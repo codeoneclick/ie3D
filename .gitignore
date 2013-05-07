@@ -11,3 +11,13 @@
 *.lai
 *.la
 *.a
+
+# Xcode crap
+*mode1v3
+*pbxuser
+*perspectivev3
+*xcuserdata*
+*xcworkspace*
+
+# Junk files on Mac OS X
+*.DS_Store
