@@ -25,6 +25,24 @@
 		A494D3891739481100228936 /* CShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3871739481100228936 /* CShader.cpp */; };
 		A494D38C1739482A00228936 /* CIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D38A1739482A00228936 /* CIndexBuffer.cpp */; };
 		A494D38F1739486900228936 /* CMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D38D1739486800228936 /* CMesh.cpp */; };
+		A494D39217394C4400228936 /* IResourceLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D39017394C4400228936 /* IResourceLoadingOperation.cpp */; };
+		A494D39517394C7500228936 /* IResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D39317394C7500228936 /* IResourceLoader.cpp */; };
+		A494D39A17394D6400228936 /* IResourceParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D39817394D6400228936 /* IResourceParser.cpp */; };
+		A494D39D17394D8600228936 /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D39B17394D8600228936 /* IResourceCommiter.cpp */; };
+		A494D3A017394E3100228936 /* IResourceLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D39E17394E3100228936 /* IResourceLoadingHandler.cpp */; };
+		A494D3A317394E7200228936 /* CResourcesFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3A117394E6F00228936 /* CResourcesFabricator.cpp */; };
+		A494D3A617394EC100228936 /* CTextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3A417394EC100228936 /* CTextureLoader.cpp */; };
+		A494D3A917394ED800228936 /* CMeshLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3A717394ED700228936 /* CMeshLoader.cpp */; };
+		A494D3AC17394EEF00228936 /* CShaderLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3AA17394EEF00228936 /* CShaderLoader.cpp */; };
+		A494D3AF17394F3800228936 /* CTextureCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3AD17394F3700228936 /* CTextureCommiter.cpp */; };
+		A494D3B217394F5200228936 /* CMeshCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3B017394F5100228936 /* CMeshCommiter.cpp */; };
+		A494D3B51739500400228936 /* CShaderCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3B31739500300228936 /* CShaderCommiter.cpp */; };
+		A494D3B81739505800228936 /* CTextureParser_PVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3B61739505700228936 /* CTextureParser_PVR.cpp */; };
+		A494D3BB1739507E00228936 /* CMeshParser_MDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3B91739507D00228936 /* CMeshParser_MDL.cpp */; };
+		A494D3BE1739509500228936 /* CShaderParser_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3BC1739509400228936 /* CShaderParser_GLSL.cpp */; };
+		A494D3C1173950E400228936 /* CTextureLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3BF173950E100228936 /* CTextureLoadingOperation.cpp */; };
+		A494D3C41739510100228936 /* CMeshLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3C2173950FE00228936 /* CMeshLoadingOperation.cpp */; };
+		A494D3C71739512100228936 /* CShaderLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494D3C51739511E00228936 /* CShaderLoadingOperation.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +79,42 @@
 		A494D38B1739482A00228936 /* CIndexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIndexBuffer.h; path = Sources/CIndexBuffer.h; sourceTree = "<group>"; };
 		A494D38D1739486800228936 /* CMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMesh.cpp; path = Sources/CMesh.cpp; sourceTree = "<group>"; };
 		A494D38E1739486800228936 /* CMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMesh.h; path = Sources/CMesh.h; sourceTree = "<group>"; };
+		A494D39017394C4400228936 /* IResourceLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceLoadingOperation.cpp; path = Sources/IResourceLoadingOperation.cpp; sourceTree = "<group>"; };
+		A494D39117394C4400228936 /* IResourceLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceLoadingOperation.h; path = Sources/IResourceLoadingOperation.h; sourceTree = "<group>"; };
+		A494D39317394C7500228936 /* IResourceLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceLoader.cpp; path = Sources/IResourceLoader.cpp; sourceTree = "<group>"; };
+		A494D39417394C7500228936 /* IResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceLoader.h; path = Sources/IResourceLoader.h; sourceTree = "<group>"; };
+		A494D39817394D6400228936 /* IResourceParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceParser.cpp; path = Sources/IResourceParser.cpp; sourceTree = "<group>"; };
+		A494D39917394D6400228936 /* IResourceParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceParser.h; path = Sources/IResourceParser.h; sourceTree = "<group>"; };
+		A494D39B17394D8600228936 /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
+		A494D39C17394D8600228936 /* IResourceCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceCommiter.h; path = Sources/IResourceCommiter.h; sourceTree = "<group>"; };
+		A494D39E17394E3100228936 /* IResourceLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceLoadingHandler.cpp; path = Sources/IResourceLoadingHandler.cpp; sourceTree = "<group>"; };
+		A494D39F17394E3100228936 /* IResourceLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceLoadingHandler.h; path = Sources/IResourceLoadingHandler.h; sourceTree = "<group>"; };
+		A494D3A117394E6F00228936 /* CResourcesFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CResourcesFabricator.cpp; path = Sources/CResourcesFabricator.cpp; sourceTree = "<group>"; };
+		A494D3A217394E7000228936 /* CResourcesFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CResourcesFabricator.h; path = Sources/CResourcesFabricator.h; sourceTree = "<group>"; };
+		A494D3A417394EC100228936 /* CTextureLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureLoader.cpp; path = Sources/CTextureLoader.cpp; sourceTree = "<group>"; };
+		A494D3A517394EC100228936 /* CTextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureLoader.h; path = Sources/CTextureLoader.h; sourceTree = "<group>"; };
+		A494D3A717394ED700228936 /* CMeshLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshLoader.cpp; path = Sources/CMeshLoader.cpp; sourceTree = "<group>"; };
+		A494D3A817394ED800228936 /* CMeshLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshLoader.h; path = Sources/CMeshLoader.h; sourceTree = "<group>"; };
+		A494D3AA17394EEF00228936 /* CShaderLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderLoader.cpp; path = Sources/CShaderLoader.cpp; sourceTree = "<group>"; };
+		A494D3AB17394EEF00228936 /* CShaderLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderLoader.h; path = Sources/CShaderLoader.h; sourceTree = "<group>"; };
+		A494D3AD17394F3700228936 /* CTextureCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureCommiter.cpp; path = Sources/CTextureCommiter.cpp; sourceTree = "<group>"; };
+		A494D3AE17394F3800228936 /* CTextureCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureCommiter.h; path = Sources/CTextureCommiter.h; sourceTree = "<group>"; };
+		A494D3B017394F5100228936 /* CMeshCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshCommiter.cpp; path = Sources/CMeshCommiter.cpp; sourceTree = "<group>"; };
+		A494D3B117394F5200228936 /* CMeshCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshCommiter.h; path = Sources/CMeshCommiter.h; sourceTree = "<group>"; };
+		A494D3B31739500300228936 /* CShaderCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCommiter.cpp; path = Sources/CShaderCommiter.cpp; sourceTree = "<group>"; };
+		A494D3B41739500300228936 /* CShaderCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCommiter.h; path = Sources/CShaderCommiter.h; sourceTree = "<group>"; };
+		A494D3B61739505700228936 /* CTextureParser_PVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureParser_PVR.cpp; path = Sources/CTextureParser_PVR.cpp; sourceTree = "<group>"; };
+		A494D3B71739505700228936 /* CTextureParser_PVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureParser_PVR.h; path = Sources/CTextureParser_PVR.h; sourceTree = "<group>"; };
+		A494D3B91739507D00228936 /* CMeshParser_MDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshParser_MDL.cpp; path = Sources/CMeshParser_MDL.cpp; sourceTree = "<group>"; };
+		A494D3BA1739507D00228936 /* CMeshParser_MDL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshParser_MDL.h; path = Sources/CMeshParser_MDL.h; sourceTree = "<group>"; };
+		A494D3BC1739509400228936 /* CShaderParser_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderParser_GLSL.cpp; path = Sources/CShaderParser_GLSL.cpp; sourceTree = "<group>"; };
+		A494D3BD1739509500228936 /* CShaderParser_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderParser_GLSL.h; path = Sources/CShaderParser_GLSL.h; sourceTree = "<group>"; };
+		A494D3BF173950E100228936 /* CTextureLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureLoadingOperation.cpp; path = Sources/CTextureLoadingOperation.cpp; sourceTree = "<group>"; };
+		A494D3C0173950E300228936 /* CTextureLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureLoadingOperation.h; path = Sources/CTextureLoadingOperation.h; sourceTree = "<group>"; };
+		A494D3C2173950FE00228936 /* CMeshLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshLoadingOperation.cpp; path = Sources/CMeshLoadingOperation.cpp; sourceTree = "<group>"; };
+		A494D3C3173950FF00228936 /* CMeshLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshLoadingOperation.h; path = Sources/CMeshLoadingOperation.h; sourceTree = "<group>"; };
+		A494D3C51739511E00228936 /* CShaderLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderLoadingOperation.cpp; path = Sources/CShaderLoadingOperation.cpp; sourceTree = "<group>"; };
+		A494D3C61739512000228936 /* CShaderLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderLoadingOperation.h; path = Sources/CShaderLoadingOperation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +211,8 @@
 				A494D37A1739470700228936 /* Resources */,
 				A494D379173946E500228936 /* Operations */,
 				A494D378173946DC00228936 /* Loaders */,
+				A494D3A217394E7000228936 /* CResourcesFabricator.h */,
+				A494D3A117394E6F00228936 /* CResourcesFabricator.cpp */,
 			);
 			name = "Resources Managment";
 			sourceTree = "<group>";
@@ -246,6 +302,14 @@
 		A494D378173946DC00228936 /* Loaders */ = {
 			isa = PBXGroup;
 			children = (
+				A494D39417394C7500228936 /* IResourceLoader.h */,
+				A494D39317394C7500228936 /* IResourceLoader.cpp */,
+				A494D3A517394EC100228936 /* CTextureLoader.h */,
+				A494D3A417394EC100228936 /* CTextureLoader.cpp */,
+				A494D3A817394ED800228936 /* CMeshLoader.h */,
+				A494D3A717394ED700228936 /* CMeshLoader.cpp */,
+				A494D3AB17394EEF00228936 /* CShaderLoader.h */,
+				A494D3AA17394EEF00228936 /* CShaderLoader.cpp */,
 			);
 			name = Loaders;
 			sourceTree = "<group>";
@@ -253,6 +317,18 @@
 		A494D379173946E500228936 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				A494D39717394D2F00228936 /* Commiters */,
+				A494D39617394C9700228936 /* Parsers */,
+				A494D39117394C4400228936 /* IResourceLoadingOperation.h */,
+				A494D39017394C4400228936 /* IResourceLoadingOperation.cpp */,
+				A494D39F17394E3100228936 /* IResourceLoadingHandler.h */,
+				A494D39E17394E3100228936 /* IResourceLoadingHandler.cpp */,
+				A494D3C0173950E300228936 /* CTextureLoadingOperation.h */,
+				A494D3BF173950E100228936 /* CTextureLoadingOperation.cpp */,
+				A494D3C3173950FF00228936 /* CMeshLoadingOperation.h */,
+				A494D3C2173950FE00228936 /* CMeshLoadingOperation.cpp */,
+				A494D3C61739512000228936 /* CShaderLoadingOperation.h */,
+				A494D3C51739511E00228936 /* CShaderLoadingOperation.cpp */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -274,6 +350,36 @@
 				A494D38D1739486800228936 /* CMesh.cpp */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		A494D39617394C9700228936 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				A494D39917394D6400228936 /* IResourceParser.h */,
+				A494D39817394D6400228936 /* IResourceParser.cpp */,
+				A494D3B71739505700228936 /* CTextureParser_PVR.h */,
+				A494D3B61739505700228936 /* CTextureParser_PVR.cpp */,
+				A494D3BA1739507D00228936 /* CMeshParser_MDL.h */,
+				A494D3B91739507D00228936 /* CMeshParser_MDL.cpp */,
+				A494D3BD1739509500228936 /* CShaderParser_GLSL.h */,
+				A494D3BC1739509400228936 /* CShaderParser_GLSL.cpp */,
+			);
+			name = Parsers;
+			sourceTree = "<group>";
+		};
+		A494D39717394D2F00228936 /* Commiters */ = {
+			isa = PBXGroup;
+			children = (
+				A494D39C17394D8600228936 /* IResourceCommiter.h */,
+				A494D39B17394D8600228936 /* IResourceCommiter.cpp */,
+				A494D3AE17394F3800228936 /* CTextureCommiter.h */,
+				A494D3AD17394F3700228936 /* CTextureCommiter.cpp */,
+				A494D3B117394F5200228936 /* CMeshCommiter.h */,
+				A494D3B017394F5100228936 /* CMeshCommiter.cpp */,
+				A494D3B41739500300228936 /* CShaderCommiter.h */,
+				A494D3B31739500300228936 /* CShaderCommiter.cpp */,
+			);
+			name = Commiters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +458,24 @@
 				A494D3891739481100228936 /* CShader.cpp in Sources */,
 				A494D38C1739482A00228936 /* CIndexBuffer.cpp in Sources */,
 				A494D38F1739486900228936 /* CMesh.cpp in Sources */,
+				A494D39217394C4400228936 /* IResourceLoadingOperation.cpp in Sources */,
+				A494D39517394C7500228936 /* IResourceLoader.cpp in Sources */,
+				A494D39A17394D6400228936 /* IResourceParser.cpp in Sources */,
+				A494D39D17394D8600228936 /* IResourceCommiter.cpp in Sources */,
+				A494D3A017394E3100228936 /* IResourceLoadingHandler.cpp in Sources */,
+				A494D3A317394E7200228936 /* CResourcesFabricator.cpp in Sources */,
+				A494D3A617394EC100228936 /* CTextureLoader.cpp in Sources */,
+				A494D3A917394ED800228936 /* CMeshLoader.cpp in Sources */,
+				A494D3AC17394EEF00228936 /* CShaderLoader.cpp in Sources */,
+				A494D3AF17394F3800228936 /* CTextureCommiter.cpp in Sources */,
+				A494D3B217394F5200228936 /* CMeshCommiter.cpp in Sources */,
+				A494D3B51739500400228936 /* CShaderCommiter.cpp in Sources */,
+				A494D3B81739505800228936 /* CTextureParser_PVR.cpp in Sources */,
+				A494D3BB1739507E00228936 /* CMeshParser_MDL.cpp in Sources */,
+				A494D3BE1739509500228936 /* CShaderParser_GLSL.cpp in Sources */,
+				A494D3C1173950E400228936 /* CTextureLoadingOperation.cpp in Sources */,
+				A494D3C41739510100228936 /* CMeshLoadingOperation.cpp in Sources */,
+				A494D3C71739512100228936 /* CShaderLoadingOperation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
