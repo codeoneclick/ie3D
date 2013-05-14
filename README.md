@@ -1,4 +1,4 @@
-gEngine
+indie2dEngine
 =======
 
-Win32/iOS 3d game engine based on OGL ES 2.0
+Win32/iOS 2d game engine based on OGL ES 2.0
