@@ -25,7 +25,7 @@
 		A4F204BD17427C700063AB07 /* CSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BB17427C700063AB07 /* CSceneGraph.cpp */; };
 		A4F204C017427D1C0063AB07 /* CRoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BE17427D1C0063AB07 /* CRoot.cpp */; };
 		A4F204CD17427D4C0063AB07 /* CIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C117427D4C0063AB07 /* CIndexBuffer.cpp */; };
-		A4F204CE17427D4C0063AB07 /* CMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C317427D4C0063AB07 /* CMesh.cpp */; };
+		A4F204CE17427D4C0063AB07 /* CShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C317427D4C0063AB07 /* CShape.cpp */; };
 		A4F204CF17427D4C0063AB07 /* CShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C517427D4C0063AB07 /* CShader.cpp */; };
 		A4F204D017427D4C0063AB07 /* CTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C717427D4C0063AB07 /* CTexture.cpp */; };
 		A4F204D117427D4C0063AB07 /* CVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C917427D4C0063AB07 /* CVertexBuffer.cpp */; };
@@ -168,8 +168,8 @@
 		A4F204BF17427D1C0063AB07 /* CRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRoot.h; path = Sources/CRoot.h; sourceTree = "<group>"; };
 		A4F204C117427D4C0063AB07 /* CIndexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIndexBuffer.cpp; path = Sources/CIndexBuffer.cpp; sourceTree = "<group>"; };
 		A4F204C217427D4C0063AB07 /* CIndexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIndexBuffer.h; path = Sources/CIndexBuffer.h; sourceTree = "<group>"; };
-		A4F204C317427D4C0063AB07 /* CMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMesh.cpp; path = Sources/CMesh.cpp; sourceTree = "<group>"; };
-		A4F204C417427D4C0063AB07 /* CMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMesh.h; path = Sources/CMesh.h; sourceTree = "<group>"; };
+		A4F204C317427D4C0063AB07 /* CShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShape.cpp; path = Sources/CShape.cpp; sourceTree = "<group>"; };
+		A4F204C417427D4C0063AB07 /* CShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShape.h; path = Sources/CShape.h; sourceTree = "<group>"; };
 		A4F204C517427D4C0063AB07 /* CShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShader.cpp; path = Sources/CShader.cpp; sourceTree = "<group>"; };
 		A4F204C617427D4C0063AB07 /* CShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShader.h; path = Sources/CShader.h; sourceTree = "<group>"; };
 		A4F204C717427D4C0063AB07 /* CTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTexture.cpp; path = Sources/CTexture.cpp; sourceTree = "<group>"; };
@@ -622,10 +622,10 @@
 				A4F204C517427D4C0063AB07 /* CShader.cpp */,
 				A4F204C217427D4C0063AB07 /* CIndexBuffer.h */,
 				A4F204C117427D4C0063AB07 /* CIndexBuffer.cpp */,
-				A4F204C417427D4C0063AB07 /* CMesh.h */,
-				A4F204C317427D4C0063AB07 /* CMesh.cpp */,
 				A4F204CA17427D4C0063AB07 /* CVertexBuffer.h */,
 				A4F204C917427D4C0063AB07 /* CVertexBuffer.cpp */,
+				A4F204C417427D4C0063AB07 /* CShape.h */,
+				A4F204C317427D4C0063AB07 /* CShape.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1110,7 +1110,7 @@
 				A4F204BD17427C700063AB07 /* CSceneGraph.cpp in Sources */,
 				A4F204C017427D1C0063AB07 /* CRoot.cpp in Sources */,
 				A4F204CD17427D4C0063AB07 /* CIndexBuffer.cpp in Sources */,
-				A4F204CE17427D4C0063AB07 /* CMesh.cpp in Sources */,
+				A4F204CE17427D4C0063AB07 /* CShape.cpp in Sources */,
 				A4F204CF17427D4C0063AB07 /* CShader.cpp in Sources */,
 				A4F204D017427D4C0063AB07 /* CTexture.cpp in Sources */,
 				A4F204D117427D4C0063AB07 /* CVertexBuffer.cpp in Sources */,

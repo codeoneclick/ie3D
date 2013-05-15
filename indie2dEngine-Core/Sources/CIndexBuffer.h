@@ -6,9 +6,46 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __gEngine_Core__CIndexBuffer__
-#define __gEngine_Core__CIndexBuffer__
+#ifndef CIndexBuffer_h
+#define CIndexBuffer_h
 
-#include <iostream>
+#include "HCommon.h"
 
-#endif /* defined(__gEngine_Core__CIndexBuffer__) */
+#define K_NUM_REPLACEMENT_INDEX_BUFFERS 3
+
+class CIndexBuffer
+{
+private:
+    
+protected:
+    
+    ui32 m_handles[K_NUM_REPLACEMENT_INDEX_BUFFERS];
+    i32  m_currentHandleIndex;
+	ui16* m_data;
+    GLenum m_mode;
+    ui32 m_numIndexes;
+    
+public:
+    
+    CIndexBuffer(ui32 _numIndexes, GLenum _mode);
+    ~CIndexBuffer(void);
+    
+    inline const ui32 Get_NumIndexes(void)
+    {
+        return m_numIndexes;
+    };
+    
+    inline ui16* Lock(void)
+    {
+        assert(m_data != nullptr);
+		return m_data;
+    };
+    
+    void Unlock(void);
+    
+    void Bind(void);
+    void Unbind(void);
+    
+};
+
+#endif 
