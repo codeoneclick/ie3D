@@ -17,9 +17,13 @@ private:
     
 protected:
     
+    std::string _Caller(const std::string& _value);
+    
 public:
     CGame(void);
     ~CGame(void);
+    
+    void Call_Test_01(void);
 };
 
 #endif 

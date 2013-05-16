@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A40D47BC17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */; };
+		A40D47BF17453AC000CA59D0 /* CTextureSerializer_PVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */; };
 		A420815F1733A9370004729E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A420815E1733A9370004729E /* UIKit.framework */; };
 		A42081611733A9370004729E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		A42081631733A9370004729E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081621733A9370004729E /* CoreGraphics.framework */; };
 		A42081861733AAA10004729E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081831733AAA10004729E /* Default-568h@2x.png */; };
 		A42081871733AAA10004729E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081841733AAA10004729E /* Default.png */; };
 		A42081881733AAA10004729E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081851733AAA10004729E /* Default@2x.png */; };
-		A4F204A017423C1E0063AB07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049E17423C1E0063AB07 /* AppDelegate.m */; };
+		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
+		A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460617450200000D831E /* IResourceCommiter.cpp */; };
+		A4F204A017423C1E0063AB07 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049E17423C1E0063AB07 /* AppDelegate.mm */; };
 		A4F204A117423C1E0063AB07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049F17423C1E0063AB07 /* main.m */; };
 		A4F204A617423C4D0063AB07 /* IOGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204A417423C4D0063AB07 /* IOGLContext.cpp */; };
 		A4F204AC17423C7F0063AB07 /* CGameLoopExecutor_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F204A717423C7F0063AB07 /* CGameLoopExecutor_iOS.mm */; };
@@ -137,6 +141,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderSerializer_GLSL.cpp; path = Sources/CShaderSerializer_GLSL.cpp; sourceTree = "<group>"; };
+		A40D47BB17453AA100CA59D0 /* CShaderSerializer_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderSerializer_GLSL.h; path = Sources/CShaderSerializer_GLSL.h; sourceTree = "<group>"; };
+		A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureSerializer_PVR.cpp; path = Sources/CTextureSerializer_PVR.cpp; sourceTree = "<group>"; };
+		A40D47BE17453AC000CA59D0 /* CTextureSerializer_PVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureSerializer_PVR.h; path = Sources/CTextureSerializer_PVR.h; sourceTree = "<group>"; };
 		A420815B1733A9370004729E /* indie2dEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = indie2dEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A420815E1733A9370004729E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A42081601733A9370004729E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -146,8 +154,12 @@
 		A42081851733AAA10004729E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Bundle/System/Default@2x.png"; sourceTree = "<group>"; };
 		A420818C1733AAB40004729E /* indie2dEngine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "indie2dEngine-Info.plist"; path = "Support/indie2dEngine-Info.plist"; sourceTree = "<group>"; };
 		A420818D1733AAB40004729E /* indie2dEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "indie2dEngine-Prefix.pch"; path = "Support/indie2dEngine-Prefix.pch"; sourceTree = "<group>"; };
+		A4BE460317450198000D831E /* IResourceSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceSerializer.cpp; path = Sources/IResourceSerializer.cpp; sourceTree = "<group>"; };
+		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
+		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
+		A4BE460717450200000D831E /* IResourceCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceCommiter.h; path = Sources/IResourceCommiter.h; sourceTree = "<group>"; };
 		A4F2049D17423C1E0063AB07 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "indie2dEngine-Core/Sources/AppDelegate.h"; sourceTree = SOURCE_ROOT; };
-		A4F2049E17423C1E0063AB07 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "indie2dEngine-Core/Sources/AppDelegate.m"; sourceTree = SOURCE_ROOT; };
+		A4F2049E17423C1E0063AB07 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "indie2dEngine-Core/Sources/AppDelegate.mm"; sourceTree = SOURCE_ROOT; };
 		A4F2049F17423C1E0063AB07 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "indie2dEngine-Core/Sources/main.m"; sourceTree = SOURCE_ROOT; };
 		A4F204A217423C310063AB07 /* HCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCommon.h; path = "indie2dEngine-Core/Sources/HCommon.h"; sourceTree = SOURCE_ROOT; };
 		A4F204A317423C310063AB07 /* HEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEnums.h; path = "indie2dEngine-Core/Sources/HEnums.h"; sourceTree = SOURCE_ROOT; };
@@ -529,7 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				A4F2049D17423C1E0063AB07 /* AppDelegate.h */,
-				A4F2049E17423C1E0063AB07 /* AppDelegate.m */,
+				A4F2049E17423C1E0063AB07 /* AppDelegate.mm */,
 				A4F2049F17423C1E0063AB07 /* main.m */,
 			);
 			name = iOS;
@@ -606,7 +618,7 @@
 			isa = PBXGroup;
 			children = (
 				A494D39717394D2F00228936 /* Commiters */,
-				A494D39617394C9700228936 /* Readers */,
+				A494D39617394C9700228936 /* Serializers */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -630,16 +642,24 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		A494D39617394C9700228936 /* Readers */ = {
+		A494D39617394C9700228936 /* Serializers */ = {
 			isa = PBXGroup;
 			children = (
+				A4BE460417450198000D831E /* IResourceSerializer.h */,
+				A4BE460317450198000D831E /* IResourceSerializer.cpp */,
+				A40D47BB17453AA100CA59D0 /* CShaderSerializer_GLSL.h */,
+				A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */,
+				A40D47BE17453AC000CA59D0 /* CTextureSerializer_PVR.h */,
+				A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */,
 			);
-			name = Readers;
+			name = Serializers;
 			sourceTree = "<group>";
 		};
 		A494D39717394D2F00228936 /* Commiters */ = {
 			isa = PBXGroup;
 			children = (
+				A4BE460717450200000D831E /* IResourceCommiter.h */,
+				A4BE460617450200000D831E /* IResourceCommiter.cpp */,
 			);
 			name = Commiters;
 			sourceTree = "<group>";
@@ -1100,7 +1120,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4F204A017423C1E0063AB07 /* AppDelegate.m in Sources */,
+				A4F204A017423C1E0063AB07 /* AppDelegate.mm in Sources */,
 				A4F204A117423C1E0063AB07 /* main.m in Sources */,
 				A4F204A617423C4D0063AB07 /* IOGLContext.cpp in Sources */,
 				A4F204AC17423C7F0063AB07 /* CGameLoopExecutor_iOS.mm in Sources */,
@@ -1116,6 +1136,10 @@
 				A4F204D117427D4C0063AB07 /* CVertexBuffer.cpp in Sources */,
 				A4F204D217427D4C0063AB07 /* IResource.cpp in Sources */,
 				A4F20620174287450063AB07 /* pugixml.cpp in Sources */,
+				A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */,
+				A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */,
+				A40D47BC17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp in Sources */,
+				A40D47BF17453AC000CA59D0 /* CTextureSerializer_PVR.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
