@@ -7,3 +7,15 @@
 //
 
 #include "IResourceSerializer.h"
+
+IResourceSerializer::IResourceSerializer(const std::string& _guid) :
+m_guid(_guid),
+m_status(E_SERIALIZER_STATUS_UNKNOWN)
+{
+    
+}
+
+IResourceSerializer::~IResourceSerializer(void)
+{
+    
+}
