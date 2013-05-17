@@ -44,11 +44,11 @@ void CGame::Call_Test_01(void)
 {
     std::cout<<"[Main Thread] : "<<std::this_thread::get_id()<<std::endl;
     
-    std::future<std::string> caller1(std::async(&CGame::_Caller, this, "zero"));
+    std::future<std::string> caller1(std::async(std::launch::deferred, &CGame::_Caller, this, "zero"));
     std::string result = caller1.get();
     //std::cout<<result<<std::endl;
     
-    std::future<std::string> caller2(std::async(&CGame::_Caller, this, "zero"));
+    std::future<std::string> caller2(std::async(std::launch::deferred, &CGame::_Caller, this, "zero"));
     result = caller2.get();
     //std::cout<<result<<std::endl;
 }

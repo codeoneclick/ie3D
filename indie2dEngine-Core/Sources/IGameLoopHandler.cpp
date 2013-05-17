@@ -8,9 +8,10 @@
 
 #include "IGameLoopHandler.h"
 
-CGameLoopCommands::CGameLoopCommands(void)
+CGameLoopCommands::CGameLoopCommands(void) :
+m_gameLoopUpdateCommand(nullptr)
 {
-    m_gameLoopUpdateCommand = nullptr;
+
 }
 
 CGameLoopCommands::~CGameLoopCommands(void)

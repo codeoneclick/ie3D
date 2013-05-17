@@ -7,17 +7,20 @@
 //
 
 #include "AppDelegate.h"
-#include "CGame.h"
+#include "CGameViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+
+    CGameViewController *vc = [CGameViewController new];
+    UINavigationController* navigationViewController = [[UINavigationController alloc] initWithRootViewController:vc];
+    [navigationViewController setNavigationBarHidden:YES animated:NO];
+    self.window.backgroundColor = [UIColor blackColor];
+    [self.window setRootViewController:navigationViewController];
     [self.window makeKeyAndVisible];
-    CGame* game = new CGame();
-    game->Call_Test_01();
     return YES;
 }
 

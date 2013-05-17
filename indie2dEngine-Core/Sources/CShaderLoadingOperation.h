@@ -1,14 +1,35 @@
 //
 //  CShaderLoadingOperation.h
-//  gEngine-Core
+//  indie2dEngine
 //
-//  Created by Sergey Sergeev on 5/7/13.
+//  Created by Sergey Sergeev on 5/17/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __gEngine_Core__CShaderLoadingOperation__
-#define __gEngine_Core__CShaderLoadingOperation__
+#ifndef CShaderLoadingOperation_h
+#define CShaderLoadingOperation_h
 
-#include <iostream>
+#include "HCommon.h"
+#include "IResourceLoadingOperation.h"
 
-#endif /* defined(__gEngine_Core__CShaderLoadingOperation__) */
+class IResource;
+
+class CShaderLoadingOperation final : public IResourceLoadingOperation
+{
+private:
+    
+protected:
+    
+    std::string m_vsFilename;
+    std::string m_fsFilename;
+    
+public:
+    
+    CShaderLoadingOperation(const std::string& _vsFilename, const std::string& _fsFilename);
+    ~CShaderLoadingOperation(void);
+    
+    std::shared_ptr<IResource> Start(void);
+    
+};
+
+#endif 

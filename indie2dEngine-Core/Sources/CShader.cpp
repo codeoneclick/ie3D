@@ -185,7 +185,7 @@ void CShader::Set_FloatCustom(f32 _value, const std::string &_uniform)
     glUniform1f(handle, _value);
 }
 
-void CShader::Set_Texture(const CTexture *_texture, E_SHADER_SAMPLER _sampler)
+void CShader::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
 {
     glActiveTexture(GL_TEXTURE0 + _sampler);
     _texture->Bind();

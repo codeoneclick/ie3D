@@ -41,7 +41,7 @@ public:
         return m_depthBufferHandle;
     };
     
-    virtual void ShowFrame(void) const = 0;
+    virtual void Output(void) const = 0;
 };
 
 #endif

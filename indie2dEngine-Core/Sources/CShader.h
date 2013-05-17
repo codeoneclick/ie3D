@@ -48,7 +48,7 @@ public:
     void Set_Vector4Custom(const glm::vec4& _vector, const std::string& _uniform);
     void Set_Float(f32 _value, E_SHADER_UNIFORM _uniform);
     void Set_FloatCustom(f32 _value, const std::string& _uniform);
-    void Set_Texture(const CTexture* _texture, E_SHADER_SAMPLER _sampler);
+    void Set_Texture(const std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler);
     
     void Bind(void);
     void Unbind(void);

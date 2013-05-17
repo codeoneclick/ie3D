@@ -6,9 +6,24 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __indi2dEngine__CRoot__
-#define __indi2dEngine__CRoot__
+#ifndef CRoot_h
+#define CRoot_h
 
-#include <iostream>
+#include "IOGLContext.h"
 
-#endif /* defined(__indi2dEngine__CRoot__) */
+class CRoot final
+{
+private:
+    
+    IOGLContext* m_glContext;
+    
+protected:
+    
+public:
+    
+    CRoot(void* _glWindow);
+    ~CRoot(void);
+};
+
+
+#endif

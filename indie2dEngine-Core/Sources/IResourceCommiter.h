@@ -6,9 +6,37 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __indie2dEngine__IResourceCommiter__
-#define __indie2dEngine__IResourceCommiter__
+#ifndef IResourceCommiter_h
+#define IResourceCommiter_h
 
-#include <iostream>
+#include "HCommon.h"
+#include "HEnums.h"
 
-#endif /* defined(__indie2dEngine__IResourceCommiter__) */
+class IResourceCommiter  : public std::enable_shared_from_this<IResourceCommiter>
+{
+private:
+    
+protected:
+    
+    std::string m_guid;
+    E_COMMITER_STATUS m_status;
+    
+public:
+    
+    IResourceCommiter(const std::string& _guid);
+    virtual ~IResourceCommiter(void);
+    
+    virtual void Commit(void) = 0;
+    
+    inline std::string Get_Guid(void)
+    {
+        return m_guid;
+    };
+    
+    inline E_COMMITER_STATUS Get_Status(void)
+    {
+        return m_status;
+    };
+};
+
+#endif 

@@ -7,3 +7,15 @@
 //
 
 #include "IResourceCommiter.h"
+
+IResourceCommiter::IResourceCommiter(const std::string& _guid) :
+m_guid(_guid),
+m_status(E_COMMITER_STATUS_UNKNOWN)
+{
+    
+}
+
+IResourceCommiter::~IResourceCommiter(void)
+{
+    
+}
