@@ -20,22 +20,15 @@ protected:
     std::string m_vsSourceCode;
     std::string m_fsSourceCode;
     
-    ui32 m_handle;
-    
     ui32 _Compile(const std::string& _sourceCode, GLenum _shader);
     ui32 _Link(ui32 _vsHandle, ui32 _fsHandle);
     
 public:
     
-    CShaderCommiter_GLSL(const std::string& _guid, const std::string& _vsSourceCode, const std::string& _fsSourceCode);
+    CShaderCommiter_GLSL(const std::string& _guid, const std::string& _vsSourceCode, const std::string& _fsSourceCode, std::shared_ptr<IResource> _resource);
     ~CShaderCommiter_GLSL(void);
     
     void Commit(void);
-    
-    inline ui32 Get_Handle(void)
-    {
-        return m_handle;
-    };
 };
 
 #endif 

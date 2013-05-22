@@ -6,9 +6,30 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __indie2dEngine__CTextureCommiter_PVR__
-#define __indie2dEngine__CTextureCommiter_PVR__
+#ifndef CTextureCommiter_PVR_h
+#define CTextureCommiter_PVR_h
 
-#include <iostream>
+#include "IResourceCommiter.h"
 
-#endif /* defined(__indie2dEngine__CTextureCommiter_PVR__) */
+class CTextureCommiter_PVR final : public IResourceCommiter
+{
+private:
+    
+protected:
+    
+    std::string m_vsSourceCode;
+    std::string m_fsSourceCode;
+    
+    ui32 _Compile(const std::string& _sourceCode, GLenum _shader);
+    ui32 _Link(ui32 _vsHandle, ui32 _fsHandle);
+    
+public:
+    
+    CTextureCommiter_PVR(const std::string& _guid, const std::string& _vsSourceCode, const std::string& _fsSourceCode, std::shared_ptr<IResource> _resource);
+    ~CTextureCommiter_PVR(void);
+    
+    void Commit(void);
+};
+
+
+#endif 

@@ -7,9 +7,10 @@
 //
 
 #include "CShaderCommiter_GLSL.h"
+#include "CShader.h"
 
-CShaderCommiter_GLSL::CShaderCommiter_GLSL(const std::string& _guid, const std::string& _vsSourceCode, const std::string& _fsSourceCode) :
-IResourceCommiter(_guid),
+CShaderCommiter_GLSL::CShaderCommiter_GLSL(const std::string& _guid, const std::string& _vsSourceCode, const std::string& _fsSourceCode, std::shared_ptr<IResource> _resource) :
+IResourceCommiter(_guid, _resource),
 m_vsSourceCode(_vsSourceCode),
 m_fsSourceCode(_fsSourceCode)
 {
@@ -59,7 +60,6 @@ ui32 CShaderCommiter_GLSL::_Link(ui32 _vsHandle, ui32 _fsHandle)
         m_status = E_COMMITER_STATUS_FAILURE;
         assert(false);
     }
-    m_status = E_COMMITER_STATUS_SUCCESS;
     return handle;
 }
 
@@ -68,6 +68,11 @@ void CShaderCommiter_GLSL::Commit(void)
     m_status = E_COMMITER_STATUS_INPROGRESS;
     ui32 vsHandle = _Compile(m_vsSourceCode, GL_VERTEX_SHADER);
     ui32 fsHandle = _Compile(m_fsSourceCode, GL_FRAGMENT_SHADER);
-    m_handle = _Link(vsHandle, fsHandle);
+    ui32 shHandle = _Link(vsHandle, fsHandle);
+    assert(m_resource != nullptr);
+    assert(m_resource->IsLoaded() == true);
+    std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
+    shader->_Set_Handle(shHandle);
+    m_status = m_status == E_COMMITER_STATUS_INPROGRESS ? E_COMMITER_STATUS_SUCCESS : E_COMMITER_STATUS_FAILURE;
 }
 

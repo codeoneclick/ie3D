@@ -12,6 +12,7 @@
 #include "HCommon.h"
 #include "HEnums.h"
 
+class IResource;
 class IResourceSerializer : public std::enable_shared_from_this<IResourceSerializer>
 {
 private:
@@ -19,11 +20,12 @@ private:
 protected:
     
     std::string m_guid;
+    std::shared_ptr<IResource> m_resource;
     E_SERIALIZER_STATUS m_status;
     
 public:
     
-    IResourceSerializer(const std::string& _guid);
+    IResourceSerializer(const std::string& _guid, std::shared_ptr<IResource> _resource);
     virtual ~IResourceSerializer(void);
     
     virtual void Serialize(void) = 0;

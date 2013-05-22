@@ -23,14 +23,6 @@ CTexture::~CTexture(void)
     glDeleteTextures(1, &m_handle);
 }
 
-void CTexture::Link(ui32 _handle, ui32 _width, ui32 _height)
-{
-    m_handle = _handle;
-    m_width = _width;
-    m_height = _height;
-    m_isLinked = true;
-}
-
 void CTexture::Bind(void) const
 {
     glBindTexture(GL_TEXTURE_2D, m_handle);

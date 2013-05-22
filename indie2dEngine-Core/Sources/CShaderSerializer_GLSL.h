@@ -20,27 +20,12 @@ protected:
     std::string m_vsFilename;
     std::string m_fsFilename;
     
-    std::string m_vsSourceCode;
-    std::string m_fsSourceCode;
-    
 public:
     
-    CShaderSerializer_GLSL(const std::string& _vsFilename, const std::string& _fsFilename);
+    CShaderSerializer_GLSL(const std::string& _vsFilename, const std::string& _fsFilename, std::shared_ptr<IResource> _resource);
     ~CShaderSerializer_GLSL(void);
 
     void Serialize(void);
-
-    inline std::string Get_VertexShaderSourceCode(void)
-    {
-        assert(m_status == E_SERIALIZER_STATUS_SUCCESS);
-        return m_vsSourceCode;
-    };
-    
-    inline std::string Get_FragmentShaderSourceCode(void)
-    {
-        assert(m_status == E_SERIALIZER_STATUS_SUCCESS);
-        return m_fsSourceCode;
-    };
 };
 
 #endif 

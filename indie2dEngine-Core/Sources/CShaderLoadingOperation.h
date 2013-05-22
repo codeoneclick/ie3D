@@ -25,10 +25,11 @@ protected:
     
 public:
     
-    CShaderLoadingOperation(const std::string& _vsFilename, const std::string& _fsFilename);
+    CShaderLoadingOperation(const std::string& _vsFilename, const std::string& _fsFilename, std::shared_ptr<IResource> _resource);
     ~CShaderLoadingOperation(void);
     
-    std::shared_ptr<IResource> Start(void);
+    void Serialize(void);
+    void Commit(void);
     
 };
 

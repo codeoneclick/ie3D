@@ -12,6 +12,7 @@
 #include "HCommon.h"
 #include "HEnums.h"
 
+class IResource;
 class IResourceCommiter  : public std::enable_shared_from_this<IResourceCommiter>
 {
 private:
@@ -19,11 +20,12 @@ private:
 protected:
     
     std::string m_guid;
+    std::shared_ptr<IResource> m_resource;
     E_COMMITER_STATUS m_status;
     
 public:
     
-    IResourceCommiter(const std::string& _guid);
+    IResourceCommiter(const std::string& _guid, std::shared_ptr<IResource> _resource);
     virtual ~IResourceCommiter(void);
     
     virtual void Commit(void) = 0;

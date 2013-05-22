@@ -24,16 +24,18 @@ protected:
     
     std::shared_ptr<IResourceSerializer> m_serializer;
     std::shared_ptr<IResourceCommiter> m_commiter;
+    std::shared_ptr<IResource> m_resource;
     
     std::string m_guid;
     E_RESOURCE_LOADING_OPERATION_STATUS m_status;
     
 public:
     
-    IResourceLoadingOperation(const std::string& _guid);
+    IResourceLoadingOperation(const std::string& _guid, std::shared_ptr<IResource> _resource);
     ~IResourceLoadingOperation(void);
     
-    virtual std::shared_ptr<IResource> Start(void) = 0;
+    virtual void Serialize(void) = 0;
+    virtual void Commit(void) = 0;
     
     inline std::string Get_Guid(void)
     {

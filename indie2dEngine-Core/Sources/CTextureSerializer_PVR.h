@@ -6,9 +6,25 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __indie2dEngine__CTextureSerializer_PVR__
-#define __indie2dEngine__CTextureSerializer_PVR__
+#ifndef CTextureSerializer_PVR_h
+#define CTextureSerializer_PVR_h
 
-#include <iostream>
+#include "IResourceSerializer.h"
 
-#endif /* defined(__indie2dEngine__CTextureSerializer_PVR__) */
+class CTextureSerializer_PVR final : public IResourceSerializer
+{
+private:
+    
+protected:
+    
+    std::string m_filename;
+    
+public:
+    
+    CTextureSerializer_PVR(const std::string& _filename, std::shared_ptr<IResource> _resource);
+    ~CTextureSerializer_PVR(void);
+    
+    void Serialize(void);
+};
+
+#endif

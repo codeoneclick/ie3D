@@ -22,7 +22,7 @@ public:
     CShaderLoader(void);
     ~CShaderLoader(void);
     
-    std::shared_future<std::shared_ptr<IResource> > StartLoadOperation(const std::string& _vsFilename, const std::string& _fsFilename);
+    std::shared_ptr<IResource> StartLoadOperation(const std::string& _vsFilename, const std::string& _fsFilename);
 };
 
 #endif

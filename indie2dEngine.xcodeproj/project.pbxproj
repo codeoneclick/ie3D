@@ -36,6 +36,7 @@
 		A46A3195174674FF0044643E /* CShaderLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A3193174674FE0044643E /* CShaderLoader.cpp */; };
 		A46A31981746751A0044643E /* CShaderLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A3196174675170044643E /* CShaderLoadingOperation.cpp */; };
 		A46A319B174675820044643E /* IResourceLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A31991746757E0044643E /* IResourceLoadingOperation.cpp */; };
+		A46A31FC174D1E5B0044643E /* CTextureLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A31FA174D1E4C0044643E /* CTextureLoadingOperation.cpp */; };
 		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
 		A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460617450200000D831E /* IResourceCommiter.cpp */; };
 		A4F204A017423C1E0063AB07 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049E17423C1E0063AB07 /* AppDelegate.mm */; };
@@ -210,6 +211,21 @@
 		A46A3197174675180044643E /* CShaderLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderLoadingOperation.h; path = Sources/CShaderLoadingOperation.h; sourceTree = "<group>"; };
 		A46A31991746757E0044643E /* IResourceLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceLoadingOperation.cpp; path = Sources/IResourceLoadingOperation.cpp; sourceTree = "<group>"; };
 		A46A319A1746757F0044643E /* IResourceLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceLoadingOperation.h; path = Sources/IResourceLoadingOperation.h; sourceTree = "<group>"; };
+		A46A31FA174D1E4C0044643E /* CTextureLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureLoadingOperation.cpp; path = Sources/CTextureLoadingOperation.cpp; sourceTree = "<group>"; };
+		A46A31FB174D1E520044643E /* CTextureLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureLoadingOperation.h; path = Sources/CTextureLoadingOperation.h; sourceTree = "<group>"; };
+		A46A31FF174D21130044643E /* PVRTArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTArray.h; sourceTree = "<group>"; };
+		A46A3200174D21130044643E /* PVRTDecompress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTDecompress.h; sourceTree = "<group>"; };
+		A46A3201174D21130044643E /* PVRTError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTError.h; sourceTree = "<group>"; };
+		A46A3202174D21130044643E /* PVRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTexture.h; sourceTree = "<group>"; };
+		A46A3203174D21130044643E /* PVRTextureDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTextureDefines.h; sourceTree = "<group>"; };
+		A46A3204174D21130044643E /* PVRTextureFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTextureFormat.h; sourceTree = "<group>"; };
+		A46A3205174D21130044643E /* PVRTextureHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTextureHeader.h; sourceTree = "<group>"; };
+		A46A3206174D21130044643E /* PVRTextureUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTextureUtilities.h; sourceTree = "<group>"; };
+		A46A3207174D21130044643E /* PVRTextureVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTextureVersion.h; sourceTree = "<group>"; };
+		A46A3208174D21130044643E /* PVRTGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTGlobal.h; sourceTree = "<group>"; };
+		A46A3209174D21130044643E /* PVRTMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTMap.h; sourceTree = "<group>"; };
+		A46A320A174D21130044643E /* PVRTString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTString.h; sourceTree = "<group>"; };
+		A46A320B174D21130044643E /* PVRTTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTTexture.h; sourceTree = "<group>"; };
 		A4BE460317450198000D831E /* IResourceSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceSerializer.cpp; path = Sources/IResourceSerializer.cpp; sourceTree = "<group>"; };
 		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
 		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
@@ -491,8 +507,8 @@
 		A40D47C3174555AF00CA59D0 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				A40D47C4174555AF00CA59D0 /* ShaderCommon.frag */,
 				A40D47C5174555AF00CA59D0 /* ShaderCommon.vert */,
+				A40D47C4174555AF00CA59D0 /* ShaderCommon.frag */,
 			);
 			name = Shaders;
 			path = Bundle/Shaders;
@@ -621,6 +637,7 @@
 			children = (
 				A4F204D3174287440063AB07 /* glm */,
 				A4F205B5174287450063AB07 /* pugixml */,
+				A46A31FD174D21130044643E /* pvrtextool */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -636,6 +653,35 @@
 				A46A318D174641760044643E /* CRenderOperationOutput.cpp */,
 			);
 			name = Operations;
+			sourceTree = "<group>";
+		};
+		A46A31FD174D21130044643E /* pvrtextool */ = {
+			isa = PBXGroup;
+			children = (
+				A46A31FE174D21130044643E /* include */,
+			);
+			name = pvrtextool;
+			path = Libraries/pvrtextool;
+			sourceTree = "<group>";
+		};
+		A46A31FE174D21130044643E /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A46A31FF174D21130044643E /* PVRTArray.h */,
+				A46A3200174D21130044643E /* PVRTDecompress.h */,
+				A46A3201174D21130044643E /* PVRTError.h */,
+				A46A3202174D21130044643E /* PVRTexture.h */,
+				A46A3203174D21130044643E /* PVRTextureDefines.h */,
+				A46A3204174D21130044643E /* PVRTextureFormat.h */,
+				A46A3205174D21130044643E /* PVRTextureHeader.h */,
+				A46A3206174D21130044643E /* PVRTextureUtilities.h */,
+				A46A3207174D21130044643E /* PVRTextureVersion.h */,
+				A46A3208174D21130044643E /* PVRTGlobal.h */,
+				A46A3209174D21130044643E /* PVRTMap.h */,
+				A46A320A174D21130044643E /* PVRTString.h */,
+				A46A320B174D21130044643E /* PVRTTexture.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		A494D36417392D3600228936 /* Render Managment */ = {
@@ -720,6 +766,8 @@
 				A46A31991746757E0044643E /* IResourceLoadingOperation.cpp */,
 				A46A3197174675180044643E /* CShaderLoadingOperation.h */,
 				A46A3196174675170044643E /* CShaderLoadingOperation.cpp */,
+				A46A31FB174D1E520044643E /* CTextureLoadingOperation.h */,
+				A46A31FA174D1E4C0044643E /* CTextureLoadingOperation.cpp */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -1269,6 +1317,7 @@
 				A46A3195174674FF0044643E /* CShaderLoader.cpp in Sources */,
 				A46A31981746751A0044643E /* CShaderLoadingOperation.cpp in Sources */,
 				A46A319B174675820044643E /* IResourceLoadingOperation.cpp in Sources */,
+				A46A31FC174D1E5B0044643E /* CTextureLoadingOperation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

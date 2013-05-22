@@ -53,7 +53,7 @@ protected:
     
     IGameLoopHandler(void);
     
-    virtual void OnGameLoopUpdate(f32 _deltatime) = 0;
+    virtual void _OnGameLoopUpdate(f32 _deltatime) = 0;
     
 public:
     

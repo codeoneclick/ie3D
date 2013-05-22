@@ -9,6 +9,7 @@
 #include "CGameViewController.h"
 #include "COGLWindow_iOS.h"
 #include "CGame.h"
+#include "CRoot.h"
 
 @interface CGameViewController ()
 
@@ -31,6 +32,7 @@
 {
     [super viewDidLoad];
     
+    CRoot* root = new CRoot((__bridge void*)_m_glWindow);
     CGame* game = new CGame();
     game->Call_Test_01();
 }

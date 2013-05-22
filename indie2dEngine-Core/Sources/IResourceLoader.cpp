@@ -9,45 +9,67 @@
 #include "IResourceLoader.h"
 #include "IResource.h"
 #include "IResourceLoadingOperation.h"
+#include "CGameLoopExecutor.h"
 
 IResourceLoader::IResourceLoader(void) :
-m_atomic(1),
+m_isRunning(1),
 m_thread(&IResourceLoader::_Thread, this)
 {
-    
+    ConnectToGameLoop(std::shared_ptr<IResourceLoader>(this));
 }
 
 IResourceLoader::~IResourceLoader(void)
 {
-    m_atomic = 0;
+    m_isRunning = 0;
     m_thread.join();
     m_operationsQueue.clear();
     m_resourceContainer.clear();
+    DisconnectFromGameLoop(std::shared_ptr<IResourceLoader>(this));
 }
 
 void IResourceLoader::_Thread(void)
 {
-    while (m_atomic)
+    while (m_isRunning)
     {
         for(auto iterator : m_operationsQueue)
         {
             std::shared_ptr<IResourceLoadingOperation> operation = iterator.second;
-            assert(operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_UNKNOWN);
-            std::shared_ptr<IResource> resource = operation->Start();
-            if(operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS)
+            if(operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_UNKNOWN)
             {
-                
+                operation->Serialize();
             }
+        }
+        if(m_operationsQueue.empty())
+        {
+            std::this_thread::yield();
         }
     }
 }
 
-void IResourceLoader::_Update(void)
+void IResourceLoader::_OnGameLoopUpdate(f32 _deltatime)
 {
-
+    auto iterator = m_operationsQueue.begin();
+    while(iterator != m_operationsQueue.end())
+    {
+        std::shared_ptr<IResourceLoadingOperation> operation = iterator->second;
+        if(operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_WAITING)
+        {
+            operation->Commit();
+            m_operationsQueue.erase(iterator++);
+        }
+        else if(operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE ||
+                operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS)
+        {
+            m_operationsQueue.erase(iterator++);
+        }
+        else
+        {
+            ++iterator;
+        }
+    }
 }
 
-void IResourceLoader::UnloadResource(std::shared_future<std::shared_ptr<IResource> > _resource)
+void IResourceLoader::UnloadResource(std::shared_ptr<IResource> _resource)
 {
 
 }

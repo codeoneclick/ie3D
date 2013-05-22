@@ -11,8 +11,8 @@
 #include "CShaderSerializer_GLSL.h"
 #include "CShaderCommiter_GLSL.h"
 
-CShaderLoadingOperation::CShaderLoadingOperation(const std::string& _vsFilename, const std::string& _fsFilename) :
-IResourceLoadingOperation(std::string().append(_vsFilename).append(_fsFilename)),
+CShaderLoadingOperation::CShaderLoadingOperation(const std::string& _vsFilename, const std::string& _fsFilename, std::shared_ptr<IResource> _resource) :
+IResourceLoadingOperation(std::string().append(_vsFilename).append(_fsFilename), _resource),
 m_vsFilename(_vsFilename),
 m_fsFilename(_fsFilename)
 {
@@ -24,25 +24,26 @@ CShaderLoadingOperation::~CShaderLoadingOperation(void)
     
 }
 
-std::shared_ptr<IResource> CShaderLoadingOperation::Start(void)
+void CShaderLoadingOperation::Serialize(void)
 {
+    assert(m_resource != nullptr);
     m_status = E_RESOURCE_LOADING_OPERATION_STATUS_INPROGRESS;
-    m_serializer = std::make_shared<CShaderSerializer_GLSL>(m_vsFilename, m_fsFilename);
+    m_serializer = std::make_shared<CShaderSerializer_GLSL>(m_vsFilename,
+                                                            m_fsFilename,
+                                                            m_resource);
     m_serializer->Serialize();
-    if(m_serializer->Get_Status() == E_SERIALIZER_STATUS_SUCCESS)
-    {
-        m_commiter = std::make_shared<CShaderCommiter_GLSL>(m_serializer->Get_Guid(),
-                                                            std::static_pointer_cast<CShaderSerializer_GLSL >(m_serializer)->Get_VertexShaderSourceCode(),
-                                                            std::static_pointer_cast<CShaderSerializer_GLSL >(m_serializer)->Get_FragmentShaderSourceCode());
-        m_commiter->Commit();
-        if(m_commiter->Get_Status() == E_COMMITER_STATUS_SUCCESS)
-        {
-            std::shared_ptr<CShader> shader = std::make_shared<CShader>(m_commiter->Get_Guid());
-            shader->Link(std::static_pointer_cast<CShaderCommiter_GLSL >(m_commiter)->Get_Handle());
-            m_status = E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS;
-            return shader;
-        }
-    }
-    m_status = E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
-    return nullptr;
+    m_status = m_serializer->Get_Status() == E_SERIALIZER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
+}
+
+void CShaderLoadingOperation::Commit(void)
+{
+    assert(m_resource != nullptr);
+    assert(m_resource->IsLoaded() == true);
+    std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
+    m_commiter = std::make_shared<CShaderCommiter_GLSL>(m_serializer->Get_Guid(),
+                                                        shader->_Get_VertexShaderSourceCode(),
+                                                        shader->_Get_FragmentShaderSourceCode(),
+                                                        m_resource);
+    m_commiter->Commit();
+    m_status = m_commiter->Get_Status() == E_COMMITER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
 }

@@ -19,17 +19,41 @@ private:
 
 protected:
     
+    friend class CShaderSerializer_GLSL;
+    friend class CShaderCommiter_GLSL;
+    friend class CShaderLoadingOperation;
+    
     i32 m_uniforms[E_SHADER_UNIFORM_MAX];
     i32 m_samplers[E_SHADER_SAMPLER_MAX];
     i32 m_attributes[E_SHADER_ATTRIBUTE_MAX];
+    
+    std::string m_vsSourceCode;
+    std::string m_fsSourceCode;
     ui32 m_handle;
+    
+    inline void _Set_SourceCode(const std::string& _vsSourceCode, const std::string& _fsSourceCode)
+    {
+        m_vsSourceCode = _vsSourceCode;
+        m_fsSourceCode = _fsSourceCode;
+        m_isLoaded = true;
+    };
+    
+    inline std::string _Get_VertexShaderSourceCode(void)
+    {
+        return m_vsSourceCode;
+    };
+    
+    inline std::string _Get_FragmentShaderSourceCode(void)
+    {
+        return m_fsSourceCode;
+    };
+    
+    void _Set_Handle(ui32 _handle);
     
 public:
     
     CShader(const std::string& _guid);
     ~CShader(void);
-    
-    void Link(ui32 _handle);
     
     inline const i32* Get_Attributes(void)
     {

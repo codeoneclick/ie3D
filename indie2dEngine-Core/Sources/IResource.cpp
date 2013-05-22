@@ -11,7 +11,8 @@
 IResource::IResource(E_RESOURCE_TYPE _resourceType, const std::string& _guid) :
 m_resourceType(_resourceType),
 m_guid(_guid),
-m_isLinked(false)
+m_isLinked(false),
+m_isLoaded(false)
 {
 
 }

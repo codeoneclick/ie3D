@@ -83,10 +83,10 @@ m_handle(0)
 
 CShader::~CShader(void)
 {
-    // TODO :
+   
 }
 
-void CShader::Link(ui32 _handle)
+void CShader::_Set_Handle(ui32 _handle)
 {
     m_handle = _handle;
     
@@ -111,6 +111,8 @@ void CShader::Link(ui32 _handle)
     m_attributes[E_SHADER_ATTRIBUTE_NORMAL] = glGetAttribLocation(m_handle, SAttributes.m_normal.c_str());
     m_attributes[E_SHADER_ATTRIBUTE_TANGENT] = glGetAttribLocation(m_handle, SAttributes.m_tangent.c_str());
     m_attributes[E_SHADER_ATTRIBUTE_COLOR] = glGetAttribLocation(m_handle, SAttributes.m_color.c_str());
+    
+    m_isLinked = true;
 }
 
 void CShader::Set_Matrix3x3(const glm::mat3x3 &_matrix, E_SHADER_UNIFORM _uniform)

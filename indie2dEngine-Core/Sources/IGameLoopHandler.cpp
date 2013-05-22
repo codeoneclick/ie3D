@@ -43,5 +43,5 @@ IGameLoopHandler::~IGameLoopHandler(void)
 
 void IGameLoopHandler::_ConnectCommands(void)
 {
-    m_commands._ConnectGameLoopUpdateCommand(std::bind(&IGameLoopHandler::OnGameLoopUpdate, this, std::placeholders::_1));
+    m_commands._ConnectGameLoopUpdateCommand(std::bind(&IGameLoopHandler::_OnGameLoopUpdate, this, std::placeholders::_1));
 }

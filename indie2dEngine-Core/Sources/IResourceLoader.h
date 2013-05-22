@@ -10,24 +10,25 @@
 #define IResourceLoader_h
 
 #include "HCommon.h"
+#include "IGameLoopHandler.h"
 
 class IResourceLoadingOperation;
 class IResource;
 
-class IResourceLoader
+class IResourceLoader : public IGameLoopHandler
 {
 private:
     
 protected:
     
     std::map<std::string, std::shared_ptr<IResourceLoadingOperation> > m_operationsQueue;
-    std::map<std::string, std::shared_future< std::shared_ptr<IResource> > > m_resourceContainer;
+    std::map<std::string, std::shared_ptr<IResource> > m_resourceContainer;
     
     std::mutex m_mutex;
     std::thread m_thread;
-    std::atomic_int m_atomic;
+    std::atomic_int m_isRunning;
     
-    virtual void _Update(void);
+    virtual void _OnGameLoopUpdate(f32 _deltatime);
     virtual void _Thread(void);
     
 public:
@@ -35,7 +36,7 @@ public:
     IResourceLoader(void);
     virtual ~IResourceLoader(void);
     
-	void UnloadResource(std::shared_future<std::shared_ptr<IResource> > _resource);
+	void UnloadResource(std::shared_ptr<IResource> _resource);
 };
 
 #endif 

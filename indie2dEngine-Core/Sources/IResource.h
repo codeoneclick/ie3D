@@ -21,6 +21,7 @@ protected:
     std::string m_guid;
     E_RESOURCE_TYPE m_resourceType;
     bool m_isLinked;
+    bool m_isLoaded;
     
 public:
     
@@ -35,6 +36,11 @@ public:
     inline const E_RESOURCE_TYPE Get_ResourceType(void)
     {
         return m_resourceType;
+    };
+    
+    inline const bool IsLoaded(void)
+    {
+        return m_isLoaded;
     };
     
     inline const bool IsLinked(void)

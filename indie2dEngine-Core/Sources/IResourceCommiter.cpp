@@ -8,8 +8,9 @@
 
 #include "IResourceCommiter.h"
 
-IResourceCommiter::IResourceCommiter(const std::string& _guid) :
+IResourceCommiter::IResourceCommiter(const std::string& _guid, std::shared_ptr<IResource> _resource) :
 m_guid(_guid),
+m_resource(_resource),
 m_status(E_COMMITER_STATUS_UNKNOWN)
 {
     

@@ -8,9 +8,10 @@
 
 #include "CShaderSerializer_GLSL.h"
 #include "CCommonOS.h"
+#include "CShader.h"
 
-CShaderSerializer_GLSL::CShaderSerializer_GLSL(const std::string& _vsFilename, const std::string& _fsFilename) :
-IResourceSerializer(std::string().append(_vsFilename).append(_fsFilename)),
+CShaderSerializer_GLSL::CShaderSerializer_GLSL(const std::string& _vsFilename, const std::string& _fsFilename, std::shared_ptr<IResource> _resource) :
+IResourceSerializer(std::string().append(_vsFilename).append(_fsFilename), _resource),
 m_vsFilename(_vsFilename),
 m_fsFilename(_fsFilename)
 {
@@ -37,15 +38,11 @@ void CShaderSerializer_GLSL::Serialize(void)
         m_status = E_SERIALIZER_STATUS_FAILURE;
         return;
     }
-    filestream.seekg(0, std::ios::end);
-    i32 lenght = filestream.tellg();
-    filestream.seekg(0, std::ios::beg);
-	char* data = new char[lenght];
-	filestream.read(data, lenght);
-    filestream.close();
     
-    assert(data != nullptr);
-    m_vsSourceCode.assign(data);
+    std::stringstream vsStringstream;
+    vsStringstream<<filestream.rdbuf();
+    std::string vsSourceCode(vsStringstream.str());
+    filestream.close();
     
     filename.assign(path);
     filename.append(m_fsFilename);
@@ -56,16 +53,14 @@ void CShaderSerializer_GLSL::Serialize(void)
         m_status = E_SERIALIZER_STATUS_FAILURE;
         return;
     }
-    filestream.seekg(0, std::ios::end);
-    lenght = filestream.tellg();
-    filestream.seekg(0, std::ios::beg);
-	data = new char[lenght];
-	filestream.read(data, lenght);
+    std::stringstream fsStringstream;
+    fsStringstream<<filestream.rdbuf();
+    std::string fsSourceCode(fsStringstream.str());
     filestream.close();
     
-    assert(data != nullptr);
-    m_fsSourceCode.assign(data);
-    
+    assert(m_resource != nullptr);
+    std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
+    shader->_Set_SourceCode(vsSourceCode, fsSourceCode);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
 }
 

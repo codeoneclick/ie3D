@@ -21,6 +21,7 @@
 #include <thread>
 #include <fstream>
 #include <strstream>
+#include <sstream>
 #include <iostream>
 #include <assert.h>
 
