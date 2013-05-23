@@ -37,6 +37,10 @@ protected:
         m_fsSourceCode = _fsSourceCode;
         m_isLoaded = true;
     };
+
+#ifdef TESTING
+public:
+#endif
     
     inline std::string _Get_VertexShaderSourceCode(void)
     {
@@ -47,6 +51,10 @@ protected:
     {
         return m_fsSourceCode;
     };
+    
+#ifdef TESTING
+protected:
+#endif
     
     void _Set_Handle(ui32 _handle);
     

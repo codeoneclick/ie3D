@@ -8,6 +8,7 @@
 
 #include "CGame.h"
 #include "CShaderLoader.h"
+#include "CTextureLoader.h"
 
 CGame::CGame(void)
 {
@@ -22,8 +23,10 @@ CGame::~CGame(void)
 void CGame::Call_Test_01(void)
 {
     CShaderLoader* shaderLoader = new CShaderLoader();
-    std::shared_ptr<IResource> shader = shaderLoader->StartLoadOperation("ShaderCommon.vert", "ShaderCommon.frag");
+    std::shared_ptr<CShader> shader = shaderLoader->StartLoadOperation("ShaderCommon.vert", "ShaderCommon.frag");
     
+    CTextureLoader* textureLoader = new CTextureLoader();
+    std::shared_ptr<CTexture> texture = textureLoader->StartLoadOperation("texture_01.pvr");
 }
 
 /*

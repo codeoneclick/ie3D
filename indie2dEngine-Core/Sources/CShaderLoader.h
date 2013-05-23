@@ -6,11 +6,12 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __indie2dEngine__CShaderLoader__
-#define __indie2dEngine__CShaderLoader__
+#ifndef CShaderLoader_h
+#define CShaderLoader_h
 
 #include "IResourceLoader.h"
 
+class CShader;
 class CShaderLoader final : public IResourceLoader
 {
 private:
@@ -22,7 +23,7 @@ public:
     CShaderLoader(void);
     ~CShaderLoader(void);
     
-    std::shared_ptr<IResource> StartLoadOperation(const std::string& _vsFilename, const std::string& _fsFilename);
+    std::shared_ptr<CShader> StartLoadOperation(const std::string& _vsFilename, const std::string& _fsFilename);
 };
 
 #endif

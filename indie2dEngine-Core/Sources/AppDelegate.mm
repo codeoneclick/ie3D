@@ -14,7 +14,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
     CGameViewController *vc = [CGameViewController new];
     UINavigationController* navigationViewController = [[UINavigationController alloc] initWithRootViewController:vc];
     [navigationViewController setNavigationBarHidden:YES animated:NO];

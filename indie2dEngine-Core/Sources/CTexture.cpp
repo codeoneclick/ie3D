@@ -8,11 +8,23 @@
 
 #include "CTexture.h"
 
+CTextureHeader::CTextureHeader(void) :
+m_data(nullptr),
+m_width(0),
+m_height(0)
+{
+    
+}
+
+CTextureHeader::~CTextureHeader(void)
+{
+    delete[] m_data;
+}
+
 CTexture::CTexture(const std::string& _guid) :
 IResource(E_RESOURCE_TYPE_TEXTURE, _guid),
 m_handle(0),
-m_width(0),
-m_height(0),
+m_header(nullptr),
 m_isWrap(false)
 {
     

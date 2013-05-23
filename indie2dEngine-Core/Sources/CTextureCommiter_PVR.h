@@ -11,21 +11,18 @@
 
 #include "IResourceCommiter.h"
 
+class CTextureHeader;
 class CTextureCommiter_PVR final : public IResourceCommiter
 {
 private:
     
 protected:
     
-    std::string m_vsSourceCode;
-    std::string m_fsSourceCode;
-    
-    ui32 _Compile(const std::string& _sourceCode, GLenum _shader);
-    ui32 _Link(ui32 _vsHandle, ui32 _fsHandle);
+    std::shared_ptr<CTextureHeader> m_header;
     
 public:
     
-    CTextureCommiter_PVR(const std::string& _guid, const std::string& _vsSourceCode, const std::string& _fsSourceCode, std::shared_ptr<IResource> _resource);
+    CTextureCommiter_PVR(const std::string& _guid, std::shared_ptr<CTextureHeader> _header,  std::shared_ptr<IResource> _resource);
     ~CTextureCommiter_PVR(void);
     
     void Commit(void);

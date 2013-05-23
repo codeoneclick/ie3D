@@ -9,11 +9,12 @@
 #include "CGameViewController.h"
 #include "COGLWindow_iOS.h"
 #include "CGame.h"
-#include "CRoot.h"
+#include "CGameRootTransition.h"
 
 @interface CGameViewController ()
 
 @property (weak, nonatomic) IBOutlet COGLWindow_iOS *m_glWindow;
+@property (unsafe_unretained, nonatomic) CGameRootTransition* m_transition;
 @end
 
 @implementation CGameViewController
@@ -31,10 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    CRoot* root = new CRoot((__bridge void*)_m_glWindow);
-    CGame* game = new CGame();
-    game->Call_Test_01();
+    self.m_transition = new CGameRootTransition((__bridge void*)_m_glWindow);
 }
 
 - (void)didReceiveMemoryWarning

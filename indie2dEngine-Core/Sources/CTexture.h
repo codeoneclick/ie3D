@@ -11,15 +11,18 @@
 
 #include "IResource.h"
 
-class CTexture final : public IResource
+class CTextureHeader final
 {
 private:
     
 protected:
     
+    friend class CRenderOperationWorldSpace;
+    friend class CRenderOperationScreenSpace;
     friend class CTextureSerializer_PVR;
     friend class CTextureCommiter_PVR;
     friend class CTextureLoadingOperation;
+    friend class CTexture;
     
     ui32 m_width;
     ui32 m_height;
@@ -30,12 +33,14 @@ protected:
 	ui32 m_numMips;
     bool m_isCompressed;
     
-    ui32 m_handle;
-    bool m_isWrap;
-    
     inline void _Set_Data(ui8* _data)
     {
         m_data = _data;
+    };
+    
+    inline ui8* _Get_Data(void)
+    {
+        return m_data;
     };
     
     inline void _Set_Format(GLenum _format)
@@ -43,19 +48,9 @@ protected:
         m_format = _format;
     };
     
-    inline GLenum _Get_Format(void)
-    {
-        return m_format;
-    };
-    
     inline void _Set_Bpp(i32 _bpp)
     {
         m_bpp = _bpp;
-    };
-    
-    inline i32 _Get_Bpp(void)
-    {
-        return m_bpp;
     };
     
     inline void _Set_NumMips(ui32 _numMips)
@@ -63,24 +58,9 @@ protected:
         m_numMips = _numMips;
     };
     
-    inline ui32 _Get_NumMips(void)
-    {
-        return m_numMips;
-    };
-    
     inline void _Set_IsCompressed(bool _isCompressed)
     {
         m_isCompressed = _isCompressed;
-    };
-    
-    inline bool _Get_IsCompressed(void)
-    {
-        return m_isCompressed;
-    };
-    
-    inline void _Set_Handle(ui32 _handle)
-    {
-        m_handle = _handle;
     };
     
     inline void _Set_Width(ui32 _width)
@@ -91,6 +71,87 @@ protected:
     inline void _Set_Height(ui32 _height)
     {
         m_height = _height;
+    };
+    
+public:
+    
+    CTextureHeader(void);
+    ~CTextureHeader(void);
+    
+    inline ui32 Get_Width(void)
+    {
+        return m_width;
+    };
+    
+    inline ui32 Get_Height(void)
+    {
+        return m_height;
+    };
+    
+    inline GLenum Get_Format(void)
+    {
+        return m_format;
+    };
+    
+    inline i32 Get_Bpp(void)
+    {
+        return m_bpp;
+    };
+
+    inline ui32 Get_NumMips(void)
+    {
+        return m_numMips;
+    };
+
+    inline bool Get_IsCompressed(void)
+    {
+        return m_isCompressed;
+    };
+};
+
+class CTexture final : public IResource
+{
+private:
+    
+protected:
+    
+    friend class CRenderOperationWorldSpace;
+    friend class CRenderOperationScreenSpace;
+    friend class CTextureSerializer_PVR;
+    friend class CTextureCommiter_PVR;
+    friend class CTextureLoadingOperation;
+    
+    std::shared_ptr<CTextureHeader> m_header;
+    ui32 m_handle;
+    bool m_isWrap;
+    
+
+    
+    inline void _Set_Header(std::shared_ptr<CTextureHeader> _header)
+    {
+        m_header = _header;
+        m_isLoaded = true;
+    };
+
+
+    
+#ifdef TESTING
+public:
+#endif
+    
+    inline std::shared_ptr<CTextureHeader> _Get_Header(void)
+    {
+        return m_header;
+    };
+    
+#ifdef TESTING
+protected:
+#endif
+        
+    inline void _Set_Handle(ui32 _handle)
+    {
+        m_handle = _handle;
+        m_isLinked = true;
     };
  
 public:
@@ -105,12 +166,14 @@ public:
     
     inline const ui32 Get_Width(void)
     {
-        return m_width;
+        assert(m_header != nullptr);
+        return m_header->Get_Width();
     };
     
     inline const ui32 Get_Height(void)
     {
-        return m_height;
+        assert(m_header != nullptr);
+        return m_header->Get_Height();
     };
     
     inline void Set_IsWrap(bool _value)

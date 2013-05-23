@@ -37,7 +37,12 @@ m_material(_material)
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     
     m_operatingTexture = std::make_shared<CTexture>(m_mode);
-    m_operatingTexture->Link(textureHandle, m_frameWidth, m_frameHeight);
+    std::shared_ptr<CTextureHeader> header = std::make_shared<CTextureHeader>();
+    header->_Set_Width(m_frameWidth);
+    header->_Set_Height(m_frameHeight);
+    m_operatingTexture = std::make_shared<CTexture>(m_mode);
+    m_operatingTexture->_Set_Header(header);
+    m_operatingTexture->_Set_Handle(textureHandle);
     m_operatingTexture->Set_IsWrap(true);
     
     CVertexBuffer* vertexBuffer = new CVertexBuffer(4, GL_STATIC_DRAW);
