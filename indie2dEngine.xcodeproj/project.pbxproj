@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		A40A698E174E634B005B475E /* CSceneUpdateMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A698C174E634A005B475E /* CSceneUpdateMgr.cpp */; };
 		A40A6991174E69F3005B475E /* ISceneUpdateHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A698F174E69F3005B475E /* ISceneUpdateHandler.cpp */; };
+		A40A69B0174F5203005B475E /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
+		A40A69B3174F5215005B475E /* CFrustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B1174F5215005B475E /* CFrustum.cpp */; };
+		A40A69B6174F5D1B005B475E /* CGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B4174F5D1B005B475E /* CGameObject.cpp */; };
+		A40A69B9174F5D2F005B475E /* CSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B7174F5D2F005B475E /* CSprite.cpp */; };
+		A40A69BC174F5D42005B475E /* CBillboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BA174F5D42005B475E /* CBillboard.cpp */; };
+		A40A69BF174F5D64005B475E /* CParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */; };
 		A40D47BC17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */; };
 		A40D47BF17453AC000CA59D0 /* CTextureSerializer_PVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */; };
 		A40D47C2174552A300CA59D0 /* CCommonOS_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C0174552A300CA59D0 /* CCommonOS_iOS.mm */; };
@@ -283,6 +289,18 @@
 		A40A698D174E634B005B475E /* CSceneUpdateMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSceneUpdateMgr.h; path = Sources/CSceneUpdateMgr.h; sourceTree = "<group>"; };
 		A40A698F174E69F3005B475E /* ISceneUpdateHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ISceneUpdateHandler.cpp; path = Sources/ISceneUpdateHandler.cpp; sourceTree = "<group>"; };
 		A40A6990174E69F3005B475E /* ISceneUpdateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISceneUpdateHandler.h; path = Sources/ISceneUpdateHandler.h; sourceTree = "<group>"; };
+		A40A69AE174F5203005B475E /* CCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCamera.cpp; path = Sources/CCamera.cpp; sourceTree = "<group>"; };
+		A40A69AF174F5203005B475E /* CCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCamera.h; path = Sources/CCamera.h; sourceTree = "<group>"; };
+		A40A69B1174F5215005B475E /* CFrustum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFrustum.cpp; path = Sources/CFrustum.cpp; sourceTree = "<group>"; };
+		A40A69B2174F5215005B475E /* CFrustum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFrustum.h; path = Sources/CFrustum.h; sourceTree = "<group>"; };
+		A40A69B4174F5D1B005B475E /* CGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameObject.cpp; path = Sources/CGameObject.cpp; sourceTree = "<group>"; };
+		A40A69B5174F5D1B005B475E /* CGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameObject.h; path = Sources/CGameObject.h; sourceTree = "<group>"; };
+		A40A69B7174F5D2F005B475E /* CSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSprite.cpp; path = Sources/CSprite.cpp; sourceTree = "<group>"; };
+		A40A69B8174F5D2F005B475E /* CSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSprite.h; path = Sources/CSprite.h; sourceTree = "<group>"; };
+		A40A69BA174F5D42005B475E /* CBillboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBillboard.cpp; path = Sources/CBillboard.cpp; sourceTree = "<group>"; };
+		A40A69BB174F5D42005B475E /* CBillboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBillboard.h; path = Sources/CBillboard.h; sourceTree = "<group>"; };
+		A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitter.cpp; path = Sources/CParticleEmitter.cpp; sourceTree = "<group>"; };
+		A40A69BE174F5D64005B475E /* CParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CParticleEmitter.h; path = Sources/CParticleEmitter.h; sourceTree = "<group>"; };
 		A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderSerializer_GLSL.cpp; path = Sources/CShaderSerializer_GLSL.cpp; sourceTree = "<group>"; };
 		A40D47BB17453AA100CA59D0 /* CShaderSerializer_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderSerializer_GLSL.h; path = Sources/CShaderSerializer_GLSL.h; sourceTree = "<group>"; };
 		A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureSerializer_PVR.cpp; path = Sources/CTextureSerializer_PVR.cpp; sourceTree = "<group>"; };
@@ -657,6 +675,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A40A69AC174F51E4005B475E /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A40A69AF174F5203005B475E /* CCamera.h */,
+				A40A69AE174F5203005B475E /* CCamera.cpp */,
+				A40A69B2174F5215005B475E /* CFrustum.h */,
+				A40A69B1174F5215005B475E /* CFrustum.cpp */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
+		A40A69AD174F51EF005B475E /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				A40A69B5174F5D1B005B475E /* CGameObject.h */,
+				A40A69B4174F5D1B005B475E /* CGameObject.cpp */,
+				A40A69B8174F5D2F005B475E /* CSprite.h */,
+				A40A69B7174F5D2F005B475E /* CSprite.cpp */,
+				A40A69BB174F5D42005B475E /* CBillboard.h */,
+				A40A69BA174F5D42005B475E /* CBillboard.cpp */,
+				A40A69BE174F5D64005B475E /* CParticleEmitter.h */,
+				A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */,
+			);
+			name = GameObjects;
+			sourceTree = "<group>";
+		};
 		A40D47C3174555AF00CA59D0 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -973,6 +1017,8 @@
 		A494D36517392D4B00228936 /* SceneGraph Managment */ = {
 			isa = PBXGroup;
 			children = (
+				A40A69AD174F51EF005B475E /* GameObjects */,
+				A40A69AC174F51E4005B475E /* Support */,
 				A4F204BC17427C700063AB07 /* CSceneGraph.h */,
 				A4F204BB17427C700063AB07 /* CSceneGraph.cpp */,
 				A40A698D174E634B005B475E /* CSceneUpdateMgr.h */,
@@ -1688,6 +1734,12 @@
 				A46A331C174E4C820044643E /* CResourceFabricator.cpp in Sources */,
 				A40A698E174E634B005B475E /* CSceneUpdateMgr.cpp in Sources */,
 				A40A6991174E69F3005B475E /* ISceneUpdateHandler.cpp in Sources */,
+				A40A69B0174F5203005B475E /* CCamera.cpp in Sources */,
+				A40A69B3174F5215005B475E /* CFrustum.cpp in Sources */,
+				A40A69B6174F5D1B005B475E /* CGameObject.cpp in Sources */,
+				A40A69B9174F5D2F005B475E /* CSprite.cpp in Sources */,
+				A40A69BC174F5D42005B475E /* CBillboard.cpp in Sources */,
+				A40A69BF174F5D64005B475E /* CParticleEmitter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,8 +21,8 @@ protected:
     CVertexBuffer* m_vertexBuffer;
     CIndexBuffer* m_indexBuffer;
     
-    glm::vec2 m_maxBound;
-    glm::vec2 m_minBound;
+    glm::vec3 m_maxBound;
+    glm::vec3 m_minBound;
     
 public:
     
@@ -30,7 +30,7 @@ public:
     ~CShape(void);
     
     void Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer);
-    void Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer, const glm::vec2& _maxBound, const glm::vec2& _minBound);
+    void Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer, const glm::vec3& _maxBound, const glm::vec3& _minBound);
     
     inline CVertexBuffer* Get_VertexBuffer(void)
     {
@@ -56,12 +56,12 @@ public:
         return m_indexBuffer->Get_NumIndexes();
     };
     
-    inline const glm::vec2 Get_MaxBound(void)
+    inline const glm::vec3 Get_MaxBound(void)
     {
         return m_maxBound;
     }
     
-    inline const glm::vec2 Get_MinBound(void)
+    inline const glm::vec3 Get_MinBound(void)
     {
         return m_minBound;
     }

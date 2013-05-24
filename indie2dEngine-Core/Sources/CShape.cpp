@@ -11,8 +11,8 @@
 CShape::CShape(void) :
 m_vertexBuffer(nullptr),
 m_indexBuffer(nullptr),
-m_maxBound(glm::vec2(-4096.0f, -4096.0f)),
-m_minBound(glm::vec2( 4096.0f,  4096.0f))
+m_maxBound(glm::vec3(-4096.0f, -4096.0f, -4096.0f)),
+m_minBound(glm::vec3( 4096.0f,  4096.0f,  4096.0f))
 {
     
 }
@@ -43,6 +43,10 @@ void CShape::Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer)
         {
             m_maxBound.y = vertexData[i].m_position.y;
         }
+        if(vertexData[i].m_position.z > m_maxBound.z)
+        {
+            m_maxBound.z = vertexData[i].m_position.z;
+        }
         if(vertexData[i].m_position.x < m_minBound.x)
         {
             m_minBound.x = vertexData[i].m_position.x;
@@ -51,10 +55,14 @@ void CShape::Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer)
         {
             m_minBound.y = vertexData[i].m_position.y;
         }
+        if(vertexData[i].m_position.z < m_minBound.z)
+        {
+            m_minBound.z = vertexData[i].m_position.z;
+        }
     }
 }
 
-void CShape::Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer, const glm::vec2 &_maxBound, const glm::vec2 &_minBound)
+void CShape::Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer, const glm::vec3 &_maxBound, const glm::vec3 &_minBound)
 {
     assert(_vertexBuffer != nullptr);
     assert(_indexBuffer != nullptr);

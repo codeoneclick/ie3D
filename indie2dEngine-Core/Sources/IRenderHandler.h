@@ -70,10 +70,10 @@ protected:
     
     IRenderHandler(void);
     
-    virtual i32 OnQueuePosition(void) = 0;
-    virtual void OnBind(const std::string& _renderMode) = 0;
-    virtual void OnDraw(const std::string& _renderMode) = 0;
-    virtual void OnUnbind(const std::string& _renderMode) = 0;
+    virtual i32 _OnQueuePosition(void) = 0;
+    virtual void _OnBind(const std::string& _renderMode) = 0;
+    virtual void _OnDraw(const std::string& _renderMode) = 0;
+    virtual void _OnUnbind(const std::string& _renderMode) = 0;
     
 public:
     

@@ -7,6 +7,12 @@
 //
 
 #include "CSceneGraph.h"
+#include "CSceneUpdateMgr.h"
+#include "CCamera.h"
+#include "CGameObject.h"
+#include "CSprite.h"
+#include "CBillboard.h"
+#include "CParticleEmitter.h"
 
 CSceneGraph::CSceneGraph(void) :
 m_camera(nullptr),
@@ -24,265 +30,102 @@ CSceneGraph::~CSceneGraph(void)
     m_billboardsContainer.clear();
     m_particlesContainer.clear();
 }
-/*
+
 void CSceneGraph::Set_Camera(std::shared_ptr<CCamera> _camera)
 {
     assert(m_sceneUpdateMgr != nullptr);
     if(m_camera != nullptr)
     {
-        m_sceneUpdateMgr->RemoveEventListener(m_camera);
+        m_sceneUpdateMgr->UnregisterSceneUpdateHandler(m_camera);
     }
     
     m_camera = _camera;
-    assert(m_updateMgr != nullptr);
-    m_updateMgr->AddEventListener(m_camera);
+    assert(m_sceneUpdateMgr != nullptr);
+    m_sceneUpdateMgr->RegisterSceneUpdateHandler(m_camera);
     
-    for(std::set<CShape3d*>::iterator iterator = m_shapes3dContainer.begin(); iterator != m_shapes3dContainer.end(); ++iterator)
+    for(auto iterator : m_gameObjectsContainer)
     {
-        CShape3d* shape3d = *iterator;
-        shape3d->Set_Camera(m_camera);
-    }
-    
-    for(std::set<CParticleEmitter*>::iterator iterator = m_particleEmittersContainer.begin(); iterator != m_particleEmittersContainer.end(); ++iterator)
-    {
-        CParticleEmitter* particleEmitter = *iterator;
-        particleEmitter->Set_Camera(m_camera);
+        iterator->Set_Camera(m_camera);
     }
 }
 
-void CSceneGraph::Set_Light(CLight* _light)
+void CSceneGraph::Set_Light(std::shared_ptr<CLight> _light)
 {
     m_light = _light;
     
-    for(std::set<CShape3d*>::iterator iterator = m_shapes3dContainer.begin(); iterator != m_shapes3dContainer.end(); ++iterator)
+    for(auto iterator : m_gameObjectsContainer)
     {
-        CShape3d* shape3d = *iterator;
-        shape3d->Set_Light(m_light);
-    }
-    for(std::set<CParticleEmitter*>::iterator iterator = m_particleEmittersContainer.begin(); iterator != m_particleEmittersContainer.end(); ++iterator)
-    {
-        CParticleEmitter* particleEmitter = *iterator;
-        particleEmitter->Set_Light(m_light);
+        iterator->Set_Light(m_light);
     }
 }
 
-void CSceneGraph::Set_Landscape(CLandscape* _landscape)
+void CSceneGraph::_InsertGameObject(std::shared_ptr<CGameObject> _gameObject)
 {
-    if(m_landscape != nullptr)
-    {
-        m_landscape->ListenUpdateMgr(false);
-        m_landscape->ListenRenderMgr(false);
-        m_landscape = nullptr;
-    }
-    
-    m_landscape = _landscape;
-    
-    assert(m_updateMgr != nullptr);
-    assert(m_renderMgr != nullptr);
-    
-    m_landscape->Set_Camera(m_camera);
-    m_landscape->Set_Light(m_light);
-    m_landscape->Set_UpdateMgr(m_updateMgr);
-    m_landscape->Set_RenderMgr(m_renderMgr);
-    m_landscape->ListenUpdateMgr(true);
-    m_landscape->ListenRenderMgr(true);
-    
-    if(m_ocean != nullptr)
-    {
-        m_ocean->Set_HeightmapTexture(m_landscape->Get_HeightmapTexture());
-        m_landscape->Set_Clipping(glm::vec4(0.0f, 1.0f, 0.0f, m_ocean->Get_Altitude()), E_RENDER_MODE_WORLD_SPACE_REFLECTION);
-        m_landscape->Set_Clipping(glm::vec4(0.0f, -1.0f, 0.0f, m_ocean->Get_Altitude()), E_RENDER_MODE_WORLD_SPACE_REFRACTION);
-    }
-    
-    for(std::set<CLandscapeDecal*>::iterator iterator = m_landscapeDecalsContainer.begin(); iterator != m_landscapeDecalsContainer.end(); ++iterator)
-    {
-        CLandscapeDecal* landscapeDecal = *iterator;
-        landscapeDecal->Set_HeightmapData(m_landscape->Get_HeightmapData());
-        landscapeDecal->Set_HeightmapWidth(m_landscape->Get_HeightmapWidth());
-        landscapeDecal->Set_HeightmapHeight(m_landscape->Get_HeightmapHeight());
-    }
-    
-    assert(m_collisionMgr != nullptr);
-    m_collisionMgr->Set_CollisionBounds(glm::vec2(m_landscape->Get_Position().x, m_landscape->Get_Position().z), glm::vec2(m_landscape->Get_HeightmapWidth(), m_landscape->Get_HeightmapHeight()));
-}
-
-void CSceneGraph::Set_Ocean(COcean *_ocean)
-{
-    if(m_ocean != nullptr)
-    {
-        m_ocean->ListenUpdateMgr(false);
-        m_ocean->ListenRenderMgr(false);
-        m_ocean = nullptr;
-    }
-    
-    m_ocean = _ocean;
-    
-    assert(m_updateMgr != nullptr);
-    assert(m_renderMgr != nullptr);
-    
-    m_ocean->Set_Camera(m_camera);
-    m_ocean->Set_Light(m_light);
-    m_ocean->Set_UpdateMgr(m_updateMgr);
-    m_ocean->Set_RenderMgr(m_renderMgr);
-    m_ocean->ListenUpdateMgr(true);
-    m_ocean->ListenRenderMgr(true);
-    
-    m_ocean->Set_ReflectionTexture(m_renderMgr->Get_TextureWorldSpaceRenderMode(E_RENDER_MODE_WORLD_SPACE_REFLECTION));
-    m_ocean->Set_RefractionTexture(m_renderMgr->Get_TextureWorldSpaceRenderMode(E_RENDER_MODE_WORLD_SPACE_REFRACTION));
-    
-    if(m_landscape != nullptr)
-    {
-        m_ocean->Set_HeightmapTexture(m_landscape->Get_HeightmapTexture());
-        m_landscape->Set_Clipping(glm::vec4(0.0f, 1.0f, 0.0f, m_ocean->Get_Altitude()), E_RENDER_MODE_WORLD_SPACE_REFLECTION);
-        m_landscape->Set_Clipping(glm::vec4(0.0f, -1.0f, 0.0f, m_ocean->Get_Altitude()), E_RENDER_MODE_WORLD_SPACE_REFRACTION);
-    }
-    
-    for(std::set<CShape3d*>::iterator iterator = m_shapes3dContainer.begin(); iterator != m_shapes3dContainer.end(); ++iterator)
-    {
-        CShape3d* shape3d = *iterator;
-        shape3d->Set_Clipping(glm::vec4(0.0f, 1.0f, 0.0f, m_ocean->Get_Altitude()), E_RENDER_MODE_WORLD_SPACE_REFLECTION);
-        shape3d->Set_Clipping(glm::vec4(0.0f, -1.0f, 0.0f, m_ocean->Get_Altitude()), E_RENDER_MODE_WORLD_SPACE_REFRACTION);
-    }
-}
-
-void CSceneGraph::InsertShape3d(CShape3d *_shape3d)
-{
-    CShape3d* shape3d = _shape3d;
-    
     if(m_camera != nullptr)
     {
-        shape3d->Set_Camera(m_camera);
+        _gameObject->Set_Camera(m_camera);
     }
     
     if(m_light != nullptr)
     {
-        shape3d->Set_Light(m_light);
+        _gameObject->Set_Light(m_light);
     }
     
-    assert(m_updateMgr != nullptr);
+    assert(m_sceneUpdateMgr != nullptr);
     assert(m_renderMgr != nullptr);
     
-    shape3d->Set_UpdateMgr(m_updateMgr);
-    shape3d->Set_RenderMgr(m_renderMgr);
-    shape3d->ListenUpdateMgr(true);
-    shape3d->ListenRenderMgr(true);
-    
-    if(m_ocean != nullptr)
-    {
-        shape3d->Set_Clipping(glm::vec4(0.0f, 1.0f, 0.0f, m_ocean->Get_Altitude()), E_RENDER_MODE_WORLD_SPACE_REFLECTION);
-        shape3d->Set_Clipping(glm::vec4(0.0f, -1.0f, 0.0f, m_ocean->Get_Altitude()), E_RENDER_MODE_WORLD_SPACE_REFRACTION);
-    }
-    
-    m_shapes3dContainer.insert(shape3d);
+    _gameObject->Set_SceneUpdateMgr(m_sceneUpdateMgr);
+    _gameObject->Set_RenderMgr(m_renderMgr);
+    _gameObject->ListenSceneUpdateMgr(true);
+    _gameObject->ListenRenderMgr(true);
+    m_gameObjectsContainer.insert(_gameObject);
 }
 
-void CSceneGraph::RemoveShape3d(CShape3d *_shape3d)
+void CSceneGraph::_RemoveGameObject(std::shared_ptr<CGameObject> _gameObject)
 {
-    CShape3d* shape3d = _shape3d;
-    shape3d->ListenUpdateMgr(false);
-    shape3d->ListenRenderMgr(false);
-    m_shapes3dContainer.erase(shape3d);
-}
-
-void CSceneGraph::InsertParticleEmitter(CParticleEmitter* _particleEmitter)
-{
-    CParticleEmitter* particleEmitter = _particleEmitter;
-    
-    if(m_camera != nullptr)
-    {
-        particleEmitter->Set_Camera(m_camera);
-    }
-    
-    if(m_light != nullptr)
-    {
-        particleEmitter->Set_Light(m_light);
-    }
-    
-    assert(m_updateMgr != nullptr);
+    assert(m_sceneUpdateMgr != nullptr);
     assert(m_renderMgr != nullptr);
     
-    particleEmitter->Set_UpdateMgr(m_updateMgr);
-    particleEmitter->Set_RenderMgr(m_renderMgr);
-    particleEmitter->ListenUpdateMgr(true);
-    particleEmitter->ListenRenderMgr(true);
-    
-    m_particleEmittersContainer.insert(particleEmitter);
+    _gameObject->Set_SceneUpdateMgr(nullptr);
+    _gameObject->Set_RenderMgr(nullptr);
+    _gameObject->ListenSceneUpdateMgr(false);
+    _gameObject->ListenRenderMgr(false);
+    m_gameObjectsContainer.erase(_gameObject);
 }
 
-void CSceneGraph::RemoveParticleEmitter(CParticleEmitter* _particleEmitter)
+void CSceneGraph::InsertSprite(std::shared_ptr<CSprite> _sprite)
 {
-    CParticleEmitter* particleEmitter = _particleEmitter;
-    particleEmitter->ListenUpdateMgr(false);
-    particleEmitter->ListenRenderMgr(false);
-    m_particleEmittersContainer.erase(particleEmitter);
+    CSceneGraph::_InsertGameObject(_sprite);
+    m_spritesContainer.insert(_sprite);
 }
 
-void CSceneGraph::InsertLandscapeDecal(CLandscapeDecal* _landscapeDecal)
+void CSceneGraph::RemoveSprite(std::shared_ptr<CSprite> _sprite)
 {
-    CLandscapeDecal* landscapeDecal = _landscapeDecal;
-    
-    if(m_camera != nullptr)
-    {
-        landscapeDecal->Set_Camera(m_camera);
-    }
-    
-    if(m_light != nullptr)
-    {
-        landscapeDecal->Set_Light(m_light);
-    }
-    
-    if(m_landscape != nullptr)
-    {
-        landscapeDecal->Set_HeightmapData(m_landscape->Get_HeightmapData());
-        landscapeDecal->Set_HeightmapWidth(m_landscape->Get_HeightmapWidth());
-        landscapeDecal->Set_HeightmapHeight(m_landscape->Get_HeightmapHeight());
-    }
-    
-    assert(m_updateMgr != nullptr);
-    assert(m_renderMgr != nullptr);
-    
-    landscapeDecal->Set_UpdateMgr(m_updateMgr);
-    landscapeDecal->Set_RenderMgr(m_renderMgr);
-    landscapeDecal->ListenUpdateMgr(true);
-    landscapeDecal->ListenRenderMgr(true);
-    
-    m_landscapeDecalsContainer.insert(landscapeDecal);
+    CSceneGraph::_RemoveGameObject(_sprite);
+    m_spritesContainer.erase(_sprite);
 }
 
-void CSceneGraph::RemoveLandscapeDecal(CLandscapeDecal* _landscapeDecal)
+void CSceneGraph::InsertBillboard(std::shared_ptr<CBillboard> _billboard)
 {
-    CLandscapeDecal* landscapeDecal = _landscapeDecal;
-    landscapeDecal->ListenUpdateMgr(false);
-    landscapeDecal->ListenRenderMgr(false);
-    m_landscapeDecalsContainer.erase(landscapeDecal);
+    CSceneGraph::_InsertGameObject(_billboard);
+    m_billboardsContainer.insert(_billboard);
 }
 
-void CSceneGraph::InsertCollider(CCollisionCallback_INTERFACE* _collider, bool _isStatic)
+void CSceneGraph::RemoveBillboard(std::shared_ptr<CBillboard> _billboard)
 {
-    assert(m_collisionMgr != nullptr);
-    m_collisionMgr->AddCollisionEventListener(_collider, _isStatic);
+    CSceneGraph::_RemoveGameObject(_billboard);
+    m_billboardsContainer.erase(_billboard);
 }
 
-void CSceneGraph::RemoveCollider(CCollisionCallback_INTERFACE* _collider)
+
+void CSceneGraph::InsertParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter)
 {
-    assert(m_collisionMgr != nullptr);
-    m_collisionMgr->RemoveCollisionEventListener(_collider);
+    CSceneGraph::_InsertGameObject(_particleEmitter);
+    m_particlesContainer.insert(_particleEmitter);
 }
 
-void CSceneGraph::FillUIView(IUIView_INTERFACE *_view, const std::string &_filename)
+void CSceneGraph::RemoveParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter)
 {
-    assert(m_uiMgr != nullptr);
-    m_uiMgr->FillUIView(_view, _filename);
+    CSceneGraph::_RemoveGameObject(_particleEmitter);
+    m_particlesContainer.erase(_particleEmitter);
 }
-
-void CSceneGraph::AddUIEventListener(CUIEventCallback_INTERFACE* _listener)
-{
-    assert(m_uiMgr != nullptr);
-    m_uiMgr->AddUIEventListener(_listener);
-}
-
-void CSceneGraph::RemoveUIEventListener(CUIEventCallback_INTERFACE* _listener)
-{
-    assert(m_uiMgr != nullptr);
-    m_uiMgr->RemoveUIEventListener(_listener);
-}*/

@@ -85,8 +85,8 @@ IRenderHandler::~IRenderHandler(void)
 
 void IRenderHandler::_ConnectCommands(void)
 {
-    m_commands._ConnectRenderQueuePositionCommand(std::bind(&IRenderHandler::OnQueuePosition, this));
-    m_commands._ConnectRenderBindCommand(std::bind(&IRenderHandler::OnBind, this, std::placeholders::_1));
-    m_commands._ConnectRenderDrawCommand(std::bind(&IRenderHandler::OnDraw, this, std::placeholders::_1));
-    m_commands._ConnectRenderUnbindCommand(std::bind(&IRenderHandler::OnUnbind, this, std::placeholders::_1));
+    m_commands._ConnectRenderQueuePositionCommand(std::bind(&IRenderHandler::_OnQueuePosition, this));
+    m_commands._ConnectRenderBindCommand(std::bind(&IRenderHandler::_OnBind, this, std::placeholders::_1));
+    m_commands._ConnectRenderDrawCommand(std::bind(&IRenderHandler::_OnDraw, this, std::placeholders::_1));
+    m_commands._ConnectRenderUnbindCommand(std::bind(&IRenderHandler::_OnUnbind, this, std::placeholders::_1));
 }
