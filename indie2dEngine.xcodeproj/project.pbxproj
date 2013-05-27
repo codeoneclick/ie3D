@@ -20,6 +20,23 @@
 		A40A69B9174F5D2F005B475E /* CSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B7174F5D2F005B475E /* CSprite.cpp */; };
 		A40A69BC174F5D42005B475E /* CBillboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BA174F5D42005B475E /* CBillboard.cpp */; };
 		A40A69BF174F5D64005B475E /* CParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */; };
+		A40A6A581753A552005B475E /* CMeshLoader_Testing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A6A571753A552005B475E /* CMeshLoader_Testing.cpp */; };
+		A40A6A611753AF38005B475E /* CGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B4174F5D1B005B475E /* CGameObject.cpp */; };
+		A40A6A621753AF38005B475E /* CSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B7174F5D2F005B475E /* CSprite.cpp */; };
+		A40A6A631753AF38005B475E /* CBillboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BA174F5D42005B475E /* CBillboard.cpp */; };
+		A40A6A641753AF38005B475E /* CParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */; };
+		A40A6A651753AF38005B475E /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
+		A40A6A661753AF38005B475E /* CFrustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B1174F5215005B475E /* CFrustum.cpp */; };
+		A40A6A671753AF38005B475E /* CSceneUpdateMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A698C174E634A005B475E /* CSceneUpdateMgr.cpp */; };
+		A40A6A681753AF38005B475E /* ISceneUpdateHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A698F174E69F3005B475E /* ISceneUpdateHandler.cpp */; };
+		A40A6A691753AF38005B475E /* CMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD0C175266EC00DDB182 /* CMesh.cpp */; };
+		A40A6A6A1753AF38005B475E /* CMeshSerializer_MDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1A1752674A00DDB182 /* CMeshSerializer_MDL.cpp */; };
+		A40A6A6B1753AF38005B475E /* CMeshLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */; };
+		A40A6A6C1753AF38005B475E /* CMeshLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD201752678E00DDB182 /* CMeshLoader.cpp */; };
+		A40A6A6D1753AF38005B475E /* CResourceFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceFabricator.cpp */; };
+		A40A6A6E1753AF75005B475E /* CMeshCommiter_MDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD171752672500DDB182 /* CMeshCommiter_MDL.cpp */; };
+		A40A6A711753B06C005B475E /* mesh.mdl in Resources */ = {isa = PBXBuildFile; fileRef = A40A6A701753B06C005B475E /* mesh.mdl */; };
+		A40A6A721753B0E3005B475E /* mesh.mdl in Resources */ = {isa = PBXBuildFile; fileRef = A40A6A701753B06C005B475E /* mesh.mdl */; };
 		A40D47BC17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */; };
 		A40D47BF17453AC000CA59D0 /* CTextureSerializer_PVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */; };
 		A40D47C2174552A300CA59D0 /* CCommonOS_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C0174552A300CA59D0 /* CCommonOS_iOS.mm */; };
@@ -316,6 +333,8 @@
 		A40A69BB174F5D42005B475E /* CBillboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBillboard.h; path = Sources/CBillboard.h; sourceTree = "<group>"; };
 		A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitter.cpp; path = Sources/CParticleEmitter.cpp; sourceTree = "<group>"; };
 		A40A69BE174F5D64005B475E /* CParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CParticleEmitter.h; path = Sources/CParticleEmitter.h; sourceTree = "<group>"; };
+		A40A6A571753A552005B475E /* CMeshLoader_Testing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMeshLoader_Testing.cpp; sourceTree = "<group>"; };
+		A40A6A701753B06C005B475E /* mesh.mdl */ = {isa = PBXFileReference; lastKnownFileType = file; path = mesh.mdl; sourceTree = "<group>"; };
 		A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderSerializer_GLSL.cpp; path = Sources/CShaderSerializer_GLSL.cpp; sourceTree = "<group>"; };
 		A40D47BB17453AA100CA59D0 /* CShaderSerializer_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderSerializer_GLSL.h; path = Sources/CShaderSerializer_GLSL.h; sourceTree = "<group>"; };
 		A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureSerializer_PVR.cpp; path = Sources/CTextureSerializer_PVR.cpp; sourceTree = "<group>"; };
@@ -716,6 +735,15 @@
 			name = GameObjects;
 			sourceTree = "<group>";
 		};
+		A40A6A6F1753B06C005B475E /* Meshes */ = {
+			isa = PBXGroup;
+			children = (
+				A40A6A701753B06C005B475E /* mesh.mdl */,
+			);
+			name = Meshes;
+			path = Bundle/Meshes;
+			sourceTree = "<group>";
+		};
 		A40D47C3174555AF00CA59D0 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,6 +809,7 @@
 		A420817B1733AA670004729E /* Bundle */ = {
 			isa = PBXGroup;
 			children = (
+				A40A6A6F1753B06C005B475E /* Meshes */,
 				A46A3212174E10B80044643E /* Textures */,
 				A40D47C3174555AF00CA59D0 /* Shaders */,
 				A42081821733AA930004729E /* System */,
@@ -996,6 +1025,7 @@
 			children = (
 				A46A3313174E2E370044643E /* CShaderLoader_Testing.cpp */,
 				A46A3315174E2E4F0044643E /* CTextureLoader_Testing.cpp */,
+				A40A6A571753A552005B475E /* CMeshLoader_Testing.cpp */,
 			);
 			name = "Unit Tests";
 			sourceTree = "<group>";
@@ -1691,6 +1721,7 @@
 				A4F2061F174287450063AB07 /* wrap.inl in Resources */,
 				A46A317917463DE10044643E /* CGameViewController.xib in Resources */,
 				A46A3214174E10B80044643E /* texture_01.pvr in Resources */,
+				A40A6A711753B06C005B475E /* mesh.mdl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1698,6 +1729,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A40A6A721753B0E3005B475E /* mesh.mdl in Resources */,
 				A46A3317174E35F00044643E /* texture_01.pvr in Resources */,
 				A46A3318174E35F00044643E /* ShaderCommon.vert in Resources */,
 				A46A3319174E35F00044643E /* ShaderCommon.frag in Resources */,
@@ -1777,6 +1809,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A40A6A6E1753AF75005B475E /* CMeshCommiter_MDL.cpp in Sources */,
+				A40A6A611753AF38005B475E /* CGameObject.cpp in Sources */,
+				A40A6A621753AF38005B475E /* CSprite.cpp in Sources */,
+				A40A6A631753AF38005B475E /* CBillboard.cpp in Sources */,
+				A40A6A641753AF38005B475E /* CParticleEmitter.cpp in Sources */,
+				A40A6A651753AF38005B475E /* CCamera.cpp in Sources */,
+				A40A6A661753AF38005B475E /* CFrustum.cpp in Sources */,
+				A40A6A671753AF38005B475E /* CSceneUpdateMgr.cpp in Sources */,
+				A40A6A681753AF38005B475E /* ISceneUpdateHandler.cpp in Sources */,
+				A40A6A691753AF38005B475E /* CMesh.cpp in Sources */,
+				A40A6A6A1753AF38005B475E /* CMeshSerializer_MDL.cpp in Sources */,
+				A40A6A6B1753AF38005B475E /* CMeshLoadingOperation.cpp in Sources */,
+				A40A6A6C1753AF38005B475E /* CMeshLoader.cpp in Sources */,
+				A40A6A6D1753AF38005B475E /* CResourceFabricator.cpp in Sources */,
 				A46A32F2174E1D100044643E /* CGameRootTransition.cpp in Sources */,
 				A46A32F3174E1D100044643E /* CCommonOS_iOS.mm in Sources */,
 				A46A32F4174E1D100044643E /* CRenderOperationWorldSpace.cpp in Sources */,
@@ -1815,6 +1861,7 @@
 				A46A32F0174E1A3F0044643E /* CTestingViewController.mm in Sources */,
 				A46A3314174E2E370044643E /* CShaderLoader_Testing.cpp in Sources */,
 				A46A3316174E2E4F0044643E /* CTextureLoader_Testing.cpp in Sources */,
+				A40A6A581753A552005B475E /* CMeshLoader_Testing.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

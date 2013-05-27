@@ -11,22 +11,22 @@
 
 #include "IResourceCommiter.h"
 
-class CTextureHeader;
-class CTextureCommiter_PVR final : public IResourceCommiter
+class CMeshHeader;
+class CMeshCommiter_MDL final : public IResourceCommiter
 {
 private:
     
 protected:
     
-    std::shared_ptr<CTextureHeader> m_header;
+    std::shared_ptr<CMeshHeader> m_header;
     
 public:
     
-    CTextureCommiter_PVR(const std::string& _guid, std::shared_ptr<CTextureHeader> _header,  std::shared_ptr<IResource> _resource);
-    ~CTextureCommiter_PVR(void);
+    CMeshCommiter_MDL(const std::string& _guid, std::shared_ptr<CMeshHeader> _header,  std::shared_ptr<IResource> _resource);
+    ~CMeshCommiter_MDL(void);
     
     void Commit(void);
 };
 
 
-#endif /* defined(__indie2dEngine__CMeshCommiter_MDL__) */
+#endif

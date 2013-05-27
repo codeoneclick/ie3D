@@ -6,9 +6,30 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __indie2dEngine__CMeshLoadingOperation__
-#define __indie2dEngine__CMeshLoadingOperation__
+#ifndef CMeshLoadingOperation_h
+#define CMeshLoadingOperation_h
 
-#include <iostream>
+#include "HCommon.h"
+#include "IResourceLoadingOperation.h"
 
-#endif /* defined(__indie2dEngine__CMeshLoadingOperation__) */
+class IResource;
+
+class CMeshLoadingOperation final : public IResourceLoadingOperation
+{
+private:
+    
+protected:
+    
+    std::string m_filename;
+    
+public:
+    
+    CMeshLoadingOperation(const std::string& _filename, std::shared_ptr<IResource> _resource);
+    ~CMeshLoadingOperation(void);
+    
+    void Serialize(void);
+    void Commit(void);
+    
+};
+
+#endif 

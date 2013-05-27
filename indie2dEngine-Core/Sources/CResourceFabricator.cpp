@@ -9,10 +9,12 @@
 #include "CResourceFabricator.h"
 #include "CTextureLoader.h"
 #include "CShaderLoader.h"
+#include "CMeshLoader.h"
 
 CResourceFabricator::CResourceFabricator(void) :
 m_textureLoader(std::make_shared<CTextureLoader>()),
-m_shaderLoader(std::make_shared<CShaderLoader>())
+m_shaderLoader(std::make_shared<CShaderLoader>()),
+m_meshLoader(std::make_shared<CMeshLoader>())
 {
     
 }
@@ -32,8 +34,16 @@ std::shared_ptr<CTexture> CResourceFabricator::CreateTexture(const std::string &
 
 std::shared_ptr<CShader> CResourceFabricator::CreateShader(const std::string &_vsFilename, const std::string &_fsFilename)
 {
-    assert(m_shaderLoader);
+    assert(m_shaderLoader != nullptr);
     std::shared_ptr<CShader> shader = m_shaderLoader->StartLoadOperation(_vsFilename, _fsFilename);
     assert(shader != nullptr);
     return shader;
+}
+
+std::shared_ptr<CMesh> CResourceFabricator::CreateMesh(const std::string &_filename)
+{
+    assert(m_meshLoader != nullptr);
+    std::shared_ptr<CMesh> mesh = m_meshLoader->StartLoadOperation(_filename);
+    assert(mesh != nullptr);
+    return mesh;
 }

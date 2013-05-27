@@ -7,3 +7,25 @@
 //
 
 #include "CMeshLoader.h"
+#include "CMesh.h"
+#include "CMeshLoadingOperation.h"
+
+CMeshLoader::CMeshLoader(void)
+{
+    
+}
+
+CMeshLoader::~CMeshLoader(void)
+{
+    
+}
+
+std::shared_ptr<CMesh> CMeshLoader::StartLoadOperation(const std::string &_filename)
+{
+    std::string guid = _filename;
+    std::shared_ptr<CMesh> resource = std::make_shared<CMesh>(guid);
+    std::shared_ptr<IResourceLoadingOperation> operation = std::make_shared<CMeshLoadingOperation>(_filename, resource);
+    m_resourceContainer.insert(std::make_pair(guid, resource));
+    m_operationsQueue.insert(std::make_pair(guid, operation));
+    return resource;
+}

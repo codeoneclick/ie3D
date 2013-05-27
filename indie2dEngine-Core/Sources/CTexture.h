@@ -125,16 +125,12 @@ protected:
     ui32 m_handle;
     bool m_isWrap;
     
-
-    
     inline void _Set_Header(std::shared_ptr<CTextureHeader> _header)
     {
         m_header = _header;
         m_isLoaded = true;
     };
 
-
-    
 #ifdef TESTING
 public:
 #endif

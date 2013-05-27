@@ -9,7 +9,7 @@
 #ifndef CMesh_h
 #define CMesh_h
 
-#include "HCommon.h"
+#include "IResource.h"
 
 struct SVertex;
 class CMeshHeader final
@@ -19,6 +19,8 @@ private:
 protected:
     
     friend class CMesh;
+    friend class CMeshSerializer_MDL;
+    friend class CMeshCommiter_MDL;
     
     SVertex* m_vertexData;
     ui16* m_indexData;
@@ -85,6 +87,98 @@ public:
     {
         return m_minBound;
     };
+};
+
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
+
+class CMesh : public IResource
+{
+private:
+    
+protected:
+    
+    friend class CMeshSerializer_MDL;
+    friend class CMeshCommiter_MDL;
+    friend class CMeshLoadingOperation;
+    
+    std::shared_ptr<CMeshHeader> m_header;
+    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
+    std::shared_ptr<CIndexBuffer> m_indexBuffer;
+    
+    inline void _Set_Header(std::shared_ptr<CMeshHeader> _header)
+    {
+        m_header = _header;
+        m_isLoaded = true;
+    };
+    
+#ifdef TESTING
+public:
+#endif
+    
+    inline std::shared_ptr<CMeshHeader> _Get_Header(void)
+    {
+        return m_header;
+    };
+    
+#ifdef TESTING
+protected:
+#endif
+    
+    inline void _Set_Handlers(std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer)
+    {
+        assert(_vertexBuffer != nullptr);
+        assert(_indexBuffer != nullptr);
+        m_vertexBuffer = _vertexBuffer;
+        m_indexBuffer = _indexBuffer;
+        m_isLinked = true;
+    };
+    
+public:
+    
+    CMesh(const std::string& _guid);
+    ~CMesh(void);
+    
+    inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)
+    {
+        assert(m_vertexBuffer != nullptr);
+        return m_vertexBuffer;
+    };
+    
+    inline std::shared_ptr<CIndexBuffer> Get_IndexBuffer(void)
+    {
+        assert(m_indexBuffer != nullptr);
+        return m_indexBuffer;
+    };
+    
+    inline const ui32 Get_NumVertexes(void)
+    {
+        assert(m_vertexBuffer != nullptr);
+        return m_vertexBuffer->Get_NumVertexes();
+    };
+    
+    inline const ui32 Get_NumIndexes(void)
+    {
+        assert(m_indexBuffer != nullptr);
+        return m_indexBuffer->Get_NumIndexes();
+    };
+    
+    inline const glm::vec3 Get_MaxBound(void)
+    {
+        assert(m_header != nullptr);
+        return m_header->Get_MaxBound();
+    }
+    
+    inline const glm::vec3 Get_MinBound(void)
+    {
+        assert(m_header != nullptr);
+        return m_header->Get_MinBound();
+    };
+    
+    void Bind(const i32* _attributes);
+    void Draw(void);
+    void Unbind(const i32* _attributes);
+
 };
 
 #endif

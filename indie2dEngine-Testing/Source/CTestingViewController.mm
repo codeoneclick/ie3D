@@ -8,13 +8,13 @@
 
 #include "CTestingViewController.h"
 #include "COGLWindow_iOS.h"
-#include "CRoot.h"
+#include "CGameRootTransition.h"
 #include "gtest/gtest.h"
 
 @interface CTestingViewController ()
 
 @property (weak, nonatomic) IBOutlet COGLWindow_iOS *m_glWindow;
-@property (unsafe_unretained, nonatomic) CRoot* m_root;
+@property (unsafe_unretained, nonatomic) CGameRootTransition* m_transition;
 
 @end
 
@@ -32,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.m_root = new CRoot((__bridge void*)_m_glWindow);
+    self.m_transition = new CGameRootTransition((__bridge void*)_m_glWindow);
     std::cout<<"[Testing] "<<std::endl<<RUN_ALL_TESTS()<<std::endl;
 }
 

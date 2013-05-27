@@ -6,9 +6,26 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __indie2dEngine__CMeshLoader__
-#define __indie2dEngine__CMeshLoader__
+#ifndef CMeshLoader_h
+#define CMeshLoader_h
 
-#include <iostream>
 
-#endif /* defined(__indie2dEngine__CMeshLoader__) */
+#include "IResourceLoader.h"
+
+class CMesh;
+class CMeshLoader final : public IResourceLoader
+{
+private:
+    
+protected:
+    
+public:
+    
+    CMeshLoader(void);
+    ~CMeshLoader(void);
+    
+    std::shared_ptr<CMesh> StartLoadOperation(const std::string& _filename);
+};
+
+
+#endif
