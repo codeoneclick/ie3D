@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210EFD0E175266EC00DDB182 /* CMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD0C175266EC00DDB182 /* CMesh.cpp */; };
+		210EFD191752672500DDB182 /* CMeshCommiter_MDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD171752672500DDB182 /* CMeshCommiter_MDL.cpp */; };
+		210EFD1C1752674A00DDB182 /* CMeshSerializer_MDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1A1752674A00DDB182 /* CMeshSerializer_MDL.cpp */; };
+		210EFD1F1752677300DDB182 /* CMeshLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */; };
+		210EFD221752678E00DDB182 /* CMeshLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD201752678E00DDB182 /* CMeshLoader.cpp */; };
 		A40A698E174E634B005B475E /* CSceneUpdateMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A698C174E634A005B475E /* CSceneUpdateMgr.cpp */; };
 		A40A6991174E69F3005B475E /* ISceneUpdateHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A698F174E69F3005B475E /* ISceneUpdateHandler.cpp */; };
 		A40A69B0174F5203005B475E /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
@@ -285,6 +290,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		210EFD0C175266EC00DDB182 /* CMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMesh.cpp; path = Sources/CMesh.cpp; sourceTree = "<group>"; };
+		210EFD0D175266EC00DDB182 /* CMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMesh.h; path = Sources/CMesh.h; sourceTree = "<group>"; };
+		210EFD171752672500DDB182 /* CMeshCommiter_MDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshCommiter_MDL.cpp; path = Sources/CMeshCommiter_MDL.cpp; sourceTree = "<group>"; };
+		210EFD181752672500DDB182 /* CMeshCommiter_MDL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshCommiter_MDL.h; path = Sources/CMeshCommiter_MDL.h; sourceTree = "<group>"; };
+		210EFD1A1752674A00DDB182 /* CMeshSerializer_MDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshSerializer_MDL.cpp; path = Sources/CMeshSerializer_MDL.cpp; sourceTree = "<group>"; };
+		210EFD1B1752674A00DDB182 /* CMeshSerializer_MDL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshSerializer_MDL.h; path = Sources/CMeshSerializer_MDL.h; sourceTree = "<group>"; };
+		210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshLoadingOperation.cpp; path = Sources/CMeshLoadingOperation.cpp; sourceTree = "<group>"; };
+		210EFD1E1752677300DDB182 /* CMeshLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshLoadingOperation.h; path = Sources/CMeshLoadingOperation.h; sourceTree = "<group>"; };
+		210EFD201752678E00DDB182 /* CMeshLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshLoader.cpp; path = Sources/CMeshLoader.cpp; sourceTree = "<group>"; };
+		210EFD211752678E00DDB182 /* CMeshLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshLoader.h; path = Sources/CMeshLoader.h; sourceTree = "<group>"; };
 		A40A698C174E634A005B475E /* CSceneUpdateMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneUpdateMgr.cpp; path = Sources/CSceneUpdateMgr.cpp; sourceTree = "<group>"; };
 		A40A698D174E634B005B475E /* CSceneUpdateMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSceneUpdateMgr.h; path = Sources/CSceneUpdateMgr.h; sourceTree = "<group>"; };
 		A40A698F174E69F3005B475E /* ISceneUpdateHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ISceneUpdateHandler.cpp; path = Sources/ISceneUpdateHandler.cpp; sourceTree = "<group>"; };
@@ -1072,6 +1087,8 @@
 				A46A3193174674FE0044643E /* CShaderLoader.cpp */,
 				A46A3210174E0F150044643E /* CTextureLoader.h */,
 				A46A320F174E0F150044643E /* CTextureLoader.cpp */,
+				210EFD211752678E00DDB182 /* CMeshLoader.h */,
+				210EFD201752678E00DDB182 /* CMeshLoader.cpp */,
 			);
 			name = Loaders;
 			sourceTree = "<group>";
@@ -1087,6 +1104,8 @@
 				A46A3196174675170044643E /* CShaderLoadingOperation.cpp */,
 				A46A31FB174D1E520044643E /* CTextureLoadingOperation.h */,
 				A46A31FA174D1E4C0044643E /* CTextureLoadingOperation.cpp */,
+				210EFD1E1752677300DDB182 /* CMeshLoadingOperation.h */,
+				210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -1106,6 +1125,8 @@
 				A4F204C917427D4C0063AB07 /* CVertexBuffer.cpp */,
 				A4F204C417427D4C0063AB07 /* CShape.h */,
 				A4F204C317427D4C0063AB07 /* CShape.cpp */,
+				210EFD0D175266EC00DDB182 /* CMesh.h */,
+				210EFD0C175266EC00DDB182 /* CMesh.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1119,6 +1140,8 @@
 				A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */,
 				A40D47BE17453AC000CA59D0 /* CTextureSerializer_PVR.h */,
 				A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */,
+				210EFD1B1752674A00DDB182 /* CMeshSerializer_MDL.h */,
+				210EFD1A1752674A00DDB182 /* CMeshSerializer_MDL.cpp */,
 			);
 			name = Serializers;
 			sourceTree = "<group>";
@@ -1132,6 +1155,8 @@
 				A46A316917462BA50044643E /* CShaderCommiter_GLSL.cpp */,
 				A46A316D17462BBF0044643E /* CTextureCommiter_PVR.h */,
 				A46A316C17462BBF0044643E /* CTextureCommiter_PVR.cpp */,
+				210EFD181752672500DDB182 /* CMeshCommiter_MDL.h */,
+				210EFD171752672500DDB182 /* CMeshCommiter_MDL.cpp */,
 			);
 			name = Commiters;
 			sourceTree = "<group>";
@@ -1740,6 +1765,11 @@
 				A40A69B9174F5D2F005B475E /* CSprite.cpp in Sources */,
 				A40A69BC174F5D42005B475E /* CBillboard.cpp in Sources */,
 				A40A69BF174F5D64005B475E /* CParticleEmitter.cpp in Sources */,
+				210EFD0E175266EC00DDB182 /* CMesh.cpp in Sources */,
+				210EFD191752672500DDB182 /* CMeshCommiter_MDL.cpp in Sources */,
+				210EFD1C1752674A00DDB182 /* CMeshSerializer_MDL.cpp in Sources */,
+				210EFD1F1752677300DDB182 /* CMeshLoadingOperation.cpp in Sources */,
+				210EFD221752678E00DDB182 /* CMeshLoader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
