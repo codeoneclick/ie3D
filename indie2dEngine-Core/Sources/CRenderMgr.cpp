@@ -15,16 +15,16 @@
 #include "CRenderOperationScreenSpace.h"
 #include "CRenderOperationOutput.h"
 
-CRenderMgr::CRenderMgr(const IOGLContext* _glContext, std::shared_ptr<CMaterial> _material) :
+CRenderMgr::CRenderMgr(const std::shared_ptr<IOGLContext> _glContext, std::shared_ptr<CMaterial> _material) :
 m_glContext(_glContext),
 m_outputRenderMaterial(_material)
 {
     assert(m_outputRenderMaterial != nullptr);
     m_outputOperation = std::make_shared<CRenderOperationOutput>(Get_ScreenWidth(),
-                                                                      Get_ScreenHeight(),
-                                                                      m_outputRenderMaterial,
-                                                                      m_glContext->Get_FrameBufferHandle(),
-                                                                      m_glContext->Get_RenderBufferHandle());
+                                                                 Get_ScreenHeight(),
+                                                                 m_outputRenderMaterial,
+                                                                 m_glContext->Get_FrameBufferHandle(),
+                                                                 m_glContext->Get_RenderBufferHandle());
 }
 
 CRenderMgr::~CRenderMgr(void)
@@ -79,7 +79,19 @@ void CRenderMgr::UnregisterWorldSpaceRenderHandler(const std::string &_mode, std
     iterator->second->UnregisterRenderHandler(_handler);
 }
 
-void CRenderMgr::OnGameLoopUpdate(f32 _deltatime)
+std::shared_ptr<CTexture> CRenderMgr::Get_WorldSpaceOperationTexture(const std::string& _mode)
+{
+    // TODO :
+    return nullptr;
+}
+
+std::shared_ptr<CTexture> CRenderMgr::Get_ScreenSpaceOperationTexture(const std::string& _mode)
+{
+    // TODO :
+    return nullptr;
+}
+
+void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
 {
     for(auto iterator : m_worldSpaceOperations)
     {
@@ -115,8 +127,8 @@ void CRenderMgr::OnGameLoopUpdate(f32 _deltatime)
     m_outputOperation->Draw();
     m_outputOperation->Unbind();
     
-    m_glContext->Output();
-    
     GLenum error = glGetError();
     assert(error == GL_NO_ERROR);
+    
+    m_glContext->Output();
 }

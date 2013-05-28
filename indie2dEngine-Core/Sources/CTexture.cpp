@@ -25,7 +25,7 @@ CTexture::CTexture(const std::string& _guid) :
 IResource(E_RESOURCE_TYPE_TEXTURE, _guid),
 m_handle(0),
 m_header(nullptr),
-m_isWrap(false)
+m_wrap(GL_REPEAT)
 {
     
 }
@@ -38,8 +38,8 @@ CTexture::~CTexture(void)
 void CTexture::Bind(void) const
 {
     glBindTexture(GL_TEXTURE_2D, m_handle);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isWrap ? GL_CLAMP_TO_EDGE : GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isWrap ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_wrap);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_wrap);
 }
 
 void CTexture::Unbind(void) const

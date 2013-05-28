@@ -1,17 +1,17 @@
 //
-//  CSprite.h
+//  CModel.h
 //  indie2dEngine
 //
-//  Created by Sergey Sergeev on 5/24/13.
+//  Created by Sergey Sergeev on 5/28/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef CSprite_h
-#define CSprite_h
+#ifndef CModel_h
+#define CModel_h
 
 #include "IGameObject.h"
 
-class CSprite : public IGameObject
+class CModel : public IGameObject
 {
 private:
     
@@ -19,8 +19,9 @@ protected:
     
 public:
     
-    CSprite(void);
-    ~CSprite(void);
+    CModel(void);
+    ~CModel(void);
 };
+
 
 #endif 

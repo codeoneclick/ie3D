@@ -19,11 +19,11 @@ class CRenderOperationScreenSpace;
 class CRenderOperationOutput;
 class IRenderHandler;
 
-class CRenderMgr : public IGameLoopHandler
+class CRenderMgr final : public IGameLoopHandler
 {
 private:
     
-    const IOGLContext* m_glContext;
+    const std::shared_ptr<IOGLContext> m_glContext;
     std::shared_ptr<CMaterial> m_outputRenderMaterial;
     std::map<std::string, std::shared_ptr<CRenderOperationWorldSpace> > m_worldSpaceOperations;
     std::map<std::string, std::shared_ptr<CRenderOperationScreenSpace> > m_screenSpaceOperations;
@@ -33,11 +33,11 @@ private:
     
 protected:
     
-    void OnGameLoopUpdate(f32 _deltatime);
+    void _OnGameLoopUpdate(f32 _deltatime);
     
 public:
     
-    CRenderMgr(const IOGLContext* _glContext, std::shared_ptr<CMaterial> _material);
+    CRenderMgr(const std::shared_ptr<IOGLContext> _glContext, std::shared_ptr<CMaterial> _material);
     ~CRenderMgr(void);
     
     void RegisterWorldSpaceRenderOperation(const std::string& _mode, std::shared_ptr<CRenderOperationWorldSpace> _operation);

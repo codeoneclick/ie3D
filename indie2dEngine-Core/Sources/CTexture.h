@@ -123,7 +123,7 @@ protected:
     
     std::shared_ptr<CTextureHeader> m_header;
     ui32 m_handle;
-    bool m_isWrap;
+    ui32 m_wrap;
     
     inline void _Set_Header(std::shared_ptr<CTextureHeader> _header)
     {
@@ -172,9 +172,9 @@ public:
         return m_header->Get_Height();
     };
     
-    inline void Set_IsWrap(bool _value)
+    inline void Set_Wrap(ui32 _wrap)
     {
-        m_isWrap = _value;
+        m_wrap = _wrap;
     };
     
     void Bind(void) const;

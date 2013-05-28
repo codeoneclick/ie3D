@@ -23,6 +23,8 @@ COGLContext_iOS::COGLContext_iOS(const CAEAGLLayer* _iOSGLLayer)
     glGenFramebuffers(1, &m_frameBufferHandle);
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_renderBufferHandle);
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 }
 

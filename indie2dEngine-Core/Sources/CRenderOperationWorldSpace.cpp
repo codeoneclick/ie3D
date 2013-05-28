@@ -39,7 +39,7 @@ m_frameHeight(_frameHeight)
     m_operatingTexture = std::make_shared<CTexture>(m_mode);
     m_operatingTexture->_Set_Header(header);
     m_operatingTexture->_Set_Handle(textureHandle);
-    m_operatingTexture->Set_IsWrap(true);
+    m_operatingTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
 }
 
 CRenderOperationWorldSpace::~CRenderOperationWorldSpace(void)

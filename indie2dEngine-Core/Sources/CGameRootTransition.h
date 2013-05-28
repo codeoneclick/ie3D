@@ -10,11 +10,13 @@
 #define CGameRootTransition_h
 
 #include "HCommon.h"
+#include "CSceneGraph.h"
+#include "CSceneFabricator.h"
 
 class IOGLContext;
 class CResourceFabricator;
 
-class CGameRootTransition final
+class CGameRootTransition final : public CSceneGraph, public CSceneFabricator
 {
 private:
     

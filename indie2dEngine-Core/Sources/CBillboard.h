@@ -9,9 +9,9 @@
 #ifndef CBillboard_h
 #define CBillboard_h
 
-#include "CGameObject.h"
+#include "IGameObject.h"
 
-class CBillboard : public CGameObject
+class CBillboard : public IGameObject
 {
 private:
     

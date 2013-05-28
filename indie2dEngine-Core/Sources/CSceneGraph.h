@@ -13,8 +13,9 @@
 
 class CCamera;
 class CLight;
-class CGameObject;
+class IGameObject;
 class CSprite;
+class CModel;
 class CBillboard;
 class CParticleEmitter;
 class CRenderMgr;
@@ -28,11 +29,12 @@ private:
     std::shared_ptr<CCamera> m_camera;
     std::shared_ptr<CLight> m_light;
     
-    std::set<std::shared_ptr<CGameObject> > m_gameObjectsContainer;
+    std::set<std::shared_ptr<IGameObject> > m_gameObjectsContainer;
     
     std::set<std::shared_ptr<CSprite> > m_spritesContainer;
     std::set<std::shared_ptr<CBillboard> > m_billboardsContainer;
     std::set<std::shared_ptr<CParticleEmitter> > m_particlesContainer;
+    std::set<std::shared_ptr<CModel> > m_modelsContainer;
     
 protected:
     
@@ -40,12 +42,8 @@ protected:
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
     std::shared_ptr<CCollisionMgr> m_collisionMgr;
     
-    virtual void _Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr) = 0;
-    virtual void _Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr) = 0;
-    virtual void _Set_CollisionMgr( std::shared_ptr<CCollisionMgr> _collisionMgr) = 0;
-    
-    void _InsertGameObject(std::shared_ptr<CGameObject> _gameObject);
-    void _RemoveGameObject(std::shared_ptr<CGameObject> _gameObject);
+    void _InsertGameObject(std::shared_ptr<IGameObject> _gameObject);
+    void _RemoveGameObject(std::shared_ptr<IGameObject> _gameObject);
     
 public:
     
@@ -57,6 +55,9 @@ public:
     
     void InsertSprite(std::shared_ptr<CSprite> _sprite);
     void RemoveSprite(std::shared_ptr<CSprite> _sprite);
+    
+    void InsertModel(std::shared_ptr<CModel> _model);
+    void RemoveModel(std::shared_ptr<CModel> _model);
     
     void InsertBillboard(std::shared_ptr<CBillboard> _billboard);
     void RemoveBillboard(std::shared_ptr<CBillboard> _billboard);

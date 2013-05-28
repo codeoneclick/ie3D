@@ -9,8 +9,9 @@
 #include "CSceneGraph.h"
 #include "CSceneUpdateMgr.h"
 #include "CCamera.h"
-#include "CGameObject.h"
+#include "IGameObject.h"
 #include "CSprite.h"
+#include "CModel.h"
 #include "CBillboard.h"
 #include "CParticleEmitter.h"
 
@@ -59,7 +60,7 @@ void CSceneGraph::Set_Light(std::shared_ptr<CLight> _light)
     }
 }
 
-void CSceneGraph::_InsertGameObject(std::shared_ptr<CGameObject> _gameObject)
+void CSceneGraph::_InsertGameObject(std::shared_ptr<IGameObject> _gameObject)
 {
     if(m_camera != nullptr)
     {
@@ -81,7 +82,7 @@ void CSceneGraph::_InsertGameObject(std::shared_ptr<CGameObject> _gameObject)
     m_gameObjectsContainer.insert(_gameObject);
 }
 
-void CSceneGraph::_RemoveGameObject(std::shared_ptr<CGameObject> _gameObject)
+void CSceneGraph::_RemoveGameObject(std::shared_ptr<IGameObject> _gameObject)
 {
     assert(m_sceneUpdateMgr != nullptr);
     assert(m_renderMgr != nullptr);
@@ -103,6 +104,18 @@ void CSceneGraph::RemoveSprite(std::shared_ptr<CSprite> _sprite)
 {
     CSceneGraph::_RemoveGameObject(_sprite);
     m_spritesContainer.erase(_sprite);
+}
+
+void CSceneGraph::InsertModel(std::shared_ptr<CModel> _model)
+{
+    CSceneGraph::_InsertGameObject(_model);
+    m_modelsContainer.insert(_model);
+}
+
+void CSceneGraph::RemoveModel(std::shared_ptr<CModel> _model)
+{
+    CSceneGraph::_RemoveGameObject(_model);
+    m_modelsContainer.erase(_model);
 }
 
 void CSceneGraph::InsertBillboard(std::shared_ptr<CBillboard> _billboard)

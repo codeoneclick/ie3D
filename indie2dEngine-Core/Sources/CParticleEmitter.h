@@ -9,9 +9,9 @@
 #ifndef CParticleEmitter_h
 #define CParticleEmitter_h
 
-#include "CGameObject.h"
+#include "IGameObject.h"
 
-class CParticleEmitter : public CGameObject
+class CParticleEmitter : public IGameObject
 {
 private:
     

@@ -18,8 +18,8 @@ private:
     
 protected:
     
-    CVertexBuffer* m_vertexBuffer;
-    CIndexBuffer* m_indexBuffer;
+    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
+    std::shared_ptr<CIndexBuffer> m_indexBuffer;
     
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
@@ -29,16 +29,13 @@ public:
     CShape(void);
     ~CShape(void);
     
-    void Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer);
-    void Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer, const glm::vec3& _maxBound, const glm::vec3& _minBound);
-    
-    inline CVertexBuffer* Get_VertexBuffer(void)
+    inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)
     {
         assert(m_vertexBuffer != nullptr);
         return m_vertexBuffer;
     };
     
-    inline CIndexBuffer* Get_IndexBuffer(void)
+    inline std::shared_ptr<CIndexBuffer> Get_IndexBuffer(void)
     {
         assert(m_indexBuffer != nullptr);
         return m_indexBuffer;

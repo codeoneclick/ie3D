@@ -14,64 +14,32 @@ m_indexBuffer(nullptr),
 m_maxBound(glm::vec3(-4096.0f, -4096.0f, -4096.0f)),
 m_minBound(glm::vec3( 4096.0f,  4096.0f,  4096.0f))
 {
+    m_vertexBuffer = std::make_shared<CVertexBuffer>(4, GL_STATIC_DRAW);
+    SVertex* vertexData = m_vertexBuffer->Lock();
+    vertexData[0].m_position = glm::vec3(-1.0f, -1.0f, 0.0f);
+    vertexData[0].m_texcoord = glm::vec2(0.0f, 0.0f);
+    vertexData[1].m_position = glm::vec3(-1.0f, 1.0f, 0.0f);
+    vertexData[1].m_texcoord = glm::vec2(0.0f, 1.0f);
+    vertexData[2].m_position = glm::vec3(1.0f, -1.0f, 0.0f);
+    vertexData[2].m_texcoord = glm::vec2(1.0f, 0.0f);
+    vertexData[3].m_position = glm::vec3(1.0f, 1.0f, 0.0f);
+    vertexData[3].m_texcoord = glm::vec2(1.0f, 1.0f);
+    m_vertexBuffer->Unlock();
     
+    m_indexBuffer = std::make_shared<CIndexBuffer>(6, GL_STATIC_DRAW);
+    ui16* indexData = m_indexBuffer->Lock();
+    indexData[0] = 0;
+    indexData[1] = 1;
+    indexData[2] = 2;
+    indexData[3] = 1;
+    indexData[4] = 2;
+    indexData[5] = 3;
+    m_indexBuffer->Unlock();
 }
 
 CShape::~CShape(void)
 {
-    delete m_vertexBuffer;
-    delete m_indexBuffer;
-}
 
-void CShape::Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer)
-{
-    assert(_vertexBuffer != nullptr);
-    assert(_indexBuffer != nullptr);
-    
-    m_vertexBuffer = _vertexBuffer;
-    m_indexBuffer = _indexBuffer;
-    
-    SVertex* vertexData = m_vertexBuffer->Lock();
-    
-    for(ui32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
-    {
-        if(vertexData[i].m_position.x > m_maxBound.x)
-        {
-            m_maxBound.x = vertexData[i].m_position.x;
-        }
-        if(vertexData[i].m_position.y > m_maxBound.y)
-        {
-            m_maxBound.y = vertexData[i].m_position.y;
-        }
-        if(vertexData[i].m_position.z > m_maxBound.z)
-        {
-            m_maxBound.z = vertexData[i].m_position.z;
-        }
-        if(vertexData[i].m_position.x < m_minBound.x)
-        {
-            m_minBound.x = vertexData[i].m_position.x;
-        }
-        if(vertexData[i].m_position.y < m_minBound.y)
-        {
-            m_minBound.y = vertexData[i].m_position.y;
-        }
-        if(vertexData[i].m_position.z < m_minBound.z)
-        {
-            m_minBound.z = vertexData[i].m_position.z;
-        }
-    }
-}
-
-void CShape::Link(CVertexBuffer* _vertexBuffer, CIndexBuffer* _indexBuffer, const glm::vec3 &_maxBound, const glm::vec3 &_minBound)
-{
-    assert(_vertexBuffer != nullptr);
-    assert(_indexBuffer != nullptr);
-    
-    m_vertexBuffer = _vertexBuffer;
-    m_indexBuffer = _indexBuffer;
-    
-    m_maxBound = _maxBound;
-    m_minBound = _minBound;
 }
 
 void CShape::Bind(const i32* _attributes)
@@ -96,3 +64,4 @@ void CShape::Unbind(const i32* _attributes)
     m_vertexBuffer->Unbind(_attributes);
     m_indexBuffer->Unbind();
 }
+
