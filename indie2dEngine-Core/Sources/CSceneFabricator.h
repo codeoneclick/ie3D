@@ -18,6 +18,8 @@ class CSprite;
 class CModel;
 class CBillboard;
 class CParticleEmitter;
+class CTemplateMgr;
+class CResourceFabricator;
 
 class CSceneFabricator
 {
@@ -28,6 +30,9 @@ protected:
     std::set<std::shared_ptr<IGameObject> > m_gameObjectsContainer;
     std::set<std::shared_ptr<CCamera> > m_camerasContainer;
     std::set<std::shared_ptr<CLight> > m_lightsContainer;
+    
+    std::shared_ptr<CTemplateMgr> m_templateMgr;
+    std::shared_ptr<CResourceFabricator> m_resourceFabricator;
     
 public:
     

@@ -37,12 +37,18 @@ CTexture::~CTexture(void)
 
 void CTexture::Bind(void) const
 {
-    glBindTexture(GL_TEXTURE_2D, m_handle);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_wrap);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_wrap);
+    if(m_isLoaded && m_isLinked)
+    {
+        glBindTexture(GL_TEXTURE_2D, m_handle);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_wrap);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_wrap);
+    }
 }
 
 void CTexture::Unbind(void) const
 {
-    glBindTexture(GL_TEXTURE_2D, NULL);
+    if(m_isLoaded && m_isLinked)
+    {
+        glBindTexture(GL_TEXTURE_2D, NULL);
+    }
 }

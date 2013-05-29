@@ -9,10 +9,9 @@
 #ifndef CModelTemplateSerializer_h
 #define CModelTemplateSerializer_h
 
-#include "HCommon.h"
-#include "HTemplates.h"
+#include "ITemplateSerializer.h"
 
-class CModelTemplateSerializer final 
+class CModelTemplateSerializer final : public ITemplateSerializer
 {
 private:
     
@@ -23,7 +22,7 @@ public:
     CModelTemplateSerializer(void);
     ~CModelTemplateSerializer(void);
     
-    std::shared_ptr<SModelTemplate> Deserialize(const std::string& _filename);
+    std::shared_ptr<ITemplate> Serialize(const std::string& _filename);
 };
 
 #endif 

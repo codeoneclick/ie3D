@@ -99,7 +99,7 @@ void CTextureSerializer_PVR::Serialize(void)
         }
         
         ui8* texturedata = new ui8[size - header->dwHeaderSize];
-        memcpy(sourcedata + header->dwHeaderSize, texturedata, size - header->dwHeaderSize);
+        memcpy(texturedata, sourcedata + header->dwHeaderSize, size - header->dwHeaderSize);
         
         textureheader->_Set_Width(header->dwWidth);
         textureheader->_Set_Height(header->dwHeight);
@@ -169,7 +169,7 @@ void CTextureSerializer_PVR::Serialize(void)
 		}
         
         ui8* texturedata = new ui8[size - (PVRTEX3_HEADERSIZE + header->u32MetaDataSize)];
-        memcpy(sourcedata + (PVRTEX3_HEADERSIZE + header->u32MetaDataSize), texturedata, size - (PVRTEX3_HEADERSIZE + header->u32MetaDataSize));
+        memcpy(texturedata, sourcedata + (PVRTEX3_HEADERSIZE + header->u32MetaDataSize), size - (PVRTEX3_HEADERSIZE + header->u32MetaDataSize));
         
         textureheader->_Set_Width(header->u32Width);
         textureheader->_Set_Height(header->u32Height);

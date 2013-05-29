@@ -13,19 +13,23 @@
 #include "HEnums.h"
 #include "IRenderHandler.h"
 #include "ISceneUpdateHandler.h"
+#include "ITemplateLoadingHandler.h"
 
 class CCamera;
 class CLight;
 class CShape;
+class CMesh;
 class CTexture;
 class CMaterial;
 class CRenderMgr;
 class CSceneUpdateMgr;
-class CResourceFabricatior;
+class CResourceFabricator;
 
 class IGameObject :
+public std::enable_shared_from_this<IGameObject>,
 public IRenderHandler,
-public ISceneUpdateHandler
+public ISceneUpdateHandler,
+public ITemplateLoadingHandler
 {
 private:
     
@@ -43,13 +47,16 @@ protected:
     glm::vec2 m_texcoordDisplacement;
     
     std::map<std::string, std::shared_ptr<CMaterial> > m_materials;
-    std::shared_ptr<CShape> m_shape;
+    std::shared_ptr<CMesh> m_mesh;
     
     std::shared_ptr<CCamera> m_camera;
     std::shared_ptr<CLight> m_light;
     
     std::shared_ptr<CRenderMgr> m_renderMgr;
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
+    std::shared_ptr<CResourceFabricator> m_resourceFabricator;
+    
+    bool m_isLoaded;
     
     bool _IsBoundBoxInFrustum(void);
     
@@ -60,9 +67,11 @@ protected:
     virtual void _OnDraw(const std::string& _renderMode);
     virtual void _OnUnbind(const std::string& _renderMode);
     
+    virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    
 public:
     
-    IGameObject(void);
+    IGameObject(std::shared_ptr<CResourceFabricator> _resourceFabricator);
     virtual ~IGameObject(void);
     
     inline void Set_Position(const glm::vec3& _position)
@@ -105,12 +114,10 @@ public:
         return m_texcoordDisplacement;
     };
     
-    virtual void Load(std::shared_ptr<CResourceFabricatior> _resourceFabricator, const std::string& _filename) = 0;
-    
     glm::vec3 Get_MaxBound(void);
     glm::vec3 Get_MinBound(void);
     
-    virtual inline void Set_Camera(std::shared_ptr<CCamera> _camera)
+    inline void Set_Camera(std::shared_ptr<CCamera> _camera)
     {
         m_camera = _camera;
     };
@@ -123,12 +130,12 @@ public:
     void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode);
     void Set_Clipping(const glm::vec4& _clipping, const std::string& _renderMode);
     
-    virtual inline void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
+    inline void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
     {
         m_renderMgr = _renderMgr;
     };
     
-    virtual inline void Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
+    inline void Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
     {
         m_sceneUpdateMgr = _sceneUpdateMgr;
     };

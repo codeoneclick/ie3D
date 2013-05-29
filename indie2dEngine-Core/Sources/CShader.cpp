@@ -78,7 +78,11 @@ CShader::CShader(const std::string& _guid) :
 IResource(E_RESOURCE_TYPE_SHADER, _guid),
 m_handle(0)
 {
-    
+    m_attributes[E_SHADER_ATTRIBUTE_POSITION] = -1;
+    m_attributes[E_SHADER_ATTRIBUTE_TEXCOORD] = -1;
+    m_attributes[E_SHADER_ATTRIBUTE_NORMAL] = -1;
+    m_attributes[E_SHADER_ATTRIBUTE_TANGENT] = -1;
+    m_attributes[E_SHADER_ATTRIBUTE_COLOR] = -1;
 }
 
 CShader::~CShader(void)
@@ -117,90 +121,135 @@ void CShader::_Set_Handle(ui32 _handle)
 
 void CShader::Set_Matrix3x3(const glm::mat3x3 &_matrix, E_SHADER_UNIFORM _uniform)
 {
-    i32 handle = m_uniforms[_uniform];
-    glUniformMatrix3fv(handle, 1, 0, &_matrix[0][0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = m_uniforms[_uniform];
+        glUniformMatrix3fv(handle, 1, 0, &_matrix[0][0]);
+    }
 }
 
 void CShader::Set_Matrix3x3Custom(const glm::mat3x3 &_matrix, const std::string &_uniform)
 {
-    i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
-    glUniformMatrix3fv(handle, 1, 0, &_matrix[0][0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
+        glUniformMatrix3fv(handle, 1, 0, &_matrix[0][0]);
+    }
 }
 
 void CShader::Set_Matrix4x4(const glm::mat4x4 &_matrix, E_SHADER_UNIFORM _uniform)
 {
-    i32 handle = m_uniforms[_uniform];
-    glUniformMatrix4fv(handle, 1, 0, &_matrix[0][0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = m_uniforms[_uniform];
+        glUniformMatrix4fv(handle, 1, 0, &_matrix[0][0]);
+    }
 }
 
 void CShader::Set_Matrix4x4Custom(const glm::mat4x4 &_matrix, const std::string &_uniform)
 {
-    i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
-    glUniformMatrix4fv(handle, 1, 0, &_matrix[0][0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
+        glUniformMatrix4fv(handle, 1, 0, &_matrix[0][0]);
+    }
 }
 
 void CShader::Set_Vector2(const glm::vec2 &_vector, E_SHADER_UNIFORM _uniform)
 {
-    i32 handle = m_uniforms[_uniform];
-    glUniform2fv(handle, 1, &_vector[0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = m_uniforms[_uniform];
+        glUniform2fv(handle, 1, &_vector[0]);
+    }
 }
 
 void CShader::Set_Vector2Custom(const glm::vec2 &_vector, const std::string &_uniform)
 {
-    i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
-    glUniform2fv(handle, 1, &_vector[0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
+        glUniform2fv(handle, 1, &_vector[0]);
+    }
 }
 
 void CShader::Set_Vector3(const glm::vec3 &_vector, E_SHADER_UNIFORM _uniform)
 {
-    i32 handle = m_uniforms[_uniform];
-    glUniform3fv(handle, 1, &_vector[0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = m_uniforms[_uniform];
+        glUniform3fv(handle, 1, &_vector[0]);
+    }
 }
 
 void CShader::Set_Vector3Custom(const glm::vec3 &_vector, const std::string &_uniform)
 {
-    i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
-    glUniform3fv(handle, 1, &_vector[0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
+        glUniform3fv(handle, 1, &_vector[0]);
+    }
 }
 
 void CShader::Set_Vector4(const glm::vec4 &_vector, E_SHADER_UNIFORM _uniform)
 {
-    i32 handle = m_uniforms[_uniform];
-    glUniform4fv(handle, 1, &_vector[0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = m_uniforms[_uniform];
+        glUniform4fv(handle, 1, &_vector[0]);
+    }
 }
 
 void CShader::Set_Vector4Custom(const glm::vec4 &_vector, const std::string &_uniform)
 {
-    i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
-    glUniform4fv(handle, 1, &_vector[0]);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
+        glUniform4fv(handle, 1, &_vector[0]);
+    }
 }
 
 void CShader::Set_Float(f32 _value, E_SHADER_UNIFORM _uniform)
 {
-    i32 handle = m_uniforms[_uniform];
-    glUniform1f(handle, _value);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = m_uniforms[_uniform];
+        glUniform1f(handle, _value);
+    }
 }
 
 void CShader::Set_FloatCustom(f32 _value, const std::string &_uniform)
 {
-    i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
-    glUniform1f(handle, _value);
+    if(m_isLoaded && m_isLinked)
+    {
+        i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
+        glUniform1f(handle, _value);
+    }
 }
 
 void CShader::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
 {
-    glActiveTexture(GL_TEXTURE0 + _sampler);
-    _texture->Bind();
-    glUniform1i(m_samplers[_sampler], _sampler);
+    if(m_isLoaded && m_isLinked)
+    {
+        glActiveTexture(GL_TEXTURE0 + _sampler);
+        _texture->Bind();
+        glUniform1i(m_samplers[_sampler], _sampler);
+    }
 }
 
 void CShader::Bind(void)
 {
-    glUseProgram(m_handle);
+    if(m_isLoaded && m_isLinked)
+    {
+        glUseProgram(m_handle);
+    }
 }
 
 void CShader::Unbind(void)
 {
-    glUseProgram(NULL);
+    if(m_isLoaded && m_isLinked)
+    {
+        glUseProgram(NULL);
+    }
 }
 

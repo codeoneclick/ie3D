@@ -1,0 +1,6 @@
+<model name="building_01">
+	<mesh value="mesh.mdl"/>
+	<materials>
+		<material filename="material.xml"/>
+	</materials>
+</model>

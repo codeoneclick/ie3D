@@ -78,15 +78,15 @@ void CMeshSerializer_MDL::Serialize(void)
         }
         if(header->m_vertexData[i].m_position.x < header->m_minBound.x)
         {
-            header->m_maxBound.x = header->m_vertexData[i].m_position.x;
+            header->m_minBound.x = header->m_vertexData[i].m_position.x;
         }
-        if(header->m_vertexData[i].m_position.y < header->m_maxBound.y)
+        if(header->m_vertexData[i].m_position.y < header->m_minBound.y)
         {
-            header->m_maxBound.y = header->m_vertexData[i].m_position.y;
+            header->m_minBound.y = header->m_vertexData[i].m_position.y;
         }
-        if(header->m_vertexData[i].m_position.z < header->m_maxBound.z)
+        if(header->m_vertexData[i].m_position.z < header->m_minBound.z)
         {
-            header->m_maxBound.z = header->m_vertexData[i].m_position.z;
+            header->m_minBound.z = header->m_vertexData[i].m_position.z;
         }
     }
     

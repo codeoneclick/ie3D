@@ -34,7 +34,7 @@ public:
     ~CSceneUpdateCommands(void);
 };
 
-class ISceneUpdateHandler : public std::enable_shared_from_this<ISceneUpdateHandler>
+class ISceneUpdateHandler
 {
 private:
     

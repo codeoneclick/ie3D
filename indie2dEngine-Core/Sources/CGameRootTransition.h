@@ -21,7 +21,6 @@ class CGameRootTransition final : public CSceneGraph, public CSceneFabricator
 private:
     
     std::shared_ptr<IOGLContext> m_glContext;
-    std::shared_ptr<CResourceFabricator> m_resourceFabricator;
     
 protected:
     

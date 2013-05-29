@@ -10,21 +10,24 @@
 #include "CCamera.h"
 #include "CFrustum.h"
 #include "CShape.h"
+#include "CMesh.h"
 #include "CShader.h"
 #include "CMaterial.h"
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
 
-IGameObject::IGameObject(void) :
+IGameObject::IGameObject(std::shared_ptr<CResourceFabricator> _resourceFabricator) :
+m_resourceFabricator(_resourceFabricator),
 m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
 m_texcoordDisplacement(glm::vec2(0.0f, 0.0f)),
-m_shape(nullptr),
+m_mesh(nullptr),
 m_camera(nullptr),
 m_light(nullptr),
 m_renderMgr(nullptr),
-m_sceneUpdateMgr(nullptr)
+m_sceneUpdateMgr(nullptr),
+m_isLoaded(false)
 {
 
 }
@@ -38,21 +41,21 @@ bool IGameObject::_IsBoundBoxInFrustum(void)
 {
     assert(m_camera != nullptr);
     assert(m_camera->Get_Frustum() != nullptr);
-    assert(m_shape != nullptr);
-    i32 result =  m_camera->Get_Frustum()->IsBoundBoxInFrustum(m_shape->Get_MaxBound() + m_position, m_shape->Get_MinBound() + m_position);
+    assert(m_mesh != nullptr);
+    i32 result =  m_camera->Get_Frustum()->IsBoundBoxInFrustum(m_mesh->Get_MaxBound() + m_position, m_mesh->Get_MinBound() + m_position);
     return result == E_FRUSTUM_BOUND_RESULT_OUTSIDE ? false : true;
 }
 
 glm::vec3 IGameObject::Get_MaxBound(void)
 {
-    assert(m_shape != nullptr);
-    return m_shape->Get_MaxBound();
+    assert(m_mesh != nullptr);
+    return m_mesh->Get_MaxBound();
 }
 
 glm::vec3 IGameObject::Get_MinBound(void)
 {
-    assert(m_shape != nullptr);
-    return m_shape->Get_MinBound();
+    assert(m_mesh != nullptr);
+    return m_mesh->Get_MinBound();
 }
 
 void IGameObject::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode)
@@ -74,20 +77,22 @@ void IGameObject::ListenRenderMgr(bool _value)
     assert(m_renderMgr != nullptr);
     for(auto iterator : m_materials)
     {
-        IRenderHandler* handler = static_cast<IRenderHandler*>(this);
-        _value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, handler->shared_from_this()) :
-        m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, handler->shared_from_this());
+        _value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
+        m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
     }
 }
 
 void IGameObject::ListenSceneUpdateMgr(bool _value)
 {
     assert(m_sceneUpdateMgr != nullptr);
-    ISceneUpdateHandler* handler = static_cast<ISceneUpdateHandler*>(this);
-    _value == true ? m_sceneUpdateMgr->RegisterSceneUpdateHandler(handler->shared_from_this()) :
-    m_sceneUpdateMgr->UnregisterSceneUpdateHandler(handler->shared_from_this());
+    _value == true ? m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this()) :
+    m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
 }
 
+void IGameObject::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+{
+    assert(false);
+}
 
 void IGameObject::_OnSceneUpdate(f32 _deltatime)
 {
@@ -110,14 +115,14 @@ void IGameObject::_OnBind(const std::string &_renderMode)
     auto iterator = m_materials.find(_renderMode);
     iterator->second->Bind();
     
-    assert(m_shape != nullptr);
-    m_shape->Bind(iterator->second->Get_Shader()->Get_Attributes());
+    assert(m_mesh != nullptr);
+    m_mesh->Bind(iterator->second->Get_Shader()->Get_Attributes());
 }
 
 void IGameObject::_OnDraw(const std::string &_renderMode)
 {
-    assert(m_shape != nullptr);
-    m_shape->Draw();
+    assert(m_mesh != nullptr);
+    m_mesh->Draw();
 }
 
 void IGameObject::_OnUnbind(const std::string &_renderMode)
@@ -126,6 +131,7 @@ void IGameObject::_OnUnbind(const std::string &_renderMode)
     auto iterator = m_materials.find(_renderMode);
     iterator->second->Unbind();
     
-    assert(m_shape != nullptr);
-    m_shape->Unbind(iterator->second->Get_Shader()->Get_Attributes());
+    assert(m_mesh != nullptr);
+    m_mesh->Unbind(iterator->second->Get_Shader()->Get_Attributes());
 }
+

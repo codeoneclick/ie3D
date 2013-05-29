@@ -12,6 +12,7 @@
 #include "CShader.h"
 #include "CGameLoopExecutor.h"
 #include "CRenderMgr.h"
+#include "CSceneUpdateMgr.h"
 #include "CRenderOperationWorldSpace.h"
 #include "CCommonOS.h"
 
@@ -37,8 +38,6 @@ CGameRootTransition::CGameRootTransition(const void* _glWindow)
     
 #endif
     
-    m_resourceFabricator = std::make_shared<CResourceFabricator>();
-    
     std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(g_vsScreenShader, g_fsScreenShader);
     
     std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
@@ -57,7 +56,10 @@ CGameRootTransition::CGameRootTransition(const void* _glWindow)
                                                                                                                          "common.world.space.render.operation");
     m_renderMgr->RegisterWorldSpaceRenderOperation("common.world.space.render.operation", worldSpaceRenderOperation);
     
+    m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
+    
     ConnectToGameLoop(m_renderMgr);
+    ConnectToGameLoop(m_sceneUpdateMgr);
 }
 
 CGameRootTransition::~CGameRootTransition(void)

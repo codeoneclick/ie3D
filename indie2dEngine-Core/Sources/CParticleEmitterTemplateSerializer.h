@@ -9,10 +9,9 @@
 #ifndef CParticleEmitterTemplateSerializer_h
 #define CParticleEmitterTemplateSerializer_h
 
-#include "HCommon.h"
-#include "HTemplates.h"
+#include "ITemplateSerializer.h"
 
-class CParticleEmitterTemplateSerializer final
+class CParticleEmitterTemplateSerializer final : public ITemplateSerializer
 {
 private:
     
@@ -23,8 +22,7 @@ public:
     CParticleEmitterTemplateSerializer(void);
     ~CParticleEmitterTemplateSerializer(void);
     
-    std::shared_ptr<SParticleEmitterTemplate> Deserialize(const std::string& _filename);
+    std::shared_ptr<ITemplate> Serialize(const std::string& _filename);
 };
-
 
 #endif 

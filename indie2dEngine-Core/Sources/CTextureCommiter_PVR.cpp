@@ -46,6 +46,7 @@ void CTextureCommiter_PVR::Commit(void)
 		data += size;
 		width >>= 1; height >>= 1;
 	}
+    
     texture->_Set_Handle(handle);
     m_status = E_COMMITER_STATUS_SUCCESS;
 }

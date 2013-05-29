@@ -41,23 +41,32 @@ CMesh::~CMesh(void)
 
 void CMesh::Bind(const i32 *_attributes)
 {
-    assert(m_vertexBuffer != nullptr);
-    assert(m_indexBuffer != nullptr);
-    m_vertexBuffer->Bind(_attributes);
-    m_indexBuffer->Bind();
+    if(m_isLoaded && m_isLinked)
+    {
+        assert(m_vertexBuffer != nullptr);
+        assert(m_indexBuffer != nullptr);
+        m_vertexBuffer->Bind(_attributes);
+        m_indexBuffer->Bind();
+    }
 }
 
 void CMesh::Draw(void)
 {
-    assert(m_vertexBuffer != nullptr);
-    assert(m_indexBuffer != nullptr);
-    glDrawElements(GL_TRIANGLES, m_indexBuffer->Get_NumIndexes(), GL_UNSIGNED_SHORT, NULL);
+    if(m_isLoaded && m_isLinked)
+    {
+        assert(m_vertexBuffer != nullptr);
+        assert(m_indexBuffer != nullptr);
+        glDrawElements(GL_TRIANGLES, m_indexBuffer->Get_NumIndexes(), GL_UNSIGNED_SHORT, NULL);
+    }
 }
 
 void CMesh::Unbind(const i32 *_attributes)
 {
-    assert(m_vertexBuffer != nullptr);
-    assert(m_indexBuffer != nullptr);
-    m_vertexBuffer->Unbind(_attributes);
-    m_indexBuffer->Unbind();
+    if(m_isLoaded && m_isLinked)
+    {
+        assert(m_vertexBuffer != nullptr);
+        assert(m_indexBuffer != nullptr);
+        m_vertexBuffer->Unbind(_attributes);
+        m_indexBuffer->Unbind();
+    }
 }

@@ -49,7 +49,7 @@ public:
     ~CRenderCommands(void);
 };
 
-class IRenderHandler : public std::enable_shared_from_this<IRenderHandler>
+class IRenderHandler
 {
 private:
     
