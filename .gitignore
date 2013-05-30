@@ -10,7 +10,7 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
+# *.a
 
 # Xcode crap
 *mode1v3
