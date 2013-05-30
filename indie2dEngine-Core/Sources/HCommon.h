@@ -25,6 +25,8 @@
 #include <iostream>
 #include <assert.h>
 
+#include <curl/curl.h>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/type_precision.hpp>
 #include <glm/gtc/matrix_transform.hpp>
