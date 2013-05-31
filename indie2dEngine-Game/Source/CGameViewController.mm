@@ -57,18 +57,24 @@ size_t ICCurlWriteCallback(char *ptr, size_t size, size_t nmemb, void *userdata)
     {
         struct curl_slist *headers = NULL;
         
-        //curl_slist_append(headers, "Accept: application/json");
-        //curl_slist_append(headers, "Content-Type: application/json");
-        //curl_slist_append(headers, "charsets: utf-8");
+        curl_slist_append(headers, "Accept: application/json");
+        curl_slist_append(headers, "Content-Type: application/json");
+        curl_slist_append(headers, "charsets: utf-8");
        
-        headers = curl_slist_append(headers, "Accept:  application/xml");
-        headers = curl_slist_append(headers, "Content-Type: text/xml");
+        //headers = curl_slist_append(headers, "Accept:  application/xml");
+        //headers = curl_slist_append(headers, "Content-Type: text/xml");
+        
+        //headers = curl_slist_append(headers, "Accept:  application/html");
+        //headers = curl_slist_append(headers, "Content-Type: text/html");
+        //headers = curl_slist_append(headers, "charset: utf-8");
+        
         
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-        curl_easy_setopt(curl, CURLOPT_URL, "http://www.w3schools.com/xml/note.xml");
-        curl_easy_setopt(curl, CURLOPT_PROXY, "http://proxy.kha.gameloft.org:3128");
-        curl_easy_setopt(curl, CURLOPT_PROXYUSERNAME, "sergey.sergeev");
-        curl_easy_setopt(curl, CURLOPT_PROXYPASSWORD, "1986Click@0509");
+        curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:5000/");
+        curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1:3129");
+        //curl_easy_setopt(curl, CURLOPT_PROXY, "http://proxy.kha.gameloft.org:3128");
+        //curl_easy_setopt(curl, CURLOPT_PROXYUSERNAME, "sergey.sergeev");
+        //curl_easy_setopt(curl, CURLOPT_PROXYPASSWORD, "1986Click@0509");
         curl_easy_setopt(curl, CURLOPT_PROXYAUTH, CURLAUTH_ANY);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ICCurlWriteCallback);
         //curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
