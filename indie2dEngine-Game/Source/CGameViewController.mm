@@ -39,7 +39,13 @@ size_t ICCurlWriteCallback(char *ptr, size_t size, size_t nmemb, void *userdata)
 	const size_t sizeInBytes = size * nmemb;
     NSData *data = [[NSData alloc] initWithBytes:ptr length:sizeInBytes];
     NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", myString);
+    std::string strData([myString UTF8String]);
+    Json::Value root;
+    Json::Reader reader;
+    if(reader.parse(strData, root))
+    {
+        std::cout<<strData<<std::endl;
+    }
 	return sizeInBytes;
 }
 
@@ -70,12 +76,12 @@ size_t ICCurlWriteCallback(char *ptr, size_t size, size_t nmemb, void *userdata)
         
         
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-        curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:5000/");
-        curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1:3129");
+        curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:3030/");
+        //curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1:3129");
         //curl_easy_setopt(curl, CURLOPT_PROXY, "http://proxy.kha.gameloft.org:3128");
         //curl_easy_setopt(curl, CURLOPT_PROXYUSERNAME, "sergey.sergeev");
-        //curl_easy_setopt(curl, CURLOPT_PROXYPASSWORD, "***");
-        curl_easy_setopt(curl, CURLOPT_PROXYAUTH, CURLAUTH_ANY);
+        //curl_easy_setopt(curl, CURLOPT_PROXYPASSWORD, "...");
+        //curl_easy_setopt(curl, CURLOPT_PROXYAUTH, CURLAUTH_ANY);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ICCurlWriteCallback);
         //curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
         
