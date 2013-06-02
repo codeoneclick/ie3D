@@ -27,6 +27,8 @@
 
 #include <curl/curl.h>
 
+#include <json/json.h>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/type_precision.hpp>
 #include <glm/gtc/matrix_transform.hpp>

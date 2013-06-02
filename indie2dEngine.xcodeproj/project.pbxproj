@@ -12,6 +12,12 @@
 		210EFD1C1752674A00DDB182 /* CMeshSerializer_MDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1A1752674A00DDB182 /* CMeshSerializer_MDL.cpp */; };
 		210EFD1F1752677300DDB182 /* CMeshLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */; };
 		210EFD221752678E00DDB182 /* CMeshLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD201752678E00DDB182 /* CMeshLoader.cpp */; };
+		210EFD40175BD4DA00DDB182 /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = 210EFD38175BD4DA00DDB182 /* json_internalarray.inl */; };
+		210EFD41175BD4DA00DDB182 /* json_internalmap.inl in Resources */ = {isa = PBXBuildFile; fileRef = 210EFD39175BD4DA00DDB182 /* json_internalmap.inl */; };
+		210EFD42175BD4DA00DDB182 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD3A175BD4DA00DDB182 /* json_reader.cpp */; };
+		210EFD43175BD4DA00DDB182 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD3C175BD4DA00DDB182 /* json_value.cpp */; };
+		210EFD44175BD4DA00DDB182 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = 210EFD3D175BD4DA00DDB182 /* json_valueiterator.inl */; };
+		210EFD45175BD4DA00DDB182 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD3E175BD4DA00DDB182 /* json_writer.cpp */; };
 		A40138B21754E6C20056461B /* CommonScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = A49B83911754D3C900AEB4DC /* CommonScreen.frag */; };
 		A40138B31754E6C20056461B /* CommonScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = A49B83921754D3C900AEB4DC /* CommonScreen.vert */; };
 		A40138C41754EF070056461B /* CModelTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */; };
@@ -349,6 +355,23 @@
 		210EFD1E1752677300DDB182 /* CMeshLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshLoadingOperation.h; path = Sources/CMeshLoadingOperation.h; sourceTree = "<group>"; };
 		210EFD201752678E00DDB182 /* CMeshLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshLoader.cpp; path = Sources/CMeshLoader.cpp; sourceTree = "<group>"; };
 		210EFD211752678E00DDB182 /* CMeshLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshLoader.h; path = Sources/CMeshLoader.h; sourceTree = "<group>"; };
+		210EFD2C175BD4DA00DDB182 /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assertions.h; sourceTree = "<group>"; };
+		210EFD2D175BD4DA00DDB182 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		210EFD2E175BD4DA00DDB182 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		210EFD2F175BD4DA00DDB182 /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = features.h; sourceTree = "<group>"; };
+		210EFD30175BD4DA00DDB182 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
+		210EFD31175BD4DA00DDB182 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		210EFD32175BD4DA00DDB182 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		210EFD33175BD4DA00DDB182 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
+		210EFD34175BD4DA00DDB182 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		210EFD37175BD4DA00DDB182 /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_batchallocator.h; sourceTree = "<group>"; };
+		210EFD38175BD4DA00DDB182 /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalarray.inl; sourceTree = "<group>"; };
+		210EFD39175BD4DA00DDB182 /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalmap.inl; sourceTree = "<group>"; };
+		210EFD3A175BD4DA00DDB182 /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_reader.cpp; sourceTree = "<group>"; };
+		210EFD3B175BD4DA00DDB182 /* json_tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_tool.h; sourceTree = "<group>"; };
+		210EFD3C175BD4DA00DDB182 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
+		210EFD3D175BD4DA00DDB182 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
+		210EFD3E175BD4DA00DDB182 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
 		A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelTemplateSerializer.cpp; path = Sources/CModelTemplateSerializer.cpp; sourceTree = "<group>"; };
 		A40138C31754EF060056461B /* CModelTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModelTemplateSerializer.h; path = Sources/CModelTemplateSerializer.h; sourceTree = "<group>"; };
 		A40138C51754EF280056461B /* CParticleEmitterTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitterTemplateSerializer.cpp; path = Sources/CParticleEmitterTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -799,6 +822,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		210EFD28175BD4DA00DDB182 /* jsoncpp */ = {
+			isa = PBXGroup;
+			children = (
+				210EFD2A175BD4DA00DDB182 /* include */,
+				210EFD35175BD4DA00DDB182 /* src */,
+			);
+			name = jsoncpp;
+			path = Libraries/jsoncpp;
+			sourceTree = "<group>";
+		};
+		210EFD2A175BD4DA00DDB182 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				210EFD2B175BD4DA00DDB182 /* json */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		210EFD2B175BD4DA00DDB182 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				210EFD2C175BD4DA00DDB182 /* assertions.h */,
+				210EFD2D175BD4DA00DDB182 /* autolink.h */,
+				210EFD2E175BD4DA00DDB182 /* config.h */,
+				210EFD2F175BD4DA00DDB182 /* features.h */,
+				210EFD30175BD4DA00DDB182 /* forwards.h */,
+				210EFD31175BD4DA00DDB182 /* json.h */,
+				210EFD32175BD4DA00DDB182 /* reader.h */,
+				210EFD33175BD4DA00DDB182 /* value.h */,
+				210EFD34175BD4DA00DDB182 /* writer.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		210EFD35175BD4DA00DDB182 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				210EFD36175BD4DA00DDB182 /* lib_json */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		210EFD36175BD4DA00DDB182 /* lib_json */ = {
+			isa = PBXGroup;
+			children = (
+				210EFD37175BD4DA00DDB182 /* json_batchallocator.h */,
+				210EFD38175BD4DA00DDB182 /* json_internalarray.inl */,
+				210EFD39175BD4DA00DDB182 /* json_internalmap.inl */,
+				210EFD3A175BD4DA00DDB182 /* json_reader.cpp */,
+				210EFD3B175BD4DA00DDB182 /* json_tool.h */,
+				210EFD3C175BD4DA00DDB182 /* json_value.cpp */,
+				210EFD3D175BD4DA00DDB182 /* json_valueiterator.inl */,
+				210EFD3E175BD4DA00DDB182 /* json_writer.cpp */,
+			);
+			path = lib_json;
+			sourceTree = "<group>";
+		};
 		A40138BC1754E9CE0056461B /* Templates */ = {
 			isa = PBXGroup;
 			children = (
@@ -1041,6 +1121,7 @@
 		A42081941733ABB20004729E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				210EFD28175BD4DA00DDB182 /* jsoncpp */,
 				A45588DE17575F3900802609 /* curl */,
 				A4F204D3174287440063AB07 /* glm */,
 				A4F205B5174287450063AB07 /* pugixml */,
@@ -1920,6 +2001,9 @@
 				A45588DA17564B8B00802609 /* material.xml in Resources */,
 				A45588DB17564B8B00802609 /* model.xml in Resources */,
 				A45588DD17565EB800802609 /* buildings_atlas.pvr in Resources */,
+				210EFD40175BD4DA00DDB182 /* json_internalarray.inl in Resources */,
+				210EFD41175BD4DA00DDB182 /* json_internalmap.inl in Resources */,
+				210EFD44175BD4DA00DDB182 /* json_valueiterator.inl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2019,6 +2103,9 @@
 				A40138F0175614950056461B /* CMaterialTemplateSerializer.cpp in Sources */,
 				A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */,
 				A45588D61756406C00802609 /* CLight.cpp in Sources */,
+				210EFD42175BD4DA00DDB182 /* json_reader.cpp in Sources */,
+				210EFD43175BD4DA00DDB182 /* json_value.cpp in Sources */,
+				210EFD45175BD4DA00DDB182 /* json_writer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2161,7 +2248,10 @@
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "indie2dEngine-Core/Support/indie2dEngine-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/indie2dEngine-Core/Libraries\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
+				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2179,7 +2269,10 @@
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "indie2dEngine-Core/Support/indie2dEngine-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/indie2dEngine-Core/Libraries\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
+				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

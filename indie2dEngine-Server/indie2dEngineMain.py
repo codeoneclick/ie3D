@@ -8,21 +8,11 @@ app = Flask(__name__)
 @app.route("/")
 def response():
 
-	xml = xmltodict.parse("""
-	 <mydocument has="an attribute">
-	   <and>
-	     <many>elements</many>
-	     <many>more elements</many>
-	   </and>
-	   <plus a="complex">
-	     element as well
-	   </plus>
-	 </mydocument>
-	 """)
-
-	#json_value = json.dumps(xml)
-	#print(json_value)
+	with open('Bundle/Templates/material.xml', 'r') as materialfile:
+	     materialdata = materialfile.read()
+	materialfile.closed
+	xml = xmltodict.parse(materialdata)
 	return jsonify(xml)
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug = True, host = "127.0.0.1", port=3030)
