@@ -74,7 +74,7 @@ size_t ICCurlWriteCallback(char *ptr, size_t size, size_t nmemb, void *userdata)
         curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1:3129");
         //curl_easy_setopt(curl, CURLOPT_PROXY, "http://proxy.kha.gameloft.org:3128");
         //curl_easy_setopt(curl, CURLOPT_PROXYUSERNAME, "sergey.sergeev");
-        //curl_easy_setopt(curl, CURLOPT_PROXYPASSWORD, "1986Click@0509");
+        //curl_easy_setopt(curl, CURLOPT_PROXYPASSWORD, "***");
         curl_easy_setopt(curl, CURLOPT_PROXYAUTH, CURLAUTH_ANY);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ICCurlWriteCallback);
         //curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
