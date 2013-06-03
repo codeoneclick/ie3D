@@ -77,3 +77,8 @@ std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::str
     }
     return materialTemplate;
 }
+
+std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+{
+    return nullptr;
+}

@@ -65,3 +65,8 @@ std::shared_ptr<ITemplate> CParticleEmitterTemplateSerializer::Serialize(const s
     
     return particleEmitterTemplate;
 }
+
+std::shared_ptr<ITemplate> CParticleEmitterTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+{
+    return nullptr;
+}

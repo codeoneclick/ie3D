@@ -11,6 +11,8 @@
 
 #include "HCommon.h"
 
+#define USE_PROXY_SERVER 1
+
 class ITemplate;
 class ITemplateSerializer
 {
@@ -18,12 +20,21 @@ private:
     
 protected:
     
+    CURL* m_context;
+    std::string m_message;
+    
+    bool _RegisterCurlContext(void);
+    void _UnregisterCurlContext(void);
+    
+    static size_t _Callback(char* _data, size_t _size, size_t _nmemb, void *userdata);
+    
 public:
     
     ITemplateSerializer(void);
     virtual ~ITemplateSerializer(void);
     
     virtual std::shared_ptr<ITemplate> Serialize(const std::string& _filename) = 0;
+    virtual std::shared_ptr<ITemplate> Serialize(const std::string& _host, ui32 _port, const std::string& _filename) = 0;
 };
 
 #endif

@@ -39,3 +39,8 @@ std::shared_ptr<ITemplate> CModelTemplateSerializer::Serialize(const std::string
     }
     return modelTemplate;
 }
+
+std::shared_ptr<ITemplate> CModelTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+{
+    return nullptr;
+}

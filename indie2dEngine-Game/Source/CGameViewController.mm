@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet COGLWindow_iOS *m_glWindow;
 @property (unsafe_unretained, nonatomic) CGameRootTransition* m_transition;
+@property (unsafe_unretained, nonatomic) std::string result;
 @end
 
 @implementation CGameViewController
@@ -37,15 +38,17 @@
 size_t ICCurlWriteCallback(char *ptr, size_t size, size_t nmemb, void *userdata)
 {
 	const size_t sizeInBytes = size * nmemb;
-    NSData *data = [[NSData alloc] initWithBytes:ptr length:sizeInBytes];
-    NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    std::string strData([myString UTF8String]);
+    std::string strdata(ptr, sizeInBytes);
+    std::string* container = static_cast<std::string* >(userdata);
+    container->append(strdata);
+    
+    /*
     Json::Value root;
     Json::Reader reader;
     if(reader.parse(strData, root))
     {
-        std::cout<<strData<<std::endl;
-    }
+        std::cout<<root["material"]["@render_mode"]<<std::endl;
+    }*/
 	return sizeInBytes;
 }
 
@@ -74,15 +77,17 @@ size_t ICCurlWriteCallback(char *ptr, size_t size, size_t nmemb, void *userdata)
         //headers = curl_slist_append(headers, "Content-Type: text/html");
         //headers = curl_slist_append(headers, "charset: utf-8");
         
+        std::string container;
         
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
         curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:3030/");
-        //curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1:3129");
+        curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1:3129");
         //curl_easy_setopt(curl, CURLOPT_PROXY, "http://proxy.kha.gameloft.org:3128");
         //curl_easy_setopt(curl, CURLOPT_PROXYUSERNAME, "sergey.sergeev");
         //curl_easy_setopt(curl, CURLOPT_PROXYPASSWORD, "...");
-        //curl_easy_setopt(curl, CURLOPT_PROXYAUTH, CURLAUTH_ANY);
+        curl_easy_setopt(curl, CURLOPT_PROXYAUTH, CURLAUTH_ANY);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ICCurlWriteCallback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&container);
         //curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
         
 #ifdef SKIP_PEER_VERIFICATION
@@ -116,6 +121,7 @@ size_t ICCurlWriteCallback(char *ptr, size_t size, size_t nmemb, void *userdata)
             fprintf(stderr, "curl_easy_perform() failed: %s\n",
                     curl_easy_strerror(res));
         
+        std::cout<<container<<std::endl;
         long statuscode = 0;
         if (res == CURLE_OK)
         {
