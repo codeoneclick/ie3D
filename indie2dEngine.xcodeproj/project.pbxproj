@@ -65,6 +65,8 @@
 		A40D47C7174555AF00CA59D0 /* CommonModel.vert in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C5174555AF00CA59D0 /* CommonModel.vert */; };
 		A40D47C8174557C500CA59D0 /* CommonModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C4174555AF00CA59D0 /* CommonModel.frag */; };
 		A40D47C9174557C500CA59D0 /* CommonModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C5174555AF00CA59D0 /* CommonModel.vert */; };
+		A418526A17609D86002FC042 /* IGameWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418526817609D86002FC042 /* IGameWorkflow.cpp */; };
+		A418527517609D9D002FC042 /* IGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418527317609D9C002FC042 /* IGameTransition.cpp */; };
 		A420815F1733A9370004729E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A420815E1733A9370004729E /* UIKit.framework */; };
 		A42081611733A9370004729E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		A42081631733A9370004729E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081621733A9370004729E /* CoreGraphics.framework */; };
@@ -424,6 +426,10 @@
 		A40D47C1174552A300CA59D0 /* CCommonOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCommonOS.h; path = Sources/CCommonOS.h; sourceTree = "<group>"; };
 		A40D47C4174555AF00CA59D0 /* CommonModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonModel.frag; sourceTree = "<group>"; };
 		A40D47C5174555AF00CA59D0 /* CommonModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonModel.vert; sourceTree = "<group>"; };
+		A418526817609D86002FC042 /* IGameWorkflow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGameWorkflow.cpp; path = Sources/IGameWorkflow.cpp; sourceTree = "<group>"; };
+		A418526917609D86002FC042 /* IGameWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGameWorkflow.h; path = Sources/IGameWorkflow.h; sourceTree = "<group>"; };
+		A418527317609D9C002FC042 /* IGameTransition.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = IGameTransition.cpp; path = Sources/IGameTransition.cpp; sourceTree = "<group>"; };
+		A418527417609D9D002FC042 /* IGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGameTransition.h; path = Sources/IGameTransition.h; sourceTree = "<group>"; };
 		A420815B1733A9370004729E /* indie2dEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = indie2dEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A420815E1733A9370004729E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A42081601733A9370004729E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1371,6 +1377,10 @@
 				A4F204A917423C7F0063AB07 /* CGameLoopExecutor.h */,
 				A4F204AB17423C7F0063AB07 /* IGameLoopHandler.h */,
 				A4F204AA17423C7F0063AB07 /* IGameLoopHandler.cpp */,
+				A418526917609D86002FC042 /* IGameWorkflow.h */,
+				A418526817609D86002FC042 /* IGameWorkflow.cpp */,
+				A418527417609D9D002FC042 /* IGameTransition.h */,
+				A418527317609D9C002FC042 /* IGameTransition.cpp */,
 			);
 			name = "StateMachine Managment";
 			sourceTree = "<group>";
@@ -2106,6 +2116,8 @@
 				210EFD42175BD4DA00DDB182 /* json_reader.cpp in Sources */,
 				210EFD43175BD4DA00DDB182 /* json_value.cpp in Sources */,
 				210EFD45175BD4DA00DDB182 /* json_writer.cpp in Sources */,
+				A418526A17609D86002FC042 /* IGameWorkflow.cpp in Sources */,
+				A418527517609D9D002FC042 /* IGameTransition.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

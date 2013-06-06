@@ -59,3 +59,4 @@ void ITemplateSerializer::_UnregisterCurlContext(void)
     }
     curl_global_cleanup();
 }
+
