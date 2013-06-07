@@ -29,11 +29,7 @@ public:
     void RegisterTransition(std::shared_ptr<IGameTransition> _transition);
     void UnregisterTransition(std::shared_ptr<IGameTransition> _transition);
     
-    void EnableTransition(const std::string& _guid);
-    void DisableTransition(const std::string& _guid);
-    
-    bool Forward(void);
-    bool Backward(void);
+    void GoToTransition(const std::string& _guid);
 };
 
 #endif 

@@ -19,6 +19,7 @@ struct ITemplate
 struct STextureTemplate : public ITemplate
 {
     std::string m_filename;
+    std::string m_operation;
     ui32 m_sampler;
     ui32 m_wrap;
 };
@@ -81,6 +82,36 @@ struct SParticleEmitterTemplate : public ITemplate
     
     f32 m_minParticleEmittInterval;
     f32 m_maxParticleEmittInterval;
+};
+
+struct SWorldSpaceRenderOperationTemplate : public ITemplate
+{
+    std::string m_guid;
+};
+
+struct SScreenSpaceRenderOperationTemplate : public ITemplate
+{
+    std::string m_guid;
+    std::string m_materialFilename;
+    std::shared_ptr<SMaterialTemplate> m_material;
+};
+
+struct SOutputRenderOperationTemplate : public ITemplate
+{
+    std::string m_guid;
+    std::string m_materialFilename;
+    std::shared_ptr<SMaterialTemplate> m_material;
+};
+
+struct SGameTransitionTemplate : public ITemplate
+{
+    std::string m_guid;
+    std::string m_outputRenderOperationFilename;
+    std::shared_ptr<SOutputRenderOperationTemplate> m_outputRenderOperation;
+    std::vector<std::string> m_worldSpaceRenderOperationsFilenames;
+    std::vector<std::shared_ptr<SWorldSpaceRenderOperationTemplate> > m_worldSpaceRenderOperations;
+    std::vector<std::string> m_screenSpaceRenderOperationsFilenames;
+    std::vector<std::shared_ptr<SScreenSpaceRenderOperationTemplate> > m_screenSpaceRenderOperations;
 };
 
 #endif

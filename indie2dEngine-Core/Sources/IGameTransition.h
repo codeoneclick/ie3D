@@ -14,7 +14,9 @@
 #include "CSceneFabricator.h"
 
 class IOGLContext;
-class IGameTransition final : public CSceneGraph, public CSceneFabricator
+class CResourceAccessor;
+class CTemplateAccessor;
+class IGameTransition final :public CSceneGraph,public CSceneFabricator
 {
 private:
     
@@ -22,11 +24,14 @@ protected:
     
     std::string m_guid;
     
-public:
-    IGameTransition(const std::string& _guid, const void* _hwnd);
-    ~IGameTransition(void);
-
+    virtual void _OnRegistered(void);
+    virtual void _OnUnregistered(void);
     
+public:
+    
+    IGameTransition(const std::string& _guid, std::shared_ptr<IOGLContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor);
+    virtual ~IGameTransition(void);
+
     inline std::string Get_Guid(void)
     {
         return m_guid;

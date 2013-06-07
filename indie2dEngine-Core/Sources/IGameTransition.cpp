@@ -24,22 +24,9 @@
 const std::string g_vsScreenShader = "CommonScreen.vert";
 const std::string g_fsScreenShader = "CommonScreen.frag";
 
-IGameTransition::IGameTransition(const std::string& _guid, const void* _hwnd) :
-m_guid(_guid)
+IGameTransition::IGameTransition(const std::string& _guid, std::shared_ptr<IOGLContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor)
 {
-#ifdef __APPLE__
-    
-	UIView* hwnd = (__bridge UIView*)_hwnd;
-    assert([[hwnd layer] isKindOfClass:[CAEAGLLayer class]]);
-    std::shared_ptr<COGLContext_iOS> glContext = std::make_shared<COGLContext_iOS>(static_cast<CAEAGLLayer*>(hwnd.layer));
-    
-#else
-    
-    // TODO :
-    
-#endif
-    
-    std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(g_vsScreenShader, g_fsScreenShader);
+    /*std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(g_vsScreenShader, g_fsScreenShader);
     
     std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
     material->Set_RenderState(E_RENDER_STATE_CULL_MODE, false);
@@ -60,6 +47,20 @@ m_guid(_guid)
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
     
     ConnectToGameLoop(m_renderMgr);
-    ConnectToGameLoop(m_sceneUpdateMgr);
+    ConnectToGameLoop(m_sceneUpdateMgr);*/
+}
 
+IGameTransition::~IGameTransition(void)
+{
+    
+}
+
+void IGameTransition::_OnRegistered(void)
+{
+    
+}
+
+void IGameTransition::_OnUnregistered(void)
+{
+    
 }

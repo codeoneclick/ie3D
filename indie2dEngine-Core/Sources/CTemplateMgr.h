@@ -12,8 +12,7 @@
 #include "HCommon.h"
 #include "HEnums.h"
 
-class CModelTemplateLoader;
-class CParticleEmitterTemplateLoader;
+class ITemplateLoader;
 class ITemplateLoadingHandler;
 class CTemplateMgr
 {
@@ -21,9 +20,8 @@ private:
     
 protected:
     
-    std::shared_ptr<CModelTemplateLoader> m_modelTemplateLoader;
-    std::shared_ptr<CParticleEmitterTemplateLoader> m_particleEmitterTemplateLoader;
-    
+    std::shared_ptr<ITemplateLoader> m_loaders[E_TEMPLATE_LOADERS_MAX];
+
 public:
     
     CTemplateMgr(void);

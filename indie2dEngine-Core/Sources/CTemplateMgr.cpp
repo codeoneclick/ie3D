@@ -10,11 +10,10 @@
 #include "CModelTemplateLoader.h"
 #include "CParticleEmitterTemplateLoader.h"
 
-CTemplateMgr::CTemplateMgr(void) :
-m_modelTemplateLoader(std::make_shared<CModelTemplateLoader>()),
-m_particleEmitterTemplateLoader(std::make_shared<CParticleEmitterTemplateLoader>())
+CTemplateMgr::CTemplateMgr(void)
 {
-
+    m_loaders[E_TEMPLATE_LOADERS_MODEL] = std::make_shared<CModelTemplateLoader>();
+    m_loaders[E_TEMPLATE_LOADERS_PARTICLE_EMITTER] = std::make_shared<CParticleEmitterTemplateLoader>();
 }
 
 CTemplateMgr::~CTemplateMgr(void)
@@ -24,14 +23,14 @@ CTemplateMgr::~CTemplateMgr(void)
 
 void CTemplateMgr::LoadModelTemplate(const std::string &_filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
 {
-    assert(m_modelTemplateLoader != nullptr);
+    assert(m_loaders[E_TEMPLATE_LOADERS_MODEL] != nullptr);
     assert(_handler != nullptr);
-    m_modelTemplateLoader->Load(_filename, _handler);
+    m_loaders[E_TEMPLATE_LOADERS_MODEL]->Load(_filename, _handler);
 }
 
 void CTemplateMgr::LoadParticleEmitterTemplate(const std::string &_filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
 {
-    assert(m_particleEmitterTemplateLoader != nullptr);
+    assert(m_loaders[E_TEMPLATE_LOADERS_PARTICLE_EMITTER] != nullptr);
     assert(_handler != nullptr);
-    m_particleEmitterTemplateLoader->Load(_filename, _handler);
+    m_loaders[E_TEMPLATE_LOADERS_PARTICLE_EMITTER]->Load(_filename, _handler);
 }

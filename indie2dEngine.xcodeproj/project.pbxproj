@@ -155,6 +155,15 @@
 		A46A3318174E35F00044643E /* CommonModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C5174555AF00CA59D0 /* CommonModel.vert */; };
 		A46A3319174E35F00044643E /* CommonModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C4174555AF00CA59D0 /* CommonModel.frag */; };
 		A46A331C174E4C820044643E /* CResourceFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceFabricator.cpp */; };
+		A48174791762145D00E1DC6E /* CTransitionTemplateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48174771762145D00E1DC6E /* CTransitionTemplateLoader.cpp */; };
+		A481748717621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748517621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp */; };
+		A481748A17621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748817621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp */; };
+		A481748D17621DE100E1DC6E /* COutputRenderOperationTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748B17621DDF00E1DC6E /* COutputRenderOperationTemplateSerializer.cpp */; };
+		A481749017621E0700E1DC6E /* CGameTransitionTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748E17621E0600E1DC6E /* CGameTransitionTemplateSerializer.cpp */; };
+		A481749317621E6B00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749117621E6A00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.cpp */; };
+		A481749617621EA700E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749417621EA600E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp */; };
+		A481749917621FF500E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749717621FF200E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp */; };
+		A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749A176221FC00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp */; };
 		A49B83841754C07200AEB4DC /* CModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B83821754C07200AEB4DC /* CModel.cpp */; };
 		A49B838F1754C9A600AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
@@ -526,6 +535,24 @@
 		A46A3315174E2E4F0044643E /* CTextureLoader_Testing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTextureLoader_Testing.cpp; sourceTree = "<group>"; };
 		A46A331A174E4C700044643E /* CResourceFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CResourceFabricator.cpp; path = Sources/CResourceFabricator.cpp; sourceTree = "<group>"; };
 		A46A331B174E4C770044643E /* CResourceFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CResourceFabricator.h; path = Sources/CResourceFabricator.h; sourceTree = "<group>"; };
+		A48174771762145D00E1DC6E /* CTransitionTemplateLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTransitionTemplateLoader.cpp; path = Sources/CTransitionTemplateLoader.cpp; sourceTree = "<group>"; };
+		A48174781762145D00E1DC6E /* CTransitionTemplateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTransitionTemplateLoader.h; path = Sources/CTransitionTemplateLoader.h; sourceTree = "<group>"; };
+		A481748517621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CWorldSpaceRenderOperationTemplateSerializer.cpp; path = Sources/CWorldSpaceRenderOperationTemplateSerializer.cpp; sourceTree = "<group>"; };
+		A481748617621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWorldSpaceRenderOperationTemplateSerializer.h; path = Sources/CWorldSpaceRenderOperationTemplateSerializer.h; sourceTree = "<group>"; };
+		A481748817621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CScreenSpaceRenderOperationTemplateSerializer.cpp; path = Sources/CScreenSpaceRenderOperationTemplateSerializer.cpp; sourceTree = "<group>"; };
+		A481748917621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CScreenSpaceRenderOperationTemplateSerializer.h; path = Sources/CScreenSpaceRenderOperationTemplateSerializer.h; sourceTree = "<group>"; };
+		A481748B17621DDF00E1DC6E /* COutputRenderOperationTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COutputRenderOperationTemplateSerializer.cpp; path = Sources/COutputRenderOperationTemplateSerializer.cpp; sourceTree = "<group>"; };
+		A481748C17621DE000E1DC6E /* COutputRenderOperationTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COutputRenderOperationTemplateSerializer.h; path = Sources/COutputRenderOperationTemplateSerializer.h; sourceTree = "<group>"; };
+		A481748E17621E0600E1DC6E /* CGameTransitionTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameTransitionTemplateSerializer.cpp; path = Sources/CGameTransitionTemplateSerializer.cpp; sourceTree = "<group>"; };
+		A481748F17621E0600E1DC6E /* CGameTransitionTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameTransitionTemplateSerializer.h; path = Sources/CGameTransitionTemplateSerializer.h; sourceTree = "<group>"; };
+		A481749117621E6A00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CWorldSpaceRenderOperationTemplateLoadingOperation.cpp; path = Sources/CWorldSpaceRenderOperationTemplateLoadingOperation.cpp; sourceTree = "<group>"; };
+		A481749217621E6B00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWorldSpaceRenderOperationTemplateLoadingOperation.h; path = Sources/CWorldSpaceRenderOperationTemplateLoadingOperation.h; sourceTree = "<group>"; };
+		A481749417621EA600E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CScreenSpaceRenderOperationTemplateLoadingOperation.cpp; path = Sources/CScreenSpaceRenderOperationTemplateLoadingOperation.cpp; sourceTree = "<group>"; };
+		A481749517621EA600E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CScreenSpaceRenderOperationTemplateLoadingOperation.h; path = Sources/CScreenSpaceRenderOperationTemplateLoadingOperation.h; sourceTree = "<group>"; };
+		A481749717621FF200E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COutputRenderOperationTemplateLoadingOperation.cpp; path = Sources/COutputRenderOperationTemplateLoadingOperation.cpp; sourceTree = "<group>"; };
+		A481749817621FF300E1DC6E /* COutputRenderOperationTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COutputRenderOperationTemplateLoadingOperation.h; path = Sources/COutputRenderOperationTemplateLoadingOperation.h; sourceTree = "<group>"; };
+		A481749A176221FC00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameTransitionTemplateLoadingOperation.cpp; path = Sources/CGameTransitionTemplateLoadingOperation.cpp; sourceTree = "<group>"; };
+		A481749B176221FD00E1DC6E /* CGameTransitionTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameTransitionTemplateLoadingOperation.h; path = Sources/CGameTransitionTemplateLoadingOperation.h; sourceTree = "<group>"; };
 		A49B83821754C07200AEB4DC /* CModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModel.cpp; path = Sources/CModel.cpp; sourceTree = "<group>"; };
 		A49B83831754C07200AEB4DC /* CModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModel.h; path = Sources/CModel.h; sourceTree = "<group>"; };
 		A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneFabricator.cpp; path = Sources/CSceneFabricator.cpp; sourceTree = "<group>"; };
@@ -905,6 +932,14 @@
 				A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */,
 				A40138C61754EF280056461B /* CParticleEmitterTemplateSerializer.h */,
 				A40138C51754EF280056461B /* CParticleEmitterTemplateSerializer.cpp */,
+				A481748617621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.h */,
+				A481748517621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp */,
+				A481748917621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.h */,
+				A481748817621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp */,
+				A481748C17621DE000E1DC6E /* COutputRenderOperationTemplateSerializer.h */,
+				A481748B17621DDF00E1DC6E /* COutputRenderOperationTemplateSerializer.cpp */,
+				A481748F17621E0600E1DC6E /* CGameTransitionTemplateSerializer.h */,
+				A481748E17621E0600E1DC6E /* CGameTransitionTemplateSerializer.cpp */,
 			);
 			name = Serializers;
 			sourceTree = "<group>";
@@ -920,6 +955,14 @@
 				A40138E81756138F0056461B /* CModelTemplateLoadingOperation.cpp */,
 				A40138EC1756144B0056461B /* CParticleEmitterLoadingOperation.h */,
 				A40138EB1756144A0056461B /* CParticleEmitterLoadingOperation.cpp */,
+				A481749217621E6B00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.h */,
+				A481749117621E6A00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.cpp */,
+				A481749517621EA600E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.h */,
+				A481749417621EA600E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp */,
+				A481749817621FF300E1DC6E /* COutputRenderOperationTemplateLoadingOperation.h */,
+				A481749717621FF200E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp */,
+				A481749B176221FD00E1DC6E /* CGameTransitionTemplateLoadingOperation.h */,
+				A481749A176221FC00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -933,6 +976,8 @@
 				A40138D91756020B0056461B /* CModelTemplateLoader.cpp */,
 				A40138DD175602380056461B /* CParticleEmitterTemplateLoader.h */,
 				A40138DC175602370056461B /* CParticleEmitterTemplateLoader.cpp */,
+				A48174781762145D00E1DC6E /* CTransitionTemplateLoader.h */,
+				A48174771762145D00E1DC6E /* CTransitionTemplateLoader.cpp */,
 			);
 			name = Loaders;
 			sourceTree = "<group>";
@@ -2118,6 +2163,15 @@
 				210EFD45175BD4DA00DDB182 /* json_writer.cpp in Sources */,
 				A418526A17609D86002FC042 /* IGameWorkflow.cpp in Sources */,
 				A418527517609D9D002FC042 /* IGameTransition.cpp in Sources */,
+				A48174791762145D00E1DC6E /* CTransitionTemplateLoader.cpp in Sources */,
+				A481748717621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp in Sources */,
+				A481748A17621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp in Sources */,
+				A481748D17621DE100E1DC6E /* COutputRenderOperationTemplateSerializer.cpp in Sources */,
+				A481749017621E0700E1DC6E /* CGameTransitionTemplateSerializer.cpp in Sources */,
+				A481749317621E6B00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */,
+				A481749617621EA700E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */,
+				A481749917621FF500E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp in Sources */,
+				A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
