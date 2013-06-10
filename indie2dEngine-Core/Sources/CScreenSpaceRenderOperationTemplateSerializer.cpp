@@ -33,7 +33,7 @@ std::shared_ptr<ITemplate> CScreenSpaceRenderOperationTemplateSerializer::Serial
     screenSpaceRenderOperationTemplate->m_guid = node.attribute("guid").as_string();
     
     pugi::xml_node material_node = node.child("material");
-    screenSpaceRenderOperationTemplate->m_materialFilename = material_node.attribute("filename").as_string();
+    screenSpaceRenderOperationTemplate->m_materialTemplateFilename = material_node.attribute("filename").as_string();
     return screenSpaceRenderOperationTemplate;
 }
 

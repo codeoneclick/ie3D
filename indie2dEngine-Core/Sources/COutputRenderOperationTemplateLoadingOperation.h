@@ -6,18 +6,23 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef COutpuRenderOperationTemplateLoadingOperation_h
-#define COutpuRenderOperationTemplateLoadingOperation_h
+#ifndef COutputRenderOperationTemplateLoadingOperation_h
+#define COutputRenderOperationTemplateLoadingOperation_h
 
-#include "HCommon.h"
+#include "ITemplateLoadingOperation.h"
 
-class COutpuRenderOperationTemplateLoadingOperation
+class COutputRenderOperationTemplateLoadingOperation : public ITemplateLoadingOperation
 {
 private:
     
 protected:
     
 public:
+    
+    COutputRenderOperationTemplateLoadingOperation(void);
+    ~COutputRenderOperationTemplateLoadingOperation(void);
+    
+    std::shared_ptr<ITemplate> Serialize(const std::string& _filename);
     
 };
 

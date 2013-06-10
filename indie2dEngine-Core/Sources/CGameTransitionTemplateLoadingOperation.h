@@ -9,9 +9,9 @@
 #ifndef CGameTransitionTemplateLoadingOperation_h
 #define CGameTransitionTemplateLoadingOperation_h
 
-#include "HCommon.h"
+#include "ITemplateLoadingOperation.h"
 
-class CGameTransitionTemplateLoadingOperation
+class CGameTransitionTemplateLoadingOperation : public ITemplateLoadingOperation
 {
 private:
     
@@ -19,6 +19,10 @@ protected:
     
 public:
     
+    CGameTransitionTemplateLoadingOperation(void);
+    ~CGameTransitionTemplateLoadingOperation(void);
+    
+    std::shared_ptr<ITemplate> Serialize(const std::string& _filename);
 };
 
 #endif

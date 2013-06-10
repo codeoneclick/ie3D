@@ -9,9 +9,9 @@
 #ifndef CScreenSpaceRenderOperationTemplateLoadingOperation_h
 #define CScreenSpaceRenderOperationTemplateLoadingOperation_h
 
-#include "HCommon.h"
+#include "ITemplateLoadingOperation.h"
 
-class CScreenSpaceRenderOperationTemplateLoadingOperation
+class CScreenSpaceRenderOperationTemplateLoadingOperation : public ITemplateLoadingOperation
 {
 private:
     
@@ -19,6 +19,10 @@ protected:
     
 public:
     
+    CScreenSpaceRenderOperationTemplateLoadingOperation(void);
+    ~CScreenSpaceRenderOperationTemplateLoadingOperation(void);
+    
+    std::shared_ptr<ITemplate> Serialize(const std::string& _filename);
 };
 
 #endif 

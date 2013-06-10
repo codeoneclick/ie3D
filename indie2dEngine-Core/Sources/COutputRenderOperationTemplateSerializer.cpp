@@ -33,7 +33,7 @@ std::shared_ptr<ITemplate> COutputRenderOperationTemplateSerializer::Serialize(c
     outputRenderOperationTemplate->m_guid = node.attribute("guid").as_string();
     
     pugi::xml_node material_node = node.child("material");
-    outputRenderOperationTemplate->m_materialFilename = material_node.attribute("filename").as_string();
+    outputRenderOperationTemplate->m_materialTemplateFilename = material_node.attribute("filename").as_string();
     return outputRenderOperationTemplate;
 }
 

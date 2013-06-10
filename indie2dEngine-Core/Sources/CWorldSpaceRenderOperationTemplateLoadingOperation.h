@@ -9,9 +9,9 @@
 #ifndef CWorldSpaceRenderOperationTemplateLoadingOperation_h
 #define CWorldSpaceRenderOperationTemplateLoadingOperation_h
 
-#include "HCommon.h"
+#include "ITemplateLoadingOperation.h"
 
-class CWorldSpaceRenderOperationTemplateLoadingOperation
+class CWorldSpaceRenderOperationTemplateLoadingOperation  : public ITemplateLoadingOperation
 {
 private:
     
@@ -19,6 +19,10 @@ protected:
     
 public:
     
+    CWorldSpaceRenderOperationTemplateLoadingOperation(void);
+    ~CWorldSpaceRenderOperationTemplateLoadingOperation(void);
+    
+    std::shared_ptr<ITemplate> Serialize(const std::string& _filename);
 };
 
 #endif 

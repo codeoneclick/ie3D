@@ -27,14 +27,27 @@ std::shared_ptr<ITemplate> CGameTransitionTemplateSerializer::Serialize(const st
     pugi::xml_document document;
     pugi::xml_parse_result result = document.load_file(path.c_str());
     assert(result.status == pugi::status_ok);
-    pugi::xml_node node = document.child("operation");
+    pugi::xml_node node = document.child("transition");
     
-    std::shared_ptr<SOutputRenderOperationTemplate> outputRenderOperationTemplate = std::make_shared<SOutputRenderOperationTemplate>();
-    outputRenderOperationTemplate->m_guid = node.attribute("guid").as_string();
+    std::shared_ptr<SGameTransitionTemplate> gameTransitionTemplate = std::make_shared<SGameTransitionTemplate>();
+    gameTransitionTemplate->m_guid = node.attribute("guid").as_string();
     
-    pugi::xml_node material_node = node.child("material");
-    outputRenderOperationTemplate->m_materialFilename = material_node.attribute("filename").as_string();
-    return outputRenderOperationTemplate;
+    pugi::xml_node outputRenderOperationNode = node.child("output.render.operation");
+    gameTransitionTemplate->m_outputRenderOperationTemplateFilename = outputRenderOperationNode.attribute("filename").as_string();
+    
+    pugi::xml_node worldSpaceRenderOperationsNode = node.child("world.space.render.operations");
+    for (pugi::xml_node material = worldSpaceRenderOperationsNode.child("world.space.render.operation"); material; material = material.next_sibling("world.space.render.operation"))
+    {
+        gameTransitionTemplate->m_worldSpaceRenderOperationsTemplatesFilenames.push_back(material.attribute("filename").as_string());
+    }
+    
+    pugi::xml_node screenSpaceRenderOperationsNode = node.child("screen.space.render.operations");
+    for (pugi::xml_node material = screenSpaceRenderOperationsNode.child("screen.space.render.operation"); material; material = material.next_sibling("screen.space.render.operation"))
+    {
+        gameTransitionTemplate->m_screenSpaceRenderOperationsTemplatesFilenames.push_back(material.attribute("filename").as_string());
+    }
+    
+    return gameTransitionTemplate;
 }
 
 std::shared_ptr<ITemplate> CGameTransitionTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)

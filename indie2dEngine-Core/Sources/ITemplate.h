@@ -92,26 +92,26 @@ struct SWorldSpaceRenderOperationTemplate : public ITemplate
 struct SScreenSpaceRenderOperationTemplate : public ITemplate
 {
     std::string m_guid;
-    std::string m_materialFilename;
-    std::shared_ptr<SMaterialTemplate> m_material;
+    std::string m_materialTemplateFilename;
+    std::shared_ptr<SMaterialTemplate> m_materialTemplate;
 };
 
 struct SOutputRenderOperationTemplate : public ITemplate
 {
     std::string m_guid;
-    std::string m_materialFilename;
-    std::shared_ptr<SMaterialTemplate> m_material;
+    std::string m_materialTemplateFilename;
+    std::shared_ptr<SMaterialTemplate> m_materialTemplate;
 };
 
 struct SGameTransitionTemplate : public ITemplate
 {
     std::string m_guid;
-    std::string m_outputRenderOperationFilename;
-    std::shared_ptr<SOutputRenderOperationTemplate> m_outputRenderOperation;
-    std::vector<std::string> m_worldSpaceRenderOperationsFilenames;
-    std::vector<std::shared_ptr<SWorldSpaceRenderOperationTemplate> > m_worldSpaceRenderOperations;
-    std::vector<std::string> m_screenSpaceRenderOperationsFilenames;
-    std::vector<std::shared_ptr<SScreenSpaceRenderOperationTemplate> > m_screenSpaceRenderOperations;
+    std::string m_outputRenderOperationTemplateFilename;
+    std::shared_ptr<SOutputRenderOperationTemplate> m_outputRenderOperationTemplate;
+    std::vector<std::string> m_worldSpaceRenderOperationsTemplatesFilenames;
+    std::vector<std::shared_ptr<SWorldSpaceRenderOperationTemplate> > m_worldSpaceRenderOperationsTemplates;
+    std::vector<std::string> m_screenSpaceRenderOperationsTemplatesFilenames;
+    std::vector<std::shared_ptr<SScreenSpaceRenderOperationTemplate> > m_screenSpaceRenderOperationsTemplates;
 };
 
 #endif
