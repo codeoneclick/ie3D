@@ -19,6 +19,7 @@ private:
     friend class ITemplateLoadingHandler;
     friend class CModelTemplateLoader;
     friend class CParticleEmitterTemplateLoader;
+    friend class CGameTransitionTemplateLoader;
     
     typedef std::function<void(std::shared_ptr<ITemplate> _template)> __TEMPLATE_LOADED_COMMAND;
     
@@ -44,6 +45,7 @@ private:
     
     friend class CModelTemplateLoader;
     friend class CParticleEmitterTemplateLoader;
+    friend class CGameTransitionTemplateLoader;
     
     void _ConnectCommands(void);
     inline CTemplateLoadingCommands _Get_Commands(void)

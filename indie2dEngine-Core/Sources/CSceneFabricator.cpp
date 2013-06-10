@@ -7,18 +7,18 @@
 //
 
 #include "CSceneFabricator.h"
-#include "CTemplateMgr.h"
+#include "CTemplateAccessor.h"
 #include "CCamera.h"
 #include "CLight.h"
 #include "CSprite.h"
 #include "CModel.h"
 #include "CBillboard.h"
 #include "CParticleEmitter.h"
-#include "CResourceFabricator.h"
+#include "CResourceAccessor.h"
 
 CSceneFabricator::CSceneFabricator() :
-m_templateMgr(std::make_shared<CTemplateMgr>()),
-m_resourceFabricator(std::make_shared<CResourceFabricator>())
+m_templateMgr(std::make_shared<CTemplateAccessor>()),
+m_resourceFabricator(std::make_shared<CResourceAccessor>())
 {
     
 }

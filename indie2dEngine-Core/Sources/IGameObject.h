@@ -23,7 +23,7 @@ class CTexture;
 class CMaterial;
 class CRenderMgr;
 class CSceneUpdateMgr;
-class CResourceFabricator;
+class CResourceAccessor;
 
 class IGameObject :
 public std::enable_shared_from_this<IGameObject>,
@@ -54,7 +54,7 @@ protected:
     
     std::shared_ptr<CRenderMgr> m_renderMgr;
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
-    std::shared_ptr<CResourceFabricator> m_resourceFabricator;
+    std::shared_ptr<CResourceAccessor> m_resourceFabricator;
     
     bool m_isLoaded;
     
@@ -71,7 +71,7 @@ protected:
     
 public:
     
-    IGameObject(std::shared_ptr<CResourceFabricator> _resourceFabricator);
+    IGameObject(std::shared_ptr<CResourceAccessor> _resourceFabricator);
     virtual ~IGameObject(void);
     
     inline void Set_Position(const glm::vec3& _position)

@@ -1,20 +1,20 @@
 //
-//  CTemplateMgr.h
+//  CTemplateAccessor.h
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef CTemplateMgr_h
-#define CTemplateMgr_h
+#ifndef CTemplateAccessor_h
+#define CTemplateAccessor_h
 
 #include "HCommon.h"
 #include "HEnums.h"
 
 class ITemplateLoader;
 class ITemplateLoadingHandler;
-class CTemplateMgr
+class CTemplateAccessor
 {
 private:
     
@@ -24,11 +24,14 @@ protected:
 
 public:
     
-    CTemplateMgr(void);
-    ~CTemplateMgr(void);
+    CTemplateAccessor(void);
+    ~CTemplateAccessor(void);
+    
+    
     
     void LoadModelTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
     void LoadParticleEmitterTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
+    void LoadGameTransitionTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
 };
 
 #endif 

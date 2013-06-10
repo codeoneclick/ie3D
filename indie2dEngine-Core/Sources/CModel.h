@@ -28,7 +28,7 @@ protected:
     
 public:
     
-    CModel(std::shared_ptr<CResourceFabricator> _resourceFabricator);
+    CModel(std::shared_ptr<CResourceAccessor> _resourceFabricator);
     ~CModel(void);
 };
 

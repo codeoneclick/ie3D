@@ -12,11 +12,15 @@
 #include "HCommon.h"
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
+#include "ITemplateLoadingHandler.h"
 
 class IOGLContext;
 class CResourceAccessor;
 class CTemplateAccessor;
-class IGameTransition final :public CSceneGraph,public CSceneFabricator
+class IGameTransition final :
+public CSceneGraph,
+public CSceneFabricator,
+public ITemplateLoadingHandler
 {
 private:
     
@@ -26,6 +30,8 @@ protected:
     
     virtual void _OnRegistered(void);
     virtual void _OnUnregistered(void);
+    
+    virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
     
 public:
     

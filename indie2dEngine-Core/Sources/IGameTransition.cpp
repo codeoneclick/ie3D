@@ -7,7 +7,8 @@
 //
 
 #include "IGameTransition.h"
-#include "CResourceFabricator.h"
+#include "CResourceAccessor.h"
+#include "CResourceAccessor.h"
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CGameLoopExecutor.h"
@@ -26,6 +27,10 @@ const std::string g_fsScreenShader = "CommonScreen.frag";
 
 IGameTransition::IGameTransition(const std::string& _guid, std::shared_ptr<IOGLContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor)
 {
+    assert(_graphicsContext != nullptr);
+    assert(_resourceAccessor != nullptr);
+    assert(_templateAccessor != nullptr);
+    
     /*std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(g_vsScreenShader, g_fsScreenShader);
     
     std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
@@ -61,6 +66,11 @@ void IGameTransition::_OnRegistered(void)
 }
 
 void IGameTransition::_OnUnregistered(void)
+{
+    
+}
+
+void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
     
 }

@@ -12,10 +12,10 @@
 #include "CTexture.h"
 #include "CCamera.h"
 #include "CLight.h"
-#include "CResourceFabricator.h"
+#include "CResourceAccessor.h"
 #include "ITemplate.h"
 
-CModel::CModel(std::shared_ptr<CResourceFabricator> _resourceFabricator) :
+CModel::CModel(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 IGameObject(_resourceFabricator)
 {
     

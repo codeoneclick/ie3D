@@ -14,7 +14,7 @@
 #include "CSceneFabricator.h"
 
 class IOGLContext;
-class CResourceFabricator;
+class CResourceAccessor;
 
 class CGameRootTransition final : public CSceneGraph, public CSceneFabricator
 {

@@ -19,7 +19,7 @@ struct ITemplate
 struct STextureTemplate : public ITemplate
 {
     std::string m_filename;
-    std::string m_operation;
+    std::string m_operationName;
     ui32 m_sampler;
     ui32 m_wrap;
 };

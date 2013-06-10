@@ -28,6 +28,7 @@ std::shared_ptr<ITemplate> CGameTransitionTemplateLoadingOperation::Serialize(co
     std::shared_ptr<CGameTransitionTemplateSerializer> gameTransitionTemplateSerializer = std::make_shared<CGameTransitionTemplateSerializer>();
     std::shared_ptr<SGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<SGameTransitionTemplate>(gameTransitionTemplateSerializer->Serialize(_filename));
     assert(gameTransitionTemplate != nullptr);
+    
     for(auto iterator : gameTransitionTemplate->m_worldSpaceRenderOperationsTemplatesFilenames)
     {
         std::shared_ptr<CWorldSpaceRenderOperationTemplateLoadingOperation> worldSpaceRenderOperationTemplateLoadingOperation = std::make_shared<CWorldSpaceRenderOperationTemplateLoadingOperation>();
@@ -35,6 +36,7 @@ std::shared_ptr<ITemplate> CGameTransitionTemplateLoadingOperation::Serialize(co
         assert(worldSpaceRenderOperationTemplate != nullptr);
         gameTransitionTemplate->m_worldSpaceRenderOperationsTemplates.push_back(worldSpaceRenderOperationTemplate);
     }
+    
     for(auto iterator : gameTransitionTemplate->m_screenSpaceRenderOperationsTemplatesFilenames)
     {
         std::shared_ptr<CScreenSpaceRenderOperationTemplateLoadingOperation> screenSpaceRenderOperationTemplateLoadingOperation = std::make_shared<CScreenSpaceRenderOperationTemplateLoadingOperation>();

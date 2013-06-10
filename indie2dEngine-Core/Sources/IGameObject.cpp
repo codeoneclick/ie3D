@@ -16,7 +16,7 @@
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
 
-IGameObject::IGameObject(std::shared_ptr<CResourceFabricator> _resourceFabricator) :
+IGameObject::IGameObject(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 m_resourceFabricator(_resourceFabricator),
 m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),

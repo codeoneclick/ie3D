@@ -7,7 +7,7 @@
 //
 
 #include "CGameRootTransition.h"
-#include "CResourceFabricator.h"
+#include "CResourceAccessor.h"
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CGameLoopExecutor.h"
