@@ -25,9 +25,6 @@
 #else
 #endif
 
-const std::string g_vsScreenShader = "CommonScreen.vert";
-const std::string g_fsScreenShader = "CommonScreen.frag";
-
 IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor) :
 CSceneFabricator(_templateAccessor, _resourceAccessor)
 {
@@ -39,29 +36,6 @@ CSceneFabricator(_templateAccessor, _resourceAccessor)
     
     m_renderMgr = std::make_shared<CRenderMgr>(_graphicsContext);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
-    
-    /*std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(g_vsScreenShader, g_fsScreenShader);
-    
-    std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
-    material->Set_RenderState(E_RENDER_STATE_CULL_MODE, false);
-    material->Set_RenderState(E_RENDER_STATE_DEPTH_MASK, true);
-    material->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, false);
-    material->Set_RenderState(E_RENDER_STATE_BLEND_MODE, false);
-    
-    material->Set_CullFaceMode(GL_FRONT);
-    material->Set_BlendFunctionSource(GL_SRC_ALPHA);
-    material->Set_BlendFunctionDest(GL_ONE_MINUS_SRC_ALPHA);
-    
-    m_renderMgr = std::make_shared<CRenderMgr>(glContext, material);
-    std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation = std::make_shared<CRenderOperationWorldSpace>(Get_ScreenWidth(),
-                                                                                                                         Get_ScreenHeight(),
-                                                                                                                         "common.world.space.render.operation");
-    m_renderMgr->RegisterWorldSpaceRenderOperation("common.world.space.render.operation", worldSpaceRenderOperation);
-    
-    m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
-    
-    ConnectToGameLoop(m_renderMgr);
-    ConnectToGameLoop(m_sceneUpdateMgr);*/
 }
 
 IGameTransition::~IGameTransition(void)
@@ -77,6 +51,18 @@ void IGameTransition::_OnRegistered(void)
 void IGameTransition::_OnUnregistered(void)
 {
     
+}
+
+void IGameTransition::_OnActivate(void)
+{
+    ConnectToGameLoop(m_renderMgr);
+    ConnectToGameLoop(m_sceneUpdateMgr);
+}
+
+void IGameTransition::_OnDeactivate(void)
+{
+    DisconnectFromGameLoop(m_renderMgr);
+    DisconnectFromGameLoop(m_sceneUpdateMgr);
 }
 
 void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
@@ -125,7 +111,4 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     outputRenderOperationMaterial->Serialize(outputRenderOperationMaterialTemplate, m_resourceAccessor, m_renderMgr);
     
     m_renderMgr->RegisterOutputRenderOperation(outputRenderOperationMaterial);
-
-    ConnectToGameLoop(m_renderMgr);
-    ConnectToGameLoop(m_sceneUpdateMgr);
 }

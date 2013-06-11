@@ -28,10 +28,15 @@ private:
     
 protected:
     
+    friend class IGameWorkflow;
+    
     std::string m_guid;
     
     virtual void _OnRegistered(void);
     virtual void _OnUnregistered(void);
+    
+    virtual void _OnActivate(void);
+    virtual void _OnDeactivate(void);
     
     virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
     

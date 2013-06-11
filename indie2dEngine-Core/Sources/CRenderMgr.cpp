@@ -84,16 +84,10 @@ void CRenderMgr::UnregisterWorldSpaceRenderHandler(const std::string &_mode, std
     iterator->second->UnregisterRenderHandler(_handler);
 }
 
-std::shared_ptr<CTexture> CRenderMgr::Get_WorldSpaceOperationTexture(const std::string& _mode)
+std::shared_ptr<CTexture> CRenderMgr::Get_RenderOperationTexture(const std::string& _mode)
 {
-    // TODO :
-    return nullptr;
-}
-
-std::shared_ptr<CTexture> CRenderMgr::Get_ScreenSpaceOperationTexture(const std::string& _mode)
-{
-    // TODO :
-    return nullptr;
+    std::shared_ptr<CTexture> texture = m_worldSpaceOperations.find(_mode) != m_worldSpaceOperations.end() ? m_worldSpaceOperations.find(_mode)->second->Get_OperatingTexture() : m_screenSpaceOperations.find(_mode) != m_screenSpaceOperations.end() ? m_screenSpaceOperations.find(_mode)->second->Get_OperatingTexture() : nullptr;
+    return texture;
 }
 
 void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)

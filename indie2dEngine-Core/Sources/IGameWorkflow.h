@@ -11,6 +11,9 @@
 
 #include "HCommon.h"
 
+
+class CTemplateAccessor;
+class CResourceAccessor;
 class IGameTransition;
 class IGameWorkflow
 {
@@ -20,6 +23,9 @@ protected:
     
     std::map<std::string, std::shared_ptr<IGameTransition> > m_transitions;
     std::shared_ptr<IGameTransition> m_currentTransition;
+    
+    std::shared_ptr<CTemplateAccessor> m_templateAccessor;
+    std::shared_ptr<CResourceAccessor> m_resourceAccessor;
     
 public:
     

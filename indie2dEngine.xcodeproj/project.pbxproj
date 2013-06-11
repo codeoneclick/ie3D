@@ -18,6 +18,10 @@
 		210EFD43175BD4DA00DDB182 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD3C175BD4DA00DDB182 /* json_value.cpp */; };
 		210EFD44175BD4DA00DDB182 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = 210EFD3D175BD4DA00DDB182 /* json_valueiterator.inl */; };
 		210EFD45175BD4DA00DDB182 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD3E175BD4DA00DDB182 /* json_writer.cpp */; };
+		21E42A4E1767B3FD00E40437 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4A1767B3FD00E40437 /* main.transition.xml */; };
+		21E42A4F1767B3FD00E40437 /* output.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4B1767B3FD00E40437 /* output.space.operation.xml */; };
+		21E42A501767B3FD00E40437 /* screen.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */; };
+		21E42A511767B3FD00E40437 /* world.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4D1767B3FD00E40437 /* world.space.operation.xml */; };
 		A40138B21754E6C20056461B /* CommonScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = A49B83911754D3C900AEB4DC /* CommonScreen.frag */; };
 		A40138B31754E6C20056461B /* CommonScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = A49B83921754D3C900AEB4DC /* CommonScreen.vert */; };
 		A40138C41754EF070056461B /* CModelTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */; };
@@ -116,7 +120,6 @@
 		A46A32EB174E194D0044643E /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A32EA174E194D0044643E /* AppDelegate.mm */; };
 		A46A32F0174E1A3F0044643E /* CTestingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A32EE174E1A3E0044643E /* CTestingViewController.mm */; };
 		A46A32F1174E1A3F0044643E /* CTestingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A46A32EF174E1A3F0044643E /* CTestingViewController.xib */; };
-		A46A32F2174E1D100044643E /* CGameRootTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BE17427D1C0063AB07 /* CGameRootTransition.cpp */; };
 		A46A32F3174E1D100044643E /* CCommonOS_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C0174552A300CA59D0 /* CCommonOS_iOS.mm */; };
 		A46A32F4174E1D100044643E /* CRenderOperationWorldSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A31871746411C0044643E /* CRenderOperationWorldSpace.cpp */; };
 		A46A32F5174E1D100044643E /* CRenderOperationScreenSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A318A174641320044643E /* CRenderOperationScreenSpace.cpp */; };
@@ -183,7 +186,6 @@
 		A4F204B517423E540063AB07 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
 		A4F204B917427B780063AB07 /* CGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204B717427B780063AB07 /* CGame.cpp */; };
 		A4F204BD17427C700063AB07 /* CSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BB17427C700063AB07 /* CSceneGraph.cpp */; };
-		A4F204C017427D1C0063AB07 /* CGameRootTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BE17427D1C0063AB07 /* CGameRootTransition.cpp */; };
 		A4F204CD17427D4C0063AB07 /* CIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C117427D4C0063AB07 /* CIndexBuffer.cpp */; };
 		A4F204CE17427D4C0063AB07 /* CShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C317427D4C0063AB07 /* CShape.cpp */; };
 		A4F204CF17427D4C0063AB07 /* CShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C517427D4C0063AB07 /* CShader.cpp */; };
@@ -383,6 +385,10 @@
 		210EFD3C175BD4DA00DDB182 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
 		210EFD3D175BD4DA00DDB182 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
 		210EFD3E175BD4DA00DDB182 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
+		21E42A4A1767B3FD00E40437 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
+		21E42A4B1767B3FD00E40437 /* output.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = output.space.operation.xml; sourceTree = "<group>"; };
+		21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.operation.xml; sourceTree = "<group>"; };
+		21E42A4D1767B3FD00E40437 /* world.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.operation.xml; sourceTree = "<group>"; };
 		A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelTemplateSerializer.cpp; path = Sources/CModelTemplateSerializer.cpp; sourceTree = "<group>"; };
 		A40138C31754EF060056461B /* CModelTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModelTemplateSerializer.h; path = Sources/CModelTemplateSerializer.h; sourceTree = "<group>"; };
 		A40138C51754EF280056461B /* CParticleEmitterTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitterTemplateSerializer.cpp; path = Sources/CParticleEmitterTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -581,8 +587,6 @@
 		A4F204B817427B780063AB07 /* CGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGame.h; path = "indie2dEngine-Game/Source/CGame.h"; sourceTree = "<group>"; };
 		A4F204BB17427C700063AB07 /* CSceneGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneGraph.cpp; path = Sources/CSceneGraph.cpp; sourceTree = "<group>"; };
 		A4F204BC17427C700063AB07 /* CSceneGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSceneGraph.h; path = Sources/CSceneGraph.h; sourceTree = "<group>"; };
-		A4F204BE17427D1C0063AB07 /* CGameRootTransition.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGameRootTransition.cpp; path = Sources/CGameRootTransition.cpp; sourceTree = "<group>"; };
-		A4F204BF17427D1C0063AB07 /* CGameRootTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameRootTransition.h; path = Sources/CGameRootTransition.h; sourceTree = "<group>"; };
 		A4F204C117427D4C0063AB07 /* CIndexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIndexBuffer.cpp; path = Sources/CIndexBuffer.cpp; sourceTree = "<group>"; };
 		A4F204C217427D4C0063AB07 /* CIndexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIndexBuffer.h; path = Sources/CIndexBuffer.h; sourceTree = "<group>"; };
 		A4F204C317427D4C0063AB07 /* CShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShape.cpp; path = Sources/CShape.cpp; sourceTree = "<group>"; };
@@ -1184,6 +1188,10 @@
 		A45588D717564B8B00802609 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				21E42A4A1767B3FD00E40437 /* main.transition.xml */,
+				21E42A4B1767B3FD00E40437 /* output.space.operation.xml */,
+				21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */,
+				21E42A4D1767B3FD00E40437 /* world.space.operation.xml */,
 				A45588D817564B8B00802609 /* material.xml */,
 				A45588D917564B8B00802609 /* model.xml */,
 			);
@@ -1356,8 +1364,8 @@
 		A46A331D174E5AC70044643E /* Transitions */ = {
 			isa = PBXGroup;
 			children = (
-				A4F204BF17427D1C0063AB07 /* CGameRootTransition.h */,
-				A4F204BE17427D1C0063AB07 /* CGameRootTransition.cpp */,
+				A418527417609D9D002FC042 /* IGameTransition.h */,
+				A418527317609D9C002FC042 /* IGameTransition.cpp */,
 			);
 			name = Transitions;
 			sourceTree = "<group>";
@@ -1424,8 +1432,6 @@
 				A4F204AA17423C7F0063AB07 /* IGameLoopHandler.cpp */,
 				A418526917609D86002FC042 /* IGameWorkflow.h */,
 				A418526817609D86002FC042 /* IGameWorkflow.cpp */,
-				A418527417609D9D002FC042 /* IGameTransition.h */,
-				A418527317609D9C002FC042 /* IGameTransition.cpp */,
 			);
 			name = "StateMachine Managment";
 			sourceTree = "<group>";
@@ -2059,6 +2065,10 @@
 				210EFD40175BD4DA00DDB182 /* json_internalarray.inl in Resources */,
 				210EFD41175BD4DA00DDB182 /* json_internalmap.inl in Resources */,
 				210EFD44175BD4DA00DDB182 /* json_valueiterator.inl in Resources */,
+				21E42A4E1767B3FD00E40437 /* main.transition.xml in Resources */,
+				21E42A4F1767B3FD00E40437 /* output.space.operation.xml in Resources */,
+				21E42A501767B3FD00E40437 /* screen.space.operation.xml in Resources */,
+				21E42A511767B3FD00E40437 /* world.space.operation.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2093,7 +2103,6 @@
 				A4F204AE17423C7F0063AB07 /* IGameLoopHandler.cpp in Sources */,
 				A4F204B917427B780063AB07 /* CGame.cpp in Sources */,
 				A4F204BD17427C700063AB07 /* CSceneGraph.cpp in Sources */,
-				A4F204C017427D1C0063AB07 /* CGameRootTransition.cpp in Sources */,
 				A4F204CD17427D4C0063AB07 /* CIndexBuffer.cpp in Sources */,
 				A4F204CE17427D4C0063AB07 /* CShape.cpp in Sources */,
 				A4F204CF17427D4C0063AB07 /* CShader.cpp in Sources */,
@@ -2193,7 +2202,6 @@
 				A40A6A6B1753AF38005B475E /* CMeshLoadingOperation.cpp in Sources */,
 				A40A6A6C1753AF38005B475E /* CMeshLoader.cpp in Sources */,
 				A40A6A6D1753AF38005B475E /* CResourceAccessor.cpp in Sources */,
-				A46A32F2174E1D100044643E /* CGameRootTransition.cpp in Sources */,
 				A46A32F3174E1D100044643E /* CCommonOS_iOS.mm in Sources */,
 				A46A32F4174E1D100044643E /* CRenderOperationWorldSpace.cpp in Sources */,
 				A46A32F5174E1D100044643E /* CRenderOperationScreenSpace.cpp in Sources */,

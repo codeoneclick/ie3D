@@ -52,8 +52,7 @@ public:
     void RegisterWorldSpaceRenderHandler(const std::string& _mode, std::shared_ptr<IRenderHandler> _handler);
     void UnregisterWorldSpaceRenderHandler(const std::string& _mode, std::shared_ptr<IRenderHandler> _handler);
     
-    std::shared_ptr<CTexture> Get_WorldSpaceOperationTexture(const std::string& _mode);
-    std::shared_ptr<CTexture> Get_ScreenSpaceOperationTexture(const std::string& _mode);
+    std::shared_ptr<CTexture> Get_RenderOperationTexture(const std::string& _mode);
 };
 
 

@@ -46,7 +46,7 @@ void CMaterial::Serialize(std::shared_ptr<SMaterialTemplate> _template, std::sha
     
     for(auto textureTemplate : _template->m_texturesTemplates)
     {
-        std::shared_ptr<CTexture> texture = _resourceAccessor->CreateTexture(textureTemplate->m_filename);
+        std::shared_ptr<CTexture> texture = textureTemplate->m_filename.length() != 0 ? _resourceAccessor->CreateTexture(textureTemplate->m_filename) : _renderMgr->Get_RenderOperationTexture(textureTemplate->m_operationName);
         assert(texture != nullptr);
         texture->Set_Wrap(textureTemplate->m_wrap);
         assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);
