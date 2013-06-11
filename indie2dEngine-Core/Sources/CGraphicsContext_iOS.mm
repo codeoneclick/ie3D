@@ -1,14 +1,14 @@
 //
-//  COGLContext_iOS.cpp
+//  CGraphicsContext_iOS.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/17/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "COGLContext_iOS.h"
+#include "CGraphicsContext_iOS.h"
 
-COGLContext_iOS::COGLContext_iOS(const CAEAGLLayer* _iOSGLLayer)
+CGraphicsContext_iOS::CGraphicsContext_iOS(const CAEAGLLayer* _iOSGLLayer)
 {
     m_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     assert(m_context != nullptr);
@@ -28,12 +28,12 @@ COGLContext_iOS::COGLContext_iOS(const CAEAGLLayer* _iOSGLLayer)
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 }
 
-COGLContext_iOS::~COGLContext_iOS(void)
+CGraphicsContext_iOS::~CGraphicsContext_iOS(void)
 {
     
 }
 
-void COGLContext_iOS::Output(void) const
+void CGraphicsContext_iOS::Output(void) const
 {
     assert(m_context != nullptr);
     [m_context presentRenderbuffer:GL_RENDERBUFFER];

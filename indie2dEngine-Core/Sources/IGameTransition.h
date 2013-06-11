@@ -14,13 +14,15 @@
 #include "CSceneFabricator.h"
 #include "ITemplateLoadingHandler.h"
 
-class IOGLContext;
+class IGraphicsContext;
 class CResourceAccessor;
 class CTemplateAccessor;
-class IGameTransition final :
+
+class IGameTransition :
 public CSceneGraph,
 public CSceneFabricator,
-public ITemplateLoadingHandler
+public ITemplateLoadingHandler,
+public std::enable_shared_from_this<ITemplateLoadingHandler>
 {
 private:
     
@@ -35,7 +37,7 @@ protected:
     
 public:
     
-    IGameTransition(const std::string& _guid, std::shared_ptr<IOGLContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor);
+    IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor);
     virtual ~IGameTransition(void);
 
     inline std::string Get_Guid(void)

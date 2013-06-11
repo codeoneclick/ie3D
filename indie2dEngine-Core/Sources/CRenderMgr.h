@@ -11,7 +11,7 @@
 
 #include "IGameLoopHandler.h"
 
-class IOGLContext;
+class IGraphicsContext;
 class CMaterial;
 class CTexture;
 class CRenderOperationWorldSpace;
@@ -23,8 +23,7 @@ class CRenderMgr final : public IGameLoopHandler
 {
 private:
     
-    const std::shared_ptr<IOGLContext> m_glContext;
-    std::shared_ptr<CMaterial> m_outputRenderMaterial;
+    const std::shared_ptr<IGraphicsContext> m_graphicsContext;
     std::map<std::string, std::shared_ptr<CRenderOperationWorldSpace> > m_worldSpaceOperations;
     std::map<std::string, std::shared_ptr<CRenderOperationScreenSpace> > m_screenSpaceOperations;
     std::shared_ptr<CRenderOperationOutput> m_outputOperation;
@@ -37,8 +36,10 @@ protected:
     
 public:
     
-    CRenderMgr(const std::shared_ptr<IOGLContext> _glContext, std::shared_ptr<CMaterial> _material);
+    CRenderMgr(const std::shared_ptr<IGraphicsContext> _graphicsContext);
     ~CRenderMgr(void);
+    
+    void RegisterOutputRenderOperation(std::shared_ptr<CMaterial> _material);
     
     void RegisterWorldSpaceRenderOperation(const std::string& _mode, std::shared_ptr<CRenderOperationWorldSpace> _operation);
     void UnregisterWorldSpaceRenderOperation(const std::string& _mode);

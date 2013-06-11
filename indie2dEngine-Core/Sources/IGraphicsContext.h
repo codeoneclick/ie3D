@@ -1,17 +1,17 @@
 //
-//  IOGLContext.h
+//  IGraphicsContext.h
 //  indi2dEngine-Core
 //
 //  Created by Sergey Sergeev on 5/7/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef IOGLContext_h
-#define IOGLContext_h
+#ifndef IGraphicsContext_h
+#define IGraphicsContext_h
 
 #include "HCommon.h"
 
-class IOGLContext
+class IGraphicsContext
 {
 private:
     
@@ -23,8 +23,8 @@ protected:
     
 public:
     
-    IOGLContext(void);
-    virtual ~IOGLContext(void);
+    IGraphicsContext(void);
+    virtual ~IGraphicsContext(void);
     
     inline const ui32 Get_FrameBufferHandle(void) const
     {

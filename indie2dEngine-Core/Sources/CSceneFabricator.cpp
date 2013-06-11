@@ -16,9 +16,9 @@
 #include "CParticleEmitter.h"
 #include "CResourceAccessor.h"
 
-CSceneFabricator::CSceneFabricator() :
-m_templateMgr(std::make_shared<CTemplateAccessor>()),
-m_resourceFabricator(std::make_shared<CResourceAccessor>())
+CSceneFabricator::CSceneFabricator(std::shared_ptr<CTemplateAccessor> _templateAccessor, std::shared_ptr<CResourceAccessor> _resourceAccessor) :
+m_templateAccessor(_templateAccessor),
+m_resourceAccessor(_resourceAccessor)
 {
     
 }
@@ -66,10 +66,10 @@ void CSceneFabricator::DeleteSprite(std::shared_ptr<CSprite> _sprite)
 
 std::shared_ptr<CModel> CSceneFabricator::CreateModel(const std::string& _filename)
 {
-    assert(m_resourceFabricator != nullptr);
-    std::shared_ptr<CModel> model = std::make_shared<CModel>(m_resourceFabricator);
-    assert(m_templateMgr != nullptr);
-    m_templateMgr->LoadModelTemplate(_filename, model);
+    assert(m_resourceAccessor != nullptr);
+    std::shared_ptr<CModel> model = std::make_shared<CModel>(m_resourceAccessor);
+    assert(m_templateAccessor != nullptr);
+    m_templateAccessor->LoadModelTemplate(_filename, model);
     m_gameObjectsContainer.insert(model);
     return model;
 }

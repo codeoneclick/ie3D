@@ -17,7 +17,7 @@
 #include "CCommonOS.h"
 
 #ifdef __APPLE__
-#include "COGLContext_iOS.h"
+#include "CGraphicsContext_iOS.h"
 #else
 #endif
 
@@ -30,7 +30,7 @@ CGameRootTransition::CGameRootTransition(const void* _glWindow)
     
 	UIView* glWindow = (__bridge UIView*)_glWindow;
     assert([[glWindow layer] isKindOfClass:[CAEAGLLayer class]]);
-    m_glContext = std::make_shared<COGLContext_iOS>(static_cast<CAEAGLLayer*>(glWindow.layer));
+    m_glContext = std::make_shared<CGraphicsContext_iOS>(static_cast<CAEAGLLayer*>(glWindow.layer));
     
 #else
     

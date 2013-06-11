@@ -8,28 +8,33 @@
 
 #include "CRenderMgr.h"
 #include "CCommonOS.h"
-#include "IOGLContext.h"
+#include "IGraphicsContext.h"
 #include "CMaterial.h"
 #include "CTexture.h"
 #include "CRenderOperationWorldSpace.h"
 #include "CRenderOperationScreenSpace.h"
 #include "CRenderOperationOutput.h"
 
-CRenderMgr::CRenderMgr(const std::shared_ptr<IOGLContext> _glContext, std::shared_ptr<CMaterial> _material) :
-m_glContext(_glContext),
-m_outputRenderMaterial(_material)
+CRenderMgr::CRenderMgr(const std::shared_ptr<IGraphicsContext> _graphicsContext) :
+m_graphicsContext(_graphicsContext),
+m_outputOperation(nullptr)
 {
-    assert(m_outputRenderMaterial != nullptr);
-    m_outputOperation = std::make_shared<CRenderOperationOutput>(Get_ScreenWidth(),
-                                                                 Get_ScreenHeight(),
-                                                                 m_outputRenderMaterial,
-                                                                 m_glContext->Get_FrameBufferHandle(),
-                                                                 m_glContext->Get_RenderBufferHandle());
+    
 }
 
 CRenderMgr::~CRenderMgr(void)
 {
-    
+
+}
+
+void CRenderMgr::RegisterOutputRenderOperation(std::shared_ptr<CMaterial> _material)
+{
+    assert(_material != nullptr);
+    m_outputOperation = std::make_shared<CRenderOperationOutput>(Get_ScreenWidth(),
+                                                                 Get_ScreenHeight(),
+                                                                 _material,
+                                                                 m_graphicsContext->Get_FrameBufferHandle(),
+                                                                 m_graphicsContext->Get_RenderBufferHandle());
 }
 
 void CRenderMgr::RegisterWorldSpaceRenderOperation(const std::string &_mode, std::shared_ptr<CRenderOperationWorldSpace> _operation)
@@ -130,5 +135,5 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
     GLenum error = glGetError();
     assert(error == GL_NO_ERROR);
     
-    m_glContext->Output();
+    m_graphicsContext->Output();
 }

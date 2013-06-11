@@ -31,12 +31,12 @@ protected:
     std::set<std::shared_ptr<CCamera> > m_camerasContainer;
     std::set<std::shared_ptr<CLight> > m_lightsContainer;
     
-    std::shared_ptr<CTemplateAccessor> m_templateMgr;
-    std::shared_ptr<CResourceAccessor> m_resourceFabricator;
+    std::shared_ptr<CTemplateAccessor> m_templateAccessor;
+    std::shared_ptr<CResourceAccessor> m_resourceAccessor;
     
 public:
     
-    CSceneFabricator(void);
+    CSceneFabricator(std::shared_ptr<CTemplateAccessor> _templateAccessor, std::shared_ptr<CResourceAccessor> _resourceAccessor);
     virtual ~CSceneFabricator(void);
     
     std::shared_ptr<CCamera> CreateCamera(f32 _fov, f32 _near, f32 _far,const glm::vec4& _viewport);

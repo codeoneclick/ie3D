@@ -8,6 +8,10 @@
 
 #include "CMaterial.h"
 #include "CShader.h"
+#include "CTexture.h"
+#include "CRenderMgr.h"
+#include "ITemplate.h"
+#include "CResourceAccessor.h"
 
 CMaterial::CMaterial(std::shared_ptr<CShader> _shader) :
 m_shader(_shader)
@@ -24,6 +28,30 @@ m_shader(_shader)
 CMaterial::~CMaterial(void)
 {
     
+}
+
+void CMaterial::Serialize(std::shared_ptr<SMaterialTemplate> _template, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CRenderMgr> _renderMgr)
+{
+    assert(_template != nullptr);
+    assert(_renderMgr != nullptr);
+    
+    Set_RenderState(E_RENDER_STATE_CULL_MODE, _template->m_isCullFace);
+    Set_RenderState(E_RENDER_STATE_DEPTH_TEST, _template->m_isDepthTest);
+    Set_RenderState(E_RENDER_STATE_DEPTH_MASK, _template->m_isDepthMask);
+    Set_RenderState(E_RENDER_STATE_BLEND_MODE, _template->m_isBlend);
+    
+    Set_CullFaceMode(_template->m_cullFaceMode);
+    Set_BlendFunctionSource(_template->m_blendFunctionSource);
+    Set_BlendFunctionDest(_template->m_blendFunctionDestination);
+    
+    for(auto textureTemplate : _template->m_texturesTemplates)
+    {
+        std::shared_ptr<CTexture> texture = _resourceAccessor->CreateTexture(textureTemplate->m_filename);
+        assert(texture != nullptr);
+        texture->Set_Wrap(textureTemplate->m_wrap);
+        assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);
+        Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->m_sampler));
+    }
 }
 
 void CMaterial::Set_CullFaceMode(GLenum _mode)

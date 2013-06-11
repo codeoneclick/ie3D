@@ -13,14 +13,14 @@
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
 
-class IOGLContext;
+class IGraphicsContext;
 class CResourceAccessor;
 
 class CGameRootTransition final : public CSceneGraph, public CSceneFabricator
 {
 private:
     
-    std::shared_ptr<IOGLContext> m_glContext;
+    std::shared_ptr<IGraphicsContext> m_glContext;
     
 protected:
     
