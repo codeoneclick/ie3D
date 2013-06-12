@@ -22,6 +22,8 @@
 		21E42A4F1767B3FD00E40437 /* output.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4B1767B3FD00E40437 /* output.space.operation.xml */; };
 		21E42A501767B3FD00E40437 /* screen.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */; };
 		21E42A511767B3FD00E40437 /* world.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4D1767B3FD00E40437 /* world.space.operation.xml */; };
+		21E42A6D176910EF00E40437 /* thread_concurrency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E42A6B176910EF00E40437 /* thread_concurrency.cpp */; };
+		21E42A701769110A00E40437 /* thread_concurrency_queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E42A6E1769110A00E40437 /* thread_concurrency_queue.cpp */; };
 		A40138B21754E6C20056461B /* CommonScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = A49B83911754D3C900AEB4DC /* CommonScreen.frag */; };
 		A40138B31754E6C20056461B /* CommonScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = A49B83921754D3C900AEB4DC /* CommonScreen.vert */; };
 		A40138C41754EF070056461B /* CModelTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */; };
@@ -393,6 +395,11 @@
 		21E42A4B1767B3FD00E40437 /* output.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = output.space.operation.xml; sourceTree = "<group>"; };
 		21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.operation.xml; sourceTree = "<group>"; };
 		21E42A4D1767B3FD00E40437 /* world.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.operation.xml; sourceTree = "<group>"; };
+		21E42A6B176910EF00E40437 /* thread_concurrency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread_concurrency.cpp; path = indieThreadConcurrency/thread_concurrency.cpp; sourceTree = "<group>"; };
+		21E42A6C176910EF00E40437 /* thread_concurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thread_concurrency.h; path = indieThreadConcurrency/thread_concurrency.h; sourceTree = "<group>"; };
+		21E42A6E1769110A00E40437 /* thread_concurrency_queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread_concurrency_queue.cpp; path = indieThreadConcurrency/thread_concurrency_queue.cpp; sourceTree = "<group>"; };
+		21E42A6F1769110A00E40437 /* thread_concurrency_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thread_concurrency_queue.h; path = indieThreadConcurrency/thread_concurrency_queue.h; sourceTree = "<group>"; };
+		21E42A711769117000E40437 /* thread_concurrency_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = thread_concurrency_common.h; path = indieThreadConcurrency/thread_concurrency_common.h; sourceTree = "<group>"; };
 		A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelTemplateSerializer.cpp; path = Sources/CModelTemplateSerializer.cpp; sourceTree = "<group>"; };
 		A40138C31754EF060056461B /* CModelTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModelTemplateSerializer.h; path = Sources/CModelTemplateSerializer.h; sourceTree = "<group>"; };
 		A40138C51754EF280056461B /* CParticleEmitterTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitterTemplateSerializer.cpp; path = Sources/CParticleEmitterTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -926,6 +933,18 @@
 			path = lib_json;
 			sourceTree = "<group>";
 		};
+		21E42A5B17690AE700E40437 /* indieThreadConcurrency  */ = {
+			isa = PBXGroup;
+			children = (
+				21E42A711769117000E40437 /* thread_concurrency_common.h */,
+				21E42A6C176910EF00E40437 /* thread_concurrency.h */,
+				21E42A6B176910EF00E40437 /* thread_concurrency.cpp */,
+				21E42A6F1769110A00E40437 /* thread_concurrency_queue.h */,
+				21E42A6E1769110A00E40437 /* thread_concurrency_queue.cpp */,
+			);
+			name = "indieThreadConcurrency ";
+			sourceTree = "<group>";
+		};
 		A40138BC1754E9CE0056461B /* Templates */ = {
 			isa = PBXGroup;
 			children = (
@@ -1050,6 +1069,7 @@
 		A42081521733A9370004729E = {
 			isa = PBXGroup;
 			children = (
+				21E42A5B17690AE700E40437 /* indieThreadConcurrency  */,
 				A46A3215174E161E0044643E /* indie2dEngine-Testing */,
 				A4F204B6174241320063AB07 /* indie2dEngine-Game */,
 				A42081641733A9370004729E /* indie2dEngine-Core */,
@@ -2201,6 +2221,8 @@
 				A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
 				A494B85D17686741004C9F96 /* CGameXcomWorkflow.cpp in Sources */,
 				A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */,
+				21E42A6D176910EF00E40437 /* thread_concurrency.cpp in Sources */,
+				21E42A701769110A00E40437 /* thread_concurrency_queue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

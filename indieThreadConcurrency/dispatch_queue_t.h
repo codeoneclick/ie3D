@@ -1,0 +1,14 @@
+//
+//  dispatch_queue_t.h
+//  indie2dEngine
+//
+//  Created by Sergey Sergeev on 6/12/13.
+//  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
+//
+
+#ifndef __indie2dEngine__dispatch_queue_t__
+#define __indie2dEngine__dispatch_queue_t__
+
+#include <iostream>
+
+#endif /* defined(__indie2dEngine__dispatch_queue_t__) */
