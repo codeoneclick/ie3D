@@ -8,14 +8,8 @@
 
 #include "CGameViewController.h"
 #include "COGLWindow_iOS.h"
-#include "CGame.h"
-#include "IGameWorkflow.h"
-#include "IGameTransition.h"
-#include "CCommonOS.h"
-#include "CModel.h"
-#include "CCamera.h"
-#include "CLight.h"
-
+#include "CGameXcomWorkflow.h"
+#include "CGameXcomInGameTransition.h"
 
 @interface CGameViewController ()
 
@@ -38,6 +32,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    CGameXcomWorkflow* workflow = new CGameXcomWorkflow();
+    std::shared_ptr<IGameTransition> transition = workflow->CreateXcomInGameTransition("main.transition.xml", (__bridge void*)self.m_glWindow);
 }
 
 - (void)didReceiveMemoryWarning

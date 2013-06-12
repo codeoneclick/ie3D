@@ -11,7 +11,6 @@
 
 #include "HCommon.h"
 
-
 class CTemplateAccessor;
 class CResourceAccessor;
 class IGameTransition;
@@ -30,7 +29,7 @@ protected:
 public:
     
     IGameWorkflow(void);
-    ~IGameWorkflow(void);
+    virtual ~IGameWorkflow(void);
     
     void RegisterTransition(std::shared_ptr<IGameTransition> _transition);
     void UnregisterTransition(std::shared_ptr<IGameTransition> _transition);

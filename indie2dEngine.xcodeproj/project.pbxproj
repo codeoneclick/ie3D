@@ -167,6 +167,10 @@
 		A481749617621EA700E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749417621EA600E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp */; };
 		A481749917621FF500E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749717621FF200E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp */; };
 		A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749A176221FC00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp */; };
+		A494B85D17686741004C9F96 /* CGameXcomWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B85B17686741004C9F96 /* CGameXcomWorkflow.cpp */; };
+		A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */; };
+		A494B8A21768A7DD004C9F96 /* material.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A11768A7DD004C9F96 /* material.screen.xml */; };
+		A494B8A41768A83D004C9F96 /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A31768A83C004C9F96 /* material.output.xml */; };
 		A49B83841754C07200AEB4DC /* CModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B83821754C07200AEB4DC /* CModel.cpp */; };
 		A49B838F1754C9A600AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
@@ -559,6 +563,12 @@
 		A481749817621FF300E1DC6E /* COutputRenderOperationTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COutputRenderOperationTemplateLoadingOperation.h; path = Sources/COutputRenderOperationTemplateLoadingOperation.h; sourceTree = "<group>"; };
 		A481749A176221FC00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameTransitionTemplateLoadingOperation.cpp; path = Sources/CGameTransitionTemplateLoadingOperation.cpp; sourceTree = "<group>"; };
 		A481749B176221FD00E1DC6E /* CGameTransitionTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameTransitionTemplateLoadingOperation.h; path = Sources/CGameTransitionTemplateLoadingOperation.h; sourceTree = "<group>"; };
+		A494B85B17686741004C9F96 /* CGameXcomWorkflow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGameXcomWorkflow.cpp; path = "indie2dEngine-Game/Source/CGameXcomWorkflow.cpp"; sourceTree = "<group>"; };
+		A494B85C17686741004C9F96 /* CGameXcomWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameXcomWorkflow.h; path = "indie2dEngine-Game/Source/CGameXcomWorkflow.h"; sourceTree = "<group>"; };
+		A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameXcomInGameTransition.cpp; path = "indie2dEngine-Game/Source/CGameXcomInGameTransition.cpp"; sourceTree = "<group>"; };
+		A494B86717686776004C9F96 /* CGameXcomInGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameXcomInGameTransition.h; path = "indie2dEngine-Game/Source/CGameXcomInGameTransition.h"; sourceTree = "<group>"; };
+		A494B8A11768A7DD004C9F96 /* material.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.screen.xml; sourceTree = "<group>"; };
+		A494B8A31768A83C004C9F96 /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
 		A49B83821754C07200AEB4DC /* CModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModel.cpp; path = Sources/CModel.cpp; sourceTree = "<group>"; };
 		A49B83831754C07200AEB4DC /* CModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModel.h; path = Sources/CModel.h; sourceTree = "<group>"; };
 		A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneFabricator.cpp; path = Sources/CSceneFabricator.cpp; sourceTree = "<group>"; };
@@ -1188,6 +1198,8 @@
 		A45588D717564B8B00802609 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A494B8A31768A83C004C9F96 /* material.output.xml */,
+				A494B8A11768A7DD004C9F96 /* material.screen.xml */,
 				21E42A4A1767B3FD00E40437 /* main.transition.xml */,
 				21E42A4B1767B3FD00E40437 /* output.space.operation.xml */,
 				21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */,
@@ -1542,6 +1554,10 @@
 				A46A317517463DE10044643E /* CGameViewController.h */,
 				A46A317617463DE10044643E /* CGameViewController.mm */,
 				A46A317717463DE10044643E /* CGameViewController.xib */,
+				A494B85C17686741004C9F96 /* CGameXcomWorkflow.h */,
+				A494B85B17686741004C9F96 /* CGameXcomWorkflow.cpp */,
+				A494B86717686776004C9F96 /* CGameXcomInGameTransition.h */,
+				A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -2069,6 +2085,8 @@
 				21E42A4F1767B3FD00E40437 /* output.space.operation.xml in Resources */,
 				21E42A501767B3FD00E40437 /* screen.space.operation.xml in Resources */,
 				21E42A511767B3FD00E40437 /* world.space.operation.xml in Resources */,
+				A494B8A21768A7DD004C9F96 /* material.screen.xml in Resources */,
+				A494B8A41768A83D004C9F96 /* material.output.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2181,6 +2199,8 @@
 				A481749617621EA700E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */,
 				A481749917621FF500E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp in Sources */,
 				A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
+				A494B85D17686741004C9F96 /* CGameXcomWorkflow.cpp in Sources */,
+				A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

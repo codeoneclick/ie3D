@@ -21,8 +21,7 @@ class CTemplateAccessor;
 class IGameTransition :
 public CSceneGraph,
 public CSceneFabricator,
-public ITemplateLoadingHandler,
-public std::enable_shared_from_this<ITemplateLoadingHandler>
+public ITemplateLoadingHandler
 {
 private:
     

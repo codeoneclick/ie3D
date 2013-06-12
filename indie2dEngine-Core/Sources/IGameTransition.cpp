@@ -19,21 +19,13 @@
 #include "CRenderOperationScreenSpace.h"
 #include "CCommonOS.h"
 #include "ITemplate.h"
-
-#ifdef __APPLE__
 #include "CGraphicsContext_iOS.h"
-#else
-#endif
 
 IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor) :
-CSceneFabricator(_templateAccessor, _resourceAccessor)
+CSceneFabricator(_templateAccessor, _resourceAccessor),
+m_guid(_filename)
 {
     assert(_graphicsContext != nullptr);
-    assert(_resourceAccessor != nullptr);
-    assert(_templateAccessor != nullptr);
-    
-    _templateAccessor->LoadGameTransitionTemplate(_filename, shared_from_this());
-    
     m_renderMgr = std::make_shared<CRenderMgr>(_graphicsContext);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
 }
@@ -86,7 +78,6 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<SMaterialTemplate> screenSpaceRenderOperationMaterialTemplate = screenSpaceRenderOperationTemplate->m_materialTemplate;
         assert(screenSpaceRenderOperationMaterialTemplate != nullptr);
 
-        
         std::shared_ptr<CShader> screenSpaceRenderOperationShader = m_resourceAccessor->CreateShader(screenSpaceRenderOperationMaterialTemplate->m_shaderTemplate->m_vsFilename,
                                                                                                      screenSpaceRenderOperationMaterialTemplate->m_shaderTemplate->m_fsFilename);
         assert(screenSpaceRenderOperationShader != nullptr);
