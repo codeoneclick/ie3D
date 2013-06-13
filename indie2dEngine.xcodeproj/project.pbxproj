@@ -173,6 +173,7 @@
 		A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */; };
 		A494B8A21768A7DD004C9F96 /* material.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A11768A7DD004C9F96 /* material.screen.xml */; };
 		A494B8A41768A83D004C9F96 /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A31768A83C004C9F96 /* material.output.xml */; };
+		A494B8A81769CC4F004C9F96 /* thread_concurrency_task.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B8A61769CC4F004C9F96 /* thread_concurrency_task.cpp */; };
 		A49B83841754C07200AEB4DC /* CModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B83821754C07200AEB4DC /* CModel.cpp */; };
 		A49B838F1754C9A600AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
@@ -576,6 +577,8 @@
 		A494B86717686776004C9F96 /* CGameXcomInGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameXcomInGameTransition.h; path = "indie2dEngine-Game/Source/CGameXcomInGameTransition.h"; sourceTree = "<group>"; };
 		A494B8A11768A7DD004C9F96 /* material.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.screen.xml; sourceTree = "<group>"; };
 		A494B8A31768A83C004C9F96 /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
+		A494B8A61769CC4F004C9F96 /* thread_concurrency_task.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread_concurrency_task.cpp; path = indieThreadConcurrency/thread_concurrency_task.cpp; sourceTree = "<group>"; };
+		A494B8A71769CC4F004C9F96 /* thread_concurrency_task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thread_concurrency_task.h; path = indieThreadConcurrency/thread_concurrency_task.h; sourceTree = "<group>"; };
 		A49B83821754C07200AEB4DC /* CModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModel.cpp; path = Sources/CModel.cpp; sourceTree = "<group>"; };
 		A49B83831754C07200AEB4DC /* CModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModel.h; path = Sources/CModel.h; sourceTree = "<group>"; };
 		A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneFabricator.cpp; path = Sources/CSceneFabricator.cpp; sourceTree = "<group>"; };
@@ -941,6 +944,8 @@
 				21E42A6B176910EF00E40437 /* thread_concurrency.cpp */,
 				21E42A6F1769110A00E40437 /* thread_concurrency_queue.h */,
 				21E42A6E1769110A00E40437 /* thread_concurrency_queue.cpp */,
+				A494B8A71769CC4F004C9F96 /* thread_concurrency_task.h */,
+				A494B8A61769CC4F004C9F96 /* thread_concurrency_task.cpp */,
 			);
 			name = "indieThreadConcurrency ";
 			sourceTree = "<group>";
@@ -2223,6 +2228,7 @@
 				A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */,
 				21E42A6D176910EF00E40437 /* thread_concurrency.cpp in Sources */,
 				21E42A701769110A00E40437 /* thread_concurrency_queue.cpp in Sources */,
+				A494B8A81769CC4F004C9F96 /* thread_concurrency_task.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

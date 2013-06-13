@@ -7,14 +7,41 @@
 //
 
 #include "thread_concurrency_queue.h"
+#include "thread_concurrency_task.h"
 
 thread_concurrency_queue::thread_concurrency_queue(const std::string& _guid) :
-m_guid(_guid)
+m_guid(_guid),
+m_running(1),
+m_thread(&thread_concurrency_queue::_Thread, this)
 {
     
 }
 
 thread_concurrency_queue::~thread_concurrency_queue(void)
 {
-    
+    m_running = 0;
+    m_thread.join();
+}
+
+void thread_concurrency_queue::append_task(std::shared_ptr<i_thread_concurrency_task> _thread_concurrency_task)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    m_queue.push(std::move(_thread_concurrency_task));
+}
+
+void thread_concurrency_queue::_Thread(void)
+{
+    while (m_running)
+    {
+        if(!m_queue.empty())
+        {
+            std::lock_guard<std::mutex> lock(m_mutex);
+            m_queue.front()->execute();
+            m_queue.pop();
+        }
+        else
+        {
+            std::this_thread::yield();
+        }
+    }
 }

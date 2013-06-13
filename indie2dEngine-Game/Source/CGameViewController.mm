@@ -17,9 +17,16 @@
 
 @property (weak, nonatomic) IBOutlet COGLWindow_iOS *m_glWindow;
 @property (unsafe_unretained, nonatomic) std::string result;
+@property (unsafe_unretained, nonatomic) thread_concurrency concurrency;
 @end
 
 @implementation CGameViewController
+
+class C
+{
+public:
+    int a;
+};
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,25 +38,35 @@
     return self;
 }
 
-template<typename RESULT, typename ...ARGS>
-void execute(thread_concurrency_queue _queue, std::function<RESULT(ARGS... args)> _function, ARGS... args)
-{
-    _function(std::forward<ARGS>(args)...);
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    thread_concurrency concurrency;
-    thread_concurrency_queue queue("main");
     
-    std::function<void(int)> function = [](int a)
+    std::function<void(int)> function1 = [](int a)
     {
         std::cout<<"call"<<a<<std::endl;
     };
     
-    execute<void, int>(queue, function, 5);
+    std::function<void(std::string)> function2 = [](std::string a)
+    {
+        std::cout<<"call"<<a<<std::endl;
+    };
+    
+    C* param = new C();
+    param->a = 99;
+    
+    std::function<void(C*)> function3 = [](C* a)
+    {
+        std::cout<<"call"<<a->a<<std::endl;
+    };
+    
+    self.concurrency.dispatch<void, int>(self.concurrency.get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function1, 2);
+    self.concurrency.dispatch<void, std::string>(self.concurrency.get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function2, "two");
+    self.concurrency.dispatch<void, C*>(self.concurrency.get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function3, param);
+
+    
+    //execute<void, int>(queue, function, 5);
     
     //CGameXcomWorkflow* workflow = new CGameXcomWorkflow();
     //std::shared_ptr<IGameTransition> transition = workflow->CreateXcomInGameTransition("main.transition.xml", (__bridge void*)self.m_glWindow);
