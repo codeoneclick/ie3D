@@ -25,8 +25,9 @@ thread_concurrency_queue::~thread_concurrency_queue(void)
 
 void thread_concurrency_queue::append_task(std::shared_ptr<i_thread_concurrency_task> _thread_concurrency_task)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    m_mutex.lock();
     m_queue.push(std::move(_thread_concurrency_task));
+    m_mutex.unlock();
 }
 
 void thread_concurrency_queue::_Thread(void)
@@ -35,9 +36,11 @@ void thread_concurrency_queue::_Thread(void)
     {
         if(!m_queue.empty())
         {
-            std::lock_guard<std::mutex> lock(m_mutex);
-            m_queue.front()->execute();
+            m_mutex.lock();
+            std::shared_ptr<i_thread_concurrency_task> thread_concurrency_task_ =  m_queue.front();
             m_queue.pop();
+            m_mutex.unlock();
+            thread_concurrency_task_->execute();
         }
         else
         {

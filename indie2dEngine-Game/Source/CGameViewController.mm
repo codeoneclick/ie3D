@@ -61,9 +61,19 @@ public:
         std::cout<<"call"<<a->a<<std::endl;
     };
     
+    std::shared_ptr<C> param2 = std::make_shared<C>();
+    param->a = 101;
+    
+    std::function<void(std::shared_ptr<C> )> function4 = [](std::shared_ptr<C> a)
+    {
+        std::cout<<"call"<<a->a<<std::endl;
+    };
+
+    
     self.concurrency.dispatch<void, int>(self.concurrency.get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function1, 2);
     self.concurrency.dispatch<void, std::string>(self.concurrency.get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function2, "two");
     self.concurrency.dispatch<void, C*>(self.concurrency.get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function3, param);
+    self.concurrency.dispatch<void, std::shared_ptr<C>>(self.concurrency.get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function4, param2);
 
     
     //execute<void, int>(queue, function, 5);

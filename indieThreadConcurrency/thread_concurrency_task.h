@@ -19,10 +19,20 @@ protected:
     
 public:
     
-    i_thread_concurrency_task(void) { };
-    virtual ~i_thread_concurrency_task(void) { };
+    i_thread_concurrency_task(void)
+    {
+        std::cout<<"[i_thread_concurrency_task created]"<<std::endl;
+    };
     
-    virtual void execute(void) { assert(false); };
+    virtual ~i_thread_concurrency_task(void)
+    {
+        std::cout<<"[i_thread_concurrency_task deleted]"<<std::endl;
+    };
+    
+    virtual void execute(void)
+    {
+        assert(false);
+    };
 };
 
 template<class FUCTION, class ARGS> class thread_concurrency_task : public i_thread_concurrency_task
