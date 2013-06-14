@@ -26,7 +26,6 @@
 #include <assert.h>
 
 #include <curl/curl.h>
-
 #include <json/json.h>
 
 #include <glm/glm.hpp>
@@ -34,6 +33,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <pugixml/pugixml.hpp>
+
+#include "thread_concurrency_common.h"
+#include "thread_concurrency.h"
 
 #ifdef __APPLE__
 

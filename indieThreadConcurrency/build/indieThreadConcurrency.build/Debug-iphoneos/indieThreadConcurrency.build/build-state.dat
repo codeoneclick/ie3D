@@ -1,0 +1,130 @@
+TindieThreadConcurrency
+v5
+r1
+cCheck dependencies
+cCompileC build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_queue.o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_queue.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_task.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency.o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLibtool /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos/libindieThreadConcurrency.a normal armv7
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk
+c00000000517799DB0000000000000110
+t1366792667
+s272
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c0000000051629833000000000062AD10
+t1365415987
+s6466832
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos/libindieThreadConcurrency.a
+t2
+s0
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/indieThreadConcurrency.LinkFileList
+c0000000051BB19690000000000000257
+t1371216233
+s599
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency.o
+t2
+s0
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_queue.o
+t2
+s0
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.o
+t2
+s0
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency.cpp
+c0000000051BB03FF00000000000008B9
+t1371210751
+s2233
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_queue.cpp
+c0000000051BAFAA900000000000006FB
+t1371208361
+s1787
+i"thread_concurrency_queue.h"
+i"thread_concurrency_task.h"
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_queue.h
+c0000000051BB004300000000000004CA
+t1371209795
+s1226
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_task.cpp
+c0000000051B9BB8100000000000000C7
+t1371126657
+s199
+
+N/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_task.h
+c0000000051B9F2A80000000000000558
+t1371140776
+s1368
+
+CBuild AST from /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency.cpp
+r0
+
+CBuild AST from /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_queue.cpp
+r0
+
+CBuild AST from /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_task.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesfbe781e9506bb741^c28588e9506bb741^---0#1#0#--18"Check dependencies36"27FE881A-7763-4F27-BDBD-CE5FA944CA9C-
+
+CCompileC build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency.o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s392909033.538404
+e392909034.805643
+r1
+xCompileC
+xbuild/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency.o
+x/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency.cpp
+xnormal
+xarmv7
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection105"Compile /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency.cpp84298ae9506bb741^6c3eceea506bb741^---0#0#0#-19%DVTDocumentLocation2@113"file://localhost/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency.cpp0000000000000000^3851"CompileC build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency.o thread_concurrency.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch armv7 -fmessage-length=0 -std=c++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-generated-files.hmap -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-own-target-headers.hmap -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-all-target-headers.hmap -iquote /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-project-headers.hmap -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/DerivedSources/armv7 -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/DerivedSources -F/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos -MMD -MT dependencies -MF /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency.d --serialize-diagnostics /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency.dia -c /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency.cpp -o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency.o36"36AAEF9B-9ECF-49E3-8E1C-CDFB718925B8-
+
+CCompileC build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_queue.o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_queue.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s392909033.536124
+e392909034.803869
+r1
+xCompileC
+xbuild/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_queue.o
+x/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_queue.cpp
+xnormal
+xarmv7
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection111"Compile /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_queue.cpp0f7b89e9506bb741^b0cacdea506bb741^---0#0#0#-19%DVTDocumentLocation2@119"file://localhost/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_queue.cpp0000000000000000^3887"CompileC build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_queue.o thread_concurrency_queue.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch armv7 -fmessage-length=0 -std=c++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-generated-files.hmap -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-own-target-headers.hmap -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-all-target-headers.hmap -iquote /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-project-headers.hmap -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/DerivedSources/armv7 -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/DerivedSources -F/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos -MMD -MT dependencies -MF /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_queue.d --serialize-diagnostics /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_queue.dia -c /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_queue.cpp -o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_queue.o36"286B57F3-C684-4133-800D-2DCFBEF034F0-
+
+CCompileC build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_task.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s392909033.537380
+e392909034.320303
+r1
+xCompileC
+xbuild/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.o
+x/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_task.cpp
+xnormal
+xarmv7
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection110"Compile /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_task.cpp69c389e9506bb741^5e6353ea506bb741^---0#0#0#-19%DVTDocumentLocation2@118"file://localhost/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_task.cpp0000000000000000^3881"CompileC build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.o thread_concurrency_task.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch armv7 -fmessage-length=0 -std=c++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-generated-files.hmap -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-own-target-headers.hmap -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-all-target-headers.hmap -iquote /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/indieThreadConcurrency-project-headers.hmap -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/DerivedSources/armv7 -I/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/DerivedSources -F/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos -MMD -MT dependencies -MF /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.d --serialize-diagnostics /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.dia -c /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/thread_concurrency_task.cpp -o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.o36"9EA5F7A5-3E55-4509-B6FC-234BBF168AFB-
+
+CLibtool /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos/libindieThreadConcurrency.a normal armv7
+s392909034.812623
+e392909034.823076
+r1
+xLibtool
+x/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos/libindieThreadConcurrency.a
+xnormal
+xarmv7
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.o has no symbols
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection69"Libtool build/Debug-iphoneos/libindieThreadConcurrency.a normal armv7861fd0ea506bb741^d0b6d2ea506bb741^-318"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/thread_concurrency_task.o has no symbols-0#0#0#--1088"Libtool build/Debug-iphoneos/libindieThreadConcurrency.a normal armv7    cd /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency    setenv IPHONEOS_DEPLOYMENT_TARGET 6.1    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only armv7 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk -L/Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos -filelist /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/indieThreadConcurrency.build/Debug-iphoneos/indieThreadConcurrency.build/Objects-normal/armv7/indieThreadConcurrency.LinkFileList -framework Foundation -o /Users/sergey.sergeev/Documents/indieEngine/gEngine/indieThreadConcurrency/build/Debug-iphoneos/libindieThreadConcurrency.a36"558CA239-6872-460D-BE4E-F52E81436C30-
+

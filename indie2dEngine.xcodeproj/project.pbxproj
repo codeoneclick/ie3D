@@ -22,8 +22,6 @@
 		21E42A4F1767B3FD00E40437 /* output.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4B1767B3FD00E40437 /* output.space.operation.xml */; };
 		21E42A501767B3FD00E40437 /* screen.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */; };
 		21E42A511767B3FD00E40437 /* world.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4D1767B3FD00E40437 /* world.space.operation.xml */; };
-		21E42A6D176910EF00E40437 /* thread_concurrency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E42A6B176910EF00E40437 /* thread_concurrency.cpp */; };
-		21E42A701769110A00E40437 /* thread_concurrency_queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E42A6E1769110A00E40437 /* thread_concurrency_queue.cpp */; };
 		A40138B21754E6C20056461B /* CommonScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = A49B83911754D3C900AEB4DC /* CommonScreen.frag */; };
 		A40138B31754E6C20056461B /* CommonScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = A49B83921754D3C900AEB4DC /* CommonScreen.vert */; };
 		A40138C41754EF070056461B /* CModelTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */; };
@@ -173,7 +171,7 @@
 		A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */; };
 		A494B8A21768A7DD004C9F96 /* material.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A11768A7DD004C9F96 /* material.screen.xml */; };
 		A494B8A41768A83D004C9F96 /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A31768A83C004C9F96 /* material.output.xml */; };
-		A494B8A81769CC4F004C9F96 /* thread_concurrency_task.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B8A61769CC4F004C9F96 /* thread_concurrency_task.cpp */; };
+		A494B93F176B2625004C9F96 /* libindieThreadConcurrency.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A494B932176B1FAC004C9F96 /* libindieThreadConcurrency.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		A49B83841754C07200AEB4DC /* CModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B83821754C07200AEB4DC /* CModel.cpp */; };
 		A49B838F1754C9A600AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
@@ -362,6 +360,20 @@
 			remoteGlobalIDString = 40C848F9101A209C0083642A;
 			remoteInfo = "libGoogleUnitTest-static";
 		};
+		A494B931176B1FAC004C9F96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A494B8F2176B1E3D004C9F96;
+			remoteInfo = indieThreadConcurrency;
+		};
+		A494B93D176B261A004C9F96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A494B8F1176B1E3D004C9F96;
+			remoteInfo = indieThreadConcurrency;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -396,11 +408,6 @@
 		21E42A4B1767B3FD00E40437 /* output.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = output.space.operation.xml; sourceTree = "<group>"; };
 		21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.operation.xml; sourceTree = "<group>"; };
 		21E42A4D1767B3FD00E40437 /* world.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.operation.xml; sourceTree = "<group>"; };
-		21E42A6B176910EF00E40437 /* thread_concurrency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread_concurrency.cpp; path = indieThreadConcurrency/thread_concurrency.cpp; sourceTree = "<group>"; };
-		21E42A6C176910EF00E40437 /* thread_concurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thread_concurrency.h; path = indieThreadConcurrency/thread_concurrency.h; sourceTree = "<group>"; };
-		21E42A6E1769110A00E40437 /* thread_concurrency_queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread_concurrency_queue.cpp; path = indieThreadConcurrency/thread_concurrency_queue.cpp; sourceTree = "<group>"; };
-		21E42A6F1769110A00E40437 /* thread_concurrency_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thread_concurrency_queue.h; path = indieThreadConcurrency/thread_concurrency_queue.h; sourceTree = "<group>"; };
-		21E42A711769117000E40437 /* thread_concurrency_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = thread_concurrency_common.h; path = indieThreadConcurrency/thread_concurrency_common.h; sourceTree = "<group>"; };
 		A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelTemplateSerializer.cpp; path = Sources/CModelTemplateSerializer.cpp; sourceTree = "<group>"; };
 		A40138C31754EF060056461B /* CModelTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModelTemplateSerializer.h; path = Sources/CModelTemplateSerializer.h; sourceTree = "<group>"; };
 		A40138C51754EF280056461B /* CParticleEmitterTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitterTemplateSerializer.cpp; path = Sources/CParticleEmitterTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -577,8 +584,7 @@
 		A494B86717686776004C9F96 /* CGameXcomInGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameXcomInGameTransition.h; path = "indie2dEngine-Game/Source/CGameXcomInGameTransition.h"; sourceTree = "<group>"; };
 		A494B8A11768A7DD004C9F96 /* material.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.screen.xml; sourceTree = "<group>"; };
 		A494B8A31768A83C004C9F96 /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
-		A494B8A61769CC4F004C9F96 /* thread_concurrency_task.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread_concurrency_task.cpp; path = indieThreadConcurrency/thread_concurrency_task.cpp; sourceTree = "<group>"; };
-		A494B8A71769CC4F004C9F96 /* thread_concurrency_task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thread_concurrency_task.h; path = indieThreadConcurrency/thread_concurrency_task.h; sourceTree = "<group>"; };
+		A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = indieThreadConcurrency.xcodeproj; path = indieThreadConcurrency/indieThreadConcurrency.xcodeproj; sourceTree = "<group>"; };
 		A49B83821754C07200AEB4DC /* CModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModel.cpp; path = Sources/CModel.cpp; sourceTree = "<group>"; };
 		A49B83831754C07200AEB4DC /* CModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModel.h; path = Sources/CModel.h; sourceTree = "<group>"; };
 		A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneFabricator.cpp; path = Sources/CSceneFabricator.cpp; sourceTree = "<group>"; };
@@ -850,6 +856,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A494B93F176B2625004C9F96 /* libindieThreadConcurrency.a in Frameworks */,
 				A45588F51757602A00802609 /* libz.dylib in Frameworks */,
 				A45588F31757600500802609 /* Security.framework in Frameworks */,
 				A45588F117575FFC00802609 /* CFNetwork.framework in Frameworks */,
@@ -939,13 +946,6 @@
 		21E42A5B17690AE700E40437 /* indieThreadConcurrency  */ = {
 			isa = PBXGroup;
 			children = (
-				21E42A711769117000E40437 /* thread_concurrency_common.h */,
-				21E42A6C176910EF00E40437 /* thread_concurrency.h */,
-				21E42A6B176910EF00E40437 /* thread_concurrency.cpp */,
-				21E42A6F1769110A00E40437 /* thread_concurrency_queue.h */,
-				21E42A6E1769110A00E40437 /* thread_concurrency_queue.cpp */,
-				A494B8A71769CC4F004C9F96 /* thread_concurrency_task.h */,
-				A494B8A61769CC4F004C9F96 /* thread_concurrency_task.cpp */,
 			);
 			name = "indieThreadConcurrency ";
 			sourceTree = "<group>";
@@ -1074,6 +1074,7 @@
 		A42081521733A9370004729E = {
 			isa = PBXGroup;
 			children = (
+				A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */,
 				21E42A5B17690AE700E40437 /* indieThreadConcurrency  */,
 				A46A3215174E161E0044643E /* indie2dEngine-Testing */,
 				A4F204B6174241320063AB07 /* indie2dEngine-Game */,
@@ -1405,6 +1406,14 @@
 				A418527317609D9C002FC042 /* IGameTransition.cpp */,
 			);
 			name = Transitions;
+			sourceTree = "<group>";
+		};
+		A494B92E176B1FAB004C9F96 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A494B932176B1FAC004C9F96 /* libindieThreadConcurrency.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A494D36417392D3600228936 /* Render Managment */ = {
@@ -1873,6 +1882,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A494B93E176B261A004C9F96 /* PBXTargetDependency */,
 			);
 			name = "indie2dEngine-Core";
 			productName = "indie2dEngine-Core";
@@ -1917,6 +1927,10 @@
 			productRefGroup = A420815C1733A9370004729E /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = A494B92E176B1FAB004C9F96 /* Products */;
+					ProjectRef = A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */;
+				},
 				{
 					ProductGroup = A46A32A0174E163E0044643E /* Products */;
 					ProjectRef = A46A324F174E161F0044643E /* libGoogleUnitTest.xcodeproj */;
@@ -1978,6 +1992,13 @@
 			fileType = "compiled.mach-o.executable";
 			path = "sample1_unittest-static";
 			remoteRef = A46A32B7174E163E0044643E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A494B932176B1FAC004C9F96 /* libindieThreadConcurrency.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libindieThreadConcurrency.a;
+			remoteRef = A494B931176B1FAC004C9F96 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2226,9 +2247,6 @@
 				A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
 				A494B85D17686741004C9F96 /* CGameXcomWorkflow.cpp in Sources */,
 				A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */,
-				21E42A6D176910EF00E40437 /* thread_concurrency.cpp in Sources */,
-				21E42A701769110A00E40437 /* thread_concurrency_queue.cpp in Sources */,
-				A494B8A81769CC4F004C9F96 /* thread_concurrency_task.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2302,6 +2320,11 @@
 			name = "libGoogleUnitTest-static";
 			targetProxy = A46A32E3174E180B0044643E /* PBXContainerItemProxy */;
 		};
+		A494B93E176B261A004C9F96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = indieThreadConcurrency;
+			targetProxy = A494B93D176B261A004C9F96 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -2373,6 +2396,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
+					"\"$(SRCROOT)/indieThreadConcurrency\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -2394,6 +2418,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
+					"\"$(SRCROOT)/indieThreadConcurrency\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
