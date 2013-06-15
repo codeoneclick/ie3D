@@ -42,7 +42,7 @@ protected:
     
     std::mutex m_mutex;
     std::thread m_thread;
-    std::atomic_int m_running;
+    bool m_running;
     
     void _Thread(void);
     
