@@ -11,99 +11,33 @@
 
 #include "thread_concurrency_common.h"
 
-// Recursive case, unpack Nth argument
-template<unsigned int N>
-struct Apply_aux
+template<unsigned int NUM>
+struct apply_
 {
-    template<typename... ArgsF, typename... ArgsT, typename... Args>
-    static void apply(std::function<void(ArgsF... args)> f, std::tuple<ArgsT...> const& t,
-                      Args... args)
+    template<typename... F_ARGS, typename... T_ARGS, typename... ARGS>
+    static void apply(std::function<void(F_ARGS... args)> _function, std::tuple<T_ARGS...> const& _targs,
+                      ARGS... args)
     {
-        Apply_aux<N-1>::apply(f, t, std::get<N-1>(t), args...);
+        apply_<NUM-1>::apply(_function, _targs, std::get<NUM-1>(_targs), args...);
     }
 };
 
-// Terminal case, call the function with unpacked arguments
 template<>
-struct Apply_aux<0>
+struct apply_<0>
 {
-    template<typename... ArgsF, typename... ArgsT, typename... Args>
-    static void apply(std::function<void(ArgsF... args)> f, std::tuple<ArgsT...> const&,
-                      Args... args)
+    template<typename... F_ARGS, typename... T_ARGS, typename... ARGS>
+    static void apply(std::function<void(F_ARGS... args)> _function, std::tuple<T_ARGS...> const&,
+                      ARGS... args)
     {
-        f(args...);
+        _function(args...);
     }
 };
 
-// Actual apply function
-template<typename... ArgsF, typename... ArgsT>
-void apply(std::function<void(ArgsF... args)> f, std::tuple<ArgsT...> const& t)
+template<typename... F_ARGS, typename... T_ARGS>
+void apply(std::function<void(F_ARGS... _fargs)> _function, std::tuple<T_ARGS...> const& _targs)
 {
-    Apply_aux<sizeof...(ArgsT)>::apply(f, t);
+    apply_<sizeof...(T_ARGS)>::apply(_function, _targs);
 }
-
-void f(int p1, double p2, std::string p3);
-void g(int p1, std::string p2);
-
-
-int foooooo();
-
-
-/**
- * Object Function Tuple Argument Unpacking
- *
- * This recursive template unpacks the tuple parameters into
- * variadic template arguments until we reach the count of 0 where the function
- * is called with the correct parameters
- *
- * @tparam N Number of tuple arguments to unroll
- *
- * @ingroup g_util_tuple
- */
-template < uint N >
-struct apply_obj_func
-{
-    template <typename... TARGS, typename... ARGS>
-    static void applyTuple(std::function<void(ARGS... args)> _function, const std::tuple<TARGS...>& _targs, ARGS... _args)
-    {
-        apply_obj_func<N-1>::applyTuple(_function, _targs, std::get<N-1>(_targs));
-    }
-};
-
-//-----------------------------------------------------------------------------
-
-/**
- * Object Function Tuple Argument Unpacking End Point
- *
- * This recursive template unpacks the tuple parameters into
- * variadic template arguments until we reach the count of 0 where the function
- * is called with the correct parameters
- *
- * @ingroup g_util_tuple
- */
-template <>
-struct apply_obj_func<0>
-{
-    template <typename... TARGS, typename... ARGS>
-    static void applyTuple(std::function<void(ARGS... args)> _function, const std::tuple<TARGS...>& _targs, ARGS... _args)
-    {
-        _function(std::forward<ARGS>(_args)...);
-    }
-};
-
-//-----------------------------------------------------------------------------
-
-/**
- * Object Function Call Forwarding Using Tuple Pack Parameters
- */
-// Actual apply function
-template <typename... ARGS, typename... TARGS>
-void applyTuple(std::function<void(ARGS... args)> _function, const std::tuple<TARGS...>& _targs)
-{
-    foooooo();
-    //apply_obj_func<sizeof...(TARGS)>::applyTuple(_function, _targs);
-}
-
 
 class i_thread_concurrency_task
 {
@@ -151,8 +85,6 @@ public:
     
     void execute(void)
     {
-        //applyTuple(m_function, m_args);
-        //m_function(m_args);
         apply(m_function, m_args);
         std::thread::id this_id = std::this_thread::get_id();
         std::cout << "[execute] thread : "<<this_id<<std::endl;
