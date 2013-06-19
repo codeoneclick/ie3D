@@ -47,6 +47,6 @@ void thread_concurrency_main_queue_update(void);
 std::shared_ptr<thread_concurrency_queue> get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY _thread_concurrency_priority);
 std::shared_ptr<thread_concurrency_main_queue> get_thread_concurrency_main_queue(void);
 template<class... ARGS>
-void thread_concurrency_dispatch(std::shared_ptr<thread_concurrency_queue> _queue, std::function<void(ARGS... args)> _function, ARGS... args);
+void thread_concurrency_dispatch(std::shared_ptr<thread_concurrency_main_queue> _queue, std::function<void(ARGS... args)> _function, ARGS... args);
 
 #endif

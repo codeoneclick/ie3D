@@ -40,9 +40,9 @@ public:
     [super viewDidLoad];
     
     
-    std::function<void(int)> function1 = [](int a)
+    std::function<void(int, float, std::string)> function1 = [](int a, float b, const std::string& c)
     {
-        std::cout<<"call"<<a<<std::endl;
+        std::cout<<"call"<<a<<b<<c<<std::endl;
     };
     
     std::function<void(std::string)> function2 = [](std::string a)
@@ -65,14 +65,23 @@ public:
     {
         std::cout<<"call"<<a->a<<std::endl;
     };
+    
+    std::function<void(void)> function5 = [](void)
+    {
+        std::cout<<"void"<<std::endl;
+    };
 
-    thread_concurrency_dispatch<int>(get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function1, 1);
+
+    thread_concurrency_dispatch<int, float, std::string>(get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function1, 1, 2.0f, "Hello World");
     thread_concurrency_dispatch<std::string>(get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function2, "two");
     thread_concurrency_dispatch<C*>(get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function3, param);
     thread_concurrency_dispatch<std::shared_ptr<C>>(get_thread_concurrency_queue(THREAD_CONCURRENCY_QUEUE_PRIORITY_LOW), function4, param2);
+    thread_concurrency_dispatch(get_thread_concurrency_main_queue(), function5);
     
-    //CGameXcomWorkflow* workflow = new CGameXcomWorkflow();
-    //std::shared_ptr<IGameTransition> transition = workflow->CreateXcomInGameTransition("main.transition.xml", (__bridge void*)self.m_glWindow);
+    CGameXcomWorkflow* workflow = new CGameXcomWorkflow();
+    std::shared_ptr<IGameTransition> transition = workflow->CreateXcomInGameTransition("main.transition.xml", (__bridge void*)self.m_glWindow);
+    workflow->RegisterTransition(transition);
+    workflow->GoToTransition("main.transition.xml");
 }
 
 - (void)didReceiveMemoryWarning

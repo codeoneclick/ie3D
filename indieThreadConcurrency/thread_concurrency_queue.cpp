@@ -27,7 +27,7 @@ void thread_concurrency_main_queue::append_task(std::shared_ptr<i_thread_concurr
 
 void thread_concurrency_main_queue::_Update(void)
 {
-    if(!m_queue.empty())
+    while(!m_queue.empty())
     {
         std::shared_ptr<i_thread_concurrency_task> thread_concurrency_task_ =  m_queue.front();
         m_queue.pop();

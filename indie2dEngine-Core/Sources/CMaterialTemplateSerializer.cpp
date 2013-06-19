@@ -68,6 +68,7 @@ std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::str
     {
         std::shared_ptr<STextureTemplate> textureTemplate = std::make_shared<STextureTemplate>();
         textureTemplate->m_filename = texture.attribute("name").as_string();
+        textureTemplate->m_operationName = texture.attribute("operation").as_string();
         textureTemplate->m_sampler = texture.attribute("slot").as_uint();
         
         std::string wrapStr = texture.attribute("wrap").as_string();

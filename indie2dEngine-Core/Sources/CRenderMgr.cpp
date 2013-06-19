@@ -87,6 +87,7 @@ void CRenderMgr::UnregisterWorldSpaceRenderHandler(const std::string &_mode, std
 std::shared_ptr<CTexture> CRenderMgr::Get_RenderOperationTexture(const std::string& _mode)
 {
     std::shared_ptr<CTexture> texture = m_worldSpaceOperations.find(_mode) != m_worldSpaceOperations.end() ? m_worldSpaceOperations.find(_mode)->second->Get_OperatingTexture() : m_screenSpaceOperations.find(_mode) != m_screenSpaceOperations.end() ? m_screenSpaceOperations.find(_mode)->second->Get_OperatingTexture() : nullptr;
+    std::cout<<"[Get_RenderOperationTexture]"<<std::endl;
     return texture;
 }
 
@@ -117,14 +118,12 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
         m_customScreenSpaceOperationsQueue.pop();
     }
     
-    // TODO :
-    assert(m_worldSpaceOperations.begin() != m_worldSpaceOperations.end());
-    auto iterator = m_worldSpaceOperations.begin();
-    std::shared_ptr<CRenderOperationWorldSpace> operation = iterator->second;
-    m_outputOperation->Get_Material()->Set_Texture(operation->Get_OperatingTexture(), E_SHADER_SAMPLER_01);
-    m_outputOperation->Bind();
-    m_outputOperation->Draw();
-    m_outputOperation->Unbind();
+    if(m_outputOperation != nullptr)
+    {
+        m_outputOperation->Bind();
+        m_outputOperation->Draw();
+        m_outputOperation->Unbind();
+    }
     
     GLenum error = glGetError();
     assert(error == GL_NO_ERROR);

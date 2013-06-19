@@ -95,9 +95,6 @@ void CMaterial::Bind(void)
     
     m_shader->Bind();
     
-    GLenum error = glGetError();
-    assert(error == GL_NO_ERROR);
-    
     for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
     {
         if(m_textures[i] != nullptr)

@@ -77,6 +77,10 @@
 		A42081861733AAA10004729E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081831733AAA10004729E /* Default-568h@2x.png */; };
 		A42081871733AAA10004729E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081841733AAA10004729E /* Default.png */; };
 		A42081881733AAA10004729E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081851733AAA10004729E /* Default@2x.png */; };
+		A42FE60E1771D6C100131949 /* CommonOutput.vert in Sources */ = {isa = PBXBuildFile; fileRef = A42FE60C1771D6C100131949 /* CommonOutput.vert */; };
+		A42FE60F1771D6C100131949 /* CommonOutput.frag in Sources */ = {isa = PBXBuildFile; fileRef = A42FE60D1771D6C100131949 /* CommonOutput.frag */; };
+		A42FE6101771D7A400131949 /* CommonOutput.vert in Resources */ = {isa = PBXBuildFile; fileRef = A42FE60C1771D6C100131949 /* CommonOutput.vert */; };
+		A42FE6111771D7A400131949 /* CommonOutput.frag in Resources */ = {isa = PBXBuildFile; fileRef = A42FE60D1771D6C100131949 /* CommonOutput.frag */; };
 		A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		A45588D61756406C00802609 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
 		A45588DA17564B8B00802609 /* material.xml in Resources */ = {isa = PBXBuildFile; fileRef = A45588D817564B8B00802609 /* material.xml */; };
@@ -473,6 +477,8 @@
 		A42081851733AAA10004729E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Bundle/System/Default@2x.png"; sourceTree = "<group>"; };
 		A420818C1733AAB40004729E /* indie2dEngine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "indie2dEngine-Info.plist"; path = "Support/indie2dEngine-Info.plist"; sourceTree = "<group>"; };
 		A420818D1733AAB40004729E /* indie2dEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "indie2dEngine-Prefix.pch"; path = "Support/indie2dEngine-Prefix.pch"; sourceTree = "<group>"; };
+		A42FE60C1771D6C100131949 /* CommonOutput.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.vert; sourceTree = "<group>"; };
+		A42FE60D1771D6C100131949 /* CommonOutput.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.frag; sourceTree = "<group>"; };
 		A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ITemplateLoadingHandler.cpp; path = Sources/ITemplateLoadingHandler.cpp; sourceTree = "<group>"; };
 		A45588CA175628F500802609 /* ITemplateLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITemplateLoadingHandler.h; path = Sources/ITemplateLoadingHandler.h; sourceTree = "<group>"; };
 		A45588D41756406C00802609 /* CLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLight.cpp; path = Sources/CLight.cpp; sourceTree = "<group>"; };
@@ -1062,6 +1068,8 @@
 		A40D47C3174555AF00CA59D0 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A42FE60C1771D6C100131949 /* CommonOutput.vert */,
+				A42FE60D1771D6C100131949 /* CommonOutput.frag */,
 				A49B83911754D3C900AEB4DC /* CommonScreen.frag */,
 				A49B83921754D3C900AEB4DC /* CommonScreen.vert */,
 				A40D47C5174555AF00CA59D0 /* CommonModel.vert */,
@@ -2008,6 +2016,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A42FE6101771D7A400131949 /* CommonOutput.vert in Resources */,
+				A42FE6111771D7A400131949 /* CommonOutput.frag in Resources */,
 				A40138B21754E6C20056461B /* CommonScreen.frag in Resources */,
 				A40138B31754E6C20056461B /* CommonScreen.vert in Resources */,
 				A40D47C8174557C500CA59D0 /* CommonModel.frag in Resources */,
@@ -2247,6 +2257,8 @@
 				A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
 				A494B85D17686741004C9F96 /* CGameXcomWorkflow.cpp in Sources */,
 				A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */,
+				A42FE60E1771D6C100131949 /* CommonOutput.vert in Sources */,
+				A42FE60F1771D6C100131949 /* CommonOutput.frag in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2399,6 +2411,7 @@
 					"\"$(SRCROOT)/indieThreadConcurrency\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/curl\"",
@@ -2421,6 +2434,7 @@
 					"\"$(SRCROOT)/indieThreadConcurrency\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/curl\"",

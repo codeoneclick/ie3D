@@ -1,5 +1,5 @@
 <material render_mode="" is_cull_face="1" is_depth_test="1" is_depth_mask="1" is_blend="0" cull_face_mode="GL_FRONT" blend_function_source="GL_SRC_ALPHA" blend_function_destination="GL_ONE_MINUS_SRC_ALPHA">
-    <shader vs_name="CommonScreen.vert" fs_name="CommonScreen.frag"/>
+    <shader vs_name="CommonOutput.vert" fs_name="CommonOutput.frag"/>
     <textures>
         <texture name="" operation="screen.space.operation" slot="0" wrap="GL_CLAMP_TO_EDGE"/>
     </textures>
