@@ -56,7 +56,7 @@ void CSceneFabricator::DeleteLight(std::shared_ptr<CLight> _light)
 
 std::shared_ptr<CSprite> CSceneFabricator::CreateSprite(const std::string& _filename)
 {
-    
+    return nullptr;
 }
 
 void CSceneFabricator::DeleteSprite(std::shared_ptr<CSprite> _sprite)
@@ -81,7 +81,7 @@ void CSceneFabricator::DeleteModel(std::shared_ptr<CModel> _model)
 
 std::shared_ptr<CBillboard> CSceneFabricator::CreateBillboard(const std::string& _filename)
 {
-    
+    return nullptr;
 }
 
 void CSceneFabricator::DeleteBillboard(std::shared_ptr<CBillboard> _billboard)
@@ -91,7 +91,7 @@ void CSceneFabricator::DeleteBillboard(std::shared_ptr<CBillboard> _billboard)
 
 std::shared_ptr<CParticleEmitter> CSceneFabricator::CreateParticleEmitter(const std::string& _filename)
 {
-    
+    return nullptr;
 }
 
 void CSceneFabricator::DeleteParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter)

@@ -1,0 +1,3 @@
+<operation guid="screen.space.blur.operation">
+    <material filename="material.blur.screen.xml"/>
+</operation>

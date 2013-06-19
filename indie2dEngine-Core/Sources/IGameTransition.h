@@ -38,6 +38,7 @@ protected:
     virtual void _OnDeactivate(void);
     
     virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    virtual void _OnLoaded(void);
     
 public:
     

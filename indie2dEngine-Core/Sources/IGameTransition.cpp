@@ -57,6 +57,11 @@ void IGameTransition::_OnDeactivate(void)
     DisconnectFromGameLoop(m_sceneUpdateMgr);
 }
 
+void IGameTransition::_OnLoaded(void)
+{
+    assert(false);
+}
+
 void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
     assert(m_renderMgr != nullptr);
@@ -112,12 +117,14 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
                                                                                             outputRenderOperationMaterialTemplate->m_shaderTemplate->m_fsFilename);
     assert(outputRenderOperationShader != nullptr);
     
-    std::function<void(std::shared_ptr<CRenderMgr>, std::shared_ptr<CResourceAccessor>, std::shared_ptr<CShader>, std::shared_ptr<SMaterialTemplate>)> function = [](std::shared_ptr<CRenderMgr> _renderMgr,std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CShader> _shader, std::shared_ptr<SMaterialTemplate> _outputRenderOperationMaterialTemplate)
+    std::function<void(IGameTransition*, std::shared_ptr<CRenderMgr>, std::shared_ptr<CResourceAccessor>, std::shared_ptr<CShader>, std::shared_ptr<SMaterialTemplate>)> function = [](IGameTransition* _gameTransition, std::shared_ptr<CRenderMgr> _renderMgr,std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CShader> _shader, std::shared_ptr<SMaterialTemplate> _outputRenderOperationMaterialTemplate)
     {
         std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>(_shader);
         outputRenderOperationMaterial->Serialize(_outputRenderOperationMaterialTemplate, _resourceAccessor, _renderMgr);
         _renderMgr->RegisterOutputRenderOperation(outputRenderOperationMaterial);
+        assert(_gameTransition != nullptr);
+        _gameTransition->_OnLoaded();
     };
     
-    thread_concurrency_dispatch<std::shared_ptr<CRenderMgr>, std::shared_ptr<CResourceAccessor>, std::shared_ptr<CShader>, std::shared_ptr<SMaterialTemplate>>(get_thread_concurrency_main_queue(), function, m_renderMgr, m_resourceAccessor, outputRenderOperationShader, outputRenderOperationMaterialTemplate);
+    thread_concurrency_dispatch<IGameTransition*, std::shared_ptr<CRenderMgr>, std::shared_ptr<CResourceAccessor>, std::shared_ptr<CShader>, std::shared_ptr<SMaterialTemplate>>(get_thread_concurrency_main_queue(), function, this, m_renderMgr, m_resourceAccessor, outputRenderOperationShader, outputRenderOperationMaterialTemplate);
 }

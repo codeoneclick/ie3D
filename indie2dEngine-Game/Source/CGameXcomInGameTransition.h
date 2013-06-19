@@ -18,6 +18,8 @@ private:
     
 protected:
     
+    void _OnLoaded(void);
+    
 public:
     CGameXcomInGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor);
     ~CGameXcomInGameTransition(void);

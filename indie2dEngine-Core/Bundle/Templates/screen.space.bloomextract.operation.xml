@@ -1,0 +1,3 @@
+<operation guid="screen.space.bloomextract.operation">
+    <material filename="material.bloomextract.screen.xml"/>
+</operation>

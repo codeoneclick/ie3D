@@ -1,0 +1,3 @@
+<operation guid="screen.space.bloomcombine.operation">
+    <material filename="material.bloomcombine.screen.xml"/>
+</operation>

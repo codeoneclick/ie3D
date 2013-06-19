@@ -65,8 +65,6 @@
 		A40D47BC17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */; };
 		A40D47BF17453AC000CA59D0 /* CTextureSerializer_PVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */; };
 		A40D47C2174552A300CA59D0 /* CCommonOS_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C0174552A300CA59D0 /* CCommonOS_iOS.mm */; };
-		A40D47C6174555AF00CA59D0 /* CommonModel.frag in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C4174555AF00CA59D0 /* CommonModel.frag */; };
-		A40D47C7174555AF00CA59D0 /* CommonModel.vert in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C5174555AF00CA59D0 /* CommonModel.vert */; };
 		A40D47C8174557C500CA59D0 /* CommonModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C4174555AF00CA59D0 /* CommonModel.frag */; };
 		A40D47C9174557C500CA59D0 /* CommonModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C5174555AF00CA59D0 /* CommonModel.vert */; };
 		A418526A17609D86002FC042 /* IGameWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418526817609D86002FC042 /* IGameWorkflow.cpp */; };
@@ -77,10 +75,20 @@
 		A42081861733AAA10004729E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081831733AAA10004729E /* Default-568h@2x.png */; };
 		A42081871733AAA10004729E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081841733AAA10004729E /* Default.png */; };
 		A42081881733AAA10004729E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081851733AAA10004729E /* Default@2x.png */; };
-		A42FE60E1771D6C100131949 /* CommonOutput.vert in Sources */ = {isa = PBXBuildFile; fileRef = A42FE60C1771D6C100131949 /* CommonOutput.vert */; };
-		A42FE60F1771D6C100131949 /* CommonOutput.frag in Sources */ = {isa = PBXBuildFile; fileRef = A42FE60D1771D6C100131949 /* CommonOutput.frag */; };
 		A42FE6101771D7A400131949 /* CommonOutput.vert in Resources */ = {isa = PBXBuildFile; fileRef = A42FE60C1771D6C100131949 /* CommonOutput.vert */; };
 		A42FE6111771D7A400131949 /* CommonOutput.frag in Resources */ = {isa = PBXBuildFile; fileRef = A42FE60D1771D6C100131949 /* CommonOutput.frag */; };
+		A42FE6201771ED0200131949 /* BloomCombineScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6141771ECE700131949 /* BloomCombineScreen.frag */; };
+		A42FE6211771ED0200131949 /* BloomCombineScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6151771ECE700131949 /* BloomCombineScreen.vert */; };
+		A42FE6221771ED0200131949 /* BloomExtractScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6161771ECE800131949 /* BloomExtractScreen.frag */; };
+		A42FE6231771ED0200131949 /* BloomExtractScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6171771ECE800131949 /* BloomExtractScreen.vert */; };
+		A42FE6241771ED0200131949 /* BlurScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6181771ECE900131949 /* BlurScreen.frag */; };
+		A42FE6251771ED0200131949 /* BlurScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6191771ECE900131949 /* BlurScreen.vert */; };
+		A42FE62C1771EEA900131949 /* material.bloomcombine.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6261771EEA600131949 /* material.bloomcombine.screen.xml */; };
+		A42FE62D1771EEA900131949 /* material.bloomextract.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6271771EEA600131949 /* material.bloomextract.screen.xml */; };
+		A42FE62E1771EEA900131949 /* material.blur.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6281771EEA700131949 /* material.blur.screen.xml */; };
+		A42FE62F1771EEA900131949 /* screen.space.bloomcombine.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6291771EEA700131949 /* screen.space.bloomcombine.operation.xml */; };
+		A42FE6301771EEA900131949 /* screen.space.bloomextract.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE62A1771EEA800131949 /* screen.space.bloomextract.operation.xml */; };
+		A42FE6311771EEA900131949 /* screen.space.blur.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */; };
 		A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		A45588D61756406C00802609 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
 		A45588DA17564B8B00802609 /* material.xml in Resources */ = {isa = PBXBuildFile; fileRef = A45588D817564B8B00802609 /* material.xml */; };
@@ -179,8 +187,6 @@
 		A49B83841754C07200AEB4DC /* CModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B83821754C07200AEB4DC /* CModel.cpp */; };
 		A49B838F1754C9A600AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
-		A49B83931754D3C900AEB4DC /* CommonScreen.frag in Sources */ = {isa = PBXBuildFile; fileRef = A49B83911754D3C900AEB4DC /* CommonScreen.frag */; };
-		A49B83941754D3C900AEB4DC /* CommonScreen.vert in Sources */ = {isa = PBXBuildFile; fileRef = A49B83921754D3C900AEB4DC /* CommonScreen.vert */; };
 		A49B83951754D44800AEB4DC /* CommonScreen.vert in Sources */ = {isa = PBXBuildFile; fileRef = A49B83921754D3C900AEB4DC /* CommonScreen.vert */; };
 		A49B83961754D44A00AEB4DC /* CommonScreen.frag in Sources */ = {isa = PBXBuildFile; fileRef = A49B83911754D3C900AEB4DC /* CommonScreen.frag */; };
 		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
@@ -479,6 +485,18 @@
 		A420818D1733AAB40004729E /* indie2dEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "indie2dEngine-Prefix.pch"; path = "Support/indie2dEngine-Prefix.pch"; sourceTree = "<group>"; };
 		A42FE60C1771D6C100131949 /* CommonOutput.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.vert; sourceTree = "<group>"; };
 		A42FE60D1771D6C100131949 /* CommonOutput.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.frag; sourceTree = "<group>"; };
+		A42FE6141771ECE700131949 /* BloomCombineScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomCombineScreen.frag; sourceTree = "<group>"; };
+		A42FE6151771ECE700131949 /* BloomCombineScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomCombineScreen.vert; sourceTree = "<group>"; };
+		A42FE6161771ECE800131949 /* BloomExtractScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomExtractScreen.frag; sourceTree = "<group>"; };
+		A42FE6171771ECE800131949 /* BloomExtractScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomExtractScreen.vert; sourceTree = "<group>"; };
+		A42FE6181771ECE900131949 /* BlurScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlurScreen.frag; sourceTree = "<group>"; };
+		A42FE6191771ECE900131949 /* BlurScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlurScreen.vert; sourceTree = "<group>"; };
+		A42FE6261771EEA600131949 /* material.bloomcombine.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.bloomcombine.screen.xml; sourceTree = "<group>"; };
+		A42FE6271771EEA600131949 /* material.bloomextract.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.bloomextract.screen.xml; sourceTree = "<group>"; };
+		A42FE6281771EEA700131949 /* material.blur.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.blur.screen.xml; sourceTree = "<group>"; };
+		A42FE6291771EEA700131949 /* screen.space.bloomcombine.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomcombine.operation.xml; sourceTree = "<group>"; };
+		A42FE62A1771EEA800131949 /* screen.space.bloomextract.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomextract.operation.xml; sourceTree = "<group>"; };
+		A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.blur.operation.xml; sourceTree = "<group>"; };
 		A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ITemplateLoadingHandler.cpp; path = Sources/ITemplateLoadingHandler.cpp; sourceTree = "<group>"; };
 		A45588CA175628F500802609 /* ITemplateLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITemplateLoadingHandler.h; path = Sources/ITemplateLoadingHandler.h; sourceTree = "<group>"; };
 		A45588D41756406C00802609 /* CLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLight.cpp; path = Sources/CLight.cpp; sourceTree = "<group>"; };
@@ -1068,10 +1086,16 @@
 		A40D47C3174555AF00CA59D0 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A42FE6141771ECE700131949 /* BloomCombineScreen.frag */,
+				A42FE6151771ECE700131949 /* BloomCombineScreen.vert */,
+				A42FE6161771ECE800131949 /* BloomExtractScreen.frag */,
+				A42FE6171771ECE800131949 /* BloomExtractScreen.vert */,
+				A42FE6181771ECE900131949 /* BlurScreen.frag */,
+				A42FE6191771ECE900131949 /* BlurScreen.vert */,
 				A42FE60C1771D6C100131949 /* CommonOutput.vert */,
 				A42FE60D1771D6C100131949 /* CommonOutput.frag */,
-				A49B83911754D3C900AEB4DC /* CommonScreen.frag */,
 				A49B83921754D3C900AEB4DC /* CommonScreen.vert */,
+				A49B83911754D3C900AEB4DC /* CommonScreen.frag */,
 				A40D47C5174555AF00CA59D0 /* CommonModel.vert */,
 				A40D47C4174555AF00CA59D0 /* CommonModel.frag */,
 			);
@@ -1232,6 +1256,12 @@
 		A45588D717564B8B00802609 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A42FE6261771EEA600131949 /* material.bloomcombine.screen.xml */,
+				A42FE6271771EEA600131949 /* material.bloomextract.screen.xml */,
+				A42FE6281771EEA700131949 /* material.blur.screen.xml */,
+				A42FE6291771EEA700131949 /* screen.space.bloomcombine.operation.xml */,
+				A42FE62A1771EEA800131949 /* screen.space.bloomextract.operation.xml */,
+				A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */,
 				A494B8A31768A83C004C9F96 /* material.output.xml */,
 				A494B8A11768A7DD004C9F96 /* material.screen.xml */,
 				21E42A4A1767B3FD00E40437 /* main.transition.xml */,
@@ -2016,6 +2046,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A42FE6201771ED0200131949 /* BloomCombineScreen.frag in Resources */,
+				A42FE6211771ED0200131949 /* BloomCombineScreen.vert in Resources */,
+				A42FE6221771ED0200131949 /* BloomExtractScreen.frag in Resources */,
+				A42FE6231771ED0200131949 /* BloomExtractScreen.vert in Resources */,
+				A42FE6241771ED0200131949 /* BlurScreen.frag in Resources */,
+				A42FE6251771ED0200131949 /* BlurScreen.vert in Resources */,
 				A42FE6101771D7A400131949 /* CommonOutput.vert in Resources */,
 				A42FE6111771D7A400131949 /* CommonOutput.frag in Resources */,
 				A40138B21754E6C20056461B /* CommonScreen.frag in Resources */,
@@ -2143,6 +2179,12 @@
 				21E42A511767B3FD00E40437 /* world.space.operation.xml in Resources */,
 				A494B8A21768A7DD004C9F96 /* material.screen.xml in Resources */,
 				A494B8A41768A83D004C9F96 /* material.output.xml in Resources */,
+				A42FE62C1771EEA900131949 /* material.bloomcombine.screen.xml in Resources */,
+				A42FE62D1771EEA900131949 /* material.bloomextract.screen.xml in Resources */,
+				A42FE62E1771EEA900131949 /* material.blur.screen.xml in Resources */,
+				A42FE62F1771EEA900131949 /* screen.space.bloomcombine.operation.xml in Resources */,
+				A42FE6301771EEA900131949 /* screen.space.bloomextract.operation.xml in Resources */,
+				A42FE6311771EEA900131949 /* screen.space.blur.operation.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2189,8 +2231,6 @@
 				A40D47BC17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp in Sources */,
 				A40D47BF17453AC000CA59D0 /* CTextureSerializer_PVR.cpp in Sources */,
 				A40D47C2174552A300CA59D0 /* CCommonOS_iOS.mm in Sources */,
-				A40D47C6174555AF00CA59D0 /* CommonModel.frag in Sources */,
-				A40D47C7174555AF00CA59D0 /* CommonModel.vert in Sources */,
 				A46A316B17462BA50044643E /* CShaderCommiter_GLSL.cpp in Sources */,
 				A46A316E17462BBF0044643E /* CTextureCommiter_PVR.cpp in Sources */,
 				A46A3171174635210044643E /* CGraphicsContext_iOS.mm in Sources */,
@@ -2224,8 +2264,6 @@
 				210EFD221752678E00DDB182 /* CMeshLoader.cpp in Sources */,
 				A49B83841754C07200AEB4DC /* CModel.cpp in Sources */,
 				A49B838F1754C9A600AEB4DC /* CSceneFabricator.cpp in Sources */,
-				A49B83931754D3C900AEB4DC /* CommonScreen.frag in Sources */,
-				A49B83941754D3C900AEB4DC /* CommonScreen.vert in Sources */,
 				A40138C41754EF070056461B /* CModelTemplateSerializer.cpp in Sources */,
 				A40138C71754EF280056461B /* CParticleEmitterTemplateSerializer.cpp in Sources */,
 				A40138CF1755FE790056461B /* ITemplateLoadingOperation.cpp in Sources */,
@@ -2257,8 +2295,6 @@
 				A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
 				A494B85D17686741004C9F96 /* CGameXcomWorkflow.cpp in Sources */,
 				A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */,
-				A42FE60E1771D6C100131949 /* CommonOutput.vert in Sources */,
-				A42FE60F1771D6C100131949 /* CommonOutput.frag in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
