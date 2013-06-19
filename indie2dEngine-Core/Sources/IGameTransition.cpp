@@ -62,6 +62,11 @@ void IGameTransition::_OnLoaded(void)
     assert(false);
 }
 
+void IGameTransition::_OnGameLoopUpdate(f32 _deltatime)
+{
+    assert(false);
+}
+
 void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
     assert(m_renderMgr != nullptr);

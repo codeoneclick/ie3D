@@ -37,8 +37,14 @@ void CGameXcomInGameTransition::_OnLoaded(void)
     light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));
     Set_Camera(camera);
     Set_Light(light);
-    std::shared_ptr<CModel> model = CreateModel("model.xml");
-    model->Set_Position(glm::vec3(32.0f, 0.0f, 32.0f));
-    InsertModel(model);
+    m_model = CreateModel("model.xml");
+    m_model->Set_Position(glm::vec3(32.0f, 0.0f, 32.0f));
+    InsertModel(m_model);
 }
 
+void CGameXcomInGameTransition::_OnGameLoopUpdate(f32 _deltatime)
+{
+    static float angle = 0.0f;
+    m_model->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
+    angle += 1.0f;
+}

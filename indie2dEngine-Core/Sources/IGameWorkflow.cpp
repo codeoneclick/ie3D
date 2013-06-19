@@ -10,6 +10,7 @@
 #include "IGameTransition.h"
 #include "CTemplateAccessor.h"
 #include "CResourceAccessor.h"
+#include "CGameLoopExecutor.h"
 
 IGameWorkflow::IGameWorkflow(void) :
 m_templateAccessor(std::make_shared<CTemplateAccessor>()),
@@ -42,7 +43,9 @@ void IGameWorkflow::GoToTransition(const std::string &_guid)
     if(m_currentTransition != nullptr)
     {
         m_currentTransition->_OnDeactivate();
+        DisconnectFromGameLoop(m_currentTransition);
     }
     m_currentTransition = m_transitions.find(_guid)->second;
     m_currentTransition->_OnActivate();
+    ConnectToGameLoop(m_currentTransition);
 }

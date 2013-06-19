@@ -13,6 +13,7 @@
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
 #include "ITemplateLoadingHandler.h"
+#include "IGameLoopHandler.h"
 
 class IGraphicsContext;
 class CResourceAccessor;
@@ -21,7 +22,8 @@ class CTemplateAccessor;
 class IGameTransition :
 public CSceneGraph,
 public CSceneFabricator,
-public ITemplateLoadingHandler
+public ITemplateLoadingHandler,
+public IGameLoopHandler
 {
 private:
     
@@ -39,6 +41,8 @@ protected:
     
     virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
     virtual void _OnLoaded(void);
+    
+    virtual void _OnGameLoopUpdate(f32 _deltatime);
     
 public:
     

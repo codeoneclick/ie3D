@@ -967,13 +967,6 @@
 			path = lib_json;
 			sourceTree = "<group>";
 		};
-		21E42A5B17690AE700E40437 /* indieThreadConcurrency  */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "indieThreadConcurrency ";
-			sourceTree = "<group>";
-		};
 		A40138BC1754E9CE0056461B /* Templates */ = {
 			isa = PBXGroup;
 			children = (
@@ -1107,7 +1100,6 @@
 			isa = PBXGroup;
 			children = (
 				A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */,
-				21E42A5B17690AE700E40437 /* indieThreadConcurrency  */,
 				A46A3215174E161E0044643E /* indie2dEngine-Testing */,
 				A4F204B6174241320063AB07 /* indie2dEngine-Game */,
 				A42081641733A9370004729E /* indie2dEngine-Core */,
