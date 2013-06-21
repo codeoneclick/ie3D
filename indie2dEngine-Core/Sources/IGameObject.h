@@ -57,6 +57,7 @@ protected:
     std::shared_ptr<CResourceAccessor> m_resourceFabricator;
     
     bool m_isLoaded;
+    bool m_isLazyListening;
     
     bool _IsBoundBoxInFrustum(void);
     
@@ -68,6 +69,8 @@ protected:
     virtual void _OnUnbind(const std::string& _renderMode);
     
     virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    
+    virtual void _LazyListenRenderMgr(void);
     
 public:
     

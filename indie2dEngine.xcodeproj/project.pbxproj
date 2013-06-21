@@ -189,6 +189,10 @@
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A49B83951754D44800AEB4DC /* CommonScreen.vert in Sources */ = {isa = PBXBuildFile; fileRef = A49B83921754D3C900AEB4DC /* CommonScreen.vert */; };
 		A49B83961754D44A00AEB4DC /* CommonScreen.frag in Sources */ = {isa = PBXBuildFile; fileRef = A49B83911754D3C900AEB4DC /* CommonScreen.frag */; };
+		A4AF4BD51774892F007D4B8C /* particle.emitter.01.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BD41774892E007D4B8C /* particle.emitter.01.xml */; };
+		A4AF4BDF1774899A007D4B8C /* particle.emitter.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */; };
+		A4AF4BE2177489E9007D4B8C /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */; };
+		A4AF4BE3177489E9007D4B8C /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */; };
 		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
 		A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460617450200000D831E /* IResourceCommiter.cpp */; };
 		A4F204A017423C1E0063AB07 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049E17423C1E0063AB07 /* AppDelegate.mm */; };
@@ -615,6 +619,10 @@
 		A49B838E1754C9A500AEB4DC /* CSceneFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSceneFabricator.h; path = Sources/CSceneFabricator.h; sourceTree = "<group>"; };
 		A49B83911754D3C900AEB4DC /* CommonScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.frag; sourceTree = "<group>"; };
 		A49B83921754D3C900AEB4DC /* CommonScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.vert; sourceTree = "<group>"; };
+		A4AF4BD41774892E007D4B8C /* particle.emitter.01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.01.xml; sourceTree = "<group>"; };
+		A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.material.xml; sourceTree = "<group>"; };
+		A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
+		A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
 		A4BE460317450198000D831E /* IResourceSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceSerializer.cpp; path = Sources/IResourceSerializer.cpp; sourceTree = "<group>"; };
 		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
 		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
@@ -1248,6 +1256,8 @@
 		A45588D717564B8B00802609 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */,
+				A4AF4BD41774892E007D4B8C /* particle.emitter.01.xml */,
 				A42FE6261771EEA600131949 /* material.bloomcombine.screen.xml */,
 				A42FE6271771EEA600131949 /* material.bloomextract.screen.xml */,
 				A42FE6281771EEA700131949 /* material.blur.screen.xml */,
@@ -1329,6 +1339,8 @@
 		A46A3212174E10B80044643E /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */,
+				A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */,
 				A45588DC17565EB800802609 /* buildings_atlas.pvr */,
 				A46A3213174E10B80044643E /* texture_01.pvr */,
 			);
@@ -2177,6 +2189,10 @@
 				A42FE62F1771EEA900131949 /* screen.space.bloomcombine.operation.xml in Resources */,
 				A42FE6301771EEA900131949 /* screen.space.bloomextract.operation.xml in Resources */,
 				A42FE6311771EEA900131949 /* screen.space.blur.operation.xml in Resources */,
+				A4AF4BD51774892F007D4B8C /* particle.emitter.01.xml in Resources */,
+				A4AF4BDF1774899A007D4B8C /* particle.emitter.material.xml in Resources */,
+				A4AF4BE2177489E9007D4B8C /* particle.emitter.01.pvr in Resources */,
+				A4AF4BE3177489E9007D4B8C /* particle.emitter.02.pvr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

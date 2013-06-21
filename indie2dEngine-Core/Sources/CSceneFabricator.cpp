@@ -91,10 +91,15 @@ void CSceneFabricator::DeleteBillboard(std::shared_ptr<CBillboard> _billboard)
 
 std::shared_ptr<CParticleEmitter> CSceneFabricator::CreateParticleEmitter(const std::string& _filename)
 {
-    return nullptr;
+    assert(m_resourceAccessor != nullptr);
+    std::shared_ptr<CParticleEmitter> particleEmitter = std::make_shared<CParticleEmitter>(m_resourceAccessor);
+    assert(m_templateAccessor != nullptr);
+    m_templateAccessor->LoadParticleEmitterTemplate(_filename, particleEmitter);
+    m_gameObjectsContainer.insert(particleEmitter);
+    return particleEmitter;
 }
 
 void CSceneFabricator::DeleteParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter)
 {
-    
+    m_gameObjectsContainer.erase(_particleEmitter);
 }

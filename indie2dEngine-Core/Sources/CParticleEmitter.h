@@ -11,15 +11,42 @@
 
 #include "IGameObject.h"
 
+struct SParticleEmitterTemplate;
+
+struct SParticle
+{
+    glm::vec3 m_position;
+    glm::vec3 m_velocity;
+    glm::vec2 m_size;
+    glm::u8vec4 m_color;
+    f32 m_timestamp;
+};
+
 class CParticleEmitter : public IGameObject
 {
 private:
     
 protected:
     
+    std::shared_ptr<SParticleEmitterTemplate> m_settings;
+    SParticle* m_particles;
+    f32 m_lastEmittTimestamp;
+    f32 m_lastParticleEmittTime;
+    
+    void _EmittParticle(ui32 _index);
+    
+    void _OnSceneUpdate(f32 _deltatime);
+    
+    i32 _OnQueuePosition(void);
+    void _OnBind(const std::string& _renderMode);
+    void _OnDraw(const std::string& _renderMode);
+    void _OnUnbind(const std::string& _renderMode);
+    
+    void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    
 public:
     
-    CParticleEmitter(void);
+    CParticleEmitter(std::shared_ptr<CResourceAccessor> _resourceFabricator);
     ~CParticleEmitter(void);
 };
 

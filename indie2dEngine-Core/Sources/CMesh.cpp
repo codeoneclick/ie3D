@@ -34,6 +34,25 @@ m_indexBuffer(nullptr)
     
 }
 
+CMesh::CMesh(const std::string& _guid, std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer) :
+IResource(E_RESOURCE_TYPE_MESH, _guid),
+m_header(std::make_shared<CMeshHeader>()),
+m_vertexBuffer(_vertexBuffer),
+m_indexBuffer(_indexBuffer)
+{
+    assert(_vertexBuffer != nullptr);
+    assert(m_indexBuffer != nullptr);
+    m_header->m_numVertexes = m_vertexBuffer->Get_NumVertexes();
+    m_header->m_numIndexes = m_indexBuffer->Get_NumIndexes();
+    m_header->m_vertexData = m_vertexBuffer->Lock();
+    m_header->m_indexData = m_indexBuffer->Lock();
+    m_header->m_maxBound = glm::vec3(0.0f);
+    m_header->m_minBound = glm::vec3(0.0f);
+    
+    m_isLoaded = true;
+    m_isLinked = true;
+}
+
 CMesh::~CMesh(void)
 {
     

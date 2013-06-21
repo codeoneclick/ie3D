@@ -11,6 +11,7 @@
 #include "CCamera.h"
 #include "CLight.h"
 #include "CModel.h"
+#include "CParticleEmitter.h"
 
 CGameXcomInGameTransition::CGameXcomInGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor) :
 IGameTransition(_filename, _graphicsContext, _resourceAccessor, _templateAccessor)
@@ -39,7 +40,11 @@ void CGameXcomInGameTransition::_OnLoaded(void)
     Set_Light(light);
     m_model = CreateModel("model.xml");
     m_model->Set_Position(glm::vec3(32.0f, 0.0f, 32.0f));
-    InsertModel(m_model);
+    //InsertModel(m_model);
+    
+    std::shared_ptr<CParticleEmitter> particleEmitter = CreateParticleEmitter("particle.emitter.01.xml");
+    particleEmitter->Set_Position(glm::vec3(32.0f, 0.0f, 32.0f));
+    InsertParticleEmitter(particleEmitter);    
 }
 
 void CGameXcomInGameTransition::_OnGameLoopUpdate(f32 _deltatime)

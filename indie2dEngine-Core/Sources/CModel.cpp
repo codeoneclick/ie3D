@@ -28,7 +28,6 @@ CModel::~CModel(void)
 
 void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
-    std::cout<<"[CModel::_OnTemplateLoaded]"<<std::endl;
     std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(_template);
     
     assert(m_resourceFabricator != nullptr);

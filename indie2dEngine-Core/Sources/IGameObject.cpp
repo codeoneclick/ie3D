@@ -27,7 +27,8 @@ m_camera(nullptr),
 m_light(nullptr),
 m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
-m_isLoaded(false)
+m_isLoaded(false),
+m_isLazyListening(false)
 {
 
 }
@@ -80,6 +81,16 @@ void IGameObject::ListenRenderMgr(bool _value)
         _value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
         m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
     }
+    m_isLazyListening = _value && !m_materials.size();
+}
+void IGameObject::_LazyListenRenderMgr(void)
+{
+    assert(m_renderMgr != nullptr);
+    for(auto iterator : m_materials)
+    {
+        m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
+    }
+    m_isLazyListening = false;
 }
 
 void IGameObject::ListenSceneUpdateMgr(bool _value)

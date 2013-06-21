@@ -137,6 +137,7 @@ protected:
 public:
     
     CMesh(const std::string& _guid);
+    CMesh(const std::string& _guid, std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer);
     ~CMesh(void);
     
     inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)

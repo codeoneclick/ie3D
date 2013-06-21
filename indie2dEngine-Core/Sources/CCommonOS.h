@@ -16,4 +16,8 @@ std::string Get_BundlePath(void);
 ui32 Get_ScreenWidth(void);
 ui32 Get_ScreenHeight(void);
 
+ui64 Get_TickCount(void);
+
+f32 Get_Random(f32 _minValue, f32 _maxValue);
+
 #endif 
