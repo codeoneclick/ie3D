@@ -31,19 +31,19 @@ void CGameXcomInGameTransition::_OnLoaded(void)
                                                    1024.0f,
                                                    glm::vec4(0.0f, 0.0f, Get_ScreenWidth(), Get_ScreenHeight()));
     camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
-    camera->Set_LookAt(glm::vec3(32.0f, 0.0f, 32.0f));
-    camera->Set_Distance(32.0f);
-    camera->Set_Height(8.0f);
+    camera->Set_LookAt(glm::vec3(16.0f, 4.0f, 16.0f));
+    camera->Set_Distance(16.0f);
+    camera->Set_Height(16.0f);
     std::shared_ptr<CLight> light = CreateLight();
     light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));
     Set_Camera(camera);
     Set_Light(light);
     m_model = CreateModel("model.xml");
-    m_model->Set_Position(glm::vec3(32.0f, 0.0f, 32.0f));
-    //InsertModel(m_model);
+    m_model->Set_Position(glm::vec3(16.0f, 0.0f, 16.0f));
+    InsertModel(m_model);
     
     std::shared_ptr<CParticleEmitter> particleEmitter = CreateParticleEmitter("particle.emitter.01.xml");
-    particleEmitter->Set_Position(glm::vec3(32.0f, 0.0f, 32.0f));
+    particleEmitter->Set_Position(glm::vec3(16.0f, 2.0f, 16.0f));
     InsertParticleEmitter(particleEmitter);    
 }
 

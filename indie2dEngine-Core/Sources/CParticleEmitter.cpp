@@ -226,9 +226,9 @@ void CParticleEmitter::_OnDraw(const std::string& _renderMode)
         material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         
-        material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->Get_Shader()->Set_Vector3(m_light->Get_Position(), E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION);
-        material->Get_Shader()->Set_Vector4(glm::vec4(0.0f, 1.0f, 0.0f, FLT_MAX), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
+        //material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
+        //material->Get_Shader()->Set_Vector3(m_light->Get_Position(), E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION);
+        //material->Get_Shader()->Set_Vector4(glm::vec4(0.0f, 1.0f, 0.0f, FLT_MAX), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         
         IGameObject::_OnDraw(_renderMode);
     }
