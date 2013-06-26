@@ -44,12 +44,16 @@ void CGameXcomInGameTransition::_OnLoaded(void)
     
     std::shared_ptr<CParticleEmitter> particleEmitter = CreateParticleEmitter("particle.emitter.01.xml");
     particleEmitter->Set_Position(glm::vec3(16.0f, 2.0f, 16.0f));
-    InsertParticleEmitter(particleEmitter);    
+    InsertParticleEmitter(particleEmitter);
+    m_isLoaded = true;
 }
 
 void CGameXcomInGameTransition::_OnGameLoopUpdate(f32 _deltatime)
 {
-    //static float angle = 0.0f;
-    //m_model->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
-    //angle += 1.0f;
+    if(m_isLoaded)
+    {
+        static float angle = 0.0f;
+        m_model->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
+        angle += 1.0f;
+    }
 }

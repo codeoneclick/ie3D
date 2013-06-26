@@ -32,6 +32,7 @@ protected:
     friend class IGameWorkflow;
     
     std::string m_guid;
+    bool m_isLoaded;
     
     virtual void _OnRegistered(void);
     virtual void _OnUnregistered(void);

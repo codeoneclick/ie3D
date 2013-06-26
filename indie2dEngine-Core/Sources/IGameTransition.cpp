@@ -23,7 +23,8 @@
 
 IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor) :
 CSceneFabricator(_templateAccessor, _resourceAccessor),
-m_guid(_filename)
+m_guid(_filename),
+m_isLoaded(false)
 {
     assert(_graphicsContext != nullptr);
     m_renderMgr = std::make_shared<CRenderMgr>(_graphicsContext);
