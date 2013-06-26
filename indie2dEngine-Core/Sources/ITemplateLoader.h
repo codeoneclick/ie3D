@@ -18,8 +18,6 @@ private:
     
 protected:
     
-    virtual void _Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler) = 0;
-    
 public:
     
     ITemplateLoader(void);

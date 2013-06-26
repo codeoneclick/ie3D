@@ -21,16 +21,20 @@ CGameTransitionTemplateLoader::~CGameTransitionTemplateLoader(void)
     
 }
 
-void CGameTransitionTemplateLoader::_Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
-{
-    std::shared_ptr<CGameTransitionTemplateLoadingOperation> gameTransitionTemplateLoadingOperation = std::make_shared<CGameTransitionTemplateLoadingOperation>();
-    std::shared_ptr<SGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<SGameTransitionTemplate>(gameTransitionTemplateLoadingOperation->Serialize(_filename));
-    assert(gameTransitionTemplate != nullptr);
-    assert(_handler != nullptr);
-    _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(gameTransitionTemplate);
-}
-
 void CGameTransitionTemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
 {
-    std::async(std::launch::async, &CGameTransitionTemplateLoader::_Load, this, _filename, _handler);
+    std::function<void(std::string, std::shared_ptr<ITemplateLoadingHandler>)> function = [](std::string _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
+    {
+        std::shared_ptr<CGameTransitionTemplateLoadingOperation> gameTransitionTemplateLoadingOperation = std::make_shared<CGameTransitionTemplateLoadingOperation>();
+        std::shared_ptr<SGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<SGameTransitionTemplate>(gameTransitionTemplateLoadingOperation->Serialize(_filename));
+        assert(gameTransitionTemplate != nullptr);
+        assert(_handler != nullptr);
+        
+        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SGameTransitionTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SGameTransitionTemplate> _template)
+        {
+             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
+        };
+        gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function, _handler, gameTransitionTemplate);
+    };
+    gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function, _filename, _handler);
 }

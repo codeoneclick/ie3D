@@ -91,6 +91,7 @@
 		A42FE62F1771EEA900131949 /* screen.space.bloomcombine.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6291771EEA700131949 /* screen.space.bloomcombine.operation.xml */; };
 		A42FE6301771EEA900131949 /* screen.space.bloomextract.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE62A1771EEA800131949 /* screen.space.bloomextract.operation.xml */; };
 		A42FE6311771EEA900131949 /* screen.space.blur.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */; };
+		A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A437A9EC177B424000160BD7 /* libgcdpp.a */; };
 		A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		A45588D61756406C00802609 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
 		A45588DA17564B8B00802609 /* material.xml in Resources */ = {isa = PBXBuildFile; fileRef = A45588D817564B8B00802609 /* material.xml */; };
@@ -185,7 +186,6 @@
 		A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */; };
 		A494B8A21768A7DD004C9F96 /* material.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A11768A7DD004C9F96 /* material.screen.xml */; };
 		A494B8A41768A83D004C9F96 /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A31768A83C004C9F96 /* material.output.xml */; };
-		A494B93F176B2625004C9F96 /* libindieThreadConcurrency.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A494B932176B1FAC004C9F96 /* libindieThreadConcurrency.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		A49B83841754C07200AEB4DC /* CModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B83821754C07200AEB4DC /* CModel.cpp */; };
 		A49B838F1754C9A600AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
@@ -320,6 +320,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A437A9EB177B424000160BD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A494B8F2176B1E3D004C9F96;
+			remoteInfo = gcdpp;
+		};
+		A437A9ED177B429A00160BD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A494B8F1176B1E3D004C9F96;
+			remoteInfo = gcdpp;
+		};
 		A46A32AB174E163E0044643E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A46A324F174E161F0044643E /* libGoogleUnitTest.xcodeproj */;
@@ -375,20 +389,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 40C848F9101A209C0083642A;
 			remoteInfo = "libGoogleUnitTest-static";
-		};
-		A494B931176B1FAC004C9F96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A494B8F2176B1E3D004C9F96;
-			remoteInfo = indieThreadConcurrency;
-		};
-		A494B93D176B261A004C9F96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A494B8F1176B1E3D004C9F96;
-			remoteInfo = indieThreadConcurrency;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -505,6 +505,7 @@
 		A42FE6291771EEA700131949 /* screen.space.bloomcombine.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomcombine.operation.xml; sourceTree = "<group>"; };
 		A42FE62A1771EEA800131949 /* screen.space.bloomextract.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomextract.operation.xml; sourceTree = "<group>"; };
 		A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.blur.operation.xml; sourceTree = "<group>"; };
+		A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gcdpp.xcodeproj; path = ../gcdpp/gcdpp.xcodeproj; sourceTree = "<group>"; };
 		A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ITemplateLoadingHandler.cpp; path = Sources/ITemplateLoadingHandler.cpp; sourceTree = "<group>"; };
 		A45588CA175628F500802609 /* ITemplateLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITemplateLoadingHandler.h; path = Sources/ITemplateLoadingHandler.h; sourceTree = "<group>"; };
 		A45588D41756406C00802609 /* CLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLight.cpp; path = Sources/CLight.cpp; sourceTree = "<group>"; };
@@ -616,7 +617,6 @@
 		A494B86717686776004C9F96 /* CGameXcomInGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameXcomInGameTransition.h; path = "indie2dEngine-Game/Source/CGameXcomInGameTransition.h"; sourceTree = "<group>"; };
 		A494B8A11768A7DD004C9F96 /* material.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.screen.xml; sourceTree = "<group>"; };
 		A494B8A31768A83C004C9F96 /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
-		A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = indieThreadConcurrency.xcodeproj; path = indieThreadConcurrency/indieThreadConcurrency.xcodeproj; sourceTree = "<group>"; };
 		A49B83821754C07200AEB4DC /* CModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModel.cpp; path = Sources/CModel.cpp; sourceTree = "<group>"; };
 		A49B83831754C07200AEB4DC /* CModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModel.h; path = Sources/CModel.h; sourceTree = "<group>"; };
 		A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneFabricator.cpp; path = Sources/CSceneFabricator.cpp; sourceTree = "<group>"; };
@@ -892,7 +892,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A494B93F176B2625004C9F96 /* libindieThreadConcurrency.a in Frameworks */,
+				A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */,
 				A45588F51757602A00802609 /* libz.dylib in Frameworks */,
 				A45588F31757600500802609 /* Security.framework in Frameworks */,
 				A45588F117575FFC00802609 /* CFNetwork.framework in Frameworks */,
@@ -1113,7 +1113,7 @@
 		A42081521733A9370004729E = {
 			isa = PBXGroup;
 			children = (
-				A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */,
+				A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */,
 				A46A3215174E161E0044643E /* indie2dEngine-Testing */,
 				A4F204B6174241320063AB07 /* indie2dEngine-Game */,
 				A42081641733A9370004729E /* indie2dEngine-Core */,
@@ -1257,6 +1257,14 @@
 				A46A31FD174D21130044643E /* pvrtextool */,
 			);
 			name = Libraries;
+			sourceTree = "<group>";
+		};
+		A437A9E8177B423F00160BD7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A437A9EC177B424000160BD7 /* libgcdpp.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A45588D717564B8B00802609 /* Templates */ = {
@@ -1454,14 +1462,6 @@
 				A418527317609D9C002FC042 /* IGameTransition.cpp */,
 			);
 			name = Transitions;
-			sourceTree = "<group>";
-		};
-		A494B92E176B1FAB004C9F96 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A494B932176B1FAC004C9F96 /* libindieThreadConcurrency.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A494D36417392D3600228936 /* Render Managment */ = {
@@ -1930,7 +1930,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A494B93E176B261A004C9F96 /* PBXTargetDependency */,
+				A437A9EE177B429A00160BD7 /* PBXTargetDependency */,
 			);
 			name = "indie2dEngine-Core";
 			productName = "indie2dEngine-Core";
@@ -1976,8 +1976,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A494B92E176B1FAB004C9F96 /* Products */;
-					ProjectRef = A494B92D176B1FAB004C9F96 /* indieThreadConcurrency.xcodeproj */;
+					ProductGroup = A437A9E8177B423F00160BD7 /* Products */;
+					ProjectRef = A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */;
 				},
 				{
 					ProductGroup = A46A32A0174E163E0044643E /* Products */;
@@ -1993,6 +1993,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		A437A9EC177B424000160BD7 /* libgcdpp.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libgcdpp.a;
+			remoteRef = A437A9EB177B424000160BD7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A46A32AC174E163E0044643E /* gtest.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2040,13 +2047,6 @@
 			fileType = "compiled.mach-o.executable";
 			path = "sample1_unittest-static";
 			remoteRef = A46A32B7174E163E0044643E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A494B932176B1FAC004C9F96 /* libindieThreadConcurrency.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libindieThreadConcurrency.a;
-			remoteRef = A494B931176B1FAC004C9F96 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2379,15 +2379,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A437A9EE177B429A00160BD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = gcdpp;
+			targetProxy = A437A9ED177B429A00160BD7 /* PBXContainerItemProxy */;
+		};
 		A46A32E4174E180B0044643E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "libGoogleUnitTest-static";
 			targetProxy = A46A32E3174E180B0044643E /* PBXContainerItemProxy */;
-		};
-		A494B93E176B261A004C9F96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = indieThreadConcurrency;
-			targetProxy = A494B93D176B261A004C9F96 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2460,7 +2460,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
-					"\"$(SRCROOT)/indieThreadConcurrency\"",
+					"\"$(SRCROOT)/../gcdpp/Headers\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -2483,7 +2483,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
-					"\"$(SRCROOT)/indieThreadConcurrency\"",
+					"\"$(SRCROOT)/../gcdpp/Headers\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;

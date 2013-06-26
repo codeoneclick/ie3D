@@ -34,8 +34,7 @@
 
 #include <pugixml/pugixml.hpp>
 
-#include "thread_concurrency_common.h"
-#include "thread_concurrency.h"
+#include "gcdppLib.h"
 
 #ifdef __APPLE__
 

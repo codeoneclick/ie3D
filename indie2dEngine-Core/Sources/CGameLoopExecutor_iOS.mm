@@ -61,7 +61,7 @@
 - (void)onUpdate:(CADisplayLink*)displayLink
 {
     assert(self.m_gameLoopExecutor != nullptr);
-    thread_concurrency_main_queue_update();
+    gcdpp::impl::UpdateMainQueue();
     self.m_gameLoopExecutor->OnGameLoopUpdate();
 }
 

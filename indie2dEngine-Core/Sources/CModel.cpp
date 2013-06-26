@@ -60,6 +60,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         }
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
+    IGameObject::_LazyListenRenderMgr();
     m_isLoaded = true;
 }
 

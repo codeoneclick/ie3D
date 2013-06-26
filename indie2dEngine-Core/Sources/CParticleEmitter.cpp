@@ -36,74 +36,69 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_settings = std::static_pointer_cast<SParticleEmitterTemplate>(_template);
     assert(m_resourceFabricator != nullptr);
     
-    std::function<void(void)> function = [this](void)
-    {
-        m_particles = new SParticle[m_settings->m_numParticles];
-        std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(m_settings->m_numParticles * 4, GL_STREAM_DRAW);
-        SVertex* vertexData = vertexBuffer->Lock();
-        
-        for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
-        {
-            m_particles[i].m_size = glm::vec2(0.0f, 0.0f);
-            m_particles[i].m_color = glm::u8vec4(0, 0, 0, 0);
-            
-            vertexData[i * 4 + 0].m_texcoord = glm::vec2( 0.0f,  0.0f);
-            vertexData[i * 4 + 1].m_texcoord = glm::vec2( 1.0f,  0.0f);
-            vertexData[i * 4 + 2].m_texcoord = glm::vec2( 1.0f,  1.0f);
-            vertexData[i * 4 + 3].m_texcoord = glm::vec2( 0.0f,  1.0f);
-        }
-        vertexBuffer->Unlock();
-        
-        std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(m_settings->m_numParticles * 6, GL_STREAM_DRAW);
-        ui16* indexData = indexBuffer->Lock();
-        
-        for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
-        {
-            indexData[i * 6 + 0] = static_cast<ui16>(i * 4 + 0);
-            indexData[i * 6 + 1] = static_cast<ui16>(i * 4 + 1);
-            indexData[i * 6 + 2] = static_cast<ui16>(i * 4 + 2);
-            
-            indexData[i * 6 + 3] = static_cast<ui16>(i * 4 + 0);
-            indexData[i * 6 + 4] = static_cast<ui16>(i * 4 + 2);
-            indexData[i * 6 + 5] = static_cast<ui16>(i * 4 + 3);
-        }
-        
-        indexBuffer->Unlock();
-        
-        m_mesh = std::make_shared<CMesh>("particle.emitter", vertexBuffer, indexBuffer);
-        assert(m_mesh != nullptr);
-        
-        for(auto materialTemplate : m_settings->m_materialsTemplates)
-        {
-            std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
-                                                                                 materialTemplate->m_shaderTemplate->m_fsFilename);
-            assert(shader != nullptr);
-            
-            std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
-            material->Set_RenderState(E_RENDER_STATE_CULL_MODE, materialTemplate->m_isCullFace);
-            material->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, materialTemplate->m_isDepthTest);
-            material->Set_RenderState(E_RENDER_STATE_DEPTH_MASK, materialTemplate->m_isDepthMask);
-            material->Set_RenderState(E_RENDER_STATE_BLEND_MODE, materialTemplate->m_isBlend);
-            
-            material->Set_CullFaceMode(materialTemplate->m_cullFaceMode);
-            material->Set_BlendFunctionSource(materialTemplate->m_blendFunctionSource);
-            material->Set_BlendFunctionDest(materialTemplate->m_blendFunctionDestination);
-            
-            for(auto textureTemplate : materialTemplate->m_texturesTemplates)
-            {
-                std::shared_ptr<CTexture> texture = m_resourceFabricator->CreateTexture(textureTemplate->m_filename);
-                assert(texture != nullptr);
-                texture->Set_Wrap(textureTemplate->m_wrap);
-                assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);
-                material->Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->m_sampler));
-            }
-            m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
-        }
-        IGameObject::_LazyListenRenderMgr();
-        m_isLoaded = true;
-    };
+    m_particles = new SParticle[m_settings->m_numParticles];
+    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(m_settings->m_numParticles * 4, GL_STREAM_DRAW);
+    SVertex* vertexData = vertexBuffer->Lock();
     
-    thread_concurrency_dispatch(get_thread_concurrency_main_queue(), function);
+    for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
+    {
+        m_particles[i].m_size = glm::vec2(0.0f, 0.0f);
+        m_particles[i].m_color = glm::u8vec4(0, 0, 0, 0);
+        
+        vertexData[i * 4 + 0].m_texcoord = glm::vec2( 0.0f,  0.0f);
+        vertexData[i * 4 + 1].m_texcoord = glm::vec2( 1.0f,  0.0f);
+        vertexData[i * 4 + 2].m_texcoord = glm::vec2( 1.0f,  1.0f);
+        vertexData[i * 4 + 3].m_texcoord = glm::vec2( 0.0f,  1.0f);
+    }
+    vertexBuffer->Unlock();
+    
+    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(m_settings->m_numParticles * 6, GL_STREAM_DRAW);
+    ui16* indexData = indexBuffer->Lock();
+    
+    for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
+    {
+        indexData[i * 6 + 0] = static_cast<ui16>(i * 4 + 0);
+        indexData[i * 6 + 1] = static_cast<ui16>(i * 4 + 1);
+        indexData[i * 6 + 2] = static_cast<ui16>(i * 4 + 2);
+        
+        indexData[i * 6 + 3] = static_cast<ui16>(i * 4 + 0);
+        indexData[i * 6 + 4] = static_cast<ui16>(i * 4 + 2);
+        indexData[i * 6 + 5] = static_cast<ui16>(i * 4 + 3);
+    }
+    
+    indexBuffer->Unlock();
+    
+    m_mesh = std::make_shared<CMesh>("particle.emitter", vertexBuffer, indexBuffer);
+    assert(m_mesh != nullptr);
+    
+    for(auto materialTemplate : m_settings->m_materialsTemplates)
+    {
+        std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
+                                                                             materialTemplate->m_shaderTemplate->m_fsFilename);
+        assert(shader != nullptr);
+        
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
+        material->Set_RenderState(E_RENDER_STATE_CULL_MODE, materialTemplate->m_isCullFace);
+        material->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, materialTemplate->m_isDepthTest);
+        material->Set_RenderState(E_RENDER_STATE_DEPTH_MASK, materialTemplate->m_isDepthMask);
+        material->Set_RenderState(E_RENDER_STATE_BLEND_MODE, materialTemplate->m_isBlend);
+        
+        material->Set_CullFaceMode(materialTemplate->m_cullFaceMode);
+        material->Set_BlendFunctionSource(materialTemplate->m_blendFunctionSource);
+        material->Set_BlendFunctionDest(materialTemplate->m_blendFunctionDestination);
+        
+        for(auto textureTemplate : materialTemplate->m_texturesTemplates)
+        {
+            std::shared_ptr<CTexture> texture = m_resourceFabricator->CreateTexture(textureTemplate->m_filename);
+            assert(texture != nullptr);
+            texture->Set_Wrap(textureTemplate->m_wrap);
+            assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);
+            material->Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->m_sampler));
+        }
+        m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
+    }
+    IGameObject::_LazyListenRenderMgr();
+    m_isLoaded = true;
 }
 
 void CParticleEmitter::_EmittParticle(ui32 _index)

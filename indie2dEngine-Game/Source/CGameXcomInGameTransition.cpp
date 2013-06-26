@@ -49,7 +49,7 @@ void CGameXcomInGameTransition::_OnLoaded(void)
 
 void CGameXcomInGameTransition::_OnGameLoopUpdate(f32 _deltatime)
 {
-    static float angle = 0.0f;
-    m_model->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
-    angle += 1.0f;
+    //static float angle = 0.0f;
+    //m_model->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
+    //angle += 1.0f;
 }

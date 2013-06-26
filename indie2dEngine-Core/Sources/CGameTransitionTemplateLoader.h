@@ -18,8 +18,6 @@ private:
     
 protected:
     
-    void _Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
-    
 public:
     
     CGameTransitionTemplateLoader(void);
