@@ -52,8 +52,8 @@ typedef signed short i16;
 typedef unsigned short ui16;
 typedef signed int i32;
 typedef unsigned int ui32;
-typedef unsigned long long ui64;
 typedef long long i64;
+typedef unsigned long long ui64;
 typedef float f32;
 
 #define MAX_VALUE(a,b) (((a) > (b)) ? (a) : (b))

@@ -18,6 +18,7 @@
 #include "CMesh.h"
 #include "ITemplate.h"
 #include "CCommonOS.h"
+#include "CTimer.h"
 
 CParticleEmitter::CParticleEmitter(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 IGameObject(_resourceFabricator)
@@ -109,7 +110,7 @@ void CParticleEmitter::_EmittParticle(ui32 _index)
     m_particles[_index].m_size = m_settings->m_startSize;
     m_particles[_index].m_color = m_settings->m_startColor;
     
-    m_particles[_index].m_timestamp = Get_TickCount();
+    m_particles[_index].m_timestamp = CTimer::Get_TickCount();
     
     f32 horizontalVelocity = glm::mix(m_settings->m_minHorizontalVelocity, m_settings->m_maxHorizontalVelocity, Get_Random(0.0f, 1.0f));
     
@@ -129,7 +130,7 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
         IGameObject::_OnSceneUpdate(_deltatime);
         
         SVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock();
-        f32 currentTime = Get_TickCount();
+        f32 currentTime = CTimer::Get_TickCount();
         
         for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
         {

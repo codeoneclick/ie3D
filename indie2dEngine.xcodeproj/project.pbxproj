@@ -74,7 +74,6 @@
 		A420815F1733A9370004729E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A420815E1733A9370004729E /* UIKit.framework */; };
 		A42081611733A9370004729E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		A42081631733A9370004729E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081621733A9370004729E /* CoreGraphics.framework */; };
-		A42081861733AAA10004729E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081831733AAA10004729E /* Default-568h@2x.png */; };
 		A42081871733AAA10004729E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081841733AAA10004729E /* Default.png */; };
 		A42081881733AAA10004729E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A42081851733AAA10004729E /* Default@2x.png */; };
 		A42FE6101771D7A400131949 /* CommonOutput.vert in Resources */ = {isa = PBXBuildFile; fileRef = A42FE60C1771D6C100131949 /* CommonOutput.vert */; };
@@ -191,6 +190,9 @@
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A49B83951754D44800AEB4DC /* CommonScreen.vert in Sources */ = {isa = PBXBuildFile; fileRef = A49B83921754D3C900AEB4DC /* CommonScreen.vert */; };
 		A49B83961754D44A00AEB4DC /* CommonScreen.frag in Sources */ = {isa = PBXBuildFile; fileRef = A49B83911754D3C900AEB4DC /* CommonScreen.frag */; };
+		A4AB15B2177C4E1B00FFC12E /* CFPSCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */; };
+		A4AB15BD177C73D400FFC12E /* CTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15BB177C73D400FFC12E /* CTimer.cpp */; };
+		A4AB15C1177C866700FFC12E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15C0177C866700FFC12E /* Default-568h@2x.png */; };
 		A4AF4BD51774892F007D4B8C /* particle.emitter.01.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BD41774892E007D4B8C /* particle.emitter.01.xml */; };
 		A4AF4BDF1774899A007D4B8C /* particle.emitter.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */; };
 		A4AF4BE2177489E9007D4B8C /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */; };
@@ -486,7 +488,6 @@
 		A420815E1733A9370004729E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A42081601733A9370004729E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A42081621733A9370004729E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A42081831733AAA10004729E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Bundle/System/Default-568h@2x.png"; sourceTree = "<group>"; };
 		A42081841733AAA10004729E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Bundle/System/Default.png; sourceTree = "<group>"; };
 		A42081851733AAA10004729E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Bundle/System/Default@2x.png"; sourceTree = "<group>"; };
 		A420818C1733AAB40004729E /* indie2dEngine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "indie2dEngine-Info.plist"; path = "Support/indie2dEngine-Info.plist"; sourceTree = "<group>"; };
@@ -623,6 +624,11 @@
 		A49B838E1754C9A500AEB4DC /* CSceneFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSceneFabricator.h; path = Sources/CSceneFabricator.h; sourceTree = "<group>"; };
 		A49B83911754D3C900AEB4DC /* CommonScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.frag; sourceTree = "<group>"; };
 		A49B83921754D3C900AEB4DC /* CommonScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.vert; sourceTree = "<group>"; };
+		A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFPSCounter.cpp; path = Sources/CFPSCounter.cpp; sourceTree = "<group>"; };
+		A4AB15B1177C4E1B00FFC12E /* CFPSCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFPSCounter.h; path = Sources/CFPSCounter.h; sourceTree = "<group>"; };
+		A4AB15BB177C73D400FFC12E /* CTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTimer.cpp; path = Sources/CTimer.cpp; sourceTree = "<group>"; };
+		A4AB15BC177C73D400FFC12E /* CTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimer.h; path = Sources/CTimer.h; sourceTree = "<group>"; };
+		A4AB15C0177C866700FFC12E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Bundle/System/Default-568h@2x.png"; sourceTree = "<group>"; };
 		A4AF4BD41774892E007D4B8C /* particle.emitter.01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.01.xml; sourceTree = "<group>"; };
 		A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.material.xml; sourceTree = "<group>"; };
 		A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
@@ -1192,7 +1198,7 @@
 		A42081821733AA930004729E /* System */ = {
 			isa = PBXGroup;
 			children = (
-				A42081831733AAA10004729E /* Default-568h@2x.png */,
+				A4AB15C0177C866700FFC12E /* Default-568h@2x.png */,
 				A42081841733AAA10004729E /* Default.png */,
 				A42081851733AAA10004729E /* Default@2x.png */,
 			);
@@ -1233,6 +1239,10 @@
 				A4F204A317423C310063AB07 /* HEnums.h */,
 				A40D47C1174552A300CA59D0 /* CCommonOS.h */,
 				A40D47C0174552A300CA59D0 /* CCommonOS_iOS.mm */,
+				A4AB15B1177C4E1B00FFC12E /* CFPSCounter.h */,
+				A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */,
+				A4AB15BC177C73D400FFC12E /* CTimer.h */,
+				A4AB15BB177C73D400FFC12E /* CTimer.cpp */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -2070,7 +2080,6 @@
 				A40138B31754E6C20056461B /* CommonScreen.vert in Resources */,
 				A40D47C8174557C500CA59D0 /* CommonModel.frag in Resources */,
 				A40D47C9174557C500CA59D0 /* CommonModel.vert in Resources */,
-				A42081861733AAA10004729E /* Default-568h@2x.png in Resources */,
 				A42081871733AAA10004729E /* Default.png in Resources */,
 				A42081881733AAA10004729E /* Default@2x.png in Resources */,
 				A4F205B9174287450063AB07 /* func_common.inl in Resources */,
@@ -2201,6 +2210,7 @@
 				A4AF4BDF1774899A007D4B8C /* particle.emitter.material.xml in Resources */,
 				A4AF4BE2177489E9007D4B8C /* particle.emitter.01.pvr in Resources */,
 				A4AF4BE3177489E9007D4B8C /* particle.emitter.02.pvr in Resources */,
+				A4AB15C1177C866700FFC12E /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2311,6 +2321,8 @@
 				A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
 				A494B85D17686741004C9F96 /* CGameXcomWorkflow.cpp in Sources */,
 				A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */,
+				A4AB15B2177C4E1B00FFC12E /* CFPSCounter.cpp in Sources */,
+				A4AB15BD177C73D400FFC12E /* CTimer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

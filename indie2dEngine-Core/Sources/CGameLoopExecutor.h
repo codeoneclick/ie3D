@@ -12,6 +12,8 @@
 #include "HCommon.h"
 #include "IGameLoopHandler.h"
 
+class CFPSCounter;
+
 class CGameLoopExecutor
 {
 private:
@@ -19,6 +21,7 @@ private:
 protected:
     
     std::set<std::shared_ptr<IGameLoopHandler> > m_handlers;
+    std::shared_ptr<CFPSCounter> m_fpsCounter;
     
 public:
     
@@ -29,6 +32,12 @@ public:
     void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
   
     void OnGameLoopUpdate();
+    
+    inline std::shared_ptr<CFPSCounter> Get_FPSCounter(void)
+    {
+        assert(m_fpsCounter != nullptr);
+        return m_fpsCounter;
+    };
 };
 
 #ifdef __APPLE__
@@ -42,5 +51,8 @@ void Run(void);
 
 #endif
 
+ui32 Get_FramesPerSecond(void);
+ui32 Get_TrianglesPerSecond(void);
+void Inc_TrianglesCount(ui32 _value);
 
-#endif 
+#endif

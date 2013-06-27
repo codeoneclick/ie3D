@@ -27,7 +27,6 @@ private:
     std::map<std::string, std::shared_ptr<CRenderOperationWorldSpace> > m_worldSpaceOperations;
     std::map<std::string, std::shared_ptr<CRenderOperationScreenSpace> > m_screenSpaceOperations;
     std::shared_ptr<CRenderOperationOutput> m_outputOperation;
-    
     std::queue<std::shared_ptr<CRenderOperationScreenSpace> > m_customScreenSpaceOperationsQueue;
     
 protected:

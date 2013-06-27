@@ -10,6 +10,7 @@
 #include "IGameLoopHandler.h"
 #include <Foundation/Foundation.h>
 #include <UIKit/UIKit.h>
+#include "CFPSCounter.h"
 
 @interface CGameLoopExecutor_iOS : NSObject
 
@@ -17,8 +18,8 @@
 
 + (CGameLoopExecutor_iOS*)SharedInstance;
 
-- (void)ConnectToGameLoop:(std::shared_ptr<IGameLoopHandler>)_handler;
-- (void)DisconnectFromGameLoop:(std::shared_ptr<IGameLoopHandler>)_handler;
+- (void)connectToGameLoop:(std::shared_ptr<IGameLoopHandler>)_handler;
+- (void)disconnectFromGameLoop:(std::shared_ptr<IGameLoopHandler>)_handler;
 
 @end
 
@@ -46,13 +47,13 @@
     return self;
 }
 
-- (void)ConnectToGameLoop:(std::shared_ptr<IGameLoopHandler>)_handler
+- (void)connectToGameLoop:(std::shared_ptr<IGameLoopHandler>)_handler
 {
     assert(self.m_gameLoopExecutor != nullptr);
     self.m_gameLoopExecutor->ConnectToGameLoop(_handler);
 }
 
-- (void)DisconnectFromGameLoop:(std::shared_ptr<IGameLoopHandler>)_handler
+- (void)disconnectFromGameLoop:(std::shared_ptr<IGameLoopHandler>)_handler
 {
     assert(self.m_gameLoopExecutor != nullptr);
     self.m_gameLoopExecutor->DisconnectFromGameLoop(_handler);
@@ -61,13 +62,38 @@
 - (void)onUpdate:(CADisplayLink*)displayLink
 {
     assert(self.m_gameLoopExecutor != nullptr);
+    assert(self.m_gameLoopExecutor->Get_FPSCounter() != nullptr);
+    self.m_gameLoopExecutor->Get_FPSCounter()->Reset();
     gcdpp::impl::UpdateMainQueue();
     self.m_gameLoopExecutor->OnGameLoopUpdate();
+    self.m_gameLoopExecutor->Get_FPSCounter()->Submit();
+}
+
+- (ui32)getFramesPerSecond;
+{
+    assert(self.m_gameLoopExecutor != nullptr);
+    assert(self.m_gameLoopExecutor->Get_FPSCounter() != nullptr);
+    return self.m_gameLoopExecutor->Get_FPSCounter()->Get_FramesPerSecond();
+}
+
+- (ui32)getTrianglesPerSecond;
+{
+    assert(self.m_gameLoopExecutor != nullptr);
+    assert(self.m_gameLoopExecutor->Get_FPSCounter() != nullptr);
+    return self.m_gameLoopExecutor->Get_FPSCounter()->Get_TrianglesPerSecond();
+}
+
+- (void)incTrianglesCount:(ui32)_value
+{
+    assert(self.m_gameLoopExecutor != nullptr);
+    assert(self.m_gameLoopExecutor->Get_FPSCounter() != nullptr);
+    return self.m_gameLoopExecutor->Get_FPSCounter()->Inc_TrianglesCount(_value);
 }
 
 @end
 
-CGameLoopExecutor::CGameLoopExecutor(void)
+CGameLoopExecutor::CGameLoopExecutor(void) :
+m_fpsCounter(std::make_shared<CFPSCounter>())
 {
     
 }
@@ -97,11 +123,26 @@ void CGameLoopExecutor::DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler>
 
 void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler)
 {
-    [[CGameLoopExecutor_iOS SharedInstance] ConnectToGameLoop:_handler];
-}
+    [[CGameLoopExecutor_iOS SharedInstance] connectToGameLoop:_handler];
+};
 
 void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler)
 {
-    [[CGameLoopExecutor_iOS SharedInstance] DisconnectFromGameLoop:_handler];
-}
+    [[CGameLoopExecutor_iOS SharedInstance] disconnectFromGameLoop:_handler];
+};
+
+ui32 Get_FramesPerSecond(void)
+{
+    return [[CGameLoopExecutor_iOS SharedInstance] getFramesPerSecond];
+};
+
+ui32 Get_TrianglesPerSecond(void)
+{
+    return [[CGameLoopExecutor_iOS SharedInstance] getTrianglesPerSecond];
+};
+
+void Inc_TrianglesCount(ui32 _value)
+{
+    [[CGameLoopExecutor_iOS SharedInstance] incTrianglesCount:_value];
+};
 
