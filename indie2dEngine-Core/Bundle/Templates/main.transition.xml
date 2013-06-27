@@ -2,11 +2,13 @@
     <output.render.operation filename="output.space.operation.xml"/>
     <world.space.render.operations>
         <world.space.render.operation filename="world.space.operation.xml"/>
+        <world.space.render.operation filename="world.space.normal.operation.xml"/>
     </world.space.render.operations>
     <screen.space.render.operations>
         <screen.space.render.operation filename="screen.space.operation.xml"/>
         <screen.space.render.operation filename="screen.space.blur.operation.xml"/>
         <screen.space.render.operation filename="screen.space.bloomextract.operation.xml"/>
         <screen.space.render.operation filename="screen.space.bloomcombine.operation.xml"/>
+        <screen.space.render.operation filename="screen.space.deffered.operation.xml"/>
     </screen.space.render.operations>
 </transition>

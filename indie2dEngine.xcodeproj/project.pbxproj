@@ -193,6 +193,14 @@
 		A4AB15B2177C4E1B00FFC12E /* CFPSCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */; };
 		A4AB15BD177C73D400FFC12E /* CTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15BB177C73D400FFC12E /* CTimer.cpp */; };
 		A4AB15C1177C866700FFC12E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15C0177C866700FFC12E /* Default-568h@2x.png */; };
+		A4AB15C3177C8FB700FFC12E /* world.space.normal.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15C2177C8FB700FFC12E /* world.space.normal.operation.xml */; };
+		A4AB15C9177C904900FFC12E /* screen.normal.model.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15C8177C904800FFC12E /* screen.normal.model.material.xml */; };
+		A4AB15CA177C90A700FFC12E /* ScreenNormalModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15C5177C8FD300FFC12E /* ScreenNormalModel.vert */; };
+		A4AB15CB177C90A700FFC12E /* ScreenNormalModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15C4177C8FD300FFC12E /* ScreenNormalModel.frag */; };
+		A4AB15D2177C997400FFC12E /* material.deffered.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15D0177C997300FFC12E /* material.deffered.screen.xml */; };
+		A4AB15D3177C997400FFC12E /* screen.space.deffered.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15D1177C997400FFC12E /* screen.space.deffered.operation.xml */; };
+		A4AB15D4177C998E00FFC12E /* DefferedScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15CC177C996B00FFC12E /* DefferedScreen.frag */; };
+		A4AB15D5177C998E00FFC12E /* DefferedScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15CD177C996B00FFC12E /* DefferedScreen.vert */; };
 		A4AF4BD51774892F007D4B8C /* particle.emitter.01.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BD41774892E007D4B8C /* particle.emitter.01.xml */; };
 		A4AF4BDF1774899A007D4B8C /* particle.emitter.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */; };
 		A4AF4BE2177489E9007D4B8C /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */; };
@@ -629,6 +637,14 @@
 		A4AB15BB177C73D400FFC12E /* CTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTimer.cpp; path = Sources/CTimer.cpp; sourceTree = "<group>"; };
 		A4AB15BC177C73D400FFC12E /* CTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimer.h; path = Sources/CTimer.h; sourceTree = "<group>"; };
 		A4AB15C0177C866700FFC12E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Bundle/System/Default-568h@2x.png"; sourceTree = "<group>"; };
+		A4AB15C2177C8FB700FFC12E /* world.space.normal.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.normal.operation.xml; sourceTree = "<group>"; };
+		A4AB15C4177C8FD300FFC12E /* ScreenNormalModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenNormalModel.frag; sourceTree = "<group>"; };
+		A4AB15C5177C8FD300FFC12E /* ScreenNormalModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenNormalModel.vert; sourceTree = "<group>"; };
+		A4AB15C8177C904800FFC12E /* screen.normal.model.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.normal.model.material.xml; sourceTree = "<group>"; };
+		A4AB15CC177C996B00FFC12E /* DefferedScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DefferedScreen.frag; sourceTree = "<group>"; };
+		A4AB15CD177C996B00FFC12E /* DefferedScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DefferedScreen.vert; sourceTree = "<group>"; };
+		A4AB15D0177C997300FFC12E /* material.deffered.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.deffered.screen.xml; sourceTree = "<group>"; };
+		A4AB15D1177C997400FFC12E /* screen.space.deffered.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.deffered.operation.xml; sourceTree = "<group>"; };
 		A4AF4BD41774892E007D4B8C /* particle.emitter.01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.01.xml; sourceTree = "<group>"; };
 		A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.material.xml; sourceTree = "<group>"; };
 		A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
@@ -1097,6 +1113,10 @@
 		A40D47C3174555AF00CA59D0 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A4AB15CC177C996B00FFC12E /* DefferedScreen.frag */,
+				A4AB15CD177C996B00FFC12E /* DefferedScreen.vert */,
+				A4AB15C5177C8FD300FFC12E /* ScreenNormalModel.vert */,
+				A4AB15C4177C8FD300FFC12E /* ScreenNormalModel.frag */,
 				21E09E8317758E6A00F199AD /* ParticleEmitter.vert */,
 				21E09E8217758E6A00F199AD /* ParticleEmitter.frag */,
 				A42FE6141771ECE700131949 /* BloomCombineScreen.frag */,
@@ -1280,6 +1300,10 @@
 		A45588D717564B8B00802609 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A4AB15D0177C997300FFC12E /* material.deffered.screen.xml */,
+				A4AB15D1177C997400FFC12E /* screen.space.deffered.operation.xml */,
+				A4AB15C8177C904800FFC12E /* screen.normal.model.material.xml */,
+				A4AB15C2177C8FB700FFC12E /* world.space.normal.operation.xml */,
 				A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */,
 				A4AF4BD41774892E007D4B8C /* particle.emitter.01.xml */,
 				A42FE6261771EEA600131949 /* material.bloomcombine.screen.xml */,
@@ -2066,6 +2090,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4AB15D4177C998E00FFC12E /* DefferedScreen.frag in Resources */,
+				A4AB15D5177C998E00FFC12E /* DefferedScreen.vert in Resources */,
+				A4AB15CA177C90A700FFC12E /* ScreenNormalModel.vert in Resources */,
+				A4AB15CB177C90A700FFC12E /* ScreenNormalModel.frag in Resources */,
 				21E09E8E17759A5400F199AD /* ParticleEmitter.vert in Resources */,
 				21E09E8F17759A5400F199AD /* ParticleEmitter.frag in Resources */,
 				A42FE6201771ED0200131949 /* BloomCombineScreen.frag in Resources */,
@@ -2211,6 +2239,10 @@
 				A4AF4BE2177489E9007D4B8C /* particle.emitter.01.pvr in Resources */,
 				A4AF4BE3177489E9007D4B8C /* particle.emitter.02.pvr in Resources */,
 				A4AB15C1177C866700FFC12E /* Default-568h@2x.png in Resources */,
+				A4AB15C3177C8FB700FFC12E /* world.space.normal.operation.xml in Resources */,
+				A4AB15C9177C904900FFC12E /* screen.normal.model.material.xml in Resources */,
+				A4AB15D2177C997400FFC12E /* material.deffered.screen.xml in Resources */,
+				A4AB15D3177C997400FFC12E /* screen.space.deffered.operation.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
