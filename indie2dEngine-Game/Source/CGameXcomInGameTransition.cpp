@@ -32,8 +32,8 @@ void CGameXcomInGameTransition::_OnLoaded(void)
                                                    glm::vec4(0.0f, 0.0f, Get_ScreenWidth(), Get_ScreenHeight()));
     camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     camera->Set_LookAt(glm::vec3(16.0f, 4.0f, 16.0f));
-    camera->Set_Distance(8.0f);
-    camera->Set_Height(8.0f);
+    camera->Set_Distance(16.0f);
+    camera->Set_Height(16.0f);
     std::shared_ptr<CLight> light = CreateLight();
     light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));
     Set_Camera(camera);
@@ -44,7 +44,7 @@ void CGameXcomInGameTransition::_OnLoaded(void)
     InsertModel(m_model);
     
     std::shared_ptr<CModel> model_01 = CreateModel("model.xml");
-    model_01->Set_Position(glm::vec3(12.0f, 0.0f, 12.0f));
+    model_01->Set_Position(glm::vec3(12.0f, 0.0f, 30.0f));
     InsertModel(model_01);
     
     
