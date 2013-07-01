@@ -27,5 +27,5 @@ void main(void)
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
     OUT_Normal = (MATRIX_View * MATRIX_World * vec4(IN_Normal.xyz / 127.0 - 1.0, 0.0)).xyz;
     OUT_ClipPlane = dot(vec3(vPosition), VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
-    OUT_Depth = gl_Position.z / gl_Position.w;
+    OUT_Depth =  (-(MATRIX_View * MATRIX_World * vec4(IN_Position, 1.0)).z - 0.1) / (128.0 - 0.1); 
 }

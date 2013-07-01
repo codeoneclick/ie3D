@@ -11,6 +11,5 @@ void main(void)
 {
     if(OUT_ClipPlane < 0.0)
         discard;
-    highp float depth = (OUT_Depth + 1.0) * 0.5;
-    gl_FragColor = vec4( depth, depth, depth, 1.0); //vec4(0.5 * OUT_Normal + vec3(0.5), 1.0);
+    gl_FragColor = vec4( OUT_Depth, OUT_Depth, OUT_Depth, 1.0); //vec4(0.5 * OUT_Normal + vec3(0.5), 1.0);
 }
