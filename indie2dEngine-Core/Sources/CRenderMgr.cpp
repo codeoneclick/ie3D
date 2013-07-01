@@ -86,8 +86,13 @@ void CRenderMgr::UnregisterWorldSpaceRenderHandler(const std::string &_mode, std
 
 std::shared_ptr<CTexture> CRenderMgr::Get_RenderOperationTexture(const std::string& _mode)
 {
-    std::shared_ptr<CTexture> texture = m_worldSpaceOperations.find(_mode) != m_worldSpaceOperations.end() ? m_worldSpaceOperations.find(_mode)->second->Get_OperatingTexture() : m_screenSpaceOperations.find(_mode) != m_screenSpaceOperations.end() ? m_screenSpaceOperations.find(_mode)->second->Get_OperatingTexture() : nullptr;
-    std::cout<<"[Get_RenderOperationTexture]"<<std::endl;
+    std::string mode = _mode;
+    std::string::size_type location = _mode.find(".depth");
+    if (std::string::npos != location)
+    {
+        mode = std::string(_mode, 0, location);
+    }
+    std::shared_ptr<CTexture> texture = m_worldSpaceOperations.find(mode) != m_worldSpaceOperations.end() ? std::string::npos == location ? m_worldSpaceOperations.find(mode)->second->Get_OperatingColorTexture() : m_worldSpaceOperations.find(mode)->second->Get_OperatingDepthTexture() : m_screenSpaceOperations.find(mode) != m_screenSpaceOperations.end() ? m_screenSpaceOperations.find(mode)->second->Get_OperatingTexture() : nullptr;
     return texture;
 }
 

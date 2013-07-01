@@ -23,9 +23,17 @@ CMeshLoader::~CMeshLoader(void)
 std::shared_ptr<CMesh> CMeshLoader::StartLoadOperation(const std::string &_filename)
 {
     std::string guid = _filename;
-    std::shared_ptr<CMesh> resource = std::make_shared<CMesh>(guid);
-    std::shared_ptr<IResourceLoadingOperation> operation = std::make_shared<CMeshLoadingOperation>(_filename, resource);
-    m_resourceContainer.insert(std::make_pair(guid, resource));
-    m_operationsQueue.insert(std::make_pair(guid, operation));
+    std::shared_ptr<CMesh> resource = nullptr;
+    if(m_resourceContainer.find(guid) != m_resourceContainer.end())
+    {
+        resource = std::static_pointer_cast<CMesh>(m_resourceContainer.find(guid)->second);
+    }
+    else
+    {
+        resource = std::make_shared<CMesh>(guid);
+        std::shared_ptr<IResourceLoadingOperation> operation = std::make_shared<CMeshLoadingOperation>(_filename, resource);
+        m_resourceContainer.insert(std::make_pair(guid, resource));
+        m_operationsQueue.insert(std::make_pair(guid, operation));
+    }
     return resource;
 }

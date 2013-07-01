@@ -38,9 +38,20 @@ void CGameXcomInGameTransition::_OnLoaded(void)
     light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));
     Set_Camera(camera);
     Set_Light(light);
+    
     m_model = CreateModel("model.xml");
     m_model->Set_Position(glm::vec3(16.0f, 0.0f, 16.0f));
     InsertModel(m_model);
+    
+    std::shared_ptr<CModel> model_01 = CreateModel("model.xml");
+    model_01->Set_Position(glm::vec3(14.0f, 0.0f, 14.0f));
+    InsertModel(model_01);
+    
+    
+    std::shared_ptr<CModel> model_02 = CreateModel("model.xml");
+    model_02->Set_Position(glm::vec3(18.0f, 0.0f, 18.0f));
+    InsertModel(model_02);
+
     
     std::shared_ptr<CParticleEmitter> particleEmitter = CreateParticleEmitter("particle.emitter.01.xml");
     particleEmitter->Set_Position(glm::vec3(16.0f, 2.0f, 16.0f));

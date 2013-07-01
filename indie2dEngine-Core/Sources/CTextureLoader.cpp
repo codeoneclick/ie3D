@@ -23,9 +23,17 @@ CTextureLoader::~CTextureLoader(void)
 std::shared_ptr<CTexture> CTextureLoader::StartLoadOperation(const std::string &_filename)
 {
     std::string guid = _filename;
-    std::shared_ptr<CTexture> resource = std::make_shared<CTexture>(guid);
-    std::shared_ptr<IResourceLoadingOperation> operation = std::make_shared<CTextureLoadingOperation>(_filename, resource);
-    m_resourceContainer.insert(std::make_pair(guid, resource));
-    m_operationsQueue.insert(std::make_pair(guid, operation));
+    std::shared_ptr<CTexture> resource = nullptr;
+    if(m_resourceContainer.find(guid) != m_resourceContainer.end())
+    {
+        resource = std::static_pointer_cast<CTexture>(m_resourceContainer.find(guid)->second);
+    }
+    else
+    {
+        resource = std::make_shared<CTexture>(guid);
+        std::shared_ptr<IResourceLoadingOperation> operation = std::make_shared<CTextureLoadingOperation>(_filename, resource);
+        m_resourceContainer.insert(std::make_pair(guid, resource));
+        m_operationsQueue.insert(std::make_pair(guid, operation));
+    }
     return resource;
 }

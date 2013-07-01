@@ -15,31 +15,52 @@ m_mode(_mode),
 m_frameWidth(_frameWidth),
 m_frameHeight(_frameHeight)
 {
-    ui32 textureHandle;
-    glGenTextures(1, &textureHandle);
-    glGenFramebuffers(1, &m_frameBufferHandle);
-    glGenRenderbuffers(1, &m_depthBufferHandle);
-    glBindTexture(GL_TEXTURE_2D, textureHandle);
+    ui32 textureColorHandle;
+    glGenTextures(1, &textureColorHandle);
+    glBindTexture(GL_TEXTURE_2D, textureColorHandle);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_frameWidth, m_frameHeight, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, NULL);
+    
+    ui32 textureDepthHandle;
+    glGenTextures(1, &textureDepthHandle);
+    glBindTexture(GL_TEXTURE_2D, textureDepthHandle);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
+    
+    glGenFramebuffers(1, &m_frameBufferHandle);
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureHandle, 0);
-    glBindRenderbuffer(GL_RENDERBUFFER, m_depthBufferHandle);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, m_frameWidth, m_frameHeight);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthBufferHandle);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorHandle, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, textureDepthHandle, 0);
     
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     
-    std::shared_ptr<CTextureHeader> header = std::make_shared<CTextureHeader>();
-    header->_Set_Width(m_frameWidth);
-    header->_Set_Height(m_frameHeight);
-    m_operatingTexture = std::make_shared<CTexture>(m_mode);
-    m_operatingTexture->_Set_Header(header);
-    m_operatingTexture->_Set_Handle(textureHandle);
-    m_operatingTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
+    std::shared_ptr<CTextureHeader> m_operatingColorTextureHeader = std::make_shared<CTextureHeader>();
+    m_operatingColorTextureHeader->_Set_Width(m_frameWidth);
+    m_operatingColorTextureHeader->_Set_Height(m_frameHeight);
+    
+    std::string m_operatingColorTextureGuid = m_mode;
+    m_operatingColorTextureGuid.append("color");
+    m_operatingColorTexture = std::make_shared<CTexture>(m_operatingColorTextureGuid);
+    m_operatingColorTexture->_Set_Header(m_operatingColorTextureHeader);
+    m_operatingColorTexture->_Set_Handle(textureColorHandle);
+    m_operatingColorTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
+    
+    std::shared_ptr<CTextureHeader> m_operatingDepthTextureHeader = std::make_shared<CTextureHeader>();
+    m_operatingDepthTextureHeader->_Set_Width(m_frameWidth);
+    m_operatingDepthTextureHeader->_Set_Height(m_frameHeight);
+    
+    std::string m_operatingDepthTextureGuid = m_mode;
+    m_operatingDepthTextureGuid.append("depth");
+    m_operatingDepthTexture = std::make_shared<CTexture>(m_operatingDepthTextureGuid);
+    m_operatingDepthTexture->_Set_Header(m_operatingDepthTextureHeader);
+    m_operatingDepthTexture->_Set_Handle(textureDepthHandle);
+    m_operatingDepthTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
 }
 
 CRenderOperationWorldSpace::~CRenderOperationWorldSpace(void)
@@ -77,11 +98,6 @@ void CRenderOperationWorldSpace::UnregisterRenderHandler(std::shared_ptr<IRender
 
 void CRenderOperationWorldSpace::Bind(void)
 {
-    glDepthMask(GL_TRUE);
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_BLEND);
-    
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
     glViewport(0, 0, m_frameWidth, m_frameHeight);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);

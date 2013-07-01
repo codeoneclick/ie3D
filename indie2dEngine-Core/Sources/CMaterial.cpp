@@ -112,7 +112,6 @@ void CMaterial::Bind(void)
         glDisable(GL_DEPTH_TEST);
     }
     
-    
     if(m_states[E_RENDER_STATE_DEPTH_MASK])
     {
         glDepthMask(GL_TRUE);
