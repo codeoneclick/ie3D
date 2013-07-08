@@ -7,8 +7,8 @@ uniform sampler2D SAMPLER_01;
 
 void main(void)
 {
-    if(OUT_ClipPlane < 0.0)
-        discard;
+    //if(OUT_ClipPlane < 0.0)
+    //    discard;
 
     lowp vec4 vDiffuseColor = texture2D(SAMPLER_01, OUT_TexCoord);
     lowp float fDiffuseFactor = max(dot(OUT_Normal, OUT_LightPosition), 0.0);
