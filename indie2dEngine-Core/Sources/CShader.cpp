@@ -27,6 +27,8 @@ extern const struct SUniforms
     std::string m_cameraPosition;
     std::string m_lightPosition;
     std::string m_clipPlane;
+    std::string m_cameraNear;
+    std::string m_cameraFar;
     
 } SUniforms;
 
@@ -60,6 +62,8 @@ const struct SUniforms SUniforms =
     "VECTOR_CameraPosition",
     "VECTOR_LightPosition",
     "VECTOR_ClipPlane",
+    "FLOAT_CameraNear",
+    "FLOAT_CameraFar"
 };
 
 const struct SSamplers SSamplers =
@@ -100,6 +104,8 @@ void CShader::_Set_Handle(ui32 _handle)
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_cameraPosition.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_lightPosition.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CLIP_PLANE] = glGetUniformLocation(m_handle, SUniforms.m_clipPlane.c_str());
+    m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR] = glGetUniformLocation(m_handle, SUniforms.m_cameraNear.c_str());
+    m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_FAR] = glGetUniformLocation(m_handle, SUniforms.m_cameraFar.c_str());
     
     m_samplers[E_SHADER_SAMPLER_01] = glGetUniformLocation(m_handle, SSamplers.m_sampler_01.c_str());
     m_samplers[E_SHADER_SAMPLER_02] = glGetUniformLocation(m_handle, SSamplers.m_sampler_02.c_str());

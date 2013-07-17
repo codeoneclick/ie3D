@@ -9,7 +9,7 @@ uniform sampler2D SAMPLER_01;
 
 void main(void)
 {
-    //if(OUT_ClipPlane < 0.0)
-    //    discard;
-    gl_FragColor = vec4( OUT_Depth, OUT_Depth, OUT_Depth, 1.0); //vec4(0.5 * OUT_Normal + vec3(0.5), 1.0);
+    if(OUT_ClipPlane < 0.0)
+        discard;
+    gl_FragColor = vec4(0.5 * OUT_Normal + vec3(0.5), OUT_Depth);
 }

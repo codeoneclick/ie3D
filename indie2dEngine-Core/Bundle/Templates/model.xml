@@ -2,6 +2,6 @@
 	<mesh value="mesh.mdl"/>
 	<materials>
 		<material filename="material.xml"/>
-        <material filename="screen.normal.model.material.xml"/>
+        <material filename="screen.gbuffer.model.material.xml"/>
 	</materials>
 </model>
