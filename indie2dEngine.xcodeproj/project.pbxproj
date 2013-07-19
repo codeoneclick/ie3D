@@ -90,6 +90,8 @@
 		A42FE62F1771EEA900131949 /* screen.space.bloomcombine.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE6291771EEA700131949 /* screen.space.bloomcombine.operation.xml */; };
 		A42FE6301771EEA900131949 /* screen.space.bloomextract.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE62A1771EEA800131949 /* screen.space.bloomextract.operation.xml */; };
 		A42FE6311771EEA900131949 /* screen.space.blur.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */; };
+		A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
+		A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364842179953E000C51AC4 /* ICollisionHandler.cpp */; };
 		A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A437A9EC177B424000160BD7 /* libgcdpp.a */; };
 		A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		A45588D61756406C00802609 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
@@ -514,6 +516,10 @@
 		A42FE6291771EEA700131949 /* screen.space.bloomcombine.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomcombine.operation.xml; sourceTree = "<group>"; };
 		A42FE62A1771EEA800131949 /* screen.space.bloomextract.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomextract.operation.xml; sourceTree = "<group>"; };
 		A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.blur.operation.xml; sourceTree = "<group>"; };
+		A436483F179952D300C51AC4 /* CCollisionMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCollisionMgr.cpp; path = Sources/CCollisionMgr.cpp; sourceTree = "<group>"; };
+		A4364840179952D300C51AC4 /* CCollisionMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCollisionMgr.h; path = Sources/CCollisionMgr.h; sourceTree = "<group>"; };
+		A4364842179953E000C51AC4 /* ICollisionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICollisionHandler.cpp; path = Sources/ICollisionHandler.cpp; sourceTree = "<group>"; };
+		A4364843179953E000C51AC4 /* ICollisionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICollisionHandler.h; path = Sources/ICollisionHandler.h; sourceTree = "<group>"; };
 		A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gcdpp.xcodeproj; path = ../gcdpp/gcdpp.xcodeproj; sourceTree = "<group>"; };
 		A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ITemplateLoadingHandler.cpp; path = Sources/ITemplateLoadingHandler.cpp; sourceTree = "<group>"; };
 		A45588CA175628F500802609 /* ITemplateLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITemplateLoadingHandler.h; path = Sources/ITemplateLoadingHandler.h; sourceTree = "<group>"; };
@@ -1289,6 +1295,17 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
+		A43648321799476000C51AC4 /* Collision Managment */ = {
+			isa = PBXGroup;
+			children = (
+				A4364840179952D300C51AC4 /* CCollisionMgr.h */,
+				A436483F179952D300C51AC4 /* CCollisionMgr.cpp */,
+				A4364843179953E000C51AC4 /* ICollisionHandler.h */,
+				A4364842179953E000C51AC4 /* ICollisionHandler.cpp */,
+			);
+			name = "Collision Managment";
+			sourceTree = "<group>";
+		};
 		A437A9E8177B423F00160BD7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1541,6 +1558,7 @@
 				A42081921733AB070004729E /* Common */,
 				A494D36817392DAC00228936 /* GUI Managment */,
 				A494D36417392D3600228936 /* Render Managment */,
+				A43648321799476000C51AC4 /* Collision Managment */,
 				A494D36717392D8100228936 /* StateMachine Managment */,
 				A494D36517392D4B00228936 /* SceneGraph Managment */,
 				A42081911733AAF40004729E /* GameObjectTemplates Managment */,
@@ -2355,6 +2373,8 @@
 				A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */,
 				A4AB15B2177C4E1B00FFC12E /* CFPSCounter.cpp in Sources */,
 				A4AB15BD177C73D400FFC12E /* CTimer.cpp in Sources */,
+				A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */,
+				A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

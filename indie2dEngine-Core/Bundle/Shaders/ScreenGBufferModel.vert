@@ -20,8 +20,8 @@ varying vec3   OUT_LightPosition;
 varying vec3   OUT_Normal;
 varying vec2   OUT_TexCoord;
 varying float  OUT_ClipPlane;
-varying vec4   OUT_Position;
 varying float  OUT_Depth;
+varying vec4   OUT_Position;
 
 void main(void)
 {
@@ -30,5 +30,6 @@ void main(void)
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
     OUT_Normal = (MATRIX_View * MATRIX_World * vec4(IN_Normal.xyz / 127.0 - 1.0, 0.0)).xyz;
     OUT_ClipPlane = dot(vec3(vPosition), VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
-    OUT_Depth =  (-(MATRIX_View * MATRIX_World * vec4(IN_Position, 1.0)).z - FLOAT_CameraNear) / (FLOAT_CameraFar - FLOAT_CameraNear); 
+    OUT_Position = MATRIX_View * MATRIX_World * vec4(IN_Position, 1.0);
+    OUT_Depth =  (-OUT_Position.z - FLOAT_CameraNear) / (FLOAT_CameraFar - FLOAT_CameraNear); 
 }
