@@ -1,0 +1,5 @@
+<material render_mode="world.space.gbuffer.position.operation" is_cull_face="1" is_depth_test="1" is_depth_mask="1" is_blend="0" cull_face_mode="GL_FRONT" blend_function_source="GL_SRC_ALPHA" blend_function_destination="GL_ONE_MINUS_SRC_ALPHA">
+    <shader vs_name="ScreenGBufferPositionModel.vert" fs_name="ScreenGBufferPositionModel.frag"/>
+    <textures>
+    </textures>
+</material>

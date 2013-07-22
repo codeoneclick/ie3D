@@ -21,6 +21,8 @@ private:
 protected:
     
     std::shared_ptr<CModel> m_model;
+    std::shared_ptr<CLight> m_light;
+    std::shared_ptr<CCamera> m_camera;
     
     void _OnLoaded(void);
     void _OnGameLoopUpdate(f32 _deltatime);

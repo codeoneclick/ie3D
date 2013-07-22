@@ -36,7 +36,7 @@ ui32 CShaderCommiter_GLSL::_Compile(const std::string &_sourceCode,  GLenum _sha
     {
         GLchar messages[256];
         glGetShaderInfoLog(handle, sizeof(messages), 0, &messages[0]);
-        std::cout<<messages;
+        std::cout<<messages<<std::endl;
         m_status = E_COMMITER_STATUS_FAILURE;
         assert(false);
     }
@@ -56,7 +56,7 @@ ui32 CShaderCommiter_GLSL::_Link(ui32 _vsHandle, ui32 _fsHandle)
     {
         GLchar messages[256];
         glGetProgramInfoLog(handle, sizeof(messages), 0, &messages[0]);
-        std::cout << messages;
+        std::cout<<messages<<std::endl;
         m_status = E_COMMITER_STATUS_FAILURE;
         assert(false);
     }
