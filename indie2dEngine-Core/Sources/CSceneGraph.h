@@ -21,6 +21,8 @@ class CParticleEmitter;
 class CRenderMgr;
 class CSceneUpdateMgr;
 class CCollisionMgr;
+class ICollisionHandler;
+class IInputContext;
 
 class CSceneGraph 
 {
@@ -41,6 +43,7 @@ protected:
     std::shared_ptr<CRenderMgr> m_renderMgr;
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
     std::shared_ptr<CCollisionMgr> m_collisionMgr;
+    std::shared_ptr<IInputContext> m_inputContext;
     
     void _InsertGameObject(std::shared_ptr<IGameObject> _gameObject);
     void _RemoveGameObject(std::shared_ptr<IGameObject> _gameObject);
@@ -64,6 +67,9 @@ public:
     
     void InsertParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter);
     void RemoveParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter);
+    
+    void RegisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler);
+    void UnregisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler);
 };
 
 #endif 

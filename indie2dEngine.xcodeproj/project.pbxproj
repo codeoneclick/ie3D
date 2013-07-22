@@ -96,6 +96,10 @@
 		A42FE6311771EEA900131949 /* screen.space.blur.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */; };
 		A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
 		A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364842179953E000C51AC4 /* ICollisionHandler.cpp */; };
+		A4364897179D6D3C00C51AC4 /* CMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364895179D6D3B00C51AC4 /* CMainMenuScene.cpp */; };
+		A43648A1179D767400C51AC4 /* CInputContext_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A436489C179D767400C51AC4 /* CInputContext_iOS.mm */; };
+		A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */; };
+		A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */; };
 		A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A437A9EC177B424000160BD7 /* libgcdpp.a */; };
 		A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		A45588D61756406C00802609 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
@@ -528,6 +532,13 @@
 		A4364840179952D300C51AC4 /* CCollisionMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCollisionMgr.h; path = Sources/CCollisionMgr.h; sourceTree = "<group>"; };
 		A4364842179953E000C51AC4 /* ICollisionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICollisionHandler.cpp; path = Sources/ICollisionHandler.cpp; sourceTree = "<group>"; };
 		A4364843179953E000C51AC4 /* ICollisionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICollisionHandler.h; path = Sources/ICollisionHandler.h; sourceTree = "<group>"; };
+		A4364895179D6D3B00C51AC4 /* CMainMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMainMenuScene.cpp; path = "indie2dEngine-Game/Source/CMainMenuScene.cpp"; sourceTree = "<group>"; };
+		A4364896179D6D3B00C51AC4 /* CMainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMainMenuScene.h; path = "indie2dEngine-Game/Source/CMainMenuScene.h"; sourceTree = "<group>"; };
+		A436489C179D767400C51AC4 /* CInputContext_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CInputContext_iOS.mm; path = Sources/CInputContext_iOS.mm; sourceTree = "<group>"; };
+		A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInputContext_Win32.cpp; path = Sources/CInputContext_Win32.cpp; sourceTree = "<group>"; };
+		A436489E179D767400C51AC4 /* IInputContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IInputContext.h; path = Sources/IInputContext.h; sourceTree = "<group>"; };
+		A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IInputTapRecognizerHandler.cpp; path = Sources/IInputTapRecognizerHandler.cpp; sourceTree = "<group>"; };
+		A43648A0179D767400C51AC4 /* IInputTapRecognizerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IInputTapRecognizerHandler.h; path = Sources/IInputTapRecognizerHandler.h; sourceTree = "<group>"; };
 		A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gcdpp.xcodeproj; path = ../gcdpp/gcdpp.xcodeproj; sourceTree = "<group>"; };
 		A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ITemplateLoadingHandler.cpp; path = Sources/ITemplateLoadingHandler.cpp; sourceTree = "<group>"; };
 		A45588CA175628F500802609 /* ITemplateLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITemplateLoadingHandler.h; path = Sources/ITemplateLoadingHandler.h; sourceTree = "<group>"; };
@@ -1316,6 +1327,18 @@
 			name = "Collision Managment";
 			sourceTree = "<group>";
 		};
+		A4364898179D74E900C51AC4 /* Input Managment */ = {
+			isa = PBXGroup;
+			children = (
+				A436489E179D767400C51AC4 /* IInputContext.h */,
+				A436489C179D767400C51AC4 /* CInputContext_iOS.mm */,
+				A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */,
+				A43648A0179D767400C51AC4 /* IInputTapRecognizerHandler.h */,
+				A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */,
+			);
+			name = "Input Managment";
+			sourceTree = "<group>";
+		};
 		A437A9E8177B423F00160BD7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1567,6 +1590,7 @@
 		A494D36617392D6300228936 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				A4364898179D74E900C51AC4 /* Input Managment */,
 				A42081921733AB070004729E /* Common */,
 				A494D36817392DAC00228936 /* GUI Managment */,
 				A494D36417392D3600228936 /* Render Managment */,
@@ -1704,6 +1728,8 @@
 				A494B85B17686741004C9F96 /* CGameXcomWorkflow.cpp */,
 				A494B86717686776004C9F96 /* CGameXcomInGameTransition.h */,
 				A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */,
+				A4364896179D6D3B00C51AC4 /* CMainMenuScene.h */,
+				A4364895179D6D3B00C51AC4 /* CMainMenuScene.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -2391,6 +2417,10 @@
 				A4AB15BD177C73D400FFC12E /* CTimer.cpp in Sources */,
 				A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */,
 				A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */,
+				A4364897179D6D3C00C51AC4 /* CMainMenuScene.cpp in Sources */,
+				A43648A1179D767400C51AC4 /* CInputContext_iOS.mm in Sources */,
+				A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */,
+				A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

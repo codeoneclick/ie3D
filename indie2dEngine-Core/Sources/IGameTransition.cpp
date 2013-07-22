@@ -15,20 +15,27 @@
 #include "CGameLoopExecutor.h"
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
+#include "CCollisionMgr.h"
 #include "CRenderOperationWorldSpace.h"
 #include "CRenderOperationScreenSpace.h"
 #include "CCommonOS.h"
 #include "ITemplate.h"
 #include "CGraphicsContext_iOS.h"
+#include "IInputContext.h"
 
-IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor) :
+IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor) :
 CSceneFabricator(_templateAccessor, _resourceAccessor),
 m_guid(_filename),
 m_isLoaded(false)
 {
     assert(_graphicsContext != nullptr);
+    assert(_inputContext != nullptr);
     m_renderMgr = std::make_shared<CRenderMgr>(_graphicsContext);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
+    m_collisionMgr = std::make_shared<CCollisionMgr>();
+    
+    m_inputContext = _inputContext;
+    m_inputContext->RegisterTapRecognizerHandler(m_collisionMgr);
 }
 
 IGameTransition::~IGameTransition(void)

@@ -9,7 +9,7 @@
 #include "ICollisionHandler.h"
 
 CCollisionCommands::CCollisionCommands(void) :
-m_getTargetCommand(nullptr),
+m_getTargetsCommand(nullptr),
 m_collisionCommand(nullptr)
 {
     
@@ -17,14 +17,14 @@ m_collisionCommand(nullptr)
 
 CCollisionCommands::~CCollisionCommands(void)
 {
-    m_getTargetCommand = nullptr;
+    m_getTargetsCommand = nullptr;
     m_collisionCommand = nullptr;
 }
 
-void CCollisionCommands::_ConnectGetTargetCommand(const __GET_TARGET_COMMAND &_command)
+void CCollisionCommands::_ConnectGetTargetsCommand(const __GET_TARGETS_COMMAND &_command)
 {
     assert(_command != nullptr);
-    m_getTargetCommand = _command;
+    m_getTargetsCommand = _command;
 }
 
 void CCollisionCommands::_ConnectCollisionCommand(const __COLLISION_COMMAND &_command)
@@ -33,16 +33,16 @@ void CCollisionCommands::_ConnectCollisionCommand(const __COLLISION_COMMAND &_co
     m_collisionCommand = _command;
 }
 
-std::shared_ptr<IGameObject> CCollisionCommands::_ExecuteGetTargetCommand(void)
+std::vector<std::shared_ptr<IGameObject> > CCollisionCommands::_ExecuteGetTargetsCommand(void)
 {
-    assert(m_getTargetCommand != nullptr);
-    return m_getTargetCommand();
+    assert(m_getTargetsCommand != nullptr);
+    return m_getTargetsCommand();
 }
 
-void CCollisionCommands::_ExecuteCollisionCommand(const glm::vec3 &_position)
+void CCollisionCommands::_ExecuteCollisionCommand(const glm::vec3 &_position, std::shared_ptr<IGameObject> _target)
 {
     assert(m_collisionCommand != nullptr);
-    m_collisionCommand(_position);
+    m_collisionCommand(_position, _target);
 }
 
 ICollisionHandler::ICollisionHandler(void)
@@ -57,6 +57,6 @@ ICollisionHandler::~ICollisionHandler(void)
 
 void ICollisionHandler::_ConnectCommands(void)
 {
-    m_commands._ConnectGetTargetCommand(std::bind(&ICollisionHandler::_OnGetTarget, this));
-    m_commands._ConnectCollisionCommand(std::bind(&ICollisionHandler::_OnCollision, this, std::placeholders::_1));
+    m_commands._ConnectGetTargetsCommand(std::bind(&ICollisionHandler::_OnGetTargets, this));
+    m_commands._ConnectCollisionCommand(std::bind(&ICollisionHandler::_OnCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
