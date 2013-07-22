@@ -2,7 +2,7 @@
 	<mesh value="mesh.mdl"/>
 	<materials>
 		<material filename="material.xml"/>
-        <material filename="screen.gbuffer.position.model.material.xml"/>
-        <material filename="gbuffer.normal.material.xml"/>
+        <!--<material filename="screen.gbuffer.position.model.material.xml"/>-->
+        <!--<material filename="gbuffer.normal.material.xml"/>-->
 	</materials>
 </model>

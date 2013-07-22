@@ -27,7 +27,7 @@ void main(void)
 
     vec3 vLightDistance = VECTOR_LightPosition - vec3(vPosition);
     OUT_LightPosition.xyz = normalize(vLightDistance);
-    OUT_LightPosition.w = 1.0 - dot(vLightDistance / 8.0, vLightDistance / 8.0);
+    OUT_LightPosition.w = 1.0 - dot(vLightDistance / 16.0, vLightDistance / 16.0);
     OUT_TexCoord = IN_TexCoord;
     OUT_ClipPlane = dot(vec3(vPosition), VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
 }

@@ -3,8 +3,8 @@
     <textures>
         <!--<texture name="" operation="screen.space.bloomcombine.operation" slot="0" wrap="GL_CLAMP_TO_EDGE"/>-->
         <!--<texture name="" operation="world.space.normal.operation" slot="0" wrap="GL_CLAMP_TO_EDGE"/>-->
-        <texture name="" operation="screen.space.deffered.operation" slot="0" wrap="GL_CLAMP_TO_EDGE"/>
+        <!--<texture name="" operation="screen.space.deffered.operation" slot="0" wrap="GL_CLAMP_TO_EDGE"/>-->
         <!--<texture name="" operation="gbuffer.normal.operation" slot="0" wrap="GL_CLAMP_TO_EDGE"/>-->
-        <!--<texture name="" operation="world.space.operation" slot="0" wrap="GL_CLAMP_TO_EDGE"/>-->
+        <texture name="" operation="world.space.operation" slot="0" wrap="GL_CLAMP_TO_EDGE"/>
     </textures>
 </material>

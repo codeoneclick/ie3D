@@ -15,6 +15,8 @@
 class IGameTransition;
 class IGameObject;
 class CModel;
+class CLight;
+class CCamera;
 
 class CMainMenuScene final : public std::enable_shared_from_this<CMainMenuScene>, public ICollisionHandler 
 {
@@ -23,6 +25,8 @@ private:
     std::shared_ptr<CModel> m_model_01;
     std::shared_ptr<CModel> m_model_02;
     std::shared_ptr<CModel> m_model_03;
+    
+    std::shared_ptr<CLight> m_light;
     
     std::vector<std::shared_ptr<IGameObject> > m_collisionTargets;
     

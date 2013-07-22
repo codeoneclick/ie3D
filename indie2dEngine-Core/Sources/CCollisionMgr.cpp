@@ -129,7 +129,6 @@ bool CCollisionMgr::_CollisionPoint(std::shared_ptr<CVertexBuffer> _vertexBuffer
     {
         glm::vec4 value = _worldMatrix * glm::vec4(vertexData[indexData[index + 0]].m_position, 1.0f);
         glm::vec3 point_01 = glm::vec3(value.x, value.y, value.z);
-        
         value = _worldMatrix * glm::vec4(vertexData[indexData[index + 1]].m_position, 1.0f);
         glm::vec3 point_02 = glm::vec3(value.x, value.y, value.z);
         value = _worldMatrix * glm::vec4(vertexData[indexData[index + 2]].m_position, 1.0f);

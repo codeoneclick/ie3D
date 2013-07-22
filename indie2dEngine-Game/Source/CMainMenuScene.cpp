@@ -34,13 +34,13 @@ void CMainMenuScene::Load(void)
                                                           128.0f,
                                                           glm::ivec4(0, 0, static_cast<i32>(Get_ScreenWidth()), static_cast<i32>(Get_ScreenHeight())));
     camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
-    camera->Set_LookAt(glm::vec3(0.0f, 4.0f, 0.0f));
+    camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
     camera->Set_Distance(16.0f);
     camera->Set_Height(16.0f);
-    std::shared_ptr<CLight> light = m_root->CreateLight();
-    light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));
+    m_light = m_root->CreateLight();
+    m_light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));
     m_root->Set_Camera(camera);
-    m_root->Set_Light(light);
+    m_root->Set_Light(m_light);
     
     m_model_01 = m_root->CreateModel("model.xml");
     m_model_01->Set_Position(glm::vec3(12.0f, 0.0f, 12.0f));
@@ -59,7 +59,7 @@ void CMainMenuScene::Load(void)
     m_root->InsertModel(m_model_03);
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
-    particleEmitter->Set_Position(glm::vec3(16.0f, 2.0f, 16.0f));
+    particleEmitter->Set_Position(glm::vec3(12.0f, 2.0f, 12.0f));
     m_root->InsertParticleEmitter(particleEmitter);
     
     m_root->RegisterCollisionHandler(shared_from_this());
@@ -68,8 +68,15 @@ void CMainMenuScene::Load(void)
 void CMainMenuScene::Update(f32 _deltatime)
 {
     static float angle = 0.0f;
-    //m_model_01->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
+    m_model_01->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
     angle += 1.0f;
+    
+    static glm::vec3 lightPosition = glm::vec3(0.0f);
+    lightPosition.x = 12.0f + cosf(-angle / 50.0f ) * -8.0f;
+    lightPosition.y = 8.0f;
+    lightPosition.z = 12.0f + sinf(-angle / 50.0f) * -8.0f;
+    
+    m_light->Set_Position(lightPosition);
 }
 
 std::vector<std::shared_ptr<IGameObject> > CMainMenuScene::_OnGetTargets(void)
