@@ -34,6 +34,8 @@ private:
     f32 m_near;
     f32 m_far;
     
+    glm::ivec4 m_viewport;
+    
     std::shared_ptr<CFrustum> m_frustum;
     
 protected:
@@ -42,7 +44,7 @@ protected:
     
 public:
     
-    CCamera(f32 _fov, f32 _near, f32 _far, glm::vec4 _viewport);
+    CCamera(f32 _fov, f32 _near, f32 _far, glm::ivec4 _viewport);
     ~CCamera(void);
     
     inline glm::mat4x4 Get_ViewMatrix(void)
@@ -148,6 +150,11 @@ public:
     inline const std::shared_ptr<CFrustum> Get_Frustum(void)
     {
         return m_frustum;
+    };
+    
+    inline const glm::ivec4 Get_Viewport(void)
+    {
+        return m_viewport;
     };
     
     glm::mat4x4 Get_SphericalMatrixForPosition(const glm::vec3& _position);

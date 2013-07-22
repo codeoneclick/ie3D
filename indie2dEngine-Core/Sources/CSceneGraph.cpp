@@ -8,19 +8,22 @@
 
 #include "CSceneGraph.h"
 #include "CSceneUpdateMgr.h"
+#include "CCollisionMgr.h"
 #include "CCamera.h"
 #include "IGameObject.h"
 #include "CSprite.h"
 #include "CModel.h"
 #include "CBillboard.h"
 #include "CParticleEmitter.h"
+#include "ICollisionHandler.h"
 
 CSceneGraph::CSceneGraph(void) :
 m_camera(nullptr),
 m_light(nullptr),
 m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
-m_collisionMgr(nullptr)
+m_collisionMgr(nullptr),
+m_inputContext(nullptr)
 {
 
 }
@@ -48,6 +51,9 @@ void CSceneGraph::Set_Camera(std::shared_ptr<CCamera> _camera)
     {
         iterator->Set_Camera(m_camera);
     }
+    
+    assert(m_collisionMgr != nullptr);
+    m_collisionMgr->Set_Camera(m_camera);
 }
 
 void CSceneGraph::Set_Light(std::shared_ptr<CLight> _light)
@@ -141,4 +147,16 @@ void CSceneGraph::RemoveParticleEmitter(std::shared_ptr<CParticleEmitter> _parti
 {
     CSceneGraph::_RemoveGameObject(_particleEmitter);
     m_particlesContainer.erase(_particleEmitter);
+}
+
+void CSceneGraph::RegisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler)
+{
+    assert(m_collisionMgr != nullptr);
+    m_collisionMgr->RegisterCollisionHandler(_handler);
+}
+
+void CSceneGraph::UnregisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler)
+{
+    assert(m_collisionMgr != nullptr);
+    m_collisionMgr->UnregisterCollisionHandler(_handler);
 }

@@ -4,7 +4,6 @@ varying highp vec2   OUT_TexCoord;
 varying lowp  float  OUT_ClipPlane;
 varying highp vec4   OUT_Position;
 varying highp float  OUT_Depth;
-varying highp vec4   OUT_Position;
 
 uniform sampler2D SAMPLER_01;
 

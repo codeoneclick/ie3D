@@ -130,6 +130,17 @@ public:
         m_light = _light;
     };
     
+    inline std::shared_ptr<CMesh> Get_Mesh(void)
+    {
+        assert(m_mesh != nullptr);
+        return m_mesh;
+    };
+    
+    inline glm::mat4x4 Get_WorldMatrix(void)
+    {
+        return m_matrixWorld;
+    };
+    
     void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode);
     void Set_Clipping(const glm::vec4& _clipping, const std::string& _renderMode);
     

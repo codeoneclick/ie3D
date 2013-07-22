@@ -30,7 +30,7 @@ CSceneFabricator::~CSceneFabricator(void)
     m_gameObjectsContainer.clear();
 }
 
-std::shared_ptr<CCamera> CSceneFabricator::CreateCamera(f32 _fov, f32 _near, f32 _far,const glm::vec4& _viewport)
+std::shared_ptr<CCamera> CSceneFabricator::CreateCamera(f32 _fov, f32 _near, f32 _far,const glm::ivec4& _viewport)
 {
     std::shared_ptr<CCamera> camera = std::make_shared<CCamera>(_fov, _near, _far, _viewport);
     m_camerasContainer.insert(camera);
