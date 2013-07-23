@@ -9,7 +9,7 @@
 #include "ICollisionHandler.h"
 
 CCollisionCommands::CCollisionCommands(void) :
-m_getTargetsCommand(nullptr),
+m_getCollidersCommand(nullptr),
 m_collisionCommand(nullptr)
 {
     
@@ -17,14 +17,14 @@ m_collisionCommand(nullptr)
 
 CCollisionCommands::~CCollisionCommands(void)
 {
-    m_getTargetsCommand = nullptr;
+    m_getCollidersCommand = nullptr;
     m_collisionCommand = nullptr;
 }
 
-void CCollisionCommands::_ConnectGetTargetsCommand(const __GET_TARGETS_COMMAND &_command)
+void CCollisionCommands::_ConnectGetCollidersCommand(const __GET_COLLIDERS_COMMAND &_command)
 {
     assert(_command != nullptr);
-    m_getTargetsCommand = _command;
+    m_getCollidersCommand = _command;
 }
 
 void CCollisionCommands::_ConnectCollisionCommand(const __COLLISION_COMMAND &_command)
@@ -33,10 +33,10 @@ void CCollisionCommands::_ConnectCollisionCommand(const __COLLISION_COMMAND &_co
     m_collisionCommand = _command;
 }
 
-std::vector<std::shared_ptr<IGameObject> > CCollisionCommands::_ExecuteGetTargetsCommand(void)
+std::vector<std::shared_ptr<IGameObject> > CCollisionCommands::_ExecuteGetCollidersCommand(void)
 {
-    assert(m_getTargetsCommand != nullptr);
-    return m_getTargetsCommand();
+    assert(m_getCollidersCommand != nullptr);
+    return m_getCollidersCommand();
 }
 
 void CCollisionCommands::_ExecuteCollisionCommand(const glm::vec3 &_position, std::shared_ptr<IGameObject> _target)
@@ -57,6 +57,6 @@ ICollisionHandler::~ICollisionHandler(void)
 
 void ICollisionHandler::_ConnectCommands(void)
 {
-    m_commands._ConnectGetTargetsCommand(std::bind(&ICollisionHandler::_OnGetTargets, this));
+    m_commands._ConnectGetCollidersCommand(std::bind(&ICollisionHandler::_OnGetColliders, this));
     m_commands._ConnectCollisionCommand(std::bind(&ICollisionHandler::_OnCollision, this, std::placeholders::_1, std::placeholders::_2));
 }

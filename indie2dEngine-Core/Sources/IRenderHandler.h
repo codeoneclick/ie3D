@@ -19,6 +19,7 @@ private:
     typedef std::function<void(const std::string&)> __RENDER_BIND_COMMAND;
     typedef std::function<void(const std::string&)> __RENDER_DRAW_COMMAND;
     typedef std::function<void(const std::string&)> __RENDER_UNBIND_COMMAND;
+    typedef std::function<void(const std::string&)> __RENDER_DEBUG_DRAW_COMMAND;
     
     friend class IRenderHandler;
     friend class CRenderOperationWorldSpace;
@@ -29,6 +30,7 @@ private:
     __RENDER_BIND_COMMAND m_renderBindCommand;
     __RENDER_DRAW_COMMAND m_renderDrawCommand;
     __RENDER_UNBIND_COMMAND m_renderUnbindCommand;
+    __RENDER_DEBUG_DRAW_COMMAND m_renderDebugDraw;
     
 protected:
     
@@ -38,11 +40,13 @@ protected:
     void _ConnectRenderBindCommand(const __RENDER_BIND_COMMAND& _command);
     void _ConnectRenderDrawCommand(const __RENDER_DRAW_COMMAND& _command);
     void _ConnectRenderUnbindCommand(const __RENDER_UNBIND_COMMAND& _command);
+    void _ConnectRenderDebugDrawCommand(const __RENDER_DEBUG_DRAW_COMMAND& _command);
     
     i32 _ExecuteRenderQueuePositionCommand(void);
     void _ExecuteRenderBindCommand(const std::string& _command);
     void _ExecuteRenderDrawCommand(const std::string& _command);
     void _ExecuteRenderUnbindCommand(const std::string& _command);
+    void _ExecuteRenderDebugDrawCommand(const std::string& _command);
     
 public:
     
@@ -74,6 +78,7 @@ protected:
     virtual void _OnBind(const std::string& _renderMode) = 0;
     virtual void _OnDraw(const std::string& _renderMode) = 0;
     virtual void _OnUnbind(const std::string& _renderMode) = 0;
+    virtual void _OnDebugDraw(const std::string& _renderMode) = 0;
     
 public:
     

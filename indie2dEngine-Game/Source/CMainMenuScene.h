@@ -28,13 +28,13 @@ private:
     
     std::shared_ptr<CLight> m_light;
     
-    std::vector<std::shared_ptr<IGameObject> > m_collisionTargets;
+    std::vector<std::shared_ptr<IGameObject> > m_colliders;
     
     IGameTransition* m_root;
     
 protected:
     
-    std::vector<std::shared_ptr<IGameObject> > _OnGetTargets(void);
+    std::vector<std::shared_ptr<IGameObject> > _OnGetColliders(void);
     void _OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _target);
     
 public:

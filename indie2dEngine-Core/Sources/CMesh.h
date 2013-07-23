@@ -92,6 +92,8 @@ public:
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
+class CAABoundBox;
+
 class CMesh : public IResource
 {
 private:
@@ -106,11 +108,9 @@ protected:
     std::shared_ptr<CVertexBuffer> m_vertexBuffer;
     std::shared_ptr<CIndexBuffer> m_indexBuffer;
     
-    inline void _Set_Header(std::shared_ptr<CMeshHeader> _header)
-    {
-        m_header = _header;
-        m_isLoaded = true;
-    };
+    std::vector<std::shared_ptr<CAABoundBox> > m_bounds;
+    
+    void _Set_Header(std::shared_ptr<CMeshHeader> _header);
     
 #ifdef TESTING
 public:
@@ -139,6 +139,8 @@ public:
     CMesh(const std::string& _guid);
     CMesh(const std::string& _guid, std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer);
     ~CMesh(void);
+    
+    std::shared_ptr<CAABoundBox> CreateBoundBox(void);
     
     inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)
     {

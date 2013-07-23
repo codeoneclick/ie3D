@@ -121,6 +121,7 @@ void CRenderOperationWorldSpace::Draw(void)
             handler->_Get_Commands()._ExecuteRenderBindCommand(m_mode);
             handler->_Get_Commands()._ExecuteRenderDrawCommand(m_mode);
             handler->_Get_Commands()._ExecuteRenderUnbindCommand(m_mode);
+            handler->_Get_Commands()._ExecuteRenderDebugDrawCommand(m_mode);
         }
     }
 }

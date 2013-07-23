@@ -12,7 +12,8 @@ CRenderCommands::CRenderCommands(void) :
 m_renderQueuePositionCommand(nullptr),
 m_renderBindCommand(nullptr),
 m_renderDrawCommand(nullptr),
-m_renderUnbindCommand(nullptr)
+m_renderUnbindCommand(nullptr),
+m_renderDebugDraw(nullptr)
 {
 
 }
@@ -23,6 +24,7 @@ CRenderCommands::~CRenderCommands(void)
     m_renderBindCommand = nullptr;
     m_renderDrawCommand = nullptr;
     m_renderUnbindCommand = nullptr;
+    m_renderDebugDraw = nullptr;
 }
 
 void CRenderCommands::_ConnectRenderQueuePositionCommand(const __RENDER_QUEUE_POSITION_COMMAND &_command)
@@ -49,6 +51,12 @@ void CRenderCommands::_ConnectRenderUnbindCommand(const __RENDER_UNBIND_COMMAND 
     m_renderUnbindCommand = _command;
 }
 
+void CRenderCommands::_ConnectRenderDebugDrawCommand(const __RENDER_DEBUG_DRAW_COMMAND &_command)
+{
+    assert(_command != nullptr);
+    m_renderDebugDraw = _command;
+}
+
 i32 CRenderCommands::_ExecuteRenderQueuePositionCommand(void)
 {
     assert(m_renderQueuePositionCommand != nullptr);
@@ -73,6 +81,12 @@ void CRenderCommands::_ExecuteRenderUnbindCommand(const std::string &_command)
     m_renderUnbindCommand(_command);
 }
 
+void CRenderCommands::_ExecuteRenderDebugDrawCommand(const std::string &_command)
+{
+    assert(m_renderDebugDraw != nullptr);
+    m_renderDebugDraw(_command);
+}
+
 IRenderHandler::IRenderHandler(void)
 {
     IRenderHandler::_ConnectCommands();
@@ -89,4 +103,5 @@ void IRenderHandler::_ConnectCommands(void)
     m_commands._ConnectRenderBindCommand(std::bind(&IRenderHandler::_OnBind, this, std::placeholders::_1));
     m_commands._ConnectRenderDrawCommand(std::bind(&IRenderHandler::_OnDraw, this, std::placeholders::_1));
     m_commands._ConnectRenderUnbindCommand(std::bind(&IRenderHandler::_OnUnbind, this, std::placeholders::_1));
+    m_commands._ConnectRenderDebugDrawCommand(std::bind(&IRenderHandler::_OnDebugDraw, this, std::placeholders::_1));
 }

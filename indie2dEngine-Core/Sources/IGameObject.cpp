@@ -15,6 +15,7 @@
 #include "CMaterial.h"
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
+#include "CAABoundBox.h"
 
 IGameObject::IGameObject(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 m_resourceFabricator(_resourceFabricator),
@@ -25,6 +26,8 @@ m_texcoordDisplacement(glm::vec2(0.0f, 0.0f)),
 m_mesh(nullptr),
 m_camera(nullptr),
 m_light(nullptr),
+m_boundBox(nullptr),
+m_debugBoundBoxMaterial(nullptr),
 m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
 m_isLoaded(false),
@@ -59,6 +62,12 @@ glm::vec3 IGameObject::Get_MinBound(void)
     return m_mesh->Get_MinBound();
 }
 
+void IGameObject::Set_Camera(std::shared_ptr<CCamera> _camera)
+{
+    assert(_camera != nullptr);
+    m_camera = _camera;
+};
+
 void IGameObject::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode)
 {
     assert(m_materials.find(_renderMode) != m_materials.end());
@@ -72,6 +81,34 @@ void IGameObject::Set_Clipping(const glm::vec4 &_clipping, const std::string& _r
     auto iterator = m_materials.find(_renderMode);
     iterator->second->Set_Clipping(_clipping);
 }
+
+std::shared_ptr<CVertexBuffer> IGameObject::Get_VertexBuffer(void)
+{
+    assert(m_mesh != nullptr);
+    assert(m_mesh->Get_VertexBuffer() != nullptr);
+    return m_mesh->Get_VertexBuffer();
+};
+
+std::shared_ptr<CIndexBuffer> IGameObject::Get_IndexBuffer(void)
+{
+    assert(m_mesh != nullptr);
+    assert(m_mesh->Get_IndexBuffer() != nullptr);
+    return m_mesh->Get_IndexBuffer();
+};
+
+std::shared_ptr<CVertexBuffer> IGameObject::Get_BoundVertexBuffer(void)
+{
+    assert(m_boundBox != nullptr);
+    assert(m_boundBox->Get_VertexBuffer() != nullptr);
+    return m_boundBox->Get_VertexBuffer();
+};
+
+std::shared_ptr<CIndexBuffer> IGameObject::Get_BoundIndexBuffer(void)
+{
+    assert(m_boundBox != nullptr);
+    assert(m_boundBox->Get_IndexBuffer() != nullptr);
+    return m_boundBox->Get_IndexBuffer();
+};
 
 void IGameObject::ListenRenderMgr(bool _value)
 {
@@ -113,6 +150,11 @@ void IGameObject::_OnSceneUpdate(f32 _deltatime)
     m_matrixTranslation = glm::translate(glm::mat4(1.0f), m_position);
     m_matrixScale = glm::scale(glm::mat4(1.0f), m_scale);
     m_matrixWorld = m_matrixTranslation * m_matrixRotation * m_matrixScale;
+    
+    if(m_boundBox != nullptr)
+    {
+        m_boundBox->Update(m_matrixWorld);
+    }
 }
 
 i32 IGameObject::_OnQueuePosition(void)
@@ -144,5 +186,28 @@ void IGameObject::_OnUnbind(const std::string &_renderMode)
     
     assert(m_mesh != nullptr);
     m_mesh->Unbind(iterator->second->Get_Shader()->Get_Attributes());
+    
+    if(m_boundBox != nullptr)
+    {
+        m_boundBox->Draw();
+    }
+}
+
+void IGameObject::_OnDebugDraw(const std::string &_renderMode)
+{
+    if(m_boundBox != nullptr)
+    {
+        assert(m_debugBoundBoxMaterial != nullptr);
+        assert(m_debugBoundBoxMaterial->Get_Shader() != nullptr);
+        m_debugBoundBoxMaterial->Bind();
+        m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_MATRIX_WORLD);
+        m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
+        m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        
+        m_boundBox->Bind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
+        m_boundBox->Draw();
+        m_boundBox->Unbind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
+        m_debugBoundBoxMaterial->Unbind();
+    }
 }
 

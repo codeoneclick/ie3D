@@ -7,6 +7,7 @@
 //
 
 #include "CMesh.h"
+#include "CAABoundBox.h"
 
 CMeshHeader::CMeshHeader(void) :
 m_vertexData(nullptr),
@@ -28,6 +29,7 @@ CMeshHeader::~CMeshHeader(void)
 CMesh::CMesh(const std::string& _guid) :
 IResource(E_RESOURCE_TYPE_MESH, _guid),
 m_header(nullptr),
+
 m_vertexBuffer(nullptr),
 m_indexBuffer(nullptr)
 {
@@ -55,7 +57,28 @@ m_indexBuffer(_indexBuffer)
 
 CMesh::~CMesh(void)
 {
+    m_bounds.clear();
+}
+
+void CMesh::_Set_Header(std::shared_ptr<CMeshHeader> _header)
+{
+    assert(_header != nullptr);
+    m_header = _header;
+    m_isLoaded = true;
     
+    for(auto bound : m_bounds)
+    {
+        bound->_Set_MaxBound(m_header->Get_MaxBound());
+        bound->_Set_MinBound(m_header->Get_MinBound());
+    }
+};
+
+std::shared_ptr<CAABoundBox> CMesh::CreateBoundBox(void)
+{
+    std::shared_ptr<CAABoundBox> bound(std::make_shared<CAABoundBox>(m_header == nullptr ? glm::vec3(0.0f) : m_header->Get_MaxBound(), m_header == nullptr ? glm::vec3(0.0f) : m_header->Get_MinBound()));
+    assert(bound != nullptr);
+    m_bounds.push_back(bound);
+    return bound;
 }
 
 void CMesh::Bind(const i32 *_attributes)

@@ -217,6 +217,9 @@
 		A4AF4BE3177489E9007D4B8C /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */; };
 		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
 		A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460617450200000D831E /* IResourceCommiter.cpp */; };
+		A4DD0EA2179E6C6F009A7AFE /* CAABoundBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0EA0179E6C6F009A7AFE /* CAABoundBox.cpp */; };
+		A4DD0EAF179E7DBE009A7AFE /* CommonBoundBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */; };
+		A4DD0EB0179E7DBE009A7AFE /* CommonBoundBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */; };
 		A4F204A017423C1E0063AB07 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049E17423C1E0063AB07 /* AppDelegate.mm */; };
 		A4F204A117423C1E0063AB07 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049F17423C1E0063AB07 /* main.mm */; };
 		A4F204A617423C4D0063AB07 /* IGraphicsContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204A417423C4D0063AB07 /* IGraphicsContext.cpp */; };
@@ -678,6 +681,10 @@
 		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
 		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
 		A4BE460717450200000D831E /* IResourceCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceCommiter.h; path = Sources/IResourceCommiter.h; sourceTree = "<group>"; };
+		A4DD0EA0179E6C6F009A7AFE /* CAABoundBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAABoundBox.cpp; path = Sources/CAABoundBox.cpp; sourceTree = "<group>"; };
+		A4DD0EA1179E6C6F009A7AFE /* CAABoundBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAABoundBox.h; path = Sources/CAABoundBox.h; sourceTree = "<group>"; };
+		A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.frag; sourceTree = "<group>"; };
+		A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.vert; sourceTree = "<group>"; };
 		A4F2049D17423C1E0063AB07 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "indie2dEngine-Core/Sources/AppDelegate.h"; sourceTree = SOURCE_ROOT; };
 		A4F2049E17423C1E0063AB07 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "indie2dEngine-Core/Sources/AppDelegate.mm"; sourceTree = SOURCE_ROOT; };
 		A4F2049F17423C1E0063AB07 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = "indie2dEngine-Core/Sources/main.mm"; sourceTree = SOURCE_ROOT; };
@@ -1138,6 +1145,8 @@
 		A40D47C3174555AF00CA59D0 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */,
+				A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */,
 				21816A661799DC36000AF4BF /* ScreenGBufferNormalModel.frag */,
 				21816A671799DC36000AF4BF /* ScreenGBufferNormalModel.vert */,
 				A4AB15CC177C996B00FFC12E /* DefferedScreen.frag */,
@@ -1674,6 +1683,8 @@
 				A4F204C317427D4C0063AB07 /* CShape.cpp */,
 				210EFD0D175266EC00DDB182 /* CMesh.h */,
 				210EFD0C175266EC00DDB182 /* CMesh.cpp */,
+				A4DD0EA1179E6C6F009A7AFE /* CAABoundBox.h */,
+				A4DD0EA0179E6C6F009A7AFE /* CAABoundBox.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2146,6 +2157,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4DD0EAF179E7DBE009A7AFE /* CommonBoundBox.frag in Resources */,
+				A4DD0EB0179E7DBE009A7AFE /* CommonBoundBox.vert in Resources */,
 				21816A6A1799DC46000AF4BF /* ScreenGBufferNormalModel.frag in Resources */,
 				21816A6B1799DC46000AF4BF /* ScreenGBufferNormalModel.vert in Resources */,
 				A4AB15D4177C998E00FFC12E /* DefferedScreen.frag in Resources */,
@@ -2421,6 +2434,7 @@
 				A43648A1179D767400C51AC4 /* CInputContext_iOS.mm in Sources */,
 				A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */,
 				A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */,
+				A4DD0EA2179E6C6F009A7AFE /* CAABoundBox.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

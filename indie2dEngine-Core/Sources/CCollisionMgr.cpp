@@ -43,15 +43,13 @@ void CCollisionMgr::_OnInputTapRecognizerPressed(const glm::ivec2& _point)
     
     for(auto handler : m_handlers)
     {
-        std::vector<std::shared_ptr<IGameObject> > targets = handler->_Get_Commands()._ExecuteGetTargetsCommand();
-        for(auto target : targets)
+        std::vector<std::shared_ptr<IGameObject> > colliders = handler->_Get_Commands()._ExecuteGetCollidersCommand();
+        for(auto collider : colliders)
         {
-            std::shared_ptr<CMesh> mesh = target->Get_Mesh();
-            assert(mesh != nullptr);
             glm::vec3 point;
-            if(CCollisionMgr::_CollisionPoint(mesh->Get_VertexBuffer(), mesh->Get_IndexBuffer(), target->Get_WorldMatrix(), origin, direction, &point))
+            if(CCollisionMgr::_CollisionPoint(collider->Get_BoundVertexBuffer(), collider->Get_BoundIndexBuffer(), glm::mat4x4(1.0f), origin, direction, &point))
             {
-                handler->_Get_Commands()._ExecuteCollisionCommand(point, target);
+                handler->_Get_Commands()._ExecuteCollisionCommand(point, collider);
             }
         }
     }

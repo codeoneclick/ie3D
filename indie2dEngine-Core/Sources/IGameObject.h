@@ -19,11 +19,14 @@ class CCamera;
 class CLight;
 class CShape;
 class CMesh;
+class CVertexBuffer;
+class CIndexBuffer;
 class CTexture;
 class CMaterial;
 class CRenderMgr;
 class CSceneUpdateMgr;
 class CResourceAccessor;
+class CAABoundBox;
 
 class IGameObject :
 public std::enable_shared_from_this<IGameObject>,
@@ -47,10 +50,12 @@ protected:
     glm::vec2 m_texcoordDisplacement;
     
     std::map<std::string, std::shared_ptr<CMaterial> > m_materials;
+    std::shared_ptr<CMaterial> m_debugBoundBoxMaterial;
     std::shared_ptr<CMesh> m_mesh;
     
     std::shared_ptr<CCamera> m_camera;
     std::shared_ptr<CLight> m_light;
+    std::shared_ptr<CAABoundBox> m_boundBox;
     
     std::shared_ptr<CRenderMgr> m_renderMgr;
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
@@ -67,6 +72,7 @@ protected:
     virtual void _OnBind(const std::string& _renderMode);
     virtual void _OnDraw(const std::string& _renderMode);
     virtual void _OnUnbind(const std::string& _renderMode);
+    virtual void _OnDebugDraw(const std::string& _renderMode);
     
     virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
     
@@ -117,29 +123,26 @@ public:
         return m_texcoordDisplacement;
     };
     
+    inline glm::mat4x4 Get_WorldMatrix(void)
+    {
+        return m_matrixWorld;
+    };
+    
     glm::vec3 Get_MaxBound(void);
     glm::vec3 Get_MinBound(void);
     
-    inline void Set_Camera(std::shared_ptr<CCamera> _camera)
-    {
-        m_camera = _camera;
-    };
+    void Set_Camera(std::shared_ptr<CCamera> _camera);
     
     virtual inline void Set_Light(std::shared_ptr<CLight> _light)
     {
         m_light = _light;
     };
     
-    inline std::shared_ptr<CMesh> Get_Mesh(void)
-    {
-        assert(m_mesh != nullptr);
-        return m_mesh;
-    };
+    std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void);
+    std::shared_ptr<CIndexBuffer> Get_IndexBuffer(void);
     
-    inline glm::mat4x4 Get_WorldMatrix(void)
-    {
-        return m_matrixWorld;
-    };
+    std::shared_ptr<CVertexBuffer> Get_BoundVertexBuffer(void);
+    std::shared_ptr<CIndexBuffer> Get_BoundIndexBuffer(void);
     
     void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode);
     void Set_Clipping(const glm::vec4& _clipping, const std::string& _renderMode);

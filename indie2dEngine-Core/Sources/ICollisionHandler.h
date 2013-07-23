@@ -17,24 +17,24 @@ class CCollisionCommands final
 {
 private:
     
-    typedef std::function<std::vector<std::shared_ptr<IGameObject> >(void)> __GET_TARGETS_COMMAND;
+    typedef std::function<std::vector<std::shared_ptr<IGameObject> >(void)> __GET_COLLIDERS_COMMAND;
     typedef std::function<void(const glm::vec3& _position, std::shared_ptr<IGameObject>)> __COLLISION_COMMAND;
     
     friend class ICollisionHandler;
     friend class CCollisionMgr;
     
-    __GET_TARGETS_COMMAND m_getTargetsCommand;
+    __GET_COLLIDERS_COMMAND m_getCollidersCommand;
     __COLLISION_COMMAND m_collisionCommand;
     
 protected:
     
     CCollisionCommands(void);
     
-    void _ConnectGetTargetsCommand(const __GET_TARGETS_COMMAND& _command);
+    void _ConnectGetCollidersCommand(const __GET_COLLIDERS_COMMAND& _command);
     void _ConnectCollisionCommand(const __COLLISION_COMMAND& _command);
     
-    std::vector<std::shared_ptr<IGameObject> > _ExecuteGetTargetsCommand(void);
-    void _ExecuteCollisionCommand(const glm::vec3& _position, std::shared_ptr<IGameObject> _target);
+    std::vector<std::shared_ptr<IGameObject> > _ExecuteGetCollidersCommand(void);
+    void _ExecuteCollisionCommand(const glm::vec3& _position, std::shared_ptr<IGameObject> _collider);
     
 public:
     
@@ -60,8 +60,8 @@ protected:
     
     ICollisionHandler(void);
     
-    virtual std::vector<std::shared_ptr<IGameObject> > _OnGetTargets(void) = 0;
-    virtual void _OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _target) = 0;
+    virtual std::vector<std::shared_ptr<IGameObject> > _OnGetColliders(void) = 0;
+    virtual void _OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _collider) = 0;
     
 public:
     

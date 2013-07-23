@@ -14,6 +14,8 @@
 #include "CLight.h"
 #include "CResourceAccessor.h"
 #include "ITemplate.h"
+#include "CAABoundBox.h"
+#include "CMesh.h"
 
 CModel::CModel(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 IGameObject(_resourceFabricator)
@@ -60,6 +62,23 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         }
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
+    
+    m_boundBox = m_mesh->CreateBoundBox();
+    assert(m_boundBox != nullptr);
+    
+    std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(k_vsBoundBoxFilename,
+                                                                         k_fsBoundBoxFilename);
+    assert(shader != nullptr);
+    m_debugBoundBoxMaterial = std::make_shared<CMaterial>(shader);
+    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_CULL_MODE, false);
+    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, true);
+    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_DEPTH_MASK, true);
+    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_BLEND_MODE, true);
+    
+    m_debugBoundBoxMaterial->Set_CullFaceMode(GL_FRONT);
+    m_debugBoundBoxMaterial->Set_BlendFunctionSource(GL_SRC_ALPHA);
+    m_debugBoundBoxMaterial->Set_BlendFunctionDest(GL_ONE_MINUS_SRC_ALPHA);
+    
     IGameObject::_LazyListenRenderMgr();
     m_isLoaded = true;
 }

@@ -44,18 +44,18 @@ void CMainMenuScene::Load(void)
     
     m_model_01 = m_root->CreateModel("model.xml");
     m_model_01->Set_Position(glm::vec3(12.0f, 0.0f, 12.0f));
-    m_collisionTargets.push_back(m_model_01);
+    m_colliders.push_back(m_model_01);
     m_root->InsertModel(m_model_01);
     
     m_model_02 = m_root->CreateModel("model.xml");
     m_model_02->Set_Position(glm::vec3(12.0f, 0.0f, 30.0f));
-    m_collisionTargets.push_back(m_model_02);
+    m_colliders.push_back(m_model_02);
     m_root->InsertModel(m_model_02);
     
     
     m_model_03= m_root->CreateModel("model.xml");
     m_model_03->Set_Position(glm::vec3(30.0f, 0.0f, 30.0f));
-    m_collisionTargets.push_back(m_model_03);
+    m_colliders.push_back(m_model_03);
     m_root->InsertModel(m_model_03);
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
@@ -79,9 +79,9 @@ void CMainMenuScene::Update(f32 _deltatime)
     m_light->Set_Position(lightPosition);
 }
 
-std::vector<std::shared_ptr<IGameObject> > CMainMenuScene::_OnGetTargets(void)
+std::vector<std::shared_ptr<IGameObject> > CMainMenuScene::_OnGetColliders(void)
 {
-    return m_collisionTargets;
+    return m_colliders;
 }
 
 void CMainMenuScene::_OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _target)
