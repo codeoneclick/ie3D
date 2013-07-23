@@ -8,8 +8,8 @@
 
 #include "CGameViewController.h"
 #include "COGLWindow_iOS.h"
-#include "CGameXcomWorkflow.h"
-#include "CGameXcomInGameTransition.h"
+#include "CKOTHWorkflow.h"
+#include "CKOTHInGameTransition.h"
 #include "CGameLoopExecutor.h"
 
 @interface CGameViewController ()
@@ -35,7 +35,7 @@
     NSRunLoop *runner = [NSRunLoop currentRunLoop];
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
     
-    CGameXcomWorkflow* workflow = new CGameXcomWorkflow();
+    CKOTHWorkflow* workflow = new CKOTHWorkflow();
     std::shared_ptr<IGameTransition> transition = workflow->CreateXcomInGameTransition("main.transition.xml", (__bridge void*)self.m_glWindow);
     workflow->RegisterTransition(transition);
     workflow->GoToTransition("main.transition.xml");

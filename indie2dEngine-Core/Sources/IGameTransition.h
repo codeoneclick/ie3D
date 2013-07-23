@@ -19,6 +19,7 @@ class IGraphicsContext;
 class IInputContext;
 class CResourceAccessor;
 class CTemplateAccessor;
+class IScene;
 
 class IGameTransition :
 public CSceneGraph,
@@ -33,6 +34,7 @@ protected:
     friend class IGameWorkflow;
     
     std::string m_guid;
+    std::shared_ptr<IScene> m_scene;
     bool m_isLoaded;
     
     virtual void _OnRegistered(void);

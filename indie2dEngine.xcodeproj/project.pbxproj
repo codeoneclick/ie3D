@@ -96,7 +96,7 @@
 		A42FE6311771EEA900131949 /* screen.space.blur.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */; };
 		A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
 		A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364842179953E000C51AC4 /* ICollisionHandler.cpp */; };
-		A4364897179D6D3C00C51AC4 /* CMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364895179D6D3B00C51AC4 /* CMainMenuScene.cpp */; };
+		A4364897179D6D3C00C51AC4 /* CKOTHInGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364895179D6D3B00C51AC4 /* CKOTHInGameScene.cpp */; };
 		A43648A1179D767400C51AC4 /* CInputContext_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A436489C179D767400C51AC4 /* CInputContext_iOS.mm */; };
 		A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */; };
 		A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */; };
@@ -191,8 +191,8 @@
 		A481749617621EA700E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749417621EA600E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp */; };
 		A481749917621FF500E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749717621FF200E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp */; };
 		A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749A176221FC00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp */; };
-		A494B85D17686741004C9F96 /* CGameXcomWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B85B17686741004C9F96 /* CGameXcomWorkflow.cpp */; };
-		A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */; };
+		A494B85D17686741004C9F96 /* CKOTHWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B85B17686741004C9F96 /* CKOTHWorkflow.cpp */; };
+		A494B86817686776004C9F96 /* CKOTHInGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B86617686776004C9F96 /* CKOTHInGameTransition.cpp */; };
 		A494B8A21768A7DD004C9F96 /* material.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A11768A7DD004C9F96 /* material.screen.xml */; };
 		A494B8A41768A83D004C9F96 /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A31768A83C004C9F96 /* material.output.xml */; };
 		A49B83841754C07200AEB4DC /* CModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B83821754C07200AEB4DC /* CModel.cpp */; };
@@ -220,6 +220,7 @@
 		A4DD0EA2179E6C6F009A7AFE /* CAABoundBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0EA0179E6C6F009A7AFE /* CAABoundBox.cpp */; };
 		A4DD0EAF179E7DBE009A7AFE /* CommonBoundBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */; };
 		A4DD0EB0179E7DBE009A7AFE /* CommonBoundBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */; };
+		A4DD0F30179EC783009A7AFE /* IScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F2E179EC782009A7AFE /* IScene.cpp */; };
 		A4F204A017423C1E0063AB07 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049E17423C1E0063AB07 /* AppDelegate.mm */; };
 		A4F204A117423C1E0063AB07 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049F17423C1E0063AB07 /* main.mm */; };
 		A4F204A617423C4D0063AB07 /* IGraphicsContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204A417423C4D0063AB07 /* IGraphicsContext.cpp */; };
@@ -535,8 +536,8 @@
 		A4364840179952D300C51AC4 /* CCollisionMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCollisionMgr.h; path = Sources/CCollisionMgr.h; sourceTree = "<group>"; };
 		A4364842179953E000C51AC4 /* ICollisionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICollisionHandler.cpp; path = Sources/ICollisionHandler.cpp; sourceTree = "<group>"; };
 		A4364843179953E000C51AC4 /* ICollisionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICollisionHandler.h; path = Sources/ICollisionHandler.h; sourceTree = "<group>"; };
-		A4364895179D6D3B00C51AC4 /* CMainMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMainMenuScene.cpp; path = "indie2dEngine-Game/Source/CMainMenuScene.cpp"; sourceTree = "<group>"; };
-		A4364896179D6D3B00C51AC4 /* CMainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMainMenuScene.h; path = "indie2dEngine-Game/Source/CMainMenuScene.h"; sourceTree = "<group>"; };
+		A4364895179D6D3B00C51AC4 /* CKOTHInGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CKOTHInGameScene.cpp; path = "indie2dEngine-Game/Source/CKOTHInGameScene.cpp"; sourceTree = "<group>"; };
+		A4364896179D6D3B00C51AC4 /* CKOTHInGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHInGameScene.h; path = "indie2dEngine-Game/Source/CKOTHInGameScene.h"; sourceTree = "<group>"; };
 		A436489C179D767400C51AC4 /* CInputContext_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CInputContext_iOS.mm; path = Sources/CInputContext_iOS.mm; sourceTree = "<group>"; };
 		A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInputContext_Win32.cpp; path = Sources/CInputContext_Win32.cpp; sourceTree = "<group>"; };
 		A436489E179D767400C51AC4 /* IInputContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IInputContext.h; path = Sources/IInputContext.h; sourceTree = "<group>"; };
@@ -648,10 +649,10 @@
 		A481749817621FF300E1DC6E /* COutputRenderOperationTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COutputRenderOperationTemplateLoadingOperation.h; path = Sources/COutputRenderOperationTemplateLoadingOperation.h; sourceTree = "<group>"; };
 		A481749A176221FC00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameTransitionTemplateLoadingOperation.cpp; path = Sources/CGameTransitionTemplateLoadingOperation.cpp; sourceTree = "<group>"; };
 		A481749B176221FD00E1DC6E /* CGameTransitionTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameTransitionTemplateLoadingOperation.h; path = Sources/CGameTransitionTemplateLoadingOperation.h; sourceTree = "<group>"; };
-		A494B85B17686741004C9F96 /* CGameXcomWorkflow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGameXcomWorkflow.cpp; path = "indie2dEngine-Game/Source/CGameXcomWorkflow.cpp"; sourceTree = "<group>"; };
-		A494B85C17686741004C9F96 /* CGameXcomWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameXcomWorkflow.h; path = "indie2dEngine-Game/Source/CGameXcomWorkflow.h"; sourceTree = "<group>"; };
-		A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameXcomInGameTransition.cpp; path = "indie2dEngine-Game/Source/CGameXcomInGameTransition.cpp"; sourceTree = "<group>"; };
-		A494B86717686776004C9F96 /* CGameXcomInGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameXcomInGameTransition.h; path = "indie2dEngine-Game/Source/CGameXcomInGameTransition.h"; sourceTree = "<group>"; };
+		A494B85B17686741004C9F96 /* CKOTHWorkflow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CKOTHWorkflow.cpp; path = "indie2dEngine-Game/Source/CKOTHWorkflow.cpp"; sourceTree = "<group>"; };
+		A494B85C17686741004C9F96 /* CKOTHWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHWorkflow.h; path = "indie2dEngine-Game/Source/CKOTHWorkflow.h"; sourceTree = "<group>"; };
+		A494B86617686776004C9F96 /* CKOTHInGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CKOTHInGameTransition.cpp; path = "indie2dEngine-Game/Source/CKOTHInGameTransition.cpp"; sourceTree = "<group>"; };
+		A494B86717686776004C9F96 /* CKOTHInGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHInGameTransition.h; path = "indie2dEngine-Game/Source/CKOTHInGameTransition.h"; sourceTree = "<group>"; };
 		A494B8A11768A7DD004C9F96 /* material.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.screen.xml; sourceTree = "<group>"; };
 		A494B8A31768A83C004C9F96 /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
 		A49B83821754C07200AEB4DC /* CModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModel.cpp; path = Sources/CModel.cpp; sourceTree = "<group>"; };
@@ -685,6 +686,8 @@
 		A4DD0EA1179E6C6F009A7AFE /* CAABoundBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAABoundBox.h; path = Sources/CAABoundBox.h; sourceTree = "<group>"; };
 		A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.frag; sourceTree = "<group>"; };
 		A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.vert; sourceTree = "<group>"; };
+		A4DD0F2E179EC782009A7AFE /* IScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IScene.cpp; path = Sources/IScene.cpp; sourceTree = "<group>"; };
+		A4DD0F2F179EC783009A7AFE /* IScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IScene.h; path = Sources/IScene.h; sourceTree = "<group>"; };
 		A4F2049D17423C1E0063AB07 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "indie2dEngine-Core/Sources/AppDelegate.h"; sourceTree = SOURCE_ROOT; };
 		A4F2049E17423C1E0063AB07 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "indie2dEngine-Core/Sources/AppDelegate.mm"; sourceTree = SOURCE_ROOT; };
 		A4F2049F17423C1E0063AB07 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = "indie2dEngine-Core/Sources/main.mm"; sourceTree = SOURCE_ROOT; };
@@ -1592,6 +1595,8 @@
 				A40A698C174E634A005B475E /* CSceneUpdateMgr.cpp */,
 				A40A6990174E69F3005B475E /* ISceneUpdateHandler.h */,
 				A40A698F174E69F3005B475E /* ISceneUpdateHandler.cpp */,
+				A4DD0F2F179EC783009A7AFE /* IScene.h */,
+				A4DD0F2E179EC782009A7AFE /* IScene.cpp */,
 			);
 			name = "SceneGraph Managment";
 			sourceTree = "<group>";
@@ -1735,12 +1740,12 @@
 				A46A317517463DE10044643E /* CGameViewController.h */,
 				A46A317617463DE10044643E /* CGameViewController.mm */,
 				A46A317717463DE10044643E /* CGameViewController.xib */,
-				A494B85C17686741004C9F96 /* CGameXcomWorkflow.h */,
-				A494B85B17686741004C9F96 /* CGameXcomWorkflow.cpp */,
-				A494B86717686776004C9F96 /* CGameXcomInGameTransition.h */,
-				A494B86617686776004C9F96 /* CGameXcomInGameTransition.cpp */,
-				A4364896179D6D3B00C51AC4 /* CMainMenuScene.h */,
-				A4364895179D6D3B00C51AC4 /* CMainMenuScene.cpp */,
+				A494B85C17686741004C9F96 /* CKOTHWorkflow.h */,
+				A494B85B17686741004C9F96 /* CKOTHWorkflow.cpp */,
+				A494B86717686776004C9F96 /* CKOTHInGameTransition.h */,
+				A494B86617686776004C9F96 /* CKOTHInGameTransition.cpp */,
+				A4364896179D6D3B00C51AC4 /* CKOTHInGameScene.h */,
+				A4364895179D6D3B00C51AC4 /* CKOTHInGameScene.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -2424,17 +2429,18 @@
 				A481749617621EA700E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */,
 				A481749917621FF500E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp in Sources */,
 				A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
-				A494B85D17686741004C9F96 /* CGameXcomWorkflow.cpp in Sources */,
-				A494B86817686776004C9F96 /* CGameXcomInGameTransition.cpp in Sources */,
+				A494B85D17686741004C9F96 /* CKOTHWorkflow.cpp in Sources */,
+				A494B86817686776004C9F96 /* CKOTHInGameTransition.cpp in Sources */,
 				A4AB15B2177C4E1B00FFC12E /* CFPSCounter.cpp in Sources */,
 				A4AB15BD177C73D400FFC12E /* CTimer.cpp in Sources */,
 				A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */,
 				A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */,
-				A4364897179D6D3C00C51AC4 /* CMainMenuScene.cpp in Sources */,
+				A4364897179D6D3C00C51AC4 /* CKOTHInGameScene.cpp in Sources */,
 				A43648A1179D767400C51AC4 /* CInputContext_iOS.mm in Sources */,
 				A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */,
 				A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */,
 				A4DD0EA2179E6C6F009A7AFE /* CAABoundBox.cpp in Sources */,
+				A4DD0F30179EC783009A7AFE /* IScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
