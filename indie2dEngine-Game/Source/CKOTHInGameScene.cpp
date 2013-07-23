@@ -44,26 +44,17 @@ void CKOTHInGameScene::Load(void)
     m_root->Set_Camera(m_camera);
     m_root->Set_Light(m_light);
     
-    std::shared_ptr<CModel> model_01 = m_root->CreateModel("model.xml");
-    model_01->Set_Position(glm::vec3(12.0f, 0.0f, 12.0f));
-    
-    m_models.push_back(model_01);
-    m_colliders.push_back(model_01);
-    m_root->InsertModel(model_01);
-    
-    std::shared_ptr<CModel> model_02 = m_root->CreateModel("model.xml");
-    model_02->Set_Position(glm::vec3(12.0f, 0.0f, 30.0f));
-    
-    m_models.push_back(model_02);
-    m_colliders.push_back(model_02);
-    m_root->InsertModel(model_02);
-    
-    std::shared_ptr<CModel> model_03= m_root->CreateModel("model.xml");
-    model_03->Set_Position(glm::vec3(30.0f, 0.0f, 30.0f));
-    
-    m_models.push_back(model_03);
-    m_colliders.push_back(model_03);
-    m_root->InsertModel(model_03);
+    for(i32 i = 0; i < 16; ++i)
+    {
+        for(i32 j = 0; j < 16; ++j)
+        {
+            std::shared_ptr<CModel> model = m_root->CreateModel("model.xml");
+            model->Set_Position(glm::vec3(i * 10, 0.0f, j * 10));
+            m_models.push_back(model);
+            m_colliders.push_back(model);
+            m_root->InsertModel(model);
+        }
+    }
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
     particleEmitter->Set_Position(glm::vec3(12.0f, 2.0f, 12.0f));
@@ -74,7 +65,7 @@ void CKOTHInGameScene::Load(void)
     m_root->RegisterCollisionHandler(shared_from_this());
 }
 
-void CKOTHInGameScene::Update(f32 _deltatime)
+void CKOTHInGameScene::OnUpdate(f32 _deltatime)
 {
     static float angle = 0.0f;
     m_models[0]->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
@@ -88,8 +79,8 @@ void CKOTHInGameScene::Update(f32 _deltatime)
     m_light->Set_Position(lightPosition);
 }
 
-void CKOTHInGameScene::_OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _target)
+void CKOTHInGameScene::_OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _collider)
 {
-    std::cout<<_target<<std::endl;
+    std::cout<<_collider<<std::endl;
 }
 

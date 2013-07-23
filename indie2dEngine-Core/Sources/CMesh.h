@@ -168,14 +168,12 @@ public:
     
     inline const glm::vec3 Get_MaxBound(void)
     {
-        assert(m_header != nullptr);
-        return m_header->Get_MaxBound();
+        return m_header != nullptr ? m_header->Get_MaxBound() : glm::vec3(0.0f);
     }
     
     inline const glm::vec3 Get_MinBound(void)
     {
-        assert(m_header != nullptr);
-        return m_header->Get_MinBound();
+        return m_header != nullptr ? m_header->Get_MinBound() : glm::vec3(0.0f);
     };
     
     void Bind(const i32* _attributes);

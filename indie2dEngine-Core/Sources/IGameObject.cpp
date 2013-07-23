@@ -16,6 +16,7 @@
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
 #include "CAABoundBox.h"
+#include "CFrustum.h"
 
 IGameObject::IGameObject(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 m_resourceFabricator(_resourceFabricator),
@@ -160,6 +161,16 @@ void IGameObject::_OnSceneUpdate(f32 _deltatime)
 i32 IGameObject::_OnQueuePosition(void)
 {
     return NULL;
+}
+
+bool IGameObject::_OnOcclusion(void)
+{
+    assert(m_camera != nullptr);
+    assert(m_camera->Get_Frustum() != nullptr);
+    
+    glm::vec3 maxBound = IGameObject::Get_MaxBound() + m_position;
+    glm::vec3 minBound = IGameObject::Get_MinBound() + m_position;
+    return !m_camera->Get_Frustum()->IsBoundBoxInFrustum(maxBound, minBound);
 }
 
 void IGameObject::_OnBind(const std::string &_renderMode)

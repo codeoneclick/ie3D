@@ -117,11 +117,13 @@ void CRenderOperationWorldSpace::Draw(void)
         {
             std::shared_ptr<IRenderHandler> handler = (*iterator_02);
             assert(handler != nullptr);
-            
-            handler->_Get_Commands()._ExecuteRenderBindCommand(m_mode);
-            handler->_Get_Commands()._ExecuteRenderDrawCommand(m_mode);
-            handler->_Get_Commands()._ExecuteRenderUnbindCommand(m_mode);
-            handler->_Get_Commands()._ExecuteRenderDebugDrawCommand(m_mode);
+            if(!handler->_OnOcclusion())
+            {
+                handler->_Get_Commands()._ExecuteRenderBindCommand(m_mode);
+                handler->_Get_Commands()._ExecuteRenderDrawCommand(m_mode);
+                handler->_Get_Commands()._ExecuteRenderUnbindCommand(m_mode);
+                handler->_Get_Commands()._ExecuteRenderDebugDrawCommand(m_mode);
+            }
         }
     }
 }

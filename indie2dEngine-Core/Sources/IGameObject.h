@@ -69,6 +69,7 @@ protected:
     virtual void _OnSceneUpdate(f32 _deltatime);
     
     virtual i32 _OnQueuePosition(void);
+    virtual bool _OnOcclusion(void);
     virtual void _OnBind(const std::string& _renderMode);
     virtual void _OnDraw(const std::string& _renderMode);
     virtual void _OnUnbind(const std::string& _renderMode);

@@ -31,6 +31,6 @@ void CKOTHInGameTransition::_OnGameLoopUpdate(f32 _deltatime)
 {
     if(m_isLoaded && m_scene != nullptr)
     {
-        m_scene->Update(_deltatime);
+        m_scene->OnUpdate(_deltatime);
     }
 }

@@ -221,6 +221,10 @@
 		A4DD0EAF179E7DBE009A7AFE /* CommonBoundBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */; };
 		A4DD0EB0179E7DBE009A7AFE /* CommonBoundBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */; };
 		A4DD0F30179EC783009A7AFE /* IScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F2E179EC782009A7AFE /* IScene.cpp */; };
+		A4DD0F36179EE100009A7AFE /* CNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F34179EE0FF009A7AFE /* CNavigator.cpp */; };
+		A4DD0F39179EE133009A7AFE /* CCharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F37179EE132009A7AFE /* CCharacterController.cpp */; };
+		A4DD0F3D179EE67A009A7AFE /* CMoveControllerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F3B179EE678009A7AFE /* CMoveControllerHandler.cpp */; };
+		A4DD0F40179EE6A4009A7AFE /* CMoveControllerView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F3F179EE6A3009A7AFE /* CMoveControllerView_iOS.mm */; };
 		A4F204A017423C1E0063AB07 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049E17423C1E0063AB07 /* AppDelegate.mm */; };
 		A4F204A117423C1E0063AB07 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049F17423C1E0063AB07 /* main.mm */; };
 		A4F204A617423C4D0063AB07 /* IGraphicsContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204A417423C4D0063AB07 /* IGraphicsContext.cpp */; };
@@ -229,7 +233,6 @@
 		A4F204AE17423C7F0063AB07 /* IGameLoopHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204AA17423C7F0063AB07 /* IGameLoopHandler.cpp */; };
 		A4F204B317423E4D0063AB07 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B217423E4D0063AB07 /* OpenGLES.framework */; };
 		A4F204B517423E540063AB07 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
-		A4F204B917427B780063AB07 /* CGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204B717427B780063AB07 /* CGame.cpp */; };
 		A4F204BD17427C700063AB07 /* CSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BB17427C700063AB07 /* CSceneGraph.cpp */; };
 		A4F204CD17427D4C0063AB07 /* CIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C117427D4C0063AB07 /* CIndexBuffer.cpp */; };
 		A4F204CE17427D4C0063AB07 /* CShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C317427D4C0063AB07 /* CShape.cpp */; };
@@ -688,6 +691,15 @@
 		A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.vert; sourceTree = "<group>"; };
 		A4DD0F2E179EC782009A7AFE /* IScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IScene.cpp; path = Sources/IScene.cpp; sourceTree = "<group>"; };
 		A4DD0F2F179EC783009A7AFE /* IScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IScene.h; path = Sources/IScene.h; sourceTree = "<group>"; };
+		A4DD0F34179EE0FF009A7AFE /* CNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNavigator.cpp; path = "indie2dEngine-Game/Source/CNavigator.cpp"; sourceTree = "<group>"; };
+		A4DD0F35179EE0FF009A7AFE /* CNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNavigator.h; path = "indie2dEngine-Game/Source/CNavigator.h"; sourceTree = "<group>"; };
+		A4DD0F37179EE132009A7AFE /* CCharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCharacterController.cpp; path = "indie2dEngine-Game/Source/CCharacterController.cpp"; sourceTree = "<group>"; };
+		A4DD0F38179EE132009A7AFE /* CCharacterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCharacterController.h; path = "indie2dEngine-Game/Source/CCharacterController.h"; sourceTree = "<group>"; };
+		A4DD0F3A179EE418009A7AFE /* HKOTHEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HKOTHEnums.h; path = "indie2dEngine-Game/Source/HKOTHEnums.h"; sourceTree = "<group>"; };
+		A4DD0F3B179EE678009A7AFE /* CMoveControllerHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMoveControllerHandler.cpp; path = "indie2dEngine-Game/Source/CMoveControllerHandler.cpp"; sourceTree = "<group>"; };
+		A4DD0F3C179EE679009A7AFE /* CMoveControllerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMoveControllerHandler.h; path = "indie2dEngine-Game/Source/CMoveControllerHandler.h"; sourceTree = "<group>"; };
+		A4DD0F3E179EE6A3009A7AFE /* CMoveControllerView_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMoveControllerView_iOS.h; path = "indie2dEngine-Game/Source/CMoveControllerView_iOS.h"; sourceTree = "<group>"; };
+		A4DD0F3F179EE6A3009A7AFE /* CMoveControllerView_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMoveControllerView_iOS.mm; path = "indie2dEngine-Game/Source/CMoveControllerView_iOS.mm"; sourceTree = "<group>"; };
 		A4F2049D17423C1E0063AB07 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "indie2dEngine-Core/Sources/AppDelegate.h"; sourceTree = SOURCE_ROOT; };
 		A4F2049E17423C1E0063AB07 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "indie2dEngine-Core/Sources/AppDelegate.mm"; sourceTree = SOURCE_ROOT; };
 		A4F2049F17423C1E0063AB07 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = "indie2dEngine-Core/Sources/main.mm"; sourceTree = SOURCE_ROOT; };
@@ -702,8 +714,6 @@
 		A4F204AB17423C7F0063AB07 /* IGameLoopHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGameLoopHandler.h; path = "indie2dEngine-Core/Sources/IGameLoopHandler.h"; sourceTree = SOURCE_ROOT; };
 		A4F204B217423E4D0063AB07 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A4F204B417423E540063AB07 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A4F204B717427B780063AB07 /* CGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGame.cpp; path = "indie2dEngine-Game/Source/CGame.cpp"; sourceTree = "<group>"; };
-		A4F204B817427B780063AB07 /* CGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGame.h; path = "indie2dEngine-Game/Source/CGame.h"; sourceTree = "<group>"; };
 		A4F204BB17427C700063AB07 /* CSceneGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneGraph.cpp; path = Sources/CSceneGraph.cpp; sourceTree = "<group>"; };
 		A4F204BC17427C700063AB07 /* CSceneGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSceneGraph.h; path = Sources/CSceneGraph.h; sourceTree = "<group>"; };
 		A4F204C117427D4C0063AB07 /* CIndexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIndexBuffer.cpp; path = Sources/CIndexBuffer.cpp; sourceTree = "<group>"; };
@@ -1735,8 +1745,7 @@
 		A4F204BA17427BEB0063AB07 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A4F204B817427B780063AB07 /* CGame.h */,
-				A4F204B717427B780063AB07 /* CGame.cpp */,
+				A4DD0F3A179EE418009A7AFE /* HKOTHEnums.h */,
 				A46A317517463DE10044643E /* CGameViewController.h */,
 				A46A317617463DE10044643E /* CGameViewController.mm */,
 				A46A317717463DE10044643E /* CGameViewController.xib */,
@@ -1746,6 +1755,14 @@
 				A494B86617686776004C9F96 /* CKOTHInGameTransition.cpp */,
 				A4364896179D6D3B00C51AC4 /* CKOTHInGameScene.h */,
 				A4364895179D6D3B00C51AC4 /* CKOTHInGameScene.cpp */,
+				A4DD0F35179EE0FF009A7AFE /* CNavigator.h */,
+				A4DD0F34179EE0FF009A7AFE /* CNavigator.cpp */,
+				A4DD0F38179EE132009A7AFE /* CCharacterController.h */,
+				A4DD0F37179EE132009A7AFE /* CCharacterController.cpp */,
+				A4DD0F3C179EE679009A7AFE /* CMoveControllerHandler.h */,
+				A4DD0F3B179EE678009A7AFE /* CMoveControllerHandler.cpp */,
+				A4DD0F3E179EE6A3009A7AFE /* CMoveControllerView_iOS.h */,
+				A4DD0F3F179EE6A3009A7AFE /* CMoveControllerView_iOS.mm */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -2353,7 +2370,6 @@
 				A4F204AC17423C7F0063AB07 /* CGameLoopExecutor_iOS.mm in Sources */,
 				A4F204AD17423C7F0063AB07 /* CGameLoopExecutor_Win32.cpp in Sources */,
 				A4F204AE17423C7F0063AB07 /* IGameLoopHandler.cpp in Sources */,
-				A4F204B917427B780063AB07 /* CGame.cpp in Sources */,
 				A4F204BD17427C700063AB07 /* CSceneGraph.cpp in Sources */,
 				A4F204CD17427D4C0063AB07 /* CIndexBuffer.cpp in Sources */,
 				A4F204CE17427D4C0063AB07 /* CShape.cpp in Sources */,
@@ -2441,6 +2457,10 @@
 				A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */,
 				A4DD0EA2179E6C6F009A7AFE /* CAABoundBox.cpp in Sources */,
 				A4DD0F30179EC783009A7AFE /* IScene.cpp in Sources */,
+				A4DD0F36179EE100009A7AFE /* CNavigator.cpp in Sources */,
+				A4DD0F39179EE133009A7AFE /* CCharacterController.cpp in Sources */,
+				A4DD0F3D179EE67A009A7AFE /* CMoveControllerHandler.cpp in Sources */,
+				A4DD0F40179EE6A4009A7AFE /* CMoveControllerView_iOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

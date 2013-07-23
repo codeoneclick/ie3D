@@ -41,7 +41,7 @@ public:
     virtual ~IScene(void);
     
     virtual void Load(void) = 0;
-    virtual void Update(f32 _deltatime) = 0;
+    virtual void OnUpdate(f32 _deltatime) = 0;
 };
 
 #endif 

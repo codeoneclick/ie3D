@@ -33,7 +33,7 @@ public:
     ~CKOTHInGameScene(void);
     
     void Load(void);
-    void Update(f32 _deltatime);
+    void OnUpdate(f32 _deltatime);
 };
 
 #endif 
