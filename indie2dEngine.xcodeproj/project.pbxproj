@@ -22,6 +22,13 @@
 		21816A6B1799DC46000AF4BF /* ScreenGBufferNormalModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21816A671799DC36000AF4BF /* ScreenGBufferNormalModel.vert */; };
 		21816A6E1799DE0F000AF4BF /* gbuffer.normal.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21816A6C1799DE0E000AF4BF /* gbuffer.normal.material.xml */; };
 		21816A6F1799DE0F000AF4BF /* gbuffer.normal.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21816A6D1799DE0E000AF4BF /* gbuffer.normal.operation.xml */; };
+		21816A7B17A07F3F000AF4BF /* Footman.mdl in Resources */ = {isa = PBXBuildFile; fileRef = 21816A7A17A07F3F000AF4BF /* Footman.mdl */; };
+		21816A8517A07F47000AF4BF /* Footman.Diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21816A8417A07F47000AF4BF /* Footman.Diffuse.pvr */; };
+		21879FD217A0809600605D7F /* material.model.Footman.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21879FCD17A0809600605D7F /* material.model.Footman.common.xml */; };
+		21879FD317A0809600605D7F /* material.model.Footman.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21879FCE17A0809600605D7F /* material.model.Footman.reflection.xml */; };
+		21879FD417A0809600605D7F /* material.model.Footman.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21879FCF17A0809600605D7F /* material.model.Footman.refraction.xml */; };
+		21879FD517A0809600605D7F /* model.Building.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21879FD017A0809600605D7F /* model.Building.xml */; };
+		21879FD617A0809600605D7F /* model.Footman.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21879FD117A0809600605D7F /* model.Footman.xml */; };
 		21E09E8E17759A5400F199AD /* ParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8317758E6A00F199AD /* ParticleEmitter.vert */; };
 		21E09E8F17759A5400F199AD /* ParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8217758E6A00F199AD /* ParticleEmitter.frag */; };
 		21E42A4E1767B3FD00E40437 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4A1767B3FD00E40437 /* main.transition.xml */; };
@@ -103,7 +110,6 @@
 		A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A437A9EC177B424000160BD7 /* libgcdpp.a */; };
 		A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		A45588D61756406C00802609 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
-		A45588DB17564B8B00802609 /* model.xml in Resources */ = {isa = PBXBuildFile; fileRef = A45588D917564B8B00802609 /* model.xml */; };
 		A45588DD17565EB800802609 /* buildings_atlas.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A45588DC17565EB800802609 /* buildings_atlas.pvr */; };
 		A45588EE17575FD300802609 /* libcurl-device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A45588EC17575FD300802609 /* libcurl-device.a */; };
 		A45588EF17575FD300802609 /* libcurl-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A45588ED17575FD300802609 /* libcurl-simulator.a */; };
@@ -464,6 +470,13 @@
 		21816A671799DC36000AF4BF /* ScreenGBufferNormalModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferNormalModel.vert; sourceTree = "<group>"; };
 		21816A6C1799DE0E000AF4BF /* gbuffer.normal.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.material.xml; sourceTree = "<group>"; };
 		21816A6D1799DE0E000AF4BF /* gbuffer.normal.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.operation.xml; sourceTree = "<group>"; };
+		21816A7A17A07F3F000AF4BF /* Footman.mdl */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman.mdl; sourceTree = "<group>"; };
+		21816A8417A07F47000AF4BF /* Footman.Diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman.Diffuse.pvr; sourceTree = "<group>"; };
+		21879FCD17A0809600605D7F /* material.model.Footman.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.common.xml; sourceTree = "<group>"; };
+		21879FCE17A0809600605D7F /* material.model.Footman.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.reflection.xml; sourceTree = "<group>"; };
+		21879FCF17A0809600605D7F /* material.model.Footman.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.refraction.xml; sourceTree = "<group>"; };
+		21879FD017A0809600605D7F /* model.Building.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Building.xml; sourceTree = "<group>"; };
+		21879FD117A0809600605D7F /* model.Footman.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Footman.xml; sourceTree = "<group>"; };
 		21E09E8217758E6A00F199AD /* ParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.frag; sourceTree = "<group>"; };
 		21E09E8317758E6A00F199AD /* ParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.vert; sourceTree = "<group>"; };
 		21E42A4A1767B3FD00E40437 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
@@ -564,7 +577,6 @@
 		A45588CA175628F500802609 /* ITemplateLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITemplateLoadingHandler.h; path = Sources/ITemplateLoadingHandler.h; sourceTree = "<group>"; };
 		A45588D41756406C00802609 /* CLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLight.cpp; path = Sources/CLight.cpp; sourceTree = "<group>"; };
 		A45588D51756406C00802609 /* CLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLight.h; path = Sources/CLight.h; sourceTree = "<group>"; };
-		A45588D917564B8B00802609 /* model.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.xml; sourceTree = "<group>"; };
 		A45588DC17565EB800802609 /* buildings_atlas.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = buildings_atlas.pvr; sourceTree = "<group>"; };
 		A45588DF17575F3900802609 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
 		A45588E017575F3900802609 /* curlbuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlbuild.h; sourceTree = "<group>"; };
@@ -1187,6 +1199,7 @@
 		A40A6A6F1753B06C005B475E /* Meshes */ = {
 			isa = PBXGroup;
 			children = (
+				21816A7A17A07F3F000AF4BF /* Footman.mdl */,
 				A40A6A701753B06C005B475E /* mesh.mdl */,
 			);
 			name = Meshes;
@@ -1412,6 +1425,11 @@
 		A45588D717564B8B00802609 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				21879FCD17A0809600605D7F /* material.model.Footman.common.xml */,
+				21879FCE17A0809600605D7F /* material.model.Footman.reflection.xml */,
+				21879FCF17A0809600605D7F /* material.model.Footman.refraction.xml */,
+				21879FD017A0809600605D7F /* model.Building.xml */,
+				21879FD117A0809600605D7F /* model.Footman.xml */,
 				A46789EB17A031E900FE26FA /* material.model.common.xml */,
 				A46789EC17A031EA00FE26FA /* material.model.reflection.xml */,
 				A46789ED17A031EC00FE26FA /* material.model.refraction.xml */,
@@ -1437,7 +1455,6 @@
 				21E42A4B1767B3FD00E40437 /* output.space.operation.xml */,
 				21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */,
 				21E42A4D1767B3FD00E40437 /* world.space.operation.xml */,
-				A45588D917564B8B00802609 /* model.xml */,
 				A46789DB17A0224500FE26FA /* material.ocean.xml */,
 				A46789DC17A0224500FE26FA /* ocean.xml */,
 			);
@@ -1507,6 +1524,7 @@
 		A46A3212174E10B80044643E /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				21816A8417A07F47000AF4BF /* Footman.Diffuse.pvr */,
 				A46789E917A0316900FE26FA /* ocean.pvr */,
 				A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */,
 				A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */,
@@ -2358,7 +2376,6 @@
 				A46A317917463DE10044643E /* CGameViewController.xib in Resources */,
 				A46A3214174E10B80044643E /* texture_01.pvr in Resources */,
 				A40A6A711753B06C005B475E /* mesh.mdl in Resources */,
-				A45588DB17564B8B00802609 /* model.xml in Resources */,
 				A45588DD17565EB800802609 /* buildings_atlas.pvr in Resources */,
 				210EFD40175BD4DA00DDB182 /* json_internalarray.inl in Resources */,
 				210EFD41175BD4DA00DDB182 /* json_internalmap.inl in Resources */,
@@ -2394,6 +2411,13 @@
 				A46789EE17A031EE00FE26FA /* material.model.common.xml in Resources */,
 				A46789EF17A031EE00FE26FA /* material.model.reflection.xml in Resources */,
 				A46789F017A031EE00FE26FA /* material.model.refraction.xml in Resources */,
+				21816A7B17A07F3F000AF4BF /* Footman.mdl in Resources */,
+				21816A8517A07F47000AF4BF /* Footman.Diffuse.pvr in Resources */,
+				21879FD217A0809600605D7F /* material.model.Footman.common.xml in Resources */,
+				21879FD317A0809600605D7F /* material.model.Footman.reflection.xml in Resources */,
+				21879FD417A0809600605D7F /* material.model.Footman.refraction.xml in Resources */,
+				21879FD517A0809600605D7F /* model.Building.xml in Resources */,
+				21879FD617A0809600605D7F /* model.Footman.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

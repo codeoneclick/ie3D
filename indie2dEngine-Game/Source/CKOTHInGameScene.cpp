@@ -52,11 +52,18 @@ void CKOTHInGameScene::Load(void)
     m_root->Set_Camera(m_camera);
     m_root->Set_Light(m_light);
     
+    std::shared_ptr<CModel> model = m_root->CreateModel("model.Footman.xml");
+    model->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
+    model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
+    m_models.push_back(model);
+    m_colliders.push_back(model);
+    m_root->InsertModel(model);
+    
     for(i32 i = 0; i < 16; ++i)
     {
         for(i32 j = 0; j < 16; ++j)
         {
-            std::shared_ptr<CModel> model = m_root->CreateModel("model.xml");
+            std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
             model->Set_Position(glm::vec3(i * 10, 0.0f, j * 10));
             m_models.push_back(model);
             m_colliders.push_back(model);
