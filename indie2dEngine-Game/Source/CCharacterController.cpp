@@ -38,6 +38,11 @@ void CCharacterController::Set_Rotation(const glm::vec3& _rotation)
     m_navigator->Set_Rotation(m_rotation);
 };
 
+void CCharacterController::_OnMoveControllerUpdate(ui32 _direction)
+{
+    m_moveDirection = static_cast<E_MOVE_CONTROLLER_DIRECTION>(_direction);
+}
+
 void CCharacterController::OnUpdate(f32 _deltatime)
 {
     assert(m_navigator != nullptr);
@@ -52,7 +57,6 @@ void CCharacterController::OnUpdate(f32 _deltatime)
         case E_MOVE_CONTROLLER_DIRECTION_NORTH:
         {
             m_navigator->MoveBackward();
-            
         }
             break;
         case E_MOVE_CONTROLLER_DIRECTION_SOUTH:
@@ -62,55 +66,36 @@ void CCharacterController::OnUpdate(f32 _deltatime)
             break;
         case E_MOVE_CONTROLLER_DIRECTION_WEST:
         {
-            m_navigator->SteerRight();
+            m_navigator->MoveLeft();
         }
             break;
         case E_MOVE_CONTROLLER_DIRECTION_EAST:
         {
-            m_navigator->SteerLeft();
+            m_navigator->MoveRight();
         }
             break;
         case E_MOVE_CONTROLLER_DIRECTION_NORTH_WEST:
         {
             m_navigator->MoveBackward();
-            m_navigator->SteerRight();
+            m_navigator->MoveLeft();
         }
             break;
         case E_MOVE_CONTROLLER_DIRECTION_NORTH_EAST:
         {
             m_navigator->MoveBackward();
-            m_navigator->SteerLeft();
+            m_navigator->MoveRight();
         }
             break;
         case E_MOVE_CONTROLLER_DIRECTION_SOUTH_WEST:
         {
             m_navigator->MoveForward();
-            m_navigator->SteerRight();
+            m_navigator->MoveRight();
         }
             break;
         case E_MOVE_CONTROLLER_DIRECTION_SOUTH_EAST:
         {
             m_navigator->MoveForward();
-            m_navigator->SteerLeft();
-        }
-            break;
-    }
-    
-    switch (m_rotateDirection)
-    {
-        case E_ROTATE_CONTROLLER_DIRECTION_NONE:
-        {
-            
-        }
-            break;
-        case E_ROTATE_CONTROLLER_DIRECTION_LEFT:
-        {
-            m_navigator->SteerLeft();
-        }
-            break;
-        case E_ROTATE_CONTROLLER_DIRECTION_RIGHT:
-        {
-            m_navigator->SteerRight();
+            m_navigator->MoveLeft();
         }
             break;
     }

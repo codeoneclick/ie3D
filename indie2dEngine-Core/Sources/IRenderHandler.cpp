@@ -14,7 +14,8 @@ m_renderOcclusionCommand(nullptr),
 m_renderBindCommand(nullptr),
 m_renderDrawCommand(nullptr),
 m_renderUnbindCommand(nullptr),
-m_renderDebugDraw(nullptr)
+m_renderDebugDraw(nullptr),
+m_renderGetNumTrianglesCommand(nullptr)
 {
 
 }
@@ -27,6 +28,7 @@ CRenderCommands::~CRenderCommands(void)
     m_renderDrawCommand = nullptr;
     m_renderUnbindCommand = nullptr;
     m_renderDebugDraw = nullptr;
+    m_renderGetNumTrianglesCommand = nullptr;
 }
 
 void CRenderCommands::_ConnectRenderQueuePositionCommand(const __RENDER_QUEUE_POSITION_COMMAND &_command)
@@ -39,6 +41,12 @@ void CRenderCommands::_ConnectRenderOcclusionCommand(const __RENDER_QUEUE_POSITI
 {
     assert(_command != nullptr);
     m_renderOcclusionCommand = _command;
+}
+
+void CRenderCommands::_ConnectRenderGetNumTrianglesCommand(const __RENDER_GET_NUM_TRIANGLES_COMMAND &_command)
+{
+    assert(_command != nullptr);
+    m_renderGetNumTrianglesCommand = _command;
 }
 
 void CRenderCommands::_ConnectRenderBindCommand(const __RENDER_BIND_COMMAND &_command)
@@ -75,6 +83,12 @@ bool CRenderCommands::_ExecuteRenderOcclusionCommand(void)
 {
     assert(m_renderOcclusionCommand != nullptr);
     return m_renderOcclusionCommand();
+}
+
+ui32 CRenderCommands::_ExecuteRenderGetNumTrianglesCommand(void)
+{
+    assert(m_renderGetNumTrianglesCommand != nullptr);
+    return m_renderGetNumTrianglesCommand();
 }
 
 void CRenderCommands::_ExecuteRenderBindCommand(const std::string &_command)
@@ -115,6 +129,7 @@ void IRenderHandler::_ConnectCommands(void)
 {
     m_commands._ConnectRenderQueuePositionCommand(std::bind(&IRenderHandler::_OnQueuePosition, this));
     m_commands._ConnectRenderOcclusionCommand(std::bind(&IRenderHandler::_OnOcclusion, this));
+    m_commands._ConnectRenderGetNumTrianglesCommand(std::bind(&IRenderHandler::_OnGet_NumTriangles, this));
     m_commands._ConnectRenderBindCommand(std::bind(&IRenderHandler::_OnBind, this, std::placeholders::_1));
     m_commands._ConnectRenderDrawCommand(std::bind(&IRenderHandler::_OnDraw, this, std::placeholders::_1));
     m_commands._ConnectRenderUnbindCommand(std::bind(&IRenderHandler::_OnUnbind, this, std::placeholders::_1));

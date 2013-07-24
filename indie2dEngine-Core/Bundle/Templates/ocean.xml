@@ -1,0 +1,9 @@
+<ocean name="ocean">
+	<width value="128"/>
+    <height value="128"/>
+    <altitude value="-0.25"/>
+    <waveGeneratorInterval value="0.005"/>
+	<materials>
+		<material filename="material.ocean.xml"/>
+	</materials>
+</ocean>

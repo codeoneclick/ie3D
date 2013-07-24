@@ -28,6 +28,8 @@ protected:
     std::map<ui32, std::set< std::shared_ptr<IRenderHandler> > > m_handlers;
     std::string m_mode;
     
+    ui32 m_numTriangles;
+    
 public:
     
     CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const std::string& _mode);
@@ -41,6 +43,11 @@ public:
     inline std::shared_ptr<CTexture> Get_OperatingDepthTexture(void)
     {
         return m_operatingDepthTexture;
+    };
+    
+    inline ui32 Get_NumTriangles(void)
+    {
+        return m_numTriangles;
     };
     
     void RegisterRenderHandler(std::shared_ptr<IRenderHandler> _handler);

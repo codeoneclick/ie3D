@@ -18,12 +18,17 @@ class IGameObject;
 class CModel;
 class CLight;
 class CCamera;
+class CNavigator;
+class CCharacterController;
 
 class CKOTHInGameScene final : public IScene
 {
 private:
     
 protected:
+    
+    std::shared_ptr<CCharacterController> m_characterController;
+    std::shared_ptr<CNavigator> m_navigator;
     
     void _OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _collider);
     

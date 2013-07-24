@@ -27,9 +27,8 @@ public:
     CTemplateAccessor(void);
     ~CTemplateAccessor(void);
     
-    
-    
     void LoadModelTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
+    void LoadOceanTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
     void LoadParticleEmitterTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
     void LoadGameTransitionTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
 };

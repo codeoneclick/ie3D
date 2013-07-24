@@ -122,7 +122,7 @@ void CModel::_OnDraw(const std::string& _renderMode)
         
         material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
         material->Get_Shader()->Set_Vector3(m_light->Get_Position(), E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION);
-        material->Get_Shader()->Set_Vector4(glm::vec4(0.0f, 1.0f, 0.0f, FLT_MAX), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
+        material->Get_Shader()->Set_Vector4(material->Get_Clipping(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         

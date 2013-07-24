@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet COGLWindow_iOS *m_glWindow;
 @property (unsafe_unretained, nonatomic) std::string result;
 @property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *trianglesLabel;
 @end
 
 @implementation CGameViewController
@@ -49,12 +50,14 @@
 - (void)viewDidUnload
 {
     [self setFpsLabel:nil];
+    [self setTrianglesLabel:nil];
     [super viewDidUnload];
 }
 
 - (void)onTick:(NSTimer*)sender
 {
-    [self.fpsLabel setText:[NSString stringWithFormat:@"%i", Get_FramesPerSecond()]];
+    [self.fpsLabel setText:[NSString stringWithFormat:@"FPS: %i", Get_FramesPerSecond()]];
+    [self.trianglesLabel setText:[NSString stringWithFormat:@"Current Triangles: %i, Total Triangles: %i", Get_CurrentNumTriagles(), Get_TotalNumTriangles()]];
 }
 
 @end

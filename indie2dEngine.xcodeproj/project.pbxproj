@@ -103,7 +103,6 @@
 		A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A437A9EC177B424000160BD7 /* libgcdpp.a */; };
 		A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		A45588D61756406C00802609 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
-		A45588DA17564B8B00802609 /* material.xml in Resources */ = {isa = PBXBuildFile; fileRef = A45588D817564B8B00802609 /* material.xml */; };
 		A45588DB17564B8B00802609 /* model.xml in Resources */ = {isa = PBXBuildFile; fileRef = A45588D917564B8B00802609 /* model.xml */; };
 		A45588DD17565EB800802609 /* buildings_atlas.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A45588DC17565EB800802609 /* buildings_atlas.pvr */; };
 		A45588EE17575FD300802609 /* libcurl-device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A45588EC17575FD300802609 /* libcurl-device.a */; };
@@ -111,6 +110,20 @@
 		A45588F117575FFC00802609 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45588F017575FF900802609 /* CFNetwork.framework */; };
 		A45588F31757600500802609 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45588F21757600200802609 /* Security.framework */; };
 		A45588F51757602A00802609 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A45588F41757602600802609 /* libz.dylib */; };
+		A46789D117A01CF800FE26FA /* COcean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789CF17A01CF800FE26FA /* COcean.cpp */; };
+		A46789D417A01F4F00FE26FA /* COceanTemplateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D217A01F4F00FE26FA /* COceanTemplateLoader.cpp */; };
+		A46789D717A0212200FE26FA /* COceanTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D517A0212200FE26FA /* COceanTemplateLoadingOperation.cpp */; };
+		A46789DA17A021AD00FE26FA /* COceanTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D817A021AD00FE26FA /* COceanTemplateSerializer.cpp */; };
+		A46789DD17A0224500FE26FA /* material.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = A46789DB17A0224500FE26FA /* material.ocean.xml */; };
+		A46789DE17A0224500FE26FA /* ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = A46789DC17A0224500FE26FA /* ocean.xml */; };
+		A46789E517A023C400FE26FA /* world.space.reflection.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A46789E317A023C300FE26FA /* world.space.reflection.operation.xml */; };
+		A46789E617A023C400FE26FA /* world.space.refraction.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A46789E417A023C400FE26FA /* world.space.refraction.operation.xml */; };
+		A46789E717A02DE100FE26FA /* CommonOcean.frag in Resources */ = {isa = PBXBuildFile; fileRef = A46789DF17A022BD00FE26FA /* CommonOcean.frag */; };
+		A46789E817A02DE100FE26FA /* CommonOcean.vert in Resources */ = {isa = PBXBuildFile; fileRef = A46789E017A022BD00FE26FA /* CommonOcean.vert */; };
+		A46789EA17A0316900FE26FA /* ocean.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A46789E917A0316900FE26FA /* ocean.pvr */; };
+		A46789EE17A031EE00FE26FA /* material.model.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = A46789EB17A031E900FE26FA /* material.model.common.xml */; };
+		A46789EF17A031EE00FE26FA /* material.model.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = A46789EC17A031EA00FE26FA /* material.model.reflection.xml */; };
+		A46789F017A031EE00FE26FA /* material.model.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = A46789ED17A031EC00FE26FA /* material.model.refraction.xml */; };
 		A46A316B17462BA50044643E /* CShaderCommiter_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A316917462BA50044643E /* CShaderCommiter_GLSL.cpp */; };
 		A46A316E17462BBF0044643E /* CTextureCommiter_PVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A316C17462BBF0044643E /* CTextureCommiter_PVR.cpp */; };
 		A46A3171174635210044643E /* CGraphicsContext_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A316F174635210044643E /* CGraphicsContext_iOS.mm */; };
@@ -223,7 +236,7 @@
 		A4DD0F30179EC783009A7AFE /* IScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F2E179EC782009A7AFE /* IScene.cpp */; };
 		A4DD0F36179EE100009A7AFE /* CNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F34179EE0FF009A7AFE /* CNavigator.cpp */; };
 		A4DD0F39179EE133009A7AFE /* CCharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F37179EE132009A7AFE /* CCharacterController.cpp */; };
-		A4DD0F3D179EE67A009A7AFE /* CMoveControllerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F3B179EE678009A7AFE /* CMoveControllerHandler.cpp */; };
+		A4DD0F3D179EE67A009A7AFE /* IMoveControllerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F3B179EE678009A7AFE /* IMoveControllerHandler.cpp */; };
 		A4DD0F40179EE6A4009A7AFE /* CMoveControllerView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F3F179EE6A3009A7AFE /* CMoveControllerView_iOS.mm */; };
 		A4F204A017423C1E0063AB07 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049E17423C1E0063AB07 /* AppDelegate.mm */; };
 		A4F204A117423C1E0063AB07 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4F2049F17423C1E0063AB07 /* main.mm */; };
@@ -551,7 +564,6 @@
 		A45588CA175628F500802609 /* ITemplateLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITemplateLoadingHandler.h; path = Sources/ITemplateLoadingHandler.h; sourceTree = "<group>"; };
 		A45588D41756406C00802609 /* CLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLight.cpp; path = Sources/CLight.cpp; sourceTree = "<group>"; };
 		A45588D51756406C00802609 /* CLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLight.h; path = Sources/CLight.h; sourceTree = "<group>"; };
-		A45588D817564B8B00802609 /* material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.xml; sourceTree = "<group>"; };
 		A45588D917564B8B00802609 /* model.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.xml; sourceTree = "<group>"; };
 		A45588DC17565EB800802609 /* buildings_atlas.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = buildings_atlas.pvr; sourceTree = "<group>"; };
 		A45588DF17575F3900802609 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
@@ -568,6 +580,24 @@
 		A45588F017575FF900802609 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A45588F21757600200802609 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A45588F41757602600802609 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A46789CF17A01CF800FE26FA /* COcean.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COcean.cpp; path = Sources/COcean.cpp; sourceTree = "<group>"; };
+		A46789D017A01CF800FE26FA /* COcean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COcean.h; path = Sources/COcean.h; sourceTree = "<group>"; };
+		A46789D217A01F4F00FE26FA /* COceanTemplateLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COceanTemplateLoader.cpp; path = Sources/COceanTemplateLoader.cpp; sourceTree = "<group>"; };
+		A46789D317A01F4F00FE26FA /* COceanTemplateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COceanTemplateLoader.h; path = Sources/COceanTemplateLoader.h; sourceTree = "<group>"; };
+		A46789D517A0212200FE26FA /* COceanTemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COceanTemplateLoadingOperation.cpp; path = Sources/COceanTemplateLoadingOperation.cpp; sourceTree = "<group>"; };
+		A46789D617A0212200FE26FA /* COceanTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COceanTemplateLoadingOperation.h; path = Sources/COceanTemplateLoadingOperation.h; sourceTree = "<group>"; };
+		A46789D817A021AD00FE26FA /* COceanTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COceanTemplateSerializer.cpp; path = Sources/COceanTemplateSerializer.cpp; sourceTree = "<group>"; };
+		A46789D917A021AD00FE26FA /* COceanTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COceanTemplateSerializer.h; path = Sources/COceanTemplateSerializer.h; sourceTree = "<group>"; };
+		A46789DB17A0224500FE26FA /* material.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.ocean.xml; sourceTree = "<group>"; };
+		A46789DC17A0224500FE26FA /* ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ocean.xml; sourceTree = "<group>"; };
+		A46789DF17A022BD00FE26FA /* CommonOcean.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOcean.frag; sourceTree = "<group>"; };
+		A46789E017A022BD00FE26FA /* CommonOcean.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOcean.vert; sourceTree = "<group>"; };
+		A46789E317A023C300FE26FA /* world.space.reflection.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.reflection.operation.xml; sourceTree = "<group>"; };
+		A46789E417A023C400FE26FA /* world.space.refraction.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.refraction.operation.xml; sourceTree = "<group>"; };
+		A46789E917A0316900FE26FA /* ocean.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean.pvr; sourceTree = "<group>"; };
+		A46789EB17A031E900FE26FA /* material.model.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.common.xml; sourceTree = "<group>"; };
+		A46789EC17A031EA00FE26FA /* material.model.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.reflection.xml; sourceTree = "<group>"; };
+		A46789ED17A031EC00FE26FA /* material.model.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.refraction.xml; sourceTree = "<group>"; };
 		A46A316917462BA50044643E /* CShaderCommiter_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCommiter_GLSL.cpp; path = Sources/CShaderCommiter_GLSL.cpp; sourceTree = "<group>"; };
 		A46A316A17462BA50044643E /* CShaderCommiter_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCommiter_GLSL.h; path = Sources/CShaderCommiter_GLSL.h; sourceTree = "<group>"; };
 		A46A316C17462BBF0044643E /* CTextureCommiter_PVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureCommiter_PVR.cpp; path = Sources/CTextureCommiter_PVR.cpp; sourceTree = "<group>"; };
@@ -696,8 +726,8 @@
 		A4DD0F37179EE132009A7AFE /* CCharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCharacterController.cpp; path = "indie2dEngine-Game/Source/CCharacterController.cpp"; sourceTree = "<group>"; };
 		A4DD0F38179EE132009A7AFE /* CCharacterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCharacterController.h; path = "indie2dEngine-Game/Source/CCharacterController.h"; sourceTree = "<group>"; };
 		A4DD0F3A179EE418009A7AFE /* HKOTHEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HKOTHEnums.h; path = "indie2dEngine-Game/Source/HKOTHEnums.h"; sourceTree = "<group>"; };
-		A4DD0F3B179EE678009A7AFE /* CMoveControllerHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMoveControllerHandler.cpp; path = "indie2dEngine-Game/Source/CMoveControllerHandler.cpp"; sourceTree = "<group>"; };
-		A4DD0F3C179EE679009A7AFE /* CMoveControllerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMoveControllerHandler.h; path = "indie2dEngine-Game/Source/CMoveControllerHandler.h"; sourceTree = "<group>"; };
+		A4DD0F3B179EE678009A7AFE /* IMoveControllerHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IMoveControllerHandler.cpp; path = "indie2dEngine-Game/Source/IMoveControllerHandler.cpp"; sourceTree = "<group>"; };
+		A4DD0F3C179EE679009A7AFE /* IMoveControllerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMoveControllerHandler.h; path = "indie2dEngine-Game/Source/IMoveControllerHandler.h"; sourceTree = "<group>"; };
 		A4DD0F3E179EE6A3009A7AFE /* CMoveControllerView_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMoveControllerView_iOS.h; path = "indie2dEngine-Game/Source/CMoveControllerView_iOS.h"; sourceTree = "<group>"; };
 		A4DD0F3F179EE6A3009A7AFE /* CMoveControllerView_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMoveControllerView_iOS.mm; path = "indie2dEngine-Game/Source/CMoveControllerView_iOS.mm"; sourceTree = "<group>"; };
 		A4F2049D17423C1E0063AB07 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "indie2dEngine-Core/Sources/AppDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -1064,6 +1094,8 @@
 				A40138EE175614920056461B /* CMaterialTemplateSerializer.cpp */,
 				A40138C31754EF060056461B /* CModelTemplateSerializer.h */,
 				A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */,
+				A46789D917A021AD00FE26FA /* COceanTemplateSerializer.h */,
+				A46789D817A021AD00FE26FA /* COceanTemplateSerializer.cpp */,
 				A40138C61754EF280056461B /* CParticleEmitterTemplateSerializer.h */,
 				A40138C51754EF280056461B /* CParticleEmitterTemplateSerializer.cpp */,
 				A481748617621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.h */,
@@ -1087,6 +1119,8 @@
 				A40138E5175613080056461B /* CMaterialTemplateLoadingOperation.cpp */,
 				A40138E9175613900056461B /* CModelTemplateLoadingOperation.h */,
 				A40138E81756138F0056461B /* CModelTemplateLoadingOperation.cpp */,
+				A46789D617A0212200FE26FA /* COceanTemplateLoadingOperation.h */,
+				A46789D517A0212200FE26FA /* COceanTemplateLoadingOperation.cpp */,
 				A40138EC1756144B0056461B /* CParticleEmitterLoadingOperation.h */,
 				A40138EB1756144A0056461B /* CParticleEmitterLoadingOperation.cpp */,
 				A481749217621E6B00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.h */,
@@ -1108,6 +1142,8 @@
 				A40138D31756015E0056461B /* ITemplateLoader.cpp */,
 				A40138DA1756020B0056461B /* CModelTemplateLoader.h */,
 				A40138D91756020B0056461B /* CModelTemplateLoader.cpp */,
+				A46789D317A01F4F00FE26FA /* COceanTemplateLoader.h */,
+				A46789D217A01F4F00FE26FA /* COceanTemplateLoader.cpp */,
 				A40138DD175602380056461B /* CParticleEmitterTemplateLoader.h */,
 				A40138DC175602370056461B /* CParticleEmitterTemplateLoader.cpp */,
 				A48174781762145D00E1DC6E /* CGameTransitionTemplateLoader.h */,
@@ -1142,6 +1178,8 @@
 				A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */,
 				A49B83831754C07200AEB4DC /* CModel.h */,
 				A49B83821754C07200AEB4DC /* CModel.cpp */,
+				A46789D017A01CF800FE26FA /* COcean.h */,
+				A46789CF17A01CF800FE26FA /* COcean.cpp */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -1158,6 +1196,8 @@
 		A40D47C3174555AF00CA59D0 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A46789DF17A022BD00FE26FA /* CommonOcean.frag */,
+				A46789E017A022BD00FE26FA /* CommonOcean.vert */,
 				A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */,
 				A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */,
 				21816A661799DC36000AF4BF /* ScreenGBufferNormalModel.frag */,
@@ -1372,6 +1412,11 @@
 		A45588D717564B8B00802609 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A46789EB17A031E900FE26FA /* material.model.common.xml */,
+				A46789EC17A031EA00FE26FA /* material.model.reflection.xml */,
+				A46789ED17A031EC00FE26FA /* material.model.refraction.xml */,
+				A46789E317A023C300FE26FA /* world.space.reflection.operation.xml */,
+				A46789E417A023C400FE26FA /* world.space.refraction.operation.xml */,
 				21816A6C1799DE0E000AF4BF /* gbuffer.normal.material.xml */,
 				21816A6D1799DE0E000AF4BF /* gbuffer.normal.operation.xml */,
 				A4AB15D0177C997300FFC12E /* material.deffered.screen.xml */,
@@ -1392,8 +1437,9 @@
 				21E42A4B1767B3FD00E40437 /* output.space.operation.xml */,
 				21E42A4C1767B3FD00E40437 /* screen.space.operation.xml */,
 				21E42A4D1767B3FD00E40437 /* world.space.operation.xml */,
-				A45588D817564B8B00802609 /* material.xml */,
 				A45588D917564B8B00802609 /* model.xml */,
+				A46789DB17A0224500FE26FA /* material.ocean.xml */,
+				A46789DC17A0224500FE26FA /* ocean.xml */,
 			);
 			name = Templates;
 			path = Bundle/Templates;
@@ -1461,6 +1507,7 @@
 		A46A3212174E10B80044643E /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A46789E917A0316900FE26FA /* ocean.pvr */,
 				A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */,
 				A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */,
 				A45588DC17565EB800802609 /* buildings_atlas.pvr */,
@@ -1759,8 +1806,8 @@
 				A4DD0F34179EE0FF009A7AFE /* CNavigator.cpp */,
 				A4DD0F38179EE132009A7AFE /* CCharacterController.h */,
 				A4DD0F37179EE132009A7AFE /* CCharacterController.cpp */,
-				A4DD0F3C179EE679009A7AFE /* CMoveControllerHandler.h */,
-				A4DD0F3B179EE678009A7AFE /* CMoveControllerHandler.cpp */,
+				A4DD0F3C179EE679009A7AFE /* IMoveControllerHandler.h */,
+				A4DD0F3B179EE678009A7AFE /* IMoveControllerHandler.cpp */,
 				A4DD0F3E179EE6A3009A7AFE /* CMoveControllerView_iOS.h */,
 				A4DD0F3F179EE6A3009A7AFE /* CMoveControllerView_iOS.mm */,
 			);
@@ -2179,6 +2226,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A46789E717A02DE100FE26FA /* CommonOcean.frag in Resources */,
+				A46789E817A02DE100FE26FA /* CommonOcean.vert in Resources */,
 				A4DD0EAF179E7DBE009A7AFE /* CommonBoundBox.frag in Resources */,
 				A4DD0EB0179E7DBE009A7AFE /* CommonBoundBox.vert in Resources */,
 				21816A6A1799DC46000AF4BF /* ScreenGBufferNormalModel.frag in Resources */,
@@ -2309,7 +2358,6 @@
 				A46A317917463DE10044643E /* CGameViewController.xib in Resources */,
 				A46A3214174E10B80044643E /* texture_01.pvr in Resources */,
 				A40A6A711753B06C005B475E /* mesh.mdl in Resources */,
-				A45588DA17564B8B00802609 /* material.xml in Resources */,
 				A45588DB17564B8B00802609 /* model.xml in Resources */,
 				A45588DD17565EB800802609 /* buildings_atlas.pvr in Resources */,
 				210EFD40175BD4DA00DDB182 /* json_internalarray.inl in Resources */,
@@ -2338,6 +2386,14 @@
 				A4AB15D3177C997400FFC12E /* screen.space.deffered.operation.xml in Resources */,
 				21816A6E1799DE0F000AF4BF /* gbuffer.normal.material.xml in Resources */,
 				21816A6F1799DE0F000AF4BF /* gbuffer.normal.operation.xml in Resources */,
+				A46789DD17A0224500FE26FA /* material.ocean.xml in Resources */,
+				A46789DE17A0224500FE26FA /* ocean.xml in Resources */,
+				A46789E517A023C400FE26FA /* world.space.reflection.operation.xml in Resources */,
+				A46789E617A023C400FE26FA /* world.space.refraction.operation.xml in Resources */,
+				A46789EA17A0316900FE26FA /* ocean.pvr in Resources */,
+				A46789EE17A031EE00FE26FA /* material.model.common.xml in Resources */,
+				A46789EF17A031EE00FE26FA /* material.model.reflection.xml in Resources */,
+				A46789F017A031EE00FE26FA /* material.model.refraction.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2459,8 +2515,12 @@
 				A4DD0F30179EC783009A7AFE /* IScene.cpp in Sources */,
 				A4DD0F36179EE100009A7AFE /* CNavigator.cpp in Sources */,
 				A4DD0F39179EE133009A7AFE /* CCharacterController.cpp in Sources */,
-				A4DD0F3D179EE67A009A7AFE /* CMoveControllerHandler.cpp in Sources */,
+				A4DD0F3D179EE67A009A7AFE /* IMoveControllerHandler.cpp in Sources */,
 				A4DD0F40179EE6A4009A7AFE /* CMoveControllerView_iOS.mm in Sources */,
+				A46789D117A01CF800FE26FA /* COcean.cpp in Sources */,
+				A46789D417A01F4F00FE26FA /* COceanTemplateLoader.cpp in Sources */,
+				A46789D717A0212200FE26FA /* COceanTemplateLoadingOperation.cpp in Sources */,
+				A46789DA17A021AD00FE26FA /* COceanTemplateSerializer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

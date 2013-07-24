@@ -70,6 +70,7 @@ protected:
     
     virtual i32 _OnQueuePosition(void);
     virtual bool _OnOcclusion(void);
+    virtual ui32 _OnGet_NumTriangles(void);
     virtual void _OnBind(const std::string& _renderMode);
     virtual void _OnDraw(const std::string& _renderMode);
     virtual void _OnUnbind(const std::string& _renderMode);
@@ -157,6 +158,8 @@ public:
     {
         m_sceneUpdateMgr = _sceneUpdateMgr;
     };
+    
+    ui32 Get_NumTriangles(void);
     
     virtual void ListenRenderMgr(bool _value);
     virtual void ListenSceneUpdateMgr(bool _value);

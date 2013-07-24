@@ -13,6 +13,7 @@
 #include "IGameObject.h"
 #include "CSprite.h"
 #include "CModel.h"
+#include "COcean.h"
 #include "CBillboard.h"
 #include "CParticleEmitter.h"
 #include "ICollisionHandler.h"
@@ -122,6 +123,18 @@ void CSceneGraph::RemoveModel(std::shared_ptr<CModel> _model)
 {
     CSceneGraph::_RemoveGameObject(_model);
     m_modelsContainer.erase(_model);
+}
+
+void CSceneGraph::InsertOcean(std::shared_ptr<COcean> _ocean)
+{
+    CSceneGraph::_InsertGameObject(_ocean);
+    m_oceansContainer.insert(_ocean);
+}
+
+void CSceneGraph::RemoveOcean(std::shared_ptr<COcean> _ocean)
+{
+    CSceneGraph::_RemoveGameObject(_ocean);
+    m_oceansContainer.erase(_ocean);
 }
 
 void CSceneGraph::InsertBillboard(std::shared_ptr<CBillboard> _billboard)

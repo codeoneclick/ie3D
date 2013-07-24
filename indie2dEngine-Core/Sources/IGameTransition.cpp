@@ -12,6 +12,7 @@
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CTexture.h"
+#include "IGameObject.h"
 #include "CGameLoopExecutor.h"
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
@@ -125,4 +126,21 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_renderMgr->RegisterOutputRenderOperation(outputRenderOperationMaterial);
     
     _OnLoaded();
+}
+
+ui32 IGameTransition::Get_CurrentNumTriangles(void)
+{
+    assert(m_renderMgr != nullptr);
+    return m_renderMgr->Get_NumTriangles();
+}
+
+
+ui32 IGameTransition::Get_TotalNumTriangles(void)
+{
+    ui32 numTriangles = 0;
+    for(auto gameObject : CSceneFabricator::m_gameObjectsContainer)
+    {
+        numTriangles += gameObject->Get_NumTriangles();
+    }
+    return numTriangles;
 }

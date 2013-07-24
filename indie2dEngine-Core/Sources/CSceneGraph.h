@@ -16,6 +16,7 @@ class CLight;
 class IGameObject;
 class CSprite;
 class CModel;
+class COcean;
 class CBillboard;
 class CParticleEmitter;
 class CRenderMgr;
@@ -37,6 +38,7 @@ private:
     std::set<std::shared_ptr<CBillboard> > m_billboardsContainer;
     std::set<std::shared_ptr<CParticleEmitter> > m_particlesContainer;
     std::set<std::shared_ptr<CModel> > m_modelsContainer;
+    std::set<std::shared_ptr<COcean> > m_oceansContainer;
     
 protected:
     
@@ -61,6 +63,9 @@ public:
     
     void InsertModel(std::shared_ptr<CModel> _model);
     void RemoveModel(std::shared_ptr<CModel> _model);
+    
+    void InsertOcean(std::shared_ptr<COcean> _ocean);
+    void RemoveOcean(std::shared_ptr<COcean> _ocean);
     
     void InsertBillboard(std::shared_ptr<CBillboard> _billboard);
     void RemoveBillboard(std::shared_ptr<CBillboard> _billboard);

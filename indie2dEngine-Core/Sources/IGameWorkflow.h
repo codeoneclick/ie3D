@@ -35,6 +35,12 @@ public:
     void UnregisterTransition(std::shared_ptr<IGameTransition> _transition);
     
     void GoToTransition(const std::string& _guid);
+    
+    ui32 Get_CurrentNumTriagles(void);
+    ui32 Get_TotalNumTriangles(void);
 };
+
+extern ui32 Get_CurrentNumTriagles(void);
+extern ui32 Get_TotalNumTriangles(void);
 
 #endif 

@@ -48,9 +48,35 @@ m_indexBuffer(_indexBuffer)
     m_header->m_numIndexes = m_indexBuffer->Get_NumIndexes();
     m_header->m_vertexData = m_vertexBuffer->Lock();
     m_header->m_indexData = m_indexBuffer->Lock();
-    m_header->m_maxBound = glm::vec3(0.0f);
-    m_header->m_minBound = glm::vec3(0.0f);
     
+    for(ui32 i = 0; i < m_header->m_numVertexes; ++i)
+    {
+        if(m_header->m_vertexData[i].m_position.x > m_header->m_maxBound.x)
+        {
+            m_header->m_maxBound.x = m_header->m_vertexData[i].m_position.x;
+        }
+        if(m_header->m_vertexData[i].m_position.y > m_header->m_maxBound.y)
+        {
+            m_header->m_maxBound.y = m_header->m_vertexData[i].m_position.y;
+        }
+        if(m_header->m_vertexData[i].m_position.z > m_header->m_maxBound.z)
+        {
+            m_header->m_maxBound.z = m_header->m_vertexData[i].m_position.z;
+        }
+        if(m_header->m_vertexData[i].m_position.x < m_header->m_minBound.x)
+        {
+            m_header->m_minBound.x = m_header->m_vertexData[i].m_position.x;
+        }
+        if(m_header->m_vertexData[i].m_position.y < m_header->m_minBound.y)
+        {
+            m_header->m_minBound.y = m_header->m_vertexData[i].m_position.y;
+        }
+        if(m_header->m_vertexData[i].m_position.z < m_header->m_minBound.z)
+        {
+            m_header->m_minBound.z = m_header->m_vertexData[i].m_position.z;
+        }
+    }
+
     m_isLoaded = true;
     m_isLinked = true;
 }

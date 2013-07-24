@@ -53,6 +53,16 @@ struct SModelTemplate : public ITemplate
     std::string m_meshFilename;
 };
 
+struct SOceanTemplate : public ITemplate
+{
+    std::vector<std::string> m_materialsFilenames;
+    std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
+    ui32 m_width;
+    ui32 m_height;
+    f32 m_altitude;
+    f32 m_waveGeneratorInterval;
+};
+
 struct SParticleEmitterTemplate : public ITemplate
 {
     std::vector<std::string> m_materialsFilenames;

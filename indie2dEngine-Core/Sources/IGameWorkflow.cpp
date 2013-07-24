@@ -12,16 +12,19 @@
 #include "CResourceAccessor.h"
 #include "CGameLoopExecutor.h"
 
+static IGameWorkflow* g_workflow = nullptr;
+
 IGameWorkflow::IGameWorkflow(void) :
 m_templateAccessor(std::make_shared<CTemplateAccessor>()),
 m_resourceAccessor(std::make_shared<CResourceAccessor>()),
 m_currentTransition(nullptr)
 {
-    
+    g_workflow = this;
 }
 
 IGameWorkflow::~IGameWorkflow(void)
 {
+    g_workflow = nullptr;
     m_transitions.clear();
 }
 
@@ -48,4 +51,26 @@ void IGameWorkflow::GoToTransition(const std::string &_guid)
     m_currentTransition = m_transitions.find(_guid)->second;
     m_currentTransition->_OnActivate();
     ConnectToGameLoop(m_currentTransition);
+}
+
+ui32 IGameWorkflow::Get_CurrentNumTriagles(void)
+{
+    return m_currentTransition != nullptr ? m_currentTransition->Get_CurrentNumTriangles() : 0;
+}
+
+ui32 IGameWorkflow::Get_TotalNumTriangles(void)
+{
+    return m_currentTransition != nullptr ? m_currentTransition->Get_TotalNumTriangles() : 0;
+}
+
+ui32 Get_CurrentNumTriagles(void)
+{
+    assert(g_workflow != nullptr);
+    return g_workflow->Get_CurrentNumTriagles();
+}
+
+ui32 Get_TotalNumTriangles(void)
+{
+    assert(g_workflow != nullptr);
+    return g_workflow->Get_TotalNumTriangles();
 }

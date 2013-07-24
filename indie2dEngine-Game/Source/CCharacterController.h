@@ -11,12 +11,13 @@
 
 #include "HCommon.h"
 #include "HKOTHEnums.h"
+#include "IMoveControllerHandler.h"
 
 class CCamera;
 class IGameObject;
 class CNavigator;
 
-class CCharacterController
+class CCharacterController : public IMoveControllerHandler
 {
 private:
     
@@ -27,13 +28,11 @@ protected:
     std::shared_ptr<CNavigator> m_navigator;
     
     E_MOVE_CONTROLLER_DIRECTION m_moveDirection;
-    E_ROTATE_CONTROLLER_DIRECTION m_rotateDirection;
     
     glm::vec3 m_position;
     glm::vec3 m_rotation;
     
-    void OnMoveControllerUpdate(ui32 _direction);
-    void OnRotateControllerUpdate(ui32 _direction);
+    void _OnMoveControllerUpdate(ui32 _direction);
     
 public:
     

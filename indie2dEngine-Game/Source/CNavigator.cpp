@@ -22,6 +22,11 @@ CNavigator::CNavigator(f32 _moveForwardSpeed,
     m_rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 }
 
+CNavigator::~CNavigator(void)
+{
+    
+}
+
 void CNavigator::Set_Position(const glm::vec3 &_position)
 {
     m_position = _position;

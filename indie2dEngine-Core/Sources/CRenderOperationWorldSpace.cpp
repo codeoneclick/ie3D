@@ -13,7 +13,8 @@
 CRenderOperationWorldSpace::CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const std::string& _mode) :
 m_mode(_mode),
 m_frameWidth(_frameWidth),
-m_frameHeight(_frameHeight)
+m_frameHeight(_frameHeight),
+m_numTriangles(0)
 {
     ui32 textureColorHandle;
     glGenTextures(1, &textureColorHandle);
@@ -102,6 +103,7 @@ void CRenderOperationWorldSpace::Bind(void)
     glViewport(0, 0, m_frameWidth, m_frameHeight);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    m_numTriangles = 0;
 }
 
 void CRenderOperationWorldSpace::Unbind(void)
@@ -123,6 +125,7 @@ void CRenderOperationWorldSpace::Draw(void)
                 handler->_Get_Commands()._ExecuteRenderDrawCommand(m_mode);
                 handler->_Get_Commands()._ExecuteRenderUnbindCommand(m_mode);
                 handler->_Get_Commands()._ExecuteRenderDebugDrawCommand(m_mode);
+                m_numTriangles += handler->_Get_Commands()._ExecuteRenderGetNumTrianglesCommand();
             }
         }
     }

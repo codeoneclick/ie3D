@@ -111,6 +111,11 @@ std::shared_ptr<CIndexBuffer> IGameObject::Get_BoundIndexBuffer(void)
     return m_boundBox->Get_IndexBuffer();
 };
 
+ui32 IGameObject::Get_NumTriangles(void)
+{
+    return m_mesh != nullptr && m_mesh->Get_IndexBuffer() != nullptr ? m_mesh->Get_NumIndexes() / 3 : 0;
+}
+
 void IGameObject::ListenRenderMgr(bool _value)
 {
     assert(m_renderMgr != nullptr);
@@ -171,6 +176,11 @@ bool IGameObject::_OnOcclusion(void)
     glm::vec3 maxBound = IGameObject::Get_MaxBound() + m_position;
     glm::vec3 minBound = IGameObject::Get_MinBound() + m_position;
     return !m_camera->Get_Frustum()->IsBoundBoxInFrustum(maxBound, minBound);
+}
+
+ui32 IGameObject::_OnGet_NumTriangles(void)
+{
+    return IGameObject::Get_NumTriangles();
 }
 
 void IGameObject::_OnBind(const std::string &_renderMode)

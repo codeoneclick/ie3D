@@ -17,7 +17,8 @@
 
 CRenderMgr::CRenderMgr(const std::shared_ptr<IGraphicsContext> _graphicsContext) :
 m_graphicsContext(_graphicsContext),
-m_outputOperation(nullptr)
+m_outputOperation(nullptr),
+m_numTriangles(0)
 {
     
 }
@@ -98,12 +99,14 @@ std::shared_ptr<CTexture> CRenderMgr::Get_RenderOperationTexture(const std::stri
 
 void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
 {
+    m_numTriangles = 0;
     for(auto iterator : m_worldSpaceOperations)
     {
         std::shared_ptr<CRenderOperationWorldSpace> operation = iterator.second;
         operation->Bind();
         operation->Draw();
         operation->Unbind();
+        m_numTriangles += operation->Get_NumTriangles();
     }
     
     for(auto iterator : m_screenSpaceOperations)

@@ -144,13 +144,11 @@ public:
     
     inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)
     {
-        assert(m_vertexBuffer != nullptr);
         return m_vertexBuffer;
     };
     
     inline std::shared_ptr<CIndexBuffer> Get_IndexBuffer(void)
     {
-        assert(m_indexBuffer != nullptr);
         return m_indexBuffer;
     };
     

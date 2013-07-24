@@ -12,11 +12,19 @@
 #include "CCommonOS.h"
 #include "CLight.h"
 #include "CModel.h"
+#include "COcean.h"
 #include "CParticleEmitter.h"
 #include "CCamera.h"
+#include "CNavigator.h"
+#include "CCharacterController.h"
+
+extern void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
+extern void UnregisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
 
 CKOTHInGameScene::CKOTHInGameScene(IGameTransition* _root) :
-IScene(_root)
+IScene(_root),
+m_navigator(nullptr),
+m_characterController(nullptr)
 {
     std::cout<<_root<<std::endl;
 }
@@ -56,6 +64,9 @@ void CKOTHInGameScene::Load(void)
         }
     }
     
+    std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
+    m_root->InsertOcean(ocean);
+    
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
     particleEmitter->Set_Position(glm::vec3(12.0f, 2.0f, 12.0f));
     
@@ -63,12 +74,19 @@ void CKOTHInGameScene::Load(void)
     m_root->InsertParticleEmitter(particleEmitter);
     
     m_root->RegisterCollisionHandler(shared_from_this());
+    
+    m_navigator = std::make_shared<CNavigator>(0.3f, 0.15f, 0.3f, 0.025f);
+    m_characterController = std::make_shared<CCharacterController>();
+    m_characterController->Set_Camera(m_camera);
+    m_characterController->Set_Character(m_models[0]);
+    m_characterController->Set_Navigator(m_navigator);
+    RegisterMoveControllerHandler(m_characterController);
 }
 
 void CKOTHInGameScene::OnUpdate(f32 _deltatime)
 {
     static float angle = 0.0f;
-    m_models[0]->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
+    //m_models[0]->Set_Rotation(glm::vec3(0.0f, angle, 0.0f));
     angle += 1.0f;
     
     static glm::vec3 lightPosition = glm::vec3(0.0f);
@@ -77,6 +95,8 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
     lightPosition.z = 12.0f + sinf(-angle / 50.0f) * -8.0f;
     
     m_light->Set_Position(lightPosition);
+    
+    m_characterController->OnUpdate(_deltatime);
 }
 
 void CKOTHInGameScene::_OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _collider)

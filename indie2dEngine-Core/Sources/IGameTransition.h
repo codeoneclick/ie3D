@@ -57,6 +57,9 @@ public:
     {
         return m_guid;
     };
+    
+    ui32 Get_CurrentNumTriangles(void);
+    ui32 Get_TotalNumTriangles(void);
 };
 
 #endif 

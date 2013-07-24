@@ -6,8 +6,20 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#ifndef CMoveControllerView_iOS_h
+#define CMoveControllerView_iOS_h
+
+#include <UIKit/UIKit.h>
+#include "HCommon.h"
+
+class IMoveControllerHandler;
 
 @interface CMoveControllerView_iOS : UIView
 
 @end
+
+
+extern void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
+extern void UnregisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
+
+#endif

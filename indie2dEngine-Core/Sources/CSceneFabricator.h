@@ -16,6 +16,7 @@ class CCamera;
 class IGameObject;
 class CSprite;
 class CModel;
+class COcean;
 class CBillboard;
 class CParticleEmitter;
 class CTemplateAccessor;
@@ -50,6 +51,9 @@ public:
     
     std::shared_ptr<CModel> CreateModel(const std::string& _filename);
     void DeleteModel(std::shared_ptr<CModel> _model);
+    
+    std::shared_ptr<COcean> CreateOcean(const std::string& _filename);
+    void DeleteOcean(std::shared_ptr<COcean> _ocean);
     
     std::shared_ptr<CBillboard> CreateBillboard(const std::string& _filename);
     void DeleteBillboard(std::shared_ptr<CBillboard> _billboard);

@@ -28,6 +28,7 @@ private:
     std::map<std::string, std::shared_ptr<CRenderOperationScreenSpace> > m_screenSpaceOperations;
     std::shared_ptr<CRenderOperationOutput> m_outputOperation;
     std::queue<std::shared_ptr<CRenderOperationScreenSpace> > m_customScreenSpaceOperationsQueue;
+    ui32 m_numTriangles;
     
 protected:
     
@@ -52,6 +53,11 @@ public:
     void UnregisterWorldSpaceRenderHandler(const std::string& _mode, std::shared_ptr<IRenderHandler> _handler);
     
     std::shared_ptr<CTexture> Get_RenderOperationTexture(const std::string& _mode);
+    
+    inline ui32 Get_NumTriangles(void)
+    {
+        return m_numTriangles;
+    };
 };
 
 
