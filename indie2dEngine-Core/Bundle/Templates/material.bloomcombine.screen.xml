@@ -1,5 +1,5 @@
-<material render_mode="" is_cull_face="1" is_depth_test="1" is_depth_mask="1" is_blend="0" cull_face_mode="GL_FRONT" blend_function_source="GL_SRC_ALPHA" blend_function_destination="GL_ONE_MINUS_SRC_ALPHA">
-    <shader vs_name="BloomCombineScreen.vert" fs_name="BloomCombineScreen.frag"/>
+<material render_mode="" is_cull_face="1" is_depth_test="1" is_depth_mask="1" is_blend="0" cull_face_mode="GL_FRONT" blend_function_source="GL_SRC_ALPHA" blend_function_destination="GL_ONE_MINUS_SRC_ALPHA" is_cliping="0" clipping_x="0.0" clipping_y="0.0" clipping_z="0.0" clipping_w="0.0" is_reflected="0">
+    <shader vs_name="BloomCombineScreen.vert" fs_name="BloomCombineScreen.frag" />
     <textures>
         <texture name="" operation="screen.space.bloomextract.operation" slot="0" wrap="GL_CLAMP_TO_EDGE"/>
         <texture name="" operation="world.space.operation" slot="1" wrap="GL_CLAMP_TO_EDGE"/>

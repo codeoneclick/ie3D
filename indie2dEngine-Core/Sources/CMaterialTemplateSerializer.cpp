@@ -58,6 +58,15 @@ std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::str
     assert(g_glEnumContainer.find(blendFunctionDestinationStr) != g_glEnumContainer.end());
     materialTemplate->m_blendFunctionDestination = g_glEnumContainer.find(blendFunctionDestinationStr)->second;
     
+    materialTemplate->m_isClipping = node.attribute("is_cliping").as_bool();
+    
+    materialTemplate->m_clipping.x = node.attribute("clipping_x").as_float();
+    materialTemplate->m_clipping.y = node.attribute("clipping_y").as_float();
+    materialTemplate->m_clipping.z = node.attribute("clipping_z").as_float();
+    materialTemplate->m_clipping.w = node.attribute("clipping_w").as_float();
+    
+    materialTemplate->m_isReflected = node.attribute("is_reflected").as_bool();
+    
     std::shared_ptr<SShaderTemplate> shaderTemplate = std::make_shared<SShaderTemplate>();
     shaderTemplate->m_vsFilename = node.child("shader").attribute("vs_name").as_string();
     shaderTemplate->m_fsFilename = node.child("shader").attribute("fs_name").as_string();

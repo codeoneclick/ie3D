@@ -44,6 +44,9 @@ void CMaterial::Serialize(std::shared_ptr<SMaterialTemplate> _template, std::sha
     Set_BlendFunctionSource(_template->m_blendFunctionSource);
     Set_BlendFunctionDest(_template->m_blendFunctionDestination);
     
+    Set_Clipping(_template->m_isClipping ? _template->m_clipping : glm::vec4(FLT_MAX));
+    Set_IsReflected(_template->m_isReflected);
+    
     for(auto textureTemplate : _template->m_texturesTemplates)
     {
         std::shared_ptr<CTexture> texture = textureTemplate->m_filename.length() != 0 ? _resourceAccessor->CreateTexture(textureTemplate->m_filename) : _renderMgr->Get_RenderOperationTexture(textureTemplate->m_operationName);

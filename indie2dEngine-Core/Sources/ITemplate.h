@@ -39,6 +39,9 @@ struct SMaterialTemplate : public ITemplate
     ui32 m_cullFaceMode;
     ui32 m_blendFunctionSource;
     ui32 m_blendFunctionDestination;
+    bool m_isClipping;
+    glm::vec4 m_clipping;
+    bool m_isReflected;
     
     std::vector<std::shared_ptr<STextureTemplate> > m_texturesTemplates;
     std::shared_ptr<SShaderTemplate> m_shaderTemplate;

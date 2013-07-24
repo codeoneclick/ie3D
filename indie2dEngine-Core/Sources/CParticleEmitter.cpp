@@ -79,23 +79,7 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         assert(shader != nullptr);
         
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
-        material->Set_RenderState(E_RENDER_STATE_CULL_MODE, materialTemplate->m_isCullFace);
-        material->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, materialTemplate->m_isDepthTest);
-        material->Set_RenderState(E_RENDER_STATE_DEPTH_MASK, materialTemplate->m_isDepthMask);
-        material->Set_RenderState(E_RENDER_STATE_BLEND_MODE, materialTemplate->m_isBlend);
-        
-        material->Set_CullFaceMode(materialTemplate->m_cullFaceMode);
-        material->Set_BlendFunctionSource(materialTemplate->m_blendFunctionSource);
-        material->Set_BlendFunctionDest(materialTemplate->m_blendFunctionDestination);
-        
-        for(auto textureTemplate : materialTemplate->m_texturesTemplates)
-        {
-            std::shared_ptr<CTexture> texture = m_resourceFabricator->CreateTexture(textureTemplate->m_filename);
-            assert(texture != nullptr);
-            texture->Set_Wrap(textureTemplate->m_wrap);
-            assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);
-            material->Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->m_sampler));
-        }
+        material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     IGameObject::_LazyListenRenderMgr();

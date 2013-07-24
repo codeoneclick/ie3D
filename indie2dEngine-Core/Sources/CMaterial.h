@@ -32,6 +32,7 @@ protected:
     glm::vec4 m_clipping;
     std::shared_ptr<CTexture> m_textures[E_SHADER_SAMPLER_MAX];
     bool m_states[E_RENDER_STATE_MAX];
+    bool m_isReflected;
     
 public:
     
@@ -52,6 +53,16 @@ public:
     
     void Set_Clipping(const glm::vec4& _clipping);
     glm::vec4 Get_Clipping(void);
+    
+    inline void Set_IsReflected(bool _value)
+    {
+        m_isReflected = _value;
+    };
+    
+    inline bool Get_IsReflected(void)
+    {
+        return m_isReflected;
+    };
     
     void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler);
     

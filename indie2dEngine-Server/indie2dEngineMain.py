@@ -3,9 +3,7 @@ from flask import jsonify
 import xmltodict
 import json
 
-app = Flask(__name__)
-
-@app.route("/")
+app = Flask(__name__)@app.route("/")
 def response():
 
 	with open('Bundle/Templates/material.xml', 'r') as materialfile:

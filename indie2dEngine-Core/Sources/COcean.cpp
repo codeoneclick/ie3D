@@ -77,7 +77,6 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
-        
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
         material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
