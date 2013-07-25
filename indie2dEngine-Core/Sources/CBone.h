@@ -25,7 +25,7 @@ protected:
     std::shared_ptr<CBone> m_next;
 	std::shared_ptr<CBone> m_child;
    
-    glm::mat4x4 m_transformation;
+    glm::mat4x4* m_transformation;
     glm::mat4x4 m_bindPosition;
     
 public:
@@ -35,7 +35,7 @@ public:
     
     void LinkChildBone(std::shared_ptr<CBone> _bone);
     std::shared_ptr<CBone> FindInChildrenById(i32 _id);
-    void AnimateHierarhy(const glm::mat4x4& _transformation);
+    void AnimateHierarhy(const glm::mat4x4* _transformation);
 	void SetupBindPosition(void);
     
     inline i32 Get_Id(void) const
@@ -73,12 +73,12 @@ public:
 		return m_bindPosition;
 	};
     
-	inline void Set_Transformation(const glm::mat4x4& _transformation)
+	inline void Set_Transformation(glm::mat4x4* _transformation)
 	{
 		m_transformation = _transformation;
 	};
     
-	inline glm::mat4x4 Get_Transformation(void) const
+	inline glm::mat4x4* Get_Transformation(void) const
 	{
 		return m_transformation;
 	};

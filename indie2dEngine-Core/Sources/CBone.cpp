@@ -15,7 +15,7 @@ m_parentId(_parentId),
 m_parent(nullptr),
 m_next(nullptr),
 m_child(nullptr),
-m_transformation(glm::mat4x4(1.0f)),
+m_transformation(nullptr),
 m_bindPosition(glm::mat4x4(1.0f))
 {
     
@@ -54,21 +54,30 @@ std::shared_ptr<CBone> CBone::FindInChildrenById(i32 _id)
     return found;
 }
 
-void CBone::AnimateHierarhy(const glm::mat4x4 &_transformation)
+void CBone::AnimateHierarhy(const glm::mat4x4* _transformation)
 {
-    m_transformation = _transformation * m_transformation;
+    if(_transformation != nullptr)
+    {
+        (*m_transformation) = (*_transformation) * (*m_transformation);
+    }
     std::shared_ptr<CBone> child = m_child;
     while(child != nullptr)
     {
         child->AnimateHierarhy(m_transformation);
         child = child->Get_Next();
     }
-    m_transformation = m_transformation * m_bindPosition;
+    if(m_transformation != nullptr)
+    {
+        (*m_transformation) = (*m_transformation) * m_bindPosition;
+    }
 }
 
 void CBone::SetupBindPosition(void)
 {
-    Set_BindPosition(glm::inverse(m_transformation));
+    if(m_transformation != nullptr)
+    {
+        Set_BindPosition(glm::inverse((*m_transformation)));
+    }
     std::shared_ptr<CBone> child = m_child;
     while(child != nullptr)
     {

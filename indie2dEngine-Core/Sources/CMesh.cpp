@@ -130,9 +130,10 @@ void CMesh::_BindSkeleton(void)
     std::shared_ptr<CBone> bone;
     for (int i = 0; i < m_skeleton->Get_NumBones(); ++i)
     {
-        if (bone == m_skeleton->Get_BoneById(i))
+        bone = m_skeleton->Get_BoneById(i);
+        if (bone != nullptr)
         {
-            bone->Set_Transformation(m_bonesTransformation[i]);
+            bone->Set_Transformation(m_bonesTransformation + i);
         }
     }
 }
@@ -170,8 +171,8 @@ void CMesh::OnUpdate(f32 _deltatime)
         
         for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
         {
-            glm::vec3 position = glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
-            glm::quat rotation = glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
+            glm::vec3 position = frame_01->Get_Position(i);//glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
+            glm::quat rotation = frame_01->Get_Rotation(i);//glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
             
             m_bonesTransformation[i] = glm::toMat4(rotation);
             m_bonesTransformation[i] = glm::translate(m_bonesTransformation[i], position);
@@ -179,6 +180,12 @@ void CMesh::OnUpdate(f32 _deltatime)
         m_skeleton->AnimateHierarhy();
         
         SVertex* vertexData = m_vertexBuffer->Lock();
+        
+        for(i32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
+        {
+            vertexData[i].m_position = m_sequenceData[i].m_position;
+        }
+        
         for(i32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
         {
             for(i32 j = 0; j < m_sequenceData[i].m_numWeights; ++j)
@@ -188,12 +195,12 @@ void CMesh::OnUpdate(f32 _deltatime)
                 
                 if (j != 0)
                 {
-                    vertexData[i].m_position = CMesh::_TransformVertex(m_sequenceData[i].m_position, boneTransformation) * weight;
+                    vertexData[i].m_position = CMesh::_TransformVertex(m_sequenceData[i].m_position, boneTransformation);
                     vertexData[i].m_normal = CVertexBuffer::CompressVec3(CMesh::_TransformVertex(m_sequenceData[i].m_normal, boneTransformation) * weight);
                 }
                 else
                 {
-                    vertexData[i].m_position += CMesh::_TransformVertex(m_sequenceData[i].m_position, boneTransformation) * weight;
+                    vertexData[i].m_position += CMesh::_TransformVertex(m_sequenceData[i].m_position, boneTransformation);
                     vertexData[i].m_normal += CVertexBuffer::CompressVec3(CMesh::_TransformVertex(m_sequenceData[i].m_normal, boneTransformation) * weight);
                 }
             }

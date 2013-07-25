@@ -72,7 +72,7 @@ std::shared_ptr<CBone> CSkeleton::Get_BoneById(i32 _id)
 void CSkeleton::AnimateHierarhy( void )
 {
     if (m_root != nullptr)
-        m_root->AnimateHierarhy(glm::mat4(1.0f));
+        m_root->AnimateHierarhy(nullptr);
 }
 
 void CSkeleton::SetupBindPosition( void )
