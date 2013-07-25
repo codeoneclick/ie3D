@@ -37,7 +37,8 @@ m_indexBuffer(nullptr),
 m_skeleton(std::make_shared<CSkeleton>()),
 m_sequence(std::make_shared<CAnimationSequence>()),
 m_animationTime(0.0f),
-m_bonesTransformation(nullptr)
+m_bonesTransformation(nullptr),
+m_sequenceData(nullptr)
 {
     
 }
@@ -50,7 +51,8 @@ m_indexBuffer(_indexBuffer),
 m_skeleton(std::make_shared<CSkeleton>()),
 m_sequence(std::make_shared<CAnimationSequence>()),
 m_animationTime(0.0f),
-m_bonesTransformation(nullptr)
+m_bonesTransformation(nullptr),
+m_sequenceData(nullptr)
 {
     assert(_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
@@ -95,6 +97,7 @@ CMesh::~CMesh(void)
 {
     m_bounds.clear();
     delete[] m_bonesTransformation;
+    delete[] m_sequenceData;
 }
 
 void CMesh::_Set_Header(std::shared_ptr<CMeshHeader> _header)
@@ -195,6 +198,7 @@ void CMesh::OnUpdate(f32 _deltatime)
                 }
             }
         }
+        m_vertexBuffer->Unlock();
     }
 }
 

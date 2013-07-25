@@ -9,6 +9,8 @@
 #include "CMeshSerializer_MDL.h"
 #include "CCommonOS.h"
 #include "CMesh.h"
+#include "CSkeleton.h"
+#include "CAnimationSequence.h"
 #include "PVRTTexture.h"
 
 CMeshSerializer_MDL::CMeshSerializer_MDL(const std::string& _filename, std::shared_ptr<IResource> _resource) :
@@ -104,9 +106,44 @@ void CMeshSerializer_MDL::Serialize(void)
         header->m_indexData[i + 2] = index;
     }
     
+    int isAnimated = 0;
+    filestream.read((char*)&isAnimated, sizeof(i32));
+    
+    if(isAnimated)
+    {
+        mesh->Get_Skeleton()->_Serialize(filestream);
+        mesh->Get_Sequence()->_Serialize(filestream, mesh->Get_Skeleton()->Get_NumBones());
+        
+        SSequenceVertex* sequenceData = mesh->_LockSequenceData(header->m_numVertexes);
+        for(ui32 i = 0; i < header->m_numVertexes; ++i)
+        {
+            sequenceData[i].m_position = header->m_vertexData[i].m_position;
+            sequenceData[i].m_normal = CVertexBuffer::UncompressU8Vec4(header->m_vertexData[i].m_normal);
+            
+            i32 numWeights = 0;
+            filestream.read((char*)&numWeights, sizeof(i32));
+            sequenceData[i].m_numWeights = numWeights;
+            for(ui32 j = 0; j < numWeights; ++j)
+            {
+                i32 boneId;
+                filestream.read((char*)&boneId, sizeof(i32));
+                f32 weight;
+                filestream.read((char*)&weight, sizeof(f32));
+                sequenceData[i].m_weights[j].m_boneId = boneId;
+                sequenceData[i].m_weights[j].m_weigth = weight;
+            }
+        }
+    }
+    
     filestream.close();
     
     mesh->_Set_Header(header);
+    
+    if(isAnimated)
+    {
+        mesh->_BindSkeleton();
+        mesh->_BindSequence();
+    }
     
     m_status = E_SERIALIZER_STATUS_SUCCESS;
 }

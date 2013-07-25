@@ -23,12 +23,14 @@ CSkeleton::~CSkeleton(void)
 
 void CSkeleton::_Serialize(std::ifstream &_stream)
 {
-    _stream>>m_numBones;
+    _stream.read((char*)&m_numBones, sizeof(i32));
     std::string name;
     i32 id, parentId;
     for (i32 i = 0; i < m_numBones; ++i)
     {
-        _stream>>name>>id>>parentId;
+        name = "";
+        _stream.read((char*)&id, sizeof(i32));
+        _stream.read((char*)&parentId, sizeof(i32));
         CSkeleton::AddBone( std::make_shared<CBone>(name, id, parentId));
     }
 }

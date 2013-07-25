@@ -147,6 +147,12 @@ public:
     
     void _BindSkeleton(void);
     void _BindSequence(void);
+    
+    inline SSequenceVertex* _LockSequenceData(i32 _numVertexes)
+    {
+        assert(m_sequenceData == nullptr);
+        return (m_sequenceData = new SSequenceVertex[_numVertexes]);
+    };
         
 #ifdef TESTING
 protected:

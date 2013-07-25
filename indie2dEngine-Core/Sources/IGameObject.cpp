@@ -164,7 +164,9 @@ void IGameObject::_OnSceneUpdate(f32 _deltatime)
     
     if(m_mesh != nullptr)
     {
-        m_mesh->OnUpdate(_deltatime);
+        static f32 deltatime = 0.0f;
+        deltatime += 0.1f;
+        m_mesh->OnUpdate(deltatime);
     }
 }
 
