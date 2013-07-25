@@ -35,17 +35,18 @@ void CMaterial::Serialize(std::shared_ptr<SMaterialTemplate> _template, std::sha
     assert(_template != nullptr);
     assert(_renderMgr != nullptr);
     
-    Set_RenderState(E_RENDER_STATE_CULL_MODE, _template->m_isCullFace);
-    Set_RenderState(E_RENDER_STATE_DEPTH_TEST, _template->m_isDepthTest);
-    Set_RenderState(E_RENDER_STATE_DEPTH_MASK, _template->m_isDepthMask);
-    Set_RenderState(E_RENDER_STATE_BLEND_MODE, _template->m_isBlend);
+    CMaterial::Set_RenderState(E_RENDER_STATE_CULL_MODE, _template->m_isCullFace);
+    CMaterial::Set_RenderState(E_RENDER_STATE_DEPTH_TEST, _template->m_isDepthTest);
+    CMaterial::Set_RenderState(E_RENDER_STATE_DEPTH_MASK, _template->m_isDepthMask);
+    CMaterial::Set_RenderState(E_RENDER_STATE_BLEND_MODE, _template->m_isBlend);
     
-    Set_CullFaceMode(_template->m_cullFaceMode);
-    Set_BlendFunctionSource(_template->m_blendFunctionSource);
-    Set_BlendFunctionDest(_template->m_blendFunctionDestination);
+    CMaterial::Set_CullFaceMode(_template->m_cullFaceMode);
+    CMaterial::Set_BlendFunctionSource(_template->m_blendFunctionSource);
+    CMaterial::Set_BlendFunctionDest(_template->m_blendFunctionDestination);
     
-    Set_Clipping(_template->m_isClipping ? _template->m_clipping : glm::vec4(FLT_MAX));
-    Set_IsReflected(_template->m_isReflected);
+    CMaterial::Set_Clipping(_template->m_isClipping ? _template->m_clipping : glm::vec4(FLT_MAX));
+    CMaterial::Set_IsReflected(_template->m_isReflected);
+    CMaterial::Set_IsDebug(_template->m_isDebug);
     
     for(auto textureTemplate : _template->m_texturesTemplates)
     {
@@ -53,7 +54,7 @@ void CMaterial::Serialize(std::shared_ptr<SMaterialTemplate> _template, std::sha
         assert(texture != nullptr);
         texture->Set_Wrap(textureTemplate->m_wrap);
         assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);
-        Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->m_sampler));
+        CMaterial::Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->m_sampler));
     }
 }
 

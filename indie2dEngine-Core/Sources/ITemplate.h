@@ -42,6 +42,7 @@ struct SMaterialTemplate : public ITemplate
     bool m_isClipping;
     glm::vec4 m_clipping;
     bool m_isReflected;
+    bool m_isDebug;
     
     std::vector<std::shared_ptr<STextureTemplate> > m_texturesTemplates;
     std::shared_ptr<SShaderTemplate> m_shaderTemplate;

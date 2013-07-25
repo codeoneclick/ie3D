@@ -33,6 +33,7 @@ protected:
     std::shared_ptr<CTexture> m_textures[E_SHADER_SAMPLER_MAX];
     bool m_states[E_RENDER_STATE_MAX];
     bool m_isReflected;
+    bool m_isDebug;
     
 public:
     
@@ -62,6 +63,17 @@ public:
     inline bool Get_IsReflected(void)
     {
         return m_isReflected;
+    };
+    
+    
+    inline void Set_IsDebug(bool _value)
+    {
+        m_isDebug = _value;
+    };
+    
+    inline bool Get_IsDebug(void)
+    {
+        return m_isDebug;
     };
     
     void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler);

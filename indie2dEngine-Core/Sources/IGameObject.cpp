@@ -161,6 +161,11 @@ void IGameObject::_OnSceneUpdate(f32 _deltatime)
     {
         m_boundBox->Update(m_matrixWorld);
     }
+    
+    if(m_mesh != nullptr)
+    {
+        m_mesh->OnUpdate(_deltatime);
+    }
 }
 
 i32 IGameObject::_OnQueuePosition(void)
@@ -216,7 +221,9 @@ void IGameObject::_OnUnbind(const std::string &_renderMode)
 
 void IGameObject::_OnDebugDraw(const std::string &_renderMode)
 {
-    if(m_boundBox != nullptr)
+    assert(m_materials.find(_renderMode) != m_materials.end());
+    auto iterator = m_materials.find(_renderMode);
+    if(m_boundBox != nullptr && iterator->second->Get_IsDebug())
     {
         assert(m_debugBoundBoxMaterial != nullptr);
         assert(m_debugBoundBoxMaterial->Get_Shader() != nullptr);

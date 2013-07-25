@@ -11,6 +11,22 @@
 
 #include "IResource.h"
 
+#define MAX_WEIGHTS 8
+
+struct SVertexWeight
+{
+	f32 m_weigth;
+	i32	m_boneId;
+};
+
+struct SSequenceVertex
+{
+    glm::vec3 m_position;
+    glm::vec3 m_normal;
+	i32	m_numWeights;
+	SVertexWeight m_weights[MAX_WEIGHTS];
+};
+
 struct SVertex;
 class CMeshHeader final
 {
@@ -93,6 +109,8 @@ public:
 #include "CIndexBuffer.h"
 
 class CAABoundBox;
+class CSkeleton;
+class CAnimationSequence;
 
 class CMesh : public IResource
 {
@@ -108,6 +126,12 @@ protected:
     std::shared_ptr<CVertexBuffer> m_vertexBuffer;
     std::shared_ptr<CIndexBuffer> m_indexBuffer;
     
+    std::shared_ptr<CSkeleton> m_skeleton;
+    std::shared_ptr<CAnimationSequence> m_sequence;
+    SSequenceVertex* m_sequenceData;
+    glm::mat4* m_bonesTransformation;
+    f32 m_animationTime;
+    
     std::vector<std::shared_ptr<CAABoundBox> > m_bounds;
     
     void _Set_Header(std::shared_ptr<CMeshHeader> _header);
@@ -121,6 +145,9 @@ public:
         return m_header;
     };
     
+    void _BindSkeleton(void);
+    void _BindSequence(void);
+        
 #ifdef TESTING
 protected:
 #endif
@@ -133,6 +160,8 @@ protected:
         m_indexBuffer = _indexBuffer;
         m_isLinked = true;
     };
+    
+     glm::vec3 _TransformVertex(const glm::vec3& _vertex, const glm::mat4x4& _matrix);
     
 public:
     
@@ -173,6 +202,18 @@ public:
     {
         return m_header != nullptr ? m_header->Get_MinBound() : glm::vec3(0.0f);
     };
+    
+    inline std::shared_ptr<CSkeleton> Get_Skeleton(void)
+    {
+        return m_skeleton;
+    };
+    
+    inline std::shared_ptr<CAnimationSequence> Get_Sequence(void)
+    {
+        return m_sequence;
+    };
+    
+    void OnUpdate(f32 _deltatime);
     
     void Bind(const i32* _attributes);
     void Draw(void);
