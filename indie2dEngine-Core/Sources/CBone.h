@@ -11,11 +11,17 @@
 
 #include "HCommon.h"
 
+class CVertexBuffer;
+class CIndexBuffer;
+
 class CBone final : public std::enable_shared_from_this<CBone>
 {
 private:
     
 protected:
+    
+    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
+    std::shared_ptr<CIndexBuffer> m_indexBuffer;
     
     std::string	m_name;
 	i32	m_id;
@@ -28,6 +34,12 @@ protected:
     glm::mat4x4* m_transformation;
     glm::mat4x4 m_bindPosition;
     
+    glm::vec3 m_maxBound;
+    glm::vec3 m_minBound;
+    
+    glm::vec3 _TransformVertex(const glm::vec3& _vertex, const glm::mat4x4& _matrix);
+    void _Update(const glm::mat4x4 &_matrix);
+    
 public:
     
     CBone(const std::string& _name, i32 _id, i32 _parentId);
@@ -37,6 +49,8 @@ public:
     std::shared_ptr<CBone> FindInChildrenById(i32 _id);
     void AnimateHierarhy(const glm::mat4x4* _transformation);
 	void SetupBindPosition(void);
+    
+    void DrawDebug(const i32* _attributes);
     
     inline i32 Get_Id(void) const
 	{

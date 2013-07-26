@@ -36,6 +36,8 @@ public:
 	void AnimateHierarhy(void);
 	void SetupBindPosition(void);
     
+    void DrawDebug(const i32* _attributes);
+    
     inline i32 Get_NumBones(void)
     {
         return m_numBones;

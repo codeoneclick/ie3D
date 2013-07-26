@@ -142,7 +142,7 @@ void CMesh::_BindSequence(void)
 {
     assert(m_skeleton != nullptr);
     assert(m_sequence != nullptr);
-    CMesh::OnUpdate(0);
+    CMesh::OnUpdate(1);
     m_skeleton->SetupBindPosition();
 }
 
@@ -157,7 +157,7 @@ void CMesh::OnUpdate(f32 _deltatime)
     if(m_isLoaded && m_isLinked && m_sequence->Get_NumFrames() != 0)
     {
         assert(m_skeleton != nullptr);
-        const f32 fps  = 10.0f;
+        const f32 fps  = 1.0f;
         m_animationTime += _deltatime;
         
         f32 animationDeltaTime = m_animationTime * fps;
@@ -171,11 +171,13 @@ void CMesh::OnUpdate(f32 _deltatime)
         
         for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
         {
-            glm::vec3 position = frame_01->Get_Position(i);//glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
-            glm::quat rotation = frame_01->Get_Rotation(i);//glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
+            glm::vec3 position = glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
+            glm::quat rotation = glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
             
-            m_bonesTransformation[i] = glm::toMat4(rotation);
-            m_bonesTransformation[i] = glm::translate(m_bonesTransformation[i], position);
+            glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
+            glm::mat4x4 matrixRotation = glm::toMat4(rotation);
+            
+            m_bonesTransformation[i] = matrixTranslation * matrixRotation;
         }
         m_skeleton->AnimateHierarhy();
         
@@ -183,24 +185,20 @@ void CMesh::OnUpdate(f32 _deltatime)
         
         for(i32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
         {
-            vertexData[i].m_position = m_sequenceData[i].m_position;
-        }
-        
-        for(i32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
-        {
             for(i32 j = 0; j < m_sequenceData[i].m_numWeights; ++j)
             {
-                glm::mat4x4 boneTransformation = m_bonesTransformation[m_sequenceData[i].m_weights[j].m_boneId];
-                f32 weight = m_sequenceData[i].m_weights[j].m_weigth;
+                std::shared_ptr<CBone> bone = m_skeleton->Get_BoneById(m_sequenceData[i].m_weights[j].m_boneId);
                 
-                if (j != 0)
+                glm::mat4x4 boneTransformation = (*bone->Get_Transformation());
+                f32 weight = m_sequenceData[i].m_weights[j].m_weigth;
+                if (j == 0)
                 {
-                    vertexData[i].m_position = CMesh::_TransformVertex(m_sequenceData[i].m_position, boneTransformation);
+                    vertexData[i].m_position = CMesh::_TransformVertex(m_sequenceData[i].m_position, boneTransformation) * weight;
                     vertexData[i].m_normal = CVertexBuffer::CompressVec3(CMesh::_TransformVertex(m_sequenceData[i].m_normal, boneTransformation) * weight);
                 }
                 else
                 {
-                    vertexData[i].m_position += CMesh::_TransformVertex(m_sequenceData[i].m_position, boneTransformation);
+                    vertexData[i].m_position += CMesh::_TransformVertex(m_sequenceData[i].m_position, boneTransformation) * weight;
                     vertexData[i].m_normal += CVertexBuffer::CompressVec3(CMesh::_TransformVertex(m_sequenceData[i].m_normal, boneTransformation) * weight);
                 }
             }

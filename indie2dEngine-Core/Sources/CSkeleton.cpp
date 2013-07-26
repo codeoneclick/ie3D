@@ -83,3 +83,11 @@ void CSkeleton::SetupBindPosition( void )
     }
 }
 
+void CSkeleton::DrawDebug(const i32 *_attributes)
+{
+    if (m_root != nullptr)
+    {
+        m_root->DrawDebug(_attributes);
+    }
+}
+

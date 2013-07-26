@@ -17,6 +17,7 @@
 #include "CSceneUpdateMgr.h"
 #include "CAABoundBox.h"
 #include "CFrustum.h"
+#include "CSkeleton.h"
 
 IGameObject::IGameObject(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 m_resourceFabricator(_resourceFabricator),
@@ -164,8 +165,7 @@ void IGameObject::_OnSceneUpdate(f32 _deltatime)
     
     if(m_mesh != nullptr)
     {
-        static f32 deltatime = 0.0f;
-        deltatime += 0.1f;
+        static f32 deltatime = 0.01f;
         m_mesh->OnUpdate(deltatime);
     }
 }
@@ -230,14 +230,19 @@ void IGameObject::_OnDebugDraw(const std::string &_renderMode)
         assert(m_debugBoundBoxMaterial != nullptr);
         assert(m_debugBoundBoxMaterial->Get_Shader() != nullptr);
         m_debugBoundBoxMaterial->Bind();
-        m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_MATRIX_WORLD);
+        m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         
-        m_boundBox->Bind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
+        /*m_boundBox->Bind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
         m_boundBox->Draw();
         m_boundBox->Unbind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
-        m_debugBoundBoxMaterial->Unbind();
+        m_debugBoundBoxMaterial->Unbind();*/
+        
+        if(m_mesh != nullptr && m_mesh->Get_Skeleton() != nullptr)
+        {
+            m_mesh->Get_Skeleton()->DrawDebug(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
+        }
     }
 }
 
