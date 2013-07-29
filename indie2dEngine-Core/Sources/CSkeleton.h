@@ -12,6 +12,8 @@
 #include "HCommon.h"
 
 class CBone;
+class CVertexBuffer;
+class CIndexBuffer;
 
 class CSkeleton final
 {
@@ -20,6 +22,9 @@ private:
     friend class CMeshSerializer_MDL;
     
 protected:
+    
+    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
+    std::shared_ptr<CIndexBuffer> m_indexBuffer;
     
     i32	m_numBones;
 	std::shared_ptr<CBone> m_root;

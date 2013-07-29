@@ -29,6 +29,7 @@
 		21879FD417A0809600605D7F /* material.model.Footman.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21879FCF17A0809600605D7F /* material.model.Footman.refraction.xml */; };
 		21879FD517A0809600605D7F /* model.Building.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21879FD017A0809600605D7F /* model.Building.xml */; };
 		21879FD617A0809600605D7F /* model.Footman.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21879FD117A0809600605D7F /* model.Footman.xml */; };
+		21879FE217A6F22400605D7F /* Footman2.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 21879FE117A6F22400605D7F /* Footman2.MDL */; };
 		21E09E8E17759A5400F199AD /* ParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8317758E6A00F199AD /* ParticleEmitter.vert */; };
 		21E09E8F17759A5400F199AD /* ParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8217758E6A00F199AD /* ParticleEmitter.frag */; };
 		21E42A4E1767B3FD00E40437 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4A1767B3FD00E40437 /* main.transition.xml */; };
@@ -480,6 +481,7 @@
 		21879FCF17A0809600605D7F /* material.model.Footman.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.refraction.xml; sourceTree = "<group>"; };
 		21879FD017A0809600605D7F /* model.Building.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Building.xml; sourceTree = "<group>"; };
 		21879FD117A0809600605D7F /* model.Footman.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Footman.xml; sourceTree = "<group>"; };
+		21879FE117A6F22400605D7F /* Footman2.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman2.MDL; sourceTree = "<group>"; };
 		21E09E8217758E6A00F199AD /* ParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.frag; sourceTree = "<group>"; };
 		21E09E8317758E6A00F199AD /* ParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.vert; sourceTree = "<group>"; };
 		21E42A4A1767B3FD00E40437 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
@@ -1208,6 +1210,7 @@
 		A40A6A6F1753B06C005B475E /* Meshes */ = {
 			isa = PBXGroup;
 			children = (
+				21879FE117A6F22400605D7F /* Footman2.MDL */,
 				21816A7A17A07F3F000AF4BF /* Footman.mdl */,
 				A40A6A701753B06C005B475E /* mesh.mdl */,
 			);
@@ -2433,6 +2436,7 @@
 				21879FD417A0809600605D7F /* material.model.Footman.refraction.xml in Resources */,
 				21879FD517A0809600605D7F /* model.Building.xml in Resources */,
 				21879FD617A0809600605D7F /* model.Footman.xml in Resources */,
+				21879FE217A6F22400605D7F /* Footman2.MDL in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

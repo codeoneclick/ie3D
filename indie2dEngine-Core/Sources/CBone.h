@@ -13,6 +13,7 @@
 
 class CVertexBuffer;
 class CIndexBuffer;
+class SVertex;
 
 class CBone final : public std::enable_shared_from_this<CBone>
 {
@@ -28,11 +29,12 @@ protected:
 	i32	m_parentId;
     
     std::shared_ptr<CBone> m_parent;
-    std::shared_ptr<CBone> m_next;
-	std::shared_ptr<CBone> m_child;
+    std::vector<std::shared_ptr<CBone> > m_childs;
+    //std::shared_ptr<CBone> m_next;
+	//std::shared_ptr<CBone> m_child;
    
     glm::mat4x4* m_transformation;
-    glm::mat4x4 m_bindPosition;
+    //glm::mat4x4 m_bindPosition;
     
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
@@ -42,15 +44,30 @@ protected:
     
 public:
     
-    CBone(const std::string& _name, i32 _id, i32 _parentId);
+    glm::quat m_rotation;
+    glm::vec3 m_position;
+    
+    CBone(i32 _id, i32 _parentId);
     ~CBone(void);
     
-    void LinkChildBone(std::shared_ptr<CBone> _bone);
-    std::shared_ptr<CBone> FindInChildrenById(i32 _id);
-    void AnimateHierarhy(const glm::mat4x4* _transformation);
-	void SetupBindPosition(void);
+    void AddChild(std::shared_ptr<CBone> _bone);
+    std::shared_ptr<CBone> FindChild(i32 _id);
+    void Update(const glm::mat4x4* _matrix);
     
+    //void LinkChildBone(std::shared_ptr<CBone> _bone);
+    //std::shared_ptr<CBone> FindInChildrenById(i32 _id);
+    //void AnimateHierarhy(const glm::mat4x4* _transformation);
+	//void SetupBindPosition(void);
+    
+    i32  FillNumIndexes(void);
+    i32 FillVertexDataDebug(SVertex* _vertexData, i32 _offset);
+    i32 FillIndexDataDebug(ui16* _indexData, i32 _index, i32 _offset);
     void DrawDebug(const i32* _attributes);
+    
+    inline std::vector<std::shared_ptr<CBone> >& Get_Childs(void)
+    {
+        return m_childs;
+    };
     
     inline i32 Get_Id(void) const
 	{
@@ -67,25 +84,25 @@ public:
 		return m_parent;
 	};
     
-	inline std::shared_ptr<CBone> Get_Next(void) const
-	{
-		return m_next;
-	};
+	//inline std::shared_ptr<CBone> Get_Next(void) const
+	//{
+	//	return m_next;
+	//};
     
-	inline std::shared_ptr<CBone> Get_Child(void) const
-	{
-		return m_child;
-	};
+	//inline std::shared_ptr<CBone> Get_Child(void) const
+	//{
+	//	return m_child;
+	//};
     
-	inline void Set_BindPosition(const glm::mat4x4& _matrix)
-	{
-		m_bindPosition = _matrix;
-	};
+	//inline void Set_BindPosition(const glm::mat4x4& _matrix)
+	//{
+	//	m_bindPosition = _matrix;
+	//};
     
-	inline const glm::mat4x4& Get_BindPosition(void) const
-	{
-		return m_bindPosition;
-	};
+	//inline const glm::mat4x4& Get_BindPosition(void) const
+	//{
+	//	return m_bindPosition;
+	//};
     
 	inline void Set_Transformation(glm::mat4x4* _transformation)
 	{

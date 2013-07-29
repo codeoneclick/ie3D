@@ -8,6 +8,8 @@
 
 #include "CSkeleton.h"
 #include "CBone.h"
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
 
 CSkeleton::CSkeleton(void) :
 m_numBones(0),
@@ -31,7 +33,7 @@ void CSkeleton::_Serialize(std::ifstream &_stream)
         name = "";
         _stream.read((char*)&id, sizeof(i32));
         _stream.read((char*)&parentId, sizeof(i32));
-        CSkeleton::AddBone( std::make_shared<CBone>(name, id, parentId));
+        CSkeleton::AddBone( std::make_shared<CBone>(id, parentId));
     }
 }
 
@@ -51,7 +53,7 @@ void CSkeleton::AddBone(std::shared_ptr<CBone> _bone)
     std::shared_ptr<CBone> parent = Get_BoneById(_bone->Get_ParentId());
     if (parent != nullptr)
     {
-        parent->LinkChildBone(_bone);
+        parent->AddChild(_bone);
     }
 }
 
@@ -66,28 +68,61 @@ std::shared_ptr<CBone> CSkeleton::Get_BoneById(i32 _id)
     {
         return m_root;
     }
-    return m_root->FindInChildrenById(_id);
+    return m_root->FindChild(_id);
 }
 
 void CSkeleton::AnimateHierarhy( void )
 {
     if (m_root != nullptr)
-        m_root->AnimateHierarhy(nullptr);
+        m_root->Update(nullptr);
 }
 
 void CSkeleton::SetupBindPosition( void )
 {
-    if (m_root != nullptr)
+    std::function<void(void)> function = [this]()
     {
-        m_root->SetupBindPosition();
-    }
+        
+        i32 numIndexes = ((m_numBones - 1) * 2);
+        
+        m_indexBuffer = std::make_shared<CIndexBuffer>(numIndexes, GL_STATIC_DRAW);
+        ui16* indexData = m_indexBuffer->Lock();
+        m_root->FillIndexDataDebug(indexData, 0, 0);
+        m_indexBuffer->Unlock();
+        
+        m_vertexBuffer = std::make_shared<CVertexBuffer>(m_numBones, GL_DYNAMIC_DRAW);
+        SVertex* vertexData = m_vertexBuffer->Lock();
+        m_root->FillVertexDataDebug(vertexData, 0);
+        m_vertexBuffer->Unlock();
+        
+        for(i32 i = 0; i < numIndexes; ++i)
+        {
+            std::cout<<"[index] : "<<indexData[i]<<std::endl;
+        }
+    };
+    gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function);
 }
 
 void CSkeleton::DrawDebug(const i32 *_attributes)
 {
+    return;
     if (m_root != nullptr)
     {
-        m_root->DrawDebug(_attributes);
+        m_root->Update(nullptr);
+        SVertex* vertexData = m_vertexBuffer->Lock();
+        m_root->FillVertexDataDebug(vertexData, 0);
+        m_vertexBuffer->Unlock();
+
+        assert(m_vertexBuffer != nullptr);
+        assert(m_indexBuffer != nullptr);
+        
+        m_vertexBuffer->Bind(_attributes);
+        m_indexBuffer->Bind();
+        glLineWidth(5.0f);
+        glDrawElements(GL_LINES, m_indexBuffer->Get_NumIndexes(), GL_UNSIGNED_SHORT, NULL);
+        m_vertexBuffer->Unbind(_attributes);
+        m_indexBuffer->Unbind();
+        
+        //m_root->DrawDebug(_attributes);
     }
 }
 

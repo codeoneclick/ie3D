@@ -10,15 +10,11 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
-CBone::CBone(const std::string& _name, i32 _id, i32 _parentId) :
-m_name(_name),
+CBone::CBone(i32 _id, i32 _parentId) :
 m_id(_id),
 m_parentId(_parentId),
 m_parent(nullptr),
-m_next(nullptr),
-m_child(nullptr),
-m_transformation(nullptr),
-m_bindPosition(glm::mat4x4(1.0f))
+m_transformation(nullptr)
 {
     std::function<void(void)> function = [this]()
     {
@@ -160,15 +156,45 @@ void CBone::_Update(const glm::mat4x4 &_matrix)
     m_vertexBuffer->Unlock();
 }
 
-void CBone::LinkChildBone(std::shared_ptr<CBone> _bone)
+void CBone::AddChild(std::shared_ptr<CBone> _bone)
+{
+    m_childs.push_back(_bone);
+    _bone->m_parent = shared_from_this();
+    _bone->m_parentId = m_id;
+}
+
+std::shared_ptr<CBone> CBone::FindChild(i32 _id)
+{
+    if(m_childs.size() == 0)
+    {
+        return nullptr;
+    }
+    std::shared_ptr<CBone> bone = nullptr;
+    for(auto iterator : m_childs)
+    {
+        if(iterator->m_id == _id)
+        {
+            bone = iterator;
+            break;
+        }
+        bone = iterator->FindChild(_id);
+        if(bone != nullptr)
+        {
+            break;
+        }
+    }
+    return bone;
+}
+
+/*void CBone::LinkChildBone(std::shared_ptr<CBone> _bone)
 {
     std::shared_ptr<CBone> oldchild = m_child;
     m_child = _bone;
     m_child->m_next = oldchild;
     m_child->m_parent = shared_from_this();
-}
+}*/
 
-std::shared_ptr<CBone> CBone::FindInChildrenById(i32 _id)
+/*std::shared_ptr<CBone> CBone::FindInChildrenById(i32 _id)
 {
     if (m_child == nullptr)
         return nullptr;
@@ -186,8 +212,20 @@ std::shared_ptr<CBone> CBone::FindInChildrenById(i32 _id)
         child = child->Get_Next();
     }
     return found;
-}
+}*/
 
+void CBone::Update(const glm::mat4x4 *_matrix)
+{
+    if(_matrix != nullptr)
+    {
+        (*m_transformation) = (*m_transformation) * glm::inverse((*_matrix));
+    }
+    for(auto iterator : m_childs)
+    {
+        iterator->Update(m_transformation);
+    }
+}
+/*
 void CBone::AnimateHierarhy(const glm::mat4x4* _transformation)
 {
     if(_transformation != nullptr)
@@ -200,13 +238,14 @@ void CBone::AnimateHierarhy(const glm::mat4x4* _transformation)
         child->AnimateHierarhy(m_transformation);
         child = child->Get_Next();
     }
-    /*if(m_transformation != nullptr)
+    if(m_transformation != nullptr)
     {
-        (*m_transformation) = (*m_transformation) * m_bindPosition;
-        CBone::_Update((*m_transformation));
-    }*/
+        //(*m_transformation) = (*m_transformation) * m_bindPosition;
+        //CBone::_Update((*m_transformation));
+    }
 }
-
+*/
+/*
 void CBone::SetupBindPosition(void)
 {
     if(m_transformation != nullptr)
@@ -220,15 +259,55 @@ void CBone::SetupBindPosition(void)
         child = child->Get_Next();
     }
 }
+*/
+
+i32 CBone::FillNumIndexes(void)
+{
+    i32 numIndexes = 1;
+    for(auto iterator : m_childs)
+    {
+        numIndexes += iterator->FillNumIndexes();
+    }
+    return numIndexes + m_childs.size();
+}
+
+i32 CBone::FillIndexDataDebug(ui16 *_indexData, i32 _index, i32 _offset)
+{
+    i32 offset = _offset;
+    for(auto iterator : m_childs)
+    {
+        _indexData[_offset] = _index;
+        _indexData[_offset + 1] = _index + 1;
+        offset = iterator->FillIndexDataDebug(_indexData, _index + 1, _offset + 2);
+    }
+    return offset;
+}
+
+i32 CBone::FillVertexDataDebug(SVertex *_vertexData, i32 _offset)
+{
+    i32 offset = _offset;
+    _vertexData[offset].m_position = glm::rotate(m_rotation, m_position); //CBone::_TransformVertex(glm::vec3(0.0f, 0.0f, 0.0f), (*m_transformation));
+    for(auto iterator : m_childs)
+    {
+        offset = iterator->FillVertexDataDebug(_vertexData, offset + 1);
+    }
+    return offset;
+}
+
 
 void CBone::DrawDebug(const i32 *_attributes)
 {
-    std::shared_ptr<CBone> child = m_child;
+    for(auto iterator : m_childs)
+    {
+        iterator->DrawDebug(_attributes);
+    }
+    
+    /*std::shared_ptr<CBone> child = m_child;
     while(child != nullptr)
     {
         child->DrawDebug(_attributes);
         child = child->Get_Next();
-    }
+    }*/
     
     if(m_vertexBuffer == nullptr || m_indexBuffer == nullptr)
     {
