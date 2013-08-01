@@ -34,7 +34,7 @@ protected:
 	//std::shared_ptr<CBone> m_child;
    
     glm::mat4x4* m_transformation;
-    //glm::mat4x4 m_bindPosition;
+    glm::mat4x4 m_bindTransformation;
     
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
@@ -53,13 +53,14 @@ public:
     void AddChild(std::shared_ptr<CBone> _bone);
     std::shared_ptr<CBone> FindChild(i32 _id);
     void Update(const glm::mat4x4* _matrix);
+    void Set_BindTransformation(void);
     
     //void LinkChildBone(std::shared_ptr<CBone> _bone);
     //std::shared_ptr<CBone> FindInChildrenById(i32 _id);
     //void AnimateHierarhy(const glm::mat4x4* _transformation);
 	//void SetupBindPosition(void);
     
-    i32  FillNumIndexes(void);
+    i32 FillNumIndexes(void);
     i32 FillVertexDataDebug(SVertex* _vertexData, i32 _offset);
     i32 FillIndexDataDebug(ui16* _indexData, i32 _index, i32 _offset);
     void DrawDebug(const i32* _attributes);

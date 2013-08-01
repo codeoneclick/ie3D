@@ -39,7 +39,7 @@ public:
     void AddBone(std::shared_ptr<CBone> _bone);
     std::shared_ptr<CBone> Get_BoneById(i32 _id);
 	void AnimateHierarhy(void);
-	void SetupBindPosition(void);
+	void Set_BindTransformation(void);
     
     void DrawDebug(const i32* _attributes);
     

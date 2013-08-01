@@ -21,6 +21,7 @@ protected:
     
     std::vector<glm::quat> m_rotations;
 	std::vector<glm::vec3> m_positions;
+    std::vector<glm::vec3> m_scales;
 	i32	m_numBones;
     
     void _Serialize(std::ifstream& _stream);
@@ -40,6 +41,12 @@ public:
 	{
         assert(_index < m_positions.size());
 		return m_positions[_index];
+	};
+    
+    inline const glm::vec3& Get_Scale(i32 _index) const
+	{
+        assert(_index < m_scales.size());
+		return m_scales[_index];
 	};
 };
 

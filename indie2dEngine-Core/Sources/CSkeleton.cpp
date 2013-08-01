@@ -26,11 +26,12 @@ CSkeleton::~CSkeleton(void)
 void CSkeleton::_Serialize(std::ifstream &_stream)
 {
     _stream.read((char*)&m_numBones, sizeof(i32));
-    std::string name;
-    i32 id, parentId;
+    i32 id, parentId, boneNameLength;
     for (i32 i = 0; i < m_numBones; ++i)
     {
-        name = "";
+        _stream.read((char*)&boneNameLength, sizeof(i32));
+        char* buffer = new char[boneNameLength];
+        _stream.read(buffer, boneNameLength * sizeof(char));
         _stream.read((char*)&id, sizeof(i32));
         _stream.read((char*)&parentId, sizeof(i32));
         CSkeleton::AddBone( std::make_shared<CBone>(id, parentId));
@@ -77,8 +78,10 @@ void CSkeleton::AnimateHierarhy( void )
         m_root->Update(nullptr);
 }
 
-void CSkeleton::SetupBindPosition( void )
+void CSkeleton::Set_BindTransformation(void)
 {
+    m_root->Set_BindTransformation();
+    /*return;
     std::function<void(void)> function = [this]()
     {
         
@@ -99,7 +102,7 @@ void CSkeleton::SetupBindPosition( void )
             std::cout<<"[index] : "<<indexData[i]<<std::endl;
         }
     };
-    gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function);
+    gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function);*/
 }
 
 void CSkeleton::DrawDebug(const i32 *_attributes)

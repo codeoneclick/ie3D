@@ -14,7 +14,8 @@ CBone::CBone(i32 _id, i32 _parentId) :
 m_id(_id),
 m_parentId(_parentId),
 m_parent(nullptr),
-m_transformation(nullptr)
+m_transformation(nullptr),
+m_bindTransformation(glm::mat4x4(1.0f))
 {
     std::function<void(void)> function = [this]()
     {
@@ -218,13 +219,28 @@ void CBone::Update(const glm::mat4x4 *_matrix)
 {
     if(_matrix != nullptr)
     {
-        (*m_transformation) = (*m_transformation) * glm::inverse((*_matrix));
+        (*m_transformation) = (*m_transformation) * (*_matrix);
     }
     for(auto iterator : m_childs)
     {
         iterator->Update(m_transformation);
     }
+    (*m_transformation) = (*m_transformation) * m_bindTransformation;
 }
+
+void CBone::Set_BindTransformation(void)
+{
+    if (m_transformation != nullptr)
+    {
+        m_bindTransformation = glm::inverse(*m_transformation);
+    }
+    
+    for(auto iterator : m_childs)
+    {
+        iterator->Set_BindTransformation();
+    }
+}
+
 /*
 void CBone::AnimateHierarhy(const glm::mat4x4* _transformation)
 {

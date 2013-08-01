@@ -13,6 +13,7 @@ m_numBones(_numBones)
 {
     m_rotations.reserve(_numBones);
     m_positions.reserve(_numBones);
+    m_scales.reserve(_numBones);
 }
 
 CAnimationFrame::~CAnimationFrame(void)
@@ -22,20 +23,26 @@ CAnimationFrame::~CAnimationFrame(void)
 
 void CAnimationFrame::_Serialize(std::ifstream &_stream)
 {
-    f32 x, y, z ,w;
     for (i32 i = 0; i < m_numBones; ++i)
     {
-        _stream.read((char*)&x, sizeof(f32));
-        _stream.read((char*)&y, sizeof(f32));
-        _stream.read((char*)&z, sizeof(f32));
-        m_positions.push_back(glm::vec3(x, y, z));
+        glm::vec3 position;
+        _stream.read((char*)&position, sizeof(glm::vec3));
+        m_positions.push_back(glm::vec3(position));
         
+        glm::quat rotation;
+        _stream.read((char*)&rotation, sizeof(glm::quat));
         
-        _stream.read((char*)&x, sizeof(f32));
-        _stream.read((char*)&y, sizeof(f32));
-        _stream.read((char*)&z, sizeof(f32));
-        _stream.read((char*)&w, sizeof(f32));
-        m_rotations.push_back(glm::quat(x, y, z, w));
+        glm::quat _rotation = glm::quat(rotation.x, rotation.y, rotation.z, rotation.w);
+        glm::vec3 euler = glm::eulerAngles(rotation);
+        std::cout<<"rotation :"<<euler.x<<","<<euler.y<<","<<euler.z<<std::endl;
+        /*f32 value = rotation.x;
+        rotation.x = rotation.z;
+        rotation.z = value;*/
+        m_rotations.push_back(_rotation);
+        
+        glm::vec3 scale;
+        _stream.read((char*)&scale, sizeof(glm::vec3));
+        m_scales.push_back(scale);
     }
 }
 

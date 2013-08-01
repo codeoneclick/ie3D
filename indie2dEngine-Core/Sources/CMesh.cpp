@@ -10,6 +10,7 @@
 #include "CAABoundBox.h"
 #include "CSkeleton.h"
 #include "CBone.h"
+#include "CTimer.h"
 #include "CAnimationSequence.h"
 
 CMeshHeader::CMeshHeader(void) :
@@ -142,8 +143,54 @@ void CMesh::_BindSequence(void)
 {
     assert(m_skeleton != nullptr);
     assert(m_sequence != nullptr);
-    CMesh::OnUpdate(1);
-    m_skeleton->SetupBindPosition();
+    
+    std::shared_ptr<CAnimationFrame> frame = m_sequence->Get_AnimationFrame(0);
+    std::shared_ptr<CBone> bone;
+    
+    for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
+    {
+        glm::vec3 position = frame->Get_Position(i); //glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
+        glm::quat rotation = frame->Get_Rotation(i); //glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
+        
+        bone = m_skeleton->Get_BoneById(i);
+        if (bone != nullptr)
+        {
+            bone->m_position = position;
+            bone->m_rotation = rotation;
+        }
+        
+        std::cout.setf(std::ios::fixed, std::ios::floatfield);
+        std::cout.setf(std::ios::showpoint);
+        std::cout.precision(3);
+        std::cout<<"Frame index: "<<frame<<std::endl<<std::endl;
+        glm::vec3 euler = glm::eulerAngles(rotation);
+        
+        /*euler.z += 90.0f;
+        euler.y += 0.0f;
+        euler.x += 180.0f;*/
+        
+        f32 temp = euler.x;
+        
+        //euler.x = euler.z;
+        //euler.z = temp;
+        
+        //euler = glm::vec3(0.0f, 0.0f, 90.0f);
+        
+        std::cout<<"rotation :"<<euler.x<<","<<euler.y<<","<<euler.z<<std::endl;
+        
+        glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
+        
+        glm::mat4x4 matrixRotation = glm::toMat4(rotation);
+        matrixRotation = glm::rotate(glm::mat4(1.0f), euler.x, glm::vec3(1.0f, 0.0f, 0.0f));
+        matrixRotation = glm::rotate(matrixRotation, euler.y, glm::vec3(0.0f, 1.0f, 0.0f));
+        matrixRotation = glm::rotate(matrixRotation, euler.z, glm::vec3(0.0f, 0.0f, 1.0f));
+        matrixRotation = glm::toMat4(rotation);
+        
+        m_bonesTransformation[i] = matrixTranslation * matrixRotation * glm::rotate(glm::mat4(1.0f), 90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+    }
+    std::cout<<std::endl;
+    m_skeleton->AnimateHierarhy();
+    m_skeleton->Set_BindTransformation();
 }
 
 glm::vec3 CMesh::_TransformVertex(const glm::vec3 &_vertex, const glm::mat4x4 &_matrix)
@@ -154,8 +201,13 @@ glm::vec3 CMesh::_TransformVertex(const glm::vec3 &_vertex, const glm::mat4x4 &_
 
 void CMesh::OnUpdate(f32 _deltatime)
 {
-    if(m_isLoaded && m_isLinked && m_sequence->Get_NumFrames() != 0)
+    static CTimer::CTime oldTime;
+    CTimer::CTime currentTime = CTimer::CClock::now();
+    
+    if(m_isLoaded && m_isLinked && m_sequence->Get_NumFrames() != 0 && CTimer::Get_TimeInterval(currentTime, oldTime) > 1000)
     {
+        oldTime = currentTime;
+        
         assert(m_skeleton != nullptr);
         const f32 fps  = 10.0f;
         m_animationTime += _deltatime;
@@ -173,6 +225,8 @@ void CMesh::OnUpdate(f32 _deltatime)
             frame = 0;
         }
         
+        //frame = 1;
+        
         std::shared_ptr<CAnimationFrame> frame_01 = m_sequence->Get_AnimationFrame(frame);
         std::shared_ptr<CAnimationFrame> frame_02 = m_sequence->Get_AnimationFrame(frameIndex_02);
         
@@ -180,8 +234,8 @@ void CMesh::OnUpdate(f32 _deltatime)
         
         for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
         {
-            glm::vec3 position = frame_01->Get_Position(i);//glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
-            glm::quat rotation = frame_01->Get_Rotation(i);//glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
+            glm::vec3 position = frame_01->Get_Position(i); //glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
+            glm::quat rotation = frame_01->Get_Rotation(i); //glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
             
             
             bone = m_skeleton->Get_BoneById(i);
@@ -191,18 +245,41 @@ void CMesh::OnUpdate(f32 _deltatime)
                 bone->m_rotation = rotation;
             }
             
+            std::cout.setf(std::ios::fixed, std::ios::floatfield);
+            std::cout.setf(std::ios::showpoint);
+            std::cout.precision(3);
+            std::cout<<"Frame index: "<<frame<<std::endl<<std::endl;
             glm::vec3 euler = glm::eulerAngles(rotation);
-            std::cout<<"Bone Id :"<<i<<" - "<<euler.x<<","<<euler.y<<","<<euler.z<<std::endl;
+            
+            
+            /*euler.z += 90.0f;
+            euler.y += 0.0f;
+            euler.x += 180.0f;*/
+            
+            f32 temp = euler.x;
+            
+            //euler.x = euler.z;
+            //euler.z = temp;
+            
+            //euler = glm::vec3(0.0f, 0.0f, 90.0f);
+            
+            std::cout<<"rotation :"<<euler.x<<","<<euler.y<<","<<euler.z<<std::endl;
             
             glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
+            
+            glm::mat4x4 matrixRotation = glm::toMat4(rotation);
+            matrixRotation = glm::rotate(glm::mat4(1.0f), euler.x, glm::vec3(1.0f, 0.0f, 0.0f));
+            matrixRotation = glm::rotate(matrixRotation, euler.y, glm::vec3(0.0f, 1.0f, 0.0f));
+            matrixRotation = glm::rotate(matrixRotation, euler.z, glm::vec3(0.0f, 0.0f, 1.0f));
+            matrixRotation = glm::toMat4(rotation);
             
             //glm::mat4x4 matrixRotation = glm::rotate(glm::mat4(1.0f), fabsf(euler.x), glm::vec3(1.0f, 0.0f, 0.0f));
             //matrixRotation = glm::rotate(matrixRotation, fabsf(euler.z), glm::vec3(0.0f, 1.0f, 0.0f));
             //matrixRotation = glm::rotate(matrixRotation, fabsf(euler.y), glm::vec3(0.0f, 0.0f, 1.0f));
             
-            glm::mat4x4 matrixRotation = glm::toMat4(rotation);
             
-            m_bonesTransformation[i] = matrixTranslation * matrixRotation;
+            
+            m_bonesTransformation[i] = matrixTranslation * matrixRotation * glm::rotate(glm::mat4(1.0f), 90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
         }
         std::cout<<std::endl;
         m_skeleton->AnimateHierarhy();
@@ -212,6 +289,9 @@ void CMesh::OnUpdate(f32 _deltatime)
         for(i32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
         {
             glm::vec3 bonePosition = glm::vec3(0.0f); //m_sequenceData[i].m_position;
+            
+            f32 sumWeight = 0.0f;
+            
             for(i32 j = 0; j < m_sequenceData[i].m_numWeights; ++j)
             {
                 std::shared_ptr<CBone> bone = m_skeleton->Get_BoneById(m_sequenceData[i].m_weights[j].m_boneId);
@@ -220,6 +300,8 @@ void CMesh::OnUpdate(f32 _deltatime)
                 glm::mat4x4 boneTransformation = (*bone->Get_Transformation());
                 f32 weight = m_sequenceData[i].m_weights[j].m_weigth;
                 //bonePosition += (glm::rotate(bone->m_rotation, m_sequenceData[i].m_position) + bone->m_position) * weight;//bone->m_position * weight;
+                
+                sumWeight += weight;
                 if(j == 0)
                 {
                     bonePosition = CMesh::_TransformVertex(m_sequenceData[i].m_position, boneTransformation) * weight;
@@ -242,6 +324,8 @@ void CMesh::OnUpdate(f32 _deltatime)
                     vertexData[i].m_normal += CVertexBuffer::CompressVec3(CMesh::_TransformVertex(m_sequenceData[i].m_normal, boneTransformation) * weight);
                 }*/
             }
+            
+            //std::cout<<"Weight "<<sumWeight<<std::endl;
             vertexData[i].m_position = bonePosition;//glm::rotate(boneRotation, bonePosition);
         }
         m_vertexBuffer->Unlock();
