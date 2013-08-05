@@ -50,6 +50,16 @@ public:
     CBone(i32 _id, i32 _parentId);
     ~CBone(void);
     
+    void Set_Name(const std::string& _name)
+    {
+        m_name = _name;
+    };
+    
+    std::string Get_Name(void)
+    {
+        return m_name;
+    };
+    
     void AddChild(std::shared_ptr<CBone> _bone);
     std::shared_ptr<CBone> FindChild(i32 _id);
     void Update(const glm::mat4x4* _matrix);

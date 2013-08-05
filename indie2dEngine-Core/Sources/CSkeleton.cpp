@@ -34,7 +34,9 @@ void CSkeleton::_Serialize(std::ifstream &_stream)
         _stream.read(buffer, boneNameLength * sizeof(char));
         _stream.read((char*)&id, sizeof(i32));
         _stream.read((char*)&parentId, sizeof(i32));
-        CSkeleton::AddBone( std::make_shared<CBone>(id, parentId));
+        std::shared_ptr<CBone> bone = std::make_shared<CBone>(id, parentId);
+        bone->Set_Name(buffer);
+        CSkeleton::AddBone(bone);
     }
 }
 
@@ -107,11 +109,10 @@ void CSkeleton::Set_BindTransformation(void)
 
 void CSkeleton::DrawDebug(const i32 *_attributes)
 {
-    return;
     if (m_root != nullptr)
     {
-        m_root->Update(nullptr);
-        SVertex* vertexData = m_vertexBuffer->Lock();
+        //m_root->Update(nullptr);
+        /*SVertex* vertexData = m_vertexBuffer->Lock();
         m_root->FillVertexDataDebug(vertexData, 0);
         m_vertexBuffer->Unlock();
 
@@ -123,9 +124,9 @@ void CSkeleton::DrawDebug(const i32 *_attributes)
         glLineWidth(5.0f);
         glDrawElements(GL_LINES, m_indexBuffer->Get_NumIndexes(), GL_UNSIGNED_SHORT, NULL);
         m_vertexBuffer->Unbind(_attributes);
-        m_indexBuffer->Unbind();
+        m_indexBuffer->Unbind();*/
         
-        //m_root->DrawDebug(_attributes);
+        m_root->DrawDebug(_attributes);
     }
 }
 

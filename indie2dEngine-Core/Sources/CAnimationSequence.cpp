@@ -32,9 +32,13 @@ void CAnimationFrame::_Serialize(std::ifstream &_stream)
         glm::quat rotation;
         _stream.read((char*)&rotation, sizeof(glm::quat));
         
-        glm::quat _rotation = glm::quat(rotation.x, rotation.y, rotation.z, rotation.w);
-        glm::vec3 euler = glm::eulerAngles(rotation);
-        std::cout<<"rotation :"<<euler.x<<","<<euler.y<<","<<euler.z<<std::endl;
+        glm::quat _rotation = glm::quat(rotation.w, -rotation.x, -rotation.y, -rotation.z);
+        glm::vec3 euler = glm::eulerAngles(_rotation);
+        std::cout.setf(std::ios::fixed, std::ios::floatfield);
+        std::cout.setf(std::ios::showpoint);
+        std::cout.precision(3);
+        std::cout<<"Bone index: "<<i<<std::endl;
+        std::cout<<"rotation: "<<euler.x<<","<<euler.y<<","<<euler.z<<std::endl;
         /*f32 value = rotation.x;
         rotation.x = rotation.z;
         rotation.z = value;*/

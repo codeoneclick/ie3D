@@ -54,6 +54,7 @@ void CKOTHInGameScene::Load(void)
     
     std::shared_ptr<CModel> model = m_root->CreateModel("model.Footman.xml");
     model->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
+    //model->Set_Scale(glm::vec3(0.25f, 0.25f, 0.25f));
     m_models.push_back(model);
     m_colliders.push_back(model);
     m_root->InsertModel(model);
