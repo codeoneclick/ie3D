@@ -22,6 +22,8 @@ protected:
     std::vector<glm::quat> m_rotations;
 	std::vector<glm::vec3> m_positions;
     std::vector<glm::vec3> m_scales;
+    std::vector<glm::vec3> m_eulers;
+    std::vector<glm::vec3> m_eulersYPR;
 	i32	m_numBones;
     
     void _Serialize(std::ifstream& _stream);
@@ -47,6 +49,18 @@ public:
 	{
         assert(_index < m_scales.size());
 		return m_scales[_index];
+	};
+    
+    inline const glm::vec3& Get_Euler(i32 _index) const
+	{
+        assert(_index < m_eulers.size());
+		return m_eulers[_index];
+	};
+    
+    inline const glm::vec3& Get_EulerYPR(i32 _index) const
+	{
+        assert(_index < m_eulersYPR.size());
+		return m_eulersYPR[_index];
 	};
 };
 

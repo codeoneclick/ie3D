@@ -159,6 +159,9 @@ void CMesh::_BindSequence(void)
             bone->m_rotation = rotation;
         }
         
+        glm::vec3 euler_01 = glm::eulerAngles(rotation);
+        glm::vec3 euler_02 = frame->Get_Euler(i);
+        glm::vec3 euler_03 = frame->Get_EulerYPR(i);
         //std::cout.setf(std::ios::fixed, std::ios::floatfield);
         //std::cout.setf(std::ios::showpoint);
         //std::cout.precision(3);
@@ -203,7 +206,7 @@ void CMesh::OnUpdate(f32 _deltatime)
     static CTimer::CTime oldTime;
     CTimer::CTime currentTime = CTimer::CClock::now();
     
-    if(m_isLoaded && m_isLinked && m_sequence->Get_NumFrames() != 0 && CTimer::Get_TimeInterval(currentTime, oldTime) > 1000)
+    if(m_isLoaded && m_isLinked && m_sequence->Get_NumFrames() != 0 && CTimer::Get_TimeInterval(currentTime, oldTime) > 1)
     {
         oldTime = currentTime;
         
@@ -233,8 +236,12 @@ void CMesh::OnUpdate(f32 _deltatime)
         
         for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
         {
-            glm::vec3 position = frame_01->Get_Position(i); //glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
-            glm::quat rotation = frame_01->Get_Rotation(i); //glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
+            glm::vec3 position = glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
+            
+            f32 angle = acos(glm::dot(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i)));
+            glm::quat rotation = (glm::sin((1.0f - interpolation) * angle) * frame_01->Get_Rotation(i) + glm::sin(interpolation * angle) * frame_02->Get_Rotation(i)) / glm::sin(angle);
+            
+            //glm::quat rotation = glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
             
             
             bone = m_skeleton->Get_BoneById(i);
@@ -248,8 +255,9 @@ void CMesh::OnUpdate(f32 _deltatime)
             std::cout.setf(std::ios::showpoint);
             std::cout.precision(3);
             std::cout<<"Frame index: "<<frame<<std::endl<<std::endl;
-            glm::vec3 euler = glm::eulerAngles(rotation);
-            
+            glm::vec3 euler_01 = glm::eulerAngles(rotation);
+            glm::vec3 euler_02 = frame_01->Get_Euler(i);
+            glm::vec3 euler_03 = frame_01->Get_EulerYPR(i);
             
             /*euler.z += 90.0f;
             euler.y += 0.0f;
@@ -262,7 +270,10 @@ void CMesh::OnUpdate(f32 _deltatime)
             
             //euler = glm::vec3(0.0f, 0.0f, 90.0f);
             
-            std::cout<<"rotation :"<<euler.x<<","<<euler.y<<","<<euler.z<<std::endl;
+            
+            std::cout<<"euler_01 :"<<euler_01.x<<","<<euler_01.y<<","<<euler_01.z<<std::endl;
+            std::cout<<"euler_02 :"<<euler_02.x<<","<<euler_02.y<<","<<euler_02.z<<std::endl;
+            std::cout<<"euler_03 :"<<glm::degrees(euler_03.x)<<","<<glm::degrees(euler_03.y)<<","<<glm::degrees(euler_03.z)<<std::endl;
             std::cout<<"position :"<<position.x<<","<<position.y<<","<<position.z<<std::endl;
             
             glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);

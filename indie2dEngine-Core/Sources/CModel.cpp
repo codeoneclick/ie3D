@@ -91,6 +91,7 @@ void CModel::_OnBind(const std::string& _renderMode)
 
 void CModel::_OnDraw(const std::string& _renderMode)
 {
+    return;
     if(m_isLoaded)
     {
         assert(m_camera != nullptr);

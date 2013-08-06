@@ -219,13 +219,13 @@ void CBone::Update(const glm::mat4x4 *_matrix)
 {
     if(_matrix != nullptr)
     {
-        (*m_transformation) = (*m_transformation) * (*_matrix);
+        //(*m_transformation) = (*m_transformation) * (*_matrix);
     }
     for(auto iterator : m_childs)
     {
         iterator->Update(m_transformation);
     }
-    (*m_transformation) = (*m_transformation) * m_bindTransformation;
+    //(*m_transformation) = (*m_transformation) * m_bindTransformation;
 }
 
 void CBone::Set_BindTransformation(void)
@@ -287,22 +287,23 @@ i32 CBone::FillNumIndexes(void)
     return numIndexes + m_childs.size();
 }
 
-i32 CBone::FillIndexDataDebug(ui16 *_indexData, i32 _index, i32 _offset)
+i32 CBone::FillIndexDataDebug(ui16 *_indexData, i32* _offset)
 {
-    i32 offset = _offset;
     for(auto iterator : m_childs)
     {
-        _indexData[_offset] = _index;
-        _indexData[_offset + 1] = _index + 1;
-        offset = iterator->FillIndexDataDebug(_indexData, _index + 1, _offset + 2);
+        _indexData[(*_offset)] = m_id;
+        i32 index = iterator->Get_Id();
+        _indexData[(*_offset) + 1] = index;
+        (*_offset) += 2;
+        iterator->FillIndexDataDebug(_indexData, _offset);
     }
-    return offset;
+    return 0;
 }
 
 i32 CBone::FillVertexDataDebug(SVertex *_vertexData, i32 _offset)
 {
     i32 offset = _offset;
-    _vertexData[offset].m_position = glm::rotate(m_rotation, m_position); //CBone::_TransformVertex(glm::vec3(0.0f, 0.0f, 0.0f), (*m_transformation));
+    _vertexData[m_id].m_position = CBone::_TransformVertex(glm::vec3(0.0f, 0.0f, 0.0f), (*m_transformation));
     for(auto iterator : m_childs)
     {
         offset = iterator->FillVertexDataDebug(_vertexData, offset + 1);

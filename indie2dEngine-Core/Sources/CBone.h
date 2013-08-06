@@ -72,7 +72,7 @@ public:
     
     i32 FillNumIndexes(void);
     i32 FillVertexDataDebug(SVertex* _vertexData, i32 _offset);
-    i32 FillIndexDataDebug(ui16* _indexData, i32 _index, i32 _offset);
+    i32 FillIndexDataDebug(ui16* _indexData, i32* _offset);
     void DrawDebug(const i32* _attributes);
     
     inline std::vector<std::shared_ptr<CBone> >& Get_Childs(void)

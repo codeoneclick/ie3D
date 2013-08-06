@@ -83,7 +83,7 @@ void CSkeleton::AnimateHierarhy( void )
 void CSkeleton::Set_BindTransformation(void)
 {
     m_root->Set_BindTransformation();
-    /*return;
+
     std::function<void(void)> function = [this]()
     {
         
@@ -91,7 +91,33 @@ void CSkeleton::Set_BindTransformation(void)
         
         m_indexBuffer = std::make_shared<CIndexBuffer>(numIndexes, GL_STATIC_DRAW);
         ui16* indexData = m_indexBuffer->Lock();
-        m_root->FillIndexDataDebug(indexData, 0, 0);
+        i32 index = 0;
+        m_root->FillIndexDataDebug(indexData, &index);
+        
+        /*indexData[0] = 0;
+        indexData[1] = 1;
+        
+        indexData[2] = 1;
+        indexData[3] = 2;
+        
+        indexData[4] = 0;
+        indexData[5] = 3;
+        
+        indexData[6] = 3;
+        indexData[7] = 4;
+        
+        indexData[8] = 4;
+        indexData[9] = 5;
+        
+        indexData[10] = 0;
+        indexData[11] = 6;
+        
+        indexData[12] = 6;
+        indexData[13] = 7;
+        
+        indexData[14] = 7;
+        indexData[15] = 8;*/
+        
         m_indexBuffer->Unlock();
         
         m_vertexBuffer = std::make_shared<CVertexBuffer>(m_numBones, GL_DYNAMIC_DRAW);
@@ -104,15 +130,15 @@ void CSkeleton::Set_BindTransformation(void)
             std::cout<<"[index] : "<<indexData[i]<<std::endl;
         }
     };
-    gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function);*/
+    gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function);
 }
 
 void CSkeleton::DrawDebug(const i32 *_attributes)
 {
-    if (m_root != nullptr)
+    if (m_root != nullptr && m_vertexBuffer != nullptr && m_indexBuffer != nullptr)
     {
-        //m_root->Update(nullptr);
-        /*SVertex* vertexData = m_vertexBuffer->Lock();
+        m_root->Update(nullptr);
+        SVertex* vertexData = m_vertexBuffer->Lock();
         m_root->FillVertexDataDebug(vertexData, 0);
         m_vertexBuffer->Unlock();
 
@@ -124,9 +150,9 @@ void CSkeleton::DrawDebug(const i32 *_attributes)
         glLineWidth(5.0f);
         glDrawElements(GL_LINES, m_indexBuffer->Get_NumIndexes(), GL_UNSIGNED_SHORT, NULL);
         m_vertexBuffer->Unbind(_attributes);
-        m_indexBuffer->Unbind();*/
+        m_indexBuffer->Unbind();
         
-        m_root->DrawDebug(_attributes);
+       // m_root->DrawDebug(_attributes);
     }
 }
 
