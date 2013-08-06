@@ -225,7 +225,7 @@ void CBone::Update(const glm::mat4x4 *_matrix)
     {
         iterator->Update(m_transformation);
     }
-    //(*m_transformation) = (*m_transformation) * m_bindTransformation;
+    (*m_transformation) = (*m_transformation) * m_bindTransformation;
 }
 
 void CBone::Set_BindTransformation(void)

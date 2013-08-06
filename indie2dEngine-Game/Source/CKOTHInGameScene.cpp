@@ -43,8 +43,8 @@ void CKOTHInGameScene::Load(void)
                                     glm::ivec4(0, 0, static_cast<i32>(Get_ScreenWidth()), static_cast<i32>(Get_ScreenHeight())));
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
-    m_camera->Set_Distance(24.0f);
-    m_camera->Set_Height(24.0f);
+    m_camera->Set_Distance(32.0f);
+    m_camera->Set_Height(32.0f);
     
     m_light = m_root->CreateLight();
     m_light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));

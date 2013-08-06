@@ -201,12 +201,47 @@ glm::vec3 CMesh::_TransformVertex(const glm::vec3 &_vertex, const glm::mat4x4 &_
     return glm::vec3(value.x, value.y, value.z);
 }
 
+glm::quat slerp( const glm::quat& from, const glm::quat& to, f32 t )
+{
+    glm::quat temp;
+	float omega, cosom, sinom, scale0, scale1;
+    
+	if ( t <= 0.0f )
+		return from;
+	else if ( t >= 1.0f )
+		return to;
+    
+	cosom = from.x * to.x + from.y * to.y + from.z * to.z + from.w * to.w;
+	if ( cosom < 0.0f )
+	{
+		temp  = -to;
+		cosom = -cosom;
+	}
+	else
+		temp = to;
+    
+	if ( ( 1.0f - cosom ) > 1e-6f )
+	{
+		omega  = acosf( cosom );
+		sinom  = 1.0f / sinf( omega );
+		scale0 = sinf( ( 1.0f - t ) * omega ) * sinom;
+		scale1 = sinf( t * omega ) * sinom;
+	}
+	else
+	{
+		scale0 = 1.0f - t;
+		scale1 = t;
+	}
+    
+	return ( ( from * scale0 ) + ( temp * scale1 ) );
+}
+
 void CMesh::OnUpdate(f32 _deltatime)
 {
     static CTimer::CTime oldTime;
     CTimer::CTime currentTime = CTimer::CClock::now();
     
-    if(m_isLoaded && m_isLinked && m_sequence->Get_NumFrames() != 0 && CTimer::Get_TimeInterval(currentTime, oldTime) > 1)
+    if(m_isLoaded && m_isLinked && m_sequence->Get_NumFrames() != 0 && CTimer::Get_TimeInterval(currentTime, oldTime) > 0)
     {
         oldTime = currentTime;
         
@@ -220,17 +255,18 @@ void CMesh::OnUpdate(f32 _deltatime)
         i32 frameIndex_02 = (frameIndex_01 + 1) % m_sequence->Get_NumFrames();
         f32 interpolation = animationDeltaTime - static_cast<f32>(floorAnimationDeltaTime);
         
-        static i32 frame = 0;
-        frame++;
-        if(frame >= m_sequence->Get_NumFrames())
+        static i32 frame_i = 0;
+        frame_i++;
+        if(frame_i >= m_sequence->Get_NumFrames())
         {
-            frame = 0;
+            frame_i = 0;
         }
         
         //frame = 1;
         
-        std::shared_ptr<CAnimationFrame> frame_01 = m_sequence->Get_AnimationFrame(frame);
+        std::shared_ptr<CAnimationFrame> frame_01 = m_sequence->Get_AnimationFrame(frameIndex_01);
         std::shared_ptr<CAnimationFrame> frame_02 = m_sequence->Get_AnimationFrame(frameIndex_02);
+        std::shared_ptr<CAnimationFrame> frame = m_sequence->Get_AnimationFrame(frame_i);
         
         std::shared_ptr<CBone> bone;
         
@@ -239,7 +275,7 @@ void CMesh::OnUpdate(f32 _deltatime)
             glm::vec3 position = glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
             
             f32 angle = acos(glm::dot(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i)));
-            glm::quat rotation = (glm::sin((1.0f - interpolation) * angle) * frame_01->Get_Rotation(i) + glm::sin(interpolation * angle) * frame_02->Get_Rotation(i)) / glm::sin(angle);
+            glm::quat rotation = slerp(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation);//frame->Get_Rotation(i);//(glm::sin((1.0f - interpolation) * angle) * frame_01->Get_Rotation(i) + glm::sin(interpolation * angle) * frame_02->Get_Rotation(i)) / glm::sin(angle);
             
             //glm::quat rotation = glm::mix(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation );
             
@@ -254,7 +290,7 @@ void CMesh::OnUpdate(f32 _deltatime)
             std::cout.setf(std::ios::fixed, std::ios::floatfield);
             std::cout.setf(std::ios::showpoint);
             std::cout.precision(3);
-            std::cout<<"Frame index: "<<frame<<std::endl<<std::endl;
+            //std::cout<<"Frame index: "<<frame<<std::endl<<std::endl;
             glm::vec3 euler_01 = glm::eulerAngles(rotation);
             glm::vec3 euler_02 = frame_01->Get_Euler(i);
             glm::vec3 euler_03 = frame_01->Get_EulerYPR(i);
@@ -272,9 +308,9 @@ void CMesh::OnUpdate(f32 _deltatime)
             
             
             std::cout<<"euler_01 :"<<euler_01.x<<","<<euler_01.y<<","<<euler_01.z<<std::endl;
-            std::cout<<"euler_02 :"<<euler_02.x<<","<<euler_02.y<<","<<euler_02.z<<std::endl;
-            std::cout<<"euler_03 :"<<glm::degrees(euler_03.x)<<","<<glm::degrees(euler_03.y)<<","<<glm::degrees(euler_03.z)<<std::endl;
-            std::cout<<"position :"<<position.x<<","<<position.y<<","<<position.z<<std::endl;
+            //std::cout<<"euler_02 :"<<euler_02.x<<","<<euler_02.y<<","<<euler_02.z<<std::endl;
+            //std::cout<<"euler_03 :"<<glm::degrees(euler_03.x)<<","<<glm::degrees(euler_03.y)<<","<<glm::degrees(euler_03.z)<<std::endl;
+            //std::cout<<"position :"<<position.x<<","<<position.y<<","<<position.z<<std::endl;
             
             glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
             

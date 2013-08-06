@@ -34,7 +34,7 @@ void CAnimationFrame::_Serialize(std::ifstream &_stream)
         glm::quat rotation;
         _stream.read((char*)&rotation, sizeof(glm::quat));
         
-        glm::quat _rotation = glm::quat(rotation.w, rotation.x, rotation.y, rotation.z);
+        glm::quat _rotation = glm::quat(rotation.w, -rotation.x, -rotation.y, -rotation.z);
         //glm::vec3 euler = glm::eulerAngles(_rotation);
         std::cout.setf(std::ios::fixed, std::ios::floatfield);
         std::cout.setf(std::ios::showpoint);

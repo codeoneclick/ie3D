@@ -30,7 +30,7 @@ void CMeshCommiter_MDL::Commit(void)
     std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh >(m_resource);
     std::shared_ptr<CMeshHeader> header = mesh->_Get_Header();
     
-    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(header->Get_NumVertexes(), GL_STATIC_DRAW);
+    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(header->Get_NumVertexes(), GL_DYNAMIC_DRAW);
     SVertex* vertexData = vertexBuffer->Lock();
 	memcpy(vertexData, header->Get_VertexData(), sizeof(SVertex) * header->Get_NumVertexes());
     vertexBuffer->Unlock();

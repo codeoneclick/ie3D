@@ -135,6 +135,7 @@ void CSkeleton::Set_BindTransformation(void)
 
 void CSkeleton::DrawDebug(const i32 *_attributes)
 {
+    return;
     if (m_root != nullptr && m_vertexBuffer != nullptr && m_indexBuffer != nullptr)
     {
         m_root->Update(nullptr);

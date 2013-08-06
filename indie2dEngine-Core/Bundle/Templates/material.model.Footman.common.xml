@@ -1,6 +1,6 @@
 <material render_mode="world.space.operation" is_cull_face="1" is_depth_test="1" is_depth_mask="1" is_blend="0" cull_face_mode="GL_FRONT" blend_function_source="GL_SRC_ALPHA" blend_function_destination="GL_ONE_MINUS_SRC_ALPHA" is_cliping="0" clipping_x="0.0" clipping_y="0.0" clipping_z="0.0" clipping_w="0.0" is_reflected="0" is_debug="1">
     <shader vs_name="CommonModel.vert" fs_name="CommonModel.frag"/>
     <textures>
-        <texture name="Footman.Diffuse.pvr" operation="" slot="0" wrap="GL_REPEAT"/>
+        <texture name="Footman2.Diffuse.pvr" operation="" slot="0" wrap="GL_REPEAT"/>
     </textures>
 </material>
