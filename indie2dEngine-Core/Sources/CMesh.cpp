@@ -214,7 +214,6 @@ void CMesh::OnUpdate(f32 _deltatime)
         m_skeleton->Update();
         
         SVertex* vertexData = m_vertexBuffer->Lock();
-        
         for(i32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
         {
             glm::vec3 bonePosition(0.0f);

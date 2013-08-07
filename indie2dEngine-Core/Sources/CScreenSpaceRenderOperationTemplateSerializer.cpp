@@ -31,6 +31,8 @@ std::shared_ptr<ITemplate> CScreenSpaceRenderOperationTemplateSerializer::Serial
     
     std::shared_ptr<SScreenSpaceRenderOperationTemplate> screenSpaceRenderOperationTemplate = std::make_shared<SScreenSpaceRenderOperationTemplate>();
     screenSpaceRenderOperationTemplate->m_guid = node.attribute("guid").as_string();
+    screenSpaceRenderOperationTemplate->m_screenWidth = node.attribute("screenWidth").as_int();
+    screenSpaceRenderOperationTemplate->m_screenHeight = node.attribute("screenHeight").as_int();
     
     pugi::xml_node material_node = node.child("material");
     screenSpaceRenderOperationTemplate->m_materialTemplateFilename = material_node.attribute("filename").as_string();

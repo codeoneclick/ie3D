@@ -88,10 +88,10 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     
     for(auto worldSpaceRenderOperationTemplate : gameTransitionTemplate->m_worldSpaceRenderOperationsTemplates)
     {
-
-        std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation = std::make_shared<CRenderOperationWorldSpace>(Get_ScreenWidth(),
-                                                                                                                                 Get_ScreenHeight(),
-                                                                                                                                 worldSpaceRenderOperationTemplate->m_guid);
+        
+        std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation = std::make_shared<CRenderOperationWorldSpace>(worldSpaceRenderOperationTemplate->m_screenWidth,
+                                                                                                                             worldSpaceRenderOperationTemplate->m_screenHeight,
+                                                                                                                             worldSpaceRenderOperationTemplate->m_guid);
         m_renderMgr->RegisterWorldSpaceRenderOperation(worldSpaceRenderOperationTemplate->m_guid, worldSpaceRenderOperation);
     }
     
@@ -107,8 +107,8 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>(screenSpaceRenderOperationShader);
         screenSpaceRenderOperationMaterial->Serialize(screenSpaceRenderOperationMaterialTemplate, m_resourceAccessor, m_renderMgr);
         
-        std::shared_ptr<CRenderOperationScreenSpace> screenSpaceRenderOperation = std::make_shared<CRenderOperationScreenSpace>(Get_ScreenWidth(),
-                                                                                                                                Get_ScreenHeight(),
+        std::shared_ptr<CRenderOperationScreenSpace> screenSpaceRenderOperation = std::make_shared<CRenderOperationScreenSpace>(screenSpaceRenderOperationTemplate->m_screenWidth,
+                                                                                                                                screenSpaceRenderOperationTemplate->m_screenHeight,
                                                                                                                                 screenSpaceRenderOperationTemplate->m_guid,
                                                                                                                                 screenSpaceRenderOperationMaterial);
         m_renderMgr->RegisterScreenSpaceRenderOperation( screenSpaceRenderOperationTemplate->m_guid, screenSpaceRenderOperation);

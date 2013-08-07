@@ -31,6 +31,8 @@ std::shared_ptr<ITemplate> CWorldSpaceRenderOperationTemplateSerializer::Seriali
     
     std::shared_ptr<SWorldSpaceRenderOperationTemplate> worldSpaceRenderOperationTemplate = std::make_shared<SWorldSpaceRenderOperationTemplate>();
     worldSpaceRenderOperationTemplate->m_guid = node.attribute("guid").as_string();
+    worldSpaceRenderOperationTemplate->m_screenWidth = node.attribute("screenWidth").as_int();
+    worldSpaceRenderOperationTemplate->m_screenHeight = node.attribute("screenHeight").as_int();
     
     return worldSpaceRenderOperationTemplate;
 }

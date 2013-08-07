@@ -66,6 +66,7 @@ std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::str
     materialTemplate->m_clipping.w = node.attribute("clipping_w").as_float();
     
     materialTemplate->m_isReflected = node.attribute("is_reflected").as_bool();
+    materialTemplate->m_isShadowed = node.attribute("is_shadowed").as_bool();
     materialTemplate->m_isDebug = node.attribute("is_debug").as_bool();
     
     std::shared_ptr<SShaderTemplate> shaderTemplate = std::make_shared<SShaderTemplate>();

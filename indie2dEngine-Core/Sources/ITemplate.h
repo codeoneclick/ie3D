@@ -42,6 +42,7 @@ struct SMaterialTemplate : public ITemplate
     bool m_isClipping;
     glm::vec4 m_clipping;
     bool m_isReflected;
+    bool m_isShadowed;
     bool m_isDebug;
     
     std::vector<std::shared_ptr<STextureTemplate> > m_texturesTemplates;
@@ -101,12 +102,16 @@ struct SParticleEmitterTemplate : public ITemplate
 struct SWorldSpaceRenderOperationTemplate : public ITemplate
 {
     std::string m_guid;
+    i32 m_screenWidth;
+    i32 m_screenHeight;
 };
 
 struct SScreenSpaceRenderOperationTemplate : public ITemplate
 {
     std::string m_guid;
     std::string m_materialTemplateFilename;
+    i32 m_screenWidth;
+    i32 m_screenHeight;
     std::shared_ptr<SMaterialTemplate> m_materialTemplate;
 };
 
