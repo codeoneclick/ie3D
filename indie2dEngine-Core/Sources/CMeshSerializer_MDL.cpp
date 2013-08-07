@@ -10,7 +10,7 @@
 #include "CCommonOS.h"
 #include "CMesh.h"
 #include "CSkeleton.h"
-#include "CAnimationSequence.h"
+#include "CSequence.h"
 #include "PVRTTexture.h"
 
 CMeshSerializer_MDL::CMeshSerializer_MDL(const std::string& _filename, std::shared_ptr<IResource> _resource) :

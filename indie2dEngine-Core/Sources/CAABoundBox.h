@@ -34,8 +34,6 @@ protected:
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
     
-    glm::vec3 _TransformVertex(const glm::vec3& _vertex, const glm::mat4x4& _worldMatrix);
-    
     inline void _Set_MaxBound(const glm::vec3& _maxBound)
     {
         m_maxBound = _maxBound;

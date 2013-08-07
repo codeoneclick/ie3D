@@ -235,13 +235,13 @@ void IGameObject::_OnDebugDraw(const std::string &_renderMode)
         m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         
         /*m_boundBox->Bind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
-        m_boundBox->Draw();
-        m_boundBox->Unbind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
-        m_debugBoundBoxMaterial->Unbind();*/
+         m_boundBox->Draw();
+         m_boundBox->Unbind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
+         m_debugBoundBoxMaterial->Unbind();*/
         
         if(m_mesh != nullptr && m_mesh->Get_Skeleton() != nullptr)
         {
-            m_mesh->Get_Skeleton()->DrawDebug(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
+            m_mesh->Get_Skeleton()->Draw(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
         }
     }
 }

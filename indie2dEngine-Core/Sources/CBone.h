@@ -21,26 +21,16 @@ private:
     
 protected:
     
-    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
-    std::shared_ptr<CIndexBuffer> m_indexBuffer;
-    
     std::string	m_name;
 	i32	m_id;
 	i32	m_parentId;
     
     std::shared_ptr<CBone> m_parent;
     std::vector<std::shared_ptr<CBone> > m_childs;
-    //std::shared_ptr<CBone> m_next;
-	//std::shared_ptr<CBone> m_child;
    
+    glm::mat4x4 m_baseTransformation;
     glm::mat4x4* m_transformation;
     glm::mat4x4 m_bindTransformation;
-    
-    glm::vec3 m_maxBound;
-    glm::vec3 m_minBound;
-    
-    glm::vec3 _TransformVertex(const glm::vec3& _vertex, const glm::mat4x4& _matrix);
-    void _Update(const glm::mat4x4 &_matrix);
     
 public:
     
@@ -65,15 +55,8 @@ public:
     void Update(const glm::mat4x4* _matrix);
     void Set_BindTransformation(void);
     
-    //void LinkChildBone(std::shared_ptr<CBone> _bone);
-    //std::shared_ptr<CBone> FindInChildrenById(i32 _id);
-    //void AnimateHierarhy(const glm::mat4x4* _transformation);
-	//void SetupBindPosition(void);
-    
-    i32 FillNumIndexes(void);
-    i32 FillVertexDataDebug(SVertex* _vertexData, i32 _offset);
-    i32 FillIndexDataDebug(ui16* _indexData, i32* _offset);
-    void DrawDebug(const i32* _attributes);
+    i32 WriteVertexData(SVertex* _vertexData, i32 _offset);
+    void WriteIndexData(ui16* _indexData, i32* _offset);
     
     inline std::vector<std::shared_ptr<CBone> >& Get_Childs(void)
     {
@@ -95,26 +78,6 @@ public:
 		return m_parent;
 	};
     
-	//inline std::shared_ptr<CBone> Get_Next(void) const
-	//{
-	//	return m_next;
-	//};
-    
-	//inline std::shared_ptr<CBone> Get_Child(void) const
-	//{
-	//	return m_child;
-	//};
-    
-	//inline void Set_BindPosition(const glm::mat4x4& _matrix)
-	//{
-	//	m_bindPosition = _matrix;
-	//};
-    
-	//inline const glm::mat4x4& Get_BindPosition(void) const
-	//{
-	//	return m_bindPosition;
-	//};
-    
 	inline void Set_Transformation(glm::mat4x4* _transformation)
 	{
 		m_transformation = _transformation;
@@ -124,6 +87,11 @@ public:
 	{
 		return m_transformation;
 	};
+    
+    inline glm::mat4x4 Get_BaseTransformation(void) const
+    {
+        return m_baseTransformation;
+    };
 };
 
 #endif 

@@ -2,8 +2,8 @@
 	<mesh value="Footman2.MDL"/>
 	<materials>
 		<material filename="material.model.Footman.common.xml"/>
-        <material filename="material.model.Footman.reflection.xml"/>
-        <material filename="material.model.Footman.refraction.xml"/>
+        <!--<material filename="material.model.Footman.reflection.xml"/>-->
+        <!--<material filename="material.model.Footman.refraction.xml"/>-->
         <!--<material filename="screen.gbuffer.position.model.material.xml"/>-->
         <!--<material filename="gbuffer.normal.material.xml"/>-->
 	</materials>

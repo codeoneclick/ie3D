@@ -106,7 +106,7 @@
 		A42FE6311771EEA900131949 /* screen.space.blur.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A42FE62B1771EEA800131949 /* screen.space.blur.operation.xml */; };
 		A42FF51017A1508200C0B419 /* CBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A42FF50E17A1508200C0B419 /* CBone.cpp */; };
 		A42FF51B17A150A600C0B419 /* CSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A42FF51917A150A600C0B419 /* CSkeleton.cpp */; };
-		A42FF51E17A15C4700C0B419 /* CAnimationSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A42FF51C17A15C4700C0B419 /* CAnimationSequence.cpp */; };
+		A42FF51E17A15C4700C0B419 /* CSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A42FF51C17A15C4700C0B419 /* CSequence.cpp */; };
 		A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
 		A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364842179953E000C51AC4 /* ICollisionHandler.cpp */; };
 		A4364897179D6D3C00C51AC4 /* CKOTHInGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364895179D6D3B00C51AC4 /* CKOTHInGameScene.cpp */; };
@@ -574,8 +574,8 @@
 		A42FF50F17A1508200C0B419 /* CBone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBone.h; path = Sources/CBone.h; sourceTree = "<group>"; };
 		A42FF51917A150A600C0B419 /* CSkeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSkeleton.cpp; path = Sources/CSkeleton.cpp; sourceTree = "<group>"; };
 		A42FF51A17A150A600C0B419 /* CSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSkeleton.h; path = Sources/CSkeleton.h; sourceTree = "<group>"; };
-		A42FF51C17A15C4700C0B419 /* CAnimationSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnimationSequence.cpp; path = Sources/CAnimationSequence.cpp; sourceTree = "<group>"; };
-		A42FF51D17A15C4700C0B419 /* CAnimationSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAnimationSequence.h; path = Sources/CAnimationSequence.h; sourceTree = "<group>"; };
+		A42FF51C17A15C4700C0B419 /* CSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSequence.cpp; path = Sources/CSequence.cpp; sourceTree = "<group>"; };
+		A42FF51D17A15C4700C0B419 /* CSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSequence.h; path = Sources/CSequence.h; sourceTree = "<group>"; };
 		A436483F179952D300C51AC4 /* CCollisionMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCollisionMgr.cpp; path = Sources/CCollisionMgr.cpp; sourceTree = "<group>"; };
 		A4364840179952D300C51AC4 /* CCollisionMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCollisionMgr.h; path = Sources/CCollisionMgr.h; sourceTree = "<group>"; };
 		A4364842179953E000C51AC4 /* ICollisionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICollisionHandler.cpp; path = Sources/ICollisionHandler.cpp; sourceTree = "<group>"; };
@@ -1787,8 +1787,8 @@
 				A42FF50E17A1508200C0B419 /* CBone.cpp */,
 				A42FF51A17A150A600C0B419 /* CSkeleton.h */,
 				A42FF51917A150A600C0B419 /* CSkeleton.cpp */,
-				A42FF51D17A15C4700C0B419 /* CAnimationSequence.h */,
-				A42FF51C17A15C4700C0B419 /* CAnimationSequence.cpp */,
+				A42FF51D17A15C4700C0B419 /* CSequence.h */,
+				A42FF51C17A15C4700C0B419 /* CSequence.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2574,7 +2574,7 @@
 				A46789DA17A021AD00FE26FA /* COceanTemplateSerializer.cpp in Sources */,
 				A42FF51017A1508200C0B419 /* CBone.cpp in Sources */,
 				A42FF51B17A150A600C0B419 /* CSkeleton.cpp in Sources */,
-				A42FF51E17A15C4700C0B419 /* CAnimationSequence.cpp in Sources */,
+				A42FF51E17A15C4700C0B419 /* CSequence.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

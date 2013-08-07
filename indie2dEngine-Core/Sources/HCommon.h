@@ -59,6 +59,57 @@ typedef long long i64;
 typedef unsigned long long ui64;
 typedef float f32;
 
+namespace glm
+{
+    inline glm::quat slerp(const glm::quat& _from, const glm::quat& _to, f32 _interpolation)
+    {
+        glm::quat value;
+        f32 omega, cosom, sinom, scale0, scale1;
+        
+        if (_interpolation <= 0.0f)
+        {
+            return _from;
+        }
+        else if (_interpolation >= 1.0f)
+        {
+            return _to;
+        }
+        
+        cosom = _from.x * _to.x + _from.y * _to.y + _from.z * _to.z + _from.w * _to.w;
+        if ( cosom < 0.0f )
+        {
+            value  = -_to;
+            cosom = -cosom;
+        }
+        else
+        {
+            value = _to;
+        }
+        
+        if ((1.0f - cosom) > 1e-6f)
+        {
+            omega  = acosf(cosom);
+            sinom  = 1.0f / sinf(omega);
+            scale0 = sinf((1.0f - _interpolation) * omega) * sinom;
+            scale1 = sinf(_interpolation * omega) * sinom;
+        }
+        else
+        {
+            scale0 = 1.0f - _interpolation;
+            scale1 = _interpolation;
+        }
+        
+        return ((_from * scale0) + (value * scale1));
+    };
+    
+    inline glm::vec3 transform(const glm::vec3 &_vertex, const glm::mat4x4 &_matrix)
+    {
+        glm::vec4 value = _matrix * glm::vec4(_vertex, 1.0f);
+        return glm::vec3(value.x, value.y, value.z);
+    }
+};
+
+
 #define MAX_VALUE(a,b) (((a) > (b)) ? (a) : (b))
 
 #endif

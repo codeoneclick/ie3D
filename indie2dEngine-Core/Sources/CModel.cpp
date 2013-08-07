@@ -55,7 +55,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     assert(shader != nullptr);
     m_debugBoundBoxMaterial = std::make_shared<CMaterial>(shader);
     m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_CULL_MODE, false);
-    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, true);
+    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, false);
     m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_DEPTH_MASK, true);
     m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_BLEND_MODE, true);
     

@@ -106,47 +106,41 @@ CAABoundBox::~CAABoundBox(void)
     
 }
 
-glm::vec3 CAABoundBox::_TransformVertex(const glm::vec3 &_vertex, const glm::mat4x4 &_worldMatrix)
-{
-    glm::vec4 value = _worldMatrix * glm::vec4(_vertex, 1.0f);
-    return glm::vec3(value.x, value.y, value.z);
-}
-
 void CAABoundBox::Update(const glm::mat4x4 &_worldMatrix)
 {
     SVertex* vertexData = m_vertexBuffer->Lock();
     
     static f32 offset = 0.1f;
     
-    vertexData[0].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_minBound.y - offset, m_maxBound.z + offset), _worldMatrix);
-    vertexData[1].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_minBound.y - offset, m_maxBound.z + offset), _worldMatrix);
-    vertexData[2].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset, m_maxBound.z + offset), _worldMatrix);
-    vertexData[3].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset, m_maxBound.z + offset), _worldMatrix);
+    vertexData[0].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_minBound.y - offset, m_maxBound.z + offset), _worldMatrix);
+    vertexData[1].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_minBound.y - offset, m_maxBound.z + offset), _worldMatrix);
+    vertexData[2].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset, m_maxBound.z + offset), _worldMatrix);
+    vertexData[3].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset, m_maxBound.z + offset), _worldMatrix);
     
-    vertexData[4].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_minBound.y - offset,  m_minBound.z - offset), _worldMatrix);
-    vertexData[5].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
-    vertexData[6].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
-    vertexData[7].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_minBound.y - offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[4].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_minBound.y - offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[5].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[6].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[7].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_minBound.y - offset,  m_minBound.z - offset), _worldMatrix);
     
-    vertexData[8].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
-    vertexData[9].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
-    vertexData[10].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
-    vertexData[11].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[8].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[9].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
+    vertexData[10].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
+    vertexData[11].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
     
-    vertexData[12].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
-    vertexData[13].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
-    vertexData[14].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
-    vertexData[15].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
+    vertexData[12].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[13].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[14].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
+    vertexData[15].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
     
-    vertexData[16].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_minBound.y - offset,  m_minBound.z - offset), _worldMatrix);
-    vertexData[17].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
-    vertexData[18].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
-    vertexData[19].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_maxBound.x + offset,  m_minBound.y - offset,  m_maxBound.z + offset), _worldMatrix);
+    vertexData[16].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_minBound.y - offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[17].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[18].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
+    vertexData[19].m_position = glm::transform(glm::vec3( m_maxBound.x + offset,  m_minBound.y - offset,  m_maxBound.z + offset), _worldMatrix);
     
-    vertexData[20].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_minBound.y - offset,  m_minBound.z - offset), _worldMatrix);
-    vertexData[21].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_minBound.y - offset,  m_maxBound.z + offset), _worldMatrix);
-    vertexData[22].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
-    vertexData[23].m_position = CAABoundBox::_TransformVertex(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[20].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_minBound.y - offset,  m_minBound.z - offset), _worldMatrix);
+    vertexData[21].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_minBound.y - offset,  m_maxBound.z + offset), _worldMatrix);
+    vertexData[22].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
+    vertexData[23].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
 
     m_vertexBuffer->Unlock();
 }

@@ -25,6 +25,7 @@ protected:
     
     std::shared_ptr<CVertexBuffer> m_vertexBuffer;
     std::shared_ptr<CIndexBuffer> m_indexBuffer;
+    f32 m_boneWidth;
     
     i32	m_numBones;
 	std::shared_ptr<CBone> m_root;
@@ -38,10 +39,10 @@ public:
     
     void AddBone(std::shared_ptr<CBone> _bone);
     std::shared_ptr<CBone> Get_BoneById(i32 _id);
-	void AnimateHierarhy(void);
+	void Update(void);
 	void Set_BindTransformation(void);
     
-    void DrawDebug(const i32* _attributes);
+    void Draw(const i32* _attributes);
     
     inline i32 Get_NumBones(void)
     {

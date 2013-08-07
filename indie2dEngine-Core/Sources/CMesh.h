@@ -110,7 +110,7 @@ public:
 
 class CAABoundBox;
 class CSkeleton;
-class CAnimationSequence;
+class CSequence;
 
 class CMesh : public IResource
 {
@@ -127,7 +127,7 @@ protected:
     std::shared_ptr<CIndexBuffer> m_indexBuffer;
     
     std::shared_ptr<CSkeleton> m_skeleton;
-    std::shared_ptr<CAnimationSequence> m_sequence;
+    std::shared_ptr<CSequence> m_sequence;
     SSequenceVertex* m_sequenceData;
     glm::mat4* m_bonesTransformation;
     f32 m_animationTime;
@@ -167,8 +167,6 @@ protected:
         m_isLinked = true;
     };
     
-     glm::vec3 _TransformVertex(const glm::vec3& _vertex, const glm::mat4x4& _matrix);
-    
 public:
     
     CMesh(const std::string& _guid);
@@ -202,7 +200,7 @@ public:
     inline const glm::vec3 Get_MaxBound(void)
     {
         return m_header != nullptr ? m_header->Get_MaxBound() : glm::vec3(0.0f);
-    }
+    };
     
     inline const glm::vec3 Get_MinBound(void)
     {
@@ -214,7 +212,7 @@ public:
         return m_skeleton;
     };
     
-    inline std::shared_ptr<CAnimationSequence> Get_Sequence(void)
+    inline std::shared_ptr<CSequence> Get_Sequence(void)
     {
         return m_sequence;
     };
