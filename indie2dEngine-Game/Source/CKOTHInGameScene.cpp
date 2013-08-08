@@ -43,8 +43,8 @@ void CKOTHInGameScene::Load(void)
                                     glm::ivec4(0, 0, static_cast<i32>(Get_ScreenWidth()), static_cast<i32>(Get_ScreenHeight())));
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
-    m_camera->Set_Distance(32.0f);
-    m_camera->Set_Height(32.0f);
+    m_camera->Set_Distance(16.0f);
+    m_camera->Set_Height(16.0f);
     
     m_light = m_root->CreateLight();
     m_light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));
@@ -54,7 +54,7 @@ void CKOTHInGameScene::Load(void)
     
     std::shared_ptr<CModel> model = m_root->CreateModel("model.Footman.xml");
     model->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
-    model->Set_Scale(glm::vec3(0.25f, 0.25f, 0.25f));
+    model->Set_Scale(glm::vec3(5.25f, 5.25f, 5.25f));
     m_models.push_back(model);
     m_colliders.push_back(model);
     m_root->InsertModel(model);

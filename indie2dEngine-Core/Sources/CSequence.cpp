@@ -37,12 +37,6 @@ void CFrame::_Serialize(std::ifstream &_stream)
         glm::vec3 scale;
         _stream.read((char*)&scale, sizeof(glm::vec3));
         m_scales.push_back(scale);
-        
-        glm::vec3 euler;
-        _stream.read((char*)&euler, sizeof(glm::vec3));
-        
-        glm::vec3 eulerYPR;
-        _stream.read((char*)&eulerYPR, sizeof(glm::vec3));
     }
 }
 

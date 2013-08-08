@@ -13,7 +13,6 @@
 
 CSkeleton::CSkeleton(void) :
 m_numBones(0),
-m_root(nullptr),
 m_boneWidth(3.0f)
 {
     
@@ -27,16 +26,13 @@ CSkeleton::~CSkeleton(void)
 void CSkeleton::_Serialize(std::ifstream &_stream)
 {
     _stream.read((char*)&m_numBones, sizeof(i32));
-    i32 id, parentId, boneNameLength;
+    i32 id, parentId;
     for (i32 i = 0; i < m_numBones; ++i)
     {
-        _stream.read((char*)&boneNameLength, sizeof(i32));
-        char* buffer = new char[boneNameLength];
-        _stream.read(buffer, boneNameLength * sizeof(char));
         _stream.read((char*)&id, sizeof(i32));
         _stream.read((char*)&parentId, sizeof(i32));
         std::shared_ptr<CBone> bone = std::make_shared<CBone>(id, parentId);
-        bone->Set_Name(buffer);
+        bone->Set_Name("");
         CSkeleton::AddBone(bone);
     }
 }
@@ -48,9 +44,9 @@ void CSkeleton::AddBone(std::shared_ptr<CBone> _bone)
         return;
     }
     
-    if (m_root == nullptr)
+    if (_bone->Get_ParentId() == -1)
     {
-        m_root = _bone;
+        m_roots.push_back(_bone);
         return;
     }
     
@@ -63,27 +59,38 @@ void CSkeleton::AddBone(std::shared_ptr<CBone> _bone)
 
 std::shared_ptr<CBone> CSkeleton::Get_BoneById(i32 _id)
 {
-    if (m_root == nullptr)
+    for(auto root : m_roots)
     {
-        return nullptr;
+        if (root->Get_Id() == _id)
+        {
+            return root;
+        }
+        else
+        {
+            std::shared_ptr<CBone> child = root->FindChild(_id);
+            if(child != nullptr)
+            {
+                return child;
+            }
+        }
     }
-    
-    if (m_root->Get_Id() == _id)
-    {
-        return m_root;
-    }
-    return m_root->FindChild(_id);
+    return nullptr;
 }
 
 void CSkeleton::Update( void )
 {
-    if (m_root != nullptr)
-        m_root->Update(nullptr);
+    for(auto root : m_roots)
+    {
+        root->Update(nullptr);
+    }
 }
 
 void CSkeleton::Set_BindTransformation(void)
 {
-    m_root->Set_BindTransformation();
+    for(auto root : m_roots)
+    {
+        root->Set_BindTransformation();
+    }
 
     std::function<void(void)> function = [this]()
     {
@@ -91,12 +98,19 @@ void CSkeleton::Set_BindTransformation(void)
         m_indexBuffer = std::make_shared<CIndexBuffer>(numIndexes, GL_STATIC_DRAW);
         ui16* indexData = m_indexBuffer->Lock();
         i32 index = 0;
-        m_root->WriteIndexData(indexData, &index);
+        for(auto root : m_roots)
+        {
+            root->WriteIndexData(indexData, &index);
+        }
         m_indexBuffer->Unlock();
         
         m_vertexBuffer = std::make_shared<CVertexBuffer>(m_numBones, GL_DYNAMIC_DRAW);
         SVertex* vertexData = m_vertexBuffer->Lock();
-        m_root->WriteVertexData(vertexData, 0);
+        index = 0;
+        for(auto root : m_roots)
+        {
+            index = root->WriteVertexData(vertexData, index);
+        }
         m_vertexBuffer->Unlock();
     };
     gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function);
@@ -104,11 +118,20 @@ void CSkeleton::Set_BindTransformation(void)
 
 void CSkeleton::Draw(const i32 *_attributes)
 {
-    if (m_root != nullptr && m_vertexBuffer != nullptr && m_indexBuffer != nullptr)
+    if (m_vertexBuffer != nullptr && m_indexBuffer != nullptr)
     {
-        m_root->Update(nullptr);
+        for(auto root : m_roots)
+        {
+            root->Update(nullptr);
+        }
+        
         SVertex* vertexData = m_vertexBuffer->Lock();
-        m_root->WriteVertexData(vertexData, 0);
+        i32 index = 0;
+        for(auto root : m_roots)
+        {
+            index = root->WriteVertexData(vertexData, index);
+        }
+
         m_vertexBuffer->Unlock();
 
         assert(m_vertexBuffer != nullptr);

@@ -32,6 +32,7 @@
 		21879FE217A6F22400605D7F /* Footman2.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 21879FE117A6F22400605D7F /* Footman2.MDL */; };
 		21879FEC17AE4A3800605D7F /* Footman3.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 21879FEB17AE4A3800605D7F /* Footman3.MDL */; };
 		218A462E17B193A400301F41 /* Footman2.Diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 218A462D17B193A400301F41 /* Footman2.Diffuse.pvr */; };
+		218A463A17B2BEFC00301F41 /* Footman4.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 218A463917B2BEFC00301F41 /* Footman4.MDL */; };
 		21E09E8E17759A5400F199AD /* ParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8317758E6A00F199AD /* ParticleEmitter.vert */; };
 		21E09E8F17759A5400F199AD /* ParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8217758E6A00F199AD /* ParticleEmitter.frag */; };
 		21E42A4E1767B3FD00E40437 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4A1767B3FD00E40437 /* main.transition.xml */; };
@@ -486,6 +487,7 @@
 		21879FE117A6F22400605D7F /* Footman2.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman2.MDL; sourceTree = "<group>"; };
 		21879FEB17AE4A3800605D7F /* Footman3.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman3.MDL; sourceTree = "<group>"; };
 		218A462D17B193A400301F41 /* Footman2.Diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman2.Diffuse.pvr; sourceTree = "<group>"; };
+		218A463917B2BEFC00301F41 /* Footman4.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman4.MDL; sourceTree = "<group>"; };
 		21E09E8217758E6A00F199AD /* ParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.frag; sourceTree = "<group>"; };
 		21E09E8317758E6A00F199AD /* ParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.vert; sourceTree = "<group>"; };
 		21E42A4A1767B3FD00E40437 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
@@ -1214,6 +1216,7 @@
 		A40A6A6F1753B06C005B475E /* Meshes */ = {
 			isa = PBXGroup;
 			children = (
+				218A463917B2BEFC00301F41 /* Footman4.MDL */,
 				21879FEB17AE4A3800605D7F /* Footman3.MDL */,
 				21879FE117A6F22400605D7F /* Footman2.MDL */,
 				21816A7A17A07F3F000AF4BF /* Footman.mdl */,
@@ -2445,6 +2448,7 @@
 				21879FE217A6F22400605D7F /* Footman2.MDL in Resources */,
 				21879FEC17AE4A3800605D7F /* Footman3.MDL in Resources */,
 				218A462E17B193A400301F41 /* Footman2.Diffuse.pvr in Resources */,
+				218A463A17B2BEFC00301F41 /* Footman4.MDL in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
