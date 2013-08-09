@@ -153,13 +153,6 @@ void CMesh::_BindSequence(void)
         glm::quat rotation = frame->Get_Rotation(i);
         glm::vec3 scale = frame->Get_Scale(i);
         
-        bone = m_skeleton->Get_BoneById(i);
-        if (bone != nullptr)
-        {
-            bone->m_position = position;
-            bone->m_rotation = rotation;
-        }
-        
         glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
         glm::mat4x4 matrixRotation = glm::toMat4(rotation);
         glm::mat4x4 matrixScale = glm::scale(glm::mat4x4(1.0f), scale);
@@ -199,16 +192,10 @@ void CMesh::OnUpdate(f32 _deltatime)
             glm::quat rotation = glm::slerp(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation);
             glm::vec3 scale = glm::mix(frame_01->Get_Scale(i), frame_02->Get_Scale(i), interpolation);
             
-            bone = m_skeleton->Get_BoneById(i);
-            if (bone != nullptr)
-            {
-                bone->m_position = position;
-                bone->m_rotation = rotation;
-            }
-            
             glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
             glm::mat4x4 matrixRotation = glm::toMat4(rotation);
             glm::mat4x4 matrixScale = glm::scale(glm::mat4x4(1.0f), scale);
+        
             m_bonesTransformation[i] = matrixTranslation * matrixRotation * matrixScale;
         }
         m_skeleton->Update();
@@ -216,11 +203,18 @@ void CMesh::OnUpdate(f32 _deltatime)
         SVertex* vertexData = m_vertexBuffer->Lock();
         for(i32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
         {
+            f32 sumWeights = 0.0f;
             glm::vec3 bonePosition(0.0f);
             for(i32 j = 0; j < m_sequenceData[i].m_numWeights; ++j)
             {
                 std::shared_ptr<CBone> bone = m_skeleton->Get_BoneById(m_sequenceData[i].m_weights[j].m_boneId);
+                if(bone == nullptr)
+                {
+                    std::cout<<m_sequenceData[i].m_weights[j].m_boneId<<std::endl;
+                    continue;
+                }
                 glm::mat4x4 boneTransformation = (*bone->Get_Transformation());
+                
                 f32 weight = m_sequenceData[i].m_weights[j].m_weigth;
                 if(j == 0)
                 {
@@ -230,6 +224,7 @@ void CMesh::OnUpdate(f32 _deltatime)
                 {
                     bonePosition += glm::transform(m_sequenceData[i].m_position, boneTransformation) * weight;
                 }
+                sumWeights += weight;
             }
             vertexData[i].m_position = bonePosition;
         }

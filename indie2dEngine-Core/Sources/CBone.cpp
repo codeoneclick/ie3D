@@ -56,11 +56,11 @@ std::shared_ptr<CBone> CBone::FindChild(i32 _id)
     return bone;
 }
 
-void CBone::Update(const glm::mat4x4 *_matrix)
+void CBone::Update(void)
 {
     for(auto iterator : m_childs)
     {
-        iterator->Update(m_transformation);
+        iterator->Update();
     }
     m_baseTransformation = (*m_transformation) * glm::inverse(m_bindTransformation);
     (*m_transformation) = (*m_transformation) * m_bindTransformation;

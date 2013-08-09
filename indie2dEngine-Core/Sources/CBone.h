@@ -34,9 +34,6 @@ protected:
     
 public:
     
-    glm::quat m_rotation;
-    glm::vec3 m_position;
-    
     CBone(i32 _id, i32 _parentId);
     ~CBone(void);
     
@@ -52,7 +49,7 @@ public:
     
     void AddChild(std::shared_ptr<CBone> _bone);
     std::shared_ptr<CBone> FindChild(i32 _id);
-    void Update(const glm::mat4x4* _matrix);
+    void Update(void);
     void Set_BindTransformation(void);
     
     i32 WriteVertexData(SVertex* _vertexData, i32 _offset);

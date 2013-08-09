@@ -28,7 +28,7 @@ protected:
     f32 m_boneWidth;
     
     i32	m_numBones;
-    std::vector<std::shared_ptr<CBone> > m_roots;
+    std::set<std::shared_ptr<CBone> > m_roots;
     
     void _Serialize(std::ifstream& _stream);
     

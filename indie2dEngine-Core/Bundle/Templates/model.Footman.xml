@@ -1,5 +1,5 @@
 <model name="footman">
-	<mesh value="Footman4.MDL"/>
+	<mesh value="mesh_01.MDL"/>
 	<materials>
 		<material filename="material.model.Footman.common.xml"/>
         <!--<material filename="material.model.Footman.reflection.xml"/>-->

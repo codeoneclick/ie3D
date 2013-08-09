@@ -108,7 +108,6 @@ void CMeshSerializer_MDL::Serialize(void)
     
     int isAnimated = 0;
     filestream.read((char*)&isAnimated, sizeof(i32));
-    
     if(isAnimated)
     {
         mesh->Get_Skeleton()->_Serialize(filestream);
@@ -123,6 +122,7 @@ void CMeshSerializer_MDL::Serialize(void)
             i32 numWeights = 0;
             filestream.read((char*)&numWeights, sizeof(i32));
             sequenceData[i].m_numWeights = numWeights;
+            f32 sumWeights = 0.0f;
             for(ui32 j = 0; j < numWeights; ++j)
             {
                 i32 boneId;
@@ -131,7 +131,9 @@ void CMeshSerializer_MDL::Serialize(void)
                 filestream.read((char*)&weight, sizeof(f32));
                 sequenceData[i].m_weights[j].m_boneId = boneId;
                 sequenceData[i].m_weights[j].m_weigth = weight;
+                sumWeights += weight;
             }
+            //assert(sumWeights == 1.0f);
         }
     }
     

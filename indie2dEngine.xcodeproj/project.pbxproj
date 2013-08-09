@@ -208,6 +208,8 @@
 		A46A3318174E35F00044643E /* CommonModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C5174555AF00CA59D0 /* CommonModel.vert */; };
 		A46A3319174E35F00044643E /* CommonModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C4174555AF00CA59D0 /* CommonModel.frag */; };
 		A46A331C174E4C820044643E /* CResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceAccessor.cpp */; };
+		A47469B817B3BE6900851268 /* Ghoul_01.MDL in Resources */ = {isa = PBXBuildFile; fileRef = A47469B717B3BE6900851268 /* Ghoul_01.MDL */; };
+		A47469C217B3ECBE00851268 /* mesh_01.MDL in Resources */ = {isa = PBXBuildFile; fileRef = A47469C117B3ECBE00851268 /* mesh_01.MDL */; };
 		A48174791762145D00E1DC6E /* CGameTransitionTemplateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48174771762145D00E1DC6E /* CGameTransitionTemplateLoader.cpp */; };
 		A481748717621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748517621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp */; };
 		A481748A17621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748817621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp */; };
@@ -693,6 +695,8 @@
 		A46A3315174E2E4F0044643E /* CTextureLoader_Testing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTextureLoader_Testing.cpp; sourceTree = "<group>"; };
 		A46A331A174E4C700044643E /* CResourceAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CResourceAccessor.cpp; path = Sources/CResourceAccessor.cpp; sourceTree = "<group>"; };
 		A46A331B174E4C770044643E /* CResourceAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CResourceAccessor.h; path = Sources/CResourceAccessor.h; sourceTree = "<group>"; };
+		A47469B717B3BE6900851268 /* Ghoul_01.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ghoul_01.MDL; sourceTree = "<group>"; };
+		A47469C117B3ECBE00851268 /* mesh_01.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = mesh_01.MDL; sourceTree = "<group>"; };
 		A48174771762145D00E1DC6E /* CGameTransitionTemplateLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameTransitionTemplateLoader.cpp; path = Sources/CGameTransitionTemplateLoader.cpp; sourceTree = "<group>"; };
 		A48174781762145D00E1DC6E /* CGameTransitionTemplateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameTransitionTemplateLoader.h; path = Sources/CGameTransitionTemplateLoader.h; sourceTree = "<group>"; };
 		A481748517621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CWorldSpaceRenderOperationTemplateSerializer.cpp; path = Sources/CWorldSpaceRenderOperationTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -1216,6 +1220,8 @@
 		A40A6A6F1753B06C005B475E /* Meshes */ = {
 			isa = PBXGroup;
 			children = (
+				A47469C117B3ECBE00851268 /* mesh_01.MDL */,
+				A47469B717B3BE6900851268 /* Ghoul_01.MDL */,
 				218A463917B2BEFC00301F41 /* Footman4.MDL */,
 				21879FEB17AE4A3800605D7F /* Footman3.MDL */,
 				21879FE117A6F22400605D7F /* Footman2.MDL */,
@@ -2449,6 +2455,8 @@
 				21879FEC17AE4A3800605D7F /* Footman3.MDL in Resources */,
 				218A462E17B193A400301F41 /* Footman2.Diffuse.pvr in Resources */,
 				218A463A17B2BEFC00301F41 /* Footman4.MDL in Resources */,
+				A47469B817B3BE6900851268 /* Ghoul_01.MDL in Resources */,
+				A47469C217B3ECBE00851268 /* mesh_01.MDL in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

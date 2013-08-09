@@ -27,26 +27,31 @@ void CSkeleton::_Serialize(std::ifstream &_stream)
 {
     _stream.read((char*)&m_numBones, sizeof(i32));
     i32 id, parentId;
+
     for (i32 i = 0; i < m_numBones; ++i)
     {
         _stream.read((char*)&id, sizeof(i32));
         _stream.read((char*)&parentId, sizeof(i32));
-        std::shared_ptr<CBone> bone = std::make_shared<CBone>(id, parentId);
-        bone->Set_Name("");
+        std::shared_ptr<CBone> bone = CSkeleton::Get_BoneById(id);
+        if(bone == nullptr)
+        {
+            bone = std::make_shared<CBone>(id, parentId);
+            bone->Set_Name("");
+        }
         CSkeleton::AddBone(bone);
     }
 }
 
 void CSkeleton::AddBone(std::shared_ptr<CBone> _bone)
 {
-    if (_bone == nullptr)
+    if(_bone == nullptr)
     {
         return;
     }
     
     if (_bone->Get_ParentId() == -1)
     {
-        m_roots.push_back(_bone);
+        m_roots.insert(_bone);
         return;
     }
     
@@ -54,7 +59,9 @@ void CSkeleton::AddBone(std::shared_ptr<CBone> _bone)
     if (parent != nullptr)
     {
         parent->AddChild(_bone);
+        return;
     }
+    assert(false);
 }
 
 std::shared_ptr<CBone> CSkeleton::Get_BoneById(i32 _id)
@@ -81,7 +88,7 @@ void CSkeleton::Update( void )
 {
     for(auto root : m_roots)
     {
-        root->Update(nullptr);
+        root->Update();
     }
 }
 
@@ -92,6 +99,7 @@ void CSkeleton::Set_BindTransformation(void)
         root->Set_BindTransformation();
     }
 
+    return;
     std::function<void(void)> function = [this]()
     {
         i32 numIndexes = ((m_numBones - 1) * 2);
@@ -103,6 +111,11 @@ void CSkeleton::Set_BindTransformation(void)
             root->WriteIndexData(indexData, &index);
         }
         m_indexBuffer->Unlock();
+        
+        for(i32 i = 0; i < numIndexes; ++i)
+        {
+            std::cout<<"[Index] "<<indexData[i]<<std::endl;
+        }
         
         m_vertexBuffer = std::make_shared<CVertexBuffer>(m_numBones, GL_DYNAMIC_DRAW);
         SVertex* vertexData = m_vertexBuffer->Lock();
@@ -118,11 +131,12 @@ void CSkeleton::Set_BindTransformation(void)
 
 void CSkeleton::Draw(const i32 *_attributes)
 {
+    return;
     if (m_vertexBuffer != nullptr && m_indexBuffer != nullptr)
     {
         for(auto root : m_roots)
         {
-            root->Update(nullptr);
+            root->Update();
         }
         
         SVertex* vertexData = m_vertexBuffer->Lock();
