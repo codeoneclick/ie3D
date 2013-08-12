@@ -98,17 +98,17 @@ void CSkeleton::Set_BindTransformation(void)
     {
         root->Set_BindTransformation();
     }
-
-    return;
+    
     std::function<void(void)> function = [this]()
     {
         i32 numIndexes = ((m_numBones - 1) * 2);
         m_indexBuffer = std::make_shared<CIndexBuffer>(numIndexes, GL_STATIC_DRAW);
         ui16* indexData = m_indexBuffer->Lock();
+        memset(indexData, 0x0, sizeof(ui16) * m_indexBuffer->Get_NumIndexes());
         i32 index = 0;
         for(auto root : m_roots)
         {
-            root->WriteIndexData(indexData, &index);
+            root->WriteIndexData(indexData, &index, numIndexes);
         }
         m_indexBuffer->Unlock();
         
@@ -119,10 +119,9 @@ void CSkeleton::Set_BindTransformation(void)
         
         m_vertexBuffer = std::make_shared<CVertexBuffer>(m_numBones, GL_DYNAMIC_DRAW);
         SVertex* vertexData = m_vertexBuffer->Lock();
-        index = 0;
         for(auto root : m_roots)
         {
-            index = root->WriteVertexData(vertexData, index);
+           root->WriteVertexData(vertexData, m_vertexBuffer->Get_NumVertexes());
         }
         m_vertexBuffer->Unlock();
     };
@@ -139,15 +138,24 @@ void CSkeleton::Draw(const i32 *_attributes)
             root->Update();
         }
         
-        SVertex* vertexData = m_vertexBuffer->Lock();
-        i32 index = 0;
-        for(auto root : m_roots)
+        std::function<void(void)> function = [this]()
         {
-            index = root->WriteVertexData(vertexData, index);
-        }
-
-        m_vertexBuffer->Unlock();
-
+            SVertex* vertexData = m_vertexBuffer->Lock();
+        
+            for(auto root : m_roots)
+            {
+                root->WriteVertexData(vertexData, m_vertexBuffer->Get_NumVertexes());
+            }
+            
+            std::function<void(void)> main = [this]()
+            {
+                m_vertexBuffer->Unlock();
+            };
+            gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
+        };
+        
+        gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
+        
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
         

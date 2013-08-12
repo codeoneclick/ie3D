@@ -175,60 +175,69 @@ void CMesh::OnUpdate(f32 _deltatime)
         assert(m_skeleton != nullptr);
         m_animationTime += _deltatime;
         
-        f32 animationDeltaTime = m_animationTime * m_sequence->Get_Fps();
-        i32 floorAnimationDeltaTime = static_cast<i32>(floorf(animationDeltaTime));
-        i32 frameIndex_01 = floorAnimationDeltaTime % m_sequence->Get_NumFrames();
-        i32 frameIndex_02 = (frameIndex_01 + 1) % m_sequence->Get_NumFrames();
-        f32 interpolation = animationDeltaTime - static_cast<f32>(floorAnimationDeltaTime);
-        
-        std::shared_ptr<CFrame> frame_01 = m_sequence->Get_AnimationFrame(frameIndex_01);
-        std::shared_ptr<CFrame> frame_02 = m_sequence->Get_AnimationFrame(frameIndex_02);
-        
-        std::shared_ptr<CBone> bone;
-        
-        for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
+        std::function<void(void)> function = [this]()
         {
-            glm::vec3 position = glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
-            glm::quat rotation = glm::slerp(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation);
-            glm::vec3 scale = glm::mix(frame_01->Get_Scale(i), frame_02->Get_Scale(i), interpolation);
+            f32 animationDeltaTime = m_animationTime * m_sequence->Get_Fps();
+            i32 floorAnimationDeltaTime = static_cast<i32>(floorf(animationDeltaTime));
+            i32 frameIndex_01 = floorAnimationDeltaTime % m_sequence->Get_NumFrames();
+            i32 frameIndex_02 = (frameIndex_01 + 1) % m_sequence->Get_NumFrames();
+            f32 interpolation = animationDeltaTime - static_cast<f32>(floorAnimationDeltaTime);
             
-            glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
-            glm::mat4x4 matrixRotation = glm::toMat4(rotation);
-            glm::mat4x4 matrixScale = glm::scale(glm::mat4x4(1.0f), scale);
-        
-            m_bonesTransformation[i] = matrixTranslation * matrixRotation * matrixScale;
-        }
-        m_skeleton->Update();
-        
-        SVertex* vertexData = m_vertexBuffer->Lock();
-        for(i32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
-        {
-            f32 sumWeights = 0.0f;
-            glm::vec3 bonePosition(0.0f);
-            for(i32 j = 0; j < m_sequenceData[i].m_numWeights; ++j)
+            std::shared_ptr<CFrame> frame_01 = m_sequence->Get_AnimationFrame(frameIndex_01);
+            std::shared_ptr<CFrame> frame_02 = m_sequence->Get_AnimationFrame(frameIndex_02);
+            
+            std::shared_ptr<CBone> bone;
+            
+            for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
             {
-                std::shared_ptr<CBone> bone = m_skeleton->Get_BoneById(m_sequenceData[i].m_weights[j].m_boneId);
-                if(bone == nullptr)
-                {
-                    std::cout<<m_sequenceData[i].m_weights[j].m_boneId<<std::endl;
-                    continue;
-                }
-                glm::mat4x4 boneTransformation = (*bone->Get_Transformation());
+                glm::vec3 position = glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
+                glm::quat rotation = glm::slerp(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation);
+                glm::vec3 scale = glm::mix(frame_01->Get_Scale(i), frame_02->Get_Scale(i), interpolation);
                 
-                f32 weight = m_sequenceData[i].m_weights[j].m_weigth;
-                if(j == 0)
-                {
-                    bonePosition = glm::transform(m_sequenceData[i].m_position, boneTransformation) * weight;
-                }
-                else
-                {
-                    bonePosition += glm::transform(m_sequenceData[i].m_position, boneTransformation) * weight;
-                }
-                sumWeights += weight;
+                glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
+                glm::mat4x4 matrixRotation = glm::toMat4(rotation);
+                glm::mat4x4 matrixScale = glm::scale(glm::mat4x4(1.0f), scale);
+                
+                m_bonesTransformation[i] = matrixTranslation * matrixRotation * matrixScale;
             }
-            vertexData[i].m_position = bonePosition;
-        }
-        m_vertexBuffer->Unlock();
+            m_skeleton->Update();
+            
+            SVertex* vertexData = m_vertexBuffer->Lock();
+            for(i32 i = 0; i < m_vertexBuffer->Get_NumVertexes(); ++i)
+            {
+                f32 sumWeights = 0.0f;
+                glm::vec3 bonePosition(0.0f);
+                for(i32 j = 0; j < m_sequenceData[i].m_numWeights; ++j)
+                {
+                    std::shared_ptr<CBone> bone = m_skeleton->Get_BoneById(m_sequenceData[i].m_weights[j].m_boneId);
+                    if(bone == nullptr)
+                    {
+                        std::cout<<m_sequenceData[i].m_weights[j].m_boneId<<std::endl;
+                        continue;
+                    }
+                    glm::mat4x4 boneTransformation = (*bone->Get_Transformation());
+                    
+                    f32 weight = m_sequenceData[i].m_weights[j].m_weigth;
+                    if(j == 0)
+                    {
+                        bonePosition = glm::transform(m_sequenceData[i].m_position, boneTransformation) * weight;
+                    }
+                    else
+                    {
+                        bonePosition += glm::transform(m_sequenceData[i].m_position, boneTransformation) * weight;
+                    }
+                    sumWeights += weight;
+                }
+                vertexData[i].m_position = bonePosition;
+            }
+            
+            std::function<void(void)> main = [this]()
+            {
+                m_vertexBuffer->Unlock();
+            };
+            gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
+        };
+        gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
     }
 }
 

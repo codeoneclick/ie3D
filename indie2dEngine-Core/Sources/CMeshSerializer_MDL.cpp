@@ -133,7 +133,6 @@ void CMeshSerializer_MDL::Serialize(void)
                 sequenceData[i].m_weights[j].m_weigth = weight;
                 sumWeights += weight;
             }
-            //assert(sumWeights == 1.0f);
         }
     }
     

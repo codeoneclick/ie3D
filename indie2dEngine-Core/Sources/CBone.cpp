@@ -79,25 +79,27 @@ void CBone::Set_BindTransformation(void)
     }
 }
 
-void CBone::WriteIndexData(ui16 *_indexData, i32* _offset)
+void CBone::WriteIndexData(ui16 *_indexData, i32* _offset, i32 _numIndexes)
 {
+    assert((*_offset) < _numIndexes);
+    
     for(auto iterator : m_childs)
     {
         _indexData[(*_offset)] = m_id;
         i32 index = iterator->Get_Id();
         _indexData[(*_offset) + 1] = index;
         (*_offset) += 2;
-        iterator->WriteIndexData(_indexData, _offset);
+        iterator->WriteIndexData(_indexData, _offset, _numIndexes);
     }
 }
 
-i32 CBone::WriteVertexData(SVertex *_vertexData, i32 _offset)
+void CBone::WriteVertexData(SVertex *_vertexData, i32 _numVertexes)
 {
-    i32 offset = _offset;
+    assert(m_id < _numVertexes);
+    
     _vertexData[m_id].m_position = glm::transform(glm::vec3(0.0f, 0.0f, 0.0f), m_baseTransformation);
     for(auto iterator : m_childs)
     {
-        offset = iterator->WriteVertexData(_vertexData, offset + 1);
+        iterator->WriteVertexData(_vertexData, _numVertexes);
     }
-    return offset;
 }

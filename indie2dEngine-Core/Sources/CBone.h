@@ -52,8 +52,8 @@ public:
     void Update(void);
     void Set_BindTransformation(void);
     
-    i32 WriteVertexData(SVertex* _vertexData, i32 _offset);
-    void WriteIndexData(ui16* _indexData, i32* _offset);
+    void WriteVertexData(SVertex* _vertexData, i32 _numVertexes);
+    void WriteIndexData(ui16* _indexData, i32* _offset, i32 _numIndexes);
     
     inline std::vector<std::shared_ptr<CBone> >& Get_Childs(void)
     {
