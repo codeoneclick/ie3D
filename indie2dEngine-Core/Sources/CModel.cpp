@@ -38,6 +38,13 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_mesh = m_resourceFabricator->CreateMesh(modelTemplate->m_meshFilename);
     assert(m_mesh != nullptr);
     
+    if(modelTemplate->m_skeletonFilename.size() != 0)
+    {
+        std::shared_ptr<CSkeleton> skeleton = m_resourceFabricator->CreateSkeleton(modelTemplate->m_skeletonFilename);
+        assert(skeleton != nullptr);
+        m_animationMixer = std::make_shared<CAnimationMixer>(m_mesh, skeleton);
+    }
+    
     for(auto materialTemplate : modelTemplate->m_materialsTemplates)
     {
         std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
@@ -47,6 +54,13 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
         material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
+    }
+    
+    for(auto animationTemplate : modelTemplate->m_sequencesFilenames)
+    {
+        std::shared_ptr<CSequence> sequence = m_resourceFabricator->CreateSequence(animationTemplate);
+        assert(sequence != nullptr);
+        m_animationMixer->AddSequence(animationTemplate, sequence);
     }
     
     m_boundBox = m_mesh->CreateBoundBox();
@@ -69,11 +83,23 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_isLoaded = true;
 }
 
+void CModel::Set_Animation(const std::string &_name)
+{
+    if(m_animationMixer != nullptr)
+    {
+        m_animationMixer->SetAnimation(_name);
+    }
+}
+
 void CModel::_OnSceneUpdate(f32 _deltatime)
 {
     if(m_isLoaded)
     {
         IGameObject::_OnSceneUpdate(_deltatime);
+        if(m_animationMixer != nullptr)
+        {
+            m_animationMixer->OnUpdate(_deltatime);
+        }
     }
 }
 

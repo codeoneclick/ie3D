@@ -41,12 +41,20 @@ void CAnimationMixer::SetAnimation(const std::string& _name)
 {
     if(m_sequences.find(_name) == m_sequences.end())
     {
-        assert(false);
         return;
     }
     
-    m_oldSequence = m_currentSequence;
-    m_currentSequence = m_sequences.find(_name)->second;
+    if(m_sequences.find(_name)->second == m_currentSequence)
+    {
+        return;
+    }
+    
+    if(m_sequences.find(_name)->second->IsLoaded() && m_sequences.find(_name)->second->IsLinked())
+    {
+        m_oldSequence = m_currentSequence;
+        m_currentSequence = m_sequences.find(_name)->second;
+        CAnimationMixer::_BindSequence();
+    }
 }
 
 void CAnimationMixer::MixAnimation(const std::string& _name)
@@ -57,8 +65,14 @@ void CAnimationMixer::MixAnimation(const std::string& _name)
         return;
     }
     
+    if(m_sequences.find(_name)->second == m_currentSequence)
+    {
+        return;
+    }
+    
     m_oldSequence = m_currentSequence;
     m_currentSequence = m_sequences.find(_name)->second;
+    CAnimationMixer::_BindSequence();
 }
 
 void CAnimationMixer::GoTo(const std::string& _name, i32 _frame)
@@ -66,10 +80,37 @@ void CAnimationMixer::GoTo(const std::string& _name, i32 _frame)
     
 }
 
+void CAnimationMixer::_BindSequence(void)
+{
+    assert(m_skeleton != nullptr);
+    assert(m_currentSequence != nullptr);
+    
+    std::shared_ptr<CFrame> frame = m_currentSequence->Get_AnimationFrame(0);
+    std::shared_ptr<CBone> bone;
+    
+    for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
+    {
+        glm::vec3 position = frame->Get_Position(i);
+        glm::quat rotation = frame->Get_Rotation(i);
+        glm::vec3 scale = frame->Get_Scale(i);
+        
+        glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
+        glm::mat4x4 matrixRotation = glm::toMat4(rotation);
+        glm::mat4x4 matrixScale = glm::scale(glm::mat4x4(1.0f), scale);
+        assert(m_skeleton->Get_Transformations() != nullptr);
+        m_skeleton->Get_Transformations()[i] = matrixTranslation * matrixRotation * matrixScale;
+    }
+    
+    m_skeleton->Update();
+    m_skeleton->Set_BindTransformation();
+}
+
 void CAnimationMixer::OnUpdate(f32 _deltatime)
 {
     assert(m_mesh != nullptr);
     assert(m_skeleton != nullptr);
+    
+    _deltatime = 0.02f;
     
     if(m_currentSequence &&
        m_currentSequence->IsLinked() &&

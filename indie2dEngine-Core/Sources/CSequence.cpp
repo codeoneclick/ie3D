@@ -65,7 +65,7 @@ void CSequence::_Serialize(std::ifstream &_stream)
     {
         std::shared_ptr<CFrame> frame = std::make_shared<CFrame>(numBones);
         frame->_Serialize(_stream);
-        m_frames.push_back( frame );
+        m_frames.push_back(frame);
     }
     m_isLoaded = true;
 }

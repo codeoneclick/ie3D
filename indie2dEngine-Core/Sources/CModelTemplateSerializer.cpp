@@ -30,13 +30,21 @@ std::shared_ptr<ITemplate> CModelTemplateSerializer::Serialize(const std::string
     pugi::xml_node node = document.child("model");
     
     std::shared_ptr<SModelTemplate> modelTemplate = std::make_shared<SModelTemplate>();
-    modelTemplate->m_meshFilename = node.child("mesh").attribute("value").as_string();
+    modelTemplate->m_meshFilename = node.child("mesh").attribute("filename").as_string();
+    modelTemplate->m_skeletonFilename = node.child("skeleton").attribute("filename").as_string();
     
     pugi::xml_node materials_node = node.child("materials");
     for (pugi::xml_node material = materials_node.child("material"); material; material = material.next_sibling("material"))
     {
         modelTemplate->m_materialsFilenames.push_back(material.attribute("filename").as_string());
     }
+    
+    pugi::xml_node animations_node = node.child("animations");
+    for (pugi::xml_node animation = animations_node.child("animation"); animation; animation = animation.next_sibling("animation"))
+    {
+        modelTemplate->m_sequencesFilenames.push_back(animation.attribute("filename").as_string());
+    }
+    
     return modelTemplate;
 }
 

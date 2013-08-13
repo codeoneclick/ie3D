@@ -1,5 +1,9 @@
 <model name="building_01">
-	<mesh value="model_01.MDL_mesh"/>
+	<mesh filename="model_01.MDL_mesh"/>
+    <skeleton filename="model_01.MDL_sk"/>
+    <animations>
+        <animation name="model_01.MDL_anim" filename="model_01.MDL_anim"/>
+    </animations>
 	<materials>
 		<material filename="material.model.common.xml"/>
         <material filename="material.model.reflection.xml"/>

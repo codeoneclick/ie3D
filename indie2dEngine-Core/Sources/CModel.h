@@ -34,6 +34,8 @@ public:
     
     CModel(std::shared_ptr<CResourceAccessor> _resourceFabricator);
     ~CModel(void);
+    
+    void Set_Animation(const std::string& _name);
 };
 
 

@@ -30,6 +30,8 @@ protected:
     
     f32 m_animationTime;
     
+    void _BindSequence(void);
+    
 public:
     
     CAnimationMixer(std::shared_ptr<CMesh> _mesh, std::shared_ptr<CSkeleton> _skeleton);
