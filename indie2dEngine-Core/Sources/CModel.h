@@ -11,11 +11,15 @@
 
 #include "IGameObject.h"
 
+class CAnimationMixer;
+
 class CModel final : public IGameObject
 {
 private:
     
 protected:
+    
+    std::shared_ptr<CAnimationMixer> m_animationMixer;
     
     void _OnSceneUpdate(f32 _deltatime);
     

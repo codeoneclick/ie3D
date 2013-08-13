@@ -56,6 +56,8 @@ struct SModelTemplate : public ITemplate
     std::vector<std::string> m_materialsFilenames;
     std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
     std::string m_meshFilename;
+    std::string m_skeletonFilename;
+    std::vector<std::string> m_sequencesFilenames;
 };
 
 struct SOceanTemplate : public ITemplate

@@ -10,8 +10,9 @@
 #define CSequence_h
 
 #include "HCommon.h"
+#include "IResource.h"
 
-class CFrame final
+class CFrame final 
 {
 private:
     
@@ -50,21 +51,24 @@ public:
 	};
 };
 
-class CSequence final
+
+class CSequence final : public IResource
 {
 private:
     
-    friend class CMeshSerializer_MDL;
+    friend class CSequenceSerializer_SEQ;
+    friend class CSequenceCommiter_SEQ;
     
 protected:
     
     std::vector<std::shared_ptr<CFrame> > m_frames;
     i32 m_fps;
-    void _Serialize(std::ifstream& _stream, i32 _numBones);
+    void _Serialize(std::ifstream& _stream);
+    void _BindSequence(void);
     
 public:
     
-    CSequence(void);
+    CSequence(const std::string& _guid);
     ~CSequence(void);
     
     inline i32 Get_NumFrames(void) const

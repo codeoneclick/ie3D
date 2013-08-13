@@ -10,16 +10,18 @@
 #define CSkeleton_h
 
 #include "HCommon.h"
+#include "IResource.h"
 
 class CBone;
 class CVertexBuffer;
 class CIndexBuffer;
 
-class CSkeleton final
+class CSkeleton final : public IResource
 {
 private:
     
-    friend class CMeshSerializer_MDL;
+    friend class CSkeletonSerializer_SK;
+    friend class CSkeletonCommiter_SK;
     
 protected:
     
@@ -29,12 +31,14 @@ protected:
     
     i32	m_numBones;
     std::set<std::shared_ptr<CBone> > m_roots;
+    glm::mat4* m_bonesTransformation;
     
     void _Serialize(std::ifstream& _stream);
+    void _BindSkeleton(void);
     
 public:
     
-    CSkeleton(void);
+    CSkeleton(const std::string& _guid);
     ~CSkeleton(void);
     
     void AddBone(std::shared_ptr<CBone> _bone);
@@ -47,6 +51,11 @@ public:
     inline i32 Get_NumBones(void)
     {
         return m_numBones;
+    };
+    
+    inline glm::mat4* Get_Transformations(void)
+    {
+        return m_bonesTransformation;
     };
 };
 

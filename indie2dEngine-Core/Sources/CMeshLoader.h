@@ -9,7 +9,6 @@
 #ifndef CMeshLoader_h
 #define CMeshLoader_h
 
-
 #include "IResourceLoader.h"
 
 class CMesh;
@@ -26,6 +25,5 @@ public:
     
     std::shared_ptr<CMesh> StartLoadOperation(const std::string& _filename);
 };
-
 
 #endif

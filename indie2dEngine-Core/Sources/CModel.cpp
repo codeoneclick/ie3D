@@ -16,9 +16,11 @@
 #include "ITemplate.h"
 #include "CAABoundBox.h"
 #include "CMesh.h"
+#include "CAnimationMixer.h"
 
 CModel::CModel(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
-IGameObject(_resourceFabricator)
+IGameObject(_resourceFabricator),
+m_animationMixer(nullptr)
 {
     
 }

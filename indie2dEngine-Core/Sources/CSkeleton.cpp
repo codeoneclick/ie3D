@@ -11,16 +11,18 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
-CSkeleton::CSkeleton(void) :
+CSkeleton::CSkeleton(const std::string& _guid) :
+IResource(E_RESOURCE_TYPE_SKELETON, _guid),
 m_numBones(0),
-m_boneWidth(3.0f)
+m_boneWidth(3.0f),
+m_bonesTransformation(nullptr)
 {
     
 }
 
 CSkeleton::~CSkeleton(void)
 {
-    
+    delete[] m_bonesTransformation;
 }
 
 void CSkeleton::_Serialize(std::ifstream &_stream)
@@ -40,7 +42,26 @@ void CSkeleton::_Serialize(std::ifstream &_stream)
         }
         CSkeleton::AddBone(bone);
     }
+    m_isLoaded = true;
 }
+
+void CSkeleton::_BindSkeleton(void)
+{
+    assert(m_bonesTransformation == nullptr);
+    m_bonesTransformation = new glm::mat4x4[CSkeleton::Get_NumBones()];
+    
+    std::shared_ptr<CBone> bone;
+    for (int i = 0; i < CSkeleton::Get_NumBones(); ++i)
+    {
+        bone = CSkeleton::Get_BoneById(i);
+        if (bone != nullptr)
+        {
+            bone->Set_Transformation(m_bonesTransformation + i);
+        }
+    }
+    m_isLinked = true;
+}
+
 
 void CSkeleton::AddBone(std::shared_ptr<CBone> _bone)
 {

@@ -19,10 +19,11 @@ struct SVertexWeight
 	i32	m_boneId;
 };
 
-struct SSequenceVertex
+struct SVertexBind
 {
-    glm::vec3 m_position;
-    glm::vec3 m_normal;
+    glm::vec3 m_bindPosition;
+    glm::vec3 m_bindNormal;
+    glm::vec3 m_bindTangent;
 	i32	m_numWeights;
 	SVertexWeight m_weights[MAX_WEIGHTS];
 };
@@ -40,6 +41,7 @@ protected:
     
     SVertex* m_vertexData;
     ui16* m_indexData;
+    SVertexBind* m_vertexBindData;
     
     ui32 m_numIndexes;
     ui32 m_numVertexes;
@@ -51,6 +53,11 @@ protected:
     {
         m_vertexData = _vertexData;
         m_numVertexes = _numVertexes;
+    };
+    
+    inline void _Set_VertexBindData(SVertexBind* _vertexBindData)
+    {
+        m_vertexBindData = _vertexBindData;
     };
     
     inline void _Set_IndexData(ui16* _indexData, ui32 _numIndexes)
@@ -109,8 +116,6 @@ public:
 #include "CIndexBuffer.h"
 
 class CAABoundBox;
-class CSkeleton;
-class CSequence;
 
 class CMesh : public IResource
 {
@@ -126,12 +131,6 @@ protected:
     std::shared_ptr<CVertexBuffer> m_vertexBuffer;
     std::shared_ptr<CIndexBuffer> m_indexBuffer;
     
-    std::shared_ptr<CSkeleton> m_skeleton;
-    std::shared_ptr<CSequence> m_sequence;
-    SSequenceVertex* m_sequenceData;
-    glm::mat4* m_bonesTransformation;
-    f32 m_animationTime;
-    
     std::vector<std::shared_ptr<CAABoundBox> > m_bounds;
     
     void _Set_Header(std::shared_ptr<CMeshHeader> _header);
@@ -143,15 +142,6 @@ public:
     inline std::shared_ptr<CMeshHeader> _Get_Header(void)
     {
         return m_header;
-    };
-    
-    void _BindSkeleton(void);
-    void _BindSequence(void);
-    
-    inline SSequenceVertex* _LockSequenceData(i32 _numVertexes)
-    {
-        assert(m_sequenceData == nullptr);
-        return (m_sequenceData = new SSequenceVertex[_numVertexes]);
     };
         
 #ifdef TESTING
@@ -185,6 +175,12 @@ public:
         return m_indexBuffer;
     };
     
+    inline SVertexBind* Get_VertexBindData(void)
+    {
+        assert(m_header != nullptr);
+        return m_header->m_vertexBindData;
+    };
+    
     inline const ui32 Get_NumVertexes(void)
     {
         assert(m_vertexBuffer != nullptr);
@@ -206,18 +202,6 @@ public:
     {
         return m_header != nullptr ? m_header->Get_MinBound() : glm::vec3(0.0f);
     };
-    
-    inline std::shared_ptr<CSkeleton> Get_Skeleton(void)
-    {
-        return m_skeleton;
-    };
-    
-    inline std::shared_ptr<CSequence> Get_Sequence(void)
-    {
-        return m_sequence;
-    };
-    
-    void OnUpdate(f32 _deltatime);
     
     void Bind(const i32* _attributes);
     void Draw(void);

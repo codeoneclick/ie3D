@@ -40,7 +40,8 @@ void CFrame::_Serialize(std::ifstream &_stream)
     }
 }
 
-CSequence::CSequence(void) :
+CSequence::CSequence(const std::string& _guid) :
+IResource(E_RESOURCE_TYPE_SEQUENCE, _guid),
 m_fps(30)
 {
     
@@ -51,16 +52,25 @@ CSequence::~CSequence(void)
     m_frames.clear();
 }
 
-void CSequence::_Serialize(std::ifstream &_stream, i32 _numBones)
+void CSequence::_Serialize(std::ifstream &_stream)
 {
+    i32 numBones = 0;
+    _stream.read((char*)&numBones, sizeof(i32));
     i32 numFrames = 0;
     _stream.read((char*)&numFrames, sizeof(i32));
+    
     m_frames.reserve(numFrames);
     
     for (i32 i = 0; i < numFrames; ++i)
     {
-        std::shared_ptr<CFrame> frame = std::make_shared<CFrame>(_numBones);
+        std::shared_ptr<CFrame> frame = std::make_shared<CFrame>(numBones);
         frame->_Serialize(_stream);
         m_frames.push_back( frame );
     }
+    m_isLoaded = true;
+}
+
+void CSequence::_BindSequence(void)
+{
+    m_isLinked = true;
 }

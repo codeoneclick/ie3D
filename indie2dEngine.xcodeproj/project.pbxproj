@@ -228,6 +228,18 @@
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A49B83951754D44800AEB4DC /* CommonScreen.vert in Sources */ = {isa = PBXBuildFile; fileRef = A49B83921754D3C900AEB4DC /* CommonScreen.vert */; };
 		A49B83961754D44A00AEB4DC /* CommonScreen.frag in Sources */ = {isa = PBXBuildFile; fileRef = A49B83911754D3C900AEB4DC /* CommonScreen.frag */; };
+		A49C4E0917BA2BB800C1484F /* model_01.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = A49C4E0617BA2BB800C1484F /* model_01.MDL_anim */; };
+		A49C4E0A17BA2BB800C1484F /* model_01.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = A49C4E0717BA2BB800C1484F /* model_01.MDL_mesh */; };
+		A49C4E0B17BA2BB800C1484F /* model_01.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = A49C4E0817BA2BB800C1484F /* model_01.MDL_sk */; };
+		A49C4E3E17BA350500C1484F /* CSkeletonLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4E3C17BA350500C1484F /* CSkeletonLoader.cpp */; };
+		A49C4E4117BA352B00C1484F /* CSequenceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4E3F17BA352B00C1484F /* CSequenceLoader.cpp */; };
+		A49C4E4417BA453100C1484F /* CSkeletonLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4E4217BA452F00C1484F /* CSkeletonLoadingOperation.cpp */; };
+		A49C4E4717BA456200C1484F /* CSequenceLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4E4517BA456100C1484F /* CSequenceLoadingOperation.cpp */; };
+		A49C4E4A17BA4B0B00C1484F /* CSkeletonSerializer_SK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4E4817BA4B0800C1484F /* CSkeletonSerializer_SK.cpp */; };
+		A49C4E4D17BA4B6700C1484F /* CSequenceSerializer_SEQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4E4B17BA4B6000C1484F /* CSequenceSerializer_SEQ.cpp */; };
+		A49C4E5017BA554300C1484F /* CSkeletonCommiter_SK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4E4E17BA554000C1484F /* CSkeletonCommiter_SK.cpp */; };
+		A49C4E5317BA557500C1484F /* CSequenceCommiter_SEQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4E5117BA557200C1484F /* CSequenceCommiter_SEQ.cpp */; };
+		A49C4ECB17BA6B0C00C1484F /* CAnimationMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4EC917BA6B0C00C1484F /* CAnimationMixer.cpp */; };
 		A4AB15B2177C4E1B00FFC12E /* CFPSCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */; };
 		A4AB15BD177C73D400FFC12E /* CTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15BB177C73D400FFC12E /* CTimer.cpp */; };
 		A4AB15C1177C866700FFC12E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB15C0177C866700FFC12E /* Default-568h@2x.png */; };
@@ -727,6 +739,27 @@
 		A49B838E1754C9A500AEB4DC /* CSceneFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSceneFabricator.h; path = Sources/CSceneFabricator.h; sourceTree = "<group>"; };
 		A49B83911754D3C900AEB4DC /* CommonScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.frag; sourceTree = "<group>"; };
 		A49B83921754D3C900AEB4DC /* CommonScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.vert; sourceTree = "<group>"; };
+		A49C4E0617BA2BB800C1484F /* model_01.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_01.MDL_anim; sourceTree = "<group>"; };
+		A49C4E0717BA2BB800C1484F /* model_01.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_01.MDL_mesh; sourceTree = "<group>"; };
+		A49C4E0817BA2BB800C1484F /* model_01.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_01.MDL_sk; sourceTree = "<group>"; };
+		A49C4E3C17BA350500C1484F /* CSkeletonLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSkeletonLoader.cpp; path = Sources/CSkeletonLoader.cpp; sourceTree = "<group>"; };
+		A49C4E3D17BA350500C1484F /* CSkeletonLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSkeletonLoader.h; path = Sources/CSkeletonLoader.h; sourceTree = "<group>"; };
+		A49C4E3F17BA352B00C1484F /* CSequenceLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSequenceLoader.cpp; path = Sources/CSequenceLoader.cpp; sourceTree = "<group>"; };
+		A49C4E4017BA352B00C1484F /* CSequenceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSequenceLoader.h; path = Sources/CSequenceLoader.h; sourceTree = "<group>"; };
+		A49C4E4217BA452F00C1484F /* CSkeletonLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSkeletonLoadingOperation.cpp; path = Sources/CSkeletonLoadingOperation.cpp; sourceTree = "<group>"; };
+		A49C4E4317BA453000C1484F /* CSkeletonLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSkeletonLoadingOperation.h; path = Sources/CSkeletonLoadingOperation.h; sourceTree = "<group>"; };
+		A49C4E4517BA456100C1484F /* CSequenceLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSequenceLoadingOperation.cpp; path = Sources/CSequenceLoadingOperation.cpp; sourceTree = "<group>"; };
+		A49C4E4617BA456100C1484F /* CSequenceLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSequenceLoadingOperation.h; path = Sources/CSequenceLoadingOperation.h; sourceTree = "<group>"; };
+		A49C4E4817BA4B0800C1484F /* CSkeletonSerializer_SK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSkeletonSerializer_SK.cpp; path = Sources/CSkeletonSerializer_SK.cpp; sourceTree = "<group>"; };
+		A49C4E4917BA4B0900C1484F /* CSkeletonSerializer_SK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSkeletonSerializer_SK.h; path = Sources/CSkeletonSerializer_SK.h; sourceTree = "<group>"; };
+		A49C4E4B17BA4B6000C1484F /* CSequenceSerializer_SEQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSequenceSerializer_SEQ.cpp; path = Sources/CSequenceSerializer_SEQ.cpp; sourceTree = "<group>"; };
+		A49C4E4C17BA4B6200C1484F /* CSequenceSerializer_SEQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSequenceSerializer_SEQ.h; path = Sources/CSequenceSerializer_SEQ.h; sourceTree = "<group>"; };
+		A49C4E4E17BA554000C1484F /* CSkeletonCommiter_SK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSkeletonCommiter_SK.cpp; path = Sources/CSkeletonCommiter_SK.cpp; sourceTree = "<group>"; };
+		A49C4E4F17BA554100C1484F /* CSkeletonCommiter_SK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSkeletonCommiter_SK.h; path = Sources/CSkeletonCommiter_SK.h; sourceTree = "<group>"; };
+		A49C4E5117BA557200C1484F /* CSequenceCommiter_SEQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSequenceCommiter_SEQ.cpp; path = Sources/CSequenceCommiter_SEQ.cpp; sourceTree = "<group>"; };
+		A49C4E5217BA557300C1484F /* CSequenceCommiter_SEQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSequenceCommiter_SEQ.h; path = Sources/CSequenceCommiter_SEQ.h; sourceTree = "<group>"; };
+		A49C4EC917BA6B0C00C1484F /* CAnimationMixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnimationMixer.cpp; path = Sources/CAnimationMixer.cpp; sourceTree = "<group>"; };
+		A49C4ECA17BA6B0C00C1484F /* CAnimationMixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAnimationMixer.h; path = Sources/CAnimationMixer.h; sourceTree = "<group>"; };
 		A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFPSCounter.cpp; path = Sources/CFPSCounter.cpp; sourceTree = "<group>"; };
 		A4AB15B1177C4E1B00FFC12E /* CFPSCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFPSCounter.h; path = Sources/CFPSCounter.h; sourceTree = "<group>"; };
 		A4AB15BB177C73D400FFC12E /* CTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTimer.cpp; path = Sources/CTimer.cpp; sourceTree = "<group>"; };
@@ -1194,6 +1227,8 @@
 				A40A69B1174F5215005B475E /* CFrustum.cpp */,
 				A45588D51756406C00802609 /* CLight.h */,
 				A45588D41756406C00802609 /* CLight.cpp */,
+				A49C4ECA17BA6B0C00C1484F /* CAnimationMixer.h */,
+				A49C4EC917BA6B0C00C1484F /* CAnimationMixer.cpp */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -1220,6 +1255,9 @@
 		A40A6A6F1753B06C005B475E /* Meshes */ = {
 			isa = PBXGroup;
 			children = (
+				A49C4E0617BA2BB800C1484F /* model_01.MDL_anim */,
+				A49C4E0717BA2BB800C1484F /* model_01.MDL_mesh */,
+				A49C4E0817BA2BB800C1484F /* model_01.MDL_sk */,
 				A47469C117B3ECBE00851268 /* mesh_01.MDL */,
 				A47469B717B3BE6900851268 /* Ghoul_01.MDL */,
 				218A463917B2BEFC00301F41 /* Footman4.MDL */,
@@ -1752,6 +1790,10 @@
 				A46A320F174E0F150044643E /* CTextureLoader.cpp */,
 				210EFD211752678E00DDB182 /* CMeshLoader.h */,
 				210EFD201752678E00DDB182 /* CMeshLoader.cpp */,
+				A49C4E3D17BA350500C1484F /* CSkeletonLoader.h */,
+				A49C4E3C17BA350500C1484F /* CSkeletonLoader.cpp */,
+				A49C4E4017BA352B00C1484F /* CSequenceLoader.h */,
+				A49C4E3F17BA352B00C1484F /* CSequenceLoader.cpp */,
 			);
 			name = Loaders;
 			sourceTree = "<group>";
@@ -1769,6 +1811,10 @@
 				A46A31FA174D1E4C0044643E /* CTextureLoadingOperation.cpp */,
 				210EFD1E1752677300DDB182 /* CMeshLoadingOperation.h */,
 				210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */,
+				A49C4E4317BA453000C1484F /* CSkeletonLoadingOperation.h */,
+				A49C4E4217BA452F00C1484F /* CSkeletonLoadingOperation.cpp */,
+				A49C4E4617BA456100C1484F /* CSequenceLoadingOperation.h */,
+				A49C4E4517BA456100C1484F /* CSequenceLoadingOperation.cpp */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -1813,6 +1859,10 @@
 				A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */,
 				210EFD1B1752674A00DDB182 /* CMeshSerializer_MDL.h */,
 				210EFD1A1752674A00DDB182 /* CMeshSerializer_MDL.cpp */,
+				A49C4E4917BA4B0900C1484F /* CSkeletonSerializer_SK.h */,
+				A49C4E4817BA4B0800C1484F /* CSkeletonSerializer_SK.cpp */,
+				A49C4E4C17BA4B6200C1484F /* CSequenceSerializer_SEQ.h */,
+				A49C4E4B17BA4B6000C1484F /* CSequenceSerializer_SEQ.cpp */,
 			);
 			name = Serializers;
 			sourceTree = "<group>";
@@ -1828,6 +1878,10 @@
 				A46A316C17462BBF0044643E /* CTextureCommiter_PVR.cpp */,
 				210EFD181752672500DDB182 /* CMeshCommiter_MDL.h */,
 				210EFD171752672500DDB182 /* CMeshCommiter_MDL.cpp */,
+				A49C4E4F17BA554100C1484F /* CSkeletonCommiter_SK.h */,
+				A49C4E4E17BA554000C1484F /* CSkeletonCommiter_SK.cpp */,
+				A49C4E5217BA557300C1484F /* CSequenceCommiter_SEQ.h */,
+				A49C4E5117BA557200C1484F /* CSequenceCommiter_SEQ.cpp */,
 			);
 			name = Commiters;
 			sourceTree = "<group>";
@@ -2457,6 +2511,9 @@
 				218A463A17B2BEFC00301F41 /* Footman4.MDL in Resources */,
 				A47469B817B3BE6900851268 /* Ghoul_01.MDL in Resources */,
 				A47469C217B3ECBE00851268 /* mesh_01.MDL in Resources */,
+				A49C4E0917BA2BB800C1484F /* model_01.MDL_anim in Resources */,
+				A49C4E0A17BA2BB800C1484F /* model_01.MDL_mesh in Resources */,
+				A49C4E0B17BA2BB800C1484F /* model_01.MDL_sk in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2587,6 +2644,15 @@
 				A42FF51017A1508200C0B419 /* CBone.cpp in Sources */,
 				A42FF51B17A150A600C0B419 /* CSkeleton.cpp in Sources */,
 				A42FF51E17A15C4700C0B419 /* CSequence.cpp in Sources */,
+				A49C4E3E17BA350500C1484F /* CSkeletonLoader.cpp in Sources */,
+				A49C4E4117BA352B00C1484F /* CSequenceLoader.cpp in Sources */,
+				A49C4E4417BA453100C1484F /* CSkeletonLoadingOperation.cpp in Sources */,
+				A49C4E4717BA456200C1484F /* CSequenceLoadingOperation.cpp in Sources */,
+				A49C4E4A17BA4B0B00C1484F /* CSkeletonSerializer_SK.cpp in Sources */,
+				A49C4E4D17BA4B6700C1484F /* CSequenceSerializer_SEQ.cpp in Sources */,
+				A49C4E5017BA554300C1484F /* CSkeletonCommiter_SK.cpp in Sources */,
+				A49C4E5317BA557500C1484F /* CSequenceCommiter_SEQ.cpp in Sources */,
+				A49C4ECB17BA6B0C00C1484F /* CAnimationMixer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 <model name="building_01">
-	<mesh value="mesh.mdl"/>
+	<mesh value="model_01.MDL_mesh"/>
 	<materials>
 		<material filename="material.model.common.xml"/>
         <material filename="material.model.reflection.xml"/>
