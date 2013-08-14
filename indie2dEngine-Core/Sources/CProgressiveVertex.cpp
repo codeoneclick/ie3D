@@ -115,22 +115,7 @@ void CProgressiveVertex::CalculateQuadric(bool _useTriangleArea)
 	}
 }
 
-irr::f32 Vertex::getQuadricTriangleArea() const {
-	return quadricTriangleArea;
-}
-
-void Vertex::setQuadricTriangleArea(irr::f32 quadricTriangleArea) {
-	this->quadricTriangleArea = quadricTriangleArea;
-}
-
-void Vertex::print() const {
-	if (active) {
-		printf("[%d  - ACTIVE]", id);
-	} else {
-		printf("[%d  - INACTIVE]", id);
-	}
-}
-
-bool Vertex::isOrphan() const {
-	return (faces.size() == 0);
+bool CProgressiveVertex::IsOrphan(void) const
+{
+	return (m_faces.size() == 0);
 }
