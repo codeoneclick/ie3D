@@ -384,10 +384,10 @@
 		A4F2061E174287450063AB07 /* verbose_operator.inl in Resources */ = {isa = PBXBuildFile; fileRef = A4F205B0174287450063AB07 /* verbose_operator.inl */; };
 		A4F2061F174287450063AB07 /* wrap.inl in Resources */ = {isa = PBXBuildFile; fileRef = A4F205B2174287450063AB07 /* wrap.inl */; };
 		A4F20620174287450063AB07 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F205B7174287450063AB07 /* pugixml.cpp */; };
-		A4F955A017BBC037003D5B6F /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F9559717BBC037003D5B6F /* Edge.cpp */; };
+		A4F955A017BBC037003D5B6F /* CProgressiveEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F9559717BBC037003D5B6F /* CProgressiveEdge.cpp */; };
 		A4F955A117BBC037003D5B6F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F9559917BBC037003D5B6F /* main.cpp */; };
-		A4F955A217BBC037003D5B6F /* ProgressiveMeshBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F9559A17BBC037003D5B6F /* ProgressiveMeshBuffer.cpp */; };
-		A4F955A317BBC037003D5B6F /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F9559C17BBC037003D5B6F /* Triangle.cpp */; };
+		A4F955A217BBC037003D5B6F /* ProgressiveMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F9559A17BBC037003D5B6F /* ProgressiveMesh.cpp */; };
+		A4F955A317BBC037003D5B6F /* CProgressiveTriangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F9559C17BBC037003D5B6F /* CProgressiveTriangle.cpp */; };
 		A4F955A417BBC037003D5B6F /* CProgressiveVertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F9559E17BBC037003D5B6F /* CProgressiveVertex.cpp */; };
 /* End PBXBuildFile section */
 
@@ -1053,13 +1053,13 @@
 		A4F205B6174287450063AB07 /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
 		A4F205B7174287450063AB07 /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cpp; sourceTree = "<group>"; };
 		A4F205B8174287450063AB07 /* pugixml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hpp; sourceTree = "<group>"; };
-		A4F9559717BBC037003D5B6F /* Edge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Edge.cpp; path = Sources/Edge.cpp; sourceTree = "<group>"; };
-		A4F9559817BBC037003D5B6F /* Edge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Edge.h; path = Sources/Edge.h; sourceTree = "<group>"; };
+		A4F9559717BBC037003D5B6F /* CProgressiveEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CProgressiveEdge.cpp; path = Sources/CProgressiveEdge.cpp; sourceTree = "<group>"; };
+		A4F9559817BBC037003D5B6F /* CProgressiveEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CProgressiveEdge.h; path = Sources/CProgressiveEdge.h; sourceTree = "<group>"; };
 		A4F9559917BBC037003D5B6F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Sources/main.cpp; sourceTree = "<group>"; };
-		A4F9559A17BBC037003D5B6F /* ProgressiveMeshBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProgressiveMeshBuffer.cpp; path = Sources/ProgressiveMeshBuffer.cpp; sourceTree = "<group>"; };
-		A4F9559B17BBC037003D5B6F /* ProgressiveMeshBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressiveMeshBuffer.h; path = Sources/ProgressiveMeshBuffer.h; sourceTree = "<group>"; };
-		A4F9559C17BBC037003D5B6F /* Triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Triangle.cpp; path = Sources/Triangle.cpp; sourceTree = "<group>"; };
-		A4F9559D17BBC037003D5B6F /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Triangle.h; path = Sources/Triangle.h; sourceTree = "<group>"; };
+		A4F9559A17BBC037003D5B6F /* ProgressiveMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProgressiveMesh.cpp; path = Sources/ProgressiveMesh.cpp; sourceTree = "<group>"; };
+		A4F9559B17BBC037003D5B6F /* ProgressiveMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressiveMesh.h; path = Sources/ProgressiveMesh.h; sourceTree = "<group>"; };
+		A4F9559C17BBC037003D5B6F /* CProgressiveTriangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CProgressiveTriangle.cpp; path = Sources/CProgressiveTriangle.cpp; sourceTree = "<group>"; };
+		A4F9559D17BBC037003D5B6F /* CProgressiveTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CProgressiveTriangle.h; path = Sources/CProgressiveTriangle.h; sourceTree = "<group>"; };
 		A4F9559E17BBC037003D5B6F /* CProgressiveVertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CProgressiveVertex.cpp; path = Sources/CProgressiveVertex.cpp; sourceTree = "<group>"; };
 		A4F9559F17BBC037003D5B6F /* CProgressiveVertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CProgressiveVertex.h; path = Sources/CProgressiveVertex.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2209,13 +2209,13 @@
 		A4F9558E17BBBC9A003D5B6F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A4F9559717BBC037003D5B6F /* Edge.cpp */,
-				A4F9559817BBC037003D5B6F /* Edge.h */,
+				A4F9559817BBC037003D5B6F /* CProgressiveEdge.h */,
+				A4F9559717BBC037003D5B6F /* CProgressiveEdge.cpp */,
 				A4F9559917BBC037003D5B6F /* main.cpp */,
-				A4F9559A17BBC037003D5B6F /* ProgressiveMeshBuffer.cpp */,
-				A4F9559B17BBC037003D5B6F /* ProgressiveMeshBuffer.h */,
-				A4F9559C17BBC037003D5B6F /* Triangle.cpp */,
-				A4F9559D17BBC037003D5B6F /* Triangle.h */,
+				A4F9559B17BBC037003D5B6F /* ProgressiveMesh.h */,
+				A4F9559A17BBC037003D5B6F /* ProgressiveMesh.cpp */,
+				A4F9559D17BBC037003D5B6F /* CProgressiveTriangle.h */,
+				A4F9559C17BBC037003D5B6F /* CProgressiveTriangle.cpp */,
 				A4F9559F17BBC037003D5B6F /* CProgressiveVertex.h */,
 				A4F9559E17BBC037003D5B6F /* CProgressiveVertex.cpp */,
 			);
@@ -2684,10 +2684,10 @@
 				A49C4E5017BA554300C1484F /* CSkeletonCommiter_SK.cpp in Sources */,
 				A49C4E5317BA557500C1484F /* CSequenceCommiter_SEQ.cpp in Sources */,
 				A49C4ECB17BA6B0C00C1484F /* CAnimationMixer.cpp in Sources */,
-				A4F955A017BBC037003D5B6F /* Edge.cpp in Sources */,
+				A4F955A017BBC037003D5B6F /* CProgressiveEdge.cpp in Sources */,
 				A4F955A117BBC037003D5B6F /* main.cpp in Sources */,
-				A4F955A217BBC037003D5B6F /* ProgressiveMeshBuffer.cpp in Sources */,
-				A4F955A317BBC037003D5B6F /* Triangle.cpp in Sources */,
+				A4F955A217BBC037003D5B6F /* ProgressiveMesh.cpp in Sources */,
+				A4F955A317BBC037003D5B6F /* CProgressiveTriangle.cpp in Sources */,
 				A4F955A417BBC037003D5B6F /* CProgressiveVertex.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

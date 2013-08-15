@@ -57,7 +57,7 @@ public:
         return m_texcoord;
     };
     
-    inline void Set_Texcoor(const glm::vec2& _texcoord)
+    inline void Set_Texcoord(const glm::vec2& _texcoord)
     {
         m_texcoord = _texcoord;
     };
@@ -72,7 +72,7 @@ public:
         m_normal = _normal;
     };
     
-	inline bool Get_Active(void) const
+	inline bool IsActive(void) const
     {
         return m_isActive;
     };
@@ -82,7 +82,7 @@ public:
         m_isActive = _value;
     };
     
-    inline std::vector<std::shared_ptr<CProgressiveTriangle> >& Get_Faces(void) const
+    inline std::vector<std::shared_ptr<CProgressiveTriangle> >& Get_Faces(void)
     {
         return m_faces;
     };
@@ -92,7 +92,7 @@ public:
         return m_quadric;
     };
     
-    inline void Set_Qiadric(const glm::mat4x4& _quadric)
+    inline void Set_Quadric(const glm::mat4x4& _quadric)
     {
         m_quadric = _quadric;
     };
