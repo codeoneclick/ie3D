@@ -51,54 +51,62 @@ ProgressiveMesh::~ProgressiveMesh(void)
 	m_vertexes.clear();
 }
 
-/*IMeshBuffer* ProgressiveMeshBuffer::getCurrentMeshBuffer() {
-	scene::IDynamicMeshBuffer* mb = new scene::CDynamicMeshBuffer(meshBuffer->getVertexType(), irr::video::EIT_16BIT);
-
-	// Add vertices to buffer
-	irr::u32 vertexIndex = 0;
-	if (meshBuffer->getVertexType() == video::EVT_STANDARD) {
-		for (irr::u32 i = 0; i < vertices.size(); ++i) {
-			Vertex* v = vertices[i];
-			if (v->isOrphan()) {
-				v->setActive(false);
-			} else if (v && v->isActive()) {
-				v->setId(vertexIndex); // Change ID
-				mb->getVertexBuffer().push_back(video::S3DVertex(v->getPosition(), v->getNormal(), v->getColor(), v->getTextureCoordinates()));
-				vertexIndex++;
-			}
-		}
+std::shared_ptr<CMesh> ProgressiveMesh::Get_CurrentMesh(void)
+{
+    std::vector<SVertex> vertexes;
+	ui32 index = 0;
+    for(ui32 i = 0; i < m_vertexes.size(); ++i)
+    {
+        CProgressiveVertex* vertex = m_vertexes[i];
+        if (vertex->IsOrphan())
+        {
+            vertex->Set_Active(false);
+        }
+        else if (vertex && vertex->IsActive())
+        {
+            vertex->Set_Id(index);
+            
+            SVertex result;
+            result.m_position = vertex->Get_Position();
+            result.m_normal = CVertexBuffer::CompressVec3(vertex->Get_Normal());
+            result.m_texcoord = vertex->Get_Texcoord();
+            vertexes.push_back(result);
+            index++;
+        }
+		
 	}
 
-	// Add indices to buffer
-	for (irr::u32 i = 0; i < triangles.size(); ++i) {
-		const Triangle* t = triangles[i];
-		if (t && t->isActive()) {
+    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(vertexes.size(), GL_STATIC_DRAW);
+    SVertex* vertexData = vertexBuffer->Lock();
+    for(ui32 i = 0; i < vertexes.size(); ++i)
+    {
+        vertexData[i] = vertexes[i];
+    }
+    vertexBuffer->Unlock();
+    
+    std::vector<ui16> indexes;
 
-#ifdef _DEBUG
-			if (!t->getVertex(0)->isActive() || !t->getVertex(1)->isActive() || !t->getVertex(2)->isActive()) {
-				t->print();
-				continue;
-			}
-#endif
-
-			mb->getIndexBuffer().push_back(t->getVertex(0)->getId());
-			mb->getIndexBuffer().push_back(t->getVertex(1)->getId());
-			mb->getIndexBuffer().push_back(t->getVertex(2)->getId());
+	for (ui32 i = 0; i < m_faces.size(); ++i)
+    {
+		const std::shared_ptr<CProgressiveTriangle> triangle = m_faces[i];
+		if (triangle && triangle->IsActive())
+        {
+			indexes.push_back(triangle->Get_Vertex(0)->Get_Id());
+			indexes.push_back(triangle->Get_Vertex(1)->Get_Id());
+			indexes.push_back(triangle->Get_Vertex(2)->Get_Id());
 		}
 	}
-
-#ifdef _DEBUG
-	printf("Building MeshBuffer [ Triangles: %d  Vertices: %d  Indices: %d  Edges: %d ]\n", mb->getIndexBuffer().size() / 3, mb->getVertexBuffer().size(), mb->getIndexBuffer().size(), edges.size());
-#endif
-
-	// Set mesh buffer material
-	mb->getMaterial() = meshBuffer->getMaterial();
-
-	// Recalculate bounding box
-	mb->recalculateBoundingBox();
-
-	return mb;
-}*/
+    
+    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(indexes.size(), GL_STATIC_DRAW);
+    ui16* indexData = indexBuffer->Lock();
+    
+    for(ui32 i = 0; i < indexes.size(); ++i)
+    {
+        indexData[i] = indexes[i];
+    }
+    indexBuffer->Unlock();
+	return nullptr;
+}
 
 void ProgressiveMesh::_CalculateQuadric(bool _useTriangleArea)
 {

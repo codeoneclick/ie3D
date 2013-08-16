@@ -43,7 +43,7 @@ void CMeshSerializer_MDL::Serialize(void)
     }
     
     std::shared_ptr<CMeshHeader> header = std::make_shared<CMeshHeader>();
-    std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh >(m_resource);
+    std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh>(m_resource);
     
     filestream.read((char*)&header->m_numVertexes, sizeof(ui32));
     filestream.read((char*)&header->m_numIndexes, sizeof(ui32));
