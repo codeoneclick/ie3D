@@ -6,7 +6,7 @@
 #include "CProgressiveVertex.h"
 #include "CProgressiveEdge.h"
 
-class CProgressiveTriangle
+class CProgressiveTriangle : public std::enable_shared_from_this<CProgressiveTriangle>
 {
 private:
     

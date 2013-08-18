@@ -9,19 +9,27 @@
 #include "CVertexBuffer.h"
 #include "HEnums.h"
 
-CVertexBuffer::CVertexBuffer(ui32 _numVertexes, GLenum _mode) :
-m_numVertexes(_numVertexes),
+ui32 CVertexBuffer::m_refGuid = 0;
+
+CVertexBuffer::CVertexBuffer(ui32 _size, GLenum _mode) :
+m_size(_size),
 m_mode(_mode)
 {
-    assert(m_numVertexes != 0);
-    m_data = new SVertex[m_numVertexes];
-    m_currentHandleIndex = -1;
-    glGenBuffers(K_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
+    assert(_size != 0);
+    m_mainVBO = new SVertex[m_size];
+    m_handleIndex = -1;
+    glGenBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
 }
 
 CVertexBuffer::~CVertexBuffer(void)
 {
-    glDeleteBuffers(K_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
+    glDeleteBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
+    for(auto VBOref : m_VBOsContainer)
+    {
+        delete[] VBOref.second;
+    }
+    m_VBOsContainer.clear();
+    delete[] m_mainVBO;
 }
 
 glm::u8vec4 CVertexBuffer::CompressVec3(const glm::vec3& _uncompressed)
@@ -44,19 +52,54 @@ glm::vec3 CVertexBuffer::UncompressU8Vec4(const glm::u8vec4& _compressed)
     return uncompressed;
 }
 
+const std::string CVertexBuffer::Create_VBORef(void)
+{
+    std::stringstream stringstream;
+    stringstream<<"vertex.buffer.reference."<<++m_refGuid;
+    std::string guid = stringstream.str();
+    assert(m_size != 0);
+    m_VBOsContainer.insert(std::make_pair(guid, new SVertex[m_size]));
+    return guid;
+}
+
+void CVertexBuffer::Delete_VBORef(const std::string &_guid)
+{
+    assert(m_VBOsContainer.find(_guid) != m_VBOsContainer.end());
+    m_VBOsContainer.erase(m_VBOsContainer.find(_guid));
+}
+
+SVertex* CVertexBuffer::Lock(void) const
+{
+    assert(m_mainVBO != nullptr);
+    return m_mainVBO;
+};
+
 void CVertexBuffer::Unlock(void)
 {
-    assert(m_data != nullptr);
-    assert(m_numVertexes != 0);
-    m_currentHandleIndex = (m_currentHandleIndex >= (K_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_currentHandleIndex + 1;
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_currentHandleIndex]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * m_numVertexes, m_data, m_mode);
+    assert(m_mainVBO != nullptr);
+    assert(m_size != 0);
+    m_handleIndex = (m_handleIndex >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_handleIndex + 1;
+    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_handleIndex]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * m_size, m_mainVBO, m_mode);
+}
+
+SVertex* CVertexBuffer::Lock(const std::string &_guid) const
+{
+    assert(m_VBOsContainer.find(_guid) !=  m_VBOsContainer.end());
+    return m_VBOsContainer.find(_guid)->second;
+}
+
+void CVertexBuffer::Unlock(const std::string &_guid)
+{
+    assert(m_VBOsContainer.find(_guid) !=  m_VBOsContainer.end());
+    m_mainVBO = m_VBOsContainer.find(_guid)->second;
+    CVertexBuffer::Unlock();
 }
 
 void CVertexBuffer::Bind(const i32* _attributes)
 {
-    assert(m_currentHandleIndex >= 0 && m_currentHandleIndex <= (K_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_currentHandleIndex]);
+    assert(m_handleIndex >= 0 && m_handleIndex <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
+    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_handleIndex]);
     ui32 stride = 0;
     i32 attribute = _attributes[E_SHADER_ATTRIBUTE_POSITION];
     if(attribute >= 0)
@@ -96,8 +139,8 @@ void CVertexBuffer::Bind(const i32* _attributes)
 
 void CVertexBuffer::Unbind(const i32* _attributes)
 {
-    assert(m_currentHandleIndex >= 0 && m_currentHandleIndex <= (K_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_currentHandleIndex]);
+    assert(m_handleIndex >= 0 && m_handleIndex <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
+    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_handleIndex]);
     i32 attribute = _attributes[E_SHADER_ATTRIBUTE_POSITION];
     if(attribute >= 0)
     {

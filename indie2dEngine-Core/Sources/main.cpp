@@ -20,6 +20,7 @@
  3. This notice may not be removed or altered from any source distribution.
  */
 
+/*
 #include <irrlicht.h>
 #include "driverChoice.h"
 #include "ProgressiveMeshBuffer.h"
@@ -260,3 +261,4 @@ int main() {
 
 	return 0;
 }
+*/

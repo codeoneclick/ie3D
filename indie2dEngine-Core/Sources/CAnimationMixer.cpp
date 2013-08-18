@@ -148,7 +148,7 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
             m_skeleton->Update();
             
             SVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock();
-            for(i32 i = 0; i <  m_mesh->Get_VertexBuffer()->Get_NumVertexes(); ++i)
+            for(i32 i = 0; i <  m_mesh->Get_VertexBuffer()->Get_Size(); ++i)
             {
                 glm::vec3 bonePosition(0.0f);
                 for(i32 j = 0; j < m_mesh->Get_VertexBindData()[i].m_numWeights; ++j)

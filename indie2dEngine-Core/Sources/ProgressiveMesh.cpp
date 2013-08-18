@@ -12,7 +12,7 @@ ProgressiveMesh::ProgressiveMesh(std::shared_ptr<CMesh> _mesh, E_SIMPLIFICATION_
     std::shared_ptr<CVertexBuffer> vertexBuffer = m_mesh->Get_VertexBuffer();
     SVertex* vertexData = vertexBuffer->Lock();
     
-    for(ui32 i = 0; i < vertexBuffer->Get_NumVertexes(); ++i)
+    for(ui32 i = 0; i < vertexBuffer->Get_Size(); ++i)
     {
         m_vertexes.push_back(new CProgressiveVertex(i, vertexData[i].m_position, vertexData[i].m_texcoord, CVertexBuffer::UncompressU8Vec4(vertexData[i].m_normal)));
     }

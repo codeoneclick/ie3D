@@ -142,7 +142,7 @@ void CSkeleton::Set_BindTransformation(void)
         SVertex* vertexData = m_vertexBuffer->Lock();
         for(auto root : m_roots)
         {
-           root->WriteVertexData(vertexData, m_vertexBuffer->Get_NumVertexes());
+           root->WriteVertexData(vertexData, m_vertexBuffer->Get_Size());
         }
         m_vertexBuffer->Unlock();
     };
@@ -165,7 +165,7 @@ void CSkeleton::Draw(const i32 *_attributes)
         
             for(auto root : m_roots)
             {
-                root->WriteVertexData(vertexData, m_vertexBuffer->Get_NumVertexes());
+                root->WriteVertexData(vertexData, m_vertexBuffer->Get_Size());
             }
             
             std::function<void(void)> main = [this]()

@@ -49,7 +49,7 @@ m_indexBuffer(_indexBuffer)
 {
     assert(_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
-    m_header->m_numVertexes = m_vertexBuffer->Get_NumVertexes();
+    m_header->m_numVertexes = m_vertexBuffer->Get_Size();
     m_header->m_numIndexes = m_indexBuffer->Get_NumIndexes();
     m_header->m_vertexData = m_vertexBuffer->Lock();
     m_header->m_indexData = m_indexBuffer->Lock();

@@ -18,6 +18,10 @@
 		210EFD43175BD4DA00DDB182 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD3C175BD4DA00DDB182 /* json_value.cpp */; };
 		210EFD44175BD4DA00DDB182 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = 210EFD3D175BD4DA00DDB182 /* json_valueiterator.inl */; };
 		210EFD45175BD4DA00DDB182 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD3E175BD4DA00DDB182 /* json_writer.cpp */; };
+		211D30D417C0D9190038B703 /* model_02.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 211D30D117C0D9190038B703 /* model_02.MDL_anim */; };
+		211D30D517C0D9190038B703 /* model_02.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 211D30D217C0D9190038B703 /* model_02.MDL_mesh */; };
+		211D30D617C0D9190038B703 /* model_02.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 211D30D317C0D9190038B703 /* model_02.MDL_sk */; };
+		211D30E017C0D9F10038B703 /* model_02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 211D30DF17C0D9F10038B703 /* model_02.pvr */; };
 		21816A6A1799DC46000AF4BF /* ScreenGBufferNormalModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21816A661799DC36000AF4BF /* ScreenGBufferNormalModel.frag */; };
 		21816A6B1799DC46000AF4BF /* ScreenGBufferNormalModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21816A671799DC36000AF4BF /* ScreenGBufferNormalModel.vert */; };
 		21816A6E1799DE0F000AF4BF /* gbuffer.normal.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21816A6C1799DE0E000AF4BF /* gbuffer.normal.material.xml */; };
@@ -492,6 +496,10 @@
 		210EFD3C175BD4DA00DDB182 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
 		210EFD3D175BD4DA00DDB182 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
 		210EFD3E175BD4DA00DDB182 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
+		211D30D117C0D9190038B703 /* model_02.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_anim; sourceTree = "<group>"; };
+		211D30D217C0D9190038B703 /* model_02.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_mesh; sourceTree = "<group>"; };
+		211D30D317C0D9190038B703 /* model_02.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_sk; sourceTree = "<group>"; };
+		211D30DF17C0D9F10038B703 /* model_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.pvr; sourceTree = "<group>"; };
 		21816A661799DC36000AF4BF /* ScreenGBufferNormalModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferNormalModel.frag; sourceTree = "<group>"; };
 		21816A671799DC36000AF4BF /* ScreenGBufferNormalModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferNormalModel.vert; sourceTree = "<group>"; };
 		21816A6C1799DE0E000AF4BF /* gbuffer.normal.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.material.xml; sourceTree = "<group>"; };
@@ -1269,6 +1277,9 @@
 		A40A6A6F1753B06C005B475E /* Meshes */ = {
 			isa = PBXGroup;
 			children = (
+				211D30D117C0D9190038B703 /* model_02.MDL_anim */,
+				211D30D217C0D9190038B703 /* model_02.MDL_mesh */,
+				211D30D317C0D9190038B703 /* model_02.MDL_sk */,
 				A49C4E0617BA2BB800C1484F /* model_01.MDL_anim */,
 				A49C4E0717BA2BB800C1484F /* model_01.MDL_mesh */,
 				A49C4E0817BA2BB800C1484F /* model_01.MDL_sk */,
@@ -1602,6 +1613,7 @@
 		A46A3212174E10B80044643E /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				211D30DF17C0D9F10038B703 /* model_02.pvr */,
 				218A462D17B193A400301F41 /* Footman2.Diffuse.pvr */,
 				21816A8417A07F47000AF4BF /* Footman.Diffuse.pvr */,
 				A46789E917A0316900FE26FA /* ocean.pvr */,
@@ -2545,6 +2557,10 @@
 				A49C4E0917BA2BB800C1484F /* model_01.MDL_anim in Resources */,
 				A49C4E0A17BA2BB800C1484F /* model_01.MDL_mesh in Resources */,
 				A49C4E0B17BA2BB800C1484F /* model_01.MDL_sk in Resources */,
+				211D30D417C0D9190038B703 /* model_02.MDL_anim in Resources */,
+				211D30D517C0D9190038B703 /* model_02.MDL_mesh in Resources */,
+				211D30D617C0D9190038B703 /* model_02.MDL_sk in Resources */,
+				211D30E017C0D9F10038B703 /* model_02.pvr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

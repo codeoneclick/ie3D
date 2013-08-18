@@ -1,8 +1,8 @@
 <model name="footman">
-	<mesh filename="model_01.MDL_mesh"/>
-    <skeleton filename="model_01.MDL_sk"/>
+	<mesh filename="model_02.MDL_mesh"/>
+    <skeleton filename="model_02.MDL_sk"/>
     <animations>
-        <animation name="model_01.MDL_anim" filename="model_01.MDL_anim"/>
+        <animation name="model_02.MDL_anim" filename="model_02.MDL_anim"/>
     </animations>
 	<materials>
 		<material filename="material.model.Footman.common.xml"/>

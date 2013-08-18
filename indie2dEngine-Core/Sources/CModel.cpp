@@ -33,7 +33,6 @@ CModel::~CModel(void)
 void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
     std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(_template);
-    
     assert(m_resourceFabricator != nullptr);
     m_mesh = m_resourceFabricator->CreateMesh(modelTemplate->m_meshFilename);
     assert(m_mesh != nullptr);
@@ -137,7 +136,6 @@ void CModel::_OnDraw(const std::string& _renderMode)
         material->Get_Shader()->Set_Vector4(material->Get_Clipping(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
-        
         IGameObject::_OnDraw(_renderMode);
     }
 }
