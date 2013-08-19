@@ -9,27 +9,25 @@
 #include "CVertexBuffer.h"
 #include "HEnums.h"
 
-ui32 CVertexBuffer::m_refGuid = 0;
-
 CVertexBuffer::CVertexBuffer(ui32 _size, GLenum _mode) :
 m_size(_size),
 m_mode(_mode)
 {
     assert(_size != 0);
-    m_mainVBO = new SVertex[m_size];
-    m_handleIndex = -1;
+    m_main = new SVertex[m_size];
+    m_index = -1;
     glGenBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
 }
 
 CVertexBuffer::~CVertexBuffer(void)
 {
     glDeleteBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
-    for(auto VBOref : m_VBOsContainer)
+    for(auto reference : m_references)
     {
-        delete[] VBOref.second;
+        delete[] reference.second;
     }
-    m_VBOsContainer.clear();
-    delete[] m_mainVBO;
+    m_references.clear();
+    delete[] m_main;
 }
 
 glm::u8vec4 CVertexBuffer::CompressVec3(const glm::vec3& _uncompressed)
@@ -52,54 +50,60 @@ glm::vec3 CVertexBuffer::UncompressU8Vec4(const glm::u8vec4& _compressed)
     return uncompressed;
 }
 
-const std::string CVertexBuffer::Create_VBORef(void)
+const std::string CVertexBuffer::_GenerateGuid(void)
 {
+    static ui32 value = 0;
     std::stringstream stringstream;
-    stringstream<<"vertex.buffer.reference."<<++m_refGuid;
-    std::string guid = stringstream.str();
+    stringstream<<"vertex.buffer.reference."<<++value;
+    return stringstream.str();
+}
+
+const std::string CVertexBuffer::CreateReference(void)
+{
     assert(m_size != 0);
-    m_VBOsContainer.insert(std::make_pair(guid, new SVertex[m_size]));
+    std::string guid = CVertexBuffer::_GenerateGuid();
+    m_references.insert(std::make_pair(guid, new SVertex[m_size]));
     return guid;
 }
 
-void CVertexBuffer::Delete_VBORef(const std::string &_guid)
+void CVertexBuffer::DeleteReference(const std::string &_guid)
 {
-    assert(m_VBOsContainer.find(_guid) != m_VBOsContainer.end());
-    m_VBOsContainer.erase(m_VBOsContainer.find(_guid));
+    assert(m_references.find(_guid) != m_references.end());
+    m_references.erase(m_references.find(_guid));
 }
 
 SVertex* CVertexBuffer::Lock(void) const
 {
-    assert(m_mainVBO != nullptr);
-    return m_mainVBO;
+    assert(m_main != nullptr);
+    return m_main;
 };
 
 void CVertexBuffer::Unlock(void)
 {
-    assert(m_mainVBO != nullptr);
+    assert(m_main != nullptr);
     assert(m_size != 0);
-    m_handleIndex = (m_handleIndex >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_handleIndex + 1;
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_handleIndex]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * m_size, m_mainVBO, m_mode);
+    m_index = (m_index >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_index + 1;
+    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * m_size, m_main, m_mode);
 }
 
 SVertex* CVertexBuffer::Lock(const std::string &_guid) const
 {
-    assert(m_VBOsContainer.find(_guid) !=  m_VBOsContainer.end());
-    return m_VBOsContainer.find(_guid)->second;
+    assert(m_references.find(_guid) !=  m_references.end());
+    return m_references.find(_guid)->second;
 }
 
 void CVertexBuffer::Unlock(const std::string &_guid)
 {
-    assert(m_VBOsContainer.find(_guid) !=  m_VBOsContainer.end());
-    m_mainVBO = m_VBOsContainer.find(_guid)->second;
+    assert(m_references.find(_guid) !=  m_references.end());
+    m_main = m_references.find(_guid)->second;
     CVertexBuffer::Unlock();
 }
 
 void CVertexBuffer::Bind(const i32* _attributes)
 {
-    assert(m_handleIndex >= 0 && m_handleIndex <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_handleIndex]);
+    assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
+    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
     ui32 stride = 0;
     i32 attribute = _attributes[E_SHADER_ATTRIBUTE_POSITION];
     if(attribute >= 0)
@@ -139,8 +143,8 @@ void CVertexBuffer::Bind(const i32* _attributes)
 
 void CVertexBuffer::Unbind(const i32* _attributes)
 {
-    assert(m_handleIndex >= 0 && m_handleIndex <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_handleIndex]);
+    assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
+    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
     i32 attribute = _attributes[E_SHADER_ATTRIBUTE_POSITION];
     if(attribute >= 0)
     {

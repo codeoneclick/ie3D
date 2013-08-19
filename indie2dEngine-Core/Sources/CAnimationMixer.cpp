@@ -19,7 +19,8 @@ m_oldSequence(nullptr),
 m_currentSequence(nullptr),
 m_animationTime(0.0f)
 {
-    
+    m_skeletonGuid = m_skeleton->CreateTransformations();
+    m_vertexBufferGuid = m_mesh->Get_VertexBuffer()->CreateReference();
 }
 
 CAnimationMixer::~CAnimationMixer(void)

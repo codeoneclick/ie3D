@@ -41,23 +41,23 @@ class CVertexBuffer
 {
 private:
     
-    static ui32 m_refGuid;
+    static const std::string _GenerateGuid(void);
     
 protected:
     
     ui32 m_size;
-    std::vector<SSourceVertex> m_sourceVBO;
-    SVertex* m_mainVBO;
-    std::map<std::string, SVertex*> m_VBOsContainer;
+    std::vector<SSourceVertex> m_source;
+    SVertex* m_main;
+    std::map<std::string, SVertex*> m_references;
     
     ui32 m_handles[k_NUM_REPLACEMENT_VERTEX_BUFFERS];
-    i32 m_handleIndex;
+    i32 m_index;
     GLenum m_mode;
     
-    inline void _Set_SourceVBO(const std::vector<SSourceVertex>& _sourceVBO)
+    inline void _Set_Source(const std::vector<SSourceVertex>& _source)
     {
-        assert(m_size == _sourceVBO.size());
-        m_sourceVBO = _sourceVBO;
+        assert(m_size == _source.size());
+        m_source = _source;
     };
     
 public:
@@ -71,17 +71,17 @@ public:
         return m_size;
     };
     
-    inline const std::vector<SSourceVertex>& Get_SourceVBO(void) const
+    inline const std::vector<SSourceVertex>& Get_Source(void) const
     {
-        assert(m_size == m_sourceVBO.size());
-        return m_sourceVBO;
+        assert(m_size == m_source.size());
+        return m_source;
     };
     
     static glm::u8vec4 CompressVec3(const glm::vec3& _uncompressed);
     static glm::vec3 UncompressU8Vec4(const glm::u8vec4& _compressed);
     
-    const std::string Create_VBORef(void);
-    void Delete_VBORef(const std::string& _guid);
+    const std::string CreateReference(void);
+    void DeleteReference(const std::string& _guid);
     
     SVertex* Lock(void) const;
     void Unlock(void);

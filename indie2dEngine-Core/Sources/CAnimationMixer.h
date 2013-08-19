@@ -30,6 +30,9 @@ protected:
     
     f32 m_animationTime;
     
+    std::string m_skeletonGuid;
+    std::string m_vertexBufferGuid;
+    
     void _BindSequence(void);
     
 public:
