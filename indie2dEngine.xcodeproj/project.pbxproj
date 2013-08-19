@@ -22,6 +22,7 @@
 		211D30D517C0D9190038B703 /* model_02.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 211D30D217C0D9190038B703 /* model_02.MDL_mesh */; };
 		211D30D617C0D9190038B703 /* model_02.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 211D30D317C0D9190038B703 /* model_02.MDL_sk */; };
 		211D30E017C0D9F10038B703 /* model_02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 211D30DF17C0D9F10038B703 /* model_02.pvr */; };
+		211D30E317C2A61D0038B703 /* IResourceLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 211D30E117C2A61A0038B703 /* IResourceLoadingHandler.cpp */; };
 		21816A6A1799DC46000AF4BF /* ScreenGBufferNormalModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21816A661799DC36000AF4BF /* ScreenGBufferNormalModel.frag */; };
 		21816A6B1799DC46000AF4BF /* ScreenGBufferNormalModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21816A671799DC36000AF4BF /* ScreenGBufferNormalModel.vert */; };
 		21816A6E1799DE0F000AF4BF /* gbuffer.normal.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21816A6C1799DE0E000AF4BF /* gbuffer.normal.material.xml */; };
@@ -500,6 +501,8 @@
 		211D30D217C0D9190038B703 /* model_02.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_mesh; sourceTree = "<group>"; };
 		211D30D317C0D9190038B703 /* model_02.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_sk; sourceTree = "<group>"; };
 		211D30DF17C0D9F10038B703 /* model_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.pvr; sourceTree = "<group>"; };
+		211D30E117C2A61A0038B703 /* IResourceLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceLoadingHandler.cpp; path = Sources/IResourceLoadingHandler.cpp; sourceTree = "<group>"; };
+		211D30E217C2A61C0038B703 /* IResourceLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceLoadingHandler.h; path = Sources/IResourceLoadingHandler.h; sourceTree = "<group>"; };
 		21816A661799DC36000AF4BF /* ScreenGBufferNormalModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferNormalModel.frag; sourceTree = "<group>"; };
 		21816A671799DC36000AF4BF /* ScreenGBufferNormalModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferNormalModel.vert; sourceTree = "<group>"; };
 		21816A6C1799DE0E000AF4BF /* gbuffer.normal.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.material.xml; sourceTree = "<group>"; };
@@ -1424,6 +1427,8 @@
 				A494D378173946DC00228936 /* Loaders */,
 				A46A331B174E4C770044643E /* CResourceAccessor.h */,
 				A46A331A174E4C700044643E /* CResourceAccessor.cpp */,
+				211D30E217C2A61C0038B703 /* IResourceLoadingHandler.h */,
+				211D30E117C2A61A0038B703 /* IResourceLoadingHandler.cpp */,
 			);
 			name = "Resources Managment";
 			sourceTree = "<group>";
@@ -2705,6 +2710,7 @@
 				A4F955A217BBC037003D5B6F /* ProgressiveMesh.cpp in Sources */,
 				A4F955A317BBC037003D5B6F /* CProgressiveTriangle.cpp in Sources */,
 				A4F955A417BBC037003D5B6F /* CProgressiveVertex.cpp in Sources */,
+				211D30E317C2A61D0038B703 /* IResourceLoadingHandler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
