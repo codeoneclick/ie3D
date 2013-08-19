@@ -98,12 +98,12 @@ void CAnimationMixer::_BindSequence(void)
         glm::mat4x4 matrixTranslation = glm::translate(glm::mat4(1.0f), position);
         glm::mat4x4 matrixRotation = glm::toMat4(rotation);
         glm::mat4x4 matrixScale = glm::scale(glm::mat4x4(1.0f), scale);
-        assert(m_skeleton->Get_Transformations() != nullptr);
-        m_skeleton->Get_Transformations()[i] = matrixTranslation * matrixRotation * matrixScale;
+        assert(m_skeleton->Get_Transformations(m_skeletonGuid) != nullptr);
+        m_skeleton->Get_Transformations(m_skeletonGuid)[i] = matrixTranslation * matrixRotation * matrixScale;
     }
     
-    m_skeleton->Update();
-    m_skeleton->Set_BindTransformation();
+    m_skeleton->Update(m_skeletonGuid);
+    m_skeleton->BindTransformation();
 }
 
 void CAnimationMixer::OnUpdate(f32 _deltatime)
@@ -143,10 +143,10 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
                 glm::mat4x4 matrixRotation = glm::toMat4(rotation);
                 glm::mat4x4 matrixScale = glm::scale(glm::mat4x4(1.0f), scale);
                 
-                assert(m_skeleton->Get_Transformations() != nullptr);
-                m_skeleton->Get_Transformations()[i] = matrixTranslation * matrixRotation * matrixScale;
+                assert(m_skeleton->Get_Transformations(m_skeletonGuid) != nullptr);
+                m_skeleton->Get_Transformations(m_skeletonGuid)[i] = matrixTranslation * matrixRotation * matrixScale;
             }
-            m_skeleton->Update();
+            m_skeleton->Update(m_skeletonGuid);
             
             SVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock();
             for(i32 i = 0; i <  m_mesh->Get_VertexBuffer()->Get_Size(); ++i)
@@ -154,7 +154,7 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
                 glm::vec3 bonePosition(0.0f);
                 for(i32 j = 0; j < m_mesh->Get_VertexBindData()[i].m_numWeights; ++j)
                 {
-                    std::shared_ptr<CBone> bone = m_skeleton->Get_BoneById(m_mesh->Get_VertexBindData()[i].m_weights[j].m_boneId);
+                    std::shared_ptr<CBone> bone = m_skeleton->Get_Bone(m_mesh->Get_VertexBindData()[i].m_weights[j].m_boneId);
                     
                     glm::mat4x4 boneTransformation = (*bone->Get_Transformation());
                     
