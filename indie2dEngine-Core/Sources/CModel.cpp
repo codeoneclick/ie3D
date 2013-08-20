@@ -78,8 +78,14 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_debugBoundBoxMaterial->Set_BlendFunctionSource(GL_SRC_ALPHA);
     m_debugBoundBoxMaterial->Set_BlendFunctionDest(GL_ONE_MINUS_SRC_ALPHA);
     
-    IGameObject::_LazyListenRenderMgr();
-    m_isLoaded = true;
+    IGameObject::_ListenRenderMgr();
+    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+}
+
+void CModel::_OnResourceLoaded(E_RESOURCE_TYPE _resource, bool _success)
+{
+    IGameObject::_OnResourceLoaded(_resource, _success);
+    
 }
 
 void CModel::Set_Animation(const std::string &_name)
@@ -92,7 +98,7 @@ void CModel::Set_Animation(const std::string &_name)
 
 void CModel::_OnSceneUpdate(f32 _deltatime)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         IGameObject::_OnSceneUpdate(_deltatime);
         if(m_animationMixer != nullptr)
@@ -109,7 +115,7 @@ i32 CModel::_OnQueuePosition(void)
 
 void CModel::_OnBind(const std::string& _renderMode)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_materials.find(_renderMode) != m_materials.end());
         IGameObject::_OnBind(_renderMode);
@@ -118,7 +124,7 @@ void CModel::_OnBind(const std::string& _renderMode)
 
 void CModel::_OnDraw(const std::string& _renderMode)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_camera != nullptr);
         assert(m_light != nullptr);
@@ -142,7 +148,7 @@ void CModel::_OnDraw(const std::string& _renderMode)
 
 void CModel::_OnUnbind(const std::string& _renderMode)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_materials.find(_renderMode) != m_materials.end());
         IGameObject::_OnUnbind(_renderMode);

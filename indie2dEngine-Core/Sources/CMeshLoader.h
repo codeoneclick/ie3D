@@ -12,6 +12,7 @@
 #include "IResourceLoader.h"
 
 class CMesh;
+class IResourceLoadingHandler;
 class CMeshLoader final : public IResourceLoader
 {
 private:
@@ -23,7 +24,7 @@ public:
     CMeshLoader(void);
     ~CMeshLoader(void);
     
-    std::shared_ptr<CMesh> StartLoadOperation(const std::string& _filename);
+    std::shared_ptr<CMesh> StartLoadOperation(const std::string& _filename, std::shared_ptr<IResourceLoadingHandler> _handler);
 };
 
 #endif

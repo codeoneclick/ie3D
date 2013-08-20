@@ -154,7 +154,7 @@ protected:
         assert(_indexBuffer != nullptr);
         m_vertexBuffer = _vertexBuffer;
         m_indexBuffer = _indexBuffer;
-        m_isLinked = true;
+        m_status |= E_RESOURCE_STATUS_COMMITED;
     };
     
 public:

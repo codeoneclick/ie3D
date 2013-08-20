@@ -67,10 +67,10 @@ void CSequence::_Serialize(std::ifstream &_stream)
         frame->_Serialize(_stream);
         m_frames.push_back(frame);
     }
-    m_isLoaded = true;
+    m_status |= E_RESOURCE_STATUS_LOADED;
 }
 
 void CSequence::_BindSequence(void)
 {
-    m_isLinked = true;
+    m_status |= E_RESOURCE_STATUS_COMMITED;
 }

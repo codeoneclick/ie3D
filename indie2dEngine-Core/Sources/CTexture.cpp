@@ -37,7 +37,7 @@ CTexture::~CTexture(void)
 
 void CTexture::Bind(void) const
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         glBindTexture(GL_TEXTURE_2D, m_handle);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_wrap);
@@ -47,7 +47,7 @@ void CTexture::Bind(void) const
 
 void CTexture::Unbind(void) const
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         glBindTexture(GL_TEXTURE_2D, NULL);
     }

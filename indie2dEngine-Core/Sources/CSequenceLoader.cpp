@@ -20,7 +20,7 @@ CSequenceLoader::~CSequenceLoader(void)
     
 }
 
-std::shared_ptr<CSequence> CSequenceLoader::StartLoadOperation(const std::string &_filename)
+std::shared_ptr<CSequence> CSequenceLoader::StartLoadOperation(const std::string &_filename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     std::string guid = _filename;
     std::shared_ptr<CSequence> resource = nullptr;

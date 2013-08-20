@@ -12,6 +12,7 @@
 #include "IResourceLoader.h"
 
 class CTexture;
+class IResourceLoadingHandler;
 class CTextureLoader final : public IResourceLoader
 {
 private:
@@ -23,7 +24,7 @@ public:
     CTextureLoader(void);
     ~CTextureLoader(void);
     
-    std::shared_ptr<CTexture> StartLoadOperation(const std::string& _filename);
+    std::shared_ptr<CTexture> StartLoadOperation(const std::string& _filename, std::shared_ptr<IResourceLoadingHandler> _handler);
 };
 
 

@@ -10,55 +10,51 @@
 #define IResourceLoadingHandler_h
 
 #include "HCommon.h"
+#include "HEnums.h"
 
-class CResourceLoadingCommand final
+class CResourceLoadingCommands final
 {
 private:
     
-    typedef std::function<void(f32)> __SCENE_UPDATE_COMMAND;
+    friend class IResourceLoadingHandler;
     
-    friend class ISceneUpdateHandler;
-    friend class CSceneUpdateMgr;
+    typedef std::function<void(E_RESOURCE_TYPE _resource, bool _success)> _RESOURCE_LOADED_COMMAND;
     
-    __SCENE_UPDATE_COMMAND m_sceneUpdateCommand;
+    _RESOURCE_LOADED_COMMAND m_resourceLoadedCommand;
     
 protected:
     
-    CSceneUpdateCommands(void);
+    CResourceLoadingCommands(void);
     
-    void _ConnectSceneUpdateCommand(const __SCENE_UPDATE_COMMAND& _command);
-    void _ExecuteSceneUpdateCommand(f32 _deltatime);
+    void _ConnectLoadedResourceCommand(const _RESOURCE_LOADED_COMMAND& _command);
+    void _ExecuteLoadedResourceCommand(E_RESOURCE_TYPE _resource, bool _success);
     
 public:
     
-    ~CSceneUpdateCommands(void);
+    ~CResourceLoadingCommands(void);
 };
 
-class ISceneUpdateHandler
+class IResourceLoadingHandler
 {
 private:
     
-    friend class CSceneUpdateMgr;
-    
-    CSceneUpdateCommands m_commands;
+    CResourceLoadingCommands m_commands;
     
     void _ConnectCommands(void);
-    inline CSceneUpdateCommands _Get_Commands(void)
+    inline CResourceLoadingCommands _Get_Commands(void)
     {
         return m_commands;
     };
     
 protected:
     
-    ISceneUpdateHandler(void);
+    IResourceLoadingHandler(void);
     
-    virtual void _OnSceneUpdate(f32 _deltatime) = 0;
+    virtual void _OnResourceLoaded(E_RESOURCE_TYPE _resource, bool _success) = 0;
     
 public:
     
-    virtual ~ISceneUpdateHandler(void);
+    virtual ~IResourceLoadingHandler(void);
 };
-
-
 
 #endif 

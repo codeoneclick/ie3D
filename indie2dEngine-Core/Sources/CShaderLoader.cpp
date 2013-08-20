@@ -20,7 +20,7 @@ CShaderLoader::~CShaderLoader(void)
     
 }
 
-std::shared_ptr<CShader> CShaderLoader::StartLoadOperation(const std::string &_vsFilename, const std::string &_fsFilename)
+std::shared_ptr<CShader> CShaderLoader::StartLoadOperation(const std::string &_vsFilename, const std::string &_fsFilename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     std::string guid = std::string().append(_vsFilename).append(_fsFilename);
     std::shared_ptr<CShader> resource = nullptr;

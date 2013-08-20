@@ -12,6 +12,7 @@
 #include "HCommon.h"
 #include "HEnums.h"
 
+class IResourceLoadingHandler;
 class IResource : public std::enable_shared_from_this<IResource>
 {
 private:
@@ -20,8 +21,9 @@ protected:
     
     std::string m_guid;
     E_RESOURCE_TYPE m_resourceType;
-    bool m_isLinked;
-    bool m_isLoaded;
+    ui8 m_status;
+    
+    std::set<std::shared_ptr<IResourceLoadingHandler>> m_handlers;
     
 public:
     
@@ -40,13 +42,16 @@ public:
     
     inline const bool IsLoaded(void)
     {
-        return m_isLoaded;
+        return m_status & E_RESOURCE_STATUS_LOADED;
     };
     
     inline const bool IsLinked(void)
     {
-        return m_isLinked;
+        return m_status & E_RESOURCE_STATUS_COMMITED;
     };
+    
+    void RegisterResourceLoadingHandler(std::shared_ptr<IResourceLoadingHandler> _handler);
+    void ExecuteResourceLoadingHandlers(void);
 };
 
 #endif 

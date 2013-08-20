@@ -12,6 +12,7 @@
 #include "IResourceLoader.h"
 
 class CSkeleton;
+class IResourceLoadingHandler;
 class CSkeletonLoader final : public IResourceLoader
 {
 private:
@@ -23,7 +24,7 @@ public:
     CSkeletonLoader(void);
     ~CSkeletonLoader(void);
     
-    std::shared_ptr<CSkeleton> StartLoadOperation(const std::string& _filename);
+    std::shared_ptr<CSkeleton> StartLoadOperation(const std::string& _filename, std::shared_ptr<IResourceLoadingHandler> _handler);
 };
 
 #endif 

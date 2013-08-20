@@ -20,7 +20,7 @@ CTextureLoader::~CTextureLoader(void)
     
 }
 
-std::shared_ptr<CTexture> CTextureLoader::StartLoadOperation(const std::string &_filename)
+std::shared_ptr<CTexture> CTextureLoader::StartLoadOperation(const std::string &_filename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     std::string guid = _filename;
     std::shared_ptr<CTexture> resource = nullptr;

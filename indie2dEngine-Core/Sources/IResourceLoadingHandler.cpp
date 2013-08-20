@@ -7,3 +7,41 @@
 //
 
 #include "IResourceLoadingHandler.h"
+
+CResourceLoadingCommands::CResourceLoadingCommands(void) :
+m_resourceLoadedCommand(nullptr)
+{
+    
+}
+
+CResourceLoadingCommands::~CResourceLoadingCommands(void)
+{
+    m_resourceLoadedCommand = nullptr;
+}
+
+void CResourceLoadingCommands::_ConnectLoadedResourceCommand(const _RESOURCE_LOADED_COMMAND &_command)
+{
+    assert(_command != nullptr);
+    m_resourceLoadedCommand = _command;
+}
+
+void CResourceLoadingCommands::_ExecuteLoadedResourceCommand(E_RESOURCE_TYPE _resource, bool _success)
+{
+    assert(m_resourceLoadedCommand != nullptr);
+    m_resourceLoadedCommand(_resource, _success);
+}
+
+IResourceLoadingHandler::IResourceLoadingHandler(void)
+{
+    IResourceLoadingHandler::_ConnectCommands();
+}
+
+IResourceLoadingHandler::~IResourceLoadingHandler(void)
+{
+    
+}
+
+void IResourceLoadingHandler::_ConnectCommands(void)
+{
+    m_commands._ConnectLoadedResourceCommand(std::bind(&IResourceLoadingHandler::_OnResourceLoaded, this, std::placeholders::_1, std::placeholders::_2));
+}

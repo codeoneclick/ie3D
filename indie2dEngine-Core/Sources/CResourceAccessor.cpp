@@ -28,42 +28,42 @@ CResourceAccessor::~CResourceAccessor(void)
     
 }
 
-std::shared_ptr<CTexture> CResourceAccessor::CreateTexture(const std::string &_filename)
+std::shared_ptr<CTexture> CResourceAccessor::CreateTexture(const std::string &_filename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     assert(m_textureLoader != nullptr);
-    std::shared_ptr<CTexture> texture = m_textureLoader->StartLoadOperation(_filename);
+    std::shared_ptr<CTexture> texture = m_textureLoader->StartLoadOperation(_filename, _handler);
     assert(texture != nullptr);
     return texture;
 }
 
-std::shared_ptr<CShader> CResourceAccessor::CreateShader(const std::string &_vsFilename, const std::string &_fsFilename)
+std::shared_ptr<CShader> CResourceAccessor::CreateShader(const std::string &_vsFilename, const std::string &_fsFilename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     assert(m_shaderLoader != nullptr);
-    std::shared_ptr<CShader> shader = m_shaderLoader->StartLoadOperation(_vsFilename, _fsFilename);
+    std::shared_ptr<CShader> shader = m_shaderLoader->StartLoadOperation(_vsFilename, _fsFilename, _handler);
     assert(shader != nullptr);
     return shader;
 }
 
-std::shared_ptr<CMesh> CResourceAccessor::CreateMesh(const std::string &_filename)
+std::shared_ptr<CMesh> CResourceAccessor::CreateMesh(const std::string &_filename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     assert(m_meshLoader != nullptr);
-    std::shared_ptr<CMesh> mesh = m_meshLoader->StartLoadOperation(_filename);
+    std::shared_ptr<CMesh> mesh = m_meshLoader->StartLoadOperation(_filename, _handler);
     assert(mesh != nullptr);
     return mesh;
 }
 
-std::shared_ptr<CSkeleton> CResourceAccessor::CreateSkeleton(const std::string &_filename)
+std::shared_ptr<CSkeleton> CResourceAccessor::CreateSkeleton(const std::string &_filename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     assert(m_skeletonLoader != nullptr);
-    std::shared_ptr<CSkeleton> skeleton = m_skeletonLoader->StartLoadOperation(_filename);
+    std::shared_ptr<CSkeleton> skeleton = m_skeletonLoader->StartLoadOperation(_filename, _handler);
     assert(skeleton != nullptr);
     return skeleton;
 }
 
-std::shared_ptr<CSequence> CResourceAccessor::CreateSequence(const std::string &_filename)
+std::shared_ptr<CSequence> CResourceAccessor::CreateSequence(const std::string &_filename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     assert(m_sequenceLoader != nullptr);
-    std::shared_ptr<CSequence> sequence = m_sequenceLoader->StartLoadOperation(_filename);
+    std::shared_ptr<CSequence> sequence = m_sequenceLoader->StartLoadOperation(_filename, _handler);
     assert(sequence != nullptr);
     return sequence;
 }

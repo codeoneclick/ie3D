@@ -82,13 +82,13 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     
-    IGameObject::_LazyListenRenderMgr();
-    m_isLoaded = true;
+    IGameObject::_ListenRenderMgr();
+    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
 void COcean::_OnSceneUpdate(f32 _deltatime)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         m_waveGeneratorTimer += m_waveGeneratorInterval;
         IGameObject::_OnSceneUpdate(_deltatime);
@@ -102,7 +102,7 @@ i32 COcean::_OnQueuePosition(void)
 
 void COcean::_OnBind(const std::string& _renderMode)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_materials.find(_renderMode) != m_materials.end());
         IGameObject::_OnBind(_renderMode);
@@ -111,7 +111,7 @@ void COcean::_OnBind(const std::string& _renderMode)
 
 void COcean::_OnDraw(const std::string& _renderMode)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_camera != nullptr);
         assert(m_light != nullptr);
@@ -136,7 +136,7 @@ void COcean::_OnDraw(const std::string& _renderMode)
 
 void COcean::_OnUnbind(const std::string& _renderMode)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_materials.find(_renderMode) != m_materials.end());
         IGameObject::_OnUnbind(_renderMode);

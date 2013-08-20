@@ -20,7 +20,7 @@ CSkeletonLoader::~CSkeletonLoader(void)
     
 }
 
-std::shared_ptr<CSkeleton> CSkeletonLoader::StartLoadOperation(const std::string &_filename)
+std::shared_ptr<CSkeleton> CSkeletonLoader::StartLoadOperation(const std::string &_filename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     std::string guid = _filename;
     std::shared_ptr<CSkeleton> resource = nullptr;

@@ -20,7 +20,7 @@ CMeshLoader::~CMeshLoader(void)
     
 }
 
-std::shared_ptr<CMesh> CMeshLoader::StartLoadOperation(const std::string &_filename)
+std::shared_ptr<CMesh> CMeshLoader::StartLoadOperation(const std::string &_filename, std::shared_ptr<IResourceLoadingHandler> _handler)
 {
     std::string guid = _filename;
     std::shared_ptr<CMesh> resource = nullptr;

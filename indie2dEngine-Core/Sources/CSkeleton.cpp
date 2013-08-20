@@ -45,12 +45,12 @@ void CSkeleton::_Serialize(std::ifstream &_stream)
         }
         CSkeleton::AddBone(bone);
     }
-    m_isLoaded = true;
+    m_status |= E_RESOURCE_STATUS_LOADED;
 }
 
 void CSkeleton::_BindSkeleton(void)
 {
-    m_isLinked = true;
+    m_status |= E_RESOURCE_STATUS_COMMITED;
 }
 
 

@@ -82,8 +82,8 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
-    IGameObject::_LazyListenRenderMgr();
-    m_isLoaded = true;
+    IGameObject::_ListenRenderMgr();
+    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
 void CParticleEmitter::_EmittParticle(ui32 _index)
@@ -109,7 +109,7 @@ void CParticleEmitter::_EmittParticle(ui32 _index)
 
 void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
 {
-    if(m_isLoaded)
+    if( m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         IGameObject::_OnSceneUpdate(_deltatime);
         
@@ -184,7 +184,7 @@ i32 CParticleEmitter::_OnQueuePosition(void)
 
 void CParticleEmitter::_OnBind(const std::string& _renderMode)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_materials.find(_renderMode) != m_materials.end());
         IGameObject::_OnBind(_renderMode);
@@ -193,7 +193,7 @@ void CParticleEmitter::_OnBind(const std::string& _renderMode)
 
 void CParticleEmitter::_OnDraw(const std::string& _renderMode)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_camera != nullptr);
         assert(m_light != nullptr);
@@ -206,17 +206,13 @@ void CParticleEmitter::_OnDraw(const std::string& _renderMode)
         material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         
-        //material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        //material->Get_Shader()->Set_Vector3(m_light->Get_Position(), E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION);
-        //material->Get_Shader()->Set_Vector4(glm::vec4(0.0f, 1.0f, 0.0f, FLT_MAX), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
-        
         IGameObject::_OnDraw(_renderMode);
     }
 }
 
 void CParticleEmitter::_OnUnbind(const std::string &_renderMode)
 {
-    if(m_isLoaded)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_materials.find(_renderMode) != m_materials.end());
         IGameObject::_OnUnbind(_renderMode);

@@ -29,6 +29,7 @@ protected:
     void _OnUnbind(const std::string& _renderMode);
     
     void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    void _OnResourceLoaded(E_RESOURCE_TYPE _resource, bool _success);
     
 public:
     

@@ -32,8 +32,7 @@ m_boundBox(nullptr),
 m_debugBoundBoxMaterial(nullptr),
 m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
-m_isLoaded(false),
-m_isLazyListening(false)
+m_status(E_LOADING_STATUS_UNLOADED)
 {
 
 }
@@ -125,16 +124,14 @@ void IGameObject::ListenRenderMgr(bool _value)
         _value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
         m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
     }
-    m_isLazyListening = _value && !m_materials.size();
 }
-void IGameObject::_LazyListenRenderMgr(void)
+void IGameObject::_ListenRenderMgr(void)
 {
     assert(m_renderMgr != nullptr);
     for(auto iterator : m_materials)
     {
         m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
     }
-    m_isLazyListening = false;
 }
 
 void IGameObject::ListenSceneUpdateMgr(bool _value)
@@ -147,6 +144,34 @@ void IGameObject::ListenSceneUpdateMgr(bool _value)
 void IGameObject::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
     assert(false);
+}
+
+void IGameObject::_OnResourceLoaded(E_RESOURCE_TYPE _resource, bool _success)
+{
+    switch (_resource)
+    {
+        case E_RESOURCE_TYPE_SHADER:
+        {
+            m_status |= E_LOADING_STATUS_SHADER_LOADED;
+        }
+            break;
+        case E_RESOURCE_TYPE_MESH:
+        {
+            m_status |= E_LOADING_STATUS_MESH_LOADED;
+        }
+            break;
+        case E_RESOURCE_TYPE_SKELETON:
+        {
+            m_status |= E_LOADING_STATUS_SKELETON_LOADED;
+        }
+            break;
+        case E_RESOURCE_TYPE_SEQUENCE:
+        {
+            m_status |= E_LOADING_STATUS_SEQUENCE_LOADED;
+        }
+        default:
+            break;
+    }
 }
 
 void IGameObject::_OnSceneUpdate(f32 _deltatime)

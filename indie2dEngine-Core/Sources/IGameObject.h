@@ -14,6 +14,7 @@
 #include "IRenderHandler.h"
 #include "ISceneUpdateHandler.h"
 #include "ITemplateLoadingHandler.h"
+#include "IResourceLoadingHandler.h"
 
 class CCamera;
 class CLight;
@@ -32,7 +33,8 @@ class IGameObject :
 public std::enable_shared_from_this<IGameObject>,
 public IRenderHandler,
 public ISceneUpdateHandler,
-public ITemplateLoadingHandler
+public ITemplateLoadingHandler,
+public IResourceLoadingHandler
 {
 private:
     
@@ -61,12 +63,14 @@ protected:
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
     std::shared_ptr<CResourceAccessor> m_resourceFabricator;
     
-    bool m_isLoaded;
-    bool m_isLazyListening;
+    ui8 m_status;
     
     bool _IsBoundBoxInFrustum(void);
     
     virtual void _OnSceneUpdate(f32 _deltatime);
+    
+    virtual void _OnResourceLoaded(E_RESOURCE_TYPE _resource, bool _success);
+    virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
     
     virtual i32 _OnQueuePosition(void);
     virtual bool _OnOcclusion(void);
@@ -75,10 +79,8 @@ protected:
     virtual void _OnDraw(const std::string& _renderMode);
     virtual void _OnUnbind(const std::string& _renderMode);
     virtual void _OnDebugDraw(const std::string& _renderMode);
-    
-    virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
-    
-    virtual void _LazyListenRenderMgr(void);
+
+    virtual void _ListenRenderMgr(void);
     
 public:
     

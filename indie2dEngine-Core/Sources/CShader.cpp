@@ -122,12 +122,12 @@ void CShader::_Set_Handle(ui32 _handle)
     m_attributes[E_SHADER_ATTRIBUTE_TANGENT] = glGetAttribLocation(m_handle, SAttributes.m_tangent.c_str());
     m_attributes[E_SHADER_ATTRIBUTE_COLOR] = glGetAttribLocation(m_handle, SAttributes.m_color.c_str());
     
-    m_isLinked = true;
+    m_status |= E_RESOURCE_STATUS_COMMITED;
 }
 
 void CShader::Set_Matrix3x3(const glm::mat3x3 &_matrix, E_SHADER_UNIFORM _uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
         glUniformMatrix3fv(handle, 1, 0, &_matrix[0][0]);
@@ -136,7 +136,7 @@ void CShader::Set_Matrix3x3(const glm::mat3x3 &_matrix, E_SHADER_UNIFORM _unifor
 
 void CShader::Set_Matrix3x3Custom(const glm::mat3x3 &_matrix, const std::string &_uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniformMatrix3fv(handle, 1, 0, &_matrix[0][0]);
@@ -145,7 +145,7 @@ void CShader::Set_Matrix3x3Custom(const glm::mat3x3 &_matrix, const std::string 
 
 void CShader::Set_Matrix4x4(const glm::mat4x4 &_matrix, E_SHADER_UNIFORM _uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
         glUniformMatrix4fv(handle, 1, 0, &_matrix[0][0]);
@@ -154,7 +154,7 @@ void CShader::Set_Matrix4x4(const glm::mat4x4 &_matrix, E_SHADER_UNIFORM _unifor
 
 void CShader::Set_Matrix4x4Custom(const glm::mat4x4 &_matrix, const std::string &_uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniformMatrix4fv(handle, 1, 0, &_matrix[0][0]);
@@ -163,7 +163,7 @@ void CShader::Set_Matrix4x4Custom(const glm::mat4x4 &_matrix, const std::string 
 
 void CShader::Set_Vector2(const glm::vec2 &_vector, E_SHADER_UNIFORM _uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
         glUniform2fv(handle, 1, &_vector[0]);
@@ -172,7 +172,7 @@ void CShader::Set_Vector2(const glm::vec2 &_vector, E_SHADER_UNIFORM _uniform)
 
 void CShader::Set_Vector2Custom(const glm::vec2 &_vector, const std::string &_uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniform2fv(handle, 1, &_vector[0]);
@@ -181,7 +181,7 @@ void CShader::Set_Vector2Custom(const glm::vec2 &_vector, const std::string &_un
 
 void CShader::Set_Vector3(const glm::vec3 &_vector, E_SHADER_UNIFORM _uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
         glUniform3fv(handle, 1, &_vector[0]);
@@ -190,7 +190,7 @@ void CShader::Set_Vector3(const glm::vec3 &_vector, E_SHADER_UNIFORM _uniform)
 
 void CShader::Set_Vector3Custom(const glm::vec3 &_vector, const std::string &_uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniform3fv(handle, 1, &_vector[0]);
@@ -199,7 +199,7 @@ void CShader::Set_Vector3Custom(const glm::vec3 &_vector, const std::string &_un
 
 void CShader::Set_Vector4(const glm::vec4 &_vector, E_SHADER_UNIFORM _uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
         glUniform4fv(handle, 1, &_vector[0]);
@@ -208,7 +208,7 @@ void CShader::Set_Vector4(const glm::vec4 &_vector, E_SHADER_UNIFORM _uniform)
 
 void CShader::Set_Vector4Custom(const glm::vec4 &_vector, const std::string &_uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniform4fv(handle, 1, &_vector[0]);
@@ -217,7 +217,7 @@ void CShader::Set_Vector4Custom(const glm::vec4 &_vector, const std::string &_un
 
 void CShader::Set_Float(f32 _value, E_SHADER_UNIFORM _uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
         glUniform1f(handle, _value);
@@ -226,7 +226,7 @@ void CShader::Set_Float(f32 _value, E_SHADER_UNIFORM _uniform)
 
 void CShader::Set_FloatCustom(f32 _value, const std::string &_uniform)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniform1f(handle, _value);
@@ -235,7 +235,7 @@ void CShader::Set_FloatCustom(f32 _value, const std::string &_uniform)
 
 void CShader::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         glActiveTexture(GL_TEXTURE0 + _sampler);
         _texture->Bind();
@@ -245,7 +245,7 @@ void CShader::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _
 
 void CShader::Bind(void)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         glUseProgram(m_handle);
     }
@@ -253,7 +253,7 @@ void CShader::Bind(void)
 
 void CShader::Unbind(void)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         glUseProgram(NULL);
     }

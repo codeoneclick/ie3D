@@ -35,7 +35,7 @@ protected:
     {
         m_vsSourceCode = _vsSourceCode;
         m_fsSourceCode = _fsSourceCode;
-        m_isLoaded = true;
+        m_status |= E_RESOURCE_STATUS_LOADED;
     };
 
 #ifdef TESTING

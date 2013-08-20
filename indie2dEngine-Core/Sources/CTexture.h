@@ -128,7 +128,7 @@ protected:
     inline void _Set_Header(std::shared_ptr<CTextureHeader> _header)
     {
         m_header = _header;
-        m_isLoaded = true;
+        m_status |= E_RESOURCE_STATUS_LOADED;
     };
 
 #ifdef TESTING
@@ -147,7 +147,7 @@ protected:
     inline void _Set_Handle(ui32 _handle)
     {
         m_handle = _handle;
-        m_isLinked = true;
+        m_status |= E_RESOURCE_STATUS_COMMITED;
     };
  
 public:

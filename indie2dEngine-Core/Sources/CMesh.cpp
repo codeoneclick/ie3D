@@ -82,8 +82,8 @@ m_indexBuffer(_indexBuffer)
         }
     }
 
-    m_isLoaded = true;
-    m_isLinked = true;
+    m_status |= E_RESOURCE_STATUS_LOADED;
+    m_status |= E_RESOURCE_STATUS_COMMITED;
 }
 
 CMesh::~CMesh(void)
@@ -95,7 +95,7 @@ void CMesh::_Set_Header(std::shared_ptr<CMeshHeader> _header)
 {
     assert(_header != nullptr);
     m_header = _header;
-    m_isLoaded = true;
+    m_status |= E_RESOURCE_STATUS_LOADED;
     
     for(auto bound : m_bounds)
     {
@@ -114,7 +114,7 @@ std::shared_ptr<CAABoundBox> CMesh::CreateBoundBox(void)
 
 void CMesh::Bind(const i32 *_attributes)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
@@ -125,7 +125,7 @@ void CMesh::Bind(const i32 *_attributes)
 
 void CMesh::Draw(void)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
@@ -135,7 +135,7 @@ void CMesh::Draw(void)
 
 void CMesh::Unbind(const i32 *_attributes)
 {
-    if(m_isLoaded && m_isLinked)
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
