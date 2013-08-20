@@ -7,9 +7,10 @@
 //
 
 #include "IResource.h"
+#include "IResourceLoadingHandler.h"
 
-IResource::IResource(E_RESOURCE_TYPE _resourceType, const std::string& _guid) :
-m_resourceType(_resourceType),
+IResource::IResource(E_RESOURCE_CLASS _class, const std::string& _guid) :
+m_class(_class),
 m_guid(_guid),
 m_status(E_RESOURCE_STATUS_UNLOADED)
 {
@@ -18,5 +19,29 @@ m_status(E_RESOURCE_STATUS_UNLOADED)
 
 IResource::~IResource(void)
 {
-    
+    m_handlers.clear();
+}
+
+void IResource::RegisterResourceLoadingHandler(std::shared_ptr<IResourceLoadingHandler> _handler)
+{
+    if(_handler == nullptr)
+    {
+        return;
+    }
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    {
+        _handler->_Get_Commands()._ExecuteLoadedResourceCommand(shared_from_this(), true);
+    }
+    else
+    {
+        m_handlers.insert(_handler);
+    }
+}
+
+void IResource::ExecuteResourceLoadingHandlers(void)
+{
+    for(auto handler : m_handlers)
+    {
+        handler->_Get_Commands()._ExecuteLoadedResourceCommand(shared_from_this(), true);
+    }
 }

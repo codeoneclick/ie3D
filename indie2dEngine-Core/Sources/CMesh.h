@@ -11,24 +11,8 @@
 
 #include "IResource.h"
 
-#define MAX_WEIGHTS 8
-
-struct SVertexWeight
-{
-	f32 m_weigth;
-	i32	m_boneId;
-};
-
-struct SVertexBind
-{
-    glm::vec3 m_bindPosition;
-    glm::vec3 m_bindNormal;
-    glm::vec3 m_bindTangent;
-	i32	m_numWeights;
-	SVertexWeight m_weights[MAX_WEIGHTS];
-};
-
 struct SVertex;
+struct SSourceVertex;
 class CMeshHeader final
 {
 private:
@@ -41,7 +25,7 @@ protected:
     
     SVertex* m_vertexData;
     ui16* m_indexData;
-    SVertexBind* m_vertexBindData;
+    SSourceVertex* m_sourceData;
     
     ui32 m_numIndexes;
     ui32 m_numVertexes;
@@ -55,9 +39,9 @@ protected:
         m_numVertexes = _numVertexes;
     };
     
-    inline void _Set_VertexBindData(SVertexBind* _vertexBindData)
+    inline void _Set_SourceData(SSourceVertex* _sourceData)
     {
-        m_vertexBindData = _vertexBindData;
+        m_sourceData = _sourceData;
     };
     
     inline void _Set_IndexData(ui16* _indexData, ui32 _numIndexes)
@@ -175,10 +159,10 @@ public:
         return m_indexBuffer;
     };
     
-    inline SVertexBind* Get_VertexBindData(void)
+    inline SSourceVertex* Get_SourceData(void)
     {
         assert(m_header != nullptr);
-        return m_header->m_vertexBindData;
+        return m_header->m_sourceData;
     };
     
     inline const ui32 Get_NumVertexes(void)

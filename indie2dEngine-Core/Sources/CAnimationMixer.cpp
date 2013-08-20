@@ -19,8 +19,8 @@ m_oldSequence(nullptr),
 m_currentSequence(nullptr),
 m_animationTime(0.0f)
 {
-    //m_skeletonGuid = m_skeleton->CreateTransformations();
-    //m_vertexBufferGuid = m_mesh->Get_VertexBuffer()->CreateReference();
+    m_skeletonGuid = m_skeleton->CreateTransformations();
+    m_vertexBufferGuid = m_mesh->Get_VertexBuffer()->CreateReference();
 }
 
 CAnimationMixer::~CAnimationMixer(void)
@@ -113,10 +113,7 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
     
     _deltatime = 0.02f;
     
-    if(m_currentSequence &&
-       m_currentSequence->IsLinked() &&
-       m_skeleton->IsLinked() &&
-       m_mesh->IsLinked())
+    if(m_currentSequence)
     {
         m_animationTime += _deltatime;
         
@@ -148,37 +145,62 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
             }
             m_skeleton->Update(m_skeletonGuid);
             
-            SVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock();
+            SVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock(m_vertexBufferGuid);
             for(i32 i = 0; i <  m_mesh->Get_VertexBuffer()->Get_Size(); ++i)
             {
                 glm::vec3 bonePosition(0.0f);
-                for(i32 j = 0; j < m_mesh->Get_VertexBindData()[i].m_numWeights; ++j)
+                for(i32 j = 0; j < m_mesh->Get_SourceData()[i].m_bones.size(); ++j)
                 {
-                    std::shared_ptr<CBone> bone = m_skeleton->Get_Bone(m_mesh->Get_VertexBindData()[i].m_weights[j].m_boneId);
+                    std::shared_ptr<CBone> bone = m_skeleton->Get_Bone(m_mesh->Get_SourceData()[i].m_bones[j].m_id);
                     
                     glm::mat4x4 boneTransformation = (*bone->Get_Transformation());
                     
-                    f32 weight = m_mesh->Get_VertexBindData()[i].m_weights[j].m_weigth;
+                    f32 weight = m_mesh->Get_SourceData()[i].m_bones[j].m_weigth;
                     if(j == 0)
                     {
-                        bonePosition = glm::transform(m_mesh->Get_VertexBindData()[i].m_bindPosition, boneTransformation) * weight;
+                        bonePosition = glm::transform(m_mesh->Get_SourceData()[i].m_position, boneTransformation) * weight;
                     }
                     else
                     {
-                        bonePosition += glm::transform(m_mesh->Get_VertexBindData()[i].m_bindPosition, boneTransformation) * weight;
+                        bonePosition += glm::transform(m_mesh->Get_SourceData()[i].m_position, boneTransformation) * weight;
                     }
                 }
                 vertexData[i].m_position = bonePosition;
+                vertexData[i].m_texcoord = m_mesh->Get_SourceData()[i].m_texcoord;
             }
             
-            std::function<void(void)> main = [this]()
+            /*std::function<void(void)> main = [this]()
             {
-                m_mesh->Get_VertexBuffer()->Unlock();
+                m_mesh->Get_VertexBuffer()->Unlock(m_vertexBufferGuid);
             };
-            gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
+            gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);*/
         };
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
     }
+    else
+    {
+        std::function<void(void)> function = [this]()
+        {
+            SVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock(m_vertexBufferGuid);
+            for(i32 i = 0; i <  m_mesh->Get_VertexBuffer()->Get_Size(); ++i)
+            {
+                vertexData[i].m_position = m_mesh->Get_SourceData()[i].m_position;
+                vertexData[i].m_texcoord = m_mesh->Get_SourceData()[i].m_texcoord;
+            }
+            
+            /*std::function<void(void)> main = [this]()
+            {
+                m_mesh->Get_VertexBuffer()->Unlock(m_vertexBufferGuid);
+            };
+            gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);*/
+        };
+        gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
+    }
+}
+
+void CAnimationMixer::OnDraw(void)
+{
+    m_mesh->Get_VertexBuffer()->Unlock(m_vertexBufferGuid);
 }
 
 

@@ -34,15 +34,6 @@ CKOTHInGameScene::~CKOTHInGameScene(void)
     
 }
 
-enum E_FLAGS
-{
-    E_FLAGS_UNLOADED = 1,
-    E_FLAGS_MATERIAL_LOADED = 2,
-    E_FLAGS_MESH_LOADED = 4,
-    E_FLAGS_SKELETON_LOADED = 8,
-    E_FLAGS_LOADED = 16
-};
-
 void CKOTHInGameScene::Load(void)
 {
     assert(m_root != nullptr);
@@ -54,29 +45,6 @@ void CKOTHInGameScene::Load(void)
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
     m_camera->Set_Distance(16.0f);
     m_camera->Set_Height(16.0f);
-    
-    i32 flag = E_FLAGS_UNLOADED;
-    
-    flag |= E_FLAGS_MESH_LOADED;
-    
-    //flag |= E_FLAGS_MATERIAL_LOADED;
-    
-    flag |= E_FLAGS_SKELETON_LOADED;
-    
-    if(flag & E_FLAGS_MESH_LOADED)
-    {
-        std::cout<<"E_FLAGS_MESH_LOADED"<<std::endl;
-    }
-    
-    if(flag & E_FLAGS_MATERIAL_LOADED)
-    {
-        std::cout<<"E_FLAGS_MATERIAL_LOADED"<<std::endl;
-    }
-    
-    if(flag & E_FLAGS_SKELETON_LOADED)
-    {
-        std::cout<<"E_FLAGS_SKELETON_LOADED"<<std::endl;
-    }
     
     m_light = m_root->CreateLight();
     m_light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));
@@ -126,8 +94,8 @@ void CKOTHInGameScene::Load(void)
 void CKOTHInGameScene::OnUpdate(f32 _deltatime)
 {
     static float angle = 0.0f;
-    //m_models[0]->Set_Animation("model_02.MDL_anim");
-    //m_models[1]->Set_Animation("model_01.MDL_anim");
+    m_models[0]->Set_Animation("model_02.MDL_anim");
+    m_models[1]->Set_Animation("model_01.MDL_anim");
     angle += 0.01f;
     
     static glm::vec3 lightPosition = glm::vec3(0.0f);

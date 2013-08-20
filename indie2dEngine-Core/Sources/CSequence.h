@@ -63,6 +63,7 @@ protected:
     
     std::vector<std::shared_ptr<CFrame> > m_frames;
     i32 m_fps;
+    std::string m_name;
     void _Serialize(std::ifstream& _stream);
     void _BindSequence(void);
     
@@ -76,9 +77,19 @@ public:
 		return m_frames.size();
 	};
     
-    inline i32 Get_Fps(void)
+    inline const i32 Get_Fps(void) const
     {
         return m_fps;
+    };
+    
+    inline void Set_Name(const std::string _name)
+    {
+        m_name = _name;
+    };
+    
+    inline const std::string Get_Name(void) const
+    {
+        return m_name;
     };
     
 	inline std::shared_ptr<CFrame> Get_AnimationFrame(i32 _index) const

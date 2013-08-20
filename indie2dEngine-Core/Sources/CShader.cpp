@@ -79,7 +79,7 @@ const struct SSamplers SSamplers =
 };
 
 CShader::CShader(const std::string& _guid) :
-IResource(E_RESOURCE_TYPE_SHADER, _guid),
+IResource(E_RESOURCE_CLASS_SHADER, _guid),
 m_handle(0)
 {
     m_attributes[E_SHADER_ATTRIBUTE_POSITION] = -1;

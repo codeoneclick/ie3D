@@ -41,7 +41,7 @@ void CFrame::_Serialize(std::ifstream &_stream)
 }
 
 CSequence::CSequence(const std::string& _guid) :
-IResource(E_RESOURCE_TYPE_SEQUENCE, _guid),
+IResource(E_RESOURCE_CLASS_SEQUENCE, _guid),
 m_fps(30)
 {
     

@@ -45,6 +45,7 @@ public:
     void MixAnimation(const std::string& _name);
     void GoTo(const std::string& _name, i32 _frame);
     void OnUpdate(f32 _deltatime);
+    void OnDraw(void);
 };
 
 #endif 

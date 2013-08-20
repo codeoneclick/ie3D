@@ -146,26 +146,26 @@ void IGameObject::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     assert(false);
 }
 
-void IGameObject::_OnResourceLoaded(E_RESOURCE_TYPE _resource, bool _success)
+void IGameObject::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)
 {
-    switch (_resource)
+    switch (_resource->Get_Class())
     {
-        case E_RESOURCE_TYPE_SHADER:
+        case E_RESOURCE_CLASS_SHADER:
         {
             m_status |= E_LOADING_STATUS_SHADER_LOADED;
         }
             break;
-        case E_RESOURCE_TYPE_MESH:
+        case E_RESOURCE_CLASS_MESH:
         {
             m_status |= E_LOADING_STATUS_MESH_LOADED;
         }
             break;
-        case E_RESOURCE_TYPE_SKELETON:
+        case E_RESOURCE_CLASS_SKELETON:
         {
             m_status |= E_LOADING_STATUS_SKELETON_LOADED;
         }
             break;
-        case E_RESOURCE_TYPE_SEQUENCE:
+        case E_RESOURCE_CLASS_SEQUENCE:
         {
             m_status |= E_LOADING_STATUS_SEQUENCE_LOADED;
         }

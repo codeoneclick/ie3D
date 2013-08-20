@@ -20,14 +20,14 @@ private:
 protected:
     
     std::string m_guid;
-    E_RESOURCE_TYPE m_resourceType;
+    E_RESOURCE_CLASS m_class;
     ui8 m_status;
     
     std::set<std::shared_ptr<IResourceLoadingHandler>> m_handlers;
     
 public:
     
-    IResource(E_RESOURCE_TYPE _resourceType, const std::string& _guid);
+    IResource(E_RESOURCE_CLASS _class, const std::string& _guid);
     virtual ~IResource(void);
     
     inline const std::string Get_Guid(void)
@@ -35,9 +35,9 @@ public:
         return m_guid;
     };
     
-    inline const E_RESOURCE_TYPE Get_ResourceType(void)
+    inline const E_RESOURCE_CLASS Get_Class(void)
     {
-        return m_resourceType;
+        return m_class;
     };
     
     inline const bool IsLoaded(void)

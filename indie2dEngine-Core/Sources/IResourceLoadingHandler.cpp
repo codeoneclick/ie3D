@@ -25,7 +25,7 @@ void CResourceLoadingCommands::_ConnectLoadedResourceCommand(const _RESOURCE_LOA
     m_resourceLoadedCommand = _command;
 }
 
-void CResourceLoadingCommands::_ExecuteLoadedResourceCommand(E_RESOURCE_TYPE _resource, bool _success)
+void CResourceLoadingCommands::_ExecuteLoadedResourceCommand(std::shared_ptr<IResource> _resource, bool _success)
 {
     assert(m_resourceLoadedCommand != nullptr);
     m_resourceLoadedCommand(_resource, _success);

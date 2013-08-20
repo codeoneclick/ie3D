@@ -16,18 +16,21 @@
 #include "ITemplate.h"
 #include "CAABoundBox.h"
 #include "CMesh.h"
+#include "CSkeleton.h"
+#include "CSequence.h"
 #include "CAnimationMixer.h"
 
 CModel::CModel(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 IGameObject(_resourceFabricator),
-m_animationMixer(nullptr)
+m_animationMixer(nullptr),
+m_skeleton(nullptr)
 {
     
 }
 
 CModel::~CModel(void)
 {
-    
+    m_sequences.clear();
 }
 
 void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
@@ -35,13 +38,14 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(_template);
     assert(m_resourceFabricator != nullptr);
     m_mesh = m_resourceFabricator->CreateMesh(modelTemplate->m_meshFilename);
+    m_mesh->RegisterResourceLoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
     
     if(modelTemplate->m_skeletonFilename.size() != 0)
     {
-        std::shared_ptr<CSkeleton> skeleton = m_resourceFabricator->CreateSkeleton(modelTemplate->m_skeletonFilename);
-        assert(skeleton != nullptr);
-        m_animationMixer = std::make_shared<CAnimationMixer>(m_mesh, skeleton);
+        m_skeleton = m_resourceFabricator->CreateSkeleton(modelTemplate->m_skeletonFilename);
+        assert(m_skeleton != nullptr);
+        m_skeleton->RegisterResourceLoadingHandler(shared_from_this());
     }
     
     for(auto materialTemplate : modelTemplate->m_materialsTemplates)
@@ -55,11 +59,13 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     
-    for(auto animationTemplate : modelTemplate->m_sequencesFilenames)
+    for(auto name : modelTemplate->m_sequencesFilenames)
     {
-        std::shared_ptr<CSequence> sequence = m_resourceFabricator->CreateSequence(animationTemplate);
+        std::shared_ptr<CSequence> sequence = m_resourceFabricator->CreateSequence(name);
         assert(sequence != nullptr);
-        m_animationMixer->AddSequence(animationTemplate, sequence);
+        sequence->Set_Name(name);
+        m_sequences.insert(sequence);
+        sequence->RegisterResourceLoadingHandler(shared_from_this());
     }
     
     m_boundBox = m_mesh->CreateBoundBox();
@@ -82,10 +88,31 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-void CModel::_OnResourceLoaded(E_RESOURCE_TYPE _resource, bool _success)
+void CModel::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)
 {
     IGameObject::_OnResourceLoaded(_resource, _success);
-    
+    if(((_resource->Get_Class() == E_RESOURCE_CLASS_SKELETON && (m_status & E_LOADING_STATUS_MESH_LOADED)) ||
+        (_resource->Get_Class() == E_RESOURCE_CLASS_MESH && (m_status & E_LOADING_STATUS_SKELETON_LOADED))) &&
+        m_animationMixer == nullptr)
+    {
+        m_animationMixer = std::make_shared<CAnimationMixer>(m_mesh, m_skeleton);
+        for(auto sequence : m_sequences)
+        {
+            if(sequence->IsLinked() && sequence->IsLoaded())
+            {
+                m_animationMixer->AddSequence(sequence->Get_Name(), sequence);
+            }
+        }
+    }
+    if(_resource->Get_Class() == E_RESOURCE_CLASS_SEQUENCE)
+    {
+        auto sequence = std::find(m_sequences.begin(), m_sequences.end(), _resource);
+        assert(sequence != m_sequences.end());
+        if(m_animationMixer != nullptr)
+        {
+            m_animationMixer->AddSequence((*sequence)->Get_Name(), (*sequence));
+        }
+    }
 }
 
 void CModel::Set_Animation(const std::string &_name)
@@ -126,6 +153,11 @@ void CModel::_OnDraw(const std::string& _renderMode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
+        if(m_animationMixer != nullptr)
+        {
+            m_animationMixer->OnDraw();
+        }
+        
         assert(m_camera != nullptr);
         assert(m_light != nullptr);
         assert(m_materials.find(_renderMode) != m_materials.end());

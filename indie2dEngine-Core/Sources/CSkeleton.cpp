@@ -12,7 +12,7 @@
 #include "CIndexBuffer.h"
 
 CSkeleton::CSkeleton(const std::string& _guid) :
-IResource(E_RESOURCE_TYPE_SKELETON, _guid),
+IResource(E_RESOURCE_CLASS_SKELETON, _guid),
 m_numBones(0),
 m_boneWidth(3.0f)
 {

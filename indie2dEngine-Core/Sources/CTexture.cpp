@@ -22,7 +22,7 @@ CTextureHeader::~CTextureHeader(void)
 }
 
 CTexture::CTexture(const std::string& _guid) :
-IResource(E_RESOURCE_TYPE_TEXTURE, _guid),
+IResource(E_RESOURCE_CLASS_TEXTURE, _guid),
 m_handle(0),
 m_header(nullptr),
 m_wrap(GL_REPEAT)

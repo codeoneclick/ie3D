@@ -21,7 +21,7 @@ struct SBone
 
 struct SSourceVertex
 {
-    glm::vec3 m_positions;
+    glm::vec3 m_position;
     glm::vec2 m_texcoord;
     glm::vec3 m_normal;
     glm::vec3 m_tangent;

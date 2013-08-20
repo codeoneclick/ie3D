@@ -35,5 +35,6 @@ std::shared_ptr<CMesh> CMeshLoader::StartLoadOperation(const std::string &_filen
         m_resourceContainer.insert(std::make_pair(guid, resource));
         m_operationsQueue.insert(std::make_pair(guid, operation));
     }
+    resource->RegisterResourceLoadingHandler(_handler);
     return resource;
 }

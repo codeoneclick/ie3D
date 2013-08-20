@@ -16,7 +16,7 @@
 CMeshHeader::CMeshHeader(void) :
 m_vertexData(nullptr),
 m_indexData(nullptr),
-m_vertexBindData(nullptr),
+m_sourceData(nullptr),
 m_numIndexes(0),
 m_numVertexes(0),
 m_maxBound(glm::vec3(-4096.0f)),
@@ -29,11 +29,11 @@ CMeshHeader::~CMeshHeader(void)
 {
     delete[] m_vertexData;
     delete[] m_indexData;
-    delete[] m_vertexBindData;
+    delete[] m_sourceData;
 }
 
 CMesh::CMesh(const std::string& _guid) :
-IResource(E_RESOURCE_TYPE_MESH, _guid),
+IResource(E_RESOURCE_CLASS_MESH, _guid),
 m_header(nullptr),
 m_vertexBuffer(nullptr),
 m_indexBuffer(nullptr)
@@ -42,7 +42,7 @@ m_indexBuffer(nullptr)
 }
 
 CMesh::CMesh(const std::string& _guid, std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer) :
-IResource(E_RESOURCE_TYPE_MESH, _guid),
+IResource(E_RESOURCE_CLASS_MESH, _guid),
 m_header(std::make_shared<CMeshHeader>()),
 m_vertexBuffer(_vertexBuffer),
 m_indexBuffer(_indexBuffer)

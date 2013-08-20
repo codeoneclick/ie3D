@@ -12,13 +12,15 @@
 #include "HCommon.h"
 #include "HEnums.h"
 
+class IResource;
 class CResourceLoadingCommands final
 {
 private:
     
+    friend class IResource;
     friend class IResourceLoadingHandler;
     
-    typedef std::function<void(E_RESOURCE_TYPE _resource, bool _success)> _RESOURCE_LOADED_COMMAND;
+    typedef std::function<void(std::shared_ptr<IResource> _resource, bool _success)> _RESOURCE_LOADED_COMMAND;
     
     _RESOURCE_LOADED_COMMAND m_resourceLoadedCommand;
     
@@ -27,7 +29,7 @@ protected:
     CResourceLoadingCommands(void);
     
     void _ConnectLoadedResourceCommand(const _RESOURCE_LOADED_COMMAND& _command);
-    void _ExecuteLoadedResourceCommand(E_RESOURCE_TYPE _resource, bool _success);
+    void _ExecuteLoadedResourceCommand(std::shared_ptr<IResource> _resource, bool _success);
     
 public:
     
@@ -37,6 +39,8 @@ public:
 class IResourceLoadingHandler
 {
 private:
+    
+    friend class IResource;
     
     CResourceLoadingCommands m_commands;
     
@@ -50,7 +54,7 @@ protected:
     
     IResourceLoadingHandler(void);
     
-    virtual void _OnResourceLoaded(E_RESOURCE_TYPE _resource, bool _success) = 0;
+    virtual void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success) = 0;
     
 public:
     

@@ -11,6 +11,8 @@
 
 #include "IGameObject.h"
 
+class CSkeleton;
+class CSequence;
 class CAnimationMixer;
 
 class CModel final : public IGameObject
@@ -19,6 +21,8 @@ private:
     
 protected:
     
+    std::shared_ptr<CSkeleton> m_skeleton;
+    std::set<std::shared_ptr<CSequence>> m_sequences;
     std::shared_ptr<CAnimationMixer> m_animationMixer;
     
     void _OnSceneUpdate(f32 _deltatime);
@@ -29,7 +33,7 @@ protected:
     void _OnUnbind(const std::string& _renderMode);
     
     void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
-    void _OnResourceLoaded(E_RESOURCE_TYPE _resource, bool _success);
+    void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
     
 public:
     

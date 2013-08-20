@@ -49,7 +49,7 @@ void CMeshSerializer_MDL::Serialize(void)
     filestream.read((char*)&header->m_numIndexes, sizeof(ui32));
     
     header->m_vertexData = new SVertex[header->m_numVertexes];
-    header->m_vertexBindData = new SVertexBind[header->m_numVertexes];
+    header->m_sourceData = new SSourceVertex[header->m_numVertexes];
     
     for(ui32 i = 0; i < header->m_numVertexes; ++i)
     {
@@ -65,19 +65,17 @@ void CMeshSerializer_MDL::Serialize(void)
         i32 numWeights = 0;
         filestream.read((char*)&numWeights, sizeof(i32));
 
-        header->m_vertexBindData[i].m_bindPosition = position;
-        header->m_vertexBindData[i].m_bindNormal = normal;
-        header->m_vertexBindData[i].m_bindTangent = tangent;
-        header->m_vertexBindData[i].m_numWeights = numWeights;
+        header->m_sourceData[i].m_position = position;
+        header->m_sourceData[i].m_texcoord = texcoord;
+        header->m_sourceData[i].m_normal = normal;
+        header->m_sourceData[i].m_tangent = tangent;
         
         for(ui32 j = 0; j < numWeights; ++j)
         {
-            i32 boneId;
-            filestream.read((char*)&boneId, sizeof(i32));
-            f32 weight;
-            filestream.read((char*)&weight, sizeof(f32));
-            header->m_vertexBindData[i].m_weights[j].m_boneId = boneId;
-            header->m_vertexBindData[i].m_weights[j].m_weigth = weight;
+            SBone bone;
+            filestream.read((char*)&bone.m_id, sizeof(i32));
+            filestream.read((char*)&bone.m_weigth, sizeof(f32));
+            header->m_sourceData[i].m_bones.push_back(bone);
         }
         
 		header->m_vertexData[i].m_position = position;
