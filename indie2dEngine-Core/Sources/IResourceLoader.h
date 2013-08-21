@@ -26,7 +26,7 @@ protected:
     
     std::mutex m_mutex;
     std::thread m_thread;
-    std::atomic_int m_isRunning;
+    std::atomic_char m_isRunning;
     
     virtual void _OnGameLoopUpdate(f32 _deltatime);
     virtual void _Thread(void);

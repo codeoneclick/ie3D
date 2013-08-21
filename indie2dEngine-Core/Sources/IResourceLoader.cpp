@@ -11,10 +11,10 @@
 #include "IResourceLoadingOperation.h"
 #include "CGameLoopExecutor.h"
 
-IResourceLoader::IResourceLoader(void) :
-m_isRunning(1),
-m_thread(&IResourceLoader::_Thread, this)
+IResourceLoader::IResourceLoader(void)
 {
+    m_isRunning = 1,
+    m_thread = std::thread(&IResourceLoader::_Thread, this);
     ConnectToGameLoop(std::shared_ptr<IResourceLoader>(this));
 }
 
