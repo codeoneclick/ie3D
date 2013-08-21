@@ -95,7 +95,7 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
 {
     static float angle = 0.0f;
     m_models[0]->Set_Animation("model_02.MDL_anim");
-    m_models[1]->Set_Animation("model_01.MDL_anim");
+    m_models[1]->Set_Animation("model_03.MDL_anim");
     angle += 0.01f;
     
     static glm::vec3 lightPosition = glm::vec3(0.0f);

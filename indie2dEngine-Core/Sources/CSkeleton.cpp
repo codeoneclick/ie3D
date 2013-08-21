@@ -144,7 +144,7 @@ void CSkeleton::BindTransformation(void)
         root->Set_BindTransformation();
     }
     
-    std::function<void(void)> function = [this]()
+    /*std::function<void(void)> function = [this]()
     {
         i32 numIndexes = ((m_numBones - 1) * 2);
         m_indexBuffer = std::make_shared<CIndexBuffer>(numIndexes, GL_STATIC_DRAW);
@@ -170,7 +170,7 @@ void CSkeleton::BindTransformation(void)
         }
         m_vertexBuffer->Unlock();
     };
-    gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function);
+    gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function);*/
 }
 
 void CSkeleton::Draw(const i32 *_attributes)
