@@ -22,23 +22,19 @@ IResource::~IResource(void)
     m_handlers.clear();
 }
 
-void IResource::RegisterResourceLoadingHandler(std::shared_ptr<IResourceLoadingHandler> _handler)
+void IResource::Set_LoadingHandler(std::shared_ptr<IResourceLoadingHandler> _handler)
 {
-    if(_handler == nullptr)
-    {
-        return;
-    }
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if((_handler != nullptr) && (m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         _handler->_Get_Commands()._ExecuteLoadedResourceCommand(shared_from_this(), true);
     }
-    else
+    else if(_handler != nullptr)
     {
         m_handlers.insert(_handler);
     }
 }
 
-void IResource::ExecuteResourceLoadingHandlers(void)
+void IResource::OnLoaded(void)
 {
     for(auto handler : m_handlers)
     {

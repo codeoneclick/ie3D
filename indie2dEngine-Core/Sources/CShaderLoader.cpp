@@ -35,5 +35,6 @@ std::shared_ptr<CShader> CShaderLoader::StartLoadOperation(const std::string &_v
         m_resourceContainer.insert(std::make_pair(guid, resource));
         m_operationsQueue.insert(std::make_pair(guid, operation));
     }
+    resource->Set_LoadingHandler(_handler);
     return resource;
 }

@@ -35,5 +35,6 @@ std::shared_ptr<CSequence> CSequenceLoader::StartLoadOperation(const std::string
         m_resourceContainer.insert(std::make_pair(guid, resource));
         m_operationsQueue.insert(std::make_pair(guid, operation));
     }
+    resource->Set_LoadingHandler(_handler);
     return resource;
 }

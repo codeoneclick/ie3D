@@ -50,8 +50,8 @@ public:
         return m_status & E_RESOURCE_STATUS_COMMITED;
     };
     
-    void RegisterResourceLoadingHandler(std::shared_ptr<IResourceLoadingHandler> _handler);
-    void ExecuteResourceLoadingHandlers(void);
+    void Set_LoadingHandler(std::shared_ptr<IResourceLoadingHandler> _handler);
+    void OnLoaded(void);
 };
 
 #endif 

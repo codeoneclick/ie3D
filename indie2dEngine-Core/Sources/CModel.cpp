@@ -38,14 +38,14 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(_template);
     assert(m_resourceFabricator != nullptr);
     m_mesh = m_resourceFabricator->CreateMesh(modelTemplate->m_meshFilename);
-    m_mesh->RegisterResourceLoadingHandler(shared_from_this());
+    m_mesh->Set_LoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
     
     if(modelTemplate->m_skeletonFilename.size() != 0)
     {
         m_skeleton = m_resourceFabricator->CreateSkeleton(modelTemplate->m_skeletonFilename);
         assert(m_skeleton != nullptr);
-        m_skeleton->RegisterResourceLoadingHandler(shared_from_this());
+        m_skeleton->Set_LoadingHandler(shared_from_this());
     }
     
     for(auto materialTemplate : modelTemplate->m_materialsTemplates)
@@ -65,7 +65,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         assert(sequence != nullptr);
         sequence->Set_Name(name);
         m_sequences.insert(sequence);
-        sequence->RegisterResourceLoadingHandler(shared_from_this());
+        sequence->Set_LoadingHandler(shared_from_this());
     }
     
     m_boundBox = m_mesh->CreateBoundBox();
