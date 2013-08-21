@@ -12,6 +12,7 @@ uniform vec3   VECTOR_CameraPosition;
 uniform vec3   VECTOR_LightPosition;
 uniform vec4   VECTOR_ClipPlane;
 
+varying vec4   OUT_LightPosition;
 varying vec4   OUT_TexCoordProj;
 varying vec2   OUT_TexCoord;
 
@@ -19,6 +20,9 @@ void main(void)
 {
     vec4 vPosition = MATRIX_World * vec4(IN_Position, 1.0);
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
+    vec3 vLightDistance = VECTOR_LightPosition - vec3(vPosition);
+    OUT_LightPosition.xyz = normalize(vLightDistance);
+    OUT_LightPosition.w = 1.0 - dot(vLightDistance / 16.0, vLightDistance / 16.0);
     OUT_TexCoord = IN_TexCoord;
     OUT_TexCoordProj = gl_Position;
 }

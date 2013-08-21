@@ -81,7 +81,7 @@ m_indexBuffer(_indexBuffer)
             m_header->m_minBound.z = m_header->m_vertexData[i].m_position.z;
         }
     }
-
+    
     m_status |= E_RESOURCE_STATUS_LOADED;
     m_status |= E_RESOURCE_STATUS_COMMITED;
 }
@@ -112,14 +112,14 @@ std::shared_ptr<CAABoundBox> CMesh::CreateBoundBox(void)
     return bound;
 }
 
-void CMesh::Bind(const i32 *_attributes)
+void CMesh::Bind(const std::string& _guid, const i32 *_attributes)
 {
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
-        m_vertexBuffer->Bind(_attributes);
         m_indexBuffer->Bind();
+        m_vertexBuffer->Bind(_attributes);
     }
 }
 
@@ -133,13 +133,13 @@ void CMesh::Draw(void)
     }
 }
 
-void CMesh::Unbind(const i32 *_attributes)
+void CMesh::Unbind(const std::string& _guid, const i32 *_attributes)
 {
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
-        m_vertexBuffer->Unbind(_attributes);
         m_indexBuffer->Unbind();
+        m_vertexBuffer->Unbind(_attributes);
     }
 }

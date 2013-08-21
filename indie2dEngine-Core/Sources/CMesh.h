@@ -114,6 +114,7 @@ protected:
     std::shared_ptr<CMeshHeader> m_header;
     std::shared_ptr<CVertexBuffer> m_vertexBuffer;
     std::shared_ptr<CIndexBuffer> m_indexBuffer;
+    std::map<std::string, ui32> m_handlers;
     
     std::vector<std::shared_ptr<CAABoundBox> > m_bounds;
     
@@ -187,9 +188,9 @@ public:
         return m_header != nullptr ? m_header->Get_MinBound() : glm::vec3(0.0f);
     };
     
-    void Bind(const i32* _attributes);
+    void Bind(const std::string& _guid, const i32* _attributes);
     void Draw(void);
-    void Unbind(const i32* _attributes);
+    void Unbind(const std::string& _guid, const i32* _attributes);
 
 };
 

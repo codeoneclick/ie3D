@@ -149,6 +149,7 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
             for(i32 i = 0; i <  m_mesh->Get_VertexBuffer()->Get_Size(); ++i)
             {
                 glm::vec3 bonePosition(0.0f);
+                glm::vec3 boneNormal(0.0f);
                 for(i32 j = 0; j < m_mesh->Get_SourceData()[i].m_bones.size(); ++j)
                 {
                     std::shared_ptr<CBone> bone = m_skeleton->Get_Bone(m_mesh->Get_SourceData()[i].m_bones[j].m_id);
@@ -159,21 +160,18 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
                     if(j == 0)
                     {
                         bonePosition = glm::transform(m_mesh->Get_SourceData()[i].m_position, boneTransformation) * weight;
+                        boneNormal = glm::transform(m_mesh->Get_SourceData()[i].m_normal, boneTransformation) * weight;
                     }
                     else
                     {
                         bonePosition += glm::transform(m_mesh->Get_SourceData()[i].m_position, boneTransformation) * weight;
+                        boneNormal += glm::transform(m_mesh->Get_SourceData()[i].m_normal, boneTransformation) * weight;
                     }
                 }
                 vertexData[i].m_position = bonePosition;
+                vertexData[i].m_normal = CVertexBuffer::CompressVec3(boneNormal);
                 vertexData[i].m_texcoord = m_mesh->Get_SourceData()[i].m_texcoord;
             }
-            
-            /*std::function<void(void)> main = [this]()
-            {
-                m_mesh->Get_VertexBuffer()->Unlock(m_vertexBufferGuid);
-            };
-            gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);*/
         };
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
     }
@@ -186,13 +184,8 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
             {
                 vertexData[i].m_position = m_mesh->Get_SourceData()[i].m_position;
                 vertexData[i].m_texcoord = m_mesh->Get_SourceData()[i].m_texcoord;
+                vertexData[i].m_normal = CVertexBuffer::CompressVec3(m_mesh->Get_SourceData()[i].m_normal);
             }
-            
-            /*std::function<void(void)> main = [this]()
-            {
-                m_mesh->Get_VertexBuffer()->Unlock(m_vertexBufferGuid);
-            };
-            gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);*/
         };
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
     }

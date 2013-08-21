@@ -216,7 +216,7 @@ void IGameObject::_OnBind(const std::string &_renderMode)
     iterator->second->Bind();
     
     assert(m_mesh != nullptr);
-    m_mesh->Bind(iterator->second->Get_Shader()->Get_Attributes());
+    m_mesh->Bind(iterator->second->Get_Shader()->Get_Guid(), iterator->second->Get_Shader()->Get_Attributes());
 }
 
 void IGameObject::_OnDraw(const std::string &_renderMode)
@@ -232,31 +232,11 @@ void IGameObject::_OnUnbind(const std::string &_renderMode)
     iterator->second->Unbind();
     
     assert(m_mesh != nullptr);
-    m_mesh->Unbind(iterator->second->Get_Shader()->Get_Attributes());
-    
-    if(m_boundBox != nullptr)
-    {
-        m_boundBox->Draw();
-    }
+    m_mesh->Unbind(iterator->second->Get_Shader()->Get_Guid(), iterator->second->Get_Shader()->Get_Attributes());
 }
 
 void IGameObject::_OnDebugDraw(const std::string &_renderMode)
 {
-    assert(m_materials.find(_renderMode) != m_materials.end());
-    auto iterator = m_materials.find(_renderMode);
-    if(m_boundBox != nullptr && iterator->second->Get_IsDebug())
-    {
-        assert(m_debugBoundBoxMaterial != nullptr);
-        assert(m_debugBoundBoxMaterial->Get_Shader() != nullptr);
-        m_debugBoundBoxMaterial->Bind();
-        m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        m_debugBoundBoxMaterial->Get_Shader()->Set_Matrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        
-        /*m_boundBox->Bind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
-         m_boundBox->Draw();
-         m_boundBox->Unbind(m_debugBoundBoxMaterial->Get_Shader()->Get_Attributes());
-         m_debugBoundBoxMaterial->Unbind();*/
-    }
+
 }
 

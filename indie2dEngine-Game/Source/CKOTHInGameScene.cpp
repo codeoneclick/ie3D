@@ -99,14 +99,13 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
     angle += 0.01f;
     
     static glm::vec3 lightPosition = glm::vec3(0.0f);
-    lightPosition.x = 12.0f + cosf(-angle / 50.0f ) * -8.0f;
+    lightPosition.x = 12.0f + cosf(-angle) * -8.0f;
     lightPosition.y = 8.0f;
-    lightPosition.z = 12.0f + sinf(-angle / 50.0f) * -8.0f;
+    lightPosition.z = 12.0f + sinf(-angle) * -8.0f;
     
     m_light->Set_Position(lightPosition);
     
     m_characterController->OnUpdate(_deltatime);
-    m_camera->Set_Rotation(angle);
 }
 
 void CKOTHInGameScene::_OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _collider)

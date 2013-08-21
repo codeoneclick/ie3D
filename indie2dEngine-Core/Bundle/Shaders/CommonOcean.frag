@@ -25,8 +25,8 @@ void main(void)
 	
 	highp vec2 vTexCoord_02 = vec2(OUT_TexCoord.x * 8.0 - sin(OUT_Timer) * 0.75,
 								   OUT_TexCoord.y * 8.0 - cos(OUT_Timer) * 0.25);
-    
-    lowp vec4 vWaterColor = texture2D(SAMPLER_03, vTexCoord_01) + texture2D(SAMPLER_03, vTexCoord_02);
+                                   
+    lowp vec4 vWaterColor = (texture2D(SAMPLER_03, vTexCoord_01) + texture2D(SAMPLER_03, vTexCoord_02)) * vec4(0.05, 0.15, 0.20, 1.0);
     vRefractionColor = mix(vRefractionColor, vWaterColor, 0.25);
     vReflectionColor = mix(vRefractionColor, vReflectionColor, 0.25);
     gl_FragColor = vReflectionColor;
