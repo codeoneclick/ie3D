@@ -76,7 +76,13 @@ SVertex* CVertexBuffer::Lock(void) const
 {
     assert(m_main != nullptr);
     return m_main;
-};
+}
+
+SVertex* CVertexBuffer::Lock(const std::string &_guid) const
+{
+    assert(m_references.find(_guid) !=  m_references.end());
+    return m_references.find(_guid)->second;
+}
 
 void CVertexBuffer::Unlock(void)
 {
@@ -87,10 +93,13 @@ void CVertexBuffer::Unlock(void)
     glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * m_size, m_main, m_mode);
 }
 
-SVertex* CVertexBuffer::Lock(const std::string &_guid) const
+void CVertexBuffer::Unlock(ui32 _size)
 {
-    assert(m_references.find(_guid) !=  m_references.end());
-    return m_references.find(_guid)->second;
+    assert(m_main != nullptr);
+    assert(_size != 0 && _size <= m_size);
+    m_index = (m_index >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_index + 1;
+    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * _size, m_main, m_mode);
 }
 
 void CVertexBuffer::Unlock(const std::string &_guid)
@@ -98,6 +107,13 @@ void CVertexBuffer::Unlock(const std::string &_guid)
     assert(m_references.find(_guid) !=  m_references.end());
     m_main = m_references.find(_guid)->second;
     CVertexBuffer::Unlock();
+}
+
+void CVertexBuffer::Unlock(ui32 _size, const std::string &_guid)
+{
+    assert(m_references.find(_guid) !=  m_references.end());
+    m_main = m_references.find(_guid)->second;
+    CVertexBuffer::Unlock(_size);
 }
 
 void CVertexBuffer::Bind(const i32* _attributes)

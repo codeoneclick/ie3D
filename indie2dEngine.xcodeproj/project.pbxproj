@@ -123,6 +123,8 @@
 		A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */; };
 		A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */; };
 		A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A437A9EC177B424000160BD7 /* libgcdpp.a */; };
+		A4535E8817C633D50058CD47 /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
+		A4535E9317C633EA0058CD47 /* CBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E9117C633EA0058CD47 /* CBatch.cpp */; };
 		A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		A45588D61756406C00802609 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
 		A45588DD17565EB800802609 /* buildings_atlas.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A45588DC17565EB800802609 /* buildings_atlas.pvr */; };
@@ -626,6 +628,10 @@
 		A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IInputTapRecognizerHandler.cpp; path = Sources/IInputTapRecognizerHandler.cpp; sourceTree = "<group>"; };
 		A43648A0179D767400C51AC4 /* IInputTapRecognizerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IInputTapRecognizerHandler.h; path = Sources/IInputTapRecognizerHandler.h; sourceTree = "<group>"; };
 		A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gcdpp.xcodeproj; path = ../gcdpp/gcdpp.xcodeproj; sourceTree = "<group>"; };
+		A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBatchingMgr.cpp; path = Sources/CBatchingMgr.cpp; sourceTree = "<group>"; };
+		A4535E8717C633D50058CD47 /* CBatchingMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBatchingMgr.h; path = Sources/CBatchingMgr.h; sourceTree = "<group>"; };
+		A4535E9117C633EA0058CD47 /* CBatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBatch.cpp; path = Sources/CBatch.cpp; sourceTree = "<group>"; };
+		A4535E9217C633EA0058CD47 /* CBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBatch.h; path = Sources/CBatch.h; sourceTree = "<group>"; };
 		A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ITemplateLoadingHandler.cpp; path = Sources/ITemplateLoadingHandler.cpp; sourceTree = "<group>"; };
 		A45588CA175628F500802609 /* ITemplateLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITemplateLoadingHandler.h; path = Sources/ITemplateLoadingHandler.h; sourceTree = "<group>"; };
 		A45588D41756406C00802609 /* CLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLight.cpp; path = Sources/CLight.cpp; sourceTree = "<group>"; };
@@ -1758,6 +1764,10 @@
 				A46A317E174640A30044643E /* IRenderHandler.cpp */,
 				A46A3182174640BD0044643E /* CMaterial.h */,
 				A46A3181174640BC0044643E /* CMaterial.cpp */,
+				A4535E8717C633D50058CD47 /* CBatchingMgr.h */,
+				A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */,
+				A4535E9217C633EA0058CD47 /* CBatch.h */,
+				A4535E9117C633EA0058CD47 /* CBatch.cpp */,
 			);
 			name = "Render Managment";
 			sourceTree = "<group>";
@@ -2723,6 +2733,8 @@
 				A4F955A317BBC037003D5B6F /* CProgressiveTriangle.cpp in Sources */,
 				A4F955A417BBC037003D5B6F /* CProgressiveVertex.cpp in Sources */,
 				211D30E317C2A61D0038B703 /* IResourceLoadingHandler.cpp in Sources */,
+				A4535E8817C633D50058CD47 /* CBatchingMgr.cpp in Sources */,
+				A4535E9317C633EA0058CD47 /* CBatch.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

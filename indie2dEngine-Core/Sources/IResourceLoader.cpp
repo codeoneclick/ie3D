@@ -13,7 +13,7 @@
 
 IResourceLoader::IResourceLoader(void)
 {
-    m_isRunning = 1,
+    m_isRunning = 1;
     m_thread = std::thread(&IResourceLoader::_Thread, this);
     ConnectToGameLoop(std::shared_ptr<IResourceLoader>(this));
 }

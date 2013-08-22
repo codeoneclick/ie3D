@@ -174,6 +174,7 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
             }
         };
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
+
     }
     else
     {

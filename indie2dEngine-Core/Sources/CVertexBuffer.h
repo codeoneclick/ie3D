@@ -84,10 +84,12 @@ public:
     void DeleteReference(const std::string& _guid);
     
     SVertex* Lock(void) const;
-    void Unlock(void);
-    
     SVertex* Lock(const std::string& _guid) const;
+    
+    void Unlock(void);
+    void Unlock(ui32 _size);
     void Unlock(const std::string& _guid);
+    void Unlock(ui32 _size, const std::string& _guid);
     
     void Bind(const i32* _attributes);
     void Unbind(const i32* _attributes);
