@@ -14,7 +14,10 @@
 #include "CResourceAccessor.h"
 
 CMaterial::CMaterial(std::shared_ptr<CShader> _shader) :
-m_shader(_shader)
+m_shader(_shader),
+m_isDebug(false),
+m_isReflected(false),
+m_isBatching(false)
 {
     for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
     {

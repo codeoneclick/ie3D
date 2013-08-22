@@ -15,6 +15,8 @@
 #include "CResourceAccessor.h"
 #include "ITemplate.h"
 #include "CAABoundBox.h"
+#include "CRenderMgr.h"
+#include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CSkeleton.h"
 #include "CSequence.h"
@@ -56,6 +58,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
         material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
+        material->Set_IsBatching(true);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     
@@ -174,7 +177,16 @@ void CModel::_OnDraw(const std::string& _renderMode)
         material->Get_Shader()->Set_Vector4(material->Get_Clipping(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
-        IGameObject::_OnDraw(_renderMode);
+        
+        if(!material->Get_IsBatching())
+        {
+            IGameObject::_OnDraw(_renderMode);
+        }
+        else if(m_mesh->IsLinked() && m_mesh->IsLoaded())
+        {
+            material->Get_Shader()->Set_Matrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_MATRIX_WORLD);
+            m_renderMgr->Get_BatchingMgr()->Batch(m_mesh, material, m_matrixWorld);
+        }
     }
 }
 

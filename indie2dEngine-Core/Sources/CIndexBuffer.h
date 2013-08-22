@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 
-#define K_NUM_REPLACEMENT_INDEX_BUFFERS 3
+#define K_NUM_REPLACEMENT_INDEX_BUFFERS 1
 
 class CIndexBuffer
 {
@@ -23,16 +23,16 @@ protected:
     i32  m_currentHandleIndex;
 	ui16* m_data;
     GLenum m_mode;
-    ui32 m_numIndexes;
+    ui32 m_size;
     
 public:
     
-    CIndexBuffer(ui32 _numIndexes, GLenum _mode);
+    CIndexBuffer(ui32 _size, GLenum _mode);
     ~CIndexBuffer(void);
     
     inline const ui32 Get_NumIndexes(void)
     {
-        return m_numIndexes;
+        return m_size;
     };
     
     inline ui16* Lock(void)
@@ -42,6 +42,7 @@ public:
     };
     
     void Unlock(void);
+    void Unlock(ui32 _size);
     
     void Bind(void);
     void Unbind(void);

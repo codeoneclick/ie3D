@@ -17,6 +17,7 @@ class CTexture;
 class CRenderOperationWorldSpace;
 class CRenderOperationScreenSpace;
 class CRenderOperationOutput;
+class CBatchingMgr;
 class IRenderHandler;
 
 class CRenderMgr final : public IGameLoopHandler
@@ -32,6 +33,7 @@ private:
     
 protected:
     
+    std::shared_ptr<CBatchingMgr> m_batchingMgr;
     void _OnGameLoopUpdate(f32 _deltatime);
     
 public:
@@ -53,6 +55,11 @@ public:
     void UnregisterWorldSpaceRenderHandler(const std::string& _mode, std::shared_ptr<IRenderHandler> _handler);
     
     std::shared_ptr<CTexture> Get_RenderOperationTexture(const std::string& _mode);
+    
+    inline std::shared_ptr<CBatchingMgr> Get_BatchingMgr(void)
+    {
+        return m_batchingMgr;
+    };
     
     inline ui32 Get_NumTriangles(void)
     {

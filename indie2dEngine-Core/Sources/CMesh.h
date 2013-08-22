@@ -190,6 +190,7 @@ public:
     
     void Bind(const std::string& _guid, const i32* _attributes);
     void Draw(void);
+    void Draw(ui32 _indices);
     void Unbind(const std::string& _guid, const i32* _attributes);
 
 };

@@ -36,9 +36,9 @@ public:
         return m_guid;
     };
 
-    void Clear(void);
-    void AddMesh(std::shared_ptr<CMesh> _mesh, const glm::mat4x4& _matrix);
-    void Draw(const std::string& _mode);
+    void Erase(void);
+    void Batch(std::shared_ptr<CMesh> _mesh, const glm::mat4x4& _matrix);
+    void Draw(void);
 };
 
 #endif 

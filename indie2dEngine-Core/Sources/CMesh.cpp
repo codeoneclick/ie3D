@@ -133,6 +133,16 @@ void CMesh::Draw(void)
     }
 }
 
+void CMesh::Draw(ui32 _indices)
+{
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    {
+        assert(m_vertexBuffer != nullptr);
+        assert(m_indexBuffer != nullptr);
+        glDrawElements(GL_TRIANGLES, _indices, GL_UNSIGNED_SHORT, NULL);
+    }
+}
+
 void CMesh::Unbind(const std::string& _guid, const i32 *_attributes)
 {
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))

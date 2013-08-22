@@ -9,11 +9,11 @@
 #include "CIndexBuffer.h"
 
 CIndexBuffer::CIndexBuffer(ui32 _numIndexes, GLenum _mode) :
-m_numIndexes(_numIndexes),
+m_size(_numIndexes),
 m_mode(_mode)
 {
-	assert(m_numIndexes != 0);
-	m_data = new ui16[m_numIndexes];
+	assert(m_size != 0);
+	m_data = new ui16[m_size];
     m_currentHandleIndex = -1;
     glGenBuffers(K_NUM_REPLACEMENT_INDEX_BUFFERS, m_handles);
 }
@@ -26,10 +26,19 @@ CIndexBuffer::~CIndexBuffer(void)
 void CIndexBuffer::Unlock(void)
 {
     assert(m_data != nullptr);
-    assert(m_numIndexes != 0);
+    assert(m_size != 0);
     m_currentHandleIndex = (m_currentHandleIndex >= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1)) ? 0 : m_currentHandleIndex + 1;
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handles[m_currentHandleIndex]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * m_numIndexes, m_data, m_mode);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * m_size, m_data, m_mode);
+}
+
+void CIndexBuffer::Unlock(ui32 _size)
+{
+    assert(m_data != nullptr);
+    assert(_size != 0);
+    m_currentHandleIndex = (m_currentHandleIndex >= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1)) ? 0 : m_currentHandleIndex + 1;
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handles[m_currentHandleIndex]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * _size, m_data, m_mode);
 }
 
 void CIndexBuffer::Bind(void)

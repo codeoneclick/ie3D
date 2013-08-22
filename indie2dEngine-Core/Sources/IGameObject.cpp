@@ -214,9 +214,12 @@ void IGameObject::_OnBind(const std::string &_renderMode)
     assert(m_materials.find(_renderMode) != m_materials.end());
     auto iterator = m_materials.find(_renderMode);
     iterator->second->Bind();
-    
-    assert(m_mesh != nullptr);
-    m_mesh->Bind(iterator->second->Get_Shader()->Get_Guid(), iterator->second->Get_Shader()->Get_Attributes());
+
+    if(!iterator->second->Get_IsBatching())
+    {
+        assert(m_mesh != nullptr);
+        m_mesh->Bind(iterator->second->Get_Shader()->Get_Guid(), iterator->second->Get_Shader()->Get_Attributes());
+    }
 }
 
 void IGameObject::_OnDraw(const std::string &_renderMode)
@@ -231,8 +234,11 @@ void IGameObject::_OnUnbind(const std::string &_renderMode)
     auto iterator = m_materials.find(_renderMode);
     iterator->second->Unbind();
     
-    assert(m_mesh != nullptr);
-    m_mesh->Unbind(iterator->second->Get_Shader()->Get_Guid(), iterator->second->Get_Shader()->Get_Attributes());
+    if(!iterator->second->Get_IsBatching())
+    {
+        assert(m_mesh != nullptr);
+        m_mesh->Unbind(iterator->second->Get_Shader()->Get_Guid(), iterator->second->Get_Shader()->Get_Attributes());
+    }
 }
 
 void IGameObject::_OnDebugDraw(const std::string &_renderMode)

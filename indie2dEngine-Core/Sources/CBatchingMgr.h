@@ -6,9 +6,30 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __indie2dEngine__CBatchingMgr__
-#define __indie2dEngine__CBatchingMgr__
+#ifndef CBatchingMgr_h
+#define CBatchingMgr_h
 
-#include <iostream>
+#include "HCommon.h"
 
-#endif /* defined(__indie2dEngine__CBatchingMgr__) */
+class CMesh;
+class CMaterial;
+class CBatch;
+class CBatchingMgr
+{
+private:
+    
+protected:
+    
+    std::map<std::string, std::shared_ptr<CBatch>> m_batches;
+    
+public:
+    
+    CBatchingMgr(void);
+    ~CBatchingMgr(void);
+    
+    void Erase(void);
+    void Batch(std::shared_ptr<CMesh> _mesh, std::shared_ptr<CMaterial> _material, const glm::mat4x4& _matrix);
+    void Draw(void);
+};
+
+#endif 
