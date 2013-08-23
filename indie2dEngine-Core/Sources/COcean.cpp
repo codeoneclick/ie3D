@@ -97,7 +97,7 @@ void COcean::_OnSceneUpdate(f32 _deltatime)
 
 i32 COcean::_OnQueuePosition(void)
 {
-    return 0;
+    return 128;
 }
 
 void COcean::_OnBind(const std::string& _renderMode)

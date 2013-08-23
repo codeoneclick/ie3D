@@ -27,7 +27,8 @@ public:
     CBatchingMgr(void);
     ~CBatchingMgr(void);
     
-    void Erase(void);
+    void Lock(void);
+    void Unlock(void);
     void Batch(std::shared_ptr<CMesh> _mesh, std::shared_ptr<CMaterial> _material, const glm::mat4x4& _matrix);
     void Draw(void);
 };

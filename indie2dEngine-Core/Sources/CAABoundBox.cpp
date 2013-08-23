@@ -108,6 +108,7 @@ CAABoundBox::~CAABoundBox(void)
 
 void CAABoundBox::Update(const glm::mat4x4 &_worldMatrix)
 {
+    return;
     SVertex* vertexData = m_vertexBuffer->Lock();
     
     static f32 offset = 0.1f;
@@ -142,7 +143,7 @@ void CAABoundBox::Update(const glm::mat4x4 &_worldMatrix)
     vertexData[22].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
     vertexData[23].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
 
-    m_vertexBuffer->Unlock();
+    //m_vertexBuffer->Unlock();
 }
 
 void CAABoundBox::Bind(const i32 *_attributes)

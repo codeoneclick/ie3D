@@ -13,6 +13,7 @@
 
 class CMaterial;
 class CMesh;
+struct SVertex;
 
 class CBatch
 {
@@ -23,8 +24,20 @@ protected:
     std::shared_ptr<CMaterial> m_material;
     std::shared_ptr<CMesh> m_mesh;
     std::string m_guid;
+    
+    SVertex* m_vertexData;
+    ui16* m_indexData;
+    
+    std::vector<std::shared_ptr<CMesh>> m_meshes;
+    std::vector<glm::mat4x4> m_matrices;
+    bool m_isUnlocked;
+    bool m_isLocked;
+    
     ui32 m_numIndices;
     ui32 m_numVertices;
+    
+    ui32 m_numUsingIndices;
+    ui32 m_numUsingVertices;
     
 public:
     
@@ -36,7 +49,9 @@ public:
         return m_guid;
     };
 
-    void Erase(void);
+    void Lock(void);
+    void Unlock(void);
+    
     void Batch(std::shared_ptr<CMesh> _mesh, const glm::mat4x4& _matrix);
     void Draw(void);
 };

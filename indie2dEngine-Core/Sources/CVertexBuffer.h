@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 
-#define k_NUM_REPLACEMENT_VERTEX_BUFFERS 1
+#define k_NUM_REPLACEMENT_VERTEX_BUFFERS 3
 
 struct SBone
 {

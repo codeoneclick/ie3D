@@ -106,11 +106,12 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
     
     for(auto iterator : m_worldSpaceOperations)
     {
-        m_batchingMgr->Erase();
+        m_batchingMgr->Lock();
         std::shared_ptr<CRenderOperationWorldSpace> operation = iterator.second;
         operation->Bind();
         operation->Draw();
         operation->Unbind();
+        m_batchingMgr->Unlock();
         m_numTriangles += operation->Get_NumTriangles();
         m_batchingMgr->Draw();
     }

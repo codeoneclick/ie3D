@@ -22,11 +22,19 @@ CBatchingMgr::~CBatchingMgr(void)
     m_batches.clear();
 }
 
-void CBatchingMgr::Erase(void)
+void CBatchingMgr::Lock(void)
 {
     for(auto iterator : m_batches)
     {
-        iterator.second->Erase();
+        iterator.second->Lock();
+    }
+}
+
+void CBatchingMgr::Unlock(void)
+{
+    for(auto iterator : m_batches)
+    {
+        iterator.second->Unlock();
     }
 }
 

@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 
-#define K_NUM_REPLACEMENT_INDEX_BUFFERS 1
+#define K_NUM_REPLACEMENT_INDEX_BUFFERS 3
 
 class CIndexBuffer
 {
