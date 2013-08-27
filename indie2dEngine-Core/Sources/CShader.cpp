@@ -78,6 +78,27 @@ const struct SSamplers SSamplers =
     "SAMPLER_08"
 };
 
+CShaderUniform::CShaderUniform(E_UNIFORM_CLASS _class) :
+m_class(_class),
+m_valid(false),
+m_hash(0),
+m_mat3x3_value(0.0f),
+m_mat4x4_value(0.0f),
+m_vec2_value(0.0f),
+m_vec3_value(0.0f),
+m_vec4_value(0.0f),
+m_f32_value(0.0f),
+m_sampler_value(E_SHADER_SAMPLER_01),
+m_texture_value(nullptr)
+{
+    
+}
+
+CShaderUniform::~CShaderUniform(void)
+{
+    
+}
+
 CShader::CShader(const std::string& _guid) :
 IResource(E_RESOURCE_CLASS_SHADER, _guid),
 m_handle(0)
@@ -87,11 +108,19 @@ m_handle(0)
     m_attributes[E_SHADER_ATTRIBUTE_NORMAL] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_TANGENT] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_COLOR] = -1;
+    
+    for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
+    {
+         m_values[i] = nullptr;
+    }
 }
 
 CShader::~CShader(void)
 {
-   
+    for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
+    {
+        delete m_values[i];
+    }
 }
 
 void CShader::_Set_Handle(ui32 _handle)
@@ -127,6 +156,15 @@ void CShader::_Set_Handle(ui32 _handle)
 
 void CShader::Set_Matrix3x3(const glm::mat3x3 &_matrix, E_SHADER_UNIFORM _uniform)
 {
+    if(m_values[_uniform] == nullptr)
+    {
+        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_MAT3X3);
+    }
+    m_values[_uniform]->Set_Matrix3x3(_matrix);
+}
+
+void CShader::_Set_Matrix3x3(const glm::mat3x3 &_matrix, E_SHADER_UNIFORM _uniform)
+{
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
@@ -144,6 +182,15 @@ void CShader::Set_Matrix3x3Custom(const glm::mat3x3 &_matrix, const std::string 
 }
 
 void CShader::Set_Matrix4x4(const glm::mat4x4 &_matrix, E_SHADER_UNIFORM _uniform)
+{
+    if(m_values[_uniform] == nullptr)
+    {
+        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_MAT4X4);
+    }
+    m_values[_uniform]->Set_Matrix4x4(_matrix);
+}
+
+void CShader::_Set_Matrix4x4(const glm::mat4x4 &_matrix, E_SHADER_UNIFORM _uniform)
 {
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
@@ -163,6 +210,15 @@ void CShader::Set_Matrix4x4Custom(const glm::mat4x4 &_matrix, const std::string 
 
 void CShader::Set_Vector2(const glm::vec2 &_vector, E_SHADER_UNIFORM _uniform)
 {
+    if(m_values[_uniform] == nullptr)
+    {
+        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_VECTOR2);
+    }
+    m_values[_uniform]->Set_Vector2(_vector);
+}
+
+void CShader::_Set_Vector2(const glm::vec2 &_vector, E_SHADER_UNIFORM _uniform)
+{
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
@@ -179,13 +235,22 @@ void CShader::Set_Vector2Custom(const glm::vec2 &_vector, const std::string &_un
     }
 }
 
-void CShader::Set_Vector3(const glm::vec3 &_vector, E_SHADER_UNIFORM _uniform)
+void CShader::_Set_Vector3(const glm::vec3 &_vector, E_SHADER_UNIFORM _uniform)
 {
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
         glUniform3fv(handle, 1, &_vector[0]);
     }
+}
+
+void CShader::Set_Vector3(const glm::vec3 &_vector, E_SHADER_UNIFORM _uniform)
+{
+    if(m_values[_uniform] == nullptr)
+    {
+        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_VECTOR3);
+    }
+    m_values[_uniform]->Set_Vector3(_vector);
 }
 
 void CShader::Set_Vector3Custom(const glm::vec3 &_vector, const std::string &_uniform)
@@ -197,13 +262,22 @@ void CShader::Set_Vector3Custom(const glm::vec3 &_vector, const std::string &_un
     }
 }
 
-void CShader::Set_Vector4(const glm::vec4 &_vector, E_SHADER_UNIFORM _uniform)
+void CShader::_Set_Vector4(const glm::vec4 &_vector, E_SHADER_UNIFORM _uniform)
 {
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
         glUniform4fv(handle, 1, &_vector[0]);
     }
+}
+
+void CShader::Set_Vector4(const glm::vec4 &_vector, E_SHADER_UNIFORM _uniform)
+{
+    if(m_values[_uniform] == nullptr)
+    {
+        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_VECTOR4);
+    }
+    m_values[_uniform]->Set_Vector4(_vector);
 }
 
 void CShader::Set_Vector4Custom(const glm::vec4 &_vector, const std::string &_uniform)
@@ -215,13 +289,22 @@ void CShader::Set_Vector4Custom(const glm::vec4 &_vector, const std::string &_un
     }
 }
 
-void CShader::Set_Float(f32 _value, E_SHADER_UNIFORM _uniform)
+void CShader::_Set_Float(f32 _value, E_SHADER_UNIFORM _uniform)
 {
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         i32 handle = m_uniforms[_uniform];
         glUniform1f(handle, _value);
     }
+}
+
+void CShader::Set_Float(f32 _value, E_SHADER_UNIFORM _uniform)
+{
+    if(m_values[_uniform] == nullptr)
+    {
+        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_FLOAT);
+    }
+    m_values[_uniform]->Set_Float(_value);
 }
 
 void CShader::Set_FloatCustom(f32 _value, const std::string &_uniform)
@@ -233,7 +316,7 @@ void CShader::Set_FloatCustom(f32 _value, const std::string &_uniform)
     }
 }
 
-void CShader::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
+void CShader::_Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
 {
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
@@ -243,8 +326,71 @@ void CShader::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _
     }
 }
 
+void CShader::Set_Texture(const std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
+{
+    if(m_values[_sampler + E_SHADER_UNIFORM_MAX] == nullptr)
+    {
+        m_values[_sampler + E_SHADER_UNIFORM_MAX] = new CShaderUniform(E_UNIFORM_CLASS_SAMPLER);
+    }
+    m_values[_sampler + E_SHADER_UNIFORM_MAX]->Set_Sampler(_texture, _sampler);
+}
+
 void CShader::Bind(void)
 {
+    for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
+    {
+        if(m_values[i] != nullptr && !m_values[i]->Get_Valid())
+        {
+            switch (m_values[i]->Get_Class())
+            {
+                case E_UNIFORM_CLASS_MAT3X3:
+                {
+                    CShader::_Set_Matrix3x3(m_values[i]->Get_Matrix3x3(), static_cast<E_SHADER_UNIFORM>(i));
+                }
+                    break;
+                    
+                case E_UNIFORM_CLASS_MAT4X4:
+                {
+                    CShader::_Set_Matrix4x4(m_values[i]->Get_Matrix4x4(), static_cast<E_SHADER_UNIFORM>(i));
+                }
+                    break;
+                    
+                case E_UNIFORM_CLASS_VECTOR2:
+                {
+                    CShader::_Set_Vector2(m_values[i]->Get_Vector2(), static_cast<E_SHADER_UNIFORM>(i));
+                }
+                    break;
+                    
+                case E_UNIFORM_CLASS_VECTOR3:
+                {
+                     CShader::_Set_Vector3(m_values[i]->Get_Vector3(), static_cast<E_SHADER_UNIFORM>(i));
+                }
+                    break;
+                    
+                case E_UNIFORM_CLASS_VECTOR4:
+                {
+                    CShader::_Set_Vector4(m_values[i]->Get_Vector4(), static_cast<E_SHADER_UNIFORM>(i));
+                }
+                    break;
+                    
+                case E_UNIFORM_CLASS_FLOAT:
+                {
+                    CShader::_Set_Float(m_values[i]->Get_Float(), static_cast<E_SHADER_UNIFORM>(i));
+                }
+                    break;
+                    
+                case E_UNIFORM_CLASS_SAMPLER:
+                {
+                    CShader::_Set_Texture(m_values[i]->Get_Texture(), m_values[i]->Get_Sampler());
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
+    
     if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
     {
         glUseProgram(m_handle);

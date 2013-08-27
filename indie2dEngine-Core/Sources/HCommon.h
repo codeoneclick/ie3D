@@ -24,6 +24,7 @@
 #include <sstream>
 #include <iostream>
 #include <assert.h>
+#include <functional>
 
 #include <curl/curl.h>
 #include <json/json.h>
