@@ -60,34 +60,49 @@ public:
     inline void Set_Matrix4x4(const glm::mat4x4& _matrix)
     {
         assert(m_class == E_UNIFORM_CLASS_MAT4X4);
-        m_mat4x4_value = _matrix;
-        m_valid = false;
+        if(m_mat4x4_value != _matrix)
+        {
+            m_mat4x4_value = _matrix;
+            m_valid = false;
+        }
     };
 
     inline void Set_Vector2(const glm::vec2& _vector)
     {
         assert(m_class == E_UNIFORM_CLASS_VECTOR2);
-        m_vec2_value = _vector;
-        m_valid = false;
+        if(m_vec2_value != _vector)
+        {
+            m_vec2_value = _vector;
+            m_valid = false;
+        }
     };
     inline void Set_Vector3(const glm::vec3& _vector)
     {
         assert(m_class == E_UNIFORM_CLASS_VECTOR3);
-        m_vec3_value = _vector;
-        m_valid = false;
+        if(m_vec3_value != _vector)
+        {
+            m_vec3_value = _vector;
+            m_valid = false;
+        }
     };
     inline void Set_Vector4(const glm::vec4& _vector)
     {
         assert(m_class == E_UNIFORM_CLASS_VECTOR4);
-        m_vec4_value = _vector;
-        m_valid = false;
+        if(m_vec4_value != _vector)
+        {
+            m_vec4_value = _vector;
+            m_valid = false;
+        }
     };
     
     inline void Set_Float(f32 _value)
     {
         assert(m_class == E_UNIFORM_CLASS_FLOAT);
-        m_f32_value = _value;
-        m_valid = false;
+        if(m_f32_value != _value)
+        {
+            m_f32_value = _value;
+            m_valid = false;
+        }
     };
     
     inline void Set_Sampler(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)

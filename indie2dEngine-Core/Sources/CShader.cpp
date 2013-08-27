@@ -337,6 +337,11 @@ void CShader::Set_Texture(const std::shared_ptr<CTexture> _texture, E_SHADER_SAM
 
 void CShader::Bind(void)
 {
+    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    {
+        glUseProgram(m_handle);
+    }
+    
     for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
     {
         if(m_values[i] != nullptr && !m_values[i]->Get_Valid())
@@ -363,7 +368,7 @@ void CShader::Bind(void)
                     
                 case E_UNIFORM_CLASS_VECTOR3:
                 {
-                     CShader::_Set_Vector3(m_values[i]->Get_Vector3(), static_cast<E_SHADER_UNIFORM>(i));
+                    CShader::_Set_Vector3(m_values[i]->Get_Vector3(), static_cast<E_SHADER_UNIFORM>(i));
                 }
                     break;
                     
@@ -389,11 +394,6 @@ void CShader::Bind(void)
                     break;
             }
         }
-    }
-    
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
-    {
-        glUseProgram(m_handle);
     }
 }
 
