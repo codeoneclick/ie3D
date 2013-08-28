@@ -97,7 +97,7 @@ void CMesh::_Set_Header(std::shared_ptr<CMeshHeader> _header)
     m_header = _header;
     m_status |= E_RESOURCE_STATUS_LOADED;
     
-    for(auto bound : m_bounds)
+    for(const auto& bound : m_bounds)
     {
         bound->_Set_MaxBound(m_header->Get_MaxBound());
         bound->_Set_MinBound(m_header->Get_MinBound());

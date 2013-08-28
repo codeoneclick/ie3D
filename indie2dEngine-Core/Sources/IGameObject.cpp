@@ -119,7 +119,7 @@ ui32 IGameObject::Get_NumTriangles(void)
 void IGameObject::ListenRenderMgr(bool _value)
 {
     assert(m_renderMgr != nullptr);
-    for(auto iterator : m_materials)
+    for(const auto& iterator : m_materials)
     {
         _value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
         m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
@@ -128,7 +128,7 @@ void IGameObject::ListenRenderMgr(bool _value)
 void IGameObject::_ListenRenderMgr(void)
 {
     assert(m_renderMgr != nullptr);
-    for(auto iterator : m_materials)
+    for(const auto& iterator : m_materials)
     {
         m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
     }

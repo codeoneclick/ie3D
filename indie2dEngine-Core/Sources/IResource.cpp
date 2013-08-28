@@ -43,7 +43,7 @@ void IResource::Unregister_LoadingHandler(const std::shared_ptr<IResourceLoading
 
 void IResource::_OnLoaded(void)
 {
-    for(auto handler : m_handlers)
+    for(const auto& handler : m_handlers)
     {
         handler->_Get_Commands()._ExecuteLoadedResourceCommand(shared_from_this(), true);
     }

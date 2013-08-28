@@ -105,7 +105,7 @@ CGameLoopExecutor::~CGameLoopExecutor(void)
 
 void CGameLoopExecutor::OnGameLoopUpdate(void)
 {
-    for(auto handler : m_handlers)
+    for(const auto& handler : m_handlers)
     {
         handler->_Get_Commands()._ExecuteGameLoopUpdateCommand(0.0f);
     }

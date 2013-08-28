@@ -21,7 +21,7 @@ m_boneWidth(3.0f)
 
 CSkeleton::~CSkeleton(void)
 {
-    for(auto transformation : m_transformations)
+    for(const auto& transformation : m_transformations)
     {
         delete[] transformation.second;
     }
@@ -78,7 +78,7 @@ void CSkeleton::AddBone(std::shared_ptr<CBone> _bone)
 
 std::shared_ptr<CBone> CSkeleton::Get_Bone(i32 _id)
 {
-    for(auto root : m_roots)
+    for(const auto& root : m_roots)
     {
         if (root->Get_Id() == _id)
         {
@@ -110,7 +110,7 @@ void CSkeleton::Update(const std::string& _guid)
         }
     }
 
-    for(auto root : m_roots)
+    for(const auto& root : m_roots)
     {
         root->Update();
     }
@@ -139,7 +139,7 @@ glm::mat4* CSkeleton::Get_Transformations(const std::string &_guid)
 
 void CSkeleton::BindTransformation(void)
 {
-    for(auto root : m_roots)
+    for(const auto& root : m_roots)
     {
         root->Set_BindTransformation();
     }
@@ -178,7 +178,7 @@ void CSkeleton::Draw(const i32 *_attributes)
     return;
     if (m_vertexBuffer != nullptr && m_indexBuffer != nullptr)
     {
-        for(auto root : m_roots)
+        for(const auto& root : m_roots)
         {
             root->Update();
         }
@@ -187,7 +187,7 @@ void CSkeleton::Draw(const i32 *_attributes)
         {
             SVertex* vertexData = m_vertexBuffer->Lock();
         
-            for(auto root : m_roots)
+            for(const auto& root : m_roots)
             {
                 root->WriteVertexData(vertexData, m_vertexBuffer->Get_Size());
             }

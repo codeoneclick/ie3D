@@ -22,7 +22,7 @@ m_mode(_mode)
 CVertexBuffer::~CVertexBuffer(void)
 {
     glDeleteBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
-    for(auto reference : m_references)
+    for(const auto& reference : m_references)
     {
         delete[] reference.second;
     }

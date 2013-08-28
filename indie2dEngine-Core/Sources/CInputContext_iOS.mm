@@ -88,7 +88,7 @@ void IInputContext::UnregisterTapRecognizerHandler(std::shared_ptr<IInputTapReco
 
 void IInputContext::TapRecognizerPressed(const glm::ivec2& _point)
 {
-    for(auto handler : m_handlers)
+    for(const auto& handler : m_handlers)
     {
         handler->_Get_Commands()._ExecuteInputTapRecognizerDidPressedCommand(_point);
     }
@@ -96,7 +96,7 @@ void IInputContext::TapRecognizerPressed(const glm::ivec2& _point)
 
 void IInputContext::TapRecognizerMoved(const glm::ivec2& _point)
 {
-    for(auto handler : m_handlers)
+    for(const auto& handler : m_handlers)
     {
         handler->_Get_Commands()._ExecuteInputTapRecognizerDidMovedCommand(_point);
     }
@@ -104,7 +104,7 @@ void IInputContext::TapRecognizerMoved(const glm::ivec2& _point)
 
 void IInputContext::TapRecognizerReleased(const glm::ivec2& _point)
 {
-    for(auto handler : m_handlers)
+    for(const auto& handler : m_handlers)
     {
         handler->_Get_Commands()._ExecuteInputTapRecognizerDidReleasedCommand(_point);
     }

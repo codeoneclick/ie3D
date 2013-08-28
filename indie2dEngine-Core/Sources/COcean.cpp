@@ -72,7 +72,7 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_mesh = std::make_shared<CMesh>("ocean", vertexBuffer, indexBuffer);
     assert(m_mesh != nullptr);
     
-    for(auto materialTemplate : oceanTemplate->m_materialsTemplates)
+    for(const auto& materialTemplate : oceanTemplate->m_materialsTemplates)
     {
         std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);

@@ -86,7 +86,7 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     std::shared_ptr<SGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<SGameTransitionTemplate>(_template);
     assert(gameTransitionTemplate != nullptr);
     
-    for(auto worldSpaceRenderOperationTemplate : gameTransitionTemplate->m_worldSpaceRenderOperationsTemplates)
+    for(const auto& worldSpaceRenderOperationTemplate : gameTransitionTemplate->m_worldSpaceRenderOperationsTemplates)
     {
         
         std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation = std::make_shared<CRenderOperationWorldSpace>(worldSpaceRenderOperationTemplate->m_screenWidth,
@@ -95,7 +95,7 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         m_renderMgr->RegisterWorldSpaceRenderOperation(worldSpaceRenderOperationTemplate->m_guid, worldSpaceRenderOperation);
     }
     
-    for(auto screenSpaceRenderOperationTemplate : gameTransitionTemplate->m_screenSpaceRenderOperationsTemplates)
+    for(const auto& screenSpaceRenderOperationTemplate : gameTransitionTemplate->m_screenSpaceRenderOperationsTemplates)
     {
         std::shared_ptr<SMaterialTemplate> screenSpaceRenderOperationMaterialTemplate = screenSpaceRenderOperationTemplate->m_materialTemplate;
         assert(screenSpaceRenderOperationMaterialTemplate != nullptr);
@@ -138,7 +138,7 @@ ui32 IGameTransition::Get_CurrentNumTriangles(void)
 ui32 IGameTransition::Get_TotalNumTriangles(void)
 {
     ui32 numTriangles = 0;
-    for(auto gameObject : CSceneFabricator::m_gameObjectsContainer)
+    for(const auto& gameObject : CSceneFabricator::m_gameObjectsContainer)
     {
         numTriangles += gameObject->Get_NumTriangles();
     }

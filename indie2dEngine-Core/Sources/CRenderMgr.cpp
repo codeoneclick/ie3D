@@ -104,7 +104,7 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
     assert(m_batchingMgr != nullptr);
     m_numTriangles = 0;
     
-    for(auto iterator : m_worldSpaceOperations)
+    for(const auto& iterator : m_worldSpaceOperations)
     {
         m_batchingMgr->Lock();
         std::shared_ptr<CRenderOperationWorldSpace> operation = iterator.second;
@@ -116,7 +116,7 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
         m_batchingMgr->Draw();
     }
     
-    for(auto iterator : m_screenSpaceOperations)
+    for(const auto& iterator : m_screenSpaceOperations)
     {
         std::shared_ptr<CRenderOperationScreenSpace> operation = iterator.second;
         operation->Bind();

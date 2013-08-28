@@ -50,7 +50,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         m_skeleton->Register_LoadingHandler(shared_from_this());
     }
     
-    for(auto materialTemplate : modelTemplate->m_materialsTemplates)
+    for(const auto& materialTemplate : modelTemplate->m_materialsTemplates)
     {
         std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
@@ -62,7 +62,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     
-    for(auto name : modelTemplate->m_sequencesFilenames)
+    for(const auto& name : modelTemplate->m_sequencesFilenames)
     {
         std::shared_ptr<CSequence> sequence = m_resourceFabricator->CreateSequence(name);
         assert(sequence != nullptr);
@@ -99,7 +99,7 @@ void CModel::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _succe
         m_animationMixer == nullptr)
     {
         m_animationMixer = std::make_shared<CAnimationMixer>(m_mesh, m_skeleton);
-        for(auto sequence : m_sequences)
+        for(const auto& sequence : m_sequences)
         {
             if(sequence->IsCommited() && sequence->IsLoaded())
             {

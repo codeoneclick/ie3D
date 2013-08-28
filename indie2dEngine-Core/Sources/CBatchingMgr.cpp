@@ -24,7 +24,7 @@ CBatchingMgr::~CBatchingMgr(void)
 
 void CBatchingMgr::Lock(void)
 {
-    for(auto iterator : m_batches)
+    for(const auto& iterator : m_batches)
     {
         iterator.second->Lock();
     }
@@ -32,7 +32,7 @@ void CBatchingMgr::Lock(void)
 
 void CBatchingMgr::Unlock(void)
 {
-    for(auto iterator : m_batches)
+    for(const auto& iterator : m_batches)
     {
         iterator.second->Unlock();
     }
@@ -55,7 +55,7 @@ void CBatchingMgr::Batch(std::shared_ptr<CMesh> _mesh, std::shared_ptr<CMaterial
 
 void CBatchingMgr::Draw(void)
 {
-    for(auto iterator : m_batches)
+    for(const auto& iterator : m_batches)
     {
         iterator.second->Draw();
     }

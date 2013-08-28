@@ -72,7 +72,7 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_mesh = std::make_shared<CMesh>("particle.emitter", vertexBuffer, indexBuffer);
     assert(m_mesh != nullptr);
     
-    for(auto materialTemplate : m_settings->m_materialsTemplates)
+    for(const auto& materialTemplate : m_settings->m_materialsTemplates)
     {
         std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);

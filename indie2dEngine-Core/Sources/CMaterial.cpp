@@ -51,7 +51,7 @@ void CMaterial::Serialize(std::shared_ptr<SMaterialTemplate> _template, std::sha
     CMaterial::Set_IsReflected(_template->m_isReflected);
     CMaterial::Set_IsDebug(_template->m_isDebug);
     
-    for(auto textureTemplate : _template->m_texturesTemplates)
+    for(const auto& textureTemplate : _template->m_texturesTemplates)
     {
         std::shared_ptr<CTexture> texture = textureTemplate->m_filename.length() != 0 ? _resourceAccessor->CreateTexture(textureTemplate->m_filename) : _renderMgr->Get_RenderOperationTexture(textureTemplate->m_operationName);
         assert(texture != nullptr);

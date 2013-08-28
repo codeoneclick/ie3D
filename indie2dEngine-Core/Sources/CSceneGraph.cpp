@@ -48,7 +48,7 @@ void CSceneGraph::Set_Camera(std::shared_ptr<CCamera> _camera)
     assert(m_sceneUpdateMgr != nullptr);
     m_sceneUpdateMgr->RegisterSceneUpdateHandler(m_camera);
     
-    for(auto iterator : m_gameObjectsContainer)
+    for(const auto& iterator : m_gameObjectsContainer)
     {
         iterator->Set_Camera(m_camera);
     }
@@ -61,7 +61,7 @@ void CSceneGraph::Set_Light(std::shared_ptr<CLight> _light)
 {
     m_light = _light;
     
-    for(auto iterator : m_gameObjectsContainer)
+    for(const auto& iterator : m_gameObjectsContainer)
     {
         iterator->Set_Light(m_light);
     }

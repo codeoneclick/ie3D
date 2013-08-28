@@ -40,7 +40,7 @@ std::shared_ptr<CBone> CBone::FindChild(i32 _id)
         return nullptr;
     }
     std::shared_ptr<CBone> bone = nullptr;
-    for(auto iterator : m_childs)
+    for(const auto& iterator : m_childs)
     {
         if(iterator->m_id == _id)
         {
@@ -58,7 +58,7 @@ std::shared_ptr<CBone> CBone::FindChild(i32 _id)
 
 void CBone::Update(void)
 {
-    for(auto iterator : m_childs)
+    for(const auto& iterator : m_childs)
     {
         iterator->Update();
     }
@@ -73,7 +73,7 @@ void CBone::Set_BindTransformation(void)
         m_bindTransformation = glm::inverse(*m_transformation);
     }
     
-    for(auto iterator : m_childs)
+    for(const auto& iterator : m_childs)
     {
         iterator->Set_BindTransformation();
     }
@@ -83,7 +83,7 @@ void CBone::WriteIndexData(ui16 *_indexData, i32* _offset, i32 _numIndexes)
 {
     assert((*_offset) < _numIndexes);
     
-    for(auto iterator : m_childs)
+    for(const auto& iterator : m_childs)
     {
         _indexData[(*_offset)] = m_id;
         i32 index = iterator->Get_Id();
@@ -98,7 +98,7 @@ void CBone::WriteVertexData(SVertex *_vertexData, i32 _numVertexes)
     assert(m_id < _numVertexes);
     
     _vertexData[m_id].m_position = glm::transform(glm::vec3(0.0f, 0.0f, 0.0f), m_baseTransformation);
-    for(auto iterator : m_childs)
+    for(const auto& iterator : m_childs)
     {
         iterator->WriteVertexData(_vertexData, _numVertexes);
     }

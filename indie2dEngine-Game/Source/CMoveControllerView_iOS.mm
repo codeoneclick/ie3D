@@ -41,7 +41,7 @@ CMoveController::~CMoveController(void)
 
 void CMoveController::OnUpdate(ui32 _direction)
 {
-    for(auto handler : m_handlers)
+    for(const auto& handler : m_handlers)
     {
         handler->_Get_Commands()._ExecuteMoveControllerUpdateCommand(_direction);
     }

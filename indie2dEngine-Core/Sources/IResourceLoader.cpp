@@ -32,7 +32,7 @@ void IResourceLoader::_Thread(void)
     while (m_isRunning)
     {
         std::lock_guard<std::mutex> lock(m_mutex);
-        for(auto iterator : m_operationsQueue)
+        for(const auto& iterator : m_operationsQueue)
         {
             std::shared_ptr<IResourceLoadingOperation> operation = iterator.second;
             if(operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_UNKNOWN)
