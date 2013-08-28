@@ -207,7 +207,7 @@ void CSkeleton::Draw(const i32 *_attributes)
         m_vertexBuffer->Bind(_attributes);
         m_indexBuffer->Bind();
         glLineWidth(m_boneWidth);
-        glDrawElements(GL_LINES, m_indexBuffer->Get_NumIndexes(), GL_UNSIGNED_SHORT, NULL);
+        glDrawElements(GL_LINES, m_indexBuffer->Get_Size(), GL_UNSIGNED_SHORT, NULL);
         m_vertexBuffer->Unbind(_attributes);
         m_indexBuffer->Unbind();
     }

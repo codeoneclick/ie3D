@@ -20,22 +20,24 @@ private:
 protected:
     
     ui32 m_handles[K_NUM_REPLACEMENT_INDEX_BUFFERS];
-    i32  m_currentHandleIndex;
+    i32  m_index;
+    
 	ui16* m_data;
-    GLenum m_mode;
     ui32 m_size;
+    
+    GLenum m_mode;
     
 public:
     
     CIndexBuffer(ui32 _size, GLenum _mode);
     ~CIndexBuffer(void);
     
-    inline const ui32 Get_NumIndexes(void)
+    inline const ui32 Get_Size(void) const
     {
         return m_size;
     };
     
-    inline ui16* Lock(void)
+    inline ui16* Lock(void) const
     {
         assert(m_data != nullptr);
 		return m_data;
@@ -44,8 +46,8 @@ public:
     void Unlock(void);
     void Unlock(ui32 _size);
     
-    void Bind(void);
-    void Unbind(void);
+    void Bind(void) const;
+    void Unbind(void) const;
     
 };
 

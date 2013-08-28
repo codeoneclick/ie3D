@@ -158,7 +158,7 @@ void CAABoundBox::Draw(void)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
-    glDrawElements(GL_TRIANGLES, m_indexBuffer->Get_NumIndexes(), GL_UNSIGNED_SHORT, NULL);
+    glDrawElements(GL_TRIANGLES, m_indexBuffer->Get_Size(), GL_UNSIGNED_SHORT, NULL);
 }
 
 void CAABoundBox::Unbind(const i32 *_attributes)

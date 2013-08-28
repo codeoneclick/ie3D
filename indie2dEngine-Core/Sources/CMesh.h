@@ -175,7 +175,7 @@ public:
     inline const ui32 Get_NumIndexes(void)
     {
         assert(m_indexBuffer != nullptr);
-        return m_indexBuffer->Get_NumIndexes();
+        return m_indexBuffer->Get_Size();
     };
     
     inline const glm::vec3 Get_MaxBound(void)

@@ -19,7 +19,7 @@ ProgressiveMesh::ProgressiveMesh(std::shared_ptr<CMesh> _mesh, E_SIMPLIFICATION_
     
     std::shared_ptr<CIndexBuffer> indexBuffer = m_mesh->Get_IndexBuffer();
 	ui16* indexes = indexBuffer->Lock();
-	for (ui32 i = 0; i < indexBuffer->Get_NumIndexes(); i += 3)
+	for (ui32 i = 0; i < indexBuffer->Get_Size(); i += 3)
     {
 		std::shared_ptr<CProgressiveTriangle> triangle = std::make_shared<CProgressiveTriangle>(m_vertexes[indexes[i]], m_vertexes[indexes[i + 1]], m_vertexes[indexes[i + 2]]);
         m_faces.push_back(triangle);

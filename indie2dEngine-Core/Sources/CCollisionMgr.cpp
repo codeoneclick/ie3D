@@ -121,7 +121,7 @@ bool CCollisionMgr::_CollisionPoint(std::shared_ptr<CVertexBuffer> _vertexBuffer
 {
     SVertex* vertexData = _vertexBuffer->Lock();
     ui16* indexData = _indexBuffer->Lock();
-    ui32 numIndexes = _indexBuffer->Get_NumIndexes();
+    ui32 numIndexes = _indexBuffer->Get_Size();
 
     for(ui32 index = 0; index < numIndexes; index += 3)
     {
