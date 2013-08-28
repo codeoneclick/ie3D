@@ -17,6 +17,12 @@ class IResource : public std::enable_shared_from_this<IResource>
 {
 private:
     
+    friend class CTextureLoadingOperation;
+    friend class CShaderLoadingOperation;
+    friend class CMeshLoadingOperation;
+    friend class CSkeletonLoadingOperation;
+    friend class CSequenceLoadingOperation;
+    
 protected:
     
     std::string m_guid;
@@ -25,33 +31,35 @@ protected:
     
     std::set<std::shared_ptr<IResourceLoadingHandler>> m_handlers;
     
+    void _OnLoaded(void);
+    
 public:
     
     IResource(E_RESOURCE_CLASS _class, const std::string& _guid);
     virtual ~IResource(void);
     
-    inline const std::string Get_Guid(void)
+    inline const std::string& Get_Guid(void) const
     {
         return m_guid;
     };
     
-    inline const E_RESOURCE_CLASS Get_Class(void)
+    inline const E_RESOURCE_CLASS Get_Class(void) const
     {
         return m_class;
     };
     
-    inline const bool IsLoaded(void)
+    inline const bool IsLoaded(void) const
     {
         return m_status & E_RESOURCE_STATUS_LOADED;
     };
     
-    inline const bool IsLinked(void)
+    inline const bool IsCommited(void) const
     {
         return m_status & E_RESOURCE_STATUS_COMMITED;
     };
     
-    void Set_LoadingHandler(std::shared_ptr<IResourceLoadingHandler> _handler);
-    void OnLoaded(void);
+    void Register_LoadingHandler(const std::shared_ptr<IResourceLoadingHandler>& _handler);
+    void Unregister_LoadingHandler(const std::shared_ptr<IResourceLoadingHandler>& _handler);
 };
 
 #endif 

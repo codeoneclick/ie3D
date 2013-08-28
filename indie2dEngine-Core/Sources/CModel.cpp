@@ -40,14 +40,14 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(_template);
     assert(m_resourceFabricator != nullptr);
     m_mesh = m_resourceFabricator->CreateMesh(modelTemplate->m_meshFilename);
-    m_mesh->Set_LoadingHandler(shared_from_this());
+    m_mesh->Register_LoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
     
     if(modelTemplate->m_skeletonFilename.size() != 0)
     {
         m_skeleton = m_resourceFabricator->CreateSkeleton(modelTemplate->m_skeletonFilename);
         assert(m_skeleton != nullptr);
-        m_skeleton->Set_LoadingHandler(shared_from_this());
+        m_skeleton->Register_LoadingHandler(shared_from_this());
     }
     
     for(auto materialTemplate : modelTemplate->m_materialsTemplates)
@@ -68,7 +68,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         assert(sequence != nullptr);
         sequence->Set_Name(name);
         m_sequences.insert(sequence);
-        sequence->Set_LoadingHandler(shared_from_this());
+        sequence->Register_LoadingHandler(shared_from_this());
     }
     
     m_boundBox = m_mesh->CreateBoundBox();
@@ -101,7 +101,7 @@ void CModel::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _succe
         m_animationMixer = std::make_shared<CAnimationMixer>(m_mesh, m_skeleton);
         for(auto sequence : m_sequences)
         {
-            if(sequence->IsLinked() && sequence->IsLoaded())
+            if(sequence->IsCommited() && sequence->IsLoaded())
             {
                 m_animationMixer->AddSequence(sequence->Get_Name(), sequence);
             }
@@ -182,7 +182,7 @@ void CModel::_OnDraw(const std::string& _renderMode)
         {
             IGameObject::_OnDraw(_renderMode);
         }
-        else if(m_mesh->IsLinked() && m_mesh->IsLoaded())
+        else if(m_mesh->IsCommited() && m_mesh->IsLoaded())
         {
             material->Get_Shader()->Set_Matrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_MATRIX_WORLD);
             m_renderMgr->Get_BatchingMgr()->Batch(m_mesh, material, m_matrixWorld);

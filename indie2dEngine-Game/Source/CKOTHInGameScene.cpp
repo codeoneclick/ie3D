@@ -59,7 +59,7 @@ void CKOTHInGameScene::Load(void)
     m_colliders.push_back(model);
     m_root->InsertModel(model);
     
-    for(i32 i = 1; i < 17; ++i)
+    /*for(i32 i = 1; i < 17; ++i)
     {
         for(i32 j = 1; j < 17; ++j)
         {
@@ -70,16 +70,16 @@ void CKOTHInGameScene::Load(void)
             m_colliders.push_back(model);
             m_root->InsertModel(model);
         }
-    }
+    }*/
     
-    std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
+    /*std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
     m_root->InsertOcean(ocean);
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
     particleEmitter->Set_Position(glm::vec3(12.0f, 2.0f, 12.0f));
     
     m_particles.push_back(particleEmitter);
-    m_root->InsertParticleEmitter(particleEmitter);
+    m_root->InsertParticleEmitter(particleEmitter);*/
     
     m_root->RegisterCollisionHandler(shared_from_this());
     
@@ -95,7 +95,7 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
 {
     static float angle = 0.0f;
     m_models[0]->Set_Animation("model_02.MDL_anim");
-    m_models[1]->Set_Animation("model_03.MDL_anim");
+    //m_models[1]->Set_Animation("model_03.MDL_anim");
     angle += 0.01f;
     
     static glm::vec3 lightPosition = glm::vec3(0.0f);

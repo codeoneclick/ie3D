@@ -80,8 +80,6 @@ const struct SSamplers SSamplers =
 
 CShaderUniform::CShaderUniform(E_UNIFORM_CLASS _class) :
 m_class(_class),
-m_valid(false),
-m_hash(0),
 m_mat3x3_value(0.0f),
 m_mat4x4_value(0.0f),
 m_vec2_value(0.0f),
@@ -108,19 +106,17 @@ m_handle(0)
     m_attributes[E_SHADER_ATTRIBUTE_NORMAL] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_TANGENT] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_COLOR] = -1;
-    
+    m_values.resize(E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX);
     for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
     {
-         m_values[i] = nullptr;
+        m_values[i] = nullptr;
     }
 }
 
 CShader::~CShader(void)
 {
-    for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
-    {
-        delete m_values[i];
-    }
+    m_values.clear();
+    m_values.resize(0);
 }
 
 void CShader::_Set_Handle(ui32 _handle)
@@ -156,25 +152,26 @@ void CShader::_Set_Handle(ui32 _handle)
 
 void CShader::Set_Matrix3x3(const glm::mat3x3 &_matrix, E_SHADER_UNIFORM _uniform)
 {
-    if(m_values[_uniform] == nullptr)
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_MAT3X3);
-    }
-    m_values[_uniform]->Set_Matrix3x3(_matrix);
-}
-
-void CShader::_Set_Matrix3x3(const glm::mat3x3 &_matrix, E_SHADER_UNIFORM _uniform)
-{
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
-    {
+        if(m_values[_uniform] != nullptr && m_values[_uniform]->Get_Matrix3x3() == _matrix)
+        {
+            return;
+        }
+        else if(m_values[_uniform] == nullptr)
+        {
+            m_values[_uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_MAT3X3);
+        }
+        
         i32 handle = m_uniforms[_uniform];
         glUniformMatrix3fv(handle, 1, 0, &_matrix[0][0]);
+        m_values[_uniform]->Set_Matrix3x3(_matrix);
     }
 }
 
 void CShader::Set_Matrix3x3Custom(const glm::mat3x3 &_matrix, const std::string &_uniform)
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniformMatrix3fv(handle, 1, 0, &_matrix[0][0]);
@@ -183,25 +180,26 @@ void CShader::Set_Matrix3x3Custom(const glm::mat3x3 &_matrix, const std::string 
 
 void CShader::Set_Matrix4x4(const glm::mat4x4 &_matrix, E_SHADER_UNIFORM _uniform)
 {
-    if(m_values[_uniform] == nullptr)
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_MAT4X4);
-    }
-    m_values[_uniform]->Set_Matrix4x4(_matrix);
-}
+        if(m_values[_uniform] != nullptr && m_values[_uniform]->Get_Matrix4x4() == _matrix)
+        {
+            return;
+        }
+        else if(m_values[_uniform] == nullptr)
+        {
+            m_values[_uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_MAT4X4);
+        }
 
-void CShader::_Set_Matrix4x4(const glm::mat4x4 &_matrix, E_SHADER_UNIFORM _uniform)
-{
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
-    {
         i32 handle = m_uniforms[_uniform];
         glUniformMatrix4fv(handle, 1, 0, &_matrix[0][0]);
+        m_values[_uniform]->Set_Matrix4x4(_matrix);
     }
 }
 
 void CShader::Set_Matrix4x4Custom(const glm::mat4x4 &_matrix, const std::string &_uniform)
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniformMatrix4fv(handle, 1, 0, &_matrix[0][0]);
@@ -210,115 +208,119 @@ void CShader::Set_Matrix4x4Custom(const glm::mat4x4 &_matrix, const std::string 
 
 void CShader::Set_Vector2(const glm::vec2 &_vector, E_SHADER_UNIFORM _uniform)
 {
-    if(m_values[_uniform] == nullptr)
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_VECTOR2);
-    }
-    m_values[_uniform]->Set_Vector2(_vector);
-}
-
-void CShader::_Set_Vector2(const glm::vec2 &_vector, E_SHADER_UNIFORM _uniform)
-{
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
-    {
+        if(m_values[_uniform] != nullptr && m_values[_uniform]->Get_Vector2() == _vector)
+        {
+            return;
+        }
+        else if(m_values[_uniform] == nullptr)
+        {
+            m_values[_uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR2);
+        }
+        
         i32 handle = m_uniforms[_uniform];
         glUniform2fv(handle, 1, &_vector[0]);
+        m_values[_uniform]->Set_Vector2(_vector);
     }
 }
 
 void CShader::Set_Vector2Custom(const glm::vec2 &_vector, const std::string &_uniform)
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniform2fv(handle, 1, &_vector[0]);
     }
 }
 
-void CShader::_Set_Vector3(const glm::vec3 &_vector, E_SHADER_UNIFORM _uniform)
-{
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
-    {
-        i32 handle = m_uniforms[_uniform];
-        glUniform3fv(handle, 1, &_vector[0]);
-    }
-}
-
 void CShader::Set_Vector3(const glm::vec3 &_vector, E_SHADER_UNIFORM _uniform)
 {
-    if(m_values[_uniform] == nullptr)
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_VECTOR3);
+        if(m_values[_uniform] != nullptr && m_values[_uniform]->Get_Vector3() == _vector)
+        {
+            return;
+        }
+        else if(m_values[_uniform] == nullptr)
+        {
+            m_values[_uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR3);
+        }
+        
+        i32 handle = m_uniforms[_uniform];
+        glUniform3fv(handle, 1, &_vector[0]);
+        m_values[_uniform]->Set_Vector3(_vector);
     }
-    m_values[_uniform]->Set_Vector3(_vector);
 }
 
 void CShader::Set_Vector3Custom(const glm::vec3 &_vector, const std::string &_uniform)
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniform3fv(handle, 1, &_vector[0]);
-    }
-}
-
-void CShader::_Set_Vector4(const glm::vec4 &_vector, E_SHADER_UNIFORM _uniform)
-{
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
-    {
-        i32 handle = m_uniforms[_uniform];
-        glUniform4fv(handle, 1, &_vector[0]);
     }
 }
 
 void CShader::Set_Vector4(const glm::vec4 &_vector, E_SHADER_UNIFORM _uniform)
 {
-    if(m_values[_uniform] == nullptr)
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_VECTOR4);
+        if(m_values[_uniform] != nullptr && m_values[_uniform]->Get_Vector4() == _vector)
+        {
+            return;
+        }
+        else if(m_values[_uniform] == nullptr)
+        {
+            m_values[_uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR4);
+        }
+
+        i32 handle = m_uniforms[_uniform];
+        glUniform4fv(handle, 1, &_vector[0]);
+        m_values[_uniform]->Set_Vector4(_vector);
     }
-    m_values[_uniform]->Set_Vector4(_vector);
 }
 
 void CShader::Set_Vector4Custom(const glm::vec4 &_vector, const std::string &_uniform)
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniform4fv(handle, 1, &_vector[0]);
     }
 }
 
-void CShader::_Set_Float(f32 _value, E_SHADER_UNIFORM _uniform)
-{
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
-    {
-        i32 handle = m_uniforms[_uniform];
-        glUniform1f(handle, _value);
-    }
-}
-
 void CShader::Set_Float(f32 _value, E_SHADER_UNIFORM _uniform)
 {
-    if(m_values[_uniform] == nullptr)
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        m_values[_uniform] = new CShaderUniform(E_UNIFORM_CLASS_FLOAT);
+        if(m_values[_uniform] != nullptr && m_values[_uniform]->Get_Float() == _value)
+        {
+            return;
+        }
+        else if(m_values[_uniform] == nullptr)
+        {
+            m_values[_uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_FLOAT);
+        }
+
+        i32 handle = m_uniforms[_uniform];
+        glUniform1f(handle, _value);
+        m_values[_uniform]->Set_Float(_value);
     }
-    m_values[_uniform]->Set_Float(_value);
 }
 
 void CShader::Set_FloatCustom(f32 _value, const std::string &_uniform)
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniform1f(handle, _value);
     }
 }
 
-void CShader::_Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
+void CShader::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         glActiveTexture(GL_TEXTURE0 + _sampler);
         _texture->Bind();
@@ -326,80 +328,17 @@ void CShader::_Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER 
     }
 }
 
-void CShader::Set_Texture(const std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
+void CShader::Bind(void) const
 {
-    if(m_values[_sampler + E_SHADER_UNIFORM_MAX] == nullptr)
-    {
-        m_values[_sampler + E_SHADER_UNIFORM_MAX] = new CShaderUniform(E_UNIFORM_CLASS_SAMPLER);
-    }
-    m_values[_sampler + E_SHADER_UNIFORM_MAX]->Set_Sampler(_texture, _sampler);
-}
-
-void CShader::Bind(void)
-{
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         glUseProgram(m_handle);
     }
-    
-    for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
-    {
-        if(m_values[i] != nullptr && !m_values[i]->Get_Valid())
-        {
-            switch (m_values[i]->Get_Class())
-            {
-                case E_UNIFORM_CLASS_MAT3X3:
-                {
-                    CShader::_Set_Matrix3x3(m_values[i]->Get_Matrix3x3(), static_cast<E_SHADER_UNIFORM>(i));
-                }
-                    break;
-                    
-                case E_UNIFORM_CLASS_MAT4X4:
-                {
-                    CShader::_Set_Matrix4x4(m_values[i]->Get_Matrix4x4(), static_cast<E_SHADER_UNIFORM>(i));
-                }
-                    break;
-                    
-                case E_UNIFORM_CLASS_VECTOR2:
-                {
-                    CShader::_Set_Vector2(m_values[i]->Get_Vector2(), static_cast<E_SHADER_UNIFORM>(i));
-                }
-                    break;
-                    
-                case E_UNIFORM_CLASS_VECTOR3:
-                {
-                    CShader::_Set_Vector3(m_values[i]->Get_Vector3(), static_cast<E_SHADER_UNIFORM>(i));
-                }
-                    break;
-                    
-                case E_UNIFORM_CLASS_VECTOR4:
-                {
-                    CShader::_Set_Vector4(m_values[i]->Get_Vector4(), static_cast<E_SHADER_UNIFORM>(i));
-                }
-                    break;
-                    
-                case E_UNIFORM_CLASS_FLOAT:
-                {
-                    CShader::_Set_Float(m_values[i]->Get_Float(), static_cast<E_SHADER_UNIFORM>(i));
-                }
-                    break;
-                    
-                case E_UNIFORM_CLASS_SAMPLER:
-                {
-                    CShader::_Set_Texture(m_values[i]->Get_Texture(), m_values[i]->Get_Sampler());
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
-    }
 }
 
-void CShader::Unbind(void)
+void CShader::Unbind(void) const
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         glUseProgram(NULL);
     }

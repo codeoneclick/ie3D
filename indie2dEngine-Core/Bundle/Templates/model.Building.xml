@@ -6,8 +6,8 @@
     </animations>
 	<materials>
 		<material filename="material.model.common.xml"/>
-        <material filename="material.model.reflection.xml"/>
-        <material filename="material.model.refraction.xml"/>
+        <!--<material filename="material.model.reflection.xml"/>-->
+        <!--<material filename="material.model.refraction.xml"/>-->
         <!--<material filename="screen.gbuffer.position.model.material.xml"/>-->
         <!--<material filename="gbuffer.normal.material.xml"/>-->
 	</materials>

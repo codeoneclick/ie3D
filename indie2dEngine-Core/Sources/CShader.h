@@ -21,15 +21,13 @@ protected:
     
     E_UNIFORM_CLASS m_class;
     
-    bool m_valid;
-    size_t m_hash;
-    
     glm::mat4x4 m_mat4x4_value;
     glm::mat3x3 m_mat3x3_value;
     glm::vec4 m_vec4_value;
     glm::vec3 m_vec3_value;
     glm::vec2 m_vec2_value;
     f32 m_f32_value;
+    
     E_SHADER_SAMPLER m_sampler_value;
     std::shared_ptr<CTexture> m_texture_value;
     
@@ -38,12 +36,7 @@ public:
     CShaderUniform(E_UNIFORM_CLASS _class);
     ~CShaderUniform(void);
     
-    inline bool Get_Valid(void)
-    {
-        return m_valid;
-    };
-    
-    inline E_UNIFORM_CLASS Get_Class(void)
+    inline E_UNIFORM_CLASS Get_Class(void) const
     {
         return m_class;
     };
@@ -51,58 +44,34 @@ public:
     inline void Set_Matrix3x3(const glm::mat3x3& _matrix)
     {
         assert(m_class == E_UNIFORM_CLASS_MAT3X3);
-        if(_matrix != m_mat3x3_value)
-        {
-            m_mat3x3_value = _matrix;
-            m_valid = false;
-        }
+        m_mat3x3_value = _matrix;
     };
     inline void Set_Matrix4x4(const glm::mat4x4& _matrix)
     {
         assert(m_class == E_UNIFORM_CLASS_MAT4X4);
-        if(m_mat4x4_value != _matrix)
-        {
-            m_mat4x4_value = _matrix;
-            m_valid = false;
-        }
+        m_mat4x4_value = _matrix;
     };
 
     inline void Set_Vector2(const glm::vec2& _vector)
     {
         assert(m_class == E_UNIFORM_CLASS_VECTOR2);
-        if(m_vec2_value != _vector)
-        {
-            m_vec2_value = _vector;
-            m_valid = false;
-        }
+        m_vec2_value = _vector;
     };
     inline void Set_Vector3(const glm::vec3& _vector)
     {
         assert(m_class == E_UNIFORM_CLASS_VECTOR3);
-        if(m_vec3_value != _vector)
-        {
-            m_vec3_value = _vector;
-            m_valid = false;
-        }
+        m_vec3_value = _vector;
     };
     inline void Set_Vector4(const glm::vec4& _vector)
     {
         assert(m_class == E_UNIFORM_CLASS_VECTOR4);
-        if(m_vec4_value != _vector)
-        {
-            m_vec4_value = _vector;
-            m_valid = false;
-        }
+        m_vec4_value = _vector;
     };
     
     inline void Set_Float(f32 _value)
     {
         assert(m_class == E_UNIFORM_CLASS_FLOAT);
-        if(m_f32_value != _value)
-        {
-            m_f32_value = _value;
-            m_valid = false;
-        }
+        m_f32_value = _value;
     };
     
     inline void Set_Sampler(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
@@ -110,52 +79,44 @@ public:
         assert(m_class == E_UNIFORM_CLASS_SAMPLER);
         m_sampler_value = _sampler;
         m_texture_value = _texture;
-        m_valid = false;
     };
     
     inline const glm::mat3x3& Get_Matrix3x3(void)
     {
         assert(m_class == E_UNIFORM_CLASS_MAT3X3);
-        m_valid = true;
         return m_mat3x3_value;
     };
     inline const glm::mat4x4& Get_Matrix4x4(void)
     {
         assert(m_class == E_UNIFORM_CLASS_MAT4X4);
-        m_valid = true;
         return m_mat4x4_value;
     };
     
     inline const glm::vec2& Get_Vector2(void)
     {
         assert(m_class == E_UNIFORM_CLASS_VECTOR2);
-        m_valid = true;
         return m_vec2_value;
     };
     inline const glm::vec3& Get_Vector3(void)
     {
         assert(m_class == E_UNIFORM_CLASS_VECTOR3);
-        m_valid = true;
         return m_vec3_value;
     };
     inline const glm::vec4& Get_Vector4(void)
     {
         assert(m_class == E_UNIFORM_CLASS_VECTOR4);
-        m_valid = true;
         return m_vec4_value;
     };
     
     inline f32 Get_Float(void)
     {
         assert(m_class == E_UNIFORM_CLASS_FLOAT);
-        m_valid = true;
         return m_f32_value;
     };
     
     inline E_SHADER_SAMPLER Get_Sampler(void)
     {
         assert(m_class == E_UNIFORM_CLASS_SAMPLER);
-        m_valid = true;
         return m_sampler_value;
     };
     
@@ -179,12 +140,11 @@ protected:
     i32 m_uniforms[E_SHADER_UNIFORM_MAX];
     i32 m_samplers[E_SHADER_SAMPLER_MAX];
     i32 m_attributes[E_SHADER_ATTRIBUTE_MAX];
+    std::vector<std::shared_ptr<CShaderUniform> > m_values;
     
     std::string m_vsSourceCode;
     std::string m_fsSourceCode;
     ui32 m_handle;
-    
-    CShaderUniform* m_values[E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX];
     
     inline void _Set_SourceCode(const std::string& _vsSourceCode, const std::string& _fsSourceCode)
     {
@@ -213,14 +173,6 @@ protected:
     
     void _Set_Handle(ui32 _handle);
     
-    void _Set_Matrix3x3(const glm::mat3x3& _matrix, E_SHADER_UNIFORM _uniform);
-    void _Set_Matrix4x4(const glm::mat4x4& _matrix, E_SHADER_UNIFORM _uniform);
-    void _Set_Vector2(const glm::vec2& _vector, E_SHADER_UNIFORM _uniform);
-    void _Set_Vector3(const glm::vec3& _vector, E_SHADER_UNIFORM _uniform);
-    void _Set_Vector4(const glm::vec4& _vector, E_SHADER_UNIFORM _uniform);
-    void _Set_Float(f32 _value, E_SHADER_UNIFORM _uniform);
-    void _Set_Texture(const std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler);
-    
 public:
     
     CShader(const std::string& _guid);
@@ -245,8 +197,8 @@ public:
     void Set_FloatCustom(f32 _value, const std::string& _uniform);
     void Set_Texture(const std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler);
     
-    void Bind(void);
-    void Unbind(void);
+    void Bind(void) const;
+    void Unbind(void) const;
 };
 
 #endif 

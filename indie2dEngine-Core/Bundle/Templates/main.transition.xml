@@ -2,8 +2,8 @@
     <output.render.operation filename="output.space.operation.xml"/>
     <world.space.render.operations>
         <world.space.render.operation filename="world.space.operation.xml"/>
-        <world.space.render.operation filename="world.space.reflection.operation.xml"/>
-        <world.space.render.operation filename="world.space.refraction.operation.xml"/>
+        <!--<world.space.render.operation filename="world.space.reflection.operation.xml"/>-->
+        <!--<world.space.render.operation filename="world.space.refraction.operation.xml"/>-->
         <!--<world.space.render.operation filename="world.space.gbuffer.position.operation.xml"/>-->
         <!--<world.space.render.operation filename="gbuffer.normal.operation.xml"/>-->
     </world.space.render.operations>

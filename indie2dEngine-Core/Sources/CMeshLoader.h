@@ -24,7 +24,7 @@ public:
     CMeshLoader(void);
     ~CMeshLoader(void);
     
-    std::shared_ptr<CMesh> StartLoadOperation(const std::string& _filename, std::shared_ptr<IResourceLoadingHandler> _handler);
+    std::shared_ptr<CMesh> StartLoadOperation(const std::string& _filename);
 };
 
 #endif

@@ -24,7 +24,7 @@ public:
     CShaderLoader(void);
     ~CShaderLoader(void);
     
-    std::shared_ptr<CShader> StartLoadOperation(const std::string& _vsFilename, const std::string& _fsFilename, std::shared_ptr<IResourceLoadingHandler> _handler);
+    std::shared_ptr<CShader> StartLoadOperation(const std::string& _vsFilename, const std::string& _fsFilename);
 };
 
 #endif

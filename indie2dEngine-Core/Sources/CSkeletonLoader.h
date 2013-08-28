@@ -24,7 +24,7 @@ public:
     CSkeletonLoader(void);
     ~CSkeletonLoader(void);
     
-    std::shared_ptr<CSkeleton> StartLoadOperation(const std::string& _filename, std::shared_ptr<IResourceLoadingHandler> _handler);
+    std::shared_ptr<CSkeleton> StartLoadOperation(const std::string& _filename);
 };
 
 #endif 

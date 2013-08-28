@@ -50,7 +50,7 @@ void CAnimationMixer::SetAnimation(const std::string& _name)
         return;
     }
     
-    if(m_sequences.find(_name)->second->IsLoaded() && m_sequences.find(_name)->second->IsLinked())
+    if(m_sequences.find(_name)->second->IsLoaded() && m_sequences.find(_name)->second->IsCommited())
     {
         m_oldSequence = m_currentSequence;
         m_currentSequence = m_sequences.find(_name)->second;

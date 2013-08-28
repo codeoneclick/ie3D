@@ -123,9 +123,11 @@ protected:
     
     std::shared_ptr<CTextureHeader> m_header;
     ui32 m_handle;
-    ui32 m_wrap;
     
-    inline void _Set_Header(std::shared_ptr<CTextureHeader> _header)
+    mutable ui32 m_settedWrap;
+    ui32 m_presettedWrap;
+    
+    inline void _Set_Header(const std::shared_ptr<CTextureHeader>& _header)
     {
         m_header = _header;
         m_status |= E_RESOURCE_STATUS_LOADED;
@@ -155,18 +157,18 @@ public:
     CTexture(const std::string& _guid);
     ~CTexture(void);
     
-    inline const ui32 Get_Handle(void)
+    inline const ui32 Get_Handle(void) const
     {
         return m_handle;
     };
     
-    inline const ui32 Get_Width(void)
+    inline const ui32 Get_Width(void) const 
     {
         assert(m_header != nullptr);
         return m_header->Get_Width();
     };
     
-    inline const ui32 Get_Height(void)
+    inline const ui32 Get_Height(void) const 
     {
         assert(m_header != nullptr);
         return m_header->Get_Height();
@@ -174,7 +176,7 @@ public:
     
     inline void Set_Wrap(ui32 _wrap)
     {
-        m_wrap = _wrap;
+        m_presettedWrap = _wrap;
     };
     
     void Bind(void) const;

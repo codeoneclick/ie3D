@@ -40,11 +40,11 @@ public:
     CResourceAccessor(void);
     ~CResourceAccessor(void);
     
-    std::shared_ptr<CTexture> CreateTexture(const std::string& _filename,  std::shared_ptr<IResourceLoadingHandler> _handler = nullptr);
-    std::shared_ptr<CShader> CreateShader(const std::string& _vsFilename, const std::string& _fsFilename, std::shared_ptr<IResourceLoadingHandler> _handler = nullptr);
-    std::shared_ptr<CMesh> CreateMesh(const std::string& _filename, std::shared_ptr<IResourceLoadingHandler> _handler = nullptr);
-    std::shared_ptr<CSkeleton> CreateSkeleton(const std::string& _filename, std::shared_ptr<IResourceLoadingHandler> _handler = nullptr);
-    std::shared_ptr<CSequence> CreateSequence(const std::string& _filename, std::shared_ptr<IResourceLoadingHandler> _handler = nullptr);
+    std::shared_ptr<CTexture> CreateTexture(const std::string& _filename);
+    std::shared_ptr<CShader> CreateShader(const std::string& _vsFilename, const std::string& _fsFilename);
+    std::shared_ptr<CMesh> CreateMesh(const std::string& _filename);
+    std::shared_ptr<CSkeleton> CreateSkeleton(const std::string& _filename);
+    std::shared_ptr<CSequence> CreateSequence(const std::string& _filename);
     
 };
 

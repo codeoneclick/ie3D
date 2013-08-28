@@ -24,7 +24,7 @@ public:
     CTextureLoader(void);
     ~CTextureLoader(void);
     
-    std::shared_ptr<CTexture> StartLoadOperation(const std::string& _filename, std::shared_ptr<IResourceLoadingHandler> _handler);
+    std::shared_ptr<CTexture> StartLoadOperation(const std::string& _filename);
 };
 
 

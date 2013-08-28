@@ -25,7 +25,8 @@ CTexture::CTexture(const std::string& _guid) :
 IResource(E_RESOURCE_CLASS_TEXTURE, _guid),
 m_handle(0),
 m_header(nullptr),
-m_wrap(GL_REPEAT)
+m_presettedWrap(GL_REPEAT),
+m_settedWrap(0)
 {
     
 }
@@ -35,19 +36,23 @@ CTexture::~CTexture(void)
     glDeleteTextures(1, &m_handle);
 }
 
-void CTexture::Bind(void) const
+void CTexture::Bind(void) const 
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         glBindTexture(GL_TEXTURE_2D, m_handle);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_wrap);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_wrap);
+        if(m_settedWrap == 0 || m_presettedWrap != m_settedWrap)
+        {
+            m_settedWrap = m_presettedWrap;
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_settedWrap);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_settedWrap);
+        }
     }
 }
 
 void CTexture::Unbind(void) const
 {
-    if((m_status & E_RESOURCE_STATUS_LOADED) && (m_status & E_RESOURCE_STATUS_COMMITED))
+    if(IResource::IsLoaded() && IResource::IsCommited())
     {
         glBindTexture(GL_TEXTURE_2D, NULL);
     }

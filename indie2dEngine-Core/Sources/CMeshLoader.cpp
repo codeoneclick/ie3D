@@ -20,7 +20,7 @@ CMeshLoader::~CMeshLoader(void)
     
 }
 
-std::shared_ptr<CMesh> CMeshLoader::StartLoadOperation(const std::string &_filename, std::shared_ptr<IResourceLoadingHandler> _handler)
+std::shared_ptr<CMesh> CMeshLoader::StartLoadOperation(const std::string &_filename)
 {
     std::string guid = _filename;
     std::shared_ptr<CMesh> resource = nullptr;
@@ -35,6 +35,5 @@ std::shared_ptr<CMesh> CMeshLoader::StartLoadOperation(const std::string &_filen
         m_resourceContainer.insert(std::make_pair(guid, resource));
         m_operationsQueue.insert(std::make_pair(guid, operation));
     }
-    resource->Set_LoadingHandler(_handler);
     return resource;
 }

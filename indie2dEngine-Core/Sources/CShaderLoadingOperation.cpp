@@ -46,5 +46,5 @@ void CShaderLoadingOperation::Commit(void)
                                                         m_resource);
     m_commiter->Commit();
     m_status = m_commiter->Get_Status() == E_COMMITER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
-    m_resource->OnLoaded();
+    m_resource->_OnLoaded();
 }
