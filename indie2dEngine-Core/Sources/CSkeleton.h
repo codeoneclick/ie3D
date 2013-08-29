@@ -13,8 +13,10 @@
 #include "IResource.h"
 
 class CBone;
-class CVertexBuffer;
-class CIndexBuffer;
+class CHVertexBuffer;
+class CSVertexBuffer;
+class CHIndexBuffer;
+class CSIndexBuffer;
 
 class CSkeleton final : public IResource
 {
@@ -25,8 +27,6 @@ private:
     
 protected:
     
-    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
-    std::shared_ptr<CIndexBuffer> m_indexBuffer;
     f32 m_boneWidth;
     
     i32	m_numBones;

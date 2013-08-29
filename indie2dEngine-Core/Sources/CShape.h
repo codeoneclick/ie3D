@@ -9,8 +9,8 @@
 #ifndef CShape_h
 #define CShape_h
 
-#include "CVertexBuffer.h"
-#include "CIndexBuffer.h"
+#include "CHVertexBuffer.h"
+#include "CHIndexBuffer.h"
 
 class CShape
 {
@@ -18,8 +18,8 @@ private:
     
 protected:
     
-    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
-    std::shared_ptr<CIndexBuffer> m_indexBuffer;
+    std::shared_ptr<CHVertexBuffer> m_vertexBuffer;
+    std::shared_ptr<CHIndexBuffer> m_indexBuffer;
     
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
@@ -29,13 +29,13 @@ public:
     CShape(void);
     ~CShape(void);
     
-    inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)
+    inline std::shared_ptr<CHVertexBuffer> Get_VertexBuffer(void)
     {
         assert(m_vertexBuffer != nullptr);
         return m_vertexBuffer;
     };
     
-    inline std::shared_ptr<CIndexBuffer> Get_IndexBuffer(void)
+    inline std::shared_ptr<CHIndexBuffer> Get_IndexBuffer(void)
     {
         assert(m_indexBuffer != nullptr);
         return m_indexBuffer;

@@ -13,6 +13,8 @@
 
 class CSequence;
 class CMesh;
+class CSVertexBuffer;
+class CSIndexBuffer;
 class CSkeleton;
 
 class CAnimationMixer
@@ -31,7 +33,8 @@ protected:
     f32 m_animationTime;
     
     std::string m_skeletonGuid;
-    std::string m_vertexBufferGuid;
+    ui32 m_vertexBufferGuid;
+    ui32 m_indexBufferGuid;
     
     void _BindSequence(void);
     
@@ -39,6 +42,16 @@ public:
     
     CAnimationMixer(std::shared_ptr<CMesh> _mesh, std::shared_ptr<CSkeleton> _skeleton);
     ~CAnimationMixer(void);
+    
+    inline const ui32 Get_VertexBufferGuid(void) const
+    {
+        return m_vertexBufferGuid;
+    };
+    
+    inline const ui32 Get_IndexBufferGuid(void) const
+    {
+        return m_indexBufferGuid;
+    };
     
     void AddSequence(const std::string& _name, std::shared_ptr<CSequence> _sequence);
     void SetAnimation(const std::string& _name);

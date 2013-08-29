@@ -10,7 +10,7 @@
 #define CVertexBuffer_h
 
 #include "HCommon.h"
-
+/*
 #define k_NUM_REPLACEMENT_VERTEX_BUFFERS 3
 
 struct SBone
@@ -94,5 +94,5 @@ public:
     void Bind(const i32* _attributes);
     void Unbind(const i32* _attributes);
 };
-
+*/
 #endif 

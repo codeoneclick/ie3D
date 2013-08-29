@@ -20,8 +20,10 @@ class CCamera;
 class CLight;
 class CShape;
 class CMesh;
-class CVertexBuffer;
-class CIndexBuffer;
+class CHVertexBuffer;
+class CSVertexBuffer;
+class CHIndexBuffer;
+class CSIndexBuffer;
 class CTexture;
 class CMaterial;
 class CRenderMgr;
@@ -142,11 +144,14 @@ public:
         m_light = _light;
     };
     
-    std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void);
-    std::shared_ptr<CIndexBuffer> Get_IndexBuffer(void);
+    std::shared_ptr<CHVertexBuffer> Get_HardwareVertexBuffer(void);
+    std::shared_ptr<CSVertexBuffer> Get_SoftwareVertexBuffer(void);
     
-    std::shared_ptr<CVertexBuffer> Get_BoundVertexBuffer(void);
-    std::shared_ptr<CIndexBuffer> Get_BoundIndexBuffer(void);
+    std::shared_ptr<CHIndexBuffer> Get_HardwareIndexBuffer(void);
+    std::shared_ptr<CSIndexBuffer> Get_SoftwareIndexBuffer(void);
+    
+    std::shared_ptr<CSVertexBuffer> Get_BoundVertexBuffer(void);
+    std::shared_ptr<CSIndexBuffer> Get_BoundIndexBuffer(void);
     
     void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode);
     void Set_Clipping(const glm::vec4& _clipping, const std::string& _renderMode);

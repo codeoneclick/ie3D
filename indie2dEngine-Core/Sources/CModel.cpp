@@ -116,6 +116,14 @@ void CModel::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _succe
             m_animationMixer->AddSequence((*sequence)->Get_Name(), (*sequence));
         }
     }
+    
+    if(_resource->Get_Class() == E_RESOURCE_CLASS_MESH)
+    {
+        if(!m_materials.begin()->second->Get_IsBatching())
+        {
+            m_mesh->CreateHardwareBuffers(GL_DYNAMIC_DRAW, GL_STATIC_DRAW);
+        }
+    }
 }
 
 void CModel::Set_Animation(const std::string &_name)
@@ -140,7 +148,7 @@ void CModel::_OnSceneUpdate(f32 _deltatime)
 
 i32 CModel::_OnQueuePosition(void)
 {
-    return 0;
+    return 16;
 }
 
 void CModel::_OnBind(const std::string& _renderMode)
@@ -156,11 +164,6 @@ void CModel::_OnDraw(const std::string& _renderMode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        if(m_animationMixer != nullptr)
-        {
-            m_animationMixer->OnDraw();
-        }
-        
         assert(m_camera != nullptr);
         assert(m_light != nullptr);
         assert(m_materials.find(_renderMode) != m_materials.end());
@@ -178,14 +181,15 @@ void CModel::_OnDraw(const std::string& _renderMode)
         material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
-        if(!material->Get_IsBatching())
+        if(!material->Get_IsBatching() && m_animationMixer != nullptr)
         {
+            m_animationMixer->OnDraw();
             IGameObject::_OnDraw(_renderMode);
         }
-        else if(m_mesh->IsCommited() && m_mesh->IsLoaded())
+        else if(m_mesh->IsLoaded() && m_animationMixer != nullptr)
         {
             material->Get_Shader()->Set_Matrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_MATRIX_WORLD);
-            m_renderMgr->Get_BatchingMgr()->Batch(m_mesh, material, m_matrixWorld);
+            m_renderMgr->Get_BatchingMgr()->Batch(std::make_tuple(m_animationMixer->Get_VertexBufferGuid(), m_animationMixer->Get_IndexBufferGuid(), m_mesh), material, m_matrixWorld);
         }
     }
 }

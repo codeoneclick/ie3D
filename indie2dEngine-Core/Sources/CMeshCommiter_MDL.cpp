@@ -30,17 +30,10 @@ void CMeshCommiter_MDL::Commit(void)
     std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh >(m_resource);
     std::shared_ptr<CMeshHeader> header = mesh->_Get_Header();
     
-    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(header->Get_NumVertexes(), GL_DYNAMIC_DRAW);
-    SVertex* vertexData = vertexBuffer->Lock();
-	memcpy(vertexData, header->Get_VertexData(), sizeof(SVertex) * header->Get_NumVertexes());
-    vertexBuffer->Unlock();
-    
-    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(header->Get_NumIndexes(), GL_STATIC_DRAW);
-    ui16* indexData = indexBuffer->Lock();
-	memcpy(indexData, header->Get_IndexData(), sizeof(ui16) * header->Get_NumIndexes());
-    indexBuffer->Unlock();
-    
-    mesh->_Set_Handlers(vertexBuffer, indexBuffer);
+    std::shared_ptr<CSVertexBuffer> softwareVertexBuffer = std::make_shared<CSVertexBuffer>(header->m_vertexData, header->m_numVertexes);
+
+    std::shared_ptr<CSIndexBuffer> softwareIndexBuffer = std::make_shared<CSIndexBuffer>(header->m_indexData, header->m_numIndexes);
+    mesh->_Set_Handlers(softwareVertexBuffer, softwareIndexBuffer);
     
     m_status = E_COMMITER_STATUS_SUCCESS;
 }

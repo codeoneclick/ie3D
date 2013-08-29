@@ -11,9 +11,10 @@
 
 #include "HCommon.h"
 
-class CVertexBuffer;
-class CIndexBuffer;
-class SVertex;
+class CHVertexBuffer;
+class CSVertexBuffer;
+class CHIndexBuffer;
+class CSIndexBuffer;
 
 class CBone final : public std::enable_shared_from_this<CBone>
 {
@@ -51,9 +52,6 @@ public:
     std::shared_ptr<CBone> FindChild(i32 _id);
     void Update(void);
     void Set_BindTransformation(void);
-    
-    void WriteVertexData(SVertex* _vertexData, i32 _numVertexes);
-    void WriteIndexData(ui16* _indexData, i32* _offset, i32 _numIndexes);
     
     inline std::vector<std::shared_ptr<CBone> >& Get_Childs(void)
     {

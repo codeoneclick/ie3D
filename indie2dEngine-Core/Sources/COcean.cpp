@@ -15,8 +15,10 @@
 #include "CResourceAccessor.h"
 #include "ITemplate.h"
 #include "CMesh.h"
-#include "CVertexBuffer.h"
-#include "CIndexBuffer.h"
+#include "CHVertexBuffer.h"
+#include "CSVertexBuffer.h"
+#include "CHIndexBuffer.h"
+#include "CSIndexBuffer.h"
 
 COcean::COcean(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 IGameObject(_resourceFabricator)
@@ -42,8 +44,8 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_waveGeneratorTimer = 0.0f;
     m_waveGeneratorInterval = oceanTemplate->m_waveGeneratorInterval;
     
-    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(4, GL_STATIC_DRAW);
-    SVertex* vertexData = vertexBuffer->Lock();
+    
+    CSVertexBuffer::SVertex* vertexData = new CSVertexBuffer::SVertex[4];
     
     vertexData[0].m_position = glm::vec3(0.0f,  m_altitude,  0.0f);
     vertexData[1].m_position = glm::vec3(m_width, m_altitude,  0.0f);
@@ -55,10 +57,9 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     vertexData[2].m_texcoord = glm::vec2(1.0f,  1.0f);
     vertexData[3].m_texcoord = glm::vec2(0.0f,  1.0f);
     
-    vertexBuffer->Unlock();
+    std::shared_ptr<CSVertexBuffer> softwareVertexBuffer = std::make_shared<CSVertexBuffer>(vertexData, 4);
     
-    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(6, GL_STATIC_DRAW);
-    ui16* indexData = indexBuffer->Lock();
+    ui16* indexData = new ui16[6];
     
     indexData[0] = 0;
     indexData[1] = 1;
@@ -67,10 +68,11 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     indexData[4] = 2;
     indexData[5] = 3;
     
-    indexBuffer->Unlock();
+    std::shared_ptr<CSIndexBuffer> softwareIndexBuffer = std::make_shared<CSIndexBuffer>(indexData, 6);
     
-    m_mesh = std::make_shared<CMesh>("ocean", vertexBuffer, indexBuffer);
+    m_mesh = std::make_shared<CMesh>("ocean", softwareVertexBuffer, softwareIndexBuffer);
     assert(m_mesh != nullptr);
+    m_mesh->CreateHardwareBuffers(GL_STATIC_DRAW, GL_STATIC_DRAW);
     
     for(const auto& materialTemplate : oceanTemplate->m_materialsTemplates)
     {
@@ -97,7 +99,7 @@ void COcean::_OnSceneUpdate(f32 _deltatime)
 
 i32 COcean::_OnQueuePosition(void)
 {
-    return 128;
+    return 8;
 }
 
 void COcean::_OnBind(const std::string& _renderMode)

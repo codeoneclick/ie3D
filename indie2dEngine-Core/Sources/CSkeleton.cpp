@@ -143,73 +143,10 @@ void CSkeleton::BindTransformation(void)
     {
         root->Set_BindTransformation();
     }
-    
-    /*std::function<void(void)> function = [this]()
-    {
-        i32 numIndexes = ((m_numBones - 1) * 2);
-        m_indexBuffer = std::make_shared<CIndexBuffer>(numIndexes, GL_STATIC_DRAW);
-        ui16* indexData = m_indexBuffer->Lock();
-        memset(indexData, 0x0, sizeof(ui16) * m_indexBuffer->Get_NumIndexes());
-        i32 index = 0;
-        for(auto root : m_roots)
-        {
-            root->WriteIndexData(indexData, &index, numIndexes);
-        }
-        m_indexBuffer->Unlock();
-        
-        for(i32 i = 0; i < numIndexes; ++i)
-        {
-            std::cout<<"[Index] "<<indexData[i]<<std::endl;
-        }
-        
-        m_vertexBuffer = std::make_shared<CVertexBuffer>(m_numBones, GL_DYNAMIC_DRAW);
-        SVertex* vertexData = m_vertexBuffer->Lock();
-        for(auto root : m_roots)
-        {
-           root->WriteVertexData(vertexData, m_vertexBuffer->Get_Size());
-        }
-        m_vertexBuffer->Unlock();
-    };
-    gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function);*/
 }
 
 void CSkeleton::Draw(const i32 *_attributes)
 {
-    return;
-    if (m_vertexBuffer != nullptr && m_indexBuffer != nullptr)
-    {
-        for(const auto& root : m_roots)
-        {
-            root->Update();
-        }
-        
-        std::function<void(void)> function = [this]()
-        {
-            SVertex* vertexData = m_vertexBuffer->Lock();
-        
-            for(const auto& root : m_roots)
-            {
-                root->WriteVertexData(vertexData, m_vertexBuffer->Get_Size());
-            }
-            
-            std::function<void(void)> main = [this]()
-            {
-                m_vertexBuffer->Unlock();
-            };
-            gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
-        };
-        
-        gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
-        
-        assert(m_vertexBuffer != nullptr);
-        assert(m_indexBuffer != nullptr);
-        
-        m_vertexBuffer->Bind(_attributes);
-        m_indexBuffer->Bind();
-        glLineWidth(m_boneWidth);
-        glDrawElements(GL_LINES, m_indexBuffer->Get_Size(), GL_UNSIGNED_SHORT, NULL);
-        m_vertexBuffer->Unbind(_attributes);
-        m_indexBuffer->Unbind();
-    }
+
 }
 

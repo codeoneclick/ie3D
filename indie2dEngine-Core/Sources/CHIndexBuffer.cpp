@@ -1,14 +1,14 @@
 //
-//  CIndexBuffer.cpp
-//  gEngine-Core
+//  CHIndexBuffer.cpp
+//  indie2dEngine
 //
-//  Created by Sergey Sergeev on 5/7/13.
+//  Created by Sergey Sergeev on 8/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CIndexBuffer.h"
-/*
-CIndexBuffer::CIndexBuffer(ui32 _size, GLenum _mode) :
+#include "CHIndexBuffer.h"
+
+CHIndexBuffer::CHIndexBuffer(ui32 _size, GLenum _mode) :
 m_size(_size),
 m_mode(_mode)
 {
@@ -18,12 +18,13 @@ m_mode(_mode)
     glGenBuffers(K_NUM_REPLACEMENT_INDEX_BUFFERS, m_handles);
 }
 
-CIndexBuffer::~CIndexBuffer(void)
+CHIndexBuffer::~CHIndexBuffer(void)
 {
     glDeleteBuffers(K_NUM_REPLACEMENT_INDEX_BUFFERS, m_handles);
+    delete[] m_data;
 }
 
-void CIndexBuffer::Unlock(void)
+void CHIndexBuffer::Unlock(void)
 {
     assert(m_data != nullptr);
     assert(m_size != 0);
@@ -32,7 +33,7 @@ void CIndexBuffer::Unlock(void)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * m_size, m_data, m_mode);
 }
 
-void CIndexBuffer::Unlock(ui32 _size)
+void CHIndexBuffer::Unlock(ui32 _size)
 {
     assert(m_data != nullptr);
     assert(_size != 0);
@@ -41,15 +42,26 @@ void CIndexBuffer::Unlock(ui32 _size)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * _size, m_data, m_mode);
 }
 
-void CIndexBuffer::Bind(void) const
+void CHIndexBuffer::Unlock(ui16 *_data, ui32 _size)
+{
+    assert(_data != nullptr);
+    assert(m_size != 0);
+    assert(m_data != nullptr);
+    assert(_size != 0 && m_size >= _size);
+    m_index = (m_index >= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1)) ? 0 : m_index + 1;
+    memcpy(m_data, _data, sizeof(ui16) * _size);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handles[m_index]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * _size, m_data, m_mode);
+}
+
+void CHIndexBuffer::Bind(void) const
 {
     assert(m_index >= 0 && m_index <= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handles[m_index]);
 }
 
-void CIndexBuffer::Unbind(void) const
+void CHIndexBuffer::Unbind(void) const
 {
     assert(m_index >= 0 && m_index <= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
-*/

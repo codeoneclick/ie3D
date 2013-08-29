@@ -38,9 +38,8 @@ void CBatchingMgr::Unlock(void)
     }
 }
 
-void CBatchingMgr::Batch(std::shared_ptr<CMesh> _mesh, std::shared_ptr<CMaterial> _material, const glm::mat4x4& _matrix)
+void CBatchingMgr::Batch(const std::tuple<ui32, ui32, std::shared_ptr<CMesh>>& _mesh, std::shared_ptr<CMaterial> _material, const glm::mat4x4& _matrix)
 {
-    assert(_mesh != nullptr);
     assert(_material != nullptr);
     assert(_material->Get_Shader() != nullptr);
     std::string guid = _material->Get_Shader()->Get_Guid() + ".batch";

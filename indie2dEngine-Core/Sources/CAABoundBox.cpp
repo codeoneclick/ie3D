@@ -10,16 +10,17 @@
 #include "CResourceAccessor.h"
 #include "CCamera.h"
 #include "CMaterial.h"
-#include "CVertexBuffer.h"
-#include "CIndexBuffer.h"
+#include "CHVertexBuffer.h"
+#include "CSVertexBuffer.h"
+#include "CHIndexBuffer.h"
+#include "CSIndexBuffer.h"
 #include "CShader.h"
 
 CAABoundBox::CAABoundBox(const glm::vec3& _maxBound, const glm::vec3& _minBound) :
 m_maxBound(_maxBound),
 m_minBound(_minBound)
 {
-    m_vertexBuffer = std::make_shared<CVertexBuffer>(24, GL_DYNAMIC_DRAW);
-    SVertex* vertexData = m_vertexBuffer->Lock();
+    CSVertexBuffer::SVertex* vertexData = new CSVertexBuffer::SVertex[24];
     
     vertexData[0].m_position = glm::vec3( _minBound.x,  _minBound.y, _maxBound.z);
     vertexData[1].m_position = glm::vec3( _maxBound.x,  _minBound.y, _maxBound.z);
@@ -51,10 +52,10 @@ m_minBound(_minBound)
     vertexData[22].m_position = glm::vec3( _minBound.x,  _maxBound.y,  _maxBound.z);
     vertexData[23].m_position = glm::vec3( _minBound.x,  _maxBound.y,  _minBound.z);
     
-    m_vertexBuffer->Unlock();
+    m_softwareVertexBuffer = std::make_shared<CSVertexBuffer>(vertexData, 24);
     
-    m_indexBuffer = std::make_shared<CIndexBuffer>(36, GL_STATIC_DRAW);
-    ui16* indexData = m_indexBuffer->Lock();
+   
+    ui16* indexData = new ui16[36];
     
     indexData[0] = 0;
     indexData[1] = 1;
@@ -98,7 +99,7 @@ m_minBound(_minBound)
     indexData[34] = 22;
     indexData[35] = 23;
     
-    m_indexBuffer->Unlock();
+    m_softwareIndexBuffer = std::make_shared<CSIndexBuffer>(indexData, 36);
 }
 
 CAABoundBox::~CAABoundBox(void)
@@ -108,8 +109,7 @@ CAABoundBox::~CAABoundBox(void)
 
 void CAABoundBox::Update(const glm::mat4x4 &_worldMatrix)
 {
-    return;
-    SVertex* vertexData = m_vertexBuffer->Lock();
+   CSVertexBuffer::SVertex* vertexData = m_softwareVertexBuffer->Lock();
     
     static f32 offset = 0.1f;
     
@@ -142,29 +142,19 @@ void CAABoundBox::Update(const glm::mat4x4 &_worldMatrix)
     vertexData[21].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_minBound.y - offset,  m_maxBound.z + offset), _worldMatrix);
     vertexData[22].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_maxBound.z + offset), _worldMatrix);
     vertexData[23].m_position = glm::transform(glm::vec3( m_minBound.x - offset,  m_maxBound.y + offset,  m_minBound.z - offset), _worldMatrix);
-
-    //m_vertexBuffer->Unlock();
 }
 
 void CAABoundBox::Bind(const i32 *_attributes)
 {
-    assert(m_vertexBuffer != nullptr);
-    assert(m_indexBuffer != nullptr);
-    m_vertexBuffer->Bind(_attributes);
-    m_indexBuffer->Bind();
+
 }
 
 void CAABoundBox::Draw(void)
 {
-    assert(m_vertexBuffer != nullptr);
-    assert(m_indexBuffer != nullptr);
-    glDrawElements(GL_TRIANGLES, m_indexBuffer->Get_Size(), GL_UNSIGNED_SHORT, NULL);
+
 }
 
 void CAABoundBox::Unbind(const i32 *_attributes)
 {
-    assert(m_vertexBuffer != nullptr);
-    assert(m_indexBuffer != nullptr);
-    m_vertexBuffer->Unbind(_attributes);
-    m_indexBuffer->Unbind();
+
 }

@@ -10,9 +10,11 @@
 #define CMesh_h
 
 #include "IResource.h"
+#include "CHVertexBuffer.h"
+#include "CSVertexBuffer.h"
+#include "CHIndexBuffer.h"
+#include "CSIndexBuffer.h"
 
-struct SVertex;
-struct SSourceVertex;
 class CMeshHeader final
 {
 private:
@@ -23,9 +25,8 @@ protected:
     friend class CMeshSerializer_MDL;
     friend class CMeshCommiter_MDL;
     
-    SVertex* m_vertexData;
+    CSVertexBuffer::SVertex* m_vertexData;
     ui16* m_indexData;
-    SSourceVertex* m_sourceData;
     
     ui32 m_numIndexes;
     ui32 m_numVertexes;
@@ -33,15 +34,10 @@ protected:
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
     
-    inline void _Set_VertexData(SVertex* _vertexData, ui32 _numVertexes)
+    inline void _Set_VertexData(CSVertexBuffer::SVertex* _vertexData, ui32 _numVertexes)
     {
         m_vertexData = _vertexData;
         m_numVertexes = _numVertexes;
-    };
-    
-    inline void _Set_SourceData(SSourceVertex* _sourceData)
-    {
-        m_sourceData = _sourceData;
     };
     
     inline void _Set_IndexData(ui16* _indexData, ui32 _numIndexes)
@@ -64,39 +60,10 @@ public:
     
     CMeshHeader(void);
     ~CMeshHeader(void);
-    
-    inline SVertex* Get_VertexData(void)
-    {
-        return m_vertexData;
-    };
-
-    inline ui16* Get_IndexData(void)
-    {
-        return m_indexData;
-    };
-
-    inline ui32 Get_NumVertexes(void)
-    {
-        return m_numVertexes;
-    };
-
-    inline ui32 Get_NumIndexes(void)
-    {
-        return m_numIndexes;
-    };
-
-    inline glm::vec3 Get_MaxBound(void)
-    {
-        return m_maxBound;
-    };
-
-    inline glm::vec3 Get_MinBound(void)
-    {
-        return m_minBound;
-    };
 };
 
-#include "CVertexBuffer.h"
+#include "CHVertexBuffer.h"
+#include "CSVertexBuffer.h"
 #include "CIndexBuffer.h"
 
 class CAABoundBox;
@@ -112,9 +79,12 @@ protected:
     friend class CMeshLoadingOperation;
     
     std::shared_ptr<CMeshHeader> m_header;
-    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
-    std::shared_ptr<CIndexBuffer> m_indexBuffer;
-    std::map<std::string, ui32> m_handlers;
+    
+    std::shared_ptr<CHVertexBuffer> m_hardwareVertexBuffer;
+    std::shared_ptr<CSVertexBuffer> m_softwareVertexBuffer;
+    
+    std::shared_ptr<CHIndexBuffer> m_hardwareIndexBuffer;
+    std::shared_ptr<CSIndexBuffer> m_softwareIndexBuffer;
     
     std::vector<std::shared_ptr<CAABoundBox> > m_bounds;
     
@@ -133,65 +103,70 @@ public:
 protected:
 #endif
     
-    inline void _Set_Handlers(std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer)
+    inline void _Set_Handlers(std::shared_ptr<CSVertexBuffer> _softwareVertexBuffer, std::shared_ptr<CSIndexBuffer> _softwareIndexBuffer)
     {
-        assert(_vertexBuffer != nullptr);
-        assert(_indexBuffer != nullptr);
-        m_vertexBuffer = _vertexBuffer;
-        m_indexBuffer = _indexBuffer;
-        m_status |= E_RESOURCE_STATUS_COMMITED;
+        assert(_softwareVertexBuffer != nullptr);
+        assert(_softwareIndexBuffer != nullptr);
+        m_softwareVertexBuffer = _softwareVertexBuffer;
+        m_softwareIndexBuffer = _softwareIndexBuffer;
     };
     
 public:
     
     CMesh(const std::string& _guid);
-    CMesh(const std::string& _guid, std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer);
+    CMesh(const std::string& _guid, std::shared_ptr<CSVertexBuffer> _softwareVertexBuffer, std::shared_ptr<CSIndexBuffer> _softwareIndexBuffer);
     ~CMesh(void);
     
     std::shared_ptr<CAABoundBox> CreateBoundBox(void);
     
-    inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)
+    void CreateHardwareBuffers(GLenum _vertexBufferMode, GLenum _indexBufferMode);
+    
+    inline std::shared_ptr<CHVertexBuffer> Get_HardwareVertexBuffer(void)
     {
-        return m_vertexBuffer;
+        return m_hardwareVertexBuffer;
     };
     
-    inline std::shared_ptr<CIndexBuffer> Get_IndexBuffer(void)
+    inline std::shared_ptr<CSVertexBuffer> Get_SoftwareVertexBuffer(void)
     {
-        return m_indexBuffer;
+        return m_softwareVertexBuffer;
     };
     
-    inline SSourceVertex* Get_SourceData(void)
+    inline std::shared_ptr<CHIndexBuffer> Get_HardwareIndexBuffer(void)
     {
-        assert(m_header != nullptr);
-        return m_header->m_sourceData;
+        return m_hardwareIndexBuffer;
+    };
+    
+    inline std::shared_ptr<CSIndexBuffer> Get_SoftwareIndexBuffer(void)
+    {
+        return m_softwareIndexBuffer;
     };
     
     inline const ui32 Get_NumVertexes(void)
     {
-        assert(m_vertexBuffer != nullptr);
-        return m_vertexBuffer->Get_Size();
+        assert(m_softwareVertexBuffer != nullptr);
+        return m_softwareVertexBuffer->Get_Size();
     };
     
     inline const ui32 Get_NumIndexes(void)
     {
-        assert(m_indexBuffer != nullptr);
-        return m_indexBuffer->Get_Size();
+        assert(m_softwareIndexBuffer != nullptr);
+        return m_softwareIndexBuffer->Get_Size();
     };
     
     inline const glm::vec3 Get_MaxBound(void)
     {
-        return m_header != nullptr ? m_header->Get_MaxBound() : glm::vec3(0.0f);
+        return m_header != nullptr ? m_header->m_maxBound : glm::vec3(0.0f);
     };
     
     inline const glm::vec3 Get_MinBound(void)
     {
-        return m_header != nullptr ? m_header->Get_MinBound() : glm::vec3(0.0f);
+        return m_header != nullptr ? m_header->m_minBound : glm::vec3(0.0f);
     };
     
-    void Bind(const std::string& _guid, const i32* _attributes);
-    void Draw(void);
-    void Draw(ui32 _indices);
-    void Unbind(const std::string& _guid, const i32* _attributes);
+    void Bind(const i32* _attributes) const;
+    void Draw(void) const;
+    void Draw(ui32 _indices) const;
+    void Unbind(const i32* _attributes) const;
 
 };
 

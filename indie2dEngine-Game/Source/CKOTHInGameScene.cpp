@@ -59,9 +59,9 @@ void CKOTHInGameScene::Load(void)
     m_colliders.push_back(model);
     m_root->InsertModel(model);
     
-    for(i32 i = 1; i < 17; ++i)
+    for(i32 i = 1; i < 2; ++i)
     {
-        for(i32 j = 1; j < 17; ++j)
+        for(i32 j = 1; j < 2; ++j)
         {
             std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
             model->Set_Position(glm::vec3(i * 10, 0.0f, j * 10));

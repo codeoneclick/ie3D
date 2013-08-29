@@ -1,36 +1,31 @@
 //
-//  CVertexBuffer.cpp
-//  gEngine-Core
+//  CHVertexBuffer.cpp
+//  indie2dEngine
 //
-//  Created by Sergey Sergeev on 5/7/13.
+//  Created by Sergey Sergeev on 8/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CVertexBuffer.h"
+#include "CHVertexBuffer.h"
 #include "HEnums.h"
-/*
-CVertexBuffer::CVertexBuffer(ui32 _size, GLenum _mode) :
+
+CHVertexBuffer::CHVertexBuffer(ui32 _size, GLenum _mode) :
 m_size(_size),
 m_mode(_mode)
 {
     assert(_size != 0);
-    m_main = new SVertex[m_size];
+    m_data = new CHVertexBuffer::SVertex[m_size];
     m_index = -1;
     glGenBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
 }
 
-CVertexBuffer::~CVertexBuffer(void)
+CHVertexBuffer::~CHVertexBuffer(void)
 {
     glDeleteBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
-    for(const auto& reference : m_references)
-    {
-        delete[] reference.second;
-    }
-    m_references.clear();
-    delete[] m_main;
+    delete[] m_data;
 }
 
-glm::u8vec4 CVertexBuffer::CompressVec3(const glm::vec3& _uncompressed)
+glm::u8vec4 CHVertexBuffer::CompressVec3(const glm::vec3& _uncompressed)
 {
     glm::vec3 normalized = glm::normalize(_uncompressed);
     glm::u8vec4 compressed;
@@ -41,7 +36,7 @@ glm::u8vec4 CVertexBuffer::CompressVec3(const glm::vec3& _uncompressed)
     return compressed;
 }
 
-glm::vec3 CVertexBuffer::UncompressU8Vec4(const glm::u8vec4& _compressed)
+glm::vec3 CHVertexBuffer::UncompressU8Vec4(const glm::u8vec4& _compressed)
 {
     glm::vec3 uncompressed;
     uncompressed.x = static_cast<f32>(_compressed.x / (255.0f * 0.5f) - 1.0f);
@@ -50,73 +45,51 @@ glm::vec3 CVertexBuffer::UncompressU8Vec4(const glm::u8vec4& _compressed)
     return uncompressed;
 }
 
-const std::string CVertexBuffer::_GenerateGuid(void)
+CHVertexBuffer::SVertex* CHVertexBuffer::Lock(void) const
 {
-    static ui32 value = 0;
-    std::stringstream stringstream;
-    stringstream<<"vertex.buffer.reference."<<++value;
-    return stringstream.str();
+    assert(m_data != nullptr);
+    return m_data;
 }
 
-const std::string CVertexBuffer::CreateReference(void)
+void CHVertexBuffer::Unlock(void)
 {
-    assert(m_size != 0);
-    std::string guid = CVertexBuffer::_GenerateGuid();
-    m_references.insert(std::make_pair(guid, new SVertex[m_size]));
-    return guid;
-}
-
-void CVertexBuffer::DeleteReference(const std::string &_guid)
-{
-    assert(m_references.find(_guid) != m_references.end());
-    m_references.erase(m_references.find(_guid));
-}
-
-SVertex* CVertexBuffer::Lock(void) const
-{
-    assert(m_main != nullptr);
-    return m_main;
-}
-
-SVertex* CVertexBuffer::Lock(const std::string &_guid) const
-{
-    assert(m_references.find(_guid) !=  m_references.end());
-    return m_references.find(_guid)->second;
-}
-
-void CVertexBuffer::Unlock(void)
-{
-    assert(m_main != nullptr);
+    assert(m_data != nullptr);
     assert(m_size != 0);
     m_index = (m_index >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_index + 1;
     glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * m_size, m_main, m_mode);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(CHVertexBuffer::SVertex) * m_size, m_data, m_mode);
 }
 
-void CVertexBuffer::Unlock(ui32 _size)
+void CHVertexBuffer::Unlock(ui32 _size)
 {
-    assert(m_main != nullptr);
+    assert(m_data != nullptr);
     assert(_size != 0 && _size <= m_size);
     m_index = (m_index >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_index + 1;
     glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * _size, m_main, m_mode);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(CHVertexBuffer::SVertex) * _size, m_data, m_mode);
 }
 
-void CVertexBuffer::Unlock(const std::string &_guid)
+void CHVertexBuffer::Unlock(CSVertexBuffer::SVertex *_data, ui32 _size)
 {
-    assert(m_references.find(_guid) !=  m_references.end());
-    m_main = m_references.find(_guid)->second;
-    CVertexBuffer::Unlock();
+    assert(_data != nullptr);
+    assert(m_size != 0);
+    assert(m_data != nullptr);
+    assert(_size != 0 && m_size >= _size);
+    m_index = (m_index >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_index + 1;
+    
+    for(ui32 i = 0; i < _size; ++i)
+    {
+        m_data[i].m_position = _data[i].m_position;
+        m_data[i].m_texcoord = _data[i].m_texcoord;
+        m_data[i].m_normal = CHVertexBuffer::CompressVec3(_data[i].m_normal);
+        m_data[i].m_tangent = CHVertexBuffer::CompressVec3(_data[i].m_tangent);
+    }
+    
+    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(CHVertexBuffer::SVertex) * _size, m_data, m_mode);
 }
 
-void CVertexBuffer::Unlock(ui32 _size, const std::string &_guid)
-{
-    assert(m_references.find(_guid) !=  m_references.end());
-    m_main = m_references.find(_guid)->second;
-    CVertexBuffer::Unlock(_size);
-}
-
-void CVertexBuffer::Bind(const i32* _attributes)
+void CHVertexBuffer::Bind(const i32* _attributes) const
 {
     assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
     glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
@@ -157,7 +130,7 @@ void CVertexBuffer::Bind(const i32* _attributes)
     }
 }
 
-void CVertexBuffer::Unbind(const i32* _attributes)
+void CHVertexBuffer::Unbind(const i32* _attributes) const
 {
     assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
     glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
@@ -188,4 +161,3 @@ void CVertexBuffer::Unbind(const i32* _attributes)
     }
     glBindBuffer(GL_ARRAY_BUFFER, NULL);
 }
-*/

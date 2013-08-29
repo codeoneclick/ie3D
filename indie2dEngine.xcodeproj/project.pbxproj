@@ -229,6 +229,8 @@
 		A481749617621EA700E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749417621EA600E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp */; };
 		A481749917621FF500E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749717621FF200E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp */; };
 		A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749A176221FC00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp */; };
+		A48EB0D817CF780E00938BB8 /* CSIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48EB0D617CF780C00938BB8 /* CSIndexBuffer.cpp */; };
+		A48EB0DB17CF785C00938BB8 /* CHIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48EB0D917CF785B00938BB8 /* CHIndexBuffer.cpp */; };
 		A494B85D17686741004C9F96 /* CKOTHWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B85B17686741004C9F96 /* CKOTHWorkflow.cpp */; };
 		A494B86817686776004C9F96 /* CKOTHInGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A494B86617686776004C9F96 /* CKOTHInGameTransition.cpp */; };
 		A494B8A21768A7DD004C9F96 /* material.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = A494B8A11768A7DD004C9F96 /* material.screen.xml */; };
@@ -267,6 +269,8 @@
 		A4AF4BE3177489E9007D4B8C /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */; };
 		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
 		A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460617450200000D831E /* IResourceCommiter.cpp */; };
+		A4D2C62B17CF504400D7E15D /* CSVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4D2C62917CF503200D7E15D /* CSVertexBuffer.cpp */; };
+		A4D2C63617CF518300D7E15D /* CHVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4D2C63417CF50FD00D7E15D /* CHVertexBuffer.cpp */; };
 		A4DD0EA2179E6C6F009A7AFE /* CAABoundBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0EA0179E6C6F009A7AFE /* CAABoundBox.cpp */; };
 		A4DD0EAF179E7DBE009A7AFE /* CommonBoundBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */; };
 		A4DD0EB0179E7DBE009A7AFE /* CommonBoundBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */; };
@@ -755,6 +759,10 @@
 		A481749817621FF300E1DC6E /* COutputRenderOperationTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COutputRenderOperationTemplateLoadingOperation.h; path = Sources/COutputRenderOperationTemplateLoadingOperation.h; sourceTree = "<group>"; };
 		A481749A176221FC00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameTransitionTemplateLoadingOperation.cpp; path = Sources/CGameTransitionTemplateLoadingOperation.cpp; sourceTree = "<group>"; };
 		A481749B176221FD00E1DC6E /* CGameTransitionTemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameTransitionTemplateLoadingOperation.h; path = Sources/CGameTransitionTemplateLoadingOperation.h; sourceTree = "<group>"; };
+		A48EB0D617CF780C00938BB8 /* CSIndexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSIndexBuffer.cpp; path = Sources/CSIndexBuffer.cpp; sourceTree = "<group>"; };
+		A48EB0D717CF780D00938BB8 /* CSIndexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSIndexBuffer.h; path = Sources/CSIndexBuffer.h; sourceTree = "<group>"; };
+		A48EB0D917CF785B00938BB8 /* CHIndexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CHIndexBuffer.cpp; path = Sources/CHIndexBuffer.cpp; sourceTree = "<group>"; };
+		A48EB0DA17CF785B00938BB8 /* CHIndexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHIndexBuffer.h; path = Sources/CHIndexBuffer.h; sourceTree = "<group>"; };
 		A494B85B17686741004C9F96 /* CKOTHWorkflow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CKOTHWorkflow.cpp; path = "indie2dEngine-Game/Source/CKOTHWorkflow.cpp"; sourceTree = "<group>"; };
 		A494B85C17686741004C9F96 /* CKOTHWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHWorkflow.h; path = "indie2dEngine-Game/Source/CKOTHWorkflow.h"; sourceTree = "<group>"; };
 		A494B86617686776004C9F96 /* CKOTHInGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CKOTHInGameTransition.cpp; path = "indie2dEngine-Game/Source/CKOTHInGameTransition.cpp"; sourceTree = "<group>"; };
@@ -809,6 +817,10 @@
 		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
 		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
 		A4BE460717450200000D831E /* IResourceCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceCommiter.h; path = Sources/IResourceCommiter.h; sourceTree = "<group>"; };
+		A4D2C62917CF503200D7E15D /* CSVertexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSVertexBuffer.cpp; path = Sources/CSVertexBuffer.cpp; sourceTree = "<group>"; };
+		A4D2C62A17CF503A00D7E15D /* CSVertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSVertexBuffer.h; path = Sources/CSVertexBuffer.h; sourceTree = "<group>"; };
+		A4D2C63417CF50FD00D7E15D /* CHVertexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CHVertexBuffer.cpp; path = Sources/CHVertexBuffer.cpp; sourceTree = "<group>"; };
+		A4D2C63517CF512100D7E15D /* CHVertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHVertexBuffer.h; path = Sources/CHVertexBuffer.h; sourceTree = "<group>"; };
 		A4DD0EA0179E6C6F009A7AFE /* CAABoundBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAABoundBox.cpp; path = Sources/CAABoundBox.cpp; sourceTree = "<group>"; };
 		A4DD0EA1179E6C6F009A7AFE /* CAABoundBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAABoundBox.h; path = Sources/CAABoundBox.h; sourceTree = "<group>"; };
 		A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.frag; sourceTree = "<group>"; };
@@ -1895,6 +1907,14 @@
 				A42FF51917A150A600C0B419 /* CSkeleton.cpp */,
 				A42FF51D17A15C4700C0B419 /* CSequence.h */,
 				A42FF51C17A15C4700C0B419 /* CSequence.cpp */,
+				A4D2C62A17CF503A00D7E15D /* CSVertexBuffer.h */,
+				A4D2C62917CF503200D7E15D /* CSVertexBuffer.cpp */,
+				A4D2C63517CF512100D7E15D /* CHVertexBuffer.h */,
+				A4D2C63417CF50FD00D7E15D /* CHVertexBuffer.cpp */,
+				A48EB0D717CF780D00938BB8 /* CSIndexBuffer.h */,
+				A48EB0D617CF780C00938BB8 /* CSIndexBuffer.cpp */,
+				A48EB0DA17CF785B00938BB8 /* CHIndexBuffer.h */,
+				A48EB0D917CF785B00938BB8 /* CHIndexBuffer.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2735,6 +2755,10 @@
 				211D30E317C2A61D0038B703 /* IResourceLoadingHandler.cpp in Sources */,
 				A4535E8817C633D50058CD47 /* CBatchingMgr.cpp in Sources */,
 				A4535E9317C633EA0058CD47 /* CBatch.cpp in Sources */,
+				A4D2C62B17CF504400D7E15D /* CSVertexBuffer.cpp in Sources */,
+				A4D2C63617CF518300D7E15D /* CHVertexBuffer.cpp in Sources */,
+				A48EB0D817CF780E00938BB8 /* CSIndexBuffer.cpp in Sources */,
+				A48EB0DB17CF785C00938BB8 /* CHIndexBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

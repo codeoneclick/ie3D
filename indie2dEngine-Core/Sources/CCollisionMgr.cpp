@@ -117,11 +117,11 @@ bool CCollisionMgr::_TriangleIntersection(const glm::vec3 &_trianglePoint_01, gl
 	return true;
 }
 
-bool CCollisionMgr::_CollisionPoint(std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer, const glm::mat4x4& _worldMatrix, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _point)
+bool CCollisionMgr::_CollisionPoint(std::shared_ptr<CSVertexBuffer> _softwareVertexBuffer, std::shared_ptr<CSIndexBuffer> _softwareIndexBuffer, const glm::mat4x4& _worldMatrix, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _point)
 {
-    SVertex* vertexData = _vertexBuffer->Lock();
-    ui16* indexData = _indexBuffer->Lock();
-    ui32 numIndexes = _indexBuffer->Get_Size();
+    CSVertexBuffer::SVertex* vertexData = _softwareVertexBuffer->Lock();
+    ui16* indexData = _softwareIndexBuffer->Lock();
+    ui32 numIndexes = _softwareIndexBuffer->Get_Size();
 
     for(ui32 index = 0; index < numIndexes; index += 3)
     {

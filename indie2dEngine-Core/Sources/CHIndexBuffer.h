@@ -1,19 +1,19 @@
 //
-//  CIndexBuffer.h
-//  gEngine-Core
+//  CHIndexBuffer.h
+//  indie2dEngine
 //
-//  Created by Sergey Sergeev on 5/7/13.
+//  Created by Sergey Sergeev on 8/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef CIndexBuffer_h
-#define CIndexBuffer_h
+#ifndef CHIndexBuffer_h
+#define CHIndexBuffer_h
 
 #include "HCommon.h"
 
-/*#define K_NUM_REPLACEMENT_INDEX_BUFFERS 3
+#define K_NUM_REPLACEMENT_INDEX_BUFFERS 3
 
-class CIndexBuffer
+class CHIndexBuffer
 {
 private:
     
@@ -29,8 +29,8 @@ protected:
     
 public:
     
-    CIndexBuffer(ui32 _size, GLenum _mode);
-    ~CIndexBuffer(void);
+    CHIndexBuffer(ui32 _size, GLenum _mode);
+    ~CHIndexBuffer(void);
     
     inline const ui32 Get_Size(void) const
     {
@@ -45,10 +45,10 @@ public:
     
     void Unlock(void);
     void Unlock(ui32 _size);
+    void Unlock(ui16* _data, ui32 _size);
     
     void Bind(void) const;
     void Unbind(void) const;
-    
 };
-*/
-#endif 
+
+#endif

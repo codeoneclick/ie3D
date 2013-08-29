@@ -2,6 +2,7 @@
 #include "ProgressiveMesh.h"
 #include "CMesh.h"
 
+/*
 static const ui32 BOUNDARY_WEIGHT = 1000;
 
 ProgressiveMesh::ProgressiveMesh(std::shared_ptr<CMesh> _mesh, E_SIMPLIFICATION_ALGORITHM _algorithm)
@@ -478,4 +479,4 @@ void ProgressiveMesh::ContractTillTriangleCount(ui32 _numberOfTriangles)
 		Contract(1);
 	}
 }
-
+*/

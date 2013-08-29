@@ -22,16 +22,19 @@ m_isLocked(false)
     assert(m_material != nullptr);
     assert(m_material->Get_Shader() != nullptr);
     m_guid = m_material->Get_Shader()->Get_Guid() + ".batch";
-    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(std::numeric_limits<ui16>::max(), GL_DYNAMIC_DRAW);
-    SVertex* vertexData = vertexBuffer->Lock();
-    memset(vertexData, 0x0, std::numeric_limits<ui16>::max() * sizeof(SVertex));
     
-    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(std::numeric_limits<ui16>::max(), GL_DYNAMIC_DRAW);
-    ui16* indexData = indexBuffer->Lock();
+    CSVertexBuffer::SVertex* vertexData = new CSVertexBuffer::SVertex[std::numeric_limits<ui16>::max()];
+    memset(vertexData, 0x0, std::numeric_limits<ui16>::max() * sizeof(CSVertexBuffer::SVertex));
+    std::shared_ptr<CSVertexBuffer> softwareVertexBuffer = std::make_shared<CSVertexBuffer>(vertexData, std::numeric_limits<ui16>::max());
+    
+   
+    ui16* indexData = new ui16[std::numeric_limits<ui16>::max()];
     memset(indexData, 0x0, std::numeric_limits<ui16>::max() * sizeof(ui16));
+    std::shared_ptr<CSIndexBuffer> softwareIndexBuffer = std::make_shared<CSIndexBuffer>(indexData, std::numeric_limits<ui16>::max());
     
-    m_mesh = std::make_shared<CMesh>(m_guid, vertexBuffer, indexBuffer);
+    m_mesh = std::make_shared<CMesh>(m_guid, softwareVertexBuffer, softwareIndexBuffer);
     assert(m_mesh != nullptr);
+    m_mesh->CreateHardwareBuffers(GL_DYNAMIC_DRAW, GL_DYNAMIC_DRAW);
 }
 
 CBatch::~CBatch(void)
@@ -61,24 +64,27 @@ void CBatch::Unlock(void)
             
             for(ui32 i = 0; i < m_meshes.size(); ++i)
             {
-                std::shared_ptr<CMesh> mesh = m_meshes[i];
+                ui32 vertexBufferGuid = std::get<0>(m_meshes[i]);
+                ui32 indexBufferGuid = std::get<1>(m_meshes[i]);
+                std::shared_ptr<CMesh> mesh = std::get<2>(m_meshes[i]);
+                
                 glm::mat4x4& matrix = m_matrices[i];
                 
-                ui16* indexData_01 = m_mesh->Get_IndexBuffer()->Lock();
-                ui16* indexData_02 = mesh->Get_IndexBuffer()->Lock();
+                ui16* indexData_01 = m_mesh->Get_SoftwareIndexBuffer()->Lock();
+                ui16* indexData_02 = mesh->Get_SoftwareIndexBuffer()->Lock();
                 
                 for(ui32 j = 0; j < mesh->Get_NumIndexes(); ++j)
                 {
                     indexData_01[numIndices + j] = indexData_02[j] + numVertices;
                 }
                 
-                SVertex* vertexData_01 = m_mesh->Get_VertexBuffer()->Lock();
-                SVertex* vertexData_02 = mesh->Get_VertexBuffer()->Lock();
+                CSVertexBuffer::SVertex* vertexData_01 = m_mesh->Get_SoftwareVertexBuffer()->Lock();
+                CSVertexBuffer::SVertex* vertexData_02 = mesh->Get_SoftwareVertexBuffer()->Lock(vertexBufferGuid);
                 for(ui32 j = 0; j < mesh->Get_NumVertexes(); ++j)
                 {
                     vertexData_01[numVertices + j] = vertexData_02[j];
-                    vertexData_01[numVertices + j].m_position = glm::transform(vertexData_01[numVertices + j].m_position, matrix);
-                    vertexData_01[numVertices + j].m_normal = CVertexBuffer::CompressVec3(glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_01[numVertices + j].m_normal), matrix));
+                    vertexData_01[numVertices + j].m_position = glm::transform(vertexData_02[numVertices + j].m_position, matrix);
+                    vertexData_01[numVertices + j].m_normal = glm::transform(vertexData_02[numVertices + j].m_normal, matrix);
                 }
                 
                 numVertices += mesh->Get_NumVertexes();
@@ -87,8 +93,8 @@ void CBatch::Unlock(void)
             
             std::function<void(void)> main = [this, numVertices, numIndices]()
             {
-                m_mesh->Get_VertexBuffer()->Unlock(numVertices);
-                m_mesh->Get_IndexBuffer()->Unlock(numIndices);
+                m_mesh->Get_HardwareVertexBuffer()->Unlock(m_mesh->Get_SoftwareVertexBuffer()->Lock(), numVertices);
+                m_mesh->Get_HardwareIndexBuffer()->Unlock(m_mesh->Get_SoftwareIndexBuffer()->Lock(), numIndices);
                 m_numVertices = numVertices;
                 m_numIndices = numIndices;
                 m_isLocked = false;
@@ -99,7 +105,7 @@ void CBatch::Unlock(void)
     }
 }
 
-void CBatch::Batch(std::shared_ptr<CMesh> _mesh, const glm::mat4x4 &_matrix)
+void CBatch::Batch(const std::tuple<ui32, ui32, std::shared_ptr<CMesh>>& _mesh, const glm::mat4x4 &_matrix)
 {
     if(!m_isLocked)
     {
@@ -117,12 +123,10 @@ void CBatch::Draw(void)
     {
         m_material->Bind();
         
-        m_mesh->Bind(m_material->Get_Shader()->Get_Guid(), m_material->Get_Shader()->Get_Attributes());
+        m_mesh->Bind(m_material->Get_Shader()->Get_Attributes());
         m_mesh->Draw(m_numIndices);
-        m_mesh->Unbind(m_material->Get_Shader()->Get_Guid(), m_material->Get_Shader()->Get_Attributes());
+        m_mesh->Unbind(m_material->Get_Shader()->Get_Attributes());
         
         m_material->Unbind();
     }
-    GLenum error = glGetError();
-    assert(error == GL_NO_ERROR);
 }

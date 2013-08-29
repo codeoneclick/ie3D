@@ -16,8 +16,10 @@
 
 class CCamera;
 class CMaterial;
-class CVertexBuffer;
-class CIndexBuffer;
+class CHVertexBuffer;
+class CSVertexBuffer;
+class CHIndexBuffer;
+class CSIndexBuffer;
 class CResourceAccessor;
 
 class CAABoundBox final
@@ -28,8 +30,10 @@ private:
     
 protected:
     
-    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
-    std::shared_ptr<CIndexBuffer> m_indexBuffer;
+    std::shared_ptr<CHVertexBuffer> m_hardwareVertexBuffer;
+    std::shared_ptr<CSVertexBuffer> m_softwareVertexBuffer;
+    std::shared_ptr<CHIndexBuffer> m_hardwareIndexBuffer;
+    std::shared_ptr<CSIndexBuffer> m_softwareIndexBuffer;
     
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
@@ -65,14 +69,14 @@ public:
         return m_minBound;
     };
     
-    inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)
+    inline std::shared_ptr<CSVertexBuffer> Get_VertexBuffer(void)
     {
-        return m_vertexBuffer;
+        return m_softwareVertexBuffer;
     };
     
-    inline std::shared_ptr<CIndexBuffer> Get_IndexBuffer(void)
+    inline std::shared_ptr<CSIndexBuffer> Get_IndexBuffer(void)
     {
-        return m_indexBuffer;
+        return m_softwareIndexBuffer;
     };
 };
 
