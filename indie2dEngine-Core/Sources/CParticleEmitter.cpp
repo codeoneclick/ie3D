@@ -47,10 +47,10 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         m_particles[i].m_size = glm::vec2(0.0f, 0.0f);
         m_particles[i].m_color = glm::u8vec4(0, 0, 0, 0);
         
-        vertexData[i * 4 + 0].m_texcoord = glm::vec2( 0.0f,  0.0f);
-        vertexData[i * 4 + 1].m_texcoord = glm::vec2( 1.0f,  0.0f);
-        vertexData[i * 4 + 2].m_texcoord = glm::vec2( 1.0f,  1.0f);
-        vertexData[i * 4 + 3].m_texcoord = glm::vec2( 0.0f,  1.0f);
+        vertexData[i * 4 + 0].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2( 0.0f,  0.0f));
+        vertexData[i * 4 + 1].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2( 1.0f,  0.0f));
+        vertexData[i * 4 + 2].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2( 1.0f,  1.0f));
+        vertexData[i * 4 + 3].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2( 0.0f,  1.0f));
     }
     std::shared_ptr<CSVertexBuffer> softwareVertexBuffer = std::make_shared<CSVertexBuffer>(vertexData, m_settings->m_numParticles * 4);
     
@@ -178,7 +178,7 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
 
 i32 CParticleEmitter::_OnQueuePosition(void)
 {
-    return 0;
+    return 8;
 }
 
 void CParticleEmitter::_OnBind(const std::string& _renderMode)

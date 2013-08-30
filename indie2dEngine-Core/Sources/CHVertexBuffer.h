@@ -21,10 +21,11 @@ public :
     struct SVertex
     {
         glm::vec3 m_position;
-        glm::vec2 m_texcoord;
+        glm::u16vec2 m_texcoord;
         glm::u8vec4 m_normal;
         glm::u8vec4 m_tangent;
         glm::u8vec4 m_color;
+        glm::u8vec4 m_extra;
     };
     
 private:
@@ -52,6 +53,9 @@ public:
         
     static glm::u8vec4 CompressVec3(const glm::vec3& _uncompressed);
     static glm::vec3 UncompressU8Vec4(const glm::u8vec4& _compressed);
+    
+    static glm::u16vec2 CompressVec2(const glm::vec2& _uncompressed);
+    static glm::vec2 UncompressU16Vec2(const glm::u16vec2& _compressed);
     
     CHVertexBuffer::SVertex* Lock(void) const;
     

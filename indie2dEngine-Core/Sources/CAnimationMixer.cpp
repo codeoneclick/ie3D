@@ -21,7 +21,7 @@ m_animationTime(0.0f)
 {
     m_skeletonGuid = m_skeleton->CreateTransformations();
     m_vertexBufferGuid = m_mesh->Get_SoftwareVertexBuffer()->CreateReference();
-    std::cout<<m_vertexBufferGuid<<std::endl;
+    m_transformations = new glm::mat4x4[m_skeleton->Get_NumBones()];
 }
 
 CAnimationMixer::~CAnimationMixer(void)
@@ -145,59 +145,37 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
                 m_skeleton->Get_Transformations(m_skeletonGuid)[i] = matrixTranslation * matrixRotation * matrixScale;
             }
             m_skeleton->Update(m_skeletonGuid);
-            
-            CSVertexBuffer::SVertex* originVertexData = m_mesh->Get_SoftwareVertexBuffer()->Lock();
-            CSVertexBuffer::SVertex* vertexData = m_mesh->Get_SoftwareVertexBuffer()->Lock(m_vertexBufferGuid);
-            for(i32 i = 0; i <  m_mesh->Get_SoftwareVertexBuffer()->Get_Size(); ++i)
-            {
-                glm::vec3 bonePosition(0.0f);
-                glm::vec3 boneNormal(0.0f);
-                for(i32 j = 0; j < originVertexData[i].m_bones.size(); ++j)
-                {
-                    std::shared_ptr<CBone> bone = m_skeleton->Get_Bone(originVertexData[i].m_bones[j].m_id);
-                    
-                    glm::mat4x4 boneTransformation = (*bone->Get_Transformation());
-                    
-                    f32 weight = originVertexData[i].m_bones[j].m_weigth;
-                    if(j == 0)
-                    {
-                        bonePosition = glm::transform(originVertexData[i].m_position, boneTransformation) * weight;
-                        boneNormal = glm::transform(originVertexData[i].m_normal, boneTransformation) * weight;
-                    }
-                    else
-                    {
-                        bonePosition += glm::transform(originVertexData[i].m_position, boneTransformation) * weight;
-                        boneNormal += glm::transform(originVertexData[i].m_normal, boneTransformation) * weight;
-                    }
-                }
-                vertexData[i].m_position = bonePosition;
-                vertexData[i].m_normal = boneNormal;
-                vertexData[i].m_texcoord = originVertexData[i].m_texcoord;
-            }
-        };
-        gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
-
-    }
-    else
-    {
-        std::function<void(void)> function = [this]()
-        {
-            CSVertexBuffer::SVertex* originVertexData = m_mesh->Get_SoftwareVertexBuffer()->Lock();
-            CSVertexBuffer::SVertex* vertexData = m_mesh->Get_SoftwareVertexBuffer()->Lock(m_vertexBufferGuid);
-            for(i32 i = 0; i <  m_mesh->Get_SoftwareVertexBuffer()->Get_Size(); ++i)
-            {
-                vertexData[i].m_position = originVertexData[i].m_position;
-                vertexData[i].m_texcoord = originVertexData[i].m_texcoord;
-                vertexData[i].m_normal = originVertexData[i].m_normal;
-            }
         };
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
     }
 }
 
+glm::mat4x4* CAnimationMixer::Get_Transformations(void)
+{
+    for(ui32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
+    {
+        std::shared_ptr<CBone> bone = m_skeleton->Get_Bone(i);
+        if(bone->Get_Transformation() != nullptr)
+        {
+            glm::mat4x4 transformation = (*bone->Get_Transformation());
+            m_transformations[i] = transformation;
+        }
+        else
+        {
+            m_transformations[i] = glm::mat4x4(1.0f);
+        }
+    }
+    return m_transformations;
+}
+
+const ui32 CAnimationMixer::Get_TransformationSize(void)
+{
+    return m_skeleton->Get_NumBones();
+}
+
 void CAnimationMixer::OnDraw(void)
 {
-    m_mesh->Get_HardwareVertexBuffer()->Unlock(m_mesh->Get_SoftwareVertexBuffer()->Lock(m_vertexBufferGuid), m_mesh->Get_SoftwareVertexBuffer()->Get_Size());
+  
 }
 
 

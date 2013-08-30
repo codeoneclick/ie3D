@@ -16,6 +16,7 @@ extern const struct SAttributes
     std::string m_normal;
     std::string m_tangent;
     std::string m_color;
+    std::string m_extra;
     
 } SAttributes;
 
@@ -24,6 +25,7 @@ extern const struct SUniforms
     std::string m_worldMatrix;
     std::string m_viewMatrix;
     std::string m_projectionMatrix;
+    std::string m_bonesMatrix;
     std::string m_cameraPosition;
     std::string m_lightPosition;
     std::string m_clipPlane;
@@ -51,7 +53,8 @@ const struct SAttributes SAttributes =
     "IN_TexCoord",
     "IN_Normal",
     "IN_Tangent",
-    "IN_Color"
+    "IN_Color",
+    "IN_Extra"
 };
 
 const struct SUniforms SUniforms =
@@ -59,6 +62,7 @@ const struct SUniforms SUniforms =
     "MATRIX_World",
     "MATRIX_View",
     "MATRIX_Projection",
+    "MATRIX_Bones",
     "VECTOR_CameraPosition",
     "VECTOR_LightPosition",
     "VECTOR_ClipPlane",
@@ -106,6 +110,7 @@ m_handle(0)
     m_attributes[E_SHADER_ATTRIBUTE_NORMAL] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_TANGENT] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_COLOR] = -1;
+    m_attributes[E_SHADER_ATTRIBUTE_EXTRA] = -1;
     m_values.resize(E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX);
     for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
     {
@@ -126,6 +131,7 @@ void CShader::_Set_Handle(ui32 _handle)
     m_uniforms[E_SHADER_UNIFORM_MATRIX_WORLD] = glGetUniformLocation(m_handle, SUniforms.m_worldMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_VIEW] = glGetUniformLocation(m_handle, SUniforms.m_viewMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_PROJECTION] = glGetUniformLocation(m_handle, SUniforms.m_projectionMatrix.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_BONES] = glGetUniformLocation(m_handle, SUniforms.m_bonesMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_cameraPosition.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_lightPosition.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CLIP_PLANE] = glGetUniformLocation(m_handle, SUniforms.m_clipPlane.c_str());
@@ -146,6 +152,7 @@ void CShader::_Set_Handle(ui32 _handle)
     m_attributes[E_SHADER_ATTRIBUTE_NORMAL] = glGetAttribLocation(m_handle, SAttributes.m_normal.c_str());
     m_attributes[E_SHADER_ATTRIBUTE_TANGENT] = glGetAttribLocation(m_handle, SAttributes.m_tangent.c_str());
     m_attributes[E_SHADER_ATTRIBUTE_COLOR] = glGetAttribLocation(m_handle, SAttributes.m_color.c_str());
+    m_attributes[E_SHADER_ATTRIBUTE_EXTRA] = glGetAttribLocation(m_handle, SAttributes.m_extra.c_str());
     
     m_status |= E_RESOURCE_STATUS_COMMITED;
 }
@@ -203,6 +210,24 @@ void CShader::Set_Matrix4x4Custom(const glm::mat4x4 &_matrix, const std::string 
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniformMatrix4fv(handle, 1, 0, &_matrix[0][0]);
+    }
+}
+
+void CShader::Set_MatrixArray4x4(const glm::mat4x4* _matrix, ui32 _size, E_SHADER_UNIFORM _uniform)
+{
+    if(IResource::IsLoaded() && IResource::IsCommited())
+    {
+        i32 handle = m_uniforms[_uniform];
+        glUniformMatrix4fv(handle, _size, 0, &_matrix[0][0][0]);
+    }
+}
+
+void CShader::Set_MatrixArray4x4Custom(const glm::mat4x4* _matrix, ui32 _size, const std::string& _uniform)
+{
+    if(IResource::IsLoaded() && IResource::IsCommited())
+    {
+        i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
+        glUniformMatrix4fv(handle, _size, 0, &_matrix[0][0][0]);
     }
 }
 

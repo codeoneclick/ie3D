@@ -52,10 +52,10 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     vertexData[2].m_position = glm::vec3(m_width, m_altitude,  m_height);
     vertexData[3].m_position = glm::vec3(0.0f,  m_altitude,  m_height);
     
-    vertexData[0].m_texcoord = glm::vec2(0.0f,  0.0f);
-    vertexData[1].m_texcoord = glm::vec2(1.0f,  0.0f);
-    vertexData[2].m_texcoord = glm::vec2(1.0f,  1.0f);
-    vertexData[3].m_texcoord = glm::vec2(0.0f,  1.0f);
+    vertexData[0].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(0.0f,  0.0f));
+    vertexData[1].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(1.0f,  0.0f));
+    vertexData[2].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(1.0f,  1.0f));
+    vertexData[3].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(0.0f,  1.0f));
     
     std::shared_ptr<CSVertexBuffer> softwareVertexBuffer = std::make_shared<CSVertexBuffer>(vertexData, 4);
     
@@ -99,7 +99,7 @@ void COcean::_OnSceneUpdate(f32 _deltatime)
 
 i32 COcean::_OnQueuePosition(void)
 {
-    return 8;
+    return 0;
 }
 
 void COcean::_OnBind(const std::string& _renderMode)

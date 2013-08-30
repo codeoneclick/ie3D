@@ -26,6 +26,7 @@ protected:
     std::map<std::string, std::shared_ptr<CSequence> > m_sequences;
     std::shared_ptr<CMesh> m_mesh;
     std::shared_ptr<CSkeleton> m_skeleton;
+    glm::mat4x4* m_transformations;
     
     std::shared_ptr<CSequence> m_oldSequence;
     std::shared_ptr<CSequence> m_currentSequence;
@@ -52,6 +53,9 @@ public:
     {
         return m_indexBufferGuid;
     };
+    
+    glm::mat4x4* Get_Transformations(void);
+    const ui32 Get_TransformationSize(void);
     
     void AddSequence(const std::string& _name, std::shared_ptr<CSequence> _sequence);
     void SetAnimation(const std::string& _name);

@@ -58,7 +58,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
         material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
-        material->Set_IsBatching(true);
+        material->Set_IsBatching(false);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     
@@ -180,9 +180,9 @@ void CModel::_OnDraw(const std::string& _renderMode)
         material->Get_Shader()->Set_Vector4(material->Get_Clipping(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
-        
         if(!material->Get_IsBatching() && m_animationMixer != nullptr)
         {
+            material->Get_Shader()->Set_MatrixArray4x4(m_animationMixer->Get_Transformations(), m_animationMixer->Get_TransformationSize(), E_SHADER_UNIFORM_MATRIX_BONES);
             m_animationMixer->OnDraw();
             IGameObject::_OnDraw(_renderMode);
         }

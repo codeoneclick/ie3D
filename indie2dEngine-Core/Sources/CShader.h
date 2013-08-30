@@ -187,6 +187,8 @@ public:
     void Set_Matrix3x3Custom(const glm::mat3x3& _matrix, const std::string& _uniform);
     void Set_Matrix4x4(const glm::mat4x4& _matrix, E_SHADER_UNIFORM _uniform);
     void Set_Matrix4x4Custom(const glm::mat4x4& _matrix, const std::string& _uniform);
+    void Set_MatrixArray4x4(const glm::mat4x4* _matrix, ui32 _size, E_SHADER_UNIFORM _uniform);
+    void Set_MatrixArray4x4Custom(const glm::mat4x4* _matrix, ui32 _size, const std::string& _uniform);
     void Set_Vector2(const glm::vec2& _vector, E_SHADER_UNIFORM _uniform);
     void Set_Vector2Custom(const glm::vec2& _vector, const std::string& _uniform);
     void Set_Vector3(const glm::vec3& _vector, E_SHADER_UNIFORM _uniform);

@@ -29,9 +29,9 @@ glm::u8vec4 CHVertexBuffer::CompressVec3(const glm::vec3& _uncompressed)
 {
     glm::vec3 normalized = glm::normalize(_uncompressed);
     glm::u8vec4 compressed;
-    compressed.x = static_cast<ui8>((normalized.x + 1.0f) * 0.5f * 255.0f);
-    compressed.y = static_cast<ui8>((normalized.y + 1.0f) * 0.5f * 255.0f);
-    compressed.z = static_cast<ui8>((normalized.z + 1.0f) * 0.5f * 255.0f);
+    compressed.x = static_cast<ui8>((normalized.x + 1.0f) * 0.5f * std::numeric_limits<ui8>::max());
+    compressed.y = static_cast<ui8>((normalized.y + 1.0f) * 0.5f * std::numeric_limits<ui8>::max());
+    compressed.z = static_cast<ui8>((normalized.z + 1.0f) * 0.5f * std::numeric_limits<ui8>::max());
     compressed.w = 0;
     return compressed;
 }
@@ -39,9 +39,25 @@ glm::u8vec4 CHVertexBuffer::CompressVec3(const glm::vec3& _uncompressed)
 glm::vec3 CHVertexBuffer::UncompressU8Vec4(const glm::u8vec4& _compressed)
 {
     glm::vec3 uncompressed;
-    uncompressed.x = static_cast<f32>(_compressed.x / (255.0f * 0.5f) - 1.0f);
-    uncompressed.y = static_cast<f32>(_compressed.y / (255.0f * 0.5f) - 1.0f);
-    uncompressed.z = static_cast<f32>(_compressed.z / (255.0f * 0.5f) - 1.0f);
+    uncompressed.x = static_cast<f32>(_compressed.x / (std::numeric_limits<ui8>::max() * 0.5f) - 1.0f);
+    uncompressed.y = static_cast<f32>(_compressed.y / (std::numeric_limits<ui8>::max() * 0.5f) - 1.0f);
+    uncompressed.z = static_cast<f32>(_compressed.z / (std::numeric_limits<ui8>::max() * 0.5f) - 1.0f);
+    return uncompressed;
+}
+
+glm::u16vec2 CHVertexBuffer::CompressVec2(const glm::vec2& _uncompressed)
+{
+    glm::u16vec2 compressed;
+    compressed.x = static_cast<ui16>((_uncompressed.x + 1.0f) * 0.5f * std::numeric_limits<ui16>::max());
+    compressed.y = static_cast<ui16>((_uncompressed.y + 1.0f) * 0.5f * std::numeric_limits<ui16>::max());
+    return compressed;
+}
+
+glm::vec2 CHVertexBuffer::UncompressU16Vec2(const glm::u16vec2& _compressed)
+{
+    glm::vec2 uncompressed;
+    uncompressed.x = static_cast<f32>(_compressed.x / (std::numeric_limits<ui16>::max() * 0.5f) - 1.0f);
+    uncompressed.y = static_cast<f32>(_compressed.y / (std::numeric_limits<ui16>::max() * 0.5f) - 1.0f);
     return uncompressed;
 }
 
@@ -80,9 +96,20 @@ void CHVertexBuffer::Unlock(CSVertexBuffer::SVertex *_data, ui32 _size)
     for(ui32 i = 0; i < _size; ++i)
     {
         m_data[i].m_position = _data[i].m_position;
-        m_data[i].m_texcoord = _data[i].m_texcoord;
+        m_data[i].m_texcoord = CHVertexBuffer::CompressVec2(_data[i].m_texcoord);
         m_data[i].m_normal = CHVertexBuffer::CompressVec3(_data[i].m_normal);
-        m_data[i].m_tangent = CHVertexBuffer::CompressVec3(_data[i].m_tangent);
+        
+        assert(_data[i].m_bones.size() <= 4);
+        m_data[i].m_tangent = glm::u8vec4(_data[i].m_bones.size() >= 1 ? static_cast<ui8>(_data[i].m_bones[0].m_id) : 0,
+                                          _data[i].m_bones.size() >= 2 ? static_cast<ui8>(_data[i].m_bones[1].m_id) : 0,
+                                          _data[i].m_bones.size() >= 3 ? static_cast<ui8>(_data[i].m_bones[2].m_id) : 0,
+                                          _data[i].m_bones.size() == 4 ? static_cast<ui8>(_data[i].m_bones[3].m_id) : 0);
+        
+        glm::u8vec4 bones = glm::u8vec4(_data[i].m_bones.size() >= 1 ? static_cast<ui8>(_data[i].m_bones[0].m_weigth * 255.0f) : 0,
+                                        _data[i].m_bones.size() >= 2 ? static_cast<ui8>(_data[i].m_bones[1].m_weigth * 255.0f) : 0,
+                                        _data[i].m_bones.size() >= 3 ? static_cast<ui8>(_data[i].m_bones[2].m_weigth * 255.0f) : 0,
+                                        _data[i].m_bones.size() == 4 ? static_cast<ui8>(_data[i].m_bones[3].m_weigth * 255.0f) : 0);
+        m_data[i].m_color = bones;
     }
     
     glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
@@ -105,9 +132,9 @@ void CHVertexBuffer::Bind(const i32* _attributes) const
     if(attribute >= 0)
     {
         glEnableVertexAttribArray(attribute);
-        glVertexAttribPointer(attribute, 2, GL_FLOAT, GL_FALSE, sizeof(SVertex), (GLvoid*)stride);
+        glVertexAttribPointer(attribute, 2, GL_UNSIGNED_SHORT, GL_FALSE, sizeof(SVertex), (GLvoid*)stride);
     }
-    stride += sizeof(glm::vec2);
+    stride += sizeof(glm::u16vec2);
     attribute = _attributes[E_SHADER_ATTRIBUTE_NORMAL];
     if(attribute >= 0)
     {
@@ -123,6 +150,13 @@ void CHVertexBuffer::Bind(const i32* _attributes) const
     }
     stride += sizeof(glm::u8vec4);
     attribute = _attributes[E_SHADER_ATTRIBUTE_COLOR];
+    if(attribute >= 0)
+    {
+        glEnableVertexAttribArray(attribute);
+        glVertexAttribPointer(attribute, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(SVertex), (GLvoid*)stride);
+    }
+    stride += sizeof(glm::u8vec4);
+    attribute = _attributes[E_SHADER_ATTRIBUTE_EXTRA];
     if(attribute >= 0)
     {
         glEnableVertexAttribArray(attribute);
@@ -155,6 +189,11 @@ void CHVertexBuffer::Unbind(const i32* _attributes) const
         glDisableVertexAttribArray(attribute);
     }
     attribute = _attributes[E_SHADER_ATTRIBUTE_COLOR];
+    if(attribute >= 0)
+    {
+        glDisableVertexAttribArray(attribute);
+    }
+    attribute = _attributes[E_SHADER_ATTRIBUTE_EXTRA];
     if(attribute >= 0)
     {
         glDisableVertexAttribArray(attribute);
