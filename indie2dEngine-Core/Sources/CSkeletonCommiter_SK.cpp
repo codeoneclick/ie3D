@@ -25,7 +25,7 @@ void CSkeletonCommiter_SK::Commit(void)
     m_status = E_COMMITER_STATUS_INPROGRESS;
     assert(m_resource != nullptr);
     
-    std::shared_ptr<CSkeleton> skeleton = std::static_pointer_cast<CSkeleton >(m_resource);
+    std::shared_ptr<CSkeleton> skeleton = std::static_pointer_cast<CSkeleton>(m_resource);
     skeleton->_BindSkeleton();
 
     m_status = E_COMMITER_STATUS_SUCCESS;

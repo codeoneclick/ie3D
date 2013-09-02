@@ -20,9 +20,17 @@ CSkeletonLoader::~CSkeletonLoader(void)
     
 }
 
+const std::string CSkeletonLoader::_GenerateGuid(void)
+{
+    static ui32 value = 0;
+    std::stringstream stringstream;
+    stringstream<<++value;
+    return stringstream.str();
+}
+
 std::shared_ptr<CSkeleton> CSkeletonLoader::StartLoadOperation(const std::string &_filename)
 {
-    std::string guid = _filename;
+    std::string guid = _filename + CSkeletonLoader::_GenerateGuid();
     std::shared_ptr<CSkeleton> resource = nullptr;
     if(m_resourceContainer.find(guid) != m_resourceContainer.end())
     {

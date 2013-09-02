@@ -267,6 +267,7 @@
 		A4AF4BE3177489E9007D4B8C /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */; };
 		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
 		A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460617450200000D831E /* IResourceCommiter.cpp */; };
+		A4C8C3F017D4C6E100F955B2 /* ocean_nm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4C8C3EF17D4C6E100F955B2 /* ocean_nm.pvr */; };
 		A4DD0EA2179E6C6F009A7AFE /* CAABoundBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0EA0179E6C6F009A7AFE /* CAABoundBox.cpp */; };
 		A4DD0EAF179E7DBE009A7AFE /* CommonBoundBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */; };
 		A4DD0EB0179E7DBE009A7AFE /* CommonBoundBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4DD0EAC179E7D33009A7AFE /* CommonBoundBox.vert */; };
@@ -809,6 +810,7 @@
 		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
 		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
 		A4BE460717450200000D831E /* IResourceCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceCommiter.h; path = Sources/IResourceCommiter.h; sourceTree = "<group>"; };
+		A4C8C3EF17D4C6E100F955B2 /* ocean_nm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean_nm.pvr; sourceTree = "<group>"; };
 		A4DD0EA0179E6C6F009A7AFE /* CAABoundBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAABoundBox.cpp; path = Sources/CAABoundBox.cpp; sourceTree = "<group>"; };
 		A4DD0EA1179E6C6F009A7AFE /* CAABoundBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAABoundBox.h; path = Sources/CAABoundBox.h; sourceTree = "<group>"; };
 		A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.frag; sourceTree = "<group>"; };
@@ -1633,6 +1635,7 @@
 		A46A3212174E10B80044643E /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A4C8C3EF17D4C6E100F955B2 /* ocean_nm.pvr */,
 				211D30DF17C0D9F10038B703 /* model_02.pvr */,
 				218A462D17B193A400301F41 /* Footman2.Diffuse.pvr */,
 				21816A8417A07F47000AF4BF /* Footman.Diffuse.pvr */,
@@ -2588,6 +2591,7 @@
 				211D30E717C5484E0038B703 /* model_03.MDL_anim in Resources */,
 				211D30E817C5484E0038B703 /* model_03.MDL_mesh in Resources */,
 				211D30E917C5484E0038B703 /* model_03.MDL_sk in Resources */,
+				A4C8C3F017D4C6E100F955B2 /* ocean_nm.pvr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,6 @@ void main(void)
     lowp vec4 vAlbedo = vDiffuseColor * 0.25;
     lowp float fDiffuseFactor = max(dot(OUT_Normal, OUT_LightPosition.xyz), 0.0);
     lowp float fSelfShadow = clamp( 2.0 * OUT_LightPosition.z, 0.0, 1.0);
-    vDiffuseColor.rgb = vDiffuseColor.rgb * fDiffuseFactor * fSelfShadow;
-    gl_FragColor = vDiffuseColor * OUT_LightPosition.w + vAlbedo;
+    vDiffuseColor.rgb = vDiffuseColor.rgb * fDiffuseFactor;
+    gl_FragColor = vDiffuseColor * clamp(OUT_LightPosition.w, 0.0, 1.0) + vAlbedo;
 }

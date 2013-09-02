@@ -19,6 +19,8 @@ private:
     
 protected:
     
+    static const std::string _GenerateGuid(void);
+    
 public:
     
     CSkeletonLoader(void);
