@@ -17,6 +17,7 @@ varying vec3   OUT_CameraPosition;
 varying vec3   OUT_Position;
 varying vec4   OUT_TexCoordProj;
 varying vec2   OUT_TexCoord;
+varying float  OUT_Distance;
 
 void main(void)
 {

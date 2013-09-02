@@ -90,6 +90,8 @@ void COcean::_OnSceneUpdate(f32 _deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
+        m_waveGeneratorInterval = m_waveGeneratorTimer > 2.0 ? -m_waveGeneratorInterval : m_waveGeneratorInterval;
+        m_waveGeneratorInterval = m_waveGeneratorTimer < 0.0 ? -m_waveGeneratorInterval : m_waveGeneratorInterval;
         m_waveGeneratorTimer += m_waveGeneratorInterval;
         IGameObject::_OnSceneUpdate(_deltatime);
     }

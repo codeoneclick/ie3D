@@ -39,7 +39,7 @@ void CKOTHInGameScene::Load(void)
     assert(m_root != nullptr);
     m_camera = m_root->CreateCamera(60.0f,
                                     0.1f,
-                                    128.0f,
+                                    256.0f,
                                     glm::ivec4(0, 0, static_cast<i32>(Get_ScreenWidth()), static_cast<i32>(Get_ScreenHeight())));
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
@@ -96,12 +96,12 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
     static float angle = 0.0f;
     m_models[0]->Set_Animation("model_02.MDL_anim");
     m_models[1]->Set_Animation("model_03.MDL_anim");
-    angle += 0.1f;
+    angle += 0.033f;
     
     static glm::vec3 lightPosition = glm::vec3(0.0f);
-    lightPosition.x = m_characterController->Get_Position().x;//0.0f + cosf(-angle) * -32.0f;
+    lightPosition.x = 0.0f + cosf(-angle) * -64.0f;
     lightPosition.y = 16.0f;
-    lightPosition.z = m_characterController->Get_Position().z;//0.0f + sinf(-angle) * -32.0f;
+    lightPosition.z = 0.0f + sinf(-angle) * -64.0f;
     
     m_light->Set_Position(lightPosition);
     
