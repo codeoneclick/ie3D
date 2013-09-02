@@ -29,7 +29,7 @@ public:
     
     void Lock(void);
     void Unlock(void);
-    void Batch(const std::tuple<ui32, ui32, std::shared_ptr<CMesh>>& _mesh, std::shared_ptr<CMaterial> _material, const glm::mat4x4& _matrix);
+    void Batch(const std::shared_ptr<CMesh>& _mesh, std::shared_ptr<CMaterial> _material, const glm::mat4x4& _matrix);
     void Draw(void);
 };
 

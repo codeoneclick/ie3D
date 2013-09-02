@@ -83,51 +83,37 @@ void IGameObject::Set_Clipping(const glm::vec4 &_clipping, const std::string& _r
     iterator->second->Set_Clipping(_clipping);
 }
 
-std::shared_ptr<CHVertexBuffer> IGameObject::Get_HardwareVertexBuffer(void)
+std::shared_ptr<CVertexBuffer> IGameObject::Get_HardwareVertexBuffer(void)
 {
     assert(m_mesh != nullptr);
-    assert(m_mesh->Get_HardwareVertexBuffer() != nullptr);
-    return m_mesh->Get_HardwareVertexBuffer();
-};
+    assert(m_mesh->Get_VertexBuffer() != nullptr);
+    return m_mesh->Get_VertexBuffer();
+}
 
-std::shared_ptr<CSVertexBuffer> IGameObject::Get_SoftwareVertexBuffer(void)
+std::shared_ptr<CIndexBuffer> IGameObject::Get_HardwareIndexBuffer(void)
 {
     assert(m_mesh != nullptr);
-    assert(m_mesh->Get_SoftwareVertexBuffer() != nullptr);
-    return m_mesh->Get_SoftwareVertexBuffer();
-};
+    assert(m_mesh->Get_IndexBuffer() != nullptr);
+    return m_mesh->Get_IndexBuffer();
+}
 
-std::shared_ptr<CHIndexBuffer> IGameObject::Get_HardwareIndexBuffer(void)
-{
-    assert(m_mesh != nullptr);
-    assert(m_mesh->Get_HardwareIndexBuffer() != nullptr);
-    return m_mesh->Get_HardwareIndexBuffer();
-};
-
-std::shared_ptr<CSIndexBuffer> IGameObject::Get_SoftwareIndexBuffer(void)
-{
-    assert(m_mesh != nullptr);
-    assert(m_mesh->Get_SoftwareIndexBuffer() != nullptr);
-    return m_mesh->Get_SoftwareIndexBuffer();
-};
-
-std::shared_ptr<CSVertexBuffer> IGameObject::Get_BoundVertexBuffer(void)
+std::shared_ptr<CVertexBuffer> IGameObject::Get_BoundVertexBuffer(void)
 {
     assert(m_boundBox != nullptr);
     assert(m_boundBox->Get_VertexBuffer() != nullptr);
     return m_boundBox->Get_VertexBuffer();
-};
+}
 
-std::shared_ptr<CSIndexBuffer> IGameObject::Get_BoundIndexBuffer(void)
+std::shared_ptr<CIndexBuffer> IGameObject::Get_BoundIndexBuffer(void)
 {
     assert(m_boundBox != nullptr);
     assert(m_boundBox->Get_IndexBuffer() != nullptr);
     return m_boundBox->Get_IndexBuffer();
-};
+}
 
 ui32 IGameObject::Get_NumTriangles(void)
 {
-    return m_mesh != nullptr && m_mesh->Get_SoftwareIndexBuffer() != nullptr ? m_mesh->Get_NumIndexes() / 3 : 0;
+    return m_mesh != nullptr && m_mesh->Get_IndexBuffer() != nullptr ? m_mesh->Get_NumIndexes() / 3 : 0;
 }
 
 void IGameObject::ListenRenderMgr(bool _value)

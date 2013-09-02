@@ -10,7 +10,7 @@
 #define CVertexBuffer_h
 
 #include "HCommon.h"
-/*
+
 #define k_NUM_REPLACEMENT_VERTEX_BUFFERS 3
 
 struct SBone
@@ -19,7 +19,7 @@ struct SBone
 	f32 m_weigth;
 };
 
-struct SSourceVertex
+struct SVertex
 {
     glm::vec3 m_position;
     glm::vec2 m_texcoord;
@@ -28,37 +28,29 @@ struct SSourceVertex
     std::vector<SBone> m_bones;
 };
 
-struct SVertex
+struct SHardwareVertex
 {
-    glm::vec3 m_position;
-    glm::vec2 m_texcoord;
-    glm::u8vec4 m_normal;
-    glm::u8vec4 m_tangent;
-    glm::u8vec4 m_color;
+    glm::vec3    m_position;
+    glm::u16vec2 m_texcoord;
+    glm::u8vec4  m_normal;
+    glm::u8vec4  m_tangent;
+    glm::u8vec4  m_color;
+    glm::u8vec4  m_extra;
 };
 
 class CVertexBuffer
 {
 private:
     
-    static const std::string _GenerateGuid(void);
-    
 protected:
     
     ui32 m_size;
-    std::vector<SSourceVertex> m_source;
-    SVertex* m_main;
-    std::map<std::string, SVertex*> m_references;
+    SHardwareVertex* m_data;
     
     ui32 m_handles[k_NUM_REPLACEMENT_VERTEX_BUFFERS];
     i32 m_index;
-    GLenum m_mode;
     
-    inline void _Set_Source(const std::vector<SSourceVertex>& _source)
-    {
-        assert(m_size == _source.size());
-        m_source = _source;
-    };
+    GLenum m_mode;
     
 public:
     
@@ -71,28 +63,17 @@ public:
         return m_size;
     };
     
-    inline const std::vector<SSourceVertex>& Get_Source(void) const
-    {
-        assert(m_size == m_source.size());
-        return m_source;
-    };
-    
     static glm::u8vec4 CompressVec3(const glm::vec3& _uncompressed);
     static glm::vec3 UncompressU8Vec4(const glm::u8vec4& _compressed);
     
-    const std::string CreateReference(void);
-    void DeleteReference(const std::string& _guid);
+    static glm::u16vec2 CompressVec2(const glm::vec2& _uncompressed);
+    static glm::vec2 UncompressU16Vec2(const glm::u16vec2& _compressed);
     
-    SVertex* Lock(void) const;
-    SVertex* Lock(const std::string& _guid) const;
-    
-    void Unlock(void);
-    void Unlock(ui32 _size);
-    void Unlock(const std::string& _guid);
-    void Unlock(ui32 _size, const std::string& _guid);
+    SHardwareVertex* Lock(void) const;
+    void Unlock(ui32 _size = 0);
     
     void Bind(const i32* _attributes);
     void Unbind(const i32* _attributes);
 };
-*/
+
 #endif 

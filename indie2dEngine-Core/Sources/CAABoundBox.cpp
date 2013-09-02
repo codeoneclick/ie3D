@@ -10,17 +10,16 @@
 #include "CResourceAccessor.h"
 #include "CCamera.h"
 #include "CMaterial.h"
-#include "CHVertexBuffer.h"
-#include "CSVertexBuffer.h"
-#include "CHIndexBuffer.h"
-#include "CSIndexBuffer.h"
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
 #include "CShader.h"
 
 CAABoundBox::CAABoundBox(const glm::vec3& _maxBound, const glm::vec3& _minBound) :
 m_maxBound(_maxBound),
 m_minBound(_minBound)
 {
-    CSVertexBuffer::SVertex* vertexData = new CSVertexBuffer::SVertex[24];
+    m_vertexBuffer = std::make_shared<CVertexBuffer>(24, GL_DYNAMIC_DRAW);
+    SHardwareVertex* vertexData = m_vertexBuffer->Lock();
     
     vertexData[0].m_position = glm::vec3( _minBound.x,  _minBound.y, _maxBound.z);
     vertexData[1].m_position = glm::vec3( _maxBound.x,  _minBound.y, _maxBound.z);
@@ -51,11 +50,9 @@ m_minBound(_minBound)
     vertexData[21].m_position = glm::vec3( _minBound.x,  _minBound.y,  _maxBound.z);
     vertexData[22].m_position = glm::vec3( _minBound.x,  _maxBound.y,  _maxBound.z);
     vertexData[23].m_position = glm::vec3( _minBound.x,  _maxBound.y,  _minBound.z);
-    
-    m_softwareVertexBuffer = std::make_shared<CSVertexBuffer>(vertexData, 24);
-    
    
-    ui16* indexData = new ui16[36];
+    m_indexBuffer = std::make_shared<CIndexBuffer>(36, GL_STATIC_DRAW);
+    ui16* indexData = m_indexBuffer->Lock();
     
     indexData[0] = 0;
     indexData[1] = 1;
@@ -98,8 +95,6 @@ m_minBound(_minBound)
     indexData[33] = 20;
     indexData[34] = 22;
     indexData[35] = 23;
-    
-    m_softwareIndexBuffer = std::make_shared<CSIndexBuffer>(indexData, 36);
 }
 
 CAABoundBox::~CAABoundBox(void)
@@ -109,7 +104,7 @@ CAABoundBox::~CAABoundBox(void)
 
 void CAABoundBox::Update(const glm::mat4x4 &_worldMatrix)
 {
-   CSVertexBuffer::SVertex* vertexData = m_softwareVertexBuffer->Lock();
+    SHardwareVertex* vertexData = m_vertexBuffer->Lock();
     
     static f32 offset = 0.1f;
     

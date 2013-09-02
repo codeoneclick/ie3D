@@ -13,8 +13,8 @@
 
 class CSequence;
 class CMesh;
-class CSVertexBuffer;
-class CSIndexBuffer;
+class CVertexBuffer;
+class CIndexBuffer;
 class CSkeleton;
 
 class CAnimationMixer
@@ -34,8 +34,6 @@ protected:
     f32 m_animationTime;
     
     std::string m_skeletonGuid;
-    ui32 m_vertexBufferGuid;
-    ui32 m_indexBufferGuid;
     
     void _BindSequence(void);
     
@@ -43,16 +41,6 @@ public:
     
     CAnimationMixer(std::shared_ptr<CMesh> _mesh, std::shared_ptr<CSkeleton> _skeleton);
     ~CAnimationMixer(void);
-    
-    inline const ui32 Get_VertexBufferGuid(void) const
-    {
-        return m_vertexBufferGuid;
-    };
-    
-    inline const ui32 Get_IndexBufferGuid(void) const
-    {
-        return m_indexBufferGuid;
-    };
     
     glm::mat4x4* Get_Transformations(void);
     const ui32 Get_TransformationSize(void);

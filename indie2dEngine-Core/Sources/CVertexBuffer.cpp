@@ -8,13 +8,13 @@
 
 #include "CVertexBuffer.h"
 #include "HEnums.h"
-/*
+
 CVertexBuffer::CVertexBuffer(ui32 _size, GLenum _mode) :
 m_size(_size),
 m_mode(_mode)
 {
     assert(_size != 0);
-    m_main = new SVertex[m_size];
+    m_data = new SHardwareVertex[m_size];
     m_index = -1;
     glGenBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
 }
@@ -22,12 +22,7 @@ m_mode(_mode)
 CVertexBuffer::~CVertexBuffer(void)
 {
     glDeleteBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
-    for(const auto& reference : m_references)
-    {
-        delete[] reference.second;
-    }
-    m_references.clear();
-    delete[] m_main;
+    delete[] m_data;
 }
 
 glm::u8vec4 CVertexBuffer::CompressVec3(const glm::vec3& _uncompressed)
@@ -50,70 +45,36 @@ glm::vec3 CVertexBuffer::UncompressU8Vec4(const glm::u8vec4& _compressed)
     return uncompressed;
 }
 
-const std::string CVertexBuffer::_GenerateGuid(void)
+glm::u16vec2 CVertexBuffer::CompressVec2(const glm::vec2& _uncompressed)
 {
-    static ui32 value = 0;
-    std::stringstream stringstream;
-    stringstream<<"vertex.buffer.reference."<<++value;
-    return stringstream.str();
+    glm::u16vec2 compressed;
+    compressed.x = static_cast<ui16>((_uncompressed.x + 1.0f) * 0.5f * std::numeric_limits<ui16>::max());
+    compressed.y = static_cast<ui16>((_uncompressed.y + 1.0f) * 0.5f * std::numeric_limits<ui16>::max());
+    return compressed;
 }
 
-const std::string CVertexBuffer::CreateReference(void)
+glm::vec2 CVertexBuffer::UncompressU16Vec2(const glm::u16vec2& _compressed)
 {
-    assert(m_size != 0);
-    std::string guid = CVertexBuffer::_GenerateGuid();
-    m_references.insert(std::make_pair(guid, new SVertex[m_size]));
-    return guid;
+    glm::vec2 uncompressed;
+    uncompressed.x = static_cast<f32>(_compressed.x / (std::numeric_limits<ui16>::max() * 0.5f) - 1.0f);
+    uncompressed.y = static_cast<f32>(_compressed.y / (std::numeric_limits<ui16>::max() * 0.5f) - 1.0f);
+    return uncompressed;
 }
 
-void CVertexBuffer::DeleteReference(const std::string &_guid)
+SHardwareVertex* CVertexBuffer::Lock(void) const
 {
-    assert(m_references.find(_guid) != m_references.end());
-    m_references.erase(m_references.find(_guid));
-}
-
-SVertex* CVertexBuffer::Lock(void) const
-{
-    assert(m_main != nullptr);
-    return m_main;
-}
-
-SVertex* CVertexBuffer::Lock(const std::string &_guid) const
-{
-    assert(m_references.find(_guid) !=  m_references.end());
-    return m_references.find(_guid)->second;
-}
-
-void CVertexBuffer::Unlock(void)
-{
-    assert(m_main != nullptr);
-    assert(m_size != 0);
-    m_index = (m_index >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_index + 1;
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * m_size, m_main, m_mode);
+    assert(m_data != nullptr);
+    return m_data;
 }
 
 void CVertexBuffer::Unlock(ui32 _size)
 {
-    assert(m_main != nullptr);
-    assert(_size != 0 && _size <= m_size);
+    assert(m_data != nullptr);
+    assert(m_size != 0);
+    
     m_index = (m_index >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_index + 1;
     glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * _size, m_main, m_mode);
-}
-
-void CVertexBuffer::Unlock(const std::string &_guid)
-{
-    assert(m_references.find(_guid) !=  m_references.end());
-    m_main = m_references.find(_guid)->second;
-    CVertexBuffer::Unlock();
-}
-
-void CVertexBuffer::Unlock(ui32 _size, const std::string &_guid)
-{
-    assert(m_references.find(_guid) !=  m_references.end());
-    m_main = m_references.find(_guid)->second;
-    CVertexBuffer::Unlock(_size);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(SHardwareVertex) * (_size > 0 ? _size : m_size) , m_data, m_mode);
 }
 
 void CVertexBuffer::Bind(const i32* _attributes)
@@ -125,35 +86,42 @@ void CVertexBuffer::Bind(const i32* _attributes)
     if(attribute >= 0)
     {
         glEnableVertexAttribArray(attribute);
-        glVertexAttribPointer(attribute, 3, GL_FLOAT, GL_FALSE, sizeof(SVertex), (GLvoid*)stride);
+        glVertexAttribPointer(attribute, 3, GL_FLOAT, GL_FALSE, sizeof(SHardwareVertex), (GLvoid*)stride);
     }
     stride += sizeof(glm::vec3);
     attribute = _attributes[E_SHADER_ATTRIBUTE_TEXCOORD];
     if(attribute >= 0)
     {
         glEnableVertexAttribArray(attribute);
-        glVertexAttribPointer(attribute, 2, GL_FLOAT, GL_FALSE, sizeof(SVertex), (GLvoid*)stride);
+        glVertexAttribPointer(attribute, 2, GL_UNSIGNED_SHORT, GL_FALSE, sizeof(SHardwareVertex), (GLvoid*)stride);
     }
-    stride += sizeof(glm::vec2);
+    stride += sizeof(glm::u16vec2);
     attribute = _attributes[E_SHADER_ATTRIBUTE_NORMAL];
     if(attribute >= 0)
     {
         glEnableVertexAttribArray(attribute);
-        glVertexAttribPointer(attribute, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(SVertex), (GLvoid*)stride);
+        glVertexAttribPointer(attribute, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(SHardwareVertex), (GLvoid*)stride);
     }
     stride += sizeof(glm::u8vec4);
     attribute = _attributes[E_SHADER_ATTRIBUTE_TANGENT];
     if(attribute >= 0)
     {
         glEnableVertexAttribArray(attribute);
-        glVertexAttribPointer(attribute, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(SVertex), (GLvoid*)stride);
+        glVertexAttribPointer(attribute, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(SHardwareVertex), (GLvoid*)stride);
     }
     stride += sizeof(glm::u8vec4);
     attribute = _attributes[E_SHADER_ATTRIBUTE_COLOR];
     if(attribute >= 0)
     {
         glEnableVertexAttribArray(attribute);
-        glVertexAttribPointer(attribute, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(SVertex), (GLvoid*)stride);
+        glVertexAttribPointer(attribute, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(SHardwareVertex), (GLvoid*)stride);
+    }
+    stride += sizeof(glm::u8vec4);
+    attribute = _attributes[E_SHADER_ATTRIBUTE_EXTRA];
+    if(attribute >= 0)
+    {
+        glEnableVertexAttribArray(attribute);
+        glVertexAttribPointer(attribute, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(SHardwareVertex), (GLvoid*)stride);
     }
 }
 
@@ -186,6 +154,10 @@ void CVertexBuffer::Unbind(const i32* _attributes)
     {
         glDisableVertexAttribArray(attribute);
     }
+    attribute = _attributes[E_SHADER_ATTRIBUTE_EXTRA];
+    if(attribute >= 0)
+    {
+        glDisableVertexAttribArray(attribute);
+    }
     glBindBuffer(GL_ARRAY_BUFFER, NULL);
 }
-*/

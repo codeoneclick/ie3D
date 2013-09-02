@@ -13,10 +13,8 @@
 #include "CCamera.h"
 #include "CLight.h"
 #include "CResourceAccessor.h"
-#include "CHVertexBuffer.h"
-#include "CSVertexBuffer.h"
-#include "CHIndexBuffer.h"
-#include "CSIndexBuffer.h"
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
 #include "CMesh.h"
 #include "ITemplate.h"
 #include "CCommonOS.h"
@@ -41,20 +39,22 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     
     m_particles = new SParticle[m_settings->m_numParticles];
 
-    CSVertexBuffer::SVertex* vertexData = new CSVertexBuffer::SVertex[m_settings->m_numParticles * 4];
+    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(m_settings->m_numParticles * 4, GL_DYNAMIC_DRAW);
+    SHardwareVertex* vertexData = vertexBuffer->Lock();
     for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
     {
         m_particles[i].m_size = glm::vec2(0.0f, 0.0f);
         m_particles[i].m_color = glm::u8vec4(0, 0, 0, 0);
         
-        vertexData[i * 4 + 0].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2( 0.0f,  0.0f));
-        vertexData[i * 4 + 1].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2( 1.0f,  0.0f));
-        vertexData[i * 4 + 2].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2( 1.0f,  1.0f));
-        vertexData[i * 4 + 3].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2( 0.0f,  1.0f));
+        vertexData[i * 4 + 0].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2( 0.0f,  0.0f));
+        vertexData[i * 4 + 1].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2( 1.0f,  0.0f));
+        vertexData[i * 4 + 2].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2( 1.0f,  1.0f));
+        vertexData[i * 4 + 3].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2( 0.0f,  1.0f));
     }
-    std::shared_ptr<CSVertexBuffer> softwareVertexBuffer = std::make_shared<CSVertexBuffer>(vertexData, m_settings->m_numParticles * 4);
+    vertexBuffer->Unlock();
     
-    ui16* indexData = new ui16[m_settings->m_numParticles * 6];
+    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(m_settings->m_numParticles * 6, GL_STATIC_DRAW);
+    ui16* indexData = indexBuffer->Lock();
     for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
     {
         indexData[i * 6 + 0] = static_cast<ui16>(i * 4 + 0);
@@ -65,12 +65,11 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         indexData[i * 6 + 4] = static_cast<ui16>(i * 4 + 2);
         indexData[i * 6 + 5] = static_cast<ui16>(i * 4 + 3);
     }
-    std::shared_ptr<CSIndexBuffer> softwareIndexBuffer = std::make_shared<CSIndexBuffer>(indexData, m_settings->m_numParticles * 6);
+    indexBuffer->Unlock();
     
-    m_mesh = std::make_shared<CMesh>("particle.emitter", softwareVertexBuffer, softwareIndexBuffer);
+    m_mesh = std::make_shared<CMesh>("particle.emitter", vertexBuffer, indexBuffer);
     assert(m_mesh != nullptr);
-    m_mesh->CreateHardwareBuffers(GL_DYNAMIC_DRAW, GL_STATIC_DRAW);
-    
+
     for(const auto& materialTemplate : m_settings->m_materialsTemplates)
     {
         std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
@@ -112,7 +111,7 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
     {
         IGameObject::_OnSceneUpdate(_deltatime);
         
-        CHVertexBuffer::SVertex* vertexData = m_mesh->Get_HardwareVertexBuffer()->Lock();
+        SHardwareVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock();
         f32 currentTime = CTimer::Get_TickCount();
         
         for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
@@ -172,7 +171,7 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
             vertexData[i * 4 + 2].m_color = m_particles[i].m_color;
             vertexData[i * 4 + 3].m_color = m_particles[i].m_color;
         }
-        m_mesh->Get_HardwareVertexBuffer()->Unlock();
+        m_mesh->Get_VertexBuffer()->Unlock();
     }
 }
 

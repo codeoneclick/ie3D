@@ -116,14 +116,6 @@ void CModel::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _succe
             m_animationMixer->AddSequence((*sequence)->Get_Name(), (*sequence));
         }
     }
-    
-    if(_resource->Get_Class() == E_RESOURCE_CLASS_MESH)
-    {
-        if(!m_materials.begin()->second->Get_IsBatching())
-        {
-            m_mesh->CreateHardwareBuffers(GL_DYNAMIC_DRAW, GL_STATIC_DRAW);
-        }
-    }
 }
 
 void CModel::Set_Animation(const std::string &_name)
@@ -189,7 +181,7 @@ void CModel::_OnDraw(const std::string& _renderMode)
         else if(m_mesh->IsLoaded() && m_animationMixer != nullptr)
         {
             material->Get_Shader()->Set_Matrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_MATRIX_WORLD);
-            m_renderMgr->Get_BatchingMgr()->Batch(std::make_tuple(m_animationMixer->Get_VertexBufferGuid(), m_animationMixer->Get_IndexBufferGuid(), m_mesh), material, m_matrixWorld);
+            m_renderMgr->Get_BatchingMgr()->Batch(m_mesh, material, m_matrixWorld);
         }
     }
 }

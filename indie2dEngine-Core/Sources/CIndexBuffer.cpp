@@ -7,7 +7,7 @@
 //
 
 #include "CIndexBuffer.h"
-/*
+
 CIndexBuffer::CIndexBuffer(ui32 _size, GLenum _mode) :
 m_size(_size),
 m_mode(_mode)
@@ -23,22 +23,13 @@ CIndexBuffer::~CIndexBuffer(void)
     glDeleteBuffers(K_NUM_REPLACEMENT_INDEX_BUFFERS, m_handles);
 }
 
-void CIndexBuffer::Unlock(void)
+void CIndexBuffer::Unlock(ui32 _size)
 {
     assert(m_data != nullptr);
     assert(m_size != 0);
     m_index = (m_index >= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1)) ? 0 : m_index + 1;
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handles[m_index]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * m_size, m_data, m_mode);
-}
-
-void CIndexBuffer::Unlock(ui32 _size)
-{
-    assert(m_data != nullptr);
-    assert(_size != 0);
-    m_index = (m_index >= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1)) ? 0 : m_index + 1;
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handles[m_index]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * _size, m_data, m_mode);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * (_size > 0 ? _size : m_size), m_data, m_mode);
 }
 
 void CIndexBuffer::Bind(void) const
@@ -52,4 +43,3 @@ void CIndexBuffer::Unbind(void) const
     assert(m_index >= 0 && m_index <= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
-*/

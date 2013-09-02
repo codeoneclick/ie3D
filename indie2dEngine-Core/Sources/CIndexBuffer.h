@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 
-/*#define K_NUM_REPLACEMENT_INDEX_BUFFERS 3
+#define K_NUM_REPLACEMENT_INDEX_BUFFERS 3
 
 class CIndexBuffer
 {
@@ -43,12 +43,10 @@ public:
 		return m_data;
     };
     
-    void Unlock(void);
-    void Unlock(ui32 _size);
+    void Unlock(ui32 _size = 0);
     
     void Bind(void) const;
     void Unbind(void) const;
     
 };
-*/
 #endif 

@@ -14,19 +14,19 @@ m_indexBuffer(nullptr),
 m_maxBound(glm::vec3(-4096.0f, -4096.0f, -4096.0f)),
 m_minBound(glm::vec3( 4096.0f,  4096.0f,  4096.0f))
 {
-    m_vertexBuffer = std::make_shared<CHVertexBuffer>(4, GL_STATIC_DRAW);
-    CHVertexBuffer::SVertex* vertexData = m_vertexBuffer->Lock();
+    m_vertexBuffer = std::make_shared<CVertexBuffer>(4, GL_STATIC_DRAW);
+    SHardwareVertex* vertexData = m_vertexBuffer->Lock();
     vertexData[0].m_position = glm::vec3(-1.0f, -1.0f, 0.0f);
-    vertexData[0].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(0.0f, 0.0f));
+    vertexData[0].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 0.0f));
     vertexData[1].m_position = glm::vec3(-1.0f, 1.0f, 0.0f);
-    vertexData[1].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(0.0f, 1.0f));
+    vertexData[1].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 1.0f));
     vertexData[2].m_position = glm::vec3(1.0f, -1.0f, 0.0f);
-    vertexData[2].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(1.0f, 0.0f));
+    vertexData[2].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 0.0f));
     vertexData[3].m_position = glm::vec3(1.0f, 1.0f, 0.0f);
-    vertexData[3].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(1.0f, 1.0f));
+    vertexData[3].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 1.0f));
     m_vertexBuffer->Unlock();
     
-    m_indexBuffer = std::make_shared<CHIndexBuffer>(6, GL_STATIC_DRAW);
+    m_indexBuffer = std::make_shared<CIndexBuffer>(6, GL_STATIC_DRAW);
     ui16* indexData = m_indexBuffer->Lock();
     indexData[0] = 0;
     indexData[1] = 1;

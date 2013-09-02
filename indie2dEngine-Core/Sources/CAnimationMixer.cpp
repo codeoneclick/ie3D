@@ -20,7 +20,6 @@ m_currentSequence(nullptr),
 m_animationTime(0.0f)
 {
     m_skeletonGuid = m_skeleton->CreateTransformations();
-    m_vertexBufferGuid = m_mesh->Get_SoftwareVertexBuffer()->CreateReference();
     m_transformations = new glm::mat4x4[m_skeleton->Get_NumBones()];
 }
 

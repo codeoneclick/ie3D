@@ -15,10 +15,8 @@
 #include "CResourceAccessor.h"
 #include "ITemplate.h"
 #include "CMesh.h"
-#include "CHVertexBuffer.h"
-#include "CSVertexBuffer.h"
-#include "CHIndexBuffer.h"
-#include "CSIndexBuffer.h"
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
 
 COcean::COcean(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 IGameObject(_resourceFabricator)
@@ -44,22 +42,23 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_waveGeneratorTimer = 0.0f;
     m_waveGeneratorInterval = oceanTemplate->m_waveGeneratorInterval;
     
-    
-    CSVertexBuffer::SVertex* vertexData = new CSVertexBuffer::SVertex[4];
+    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(4, GL_STATIC_DRAW);
+    SHardwareVertex* vertexData = vertexBuffer->Lock();
     
     vertexData[0].m_position = glm::vec3(0.0f,  m_altitude,  0.0f);
     vertexData[1].m_position = glm::vec3(m_width, m_altitude,  0.0f);
     vertexData[2].m_position = glm::vec3(m_width, m_altitude,  m_height);
     vertexData[3].m_position = glm::vec3(0.0f,  m_altitude,  m_height);
     
-    vertexData[0].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(0.0f,  0.0f));
-    vertexData[1].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(1.0f,  0.0f));
-    vertexData[2].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(1.0f,  1.0f));
-    vertexData[3].m_texcoord = CHVertexBuffer::CompressVec2(glm::vec2(0.0f,  1.0f));
+    vertexData[0].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f,  0.0f));
+    vertexData[1].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f,  0.0f));
+    vertexData[2].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f,  1.0f));
+    vertexData[3].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f,  1.0f));
     
-    std::shared_ptr<CSVertexBuffer> softwareVertexBuffer = std::make_shared<CSVertexBuffer>(vertexData, 4);
+    vertexBuffer->Unlock();
     
-    ui16* indexData = new ui16[6];
+    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(6, GL_STATIC_DRAW);
+    ui16* indexData = indexBuffer->Lock();
     
     indexData[0] = 0;
     indexData[1] = 1;
@@ -68,11 +67,10 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     indexData[4] = 2;
     indexData[5] = 3;
     
-    std::shared_ptr<CSIndexBuffer> softwareIndexBuffer = std::make_shared<CSIndexBuffer>(indexData, 6);
+    indexBuffer->Unlock();
     
-    m_mesh = std::make_shared<CMesh>("ocean", softwareVertexBuffer, softwareIndexBuffer);
+    m_mesh = std::make_shared<CMesh>("ocean", vertexBuffer, indexBuffer);
     assert(m_mesh != nullptr);
-    m_mesh->CreateHardwareBuffers(GL_STATIC_DRAW, GL_STATIC_DRAW);
     
     for(const auto& materialTemplate : oceanTemplate->m_materialsTemplates)
     {

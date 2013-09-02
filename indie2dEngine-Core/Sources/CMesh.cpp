@@ -16,8 +16,8 @@
 CMeshHeader::CMeshHeader(void) :
 m_vertexData(nullptr),
 m_indexData(nullptr),
-m_numIndexes(0),
-m_numVertexes(0),
+m_numIndices(0),
+m_numVerticies(0),
 m_maxBound(glm::vec3(-4096.0f)),
 m_minBound(glm::vec3( 4096.0f))
 {
@@ -33,83 +33,60 @@ CMeshHeader::~CMeshHeader(void)
 CMesh::CMesh(const std::string& _guid) :
 IResource(E_RESOURCE_CLASS_MESH, _guid),
 m_header(nullptr),
-m_softwareVertexBuffer(nullptr),
-m_hardwareVertexBuffer(nullptr),
-m_softwareIndexBuffer(nullptr),
-m_hardwareIndexBuffer(nullptr)
+m_vertexBuffer(nullptr),
+m_indexBuffer(nullptr)
 {
     
 }
 
-CMesh::CMesh(const std::string& _guid, std::shared_ptr<CSVertexBuffer> _softwareVertexBuffer, std::shared_ptr<CSIndexBuffer> _softwareIndexBuffer) :
+CMesh::CMesh(const std::string& _guid, std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer) :
 IResource(E_RESOURCE_CLASS_MESH, _guid),
 m_header(std::make_shared<CMeshHeader>()),
-m_softwareVertexBuffer(_softwareVertexBuffer),
-m_hardwareVertexBuffer(nullptr),
-m_softwareIndexBuffer(_softwareIndexBuffer),
-m_hardwareIndexBuffer(nullptr)
+m_vertexBuffer(_vertexBuffer),
+m_indexBuffer(_indexBuffer)
 {
-    assert(_softwareVertexBuffer != nullptr);
-    assert(_softwareIndexBuffer != nullptr);
-    m_header->m_numVertexes = m_softwareVertexBuffer->Get_Size();
-    m_header->m_numIndexes = m_softwareIndexBuffer->Get_Size();
-    m_header->m_vertexData = m_softwareVertexBuffer->Lock();
-    m_header->m_indexData = m_softwareIndexBuffer->Lock();
+    m_header->m_numVerticies = m_vertexBuffer->Get_Size();
+    m_header->m_numIndices = m_indexBuffer->Get_Size();
+    m_header->m_vertexData = nullptr;
+    m_header->m_indexData = nullptr;
     
-    for(ui32 i = 0; i < m_header->m_numVertexes; ++i)
+    SHardwareVertex* vertexData = m_vertexBuffer->Lock();
+    
+    for(ui32 i = 0; i < m_header->m_numVerticies; ++i)
     {
-        if(m_header->m_vertexData[i].m_position.x > m_header->m_maxBound.x)
+        if(vertexData[i].m_position.x > m_header->m_maxBound.x)
         {
-            m_header->m_maxBound.x = m_header->m_vertexData[i].m_position.x;
+            m_header->m_maxBound.x = vertexData[i].m_position.x;
         }
-        if(m_header->m_vertexData[i].m_position.y > m_header->m_maxBound.y)
+        if(vertexData[i].m_position.y > m_header->m_maxBound.y)
         {
-            m_header->m_maxBound.y = m_header->m_vertexData[i].m_position.y;
+            m_header->m_maxBound.y = vertexData[i].m_position.y;
         }
-        if(m_header->m_vertexData[i].m_position.z > m_header->m_maxBound.z)
+        if(vertexData[i].m_position.z > m_header->m_maxBound.z)
         {
-            m_header->m_maxBound.z = m_header->m_vertexData[i].m_position.z;
+            m_header->m_maxBound.z = vertexData[i].m_position.z;
         }
-        if(m_header->m_vertexData[i].m_position.x < m_header->m_minBound.x)
+        if(vertexData[i].m_position.x < m_header->m_minBound.x)
         {
-            m_header->m_minBound.x = m_header->m_vertexData[i].m_position.x;
+            m_header->m_minBound.x = vertexData[i].m_position.x;
         }
-        if(m_header->m_vertexData[i].m_position.y < m_header->m_minBound.y)
+        if(vertexData[i].m_position.y < m_header->m_minBound.y)
         {
-            m_header->m_minBound.y = m_header->m_vertexData[i].m_position.y;
+            m_header->m_minBound.y = vertexData[i].m_position.y;
         }
-        if(m_header->m_vertexData[i].m_position.z < m_header->m_minBound.z)
+        if(vertexData[i].m_position.z < m_header->m_minBound.z)
         {
-            m_header->m_minBound.z = m_header->m_vertexData[i].m_position.z;
+            m_header->m_minBound.z = vertexData[i].m_position.z;
         }
     }
     
     m_status |= E_RESOURCE_STATUS_LOADED;
+    m_status |= E_RESOURCE_STATUS_COMMITED;
 }
 
 CMesh::~CMesh(void)
 {
     m_bounds.clear();
-}
-
-void CMesh::CreateHardwareBuffers(GLenum _vertexBufferMode, GLenum _indexBufferMode)
-{
-    assert(m_softwareVertexBuffer != nullptr);
-    assert(m_softwareVertexBuffer->Get_Size() != 0);
-    if(m_hardwareVertexBuffer == nullptr)
-    {
-        m_hardwareVertexBuffer = std::make_shared<CHVertexBuffer>(m_softwareVertexBuffer->Get_Size(), _vertexBufferMode);
-        m_hardwareVertexBuffer->Unlock(m_softwareVertexBuffer->Lock(), m_softwareVertexBuffer->Get_Size());
-    }
-    
-    assert(m_softwareIndexBuffer != nullptr);
-    assert(m_softwareIndexBuffer->Get_Size() != 0);
-    if(m_hardwareIndexBuffer == nullptr)
-    {
-        m_hardwareIndexBuffer = std::make_shared<CHIndexBuffer>(m_softwareIndexBuffer->Get_Size(), _indexBufferMode);
-        m_hardwareIndexBuffer->Unlock(m_softwareIndexBuffer->Lock(), m_softwareIndexBuffer->Get_Size());
-    }
-    m_status |= E_RESOURCE_STATUS_COMMITED;
 }
 
 void CMesh::_Set_Header(std::shared_ptr<CMeshHeader> _header)
@@ -137,10 +114,10 @@ void CMesh::Bind(const i32 *_attributes) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        assert(m_hardwareVertexBuffer != nullptr);
-        assert(m_hardwareIndexBuffer != nullptr);
-        m_hardwareIndexBuffer->Bind();
-        m_hardwareVertexBuffer->Bind(_attributes);
+        assert(m_vertexBuffer != nullptr);
+        assert(m_indexBuffer != nullptr);
+        m_vertexBuffer->Bind(_attributes);
+        m_indexBuffer->Bind();
     }
 }
 
@@ -148,9 +125,9 @@ void CMesh::Draw(void) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        assert(m_hardwareVertexBuffer != nullptr);
-        assert(m_hardwareIndexBuffer != nullptr);
-        glDrawElements(GL_TRIANGLES, m_hardwareIndexBuffer->Get_Size(), GL_UNSIGNED_SHORT, NULL);
+        assert(m_vertexBuffer != nullptr);
+        assert(m_indexBuffer != nullptr);
+        glDrawElements(GL_TRIANGLES, m_indexBuffer->Get_Size(), GL_UNSIGNED_SHORT, NULL);
     }
 }
 
@@ -158,8 +135,8 @@ void CMesh::Draw(ui32 _indices) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        assert(m_hardwareVertexBuffer != nullptr);
-        assert(m_hardwareIndexBuffer != nullptr);
+        assert(m_vertexBuffer != nullptr);
+        assert(m_indexBuffer != nullptr);
         glDrawElements(GL_TRIANGLES, _indices, GL_UNSIGNED_SHORT, NULL);
     }
 }
@@ -168,9 +145,9 @@ void CMesh::Unbind(const i32 *_attributes) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        assert(m_hardwareVertexBuffer != nullptr);
-        assert(m_hardwareIndexBuffer != nullptr);
-        m_hardwareIndexBuffer->Unbind();
-        m_hardwareVertexBuffer->Unbind(_attributes);
+        assert(m_vertexBuffer != nullptr);
+        assert(m_indexBuffer != nullptr);
+        m_indexBuffer->Unbind();
+        m_vertexBuffer->Unbind(_attributes);
     }
 }

@@ -45,12 +45,12 @@ void CMeshSerializer_MDL::Serialize(void)
     std::shared_ptr<CMeshHeader> header = std::make_shared<CMeshHeader>();
     std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh>(m_resource);
     
-    filestream.read((char*)&header->m_numVertexes, sizeof(ui32));
-    filestream.read((char*)&header->m_numIndexes, sizeof(ui32));
+    filestream.read((char*)&header->m_numVerticies, sizeof(ui32));
+    filestream.read((char*)&header->m_numIndices, sizeof(ui32));
     
-    header->m_vertexData = new CSVertexBuffer::SVertex[header->m_numVertexes];
+    header->m_vertexData = new SVertex[header->m_numVerticies];
     
-    for(ui32 i = 0; i < header->m_numVertexes; ++i)
+    for(ui32 i = 0; i < header->m_numVerticies; ++i)
     {
         glm::vec3 position;
         filestream.read((char*)&position, sizeof(glm::vec3));
@@ -66,7 +66,7 @@ void CMeshSerializer_MDL::Serialize(void)
 
         for(ui32 j = 0; j < numWeights; ++j)
         {
-            CSVertexBuffer::SBone bone;
+            SBone bone;
             filestream.read((char*)&bone.m_id, sizeof(i32));
             filestream.read((char*)&bone.m_weigth, sizeof(f32));
             header->m_vertexData[i].m_bones.push_back(bone);
@@ -103,14 +103,14 @@ void CMeshSerializer_MDL::Serialize(void)
         }
     }
     
-	header->m_indexData = new ui16[header->m_numIndexes];
+	header->m_indexData = new ui16[header->m_numIndices];
     
-    for(ui32 i = 0; i < header->m_numIndexes; ++i)
+    for(ui32 i = 0; i < header->m_numIndices; ++i)
     {
         filestream.read((char*)&header->m_indexData[i], sizeof(ui16));
     }
     
-    for(ui32 i = 0; i < header->m_numIndexes; i += 3)
+    for(ui32 i = 0; i < header->m_numIndices; i += 3)
     {
         ui16 index = header->m_indexData[i + 1];
         header->m_indexData[i + 1] = header->m_indexData[i + 2];

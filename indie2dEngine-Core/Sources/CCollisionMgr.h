@@ -14,10 +14,8 @@
 
 class CCamera;
 class ICollisionHandler;
-class CHVertexBuffer;
-class CSVertexBuffer;
-class CHIndexBuffer;
-class CSIndexBuffer;
+class CVertexBuffer;
+class CIndexBuffer;
 
 class CCollisionMgr final : public IInputTapRecognizerHandler
 {
@@ -28,7 +26,7 @@ protected:
     std::shared_ptr<CCamera> m_camera;
     std::set<std::shared_ptr<ICollisionHandler> > m_handlers;
     
-    bool _CollisionPoint(std::shared_ptr<CSVertexBuffer> _softwareVertexBuffer, std::shared_ptr<CSIndexBuffer> _softwareIndexBuffer, const glm::mat4x4& _worldMatrix, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _point);
+    bool _CollisionPoint(std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer, const glm::mat4x4& _worldMatrix, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _point);
     bool _TriangleIntersection(const glm::vec3& _trianglePoint_01, glm::vec3& _trianglePoint_02, glm::vec3& _trianglePoint_03, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _intersectPoint);
     
     void _OnInputTapRecognizerPressed(const glm::ivec2& _point);

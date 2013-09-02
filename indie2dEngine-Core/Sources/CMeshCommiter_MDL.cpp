@@ -30,10 +30,35 @@ void CMeshCommiter_MDL::Commit(void)
     std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh >(m_resource);
     std::shared_ptr<CMeshHeader> header = mesh->_Get_Header();
     
-    std::shared_ptr<CSVertexBuffer> softwareVertexBuffer = std::make_shared<CSVertexBuffer>(header->m_vertexData, header->m_numVertexes);
+    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(header->_Get_NumVerticies(), GL_STATIC_DRAW);
+    SHardwareVertex* vertexData = vertexBuffer->Lock();
+    
+    for(ui32 i = 0; i < header->_Get_NumVerticies(); ++i)
+    {
+        vertexData[i].m_position = header->_Get_VertexData()[i].m_position;
+        vertexData[i].m_texcoord = CVertexBuffer::CompressVec2(header->_Get_VertexData()[i].m_texcoord);
+        vertexData[i].m_normal = CVertexBuffer::CompressVec3(header->_Get_VertexData()[i].m_normal);
+        
+        assert(header->_Get_VertexData()[i].m_bones.size() <= 4);
+        vertexData[i].m_tangent = glm::u8vec4(header->_Get_VertexData()[i].m_bones.size() >= 1 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[0].m_id) : 0,
+                                              header->_Get_VertexData()[i].m_bones.size() >= 2 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[1].m_id) : 0,
+                                              header->_Get_VertexData()[i].m_bones.size() >= 3 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[2].m_id) : 0,
+                                              header->_Get_VertexData()[i].m_bones.size() == 4 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[3].m_id) : 0);
+        
+        vertexData[i].m_color = glm::u8vec4(header->_Get_VertexData()[i].m_bones.size() >= 1 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[0].m_weigth * 255.0f) : 0,
+                                            header->_Get_VertexData()[i].m_bones.size() >= 2 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[1].m_weigth * 255.0f) : 0,
+                                            header->_Get_VertexData()[i].m_bones.size() >= 3 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[2].m_weigth * 255.0f) : 0,
+                                            header->_Get_VertexData()[i].m_bones.size() == 4 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[3].m_weigth * 255.0f) : 0);
+    }
+    vertexBuffer->Unlock();
+    
+    
+    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(header->_Get_NumIndices(), GL_STATIC_DRAW);
+    ui16* indexData = indexBuffer->Lock();
+	memcpy(indexData, header->_Get_IndexData(), sizeof(ui16) * header->_Get_NumIndices());
+    indexBuffer->Unlock();
 
-    std::shared_ptr<CSIndexBuffer> softwareIndexBuffer = std::make_shared<CSIndexBuffer>(header->m_indexData, header->m_numIndexes);
-    mesh->_Set_Handlers(softwareVertexBuffer, softwareIndexBuffer);
+    mesh->_Set_Handlers(vertexBuffer, indexBuffer);
     
     m_status = E_COMMITER_STATUS_SUCCESS;
 }
