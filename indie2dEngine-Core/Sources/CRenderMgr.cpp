@@ -22,7 +22,7 @@ m_outputOperation(nullptr),
 m_batchingMgr(std::make_shared<CBatchingMgr>()),
 m_numTriangles(0)
 {
-    glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
+   
 }
 
 CRenderMgr::~CRenderMgr(void)

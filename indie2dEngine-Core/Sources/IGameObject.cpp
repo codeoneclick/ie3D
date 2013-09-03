@@ -54,13 +54,13 @@ bool IGameObject::_IsBoundBoxInFrustum(void)
 glm::vec3 IGameObject::Get_MaxBound(void)
 {
     assert(m_mesh != nullptr);
-    return m_mesh->Get_MaxBound();
+    return m_mesh->Get_MaxBound() * m_scale;
 }
 
 glm::vec3 IGameObject::Get_MinBound(void)
 {
     assert(m_mesh != nullptr);
-    return m_mesh->Get_MinBound();
+    return m_mesh->Get_MinBound() * m_scale;
 }
 
 void IGameObject::Set_Camera(std::shared_ptr<CCamera> _camera)

@@ -33,6 +33,9 @@ std::shared_ptr<ITemplate> CWorldSpaceRenderOperationTemplateSerializer::Seriali
     worldSpaceRenderOperationTemplate->m_guid = node.attribute("guid").as_string();
     worldSpaceRenderOperationTemplate->m_screenWidth = node.attribute("screenWidth").as_int();
     worldSpaceRenderOperationTemplate->m_screenHeight = node.attribute("screenHeight").as_int();
+    worldSpaceRenderOperationTemplate->m_clearColor.x = node.attribute("clear_color_r").as_float();
+    worldSpaceRenderOperationTemplate->m_clearColor.y = node.attribute("clear_color_g").as_float();
+    worldSpaceRenderOperationTemplate->m_clearColor.z = node.attribute("clear_color_b").as_float();
     
     return worldSpaceRenderOperationTemplate;
 }

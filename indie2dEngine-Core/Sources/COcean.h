@@ -21,6 +21,7 @@ private:
     f32 m_altitude;
     f32 m_waveGeneratorTimer;
     f32 m_waveGeneratorInterval;
+    f32 m_textureTileFactor;
     
 protected:
     

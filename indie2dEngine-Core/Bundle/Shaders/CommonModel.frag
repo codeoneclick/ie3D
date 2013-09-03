@@ -4,6 +4,7 @@ varying highp vec2   OUT_TexCoord;
 varying lowp  float  OUT_ClipPlane;
 
 uniform sampler2D SAMPLER_01;
+uniform sampler2D SAMPLER_02;
 
 void main(void)
 {

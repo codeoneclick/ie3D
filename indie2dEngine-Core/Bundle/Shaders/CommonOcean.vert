@@ -23,7 +23,7 @@ void main(void)
 {
     vec4 vPosition = MATRIX_World * vec4(IN_Position, 1.0);
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
-    OUT_TexCoord = IN_TexCoord / 32767.0  - 1.0;
+    OUT_TexCoord = (IN_TexCoord / 32767.0  - 1.0) * 4.0;
     OUT_TexCoordProj = gl_Position;
     
     OUT_LightPosition = VECTOR_LightPosition;

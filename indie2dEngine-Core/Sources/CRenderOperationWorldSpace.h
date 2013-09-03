@@ -25,6 +25,7 @@ protected:
     ui32 m_frameBufferHandle;
     ui32 m_frameWidth;
     ui32 m_frameHeight;
+    glm::vec3 m_clearColor;
     std::map<ui32, std::set< std::shared_ptr<IRenderHandler> > > m_handlers;
     std::string m_mode;
     
@@ -32,7 +33,7 @@ protected:
     
 public:
     
-    CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const std::string& _mode);
+    CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const glm::vec3& _clearColor, const std::string& _mode);
     ~CRenderOperationWorldSpace(void);
     
     inline std::shared_ptr<CTexture> Get_OperatingColorTexture(void)

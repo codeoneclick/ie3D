@@ -2,5 +2,6 @@
     <shader vs_name="CommonModel.vert" fs_name="CommonModel.frag"/>
     <textures>
         <texture name="model_02.pvr" operation="" slot="0" wrap="GL_REPEAT"/>
+        <texture name="ocean_nm.pvr" operation="" slot="1" wrap="GL_REPEAT"/>
     </textures>
 </material>

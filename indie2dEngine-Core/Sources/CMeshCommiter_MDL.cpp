@@ -38,14 +38,15 @@ void CMeshCommiter_MDL::Commit(void)
         vertexData[i].m_position = header->_Get_VertexData()[i].m_position;
         vertexData[i].m_texcoord = CVertexBuffer::CompressVec2(header->_Get_VertexData()[i].m_texcoord);
         vertexData[i].m_normal = CVertexBuffer::CompressVec3(header->_Get_VertexData()[i].m_normal);
+        vertexData[i].m_tangent = CVertexBuffer::CompressVec3(header->_Get_VertexData()[i].m_tangent);
         
         assert(header->_Get_VertexData()[i].m_bones.size() <= 4);
-        vertexData[i].m_tangent = glm::u8vec4(header->_Get_VertexData()[i].m_bones.size() >= 1 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[0].m_id) : 0,
+        vertexData[i].m_color = glm::u8vec4(header->_Get_VertexData()[i].m_bones.size() >= 1 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[0].m_id) : 0,
                                               header->_Get_VertexData()[i].m_bones.size() >= 2 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[1].m_id) : 0,
                                               header->_Get_VertexData()[i].m_bones.size() >= 3 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[2].m_id) : 0,
                                               header->_Get_VertexData()[i].m_bones.size() == 4 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[3].m_id) : 0);
         
-        vertexData[i].m_color = glm::u8vec4(header->_Get_VertexData()[i].m_bones.size() >= 1 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[0].m_weigth * 255.0f) : 0,
+        vertexData[i].m_extra = glm::u8vec4(header->_Get_VertexData()[i].m_bones.size() >= 1 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[0].m_weigth * 255.0f) : 0,
                                             header->_Get_VertexData()[i].m_bones.size() >= 2 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[1].m_weigth * 255.0f) : 0,
                                             header->_Get_VertexData()[i].m_bones.size() >= 3 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[2].m_weigth * 255.0f) : 0,
                                             header->_Get_VertexData()[i].m_bones.size() == 4 ? static_cast<ui8>(header->_Get_VertexData()[i].m_bones[3].m_weigth * 255.0f) : 0);

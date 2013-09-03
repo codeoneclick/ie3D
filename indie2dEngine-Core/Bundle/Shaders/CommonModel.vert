@@ -4,6 +4,7 @@ attribute vec2 IN_TexCoord;
 attribute vec4 IN_Normal;
 attribute vec4 IN_Tangent;
 attribute vec4 IN_Color;
+attribute vec4 IN_Extra;
 
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
@@ -23,29 +24,34 @@ void main(void)
 {
     vec4 vPosition = vec4(IN_Position, 1.0);
     vec4 vNormal = vec4(IN_Normal.xyz / 127.0 - 1.0, 1.0);
-    vec4 vWeights = IN_Color / 255.0;
+    vec4 vTangent = vec4(IN_Tangent.xyz / 127.0 - 1.0, 1.0);
+    vec4 vWeights = IN_Extra / 255.0;
     
-    int index = int(IN_Tangent.x);
+    int index = int(IN_Color.x);
     vec4 vBonePosition = MATRIX_Bones[index] * vPosition * vWeights.x;
     vec4 vBoneNormal = MATRIX_Bones[index] * vNormal * vWeights.x;
+    vec4 vBoneTangent = MATRIX_Bones[index] * vTangent * vWeights.x;
     
-    index = int(IN_Tangent.y);
+    index = int(IN_Color.y);
     vBonePosition += MATRIX_Bones[index] * vPosition * vWeights.y;
     vBoneNormal += MATRIX_Bones[index] * vNormal * vWeights.y;
+    vBoneTangent += MATRIX_Bones[index] * vTangent * vWeights.y;
     
-    index = int(IN_Tangent.z);
+    index = int(IN_Color.z);
     vBonePosition += MATRIX_Bones[index] * vPosition * vWeights.z;
     vBoneNormal += MATRIX_Bones[index] * vNormal * vWeights.z;
+    vBoneTangent += MATRIX_Bones[index] * vTangent * vWeights.z;
     
-    index = int(IN_Tangent.w);
+    index = int(IN_Color.w);
     vBonePosition += MATRIX_Bones[index] * vPosition * vWeights.w;
     vBoneNormal += MATRIX_Bones[index] * vNormal * vWeights.w;
+    vBoneTangent += MATRIX_Bones[index] * vTangent * vWeights.w;
 
     vBonePosition = MATRIX_World * vBonePosition;
     
     gl_Position = MATRIX_Projection * MATRIX_View * vBonePosition;
 
-    OUT_Normal = (vBoneNormal).xyz;
+    OUT_Normal = normalize(MATRIX_World * vBoneNormal).xyz;
     
     vec3 vLightDistance = VECTOR_LightPosition - vBonePosition.xyz;
     OUT_LightPosition.xyz = normalize(vLightDistance);

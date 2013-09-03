@@ -59,16 +59,29 @@ void CKOTHInGameScene::Load(void)
     m_colliders.push_back(model);
     m_root->InsertModel(model);
     
-    for(i32 i = 3; i < 11; ++i)
+    for(i32 i = 0; i < 14; ++i)
     {
-        for(i32 j = 3; j < 11; ++j)
+        for(i32 j = 0; j < 14; ++j)
         {
-            std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
-            model->Set_Position(glm::vec3(i * 10, 0.0f, j * 10));
-            model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
-            m_models.push_back(model);
-            m_colliders.push_back(model);
-            m_root->InsertModel(model);
+            if(i == 0 || i == 13 || j == 0 || j == 13)
+            {
+                std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
+                model->Set_Position(glm::vec3(i * 10, 0.0f, j * 10));
+                model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
+                m_models.push_back(model);
+                m_colliders.push_back(model);
+                m_root->InsertModel(model);
+            }
+            
+            /*if(i%2 == 0 || j%2 == 0)
+            {
+                std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
+                model->Set_Position(glm::vec3(i * 10, -15.0f, j * 10));
+                model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
+                m_models.push_back(model);
+                m_colliders.push_back(model);
+                m_root->InsertModel(model);
+            }*/
         }
     }
     
@@ -99,9 +112,9 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
     angle += 0.033f;
     
     static glm::vec3 lightPosition = glm::vec3(0.0f);
-    lightPosition.x = 0.0f + cosf(-angle) * -64.0f;
+    lightPosition.x = m_characterController->Get_Position().x + cosf(-angle) * -32.0f;
     lightPosition.y = 16.0f;
-    lightPosition.z = 0.0f + sinf(-angle) * -64.0f;
+    lightPosition.z = m_characterController->Get_Position().z + sinf(-angle) * -32.0f;
     
     m_light->Set_Position(lightPosition);
     
