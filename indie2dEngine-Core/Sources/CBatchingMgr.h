@@ -13,6 +13,7 @@
 
 class CMesh;
 class CMaterial;
+class CAnimationMixer;
 class CBatch;
 class CBatchingMgr
 {
@@ -29,7 +30,7 @@ public:
     
     void Lock(void);
     void Unlock(void);
-    void Batch(const std::shared_ptr<CMesh>& _mesh, std::shared_ptr<CMaterial> _material, const glm::mat4x4& _matrix);
+    void Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>& _mesh, std::shared_ptr<CMaterial> _material, const glm::mat4x4& _matrix);
     void Draw(void);
 };
 

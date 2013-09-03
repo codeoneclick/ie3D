@@ -55,10 +55,9 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
-        
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
         material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
-        material->Set_IsBatching(false);
+        material->Set_IsBatching(modelTemplate->m_isBatching);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     
@@ -175,13 +174,11 @@ void CModel::_OnDraw(const std::string& _renderMode)
         if(!material->Get_IsBatching() && m_animationMixer != nullptr)
         {
             material->Get_Shader()->Set_MatrixArray4x4(m_animationMixer->Get_Transformations(), m_animationMixer->Get_TransformationSize(), E_SHADER_UNIFORM_MATRIX_BONES);
-            m_animationMixer->OnDraw();
             IGameObject::_OnDraw(_renderMode);
         }
         else if(m_mesh->IsLoaded() && m_animationMixer != nullptr)
         {
-            material->Get_Shader()->Set_Matrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_MATRIX_WORLD);
-            m_renderMgr->Get_BatchingMgr()->Batch(m_mesh, material, m_matrixWorld);
+            m_renderMgr->Get_BatchingMgr()->Batch(std::make_tuple(m_mesh, m_animationMixer), material, m_matrixWorld);
         }
     }
 }

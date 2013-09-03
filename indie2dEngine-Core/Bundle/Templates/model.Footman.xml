@@ -1,5 +1,5 @@
 <model name="footman">
-	<mesh filename="model_02.MDL_mesh"/>
+	<mesh filename="model_02.MDL_mesh" is_batching="0"/>
     <skeleton filename="model_02.MDL_sk"/>
     <animations>
         <animation name="model_02.MDL_anim" filename="model_02.MDL_anim"/>

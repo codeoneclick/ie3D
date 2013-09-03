@@ -10,6 +10,7 @@
 #include "CMaterial.h"
 #include "CMesh.h"
 #include "CShader.h"
+#include "CAnimationMixer.h"
 
 CBatch::CBatch(std::shared_ptr<CMaterial> _material) :
 m_material(_material),
@@ -64,7 +65,8 @@ void CBatch::Unlock(void)
             
             for(ui32 i = 0; i < m_meshes.size(); ++i)
             {
-                std::shared_ptr<CMesh> mesh = m_meshes[i];
+                std::shared_ptr<CMesh> mesh = std::get<0>(m_meshes[i]);
+                std::shared_ptr<CAnimationMixer> mixer = std::get<1>(m_meshes[i]);
                 
                 glm::mat4x4& matrix = m_matrices[i];
                 
@@ -81,8 +83,9 @@ void CBatch::Unlock(void)
                 for(ui32 j = 0; j < mesh->Get_NumVertexes(); ++j)
                 {
                     vertexData_01[numVertices + j] = vertexData_02[j];
-                    vertexData_01[numVertices + j].m_position = glm::transform(vertexData_02[numVertices + j].m_position, matrix);
-                    vertexData_01[numVertices + j].m_normal = CVertexBuffer::CompressVec3(glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_02[numVertices + j].m_normal), matrix));
+                    vertexData_01[numVertices + j].m_position = glm::transform(vertexData_02[j].m_position, matrix);
+                    vertexData_01[numVertices + j].m_normal = CVertexBuffer::CompressVec3(glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_02[j].m_normal), matrix));
+                    vertexData_01[numVertices + j].m_tangent = CVertexBuffer::CompressVec3(glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_02[j].m_tangent), matrix));
                 }
                 
                 numVertices += mesh->Get_NumVertexes();
@@ -103,7 +106,7 @@ void CBatch::Unlock(void)
     }
 }
 
-void CBatch::Batch(const std::shared_ptr<CMesh>& _mesh, const glm::mat4x4 &_matrix)
+void CBatch::Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>& _mesh, const glm::mat4x4 &_matrix)
 {
     if(!m_isLocked)
     {
@@ -120,6 +123,10 @@ void CBatch::Draw(void)
     if(m_numIndices != 0 && m_numVertices != 0)
     {
         m_material->Bind();
+        
+        std::shared_ptr<CAnimationMixer> mixer = std::get<1>(m_meshes[0]);
+        m_material->Get_Shader()->Set_MatrixArray4x4(mixer->Get_Transformations(), mixer->Get_TransformationSize(), E_SHADER_UNIFORM_MATRIX_BONES);
+        m_material->Get_Shader()->Set_Matrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_MATRIX_WORLD);
         
         m_mesh->Bind(m_material->Get_Shader()->Get_Attributes());
         m_mesh->Draw(m_numIndices);

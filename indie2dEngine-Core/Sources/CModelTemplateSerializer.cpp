@@ -31,6 +31,7 @@ std::shared_ptr<ITemplate> CModelTemplateSerializer::Serialize(const std::string
     
     std::shared_ptr<SModelTemplate> modelTemplate = std::make_shared<SModelTemplate>();
     modelTemplate->m_meshFilename = node.child("mesh").attribute("filename").as_string();
+    modelTemplate->m_isBatching = node.child("mesh").attribute("is_batching").as_bool();
     modelTemplate->m_skeletonFilename = node.child("skeleton").attribute("filename").as_string();
     
     pugi::xml_node materials_node = node.child("materials");

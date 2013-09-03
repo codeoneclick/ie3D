@@ -72,8 +72,7 @@ void CKOTHInGameScene::Load(void)
                 m_colliders.push_back(model);
                 m_root->InsertModel(model);
             }
-            
-            /*if(i%2 == 0 || j%2 == 0)
+            /*else if(i%2 == 0 || j%2 == 0)
             {
                 std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
                 model->Set_Position(glm::vec3(i * 10, -15.0f, j * 10));
@@ -96,7 +95,7 @@ void CKOTHInGameScene::Load(void)
     
     m_root->RegisterCollisionHandler(shared_from_this());
     
-    m_navigator = std::make_shared<CNavigator>(0.3f, 0.15f, 0.3f, 0.025f);
+    m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
     m_characterController = std::make_shared<CCharacterController>();
     m_characterController->Set_Camera(m_camera);
     m_characterController->Set_Character(m_models[0]);

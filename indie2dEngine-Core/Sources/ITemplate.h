@@ -58,6 +58,7 @@ struct SModelTemplate : public ITemplate
     std::string m_meshFilename;
     std::string m_skeletonFilename;
     std::vector<std::string> m_sequencesFilenames;
+    bool m_isBatching;
 };
 
 struct SOceanTemplate : public ITemplate
