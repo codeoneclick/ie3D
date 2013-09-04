@@ -13,8 +13,17 @@
 #include "ITemplate.h"
 #include "CResourceAccessor.h"
 
-CMaterial::CMaterial(std::shared_ptr<CShader> _shader) :
+static bool s_states[E_RENDER_STATE_MAX] =
+{
+    false,
+    false,
+    true,
+    true
+};
+
+CMaterial::CMaterial(std::shared_ptr<CShader> _shader, const std::string& _guid) :
 m_shader(_shader),
+m_guid(_guid),
 m_isDebug(false),
 m_isReflected(false),
 m_isBatching(false)
@@ -110,42 +119,50 @@ void CMaterial::Bind(void)
         }
     }
     
-    if(m_states[E_RENDER_STATE_DEPTH_TEST])
+    if(m_states[E_RENDER_STATE_DEPTH_TEST] && s_states[E_RENDER_STATE_DEPTH_TEST] != m_states[E_RENDER_STATE_DEPTH_TEST])
     {
         glEnable(GL_DEPTH_TEST);
+        s_states[E_RENDER_STATE_DEPTH_TEST] = m_states[E_RENDER_STATE_DEPTH_TEST];
     }
-    else
+    else if(s_states[E_RENDER_STATE_DEPTH_TEST] != m_states[E_RENDER_STATE_DEPTH_TEST])
     {
         glDisable(GL_DEPTH_TEST);
+        s_states[E_RENDER_STATE_DEPTH_TEST] = m_states[E_RENDER_STATE_DEPTH_TEST];
     }
     
-    if(m_states[E_RENDER_STATE_DEPTH_MASK])
+    if(m_states[E_RENDER_STATE_DEPTH_MASK] && s_states[E_RENDER_STATE_DEPTH_MASK] != m_states[E_RENDER_STATE_DEPTH_MASK])
     {
         glDepthMask(GL_TRUE);
+        s_states[E_RENDER_STATE_DEPTH_MASK] = m_states[E_RENDER_STATE_DEPTH_MASK];
     }
-    else
+    else if(s_states[E_RENDER_STATE_DEPTH_MASK] != m_states[E_RENDER_STATE_DEPTH_MASK])
     {
         glDepthMask(GL_FALSE);
+        s_states[E_RENDER_STATE_DEPTH_MASK] = m_states[E_RENDER_STATE_DEPTH_MASK];
     }
     
-    if(m_states[E_RENDER_STATE_CULL_MODE])
+    if(m_states[E_RENDER_STATE_CULL_MODE] && s_states[E_RENDER_STATE_CULL_MODE] != m_states[E_RENDER_STATE_CULL_MODE])
     {
         glEnable(GL_CULL_FACE);
         glCullFace(m_cullFaceMode);
+        s_states[E_RENDER_STATE_CULL_MODE] = m_states[E_RENDER_STATE_CULL_MODE];
     }
-    else
+    else if(s_states[E_RENDER_STATE_CULL_MODE] != m_states[E_RENDER_STATE_CULL_MODE])
     {
         glDisable(GL_CULL_FACE);
+        s_states[E_RENDER_STATE_CULL_MODE] = m_states[E_RENDER_STATE_CULL_MODE];
     }
     
-    if(m_states[E_RENDER_STATE_BLEND_MODE])
+    if(m_states[E_RENDER_STATE_BLEND_MODE] && s_states[E_RENDER_STATE_BLEND_MODE] != m_states[E_RENDER_STATE_BLEND_MODE])
     {
         glEnable(GL_BLEND);
         glBlendFunc(m_blendFunctionSource, m_blendFunctionDest);
+        s_states[E_RENDER_STATE_BLEND_MODE] = m_states[E_RENDER_STATE_BLEND_MODE];
     }
-    else
+    else if(s_states[E_RENDER_STATE_BLEND_MODE] != m_states[E_RENDER_STATE_BLEND_MODE])
     {
         glDisable(GL_BLEND);
+        s_states[E_RENDER_STATE_BLEND_MODE] = m_states[E_RENDER_STATE_BLEND_MODE];
     }
 }
 

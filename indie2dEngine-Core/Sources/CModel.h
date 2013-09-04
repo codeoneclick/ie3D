@@ -28,9 +28,10 @@ protected:
     void _OnSceneUpdate(f32 _deltatime);
     
     i32 _OnQueuePosition(void);
-    void _OnBind(const std::string& _renderMode);
-    void _OnDraw(const std::string& _renderMode);
-    void _OnUnbind(const std::string& _renderMode);
+    void _OnBind(const std::string& _mode);
+    void _OnDraw(const std::string& _mode);
+    void _OnUnbind(const std::string& _mode);
+    void _OnBatch(const std::string& _mode);
     
     void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
     void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);

@@ -25,6 +25,7 @@ m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
 m_texcoordDisplacement(glm::vec2(0.0f, 0.0f)),
+m_renderQueuePosition(0),
 m_mesh(nullptr),
 m_camera(nullptr),
 m_light(nullptr),
@@ -32,6 +33,7 @@ m_boundBox(nullptr),
 m_debugBoundBoxMaterial(nullptr),
 m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
+m_bind(nullptr),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
 
@@ -209,39 +211,44 @@ ui32 IGameObject::_OnGet_NumTriangles(void)
     return IGameObject::Get_NumTriangles();
 }
 
-void IGameObject::_OnBind(const std::string &_renderMode)
+void IGameObject::_OnBatch(const std::string& _mode)
 {
-    assert(m_materials.find(_renderMode) != m_materials.end());
-    auto iterator = m_materials.find(_renderMode);
-    iterator->second->Bind();
+    
+}
+
+void IGameObject::_OnBind(const std::string &_mode)
+{
+    assert(m_materials.find(_mode) != m_materials.end());
+    auto iterator = m_materials.find(_mode);
 
     if(!iterator->second->Get_IsBatching())
     {
         assert(m_mesh != nullptr);
+        iterator->second->Bind();
         m_mesh->Bind(iterator->second->Get_Shader()->Get_Attributes());
     }
 }
 
-void IGameObject::_OnDraw(const std::string &_renderMode)
+void IGameObject::_OnDraw(const std::string &_mode)
 {
     assert(m_mesh != nullptr);
     m_mesh->Draw();
 }
 
-void IGameObject::_OnUnbind(const std::string &_renderMode)
+void IGameObject::_OnUnbind(const std::string &_mode)
 {
-    assert(m_materials.find(_renderMode) != m_materials.end());
-    auto iterator = m_materials.find(_renderMode);
-    iterator->second->Unbind();
+    assert(m_materials.find(_mode) != m_materials.end());
+    auto iterator = m_materials.find(_mode);
     
     if(!iterator->second->Get_IsBatching())
     {
         assert(m_mesh != nullptr);
+        iterator->second->Unbind();
         m_mesh->Unbind(iterator->second->Get_Shader()->Get_Attributes());
     }
 }
 
-void IGameObject::_OnDebugDraw(const std::string &_renderMode)
+void IGameObject::_OnDebugDraw(const std::string &_mode)
 {
 
 }

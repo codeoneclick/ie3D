@@ -3,7 +3,7 @@ uniform sampler2D SAMPLER_01;
 
 void main(void)
 {
-    mediump float distance = 0.0033;
+    mediump float distance = 0.005;
     mediump vec4 color;
 	color  = texture2D(SAMPLER_01, vec2(OUT_TexCoord.x + distance, OUT_TexCoord.y + distance));
 	color += texture2D(SAMPLER_01, vec2(OUT_TexCoord.x - distance, OUT_TexCoord.y - distance));

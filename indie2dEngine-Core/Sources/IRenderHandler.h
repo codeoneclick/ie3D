@@ -22,6 +22,7 @@ private:
     typedef std::function<void(const std::string&)> __RENDER_DRAW_COMMAND;
     typedef std::function<void(const std::string&)> __RENDER_UNBIND_COMMAND;
     typedef std::function<void(const std::string&)> __RENDER_DEBUG_DRAW_COMMAND;
+    typedef std::function<void(const std::string&)> __RENDER_BATCH_COMMAND;
     
     friend class IRenderHandler;
     friend class CRenderOperationWorldSpace;
@@ -34,7 +35,8 @@ private:
     __RENDER_BIND_COMMAND m_renderBindCommand;
     __RENDER_DRAW_COMMAND m_renderDrawCommand;
     __RENDER_UNBIND_COMMAND m_renderUnbindCommand;
-    __RENDER_DEBUG_DRAW_COMMAND m_renderDebugDraw;
+    __RENDER_DEBUG_DRAW_COMMAND m_renderDebugDrawCommand;
+    __RENDER_BATCH_COMMAND m_renderBatchCommand;
     
 protected:
     
@@ -47,14 +49,16 @@ protected:
     void _ConnectRenderDrawCommand(const __RENDER_DRAW_COMMAND& _command);
     void _ConnectRenderUnbindCommand(const __RENDER_UNBIND_COMMAND& _command);
     void _ConnectRenderDebugDrawCommand(const __RENDER_DEBUG_DRAW_COMMAND& _command);
+    void _ConnectRenderBatchCommand(const __RENDER_BATCH_COMMAND& _command);
     
     i32 _ExecuteRenderQueuePositionCommand(void);
     bool _ExecuteRenderOcclusionCommand(void);
     ui32 _ExecuteRenderGetNumTrianglesCommand(void);
-    void _ExecuteRenderBindCommand(const std::string& _command);
-    void _ExecuteRenderDrawCommand(const std::string& _command);
-    void _ExecuteRenderUnbindCommand(const std::string& _command);
-    void _ExecuteRenderDebugDrawCommand(const std::string& _command);
+    void _ExecuteRenderBindCommand(const std::string& _mode);
+    void _ExecuteRenderDrawCommand(const std::string& _mode);
+    void _ExecuteRenderUnbindCommand(const std::string& _mode);
+    void _ExecuteRenderDebugDrawCommand(const std::string& _mode);
+    void _ExecuteRenderBatchCommand(const std::string& _mode);
     
 public:
     
@@ -85,10 +89,11 @@ protected:
     virtual i32 _OnQueuePosition(void) = 0;
     virtual bool _OnOcclusion(void) = 0;
     virtual ui32 _OnGet_NumTriangles(void) = 0;
-    virtual void _OnBind(const std::string& _renderMode) = 0;
-    virtual void _OnDraw(const std::string& _renderMode) = 0;
-    virtual void _OnUnbind(const std::string& _renderMode) = 0;
-    virtual void _OnDebugDraw(const std::string& _renderMode) = 0;
+    virtual void _OnBind(const std::string& _mode) = 0;
+    virtual void _OnDraw(const std::string& _mode) = 0;
+    virtual void _OnUnbind(const std::string& _mode) = 0;
+    virtual void _OnDebugDraw(const std::string& _mode) = 0;
+    virtual void _OnBatch(const std::string& _mode) = 0;
     
 public:
     

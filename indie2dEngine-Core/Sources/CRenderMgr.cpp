@@ -19,10 +19,17 @@
 CRenderMgr::CRenderMgr(const std::shared_ptr<IGraphicsContext> _graphicsContext) :
 m_graphicsContext(_graphicsContext),
 m_outputOperation(nullptr),
-m_batchingMgr(std::make_shared<CBatchingMgr>()),
+m_batchingMgr(nullptr),
 m_numTriangles(0)
 {
-   
+    glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_BLEND);
+    
+    i32 value = 0;
+    glGetIntegerv(GL_MAX_VERTEX_UNIFORM_VECTORS, &value);
+    std::cout<<value<<std::endl;
 }
 
 CRenderMgr::~CRenderMgr(void)
@@ -106,14 +113,17 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
     
     for(const auto& iterator : m_worldSpaceOperations)
     {
-        m_batchingMgr->Lock();
         std::shared_ptr<CRenderOperationWorldSpace> operation = iterator.second;
+        
+        m_batchingMgr->Lock(operation->Get_Mode());
+        operation->Batch();
+        m_batchingMgr->Unlock(operation->Get_Mode());
+        
         operation->Bind();
         operation->Draw();
         operation->Unbind();
-        m_batchingMgr->Unlock();
+        
         m_numTriangles += operation->Get_NumTriangles();
-        m_batchingMgr->Draw();
     }
     
     for(const auto& iterator : m_screenSpaceOperations)

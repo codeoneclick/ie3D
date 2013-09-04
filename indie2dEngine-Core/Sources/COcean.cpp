@@ -21,7 +21,7 @@
 COcean::COcean(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 IGameObject(_resourceFabricator)
 {
-
+    m_renderQueuePosition = 0;
 }
 
 COcean::~COcean(void)
@@ -79,7 +79,7 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
         material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
@@ -101,7 +101,7 @@ void COcean::_OnSceneUpdate(f32 _deltatime)
 
 i32 COcean::_OnQueuePosition(void)
 {
-    return 0;
+    return m_renderQueuePosition;
 }
 
 void COcean::_OnBind(const std::string& _renderMode)

@@ -40,6 +40,7 @@ std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::str
     pugi::xml_node node = document.child("material");
     
     std::shared_ptr<SMaterialTemplate> materialTemplate = std::make_shared<SMaterialTemplate>();
+    materialTemplate->m_filename = _filename;
     materialTemplate->m_renderMode = node.attribute("render_mode").as_string();
     materialTemplate->m_isCullFace = node.attribute("is_cull_face").as_bool();
     materialTemplate->m_isDepthTest = node.attribute("is_depth_test").as_bool();

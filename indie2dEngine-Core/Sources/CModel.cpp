@@ -27,7 +27,7 @@ IGameObject(_resourceFabricator),
 m_animationMixer(nullptr),
 m_skeleton(nullptr)
 {
-    
+    m_renderQueuePosition = 8;
 }
 
 CModel::~CModel(void)
@@ -55,7 +55,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
         material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
         material->Set_IsBatching(modelTemplate->m_isBatching);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
@@ -76,7 +76,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(k_vsBoundBoxFilename,
                                                                          k_fsBoundBoxFilename);
     assert(shader != nullptr);
-    m_debugBoundBoxMaterial = std::make_shared<CMaterial>(shader);
+    m_debugBoundBoxMaterial = std::make_shared<CMaterial>(shader, "bound.box");
     m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_CULL_MODE, false);
     m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, false);
     m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_DEPTH_MASK, true);
@@ -86,6 +86,19 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_debugBoundBoxMaterial->Set_BlendFunctionSource(GL_SRC_ALPHA);
     m_debugBoundBoxMaterial->Set_BlendFunctionDest(GL_ONE_MINUS_SRC_ALPHA);
     
+    m_bind = [this](std::shared_ptr<CMaterial> _material)
+    {
+        _material->Get_Shader()->Set_Matrix4x4(_material->Get_IsBatching() ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+        _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
+        _material->Get_Shader()->Set_Matrix4x4(!_material->Get_IsReflected() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        
+        _material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
+        _material->Get_Shader()->Set_Vector3(m_light->Get_Position(), E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION);
+        _material->Get_Shader()->Set_Vector4(_material->Get_Clipping(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
+        _material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
+        _material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+    };
+
     IGameObject::_ListenRenderMgr();
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
@@ -137,58 +150,58 @@ void CModel::_OnSceneUpdate(f32 _deltatime)
     }
 }
 
-i32 CModel::_OnQueuePosition(void)
+void CModel::_OnBatch(const std::string& _mode)
 {
-    return 16;
-}
+    assert(m_materials.find(_mode) != m_materials.end());
+    std::shared_ptr<CMaterial> material = m_materials.find(_mode)->second;
+    assert(material->Get_Shader() != nullptr);
 
-void CModel::_OnBind(const std::string& _renderMode)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    if(m_mesh->IsLoaded() && m_animationMixer != nullptr && material->Get_IsBatching())
     {
-        assert(m_materials.find(_renderMode) != m_materials.end());
-        IGameObject::_OnBind(_renderMode);
+        m_renderMgr->Get_BatchingMgr()->Batch(_mode, m_renderQueuePosition, std::make_tuple(m_mesh, m_animationMixer), material, m_bind, m_matrixWorld);
     }
 }
 
-void CModel::_OnDraw(const std::string& _renderMode)
+i32 CModel::_OnQueuePosition(void)
+{
+    return m_renderQueuePosition;
+}
+
+void CModel::_OnBind(const std::string& _mode)
+{
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    {
+        assert(m_materials.find(_mode) != m_materials.end());
+        IGameObject::_OnBind(_mode);
+    }
+}
+
+void CModel::_OnDraw(const std::string& _mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_camera != nullptr);
         assert(m_light != nullptr);
-        assert(m_materials.find(_renderMode) != m_materials.end());
+        assert(m_materials.find(_mode) != m_materials.end());
         
-        std::shared_ptr<CMaterial> material = m_materials.find(_renderMode)->second;
+        std::shared_ptr<CMaterial> material = m_materials.find(_mode)->second;
         assert(material->Get_Shader() != nullptr);
         
-        material->Get_Shader()->Set_Matrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->Get_Shader()->Set_Matrix4x4(!material->Get_IsReflected() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        
-        material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->Get_Shader()->Set_Vector3(m_light->Get_Position(), E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION);
-        material->Get_Shader()->Set_Vector4(material->Get_Clipping(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
-        material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
-        material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         if(!material->Get_IsBatching() && m_animationMixer != nullptr)
         {
+            m_bind(material);
             material->Get_Shader()->Set_MatrixArray4x4(m_animationMixer->Get_Transformations(), m_animationMixer->Get_TransformationSize(), E_SHADER_UNIFORM_MATRIX_BONES);
-            IGameObject::_OnDraw(_renderMode);
-        }
-        else if(m_mesh->IsLoaded() && m_animationMixer != nullptr)
-        {
-            m_renderMgr->Get_BatchingMgr()->Batch(std::make_tuple(m_mesh, m_animationMixer), material, m_matrixWorld);
+            IGameObject::_OnDraw(_mode);
         }
     }
 }
 
-void CModel::_OnUnbind(const std::string& _renderMode)
+void CModel::_OnUnbind(const std::string& _mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(_renderMode) != m_materials.end());
-        IGameObject::_OnUnbind(_renderMode);
+        assert(m_materials.find(_mode) != m_materials.end());
+        IGameObject::_OnUnbind(_mode);
     }
 }
 

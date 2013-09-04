@@ -35,10 +35,11 @@ protected:
     bool m_isReflected;
     bool m_isBatching;
     bool m_isDebug;
+    std::string m_guid;
     
 public:
     
-    CMaterial(std::shared_ptr<CShader> _shader);
+    CMaterial(std::shared_ptr<CShader> _shader, const std::string& _guid);
     ~CMaterial(void);
     
     void Serialize(std::shared_ptr<SMaterialTemplate> _template, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CRenderMgr> _renderMgr);
@@ -61,7 +62,7 @@ public:
         m_isReflected = _value;
     };
     
-    inline bool Get_IsReflected(void)
+    inline bool Get_IsReflected(void) const
     {
         return m_isReflected;
     };
@@ -71,7 +72,7 @@ public:
         m_isDebug = _value;
     };
     
-    inline bool Get_IsDebug(void)
+    inline bool Get_IsDebug(void) const
     {
         return m_isDebug;
     };
@@ -81,9 +82,14 @@ public:
         m_isBatching = _value;
     };
     
-    inline bool Get_IsBatching(void)
+    inline bool Get_IsBatching(void) const
     {
         return m_isBatching;
+    };
+    
+    inline std::string Get_Guid(void) const
+    {
+        return m_guid;
     };
     
     void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler);

@@ -70,7 +70,7 @@ CRenderOperationWorldSpace::~CRenderOperationWorldSpace(void)
     
 }
 
-void CRenderOperationWorldSpace::RegisterRenderHandler(std::shared_ptr<IRenderHandler> _handler)
+void CRenderOperationWorldSpace::RegisterRenderHandler(const std::shared_ptr<IRenderHandler>& _handler)
 {
     assert(_handler != nullptr);
     
@@ -84,7 +84,7 @@ void CRenderOperationWorldSpace::RegisterRenderHandler(std::shared_ptr<IRenderHa
     }
 }
 
-void CRenderOperationWorldSpace::UnregisterRenderHandler(std::shared_ptr<IRenderHandler> _handler)
+void CRenderOperationWorldSpace::UnregisterRenderHandler(const std::shared_ptr<IRenderHandler>& _handler)
 {
     assert(_handler != nullptr);
     
@@ -95,6 +95,22 @@ void CRenderOperationWorldSpace::UnregisterRenderHandler(std::shared_ptr<IRender
     else
     {
         m_handlers[_handler->_Get_Commands()._ExecuteRenderQueuePositionCommand()].erase(_handler);
+    }
+}
+
+void CRenderOperationWorldSpace::Batch(void)
+{
+    for(std::map<ui32, std::set< std::shared_ptr<IRenderHandler> > >::iterator iterator_01 = m_handlers.begin(); iterator_01 != m_handlers.end(); ++iterator_01)
+    {
+        for(std::set< std::shared_ptr<IRenderHandler> >::iterator iterator_02 = (*iterator_01).second.begin(); iterator_02 !=  (*iterator_01).second.end(); ++iterator_02)
+        {
+            std::shared_ptr<IRenderHandler> handler = (*iterator_02);
+            assert(handler != nullptr);
+            if(!handler->_OnOcclusion())
+            {
+                handler->_Get_Commands()._ExecuteRenderBatchCommand(m_mode);
+            }
+        }
     }
 }
 

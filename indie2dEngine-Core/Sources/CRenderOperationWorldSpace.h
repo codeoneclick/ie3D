@@ -13,6 +13,8 @@
 
 class CTexture;
 class IRenderHandler;
+class CBatchingMgr;
+
 
 class CRenderOperationWorldSpace final
 {
@@ -36,24 +38,30 @@ public:
     CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const glm::vec3& _clearColor, const std::string& _mode);
     ~CRenderOperationWorldSpace(void);
     
-    inline std::shared_ptr<CTexture> Get_OperatingColorTexture(void)
+    inline std::shared_ptr<CTexture> Get_OperatingColorTexture(void) const
     {
         return m_operatingColorTexture;
     };
     
-    inline std::shared_ptr<CTexture> Get_OperatingDepthTexture(void)
+    inline std::shared_ptr<CTexture> Get_OperatingDepthTexture(void) const
     {
         return m_operatingDepthTexture;
     };
     
-    inline ui32 Get_NumTriangles(void)
+    inline ui32 Get_NumTriangles(void) const
     {
         return m_numTriangles;
     };
     
-    void RegisterRenderHandler(std::shared_ptr<IRenderHandler> _handler);
-    void UnregisterRenderHandler(std::shared_ptr<IRenderHandler> _handler);
+    inline std::string Get_Mode(void) const
+    {
+        return m_mode;
+    };
     
+    void RegisterRenderHandler(const std::shared_ptr<IRenderHandler>& _handler);
+    void UnregisterRenderHandler(const std::shared_ptr<IRenderHandler>& _handler);
+    
+    void Batch(void);
     void Bind(void);
     void Unbind(void);
     

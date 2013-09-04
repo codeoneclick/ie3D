@@ -15,6 +15,7 @@
 #include "IGameObject.h"
 #include "CGameLoopExecutor.h"
 #include "CRenderMgr.h"
+#include "CBatchingMgr.h"
 #include "CSceneUpdateMgr.h"
 #include "CCollisionMgr.h"
 #include "CRenderOperationWorldSpace.h"
@@ -33,6 +34,8 @@ m_isLoaded(false)
     assert(_graphicsContext != nullptr);
     assert(_inputContext != nullptr);
     m_renderMgr = std::make_shared<CRenderMgr>(_graphicsContext);
+    std::shared_ptr<CBatchingMgr> batchingMgr = std::make_shared<CBatchingMgr>(m_renderMgr);
+    m_renderMgr->Set_BatchingMgr(batchingMgr);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
     m_collisionMgr = std::make_shared<CCollisionMgr>();
     
@@ -105,7 +108,7 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
                                                                                                      screenSpaceRenderOperationMaterialTemplate->m_shaderTemplate->m_fsFilename);
         assert(screenSpaceRenderOperationShader != nullptr);
         
-        std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>(screenSpaceRenderOperationShader);
+        std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>(screenSpaceRenderOperationShader, screenSpaceRenderOperationMaterialTemplate->m_filename);
         screenSpaceRenderOperationMaterial->Serialize(screenSpaceRenderOperationMaterialTemplate, m_resourceAccessor, m_renderMgr);
         
         std::shared_ptr<CRenderOperationScreenSpace> screenSpaceRenderOperation = std::make_shared<CRenderOperationScreenSpace>(screenSpaceRenderOperationTemplate->m_screenWidth,
@@ -122,7 +125,7 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
                                                                                             outputRenderOperationMaterialTemplate->m_shaderTemplate->m_fsFilename);
     assert(outputRenderOperationShader != nullptr);
     
-    std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>(outputRenderOperationShader);
+    std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>(outputRenderOperationShader, outputRenderOperationMaterialTemplate->m_filename);
     outputRenderOperationMaterial->Serialize(outputRenderOperationMaterialTemplate, m_resourceAccessor, m_renderMgr);
     m_renderMgr->RegisterOutputRenderOperation(outputRenderOperationMaterial);
     

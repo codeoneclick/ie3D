@@ -56,6 +56,11 @@ public:
     
     std::shared_ptr<CTexture> Get_RenderOperationTexture(const std::string& _mode);
     
+    inline void Set_BatchingMgr(const std::shared_ptr<CBatchingMgr>& _batchingMgr)
+    {
+        m_batchingMgr = _batchingMgr;
+    };
+    
     inline std::shared_ptr<CBatchingMgr> Get_BatchingMgr(void)
     {
         return m_batchingMgr;

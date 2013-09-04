@@ -25,6 +25,7 @@ IGameObject(_resourceFabricator)
 {
     m_settings = nullptr;
     m_lastEmittTimestamp = 0;
+    m_renderQueuePosition = 16;
 }
 
 CParticleEmitter::~CParticleEmitter(void)
@@ -76,7 +77,7 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
         
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
         material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
@@ -107,7 +108,7 @@ void CParticleEmitter::_EmittParticle(ui32 _index)
 
 void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
 {
-    if( m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         IGameObject::_OnSceneUpdate(_deltatime);
         
@@ -177,7 +178,7 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
 
 i32 CParticleEmitter::_OnQueuePosition(void)
 {
-    return 8;
+    return m_renderQueuePosition;
 }
 
 void CParticleEmitter::_OnBind(const std::string& _renderMode)

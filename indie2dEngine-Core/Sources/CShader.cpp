@@ -9,6 +9,8 @@
 #include "CShader.h"
 #include "CTexture.h"
 
+static ui32 s_handle = NULL;
+
 extern const struct SAttributes
 {
     std::string m_position;
@@ -355,17 +357,18 @@ void CShader::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _
 
 void CShader::Bind(void) const
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::IsLoaded() && IResource::IsCommited() && s_handle != m_handle)
     {
+        s_handle = m_handle;
         glUseProgram(m_handle);
     }
 }
 
 void CShader::Unbind(void) const
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    /*if(IResource::IsLoaded() && IResource::IsCommited())
     {
         glUseProgram(NULL);
-    }
+    }*/
 }
 

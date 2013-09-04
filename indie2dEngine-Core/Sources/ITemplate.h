@@ -32,6 +32,7 @@ struct SShaderTemplate : public ITemplate
 
 struct SMaterialTemplate : public ITemplate
 {
+    std::string m_filename;
     bool m_isCullFace;
     bool m_isBlend;
     bool m_isDepthTest;
