@@ -21,7 +21,8 @@
 #include "CTimer.h"
 
 CParticleEmitter::CParticleEmitter(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
-IGameObject(_resourceFabricator)
+IGameObject(_resourceFabricator),
+m_isLocked(false)
 {
     m_settings = nullptr;
     m_lastEmittTimestamp = 0;
@@ -110,69 +111,81 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::_OnSceneUpdate(_deltatime);
-        
-        SHardwareVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock();
-        f32 currentTime = CTimer::Get_TickCount();
-        
-        for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
+        if(!m_isLocked)
         {
-            f32 particleAge = currentTime - m_particles[i].m_timestamp;
-            
-            if(particleAge > m_settings->m_duration)
+            m_isLocked = true;
+            IGameObject::_OnSceneUpdate(_deltatime);
+            std::function<void(void)> function = [this]()
             {
-                if((currentTime - m_lastEmittTimestamp) > Get_Random(m_settings->m_minParticleEmittInterval, m_settings->m_maxParticleEmittInterval))
+                SHardwareVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock();
+                f32 currentTime = CTimer::Get_TickCount();
+                
+                for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
                 {
-                    m_lastEmittTimestamp = currentTime;
-                    CParticleEmitter::_EmittParticle(i);
+                    f32 particleAge = currentTime - m_particles[i].m_timestamp;
+                    
+                    if(particleAge > m_settings->m_duration)
+                    {
+                        if((currentTime - m_lastEmittTimestamp) > Get_Random(m_settings->m_minParticleEmittInterval, m_settings->m_maxParticleEmittInterval))
+                        {
+                            m_lastEmittTimestamp = currentTime;
+                            CParticleEmitter::_EmittParticle(i);
+                        }
+                        else
+                        {
+                            m_particles[i].m_size = glm::vec2(0.0f, 0.0f);
+                            m_particles[i].m_color = glm::u8vec4(0, 0, 0, 0);
+                        }
+                    }
+                    
+                    f32 particleClampAge = glm::clamp( particleAge / m_settings->m_duration, 0.0f, 1.0f);
+                    
+                    f32 startVelocity = glm::length(m_particles[i].m_velocity);
+                    f32 endVelocity = m_settings->m_endVelocity * startVelocity;
+                    f32 velocityIntegral = startVelocity * particleClampAge + (endVelocity - startVelocity) * particleClampAge * particleClampAge / 2.0f;
+                    m_particles[i].m_position += glm::normalize(m_particles[i].m_velocity) * velocityIntegral * m_settings->m_duration;
+                    m_particles[i].m_position += m_settings->m_gravity * particleAge * particleClampAge;
+                    
+                    f32 randomValue = Get_Random(0.0f, 1.0f);
+                    f32 startSize = glm::mix(m_settings->m_startSize.x, m_settings->m_startSize.y, randomValue);
+                    f32 endSize = glm::mix(m_settings->m_endSize.x, m_settings->m_endSize.y, randomValue);
+                    m_particles[i].m_size = glm::vec2(glm::mix(startSize, endSize, particleClampAge));
+                    
+                    m_particles[i].m_color = glm::mix(m_settings->m_startColor, m_settings->m_endColor, particleClampAge);
+                    m_particles[i].m_color.a = glm::mix(m_settings->m_startColor.a, m_settings->m_endColor.a, particleClampAge);
+                    
+                    glm::mat4x4 matrixSpherical = m_camera->Get_SphericalMatrixForPosition(m_particles[i].m_position);
+                    
+                    glm::vec4 position = glm::vec4(-m_particles[i].m_size.x, -m_particles[i].m_size.y, 0.0f, 1.0f);
+                    position = matrixSpherical * position;
+                    vertexData[i * 4 + 0].m_position = glm::vec3(position.x, position.y, position.z);
+                    
+                    position = glm::vec4(m_particles[i].m_size.x, -m_particles[i].m_size.y, 0.0f, 1.0f);
+                    position = matrixSpherical * position;
+                    vertexData[i * 4 + 1].m_position = glm::vec3(position.x, position.y, position.z);
+                    
+                    position = glm::vec4(m_particles[i].m_size.x, m_particles[i].m_size.y, 0.0f, 1.0f);
+                    position = matrixSpherical * position;
+                    vertexData[i * 4 + 2].m_position = glm::vec3(position.x, position.y, position.z);
+                    
+                    position = glm::vec4(-m_particles[i].m_size.x, m_particles[i].m_size.y, 0.0f, 1.0f);
+                    position = matrixSpherical * position;
+                    vertexData[i * 4 + 3].m_position = glm::vec3(position.x, position.y, position.z);
+                    
+                    vertexData[i * 4 + 0].m_color = m_particles[i].m_color;
+                    vertexData[i * 4 + 1].m_color = m_particles[i].m_color;
+                    vertexData[i * 4 + 2].m_color = m_particles[i].m_color;
+                    vertexData[i * 4 + 3].m_color = m_particles[i].m_color;
                 }
-                else
+                std::function<void(void)> main = [this]()
                 {
-                    m_particles[i].m_size = glm::vec2(0.0f, 0.0f);
-                    m_particles[i].m_color = glm::u8vec4(0, 0, 0, 0);
-                }
-            }
-            
-            f32 particleClampAge = glm::clamp( particleAge / m_settings->m_duration, 0.0f, 1.0f);
-            
-            f32 startVelocity = glm::length(m_particles[i].m_velocity);
-            f32 endVelocity = m_settings->m_endVelocity * startVelocity;
-            f32 velocityIntegral = startVelocity * particleClampAge + (endVelocity - startVelocity) * particleClampAge * particleClampAge / 2.0f;
-            m_particles[i].m_position += glm::normalize(m_particles[i].m_velocity) * velocityIntegral * m_settings->m_duration;
-            m_particles[i].m_position += m_settings->m_gravity * particleAge * particleClampAge;
-            
-            f32 randomValue = Get_Random(0.0f, 1.0f);
-            f32 startSize = glm::mix(m_settings->m_startSize.x, m_settings->m_startSize.y, randomValue);
-            f32 endSize = glm::mix(m_settings->m_endSize.x, m_settings->m_endSize.y, randomValue);
-            m_particles[i].m_size = glm::vec2(glm::mix(startSize, endSize, particleClampAge));
-            
-            m_particles[i].m_color = glm::mix(m_settings->m_startColor, m_settings->m_endColor, particleClampAge);
-            m_particles[i].m_color.a = glm::mix(m_settings->m_startColor.a, m_settings->m_endColor.a, particleClampAge);
-            
-            glm::mat4x4 matrixSpherical = m_camera->Get_SphericalMatrixForPosition(m_particles[i].m_position);
-            
-            glm::vec4 position = glm::vec4(-m_particles[i].m_size.x, -m_particles[i].m_size.y, 0.0f, 1.0f);
-            position = matrixSpherical * position;
-            vertexData[i * 4 + 0].m_position = glm::vec3(position.x, position.y, position.z);
-            
-            position = glm::vec4(m_particles[i].m_size.x, -m_particles[i].m_size.y, 0.0f, 1.0f);
-            position = matrixSpherical * position;
-            vertexData[i * 4 + 1].m_position = glm::vec3(position.x, position.y, position.z);
-            
-            position = glm::vec4(m_particles[i].m_size.x, m_particles[i].m_size.y, 0.0f, 1.0f);
-            position = matrixSpherical * position;
-            vertexData[i * 4 + 2].m_position = glm::vec3(position.x, position.y, position.z);
-            
-            position = glm::vec4(-m_particles[i].m_size.x, m_particles[i].m_size.y, 0.0f, 1.0f);
-            position = matrixSpherical * position;
-            vertexData[i * 4 + 3].m_position = glm::vec3(position.x, position.y, position.z);
-            
-            vertexData[i * 4 + 0].m_color = m_particles[i].m_color;
-            vertexData[i * 4 + 1].m_color = m_particles[i].m_color;
-            vertexData[i * 4 + 2].m_color = m_particles[i].m_color;
-            vertexData[i * 4 + 3].m_color = m_particles[i].m_color;
+                    m_mesh->Get_VertexBuffer()->Unlock();
+                    m_isLocked = false;
+                };
+                gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
+            };
+            gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
         }
-        m_mesh->Get_VertexBuffer()->Unlock();
     }
 }
 

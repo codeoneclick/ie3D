@@ -15,6 +15,11 @@ uniform vec3   VECTOR_CameraPosition;
 uniform vec3   VECTOR_LightPosition;
 uniform vec4   VECTOR_ClipPlane;
 
+uniform int    INT_FLAG_01;
+uniform int    INT_FLAG_02;
+uniform int    INT_FLAG_03;
+uniform int    INT_FLAG_04;
+
 varying vec4   OUT_LightPosition;
 varying vec3   OUT_Normal;
 varying vec2   OUT_TexCoord;
@@ -27,35 +32,37 @@ void main(void)
     vec4 vTangent = vec4(IN_Tangent.xyz / 127.0 - 1.0, 1.0);
     vec4 vWeights = IN_Extra / 255.0;
     
-    int index = int(IN_Color.x);
-    vec4 vBonePosition = MATRIX_Bones[index] * vPosition * vWeights.x;
-    vec4 vBoneNormal = MATRIX_Bones[index] * vNormal * vWeights.x;
-    vec4 vBoneTangent = MATRIX_Bones[index] * vTangent * vWeights.x;
+    if(INT_FLAG_01 == 1)
+    {
+        int index = 0;
+        vec4 vBonePosition = vec4(0.0, 0.0, 0.0, 0.0);
+        vec4 vBoneNormal = vec4(0.0, 0.0, 0.0, 0.0);
+        vec4 vBoneTangent = vec4(0.0, 0.0, 0.0, 0.0);
     
-    index = int(IN_Color.y);
-    vBonePosition += MATRIX_Bones[index] * vPosition * vWeights.y;
-    vBoneNormal += MATRIX_Bones[index] * vNormal * vWeights.y;
-    vBoneTangent += MATRIX_Bones[index] * vTangent * vWeights.y;
-    
-    index = int(IN_Color.z);
-    vBonePosition += MATRIX_Bones[index] * vPosition * vWeights.z;
-    vBoneNormal += MATRIX_Bones[index] * vNormal * vWeights.z;
-    vBoneTangent += MATRIX_Bones[index] * vTangent * vWeights.z;
-    
-    index = int(IN_Color.w);
-    vBonePosition += MATRIX_Bones[index] * vPosition * vWeights.w;
-    vBoneNormal += MATRIX_Bones[index] * vNormal * vWeights.w;
-    vBoneTangent += MATRIX_Bones[index] * vTangent * vWeights.w;
+        for(int i = 0; i < 4; i++)
+        {
+            index = int(IN_Color[i]);
+            vBonePosition += MATRIX_Bones[index] * vPosition * vWeights[i];
+            vBoneNormal += MATRIX_Bones[index] * vNormal * vWeights[i];
+            vBoneTangent += MATRIX_Bones[index] * vTangent * vWeights[i];
+        }
+        vPosition = MATRIX_World * vBonePosition;
+        vNormal = normalize(MATRIX_World * vBoneNormal);
+        vTangent = normalize(MATRIX_World * vBoneTangent);
+    }
+    else
+    {
+        vPosition = MATRIX_World * vPosition;
+        vNormal = normalize(MATRIX_World * vNormal);
+        vTangent = normalize(MATRIX_World * vTangent);
+    }
 
-    vBonePosition = MATRIX_World * vBonePosition;
+    gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
     
-    gl_Position = MATRIX_Projection * MATRIX_View * vBonePosition;
-
-    OUT_Normal = normalize(MATRIX_World * vBoneNormal).xyz;
-    
-    vec3 vLightDistance = VECTOR_LightPosition - vBonePosition.xyz;
+    vec3 vLightDistance = VECTOR_LightPosition - vPosition.xyz;
     OUT_LightPosition.xyz = normalize(vLightDistance);
     OUT_LightPosition.w = 1.0 - dot(vLightDistance / 16.0, vLightDistance / 16.0);
     OUT_TexCoord = IN_TexCoord / 32767.0  - 1.0;
-    OUT_ClipPlane = dot(vBonePosition.xyz, VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
+    OUT_Normal = vNormal.xyz;
+    OUT_ClipPlane = dot(vPosition.xyz, VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
 }

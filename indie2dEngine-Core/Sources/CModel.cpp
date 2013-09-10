@@ -97,6 +97,8 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         _material->Get_Shader()->Set_Vector4(_material->Get_Clipping(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         _material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         _material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+        
+        _material->Get_Shader()->Set_Int(_material->Get_IsBatching() ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_01);
     };
 
     IGameObject::_ListenRenderMgr();

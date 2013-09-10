@@ -33,6 +33,10 @@ extern const struct SUniforms
     std::string m_clipPlane;
     std::string m_cameraNear;
     std::string m_cameraFar;
+    std::string m_flag01;
+    std::string m_flag02;
+    std::string m_flag03;
+    std::string m_flag04;
     
 } SUniforms;
 
@@ -69,7 +73,11 @@ const struct SUniforms SUniforms =
     "VECTOR_LightPosition",
     "VECTOR_ClipPlane",
     "FLOAT_CameraNear",
-    "FLOAT_CameraFar"
+    "FLOAT_CameraFar",
+    "INT_FLAG_01",
+    "INT_FLAG_02",
+    "INT_FLAG_03",
+    "INT_FLAG_04"
 };
 
 const struct SSamplers SSamplers =
@@ -139,6 +147,11 @@ void CShader::_Set_Handle(ui32 _handle)
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CLIP_PLANE] = glGetUniformLocation(m_handle, SUniforms.m_clipPlane.c_str());
     m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR] = glGetUniformLocation(m_handle, SUniforms.m_cameraNear.c_str());
     m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_FAR] = glGetUniformLocation(m_handle, SUniforms.m_cameraFar.c_str());
+    
+    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_01] = glGetUniformLocation(m_handle, SUniforms.m_flag01.c_str());
+    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_02] = glGetUniformLocation(m_handle, SUniforms.m_flag02.c_str());
+    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_03] = glGetUniformLocation(m_handle, SUniforms.m_flag03.c_str());
+    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_04] = glGetUniformLocation(m_handle, SUniforms.m_flag04.c_str());
     
     m_samplers[E_SHADER_SAMPLER_01] = glGetUniformLocation(m_handle, SSamplers.m_sampler_01.c_str());
     m_samplers[E_SHADER_SAMPLER_02] = glGetUniformLocation(m_handle, SSamplers.m_sampler_02.c_str());
@@ -342,6 +355,34 @@ void CShader::Set_FloatCustom(f32 _value, const std::string &_uniform)
     {
         i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
         glUniform1f(handle, _value);
+    }
+}
+
+void CShader::Set_Int(i32 _value, E_SHADER_UNIFORM _uniform)
+{
+    if(IResource::IsLoaded() && IResource::IsCommited())
+    {
+        if(m_values[_uniform] != nullptr && m_values[_uniform]->Get_Int() == _value)
+        {
+            return;
+        }
+        else if(m_values[_uniform] == nullptr)
+        {
+            m_values[_uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_INT);
+        }
+        
+        i32 handle = m_uniforms[_uniform];
+        glUniform1i(handle, _value);
+        m_values[_uniform]->Set_Int(_value);
+    }
+}
+
+void CShader::Set_IntCustom(i32 _value, const std::string &_uniform)
+{
+    if(IResource::IsLoaded() && IResource::IsCommited())
+    {
+        i32 handle = glGetUniformLocation(m_handle, _uniform.c_str());
+        glUniform1i(handle, _value);
     }
 }
 

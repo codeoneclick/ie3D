@@ -86,14 +86,22 @@ void CBatch::Unlock(void)
                 SHardwareVertex* vertexData_02 = mesh->Get_VertexBuffer()->Lock();
                 for(ui32 j = 0; j < mesh->Get_NumVertexes(); ++j)
                 {
+                    glm::vec3 position = glm::vec3(0.0f);
+                    glm::vec3 normal = glm::vec3(0.0f);
+                    glm::vec3 tangent = glm::vec3(0.0f);
+                    
+                    for(ui32 k = 0; k < 4; ++k)
+                    {
+                        f32 weight = static_cast<f32>(vertexData_02[j].m_extra[k]) / 255.0f;
+                        position += glm::transform(vertexData_02[j].m_position, m_transformations[vertexData_02[j].m_color[k] + numTransformations]) * weight;
+                        normal += glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_02[j].m_normal), m_transformations[vertexData_02[j].m_color[k] + numTransformations]) * weight;
+                        tangent += glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_02[j].m_tangent), m_transformations[vertexData_02[j].m_color[k] + numTransformations]) * weight;
+                    }
+                    
                     vertexData_01[numVertices + j] = vertexData_02[j];
-                    vertexData_01[numVertices + j].m_position = glm::transform(vertexData_02[j].m_position, matrix);
-                    vertexData_01[numVertices + j].m_normal = CVertexBuffer::CompressVec3(glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_02[j].m_normal), matrix));
-                    vertexData_01[numVertices + j].m_tangent = CVertexBuffer::CompressVec3(glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_02[j].m_tangent), matrix));
-                    vertexData_01[numVertices + j].m_color.x += numTransformations;
-                    vertexData_01[numVertices + j].m_color.y += numTransformations;
-                    vertexData_01[numVertices + j].m_color.z += numTransformations;
-                    vertexData_01[numVertices + j].m_color.w += numTransformations;
+                    vertexData_01[numVertices + j].m_position = glm::transform(position, matrix);
+                    vertexData_01[numVertices + j].m_normal = CVertexBuffer::CompressVec3(glm::transform(normal, matrix));
+                    vertexData_01[numVertices + j].m_tangent = CVertexBuffer::CompressVec3(glm::transform(tangent, matrix));
                 }
                 
                 numVertices += mesh->Get_NumVertexes();

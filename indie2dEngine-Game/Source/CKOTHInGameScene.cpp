@@ -72,15 +72,15 @@ void CKOTHInGameScene::Load(void)
                 m_colliders.push_back(model);
                 m_root->InsertModel(model);
             }
-            else if((i > 3 && i < 11) && (j > 3 && j < 11) && (i%2 == 0 || j%2 == 0))
+            /*else if((i > 3 && i < 11) && (j > 3 && j < 11) && (i%2 == 0 || j%2 == 0))
             {
                 std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
-                model->Set_Position(glm::vec3(i * 10, -15.0f, j * 10));
+                model->Set_Position(glm::vec3(i * 10, 0.0f, j * 10));
                 model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
                 m_models.push_back(model);
                 m_colliders.push_back(model);
                 m_root->InsertModel(model);
-            }
+            }*/
         }
     }
     

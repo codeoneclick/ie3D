@@ -46,11 +46,11 @@ void main(void)
     lowp vec4 vReflectionColor = texture2D(SAMPLER_01, vPerturbatedTexCoord);
     lowp vec4 vRefractionColor = texture2D(SAMPLER_02, vec2(0.5 + (0.5 - vPerturbatedTexCoord.x), vPerturbatedTexCoord.y));
     
-    highp vec3 vLightDirection = normalize(OUT_LightPosition - OUT_Position);
-    highp vec3 vCameraDirection = normalize( OUT_Position - OUT_CameraPosition);
-    highp float fLightDistance = length(OUT_Position - OUT_LightPosition);
+    mediump vec3 vLightDirection = normalize(OUT_LightPosition - OUT_Position);
+    mediump vec3 vCameraDirection = normalize( OUT_Position - OUT_CameraPosition);
+    mediump float fLightDistance = length(OUT_Position - OUT_LightPosition);
     
-    highp vec3 vTemp;
+    mediump vec3 vTemp;
     vTemp.x = dot(vLightDirection, vTangent);
     vTemp.y = dot(vLightDirection, vBinormal);
     vTemp.z = dot(vLightDirection, vNormal);
@@ -61,15 +61,14 @@ void main(void)
     vTemp.z = dot(vCameraDirection, vNormal);
     vCameraDirection = normalize(vTemp);
     
-    highp float fLightAttitude = fLightConst + fLightLinear * fLightDistance + fLightExponential * fLightDistance * fLightDistance;
-    highp float fDiffuseFactor = max(dot(vNormalColor, vLightDirection), 0.0) / fLightAttitude;
+    mediump float fLightAttitude = fLightConst + fLightLinear * fLightDistance + fLightExponential * fLightDistance * fLightDistance;
+    mediump float fDiffuseFactor = max(dot(vNormalColor, vLightDirection), 0.0) / fLightAttitude;
     
-    highp vec3 vReflect = reflect(vCameraDirection, vNormalColor);
-    highp float fSpecularFactor = pow(max(dot(vLightDirection, vReflect), 0.0), 16.0);
+    mediump vec3 vReflect = reflect(vCameraDirection, vNormalColor);
+    mediump float fSpecularFactor = pow(max(dot(vLightDirection, vReflect), 0.0), 16.0);
     
-    highp float fFresnel = dot(-vCameraDirection, vNormalColor);    
     lowp vec4 vColor = mix(vReflectionColor, vRefractionColor, 0.5);
 
-    gl_FragColor = vColor * fDiffuseFactor + vSpecularColor * fSpecularFactor;
+    gl_FragColor = vColor * fDiffuseFactor + vSpecularColor * fSpecularFactor + vColor * 0.25;
 }
 

@@ -27,6 +27,7 @@ protected:
     glm::vec3 m_vec3_value;
     glm::vec2 m_vec2_value;
     f32 m_f32_value;
+    i32 m_i32_value;
     
     E_SHADER_SAMPLER m_sampler_value;
     std::shared_ptr<CTexture> m_texture_value;
@@ -74,6 +75,12 @@ public:
         m_f32_value = _value;
     };
     
+    inline void Set_Int(i32 _value)
+    {
+        assert(m_class = E_UNIFORM_CLASS_INT);
+        m_i32_value = _value;
+    };
+    
     inline void Set_Sampler(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
     {
         assert(m_class == E_UNIFORM_CLASS_SAMPLER);
@@ -112,6 +119,12 @@ public:
     {
         assert(m_class == E_UNIFORM_CLASS_FLOAT);
         return m_f32_value;
+    };
+    
+    inline i32 Get_Int(void)
+    {
+        assert(m_class == E_UNIFORM_CLASS_INT);
+        return m_i32_value;
     };
     
     inline E_SHADER_SAMPLER Get_Sampler(void)
@@ -197,6 +210,8 @@ public:
     void Set_Vector4Custom(const glm::vec4& _vector, const std::string& _uniform);
     void Set_Float(f32 _value, E_SHADER_UNIFORM _uniform);
     void Set_FloatCustom(f32 _value, const std::string& _uniform);
+    void Set_Int(i32 _value, E_SHADER_UNIFORM _uniform);
+    void Set_IntCustom(i32 _value, const std::string& _uniform);
     void Set_Texture(const std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler);
     
     void Bind(void) const;
