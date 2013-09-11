@@ -45,6 +45,7 @@ void CRenderMgr::RegisterOutputRenderOperation(std::shared_ptr<CMaterial> _mater
                                                                  _material,
                                                                  m_graphicsContext->Get_FrameBufferHandle(),
                                                                  m_graphicsContext->Get_RenderBufferHandle());
+    std::cout<<"[Output resolution] : "<<Get_ScreenWidth()<<"x"<<Get_ScreenHeight()<<std::endl;
 }
 
 void CRenderMgr::RegisterWorldSpaceRenderOperation(const std::string &_mode, std::shared_ptr<CRenderOperationWorldSpace> _operation)

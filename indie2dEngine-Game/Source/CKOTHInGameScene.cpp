@@ -72,15 +72,15 @@ void CKOTHInGameScene::Load(void)
                 m_colliders.push_back(model);
                 m_root->InsertModel(model);
             }
-            /*else if((i > 3 && i < 11) && (j > 3 && j < 11) && (i%2 == 0 || j%2 == 0))
+            else if((i > 3 && i < 11) && (j > 3 && j < 11) && (i%2 == 0 || j%2 == 0))
             {
                 std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
-                model->Set_Position(glm::vec3(i * 10, 0.0f, j * 10));
+                model->Set_Position(glm::vec3(i * 10, -7.5f, j * 10));
                 model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
                 m_models.push_back(model);
                 m_colliders.push_back(model);
                 m_root->InsertModel(model);
-            }*/
+            }
         }
     }
     
@@ -107,7 +107,14 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
 {
     static float angle = 0.0f;
     m_models[0]->Set_Animation("model_02.MDL_anim");
-    m_models[1]->Set_Animation("model_03.MDL_anim");
+    
+    for(ui32 i = 1; i < m_models.size(); ++i)
+    {
+        if(i % 2 == 0)
+        {
+            m_models[i]->Set_Animation("model_03.MDL_anim");
+        }
+    }
     angle += 0.033f;
     
     static glm::vec3 lightPosition = glm::vec3(0.0f);

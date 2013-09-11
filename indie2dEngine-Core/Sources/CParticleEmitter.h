@@ -32,7 +32,7 @@ protected:
     SParticle* m_particles;
     f32 m_lastEmittTimestamp;
     f32 m_lastParticleEmittTime;
-    bool m_isLocked;
+    ui8 m_locked;
     
     void _EmittParticle(ui32 _index);
     

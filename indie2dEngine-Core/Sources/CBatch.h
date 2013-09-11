@@ -32,14 +32,16 @@ protected:
     std::vector<std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>> m_meshes;
     std::vector<glm::mat4x4> m_matrices;
     std::vector<glm::mat4x4> m_transformations;
-    bool m_isUnlocked;
-    bool m_isLocked;
+
+    ui8 m_locked;
+    ui8 m_proccessed;
+    ui8 m_unlocked;
     
     ui32 m_numIndices;
     ui32 m_numVertices;
     
-    ui32 m_numUsingIndices;
-    ui32 m_numUsingVertices;
+    ui32 m_numPushedIndices;
+    ui32 m_numPushedVertices;
     
     ui32 m_renderQueuePosition;
     

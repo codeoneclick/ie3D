@@ -19,9 +19,11 @@ m_bind(_bind),
 m_mode(_mode),
 m_numVertices(0),
 m_numIndices(0),
-m_numUsingVertices(0),
-m_numUsingIndices(0),
-m_isLocked(false)
+m_numPushedVertices(0),
+m_numPushedIndices(0),
+m_locked(0),
+m_proccessed(0),
+m_unlocked(0)
 {
     assert(m_material != nullptr);
     assert(m_material->Get_Shader() != nullptr);
@@ -48,21 +50,22 @@ CBatch::~CBatch(void)
 
 void CBatch::Lock(void)
 {
-    if(!m_isLocked)
+    if(m_locked == 0 && m_proccessed == 0)
     {
         m_meshes.clear();
         m_matrices.clear();
         m_transformations.clear();
     }
+    m_locked = 1;
 }
 
 void CBatch::Unlock(void)
 {
-    if(!m_isLocked)
+    if(m_locked == 1 && m_proccessed == 0 && m_unlocked == 0)
     {
-        m_isLocked = true;
+        m_proccessed = 1;
         assert(m_matrices.size() == m_meshes.size());
-        std::function<void(void)> function = [this]()
+        std::function<void(void)> unlock = [this]()
         {
             ui32 numVertices = 0;
             ui32 numIndices = 0;
@@ -110,23 +113,19 @@ void CBatch::Unlock(void)
                 assert(numTransformations < 255);
             }
             
-            std::function<void(void)> main = [this, numVertices, numIndices]()
-            {
-                m_mesh->Get_VertexBuffer()->Unlock(numVertices);
-                m_mesh->Get_IndexBuffer()->Unlock(numIndices);
-                m_numVertices = numVertices;
-                m_numIndices = numIndices;
-                m_isLocked = false;
-            };
-            gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
+            m_numPushedVertices = numVertices;
+            m_numPushedIndices = numIndices;
+            m_proccessed = 0;
+            m_locked = 0;
+            m_unlocked = 1;
         };
-        gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
+        gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), unlock);
     }
 }
 
 void CBatch::Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>& _mesh, const glm::mat4x4 &_matrix)
 {
-    if(!m_isLocked)
+    if(m_locked == 1 && m_proccessed == 0)
     {
         m_meshes.push_back(_mesh);
         m_matrices.push_back(_matrix);
@@ -164,12 +163,20 @@ void CBatch::_OnDraw(const std::string& _mode)
     assert(m_mesh != nullptr);
     assert(m_material != nullptr);
     assert(m_material->Get_Shader() != nullptr);
+    
+    if(m_unlocked == 1)
+    {
+        m_unlocked = 0;
+        m_numVertices = m_numPushedVertices;
+        m_numIndices = m_numPushedIndices;
+        m_mesh->Get_VertexBuffer()->Unlock(m_numVertices);
+        m_mesh->Get_IndexBuffer()->Unlock(m_numIndices);
+    }
+    
     if(m_numIndices != 0 && m_numVertices != 0)
     {
         m_material->Bind();
         m_bind(m_material);
-        
-        m_material->Get_Shader()->Set_MatrixArray4x4(&m_transformations[0], m_transformations.size(), E_SHADER_UNIFORM_MATRIX_BONES);
         
         m_mesh->Bind(m_material->Get_Shader()->Get_Attributes());
         m_mesh->Draw(m_numIndices);

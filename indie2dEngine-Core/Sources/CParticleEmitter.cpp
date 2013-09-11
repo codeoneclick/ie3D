@@ -22,7 +22,7 @@
 
 CParticleEmitter::CParticleEmitter(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
 IGameObject(_resourceFabricator),
-m_isLocked(false)
+m_locked(0)
 {
     m_settings = nullptr;
     m_lastEmittTimestamp = 0;
@@ -111,9 +111,9 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        if(!m_isLocked)
+        if(m_locked == 0)
         {
-            m_isLocked = true;
+            m_locked = 1;
             IGameObject::_OnSceneUpdate(_deltatime);
             std::function<void(void)> function = [this]()
             {
@@ -180,7 +180,7 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
                 std::function<void(void)> main = [this]()
                 {
                     m_mesh->Get_VertexBuffer()->Unlock();
-                    m_isLocked = false;
+                    m_locked = 0;
                 };
                 gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
             };
