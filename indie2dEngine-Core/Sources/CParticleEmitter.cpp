@@ -208,7 +208,6 @@ void CParticleEmitter::_OnDraw(const std::string& _renderMode)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_camera != nullptr);
-        assert(m_light != nullptr);
         assert(m_materials.find(_renderMode) != m_materials.end());
         
         std::shared_ptr<CMaterial> material = m_materials.find(_renderMode)->second;

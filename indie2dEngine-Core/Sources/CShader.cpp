@@ -29,10 +29,19 @@ extern const struct SUniforms
     std::string m_projectionMatrix;
     std::string m_bonesMatrix;
     std::string m_cameraPosition;
-    std::string m_lightPosition;
+    std::string m_lightPosition_01;
+    std::string m_lightPosition_02;
+    std::string m_lightPosition_03;
+    std::string m_lightPosition_04;
+    std::string m_lightColor_01;
+    std::string m_lightColor_02;
+    std::string m_lightColor_03;
+    std::string m_lightColor_04;
     std::string m_clipPlane;
     std::string m_cameraNear;
     std::string m_cameraFar;
+    std::string m_timer;
+    std::string m_lightsCount;
     std::string m_flag01;
     std::string m_flag02;
     std::string m_flag03;
@@ -70,10 +79,19 @@ const struct SUniforms SUniforms =
     "MATRIX_Projection",
     "MATRIX_Bones",
     "VECTOR_CameraPosition",
-    "VECTOR_LightPosition",
+    "VECTOR_LightPosition_01",
+    "VECTOR_LightPosition_02",
+    "VECTOR_LightPosition_03",
+    "VECTOR_LightPosition_04",
+    "VECTOR_LightColor_01",
+    "VECTOR_LightColor_02",
+    "VECTOR_LightColor_03",
+    "VECTOR_LightColor_04",
     "VECTOR_ClipPlane",
     "FLOAT_CameraNear",
     "FLOAT_CameraFar",
+    "FLOAT_Timer",
+    "INT_LightsCount",
     "INT_FLAG_01",
     "INT_FLAG_02",
     "INT_FLAG_03",
@@ -143,10 +161,19 @@ void CShader::_Set_Handle(ui32 _handle)
     m_uniforms[E_SHADER_UNIFORM_MATRIX_PROJECTION] = glGetUniformLocation(m_handle, SUniforms.m_projectionMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_BONES] = glGetUniformLocation(m_handle, SUniforms.m_bonesMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_cameraPosition.c_str());
-    m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_lightPosition.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_lightPosition_01.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_02_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_lightPosition_02.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_03_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_lightPosition_03.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_04_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_lightPosition_04.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_01_COLOR] = glGetUniformLocation(m_handle, SUniforms.m_lightColor_01.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_02_COLOR] = glGetUniformLocation(m_handle, SUniforms.m_lightColor_02.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_03_COLOR] = glGetUniformLocation(m_handle, SUniforms.m_lightColor_03.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_04_COLOR] = glGetUniformLocation(m_handle, SUniforms.m_lightColor_04.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CLIP_PLANE] = glGetUniformLocation(m_handle, SUniforms.m_clipPlane.c_str());
     m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR] = glGetUniformLocation(m_handle, SUniforms.m_cameraNear.c_str());
     m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_FAR] = glGetUniformLocation(m_handle, SUniforms.m_cameraFar.c_str());
+    m_uniforms[E_SHADER_UNIFORM_FLOAT_TIMER] = glGetUniformLocation(m_handle, SUniforms.m_timer.c_str());
+    m_uniforms[E_SHADER_UNIFORM_INT_LIGHTS_COUNT] = glGetUniformLocation(m_handle, SUniforms.m_lightsCount.c_str());
     
     m_uniforms[E_SHADER_UNIFORM_INT_FLAG_01] = glGetUniformLocation(m_handle, SUniforms.m_flag01.c_str());
     m_uniforms[E_SHADER_UNIFORM_INT_FLAG_02] = glGetUniformLocation(m_handle, SUniforms.m_flag02.c_str());

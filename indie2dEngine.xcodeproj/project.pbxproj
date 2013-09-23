@@ -2899,7 +2899,7 @@
 					"\"$(SRCROOT)/../gcdpp/Headers\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/curl\"",
@@ -2922,7 +2922,7 @@
 					"\"$(SRCROOT)/../gcdpp/Headers\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/curl\"",

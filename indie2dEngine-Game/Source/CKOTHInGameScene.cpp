@@ -46,11 +46,17 @@ void CKOTHInGameScene::Load(void)
     m_camera->Set_Distance(32.0f);
     m_camera->Set_Height(32.0f);
     
-    m_light = m_root->CreateLight();
-    m_light->Set_Position(glm::vec3(32.0f, 32.0f, 32.0f));
+    std::shared_ptr<CLight> light_01 = m_root->CreateLight();
+    m_lights.push_back(light_01);
     
     m_root->Set_Camera(m_camera);
-    m_root->Set_Light(m_light);
+    m_root->Set_Light(light_01, E_LIGHT_01);
+    
+    std::shared_ptr<CLight> light_02 = m_root->CreateLight();
+    m_lights.push_back(light_02);
+    
+    m_root->Set_Camera(m_camera);
+    m_root->Set_Light(light_02, E_LIGHT_02);
     
     std::shared_ptr<CModel> model = m_root->CreateModel("model.Footman.xml");
     model->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
@@ -117,12 +123,17 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
     }
     angle += 0.033f;
     
-    static glm::vec3 lightPosition = glm::vec3(0.0f);
-    lightPosition.x = m_characterController->Get_Position().x + cosf(-angle) * -32.0f;
-    lightPosition.y = 16.0f;
-    lightPosition.z = m_characterController->Get_Position().z + sinf(-angle) * -32.0f;
-    
-    m_light->Set_Position(lightPosition);
+    static glm::vec3 lightPosition_01 = glm::vec3(0.0f);
+    lightPosition_01.x = 0.0f + cosf(-angle) * -16.0f;
+    lightPosition_01.y = 16.0f;
+    lightPosition_01.z = 0.0f + sinf(-angle) * -16.0f;
+    m_lights[0]->Set_Position(lightPosition_01);
+
+    static glm::vec3 lightPosition_02 = glm::vec3(0.0f);
+    lightPosition_02.x = 32.0f + cosf(-angle) * -16.0f;
+    lightPosition_02.y = 16.0f;
+    lightPosition_02.z = 32.0f + sinf(-angle) * -16.0f;
+    m_lights[1]->Set_Position(lightPosition_02);
     
     m_characterController->OnUpdate(_deltatime);
 }

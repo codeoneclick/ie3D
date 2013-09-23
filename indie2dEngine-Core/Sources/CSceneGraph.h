@@ -10,6 +10,7 @@
 #define CSceneGraph_h
 
 #include "HCommon.h"
+#include "HEnums.h"
 
 class CCamera;
 class CLight;
@@ -30,7 +31,7 @@ class CSceneGraph
 private:
     
     std::shared_ptr<CCamera> m_camera;
-    std::shared_ptr<CLight> m_light;
+    std::shared_ptr<CLight> m_lights[E_LIGHT_MAX];
     
     std::set<std::shared_ptr<IGameObject> > m_gameObjectsContainer;
     
@@ -56,7 +57,7 @@ public:
     virtual ~CSceneGraph(void);
     
     void Set_Camera(std::shared_ptr<CCamera> _camera);
-    void Set_Light(std::shared_ptr<CLight> _light);
+    void Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id);
     
     void InsertSprite(std::shared_ptr<CSprite> _sprite);
     void RemoveSprite(std::shared_ptr<CSprite> _sprite);

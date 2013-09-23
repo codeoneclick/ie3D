@@ -27,7 +27,7 @@ protected:
     
     IGameTransition* m_root;
     std::shared_ptr<CCamera> m_camera;
-    std::shared_ptr<CLight> m_light;
+    std::vector<std::shared_ptr<CLight>> m_lights;
     std::vector<std::shared_ptr<CModel> > m_models;
     std::vector<std::shared_ptr<CParticleEmitter> > m_particles;
     std::vector<std::shared_ptr<IGameObject> > m_colliders;

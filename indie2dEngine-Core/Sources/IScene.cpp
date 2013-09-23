@@ -17,6 +17,7 @@ m_root(_root)
 IScene::~IScene(void)
 {
     m_models.clear();
+    m_lights.clear();
     m_particles.clear();
     m_colliders.clear();
 }

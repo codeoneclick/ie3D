@@ -9,10 +9,17 @@ uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
 
 uniform vec3   VECTOR_CameraPosition;
-uniform vec3   VECTOR_LightPosition;
+uniform vec3   VECTOR_LightPosition_01;
+uniform vec3   VECTOR_LightPosition_02;
+uniform vec3   VECTOR_LightPosition_03;
+uniform vec3   VECTOR_LightPosition_04;
+uniform vec3   VECTOR_LightColor_01;
+uniform vec3   VECTOR_LightColor_02;
+uniform vec3   VECTOR_LightColor_03;
+uniform vec3   VECTOR_LightColor_04;
 uniform vec4   VECTOR_ClipPlane;
 
-varying vec3   OUT_LightPosition;
+varying vec3   OUT_LightPosition[4];
 varying vec3   OUT_CameraPosition;
 varying vec3   OUT_Position;
 varying vec4   OUT_TexCoordProj;
@@ -26,7 +33,11 @@ void main(void)
     OUT_TexCoord = (IN_TexCoord / 32767.0  - 1.0) * 4.0;
     OUT_TexCoordProj = gl_Position;
     
-    OUT_LightPosition = VECTOR_LightPosition;
+    OUT_LightPosition[0] = VECTOR_LightPosition_01;
+    OUT_LightPosition[1] = VECTOR_LightPosition_02;
+    OUT_LightPosition[2] = VECTOR_LightPosition_03;
+    OUT_LightPosition[3] = VECTOR_LightPosition_04;
+    
     OUT_CameraPosition = VECTOR_CameraPosition;
     OUT_Position = vPosition.xyz;
 }

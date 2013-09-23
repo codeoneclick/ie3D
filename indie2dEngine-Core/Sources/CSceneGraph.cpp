@@ -20,13 +20,15 @@
 
 CSceneGraph::CSceneGraph(void) :
 m_camera(nullptr),
-m_light(nullptr),
 m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
 m_collisionMgr(nullptr),
 m_inputContext(nullptr)
 {
-
+    for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
+    {
+        m_lights[i] = nullptr;
+    }
 }
 
 CSceneGraph::~CSceneGraph(void)
@@ -57,13 +59,13 @@ void CSceneGraph::Set_Camera(std::shared_ptr<CCamera> _camera)
     m_collisionMgr->Set_Camera(m_camera);
 }
 
-void CSceneGraph::Set_Light(std::shared_ptr<CLight> _light)
+void CSceneGraph::Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id)
 {
-    m_light = _light;
+    m_lights[_id] = _light;
     
     for(const auto& iterator : m_gameObjectsContainer)
     {
-        iterator->Set_Light(m_light);
+        iterator->Set_Light(_light, _id);
     }
 }
 
@@ -74,9 +76,12 @@ void CSceneGraph::_InsertGameObject(std::shared_ptr<IGameObject> _gameObject)
         _gameObject->Set_Camera(m_camera);
     }
     
-    if(m_light != nullptr)
+    for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
     {
-        _gameObject->Set_Light(m_light);
+        if(m_lights[i] != nullptr)
+        {
+            _gameObject->Set_Light(m_lights[i], static_cast<E_LIGHTS>(i));
+        }
     }
     
     assert(m_sceneUpdateMgr != nullptr);

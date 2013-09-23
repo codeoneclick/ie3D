@@ -12,7 +12,14 @@ uniform mat4   MATRIX_World;
 uniform mat4   MATRIX_Bones[128];
 
 uniform vec3   VECTOR_CameraPosition;
-uniform vec3   VECTOR_LightPosition;
+uniform vec3   VECTOR_LightPosition_01;
+uniform vec3   VECTOR_LightPosition_02;
+uniform vec3   VECTOR_LightPosition_03;
+uniform vec3   VECTOR_LightPosition_04;
+uniform vec3   VECTOR_LightColor_01;
+uniform vec3   VECTOR_LightColor_02;
+uniform vec3   VECTOR_LightColor_03;
+uniform vec3   VECTOR_LightColor_04;
 uniform vec4   VECTOR_ClipPlane;
 
 uniform int    INT_FLAG_01;
@@ -59,7 +66,7 @@ void main(void)
 
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
     
-    vec3 vLightDistance = VECTOR_LightPosition - vPosition.xyz;
+    vec3 vLightDistance = VECTOR_LightPosition_01 - vPosition.xyz;
     OUT_LightPosition.xyz = normalize(vLightDistance);
     OUT_LightPosition.w = 1.0 - dot(vLightDistance / 16.0, vLightDistance / 16.0);
     OUT_TexCoord = IN_TexCoord / 32767.0  - 1.0;

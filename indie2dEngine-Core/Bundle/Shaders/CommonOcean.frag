@@ -1,10 +1,11 @@
 varying mediump vec4   OUT_TexCoordProj;
 varying mediump vec2   OUT_TexCoord;
-varying mediump vec3   OUT_LightPosition;
+varying mediump vec3   OUT_LightPosition[4];
 varying mediump vec3   OUT_CameraPosition;
 varying mediump vec3   OUT_Position;
 
-uniform lowp float  OUT_Timer;
+uniform highp float  FLOAT_Timer;
+uniform highp int    INT_LightsCount;
 
 uniform sampler2D SAMPLER_01;
 uniform sampler2D SAMPLER_02;
@@ -25,11 +26,11 @@ const mediump float fPerturbationFactor = 0.1;
 
 void main(void)
 {
-    mediump vec2 vTexCoord_01 = vec2(OUT_TexCoord.x + sin(OUT_Timer) * 0.33,
-								     OUT_TexCoord.y + cos(OUT_Timer) * 0.66);
+    mediump vec2 vTexCoord_01 = vec2(OUT_TexCoord.x + sin(FLOAT_Timer) * 0.33,
+								     OUT_TexCoord.y + cos(FLOAT_Timer) * 0.66);
 	
-	mediump vec2 vTexCoord_02 = vec2(OUT_TexCoord.x - sin(OUT_Timer) * 0.75,
-								     OUT_TexCoord.y - cos(OUT_Timer) * 0.25);
+	mediump vec2 vTexCoord_02 = vec2(OUT_TexCoord.x - sin(FLOAT_Timer) * 0.75,
+								     OUT_TexCoord.y - cos(FLOAT_Timer) * 0.25);
                                      
     lowp vec4 vNormalColor_01 = texture2D(SAMPLER_04, vTexCoord_01) * 2.0 - 1.0;
     lowp vec4 vNormalColor_02 = texture2D(SAMPLER_04, vTexCoord_02) * 2.0 - 1.0;
@@ -46,29 +47,42 @@ void main(void)
     lowp vec4 vReflectionColor = texture2D(SAMPLER_01, vPerturbatedTexCoord);
     lowp vec4 vRefractionColor = texture2D(SAMPLER_02, vec2(0.5 + (0.5 - vPerturbatedTexCoord.x), vPerturbatedTexCoord.y));
     
-    mediump vec3 vLightDirection = normalize(OUT_LightPosition - OUT_Position);
-    mediump vec3 vCameraDirection = normalize( OUT_Position - OUT_CameraPosition);
-    mediump float fLightDistance = length(OUT_Position - OUT_LightPosition);
+    mediump vec3 vCameraDirection = normalize(OUT_Position - OUT_CameraPosition);
     
     mediump vec3 vTemp;
-    vTemp.x = dot(vLightDirection, vTangent);
-    vTemp.y = dot(vLightDirection, vBinormal);
-    vTemp.z = dot(vLightDirection, vNormal);
-    vLightDirection = normalize(vTemp);
-    
     vTemp.x = dot(vCameraDirection, vTangent);
     vTemp.y = dot(vCameraDirection, vBinormal);
     vTemp.z = dot(vCameraDirection, vNormal);
     vCameraDirection = normalize(vTemp);
     
-    mediump float fLightAttitude = fLightConst + fLightLinear * fLightDistance + fLightExponential * fLightDistance * fLightDistance;
-    mediump float fDiffuseFactor = max(dot(vNormalColor, vLightDirection), 0.0) / fLightAttitude;
-    
     mediump vec3 vReflect = reflect(vCameraDirection, vNormalColor);
-    mediump float fSpecularFactor = pow(max(dot(vLightDirection, vReflect), 0.0), 16.0);
+    lowp vec4 vColor = mix(vReflectionColor, vRefractionColor, 0.75);
     
-    lowp vec4 vColor = mix(vReflectionColor, vRefractionColor, 0.5);
+    mediump vec3  vLightDirection;
+    mediump float fLightDistance;
+    mediump float fLightAttitude;
+    mediump float fDiffuseFactor;
+    mediump float fSpecularFactor;
+    lowp vec4 fDiffuseColor = vColor;
 
-    gl_FragColor = vColor * fDiffuseFactor + vSpecularColor * fSpecularFactor + vColor * 0.25;
+    for(int i = 0; i < INT_LightsCount; i++)
+    {
+        vLightDirection = normalize(OUT_LightPosition[i] - OUT_Position);
+        fLightDistance = length(OUT_Position - OUT_LightPosition[i]);
+        
+        vTemp.x = dot(vLightDirection, vTangent);
+        vTemp.y = dot(vLightDirection, vBinormal);
+        vTemp.z = dot(vLightDirection, vNormal);
+        vLightDirection = normalize(vTemp);
+        
+        fLightAttitude = fLightConst + fLightLinear * fLightDistance + fLightExponential * fLightDistance * fLightDistance;
+        fDiffuseFactor = max(dot(vNormalColor, vLightDirection), 0.0) / fLightAttitude;
+        fSpecularFactor = pow(max(dot(vLightDirection, vReflect), 0.0), 16.0);
+    
+        fDiffuseColor = fDiffuseColor * fDiffuseFactor + vSpecularColor * fSpecularFactor;
+    }
+    
+    vColor = fDiffuseColor + vColor * 0.25;
+    gl_FragColor = vColor;
 }
 

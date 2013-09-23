@@ -118,7 +118,6 @@ void COcean::_OnDraw(const std::string& _renderMode)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_camera != nullptr);
-        assert(m_light != nullptr);
         assert(m_materials.find(_renderMode) != m_materials.end());
         
         std::shared_ptr<CMaterial> material = m_materials.find(_renderMode)->second;
@@ -128,11 +127,21 @@ void COcean::_OnDraw(const std::string& _renderMode)
         material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         
+        ui32 count = 0;
+        for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
+        {
+            if(m_lights[i] != nullptr)
+            {
+                material->Get_Shader()->Set_Vector3(m_lights[i]->Get_Position(), static_cast<E_SHADER_UNIFORM>(E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION + i));
+                count++;
+            }
+        }
+        
         material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->Get_Shader()->Set_Vector3(m_light->Get_Position(), E_SHADER_UNIFORM_VECTOR_LIGHT_POSITION);
         material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
-        material->Get_Shader()->Set_FloatCustom(m_waveGeneratorTimer, "OUT_Timer");
+        material->Get_Shader()->Set_Float(m_waveGeneratorTimer, E_SHADER_UNIFORM_FLOAT_TIMER);
+        material->Get_Shader()->Set_Int(count, E_SHADER_UNIFORM_INT_LIGHTS_COUNT);
         
         IGameObject::_OnDraw(_renderMode);
     }

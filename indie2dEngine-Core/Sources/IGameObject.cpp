@@ -28,7 +28,6 @@ m_texcoordDisplacement(glm::vec2(0.0f, 0.0f)),
 m_renderQueuePosition(0),
 m_mesh(nullptr),
 m_camera(nullptr),
-m_light(nullptr),
 m_boundBox(nullptr),
 m_debugBoundBoxMaterial(nullptr),
 m_renderMgr(nullptr),
@@ -36,7 +35,10 @@ m_sceneUpdateMgr(nullptr),
 m_bind(nullptr),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
-
+    for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
+    {
+        m_lights[i] = nullptr;
+    }
 }
 
 IGameObject::~IGameObject(void)

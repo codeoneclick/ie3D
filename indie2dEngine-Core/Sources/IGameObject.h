@@ -56,7 +56,7 @@ protected:
     std::shared_ptr<CMesh> m_mesh;
     
     std::shared_ptr<CCamera> m_camera;
-    std::shared_ptr<CLight> m_light;
+    std::shared_ptr<CLight> m_lights[E_LIGHT_MAX];
     std::shared_ptr<CAABoundBox> m_boundBox;
     
     std::shared_ptr<CRenderMgr> m_renderMgr;
@@ -140,9 +140,9 @@ public:
     
     void Set_Camera(std::shared_ptr<CCamera> _camera);
     
-    virtual inline void Set_Light(std::shared_ptr<CLight> _light)
+    virtual inline void Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id)
     {
-        m_light = _light;
+        m_lights[_id] = _light;
     };
     
     std::shared_ptr<CVertexBuffer> Get_HardwareVertexBuffer(void);
