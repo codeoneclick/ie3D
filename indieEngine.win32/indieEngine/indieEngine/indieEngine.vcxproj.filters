@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core">
+      <UniqueIdentifier>{1c53c0fb-5231-41a6-9b96-8933ad3c47a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Game">
+      <UniqueIdentifier>{453b7e45-edb0-4aa3-a8e4-3260c322c2f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Libraries">
+      <UniqueIdentifier>{34e63407-84fc-43ff-85e4-2c432e0c939f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source">
+      <UniqueIdentifier>{6598a7f8-b444-416f-a34d-d8ef70ce97db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Win32">
+      <UniqueIdentifier>{ad7a9ea0-88c1-487a-b49c-e207f9b210c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Input Managment">
+      <UniqueIdentifier>{91c2b5bb-cf8a-421e-9ffb-c68ed29157a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Common">
+      <UniqueIdentifier>{153608bf-90d1-480f-8598-bbf42976e81a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\GUI Managment">
+      <UniqueIdentifier>{d9e59314-6516-4cdc-9e4b-5baa9f77a071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Render Managment">
+      <UniqueIdentifier>{655d8f41-a369-4d19-a421-6b39aae03080}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Collision Managment">
+      <UniqueIdentifier>{2325e665-bd5d-4ff8-bca8-b51e2d1a30f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\StateMachine Managment">
+      <UniqueIdentifier>{ea53144c-00f6-469b-b659-baf38336ed61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\SceneGraph Managment">
+      <UniqueIdentifier>{7c3a7ceb-7994-447f-a3c7-5d2393967ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\GameObjectTemplates Managment">
+      <UniqueIdentifier>{7a08495b-34dc-456b-b396-fc41c25cc00f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Resources Managment">
+      <UniqueIdentifier>{d9c689b5-2c6b-45b7-ad6a-60dff1231009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Resources Managment\Resources">
+      <UniqueIdentifier>{8aa5033e-bc72-488e-92bb-c52c794594f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Resources Managment\Operations">
+      <UniqueIdentifier>{08ac98b8-f132-407b-a67f-d2723e4e7bc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Resources Managment\Loaders">
+      <UniqueIdentifier>{7c5c2c43-358a-4d41-a649-e39b76302712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters">
+      <UniqueIdentifier>{f79e41f9-6514-48e2-be71-dc98b3b81e62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers">
+      <UniqueIdentifier>{40a51c10-c0e2-4775-9e0f-73eb405a07d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders">
+      <UniqueIdentifier>{916e510d-354a-43eb-938b-47ac25de871b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations">
+      <UniqueIdentifier>{258bfd27-eb44-40e8-aceb-36c584053038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers">
+      <UniqueIdentifier>{969fe196-7fb9-46b4-ad3a-f16f5fa8c83c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Templates">
+      <UniqueIdentifier>{accd2a90-ee0c-410f-9b78-6b28bc2f10db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects">
+      <UniqueIdentifier>{4d0fffb5-746e-4920-970b-b440c0adb23d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\SceneGraph Managment\Support">
+      <UniqueIdentifier>{fc4f1ee2-7483-4fe1-896c-7c51e2ca5710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\StateMachine Managment\Transitions">
+      <UniqueIdentifier>{94c331b7-15f5-4be8-a042-05a262ac96c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\Render Managment\Operations">
+      <UniqueIdentifier>{8d9edc78-4fc4-46dc-9c34-51a0f343184f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IResourceLoadingHandler.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CIndexBuffer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CShader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CShape.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CTexture.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CVertexBuffer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IResource.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CAABoundBox.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CBone.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CMesh.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSequence.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSkeleton.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IResourceLoadingHandler.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CIndexBuffer.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CShader.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CShape.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CTexture.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CVertexBuffer.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IResource.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CAABoundBox.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CBone.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMesh.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSequence.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSkeleton.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
