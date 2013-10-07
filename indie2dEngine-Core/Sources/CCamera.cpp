@@ -40,6 +40,9 @@ void CCamera::_OnSceneUpdate(f32 _deltatime)
     look.y = -look.y + m_altitude * 2.0f;
     m_reflection = glm::lookAt(position, look, m_up * -1.0f);
     
+    m_matrixNormal = glm::inverse(m_view);
+    m_matrixNormal = glm::transpose(m_matrixNormal);
+    
     assert(m_frustum != nullptr);
     m_frustum->Update();
 }

@@ -9,6 +9,7 @@ attribute vec4 IN_Extra;
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
+uniform mat4   MATRIX_Normal;
 uniform mat4   MATRIX_Bones[128];
 
 uniform vec3   VECTOR_CameraPosition;
@@ -54,14 +55,14 @@ void main(void)
             vBoneTangent += MATRIX_Bones[index] * vTangent * vWeights[i];
         }
         vPosition = MATRIX_World * vBonePosition;
-        vNormal = normalize(MATRIX_World * vBoneNormal);
-        vTangent = normalize(MATRIX_World * vBoneTangent);
+        vNormal = normalize(MATRIX_Normal * vBoneNormal);
+        vTangent = normalize(MATRIX_Normal * vBoneTangent);
     }
     else
     {
         vPosition = MATRIX_World * vPosition;
-        vNormal = normalize(MATRIX_World * vNormal);
-        vTangent = normalize(MATRIX_World * vTangent);
+        vNormal = normalize(MATRIX_Normal * vNormal);
+        vTangent = normalize(MATRIX_Normal * vTangent);
     }
 
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;

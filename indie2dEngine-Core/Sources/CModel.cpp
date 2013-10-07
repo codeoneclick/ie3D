@@ -91,6 +91,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         _material->Get_Shader()->Set_Matrix4x4(_material->Get_IsBatching() ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         _material->Get_Shader()->Set_Matrix4x4(!_material->Get_IsReflected() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         
         ui32 count = 0;
         for(ui32 i = 0; i < E_LIGHT_MAX; ++i)

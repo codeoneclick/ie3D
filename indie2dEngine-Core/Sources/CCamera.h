@@ -20,6 +20,7 @@ private:
     glm::mat4x4 m_view;
     glm::mat4x4 m_reflection;
     glm::mat4x4 m_projection;
+    glm::mat4x4 m_matrixNormal;
     
     glm::vec3 m_position;
     glm::vec3 m_look;
@@ -60,6 +61,11 @@ public:
     inline glm::mat4x4 Get_ViewReflectionMatrix(void)
     {
         return m_reflection;
+    };
+    
+    inline glm::mat4x4 Get_MatrixNormal(void)
+    {
+        return m_matrixNormal;
     };
     
     inline void Set_Position(const glm::vec3& _position)

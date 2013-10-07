@@ -27,6 +27,7 @@ extern const struct SUniforms
     std::string m_worldMatrix;
     std::string m_viewMatrix;
     std::string m_projectionMatrix;
+    std::string m_normalMatrix;
     std::string m_bonesMatrix;
     std::string m_cameraPosition;
     std::string m_lightPosition_01;
@@ -77,6 +78,7 @@ const struct SUniforms SUniforms =
     "MATRIX_World",
     "MATRIX_View",
     "MATRIX_Projection",
+    "MATRIX_Normal",
     "MATRIX_Bones",
     "VECTOR_CameraPosition",
     "VECTOR_LightPosition_01",
@@ -159,6 +161,7 @@ void CShader::_Set_Handle(ui32 _handle)
     m_uniforms[E_SHADER_UNIFORM_MATRIX_WORLD] = glGetUniformLocation(m_handle, SUniforms.m_worldMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_VIEW] = glGetUniformLocation(m_handle, SUniforms.m_viewMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_PROJECTION] = glGetUniformLocation(m_handle, SUniforms.m_projectionMatrix.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_NORMAL] = glGetUniformLocation(m_handle, SUniforms.m_normalMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_BONES] = glGetUniformLocation(m_handle, SUniforms.m_bonesMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_cameraPosition.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION] = glGetUniformLocation(m_handle, SUniforms.m_lightPosition_01.c_str());
