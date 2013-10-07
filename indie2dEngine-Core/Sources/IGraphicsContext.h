@@ -10,6 +10,7 @@
 #define IGraphicsContext_h
 
 #include "HCommon.h"
+#include "HEnums.h"
 
 class IGraphicsContext
 {
@@ -25,6 +26,8 @@ public:
     
     IGraphicsContext(void);
     virtual ~IGraphicsContext(void);
+    
+    static std::shared_ptr<IGraphicsContext> CreateGraphicsContext(const void* _hwnd, E_PLATFORM_API _api);
     
     inline const ui32 Get_FrameBufferHandle(void) const
     {

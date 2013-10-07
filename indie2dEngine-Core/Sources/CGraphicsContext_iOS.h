@@ -13,25 +13,8 @@
 
 #ifdef __APPLE__
 
-#include <Foundation/Foundation.h>
-#include <UIKit/UIKit.h>
-#include <QuartzCore/QuartzCore.h>
 
-class CGraphicsContext_iOS final : public IGraphicsContext
-{
-private:
-    
-protected:
-    
-     EAGLContext* m_context;
-    
-public:
-    
-    CGraphicsContext_iOS(const CAEAGLLayer* _iOSGLLayer);
-    ~CGraphicsContext_iOS(void);
-    
-    void Output(void) const;
-};
+
 
 #endif 
            

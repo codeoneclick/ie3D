@@ -9,6 +9,12 @@
 #ifndef HEnums_h
 #define HEnums_h
 
+enum E_PLATFORM_API
+{
+    E_PLATFORM_API_IOS = 0,
+    E_PLATFORM_API_WIN32
+};
+
 enum E_RESOURCE_CLASS
 {
     E_RESOURCE_CLASS_UNKNOWN = 0,

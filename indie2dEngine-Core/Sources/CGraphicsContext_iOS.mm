@@ -6,9 +6,30 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CGraphicsContext_iOS.h"
+#include "IGraphicsContext.h"
 
-CGraphicsContext_iOS::CGraphicsContext_iOS(const CAEAGLLayer* _iOSGLLayer)
+#include <Foundation/Foundation.h>
+#include <UIKit/UIKit.h>
+#include <QuartzCore/QuartzCore.h>
+
+class CGraphicsContext_iOS final : public IGraphicsContext
+{
+private:
+    
+protected:
+    
+    EAGLContext* m_context;
+    
+public:
+    
+    CGraphicsContext_iOS(const CAEAGLLayer* _iOSGLLayer);
+    ~CGraphicsContext_iOS(void);
+    
+    void Output(void) const;
+};
+
+
+CGraphicsContext_iOS::CGraphicsContext_iOS(const CAEAGLLayer* _window)
 {
     m_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     assert(m_context != nullptr);
