@@ -1,0 +1,1422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		00B4F48B12F6A69C0084EC00 /* PrepareXcodeProjectTemplate */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 00B4F48E12F6A6BA0084EC00 /* Build configuration list for PBXAggregateTarget "PrepareXcodeProjectTemplate" */;
+			buildPhases = (
+				00B4F48A12F6A69C0084EC00 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = PrepareXcodeProjectTemplate;
+			productName = PrepareXcodeProjectTemplate;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		A4C700001803015500B3DEEC /* SDL_clipboardevents_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDF71803015400B3DEEC /* SDL_clipboardevents_c.h */; };
+		A4C700011803015500B3DEEC /* SDL_dropevents.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDF81803015400B3DEEC /* SDL_dropevents.c */; };
+		A4C700021803015500B3DEEC /* SDL_dropevents_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDF91803015400B3DEEC /* SDL_dropevents_c.h */; };
+		A4C700031803015500B3DEEC /* SDL_events.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDFA1803015400B3DEEC /* SDL_events.c */; };
+		A4C700041803015500B3DEEC /* SDL_events_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDFB1803015400B3DEEC /* SDL_events_c.h */; };
+		A4C700051803015500B3DEEC /* SDL_gesture.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDFC1803015400B3DEEC /* SDL_gesture.c */; };
+		A4C700061803015500B3DEEC /* SDL_gesture_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDFD1803015400B3DEEC /* SDL_gesture_c.h */; };
+		A4C700071803015500B3DEEC /* SDL_keyboard.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDFE1803015400B3DEEC /* SDL_keyboard.c */; };
+		A4C700081803015500B3DEEC /* SDL_keyboard_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDFF1803015400B3DEEC /* SDL_keyboard_c.h */; };
+		A4C700091803015500B3DEEC /* SDL_mouse.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE001803015400B3DEEC /* SDL_mouse.c */; };
+		A4C7000A1803015500B3DEEC /* SDL_mouse_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE011803015400B3DEEC /* SDL_mouse_c.h */; };
+		A4C7000B1803015500B3DEEC /* SDL_quit.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE021803015400B3DEEC /* SDL_quit.c */; };
+		A4C7000C1803015500B3DEEC /* SDL_sysevents.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE031803015400B3DEEC /* SDL_sysevents.h */; };
+		A4C7000D1803015500B3DEEC /* SDL_touch.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE041803015400B3DEEC /* SDL_touch.c */; };
+		A4C7000E1803015500B3DEEC /* SDL_touch_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE051803015400B3DEEC /* SDL_touch_c.h */; };
+		A4C7000F1803015500B3DEEC /* SDL_windowevents.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE061803015400B3DEEC /* SDL_windowevents.c */; };
+		A4C700101803015500B3DEEC /* SDL_windowevents_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE071803015400B3DEEC /* SDL_windowevents_c.h */; };
+		A4C700111803015500B3DEEC /* SDL_rwopsbundlesupport.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE0A1803015400B3DEEC /* SDL_rwopsbundlesupport.h */; };
+		A4C700121803015500B3DEEC /* SDL_rwopsbundlesupport.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE0B1803015400B3DEEC /* SDL_rwopsbundlesupport.m */; };
+		A4C700131803015500B3DEEC /* SDL_rwops.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE0C1803015400B3DEEC /* SDL_rwops.c */; };
+		A4C700151803015500B3DEEC /* SDL_syshaptic.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE111803015400B3DEEC /* SDL_syshaptic.c */; };
+		A4C700171803015500B3DEEC /* SDL_haptic.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE141803015400B3DEEC /* SDL_haptic.c */; };
+		A4C700191803015500B3DEEC /* SDL_syshaptic.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE161803015400B3DEEC /* SDL_syshaptic.h */; };
+		A4C700211803015500B3DEEC /* SDL_sysjoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE261803015400B3DEEC /* SDL_sysjoystick.m */; };
+		A4C700221803015500B3DEEC /* SDLUIAccelerationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE271803015400B3DEEC /* SDLUIAccelerationDelegate.h */; };
+		A4C700231803015500B3DEEC /* SDLUIAccelerationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE281803015400B3DEEC /* SDLUIAccelerationDelegate.m */; };
+		A4C700271803015500B3DEEC /* SDL_gamecontroller.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE2E1803015400B3DEEC /* SDL_gamecontroller.c */; };
+		A4C700291803015500B3DEEC /* SDL_joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE301803015400B3DEEC /* SDL_joystick.c */; };
+		A4C7002A1803015500B3DEEC /* SDL_joystick_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE311803015400B3DEEC /* SDL_joystick_c.h */; };
+		A4C7002B1803015500B3DEEC /* SDL_sysjoystick.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE321803015400B3DEEC /* SDL_sysjoystick.h */; };
+		A4C700411803015500B3DEEC /* SDL_sysloadso.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE4E1803015400B3DEEC /* SDL_sysloadso.c */; };
+		A4C700421803015500B3DEEC /* SDL_sysloadso.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE501803015400B3DEEC /* SDL_sysloadso.c */; };
+		A4C700501803015500B3DEEC /* SDL_power.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE6C1803015400B3DEEC /* SDL_power.c */; };
+		A4C700511803015500B3DEEC /* SDL_syspower.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE6E1803015400B3DEEC /* SDL_syspower.h */; };
+		A4C700521803015500B3DEEC /* SDL_syspower.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE6F1803015400B3DEEC /* SDL_syspower.m */; };
+		A4C700551803015500B3DEEC /* mmx.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE751803015400B3DEEC /* mmx.h */; };
+		A4C7005A1803015500B3DEEC /* SDL_glesfuncs.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE7C1803015400B3DEEC /* SDL_glesfuncs.h */; };
+		A4C7005B1803015500B3DEEC /* SDL_render_gles.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE7D1803015400B3DEEC /* SDL_render_gles.c */; };
+		A4C7005C1803015500B3DEEC /* SDL_gles2funcs.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE7F1803015400B3DEEC /* SDL_gles2funcs.h */; };
+		A4C7005D1803015500B3DEEC /* SDL_render_gles2.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE801803015400B3DEEC /* SDL_render_gles2.c */; };
+		A4C7005E1803015500B3DEEC /* SDL_shaders_gles2.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE811803015400B3DEEC /* SDL_shaders_gles2.c */; };
+		A4C7005F1803015500B3DEEC /* SDL_shaders_gles2.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE821803015400B3DEEC /* SDL_shaders_gles2.h */; };
+		A4C700611803015500B3DEEC /* SDL_render.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE851803015400B3DEEC /* SDL_render.c */; };
+		A4C700621803015500B3DEEC /* SDL_sysrender.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE861803015400B3DEEC /* SDL_sysrender.h */; };
+		A4C700631803015500B3DEEC /* SDL_yuv_mmx.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE871803015400B3DEEC /* SDL_yuv_mmx.c */; };
+		A4C700641803015500B3DEEC /* SDL_yuv_sw.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE881803015400B3DEEC /* SDL_yuv_sw.c */; };
+		A4C700651803015500B3DEEC /* SDL_yuv_sw_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE891803015400B3DEEC /* SDL_yuv_sw_c.h */; };
+		A4C700661803015500B3DEEC /* SDL_blendfillrect.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE8B1803015400B3DEEC /* SDL_blendfillrect.c */; };
+		A4C700671803015500B3DEEC /* SDL_blendfillrect.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE8C1803015400B3DEEC /* SDL_blendfillrect.h */; };
+		A4C700681803015500B3DEEC /* SDL_blendline.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE8D1803015400B3DEEC /* SDL_blendline.c */; };
+		A4C700691803015500B3DEEC /* SDL_blendline.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE8E1803015400B3DEEC /* SDL_blendline.h */; };
+		A4C7006A1803015500B3DEEC /* SDL_blendpoint.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE8F1803015400B3DEEC /* SDL_blendpoint.c */; };
+		A4C7006B1803015500B3DEEC /* SDL_blendpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE901803015400B3DEEC /* SDL_blendpoint.h */; };
+		A4C7006C1803015500B3DEEC /* SDL_draw.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE911803015400B3DEEC /* SDL_draw.h */; };
+		A4C7006D1803015500B3DEEC /* SDL_drawline.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE921803015400B3DEEC /* SDL_drawline.c */; };
+		A4C7006E1803015500B3DEEC /* SDL_drawline.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE931803015400B3DEEC /* SDL_drawline.h */; };
+		A4C7006F1803015500B3DEEC /* SDL_drawpoint.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE941803015400B3DEEC /* SDL_drawpoint.c */; };
+		A4C700701803015500B3DEEC /* SDL_drawpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE951803015400B3DEEC /* SDL_drawpoint.h */; };
+		A4C700711803015500B3DEEC /* SDL_render_sw.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE961803015400B3DEEC /* SDL_render_sw.c */; };
+		A4C700721803015500B3DEEC /* SDL_render_sw_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE971803015400B3DEEC /* SDL_render_sw_c.h */; };
+		A4C700731803015500B3DEEC /* SDL_rotate.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE981803015400B3DEEC /* SDL_rotate.c */; };
+		A4C700741803015500B3DEEC /* SDL_rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE991803015400B3DEEC /* SDL_rotate.h */; };
+		A4C700751803015500B3DEEC /* SDL_assert_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE9A1803015400B3DEEC /* SDL_assert_c.h */; };
+		A4C700761803015500B3DEEC /* SDL_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE9B1803015400B3DEEC /* SDL_assert.c */; };
+		A4C700771803015500B3DEEC /* SDL_error_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FE9C1803015400B3DEEC /* SDL_error_c.h */; };
+		A4C700781803015500B3DEEC /* SDL_error.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE9D1803015400B3DEEC /* SDL_error.c */; };
+		A4C700791803015500B3DEEC /* SDL_hints.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE9E1803015400B3DEEC /* SDL_hints.c */; };
+		A4C7007A1803015500B3DEEC /* SDL_log.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FE9F1803015400B3DEEC /* SDL_log.c */; };
+		A4C7007B1803015500B3DEEC /* SDL.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FEA01803015400B3DEEC /* SDL.c */; };
+		A4C7007C1803015500B3DEEC /* SDL_getenv.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FEA21803015400B3DEEC /* SDL_getenv.c */; };
+		A4C7007D1803015500B3DEEC /* SDL_iconv.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FEA31803015400B3DEEC /* SDL_iconv.c */; };
+		A4C7007E1803015500B3DEEC /* SDL_malloc.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FEA41803015400B3DEEC /* SDL_malloc.c */; };
+		A4C7007F1803015500B3DEEC /* SDL_qsort.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FEA51803015400B3DEEC /* SDL_qsort.c */; };
+		A4C700801803015500B3DEEC /* SDL_stdlib.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FEA61803015400B3DEEC /* SDL_stdlib.c */; };
+		A4C700811803015500B3DEEC /* SDL_string.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FEA71803015400B3DEEC /* SDL_string.c */; };
+		A4C700A21803015500B3DEEC /* SDL_syscond.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FECE1803015400B3DEEC /* SDL_syscond.c */; };
+		A4C700A31803015500B3DEEC /* SDL_sysmutex.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FECF1803015400B3DEEC /* SDL_sysmutex.c */; };
+		A4C700A41803015500B3DEEC /* SDL_sysmutex_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FED01803015400B3DEEC /* SDL_sysmutex_c.h */; };
+		A4C700A51803015500B3DEEC /* SDL_syssem.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FED11803015400B3DEEC /* SDL_syssem.c */; };
+		A4C700A61803015500B3DEEC /* SDL_systhread.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FED21803015400B3DEEC /* SDL_systhread.c */; };
+		A4C700A71803015500B3DEEC /* SDL_systhread_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FED31803015400B3DEEC /* SDL_systhread_c.h */; };
+		A4C700A81803015500B3DEEC /* SDL_systls.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FED41803015400B3DEEC /* SDL_systls.c */; };
+		A4C700A91803015500B3DEEC /* SDL_systhread.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FED51803015400B3DEEC /* SDL_systhread.h */; };
+		A4C700AA1803015500B3DEEC /* SDL_thread.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FED61803015400B3DEEC /* SDL_thread.c */; };
+		A4C700AB1803015500B3DEEC /* SDL_thread_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FED71803015400B3DEEC /* SDL_thread_c.h */; };
+		A4C700B41803015500B3DEEC /* SDL_timer.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FEE51803015400B3DEEC /* SDL_timer.c */; };
+		A4C700B51803015500B3DEEC /* SDL_timer_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FEE61803015400B3DEEC /* SDL_timer_c.h */; };
+		A4C700B61803015500B3DEEC /* SDL_systimer.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FEE81803015400B3DEEC /* SDL_systimer.c */; };
+		A4C701001803015500B3DEEC /* SDL_nullevents.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF391803015500B3DEEC /* SDL_nullevents.c */; };
+		A4C701011803015500B3DEEC /* SDL_nullevents_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF3A1803015500B3DEEC /* SDL_nullevents_c.h */; };
+		A4C701021803015500B3DEEC /* SDL_nullframebuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF3B1803015500B3DEEC /* SDL_nullframebuffer.c */; };
+		A4C701031803015500B3DEEC /* SDL_nullframebuffer_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF3C1803015500B3DEEC /* SDL_nullframebuffer_c.h */; };
+		A4C701041803015500B3DEEC /* SDL_nullvideo.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF3D1803015500B3DEEC /* SDL_nullvideo.c */; };
+		A4C701051803015500B3DEEC /* SDL_nullvideo.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF3E1803015500B3DEEC /* SDL_nullvideo.h */; };
+		A4C701121803015500B3DEEC /* SDL_blit.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF4D1803015500B3DEEC /* SDL_blit.c */; };
+		A4C701131803015500B3DEEC /* SDL_blit.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF4E1803015500B3DEEC /* SDL_blit.h */; };
+		A4C701141803015500B3DEEC /* SDL_blit_0.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF4F1803015500B3DEEC /* SDL_blit_0.c */; };
+		A4C701151803015500B3DEEC /* SDL_blit_1.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF501803015500B3DEEC /* SDL_blit_1.c */; };
+		A4C701161803015500B3DEEC /* SDL_blit_A.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF511803015500B3DEEC /* SDL_blit_A.c */; };
+		A4C701171803015500B3DEEC /* SDL_blit_auto.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF521803015500B3DEEC /* SDL_blit_auto.c */; };
+		A4C701181803015500B3DEEC /* SDL_blit_auto.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF531803015500B3DEEC /* SDL_blit_auto.h */; };
+		A4C701191803015500B3DEEC /* SDL_blit_copy.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF541803015500B3DEEC /* SDL_blit_copy.c */; };
+		A4C7011A1803015500B3DEEC /* SDL_blit_copy.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF551803015500B3DEEC /* SDL_blit_copy.h */; };
+		A4C7011B1803015500B3DEEC /* SDL_blit_N.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF561803015500B3DEEC /* SDL_blit_N.c */; };
+		A4C7011C1803015500B3DEEC /* SDL_blit_slow.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF571803015500B3DEEC /* SDL_blit_slow.c */; };
+		A4C7011D1803015500B3DEEC /* SDL_blit_slow.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF581803015500B3DEEC /* SDL_blit_slow.h */; };
+		A4C7011E1803015500B3DEEC /* SDL_bmp.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF591803015500B3DEEC /* SDL_bmp.c */; };
+		A4C7011F1803015500B3DEEC /* SDL_clipboard.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF5A1803015500B3DEEC /* SDL_clipboard.c */; };
+		A4C701201803015500B3DEEC /* SDL_fillrect.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF5B1803015500B3DEEC /* SDL_fillrect.c */; };
+		A4C701211803015500B3DEEC /* SDL_pixels.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF5C1803015500B3DEEC /* SDL_pixels.c */; };
+		A4C701221803015500B3DEEC /* SDL_pixels_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF5D1803015500B3DEEC /* SDL_pixels_c.h */; };
+		A4C701231803015500B3DEEC /* SDL_rect.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF5E1803015500B3DEEC /* SDL_rect.c */; };
+		A4C701241803015500B3DEEC /* SDL_rect_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF5F1803015500B3DEEC /* SDL_rect_c.h */; };
+		A4C701251803015500B3DEEC /* SDL_RLEaccel.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF601803015500B3DEEC /* SDL_RLEaccel.c */; };
+		A4C701261803015500B3DEEC /* SDL_RLEaccel_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF611803015500B3DEEC /* SDL_RLEaccel_c.h */; };
+		A4C701271803015500B3DEEC /* SDL_shape.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF621803015500B3DEEC /* SDL_shape.c */; };
+		A4C701281803015500B3DEEC /* SDL_shape_internals.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF631803015500B3DEEC /* SDL_shape_internals.h */; };
+		A4C701291803015500B3DEEC /* SDL_stretch.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF641803015500B3DEEC /* SDL_stretch.c */; };
+		A4C7012A1803015500B3DEEC /* SDL_surface.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF651803015500B3DEEC /* SDL_surface.c */; };
+		A4C7012B1803015500B3DEEC /* SDL_sysvideo.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF661803015500B3DEEC /* SDL_sysvideo.h */; };
+		A4C7012C1803015500B3DEEC /* SDL_video.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF671803015500B3DEEC /* SDL_video.c */; };
+		A4C7012D1803015500B3DEEC /* keyinfotable.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF6A1803015500B3DEEC /* keyinfotable.h */; };
+		A4C7012E1803015500B3DEEC /* SDL_uikitappdelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF6B1803015500B3DEEC /* SDL_uikitappdelegate.h */; };
+		A4C7012F1803015500B3DEEC /* SDL_uikitappdelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF6C1803015500B3DEEC /* SDL_uikitappdelegate.m */; };
+		A4C701301803015500B3DEEC /* SDL_uikitevents.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF6D1803015500B3DEEC /* SDL_uikitevents.h */; };
+		A4C701311803015500B3DEEC /* SDL_uikitevents.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF6E1803015500B3DEEC /* SDL_uikitevents.m */; };
+		A4C701321803015500B3DEEC /* SDL_uikitmessagebox.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF6F1803015500B3DEEC /* SDL_uikitmessagebox.h */; };
+		A4C701331803015500B3DEEC /* SDL_uikitmessagebox.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF701803015500B3DEEC /* SDL_uikitmessagebox.m */; };
+		A4C701341803015500B3DEEC /* SDL_uikitmodes.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF711803015500B3DEEC /* SDL_uikitmodes.h */; };
+		A4C701351803015500B3DEEC /* SDL_uikitmodes.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF721803015500B3DEEC /* SDL_uikitmodes.m */; };
+		A4C701361803015500B3DEEC /* SDL_uikitopengles.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF731803015500B3DEEC /* SDL_uikitopengles.h */; };
+		A4C701371803015500B3DEEC /* SDL_uikitopengles.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF741803015500B3DEEC /* SDL_uikitopengles.m */; };
+		A4C701381803015500B3DEEC /* SDL_uikitopenglview.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF751803015500B3DEEC /* SDL_uikitopenglview.h */; };
+		A4C701391803015500B3DEEC /* SDL_uikitopenglview.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF761803015500B3DEEC /* SDL_uikitopenglview.m */; };
+		A4C7013A1803015500B3DEEC /* SDL_uikitvideo.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF771803015500B3DEEC /* SDL_uikitvideo.h */; };
+		A4C7013B1803015500B3DEEC /* SDL_uikitvideo.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF781803015500B3DEEC /* SDL_uikitvideo.m */; };
+		A4C7013C1803015500B3DEEC /* SDL_uikitview.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF791803015500B3DEEC /* SDL_uikitview.h */; };
+		A4C7013D1803015500B3DEEC /* SDL_uikitview.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF7A1803015500B3DEEC /* SDL_uikitview.m */; };
+		A4C7013E1803015500B3DEEC /* SDL_uikitviewcontroller.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF7B1803015500B3DEEC /* SDL_uikitviewcontroller.h */; };
+		A4C7013F1803015500B3DEEC /* SDL_uikitviewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF7C1803015500B3DEEC /* SDL_uikitviewcontroller.m */; };
+		A4C701401803015500B3DEEC /* SDL_uikitwindow.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FF7D1803015500B3DEEC /* SDL_uikitwindow.h */; };
+		A4C701411803015500B3DEEC /* SDL_uikitwindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FF7E1803015500B3DEEC /* SDL_uikitwindow.m */; };
+		A4C702E9180302FF00B3DEEC /* begin_code.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702A1180302FE00B3DEEC /* begin_code.h */; };
+		A4C702EA180302FF00B3DEEC /* close_code.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702A2180302FE00B3DEEC /* close_code.h */; };
+		A4C702EB180302FF00B3DEEC /* SDL_assert.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702A3180302FE00B3DEEC /* SDL_assert.h */; };
+		A4C702EC180302FF00B3DEEC /* SDL_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702A4180302FE00B3DEEC /* SDL_atomic.h */; };
+		A4C702ED180302FF00B3DEEC /* SDL_audio.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702A5180302FE00B3DEEC /* SDL_audio.h */; };
+		A4C702EE180302FF00B3DEEC /* SDL_bits.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702A6180302FE00B3DEEC /* SDL_bits.h */; };
+		A4C702EF180302FF00B3DEEC /* SDL_blendmode.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702A7180302FE00B3DEEC /* SDL_blendmode.h */; };
+		A4C702F0180302FF00B3DEEC /* SDL_clipboard.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702A8180302FE00B3DEEC /* SDL_clipboard.h */; };
+		A4C702F2180302FF00B3DEEC /* SDL_config_iphoneos.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702AA180302FE00B3DEEC /* SDL_config_iphoneos.h */; };
+		A4C702F9180302FF00B3DEEC /* SDL_config.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702B1180302FE00B3DEEC /* SDL_config.h */; };
+		A4C702FA180302FF00B3DEEC /* SDL_copying.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702B2180302FE00B3DEEC /* SDL_copying.h */; };
+		A4C702FB180302FF00B3DEEC /* SDL_cpuinfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702B3180302FE00B3DEEC /* SDL_cpuinfo.h */; };
+		A4C702FC180302FF00B3DEEC /* SDL_endian.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702B4180302FE00B3DEEC /* SDL_endian.h */; };
+		A4C702FD180302FF00B3DEEC /* SDL_error.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702B5180302FE00B3DEEC /* SDL_error.h */; };
+		A4C702FE180302FF00B3DEEC /* SDL_events.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702B6180302FE00B3DEEC /* SDL_events.h */; };
+		A4C702FF180302FF00B3DEEC /* SDL_gamecontroller.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702B7180302FE00B3DEEC /* SDL_gamecontroller.h */; };
+		A4C70300180302FF00B3DEEC /* SDL_gesture.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702B8180302FE00B3DEEC /* SDL_gesture.h */; };
+		A4C70301180302FF00B3DEEC /* SDL_haptic.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702B9180302FE00B3DEEC /* SDL_haptic.h */; };
+		A4C70302180302FF00B3DEEC /* SDL_hints.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702BA180302FE00B3DEEC /* SDL_hints.h */; };
+		A4C70303180302FF00B3DEEC /* SDL_joystick.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702BB180302FE00B3DEEC /* SDL_joystick.h */; };
+		A4C70304180302FF00B3DEEC /* SDL_keyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702BC180302FE00B3DEEC /* SDL_keyboard.h */; };
+		A4C70305180302FF00B3DEEC /* SDL_keycode.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702BD180302FE00B3DEEC /* SDL_keycode.h */; };
+		A4C70306180302FF00B3DEEC /* SDL_loadso.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702BE180302FE00B3DEEC /* SDL_loadso.h */; };
+		A4C70307180302FF00B3DEEC /* SDL_log.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702BF180302FE00B3DEEC /* SDL_log.h */; };
+		A4C70308180302FF00B3DEEC /* SDL_main.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C0180302FE00B3DEEC /* SDL_main.h */; };
+		A4C70309180302FF00B3DEEC /* SDL_messagebox.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C1180302FE00B3DEEC /* SDL_messagebox.h */; };
+		A4C7030A180302FF00B3DEEC /* SDL_mouse.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C2180302FE00B3DEEC /* SDL_mouse.h */; };
+		A4C7030B180302FF00B3DEEC /* SDL_mutex.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C3180302FE00B3DEEC /* SDL_mutex.h */; };
+		A4C7030C180302FF00B3DEEC /* SDL_name.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C4180302FE00B3DEEC /* SDL_name.h */; };
+		A4C7030D180302FF00B3DEEC /* SDL_opengl.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C5180302FE00B3DEEC /* SDL_opengl.h */; };
+		A4C7030E180302FF00B3DEEC /* SDL_opengles.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C6180302FE00B3DEEC /* SDL_opengles.h */; };
+		A4C7030F180302FF00B3DEEC /* SDL_opengles2.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C7180302FE00B3DEEC /* SDL_opengles2.h */; };
+		A4C70310180302FF00B3DEEC /* SDL_pixels.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C8180302FE00B3DEEC /* SDL_pixels.h */; };
+		A4C70311180302FF00B3DEEC /* SDL_platform.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702C9180302FE00B3DEEC /* SDL_platform.h */; };
+		A4C70312180302FF00B3DEEC /* SDL_power.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702CA180302FE00B3DEEC /* SDL_power.h */; };
+		A4C70313180302FF00B3DEEC /* SDL_quit.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702CB180302FE00B3DEEC /* SDL_quit.h */; };
+		A4C70314180302FF00B3DEEC /* SDL_rect.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702CC180302FE00B3DEEC /* SDL_rect.h */; };
+		A4C70315180302FF00B3DEEC /* SDL_render.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702CD180302FE00B3DEEC /* SDL_render.h */; };
+		A4C70316180302FF00B3DEEC /* SDL_revision.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702CE180302FE00B3DEEC /* SDL_revision.h */; };
+		A4C70317180302FF00B3DEEC /* SDL_rwops.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702CF180302FE00B3DEEC /* SDL_rwops.h */; };
+		A4C70318180302FF00B3DEEC /* SDL_scancode.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D0180302FE00B3DEEC /* SDL_scancode.h */; };
+		A4C70319180302FF00B3DEEC /* SDL_shape.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D1180302FF00B3DEEC /* SDL_shape.h */; };
+		A4C7031A180302FF00B3DEEC /* SDL_stdinc.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D2180302FF00B3DEEC /* SDL_stdinc.h */; };
+		A4C7031B180302FF00B3DEEC /* SDL_surface.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D3180302FF00B3DEEC /* SDL_surface.h */; };
+		A4C7031C180302FF00B3DEEC /* SDL_system.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D4180302FF00B3DEEC /* SDL_system.h */; };
+		A4C7031D180302FF00B3DEEC /* SDL_syswm.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D5180302FF00B3DEEC /* SDL_syswm.h */; };
+		A4C7031E180302FF00B3DEEC /* SDL_test_assert.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D6180302FF00B3DEEC /* SDL_test_assert.h */; };
+		A4C7031F180302FF00B3DEEC /* SDL_test_common.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D7180302FF00B3DEEC /* SDL_test_common.h */; };
+		A4C70320180302FF00B3DEEC /* SDL_test_compare.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D8180302FF00B3DEEC /* SDL_test_compare.h */; };
+		A4C70321180302FF00B3DEEC /* SDL_test_crc32.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702D9180302FF00B3DEEC /* SDL_test_crc32.h */; };
+		A4C70322180302FF00B3DEEC /* SDL_test_font.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702DA180302FF00B3DEEC /* SDL_test_font.h */; };
+		A4C70323180302FF00B3DEEC /* SDL_test_fuzzer.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702DB180302FF00B3DEEC /* SDL_test_fuzzer.h */; };
+		A4C70324180302FF00B3DEEC /* SDL_test_harness.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702DC180302FF00B3DEEC /* SDL_test_harness.h */; };
+		A4C70325180302FF00B3DEEC /* SDL_test_images.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702DD180302FF00B3DEEC /* SDL_test_images.h */; };
+		A4C70326180302FF00B3DEEC /* SDL_test_log.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702DE180302FF00B3DEEC /* SDL_test_log.h */; };
+		A4C70327180302FF00B3DEEC /* SDL_test_md5.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702DF180302FF00B3DEEC /* SDL_test_md5.h */; };
+		A4C70328180302FF00B3DEEC /* SDL_test_random.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702E0180302FF00B3DEEC /* SDL_test_random.h */; };
+		A4C70329180302FF00B3DEEC /* SDL_test.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702E1180302FF00B3DEEC /* SDL_test.h */; };
+		A4C7032A180302FF00B3DEEC /* SDL_thread.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702E2180302FF00B3DEEC /* SDL_thread.h */; };
+		A4C7032B180302FF00B3DEEC /* SDL_timer.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702E3180302FF00B3DEEC /* SDL_timer.h */; };
+		A4C7032C180302FF00B3DEEC /* SDL_touch.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702E4180302FF00B3DEEC /* SDL_touch.h */; };
+		A4C7032D180302FF00B3DEEC /* SDL_types.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702E5180302FF00B3DEEC /* SDL_types.h */; };
+		A4C7032E180302FF00B3DEEC /* SDL_version.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702E6180302FF00B3DEEC /* SDL_version.h */; };
+		A4C7032F180302FF00B3DEEC /* SDL_video.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702E7180302FF00B3DEEC /* SDL_video.h */; };
+		A4C70330180302FF00B3DEEC /* SDL.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C702E8180302FF00B3DEEC /* SDL.h */; };
+		A4C7FFBD1803015500B3DEEC /* SDL_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FD981803015400B3DEEC /* SDL_atomic.c */; };
+		A4C7FFBE1803015500B3DEEC /* SDL_spinlock.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FD991803015400B3DEEC /* SDL_spinlock.c */; };
+		A4C7FFC91803015500B3DEEC /* SDL_coreaudio.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDAB1803015400B3DEEC /* SDL_coreaudio.c */; };
+		A4C7FFCA1803015500B3DEEC /* SDL_coreaudio.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDAC1803015400B3DEEC /* SDL_coreaudio.h */; };
+		A4C7FFD21803015500B3DEEC /* SDL_dummyaudio.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDB81803015400B3DEEC /* SDL_dummyaudio.c */; };
+		A4C7FFD31803015500B3DEEC /* SDL_dummyaudio.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDB91803015400B3DEEC /* SDL_dummyaudio.h */; };
+		A4C7FFE21803015500B3DEEC /* SDL_audio.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDCF1803015400B3DEEC /* SDL_audio.c */; };
+		A4C7FFE31803015500B3DEEC /* SDL_audio_c.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDD01803015400B3DEEC /* SDL_audio_c.h */; };
+		A4C7FFE41803015500B3DEEC /* SDL_audiocvt.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDD11803015400B3DEEC /* SDL_audiocvt.c */; };
+		A4C7FFE71803015500B3DEEC /* SDL_audiomem.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDD41803015400B3DEEC /* SDL_audiomem.h */; };
+		A4C7FFE81803015500B3DEEC /* SDL_audiotypecvt.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDD51803015400B3DEEC /* SDL_audiotypecvt.c */; };
+		A4C7FFE91803015500B3DEEC /* SDL_mixer.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDD61803015400B3DEEC /* SDL_mixer.c */; };
+		A4C7FFEA1803015500B3DEEC /* SDL_sysaudio.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDD71803015400B3DEEC /* SDL_sysaudio.h */; };
+		A4C7FFEB1803015500B3DEEC /* SDL_wave.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDD81803015400B3DEEC /* SDL_wave.c */; };
+		A4C7FFEC1803015500B3DEEC /* SDL_wave.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDD91803015400B3DEEC /* SDL_wave.h */; };
+		A4C7FFF81803015500B3DEEC /* SDL_cpuinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDEE1803015400B3DEEC /* SDL_cpuinfo.c */; };
+		A4C7FFF91803015500B3DEEC /* blank_cursor.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDF01803015400B3DEEC /* blank_cursor.h */; };
+		A4C7FFFA1803015500B3DEEC /* default_cursor.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDF11803015400B3DEEC /* default_cursor.h */; };
+		A4C7FFFB1803015500B3DEEC /* scancodes_darwin.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDF21803015400B3DEEC /* scancodes_darwin.h */; };
+		A4C7FFFC1803015500B3DEEC /* scancodes_linux.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDF31803015400B3DEEC /* scancodes_linux.h */; };
+		A4C7FFFD1803015500B3DEEC /* scancodes_windows.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDF41803015400B3DEEC /* scancodes_windows.h */; };
+		A4C7FFFE1803015500B3DEEC /* scancodes_xfree86.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C7FDF51803015400B3DEEC /* scancodes_xfree86.h */; };
+		A4C7FFFF1803015500B3DEEC /* SDL_clipboardevents.c in Sources */ = {isa = PBXBuildFile; fileRef = A4C7FDF61803015400B3DEEC /* SDL_clipboardevents.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A4C702A1180302FE00B3DEEC /* begin_code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = begin_code.h; path = ../include/begin_code.h; sourceTree = "<group>"; };
+		A4C702A2180302FE00B3DEEC /* close_code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = close_code.h; path = ../include/close_code.h; sourceTree = "<group>"; };
+		A4C702A3180302FE00B3DEEC /* SDL_assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_assert.h; path = ../include/SDL_assert.h; sourceTree = "<group>"; };
+		A4C702A4180302FE00B3DEEC /* SDL_atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_atomic.h; path = ../include/SDL_atomic.h; sourceTree = "<group>"; };
+		A4C702A5180302FE00B3DEEC /* SDL_audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_audio.h; path = ../include/SDL_audio.h; sourceTree = "<group>"; };
+		A4C702A6180302FE00B3DEEC /* SDL_bits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_bits.h; path = ../include/SDL_bits.h; sourceTree = "<group>"; };
+		A4C702A7180302FE00B3DEEC /* SDL_blendmode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_blendmode.h; path = ../include/SDL_blendmode.h; sourceTree = "<group>"; };
+		A4C702A8180302FE00B3DEEC /* SDL_clipboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_clipboard.h; path = ../include/SDL_clipboard.h; sourceTree = "<group>"; };
+		A4C702AA180302FE00B3DEEC /* SDL_config_iphoneos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_config_iphoneos.h; path = ../include/SDL_config_iphoneos.h; sourceTree = "<group>"; };
+		A4C702B1180302FE00B3DEEC /* SDL_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_config.h; path = ../include/SDL_config.h; sourceTree = "<group>"; };
+		A4C702B2180302FE00B3DEEC /* SDL_copying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_copying.h; path = ../include/SDL_copying.h; sourceTree = "<group>"; };
+		A4C702B3180302FE00B3DEEC /* SDL_cpuinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_cpuinfo.h; path = ../include/SDL_cpuinfo.h; sourceTree = "<group>"; };
+		A4C702B4180302FE00B3DEEC /* SDL_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_endian.h; path = ../include/SDL_endian.h; sourceTree = "<group>"; };
+		A4C702B5180302FE00B3DEEC /* SDL_error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_error.h; path = ../include/SDL_error.h; sourceTree = "<group>"; };
+		A4C702B6180302FE00B3DEEC /* SDL_events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_events.h; path = ../include/SDL_events.h; sourceTree = "<group>"; };
+		A4C702B7180302FE00B3DEEC /* SDL_gamecontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_gamecontroller.h; path = ../include/SDL_gamecontroller.h; sourceTree = "<group>"; };
+		A4C702B8180302FE00B3DEEC /* SDL_gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_gesture.h; path = ../include/SDL_gesture.h; sourceTree = "<group>"; };
+		A4C702B9180302FE00B3DEEC /* SDL_haptic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_haptic.h; path = ../include/SDL_haptic.h; sourceTree = "<group>"; };
+		A4C702BA180302FE00B3DEEC /* SDL_hints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_hints.h; path = ../include/SDL_hints.h; sourceTree = "<group>"; };
+		A4C702BB180302FE00B3DEEC /* SDL_joystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_joystick.h; path = ../include/SDL_joystick.h; sourceTree = "<group>"; };
+		A4C702BC180302FE00B3DEEC /* SDL_keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_keyboard.h; path = ../include/SDL_keyboard.h; sourceTree = "<group>"; };
+		A4C702BD180302FE00B3DEEC /* SDL_keycode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_keycode.h; path = ../include/SDL_keycode.h; sourceTree = "<group>"; };
+		A4C702BE180302FE00B3DEEC /* SDL_loadso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_loadso.h; path = ../include/SDL_loadso.h; sourceTree = "<group>"; };
+		A4C702BF180302FE00B3DEEC /* SDL_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_log.h; path = ../include/SDL_log.h; sourceTree = "<group>"; };
+		A4C702C0180302FE00B3DEEC /* SDL_main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_main.h; path = ../include/SDL_main.h; sourceTree = "<group>"; };
+		A4C702C1180302FE00B3DEEC /* SDL_messagebox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_messagebox.h; path = ../include/SDL_messagebox.h; sourceTree = "<group>"; };
+		A4C702C2180302FE00B3DEEC /* SDL_mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_mouse.h; path = ../include/SDL_mouse.h; sourceTree = "<group>"; };
+		A4C702C3180302FE00B3DEEC /* SDL_mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_mutex.h; path = ../include/SDL_mutex.h; sourceTree = "<group>"; };
+		A4C702C4180302FE00B3DEEC /* SDL_name.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_name.h; path = ../include/SDL_name.h; sourceTree = "<group>"; };
+		A4C702C5180302FE00B3DEEC /* SDL_opengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_opengl.h; path = ../include/SDL_opengl.h; sourceTree = "<group>"; };
+		A4C702C6180302FE00B3DEEC /* SDL_opengles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_opengles.h; path = ../include/SDL_opengles.h; sourceTree = "<group>"; };
+		A4C702C7180302FE00B3DEEC /* SDL_opengles2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_opengles2.h; path = ../include/SDL_opengles2.h; sourceTree = "<group>"; };
+		A4C702C8180302FE00B3DEEC /* SDL_pixels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_pixels.h; path = ../include/SDL_pixels.h; sourceTree = "<group>"; };
+		A4C702C9180302FE00B3DEEC /* SDL_platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_platform.h; path = ../include/SDL_platform.h; sourceTree = "<group>"; };
+		A4C702CA180302FE00B3DEEC /* SDL_power.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_power.h; path = ../include/SDL_power.h; sourceTree = "<group>"; };
+		A4C702CB180302FE00B3DEEC /* SDL_quit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_quit.h; path = ../include/SDL_quit.h; sourceTree = "<group>"; };
+		A4C702CC180302FE00B3DEEC /* SDL_rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_rect.h; path = ../include/SDL_rect.h; sourceTree = "<group>"; };
+		A4C702CD180302FE00B3DEEC /* SDL_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_render.h; path = ../include/SDL_render.h; sourceTree = "<group>"; };
+		A4C702CE180302FE00B3DEEC /* SDL_revision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_revision.h; path = ../include/SDL_revision.h; sourceTree = "<group>"; };
+		A4C702CF180302FE00B3DEEC /* SDL_rwops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_rwops.h; path = ../include/SDL_rwops.h; sourceTree = "<group>"; };
+		A4C702D0180302FE00B3DEEC /* SDL_scancode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_scancode.h; path = ../include/SDL_scancode.h; sourceTree = "<group>"; };
+		A4C702D1180302FF00B3DEEC /* SDL_shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_shape.h; path = ../include/SDL_shape.h; sourceTree = "<group>"; };
+		A4C702D2180302FF00B3DEEC /* SDL_stdinc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_stdinc.h; path = ../include/SDL_stdinc.h; sourceTree = "<group>"; };
+		A4C702D3180302FF00B3DEEC /* SDL_surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_surface.h; path = ../include/SDL_surface.h; sourceTree = "<group>"; };
+		A4C702D4180302FF00B3DEEC /* SDL_system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_system.h; path = ../include/SDL_system.h; sourceTree = "<group>"; };
+		A4C702D5180302FF00B3DEEC /* SDL_syswm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_syswm.h; path = ../include/SDL_syswm.h; sourceTree = "<group>"; };
+		A4C702D6180302FF00B3DEEC /* SDL_test_assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_assert.h; path = ../include/SDL_test_assert.h; sourceTree = "<group>"; };
+		A4C702D7180302FF00B3DEEC /* SDL_test_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_common.h; path = ../include/SDL_test_common.h; sourceTree = "<group>"; };
+		A4C702D8180302FF00B3DEEC /* SDL_test_compare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_compare.h; path = ../include/SDL_test_compare.h; sourceTree = "<group>"; };
+		A4C702D9180302FF00B3DEEC /* SDL_test_crc32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_crc32.h; path = ../include/SDL_test_crc32.h; sourceTree = "<group>"; };
+		A4C702DA180302FF00B3DEEC /* SDL_test_font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_font.h; path = ../include/SDL_test_font.h; sourceTree = "<group>"; };
+		A4C702DB180302FF00B3DEEC /* SDL_test_fuzzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_fuzzer.h; path = ../include/SDL_test_fuzzer.h; sourceTree = "<group>"; };
+		A4C702DC180302FF00B3DEEC /* SDL_test_harness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_harness.h; path = ../include/SDL_test_harness.h; sourceTree = "<group>"; };
+		A4C702DD180302FF00B3DEEC /* SDL_test_images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_images.h; path = ../include/SDL_test_images.h; sourceTree = "<group>"; };
+		A4C702DE180302FF00B3DEEC /* SDL_test_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_log.h; path = ../include/SDL_test_log.h; sourceTree = "<group>"; };
+		A4C702DF180302FF00B3DEEC /* SDL_test_md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_md5.h; path = ../include/SDL_test_md5.h; sourceTree = "<group>"; };
+		A4C702E0180302FF00B3DEEC /* SDL_test_random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test_random.h; path = ../include/SDL_test_random.h; sourceTree = "<group>"; };
+		A4C702E1180302FF00B3DEEC /* SDL_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_test.h; path = ../include/SDL_test.h; sourceTree = "<group>"; };
+		A4C702E2180302FF00B3DEEC /* SDL_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_thread.h; path = ../include/SDL_thread.h; sourceTree = "<group>"; };
+		A4C702E3180302FF00B3DEEC /* SDL_timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_timer.h; path = ../include/SDL_timer.h; sourceTree = "<group>"; };
+		A4C702E4180302FF00B3DEEC /* SDL_touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_touch.h; path = ../include/SDL_touch.h; sourceTree = "<group>"; };
+		A4C702E5180302FF00B3DEEC /* SDL_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_types.h; path = ../include/SDL_types.h; sourceTree = "<group>"; };
+		A4C702E6180302FF00B3DEEC /* SDL_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_version.h; path = ../include/SDL_version.h; sourceTree = "<group>"; };
+		A4C702E7180302FF00B3DEEC /* SDL_video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_video.h; path = ../include/SDL_video.h; sourceTree = "<group>"; };
+		A4C702E8180302FF00B3DEEC /* SDL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL.h; path = ../include/SDL.h; sourceTree = "<group>"; };
+		A4C7FD981803015400B3DEEC /* SDL_atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_atomic.c; sourceTree = "<group>"; };
+		A4C7FD991803015400B3DEEC /* SDL_spinlock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_spinlock.c; sourceTree = "<group>"; };
+		A4C7FDAB1803015400B3DEEC /* SDL_coreaudio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_coreaudio.c; sourceTree = "<group>"; };
+		A4C7FDAC1803015400B3DEEC /* SDL_coreaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_coreaudio.h; sourceTree = "<group>"; };
+		A4C7FDB81803015400B3DEEC /* SDL_dummyaudio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_dummyaudio.c; sourceTree = "<group>"; };
+		A4C7FDB91803015400B3DEEC /* SDL_dummyaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_dummyaudio.h; sourceTree = "<group>"; };
+		A4C7FDCF1803015400B3DEEC /* SDL_audio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_audio.c; sourceTree = "<group>"; };
+		A4C7FDD01803015400B3DEEC /* SDL_audio_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_audio_c.h; sourceTree = "<group>"; };
+		A4C7FDD11803015400B3DEEC /* SDL_audiocvt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_audiocvt.c; sourceTree = "<group>"; };
+		A4C7FDD41803015400B3DEEC /* SDL_audiomem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_audiomem.h; sourceTree = "<group>"; };
+		A4C7FDD51803015400B3DEEC /* SDL_audiotypecvt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_audiotypecvt.c; sourceTree = "<group>"; };
+		A4C7FDD61803015400B3DEEC /* SDL_mixer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_mixer.c; sourceTree = "<group>"; };
+		A4C7FDD71803015400B3DEEC /* SDL_sysaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_sysaudio.h; sourceTree = "<group>"; };
+		A4C7FDD81803015400B3DEEC /* SDL_wave.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_wave.c; sourceTree = "<group>"; };
+		A4C7FDD91803015400B3DEEC /* SDL_wave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_wave.h; sourceTree = "<group>"; };
+		A4C7FDEE1803015400B3DEEC /* SDL_cpuinfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_cpuinfo.c; sourceTree = "<group>"; };
+		A4C7FDF01803015400B3DEEC /* blank_cursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blank_cursor.h; sourceTree = "<group>"; };
+		A4C7FDF11803015400B3DEEC /* default_cursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = default_cursor.h; sourceTree = "<group>"; };
+		A4C7FDF21803015400B3DEEC /* scancodes_darwin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scancodes_darwin.h; sourceTree = "<group>"; };
+		A4C7FDF31803015400B3DEEC /* scancodes_linux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scancodes_linux.h; sourceTree = "<group>"; };
+		A4C7FDF41803015400B3DEEC /* scancodes_windows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scancodes_windows.h; sourceTree = "<group>"; };
+		A4C7FDF51803015400B3DEEC /* scancodes_xfree86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scancodes_xfree86.h; sourceTree = "<group>"; };
+		A4C7FDF61803015400B3DEEC /* SDL_clipboardevents.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_clipboardevents.c; sourceTree = "<group>"; };
+		A4C7FDF71803015400B3DEEC /* SDL_clipboardevents_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_clipboardevents_c.h; sourceTree = "<group>"; };
+		A4C7FDF81803015400B3DEEC /* SDL_dropevents.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_dropevents.c; sourceTree = "<group>"; };
+		A4C7FDF91803015400B3DEEC /* SDL_dropevents_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_dropevents_c.h; sourceTree = "<group>"; };
+		A4C7FDFA1803015400B3DEEC /* SDL_events.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_events.c; sourceTree = "<group>"; };
+		A4C7FDFB1803015400B3DEEC /* SDL_events_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_events_c.h; sourceTree = "<group>"; };
+		A4C7FDFC1803015400B3DEEC /* SDL_gesture.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_gesture.c; sourceTree = "<group>"; };
+		A4C7FDFD1803015400B3DEEC /* SDL_gesture_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gesture_c.h; sourceTree = "<group>"; };
+		A4C7FDFE1803015400B3DEEC /* SDL_keyboard.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_keyboard.c; sourceTree = "<group>"; };
+		A4C7FDFF1803015400B3DEEC /* SDL_keyboard_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_keyboard_c.h; sourceTree = "<group>"; };
+		A4C7FE001803015400B3DEEC /* SDL_mouse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_mouse.c; sourceTree = "<group>"; };
+		A4C7FE011803015400B3DEEC /* SDL_mouse_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_mouse_c.h; sourceTree = "<group>"; };
+		A4C7FE021803015400B3DEEC /* SDL_quit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_quit.c; sourceTree = "<group>"; };
+		A4C7FE031803015400B3DEEC /* SDL_sysevents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_sysevents.h; sourceTree = "<group>"; };
+		A4C7FE041803015400B3DEEC /* SDL_touch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_touch.c; sourceTree = "<group>"; };
+		A4C7FE051803015400B3DEEC /* SDL_touch_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_touch_c.h; sourceTree = "<group>"; };
+		A4C7FE061803015400B3DEEC /* SDL_windowevents.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_windowevents.c; sourceTree = "<group>"; };
+		A4C7FE071803015400B3DEEC /* SDL_windowevents_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_windowevents_c.h; sourceTree = "<group>"; };
+		A4C7FE0A1803015400B3DEEC /* SDL_rwopsbundlesupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_rwopsbundlesupport.h; sourceTree = "<group>"; };
+		A4C7FE0B1803015400B3DEEC /* SDL_rwopsbundlesupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_rwopsbundlesupport.m; sourceTree = "<group>"; };
+		A4C7FE0C1803015400B3DEEC /* SDL_rwops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_rwops.c; sourceTree = "<group>"; };
+		A4C7FE111803015400B3DEEC /* SDL_syshaptic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_syshaptic.c; sourceTree = "<group>"; };
+		A4C7FE141803015400B3DEEC /* SDL_haptic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_haptic.c; sourceTree = "<group>"; };
+		A4C7FE161803015400B3DEEC /* SDL_syshaptic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_syshaptic.h; sourceTree = "<group>"; };
+		A4C7FE261803015400B3DEEC /* SDL_sysjoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_sysjoystick.m; sourceTree = "<group>"; };
+		A4C7FE271803015400B3DEEC /* SDLUIAccelerationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLUIAccelerationDelegate.h; sourceTree = "<group>"; };
+		A4C7FE281803015400B3DEEC /* SDLUIAccelerationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLUIAccelerationDelegate.m; sourceTree = "<group>"; };
+		A4C7FE2E1803015400B3DEEC /* SDL_gamecontroller.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_gamecontroller.c; sourceTree = "<group>"; };
+		A4C7FE301803015400B3DEEC /* SDL_joystick.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_joystick.c; sourceTree = "<group>"; };
+		A4C7FE311803015400B3DEEC /* SDL_joystick_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_joystick_c.h; sourceTree = "<group>"; };
+		A4C7FE321803015400B3DEEC /* SDL_sysjoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_sysjoystick.h; sourceTree = "<group>"; };
+		A4C7FE4E1803015400B3DEEC /* SDL_sysloadso.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_sysloadso.c; sourceTree = "<group>"; };
+		A4C7FE501803015400B3DEEC /* SDL_sysloadso.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_sysloadso.c; sourceTree = "<group>"; };
+		A4C7FE6C1803015400B3DEEC /* SDL_power.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_power.c; sourceTree = "<group>"; };
+		A4C7FE6E1803015400B3DEEC /* SDL_syspower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_syspower.h; sourceTree = "<group>"; };
+		A4C7FE6F1803015400B3DEEC /* SDL_syspower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_syspower.m; sourceTree = "<group>"; };
+		A4C7FE751803015400B3DEEC /* mmx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmx.h; sourceTree = "<group>"; };
+		A4C7FE7C1803015400B3DEEC /* SDL_glesfuncs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_glesfuncs.h; sourceTree = "<group>"; };
+		A4C7FE7D1803015400B3DEEC /* SDL_render_gles.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_render_gles.c; sourceTree = "<group>"; };
+		A4C7FE7F1803015400B3DEEC /* SDL_gles2funcs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gles2funcs.h; sourceTree = "<group>"; };
+		A4C7FE801803015400B3DEEC /* SDL_render_gles2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_render_gles2.c; sourceTree = "<group>"; };
+		A4C7FE811803015400B3DEEC /* SDL_shaders_gles2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_shaders_gles2.c; sourceTree = "<group>"; };
+		A4C7FE821803015400B3DEEC /* SDL_shaders_gles2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_shaders_gles2.h; sourceTree = "<group>"; };
+		A4C7FE851803015400B3DEEC /* SDL_render.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_render.c; sourceTree = "<group>"; };
+		A4C7FE861803015400B3DEEC /* SDL_sysrender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_sysrender.h; sourceTree = "<group>"; };
+		A4C7FE871803015400B3DEEC /* SDL_yuv_mmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_yuv_mmx.c; sourceTree = "<group>"; };
+		A4C7FE881803015400B3DEEC /* SDL_yuv_sw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_yuv_sw.c; sourceTree = "<group>"; };
+		A4C7FE891803015400B3DEEC /* SDL_yuv_sw_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_yuv_sw_c.h; sourceTree = "<group>"; };
+		A4C7FE8B1803015400B3DEEC /* SDL_blendfillrect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blendfillrect.c; sourceTree = "<group>"; };
+		A4C7FE8C1803015400B3DEEC /* SDL_blendfillrect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_blendfillrect.h; sourceTree = "<group>"; };
+		A4C7FE8D1803015400B3DEEC /* SDL_blendline.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blendline.c; sourceTree = "<group>"; };
+		A4C7FE8E1803015400B3DEEC /* SDL_blendline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_blendline.h; sourceTree = "<group>"; };
+		A4C7FE8F1803015400B3DEEC /* SDL_blendpoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blendpoint.c; sourceTree = "<group>"; };
+		A4C7FE901803015400B3DEEC /* SDL_blendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_blendpoint.h; sourceTree = "<group>"; };
+		A4C7FE911803015400B3DEEC /* SDL_draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_draw.h; sourceTree = "<group>"; };
+		A4C7FE921803015400B3DEEC /* SDL_drawline.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_drawline.c; sourceTree = "<group>"; };
+		A4C7FE931803015400B3DEEC /* SDL_drawline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_drawline.h; sourceTree = "<group>"; };
+		A4C7FE941803015400B3DEEC /* SDL_drawpoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_drawpoint.c; sourceTree = "<group>"; };
+		A4C7FE951803015400B3DEEC /* SDL_drawpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_drawpoint.h; sourceTree = "<group>"; };
+		A4C7FE961803015400B3DEEC /* SDL_render_sw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_render_sw.c; sourceTree = "<group>"; };
+		A4C7FE971803015400B3DEEC /* SDL_render_sw_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_render_sw_c.h; sourceTree = "<group>"; };
+		A4C7FE981803015400B3DEEC /* SDL_rotate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_rotate.c; sourceTree = "<group>"; };
+		A4C7FE991803015400B3DEEC /* SDL_rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_rotate.h; sourceTree = "<group>"; };
+		A4C7FE9A1803015400B3DEEC /* SDL_assert_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_assert_c.h; path = ../src/SDL_assert_c.h; sourceTree = "<group>"; };
+		A4C7FE9B1803015400B3DEEC /* SDL_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_assert.c; path = ../src/SDL_assert.c; sourceTree = "<group>"; };
+		A4C7FE9C1803015400B3DEEC /* SDL_error_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_error_c.h; path = ../src/SDL_error_c.h; sourceTree = "<group>"; };
+		A4C7FE9D1803015400B3DEEC /* SDL_error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_error.c; path = ../src/SDL_error.c; sourceTree = "<group>"; };
+		A4C7FE9E1803015400B3DEEC /* SDL_hints.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_hints.c; path = ../src/SDL_hints.c; sourceTree = "<group>"; };
+		A4C7FE9F1803015400B3DEEC /* SDL_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_log.c; path = ../src/SDL_log.c; sourceTree = "<group>"; };
+		A4C7FEA01803015400B3DEEC /* SDL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL.c; path = ../src/SDL.c; sourceTree = "<group>"; };
+		A4C7FEA21803015400B3DEEC /* SDL_getenv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_getenv.c; sourceTree = "<group>"; };
+		A4C7FEA31803015400B3DEEC /* SDL_iconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_iconv.c; sourceTree = "<group>"; };
+		A4C7FEA41803015400B3DEEC /* SDL_malloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_malloc.c; sourceTree = "<group>"; };
+		A4C7FEA51803015400B3DEEC /* SDL_qsort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_qsort.c; sourceTree = "<group>"; };
+		A4C7FEA61803015400B3DEEC /* SDL_stdlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_stdlib.c; sourceTree = "<group>"; };
+		A4C7FEA71803015400B3DEEC /* SDL_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_string.c; sourceTree = "<group>"; };
+		A4C7FECE1803015400B3DEEC /* SDL_syscond.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_syscond.c; sourceTree = "<group>"; };
+		A4C7FECF1803015400B3DEEC /* SDL_sysmutex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_sysmutex.c; sourceTree = "<group>"; };
+		A4C7FED01803015400B3DEEC /* SDL_sysmutex_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_sysmutex_c.h; sourceTree = "<group>"; };
+		A4C7FED11803015400B3DEEC /* SDL_syssem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_syssem.c; sourceTree = "<group>"; };
+		A4C7FED21803015400B3DEEC /* SDL_systhread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_systhread.c; sourceTree = "<group>"; };
+		A4C7FED31803015400B3DEEC /* SDL_systhread_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_systhread_c.h; sourceTree = "<group>"; };
+		A4C7FED41803015400B3DEEC /* SDL_systls.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_systls.c; sourceTree = "<group>"; };
+		A4C7FED51803015400B3DEEC /* SDL_systhread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_systhread.h; sourceTree = "<group>"; };
+		A4C7FED61803015400B3DEEC /* SDL_thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_thread.c; sourceTree = "<group>"; };
+		A4C7FED71803015400B3DEEC /* SDL_thread_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_thread_c.h; sourceTree = "<group>"; };
+		A4C7FEE51803015400B3DEEC /* SDL_timer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_timer.c; sourceTree = "<group>"; };
+		A4C7FEE61803015400B3DEEC /* SDL_timer_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_timer_c.h; sourceTree = "<group>"; };
+		A4C7FEE81803015400B3DEEC /* SDL_systimer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_systimer.c; sourceTree = "<group>"; };
+		A4C7FF391803015500B3DEEC /* SDL_nullevents.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_nullevents.c; sourceTree = "<group>"; };
+		A4C7FF3A1803015500B3DEEC /* SDL_nullevents_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_nullevents_c.h; sourceTree = "<group>"; };
+		A4C7FF3B1803015500B3DEEC /* SDL_nullframebuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_nullframebuffer.c; sourceTree = "<group>"; };
+		A4C7FF3C1803015500B3DEEC /* SDL_nullframebuffer_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_nullframebuffer_c.h; sourceTree = "<group>"; };
+		A4C7FF3D1803015500B3DEEC /* SDL_nullvideo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_nullvideo.c; sourceTree = "<group>"; };
+		A4C7FF3E1803015500B3DEEC /* SDL_nullvideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_nullvideo.h; sourceTree = "<group>"; };
+		A4C7FF4D1803015500B3DEEC /* SDL_blit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blit.c; sourceTree = "<group>"; };
+		A4C7FF4E1803015500B3DEEC /* SDL_blit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_blit.h; sourceTree = "<group>"; };
+		A4C7FF4F1803015500B3DEEC /* SDL_blit_0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blit_0.c; sourceTree = "<group>"; };
+		A4C7FF501803015500B3DEEC /* SDL_blit_1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blit_1.c; sourceTree = "<group>"; };
+		A4C7FF511803015500B3DEEC /* SDL_blit_A.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blit_A.c; sourceTree = "<group>"; };
+		A4C7FF521803015500B3DEEC /* SDL_blit_auto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blit_auto.c; sourceTree = "<group>"; };
+		A4C7FF531803015500B3DEEC /* SDL_blit_auto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_blit_auto.h; sourceTree = "<group>"; };
+		A4C7FF541803015500B3DEEC /* SDL_blit_copy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blit_copy.c; sourceTree = "<group>"; };
+		A4C7FF551803015500B3DEEC /* SDL_blit_copy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_blit_copy.h; sourceTree = "<group>"; };
+		A4C7FF561803015500B3DEEC /* SDL_blit_N.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blit_N.c; sourceTree = "<group>"; };
+		A4C7FF571803015500B3DEEC /* SDL_blit_slow.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_blit_slow.c; sourceTree = "<group>"; };
+		A4C7FF581803015500B3DEEC /* SDL_blit_slow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_blit_slow.h; sourceTree = "<group>"; };
+		A4C7FF591803015500B3DEEC /* SDL_bmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_bmp.c; sourceTree = "<group>"; };
+		A4C7FF5A1803015500B3DEEC /* SDL_clipboard.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_clipboard.c; sourceTree = "<group>"; };
+		A4C7FF5B1803015500B3DEEC /* SDL_fillrect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_fillrect.c; sourceTree = "<group>"; };
+		A4C7FF5C1803015500B3DEEC /* SDL_pixels.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_pixels.c; sourceTree = "<group>"; };
+		A4C7FF5D1803015500B3DEEC /* SDL_pixels_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_pixels_c.h; sourceTree = "<group>"; };
+		A4C7FF5E1803015500B3DEEC /* SDL_rect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_rect.c; sourceTree = "<group>"; };
+		A4C7FF5F1803015500B3DEEC /* SDL_rect_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_rect_c.h; sourceTree = "<group>"; };
+		A4C7FF601803015500B3DEEC /* SDL_RLEaccel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_RLEaccel.c; sourceTree = "<group>"; };
+		A4C7FF611803015500B3DEEC /* SDL_RLEaccel_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_RLEaccel_c.h; sourceTree = "<group>"; };
+		A4C7FF621803015500B3DEEC /* SDL_shape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_shape.c; sourceTree = "<group>"; };
+		A4C7FF631803015500B3DEEC /* SDL_shape_internals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_shape_internals.h; sourceTree = "<group>"; };
+		A4C7FF641803015500B3DEEC /* SDL_stretch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_stretch.c; sourceTree = "<group>"; };
+		A4C7FF651803015500B3DEEC /* SDL_surface.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_surface.c; sourceTree = "<group>"; };
+		A4C7FF661803015500B3DEEC /* SDL_sysvideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_sysvideo.h; sourceTree = "<group>"; };
+		A4C7FF671803015500B3DEEC /* SDL_video.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_video.c; sourceTree = "<group>"; };
+		A4C7FF6A1803015500B3DEEC /* keyinfotable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyinfotable.h; sourceTree = "<group>"; };
+		A4C7FF6B1803015500B3DEEC /* SDL_uikitappdelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitappdelegate.h; sourceTree = "<group>"; };
+		A4C7FF6C1803015500B3DEEC /* SDL_uikitappdelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitappdelegate.m; sourceTree = "<group>"; };
+		A4C7FF6D1803015500B3DEEC /* SDL_uikitevents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitevents.h; sourceTree = "<group>"; };
+		A4C7FF6E1803015500B3DEEC /* SDL_uikitevents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitevents.m; sourceTree = "<group>"; };
+		A4C7FF6F1803015500B3DEEC /* SDL_uikitmessagebox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitmessagebox.h; sourceTree = "<group>"; };
+		A4C7FF701803015500B3DEEC /* SDL_uikitmessagebox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitmessagebox.m; sourceTree = "<group>"; };
+		A4C7FF711803015500B3DEEC /* SDL_uikitmodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitmodes.h; sourceTree = "<group>"; };
+		A4C7FF721803015500B3DEEC /* SDL_uikitmodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitmodes.m; sourceTree = "<group>"; };
+		A4C7FF731803015500B3DEEC /* SDL_uikitopengles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitopengles.h; sourceTree = "<group>"; };
+		A4C7FF741803015500B3DEEC /* SDL_uikitopengles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitopengles.m; sourceTree = "<group>"; };
+		A4C7FF751803015500B3DEEC /* SDL_uikitopenglview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitopenglview.h; sourceTree = "<group>"; };
+		A4C7FF761803015500B3DEEC /* SDL_uikitopenglview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitopenglview.m; sourceTree = "<group>"; };
+		A4C7FF771803015500B3DEEC /* SDL_uikitvideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitvideo.h; sourceTree = "<group>"; };
+		A4C7FF781803015500B3DEEC /* SDL_uikitvideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitvideo.m; sourceTree = "<group>"; };
+		A4C7FF791803015500B3DEEC /* SDL_uikitview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitview.h; sourceTree = "<group>"; };
+		A4C7FF7A1803015500B3DEEC /* SDL_uikitview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitview.m; sourceTree = "<group>"; };
+		A4C7FF7B1803015500B3DEEC /* SDL_uikitviewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitviewcontroller.h; sourceTree = "<group>"; };
+		A4C7FF7C1803015500B3DEEC /* SDL_uikitviewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitviewcontroller.m; sourceTree = "<group>"; };
+		A4C7FF7D1803015500B3DEEC /* SDL_uikitwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitwindow.h; sourceTree = "<group>"; };
+		A4C7FF7E1803015500B3DEEC /* SDL_uikitwindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitwindow.m; sourceTree = "<group>"; };
+		FD6526630DE8FCCB002AD96B /* libsdl-2.02.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libsdl-2.02.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD6526630DE8FCCB002AD96B /* libsdl-2.02.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				A4C702A0180302EC00B3DEEC /* Headers */,
+				FD99B8BD0DD52E6D00FB1D6B /* Source */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		A4C702A0180302EC00B3DEEC /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				A4C702A1180302FE00B3DEEC /* begin_code.h */,
+				A4C702A2180302FE00B3DEEC /* close_code.h */,
+				A4C702A3180302FE00B3DEEC /* SDL_assert.h */,
+				A4C702A4180302FE00B3DEEC /* SDL_atomic.h */,
+				A4C702A5180302FE00B3DEEC /* SDL_audio.h */,
+				A4C702A6180302FE00B3DEEC /* SDL_bits.h */,
+				A4C702A7180302FE00B3DEEC /* SDL_blendmode.h */,
+				A4C702A8180302FE00B3DEEC /* SDL_clipboard.h */,
+				A4C702AA180302FE00B3DEEC /* SDL_config_iphoneos.h */,
+				A4C702B1180302FE00B3DEEC /* SDL_config.h */,
+				A4C702B2180302FE00B3DEEC /* SDL_copying.h */,
+				A4C702B3180302FE00B3DEEC /* SDL_cpuinfo.h */,
+				A4C702B4180302FE00B3DEEC /* SDL_endian.h */,
+				A4C702B5180302FE00B3DEEC /* SDL_error.h */,
+				A4C702B6180302FE00B3DEEC /* SDL_events.h */,
+				A4C702B7180302FE00B3DEEC /* SDL_gamecontroller.h */,
+				A4C702B8180302FE00B3DEEC /* SDL_gesture.h */,
+				A4C702B9180302FE00B3DEEC /* SDL_haptic.h */,
+				A4C702BA180302FE00B3DEEC /* SDL_hints.h */,
+				A4C702BB180302FE00B3DEEC /* SDL_joystick.h */,
+				A4C702BC180302FE00B3DEEC /* SDL_keyboard.h */,
+				A4C702BD180302FE00B3DEEC /* SDL_keycode.h */,
+				A4C702BE180302FE00B3DEEC /* SDL_loadso.h */,
+				A4C702BF180302FE00B3DEEC /* SDL_log.h */,
+				A4C702C0180302FE00B3DEEC /* SDL_main.h */,
+				A4C702C1180302FE00B3DEEC /* SDL_messagebox.h */,
+				A4C702C2180302FE00B3DEEC /* SDL_mouse.h */,
+				A4C702C3180302FE00B3DEEC /* SDL_mutex.h */,
+				A4C702C4180302FE00B3DEEC /* SDL_name.h */,
+				A4C702C5180302FE00B3DEEC /* SDL_opengl.h */,
+				A4C702C6180302FE00B3DEEC /* SDL_opengles.h */,
+				A4C702C7180302FE00B3DEEC /* SDL_opengles2.h */,
+				A4C702C8180302FE00B3DEEC /* SDL_pixels.h */,
+				A4C702C9180302FE00B3DEEC /* SDL_platform.h */,
+				A4C702CA180302FE00B3DEEC /* SDL_power.h */,
+				A4C702CB180302FE00B3DEEC /* SDL_quit.h */,
+				A4C702CC180302FE00B3DEEC /* SDL_rect.h */,
+				A4C702CD180302FE00B3DEEC /* SDL_render.h */,
+				A4C702CE180302FE00B3DEEC /* SDL_revision.h */,
+				A4C702CF180302FE00B3DEEC /* SDL_rwops.h */,
+				A4C702D0180302FE00B3DEEC /* SDL_scancode.h */,
+				A4C702D1180302FF00B3DEEC /* SDL_shape.h */,
+				A4C702D2180302FF00B3DEEC /* SDL_stdinc.h */,
+				A4C702D3180302FF00B3DEEC /* SDL_surface.h */,
+				A4C702D4180302FF00B3DEEC /* SDL_system.h */,
+				A4C702D5180302FF00B3DEEC /* SDL_syswm.h */,
+				A4C702D6180302FF00B3DEEC /* SDL_test_assert.h */,
+				A4C702D7180302FF00B3DEEC /* SDL_test_common.h */,
+				A4C702D8180302FF00B3DEEC /* SDL_test_compare.h */,
+				A4C702D9180302FF00B3DEEC /* SDL_test_crc32.h */,
+				A4C702DA180302FF00B3DEEC /* SDL_test_font.h */,
+				A4C702DB180302FF00B3DEEC /* SDL_test_fuzzer.h */,
+				A4C702DC180302FF00B3DEEC /* SDL_test_harness.h */,
+				A4C702DD180302FF00B3DEEC /* SDL_test_images.h */,
+				A4C702DE180302FF00B3DEEC /* SDL_test_log.h */,
+				A4C702DF180302FF00B3DEEC /* SDL_test_md5.h */,
+				A4C702E0180302FF00B3DEEC /* SDL_test_random.h */,
+				A4C702E1180302FF00B3DEEC /* SDL_test.h */,
+				A4C702E2180302FF00B3DEEC /* SDL_thread.h */,
+				A4C702E3180302FF00B3DEEC /* SDL_timer.h */,
+				A4C702E4180302FF00B3DEEC /* SDL_touch.h */,
+				A4C702E5180302FF00B3DEEC /* SDL_types.h */,
+				A4C702E6180302FF00B3DEEC /* SDL_version.h */,
+				A4C702E7180302FF00B3DEEC /* SDL_video.h */,
+				A4C702E8180302FF00B3DEEC /* SDL.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		A4C7FD971803015400B3DEEC /* atomic */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FD981803015400B3DEEC /* SDL_atomic.c */,
+				A4C7FD991803015400B3DEEC /* SDL_spinlock.c */,
+			);
+			name = atomic;
+			path = ../src/atomic;
+			sourceTree = "<group>";
+		};
+		A4C7FD9A1803015400B3DEEC /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FDAA1803015400B3DEEC /* coreaudio */,
+				A4C7FDB71803015400B3DEEC /* dummy */,
+				A4C7FDCF1803015400B3DEEC /* SDL_audio.c */,
+				A4C7FDD01803015400B3DEEC /* SDL_audio_c.h */,
+				A4C7FDD11803015400B3DEEC /* SDL_audiocvt.c */,
+				A4C7FDD41803015400B3DEEC /* SDL_audiomem.h */,
+				A4C7FDD51803015400B3DEEC /* SDL_audiotypecvt.c */,
+				A4C7FDD61803015400B3DEEC /* SDL_mixer.c */,
+				A4C7FDD71803015400B3DEEC /* SDL_sysaudio.h */,
+				A4C7FDD81803015400B3DEEC /* SDL_wave.c */,
+				A4C7FDD91803015400B3DEEC /* SDL_wave.h */,
+			);
+			name = audio;
+			path = ../src/audio;
+			sourceTree = "<group>";
+		};
+		A4C7FDAA1803015400B3DEEC /* coreaudio */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FDAB1803015400B3DEEC /* SDL_coreaudio.c */,
+				A4C7FDAC1803015400B3DEEC /* SDL_coreaudio.h */,
+			);
+			path = coreaudio;
+			sourceTree = "<group>";
+		};
+		A4C7FDB71803015400B3DEEC /* dummy */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FDB81803015400B3DEEC /* SDL_dummyaudio.c */,
+				A4C7FDB91803015400B3DEEC /* SDL_dummyaudio.h */,
+			);
+			path = dummy;
+			sourceTree = "<group>";
+		};
+		A4C7FDED1803015400B3DEEC /* cpuinfo */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FDEE1803015400B3DEEC /* SDL_cpuinfo.c */,
+			);
+			name = cpuinfo;
+			path = ../src/cpuinfo;
+			sourceTree = "<group>";
+		};
+		A4C7FDEF1803015400B3DEEC /* events */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FDF01803015400B3DEEC /* blank_cursor.h */,
+				A4C7FDF11803015400B3DEEC /* default_cursor.h */,
+				A4C7FDF21803015400B3DEEC /* scancodes_darwin.h */,
+				A4C7FDF31803015400B3DEEC /* scancodes_linux.h */,
+				A4C7FDF41803015400B3DEEC /* scancodes_windows.h */,
+				A4C7FDF51803015400B3DEEC /* scancodes_xfree86.h */,
+				A4C7FDF61803015400B3DEEC /* SDL_clipboardevents.c */,
+				A4C7FDF71803015400B3DEEC /* SDL_clipboardevents_c.h */,
+				A4C7FDF81803015400B3DEEC /* SDL_dropevents.c */,
+				A4C7FDF91803015400B3DEEC /* SDL_dropevents_c.h */,
+				A4C7FDFA1803015400B3DEEC /* SDL_events.c */,
+				A4C7FDFB1803015400B3DEEC /* SDL_events_c.h */,
+				A4C7FDFC1803015400B3DEEC /* SDL_gesture.c */,
+				A4C7FDFD1803015400B3DEEC /* SDL_gesture_c.h */,
+				A4C7FDFE1803015400B3DEEC /* SDL_keyboard.c */,
+				A4C7FDFF1803015400B3DEEC /* SDL_keyboard_c.h */,
+				A4C7FE001803015400B3DEEC /* SDL_mouse.c */,
+				A4C7FE011803015400B3DEEC /* SDL_mouse_c.h */,
+				A4C7FE021803015400B3DEEC /* SDL_quit.c */,
+				A4C7FE031803015400B3DEEC /* SDL_sysevents.h */,
+				A4C7FE041803015400B3DEEC /* SDL_touch.c */,
+				A4C7FE051803015400B3DEEC /* SDL_touch_c.h */,
+				A4C7FE061803015400B3DEEC /* SDL_windowevents.c */,
+				A4C7FE071803015400B3DEEC /* SDL_windowevents_c.h */,
+			);
+			name = events;
+			path = ../src/events;
+			sourceTree = "<group>";
+		};
+		A4C7FE081803015400B3DEEC /* file */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE091803015400B3DEEC /* cocoa */,
+				A4C7FE0C1803015400B3DEEC /* SDL_rwops.c */,
+			);
+			name = file;
+			path = ../src/file;
+			sourceTree = "<group>";
+		};
+		A4C7FE091803015400B3DEEC /* cocoa */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE0A1803015400B3DEEC /* SDL_rwopsbundlesupport.h */,
+				A4C7FE0B1803015400B3DEEC /* SDL_rwopsbundlesupport.m */,
+			);
+			path = cocoa;
+			sourceTree = "<group>";
+		};
+		A4C7FE0D1803015400B3DEEC /* haptic */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE101803015400B3DEEC /* dummy */,
+				A4C7FE141803015400B3DEEC /* SDL_haptic.c */,
+				A4C7FE161803015400B3DEEC /* SDL_syshaptic.h */,
+			);
+			name = haptic;
+			path = ../src/haptic;
+			sourceTree = "<group>";
+		};
+		A4C7FE101803015400B3DEEC /* dummy */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE111803015400B3DEEC /* SDL_syshaptic.c */,
+			);
+			path = dummy;
+			sourceTree = "<group>";
+		};
+		A4C7FE191803015400B3DEEC /* joystick */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE251803015400B3DEEC /* iphoneos */,
+				A4C7FE2E1803015400B3DEEC /* SDL_gamecontroller.c */,
+				A4C7FE301803015400B3DEEC /* SDL_joystick.c */,
+				A4C7FE311803015400B3DEEC /* SDL_joystick_c.h */,
+				A4C7FE321803015400B3DEEC /* SDL_sysjoystick.h */,
+			);
+			name = joystick;
+			path = ../src/joystick;
+			sourceTree = "<group>";
+		};
+		A4C7FE251803015400B3DEEC /* iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE261803015400B3DEEC /* SDL_sysjoystick.m */,
+				A4C7FE271803015400B3DEEC /* SDLUIAccelerationDelegate.h */,
+				A4C7FE281803015400B3DEEC /* SDLUIAccelerationDelegate.m */,
+			);
+			path = iphoneos;
+			sourceTree = "<group>";
+		};
+		A4C7FE4A1803015400B3DEEC /* loadso */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE4D1803015400B3DEEC /* dlopen */,
+				A4C7FE4F1803015400B3DEEC /* dummy */,
+			);
+			name = loadso;
+			path = ../src/loadso;
+			sourceTree = "<group>";
+		};
+		A4C7FE4D1803015400B3DEEC /* dlopen */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE4E1803015400B3DEEC /* SDL_sysloadso.c */,
+			);
+			path = dlopen;
+			sourceTree = "<group>";
+		};
+		A4C7FE4F1803015400B3DEEC /* dummy */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE501803015400B3DEEC /* SDL_sysloadso.c */,
+			);
+			path = dummy;
+			sourceTree = "<group>";
+		};
+		A4C7FE611803015400B3DEEC /* power */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE6C1803015400B3DEEC /* SDL_power.c */,
+				A4C7FE6D1803015400B3DEEC /* uikit */,
+			);
+			name = power;
+			path = ../src/power;
+			sourceTree = "<group>";
+		};
+		A4C7FE6D1803015400B3DEEC /* uikit */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE6E1803015400B3DEEC /* SDL_syspower.h */,
+				A4C7FE6F1803015400B3DEEC /* SDL_syspower.m */,
+			);
+			path = uikit;
+			sourceTree = "<group>";
+		};
+		A4C7FE721803015400B3DEEC /* render */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE751803015400B3DEEC /* mmx.h */,
+				A4C7FE7B1803015400B3DEEC /* opengles */,
+				A4C7FE7E1803015400B3DEEC /* opengles2 */,
+				A4C7FE851803015400B3DEEC /* SDL_render.c */,
+				A4C7FE861803015400B3DEEC /* SDL_sysrender.h */,
+				A4C7FE871803015400B3DEEC /* SDL_yuv_mmx.c */,
+				A4C7FE881803015400B3DEEC /* SDL_yuv_sw.c */,
+				A4C7FE891803015400B3DEEC /* SDL_yuv_sw_c.h */,
+				A4C7FE8A1803015400B3DEEC /* software */,
+			);
+			name = render;
+			path = ../src/render;
+			sourceTree = "<group>";
+		};
+		A4C7FE7B1803015400B3DEEC /* opengles */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE7C1803015400B3DEEC /* SDL_glesfuncs.h */,
+				A4C7FE7D1803015400B3DEEC /* SDL_render_gles.c */,
+			);
+			path = opengles;
+			sourceTree = "<group>";
+		};
+		A4C7FE7E1803015400B3DEEC /* opengles2 */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE7F1803015400B3DEEC /* SDL_gles2funcs.h */,
+				A4C7FE801803015400B3DEEC /* SDL_render_gles2.c */,
+				A4C7FE811803015400B3DEEC /* SDL_shaders_gles2.c */,
+				A4C7FE821803015400B3DEEC /* SDL_shaders_gles2.h */,
+			);
+			path = opengles2;
+			sourceTree = "<group>";
+		};
+		A4C7FE8A1803015400B3DEEC /* software */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FE8B1803015400B3DEEC /* SDL_blendfillrect.c */,
+				A4C7FE8C1803015400B3DEEC /* SDL_blendfillrect.h */,
+				A4C7FE8D1803015400B3DEEC /* SDL_blendline.c */,
+				A4C7FE8E1803015400B3DEEC /* SDL_blendline.h */,
+				A4C7FE8F1803015400B3DEEC /* SDL_blendpoint.c */,
+				A4C7FE901803015400B3DEEC /* SDL_blendpoint.h */,
+				A4C7FE911803015400B3DEEC /* SDL_draw.h */,
+				A4C7FE921803015400B3DEEC /* SDL_drawline.c */,
+				A4C7FE931803015400B3DEEC /* SDL_drawline.h */,
+				A4C7FE941803015400B3DEEC /* SDL_drawpoint.c */,
+				A4C7FE951803015400B3DEEC /* SDL_drawpoint.h */,
+				A4C7FE961803015400B3DEEC /* SDL_render_sw.c */,
+				A4C7FE971803015400B3DEEC /* SDL_render_sw_c.h */,
+				A4C7FE981803015400B3DEEC /* SDL_rotate.c */,
+				A4C7FE991803015400B3DEEC /* SDL_rotate.h */,
+			);
+			path = software;
+			sourceTree = "<group>";
+		};
+		A4C7FEA11803015400B3DEEC /* stdlib */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FEA21803015400B3DEEC /* SDL_getenv.c */,
+				A4C7FEA31803015400B3DEEC /* SDL_iconv.c */,
+				A4C7FEA41803015400B3DEEC /* SDL_malloc.c */,
+				A4C7FEA51803015400B3DEEC /* SDL_qsort.c */,
+				A4C7FEA61803015400B3DEEC /* SDL_stdlib.c */,
+				A4C7FEA71803015400B3DEEC /* SDL_string.c */,
+			);
+			name = stdlib;
+			path = ../src/stdlib;
+			sourceTree = "<group>";
+		};
+		A4C7FEB81803015400B3DEEC /* thread */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FECD1803015400B3DEEC /* pthread */,
+				A4C7FED51803015400B3DEEC /* SDL_systhread.h */,
+				A4C7FED61803015400B3DEEC /* SDL_thread.c */,
+				A4C7FED71803015400B3DEEC /* SDL_thread_c.h */,
+			);
+			name = thread;
+			path = ../src/thread;
+			sourceTree = "<group>";
+		};
+		A4C7FECD1803015400B3DEEC /* pthread */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FECE1803015400B3DEEC /* SDL_syscond.c */,
+				A4C7FECF1803015400B3DEEC /* SDL_sysmutex.c */,
+				A4C7FED01803015400B3DEEC /* SDL_sysmutex_c.h */,
+				A4C7FED11803015400B3DEEC /* SDL_syssem.c */,
+				A4C7FED21803015400B3DEEC /* SDL_systhread.c */,
+				A4C7FED31803015400B3DEEC /* SDL_systhread_c.h */,
+				A4C7FED41803015400B3DEEC /* SDL_systls.c */,
+			);
+			path = pthread;
+			sourceTree = "<group>";
+		};
+		A4C7FEDE1803015400B3DEEC /* timer */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FEE51803015400B3DEEC /* SDL_timer.c */,
+				A4C7FEE61803015400B3DEEC /* SDL_timer_c.h */,
+				A4C7FEE71803015400B3DEEC /* unix */,
+			);
+			name = timer;
+			path = ../src/timer;
+			sourceTree = "<group>";
+		};
+		A4C7FEE71803015400B3DEEC /* unix */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FEE81803015400B3DEEC /* SDL_systimer.c */,
+			);
+			path = unix;
+			sourceTree = "<group>";
+		};
+		A4C7FEEB1803015400B3DEEC /* video */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FF381803015500B3DEEC /* dummy */,
+				A4C7FF4D1803015500B3DEEC /* SDL_blit.c */,
+				A4C7FF4E1803015500B3DEEC /* SDL_blit.h */,
+				A4C7FF4F1803015500B3DEEC /* SDL_blit_0.c */,
+				A4C7FF501803015500B3DEEC /* SDL_blit_1.c */,
+				A4C7FF511803015500B3DEEC /* SDL_blit_A.c */,
+				A4C7FF521803015500B3DEEC /* SDL_blit_auto.c */,
+				A4C7FF531803015500B3DEEC /* SDL_blit_auto.h */,
+				A4C7FF541803015500B3DEEC /* SDL_blit_copy.c */,
+				A4C7FF551803015500B3DEEC /* SDL_blit_copy.h */,
+				A4C7FF561803015500B3DEEC /* SDL_blit_N.c */,
+				A4C7FF571803015500B3DEEC /* SDL_blit_slow.c */,
+				A4C7FF581803015500B3DEEC /* SDL_blit_slow.h */,
+				A4C7FF591803015500B3DEEC /* SDL_bmp.c */,
+				A4C7FF5A1803015500B3DEEC /* SDL_clipboard.c */,
+				A4C7FF5B1803015500B3DEEC /* SDL_fillrect.c */,
+				A4C7FF5C1803015500B3DEEC /* SDL_pixels.c */,
+				A4C7FF5D1803015500B3DEEC /* SDL_pixels_c.h */,
+				A4C7FF5E1803015500B3DEEC /* SDL_rect.c */,
+				A4C7FF5F1803015500B3DEEC /* SDL_rect_c.h */,
+				A4C7FF601803015500B3DEEC /* SDL_RLEaccel.c */,
+				A4C7FF611803015500B3DEEC /* SDL_RLEaccel_c.h */,
+				A4C7FF621803015500B3DEEC /* SDL_shape.c */,
+				A4C7FF631803015500B3DEEC /* SDL_shape_internals.h */,
+				A4C7FF641803015500B3DEEC /* SDL_stretch.c */,
+				A4C7FF651803015500B3DEEC /* SDL_surface.c */,
+				A4C7FF661803015500B3DEEC /* SDL_sysvideo.h */,
+				A4C7FF671803015500B3DEEC /* SDL_video.c */,
+				A4C7FF691803015500B3DEEC /* uikit */,
+			);
+			name = video;
+			path = ../src/video;
+			sourceTree = "<group>";
+		};
+		A4C7FF381803015500B3DEEC /* dummy */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FF391803015500B3DEEC /* SDL_nullevents.c */,
+				A4C7FF3A1803015500B3DEEC /* SDL_nullevents_c.h */,
+				A4C7FF3B1803015500B3DEEC /* SDL_nullframebuffer.c */,
+				A4C7FF3C1803015500B3DEEC /* SDL_nullframebuffer_c.h */,
+				A4C7FF3D1803015500B3DEEC /* SDL_nullvideo.c */,
+				A4C7FF3E1803015500B3DEEC /* SDL_nullvideo.h */,
+			);
+			path = dummy;
+			sourceTree = "<group>";
+		};
+		A4C7FF691803015500B3DEEC /* uikit */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FF6A1803015500B3DEEC /* keyinfotable.h */,
+				A4C7FF6B1803015500B3DEEC /* SDL_uikitappdelegate.h */,
+				A4C7FF6C1803015500B3DEEC /* SDL_uikitappdelegate.m */,
+				A4C7FF6D1803015500B3DEEC /* SDL_uikitevents.h */,
+				A4C7FF6E1803015500B3DEEC /* SDL_uikitevents.m */,
+				A4C7FF6F1803015500B3DEEC /* SDL_uikitmessagebox.h */,
+				A4C7FF701803015500B3DEEC /* SDL_uikitmessagebox.m */,
+				A4C7FF711803015500B3DEEC /* SDL_uikitmodes.h */,
+				A4C7FF721803015500B3DEEC /* SDL_uikitmodes.m */,
+				A4C7FF731803015500B3DEEC /* SDL_uikitopengles.h */,
+				A4C7FF741803015500B3DEEC /* SDL_uikitopengles.m */,
+				A4C7FF751803015500B3DEEC /* SDL_uikitopenglview.h */,
+				A4C7FF761803015500B3DEEC /* SDL_uikitopenglview.m */,
+				A4C7FF771803015500B3DEEC /* SDL_uikitvideo.h */,
+				A4C7FF781803015500B3DEEC /* SDL_uikitvideo.m */,
+				A4C7FF791803015500B3DEEC /* SDL_uikitview.h */,
+				A4C7FF7A1803015500B3DEEC /* SDL_uikitview.m */,
+				A4C7FF7B1803015500B3DEEC /* SDL_uikitviewcontroller.h */,
+				A4C7FF7C1803015500B3DEEC /* SDL_uikitviewcontroller.m */,
+				A4C7FF7D1803015500B3DEEC /* SDL_uikitwindow.h */,
+				A4C7FF7E1803015500B3DEEC /* SDL_uikitwindow.m */,
+			);
+			path = uikit;
+			sourceTree = "<group>";
+		};
+		FD99B8BD0DD52E6D00FB1D6B /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7FD971803015400B3DEEC /* atomic */,
+				A4C7FD9A1803015400B3DEEC /* audio */,
+				A4C7FDED1803015400B3DEEC /* cpuinfo */,
+				A4C7FDEF1803015400B3DEEC /* events */,
+				A4C7FE081803015400B3DEEC /* file */,
+				A4C7FE0D1803015400B3DEEC /* haptic */,
+				A4C7FE191803015400B3DEEC /* joystick */,
+				A4C7FE4A1803015400B3DEEC /* loadso */,
+				A4C7FE611803015400B3DEEC /* power */,
+				A4C7FE721803015400B3DEEC /* render */,
+				A4C7FE9A1803015400B3DEEC /* SDL_assert_c.h */,
+				A4C7FE9B1803015400B3DEEC /* SDL_assert.c */,
+				A4C7FE9C1803015400B3DEEC /* SDL_error_c.h */,
+				A4C7FE9D1803015400B3DEEC /* SDL_error.c */,
+				A4C7FE9E1803015400B3DEEC /* SDL_hints.c */,
+				A4C7FE9F1803015400B3DEEC /* SDL_log.c */,
+				A4C7FEA01803015400B3DEEC /* SDL.c */,
+				A4C7FEA11803015400B3DEEC /* stdlib */,
+				A4C7FEB81803015400B3DEEC /* thread */,
+				A4C7FEDE1803015400B3DEEC /* timer */,
+				A4C7FEEB1803015400B3DEEC /* video */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FD65265F0DE8FCCB002AD96B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4C7FFE71803015500B3DEEC /* SDL_audiomem.h in Headers */,
+				A4C7FFFA1803015500B3DEEC /* default_cursor.h in Headers */,
+				A4C701261803015500B3DEEC /* SDL_RLEaccel_c.h in Headers */,
+				A4C701011803015500B3DEEC /* SDL_nullevents_c.h in Headers */,
+				A4C700621803015500B3DEEC /* SDL_sysrender.h in Headers */,
+				A4C70303180302FF00B3DEEC /* SDL_joystick.h in Headers */,
+				A4C701401803015500B3DEEC /* SDL_uikitwindow.h in Headers */,
+				A4C7013A1803015500B3DEEC /* SDL_uikitvideo.h in Headers */,
+				A4C7FFFC1803015500B3DEEC /* scancodes_linux.h in Headers */,
+				A4C70306180302FF00B3DEEC /* SDL_loadso.h in Headers */,
+				A4C702FC180302FF00B3DEEC /* SDL_endian.h in Headers */,
+				A4C702EB180302FF00B3DEEC /* SDL_assert.h in Headers */,
+				A4C7031B180302FF00B3DEEC /* SDL_surface.h in Headers */,
+				A4C700B51803015500B3DEEC /* SDL_timer_c.h in Headers */,
+				A4C701031803015500B3DEEC /* SDL_nullframebuffer_c.h in Headers */,
+				A4C7006C1803015500B3DEEC /* SDL_draw.h in Headers */,
+				A4C7000C1803015500B3DEEC /* SDL_sysevents.h in Headers */,
+				A4C701181803015500B3DEEC /* SDL_blit_auto.h in Headers */,
+				A4C7011A1803015500B3DEEC /* SDL_blit_copy.h in Headers */,
+				A4C700081803015500B3DEEC /* SDL_keyboard_c.h in Headers */,
+				A4C702EF180302FF00B3DEEC /* SDL_blendmode.h in Headers */,
+				A4C70304180302FF00B3DEEC /* SDL_keyboard.h in Headers */,
+				A4C7FFEC1803015500B3DEEC /* SDL_wave.h in Headers */,
+				A4C7030B180302FF00B3DEEC /* SDL_mutex.h in Headers */,
+				A4C700511803015500B3DEEC /* SDL_syspower.h in Headers */,
+				A4C70320180302FF00B3DEEC /* SDL_test_compare.h in Headers */,
+				A4C700AB1803015500B3DEEC /* SDL_thread_c.h in Headers */,
+				A4C7000A1803015500B3DEEC /* SDL_mouse_c.h in Headers */,
+				A4C7030F180302FF00B3DEEC /* SDL_opengles2.h in Headers */,
+				A4C7002A1803015500B3DEEC /* SDL_joystick_c.h in Headers */,
+				A4C702FB180302FF00B3DEEC /* SDL_cpuinfo.h in Headers */,
+				A4C7030A180302FF00B3DEEC /* SDL_mouse.h in Headers */,
+				A4C701321803015500B3DEEC /* SDL_uikitmessagebox.h in Headers */,
+				A4C700101803015500B3DEEC /* SDL_windowevents_c.h in Headers */,
+				A4C700771803015500B3DEEC /* SDL_error_c.h in Headers */,
+				A4C70330180302FF00B3DEEC /* SDL.h in Headers */,
+				A4C70301180302FF00B3DEEC /* SDL_haptic.h in Headers */,
+				A4C7031C180302FF00B3DEEC /* SDL_system.h in Headers */,
+				A4C7030D180302FF00B3DEEC /* SDL_opengl.h in Headers */,
+				A4C7032A180302FF00B3DEEC /* SDL_thread.h in Headers */,
+				A4C702EE180302FF00B3DEEC /* SDL_bits.h in Headers */,
+				A4C701241803015500B3DEEC /* SDL_rect_c.h in Headers */,
+				A4C701051803015500B3DEEC /* SDL_nullvideo.h in Headers */,
+				A4C700691803015500B3DEEC /* SDL_blendline.h in Headers */,
+				A4C70309180302FF00B3DEEC /* SDL_messagebox.h in Headers */,
+				A4C702E9180302FF00B3DEEC /* begin_code.h in Headers */,
+				A4C700651803015500B3DEEC /* SDL_yuv_sw_c.h in Headers */,
+				A4C702EA180302FF00B3DEEC /* close_code.h in Headers */,
+				A4C700111803015500B3DEEC /* SDL_rwopsbundlesupport.h in Headers */,
+				A4C70326180302FF00B3DEEC /* SDL_test_log.h in Headers */,
+				A4C7030C180302FF00B3DEEC /* SDL_name.h in Headers */,
+				A4C701221803015500B3DEEC /* SDL_pixels_c.h in Headers */,
+				A4C7031A180302FF00B3DEEC /* SDL_stdinc.h in Headers */,
+				A4C7FFE31803015500B3DEEC /* SDL_audio_c.h in Headers */,
+				A4C7FFFE1803015500B3DEEC /* scancodes_xfree86.h in Headers */,
+				A4C70323180302FF00B3DEEC /* SDL_test_fuzzer.h in Headers */,
+				A4C7FFCA1803015500B3DEEC /* SDL_coreaudio.h in Headers */,
+				A4C702FD180302FF00B3DEEC /* SDL_error.h in Headers */,
+				A4C702FF180302FF00B3DEEC /* SDL_gamecontroller.h in Headers */,
+				A4C7FFFB1803015500B3DEEC /* scancodes_darwin.h in Headers */,
+				A4C700001803015500B3DEEC /* SDL_clipboardevents_c.h in Headers */,
+				A4C700A71803015500B3DEEC /* SDL_systhread_c.h in Headers */,
+				A4C70315180302FF00B3DEEC /* SDL_render.h in Headers */,
+				A4C702FE180302FF00B3DEEC /* SDL_events.h in Headers */,
+				A4C7012D1803015500B3DEEC /* keyinfotable.h in Headers */,
+				A4C7032F180302FF00B3DEEC /* SDL_video.h in Headers */,
+				A4C70318180302FF00B3DEEC /* SDL_scancode.h in Headers */,
+				A4C7012E1803015500B3DEEC /* SDL_uikitappdelegate.h in Headers */,
+				A4C7006E1803015500B3DEEC /* SDL_drawline.h in Headers */,
+				A4C700751803015500B3DEEC /* SDL_assert_c.h in Headers */,
+				A4C700041803015500B3DEEC /* SDL_events_c.h in Headers */,
+				A4C70313180302FF00B3DEEC /* SDL_quit.h in Headers */,
+				A4C700671803015500B3DEEC /* SDL_blendfillrect.h in Headers */,
+				A4C7012B1803015500B3DEEC /* SDL_sysvideo.h in Headers */,
+				A4C70321180302FF00B3DEEC /* SDL_test_crc32.h in Headers */,
+				A4C700701803015500B3DEEC /* SDL_drawpoint.h in Headers */,
+				A4C7032C180302FF00B3DEEC /* SDL_touch.h in Headers */,
+				A4C7005F1803015500B3DEEC /* SDL_shaders_gles2.h in Headers */,
+				A4C70308180302FF00B3DEEC /* SDL_main.h in Headers */,
+				A4C70319180302FF00B3DEEC /* SDL_shape.h in Headers */,
+				A4C7031D180302FF00B3DEEC /* SDL_syswm.h in Headers */,
+				A4C70324180302FF00B3DEEC /* SDL_test_harness.h in Headers */,
+				A4C702EC180302FF00B3DEEC /* SDL_atomic.h in Headers */,
+				A4C7013E1803015500B3DEEC /* SDL_uikitviewcontroller.h in Headers */,
+				A4C700A41803015500B3DEEC /* SDL_sysmutex_c.h in Headers */,
+				A4C7FFD31803015500B3DEEC /* SDL_dummyaudio.h in Headers */,
+				A4C7FFFD1803015500B3DEEC /* scancodes_windows.h in Headers */,
+				A4C7013C1803015500B3DEEC /* SDL_uikitview.h in Headers */,
+				A4C702ED180302FF00B3DEEC /* SDL_audio.h in Headers */,
+				A4C70305180302FF00B3DEEC /* SDL_keycode.h in Headers */,
+				A4C70316180302FF00B3DEEC /* SDL_revision.h in Headers */,
+				A4C7005C1803015500B3DEEC /* SDL_gles2funcs.h in Headers */,
+				A4C700741803015500B3DEEC /* SDL_rotate.h in Headers */,
+				A4C701281803015500B3DEEC /* SDL_shape_internals.h in Headers */,
+				A4C70300180302FF00B3DEEC /* SDL_gesture.h in Headers */,
+				A4C700721803015500B3DEEC /* SDL_render_sw_c.h in Headers */,
+				A4C702F9180302FF00B3DEEC /* SDL_config.h in Headers */,
+				A4C701341803015500B3DEEC /* SDL_uikitmodes.h in Headers */,
+				A4C701301803015500B3DEEC /* SDL_uikitevents.h in Headers */,
+				A4C702FA180302FF00B3DEEC /* SDL_copying.h in Headers */,
+				A4C7006B1803015500B3DEEC /* SDL_blendpoint.h in Headers */,
+				A4C70307180302FF00B3DEEC /* SDL_log.h in Headers */,
+				A4C70327180302FF00B3DEEC /* SDL_test_md5.h in Headers */,
+				A4C7031F180302FF00B3DEEC /* SDL_test_common.h in Headers */,
+				A4C70322180302FF00B3DEEC /* SDL_test_font.h in Headers */,
+				A4C701381803015500B3DEEC /* SDL_uikitopenglview.h in Headers */,
+				A4C7030E180302FF00B3DEEC /* SDL_opengles.h in Headers */,
+				A4C7031E180302FF00B3DEEC /* SDL_test_assert.h in Headers */,
+				A4C70325180302FF00B3DEEC /* SDL_test_images.h in Headers */,
+				A4C700221803015500B3DEEC /* SDLUIAccelerationDelegate.h in Headers */,
+				A4C70314180302FF00B3DEEC /* SDL_rect.h in Headers */,
+				A4C700061803015500B3DEEC /* SDL_gesture_c.h in Headers */,
+				A4C7005A1803015500B3DEEC /* SDL_glesfuncs.h in Headers */,
+				A4C702F0180302FF00B3DEEC /* SDL_clipboard.h in Headers */,
+				A4C7000E1803015500B3DEEC /* SDL_touch_c.h in Headers */,
+				A4C70328180302FF00B3DEEC /* SDL_test_random.h in Headers */,
+				A4C70302180302FF00B3DEEC /* SDL_hints.h in Headers */,
+				A4C701131803015500B3DEEC /* SDL_blit.h in Headers */,
+				A4C700191803015500B3DEEC /* SDL_syshaptic.h in Headers */,
+				A4C7011D1803015500B3DEEC /* SDL_blit_slow.h in Headers */,
+				A4C7032D180302FF00B3DEEC /* SDL_types.h in Headers */,
+				A4C700021803015500B3DEEC /* SDL_dropevents_c.h in Headers */,
+				A4C7032E180302FF00B3DEEC /* SDL_version.h in Headers */,
+				A4C700A91803015500B3DEEC /* SDL_systhread.h in Headers */,
+				A4C7002B1803015500B3DEEC /* SDL_sysjoystick.h in Headers */,
+				A4C7FFF91803015500B3DEEC /* blank_cursor.h in Headers */,
+				A4C701361803015500B3DEEC /* SDL_uikitopengles.h in Headers */,
+				A4C70311180302FF00B3DEEC /* SDL_platform.h in Headers */,
+				A4C7FFEA1803015500B3DEEC /* SDL_sysaudio.h in Headers */,
+				A4C70317180302FF00B3DEEC /* SDL_rwops.h in Headers */,
+				A4C70329180302FF00B3DEEC /* SDL_test.h in Headers */,
+				A4C70312180302FF00B3DEEC /* SDL_power.h in Headers */,
+				A4C702F2180302FF00B3DEEC /* SDL_config_iphoneos.h in Headers */,
+				A4C70310180302FF00B3DEEC /* SDL_pixels.h in Headers */,
+				A4C700551803015500B3DEEC /* mmx.h in Headers */,
+				A4C7032B180302FF00B3DEEC /* SDL_timer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FD6526620DE8FCCB002AD96B /* libsdl-2.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD6526990DE8FD14002AD96B /* Build configuration list for PBXNativeTarget "libsdl-2.0" */;
+			buildPhases = (
+				FD65265F0DE8FCCB002AD96B /* Headers */,
+				FD6526600DE8FCCB002AD96B /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libsdl-2.0";
+			productName = iPhoneSDLStaticLib;
+			productReference = FD6526630DE8FCCB002AD96B /* libsdl-2.02.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "sdl-2.0" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = ../..;
+			targets = (
+				FD6526620DE8FCCB002AD96B /* libsdl-2.0 */,
+				00B4F48B12F6A69C0084EC00 /* PrepareXcodeProjectTemplate */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00B4F48A12F6A69C0084EC00 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SYMROOT)/$CONFIGURATION-Universal/libSDL.a",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# clean up the framework, remove headers, extra files\n\ntemp=$BUILD_DIR/$BUILD_STYLE-template\n# Wrong! 1. Can't assume location of Xcode directory (use xcode-select)\n# 2. Project templates should go in Application Support directories anyway.\ntemplate_dir_name=\"SDL iOS Application\"\n# dest=\"$(HOME)/Library/Application Support/Developer/Shared/Xcode/Project Templates/SDL/SDL iOS Application\"\nrsync_flags=\"--exclude *.svn --links -r\"\n\n# mkdir -p $dest\nmkdir -p $temp\nmkdir -p \"$temp/$template_dir_name/SDL/lib/\"\nmkdir -p \"$temp/$template_dir_name/SDL/include\"\n\n# copy template\nrsync $rsync_flags \"../template/$template_dir_name\" $temp/\n\n# copy Universal libSDL.a\nrsync $rsync_flags -r $SYMROOT/$CONFIGURATION-Universal/libSDL.a \"$temp/$template_dir_name/SDL/lib/\"\n\n# copy headers\nrsync $rsync_flags ../../include/ \"$temp/$template_dir_name/SDL/include\"\n\n#install (nah, don't install)\n# cp -fr \"$temp/$template_dir_name\" \"$dest\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FD6526600DE8FCCB002AD96B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4C7007E1803015500B3DEEC /* SDL_malloc.c in Sources */,
+				A4C700A21803015500B3DEEC /* SDL_syscond.c in Sources */,
+				A4C7000D1803015500B3DEEC /* SDL_touch.c in Sources */,
+				A4C700781803015500B3DEEC /* SDL_error.c in Sources */,
+				A4C700761803015500B3DEEC /* SDL_assert.c in Sources */,
+				A4C700791803015500B3DEEC /* SDL_hints.c in Sources */,
+				A4C7012F1803015500B3DEEC /* SDL_uikitappdelegate.m in Sources */,
+				A4C7007A1803015500B3DEEC /* SDL_log.c in Sources */,
+				A4C700641803015500B3DEEC /* SDL_yuv_sw.c in Sources */,
+				A4C701021803015500B3DEEC /* SDL_nullframebuffer.c in Sources */,
+				A4C701201803015500B3DEEC /* SDL_fillrect.c in Sources */,
+				A4C7012A1803015500B3DEEC /* SDL_surface.c in Sources */,
+				A4C701121803015500B3DEEC /* SDL_blit.c in Sources */,
+				A4C7011F1803015500B3DEEC /* SDL_clipboard.c in Sources */,
+				A4C700611803015500B3DEEC /* SDL_render.c in Sources */,
+				A4C701141803015500B3DEEC /* SDL_blit_0.c in Sources */,
+				A4C7007B1803015500B3DEEC /* SDL.c in Sources */,
+				A4C700811803015500B3DEEC /* SDL_string.c in Sources */,
+				A4C7FFBE1803015500B3DEEC /* SDL_spinlock.c in Sources */,
+				A4C7007C1803015500B3DEEC /* SDL_getenv.c in Sources */,
+				A4C7012C1803015500B3DEEC /* SDL_video.c in Sources */,
+				A4C700A51803015500B3DEEC /* SDL_syssem.c in Sources */,
+				A4C701311803015500B3DEEC /* SDL_uikitevents.m in Sources */,
+				A4C7007D1803015500B3DEEC /* SDL_iconv.c in Sources */,
+				A4C700B61803015500B3DEEC /* SDL_systimer.c in Sources */,
+				A4C7013D1803015500B3DEEC /* SDL_uikitview.m in Sources */,
+				A4C701391803015500B3DEEC /* SDL_uikitopenglview.m in Sources */,
+				A4C7FFE81803015500B3DEEC /* SDL_audiotypecvt.c in Sources */,
+				A4C701191803015500B3DEEC /* SDL_blit_copy.c in Sources */,
+				A4C700151803015500B3DEEC /* SDL_syshaptic.c in Sources */,
+				A4C700501803015500B3DEEC /* SDL_power.c in Sources */,
+				A4C701271803015500B3DEEC /* SDL_shape.c in Sources */,
+				A4C7006A1803015500B3DEEC /* SDL_blendpoint.c in Sources */,
+				A4C700231803015500B3DEEC /* SDLUIAccelerationDelegate.m in Sources */,
+				A4C7013B1803015500B3DEEC /* SDL_uikitvideo.m in Sources */,
+				A4C700681803015500B3DEEC /* SDL_blendline.c in Sources */,
+				A4C701411803015500B3DEEC /* SDL_uikitwindow.m in Sources */,
+				A4C7011B1803015500B3DEEC /* SDL_blit_N.c in Sources */,
+				A4C701171803015500B3DEEC /* SDL_blit_auto.c in Sources */,
+				A4C701041803015500B3DEEC /* SDL_nullvideo.c in Sources */,
+				A4C7005D1803015500B3DEEC /* SDL_render_gles2.c in Sources */,
+				A4C700B41803015500B3DEEC /* SDL_timer.c in Sources */,
+				A4C700011803015500B3DEEC /* SDL_dropevents.c in Sources */,
+				A4C700211803015500B3DEEC /* SDL_sysjoystick.m in Sources */,
+				A4C700A31803015500B3DEEC /* SDL_sysmutex.c in Sources */,
+				A4C700731803015500B3DEEC /* SDL_rotate.c in Sources */,
+				A4C700121803015500B3DEEC /* SDL_rwopsbundlesupport.m in Sources */,
+				A4C7FFBD1803015500B3DEEC /* SDL_atomic.c in Sources */,
+				A4C701251803015500B3DEEC /* SDL_RLEaccel.c in Sources */,
+				A4C700411803015500B3DEEC /* SDL_sysloadso.c in Sources */,
+				A4C700421803015500B3DEEC /* SDL_sysloadso.c in Sources */,
+				A4C700031803015500B3DEEC /* SDL_events.c in Sources */,
+				A4C700051803015500B3DEEC /* SDL_gesture.c in Sources */,
+				A4C7011E1803015500B3DEEC /* SDL_bmp.c in Sources */,
+				A4C7006D1803015500B3DEEC /* SDL_drawline.c in Sources */,
+				A4C700171803015500B3DEEC /* SDL_haptic.c in Sources */,
+				A4C7011C1803015500B3DEEC /* SDL_blit_slow.c in Sources */,
+				A4C7013F1803015500B3DEEC /* SDL_uikitviewcontroller.m in Sources */,
+				A4C7006F1803015500B3DEEC /* SDL_drawpoint.c in Sources */,
+				A4C7FFFF1803015500B3DEEC /* SDL_clipboardevents.c in Sources */,
+				A4C7FFE21803015500B3DEEC /* SDL_audio.c in Sources */,
+				A4C700271803015500B3DEEC /* SDL_gamecontroller.c in Sources */,
+				A4C701371803015500B3DEEC /* SDL_uikitopengles.m in Sources */,
+				A4C7FFF81803015500B3DEEC /* SDL_cpuinfo.c in Sources */,
+				A4C700A61803015500B3DEEC /* SDL_systhread.c in Sources */,
+				A4C700291803015500B3DEEC /* SDL_joystick.c in Sources */,
+				A4C701161803015500B3DEEC /* SDL_blit_A.c in Sources */,
+				A4C7000F1803015500B3DEEC /* SDL_windowevents.c in Sources */,
+				A4C7FFE41803015500B3DEEC /* SDL_audiocvt.c in Sources */,
+				A4C700521803015500B3DEEC /* SDL_syspower.m in Sources */,
+				A4C700631803015500B3DEEC /* SDL_yuv_mmx.c in Sources */,
+				A4C7FFC91803015500B3DEEC /* SDL_coreaudio.c in Sources */,
+				A4C701331803015500B3DEEC /* SDL_uikitmessagebox.m in Sources */,
+				A4C701211803015500B3DEEC /* SDL_pixels.c in Sources */,
+				A4C701231803015500B3DEEC /* SDL_rect.c in Sources */,
+				A4C7005E1803015500B3DEEC /* SDL_shaders_gles2.c in Sources */,
+				A4C700A81803015500B3DEEC /* SDL_systls.c in Sources */,
+				A4C701351803015500B3DEEC /* SDL_uikitmodes.m in Sources */,
+				A4C700711803015500B3DEEC /* SDL_render_sw.c in Sources */,
+				A4C700661803015500B3DEEC /* SDL_blendfillrect.c in Sources */,
+				A4C700AA1803015500B3DEEC /* SDL_thread.c in Sources */,
+				A4C7005B1803015500B3DEEC /* SDL_render_gles.c in Sources */,
+				A4C7FFE91803015500B3DEEC /* SDL_mixer.c in Sources */,
+				A4C700801803015500B3DEEC /* SDL_stdlib.c in Sources */,
+				A4C700091803015500B3DEEC /* SDL_mouse.c in Sources */,
+				A4C701001803015500B3DEEC /* SDL_nullevents.c in Sources */,
+				A4C7FFD21803015500B3DEEC /* SDL_dummyaudio.c in Sources */,
+				A4C701291803015500B3DEEC /* SDL_stretch.c in Sources */,
+				A4C7000B1803015500B3DEEC /* SDL_quit.c in Sources */,
+				A4C7007F1803015500B3DEEC /* SDL_qsort.c in Sources */,
+				A4C700131803015500B3DEEC /* SDL_rwops.c in Sources */,
+				A4C7FFEB1803015500B3DEEC /* SDL_wave.c in Sources */,
+				A4C701151803015500B3DEEC /* SDL_blit_1.c in Sources */,
+				A4C700071803015500B3DEEC /* SDL_keyboard.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		00B4F48C12F6A69C0084EC00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = PrepareXcodeProjectTemplate;
+			};
+			name = Debug;
+		};
+		00B4F48D12F6A69C0084EC00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				PRODUCT_NAME = PrepareXcodeProjectTemplate;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FD6526640DE8FCCB002AD96B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = __IPHONEOS__;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../include\"",
+				);
+				PRODUCT_NAME = "sdl-2.02";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FD6526650DE8FCCB002AD96B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = __IPHONEOS__;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../include\"",
+				);
+				PRODUCT_NAME = "sdl-2.02";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00B4F48E12F6A6BA0084EC00 /* Build configuration list for PBXAggregateTarget "PrepareXcodeProjectTemplate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00B4F48C12F6A69C0084EC00 /* Debug */,
+				00B4F48D12F6A69C0084EC00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "sdl-2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD6526990DE8FD14002AD96B /* Build configuration list for PBXNativeTarget "libsdl-2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD6526640DE8FCCB002AD96B /* Debug */,
+				FD6526650DE8FCCB002AD96B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

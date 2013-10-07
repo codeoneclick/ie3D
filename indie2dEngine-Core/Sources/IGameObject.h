@@ -44,12 +44,10 @@ protected:
     glm::mat4x4 m_matrixRotation;
     glm::mat4x4 m_matrixTranslation;
     glm::mat4x4 m_matrixWorld;
-    glm::mat4x4 m_matrixWVP;
     
     glm::vec3 m_position;
     glm::vec3 m_rotation;
     glm::vec3 m_scale;
-    glm::vec2 m_texcoordDisplacement;
     
     std::map<std::string, std::shared_ptr<CMaterial> > m_materials;
     std::shared_ptr<CMaterial> m_debugBoundBoxMaterial;
@@ -118,16 +116,6 @@ public:
     inline glm::vec3 Get_Scale(void)
     {
         return m_scale;
-    };
-    
-    inline void Set_TexcoordDisplacement(const glm::vec2& _texcoordDisplacement)
-    {
-        m_texcoordDisplacement = _texcoordDisplacement;
-    };
-    
-    inline glm::vec2 Get_TexcoordDisplacement(void)
-    {
-        return m_texcoordDisplacement;
     };
     
     inline glm::mat4x4 Get_WorldMatrix(void)

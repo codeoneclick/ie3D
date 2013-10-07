@@ -267,6 +267,9 @@
 		A4AF4BE3177489E9007D4B8C /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */; };
 		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
 		A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460617450200000D831E /* IResourceCommiter.cpp */; };
+		A4C703431803072D00B3DEEC /* libsdl-2.02.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C703401803070E00B3DEEC /* libsdl-2.02.a */; };
+		A4C7034718030DC800B3DEEC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C7034618030DC800B3DEEC /* AudioToolbox.framework */; };
+		A4C7034918030DCF00B3DEEC /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C7034818030DCF00B3DEEC /* CoreAudio.framework */; };
 		A4C8C3F017D4C6E100F955B2 /* ocean_nm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4C8C3EF17D4C6E100F955B2 /* ocean_nm.pvr */; };
 		A4C8C3F217D5F16B00F955B2 /* ocean_hm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4C8C3F117D5F16B00F955B2 /* ocean_hm.pvr */; };
 		A4C8C3F417D600D000F955B2 /* texture_02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4C8C3F317D600CF00F955B2 /* texture_02.pvr */; };
@@ -474,6 +477,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 40C848F9101A209C0083642A;
 			remoteInfo = "libGoogleUnitTest-static";
+		};
+		A4C7033F1803070E00B3DEEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FD6526630DE8FCCB002AD96B;
+			remoteInfo = "libsdl-2.0";
+		};
+		A4C703411803071E00B3DEEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FD6526620DE8FCCB002AD96B;
+			remoteInfo = "libsdl-2.0";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -812,6 +829,9 @@
 		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
 		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
 		A4BE460717450200000D831E /* IResourceCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceCommiter.h; path = Sources/IResourceCommiter.h; sourceTree = "<group>"; };
+		A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "sdl-2.0.xcodeproj"; path = "Libraries/sdl-2.0/project.ios/sdl-2.0.xcodeproj"; sourceTree = "<group>"; };
+		A4C7034618030DC800B3DEEC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A4C7034818030DCF00B3DEEC /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A4C8C3EF17D4C6E100F955B2 /* ocean_nm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean_nm.pvr; sourceTree = "<group>"; };
 		A4C8C3F117D5F16B00F955B2 /* ocean_hm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean_hm.pvr; sourceTree = "<group>"; };
 		A4C8C3F317D600CF00F955B2 /* texture_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_02.pvr; sourceTree = "<group>"; };
@@ -1098,6 +1118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4C7034918030DCF00B3DEEC /* CoreAudio.framework in Frameworks */,
+				A4C7034718030DC800B3DEEC /* AudioToolbox.framework in Frameworks */,
+				A4C703431803072D00B3DEEC /* libsdl-2.02.a in Frameworks */,
 				A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */,
 				A45588F51757602A00802609 /* libz.dylib in Frameworks */,
 				A45588F31757600500802609 /* Security.framework in Frameworks */,
@@ -1375,6 +1398,8 @@
 		A420815D1733A9370004729E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4C7034818030DCF00B3DEEC /* CoreAudio.framework */,
+				A4C7034618030DC800B3DEEC /* AudioToolbox.framework */,
 				A45588EC17575FD300802609 /* libcurl-device.a */,
 				A45588ED17575FD300802609 /* libcurl-simulator.a */,
 				A45588F41757602600802609 /* libz.dylib */,
@@ -1497,6 +1522,7 @@
 		A42081941733ABB20004729E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A4C70331180306F400B3DEEC /* sdl-2.0 */,
 				210EFD28175BD4DA00DDB182 /* jsoncpp */,
 				A45588DE17575F3900802609 /* curl */,
 				A4F204D3174287440063AB07 /* glm */,
@@ -1946,6 +1972,22 @@
 			name = Commiters;
 			sourceTree = "<group>";
 		};
+		A4C70331180306F400B3DEEC /* sdl-2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */,
+			);
+			name = "sdl-2.0";
+			sourceTree = "<group>";
+		};
+		A4C7033B1803070D00B3DEEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4C703401803070E00B3DEEC /* libsdl-2.02.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A4F204B6174241320063AB07 /* indie2dEngine-Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -2281,6 +2323,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A4C703421803071E00B3DEEC /* PBXTargetDependency */,
 				A437A9EE177B429A00160BD7 /* PBXTargetDependency */,
 			);
 			name = "indie2dEngine-Core";
@@ -2333,6 +2376,10 @@
 				{
 					ProductGroup = A46A32A0174E163E0044643E /* Products */;
 					ProjectRef = A46A324F174E161F0044643E /* libGoogleUnitTest.xcodeproj */;
+				},
+				{
+					ProductGroup = A4C7033B1803070D00B3DEEC /* Products */;
+					ProjectRef = A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -2398,6 +2445,13 @@
 			fileType = "compiled.mach-o.executable";
 			path = "sample1_unittest-static";
 			remoteRef = A46A32B7174E163E0044643E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A4C703401803070E00B3DEEC /* libsdl-2.02.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libsdl-2.02.a";
+			remoteRef = A4C7033F1803070E00B3DEEC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2825,6 +2879,11 @@
 			name = "libGoogleUnitTest-static";
 			targetProxy = A46A32E3174E180B0044643E /* PBXContainerItemProxy */;
 		};
+		A4C703421803071E00B3DEEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libsdl-2.0";
+			targetProxy = A4C703411803071E00B3DEEC /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -2897,6 +2956,7 @@
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
 					"\"$(SRCROOT)/../gcdpp/Headers\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/sdl-2.0/include\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -2920,6 +2980,7 @@
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
 					"\"$(SRCROOT)/../gcdpp/Headers\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/sdl-2.0/include\"",
 				);
 				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
