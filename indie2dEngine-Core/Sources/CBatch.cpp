@@ -138,9 +138,9 @@ void CBatch::Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAni
         m_meshes.push_back(_mesh);
         m_matrices.push_back(_matrix);
         
-        m_numBatchedVertices = std::get<0>(_mesh)->Get_NumVertexes();
-        m_numBatchedIndices = std::get<0>(_mesh)->Get_NumIndexes();
-        m_numBatchedTransformations = std::get<1>(_mesh)->Get_TransformationSize();
+        m_numBatchedVertices += std::get<0>(_mesh)->Get_NumVertexes();
+        m_numBatchedIndices += std::get<0>(_mesh)->Get_NumIndexes();
+        m_numBatchedTransformations += std::get<1>(_mesh)->Get_TransformationSize();
         
         std::shared_ptr<CAnimationMixer> mixer = std::get<1>(_mesh);
         for(ui32 i = 0; i < mixer->Get_TransformationSize(); ++i)
