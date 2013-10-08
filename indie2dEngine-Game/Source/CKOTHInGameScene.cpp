@@ -124,9 +124,9 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
     angle += 0.033f;
     
     static glm::vec3 lightPosition_01 = glm::vec3(0.0f);
-    lightPosition_01.x = 16.0f + cosf(-angle) * -16.0f;
+    lightPosition_01.x = m_characterController->Get_Position().x;// + cosf(-angle) * -16.0f;
     lightPosition_01.y = 16.0f;
-    lightPosition_01.z = 16.0f + sinf(-angle) * -16.0f;
+    lightPosition_01.z = m_characterController->Get_Position().z;// + sinf(-angle) * -16.0f;
     m_lights[0]->Set_Position(lightPosition_01);
 
     static glm::vec3 lightPosition_02 = glm::vec3(0.0f);
