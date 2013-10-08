@@ -22,7 +22,7 @@
 #include "CRenderOperationScreenSpace.h"
 #include "CCommonOS.h"
 #include "ITemplate.h"
-#include "CGraphicsContext_iOS.h"
+#include "IGraphicsContext.h"
 #include "IInputContext.h"
 
 IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor) :

@@ -694,7 +694,6 @@
 		A46A316C17462BBF0044643E /* CTextureCommiter_PVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureCommiter_PVR.cpp; path = Sources/CTextureCommiter_PVR.cpp; sourceTree = "<group>"; };
 		A46A316D17462BBF0044643E /* CTextureCommiter_PVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureCommiter_PVR.h; path = Sources/CTextureCommiter_PVR.h; sourceTree = "<group>"; };
 		A46A316F174635210044643E /* CGraphicsContext_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CGraphicsContext_iOS.mm; path = Sources/CGraphicsContext_iOS.mm; sourceTree = "<group>"; };
-		A46A3170174635210044643E /* CGraphicsContext_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGraphicsContext_iOS.h; path = Sources/CGraphicsContext_iOS.h; sourceTree = "<group>"; };
 		A46A317217463D180044643E /* COGLWindow_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = COGLWindow_iOS.mm; path = Sources/COGLWindow_iOS.mm; sourceTree = "<group>"; };
 		A46A317317463D180044643E /* COGLWindow_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COGLWindow_iOS.h; path = Sources/COGLWindow_iOS.h; sourceTree = "<group>"; };
 		A46A317517463DE10044643E /* CGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController.h; path = "indie2dEngine-Game/Source/CGameViewController.h"; sourceTree = "<group>"; };
@@ -855,7 +854,7 @@
 		A4F2049F17423C1E0063AB07 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = "indie2dEngine-Core/Sources/main.mm"; sourceTree = SOURCE_ROOT; };
 		A4F204A217423C310063AB07 /* HCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCommon.h; path = "indie2dEngine-Core/Sources/HCommon.h"; sourceTree = SOURCE_ROOT; };
 		A4F204A317423C310063AB07 /* HEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEnums.h; path = "indie2dEngine-Core/Sources/HEnums.h"; sourceTree = SOURCE_ROOT; };
-		A4F204A417423C4D0063AB07 /* IGraphicsContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGraphicsContext.cpp; path = "indie2dEngine-Core/Sources/IGraphicsContext.cpp"; sourceTree = SOURCE_ROOT; };
+		A4F204A417423C4D0063AB07 /* IGraphicsContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = IGraphicsContext.cpp; path = "indie2dEngine-Core/Sources/IGraphicsContext.cpp"; sourceTree = SOURCE_ROOT; };
 		A4F204A517423C4D0063AB07 /* IGraphicsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraphicsContext.h; path = "indie2dEngine-Core/Sources/IGraphicsContext.h"; sourceTree = SOURCE_ROOT; };
 		A4F204A717423C7F0063AB07 /* CGameLoopExecutor_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CGameLoopExecutor_iOS.mm; path = "indie2dEngine-Core/Sources/CGameLoopExecutor_iOS.mm"; sourceTree = SOURCE_ROOT; };
 		A4F204A817423C7F0063AB07 /* CGameLoopExecutor_Win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameLoopExecutor_Win32.cpp; path = "indie2dEngine-Core/Sources/CGameLoopExecutor_Win32.cpp"; sourceTree = SOURCE_ROOT; };
@@ -1789,7 +1788,6 @@
 				A46A317A174640450044643E /* Operations */,
 				A4F204A517423C4D0063AB07 /* IGraphicsContext.h */,
 				A4F204A417423C4D0063AB07 /* IGraphicsContext.cpp */,
-				A46A3170174635210044643E /* CGraphicsContext_iOS.h */,
 				A46A316F174635210044643E /* CGraphicsContext_iOS.mm */,
 				A46A317317463D180044643E /* COGLWindow_iOS.h */,
 				A46A317217463D180044643E /* COGLWindow_iOS.mm */,

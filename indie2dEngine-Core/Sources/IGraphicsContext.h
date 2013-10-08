@@ -12,7 +12,7 @@
 #include "HCommon.h"
 #include "HEnums.h"
 
-class IGraphicsContext
+class IGraphicsContext : public std::enable_shared_from_this<IGraphicsContext>
 {
 private:
     
@@ -21,6 +21,8 @@ protected:
     ui32 m_frameBufferHandle;
     ui32 m_renderBufferHandle;
 	ui32 m_depthBufferHandle;
+    
+    static std::vector<std::shared_ptr<IGraphicsContext> > m_contexts;
     
 public:
     
@@ -37,7 +39,7 @@ public:
     inline const ui32 Get_RenderBufferHandle(void) const
     {
         return m_renderBufferHandle;
-    }
+    };
     
     inline const i32 Get_DepthBufferHandle(void) const
     {

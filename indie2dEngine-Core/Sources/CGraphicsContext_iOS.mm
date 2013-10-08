@@ -22,14 +22,20 @@ protected:
     
 public:
     
-    CGraphicsContext_iOS(const CAEAGLLayer* _iOSGLLayer);
+    CGraphicsContext_iOS(const CAEAGLLayer* _hwnd);
     ~CGraphicsContext_iOS(void);
     
     void Output(void) const;
 };
 
+std::shared_ptr<IGraphicsContext> CreateGraphicsContext_iOS(const void* _hwnd)
+{
+    const UIView* hwnd = (__bridge UIView*)_hwnd;
+    assert([hwnd.layer isKindOfClass:[CAEAGLLayer class]]);
+    return std::make_shared<CGraphicsContext_iOS>(hwnd.layer);
+};
 
-CGraphicsContext_iOS::CGraphicsContext_iOS(const CAEAGLLayer* _window)
+CGraphicsContext_iOS::CGraphicsContext_iOS(const CAEAGLLayer* _hwnd)
 {
     m_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     assert(m_context != nullptr);
@@ -39,7 +45,7 @@ CGraphicsContext_iOS::CGraphicsContext_iOS(const CAEAGLLayer* _window)
     
     glGenRenderbuffers(1, &m_renderBufferHandle);
     glBindRenderbuffer(GL_RENDERBUFFER, m_renderBufferHandle);
-    [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_iOSGLLayer];
+    [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_hwnd];
     
     glGenFramebuffers(1, &m_frameBufferHandle);
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
