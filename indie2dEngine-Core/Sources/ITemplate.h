@@ -108,7 +108,7 @@ struct SWorldSpaceRenderOperationTemplate : public ITemplate
     std::string m_guid;
     i32 m_screenWidth;
     i32 m_screenHeight;
-    glm::vec3 m_clearColor;
+    glm::vec4 m_clearColor;
 };
 
 struct SScreenSpaceRenderOperationTemplate : public ITemplate

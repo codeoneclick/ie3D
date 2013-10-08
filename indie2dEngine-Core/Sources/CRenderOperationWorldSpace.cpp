@@ -10,7 +10,7 @@
 #include "CTexture.h"
 #include "IRenderHandler.h"
 
-CRenderOperationWorldSpace::CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const glm::vec3& _clearColor, const std::string& _mode) :
+CRenderOperationWorldSpace::CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const glm::vec4& _clearColor, const std::string& _mode) :
 m_mode(_mode),
 m_frameWidth(_frameWidth),
 m_frameHeight(_frameHeight),
@@ -118,7 +118,7 @@ void CRenderOperationWorldSpace::Bind(void)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
     glViewport(0, 0, m_frameWidth, m_frameHeight);
-    glClearColor(m_clearColor.x, m_clearColor.y, m_clearColor.b, 1.0f);
+    glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     m_numTriangles = 0;
 }
