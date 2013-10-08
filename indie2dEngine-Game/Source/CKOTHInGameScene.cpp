@@ -26,7 +26,7 @@ IScene(_root),
 m_navigator(nullptr),
 m_characterController(nullptr)
 {
-    std::cout<<_root<<std::endl;
+
 }
 
 CKOTHInGameScene::~CKOTHInGameScene(void)
@@ -124,15 +124,15 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
     angle += 0.033f;
     
     static glm::vec3 lightPosition_01 = glm::vec3(0.0f);
-    lightPosition_01.x = 0.0f + cosf(-angle) * -16.0f;
+    lightPosition_01.x = 16.0f + cosf(-angle) * -16.0f;
     lightPosition_01.y = 16.0f;
-    lightPosition_01.z = 0.0f + sinf(-angle) * -16.0f;
+    lightPosition_01.z = 16.0f + sinf(-angle) * -16.0f;
     m_lights[0]->Set_Position(lightPosition_01);
 
     static glm::vec3 lightPosition_02 = glm::vec3(0.0f);
-    lightPosition_02.x = 32.0f + cosf(-angle) * -16.0f;
+    lightPosition_02.x = 48.0f + cosf(-angle) * -16.0f;
     lightPosition_02.y = 16.0f;
-    lightPosition_02.z = 32.0f + sinf(-angle) * -16.0f;
+    lightPosition_02.z = 48.0f + sinf(-angle) * -16.0f;
     m_lights[1]->Set_Position(lightPosition_02);
     
     m_characterController->OnUpdate(_deltatime);

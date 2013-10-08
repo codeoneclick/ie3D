@@ -70,7 +70,7 @@ void IGameObject::Set_Camera(std::shared_ptr<CCamera> _camera)
 {
     assert(_camera != nullptr);
     m_camera = _camera;
-};
+}
 
 void IGameObject::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode)
 {

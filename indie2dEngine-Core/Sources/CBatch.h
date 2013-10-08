@@ -22,7 +22,6 @@ private:
     
 protected:
     
-    
     std::shared_ptr<CMaterial> m_material;
     std::function<void(std::shared_ptr<CMaterial>)> m_bind;
     std::shared_ptr<CMesh> m_mesh;
@@ -45,6 +44,10 @@ protected:
     
     ui32 m_renderQueuePosition;
     
+    ui32 m_numBatchedVertices;
+    ui32 m_numBatchedIndices;
+    ui32 m_numBatchedTransformations;
+    
     i32 _OnQueuePosition(void);
     bool _OnOcclusion(void);
     ui32 _OnGet_NumTriangles(void);
@@ -59,6 +62,10 @@ public:
     CBatch(const std::string& _mode, ui32 _renderQueuePosition, const std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _bind);
     ~CBatch(void);
     
+    static const ui32 k_MAX_NUM_VERTICES;
+    static const ui32 k_MAX_NUM_INDICES;
+    static const ui32 k_MAX_NUM_TRANSFORMATION;
+    
     inline std::string Get_Guid(void) const
     {
         return m_guid;
@@ -67,6 +74,21 @@ public:
     inline std::string Get_Mode(void) const
     {
         return m_mode;
+    };
+    
+    inline ui32 Get_NumBatchedVertices(void)
+    {
+        return m_numBatchedVertices;
+    };
+    
+    inline ui32 Get_NumBatchedIndices(void)
+    {
+        return m_numBatchedIndices;
+    };
+    
+    inline ui32 Get_NumBatchedTransformations(void)
+    {
+        return m_numBatchedTransformations;
     };
 
     void Lock(void);

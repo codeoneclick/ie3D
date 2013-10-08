@@ -28,6 +28,8 @@ protected:
     
 public:
     
+    static const ui32 k_MAX_BATCHES_PER_MESH_TYPE;
+    
     CBatchingMgr(const std::shared_ptr<CRenderMgr>& _renderMgr);
     ~CBatchingMgr(void);
     

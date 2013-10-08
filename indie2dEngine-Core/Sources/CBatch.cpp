@@ -12,6 +12,10 @@
 #include "CShader.h"
 #include "CAnimationMixer.h"
 
+const ui32 CBatch::k_MAX_NUM_VERTICES = std::numeric_limits<ui16>::max() / 4; // 16k vertices
+const ui32 CBatch::k_MAX_NUM_INDICES = std::numeric_limits<ui16>::max() / 2;  // 32k indices
+const ui32 CBatch::k_MAX_NUM_TRANSFORMATION = 255;
+
 CBatch::CBatch(const std::string& _mode, ui32 _renderQueuePosition, std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _bind) :
 m_material(_material),
 m_renderQueuePosition(_renderQueuePosition),
@@ -29,14 +33,14 @@ m_unlocked(0)
     assert(m_material->Get_Shader() != nullptr);
     m_guid = m_material->Get_Shader()->Get_Guid() + ".batch";
     
-    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(std::numeric_limits<ui16>::max(), GL_DYNAMIC_DRAW);
+    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(k_MAX_NUM_VERTICES, GL_DYNAMIC_DRAW);
     SHardwareVertex* vertexData = vertexBuffer->Lock();
-    memset(vertexData, 0x0, std::numeric_limits<ui16>::max() * sizeof(SHardwareVertex));
+    memset(vertexData, 0x0, k_MAX_NUM_VERTICES * sizeof(SHardwareVertex));
     vertexBuffer->Unlock();
    
-    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(std::numeric_limits<ui16>::max(), GL_DYNAMIC_DRAW);
+    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(k_MAX_NUM_INDICES, GL_DYNAMIC_DRAW);
     ui16* indexData = indexBuffer->Lock();
-    memset(indexData, 0x0, std::numeric_limits<ui16>::max() * sizeof(ui16));
+    memset(indexData, 0x0, k_MAX_NUM_INDICES * sizeof(ui16));
     indexBuffer->Unlock();
     
     m_mesh = std::make_shared<CMesh>(m_guid, vertexBuffer, indexBuffer);
@@ -55,6 +59,10 @@ void CBatch::Lock(void)
         m_meshes.clear();
         m_matrices.clear();
         m_transformations.clear();
+        
+        m_numBatchedVertices = 0;
+        m_numBatchedIndices = 0;
+        m_numBatchedTransformations = 0;
     }
     m_locked = 1;
 }
@@ -110,7 +118,7 @@ void CBatch::Unlock(void)
                 numVertices += mesh->Get_NumVertexes();
                 numIndices += mesh->Get_NumIndexes();
                 numTransformations += mixer->Get_TransformationSize();
-                assert(numTransformations < 255);
+                assert(numTransformations < k_MAX_NUM_TRANSFORMATION);
             }
             
             m_numPushedVertices = numVertices;
@@ -129,6 +137,10 @@ void CBatch::Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAni
     {
         m_meshes.push_back(_mesh);
         m_matrices.push_back(_matrix);
+        
+        m_numBatchedVertices = std::get<0>(_mesh)->Get_NumVertexes();
+        m_numBatchedIndices = std::get<0>(_mesh)->Get_NumIndexes();
+        m_numBatchedTransformations = std::get<1>(_mesh)->Get_TransformationSize();
         
         std::shared_ptr<CAnimationMixer> mixer = std::get<1>(_mesh);
         for(ui32 i = 0; i < mixer->Get_TransformationSize(); ++i)
