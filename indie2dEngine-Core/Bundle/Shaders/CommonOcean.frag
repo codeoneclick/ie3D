@@ -27,11 +27,11 @@ const mediump vec3 k_vNormal = vec3(0.0, 1.0, 0.0);
 
 void main(void)
 {
-    mediump vec2 vTexCoord_01 = vec2(OUT_TexCoord.x + sin(FLOAT_Timer) * 0.33,
-								     OUT_TexCoord.y + cos(FLOAT_Timer) * 0.66);
+    mediump vec2 vTexCoord_01 = vec2(OUT_TexCoord.x + sin(FLOAT_Timer),
+								     OUT_TexCoord.y - cos(FLOAT_Timer));
 	
-	mediump vec2 vTexCoord_02 = vec2(OUT_TexCoord.x - sin(FLOAT_Timer) * 0.75,
-								     OUT_TexCoord.y - cos(FLOAT_Timer) * 0.25);
+	mediump vec2 vTexCoord_02 = vec2(OUT_TexCoord.x - sin(FLOAT_Timer),
+								     OUT_TexCoord.y + cos(FLOAT_Timer));
                                      
     lowp vec4 vNormalColor_01 = texture2D(SAMPLER_04, vTexCoord_01) * 2.0 - 1.0;
     lowp vec4 vNormalColor_02 = texture2D(SAMPLER_04, vTexCoord_02) * 2.0 - 1.0;
@@ -62,7 +62,8 @@ void main(void)
     vLightDirection = normalize(vTemp);
     
     mediump vec3 vReflect = reflect(vCameraDirection, vNormalColor);
-    lowp vec4 vColor = mix(vReflectionColor, vRefractionColor, 0.75);
+    mediump float fFresnel = 1.0 - clamp(vReflectionColor.r + vReflectionColor.g + vReflectionColor.b, 0.0, 1.0);
+    lowp vec4 vColor = mix(vReflectionColor, vRefractionColor, fFresnel);
     
     mediump float fLightDistance = length(OUT_Position - OUT_LightPosition);
     mediump float fLightAttitude = fLightConst + fLightLinear * fLightDistance + fLightExponential * fLightDistance * fLightDistance;
