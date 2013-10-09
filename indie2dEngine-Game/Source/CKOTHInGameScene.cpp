@@ -92,6 +92,7 @@ void CKOTHInGameScene::Load(void)
     
     std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
     m_root->InsertOcean(ocean);
+    ocean->Set_Position(glm::vec3(-128.0f, 0.0f, -128.0f));
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
     particleEmitter->Set_Position(glm::vec3(12.0f, 2.0f, 12.0f));
@@ -121,12 +122,12 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
             m_models[i]->Set_Animation("model_03.MDL_anim");
         }
     }
-    angle += 0.033f;
+    angle += 0.33f;
     
     static glm::vec3 lightPosition_01 = glm::vec3(0.0f);
-    lightPosition_01.x = m_characterController->Get_Position().x;// + cosf(-angle) * -16.0f;
+    lightPosition_01.x = 70.0f + cosf(-angle) * -48.0f;
     lightPosition_01.y = 16.0f;
-    lightPosition_01.z = m_characterController->Get_Position().z;// + sinf(-angle) * -16.0f;
+    lightPosition_01.z = 70.0f + sinf(-angle) * -48.0f;
     m_lights[0]->Set_Position(lightPosition_01);
 
     static glm::vec3 lightPosition_02 = glm::vec3(0.0f);

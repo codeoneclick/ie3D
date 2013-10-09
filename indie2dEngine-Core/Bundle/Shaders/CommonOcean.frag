@@ -25,6 +25,8 @@ const mediump vec3 k_vBinormal = vec3(1.0, 0.0, 0.0);
 const mediump vec3 k_vTangent = vec3(0.0, 0.0, 1.0);
 const mediump vec3 k_vNormal = vec3(0.0, 1.0, 0.0);
 
+
+
 void main(void)
 {
     mediump vec2 vTexCoord_01 = vec2(OUT_TexCoord.x + sin(FLOAT_Timer),
@@ -62,8 +64,10 @@ void main(void)
     vLightDirection = normalize(vTemp);
     
     mediump vec3 vReflect = reflect(vCameraDirection, vNormalColor);
-    mediump float fFresnel = 1.0 - clamp(vReflectionColor.r + vReflectionColor.g + vReflectionColor.b, 0.0, 1.0);
-    lowp vec4 vColor = mix(vReflectionColor, vRefractionColor, fFresnel);
+    mediump float fReflectionFresnel = 1.0 - clamp((vReflectionColor.r + vReflectionColor.g + vReflectionColor.b) * 16.0, 0.0, 0.99);
+    mediump float fRefractionFresnel = 1.0 - clamp((vRefractionColor.r + vRefractionColor.g + vRefractionColor.b) * 16.0, 0.0, 0.99);
+    vRefractionColor = mix(vRefractionColor, vWaterColor, fRefractionFresnel);
+    lowp vec4 vColor = mix(vReflectionColor, vRefractionColor, fReflectionFresnel);
     
     mediump float fLightDistance = length(OUT_Position - OUT_LightPosition);
     mediump float fLightAttitude = fLightConst + fLightLinear * fLightDistance + fLightExponential * fLightDistance * fLightDistance;
@@ -73,6 +77,14 @@ void main(void)
     
     fDiffuseColor = fDiffuseColor * fDiffuseFactor + vSpecularColor * fSpecularFactor;
     vColor = fDiffuseColor + vColor * 0.25;
+    
+    mediump vec3 vOceanCenter = vec3(64.0, 0.0, 64.0);
+    mediump float fFogStart = 128.0;
+    mediump float fFogEnd = 192.0;
+    mediump float fFogDistance = length(OUT_Position - vOceanCenter);
+	mediump float fFogFactor = clamp((fFogDistance - fFogStart) / fFogEnd, 0.0, 1.0);
+    
+    vColor = mix(vColor, vec4(1.0, 1.0, 1.0, 1.0), fFogFactor);
     gl_FragColor = vColor;
 }
 

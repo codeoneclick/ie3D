@@ -1,6 +1,6 @@
 <ocean name="ocean">
-	<width value="128"/>
-    <height value="128"/>
+	<width value="512"/>
+    <height value="512"/>
     <altitude value="-0.25"/>
     <waveGeneratorInterval value="0.005"/>
 	<materials>

@@ -29,7 +29,6 @@ m_numTriangles(0)
     
     i32 value = 0;
     glGetIntegerv(GL_MAX_VERTEX_UNIFORM_VECTORS, &value);
-    std::cout<<value<<std::endl;
 }
 
 CRenderMgr::~CRenderMgr(void)
