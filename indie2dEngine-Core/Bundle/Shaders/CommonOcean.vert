@@ -20,40 +20,32 @@ uniform vec3   VECTOR_LightColor_03;
 uniform vec3   VECTOR_LightColor_04;
 uniform vec4   VECTOR_ClipPlane;
 uniform int    INT_LightsCount;
+uniform float  FLOAT_Timer;
 
 varying vec3   OUT_LightDirection;
 varying vec3   OUT_LightPosition;
 varying vec3   OUT_CameraDirection;
 varying vec3   OUT_CameraPosition;
 varying vec3   OUT_Position;
-varying vec4   OUT_TexCoordProj;
-varying vec2   OUT_TexCoord;
+varying vec4   OUT_TexCoordProjection;
+varying vec2   OUT_TexCoordDisplace_01;
+varying vec2   OUT_TexCoordDisplace_02;
 
-/*const vec3 k_vBinormal = vec3(1.0, 0.0, 0.0);
-const vec3 k_vTangent = vec3(0.0, 0.0, 1.0);
-const vec3 k_vNormal = vec3(0.0, 1.0, 0.0);*/
+const float k_fTexCoordScale = 4.0;
 
 void main(void)
 {
     vec4 vPosition = MATRIX_World * vec4(IN_Position, 1.0);
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
-    OUT_TexCoord = (IN_TexCoord / 32767.0  - 1.0) * 4.0;
-    OUT_TexCoordProj = gl_Position;
     
-    /*vec3 vCameraDirection = normalize(vPosition.xyz - VECTOR_CameraPosition);
-    vec3 vTemp;
-    vTemp.x = dot(vCameraDirection, k_vTangent);
-    vTemp.y = dot(vCameraDirection, k_vBinormal);
-    vTemp.z = dot(vCameraDirection, k_vNormal);
-    vCameraDirection = normalize(vTemp);
-    OUT_CameraDirection = vCameraDirection;
     
-    vec3 vLightDirection = normalize(VECTOR_LightPosition_01 - vPosition.xyz);
-    vTemp.x = dot(vLightDirection, k_vTangent);
-    vTemp.y = dot(vLightDirection, k_vBinormal);
-    vTemp.z = dot(vLightDirection, k_vNormal);
-    vLightDirection = normalize(vTemp);
-    OUT_LightDirection = vLightDirection;*/
+    vec2 vTexCoord = (IN_TexCoord / 32767.0  - 1.0) * k_fTexCoordScale;
+    OUT_TexCoordDisplace_01 = vec2(vTexCoord.x + sin(FLOAT_Timer),
+                                   vTexCoord.y - cos(FLOAT_Timer));
+	
+	OUT_TexCoordDisplace_02 = vec2(vTexCoord.x - sin(FLOAT_Timer),
+                                   vTexCoord.y + cos(FLOAT_Timer));
+    OUT_TexCoordProjection = gl_Position;
     
     OUT_LightPosition = VECTOR_LightPosition_01;
     OUT_CameraPosition = VECTOR_CameraPosition;

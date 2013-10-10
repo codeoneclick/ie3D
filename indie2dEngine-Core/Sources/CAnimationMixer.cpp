@@ -111,8 +111,6 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
     assert(m_mesh != nullptr);
     assert(m_skeleton != nullptr);
     
-    _deltatime = 0.02f;
-    
     if(m_currentSequence)
     {
         m_animationTime += _deltatime;

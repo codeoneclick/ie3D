@@ -265,6 +265,7 @@
 		A4AF4BDF1774899A007D4B8C /* particle.emitter.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */; };
 		A4AF4BE2177489E9007D4B8C /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */; };
 		A4AF4BE3177489E9007D4B8C /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */; };
+		A4BB784218069E6B00E050F6 /* IGUIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BB784018069E6B00E050F6 /* IGUIControl.cpp */; };
 		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
 		A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460617450200000D831E /* IResourceCommiter.cpp */; };
 		A4C703431803072D00B3DEEC /* libsdl-2.02.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C703401803070E00B3DEEC /* libsdl-2.02.a */; };
@@ -824,6 +825,8 @@
 		A4AF4BDE1774899A007D4B8C /* particle.emitter.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.material.xml; sourceTree = "<group>"; };
 		A4AF4BE0177489E9007D4B8C /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
 		A4AF4BE1177489E9007D4B8C /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
+		A4BB784018069E6B00E050F6 /* IGUIControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGUIControl.cpp; path = Sources/IGUIControl.cpp; sourceTree = "<group>"; };
+		A4BB784118069E6B00E050F6 /* IGUIControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGUIControl.h; path = Sources/IGUIControl.h; sourceTree = "<group>"; };
 		A4BE460317450198000D831E /* IResourceSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceSerializer.cpp; path = Sources/IResourceSerializer.cpp; sourceTree = "<group>"; };
 		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
 		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
@@ -1859,6 +1862,8 @@
 		A494D36817392DAC00228936 /* GUI Managment */ = {
 			isa = PBXGroup;
 			children = (
+				A4BB784118069E6B00E050F6 /* IGUIControl.h */,
+				A4BB784018069E6B00E050F6 /* IGUIControl.cpp */,
 			);
 			name = "GUI Managment";
 			sourceTree = "<group>";
@@ -2797,6 +2802,7 @@
 				A4F955A317BBC037003D5B6F /* CProgressiveTriangle.cpp in Sources */,
 				A4F955A417BBC037003D5B6F /* CProgressiveVertex.cpp in Sources */,
 				211D30E317C2A61D0038B703 /* IResourceLoadingHandler.cpp in Sources */,
+				A4BB784218069E6B00E050F6 /* IGUIControl.cpp in Sources */,
 				A4535E8817C633D50058CD47 /* CBatchingMgr.cpp in Sources */,
 				A4535E9317C633EA0058CD47 /* CBatch.cpp in Sources */,
 			);

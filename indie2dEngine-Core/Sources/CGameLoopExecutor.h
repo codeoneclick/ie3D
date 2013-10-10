@@ -22,6 +22,7 @@ protected:
     
     std::set<std::shared_ptr<IGameLoopHandler> > m_handlers;
     std::shared_ptr<CFPSCounter> m_fpsCounter;
+    static const ui32 k_MAX_FRAME_RATE;
     
 public:
     

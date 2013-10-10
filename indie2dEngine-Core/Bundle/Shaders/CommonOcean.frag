@@ -1,12 +1,11 @@
-varying mediump vec4   OUT_TexCoordProj;
-varying mediump vec2   OUT_TexCoord;
+varying mediump vec4   OUT_TexCoordProjection;
+varying mediump vec2   OUT_TexCoordDisplace_01;
+varying mediump vec2   OUT_TexCoordDisplace_02;
 varying mediump vec3   OUT_LightDirection;
 varying mediump vec3   OUT_LightPosition;
 varying mediump vec3   OUT_CameraDirection;
 varying mediump vec3   OUT_CameraPosition;
 varying mediump vec3   OUT_Position;
-
-uniform highp float  FLOAT_Timer;
 
 uniform sampler2D SAMPLER_01;
 uniform sampler2D SAMPLER_02;
@@ -25,23 +24,15 @@ const mediump vec3 k_vBinormal = vec3(1.0, 0.0, 0.0);
 const mediump vec3 k_vTangent = vec3(0.0, 0.0, 1.0);
 const mediump vec3 k_vNormal = vec3(0.0, 1.0, 0.0);
 
-
-
 void main(void)
 {
-    mediump vec2 vTexCoord_01 = vec2(OUT_TexCoord.x + sin(FLOAT_Timer),
-								     OUT_TexCoord.y - cos(FLOAT_Timer));
-	
-	mediump vec2 vTexCoord_02 = vec2(OUT_TexCoord.x - sin(FLOAT_Timer),
-								     OUT_TexCoord.y + cos(FLOAT_Timer));
-                                     
-    lowp vec4 vNormalColor_01 = texture2D(SAMPLER_04, vTexCoord_01) * 2.0 - 1.0;
-    lowp vec4 vNormalColor_02 = texture2D(SAMPLER_04, vTexCoord_02) * 2.0 - 1.0;
-    lowp vec3 vNormalColor = mix(vNormalColor_01, vNormalColor_02, 0.5).xyz;                                 
-
-    mediump vec2 vTexCoordProj = OUT_TexCoordProj.xy;
-	vTexCoordProj.x = 0.5 - 0.5 * vTexCoordProj.x / OUT_TexCoordProj.w;
-	vTexCoordProj.y = 0.5 + 0.5 * vTexCoordProj.y / OUT_TexCoordProj.w;
+    lowp vec4 vNormalColor_01 = texture2D(SAMPLER_04, OUT_TexCoordDisplace_01) * 2.0 - 1.0;
+    lowp vec4 vNormalColor_02 = texture2D(SAMPLER_04, OUT_TexCoordDisplace_02) * 2.0 - 1.0;
+    lowp vec3 vNormalColor = mix(vNormalColor_01, vNormalColor_02, 0.5).xyz;
+    
+    mediump vec2 vTexCoordProj = OUT_TexCoordProjection.xy;
+	vTexCoordProj.x = 0.5 - 0.5 * vTexCoordProj.x / OUT_TexCoordProjection.w;
+	vTexCoordProj.y = 0.5 + 0.5 * vTexCoordProj.y / OUT_TexCoordProjection.w;
     
     mediump vec2 vPerturbation = fPerturbationFactor * vNormalColor.rg;
     mediump vec2 vPerturbatedTexCoord = vTexCoordProj + vPerturbation;
@@ -76,15 +67,8 @@ void main(void)
     lowp vec4 fDiffuseColor = vColor;
     
     fDiffuseColor = fDiffuseColor * fDiffuseFactor + vSpecularColor * fSpecularFactor;
-    vColor = fDiffuseColor + vColor * 0.25;
+    vColor = fDiffuseColor + vColor * 0.5;
     
-    mediump vec3 vOceanCenter = vec3(64.0, 0.0, 64.0);
-    mediump float fFogStart = 128.0;
-    mediump float fFogEnd = 192.0;
-    mediump float fFogDistance = length(OUT_Position - vOceanCenter);
-	mediump float fFogFactor = clamp((fFogDistance - fFogStart) / fFogEnd, 0.0, 1.0);
-    
-    vColor = mix(vColor, vec4(1.0, 1.0, 1.0, 1.0), fFogFactor);
     gl_FragColor = vColor;
 }
 
