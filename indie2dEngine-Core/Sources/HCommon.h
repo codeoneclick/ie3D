@@ -32,9 +32,7 @@
 #define USE_JSONCPP 1
 #define USE_GCDPP 1
 
-#define UINT16_MAX std::numeric_limits<ui16>::max()
-
-#else if defined(__WIN32__)
+#else
 
 #define M_PI 3.14f
 #define M_PI_2 1.57f
