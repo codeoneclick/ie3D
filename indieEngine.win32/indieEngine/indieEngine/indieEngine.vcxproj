@@ -19,7 +19,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120_CTP_Nov2012</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -82,12 +82,14 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CBone.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CCamera.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CCollisionMgr.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CCommonOS_win32.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CFPSCounter.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CFrustum.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_Win32.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoader.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoadingOperation.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateSerializer.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_win32.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CIndexBuffer.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CInputContext_Win32.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CLight.cpp" />
@@ -107,6 +109,7 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoader.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoadingOperation.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateSerializer.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow_win32.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateLoadingOperation.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateSerializer.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.cpp" />
@@ -172,6 +175,13 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingOperation.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CCharacterController.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameScene.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameTransition.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CKOTHWorkflow.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CNavigator.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\IMoveControllerHandler.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\Win32-Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppCommon.h" />
@@ -348,7 +358,7 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoader.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateSerializer.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow_iOS.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateSerializer.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.h" />
@@ -417,6 +427,15 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CCharacterController.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CGameViewController.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameScene.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameTransition.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CKOTHWorkflow.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CMoveControllerView_iOS.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CNavigator.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\HKOTHEnums.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\IMoveControllerHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_common.inl" />
@@ -527,6 +546,8 @@
     <None Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_iOS.mm" />
     <None Include="..\..\..\indie2dEngine-Core\Sources\CInputContext_iOS.mm" />
     <None Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow_iOS.mm" />
+    <None Include="..\..\..\indie2dEngine-Game\Source\CGameViewController.mm" />
+    <None Include="..\..\..\indie2dEngine-Game\Source\CMoveControllerView_iOS.mm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

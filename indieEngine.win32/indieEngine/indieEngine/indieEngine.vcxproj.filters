@@ -112,6 +112,9 @@
     <Filter Include="Source Files\indieEngine-Core\Libraries\gcdpp">
       <UniqueIdentifier>{0f10b1fb-d5fe-48d7-9332-c2799f153d1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\indieEngine-Game\Sources">
+      <UniqueIdentifier>{8a3a2709-7b77-4d48-af90-df8fe8b5aa8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.cpp">
@@ -429,6 +432,36 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Libraries\pugixml\pugixml.cpp">
       <Filter>Source Files\indieEngine-Core\Libraries\pugixml</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CCharacterController.cpp">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameScene.cpp">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameTransition.cpp">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CKOTHWorkflow.cpp">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CNavigator.cpp">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\IMoveControllerHandler.cpp">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\Win32-Main.cpp">
+      <Filter>Source Files\indieEngine-Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CCommonOS_win32.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow_win32.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_win32.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.h">
@@ -690,9 +723,6 @@
       <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMaterial.h">
-      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow_iOS.h">
       <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CRenderMgr.h">
@@ -1160,6 +1190,36 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pugixml\pugixml.hpp">
       <Filter>Source Files\indieEngine-Core\Libraries\pugixml</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CCharacterController.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CGameViewController.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameScene.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameTransition.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CKOTHWorkflow.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CMoveControllerView_iOS.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CNavigator.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\HKOTHEnums.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\IMoveControllerHandler.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_iOS.mm">
@@ -1485,6 +1545,12 @@
     </None>
     <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\wrap.inl">
       <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Game\Source\CGameViewController.mm">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Game\Source\CMoveControllerView_iOS.mm">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
     </None>
   </ItemGroup>
 </Project>

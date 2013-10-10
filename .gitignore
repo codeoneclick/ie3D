@@ -9,6 +9,7 @@
 *.dylib
 *.pdb
 *.idb
+*.opensdf
 
 # Compiled Static libraries
 *.lai
