@@ -7,6 +7,9 @@
 //
 
 #include "CGameLoopExecutor.h"
+
+#ifdef __APPLE__
+
 #include "IGameLoopHandler.h"
 #include <Foundation/Foundation.h>
 #include <UIKit/UIKit.h>
@@ -151,4 +154,6 @@ void Inc_TrianglesCount(ui32 _value)
 {
     [[CGameLoopExecutor_iOS SharedInstance] incTrianglesCount:_value];
 };
+
+#endif
 

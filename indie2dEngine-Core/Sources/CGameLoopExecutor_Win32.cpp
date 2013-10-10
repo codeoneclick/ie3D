@@ -8,6 +8,8 @@
 
 #include "CGameLoopExecutor.h"
 
+#ifdef __WIN32__
+
 bool Run(void)
 {
 	return true;
@@ -22,3 +24,5 @@ void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler)
 {
     
 };
+
+#endif
