@@ -2,10 +2,13 @@
 *.slo
 *.lo
 *.o
+*.obj
 
 # Compiled Dynamic libraries
 *.so
 *.dylib
+*.pdb
+*.idb
 
 # Compiled Static libraries
 *.lai

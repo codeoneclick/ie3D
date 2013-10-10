@@ -48,16 +48,16 @@ glm::vec3 CVertexBuffer::UncompressU8Vec4(const glm::u8vec4& _compressed)
 glm::u16vec2 CVertexBuffer::CompressVec2(const glm::vec2& _uncompressed)
 {
     glm::u16vec2 compressed;
-    compressed.x = static_cast<ui16>((_uncompressed.x + 1.0f) * 0.5f * std::numeric_limits<ui16>::max());
-    compressed.y = static_cast<ui16>((_uncompressed.y + 1.0f) * 0.5f * std::numeric_limits<ui16>::max());
+    compressed.x = static_cast<ui16>((_uncompressed.x + 1.0f) * 0.5f * UINT16_MAX);
+    compressed.y = static_cast<ui16>((_uncompressed.y + 1.0f) * 0.5f * UINT16_MAX);
     return compressed;
 }
 
 glm::vec2 CVertexBuffer::UncompressU16Vec2(const glm::u16vec2& _compressed)
 {
     glm::vec2 uncompressed;
-    uncompressed.x = static_cast<f32>(_compressed.x / (std::numeric_limits<ui16>::max() * 0.5f) - 1.0f);
-    uncompressed.y = static_cast<f32>(_compressed.y / (std::numeric_limits<ui16>::max() * 0.5f) - 1.0f);
+    uncompressed.x = static_cast<f32>(_compressed.x / (UINT16_MAX * 0.5f) - 1.0f);
+    uncompressed.y = static_cast<f32>(_compressed.y / (UINT16_MAX * 0.5f) - 1.0f);
     return uncompressed;
 }
 

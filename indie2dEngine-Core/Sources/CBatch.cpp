@@ -12,8 +12,8 @@
 #include "CShader.h"
 #include "CAnimationMixer.h"
 
-const ui32 CBatch::k_MAX_NUM_VERTICES = std::numeric_limits<ui16>::max() / 4; // 16k vertices
-const ui32 CBatch::k_MAX_NUM_INDICES = std::numeric_limits<ui16>::max() / 2;  // 32k indices
+const ui32 CBatch::k_MAX_NUM_VERTICES = UINT16_MAX / 4; // 16k vertices
+const ui32 CBatch::k_MAX_NUM_INDICES = UINT16_MAX / 2;  // 32k indices
 const ui32 CBatch::k_MAX_NUM_TRANSFORMATION = 255;
 
 CBatch::CBatch(const std::string& _mode, ui32 _renderQueuePosition, std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _bind) :
@@ -73,8 +73,10 @@ void CBatch::Unlock(void)
     {
         m_proccessed = 1;
         assert(m_matrices.size() == m_meshes.size());
+#ifdef USE_GCDPP
         std::function<void(void)> unlock = [this]()
         {
+#endif
             ui32 numVertices = 0;
             ui32 numIndices = 0;
             ui32 numTransformations = 0;
@@ -126,8 +128,10 @@ void CBatch::Unlock(void)
             m_proccessed = 0;
             m_locked = 0;
             m_unlocked = 1;
+#ifdef USE_GCDPP
         };
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), unlock);
+#endif
     }
 }
 

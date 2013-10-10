@@ -32,19 +32,19 @@ public:
     CFrame(i32 _numBones);
     ~CFrame(void);
     
-    inline const glm::quat& Get_Rotation(i32 _index) const
+    inline const glm::quat& Get_Rotation(ui32 _index) const
 	{
         assert(_index < m_rotations.size());
 		return m_rotations[_index];
 	};
     
-	inline const glm::vec3& Get_Position(i32 _index) const
+	inline const glm::vec3& Get_Position(ui32 _index) const
 	{
         assert(_index < m_positions.size());
 		return m_positions[_index];
 	};
     
-    inline const glm::vec3& Get_Scale(i32 _index) const
+    inline const glm::vec3& Get_Scale(ui32 _index) const
 	{
         assert(_index < m_scales.size());
 		return m_scales[_index];

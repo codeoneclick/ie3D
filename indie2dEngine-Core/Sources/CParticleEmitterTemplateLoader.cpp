@@ -23,13 +23,16 @@ CParticleEmitterTemplateLoader::~CParticleEmitterTemplateLoader(void)
 
 void CParticleEmitterTemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
 {
+#ifdef USE_GCDPP
     std::function<void(std::string, std::shared_ptr<ITemplateLoadingHandler>)> function = [](std::string _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
     {
+#endif
         std::shared_ptr<CParticleEmitterLoadingOperation> operation = std::make_shared<CParticleEmitterLoadingOperation>();
         std::shared_ptr<SParticleEmitterTemplate> particleEmitterTemplate = std::static_pointer_cast<SParticleEmitterTemplate>(operation->Serialize(_filename));
         assert(particleEmitterTemplate != nullptr);
         assert(_handler != nullptr);
         
+#ifdef USE_GCDPP
         std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SParticleEmitterTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SParticleEmitterTemplate> _template)
         {
             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
@@ -37,4 +40,7 @@ void CParticleEmitterTemplateLoader::Load(const std::string& _filename, std::sha
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function, _handler, particleEmitterTemplate);
     };
     gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function, _filename, _handler);
+#else
+	 _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(particleEmitterTemplate);
+#endif
 }

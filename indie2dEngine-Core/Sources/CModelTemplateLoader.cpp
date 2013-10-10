@@ -23,13 +23,15 @@ CModelTemplateLoader::~CModelTemplateLoader(void)
 
 void CModelTemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
 {
+#ifdef USE_GCDPP
     std::function<void(std::string, std::shared_ptr<ITemplateLoadingHandler>)> function = [](std::string _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
     {
+#endif
         std::shared_ptr<CModelTemplateLoadingOperation> operation = std::make_shared<CModelTemplateLoadingOperation>();
         std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(operation->Serialize(_filename));
         assert(modelTemplate != nullptr);
         assert(_handler != nullptr);
-        
+#ifdef USE_GCDPP
         std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SModelTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SModelTemplate> _template)
         {
             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
@@ -37,4 +39,7 @@ void CModelTemplateLoader::Load(const std::string& _filename, std::shared_ptr<IT
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function, _handler, modelTemplate);
     };
     gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function, _filename, _handler);
+#else
+	_handler->_Get_Commands()._ExecuteTemplateLoadedCommand(modelTemplate);
+#endif
 }

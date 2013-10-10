@@ -48,7 +48,9 @@ void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
 
 #else
 
-void Run(void);
+bool Run(void);
+void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
+void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
 
 #endif
 

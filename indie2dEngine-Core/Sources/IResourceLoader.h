@@ -25,7 +25,7 @@ protected:
     std::map<std::string, std::shared_ptr<IResource> > m_resourceContainer;
     
     std::mutex m_mutex;
-    std::atomic_char m_isRunning;
+    ui8 m_isRunning;
     std::thread m_thread;
     
     virtual void _OnGameLoopUpdate(f32 _deltatime);

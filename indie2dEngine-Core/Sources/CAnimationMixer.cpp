@@ -115,8 +115,10 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
     {
         m_animationTime += _deltatime;
         
+#ifdef USE_GCDPP
         std::function<void(void)> function = [this]()
         {
+#endif
             f32 animationDeltaTime = m_animationTime * m_currentSequence->Get_Fps();
             i32 floorAnimationDeltaTime = static_cast<i32>(floorf(animationDeltaTime));
             i32 frameIndex_01 = floorAnimationDeltaTime % m_currentSequence->Get_NumFrames();
@@ -142,8 +144,10 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
                 m_skeleton->Get_Transformations(m_skeletonGuid)[i] = matrixTranslation * matrixRotation * matrixScale;
             }
             m_skeleton->Update(m_skeletonGuid);
+#ifdef USE_GCDPP
         };
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
+#endif
     }
 }
 

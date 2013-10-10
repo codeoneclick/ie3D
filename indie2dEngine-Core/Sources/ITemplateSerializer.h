@@ -19,8 +19,10 @@ class ITemplateSerializer
 private:
     
 protected:
-    
+
+#ifdef USE_CURL
     CURL* m_context;
+#endif
     std::string m_message;
     
     bool _RegisterCurlContext(void);

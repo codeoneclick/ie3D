@@ -8,8 +8,10 @@
 
 #include "ITemplateSerializer.h"
 
-ITemplateSerializer::ITemplateSerializer(void) :
-m_context(nullptr)
+ITemplateSerializer::ITemplateSerializer(void)
+#ifdef USE_CURL
+: m_context(nullptr)
+#endif
 {
     
 }
@@ -30,6 +32,7 @@ size_t ITemplateSerializer::_Callback(char* _data, size_t _size, size_t _nmemb, 
 
 bool ITemplateSerializer::_RegisterCurlContext(void)
 {
+#ifdef USE_CURL
     curl_global_init(CURL_GLOBAL_DEFAULT);
     m_context = curl_easy_init();
     if(m_context)
@@ -48,15 +51,18 @@ bool ITemplateSerializer::_RegisterCurlContext(void)
         curl_easy_setopt(m_context, CURLOPT_WRITEFUNCTION, ITemplateSerializer::_Callback);
         return true;
     }
+#endif
     return false;
 }
 
 void ITemplateSerializer::_UnregisterCurlContext(void)
 {
+#ifdef USE_CURL
     if(m_context)
     {
         curl_easy_cleanup(m_context);
     }
     curl_global_cleanup();
+#endif
 }
 

@@ -26,8 +26,20 @@
 #include <assert.h>
 #include <functional>
 
-#include <curl/curl.h>
-#include <json/json.h>
+#ifdef __APPLE__
+
+#define USE_CURL 1
+#define USE_JSONCPP 1
+#define USE_GCDPP 1
+
+#define UINT16_MAX std::numeric_limits<ui16>::max()
+
+#else if defined(__WIN32__)
+
+#define M_PI 3.14f
+#define M_PI_2 1.57f
+
+#endif
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_precision.hpp>
@@ -35,10 +47,19 @@
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
-
 #include <pugixml/pugixml.hpp>
 
+#ifdef USE_GCDPP
 #include "gcdppLib.h"
+#endif
+
+#ifdef USE_CURL
+#include <curl/curl.h>
+#endif
+
+#ifdef USE_JSONCPP
+#include <json/json.h>
+#endif
 
 #ifdef __APPLE__
 
@@ -47,6 +68,10 @@
 #include <QuartzCore/QuartzCore.h>
 
 #else
+
+#include <EGL/egl.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 
 #endif
 

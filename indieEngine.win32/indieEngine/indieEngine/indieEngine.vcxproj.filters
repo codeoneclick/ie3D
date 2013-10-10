@@ -94,6 +94,24 @@
     <Filter Include="Source Files\indieEngine-Core\Source\Render Managment\Operations">
       <UniqueIdentifier>{8d9edc78-4fc4-46dc-9c34-51a0f343184f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Libraries\jsoncpp">
+      <UniqueIdentifier>{c51889a5-c572-43ca-859e-52e2512d486e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Libraries\curl">
+      <UniqueIdentifier>{eec44ece-b98d-464e-998a-82bfeeebee51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Libraries\glm">
+      <UniqueIdentifier>{fb36f0c8-8170-4f3e-88e4-c1994edb1681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Libraries\pugixml">
+      <UniqueIdentifier>{5594fb2e-2ebd-4840-99ad-6be8a5062067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Libraries\pvrtextool">
+      <UniqueIdentifier>{5320311f-db4c-4380-b532-c497dd472bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Libraries\gcdpp">
+      <UniqueIdentifier>{0f10b1fb-d5fe-48d7-9332-c2799f153d1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.cpp">
@@ -134,6 +152,282 @@
     </ClCompile>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSkeleton.cpp">
       <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CMeshSerializer_MDL.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSequenceSerializer_SEQ.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CShaderSerializer_GLSL.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSkeletonSerializer_SK.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CTextureSerializer_PVR.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IResourceSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CMeshCommiter_MDL.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSequenceCommiter_SEQ.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CShaderCommiter_GLSL.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSkeletonCommiter_SK.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CTextureCommiter_PVR.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IResourceCommiter.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CMeshLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSequenceLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CShaderLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSkeletonLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CTextureLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IResourceLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CMeshLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSequenceLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CShaderLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSkeletonLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CTextureLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IResourceLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CTemplateAccessor.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CModelTemplateLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitterTemplateLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CMaterialTemplateLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CModelTemplateLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitterLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CScreenSpaceRenderOperationTemplateLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CMaterialTemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CModelTemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitterTemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CScreenSpaceRenderOperationTemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplate.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Templates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSceneFabricator.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSceneGraph.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSceneUpdateMgr.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IScene.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ISceneUpdateHandler.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CBillboard.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CModel.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COcean.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CSprite.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameObject.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CAnimationMixer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CCamera.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CFrustum.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CLight.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameTransition.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment\Transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_Win32.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameLoopHandler.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameWorkflow.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CCollisionMgr.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Collision Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ICollisionHandler.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Collision Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CBatch.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CBatchingMgr.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CMaterial.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CRenderMgr.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGraphicsContext.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IRenderHandler.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CRenderOperationOutput.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CRenderOperationScreenSpace.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CRenderOperationWorldSpace.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CInputContext_Win32.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Input Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IInputTapRecognizerHandler.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Input Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGUIControl.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CFPSCounter.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CTimer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppImpl.cpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppMainQueue_t.cpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppQueue_i.cpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppQueue_t.cpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppTask_i.cpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppTask_t.cpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Libraries\pugixml\pugixml.cpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\pugixml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,5 +470,1021 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSkeleton.h">
       <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMeshSerializer_MDL.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSequenceSerializer_SEQ.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CShaderSerializer_GLSL.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSkeletonSerializer_SK.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CTextureSerializer_PVR.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IResourceSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMeshCommiter_MDL.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSequenceCommiter_SEQ.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CShaderCommiter_GLSL.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSkeletonCommiter_SK.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CTextureCommiter_PVR.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IResourceCommiter.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations\Commiters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMeshLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSequenceLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CShaderLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSkeletonLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CTextureLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IResourceLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMeshLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSequenceLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CShaderLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSkeletonLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CTextureLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IResourceLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CTemplateAccessor.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CModelTemplateLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitterTemplateLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMaterialTemplateLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CModelTemplateLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitterLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CScreenSpaceRenderOperationTemplateLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMaterialTemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CModelTemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitterTemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CScreenSpaceRenderOperationTemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplate.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSceneFabricator.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSceneGraph.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSceneUpdateMgr.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IScene.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ISceneUpdateHandler.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CBillboard.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CModel.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COcean.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CSprite.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGameObject.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CAnimationMixer.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CCamera.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CFrustum.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CLight.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGameTransition.h">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment\Transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor.h">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGameLoopHandler.h">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGameWorkflow.h">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CCollisionMgr.h">
+      <Filter>Source Files\indieEngine-Core\Source\Collision Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ICollisionHandler.h">
+      <Filter>Source Files\indieEngine-Core\Source\Collision Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CBatch.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CBatchingMgr.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMaterial.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow_iOS.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CRenderMgr.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGraphicsContext.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IRenderHandler.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CRenderOperationOutput.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CRenderOperationScreenSpace.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CRenderOperationWorldSpace.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IInputContext.h">
+      <Filter>Source Files\indieEngine-Core\Source\Input Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IInputTapRecognizerHandler.h">
+      <Filter>Source Files\indieEngine-Core\Source\Input Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGUIControl.h">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CCommonOS.h">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CFPSCounter.h">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CTimer.h">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\HCommon.h">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\HEnums.h">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppCommon.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppImpl.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppLib.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppMainQueue_t.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppQueue_i.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppQueue_t.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppTask_i.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppTask_t.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\gcdpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_common.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_exponential.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_geometric.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_integer.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_matrix.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_noise.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_packing.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_trigonometric.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_vector_relational.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\hint.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_common.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_exponential.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_geometric.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_matrix.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_trigonometric.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_vector_relational.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\setup.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_float.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_gentype.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_half.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_int.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat2x2.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat2x3.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat2x4.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat3x2.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat3x3.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat3x4.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat4x2.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat4x3.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat4x4.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_size.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec1.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec2.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec3.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec4.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\_detail.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\_fixes.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\_swizzle.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\_swizzle_func.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\_vectorize.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\ext.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\glm.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\half_float.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\matrix_access.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\matrix_integer.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\matrix_inverse.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\matrix_transform.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\noise.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\quaternion.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\random.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\swizzle.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\type_precision.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\type_ptr.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\associated_min_max.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\bit.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\closest_point.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\color_cast.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\color_space.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\color_space_YCoCg.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\compatibility.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\component_wise.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\constants.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\epsilon.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\euler_angles.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\extend.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\extented_min_max.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\fast_exponential.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\fast_square_root.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\fast_trigonometry.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\gradient_paint.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\handed_coordinate_space.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\inertia.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\integer.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\intersect.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\int_10_10_10_2.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\log_base.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_cross_product.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_interpolation.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_major_storage.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_operation.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_query.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\mixed_product.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\multiple.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\noise.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\norm.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\normal.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\normalize_dot.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\number_precision.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\ocl_type.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\optimum_pow.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\orthonormalize.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\perpendicular.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\polar_coordinates.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\projection.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\quaternion.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\random.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\raw_data.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\reciprocal.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\rotate_vector.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\simd_mat4.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\simd_vec4.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\spline.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\std_based_type.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\string_cast.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\transform.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\transform2.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\ulp.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\unsigned_int.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\vec1.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\vector_access.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\vector_angle.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\vector_query.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\verbose_operator.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\wrap.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\glm\virtrev\xstream.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTArray.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTDecompress.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTError.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTexture.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTextureDefines.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTextureFormat.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTextureHeader.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTextureUtilities.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTextureVersion.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTGlobal.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTMap.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTString.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include\PVRTTexture.h">
+      <Filter>Source Files\indieEngine-Core\Libraries\pvrtextool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pugixml\pugiconfig.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\pugixml\pugixml.hpp">
+      <Filter>Source Files\indieEngine-Core\Libraries\pugixml</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_iOS.mm">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_iOS.mm">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow_iOS.mm">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Sources\CInputContext_iOS.mm">
+      <Filter>Source Files\indieEngine-Core\Source\Input Managment</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Sources\CCommonOS_iOS.mm">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_common.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_exponential.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_geometric.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_integer.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_matrix.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_noise.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_packing.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_trigonometric.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_vector_relational.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_common.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_exponential.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_geometric.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_matrix.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_trigonometric.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\intrinsic_vector_relational.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_gentype.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_half.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat2x2.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat2x3.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat2x4.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat3x2.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat3x3.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat3x4.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat4x2.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat4x3.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_mat4x4.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec1.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec2.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec3.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\type_vec4.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\half_float.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\matrix_access.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\matrix_inverse.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\matrix_transform.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\noise.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\quaternion.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\random.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\swizzle.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\type_precision.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtc\type_ptr.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\associated_min_max.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\bit.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\closest_point.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\color_cast.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\color_space.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\color_space_YCoCg.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\compatibility.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\component_wise.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\constants.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\epsilon.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\euler_angles.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\extend.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\extented_min_max.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\fast_exponential.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\fast_square_root.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\fast_trigonometry.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\gradient_paint.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\handed_coordinate_space.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\inertia.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\integer.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\intersect.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\int_10_10_10_2.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\log_base.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_cross_product.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_interpolation.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_major_storage.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_operation.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\matrix_query.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\mixed_product.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\multiple.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\noise.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\norm.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\normal.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\normalize_dot.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\number_precision.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\ocl_type.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\optimum_pow.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\orthonormalize.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\perpendicular.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\polar_coordinates.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\projection.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\quaternion.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\random.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\raw_data.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\reciprocal.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\rotate_vector.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\simd_mat4.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\simd_vec4.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\spline.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\std_based_type.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\string_cast.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\transform.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\transform2.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\ulp.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\unsigned_int.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\vec1.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\vector_access.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\vector_angle.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\vector_query.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\verbose_operator.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
+    <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\wrap.inl">
+      <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
+    </None>
   </ItemGroup>
 </Project>

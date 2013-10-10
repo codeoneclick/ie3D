@@ -7,3 +7,18 @@
 //
 
 #include "CGameLoopExecutor.h"
+
+bool Run(void)
+{
+	return true;
+}
+
+void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler)
+{
+   
+};
+
+void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler)
+{
+    
+};

@@ -10,6 +10,8 @@
 #include "CCommonOS.h"
 #include "ITemplate.h"
 
+#ifdef __APPLE__
+
 std::map<std::string, GLenum> g_glEnumContainer = {
     {"GL_FRONT", GL_FRONT},
     {"GL_BACK", GL_BACK},
@@ -19,6 +21,25 @@ std::map<std::string, GLenum> g_glEnumContainer = {
     {"GL_CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE },
     {"GL_MIRRORED_REPEAT", GL_MIRRORED_REPEAT }
 };
+
+#else if defined(__WIN32)
+
+static std::map<std::string, GLenum> __CreateGlEnumContainer(void)
+{
+	 std::map<std::string, GLenum> container;
+	 container.insert(std::make_pair("GL_FRONT", GL_FRONT));
+	 container.insert(std::make_pair("GL_BACK", GL_BACK));
+	 container.insert(std::make_pair("GL_SRC_ALPHA", GL_SRC_ALPHA));
+	 container.insert(std::make_pair("GL_ONE_MINUS_SRC_ALPHA", GL_ONE_MINUS_SRC_ALPHA));
+	 container.insert(std::make_pair("GL_REPEAT", GL_REPEAT));
+	 container.insert(std::make_pair("GL_CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE));
+	 container.insert(std::make_pair("GL_MIRRORED_REPEAT", GL_MIRRORED_REPEAT));
+	 return container;
+};
+
+std::map<std::string, GLenum> g_glEnumContainer = __CreateGlEnumContainer();
+
+#endif
 
 CMaterialTemplateSerializer::CMaterialTemplateSerializer(void)
 {
