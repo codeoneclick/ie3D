@@ -101,7 +101,12 @@ void Run(void)
 		}
 		else
 		{
+			assert(CGameLoopExecutor::Get_Instance() != nullptr);
+			assert(CGameLoopExecutor::Get_Instance()->Get_FPSCounter() != nullptr);
+			CGameLoopExecutor::Get_Instance()->Get_FPSCounter()->Reset();
 			CGameLoopExecutor::Get_Instance()->OnGameLoopUpdate();
+			CGameLoopExecutor::Get_Instance()->Get_FPSCounter()->Submit();
+			std::cout<<"[FPS] "<<Get_FramesPerSecond()<<std::endl;
 		}
 	}
 };

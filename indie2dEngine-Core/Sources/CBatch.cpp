@@ -73,10 +73,8 @@ void CBatch::Unlock(void)
     {
         m_proccessed = 1;
         assert(m_matrices.size() == m_meshes.size());
-#ifdef USE_GCDPP
         std::function<void(void)> unlock = [this]()
         {
-#endif
             ui32 numVertices = 0;
             ui32 numIndices = 0;
             ui32 numTransformations = 0;
@@ -128,9 +126,12 @@ void CBatch::Unlock(void)
             m_proccessed = 0;
             m_locked = 0;
             m_unlocked = 1;
-#ifdef USE_GCDPP
+
         };
+#ifdef USE_GCDPP
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), unlock);
+#else
+		std::async(std::launch::async, unlock);
 #endif
     }
 }

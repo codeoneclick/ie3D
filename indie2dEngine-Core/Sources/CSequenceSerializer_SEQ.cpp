@@ -32,7 +32,7 @@ void CSequenceSerializer_SEQ::Serialize(void)
     filename.append(m_filename);
     
     std::ifstream filestream;
-    filestream.open(filename.c_str());
+    filestream.open(filename.c_str(), std::ifstream::in | std::ifstream::binary);
     if (!filestream.is_open())
     {
         m_status = E_SERIALIZER_STATUS_FAILURE;

@@ -9,12 +9,12 @@ std::string Get_BundlePath(void)
 
 ui32 Get_ScreenWidth(void)
 {
-    return 480;
+    return 640;
 };
 
 ui32 Get_ScreenHeight(void)
 {
-    return 640;
+    return 480;
 };
 
 f32 Get_Random(f32 _minValue, f32 _maxValue)
