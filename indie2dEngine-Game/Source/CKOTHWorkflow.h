@@ -23,7 +23,7 @@ public:
     CKOTHWorkflow(void);
     ~CKOTHWorkflow(void);
     
-    std::shared_ptr<IGameTransition> CreateXcomInGameTransition(const std::string& _filename, void* _hwnd);
+    std::shared_ptr<IGameTransition> CreateKOTHInGameTransition(const std::string& _filename, void* _hwnd);
 };
 
 #endif 

@@ -1,8 +1,9 @@
 
-#include "COGLWindow.h"
+#include "IOGLWindow.h"
 #include "CCommonOS.h"
+#include "IInputContext.h"
 
-CGLWindow_Win32::CGLWindow_Win32(void)
+IOGLWindow::IOGLWindow(void)
 {
 	m_hWnd = 0;
 	m_hDC = 0;
@@ -17,7 +18,7 @@ CGLWindow_Win32::CGLWindow_Win32(void)
 	windowRectangle.bottom = Get_ScreenHeight();                      
 
 	windowClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;  
-	windowClass.lpfnWndProc = (WNDPROC)CInputContext::InputProcess;          
+	windowClass.lpfnWndProc = (WNDPROC)IInputContext::InputProcess;          
 	windowClass.cbClsExtra = 0;                                                                    
 	windowClass.cbWndExtra = 0;                                                            
 	windowClass.hInstance = GetModuleHandle(NULL);                                            
@@ -60,4 +61,9 @@ CGLWindow_Win32::CGLWindow_Win32(void)
 
 	ShowWindow(m_hWnd, SW_SHOW);  
 	UpdateWindow(m_hWnd);     
+}
+
+IOGLWindow::~IOGLWindow(void)
+{
+
 }

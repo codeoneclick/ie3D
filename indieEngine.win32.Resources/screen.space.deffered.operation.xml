@@ -1,0 +1,3 @@
+<operation guid="screen.space.deffered.operation" screenWidth="320" screenHeight="240">
+    <material filename="material.deffered.screen.xml"/>
+</operation>

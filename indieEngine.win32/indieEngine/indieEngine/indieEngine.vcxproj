@@ -176,6 +176,7 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingOperation.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CCharacterController.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CGameViewController_win32.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameScene.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameTransition.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CKOTHWorkflow.cpp" />
@@ -358,7 +359,7 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoader.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateSerializer.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IOGLWindow.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateSerializer.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.h" />
@@ -429,6 +430,7 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CCharacterController.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CGameViewController.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CGameViewController_win32.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameScene.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CKOTHInGameTransition.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CKOTHWorkflow.h" />

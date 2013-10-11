@@ -462,6 +462,9 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_win32.cpp">
       <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CGameViewController_win32.cpp">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.h">
@@ -1217,7 +1220,10 @@
     <ClInclude Include="..\..\..\indie2dEngine-Game\Source\IMoveControllerHandler.h">
       <Filter>Source Files\indieEngine-Game\Sources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow.h">
+    <ClInclude Include="..\..\..\indie2dEngine-Game\Source\CGameViewController_win32.h">
+      <Filter>Source Files\indieEngine-Game\Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IOGLWindow.h">
       <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
     </ClInclude>
   </ItemGroup>

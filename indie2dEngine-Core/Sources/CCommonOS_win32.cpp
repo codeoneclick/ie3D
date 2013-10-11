@@ -1,10 +1,10 @@
 #include "CCommonOS.h"
 
-#ifdef __WIN32__
+#ifndef __APPLE__
 
 std::string Get_BundlePath(void)
 {
-    return "../../Resources/Bundle/";
+    return "../../../indieEngine.win32.Resources/";
 };
 
 ui32 Get_ScreenWidth(void)

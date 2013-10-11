@@ -1,0 +1,3 @@
+<operation guid="screen.space.bloomextract.operation" screenWidth="320" screenHeight="240">
+    <material filename="material.bloomextract.screen.xml"/>
+</operation>

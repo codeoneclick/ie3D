@@ -34,6 +34,7 @@ m_isLoaded(false)
     assert(_graphicsContext != nullptr);
     assert(_inputContext != nullptr);
     m_renderMgr = std::make_shared<CRenderMgr>(_graphicsContext);
+	CSceneFabricator::_Set_ScreenSpaceTextureAccessor(m_renderMgr);
     std::shared_ptr<CBatchingMgr> batchingMgr = std::make_shared<CBatchingMgr>(m_renderMgr);
     m_renderMgr->Set_BatchingMgr(batchingMgr);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();

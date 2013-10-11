@@ -1,694 +1,132 @@
-﻿Build started 10.10.2013 18:59:28.
+﻿Build started 11.10.2013 16:03:41.
      1>Project "D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\indieEngine\indieEngine.vcxproj" on node 2 (Build target(s)).
      1>CTP_Warning:
          'Microsoft Visual C++ Compiler Nov 2012 CTP' is for testing purposes only.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\CL.exe /c /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Sources" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\ogles2\include" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\pvrtextool\include" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\gcdpp\include" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\jsoncpp\include" /ZI /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /U_CONSOLE /U__WIN32__ /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppImpl.cpp" "..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppMainQueue_t.cpp" "..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppQueue_i.cpp" "..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppQueue_t.cpp" "..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppTask_i.cpp" "..\..\..\indie2dEngine-Core\Libraries\gcdpp\src\gcdppTask_t.cpp" "..\..\..\indie2dEngine-Core\Libraries\pugixml\pugixml.cpp" "..\..\..\indie2dEngine-Core\Sources\CAABoundBox.cpp" "..\..\..\indie2dEngine-Core\Sources\CAnimationMixer.cpp" "..\..\..\indie2dEngine-Core\Sources\CBatch.cpp" "..\..\..\indie2dEngine-Core\Sources\CBatchingMgr.cpp" "..\..\..\indie2dEngine-Core\Sources\CBillboard.cpp" "..\..\..\indie2dEngine-Core\Sources\CBone.cpp" "..\..\..\indie2dEngine-Core\Sources\CCamera.cpp" "..\..\..\indie2dEngine-Core\Sources\CCollisionMgr.cpp" "..\..\..\indie2dEngine-Core\Sources\CCommonOS_win32.cpp" "..\..\..\indie2dEngine-Core\Sources\CFPSCounter.cpp" "..\..\..\indie2dEngine-Core\Sources\CFrustum.cpp" "..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_Win32.cpp" "..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_win32.cpp" "..\..\..\indie2dEngine-Core\Sources\CIndexBuffer.cpp" "..\..\..\indie2dEngine-Core\Sources\CInputContext_Win32.cpp" "..\..\..\indie2dEngine-Core\Sources\CLight.cpp" "..\..\..\indie2dEngine-Core\Sources\CMaterial.cpp" "..\..\..\indie2dEngine-Core\Sources\CMaterialTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CMaterialTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CMesh.cpp" "..\..\..\indie2dEngine-Core\Sources\CMeshCommiter_MDL.cpp" "..\..\..\indie2dEngine-Core\Sources\CMeshLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CMeshLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CMeshSerializer_MDL.cpp" "..\..\..\indie2dEngine-Core\Sources\CModel.cpp" "..\..\..\indie2dEngine-Core\Sources\CModelTemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CModelTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CModelTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\COcean.cpp" "..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\COceanTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\COGLWindow_win32.cpp" "..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.cpp" "..\..\..\indie2dEngine-Core\Sources\CParticleEmitterLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CParticleEmitterTemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CParticleEmitterTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CRenderMgr.cpp" "..\..\..\indie2dEngine-Core\Sources\CRenderOperationOutput.cpp" "..\..\..\indie2dEngine-Core\Sources\CRenderOperationScreenSpace.cpp" "..\..\..\indie2dEngine-Core\Sources\CRenderOperationWorldSpace.cpp" "..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.cpp" "..\..\..\indie2dEngine-Core\Sources\CSceneFabricator.cpp" "..\..\..\indie2dEngine-Core\Sources\CSceneGraph.cpp" "..\..\..\indie2dEngine-Core\Sources\CSceneUpdateMgr.cpp" "..\..\..\indie2dEngine-Core\Sources\CScreenSpaceRenderOperationTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CScreenSpaceRenderOperationTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequence.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequenceCommiter_SEQ.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequenceLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequenceLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequenceSerializer_SEQ.cpp" "..\..\..\indie2dEngine-Core\Sources\CShader.cpp" "..\..\..\indie2dEngine-Core\Sources\CShaderCommiter_GLSL.cpp" "..\..\..\indie2dEngine-Core\Sources\CShaderLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CShaderLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CShaderSerializer_GLSL.cpp" "..\..\..\indie2dEngine-Core\Sources\CShape.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeleton.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeletonCommiter_SK.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeletonLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeletonLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeletonSerializer_SK.cpp" "..\..\..\indie2dEngine-Core\Sources\CSprite.cpp" "..\..\..\indie2dEngine-Core\Sources\CTemplateAccessor.cpp" "..\..\..\indie2dEngine-Core\Sources\CTexture.cpp" "..\..\..\indie2dEngine-Core\Sources\CTextureCommiter_PVR.cpp" "..\..\..\indie2dEngine-Core\Sources\CTextureLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CTextureLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CTextureSerializer_PVR.cpp" "..\..\..\indie2dEngine-Core\Sources\CTimer.cpp" "..\..\..\indie2dEngine-Core\Sources\CVertexBuffer.cpp" "..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\ICollisionHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IGameLoopHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IGameObject.cpp" "..\..\..\indie2dEngine-Core\Sources\IGameTransition.cpp" "..\..\..\indie2dEngine-Core\Sources\IGameWorkflow.cpp" "..\..\..\indie2dEngine-Core\Sources\IGraphicsContext.cpp" "..\..\..\indie2dEngine-Core\Sources\IGUIControl.cpp" "..\..\..\indie2dEngine-Core\Sources\IInputTapRecognizerHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IRenderHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IResource.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceCommiter.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceLoadingHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\IScene.cpp" "..\..\..\indie2dEngine-Core\Sources\ISceneUpdateHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplate.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.cpp" "..\..\..\indie2dEngine-Game\Source\CCharacterController.cpp" "..\..\..\indie2dEngine-Game\Source\CKOTHInGameScene.cpp" "..\..\..\indie2dEngine-Game\Source\CKOTHInGameTransition.cpp" "..\..\..\indie2dEngine-Game\Source\CKOTHWorkflow.cpp" "..\..\..\indie2dEngine-Game\Source\CNavigator.cpp" "..\..\..\indie2dEngine-Game\Source\IMoveControllerHandler.cpp" "..\..\..\indie2dEngine-Game\Source\Win32-Main.cpp"
-         Win32-Main.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-game\source\win32-main.cpp(4): error C2065: 'CGameMainMenuSceneViewController_Win32' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-game\source\win32-main.cpp(4): error C2065: 'controller' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-game\source\win32-main.cpp(4): error C2061: syntax error : identifier 'CGameMainMenuSceneViewController_Win32'
-     1>d:\hobby\indie2dengine\indie2dengine-game\source\win32-main.cpp(5): error C3861: 'Run': identifier not found
-         IMoveControllerHandler.cpp
-         CNavigator.cpp
-         CKOTHWorkflow.cpp
-         CKOTHInGameTransition.cpp
-         CKOTHInGameScene.cpp
-         CCharacterController.cpp
-         ITemplateSerializer.cpp
-         ITemplateLoadingOperation.cpp
-         ITemplateLoadingHandler.cpp
-         ITemplateLoader.cpp
-         ITemplate.cpp
-         ISceneUpdateHandler.cpp
-         IScene.cpp
-         IResourceSerializer.cpp
-         IResourceLoadingOperation.cpp
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(713): warning C4150: deletion of pointer to incomplete type 'IResourceSerializer'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\iresourceloadingoperation.h(15) : see declaration of 'IResourceSerializer'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IResourceSerializer>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IResourceSerializer
-         ,            _Ux=IResourceSerializer
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IResourceSerializer>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IResourceSerializer
-         ,            _Ux=IResourceSerializer
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(499) : while compiling class template member function 'std::shared_ptr<IResourceSerializer>::shared_ptr(std::nullptr_t)'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\iresourceloadingoperation.cpp(17) : see reference to function template instantiation 'std::shared_ptr<IResourceSerializer>::shared_ptr(std::nullptr_t)' being compiled
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\iresourceloadingoperation.h(25) : see reference to class template instantiation 'std::shared_ptr<IResourceSerializer>' being compiled
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(713): warning C4150: deletion of pointer to incomplete type 'IResourceCommiter'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\iresourceloadingoperation.h(16) : see declaration of 'IResourceCommiter'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IResourceCommiter>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IResourceCommiter
-         ,            _Ux=IResourceCommiter
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IResourceCommiter>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IResourceCommiter
-         ,            _Ux=IResourceCommiter
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(499) : while compiling class template member function 'std::shared_ptr<IResourceCommiter>::shared_ptr(std::nullptr_t)'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\iresourceloadingoperation.cpp(17) : see reference to function template instantiation 'std::shared_ptr<IResourceCommiter>::shared_ptr(std::nullptr_t)' being compiled
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\iresourceloadingoperation.h(26) : see reference to class template instantiation 'std::shared_ptr<IResourceCommiter>' being compiled
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(161): warning C4150: deletion of pointer to incomplete type 'IResourceSerializer'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\iresourceloadingoperation.h(15) : see declaration of 'IResourceSerializer'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(160) : while compiling class template member function 'void std::_Ref_count<_Ux>::_Destroy(void)'
-                 with
-                 [
-                     _Ux=IResourceSerializer
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(711) : see reference to class template instantiation 'std::_Ref_count<_Ux>' being compiled
-                 with
-                 [
-                     _Ux=IResourceSerializer
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IResourceSerializer>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IResourceSerializer
-         ,            _Ux=IResourceSerializer
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IResourceSerializer>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IResourceSerializer
-         ,            _Ux=IResourceSerializer
-                 ]
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(161): warning C4150: deletion of pointer to incomplete type 'IResourceCommiter'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\iresourceloadingoperation.h(16) : see declaration of 'IResourceCommiter'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(160) : while compiling class template member function 'void std::_Ref_count<_Ux>::_Destroy(void)'
-                 with
-                 [
-                     _Ux=IResourceCommiter
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(711) : see reference to class template instantiation 'std::_Ref_count<_Ux>' being compiled
-                 with
-                 [
-                     _Ux=IResourceCommiter
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IResourceCommiter>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IResourceCommiter
-         ,            _Ux=IResourceCommiter
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IResourceCommiter>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IResourceCommiter
-         ,            _Ux=IResourceCommiter
-                 ]
-         IResourceLoadingHandler.cpp
-         IResourceLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         IResourceCommiter.cpp
-         IResource.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         Generating Code...
-         Compiling...
-         IRenderHandler.cpp
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\xrefwrap(431): warning C4800: 'i32' : forcing value to bool 'true' or 'false' (performance warning)
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(239) : see reference to function template instantiation '_Ret std::_Callable_obj<std::function<i32 (void)>,false>::_ApplyX<_Rx>(void)' being compiled
-                 with
-                 [
-                     _Ret=bool
-         ,            _Rx=bool
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(239) : see reference to function template instantiation '_Ret std::_Callable_obj<std::function<i32 (void)>,false>::_ApplyX<_Rx>(void)' being compiled
-                 with
-                 [
-                     _Ret=bool
-         ,            _Rx=bool
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(239) : while compiling class template member function 'bool std::_Func_impl<_MyWrapper,_Alloc,_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>::_Do_call(void)'
-                 with
-                 [
-                     _Alloc=std::allocator<std::_Func_class<bool,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>>
-         ,            _Ret=bool
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(514) : see reference to class template instantiation 'std::_Func_impl<_MyWrapper,_Alloc,_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>' being compiled
-                 with
-                 [
-                     _Alloc=std::allocator<std::_Func_class<bool,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>>
-         ,            _Ret=bool
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(514) : see reference to function template instantiation 'void std::_Func_class<_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>::_Do_alloc<_Myimpl,const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND&,_Alloc>(_Fty,_Alloc)' being compiled
-                 with
-                 [
-                     _Ret=bool
-         ,            _Alloc=std::allocator<std::_Func_class<bool,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>>
-         ,            _Fty=const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND &
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(514) : see reference to function template instantiation 'void std::_Func_class<_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>::_Do_alloc<_Myimpl,const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND&,_Alloc>(_Fty,_Alloc)' being compiled
-                 with
-                 [
-                     _Ret=bool
-         ,            _Alloc=std::allocator<std::_Func_class<bool,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>>
-         ,            _Fty=const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND &
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(514) : see reference to function template instantiation 'void std::_Func_class<_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>::_Reset_alloc<const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND&,std::allocator<std::_Func_class<_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>>>(_Fty,_Alloc)' being compiled
-                 with
-                 [
-                     _Ret=bool
-         ,            _Fty=const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND &
-         ,            _Alloc=std::allocator<std::_Func_class<bool,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>>
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(514) : see reference to function template instantiation 'void std::_Func_class<_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>::_Reset_alloc<const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND&,std::allocator<std::_Func_class<_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>>>(_Fty,_Alloc)' being compiled
-                 with
-                 [
-                     _Ret=bool
-         ,            _Fty=const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND &
-         ,            _Alloc=std::allocator<std::_Func_class<bool,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>>
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(692) : see reference to function template instantiation 'void std::_Func_class<_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>::_Reset<const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND&>(_Fty)' being compiled
-                 with
-                 [
-                     _Ret=bool
-         ,            _Fty=const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND &
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\functional(692) : see reference to function template instantiation 'void std::_Func_class<_Ret,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil,std::_Nil>::_Reset<const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND&>(_Fty)' being compiled
-                 with
-                 [
-                     _Ret=bool
-         ,            _Fty=const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND &
-                 ]
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\irenderhandler.cpp(45) : see reference to function template instantiation 'std::function<bool (void)> &std::function<bool (void)>::operator =<const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND&>(_Fx)' being compiled
-                 with
-                 [
-                     _Fx=const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND &
-                 ]
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\irenderhandler.cpp(45) : see reference to function template instantiation 'std::function<bool (void)> &std::function<bool (void)>::operator =<const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND&>(_Fx)' being compiled
-                 with
-                 [
-                     _Fx=const CRenderCommands::__RENDER_QUEUE_POSITION_COMMAND &
-                 ]
-         IInputTapRecognizerHandler.cpp
-         IGUIControl.cpp
-         IGraphicsContext.cpp
-         IGameWorkflow.cpp
-         IGameTransition.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadinghandler.h(14) : see declaration of 'ITemplate'
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(713): warning C4150: deletion of pointer to incomplete type 'IScene'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\igametransition.h(22) : see declaration of 'IScene'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IScene>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IScene
-         ,            _Ux=IScene
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IScene>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IScene
-         ,            _Ux=IScene
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(499) : while compiling class template member function 'std::shared_ptr<IScene>::shared_ptr(std::nullptr_t)'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\igametransition.cpp(33) : see reference to function template instantiation 'std::shared_ptr<IScene>::shared_ptr(std::nullptr_t)' being compiled
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\igametransition.h(37) : see reference to class template instantiation 'std::shared_ptr<IScene>' being compiled
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(161): warning C4150: deletion of pointer to incomplete type 'IScene'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\igametransition.h(22) : see declaration of 'IScene'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(160) : while compiling class template member function 'void std::_Ref_count<_Ux>::_Destroy(void)'
-                 with
-                 [
-                     _Ux=IScene
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(711) : see reference to class template instantiation 'std::_Ref_count<_Ux>' being compiled
-                 with
-                 [
-                     _Ux=IScene
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IScene>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IScene
-         ,            _Ux=IScene
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IScene>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IScene
-         ,            _Ux=IScene
-                 ]
-         IGameObject.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(713): warning C4150: deletion of pointer to incomplete type 'CLight'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\igameobject.h(20) : see declaration of 'CLight'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CLight>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CLight
-         ,            _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CLight>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CLight
-         ,            _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(499) : while compiling class template member function 'std::shared_ptr<CLight>::shared_ptr(std::nullptr_t)'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\igameobject.cpp(39) : see reference to function template instantiation 'std::shared_ptr<CLight>::shared_ptr(std::nullptr_t)' being compiled
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\igameobject.h(57) : see reference to class template instantiation 'std::shared_ptr<CLight>' being compiled
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(161): warning C4150: deletion of pointer to incomplete type 'CLight'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\igameobject.h(20) : see declaration of 'CLight'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(160) : while compiling class template member function 'void std::_Ref_count<_Ux>::_Destroy(void)'
-                 with
-                 [
-                     _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(711) : see reference to class template instantiation 'std::_Ref_count<_Ux>' being compiled
-                 with
-                 [
-                     _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CLight>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CLight
-         ,            _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CLight>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CLight
-         ,            _Ux=CLight
-                 ]
-         IGameLoopHandler.cpp
-         ICollisionHandler.cpp
-         CWorldSpaceRenderOperationTemplateSerializer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateserializer.h(16) : see declaration of 'ITemplate'
-         CWorldSpaceRenderOperationTemplateLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-         CVertexBuffer.cpp
-         CTimer.cpp
-         CTextureSerializer_PVR.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\ctextureserializer_pvr.cpp(44): warning C4244: 'initializing' : conversion from 'std::streamoff' to 'i32', possible loss of data
-         CTextureLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CTextureLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CTextureCommiter_PVR.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CTexture.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CTemplateAccessor.cpp
-         CSprite.cpp
-         Generating Code...
-         Compiling...
-         CSkeletonSerializer_SK.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CSkeletonLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CSkeletonLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CSkeletonCommiter_SK.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CSkeleton.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CShape.cpp
-         CShaderSerializer_GLSL.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CShaderLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CShaderLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CShaderCommiter_GLSL.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CShader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CSequenceSerializer_SEQ.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CSequenceLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CSequenceLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CSequenceCommiter_SEQ.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CSequence.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CScreenSpaceRenderOperationTemplateSerializer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateserializer.h(16) : see declaration of 'ITemplate'
-         CScreenSpaceRenderOperationTemplateLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-         CSceneUpdateMgr.cpp
-         CSceneGraph.cpp
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(713): warning C4150: deletion of pointer to incomplete type 'CLight'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.h(16) : see declaration of 'CLight'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CLight>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CLight
-         ,            _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CLight>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CLight
-         ,            _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(499) : while compiling class template member function 'std::shared_ptr<CLight>::shared_ptr(std::nullptr_t)'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.cpp(30) : see reference to function template instantiation 'std::shared_ptr<CLight>::shared_ptr(std::nullptr_t)' being compiled
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.h(34) : see reference to class template instantiation 'std::shared_ptr<CLight>' being compiled
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(713): warning C4150: deletion of pointer to incomplete type 'CRenderMgr'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.h(23) : see declaration of 'CRenderMgr'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CRenderMgr>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CRenderMgr
-         ,            _Ux=CRenderMgr
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CRenderMgr>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CRenderMgr
-         ,            _Ux=CRenderMgr
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(499) : while compiling class template member function 'std::shared_ptr<CRenderMgr>::shared_ptr(std::nullptr_t)'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.cpp(27) : see reference to function template instantiation 'std::shared_ptr<CRenderMgr>::shared_ptr(std::nullptr_t)' being compiled
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.h(46) : see reference to class template instantiation 'std::shared_ptr<CRenderMgr>' being compiled
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(713): warning C4150: deletion of pointer to incomplete type 'IInputContext'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.h(27) : see declaration of 'IInputContext'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IInputContext>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IInputContext
-         ,            _Ux=IInputContext
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IInputContext>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IInputContext
-         ,            _Ux=IInputContext
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(499) : while compiling class template member function 'std::shared_ptr<IInputContext>::shared_ptr(std::nullptr_t)'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.cpp(27) : see reference to function template instantiation 'std::shared_ptr<IInputContext>::shared_ptr(std::nullptr_t)' being compiled
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.h(49) : see reference to class template instantiation 'std::shared_ptr<IInputContext>' being compiled
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(161): warning C4150: deletion of pointer to incomplete type 'CLight'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.h(16) : see declaration of 'CLight'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(160) : while compiling class template member function 'void std::_Ref_count<_Ux>::_Destroy(void)'
-                 with
-                 [
-                     _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(711) : see reference to class template instantiation 'std::_Ref_count<_Ux>' being compiled
-                 with
-                 [
-                     _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CLight>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CLight
-         ,            _Ux=CLight
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CLight>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CLight
-         ,            _Ux=CLight
-                 ]
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(161): warning C4150: deletion of pointer to incomplete type 'CRenderMgr'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.h(23) : see declaration of 'CRenderMgr'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(160) : while compiling class template member function 'void std::_Ref_count<_Ux>::_Destroy(void)'
-                 with
-                 [
-                     _Ux=CRenderMgr
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(711) : see reference to class template instantiation 'std::_Ref_count<_Ux>' being compiled
-                 with
-                 [
-                     _Ux=CRenderMgr
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CRenderMgr>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CRenderMgr
-         ,            _Ux=CRenderMgr
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<CRenderMgr>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=CRenderMgr
-         ,            _Ux=CRenderMgr
-                 ]
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(161): warning C4150: deletion of pointer to incomplete type 'IInputContext'; no destructor called
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\cscenegraph.h(27) : see declaration of 'IInputContext'
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(160) : while compiling class template member function 'void std::_Ref_count<_Ux>::_Destroy(void)'
-                 with
-                 [
-                     _Ux=IInputContext
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(711) : see reference to class template instantiation 'std::_Ref_count<_Ux>' being compiled
-                 with
-                 [
-                     _Ux=IInputContext
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IInputContext>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IInputContext
-         ,            _Ux=IInputContext
-                 ]
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\memory(501) : see reference to function template instantiation 'void std::shared_ptr<IInputContext>::_Resetp<_Ty>(_Ux *)' being compiled
-                 with
-                 [
-                     _Ty=IInputContext
-         ,            _Ux=IInputContext
-                 ]
-         Generating Code...
-         Compiling...
-         CSceneFabricator.cpp
-         CResourceAccessor.cpp
-         CRenderOperationWorldSpace.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CRenderOperationScreenSpace.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CRenderOperationOutput.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+         C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\CL.exe /c /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Sources" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\ogles2\include" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\pvrtextool\include" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\gcdpp\include" /I"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\jsoncpp\include" /ZI /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /U_CONSOLE /U__WIN32__ /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\indie2dEngine-Core\Sources\CRenderMgr.cpp"
          CRenderMgr.cpp
      1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
      1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CParticleEmitterTemplateSerializer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateserializer.h(16) : see declaration of 'ITemplate'
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(34): warning C4244: '=' : conversion from 'unsigned int' to 'f32', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(35): warning C4244: '=' : conversion from 'unsigned int' to 'f32', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(45): warning C4244: '=' : conversion from 'float' to 'unsigned char', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(46): warning C4244: '=' : conversion from 'float' to 'unsigned char', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(47): warning C4244: '=' : conversion from 'float' to 'unsigned char', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(48): warning C4244: '=' : conversion from 'float' to 'unsigned char', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(49): warning C4244: '=' : conversion from 'float' to 'unsigned char', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(50): warning C4244: '=' : conversion from 'float' to 'unsigned char', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(51): warning C4244: '=' : conversion from 'float' to 'unsigned char', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(52): warning C4244: '=' : conversion from 'float' to 'unsigned char', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(57): warning C4244: '=' : conversion from 'unsigned int' to 'f32', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemittertemplateserializer.cpp(58): warning C4244: '=' : conversion from 'unsigned int' to 'f32', possible loss of data
-         CParticleEmitterTemplateLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadinghandler.h(14): warning C4099: 'ITemplate' : type name first seen using 'struct' now seen using 'class'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15) : see declaration of 'ITemplate'
-         CParticleEmitterLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-         CParticleEmitter.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadinghandler.h(14) : see declaration of 'ITemplate'
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemitter.cpp(97): warning C4244: '=' : conversion from 'ui64' to 'f32', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cparticleemitter.cpp(123): warning C4244: 'initializing' : conversion from 'ui64' to 'f32', possible loss of data
-         COutputRenderOperationTemplateSerializer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateserializer.h(16) : see declaration of 'ITemplate'
-         COutputRenderOperationTemplateLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-         COGLWindow_win32.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\coglwindow_win32.cpp(20): error C2653: 'CInputContext' : is not a class or namespace name
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\coglwindow_win32.cpp(20): error C2065: 'InputProcess' : undeclared identifier
-         COceanTemplateSerializer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateserializer.h(16) : see declaration of 'ITemplate'
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\coceantemplateserializer.cpp(33): warning C4244: '=' : conversion from 'float' to 'ui32', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\coceantemplateserializer.cpp(34): warning C4244: '=' : conversion from 'float' to 'ui32', possible loss of data
-         COceanTemplateLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-         COceanTemplateLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadinghandler.h(14): warning C4099: 'ITemplate' : type name first seen using 'struct' now seen using 'class'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15) : see declaration of 'ITemplate'
-         COcean.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadinghandler.h(14) : see declaration of 'ITemplate'
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cocean.cpp(38): warning C4244: '=' : conversion from 'ui32' to 'f32', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cocean.cpp(39): warning C4244: '=' : conversion from 'ui32' to 'f32', possible loss of data
-         CModelTemplateSerializer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateserializer.h(16) : see declaration of 'ITemplate'
-         CModelTemplateLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-         CModelTemplateLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadinghandler.h(14): warning C4099: 'ITemplate' : type name first seen using 'struct' now seen using 'class'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15) : see declaration of 'ITemplate'
-         Generating Code...
-         Compiling...
-         CModel.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadinghandler.h(14) : see declaration of 'ITemplate'
-         CMeshSerializer_MDL.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cmeshserializer_mdl.cpp(67): warning C4018: '<' : signed/unsigned mismatch
-         CMeshLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CMeshLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CMeshCommiter_MDL.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CMesh.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CMaterialTemplateSerializer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateserializer.h(16) : see declaration of 'ITemplate'
-         CMaterialTemplateLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-         CMaterial.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CLight.cpp
-         CInputContext_Win32.cpp
-         CIndexBuffer.cpp
-         CGraphicsContext_win32.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(3): error C2653: 'CGLContext_Win32' : is not a class or namespace name
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(4): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(5): error C2065: 'm_eglWindow' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(6): error C2065: 'm_eglDisplay' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(8): error C2065: 'm_eglDisplay' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(9): error C2065: 'm_eglDisplay' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(12): error C2065: 'm_eglDisplay' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(15): warning C4508: 'CGLContext_Win32' : function should return a value; 'void' return type assumed
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(31): error C2065: 'm_eglDisplay' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(31): error C2065: 'm_eglConfig' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(37): error C2065: 'm_eglSurface' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(37): error C2065: 'm_eglDisplay' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(37): error C2065: 'm_eglConfig' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(37): error C2065: 'm_eglWindow' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(39): error C2065: 'm_eglSurface' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(42): error C2065: 'm_eglSurface' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(42): error C2065: 'm_eglDisplay' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(42): error C2065: 'm_eglConfig' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(46): error C2065: 'm_eglContext' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(46): error C2065: 'm_eglDisplay' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(46): error C2065: 'm_eglConfig' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(48): error C2065: 'm_eglDisplay' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(48): error C2065: 'm_eglSurface' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(48): error C2065: 'm_eglContext' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(52): error C2065: 'm_frameBufferHandle' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(56): error C2065: 'm_renderBufferHandle' : undeclared identifier
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(59): error C2653: 'CGLContext_Win32' : is not a class or namespace name
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cgraphicscontext_win32.cpp(59): fatal error C1903: unable to recover from previous error(s); stopping compilation
-         CGameTransitionTemplateSerializer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateserializer.h(16) : see declaration of 'ITemplate'
-         CGameTransitionTemplateLoadingOperation.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-         CGameTransitionTemplateLoader.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15): warning C4099: 'ITemplate' : type name first seen using 'class' now seen using 'struct'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadingoperation.h(15) : see declaration of 'ITemplate'
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\itemplateloadinghandler.h(14): warning C4099: 'ITemplate' : type name first seen using 'struct' now seen using 'class'
-                 d:\hobby\indie2dengine\indie2dengine-core\sources\itemplate.h(15) : see declaration of 'ITemplate'
-         CGameLoopExecutor_Win32.cpp
-         CFrustum.cpp
-         CFPSCounter.cpp
-         CCommonOS_win32.cpp
-         Generating Code...
-         Compiling...
-         CCollisionMgr.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CCamera.cpp
-         CBone.cpp
-         CBillboard.cpp
-         CBatchingMgr.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CBatch.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         CAnimationMixer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\canimationmixer.cpp(156): warning C4018: '<' : signed/unsigned mismatch
-         CAABoundBox.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(53): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\iresource.h(58): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-         pugixml.cpp
-         gcdppTask_t.cpp
-         gcdppTask_i.cpp
-         gcdppQueue_t.cpp
-         gcdppQueue_i.cpp
-         gcdppMainQueue_t.cpp
-         gcdppImpl.cpp
-         Generating Code...
-     1>Done Building Project "D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\indieEngine\indieEngine.vcxproj" (Build target(s)) -- FAILED.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\ogles2\windows_x86_32\lib" /LIBPATH:"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\ogles2\windows_x86_64\lib" /LIBPATH:"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_32\Static" /LIBPATH:"D:\Hobby\indie2dEngine\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_64\Static" libEGL.lib libGLESv2.lib PVRTexLib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.lib" /MACHINE:X86 "/fe:C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\\bin\c1xx.dll"  Debug\gcdppImpl.obj
+         Debug\gcdppMainQueue_t.obj
+         Debug\gcdppQueue_i.obj
+         Debug\gcdppQueue_t.obj
+         Debug\gcdppTask_i.obj
+         Debug\gcdppTask_t.obj
+         Debug\pugixml.obj
+         Debug\CAABoundBox.obj
+         Debug\CAnimationMixer.obj
+         Debug\CBatch.obj
+         Debug\CBatchingMgr.obj
+         Debug\CBillboard.obj
+         Debug\CBone.obj
+         Debug\CCamera.obj
+         Debug\CCollisionMgr.obj
+         Debug\CCommonOS_win32.obj
+         Debug\CFPSCounter.obj
+         Debug\CFrustum.obj
+         Debug\CGameLoopExecutor_Win32.obj
+         Debug\CGameTransitionTemplateLoader.obj
+         Debug\CGameTransitionTemplateLoadingOperation.obj
+         Debug\CGameTransitionTemplateSerializer.obj
+         Debug\CGraphicsContext_win32.obj
+         Debug\CIndexBuffer.obj
+         Debug\CInputContext_Win32.obj
+         Debug\CLight.obj
+         Debug\CMaterial.obj
+         Debug\CMaterialTemplateLoadingOperation.obj
+         Debug\CMaterialTemplateSerializer.obj
+         Debug\CMesh.obj
+         Debug\CMeshCommiter_MDL.obj
+         Debug\CMeshLoader.obj
+         Debug\CMeshLoadingOperation.obj
+         Debug\CMeshSerializer_MDL.obj
+         Debug\CModel.obj
+         Debug\CModelTemplateLoader.obj
+         Debug\CModelTemplateLoadingOperation.obj
+         Debug\CModelTemplateSerializer.obj
+         Debug\COcean.obj
+         Debug\COceanTemplateLoader.obj
+         Debug\COceanTemplateLoadingOperation.obj
+         Debug\COceanTemplateSerializer.obj
+         Debug\COGLWindow_win32.obj
+         Debug\COutputRenderOperationTemplateLoadingOperation.obj
+         Debug\COutputRenderOperationTemplateSerializer.obj
+         Debug\CParticleEmitter.obj
+         Debug\CParticleEmitterLoadingOperation.obj
+         Debug\CParticleEmitterTemplateLoader.obj
+         Debug\CParticleEmitterTemplateSerializer.obj
+         Debug\CRenderMgr.obj
+         Debug\CRenderOperationOutput.obj
+         Debug\CRenderOperationScreenSpace.obj
+         Debug\CRenderOperationWorldSpace.obj
+         Debug\CResourceAccessor.obj
+         Debug\CSceneFabricator.obj
+         Debug\CSceneGraph.obj
+         Debug\CSceneUpdateMgr.obj
+         Debug\CScreenSpaceRenderOperationTemplateLoadingOperation.obj
+         Debug\CScreenSpaceRenderOperationTemplateSerializer.obj
+         Debug\CSequence.obj
+         Debug\CSequenceCommiter_SEQ.obj
+         Debug\CSequenceLoader.obj
+         Debug\CSequenceLoadingOperation.obj
+         Debug\CSequenceSerializer_SEQ.obj
+         Debug\CShader.obj
+         Debug\CShaderCommiter_GLSL.obj
+         Debug\CShaderLoader.obj
+         Debug\CShaderLoadingOperation.obj
+         Debug\CShaderSerializer_GLSL.obj
+         Debug\CShape.obj
+         Debug\CSkeleton.obj
+         Debug\CSkeletonCommiter_SK.obj
+         Debug\CSkeletonLoader.obj
+         Debug\CSkeletonLoadingOperation.obj
+         Debug\CSkeletonSerializer_SK.obj
+         Debug\CSprite.obj
+         Debug\CTemplateAccessor.obj
+         Debug\CTexture.obj
+         Debug\CTextureCommiter_PVR.obj
+         Debug\CTextureLoader.obj
+         Debug\CTextureLoadingOperation.obj
+         Debug\CTextureSerializer_PVR.obj
+         Debug\CTimer.obj
+         Debug\CVertexBuffer.obj
+         Debug\CWorldSpaceRenderOperationTemplateLoadingOperation.obj
+         Debug\CWorldSpaceRenderOperationTemplateSerializer.obj
+         Debug\ICollisionHandler.obj
+         Debug\IGameLoopHandler.obj
+         Debug\IGameObject.obj
+         Debug\IGameTransition.obj
+         Debug\IGameWorkflow.obj
+         Debug\IGraphicsContext.obj
+         Debug\IGUIControl.obj
+         Debug\IInputTapRecognizerHandler.obj
+         Debug\IRenderHandler.obj
+         Debug\IResource.obj
+         Debug\IResourceCommiter.obj
+         Debug\IResourceLoader.obj
+         Debug\IResourceLoadingHandler.obj
+         Debug\IResourceLoadingOperation.obj
+         Debug\IResourceSerializer.obj
+         Debug\IScene.obj
+         Debug\ISceneUpdateHandler.obj
+         Debug\ITemplate.obj
+         Debug\ITemplateLoader.obj
+         Debug\ITemplateLoadingHandler.obj
+         Debug\ITemplateLoadingOperation.obj
+         Debug\ITemplateSerializer.obj
+         Debug\CCharacterController.obj
+         Debug\CGameViewController_win32.obj
+         Debug\CKOTHInGameScene.obj
+         Debug\CKOTHInGameTransition.obj
+         Debug\CKOTHWorkflow.obj
+         Debug\CNavigator.obj
+         Debug\IMoveControllerHandler.obj
+         "Debug\Win32-Main.obj"
+         indieEngine.vcxproj -> D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.exe
+     1>Done Building Project "D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\indieEngine\indieEngine.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:04:51.31
+Time Elapsed 00:00:04.34

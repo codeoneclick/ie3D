@@ -18,8 +18,20 @@
 #include "CNavigator.h"
 #include "CCharacterController.h"
 
+#ifdef __APPLE__
 extern void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
 extern void UnregisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
+#else
+void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler)
+{
+
+};
+
+void UnregisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler)
+{
+
+};
+#endif
 
 CKOTHInGameScene::CKOTHInGameScene(IGameTransition* _root) :
 IScene(_root),

@@ -1,0 +1,3 @@
+<operation guid="screen.space.bloomcombine.operation" screenWidth="320" screenHeight="240">
+    <material filename="material.bloomcombine.screen.xml"/>
+</operation>

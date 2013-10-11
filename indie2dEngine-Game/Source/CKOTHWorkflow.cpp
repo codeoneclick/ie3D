@@ -22,12 +22,16 @@ CKOTHWorkflow::~CKOTHWorkflow(void)
     
 }
 
-std::shared_ptr<IGameTransition> CKOTHWorkflow::CreateXcomInGameTransition(const std::string &_filename, void *_hwnd)
+std::shared_ptr<IGameTransition> CKOTHWorkflow::CreateKOTHInGameTransition(const std::string &_filename, void *_hwnd)
 {
+#ifdef __APPLE__
     std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::CreateGraphicsContext(_hwnd, E_PLATFORM_API_IOS);
+#else
+	std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::CreateGraphicsContext(_hwnd, E_PLATFORM_API_WIN32);
+#endif
     std::shared_ptr<IInputContext> inputContext = std::make_shared<IInputContext>(_hwnd);
-    std::shared_ptr<CKOTHInGameTransition> gameXcomInGameTransition = std::make_shared<CKOTHInGameTransition>(_filename, graphicsContext, inputContext, m_resourceAccessor, m_templateAccessor);
-    m_templateAccessor->LoadGameTransitionTemplate(_filename, gameXcomInGameTransition);
-    assert(gameXcomInGameTransition != nullptr);
-    return gameXcomInGameTransition;
+    std::shared_ptr<CKOTHInGameTransition> gameKOTHInGameTransition = std::make_shared<CKOTHInGameTransition>(_filename, graphicsContext, inputContext, m_resourceAccessor, m_templateAccessor);
+    m_templateAccessor->LoadGameTransitionTemplate(_filename, gameKOTHInGameTransition);
+    assert(gameKOTHInGameTransition != nullptr);
+    return gameKOTHInGameTransition;
 }

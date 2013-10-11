@@ -21,11 +21,14 @@ class CBillboard;
 class CParticleEmitter;
 class CTemplateAccessor;
 class CResourceAccessor;
+class CRenderMgr;
 
 class CSceneFabricator
 {
 private:
-    
+
+    std::shared_ptr<CRenderMgr> m_screenSpaceTextureAccessor;
+
 protected:
     
     std::set<std::shared_ptr<IGameObject> > m_gameObjectsContainer;
@@ -34,6 +37,11 @@ protected:
     
     std::shared_ptr<CTemplateAccessor> m_templateAccessor;
     std::shared_ptr<CResourceAccessor> m_resourceAccessor;
+
+	inline void _Set_ScreenSpaceTextureAccessor(std::shared_ptr<CRenderMgr> _screenSpaceTextureAccessor)
+	{
+		m_screenSpaceTextureAccessor = _screenSpaceTextureAccessor;
+	};
     
 public:
     

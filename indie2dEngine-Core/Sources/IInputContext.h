@@ -26,6 +26,12 @@ public:
     IInputContext(void* _window);
     ~IInputContext(void);
 
+#ifndef __APPLE__
+
+	static LRESULT  CALLBACK InputProcess(HWND _HWND, UINT _message, WPARAM _paramW, LPARAM _paramL);
+
+#endif
+
     void TapRecognizerPressed(const glm::ivec2& _point);
     void TapRecognizerMoved(const glm::ivec2& _point);
     void TapRecognizerReleased(const glm::ivec2& _point);

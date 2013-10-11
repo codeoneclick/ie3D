@@ -1,14 +1,14 @@
 //
-//  COGLWindow_iOS.cpp
+//  IOGLWindow.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/17/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "COGLWindow_iOS.h"
+#include "IOGLWindow.h"
 
-@implementation COGLWindow_iOS
+@implementation IOGLWindow
 
 + (Class) layerClass
 {

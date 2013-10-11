@@ -16,10 +16,12 @@
 #include "CBillboard.h"
 #include "CParticleEmitter.h"
 #include "CResourceAccessor.h"
+#include "CRenderMgr.h"
 
 CSceneFabricator::CSceneFabricator(std::shared_ptr<CTemplateAccessor> _templateAccessor, std::shared_ptr<CResourceAccessor> _resourceAccessor) :
 m_templateAccessor(_templateAccessor),
-m_resourceAccessor(_resourceAccessor)
+m_resourceAccessor(_resourceAccessor),
+m_screenSpaceTextureAccessor(nullptr)
 {
     
 }
@@ -70,6 +72,8 @@ std::shared_ptr<CModel> CSceneFabricator::CreateModel(const std::string& _filena
     assert(m_resourceAccessor != nullptr);
     std::shared_ptr<CModel> model = std::make_shared<CModel>(m_resourceAccessor);
     assert(m_templateAccessor != nullptr);
+	assert(m_screenSpaceTextureAccessor != nullptr);
+	model->Set_RenderMgr(m_screenSpaceTextureAccessor);
     m_templateAccessor->LoadModelTemplate(_filename, model);
     m_gameObjectsContainer.insert(model);
     return model;
@@ -85,6 +89,8 @@ std::shared_ptr<COcean> CSceneFabricator::CreateOcean(const std::string &_filena
     assert(m_resourceAccessor != nullptr);
     std::shared_ptr<COcean> ocean = std::make_shared<COcean>(m_resourceAccessor);
     assert(m_templateAccessor != nullptr);
+	assert(m_screenSpaceTextureAccessor != nullptr);
+	ocean->Set_RenderMgr(m_screenSpaceTextureAccessor);
     m_templateAccessor->LoadOceanTemplate(_filename, ocean);
     m_gameObjectsContainer.insert(ocean);
     return ocean;
@@ -110,6 +116,8 @@ std::shared_ptr<CParticleEmitter> CSceneFabricator::CreateParticleEmitter(const 
     assert(m_resourceAccessor != nullptr);
     std::shared_ptr<CParticleEmitter> particleEmitter = std::make_shared<CParticleEmitter>(m_resourceAccessor);
     assert(m_templateAccessor != nullptr);
+	assert(m_screenSpaceTextureAccessor != nullptr);
+	particleEmitter->Set_RenderMgr(m_screenSpaceTextureAccessor);
     m_templateAccessor->LoadParticleEmitterTemplate(_filename, particleEmitter);
     m_gameObjectsContainer.insert(particleEmitter);
     return particleEmitter;

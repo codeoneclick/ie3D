@@ -1,6 +1,36 @@
 #include "IGraphicsContext.h"
+#include "IOGLWindow.h"
 
-CGLContext_Win32::CGLContext_Win32(const HWND& _hWND, const HDC& _hDC)
+#ifndef __APPLE__
+
+class CGraphicsContext_win32 : public IGraphicsContext
+{
+private:
+
+protected:
+ 
+    EGLDisplay m_eglDisplay;
+	EGLConfig m_eglConfig;
+	EGLSurface m_eglSurface;
+	EGLContext m_eglContext;
+	EGLNativeWindowType	m_eglWindow;
+    
+public:
+    
+	CGraphicsContext_win32(const HWND& _hWND, const HDC& _hDC);
+    ~CGraphicsContext_win32(void);
+
+    void Output(void) const;
+};
+
+std::shared_ptr<IGraphicsContext> CreateGraphicsContext_win32(const void* _hwnd)
+{
+	IOGLWindow* window = (IOGLWindow*)(_hwnd);
+	assert(window != nullptr);
+	return std::make_shared<CGraphicsContext_win32>(window->Get_HWND(), window->Get_HDC());
+};
+
+CGraphicsContext_win32::CGraphicsContext_win32(const HWND& _hWND, const HDC& _hDC)
 {
 	m_eglWindow = _hWND;
 	m_eglDisplay = eglGetDisplay(_hDC);
@@ -11,7 +41,7 @@ CGLContext_Win32::CGLContext_Win32(const HWND& _hWND, const HDC& _hDC)
 	EGLint iMajorVersion, iMinorVersion;
 	if (!eglInitialize(m_eglDisplay, &iMajorVersion, &iMinorVersion))
 	{
-		MessageBox(0, L"eglInitialize() failed.", L"iGaia-CartoonPanzers", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox(0, L"eglInitialize() failed.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
 		return;
 	}
 
@@ -30,7 +60,7 @@ CGLContext_Win32::CGLContext_Win32(const HWND& _hWND, const HDC& _hDC)
 	int iConfigs;
 	if (!eglChooseConfig(m_eglDisplay, pi32ConfigAttribs, &m_eglConfig, 1, &iConfigs) || (iConfigs != 1))
 	{
-		MessageBox(0, L"eglChooseConfig() failed.", L"iGaia-CartoonPanzers", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox(0, L"eglChooseConfig() failed.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
 		return;
 	}
 
@@ -56,12 +86,14 @@ CGLContext_Win32::CGLContext_Win32(const HWND& _hWND, const HDC& _hDC)
 	m_renderBufferHandle = bindedRenderBufferHandle;
 }
 
-CGLContext_Win32::~CGLContext_Win32(void)
+CGraphicsContext_win32::~CGraphicsContext_win32(void)
 {
 
 }
 
-void CGLContext_Win32::Present(void) const
+void CGraphicsContext_win32::Output(void) const
 {
 	assert(eglSwapBuffers(m_eglDisplay, m_eglSurface) == EGL_TRUE);
 }
+
+#endif

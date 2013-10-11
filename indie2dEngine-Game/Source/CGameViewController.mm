@@ -37,7 +37,7 @@
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
     
     CKOTHWorkflow* workflow = new CKOTHWorkflow();
-    std::shared_ptr<IGameTransition> transition = workflow->CreateXcomInGameTransition("main.transition.xml", (__bridge void*)self.m_glWindow);
+    std::shared_ptr<IGameTransition> transition = workflow->CreateKOTHInGameTransition("main.transition.xml", (__bridge void*)self.m_glWindow);
     workflow->RegisterTransition(transition);
     workflow->GoToTransition("main.transition.xml");
 }

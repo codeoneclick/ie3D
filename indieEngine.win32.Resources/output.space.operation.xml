@@ -1,0 +1,4 @@
+<operation guid="output.space.operation">
+    <material filename="material.output.xml"/>
+</operation>
+

@@ -1,0 +1,3 @@
+<operation guid="screen.space.operation" screenWidth="320" screenHeight="240">
+    <material filename="material.screen.xml"/>
+</operation>
