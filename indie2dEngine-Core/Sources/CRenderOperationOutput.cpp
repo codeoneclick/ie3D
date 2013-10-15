@@ -43,7 +43,6 @@ void CRenderOperationOutput::Bind(void)
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
     m_material->Bind();
-    
     m_shape->Bind(m_material->Get_Shader()->Get_Attributes());
 }
 
@@ -51,6 +50,9 @@ void CRenderOperationOutput::Unbind(void)
 {
     m_shape->Unbind(m_material->Get_Shader()->Get_Attributes());
     m_material->Unbind();
+    
+    const GLenum discards[]  = {GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT};
+    glDiscardFramebufferEXT(GL_FRAMEBUFFER, 2, discards);
 }
 
 void CRenderOperationOutput::Draw(void)
