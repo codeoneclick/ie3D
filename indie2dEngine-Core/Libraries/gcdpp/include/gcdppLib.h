@@ -88,6 +88,7 @@ namespace gcdpp
         _queue->AppendTask(task);
     };
     
+
     extern inline std::shared_ptr<gcdppQueue_t> queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY _priority)
     {
         return gcdppImpl::Instance()->GetGlobalQueue(_priority);
@@ -103,7 +104,7 @@ namespace gcdpp
         assert(gcdppImpl::Instance()->GetMainQueue() != nullptr);
         gcdppImpl::Instance()->GetMainQueue()->_Update();
     };
-        
+    
     template<class... ARGS>
     extern inline size_t impl::DispatchAsync(std::shared_ptr<gcdppQueue_i> _queue, std::function<void(ARGS... args)> _function, ARGS... args)
     {

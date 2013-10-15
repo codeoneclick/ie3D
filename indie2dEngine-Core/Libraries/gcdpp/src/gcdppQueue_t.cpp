@@ -11,11 +11,10 @@
 using namespace gcdpp;
 
 gcdppQueue_t::gcdppQueue_t(const std::string& _guid) :
-gcdppQueue_i(_guid),
-m_running(1),
-m_thread(&gcdppQueue_t::_Thread, this)
+gcdppQueue_i(_guid)
 {
-    
+    m_running = 1;
+    m_thread =  std::thread(&gcdppQueue_t::_Thread, this);
 }
 
 gcdppQueue_t::~gcdppQueue_t(void)

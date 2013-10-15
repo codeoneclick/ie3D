@@ -44,6 +44,12 @@
 		219DC4CB180DC356001C72D4 /* CGraphicsContext_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */; };
 		219DC4CD180DC465001C72D4 /* COGLWindow_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CC180DC465001C72D4 /* COGLWindow_win32.cpp */; };
 		219DC4CF180DC4EF001C72D4 /* CCommonOS_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */; };
+		219DC4E3180DCB10001C72D4 /* gcdppImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4DD180DCB10001C72D4 /* gcdppImpl.cpp */; };
+		219DC4E4180DCB10001C72D4 /* gcdppMainQueue_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4DE180DCB10001C72D4 /* gcdppMainQueue_t.cpp */; };
+		219DC4E5180DCB10001C72D4 /* gcdppQueue_i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4DF180DCB10001C72D4 /* gcdppQueue_i.cpp */; };
+		219DC4E6180DCB10001C72D4 /* gcdppQueue_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4E0180DCB10001C72D4 /* gcdppQueue_t.cpp */; };
+		219DC4E7180DCB10001C72D4 /* gcdppTask_i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4E1180DCB10001C72D4 /* gcdppTask_i.cpp */; };
+		219DC4E8180DCB10001C72D4 /* gcdppTask_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4E2180DCB10001C72D4 /* gcdppTask_t.cpp */; };
 		21E09E8E17759A5400F199AD /* ParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8317758E6A00F199AD /* ParticleEmitter.vert */; };
 		21E09E8F17759A5400F199AD /* ParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8217758E6A00F199AD /* ParticleEmitter.frag */; };
 		21E42A4E1767B3FD00E40437 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4A1767B3FD00E40437 /* main.transition.xml */; };
@@ -125,7 +131,6 @@
 		A43648A1179D767400C51AC4 /* CInputContext_iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489C179D767400C51AC4 /* CInputContext_iOS.cpp */; };
 		A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */; };
 		A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */; };
-		A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A437A9EC177B424000160BD7 /* libgcdpp.a */; };
 		A4535E8817C633D50058CD47 /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
 		A4535E9317C633EA0058CD47 /* CBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E9117C633EA0058CD47 /* CBatch.cpp */; };
 		A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
@@ -411,20 +416,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A437A9EB177B424000160BD7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A494B8F2176B1E3D004C9F96;
-			remoteInfo = gcdpp;
-		};
-		A437A9ED177B429A00160BD7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A494B8F1176B1E3D004C9F96;
-			remoteInfo = gcdpp;
-		};
 		A46A32AB174E163E0044643E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A46A324F174E161F0044643E /* libGoogleUnitTest.xcodeproj */;
@@ -539,6 +530,20 @@
 		219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_win32.cpp; path = Sources/CGraphicsContext_win32.cpp; sourceTree = "<group>"; };
 		219DC4CC180DC465001C72D4 /* COGLWindow_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_win32.cpp; path = Sources/COGLWindow_win32.cpp; sourceTree = "<group>"; };
 		219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCommonOS_win32.cpp; path = Sources/CCommonOS_win32.cpp; sourceTree = "<group>"; };
+		219DC4D4180DCB10001C72D4 /* gcdppCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcdppCommon.h; sourceTree = "<group>"; };
+		219DC4D5180DCB10001C72D4 /* gcdppImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcdppImpl.h; sourceTree = "<group>"; };
+		219DC4D6180DCB10001C72D4 /* gcdppLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcdppLib.h; sourceTree = "<group>"; };
+		219DC4D7180DCB10001C72D4 /* gcdppMainQueue_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcdppMainQueue_t.h; sourceTree = "<group>"; };
+		219DC4D8180DCB10001C72D4 /* gcdppQueue_i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcdppQueue_i.h; sourceTree = "<group>"; };
+		219DC4D9180DCB10001C72D4 /* gcdppQueue_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcdppQueue_t.h; sourceTree = "<group>"; };
+		219DC4DA180DCB10001C72D4 /* gcdppTask_i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcdppTask_i.h; sourceTree = "<group>"; };
+		219DC4DB180DCB10001C72D4 /* gcdppTask_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcdppTask_t.h; sourceTree = "<group>"; };
+		219DC4DD180DCB10001C72D4 /* gcdppImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppImpl.cpp; sourceTree = "<group>"; };
+		219DC4DE180DCB10001C72D4 /* gcdppMainQueue_t.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppMainQueue_t.cpp; sourceTree = "<group>"; };
+		219DC4DF180DCB10001C72D4 /* gcdppQueue_i.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppQueue_i.cpp; sourceTree = "<group>"; };
+		219DC4E0180DCB10001C72D4 /* gcdppQueue_t.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppQueue_t.cpp; sourceTree = "<group>"; };
+		219DC4E1180DCB10001C72D4 /* gcdppTask_i.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppTask_i.cpp; sourceTree = "<group>"; };
+		219DC4E2180DCB10001C72D4 /* gcdppTask_t.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppTask_t.cpp; sourceTree = "<group>"; };
 		21E09E8217758E6A00F199AD /* ParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.frag; sourceTree = "<group>"; };
 		21E09E8317758E6A00F199AD /* ParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.vert; sourceTree = "<group>"; };
 		21E42A4A1767B3FD00E40437 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
@@ -640,7 +645,6 @@
 		A436489E179D767400C51AC4 /* IInputContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IInputContext.h; path = Sources/IInputContext.h; sourceTree = "<group>"; };
 		A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IInputTapRecognizerHandler.cpp; path = Sources/IInputTapRecognizerHandler.cpp; sourceTree = "<group>"; };
 		A43648A0179D767400C51AC4 /* IInputTapRecognizerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IInputTapRecognizerHandler.h; path = Sources/IInputTapRecognizerHandler.h; sourceTree = "<group>"; };
-		A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gcdpp.xcodeproj; path = ../gcdpp/gcdpp.xcodeproj; sourceTree = "<group>"; };
 		A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBatchingMgr.cpp; path = Sources/CBatchingMgr.cpp; sourceTree = "<group>"; };
 		A4535E8717C633D50058CD47 /* CBatchingMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBatchingMgr.h; path = Sources/CBatchingMgr.h; sourceTree = "<group>"; };
 		A4535E9117C633EA0058CD47 /* CBatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBatch.cpp; path = Sources/CBatch.cpp; sourceTree = "<group>"; };
@@ -1112,7 +1116,6 @@
 			files = (
 				A4C7034918030DCF00B3DEEC /* CoreAudio.framework in Frameworks */,
 				A4C7034718030DC800B3DEEC /* AudioToolbox.framework in Frameworks */,
-				A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */,
 				A45588F51757602A00802609 /* libz.dylib in Frameworks */,
 				A45588F31757600500802609 /* Security.framework in Frameworks */,
 				A45588F117575FFC00802609 /* CFNetwork.framework in Frameworks */,
@@ -1197,6 +1200,44 @@
 				210EFD3E175BD4DA00DDB182 /* json_writer.cpp */,
 			);
 			path = lib_json;
+			sourceTree = "<group>";
+		};
+		219DC4D2180DCB10001C72D4 /* gcdpp */ = {
+			isa = PBXGroup;
+			children = (
+				219DC4D3180DCB10001C72D4 /* include */,
+				219DC4DC180DCB10001C72D4 /* src */,
+			);
+			name = gcdpp;
+			path = Libraries/gcdpp;
+			sourceTree = "<group>";
+		};
+		219DC4D3180DCB10001C72D4 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				219DC4D4180DCB10001C72D4 /* gcdppCommon.h */,
+				219DC4D5180DCB10001C72D4 /* gcdppImpl.h */,
+				219DC4D6180DCB10001C72D4 /* gcdppLib.h */,
+				219DC4D7180DCB10001C72D4 /* gcdppMainQueue_t.h */,
+				219DC4D8180DCB10001C72D4 /* gcdppQueue_i.h */,
+				219DC4D9180DCB10001C72D4 /* gcdppQueue_t.h */,
+				219DC4DA180DCB10001C72D4 /* gcdppTask_i.h */,
+				219DC4DB180DCB10001C72D4 /* gcdppTask_t.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		219DC4DC180DCB10001C72D4 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				219DC4DD180DCB10001C72D4 /* gcdppImpl.cpp */,
+				219DC4DE180DCB10001C72D4 /* gcdppMainQueue_t.cpp */,
+				219DC4DF180DCB10001C72D4 /* gcdppQueue_i.cpp */,
+				219DC4E0180DCB10001C72D4 /* gcdppQueue_t.cpp */,
+				219DC4E1180DCB10001C72D4 /* gcdppTask_i.cpp */,
+				219DC4E2180DCB10001C72D4 /* gcdppTask_t.cpp */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		A40138BC1754E9CE0056461B /* Templates */ = {
@@ -1368,7 +1409,6 @@
 		A42081521733A9370004729E = {
 			isa = PBXGroup;
 			children = (
-				A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */,
 				A46A3215174E161E0044643E /* indie2dEngine-Testing */,
 				A4F204B6174241320063AB07 /* indie2dEngine-Game */,
 				A42081641733A9370004729E /* indie2dEngine-Core */,
@@ -1514,6 +1554,7 @@
 		A42081941733ABB20004729E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				219DC4D2180DCB10001C72D4 /* gcdpp */,
 				210EFD28175BD4DA00DDB182 /* jsoncpp */,
 				A45588DE17575F3900802609 /* curl */,
 				A4F204D3174287440063AB07 /* glm */,
@@ -1544,14 +1585,6 @@
 				A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */,
 			);
 			name = "Input Managment";
-			sourceTree = "<group>";
-		};
-		A437A9E8177B423F00160BD7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A437A9EC177B424000160BD7 /* libgcdpp.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A45588D717564B8B00802609 /* Templates */ = {
@@ -2301,7 +2334,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A437A9EE177B429A00160BD7 /* PBXTargetDependency */,
 			);
 			name = "indie2dEngine-Core";
 			productName = "indie2dEngine-Core";
@@ -2347,10 +2379,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A437A9E8177B423F00160BD7 /* Products */;
-					ProjectRef = A437A9E7177B423F00160BD7 /* gcdpp.xcodeproj */;
-				},
-				{
 					ProductGroup = A46A32A0174E163E0044643E /* Products */;
 					ProjectRef = A46A324F174E161F0044643E /* libGoogleUnitTest.xcodeproj */;
 				},
@@ -2364,13 +2392,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A437A9EC177B424000160BD7 /* libgcdpp.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libgcdpp.a;
-			remoteRef = A437A9EB177B424000160BD7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		A46A32AC174E163E0044643E /* gtest.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2646,6 +2667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				219DC4E3180DCB10001C72D4 /* gcdppImpl.cpp in Sources */,
 				A4F204A017423C1E0063AB07 /* AppDelegate.mm in Sources */,
 				A4F204A117423C1E0063AB07 /* main.mm in Sources */,
 				A4F204A617423C4D0063AB07 /* IGraphicsContext.cpp in Sources */,
@@ -2665,6 +2687,7 @@
 				219DC4CF180DC4EF001C72D4 /* CCommonOS_win32.cpp in Sources */,
 				A40D47BC17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp in Sources */,
 				A40D47BF17453AC000CA59D0 /* CTextureSerializer_PVR.cpp in Sources */,
+				219DC4E8180DCB10001C72D4 /* gcdppTask_t.cpp in Sources */,
 				A40D47C2174552A300CA59D0 /* CCommonOS_iOS.cpp in Sources */,
 				A46A316B17462BA50044643E /* CShaderCommiter_GLSL.cpp in Sources */,
 				A46A316E17462BBF0044643E /* CTextureCommiter_PVR.cpp in Sources */,
@@ -2686,6 +2709,7 @@
 				A46A331C174E4C820044643E /* CResourceAccessor.cpp in Sources */,
 				A40A698E174E634B005B475E /* CSceneUpdateMgr.cpp in Sources */,
 				A40A6991174E69F3005B475E /* ISceneUpdateHandler.cpp in Sources */,
+				219DC4E7180DCB10001C72D4 /* gcdppTask_i.cpp in Sources */,
 				A40A69B0174F5203005B475E /* CCamera.cpp in Sources */,
 				A40A69B3174F5215005B475E /* CFrustum.cpp in Sources */,
 				A40A69B6174F5D1B005B475E /* IGameObject.cpp in Sources */,
@@ -2708,6 +2732,7 @@
 				A40138DB1756020B0056461B /* CModelTemplateLoader.cpp in Sources */,
 				A40138DE175602380056461B /* CParticleEmitterTemplateLoader.cpp in Sources */,
 				A40138E1175602D50056461B /* ITemplate.cpp in Sources */,
+				219DC4E4180DCB10001C72D4 /* gcdppMainQueue_t.cpp in Sources */,
 				A40138E417560F640056461B /* CTemplateAccessor.cpp in Sources */,
 				A40138E7175613080056461B /* CMaterialTemplateLoadingOperation.cpp in Sources */,
 				A40138EA175613900056461B /* CModelTemplateLoadingOperation.cpp in Sources */,
@@ -2723,6 +2748,7 @@
 				A48174791762145D00E1DC6E /* CGameTransitionTemplateLoader.cpp in Sources */,
 				A481748717621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp in Sources */,
 				A481748A17621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp in Sources */,
+				219DC4E6180DCB10001C72D4 /* gcdppQueue_t.cpp in Sources */,
 				A481748D17621DE100E1DC6E /* COutputRenderOperationTemplateSerializer.cpp in Sources */,
 				A481749017621E0700E1DC6E /* CGameTransitionTemplateSerializer.cpp in Sources */,
 				A481749317621E6B00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */,
@@ -2736,6 +2762,7 @@
 				A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */,
 				A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */,
 				219DC4CD180DC465001C72D4 /* COGLWindow_win32.cpp in Sources */,
+				219DC4E5180DCB10001C72D4 /* gcdppQueue_i.cpp in Sources */,
 				A4364897179D6D3C00C51AC4 /* CKOTHInGameScene.cpp in Sources */,
 				A43648A1179D767400C51AC4 /* CInputContext_iOS.cpp in Sources */,
 				A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */,
@@ -2839,11 +2866,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A437A9EE177B429A00160BD7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = gcdpp;
-			targetProxy = A437A9ED177B429A00160BD7 /* PBXContainerItemProxy */;
-		};
 		A46A32E4174E180B0044643E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "libGoogleUnitTest-static";

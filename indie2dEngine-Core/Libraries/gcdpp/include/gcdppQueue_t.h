@@ -19,7 +19,6 @@ namespace gcdpp
         
     protected:
         
-        std::mutex m_mutex;
         std::thread m_thread;
         bool m_running;
         

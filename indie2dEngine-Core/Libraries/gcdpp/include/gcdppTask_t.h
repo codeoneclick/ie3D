@@ -51,10 +51,10 @@ namespace gcdpp
         
     public:
         
-        gcdppTask_t(FUCTION _function, std::tuple<ARGS...> _args)
+        gcdppTask_t(FUCTION _function, ARGS... _args)
         {
             m_function = _function;
-			m_args = _args;
+            m_args = std::make_tuple(_args...);
         };
         
         ~gcdppTask_t(void)

@@ -20,6 +20,7 @@ namespace gcdpp
     protected:
         
         std::string m_guid;
+        std::mutex m_mutex;
         std::queue<std::shared_ptr<gcdppTask_i> > m_queue;
         
     public:

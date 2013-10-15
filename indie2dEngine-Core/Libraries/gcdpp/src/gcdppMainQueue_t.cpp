@@ -23,15 +23,19 @@ gcdppMainQueue_t::~gcdppMainQueue_t(void)
 
 void gcdppMainQueue_t::AppendTask(std::shared_ptr<gcdppTask_i> _task)
 {
-    assert(_task != nullptr);
+    m_mutex.lock();
     m_queue.push(_task);
+    m_mutex.unlock();
 }
 
 void gcdppMainQueue_t::_Update(void)
 {
     while(!m_queue.empty())
     {
-        m_queue.front()->Execute();
+        m_mutex.lock();
+        std::shared_ptr<gcdppTask_i> task_ =  m_queue.front();
         m_queue.pop();
+        m_mutex.unlock();
+        task_->Execute();
     }
 }
