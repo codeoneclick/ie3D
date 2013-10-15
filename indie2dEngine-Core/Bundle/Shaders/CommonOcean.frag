@@ -26,7 +26,7 @@ const mediump vec3 k_vNormal = vec3(0.0, 1.0, 0.0);
 
 void main(void)
 {
-    lowp vec4 vNormalColor_01 = texture2D(SAMPLER_04, OUT_TexCoordDisplace_01) * 2.0 - 1.0;
+    /*lowp vec4 vNormalColor_01 = texture2D(SAMPLER_04, OUT_TexCoordDisplace_01) * 2.0 - 1.0;
     lowp vec4 vNormalColor_02 = texture2D(SAMPLER_04, OUT_TexCoordDisplace_02) * 2.0 - 1.0;
     lowp vec3 vNormalColor = mix(vNormalColor_01, vNormalColor_02, 0.5).xyz;
     
@@ -69,6 +69,7 @@ void main(void)
     fDiffuseColor = fDiffuseColor * fDiffuseFactor + vSpecularColor * fSpecularFactor;
     vColor = fDiffuseColor + vColor * 0.5;
     
-    gl_FragColor = vColor;
+    gl_FragColor = vColor;*/
+    gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
 }
 
