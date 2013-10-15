@@ -41,6 +41,9 @@
 		21879FEC17AE4A3800605D7F /* Footman3.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 21879FEB17AE4A3800605D7F /* Footman3.MDL */; };
 		218A462E17B193A400301F41 /* Footman2.Diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 218A462D17B193A400301F41 /* Footman2.Diffuse.pvr */; };
 		218A463A17B2BEFC00301F41 /* Footman4.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 218A463917B2BEFC00301F41 /* Footman4.MDL */; };
+		219DC4CB180DC356001C72D4 /* CGraphicsContext_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */; };
+		219DC4CD180DC465001C72D4 /* COGLWindow_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CC180DC465001C72D4 /* COGLWindow_win32.cpp */; };
+		219DC4CF180DC4EF001C72D4 /* CCommonOS_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */; };
 		21E09E8E17759A5400F199AD /* ParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8317758E6A00F199AD /* ParticleEmitter.vert */; };
 		21E09E8F17759A5400F199AD /* ParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8217758E6A00F199AD /* ParticleEmitter.frag */; };
 		21E42A4E1767B3FD00E40437 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4A1767B3FD00E40437 /* main.transition.xml */; };
@@ -89,7 +92,7 @@
 		A40A6A721753B0E3005B475E /* mesh.mdl in Resources */ = {isa = PBXBuildFile; fileRef = A40A6A701753B06C005B475E /* mesh.mdl */; };
 		A40D47BC17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */; };
 		A40D47BF17453AC000CA59D0 /* CTextureSerializer_PVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */; };
-		A40D47C2174552A300CA59D0 /* CCommonOS_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C0174552A300CA59D0 /* CCommonOS_iOS.mm */; };
+		A40D47C2174552A300CA59D0 /* CCommonOS_iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C0174552A300CA59D0 /* CCommonOS_iOS.cpp */; };
 		A40D47C8174557C500CA59D0 /* CommonModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C4174555AF00CA59D0 /* CommonModel.frag */; };
 		A40D47C9174557C500CA59D0 /* CommonModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = A40D47C5174555AF00CA59D0 /* CommonModel.vert */; };
 		A418526A17609D86002FC042 /* IGameWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418526817609D86002FC042 /* IGameWorkflow.cpp */; };
@@ -119,7 +122,7 @@
 		A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
 		A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364842179953E000C51AC4 /* ICollisionHandler.cpp */; };
 		A4364897179D6D3C00C51AC4 /* CKOTHInGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364895179D6D3B00C51AC4 /* CKOTHInGameScene.cpp */; };
-		A43648A1179D767400C51AC4 /* CInputContext_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A436489C179D767400C51AC4 /* CInputContext_iOS.mm */; };
+		A43648A1179D767400C51AC4 /* CInputContext_iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489C179D767400C51AC4 /* CInputContext_iOS.cpp */; };
 		A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */; };
 		A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */; };
 		A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A437A9EC177B424000160BD7 /* libgcdpp.a */; };
@@ -149,8 +152,8 @@
 		A46789F017A031EE00FE26FA /* material.model.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = A46789ED17A031EC00FE26FA /* material.model.refraction.xml */; };
 		A46A316B17462BA50044643E /* CShaderCommiter_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A316917462BA50044643E /* CShaderCommiter_GLSL.cpp */; };
 		A46A316E17462BBF0044643E /* CTextureCommiter_PVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A316C17462BBF0044643E /* CTextureCommiter_PVR.cpp */; };
-		A46A3171174635210044643E /* CGraphicsContext_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A316F174635210044643E /* CGraphicsContext_iOS.mm */; };
-		A46A317417463D180044643E /* COGLWindow_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A317217463D180044643E /* COGLWindow_iOS.mm */; };
+		A46A3171174635210044643E /* CGraphicsContext_iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A316F174635210044643E /* CGraphicsContext_iOS.cpp */; };
+		A46A317417463D180044643E /* COGLWindow_iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A317217463D180044643E /* COGLWindow_iOS.cpp */; };
 		A46A317817463DE10044643E /* CGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A317617463DE10044643E /* CGameViewController.mm */; };
 		A46A317917463DE10044643E /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A46A317717463DE10044643E /* CGameViewController.xib */; };
 		A46A317D1746408C0044643E /* CRenderMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A317B1746408B0044643E /* CRenderMgr.cpp */; };
@@ -180,13 +183,13 @@
 		A46A32EB174E194D0044643E /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A32EA174E194D0044643E /* AppDelegate.mm */; };
 		A46A32F0174E1A3F0044643E /* CTestingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A32EE174E1A3E0044643E /* CTestingViewController.mm */; };
 		A46A32F1174E1A3F0044643E /* CTestingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A46A32EF174E1A3F0044643E /* CTestingViewController.xib */; };
-		A46A32F3174E1D100044643E /* CCommonOS_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C0174552A300CA59D0 /* CCommonOS_iOS.mm */; };
+		A46A32F3174E1D100044643E /* CCommonOS_iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40D47C0174552A300CA59D0 /* CCommonOS_iOS.cpp */; };
 		A46A32F4174E1D100044643E /* CRenderOperationWorldSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A31871746411C0044643E /* CRenderOperationWorldSpace.cpp */; };
 		A46A32F5174E1D100044643E /* CRenderOperationScreenSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A318A174641320044643E /* CRenderOperationScreenSpace.cpp */; };
 		A46A32F6174E1D100044643E /* CRenderOperationOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A318D174641760044643E /* CRenderOperationOutput.cpp */; };
 		A46A32F7174E1D100044643E /* IGraphicsContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204A417423C4D0063AB07 /* IGraphicsContext.cpp */; };
-		A46A32F8174E1D100044643E /* CGraphicsContext_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A316F174635210044643E /* CGraphicsContext_iOS.mm */; };
-		A46A32F9174E1D100044643E /* COGLWindow_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A317217463D180044643E /* COGLWindow_iOS.mm */; };
+		A46A32F8174E1D100044643E /* CGraphicsContext_iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A316F174635210044643E /* CGraphicsContext_iOS.cpp */; };
+		A46A32F9174E1D100044643E /* COGLWindow_iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A317217463D180044643E /* COGLWindow_iOS.cpp */; };
 		A46A32FA174E1D100044643E /* CRenderMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A317B1746408B0044643E /* CRenderMgr.cpp */; };
 		A46A32FB174E1D100044643E /* IRenderHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A317E174640A30044643E /* IRenderHandler.cpp */; };
 		A46A32FC174E1D100044643E /* CMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A3181174640BC0044643E /* CMaterial.cpp */; };
@@ -268,7 +271,6 @@
 		A4BB784218069E6B00E050F6 /* IGUIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BB784018069E6B00E050F6 /* IGUIControl.cpp */; };
 		A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460317450198000D831E /* IResourceSerializer.cpp */; };
 		A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BE460617450200000D831E /* IResourceCommiter.cpp */; };
-		A4C703431803072D00B3DEEC /* libsdl-2.02.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C703401803070E00B3DEEC /* libsdl-2.02.a */; };
 		A4C7034718030DC800B3DEEC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C7034618030DC800B3DEEC /* AudioToolbox.framework */; };
 		A4C7034918030DCF00B3DEEC /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C7034818030DCF00B3DEEC /* CoreAudio.framework */; };
 		A4C8C3F017D4C6E100F955B2 /* ocean_nm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4C8C3EF17D4C6E100F955B2 /* ocean_nm.pvr */; };
@@ -479,20 +481,6 @@
 			remoteGlobalIDString = 40C848F9101A209C0083642A;
 			remoteInfo = "libGoogleUnitTest-static";
 		};
-		A4C7033F1803070E00B3DEEC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FD6526630DE8FCCB002AD96B;
-			remoteInfo = "libsdl-2.0";
-		};
-		A4C703411803071E00B3DEEC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = FD6526620DE8FCCB002AD96B;
-			remoteInfo = "libsdl-2.0";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -547,6 +535,10 @@
 		21879FEB17AE4A3800605D7F /* Footman3.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman3.MDL; sourceTree = "<group>"; };
 		218A462D17B193A400301F41 /* Footman2.Diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman2.Diffuse.pvr; sourceTree = "<group>"; };
 		218A463917B2BEFC00301F41 /* Footman4.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman4.MDL; sourceTree = "<group>"; };
+		219DC4C9180DC0F9001C72D4 /* IOGLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOGLWindow.h; path = Sources/IOGLWindow.h; sourceTree = "<group>"; };
+		219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_win32.cpp; path = Sources/CGraphicsContext_win32.cpp; sourceTree = "<group>"; };
+		219DC4CC180DC465001C72D4 /* COGLWindow_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_win32.cpp; path = Sources/COGLWindow_win32.cpp; sourceTree = "<group>"; };
+		219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCommonOS_win32.cpp; path = Sources/CCommonOS_win32.cpp; sourceTree = "<group>"; };
 		21E09E8217758E6A00F199AD /* ParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.frag; sourceTree = "<group>"; };
 		21E09E8317758E6A00F199AD /* ParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.vert; sourceTree = "<group>"; };
 		21E42A4A1767B3FD00E40437 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
@@ -601,7 +593,7 @@
 		A40D47BB17453AA100CA59D0 /* CShaderSerializer_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderSerializer_GLSL.h; path = Sources/CShaderSerializer_GLSL.h; sourceTree = "<group>"; };
 		A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureSerializer_PVR.cpp; path = Sources/CTextureSerializer_PVR.cpp; sourceTree = "<group>"; };
 		A40D47BE17453AC000CA59D0 /* CTextureSerializer_PVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureSerializer_PVR.h; path = Sources/CTextureSerializer_PVR.h; sourceTree = "<group>"; };
-		A40D47C0174552A300CA59D0 /* CCommonOS_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CCommonOS_iOS.mm; path = Sources/CCommonOS_iOS.mm; sourceTree = "<group>"; };
+		A40D47C0174552A300CA59D0 /* CCommonOS_iOS.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CCommonOS_iOS.cpp; path = Sources/CCommonOS_iOS.cpp; sourceTree = "<group>"; };
 		A40D47C1174552A300CA59D0 /* CCommonOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCommonOS.h; path = Sources/CCommonOS.h; sourceTree = "<group>"; };
 		A40D47C4174555AF00CA59D0 /* CommonModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonModel.frag; sourceTree = "<group>"; };
 		A40D47C5174555AF00CA59D0 /* CommonModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonModel.vert; sourceTree = "<group>"; };
@@ -643,7 +635,7 @@
 		A4364843179953E000C51AC4 /* ICollisionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICollisionHandler.h; path = Sources/ICollisionHandler.h; sourceTree = "<group>"; };
 		A4364895179D6D3B00C51AC4 /* CKOTHInGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CKOTHInGameScene.cpp; path = "indie2dEngine-Game/Source/CKOTHInGameScene.cpp"; sourceTree = "<group>"; };
 		A4364896179D6D3B00C51AC4 /* CKOTHInGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHInGameScene.h; path = "indie2dEngine-Game/Source/CKOTHInGameScene.h"; sourceTree = "<group>"; };
-		A436489C179D767400C51AC4 /* CInputContext_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CInputContext_iOS.mm; path = Sources/CInputContext_iOS.mm; sourceTree = "<group>"; };
+		A436489C179D767400C51AC4 /* CInputContext_iOS.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CInputContext_iOS.cpp; path = Sources/CInputContext_iOS.cpp; sourceTree = "<group>"; };
 		A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInputContext_Win32.cpp; path = Sources/CInputContext_Win32.cpp; sourceTree = "<group>"; };
 		A436489E179D767400C51AC4 /* IInputContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IInputContext.h; path = Sources/IInputContext.h; sourceTree = "<group>"; };
 		A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IInputTapRecognizerHandler.cpp; path = Sources/IInputTapRecognizerHandler.cpp; sourceTree = "<group>"; };
@@ -694,9 +686,8 @@
 		A46A316A17462BA50044643E /* CShaderCommiter_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCommiter_GLSL.h; path = Sources/CShaderCommiter_GLSL.h; sourceTree = "<group>"; };
 		A46A316C17462BBF0044643E /* CTextureCommiter_PVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureCommiter_PVR.cpp; path = Sources/CTextureCommiter_PVR.cpp; sourceTree = "<group>"; };
 		A46A316D17462BBF0044643E /* CTextureCommiter_PVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureCommiter_PVR.h; path = Sources/CTextureCommiter_PVR.h; sourceTree = "<group>"; };
-		A46A316F174635210044643E /* CGraphicsContext_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CGraphicsContext_iOS.mm; path = Sources/CGraphicsContext_iOS.mm; sourceTree = "<group>"; };
-		A46A317217463D180044643E /* COGLWindow_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = COGLWindow_iOS.mm; path = Sources/COGLWindow_iOS.mm; sourceTree = "<group>"; };
-		A46A317317463D180044643E /* COGLWindow_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COGLWindow_iOS.h; path = Sources/COGLWindow_iOS.h; sourceTree = "<group>"; };
+		A46A316F174635210044643E /* CGraphicsContext_iOS.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_iOS.cpp; path = Sources/CGraphicsContext_iOS.cpp; sourceTree = "<group>"; };
+		A46A317217463D180044643E /* COGLWindow_iOS.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_iOS.cpp; path = Sources/COGLWindow_iOS.cpp; sourceTree = "<group>"; };
 		A46A317517463DE10044643E /* CGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController.h; path = "indie2dEngine-Game/Source/CGameViewController.h"; sourceTree = "<group>"; };
 		A46A317617463DE10044643E /* CGameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CGameViewController.mm; path = "indie2dEngine-Game/Source/CGameViewController.mm"; sourceTree = "<group>"; };
 		A46A317717463DE10044643E /* CGameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CGameViewController.xib; path = "indie2dEngine-Game/Source/CGameViewController.xib"; sourceTree = "<group>"; };
@@ -831,7 +822,6 @@
 		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
 		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
 		A4BE460717450200000D831E /* IResourceCommiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceCommiter.h; path = Sources/IResourceCommiter.h; sourceTree = "<group>"; };
-		A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "sdl-2.0.xcodeproj"; path = "Libraries/sdl-2.0/project.ios/sdl-2.0.xcodeproj"; sourceTree = "<group>"; };
 		A4C7034618030DC800B3DEEC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A4C7034818030DCF00B3DEEC /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A4C8C3EF17D4C6E100F955B2 /* ocean_nm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean_nm.pvr; sourceTree = "<group>"; };
@@ -1122,7 +1112,6 @@
 			files = (
 				A4C7034918030DCF00B3DEEC /* CoreAudio.framework in Frameworks */,
 				A4C7034718030DC800B3DEEC /* AudioToolbox.framework in Frameworks */,
-				A4C703431803072D00B3DEEC /* libsdl-2.02.a in Frameworks */,
 				A437A9EF177B42A400160BD7 /* libgcdpp.a in Frameworks */,
 				A45588F51757602A00802609 /* libz.dylib in Frameworks */,
 				A45588F31757600500802609 /* Security.framework in Frameworks */,
@@ -1502,7 +1491,8 @@
 				A4F204A217423C310063AB07 /* HCommon.h */,
 				A4F204A317423C310063AB07 /* HEnums.h */,
 				A40D47C1174552A300CA59D0 /* CCommonOS.h */,
-				A40D47C0174552A300CA59D0 /* CCommonOS_iOS.mm */,
+				A40D47C0174552A300CA59D0 /* CCommonOS_iOS.cpp */,
+				219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */,
 				A4AB15B1177C4E1B00FFC12E /* CFPSCounter.h */,
 				A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */,
 				A4AB15BC177C73D400FFC12E /* CTimer.h */,
@@ -1524,7 +1514,6 @@
 		A42081941733ABB20004729E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				A4C70331180306F400B3DEEC /* sdl-2.0 */,
 				210EFD28175BD4DA00DDB182 /* jsoncpp */,
 				A45588DE17575F3900802609 /* curl */,
 				A4F204D3174287440063AB07 /* glm */,
@@ -1549,7 +1538,7 @@
 			isa = PBXGroup;
 			children = (
 				A436489E179D767400C51AC4 /* IInputContext.h */,
-				A436489C179D767400C51AC4 /* CInputContext_iOS.mm */,
+				A436489C179D767400C51AC4 /* CInputContext_iOS.cpp */,
 				A436489D179D767400C51AC4 /* CInputContext_Win32.cpp */,
 				A43648A0179D767400C51AC4 /* IInputTapRecognizerHandler.h */,
 				A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */,
@@ -1791,9 +1780,11 @@
 				A46A317A174640450044643E /* Operations */,
 				A4F204A517423C4D0063AB07 /* IGraphicsContext.h */,
 				A4F204A417423C4D0063AB07 /* IGraphicsContext.cpp */,
-				A46A316F174635210044643E /* CGraphicsContext_iOS.mm */,
-				A46A317317463D180044643E /* COGLWindow_iOS.h */,
-				A46A317217463D180044643E /* COGLWindow_iOS.mm */,
+				A46A316F174635210044643E /* CGraphicsContext_iOS.cpp */,
+				219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */,
+				219DC4C9180DC0F9001C72D4 /* IOGLWindow.h */,
+				A46A317217463D180044643E /* COGLWindow_iOS.cpp */,
+				219DC4CC180DC465001C72D4 /* COGLWindow_win32.cpp */,
 				A46A317C1746408B0044643E /* CRenderMgr.h */,
 				A46A317B1746408B0044643E /* CRenderMgr.cpp */,
 				A46A317F174640A30044643E /* IRenderHandler.h */,
@@ -1973,22 +1964,6 @@
 				A49C4E5117BA557200C1484F /* CSequenceCommiter_SEQ.cpp */,
 			);
 			name = Commiters;
-			sourceTree = "<group>";
-		};
-		A4C70331180306F400B3DEEC /* sdl-2.0 */ = {
-			isa = PBXGroup;
-			children = (
-				A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */,
-			);
-			name = "sdl-2.0";
-			sourceTree = "<group>";
-		};
-		A4C7033B1803070D00B3DEEC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A4C703401803070E00B3DEEC /* libsdl-2.02.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A4F204B6174241320063AB07 /* indie2dEngine-Game */ = {
@@ -2326,7 +2301,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A4C703421803071E00B3DEEC /* PBXTargetDependency */,
 				A437A9EE177B429A00160BD7 /* PBXTargetDependency */,
 			);
 			name = "indie2dEngine-Core";
@@ -2379,10 +2353,6 @@
 				{
 					ProductGroup = A46A32A0174E163E0044643E /* Products */;
 					ProjectRef = A46A324F174E161F0044643E /* libGoogleUnitTest.xcodeproj */;
-				},
-				{
-					ProductGroup = A4C7033B1803070D00B3DEEC /* Products */;
-					ProjectRef = A4C7033A1803070D00B3DEEC /* sdl-2.0.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -2448,13 +2418,6 @@
 			fileType = "compiled.mach-o.executable";
 			path = "sample1_unittest-static";
 			remoteRef = A46A32B7174E163E0044643E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A4C703401803070E00B3DEEC /* libsdl-2.02.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libsdl-2.02.a";
-			remoteRef = A4C7033F1803070E00B3DEEC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2699,13 +2662,14 @@
 				A4F20620174287450063AB07 /* pugixml.cpp in Sources */,
 				A4BE460517450198000D831E /* IResourceSerializer.cpp in Sources */,
 				A4BE460817450200000D831E /* IResourceCommiter.cpp in Sources */,
+				219DC4CF180DC4EF001C72D4 /* CCommonOS_win32.cpp in Sources */,
 				A40D47BC17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp in Sources */,
 				A40D47BF17453AC000CA59D0 /* CTextureSerializer_PVR.cpp in Sources */,
-				A40D47C2174552A300CA59D0 /* CCommonOS_iOS.mm in Sources */,
+				A40D47C2174552A300CA59D0 /* CCommonOS_iOS.cpp in Sources */,
 				A46A316B17462BA50044643E /* CShaderCommiter_GLSL.cpp in Sources */,
 				A46A316E17462BBF0044643E /* CTextureCommiter_PVR.cpp in Sources */,
-				A46A3171174635210044643E /* CGraphicsContext_iOS.mm in Sources */,
-				A46A317417463D180044643E /* COGLWindow_iOS.mm in Sources */,
+				A46A3171174635210044643E /* CGraphicsContext_iOS.cpp in Sources */,
+				A46A317417463D180044643E /* COGLWindow_iOS.cpp in Sources */,
 				A46A317817463DE10044643E /* CGameViewController.mm in Sources */,
 				A46A317D1746408C0044643E /* CRenderMgr.cpp in Sources */,
 				A46A3180174640A40044643E /* IRenderHandler.cpp in Sources */,
@@ -2728,6 +2692,7 @@
 				A40A69B9174F5D2F005B475E /* CSprite.cpp in Sources */,
 				A40A69BC174F5D42005B475E /* CBillboard.cpp in Sources */,
 				A40A69BF174F5D64005B475E /* CParticleEmitter.cpp in Sources */,
+				219DC4CB180DC356001C72D4 /* CGraphicsContext_win32.cpp in Sources */,
 				210EFD0E175266EC00DDB182 /* CMesh.cpp in Sources */,
 				210EFD191752672500DDB182 /* CMeshCommiter_MDL.cpp in Sources */,
 				210EFD1C1752674A00DDB182 /* CMeshSerializer_MDL.cpp in Sources */,
@@ -2770,8 +2735,9 @@
 				A4AB15BD177C73D400FFC12E /* CTimer.cpp in Sources */,
 				A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */,
 				A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */,
+				219DC4CD180DC465001C72D4 /* COGLWindow_win32.cpp in Sources */,
 				A4364897179D6D3C00C51AC4 /* CKOTHInGameScene.cpp in Sources */,
-				A43648A1179D767400C51AC4 /* CInputContext_iOS.mm in Sources */,
+				A43648A1179D767400C51AC4 /* CInputContext_iOS.cpp in Sources */,
 				A43648A2179D767400C51AC4 /* CInputContext_Win32.cpp in Sources */,
 				A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */,
 				A4DD0EA2179E6C6F009A7AFE /* CAABoundBox.cpp in Sources */,
@@ -2826,13 +2792,13 @@
 				A40A6A6B1753AF38005B475E /* CMeshLoadingOperation.cpp in Sources */,
 				A40A6A6C1753AF38005B475E /* CMeshLoader.cpp in Sources */,
 				A40A6A6D1753AF38005B475E /* CResourceAccessor.cpp in Sources */,
-				A46A32F3174E1D100044643E /* CCommonOS_iOS.mm in Sources */,
+				A46A32F3174E1D100044643E /* CCommonOS_iOS.cpp in Sources */,
 				A46A32F4174E1D100044643E /* CRenderOperationWorldSpace.cpp in Sources */,
 				A46A32F5174E1D100044643E /* CRenderOperationScreenSpace.cpp in Sources */,
 				A46A32F6174E1D100044643E /* CRenderOperationOutput.cpp in Sources */,
 				A46A32F7174E1D100044643E /* IGraphicsContext.cpp in Sources */,
-				A46A32F8174E1D100044643E /* CGraphicsContext_iOS.mm in Sources */,
-				A46A32F9174E1D100044643E /* COGLWindow_iOS.mm in Sources */,
+				A46A32F8174E1D100044643E /* CGraphicsContext_iOS.cpp in Sources */,
+				A46A32F9174E1D100044643E /* COGLWindow_iOS.cpp in Sources */,
 				A46A32FA174E1D100044643E /* CRenderMgr.cpp in Sources */,
 				A46A32FB174E1D100044643E /* IRenderHandler.cpp in Sources */,
 				A46A32FC174E1D100044643E /* CMaterial.cpp in Sources */,
@@ -2882,11 +2848,6 @@
 			isa = PBXTargetDependency;
 			name = "libGoogleUnitTest-static";
 			targetProxy = A46A32E3174E180B0044643E /* PBXContainerItemProxy */;
-		};
-		A4C703421803071E00B3DEEC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "libsdl-2.0";
-			targetProxy = A4C703411803071E00B3DEEC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

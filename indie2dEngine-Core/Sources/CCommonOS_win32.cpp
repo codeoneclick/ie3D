@@ -1,6 +1,6 @@
 #include "CCommonOS.h"
 
-#ifndef __APPLE__
+#if defined(__WIN32__)
 
 std::string Get_BundlePath(void)
 {

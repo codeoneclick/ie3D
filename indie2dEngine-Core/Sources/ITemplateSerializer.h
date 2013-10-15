@@ -20,8 +20,10 @@ private:
     
 protected:
 
-#ifdef USE_CURL
+#if defined(__USE_CURL__)
+    
     CURL* m_context;
+    
 #endif
     std::string m_message;
     

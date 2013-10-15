@@ -26,9 +26,9 @@ public:
     IInputContext(void* _window);
     ~IInputContext(void);
 
-#ifndef __APPLE__
+#if defined(__WIN32__)
 
-	static LRESULT  CALLBACK InputProcess(HWND _HWND, UINT _message, WPARAM _paramW, LPARAM _paramL);
+	static LRESULT CALLBACK InputProcess(HWND _hwnd, UINT _message, WPARAM _paramW, LPARAM _paramL);
 
 #endif
 

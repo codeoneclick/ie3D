@@ -33,18 +33,22 @@ std::shared_ptr<IGraphicsContext> IGraphicsContext::CreateGraphicsContext(const 
     {
         case E_PLATFORM_API_IOS:
         {
-#ifdef __APPLE__
+#if defined(__APPLE__)
             context = CreateGraphicsContext_iOS(_hwnd);
             m_contexts.push_back(context);
+#else
+            assert(false);
 #endif
         }
             break;
             
         case E_PLATFORM_API_WIN32:
         {
-#ifndef __APPLE__
+#if defined(__WIN32__)
             context = CreateGraphicsContext_win32(_hwnd);
             m_contexts.push_back(context);
+#else
+            assert(false);
 #endif
         }
             break;

@@ -115,7 +115,7 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
         {
             m_locked = 1;
             IGameObject::_OnSceneUpdate(_deltatime);
-#ifdef USE_GCDPP
+#if defined(__USE_GCDPP__)
             std::function<void(void)> function = [this]()
             {
 #endif
@@ -179,13 +179,13 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
                     vertexData[i * 4 + 2].m_color = m_particles[i].m_color;
                     vertexData[i * 4 + 3].m_color = m_particles[i].m_color;
                 }
-#ifdef USE_GCDPP
+#if defined(__USE_GCDPP__)
                 std::function<void(void)> main = [this]()
                 {
 #endif
                     m_mesh->Get_VertexBuffer()->Unlock();
                     m_locked = 0;
-#ifdef USE_GCDPP
+#if defined(__USE_GCDPP__)
                 };
                 gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
             };

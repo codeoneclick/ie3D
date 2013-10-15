@@ -23,7 +23,7 @@ CParticleEmitterTemplateLoader::~CParticleEmitterTemplateLoader(void)
 
 void CParticleEmitterTemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
 {
-#ifdef USE_GCDPP
+#if defined(__USE_GCDPP__)
     std::function<void(std::string, std::shared_ptr<ITemplateLoadingHandler>)> function = [](std::string _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
     {
 #endif
@@ -32,7 +32,7 @@ void CParticleEmitterTemplateLoader::Load(const std::string& _filename, std::sha
         assert(particleEmitterTemplate != nullptr);
         assert(_handler != nullptr);
         
-#ifdef USE_GCDPP
+#if defined(__USE_GCDPP__)
         std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SParticleEmitterTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SParticleEmitterTemplate> _template)
         {
             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);

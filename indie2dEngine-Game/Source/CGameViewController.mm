@@ -7,14 +7,14 @@
 //
 
 #include "CGameViewController.h"
-#include "COGLWindow_iOS.h"
+#include "IOGLWindow.h"
 #include "CKOTHWorkflow.h"
 #include "CKOTHInGameTransition.h"
 #include "CGameLoopExecutor.h"
 
 @interface CGameViewController ()
 
-@property (weak, nonatomic) IBOutlet COGLWindow_iOS *m_glWindow;
+@property (weak, nonatomic) IBOutlet IOGLWindow *m_glWindow;
 @property (unsafe_unretained, nonatomic) std::string result;
 @property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *trianglesLabel;

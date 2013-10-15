@@ -1,7 +1,7 @@
 #include "IGraphicsContext.h"
 #include "IOGLWindow.h"
 
-#ifndef __APPLE__
+#if defined(__WIN32__)
 
 class CGraphicsContext_win32 : public IGraphicsContext
 {

@@ -1,7 +1,10 @@
-
 #include "IOGLWindow.h"
+
+#if defined(__WIN32__)
+
 #include "CCommonOS.h"
 #include "IInputContext.h"
+
 
 IOGLWindow::IOGLWindow(void)
 {
@@ -67,3 +70,5 @@ IOGLWindow::~IOGLWindow(void)
 {
 
 }
+
+#endif

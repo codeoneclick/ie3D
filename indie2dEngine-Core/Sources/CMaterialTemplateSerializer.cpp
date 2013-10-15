@@ -10,7 +10,7 @@
 #include "CCommonOS.h"
 #include "ITemplate.h"
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
 
 std::map<std::string, GLenum> g_glEnumContainer = {
     {"GL_FRONT", GL_FRONT},
@@ -22,7 +22,7 @@ std::map<std::string, GLenum> g_glEnumContainer = {
     {"GL_MIRRORED_REPEAT", GL_MIRRORED_REPEAT }
 };
 
-#else if defined(__WIN32)
+#elif defined(__WIN32__)
 
 static std::map<std::string, GLenum> __CreateGlEnumContainer(void)
 {

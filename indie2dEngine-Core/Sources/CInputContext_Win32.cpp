@@ -1,5 +1,7 @@
 #include "IInputContext.h"
 
+#if defined(__WIN32__)
+
 IInputContext::IInputContext(void* _hwnd)
 {
 
@@ -35,7 +37,7 @@ void IInputContext::UnregisterTapRecognizerHandler(std::shared_ptr<IInputTapReco
 
 }
 
-LRESULT CALLBACK IInputContext::InputProcess(HWND _HWND, UINT _message, WPARAM _paramW, LPARAM _paramL)  
+LRESULT CALLBACK IInputContext::InputProcess(HWND _hwnd, UINT _message, WPARAM _paramW, LPARAM _paramL)
 {
 	switch (_message)                                                                        
 	{
@@ -94,5 +96,8 @@ LRESULT CALLBACK IInputContext::InputProcess(HWND _HWND, UINT _message, WPARAM _
 			return 0;      
 		}
 	}
-	return DefWindowProc(_HWND, _message, _paramW, _paramL);
+	return DefWindowProc(_hwnd, _message, _paramW, _paramL);
 }
+
+
+#endif

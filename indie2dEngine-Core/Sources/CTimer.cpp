@@ -15,7 +15,7 @@
 
 ui64 CTimer::Get_TickCount(void)
 {
-#ifdef __APPLE__
+#if defined(__APPLE__)
     static mach_timebase_info_data_t timebaseInfo;
     uint64_t machTime = mach_absolute_time();
     if (timebaseInfo.denom == 0 )
@@ -24,7 +24,7 @@ ui64 CTimer::Get_TickCount(void)
     }
     uint64_t milliseconds = ((machTime / 1000000) * timebaseInfo.numer) / timebaseInfo.denom;
     return milliseconds;
-#else if defined(__WIN32__)
+#elif defined(__WIN32__)
 	return 0;
 #endif
 }

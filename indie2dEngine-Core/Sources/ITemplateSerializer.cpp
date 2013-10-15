@@ -9,7 +9,7 @@
 #include "ITemplateSerializer.h"
 
 ITemplateSerializer::ITemplateSerializer(void)
-#ifdef USE_CURL
+#if defined(__USE_CURL__)
 : m_context(nullptr)
 #endif
 {
@@ -32,7 +32,7 @@ size_t ITemplateSerializer::_Callback(char* _data, size_t _size, size_t _nmemb, 
 
 bool ITemplateSerializer::_RegisterCurlContext(void)
 {
-#ifdef USE_CURL
+#if defined(__USE_CURL__)
     curl_global_init(CURL_GLOBAL_DEFAULT);
     m_context = curl_easy_init();
     if(m_context)

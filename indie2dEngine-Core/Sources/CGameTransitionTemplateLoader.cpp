@@ -23,7 +23,7 @@ CGameTransitionTemplateLoader::~CGameTransitionTemplateLoader(void)
 
 void CGameTransitionTemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
 {
-#ifdef USE_GCDPP
+#if defined(__USE_GCDPP__)
     std::function<void(std::string, std::shared_ptr<ITemplateLoadingHandler>)> function = [](std::string _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
     {
 #endif
@@ -31,7 +31,7 @@ void CGameTransitionTemplateLoader::Load(const std::string& _filename, std::shar
         std::shared_ptr<SGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<SGameTransitionTemplate>(gameTransitionTemplateLoadingOperation->Serialize(_filename));
         assert(gameTransitionTemplate != nullptr);
         assert(_handler != nullptr);
-#ifdef USE_GCDPP
+#if defined(__USE_GCDPP__)
         std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SGameTransitionTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SGameTransitionTemplate> _template)
         {
              _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);

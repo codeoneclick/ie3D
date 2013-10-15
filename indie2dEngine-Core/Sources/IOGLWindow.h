@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
 
 #include <Foundation/Foundation.h>
 #include <UIKit/UIKit.h>
@@ -21,7 +21,7 @@
 
 @end
 
-#else if defined(__WIN32__)
+#elif defined(__WIN32__)
 
 class IOGLWindow
 {

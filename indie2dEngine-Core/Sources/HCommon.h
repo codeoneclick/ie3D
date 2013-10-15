@@ -26,11 +26,11 @@
 #include <assert.h>
 #include <functional>
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
 
-#define USE_CURL 1
-#define USE_JSONCPP 1
-#define USE_GCDPP 1
+#define __USE_CURL__
+#define __USE_JSONCPP__
+#define __USE_GCDPP__
 
 #else
 
@@ -47,25 +47,25 @@
 #include <glm/gtx/euler_angles.hpp>
 #include <pugixml/pugixml.hpp>
 
-#ifdef USE_GCDPP
+#if defined(__USE_GCDPP__)
 #include "gcdppLib.h"
 #endif
 
-#ifdef USE_CURL
+#if defined(__USE_CURL__)
 #include <curl/curl.h>
 #endif
 
-#ifdef USE_JSONCPP
+#if defined(__USE_JSONCPP__)
 #include <json/json.h>
 #endif
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
 
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 #include <QuartzCore/QuartzCore.h>
 
-#else
+#elif defined(__WIN32__)
 
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
