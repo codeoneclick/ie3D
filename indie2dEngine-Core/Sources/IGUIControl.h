@@ -50,6 +50,13 @@ protected:
 	ui8 m_status;
     ui32 m_renderQueuePosition;
 
+	std::shared_ptr<IGUIControl> m_parent;
+
+	inline void _Set_Parent(const std::shared_ptr<IGUIControl> _parent) 
+	{
+		m_parent = _parent;
+	};
+
 	std::shared_ptr<CRenderMgr> m_renderMgr;
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
     std::shared_ptr<CResourceAccessor> m_resourceAccessor;
@@ -92,6 +99,11 @@ public:
     {
         return m_matrixWorld;
     };
+
+	inline std::shared_ptr<IGUIControl> Get_Parent(void)
+	{
+		return m_parent;
+	};
     
     std::shared_ptr<CVertexBuffer> Get_HardwareVertexBuffer(void);
     std::shared_ptr<CIndexBuffer> Get_HardwareIndexBuffer(void);

@@ -22,6 +22,7 @@ m_quad(nullptr),
 m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
 m_material(nullptr),
+m_parent(nullptr),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
 
