@@ -50,12 +50,14 @@ public:
     
     inline const bool IsLoaded(void) const
     {
-        return m_status & E_RESOURCE_STATUS_LOADED;
+		const bool value = 0 != (m_status & E_RESOURCE_STATUS_LOADED);
+		return value;
     };
     
     inline const bool IsCommited(void) const
     {
-        return m_status & E_RESOURCE_STATUS_COMMITED;
+		const bool value = 0 != (m_status & E_RESOURCE_STATUS_COMMITED);
+		return value;
     };
     
     void Register_LoadingHandler(const std::shared_ptr<IResourceLoadingHandler>& _handler);

@@ -12,7 +12,7 @@
 #include "HCommon.h"
 
 class CMaterial;
-class CShape;
+class CQuad;
 
 class CRenderOperationOutput
 {
@@ -25,7 +25,7 @@ protected:
     ui32 m_renderBufferHandle;
     ui32 m_frameWidth;
     ui32 m_frameHeight;
-    std::shared_ptr<CShape> m_shape;
+    std::shared_ptr<CQuad> m_quad;
     
 public:
     

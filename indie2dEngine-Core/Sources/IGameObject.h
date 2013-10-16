@@ -18,7 +18,6 @@
 
 class CCamera;
 class CLight;
-class CShape;
 class CMesh;
 class CVertexBuffer;
 class CIndexBuffer;
@@ -59,7 +58,7 @@ protected:
     
     std::shared_ptr<CRenderMgr> m_renderMgr;
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
-    std::shared_ptr<CResourceAccessor> m_resourceFabricator;
+    std::shared_ptr<CResourceAccessor> m_resourceAccessor;
     
     ui8 m_status;
     ui32 m_renderQueuePosition;
@@ -80,12 +79,10 @@ protected:
     virtual void _OnUnbind(const std::string& _mode);
     virtual void _OnDebugDraw(const std::string& _mode);
     virtual void _OnBatch(const std::string& _mode);
-
-    virtual void _ListenRenderMgr(void);
     
 public:
     
-    IGameObject(std::shared_ptr<CResourceAccessor> _resourceFabricator);
+    IGameObject(const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
     virtual ~IGameObject(void);
     
     inline void Set_Position(const glm::vec3& _position)

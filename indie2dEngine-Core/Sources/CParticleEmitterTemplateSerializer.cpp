@@ -31,8 +31,8 @@ std::shared_ptr<ITemplate> CParticleEmitterTemplateSerializer::Serialize(const s
     std::shared_ptr<SParticleEmitterTemplate> particleEmitterTemplate = std::make_shared<SParticleEmitterTemplate>();
     
     particleEmitterTemplate->m_numParticles = node.child("num_particles").attribute("value").as_int();
-    particleEmitterTemplate->m_duration = node.child("duration").attribute("value").as_uint();
-    particleEmitterTemplate->m_durationRandomness = node.child("duration_randomness").attribute("value").as_uint();
+	particleEmitterTemplate->m_duration = node.child("duration").attribute("value").as_uint();
+    particleEmitterTemplate->m_durationRandomness = node.child("duration_randomness").attribute("value").as_float();
     particleEmitterTemplate->m_velocitySensitivity = node.child("velocity_sensitivity").attribute("value").as_float();
     particleEmitterTemplate->m_minHorizontalVelocity = node.child("min_horizontal_velocity").attribute("value").as_float();
     particleEmitterTemplate->m_maxHorizontalVelocity = node.child("max_horizontal_velocity").attribute("value").as_float();
@@ -42,14 +42,14 @@ std::shared_ptr<ITemplate> CParticleEmitterTemplateSerializer::Serialize(const s
     particleEmitterTemplate->m_gravity.x = node.child("gravity").attribute("x").as_float();
     particleEmitterTemplate->m_gravity.y = node.child("gravity").attribute("y").as_float();
     particleEmitterTemplate->m_gravity.z = node.child("gravity").attribute("z").as_float();
-    particleEmitterTemplate->m_startColor.x = node.child("start_color").attribute("r").as_float();
-    particleEmitterTemplate->m_startColor.y = node.child("start_color").attribute("g").as_float();
-    particleEmitterTemplate->m_startColor.z = node.child("start_color").attribute("b").as_float();
-    particleEmitterTemplate->m_startColor.w = node.child("start_color").attribute("a").as_float();
-    particleEmitterTemplate->m_endColor.x = node.child("end_color").attribute("r").as_float();
-    particleEmitterTemplate->m_endColor.y = node.child("end_color").attribute("g").as_float();
-    particleEmitterTemplate->m_endColor.z = node.child("end_color").attribute("b").as_float();
-    particleEmitterTemplate->m_endColor.w = node.child("end_color").attribute("a").as_float();
+	particleEmitterTemplate->m_startColor.x = static_cast<ui8>(node.child("start_color").attribute("r").as_uint());
+    particleEmitterTemplate->m_startColor.y = static_cast<ui8>(node.child("start_color").attribute("g").as_uint());
+    particleEmitterTemplate->m_startColor.z = static_cast<ui8>(node.child("start_color").attribute("b").as_uint());
+    particleEmitterTemplate->m_startColor.w = static_cast<ui8>(node.child("start_color").attribute("a").as_uint());
+    particleEmitterTemplate->m_endColor.x = static_cast<ui8>(node.child("end_color").attribute("r").as_uint());
+    particleEmitterTemplate->m_endColor.y = static_cast<ui8>(node.child("end_color").attribute("g").as_uint());
+    particleEmitterTemplate->m_endColor.z = static_cast<ui8>(node.child("end_color").attribute("b").as_uint());
+    particleEmitterTemplate->m_endColor.w = static_cast<ui8>(node.child("end_color").attribute("a").as_uint());
     particleEmitterTemplate->m_startSize.x = node.child("start_size").attribute("width").as_float();
     particleEmitterTemplate->m_startSize.y = node.child("start_size").attribute("height").as_float();
     particleEmitterTemplate->m_endSize.x = node.child("end_size").attribute("width").as_float();

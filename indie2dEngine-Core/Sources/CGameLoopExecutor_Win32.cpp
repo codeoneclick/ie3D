@@ -11,7 +11,6 @@
 
 #ifndef __APPLE__
 
-const ui32 CGameLoopExecutor::k_MAX_FRAME_RATE = 24;
 CGameLoopExecutor* CGameLoopExecutor::m_instance = nullptr;
 
 CGameLoopExecutor* CGameLoopExecutor::Get_Instance(void)
@@ -38,7 +37,7 @@ void CGameLoopExecutor::OnGameLoopUpdate(void)
 {
     static std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
     std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
-    f32 deltatime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count() / (k_MAX_FRAME_RATE * 1000.0f);
+    f32 deltatime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count() / 1000.0f;
     lastTime = currentTime;
     for(const auto& handler : m_handlers)
     {
@@ -106,7 +105,8 @@ void Run(void)
 			CGameLoopExecutor::Get_Instance()->Get_FPSCounter()->Reset();
 			CGameLoopExecutor::Get_Instance()->OnGameLoopUpdate();
 			CGameLoopExecutor::Get_Instance()->Get_FPSCounter()->Submit();
-			std::cout<<"[FPS] "<<Get_FramesPerSecond()<<std::endl;
+			std::wstring strfps = std::to_wstring(Get_FramesPerSecond());
+			SetWindowText(GetActiveWindow(), strfps.c_str());
 		}
 	}
 };

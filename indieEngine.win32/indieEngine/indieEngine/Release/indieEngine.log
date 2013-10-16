@@ -1,0 +1,140 @@
+﻿Build started 16.10.2013 18:19:38.
+     1>Project "D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\indieEngine\indieEngine.vcxproj" on node 2 (Build target(s)).
+     1>CTP_Warning:
+         'Microsoft Visual C++ Compiler Nov 2012 CTP' is for testing purposes only.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\CL.exe /c /I"..\..\..\indie2dEngine-Core\Sources" /I"..\..\..\indie2dEngine-Core\Libraries" /I"..\..\..\indie2dEngine-Core\Libraries\ogles2\include" /I"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include" /I"..\..\..\indie2dEngine-Core\Libraries\gcdpp\include" /I"..\..\..\indie2dEngine-Core\Libraries\jsoncpp\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D __WIN32__ /D _UNICODE /D UNICODE /U__APPLE__ /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_Win32.cpp" "..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.cpp"
+         CGameLoopExecutor_Win32.cpp
+         CParticleEmitter.cpp
+     1>..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.cpp(131): warning C4244: 'argument' : conversion from 'ui64' to 'f32', possible loss of data
+     1>..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.cpp(133): warning C4244: '=' : conversion from 'ui64' to 'f32', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Release\indieEngine.exe" /NOLOGO /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_32\lib" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_64\lib" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_32\Static" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_64\Static" libEGL.lib libGLESv2.lib PVRTexLib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Release\indieEngine.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Release\indieEngine.lib" /MACHINE:X86 /SAFESEH "/fe:C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\\bin\c1xx.dll"  Release\gcdppImpl.obj
+         Release\gcdppMainQueue_t.obj
+         Release\gcdppQueue_i.obj
+         Release\gcdppQueue_t.obj
+         Release\gcdppTask_i.obj
+         Release\gcdppTask_t.obj
+         Release\pugixml.obj
+         Release\CAABoundBox.obj
+         Release\CAnimationMixer.obj
+         Release\CBatch.obj
+         Release\CBatchingMgr.obj
+         Release\CBillboard.obj
+         Release\CBone.obj
+         Release\CCamera.obj
+         Release\CCollisionMgr.obj
+         Release\CCommonOS_iOS.obj
+         Release\CCommonOS_win32.obj
+         Release\CFPSCounter.obj
+         Release\CFrustum.obj
+         Release\CGameLoopExecutor_Win32.obj
+         Release\CGameTransitionTemplateLoader.obj
+         Release\CGameTransitionTemplateLoadingOperation.obj
+         Release\CGameTransitionTemplateSerializer.obj
+         Release\CGraphicsContext_iOS.obj
+         Release\CGraphicsContext_win32.obj
+         Release\CGUIMgr.obj
+         Release\CIndexBuffer.obj
+         Release\CInputContext_iOS.obj
+         Release\CInputContext_Win32.obj
+         Release\CLight.obj
+         Release\CMaterial.obj
+         Release\CMaterialTemplateLoadingOperation.obj
+         Release\CMaterialTemplateSerializer.obj
+         Release\CMesh.obj
+         Release\CMeshCommiter_MDL.obj
+         Release\CMeshLoader.obj
+         Release\CMeshLoadingOperation.obj
+         Release\CMeshSerializer_MDL.obj
+         Release\CModel.obj
+         Release\CModelTemplateLoader.obj
+         Release\CModelTemplateLoadingOperation.obj
+         Release\CModelTemplateSerializer.obj
+         Release\COcean.obj
+         Release\COceanTemplateLoader.obj
+         Release\COceanTemplateLoadingOperation.obj
+         Release\COceanTemplateSerializer.obj
+         Release\COGLWindow_iOS.obj
+         Release\COGLWindow_win32.obj
+         Release\COutputRenderOperationTemplateLoadingOperation.obj
+         Release\COutputRenderOperationTemplateSerializer.obj
+         Release\CParticleEmitter.obj
+         Release\CParticleEmitterLoadingOperation.obj
+         Release\CParticleEmitterTemplateLoader.obj
+         Release\CParticleEmitterTemplateSerializer.obj
+         Release\CRenderMgr.obj
+         Release\CRenderOperationOutput.obj
+         Release\CRenderOperationScreenSpace.obj
+         Release\CRenderOperationWorldSpace.obj
+         Release\CResourceAccessor.obj
+         Release\CSceneFabricator.obj
+         Release\CSceneGraph.obj
+         Release\CSceneUpdateMgr.obj
+         Release\CScreenSpaceRenderOperationTemplateLoadingOperation.obj
+         Release\CScreenSpaceRenderOperationTemplateSerializer.obj
+         Release\CSequence.obj
+         Release\CSequenceCommiter_SEQ.obj
+         Release\CSequenceLoader.obj
+         Release\CSequenceLoadingOperation.obj
+         Release\CSequenceSerializer_SEQ.obj
+         Release\CShader.obj
+         Release\CShaderCommiter_GLSL.obj
+         Release\CShaderLoader.obj
+         Release\CShaderLoadingOperation.obj
+         Release\CShaderSerializer_GLSL.obj
+         Release\CQuad.obj
+         Release\CSkeleton.obj
+         Release\CSkeletonCommiter_SK.obj
+         Release\CSkeletonLoader.obj
+         Release\CSkeletonLoadingOperation.obj
+         Release\CSkeletonSerializer_SK.obj
+         Release\CSprite.obj
+         Release\CTemplateAccessor.obj
+         Release\CTexture.obj
+         Release\CTextureCommiter_PVR.obj
+         Release\CTextureLoader.obj
+         Release\CTextureLoadingOperation.obj
+         Release\CTextureSerializer_PVR.obj
+         Release\CTimer.obj
+         Release\CVertexBuffer.obj
+         Release\CWorldSpaceRenderOperationTemplateLoadingOperation.obj
+         Release\CWorldSpaceRenderOperationTemplateSerializer.obj
+         Release\ICollisionHandler.obj
+         Release\IGameLoopHandler.obj
+         Release\IGameObject.obj
+         Release\IGameTransition.obj
+         Release\IGameWorkflow.obj
+         Release\IGraphicsContext.obj
+         Release\IGUIControl.obj
+         Release\IInputTapRecognizerHandler.obj
+         Release\IRenderHandler.obj
+         Release\IResource.obj
+         Release\IResourceCommiter.obj
+         Release\IResourceLoader.obj
+         Release\IResourceLoadingHandler.obj
+         Release\IResourceLoadingOperation.obj
+         Release\IResourceSerializer.obj
+         Release\IScene.obj
+         Release\ISceneUpdateHandler.obj
+         Release\ITemplate.obj
+         Release\ITemplateLoader.obj
+         Release\ITemplateLoadingHandler.obj
+         Release\ITemplateLoadingOperation.obj
+         Release\ITemplateSerializer.obj
+         Release\CCharacterController.obj
+         Release\CGameViewController_win32.obj
+         Release\CKOTHInGameScene.obj
+         Release\CKOTHInGameTransition.obj
+         Release\CKOTHWorkflow.obj
+         Release\CNavigator.obj
+         Release\IMoveControllerHandler.obj
+         "Release\Win32-Main.obj"
+         Generating code
+         Finished generating code
+         indieEngine.vcxproj -> D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Release\indieEngine.exe
+     1>Done Building Project "D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\indieEngine\indieEngine.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:32.59

@@ -1,8 +1,8 @@
 <particle_emitter name="particle_emitter_01">
     <num_particles value="54" />
-    <duration value="2000" />
-    <duration_randomness value="1" />
-    <velocity_sensitivity value="1" />
+    <duration value="2000.0" />
+    <duration_randomness value="1.0" />
+    <velocity_sensitivity value="1.0" />
     <min_horizontal_velocity value="0" />
     <max_horizontal_velocity value="0.0001" />
     <min_vertical_velocity value="0.0001" />
@@ -13,8 +13,8 @@
     <end_color r="255" g="127" b="127" a="0" />
     <start_size width="0.1" height="0.1" />
     <end_size width="2.0" height="2.0" />
-    <min_particle_emitt_interval value="66" />
-    <max_particle_emitt_interval value="133" />
+    <min_particle_emitt_interval value="66.0" />
+    <max_particle_emitt_interval value="133.0" />
     <materials>
 		<material filename="particle.emitter.material.xml"/>
 	</materials>

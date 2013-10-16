@@ -37,7 +37,7 @@ CParticleEmitter::~CParticleEmitter(void)
 void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
     m_settings = std::static_pointer_cast<SParticleEmitterTemplate>(_template);
-    assert(m_resourceFabricator != nullptr);
+    assert(m_resourceAccessor != nullptr);
     
     m_particles = new SParticle[m_settings->m_numParticles];
 
@@ -74,15 +74,15 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 
     for(const auto& materialTemplate : m_settings->m_materialsTemplates)
     {
-        std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
+        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
         
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
-        material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
+        material->Serialize(materialTemplate, m_resourceAccessor, m_renderMgr);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
-    IGameObject::_ListenRenderMgr();
+    IGameObject::ListenRenderMgr(true);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
@@ -120,11 +120,11 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
             {
 #endif
                 SHardwareVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock();
-                f32 currentTime = CTimer::Get_TickCount();
+                ui64 currentTime = CTimer::Get_TickCount();
                 
                 for(ui32 i = 0; i < m_settings->m_numParticles; ++i)
                 {
-                    f32 particleAge = currentTime - m_particles[i].m_timestamp;
+                    ui64 particleAge = currentTime - m_particles[i].m_timestamp;
                     
                     if(particleAge > m_settings->m_duration)
                     {
@@ -140,13 +140,13 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
                         }
                     }
                     
-                    f32 particleClampAge = glm::clamp( particleAge / m_settings->m_duration, 0.0f, 1.0f);
+                    f32 particleClampAge = glm::clamp(static_cast<f32>(particleAge) / static_cast<f32>(m_settings->m_duration), 0.0f, 1.0f);
                     
                     f32 startVelocity = glm::length(m_particles[i].m_velocity);
                     f32 endVelocity = m_settings->m_endVelocity * startVelocity;
                     f32 velocityIntegral = startVelocity * particleClampAge + (endVelocity - startVelocity) * particleClampAge * particleClampAge / 2.0f;
-                    m_particles[i].m_position += glm::normalize(m_particles[i].m_velocity) * velocityIntegral * m_settings->m_duration;
-                    m_particles[i].m_position += m_settings->m_gravity * particleAge * particleClampAge;
+                    m_particles[i].m_position += glm::normalize(m_particles[i].m_velocity) * velocityIntegral * static_cast<f32>(m_settings->m_duration);
+                    m_particles[i].m_position += m_settings->m_gravity * static_cast<f32>(particleAge) * particleClampAge;
                     
                     f32 randomValue = Get_Random(0.0f, 1.0f);
                     f32 startSize = glm::mix(m_settings->m_startSize.x, m_settings->m_startSize.y, randomValue);

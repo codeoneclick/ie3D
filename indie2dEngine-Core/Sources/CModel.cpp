@@ -38,32 +38,32 @@ CModel::~CModel(void)
 void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
     std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(_template);
-    assert(m_resourceFabricator != nullptr);
-    m_mesh = m_resourceFabricator->CreateMesh(modelTemplate->m_meshFilename);
+    assert(m_resourceAccessor != nullptr);
+    m_mesh = m_resourceAccessor->CreateMesh(modelTemplate->m_meshFilename);
     m_mesh->Register_LoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
     
     if(modelTemplate->m_skeletonFilename.size() != 0)
     {
-        m_skeleton = m_resourceFabricator->CreateSkeleton(modelTemplate->m_skeletonFilename);
+        m_skeleton = m_resourceAccessor->CreateSkeleton(modelTemplate->m_skeletonFilename);
         assert(m_skeleton != nullptr);
         m_skeleton->Register_LoadingHandler(shared_from_this());
     }
     
     for(const auto& materialTemplate : modelTemplate->m_materialsTemplates)
     {
-        std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
+        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
-        material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
+        material->Serialize(materialTemplate, m_resourceAccessor, m_renderMgr);
         material->Set_IsBatching(modelTemplate->m_isBatching);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     
     for(const auto& name : modelTemplate->m_sequencesFilenames)
     {
-        std::shared_ptr<CSequence> sequence = m_resourceFabricator->CreateSequence(name);
+        std::shared_ptr<CSequence> sequence = m_resourceAccessor->CreateSequence(name);
         assert(sequence != nullptr);
         sequence->Set_Name(name);
         m_sequences.insert(sequence);
@@ -73,7 +73,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_boundBox = m_mesh->CreateBoundBox();
     assert(m_boundBox != nullptr);
     
-    std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(k_vsBoundBoxFilename,
+    std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(k_vsBoundBoxFilename,
                                                                          k_fsBoundBoxFilename);
     assert(shader != nullptr);
     m_debugBoundBoxMaterial = std::make_shared<CMaterial>(shader, "bound.box");
@@ -111,7 +111,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         _material->Get_Shader()->Set_Int(_material->Get_IsBatching() ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_01);
     };
 
-    IGameObject::_ListenRenderMgr();
+    IGameObject::ListenRenderMgr(true);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

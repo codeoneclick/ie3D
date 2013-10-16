@@ -33,7 +33,7 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
     std::shared_ptr<SOceanTemplate> oceanTemplate = std::static_pointer_cast<SOceanTemplate>(_template);
 
-    assert(m_resourceFabricator != nullptr);
+    assert(m_resourceAccessor != nullptr);
     
     m_width = oceanTemplate->m_width;
     m_height = oceanTemplate->m_height;
@@ -76,15 +76,15 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     
     for(const auto& materialTemplate : oceanTemplate->m_materialsTemplates)
     {
-        std::shared_ptr<CShader> shader = m_resourceFabricator->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
+        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
-        material->Serialize(materialTemplate, m_resourceFabricator, m_renderMgr);
+        material->Serialize(materialTemplate, m_resourceAccessor, m_renderMgr);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     
-    IGameObject::_ListenRenderMgr();
+    IGameObject::ListenRenderMgr(true);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

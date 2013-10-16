@@ -129,9 +129,6 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CShader.cpp">
       <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CShape.cpp">
-      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CTexture.cpp">
       <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
     </ClCompile>
@@ -465,6 +462,24 @@
     <ClCompile Include="..\..\..\indie2dEngine-Game\Source\CGameViewController_win32.cpp">
       <Filter>Source Files\indieEngine-Game\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CCommonOS_iOS.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_iOS.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow_iOS.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CInputContext_iOS.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Input Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CQuad.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.h">
@@ -477,9 +492,6 @@
       <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CShader.h">
-      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CShape.h">
       <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CTexture.h">
@@ -1226,22 +1238,16 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IOGLWindow.h">
       <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CQuad.h">
+      <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.h">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_iOS.mm">
       <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
-    </None>
-    <None Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_iOS.mm">
-      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
-    </None>
-    <None Include="..\..\..\indie2dEngine-Core\Sources\COGLWindow_iOS.mm">
-      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
-    </None>
-    <None Include="..\..\..\indie2dEngine-Core\Sources\CInputContext_iOS.mm">
-      <Filter>Source Files\indieEngine-Core\Source\Input Managment</Filter>
-    </None>
-    <None Include="..\..\..\indie2dEngine-Core\Sources\CCommonOS_iOS.mm">
-      <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
     </None>
     <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_common.inl">
       <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>

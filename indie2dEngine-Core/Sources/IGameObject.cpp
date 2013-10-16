@@ -9,18 +9,15 @@
 #include "IGameObject.h"
 #include "CCamera.h"
 #include "CFrustum.h"
-#include "CShape.h"
 #include "CMesh.h"
 #include "CShader.h"
 #include "CMaterial.h"
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
 #include "CAABoundBox.h"
-#include "CFrustum.h"
-#include "CSkeleton.h"
 
-IGameObject::IGameObject(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
-m_resourceFabricator(_resourceFabricator),
+IGameObject::IGameObject(const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
+m_resourceAccessor(_resourceAccessor),
 m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
@@ -126,14 +123,6 @@ void IGameObject::ListenRenderMgr(bool _value)
     {
         _value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
         m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
-    }
-}
-void IGameObject::_ListenRenderMgr(void)
-{
-    assert(m_renderMgr != nullptr);
-    for(const auto& iterator : m_materials)
-    {
-        m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
     }
 }
 

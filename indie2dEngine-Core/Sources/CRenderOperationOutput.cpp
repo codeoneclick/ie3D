@@ -9,7 +9,7 @@
 #include "CRenderOperationOutput.h"
 #include "CMaterial.h"
 #include "CShader.h"
-#include "CShape.h"
+#include "CQuad.h"
 
 CRenderOperationOutput::CRenderOperationOutput(ui32 _frameWidth, ui32 _frameHeight, std::shared_ptr<CMaterial> _material, ui32 _frameBufferHandle, ui32 _renderBufferHandle) :
 m_frameWidth(_frameWidth),
@@ -27,7 +27,7 @@ m_renderBufferHandle(_renderBufferHandle)
     m_material->Set_BlendFunctionSource(GL_SRC_ALPHA);
     m_material->Set_BlendFunctionDest(GL_ONE_MINUS_SRC_ALPHA);
     
-    m_shape = std::make_shared<CShape>();
+	m_quad = std::make_shared<CQuad>();
 }
 
 CRenderOperationOutput::~CRenderOperationOutput(void)
@@ -43,20 +43,24 @@ void CRenderOperationOutput::Bind(void)
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
     m_material->Bind();
-    m_shape->Bind(m_material->Get_Shader()->Get_Attributes());
+    m_quad->Bind(m_material->Get_Shader()->Get_Attributes());
 }
 
 void CRenderOperationOutput::Unbind(void)
 {
-    m_shape->Unbind(m_material->Get_Shader()->Get_Attributes());
+    m_quad->Unbind(m_material->Get_Shader()->Get_Attributes());
     m_material->Unbind();
-    
+
+#if defined(__APPLE__)
     const GLenum discards[]  = {GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT};
     glDiscardFramebufferEXT(GL_FRAMEBUFFER, 2, discards);
+#elif defined(__WIN32__)
+
+#endif
 }
 
 void CRenderOperationOutput::Draw(void)
 {
-    m_shape->Draw();
+    m_quad->Draw();
 }
 

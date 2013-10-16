@@ -113,9 +113,8 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
     
     if(m_currentSequence)
     {
-        m_animationTime += _deltatime;
-        
-        std::function<void(void)> function = [this]()
+		m_animationTime += _deltatime;
+		std::function<void(void)> function = [this]()
         {
             f32 animationDeltaTime = m_animationTime * m_currentSequence->Get_Fps();
             i32 floorAnimationDeltaTime = static_cast<i32>(floorf(animationDeltaTime));

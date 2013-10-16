@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 
-struct ITemplate
+class ITemplate
 {
     
 };
@@ -78,7 +78,7 @@ struct SParticleEmitterTemplate : public ITemplate
     std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
     ui32 m_numParticles;
     
-    f32 m_duration;
+    ui64 m_duration;
     f32 m_durationRandomness;
     
     f32 m_velocitySensitivity;
@@ -99,8 +99,8 @@ struct SParticleEmitterTemplate : public ITemplate
     glm::vec2 m_startSize;
     glm::vec2 m_endSize;
     
-    f32 m_minParticleEmittInterval;
-    f32 m_maxParticleEmittInterval;
+	ui64 m_minParticleEmittInterval;
+    ui64 m_maxParticleEmittInterval;
 };
 
 struct SWorldSpaceRenderOperationTemplate : public ITemplate

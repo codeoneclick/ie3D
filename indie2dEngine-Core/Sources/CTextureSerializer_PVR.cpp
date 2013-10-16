@@ -41,7 +41,7 @@ void CTextureSerializer_PVR::Serialize(void)
     }
     
     filestream.seekg(0, std::ios::end);
-    i32 size = filestream.tellg();
+    ui32 size = filestream.tellg();
     filestream.seekg(0, std::ios::beg);
 	ui8* sourcedata = new ui8[size];
 	filestream.read((char*)sourcedata, size);

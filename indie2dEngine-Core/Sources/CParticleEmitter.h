@@ -19,7 +19,7 @@ struct SParticle
     glm::vec3 m_velocity;
     glm::vec2 m_size;
     glm::u8vec4 m_color;
-    f32 m_timestamp;
+    ui64 m_timestamp;
 };
 
 class CParticleEmitter : public IGameObject
