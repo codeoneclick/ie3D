@@ -480,6 +480,21 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.cpp">
       <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIButton.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoader.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoadingOperation.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateSerializer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.h">
@@ -1243,6 +1258,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.h">
       <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIButton.h">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoader.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoadingOperation.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateSerializer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

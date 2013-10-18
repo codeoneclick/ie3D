@@ -31,6 +31,7 @@ public:
     void LoadOceanTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
     void LoadParticleEmitterTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
     void LoadGameTransitionTemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler);
+	void LoadGUITemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler, E_GUI_LOADING_SCHEME _scheme);
 };
 
 #endif 

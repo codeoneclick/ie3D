@@ -18,10 +18,18 @@ private:
 
 protected:
 
+	std::vector<std::shared_ptr<IGUIControl>> m_controls;
+    
+    virtual void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
+    virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+
 public:
 
 	CGUIContainer(const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
 	~CGUIContainer(void);
+
+	void RegisterControl(const std::shared_ptr<IGUIControl>& _control);
+	void UnregisterControl(const std::shared_ptr<IGUIControl>& _control);
 };
 
 #endif

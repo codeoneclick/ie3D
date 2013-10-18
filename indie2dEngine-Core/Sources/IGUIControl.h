@@ -33,6 +33,8 @@ public IResourceLoadingHandler
 {
 private:
 
+	friend class CGUIContainer;
+
 protected:
 
 	glm::mat4x4 m_matrixScale;

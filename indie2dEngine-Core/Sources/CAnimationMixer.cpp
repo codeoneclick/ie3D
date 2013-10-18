@@ -89,7 +89,7 @@ void CAnimationMixer::_BindSequence(void)
     std::shared_ptr<CFrame> frame = m_currentSequence->Get_AnimationFrame(0);
     std::shared_ptr<CBone> bone;
     
-    for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
+    for (ui32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
     {
         glm::vec3 position = frame->Get_Position(i);
         glm::quat rotation = frame->Get_Rotation(i);
@@ -127,7 +127,7 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
             
             std::shared_ptr<CBone> bone;
             
-            for (i32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
+            for (ui32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
             {
                 glm::vec3 position = glm::mix(frame_01->Get_Position(i), frame_02->Get_Position(i), interpolation );
                 glm::quat rotation = glm::slerp(frame_01->Get_Rotation(i), frame_02->Get_Rotation(i), interpolation);

@@ -61,7 +61,7 @@ void CMeshSerializer_MDL::Serialize(void)
         glm::vec2 texcoord;
         filestream.read((char*)&texcoord, sizeof(glm::vec2));
         
-        i32 numWeights = 0;
+        ui32 numWeights = 0;
         filestream.read((char*)&numWeights, sizeof(i32));
 
         for(ui32 j = 0; j < numWeights; ++j)

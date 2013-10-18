@@ -98,7 +98,12 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateSerializer.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_iOS.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_win32.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIButton.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoader.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoadingOperation.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateSerializer.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CIndexBuffer.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CInputContext_iOS.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CInputContext_Win32.cpp" />
@@ -343,6 +348,7 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CBatchingMgr.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CBillboard.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CBone.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIButton.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CCamera.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CCollisionMgr.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CCommonOS.h" />
@@ -352,7 +358,11 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoader.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateSerializer.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoader.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoadingOperation.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateSerializer.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CIndexBuffer.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CLight.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CMaterial.h" />

@@ -29,7 +29,7 @@ protected:
     
     f32 m_boneWidth;
     
-    i32	m_numBones;
+    ui32 m_numBones;
     std::set<std::shared_ptr<CBone> > m_roots;
     std::map<std::string, glm::mat4x4*> m_transformations;
     
@@ -48,7 +48,7 @@ public:
     void AddBone(std::shared_ptr<CBone> _bone);
     std::shared_ptr<CBone> Get_Bone(i32 _id);
     
-    inline i32 Get_NumBones(void)
+    inline ui32 Get_NumBones(void)
     {
         return m_numBones;
     };

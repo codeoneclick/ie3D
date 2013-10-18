@@ -33,7 +33,7 @@ void CSkeleton::_Serialize(std::ifstream &_stream)
     _stream.read((char*)&m_numBones, sizeof(i32));
     i32 id, parentId;
 
-    for (i32 i = 0; i < m_numBones; ++i)
+    for (ui32 i = 0; i < m_numBones; ++i)
     {
         _stream.read((char*)&id, sizeof(i32));
         _stream.read((char*)&parentId, sizeof(i32));
@@ -101,7 +101,7 @@ void CSkeleton::Update(const std::string& _guid)
     assert(m_transformations.find(_guid) != m_transformations.end());
     glm::mat4x4* transformation = m_transformations.find(_guid)->second;
     std::shared_ptr<CBone> bone;
-    for (int i = 0; i < CSkeleton::Get_NumBones(); ++i)
+    for (ui32 i = 0; i < CSkeleton::Get_NumBones(); ++i)
     {
         bone = CSkeleton::Get_Bone(i);
         if (bone != nullptr)
