@@ -29,7 +29,7 @@ void CGUITemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITem
 void CGUITemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler, E_GUI_LOADING_SCHEME _scheme)
 {
 #if defined(__USE_GCDPP__)
-    std::function<void(std::string, std::shared_ptr<ITemplateLoadingHandler>)> function = [](std::string _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
+    std::function<void(std::string, std::shared_ptr<ITemplateLoadingHandler>)> function = [_scheme](std::string _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
     {
 #endif
         std::shared_ptr<CGUITemplateLoadingOperation> operation = std::make_shared<CGUITemplateLoadingOperation>(_scheme);
@@ -41,7 +41,7 @@ void CGUITemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITem
         {
             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
         };
-        gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function, _handler, modelTemplate);
+        gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), function, _handler, guiTemplate);
     };
     gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function, _filename, _handler);
 #else
