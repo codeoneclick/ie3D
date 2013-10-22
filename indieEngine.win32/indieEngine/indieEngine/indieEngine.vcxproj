@@ -92,6 +92,8 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CCommonOS_win32.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CFPSCounter.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CFrustum.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_iOS.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_Win32.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoader.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoadingOperation.cpp" />
@@ -100,7 +102,8 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_win32.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIButton.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.cpp" />
-    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIFabricator.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIGraph.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoader.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoadingOperation.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateSerializer.cpp" />
@@ -359,8 +362,9 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateSerializer.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIFabricator.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoader.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIGraph.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateSerializer.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CIndexBuffer.h" />
@@ -565,7 +569,6 @@
     <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\vector_query.inl" />
     <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\verbose_operator.inl" />
     <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\gtx\wrap.inl" />
-    <None Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_iOS.mm" />
     <None Include="..\..\..\indie2dEngine-Game\Source\CGameViewController.mm" />
     <None Include="..\..\..\indie2dEngine-Game\Source\CMoveControllerView_iOS.mm" />
   </ItemGroup>

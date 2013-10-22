@@ -145,7 +145,7 @@ void CSkeleton::BindTransformation(void)
     }
 }
 
-void CSkeleton::Draw(const i32 *_attributes)
+void CSkeleton::Draw(const i32 *_attributes, const std::string& _guid)
 {
 
 }

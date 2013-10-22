@@ -54,7 +54,7 @@ public:
     };
     
     void Update(const std::string& _guid);
-    void Draw(const i32* _attributes);
+	void Draw(const i32* _attributes, const std::string& _guid);
     
     std::string CreateTransformations(void);
     glm::mat4* Get_Transformations(const std::string& _guid);

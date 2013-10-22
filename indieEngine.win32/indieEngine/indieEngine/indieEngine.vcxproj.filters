@@ -115,6 +115,9 @@
     <Filter Include="Source Files\indieEngine-Game\Sources">
       <UniqueIdentifier>{8a3a2709-7b77-4d48-af90-df8fe8b5aa8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\indieEngine-Core\Source\GUI Managment\Controls">
+      <UniqueIdentifier>{64794177-b7b6-4f8d-b1a6-b79b59d4b8f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.cpp">
@@ -477,15 +480,6 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CQuad.cpp">
       <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.cpp">
-      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIButton.cpp">
-      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.cpp">
-      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoader.cpp">
       <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
     </ClCompile>
@@ -494,6 +488,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateSerializer.cpp">
       <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_iOS.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIGraph.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIFabricator.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIButton.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment\Controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1256,15 +1268,6 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CQuad.h">
       <Filter>Source Files\indieEngine-Core\Source\Resources Managment\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIMgr.h">
-      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIButton.h">
-      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.h">
-      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateLoader.h">
       <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Loaders</Filter>
     </ClInclude>
@@ -1274,11 +1277,20 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUITemplateSerializer.h">
       <Filter>Source Files\indieEngine-Core\Source\GameObjectTemplates Managment\Serializers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIGraph.h">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIFabricator.h">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIButton.h">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.h">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment\Controls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_iOS.mm">
-      <Filter>Source Files\indieEngine-Core\Source\StateMachine Managment</Filter>
-    </None>
     <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_common.inl">
       <Filter>Source Files\indieEngine-Core\Libraries\glm</Filter>
     </None>

@@ -8,7 +8,7 @@
 
 #include "CGameLoopExecutor.h"
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
 
 #include "IGameLoopHandler.h"
 #include <Foundation/Foundation.h>

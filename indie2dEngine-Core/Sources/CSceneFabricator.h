@@ -28,15 +28,24 @@ class CSceneFabricator
 private:
 
     std::shared_ptr<CRenderMgr> m_screenSpaceTextureAccessor;
+	std::shared_ptr<CTemplateAccessor> m_templateAccessor;
+    std::shared_ptr<CResourceAccessor> m_resourceAccessor;
 
 protected:
     
     std::set<std::shared_ptr<IGameObject> > m_gameObjectsContainer;
     std::set<std::shared_ptr<CCamera> > m_camerasContainer;
     std::set<std::shared_ptr<CLight> > m_lightsContainer;
-    
-    std::shared_ptr<CTemplateAccessor> m_templateAccessor;
-    std::shared_ptr<CResourceAccessor> m_resourceAccessor;
+
+	inline void _Set_SceneTemplateAccessor(std::shared_ptr<CTemplateAccessor> _templateAccessor)
+	{
+		m_templateAccessor = _templateAccessor;
+	};
+
+	inline void _Set_SceneResourceAccessor(std::shared_ptr<CResourceAccessor> _resourceAccessor)
+	{
+		m_resourceAccessor = _resourceAccessor;
+	};
 
 	inline void _Set_ScreenSpaceTextureAccessor(std::shared_ptr<CRenderMgr> _screenSpaceTextureAccessor)
 	{
