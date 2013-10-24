@@ -14,6 +14,7 @@
 
 class CMaterial;
 class CMesh;
+class CQuad;
 class CAnimationMixer;
 
 class CBatch : public IRenderHandler
@@ -23,15 +24,18 @@ private:
 protected:
     
     std::shared_ptr<CMaterial> m_material;
-    std::function<void(std::shared_ptr<CMaterial>)> m_bind;
+    std::function<void(std::shared_ptr<CMaterial>)> m_materialImposer;
     std::shared_ptr<CMesh> m_mesh;
     std::string m_guid;
     std::string m_mode;
     
     std::vector<std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>> m_meshes;
+	std::vector<std::shared_ptr<CQuad>> m_controls;
     std::vector<glm::mat4x4> m_matrices;
-    std::vector<glm::mat4x4> m_transformations;
-
+	std::vector<glm::mat4x4> m_transformations;
+	std::vector<glm::vec2> m_positions;
+	std::vector<glm::vec2> m_sizes;
+    
     ui8 m_locked;
     ui8 m_proccessed;
     ui8 m_unlocked;
@@ -47,6 +51,8 @@ protected:
     ui32 m_numBatchedVertices;
     ui32 m_numBatchedIndices;
     ui32 m_numBatchedTransformations;
+
+	E_BATCH_GEOMETRY_MODE m_geometryMode;
     
     i32 _OnQueuePosition(void);
     bool _OnOcclusion(void);
@@ -59,7 +65,7 @@ protected:
     
 public:
     
-    CBatch(const std::string& _mode, ui32 _renderQueuePosition, const std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _bind);
+    CBatch(const std::string& _mode, E_BATCH_GEOMETRY_MODE _geometryMode, ui32 _renderQueuePosition, const std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _materialImposer);
     ~CBatch(void);
     
     static const ui32 k_MAX_NUM_VERTICES;
@@ -94,7 +100,8 @@ public:
     void Lock(void);
     void Unlock(void);
     
-    void Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>& _mesh, const glm::mat4x4& _matrix);
+    void Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>& _model, const glm::mat4x4& _worldMatrix);
+	void Batch(const std::shared_ptr<CQuad>& _control, const glm::vec2& _position, const glm::vec2& _size); 
 };
 
 #endif 

@@ -16,11 +16,12 @@ const ui32 CBatch::k_MAX_NUM_VERTICES = UINT16_MAX / 4; // 16k vertices
 const ui32 CBatch::k_MAX_NUM_INDICES = UINT16_MAX / 2;  // 32k indices
 const ui32 CBatch::k_MAX_NUM_TRANSFORMATION = 255;
 
-CBatch::CBatch(const std::string& _mode, ui32 _renderQueuePosition, std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _bind) :
+CBatch::CBatch(const std::string& _mode, E_BATCH_GEOMETRY_MODE _geometryMode, ui32 _renderQueuePosition, std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _materialImposer) :
 m_material(_material),
 m_renderQueuePosition(_renderQueuePosition),
-m_bind(_bind),
+m_materialImposer(_materialImposer),
 m_mode(_mode),
+m_geometryMode(_geometryMode),
 m_numVertices(0),
 m_numIndices(0),
 m_numPushedVertices(0),
@@ -59,6 +60,10 @@ void CBatch::Lock(void)
         m_meshes.clear();
         m_matrices.clear();
         m_transformations.clear();
+
+		m_controls.clear();
+		m_positions.clear();
+		m_sizes.clear();
         
         m_numBatchedVertices = 0;
         m_numBatchedIndices = 0;
@@ -153,6 +158,11 @@ void CBatch::Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAni
             m_transformations.push_back(mixer->Get_Transformations()[i]);
         }
     }
+}
+
+void CBatch::Batch(const std::shared_ptr<CQuad>& _control, const glm::vec2& _position, const glm::vec2& _size)
+{
+
 }
 
 i32 CBatch::_OnQueuePosition(void)
