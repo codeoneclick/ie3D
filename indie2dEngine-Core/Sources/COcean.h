@@ -36,7 +36,7 @@ protected:
     
 public:
     
-    COcean(std::shared_ptr<CResourceAccessor> _resourceFabricator);
+    COcean(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
     ~COcean(void);
 };
 

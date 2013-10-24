@@ -67,6 +67,8 @@
 
 #elif defined(__WIN32__)
 
+#include <windows.h>
+#include <gl/gl.h>
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>

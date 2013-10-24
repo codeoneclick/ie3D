@@ -13,8 +13,9 @@
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
 
-IGUIControl::IGUIControl(const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
+IGUIControl::IGUIControl(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor) :
 m_resourceAccessor(_resourceAccessor),
+m_screenSpaceTextureAccessor(_screenSpaceTextureAccessor),
 m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
 m_renderQueuePosition(0),

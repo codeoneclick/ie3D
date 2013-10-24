@@ -10,6 +10,7 @@
 #define CSceneFabricator_h
 
 #include "HCommon.h"
+#include "IFabricator.h"
 
 class CLight;
 class CCamera;
@@ -19,17 +20,11 @@ class CModel;
 class COcean;
 class CBillboard;
 class CParticleEmitter;
-class CTemplateAccessor;
-class CResourceAccessor;
 class CRenderMgr;
 
-class CSceneFabricator
+class CSceneFabricator : public virtual IFabricator
 {
 private:
-
-    std::shared_ptr<CRenderMgr> m_screenSpaceTextureAccessor;
-	std::shared_ptr<CTemplateAccessor> m_templateAccessor;
-    std::shared_ptr<CResourceAccessor> m_resourceAccessor;
 
 protected:
     
@@ -37,24 +32,9 @@ protected:
     std::set<std::shared_ptr<CCamera> > m_camerasContainer;
     std::set<std::shared_ptr<CLight> > m_lightsContainer;
 
-	inline void _Set_SceneTemplateAccessor(std::shared_ptr<CTemplateAccessor> _templateAccessor)
-	{
-		m_templateAccessor = _templateAccessor;
-	};
-
-	inline void _Set_SceneResourceAccessor(std::shared_ptr<CResourceAccessor> _resourceAccessor)
-	{
-		m_resourceAccessor = _resourceAccessor;
-	};
-
-	inline void _Set_ScreenSpaceTextureAccessor(std::shared_ptr<CRenderMgr> _screenSpaceTextureAccessor)
-	{
-		m_screenSpaceTextureAccessor = _screenSpaceTextureAccessor;
-	};
-    
 public:
     
-    CSceneFabricator(std::shared_ptr<CTemplateAccessor> _templateAccessor, std::shared_ptr<CResourceAccessor> _resourceAccessor);
+    CSceneFabricator(const std::shared_ptr<CTemplateAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
     virtual ~CSceneFabricator(void);
     
     std::shared_ptr<CCamera> CreateCamera(f32 _fov, f32 _near, f32 _far,const glm::ivec4& _viewport);

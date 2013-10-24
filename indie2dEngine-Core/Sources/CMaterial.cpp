@@ -42,10 +42,11 @@ CMaterial::~CMaterial(void)
     
 }
 
-void CMaterial::Serialize(std::shared_ptr<SMaterialTemplate> _template, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CRenderMgr> _renderMgr)
+void CMaterial::Serialize(const std::shared_ptr<SMaterialTemplate>& _template, const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor)
 {
     assert(_template != nullptr);
-    assert(_renderMgr != nullptr);
+    assert(_screenSpaceTextureAccessor != nullptr);
+	assert(_resourceAccessor != nullptr);
     
     CMaterial::Set_RenderState(E_RENDER_STATE_CULL_MODE, _template->m_isCullFace);
     CMaterial::Set_RenderState(E_RENDER_STATE_DEPTH_TEST, _template->m_isDepthTest);
@@ -62,7 +63,7 @@ void CMaterial::Serialize(std::shared_ptr<SMaterialTemplate> _template, std::sha
     
     for(const auto& textureTemplate : _template->m_texturesTemplates)
     {
-        std::shared_ptr<CTexture> texture = textureTemplate->m_filename.length() != 0 ? _resourceAccessor->CreateTexture(textureTemplate->m_filename) : _renderMgr->Get_RenderOperationTexture(textureTemplate->m_operationName);
+        std::shared_ptr<CTexture> texture = textureTemplate->m_filename.length() != 0 ? _resourceAccessor->CreateTexture(textureTemplate->m_filename) : _screenSpaceTextureAccessor->Get_RenderOperationTexture(textureTemplate->m_operationName);
         assert(texture != nullptr);
         texture->Set_Wrap(textureTemplate->m_wrap);
         assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);

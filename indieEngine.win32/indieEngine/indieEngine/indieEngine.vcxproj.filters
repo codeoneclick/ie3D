@@ -402,9 +402,6 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IInputTapRecognizerHandler.cpp">
       <Filter>Source Files\indieEngine-Core\Source\Input Managment</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGUIControl.cpp">
-      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CFPSCounter.cpp">
       <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
     </ClCompile>
@@ -506,6 +503,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.cpp">
       <Filter>Source Files\indieEngine-Core\Source\GUI Managment\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IFabricator.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGUIControl.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IScreenSpaceTextureAccessor.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -790,9 +796,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IInputTapRecognizerHandler.h">
       <Filter>Source Files\indieEngine-Core\Source\Input Managment</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGUIControl.h">
-      <Filter>Source Files\indieEngine-Core\Source\GUI Managment</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CCommonOS.h">
       <Filter>Source Files\indieEngine-Core\Source\Common</Filter>
@@ -1288,6 +1291,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CGUIContainer.h">
       <Filter>Source Files\indieEngine-Core\Source\GUI Managment\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IFabricator.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGUIControl.h">
+      <Filter>Source Files\indieEngine-Core\Source\GUI Managment\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IScreenSpaceTextureAccessor.h">
+      <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

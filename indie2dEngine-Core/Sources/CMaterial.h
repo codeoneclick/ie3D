@@ -14,7 +14,7 @@
 
 class CShader;
 class CTexture;
-class CRenderMgr;
+class IScreenSpaceTextureAccessor;
 class CResourceAccessor;
 
 struct SMaterialTemplate;
@@ -42,7 +42,7 @@ public:
     CMaterial(std::shared_ptr<CShader> _shader, const std::string& _guid);
     ~CMaterial(void);
     
-    void Serialize(std::shared_ptr<SMaterialTemplate> _template, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CRenderMgr> _renderMgr);
+    void Serialize(const std::shared_ptr<SMaterialTemplate>& _template, const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
     
     void Set_CullFaceMode(GLenum _mode);
     void Set_BlendFunctionSource(GLenum _blendFunction);

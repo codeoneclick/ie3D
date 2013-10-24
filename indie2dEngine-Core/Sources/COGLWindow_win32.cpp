@@ -56,11 +56,47 @@ IOGLWindow::IOGLWindow(void)
 		return;                                                        
 	}
 
+
+	static PIXELFORMATDESCRIPTOR pixelFormatDescriptor =				
+	{
+		sizeof(PIXELFORMATDESCRIPTOR),				
+		1,											
+		PFD_DRAW_TO_WINDOW |						
+		PFD_SUPPORT_OPENGL |						
+		PFD_DOUBLEBUFFER,							
+		PFD_TYPE_RGBA,							
+		16,										
+		0, 0, 0, 0, 0, 0,							
+		0,											
+		0,											
+		0,											
+		0, 0, 0, 0,									
+		16,											  
+		0,											
+		0,											
+		PFD_MAIN_PLANE,								
+		0,											
+		0, 0, 0
+	};
+	
 	if (!(m_hDC = GetDC(m_hWnd)))                                                        
 	{
 		MessageBox(NULL, L"Can't Create GL Device Context.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
 		return;                                                        
 	}
+	GLuint pixelFormat = 0;
+	if (!(pixelFormat = ChoosePixelFormat(m_hDC, &pixelFormatDescriptor)))
+	{
+		MessageBox(NULL, L"Can't ChoosePixelFormat.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
+		return; 
+	}
+
+	if(!SetPixelFormat(m_hDC, pixelFormat, &pixelFormatDescriptor))
+	{
+		MessageBox(NULL, L"Can't SetPixelFormat.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
+		return; 		
+	}
+
 
 	ShowWindow(m_hWnd, SW_SHOW);  
 	UpdateWindow(m_hWnd);     

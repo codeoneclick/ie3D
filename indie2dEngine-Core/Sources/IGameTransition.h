@@ -12,6 +12,7 @@
 #include "HCommon.h"
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
+#include "CGUIFabricator.h"
 #include "ITemplateLoadingHandler.h"
 #include "IGameLoopHandler.h"
 
@@ -24,6 +25,7 @@ class IScene;
 class IGameTransition :
 public CSceneGraph,
 public CSceneFabricator,
+public CGUIFabricator,
 public ITemplateLoadingHandler,
 public IGameLoopHandler
 {

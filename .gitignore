@@ -10,6 +10,9 @@
 *.pdb
 *.idb
 *.opensdf
+*.ilk
+*.exe
+*.ipch
 
 # Compiled Static libraries
 *.lai

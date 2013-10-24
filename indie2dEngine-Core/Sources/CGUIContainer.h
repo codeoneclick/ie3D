@@ -25,7 +25,7 @@ protected:
 
 public:
 
-	CGUIContainer(const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
+	CGUIContainer(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
 	~CGUIContainer(void);
 
 	void RegisterControl(const std::shared_ptr<IGUIControl>& _control);

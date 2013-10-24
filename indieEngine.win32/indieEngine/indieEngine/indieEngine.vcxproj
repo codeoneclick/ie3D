@@ -63,13 +63,15 @@
       <AdditionalIncludeDirectories>..\..\..\indie2dEngine-Core\Sources;..\..\..\indie2dEngine-Core\Libraries;..\..\..\indie2dEngine-Core\Libraries\ogles2\include;..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include;..\..\..\indie2dEngine-Core\Libraries\gcdpp\include;..\..\..\indie2dEngine-Core\Libraries\jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>__APPLE__</UndefinePreprocessorDefinitions>
       <PreprocessorDefinitions>__WIN32__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>HCommon.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_32\lib;..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_64\lib;..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_32\Static;..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_64\Static;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;PVRTexLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;libEGL.lib;libGLESv2.lib;PVRTexLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -173,6 +175,7 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateLoadingOperation.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateSerializer.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ICollisionHandler.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IFabricator.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameLoopHandler.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameObject.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameTransition.cpp" />
@@ -189,6 +192,7 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IResourceSerializer.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IScene.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ISceneUpdateHandler.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IScreenSpaceTextureAccessor.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplate.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoader.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.cpp" />
@@ -385,6 +389,7 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoader.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateSerializer.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IFabricator.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IOGLWindow.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateSerializer.h" />
@@ -449,6 +454,7 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IResourceSerializer.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IScene.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ISceneUpdateHandler.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IScreenSpaceTextureAccessor.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplate.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoader.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.h" />

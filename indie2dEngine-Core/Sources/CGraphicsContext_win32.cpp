@@ -32,6 +32,19 @@ std::shared_ptr<IGraphicsContext> CreateGraphicsContext_win32(const void* _hwnd)
 
 CGraphicsContext_win32::CGraphicsContext_win32(const HWND& _hWND, const HDC& _hDC)
 {
+	HGLRC hRC = NULL;		
+	if (!(hRC = wglCreateContext(_hDC)))
+	{
+		MessageBox(0, L"wglCreateContext() failed.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
+		return;
+	}
+
+	if(!wglMakeCurrent(_hDC, hRC))	
+	{
+		MessageBox(0, L"wglMakeCurrent() failed.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
+		return;						
+	}
+
 	m_eglWindow = _hWND;
 	m_eglDisplay = eglGetDisplay(_hDC);
 

@@ -20,8 +20,8 @@
 #include "CCommonOS.h"
 #include "CTimer.h"
 
-CParticleEmitter::CParticleEmitter(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
-IGameObject(_resourceFabricator),
+CParticleEmitter::CParticleEmitter(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor) :
+IGameObject(_resourceAccessor, _screenSpaceTextureAccessor),
 m_locked(0)
 {
     m_settings = nullptr;
@@ -75,14 +75,14 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     for(const auto& materialTemplate : m_settings->m_materialsTemplates)
     {
         std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
-                                                                             materialTemplate->m_shaderTemplate->m_fsFilename);
+                                                                           materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
         
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
-        material->Serialize(materialTemplate, m_resourceAccessor, m_renderMgr);
+        material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
-    IGameObject::ListenRenderMgr(true);
+
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

@@ -18,8 +18,8 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
-COcean::COcean(std::shared_ptr<CResourceAccessor> _resourceFabricator) :
-IGameObject(_resourceFabricator)
+COcean::COcean(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor) :
+IGameObject(_resourceAccessor, _screenSpaceTextureAccessor)
 {
     m_renderQueuePosition = 0;
 }
@@ -80,11 +80,10 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
-        material->Serialize(materialTemplate, m_resourceAccessor, m_renderMgr);
+        material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
     
-    IGameObject::ListenRenderMgr(true);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

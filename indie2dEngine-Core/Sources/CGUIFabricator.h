@@ -10,19 +10,15 @@
 #define CGUIFabricator_h
 
 #include "HCommon.h"
+#include "IFabricator.h"
 
 class IGUIControl;
-class CTemplateAccessor;
-class CResourceAccessor;
 class CGUIContainer;
 class CGUIButton;
 
-class CGUIFabricator
+class CGUIFabricator : public virtual IFabricator
 {
 private:
-
-	std::shared_ptr<CTemplateAccessor> m_templateAccessor;
-    std::shared_ptr<CResourceAccessor> m_resourceAccessor;
 
 protected:
 
@@ -30,14 +26,14 @@ protected:
 
 public:
 
-	CGUIFabricator(std::shared_ptr<CTemplateAccessor> _templateAccessor, std::shared_ptr<CResourceAccessor> _resourceAccessor);
+	CGUIFabricator(const std::shared_ptr<CTemplateAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
 	~CGUIFabricator(void);
 
 	std::shared_ptr<CGUIContainer> CreateContainer(const std::string& _filename);
-    void DeleteCamera(const std::shared_ptr<CGUIContainer>& _control);
+    void DeleteContainer(const std::shared_ptr<CGUIContainer>& _control);
     
     std::shared_ptr<CGUIButton> CreateButton(const std::string& _filename);
-    void DeleteLight(const std::shared_ptr<CGUIButton>& _control);
+    void DeleteButton(const std::shared_ptr<CGUIButton>& _control);
 };
 
 #endif 

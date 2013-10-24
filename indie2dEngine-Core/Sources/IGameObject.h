@@ -26,6 +26,7 @@ class CMaterial;
 class CRenderMgr;
 class CSceneUpdateMgr;
 class CResourceAccessor;
+class IScreenSpaceTextureAccessor;
 class CAABoundBox;
 
 class IGameObject :
@@ -59,6 +60,7 @@ protected:
     std::shared_ptr<CRenderMgr> m_renderMgr;
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
     std::shared_ptr<CResourceAccessor> m_resourceAccessor;
+	std::shared_ptr<IScreenSpaceTextureAccessor> m_screenSpaceTextureAccessor;
     
     ui8 m_status;
     ui32 m_renderQueuePosition;
@@ -82,7 +84,7 @@ protected:
     
 public:
     
-    IGameObject(const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
+	IGameObject(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
     virtual ~IGameObject(void);
     
     inline void Set_Position(const glm::vec3& _position)
@@ -141,11 +143,13 @@ public:
     
     inline void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
     {
+		assert(_renderMgr != nullptr);
         m_renderMgr = _renderMgr;
     };
     
     inline void Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
     {
+		assert(_sceneUpdateMgr != nullptr);
         m_sceneUpdateMgr = _sceneUpdateMgr;
     };
     

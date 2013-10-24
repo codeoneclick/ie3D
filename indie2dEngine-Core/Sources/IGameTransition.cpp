@@ -26,7 +26,9 @@
 #include "IInputContext.h"
 
 IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor) :
+IFabricator(_templateAccessor, _resourceAccessor),
 CSceneFabricator(_templateAccessor, _resourceAccessor),
+CGUIFabricator(_templateAccessor, _resourceAccessor),
 m_guid(_filename),
 m_scene(nullptr),
 m_isLoaded(false)
@@ -34,7 +36,7 @@ m_isLoaded(false)
     assert(_graphicsContext != nullptr);
     assert(_inputContext != nullptr);
     m_renderMgr = std::make_shared<CRenderMgr>(_graphicsContext);
-	CSceneFabricator::_Set_ScreenSpaceTextureAccessor(m_renderMgr);
+	_Set_ScreenSpaceTextureAccessor(m_renderMgr);
     std::shared_ptr<CBatchingMgr> batchingMgr = std::make_shared<CBatchingMgr>(m_renderMgr);
     m_renderMgr->Set_BatchingMgr(batchingMgr);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();

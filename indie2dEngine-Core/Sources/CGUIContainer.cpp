@@ -8,9 +8,8 @@
 
 #include "CGUIContainer.h"
 
-
-CGUIContainer::CGUIContainer(const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
-IGUIControl(_resourceAccessor)
+CGUIContainer::CGUIContainer(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor) :
+IGUIControl(_resourceAccessor, _screenSpaceTextureAccessor)
 {
 
 }

@@ -23,6 +23,7 @@ class CMaterial;
 class CRenderMgr;
 class CSceneUpdateMgr;
 class CResourceAccessor;
+class IScreenSpaceTextureAccessor;
 
 class IGUIControl :
 public std::enable_shared_from_this<IGUIControl>,
@@ -62,6 +63,7 @@ protected:
 	std::shared_ptr<CRenderMgr> m_renderMgr;
     std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
     std::shared_ptr<CResourceAccessor> m_resourceAccessor;
+	std::shared_ptr<IScreenSpaceTextureAccessor> m_screenSpaceTextureAccessor;
 
 	virtual void _OnSceneUpdate(f32 _deltatime);
     
@@ -79,7 +81,7 @@ protected:
 
 public:
 
-	IGUIControl(const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
+	IGUIControl(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
 	virtual ~IGUIControl(void);
 
 	inline void Set_Position(const glm::vec2& _position)
@@ -115,11 +117,13 @@ public:
 
 	inline void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
     {
+		assert(_renderMgr != nullptr);
         m_renderMgr = _renderMgr;
     };
     
     inline void Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
     {
+		assert(_sceneUpdateMgr != nullptr);
         m_sceneUpdateMgr = _sceneUpdateMgr;
     };
     

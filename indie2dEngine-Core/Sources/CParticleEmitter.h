@@ -47,7 +47,7 @@ protected:
     
 public:
     
-    CParticleEmitter(std::shared_ptr<CResourceAccessor> _resourceFabricator);
+    CParticleEmitter(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
     ~CParticleEmitter(void);
 };
 
