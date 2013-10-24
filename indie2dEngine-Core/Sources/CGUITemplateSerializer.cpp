@@ -29,8 +29,41 @@ std::shared_ptr<ITemplate> CGUITemplateSerializer::Serialize(const std::string& 
     pugi::xml_parse_result result = document.load_file(path.c_str());
     assert(result.status == pugi::status_ok);
     pugi::xml_node node = document.child("control");
-   
-	return nullptr;
+	std::shared_ptr<SGUIControlTemplate> guicontrolTemplate = nullptr;
+
+	switch (m_scheme)
+	{
+	case E_GUI_LOADING_SCHEME_NONE:
+		{
+			assert(false);
+		}
+		break;
+	case E_GUI_LOADING_SCHEME_CONTAINER:
+		{
+			guicontrolTemplate = std::make_shared<SGUIContainerTemplate>();
+			std::static_pointer_cast<SGUIContainerTemplate>(guicontrolTemplate)->m_width = node.child("width").attribute("value").as_float();
+			std::static_pointer_cast<SGUIContainerTemplate>(guicontrolTemplate)->m_height = node.child("height").attribute("value").as_float();
+		}
+		break;
+	case E_GUI_LOADING_SCHEME_BUTTON:
+		{
+
+		}
+		break;
+	default:
+		{
+			assert(false);
+		}
+		break;
+	}
+
+	pugi::xml_node materials_node = node.child("materials");
+    for (pugi::xml_node material = materials_node.child("material"); material; material = material.next_sibling("material"))
+    {
+        guicontrolTemplate->m_materialsFilenames.push_back(material.attribute("filename").as_string());
+    }
+
+	return guicontrolTemplate;
 }
 
 std::shared_ptr<ITemplate> CGUITemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)

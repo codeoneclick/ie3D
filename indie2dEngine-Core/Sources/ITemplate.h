@@ -138,4 +138,16 @@ struct SGameTransitionTemplate : public ITemplate
     std::vector<std::shared_ptr<SScreenSpaceRenderOperationTemplate> > m_screenSpaceRenderOperationsTemplates;
 };
 
+struct SGUIControlTemplate : public ITemplate
+{
+	std::vector<std::string> m_materialsFilenames;
+    std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
+};
+
+struct SGUIContainerTemplate : public SGUIControlTemplate
+{
+	ui32 m_width;
+    ui32 m_height;
+};
+
 #endif

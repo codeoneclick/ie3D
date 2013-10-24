@@ -1,10 +1,10 @@
-﻿Build started 23.10.2013 19:11:32.
+﻿Build started 24.10.2013 15:32:54.
      1>Project "D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\indieEngine\indieEngine.vcxproj" on node 2 (Build target(s)).
      1>CTP_Warning:
          'Microsoft Visual C++ Compiler Nov 2012 CTP' is for testing purposes only.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\CL.exe /c /I"..\..\..\indie2dEngine-Core\Sources" /I"..\..\..\indie2dEngine-Core\Libraries" /I"..\..\..\indie2dEngine-Core\Libraries\ogles2\include" /I"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include" /I"..\..\..\indie2dEngine-Core\Libraries\gcdpp\include" /I"..\..\..\indie2dEngine-Core\Libraries\jsoncpp\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D __WIN32__ /D _UNICODE /D UNICODE /U__APPLE__ /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\indie2dEngine-Core\Sources\COGLWindow_win32.cpp"
-         COGLWindow_win32.cpp
+         C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\CL.exe /c /I"..\..\..\indie2dEngine-Core\Sources" /I"..\..\..\indie2dEngine-Core\Libraries" /I"..\..\..\indie2dEngine-Core\Libraries\ogles2\include" /I"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include" /I"..\..\..\indie2dEngine-Core\Libraries\gcdpp\include" /I"..\..\..\indie2dEngine-Core\Libraries\jsoncpp\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D __WIN32__ /D _UNICODE /D UNICODE /U__APPLE__ /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\indie2dEngine-Core\Sources\CQuad.cpp"
+         CQuad.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Release\indieEngine.exe" /NOLOGO /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_32\lib" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_64\lib" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_32\Static" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_64\Static" opengl32.lib libEGL.lib libGLESv2.lib PVRTexLib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Release\indieEngine.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Release\indieEngine.lib" /MACHINE:X86 /SAFESEH "/fe:C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\\bin\c1xx.dll"  Release\gcdppImpl.obj
          Release\gcdppMainQueue_t.obj
@@ -144,4 +144,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:09:47.72
+Time Elapsed 00:00:34.97

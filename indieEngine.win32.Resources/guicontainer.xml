@@ -1,0 +1,7 @@
+<control name="guicontainer">
+	<width value="128"/>
+    <height value="128"/>
+	<materials>
+		<material filename="material.guicontainer.xml"/>
+	</materials>
+</control>

@@ -56,7 +56,7 @@ IOGLWindow::IOGLWindow(void)
 		return;                                                        
 	}
 
-
+#if defined(__USE_OPENGL__)
 	static PIXELFORMATDESCRIPTOR pixelFormatDescriptor =				
 	{
 		sizeof(PIXELFORMATDESCRIPTOR),				
@@ -78,12 +78,13 @@ IOGLWindow::IOGLWindow(void)
 		0,											
 		0, 0, 0
 	};
-	
+#endif
 	if (!(m_hDC = GetDC(m_hWnd)))                                                        
 	{
 		MessageBox(NULL, L"Can't Create GL Device Context.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
 		return;                                                        
 	}
+#if defined(__USE_OPENGL__)
 	GLuint pixelFormat = 0;
 	if (!(pixelFormat = ChoosePixelFormat(m_hDC, &pixelFormatDescriptor)))
 	{
@@ -96,6 +97,7 @@ IOGLWindow::IOGLWindow(void)
 		MessageBox(NULL, L"Can't SetPixelFormat.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
 		return; 		
 	}
+#endif
 
 
 	ShowWindow(m_hWnd, SW_SHOW);  

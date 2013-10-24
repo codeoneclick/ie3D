@@ -13,6 +13,9 @@
 *.ilk
 *.exe
 *.ipch
+*.tlog
+*.suo
+*.sdf
 
 # Compiled Static libraries
 *.lai

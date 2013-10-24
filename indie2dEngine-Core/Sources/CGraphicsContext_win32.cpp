@@ -14,6 +14,7 @@ protected:
 	EGLSurface m_eglSurface;
 	EGLContext m_eglContext;
 	EGLNativeWindowType	m_eglWindow;
+	HDC m_hDC;
     
 public:
     
@@ -32,19 +33,23 @@ std::shared_ptr<IGraphicsContext> CreateGraphicsContext_win32(const void* _hwnd)
 
 CGraphicsContext_win32::CGraphicsContext_win32(const HWND& _hWND, const HDC& _hDC)
 {
+#if defined(__USE_OPENGL__)
+	m_hDC = _hDC;
 	HGLRC hRC = NULL;		
-	if (!(hRC = wglCreateContext(_hDC)))
+	if (!(hRC = wglCreateContext(m_hDC)))
 	{
 		MessageBox(0, L"wglCreateContext() failed.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
 		return;
 	}
 
-	if(!wglMakeCurrent(_hDC, hRC))	
+	if(!wglMakeCurrent(m_hDC, hRC))	
 	{
 		MessageBox(0, L"wglMakeCurrent() failed.", L"indieEngine", MB_OK | MB_ICONEXCLAMATION);
 		return;						
 	}
+#endif
 
+#if defined(__USE_OPENGLES__)
 	m_eglWindow = _hWND;
 	m_eglDisplay = eglGetDisplay(_hDC);
 
@@ -89,6 +94,7 @@ CGraphicsContext_win32::CGraphicsContext_win32(const HWND& _hWND, const HDC& _hD
 	m_eglContext = eglCreateContext(m_eglDisplay, m_eglConfig, NULL, ai32ContextAttribs);
 
 	eglMakeCurrent(m_eglDisplay, m_eglSurface, m_eglSurface, m_eglContext);
+#endif
 
 	i32 bindedFrameBufferHandle = 0;
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &bindedFrameBufferHandle);
@@ -106,7 +112,13 @@ CGraphicsContext_win32::~CGraphicsContext_win32(void)
 
 void CGraphicsContext_win32::Output(void) const
 {
+#if defined(__USE_OPENGLES__)
 	assert(eglSwapBuffers(m_eglDisplay, m_eglSurface) == EGL_TRUE);
+#endif
+
+#if defined(__USE_OPENGL__)
+	SwapBuffers(m_hDC);	
+#endif
 }
 
 #endif

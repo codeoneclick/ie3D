@@ -31,11 +31,13 @@
 #define __USE_CURL__
 #define __USE_JSONCPP__
 #define __USE_GCDPP__
+#define __USE_OPENGLES__
 
 #else
 
 #define M_PI 3.14f
 #define M_PI_2 1.57f
+#define __USE_OPENGLES__
 
 #endif
 
@@ -74,6 +76,8 @@
 #include <GLES2/gl2ext.h>
 
 #endif
+
+#pragma hdrstop
 
 typedef signed char i8;
 typedef unsigned char ui8;
