@@ -76,26 +76,30 @@ void CGUIContainer::_OnSceneUpdate(f32 _deltatime)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
 		IGUIControl::_OnSceneUpdate(_deltatime);
-		SHardwareVertex* vertexData = m_quad->Get_VertexBuffer()->Lock();
 
-		f32 screenWidth = Get_ScreenWidth();
-		f32 screenHeight = Get_ScreenHeight();
+		if(m_material != nullptr && !m_material->Get_IsBatching())
+		{
+			SHardwareVertex* vertexData = m_quad->Get_VertexBuffer()->Lock();
 
-		glm::vec4 frame(0.0f);
-		frame.x = (m_position.x / screenWidth) * 2.0f - 1.0f;
-		frame.y = (m_position.y / screenHeight) * 2.0f - 1.0f;
-		frame.z = ((m_position.x + m_size.x) / screenWidth) * 2.0f - 1.0f;
-		frame.w = ((m_position.y + m_size.y) / screenHeight) * 2.0f - 1.0f;
+			f32 screenWidth = Get_ScreenWidth();
+			f32 screenHeight = Get_ScreenHeight();
 
-		vertexData[0].m_position = glm::vec3(frame.x, frame.y, 0.0f);
-		vertexData[0].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 0.0f));
-		vertexData[1].m_position = glm::vec3(frame.x, frame.w, 0.0f);
-		vertexData[1].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 1.0f));
-		vertexData[2].m_position = glm::vec3(frame.z, frame.y, 0.0f);
-		vertexData[2].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 0.0f));
-		vertexData[3].m_position = glm::vec3(frame.z, frame.w, 0.0f);
-		vertexData[3].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 1.0f));
-		m_quad->Get_VertexBuffer()->Unlock();
+			glm::vec4 frame(0.0f);
+			frame.x = (m_position.x / screenWidth) * 2.0f - 1.0f;
+			frame.y = ((screenHeight - m_position.y) / screenHeight) * 2.0f - 1.0f;
+			frame.z = ((m_position.x + m_size.x) / screenWidth) * 2.0f - 1.0f;
+			frame.w = ((screenHeight - (m_position.y + m_size.y)) / screenHeight) * 2.0f - 1.0f;
+
+			vertexData[0].m_position = glm::vec3(frame.x, frame.y, 0.0f);
+			vertexData[0].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 0.0f));
+			vertexData[1].m_position = glm::vec3(frame.x, frame.w, 0.0f);
+			vertexData[1].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 1.0f));
+			vertexData[2].m_position = glm::vec3(frame.z, frame.y, 0.0f);
+			vertexData[2].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 0.0f));
+			vertexData[3].m_position = glm::vec3(frame.z, frame.w, 0.0f);
+			vertexData[3].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 1.0f));
+			m_quad->Get_VertexBuffer()->Unlock();
+		}
     }
 }
 

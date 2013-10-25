@@ -1,12 +1,12 @@
-﻿Build started 25.10.2013 18:23:29.
+﻿Build started 25.10.2013 19:26:57.
      1>Project "D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\indieEngine\indieEngine.vcxproj" on node 2 (Build target(s)).
      1>CTP_Warning:
          'Microsoft Visual C++ Compiler Nov 2012 CTP' is for testing purposes only.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\CL.exe /c /I"..\..\..\indie2dEngine-Core\Sources" /I"..\..\..\indie2dEngine-Core\Libraries" /I"..\..\..\indie2dEngine-Core\Libraries\ogles2\include" /I"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include" /I"..\..\..\indie2dEngine-Core\Libraries\gcdpp\include" /I"..\..\..\indie2dEngine-Core\Libraries\jsoncpp\include" /ZI /nologo /W3 /WX- /Od /Oy- /D __WIN32__ /D _UNICODE /D UNICODE /U__APPLE__ /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\indie2dEngine-Core\Sources\CGUIContainer.cpp"
-         CGUIContainer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cguicontainer.cpp(81): warning C4244: 'initializing' : conversion from 'ui32' to 'f32', possible loss of data
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cguicontainer.cpp(82): warning C4244: 'initializing' : conversion from 'ui32' to 'f32', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\CL.exe /c /I"..\..\..\indie2dEngine-Core\Sources" /I"..\..\..\indie2dEngine-Core\Libraries" /I"..\..\..\indie2dEngine-Core\Libraries\ogles2\include" /I"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include" /I"..\..\..\indie2dEngine-Core\Libraries\gcdpp\include" /I"..\..\..\indie2dEngine-Core\Libraries\jsoncpp\include" /ZI /nologo /W3 /WX- /Od /Oy- /D __WIN32__ /D _UNICODE /D UNICODE /U__APPLE__ /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\indie2dEngine-Core\Sources\CBatch.cpp"
+         CBatch.cpp
+     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cbatch.cpp(160): warning C4244: 'initializing' : conversion from 'ui32' to 'f32', possible loss of data
+     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cbatch.cpp(161): warning C4244: 'initializing' : conversion from 'ui32' to 'f32', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_32\lib" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_64\lib" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_32\Static" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_64\Static" libEGL.lib libGLESv2.lib PVRTexLib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.lib" /MACHINE:X86 "/fe:C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\\bin\c1xx.dll"  Debug\gcdppImpl.obj
          Debug\gcdppMainQueue_t.obj
@@ -145,4 +145,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.10
+Time Elapsed 00:00:05.13

@@ -121,6 +121,11 @@ void CKOTHInGameScene::Load(void)
 
 	std::shared_ptr<CGUIContainer> guicontainer = m_root->CreateGUIContainer("guicontainer.xml");
 	m_root->InsertGUIContainer(guicontainer);
+	guicontainer->Set_Position(glm::vec2(100.0f, 100.0f)); 
+
+	std::shared_ptr<CGUIContainer> guicontainer2 = m_root->CreateGUIContainer("guicontainer.xml");
+	m_root->InsertGUIContainer(guicontainer2);
+	guicontainer2->Set_Position(glm::vec2(300.0f, 300.0f)); 
     
     m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
     m_characterController = std::make_shared<CCharacterController>();

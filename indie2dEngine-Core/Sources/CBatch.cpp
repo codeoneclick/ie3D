@@ -12,6 +12,7 @@
 #include "CQuad.h"
 #include "CShader.h"
 #include "CAnimationMixer.h"
+#include "CCommonOS.h"
 
 const ui32 CBatch::k_MAX_NUM_VERTICES = UINT16_MAX / 4; // 16k vertices
 const ui32 CBatch::k_MAX_NUM_INDICES = UINT16_MAX / 2;  // 32k indices
@@ -133,7 +134,57 @@ std::function<void(void)> CBatch::_UnlockModelsGeometry()
 
 std::function<void(void)> CBatch::_UnlockControlsGeometry()
 {
-	return nullptr;
+	return [this]()
+	{
+		ui32 numVertices = 0;
+        ui32 numIndices = 0;
+            
+		for(ui32 i = 0; i < m_controls.size(); ++i)
+        {
+			std::shared_ptr<CQuad> quad = m_controls[i];
+				
+			glm::vec2 position = m_positions[i];
+			glm::vec2 size = m_sizes[i];
+                
+            ui16* indexData_01 = m_mesh->Get_IndexBuffer()->Lock();
+            ui16* indexData_02 = quad->Get_IndexBuffer()->Lock();
+                
+            for(ui32 j = 0; j < quad->Get_NumIndexes(); ++j)
+            {
+                indexData_01[numIndices + j] = indexData_02[j] + numVertices;
+            }
+                
+            SHardwareVertex* vertexData_01 = m_mesh->Get_VertexBuffer()->Lock();
+            SHardwareVertex* vertexData_02 = quad->Get_VertexBuffer()->Lock();
+
+			f32 screenWidth = Get_ScreenWidth();
+			f32 screenHeight = Get_ScreenHeight();
+
+			glm::vec4 frame(0.0f);
+			frame.x = (position.x / screenWidth) * 2.0f - 1.0f;
+			frame.y = ((screenHeight - position.y) / screenHeight) * 2.0f - 1.0f;
+			frame.z = ((position.x + size.x) / screenWidth) * 2.0f - 1.0f;
+			frame.w = ((screenHeight - (position.y + size.y)) / screenHeight) * 2.0f - 1.0f;
+
+			vertexData_01[numVertices + 0].m_position = glm::vec3(frame.x, frame.y, 0.0f);
+			vertexData_01[numVertices + 0].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 0.0f));
+			vertexData_01[numVertices + 1].m_position = glm::vec3(frame.x, frame.w, 0.0f);
+			vertexData_01[numVertices + 1].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 1.0f));
+			vertexData_01[numVertices + 2].m_position = glm::vec3(frame.z, frame.y, 0.0f);
+			vertexData_01[numVertices + 2].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 0.0f));
+			vertexData_01[numVertices + 3].m_position = glm::vec3(frame.z, frame.w, 0.0f);
+			vertexData_01[numVertices + 3].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 1.0f));
+
+            numVertices += quad->Get_NumVertexes();
+            numIndices += quad->Get_NumIndexes();
+		}
+            
+        m_numPushedVertices = numVertices;
+        m_numPushedIndices = numIndices;
+        m_proccessed = 0;
+        m_locked = 0;
+        m_unlocked = 1;
+	};
 }
 
 std::function<void(void)> CBatch::_UnlockPatriclesGeometry()
@@ -163,7 +214,9 @@ void CBatch::Unlock(void)
 			break;
 		case E_BATCH_GEOMETRY_MODE_CONTROLS:
 			{
-
+				unlock = _UnlockControlsGeometry();
+				assert(m_positions.size() == m_sizes.size());
+				assert(m_positions.size() == m_controls.size());
 			}
 			break;
 		case E_BATCH_GEOMETRY_MODE_PARTICLES:
