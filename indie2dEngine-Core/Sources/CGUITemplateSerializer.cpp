@@ -41,6 +41,7 @@ std::shared_ptr<ITemplate> CGUITemplateSerializer::Serialize(const std::string& 
 	case E_GUI_LOADING_SCHEME_CONTAINER:
 		{
 			guicontrolTemplate = std::make_shared<SGUIContainerTemplate>();
+			std::static_pointer_cast<SGUIContainerTemplate>(guicontrolTemplate)->m_isBatching = node.attribute("is_batching").as_bool();
 			std::static_pointer_cast<SGUIContainerTemplate>(guicontrolTemplate)->m_width = node.child("width").attribute("value").as_float();
 			std::static_pointer_cast<SGUIContainerTemplate>(guicontrolTemplate)->m_height = node.child("height").attribute("value").as_float();
 		}
@@ -57,12 +58,7 @@ std::shared_ptr<ITemplate> CGUITemplateSerializer::Serialize(const std::string& 
 		break;
 	}
 
-	pugi::xml_node materials_node = node.child("materials");
-    for (pugi::xml_node material = materials_node.child("material"); material; material = material.next_sibling("material"))
-    {
-        guicontrolTemplate->m_materialsFilenames.push_back(material.attribute("filename").as_string());
-    }
-
+	guicontrolTemplate->m_materialsFilename = node.child("material").attribute("filename").as_string();
 	return guicontrolTemplate;
 }
 

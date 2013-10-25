@@ -9,6 +9,7 @@
 #include "CBatch.h"
 #include "CMaterial.h"
 #include "CMesh.h"
+#include "CQuad.h"
 #include "CShader.h"
 #include "CAnimationMixer.h"
 
@@ -72,13 +73,9 @@ void CBatch::Lock(void)
     m_locked = 1;
 }
 
-void CBatch::Unlock(void)
+std::function<void(void)> CBatch::_UnlockModelsGeometry()
 {
-    if(m_locked == 1 && m_proccessed == 0 && m_unlocked == 0)
-    {
-        m_proccessed = 1;
-        assert(m_matrices.size() == m_meshes.size());
-        std::function<void(void)> unlock = [this]()
+	return [this]()
         {
             ui32 numVertices = 0;
             ui32 numIndices = 0;
@@ -131,8 +128,58 @@ void CBatch::Unlock(void)
             m_proccessed = 0;
             m_locked = 0;
             m_unlocked = 1;
-
         };
+}
+
+std::function<void(void)> CBatch::_UnlockControlsGeometry()
+{
+	return nullptr;
+}
+
+std::function<void(void)> CBatch::_UnlockPatriclesGeometry()
+{
+	return nullptr;
+}
+
+void CBatch::Unlock(void)
+{
+    if(m_locked == 1 && m_proccessed == 0 && m_unlocked == 0)
+    {
+        m_proccessed = 1;
+
+		std::function<void(void)> unlock = nullptr;
+		switch (m_geometryMode)
+		{
+		case E_BATCH_GEOMETRY_MODE_NONE:
+			{
+				assert(false);
+			}
+			break;
+		case E_BATCH_GEOMETRY_MODE_MODELS:
+			{
+				unlock = _UnlockModelsGeometry();
+				assert(m_matrices.size() == m_meshes.size());
+			}
+			break;
+		case E_BATCH_GEOMETRY_MODE_CONTROLS:
+			{
+
+			}
+			break;
+		case E_BATCH_GEOMETRY_MODE_PARTICLES:
+			{
+
+			}
+			break;
+		default:
+			{
+				assert(false);
+			}
+			break;
+		}
+
+		assert(unlock != nullptr);
+        
 #if defined(__USE_GCDPP__)
         gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), unlock);
 #else
@@ -161,8 +208,16 @@ void CBatch::Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAni
 }
 
 void CBatch::Batch(const std::shared_ptr<CQuad>& _control, const glm::vec2& _position, const glm::vec2& _size)
-{
-
+{ 
+	if(m_locked == 1 && m_proccessed == 0)
+    {
+		m_controls.push_back(_control);
+		m_positions.push_back(_position);
+		m_sizes.push_back(_size);
+        
+        m_numBatchedVertices += _control->Get_NumVertexes();
+        m_numBatchedIndices += _control->Get_NumIndexes();
+    }
 }
 
 i32 CBatch::_OnQueuePosition(void)
@@ -203,7 +258,7 @@ void CBatch::_OnDraw(const std::string& _mode)
     if(m_numIndices != 0 && m_numVertices != 0)
     {
         m_material->Bind();
-        m_bind(m_material);
+		m_materialImposer(m_material);
         
         m_mesh->Bind(m_material->Get_Shader()->Get_Attributes());
         m_mesh->Draw(m_numIndices);

@@ -17,11 +17,15 @@
 #include "CCamera.h"
 #include "CNavigator.h"
 #include "CCharacterController.h"
+#include "CGUIContainer.h"
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
+
 extern void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
 extern void UnregisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
-#else
+
+#elif defined(__WIN32__)
+
 void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler)
 {
 
@@ -31,6 +35,7 @@ void UnregisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _ha
 {
 
 };
+
 #endif
 
 CKOTHInGameScene::CKOTHInGameScene(IGameTransition* _root) :
@@ -113,6 +118,9 @@ void CKOTHInGameScene::Load(void)
     m_root->InsertParticleEmitter(particleEmitter);
     
     m_root->RegisterCollisionHandler(shared_from_this());
+
+	std::shared_ptr<CGUIContainer> guicontainer = m_root->CreateGUIContainer("guicontainer.xml");
+	m_root->InsertGUIContainer(guicontainer);
     
     m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
     m_characterController = std::make_shared<CCharacterController>();

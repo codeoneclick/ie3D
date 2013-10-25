@@ -23,7 +23,7 @@ CGUIFabricator::~CGUIFabricator(void)
 	m_controlsContainer.clear();
 }
 
-std::shared_ptr<CGUIContainer> CGUIFabricator::CreateContainer(const std::string& _filename)
+std::shared_ptr<CGUIContainer> CGUIFabricator::CreateGUIContainer(const std::string& _filename)
 {
 	assert(m_resourceAccessor != nullptr);
 	assert(m_screenSpaceTextureAccessor != nullptr);
@@ -34,17 +34,17 @@ std::shared_ptr<CGUIContainer> CGUIFabricator::CreateContainer(const std::string
     return container;
 }
 
-void CGUIFabricator::DeleteContainer(const std::shared_ptr<CGUIContainer>& _control)
+void CGUIFabricator::DeleteGUIContainer(const std::shared_ptr<CGUIContainer>& _control)
 {
 
 }
     
-std::shared_ptr<CGUIButton> CGUIFabricator::CreateButton(const std::string& _filename)
+std::shared_ptr<CGUIButton> CGUIFabricator::CreateGUIButton(const std::string& _filename)
 {
 	return nullptr;
 }
 
-void CGUIFabricator::DeleteButton(const std::shared_ptr<CGUIButton>& _control)
+void CGUIFabricator::DeleteGUIButton(const std::shared_ptr<CGUIButton>& _control)
 {
 
 }

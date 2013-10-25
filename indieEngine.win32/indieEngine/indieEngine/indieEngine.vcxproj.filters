@@ -513,6 +513,9 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IScreenSpaceTextureAccessor.cpp">
       <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGraph.cpp">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.h">
@@ -1300,6 +1303,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IScreenSpaceTextureAccessor.h">
       <Filter>Source Files\indieEngine-Core\Source\Render Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGraph.h">
+      <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

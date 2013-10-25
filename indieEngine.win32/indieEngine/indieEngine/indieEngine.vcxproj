@@ -180,6 +180,7 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameObject.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameTransition.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGameWorkflow.cpp" />
+    <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGraph.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGraphicsContext.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGUIControl.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IInputTapRecognizerHandler.cpp" />
@@ -390,6 +391,7 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COceanTemplateSerializer.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IFabricator.h" />
+    <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGraph.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IOGLWindow.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateSerializer.h" />

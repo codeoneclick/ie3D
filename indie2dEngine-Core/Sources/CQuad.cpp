@@ -17,25 +17,13 @@ m_minBound(glm::vec3( 4096.0f,  4096.0f,  4096.0f))
     m_vertexBuffer = std::make_shared<CVertexBuffer>(4, GL_STATIC_DRAW);
     SHardwareVertex* vertexData = m_vertexBuffer->Lock();
 
-	f32 screenWidth = 640.0f;
-	f32 screenHeight = 480.0f;
-
-	glm::vec2 position = glm::vec2(160.0f, 120.0f);
-	glm::vec2 size = glm::vec2(320.0f, 240.0f);
-
-	glm::vec4 frame(0.0f);
-	frame.x = (position.x / screenWidth) * 2.0f - 1.0f;
-	frame.y = (position.y / screenHeight) * 2.0f - 1.0f;
-	frame.z = ((position.x + size.x) / screenWidth) * 2.0f - 1.0f;
-	frame.w = ((position.y + size.y) / screenHeight) * 2.0f - 1.0f;
-
-    vertexData[0].m_position = glm::vec3(frame.x, frame.y, 0.0f);
+    vertexData[0].m_position = glm::vec3(-1.0f, -1.0f, 0.0f);
     vertexData[0].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 0.0f));
-    vertexData[1].m_position = glm::vec3(frame.x, frame.w, 0.0f);
+    vertexData[1].m_position = glm::vec3(-1.0f, 1.0f, 0.0f);
     vertexData[1].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 1.0f));
-    vertexData[2].m_position = glm::vec3(frame.z, frame.y, 0.0f);
+    vertexData[2].m_position = glm::vec3(1.0f, -1.0f, 0.0f);
     vertexData[2].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 0.0f));
-    vertexData[3].m_position = glm::vec3(frame.z, frame.w, 0.0f);
+    vertexData[3].m_position = glm::vec3(1.0f, 1.0f, 0.0f);
     vertexData[3].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 1.0f));
     m_vertexBuffer->Unlock();
     

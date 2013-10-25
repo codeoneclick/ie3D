@@ -83,6 +83,7 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
     }
 
+	IGameObject::ListenRenderMgr(m_isNeedToRender);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

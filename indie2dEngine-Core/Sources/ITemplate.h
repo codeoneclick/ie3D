@@ -140,14 +140,15 @@ struct SGameTransitionTemplate : public ITemplate
 
 struct SGUIControlTemplate : public ITemplate
 {
-	std::vector<std::string> m_materialsFilenames;
-    std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
+	std::string m_materialsFilename;
+    std::shared_ptr<SMaterialTemplate> m_materialsTemplate;
 };
 
 struct SGUIContainerTemplate : public SGUIControlTemplate
 {
 	ui32 m_width;
     ui32 m_height;
+	bool m_isBatching;
 };
 
 #endif

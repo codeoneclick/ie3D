@@ -10,6 +10,7 @@
 #define CBatch_h
 
 #include "HCommon.h"
+#include "HEnums.h"
 #include "IRenderHandler.h"
 
 class CMaterial;
@@ -53,6 +54,10 @@ protected:
     ui32 m_numBatchedTransformations;
 
 	E_BATCH_GEOMETRY_MODE m_geometryMode;
+
+	std::function<void(void)> _UnlockModelsGeometry(void);
+	std::function<void(void)> _UnlockControlsGeometry(void);
+	std::function<void(void)> _UnlockPatriclesGeometry(void);
     
     i32 _OnQueuePosition(void);
     bool _OnOcclusion(void);

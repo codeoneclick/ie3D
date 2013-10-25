@@ -19,6 +19,13 @@ private:
 protected:
 
 	std::vector<std::shared_ptr<IGUIControl>> m_controls;
+
+	void _OnSceneUpdate(f32 _deltatime);
+    
+    void _OnBind(const std::string& _mode);
+    void _OnDraw(const std::string& _mode);
+    void _OnUnbind(const std::string& _mode);
+    void _OnBatch(const std::string& _mode);
     
     virtual void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
     virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);

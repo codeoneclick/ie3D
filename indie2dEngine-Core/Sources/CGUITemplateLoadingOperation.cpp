@@ -7,6 +7,7 @@
 //
 
 #include "CGUITemplateLoadingOperation.h"
+#include "CMaterialTemplateLoadingOperation.h"
 #include "CGUITemplateSerializer.h"
 #include "ITemplate.h"
 
@@ -24,5 +25,11 @@ CGUITemplateLoadingOperation::~CGUITemplateLoadingOperation(void)
 std::shared_ptr<ITemplate> CGUITemplateLoadingOperation::Serialize(const std::string& _filename)
 {
 	std::shared_ptr<CGUITemplateSerializer> serializer = std::make_shared<CGUITemplateSerializer>(m_scheme);
-    return serializer->Serialize(_filename);
+	std::shared_ptr<SGUIControlTemplate> guicontrolTemplate = std::static_pointer_cast<SGUIControlTemplate>(serializer->Serialize(_filename));
+    assert(guicontrolTemplate != nullptr);
+    std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
+	std::shared_ptr<SMaterialTemplate> materialTemplate = std::static_pointer_cast<SMaterialTemplate>(materialLoadingOperation->Serialize(guicontrolTemplate->m_materialsFilename));
+    assert(materialTemplate != nullptr);
+    guicontrolTemplate->m_materialsTemplate = materialTemplate;
+    return guicontrolTemplate;
 }

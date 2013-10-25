@@ -1,7 +1,5 @@
-<control name="guicontainer">
+<control name="guicontainer" is_batching="0">
 	<width value="128"/>
     <height value="128"/>
-	<materials>
-		<material filename="material.guicontainer.xml"/>
-	</materials>
+	<material filename="material.guicontainer.xml"/>
 </control>

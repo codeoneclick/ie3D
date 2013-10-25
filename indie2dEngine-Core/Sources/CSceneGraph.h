@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
+#include "IGraph.h"
 
 class CCamera;
 class CLight;
@@ -26,7 +27,7 @@ class CCollisionMgr;
 class ICollisionHandler;
 class IInputContext;
 
-class CSceneGraph 
+class CSceneGraph : public virtual IGraph
 {
 private:
     
@@ -43,8 +44,6 @@ private:
     
 protected:
     
-    std::shared_ptr<CRenderMgr> m_renderMgr;
-    std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
     std::shared_ptr<CCollisionMgr> m_collisionMgr;
     std::shared_ptr<IInputContext> m_inputContext;
     

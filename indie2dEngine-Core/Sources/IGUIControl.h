@@ -52,6 +52,8 @@ protected:
 
 	ui8 m_status;
     ui32 m_renderQueuePosition;
+	std::function<void(std::shared_ptr<CMaterial>)> m_materialImposer;
+	bool m_isNeedToRender;
 
 	std::shared_ptr<IGUIControl> m_parent;
 

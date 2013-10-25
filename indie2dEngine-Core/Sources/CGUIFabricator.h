@@ -29,11 +29,11 @@ public:
 	CGUIFabricator(const std::shared_ptr<CTemplateAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
 	~CGUIFabricator(void);
 
-	std::shared_ptr<CGUIContainer> CreateContainer(const std::string& _filename);
-    void DeleteContainer(const std::shared_ptr<CGUIContainer>& _control);
+	std::shared_ptr<CGUIContainer> CreateGUIContainer(const std::string& _filename);
+    void DeleteGUIContainer(const std::shared_ptr<CGUIContainer>& _control);
     
-    std::shared_ptr<CGUIButton> CreateButton(const std::string& _filename);
-    void DeleteButton(const std::shared_ptr<CGUIButton>& _control);
+    std::shared_ptr<CGUIButton> CreateGUIButton(const std::string& _filename);
+    void DeleteGUIButton(const std::shared_ptr<CGUIButton>& _control);
 };
 
 #endif 

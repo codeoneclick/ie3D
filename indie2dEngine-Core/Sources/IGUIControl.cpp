@@ -24,6 +24,7 @@ m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
 m_material(nullptr),
 m_parent(nullptr),
+m_isNeedToRender(false),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
 
@@ -50,12 +51,21 @@ std::shared_ptr<CIndexBuffer> IGUIControl::Get_HardwareIndexBuffer(void)
 
 void IGUIControl::ListenRenderMgr(bool _value)
 {
-    assert(m_renderMgr != nullptr);
+    if(_value)
+	{
+		assert(m_renderMgr != nullptr);
+	}
+
 	if(m_material != nullptr)
     {
-        _value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(m_materialModeName, shared_from_this()) :
-        m_renderMgr->UnregisterWorldSpaceRenderHandler(m_materialModeName, shared_from_this());
+		if(m_renderMgr != nullptr)
+		{
+			_value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(m_materialModeName, shared_from_this()) :
+			m_renderMgr->UnregisterWorldSpaceRenderHandler(m_materialModeName, shared_from_this());
+		}
     }
+
+	m_isNeedToRender = _value;
 }
 
 void IGUIControl::ListenSceneUpdateMgr(bool _value)
@@ -107,7 +117,7 @@ void IGUIControl::_OnSceneUpdate(f32 _deltatime)
 
 i32 IGUIControl::_OnQueuePosition(void)
 {
-	return INT32_MAX;
+	return UINT32_MAX;
 }
 
 bool IGUIControl::_OnOcclusion(void)

@@ -64,7 +64,8 @@ protected:
     
     ui8 m_status;
     ui32 m_renderQueuePosition;
-    std::function<void(std::shared_ptr<CMaterial>)> m_bind;
+    std::function<void(std::shared_ptr<CMaterial>)> m_materialImposer;
+	bool m_isNeedToRender;
     
     bool _IsBoundBoxInFrustum(void);
     

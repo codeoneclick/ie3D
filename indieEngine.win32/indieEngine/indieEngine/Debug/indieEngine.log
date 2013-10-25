@@ -1,125 +1,12 @@
-﻿Build started 16.10.2013 16:26:25.
+﻿Build started 25.10.2013 18:23:29.
      1>Project "D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\indieEngine\indieEngine.vcxproj" on node 2 (Build target(s)).
      1>CTP_Warning:
          'Microsoft Visual C++ Compiler Nov 2012 CTP' is for testing purposes only.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\CL.exe /c /I"..\..\..\indie2dEngine-Core\Sources" /I"..\..\..\indie2dEngine-Core\Libraries" /I"..\..\..\indie2dEngine-Core\Libraries\ogles2\include" /I"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include" /I"..\..\..\indie2dEngine-Core\Libraries\gcdpp\include" /I"..\..\..\indie2dEngine-Core\Libraries\jsoncpp\include" /ZI /nologo /W3 /WX- /Od /Oy- /D __WIN32__ /D _UNICODE /D UNICODE /U__APPLE__ /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\indie2dEngine-Core\Sources\CAABoundBox.cpp" "..\..\..\indie2dEngine-Core\Sources\CAnimationMixer.cpp" "..\..\..\indie2dEngine-Core\Sources\CBatch.cpp" "..\..\..\indie2dEngine-Core\Sources\CBatchingMgr.cpp" "..\..\..\indie2dEngine-Core\Sources\CBillboard.cpp" "..\..\..\indie2dEngine-Core\Sources\CBone.cpp" "..\..\..\indie2dEngine-Core\Sources\CCamera.cpp" "..\..\..\indie2dEngine-Core\Sources\CCollisionMgr.cpp" "..\..\..\indie2dEngine-Core\Sources\CCommonOS_iOS.cpp" "..\..\..\indie2dEngine-Core\Sources\CCommonOS_win32.cpp" "..\..\..\indie2dEngine-Core\Sources\CFPSCounter.cpp" "..\..\..\indie2dEngine-Core\Sources\CFrustum.cpp" "..\..\..\indie2dEngine-Core\Sources\CGameLoopExecutor_Win32.cpp" "..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CGameTransitionTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_iOS.cpp" "..\..\..\indie2dEngine-Core\Sources\CGraphicsContext_win32.cpp" "..\..\..\indie2dEngine-Core\Sources\CIndexBuffer.cpp" "..\..\..\indie2dEngine-Core\Sources\CInputContext_Win32.cpp" "..\..\..\indie2dEngine-Core\Sources\CLight.cpp" "..\..\..\indie2dEngine-Core\Sources\CMaterial.cpp" "..\..\..\indie2dEngine-Core\Sources\CMaterialTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CMaterialTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CMesh.cpp" "..\..\..\indie2dEngine-Core\Sources\CMeshCommiter_MDL.cpp" "..\..\..\indie2dEngine-Core\Sources\CMeshLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CMeshLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CMeshSerializer_MDL.cpp" "..\..\..\indie2dEngine-Core\Sources\CModel.cpp" "..\..\..\indie2dEngine-Core\Sources\CModelTemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CModelTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CModelTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\COGLWindow_iOS.cpp" "..\..\..\indie2dEngine-Core\Sources\COGLWindow_win32.cpp" "..\..\..\indie2dEngine-Core\Sources\COcean.cpp" "..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\COceanTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\COceanTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\COutputRenderOperationTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CParticleEmitter.cpp" "..\..\..\indie2dEngine-Core\Sources\CParticleEmitterLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CParticleEmitterTemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CParticleEmitterTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CRenderMgr.cpp" "..\..\..\indie2dEngine-Core\Sources\CRenderOperationOutput.cpp" "..\..\..\indie2dEngine-Core\Sources\CRenderOperationScreenSpace.cpp" "..\..\..\indie2dEngine-Core\Sources\CRenderOperationWorldSpace.cpp" "..\..\..\indie2dEngine-Core\Sources\CResourceAccessor.cpp" "..\..\..\indie2dEngine-Core\Sources\CSceneFabricator.cpp" "..\..\..\indie2dEngine-Core\Sources\CSceneGraph.cpp" "..\..\..\indie2dEngine-Core\Sources\CSceneUpdateMgr.cpp" "..\..\..\indie2dEngine-Core\Sources\CScreenSpaceRenderOperationTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CScreenSpaceRenderOperationTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequence.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequenceCommiter_SEQ.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequenceLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequenceLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CSequenceSerializer_SEQ.cpp" "..\..\..\indie2dEngine-Core\Sources\CShader.cpp" "..\..\..\indie2dEngine-Core\Sources\CShaderCommiter_GLSL.cpp" "..\..\..\indie2dEngine-Core\Sources\CShaderLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CShaderLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CShaderSerializer_GLSL.cpp" "..\..\..\indie2dEngine-Core\Sources\CShape.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeleton.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeletonCommiter_SK.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeletonLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeletonLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CSkeletonSerializer_SK.cpp" "..\..\..\indie2dEngine-Core\Sources\CSprite.cpp" "..\..\..\indie2dEngine-Core\Sources\CTemplateAccessor.cpp" "..\..\..\indie2dEngine-Core\Sources\CTexture.cpp" "..\..\..\indie2dEngine-Core\Sources\CTextureCommiter_PVR.cpp" "..\..\..\indie2dEngine-Core\Sources\CTextureLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\CTextureLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CTextureSerializer_PVR.cpp" "..\..\..\indie2dEngine-Core\Sources\CTimer.cpp" "..\..\..\indie2dEngine-Core\Sources\CVertexBuffer.cpp" "..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\CWorldSpaceRenderOperationTemplateSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\ICollisionHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IGameLoopHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IGameObject.cpp" "..\..\..\indie2dEngine-Core\Sources\IGameTransition.cpp" "..\..\..\indie2dEngine-Core\Sources\IGameWorkflow.cpp" "..\..\..\indie2dEngine-Core\Sources\IGraphicsContext.cpp" "..\..\..\indie2dEngine-Core\Sources\IInputTapRecognizerHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IRenderHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IResource.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceCommiter.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceLoadingHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\IResourceSerializer.cpp" "..\..\..\indie2dEngine-Core\Sources\IScene.cpp" "..\..\..\indie2dEngine-Core\Sources\ISceneUpdateHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplate.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplateLoader.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingOperation.cpp" "..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.cpp" "..\..\..\indie2dEngine-Game\Source\CCharacterController.cpp" "..\..\..\indie2dEngine-Game\Source\CGameViewController_win32.cpp" "..\..\..\indie2dEngine-Game\Source\CKOTHInGameScene.cpp" "..\..\..\indie2dEngine-Game\Source\CKOTHInGameTransition.cpp" "..\..\..\indie2dEngine-Game\Source\CKOTHWorkflow.cpp" "..\..\..\indie2dEngine-Game\Source\CNavigator.cpp" "..\..\..\indie2dEngine-Game\Source\IMoveControllerHandler.cpp" "..\..\..\indie2dEngine-Game\Source\Win32-Main.cpp"
-         CParticleEmitterTemplateLoader.cpp
-         CGameLoopExecutor_Win32.cpp
-         CAnimationMixer.cpp
-     1>d:\hobby\indie2dengine\indie2dengine-core\sources\canimationmixer.cpp(155): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         Compiling...
-         IResource.cpp
-         CTextureLoadingOperation.cpp
-         CTexture.cpp
-         CSkeletonLoadingOperation.cpp
-         CSkeleton.cpp
-         CShaderLoadingOperation.cpp
-         CShaderCommiter_GLSL.cpp
-         CShader.cpp
-         CSequenceLoadingOperation.cpp
-         CModel.cpp
-         CMeshLoadingOperation.cpp
-         CMesh.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         Win32-Main.cpp
-         IMoveControllerHandler.cpp
-         CNavigator.cpp
-         CKOTHWorkflow.cpp
-         CKOTHInGameTransition.cpp
-         CKOTHInGameScene.cpp
-         CGameViewController_win32.cpp
-         CCharacterController.cpp
-         ITemplateSerializer.cpp
-         ITemplateLoadingOperation.cpp
-         ITemplateLoadingHandler.cpp
-         ITemplateLoader.cpp
-         ITemplate.cpp
-         ISceneUpdateHandler.cpp
-         IScene.cpp
-         IResourceSerializer.cpp
-         IResourceLoadingOperation.cpp
-         IResourceLoadingHandler.cpp
-         IResourceLoader.cpp
-         IResourceCommiter.cpp
-         IRenderHandler.cpp
-         IInputTapRecognizerHandler.cpp
-         IGraphicsContext.cpp
-         IGameWorkflow.cpp
-         IGameTransition.cpp
-         IGameObject.cpp
-         IGameLoopHandler.cpp
-         ICollisionHandler.cpp
-         CWorldSpaceRenderOperationTemplateSerializer.cpp
-         CWorldSpaceRenderOperationTemplateLoadingOperation.cpp
-         CVertexBuffer.cpp
-         CTimer.cpp
-         CTextureSerializer_PVR.cpp
-         CTextureLoader.cpp
-         CTextureCommiter_PVR.cpp
-         CTemplateAccessor.cpp
-         CSprite.cpp
-         CSkeletonSerializer_SK.cpp
-         CSkeletonLoader.cpp
-         CSkeletonCommiter_SK.cpp
-         CShape.cpp
-         CShaderSerializer_GLSL.cpp
-         CShaderLoader.cpp
-         CSequenceSerializer_SEQ.cpp
-         CSequenceLoader.cpp
-         CSequenceCommiter_SEQ.cpp
-         CSequence.cpp
-         CScreenSpaceRenderOperationTemplateSerializer.cpp
-         CScreenSpaceRenderOperationTemplateLoadingOperation.cpp
-         CSceneUpdateMgr.cpp
-         CSceneGraph.cpp
-         CSceneFabricator.cpp
-         CResourceAccessor.cpp
-         CRenderOperationWorldSpace.cpp
-         CRenderOperationScreenSpace.cpp
-         CRenderOperationOutput.cpp
-         CRenderMgr.cpp
-         CParticleEmitterTemplateSerializer.cpp
-         CParticleEmitterLoadingOperation.cpp
-         CParticleEmitter.cpp
-         COutputRenderOperationTemplateSerializer.cpp
-         COutputRenderOperationTemplateLoadingOperation.cpp
-         COceanTemplateSerializer.cpp
-         COceanTemplateLoadingOperation.cpp
-         COceanTemplateLoader.cpp
-         COcean.cpp
-         COGLWindow_win32.cpp
-         COGLWindow_iOS.cpp
-         CModelTemplateSerializer.cpp
-         CModelTemplateLoadingOperation.cpp
-         CModelTemplateLoader.cpp
-         CMeshSerializer_MDL.cpp
-         CMeshLoader.cpp
-         CMeshCommiter_MDL.cpp
-         CMaterialTemplateSerializer.cpp
-         CMaterialTemplateLoadingOperation.cpp
-         CMaterial.cpp
-         CLight.cpp
-         CInputContext_Win32.cpp
-         CIndexBuffer.cpp
-         CGraphicsContext_win32.cpp
-         CGraphicsContext_iOS.cpp
-         CGameTransitionTemplateSerializer.cpp
-         CGameTransitionTemplateLoadingOperation.cpp
-         CGameTransitionTemplateLoader.cpp
-         CFrustum.cpp
-         CFPSCounter.cpp
-         CCommonOS_win32.cpp
-         CCommonOS_iOS.cpp
-         CCollisionMgr.cpp
-         CCamera.cpp
-         CBone.cpp
-         CBillboard.cpp
-         CBatchingMgr.cpp
-         CBatch.cpp
-         CAABoundBox.cpp
+         C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\bin\CL.exe /c /I"..\..\..\indie2dEngine-Core\Sources" /I"..\..\..\indie2dEngine-Core\Libraries" /I"..\..\..\indie2dEngine-Core\Libraries\ogles2\include" /I"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\include" /I"..\..\..\indie2dEngine-Core\Libraries\gcdpp\include" /I"..\..\..\indie2dEngine-Core\Libraries\jsoncpp\include" /ZI /nologo /W3 /WX- /Od /Oy- /D __WIN32__ /D _UNICODE /D UNICODE /U__APPLE__ /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\indie2dEngine-Core\Sources\CGUIContainer.cpp"
+         CGUIContainer.cpp
+     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cguicontainer.cpp(81): warning C4244: 'initializing' : conversion from 'ui32' to 'f32', possible loss of data
+     1>d:\hobby\indie2dengine\indie2dengine-core\sources\cguicontainer.cpp(82): warning C4244: 'initializing' : conversion from 'ui32' to 'f32', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_32\lib" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\ogles2\windows_x86_64\lib" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_32\Static" /LIBPATH:"..\..\..\indie2dEngine-Core\Libraries\pvrtextool\windows_x86_64\Static" libEGL.lib libGLESv2.lib PVRTexLib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Hobby\indie2dEngine\indieEngine.win32\indieEngine\Debug\indieEngine.lib" /MACHINE:X86 "/fe:C:\Program Files (x86)\Microsoft Visual C++ Compiler Nov 2012 CTP\\bin\c1xx.dll"  Debug\gcdppImpl.obj
          Debug\gcdppMainQueue_t.obj
@@ -140,12 +27,21 @@
          Debug\CCommonOS_win32.obj
          Debug\CFPSCounter.obj
          Debug\CFrustum.obj
+         Debug\CGameLoopExecutor.obj
+         Debug\CGameLoopExecutor_iOS.obj
          Debug\CGameLoopExecutor_Win32.obj
          Debug\CGameTransitionTemplateLoader.obj
          Debug\CGameTransitionTemplateLoadingOperation.obj
          Debug\CGameTransitionTemplateSerializer.obj
          Debug\CGraphicsContext_iOS.obj
          Debug\CGraphicsContext_win32.obj
+         Debug\CGUIButton.obj
+         Debug\CGUIContainer.obj
+         Debug\CGUIFabricator.obj
+         Debug\CGUIGraph.obj
+         Debug\CGUITemplateLoader.obj
+         Debug\CGUITemplateLoadingOperation.obj
+         Debug\CGUITemplateSerializer.obj
          Debug\CIndexBuffer.obj
          Debug\CInputContext_iOS.obj
          Debug\CInputContext_Win32.obj
@@ -194,7 +90,7 @@
          Debug\CShaderLoader.obj
          Debug\CShaderLoadingOperation.obj
          Debug\CShaderSerializer_GLSL.obj
-         Debug\CShape.obj
+         Debug\CQuad.obj
          Debug\CSkeleton.obj
          Debug\CSkeletonCommiter_SK.obj
          Debug\CSkeletonLoader.obj
@@ -212,10 +108,12 @@
          Debug\CWorldSpaceRenderOperationTemplateLoadingOperation.obj
          Debug\CWorldSpaceRenderOperationTemplateSerializer.obj
          Debug\ICollisionHandler.obj
+         Debug\IFabricator.obj
          Debug\IGameLoopHandler.obj
          Debug\IGameObject.obj
          Debug\IGameTransition.obj
          Debug\IGameWorkflow.obj
+         Debug\IGraph.obj
          Debug\IGraphicsContext.obj
          Debug\IGUIControl.obj
          Debug\IInputTapRecognizerHandler.obj
@@ -228,6 +126,7 @@
          Debug\IResourceSerializer.obj
          Debug\IScene.obj
          Debug\ISceneUpdateHandler.obj
+         Debug\IScreenSpaceTextureAccessor.obj
          Debug\ITemplate.obj
          Debug\ITemplateLoader.obj
          Debug\ITemplateLoadingHandler.obj
@@ -246,4 +145,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:02:56.41
+Time Elapsed 00:00:05.10

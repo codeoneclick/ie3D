@@ -20,8 +20,6 @@
 
 CSceneGraph::CSceneGraph(void) :
 m_camera(nullptr),
-m_renderMgr(nullptr),
-m_sceneUpdateMgr(nullptr),
 m_collisionMgr(nullptr),
 m_inputContext(nullptr)
 {

@@ -29,7 +29,8 @@ m_boundBox(nullptr),
 m_debugBoundBoxMaterial(nullptr),
 m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
-m_bind(nullptr),
+m_materialImposer(nullptr),
+m_isNeedToRender(false),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
     for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
@@ -119,12 +120,21 @@ ui32 IGameObject::Get_NumTriangles(void)
 
 void IGameObject::ListenRenderMgr(bool _value)
 {
-    assert(m_renderMgr != nullptr);
+	if(_value)
+	{
+		assert(m_renderMgr != nullptr);
+	}
+
     for(const auto& iterator : m_materials)
     {
-        _value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
-        m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
+		if(m_renderMgr != nullptr)
+		{
+			_value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
+			m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
+		}
     }
+
+	m_isNeedToRender = _value;
 }
 
 void IGameObject::ListenSceneUpdateMgr(bool _value)
