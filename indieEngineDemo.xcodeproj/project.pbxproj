@@ -1,0 +1,898 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21D070C5181D9D460019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C4181D9D460019D264 /* Foundation.framework */; };
+		21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C6181D9D460019D264 /* CoreGraphics.framework */; };
+		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
+		21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D0724F181DAEA00019D264 /* QuartzCore.framework */; };
+		21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D07251181DAEA60019D264 /* OpenGLES.framework */; };
+		21D07253181DAEAF0019D264 /* libindieEngineCore-Lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D07244181DAE800019D264 /* libindieEngineCore-Lib.a */; };
+		21D0726C181DB1910019D264 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D07255181DB1910019D264 /* AppDelegate.mm */; };
+		21D0726D181DB1910019D264 /* CCharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07256181DB1910019D264 /* CCharacterController.cpp */; };
+		21D0726E181DB1910019D264 /* CGameViewController_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07258181DB1910019D264 /* CGameViewController_win32.cpp */; };
+		21D0726F181DB1910019D264 /* CGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725B181DB1910019D264 /* CGameViewController.mm */; };
+		21D07270181DB1910019D264 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
+		21D07271181DB1910019D264 /* CKOTHInGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725D181DB1910019D264 /* CKOTHInGameScene.cpp */; };
+		21D07272181DB1910019D264 /* CKOTHInGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725F181DB1910019D264 /* CKOTHInGameTransition.cpp */; };
+		21D07273181DB1910019D264 /* CKOTHWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07261181DB1910019D264 /* CKOTHWorkflow.cpp */; };
+		21D07274181DB1910019D264 /* CMoveControllerView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D07264181DB1910019D264 /* CMoveControllerView_iOS.mm */; };
+		21D07275181DB1910019D264 /* CNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07265181DB1910019D264 /* CNavigator.cpp */; };
+		21D07276181DB1910019D264 /* IMoveControllerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07268181DB1910019D264 /* IMoveControllerHandler.cpp */; };
+		21D07277181DB1910019D264 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D0726A181DB1910019D264 /* main.mm */; };
+		21D07278181DB1910019D264 /* Win32-Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0726B181DB1910019D264 /* Win32-Main.cpp */; };
+		21D072DB181DB34F0019D264 /* Footman.mdl in Resources */ = {isa = PBXBuildFile; fileRef = 21D0727B181DB34F0019D264 /* Footman.mdl */; };
+		21D072DC181DB34F0019D264 /* Footman2.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 21D0727C181DB34F0019D264 /* Footman2.MDL */; };
+		21D072DD181DB34F0019D264 /* Footman3.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 21D0727D181DB34F0019D264 /* Footman3.MDL */; };
+		21D072DE181DB34F0019D264 /* Footman4.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 21D0727E181DB34F0019D264 /* Footman4.MDL */; };
+		21D072DF181DB34F0019D264 /* Ghoul_01.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 21D0727F181DB34F0019D264 /* Ghoul_01.MDL */; };
+		21D072E0181DB34F0019D264 /* mesh.mdl in Resources */ = {isa = PBXBuildFile; fileRef = 21D07280181DB34F0019D264 /* mesh.mdl */; };
+		21D072E1181DB34F0019D264 /* mesh_01.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 21D07281181DB34F0019D264 /* mesh_01.MDL */; };
+		21D072E2181DB34F0019D264 /* model_01.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 21D07282181DB34F0019D264 /* model_01.MDL_anim */; };
+		21D072E3181DB34F0019D264 /* model_01.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21D07283181DB34F0019D264 /* model_01.MDL_mesh */; };
+		21D072E4181DB34F0019D264 /* model_01.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 21D07284181DB34F0019D264 /* model_01.MDL_sk */; };
+		21D072E5181DB34F0019D264 /* model_02.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 21D07285181DB34F0019D264 /* model_02.MDL_anim */; };
+		21D072E6181DB34F0019D264 /* model_02.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21D07286181DB34F0019D264 /* model_02.MDL_mesh */; };
+		21D072E7181DB34F0019D264 /* model_02.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 21D07287181DB34F0019D264 /* model_02.MDL_sk */; };
+		21D072E8181DB34F0019D264 /* model_03.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 21D07288181DB34F0019D264 /* model_03.MDL_anim */; };
+		21D072E9181DB34F0019D264 /* model_03.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21D07289181DB34F0019D264 /* model_03.MDL_mesh */; };
+		21D072EA181DB34F0019D264 /* model_03.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 21D0728A181DB34F0019D264 /* model_03.MDL_sk */; };
+		21D07307181DB34F0019D264 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A9181DB34F0019D264 /* Default-568h@2x.png */; };
+		21D07308181DB34F0019D264 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AA181DB34F0019D264 /* Default.png */; };
+		21D07309181DB34F0019D264 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AB181DB34F0019D264 /* Default@2x.png */; };
+		21D0730A181DB34F0019D264 /* gbuffer.normal.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AD181DB34F0019D264 /* gbuffer.normal.material.xml */; };
+		21D0730B181DB34F0019D264 /* gbuffer.normal.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AE181DB34F0019D264 /* gbuffer.normal.operation.xml */; };
+		21D0730C181DB34F0019D264 /* guicontainer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AF181DB34F0019D264 /* guicontainer.xml */; };
+		21D0730D181DB34F0019D264 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B0181DB34F0019D264 /* main.transition.xml */; };
+		21D0730E181DB34F0019D264 /* material.bloomcombine.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B1181DB34F0019D264 /* material.bloomcombine.screen.xml */; };
+		21D0730F181DB34F0019D264 /* material.bloomextract.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B2181DB34F0019D264 /* material.bloomextract.screen.xml */; };
+		21D07310181DB34F0019D264 /* material.blur.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B3181DB34F0019D264 /* material.blur.screen.xml */; };
+		21D07311181DB34F0019D264 /* material.deffered.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B4181DB34F0019D264 /* material.deffered.screen.xml */; };
+		21D07312181DB34F0019D264 /* material.guicontainer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B5181DB34F0019D264 /* material.guicontainer.xml */; };
+		21D07313181DB34F0019D264 /* material.model.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B6181DB34F0019D264 /* material.model.common.xml */; };
+		21D07314181DB34F0019D264 /* material.model.Footman.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B7181DB34F0019D264 /* material.model.Footman.common.xml */; };
+		21D07315181DB34F0019D264 /* material.model.Footman.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B8181DB34F0019D264 /* material.model.Footman.reflection.xml */; };
+		21D07316181DB34F0019D264 /* material.model.Footman.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B9181DB34F0019D264 /* material.model.Footman.refraction.xml */; };
+		21D07317181DB34F0019D264 /* material.model.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BA181DB34F0019D264 /* material.model.reflection.xml */; };
+		21D07318181DB34F0019D264 /* material.model.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BB181DB34F0019D264 /* material.model.refraction.xml */; };
+		21D07319181DB34F0019D264 /* material.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BC181DB34F0019D264 /* material.ocean.xml */; };
+		21D0731A181DB34F0019D264 /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BD181DB34F0019D264 /* material.output.xml */; };
+		21D0731B181DB34F0019D264 /* material.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BE181DB34F0019D264 /* material.screen.xml */; };
+		21D0731C181DB34F0019D264 /* model.Building.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BF181DB34F0019D264 /* model.Building.xml */; };
+		21D0731D181DB34F0019D264 /* model.Footman.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C0181DB34F0019D264 /* model.Footman.xml */; };
+		21D0731E181DB34F0019D264 /* ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C1181DB34F0019D264 /* ocean.xml */; };
+		21D0731F181DB34F0019D264 /* output.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C2181DB34F0019D264 /* output.space.operation.xml */; };
+		21D07320181DB34F0019D264 /* particle.emitter.01.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C3181DB34F0019D264 /* particle.emitter.01.xml */; };
+		21D07321181DB34F0019D264 /* particle.emitter.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C4181DB34F0019D264 /* particle.emitter.material.xml */; };
+		21D07322181DB34F0019D264 /* screen.gbuffer.position.model.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C5181DB34F0019D264 /* screen.gbuffer.position.model.material.xml */; };
+		21D07323181DB34F0019D264 /* screen.space.bloomcombine.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C6181DB34F0019D264 /* screen.space.bloomcombine.operation.xml */; };
+		21D07324181DB34F0019D264 /* screen.space.bloomextract.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C7181DB34F0019D264 /* screen.space.bloomextract.operation.xml */; };
+		21D07325181DB34F0019D264 /* screen.space.blur.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C8181DB34F0019D264 /* screen.space.blur.operation.xml */; };
+		21D07326181DB34F0019D264 /* screen.space.deffered.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C9181DB34F0019D264 /* screen.space.deffered.operation.xml */; };
+		21D07327181DB34F0019D264 /* screen.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CA181DB34F0019D264 /* screen.space.operation.xml */; };
+		21D07328181DB34F0019D264 /* world.space.gbuffer.position.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CB181DB34F0019D264 /* world.space.gbuffer.position.operation.xml */; };
+		21D07329181DB34F0019D264 /* world.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CC181DB34F0019D264 /* world.space.operation.xml */; };
+		21D0732A181DB34F0019D264 /* world.space.reflection.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CD181DB34F0019D264 /* world.space.reflection.operation.xml */; };
+		21D0732B181DB34F0019D264 /* world.space.refraction.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CE181DB34F0019D264 /* world.space.refraction.operation.xml */; };
+		21D0732C181DB34F0019D264 /* buildings_atlas.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D0181DB34F0019D264 /* buildings_atlas.pvr */; };
+		21D0732D181DB34F0019D264 /* Footman.Diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D1181DB34F0019D264 /* Footman.Diffuse.pvr */; };
+		21D0732E181DB34F0019D264 /* Footman2.Diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D2181DB34F0019D264 /* Footman2.Diffuse.pvr */; };
+		21D0732F181DB34F0019D264 /* model_02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D3181DB34F0019D264 /* model_02.pvr */; };
+		21D07330181DB34F0019D264 /* ocean.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D4181DB34F0019D264 /* ocean.pvr */; };
+		21D07331181DB34F0019D264 /* ocean_hm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D5181DB34F0019D264 /* ocean_hm.pvr */; };
+		21D07332181DB34F0019D264 /* ocean_nm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D6181DB34F0019D264 /* ocean_nm.pvr */; };
+		21D07333181DB34F0019D264 /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D7181DB34F0019D264 /* particle.emitter.01.pvr */; };
+		21D07334181DB34F0019D264 /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D8181DB34F0019D264 /* particle.emitter.02.pvr */; };
+		21D07335181DB34F0019D264 /* texture_01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072D9181DB34F0019D264 /* texture_01.pvr */; };
+		21D07336181DB34F0019D264 /* texture_02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21D072DA181DB34F0019D264 /* texture_02.pvr */; };
+		21D07337181DB3800019D264 /* BloomCombineScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D0728C181DB34F0019D264 /* BloomCombineScreen.frag */; };
+		21D07338181DB3800019D264 /* BloomCombineScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D0728D181DB34F0019D264 /* BloomCombineScreen.vert */; };
+		21D07339181DB3800019D264 /* BloomExtractScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D0728E181DB34F0019D264 /* BloomExtractScreen.frag */; };
+		21D0733A181DB3800019D264 /* BloomExtractScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D0728F181DB34F0019D264 /* BloomExtractScreen.vert */; };
+		21D0733B181DB3800019D264 /* BlurScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D07290181DB34F0019D264 /* BlurScreen.frag */; };
+		21D0733C181DB3800019D264 /* BlurScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D07291181DB34F0019D264 /* BlurScreen.vert */; };
+		21D0733D181DB3800019D264 /* CommonBoundBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D07292181DB34F0019D264 /* CommonBoundBox.frag */; };
+		21D0733E181DB3800019D264 /* CommonBoundBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D07293181DB34F0019D264 /* CommonBoundBox.vert */; };
+		21D0733F181DB3800019D264 /* CommonGUI.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D07294181DB34F0019D264 /* CommonGUI.frag */; };
+		21D07340181DB3800019D264 /* CommonGUI.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D07295181DB34F0019D264 /* CommonGUI.vert */; };
+		21D07341181DB3800019D264 /* CommonModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D07296181DB34F0019D264 /* CommonModel.frag */; };
+		21D07342181DB3800019D264 /* CommonModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D07297181DB34F0019D264 /* CommonModel.vert */; };
+		21D07343181DB3800019D264 /* CommonOcean.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D07298181DB34F0019D264 /* CommonOcean.frag */; };
+		21D07344181DB3800019D264 /* CommonOcean.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D07299181DB34F0019D264 /* CommonOcean.vert */; };
+		21D07345181DB3800019D264 /* CommonOutput.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D0729A181DB34F0019D264 /* CommonOutput.frag */; };
+		21D07346181DB3800019D264 /* CommonOutput.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D0729B181DB34F0019D264 /* CommonOutput.vert */; };
+		21D07347181DB3800019D264 /* CommonScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D0729C181DB34F0019D264 /* CommonScreen.frag */; };
+		21D07348181DB3800019D264 /* CommonScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D0729D181DB34F0019D264 /* CommonScreen.vert */; };
+		21D07349181DB3800019D264 /* DefferedScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D0729E181DB34F0019D264 /* DefferedScreen.frag */; };
+		21D0734A181DB3800019D264 /* DefferedScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D0729F181DB34F0019D264 /* DefferedScreen.vert */; };
+		21D0734B181DB3800019D264 /* ParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A0181DB34F0019D264 /* ParticleEmitter.frag */; };
+		21D0734C181DB3800019D264 /* ParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A1181DB34F0019D264 /* ParticleEmitter.vert */; };
+		21D0734D181DB3800019D264 /* ScreenGBufferNormalModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A2181DB34F0019D264 /* ScreenGBufferNormalModel.frag */; };
+		21D0734E181DB3800019D264 /* ScreenGBufferNormalModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A3181DB34F0019D264 /* ScreenGBufferNormalModel.vert */; };
+		21D0734F181DB3800019D264 /* ScreenGBufferPositionModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A4181DB34F0019D264 /* ScreenGBufferPositionModel.frag */; };
+		21D07350181DB3800019D264 /* ScreenGBufferPositionModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A5181DB34F0019D264 /* ScreenGBufferPositionModel.vert */; };
+		21D07351181DB3800019D264 /* ShaderCommon.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A6181DB34F0019D264 /* ShaderCommon.frag */; };
+		21D07352181DB3800019D264 /* ShaderCommon.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A7181DB34F0019D264 /* ShaderCommon.vert */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		21D07241181DAE800019D264 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21D0723B181DAE7F0019D264 /* indieEngineCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A46A32BD174E16AC0044643E;
+			remoteInfo = "indieEngineCore-Testing";
+		};
+		21D07243181DAE800019D264 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21D0723B181DAE7F0019D264 /* indieEngineCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21D0712A181DA5620019D264;
+			remoteInfo = "indieEngineCore-Lib";
+		};
+		21D0724D181DAE940019D264 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21D0723B181DAE7F0019D264 /* indieEngineCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 21D07129181DA5620019D264;
+			remoteInfo = "indieEngineCore-Lib";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		21D070C1181D9D460019D264 /* indieEngineDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = indieEngineDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		21D070C8181D9D460019D264 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		21D070DD181D9D460019D264 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		21D070F5181DA1060019D264 /* indieEngineDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "indieEngineDemo-Info.plist"; path = "indie2dEngine-Demo/Support/indieEngineDemo-Info.plist"; sourceTree = SOURCE_ROOT; };
+		21D070F6181DA1060019D264 /* indieEngineDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "indieEngineDemo-Prefix.pch"; path = "indie2dEngine-Demo/Support/indieEngineDemo-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		21D0723B181DAE7F0019D264 /* indieEngineCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = indieEngineCore.xcodeproj; sourceTree = "<group>"; };
+		21D0724F181DAEA00019D264 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		21D07251181DAEA60019D264 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		21D07254181DB1910019D264 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "indie2dEngine-Demo/Sources/AppDelegate.h"; sourceTree = SOURCE_ROOT; };
+		21D07255181DB1910019D264 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "indie2dEngine-Demo/Sources/AppDelegate.mm"; sourceTree = SOURCE_ROOT; };
+		21D07256181DB1910019D264 /* CCharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCharacterController.cpp; path = "indie2dEngine-Demo/Sources/CCharacterController.cpp"; sourceTree = SOURCE_ROOT; };
+		21D07257181DB1910019D264 /* CCharacterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCharacterController.h; path = "indie2dEngine-Demo/Sources/CCharacterController.h"; sourceTree = SOURCE_ROOT; };
+		21D07258181DB1910019D264 /* CGameViewController_win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameViewController_win32.cpp; path = "indie2dEngine-Demo/Sources/CGameViewController_win32.cpp"; sourceTree = SOURCE_ROOT; };
+		21D07259181DB1910019D264 /* CGameViewController_win32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController_win32.h; path = "indie2dEngine-Demo/Sources/CGameViewController_win32.h"; sourceTree = SOURCE_ROOT; };
+		21D0725A181DB1910019D264 /* CGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController.h; path = "indie2dEngine-Demo/Sources/CGameViewController.h"; sourceTree = SOURCE_ROOT; };
+		21D0725B181DB1910019D264 /* CGameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CGameViewController.mm; path = "indie2dEngine-Demo/Sources/CGameViewController.mm"; sourceTree = SOURCE_ROOT; };
+		21D0725C181DB1910019D264 /* CGameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CGameViewController.xib; path = "indie2dEngine-Demo/Sources/CGameViewController.xib"; sourceTree = SOURCE_ROOT; };
+		21D0725D181DB1910019D264 /* CKOTHInGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CKOTHInGameScene.cpp; path = "indie2dEngine-Demo/Sources/CKOTHInGameScene.cpp"; sourceTree = SOURCE_ROOT; };
+		21D0725E181DB1910019D264 /* CKOTHInGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHInGameScene.h; path = "indie2dEngine-Demo/Sources/CKOTHInGameScene.h"; sourceTree = SOURCE_ROOT; };
+		21D0725F181DB1910019D264 /* CKOTHInGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CKOTHInGameTransition.cpp; path = "indie2dEngine-Demo/Sources/CKOTHInGameTransition.cpp"; sourceTree = SOURCE_ROOT; };
+		21D07260181DB1910019D264 /* CKOTHInGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHInGameTransition.h; path = "indie2dEngine-Demo/Sources/CKOTHInGameTransition.h"; sourceTree = SOURCE_ROOT; };
+		21D07261181DB1910019D264 /* CKOTHWorkflow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CKOTHWorkflow.cpp; path = "indie2dEngine-Demo/Sources/CKOTHWorkflow.cpp"; sourceTree = SOURCE_ROOT; };
+		21D07262181DB1910019D264 /* CKOTHWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHWorkflow.h; path = "indie2dEngine-Demo/Sources/CKOTHWorkflow.h"; sourceTree = SOURCE_ROOT; };
+		21D07263181DB1910019D264 /* CMoveControllerView_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMoveControllerView_iOS.h; path = "indie2dEngine-Demo/Sources/CMoveControllerView_iOS.h"; sourceTree = SOURCE_ROOT; };
+		21D07264181DB1910019D264 /* CMoveControllerView_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMoveControllerView_iOS.mm; path = "indie2dEngine-Demo/Sources/CMoveControllerView_iOS.mm"; sourceTree = SOURCE_ROOT; };
+		21D07265181DB1910019D264 /* CNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNavigator.cpp; path = "indie2dEngine-Demo/Sources/CNavigator.cpp"; sourceTree = SOURCE_ROOT; };
+		21D07266181DB1910019D264 /* CNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNavigator.h; path = "indie2dEngine-Demo/Sources/CNavigator.h"; sourceTree = SOURCE_ROOT; };
+		21D07267181DB1910019D264 /* HKOTHEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKOTHEnums.h; path = "indie2dEngine-Demo/Sources/HKOTHEnums.h"; sourceTree = SOURCE_ROOT; };
+		21D07268181DB1910019D264 /* IMoveControllerHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IMoveControllerHandler.cpp; path = "indie2dEngine-Demo/Sources/IMoveControllerHandler.cpp"; sourceTree = SOURCE_ROOT; };
+		21D07269181DB1910019D264 /* IMoveControllerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMoveControllerHandler.h; path = "indie2dEngine-Demo/Sources/IMoveControllerHandler.h"; sourceTree = SOURCE_ROOT; };
+		21D0726A181DB1910019D264 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = "indie2dEngine-Demo/Sources/main.mm"; sourceTree = SOURCE_ROOT; };
+		21D0726B181DB1910019D264 /* Win32-Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Win32-Main.cpp"; path = "indie2dEngine-Demo/Sources/Win32-Main.cpp"; sourceTree = SOURCE_ROOT; };
+		21D0727B181DB34F0019D264 /* Footman.mdl */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman.mdl; sourceTree = "<group>"; };
+		21D0727C181DB34F0019D264 /* Footman2.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman2.MDL; sourceTree = "<group>"; };
+		21D0727D181DB34F0019D264 /* Footman3.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman3.MDL; sourceTree = "<group>"; };
+		21D0727E181DB34F0019D264 /* Footman4.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman4.MDL; sourceTree = "<group>"; };
+		21D0727F181DB34F0019D264 /* Ghoul_01.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ghoul_01.MDL; sourceTree = "<group>"; };
+		21D07280181DB34F0019D264 /* mesh.mdl */ = {isa = PBXFileReference; lastKnownFileType = file; path = mesh.mdl; sourceTree = "<group>"; };
+		21D07281181DB34F0019D264 /* mesh_01.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = mesh_01.MDL; sourceTree = "<group>"; };
+		21D07282181DB34F0019D264 /* model_01.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_01.MDL_anim; sourceTree = "<group>"; };
+		21D07283181DB34F0019D264 /* model_01.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_01.MDL_mesh; sourceTree = "<group>"; };
+		21D07284181DB34F0019D264 /* model_01.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_01.MDL_sk; sourceTree = "<group>"; };
+		21D07285181DB34F0019D264 /* model_02.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_anim; sourceTree = "<group>"; };
+		21D07286181DB34F0019D264 /* model_02.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_mesh; sourceTree = "<group>"; };
+		21D07287181DB34F0019D264 /* model_02.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_sk; sourceTree = "<group>"; };
+		21D07288181DB34F0019D264 /* model_03.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_03.MDL_anim; sourceTree = "<group>"; };
+		21D07289181DB34F0019D264 /* model_03.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_03.MDL_mesh; sourceTree = "<group>"; };
+		21D0728A181DB34F0019D264 /* model_03.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_03.MDL_sk; sourceTree = "<group>"; };
+		21D0728C181DB34F0019D264 /* BloomCombineScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomCombineScreen.frag; sourceTree = "<group>"; };
+		21D0728D181DB34F0019D264 /* BloomCombineScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomCombineScreen.vert; sourceTree = "<group>"; };
+		21D0728E181DB34F0019D264 /* BloomExtractScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomExtractScreen.frag; sourceTree = "<group>"; };
+		21D0728F181DB34F0019D264 /* BloomExtractScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomExtractScreen.vert; sourceTree = "<group>"; };
+		21D07290181DB34F0019D264 /* BlurScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlurScreen.frag; sourceTree = "<group>"; };
+		21D07291181DB34F0019D264 /* BlurScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlurScreen.vert; sourceTree = "<group>"; };
+		21D07292181DB34F0019D264 /* CommonBoundBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.frag; sourceTree = "<group>"; };
+		21D07293181DB34F0019D264 /* CommonBoundBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.vert; sourceTree = "<group>"; };
+		21D07294181DB34F0019D264 /* CommonGUI.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonGUI.frag; sourceTree = "<group>"; };
+		21D07295181DB34F0019D264 /* CommonGUI.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonGUI.vert; sourceTree = "<group>"; };
+		21D07296181DB34F0019D264 /* CommonModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonModel.frag; sourceTree = "<group>"; };
+		21D07297181DB34F0019D264 /* CommonModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonModel.vert; sourceTree = "<group>"; };
+		21D07298181DB34F0019D264 /* CommonOcean.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOcean.frag; sourceTree = "<group>"; };
+		21D07299181DB34F0019D264 /* CommonOcean.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOcean.vert; sourceTree = "<group>"; };
+		21D0729A181DB34F0019D264 /* CommonOutput.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.frag; sourceTree = "<group>"; };
+		21D0729B181DB34F0019D264 /* CommonOutput.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.vert; sourceTree = "<group>"; };
+		21D0729C181DB34F0019D264 /* CommonScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.frag; sourceTree = "<group>"; };
+		21D0729D181DB34F0019D264 /* CommonScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.vert; sourceTree = "<group>"; };
+		21D0729E181DB34F0019D264 /* DefferedScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DefferedScreen.frag; sourceTree = "<group>"; };
+		21D0729F181DB34F0019D264 /* DefferedScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DefferedScreen.vert; sourceTree = "<group>"; };
+		21D072A0181DB34F0019D264 /* ParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.frag; sourceTree = "<group>"; };
+		21D072A1181DB34F0019D264 /* ParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.vert; sourceTree = "<group>"; };
+		21D072A2181DB34F0019D264 /* ScreenGBufferNormalModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferNormalModel.frag; sourceTree = "<group>"; };
+		21D072A3181DB34F0019D264 /* ScreenGBufferNormalModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferNormalModel.vert; sourceTree = "<group>"; };
+		21D072A4181DB34F0019D264 /* ScreenGBufferPositionModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferPositionModel.frag; sourceTree = "<group>"; };
+		21D072A5181DB34F0019D264 /* ScreenGBufferPositionModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferPositionModel.vert; sourceTree = "<group>"; };
+		21D072A6181DB34F0019D264 /* ShaderCommon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShaderCommon.frag; sourceTree = "<group>"; };
+		21D072A7181DB34F0019D264 /* ShaderCommon.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShaderCommon.vert; sourceTree = "<group>"; };
+		21D072A9181DB34F0019D264 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		21D072AA181DB34F0019D264 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		21D072AB181DB34F0019D264 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		21D072AD181DB34F0019D264 /* gbuffer.normal.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.material.xml; sourceTree = "<group>"; };
+		21D072AE181DB34F0019D264 /* gbuffer.normal.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.operation.xml; sourceTree = "<group>"; };
+		21D072AF181DB34F0019D264 /* guicontainer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = guicontainer.xml; sourceTree = "<group>"; };
+		21D072B0181DB34F0019D264 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
+		21D072B1181DB34F0019D264 /* material.bloomcombine.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.bloomcombine.screen.xml; sourceTree = "<group>"; };
+		21D072B2181DB34F0019D264 /* material.bloomextract.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.bloomextract.screen.xml; sourceTree = "<group>"; };
+		21D072B3181DB34F0019D264 /* material.blur.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.blur.screen.xml; sourceTree = "<group>"; };
+		21D072B4181DB34F0019D264 /* material.deffered.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.deffered.screen.xml; sourceTree = "<group>"; };
+		21D072B5181DB34F0019D264 /* material.guicontainer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.guicontainer.xml; sourceTree = "<group>"; };
+		21D072B6181DB34F0019D264 /* material.model.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.common.xml; sourceTree = "<group>"; };
+		21D072B7181DB34F0019D264 /* material.model.Footman.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.common.xml; sourceTree = "<group>"; };
+		21D072B8181DB34F0019D264 /* material.model.Footman.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.reflection.xml; sourceTree = "<group>"; };
+		21D072B9181DB34F0019D264 /* material.model.Footman.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.refraction.xml; sourceTree = "<group>"; };
+		21D072BA181DB34F0019D264 /* material.model.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.reflection.xml; sourceTree = "<group>"; };
+		21D072BB181DB34F0019D264 /* material.model.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.refraction.xml; sourceTree = "<group>"; };
+		21D072BC181DB34F0019D264 /* material.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.ocean.xml; sourceTree = "<group>"; };
+		21D072BD181DB34F0019D264 /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
+		21D072BE181DB34F0019D264 /* material.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.screen.xml; sourceTree = "<group>"; };
+		21D072BF181DB34F0019D264 /* model.Building.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Building.xml; sourceTree = "<group>"; };
+		21D072C0181DB34F0019D264 /* model.Footman.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Footman.xml; sourceTree = "<group>"; };
+		21D072C1181DB34F0019D264 /* ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ocean.xml; sourceTree = "<group>"; };
+		21D072C2181DB34F0019D264 /* output.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = output.space.operation.xml; sourceTree = "<group>"; };
+		21D072C3181DB34F0019D264 /* particle.emitter.01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.01.xml; sourceTree = "<group>"; };
+		21D072C4181DB34F0019D264 /* particle.emitter.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.material.xml; sourceTree = "<group>"; };
+		21D072C5181DB34F0019D264 /* screen.gbuffer.position.model.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.gbuffer.position.model.material.xml; sourceTree = "<group>"; };
+		21D072C6181DB34F0019D264 /* screen.space.bloomcombine.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomcombine.operation.xml; sourceTree = "<group>"; };
+		21D072C7181DB34F0019D264 /* screen.space.bloomextract.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomextract.operation.xml; sourceTree = "<group>"; };
+		21D072C8181DB34F0019D264 /* screen.space.blur.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.blur.operation.xml; sourceTree = "<group>"; };
+		21D072C9181DB34F0019D264 /* screen.space.deffered.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.deffered.operation.xml; sourceTree = "<group>"; };
+		21D072CA181DB34F0019D264 /* screen.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.operation.xml; sourceTree = "<group>"; };
+		21D072CB181DB34F0019D264 /* world.space.gbuffer.position.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.gbuffer.position.operation.xml; sourceTree = "<group>"; };
+		21D072CC181DB34F0019D264 /* world.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.operation.xml; sourceTree = "<group>"; };
+		21D072CD181DB34F0019D264 /* world.space.reflection.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.reflection.operation.xml; sourceTree = "<group>"; };
+		21D072CE181DB34F0019D264 /* world.space.refraction.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.refraction.operation.xml; sourceTree = "<group>"; };
+		21D072D0181DB34F0019D264 /* buildings_atlas.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = buildings_atlas.pvr; sourceTree = "<group>"; };
+		21D072D1181DB34F0019D264 /* Footman.Diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman.Diffuse.pvr; sourceTree = "<group>"; };
+		21D072D2181DB34F0019D264 /* Footman2.Diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman2.Diffuse.pvr; sourceTree = "<group>"; };
+		21D072D3181DB34F0019D264 /* model_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.pvr; sourceTree = "<group>"; };
+		21D072D4181DB34F0019D264 /* ocean.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean.pvr; sourceTree = "<group>"; };
+		21D072D5181DB34F0019D264 /* ocean_hm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean_hm.pvr; sourceTree = "<group>"; };
+		21D072D6181DB34F0019D264 /* ocean_nm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean_nm.pvr; sourceTree = "<group>"; };
+		21D072D7181DB34F0019D264 /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
+		21D072D8181DB34F0019D264 /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
+		21D072D9181DB34F0019D264 /* texture_01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_01.pvr; sourceTree = "<group>"; };
+		21D072DA181DB34F0019D264 /* texture_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_02.pvr; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		21D070BE181D9D460019D264 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21D07253181DAEAF0019D264 /* libindieEngineCore-Lib.a in Frameworks */,
+				21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */,
+				21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */,
+				21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */,
+				21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */,
+				21D070C5181D9D460019D264 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		21D070B8181D9D460019D264 = {
+			isa = PBXGroup;
+			children = (
+				21D070F4181DA09B0019D264 /* indieEngine-Core */,
+				21D070CA181D9D460019D264 /* indieEngine-Demo */,
+				21D070C3181D9D460019D264 /* Frameworks */,
+				21D070C2181D9D460019D264 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		21D070C2181D9D460019D264 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21D070C1181D9D460019D264 /* indieEngineDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		21D070C3181D9D460019D264 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21D07251181DAEA60019D264 /* OpenGLES.framework */,
+				21D0724F181DAEA00019D264 /* QuartzCore.framework */,
+				21D070C4181D9D460019D264 /* Foundation.framework */,
+				21D070C6181D9D460019D264 /* CoreGraphics.framework */,
+				21D070C8181D9D460019D264 /* UIKit.framework */,
+				21D070DD181D9D460019D264 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		21D070CA181D9D460019D264 /* indieEngine-Demo */ = {
+			isa = PBXGroup;
+			children = (
+				21D07279181DB33E0019D264 /* Resources */,
+				21D070CB181D9D460019D264 /* Supporting Files */,
+				21D070F3181D9ECF0019D264 /* Sources */,
+			);
+			name = "indieEngine-Demo";
+			path = indieEngineDemo;
+			sourceTree = "<group>";
+		};
+		21D070CB181D9D460019D264 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				21D070F5181DA1060019D264 /* indieEngineDemo-Info.plist */,
+				21D070F6181DA1060019D264 /* indieEngineDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		21D070F3181D9ECF0019D264 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				21D07254181DB1910019D264 /* AppDelegate.h */,
+				21D07255181DB1910019D264 /* AppDelegate.mm */,
+				21D07256181DB1910019D264 /* CCharacterController.cpp */,
+				21D07257181DB1910019D264 /* CCharacterController.h */,
+				21D07258181DB1910019D264 /* CGameViewController_win32.cpp */,
+				21D07259181DB1910019D264 /* CGameViewController_win32.h */,
+				21D0725A181DB1910019D264 /* CGameViewController.h */,
+				21D0725B181DB1910019D264 /* CGameViewController.mm */,
+				21D0725C181DB1910019D264 /* CGameViewController.xib */,
+				21D0725D181DB1910019D264 /* CKOTHInGameScene.cpp */,
+				21D0725E181DB1910019D264 /* CKOTHInGameScene.h */,
+				21D0725F181DB1910019D264 /* CKOTHInGameTransition.cpp */,
+				21D07260181DB1910019D264 /* CKOTHInGameTransition.h */,
+				21D07261181DB1910019D264 /* CKOTHWorkflow.cpp */,
+				21D07262181DB1910019D264 /* CKOTHWorkflow.h */,
+				21D07263181DB1910019D264 /* CMoveControllerView_iOS.h */,
+				21D07264181DB1910019D264 /* CMoveControllerView_iOS.mm */,
+				21D07265181DB1910019D264 /* CNavigator.cpp */,
+				21D07266181DB1910019D264 /* CNavigator.h */,
+				21D07267181DB1910019D264 /* HKOTHEnums.h */,
+				21D07268181DB1910019D264 /* IMoveControllerHandler.cpp */,
+				21D07269181DB1910019D264 /* IMoveControllerHandler.h */,
+				21D0726A181DB1910019D264 /* main.mm */,
+				21D0726B181DB1910019D264 /* Win32-Main.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		21D070F4181DA09B0019D264 /* indieEngine-Core */ = {
+			isa = PBXGroup;
+			children = (
+				21D0723B181DAE7F0019D264 /* indieEngineCore.xcodeproj */,
+			);
+			name = "indieEngine-Core";
+			sourceTree = "<group>";
+		};
+		21D0723C181DAE7F0019D264 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21D07242181DAE800019D264 /* indieEngineCore-Testing.app */,
+				21D07244181DAE800019D264 /* libindieEngineCore-Lib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		21D07279181DB33E0019D264 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				21D0727A181DB34F0019D264 /* Meshes */,
+				21D0728B181DB34F0019D264 /* Shaders */,
+				21D072A8181DB34F0019D264 /* System */,
+				21D072AC181DB34F0019D264 /* Templates */,
+				21D072CF181DB34F0019D264 /* Textures */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		21D0727A181DB34F0019D264 /* Meshes */ = {
+			isa = PBXGroup;
+			children = (
+				21D0727B181DB34F0019D264 /* Footman.mdl */,
+				21D0727C181DB34F0019D264 /* Footman2.MDL */,
+				21D0727D181DB34F0019D264 /* Footman3.MDL */,
+				21D0727E181DB34F0019D264 /* Footman4.MDL */,
+				21D0727F181DB34F0019D264 /* Ghoul_01.MDL */,
+				21D07280181DB34F0019D264 /* mesh.mdl */,
+				21D07281181DB34F0019D264 /* mesh_01.MDL */,
+				21D07282181DB34F0019D264 /* model_01.MDL_anim */,
+				21D07283181DB34F0019D264 /* model_01.MDL_mesh */,
+				21D07284181DB34F0019D264 /* model_01.MDL_sk */,
+				21D07285181DB34F0019D264 /* model_02.MDL_anim */,
+				21D07286181DB34F0019D264 /* model_02.MDL_mesh */,
+				21D07287181DB34F0019D264 /* model_02.MDL_sk */,
+				21D07288181DB34F0019D264 /* model_03.MDL_anim */,
+				21D07289181DB34F0019D264 /* model_03.MDL_mesh */,
+				21D0728A181DB34F0019D264 /* model_03.MDL_sk */,
+			);
+			name = Meshes;
+			path = "indie2dEngine-Demo/Bundle/Meshes";
+			sourceTree = SOURCE_ROOT;
+		};
+		21D0728B181DB34F0019D264 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				21D0728C181DB34F0019D264 /* BloomCombineScreen.frag */,
+				21D0728D181DB34F0019D264 /* BloomCombineScreen.vert */,
+				21D0728E181DB34F0019D264 /* BloomExtractScreen.frag */,
+				21D0728F181DB34F0019D264 /* BloomExtractScreen.vert */,
+				21D07290181DB34F0019D264 /* BlurScreen.frag */,
+				21D07291181DB34F0019D264 /* BlurScreen.vert */,
+				21D07292181DB34F0019D264 /* CommonBoundBox.frag */,
+				21D07293181DB34F0019D264 /* CommonBoundBox.vert */,
+				21D07294181DB34F0019D264 /* CommonGUI.frag */,
+				21D07295181DB34F0019D264 /* CommonGUI.vert */,
+				21D07296181DB34F0019D264 /* CommonModel.frag */,
+				21D07297181DB34F0019D264 /* CommonModel.vert */,
+				21D07298181DB34F0019D264 /* CommonOcean.frag */,
+				21D07299181DB34F0019D264 /* CommonOcean.vert */,
+				21D0729A181DB34F0019D264 /* CommonOutput.frag */,
+				21D0729B181DB34F0019D264 /* CommonOutput.vert */,
+				21D0729C181DB34F0019D264 /* CommonScreen.frag */,
+				21D0729D181DB34F0019D264 /* CommonScreen.vert */,
+				21D0729E181DB34F0019D264 /* DefferedScreen.frag */,
+				21D0729F181DB34F0019D264 /* DefferedScreen.vert */,
+				21D072A0181DB34F0019D264 /* ParticleEmitter.frag */,
+				21D072A1181DB34F0019D264 /* ParticleEmitter.vert */,
+				21D072A2181DB34F0019D264 /* ScreenGBufferNormalModel.frag */,
+				21D072A3181DB34F0019D264 /* ScreenGBufferNormalModel.vert */,
+				21D072A4181DB34F0019D264 /* ScreenGBufferPositionModel.frag */,
+				21D072A5181DB34F0019D264 /* ScreenGBufferPositionModel.vert */,
+				21D072A6181DB34F0019D264 /* ShaderCommon.frag */,
+				21D072A7181DB34F0019D264 /* ShaderCommon.vert */,
+			);
+			name = Shaders;
+			path = "indie2dEngine-Demo/Bundle/Shaders";
+			sourceTree = SOURCE_ROOT;
+		};
+		21D072A8181DB34F0019D264 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				21D072A9181DB34F0019D264 /* Default-568h@2x.png */,
+				21D072AA181DB34F0019D264 /* Default.png */,
+				21D072AB181DB34F0019D264 /* Default@2x.png */,
+			);
+			name = System;
+			path = "indie2dEngine-Demo/Bundle/System";
+			sourceTree = SOURCE_ROOT;
+		};
+		21D072AC181DB34F0019D264 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				21D072AD181DB34F0019D264 /* gbuffer.normal.material.xml */,
+				21D072AE181DB34F0019D264 /* gbuffer.normal.operation.xml */,
+				21D072AF181DB34F0019D264 /* guicontainer.xml */,
+				21D072B0181DB34F0019D264 /* main.transition.xml */,
+				21D072B1181DB34F0019D264 /* material.bloomcombine.screen.xml */,
+				21D072B2181DB34F0019D264 /* material.bloomextract.screen.xml */,
+				21D072B3181DB34F0019D264 /* material.blur.screen.xml */,
+				21D072B4181DB34F0019D264 /* material.deffered.screen.xml */,
+				21D072B5181DB34F0019D264 /* material.guicontainer.xml */,
+				21D072B6181DB34F0019D264 /* material.model.common.xml */,
+				21D072B7181DB34F0019D264 /* material.model.Footman.common.xml */,
+				21D072B8181DB34F0019D264 /* material.model.Footman.reflection.xml */,
+				21D072B9181DB34F0019D264 /* material.model.Footman.refraction.xml */,
+				21D072BA181DB34F0019D264 /* material.model.reflection.xml */,
+				21D072BB181DB34F0019D264 /* material.model.refraction.xml */,
+				21D072BC181DB34F0019D264 /* material.ocean.xml */,
+				21D072BD181DB34F0019D264 /* material.output.xml */,
+				21D072BE181DB34F0019D264 /* material.screen.xml */,
+				21D072BF181DB34F0019D264 /* model.Building.xml */,
+				21D072C0181DB34F0019D264 /* model.Footman.xml */,
+				21D072C1181DB34F0019D264 /* ocean.xml */,
+				21D072C2181DB34F0019D264 /* output.space.operation.xml */,
+				21D072C3181DB34F0019D264 /* particle.emitter.01.xml */,
+				21D072C4181DB34F0019D264 /* particle.emitter.material.xml */,
+				21D072C5181DB34F0019D264 /* screen.gbuffer.position.model.material.xml */,
+				21D072C6181DB34F0019D264 /* screen.space.bloomcombine.operation.xml */,
+				21D072C7181DB34F0019D264 /* screen.space.bloomextract.operation.xml */,
+				21D072C8181DB34F0019D264 /* screen.space.blur.operation.xml */,
+				21D072C9181DB34F0019D264 /* screen.space.deffered.operation.xml */,
+				21D072CA181DB34F0019D264 /* screen.space.operation.xml */,
+				21D072CB181DB34F0019D264 /* world.space.gbuffer.position.operation.xml */,
+				21D072CC181DB34F0019D264 /* world.space.operation.xml */,
+				21D072CD181DB34F0019D264 /* world.space.reflection.operation.xml */,
+				21D072CE181DB34F0019D264 /* world.space.refraction.operation.xml */,
+			);
+			name = Templates;
+			path = "indie2dEngine-Demo/Bundle/Templates";
+			sourceTree = SOURCE_ROOT;
+		};
+		21D072CF181DB34F0019D264 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				21D072D0181DB34F0019D264 /* buildings_atlas.pvr */,
+				21D072D1181DB34F0019D264 /* Footman.Diffuse.pvr */,
+				21D072D2181DB34F0019D264 /* Footman2.Diffuse.pvr */,
+				21D072D3181DB34F0019D264 /* model_02.pvr */,
+				21D072D4181DB34F0019D264 /* ocean.pvr */,
+				21D072D5181DB34F0019D264 /* ocean_hm.pvr */,
+				21D072D6181DB34F0019D264 /* ocean_nm.pvr */,
+				21D072D7181DB34F0019D264 /* particle.emitter.01.pvr */,
+				21D072D8181DB34F0019D264 /* particle.emitter.02.pvr */,
+				21D072D9181DB34F0019D264 /* texture_01.pvr */,
+				21D072DA181DB34F0019D264 /* texture_02.pvr */,
+			);
+			name = Textures;
+			path = "indie2dEngine-Demo/Bundle/Textures";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		21D070C0181D9D460019D264 /* indieEngineDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21D070ED181D9D460019D264 /* Build configuration list for PBXNativeTarget "indieEngineDemo" */;
+			buildPhases = (
+				21D070BD181D9D460019D264 /* Sources */,
+				21D070BE181D9D460019D264 /* Frameworks */,
+				21D070BF181D9D460019D264 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21D0724E181DAE940019D264 /* PBXTargetDependency */,
+			);
+			name = indieEngineDemo;
+			productName = indieEngineDemo;
+			productReference = 21D070C1181D9D460019D264 /* indieEngineDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		21D070B9181D9D460019D264 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Sergey Sergeev";
+			};
+			buildConfigurationList = 21D070BC181D9D460019D264 /* Build configuration list for PBXProject "indieEngineDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 21D070B8181D9D460019D264;
+			productRefGroup = 21D070C2181D9D460019D264 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 21D0723C181DAE7F0019D264 /* Products */;
+					ProjectRef = 21D0723B181DAE7F0019D264 /* indieEngineCore.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				21D070C0181D9D460019D264 /* indieEngineDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		21D07242181DAE800019D264 /* indieEngineCore-Testing.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "indieEngineCore-Testing.app";
+			remoteRef = 21D07241181DAE800019D264 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		21D07244181DAE800019D264 /* libindieEngineCore-Lib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libindieEngineCore-Lib.a";
+			remoteRef = 21D07243181DAE800019D264 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		21D070BF181D9D460019D264 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21D07337181DB3800019D264 /* BloomCombineScreen.frag in Resources */,
+				21D07338181DB3800019D264 /* BloomCombineScreen.vert in Resources */,
+				21D07339181DB3800019D264 /* BloomExtractScreen.frag in Resources */,
+				21D0733A181DB3800019D264 /* BloomExtractScreen.vert in Resources */,
+				21D0733B181DB3800019D264 /* BlurScreen.frag in Resources */,
+				21D0733C181DB3800019D264 /* BlurScreen.vert in Resources */,
+				21D0733D181DB3800019D264 /* CommonBoundBox.frag in Resources */,
+				21D0733E181DB3800019D264 /* CommonBoundBox.vert in Resources */,
+				21D0733F181DB3800019D264 /* CommonGUI.frag in Resources */,
+				21D07340181DB3800019D264 /* CommonGUI.vert in Resources */,
+				21D07341181DB3800019D264 /* CommonModel.frag in Resources */,
+				21D07342181DB3800019D264 /* CommonModel.vert in Resources */,
+				21D07343181DB3800019D264 /* CommonOcean.frag in Resources */,
+				21D07344181DB3800019D264 /* CommonOcean.vert in Resources */,
+				21D07345181DB3800019D264 /* CommonOutput.frag in Resources */,
+				21D07346181DB3800019D264 /* CommonOutput.vert in Resources */,
+				21D07347181DB3800019D264 /* CommonScreen.frag in Resources */,
+				21D07348181DB3800019D264 /* CommonScreen.vert in Resources */,
+				21D07349181DB3800019D264 /* DefferedScreen.frag in Resources */,
+				21D0734A181DB3800019D264 /* DefferedScreen.vert in Resources */,
+				21D0734B181DB3800019D264 /* ParticleEmitter.frag in Resources */,
+				21D0734C181DB3800019D264 /* ParticleEmitter.vert in Resources */,
+				21D0734D181DB3800019D264 /* ScreenGBufferNormalModel.frag in Resources */,
+				21D0734E181DB3800019D264 /* ScreenGBufferNormalModel.vert in Resources */,
+				21D0734F181DB3800019D264 /* ScreenGBufferPositionModel.frag in Resources */,
+				21D07350181DB3800019D264 /* ScreenGBufferPositionModel.vert in Resources */,
+				21D07351181DB3800019D264 /* ShaderCommon.frag in Resources */,
+				21D07352181DB3800019D264 /* ShaderCommon.vert in Resources */,
+				21D072E0181DB34F0019D264 /* mesh.mdl in Resources */,
+				21D07270181DB1910019D264 /* CGameViewController.xib in Resources */,
+				21D072EA181DB34F0019D264 /* model_03.MDL_sk in Resources */,
+				21D0730A181DB34F0019D264 /* gbuffer.normal.material.xml in Resources */,
+				21D0732D181DB34F0019D264 /* Footman.Diffuse.pvr in Resources */,
+				21D07313181DB34F0019D264 /* material.model.common.xml in Resources */,
+				21D072DE181DB34F0019D264 /* Footman4.MDL in Resources */,
+				21D0732C181DB34F0019D264 /* buildings_atlas.pvr in Resources */,
+				21D0732F181DB34F0019D264 /* model_02.pvr in Resources */,
+				21D072E9181DB34F0019D264 /* model_03.MDL_mesh in Resources */,
+				21D0732B181DB34F0019D264 /* world.space.refraction.operation.xml in Resources */,
+				21D072E8181DB34F0019D264 /* model_03.MDL_anim in Resources */,
+				21D07328181DB34F0019D264 /* world.space.gbuffer.position.operation.xml in Resources */,
+				21D07330181DB34F0019D264 /* ocean.pvr in Resources */,
+				21D072DC181DB34F0019D264 /* Footman2.MDL in Resources */,
+				21D072E4181DB34F0019D264 /* model_01.MDL_sk in Resources */,
+				21D0731A181DB34F0019D264 /* material.output.xml in Resources */,
+				21D072DB181DB34F0019D264 /* Footman.mdl in Resources */,
+				21D07322181DB34F0019D264 /* screen.gbuffer.position.model.material.xml in Resources */,
+				21D072DF181DB34F0019D264 /* Ghoul_01.MDL in Resources */,
+				21D0731B181DB34F0019D264 /* material.screen.xml in Resources */,
+				21D07316181DB34F0019D264 /* material.model.Footman.refraction.xml in Resources */,
+				21D0731E181DB34F0019D264 /* ocean.xml in Resources */,
+				21D07319181DB34F0019D264 /* material.ocean.xml in Resources */,
+				21D0730B181DB34F0019D264 /* gbuffer.normal.operation.xml in Resources */,
+				21D07312181DB34F0019D264 /* material.guicontainer.xml in Resources */,
+				21D07331181DB34F0019D264 /* ocean_hm.pvr in Resources */,
+				21D07333181DB34F0019D264 /* particle.emitter.01.pvr in Resources */,
+				21D07315181DB34F0019D264 /* material.model.Footman.reflection.xml in Resources */,
+				21D0732A181DB34F0019D264 /* world.space.reflection.operation.xml in Resources */,
+				21D07329181DB34F0019D264 /* world.space.operation.xml in Resources */,
+				21D07321181DB34F0019D264 /* particle.emitter.material.xml in Resources */,
+				21D072E2181DB34F0019D264 /* model_01.MDL_anim in Resources */,
+				21D07327181DB34F0019D264 /* screen.space.operation.xml in Resources */,
+				21D07323181DB34F0019D264 /* screen.space.bloomcombine.operation.xml in Resources */,
+				21D07336181DB34F0019D264 /* texture_02.pvr in Resources */,
+				21D0730E181DB34F0019D264 /* material.bloomcombine.screen.xml in Resources */,
+				21D0730F181DB34F0019D264 /* material.bloomextract.screen.xml in Resources */,
+				21D07309181DB34F0019D264 /* Default@2x.png in Resources */,
+				21D0730C181DB34F0019D264 /* guicontainer.xml in Resources */,
+				21D07307181DB34F0019D264 /* Default-568h@2x.png in Resources */,
+				21D07335181DB34F0019D264 /* texture_01.pvr in Resources */,
+				21D07334181DB34F0019D264 /* particle.emitter.02.pvr in Resources */,
+				21D07314181DB34F0019D264 /* material.model.Footman.common.xml in Resources */,
+				21D072E5181DB34F0019D264 /* model_02.MDL_anim in Resources */,
+				21D07318181DB34F0019D264 /* material.model.refraction.xml in Resources */,
+				21D07324181DB34F0019D264 /* screen.space.bloomextract.operation.xml in Resources */,
+				21D07311181DB34F0019D264 /* material.deffered.screen.xml in Resources */,
+				21D0731C181DB34F0019D264 /* model.Building.xml in Resources */,
+				21D07317181DB34F0019D264 /* material.model.reflection.xml in Resources */,
+				21D07320181DB34F0019D264 /* particle.emitter.01.xml in Resources */,
+				21D0730D181DB34F0019D264 /* main.transition.xml in Resources */,
+				21D0732E181DB34F0019D264 /* Footman2.Diffuse.pvr in Resources */,
+				21D072E6181DB34F0019D264 /* model_02.MDL_mesh in Resources */,
+				21D072E3181DB34F0019D264 /* model_01.MDL_mesh in Resources */,
+				21D07332181DB34F0019D264 /* ocean_nm.pvr in Resources */,
+				21D072E1181DB34F0019D264 /* mesh_01.MDL in Resources */,
+				21D072E7181DB34F0019D264 /* model_02.MDL_sk in Resources */,
+				21D07325181DB34F0019D264 /* screen.space.blur.operation.xml in Resources */,
+				21D07326181DB34F0019D264 /* screen.space.deffered.operation.xml in Resources */,
+				21D072DD181DB34F0019D264 /* Footman3.MDL in Resources */,
+				21D07308181DB34F0019D264 /* Default.png in Resources */,
+				21D07310181DB34F0019D264 /* material.blur.screen.xml in Resources */,
+				21D0731D181DB34F0019D264 /* model.Footman.xml in Resources */,
+				21D0731F181DB34F0019D264 /* output.space.operation.xml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		21D070BD181D9D460019D264 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21D07278181DB1910019D264 /* Win32-Main.cpp in Sources */,
+				21D07273181DB1910019D264 /* CKOTHWorkflow.cpp in Sources */,
+				21D07275181DB1910019D264 /* CNavigator.cpp in Sources */,
+				21D0726C181DB1910019D264 /* AppDelegate.mm in Sources */,
+				21D07272181DB1910019D264 /* CKOTHInGameTransition.cpp in Sources */,
+				21D07271181DB1910019D264 /* CKOTHInGameScene.cpp in Sources */,
+				21D0726D181DB1910019D264 /* CCharacterController.cpp in Sources */,
+				21D07277181DB1910019D264 /* main.mm in Sources */,
+				21D07274181DB1910019D264 /* CMoveControllerView_iOS.mm in Sources */,
+				21D07276181DB1910019D264 /* IMoveControllerHandler.cpp in Sources */,
+				21D0726F181DB1910019D264 /* CGameViewController.mm in Sources */,
+				21D0726E181DB1910019D264 /* CGameViewController_win32.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		21D0724E181DAE940019D264 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "indieEngineCore-Lib";
+			targetProxy = 21D0724D181DAE940019D264 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		21D070EB181D9D460019D264 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		21D070EC181D9D460019D264 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		21D070EE181D9D460019D264 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "indie2dEngine-Demo/Support/indieEngineDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/indie2dEngine-Core/Sources\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/gcdpp/include\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/curl/include\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/indie2dEngine-Demo/Support/indieEngineDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		21D070EF181D9D460019D264 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "indie2dEngine-Demo/Support/indieEngineDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/indie2dEngine-Core/Sources\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/gcdpp/include\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/curl/include\"",
+					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/indie2dEngine-Demo/Support/indieEngineDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		21D070BC181D9D460019D264 /* Build configuration list for PBXProject "indieEngineDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21D070EB181D9D460019D264 /* Debug */,
+				21D070EC181D9D460019D264 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21D070ED181D9D460019D264 /* Build configuration list for PBXNativeTarget "indieEngineDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21D070EE181D9D460019D264 /* Debug */,
+				21D070EF181D9D460019D264 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 21D070B9181D9D460019D264 /* Project object */;
+}

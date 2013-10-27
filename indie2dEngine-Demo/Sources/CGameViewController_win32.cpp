@@ -1,4 +1,15 @@
+//
+//  CGameViewController_win32.h
+//  indi2dEngine-Core
+//
+//  Created by Sergey Sergeev on 5/3/13.
+//  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
+//
+
 #include "CGameViewController_win32.h"
+
+#if defined(__WIN32__)
+
 #include "IOGLWindow.h"
 #include "CKOTHWorkflow.h"
 #include "IGameTransition.h"
@@ -16,3 +27,5 @@ CGameViewController_win32::~CGameViewController_win32(void)
 {
 
 }
+
+#endif

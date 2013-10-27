@@ -155,7 +155,6 @@ std::function<void(void)> CBatch::_UnlockControlsGeometry()
             }
                 
             SHardwareVertex* vertexData_01 = m_mesh->Get_VertexBuffer()->Lock();
-            SHardwareVertex* vertexData_02 = quad->Get_VertexBuffer()->Lock();
 
 			f32 screenWidth = Get_ScreenWidth();
 			f32 screenHeight = Get_ScreenHeight();

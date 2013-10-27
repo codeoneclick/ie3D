@@ -28,8 +28,8 @@
 
 #if defined(__APPLE__)
 
-#define __USE_CURL__
-#define __USE_JSONCPP__
+#undef  __USE_CURL__
+#undef  __USE_JSONCPP__
 #define __USE_GCDPP__
 #define __USE_OPENGLES__
 
