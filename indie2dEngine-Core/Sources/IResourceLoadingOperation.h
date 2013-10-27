@@ -32,7 +32,7 @@ protected:
 public:
     
     IResourceLoadingOperation(const std::string& _guid, std::shared_ptr<IResource> _resource);
-    ~IResourceLoadingOperation(void);
+    virtual ~IResourceLoadingOperation(void);
     
     virtual void Serialize(void) = 0;
     virtual void Commit(void) = 0;

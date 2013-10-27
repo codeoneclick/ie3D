@@ -26,10 +26,22 @@
 		211D30E717C5484E0038B703 /* model_03.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 211D30E417C5484E0038B703 /* model_03.MDL_anim */; };
 		211D30E817C5484E0038B703 /* model_03.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 211D30E517C5484E0038B703 /* model_03.MDL_mesh */; };
 		211D30E917C5484E0038B703 /* model_03.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 211D30E617C5484E0038B703 /* model_03.MDL_sk */; };
+		21457FE5181C4BCC0071839E /* CGUIFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE1181C4BCC0071839E /* CGUIFabricator.cpp */; };
+		21457FE6181C4BCC0071839E /* CGUIGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE3181C4BCC0071839E /* CGUIGraph.cpp */; };
+		21457FEB181C4BEA0071839E /* IFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE7181C4BEA0071839E /* IFabricator.cpp */; };
+		21457FEC181C4BEA0071839E /* IGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE9181C4BEA0071839E /* IGraph.cpp */; };
+		21457FEF181C4C060071839E /* IScreenSpaceTextureAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */; };
+		21457FF3181C4CAD0071839E /* ShaderCommon.frag in Sources */ = {isa = PBXBuildFile; fileRef = 21457FF1181C4CAD0071839E /* ShaderCommon.frag */; };
+		21457FF4181C4CAD0071839E /* ShaderCommon.vert in Sources */ = {isa = PBXBuildFile; fileRef = 21457FF2181C4CAD0071839E /* ShaderCommon.vert */; };
+		21457FF7181C4CC10071839E /* guicontainer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21457FF5181C4CC10071839E /* guicontainer.xml */; };
+		21457FF8181C4CC10071839E /* material.guicontainer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21457FF6181C4CC10071839E /* material.guicontainer.xml */; };
+		21457FFB181C6F590071839E /* CommonGUI.frag in Sources */ = {isa = PBXBuildFile; fileRef = 21457FF9181C6F590071839E /* CommonGUI.frag */; };
+		21457FFC181C6F590071839E /* CommonGUI.vert in Sources */ = {isa = PBXBuildFile; fileRef = 21457FFA181C6F590071839E /* CommonGUI.vert */; };
+		21457FFD181C6FEB0071839E /* CommonGUI.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21457FF9181C6F590071839E /* CommonGUI.frag */; };
+		21457FFE181C6FEB0071839E /* CommonGUI.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21457FFA181C6F590071839E /* CommonGUI.vert */; };
 		217BB29F1815A48700DB8ECC /* CQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB29D1815A48700DB8ECC /* CQuad.cpp */; };
 		217BB2A61815A4B000DB8ECC /* CGUIButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A01815A4B000DB8ECC /* CGUIButton.cpp */; };
 		217BB2A71815A4B000DB8ECC /* CGUIContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A21815A4B000DB8ECC /* CGUIContainer.cpp */; };
-		217BB2A81815A4B000DB8ECC /* CGUIMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A41815A4B000DB8ECC /* CGUIMgr.cpp */; };
 		217BB2AB1815A4CE00DB8ECC /* CGUITemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A91815A4CE00DB8ECC /* CGUITemplateSerializer.cpp */; };
 		217BB2AE1815A4E300DB8ECC /* CGUITemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2AC1815A4E300DB8ECC /* CGUITemplateLoadingOperation.cpp */; };
 		217BB2B11815A4FD00DB8ECC /* CGUITemplateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2AF1815A4FD00DB8ECC /* CGUITemplateLoader.cpp */; };
@@ -58,6 +70,7 @@
 		219DC4E6180DCB10001C72D4 /* gcdppQueue_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4E0180DCB10001C72D4 /* gcdppQueue_t.cpp */; };
 		219DC4E7180DCB10001C72D4 /* gcdppTask_i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4E1180DCB10001C72D4 /* gcdppTask_i.cpp */; };
 		219DC4E8180DCB10001C72D4 /* gcdppTask_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4E2180DCB10001C72D4 /* gcdppTask_t.cpp */; };
+		21D0709B181C78780019D264 /* indieEngine-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21D0709A181C78780019D264 /* indieEngine-Info.plist */; };
 		21E09E8E17759A5400F199AD /* ParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8317758E6A00F199AD /* ParticleEmitter.vert */; };
 		21E09E8F17759A5400F199AD /* ParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21E09E8217758E6A00F199AD /* ParticleEmitter.frag */; };
 		21E42A4E1767B3FD00E40437 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E42A4A1767B3FD00E40437 /* main.transition.xml */; };
@@ -186,7 +199,7 @@
 		A46A32BF174E16AC0044643E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		A46A32C0174E16AC0044643E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081621733A9370004729E /* CoreGraphics.framework */; };
 		A46A32D8174E17970044643E /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A46A32D7174E17970044643E /* main.mm */; };
-		A46A32DB174E17B50044643E /* indie2dEngine-Testing-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A46A32D9174E17B50044643E /* indie2dEngine-Testing-Info.plist */; };
+		A46A32DB174E17B50044643E /* indieEngine-Testing-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A46A32D9174E17B50044643E /* indieEngine-Testing-Info.plist */; };
 		A46A32E0174E17C20044643E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A46A32DD174E17C20044643E /* Default-568h@2x.png */; };
 		A46A32E1174E17C20044643E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A46A32DE174E17C20044643E /* Default.png */; };
 		A46A32E2174E17C20044643E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A46A32DF174E17C20044643E /* Default@2x.png */; };
@@ -517,14 +530,28 @@
 		211D30E417C5484E0038B703 /* model_03.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_03.MDL_anim; sourceTree = "<group>"; };
 		211D30E517C5484E0038B703 /* model_03.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_03.MDL_mesh; sourceTree = "<group>"; };
 		211D30E617C5484E0038B703 /* model_03.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_03.MDL_sk; sourceTree = "<group>"; };
+		21457FE1181C4BCC0071839E /* CGUIFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIFabricator.cpp; path = Sources/CGUIFabricator.cpp; sourceTree = "<group>"; };
+		21457FE2181C4BCC0071839E /* CGUIFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIFabricator.h; path = Sources/CGUIFabricator.h; sourceTree = "<group>"; };
+		21457FE3181C4BCC0071839E /* CGUIGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIGraph.cpp; path = Sources/CGUIGraph.cpp; sourceTree = "<group>"; };
+		21457FE4181C4BCC0071839E /* CGUIGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIGraph.h; path = Sources/CGUIGraph.h; sourceTree = "<group>"; };
+		21457FE7181C4BEA0071839E /* IFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IFabricator.cpp; path = Sources/IFabricator.cpp; sourceTree = "<group>"; };
+		21457FE8181C4BEA0071839E /* IFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IFabricator.h; path = Sources/IFabricator.h; sourceTree = "<group>"; };
+		21457FE9181C4BEA0071839E /* IGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGraph.cpp; path = Sources/IGraph.cpp; sourceTree = "<group>"; };
+		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
+		21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IScreenSpaceTextureAccessor.cpp; path = Sources/IScreenSpaceTextureAccessor.cpp; sourceTree = "<group>"; };
+		21457FEE181C4C060071839E /* IScreenSpaceTextureAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IScreenSpaceTextureAccessor.h; path = Sources/IScreenSpaceTextureAccessor.h; sourceTree = "<group>"; };
+		21457FF1181C4CAD0071839E /* ShaderCommon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShaderCommon.frag; sourceTree = "<group>"; };
+		21457FF2181C4CAD0071839E /* ShaderCommon.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShaderCommon.vert; sourceTree = "<group>"; };
+		21457FF5181C4CC10071839E /* guicontainer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = guicontainer.xml; sourceTree = "<group>"; };
+		21457FF6181C4CC10071839E /* material.guicontainer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.guicontainer.xml; sourceTree = "<group>"; };
+		21457FF9181C6F590071839E /* CommonGUI.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonGUI.frag; sourceTree = "<group>"; };
+		21457FFA181C6F590071839E /* CommonGUI.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonGUI.vert; sourceTree = "<group>"; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
 		217BB29E1815A48700DB8ECC /* CQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuad.h; path = Sources/CQuad.h; sourceTree = "<group>"; };
 		217BB2A01815A4B000DB8ECC /* CGUIButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIButton.cpp; path = Sources/CGUIButton.cpp; sourceTree = "<group>"; };
 		217BB2A11815A4B000DB8ECC /* CGUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIButton.h; path = Sources/CGUIButton.h; sourceTree = "<group>"; };
 		217BB2A21815A4B000DB8ECC /* CGUIContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIContainer.cpp; path = Sources/CGUIContainer.cpp; sourceTree = "<group>"; };
 		217BB2A31815A4B000DB8ECC /* CGUIContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIContainer.h; path = Sources/CGUIContainer.h; sourceTree = "<group>"; };
-		217BB2A41815A4B000DB8ECC /* CGUIMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIMgr.cpp; path = Sources/CGUIMgr.cpp; sourceTree = "<group>"; };
-		217BB2A51815A4B000DB8ECC /* CGUIMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIMgr.h; path = Sources/CGUIMgr.h; sourceTree = "<group>"; };
 		217BB2A91815A4CE00DB8ECC /* CGUITemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUITemplateSerializer.cpp; path = Sources/CGUITemplateSerializer.cpp; sourceTree = "<group>"; };
 		217BB2AA1815A4CE00DB8ECC /* CGUITemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUITemplateSerializer.h; path = Sources/CGUITemplateSerializer.h; sourceTree = "<group>"; };
 		217BB2AC1815A4E300DB8ECC /* CGUITemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUITemplateLoadingOperation.cpp; path = Sources/CGUITemplateLoadingOperation.cpp; sourceTree = "<group>"; };
@@ -565,6 +592,7 @@
 		219DC4E0180DCB10001C72D4 /* gcdppQueue_t.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppQueue_t.cpp; sourceTree = "<group>"; };
 		219DC4E1180DCB10001C72D4 /* gcdppTask_i.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppTask_i.cpp; sourceTree = "<group>"; };
 		219DC4E2180DCB10001C72D4 /* gcdppTask_t.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppTask_t.cpp; sourceTree = "<group>"; };
+		21D0709A181C78780019D264 /* indieEngine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "indieEngine-Info.plist"; path = "Support/indieEngine-Info.plist"; sourceTree = "<group>"; };
 		21E09E8217758E6A00F199AD /* ParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.frag; sourceTree = "<group>"; };
 		21E09E8317758E6A00F199AD /* ParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.vert; sourceTree = "<group>"; };
 		21E42A4A1767B3FD00E40437 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
@@ -633,8 +661,7 @@
 		A42081621733A9370004729E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A42081841733AAA10004729E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Bundle/System/Default.png; sourceTree = "<group>"; };
 		A42081851733AAA10004729E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Bundle/System/Default@2x.png"; sourceTree = "<group>"; };
-		A420818C1733AAB40004729E /* indie2dEngine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "indie2dEngine-Info.plist"; path = "Support/indie2dEngine-Info.plist"; sourceTree = "<group>"; };
-		A420818D1733AAB40004729E /* indie2dEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "indie2dEngine-Prefix.pch"; path = "Support/indie2dEngine-Prefix.pch"; sourceTree = "<group>"; };
+		A420818D1733AAB40004729E /* indieEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "indieEngine-Prefix.pch"; path = "Support/indieEngine-Prefix.pch"; sourceTree = "<group>"; };
 		A42FE60C1771D6C100131949 /* CommonOutput.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.vert; sourceTree = "<group>"; };
 		A42FE60D1771D6C100131949 /* CommonOutput.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.frag; sourceTree = "<group>"; };
 		A42FE6141771ECE700131949 /* BloomCombineScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomCombineScreen.frag; sourceTree = "<group>"; };
@@ -755,10 +782,10 @@
 		A46A3210174E0F150044643E /* CTextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureLoader.h; path = Sources/CTextureLoader.h; sourceTree = "<group>"; };
 		A46A3213174E10B80044643E /* texture_01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_01.pvr; sourceTree = "<group>"; };
 		A46A324F174E161F0044643E /* libGoogleUnitTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libGoogleUnitTest.xcodeproj; path = "gtest-1.6.0/xcode/libGoogleUnitTest.xcodeproj"; sourceTree = "<group>"; };
-		A46A32BD174E16AC0044643E /* indie2dEngine-Testing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "indie2dEngine-Testing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A46A32BD174E16AC0044643E /* indieEngine-Testing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "indieEngine-Testing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A46A32D7174E17970044643E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		A46A32D9174E17B50044643E /* indie2dEngine-Testing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "indie2dEngine-Testing-Info.plist"; path = "Support/indie2dEngine-Testing-Info.plist"; sourceTree = "<group>"; };
-		A46A32DA174E17B50044643E /* indie2dEngine-Testing-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "indie2dEngine-Testing-Prefix.pch"; path = "Support/indie2dEngine-Testing-Prefix.pch"; sourceTree = "<group>"; };
+		A46A32D9174E17B50044643E /* indieEngine-Testing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "indieEngine-Testing-Info.plist"; path = "Support/indieEngine-Testing-Info.plist"; sourceTree = "<group>"; };
+		A46A32DA174E17B50044643E /* indieEngine-Testing-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "indieEngine-Testing-Prefix.pch"; path = "Support/indieEngine-Testing-Prefix.pch"; sourceTree = "<group>"; };
 		A46A32DD174E17C20044643E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A46A32DE174E17C20044643E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A46A32DF174E17C20044643E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -1221,6 +1248,19 @@
 			path = lib_json;
 			sourceTree = "<group>";
 		};
+		21457FF0181C4C160071839E /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				217BB2A01815A4B000DB8ECC /* CGUIButton.cpp */,
+				217BB2A11815A4B000DB8ECC /* CGUIButton.h */,
+				217BB2A21815A4B000DB8ECC /* CGUIContainer.cpp */,
+				217BB2A31815A4B000DB8ECC /* CGUIContainer.h */,
+				A4BB784118069E6B00E050F6 /* IGUIControl.h */,
+				A4BB784018069E6B00E050F6 /* IGUIControl.cpp */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
 		219DC4D2180DCB10001C72D4 /* gcdpp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1402,6 +1442,10 @@
 		A40D47C3174555AF00CA59D0 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				21457FF9181C6F590071839E /* CommonGUI.frag */,
+				21457FFA181C6F590071839E /* CommonGUI.vert */,
+				21457FF1181C4CAD0071839E /* ShaderCommon.frag */,
+				21457FF2181C4CAD0071839E /* ShaderCommon.vert */,
 				A46789DF17A022BD00FE26FA /* CommonOcean.frag */,
 				A46789E017A022BD00FE26FA /* CommonOcean.vert */,
 				A4DD0EAB179E7D33009A7AFE /* CommonBoundBox.frag */,
@@ -1434,9 +1478,9 @@
 		A42081521733A9370004729E = {
 			isa = PBXGroup;
 			children = (
-				A46A3215174E161E0044643E /* indie2dEngine-Testing */,
-				A4F204B6174241320063AB07 /* indie2dEngine-Game */,
-				A42081641733A9370004729E /* indie2dEngine-Core */,
+				A46A3215174E161E0044643E /* indieEngine-Testing */,
+				A4F204B6174241320063AB07 /* indieEngine-Game */,
+				A42081641733A9370004729E /* indieEngine-Core */,
 				A420815D1733A9370004729E /* Frameworks */,
 				A420815C1733A9370004729E /* Products */,
 			);
@@ -1446,7 +1490,7 @@
 			isa = PBXGroup;
 			children = (
 				A420815B1733A9370004729E /* indie2dEngine.app */,
-				A46A32BD174E16AC0044643E /* indie2dEngine-Testing.app */,
+				A46A32BD174E16AC0044643E /* indieEngine-Testing.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1470,7 +1514,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A42081641733A9370004729E /* indie2dEngine-Core */ = {
+		A42081641733A9370004729E /* indieEngine-Core */ = {
 			isa = PBXGroup;
 			children = (
 				A42081941733ABB20004729E /* Libraries */,
@@ -1478,14 +1522,15 @@
 				A420817B1733AA670004729E /* Bundle */,
 				A42081651733A9370004729E /* Supporting Files */,
 			);
+			name = "indieEngine-Core";
 			path = "indie2dEngine-Core";
 			sourceTree = "<group>";
 		};
 		A42081651733A9370004729E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A420818C1733AAB40004729E /* indie2dEngine-Info.plist */,
-				A420818D1733AAB40004729E /* indie2dEngine-Prefix.pch */,
+				21D0709A181C78780019D264 /* indieEngine-Info.plist */,
+				A420818D1733AAB40004729E /* indieEngine-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1524,6 +1569,7 @@
 		A42081901733AAE60004729E /* Resources Managment */ = {
 			isa = PBXGroup;
 			children = (
+				A43648321799476000C51AC4 /* Collision Managment */,
 				A494D37A1739470700228936 /* Resources */,
 				A494D379173946E500228936 /* Operations */,
 				A494D378173946DC00228936 /* Loaders */,
@@ -1615,6 +1661,8 @@
 		A45588D717564B8B00802609 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				21457FF5181C4CC10071839E /* guicontainer.xml */,
+				21457FF6181C4CC10071839E /* material.guicontainer.xml */,
 				21879FCD17A0809600605D7F /* material.model.Footman.common.xml */,
 				21879FCE17A0809600605D7F /* material.model.Footman.reflection.xml */,
 				21879FCF17A0809600605D7F /* material.model.Footman.refraction.xml */,
@@ -1730,7 +1778,7 @@
 			path = Bundle/Textures;
 			sourceTree = "<group>";
 		};
-		A46A3215174E161E0044643E /* indie2dEngine-Testing */ = {
+		A46A3215174E161E0044643E /* indieEngine-Testing */ = {
 			isa = PBXGroup;
 			children = (
 				A46A3216174E161E0044643E /* Libraries */,
@@ -1738,6 +1786,7 @@
 				A46A32D6174E176D0044643E /* Bundle */,
 				A46A32C2174E16AD0044643E /* Supporting Files */,
 			);
+			name = "indieEngine-Testing";
 			path = "indie2dEngine-Testing";
 			sourceTree = "<group>";
 		};
@@ -1775,8 +1824,8 @@
 		A46A32C2174E16AD0044643E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A46A32D9174E17B50044643E /* indie2dEngine-Testing-Info.plist */,
-				A46A32DA174E17B50044643E /* indie2dEngine-Testing-Prefix.pch */,
+				A46A32D9174E17B50044643E /* indieEngine-Testing-Info.plist */,
+				A46A32DA174E17B50044643E /* indieEngine-Testing-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1853,6 +1902,8 @@
 				A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */,
 				A4535E9217C633EA0058CD47 /* CBatch.h */,
 				A4535E9117C633EA0058CD47 /* CBatch.cpp */,
+				21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */,
+				21457FEE181C4C060071839E /* IScreenSpaceTextureAccessor.h */,
 			);
 			name = "Render Managment";
 			sourceTree = "<group>";
@@ -1872,6 +1923,10 @@
 				A40A698F174E69F3005B475E /* ISceneUpdateHandler.cpp */,
 				A4DD0F2F179EC783009A7AFE /* IScene.h */,
 				A4DD0F2E179EC782009A7AFE /* IScene.cpp */,
+				21457FE7181C4BEA0071839E /* IFabricator.cpp */,
+				21457FE8181C4BEA0071839E /* IFabricator.h */,
+				21457FE9181C4BEA0071839E /* IGraph.cpp */,
+				21457FEA181C4BEA0071839E /* IGraph.h */,
 			);
 			name = "SceneGraph Managment";
 			sourceTree = "<group>";
@@ -1884,7 +1939,6 @@
 				A42081921733AB070004729E /* Common */,
 				A494D36817392DAC00228936 /* GUI Managment */,
 				A494D36417392D3600228936 /* Render Managment */,
-				A43648321799476000C51AC4 /* Collision Managment */,
 				A494D36717392D8100228936 /* StateMachine Managment */,
 				A494D36517392D4B00228936 /* SceneGraph Managment */,
 				A42081911733AAF40004729E /* GameObjectTemplates Managment */,
@@ -1912,14 +1966,11 @@
 		A494D36817392DAC00228936 /* GUI Managment */ = {
 			isa = PBXGroup;
 			children = (
-				217BB2A01815A4B000DB8ECC /* CGUIButton.cpp */,
-				217BB2A11815A4B000DB8ECC /* CGUIButton.h */,
-				217BB2A21815A4B000DB8ECC /* CGUIContainer.cpp */,
-				217BB2A31815A4B000DB8ECC /* CGUIContainer.h */,
-				217BB2A41815A4B000DB8ECC /* CGUIMgr.cpp */,
-				217BB2A51815A4B000DB8ECC /* CGUIMgr.h */,
-				A4BB784118069E6B00E050F6 /* IGUIControl.h */,
-				A4BB784018069E6B00E050F6 /* IGUIControl.cpp */,
+				21457FF0181C4C160071839E /* Controls */,
+				21457FE1181C4BCC0071839E /* CGUIFabricator.cpp */,
+				21457FE2181C4BCC0071839E /* CGUIFabricator.h */,
+				21457FE3181C4BCC0071839E /* CGUIGraph.cpp */,
+				21457FE4181C4BCC0071839E /* CGUIGraph.h */,
 			);
 			name = "GUI Managment";
 			sourceTree = "<group>";
@@ -2031,12 +2082,12 @@
 			name = Commiters;
 			sourceTree = "<group>";
 		};
-		A4F204B6174241320063AB07 /* indie2dEngine-Game */ = {
+		A4F204B6174241320063AB07 /* indieEngine-Game */ = {
 			isa = PBXGroup;
 			children = (
 				A4F204BA17427BEB0063AB07 /* Sources */,
 			);
-			name = "indie2dEngine-Game";
+			name = "indieEngine-Game";
 			sourceTree = "<group>";
 		};
 		A4F204BA17427BEB0063AB07 /* Sources */ = {
@@ -2355,9 +2406,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A420815A1733A9370004729E /* indie2dEngine-Core */ = {
+		A420815A1733A9370004729E /* indieEngine-Core */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A42081781733A9370004729E /* Build configuration list for PBXNativeTarget "indie2dEngine-Core" */;
+			buildConfigurationList = A42081781733A9370004729E /* Build configuration list for PBXNativeTarget "indieEngine-Core" */;
 			buildPhases = (
 				A42081571733A9370004729E /* Sources */,
 				A42081581733A9370004729E /* Frameworks */,
@@ -2367,14 +2418,14 @@
 			);
 			dependencies = (
 			);
-			name = "indie2dEngine-Core";
+			name = "indieEngine-Core";
 			productName = "indie2dEngine-Core";
 			productReference = A420815B1733A9370004729E /* indie2dEngine.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A46A32BC174E16AC0044643E /* indie2dEngine-Testing */ = {
+		A46A32BC174E16AC0044643E /* indieEngine-Testing */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A46A32D3174E16AD0044643E /* Build configuration list for PBXNativeTarget "indie2dEngine-Testing" */;
+			buildConfigurationList = A46A32D3174E16AD0044643E /* Build configuration list for PBXNativeTarget "indieEngine-Testing" */;
 			buildPhases = (
 				A46A32B9174E16AC0044643E /* Sources */,
 				A46A32BA174E16AC0044643E /* Frameworks */,
@@ -2385,9 +2436,9 @@
 			dependencies = (
 				A46A32E4174E180B0044643E /* PBXTargetDependency */,
 			);
-			name = "indie2dEngine-Testing";
+			name = "indieEngine-Testing";
 			productName = "indie2dEngine-Testing";
-			productReference = A46A32BD174E16AC0044643E /* indie2dEngine-Testing.app */;
+			productReference = A46A32BD174E16AC0044643E /* indieEngine-Testing.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2399,7 +2450,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Sergey Sergeev";
 			};
-			buildConfigurationList = A42081561733A9370004729E /* Build configuration list for PBXProject "indie2dEngine" */;
+			buildConfigurationList = A42081561733A9370004729E /* Build configuration list for PBXProject "indieEngine" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2417,8 +2468,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				A420815A1733A9370004729E /* indie2dEngine-Core */,
-				A46A32BC174E16AC0044643E /* indie2dEngine-Testing */,
+				A420815A1733A9370004729E /* indieEngine-Core */,
+				A46A32BC174E16AC0044643E /* indieEngine-Testing */,
 			);
 		};
 /* End PBXProject section */
@@ -2480,6 +2531,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21457FFD181C6FEB0071839E /* CommonGUI.frag in Resources */,
+				21457FFE181C6FEB0071839E /* CommonGUI.vert in Resources */,
 				A46789E717A02DE100FE26FA /* CommonOcean.frag in Resources */,
 				A46789E817A02DE100FE26FA /* CommonOcean.vert in Resources */,
 				A4DD0EAF179E7DBE009A7AFE /* CommonBoundBox.frag in Resources */,
@@ -2583,6 +2636,7 @@
 				A4F20603174287450063AB07 /* normal.inl in Resources */,
 				A4F20604174287450063AB07 /* normalize_dot.inl in Resources */,
 				A4F20605174287450063AB07 /* number_precision.inl in Resources */,
+				21457FF8181C4CC10071839E /* material.guicontainer.xml in Resources */,
 				A4F20606174287450063AB07 /* ocl_type.inl in Resources */,
 				A4F20607174287450063AB07 /* optimum_pow.inl in Resources */,
 				A4F20608174287450063AB07 /* orthonormalize.inl in Resources */,
@@ -2601,6 +2655,7 @@
 				A4F20615174287450063AB07 /* string_cast.inl in Resources */,
 				A4F20616174287450063AB07 /* transform.inl in Resources */,
 				A4F20617174287450063AB07 /* transform2.inl in Resources */,
+				21D0709B181C78780019D264 /* indieEngine-Info.plist in Resources */,
 				A4F20618174287450063AB07 /* ulp.inl in Resources */,
 				A4F20619174287450063AB07 /* unsigned_int.inl in Resources */,
 				A4F2061A174287450063AB07 /* vec1.inl in Resources */,
@@ -2673,6 +2728,7 @@
 				A4C8C3F017D4C6E100F955B2 /* ocean_nm.pvr in Resources */,
 				A4C8C3F217D5F16B00F955B2 /* ocean_hm.pvr in Resources */,
 				A4C8C3F417D600D000F955B2 /* texture_02.pvr in Resources */,
+				21457FF7181C4CC10071839E /* guicontainer.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2684,7 +2740,7 @@
 				A46A3317174E35F00044643E /* texture_01.pvr in Resources */,
 				A46A3318174E35F00044643E /* CommonModel.vert in Resources */,
 				A46A3319174E35F00044643E /* CommonModel.frag in Resources */,
-				A46A32DB174E17B50044643E /* indie2dEngine-Testing-Info.plist in Resources */,
+				A46A32DB174E17B50044643E /* indieEngine-Testing-Info.plist in Resources */,
 				A46A32E0174E17C20044643E /* Default-568h@2x.png in Resources */,
 				A46A32E1174E17C20044643E /* Default.png in Resources */,
 				A46A32E2174E17C20044643E /* Default@2x.png in Resources */,
@@ -2732,12 +2788,12 @@
 				A46A318C174641320044643E /* CRenderOperationScreenSpace.cpp in Sources */,
 				A46A318F174641760044643E /* CRenderOperationOutput.cpp in Sources */,
 				217BB2B31815BDFD00DB8ECC /* CGameLoopExecutor.cpp in Sources */,
-				217BB2A81815A4B000DB8ECC /* CGUIMgr.cpp in Sources */,
 				A46A319217466F720044643E /* IResourceLoader.cpp in Sources */,
 				A46A3195174674FF0044643E /* CShaderLoader.cpp in Sources */,
 				A46A31981746751A0044643E /* CShaderLoadingOperation.cpp in Sources */,
 				A46A319B174675820044643E /* IResourceLoadingOperation.cpp in Sources */,
 				A46A31FC174D1E5B0044643E /* CTextureLoadingOperation.cpp in Sources */,
+				21457FE5181C4BCC0071839E /* CGUIFabricator.cpp in Sources */,
 				A46A3211174E0F150044643E /* CTextureLoader.cpp in Sources */,
 				A46A331C174E4C820044643E /* CResourceAccessor.cpp in Sources */,
 				A40A698E174E634B005B475E /* CSceneUpdateMgr.cpp in Sources */,
@@ -2754,6 +2810,7 @@
 				210EFD191752672500DDB182 /* CMeshCommiter_MDL.cpp in Sources */,
 				210EFD1C1752674A00DDB182 /* CMeshSerializer_MDL.cpp in Sources */,
 				210EFD1F1752677300DDB182 /* CMeshLoadingOperation.cpp in Sources */,
+				21457FEF181C4C060071839E /* IScreenSpaceTextureAccessor.cpp in Sources */,
 				210EFD221752678E00DDB182 /* CMeshLoader.cpp in Sources */,
 				A49B83841754C07200AEB4DC /* CModel.cpp in Sources */,
 				A49B838F1754C9A600AEB4DC /* CSceneFabricator.cpp in Sources */,
@@ -2765,6 +2822,7 @@
 				A40138DB1756020B0056461B /* CModelTemplateLoader.cpp in Sources */,
 				A40138DE175602380056461B /* CParticleEmitterTemplateLoader.cpp in Sources */,
 				A40138E1175602D50056461B /* ITemplate.cpp in Sources */,
+				21457FFC181C6F590071839E /* CommonGUI.vert in Sources */,
 				219DC4E4180DCB10001C72D4 /* gcdppMainQueue_t.cpp in Sources */,
 				A40138E417560F640056461B /* CTemplateAccessor.cpp in Sources */,
 				A40138E7175613080056461B /* CMaterialTemplateLoadingOperation.cpp in Sources */,
@@ -2773,6 +2831,7 @@
 				A40138F0175614950056461B /* CMaterialTemplateSerializer.cpp in Sources */,
 				A45588CB175628F500802609 /* ITemplateLoadingHandler.cpp in Sources */,
 				A45588D61756406C00802609 /* CLight.cpp in Sources */,
+				21457FEC181C4BEA0071839E /* IGraph.cpp in Sources */,
 				210EFD42175BD4DA00DDB182 /* json_reader.cpp in Sources */,
 				210EFD43175BD4DA00DDB182 /* json_value.cpp in Sources */,
 				210EFD45175BD4DA00DDB182 /* json_writer.cpp in Sources */,
@@ -2787,10 +2846,12 @@
 				A481749317621E6B00E1DC6E /* CWorldSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */,
 				A481749617621EA700E1DC6E /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */,
 				A481749917621FF500E1DC6E /* COutputRenderOperationTemplateLoadingOperation.cpp in Sources */,
+				21457FFB181C6F590071839E /* CommonGUI.frag in Sources */,
 				A481749C176221FF00E1DC6E /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
 				A494B85D17686741004C9F96 /* CKOTHWorkflow.cpp in Sources */,
 				A494B86817686776004C9F96 /* CKOTHInGameTransition.cpp in Sources */,
 				A4AB15B2177C4E1B00FFC12E /* CFPSCounter.cpp in Sources */,
+				21457FE6181C4BCC0071839E /* CGUIGraph.cpp in Sources */,
 				A4AB15BD177C73D400FFC12E /* CTimer.cpp in Sources */,
 				A4364841179952D300C51AC4 /* CCollisionMgr.cpp in Sources */,
 				A4364844179953E000C51AC4 /* ICollisionHandler.cpp in Sources */,
@@ -2804,10 +2865,12 @@
 				A43648A3179D767400C51AC4 /* IInputTapRecognizerHandler.cpp in Sources */,
 				A4DD0EA2179E6C6F009A7AFE /* CAABoundBox.cpp in Sources */,
 				A4DD0F30179EC783009A7AFE /* IScene.cpp in Sources */,
+				21457FEB181C4BEA0071839E /* IFabricator.cpp in Sources */,
 				A4DD0F36179EE100009A7AFE /* CNavigator.cpp in Sources */,
 				A4DD0F39179EE133009A7AFE /* CCharacterController.cpp in Sources */,
 				A4DD0F3D179EE67A009A7AFE /* IMoveControllerHandler.cpp in Sources */,
 				A4DD0F40179EE6A4009A7AFE /* CMoveControllerView_iOS.mm in Sources */,
+				21457FF3181C4CAD0071839E /* ShaderCommon.frag in Sources */,
 				A46789D117A01CF800FE26FA /* COcean.cpp in Sources */,
 				217BB2AB1815A4CE00DB8ECC /* CGUITemplateSerializer.cpp in Sources */,
 				217BB2A61815A4B000DB8ECC /* CGUIButton.cpp in Sources */,
@@ -2822,6 +2885,7 @@
 				A49C4E4117BA352B00C1484F /* CSequenceLoader.cpp in Sources */,
 				A49C4E4417BA453100C1484F /* CSkeletonLoadingOperation.cpp in Sources */,
 				A49C4E4717BA456200C1484F /* CSequenceLoadingOperation.cpp in Sources */,
+				21457FF4181C4CAD0071839E /* ShaderCommon.vert in Sources */,
 				A49C4E4A17BA4B0B00C1484F /* CSkeletonSerializer_SK.cpp in Sources */,
 				A49C4E4D17BA4B6700C1484F /* CSequenceSerializer_SEQ.cpp in Sources */,
 				A49C4E5017BA554300C1484F /* CSkeletonCommiter_SK.cpp in Sources */,
@@ -2974,20 +3038,39 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_WARN_BOOL_CONVERSION = NO;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "indie2dEngine-Core/Support/indie2dEngine-Prefix.pch";
+				GCC_PREFIX_HEADER = "indie2dEngine-Core/Support/indieEngine-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = NO;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
 				);
-				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/indie2dEngine-Core/Support/indieEngine-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/curl\"",
 				);
-				PRODUCT_NAME = indie2dEngine;
+				PRODUCT_NAME = indieEngine;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2996,20 +3079,39 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_WARN_BOOL_CONVERSION = NO;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "indie2dEngine-Core/Support/indie2dEngine-Prefix.pch";
+				GCC_PREFIX_HEADER = "indie2dEngine-Core/Support/indieEngine-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = NO;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/jsoncpp/include\"",
 				);
-				INFOPLIST_FILE = "indie2dEngine-Core/Support/indie2dEngine-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/indie2dEngine-Core/Support/indieEngine-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/curl\"",
 				);
-				PRODUCT_NAME = indie2dEngine;
+				PRODUCT_NAME = indieEngine;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -3022,7 +3124,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "indie2dEngine-Testing/Support/indie2dEngine-Testing-Prefix.pch";
+				GCC_PREFIX_HEADER = "indie2dEngine-Testing/Support/indieEngine-Testing-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"TESTING=1",
@@ -3032,8 +3134,8 @@
 					"\"$(SRCROOT)/indie2dEngine-Testing/Libraries/gtest-1.6.0/include\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/indie2dEngine-Testing/Support/indie2dEngine-Testing-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "indie2dEngine-Testing/Support/indieEngine-Testing-Info.plist";
+				PRODUCT_NAME = "indieEngine-Testing";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3046,13 +3148,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "indie2dEngine-Testing/Support/indie2dEngine-Testing-Prefix.pch";
+				GCC_PREFIX_HEADER = "indie2dEngine-Testing/Support/indieEngine-Testing-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/indie2dEngine-Testing/Libraries/gtest-1.6.0/include\"",
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries\"",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/indie2dEngine-Testing/Support/indie2dEngine-Testing-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "indie2dEngine-Testing/Support/indieEngine-Testing-Info.plist";
+				PRODUCT_NAME = "indieEngine-Testing";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -3060,7 +3162,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A42081561733A9370004729E /* Build configuration list for PBXProject "indie2dEngine" */ = {
+		A42081561733A9370004729E /* Build configuration list for PBXProject "indieEngine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A42081761733A9370004729E /* Debug */,
@@ -3069,7 +3171,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A42081781733A9370004729E /* Build configuration list for PBXNativeTarget "indie2dEngine-Core" */ = {
+		A42081781733A9370004729E /* Build configuration list for PBXNativeTarget "indieEngine-Core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A42081791733A9370004729E /* Debug */,
@@ -3078,7 +3180,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A46A32D3174E16AD0044643E /* Build configuration list for PBXNativeTarget "indie2dEngine-Testing" */ = {
+		A46A32D3174E16AD0044643E /* Build configuration list for PBXNativeTarget "indieEngine-Testing" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A46A32D4174E16AD0044643E /* Debug */,
