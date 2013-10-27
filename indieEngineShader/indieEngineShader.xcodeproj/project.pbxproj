@@ -1,0 +1,608 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+		D7BA7D76DAB5DD13389D6332 = {
+			buildActionMask = 2147483647;
+			files = (
+				);
+			generatedFileNames = (
+				);
+			isa = PBXShellScriptBuildPhase;
+			name = "Qt Qmake";
+			neededFileNames = (
+				);
+			shellPath = "/bin/sh";
+			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_makeqmake.mak";
+		};
+		118FCBAABA162BA17933C789 = {
+			isa = PBXFileReference;
+			name = "main.cpp";
+			path = "main.cpp";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		2B093CA6F071B023A473CED0 = {
+			fileRef = "118FCBAABA162BA17933C789";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		21DEF9A46CB2FA5B69809D73 = {
+			isa = PBXFileReference;
+			name = "indieEngineShader.cpp";
+			path = "indieEngineShader.cpp";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		3E67E7C99E45BBEC93BE00E8 = {
+			fileRef = "21DEF9A46CB2FA5B69809D73";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		2370FDDA306E75D3EA8B50A2 = {
+			isa = PBXFileReference;
+			name = "moc_indieEngineShader.cpp";
+			path = "moc_indieEngineShader.cpp";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		87D3E9B28A8BB3F040AAA983 = {
+			fileRef = "2370FDDA306E75D3EA8B50A2";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		CEF227E9DF025C332BC3D455 = {
+			isa = PBXFileReference;
+			name = "ui_indieEngineShader.h";
+			path = "ui_indieEngineShader.h";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+		};
+		A0898E6FFFB0D676B4B90A9F = {
+			isa = PBXFileReference;
+			name = "indieEngineShader.h";
+			path = "indieEngineShader.h";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+		};
+		F4918A0098C115899538B265 = {
+			isa = PBXFileReference;
+			name = "indieEngineShader.pro";
+			path = "indieEngineShader.pro";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+		};
+		A0898E6FFFB0D676B4B90A9F = {
+			isa = PBXFileReference;
+			name = "indieEngineShader.h";
+			path = "indieEngineShader.h";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+		};
+		54F09201E28898AB2BACC861 = {
+			fileRef = "A0898E6FFFB0D676B4B90A9F";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		341FCD610917A406F9EB3B23 = {
+			isa = PBXFileReference;
+			name = "indieEngineShader.ui";
+			path = "indieEngineShader.ui";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+		};
+		ABEB9F93647F6D42AB57270C = {
+			fileRef = "341FCD610917A406F9EB3B23";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		883D7615C4D2DE3FA1218F12 = {
+			isa = PBXGroup;
+			children = (
+				"A0898E6FFFB0D676B4B90A9F");
+			name = "Headers";
+			refType = 4;
+			sourceTree = "<Group>";
+		};
+		FB61758D0F0FDA4BA867C3D5 = {
+			isa = PBXGroup;
+			children = (
+				"118FCBAABA162BA17933C789",
+				"21DEF9A46CB2FA5B69809D73");
+			name = "Sources";
+			refType = 4;
+			sourceTree = "<Group>";
+		};
+		DD3C674B0E9509B84DF40A16 = {
+			isa = PBXGroup;
+			children = (
+				"A0898E6FFFB0D676B4B90A9F");
+			name = "Sources [MOC]";
+			refType = 4;
+			sourceTree = "<Group>";
+		};
+		EEC299C65D5017EB9DD513B0 = {
+			isa = PBXGroup;
+			children = (
+				"341FCD610917A406F9EB3B23");
+			name = "Sources [UIC]";
+			refType = 4;
+			sourceTree = "<Group>";
+		};
+		7CABE3C80E79AD2B307756D2 = {
+			isa = PBXGroup;
+			children = (
+				"F4918A0098C115899538B265");
+			name = "Sources [qmake]";
+			refType = 4;
+			sourceTree = "<Group>";
+		};
+		46E892BBB6BB6952967E0561 = {
+			isa = PBXGroup;
+			children = (
+				"2370FDDA306E75D3EA8B50A2",
+				"CEF227E9DF025C332BC3D455");
+			name = "Temporary Sources";
+			refType = 4;
+			sourceTree = "<Group>";
+		};
+		A0A52A2ADF7A1E2A99738674 = {
+			buildActionMask = 2147483647;
+			files = (
+				);
+			generatedFileNames = (
+				"2B093CA6F071B023A473CED0",
+				"3E67E7C99E45BBEC93BE00E8",
+				"87D3E9B28A8BB3F040AAA983");
+			isa = PBXShellScriptBuildPhase;
+			name = "Qt Preprocessors";
+			neededFileNames = (
+				"2B093CA6F071B023A473CED0",
+				"3E67E7C99E45BBEC93BE00E8",
+				"87D3E9B28A8BB3F040AAA983");
+			shellPath = "/bin/sh";
+			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_preprocess.mak";
+		};
+		C29B8785722055ED95EF7B57 = {
+			buildActionMask = 2147483647;
+			files = (
+				"2B093CA6F071B023A473CED0",
+				"3E67E7C99E45BBEC93BE00E8",
+				"87D3E9B28A8BB3F040AAA983");
+			isa = PBXSourcesBuildPhase;
+			name = "Build Sources";
+		};
+		CA490857EDB3B5096F73A895 = {
+			isa = PBXFileReference;
+			name = "QtWidgets.framework";
+			path = "../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+			lastKnownFileType = "wrapper.framework";
+		};
+		A7D06955B2B6F13D5163B992 = {
+			fileRef = "CA490857EDB3B5096F73A895";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		20871552E384EE14A56B6C16 = {
+			isa = PBXFileReference;
+			name = "QtGui.framework";
+			path = "../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+			lastKnownFileType = "wrapper.framework";
+		};
+		F09BB15AAC632BEC4A9F1379 = {
+			fileRef = "20871552E384EE14A56B6C16";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		820E7897D339E43EC7B964D4 = {
+			isa = PBXFileReference;
+			name = "QtCore.framework";
+			path = "../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework";
+			refType = 4;
+			sourceTree = "SOURCE_ROOT";
+			lastKnownFileType = "wrapper.framework";
+		};
+		255E691CCCEB8EC9D744BFD0 = {
+			fileRef = "820E7897D339E43EC7B964D4";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		DA18A6831232F53228631AD1 = {
+			isa = PBXFileReference;
+			name = "OpenGL.framework";
+			path = "/System/Library/Frameworks/OpenGL.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		BCEF71E1EDFB18DA77DC750B = {
+			fileRef = "DA18A6831232F53228631AD1";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C6766F86E49E9C8701C8E637 = {
+			isa = PBXFileReference;
+			name = "AGL.framework";
+			path = "/System/Library/Frameworks/AGL.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		0C6D4628EE0B0D1479A20551 = {
+			fileRef = "C6766F86E49E9C8701C8E637";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ED1E82605DD74B483AF3C982 = {
+			children = (
+				"CA490857EDB3B5096F73A895",
+				"20871552E384EE14A56B6C16",
+				"820E7897D339E43EC7B964D4",
+				"DA18A6831232F53228631AD1",
+				"C6766F86E49E9C8701C8E637");
+			isa = PBXGroup;
+			name = "External Frameworks and Libraries";
+			path = "";
+			refType = 4;
+			sourceTree = "<Group>";
+		};
+		2A1043669E6E5A7426EA502A = {
+			buildActionMask = 2147483647;
+			files = (
+				"A7D06955B2B6F13D5163B992",
+				"F09BB15AAC632BEC4A9F1379",
+				"255E691CCCEB8EC9D744BFD0",
+				"BCEF71E1EDFB18DA77DC750B",
+				"0C6D4628EE0B0D1479A20551");
+			isa = PBXFrameworksBuildPhase;
+			name = "Frameworks & Libraries";
+		};
+		3787F99312C85FF0073FD7BA = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXResourcesBuildPhase;
+			name = "Bundle Resources";
+		};
+		05596AB53D8D521C69802C27 = {
+			children = (
+				"FB61758D0F0FDA4BA867C3D5",
+				"46E892BBB6BB6952967E0561",
+				"883D7615C4D2DE3FA1218F12",
+				"7CABE3C80E79AD2B307756D2",
+				"DD3C674B0E9509B84DF40A16",
+				"EEC299C65D5017EB9DD513B0",
+				"ED1E82605DD74B483AF3C982");
+			isa = PBXGroup;
+			name = "indieEngineShader";
+			path = "";
+			refType = 4;
+			sourceTree = "<Group>";
+		};
+		8AA220651E477882BEDEF958 = {
+			isa = PBXFileReference;
+			explicitFileType = "wrapper.application";
+			path = "indieEngineShader.app";
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		068F80C7519D0528FB08E821 = {
+			children = (
+				"8AA220651E477882BEDEF958");
+			isa = PBXGroup;
+			name = "Products";
+			refType = 4;
+			sourceTree = "<Group>";
+		};
+		0B6373133D835CE1A12FC310 = {
+			buildPhases = (
+				"D7BA7D76DAB5DD13389D6332",
+				"A0A52A2ADF7A1E2A99738674",
+				"C29B8785722055ED95EF7B57",
+				"2A1043669E6E5A7426EA502A",
+				"3787F99312C85FF0073FD7BA");
+			buildSettings = {
+				CC = "/usr/bin/gcc";
+				CPLUSPLUS = "/usr/bin/g++";
+				LEXFLAGS = "";
+				YACCFLAGS = "-d";
+				OTHER_REZFLAGS = "";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "";
+				PREBINDING = NO;
+				INFOPLIST_FILE = "Info.plist";
+				BUILD_ROOT = "/Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader";
+				OTHER_LDFLAGS = (
+						"-headerpad_max_install_names",
+						"-mmacosx-version-min=10.6",
+						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
+				DYLIB_CURRENT_VERSION = "1.0.0";
+				DYLIB_COMPATIBILITY_VERSION = "1.0";
+				PRODUCT_NAME = "indieEngineShader";
+			};
+			conditionalBuildSettings = {
+			};
+			dependencies = (
+				);
+			productReference = "8AA220651E477882BEDEF958";
+			shouldUseHeadermap = 1;
+			buildConfigurationList = 17B3380A4D6A7D415E7F2E1E;
+			isa = PBXNativeTarget;
+			productType = "com.apple.product-type.application";
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist SYSTEM \"file://localhost/System/Library/DTDs/PropertyList.dtd\">
+<plist version=\"0.9\">
+<dict>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Created by Qt/QMake</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleExecutable</key>
+	<string>indieEngineShader</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.indieEngineShader</string>
+	<key>NOTE</key>
+	<string>This file was generated by Qt/QMake.</string>
+</dict>
+</plist>
+";
+			name = "indieEngineShader";
+			productName = "indieEngineShader";
+			startupPath = "<<ProjectDirectory>>";
+		};
+		4B72B24813252891014BCF61 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
+				GCC_OPTIMIZATION_LEVEL = "0";
+				PRODUCT_NAME = "indieEngineShader";
+				HEADER_SEARCH_PATHS = (
+					"../../../../Qt5.0.2/5.0.2/clang_64/include",
+					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtWidgets",
+					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework/Versions/5/Headers",
+					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtGui",
+					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework/Versions/5/Headers",
+					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtCore",
+					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework/Versions/5/Headers",
+					".",
+					"/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers",
+					"/System/Library/Frameworks/AGL.framework/Headers",
+					".",
+					"/usr/local/include",
+					"/System/Library/Frameworks/CarbonCore.framework/Headers",
+					"../../../../Qt5.0.2/5.0.2/clang_64/mkspecs/macx-xcode");
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+					"/System/Library/Frameworks/");
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
+				INFOPLIST_FILE = "Info.plist";
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-mmacosx-version-min=10.6",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-mmacosx-version-min=10.6",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_LDFLAGS = (
+						"-headerpad_max_install_names",
+						"-mmacosx-version-min=10.6",
+						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
+				ARCHS = "x86_64";
+			};
+			name = "Debug";
+		};
+		2C641C3335766025DD51B7BD = {
+			buildRules = (
+				);
+			buildSettings = {
+				COPY_PHASE_STRIP = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
+				GCC_OPTIMIZATION_LEVEL = "0";
+				PRODUCT_NAME = "indieEngineShader";
+			};
+			isa = "PBXBuildStyle";
+			name = "Debug";
+		};
+		BEC09A62E69C3553534FF35E = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
+				GCC_OPTIMIZATION_LEVEL = "0";
+				PRODUCT_NAME = "indieEngineShader";
+				PRODUCT_NAME = "indieEngineShader";
+			};
+			name = "Debug";
+		};
+		2C641C3335766025DD51B7BD = {
+			buildRules = (
+				);
+			buildSettings = {
+				COPY_PHASE_STRIP = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
+				GCC_OPTIMIZATION_LEVEL = "0";
+				PRODUCT_NAME = "indieEngineShader";
+			};
+			isa = "PBXBuildStyle";
+			name = "Debug";
+		};
+		D70590BEB531B51029F711BB = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "YES";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				PRODUCT_NAME = "indieEngineShader";
+				HEADER_SEARCH_PATHS = (
+					"../../../../Qt5.0.2/5.0.2/clang_64/include",
+					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtWidgets",
+					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework/Versions/5/Headers",
+					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtGui",
+					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework/Versions/5/Headers",
+					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtCore",
+					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework/Versions/5/Headers",
+					".",
+					"/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers",
+					"/System/Library/Frameworks/AGL.framework/Headers",
+					".",
+					"/usr/local/include",
+					"/System/Library/Frameworks/CarbonCore.framework/Headers",
+					"../../../../Qt5.0.2/5.0.2/clang_64/mkspecs/macx-xcode");
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+					"/System/Library/Frameworks/");
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
+				INFOPLIST_FILE = "Info.plist";
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-mmacosx-version-min=10.6",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-mmacosx-version-min=10.6",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_LDFLAGS = (
+						"-headerpad_max_install_names",
+						"-mmacosx-version-min=10.6",
+						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
+				ARCHS = "x86_64";
+			};
+			name = "Release";
+		};
+		26DE8D2AEA4B3714B41E931F = {
+			buildRules = (
+				);
+			buildSettings = {
+				COPY_PHASE_STRIP = "YES";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				PRODUCT_NAME = "indieEngineShader";
+			};
+			isa = "PBXBuildStyle";
+			name = "Release";
+		};
+		8C7174830A1E4DCBA0332EC1 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "YES";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				PRODUCT_NAME = "indieEngineShader";
+				PRODUCT_NAME = "indieEngineShader";
+			};
+			name = "Release";
+		};
+		26DE8D2AEA4B3714B41E931F = {
+			buildRules = (
+				);
+			buildSettings = {
+				COPY_PHASE_STRIP = "YES";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				PRODUCT_NAME = "indieEngineShader";
+			};
+			isa = "PBXBuildStyle";
+			name = "Release";
+		};
+		CC82A9286117DFED018F418F = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				"4B72B24813252891014BCF61",
+				"D70590BEB531B51029F711BB");
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationIsName = "Release";
+		};
+		17B3380A4D6A7D415E7F2E1E = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				"BEC09A62E69C3553534FF35E",
+				"8C7174830A1E4DCBA0332EC1");
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationIsName = "Release";
+		};
+		91B15E841AA80083484172DE = {
+			buildStyles = (
+				"2C641C3335766025DD51B7BD",
+				"2C641C3335766025DD51B7BD",
+				"26DE8D2AEA4B3714B41E931F",
+				"26DE8D2AEA4B3714B41E931F");
+			hasScannedForEncodings = 1;
+			isa = PBXProject;
+			mainGroup = "05596AB53D8D521C69802C27";
+			buildConfigurationList = "CC82A9286117DFED018F418F";
+			projectDirPath = "";
+			targets = (
+				"0B6373133D835CE1A12FC310");
+		};
+	};
+	rootObject = "91B15E841AA80083484172DE";
+}
