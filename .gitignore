@@ -21,6 +21,7 @@
 *.lai
 *.la
 # *.a
+# *.lib
 
 # Xcode crap
 *mode1v3
@@ -31,3 +32,7 @@
 
 # Junk files on Mac OS X
 *.DS_Store
+
+# Directories
+Debug/
+Release/
