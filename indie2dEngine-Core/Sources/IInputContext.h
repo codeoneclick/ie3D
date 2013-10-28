@@ -21,6 +21,14 @@ protected:
 
     std::set<std::shared_ptr<IInputTapRecognizerHandler> > m_handlers;
 
+#if defined(__WIN32__)
+
+	static IInputContext* m_sharedInstance;
+	POINT m_mousePosition;
+	bool m_isTapped;
+
+#endif
+
 public:
 
     IInputContext(void* _window);

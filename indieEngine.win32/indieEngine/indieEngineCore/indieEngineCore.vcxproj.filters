@@ -16,9 +16,6 @@
     <Filter Include="Source Files\indieEngine-Core">
       <UniqueIdentifier>{1c53c0fb-5231-41a6-9b96-8933ad3c47a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\indieEngine-Game">
-      <UniqueIdentifier>{453b7e45-edb0-4aa3-a8e4-3260c322c2f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\indieEngine-Core\Libraries">
       <UniqueIdentifier>{34e63407-84fc-43ff-85e4-2c432e0c939f}</UniqueIdentifier>
     </Filter>
@@ -108,9 +105,6 @@
     </Filter>
     <Filter Include="Source Files\indieEngine-Core\Libraries\gcdpp">
       <UniqueIdentifier>{0f10b1fb-d5fe-48d7-9332-c2799f153d1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\indieEngine-Game\Sources">
-      <UniqueIdentifier>{8a3a2709-7b77-4d48-af90-df8fe8b5aa8e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\indieEngine-Core\Source\GUI Managment\Controls">
       <UniqueIdentifier>{64794177-b7b6-4f8d-b1a6-b79b59d4b8f6}</UniqueIdentifier>
@@ -488,30 +482,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\IGraph.cpp">
       <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CCharacterController.cpp">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CGameViewController_win32.cpp">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHInGameScene.cpp">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHInGameTransition.cpp">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHWorkflow.cpp">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CNavigator.cpp">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\IMoveControllerHandler.cpp">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\Win32-Main.cpp">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1273,30 +1243,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\IGraph.h">
       <Filter>Source Files\indieEngine-Core\Source\SceneGraph Managment</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CCharacterController.h">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CGameViewController_win32.h">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHInGameScene.h">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHInGameTransition.h">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHWorkflow.h">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CNavigator.h">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\HKOTHEnums.h">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\IMoveControllerHandler.h">
-      <Filter>Source Files\indieEngine-Game\Sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

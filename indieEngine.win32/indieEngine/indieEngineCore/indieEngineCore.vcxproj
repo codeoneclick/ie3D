@@ -205,14 +205,6 @@
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingOperation.cpp" />
     <ClCompile Include="..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.cpp" />
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CCharacterController.cpp" />
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CGameViewController_win32.cpp" />
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHInGameScene.cpp" />
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHInGameTransition.cpp" />
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHWorkflow.cpp" />
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\CNavigator.cpp" />
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\IMoveControllerHandler.cpp" />
-    <ClCompile Include="..\..\..\indie2dEngine-Demo\Sources\Win32-Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\indie2dEngine-Core\Libraries\gcdpp\include\gcdppCommon.h" />
@@ -468,14 +460,6 @@
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingHandler.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateLoadingOperation.h" />
     <ClInclude Include="..\..\..\indie2dEngine-Core\Sources\ITemplateSerializer.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CCharacterController.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CGameViewController_win32.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHInGameScene.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHInGameTransition.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CKOTHWorkflow.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\CNavigator.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\HKOTHEnums.h" />
-    <ClInclude Include="..\..\..\indie2dEngine-Demo\Sources\IMoveControllerHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\indie2dEngine-Core\Libraries\glm\core\func_common.inl" />
