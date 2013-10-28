@@ -59,16 +59,15 @@ public:
 
 #if defined(__IOS__)
 
-void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
-void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
 
 #elif defined(__WIN32__)
 
 void Run(void);
-void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
-void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
 
 #endif
+
+void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
+void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
 
 ui32 Get_FramesPerSecond(void);
 ui32 Get_TrianglesPerSecond(void);
