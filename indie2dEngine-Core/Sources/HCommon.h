@@ -26,7 +26,7 @@
 #include <assert.h>
 #include <functional>
 
-#if defined(__APPLE__)
+#if defined(__IOS__) || defined(__OSX__)
 
 #undef  __USE_CURL__
 #undef  __USE_JSONCPP__
@@ -61,7 +61,7 @@
 #include <json/json.h>
 #endif
 
-#if defined(__APPLE__)
+#if defined(__IOS__)
 
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
@@ -70,7 +70,12 @@
 #elif defined(__WIN32__)
 
 #include <windows.h>
-#include <gl/gl.h>
+#include <EGL/egl.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+
+#elif defined(__OSX__)
+
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>

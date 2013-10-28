@@ -24,7 +24,8 @@ protected:
     std::shared_ptr<CFPSCounter> m_fpsCounter;
     static const ui32 k_MAX_FRAME_RATE;
 
-#ifndef __APPLE__
+#if defined(__WIN32__)
+    
 	static CGameLoopExecutor* m_instance;
 	static CGameLoopExecutor* Get_Instance(void);
 
@@ -36,6 +37,7 @@ protected:
 	friend void Inc_TrianglesCount(ui32 _value);
 
 	friend void Run(void);
+    
 #endif
     
 public:
@@ -55,12 +57,12 @@ public:
     };
 };
 
-#ifdef __APPLE__
+#if defined(__IOS__)
 
 void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
 void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
 
-#else
+#elif defined(__WIN32__)
 
 void Run(void);
 void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler);

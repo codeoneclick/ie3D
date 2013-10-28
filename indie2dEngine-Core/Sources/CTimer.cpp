@@ -8,14 +8,16 @@
 
 #include "CTimer.h"
 
-#ifdef __APPLE__
+#if defined(__IOS__) || defined(__OSX__)
+
 #include <mach/mach.h>
 #include <mach/mach_time.h>
+
 #endif
 
 ui64 CTimer::Get_TickCount(void)
 {
-#if defined(__APPLE__)
+#if defined(__IOS__) || defined(__OSX__)
     static mach_timebase_info_data_t timebaseInfo;
     uint64_t machTime = mach_absolute_time();
     if (timebaseInfo.denom == 0 )

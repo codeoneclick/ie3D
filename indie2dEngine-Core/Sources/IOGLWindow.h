@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 
-#if defined(__APPLE__)
+#if defined(__IOS__)
 
 #include <Foundation/Foundation.h>
 #include <UIKit/UIKit.h>
