@@ -21,6 +21,15 @@
 
 @end
 
+#elif defined(__OSX__)
+
+#import <Cocoa/Cocoa.h>
+#import <QuartzCore/CVDisplayLink.h>
+
+@interface IOGLWindow : NSOpenGLView
+
+@end
+
 #elif defined(__WIN32__)
 
 class IOGLWindow

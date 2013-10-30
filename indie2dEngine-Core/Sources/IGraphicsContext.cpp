@@ -12,6 +12,7 @@ class CGraphicsContext_iOS;
 
 extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_iOS(const void* _hwnd);
 extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_win32(const void* _hwnd);
+extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_osx(const void* _hwnd);
 
 std::vector<std::shared_ptr<IGraphicsContext> > IGraphicsContext::m_contexts;
 
@@ -58,6 +59,13 @@ std::shared_ptr<IGraphicsContext> IGraphicsContext::CreateGraphicsContext(const 
             assert(false);
             
 #endif
+        }
+            break;
+            
+        case E_PLATFORM_API_OSX:
+        {
+            context = CreateGraphicsContext_osx(_hwnd);
+            m_contexts.push_back(context);
         }
             break;
             

@@ -26,9 +26,6 @@ m_numTriangles(0)
     glDepthMask(GL_TRUE);
     glDisable(GL_CULL_FACE);
     glDisable(GL_BLEND);
-    
-    i32 value = 0;
-    glGetIntegerv(GL_MAX_VERTEX_UNIFORM_VECTORS, &value);
 }
 
 CRenderMgr::~CRenderMgr(void)

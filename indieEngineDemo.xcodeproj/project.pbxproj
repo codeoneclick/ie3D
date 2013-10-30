@@ -12,7 +12,7 @@
 		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
 		21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D0724F181DAEA00019D264 /* QuartzCore.framework */; };
 		21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D07251181DAEA60019D264 /* OpenGLES.framework */; };
-		21D07253181DAEAF0019D264 /* libindieEngineCore-Lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D07244181DAE800019D264 /* libindieEngineCore-Lib.a */; };
+		21D07253181DAEAF0019D264 /* libindieEngineCore-ios-Lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D07244181DAE800019D264 /* libindieEngineCore-ios-Lib.a */; };
 		21D0726C181DB1910019D264 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D07255181DB1910019D264 /* AppDelegate.mm */; };
 		21D0726D181DB1910019D264 /* CCharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07256181DB1910019D264 /* CCharacterController.cpp */; };
 		21D0726E181DB1910019D264 /* CGameViewController_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07258181DB1910019D264 /* CGameViewController_win32.cpp */; };
@@ -121,6 +121,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		21ADA9F5182130510082E8BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21D0723B181DAE7F0019D264 /* indieEngineCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21853415181EFC6200315CBB;
+			remoteInfo = "indieEngineCore-osx-Lib";
+		};
 		21D07241181DAE800019D264 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 21D0723B181DAE7F0019D264 /* indieEngineCore.xcodeproj */;
@@ -278,7 +285,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21D07253181DAEAF0019D264 /* libindieEngineCore-Lib.a in Frameworks */,
+				21D07253181DAEAF0019D264 /* libindieEngineCore-ios-Lib.a in Frameworks */,
 				21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */,
 				21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */,
 				21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */,
@@ -384,7 +391,8 @@
 			isa = PBXGroup;
 			children = (
 				21D07242181DAE800019D264 /* indieEngineCore-Testing.app */,
-				21D07244181DAE800019D264 /* libindieEngineCore-Lib.a */,
+				21D07244181DAE800019D264 /* libindieEngineCore-ios-Lib.a */,
+				21ADA9F6182130510082E8BA /* libindieEngineCore-osx-Lib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -587,6 +595,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		21ADA9F6182130510082E8BA /* libindieEngineCore-osx-Lib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libindieEngineCore-osx-Lib.a";
+			remoteRef = 21ADA9F5182130510082E8BA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		21D07242181DAE800019D264 /* indieEngineCore-Testing.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
@@ -594,10 +609,10 @@
 			remoteRef = 21D07241181DAE800019D264 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		21D07244181DAE800019D264 /* libindieEngineCore-Lib.a */ = {
+		21D07244181DAE800019D264 /* libindieEngineCore-ios-Lib.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libindieEngineCore-Lib.a";
+			path = "libindieEngineCore-ios-Lib.a";
 			remoteRef = 21D07243181DAE800019D264 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -820,6 +835,11 @@
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "indie2dEngine-Demo/Support/indieEngineDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					__IOS__,
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/indie2dEngine-Core/Sources\"",
@@ -850,6 +870,7 @@
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "indie2dEngine-Demo/Support/indieEngineDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = __IOS__;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/indie2dEngine-Core/Sources\"",

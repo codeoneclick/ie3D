@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210BE29A182190BB0010C95A /* libEGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA31181EFED8007FE7A8 /* libEGL.dylib */; };
+		210BE29C182190BB0010C95A /* libGLESv2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA33181EFED8007FE7A8 /* libGLESv2.dylib */; };
 		2111AA30181EFEB0007FE7A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */; };
-		2111AA34181EFED8007FE7A8 /* libEGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA31181EFED8007FE7A8 /* libEGL.dylib */; };
-		2111AA35181EFED8007FE7A8 /* libGLESv1_CM.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA32181EFED8007FE7A8 /* libGLESv1_CM.dylib */; };
-		2111AA36181EFED8007FE7A8 /* libGLESv2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA33181EFED8007FE7A8 /* libGLESv2.dylib */; };
 		2111AA37181EFF30007FE7A8 /* gcdppImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4DD180DCB10001C72D4 /* gcdppImpl.cpp */; };
 		2111AA38181EFF30007FE7A8 /* gcdppMainQueue_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4DE180DCB10001C72D4 /* gcdppMainQueue_t.cpp */; };
 		2111AA39181EFF30007FE7A8 /* gcdppQueue_i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4DF180DCB10001C72D4 /* gcdppQueue_i.cpp */; };
@@ -141,6 +140,15 @@
 		2111AAB7181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */; };
 		2111AAB8181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */; };
 		2111AAB9181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */; };
+		2111AAC6181FF826007FE7A8 /* CGraphicsContext_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAC5181FF826007FE7A8 /* CGraphicsContext_osx.cpp */; };
+		2173173F1821A7F600FF3D1E /* COGLWindow_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */; };
+		217317481821A8C500FF3D1E /* COGLWindow_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */; };
+		2173174A1821AE6700FF3D1E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217317491821AE6700FF3D1E /* OpenGL.framework */; };
+		21ADAA0618214AD00082E8BA /* CCommonOS_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ADAA0518214AD00082E8BA /* CCommonOS_osx.cpp */; };
+		21B2A3E118214E8900E1E262 /* CCommonOS_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ADAA0518214AD00082E8BA /* CCommonOS_osx.cpp */; };
+		21B2A3EA18214E9600E1E262 /* CGraphicsContext_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAC5181FF826007FE7A8 /* CGraphicsContext_osx.cpp */; };
+		21B2A3F2182185FB00E1E262 /* CInputContext_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */; };
+		21B2A3F31821863200E1E262 /* CInputContext_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */; };
 		21D0712B181DA5620019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		21D071B9181DA6C20019D264 /* gcdppImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4DD180DCB10001C72D4 /* gcdppImpl.cpp */; };
 		21D071BA181DA6C20019D264 /* gcdppMainQueue_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4DE180DCB10001C72D4 /* gcdppMainQueue_t.cpp */; };
@@ -441,6 +449,7 @@
 		2111AA32181EFED8007FE7A8 /* libGLESv1_CM.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv1_CM.dylib; path = "indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv1_CM.dylib"; sourceTree = "<group>"; };
 		2111AA33181EFED8007FE7A8 /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<group>"; };
 		2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGameLoopExecutor_osx.cpp; path = Sources/CGameLoopExecutor_osx.cpp; sourceTree = "<group>"; };
+		2111AAC5181FF826007FE7A8 /* CGraphicsContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_osx.cpp; path = Sources/CGraphicsContext_osx.cpp; sourceTree = "<group>"; };
 		211D30E117C2A61A0038B703 /* IResourceLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceLoadingHandler.cpp; path = Sources/IResourceLoadingHandler.cpp; sourceTree = "<group>"; };
 		211D30E217C2A61C0038B703 /* IResourceLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceLoadingHandler.h; path = Sources/IResourceLoadingHandler.h; sourceTree = "<group>"; };
 		21457FE1181C4BCC0071839E /* CGUIFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIFabricator.cpp; path = Sources/CGUIFabricator.cpp; sourceTree = "<group>"; };
@@ -453,6 +462,8 @@
 		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
 		21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IScreenSpaceTextureAccessor.cpp; path = Sources/IScreenSpaceTextureAccessor.cpp; sourceTree = "<group>"; };
 		21457FEE181C4C060071839E /* IScreenSpaceTextureAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IScreenSpaceTextureAccessor.h; path = Sources/IScreenSpaceTextureAccessor.h; sourceTree = "<group>"; };
+		2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_osx.cpp; path = Sources/COGLWindow_osx.cpp; sourceTree = "<group>"; };
+		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
 		217BB29E1815A48700DB8ECC /* CQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuad.h; path = Sources/CQuad.h; sourceTree = "<group>"; };
 		217BB2A01815A4B000DB8ECC /* CGUIButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIButton.cpp; path = Sources/CGUIButton.cpp; sourceTree = "<group>"; };
@@ -489,6 +500,8 @@
 		219DC4E0180DCB10001C72D4 /* gcdppQueue_t.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppQueue_t.cpp; sourceTree = "<group>"; };
 		219DC4E1180DCB10001C72D4 /* gcdppTask_i.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppTask_i.cpp; sourceTree = "<group>"; };
 		219DC4E2180DCB10001C72D4 /* gcdppTask_t.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppTask_t.cpp; sourceTree = "<group>"; };
+		21ADAA0518214AD00082E8BA /* CCommonOS_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CCommonOS_osx.cpp; path = Sources/CCommonOS_osx.cpp; sourceTree = "<group>"; };
+		21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInputContext_osx.cpp; path = Sources/CInputContext_osx.cpp; sourceTree = "<group>"; };
 		21D0712A181DA5620019D264 /* libindieEngineCore-ios-Lib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libindieEngineCore-ios-Lib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D07138181DA5620019D264 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelTemplateSerializer.cpp; path = Sources/CModelTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -962,9 +975,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2111AA34181EFED8007FE7A8 /* libEGL.dylib in Frameworks */,
-				2111AA35181EFED8007FE7A8 /* libGLESv1_CM.dylib in Frameworks */,
-				2111AA36181EFED8007FE7A8 /* libGLESv2.dylib in Frameworks */,
+				2173174A1821AE6700FF3D1E /* OpenGL.framework in Frameworks */,
+				210BE29A182190BB0010C95A /* libEGL.dylib in Frameworks */,
+				210BE29C182190BB0010C95A /* libGLESv2.dylib in Frameworks */,
 				2111AA30181EFEB0007FE7A8 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1253,6 +1266,7 @@
 		A420815D1733A9370004729E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				217317491821AE6700FF3D1E /* OpenGL.framework */,
 				2111AA31181EFED8007FE7A8 /* libEGL.dylib */,
 				2111AA32181EFED8007FE7A8 /* libGLESv1_CM.dylib */,
 				2111AA33181EFED8007FE7A8 /* libGLESv2.dylib */,
@@ -1338,6 +1352,7 @@
 				A4F204A317423C310063AB07 /* HEnums.h */,
 				A40D47C1174552A300CA59D0 /* CCommonOS.h */,
 				A40D47C0174552A300CA59D0 /* CCommonOS_ios.cpp */,
+				21ADAA0518214AD00082E8BA /* CCommonOS_osx.cpp */,
 				219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */,
 				A4AB15B1177C4E1B00FFC12E /* CFPSCounter.h */,
 				A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */,
@@ -1376,6 +1391,7 @@
 			children = (
 				A436489E179D767400C51AC4 /* IInputContext.h */,
 				A436489C179D767400C51AC4 /* CInputContext_ios.cpp */,
+				21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */,
 				A436489D179D767400C51AC4 /* CInputContext_win32.cpp */,
 				A43648A0179D767400C51AC4 /* IInputTapRecognizerHandler.h */,
 				A436489F179D767400C51AC4 /* IInputTapRecognizerHandler.cpp */,
@@ -1552,9 +1568,11 @@
 				A4F204A517423C4D0063AB07 /* IGraphicsContext.h */,
 				A4F204A417423C4D0063AB07 /* IGraphicsContext.cpp */,
 				A46A316F174635210044643E /* CGraphicsContext_ios.cpp */,
+				2111AAC5181FF826007FE7A8 /* CGraphicsContext_osx.cpp */,
 				219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */,
 				219DC4C9180DC0F9001C72D4 /* IOGLWindow.h */,
 				A46A317217463D180044643E /* COGLWindow_ios.cpp */,
+				2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */,
 				219DC4CC180DC465001C72D4 /* COGLWindow_win32.cpp */,
 				A46A317C1746408B0044643E /* CRenderMgr.h */,
 				A46A317B1746408B0044643E /* CRenderMgr.cpp */,
@@ -2174,6 +2192,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				217317481821A8C500FF3D1E /* COGLWindow_osx.cpp in Sources */,
+				21B2A3F31821863200E1E262 /* CInputContext_osx.cpp in Sources */,
+				21B2A3EA18214E9600E1E262 /* CGraphicsContext_osx.cpp in Sources */,
+				21B2A3E118214E8900E1E262 /* CCommonOS_osx.cpp in Sources */,
 				2111AA37181EFF30007FE7A8 /* gcdppImpl.cpp in Sources */,
 				2111AA38181EFF30007FE7A8 /* gcdppMainQueue_t.cpp in Sources */,
 				2111AA39181EFF30007FE7A8 /* gcdppQueue_i.cpp in Sources */,
@@ -2466,6 +2488,7 @@
 				A46A32F7174E1D100044643E /* IGraphicsContext.cpp in Sources */,
 				A46A32F8174E1D100044643E /* CGraphicsContext_ios.cpp in Sources */,
 				A46A32F9174E1D100044643E /* COGLWindow_ios.cpp in Sources */,
+				21ADAA0618214AD00082E8BA /* CCommonOS_osx.cpp in Sources */,
 				A46A32FA174E1D100044643E /* CRenderMgr.cpp in Sources */,
 				A46A32FB174E1D100044643E /* IRenderHandler.cpp in Sources */,
 				A46A32FC174E1D100044643E /* CMaterial.cpp in Sources */,
@@ -2479,6 +2502,8 @@
 				A46A3304174E1D100044643E /* CIndexBuffer.cpp in Sources */,
 				A46A3305174E1D100044643E /* CVertexBuffer.cpp in Sources */,
 				A46A3307174E1D100044643E /* IResourceCommiter.cpp in Sources */,
+				2111AAC6181FF826007FE7A8 /* CGraphicsContext_osx.cpp in Sources */,
+				21B2A3F2182185FB00E1E262 /* CInputContext_osx.cpp in Sources */,
 				A46A3308174E1D100044643E /* CShaderCommiter_GLSL.cpp in Sources */,
 				A46A3309174E1D100044643E /* CTextureCommiter_PVR.cpp in Sources */,
 				A46A330A174E1D100044643E /* IResourceSerializer.cpp in Sources */,
@@ -2494,6 +2519,7 @@
 				A46A32EB174E194D0044643E /* AppDelegate.mm in Sources */,
 				A46A32F0174E1A3F0044643E /* CTestingViewController.mm in Sources */,
 				A46A3314174E2E370044643E /* CShaderLoader_Testing.cpp in Sources */,
+				2173173F1821A7F600FF3D1E /* COGLWindow_osx.cpp in Sources */,
 				A46A3316174E2E4F0044643E /* CTextureLoader_Testing.cpp in Sources */,
 				A40A6A581753A552005B475E /* CMeshLoader_Testing.cpp in Sources */,
 				A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */,
@@ -2514,6 +2540,8 @@
 		21853435181EFC6200315CBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
@@ -2521,6 +2549,7 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -2541,6 +2570,7 @@
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/gcdpp/include\"",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/codeoneclick/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib",
@@ -2552,12 +2582,15 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				TARGETED_DEVICE_FAMILY = "";
 			};
 			name = Debug;
 		};
 		21853436181EFC6200315CBB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
@@ -2567,6 +2600,7 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -2584,6 +2618,7 @@
 					"\"$(SRCROOT)/indie2dEngine-Core/Libraries/gcdpp/include\"",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/codeoneclick/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib",
@@ -2595,6 +2630,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				TARGETED_DEVICE_FAMILY = "";
 			};
 			name = Release;
 		};

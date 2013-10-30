@@ -5,417 +5,464 @@
 	};
 	objectVersion = 46;
 	objects = {
-		D7BA7D76DAB5DD13389D6332 = {
+
+/* Begin PBXBuildFile section */
+		0C6D4628EE0B0D1479A20551 /* AGL.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = C6766F86E49E9C8701C8E637 /* AGL.framework */; };
+		210BE29318218FD20010C95A /* libindieEngineCore-osx-Lib.a in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 210BE29018218FC20010C95A /* libindieEngineCore-osx-Lib.a */; };
+		210BE2971821906B0010C95A /* libEGL.dylib in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 210BE2941821906B0010C95A /* libEGL.dylib */; };
+		210BE2991821906B0010C95A /* libGLESv2.dylib in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 210BE2961821906B0010C95A /* libGLESv2.dylib */; };
+		210BE2A6182191D60010C95A /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 210BE2941821906B0010C95A /* libEGL.dylib */; };
+		210BE2A8182191D60010C95A /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 210BE2961821906B0010C95A /* libGLESv2.dylib */; };
+		21ADA9DB18211A640082E8BA /* Cocoa.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 21ADA9DA18211A640082E8BA /* Cocoa.framework */; };
+		21ADA9EA18212F010082E8BA /* main.transition.xml in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21ADA9E618212F010082E8BA /* main.transition.xml */; };
+		21ADA9EB18212F010082E8BA /* material.output.xml in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21ADA9E718212F010082E8BA /* material.output.xml */; };
+		21ADA9EC18212F010082E8BA /* output.space.operation.xml in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21ADA9E818212F010082E8BA /* output.space.operation.xml */; };
+		21ADA9ED18212F010082E8BA /* world.space.operation.xml in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21ADA9E918212F010082E8BA /* world.space.operation.xml */; };
+		21ADA9F018212F460082E8BA /* CIESAWorkflow.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 21ADA9EE18212F460082E8BA /* CIESAWorkflow.cpp */; };
+		21ADA9F118212F540082E8BA /* CommonOutput.frag in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21ADA9E218212EF60082E8BA /* CommonOutput.frag */; };
+		21ADA9F218212F540082E8BA /* CommonOutput.vert in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21ADA9E318212EF60082E8BA /* CommonOutput.vert */; };
+		21ADA9F9182131970082E8BA /* СIESAMainTransition.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 21ADA9F7182131970082E8BA /* СIESAMainTransition.cpp */; };
+		255E691CCCEB8EC9D744BFD0 /* QtCore.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 820E7897D339E43EC7B964D4 /* QtCore.framework */; };
+		2B093CA6F071B023A473CED0 /* main.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 118FCBAABA162BA17933C789 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		3E67E7C99E45BBEC93BE00E8 /* indieEngineShader.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 21DEF9A46CB2FA5B69809D73 /* indieEngineShader.cpp */; settings = {ATTRIBUTES = (); }; };
+		87D3E9B28A8BB3F040AAA983 /* moc_indieEngineShader.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 2370FDDA306E75D3EA8B50A2 /* moc_indieEngineShader.cpp */; settings = {ATTRIBUTES = (); }; };
+		A7D06955B2B6F13D5163B992 /* QtWidgets.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = CA490857EDB3B5096F73A895 /* QtWidgets.framework */; };
+		BCEF71E1EDFB18DA77DC750B /* OpenGL.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = DA18A6831232F53228631AD1 /* OpenGL.framework */; };
+		F09BB15AAC632BEC4A9F1379 /* QtGui.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 20871552E384EE14A56B6C16 /* QtGui.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		210BE28B18218FC20010C95A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210BE28218218FB20010C95A /* indieEngineCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A46A32BD174E16AC0044643E;
+			remoteInfo = "indieEngineCore-Testing";
+		};
+		210BE28D18218FC20010C95A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210BE28218218FB20010C95A /* indieEngineCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21D0712A181DA5620019D264;
+			remoteInfo = "indieEngineCore-ios-Lib";
+		};
+		210BE28F18218FC20010C95A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210BE28218218FB20010C95A /* indieEngineCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21853415181EFC6200315CBB;
+			remoteInfo = "indieEngineCore-osx-Lib";
+		};
+		210BE29118218FC90010C95A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210BE28218218FB20010C95A /* indieEngineCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 21853414181EFC6200315CBB;
+			remoteInfo = "indieEngineCore-osx-Lib";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		210BE2A5182191C20010C95A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
 			files = (
-				);
-			generatedFileNames = (
-				);
-			isa = PBXShellScriptBuildPhase;
-			name = "Qt Qmake";
-			neededFileNames = (
-				);
-			shellPath = "/bin/sh";
-			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_makeqmake.mak";
+				210BE2A6182191D60010C95A /* libEGL.dylib in CopyFiles */,
+				210BE2A8182191D60010C95A /* libGLESv2.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		118FCBAABA162BA17933C789 = {
-			isa = PBXFileReference;
-			name = "main.cpp";
-			path = "main.cpp";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		2B093CA6F071B023A473CED0 = {
-			fileRef = "118FCBAABA162BA17933C789";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		21DEF9A46CB2FA5B69809D73 = {
-			isa = PBXFileReference;
-			name = "indieEngineShader.cpp";
-			path = "indieEngineShader.cpp";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		3E67E7C99E45BBEC93BE00E8 = {
-			fileRef = "21DEF9A46CB2FA5B69809D73";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		2370FDDA306E75D3EA8B50A2 = {
-			isa = PBXFileReference;
-			name = "moc_indieEngineShader.cpp";
-			path = "moc_indieEngineShader.cpp";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		87D3E9B28A8BB3F040AAA983 = {
-			fileRef = "2370FDDA306E75D3EA8B50A2";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		CEF227E9DF025C332BC3D455 = {
-			isa = PBXFileReference;
-			name = "ui_indieEngineShader.h";
-			path = "ui_indieEngineShader.h";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-		};
-		A0898E6FFFB0D676B4B90A9F = {
-			isa = PBXFileReference;
-			name = "indieEngineShader.h";
-			path = "indieEngineShader.h";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-		};
-		F4918A0098C115899538B265 = {
-			isa = PBXFileReference;
-			name = "indieEngineShader.pro";
-			path = "indieEngineShader.pro";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-		};
-		A0898E6FFFB0D676B4B90A9F = {
-			isa = PBXFileReference;
-			name = "indieEngineShader.h";
-			path = "indieEngineShader.h";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-		};
-		54F09201E28898AB2BACC861 = {
-			fileRef = "A0898E6FFFB0D676B4B90A9F";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		341FCD610917A406F9EB3B23 = {
-			isa = PBXFileReference;
-			name = "indieEngineShader.ui";
-			path = "indieEngineShader.ui";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-		};
-		ABEB9F93647F6D42AB57270C = {
-			fileRef = "341FCD610917A406F9EB3B23";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		883D7615C4D2DE3FA1218F12 = {
-			isa = PBXGroup;
-			children = (
-				"A0898E6FFFB0D676B4B90A9F");
-			name = "Headers";
-			refType = 4;
-			sourceTree = "<Group>";
-		};
-		FB61758D0F0FDA4BA867C3D5 = {
-			isa = PBXGroup;
-			children = (
-				"118FCBAABA162BA17933C789",
-				"21DEF9A46CB2FA5B69809D73");
-			name = "Sources";
-			refType = 4;
-			sourceTree = "<Group>";
-		};
-		DD3C674B0E9509B84DF40A16 = {
-			isa = PBXGroup;
-			children = (
-				"A0898E6FFFB0D676B4B90A9F");
-			name = "Sources [MOC]";
-			refType = 4;
-			sourceTree = "<Group>";
-		};
-		EEC299C65D5017EB9DD513B0 = {
-			isa = PBXGroup;
-			children = (
-				"341FCD610917A406F9EB3B23");
-			name = "Sources [UIC]";
-			refType = 4;
-			sourceTree = "<Group>";
-		};
-		7CABE3C80E79AD2B307756D2 = {
-			isa = PBXGroup;
-			children = (
-				"F4918A0098C115899538B265");
-			name = "Sources [qmake]";
-			refType = 4;
-			sourceTree = "<Group>";
-		};
-		46E892BBB6BB6952967E0561 = {
-			isa = PBXGroup;
-			children = (
-				"2370FDDA306E75D3EA8B50A2",
-				"CEF227E9DF025C332BC3D455");
-			name = "Temporary Sources";
-			refType = 4;
-			sourceTree = "<Group>";
-		};
-		A0A52A2ADF7A1E2A99738674 = {
-			buildActionMask = 2147483647;
-			files = (
-				);
-			generatedFileNames = (
-				"2B093CA6F071B023A473CED0",
-				"3E67E7C99E45BBEC93BE00E8",
-				"87D3E9B28A8BB3F040AAA983");
-			isa = PBXShellScriptBuildPhase;
-			name = "Qt Preprocessors";
-			neededFileNames = (
-				"2B093CA6F071B023A473CED0",
-				"3E67E7C99E45BBEC93BE00E8",
-				"87D3E9B28A8BB3F040AAA983");
-			shellPath = "/bin/sh";
-			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_preprocess.mak";
-		};
-		C29B8785722055ED95EF7B57 = {
-			buildActionMask = 2147483647;
-			files = (
-				"2B093CA6F071B023A473CED0",
-				"3E67E7C99E45BBEC93BE00E8",
-				"87D3E9B28A8BB3F040AAA983");
-			isa = PBXSourcesBuildPhase;
-			name = "Build Sources";
-		};
-		CA490857EDB3B5096F73A895 = {
-			isa = PBXFileReference;
-			name = "QtWidgets.framework";
-			path = "../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-			lastKnownFileType = "wrapper.framework";
-		};
-		A7D06955B2B6F13D5163B992 = {
-			fileRef = "CA490857EDB3B5096F73A895";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		20871552E384EE14A56B6C16 = {
-			isa = PBXFileReference;
-			name = "QtGui.framework";
-			path = "../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-			lastKnownFileType = "wrapper.framework";
-		};
-		F09BB15AAC632BEC4A9F1379 = {
-			fileRef = "20871552E384EE14A56B6C16";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		820E7897D339E43EC7B964D4 = {
-			isa = PBXFileReference;
-			name = "QtCore.framework";
-			path = "../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework";
-			refType = 4;
-			sourceTree = "SOURCE_ROOT";
-			lastKnownFileType = "wrapper.framework";
-		};
-		255E691CCCEB8EC9D744BFD0 = {
-			fileRef = "820E7897D339E43EC7B964D4";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		DA18A6831232F53228631AD1 = {
-			isa = PBXFileReference;
-			name = "OpenGL.framework";
-			path = "/System/Library/Frameworks/OpenGL.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		BCEF71E1EDFB18DA77DC750B = {
-			fileRef = "DA18A6831232F53228631AD1";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		C6766F86E49E9C8701C8E637 = {
-			isa = PBXFileReference;
-			name = "AGL.framework";
-			path = "/System/Library/Frameworks/AGL.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		0C6D4628EE0B0D1479A20551 = {
-			fileRef = "C6766F86E49E9C8701C8E637";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		ED1E82605DD74B483AF3C982 = {
-			children = (
-				"CA490857EDB3B5096F73A895",
-				"20871552E384EE14A56B6C16",
-				"820E7897D339E43EC7B964D4",
-				"DA18A6831232F53228631AD1",
-				"C6766F86E49E9C8701C8E637");
-			isa = PBXGroup;
-			name = "External Frameworks and Libraries";
-			path = "";
-			refType = 4;
-			sourceTree = "<Group>";
-		};
-		2A1043669E6E5A7426EA502A = {
-			buildActionMask = 2147483647;
-			files = (
-				"A7D06955B2B6F13D5163B992",
-				"F09BB15AAC632BEC4A9F1379",
-				"255E691CCCEB8EC9D744BFD0",
-				"BCEF71E1EDFB18DA77DC750B",
-				"0C6D4628EE0B0D1479A20551");
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		118FCBAABA162BA17933C789 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		20871552E384EE14A56B6C16 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = ../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework; sourceTree = SOURCE_ROOT; };
+		210BE28218218FB20010C95A /* indieEngineCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = indieEngineCore.xcodeproj; path = ../indieEngineCore.xcodeproj; sourceTree = "<group>"; };
+		210BE2941821906B0010C95A /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = "/Users/codeoneclick/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib/libEGL.dylib"; sourceTree = "<absolute>"; };
+		210BE2951821906B0010C95A /* libGLESv1_CM.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv1_CM.dylib; path = "/Users/codeoneclick/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv1_CM.dylib"; sourceTree = "<absolute>"; };
+		210BE2961821906B0010C95A /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "/Users/codeoneclick/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<absolute>"; };
+		2111AAC7182019B9007FE7A8 /* indieEngineShader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = indieEngineShader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		21ADA9DA18211A640082E8BA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		21ADA9E218212EF60082E8BA /* CommonOutput.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonOutput.frag; path = Bundle/CommonOutput.frag; sourceTree = SOURCE_ROOT; };
+		21ADA9E318212EF60082E8BA /* CommonOutput.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonOutput.vert; path = Bundle/CommonOutput.vert; sourceTree = SOURCE_ROOT; };
+		21ADA9E618212F010082E8BA /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = main.transition.xml; path = Bundle/main.transition.xml; sourceTree = SOURCE_ROOT; };
+		21ADA9E718212F010082E8BA /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.output.xml; path = Bundle/material.output.xml; sourceTree = SOURCE_ROOT; };
+		21ADA9E818212F010082E8BA /* output.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = output.space.operation.xml; path = Bundle/output.space.operation.xml; sourceTree = SOURCE_ROOT; };
+		21ADA9E918212F010082E8BA /* world.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = world.space.operation.xml; path = Bundle/world.space.operation.xml; sourceTree = SOURCE_ROOT; };
+		21ADA9EE18212F460082E8BA /* CIESAWorkflow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIESAWorkflow.cpp; path = Sources/CIESAWorkflow.cpp; sourceTree = SOURCE_ROOT; };
+		21ADA9EF18212F460082E8BA /* CIESAWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIESAWorkflow.h; path = Sources/CIESAWorkflow.h; sourceTree = SOURCE_ROOT; };
+		21ADA9F7182131970082E8BA /* СIESAMainTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "СIESAMainTransition.cpp"; path = "Sources/СIESAMainTransition.cpp"; sourceTree = SOURCE_ROOT; };
+		21ADA9F8182131970082E8BA /* СIESAMainTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "СIESAMainTransition.h"; path = "Sources/СIESAMainTransition.h"; sourceTree = SOURCE_ROOT; };
+		21DEF9A46CB2FA5B69809D73 /* indieEngineShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = indieEngineShader.cpp; sourceTree = SOURCE_ROOT; };
+		2370FDDA306E75D3EA8B50A2 /* moc_indieEngineShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = moc_indieEngineShader.cpp; sourceTree = SOURCE_ROOT; };
+		341FCD610917A406F9EB3B23 /* indieEngineShader.ui */ = {isa = PBXFileReference; lastKnownFileType = text; path = indieEngineShader.ui; sourceTree = SOURCE_ROOT; };
+		820E7897D339E43EC7B964D4 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = ../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework; sourceTree = SOURCE_ROOT; };
+		A0898E6FFFB0D676B4B90A9F /* indieEngineShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = indieEngineShader.h; sourceTree = SOURCE_ROOT; };
+		C6766F86E49E9C8701C8E637 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		CA490857EDB3B5096F73A895 /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = ../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework; sourceTree = SOURCE_ROOT; };
+		CEF227E9DF025C332BC3D455 /* ui_indieEngineShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ui_indieEngineShader.h; sourceTree = SOURCE_ROOT; };
+		DA18A6831232F53228631AD1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		F4918A0098C115899538B265 /* indieEngineShader.pro */ = {isa = PBXFileReference; lastKnownFileType = text; path = indieEngineShader.pro; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A1043669E6E5A7426EA502A /* Frameworks & Libraries */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				210BE2971821906B0010C95A /* libEGL.dylib in Frameworks & Libraries */,
+				210BE2991821906B0010C95A /* libGLESv2.dylib in Frameworks & Libraries */,
+				210BE29318218FD20010C95A /* libindieEngineCore-osx-Lib.a in Frameworks & Libraries */,
+				21ADA9DB18211A640082E8BA /* Cocoa.framework in Frameworks & Libraries */,
+				A7D06955B2B6F13D5163B992 /* QtWidgets.framework in Frameworks & Libraries */,
+				F09BB15AAC632BEC4A9F1379 /* QtGui.framework in Frameworks & Libraries */,
+				255E691CCCEB8EC9D744BFD0 /* QtCore.framework in Frameworks & Libraries */,
+				BCEF71E1EDFB18DA77DC750B /* OpenGL.framework in Frameworks & Libraries */,
+				0C6D4628EE0B0D1479A20551 /* AGL.framework in Frameworks & Libraries */,
+			);
 			name = "Frameworks & Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3787F99312C85FF0073FD7BA = {
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05596AB53D8D521C69802C27 /* indieEngineShader */ = {
+			isa = PBXGroup;
+			children = (
+				2111AAC9182019C3007FE7A8 /* indieEngine-Core */,
+				21ADA9DD18212EA00082E8BA /* indieEngine-ShaderAPP */,
+				FB61758D0F0FDA4BA867C3D5 /* Sources */,
+				46E892BBB6BB6952967E0561 /* Temporary Sources */,
+				883D7615C4D2DE3FA1218F12 /* Headers */,
+				7CABE3C80E79AD2B307756D2 /* Sources [qmake] */,
+				DD3C674B0E9509B84DF40A16 /* Sources [MOC] */,
+				EEC299C65D5017EB9DD513B0 /* Sources [UIC] */,
+				ED1E82605DD74B483AF3C982 /* External Frameworks and Libraries */,
+				2111AAC8182019B9007FE7A8 /* Products */,
+			);
+			name = indieEngineShader;
+			sourceTree = "<Group>";
+		};
+		210BE28618218FC20010C95A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				210BE28C18218FC20010C95A /* indieEngineCore-Testing.app */,
+				210BE28E18218FC20010C95A /* libindieEngineCore-ios-Lib.a */,
+				210BE29018218FC20010C95A /* libindieEngineCore-osx-Lib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2111AAC8182019B9007FE7A8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2111AAC7182019B9007FE7A8 /* indieEngineShader.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2111AAC9182019C3007FE7A8 /* indieEngine-Core */ = {
+			isa = PBXGroup;
+			children = (
+				210BE28218218FB20010C95A /* indieEngineCore.xcodeproj */,
+			);
+			name = "indieEngine-Core";
+			sourceTree = "<group>";
+		};
+		21ADA9DD18212EA00082E8BA /* indieEngine-ShaderAPP */ = {
+			isa = PBXGroup;
+			children = (
+				21ADA9DF18212ED10082E8BA /* Bundle */,
+				21ADA9DE18212EC20082E8BA /* Sources */,
+			);
+			name = "indieEngine-ShaderAPP";
+			sourceTree = "<group>";
+		};
+		21ADA9DE18212EC20082E8BA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				21ADA9EF18212F460082E8BA /* CIESAWorkflow.h */,
+				21ADA9EE18212F460082E8BA /* CIESAWorkflow.cpp */,
+				21ADA9F8182131970082E8BA /* СIESAMainTransition.h */,
+				21ADA9F7182131970082E8BA /* СIESAMainTransition.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		21ADA9DF18212ED10082E8BA /* Bundle */ = {
+			isa = PBXGroup;
+			children = (
+				21ADA9E118212EDE0082E8BA /* Templates */,
+				21ADA9E018212ED80082E8BA /* Shaders */,
+			);
+			name = Bundle;
+			sourceTree = "<group>";
+		};
+		21ADA9E018212ED80082E8BA /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				21ADA9E218212EF60082E8BA /* CommonOutput.frag */,
+				21ADA9E318212EF60082E8BA /* CommonOutput.vert */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		21ADA9E118212EDE0082E8BA /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				21ADA9E618212F010082E8BA /* main.transition.xml */,
+				21ADA9E718212F010082E8BA /* material.output.xml */,
+				21ADA9E818212F010082E8BA /* output.space.operation.xml */,
+				21ADA9E918212F010082E8BA /* world.space.operation.xml */,
+			);
+			name = Templates;
+			sourceTree = "<group>";
+		};
+		46E892BBB6BB6952967E0561 /* Temporary Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2370FDDA306E75D3EA8B50A2 /* moc_indieEngineShader.cpp */,
+				CEF227E9DF025C332BC3D455 /* ui_indieEngineShader.h */,
+			);
+			name = "Temporary Sources";
+			sourceTree = "<Group>";
+		};
+		7CABE3C80E79AD2B307756D2 /* Sources [qmake] */ = {
+			isa = PBXGroup;
+			children = (
+				F4918A0098C115899538B265 /* indieEngineShader.pro */,
+			);
+			name = "Sources [qmake]";
+			sourceTree = "<Group>";
+		};
+		883D7615C4D2DE3FA1218F12 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				A0898E6FFFB0D676B4B90A9F /* indieEngineShader.h */,
+			);
+			name = Headers;
+			sourceTree = "<Group>";
+		};
+		DD3C674B0E9509B84DF40A16 /* Sources [MOC] */ = {
+			isa = PBXGroup;
+			children = (
+				A0898E6FFFB0D676B4B90A9F /* indieEngineShader.h */,
+			);
+			name = "Sources [MOC]";
+			sourceTree = "<Group>";
+		};
+		ED1E82605DD74B483AF3C982 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				210BE2941821906B0010C95A /* libEGL.dylib */,
+				210BE2951821906B0010C95A /* libGLESv1_CM.dylib */,
+				210BE2961821906B0010C95A /* libGLESv2.dylib */,
+				21ADA9DA18211A640082E8BA /* Cocoa.framework */,
+				CA490857EDB3B5096F73A895 /* QtWidgets.framework */,
+				20871552E384EE14A56B6C16 /* QtGui.framework */,
+				820E7897D339E43EC7B964D4 /* QtCore.framework */,
+				DA18A6831232F53228631AD1 /* OpenGL.framework */,
+				C6766F86E49E9C8701C8E637 /* AGL.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<Group>";
+		};
+		EEC299C65D5017EB9DD513B0 /* Sources [UIC] */ = {
+			isa = PBXGroup;
+			children = (
+				341FCD610917A406F9EB3B23 /* indieEngineShader.ui */,
+			);
+			name = "Sources [UIC]";
+			sourceTree = "<Group>";
+		};
+		FB61758D0F0FDA4BA867C3D5 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				118FCBAABA162BA17933C789 /* main.cpp */,
+				21DEF9A46CB2FA5B69809D73 /* indieEngineShader.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<Group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0B6373133D835CE1A12FC310 /* indieEngineShader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17B3380A4D6A7D415E7F2E1E /* Build configuration list for PBXNativeTarget "indieEngineShader" */;
+			buildPhases = (
+				D7BA7D76DAB5DD13389D6332 /* Qt Qmake */,
+				A0A52A2ADF7A1E2A99738674 /* Qt Preprocessors */,
+				C29B8785722055ED95EF7B57 /* Build Sources */,
+				2A1043669E6E5A7426EA502A /* Frameworks & Libraries */,
+				3787F99312C85FF0073FD7BA /* Bundle Resources */,
+				210BE2A5182191C20010C95A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				210BE29218218FC90010C95A /* PBXTargetDependency */,
+			);
+			name = indieEngineShader;
+			productName = indieEngineShader;
+			productReference = 2111AAC7182019B9007FE7A8 /* indieEngineShader.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		91B15E841AA80083484172DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = CC82A9286117DFED018F418F /* Build configuration list for PBXProject "indieEngineShader" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 05596AB53D8D521C69802C27 /* indieEngineShader */;
+			productRefGroup = 2111AAC8182019B9007FE7A8 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 210BE28618218FC20010C95A /* Products */;
+					ProjectRef = 210BE28218218FB20010C95A /* indieEngineCore.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				0B6373133D835CE1A12FC310 /* indieEngineShader */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		210BE28C18218FC20010C95A /* indieEngineCore-Testing.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "indieEngineCore-Testing.app";
+			remoteRef = 210BE28B18218FC20010C95A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		210BE28E18218FC20010C95A /* libindieEngineCore-ios-Lib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libindieEngineCore-ios-Lib.a";
+			remoteRef = 210BE28D18218FC20010C95A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		210BE29018218FC20010C95A /* libindieEngineCore-osx-Lib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libindieEngineCore-osx-Lib.a";
+			remoteRef = 210BE28F18218FC20010C95A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3787F99312C85FF0073FD7BA /* Bundle Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21ADA9F118212F540082E8BA /* CommonOutput.frag in Bundle Resources */,
+				21ADA9F218212F540082E8BA /* CommonOutput.vert in Bundle Resources */,
+				21ADA9EC18212F010082E8BA /* output.space.operation.xml in Bundle Resources */,
+				21ADA9ED18212F010082E8BA /* world.space.operation.xml in Bundle Resources */,
+				21ADA9EB18212F010082E8BA /* material.output.xml in Bundle Resources */,
+				21ADA9EA18212F010082E8BA /* main.transition.xml in Bundle Resources */,
+			);
+			name = "Bundle Resources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A0A52A2ADF7A1E2A99738674 /* Qt Preprocessors */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			isa = PBXResourcesBuildPhase;
-			name = "Bundle Resources";
+			name = "Qt Preprocessors";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_preprocess.mak";
 		};
-		05596AB53D8D521C69802C27 = {
-			children = (
-				"FB61758D0F0FDA4BA867C3D5",
-				"46E892BBB6BB6952967E0561",
-				"883D7615C4D2DE3FA1218F12",
-				"7CABE3C80E79AD2B307756D2",
-				"DD3C674B0E9509B84DF40A16",
-				"EEC299C65D5017EB9DD513B0",
-				"ED1E82605DD74B483AF3C982");
-			isa = PBXGroup;
-			name = "indieEngineShader";
-			path = "";
-			refType = 4;
-			sourceTree = "<Group>";
+		D7BA7D76DAB5DD13389D6332 /* Qt Qmake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Qmake";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_makeqmake.mak";
 		};
-		8AA220651E477882BEDEF958 = {
-			isa = PBXFileReference;
-			explicitFileType = "wrapper.application";
-			path = "indieEngineShader.app";
-			refType = 3;
-			sourceTree = BUILT_PRODUCTS_DIR;
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C29B8785722055ED95EF7B57 /* Build Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21ADA9F018212F460082E8BA /* CIESAWorkflow.cpp in Build Sources */,
+				2B093CA6F071B023A473CED0 /* main.cpp in Build Sources */,
+				3E67E7C99E45BBEC93BE00E8 /* indieEngineShader.cpp in Build Sources */,
+				21ADA9F9182131970082E8BA /* СIESAMainTransition.cpp in Build Sources */,
+				87D3E9B28A8BB3F040AAA983 /* moc_indieEngineShader.cpp in Build Sources */,
+			);
+			name = "Build Sources";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		068F80C7519D0528FB08E821 = {
-			children = (
-				"8AA220651E477882BEDEF958");
-			isa = PBXGroup;
-			name = "Products";
-			refType = 4;
-			sourceTree = "<Group>";
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		210BE29218218FC90010C95A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "indieEngineCore-osx-Lib";
+			targetProxy = 210BE29118218FC90010C95A /* PBXContainerItemProxy */;
 		};
-		0B6373133D835CE1A12FC310 = {
-			buildPhases = (
-				"D7BA7D76DAB5DD13389D6332",
-				"A0A52A2ADF7A1E2A99738674",
-				"C29B8785722055ED95EF7B57",
-				"2A1043669E6E5A7426EA502A",
-				"3787F99312C85FF0073FD7BA");
-			buildSettings = {
-				CC = "/usr/bin/gcc";
-				CPLUSPLUS = "/usr/bin/g++";
-				LEXFLAGS = "";
-				YACCFLAGS = "-d";
-				OTHER_REZFLAGS = "";
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "";
-				PREBINDING = NO;
-				INFOPLIST_FILE = "Info.plist";
-				BUILD_ROOT = "/Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader";
-				OTHER_LDFLAGS = (
-						"-headerpad_max_install_names",
-						"-mmacosx-version-min=10.6",
-						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
-						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
-				DYLIB_CURRENT_VERSION = "1.0.0";
-				DYLIB_COMPATIBILITY_VERSION = "1.0";
-				PRODUCT_NAME = "indieEngineShader";
-			};
-			conditionalBuildSettings = {
-			};
-			dependencies = (
-				);
-			productReference = "8AA220651E477882BEDEF958";
-			shouldUseHeadermap = 1;
-			buildConfigurationList = 17B3380A4D6A7D415E7F2E1E;
-			isa = PBXNativeTarget;
-			productType = "com.apple.product-type.application";
-			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE plist SYSTEM \"file://localhost/System/Library/DTDs/PropertyList.dtd\">
-<plist version=\"0.9\">
-<dict>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleGetInfoString</key>
-	<string>Created by Qt/QMake</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleExecutable</key>
-	<string>indieEngineShader</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.indieEngineShader</string>
-	<key>NOTE</key>
-	<string>This file was generated by Qt/QMake.</string>
-</dict>
-</plist>
-";
-			name = "indieEngineShader";
-			productName = "indieEngineShader";
-			startupPath = "<<ProjectDirectory>>";
-		};
-		4B72B24813252891014BCF61 = {
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4B72B24813252891014BCF61 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = "NO";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
-				GCC_OPTIMIZATION_LEVEL = "0";
-				PRODUCT_NAME = "indieEngineShader";
-				HEADER_SEARCH_PATHS = (
-					"../../../../Qt5.0.2/5.0.2/clang_64/include",
-					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtWidgets",
-					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework/Versions/5/Headers",
-					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtGui",
-					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework/Versions/5/Headers",
-					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtCore",
-					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework/Versions/5/Headers",
-					".",
-					"/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers",
-					"/System/Library/Frameworks/AGL.framework/Headers",
-					".",
-					"/usr/local/include",
-					"/System/Library/Frameworks/CarbonCore.framework/Headers",
-					"../../../../Qt5.0.2/5.0.2/clang_64/mkspecs/macx-xcode");
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
-					"/System/Library/Frameworks/");
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
-					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
-				INFOPLIST_FILE = "Info.plist";
+					/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib,
+					/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = (
+					../../../../Qt5.0.2/5.0.2/clang_64/include,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtWidgets,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework/Versions/5/Headers,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtGui,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework/Versions/5/Headers,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtCore,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework/Versions/5/Headers,
+					.,
+					/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers,
+					/System/Library/Frameworks/AGL.framework/Headers,
+					.,
+					/usr/local/include,
+					/System/Library/Frameworks/CarbonCore.framework/Headers,
+					"../../../../Qt5.0.2/5.0.2/clang_64/mkspecs/macx-xcode",
+				);
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib,
+					/System/Library/Frameworks/,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-pipe",
 					"-mmacosx-version-min=10.6",
@@ -426,7 +473,8 @@
 					"-DQT_NO_DEBUG",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
-					"-DQT_CORE_LIB");
+					"-DQT_CORE_LIB",
+				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"-pipe",
 					"-mmacosx-version-min=10.6",
@@ -437,79 +485,196 @@
 					"-DQT_NO_DEBUG",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
-					"-DQT_CORE_LIB");
+					"-DQT_CORE_LIB",
+				);
 				OTHER_LDFLAGS = (
-						"-headerpad_max_install_names",
-						"-mmacosx-version-min=10.6",
-						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
-						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
-				ARCHS = "x86_64";
-			};
-			name = "Debug";
-		};
-		2C641C3335766025DD51B7BD = {
-			buildRules = (
+					"-headerpad_max_install_names",
+					"-mmacosx-version-min=10.6",
+					"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+					"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib",
 				);
-			buildSettings = {
-				COPY_PHASE_STRIP = "NO";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
-				GCC_OPTIMIZATION_LEVEL = "0";
-				PRODUCT_NAME = "indieEngineShader";
+				PRODUCT_NAME = indieEngineShader;
 			};
-			isa = "PBXBuildStyle";
-			name = "Debug";
+			name = Debug;
 		};
-		BEC09A62E69C3553534FF35E = {
+		8C7174830A1E4DCBA0332EC1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = "NO";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
-				GCC_OPTIMIZATION_LEVEL = "0";
-				PRODUCT_NAME = "indieEngineShader";
-				PRODUCT_NAME = "indieEngineShader";
-			};
-			name = "Debug";
-		};
-		2C641C3335766025DD51B7BD = {
-			buildRules = (
-				);
-			buildSettings = {
-				COPY_PHASE_STRIP = "NO";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
-				GCC_OPTIMIZATION_LEVEL = "0";
-				PRODUCT_NAME = "indieEngineShader";
-			};
-			isa = "PBXBuildStyle";
-			name = "Debug";
-		};
-		D70590BEB531B51029F711BB = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = "YES";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
-				PRODUCT_NAME = "indieEngineShader";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = __OSX__;
 				HEADER_SEARCH_PATHS = (
-					"../../../../Qt5.0.2/5.0.2/clang_64/include",
-					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtWidgets",
-					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework/Versions/5/Headers",
-					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtGui",
-					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework/Versions/5/Headers",
-					"../../../../Qt5.0.2/5.0.2/clang_64/include/QtCore",
-					"../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework/Versions/5/Headers",
-					".",
-					"/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers",
-					"/System/Library/Frameworks/AGL.framework/Headers",
-					".",
-					"/usr/local/include",
-					"/System/Library/Frameworks/CarbonCore.framework/Headers",
-					"../../../../Qt5.0.2/5.0.2/clang_64/mkspecs/macx-xcode");
+					../../../../Qt5.0.2/5.0.2/clang_64/include,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtWidgets,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework/Versions/5/Headers,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtGui,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework/Versions/5/Headers,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtCore,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework/Versions/5/Headers,
+					.,
+					/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers,
+					/System/Library/Frameworks/AGL.framework/Headers,
+					.,
+					/usr/local/include,
+					/System/Library/Frameworks/CarbonCore.framework/Headers,
+					"../../../../Qt5.0.2/5.0.2/clang_64/mkspecs/macx-xcode",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Sources\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries/curl/include\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries/jsoncpp/include\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries/ogles2/include\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries/gcdpp/include\"",
+				);
+				LD_DYLIB_INSTALL_NAME = "";
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
-					"/System/Library/Frameworks/");
+					"$(inherited)",
+					"/Users/codeoneclick/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-mmacosx-version-min=10.8",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-mmacosx-version-min=10.8",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-headerpad_max_install_names",
+					"-mmacosx-version-min=10.8",
+					"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+					"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib",
+				);
+				PRODUCT_NAME = indieEngineShader;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BEC09A62E69C3553534FF35E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = __OSX__;
+				HEADER_SEARCH_PATHS = (
+					../../../../Qt5.0.2/5.0.2/clang_64/include,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtWidgets,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework/Versions/5/Headers,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtGui,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework/Versions/5/Headers,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtCore,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework/Versions/5/Headers,
+					.,
+					/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers,
+					/System/Library/Frameworks/AGL.framework/Headers,
+					.,
+					/usr/local/include,
+					/System/Library/Frameworks/CarbonCore.framework/Headers,
+					"../../../../Qt5.0.2/5.0.2/clang_64/mkspecs/macx-xcode",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Sources\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries/curl/include\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries/jsoncpp/include\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries/ogles2/include\"",
+					"\"$(SRCROOT)/../indie2dEngine-Core/Libraries/gcdpp/include\"",
+				);
+				LD_DYLIB_INSTALL_NAME = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/codeoneclick/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-mmacosx-version-min=10.8",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-mmacosx-version-min=10.8",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-headerpad_max_install_names",
+					"-mmacosx-version-min=10.8",
+					"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+					"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib",
+				);
+				PRODUCT_NAME = indieEngineShader;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D70590BEB531B51029F711BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
-					"/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
-				INFOPLIST_FILE = "Info.plist";
+					/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib,
+					/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				HEADER_SEARCH_PATHS = (
+					../../../../Qt5.0.2/5.0.2/clang_64/include,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtWidgets,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtWidgets.framework/Versions/5/Headers,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtGui,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtGui.framework/Versions/5/Headers,
+					../../../../Qt5.0.2/5.0.2/clang_64/include/QtCore,
+					../../../../Qt5.0.2/5.0.2/clang_64/lib/QtCore.framework/Versions/5/Headers,
+					.,
+					/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers,
+					/System/Library/Frameworks/AGL.framework/Headers,
+					.,
+					/usr/local/include,
+					/System/Library/Frameworks/CarbonCore.framework/Headers,
+					"../../../../Qt5.0.2/5.0.2/clang_64/mkspecs/macx-xcode",
+				);
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib,
+					/System/Library/Frameworks/,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = (
 					"-pipe",
 					"-mmacosx-version-min=10.6",
@@ -520,7 +685,8 @@
 					"-DQT_NO_DEBUG",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
-					"-DQT_CORE_LIB");
+					"-DQT_CORE_LIB",
+				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"-pipe",
 					"-mmacosx-version-min=10.6",
@@ -531,78 +697,40 @@
 					"-DQT_NO_DEBUG",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
-					"-DQT_CORE_LIB");
+					"-DQT_CORE_LIB",
+				);
 				OTHER_LDFLAGS = (
-						"-headerpad_max_install_names",
-						"-mmacosx-version-min=10.6",
-						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
-						"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib");
-				ARCHS = "x86_64";
-			};
-			name = "Release";
-		};
-		26DE8D2AEA4B3714B41E931F = {
-			buildRules = (
+					"-headerpad_max_install_names",
+					"-mmacosx-version-min=10.6",
+					"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/lib",
+					"-F/Users/codeoneclick/Qt5.0.2/5.0.2/clang_64/qtbase/lib",
 				);
-			buildSettings = {
-				COPY_PHASE_STRIP = "YES";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
-				PRODUCT_NAME = "indieEngineShader";
+				PRODUCT_NAME = indieEngineShader;
 			};
-			isa = "PBXBuildStyle";
-			name = "Release";
+			name = Release;
 		};
-		8C7174830A1E4DCBA0332EC1 = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = "YES";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
-				PRODUCT_NAME = "indieEngineShader";
-				PRODUCT_NAME = "indieEngineShader";
-			};
-			name = "Release";
-		};
-		26DE8D2AEA4B3714B41E931F = {
-			buildRules = (
-				);
-			buildSettings = {
-				COPY_PHASE_STRIP = "YES";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
-				PRODUCT_NAME = "indieEngineShader";
-			};
-			isa = "PBXBuildStyle";
-			name = "Release";
-		};
-		CC82A9286117DFED018F418F = {
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		17B3380A4D6A7D415E7F2E1E /* Build configuration list for PBXNativeTarget "indieEngineShader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				"4B72B24813252891014BCF61",
-				"D70590BEB531B51029F711BB");
+				BEC09A62E69C3553534FF35E /* Debug */,
+				8C7174830A1E4DCBA0332EC1 /* Release */,
+			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationIsName = "Release";
+			defaultConfigurationName = Release;
 		};
-		17B3380A4D6A7D415E7F2E1E = {
+		CC82A9286117DFED018F418F /* Build configuration list for PBXProject "indieEngineShader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				"BEC09A62E69C3553534FF35E",
-				"8C7174830A1E4DCBA0332EC1");
+				4B72B24813252891014BCF61 /* Debug */,
+				D70590BEB531B51029F711BB /* Release */,
+			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationIsName = "Release";
+			defaultConfigurationName = Release;
 		};
-		91B15E841AA80083484172DE = {
-			buildStyles = (
-				"2C641C3335766025DD51B7BD",
-				"2C641C3335766025DD51B7BD",
-				"26DE8D2AEA4B3714B41E931F",
-				"26DE8D2AEA4B3714B41E931F");
-			hasScannedForEncodings = 1;
-			isa = PBXProject;
-			mainGroup = "05596AB53D8D521C69802C27";
-			buildConfigurationList = "CC82A9286117DFED018F418F";
-			projectDirPath = "";
-			targets = (
-				"0B6373133D835CE1A12FC310");
-		};
+/* End XCConfigurationList section */
 	};
-	rootObject = "91B15E841AA80083484172DE";
+	rootObject = 91B15E841AA80083484172DE /* Project object */;
 }

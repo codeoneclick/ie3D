@@ -24,9 +24,9 @@ CKOTHWorkflow::~CKOTHWorkflow(void)
 
 std::shared_ptr<IGameTransition> CKOTHWorkflow::CreateKOTHInGameTransition(const std::string &_filename, void *_hwnd)
 {
-#ifdef __APPLE__
+#if defined (__IOS__)
     std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::CreateGraphicsContext(_hwnd, E_PLATFORM_API_IOS);
-#else
+#elif defined(__WIN32__)
 	std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::CreateGraphicsContext(_hwnd, E_PLATFORM_API_WIN32);
 #endif
     std::shared_ptr<IInputContext> inputContext = std::make_shared<IInputContext>(_hwnd);

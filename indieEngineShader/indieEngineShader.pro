@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = indieEngineShader
 TEMPLATE = app
 
+QMAKE_CFLAGS += -mmacosx-version-min=10.8
+QMAKE_CXXFLAGS += -mmacosx-version-min=10.8
 
 SOURCES += main.cpp\
         indieEngineShader.cpp

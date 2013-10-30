@@ -1,0 +1,8 @@
+<transition guid="main.transition">
+    <output.render.operation filename="output.space.operation.xml"/>
+    <world.space.render.operations>
+        <world.space.render.operation filename="world.space.operation.xml"/>
+    </world.space.render.operations>
+    <screen.space.render.operations>
+    </screen.space.render.operations>
+</transition>

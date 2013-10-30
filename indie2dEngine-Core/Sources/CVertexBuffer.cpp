@@ -16,6 +16,8 @@ m_mode(_mode)
     assert(_size != 0);
     m_data = new SHardwareVertex[m_size];
     m_index = -1;
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
     glGenBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
 }
 

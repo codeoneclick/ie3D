@@ -1,11 +1,11 @@
 #include "indieEngineShader.h"
+#include "ui_indieEngineShader.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    indieEngineShader w;
-    w.show();
-    
-    return a.exec();
+    QApplication application(argc, argv);
+    indieEngineShader window;
+    window.show();
+    return application.exec();
 }

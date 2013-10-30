@@ -15,6 +15,9 @@ public:
     explicit indieEngineShader(QWidget *parent = 0);
     ~indieEngineShader();
     
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::indieEngineShader *ui;
 };
