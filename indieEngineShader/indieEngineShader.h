@@ -11,9 +11,13 @@ class indieEngineShader : public QMainWindow
 {
     Q_OBJECT
     
+protected:
+    void closeEvent(QCloseEvent* _event);
+    
 public:
     explicit indieEngineShader(QWidget *parent = 0);
-    ~indieEngineShader();
+    ~indieEngineShader(void);
+    void Execute(void);
     
 private slots:
     void on_pushButton_clicked();

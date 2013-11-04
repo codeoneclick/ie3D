@@ -7,5 +7,6 @@ int main(int argc, char *argv[])
     QApplication application(argc, argv);
     indieEngineShader window;
     window.show();
+    window.Execute();
     return application.exec();
 }

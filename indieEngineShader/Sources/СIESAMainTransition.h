@@ -12,6 +12,9 @@
 #include "HCommon.h"
 #include "IGameTransition.h"
 
+class CCamera;
+class CModel;
+
 class CIESAMainTransition : public IGameTransition
 {
 private:
@@ -20,6 +23,9 @@ protected:
     
     void _OnLoaded(void);
     void _OnGameLoopUpdate(f32 _deltatime);
+    
+    std::shared_ptr<CCamera> m_camera;
+    std::shared_ptr<CModel> m_model;
     
 public:
     CIESAMainTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor);

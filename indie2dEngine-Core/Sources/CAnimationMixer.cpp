@@ -143,7 +143,8 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
             m_skeleton->Update(m_skeletonGuid);
         };
 #if defined(__USE_GCDPP__)
-        gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
+        function();
+        //gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
 #else
 		std::async(std::launch::async, function);
 #endif

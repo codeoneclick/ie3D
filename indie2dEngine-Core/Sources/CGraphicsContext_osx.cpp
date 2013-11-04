@@ -12,17 +12,18 @@
 
 #if defined(__OSX__)
 
+#define k_MAX_RETRIES 128
+
 class CGraphicsContext_osx : public IGraphicsContext
 {
 private:
     
 protected:
-    
-    EGLDisplay m_eglDisplay;
-	EGLConfig m_eglConfig;
-	EGLSurface m_eglSurface;
-	EGLContext m_eglContext;
-	EGLNativeWindowType	m_eglWindow;
+
+    EGLDisplay m_display;
+	EGLSurface m_surface;
+	EGLContext m_context;
+	EGLNativeWindowType	m_window;
     
 public:
     
@@ -47,19 +48,23 @@ CGraphicsContext_osx::CGraphicsContext_osx(EGLNativeWindowType _window)
     
 #if defined(__USE_OPENGLES__)
     
-    m_eglWindow = _window;
+    m_window = _window;
+    m_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     
-	if(m_eglDisplay == EGL_NO_DISPLAY)
-    {
-		m_eglDisplay = eglGetDisplay((EGLNativeDisplayType) EGL_DEFAULT_DISPLAY);
-    }
-    
-	EGLint iMajorVersion, iMinorVersion;
-	if (!eglInitialize(m_eglDisplay, &iMajorVersion, &iMinorVersion))
+	EGLint majorVersion, minorVersion;
+    ui32 retries = 0;
+	while(!eglInitialize(m_display, &majorVersion, &minorVersion) && retries < k_MAX_RETRIES)
 	{
-		NSLog(@"eglInitialize() failed.");
-		return;
+		NSLog(@"eglInitialize() failed. Retries : %i", retries);
+        m_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+		retries++;
 	}
+    
+    if(retries == k_MAX_RETRIES)
+    {
+        assert(false);
+        return;
+    }
     
 	eglBindAPI(EGL_OPENGL_ES_API);
     
@@ -73,31 +78,32 @@ CGraphicsContext_osx::CGraphicsContext_osx(EGLNativeWindowType _window)
 		EGL_NONE
     };
     
-	int iConfigs;
-	if (!eglChooseConfig(m_eglDisplay, attributes, &m_eglConfig, 1, &iConfigs) || (iConfigs != 1))
+    EGLConfig config;
+	i32 configs;
+	if (!eglChooseConfig(m_display, attributes, &config, 1, &configs) || (configs != 1))
 	{
 		NSLog(@"eglChooseConfig() failed.");
 		return;
 	}
     
-	m_eglSurface = eglCreateWindowSurface(m_eglDisplay, m_eglConfig, m_eglWindow, NULL);
+	m_surface = eglCreateWindowSurface(m_display, config, m_window, NULL);
     
-	if(m_eglSurface == EGL_NO_SURFACE)
+	if(m_surface == EGL_NO_SURFACE)
 	{
 		NSLog(@"eglCreateWindowSurface() failed.");
 		return;
 	}
     
-    EGLint contextAttrs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
-    m_eglContext = eglCreateContext(m_eglDisplay, m_eglConfig, NULL, contextAttrs);
+    EGLint contextAttributess[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
+    m_context = eglCreateContext(m_display, config, NULL, contextAttributess);
     
-    if(m_eglContext == EGL_NO_CONTEXT)
+    if(m_context == EGL_NO_CONTEXT)
     {
         NSLog(@"eglCreateContext() failed.");
         return;
     }
     
-	if(!eglMakeCurrent(m_eglDisplay, m_eglSurface, m_eglSurface, m_eglContext))
+	if(!eglMakeCurrent(m_display, m_surface, m_surface, m_context))
     {
         NSLog(@"eglMakeCurrent() failed.");
         return;
@@ -125,11 +131,15 @@ CGraphicsContext_osx::~CGraphicsContext_osx(void)
 void CGraphicsContext_osx::Output(void) const
 {
 #if defined(__USE_OPENGLES__)
-	assert(eglSwapBuffers(m_eglDisplay, m_eglSurface) == EGL_TRUE);
+    
+	eglSwapBuffers(m_display, m_surface);
+    
 #endif
     
 #if defined(__USE_OPENGL__)
-	SwapBuffers(m_hDC);	
+    
+	SwapBuffers(m_hDC);
+    
 #endif
 }
 

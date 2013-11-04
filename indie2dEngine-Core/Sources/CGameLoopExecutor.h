@@ -69,6 +69,12 @@ void Run(void);
 void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
 void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler);
 
+#if defined(__OSX__)
+
+void TerminateGameLoop(void);
+
+#endif
+
 ui32 Get_FramesPerSecond(void);
 ui32 Get_TrianglesPerSecond(void);
 void Inc_TrianglesCount(ui32 _value);

@@ -13,6 +13,14 @@
 		210BE2991821906B0010C95A /* libGLESv2.dylib in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 210BE2961821906B0010C95A /* libGLESv2.dylib */; };
 		210BE2A6182191D60010C95A /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 210BE2941821906B0010C95A /* libEGL.dylib */; };
 		210BE2A8182191D60010C95A /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 210BE2961821906B0010C95A /* libGLESv2.dylib */; };
+		2151B90E1822D22E0038D257 /* material.model.Footman.common.xml in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 2151B90C1822D22E0038D257 /* material.model.Footman.common.xml */; };
+		2151B90F1822D22E0038D257 /* model.Footman.xml in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 2151B90D1822D22E0038D257 /* model.Footman.xml */; };
+		2151B9151822D24F0038D257 /* model_02.pvr in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 2151B9141822D24F0038D257 /* model_02.pvr */; };
+		2151B9191822D2590038D257 /* model_02.MDL_anim in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 2151B9161822D2590038D257 /* model_02.MDL_anim */; };
+		2151B91A1822D2590038D257 /* model_02.MDL_mesh in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 2151B9171822D2590038D257 /* model_02.MDL_mesh */; };
+		2151B91B1822D2590038D257 /* model_02.MDL_sk in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 2151B9181822D2590038D257 /* model_02.MDL_sk */; };
+		2151B91D1822D4B60038D257 /* CommonModel.frag in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 2151B9101822D23B0038D257 /* CommonModel.frag */; };
+		2151B91E1822D4B60038D257 /* CommonModel.vert in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 2151B9111822D23B0038D257 /* CommonModel.vert */; };
 		21ADA9DB18211A640082E8BA /* Cocoa.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 21ADA9DA18211A640082E8BA /* Cocoa.framework */; };
 		21ADA9EA18212F010082E8BA /* main.transition.xml in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21ADA9E618212F010082E8BA /* main.transition.xml */; };
 		21ADA9EB18212F010082E8BA /* material.output.xml in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21ADA9E718212F010082E8BA /* material.output.xml */; };
@@ -84,6 +92,14 @@
 		210BE2951821906B0010C95A /* libGLESv1_CM.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv1_CM.dylib; path = "/Users/codeoneclick/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv1_CM.dylib"; sourceTree = "<absolute>"; };
 		210BE2961821906B0010C95A /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "/Users/codeoneclick/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<absolute>"; };
 		2111AAC7182019B9007FE7A8 /* indieEngineShader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = indieEngineShader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2151B90C1822D22E0038D257 /* material.model.Footman.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.Footman.common.xml; path = Bundle/material.model.Footman.common.xml; sourceTree = SOURCE_ROOT; };
+		2151B90D1822D22E0038D257 /* model.Footman.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = model.Footman.xml; path = Bundle/model.Footman.xml; sourceTree = SOURCE_ROOT; };
+		2151B9101822D23B0038D257 /* CommonModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonModel.frag; path = Bundle/CommonModel.frag; sourceTree = SOURCE_ROOT; };
+		2151B9111822D23B0038D257 /* CommonModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonModel.vert; path = Bundle/CommonModel.vert; sourceTree = SOURCE_ROOT; };
+		2151B9141822D24F0038D257 /* model_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_02.pvr; path = Bundle/model_02.pvr; sourceTree = SOURCE_ROOT; };
+		2151B9161822D2590038D257 /* model_02.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_02.MDL_anim; path = Bundle/model_02.MDL_anim; sourceTree = SOURCE_ROOT; };
+		2151B9171822D2590038D257 /* model_02.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_02.MDL_mesh; path = Bundle/model_02.MDL_mesh; sourceTree = SOURCE_ROOT; };
+		2151B9181822D2590038D257 /* model_02.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_02.MDL_sk; path = Bundle/model_02.MDL_sk; sourceTree = SOURCE_ROOT; };
 		21ADA9DA18211A640082E8BA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		21ADA9E218212EF60082E8BA /* CommonOutput.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonOutput.frag; path = Bundle/CommonOutput.frag; sourceTree = SOURCE_ROOT; };
 		21ADA9E318212EF60082E8BA /* CommonOutput.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonOutput.vert; path = Bundle/CommonOutput.vert; sourceTree = SOURCE_ROOT; };
@@ -171,6 +187,24 @@
 			name = "indieEngine-Core";
 			sourceTree = "<group>";
 		};
+		2151B90A1822D1E20038D257 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2151B9161822D2590038D257 /* model_02.MDL_anim */,
+				2151B9171822D2590038D257 /* model_02.MDL_mesh */,
+				2151B9181822D2590038D257 /* model_02.MDL_sk */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		2151B90B1822D1EF0038D257 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				2151B9141822D24F0038D257 /* model_02.pvr */,
+			);
+			name = Textures;
+			sourceTree = "<group>";
+		};
 		21ADA9DD18212EA00082E8BA /* indieEngine-ShaderAPP */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +228,8 @@
 		21ADA9DF18212ED10082E8BA /* Bundle */ = {
 			isa = PBXGroup;
 			children = (
+				2151B90B1822D1EF0038D257 /* Textures */,
+				2151B90A1822D1E20038D257 /* Models */,
 				21ADA9E118212EDE0082E8BA /* Templates */,
 				21ADA9E018212ED80082E8BA /* Shaders */,
 			);
@@ -203,6 +239,8 @@
 		21ADA9E018212ED80082E8BA /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				2151B9101822D23B0038D257 /* CommonModel.frag */,
+				2151B9111822D23B0038D257 /* CommonModel.vert */,
 				21ADA9E218212EF60082E8BA /* CommonOutput.frag */,
 				21ADA9E318212EF60082E8BA /* CommonOutput.vert */,
 			);
@@ -212,6 +250,8 @@
 		21ADA9E118212EDE0082E8BA /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				2151B90C1822D22E0038D257 /* material.model.Footman.common.xml */,
+				2151B90D1822D22E0038D257 /* model.Footman.xml */,
 				21ADA9E618212F010082E8BA /* main.transition.xml */,
 				21ADA9E718212F010082E8BA /* material.output.xml */,
 				21ADA9E818212F010082E8BA /* output.space.operation.xml */,
@@ -370,9 +410,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2151B91D1822D4B60038D257 /* CommonModel.frag in Bundle Resources */,
+				2151B91E1822D4B60038D257 /* CommonModel.vert in Bundle Resources */,
+				2151B90E1822D22E0038D257 /* material.model.Footman.common.xml in Bundle Resources */,
+				2151B91B1822D2590038D257 /* model_02.MDL_sk in Bundle Resources */,
 				21ADA9F118212F540082E8BA /* CommonOutput.frag in Bundle Resources */,
 				21ADA9F218212F540082E8BA /* CommonOutput.vert in Bundle Resources */,
+				2151B90F1822D22E0038D257 /* model.Footman.xml in Bundle Resources */,
+				2151B91A1822D2590038D257 /* model_02.MDL_mesh in Bundle Resources */,
 				21ADA9EC18212F010082E8BA /* output.space.operation.xml in Bundle Resources */,
+				2151B9151822D24F0038D257 /* model_02.pvr in Bundle Resources */,
+				2151B9191822D2590038D257 /* model_02.MDL_anim in Bundle Resources */,
 				21ADA9ED18212F010082E8BA /* world.space.operation.xml in Bundle Resources */,
 				21ADA9EB18212F010082E8BA /* material.output.xml in Bundle Resources */,
 				21ADA9EA18212F010082E8BA /* main.transition.xml in Bundle Resources */,

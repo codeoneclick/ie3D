@@ -12,6 +12,9 @@
 
 #include <Cocoa/Cocoa.h>
 
+static ui32 g_screenWidth = 0;
+static ui32 g_screenHeight = 0;
+
 std::string Get_BundlePath(void)
 {
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
@@ -21,13 +24,27 @@ std::string Get_BundlePath(void)
 
 ui32 Get_ScreenWidth(void)
 {
-    return 640;
+    assert(g_screenWidth != 0);
+    return g_screenWidth;
 };
 
 ui32 Get_ScreenHeight(void)
 {
-    return 480;
+    assert(g_screenHeight != 0);
+    return g_screenHeight;
 };
+
+void Set_ScreenWidth(ui32 _width)
+{
+    assert(g_screenWidth == 0);
+    g_screenWidth = _width;
+}
+
+void Set_ScreenHeight(ui32 _height)
+{
+    assert(g_screenHeight == 0);
+    g_screenHeight = _height;
+}
 
 f32 Get_Random(f32 _minValue, f32 _maxValue)
 {

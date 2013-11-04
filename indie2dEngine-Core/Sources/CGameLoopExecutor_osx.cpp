@@ -61,6 +61,11 @@
     self.m_gameLoopExecutor->DisconnectFromGameLoop(_handler);
 }
 
+- (void)terminateGameLoop
+{
+    [self.m_looper invalidate];
+}
+
 - (void)onUpdate
 {
     assert(self.m_gameLoopExecutor != nullptr);
@@ -102,6 +107,11 @@ void ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler)
 void DisconnectFromGameLoop(std::shared_ptr<IGameLoopHandler> _handler)
 {
     [[CGameLoopExecutor_osx SharedInstance] disconnectFromGameLoop:_handler];
+};
+
+void TerminateGameLoop(void)
+{
+    [[CGameLoopExecutor_osx SharedInstance] terminateGameLoop];
 };
 
 ui32 Get_FramesPerSecond(void)
