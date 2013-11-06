@@ -477,7 +477,7 @@
 		217BB2AF1815A4FD00DB8ECC /* CGUITemplateLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUITemplateLoader.cpp; path = Sources/CGUITemplateLoader.cpp; sourceTree = "<group>"; };
 		217BB2B01815A4FD00DB8ECC /* CGUITemplateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUITemplateLoader.h; path = Sources/CGUITemplateLoader.h; sourceTree = "<group>"; };
 		217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameLoopExecutor.cpp; path = Sources/CGameLoopExecutor.cpp; sourceTree = "<group>"; };
-		21853415181EFC6200315CBB /* libindieEngineCore-osx-Lib_d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libindieEngineCore-osx-Lib_d.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21853415181EFC6200315CBB /* libindieEngineCore-osx-Lib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libindieEngineCore-osx-Lib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21853416181EFC6200315CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		21853419181EFC6200315CBB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2185341A181EFC6200315CBB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -1258,7 +1258,7 @@
 			children = (
 				A46A32BD174E16AC0044643E /* indieEngineCore-Testing.app */,
 				21D0712A181DA5620019D264 /* libindieEngineCore-ios-Lib.a */,
-				21853415181EFC6200315CBB /* libindieEngineCore-osx-Lib_d.a */,
+				21853415181EFC6200315CBB /* libindieEngineCore-osx-Lib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2048,7 +2048,7 @@
 			);
 			name = "indieEngineCore-osx-Lib";
 			productName = "indieEngineCore-osx-Lib";
-			productReference = 21853415181EFC6200315CBB /* libindieEngineCore-osx-Lib_d.a */;
+			productReference = 21853415181EFC6200315CBB /* libindieEngineCore-osx-Lib.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		21D07129181DA5620019D264 /* indieEngineCore-ios-Lib */ = {
@@ -2580,7 +2580,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)_d";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				TARGETED_DEVICE_FAMILY = "";
 			};

@@ -7,6 +7,7 @@
 //
 
 #include "IGameObjectExtension.h"
+#include "CMaterial.h"
 
 IGameObjectExtension::IGameObjectExtension(const std::shared_ptr<IGameObject>& _gameObject) :
 IGameObject(nullptr, nullptr),
@@ -25,7 +26,7 @@ std::shared_ptr<CMaterial> IGameObjectExtension::Get_Material(const std::string&
     assert(m_gameObject != nullptr);
     auto material = m_materials.find(_mode);
     assert(material != m_materials.end());
-    return (*material);
+    return material->second;
 }
 
 std::shared_ptr<CShader> IGameObjectExtension::Get_Shader(const std::string& _mode)

@@ -5,10 +5,12 @@
 #include <Cocoa/Cocoa.h>
 #endif
 
+#if defined(__OSX__) || defined(__WIN32__)
 #include "IOGLWindow.h"
 #include "CIESAWorkflow.h"
 #include "CCommonOS.h"
 #include "CGameLoopExecutor.h"
+#endif
 
 CMainWindowGUI::CMainWindowGUI(QWidget *parent) :
     QMainWindow(parent),

@@ -32,6 +32,7 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
+    QPushButton *pushButton_4;
     QGroupBox *groupBox_2;
     QWidget *opengl_window;
     QMenuBar *menuBar;
@@ -58,6 +59,9 @@ public:
         pushButton_3 = new QPushButton(groupBox);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
         pushButton_3->setGeometry(QRect(20, 110, 301, 32));
+        pushButton_4 = new QPushButton(groupBox);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setGeometry(QRect(20, 180, 114, 32));
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         groupBox_2->setGeometry(QRect(10, 9, 641, 691));
@@ -88,6 +92,7 @@ public:
         pushButton->setText(QApplication::translate("CMainWindowGUI", "ShaderCompile", 0));
         pushButton_2->setText(QApplication::translate("CMainWindowGUI", "MaterialSettings", 0));
         pushButton_3->setText(QApplication::translate("CMainWindowGUI", "MaterialExport", 0));
+        pushButton_4->setText(QApplication::translate("CMainWindowGUI", "PushButton", 0));
         groupBox_2->setTitle(QApplication::translate("CMainWindowGUI", "3D", 0));
     } // retranslateUi
 
