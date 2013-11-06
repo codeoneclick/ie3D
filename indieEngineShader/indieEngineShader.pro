@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2013-10-28T00:03:29
+# Project created by QtCreator 2013-11-06T15:15:54
 #
 #-------------------------------------------------
 
@@ -11,12 +11,19 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = indieEngineShader
 TEMPLATE = app
 
-QMAKE_CFLAGS += -mmacosx-version-min=10.8
-QMAKE_CXXFLAGS += -mmacosx-version-min=10.8
 
 SOURCES += main.cpp\
-        indieEngineShader.cpp
+        CMainWindowGUI.cpp \
+    CShaderCompileGUI.cpp \
+    CMaterialSettingsGUI.cpp \
+    CMaterialExportGUI.cpp
 
-HEADERS  += indieEngineShader.h
+HEADERS  += CMainWindowGUI.h \
+    CShaderCompileGUI.h \
+    CMaterialSettingsGUI.h \
+    CMaterialExportGUI.h
 
-FORMS    += indieEngineShader.ui
+FORMS    += CMainWindowGUI.ui \
+    CShaderCompileGUI.ui \
+    CMaterialSettingsGUI.ui \
+    CMaterialExportGUI.ui
