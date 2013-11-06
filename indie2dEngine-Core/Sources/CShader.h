@@ -140,7 +140,7 @@ public:
     };
 };
 
-class CShader final : public IResource 
+class CShader : public IResource
 {
 private:
 

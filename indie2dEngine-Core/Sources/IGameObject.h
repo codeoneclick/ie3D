@@ -54,7 +54,7 @@ protected:
     std::shared_ptr<CMesh> m_mesh;
     
     std::shared_ptr<CCamera> m_camera;
-    std::shared_ptr<CLight> m_lights[E_LIGHT_MAX];
+    std::array<std::shared_ptr<CLight>, E_LIGHT_MAX> m_lights;
     std::shared_ptr<CAABoundBox> m_boundBox;
     
     std::shared_ptr<CRenderMgr> m_renderMgr;

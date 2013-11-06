@@ -14,6 +14,7 @@
 #include <queue>
 #include <string>
 #include <vector>
+#include <array>
 #include <numeric>
 #include <future>
 #include <algorithm>

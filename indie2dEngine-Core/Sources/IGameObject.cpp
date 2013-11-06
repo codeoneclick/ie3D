@@ -33,10 +33,10 @@ m_materialImposer(nullptr),
 m_isNeedToRender(false),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
-    for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
-    {
-        m_lights[i] = nullptr;
-    }
+    std::for_each(m_lights.begin(), m_lights.end(), [](std::shared_ptr<CLight> _light)
+                  {
+                      _light = nullptr;
+                  });
 }
 
 IGameObject::~IGameObject(void)
