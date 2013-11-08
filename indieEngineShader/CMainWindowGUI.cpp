@@ -8,12 +8,19 @@
 #if defined(__OSX__) || defined(__WIN32__)
 #include "IOGLWindow.h"
 #include "CIESAWorkflow.h"
+#include "СIESAMainTransition.h"
 #include "CCommonOS.h"
 #include "CGameLoopExecutor.h"
 #endif
 
 CMainWindowGUI::CMainWindowGUI(QWidget *parent) :
     QMainWindow(parent),
+#if defined(__OSX__) || defined(__WIN32__)
+
+    m_iesaWorkflow(nullptr),
+    m_iesaTransition(nullptr),
+
+#endif
     ui(new Ui::CMainWindowGUI)
 {
     ui->setupUi(this);
@@ -27,6 +34,13 @@ CMainWindowGUI::~CMainWindowGUI()
 void CMainWindowGUI::on_pushButton_clicked()
 {
     m_shaderCompileGUI = new CShaderCompileGUI(this);
+    
+#if defined(__OSX__) || defined(__WIN32__)
+    
+    m_shaderCompileGUI->Set_Transition(m_iesaTransition);
+    
+#endif
+    
     m_shaderCompileGUI->exec();
 }
 
@@ -45,22 +59,26 @@ void CMainWindowGUI::on_pushButton_3_clicked()
 
 void CMainWindowGUI::Execute(void)
 {
-#if defined(__OSX__)
+#if defined(__OSX__) || defined(__WIN32__)
+    
     NSView* view = reinterpret_cast<NSView*>(ui->opengl_window->winId());
     
     Set_ScreenWidth(static_cast<ui32>(view.frame.size.width));
     Set_ScreenHeight(static_cast<ui32>(view.frame.size.height));
     
-    CIESAWorkflow* workflow = new CIESAWorkflow();
-    std::shared_ptr<IGameTransition> transition = workflow->CreateIESAMainTransition("main.transition.xml", (__bridge void*)view);
-    workflow->RegisterTransition(transition);
-    workflow->GoToTransition("main.transition.xml");
+    m_iesaWorkflow = std::make_shared<CIESAWorkflow>();
+    m_iesaTransition = std::static_pointer_cast<CIESAMainTransition>(m_iesaWorkflow->CreateIESAMainTransition("main.transition.xml", (__bridge void*)view));
+    m_iesaWorkflow->RegisterTransition(std::static_pointer_cast<IGameTransition>(m_iesaTransition));
+    m_iesaWorkflow->GoToTransition("main.transition.xml");
+    
 #endif
 }
 
 void CMainWindowGUI::closeEvent(QCloseEvent *)
 {
-#if defined(__OSX__)
+#if defined(__OSX__) || defined(__WIN32__)
+    
     TerminateGameLoop();
+    
 #endif
 }

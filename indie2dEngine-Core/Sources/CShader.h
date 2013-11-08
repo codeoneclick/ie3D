@@ -149,6 +149,7 @@ protected:
     friend class CShaderSerializer_GLSL;
     friend class CShaderCommiter_GLSL;
     friend class CShaderLoadingOperation;
+    friend class CShaderExtension;
     
     i32 m_uniforms[E_SHADER_UNIFORM_MAX];
     i32 m_samplers[E_SHADER_SAMPLER_MAX];

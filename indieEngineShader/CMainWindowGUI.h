@@ -7,6 +7,13 @@
 #include "CMaterialSettingsGUI.h"
 #include "CMaterialExportGUI.h"
 
+#if defined(__OSX__) || defined(__WIN32__)
+
+class CIESAWorkflow;
+class CIESAMainTransition;
+
+#endif
+
 namespace Ui {
 class CMainWindowGUI;
 }
@@ -17,6 +24,13 @@ class CMainWindowGUI : public QMainWindow
     
 protected:
     void closeEvent(QCloseEvent*);
+    
+#if defined(__OSX__) || defined(__WIN32__)
+    
+    std::shared_ptr<CIESAWorkflow> m_iesaWorkflow;
+    std::shared_ptr<CIESAMainTransition> m_iesaTransition;
+    
+#endif
     
 public:
     explicit CMainWindowGUI(QWidget *parent = 0);

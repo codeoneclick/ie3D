@@ -23,6 +23,11 @@ public:
     
     CShaderExtension(const std::shared_ptr<CShader>& _shader);
     ~CShaderExtension(void);
+    
+    std::string Get_VertexShaderSourceCode(void);
+    std::string Get_FragmentShaderSourceCode(void);
+    bool Compile(const std::string& _vsSourceCode, const std::string& _fsSourceCode);
+
 };
 
 #endif
