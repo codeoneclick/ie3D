@@ -70,6 +70,7 @@ void CMainWindowGUI::Execute(void)
     m_iesaTransition = std::static_pointer_cast<CIESAMainTransition>(m_iesaWorkflow->CreateIESAMainTransition("main.transition.xml", (__bridge void*)view));
     m_iesaWorkflow->RegisterTransition(std::static_pointer_cast<IGameTransition>(m_iesaTransition));
     m_iesaWorkflow->GoToTransition("main.transition.xml");
+    m_iesaTransition->LoadGameObject("model.Footman.xml");
     
 #endif
 }

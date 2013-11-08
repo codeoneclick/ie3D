@@ -11,7 +11,9 @@
 
 IGameObjectExtension::IGameObjectExtension(const std::shared_ptr<IGameObject>& _gameObject) :
 IGameObject(nullptr, nullptr),
-m_gameObject(_gameObject)
+m_gameObject(_gameObject),
+m_startLoadingCallback(nullptr),
+m_endLoadingCallback(nullptr)
 {
     
 }
@@ -35,4 +37,32 @@ std::shared_ptr<CShader> IGameObjectExtension::Get_Shader(const std::string& _mo
     std::shared_ptr<CMaterial> material = IGameObjectExtension::Get_Material(_mode);
     std::shared_ptr<CShader> shader = material->Get_Shader();
     return shader;
+}
+
+void IGameObjectExtension::Load(void)
+{
+    assert(m_startLoadingCallback != nullptr);
+    assert(m_endLoadingCallback != nullptr);
+    
+    std::function<void(void)> startLoadingFunction = [this]()
+    {
+        while(m_gameObject->Get)
+        std::function<void(void)> endLadingFunction = [this]()
+        {
+            
+        };
+        gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), endLadingFunction);
+    };
+    
+    gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), startLoadingFunction);
+}
+
+void IGameObjectExtension::Set_StartLoadingCallback(const std::function<void(const std::shared_ptr<IGameObjectExtension>&)>& _callback)
+{
+    
+}
+
+void IGameObjectExtension::Set_EndLoadingCallback(const std::function<void(const std::shared_ptr<IGameObjectExtension>&)>& _callaback)
+{
+    
 }
