@@ -34,6 +34,11 @@ void CResourceLoadingCommands::_ExecuteLoadedResourceCommand(std::shared_ptr<IRe
 IResourceLoadingHandler::IResourceLoadingHandler(void)
 {
     IResourceLoadingHandler::_ConnectCommands();
+    std::for_each(m_handlers.begin(), m_handlers.end(), [](_RESOURCE_LOADED_HANDLER _handler)
+                  {
+                      _handler = nullptr;
+                  });
+
 }
 
 IResourceLoadingHandler::~IResourceLoadingHandler(void)
@@ -44,4 +49,9 @@ IResourceLoadingHandler::~IResourceLoadingHandler(void)
 void IResourceLoadingHandler::_ConnectCommands(void)
 {
     m_commands._ConnectLoadedResourceCommand(std::bind(&IResourceLoadingHandler::_OnResourceLoaded, this, std::placeholders::_1, std::placeholders::_2));
+}
+
+void IResourceLoadingHandler::Listen(const _RESOURCE_LOADED_HANDLER &_handler, E_RESOURCE_CLASS _class)
+{
+    m_handlers[_class] = _handler;
 }

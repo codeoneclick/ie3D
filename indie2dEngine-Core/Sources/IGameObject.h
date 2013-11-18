@@ -158,6 +158,7 @@ public:
     
     virtual void ListenRenderMgr(bool _value);
     virtual void ListenSceneUpdateMgr(bool _value);
+    
 };
 
 #endif 
