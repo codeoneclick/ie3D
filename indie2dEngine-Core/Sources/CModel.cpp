@@ -80,10 +80,11 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                            materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
-		material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_renderMode);
+		material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
         material->Set_IsBatching(modelTemplate->m_isBatching);
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
+        CModel::_OnResourceLoaded(material, true);
     }
     
     for(const auto& name : modelTemplate->m_sequencesFilenames)

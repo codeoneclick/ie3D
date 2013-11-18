@@ -46,12 +46,10 @@ void IGameObjectExtension::Load(void)
     
     std::function<void(void)> startLoadingFunction = [this]()
     {
-        while(m_gameObject->Get)
         std::function<void(void)> endLadingFunction = [this]()
         {
             
         };
-        gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), endLadingFunction);
     };
     
     gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), startLoadingFunction);

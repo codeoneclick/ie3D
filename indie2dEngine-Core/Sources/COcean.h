@@ -33,6 +33,7 @@ protected:
     void _OnUnbind(const std::string& _renderMode);
     
     void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
     
 public:
     

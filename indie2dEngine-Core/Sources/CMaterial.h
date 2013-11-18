@@ -11,15 +11,17 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
+#include "IResource.h"
 
 class CShader;
 class CTexture;
 class IScreenSpaceTextureAccessor;
 class CResourceAccessor;
+class IResourceLoadingHandler;
 
 struct SMaterialTemplate;
 
-class CMaterial
+class CMaterial : public IResource
 {
 private:
     
@@ -42,7 +44,7 @@ public:
     CMaterial(std::shared_ptr<CShader> _shader, const std::string& _guid);
     ~CMaterial(void);
     
-    void Serialize(const std::shared_ptr<SMaterialTemplate>& _template, const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
+    void Serialize(const std::shared_ptr<SMaterialTemplate>& _template, const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<IResourceLoadingHandler>& _handler = nullptr);
     
     void Set_CullFaceMode(GLenum _mode);
     void Set_BlendFunctionSource(GLenum _blendFunction);

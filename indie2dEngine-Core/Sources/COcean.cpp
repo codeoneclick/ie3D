@@ -79,13 +79,19 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                              materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
-        material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_renderMode);
+        material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
+        COcean::_OnResourceLoaded(material, true);
     }
     
 	IGameObject::ListenRenderMgr(m_isNeedToRender);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+}
+
+void COcean::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)
+{
+    IGameObject::_OnResourceLoaded(_resource, _success);
 }
 
 void COcean::_OnSceneUpdate(f32 _deltatime)

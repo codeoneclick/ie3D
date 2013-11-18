@@ -151,30 +151,48 @@ void IGameObject::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 
 void IGameObject::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)
 {
+    std::string resourcename = "resource";
     switch (_resource->Get_Class())
     {
         case E_RESOURCE_CLASS_SHADER:
         {
             m_status |= E_LOADING_STATUS_SHADER_LOADED;
+            resourcename = "shader";
         }
             break;
         case E_RESOURCE_CLASS_MESH:
         {
             m_status |= E_LOADING_STATUS_MESH_LOADED;
+            resourcename = "mesh";
         }
             break;
         case E_RESOURCE_CLASS_SKELETON:
         {
             m_status |= E_LOADING_STATUS_SKELETON_LOADED;
+            resourcename = "skeleton";
         }
             break;
         case E_RESOURCE_CLASS_SEQUENCE:
         {
             m_status |= E_LOADING_STATUS_SEQUENCE_LOADED;
+            resourcename = "sequence";
         }
+            break;
+        case E_RESOURCE_CLASS_TEXTURE:
+        {
+            resourcename = "texture";
+        }
+            break;
+        case E_RESOURCE_CLASS_MATERIAL:
+        {
+            resourcename = "material";
+        }
+            break;
+
         default:
             break;
     }
+    std::cout<<"Loaded: "<<resourcename<<". Guid: "<<_resource->Get_Guid()<<std::endl;
 }
 
 void IGameObject::_OnSceneUpdate(f32 _deltatime)

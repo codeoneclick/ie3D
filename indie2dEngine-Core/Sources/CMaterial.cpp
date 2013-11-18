@@ -12,6 +12,7 @@
 #include "CRenderMgr.h"
 #include "ITemplate.h"
 #include "CResourceAccessor.h"
+#include "IResourceLoadingHandler.h"
 
 static bool s_states[E_RENDER_STATE_MAX] =
 {
@@ -22,6 +23,7 @@ static bool s_states[E_RENDER_STATE_MAX] =
 };
 
 CMaterial::CMaterial(std::shared_ptr<CShader> _shader, const std::string& _guid) :
+IResource(E_RESOURCE_CLASS_MATERIAL, _guid),
 m_shader(_shader),
 m_guid(_guid),
 m_isDebug(false),
@@ -42,7 +44,7 @@ CMaterial::~CMaterial(void)
     
 }
 
-void CMaterial::Serialize(const std::shared_ptr<SMaterialTemplate>& _template, const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor)
+void CMaterial::Serialize(const std::shared_ptr<SMaterialTemplate>& _template, const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<IResourceLoadingHandler>& _handler)
 {
     assert(_template != nullptr);
     assert(_screenSpaceTextureAccessor != nullptr);
@@ -64,6 +66,10 @@ void CMaterial::Serialize(const std::shared_ptr<SMaterialTemplate>& _template, c
     for(const auto& textureTemplate : _template->m_texturesTemplates)
     {
         std::shared_ptr<CTexture> texture = textureTemplate->m_filename.length() != 0 ? _resourceAccessor->CreateTexture(textureTemplate->m_filename) : _screenSpaceTextureAccessor->Get_RenderOperationTexture(textureTemplate->m_operationName);
+        if(_handler != nullptr)
+        {
+            texture->Register_LoadingHandler(_handler);
+        }
         assert(texture != nullptr);
         texture->Set_Wrap(textureTemplate->m_wrap);
         assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);

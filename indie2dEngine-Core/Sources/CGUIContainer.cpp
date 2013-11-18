@@ -63,7 +63,7 @@ void CGUIContainer::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
                                                                        guicontainerTemplate->m_materialsTemplate->m_shaderTemplate->m_fsFilename);
     assert(shader != nullptr);
 	m_material = std::make_shared<CMaterial>(shader, guicontainerTemplate->m_materialsTemplate->m_filename);
-	m_material->Serialize(guicontainerTemplate->m_materialsTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor);
+	m_material->Serialize(guicontainerTemplate->m_materialsTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
     m_material->Set_IsBatching(guicontainerTemplate->m_isBatching);
 	m_materialModeName = guicontainerTemplate->m_materialsTemplate->m_renderMode;
 

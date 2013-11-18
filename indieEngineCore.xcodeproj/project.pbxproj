@@ -1578,8 +1578,6 @@
 				A46A317B1746408B0044643E /* CRenderMgr.cpp */,
 				A46A317F174640A30044643E /* IRenderHandler.h */,
 				A46A317E174640A30044643E /* IRenderHandler.cpp */,
-				A46A3182174640BD0044643E /* CMaterial.h */,
-				A46A3181174640BC0044643E /* CMaterial.cpp */,
 				A4535E8717C633D50058CD47 /* CBatchingMgr.h */,
 				A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */,
 				A4535E9217C633EA0058CD47 /* CBatch.h */,
@@ -1707,6 +1705,8 @@
 				A42FF51917A150A600C0B419 /* CSkeleton.cpp */,
 				A42FF51D17A15C4700C0B419 /* CSequence.h */,
 				A42FF51C17A15C4700C0B419 /* CSequence.cpp */,
+				A46A3182174640BD0044643E /* CMaterial.h */,
+				A46A3181174640BC0044643E /* CMaterial.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

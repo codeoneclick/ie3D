@@ -43,18 +43,18 @@ public:
         return m_guid;
     };
     
-    inline const E_RESOURCE_CLASS Get_Class(void) const
+    inline E_RESOURCE_CLASS Get_Class(void) const
     {
         return m_class;
     };
     
-    inline const bool IsLoaded(void) const
+    inline bool IsLoaded(void) const
     {
 		const bool value = 0 != (m_status & E_RESOURCE_STATUS_LOADED);
 		return value;
     };
     
-    inline const bool IsCommited(void) const
+    inline bool IsCommited(void) const
     {
 		const bool value = 0 != (m_status & E_RESOURCE_STATUS_COMMITED);
 		return value;

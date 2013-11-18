@@ -79,12 +79,18 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         assert(shader != nullptr);
         
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
-        material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor);
+        material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
+        CParticleEmitter::_OnResourceLoaded(material, true);
     }
 
 	IGameObject::ListenRenderMgr(m_isNeedToRender);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+}
+
+void CParticleEmitter::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)
+{
+    IGameObject::_OnResourceLoaded(_resource, _success);
 }
 
 void CParticleEmitter::_EmittParticle(ui32 _index)

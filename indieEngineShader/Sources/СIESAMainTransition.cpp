@@ -79,8 +79,8 @@ void CIESAMainTransition::LoadGameObject(const std::string& _filename)
     m_model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
     InsertModel(m_model);
     
-    m_gameObjectExtension = std::make_shared<IGameObjectExtension>(m_model);
-    m_shaderExtension = std::make_shared<CShaderExtension>(m_gameObjectExtension->Get_Shader("world.space.operation"));
+    //m_gameObjectExtension = std::make_shared<IGameObjectExtension>(m_model);
+    //m_shaderExtension = std::make_shared<CShaderExtension>(m_gameObjectExtension->Get_Shader("world.space.operation"));
 }
 
 std::shared_ptr<IGameObjectExtension> CIESAMainTransition::Get_GameObjectExtension(void)
