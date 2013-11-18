@@ -30,10 +30,10 @@ m_isDebug(false),
 m_isReflected(false),
 m_isBatching(false)
 {
-    for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
-    {
-        m_textures[i] = nullptr;
-    }
+    std::for_each(m_textures.begin(), m_textures.end(), [](std::shared_ptr<CTexture> _texture)
+                  {
+                      _texture = nullptr;
+                  });
     
     m_states[E_RENDER_STATE_DEPTH_TEST] = true;
     m_states[E_RENDER_STATE_DEPTH_MASK] = true;
@@ -107,9 +107,22 @@ void CMaterial::Set_RenderState(E_RENDER_STATE _state, bool _value)
     m_states[_state] = _value;
 }
 
-void CMaterial::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
+void CMaterial::Set_Texture(const std::shared_ptr<CTexture>& _texture, E_SHADER_SAMPLER _sampler)
 {
-    m_textures[_sampler] = _texture;
+    m_textures.at(_sampler) = _texture;
+}
+
+
+E_SHADER_SAMPLER CMaterial::Get_Sampler(const std::shared_ptr<CTexture> &_texture)
+{
+    for(ui32 i = 0; i < m_textures.size(); ++i)
+    {
+        if(_texture == m_textures.at(i))
+        {
+            return static_cast<E_SHADER_SAMPLER>(i);
+        }
+    }
+    assert(false);
 }
 
 void CMaterial::Bind(void)

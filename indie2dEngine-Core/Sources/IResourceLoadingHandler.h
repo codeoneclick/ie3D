@@ -40,14 +40,14 @@ class IResourceLoadingHandler
 {
 public:
     
-    typedef std::function<void(const std::shared_ptr<IResource>&)> _RESOURCE_LOADED_HANDLER;
+    typedef std::function<void(const std::shared_ptr<IResource>&)> RESOURCE_LOADED_HANDLER;
     
 private:
     
     friend class IResource;
     
     CResourceLoadingCommands m_commands;
-    std::array<_RESOURCE_LOADED_HANDLER, E_RESOURCE_CLASS_MAX> m_handlers;
+    std::array<RESOURCE_LOADED_HANDLER, E_RESOURCE_CLASS_MAX> m_handlers;
     
     void _ConnectCommands(void);
     inline CResourceLoadingCommands _Get_Commands(void)
@@ -61,7 +61,7 @@ protected:
     
     virtual void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success) = 0;
     
-    inline _RESOURCE_LOADED_HANDLER _Get_Handler(E_RESOURCE_CLASS _class)
+    inline RESOURCE_LOADED_HANDLER _Get_Handler(E_RESOURCE_CLASS _class)
     {
         return m_handlers.at(_class);
     };
@@ -70,7 +70,7 @@ public:
     
     virtual ~IResourceLoadingHandler(void);
     
-    void Listen(const _RESOURCE_LOADED_HANDLER& _handler, E_RESOURCE_CLASS _class);
+    void Listen(const RESOURCE_LOADED_HANDLER& _handler, E_RESOURCE_CLASS _class);
 };
 
 #endif 

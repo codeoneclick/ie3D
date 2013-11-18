@@ -32,7 +32,7 @@ protected:
     GLenum m_blendFunctionSource;
     GLenum m_blendFunctionDest;
     glm::vec4 m_clipping;
-    std::shared_ptr<CTexture> m_textures[E_SHADER_SAMPLER_MAX];
+    std::array<std::shared_ptr<CTexture>, E_SHADER_SAMPLER_MAX> m_textures;
     bool m_states[E_RENDER_STATE_MAX];
     bool m_isReflected;
     bool m_isBatching;
@@ -94,7 +94,9 @@ public:
         return m_guid;
     };
     
-    void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler);
+    void Set_Texture(const std::shared_ptr<CTexture>& _texture, E_SHADER_SAMPLER _sampler);
+    E_SHADER_SAMPLER Get_Sampler(const std::shared_ptr<CTexture>& _texture);
+    
     
     void Bind(void);
     void Unbind(void);
