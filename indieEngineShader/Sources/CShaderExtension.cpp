@@ -7,6 +7,7 @@
 //
 
 #include "CShaderExtension.h"
+#include "CShaderCommiter_GLSL.h"
 
 CShaderExtension::CShaderExtension(const std::shared_ptr<CShader>& _shader) :
 CShader("shader.extension"),
@@ -34,5 +35,8 @@ std::string CShaderExtension::Get_FragmentShaderSourceCode(void)
 
 bool CShaderExtension::Compile(const std::string& _vsSourceCode, const std::string& _fsSourceCode)
 {
-    return false;
+    assert(m_shader != nullptr);
+    std::shared_ptr<CShaderCommiter_GLSL> commiter = std::make_shared<CShaderCommiter_GLSL>(m_shader->Get_Guid(), _vsSourceCode, _fsSourceCode, m_shader);
+    commiter->Commit();
+    return true;
 }

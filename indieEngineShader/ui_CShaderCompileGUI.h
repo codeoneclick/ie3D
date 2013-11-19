@@ -17,6 +17,7 @@
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QPushButton>
 
 QT_BEGIN_NAMESPACE
 
@@ -30,6 +31,8 @@ public:
     QGroupBox *groupBox_3;
     QPlainTextEdit *console;
     QGroupBox *groupBox_4;
+    QPushButton *btn_compile;
+    QPushButton *btn_close;
 
     void setupUi(QDialog *CShaderCompileGUI)
     {
@@ -59,6 +62,12 @@ public:
         groupBox_4 = new QGroupBox(CShaderCompileGUI);
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
         groupBox_4->setGeometry(QRect(769, 9, 241, 601));
+        btn_compile = new QPushButton(groupBox_4);
+        btn_compile->setObjectName(QStringLiteral("btn_compile"));
+        btn_compile->setGeometry(QRect(10, 30, 221, 32));
+        btn_close = new QPushButton(groupBox_4);
+        btn_close->setObjectName(QStringLiteral("btn_close"));
+        btn_close->setGeometry(QRect(10, 70, 221, 32));
 
         retranslateUi(CShaderCompileGUI);
 
@@ -72,6 +81,8 @@ public:
         groupBox_2->setTitle(QApplication::translate("CShaderCompileGUI", "Source FS", 0));
         groupBox_3->setTitle(QApplication::translate("CShaderCompileGUI", "Console", 0));
         groupBox_4->setTitle(QApplication::translate("CShaderCompileGUI", "Settings", 0));
+        btn_compile->setText(QApplication::translate("CShaderCompileGUI", "Compile", 0));
+        btn_close->setText(QApplication::translate("CShaderCompileGUI", "Close", 0));
     } // retranslateUi
 
 };

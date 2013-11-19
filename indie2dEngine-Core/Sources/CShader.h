@@ -154,7 +154,7 @@ protected:
     i32 m_uniforms[E_SHADER_UNIFORM_MAX];
     i32 m_samplers[E_SHADER_SAMPLER_MAX];
     i32 m_attributes[E_SHADER_ATTRIBUTE_MAX];
-    std::vector<std::shared_ptr<CShaderUniform> > m_values;
+    std::array<std::shared_ptr<CShaderUniform>, E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX> m_values;
     
     std::string m_vsSourceCode;
     std::string m_fsSourceCode;

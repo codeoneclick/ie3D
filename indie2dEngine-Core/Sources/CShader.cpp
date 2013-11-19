@@ -141,22 +141,21 @@ m_handle(0)
     m_attributes[E_SHADER_ATTRIBUTE_TANGENT] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_COLOR] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_EXTRA] = -1;
-    m_values.resize(E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX);
-    for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
-    {
-        m_values[i] = nullptr;
-    }
 }
 
 CShader::~CShader(void)
 {
-    m_values.clear();
-    m_values.resize(0);
+    
 }
 
 void CShader::_Set_Handle(ui32 _handle)
 {
     m_handle = _handle;
+    
+    std::for_each(m_values.begin(), m_values.end(), [](std::shared_ptr<CShaderUniform> _value)
+                  {
+                      _value = nullptr;
+                  });
     
     m_uniforms[E_SHADER_UNIFORM_MATRIX_WORLD] = glGetUniformLocation(m_handle, SUniforms.m_worldMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_VIEW] = glGetUniformLocation(m_handle, SUniforms.m_viewMatrix.c_str());

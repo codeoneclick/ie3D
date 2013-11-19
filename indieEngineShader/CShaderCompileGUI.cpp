@@ -12,8 +12,10 @@
 CShaderCompileGUI::CShaderCompileGUI(QWidget *parent) :
     QDialog(parent),
 #if defined(__OSX__) || defined(__WIN32__)
+
     m_iesaTransition(nullptr),
     m_mode(""),
+
 #endif
     ui(new Ui::CShaderCompileGUI)
 {
@@ -24,7 +26,6 @@ CShaderCompileGUI::~CShaderCompileGUI()
 {
     delete ui;
 }
-
 
 void CShaderCompileGUI::Set_Transition(const std::shared_ptr<CIESAMainTransition> _ieasTransition)
 {
@@ -50,4 +51,26 @@ void CShaderCompileGUI::Set_Mode(const std::string &_mode)
 {
     assert(_mode.length() != 0);
     m_mode = _mode;
+}
+void CShaderCompileGUI::on_btn_compile_clicked()
+{
+#if defined(__OSX__) || defined(__WIN32__)
+    
+    IResourceLoadingHandler::RESOURCE_LOADING_HANDLER handler;
+    std::function<void(const std::shared_ptr<IResource>&)> function = [handler, this](const std::shared_ptr<IResource>& _resource)
+    {
+        std::shared_ptr<CShaderExtension> shaderExtension = std::static_pointer_cast<CShaderExtension>(_resource);
+        std::string vsSourceCode = ui->source_vs->toPlainText().toUtf8().constData();
+        std::string fsSourceCode = ui->source_fs->toPlainText().toUtf8().constData();
+        shaderExtension->Compile(vsSourceCode, fsSourceCode);
+    };
+    handler = std::make_shared<std::function<void(const std::shared_ptr<IResource>&)>>(function);
+    m_iesaTransition->Get_GameObjectExtension()->Get_Shader(handler, m_mode);
+    
+#endif
+}
+
+void CShaderCompileGUI::on_btn_close_clicked()
+{
+    close();
 }

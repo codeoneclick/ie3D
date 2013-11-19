@@ -38,6 +38,11 @@ public:
     
 #endif
 
+private slots:
+    void on_btn_compile_clicked();
+
+    void on_btn_close_clicked();
+
 private:
     Ui::CShaderCompileGUI *ui;
 };
