@@ -77,7 +77,7 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
                                                                            materialTemplate->m_shaderTemplate->m_fsFilename);
         assert(shader != nullptr);
-        
+        shader->Register_LoadingHandler(shared_from_this());
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_filename);
         material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
         m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
@@ -86,6 +86,16 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 
 	IGameObject::ListenRenderMgr(m_isNeedToRender);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+    
+    std::set<std::string> modes;
+    for(auto material : m_materials)
+    {
+        modes.insert(material.first);
+    }
+    for(TEMPLATE_LOADING_HANDLER handler : m_templateLoadingHandlers)
+    {
+        (*handler)(modes);
+    }
 }
 
 void CParticleEmitter::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)

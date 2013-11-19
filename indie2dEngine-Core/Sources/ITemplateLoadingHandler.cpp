@@ -45,3 +45,14 @@ void ITemplateLoadingHandler::_ConnectCommands(void)
 {
     m_commands._ConnectTemplateLoadedCommand(std::bind(&ITemplateLoadingHandler::_OnTemplateLoaded, this, std::placeholders::_1));
 }
+
+void ITemplateLoadingHandler::RegisterTemplateLoadingHandler(const TEMPLATE_LOADING_HANDLER& _handler)
+{
+    m_templateLoadingHandlers.insert(_handler);
+}
+
+void ITemplateLoadingHandler::UnregisterTemplateLoadingHandler(const TEMPLATE_LOADING_HANDLER& _handler)
+{
+    m_templateLoadingHandlers.insert(_handler);
+}
+

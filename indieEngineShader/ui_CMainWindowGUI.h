@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
@@ -32,6 +33,7 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
+    QComboBox *materials_list;
     QGroupBox *groupBox_2;
     QWidget *opengl_window;
     QMenuBar *menuBar;
@@ -51,13 +53,16 @@ public:
         groupBox->setGeometry(QRect(669, 10, 341, 691));
         pushButton = new QPushButton(groupBox);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(20, 30, 301, 32));
+        pushButton->setGeometry(QRect(20, 80, 301, 32));
         pushButton_2 = new QPushButton(groupBox);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(20, 70, 301, 32));
+        pushButton_2->setGeometry(QRect(20, 120, 301, 32));
         pushButton_3 = new QPushButton(groupBox);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(20, 110, 301, 32));
+        pushButton_3->setGeometry(QRect(20, 160, 301, 32));
+        materials_list = new QComboBox(groupBox);
+        materials_list->setObjectName(QStringLiteral("materials_list"));
+        materials_list->setGeometry(QRect(25, 40, 291, 26));
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         groupBox_2->setGeometry(QRect(10, 9, 641, 691));

@@ -75,6 +75,9 @@ void CMaterial::Serialize(const std::shared_ptr<SMaterialTemplate>& _template, c
         assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);
         CMaterial::Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->m_sampler));
     }
+    
+    m_status |= E_RESOURCE_STATUS_LOADED;
+    m_status |= E_RESOURCE_STATUS_COMMITED;
 }
 
 void CMaterial::Set_CullFaceMode(GLenum _mode)

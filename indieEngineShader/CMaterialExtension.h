@@ -27,6 +27,11 @@ public:
     CMaterialExtension(const std::shared_ptr<CMaterial>& _material);
     ~CMaterialExtension(void);
     
+    inline std::shared_ptr<CMaterial> Get_Material(void)
+    {
+        return m_material;
+    };
+    
     inline std::shared_ptr<CShaderExtension> Get_ShaderExtension(void)
     {
         return m_shaderExtension;

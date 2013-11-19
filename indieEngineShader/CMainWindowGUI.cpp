@@ -11,6 +11,7 @@
 #include "СIESAMainTransition.h"
 #include "CCommonOS.h"
 #include "CGameLoopExecutor.h"
+#include "IGameObjectExtension.h"
 #endif
 
 CMainWindowGUI::CMainWindowGUI(QWidget *parent) :
@@ -72,6 +73,17 @@ void CMainWindowGUI::Execute(void)
     m_iesaWorkflow->GoToTransition("main.transition.xml");
     m_iesaTransition->LoadGameObject("model.Footman.xml");
     
+    ITemplateLoadingHandler::TEMPLATE_LOADING_HANDLER handler;
+    std::function<void(const std::set<std::string>&)> function = [handler, this](const std::set<std::string>& _modes)
+    {
+        for(auto mode : _modes)
+        {
+            QString item = mode.c_str();
+            ui->materials_list->addItem(item);
+        }
+    };
+    handler = std::make_shared<std::function<void(const std::set<std::string>&)>>(function);
+    m_iesaTransition->Get_GameObjectExtension()->Get_Modes(handler);
 #endif
 }
 

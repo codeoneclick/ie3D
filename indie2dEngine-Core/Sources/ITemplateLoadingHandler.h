@@ -41,6 +41,10 @@ public:
 
 class ITemplateLoadingHandler
 {
+public:
+    
+    typedef std::shared_ptr<std::function<void(const std::set<std::string>&)>> TEMPLATE_LOADING_HANDLER;
+    
 private:
     
     CTemplateLoadingCommands m_commands;
@@ -61,11 +65,16 @@ protected:
     
     ITemplateLoadingHandler(void);
     
+    std::set<TEMPLATE_LOADING_HANDLER> m_templateLoadingHandlers;
+    
     virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template) = 0;
     
 public:
     
     virtual ~ITemplateLoadingHandler(void);
+    
+    void RegisterTemplateLoadingHandler(const TEMPLATE_LOADING_HANDLER& _handler);
+    void UnregisterTemplateLoadingHandler(const TEMPLATE_LOADING_HANDLER& _handler);
 };
 
 #endif

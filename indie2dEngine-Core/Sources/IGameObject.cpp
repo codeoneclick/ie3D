@@ -193,10 +193,10 @@ void IGameObject::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _
             break;
     }
     
-    RESOURCE_LOADED_HANDLER handler = IResourceLoadingHandler::_Get_Handler(_resource->Get_Class());
-    if(handler != nullptr)
+    std::set<RESOURCE_LOADING_HANDLER> handlers = m_resourceLoadingHandlers[_resource->Get_Class()];
+    for(RESOURCE_LOADING_HANDLER handler : handlers)
     {
-        handler(_resource);
+        (*handler)(_resource);
     }
     std::cout<<"Loaded: "<<resourcename<<". Guid: "<<_resource->Get_Guid()<<std::endl;
 }
