@@ -40,6 +40,7 @@
 		A4BF8EFA182A8B5900B0289E /* CShaderExtension.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A4BF8EF8182A8B5900B0289E /* CShaderExtension.cpp */; };
 		A4BF8F11182A8E9600B0289E /* IGameObjectExtension.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A4BF8F0F182A8E9600B0289E /* IGameObjectExtension.cpp */; };
 		A4BF8F55182B96D500B0289E /* libindieEngineCore-osx-Lib.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A4BF8F52182B96B600B0289E /* libindieEngineCore-osx-Lib.a */; };
+		A4BF8F67183B648B00B0289E /* CMaterialExtension.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A4BF8F65183B648B00B0289E /* CMaterialExtension.cpp */; };
 		AE4BC056CC6D957212DCBBA9 /* QtWidgets.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = CF9CC1A0C929C1437E2A2AA5 /* QtWidgets.framework */; };
 		B5C279A0B452D00BC7F6F369 /* CMainWindowGUI.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = F3DB039924C047693C9CD035 /* CMainWindowGUI.cpp */; settings = {ATTRIBUTES = (); }; };
 		BCEF71E1EDFB18DA77DC750B /* OpenGL.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = DA18A6831232F53228631AD1 /* OpenGL.framework */; };
@@ -134,6 +135,8 @@
 		A4BF8F0F182A8E9600B0289E /* IGameObjectExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGameObjectExtension.cpp; path = Sources/IGameObjectExtension.cpp; sourceTree = SOURCE_ROOT; };
 		A4BF8F10182A8E9600B0289E /* IGameObjectExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGameObjectExtension.h; path = Sources/IGameObjectExtension.h; sourceTree = SOURCE_ROOT; };
 		A4BF8F44182B96A900B0289E /* indieEngineCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = indieEngineCore.xcodeproj; path = ../indieEngineCore.xcodeproj; sourceTree = SOURCE_ROOT; };
+		A4BF8F65183B648B00B0289E /* CMaterialExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMaterialExtension.cpp; sourceTree = SOURCE_ROOT; };
+		A4BF8F66183B648B00B0289E /* CMaterialExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMaterialExtension.h; sourceTree = SOURCE_ROOT; };
 		A86A1328DF112F4FF2DB960E /* ui_CMainWindowGUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ui_CMainWindowGUI.h; sourceTree = "<absolute>"; };
 		C1C8ADEB7E4183E896AE3BC1 /* moc_CMaterialSettingsGUI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = moc_CMaterialSettingsGUI.cpp; sourceTree = "<absolute>"; };
 		C6766F86E49E9C8701C8E637 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -232,14 +235,11 @@
 		A4BF8EB6182A804800B0289E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A4BF8F64183B61C100B0289E /* Datamodel */,
 				A4BF8ED9182A80A900B0289E /* CIESAWorkflow.cpp */,
 				A4BF8EDA182A80A900B0289E /* CIESAWorkflow.h */,
-				A4BF8EDB182A80A900B0289E /* СIESAMainTransition.cpp */,
 				A4BF8EDC182A80A900B0289E /* СIESAMainTransition.h */,
-				A4BF8EF9182A8B5900B0289E /* CShaderExtension.h */,
-				A4BF8EF8182A8B5900B0289E /* CShaderExtension.cpp */,
-				A4BF8F10182A8E9600B0289E /* IGameObjectExtension.h */,
-				A4BF8F0F182A8E9600B0289E /* IGameObjectExtension.cpp */,
+				A4BF8EDB182A80A900B0289E /* СIESAMainTransition.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -273,6 +273,19 @@
 				A4BF8F52182B96B600B0289E /* libindieEngineCore-osx-Lib.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A4BF8F64183B61C100B0289E /* Datamodel */ = {
+			isa = PBXGroup;
+			children = (
+				A4BF8EF9182A8B5900B0289E /* CShaderExtension.h */,
+				A4BF8EF8182A8B5900B0289E /* CShaderExtension.cpp */,
+				A4BF8F66183B648B00B0289E /* CMaterialExtension.h */,
+				A4BF8F65183B648B00B0289E /* CMaterialExtension.cpp */,
+				A4BF8F10182A8E9600B0289E /* IGameObjectExtension.h */,
+				A4BF8F0F182A8E9600B0289E /* IGameObjectExtension.cpp */,
+			);
+			name = Datamodel;
 			sourceTree = "<group>";
 		};
 		E5CB62C61293971C56F3BE8A /* Sources [uic] */ = {
@@ -428,7 +441,7 @@
 			name = "Qt Preprocessors";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_preprocess.mak";
+			shellScript = "make -C /Users/sergey.sergeev/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_preprocess.mak";
 		};
 		D7BA7D76DAB5DD13389D6332 /* Qt Qmake */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -438,7 +451,7 @@
 			name = "Qt Qmake";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_makeqmake.mak";
+			shellScript = "make -C /Users/sergey.sergeev/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_makeqmake.mak";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -447,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4BF8F67183B648B00B0289E /* CMaterialExtension.cpp in Compile Sources */,
 				2B093CA6F071B023A473CED0 /* main.cpp in Compile Sources */,
 				B5C279A0B452D00BC7F6F369 /* CMainWindowGUI.cpp in Compile Sources */,
 				A4BF8EDD182A80A900B0289E /* CIESAWorkflow.cpp in Compile Sources */,

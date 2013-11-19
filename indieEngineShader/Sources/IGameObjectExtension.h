@@ -11,7 +11,10 @@
 
 #include "IGameObject.h"
 
-class CShader;
+class CMaterialExtension;
+
+class CSceneGraph;
+class CSceneFabricator;
 
 class IGameObjectExtension : public IGameObject
 {
@@ -20,23 +23,23 @@ private:
 protected:
     
     std::shared_ptr<IGameObject> m_gameObject;
-    std::function<void(const std::shared_ptr<IGameObjectExtension>&)> m_startLoadingCallback;
-    std::function<void(const std::shared_ptr<IGameObjectExtension>&)> m_endLoadingCallback;
-
+    std::map<std::string, std::shared_ptr<CMaterialExtension>> m_materials;
+    std::shared_ptr<CSceneGraph> m_sceneGraph;
+    std::shared_ptr<CSceneFabricator> m_sceneFabricator;
+    
+    void _OnExtensionResourceLoaded(const std::shared_ptr<IResource>& _resource);
     
 public:
     
-    IGameObjectExtension(const std::shared_ptr<IGameObject>& _gameObject);
+    IGameObjectExtension(const std::shared_ptr<CSceneGraph>& _sceneGraph, const std::shared_ptr<CSceneFabricator>& _sceneFabricator);
     ~IGameObjectExtension(void);
     
-    void Load(void);
+    void Load(const std::string& _filename);
     
-    void Set_StartLoadingCallback(const std::function<void(const std::shared_ptr<IGameObjectExtension>&)>& _callback);
-    void Set_EndLoadingCallback(const std::function<void(const std::shared_ptr<IGameObjectExtension>&)>& _callaback);
-    
-    std::shared_ptr<CMaterial> Get_Material(const std::string& _mode);
-    std::shared_ptr<CShader> Get_Shader(const std::string& _mode);
-    
+    inline const std::shared_ptr<IGameObject> Get_GameObject(void)
+    {
+        return m_gameObject;
+    };
 };
 
 #endif

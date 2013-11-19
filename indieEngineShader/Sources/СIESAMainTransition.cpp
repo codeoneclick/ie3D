@@ -17,8 +17,6 @@ CIESAMainTransition::CIESAMainTransition(const std::string& _filename, std::shar
 IFabricator(_templateAccessor, _resourceAccessor),
 IGameTransition(_filename, _graphicsContext, _inputContext, _resourceAccessor, _templateAccessor),
 m_camera(nullptr),
-m_model(nullptr),
-m_shaderExtension(nullptr),
 m_gameObjectExtension(nullptr)
 {
     
@@ -50,10 +48,10 @@ void CIESAMainTransition::_OnGameLoopUpdate(f32 _deltatime)
     {
         static f32 value = 0.0f;
         value += _deltatime;
-        if(m_model != nullptr)
+        if(m_gameObjectExtension != nullptr && m_gameObjectExtension->Get_GameObject() != nullptr)
         {
-            m_model->Set_Rotation(glm::vec3(0.0f, value, 0.0f));
-            m_model->Set_Animation("model_02.MDL_anim");
+            m_gameObjectExtension->Get_GameObject()->Set_Rotation(glm::vec3(0.0f, value, 0.0f));
+            std::static_pointer_cast<CModel>(m_gameObjectExtension->Get_GameObject())->Set_Animation("model_02.MDL_anim");
         }
     }
 }
@@ -65,33 +63,15 @@ void CIESAMainTransition::CreateGameObject(void)
 
 void CIESAMainTransition::LoadGameObject(const std::string& _filename)
 {
-    if(m_model != nullptr)
-    {
-        RemoveModel(m_model);
-        DeleteModel(m_model);
-        m_model = nullptr;
-        m_shaderExtension = nullptr;
-        m_gameObjectExtension = nullptr;
-    }
-    
-    m_model = CreateModel(_filename);
-    m_model->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
-    m_model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
-    InsertModel(m_model);
-    
-    //m_gameObjectExtension = std::make_shared<IGameObjectExtension>(m_model);
-    //m_shaderExtension = std::make_shared<CShaderExtension>(m_gameObjectExtension->Get_Shader("world.space.operation"));
+    std::shared_ptr<CSceneGraph> sceneGraph = std::dynamic_pointer_cast<CSceneGraph>(shared_from_this());
+    std::shared_ptr<CSceneFabricator> sceneFabricator = std::dynamic_pointer_cast<CSceneFabricator>(shared_from_this());
+    m_gameObjectExtension = std::make_shared<IGameObjectExtension>(sceneGraph, sceneFabricator);
+    m_gameObjectExtension->Load(_filename);
 }
 
 std::shared_ptr<IGameObjectExtension> CIESAMainTransition::Get_GameObjectExtension(void)
 {
     assert(m_gameObjectExtension != nullptr);
     return m_gameObjectExtension;
-}
-
-std::shared_ptr<CShaderExtension> CIESAMainTransition::Get_ShaderExtension(void)
-{
-    assert(m_shaderExtension != nullptr);
-    return m_shaderExtension;
 }
 
