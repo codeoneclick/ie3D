@@ -115,6 +115,11 @@ void CMaterial::Set_Texture(const std::shared_ptr<CTexture>& _texture, E_SHADER_
     m_textures.at(_sampler) = _texture;
 }
 
+std::shared_ptr<CTexture> CMaterial::Get_Texture(E_SHADER_SAMPLER _sampler)
+{
+    return m_textures.at(_sampler);
+}
+
 
 E_SHADER_SAMPLER CMaterial::Get_Sampler(const std::shared_ptr<CTexture> &_texture)
 {

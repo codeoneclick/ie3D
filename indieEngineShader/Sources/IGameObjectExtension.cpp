@@ -8,6 +8,7 @@
 
 #include "IGameObjectExtension.h"
 #include "CMaterial.h"
+#include "CTexture.h"
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
 #include "CModel.h"
@@ -107,15 +108,20 @@ void IGameObjectExtension::Get_Material(const RESOURCE_LOADING_HANDLER& _handler
     auto materialExtension = m_materialsExtension.find(_mode);
     if(materialExtension != m_materialsExtension.end() && materialExtension->second->Get_Material()->IsCommited())
     {
-        (*_handler)(materialExtension->second->Get_Material());
+        (*_handler)(materialExtension->second);
     }
     
     RESOURCE_LOADING_HANDLER handler;
     std::function<void(const std::shared_ptr<IResource>&)> function = [_mode, _handler, handler, this](const std::shared_ptr<IResource>& _resource)
     {
-        if(_mode == _resource->Get_Guid())
+        auto materialExtension = m_materialsExtension.find(_mode);
+        if(materialExtension != m_materialsExtension.end() && materialExtension->second->Get_Material()->IsCommited())
         {
-            (*_handler)(_resource);
+            (*_handler)(materialExtension->second);
+        }
+        else
+        {
+            assert(false);
         }
         m_gameObject->UnregisterResourceLoadingHandler(handler, _resource->Get_Class());
     };
@@ -125,10 +131,54 @@ void IGameObjectExtension::Get_Material(const RESOURCE_LOADING_HANDLER& _handler
 
 void IGameObjectExtension::Get_Shader(const RESOURCE_LOADING_HANDLER& _handler, const std::string& _mode)
 {
+    assert(m_gameObject != nullptr);
+    auto materialExtension = m_materialsExtension.find(_mode);
+    if(materialExtension != m_materialsExtension.end() && materialExtension->second->Get_Material()->Get_Shader()->IsCommited())
+    {
+        (*_handler)(materialExtension->second->Get_ShaderExtension());
+    }
     
+    RESOURCE_LOADING_HANDLER handler;
+    std::function<void(const std::shared_ptr<IResource>&)> function = [_mode, _handler, handler, this](const std::shared_ptr<IResource>& _resource)
+    {
+        auto materialExtension = m_materialsExtension.find(_mode);
+        if(materialExtension != m_materialsExtension.end() && materialExtension->second->Get_Material()->Get_Shader()->IsCommited())
+        {
+            (*_handler)(materialExtension->second->Get_ShaderExtension());
+        }
+        else
+        {
+            assert(false);
+        }
+        m_gameObject->UnregisterResourceLoadingHandler(handler, _resource->Get_Class());
+    };
+    handler = std::make_shared<std::function<void(const std::shared_ptr<IResource>&)>>(function);
+    m_gameObject->RegisterResourceLoadingHandler(handler, E_RESOURCE_CLASS_SHADER);
 }
 
 void IGameObjectExtension::Get_Texture(const RESOURCE_LOADING_HANDLER& _handler, const std::string& _mode, E_SHADER_SAMPLER _sampler)
 {
+    assert(m_gameObject != nullptr);
+    auto materialExtension = m_materialsExtension.find(_mode);
+    if(materialExtension != m_materialsExtension.end() && materialExtension->second->Get_Material()->Get_Texture(_sampler) != nullptr && materialExtension->second->Get_Material()->Get_Texture(_sampler)->IsCommited())
+    {
+        (*_handler)(materialExtension->second->Get_Material()->Get_Texture(_sampler));
+    }
     
+    RESOURCE_LOADING_HANDLER handler;
+    std::function<void(const std::shared_ptr<IResource>&)> function = [_mode, _handler, handler, _sampler, this](const std::shared_ptr<IResource>& _resource)
+    {
+        auto materialExtension = m_materialsExtension.find(_mode);
+        if(materialExtension != m_materialsExtension.end() && materialExtension->second->Get_Material()->Get_Texture(_sampler) != nullptr && materialExtension->second->Get_Material()->Get_Texture(_sampler)->IsCommited())
+        {
+            (*_handler)(materialExtension->second->Get_Material()->Get_Texture(_sampler));
+        }
+        else
+        {
+            assert(false);
+        }
+        m_gameObject->UnregisterResourceLoadingHandler(handler, _resource->Get_Class());
+    };
+    handler = std::make_shared<std::function<void(const std::shared_ptr<IResource>&)>>(function);
+    m_gameObject->RegisterResourceLoadingHandler(handler, E_RESOURCE_CLASS_SHADER);
 }

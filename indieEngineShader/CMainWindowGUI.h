@@ -9,6 +9,8 @@
 
 #if defined(__OSX__) || defined(__WIN32__)
 
+#include "HCommon.h"
+
 class CIESAWorkflow;
 class CIESAMainTransition;
 
@@ -29,6 +31,7 @@ protected:
     
     std::shared_ptr<CIESAWorkflow> m_iesaWorkflow;
     std::shared_ptr<CIESAMainTransition> m_iesaTransition;
+    std::string m_mode;
     
 #endif
     
@@ -44,6 +47,8 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_3_clicked();
+
+    void on_materials_list_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::CMainWindowGUI *ui;

@@ -95,6 +95,7 @@ public:
     };
     
     void Set_Texture(const std::shared_ptr<CTexture>& _texture, E_SHADER_SAMPLER _sampler);
+    std::shared_ptr<CTexture> Get_Texture(E_SHADER_SAMPLER _sampler);
     E_SHADER_SAMPLER Get_Sampler(const std::shared_ptr<CTexture>& _texture);
     
     

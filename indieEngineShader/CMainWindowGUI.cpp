@@ -20,6 +20,7 @@ CMainWindowGUI::CMainWindowGUI(QWidget *parent) :
 
     m_iesaWorkflow(nullptr),
     m_iesaTransition(nullptr),
+    m_mode(""),
 
 #endif
     ui(new Ui::CMainWindowGUI)
@@ -38,6 +39,7 @@ void CMainWindowGUI::on_pushButton_clicked()
     
 #if defined(__OSX__) || defined(__WIN32__)
     
+    m_shaderCompileGUI->Set_Mode(m_mode);
     m_shaderCompileGUI->Set_Transition(m_iesaTransition);
     
 #endif
@@ -76,14 +78,16 @@ void CMainWindowGUI::Execute(void)
     ITemplateLoadingHandler::TEMPLATE_LOADING_HANDLER handler;
     std::function<void(const std::set<std::string>&)> function = [handler, this](const std::set<std::string>& _modes)
     {
+        ui->materials_list->clear();
         for(auto mode : _modes)
         {
-            QString item = mode.c_str();
-            ui->materials_list->addItem(item);
+            ui->materials_list->addItem(mode.c_str());
         }
+        m_mode = ui->materials_list->currentText().toUtf8().constData();
     };
     handler = std::make_shared<std::function<void(const std::set<std::string>&)>>(function);
     m_iesaTransition->Get_GameObjectExtension()->Get_Modes(handler);
+    
 #endif
 }
 
@@ -93,5 +97,14 @@ void CMainWindowGUI::closeEvent(QCloseEvent *)
     
     TerminateGameLoop();
     
+#endif
+}
+
+void CMainWindowGUI::on_materials_list_currentIndexChanged(const QString &arg1)
+{
+#if defined(__OSX__) || defined(__WIN32__)
+    
+    m_mode = arg1.toUtf8().constData();
+
 #endif
 }
