@@ -152,10 +152,10 @@ void CShader::_Set_Handle(ui32 _handle)
 {
     m_handle = _handle;
     
-    std::for_each(m_values.begin(), m_values.end(), [](std::shared_ptr<CShaderUniform> _value)
-                  {
-                      _value = nullptr;
-                  });
+    for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
+    {
+        m_values[i] = nullptr;
+    }
     
     m_uniforms[E_SHADER_UNIFORM_MATRIX_WORLD] = glGetUniformLocation(m_handle, SUniforms.m_worldMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_VIEW] = glGetUniformLocation(m_handle, SUniforms.m_viewMatrix.c_str());
