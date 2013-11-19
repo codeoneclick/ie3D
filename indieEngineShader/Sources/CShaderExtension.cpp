@@ -38,5 +38,6 @@ bool CShaderExtension::Compile(const std::string& _vsSourceCode, const std::stri
     assert(m_shader != nullptr);
     std::shared_ptr<CShaderCommiter_GLSL> commiter = std::make_shared<CShaderCommiter_GLSL>(m_shader->Get_Guid(), _vsSourceCode, _fsSourceCode, m_shader);
     commiter->Commit();
+    m_shader->_Set_SourceCode(_vsSourceCode, _fsSourceCode);
     return true;
 }
