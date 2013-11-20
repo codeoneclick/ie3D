@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+class CCodeEditor;
+
 #if defined(__OSX__) || defined(__WIN32__)
 
 class CIESAMainTransition;
@@ -26,6 +28,8 @@ protected:
     
 #endif
 
+    CCodeEditor* m_vsEditor;
+    CCodeEditor* m_fsEditor;
 
 public:
     explicit CShaderCompileGUI(QWidget *parent = 0);

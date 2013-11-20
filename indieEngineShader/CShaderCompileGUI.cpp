@@ -1,5 +1,6 @@
 #include "CShaderCompileGUI.h"
 #include "ui_CShaderCompileGUI.h"
+#include "CCodeEditor.h"
 
 #if defined(__OSX__) || defined(__WIN32__)
 
@@ -20,11 +21,21 @@ CShaderCompileGUI::CShaderCompileGUI(QWidget *parent) :
     ui(new Ui::CShaderCompileGUI)
 {
     ui->setupUi(this);
+    
+    m_vsEditor = new CCodeEditor(ui->groupBox);
+    m_vsEditor->setGeometry(ui->source_vs->geometry());
+    ui->source_vs->setVisible(false);
+    
+    m_fsEditor = new CCodeEditor(ui->groupBox_2);
+    m_fsEditor->setGeometry(ui->source_fs->geometry());
+    ui->source_fs->setVisible(false);
 }
 
 CShaderCompileGUI::~CShaderCompileGUI()
 {
     delete ui;
+    delete m_vsEditor;
+    delete m_fsEditor;
 }
 
 void CShaderCompileGUI::Set_Transition(const std::shared_ptr<CIESAMainTransition> _ieasTransition)
@@ -37,11 +48,11 @@ void CShaderCompileGUI::Set_Transition(const std::shared_ptr<CIESAMainTransition
     std::function<void(const std::shared_ptr<IResource>&)> function = [handler, this](const std::shared_ptr<IResource>& _resource)
     {
         std::shared_ptr<CShaderExtension> shaderExtension = std::static_pointer_cast<CShaderExtension>(_resource);
-        ui->source_vs->clear();
-        ui->source_vs->appendPlainText(shaderExtension->Get_VertexShaderSourceCode().c_str());
+        m_vsEditor->clear();
+        m_vsEditor->appendPlainText(shaderExtension->Get_VertexShaderSourceCode().c_str());
         
-        ui->source_fs->clear();
-        ui->source_fs->appendPlainText(shaderExtension->Get_FragmentShaderSourceCode().c_str());
+        m_fsEditor->clear();
+        m_fsEditor->appendPlainText(shaderExtension->Get_FragmentShaderSourceCode().c_str());
     };
     handler = std::make_shared<std::function<void(const std::shared_ptr<IResource>&)>>(function);
     m_iesaTransition->Get_GameObjectExtension()->Get_Shader(handler, m_mode);
@@ -60,8 +71,8 @@ void CShaderCompileGUI::on_btn_compile_clicked()
     std::function<void(const std::shared_ptr<IResource>&)> function = [handler, this](const std::shared_ptr<IResource>& _resource)
     {
         std::shared_ptr<CShaderExtension> shaderExtension = std::static_pointer_cast<CShaderExtension>(_resource);
-        std::string vsSourceCode = ui->source_vs->toPlainText().toUtf8().constData();
-        std::string fsSourceCode = ui->source_fs->toPlainText().toUtf8().constData();
+        std::string vsSourceCode = m_vsEditor->toPlainText().toUtf8().constData();
+        std::string fsSourceCode = m_fsEditor->toPlainText().toUtf8().constData();
         shaderExtension->Compile(vsSourceCode, fsSourceCode);
     };
     handler = std::make_shared<std::function<void(const std::shared_ptr<IResource>&)>>(function);
