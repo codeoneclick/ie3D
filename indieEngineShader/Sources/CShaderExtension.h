@@ -13,6 +13,8 @@
 
 class CShaderExtension : public CShader
 {
+public:
+    typedef std::function<void(const std::string& message)> SHADER_COMPILE_MESSAGE_HANDLER;
 private:
     
 protected:
@@ -26,7 +28,7 @@ public:
     
     std::string Get_VertexShaderSourceCode(void);
     std::string Get_FragmentShaderSourceCode(void);
-    bool Compile(const std::string& _vsSourceCode, const std::string& _fsSourceCode);
+    bool Compile(const std::string& _vsSourceCode, const std::string& _fsSourceCode, const SHADER_COMPILE_MESSAGE_HANDLER& _handler);
 
 };
 

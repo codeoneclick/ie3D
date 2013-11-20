@@ -1,6 +1,7 @@
 #include "CShaderCompileGUI.h"
 #include "ui_CShaderCompileGUI.h"
 #include "CCodeEditor.h"
+#include "qsyntaxhighlighter.h"
 
 #if defined(__OSX__) || defined(__WIN32__)
 
@@ -24,10 +25,12 @@ CShaderCompileGUI::CShaderCompileGUI(QWidget *parent) :
     
     m_vsEditor = new CCodeEditor(ui->groupBox);
     m_vsEditor->setGeometry(ui->source_vs->geometry());
+    m_vsEditor->setFont(ui->source_vs->font());
     ui->source_vs->setVisible(false);
     
     m_fsEditor = new CCodeEditor(ui->groupBox_2);
     m_fsEditor->setGeometry(ui->source_fs->geometry());
+    m_fsEditor->setFont(ui->source_fs->font());
     ui->source_fs->setVisible(false);
 }
 
@@ -68,12 +71,14 @@ void CShaderCompileGUI::on_btn_compile_clicked()
 #if defined(__OSX__) || defined(__WIN32__)
     
     IResourceLoadingHandler::RESOURCE_LOADING_HANDLER handler;
-    std::function<void(const std::shared_ptr<IResource>&)> function = [handler, this](const std::shared_ptr<IResource>& _resource)
-    {
+    std::function<void(const std::shared_ptr<IResource>&)> function = [handler, this](const std::shared_ptr<IResource>& _resource){
         std::shared_ptr<CShaderExtension> shaderExtension = std::static_pointer_cast<CShaderExtension>(_resource);
         std::string vsSourceCode = m_vsEditor->toPlainText().toUtf8().constData();
         std::string fsSourceCode = m_fsEditor->toPlainText().toUtf8().constData();
-        shaderExtension->Compile(vsSourceCode, fsSourceCode);
+        shaderExtension->Compile(vsSourceCode, fsSourceCode, [this](const std::string& _message){
+            ui->console->clear();
+            ui->console->appendHtml(_message.c_str());
+        });
     };
     handler = std::make_shared<std::function<void(const std::shared_ptr<IResource>&)>>(function);
     m_iesaTransition->Get_GameObjectExtension()->Get_Shader(handler, m_mode);

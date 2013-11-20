@@ -19,6 +19,7 @@ protected:
     
     std::string m_vsSourceCode;
     std::string m_fsSourceCode;
+    std::string m_message;
     
     ui32 _Compile(const std::string& _sourceCode, GLenum _shader);
     ui32 _Link(ui32 _vsHandle, ui32 _fsHandle);
@@ -29,6 +30,11 @@ public:
     ~CShaderCommiter_GLSL(void);
     
     void Commit(void);
+    
+    inline std::string Get_StatusMessage(void)
+    {
+        return m_message;
+    };
 };
 
 #endif 

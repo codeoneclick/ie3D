@@ -34,11 +34,11 @@ ui32 CShaderCommiter_GLSL::_Compile(const std::string &_sourceCode,  GLenum _sha
     
     if (success == GL_FALSE)
     {
-        GLchar messages[256];
-        glGetShaderInfoLog(handle, sizeof(messages), 0, &messages[0]);
-        std::cout<<messages<<std::endl;
+        GLchar message[256];
+        glGetShaderInfoLog(handle, sizeof(message), 0, &message[0]);
+        m_message = message;
+        std::cout<<message<<std::endl;
         m_status = E_COMMITER_STATUS_FAILURE;
-        assert(false);
     }
     return handle;
 }
@@ -54,21 +54,54 @@ ui32 CShaderCommiter_GLSL::_Link(ui32 _vsHandle, ui32 _fsHandle)
     glGetProgramiv(handle, GL_LINK_STATUS, &success);
     if (success == GL_FALSE)
     {
-        GLchar messages[256];
-        glGetProgramInfoLog(handle, sizeof(messages), 0, &messages[0]);
-        std::cout<<messages<<std::endl;
+        GLchar message[256];
+        glGetProgramInfoLog(handle, sizeof(message), 0, &message[0]);
+        m_message = message;
+        std::cout<<m_message<<std::endl;
         m_status = E_COMMITER_STATUS_FAILURE;
-        assert(false);
     }
     return handle;
 }
 
 void CShaderCommiter_GLSL::Commit(void)
 {
+    std::string message = "";
     m_status = E_COMMITER_STATUS_INPROGRESS;
     ui32 vsHandle = _Compile(m_vsSourceCode, GL_VERTEX_SHADER);
+    if(m_status == E_COMMITER_STATUS_FAILURE)
+    {
+        message = "<font color=\"red\"><b>VERTEX SHADER COMPILE ERROR:</b><br>" + m_message + "</font><br>";
+        m_message = message;
+        return;
+    }
+    else
+    {
+        message = "<font color=\"green\"><b>VERTEX SHADER COMPILE SUCCESS.</b></font><br>";
+    }
     ui32 fsHandle = _Compile(m_fsSourceCode, GL_FRAGMENT_SHADER);
+    if(m_status == E_COMMITER_STATUS_FAILURE)
+    {
+        message += "<font color=\"red\"><b>FRAGMENT SHADER COMPILE ERROR:</b><br>" + m_message + "</font><br>";
+        m_message = message;
+        return;
+    }
+    else
+    {
+        message += "<font color=\"green\"><b>FRAGMENT SHADER COMPILE SUCCESS.</b></font><br>";
+    }
+    
     ui32 shHandle = _Link(vsHandle, fsHandle);
+    if(m_status == E_COMMITER_STATUS_FAILURE)
+    {
+        message += "<font color=\"red\"><b>SHADER LINKING ERROR:</b><br>" + m_message + "</font>";
+        m_message = message;
+        return;
+    }
+    else
+    {
+        message += "<font color=\"green\"><b>SHADER LINKING SUCCESS.</b></font>";
+    }
+    m_message = message;
     assert(m_resource != nullptr);
     assert(m_resource->IsLoaded() == true);
     std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
