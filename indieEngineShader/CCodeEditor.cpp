@@ -6,8 +6,8 @@ CCodeEditor::CCodeEditor(QWidget *parent) : QPlainTextEdit(parent)
     m_sourceLineWidget = new CLineWidget(this);
 
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(UpdateLineWidgetWidth(int)));
-    connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(HighlightLine(QRect,int)));
-    connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(UpdateLineWidget()));
+    connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(UpdateLineWidget(QRect,int)));
+    connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(HighlightLine(void)));
 
     UpdateLineWidgetWidth(0);
     HighlightLine();

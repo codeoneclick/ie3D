@@ -40,7 +40,7 @@ compiler_rcc_make_all:
 compiler_rcc_clean:
 compiler_moc_header_make_all: moc_CMainWindowGUI.cpp moc_CShaderCompileGUI.cpp moc_CMaterialSettingsGUI.cpp moc_CMaterialExportGUI.cpp moc_CCodeEditor.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_CMainWindowGUI.cpp moc_CShaderCompileGUI.cpp moc_CMaterialSettingsGUI.cpp moc_CMaterialExportGUI.cpp
+	-$(DEL_FILE) moc_CMainWindowGUI.cpp moc_CShaderCompileGUI.cpp moc_CMaterialSettingsGUI.cpp moc_CMaterialExportGUI.cpp moc_CCodeEditor.cpp
 moc_CMainWindowGUI.cpp: /Applications/Qt/5.1.1/clang_64/include/QtWidgets/QMainWindow \
 		CShaderCompileGUI.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/QDialog \
@@ -61,7 +61,8 @@ moc_CMaterialExportGUI.cpp: /Applications/Qt/5.1.1/clang_64/include/QtWidgets/QD
 		CMaterialExportGUI.h
 	/Applications/Qt/5.1.1/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 $(INCPATH) CMaterialExportGUI.h -o moc_CMaterialExportGUI.cpp
 
-moc_CCodeEditor.cpp: /Applications/Qt/5.1.1/clang_64/include/QtWidgets/QDialog \
+moc_CCodeEditor.cpp: /Applications/Qt/5.1.1/clang_64/include/QtWidgets/QPlainTextEdit \
+		/Applications/Qt/5.1.1/clang_64/include/QtCore/QObject \
 		CCodeEditor.h
 	/Applications/Qt/5.1.1/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 $(INCPATH) CCodeEditor.h -o moc_CCodeEditor.cpp
 
