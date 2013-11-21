@@ -9,56 +9,52 @@
 #ifndef CLandscape_h
 #define CLandscape_h
 
-#include "CGameObject3d.h"
+#include "IGameObject.h"
 #include "CHeightmapProcessor.h"
-#include "CQuadTree.h"
-#include "CLandscapeChunk.h"
-#include "CLandscapeEdges.h"
 
-class CLandscape : public CGameObject3d
+class CLandscapeChunk;
+
+class CLandscape : public IGameObject
 {
 private:
 
     CHeightmapProcessor* m_heightmapProcessor;
     CLandscapeChunk** m_landscapeContainer;
-    CLandscapeEdges* m_landscapeEdges;
     
     ui32 m_numChunkRows;
     ui32 m_numChunkCells;
 
-    CMaterial* m_splattingDiffuseMaterial;
-    CMaterial* m_splattingNormalMaterial;
-
-    void CreateLandscapeEdges(CResourceMgrsFacade* _resourceMgrsFacade, CShaderComposite* _shaderComposite, SLandscapeSettings* _settings);
+    std::shared_ptr<CMaterial> m_splattingDiffuseMaterial;
+    std::shared_ptr<CMaterial> m_splattingNormalMaterial;
     
 protected:
 
-    void OnResourceDidLoad(TSharedPtrResource _resource);
-
-    void OnUpdate(f32 _deltatime);
-
-    ui32 OnDrawIndex(void);
-    void OnBind(E_RENDER_MODE_WORLD_SPACE _mode);
-    void OnDraw(E_RENDER_MODE_WORLD_SPACE _mode);
-    void OnUnbind(E_RENDER_MODE_WORLD_SPACE _mode);
+    void _OnSceneUpdate(f32 _deltatime);
+    
+    i32 _OnQueuePosition(void);
+    void _OnBind(const std::string& _mode);
+    void _OnDraw(const std::string& _mode);
+    void _OnUnbind(const std::string& _mode);
+    void _OnBatch(const std::string& _mode);
+    
+    void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
 
 public:
 
-    CLandscape(void);
+    CLandscape(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
     ~CLandscape(void);
 
-    void Load(CResourceMgrsFacade* _resourceMgrsFacade, CShaderComposite* _shaderComposite, const std::string& _filename);
+    void Set_Camera(std::shared_ptr<CCamera> _camera);
+    void Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id);
     
-    void Set_Camera(CCamera* _camera);
-    void Set_Light(CLight* _light);
-
-    void Set_RenderMgr(CRenderMgr* _renderMgr);
-    void Set_UpdateMgr(CSceneUpdateMgr* _updateMgr);
-
+    void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr);
+    void Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr);
+    
     void ListenRenderMgr(bool _value);
-    void ListenUpdateMgr(bool _value);
+    void ListenSceneUpdateMgr(bool _value);
 
-    inline CTexture* Get_HeightmapTexture(void)
+    inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
     {
         assert(m_heightmapProcessor != nullptr);
         assert(m_heightmapProcessor->Get_HeightmapTexture() != nullptr);

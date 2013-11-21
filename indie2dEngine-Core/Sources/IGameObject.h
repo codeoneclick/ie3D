@@ -126,7 +126,7 @@ public:
     glm::vec3 Get_MaxBound(void);
     glm::vec3 Get_MinBound(void);
     
-    void Set_Camera(std::shared_ptr<CCamera> _camera);
+    virtual void Set_Camera(std::shared_ptr<CCamera> _camera);
     
     virtual inline void Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id)
     {
@@ -142,13 +142,13 @@ public:
     void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode);
     void Set_Clipping(const glm::vec4& _clipping, const std::string& _renderMode);
     
-    inline void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
+    virtual inline void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
     {
 		assert(_renderMgr != nullptr);
         m_renderMgr = _renderMgr;
     };
     
-    inline void Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
+    virtual inline void Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
     {
 		assert(_sceneUpdateMgr != nullptr);
         m_sceneUpdateMgr = _sceneUpdateMgr;

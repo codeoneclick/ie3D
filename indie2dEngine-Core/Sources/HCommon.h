@@ -148,5 +148,6 @@ namespace glm
 
 
 #define MAX_VALUE(a,b) (((a) > (b)) ? (a) : (b))
+#define TO_RGB(r,g,b) (unsigned short)(((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3))
 
 #endif

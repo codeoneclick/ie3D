@@ -22,6 +22,7 @@ protected:
     friend class CTextureSerializer_PVR;
     friend class CTextureCommiter_PVR;
     friend class CTextureLoadingOperation;
+    friend class CHeightmapProcessor;
     friend class CTexture;
     
     ui32 m_width;
@@ -120,6 +121,7 @@ protected:
     friend class CTextureSerializer_PVR;
     friend class CTextureCommiter_PVR;
     friend class CTextureLoadingOperation;
+    friend class CHeightmapProcessor;
     
     std::shared_ptr<CTextureHeader> m_header;
     ui32 m_handle;
