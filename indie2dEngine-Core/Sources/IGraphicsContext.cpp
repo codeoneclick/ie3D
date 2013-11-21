@@ -61,13 +61,16 @@ std::shared_ptr<IGraphicsContext> IGraphicsContext::CreateGraphicsContext(const 
 #endif
         }
             break;
-            
+#if defined(__OSX__)
         case E_PLATFORM_API_OSX:
         {
             context = CreateGraphicsContext_osx(_hwnd);
             m_contexts.push_back(context);
         }
             break;
+#else
+            assert(false);
+#endif
             
         default:
         {

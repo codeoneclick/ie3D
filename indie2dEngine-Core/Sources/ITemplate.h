@@ -72,6 +72,16 @@ struct SOceanTemplate : public ITemplate
     f32 m_waveGeneratorInterval;
 };
 
+struct SLandscapeTemplate : public ITemplate
+{
+    std::vector<std::string> m_materialsFilenames;
+    std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
+    ui32 m_width;
+    ui32 m_height;
+    std::string m_heightmapDataFileName;
+    std::string m_splattingDataFileName;
+};
+
 struct SParticleEmitterTemplate : public ITemplate
 {
     std::vector<std::string> m_materialsFilenames;

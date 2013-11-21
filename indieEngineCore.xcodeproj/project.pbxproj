@@ -342,6 +342,12 @@
 		A46A3312174E1D100044643E /* CTextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A320F174E0F150044643E /* CTextureLoader.cpp */; };
 		A46A3314174E2E370044643E /* CShaderLoader_Testing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A3313174E2E370044643E /* CShaderLoader_Testing.cpp */; };
 		A46A3316174E2E4F0044643E /* CTextureLoader_Testing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A3315174E2E4F0044643E /* CTextureLoader_Testing.cpp */; };
+		A46B1C87183E3B7400A3EF49 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
+		A46B1C88183E426B00A3EF49 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
+		A46B1C89183E426B00A3EF49 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
+		A46B1C8B183E533A00A3EF49 /* CLandscapeChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */; };
+		A46B1C8C183E533A00A3EF49 /* CLandscapeChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */; };
+		A46B1C8D183E533B00A3EF49 /* CLandscapeChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */; };
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 /* End PBXBuildFile section */
 
@@ -665,6 +671,14 @@
 		A46A3315174E2E4F0044643E /* CTextureLoader_Testing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTextureLoader_Testing.cpp; sourceTree = "<group>"; };
 		A46A331A174E4C700044643E /* CResourceAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CResourceAccessor.cpp; path = Sources/CResourceAccessor.cpp; sourceTree = "<group>"; };
 		A46A331B174E4C770044643E /* CResourceAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CResourceAccessor.h; path = Sources/CResourceAccessor.h; sourceTree = "<group>"; };
+		A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLandscape.cpp; path = Sources/CLandscape.cpp; sourceTree = "<group>"; };
+		A46B1C75183E3B3600A3EF49 /* CLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLandscape.h; path = Sources/CLandscape.h; sourceTree = "<group>"; };
+		A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLandscapeChunk.cpp; path = Sources/CLandscapeChunk.cpp; sourceTree = "<group>"; };
+		A46B1C77183E3B3600A3EF49 /* CLandscapeChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLandscapeChunk.h; path = Sources/CLandscapeChunk.h; sourceTree = "<group>"; };
+		A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLandscapeEdges.cpp; path = Sources/CLandscapeEdges.cpp; sourceTree = "<group>"; };
+		A46B1C79183E3B3600A3EF49 /* CLandscapeEdges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLandscapeEdges.h; path = Sources/CLandscapeEdges.h; sourceTree = "<group>"; };
+		A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuadTree.cpp; path = Sources/CQuadTree.cpp; sourceTree = "<group>"; };
+		A46B1C86183E3B7400A3EF49 /* CQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuadTree.h; path = Sources/CQuadTree.h; sourceTree = "<group>"; };
 		A48174771762145D00E1DC6E /* CGameTransitionTemplateLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameTransitionTemplateLoader.cpp; path = Sources/CGameTransitionTemplateLoader.cpp; sourceTree = "<group>"; };
 		A48174781762145D00E1DC6E /* CGameTransitionTemplateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameTransitionTemplateLoader.h; path = Sources/CGameTransitionTemplateLoader.h; sourceTree = "<group>"; };
 		A481748517621CED00E1DC6E /* CWorldSpaceRenderOperationTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CWorldSpaceRenderOperationTemplateSerializer.cpp; path = Sources/CWorldSpaceRenderOperationTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -1212,6 +1226,8 @@
 		A40A69AC174F51E4005B475E /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				A46B1C86183E3B7400A3EF49 /* CQuadTree.h */,
+				A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */,
 				A40A69AF174F5203005B475E /* CCamera.h */,
 				A40A69AE174F5203005B475E /* CCamera.cpp */,
 				A40A69B2174F5215005B475E /* CFrustum.h */,
@@ -1227,6 +1243,12 @@
 		A40A69AD174F51EF005B475E /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A46B1C75183E3B3600A3EF49 /* CLandscape.h */,
+				A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */,
+				A46B1C77183E3B3600A3EF49 /* CLandscapeChunk.h */,
+				A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */,
+				A46B1C79183E3B3600A3EF49 /* CLandscapeEdges.h */,
+				A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */,
 				A40A69B5174F5D1B005B475E /* IGameObject.h */,
 				A40A69B4174F5D1B005B475E /* IGameObject.cpp */,
 				A40A69B8174F5D2F005B475E /* CSprite.h */,
@@ -2221,6 +2243,7 @@
 				2111AA4C181EFF30007FE7A8 /* CGUIGraph.cpp in Sources */,
 				2111AA4D181EFF30007FE7A8 /* CRenderOperationWorldSpace.cpp in Sources */,
 				2111AA4E181EFF30007FE7A8 /* CRenderOperationScreenSpace.cpp in Sources */,
+				A46B1C89183E426B00A3EF49 /* CQuadTree.cpp in Sources */,
 				2111AA4F181EFF30007FE7A8 /* CRenderOperationOutput.cpp in Sources */,
 				2111AA50181EFF30007FE7A8 /* IGraphicsContext.cpp in Sources */,
 				2111AA51181EFF30007FE7A8 /* CGraphicsContext_ios.cpp in Sources */,
@@ -2274,6 +2297,7 @@
 				2111AA81181EFF30007FE7A8 /* CGameTransitionTemplateLoadingOperation.cpp in Sources */,
 				2111AA82181EFF30007FE7A8 /* ITemplateSerializer.cpp in Sources */,
 				2111AA83181EFF30007FE7A8 /* CGUITemplateSerializer.cpp in Sources */,
+				A46B1C8C183E533A00A3EF49 /* CLandscapeChunk.cpp in Sources */,
 				2111AA84181EFF30007FE7A8 /* CMaterialTemplateSerializer.cpp in Sources */,
 				2111AA85181EFF30007FE7A8 /* CModelTemplateSerializer.cpp in Sources */,
 				2111AA86181EFF30007FE7A8 /* COceanTemplateSerializer.cpp in Sources */,
@@ -2382,6 +2406,7 @@
 				21D071E8181DA6C20019D264 /* COcean.cpp in Sources */,
 				21D071E9181DA6C20019D264 /* CCamera.cpp in Sources */,
 				21D071EA181DA6C20019D264 /* CFrustum.cpp in Sources */,
+				A46B1C8B183E533A00A3EF49 /* CLandscapeChunk.cpp in Sources */,
 				21D071EB181DA6C20019D264 /* CLight.cpp in Sources */,
 				21D071EC181DA6C20019D264 /* CAnimationMixer.cpp in Sources */,
 				21D071ED181DA6C20019D264 /* CSceneGraph.cpp in Sources */,
@@ -2395,6 +2420,7 @@
 				21D071F5181DA6C20019D264 /* CGUITemplateLoader.cpp in Sources */,
 				21D071F6181DA6C20019D264 /* CModelTemplateLoader.cpp in Sources */,
 				21D071F7181DA6C20019D264 /* COceanTemplateLoader.cpp in Sources */,
+				A46B1C88183E426B00A3EF49 /* CQuadTree.cpp in Sources */,
 				21D071F8181DA6C20019D264 /* CParticleEmitterTemplateLoader.cpp in Sources */,
 				21D071F9181DA6C20019D264 /* CGameTransitionTemplateLoader.cpp in Sources */,
 				21D071FA181DA6C20019D264 /* ITemplateLoadingOperation.cpp in Sources */,
@@ -2482,6 +2508,7 @@
 				A40A6A6C1753AF38005B475E /* CMeshLoader.cpp in Sources */,
 				A40A6A6D1753AF38005B475E /* CResourceAccessor.cpp in Sources */,
 				A46A32F3174E1D100044643E /* CCommonOS_ios.cpp in Sources */,
+				A46B1C87183E3B7400A3EF49 /* CQuadTree.cpp in Sources */,
 				A46A32F4174E1D100044643E /* CRenderOperationWorldSpace.cpp in Sources */,
 				A46A32F5174E1D100044643E /* CRenderOperationScreenSpace.cpp in Sources */,
 				A46A32F6174E1D100044643E /* CRenderOperationOutput.cpp in Sources */,
@@ -2517,6 +2544,7 @@
 				A46A3312174E1D100044643E /* CTextureLoader.cpp in Sources */,
 				A46A32D8174E17970044643E /* main.mm in Sources */,
 				A46A32EB174E194D0044643E /* AppDelegate.mm in Sources */,
+				A46B1C8D183E533B00A3EF49 /* CLandscapeChunk.cpp in Sources */,
 				A46A32F0174E1A3F0044643E /* CTestingViewController.mm in Sources */,
 				A46A3314174E2E370044643E /* CShaderLoader_Testing.cpp in Sources */,
 				2173173F1821A7F600FF3D1E /* COGLWindow_osx.cpp in Sources */,
