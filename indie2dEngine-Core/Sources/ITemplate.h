@@ -76,6 +76,10 @@ struct SLandscapeTemplate : public ITemplate
 {
     std::vector<std::string> m_materialsFilenames;
     std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
+    std::string m_splattingDiffuseMaterialFilename;
+    std::shared_ptr<SMaterialTemplate> m_splattingDiffuseMaterial;
+    std::shared_ptr<SMaterialTemplate> m_splattingNormalMaterial;
+    std::string m_splattingNormalMaterialFilename;
     ui32 m_width;
     ui32 m_height;
     std::string m_heightmapDataFileName;

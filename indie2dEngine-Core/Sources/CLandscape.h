@@ -13,19 +13,22 @@
 #include "CHeightmapProcessor.h"
 
 class CLandscapeChunk;
+class CShader;
 
 class CLandscape : public IGameObject
 {
 private:
 
-    CHeightmapProcessor* m_heightmapProcessor;
-    CLandscapeChunk** m_landscapeContainer;
+    std::shared_ptr<CHeightmapProcessor> m_heightmapProcessor;
+    std::vector<std::shared_ptr<CLandscapeChunk>> m_chunks;
     
     ui32 m_numChunkRows;
     ui32 m_numChunkCells;
 
     std::shared_ptr<CMaterial> m_splattingDiffuseMaterial;
     std::shared_ptr<CMaterial> m_splattingNormalMaterial;
+    std::shared_ptr<CShader> m_splattingDiffuseMaterialShader;
+    std::shared_ptr<CShader> m_splattingNormalMaterialShader;
     
 protected:
 
