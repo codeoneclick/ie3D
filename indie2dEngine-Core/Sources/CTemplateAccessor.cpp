@@ -27,35 +27,40 @@ CTemplateAccessor::~CTemplateAccessor(void)
     
 }
 
-void CTemplateAccessor::LoadModelTemplate(const std::string &_filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
+void CTemplateAccessor::LoadModelTemplate(const std::string &_filename, const std::shared_ptr<ITemplateLoadingHandler>& _handler)
 {
     assert(m_loaders[E_TEMPLATE_LOADERS_MODEL] != nullptr);
     assert(_handler != nullptr);
     m_loaders[E_TEMPLATE_LOADERS_MODEL]->Load(_filename, _handler);
 }
 
-void CTemplateAccessor::LoadOceanTemplate(const std::string &_filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
+void CTemplateAccessor::LoadOceanTemplate(const std::string &_filename, const std::shared_ptr<ITemplateLoadingHandler>& _handler)
 {
     assert(m_loaders[E_TEMPLATE_LOADERS_OCEAN] != nullptr);
     assert(_handler != nullptr);
     m_loaders[E_TEMPLATE_LOADERS_OCEAN]->Load(_filename, _handler);
 }
 
-void CTemplateAccessor::LoadParticleEmitterTemplate(const std::string &_filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
+void CTemplateAccessor::LoadLandscapeTemplate(const std::string &_filename, const std::shared_ptr<ITemplateLoadingHandler>& _handler)
+{
+    
+}
+
+void CTemplateAccessor::LoadParticleEmitterTemplate(const std::string &_filename, const std::shared_ptr<ITemplateLoadingHandler>& _handler)
 {
     assert(m_loaders[E_TEMPLATE_LOADERS_PARTICLE_EMITTER] != nullptr);
     assert(_handler != nullptr);
     m_loaders[E_TEMPLATE_LOADERS_PARTICLE_EMITTER]->Load(_filename, _handler);
 }
 
-void CTemplateAccessor::LoadGameTransitionTemplate(const std::string &_filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
+void CTemplateAccessor::LoadGameTransitionTemplate(const std::string &_filename, const std::shared_ptr<ITemplateLoadingHandler>& _handler)
 {
     assert(m_loaders[E_TEMPLATE_LOADERS_GAME_TRANSITIONS] != nullptr);
     assert(_handler != nullptr);
     m_loaders[E_TEMPLATE_LOADERS_GAME_TRANSITIONS]->Load(_filename, _handler);
 }
 
-void CTemplateAccessor::LoadGUITemplate(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler, E_GUI_LOADING_SCHEME _scheme)
+void CTemplateAccessor::LoadGUITemplate(const std::string& _filename, const std::shared_ptr<ITemplateLoadingHandler>& _handler, E_GUI_LOADING_SCHEME _scheme)
 {
 	assert(m_loaders[E_TEMPLATE_LOADERS_GUI] != nullptr);
 	assert(_handler != nullptr);

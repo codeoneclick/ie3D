@@ -14,19 +14,22 @@
 #include "CSprite.h"
 #include "CModel.h"
 #include "COcean.h"
+#include "CLandscape.h"
 #include "CBillboard.h"
 #include "CParticleEmitter.h"
 #include "ICollisionHandler.h"
 
 CSceneGraph::CSceneGraph(void) :
 m_camera(nullptr),
+m_oceansContainer(nullptr),
+m_landscapeContainer(nullptr),
 m_collisionMgr(nullptr),
 m_inputContext(nullptr)
 {
-    for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
-    {
-        m_lights[i] = nullptr;
-    }
+    std::for_each(m_lights.begin(), m_lights.end(), [](std::shared_ptr<CLight> _light)
+                  {
+                      _light = nullptr;
+                  });
 }
 
 CSceneGraph::~CSceneGraph(void)
@@ -36,7 +39,7 @@ CSceneGraph::~CSceneGraph(void)
     m_particlesContainer.clear();
 }
 
-void CSceneGraph::Set_Camera(std::shared_ptr<CCamera> _camera)
+void CSceneGraph::Set_Camera(const std::shared_ptr<CCamera>& _camera)
 {
     assert(m_sceneUpdateMgr != nullptr);
     if(m_camera != nullptr)
@@ -57,17 +60,17 @@ void CSceneGraph::Set_Camera(std::shared_ptr<CCamera> _camera)
     m_collisionMgr->Set_Camera(m_camera);
 }
 
-void CSceneGraph::Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id)
+void CSceneGraph::Set_Light(const std::shared_ptr<CLight>& _light, E_LIGHTS _id)
 {
     m_lights[_id] = _light;
     
-    for(const auto& iterator : m_gameObjectsContainer)
-    {
-        iterator->Set_Light(_light, _id);
-    }
+    std::for_each(m_gameObjectsContainer.begin(), m_gameObjectsContainer.end(), [_light, _id](std::shared_ptr<IGameObject> _gameObject)
+                  {
+                      _gameObject->Set_Light(_light, _id);
+                  });
 }
 
-void CSceneGraph::_InsertGameObject(std::shared_ptr<IGameObject> _gameObject)
+void CSceneGraph::_InsertGameObject(const std::shared_ptr<IGameObject>& _gameObject)
 {
     if(m_camera != nullptr)
     {
@@ -92,7 +95,7 @@ void CSceneGraph::_InsertGameObject(std::shared_ptr<IGameObject> _gameObject)
     m_gameObjectsContainer.insert(_gameObject);
 }
 
-void CSceneGraph::_RemoveGameObject(std::shared_ptr<IGameObject> _gameObject)
+void CSceneGraph::_RemoveGameObject(const std::shared_ptr<IGameObject>& _gameObject)
 {
     assert(m_sceneUpdateMgr != nullptr);
     assert(m_renderMgr != nullptr);
@@ -104,74 +107,85 @@ void CSceneGraph::_RemoveGameObject(std::shared_ptr<IGameObject> _gameObject)
     m_gameObjectsContainer.erase(_gameObject);
 }
 
-void CSceneGraph::InsertSprite(std::shared_ptr<CSprite> _sprite)
+void CSceneGraph::InsertSprite(const std::shared_ptr<CSprite>& _sprite)
 {
     CSceneGraph::_InsertGameObject(_sprite);
     m_spritesContainer.insert(_sprite);
 }
 
-void CSceneGraph::RemoveSprite(std::shared_ptr<CSprite> _sprite)
+void CSceneGraph::RemoveSprite(const std::shared_ptr<CSprite>& _sprite)
 {
     CSceneGraph::_RemoveGameObject(_sprite);
     m_spritesContainer.erase(_sprite);
 }
 
-void CSceneGraph::InsertModel(std::shared_ptr<CModel> _model)
+void CSceneGraph::InsertModel(const std::shared_ptr<CModel>& _model)
 {
     CSceneGraph::_InsertGameObject(_model);
     m_modelsContainer.insert(_model);
 }
 
-void CSceneGraph::RemoveModel(std::shared_ptr<CModel> _model)
+void CSceneGraph::RemoveModel(const std::shared_ptr<CModel>& _model)
 {
     CSceneGraph::_RemoveGameObject(_model);
     m_modelsContainer.erase(_model);
 }
 
-void CSceneGraph::InsertOcean(std::shared_ptr<COcean> _ocean)
+void CSceneGraph::InsertOcean(const std::shared_ptr<COcean>& _ocean)
 {
     CSceneGraph::_InsertGameObject(_ocean);
-    m_oceansContainer.insert(_ocean);
+    m_oceansContainer = _ocean;
 }
 
-void CSceneGraph::RemoveOcean(std::shared_ptr<COcean> _ocean)
+void CSceneGraph::RemoveOcean(const std::shared_ptr<COcean>& _ocean)
 {
     CSceneGraph::_RemoveGameObject(_ocean);
-    m_oceansContainer.erase(_ocean);
+    m_oceansContainer = nullptr;
 }
 
-void CSceneGraph::InsertBillboard(std::shared_ptr<CBillboard> _billboard)
+void CSceneGraph::InsertLandscape(const std::shared_ptr<CLandscape> &_landscape)
+{
+    CSceneGraph::_InsertGameObject(_landscape);
+    m_landscapeContainer = _landscape;
+}
+
+void CSceneGraph::RemoveLandscape(const std::shared_ptr<CLandscape> &_landscape)
+{
+    CSceneGraph::_RemoveGameObject(_landscape);
+    m_landscapeContainer = nullptr;
+}
+
+void CSceneGraph::InsertBillboard(const std::shared_ptr<CBillboard>& _billboard)
 {
     CSceneGraph::_InsertGameObject(_billboard);
     m_billboardsContainer.insert(_billboard);
 }
 
-void CSceneGraph::RemoveBillboard(std::shared_ptr<CBillboard> _billboard)
+void CSceneGraph::RemoveBillboard(const std::shared_ptr<CBillboard>& _billboard)
 {
     CSceneGraph::_RemoveGameObject(_billboard);
     m_billboardsContainer.erase(_billboard);
 }
 
-
-void CSceneGraph::InsertParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter)
+void CSceneGraph::InsertParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter)
 {
     CSceneGraph::_InsertGameObject(_particleEmitter);
     m_particlesContainer.insert(_particleEmitter);
 }
 
-void CSceneGraph::RemoveParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter)
+void CSceneGraph::RemoveParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter)
 {
     CSceneGraph::_RemoveGameObject(_particleEmitter);
     m_particlesContainer.erase(_particleEmitter);
 }
 
-void CSceneGraph::RegisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler)
+void CSceneGraph::RegisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler)
 {
     assert(m_collisionMgr != nullptr);
     m_collisionMgr->RegisterCollisionHandler(_handler);
 }
 
-void CSceneGraph::UnregisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler)
+void CSceneGraph::UnregisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler)
 {
     assert(m_collisionMgr != nullptr);
     m_collisionMgr->UnregisterCollisionHandler(_handler);

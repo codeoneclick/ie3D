@@ -1259,12 +1259,6 @@
 		A40A69AD174F51EF005B475E /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
-				A46B1C75183E3B3600A3EF49 /* CLandscape.h */,
-				A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */,
-				A46B1C77183E3B3600A3EF49 /* CLandscapeChunk.h */,
-				A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */,
-				A46B1C79183E3B3600A3EF49 /* CLandscapeEdges.h */,
-				A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */,
 				A40A69B5174F5D1B005B475E /* IGameObject.h */,
 				A40A69B4174F5D1B005B475E /* IGameObject.cpp */,
 				A40A69B8174F5D2F005B475E /* CSprite.h */,
@@ -1277,6 +1271,12 @@
 				A49B83821754C07200AEB4DC /* CModel.cpp */,
 				A46789D017A01CF800FE26FA /* COcean.h */,
 				A46789CF17A01CF800FE26FA /* COcean.cpp */,
+				A46B1C75183E3B3600A3EF49 /* CLandscape.h */,
+				A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */,
+				A46B1C77183E3B3600A3EF49 /* CLandscapeChunk.h */,
+				A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */,
+				A46B1C79183E3B3600A3EF49 /* CLandscapeEdges.h */,
+				A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";

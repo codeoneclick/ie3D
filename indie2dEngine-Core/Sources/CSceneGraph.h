@@ -19,6 +19,7 @@ class IGameObject;
 class CSprite;
 class CModel;
 class COcean;
+class CLandscape;
 class CBillboard;
 class CParticleEmitter;
 class CRenderMgr;
@@ -32,7 +33,7 @@ class CSceneGraph : public virtual IGraph
 private:
     
     std::shared_ptr<CCamera> m_camera;
-    std::shared_ptr<CLight> m_lights[E_LIGHT_MAX];
+    std::array<std::shared_ptr<CLight>, E_LIGHT_MAX> m_lights;
     
     std::set<std::shared_ptr<IGameObject> > m_gameObjectsContainer;
     
@@ -40,41 +41,45 @@ private:
     std::set<std::shared_ptr<CBillboard> > m_billboardsContainer;
     std::set<std::shared_ptr<CParticleEmitter> > m_particlesContainer;
     std::set<std::shared_ptr<CModel> > m_modelsContainer;
-    std::set<std::shared_ptr<COcean> > m_oceansContainer;
+    std::shared_ptr<COcean> m_oceansContainer;
+    std::shared_ptr<CLandscape> m_landscapeContainer;
     
 protected:
     
     std::shared_ptr<CCollisionMgr> m_collisionMgr;
     std::shared_ptr<IInputContext> m_inputContext;
     
-    void _InsertGameObject(std::shared_ptr<IGameObject> _gameObject);
-    void _RemoveGameObject(std::shared_ptr<IGameObject> _gameObject);
+    void _InsertGameObject(const std::shared_ptr<IGameObject>& _gameObject);
+    void _RemoveGameObject(const std::shared_ptr<IGameObject>& _gameObject);
     
 public:
     
     CSceneGraph(void);
     virtual ~CSceneGraph(void);
     
-    void Set_Camera(std::shared_ptr<CCamera> _camera);
-    void Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id);
+    void Set_Camera(const std::shared_ptr<CCamera>& _camera);
+    void Set_Light(const std::shared_ptr<CLight>& _light, E_LIGHTS _id);
     
-    void InsertSprite(std::shared_ptr<CSprite> _sprite);
-    void RemoveSprite(std::shared_ptr<CSprite> _sprite);
+    void InsertSprite(const std::shared_ptr<CSprite>& _sprite);
+    void RemoveSprite(const std::shared_ptr<CSprite>& _sprite);
     
-    void InsertModel(std::shared_ptr<CModel> _model);
-    void RemoveModel(std::shared_ptr<CModel> _model);
+    void InsertModel(const std::shared_ptr<CModel>& _model);
+    void RemoveModel(const std::shared_ptr<CModel>& _model);
     
-    void InsertOcean(std::shared_ptr<COcean> _ocean);
-    void RemoveOcean(std::shared_ptr<COcean> _ocean);
+    void InsertOcean(const std::shared_ptr<COcean>& _ocean);
+    void RemoveOcean(const std::shared_ptr<COcean>& _ocean);
     
-    void InsertBillboard(std::shared_ptr<CBillboard> _billboard);
-    void RemoveBillboard(std::shared_ptr<CBillboard> _billboard);
+    void InsertLandscape(const std::shared_ptr<CLandscape>& _landscape);
+    void RemoveLandscape(const std::shared_ptr<CLandscape>& _landscape);
     
-    void InsertParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter);
-    void RemoveParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter);
+    void InsertBillboard(const std::shared_ptr<CBillboard>& _billboard);
+    void RemoveBillboard(const std::shared_ptr<CBillboard>& _billboard);
     
-    void RegisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler);
-    void UnregisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler);
+    void InsertParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter);
+    void RemoveParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter);
+    
+    void RegisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler);
+    void UnregisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler);
 };
 
 #endif 

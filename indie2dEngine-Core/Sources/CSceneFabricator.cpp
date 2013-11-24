@@ -13,6 +13,7 @@
 #include "CSprite.h"
 #include "CModel.h"
 #include "COcean.h"
+#include "CLandscape.h"
 #include "CBillboard.h"
 #include "CParticleEmitter.h"
 #include "CResourceAccessor.h"
@@ -38,7 +39,7 @@ std::shared_ptr<CCamera> CSceneFabricator::CreateCamera(f32 _fov, f32 _near, f32
     return camera;
 }
 
-void CSceneFabricator::DeleteCamera(std::shared_ptr<CCamera> _camera)
+void CSceneFabricator::DeleteCamera(const std::shared_ptr<CCamera>& _camera)
 {
     m_camerasContainer.erase(_camera);
 }
@@ -50,7 +51,7 @@ std::shared_ptr<CLight> CSceneFabricator::CreateLight(void)
     return light;
 }
 
-void CSceneFabricator::DeleteLight(std::shared_ptr<CLight> _light)
+void CSceneFabricator::DeleteLight(const std::shared_ptr<CLight>& _light)
 {
     m_lightsContainer.erase(_light);
 }
@@ -60,7 +61,7 @@ std::shared_ptr<CSprite> CSceneFabricator::CreateSprite(const std::string& _file
     return nullptr;
 }
 
-void CSceneFabricator::DeleteSprite(std::shared_ptr<CSprite> _sprite)
+void CSceneFabricator::DeleteSprite(const std::shared_ptr<CSprite>& _sprite)
 {
     
 }
@@ -76,7 +77,7 @@ std::shared_ptr<CModel> CSceneFabricator::CreateModel(const std::string& _filena
     return model;
 }
 
-void CSceneFabricator::DeleteModel(std::shared_ptr<CModel> _model)
+void CSceneFabricator::DeleteModel(const std::shared_ptr<CModel>& _model)
 {
     m_gameObjectsContainer.erase(_model);
 }
@@ -92,9 +93,25 @@ std::shared_ptr<COcean> CSceneFabricator::CreateOcean(const std::string &_filena
     return ocean;
 }
 
-void CSceneFabricator::DeleteOcean(std::shared_ptr<COcean> _ocean)
+void CSceneFabricator::DeleteOcean(const std::shared_ptr<COcean>& _ocean)
 {
     m_gameObjectsContainer.erase(_ocean);
+}
+
+std::shared_ptr<CLandscape> CSceneFabricator::CreateLandscape(const std::string &_filename)
+{
+    assert(m_resourceAccessor != nullptr);
+	assert(m_screenSpaceTextureAccessor != nullptr);
+    std::shared_ptr<CLandscape> landscape = std::make_shared<CLandscape>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+    assert(m_templateAccessor != nullptr);
+    m_templateAccessor->LoadOceanTemplate(_filename, landscape);
+    m_gameObjectsContainer.insert(landscape);
+    return landscape;
+}
+
+void CSceneFabricator::DeleteLandscape(const std::shared_ptr<CLandscape> &_landscape)
+{
+    
 }
 
 std::shared_ptr<CBillboard> CSceneFabricator::CreateBillboard(const std::string& _filename)
@@ -102,7 +119,7 @@ std::shared_ptr<CBillboard> CSceneFabricator::CreateBillboard(const std::string&
     return nullptr;
 }
 
-void CSceneFabricator::DeleteBillboard(std::shared_ptr<CBillboard> _billboard)
+void CSceneFabricator::DeleteBillboard(const std::shared_ptr<CBillboard>& _billboard)
 {
     
 }
@@ -118,7 +135,7 @@ std::shared_ptr<CParticleEmitter> CSceneFabricator::CreateParticleEmitter(const 
     return particleEmitter;
 }
 
-void CSceneFabricator::DeleteParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter)
+void CSceneFabricator::DeleteParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter)
 {
     m_gameObjectsContainer.erase(_particleEmitter);
 }

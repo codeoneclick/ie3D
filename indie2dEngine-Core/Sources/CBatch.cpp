@@ -233,7 +233,8 @@ void CBatch::Unlock(void)
 		assert(unlock != nullptr);
         
 #if defined(__USE_GCDPP__)
-        gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), unlock);
+        //gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), unlock);
+        unlock();
 #else
 		std::async(std::launch::async, unlock);
 #endif

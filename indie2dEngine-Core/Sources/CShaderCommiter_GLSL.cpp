@@ -39,6 +39,7 @@ ui32 CShaderCommiter_GLSL::_Compile(const std::string &_sourceCode,  GLenum _sha
         m_message = message;
         std::cout<<message<<std::endl;
         m_status = E_COMMITER_STATUS_FAILURE;
+        assert(false);
     }
     return handle;
 }
@@ -59,6 +60,7 @@ ui32 CShaderCommiter_GLSL::_Link(ui32 _vsHandle, ui32 _fsHandle)
         m_message = message;
         std::cout<<m_message<<std::endl;
         m_status = E_COMMITER_STATUS_FAILURE;
+        assert(false);
     }
     return handle;
 }

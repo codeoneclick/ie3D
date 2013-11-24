@@ -18,6 +18,7 @@ class IGameObject;
 class CSprite;
 class CModel;
 class COcean;
+class CLandscape;
 class CBillboard;
 class CParticleEmitter;
 class CRenderMgr;
@@ -38,25 +39,28 @@ public:
     virtual ~CSceneFabricator(void);
     
     std::shared_ptr<CCamera> CreateCamera(f32 _fov, f32 _near, f32 _far,const glm::ivec4& _viewport);
-    void DeleteCamera(std::shared_ptr<CCamera> _camera);
+    void DeleteCamera(const std::shared_ptr<CCamera>& _camera);
     
     std::shared_ptr<CLight> CreateLight(void);
-    void DeleteLight(std::shared_ptr<CLight> _light);
+    void DeleteLight(const std::shared_ptr<CLight>& _light);
     
     std::shared_ptr<CSprite> CreateSprite(const std::string& _filename);
-    void DeleteSprite(std::shared_ptr<CSprite> _sprite);
+    void DeleteSprite(const std::shared_ptr<CSprite>& _sprite);
     
     std::shared_ptr<CModel> CreateModel(const std::string& _filename);
-    void DeleteModel(std::shared_ptr<CModel> _model);
+    void DeleteModel(const std::shared_ptr<CModel>& _model);
     
     std::shared_ptr<COcean> CreateOcean(const std::string& _filename);
-    void DeleteOcean(std::shared_ptr<COcean> _ocean);
+    void DeleteOcean(const std::shared_ptr<COcean>& _ocean);
+    
+    std::shared_ptr<CLandscape> CreateLandscape(const std::string& _filename);
+    void DeleteLandscape(const std::shared_ptr<CLandscape>& _landscape);
     
     std::shared_ptr<CBillboard> CreateBillboard(const std::string& _filename);
-    void DeleteBillboard(std::shared_ptr<CBillboard> _billboard);
+    void DeleteBillboard(const std::shared_ptr<CBillboard>& _billboard);
     
     std::shared_ptr<CParticleEmitter> CreateParticleEmitter(const std::string& _filename);
-    void DeleteParticleEmitter(std::shared_ptr<CParticleEmitter> _particleEmitter);
+    void DeleteParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter);
 };
 
 #endif

@@ -31,13 +31,12 @@ varying vec4   OUT_TexCoordProjection;
 varying vec2   OUT_TexCoordDisplace_01;
 varying vec2   OUT_TexCoordDisplace_02;
 
-const float k_fTexCoordScale = 4.0;
+const float k_fTexCoordScale = 16.0;
 
 void main(void)
 {
     vec4 vPosition = MATRIX_World * vec4(IN_Position, 1.0);
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
-    
     
     vec2 vTexCoord = (IN_TexCoord / 32767.0  - 1.0) * k_fTexCoordScale;
     OUT_TexCoordDisplace_01 = vec2(vTexCoord.x + sin(FLOAT_Timer),
