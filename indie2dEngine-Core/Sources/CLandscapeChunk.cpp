@@ -23,9 +23,33 @@
 CLandscapeChunk::CLandscapeChunk(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor) :
 IGameObject(_resourceAccessor, _screenSpaceTextureAccessor),
 m_width(0),
-m_height(0)
+m_height(0),
+m_numIndexesToRender(0)
 {
+    m_renderQueuePosition = 4;
     
+    m_materialImposer = [this](std::shared_ptr<CMaterial> _material)
+    {
+        _material->Get_Shader()->Set_Matrix4x4(_material->Get_IsBatching() ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+        _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
+        _material->Get_Shader()->Set_Matrix4x4(!_material->Get_IsReflected() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
+        
+        ui32 count = 0;
+        for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
+        {
+            if(m_lights[i] != nullptr)
+            {
+                _material->Get_Shader()->Set_Vector3(m_lights[i]->Get_Position(), static_cast<E_SHADER_UNIFORM>(E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION + i));
+                count++;
+            }
+        }
+        
+        _material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
+        _material->Get_Shader()->Set_Vector4(_material->Get_Clipping(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
+        _material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
+        _material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+    };
 }
 
 CLandscapeChunk::~CLandscapeChunk(void)
@@ -89,7 +113,7 @@ void CLandscapeChunk::_OnSceneUpdate(f32 _deltatime)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         IGameObject::_OnSceneUpdate(_deltatime);
-        m_quadTree->OnUpdate(m_camera->Get_Frustum());
+        m_numIndexesToRender = m_quadTree->OnUpdate(m_camera->Get_Frustum());
     }
 }
 
@@ -114,7 +138,7 @@ void CLandscapeChunk::_OnBind(const std::string& _mode)
 
 void CLandscapeChunk::_OnDraw(const std::string& _mode)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    if((m_status & E_LOADING_STATUS_TEMPLATE_LOADED) && m_numIndexesToRender != 0)
     {
         assert(m_camera != nullptr);
         assert(m_materials.find(_mode) != m_materials.end());
@@ -123,7 +147,9 @@ void CLandscapeChunk::_OnDraw(const std::string& _mode)
         assert(material->Get_Shader() != nullptr);
         
         m_materialImposer(material);
-        IGameObject::_OnDraw(_mode);
+        
+        assert(m_mesh != nullptr);
+        m_mesh->Draw(m_numIndexesToRender);
     }
 }
 

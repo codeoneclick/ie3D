@@ -1,0 +1,11 @@
+<landscape name="landscape">
+	<width value="128"/>
+    <height value="128"/>
+    <heightmap_data filename="heightmap.data"/>
+    <splatting_data filename="splatting.data"/>
+	<materials>
+		<material filename="material.landscape.xml"/>
+	</materials>
+    <splatting_diffuse_material filename="material.splatting.diffuse.xml"/>
+    <splatting_normal_material filename="material.splatting.normal.xml"/>
+</landscape>

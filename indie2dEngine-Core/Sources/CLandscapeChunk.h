@@ -22,6 +22,7 @@ private:
     
     ui32 m_width;
     ui32 m_height;
+    ui32 m_numIndexesToRender;
     std::shared_ptr<CQuadTree> m_quadTree;
     
 protected:

@@ -31,6 +31,7 @@ m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
 m_materialImposer(nullptr),
 m_isNeedToRender(false),
+m_isNeedToUpdate(false),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
     std::for_each(m_lights.begin(), m_lights.end(), [](std::shared_ptr<CLight> _light)
@@ -133,7 +134,6 @@ void IGameObject::ListenRenderMgr(bool _value)
 			m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
 		}
     }
-
 	m_isNeedToRender = _value;
 }
 
@@ -142,6 +142,7 @@ void IGameObject::ListenSceneUpdateMgr(bool _value)
     assert(m_sceneUpdateMgr != nullptr);
     _value == true ? m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this()) :
     m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
+    m_isNeedToUpdate = _value;
 }
 
 void IGameObject::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)

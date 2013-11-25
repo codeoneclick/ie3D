@@ -81,7 +81,12 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         }
     }
     
-	IGameObject::ListenRenderMgr(m_isNeedToRender);
+    CLandscape::Set_Camera(m_camera);
+    CLandscape::Set_RenderMgr(m_renderMgr);
+    CLandscape::Set_SceneUpdateMgr(m_sceneUpdateMgr);
+	CLandscape::ListenRenderMgr(m_isNeedToRender);
+    CLandscape::ListenSceneUpdateMgr(m_isNeedToUpdate);
+    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
     
     std::set<std::string> modes;
@@ -153,6 +158,8 @@ void CLandscape::_OnUnbind(const std::string& _mode)
 
 void CLandscape::Set_Camera(std::shared_ptr<CCamera> _camera)
 {
+    IGameObject::Set_Camera(_camera);
+    
     for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
@@ -166,6 +173,8 @@ void CLandscape::Set_Camera(std::shared_ptr<CCamera> _camera)
 
 void CLandscape::Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id)
 {
+    IGameObject::Set_Light(_light, _id);
+    
     for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
@@ -179,6 +188,8 @@ void CLandscape::Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id)
 
 void CLandscape::Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
 {
+    IGameObject::Set_RenderMgr(_renderMgr);
+    
     for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
@@ -192,6 +203,8 @@ void CLandscape::Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
 
 void CLandscape::Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
 {
+    IGameObject::Set_SceneUpdateMgr(_sceneUpdateMgr);
+    
     for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
@@ -205,6 +218,8 @@ void CLandscape::Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdat
 
 void CLandscape::ListenRenderMgr(bool _value)
 {
+    m_isNeedToRender = _value;
+    
     for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
@@ -218,6 +233,8 @@ void CLandscape::ListenRenderMgr(bool _value)
 
 void CLandscape::ListenSceneUpdateMgr(bool _value)
 {
+    m_isNeedToUpdate = _value;
+    
     for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)

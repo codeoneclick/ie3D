@@ -35,14 +35,13 @@ m_edgesMaskTexture(nullptr)
     m_height = _template->m_height;
     
     m_heightmapData = new f32[m_width * m_height];
-    
     m_maxAltitude = 0.0f;
     
     for(ui32 i = 0; i < m_width; ++i)
     {
         for(ui32 j = 0; j < m_height; ++j)
         {
-			m_heightmapData[i + j * m_height] = 0.0f;
+			m_heightmapData[i + j * m_height] = sin(i * 0.33f) + cos(j * 0.33f);;
             
             if(fabsf(m_heightmapData[i +j * m_height]) > m_maxAltitude)
             {
@@ -53,8 +52,8 @@ m_edgesMaskTexture(nullptr)
         }
     }
     
-    m_chunkWidth = 32;
-    m_chunkHeight = 32;
+    m_chunkWidth = 64;
+    m_chunkHeight = 64;
     
     m_numChunkRows = m_width / m_chunkWidth;
     m_numChunkCells = m_height / m_chunkHeight;
@@ -148,7 +147,6 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingTexture(void)
             data[i + j * m_height] = TO_RGB(255, 0, 0);
 
             f32 height = CHeightmapHelper::Get_HeightValue(m_heightmapData, m_width, m_height, glm::vec3(i , 0.0f, j));
-            
             if(height > 5.0f)
             {
                 data[i + j * m_width] = TO_RGB(0, 255, 0);

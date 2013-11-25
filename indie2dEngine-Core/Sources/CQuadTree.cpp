@@ -208,10 +208,11 @@ void CQuadTree::_GenerateQuadTreeNode(const std::shared_ptr<CFrustum> &_frustum,
     }
 }
 
-void CQuadTree::OnUpdate(const std::shared_ptr<CFrustum> &_frustum)
+ui32 CQuadTree::OnUpdate(const std::shared_ptr<CFrustum> &_frustum)
 {
     ui16* indexes = m_indexBuffer->Lock();
     ui32 numIndexes = 0;
     CQuadTree::_GenerateQuadTreeNode(_frustum, shared_from_this(), indexes, numIndexes);
     m_indexBuffer->Unlock(numIndexes);
+    return numIndexes;
 }

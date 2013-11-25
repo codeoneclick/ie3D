@@ -48,7 +48,7 @@ public:
     ~CQuadTree(void);
 
     void Generate(const std::shared_ptr<CVertexBuffer>& _vertexBuffer, const std::shared_ptr<CIndexBuffer>& _indexBuffer, const glm::vec3& _maxBound, const glm::vec3& _minBound, f32 _depth, ui32 _size);
-    void OnUpdate(const std::shared_ptr<CFrustum>& _frustum);
+    ui32 OnUpdate(const std::shared_ptr<CFrustum>& _frustum);
 };
 
 

@@ -13,6 +13,7 @@
 #include "CLight.h"
 #include "CModel.h"
 #include "COcean.h"
+#include "CLandscape.h"
 #include "CParticleEmitter.h"
 #include "CCamera.h"
 #include "CNavigator.h"
@@ -110,6 +111,9 @@ void CKOTHInGameScene::Load(void)
     std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
     m_root->InsertOcean(ocean);
     ocean->Set_Position(glm::vec3(-128.0f, 0.0f, -128.0f));
+    
+    std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("landscape.xml");
+    m_root->InsertLandscape(landscape);
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
     particleEmitter->Set_Position(glm::vec3(12.0f, 2.0f, 12.0f));

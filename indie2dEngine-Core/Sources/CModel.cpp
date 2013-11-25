@@ -114,6 +114,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_debugBoundBoxMaterial->Set_BlendFunctionDest(GL_ONE_MINUS_SRC_ALPHA);
     
 	IGameObject::ListenRenderMgr(m_isNeedToRender);
+    IGameObject::ListenSceneUpdateMgr(m_isNeedToUpdate);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
     
     std::set<std::string> modes;

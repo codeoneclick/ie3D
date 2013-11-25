@@ -118,6 +118,12 @@
 		21D07350181DB3800019D264 /* ScreenGBufferPositionModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A5181DB34F0019D264 /* ScreenGBufferPositionModel.vert */; };
 		21D07351181DB3800019D264 /* ShaderCommon.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A6181DB34F0019D264 /* ShaderCommon.frag */; };
 		21D07352181DB3800019D264 /* ShaderCommon.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A7181DB34F0019D264 /* ShaderCommon.vert */; };
+		A4F5D70E18436E4E00ADAC70 /* landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D70C18436E4E00ADAC70 /* landscape.xml */; };
+		A4F5D70F18436E4E00ADAC70 /* material.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D70D18436E4E00ADAC70 /* material.landscape.xml */; };
+		A4F5D71218436F6E00ADAC70 /* material.splatting.diffuse.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */; };
+		A4F5D71318436F6E00ADAC70 /* material.splatting.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */; };
+		A4F5D718184387E700ADAC70 /* CommonLandscape.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71418437C9400ADAC70 /* CommonLandscape.frag */; };
+		A4F5D719184387E700ADAC70 /* CommonLandscape.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71518437C9400ADAC70 /* CommonLandscape.vert */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -278,6 +284,12 @@
 		21D072D8181DB34F0019D264 /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
 		21D072D9181DB34F0019D264 /* texture_01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_01.pvr; sourceTree = "<group>"; };
 		21D072DA181DB34F0019D264 /* texture_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_02.pvr; sourceTree = "<group>"; };
+		A4F5D70C18436E4E00ADAC70 /* landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = landscape.xml; sourceTree = "<group>"; };
+		A4F5D70D18436E4E00ADAC70 /* material.landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.xml; sourceTree = "<group>"; };
+		A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.diffuse.xml; sourceTree = "<group>"; };
+		A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.normal.xml; sourceTree = "<group>"; };
+		A4F5D71418437C9400ADAC70 /* CommonLandscape.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonLandscape.frag; sourceTree = "<group>"; };
+		A4F5D71518437C9400ADAC70 /* CommonLandscape.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonLandscape.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,6 +448,8 @@
 		21D0728B181DB34F0019D264 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A4F5D71418437C9400ADAC70 /* CommonLandscape.frag */,
+				A4F5D71518437C9400ADAC70 /* CommonLandscape.vert */,
 				21D0728C181DB34F0019D264 /* BloomCombineScreen.frag */,
 				21D0728D181DB34F0019D264 /* BloomCombineScreen.vert */,
 				21D0728E181DB34F0019D264 /* BloomExtractScreen.frag */,
@@ -483,6 +497,10 @@
 		21D072AC181DB34F0019D264 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */,
+				A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */,
+				A4F5D70C18436E4E00ADAC70 /* landscape.xml */,
+				A4F5D70D18436E4E00ADAC70 /* material.landscape.xml */,
 				21D072AD181DB34F0019D264 /* gbuffer.normal.material.xml */,
 				21D072AE181DB34F0019D264 /* gbuffer.normal.operation.xml */,
 				21D072AF181DB34F0019D264 /* guicontainer.xml */,
@@ -623,6 +641,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4F5D718184387E700ADAC70 /* CommonLandscape.frag in Resources */,
+				A4F5D719184387E700ADAC70 /* CommonLandscape.vert in Resources */,
+				A4F5D70F18436E4E00ADAC70 /* material.landscape.xml in Resources */,
 				21D07337181DB3800019D264 /* BloomCombineScreen.frag in Resources */,
 				21D07338181DB3800019D264 /* BloomCombineScreen.vert in Resources */,
 				21D07339181DB3800019D264 /* BloomExtractScreen.frag in Resources */,
@@ -641,6 +662,7 @@
 				21D07346181DB3800019D264 /* CommonOutput.vert in Resources */,
 				21D07347181DB3800019D264 /* CommonScreen.frag in Resources */,
 				21D07348181DB3800019D264 /* CommonScreen.vert in Resources */,
+				A4F5D71318436F6E00ADAC70 /* material.splatting.normal.xml in Resources */,
 				21D07349181DB3800019D264 /* DefferedScreen.frag in Resources */,
 				21D0734A181DB3800019D264 /* DefferedScreen.vert in Resources */,
 				21D0734B181DB3800019D264 /* ParticleEmitter.frag in Resources */,
@@ -658,6 +680,7 @@
 				21D0732D181DB34F0019D264 /* Footman.Diffuse.pvr in Resources */,
 				21D07313181DB34F0019D264 /* material.model.common.xml in Resources */,
 				21D072DE181DB34F0019D264 /* Footman4.MDL in Resources */,
+				A4F5D71218436F6E00ADAC70 /* material.splatting.diffuse.xml in Resources */,
 				21D0732C181DB34F0019D264 /* buildings_atlas.pvr in Resources */,
 				21D0732F181DB34F0019D264 /* model_02.pvr in Resources */,
 				21D072E9181DB34F0019D264 /* model_03.MDL_mesh in Resources */,
@@ -698,6 +721,7 @@
 				21D072E5181DB34F0019D264 /* model_02.MDL_anim in Resources */,
 				21D07318181DB34F0019D264 /* material.model.refraction.xml in Resources */,
 				21D07324181DB34F0019D264 /* screen.space.bloomextract.operation.xml in Resources */,
+				A4F5D70E18436E4E00ADAC70 /* landscape.xml in Resources */,
 				21D07311181DB34F0019D264 /* material.deffered.screen.xml in Resources */,
 				21D0731C181DB34F0019D264 /* model.Building.xml in Resources */,
 				21D07317181DB34F0019D264 /* material.model.reflection.xml in Resources */,
@@ -851,12 +875,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/indie2dEngine-Demo/Support/indieEngineDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5BBE2F54-4A6B-4F02-95B6-9DF30288A1F0";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -883,12 +908,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/indie2dEngine-Demo/Support/indieEngineDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5BBE2F54-4A6B-4F02-95B6-9DF30288A1F0";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

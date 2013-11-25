@@ -21,6 +21,7 @@ private:
     friend class CParticleEmitterTemplateLoader;
     friend class CGameTransitionTemplateLoader;
     friend class COceanTemplateLoader;
+    friend class CLandscapeTemplateLoader;
 	friend class CGUITemplateLoader;
     
     typedef std::function<void(std::shared_ptr<ITemplate> _template)> __TEMPLATE_LOADED_COMMAND;
@@ -53,6 +54,7 @@ private:
     friend class CParticleEmitterTemplateLoader;
     friend class CGameTransitionTemplateLoader;
     friend class COceanTemplateLoader;
+    friend class CLandscapeTemplateLoader;
 	friend class CGUITemplateLoader;
     
     void _ConnectCommands(void);

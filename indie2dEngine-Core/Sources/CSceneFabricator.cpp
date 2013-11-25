@@ -104,7 +104,7 @@ std::shared_ptr<CLandscape> CSceneFabricator::CreateLandscape(const std::string 
 	assert(m_screenSpaceTextureAccessor != nullptr);
     std::shared_ptr<CLandscape> landscape = std::make_shared<CLandscape>(m_resourceAccessor, m_screenSpaceTextureAccessor);
     assert(m_templateAccessor != nullptr);
-    m_templateAccessor->LoadOceanTemplate(_filename, landscape);
+    m_templateAccessor->LoadLandscapeTemplate(_filename, landscape);
     m_gameObjectsContainer.insert(landscape);
     return landscape;
 }
