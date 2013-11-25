@@ -17,7 +17,7 @@ const lowp vec4 vSpecularColor = vec4(1.25, 0.5, 0.25, 1.0);
 const mediump float fLightConst = 0.3;
 const mediump float fLightLinear = 0.007;
 const mediump float fLightExponential = 0.00008;
-const mediump vec2 vPerturbationFactor = vec2(0.025, 0.075);
+const mediump vec2 vPerturbationFactor = vec2(0.0, 0.0);
 
 const mediump vec3 k_vBinormal = vec3(1.0, 0.0, 0.0);
 const mediump vec3 k_vTangent = vec3(0.0, 0.0, 1.0);
@@ -61,7 +61,7 @@ void main(void)
     
     mediump float fresnel = dot(normalize(OUT_CameraPosition - OUT_Position), k_vNormal);
     vReflectionColor = mix(vDiffuseColor, vReflectionColor, vReflectionColor.a);
-    vReflectionColor = fresnel * mix(vReflectionColor, vDiffuseColor, vRefractionColor.a);
+    //vReflectionColor = mix(vReflectionColor, vDiffuseColor, vRefractionColor.a);
     vRefractionColor = mix(vDiffuseColor, vRefractionColor, vRefractionColor.a);
     gl_FragColor = mix(vReflectionColor, vRefractionColor, fresnel)/* + vSpecularColor * fSpecularFactor*/;
 }

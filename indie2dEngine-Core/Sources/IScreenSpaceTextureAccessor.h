@@ -12,6 +12,7 @@
 #include "HCommon.h"
 
 class CTexture;
+class CMaterial;
 
 class IScreenSpaceTextureAccessor
 {
@@ -25,6 +26,7 @@ public:
     virtual ~IScreenSpaceTextureAccessor(void);
     
 	virtual std::shared_ptr<CTexture> Get_RenderOperationTexture(const std::string& _mode) = 0;
+    virtual std::shared_ptr<CTexture> Get_CustomScreenSpaceOperationTexture(const std::shared_ptr<CMaterial> _material, ui32 _textureWidth, ui32 _textureHeight) = 0;
 };
 
 #endif

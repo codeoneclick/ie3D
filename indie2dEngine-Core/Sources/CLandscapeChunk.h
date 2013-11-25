@@ -28,6 +28,8 @@ private:
 protected:
     
     void _Set_Mesh(const std::shared_ptr<CMesh>& _mesh, ui32 _width, ui32 _height);
+    void _Set_SplattingDiffuseTexture(const std::shared_ptr<CTexture>& _texture);
+    void _Set_SplattingNormalTexture(const std::shared_ptr<CTexture>& _texture);
     
     void _OnSceneUpdate(f32 _deltatime);
     

@@ -66,6 +66,22 @@ void CLandscapeChunk::_Set_Mesh(const std::shared_ptr<CMesh> &_mesh, ui32 _width
     m_height = _height;
 }
 
+void CLandscapeChunk::_Set_SplattingDiffuseTexture(const std::shared_ptr<CTexture>& _texture)
+{
+    for(const auto& material : m_materials)
+    {
+        material.second->Set_Texture(_texture, E_SHADER_SAMPLER_01);
+    }
+}
+
+void CLandscapeChunk::_Set_SplattingNormalTexture(const std::shared_ptr<CTexture>& _texture)
+{
+    for(const auto& material : m_materials)
+    {
+        material.second->Set_Texture(_texture, E_SHADER_SAMPLER_02);
+    }
+}
+
 void CLandscapeChunk::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
     std::shared_ptr<SLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<SLandscapeTemplate>(_template);

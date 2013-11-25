@@ -261,6 +261,7 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingDiffuseTexture
     assert(m_screenSpaceTextureAccessor != nullptr);
     assert(m_diffuseTexture == nullptr);
     assert(m_splattingTexture != nullptr);
+    m_diffuseTexture = m_screenSpaceTextureAccessor->Get_CustomScreenSpaceOperationTexture(_material, 2048, 2048);
     return m_diffuseTexture;
 }
 
@@ -269,6 +270,7 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingNormalTexture(
     assert(m_screenSpaceTextureAccessor != nullptr);
     assert(m_normalTexture == nullptr);
     assert(m_splattingTexture != nullptr);
+    m_normalTexture = m_screenSpaceTextureAccessor->Get_CustomScreenSpaceOperationTexture(_material, 2048, 2048);
     return m_normalTexture;
 }
 

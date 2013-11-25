@@ -80,6 +80,42 @@ void CMaterial::Serialize(const std::shared_ptr<SMaterialTemplate>& _template, c
     m_status |= E_RESOURCE_STATUS_COMMITED;
 }
 
+bool CMaterial::IsLoaded(void) const
+{
+    bool value = false;
+    for(const auto& texture : m_textures)
+    {
+        if(texture != nullptr)
+        {
+            value = texture->IsLoaded();
+            if(!value)
+            {
+                return value;
+            }
+        }
+    }
+    value = m_shader->IsLoaded();
+    return value;
+}
+
+bool CMaterial::IsCommited(void) const
+{
+    bool value = false;
+    for(const auto& texture : m_textures)
+    {
+        if(texture != nullptr)
+        {
+            value = texture->IsCommited();
+            if(!value)
+            {
+                return value;
+            }
+        }
+    }
+    value = m_shader->IsCommited();
+    return value;
+}
+
 void CMaterial::Set_CullFaceMode(GLenum _mode)
 {
     m_cullFaceMode = _mode;

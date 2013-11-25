@@ -29,6 +29,8 @@ private:
     std::shared_ptr<CMaterial> m_splattingNormalMaterial;
     std::shared_ptr<CShader> m_splattingDiffuseMaterialShader;
     std::shared_ptr<CShader> m_splattingNormalMaterialShader;
+    bool m_isSplattingDiffuseTextureCommited;
+    bool m_isSplattingNormalTextureCommited;
     
 protected:
 

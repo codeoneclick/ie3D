@@ -118,8 +118,15 @@
 		21D07350181DB3800019D264 /* ScreenGBufferPositionModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A5181DB34F0019D264 /* ScreenGBufferPositionModel.vert */; };
 		21D07351181DB3800019D264 /* ShaderCommon.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A6181DB34F0019D264 /* ShaderCommon.frag */; };
 		21D07352181DB3800019D264 /* ShaderCommon.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A7181DB34F0019D264 /* ShaderCommon.vert */; };
+		A49046401843B2A4009734B8 /* CommonLandscapeSplatting.vert in Resources */ = {isa = PBXBuildFile; fileRef = A490463B1843B277009734B8 /* CommonLandscapeSplatting.vert */; };
+		A49046411843B2A4009734B8 /* CommonLandscapeSplatting.frag in Resources */ = {isa = PBXBuildFile; fileRef = A490463A1843B277009734B8 /* CommonLandscapeSplatting.frag */; };
+		A49046451843B703009734B8 /* layer_01_diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A49046421843B703009734B8 /* layer_01_diffuse.pvr */; };
+		A49046461843B703009734B8 /* layer_02_diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A49046431843B703009734B8 /* layer_02_diffuse.pvr */; };
+		A49046471843B703009734B8 /* layer_03_diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A49046441843B703009734B8 /* layer_03_diffuse.pvr */; };
+		A490464B1843B9DE009734B8 /* material.landscape.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046481843B9DE009734B8 /* material.landscape.common.xml */; };
+		A490464C1843B9DE009734B8 /* material.landscape.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046491843B9DE009734B8 /* material.landscape.reflection.xml */; };
+		A490464D1843B9DE009734B8 /* material.landscape.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = A490464A1843B9DE009734B8 /* material.landscape.refraction.xml */; };
 		A4F5D70E18436E4E00ADAC70 /* landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D70C18436E4E00ADAC70 /* landscape.xml */; };
-		A4F5D70F18436E4E00ADAC70 /* material.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D70D18436E4E00ADAC70 /* material.landscape.xml */; };
 		A4F5D71218436F6E00ADAC70 /* material.splatting.diffuse.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */; };
 		A4F5D71318436F6E00ADAC70 /* material.splatting.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */; };
 		A4F5D718184387E700ADAC70 /* CommonLandscape.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71418437C9400ADAC70 /* CommonLandscape.frag */; };
@@ -284,8 +291,15 @@
 		21D072D8181DB34F0019D264 /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
 		21D072D9181DB34F0019D264 /* texture_01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_01.pvr; sourceTree = "<group>"; };
 		21D072DA181DB34F0019D264 /* texture_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_02.pvr; sourceTree = "<group>"; };
+		A490463A1843B277009734B8 /* CommonLandscapeSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonLandscapeSplatting.frag; sourceTree = "<group>"; };
+		A490463B1843B277009734B8 /* CommonLandscapeSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonLandscapeSplatting.vert; sourceTree = "<group>"; };
+		A49046421843B703009734B8 /* layer_01_diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = layer_01_diffuse.pvr; sourceTree = "<group>"; };
+		A49046431843B703009734B8 /* layer_02_diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = layer_02_diffuse.pvr; sourceTree = "<group>"; };
+		A49046441843B703009734B8 /* layer_03_diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = layer_03_diffuse.pvr; sourceTree = "<group>"; };
+		A49046481843B9DE009734B8 /* material.landscape.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.common.xml; sourceTree = "<group>"; };
+		A49046491843B9DE009734B8 /* material.landscape.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.reflection.xml; sourceTree = "<group>"; };
+		A490464A1843B9DE009734B8 /* material.landscape.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.refraction.xml; sourceTree = "<group>"; };
 		A4F5D70C18436E4E00ADAC70 /* landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = landscape.xml; sourceTree = "<group>"; };
-		A4F5D70D18436E4E00ADAC70 /* material.landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.xml; sourceTree = "<group>"; };
 		A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.diffuse.xml; sourceTree = "<group>"; };
 		A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.normal.xml; sourceTree = "<group>"; };
 		A4F5D71418437C9400ADAC70 /* CommonLandscape.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonLandscape.frag; sourceTree = "<group>"; };
@@ -448,6 +462,8 @@
 		21D0728B181DB34F0019D264 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A490463B1843B277009734B8 /* CommonLandscapeSplatting.vert */,
+				A490463A1843B277009734B8 /* CommonLandscapeSplatting.frag */,
 				A4F5D71418437C9400ADAC70 /* CommonLandscape.frag */,
 				A4F5D71518437C9400ADAC70 /* CommonLandscape.vert */,
 				21D0728C181DB34F0019D264 /* BloomCombineScreen.frag */,
@@ -497,10 +513,12 @@
 		21D072AC181DB34F0019D264 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A49046481843B9DE009734B8 /* material.landscape.common.xml */,
+				A49046491843B9DE009734B8 /* material.landscape.reflection.xml */,
+				A490464A1843B9DE009734B8 /* material.landscape.refraction.xml */,
 				A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */,
 				A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */,
 				A4F5D70C18436E4E00ADAC70 /* landscape.xml */,
-				A4F5D70D18436E4E00ADAC70 /* material.landscape.xml */,
 				21D072AD181DB34F0019D264 /* gbuffer.normal.material.xml */,
 				21D072AE181DB34F0019D264 /* gbuffer.normal.operation.xml */,
 				21D072AF181DB34F0019D264 /* guicontainer.xml */,
@@ -543,6 +561,9 @@
 		21D072CF181DB34F0019D264 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				A49046421843B703009734B8 /* layer_01_diffuse.pvr */,
+				A49046431843B703009734B8 /* layer_02_diffuse.pvr */,
+				A49046441843B703009734B8 /* layer_03_diffuse.pvr */,
 				21D072D0181DB34F0019D264 /* buildings_atlas.pvr */,
 				21D072D1181DB34F0019D264 /* Footman.Diffuse.pvr */,
 				21D072D2181DB34F0019D264 /* Footman2.Diffuse.pvr */,
@@ -641,16 +662,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49046401843B2A4009734B8 /* CommonLandscapeSplatting.vert in Resources */,
+				A49046411843B2A4009734B8 /* CommonLandscapeSplatting.frag in Resources */,
 				A4F5D718184387E700ADAC70 /* CommonLandscape.frag in Resources */,
 				A4F5D719184387E700ADAC70 /* CommonLandscape.vert in Resources */,
-				A4F5D70F18436E4E00ADAC70 /* material.landscape.xml in Resources */,
 				21D07337181DB3800019D264 /* BloomCombineScreen.frag in Resources */,
+				A49046471843B703009734B8 /* layer_03_diffuse.pvr in Resources */,
 				21D07338181DB3800019D264 /* BloomCombineScreen.vert in Resources */,
 				21D07339181DB3800019D264 /* BloomExtractScreen.frag in Resources */,
 				21D0733A181DB3800019D264 /* BloomExtractScreen.vert in Resources */,
 				21D0733B181DB3800019D264 /* BlurScreen.frag in Resources */,
 				21D0733C181DB3800019D264 /* BlurScreen.vert in Resources */,
 				21D0733D181DB3800019D264 /* CommonBoundBox.frag in Resources */,
+				A49046451843B703009734B8 /* layer_01_diffuse.pvr in Resources */,
 				21D0733E181DB3800019D264 /* CommonBoundBox.vert in Resources */,
 				21D0733F181DB3800019D264 /* CommonGUI.frag in Resources */,
 				21D07340181DB3800019D264 /* CommonGUI.vert in Resources */,
@@ -659,6 +683,7 @@
 				21D07343181DB3800019D264 /* CommonOcean.frag in Resources */,
 				21D07344181DB3800019D264 /* CommonOcean.vert in Resources */,
 				21D07345181DB3800019D264 /* CommonOutput.frag in Resources */,
+				A49046461843B703009734B8 /* layer_02_diffuse.pvr in Resources */,
 				21D07346181DB3800019D264 /* CommonOutput.vert in Resources */,
 				21D07347181DB3800019D264 /* CommonScreen.frag in Resources */,
 				21D07348181DB3800019D264 /* CommonScreen.vert in Resources */,
@@ -677,9 +702,11 @@
 				21D07270181DB1910019D264 /* CGameViewController.xib in Resources */,
 				21D072EA181DB34F0019D264 /* model_03.MDL_sk in Resources */,
 				21D0730A181DB34F0019D264 /* gbuffer.normal.material.xml in Resources */,
+				A490464C1843B9DE009734B8 /* material.landscape.reflection.xml in Resources */,
 				21D0732D181DB34F0019D264 /* Footman.Diffuse.pvr in Resources */,
 				21D07313181DB34F0019D264 /* material.model.common.xml in Resources */,
 				21D072DE181DB34F0019D264 /* Footman4.MDL in Resources */,
+				A490464B1843B9DE009734B8 /* material.landscape.common.xml in Resources */,
 				A4F5D71218436F6E00ADAC70 /* material.splatting.diffuse.xml in Resources */,
 				21D0732C181DB34F0019D264 /* buildings_atlas.pvr in Resources */,
 				21D0732F181DB34F0019D264 /* model_02.pvr in Resources */,
@@ -718,6 +745,7 @@
 				21D07335181DB34F0019D264 /* texture_01.pvr in Resources */,
 				21D07334181DB34F0019D264 /* particle.emitter.02.pvr in Resources */,
 				21D07314181DB34F0019D264 /* material.model.Footman.common.xml in Resources */,
+				A490464D1843B9DE009734B8 /* material.landscape.refraction.xml in Resources */,
 				21D072E5181DB34F0019D264 /* model_02.MDL_anim in Resources */,
 				21D07318181DB34F0019D264 /* material.model.refraction.xml in Resources */,
 				21D07324181DB34F0019D264 /* screen.space.bloomextract.operation.xml in Resources */,

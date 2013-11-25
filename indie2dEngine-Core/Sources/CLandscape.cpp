@@ -25,7 +25,9 @@ IGameObject(_resourceAccessor, _screenSpaceTextureAccessor),
 m_splattingDiffuseMaterial(nullptr),
 m_splattingNormalMaterial(nullptr),
 m_splattingDiffuseMaterialShader(nullptr),
-m_splattingNormalMaterialShader(nullptr)
+m_splattingNormalMaterialShader(nullptr),
+m_isSplattingDiffuseTextureCommited(false),
+m_isSplattingNormalTextureCommited(false)
 {
 
 }
@@ -41,13 +43,20 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     assert(m_resourceAccessor != nullptr);
     assert(m_screenSpaceTextureAccessor != nullptr);
     
+    m_isSplattingDiffuseTextureCommited = false;
+    m_isSplattingNormalTextureCommited = false;
+    
     m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_screenSpaceTextureAccessor, landscapeTemplate);
+    
+    m_heightmapProcessor->PreprocessSplattingTexture();
+    m_heightmapProcessor->PreprocessHeightmapTexture();
     
     m_splattingDiffuseMaterialShader = m_resourceAccessor->CreateShader(landscapeTemplate->m_splattingDiffuseMaterial->m_shaderTemplate->m_vsFilename,
                                                                         landscapeTemplate->m_splattingDiffuseMaterial->m_shaderTemplate->m_fsFilename);
     assert(m_splattingDiffuseMaterialShader != nullptr);
     m_splattingDiffuseMaterial = std::make_shared<CMaterial>(m_splattingDiffuseMaterialShader, landscapeTemplate->m_splattingDiffuseMaterial->m_renderMode);
     m_splattingDiffuseMaterial->Serialize(landscapeTemplate->m_splattingDiffuseMaterial, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
+    m_splattingDiffuseMaterial->Set_Texture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     CLandscape::_OnResourceLoaded(m_splattingDiffuseMaterial, true);
     m_splattingDiffuseMaterialShader->Register_LoadingHandler(shared_from_this());
     
@@ -56,12 +65,10 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     assert(m_splattingNormalMaterialShader != nullptr);
     m_splattingNormalMaterial = std::make_shared<CMaterial>(m_splattingNormalMaterialShader, landscapeTemplate->m_splattingNormalMaterial->m_renderMode);
     m_splattingNormalMaterial->Serialize(landscapeTemplate->m_splattingNormalMaterial, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
+    m_splattingNormalMaterial->Set_Texture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     CLandscape::_OnResourceLoaded(m_splattingNormalMaterial, true);
     m_splattingNormalMaterialShader->Register_LoadingHandler(shared_from_this());
     
-    m_heightmapProcessor->PreprocessSplattingTexture();
-    m_heightmapProcessor->PreprocessHeightmapTexture();
-
     m_numChunkRows = m_heightmapProcessor->Get_NumChunkRows();
     m_numChunkCells = m_heightmapProcessor->Get_NumChunkCells();
     
@@ -109,7 +116,39 @@ void CLandscape::_OnSceneUpdate(f32 _deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::_OnSceneUpdate(_deltatime);
+        assert(m_splattingDiffuseMaterial != nullptr);
+        if(!m_isSplattingDiffuseTextureCommited && m_splattingDiffuseMaterial->IsCommited())
+        {
+            assert(m_heightmapProcessor != nullptr);
+            std::shared_ptr<CTexture> splattingDiffuseTexture = m_heightmapProcessor->PreprocessSplattingDiffuseTexture(m_splattingDiffuseMaterial);
+            for(ui32 i = 0; i < m_numChunkRows; ++i)
+            {
+                for(ui32 j = 0; j < m_numChunkCells; ++j)
+                {
+                    assert(m_chunks.size() != 0);
+                    assert(m_chunks[i + j * m_numChunkRows] != nullptr);
+                    m_chunks[i + j * m_numChunkRows]->_Set_SplattingDiffuseTexture(splattingDiffuseTexture);
+                }
+            }
+            m_isSplattingDiffuseTextureCommited = true;
+        }
+        
+        assert(m_splattingNormalMaterial != nullptr);
+        if(!m_isSplattingNormalTextureCommited && m_splattingNormalMaterial->IsCommited())
+        {
+            assert(m_heightmapProcessor != nullptr);
+            std::shared_ptr<CTexture> splattingNormalTexture = m_heightmapProcessor->PreprocessSplattingNormalTexture(m_splattingNormalMaterial);
+            for(ui32 i = 0; i < m_numChunkRows; ++i)
+            {
+                for(ui32 j = 0; j < m_numChunkCells; ++j)
+                {
+                    assert(m_chunks.size() != 0);
+                    assert(m_chunks[i + j * m_numChunkRows] != nullptr);
+                    m_chunks[i + j * m_numChunkRows]->_Set_SplattingNormalTexture(splattingNormalTexture);
+                }
+            }
+            m_isSplattingNormalTextureCommited = true;
+        }
     }
 }
 
@@ -120,40 +159,22 @@ void CLandscape::_OnBatch(const std::string& _mode)
 
 i32 CLandscape::_OnQueuePosition(void)
 {
-    return m_renderQueuePosition;
+    return 0;
 }
 
 void CLandscape::_OnBind(const std::string& _mode)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        assert(m_materials.find(_mode) != m_materials.end());
-        IGameObject::_OnBind(_mode);
-    }
+
 }
 
 void CLandscape::_OnDraw(const std::string& _mode)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        assert(m_camera != nullptr);
-        assert(m_materials.find(_mode) != m_materials.end());
-        
-        std::shared_ptr<CMaterial> material = m_materials.find(_mode)->second;
-        assert(material->Get_Shader() != nullptr);
-        
-        m_materialImposer(material);
-        IGameObject::_OnDraw(_mode);
-    }
+
 }
 
 void CLandscape::_OnUnbind(const std::string& _mode)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        assert(m_materials.find(_mode) != m_materials.end());
-        IGameObject::_OnUnbind(_mode);
-    }
+
 }
 
 void CLandscape::Set_Camera(std::shared_ptr<CCamera> _camera)
@@ -233,8 +254,7 @@ void CLandscape::ListenRenderMgr(bool _value)
 
 void CLandscape::ListenSceneUpdateMgr(bool _value)
 {
-    m_isNeedToUpdate = _value;
-    
+    IGameObject::ListenSceneUpdateMgr(_value);
     for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)

@@ -48,13 +48,13 @@ public:
         return m_class;
     };
     
-    inline bool IsLoaded(void) const
+    inline virtual bool IsLoaded(void) const
     {
 		const bool value = 0 != (m_status & E_RESOURCE_STATUS_LOADED);
 		return value;
     };
     
-    inline bool IsCommited(void) const
+    inline virtual bool IsCommited(void) const
     {
 		const bool value = 0 != (m_status & E_RESOURCE_STATUS_COMMITED);
 		return value;

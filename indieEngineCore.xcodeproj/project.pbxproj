@@ -1641,8 +1641,8 @@
 				A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */,
 				A4535E9217C633EA0058CD47 /* CBatch.h */,
 				A4535E9117C633EA0058CD47 /* CBatch.cpp */,
-				21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */,
 				21457FEE181C4C060071839E /* IScreenSpaceTextureAccessor.h */,
+				21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */,
 			);
 			name = "Render Managment";
 			sourceTree = "<group>";

@@ -99,6 +99,9 @@ public:
     E_SHADER_SAMPLER Get_Sampler(const std::shared_ptr<CTexture>& _texture);
     
     
+    virtual bool IsLoaded(void) const;
+    virtual bool IsCommited(void) const;
+    
     void Bind(void);
     void Unbind(void);
 };

@@ -50,12 +50,11 @@ public:
     void RegisterScreenSpaceRenderOperation(const std::string& _mode, std::shared_ptr<CRenderOperationScreenSpace> _operation);
     void UnregisterScreenSpaceRenderOperation(const std::string& _mode);
     
-    std::shared_ptr<CTexture> PushCustomScreenSpaceRenderOperation(std::shared_ptr<CMaterial> _material, ui32 _textureWidth, ui32 _textureHeight);
-    
     void RegisterWorldSpaceRenderHandler(const std::string& _mode, std::shared_ptr<IRenderHandler> _handler);
     void UnregisterWorldSpaceRenderHandler(const std::string& _mode, std::shared_ptr<IRenderHandler> _handler);
 
 	std::shared_ptr<CTexture> Get_RenderOperationTexture(const std::string& _mode);
+    std::shared_ptr<CTexture> Get_CustomScreenSpaceOperationTexture(const std::shared_ptr<CMaterial> _material, ui32 _textureWidth, ui32 _textureHeight);
     
     inline void Set_BatchingMgr(const std::shared_ptr<CBatchingMgr>& _batchingMgr)
     {

@@ -70,13 +70,6 @@ void CRenderMgr::UnregisterScreenSpaceRenderOperation(const std::string &_mode)
     m_screenSpaceOperations.erase(iterator);
 }
 
-std::shared_ptr<CTexture> CRenderMgr::PushCustomScreenSpaceRenderOperation(std::shared_ptr<CMaterial> _material, ui32 _textureWidth, ui32 _textureHeight)
-{
-    std::shared_ptr<CRenderOperationScreenSpace> operation = std::make_shared<CRenderOperationScreenSpace>(_textureWidth, _textureHeight, "render.mode.custom", _material);
-    m_customScreenSpaceOperationsQueue.push(operation);
-    return operation->Get_OperatingTexture();
-}
-
 void CRenderMgr::RegisterWorldSpaceRenderHandler(const std::string &_mode, std::shared_ptr<IRenderHandler> _handler)
 {
     auto iterator = m_worldSpaceOperations.find(_mode);
@@ -101,6 +94,13 @@ std::shared_ptr<CTexture> CRenderMgr::Get_RenderOperationTexture(const std::stri
     }
     std::shared_ptr<CTexture> texture = m_worldSpaceOperations.find(mode) != m_worldSpaceOperations.end() ? std::string::npos == location ? m_worldSpaceOperations.find(mode)->second->Get_OperatingColorTexture() : m_worldSpaceOperations.find(mode)->second->Get_OperatingDepthTexture() : m_screenSpaceOperations.find(mode) != m_screenSpaceOperations.end() ? m_screenSpaceOperations.find(mode)->second->Get_OperatingTexture() : nullptr;
     return texture;
+}
+
+std::shared_ptr<CTexture> CRenderMgr::Get_CustomScreenSpaceOperationTexture(const std::shared_ptr<CMaterial> _material, ui32 _textureWidth, ui32 _textureHeight)
+{
+    std::shared_ptr<CRenderOperationScreenSpace> operation = std::make_shared<CRenderOperationScreenSpace>(_textureWidth, _textureHeight, "render.mode.custom", _material);
+    m_customScreenSpaceOperationsQueue.push(operation);
+    return operation->Get_OperatingTexture();
 }
 
 void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
