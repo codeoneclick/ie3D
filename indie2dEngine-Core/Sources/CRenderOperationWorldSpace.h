@@ -30,12 +30,12 @@ protected:
     glm::vec4 m_clearColor;
     std::map<ui32, std::set< std::shared_ptr<IRenderHandler> > > m_handlers;
     std::string m_mode;
-    
+    ui32 m_index;
     ui32 m_numTriangles;
     
 public:
     
-    CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const glm::vec4& _clearColor, const std::string& _mode);
+    CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const glm::vec4& _clearColor, const std::string& _mode, ui32 _index);
     ~CRenderOperationWorldSpace(void);
     
     inline std::shared_ptr<CTexture> Get_OperatingColorTexture(void) const
@@ -56,6 +56,11 @@ public:
     inline std::string Get_Mode(void) const
     {
         return m_mode;
+    };
+    
+    inline ui32 Get_Index(void) const
+    {
+        return m_index;
     };
     
     void RegisterRenderHandler(const std::shared_ptr<IRenderHandler>& _handler);

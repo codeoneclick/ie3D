@@ -108,7 +108,14 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
     assert(m_batchingMgr != nullptr);
     m_numTriangles = 0;
     
-    for(const auto& iterator : m_worldSpaceOperations)
+    typedef std::pair<std::string, std::shared_ptr<CRenderOperationWorldSpace>> operation_t;
+    
+    std::vector<operation_t> operations(m_worldSpaceOperations.begin(), m_worldSpaceOperations.end());
+    std::sort(operations.begin(), operations.end(), [](const operation_t& _operation_01, const operation_t& _operation_02){
+        return _operation_01.second->Get_Index() < _operation_02.second->Get_Index();
+    });
+    
+    for(const auto& iterator : operations)
     {
         std::shared_ptr<CRenderOperationWorldSpace> operation = iterator.second;
         

@@ -10,8 +10,9 @@
 #include "CTexture.h"
 #include "IRenderHandler.h"
 
-CRenderOperationWorldSpace::CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const glm::vec4& _clearColor, const std::string& _mode) :
+CRenderOperationWorldSpace::CRenderOperationWorldSpace(ui32 _frameWidth, ui32 _frameHeight, const glm::vec4& _clearColor, const std::string& _mode, ui32 _index) :
 m_mode(_mode),
+m_index(_index),
 m_frameWidth(_frameWidth),
 m_frameHeight(_frameHeight),
 m_clearColor(_clearColor),

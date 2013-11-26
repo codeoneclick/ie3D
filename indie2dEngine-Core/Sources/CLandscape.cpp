@@ -19,6 +19,7 @@
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CLandscapeChunk.h"
+#include "CLandscapeEdges.h"
 
 CLandscape::CLandscape(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor) :
 IGameObject(_resourceAccessor, _screenSpaceTextureAccessor),
@@ -27,7 +28,8 @@ m_splattingNormalMaterial(nullptr),
 m_splattingDiffuseMaterialShader(nullptr),
 m_splattingNormalMaterialShader(nullptr),
 m_isSplattingDiffuseTextureCommited(false),
-m_isSplattingNormalTextureCommited(false)
+m_isSplattingNormalTextureCommited(false),
+m_edges(std::make_shared<CLandscapeEdges>(_resourceAccessor, _screenSpaceTextureAccessor))
 {
 
 }
@@ -50,6 +52,7 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     
     m_heightmapProcessor->PreprocessSplattingTexture();
     m_heightmapProcessor->PreprocessHeightmapTexture();
+    m_heightmapProcessor->PreprocessEdgesMaskTexture();
     
     m_splattingDiffuseMaterialShader = m_resourceAccessor->CreateShader(landscapeTemplate->m_splattingDiffuseMaterial->m_shaderTemplate->m_vsFilename,
                                                                         landscapeTemplate->m_splattingDiffuseMaterial->m_shaderTemplate->m_fsFilename);
@@ -87,6 +90,8 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
             m_chunks[i + j * m_numChunkRows]->_OnTemplateLoaded(_template);
         }
     }
+    m_edges->_OnTemplateLoaded(_template);
+    m_edges->_Set_EdgeTexture(m_heightmapProcessor->Get_EdgesMaskTexture());
     
     CLandscape::Set_Camera(m_camera);
     CLandscape::Set_RenderMgr(m_renderMgr);
@@ -190,6 +195,8 @@ void CLandscape::Set_Camera(std::shared_ptr<CCamera> _camera)
             m_chunks[i + j * m_numChunkRows]->Set_Camera(_camera);
         }
     }
+    assert(m_edges != nullptr);
+    m_edges->Set_Camera(_camera);
 }
 
 void CLandscape::Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id)
@@ -205,6 +212,8 @@ void CLandscape::Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id)
             m_chunks[i + j * m_numChunkRows]->Set_Light(_light, _id);
         }
     }
+    assert(m_edges != nullptr);
+    m_edges->Set_Light(_light, _id);
 }
 
 void CLandscape::Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
@@ -220,6 +229,8 @@ void CLandscape::Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
             m_chunks[i + j * m_numChunkRows]->Set_RenderMgr(_renderMgr);
         }
     }
+    assert(m_edges != nullptr);
+    m_edges->Set_RenderMgr(_renderMgr);
 }
 
 void CLandscape::Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
@@ -235,6 +246,8 @@ void CLandscape::Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdat
             m_chunks[i + j * m_numChunkRows]->Set_SceneUpdateMgr(_sceneUpdateMgr);
         }
     }
+    assert(m_edges != nullptr);
+    m_edges->Set_SceneUpdateMgr(_sceneUpdateMgr);
 }
 
 void CLandscape::ListenRenderMgr(bool _value)
@@ -250,6 +263,8 @@ void CLandscape::ListenRenderMgr(bool _value)
             m_chunks[i + j * m_numChunkRows]->ListenRenderMgr(_value);
         }
     }
+    assert(m_edges != nullptr);
+    m_edges->ListenRenderMgr(_value);
 }
 
 void CLandscape::ListenSceneUpdateMgr(bool _value)
@@ -264,5 +279,7 @@ void CLandscape::ListenSceneUpdateMgr(bool _value)
             m_chunks[i + j * m_numChunkRows]->ListenSceneUpdateMgr(_value);
         }
     }
+    assert(m_edges != nullptr);
+    m_edges->ListenSceneUpdateMgr(_value);
 }
 

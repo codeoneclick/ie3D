@@ -9,39 +9,36 @@
 #ifndef CLandscapeEdges_h
 #define CLandscapeEdges_h
 
-#include "CGameObject3d.h"
+#include "IGameObject.h"
 
-class CLandscapeEdges : public CGameObject3d
+class CLandscapeEdges : public IGameObject
 {
 private:
 
     ui32 m_width;
     ui32 m_height;
-    glm::vec2 m_heightBound;
+    glm::vec2 m_heightBounds;
+    
+    friend class CLandscape;
 
 protected:
 
-    void OnResourceDidLoad(TSharedPtrResource _resource);
-
-    void OnUpdate(f32 _deltatime);
-
-    ui32 OnDrawIndex(void);
-    void OnBind(E_RENDER_MODE_WORLD_SPACE _mode);
-    void OnDraw(E_RENDER_MODE_WORLD_SPACE _mode);
-    void OnUnbind(E_RENDER_MODE_WORLD_SPACE _mode);
+    void _OnSceneUpdate(f32 _deltatime);
+    void _Set_EdgeTexture(const std::shared_ptr<CTexture>& _texture);
+    
+    i32 _OnQueuePosition(void);
+    void _OnBind(const std::string& _mode);
+    void _OnDraw(const std::string& _mode);
+    void _OnUnbind(const std::string& _mode);
+    void _OnBatch(const std::string& _mode);
+    
+    void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
     
 public:
     
-    CLandscapeEdges(void);
+    CLandscapeEdges(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
     ~CLandscapeEdges(void);
-
-    void Load(CResourceMgrsFacade* _resourceMgrsFacade, CShaderComposite* _shaderComposite, const std::string& _filename)
-    {
-        assert(false);
-    };
-
-    void Load(CMaterial* _material, ui32 _width, ui32 _height, const glm::vec2 _heightBound);
-    
 };
 
 #endif 

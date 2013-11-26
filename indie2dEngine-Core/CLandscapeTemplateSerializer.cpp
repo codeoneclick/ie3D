@@ -42,6 +42,16 @@ std::shared_ptr<ITemplate> CLandscapeTemplateSerializer::Serialize(const std::st
     {
         landscapeTemplate->m_materialsFilenames.push_back(material.attribute("filename").as_string());
     }
+    
+    landscapeTemplate->m_edgesBound_x = node.child("edge_bound_x").attribute("value").as_float();
+    landscapeTemplate->m_edgesBound_y = node.child("edge_bound_y").attribute("value").as_float();
+    
+    materials_node = node.child("edges_materials");
+    for (pugi::xml_node material = materials_node.child("material"); material; material = material.next_sibling("material"))
+    {
+        landscapeTemplate->m_edgesMaterialsFilenames.push_back(material.attribute("filename").as_string());
+    }
+    
     return landscapeTemplate;
 }
 

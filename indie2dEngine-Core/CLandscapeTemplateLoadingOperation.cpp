@@ -44,5 +44,13 @@ std::shared_ptr<ITemplate> CLandscapeTemplateLoadingOperation::Serialize(const s
     assert(materialTemplate != nullptr);
     landscapeTemplate->m_splattingNormalMaterial = materialTemplate;
     
+    for(const auto& iterator : landscapeTemplate->m_edgesMaterialsFilenames)
+    {
+        std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
+        std::shared_ptr<SMaterialTemplate> materialTemplate = std::static_pointer_cast<SMaterialTemplate>(materialLoadingOperation->Serialize(iterator));
+        assert(materialTemplate != nullptr);
+        landscapeTemplate->m_edgesMaterials.push_back(materialTemplate);
+    }
+    
     return landscapeTemplate;
 }

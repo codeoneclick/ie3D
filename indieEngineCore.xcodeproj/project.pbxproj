@@ -356,6 +356,9 @@
 		A46B1C99183E6CA600A3EF49 /* CHeightmapHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C95183E6C9500A3EF49 /* CHeightmapHelper.cpp */; };
 		A46B1C9B183E7AA800A3EF49 /* CLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */; };
 		A46B1C9C183E7AA800A3EF49 /* CLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */; };
+		A49046511844A7F6009734B8 /* CLandscapeEdges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */; };
+		A49046521844A7F6009734B8 /* CLandscapeEdges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */; };
+		A49046531844A7F7009734B8 /* CLandscapeEdges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */; };
 		A49B83901754CCB900AEB4DC /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
 		A4F5D6F718436CCA00ADAC70 /* CLandscapeTemplateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F5D6F518436CCA00ADAC70 /* CLandscapeTemplateLoader.cpp */; };
 		A4F5D70218436D3F00ADAC70 /* CLandscapeTemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F5D70018436D3F00ADAC70 /* CLandscapeTemplateLoadingOperation.cpp */; };
@@ -2262,6 +2265,7 @@
 				2111AA3A181EFF30007FE7A8 /* gcdppQueue_t.cpp in Sources */,
 				2111AA3B181EFF30007FE7A8 /* gcdppTask_i.cpp in Sources */,
 				A46B1C9C183E7AA800A3EF49 /* CLandscape.cpp in Sources */,
+				A49046531844A7F7009734B8 /* CLandscapeEdges.cpp in Sources */,
 				2111AA3C181EFF30007FE7A8 /* gcdppTask_t.cpp in Sources */,
 				2111AA3D181EFF30007FE7A8 /* json_reader.cpp in Sources */,
 				2111AAB9181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp in Sources */,
@@ -2422,6 +2426,7 @@
 				21D071CC181DA6C20019D264 /* IGUIControl.cpp in Sources */,
 				21D071CD181DA6C20019D264 /* CGUIFabricator.cpp in Sources */,
 				21D071CE181DA6C20019D264 /* CGUIGraph.cpp in Sources */,
+				A49046521844A7F6009734B8 /* CLandscapeEdges.cpp in Sources */,
 				21D071CF181DA6C20019D264 /* CRenderOperationWorldSpace.cpp in Sources */,
 				21D071D0181DA6C20019D264 /* CRenderOperationScreenSpace.cpp in Sources */,
 				21D071D1181DA6C20019D264 /* CRenderOperationOutput.cpp in Sources */,
@@ -2544,6 +2549,7 @@
 				A40A6A6E1753AF75005B475E /* CMeshCommiter_MDL.cpp in Sources */,
 				A40A6A611753AF38005B475E /* IGameObject.cpp in Sources */,
 				A40A6A621753AF38005B475E /* CSprite.cpp in Sources */,
+				A49046511844A7F6009734B8 /* CLandscapeEdges.cpp in Sources */,
 				A40A6A631753AF38005B475E /* CBillboard.cpp in Sources */,
 				A40A6A641753AF38005B475E /* CParticleEmitter.cpp in Sources */,
 				A40A6A651753AF38005B475E /* CCamera.cpp in Sources */,

@@ -126,6 +126,9 @@
 		A490464B1843B9DE009734B8 /* material.landscape.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046481843B9DE009734B8 /* material.landscape.common.xml */; };
 		A490464C1843B9DE009734B8 /* material.landscape.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046491843B9DE009734B8 /* material.landscape.reflection.xml */; };
 		A490464D1843B9DE009734B8 /* material.landscape.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = A490464A1843B9DE009734B8 /* material.landscape.refraction.xml */; };
+		A49046571844B27B009734B8 /* material.landscape.edges.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046541844B27B009734B8 /* material.landscape.edges.common.xml */; };
+		A49046581844B27B009734B8 /* material.landscape.edges.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046551844B27B009734B8 /* material.landscape.edges.reflection.xml */; };
+		A49046591844B27B009734B8 /* material.landscape.edges.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046561844B27B009734B8 /* material.landscape.edges.refraction.xml */; };
 		A4F5D70E18436E4E00ADAC70 /* landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D70C18436E4E00ADAC70 /* landscape.xml */; };
 		A4F5D71218436F6E00ADAC70 /* material.splatting.diffuse.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */; };
 		A4F5D71318436F6E00ADAC70 /* material.splatting.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */; };
@@ -299,6 +302,9 @@
 		A49046481843B9DE009734B8 /* material.landscape.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.common.xml; sourceTree = "<group>"; };
 		A49046491843B9DE009734B8 /* material.landscape.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.reflection.xml; sourceTree = "<group>"; };
 		A490464A1843B9DE009734B8 /* material.landscape.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.refraction.xml; sourceTree = "<group>"; };
+		A49046541844B27B009734B8 /* material.landscape.edges.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.common.xml; sourceTree = "<group>"; };
+		A49046551844B27B009734B8 /* material.landscape.edges.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.reflection.xml; sourceTree = "<group>"; };
+		A49046561844B27B009734B8 /* material.landscape.edges.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.refraction.xml; sourceTree = "<group>"; };
 		A4F5D70C18436E4E00ADAC70 /* landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = landscape.xml; sourceTree = "<group>"; };
 		A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.diffuse.xml; sourceTree = "<group>"; };
 		A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.normal.xml; sourceTree = "<group>"; };
@@ -513,6 +519,9 @@
 		21D072AC181DB34F0019D264 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A49046541844B27B009734B8 /* material.landscape.edges.common.xml */,
+				A49046551844B27B009734B8 /* material.landscape.edges.reflection.xml */,
+				A49046561844B27B009734B8 /* material.landscape.edges.refraction.xml */,
 				A49046481843B9DE009734B8 /* material.landscape.common.xml */,
 				A49046491843B9DE009734B8 /* material.landscape.reflection.xml */,
 				A490464A1843B9DE009734B8 /* material.landscape.refraction.xml */,
@@ -727,6 +736,7 @@
 				21D07319181DB34F0019D264 /* material.ocean.xml in Resources */,
 				21D0730B181DB34F0019D264 /* gbuffer.normal.operation.xml in Resources */,
 				21D07312181DB34F0019D264 /* material.guicontainer.xml in Resources */,
+				A49046581844B27B009734B8 /* material.landscape.edges.reflection.xml in Resources */,
 				21D07331181DB34F0019D264 /* ocean_hm.pvr in Resources */,
 				21D07333181DB34F0019D264 /* particle.emitter.01.pvr in Resources */,
 				21D07315181DB34F0019D264 /* material.model.Footman.reflection.xml in Resources */,
@@ -739,6 +749,7 @@
 				21D07336181DB34F0019D264 /* texture_02.pvr in Resources */,
 				21D0730E181DB34F0019D264 /* material.bloomcombine.screen.xml in Resources */,
 				21D0730F181DB34F0019D264 /* material.bloomextract.screen.xml in Resources */,
+				A49046591844B27B009734B8 /* material.landscape.edges.refraction.xml in Resources */,
 				21D07309181DB34F0019D264 /* Default@2x.png in Resources */,
 				21D0730C181DB34F0019D264 /* guicontainer.xml in Resources */,
 				21D07307181DB34F0019D264 /* Default-568h@2x.png in Resources */,
@@ -754,6 +765,7 @@
 				21D0731C181DB34F0019D264 /* model.Building.xml in Resources */,
 				21D07317181DB34F0019D264 /* material.model.reflection.xml in Resources */,
 				21D07320181DB34F0019D264 /* particle.emitter.01.xml in Resources */,
+				A49046571844B27B009734B8 /* material.landscape.edges.common.xml in Resources */,
 				21D0730D181DB34F0019D264 /* main.transition.xml in Resources */,
 				21D0732E181DB34F0019D264 /* Footman2.Diffuse.pvr in Resources */,
 				21D072E6181DB34F0019D264 /* model_02.MDL_mesh in Resources */,

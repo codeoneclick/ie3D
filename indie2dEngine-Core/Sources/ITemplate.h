@@ -65,7 +65,7 @@ struct SModelTemplate : public ITemplate
 struct SOceanTemplate : public ITemplate
 {
     std::vector<std::string> m_materialsFilenames;
-    std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
+    std::vector<std::shared_ptr<SMaterialTemplate>> m_materialsTemplates;
     ui32 m_width;
     ui32 m_height;
     f32 m_altitude;
@@ -84,6 +84,10 @@ struct SLandscapeTemplate : public ITemplate
     ui32 m_splattingDiffuseTextureHeight;
     ui32 m_splattingNormalTextureWidth;
     ui32 m_splattingNormalTextureHeight;
+    std::vector<std::string> m_edgesMaterialsFilenames;
+    std::vector<std::shared_ptr<SMaterialTemplate>> m_edgesMaterials;
+    f32 m_edgesBound_x;
+    f32 m_edgesBound_y;
     
     ui32 m_width;
     ui32 m_height;
@@ -126,6 +130,7 @@ struct SParticleEmitterTemplate : public ITemplate
 struct SWorldSpaceRenderOperationTemplate : public ITemplate
 {
     std::string m_guid;
+    ui32 m_index;
     i32 m_screenWidth;
     i32 m_screenHeight;
     glm::vec4 m_clearColor;

@@ -187,7 +187,11 @@ void CHeightmapProcessor::_FillEdgesMaskTextureBlock(ui16* _data, ui32 _index, u
         _data[indexOffset] = TO_RGB(0, 0, 0);
         if(currentEdgeHeight < height)
         {
-            _data[indexOffset] = TO_RGB(255, 255, 255);
+            _data[indexOffset] = TO_RGB(255, 0, 0);
+        }
+        else
+        {
+            _data[indexOffset] = TO_RGB(0, 255, 0);
         }
     }
 }

@@ -87,7 +87,7 @@ void CKOTHInGameScene::Load(void)
     {
         for(i32 j = 0; j < 14; ++j)
         {
-            if(i == 0 || i == 13 || j == 0 || j == 13)
+            if(i == 1 || i == 11 || j == 1 || j == 11)
             {
                 std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
                 model->Set_Position(glm::vec3(i * 10, 0.0f, j * 10));

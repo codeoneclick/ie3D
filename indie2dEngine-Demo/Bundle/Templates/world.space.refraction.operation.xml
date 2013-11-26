@@ -1,1 +1,1 @@
-<operation guid="world.space.refraction.operation" screenWidth="256" screenHeight="256" clear_color_r="0.5" clear_color_g="0.5" clear_color_b="0.5" clear_color_a="0.0"/>
+<operation guid="world.space.refraction.operation" index="1" screenWidth="256" screenHeight="256" clear_color_r="0.5" clear_color_g="0.5" clear_color_b="0.5" clear_color_a="0.0"/>

@@ -98,7 +98,7 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
         std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation = std::make_shared<CRenderOperationWorldSpace>(worldSpaceRenderOperationTemplate->m_screenWidth,
                                                                                                                              worldSpaceRenderOperationTemplate->m_screenHeight,
                                                                                                                              worldSpaceRenderOperationTemplate->m_clearColor,
-                                                                                                                             worldSpaceRenderOperationTemplate->m_guid);
+                                                                                                                             worldSpaceRenderOperationTemplate->m_guid, worldSpaceRenderOperationTemplate->m_index);
         m_renderMgr->RegisterWorldSpaceRenderOperation(worldSpaceRenderOperationTemplate->m_guid, worldSpaceRenderOperation);
     }
     

@@ -31,13 +31,13 @@ std::shared_ptr<ITemplate> CWorldSpaceRenderOperationTemplateSerializer::Seriali
     
     std::shared_ptr<SWorldSpaceRenderOperationTemplate> worldSpaceRenderOperationTemplate = std::make_shared<SWorldSpaceRenderOperationTemplate>();
     worldSpaceRenderOperationTemplate->m_guid = node.attribute("guid").as_string();
+    worldSpaceRenderOperationTemplate->m_index = node.attribute("index").as_uint();
     worldSpaceRenderOperationTemplate->m_screenWidth = node.attribute("screenWidth").as_int();
     worldSpaceRenderOperationTemplate->m_screenHeight = node.attribute("screenHeight").as_int();
     worldSpaceRenderOperationTemplate->m_clearColor.r = node.attribute("clear_color_r").as_float();
     worldSpaceRenderOperationTemplate->m_clearColor.g = node.attribute("clear_color_g").as_float();
     worldSpaceRenderOperationTemplate->m_clearColor.b = node.attribute("clear_color_b").as_float();
     worldSpaceRenderOperationTemplate->m_clearColor.a = node.attribute("clear_color_a").as_float();
-    
     return worldSpaceRenderOperationTemplate;
 }
 

@@ -26,8 +26,8 @@ class CRenderMgr final : public IGameLoopHandler, public IScreenSpaceTextureAcce
 private:
     
     const std::shared_ptr<IGraphicsContext> m_graphicsContext;
-    std::map<std::string, std::shared_ptr<CRenderOperationWorldSpace> > m_worldSpaceOperations;
-    std::map<std::string, std::shared_ptr<CRenderOperationScreenSpace> > m_screenSpaceOperations;
+    std::map<std::string, std::shared_ptr<CRenderOperationWorldSpace>> m_worldSpaceOperations;
+    std::map<std::string, std::shared_ptr<CRenderOperationScreenSpace>> m_screenSpaceOperations;
     std::shared_ptr<CRenderOperationOutput> m_outputOperation;
     std::queue<std::shared_ptr<CRenderOperationScreenSpace> > m_customScreenSpaceOperationsQueue;
     ui32 m_numTriangles;
