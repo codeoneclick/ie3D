@@ -204,9 +204,11 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
                     m_locked = 0;
 #if defined(__USE_GCDPP__)
                 };
-                gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
+                main();
+                //gcdpp::impl::DispatchAsync(gcdpp::queue::GetMainQueue(), main);
             };
-            gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
+            function();
+            //gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
 #endif
         }
     }

@@ -60,6 +60,8 @@ public:
     
     void ListenRenderMgr(bool _value);
     void ListenSceneUpdateMgr(bool _value);
+    
+    ui32 Get_NumTriangles(void);
 
     inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
     {

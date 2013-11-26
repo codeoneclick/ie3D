@@ -155,7 +155,7 @@ public:
         m_sceneUpdateMgr = _sceneUpdateMgr;
     };
     
-    ui32 Get_NumTriangles(void);
+    virtual ui32 Get_NumTriangles(void);
     
     virtual void ListenRenderMgr(bool _value);
     virtual void ListenSceneUpdateMgr(bool _value);

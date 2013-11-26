@@ -283,3 +283,18 @@ void CLandscape::ListenSceneUpdateMgr(bool _value)
     m_edges->ListenSceneUpdateMgr(_value);
 }
 
+ui32 CLandscape::Get_NumTriangles(void)
+{
+    ui32 numTriangles = 0;
+    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    {
+        for(ui32 j = 0; j < m_numChunkCells; ++j)
+        {
+            assert(m_chunks.size() != 0);
+            assert(m_chunks[i + j * m_numChunkRows] != nullptr);
+            numTriangles += m_chunks[i + j * m_numChunkRows]->Get_NumTriangles();
+        }
+    }
+    return numTriangles;
+}
+
