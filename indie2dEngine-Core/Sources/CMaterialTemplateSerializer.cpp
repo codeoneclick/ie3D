@@ -10,7 +10,7 @@
 #include "CCommonOS.h"
 #include "ITemplate.h"
 
-#if defined(__IOS__) || defined(__OSX__)
+#if defined(__IOS__) || defined(__OSX__) || defined(__NDK__)
 
 std::map<std::string, GLenum> g_glEnumContainer = {
     {"GL_FRONT", GL_FRONT},

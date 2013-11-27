@@ -21,7 +21,7 @@ protected:
 public:
     
     ITemplateLoader(void);
-    ~ITemplateLoader(void);
+    virtual ~ITemplateLoader(void);
     
     virtual void Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler) = 0;
 };

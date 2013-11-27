@@ -40,6 +40,6 @@ void CLandscapeTemplateLoader::Load(const std::string& _filename, std::shared_pt
     };
     gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function, _filename, _handler);
 #else
-    _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(oceanTemplate);
+    _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(landscapeTemplate);
 #endif
 }

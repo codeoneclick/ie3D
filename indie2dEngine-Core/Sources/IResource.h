@@ -29,7 +29,7 @@ protected:
     E_RESOURCE_CLASS m_class;
     ui8 m_status;
     
-    std::set<std::shared_ptr<IResourceLoadingHandler>> m_handlers;
+    std::set<std::shared_ptr<IResourceLoadingHandler> > m_handlers;
     
     void _OnLoaded(void);
     

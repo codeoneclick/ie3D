@@ -8,9 +8,10 @@
 
 #include "IGraphicsContext.h"
 #include "IOGLWindow.h"
-#include <Cocoa/Cocoa.h>
 
 #if defined(__OSX__)
+
+#include <Cocoa/Cocoa.h>
 
 #define k_MAX_RETRIES 128
 
