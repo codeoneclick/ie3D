@@ -20,12 +20,12 @@
 #include "CCharacterController.h"
 #include "CGUIContainer.h"
 
-#if defined(__APPLE__)
+#if defined(__IOS__) || defined(__OSX__)
 
 extern void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
 extern void UnregisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
 
-#elif defined(__WIN32__)
+#elif defined(__WIN32__) || defined(__NDK__)
 
 void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler)
 {

@@ -26,6 +26,8 @@ ui64 CTimer::Get_TickCount(void)
     }
     uint64_t milliseconds = ((machTime / 1000000) * timebaseInfo.numer) / timebaseInfo.denom;
     return milliseconds;
+#elif defined(__NDK__)
+    return 0;
 #elif defined(__WIN32__)
 	return 0;
 #endif

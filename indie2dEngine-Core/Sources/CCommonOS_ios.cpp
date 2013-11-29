@@ -16,7 +16,7 @@
 std::string Get_BundlePath(void)
 {
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
-    path.append("/");
+    path.append("/wrong");
     return path;
 };
 

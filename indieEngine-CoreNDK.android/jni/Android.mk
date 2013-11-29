@@ -3,6 +3,8 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 SOURCE_FILES := $(wildcard $(LOCAL_PATH)/../../indie2dEngine-Core/Sources/*.cpp)
+SOURCE_FILES += $(wildcard $(LOCAL_PATH)/../../indie2dEngine-Core/Libraries/pugixml/*.cpp)
+#SOURCE_FILES += $(wildcard $(LOCAL_PATH)/../../indie2dEngine-Core/Libraries/gcdpp/*.cpp)
 
 LOCAL_MODULE := IndieEngineCoreNDK
 LOCAL_CFLAGS := -Werror -D__NDK__ -DGXX_EXPERIMENTAL_CXX0X

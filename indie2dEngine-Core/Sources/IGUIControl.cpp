@@ -117,7 +117,7 @@ void IGUIControl::_OnSceneUpdate(f32 _deltatime)
 
 i32 IGUIControl::_OnQueuePosition(void)
 {
-	return UINT32_MAX;
+	return 65535;
 }
 
 bool IGUIControl::_OnOcclusion(void)

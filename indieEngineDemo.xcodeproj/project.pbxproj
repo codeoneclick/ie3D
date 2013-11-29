@@ -129,6 +129,7 @@
 		A49046571844B27B009734B8 /* material.landscape.edges.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046541844B27B009734B8 /* material.landscape.edges.common.xml */; };
 		A49046581844B27B009734B8 /* material.landscape.edges.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046551844B27B009734B8 /* material.landscape.edges.reflection.xml */; };
 		A49046591844B27B009734B8 /* material.landscape.edges.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = A49046561844B27B009734B8 /* material.landscape.edges.refraction.xml */; };
+		A4D21A1C1848CFB900595FEA /* CGameViewController_ndk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4D21A1A1848CFB900595FEA /* CGameViewController_ndk.cpp */; };
 		A4F5D70E18436E4E00ADAC70 /* landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D70C18436E4E00ADAC70 /* landscape.xml */; };
 		A4F5D71218436F6E00ADAC70 /* material.splatting.diffuse.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */; };
 		A4F5D71318436F6E00ADAC70 /* material.splatting.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */; };
@@ -305,6 +306,8 @@
 		A49046541844B27B009734B8 /* material.landscape.edges.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.common.xml; sourceTree = "<group>"; };
 		A49046551844B27B009734B8 /* material.landscape.edges.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.reflection.xml; sourceTree = "<group>"; };
 		A49046561844B27B009734B8 /* material.landscape.edges.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.refraction.xml; sourceTree = "<group>"; };
+		A4D21A1A1848CFB900595FEA /* CGameViewController_ndk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameViewController_ndk.cpp; path = "indie2dEngine-Demo/Sources/CGameViewController_ndk.cpp"; sourceTree = SOURCE_ROOT; };
+		A4D21A1B1848CFB900595FEA /* CGameViewController_ndk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController_ndk.h; path = "indie2dEngine-Demo/Sources/CGameViewController_ndk.h"; sourceTree = SOURCE_ROOT; };
 		A4F5D70C18436E4E00ADAC70 /* landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = landscape.xml; sourceTree = "<group>"; };
 		A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.diffuse.xml; sourceTree = "<group>"; };
 		A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.normal.xml; sourceTree = "<group>"; };
@@ -387,8 +390,10 @@
 				21D07255181DB1910019D264 /* AppDelegate.mm */,
 				21D07256181DB1910019D264 /* CCharacterController.cpp */,
 				21D07257181DB1910019D264 /* CCharacterController.h */,
-				21D07258181DB1910019D264 /* CGameViewController_win32.cpp */,
 				21D07259181DB1910019D264 /* CGameViewController_win32.h */,
+				21D07258181DB1910019D264 /* CGameViewController_win32.cpp */,
+				A4D21A1B1848CFB900595FEA /* CGameViewController_ndk.h */,
+				A4D21A1A1848CFB900595FEA /* CGameViewController_ndk.cpp */,
 				21D0725A181DB1910019D264 /* CGameViewController.h */,
 				21D0725B181DB1910019D264 /* CGameViewController.mm */,
 				21D0725C181DB1910019D264 /* CGameViewController.xib */,
@@ -797,6 +802,7 @@
 				21D07272181DB1910019D264 /* CKOTHInGameTransition.cpp in Sources */,
 				21D07271181DB1910019D264 /* CKOTHInGameScene.cpp in Sources */,
 				21D0726D181DB1910019D264 /* CCharacterController.cpp in Sources */,
+				A4D21A1C1848CFB900595FEA /* CGameViewController_ndk.cpp in Sources */,
 				21D07277181DB1910019D264 /* main.mm in Sources */,
 				21D07274181DB1910019D264 /* CMoveControllerView_iOS.mm in Sources */,
 				21D07276181DB1910019D264 /* IMoveControllerHandler.cpp in Sources */,

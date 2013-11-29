@@ -7,5 +7,6 @@ public class CGameJNILib {
 	        System.loadLibrary("IndieEngineDemo");
 	 }
 	 
-	 public static native void fooo();
+	 public static native void start();
+	 public static native void run();
 }

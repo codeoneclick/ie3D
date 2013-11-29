@@ -57,6 +57,20 @@ public:
 	};
 };
 
+#elif defined(__NDK__)
+
+class IOGLWindow
+{
+private:
+
+protected:
+
+public:
+
+	IOGLWindow(void);
+	~IOGLWindow(void);
+};
+
 #endif
 
 #endif 

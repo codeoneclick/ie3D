@@ -28,6 +28,8 @@ std::shared_ptr<IGameTransition> CKOTHWorkflow::CreateKOTHInGameTransition(const
     std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::CreateGraphicsContext(_hwnd, E_PLATFORM_API_IOS);
 #elif defined(__WIN32__)
 	std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::CreateGraphicsContext(_hwnd, E_PLATFORM_API_WIN32);
+#elif defined(__NDK__)
+    std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::CreateGraphicsContext(_hwnd, E_PLATFORM_API_NDK);
 #endif
     std::shared_ptr<IInputContext> inputContext = std::make_shared<IInputContext>(_hwnd);
     std::shared_ptr<CKOTHInGameTransition> gameKOTHInGameTransition = std::make_shared<CKOTHInGameTransition>(_filename, graphicsContext, inputContext, m_resourceAccessor, m_templateAccessor);

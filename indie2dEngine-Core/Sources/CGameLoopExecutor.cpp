@@ -9,7 +9,7 @@
 #include "CGameLoopExecutor.h"
 #include "CFPSCounter.h"
 
-#if defined(__WIN32__)
+#if defined(__WIN32__) || defined(__NDK__)
 
 CGameLoopExecutor* CGameLoopExecutor::m_instance = nullptr;
 
@@ -27,7 +27,7 @@ CGameLoopExecutor* CGameLoopExecutor::Get_Instance(void)
 CGameLoopExecutor::CGameLoopExecutor(void) :
 m_fpsCounter(std::make_shared<CFPSCounter>())
 {
-#if defined(__WIN32__)
+#if defined(__WIN32__) || defined(__NDK__)
     
 	m_instance = this;
     

@@ -24,7 +24,7 @@ protected:
     std::shared_ptr<CFPSCounter> m_fpsCounter;
     static const ui32 k_MAX_FRAME_RATE;
 
-#if defined(__WIN32__)
+#if defined(__WIN32__) || defined(__NDK__)
     
 	static CGameLoopExecutor* m_instance;
 	static CGameLoopExecutor* Get_Instance(void);
@@ -59,8 +59,7 @@ public:
 
 #if defined(__IOS__)
 
-
-#elif defined(__WIN32__)
+#elif defined(__WIN32__) || defined(__NDK__)
 
 void Run(void);
 

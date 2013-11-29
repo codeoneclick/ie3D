@@ -167,6 +167,7 @@ E_SHADER_SAMPLER CMaterial::Get_Sampler(const std::shared_ptr<CTexture> &_textur
         }
     }
     assert(false);
+    return E_SHADER_SAMPLER_01;
 }
 
 void CMaterial::Bind(void)
