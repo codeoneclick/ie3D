@@ -1,4 +1,4 @@
-package com.codeoneclick.indieengine_demo;
+package com.codeoneclick.indieenginedemo;
 
 import android.app.Activity;
 import android.os.Bundle;

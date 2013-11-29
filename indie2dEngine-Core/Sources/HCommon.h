@@ -34,7 +34,7 @@
 #define __USE_GCDPP__
 #define __USE_OPENGLES__
 
-#else
+#elif defined(__WIN32__)
 
 #define M_PI 3.14f
 #define M_PI_2 1.57f

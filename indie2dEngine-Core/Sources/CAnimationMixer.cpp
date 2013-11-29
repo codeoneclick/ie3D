@@ -146,7 +146,8 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
         function();
         //gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), function);
 #else
-		std::async(std::launch::async, function);
+        function();
+		//std::async(std::launch::async, function);
 #endif
     }
 }

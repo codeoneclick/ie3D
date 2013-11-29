@@ -17,65 +17,39 @@
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="a" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.macosx.lib.debug.1298038807" name="Debug" parent="cdt.managedbuild.config.macosx.lib.debug">
+				<configuration artifactExtension="a" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GmakeErrorParser" id="cdt.managedbuild.config.macosx.lib.debug.1298038807" name="Debug" parent="cdt.managedbuild.config.macosx.lib.debug">
 					<folderInfo id="cdt.managedbuild.config.macosx.lib.debug.1298038807." name="/" resourcePath="">
-						<toolChain id="cdt.managedbuild.toolchain.gnu.macosx.lib.debug.560000409" name="MacOSX GCC" superClass="cdt.managedbuild.toolchain.gnu.macosx.lib.debug">
-							<targetPlatform id="cdt.managedbuild.target.gnu.platform.macosx.lib.debug.574371168" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.macosx.lib.debug"/>
-							<builder buildPath="${workspace_loc:/indieEngineCore}/Debug" id="cdt.managedbuild.target.gnu.builder.base.2082156558" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
-							<tool id="cdt.managedbuild.tool.macosx.c.linker.macosx.base.388448377" name="MacOS X C Linker" superClass="cdt.managedbuild.tool.macosx.c.linker.macosx.base"/>
-							<tool id="cdt.managedbuild.tool.macosx.cpp.linker.macosx.base.1839985990" name="MacOS X C++ Linker" superClass="cdt.managedbuild.tool.macosx.cpp.linker.macosx.base"/>
-							<tool id="cdt.managedbuild.tool.gnu.assembler.macosx.lib.debug.1023959476" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.macosx.lib.debug">
-								<option id="gnu.both.asm.option.include.paths.373368562" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/curl/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/gcdpp/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/jsoncpp/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/pvrtextool/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Sources"/>
-								</option>
-								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1176573773" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+						<toolChain id="cdt.managedbuild.toolchain.gnu.macosx.base.611782580" name="MacOSX GCC" superClass="cdt.managedbuild.toolchain.gnu.macosx.base">
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.MachO64" id="cdt.managedbuild.target.gnu.platform.macosx.base.250133227" name="Debug Platform" osList="macosx" superClass="cdt.managedbuild.target.gnu.platform.macosx.base"/>
+							<builder buildPath="${workspace_loc:/indieEngine-Core}/Debug" id="cdt.managedbuild.target.gnu.builder.macosx.base.921086433" name="Gnu Make Builder.Debug" superClass="cdt.managedbuild.target.gnu.builder.macosx.base"/>
+							<tool id="cdt.managedbuild.tool.macosx.c.linker.macosx.base.911961076" name="MacOS X C Linker" superClass="cdt.managedbuild.tool.macosx.c.linker.macosx.base"/>
+							<tool id="cdt.managedbuild.tool.macosx.cpp.linker.macosx.base.627199945" name="MacOS X C++ Linker" superClass="cdt.managedbuild.tool.macosx.cpp.linker.macosx.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.macosx.base.1100148160" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.macosx.base">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.675331957" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
-							<tool id="cdt.managedbuild.toolmacosx.lib.debug.gnu.archiver.23566685" name="GCC Archiver" superClass="cdt.managedbuild.toolmacosx.lib.debug.gnu.archiver"/>
-							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.macosx.lib.debug.6825828" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.macosx.lib.debug">
-								<option id="gnu.cpp.compiler.macosx.lib.debug.option.optimization.level.983320553" name="Optimization Level" superClass="gnu.cpp.compiler.macosx.lib.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.macosx.lib.debug.option.debugging.level.1676288665" name="Debug Level" superClass="gnu.cpp.compiler.macosx.lib.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.option.include.paths.319291658" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/curl/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/gcdpp/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/jsoncpp/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/pvrtextool/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Sources"/>
-								</option>
-								<option id="gnu.cpp.compiler.option.other.other.228348399" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -std=c++0x" valueType="string"/>
-								<option id="gnu.cpp.compiler.option.preprocessor.def.2115795843" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="__NDK__"/>
-									<listOptionValue builtIn="false" value="__GXX_EXPERIMENTAL_CXX0X__"/>
-								</option>
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.979519584" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.macosx.base.1594578952" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.macosx.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.macosx.base.815679265" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.macosx.base">
+								<option id="gnu.cpp.compiler.option.optimization.level.981640611" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.debugging.level.1875655183" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.61523903" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
-							<tool id="cdt.managedbuild.tool.gnu.c.compiler.macosx.lib.debug.1397476096" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.macosx.lib.debug">
-								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.macosx.lib.debug.option.optimization.level.154161751" name="Optimization Level" superClass="gnu.c.compiler.macosx.lib.debug.option.optimization.level" valueType="enumerated"/>
-								<option id="gnu.c.compiler.macosx.lib.debug.option.debugging.level.13775936" name="Debug Level" superClass="gnu.c.compiler.macosx.lib.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
-								<option id="gnu.c.compiler.option.include.paths.930845279" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.macosx.base.919404008" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.macosx.base">
+								<option id="gnu.c.compiler.option.include.paths.208469074" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/curl/include"/>
 									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/gcdpp/include"/>
 									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/jsoncpp/include"/>
+									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/curl/include"/>
 									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/ogles2/include"/>
 									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Libraries/pvrtextool/include"/>
-									<listOptionValue builtIn="false" value="/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Core/Sources"/>
 								</option>
-								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1674797751" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="__GXX_EXPERIMENTAL_CXX0X__"/>
-								</option>
-								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1297750137" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.option.optimization.level.85452158" superClass="gnu.c.compiler.option.optimization.level" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.debugging.level.50917705" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1695957276" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -168,21 +142,44 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="indieEngineCore.cdt.managedbuild.target.macosx.lib.1132281478" name="Static Library" projectType="cdt.managedbuild.target.macosx.lib"/>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/indieEngine-Core"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/indieEngine-Core"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.release.1309152082;cdt.managedbuild.config.macosx.lib.release.1309152082.;cdt.managedbuild.tool.gnu.cpp.compiler.macosx.lib.release.1291880642;cdt.managedbuild.tool.gnu.cpp.compiler.input.299673043">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.debug.1298038807;cdt.managedbuild.config.macosx.lib.debug.1298038807.;cdt.managedbuild.tool.gnu.cross.c.compiler.1152318588;cdt.managedbuild.tool.gnu.c.compiler.input.2099914571">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.debug.1298038807;cdt.managedbuild.config.macosx.lib.debug.1298038807.;cdt.managedbuild.tool.gnu.cpp.compiler.macosx.lib.debug.6825828;cdt.managedbuild.tool.gnu.cpp.compiler.input.979519584">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.release.1309152082;cdt.managedbuild.config.macosx.lib.release.1309152082.;cdt.managedbuild.tool.gnu.c.compiler.macosx.lib.release.819764800;cdt.managedbuild.tool.gnu.c.compiler.input.658304605">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.debug.1298038807;cdt.managedbuild.config.macosx.lib.debug.1298038807.;cdt.managedbuild.tool.gnu.c.compiler.macosx.lib.debug.1397476096;cdt.managedbuild.tool.gnu.c.compiler.input.1297750137">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.release.1309152082;cdt.managedbuild.config.macosx.lib.release.1309152082.;cdt.managedbuild.tool.gnu.c.compiler.macosx.lib.release.819764800;cdt.managedbuild.tool.gnu.c.compiler.input.658304605">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.debug.1298038807;cdt.managedbuild.config.macosx.lib.debug.1298038807.;cdt.managedbuild.tool.gnu.cross.cpp.compiler.1192938905;cdt.managedbuild.tool.gnu.cpp.compiler.input.1639374441">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.release.1309152082;cdt.managedbuild.config.macosx.lib.release.1309152082.;cdt.managedbuild.tool.gnu.cpp.compiler.macosx.lib.release.1291880642;cdt.managedbuild.tool.gnu.cpp.compiler.input.299673043">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.debug.1298038807;cdt.managedbuild.config.macosx.lib.debug.1298038807.;cdt.managedbuild.tool.gnu.cpp.compiler.macosx.base.189298185;cdt.managedbuild.tool.gnu.cpp.compiler.input.1571964062">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.debug.1298038807;cdt.managedbuild.config.macosx.lib.debug.1298038807.;com.android.gcc.compiler.204003800;com.android.gcc.inputType.61979869">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.android.AndroidPerProjectProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.lib.debug.1298038807;cdt.managedbuild.config.macosx.lib.debug.1298038807.;cdt.managedbuild.tool.gnu.c.compiler.macosx.base.828244723;cdt.managedbuild.tool.gnu.c.compiler.input.944839346">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
 </cproject>

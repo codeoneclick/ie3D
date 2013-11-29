@@ -1,4 +1,4 @@
-package com.codeoneclick.indieengine_demo;
+package com.codeoneclick.indieenginedemo;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -261,7 +261,7 @@ public class CGameView extends GLSurfaceView
     {
         public void onDrawFrame(GL10 gl) 
         {
-
+        	CGameJNILib.fooo();
         }
 
         public void onSurfaceChanged(GL10 gl, int width, int height) 

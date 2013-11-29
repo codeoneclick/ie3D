@@ -14,8 +14,8 @@
 #include "CAnimationMixer.h"
 #include "CCommonOS.h"
 
-const ui32 CBatch::k_MAX_NUM_VERTICES = UINT16_MAX / 4; // 16k vertices
-const ui32 CBatch::k_MAX_NUM_INDICES = UINT16_MAX / 2;  // 32k indices
+const ui32 CBatch::k_MAX_NUM_VERTICES = 65535 / 4; // 16k vertices
+const ui32 CBatch::k_MAX_NUM_INDICES = 65535 / 2;  // 32k indices
 const ui32 CBatch::k_MAX_NUM_TRANSFORMATION = 255;
 
 CBatch::CBatch(const std::string& _mode, E_BATCH_GEOMETRY_MODE _geometryMode, ui32 _renderQueuePosition, std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _materialImposer) :
@@ -236,7 +236,8 @@ void CBatch::Unlock(void)
         //gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), unlock);
         unlock();
 #else
-		std::async(std::launch::async, unlock);
+        unlock();
+		//std::async(std::launch::async, unlock);
 #endif
     }
 }

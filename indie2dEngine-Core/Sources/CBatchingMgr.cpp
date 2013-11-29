@@ -60,7 +60,10 @@ void CBatchingMgr::Batch(const std::string& _mode, ui32 _renderQueuePosition, co
     
     for(ui32 i = 0; i < k_MAX_BATCHES_PER_MESH_TYPE; ++i)
     {
-        std::string guid = _material->Get_Guid() + ".batch_" + std::to_string(i);
+    	std::ostringstream stream;
+    	stream<<i;
+    	std::string guid = _material->Get_Guid() + ".batch_" + stream.str();
+        //std::string guid = _material->Get_Guid() + ".batch_" + std::to_string(i);
         auto iterator = m_batches.find(guid);
         
         if(iterator == m_batches.end())
@@ -93,7 +96,10 @@ void CBatchingMgr::Batch(const std::string& _mode, ui32 _renderQueuePosition, co
 
 	for(ui32 i = 0; i < k_MAX_BATCHES_PER_MESH_TYPE; ++i)
     {
-        std::string guid = _material->Get_Guid() + ".batch_" + std::to_string(i);
+		std::ostringstream stream;
+		stream<<i;
+		std::string guid = _material->Get_Guid() + ".batch_" + stream.str();
+        //std::string guid = _material->Get_Guid() + ".batch_" + std::to_string(i);
         auto iterator = m_batches.find(guid);
         
         if(iterator == m_batches.end())
