@@ -50,7 +50,7 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<location>/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Demo/Bundle</location>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/indie2dEngine-Demo/Bundle</locationURI>
 		</link>
 		<link>
 			<name>libs/IndieEngineCore</name>
