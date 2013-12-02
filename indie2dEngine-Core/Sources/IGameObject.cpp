@@ -219,7 +219,7 @@ void IGameObject::_OnSceneUpdate(f32 _deltatime)
 
 i32 IGameObject::_OnQueuePosition(void)
 {
-    return NULL;
+    return 0;
 }
 
 bool IGameObject::_OnOcclusion(void)

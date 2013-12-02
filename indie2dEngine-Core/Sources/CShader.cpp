@@ -9,7 +9,7 @@
 #include "CShader.h"
 #include "CTexture.h"
 
-static ui32 s_handle = NULL;
+static ui32 s_handle = 0;
 
 extern const struct SAttributes
 {

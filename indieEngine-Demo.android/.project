@@ -48,6 +48,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>assets</name>
+			<type>2</type>
+			<location>/Users/sergey.sergeev/Documents/Hobby/indieEngine/indie2dEngine-Demo/Bundle</location>
+		</link>
+		<link>
 			<name>libs/IndieEngineCore</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>

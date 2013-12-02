@@ -161,5 +161,5 @@ void CVertexBuffer::Unbind(const i32* _attributes)
     {
         glDisableVertexAttribArray(attribute);
     }
-    glBindBuffer(GL_ARRAY_BUFFER, NULL);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

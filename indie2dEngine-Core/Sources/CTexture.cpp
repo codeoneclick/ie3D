@@ -54,6 +54,6 @@ void CTexture::Unbind(void) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        glBindTexture(GL_TEXTURE_2D, NULL);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 }
