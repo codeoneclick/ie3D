@@ -100,6 +100,33 @@ typedef long long i64;
 typedef unsigned long long ui64;
 typedef float f32;
 
+namespace std
+{
+    class memstream: public std::istream
+    {
+    public:
+        
+        memstream(char* _data, size_t _size): std::istream(&m_buffer),
+        m_buffer(_data, _size)
+        {
+            rdbuf(&m_buffer);
+        };
+        
+    private:
+        class membuf : public std::streambuf
+        {
+        public:
+
+            membuf(char* _data, size_t _size)
+            {
+                setp(_data, _data + _size);
+                setg(_data, _data, _data + _size);
+            };
+        };
+        membuf m_buffer;
+    };
+};
+
 namespace glm
 {
     inline glm::quat slerp(const glm::quat& _from, const glm::quat& _to, f32 _interpolation)
