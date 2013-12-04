@@ -6,6 +6,9 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := IndieEngine-Core
 LOCAL_SRC_FILES := ../../indieEngine-Core.android/obj/local/armeabi/libIndieEngine-Core.a
 LOCAL_EXPORT_C_INCLUDES := ../../indie2dEngine-Core/Sources ../indie2dEngine-Core/Libraries
+LOCAL_CFLAGS := -g
+LOCAL_CFLAGS += -ggdb
+LOCAL_CFLAGS += -O1
 LOCAL_CPPFLAGS += -std=c++11
 include $(PREBUILT_STATIC_LIBRARY)
 

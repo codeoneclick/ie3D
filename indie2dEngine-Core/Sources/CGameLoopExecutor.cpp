@@ -41,6 +41,11 @@ CGameLoopExecutor::~CGameLoopExecutor(void)
 
 void CGameLoopExecutor::OnGameLoopUpdate(void)
 {
+#if defined(__NDK__)
+    
+    NDK_LOG("OnGameLoopUpdate");
+    
+#endif
     static std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
     std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
     f32 deltatime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count() / 1000.0f;

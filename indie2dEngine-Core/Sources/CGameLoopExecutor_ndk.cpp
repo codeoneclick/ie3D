@@ -44,6 +44,7 @@ void Inc_TrianglesCount(ui32 _value)
 
 void Run(void)
 {
+    NDK_LOG("Run Loop");
     assert(CGameLoopExecutor::Get_Instance() != nullptr);
     assert(CGameLoopExecutor::Get_Instance()->Get_FPSCounter() != nullptr);
     CGameLoopExecutor::Get_Instance()->Get_FPSCounter()->Reset();

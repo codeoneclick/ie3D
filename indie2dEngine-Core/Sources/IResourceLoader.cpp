@@ -14,7 +14,7 @@
 IResourceLoader::IResourceLoader(void)
 {
     m_isRunning = 1;
-    m_thread = std::thread(&IResourceLoader::_Thread, this);
+    //m_thread = std::thread(&IResourceLoader::_Thread, this);
     ConnectToGameLoop(std::shared_ptr<IResourceLoader>(this));
 }
 
@@ -29,9 +29,9 @@ IResourceLoader::~IResourceLoader(void)
 
 void IResourceLoader::_Thread(void)
 {
-    while (m_isRunning)
+    //while (m_isRunning)
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
+    //    std::lock_guard<std::mutex> lock(m_mutex);
         for(const auto& iterator : m_operationsQueue)
         {
             std::shared_ptr<IResourceLoadingOperation> operation = iterator.second;
@@ -40,15 +40,16 @@ void IResourceLoader::_Thread(void)
                 operation->Serialize();
             }
         }
-        if(m_operationsQueue.empty())
+        //if(m_operationsQueue.empty())
         {
-            std::this_thread::sleep_for(std::chrono::milliseconds(128));
+        //    std::this_thread::sleep_for(std::chrono::milliseconds(128));
         }
     }
 }
 
 void IResourceLoader::_OnGameLoopUpdate(f32 _deltatime)
 {
+    IResourceLoader::_Thread();
     auto iterator = m_operationsQueue.begin();
     while(iterator != m_operationsQueue.end())
     {
@@ -56,13 +57,13 @@ void IResourceLoader::_OnGameLoopUpdate(f32 _deltatime)
         if(operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_WAITING)
         {
             operation->Commit();
-            std::lock_guard<std::mutex> lock(m_mutex);
+            //std::lock_guard<std::mutex> lock(m_mutex);
             m_operationsQueue.erase(iterator++);
         }
         else if(operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE ||
                 operation->Get_Status() == E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS)
         {
-            std::lock_guard<std::mutex> lock(m_mutex);
+            //std::lock_guard<std::mutex> lock(m_mutex);
             m_operationsQueue.erase(iterator++);
         }
         else

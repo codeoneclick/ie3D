@@ -24,14 +24,27 @@ extern "C" JNIEXPORT void JNICALL Java_com_codeoneclick_indieenginedemo_CGameJNI
 	Run();
 }*/
 
-static void custom_handle_cmd(struct android_app* app, int32_t cmd)
+int g_animating = 0;
+
+static void custom_handle_cmd(struct android_app* _application, int32_t _command)
 {
-    switch(cmd)
-    {
-       case APP_CMD_INIT_WINDOW:
-        NDK_LOG("App Init Window");
-        break;
-    }
+	switch(_command)
+	{
+		case APP_CMD_INIT_WINDOW:
+		{
+			IGraphicsContext::Set_AWindow(_application->window);
+			CResourceAccessor::Set_AAssetManager(_application->activity->assetManager);
+			CGameViewController_ndk* controller = new CGameViewController_ndk();
+			Run();
+		}
+		break;
+		case APP_CMD_GAINED_FOCUS:
+		{
+			NDK_LOG("run loop started");
+			g_animating = 1;
+		}
+		break;
+	}
 }
 
 static int32_t custom_handle_input(struct android_app* app, AInputEvent* event)
@@ -44,48 +57,34 @@ static int32_t custom_handle_input(struct android_app* app, AInputEvent* event)
     return 0;
 }
 
-class CShared : public std::enable_shared_from_this<CShared>
-{
-public:
-	void Foo()
-	{
-
-		NDK_LOG("Foo");
-		std::shared_ptr<CShared> ptr = shared_from_this();
-		if(ptr == nullptr)
-		{
-			NDK_LOG("FAIL");
-		}
-	};
-};
-
-void android_main(struct android_app* state)
+void android_main(struct android_app* _application)
 {
 	NDK_LOG("START");
 	app_dummy();
 
-	std::shared_ptr<CShared> a = std::make_shared<CShared>();
-	a->Foo();
-
 	int events;
-	state->onAppCmd = custom_handle_cmd;
-	state->onInputEvent = custom_handle_input;
-
-	IGraphicsContext::Set_AWindow(state->window);
-	CResourceAccessor::Set_AAssetManager(state->activity->assetManager);
-	CGameViewController_ndk* controller = new CGameViewController_ndk();
+	_application->onAppCmd = custom_handle_cmd;
+	_application->onInputEvent = custom_handle_input;
 
 	while (true)
 	{
+		NDK_LOG("while loop");
 		struct android_poll_source* source;
 		while (ALooper_pollAll(-1, NULL, &events, (void**)&source) >= 0)
 		{
+			NDK_LOG("run loop events");
 			if (source != nullptr)
 			{
-				source->process(state, source);
+				source->process(_application, source);
 			}
 
-			if (state->destroyRequested != 0)
+			if(g_animating == 1)
+			{
+				NDK_LOG("run loop executed");
+
+			}
+
+			if (_application->destroyRequested != 0)
 			{
 				NDK_LOG("We are exiting");
 				return;
