@@ -88,7 +88,6 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     assert(m_renderMgr != nullptr);
     assert(m_resourceAccessor != nullptr);
     
-   
     std::shared_ptr<SGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<SGameTransitionTemplate>(_template);
     assert(gameTransitionTemplate != nullptr);
     

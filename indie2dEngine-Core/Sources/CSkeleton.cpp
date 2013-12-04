@@ -28,15 +28,15 @@ CSkeleton::~CSkeleton(void)
     m_transformations.clear();
 }
 
-void CSkeleton::_Serialize(std::ifstream &_stream)
+void CSkeleton::_Serialize(std::istream *_stream)
 {
-    _stream.read((char*)&m_numBones, sizeof(i32));
+    _stream->read((char*)&m_numBones, sizeof(i32));
     i32 id, parentId;
 
     for (ui32 i = 0; i < m_numBones; ++i)
     {
-        _stream.read((char*)&id, sizeof(i32));
-        _stream.read((char*)&parentId, sizeof(i32));
+        _stream->read((char*)&id, sizeof(i32));
+        _stream->read((char*)&parentId, sizeof(i32));
         std::shared_ptr<CBone> bone = CSkeleton::Get_Bone(id);
         if(bone == nullptr)
         {

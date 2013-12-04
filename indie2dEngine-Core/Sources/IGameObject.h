@@ -145,13 +145,11 @@ public:
     
     virtual inline void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
     {
-		assert(_renderMgr != nullptr);
         m_renderMgr = _renderMgr;
     };
     
     virtual inline void Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
     {
-		assert(_sceneUpdateMgr != nullptr);
         m_sceneUpdateMgr = _sceneUpdateMgr;
     };
     

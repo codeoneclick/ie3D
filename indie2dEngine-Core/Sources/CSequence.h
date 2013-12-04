@@ -25,7 +25,7 @@ protected:
     std::vector<glm::vec3> m_scales;
 	i32	m_numBones;
     
-    void _Serialize(std::ifstream& _stream);
+    void _Serialize(std::istream* _stream);
     
 public:
     
@@ -64,7 +64,7 @@ protected:
     std::vector<std::shared_ptr<CFrame> > m_frames;
     i32 m_fps;
     std::string m_name;
-    void _Serialize(std::ifstream& _stream);
+    void _Serialize(std::istream* _stream);
     void _BindSequence(void);
     
 public:

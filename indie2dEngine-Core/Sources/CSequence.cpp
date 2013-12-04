@@ -21,21 +21,21 @@ CFrame::~CFrame(void)
     
 }
 
-void CFrame::_Serialize(std::ifstream &_stream)
+void CFrame::_Serialize(std::istream* _stream)
 {
     for (i32 i = 0; i < m_numBones; ++i)
     {
         glm::vec3 position;
-        _stream.read((char*)&position, sizeof(glm::vec3));
+        _stream->read((char*)&position, sizeof(glm::vec3));
         m_positions.push_back(glm::vec3(position));
         
         glm::quat rotation;
-        _stream.read((char*)&rotation, sizeof(glm::quat));
+        _stream->read((char*)&rotation, sizeof(glm::quat));
         glm::quat _rotation = glm::quat(rotation.w, -rotation.x, -rotation.y, -rotation.z);
         m_rotations.push_back(_rotation);
         
         glm::vec3 scale;
-        _stream.read((char*)&scale, sizeof(glm::vec3));
+        _stream->read((char*)&scale, sizeof(glm::vec3));
         m_scales.push_back(scale);
     }
 }
@@ -52,12 +52,12 @@ CSequence::~CSequence(void)
     m_frames.clear();
 }
 
-void CSequence::_Serialize(std::ifstream &_stream)
+void CSequence::_Serialize(std::istream* _stream)
 {
     i32 numBones = 0;
-    _stream.read((char*)&numBones, sizeof(i32));
+    _stream->read((char*)&numBones, sizeof(i32));
     i32 numFrames = 0;
-    _stream.read((char*)&numFrames, sizeof(i32));
+    _stream->read((char*)&numFrames, sizeof(i32));
     
     m_frames.reserve(numFrames);
     

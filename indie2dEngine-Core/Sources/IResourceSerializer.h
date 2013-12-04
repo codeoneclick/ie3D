@@ -23,6 +23,9 @@ protected:
     std::shared_ptr<IResource> m_resource;
     E_SERIALIZER_STATUS m_status;
     
+    std::istream* _LoadData(const std::string &_path);
+    void _FreeData(std::istream* _stream);
+    
 public:
     
     IResourceSerializer(const std::string& _guid, std::shared_ptr<IResource> _resource);

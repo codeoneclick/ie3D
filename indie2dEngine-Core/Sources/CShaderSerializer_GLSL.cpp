@@ -9,6 +9,7 @@
 #include "CShaderSerializer_GLSL.h"
 #include "CCommonOS.h"
 #include "CShader.h"
+#include "CResourceAccessor.h"
 
 CShaderSerializer_GLSL::CShaderSerializer_GLSL(const std::string& _vsFilename, const std::string& _fsFilename, std::shared_ptr<IResource> _resource) :
 IResourceSerializer(std::string().append(_vsFilename).append(_fsFilename), _resource),
@@ -31,32 +32,20 @@ void CShaderSerializer_GLSL::Serialize(void)
     std::string filename(path);
     filename.append(m_vsFilename);
     
-    std::ifstream filestream;
-    filestream.open(filename.c_str());
-    if (!filestream.is_open())
-    {
-        m_status = E_SERIALIZER_STATUS_FAILURE;
-        return;
-    }
-    
+    std::istream* filestream = IResourceSerializer::_LoadData(filename);
     std::stringstream vsStringstream;
-    vsStringstream<<filestream.rdbuf();
+    vsStringstream<<filestream->rdbuf();
     std::string vsSourceCode(vsStringstream.str());
-    filestream.close();
+    IResourceSerializer::_FreeData(filestream);
     
     filename.assign(path);
     filename.append(m_fsFilename);
     
-    filestream.open(filename.c_str());
-    if (!filestream.is_open())
-    {
-        m_status = E_SERIALIZER_STATUS_FAILURE;
-        return;
-    }
+    filestream = IResourceSerializer::_LoadData(filename);
     std::stringstream fsStringstream;
-    fsStringstream<<filestream.rdbuf();
+    fsStringstream<<filestream->rdbuf();
     std::string fsSourceCode(fsStringstream.str());
-    filestream.close();
+    IResourceSerializer::_FreeData(filestream);
     
     assert(m_resource != nullptr);
     std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);

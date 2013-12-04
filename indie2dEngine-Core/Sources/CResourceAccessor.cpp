@@ -13,6 +13,12 @@
 #include "CSkeletonLoader.h"
 #include "CSequenceLoader.h"
 
+#if defined(__NDK__)
+
+AAssetManager* CResourceAccessor::m_assetManager = nullptr;
+
+#endif
+
 CResourceAccessor::CResourceAccessor(void) :
 m_textureLoader(std::make_shared<CTextureLoader>()),
 m_shaderLoader(std::make_shared<CShaderLoader>()),

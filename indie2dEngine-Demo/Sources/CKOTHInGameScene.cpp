@@ -64,16 +64,14 @@ void CKOTHInGameScene::Load(void)
     m_camera->Set_Distance(32.0f);
     m_camera->Set_Height(32.0f);
     
+    m_root->Set_Camera(m_camera);
+    
     std::shared_ptr<CLight> light_01 = m_root->CreateLight();
     m_lights.push_back(light_01);
-    
-    m_root->Set_Camera(m_camera);
     m_root->Set_Light(light_01, E_LIGHT_01);
     
     std::shared_ptr<CLight> light_02 = m_root->CreateLight();
     m_lights.push_back(light_02);
-    
-    m_root->Set_Camera(m_camera);
     m_root->Set_Light(light_02, E_LIGHT_02);
     
     std::shared_ptr<CModel> model = m_root->CreateModel("model.Footman.xml");

@@ -32,20 +32,13 @@ void CTextureSerializer_PVR::Serialize(void)
     std::string filename(path);
     filename.append(m_filename);
     
-    std::ifstream filestream;
-    filestream.open(filename.c_str(), std::ifstream::in | std::ifstream::binary);
-    if (!filestream.is_open())
-    {
-        m_status = E_SERIALIZER_STATUS_FAILURE;
-        return;
-    }
-    
-    filestream.seekg(0, std::ios::end);
-    i64 size = filestream.tellg();
-    filestream.seekg(0, std::ios::beg);
+    std::istream* filestream = IResourceSerializer::_LoadData(filename);
+    filestream->seekg(0, std::ios::end);
+    i64 size = filestream->tellg();
+    filestream->seekg(0, std::ios::beg);
 	ui8* sourcedata = new ui8[size];
-	filestream.read((char*)sourcedata, static_cast<i32>(size));
-    filestream.close();
+	filestream->read((char*)sourcedata, static_cast<i32>(size));
+    IResourceSerializer::_FreeData(filestream);
     
     std::shared_ptr<CTexture> texture = std::static_pointer_cast<CTexture >(m_resource);
     std::shared_ptr<CTextureHeader> textureheader = std::make_shared<CTextureHeader>();

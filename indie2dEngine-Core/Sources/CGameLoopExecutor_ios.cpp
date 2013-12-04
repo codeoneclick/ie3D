@@ -67,7 +67,9 @@
     assert(self.m_gameLoopExecutor != nullptr);
     assert(self.m_gameLoopExecutor->Get_FPSCounter() != nullptr);
     self.m_gameLoopExecutor->Get_FPSCounter()->Reset();
+#if defined(__USE_GCDPP__)
     gcdpp::impl::UpdateMainQueue();
+#endif
     self.m_gameLoopExecutor->OnGameLoopUpdate();
     self.m_gameLoopExecutor->Get_FPSCounter()->Submit();
 }

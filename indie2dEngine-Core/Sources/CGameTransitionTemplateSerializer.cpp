@@ -25,7 +25,7 @@ std::shared_ptr<ITemplate> CGameTransitionTemplateSerializer::Serialize(const st
     std::string path(Get_BundlePath());
     path.append(_filename);
     pugi::xml_document document;
-    pugi::xml_parse_result result = document.load_file(path.c_str());
+    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, path);
     assert(result.status == pugi::status_ok);
     pugi::xml_node node = document.child("transition");
     

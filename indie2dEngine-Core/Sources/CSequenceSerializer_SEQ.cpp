@@ -31,17 +31,11 @@ void CSequenceSerializer_SEQ::Serialize(void)
     std::string filename(path);
     filename.append(m_filename);
     
-    std::ifstream filestream;
-    filestream.open(filename.c_str(), std::ifstream::in | std::ifstream::binary);
-    if (!filestream.is_open())
-    {
-        m_status = E_SERIALIZER_STATUS_FAILURE;
-        return;
-    }
+    std::istream* filestream = IResourceSerializer::_LoadData(filename);
     
     std::shared_ptr<CSequence> sequence = std::static_pointer_cast<CSequence >(m_resource);
     sequence->_Serialize(filestream);
+    IResourceSerializer::_FreeData(filestream);
     
-    filestream.close();
     m_status = E_SERIALIZER_STATUS_SUCCESS;
 }

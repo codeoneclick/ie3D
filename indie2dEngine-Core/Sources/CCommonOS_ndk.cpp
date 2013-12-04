@@ -12,7 +12,7 @@
 
 std::string Get_BundlePath(void)
 {
-    return "../../../indieEngine.win32.Resources/";
+    return "";
 };
 
 ui32 Get_ScreenWidth(void)

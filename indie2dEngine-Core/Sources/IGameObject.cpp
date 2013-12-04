@@ -68,7 +68,6 @@ glm::vec3 IGameObject::Get_MinBound(void)
 
 void IGameObject::Set_Camera(std::shared_ptr<CCamera> _camera)
 {
-    assert(_camera != nullptr);
     m_camera = _camera;
 }
 
@@ -139,9 +138,11 @@ void IGameObject::ListenRenderMgr(bool _value)
 
 void IGameObject::ListenSceneUpdateMgr(bool _value)
 {
-    assert(m_sceneUpdateMgr != nullptr);
-    _value == true ? m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this()) :
-    m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
+    if(m_sceneUpdateMgr != nullptr)
+    {
+        _value == true ? m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this()) :
+        m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
+    }
     m_isNeedToUpdate = _value;
 }
 

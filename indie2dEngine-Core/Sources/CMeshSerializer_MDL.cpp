@@ -34,41 +34,35 @@ void CMeshSerializer_MDL::Serialize(void)
     std::string filename(path);
     filename.append(m_filename);
     
-    std::ifstream filestream;
-    filestream.open(filename.c_str(), std::ifstream::in | std::ifstream::binary);
-    if (!filestream.is_open())
-    {
-        m_status = E_SERIALIZER_STATUS_FAILURE;
-        return;
-    }
+    std::istream* filestream = IResourceSerializer::_LoadData(filename);
     
     std::shared_ptr<CMeshHeader> header = std::make_shared<CMeshHeader>();
     std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh>(m_resource);
     
-    filestream.read((char*)&header->m_numVerticies, sizeof(ui32));
-    filestream.read((char*)&header->m_numIndices, sizeof(ui32));
+    filestream->read((char*)&header->m_numVerticies, sizeof(ui32));
+    filestream->read((char*)&header->m_numIndices, sizeof(ui32));
     
     header->m_vertexData = new SVertex[header->m_numVerticies];
     
     for(ui32 i = 0; i < header->m_numVerticies; ++i)
     {
         glm::vec3 position;
-        filestream.read((char*)&position, sizeof(glm::vec3));
+        filestream->read((char*)&position, sizeof(glm::vec3));
         glm::vec3 normal;
-        filestream.read((char*)&normal, sizeof(glm::vec3));
+        filestream->read((char*)&normal, sizeof(glm::vec3));
         glm::vec3 tangent;
-        filestream.read((char*)&tangent, sizeof(glm::vec3));
+        filestream->read((char*)&tangent, sizeof(glm::vec3));
         glm::vec2 texcoord;
-        filestream.read((char*)&texcoord, sizeof(glm::vec2));
+        filestream->read((char*)&texcoord, sizeof(glm::vec2));
         
         ui32 numWeights = 0;
-        filestream.read((char*)&numWeights, sizeof(i32));
+        filestream->read((char*)&numWeights, sizeof(i32));
 
         for(ui32 j = 0; j < numWeights; ++j)
         {
             SBone bone;
-            filestream.read((char*)&bone.m_id, sizeof(i32));
-            filestream.read((char*)&bone.m_weigth, sizeof(f32));
+            filestream->read((char*)&bone.m_id, sizeof(i32));
+            filestream->read((char*)&bone.m_weigth, sizeof(f32));
             header->m_vertexData[i].m_bones.push_back(bone);
         }
         
@@ -107,7 +101,7 @@ void CMeshSerializer_MDL::Serialize(void)
     
     for(ui32 i = 0; i < header->m_numIndices; ++i)
     {
-        filestream.read((char*)&header->m_indexData[i], sizeof(ui16));
+        filestream->read((char*)&header->m_indexData[i], sizeof(ui16));
     }
     
     for(ui32 i = 0; i < header->m_numIndices; i += 3)
@@ -116,9 +110,7 @@ void CMeshSerializer_MDL::Serialize(void)
         header->m_indexData[i + 1] = header->m_indexData[i + 2];
         header->m_indexData[i + 2] = index;
     }
-    
-    filestream.close();
-    
+    IResourceSerializer::_FreeData(filestream);
     mesh->_Set_Header(header);
     
     m_status = E_SERIALIZER_STATUS_SUCCESS;

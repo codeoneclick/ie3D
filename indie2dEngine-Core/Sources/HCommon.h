@@ -31,7 +31,7 @@
 
 #undef  __USE_CURL__
 #undef  __USE_JSONCPP__
-#define __USE_GCDPP__
+//#define __USE_GCDPP__
 #define __USE_OPENGLES__
 
 #elif defined(__WIN32__)
@@ -87,6 +87,15 @@
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
+
+#include <jni.h>
+#include <android/window.h>
+#include <android/sensor.h>
+#include <android/log.h>
+#include <android_native_app_glue.h>
+#include <android/asset_manager.h>
+
+#define NDK_LOG(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
 
 #endif
 

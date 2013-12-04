@@ -11,7 +11,7 @@
 
 CSceneUpdateMgr::CSceneUpdateMgr(void)
 {
-    
+
 }
 
 CSceneUpdateMgr::~CSceneUpdateMgr(void)
@@ -26,7 +26,11 @@ void CSceneUpdateMgr::RegisterSceneUpdateHandler(std::shared_ptr<ISceneUpdateHan
 
 void CSceneUpdateMgr::UnregisterSceneUpdateHandler(std::shared_ptr<ISceneUpdateHandler> _handler)
 {
-    m_handlers.erase(_handler);
+    auto handler = std::find(m_handlers.begin(), m_handlers.end(), _handler);
+    if(handler != m_handlers.end())
+    {
+        m_handlers.erase(_handler);
+    }
 }
 
 void CSceneUpdateMgr::_OnGameLoopUpdate(f32 _deltatime)

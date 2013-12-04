@@ -33,7 +33,7 @@ protected:
     std::set<std::shared_ptr<CBone> > m_roots;
     std::map<std::string, glm::mat4x4*> m_transformations;
     
-    void _Serialize(std::ifstream& _stream);
+    void _Serialize(std::istream* _stream);
     void _BindSkeleton(void);
     
     static const std::string _GenerateGuid(void);

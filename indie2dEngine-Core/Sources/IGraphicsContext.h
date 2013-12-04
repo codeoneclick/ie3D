@@ -12,6 +12,12 @@
 #include "HCommon.h"
 #include "HEnums.h"
 
+#if defined(__NDK__)
+
+struct ANativeWindow;
+
+#endif
+
 class IGraphicsContext : public std::enable_shared_from_this<IGraphicsContext>
 {
 private:
@@ -23,6 +29,12 @@ protected:
 	ui32 m_depthBufferHandle;
     
     static std::vector<std::shared_ptr<IGraphicsContext> > m_contexts;
+    
+#if defined(__NDK__)
+    
+    static ANativeWindow* m_AWindow;
+    
+#endif
     
 public:
     
@@ -45,6 +57,22 @@ public:
     {
         return m_depthBufferHandle;
     };
+    
+#if defined(__NDK__)
+    
+    void static Set_AWindow(ANativeWindow* _AWindow)
+    {
+        assert(_AWindow != nullptr);
+        m_AWindow = _AWindow;
+    };
+    
+    static ANativeWindow* Get_AWindow(void)
+    {
+        assert(m_AWindow != nullptr);
+        return m_AWindow;
+    };
+    
+#endif
     
     virtual void Output(void) const = 0;
 };

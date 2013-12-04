@@ -7,6 +7,7 @@
 //
 
 #include "ITemplateSerializer.h"
+#include "CResourceAccessor.h"
 
 ITemplateSerializer::ITemplateSerializer(void)
 #if defined(__USE_CURL__)
@@ -19,6 +20,35 @@ ITemplateSerializer::ITemplateSerializer(void)
 ITemplateSerializer::~ITemplateSerializer(void)
 {
     
+}
+
+pugi::xml_parse_result ITemplateSerializer::_LoadDocument(pugi::xml_document &_document, const std::string &_path)
+{
+    pugi::xml_parse_result result;
+#if defined(__NDK__)
+    std::memstream* mstream;
+    AAssetManager* manager = CResourceAccessor::Get_AAssetManager();
+    AAsset* asset = AAssetManager_open(manager, _path.c_str(), AASSET_MODE_UNKNOWN);
+    if(asset)
+    {
+        ui32 size = AAsset_getLength(asset);
+        char* buffer = new char[size];
+        if(buffer != nullptr)
+        {
+            AAsset_read(asset, buffer, size);
+        }
+        mstream = new std::memstream(buffer, size);
+        std::stringstream stringstream;
+        stringstream<<mstream->rdbuf();
+        std::string content(stringstream.str());
+        //delete[] buffer;
+        AAsset_close(asset);
+        result = _document.load(content.c_str());
+    }
+#else
+    result = _document.load_file(_path.c_str());
+#endif
+    return result;
 }
 
 size_t ITemplateSerializer::_Callback(char* _data, size_t _size, size_t _nmemb, void *userdata)

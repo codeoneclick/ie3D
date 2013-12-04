@@ -1,0 +1,20 @@
+<landscape name="landscape">
+	<width value="128"/>
+    <height value="128"/>
+    <heightmap_data filename="heightmap.data"/>
+    <splatting_data filename="splatting.data"/>
+	<materials>
+		<material filename="material.landscape.common.xml"/>
+        <material filename="material.landscape.reflection.xml"/>
+        <material filename="material.landscape.refraction.xml"/>
+	</materials>
+    <splatting_diffuse_material filename="material.splatting.diffuse.xml"/>
+    <splatting_normal_material filename="material.splatting.normal.xml"/>
+    <edge_bound_x value="-8.0"/>
+    <edge_bound_y value="8.0"/>
+    <edges_materials>
+        <material filename="material.landscape.edges.common.xml"/>
+        <material filename="material.landscape.edges.reflection.xml"/>
+        <material filename="material.landscape.edges.refraction.xml"/>
+    </edges_materials>
+</landscape>

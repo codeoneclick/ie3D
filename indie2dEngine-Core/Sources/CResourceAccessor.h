@@ -23,6 +23,12 @@ class CSkeletonLoader;
 class CSequenceLoader;
 class IResourceLoadingHandler;
 
+#if defined(__NDK__)
+
+struct AAssetManager;
+
+#endif
+
 class CResourceAccessor
 {
 private:
@@ -35,10 +41,32 @@ protected:
     std::shared_ptr<CSkeletonLoader> m_skeletonLoader;
     std::shared_ptr<CSequenceLoader> m_sequenceLoader;
     
+#if defined(__NDK__)
+    
+    static AAssetManager* m_assetManager;
+
+#endif
+    
 public:
     
     CResourceAccessor(void);
     ~CResourceAccessor(void);
+    
+#if defined(__NDK__)
+    
+    void static Set_AAssetManager(AAssetManager* _assetManager)
+    {
+        assert(_assetManager != nullptr);
+        m_assetManager = _assetManager;
+    };
+    
+    static AAssetManager* Get_AAssetManager(void)
+    {
+        assert(m_assetManager != nullptr);
+        return m_assetManager;
+    };
+    
+#endif
     
     std::shared_ptr<CTexture> CreateTexture(const std::string& _filename);
     std::shared_ptr<CShader> CreateShader(const std::string& _vsFilename, const std::string& _fsFilename);

@@ -10,7 +10,7 @@ uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
 uniform mat4   MATRIX_Normal;
-uniform mat4   MATRIX_Bones[128];
+uniform mat4   MATRIX_Bones[64];
 
 uniform vec3   VECTOR_CameraPosition;
 uniform vec3   VECTOR_LightPosition_01;

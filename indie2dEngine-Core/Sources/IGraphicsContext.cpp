@@ -10,6 +10,12 @@
 
 class CGraphicsContext_iOS;
 
+#if defined(__NDK__)
+
+ANativeWindow* IGraphicsContext::m_AWindow = nullptr;
+
+#endif
+
 extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_iOS(const void* _hwnd);
 extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_win32(const void* _hwnd);
 extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_osx(const void* _hwnd);
