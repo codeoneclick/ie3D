@@ -37,6 +37,11 @@ ui32 CShaderCommiter_GLSL::_Compile(const std::string &_sourceCode,  GLenum _sha
         GLchar message[256];
         glGetShaderInfoLog(handle, sizeof(message), 0, &message[0]);
         m_message = message;
+#if defined(__NDK__)
+        NDK_LOG("Error: GLSL guid %s", m_guid.c_str());
+        NDK_LOG("Error: GLSL sourcecode %s", _sourceCode.c_str());
+        NDK_LOG("Error: GLSL compile %s", m_message.c_str());
+#endif
         std::cout<<message<<std::endl;
         m_status = E_COMMITER_STATUS_FAILURE;
         assert(false);

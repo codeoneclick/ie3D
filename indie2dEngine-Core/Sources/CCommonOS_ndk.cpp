@@ -7,6 +7,7 @@
 //
 
 #include "CCommonOS.h"
+#include "IGraphicsContext.h"
 
 #if defined(__NDK__)
 
@@ -17,12 +18,12 @@ std::string Get_BundlePath(void)
 
 ui32 Get_ScreenWidth(void)
 {
-    return 640;
+    return ANativeWindow_getWidth(IGraphicsContext::Get_AWindow());
 };
 
 ui32 Get_ScreenHeight(void)
 {
-    return 480;
+    return ANativeWindow_getHeight(IGraphicsContext::Get_AWindow());
 };
 
 f32 Get_Random(f32 _minValue, f32 _maxValue)

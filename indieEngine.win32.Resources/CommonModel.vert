@@ -42,21 +42,9 @@ void main(void)
     
     if(INT_FLAG_01 == 1)
     {
-        int index = 0;
-        vec4 vBonePosition = vec4(0.0, 0.0, 0.0, 0.0);
-        vec4 vBoneNormal = vec4(0.0, 0.0, 0.0, 0.0);
-        vec4 vBoneTangent = vec4(0.0, 0.0, 0.0, 0.0);
-    
-        for(int i = 0; i < 4; i++)
-        {
-            index = int(IN_Color[i]);
-            vBonePosition += MATRIX_Bones[index] * vPosition * vWeights[i];
-            vBoneNormal += MATRIX_Bones[index] * vNormal * vWeights[i];
-            vBoneTangent += MATRIX_Bones[index] * vTangent * vWeights[i];
-        }
-        vPosition = MATRIX_World * vBonePosition;
-        vNormal = normalize(MATRIX_Normal * vBoneNormal);
-        vTangent = normalize(MATRIX_Normal * vBoneTangent);
+        vPosition = MATRIX_World * vPosition;
+        vNormal = normalize(MATRIX_Normal * vNormal);
+        vTangent = normalize(MATRIX_Normal * vTangent);
     }
     else
     {
