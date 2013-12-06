@@ -17,9 +17,12 @@ SOURCE_FILES := $(wildcard $(LOCAL_PATH)/../../indie2dEngine-Demo/Sources/*.cpp)
 
 LOCAL_MODULE := IndieEngine-Demo
 LOCAL_CFLAGS := -Werror -D__NDK__ -DGXX_EXPERIMENTAL_CXX0X
-LOCAL_CFLAGS += -g
-LOCAL_CFLAGS += -ggdb
-LOCAL_CFLAGS += -O1
+LOCAL_CFLASG += -g
+LOCAL_CFLAGS += -O2
+LOCAL_CFLAGS += -DNDEBUG 
+#LOCAL_CFLAGS += -g
+#LOCAL_CFLAGS += -ggdb
+#LOCAL_CFLAGS += -O1
 LOCAL_STATIC_LIBRARIES := IndieEngine-Core android_native_app_glue
 LOCAL_C_INCLUDES := ../indie2dEngine-Demo/Sources ../indie2dEngine-Core/Sources ../indie2dEngine-Core/Libraries
 LOCAL_SRC_FILES := $(SOURCE_FILES:$(LOCAL_PATH)/%=%)\

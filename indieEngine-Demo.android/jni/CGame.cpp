@@ -28,6 +28,14 @@ static void custom_handle_cmd(struct android_app* _application, int32_t _command
     	   Run();
        }
        break;
+
+       case APP_CMD_TERM_WINDOW:
+       {
+    	   ANativeActivity_finish(_application->activity);
+    	   exit(0);
+       }
+       break;
+
        case APP_CMD_GAINED_FOCUS:
        {
     	   g_animating = 1;
@@ -36,7 +44,8 @@ static void custom_handle_cmd(struct android_app* _application, int32_t _command
 
        case APP_CMD_LOST_FOCUS:
        {
-    	   g_animating = 0;
+    	   ANativeActivity_finish(_application->activity);
+    	   exit(0);
        }
        break;
     }
@@ -74,6 +83,8 @@ void android_main(struct android_app* _application)
 
 			if (_application->destroyRequested != 0)
 			{
+				ANativeActivity_finish(_application->activity);
+				exit(0);
 				return;
 			}
 		}

@@ -31,7 +31,7 @@
 
 #undef  __USE_CURL__
 #undef  __USE_JSONCPP__
-//#define __USE_GCDPP__
+#define __USE_GCDPP__
 #define __USE_OPENGLES__
 
 #elif defined(__WIN32__)
