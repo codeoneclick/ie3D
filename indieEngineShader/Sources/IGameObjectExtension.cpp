@@ -22,7 +22,7 @@ m_sceneGraph(_sceneGraph),
 m_sceneFabricator(_sceneFabricator)
 {
     m_resourceLoadingHandler = std::make_shared<std::function<void(const std::shared_ptr<IResource>&)>>(std::bind(&IGameObjectExtension::_OnExtensionResourceLoaded, this, std::placeholders::_1));
-    m_templateLoadingHandler = std::make_shared<std::function<void(const std::set<std::string>&)>>(std::bind(&IGameObjectExtension::_OnExtensionTemplateLoaded, this, std::placeholders::_1));
+    m_templateLoadingHandler = std::make_shared<std::function<void(const std::shared_ptr<ITemplate>&)>>(std::bind(&IGameObjectExtension::_OnExtensionTemplateLoaded, this, std::placeholders::_1));
 }
 
 IGameObjectExtension::~IGameObjectExtension(void)
@@ -69,9 +69,9 @@ void IGameObjectExtension::_OnExtensionResourceLoaded(const std::shared_ptr<IRes
     }
 }
 
-void IGameObjectExtension::_OnExtensionTemplateLoaded(const std::set<std::string> _modes)
+void IGameObjectExtension::_OnExtensionTemplateLoaded(const std::shared_ptr<ITemplate> _template)
 {
-    m_modes = _modes;
+    m_template = _template;
 }
 
 void IGameObjectExtension::Load(const std::string &_filename)
@@ -92,12 +92,12 @@ void IGameObjectExtension::Load(const std::string &_filename)
     m_sceneGraph->InsertModel(std::static_pointer_cast<CModel>(m_gameObject));
 }
 
-void IGameObjectExtension::Get_Modes(const TEMPLATE_LOADING_HANDLER &_handler)
+void IGameObjectExtension::Get_Template(const TEMPLATE_LOADING_HANDLER &_handler)
 {
     assert(m_gameObject != nullptr);
-    if(m_modes.size() != 0)
+    if(m_template != nullptr)
     {
-        (*_handler)(m_modes);
+        (*_handler)(m_template);
     }
     m_gameObject->RegisterTemplateLoadingHandler(_handler);
 }

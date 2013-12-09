@@ -7,7 +7,6 @@
 //
 
 #include "CModelTemplateSerializer.h"
-#include "CCommonOS.h"
 #include "ITemplate.h"
 
 CModelTemplateSerializer::CModelTemplateSerializer(void)
@@ -22,10 +21,8 @@ CModelTemplateSerializer::~CModelTemplateSerializer(void)
 
 std::shared_ptr<ITemplate> CModelTemplateSerializer::Serialize(const std::string& _filename)
 {
-    std::string path(Get_BundlePath());
-    path.append(_filename);
     pugi::xml_document document;
-    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, path);
+    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     pugi::xml_node node = document.child("model");
     
@@ -52,4 +49,37 @@ std::shared_ptr<ITemplate> CModelTemplateSerializer::Serialize(const std::string
 std::shared_ptr<ITemplate> CModelTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
+}
+
+void CModelTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
+{
+    std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(_template);
+    pugi::xml_document document;
+    document.load("<model name=\"\">\
+                   <mesh filename=\"\" is_batching=\"\"/>\
+                   <skeleton filename=\"\"/>\
+                   <animations>\
+                   <animation name=\"\" filename=\"\"/>\
+                   </animations>\
+                   <materials>\
+                   <material filename=\"\"/>\
+                   </materials>\
+                   </model>");
+    pugi::xml_node node = document.child("model");
+    node.attribute("name").set_value(modelTemplate->m_meshFilename.c_str());
+    node.child("mesh").attribute("filename").set_value(modelTemplate->m_meshFilename.c_str());
+    node.child("mesh").attribute("is_batching").set_value(0);
+    node.child("skeleton").attribute("filename").set_value(modelTemplate->m_skeletonFilename.c_str());
+    for(auto sequence : modelTemplate->m_sequencesFilenames)
+    {
+        node.child("animations").append_child("animation");
+        node.child("animations").child("animation").append_attribute("filename");
+        node.child("animations").child("animation").attribute("filename").set_value(sequence.c_str());
+    }
+    for(auto material : modelTemplate->m_materialsFilenames)
+    {
+        node.child("materials").append_child("material");
+        node.child("materials").child("material").append_attribute("filename");
+        node.child("materials").child("material").attribute("filename").set_value(material.c_str());
+    }
 }

@@ -7,7 +7,6 @@
 //
 
 #include "CShaderSerializer_GLSL.h"
-#include "CCommonOS.h"
 #include "CShader.h"
 #include "CResourceAccessor.h"
 
@@ -28,20 +27,13 @@ void CShaderSerializer_GLSL::Serialize(void)
 {
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::string path(Get_BundlePath());
-    std::string filename(path);
-    filename.append(m_vsFilename);
-    
-    std::istream* filestream = IResourceSerializer::_LoadData(filename);
+    std::istream* filestream = IResourceSerializer::_LoadData(m_vsFilename);
     std::stringstream vsStringstream;
     vsStringstream<<filestream->rdbuf();
     std::string vsSourceCode(vsStringstream.str());
     IResourceSerializer::_FreeData(filestream);
     
-    filename.assign(path);
-    filename.append(m_fsFilename);
-    
-    filestream = IResourceSerializer::_LoadData(filename);
+    filestream = IResourceSerializer::_LoadData(m_fsFilename);
     std::stringstream fsStringstream;
     fsStringstream<<filestream->rdbuf();
     std::string fsSourceCode(fsStringstream.str());

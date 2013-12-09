@@ -52,30 +52,30 @@ struct SMaterialTemplate : public ITemplate
     std::string m_renderMode;
 };
 
-struct SModelTemplate : public ITemplate
+struct SGameObjectTemplate : public ITemplate
 {
     std::vector<std::string> m_materialsFilenames;
     std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
+};
+
+struct SModelTemplate : public SGameObjectTemplate
+{
     std::string m_meshFilename;
     std::string m_skeletonFilename;
     std::vector<std::string> m_sequencesFilenames;
     bool m_isBatching;
 };
 
-struct SOceanTemplate : public ITemplate
+struct SOceanTemplate : public SGameObjectTemplate
 {
-    std::vector<std::string> m_materialsFilenames;
-    std::vector<std::shared_ptr<SMaterialTemplate>> m_materialsTemplates;
     ui32 m_width;
     ui32 m_height;
     f32 m_altitude;
     f32 m_waveGeneratorInterval;
 };
 
-struct SLandscapeTemplate : public ITemplate
+struct SLandscapeTemplate : public SGameObjectTemplate
 {
-    std::vector<std::string> m_materialsFilenames;
-    std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
     std::string m_splattingDiffuseMaterialFilename;
     std::string m_splattingNormalMaterialFilename;
     std::shared_ptr<SMaterialTemplate> m_splattingDiffuseMaterial;
@@ -96,10 +96,8 @@ struct SLandscapeTemplate : public ITemplate
     std::string m_splattingDataFileName;
 };
 
-struct SParticleEmitterTemplate : public ITemplate
+struct SParticleEmitterTemplate : public SGameObjectTemplate
 {
-    std::vector<std::string> m_materialsFilenames;
-    std::vector<std::shared_ptr<SMaterialTemplate> > m_materialsTemplates;
     ui32 m_numParticles;
     
     ui64 m_duration;

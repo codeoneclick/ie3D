@@ -100,16 +100,7 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     CLandscape::ListenSceneUpdateMgr(m_isNeedToUpdate);
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
-    
-    std::set<std::string> modes;
-    for(auto material : m_materials)
-    {
-        modes.insert(material.first);
-    }
-    for(TEMPLATE_LOADING_HANDLER handler : m_templateLoadingHandlers)
-    {
-        (*handler)(modes);
-    }
+    IGameObject::_OnTemplateLoaded(_template);
 }
 
 void CLandscape::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)

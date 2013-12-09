@@ -32,7 +32,7 @@ protected:
     
     static size_t _Callback(char* _data, size_t _size, size_t _nmemb, void *userdata);
     
-    pugi::xml_parse_result _LoadDocument(pugi::xml_document& _document, const std::string& _path);
+    pugi::xml_parse_result _LoadDocument(pugi::xml_document& _document, const std::string& _filename);
     
 public:
     
@@ -41,6 +41,7 @@ public:
     
     virtual std::shared_ptr<ITemplate> Serialize(const std::string& _filename) = 0;
     virtual std::shared_ptr<ITemplate> Serialize(const std::string& _host, ui32 _port, const std::string& _filename) = 0;
+    virtual void Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template) = 0;
 };
 
 #endif

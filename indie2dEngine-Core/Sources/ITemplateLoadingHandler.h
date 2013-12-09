@@ -33,7 +33,7 @@ protected:
     CTemplateLoadingCommands(void);
     
     void _ConnectTemplateLoadedCommand(const __TEMPLATE_LOADED_COMMAND& _command);
-    void _ExecuteTemplateLoadedCommand(std::shared_ptr<ITemplate> _template);
+    void _ExecuteTemplateLoadedCommand(const std::shared_ptr<ITemplate>& _template);
     
 public:
     
@@ -44,7 +44,7 @@ class ITemplateLoadingHandler
 {
 public:
     
-    typedef std::shared_ptr<std::function<void(const std::set<std::string>&)>> TEMPLATE_LOADING_HANDLER;
+    typedef std::shared_ptr<std::function<void(const std::shared_ptr<ITemplate>&)>> TEMPLATE_LOADING_HANDLER;
     
 private:
     
