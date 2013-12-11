@@ -159,8 +159,10 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
         m_outputOperation->Unbind();
     }
     
+#if !defined(__OSX__)
     GLenum error = glGetError();
     assert(error == GL_NO_ERROR);
+#endif
     
     m_graphicsContext->Output();
 }

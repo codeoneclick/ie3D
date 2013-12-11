@@ -79,6 +79,11 @@ void CCodeEditor::OnPaint(QPaintEvent *_event)
 {
     QPainter painter(m_sourceLineWidget);
     painter.fillRect(_event->rect(), Qt::darkGray);
+    
+    QFont font("Menlo");
+    font.setBold(true);
+    font.setPointSize(11);
+    painter.setFont(font);
 
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
@@ -91,7 +96,7 @@ void CCodeEditor::OnPaint(QPaintEvent *_event)
         {
             QString number = QString::number(blockNumber + 1);
             painter.setPen(Qt::white);
-            painter.drawText(0, top, m_sourceLineWidget->width(), fontMetrics().height(), Qt::AlignRight, number);
+            painter.drawText(0, top, m_sourceLineWidget->width(), fontMetrics().height(), Qt::AlignLeft, number);
         }
 
         block = block.next();

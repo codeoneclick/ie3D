@@ -86,9 +86,9 @@ public:
         pushButton_3->setGeometry(QRect(20, 640, 301, 32));
         materials_list = new QComboBox(groupBox);
         materials_list->setObjectName(QStringLiteral("materials_list"));
-        materials_list->setGeometry(QRect(110, 55, 221, 26));
+        materials_list->setGeometry(QRect(130, 55, 201, 26));
         materials_list->setFont(font);
-        materials_list->setStyleSheet(QStringLiteral("background-color: rgb(128, 128, 128);"));
+        materials_list->setStyleSheet(QStringLiteral(""));
         label = new QLabel(groupBox);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(10, 60, 101, 19));
@@ -96,6 +96,7 @@ public:
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         groupBox_2->setGeometry(QRect(10, 9, 641, 691));
+        groupBox_2->setFont(font);
         opengl_window = new QWidget(groupBox_2);
         opengl_window->setObjectName(QStringLiteral("opengl_window"));
         opengl_window->setGeometry(QRect(9, 29, 621, 651));
@@ -125,7 +126,7 @@ public:
 
     void retranslateUi(QMainWindow *CMainWindowGUI)
     {
-        CMainWindowGUI->setWindowTitle(QApplication::translate("CMainWindowGUI", "indieEngine-Shader", 0));
+        CMainWindowGUI->setWindowTitle(QApplication::translate("CMainWindowGUI", "indieEngine-ShaderEditor", 0));
         actionOpen->setText(QApplication::translate("CMainWindowGUI", "Open", 0));
         actionSave->setText(QApplication::translate("CMainWindowGUI", "Save", 0));
         actionExit->setText(QApplication::translate("CMainWindowGUI", "Exit", 0));

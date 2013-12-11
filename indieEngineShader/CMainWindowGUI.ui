@@ -24,7 +24,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>indieEngine-Shader</string>
+   <string>indieEngine-ShaderEditor</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(64, 64, 64);
@@ -99,9 +99,9 @@ selection-background-color: rgb(128, 128, 128);</string>
     <widget class="QComboBox" name="materials_list">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>130</x>
        <y>55</y>
-       <width>221</width>
+       <width>201</width>
        <height>26</height>
       </rect>
      </property>
@@ -113,7 +113,7 @@ selection-background-color: rgb(128, 128, 128);</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(128, 128, 128);</string>
+      <string notr="true"/>
      </property>
     </widget>
     <widget class="QLabel" name="label">
@@ -145,6 +145,13 @@ selection-background-color: rgb(128, 128, 128);</string>
       <width>641</width>
       <height>691</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="title">
      <string>3D</string>

@@ -19,8 +19,19 @@
     <height>768</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <family>Menlo</family>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>indieEngine-ShaderEditor</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(64, 64, 64);
+color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
@@ -30,6 +41,13 @@
      <width>751</width>
      <height>300</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Menlo</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="title">
     <string>Source VS</string>
@@ -49,6 +67,36 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QScrollBar:vertical {               
+border: 1px solid #999999;
+background:white;
+width:10px;
+margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:vertical {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+stop: 0  rgb(128, 128, 128), stop: 0.5 rgb(128, 128, 128),  stop:1 rgb(128, 128, 128));
+min-height: 0px;
+}
+QScrollBar::add-line:vertical {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+stop: 0  rgb(128, 128, 128), stop: 0.5 rgb(128, 128, 128),  stop:1 rgb(128, 128, 128));
+height: px;
+subcontrol-position: bottom;
+subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+stop: 0  rgb(128, 128, 128), stop: 0.5 rgb(128, 128, 128),  stop:1 rgb(128, 128, 128));
+height: 0px;
+subcontrol-position: top;
+subcontrol-origin: margin;
+}</string>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOn</enum>
+    </property>
    </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_2">
@@ -59,6 +107,13 @@
      <width>751</width>
      <height>300</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Menlo</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="title">
     <string>Source FS</string>
@@ -78,6 +133,36 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QScrollBar:vertical {               
+border: 1px solid #999999;
+background:white;
+width:10px;
+margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:vertical {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+stop: 0  rgb(128, 128, 128), stop: 0.5 rgb(128, 128, 128),  stop:1 rgb(128, 128, 128));
+min-height: 0px;
+}
+QScrollBar::add-line:vertical {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+stop: 0  rgb(128, 128, 128), stop: 0.5 rgb(128, 128, 128),  stop:1 rgb(128, 128, 128));
+height: px;
+subcontrol-position: bottom;
+subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+stop: 0  rgb(128, 128, 128), stop: 0.5 rgb(128, 128, 128),  stop:1 rgb(128, 128, 128));
+height: 0px;
+subcontrol-position: top;
+subcontrol-origin: margin;
+}</string>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOn</enum>
+    </property>
    </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_3">
@@ -89,8 +174,15 @@
      <height>151</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Menlo</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
    <property name="title">
-    <string>Console</string>
+    <string>Output</string>
    </property>
    <widget class="QPlainTextEdit" name="console">
     <property name="geometry">
@@ -118,10 +210,137 @@
      <height>601</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Menlo</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
    <property name="title">
-    <string>Settings</string>
+    <string>Options</string>
    </property>
    <widget class="QPushButton" name="btn_compile">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>520</y>
+      <width>221</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align:left;
+background-color: rgb(128, 128, 128);</string>
+    </property>
+    <property name="text">
+     <string>  Compile</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_back">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>221</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align:left;
+background-color: rgb(128, 128, 128);</string>
+    </property>
+    <property name="text">
+     <string>  Back</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_save_vs">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>221</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align:left;
+background-color: rgb(128, 128, 128);</string>
+    </property>
+    <property name="text">
+     <string>  Save VS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_save_fs">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>221</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align:left;
+background-color: rgb(128, 128, 128);</string>
+    </property>
+    <property name="text">
+     <string>  Save FS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_save_vs_as">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>221</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align:left;
+background-color: rgb(128, 128, 128);</string>
+    </property>
+    <property name="text">
+     <string>  Save VS as...</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_open_vs">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -130,11 +349,22 @@
       <height>32</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align:left;
+background-color: rgb(128, 128, 128);</string>
+    </property>
     <property name="text">
-     <string>Compile</string>
+     <string>  Open VS...</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_close">
+   <widget class="QPushButton" name="btn_open_fs">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -143,11 +373,52 @@
       <height>32</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align:left;
+background-color: rgb(128, 128, 128);</string>
+    </property>
     <property name="text">
-     <string>Close</string>
+     <string>  Open FS...</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_save_fs_as">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>221</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align:left;
+background-color: rgb(128, 128, 128);</string>
+    </property>
+    <property name="text">
+     <string>  Save FS as...</string>
     </property>
    </widget>
   </widget>
+  <zorder>groupBox</zorder>
+  <zorder>groupBox_2</zorder>
+  <zorder>groupBox_3</zorder>
+  <zorder>groupBox_4</zorder>
+  <zorder>btn_back</zorder>
+  <zorder>btn_compile</zorder>
  </widget>
  <resources/>
  <connections/>
