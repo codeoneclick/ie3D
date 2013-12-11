@@ -30,6 +30,9 @@ protected:
 
     CCodeEditor* m_vsEditor;
     CCodeEditor* m_fsEditor;
+    
+    std::string m_recentVSFilename;
+    std::string m_recentFSFilename;
 
 public:
     explicit CShaderCompileGUI(QWidget *parent = 0);
