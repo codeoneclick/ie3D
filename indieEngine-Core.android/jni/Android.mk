@@ -8,7 +8,6 @@ SOURCE_FILES += $(wildcard $(LOCAL_PATH)/../../indie2dEngine-Core/Libraries/pugi
 
 LOCAL_MODULE := IndieEngine-Core
 LOCAL_CFLAGS := -Werror -D__NDK__ -DGXX_EXPERIMENTAL_CXX0X
-LOCAL_CFLASG += -g
 LOCAL_CFLAGS += -O2
 LOCAL_CFLAGS += -DNDEBUG 
 #LOCAL_CFLAGS += -g
