@@ -30,6 +30,9 @@ protected:
 
     CCodeEditor* m_vsEditor;
     CCodeEditor* m_fsEditor;
+    
+    std::string m_recentVSFilename;
+    std::string m_recentFSFilename;
 
 public:
     explicit CShaderCompileGUI(QWidget *parent = 0);
@@ -45,7 +48,19 @@ public:
 private slots:
     void on_btn_compile_clicked();
 
-    void on_btn_close_clicked();
+    void on_btn_open_vs_clicked();
+
+    void on_btn_open_fs_clicked();
+
+    void on_btn_save_vs_clicked();
+
+    void on_btn_save_vs_as_clicked();
+
+    void on_btn_save_fs_clicked();
+
+    void on_btn_save_fs_as_clicked();
+
+    void on_btn_back_clicked();
 
 private:
     Ui::CShaderCompileGUI *ui;

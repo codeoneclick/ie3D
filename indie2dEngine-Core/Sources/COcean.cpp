@@ -88,16 +88,7 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     
 	IGameObject::ListenRenderMgr(m_isNeedToRender);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
-    
-    std::set<std::string> modes;
-    for(auto material : m_materials)
-    {
-        modes.insert(material.first);
-    }
-    for(TEMPLATE_LOADING_HANDLER handler : m_templateLoadingHandlers)
-    {
-        (*handler)(modes);
-    }
+    IGameObject::_OnTemplateLoaded(_template);
 }
 
 void COcean::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)

@@ -101,7 +101,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     assert(m_boundBox != nullptr);
     
     std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(k_vsBoundBoxFilename,
-                                                                         k_fsBoundBoxFilename);
+                                                                       k_fsBoundBoxFilename);
     assert(shader != nullptr);
     m_debugBoundBoxMaterial = std::make_shared<CMaterial>(shader, "bound.box");
     m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_CULL_MODE, false);
@@ -116,16 +116,7 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 	IGameObject::ListenRenderMgr(m_isNeedToRender);
     IGameObject::ListenSceneUpdateMgr(m_isNeedToUpdate);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
-    
-    std::set<std::string> modes;
-    for(auto material : m_materials)
-    {
-        modes.insert(material.first);
-    }
-    for(TEMPLATE_LOADING_HANDLER handler : m_templateLoadingHandlers)
-    {
-         (*handler)(modes);
-    }
+    IGameObject::_OnTemplateLoaded(_template);
 }
 
 void CModel::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)

@@ -26,6 +26,11 @@ m_numTriangles(0)
     glDepthMask(GL_TRUE);
     glDisable(GL_CULL_FACE);
     glDisable(GL_BLEND);
+    glDisable(GL_STENCIL_TEST);
+    glDisable(GL_DITHER);
+    glDepthFunc(GL_LEQUAL);
+    //glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
+    //glShadeModel(GL_SMOOTH);
 }
 
 CRenderMgr::~CRenderMgr(void)
@@ -154,8 +159,10 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
         m_outputOperation->Unbind();
     }
     
+#if !defined(__OSX__)
     GLenum error = glGetError();
     assert(error == GL_NO_ERROR);
+#endif
     
     m_graphicsContext->Output();
 }

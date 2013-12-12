@@ -24,6 +24,7 @@ m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
 m_renderQueuePosition(0),
 m_mesh(nullptr),
+m_template(nullptr),
 m_camera(nullptr),
 m_boundBox(nullptr),
 m_debugBoundBoxMaterial(nullptr),
@@ -148,7 +149,11 @@ void IGameObject::ListenSceneUpdateMgr(bool _value)
 
 void IGameObject::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 {
-    assert(false);
+    m_template = _template;
+    for(TEMPLATE_LOADING_HANDLER handler : m_templateLoadingHandlers)
+    {
+        (*handler)(m_template);
+    }
 }
 
 void IGameObject::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)

@@ -36,21 +36,25 @@ protected:
 #endif
     
 public:
+    
     explicit CMainWindowGUI(QWidget *parent = 0);
     ~CMainWindowGUI();
     
     void Execute(void);
 
 private slots:
+    
     void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
-
     void on_pushButton_3_clicked();
-
     void on_materials_list_currentIndexChanged(const QString &arg1);
+    
+    void on_buttonOpen_clicked(void);
+    void on_buttonSave_clicked(void);
+    void on_buttonExit_clicked(void);
 
 private:
+    
     Ui::CMainWindowGUI *ui;
 
     CShaderCompileGUI* m_shaderCompileGUI;

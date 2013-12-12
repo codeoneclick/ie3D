@@ -419,6 +419,7 @@ void CShader::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
+        assert(_sampler < E_SHADER_SAMPLER_MAX);
         glActiveTexture(GL_TEXTURE0 + _sampler);
         _texture->Bind();
         glUniform1i(m_samplers[_sampler], _sampler);

@@ -14,37 +14,41 @@
 #include "CResourceAccessor.h"
 #include "IGraphicsContext.h"
 
-/*extern "C" JNIEXPORT void JNICALL Java_com_codeoneclick_indieenginedemo_CGameJNILib_start(JNIEnv * env, jobject obj)
-{
-	CGameViewController_ndk* controller = new CGameViewController_ndk();
-}
-
-extern "C" JNIEXPORT void JNICALL Java_com_codeoneclick_indieenginedemo_CGameJNILib_run(JNIEnv * env, jobject obj)
-{
-	Run();
-}*/
-
-int g_animating = 0;
+ui32 g_animating = 0;
 
 static void custom_handle_cmd(struct android_app* _application, int32_t _command)
 {
-	switch(_command)
-	{
-		case APP_CMD_INIT_WINDOW:
-		{
-			IGraphicsContext::Set_AWindow(_application->window);
-			CResourceAccessor::Set_AAssetManager(_application->activity->assetManager);
-			CGameViewController_ndk* controller = new CGameViewController_ndk();
-			Run();
-		}
-		break;
-		case APP_CMD_GAINED_FOCUS:
-		{
-			NDK_LOG("run loop started");
-			g_animating = 1;
-		}
-		break;
-	}
+    switch(_command)
+    {
+       case APP_CMD_INIT_WINDOW:
+       {
+    	   IGraphicsContext::Set_AWindow(_application->window);
+    	   CResourceAccessor::Set_AAssetManager(_application->activity->assetManager);
+    	   CGameViewController_ndk* controller = new CGameViewController_ndk();
+    	   Run();
+       }
+       break;
+
+       case APP_CMD_TERM_WINDOW:
+       {
+    	   ANativeActivity_finish(_application->activity);
+    	   exit(0);
+       }
+       break;
+
+       case APP_CMD_GAINED_FOCUS:
+       {
+    	   g_animating = 1;
+       }
+       break;
+
+       case APP_CMD_LOST_FOCUS:
+       {
+    	   ANativeActivity_finish(_application->activity);
+    	   exit(0);
+       }
+       break;
+    }
 }
 
 static int32_t custom_handle_input(struct android_app* app, AInputEvent* event)
@@ -59,18 +63,19 @@ static int32_t custom_handle_input(struct android_app* app, AInputEvent* event)
 
 void android_main(struct android_app* _application)
 {
-	NDK_LOG("START");
 	app_dummy();
 
 	int events;
 	_application->onAppCmd = custom_handle_cmd;
 	_application->onInputEvent = custom_handle_input;
 
-	while (true)
+	ANativeActivity_setWindowFlags(_application->activity, AWINDOW_FLAG_FULLSCREEN|AWINDOW_FLAG_KEEP_SCREEN_ON , 1);
+
+	while (1)
 	{
 		NDK_LOG("while loop");
 		struct android_poll_source* source;
-		while (ALooper_pollAll(-1, NULL, &events, (void**)&source) >= 0)
+		while (ALooper_pollAll(g_animating ? 0 : -1, NULL, &events, (void**)&source) >= 0)
 		{
 			NDK_LOG("run loop events");
 			if (source != nullptr)
@@ -78,17 +83,16 @@ void android_main(struct android_app* _application)
 				source->process(_application, source);
 			}
 
-			if(g_animating == 1)
-			{
-				NDK_LOG("run loop executed");
-
-			}
-
 			if (_application->destroyRequested != 0)
 			{
-				NDK_LOG("We are exiting");
+				ANativeActivity_finish(_application->activity);
+				exit(0);
 				return;
 			}
+		}
+		if(g_animating == 1)
+		{
+			Run();
 		}
 	}
 }

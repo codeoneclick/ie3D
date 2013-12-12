@@ -8,6 +8,7 @@
 
 #include "IResourceSerializer.h"
 #include "CResourceAccessor.h"
+#include "CCommonOS.h"
 
 IResourceSerializer::IResourceSerializer(const std::string& _guid, std::shared_ptr<IResource> _resource) :
 m_guid(_guid),
@@ -22,12 +23,18 @@ IResourceSerializer::~IResourceSerializer(void)
     
 }
 
-std::istream* IResourceSerializer::_LoadData(const std::string &_path)
+std::istream* IResourceSerializer::_LoadData(const std::string &_filename)
 {
+    std::string path_filename(Get_BundlePath());
+    path_filename.append(_filename);
 #if defined(__NDK__)
     std::memstream* mstream;
     AAssetManager* manager = CResourceAccessor::Get_AAssetManager();
-    AAsset* asset = AAssetManager_open(manager, _path.c_str(), AASSET_MODE_UNKNOWN);
+    AAsset* asset = AAssetManager_open(manager, _filename.c_str(), AASSET_MODE_UNKNOWN);
+    if(asset == nullptr)
+    {
+        asset = AAssetManager_open(manager, path_filename.c_str(), AASSET_MODE_UNKNOWN);
+    }
     if(asset)
     {
         ui32 size = AAsset_getLength(asset);
@@ -42,11 +49,15 @@ std::istream* IResourceSerializer::_LoadData(const std::string &_path)
     }
 #else
     std::ifstream* filestream = new std::ifstream();
-    filestream->open(_path.c_str());
+    filestream->open(_filename.c_str());
     if (!filestream->is_open())
     {
-        m_status = E_SERIALIZER_STATUS_FAILURE;
-        assert(false);
+        filestream->open(path_filename);
+        if (!filestream->is_open())
+        {
+            m_status = E_SERIALIZER_STATUS_FAILURE;
+            assert(false);
+        }
     }
     return filestream;
 #endif

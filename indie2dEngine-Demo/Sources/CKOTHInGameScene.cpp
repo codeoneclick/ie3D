@@ -134,7 +134,7 @@ void CKOTHInGameScene::Load(void)
     m_characterController->Set_Camera(m_camera);
     m_characterController->Set_Character(m_models[0]);
     m_characterController->Set_Navigator(m_navigator);
-	m_characterController->Set_Position(glm::vec3(-16.0f, 0.0f, -16.0f));
+	m_characterController->Set_Position(glm::vec3(24.0f, 0.0f, 24.0f));
     RegisterMoveControllerHandler(m_characterController);
 }
 

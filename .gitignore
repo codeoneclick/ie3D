@@ -24,6 +24,10 @@
 # *.a
 # *.lib
 
+#Android trash
+*.apk
+*.jar
+
 # Xcode crap
 *mode1v3
 *pbxuser

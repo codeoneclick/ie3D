@@ -1,5 +1,6 @@
 #include "CMainWindowGUI.h"
 #include "ui_CMainWindowGUI.h"
+#include "QFileDialog.h"
 
 #if defined(__OSX__)
 #include <Cocoa/Cocoa.h>
@@ -12,6 +13,7 @@
 #include "CCommonOS.h"
 #include "CGameLoopExecutor.h"
 #include "IGameObjectExtension.h"
+#include "ITemplate.h"
 #endif
 
 CMainWindowGUI::CMainWindowGUI(QWidget *parent) :
@@ -26,6 +28,9 @@ CMainWindowGUI::CMainWindowGUI(QWidget *parent) :
     ui(new Ui::CMainWindowGUI)
 {
     ui->setupUi(this);
+    connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(on_buttonOpen_clicked()));
+    connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(on_buttonSave_clicked()));
+    connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(on_buttonExit_clicked()));
 }
 
 CMainWindowGUI::~CMainWindowGUI()
@@ -73,20 +78,6 @@ void CMainWindowGUI::Execute(void)
     m_iesaTransition = std::static_pointer_cast<CIESAMainTransition>(m_iesaWorkflow->CreateIESAMainTransition("main.transition.xml", (__bridge void*)view));
     m_iesaWorkflow->RegisterTransition(std::static_pointer_cast<IGameTransition>(m_iesaTransition));
     m_iesaWorkflow->GoToTransition("main.transition.xml");
-    m_iesaTransition->LoadGameObject("model.Footman.xml");
-    
-    ITemplateLoadingHandler::TEMPLATE_LOADING_HANDLER handler;
-    std::function<void(const std::set<std::string>&)> function = [handler, this](const std::set<std::string>& _modes)
-    {
-        ui->materials_list->clear();
-        for(auto mode : _modes)
-        {
-            ui->materials_list->addItem(mode.c_str());
-        }
-        m_mode = ui->materials_list->currentText().toUtf8().constData();
-    };
-    handler = std::make_shared<std::function<void(const std::set<std::string>&)>>(function);
-    m_iesaTransition->Get_GameObjectExtension()->Get_Modes(handler);
     
 #endif
 }
@@ -107,4 +98,45 @@ void CMainWindowGUI::on_materials_list_currentIndexChanged(const QString &arg1)
     m_mode = arg1.toUtf8().constData();
 
 #endif
+}
+
+void CMainWindowGUI::on_buttonOpen_clicked(void)
+{
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), "", tr("Files (*.xml)"));
+    if (filename.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+#if defined(__OSX__) || defined(__WIN32__)
+        
+        m_iesaTransition->LoadGameObject(filename.toUtf8().constData());
+        ITemplateLoadingHandler::TEMPLATE_LOADING_HANDLER handler;
+        std::function<void(const std::shared_ptr<ITemplate>&)> function = [handler, this](const std::shared_ptr<ITemplate>& _template)
+        {
+            ui->materials_list->clear();
+            std::shared_ptr<SGameObjectTemplate> gameObjectTemplate = std::static_pointer_cast<SGameObjectTemplate>(_template);
+            
+            for(auto materialTemplate : gameObjectTemplate->m_materialsTemplates)
+            {
+                ui->materials_list->addItem(materialTemplate->m_renderMode.c_str());
+            }
+            m_mode = ui->materials_list->currentText().toUtf8().constData();
+        };
+        handler = std::make_shared<std::function<void(const std::shared_ptr<ITemplate>&)>>(function);
+        m_iesaTransition->Get_GameObjectExtension()->Get_Template(handler);
+        
+#endif
+    }
+}
+
+void CMainWindowGUI::on_buttonSave_clicked(void)
+{
+    std::cout<<"save action"<<std::endl;
+}
+
+void CMainWindowGUI::on_buttonExit_clicked(void)
+{
+    std::cout<<"exit action"<<std::endl;
 }

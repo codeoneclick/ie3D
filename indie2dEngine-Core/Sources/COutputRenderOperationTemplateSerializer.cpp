@@ -7,7 +7,6 @@
 //
 
 #include "COutputRenderOperationTemplateSerializer.h"
-#include "CCommonOS.h"
 #include "ITemplate.h"
 
 COutputRenderOperationTemplateSerializer::COutputRenderOperationTemplateSerializer(void)
@@ -22,10 +21,8 @@ COutputRenderOperationTemplateSerializer::~COutputRenderOperationTemplateSeriali
 
 std::shared_ptr<ITemplate> COutputRenderOperationTemplateSerializer::Serialize(const std::string& _filename)
 {
-    std::string path(Get_BundlePath());
-    path.append(_filename);
     pugi::xml_document document;
-    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, path);
+    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     pugi::xml_node node = document.child("operation");
     
@@ -40,4 +37,9 @@ std::shared_ptr<ITemplate> COutputRenderOperationTemplateSerializer::Serialize(c
 std::shared_ptr<ITemplate> COutputRenderOperationTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
+}
+
+void COutputRenderOperationTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
+{
+    
 }

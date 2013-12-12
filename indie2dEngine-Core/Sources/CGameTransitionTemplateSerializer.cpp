@@ -7,7 +7,6 @@
 //
 
 #include "CGameTransitionTemplateSerializer.h"
-#include "CCommonOS.h"
 #include "ITemplate.h"
 
 CGameTransitionTemplateSerializer::CGameTransitionTemplateSerializer(void)
@@ -22,10 +21,8 @@ CGameTransitionTemplateSerializer::~CGameTransitionTemplateSerializer(void)
 
 std::shared_ptr<ITemplate> CGameTransitionTemplateSerializer::Serialize(const std::string& _filename)
 {
-    std::string path(Get_BundlePath());
-    path.append(_filename);
     pugi::xml_document document;
-    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, path);
+    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     pugi::xml_node node = document.child("transition");
     
@@ -53,4 +50,9 @@ std::shared_ptr<ITemplate> CGameTransitionTemplateSerializer::Serialize(const st
 std::shared_ptr<ITemplate> CGameTransitionTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
+}
+
+void CGameTransitionTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
+{
+    
 }

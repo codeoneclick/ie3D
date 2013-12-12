@@ -50,6 +50,7 @@ protected:
     glm::vec3 m_scale;
     
     std::map<std::string, std::shared_ptr<CMaterial> > m_materials;
+    std::shared_ptr<ITemplate> m_template;
     std::shared_ptr<CMaterial> m_debugBoundBoxMaterial;
     std::shared_ptr<CMesh> m_mesh;
     

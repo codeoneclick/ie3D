@@ -31,7 +31,7 @@
 
 #undef  __USE_CURL__
 #undef  __USE_JSONCPP__
-//#define __USE_GCDPP__
+#define __USE_GCDPP__
 #define __USE_OPENGLES__
 
 #elif defined(__WIN32__)
@@ -113,12 +113,30 @@ namespace std
 {
     class memstream: public std::istream
     {
+    protected:
+        
+        char* m_data;
+        size_t m_size;
+        
     public:
         
-        memstream(char* _data, size_t _size): std::istream(&m_buffer),
-        m_buffer(_data, _size)
+        memstream(char* _data, size_t _size):
+        std::istream(&m_buffer),
+        m_buffer(_data, _size),
+        m_data(_data),
+        m_size(_size)
         {
             rdbuf(&m_buffer);
+        };
+        
+        inline size_t size(void)
+        {
+            return m_size;
+        };
+        
+        inline char* data(void)
+        {
+            return m_data;
         };
         
     private:

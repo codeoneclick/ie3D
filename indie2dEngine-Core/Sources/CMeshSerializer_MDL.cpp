@@ -7,7 +7,6 @@
 //
 
 #include "CMeshSerializer_MDL.h"
-#include "CCommonOS.h"
 #include "CMesh.h"
 #include "CSkeleton.h"
 #include "CSequence.h"
@@ -30,11 +29,7 @@ void CMeshSerializer_MDL::Serialize(void)
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::string path(Get_BundlePath());
-    std::string filename(path);
-    filename.append(m_filename);
-    
-    std::istream* filestream = IResourceSerializer::_LoadData(filename);
+    std::istream* filestream = IResourceSerializer::_LoadData(m_filename);
     
     std::shared_ptr<CMeshHeader> header = std::make_shared<CMeshHeader>();
     std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh>(m_resource);

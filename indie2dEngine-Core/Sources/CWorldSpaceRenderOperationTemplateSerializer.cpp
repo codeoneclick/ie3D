@@ -7,7 +7,6 @@
 //
 
 #include "CWorldSpaceRenderOperationTemplateSerializer.h"
-#include "CCommonOS.h"
 #include "ITemplate.h"
 
 CWorldSpaceRenderOperationTemplateSerializer::CWorldSpaceRenderOperationTemplateSerializer(void)
@@ -22,10 +21,8 @@ CWorldSpaceRenderOperationTemplateSerializer::~CWorldSpaceRenderOperationTemplat
 
 std::shared_ptr<ITemplate> CWorldSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _filename)
 {
-    std::string path(Get_BundlePath());
-    path.append(_filename);
     pugi::xml_document document;
-   pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, path);
+    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     pugi::xml_node node = document.child("operation");
     
@@ -44,4 +41,9 @@ std::shared_ptr<ITemplate> CWorldSpaceRenderOperationTemplateSerializer::Seriali
 std::shared_ptr<ITemplate> CWorldSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
+}
+
+void CWorldSpaceRenderOperationTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
+{
+    
 }

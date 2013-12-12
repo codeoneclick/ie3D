@@ -16,8 +16,19 @@
     <height>768</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <family>Menlo</family>
+    <weight>75</weight>
+    <bold>true</bold>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>CMainWindowGUI</string>
+   <string>indieEngine-ShaderEditor</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(64, 64, 64);
+color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="groupBox">
@@ -29,6 +40,13 @@
       <height>691</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="title">
      <string>Settings</string>
     </property>
@@ -36,10 +54,17 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>80</y>
+       <y>560</y>
        <width>301</width>
        <height>32</height>
       </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">selection-color: rgb(128, 128, 128);
+selection-background-color: rgb(128, 128, 128);</string>
      </property>
      <property name="text">
       <string>ShaderCompile</string>
@@ -49,7 +74,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>120</y>
+       <y>600</y>
        <width>301</width>
        <height>32</height>
       </rect>
@@ -62,7 +87,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>160</y>
+       <y>640</y>
        <width>301</width>
        <height>32</height>
       </rect>
@@ -74,11 +99,41 @@
     <widget class="QComboBox" name="materials_list">
      <property name="geometry">
       <rect>
-       <x>25</x>
-       <y>40</y>
-       <width>291</width>
+       <x>130</x>
+       <y>55</y>
+       <width>201</width>
        <height>26</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Menlo</family>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>101</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Menlo</family>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Render mode:</string>
      </property>
     </widget>
    </widget>
@@ -90,6 +145,13 @@
       <width>641</width>
       <height>691</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="title">
      <string>3D</string>
@@ -115,6 +177,15 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -125,6 +196,21 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

@@ -7,7 +7,6 @@
 //
 
 #include "CTextureSerializer_PVR.h"
-#include "CCommonOS.h"
 #include "CTexture.h"
 #include "PVRTTexture.h"
 
@@ -28,14 +27,16 @@ void CTextureSerializer_PVR::Serialize(void)
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::string path(Get_BundlePath());
-    std::string filename(path);
-    filename.append(m_filename);
+    std::istream* filestream = IResourceSerializer::_LoadData(m_filename);
     
-    std::istream* filestream = IResourceSerializer::_LoadData(filename);
+#if defined(__NDK__)
+    i64 size = static_cast<std::memstream*>(filestream)->size();
+#else
     filestream->seekg(0, std::ios::end);
     i64 size = filestream->tellg();
     filestream->seekg(0, std::ios::beg);
+#endif
+    
 	ui8* sourcedata = new ui8[size];
 	filestream->read((char*)sourcedata, static_cast<i32>(size));
     IResourceSerializer::_FreeData(filestream);

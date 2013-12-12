@@ -8,4 +8,4 @@ APP_CFLAGS += -Wno-error=format-security
 APP_CFLAGS += -Wno-deprecated
 APP_GNUSTL_FORCE_CPP_FEATURES := exceptions rtti
 APP_CPPFLAGS += -std=c++11
-APP_OPTIM := debug
+APP_OPTIM := release

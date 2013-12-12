@@ -7,7 +7,6 @@
 //
 
 #include "CParticleEmitterTemplateSerializer.h"
-#include "CCommonOS.h"
 #include "ITemplate.h"
 
 CParticleEmitterTemplateSerializer::CParticleEmitterTemplateSerializer(void)
@@ -22,10 +21,8 @@ CParticleEmitterTemplateSerializer::~CParticleEmitterTemplateSerializer(void)
 
 std::shared_ptr<ITemplate> CParticleEmitterTemplateSerializer::Serialize(const std::string& _filename)
 {
-    std::string path(Get_BundlePath());
-    path.append(_filename);
     pugi::xml_document document;
-    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, path);
+    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     pugi::xml_node node = document.child("particle_emitter");
     std::shared_ptr<SParticleEmitterTemplate> particleEmitterTemplate = std::make_shared<SParticleEmitterTemplate>();
@@ -69,4 +66,9 @@ std::shared_ptr<ITemplate> CParticleEmitterTemplateSerializer::Serialize(const s
 std::shared_ptr<ITemplate> CParticleEmitterTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
+}
+
+void CParticleEmitterTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
+{
+    
 }

@@ -7,7 +7,6 @@
 //
 
 #include "CLandscapeTemplateSerializer.h"
-#include "CCommonOS.h"
 #include "ITemplate.h"
 
 CLandscapeTemplateSerializer::CLandscapeTemplateSerializer(void)
@@ -22,10 +21,8 @@ CLandscapeTemplateSerializer::~CLandscapeTemplateSerializer(void)
 
 std::shared_ptr<ITemplate> CLandscapeTemplateSerializer::Serialize(const std::string& _filename)
 {
-    std::string path(Get_BundlePath());
-    path.append(_filename);
     pugi::xml_document document;
-    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, path);
+    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     pugi::xml_node node = document.child("landscape");
     
@@ -58,4 +55,9 @@ std::shared_ptr<ITemplate> CLandscapeTemplateSerializer::Serialize(const std::st
 std::shared_ptr<ITemplate> CLandscapeTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
+}
+
+void CLandscapeTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
+{
+    
 }
