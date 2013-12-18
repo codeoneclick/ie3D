@@ -5,4 +5,3 @@ void main(void)
 {
     gl_FragColor = texture2D(SAMPLER_01, OUT_TexCoord);
 }
-

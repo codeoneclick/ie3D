@@ -44,7 +44,6 @@ public:
 
 private slots:
     
-    void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
     void on_materials_list_currentIndexChanged(const QString &arg1);
@@ -52,6 +51,17 @@ private slots:
     void on_buttonOpen_clicked(void);
     void on_buttonSave_clicked(void);
     void on_buttonExit_clicked(void);
+    void on_btn_shader_compile_clicked();
+
+    void on_btn_content_path_clicked();
+
+    void on_btn_open_clicked();
+
+    void on_btn_save_clicked();
+
+    void on_btn_saveas_clicked();
+
+    void on_btn_material_editor_clicked();
 
 private:
     

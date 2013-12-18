@@ -9,6 +9,7 @@
 #include "СIESAMainTransition.h"
 #include "IGameObjectExtension.h"
 #include "CShaderExtension.h"
+#include "CUICommon.h"
 
 #endif
 
@@ -35,6 +36,8 @@ CShaderCompileGUI::CShaderCompileGUI(QWidget *parent) :
     m_fsEditor->setFont(ui->source_fs->font());
     m_fsEditor->setStyleSheet(ui->source_fs->styleSheet());
     ui->source_fs->setVisible(false);
+    
+    ui->btn_compile->setStyleSheet(kBtnFocusStyleSheet);
 }
 
 CShaderCompileGUI::~CShaderCompileGUI()

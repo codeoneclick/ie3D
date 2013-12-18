@@ -19,23 +19,14 @@
 		85317E6F3E150DA9A71A5DF3 /* QtCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 273A79FCE36F0DF426F9F3F9 /* QtCore.framework */; };
 		A46B1C6A183CD77C00A3EF49 /* CCodeEditor.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A46B1C68183CD77C00A3EF49 /* CCodeEditor.cpp */; };
 		A46B1C6E183CD79300A3EF49 /* moc_CCodeEditor.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A46B1C6D183CD79300A3EF49 /* moc_CCodeEditor.cpp */; };
-		A4AE4F1C1855BED000AA0732 /* CommonBoundBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4AE4F161855BEC100AA0732 /* CommonBoundBox.frag */; };
-		A4AE4F1D1855BED000AA0732 /* CommonBoundBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4AE4F171855BEC100AA0732 /* CommonBoundBox.vert */; };
 		A4BF8EDD182A80A900B0289E /* CIESAWorkflow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A4BF8ED9182A80A900B0289E /* CIESAWorkflow.cpp */; };
 		A4BF8EDE182A80A900B0289E /* СIESAMainTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A4BF8EDB182A80A900B0289E /* СIESAMainTransition.cpp */; };
 		A4BF8EE1182A84DF00B0289E /* libEGL.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A4BF8EDF182A84DF00B0289E /* libEGL.dylib */; };
 		A4BF8EE2182A84DF00B0289E /* libGLESv2.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A4BF8EE0182A84DF00B0289E /* libGLESv2.dylib */; };
-		A4BF8EE7182A850B00B0289E /* CommonModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8EC7182A807C00B0289E /* CommonModel.frag */; };
-		A4BF8EE8182A850B00B0289E /* CommonModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8EC8182A807C00B0289E /* CommonModel.vert */; };
 		A4BF8EE9182A850B00B0289E /* CommonOutput.frag in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8EC9182A807C00B0289E /* CommonOutput.frag */; };
 		A4BF8EEA182A850B00B0289E /* CommonOutput.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ECA182A807C00B0289E /* CommonOutput.vert */; };
 		A4BF8EEB182A850B00B0289E /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ECB182A807C00B0289E /* main.transition.xml */; };
-		A4BF8EEC182A850C00B0289E /* material.model.Footman.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ECC182A807C00B0289E /* material.model.Footman.common.xml */; };
 		A4BF8EED182A850C00B0289E /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ECD182A807C00B0289E /* material.output.xml */; };
-		A4BF8EEE182A850C00B0289E /* model_02.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ECE182A807C00B0289E /* model_02.MDL_anim */; };
-		A4BF8EEF182A850C00B0289E /* model_02.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ECF182A807C00B0289E /* model_02.MDL_mesh */; };
-		A4BF8EF0182A850C00B0289E /* model_02.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ED0182A807C00B0289E /* model_02.MDL_sk */; };
-		A4BF8EF1182A850C00B0289E /* model_02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ED1182A807C00B0289E /* model_02.pvr */; };
 		A4BF8EF2182A850C00B0289E /* model.Footman.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ED2182A807C00B0289E /* model.Footman.xml */; };
 		A4BF8EF3182A850C00B0289E /* output.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ED3182A807C00B0289E /* output.space.operation.xml */; };
 		A4BF8EF4182A850C00B0289E /* world.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ED4182A807C00B0289E /* world.space.operation.xml */; };
@@ -117,19 +108,11 @@
 		A46B1C68183CD77C00A3EF49 /* CCodeEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCodeEditor.cpp; sourceTree = SOURCE_ROOT; };
 		A46B1C69183CD77C00A3EF49 /* CCodeEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCodeEditor.h; sourceTree = SOURCE_ROOT; };
 		A46B1C6D183CD79300A3EF49 /* moc_CCodeEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moc_CCodeEditor.cpp; sourceTree = SOURCE_ROOT; };
-		A4AE4F161855BEC100AA0732 /* CommonBoundBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonBoundBox.frag; path = Bundle/CommonBoundBox.frag; sourceTree = SOURCE_ROOT; };
-		A4AE4F171855BEC100AA0732 /* CommonBoundBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonBoundBox.vert; path = Bundle/CommonBoundBox.vert; sourceTree = SOURCE_ROOT; };
-		A4BF8EC7182A807C00B0289E /* CommonModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonModel.frag; path = Bundle/CommonModel.frag; sourceTree = SOURCE_ROOT; };
-		A4BF8EC8182A807C00B0289E /* CommonModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonModel.vert; path = Bundle/CommonModel.vert; sourceTree = SOURCE_ROOT; };
+		A49994A51861D45B003DA222 /* CUICommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CUICommon.h; path = Sources/CUICommon.h; sourceTree = SOURCE_ROOT; };
 		A4BF8EC9182A807C00B0289E /* CommonOutput.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonOutput.frag; path = Bundle/CommonOutput.frag; sourceTree = SOURCE_ROOT; };
 		A4BF8ECA182A807C00B0289E /* CommonOutput.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonOutput.vert; path = Bundle/CommonOutput.vert; sourceTree = SOURCE_ROOT; };
 		A4BF8ECB182A807C00B0289E /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = main.transition.xml; path = Bundle/main.transition.xml; sourceTree = SOURCE_ROOT; };
-		A4BF8ECC182A807C00B0289E /* material.model.Footman.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.Footman.common.xml; path = Bundle/material.model.Footman.common.xml; sourceTree = SOURCE_ROOT; };
 		A4BF8ECD182A807C00B0289E /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.output.xml; path = Bundle/material.output.xml; sourceTree = SOURCE_ROOT; };
-		A4BF8ECE182A807C00B0289E /* model_02.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_02.MDL_anim; path = Bundle/model_02.MDL_anim; sourceTree = SOURCE_ROOT; };
-		A4BF8ECF182A807C00B0289E /* model_02.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_02.MDL_mesh; path = Bundle/model_02.MDL_mesh; sourceTree = SOURCE_ROOT; };
-		A4BF8ED0182A807C00B0289E /* model_02.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_02.MDL_sk; path = Bundle/model_02.MDL_sk; sourceTree = SOURCE_ROOT; };
-		A4BF8ED1182A807C00B0289E /* model_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_02.pvr; path = Bundle/model_02.pvr; sourceTree = SOURCE_ROOT; };
 		A4BF8ED2182A807C00B0289E /* model.Footman.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = model.Footman.xml; path = Bundle/model.Footman.xml; sourceTree = SOURCE_ROOT; };
 		A4BF8ED3182A807C00B0289E /* output.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = output.space.operation.xml; path = Bundle/output.space.operation.xml; sourceTree = SOURCE_ROOT; };
 		A4BF8ED4182A807C00B0289E /* world.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = world.space.operation.xml; path = Bundle/world.space.operation.xml; sourceTree = SOURCE_ROOT; };
@@ -256,19 +239,10 @@
 		A4BF8EB7182A805000B0289E /* Bundle */ = {
 			isa = PBXGroup;
 			children = (
-				A4AE4F161855BEC100AA0732 /* CommonBoundBox.frag */,
-				A4AE4F171855BEC100AA0732 /* CommonBoundBox.vert */,
-				A4BF8EC7182A807C00B0289E /* CommonModel.frag */,
-				A4BF8EC8182A807C00B0289E /* CommonModel.vert */,
 				A4BF8EC9182A807C00B0289E /* CommonOutput.frag */,
 				A4BF8ECA182A807C00B0289E /* CommonOutput.vert */,
 				A4BF8ECB182A807C00B0289E /* main.transition.xml */,
-				A4BF8ECC182A807C00B0289E /* material.model.Footman.common.xml */,
 				A4BF8ECD182A807C00B0289E /* material.output.xml */,
-				A4BF8ECE182A807C00B0289E /* model_02.MDL_anim */,
-				A4BF8ECF182A807C00B0289E /* model_02.MDL_mesh */,
-				A4BF8ED0182A807C00B0289E /* model_02.MDL_sk */,
-				A4BF8ED1182A807C00B0289E /* model_02.pvr */,
 				A4BF8ED2182A807C00B0289E /* model.Footman.xml */,
 				A4BF8ED3182A807C00B0289E /* output.space.operation.xml */,
 				A4BF8ED4182A807C00B0289E /* world.space.operation.xml */,
@@ -340,6 +314,7 @@
 				9E5B151FF7491DA5A4C25514 /* CMaterialSettingsGUI.h */,
 				7FC7F8BCCFA5C0A042602223 /* CMaterialExportGUI.h */,
 				A46B1C69183CD77C00A3EF49 /* CCodeEditor.h */,
+				A49994A51861D45B003DA222 /* CUICommon.h */,
 			);
 			name = Sources;
 			sourceTree = "<Group>";
@@ -427,19 +402,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4AE4F1C1855BED000AA0732 /* CommonBoundBox.frag in Resources */,
-				A4AE4F1D1855BED000AA0732 /* CommonBoundBox.vert in Resources */,
-				A4BF8EE7182A850B00B0289E /* CommonModel.frag in Resources */,
-				A4BF8EE8182A850B00B0289E /* CommonModel.vert in Resources */,
 				A4BF8EE9182A850B00B0289E /* CommonOutput.frag in Resources */,
 				A4BF8EEA182A850B00B0289E /* CommonOutput.vert in Resources */,
 				A4BF8EEB182A850B00B0289E /* main.transition.xml in Resources */,
-				A4BF8EEC182A850C00B0289E /* material.model.Footman.common.xml in Resources */,
 				A4BF8EED182A850C00B0289E /* material.output.xml in Resources */,
-				A4BF8EEE182A850C00B0289E /* model_02.MDL_anim in Resources */,
-				A4BF8EEF182A850C00B0289E /* model_02.MDL_mesh in Resources */,
-				A4BF8EF0182A850C00B0289E /* model_02.MDL_sk in Resources */,
-				A4BF8EF1182A850C00B0289E /* model_02.pvr in Resources */,
 				A4BF8EF2182A850C00B0289E /* model.Footman.xml in Resources */,
 				A4BF8EF3182A850C00B0289E /* output.space.operation.xml in Resources */,
 				A4BF8EF4182A850C00B0289E /* world.space.operation.xml in Resources */,

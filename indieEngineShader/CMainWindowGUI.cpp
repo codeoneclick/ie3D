@@ -14,6 +14,7 @@
 #include "CGameLoopExecutor.h"
 #include "IGameObjectExtension.h"
 #include "ITemplate.h"
+#include "CUICommon.h"
 #endif
 
 CMainWindowGUI::CMainWindowGUI(QWidget *parent) :
@@ -31,6 +32,21 @@ CMainWindowGUI::CMainWindowGUI(QWidget *parent) :
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(on_buttonOpen_clicked()));
     connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(on_buttonSave_clicked()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(on_buttonExit_clicked()));
+    
+    ui->btn_shader_compile->setDisabled(true);
+    ui->btn_shader_compile->setStyleSheet(kBtnDisableStyleSheet);
+    
+    ui->btn_open->setDisabled(true);
+    ui->btn_open->setStyleSheet(kBtnDisableStyleSheet);
+    
+    ui->btn_save->setDisabled(true);
+    ui->btn_save->setStyleSheet(kBtnDisableStyleSheet);
+    
+    ui->btn_saveas->setDisabled(true);
+    ui->btn_saveas->setStyleSheet(kBtnDisableStyleSheet);
+    
+    ui->btn_material_editor->setDisabled(true);
+    ui->btn_material_editor->setStyleSheet(kBtnDisableStyleSheet);
 }
 
 CMainWindowGUI::~CMainWindowGUI()
@@ -38,24 +54,9 @@ CMainWindowGUI::~CMainWindowGUI()
     delete ui;
 }
 
-void CMainWindowGUI::on_pushButton_clicked()
-{
-    m_shaderCompileGUI = new CShaderCompileGUI(this);
-    
-#if defined(__OSX__) || defined(__WIN32__)
-    
-    m_shaderCompileGUI->Set_Mode(m_mode);
-    m_shaderCompileGUI->Set_Transition(m_iesaTransition);
-    
-#endif
-    
-    m_shaderCompileGUI->exec();
-}
-
 void CMainWindowGUI::on_pushButton_2_clicked()
 {
-    m_materialSettingsGUI = new CMaterialSettingsGUI(this);
-    m_materialSettingsGUI->show();
+
 }
 
 void CMainWindowGUI::on_pushButton_3_clicked()
@@ -102,6 +103,50 @@ void CMainWindowGUI::on_materials_list_currentIndexChanged(const QString &arg1)
 
 void CMainWindowGUI::on_buttonOpen_clicked(void)
 {
+}
+
+void CMainWindowGUI::on_buttonSave_clicked(void)
+{
+    std::cout<<"save action"<<std::endl;
+}
+
+void CMainWindowGUI::on_buttonExit_clicked(void)
+{
+    std::cout<<"exit action"<<std::endl;
+}
+
+void CMainWindowGUI::on_btn_shader_compile_clicked()
+{
+    m_shaderCompileGUI = new CShaderCompileGUI(this);
+    
+#if defined(__OSX__) || defined(__WIN32__)
+    
+    m_shaderCompileGUI->Set_Mode(m_mode);
+    m_shaderCompileGUI->Set_Transition(m_iesaTransition);
+    
+#endif
+    
+    m_shaderCompileGUI->exec();
+}
+
+void CMainWindowGUI::on_btn_content_path_clicked()
+{
+    QString path = QFileDialog::getExistingDirectory();
+    if (path.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        ui->lbl_content_path->setText("path: " + path);
+        ui->btn_open->setDisabled(false);
+        ui->btn_open->setStyleSheet(kBtnEnableStyleSheet);
+        Set_BundlePath(path.toUtf8().constData());
+    }
+}
+
+void CMainWindowGUI::on_btn_open_clicked()
+{
     QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), "", tr("Files (*.xml)"));
     if (filename.isEmpty())
     {
@@ -123,6 +168,17 @@ void CMainWindowGUI::on_buttonOpen_clicked(void)
                 ui->materials_list->addItem(materialTemplate->m_renderMode.c_str());
             }
             m_mode = ui->materials_list->currentText().toUtf8().constData();
+            ui->btn_shader_compile->setDisabled(ui->materials_list->count() == 0);
+            ui->btn_shader_compile->setStyleSheet(ui->materials_list->count() == 0 ? kBtnDisableStyleSheet : kBtnFocusStyleSheet);
+            
+            ui->btn_material_editor->setDisabled(ui->materials_list->count() == 0);
+            ui->btn_material_editor->setStyleSheet(ui->materials_list->count() == 0 ? kBtnDisableStyleSheet : kBtnFocusStyleSheet);
+            
+            ui->btn_save->setDisabled(false);
+            ui->btn_save->setStyleSheet(kBtnEnableStyleSheet);
+            
+            ui->btn_saveas->setDisabled(false);
+            ui->btn_saveas->setStyleSheet(kBtnEnableStyleSheet);
         };
         handler = std::make_shared<std::function<void(const std::shared_ptr<ITemplate>&)>>(function);
         m_iesaTransition->Get_GameObjectExtension()->Get_Template(handler);
@@ -131,12 +187,18 @@ void CMainWindowGUI::on_buttonOpen_clicked(void)
     }
 }
 
-void CMainWindowGUI::on_buttonSave_clicked(void)
+void CMainWindowGUI::on_btn_save_clicked()
 {
-    std::cout<<"save action"<<std::endl;
+
 }
 
-void CMainWindowGUI::on_buttonExit_clicked(void)
+void CMainWindowGUI::on_btn_saveas_clicked()
 {
-    std::cout<<"exit action"<<std::endl;
+
+}
+
+void CMainWindowGUI::on_btn_material_editor_clicked()
+{
+    m_materialSettingsGUI = new CMaterialSettingsGUI(this);
+    m_materialSettingsGUI->show();
 }

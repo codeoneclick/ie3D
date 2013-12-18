@@ -18,7 +18,7 @@ private:
     typedef std::function<void(ui32)> __MOVE_CONTROLLER_UPDATE_COMMAND;
     
     friend class IMoveControllerHandler;
-    friend class CMoveController;
+    friend class CMoveControllerRecognizer;
     
     __MOVE_CONTROLLER_UPDATE_COMMAND m_moveControllerUpdateCommand;
     
@@ -39,7 +39,7 @@ class IMoveControllerHandler
 {
 private:
     
-    friend class CMoveController;
+    friend class CMoveControllerRecognizer;
     
     CMoveControllerCommands m_commands;
     

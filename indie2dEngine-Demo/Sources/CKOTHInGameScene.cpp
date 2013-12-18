@@ -18,30 +18,13 @@
 #include "CCamera.h"
 #include "CNavigator.h"
 #include "CCharacterController.h"
+#include "CMoveControllerRecognizer.h"
 #include "CGUIContainer.h"
-
-#if defined(__IOS__) || defined(__OSX__)
-
-extern void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
-extern void UnregisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler);
-
-#elif defined(__WIN32__) || defined(__NDK__)
-
-void RegisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler)
-{
-
-};
-
-void UnregisterMoveControllerHandler(std::shared_ptr<IMoveControllerHandler> _handler)
-{
-
-};
-
-#endif
 
 CKOTHInGameScene::CKOTHInGameScene(IGameTransition* _root) :
 IScene(_root),
 m_navigator(nullptr),
+m_moveControllerRecognizer(nullptr),
 m_characterController(nullptr)
 {
 
@@ -120,6 +103,8 @@ void CKOTHInGameScene::Load(void)
     m_root->InsertParticleEmitter(particleEmitter);
     
     m_root->RegisterCollisionHandler(shared_from_this());
+    m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
+    m_root->RegisterTapRecognizerHandler(m_moveControllerRecognizer);
 
 	/*std::shared_ptr<CGUIContainer> guicontainer = m_root->CreateGUIContainer("guicontainer.xml");
 	m_root->InsertGUIContainer(guicontainer);
@@ -135,7 +120,7 @@ void CKOTHInGameScene::Load(void)
     m_characterController->Set_Character(m_models[0]);
     m_characterController->Set_Navigator(m_navigator);
 	m_characterController->Set_Position(glm::vec3(24.0f, 0.0f, 24.0f));
-    RegisterMoveControllerHandler(m_characterController);
+    m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);
 }
 
 void CKOTHInGameScene::OnUpdate(f32 _deltatime)

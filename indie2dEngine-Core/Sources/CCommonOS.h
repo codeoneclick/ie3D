@@ -20,6 +20,7 @@ f32 Get_Random(f32 _minValue, f32 _maxValue);
 
 #if defined(__OSX__)
 
+void Set_BundlePath(const std::string& _path);
 void Set_ScreenWidth(ui32 _width);
 void Set_ScreenHeight(ui32 _height);
 

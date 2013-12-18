@@ -18,6 +18,7 @@
 #include "CBillboard.h"
 #include "CParticleEmitter.h"
 #include "ICollisionHandler.h"
+#include "IInputContext.h"
 
 CSceneGraph::CSceneGraph(void) :
 m_camera(nullptr),
@@ -190,3 +191,16 @@ void CSceneGraph::UnregisterCollisionHandler(const std::shared_ptr<ICollisionHan
     assert(m_collisionMgr != nullptr);
     m_collisionMgr->UnregisterCollisionHandler(_handler);
 }
+
+void CSceneGraph::RegisterTapRecognizerHandler(const std::shared_ptr<IInputTapRecognizerHandler>& _handler)
+{
+    assert(m_inputContext != nullptr);
+    m_inputContext->RegisterTapRecognizerHandler(_handler);
+}
+
+void CSceneGraph::UnregisterTapRecognizerHandler(const std::shared_ptr<IInputTapRecognizerHandler>& _handler)
+{
+    assert(m_inputContext != nullptr);
+    m_inputContext->UnregisterTapRecognizerHandler(_handler);
+}
+

@@ -69,7 +69,10 @@ IInputContext::IInputContext(void* _window)
 
     CInputRecognizerWindow* inputRecognizerWindow = [CInputRecognizerWindow new];
     inputRecognizerWindow.m_context = this;
-    inputRecognizerWindow.frame = CGRectMake(0.0f, 0.0f, window.frame.size.width, window.frame.size.height);
+    inputRecognizerWindow.frame = CGRectMake(0.0f,
+                                             0.0f,
+                                             window.frame.size.width,
+                                             window.frame.size.height);
     [window addSubview:inputRecognizerWindow];
 }
 

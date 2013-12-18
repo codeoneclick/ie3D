@@ -12,7 +12,6 @@
 #include "HCommon.h"
 #include "IScene.h"
 
-
 class IGameTransition;
 class IGameObject;
 class CModel;
@@ -20,6 +19,7 @@ class CLight;
 class CCamera;
 class CNavigator;
 class CCharacterController;
+class CMoveControllerRecognizer;
 
 class CKOTHInGameScene final : public IScene
 {
@@ -27,6 +27,7 @@ private:
     
 protected:
     
+    std::shared_ptr<CMoveControllerRecognizer> m_moveControllerRecognizer;
     std::shared_ptr<CCharacterController> m_characterController;
     std::shared_ptr<CNavigator> m_navigator;
     
