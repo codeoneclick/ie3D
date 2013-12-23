@@ -12,8 +12,73 @@
 #include "HCommon.h"
 #include "HEnums.h"
 
-typedef std::pair<E_TEMPLATE_META_TYPE, std::tuple<bool, i8, ui8, i16, ui16, i32, ui32, f32, std::string>>
-TTemplateAttribute;
+class TTemplateAttribute
+{
+private:
+    
+protected:
+    
+    E_TEMPLATE_META_TYPE m_metaType;
+    union
+    {
+        bool        m_BOOL;
+        i8          m_I8;
+        ui8         m_UI8;
+        i16         m_I16;
+        ui16        m_UI16;
+        i32         m_I32;
+        ui32        m_UI32;
+        f32         m_F32;
+        char*       m_STRING;
+    } m_data;
+    
+public:
+    
+    TTemplateAttribute(bool _value) { m_data.m_BOOL = _value; m_metaType = E_TEMPLATE_META_TYPE_BOOL; };
+    TTemplateAttribute(i8 _value) { m_data.m_I8 = _value; m_metaType = E_TEMPLATE_META_TYPE_I8; };
+    TTemplateAttribute(ui8 _value) { m_data.m_UI8 = _value; m_metaType = E_TEMPLATE_META_TYPE_UI8; };
+    TTemplateAttribute(i16 _value) { m_data.m_I16 = _value; m_metaType = E_TEMPLATE_META_TYPE_I16; };
+    TTemplateAttribute(ui16 _value) { m_data.m_UI16 = _value; m_metaType = E_TEMPLATE_META_TYPE_UI16; };
+    TTemplateAttribute(i32 _value) { m_data.m_I32 = _value; m_metaType = E_TEMPLATE_META_TYPE_I32; };
+    TTemplateAttribute(ui32 _value) { m_data.m_UI32 = _value; m_metaType = E_TEMPLATE_META_TYPE_UI32; };
+    TTemplateAttribute(f32 _value) { m_data.m_F32 = _value; m_metaType = E_TEMPLATE_META_TYPE_F32; };
+    TTemplateAttribute(const char* _value) { strcpy(m_data.m_STRING, _value); m_metaType = E_TEMPLATE_META_TYPE_STRING; };
+    
+    E_TEMPLATE_META_TYPE Get_MetaType(void);
+    bool Get_Bool(void);
+    i8 Get_I8(void);
+    ui8 Get_UI8(void);
+    i16 Get_I16(void);
+    ui16 Get_UI16(void);
+    i32 Get_I32(void);
+    ui32 Get_UI32(void);
+    f32 Get_F32(void);
+    std::string Get_String(void);
+};
+
+#if defined(__IOS__) || defined(__OSX__) || defined(__NDK__)
+
+extern std::map<std::string, GLenum> g_glenumToString;
+extern std::map<GLenum, std::string> g_stringToGLenum;
+
+#elif defined(__WIN32__)
+
+#endif
+
+template <class ...Args>
+std::string Get_TemplateAttributeKey(const Args&... args)
+{
+    std::vector<std::string> keys = {args...};
+    assert(keys.size() != 0);
+    std::string key = "";
+    for (ui32 i = 0; i < (keys.size() - 1); ++i)
+    {
+        key.append(keys[i] + ":");
+    }
+    key.append(keys[keys.size() - 1]);
+    assert(key.length() != 0);
+    return key;
+}
 
 class I_RO_TemplateCommon
 {
@@ -25,9 +90,6 @@ public:
     
     I_RO_TemplateCommon(void);
     ~I_RO_TemplateCommon(void);
-    
-    virtual std::string Get_Path(void) = 0;
-    virtual std::string Get_Filename(void) = 0;
 };
 
 class I_RW_TemplateCommon
@@ -40,9 +102,6 @@ public:
     
     I_RW_TemplateCommon(void);
     ~I_RW_TemplateCommon(void);
-    
-    virtual void Set_Path(const std::string& _path) = 0;
-    virtual void Set_Filename(const std::string& _filename) = 0;
     
     virtual void Set_Attribute(const std::string& _attributeName,
                                E_TEMPLATE_META_TYPE _metaType,
@@ -63,21 +122,13 @@ private:
     
 protected:
     
-    std::string m_path;
-    std::string m_filename;
-    std::map<std::string, std::vector<TTemplateAttribute>> m_attributes;
+    std::map<std::string, std::vector<std::shared_ptr<TTemplateAttribute>>> m_attributes;
     std::map<std::string, std::vector<std::shared_ptr<I_RO_TemplateCommon>>> m_templates;
     
 public:
     
     CTemplateCommon(void);
     ~CTemplateCommon(void);
-    
-    std::string Get_Path(void);
-    std::string Get_Filename(void);
-    
-    void Set_Path(const std::string& _path);
-    void Set_Filename(const std::string& _filename);
     
     void Set_Attribute(const std::string& _attributeName,
                        E_TEMPLATE_META_TYPE _metaType,

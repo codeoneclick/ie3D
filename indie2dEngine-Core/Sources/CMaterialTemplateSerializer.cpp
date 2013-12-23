@@ -8,37 +8,8 @@
 
 #include "CMaterialTemplateSerializer.h"
 #include "ITemplate.h"
+#include "CTemplateCommon.h"
 
-#if defined(__IOS__) || defined(__OSX__) || defined(__NDK__)
-
-std::map<std::string, GLenum> g_glEnumContainer = {
-    {"GL_FRONT", GL_FRONT},
-    {"GL_BACK", GL_BACK},
-    {"GL_SRC_ALPHA", GL_SRC_ALPHA},
-    {"GL_ONE_MINUS_SRC_ALPHA", GL_ONE_MINUS_SRC_ALPHA},
-    {"GL_REPEAT", GL_REPEAT},
-    {"GL_CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE },
-    {"GL_MIRRORED_REPEAT", GL_MIRRORED_REPEAT }
-};
-
-#elif defined(__WIN32__)
-
-static std::map<std::string, GLenum> __CreateGlEnumContainer(void)
-{
-	 std::map<std::string, GLenum> container;
-	 container.insert(std::make_pair("GL_FRONT", GL_FRONT));
-	 container.insert(std::make_pair("GL_BACK", GL_BACK));
-	 container.insert(std::make_pair("GL_SRC_ALPHA", GL_SRC_ALPHA));
-	 container.insert(std::make_pair("GL_ONE_MINUS_SRC_ALPHA", GL_ONE_MINUS_SRC_ALPHA));
-	 container.insert(std::make_pair("GL_REPEAT", GL_REPEAT));
-	 container.insert(std::make_pair("GL_CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE));
-	 container.insert(std::make_pair("GL_MIRRORED_REPEAT", GL_MIRRORED_REPEAT));
-	 return container;
-};
-
-std::map<std::string, GLenum> g_glEnumContainer = __CreateGlEnumContainer();
-
-#endif
 
 CMaterialTemplateSerializer::CMaterialTemplateSerializer(void)
 {
@@ -66,16 +37,16 @@ std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::str
     materialTemplate->m_isBlend = node.attribute("is_blend").as_bool();
     
     std::string cullFaceModeStr = node.attribute("cull_face_mode").as_string();
-    assert(g_glEnumContainer.find(cullFaceModeStr) != g_glEnumContainer.end());
-    materialTemplate->m_cullFaceMode = g_glEnumContainer.find(cullFaceModeStr)->second;
+    assert(g_glenumToString.find(cullFaceModeStr) != g_glenumToString.end());
+    materialTemplate->m_cullFaceMode = g_glenumToString.find(cullFaceModeStr)->second;
     
     std::string blendFunctionSourceStr = node.attribute("blend_function_source").as_string();
-    assert(g_glEnumContainer.find(blendFunctionSourceStr) != g_glEnumContainer.end());
-    materialTemplate->m_blendFunctionSource = g_glEnumContainer.find(blendFunctionSourceStr)->second;
+    assert(g_glenumToString.find(blendFunctionSourceStr) != g_glenumToString.end());
+    materialTemplate->m_blendFunctionSource = g_glenumToString.find(blendFunctionSourceStr)->second;
     
     std::string blendFunctionDestinationStr = node.attribute("blend_function_destination").as_string();
-    assert(g_glEnumContainer.find(blendFunctionDestinationStr) != g_glEnumContainer.end());
-    materialTemplate->m_blendFunctionDestination = g_glEnumContainer.find(blendFunctionDestinationStr)->second;
+    assert(g_glenumToString.find(blendFunctionDestinationStr) != g_glenumToString.end());
+    materialTemplate->m_blendFunctionDestination = g_glenumToString.find(blendFunctionDestinationStr)->second;
     
     materialTemplate->m_isClipping = node.attribute("is_cliping").as_bool();
     
@@ -102,8 +73,8 @@ std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::str
         textureTemplate->m_sampler = texture.attribute("slot").as_uint();
         
         std::string wrapStr = texture.attribute("wrap").as_string();
-        assert(g_glEnumContainer.find(wrapStr) != g_glEnumContainer.end());
-        textureTemplate->m_wrap = g_glEnumContainer.find(wrapStr)->second;
+        assert(g_glenumToString.find(wrapStr) != g_glenumToString.end());
+        textureTemplate->m_wrap = g_glenumToString.find(wrapStr)->second;
         materialTemplate->m_texturesTemplates.push_back(textureTemplate);
     }
     return materialTemplate;
