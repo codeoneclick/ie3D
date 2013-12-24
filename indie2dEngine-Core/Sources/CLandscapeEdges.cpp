@@ -13,7 +13,7 @@
 #include "CCamera.h"
 #include "CLight.h"
 #include "CResourceAccessor.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "CAABoundBox.h"
 #include "CRenderMgr.h"
 #include "CBatchingMgr.h"
@@ -64,24 +64,26 @@ void CLandscapeEdges::_Set_EdgeTexture(const std::shared_ptr<CTexture>& _texture
     }
 }
 
-void CLandscapeEdges::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+void CLandscapeEdges::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
-    std::shared_ptr<SLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<SLandscapeTemplate>(_template);
+    std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<CLandscapeTemplate>(_template);
     assert(m_resourceAccessor != nullptr);
     
-    m_width = landscapeTemplate->m_width;
-    m_height = landscapeTemplate->m_height;
-    m_heightBounds = glm::vec2(landscapeTemplate->m_edgesBound_x, landscapeTemplate->m_edgesBound_y);
+    m_width = landscapeTemplate->Get_Size().x;
+    m_height = landscapeTemplate->Get_Size().y;
+    m_heightBounds = glm::vec2(landscapeTemplate->Get_EdgesSize().x, landscapeTemplate->Get_EdgesSize().y);
     
-    for(const auto& materialTemplate : landscapeTemplate->m_edgesMaterials)
+    for(const auto& iterator : landscapeTemplate->Get_EdgesMaterialsTemplates())
     {
-        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
-                                                                           materialTemplate->m_shaderTemplate->m_fsFilename);
+        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(iterator);
+        std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+                                                                           shaderTemplate->Get_FSFilename());
         assert(shader != nullptr);
         shader->Register_LoadingHandler(shared_from_this());
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_renderMode);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->Get_RenderOperationName());
 		material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
-        m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
+        m_materials.insert(std::make_pair(materialTemplate->Get_RenderOperationName(), material));
         CLandscapeEdges::_OnResourceLoaded(material, true);
     }
     

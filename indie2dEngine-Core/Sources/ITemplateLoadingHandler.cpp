@@ -25,7 +25,7 @@ void CTemplateLoadingCommands::_ConnectTemplateLoadedCommand(const __TEMPLATE_LO
     m_templateLoadedCommand = _command;
 }
 
-void CTemplateLoadingCommands::_ExecuteTemplateLoadedCommand(const std::shared_ptr<ITemplate>& _template)
+void CTemplateLoadingCommands::_ExecuteTemplateLoadedCommand(const std::shared_ptr<I_RO_TemplateCommon>& _template)
 {
     assert(m_templateLoadedCommand != nullptr);
     m_templateLoadedCommand(_template);

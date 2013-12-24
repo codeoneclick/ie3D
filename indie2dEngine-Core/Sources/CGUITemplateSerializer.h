@@ -12,7 +12,7 @@
 #include "ITemplateSerializer.h"
 #include "HEnums.h"
 
-class CGUITemplateSerializer final : public ITemplateSerializer
+/*class CGUITemplateSerializer final : public ITemplateSerializer
 {
 private:
     
@@ -28,6 +28,6 @@ public:
     std::shared_ptr<ITemplate> Serialize(const std::string& _filename);
     std::shared_ptr<ITemplate> Serialize(const std::string& _host, ui32 _port, const std::string& _filename);
     void Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template);
-};
+};*/
 
 #endif 

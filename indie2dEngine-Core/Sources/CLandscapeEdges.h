@@ -32,7 +32,7 @@ protected:
     void _OnUnbind(const std::string& _mode);
     void _OnBatch(const std::string& _mode);
     
-    void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
     void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
     
 public:

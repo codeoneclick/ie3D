@@ -8,7 +8,7 @@
 
 #include "CGameTransitionTemplateLoader.h"
 #include "CGameTransitionTemplateLoadingOperation.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "ITemplateLoadingHandler.h"
 
 CGameTransitionTemplateLoader::CGameTransitionTemplateLoader(void)
@@ -28,11 +28,11 @@ void CGameTransitionTemplateLoader::Load(const std::string& _filename, std::shar
     {
 #endif
         std::shared_ptr<CGameTransitionTemplateLoadingOperation> gameTransitionTemplateLoadingOperation = std::make_shared<CGameTransitionTemplateLoadingOperation>();
-        std::shared_ptr<SGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<SGameTransitionTemplate>(gameTransitionTemplateLoadingOperation->Serialize(_filename));
+        std::shared_ptr<CGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<CGameTransitionTemplate>(gameTransitionTemplateLoadingOperation->Serialize(_filename));
         assert(gameTransitionTemplate != nullptr);
         assert(_handler != nullptr);
 #if defined(__USE_GCDPP__)
-        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SGameTransitionTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SGameTransitionTemplate> _template)
+        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<CGameTransitionTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<CGameTransitionTemplate> _template)
         {
              _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
         };

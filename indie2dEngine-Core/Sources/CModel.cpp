@@ -13,7 +13,7 @@
 #include "CCamera.h"
 #include "CLight.h"
 #include "CResourceAccessor.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "CAABoundBox.h"
 #include "CRenderMgr.h"
 #include "CBatchingMgr.h"
@@ -60,39 +60,41 @@ CModel::~CModel(void)
     m_sequences.clear();
 }
 
-void CModel::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+void CModel::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
-    std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(_template);
+    std::shared_ptr<CModelTemplate> modelTemplate = std::static_pointer_cast<CModelTemplate>(_template);
     assert(m_resourceAccessor != nullptr);
-    m_mesh = m_resourceAccessor->CreateMesh(modelTemplate->m_meshFilename);
+    m_mesh = m_resourceAccessor->CreateMesh(modelTemplate->Get_MeshFilename());
     m_mesh->Register_LoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
     
-    if(modelTemplate->m_skeletonFilename.size() != 0)
+    if(modelTemplate->Get_SkeletonFilename().size() != 0)
     {
-        m_skeleton = m_resourceAccessor->CreateSkeleton(modelTemplate->m_skeletonFilename);
+        m_skeleton = m_resourceAccessor->CreateSkeleton(modelTemplate->Get_SkeletonFilename());
         assert(m_skeleton != nullptr);
         m_skeleton->Register_LoadingHandler(shared_from_this());
     }
     
-    for(const auto& materialTemplate : modelTemplate->m_materialsTemplates)
+    for(const auto& iterator : modelTemplate->Get_MaterialsTemplates())
     {
-        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
-                                                                           materialTemplate->m_shaderTemplate->m_fsFilename);
+        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(iterator);
+        std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+                                                                           shaderTemplate->Get_FSFilename());
         assert(shader != nullptr);
         shader->Register_LoadingHandler(shared_from_this());
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_renderMode);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->Get_RenderOperationName());
 		material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
-        material->Set_IsBatching(modelTemplate->m_isBatching);
-        m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
+        material->Set_IsBatching(modelTemplate->Get_IsBatching());
+        m_materials.insert(std::make_pair(materialTemplate->Get_RenderOperationName(), material));
         CModel::_OnResourceLoaded(material, true);
     }
     
-    for(const auto& name : modelTemplate->m_sequencesFilenames)
+    for(const auto& iterator : modelTemplate->Get_SequencesFilenames())
     {
-        std::shared_ptr<CSequence> sequence = m_resourceAccessor->CreateSequence(name);
+        std::shared_ptr<CSequence> sequence = m_resourceAccessor->CreateSequence(iterator);
         assert(sequence != nullptr);
-        sequence->Set_Name(name);
+        sequence->Set_Name(iterator);
         m_sequences.insert(sequence);
         sequence->Register_LoadingHandler(shared_from_this());
     }

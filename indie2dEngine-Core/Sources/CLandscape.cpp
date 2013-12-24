@@ -13,7 +13,7 @@
 #include "CCamera.h"
 #include "CLight.h"
 #include "CResourceAccessor.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "CAABoundBox.h"
 #include "CRenderMgr.h"
 #include "CBatchingMgr.h"
@@ -39,9 +39,9 @@ CLandscape::~CLandscape(void)
 
 }
 
-void CLandscape::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+void CLandscape::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
-    std::shared_ptr<SLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<SLandscapeTemplate>(_template);
+    std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<CLandscapeTemplate>(_template);
     assert(m_resourceAccessor != nullptr);
     assert(m_screenSpaceTextureAccessor != nullptr);
     
@@ -54,20 +54,24 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_heightmapProcessor->PreprocessHeightmapTexture();
     m_heightmapProcessor->PreprocessEdgesMaskTexture();
     
-    m_splattingDiffuseMaterialShader = m_resourceAccessor->CreateShader(landscapeTemplate->m_splattingDiffuseMaterial->m_shaderTemplate->m_vsFilename,
-                                                                        landscapeTemplate->m_splattingDiffuseMaterial->m_shaderTemplate->m_fsFilename);
+    std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(landscapeTemplate->Get_SplattingDiffuseMaterialTemplate());
+    std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+    m_splattingDiffuseMaterialShader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+                                                                        shaderTemplate->Get_FSFilename());
     assert(m_splattingDiffuseMaterialShader != nullptr);
-    m_splattingDiffuseMaterial = std::make_shared<CMaterial>(m_splattingDiffuseMaterialShader, landscapeTemplate->m_splattingDiffuseMaterial->m_renderMode);
-    m_splattingDiffuseMaterial->Serialize(landscapeTemplate->m_splattingDiffuseMaterial, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
+    m_splattingDiffuseMaterial = std::make_shared<CMaterial>(m_splattingDiffuseMaterialShader, materialTemplate->Get_RenderOperationName());
+    m_splattingDiffuseMaterial->Serialize(landscapeTemplate->Get_SplattingDiffuseMaterialTemplate(), m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
     m_splattingDiffuseMaterial->Set_Texture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     CLandscape::_OnResourceLoaded(m_splattingDiffuseMaterial, true);
     m_splattingDiffuseMaterialShader->Register_LoadingHandler(shared_from_this());
     
-    m_splattingNormalMaterialShader = m_resourceAccessor->CreateShader(landscapeTemplate->m_splattingNormalMaterial->m_shaderTemplate->m_vsFilename,
-                                                                       landscapeTemplate->m_splattingNormalMaterial->m_shaderTemplate->m_fsFilename);
+    materialTemplate = std::static_pointer_cast<CTemplateMaterial>(landscapeTemplate->Get_SplattingNormalMaterialTemplate());
+    shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+    m_splattingNormalMaterialShader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+                                                                       shaderTemplate->Get_FSFilename());
     assert(m_splattingNormalMaterialShader != nullptr);
-    m_splattingNormalMaterial = std::make_shared<CMaterial>(m_splattingNormalMaterialShader, landscapeTemplate->m_splattingNormalMaterial->m_renderMode);
-    m_splattingNormalMaterial->Serialize(landscapeTemplate->m_splattingNormalMaterial, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
+    m_splattingNormalMaterial = std::make_shared<CMaterial>(m_splattingNormalMaterialShader, materialTemplate->Get_RenderOperationName());
+    m_splattingNormalMaterial->Serialize(landscapeTemplate->Get_SplattingNormalMaterialTemplate(), m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
     m_splattingNormalMaterial->Set_Texture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     CLandscape::_OnResourceLoaded(m_splattingNormalMaterial, true);
     m_splattingNormalMaterialShader->Register_LoadingHandler(shared_from_this());

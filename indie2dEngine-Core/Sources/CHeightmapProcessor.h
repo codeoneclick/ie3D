@@ -17,7 +17,7 @@ class CMesh;
 class CVertexBuffer;
 class CIndexBuffer;
 class IScreenSpaceTextureAccessor;
-struct SLandscapeTemplate;
+class I_RO_TemplateCommon;
 
 class CHeightmapProcessor
 {
@@ -58,7 +58,7 @@ protected:
 
 public:
 
-    CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<SLandscapeTemplate>& _template);
+    CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<I_RO_TemplateCommon>& _template);
     ~CHeightmapProcessor(void);
 
     std::shared_ptr<CTexture> PreprocessHeightmapTexture(void);

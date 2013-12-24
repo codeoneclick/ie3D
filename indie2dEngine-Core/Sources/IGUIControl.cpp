@@ -75,7 +75,7 @@ void IGUIControl::ListenSceneUpdateMgr(bool _value)
     m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
 }
 
-void IGUIControl::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+void IGUIControl::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     assert(false);
 }

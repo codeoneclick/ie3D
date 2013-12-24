@@ -9,7 +9,7 @@
 #include "COceanTemplateLoadingOperation.h"
 #include "CMaterialTemplateLoadingOperation.h"
 #include "COceanTemplateSerializer.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 
 COceanTemplateLoadingOperation::COceanTemplateLoadingOperation(void)
 {
@@ -21,17 +21,21 @@ COceanTemplateLoadingOperation::~COceanTemplateLoadingOperation(void)
     
 }
 
-std::shared_ptr<ITemplate> COceanTemplateLoadingOperation::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> COceanTemplateLoadingOperation::Serialize(const std::string& _filename)
 {
     std::shared_ptr<COceanTemplateSerializer> oceanSerializer = std::make_shared<COceanTemplateSerializer>();
-    std::shared_ptr<SOceanTemplate> oceanTemplate = std::static_pointer_cast<SOceanTemplate>(oceanSerializer->Serialize(_filename));
+    std::shared_ptr<COceanTemplate> oceanTemplate = std::static_pointer_cast<COceanTemplate>(oceanSerializer->Serialize(_filename));
     assert(oceanTemplate != nullptr);
-    for(const auto& iterator : oceanTemplate->m_materialsFilenames)
+    std::vector<std::string> materialsTemplatesFilenames = oceanTemplate->Get_MaterialsTemplatesFilenames();
+    for(const auto& iterator : materialsTemplatesFilenames)
     {
         std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-        std::shared_ptr<SMaterialTemplate> materialTemplate = std::static_pointer_cast<SMaterialTemplate>(materialLoadingOperation->Serialize(iterator));
+        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(iterator));
         assert(materialTemplate != nullptr);
-        oceanTemplate->m_materialsTemplates.push_back(materialTemplate);
+        oceanTemplate->Set_Template(Get_TemplateAttributeKey(oceanTemplate->kGameObjectMaterialsTemplatesNode,
+                                                             oceanTemplate->kGameObjectMaterialTemplateNode,
+                                                             oceanTemplate->kGameObjectMaterialFilenameAttribute),
+                                    materialTemplate);
     }
     return oceanTemplate;
 }

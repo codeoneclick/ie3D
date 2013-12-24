@@ -9,7 +9,7 @@
 #include "CParticleEmitterLoadingOperation.h"
 #include "CMaterialTemplateLoadingOperation.h"
 #include "CParticleEmitterTemplateSerializer.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 
 CParticleEmitterLoadingOperation::CParticleEmitterLoadingOperation(void)
 {
@@ -21,17 +21,21 @@ CParticleEmitterLoadingOperation::~CParticleEmitterLoadingOperation(void)
     
 }
 
-std::shared_ptr<ITemplate> CParticleEmitterLoadingOperation::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CParticleEmitterLoadingOperation::Serialize(const std::string& _filename)
 {
     std::shared_ptr<CParticleEmitterTemplateSerializer> particleEmitterSerializer = std::make_shared<CParticleEmitterTemplateSerializer>();
-    std::shared_ptr<SModelTemplate> particleEmitterTemplate = std::static_pointer_cast<SModelTemplate>(particleEmitterSerializer->Serialize(_filename));
+    std::shared_ptr<CParticleEmitterTemplate> particleEmitterTemplate = std::static_pointer_cast<CParticleEmitterTemplate>(particleEmitterSerializer->Serialize(_filename));
     assert(particleEmitterTemplate != nullptr);
-    for(const auto& iterator : particleEmitterTemplate->m_materialsFilenames)
+    std::vector<std::string> materialsTemplatesFilenames = particleEmitterTemplate->Get_MaterialsTemplatesFilenames();
+    for(const auto& iterator : materialsTemplatesFilenames)
     {
         std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-        std::shared_ptr<SMaterialTemplate> materialTemplate = std::static_pointer_cast<SMaterialTemplate>(materialLoadingOperation->Serialize(iterator));
+        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(iterator));
         assert(materialTemplate != nullptr);
-        particleEmitterTemplate->m_materialsTemplates.push_back(materialTemplate);
+        particleEmitterTemplate->Set_Template(Get_TemplateAttributeKey(particleEmitterTemplate->kGameObjectMaterialsTemplatesNode,
+                                                                       particleEmitterTemplate->kGameObjectMaterialTemplateNode,
+                                                                       particleEmitterTemplate->kGameObjectMaterialFilenameAttribute),
+                                              materialTemplate);
     }
     return particleEmitterTemplate;
 }

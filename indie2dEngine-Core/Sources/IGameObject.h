@@ -50,7 +50,7 @@ protected:
     glm::vec3 m_scale;
     
     std::map<std::string, std::shared_ptr<CMaterial> > m_materials;
-    std::shared_ptr<ITemplate> m_template;
+    std::shared_ptr<I_RO_TemplateCommon> m_template;
     std::shared_ptr<CMaterial> m_debugBoundBoxMaterial;
     std::shared_ptr<CMesh> m_mesh;
     
@@ -74,7 +74,7 @@ protected:
     virtual void _OnSceneUpdate(f32 _deltatime);
     
     virtual void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
-    virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    virtual void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
     
     virtual i32 _OnQueuePosition(void);
     virtual bool _OnOcclusion(void);

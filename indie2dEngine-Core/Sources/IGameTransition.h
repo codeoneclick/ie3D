@@ -47,7 +47,7 @@ protected:
     virtual void _OnActivate(void);
     virtual void _OnDeactivate(void);
     
-    virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    virtual void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
     virtual void _OnLoaded(void);
     
     virtual void _OnGameLoopUpdate(f32 _deltatime);

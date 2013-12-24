@@ -50,9 +50,9 @@ void CGUIContainer::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool
 	IGUIControl::_OnResourceLoaded(_resource, _success);
 }
 
-void CGUIContainer::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+void CGUIContainer::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
-	std::shared_ptr<SGUIContainerTemplate> guicontainerTemplate = std::static_pointer_cast<SGUIContainerTemplate>(_template);
+	/*std::shared_ptr<SGUIContainerTemplate> guicontainerTemplate = std::static_pointer_cast<SGUIContainerTemplate>(_template);
     assert(m_resourceAccessor != nullptr);
 	m_quad = m_quad = std::make_shared<CQuad>();
     assert(m_quad != nullptr);
@@ -68,7 +68,7 @@ void CGUIContainer::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
 	m_materialModeName = guicontainerTemplate->m_materialsTemplate->m_renderMode;
 
 	IGUIControl::ListenRenderMgr(m_isNeedToRender);
-    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;*/
 }
 
 void CGUIContainer::_OnSceneUpdate(f32 _deltatime)

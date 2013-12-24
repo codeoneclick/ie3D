@@ -28,7 +28,7 @@ void CGUITemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITem
 
 void CGUITemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler, E_GUI_LOADING_SCHEME _scheme)
 {
-#if defined(__USE_GCDPP__)
+/*#if defined(__USE_GCDPP__)
     std::function<void(std::string, std::shared_ptr<ITemplateLoadingHandler>)> function = [_scheme](std::string _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
     {
 #endif
@@ -47,4 +47,5 @@ void CGUITemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITem
 #else
 	_handler->_Get_Commands()._ExecuteTemplateLoadedCommand(guiTemplate);
 #endif
+*/
 }

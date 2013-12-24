@@ -70,7 +70,7 @@ protected:
 	virtual void _OnSceneUpdate(f32 _deltatime);
     
     virtual void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
-    virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    virtual void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
     
     virtual i32 _OnQueuePosition(void);
     virtual bool _OnOcclusion(void);

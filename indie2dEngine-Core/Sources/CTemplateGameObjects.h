@@ -30,6 +30,7 @@ public:
     CTemplateTexture(void);
     ~CTemplateTexture(void);
     
+    std::string Get_Filename(void) const;
     std::string Get_RenderOperationName(void) const;
     ui32 Get_SamplerId(void) const;
     ui32 Get_WrapMode(void) const;
@@ -77,7 +78,6 @@ public:
     const std::string kMaterialIsReflectingAttribute;
     const std::string kMaterialIsShadowingAttribute;
     const std::string kMaterialIsDebuggingAttribute;
-    
     const std::string kMaterialTexturesTemplatesNode;
     const std::string kMaterialTextureTemplateNode;
     const std::string kMaterialShaderTemplateNode;
@@ -106,7 +106,7 @@ public:
     bool Get_IsDebugging(void) const;
     
     std::vector<std::shared_ptr<I_RO_TemplateCommon>> Get_TexturesTemplates(void) const;
-    std::shared_ptr<I_RO_TemplateCommon> Get_ShaderTemplates(void) const;
+    std::shared_ptr<I_RO_TemplateCommon> Get_ShaderTemplate(void) const;
 };
 
 class CGameObjectTemplate : public CTemplateCommon
@@ -136,7 +136,6 @@ class CModelTemplate : public CGameObjectTemplate
 public:
     
     const std::string kModelMainNode;
-    const std::string kModelMeshNode;
     const std::string kModelMeshFilenameAttribute;
     const std::string kModelMeshIsBatchingAttribute;
     const std::string kModelSkeletonNode;
@@ -190,10 +189,6 @@ class CParticleEmitterTemplate : public CGameObjectTemplate
 {
 public:
 
-private:
-    
-protected:
-    
     const std::string kParticleEmitterMainNode;
     const std::string kParticleEmitterNumParticlesAttribute;
     const std::string kParticleEmitterDurationAttribute;
@@ -221,7 +216,10 @@ protected:
     const std::string kParticleEmitterDestinationSizeYAttribute;
     const std::string kParticleEmitterMaxEmittIntervalAttribute;
     const std::string kParticleEmitterMinEmittIntervalAttribute;
+
+private:
     
+protected:
     
 public:
     
@@ -289,7 +287,115 @@ public:
 };
 
 
+struct CWorldSpaceRenderOperationTemplate : public CTemplateCommon
+{
+public:
+    
+    const std::string kWorldSpaceRenderOperationMainNode;
+    const std::string kWorldSpaceRenderOperationGuidAttribute;
+    const std::string kWorldSpaceRenderOperationIndexAttribute;
+    const std::string kWorldSpaceRenderOperationScreenWidthAttribute;
+    const std::string kWorldSpaceRenderOperationScreenHeightAttribute;
+    const std::string kWorldSpaceRenderOperationClearColorRAttribute;
+    const std::string kWorldSpaceRenderOperationClearColorGAttribute;
+    const std::string kWorldSpaceRenderOperationClearColorBAttribute;
+    const std::string kWorldSpaceRenderOperationClearColorAAttribute;
+    
+private:
+    
+protected:
+    
+public:
+    
+    CWorldSpaceRenderOperationTemplate(void);
+    ~CWorldSpaceRenderOperationTemplate(void);
+    
+    std::string Get_Guid(void) const;
+    ui32 Get_Index(void) const;
+    ui32 Get_ScreenWidth(void) const;
+    ui32 Get_ScreenHeight(void) const;
+    glm::vec4 Get_ClearColor(void) const;
+};
 
+class CScreenSpaceRenderOperationTemplate : public CTemplateCommon
+{
+public:
+    
+    const std::string kScreenSpaceRenderOperationMainNode;
+    const std::string kScreenSpaceRenderOperationGuidAttribute;
+    const std::string kScreenSpaceRenderOperationScreenWidthAttribute;
+    const std::string kScreenSpaceRenderOperationScreenHeightAttribute;
+    const std::string kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute;
+    
+private:
+    
+protected:
+    
+public:
+    
+    CScreenSpaceRenderOperationTemplate(void);
+    ~CScreenSpaceRenderOperationTemplate(void);
+    
+    std::string Get_Guid(void) const;
+    ui32 Get_ScreenWidth(void) const;
+    ui32 Get_ScreenHeight(void) const;
+    std::string Get_MaterialTemplateFilename(void) const;
+    std::shared_ptr<I_RO_TemplateCommon> Get_MaterialTemplate(void) const;
+};
 
+class COutputRenderOperationTemplate : public CTemplateCommon
+{
+public:
+    
+    const std::string kOutputRenderOperationMainNode;
+    const std::string kOutputRenderOperationGuidAttribute;
+    const std::string kOutputRenderOperationMaterialTemplateFilenameAttribute;
+    
+private:
+    
+protected:
+    
+public:
+    
+    COutputRenderOperationTemplate(void);
+    ~COutputRenderOperationTemplate(void);
+    
+    std::string Get_Guid(void) const;
+    std::string Get_MaterialTemplateFilename(void) const;
+    std::shared_ptr<I_RO_TemplateCommon> Get_MaterialTemplate(void) const;
+};
+
+class CGameTransitionTemplate : public CTemplateCommon
+{
+public:
+    
+    const std::string kGameTransitionMainNode;
+    const std::string kGameTransitionGuidAttribute;
+    const std::string kGameTransitionOutputRenderOperationTemplateNode;
+    const std::string kGameTransitionOutputRenderOperationTemplateFilenameAttribute;
+    const std::string kGameTransitionWorldSpaceRenderOperationsTemplatesNode;
+    const std::string kGameTransitionWorldSpaceRenderOperationTemplateNode;
+    const std::string kGameTransitionWorldSpaceRenderOperationTemplateFilenameAttribute;
+    const std::string kGameTransitionScreenSpaceRenderOperationsTemplatesNode;
+    const std::string kGameTransitionScreenSpaceRenderOperationTemplateNode;
+    const std::string kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute;
+    
+private:
+    
+protected:
+    
+public:
+    
+    CGameTransitionTemplate(void);
+    ~CGameTransitionTemplate(void);
+    
+    std::string Get_Guid(void) const;
+    std::string Get_OutputRenderOperationTemplateFilename(void) const;
+    std::shared_ptr<I_RO_TemplateCommon> Get_OutputRenderOperationTemplate(void) const;
+    std::vector<std::string> Get_WorldSpaceRenderOperationsTemplatesFilenames(void) const;
+    std::vector<std::shared_ptr<I_RO_TemplateCommon> > Get_WorldSpaceRenderOperationsTemplates(void) const;
+    std::vector<std::string> Get_ScreenSpaceRenderOperationsTemplatesFilenames(void) const;
+    std::vector<std::shared_ptr<I_RO_TemplateCommon> > Get_ScreenSpaceRenderOperationsTemplates(void) const;
+};
 
 #endif

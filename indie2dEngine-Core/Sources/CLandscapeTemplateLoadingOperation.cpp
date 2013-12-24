@@ -9,7 +9,7 @@
 #include "CLandscapeTemplateLoadingOperation.h"
 #include "CMaterialTemplateLoadingOperation.h"
 #include "CLandscapeTemplateSerializer.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 
 CLandscapeTemplateLoadingOperation::CLandscapeTemplateLoadingOperation(void)
 {
@@ -21,35 +21,50 @@ CLandscapeTemplateLoadingOperation::~CLandscapeTemplateLoadingOperation(void)
     
 }
 
-std::shared_ptr<ITemplate> CLandscapeTemplateLoadingOperation::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplateLoadingOperation::Serialize(const std::string& _filename)
 {
     std::shared_ptr<CLandscapeTemplateSerializer> landscapeSerializer = std::make_shared<CLandscapeTemplateSerializer>();
-    std::shared_ptr<SLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<SLandscapeTemplate>(landscapeSerializer->Serialize(_filename));
+    std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<CLandscapeTemplate>(landscapeSerializer->Serialize(_filename));
     assert(landscapeTemplate != nullptr);
-    for(const auto& iterator : landscapeTemplate->m_materialsFilenames)
+    std::vector<std::string> materialsTemplatesFilenames = landscapeTemplate->Get_MaterialsTemplatesFilenames();
+    for(const auto& iterator : materialsTemplatesFilenames)
     {
         std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-        std::shared_ptr<SMaterialTemplate> materialTemplate = std::static_pointer_cast<SMaterialTemplate>(materialLoadingOperation->Serialize(iterator));
+        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(iterator));
         assert(materialTemplate != nullptr);
-        landscapeTemplate->m_materialsTemplates.push_back(materialTemplate);
+        landscapeTemplate->Set_Template(Get_TemplateAttributeKey(landscapeTemplate->kGameObjectMaterialsTemplatesNode,
+                                                                 landscapeTemplate->kGameObjectMaterialTemplateNode,
+                                                                 landscapeTemplate->kGameObjectMaterialFilenameAttribute),
+                                        materialTemplate);
     }
-    
+
     std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-    std::shared_ptr<SMaterialTemplate> materialTemplate = std::static_pointer_cast<SMaterialTemplate>(materialLoadingOperation->Serialize(landscapeTemplate->m_splattingDiffuseMaterialFilename));
+    std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(landscapeTemplate->Get_SplattingDiffuseMaterialFilename()));
     assert(materialTemplate != nullptr);
-    landscapeTemplate->m_splattingDiffuseMaterial = materialTemplate;
+    
+    landscapeTemplate->Set_Template(Get_TemplateAttributeKey(landscapeTemplate->kLandscapeMainNode,
+                                                             landscapeTemplate->kLandscapeSplattingDiffuseMaterialFilenameAttribute),
+                                    materialTemplate);
     
     materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-    materialTemplate = std::static_pointer_cast<SMaterialTemplate>(materialLoadingOperation->Serialize(landscapeTemplate->m_splattingNormalMaterialFilename));
+    materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(landscapeTemplate->Get_SplattingNormalMaterialFilename()));
     assert(materialTemplate != nullptr);
-    landscapeTemplate->m_splattingNormalMaterial = materialTemplate;
+    landscapeTemplate->Set_Template(Get_TemplateAttributeKey(landscapeTemplate->kLandscapeMainNode,
+                                                             landscapeTemplate->kLandscapeSplattingNormalMaterialFilenameAttribute),
+                                    materialTemplate);
     
-    for(const auto& iterator : landscapeTemplate->m_edgesMaterialsFilenames)
+    std::vector<std::string> edgesMaterialsTemplatesFilenames = landscapeTemplate->Get_EdgesMaterialsFilenames();
+    for(const auto& iterator : edgesMaterialsTemplatesFilenames)
     {
         std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-        std::shared_ptr<SMaterialTemplate> materialTemplate = std::static_pointer_cast<SMaterialTemplate>(materialLoadingOperation->Serialize(iterator));
+        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(iterator));
         assert(materialTemplate != nullptr);
-        landscapeTemplate->m_edgesMaterials.push_back(materialTemplate);
+        landscapeTemplate->Set_Template(Get_TemplateAttributeKey(landscapeTemplate->kLandscapeMainNode,
+                                                                 landscapeTemplate->kLandscapeEdgesNode,
+                                                                 landscapeTemplate->kLandscapeEdgesMaterialsTemplatesNode,
+                                                                 landscapeTemplate->kLandscapeEdgeMaterialTemplateNode,
+                                                                 landscapeTemplate->kLandscapeEdgeMaterialTemplateFilenameAttribute),
+                                       materialTemplate);
     }
     
     return landscapeTemplate;

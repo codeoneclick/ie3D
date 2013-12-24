@@ -10,7 +10,7 @@
 #include "CShader.h"
 #include "CTexture.h"
 #include "CRenderMgr.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "CResourceAccessor.h"
 #include "IResourceLoadingHandler.h"
 
@@ -44,36 +44,40 @@ CMaterial::~CMaterial(void)
     
 }
 
-void CMaterial::Serialize(const std::shared_ptr<SMaterialTemplate>& _template, const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<IResourceLoadingHandler>& _handler)
+void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template, const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<IResourceLoadingHandler>& _handler)
 {
     assert(_template != nullptr);
     assert(_screenSpaceTextureAccessor != nullptr);
 	assert(_resourceAccessor != nullptr);
     
-    CMaterial::Set_RenderState(E_RENDER_STATE_CULL_MODE, _template->m_isCullFace);
-    CMaterial::Set_RenderState(E_RENDER_STATE_DEPTH_TEST, _template->m_isDepthTest);
-    CMaterial::Set_RenderState(E_RENDER_STATE_DEPTH_MASK, _template->m_isDepthMask);
-    CMaterial::Set_RenderState(E_RENDER_STATE_BLEND_MODE, _template->m_isBlend);
     
-    CMaterial::Set_CullFaceMode(_template->m_cullFaceMode);
-    CMaterial::Set_BlendFunctionSource(_template->m_blendFunctionSource);
-    CMaterial::Set_BlendFunctionDest(_template->m_blendFunctionDestination);
+    std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(_template);
+    CMaterial::Set_RenderState(E_RENDER_STATE_CULL_MODE, materialTemplate->Get_IsCullFace());
+    CMaterial::Set_RenderState(E_RENDER_STATE_DEPTH_TEST, materialTemplate->Get_IsDepthTest());
+    CMaterial::Set_RenderState(E_RENDER_STATE_DEPTH_MASK, materialTemplate->Get_IsDepthMask());
+    CMaterial::Set_RenderState(E_RENDER_STATE_BLEND_MODE, materialTemplate->Get_IsBlending());
     
-    CMaterial::Set_Clipping(_template->m_isClipping ? _template->m_clipping : glm::vec4(FLT_MAX));
-    CMaterial::Set_IsReflected(_template->m_isReflected);
-    CMaterial::Set_IsDebug(_template->m_isDebug);
+    CMaterial::Set_CullFaceMode(materialTemplate->Get_CullFaceMode());
+    CMaterial::Set_BlendFunctionSource(materialTemplate->Get_BlendingFunctionSource());
+    CMaterial::Set_BlendFunctionDest(materialTemplate->Get_BlendingFunctionDestination());
     
-    for(const auto& textureTemplate : _template->m_texturesTemplates)
+    CMaterial::Set_Clipping(materialTemplate->Get_IsClipping() ? materialTemplate->Get_ClippingPlane() : glm::vec4(FLT_MAX));
+    CMaterial::Set_IsReflected(materialTemplate->Get_IsReflecting());
+    CMaterial::Set_IsDebug(materialTemplate->Get_IsDebugging());
+    
+    for(const auto& iterator : materialTemplate->Get_TexturesTemplates())
     {
-        std::shared_ptr<CTexture> texture = textureTemplate->m_filename.length() != 0 ? _resourceAccessor->CreateTexture(textureTemplate->m_filename) : _screenSpaceTextureAccessor->Get_RenderOperationTexture(textureTemplate->m_operationName);
+        std::shared_ptr<CTemplateTexture> textureTemplate = std::static_pointer_cast<CTemplateTexture>(iterator);
+        
+        std::shared_ptr<CTexture> texture = textureTemplate->Get_Filename().length() != 0 ? _resourceAccessor->CreateTexture(textureTemplate->Get_Filename()) : _screenSpaceTextureAccessor->Get_RenderOperationTexture(textureTemplate->Get_RenderOperationName());
         if(_handler != nullptr)
         {
             texture->Register_LoadingHandler(_handler);
         }
         assert(texture != nullptr);
-        texture->Set_Wrap(textureTemplate->m_wrap);
-        assert(textureTemplate->m_sampler >= 0 && textureTemplate->m_sampler < E_SHADER_SAMPLER_MAX);
-        CMaterial::Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->m_sampler));
+        texture->Set_Wrap(textureTemplate->Get_WrapMode());
+        assert(textureTemplate->Get_SamplerId() >= 0 && textureTemplate->Get_SamplerId() < E_SHADER_SAMPLER_MAX);
+        CMaterial::Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->Get_SamplerId()));
     }
     
     m_status |= E_RESOURCE_STATUS_LOADED;

@@ -9,7 +9,7 @@
 #include "COutputRenderOperationTemplateLoadingOperation.h"
 #include "CMaterialTemplateLoadingOperation.h"
 #include "COutputRenderOperationTemplateSerializer.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 
 COutputRenderOperationTemplateLoadingOperation::COutputRenderOperationTemplateLoadingOperation(void)
 {
@@ -21,14 +21,16 @@ COutputRenderOperationTemplateLoadingOperation::~COutputRenderOperationTemplateL
     
 }
 
-std::shared_ptr<ITemplate> COutputRenderOperationTemplateLoadingOperation::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> COutputRenderOperationTemplateLoadingOperation::Serialize(const std::string& _filename)
 {
     std::shared_ptr<COutputRenderOperationTemplateSerializer> outputRenderOperationTemplateSerializer = std::make_shared<COutputRenderOperationTemplateSerializer>();
-    std::shared_ptr<SOutputRenderOperationTemplate> outputRenderOperationTemplate = std::static_pointer_cast<SOutputRenderOperationTemplate>(outputRenderOperationTemplateSerializer->Serialize(_filename));
+    std::shared_ptr<COutputRenderOperationTemplate> outputRenderOperationTemplate = std::static_pointer_cast<COutputRenderOperationTemplate>(outputRenderOperationTemplateSerializer->Serialize(_filename));
     assert(outputRenderOperationTemplate != nullptr);
     std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-    std::shared_ptr<SMaterialTemplate> materialTemplate = std::static_pointer_cast<SMaterialTemplate>(materialLoadingOperation->Serialize(outputRenderOperationTemplate->m_materialTemplateFilename));
+    std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(outputRenderOperationTemplate->Get_MaterialTemplateFilename()));
     assert(materialTemplate != nullptr);
-    outputRenderOperationTemplate->m_materialTemplate = materialTemplate;
+    outputRenderOperationTemplate->Set_Template(Get_TemplateAttributeKey(outputRenderOperationTemplate->kOutputRenderOperationMainNode,
+                                                                         outputRenderOperationTemplate->kOutputRenderOperationMaterialTemplateFilenameAttribute),
+                                                materialTemplate);
     return outputRenderOperationTemplate;
 }

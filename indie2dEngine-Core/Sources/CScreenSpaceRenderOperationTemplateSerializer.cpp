@@ -7,7 +7,7 @@
 //
 
 #include "CScreenSpaceRenderOperationTemplateSerializer.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 
 CScreenSpaceRenderOperationTemplateSerializer::CScreenSpaceRenderOperationTemplateSerializer(void)
 {
@@ -19,29 +19,48 @@ CScreenSpaceRenderOperationTemplateSerializer::~CScreenSpaceRenderOperationTempl
     
 }
 
-std::shared_ptr<ITemplate> CScreenSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CScreenSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
-    pugi::xml_node node = document.child("operation");
     
-    std::shared_ptr<SScreenSpaceRenderOperationTemplate> screenSpaceRenderOperationTemplate = std::make_shared<SScreenSpaceRenderOperationTemplate>();
-    screenSpaceRenderOperationTemplate->m_guid = node.attribute("guid").as_string();
-    screenSpaceRenderOperationTemplate->m_screenWidth = node.attribute("screenWidth").as_int();
-    screenSpaceRenderOperationTemplate->m_screenHeight = node.attribute("screenHeight").as_int();
+    std::shared_ptr<CScreenSpaceRenderOperationTemplate> screenSpaceRenderOperationTemplate = std::make_shared<CScreenSpaceRenderOperationTemplate>();
+    pugi::xml_node node = document.child(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMainNode.c_str());
     
-    pugi::xml_node material_node = node.child("material");
-    screenSpaceRenderOperationTemplate->m_materialTemplateFilename = material_node.attribute("filename").as_string();
+    std::string guid = node.attribute(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationGuidAttribute.c_str()).as_string();
+    screenSpaceRenderOperationTemplate->Set_Attribute(Get_TemplateAttributeKey(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMainNode,
+                                                                               screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationGuidAttribute),
+                                                      E_TEMPLATE_META_TYPE_STRING,
+                                                      &guid);
+
+    ui32 screenWidth = node.attribute(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationScreenWidthAttribute.c_str()).as_uint();
+    screenSpaceRenderOperationTemplate->Set_Attribute(Get_TemplateAttributeKey(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMainNode,
+                                                                               screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationScreenWidthAttribute),
+                                                      E_TEMPLATE_META_TYPE_UI32,
+                                                      &screenWidth);
+
+    
+    ui32 screenHeight = node.attribute(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationScreenHeightAttribute.c_str()).as_uint();
+    screenSpaceRenderOperationTemplate->Set_Attribute(Get_TemplateAttributeKey(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMainNode,
+                                                                               screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationScreenHeightAttribute),
+                                                      E_TEMPLATE_META_TYPE_UI32,
+                                                      &screenHeight);
+    
+    std::string materialFilename = node.attribute(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute.c_str()).as_string();
+    screenSpaceRenderOperationTemplate->Set_Attribute(Get_TemplateAttributeKey(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMainNode,
+                                                                               screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute),
+                                                      E_TEMPLATE_META_TYPE_STRING,
+                                                      &materialFilename);
     return screenSpaceRenderOperationTemplate;
 }
 
-std::shared_ptr<ITemplate> CScreenSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CScreenSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CScreenSpaceRenderOperationTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
+void CScreenSpaceRenderOperationTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     
 }

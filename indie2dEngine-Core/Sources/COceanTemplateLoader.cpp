@@ -8,7 +8,7 @@
 
 #include "COceanTemplateLoader.h"
 #include "COceanTemplateLoadingOperation.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "ITemplateLoadingHandler.h"
 
 COceanTemplateLoader::COceanTemplateLoader(void)
@@ -28,11 +28,11 @@ void COceanTemplateLoader::Load(const std::string& _filename, std::shared_ptr<IT
     {
 #endif
         std::shared_ptr<COceanTemplateLoadingOperation> operation = std::make_shared<COceanTemplateLoadingOperation>();
-        std::shared_ptr<SOceanTemplate> oceanTemplate = std::static_pointer_cast<SOceanTemplate>(operation->Serialize(_filename));
+        std::shared_ptr<COceanTemplate> oceanTemplate = std::static_pointer_cast<COceanTemplate>(operation->Serialize(_filename));
         assert(oceanTemplate != nullptr);
         assert(_handler != nullptr);
 #if defined(__USE_GCDPP__)
-        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SOceanTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SOceanTemplate> _template)
+        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<COceanTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<COceanTemplate> _template)
         {
             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
         };

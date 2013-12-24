@@ -13,7 +13,7 @@
 #include "CCamera.h"
 #include "CLight.h"
 #include "CResourceAccessor.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
@@ -29,18 +29,18 @@ COcean::~COcean(void)
     
 }
 
-void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+void COcean::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
-    std::shared_ptr<SOceanTemplate> oceanTemplate = std::static_pointer_cast<SOceanTemplate>(_template);
+    std::shared_ptr<COceanTemplate> oceanTemplate = std::static_pointer_cast<COceanTemplate>(_template);
 
     assert(m_resourceAccessor != nullptr);
     
-    m_width = oceanTemplate->m_width;
-    m_height = oceanTemplate->m_height;
-    m_altitude = oceanTemplate->m_altitude;
+    m_width = oceanTemplate->Get_Size().x;
+    m_height = oceanTemplate->Get_Size().y;
+    m_altitude = oceanTemplate->Get_Altitude();
     
     m_waveGeneratorTimer = 0.0f;
-    m_waveGeneratorInterval = oceanTemplate->m_waveGeneratorInterval;
+    m_waveGeneratorInterval = oceanTemplate->Get_WaveGenerationInterval();
     
     std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(4, GL_STATIC_DRAW);
     SHardwareVertex* vertexData = vertexBuffer->Lock();
@@ -74,15 +74,17 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
     m_mesh = std::make_shared<CMesh>("ocean", vertexBuffer, indexBuffer);
     assert(m_mesh != nullptr);
     
-    for(const auto& materialTemplate : oceanTemplate->m_materialsTemplates)
+    for(const auto& iterator : oceanTemplate->Get_MaterialsTemplates())
     {
-        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
-                                                                             materialTemplate->m_shaderTemplate->m_fsFilename);
+        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(iterator);
+        std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+                                                                           shaderTemplate->Get_FSFilename());
         assert(shader != nullptr);
         shader->Register_LoadingHandler(shared_from_this());
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_renderMode);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->Get_RenderOperationName());
         material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
-        m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
+        m_materials.insert(std::make_pair(materialTemplate->Get_RenderOperationName(), material));
         COcean::_OnResourceLoaded(material, true);
     }
     

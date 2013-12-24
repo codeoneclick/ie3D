@@ -21,7 +21,7 @@
 #include "CRenderOperationWorldSpace.h"
 #include "CRenderOperationScreenSpace.h"
 #include "CCommonOS.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "IGraphicsContext.h"
 #include "IInputContext.h"
 
@@ -83,51 +83,59 @@ void IGameTransition::_OnGameLoopUpdate(f32 _deltatime)
     assert(false);
 }
 
-void IGameTransition::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+void IGameTransition::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     assert(m_renderMgr != nullptr);
     assert(m_resourceAccessor != nullptr);
     
-    std::shared_ptr<SGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<SGameTransitionTemplate>(_template);
+    std::shared_ptr<CGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<CGameTransitionTemplate>(_template);
     assert(gameTransitionTemplate != nullptr);
     
-    for(const auto& worldSpaceRenderOperationTemplate : gameTransitionTemplate->m_worldSpaceRenderOperationsTemplates)
+    for(const auto& iterator : gameTransitionTemplate->Get_WorldSpaceRenderOperationsTemplates())
     {
-        
-        std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation = std::make_shared<CRenderOperationWorldSpace>(worldSpaceRenderOperationTemplate->m_screenWidth,
-                                                                                                                             worldSpaceRenderOperationTemplate->m_screenHeight,
-                                                                                                                             worldSpaceRenderOperationTemplate->m_clearColor,
-                                                                                                                             worldSpaceRenderOperationTemplate->m_guid, worldSpaceRenderOperationTemplate->m_index);
-        m_renderMgr->RegisterWorldSpaceRenderOperation(worldSpaceRenderOperationTemplate->m_guid, worldSpaceRenderOperation);
+        std::shared_ptr<CWorldSpaceRenderOperationTemplate> worldSpaceRenderOperationTemplate = std::static_pointer_cast<CWorldSpaceRenderOperationTemplate>(iterator);
+        std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation =
+        std::make_shared<CRenderOperationWorldSpace>(worldSpaceRenderOperationTemplate->Get_ScreenWidth(),
+                                                     worldSpaceRenderOperationTemplate->Get_ScreenHeight(),
+                                                     worldSpaceRenderOperationTemplate->Get_ClearColor(),
+                                                     worldSpaceRenderOperationTemplate->Get_Guid(),
+                                                     worldSpaceRenderOperationTemplate->Get_Index());
+        m_renderMgr->RegisterWorldSpaceRenderOperation(worldSpaceRenderOperationTemplate->Get_Guid(), worldSpaceRenderOperation);
     }
     
-    for(const auto& screenSpaceRenderOperationTemplate : gameTransitionTemplate->m_screenSpaceRenderOperationsTemplates)
+    for(const auto& iterator : gameTransitionTemplate->Get_ScreenSpaceRenderOperationsTemplates())
     {
-        std::shared_ptr<SMaterialTemplate> screenSpaceRenderOperationMaterialTemplate = screenSpaceRenderOperationTemplate->m_materialTemplate;
+        std::shared_ptr<CScreenSpaceRenderOperationTemplate> screenSpaceRenderOperationTemplate = std::static_pointer_cast<CScreenSpaceRenderOperationTemplate>(iterator);
+        std::shared_ptr<CTemplateMaterial> screenSpaceRenderOperationMaterialTemplate = std::static_pointer_cast<CTemplateMaterial>(screenSpaceRenderOperationTemplate->Get_MaterialTemplate());
         assert(screenSpaceRenderOperationMaterialTemplate != nullptr);
-
-        std::shared_ptr<CShader> screenSpaceRenderOperationShader = m_resourceAccessor->CreateShader(screenSpaceRenderOperationMaterialTemplate->m_shaderTemplate->m_vsFilename,
-                                                                                                     screenSpaceRenderOperationMaterialTemplate->m_shaderTemplate->m_fsFilename);
+        
+        std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(screenSpaceRenderOperationMaterialTemplate->Get_ShaderTemplate());
+        std::shared_ptr<CShader> screenSpaceRenderOperationShader =
+        m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+                                         shaderTemplate->Get_FSFilename());
         assert(screenSpaceRenderOperationShader != nullptr);
         
-        std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>(screenSpaceRenderOperationShader, screenSpaceRenderOperationMaterialTemplate->m_filename);
+        std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>(screenSpaceRenderOperationShader, screenSpaceRenderOperationMaterialTemplate->Get_RenderOperationName());
         screenSpaceRenderOperationMaterial->Serialize(screenSpaceRenderOperationMaterialTemplate, m_resourceAccessor, m_renderMgr);
         
-        std::shared_ptr<CRenderOperationScreenSpace> screenSpaceRenderOperation = std::make_shared<CRenderOperationScreenSpace>(screenSpaceRenderOperationTemplate->m_screenWidth,
-                                                                                                                                screenSpaceRenderOperationTemplate->m_screenHeight,
-                                                                                                                                screenSpaceRenderOperationTemplate->m_guid,
-                                                                                                                                screenSpaceRenderOperationMaterial);
-        m_renderMgr->RegisterScreenSpaceRenderOperation( screenSpaceRenderOperationTemplate->m_guid, screenSpaceRenderOperation);
+        std::shared_ptr<CRenderOperationScreenSpace> screenSpaceRenderOperation =
+        std::make_shared<CRenderOperationScreenSpace>(screenSpaceRenderOperationTemplate->Get_ScreenWidth(),
+                                                      screenSpaceRenderOperationTemplate->Get_ScreenHeight(),
+                                                      screenSpaceRenderOperationTemplate->Get_Guid(),
+                                                      screenSpaceRenderOperationMaterial);
+        m_renderMgr->RegisterScreenSpaceRenderOperation( screenSpaceRenderOperationTemplate->Get_Guid(), screenSpaceRenderOperation);
     }
     
-    std::shared_ptr<SMaterialTemplate> outputRenderOperationMaterialTemplate = gameTransitionTemplate->m_outputRenderOperationTemplate->m_materialTemplate;
+    std::shared_ptr<COutputRenderOperationTemplate> outputRenderOperationTemplate = std::static_pointer_cast<COutputRenderOperationTemplate>(gameTransitionTemplate->Get_OutputRenderOperationTemplate());
+    std::shared_ptr<CTemplateMaterial> outputRenderOperationMaterialTemplate = std::static_pointer_cast<CTemplateMaterial>(outputRenderOperationTemplate->Get_MaterialTemplate());
     assert(outputRenderOperationMaterialTemplate != nullptr);
     
-    std::shared_ptr<CShader> outputRenderOperationShader = m_resourceAccessor->CreateShader(outputRenderOperationMaterialTemplate->m_shaderTemplate->m_vsFilename,
-                                                                                            outputRenderOperationMaterialTemplate->m_shaderTemplate->m_fsFilename);
+    std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(outputRenderOperationMaterialTemplate->Get_ShaderTemplate());
+    std::shared_ptr<CShader> outputRenderOperationShader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+                                                                                            shaderTemplate->Get_FSFilename());
     assert(outputRenderOperationShader != nullptr);
     
-    std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>(outputRenderOperationShader, outputRenderOperationMaterialTemplate->m_filename);
+    std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>(outputRenderOperationShader, outputRenderOperationMaterialTemplate->Get_RenderOperationName());
     outputRenderOperationMaterial->Serialize(outputRenderOperationMaterialTemplate, m_resourceAccessor, m_renderMgr);
     m_renderMgr->RegisterOutputRenderOperation(outputRenderOperationMaterial);
     

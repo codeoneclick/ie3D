@@ -25,9 +25,19 @@ CTemplateTexture::~CTemplateTexture(void)
     
 }
 
+std::string CTemplateTexture::Get_Filename(void) const
+{
+    const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
+                                             kTextureFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_String();
+}
+
 std::string CTemplateTexture::Get_RenderOperationName(void) const
 {
-    const auto& iterator = m_attributes.find(kTextureMainNode + ":" + kTextureRenderOperationNameAttribute);
+    const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
+                                             kTextureRenderOperationNameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_String();
@@ -35,7 +45,8 @@ std::string CTemplateTexture::Get_RenderOperationName(void) const
 
 ui32 CTemplateTexture::Get_SamplerId(void) const
 {
-    const auto& iterator = m_attributes.find(kTextureMainNode + ":" + kTextureSamplerIdAttribute);
+    const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
+                                             kTextureSamplerIdAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_UI32();
@@ -43,7 +54,8 @@ ui32 CTemplateTexture::Get_SamplerId(void) const
 
 ui32 CTemplateTexture::Get_WrapMode(void) const
 {
-    const auto& iterator = m_attributes.find(kTextureMainNode + ":" + kTextureWrapModeAttribute);
+    const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
+                                             kTextureWrapModeAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_UI32();
@@ -65,7 +77,8 @@ CTemplateShader::~CTemplateShader(void)
 
 std::string CTemplateShader::Get_VSFilename(void) const
 {
-    const auto& iterator = m_attributes.find(kShaderMainNode + ":" + kShaderVSFilenameAttribute);
+    const auto& iterator = m_attributes.find(kShaderMainNode + ":" +
+                                             kShaderVSFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_String();
@@ -73,7 +86,8 @@ std::string CTemplateShader::Get_VSFilename(void) const
 
 std::string CTemplateShader::Get_FSFilename(void) const
 {
-    const auto& iterator = m_attributes.find(kShaderMainNode + ":" + kShaderFSFilenameAttribute);
+    const auto& iterator = m_attributes.find(kShaderMainNode + ":" +
+                                             kShaderFSFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_String();
@@ -105,9 +119,15 @@ kMaterialShaderTemplateNode("shader")
     
 }
 
+CTemplateMaterial::~CTemplateMaterial(void)
+{
+    
+}
+
 std::string CTemplateMaterial::Get_RenderOperationName(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialRenderOperationNameAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialRenderOperationNameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_String();
@@ -115,7 +135,8 @@ std::string CTemplateMaterial::Get_RenderOperationName(void) const
 
 bool CTemplateMaterial::Get_IsCullFace(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialIsCullFaceAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialIsCullFaceAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_Bool();
@@ -123,7 +144,8 @@ bool CTemplateMaterial::Get_IsCullFace(void) const
 
 ui32 CTemplateMaterial::Get_CullFaceMode(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialCullFaceModeAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialCullFaceModeAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_UI32();
@@ -131,7 +153,8 @@ ui32 CTemplateMaterial::Get_CullFaceMode(void) const
 
 bool CTemplateMaterial::Get_IsBlending(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialIsBlendingAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialIsBlendingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_Bool();
@@ -139,7 +162,8 @@ bool CTemplateMaterial::Get_IsBlending(void) const
 
 ui32 CTemplateMaterial::Get_BlendingFunctionSource(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialBlendingFunctionSourceAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialBlendingFunctionSourceAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_UI32();
@@ -147,7 +171,8 @@ ui32 CTemplateMaterial::Get_BlendingFunctionSource(void) const
 
 ui32 CTemplateMaterial::Get_BlendingFunctionDestination(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialBlendingFunctionDestinationAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialBlendingFunctionDestinationAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_UI32();
@@ -155,7 +180,8 @@ ui32 CTemplateMaterial::Get_BlendingFunctionDestination(void) const
 
 bool CTemplateMaterial::Get_IsDepthTest(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialIsDepthTestAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialIsDepthTestAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_Bool();
@@ -163,7 +189,8 @@ bool CTemplateMaterial::Get_IsDepthTest(void) const
 
 bool CTemplateMaterial::Get_IsDepthMask(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialIsDepthMaskAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialIsDepthMaskAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_Bool();
@@ -171,7 +198,8 @@ bool CTemplateMaterial::Get_IsDepthMask(void) const
 
 bool CTemplateMaterial::Get_IsClipping(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialIsClippingAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialIsClippingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_Bool();
@@ -179,22 +207,26 @@ bool CTemplateMaterial::Get_IsClipping(void) const
 
 glm::vec4 CTemplateMaterial::Get_ClippingPlane(void) const
 {
-    const auto& iteratorX = m_attributes.find(kMaterialMainNode + ":" + kMaterialClippingXAttribute);
+    const auto& iteratorX = m_attributes.find(kMaterialMainNode + ":" +
+                                              kMaterialClippingXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
     f32 x = iteratorX->second[0]->Get_F32();
     
-    const auto& iteratorY = m_attributes.find(kMaterialMainNode + ":" + kMaterialClippingYAttribute);
+    const auto& iteratorY = m_attributes.find(kMaterialMainNode + ":" +
+                                              kMaterialClippingYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
     f32 y = iteratorY->second[0]->Get_F32();
     
-    const auto& iteratorZ = m_attributes.find(kMaterialMainNode + ":" + kMaterialClippingZAttribute);
+    const auto& iteratorZ = m_attributes.find(kMaterialMainNode + ":" +
+                                              kMaterialClippingZAttribute);
     assert(iteratorZ != m_attributes.end());
     assert(iteratorZ->second.size() != 0);
     f32 z = iteratorZ->second[0]->Get_F32();
     
-    const auto& iteratorW = m_attributes.find(kMaterialMainNode+ ":" + kMaterialClippingWAttribute);
+    const auto& iteratorW = m_attributes.find(kMaterialMainNode+ ":" +
+                                              kMaterialClippingWAttribute);
     assert(iteratorW != m_attributes.end());
     assert(iteratorW->second.size() != 0);
     f32 w = iteratorW->second[0]->Get_F32();
@@ -203,7 +235,8 @@ glm::vec4 CTemplateMaterial::Get_ClippingPlane(void) const
 
 bool CTemplateMaterial::Get_IsReflecting(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialIsReflectingAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialIsReflectingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_Bool();
@@ -211,7 +244,8 @@ bool CTemplateMaterial::Get_IsReflecting(void) const
 
 bool CTemplateMaterial::Get_IsShadowing(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialIsShadowingAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialIsShadowingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_Bool();
@@ -219,7 +253,8 @@ bool CTemplateMaterial::Get_IsShadowing(void) const
 
 bool CTemplateMaterial::Get_IsDebugging(void) const
 {
-    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" + kMaterialIsDebuggingAttribute);
+    const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
+                                             kMaterialIsDebuggingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->Get_Bool();
@@ -227,14 +262,16 @@ bool CTemplateMaterial::Get_IsDebugging(void) const
 
 std::vector<std::shared_ptr<I_RO_TemplateCommon>> CTemplateMaterial::Get_TexturesTemplates(void) const
 {
-    const auto& iterator = m_templates.find(kMaterialMainNode + ":" + kMaterialTexturesTemplatesNode);
+    const auto& iterator = m_templates.find(kMaterialMainNode + ":" +
+                                            kMaterialTexturesTemplatesNode);
     assert(iterator != m_templates.end());
     return iterator->second;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CTemplateMaterial::Get_ShaderTemplates(void) const
+std::shared_ptr<I_RO_TemplateCommon> CTemplateMaterial::Get_ShaderTemplate(void) const
 {
-    const auto& iterator = m_templates.find(kMaterialMainNode + ":" + kMaterialShaderTemplateNode);
+    const auto& iterator = m_templates.find(kMaterialMainNode + ":" +
+                                            kMaterialShaderTemplateNode);
     assert(iterator != m_templates.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0];
@@ -280,7 +317,6 @@ std::vector<std::shared_ptr<I_RO_TemplateCommon>> CGameObjectTemplate::Get_Mater
 CModelTemplate::CModelTemplate(void) :
 CGameObjectTemplate(),
 kModelMainNode("model"),
-kModelMeshNode("mesh"),
 kModelMeshFilenameAttribute("filename"),
 kModelMeshIsBatchingAttribute("is_batching"),
 kModelSkeletonNode("skeleton"),
@@ -301,7 +337,6 @@ CModelTemplate::~CModelTemplate(void)
 std::string CModelTemplate::Get_MeshFilename(void) const
 {
     const auto& iterator = m_attributes.find(kModelMainNode + ":" +
-                                             kModelMeshNode + ":" +
                                              kModelMeshFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
@@ -351,7 +386,6 @@ std::vector<std::string> CModelTemplate::Get_SequenceAnimationsNames(void) const
 bool CModelTemplate::Get_IsBatching(void) const
 {
     const auto& iterator = m_attributes.find(kModelMainNode + ":" +
-                                             kModelMeshNode + ":" +
                                              kModelMeshIsBatchingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
@@ -812,9 +846,289 @@ std::vector<std::shared_ptr<I_RO_TemplateCommon>> CLandscapeTemplate::Get_EdgesM
                                             kLandscapeEdgeMaterialTemplateFilenameAttribute);
     assert(iterator != m_templates.end());
     return iterator->second;
-
 }
 
+CWorldSpaceRenderOperationTemplate::CWorldSpaceRenderOperationTemplate(void) :
+CTemplateCommon(),
+kWorldSpaceRenderOperationMainNode("operation"),
+kWorldSpaceRenderOperationGuidAttribute("guid"),
+kWorldSpaceRenderOperationIndexAttribute("index"),
+kWorldSpaceRenderOperationScreenWidthAttribute("width"),
+kWorldSpaceRenderOperationScreenHeightAttribute("height"),
+kWorldSpaceRenderOperationClearColorRAttribute("clear_color_r"),
+kWorldSpaceRenderOperationClearColorGAttribute("clear_color_g"),
+kWorldSpaceRenderOperationClearColorBAttribute("clear_color_b"),
+kWorldSpaceRenderOperationClearColorAAttribute("clear_color_a")
+{
+    
+}
 
+CWorldSpaceRenderOperationTemplate::~CWorldSpaceRenderOperationTemplate(void)
+{
+    
+}
 
+std::string CWorldSpaceRenderOperationTemplate::Get_Guid(void) const
+{
+    const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
+                                             kWorldSpaceRenderOperationGuidAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_String();
+}
+
+ui32 CWorldSpaceRenderOperationTemplate::Get_Index(void) const
+{
+    const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
+                                             kWorldSpaceRenderOperationIndexAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_UI32();
+}
+
+ui32 CWorldSpaceRenderOperationTemplate::Get_ScreenWidth(void) const
+{
+    const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
+                                             kWorldSpaceRenderOperationScreenWidthAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_UI32();
+}
+
+ui32 CWorldSpaceRenderOperationTemplate::Get_ScreenHeight(void) const
+{
+    const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
+                                             kWorldSpaceRenderOperationScreenHeightAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_UI32();
+}
+
+glm::vec4 CWorldSpaceRenderOperationTemplate::Get_ClearColor(void) const
+{
+    const auto& iteratorR = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
+                                              kWorldSpaceRenderOperationClearColorRAttribute);
+    assert(iteratorR != m_attributes.end());
+    assert(iteratorR->second.size() != 0);
+    f32 r = iteratorR->second[0]->Get_F32();
+    
+    const auto& iteratorG = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
+                                              kWorldSpaceRenderOperationClearColorGAttribute);
+    assert(iteratorG != m_attributes.end());
+    assert(iteratorG->second.size() != 0);
+    ui8 g = iteratorG->second[0]->Get_F32();
+    
+    const auto& iteratorB = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
+                                              kWorldSpaceRenderOperationClearColorBAttribute);
+    assert(iteratorB != m_attributes.end());
+    assert(iteratorB->second.size() != 0);
+    ui8 b = iteratorB->second[0]->Get_F32();
+    
+    const auto& iteratorA = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
+                                              kWorldSpaceRenderOperationClearColorAAttribute);
+    assert(iteratorA != m_attributes.end());
+    assert(iteratorA->second.size() != 0);
+    ui8 a = iteratorA->second[0]->Get_F32();
+    
+    return glm::vec4(r, g, b, a);
+}
+
+CScreenSpaceRenderOperationTemplate::CScreenSpaceRenderOperationTemplate(void) :
+CTemplateCommon(),
+kScreenSpaceRenderOperationMainNode("operation"),
+kScreenSpaceRenderOperationGuidAttribute("guid"),
+kScreenSpaceRenderOperationScreenWidthAttribute("width"),
+kScreenSpaceRenderOperationScreenHeightAttribute("height"),
+kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute("material_filename")
+{
+    
+}
+
+CScreenSpaceRenderOperationTemplate::~CScreenSpaceRenderOperationTemplate(void)
+{
+    
+}
+
+std::string CScreenSpaceRenderOperationTemplate::Get_Guid(void) const
+{
+    const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
+                                             kScreenSpaceRenderOperationGuidAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_String();
+}
+
+ui32 CScreenSpaceRenderOperationTemplate::Get_ScreenWidth(void) const
+{
+    const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
+                                             kScreenSpaceRenderOperationScreenWidthAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_UI32();
+}
+
+ui32 CScreenSpaceRenderOperationTemplate::Get_ScreenHeight(void) const
+{
+    const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
+                                             kScreenSpaceRenderOperationScreenHeightAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_UI32();
+}
+
+std::string CScreenSpaceRenderOperationTemplate::Get_MaterialTemplateFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
+                                             kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_String();
+}
+
+std::shared_ptr<I_RO_TemplateCommon> CScreenSpaceRenderOperationTemplate::Get_MaterialTemplate(void) const
+{
+    const auto& iterator = m_templates.find(kScreenSpaceRenderOperationMainNode + ":" +
+                                            kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute);
+    assert(iterator != m_templates.end());
+    return iterator->second[0];
+}
+
+COutputRenderOperationTemplate::COutputRenderOperationTemplate(void) :
+CTemplateCommon(),
+kOutputRenderOperationMainNode("operation"),
+kOutputRenderOperationGuidAttribute("guid"),
+kOutputRenderOperationMaterialTemplateFilenameAttribute("material_filename")
+{
+    
+}
+
+COutputRenderOperationTemplate::~COutputRenderOperationTemplate(void)
+{
+    
+}
+
+std::string COutputRenderOperationTemplate::Get_Guid(void) const
+{
+    const auto& iterator = m_attributes.find(kOutputRenderOperationMainNode + ":" +
+                                             kOutputRenderOperationGuidAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_String();
+}
+
+std::string COutputRenderOperationTemplate::Get_MaterialTemplateFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kOutputRenderOperationMainNode + ":" +
+                                             kOutputRenderOperationMaterialTemplateFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_String();
+}
+
+std::shared_ptr<I_RO_TemplateCommon> COutputRenderOperationTemplate::Get_MaterialTemplate(void) const
+{
+    const auto& iterator = m_templates.find(kOutputRenderOperationMainNode + ":" +
+                                            kOutputRenderOperationMaterialTemplateFilenameAttribute);
+    assert(iterator != m_templates.end());
+    return iterator->second[0];
+}
+
+CGameTransitionTemplate::CGameTransitionTemplate(void) :
+CTemplateCommon(),
+kGameTransitionMainNode("transition"),
+kGameTransitionGuidAttribute("guid"),
+kGameTransitionOutputRenderOperationTemplateNode("output_render_operation"),
+kGameTransitionOutputRenderOperationTemplateFilenameAttribute("filename"),
+kGameTransitionWorldSpaceRenderOperationsTemplatesNode("world_space_operations"),
+kGameTransitionWorldSpaceRenderOperationTemplateNode("operation"),
+kGameTransitionWorldSpaceRenderOperationTemplateFilenameAttribute("filename"),
+kGameTransitionScreenSpaceRenderOperationsTemplatesNode("screen_space_operations"),
+kGameTransitionScreenSpaceRenderOperationTemplateNode("operation"),
+kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute("filename")
+{
+    
+}
+
+CGameTransitionTemplate::~CGameTransitionTemplate(void)
+{
+    
+}
+
+std::string CGameTransitionTemplate::Get_Guid(void) const
+{
+    const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
+                                             kGameTransitionOutputRenderOperationTemplateNode);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_String();
+}
+
+std::string CGameTransitionTemplate::Get_OutputRenderOperationTemplateFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
+                                             kGameTransitionOutputRenderOperationTemplateNode + ":" +
+                                             kGameTransitionOutputRenderOperationTemplateFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->Get_String();
+}
+
+std::shared_ptr<I_RO_TemplateCommon> CGameTransitionTemplate::Get_OutputRenderOperationTemplate(void) const
+{
+    const auto& iterator = m_templates.find(kGameTransitionMainNode + ":" +
+                                            kGameTransitionOutputRenderOperationTemplateNode + ":" +
+                                            kGameTransitionOutputRenderOperationTemplateFilenameAttribute);
+    assert(iterator != m_templates.end());
+    return iterator->second[0];
+}
+
+std::vector<std::string> CGameTransitionTemplate::Get_WorldSpaceRenderOperationsTemplatesFilenames(void) const
+{
+    const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
+                                             kGameTransitionWorldSpaceRenderOperationsTemplatesNode + ":" +
+                                             kGameTransitionWorldSpaceRenderOperationTemplateNode + ":" +
+                                             kGameTransitionWorldSpaceRenderOperationTemplateFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    std::vector<std::string> filenames;
+    for(const auto& filename : iterator->second)
+    {
+        filenames.push_back(filename->Get_String());
+    }
+    return filenames;
+}
+
+std::vector<std::shared_ptr<I_RO_TemplateCommon>> CGameTransitionTemplate::Get_WorldSpaceRenderOperationsTemplates(void) const
+{
+    const auto& iterator = m_templates.find(kGameTransitionMainNode + ":" +
+                                            kGameTransitionWorldSpaceRenderOperationsTemplatesNode + ":" +
+                                            kGameTransitionWorldSpaceRenderOperationTemplateNode + ":" +
+                                            kGameTransitionWorldSpaceRenderOperationTemplateFilenameAttribute);
+    assert(iterator != m_templates.end());
+    return iterator->second;
+}
+
+std::vector<std::string> CGameTransitionTemplate::Get_ScreenSpaceRenderOperationsTemplatesFilenames(void) const
+{
+    const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
+                                             kGameTransitionScreenSpaceRenderOperationsTemplatesNode + ":" +
+                                             kGameTransitionScreenSpaceRenderOperationTemplateNode + ":" +
+                                             kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    std::vector<std::string> filenames;
+    for(const auto& filename : iterator->second)
+    {
+        filenames.push_back(filename->Get_String());
+    }
+    return filenames;
+}
+
+std::vector<std::shared_ptr<I_RO_TemplateCommon>> CGameTransitionTemplate::Get_ScreenSpaceRenderOperationsTemplates(void) const
+{
+    const auto& iterator = m_templates.find(kGameTransitionMainNode + ":" +
+                                            kGameTransitionScreenSpaceRenderOperationsTemplatesNode + ":" +
+                                            kGameTransitionScreenSpaceRenderOperationTemplateNode + ":" +
+                                            kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute);
+    assert(iterator != m_templates.end());
+    return iterator->second;
+}
 

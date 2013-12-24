@@ -22,7 +22,7 @@ public:
     CParticleEmitterLoadingOperation(void);
     ~CParticleEmitterLoadingOperation(void);
     
-    std::shared_ptr<ITemplate> Serialize(const std::string& _filename);
+    std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename);
 };
 
 #endif 

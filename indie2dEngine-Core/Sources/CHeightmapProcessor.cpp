@@ -13,10 +13,10 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "IScreenSpaceTextureAccessor.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "CHeightmapHelper.h"
 
-CHeightmapProcessor::CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<SLandscapeTemplate>& _template) :
+CHeightmapProcessor::CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<I_RO_TemplateCommon>& _template) :
 m_heightmapData(nullptr),
 m_screenSpaceTextureAccessor(_screenSpaceTextureAccessor),
 m_heightmapTexture(nullptr),
@@ -31,8 +31,10 @@ m_edgesMaskTexture(nullptr)
     m_maxHeight = -FLT_MAX;
     m_minHeight = FLT_MAX;
     
-    m_width = _template->m_width;
-    m_height = _template->m_height;
+    std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<CLandscapeTemplate>(_template);
+    
+    m_width = landscapeTemplate->Get_Size().x;
+    m_height = landscapeTemplate->Get_Size().y;
     
     m_heightmapData = new f32[m_width * m_height];
     m_maxAltitude = 0.0f;

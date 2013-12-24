@@ -8,7 +8,7 @@
 
 #include "CParticleEmitterTemplateLoader.h"
 #include "CParticleEmitterLoadingOperation.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "ITemplateLoadingHandler.h"
 
 CParticleEmitterTemplateLoader::CParticleEmitterTemplateLoader(void)
@@ -28,12 +28,12 @@ void CParticleEmitterTemplateLoader::Load(const std::string& _filename, std::sha
     {
 #endif
         std::shared_ptr<CParticleEmitterLoadingOperation> operation = std::make_shared<CParticleEmitterLoadingOperation>();
-        std::shared_ptr<SParticleEmitterTemplate> particleEmitterTemplate = std::static_pointer_cast<SParticleEmitterTemplate>(operation->Serialize(_filename));
+        std::shared_ptr<CParticleEmitterTemplate> particleEmitterTemplate = std::static_pointer_cast<CParticleEmitterTemplate>(operation->Serialize(_filename));
         assert(particleEmitterTemplate != nullptr);
         assert(_handler != nullptr);
         
 #if defined(__USE_GCDPP__)
-        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SParticleEmitterTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SParticleEmitterTemplate> _template)
+        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<CParticleEmitterTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<CParticleEmitterTemplate> _template)
         {
             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
         };

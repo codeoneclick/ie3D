@@ -8,7 +8,7 @@
 
 #include "CModelTemplateLoader.h"
 #include "CModelTemplateLoadingOperation.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "ITemplateLoadingHandler.h"
 
 CModelTemplateLoader::CModelTemplateLoader(void)
@@ -31,13 +31,13 @@ void CModelTemplateLoader::Load(const std::string& _filename, std::shared_ptr<IT
 #endif
         
         std::shared_ptr<CModelTemplateLoadingOperation> operation = std::make_shared<CModelTemplateLoadingOperation>();
-        std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(operation->Serialize(_filename));
+        std::shared_ptr<CModelTemplate> modelTemplate = std::static_pointer_cast<CModelTemplate>(operation->Serialize(_filename));
         assert(modelTemplate != nullptr);
         assert(_handler != nullptr);
         
 #if defined(__USE_GCDPP__)
         
-        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SModelTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SModelTemplate> _template)
+        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<CModelTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<CModelTemplate> _template)
         {
             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
         };

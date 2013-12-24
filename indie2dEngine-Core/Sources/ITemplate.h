@@ -9,6 +9,7 @@
 #ifndef ITemplate_h
 #define ITemplate_h
 
+/*
 #include "HCommon.h"
 
 class ITemplate
@@ -173,5 +174,5 @@ struct SGUIContainerTemplate : public SGUIControlTemplate
     ui32 m_height;
 	bool m_isBatching;
 };
-
+*/
 #endif

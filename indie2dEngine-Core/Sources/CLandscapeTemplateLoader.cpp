@@ -8,7 +8,7 @@
 
 #include "CLandscapeTemplateLoader.h"
 #include "CLandscapeTemplateLoadingOperation.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "ITemplateLoadingHandler.h"
 
 CLandscapeTemplateLoader::CLandscapeTemplateLoader(void)
@@ -28,11 +28,11 @@ void CLandscapeTemplateLoader::Load(const std::string& _filename, std::shared_pt
     {
 #endif
         std::shared_ptr<CLandscapeTemplateLoadingOperation> operation = std::make_shared<CLandscapeTemplateLoadingOperation>();
-        std::shared_ptr<SLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<SLandscapeTemplate>(operation->Serialize(_filename));
+        std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<CLandscapeTemplate>(operation->Serialize(_filename));
         assert(landscapeTemplate != nullptr);
         assert(_handler != nullptr);
 #if defined(__USE_GCDPP__)
-        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<SLandscapeTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<SLandscapeTemplate> _template)
+        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<CLandscapeTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<CLandscapeTemplate> _template)
         {
             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
         };

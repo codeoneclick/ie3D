@@ -13,7 +13,7 @@
 
 #define USE_PROXY_SERVER 1
 
-class ITemplate;
+class I_RO_TemplateCommon;
 class ITemplateSerializer
 {
 private:
@@ -39,9 +39,9 @@ public:
     ITemplateSerializer(void);
     virtual ~ITemplateSerializer(void);
     
-    virtual std::shared_ptr<ITemplate> Serialize(const std::string& _filename) = 0;
-    virtual std::shared_ptr<ITemplate> Serialize(const std::string& _host, ui32 _port, const std::string& _filename) = 0;
-    virtual void Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template) = 0;
+    virtual std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename) = 0;
+    virtual std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _host, ui32 _port, const std::string& _filename) = 0;
+    virtual void Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template) = 0;
 };
 
 #endif

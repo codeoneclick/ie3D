@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 
-class ITemplate;
+class I_RO_TemplateCommon;
 class CTemplateLoadingCommands final
 {
 private:
@@ -24,7 +24,7 @@ private:
     friend class CLandscapeTemplateLoader;
 	friend class CGUITemplateLoader;
     
-    typedef std::function<void(std::shared_ptr<ITemplate> _template)> __TEMPLATE_LOADED_COMMAND;
+    typedef std::function<void(std::shared_ptr<I_RO_TemplateCommon> _template)> __TEMPLATE_LOADED_COMMAND;
     
     __TEMPLATE_LOADED_COMMAND m_templateLoadedCommand;
     
@@ -33,7 +33,7 @@ protected:
     CTemplateLoadingCommands(void);
     
     void _ConnectTemplateLoadedCommand(const __TEMPLATE_LOADED_COMMAND& _command);
-    void _ExecuteTemplateLoadedCommand(const std::shared_ptr<ITemplate>& _template);
+    void _ExecuteTemplateLoadedCommand(const std::shared_ptr<I_RO_TemplateCommon>& _template);
     
 public:
     
@@ -44,7 +44,7 @@ class ITemplateLoadingHandler
 {
 public:
     
-    typedef std::shared_ptr<std::function<void(const std::shared_ptr<ITemplate>&)>> TEMPLATE_LOADING_HANDLER;
+    typedef std::shared_ptr<std::function<void(const std::shared_ptr<I_RO_TemplateCommon>&)>> TEMPLATE_LOADING_HANDLER;
     
 private:
     
@@ -69,7 +69,7 @@ protected:
     
     std::set<TEMPLATE_LOADING_HANDLER> m_templateLoadingHandlers;
     
-    virtual void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template) = 0;
+    virtual void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template) = 0;
     
 public:
     

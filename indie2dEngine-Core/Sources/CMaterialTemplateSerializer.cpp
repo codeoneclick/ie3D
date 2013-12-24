@@ -7,8 +7,7 @@
 //
 
 #include "CMaterialTemplateSerializer.h"
-#include "ITemplate.h"
-#include "CTemplateCommon.h"
+#include "CTemplateGameObjects.h"
 
 
 CMaterialTemplateSerializer::CMaterialTemplateSerializer(void)
@@ -21,71 +20,183 @@ CMaterialTemplateSerializer::~CMaterialTemplateSerializer(void)
     
 }
 
-std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplateSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
-    pugi::xml_node node = document.child("material");
     
-    std::shared_ptr<SMaterialTemplate> materialTemplate = std::make_shared<SMaterialTemplate>();
-    materialTemplate->m_filename = _filename;
-    materialTemplate->m_renderMode = node.attribute("render_mode").as_string();
-    materialTemplate->m_isCullFace = node.attribute("is_cull_face").as_bool();
-    materialTemplate->m_isDepthTest = node.attribute("is_depth_test").as_bool();
-    materialTemplate->m_isDepthMask = node.attribute("is_depth_mask").as_bool();
-    materialTemplate->m_isBlend = node.attribute("is_blend").as_bool();
+    std::shared_ptr<CTemplateMaterial> materialTemplate = std::make_shared<CTemplateMaterial>();
     
-    std::string cullFaceModeStr = node.attribute("cull_face_mode").as_string();
+    pugi::xml_node node = document.child(materialTemplate->kMaterialMainNode.c_str());
+    
+    std::string renderOperationName = node.attribute(materialTemplate->kMaterialRenderOperationNameAttribute.c_str()).as_string();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialRenderOperationNameAttribute),
+                                    E_TEMPLATE_META_TYPE_STRING,
+                                    &renderOperationName);
+    
+    bool isCullFace = node.attribute(materialTemplate->kMaterialIsCullFaceAttribute.c_str()).as_bool();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialIsCullFaceAttribute),
+                                    E_TEMPLATE_META_TYPE_BOOL,
+                                    &isCullFace);
+    
+    bool isDepthTest = node.attribute(materialTemplate->kMaterialIsDepthTestAttribute.c_str()).as_bool();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialIsDepthTestAttribute),
+                                    E_TEMPLATE_META_TYPE_BOOL,
+                                    &isDepthTest);
+    
+    bool isDepthMask = node.attribute(materialTemplate->kMaterialIsDepthMaskAttribute.c_str()).as_bool();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialIsDepthMaskAttribute),
+                                    E_TEMPLATE_META_TYPE_BOOL,
+                                    &isDepthMask);
+    
+    bool isBlending = node.attribute(materialTemplate->kMaterialIsBlendingAttribute.c_str()).as_bool();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialIsBlendingAttribute),
+                                    E_TEMPLATE_META_TYPE_BOOL,
+                                    &isBlending);
+    
+    std::string cullFaceModeStr = node.attribute(materialTemplate->kMaterialCullFaceModeAttribute.c_str()).as_string();
     assert(g_glenumToString.find(cullFaceModeStr) != g_glenumToString.end());
-    materialTemplate->m_cullFaceMode = g_glenumToString.find(cullFaceModeStr)->second;
+    ui32 cullFaceMode = g_glenumToString.find(cullFaceModeStr)->second;
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialCullFaceModeAttribute),
+                                    E_TEMPLATE_META_TYPE_UI32,
+                                    &cullFaceMode);
     
-    std::string blendFunctionSourceStr = node.attribute("blend_function_source").as_string();
-    assert(g_glenumToString.find(blendFunctionSourceStr) != g_glenumToString.end());
-    materialTemplate->m_blendFunctionSource = g_glenumToString.find(blendFunctionSourceStr)->second;
+    std::string blendingFunctionSourceStr = node.attribute(materialTemplate->kMaterialBlendingFunctionSourceAttribute.c_str()).as_string();
+    assert(g_glenumToString.find(blendingFunctionSourceStr) != g_glenumToString.end());
+    ui32 blendingFunctionSource = g_glenumToString.find(blendingFunctionSourceStr)->second;
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialBlendingFunctionSourceAttribute),
+                                    E_TEMPLATE_META_TYPE_UI32,
+                                    &blendingFunctionSource);
     
-    std::string blendFunctionDestinationStr = node.attribute("blend_function_destination").as_string();
-    assert(g_glenumToString.find(blendFunctionDestinationStr) != g_glenumToString.end());
-    materialTemplate->m_blendFunctionDestination = g_glenumToString.find(blendFunctionDestinationStr)->second;
+    std::string blendingFunctionDestinationStr = node.attribute(materialTemplate->kMaterialBlendingFunctionDestinationAttribute.c_str()).as_string();
+    assert(g_glenumToString.find(blendingFunctionDestinationStr) != g_glenumToString.end());
+    ui32 blendingFunctionDestination = g_glenumToString.find(blendingFunctionDestinationStr)->second;
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialBlendingFunctionDestinationAttribute),
+                                    E_TEMPLATE_META_TYPE_UI32,
+                                    &blendingFunctionDestination);
     
-    materialTemplate->m_isClipping = node.attribute("is_cliping").as_bool();
+    bool isClipping = node.attribute(materialTemplate->kMaterialIsClippingAttribute.c_str()).as_bool();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialIsClippingAttribute),
+                                    E_TEMPLATE_META_TYPE_BOOL,
+                                    &isClipping);
+
+    f32 clippingX = node.attribute(materialTemplate->kMaterialClippingXAttribute.c_str()).as_float();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialClippingXAttribute),
+                                    E_TEMPLATE_META_TYPE_F32,
+                                    &clippingX);
     
-    materialTemplate->m_clipping.x = node.attribute("clipping_x").as_float();
-    materialTemplate->m_clipping.y = node.attribute("clipping_y").as_float();
-    materialTemplate->m_clipping.z = node.attribute("clipping_z").as_float();
-    materialTemplate->m_clipping.w = node.attribute("clipping_w").as_float();
+    f32 clippingY = node.attribute(materialTemplate->kMaterialClippingYAttribute.c_str()).as_float();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialClippingYAttribute),
+                                    E_TEMPLATE_META_TYPE_F32,
+                                    &clippingY);
     
-    materialTemplate->m_isReflected = node.attribute("is_reflected").as_bool();
-    materialTemplate->m_isShadowed = node.attribute("is_shadowed").as_bool();
-    materialTemplate->m_isDebug = node.attribute("is_debug").as_bool();
+    f32 clippingZ = node.attribute(materialTemplate->kMaterialClippingZAttribute.c_str()).as_float();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialClippingZAttribute),
+                                    E_TEMPLATE_META_TYPE_F32,
+                                    &clippingZ);
     
-    std::shared_ptr<SShaderTemplate> shaderTemplate = std::make_shared<SShaderTemplate>();
-    shaderTemplate->m_vsFilename = node.child("shader").attribute("vs_name").as_string();
-    shaderTemplate->m_fsFilename = node.child("shader").attribute("fs_name").as_string();
-    materialTemplate->m_shaderTemplate = shaderTemplate;
+    f32 clippingW = node.attribute(materialTemplate->kMaterialClippingWAttribute.c_str()).as_float();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialClippingWAttribute),
+                                    E_TEMPLATE_META_TYPE_F32,
+                                    &clippingW);
     
-    pugi::xml_node textures_node = node.child("textures");
-    for (pugi::xml_node texture = textures_node.child("texture"); texture; texture = texture.next_sibling("texture"))
+    bool isReflecting = node.attribute(materialTemplate->kMaterialIsReflectingAttribute.c_str()).as_bool();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialIsReflectingAttribute),
+                                    E_TEMPLATE_META_TYPE_BOOL,
+                                    &isReflecting);
+
+    bool isShadowing = node.attribute(materialTemplate->kMaterialIsShadowingAttribute.c_str()).as_bool();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialIsShadowingAttribute),
+                                    E_TEMPLATE_META_TYPE_BOOL,
+                                    &isShadowing);
+    
+    bool isDebugging = node.attribute(materialTemplate->kMaterialIsDebuggingAttribute.c_str()).as_bool();
+    materialTemplate->Set_Attribute(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                             materialTemplate->kMaterialIsDebuggingAttribute),
+                                    E_TEMPLATE_META_TYPE_BOOL,
+                                    &isDebugging);
+    
+    
+    std::shared_ptr<CTemplateShader> shaderTemplate = std::make_shared<CTemplateShader>();
+    std::string vsFilename = node.child(materialTemplate->kMaterialShaderTemplateNode.c_str()).attribute(shaderTemplate->kShaderVSFilenameAttribute.c_str()).as_string();
+    shaderTemplate->Set_Attribute(Get_TemplateAttributeKey(shaderTemplate->kShaderMainNode,
+                                                           shaderTemplate->kShaderVSFilenameAttribute),
+                                  E_TEMPLATE_META_TYPE_STRING,
+                                  &vsFilename);
+    
+    std::string fsFilename = node.child(materialTemplate->kMaterialShaderTemplateNode.c_str()).attribute(shaderTemplate->kShaderFSFilenameAttribute.c_str()).as_string();
+    shaderTemplate->Set_Attribute(Get_TemplateAttributeKey(shaderTemplate->kShaderMainNode,
+                                                           shaderTemplate->kShaderFSFilenameAttribute),
+                                  E_TEMPLATE_META_TYPE_STRING,
+                                  &fsFilename);
+    
+    materialTemplate->Set_Template(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                            materialTemplate->kMaterialShaderTemplateNode),
+                                   shaderTemplate);
+    
+    pugi::xml_node texturesNode = node.child(materialTemplate->kMaterialTexturesTemplatesNode.c_str());
+    for (pugi::xml_node texture = texturesNode.child(materialTemplate->kMaterialTextureTemplateNode.c_str());
+         texture;
+         texture = texture.next_sibling(materialTemplate->kMaterialTextureTemplateNode.c_str()))
     {
-        std::shared_ptr<STextureTemplate> textureTemplate = std::make_shared<STextureTemplate>();
-        textureTemplate->m_filename = texture.attribute("name").as_string();
-        textureTemplate->m_operationName = texture.attribute("operation").as_string();
-        textureTemplate->m_sampler = texture.attribute("slot").as_uint();
+        std::shared_ptr<CTemplateTexture> textureTemplate = std::make_shared<CTemplateTexture>();
         
-        std::string wrapStr = texture.attribute("wrap").as_string();
-        assert(g_glenumToString.find(wrapStr) != g_glenumToString.end());
-        textureTemplate->m_wrap = g_glenumToString.find(wrapStr)->second;
-        materialTemplate->m_texturesTemplates.push_back(textureTemplate);
+        std::string filename = texture.attribute(textureTemplate->kTextureFilenameAttribute.c_str()).as_string();
+        textureTemplate->Set_Attribute(Get_TemplateAttributeKey(textureTemplate->kTextureMainNode,
+                                                                textureTemplate->kTextureFilenameAttribute),
+                                       E_TEMPLATE_META_TYPE_STRING,
+                                       &filename);
+        
+        std::string renderOperationName = texture.attribute(textureTemplate->kTextureFilenameAttribute.c_str()).as_string();
+        textureTemplate->Set_Attribute(Get_TemplateAttributeKey(textureTemplate->kTextureMainNode,
+                                                                textureTemplate->kTextureRenderOperationNameAttribute),
+                                       E_TEMPLATE_META_TYPE_STRING,
+                                       &renderOperationName);
+        
+        ui32 samplerId = texture.attribute(textureTemplate->kTextureSamplerIdAttribute.c_str()).as_uint();
+        textureTemplate->Set_Attribute(Get_TemplateAttributeKey(textureTemplate->kTextureMainNode,
+                                                                textureTemplate->kTextureSamplerIdAttribute),
+                                       E_TEMPLATE_META_TYPE_UI32,
+                                       &samplerId);
+        
+        std::string textureWrapModeStr = texture.attribute(textureTemplate->kTextureWrapModeAttribute.c_str()).as_string();
+        assert(g_glenumToString.find(textureWrapModeStr) != g_glenumToString.end());
+        ui32 textureWrapMode = g_glenumToString.find(textureWrapModeStr)->second;
+        textureTemplate->Set_Attribute(Get_TemplateAttributeKey(textureTemplate->kTextureMainNode,
+                                                                textureTemplate->kTextureWrapModeAttribute),
+                                       E_TEMPLATE_META_TYPE_UI32,
+                                       &textureWrapMode);
+        
+        materialTemplate->Set_Template(Get_TemplateAttributeKey(materialTemplate->kMaterialMainNode,
+                                                                materialTemplate->kMaterialTexturesTemplatesNode),
+                                       textureTemplate);
     }
+
     return materialTemplate;
 }
 
-std::shared_ptr<ITemplate> CMaterialTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CMaterialTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
+void CMaterialTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     
 }

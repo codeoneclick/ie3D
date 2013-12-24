@@ -147,7 +147,7 @@ void IGameObject::ListenSceneUpdateMgr(bool _value)
     m_isNeedToUpdate = _value;
 }
 
-void IGameObject::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+void IGameObject::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     m_template = _template;
     for(TEMPLATE_LOADING_HANDLER handler : m_templateLoadingHandlers)

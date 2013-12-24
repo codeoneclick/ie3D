@@ -20,7 +20,7 @@ CMaterialTemplateLoadingOperation::~CMaterialTemplateLoadingOperation(void)
     
 }
 
-std::shared_ptr<ITemplate> CMaterialTemplateLoadingOperation::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplateLoadingOperation::Serialize(const std::string& _filename)
 {
     std::shared_ptr<CMaterialTemplateSerializer> serializer = std::make_shared<CMaterialTemplateSerializer>();
     return serializer->Serialize(_filename);

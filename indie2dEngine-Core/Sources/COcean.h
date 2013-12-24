@@ -32,7 +32,7 @@ protected:
     void _OnDraw(const std::string& _renderMode);
     void _OnUnbind(const std::string& _renderMode);
     
-    void _OnTemplateLoaded(std::shared_ptr<ITemplate> _template);
+    void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
     void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
     
 public:

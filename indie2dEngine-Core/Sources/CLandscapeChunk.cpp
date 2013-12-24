@@ -13,7 +13,7 @@
 #include "CCamera.h"
 #include "CLight.h"
 #include "CResourceAccessor.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "CAABoundBox.h"
 #include "CRenderMgr.h"
 #include "CBatchingMgr.h"
@@ -82,20 +82,22 @@ void CLandscapeChunk::_Set_SplattingNormalTexture(const std::shared_ptr<CTexture
     }
 }
 
-void CLandscapeChunk::_OnTemplateLoaded(std::shared_ptr<ITemplate> _template)
+void CLandscapeChunk::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
-    std::shared_ptr<SLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<SLandscapeTemplate>(_template);
+    std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<CLandscapeTemplate>(_template);
     assert(m_resourceAccessor != nullptr);
     
-    for(const auto& materialTemplate : landscapeTemplate->m_materialsTemplates)
+    for(const auto& iterator : landscapeTemplate->Get_MaterialsTemplates())
     {
-        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(materialTemplate->m_shaderTemplate->m_vsFilename,
-                                                                           materialTemplate->m_shaderTemplate->m_fsFilename);
+        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(iterator);
+        std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+                                                                           shaderTemplate->Get_FSFilename());
         assert(shader != nullptr);
         shader->Register_LoadingHandler(shared_from_this());
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->m_renderMode);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->Get_RenderOperationName());
 		material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
-        m_materials.insert(std::make_pair(materialTemplate->m_renderMode, material));
+        m_materials.insert(std::make_pair(materialTemplate->Get_RenderOperationName(), material));
         CLandscapeChunk::_OnResourceLoaded(material, true);
     }
     

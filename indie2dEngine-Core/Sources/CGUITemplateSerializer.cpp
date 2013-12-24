@@ -9,7 +9,7 @@
 #include "CGUITemplateSerializer.h"
 #include "ITemplate.h"
 
-CGUITemplateSerializer::CGUITemplateSerializer(E_GUI_LOADING_SCHEME _scheme) :
+/*CGUITemplateSerializer::CGUITemplateSerializer(E_GUI_LOADING_SCHEME _scheme) :
 m_scheme(_scheme)
 {
     
@@ -67,4 +67,4 @@ std::shared_ptr<ITemplate> CGUITemplateSerializer::Serialize(const std::string& 
 void CGUITemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
 {
 
-}
+}*/
