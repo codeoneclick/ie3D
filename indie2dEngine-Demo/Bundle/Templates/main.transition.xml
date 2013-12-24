@@ -1,17 +1,10 @@
 <transition guid="main.transition">
-    <output.render.operation filename="output.space.operation.xml"/>
-    <world.space.render.operations>
-        <world.space.render.operation filename="world.space.operation.xml"/>
-        <world.space.render.operation filename="world.space.reflection.operation.xml"/>
-        <world.space.render.operation filename="world.space.refraction.operation.xml"/>
-        <!--<world.space.render.operation filename="world.space.gbuffer.position.operation.xml"/>-->
-        <!--<world.space.render.operation filename="gbuffer.normal.operation.xml"/>-->
-    </world.space.render.operations>
-    <screen.space.render.operations>
-        <!--<screen.space.render.operation filename="screen.space.operation.xml"/>-->
-        <!--<screen.space.render.operation filename="screen.space.blur.operation.xml"/>-->
-        <!--<screen.space.render.operation filename="screen.space.bloomextract.operation.xml"/>-->
-        <!--<screen.space.render.operation filename="screen.space.bloomcombine.operation.xml"/>-->
-        <!--<screen.space.render.operation filename="screen.space.deffered.operation.xml"/>-->
-    </screen.space.render.operations>
+    <output_render_operation filename="output.space.operation.xml"/>
+    <world_space_operations>
+        <operation filename="world.space.operation.xml"/>
+        <operation filename="world.space.reflection.operation.xml"/>
+        <operation filename="world.space.refraction.operation.xml"/>
+    </world_space_operations>
+    <screen_space_operations>
+    </screen_space_operations>
 </transition>

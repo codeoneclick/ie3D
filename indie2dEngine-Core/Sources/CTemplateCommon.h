@@ -34,15 +34,16 @@ protected:
     
 public:
     
-    TTemplateAttribute(bool _value) { m_data.m_BOOL = _value; m_metaType = E_TEMPLATE_META_TYPE_BOOL; };
-    TTemplateAttribute(i8 _value) { m_data.m_I8 = _value; m_metaType = E_TEMPLATE_META_TYPE_I8; };
-    TTemplateAttribute(ui8 _value) { m_data.m_UI8 = _value; m_metaType = E_TEMPLATE_META_TYPE_UI8; };
-    TTemplateAttribute(i16 _value) { m_data.m_I16 = _value; m_metaType = E_TEMPLATE_META_TYPE_I16; };
-    TTemplateAttribute(ui16 _value) { m_data.m_UI16 = _value; m_metaType = E_TEMPLATE_META_TYPE_UI16; };
-    TTemplateAttribute(i32 _value) { m_data.m_I32 = _value; m_metaType = E_TEMPLATE_META_TYPE_I32; };
-    TTemplateAttribute(ui32 _value) { m_data.m_UI32 = _value; m_metaType = E_TEMPLATE_META_TYPE_UI32; };
-    TTemplateAttribute(f32 _value) { m_data.m_F32 = _value; m_metaType = E_TEMPLATE_META_TYPE_F32; };
-    TTemplateAttribute(const char* _value) { strcpy(m_data.m_STRING, _value); m_metaType = E_TEMPLATE_META_TYPE_STRING; };
+    TTemplateAttribute(bool _value) { m_data.m_STRING = nullptr; m_data.m_BOOL = _value; m_metaType = E_TEMPLATE_META_TYPE_BOOL; };
+    TTemplateAttribute(i8 _value) { m_data.m_STRING = nullptr; m_data.m_I8 = _value; m_metaType = E_TEMPLATE_META_TYPE_I8; };
+    TTemplateAttribute(ui8 _value) { m_data.m_STRING = nullptr; m_data.m_UI8 = _value; m_metaType = E_TEMPLATE_META_TYPE_UI8; };
+    TTemplateAttribute(i16 _value) { m_data.m_STRING = nullptr; m_data.m_I16 = _value; m_metaType = E_TEMPLATE_META_TYPE_I16; };
+    TTemplateAttribute(ui16 _value) { m_data.m_STRING = nullptr; m_data.m_UI16 = _value; m_metaType = E_TEMPLATE_META_TYPE_UI16; };
+    TTemplateAttribute(i32 _value) { m_data.m_STRING = nullptr; m_data.m_I32 = _value; m_metaType = E_TEMPLATE_META_TYPE_I32; };
+    TTemplateAttribute(ui32 _value) { m_data.m_STRING = nullptr; m_data.m_UI32 = _value; m_metaType = E_TEMPLATE_META_TYPE_UI32; };
+    TTemplateAttribute(f32 _value) { m_data.m_STRING = nullptr; m_data.m_F32 = _value; m_metaType = E_TEMPLATE_META_TYPE_F32; };
+    TTemplateAttribute(const char* _value) { m_data.m_STRING = new char[strlen(_value)]; strcpy(m_data.m_STRING, _value); m_metaType = E_TEMPLATE_META_TYPE_STRING; };
+    ~TTemplateAttribute(void) { delete[] m_data.m_STRING; }
     
     E_TEMPLATE_META_TYPE Get_MetaType(void);
     bool Get_Bool(void);

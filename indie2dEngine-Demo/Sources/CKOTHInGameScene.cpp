@@ -64,7 +64,7 @@ void CKOTHInGameScene::Load(void)
     m_colliders.push_back(model);
     m_root->InsertModel(model);
     
-    for(i32 i = 0; i < 14; ++i)
+    /*for(i32 i = 0; i < 14; ++i)
     {
         for(i32 j = 0; j < 14; ++j)
         {
@@ -104,7 +104,7 @@ void CKOTHInGameScene::Load(void)
     
     m_root->RegisterCollisionHandler(shared_from_this());
     m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
-    m_root->RegisterTapRecognizerHandler(m_moveControllerRecognizer);
+    m_root->RegisterTapRecognizerHandler(m_moveControllerRecognizer);*/
 
 	/*std::shared_ptr<CGUIContainer> guicontainer = m_root->CreateGUIContainer("guicontainer.xml");
 	m_root->InsertGUIContainer(guicontainer);

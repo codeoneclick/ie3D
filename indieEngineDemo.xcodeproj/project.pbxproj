@@ -44,14 +44,8 @@
 		21D07307181DB34F0019D264 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D072A9181DB34F0019D264 /* Default-568h@2x.png */; };
 		21D07308181DB34F0019D264 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AA181DB34F0019D264 /* Default.png */; };
 		21D07309181DB34F0019D264 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AB181DB34F0019D264 /* Default@2x.png */; };
-		21D0730A181DB34F0019D264 /* gbuffer.normal.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AD181DB34F0019D264 /* gbuffer.normal.material.xml */; };
-		21D0730B181DB34F0019D264 /* gbuffer.normal.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AE181DB34F0019D264 /* gbuffer.normal.operation.xml */; };
 		21D0730C181DB34F0019D264 /* guicontainer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072AF181DB34F0019D264 /* guicontainer.xml */; };
 		21D0730D181DB34F0019D264 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B0181DB34F0019D264 /* main.transition.xml */; };
-		21D0730E181DB34F0019D264 /* material.bloomcombine.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B1181DB34F0019D264 /* material.bloomcombine.screen.xml */; };
-		21D0730F181DB34F0019D264 /* material.bloomextract.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B2181DB34F0019D264 /* material.bloomextract.screen.xml */; };
-		21D07310181DB34F0019D264 /* material.blur.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B3181DB34F0019D264 /* material.blur.screen.xml */; };
-		21D07311181DB34F0019D264 /* material.deffered.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B4181DB34F0019D264 /* material.deffered.screen.xml */; };
 		21D07312181DB34F0019D264 /* material.guicontainer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B5181DB34F0019D264 /* material.guicontainer.xml */; };
 		21D07313181DB34F0019D264 /* material.model.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B6181DB34F0019D264 /* material.model.common.xml */; };
 		21D07314181DB34F0019D264 /* material.model.Footman.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072B7181DB34F0019D264 /* material.model.Footman.common.xml */; };
@@ -68,13 +62,6 @@
 		21D0731F181DB34F0019D264 /* output.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C2181DB34F0019D264 /* output.space.operation.xml */; };
 		21D07320181DB34F0019D264 /* particle.emitter.01.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C3181DB34F0019D264 /* particle.emitter.01.xml */; };
 		21D07321181DB34F0019D264 /* particle.emitter.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C4181DB34F0019D264 /* particle.emitter.material.xml */; };
-		21D07322181DB34F0019D264 /* screen.gbuffer.position.model.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C5181DB34F0019D264 /* screen.gbuffer.position.model.material.xml */; };
-		21D07323181DB34F0019D264 /* screen.space.bloomcombine.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C6181DB34F0019D264 /* screen.space.bloomcombine.operation.xml */; };
-		21D07324181DB34F0019D264 /* screen.space.bloomextract.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C7181DB34F0019D264 /* screen.space.bloomextract.operation.xml */; };
-		21D07325181DB34F0019D264 /* screen.space.blur.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C8181DB34F0019D264 /* screen.space.blur.operation.xml */; };
-		21D07326181DB34F0019D264 /* screen.space.deffered.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C9181DB34F0019D264 /* screen.space.deffered.operation.xml */; };
-		21D07327181DB34F0019D264 /* screen.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CA181DB34F0019D264 /* screen.space.operation.xml */; };
-		21D07328181DB34F0019D264 /* world.space.gbuffer.position.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CB181DB34F0019D264 /* world.space.gbuffer.position.operation.xml */; };
 		21D07329181DB34F0019D264 /* world.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CC181DB34F0019D264 /* world.space.operation.xml */; };
 		21D0732A181DB34F0019D264 /* world.space.reflection.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CD181DB34F0019D264 /* world.space.reflection.operation.xml */; };
 		21D0732B181DB34F0019D264 /* world.space.refraction.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072CE181DB34F0019D264 /* world.space.refraction.operation.xml */; };
@@ -248,14 +235,8 @@
 		21D072A9181DB34F0019D264 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		21D072AA181DB34F0019D264 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		21D072AB181DB34F0019D264 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		21D072AD181DB34F0019D264 /* gbuffer.normal.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.material.xml; sourceTree = "<group>"; };
-		21D072AE181DB34F0019D264 /* gbuffer.normal.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.operation.xml; sourceTree = "<group>"; };
 		21D072AF181DB34F0019D264 /* guicontainer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = guicontainer.xml; sourceTree = "<group>"; };
 		21D072B0181DB34F0019D264 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
-		21D072B1181DB34F0019D264 /* material.bloomcombine.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.bloomcombine.screen.xml; sourceTree = "<group>"; };
-		21D072B2181DB34F0019D264 /* material.bloomextract.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.bloomextract.screen.xml; sourceTree = "<group>"; };
-		21D072B3181DB34F0019D264 /* material.blur.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.blur.screen.xml; sourceTree = "<group>"; };
-		21D072B4181DB34F0019D264 /* material.deffered.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.deffered.screen.xml; sourceTree = "<group>"; };
 		21D072B5181DB34F0019D264 /* material.guicontainer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.guicontainer.xml; sourceTree = "<group>"; };
 		21D072B6181DB34F0019D264 /* material.model.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.common.xml; sourceTree = "<group>"; };
 		21D072B7181DB34F0019D264 /* material.model.Footman.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.common.xml; sourceTree = "<group>"; };
@@ -272,13 +253,6 @@
 		21D072C2181DB34F0019D264 /* output.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = output.space.operation.xml; sourceTree = "<group>"; };
 		21D072C3181DB34F0019D264 /* particle.emitter.01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.01.xml; sourceTree = "<group>"; };
 		21D072C4181DB34F0019D264 /* particle.emitter.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.material.xml; sourceTree = "<group>"; };
-		21D072C5181DB34F0019D264 /* screen.gbuffer.position.model.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.gbuffer.position.model.material.xml; sourceTree = "<group>"; };
-		21D072C6181DB34F0019D264 /* screen.space.bloomcombine.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomcombine.operation.xml; sourceTree = "<group>"; };
-		21D072C7181DB34F0019D264 /* screen.space.bloomextract.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomextract.operation.xml; sourceTree = "<group>"; };
-		21D072C8181DB34F0019D264 /* screen.space.blur.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.blur.operation.xml; sourceTree = "<group>"; };
-		21D072C9181DB34F0019D264 /* screen.space.deffered.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.deffered.operation.xml; sourceTree = "<group>"; };
-		21D072CA181DB34F0019D264 /* screen.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.operation.xml; sourceTree = "<group>"; };
-		21D072CB181DB34F0019D264 /* world.space.gbuffer.position.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.gbuffer.position.operation.xml; sourceTree = "<group>"; };
 		21D072CC181DB34F0019D264 /* world.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.operation.xml; sourceTree = "<group>"; };
 		21D072CD181DB34F0019D264 /* world.space.reflection.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.reflection.operation.xml; sourceTree = "<group>"; };
 		21D072CE181DB34F0019D264 /* world.space.refraction.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.refraction.operation.xml; sourceTree = "<group>"; };
@@ -524,6 +498,9 @@
 		21D072AC181DB34F0019D264 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				A4BB05171869F44600B226DB /* GameObjects */,
+				A4BB05161869F36900B226DB /* RenderOperations */,
+				A4BB05151869F35800B226DB /* Transitions */,
 				A49046541844B27B009734B8 /* material.landscape.edges.common.xml */,
 				A49046551844B27B009734B8 /* material.landscape.edges.reflection.xml */,
 				A49046561844B27B009734B8 /* material.landscape.edges.refraction.xml */,
@@ -533,18 +510,8 @@
 				A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */,
 				A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */,
 				A4F5D70C18436E4E00ADAC70 /* landscape.xml */,
-				21D072AD181DB34F0019D264 /* gbuffer.normal.material.xml */,
-				21D072AE181DB34F0019D264 /* gbuffer.normal.operation.xml */,
 				21D072AF181DB34F0019D264 /* guicontainer.xml */,
-				21D072B0181DB34F0019D264 /* main.transition.xml */,
-				21D072B1181DB34F0019D264 /* material.bloomcombine.screen.xml */,
-				21D072B2181DB34F0019D264 /* material.bloomextract.screen.xml */,
-				21D072B3181DB34F0019D264 /* material.blur.screen.xml */,
-				21D072B4181DB34F0019D264 /* material.deffered.screen.xml */,
 				21D072B5181DB34F0019D264 /* material.guicontainer.xml */,
-				21D072B7181DB34F0019D264 /* material.model.Footman.common.xml */,
-				21D072B8181DB34F0019D264 /* material.model.Footman.reflection.xml */,
-				21D072B9181DB34F0019D264 /* material.model.Footman.refraction.xml */,
 				21D072B6181DB34F0019D264 /* material.model.common.xml */,
 				21D072BA181DB34F0019D264 /* material.model.reflection.xml */,
 				21D072BB181DB34F0019D264 /* material.model.refraction.xml */,
@@ -552,21 +519,10 @@
 				21D072BD181DB34F0019D264 /* material.output.xml */,
 				21D072BE181DB34F0019D264 /* material.screen.xml */,
 				21D072BF181DB34F0019D264 /* model.Building.xml */,
-				21D072C0181DB34F0019D264 /* model.Footman.xml */,
 				21D072C1181DB34F0019D264 /* ocean.xml */,
 				21D072C2181DB34F0019D264 /* output.space.operation.xml */,
 				21D072C3181DB34F0019D264 /* particle.emitter.01.xml */,
 				21D072C4181DB34F0019D264 /* particle.emitter.material.xml */,
-				21D072C5181DB34F0019D264 /* screen.gbuffer.position.model.material.xml */,
-				21D072C6181DB34F0019D264 /* screen.space.bloomcombine.operation.xml */,
-				21D072C7181DB34F0019D264 /* screen.space.bloomextract.operation.xml */,
-				21D072C8181DB34F0019D264 /* screen.space.blur.operation.xml */,
-				21D072C9181DB34F0019D264 /* screen.space.deffered.operation.xml */,
-				21D072CA181DB34F0019D264 /* screen.space.operation.xml */,
-				21D072CB181DB34F0019D264 /* world.space.gbuffer.position.operation.xml */,
-				21D072CC181DB34F0019D264 /* world.space.operation.xml */,
-				21D072CD181DB34F0019D264 /* world.space.reflection.operation.xml */,
-				21D072CE181DB34F0019D264 /* world.space.refraction.operation.xml */,
 			);
 			name = Templates;
 			path = "indie2dEngine-Demo/Bundle/Templates";
@@ -593,6 +549,43 @@
 			name = Textures;
 			path = "indie2dEngine-Demo/Bundle/Textures";
 			sourceTree = SOURCE_ROOT;
+		};
+		A4BB05151869F35800B226DB /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				21D072B0181DB34F0019D264 /* main.transition.xml */,
+			);
+			name = Transitions;
+			sourceTree = "<group>";
+		};
+		A4BB05161869F36900B226DB /* RenderOperations */ = {
+			isa = PBXGroup;
+			children = (
+				21D072CC181DB34F0019D264 /* world.space.operation.xml */,
+				21D072CD181DB34F0019D264 /* world.space.reflection.operation.xml */,
+				21D072CE181DB34F0019D264 /* world.space.refraction.operation.xml */,
+			);
+			name = RenderOperations;
+			sourceTree = "<group>";
+		};
+		A4BB05171869F44600B226DB /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				A4BB05181869F44D00B226DB /* Materials */,
+				21D072C0181DB34F0019D264 /* model.Footman.xml */,
+			);
+			name = GameObjects;
+			sourceTree = "<group>";
+		};
+		A4BB05181869F44D00B226DB /* Materials */ = {
+			isa = PBXGroup;
+			children = (
+				21D072B7181DB34F0019D264 /* material.model.Footman.common.xml */,
+				21D072B8181DB34F0019D264 /* material.model.Footman.reflection.xml */,
+				21D072B9181DB34F0019D264 /* material.model.Footman.refraction.xml */,
+			);
+			name = Materials;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -715,7 +708,6 @@
 				21D072E0181DB34F0019D264 /* mesh.mdl in Resources */,
 				21D07270181DB1910019D264 /* CGameViewController.xib in Resources */,
 				21D072EA181DB34F0019D264 /* model_03.MDL_sk in Resources */,
-				21D0730A181DB34F0019D264 /* gbuffer.normal.material.xml in Resources */,
 				A490464C1843B9DE009734B8 /* material.landscape.reflection.xml in Resources */,
 				21D0732D181DB34F0019D264 /* Footman.Diffuse.pvr in Resources */,
 				21D07313181DB34F0019D264 /* material.model.common.xml in Resources */,
@@ -727,19 +719,16 @@
 				21D072E9181DB34F0019D264 /* model_03.MDL_mesh in Resources */,
 				21D0732B181DB34F0019D264 /* world.space.refraction.operation.xml in Resources */,
 				21D072E8181DB34F0019D264 /* model_03.MDL_anim in Resources */,
-				21D07328181DB34F0019D264 /* world.space.gbuffer.position.operation.xml in Resources */,
 				21D07330181DB34F0019D264 /* ocean.pvr in Resources */,
 				21D072DC181DB34F0019D264 /* Footman2.MDL in Resources */,
 				21D072E4181DB34F0019D264 /* model_01.MDL_sk in Resources */,
 				21D0731A181DB34F0019D264 /* material.output.xml in Resources */,
 				21D072DB181DB34F0019D264 /* Footman.mdl in Resources */,
-				21D07322181DB34F0019D264 /* screen.gbuffer.position.model.material.xml in Resources */,
 				21D072DF181DB34F0019D264 /* Ghoul_01.MDL in Resources */,
 				21D0731B181DB34F0019D264 /* material.screen.xml in Resources */,
 				21D07316181DB34F0019D264 /* material.model.Footman.refraction.xml in Resources */,
 				21D0731E181DB34F0019D264 /* ocean.xml in Resources */,
 				21D07319181DB34F0019D264 /* material.ocean.xml in Resources */,
-				21D0730B181DB34F0019D264 /* gbuffer.normal.operation.xml in Resources */,
 				21D07312181DB34F0019D264 /* material.guicontainer.xml in Resources */,
 				A49046581844B27B009734B8 /* material.landscape.edges.reflection.xml in Resources */,
 				21D07331181DB34F0019D264 /* ocean_hm.pvr in Resources */,
@@ -749,11 +738,7 @@
 				21D07329181DB34F0019D264 /* world.space.operation.xml in Resources */,
 				21D07321181DB34F0019D264 /* particle.emitter.material.xml in Resources */,
 				21D072E2181DB34F0019D264 /* model_01.MDL_anim in Resources */,
-				21D07327181DB34F0019D264 /* screen.space.operation.xml in Resources */,
-				21D07323181DB34F0019D264 /* screen.space.bloomcombine.operation.xml in Resources */,
 				21D07336181DB34F0019D264 /* texture_02.pvr in Resources */,
-				21D0730E181DB34F0019D264 /* material.bloomcombine.screen.xml in Resources */,
-				21D0730F181DB34F0019D264 /* material.bloomextract.screen.xml in Resources */,
 				A49046591844B27B009734B8 /* material.landscape.edges.refraction.xml in Resources */,
 				21D07309181DB34F0019D264 /* Default@2x.png in Resources */,
 				21D0730C181DB34F0019D264 /* guicontainer.xml in Resources */,
@@ -764,9 +749,7 @@
 				A490464D1843B9DE009734B8 /* material.landscape.refraction.xml in Resources */,
 				21D072E5181DB34F0019D264 /* model_02.MDL_anim in Resources */,
 				21D07318181DB34F0019D264 /* material.model.refraction.xml in Resources */,
-				21D07324181DB34F0019D264 /* screen.space.bloomextract.operation.xml in Resources */,
 				A4F5D70E18436E4E00ADAC70 /* landscape.xml in Resources */,
-				21D07311181DB34F0019D264 /* material.deffered.screen.xml in Resources */,
 				21D0731C181DB34F0019D264 /* model.Building.xml in Resources */,
 				21D07317181DB34F0019D264 /* material.model.reflection.xml in Resources */,
 				21D07320181DB34F0019D264 /* particle.emitter.01.xml in Resources */,
@@ -778,11 +761,8 @@
 				21D07332181DB34F0019D264 /* ocean_nm.pvr in Resources */,
 				21D072E1181DB34F0019D264 /* mesh_01.MDL in Resources */,
 				21D072E7181DB34F0019D264 /* model_02.MDL_sk in Resources */,
-				21D07325181DB34F0019D264 /* screen.space.blur.operation.xml in Resources */,
-				21D07326181DB34F0019D264 /* screen.space.deffered.operation.xml in Resources */,
 				21D072DD181DB34F0019D264 /* Footman3.MDL in Resources */,
 				21D07308181DB34F0019D264 /* Default.png in Resources */,
-				21D07310181DB34F0019D264 /* material.blur.screen.xml in Resources */,
 				21D0731D181DB34F0019D264 /* model.Footman.xml in Resources */,
 				21D0731F181DB34F0019D264 /* output.space.operation.xml in Resources */,
 			);
