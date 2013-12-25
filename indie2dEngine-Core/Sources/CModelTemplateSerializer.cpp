@@ -76,8 +76,7 @@ std::shared_ptr<I_RO_TemplateCommon> CModelTemplateSerializer::Serialize(const s
     for (pugi::xml_node material = materialsNode.child(modelTemplate->kGameObjectMaterialTemplateNode.c_str());
          material;
          material = material.next_sibling(modelTemplate->kGameObjectMaterialTemplateNode.c_str()))
-    {
-        std::string filename = material.attribute(modelTemplate->kGameObjectMaterialFilenameAttribute.c_str()).as_string();
+    {        std::string filename = material.attribute(modelTemplate->kGameObjectMaterialFilenameAttribute.c_str()).as_string();
         modelTemplate->Set_Attribute(Get_TemplateAttributeKey(modelTemplate->kGameObjectMaterialsTemplatesNode,
                                                               modelTemplate->kGameObjectMaterialTemplateNode,
                                                               modelTemplate->kGameObjectMaterialFilenameAttribute),

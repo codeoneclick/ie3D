@@ -64,7 +64,7 @@ void CKOTHInGameScene::Load(void)
     m_colliders.push_back(model);
     m_root->InsertModel(model);
     
-    /*for(i32 i = 0; i < 14; ++i)
+    for(i32 i = 0; i < 14; ++i)
     {
         for(i32 j = 0; j < 14; ++j)
         {
@@ -93,18 +93,16 @@ void CKOTHInGameScene::Load(void)
     m_root->InsertOcean(ocean);
     ocean->Set_Position(glm::vec3(-128.0f, 0.0f, -128.0f));
     
-    std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("landscape.xml");
-    m_root->InsertLandscape(landscape);
-    
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
     particleEmitter->Set_Position(glm::vec3(12.0f, 2.0f, 12.0f));
     
     m_particles.push_back(particleEmitter);
     m_root->InsertParticleEmitter(particleEmitter);
     
+    std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("landscape.xml");
+    m_root->InsertLandscape(landscape);
+    
     m_root->RegisterCollisionHandler(shared_from_this());
-    m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
-    m_root->RegisterTapRecognizerHandler(m_moveControllerRecognizer);*/
 
 	/*std::shared_ptr<CGUIContainer> guicontainer = m_root->CreateGUIContainer("guicontainer.xml");
 	m_root->InsertGUIContainer(guicontainer);
@@ -120,6 +118,9 @@ void CKOTHInGameScene::Load(void)
     m_characterController->Set_Character(m_models[0]);
     m_characterController->Set_Navigator(m_navigator);
 	m_characterController->Set_Position(glm::vec3(24.0f, 0.0f, 24.0f));
+    
+    m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
+    m_root->RegisterTapRecognizerHandler(m_moveControllerRecognizer);
     m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);
 }
 

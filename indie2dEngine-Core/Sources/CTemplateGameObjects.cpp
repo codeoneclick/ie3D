@@ -279,7 +279,7 @@ std::shared_ptr<I_RO_TemplateCommon> CTemplateMaterial::Get_ShaderTemplate(void)
 
 CGameObjectTemplate::CGameObjectTemplate(void) :
 CTemplateCommon(),
-kGameObjectMaterialsTemplatesNode("materils"),
+kGameObjectMaterialsTemplatesNode("materials"),
 kGameObjectMaterialTemplateNode("material"),
 kGameObjectMaterialFilenameAttribute("filename")
 {
@@ -420,7 +420,7 @@ glm::vec2 COceanTemplate::Get_Size(void) const
                                               kOceanSizeYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    ui8 y = iteratorY->second[0]->Get_F32();
+    f32 y = iteratorY->second[0]->Get_F32();
     
     return glm::vec2(x, y);
 }
@@ -705,7 +705,7 @@ kLandscapeSplattingDataFilenameAttribute("splatting_data_filename"),
 kLandscapeSizeXAttribute("size_x"),
 kLandscapeSizeYAttribute("size_y"),
 kLandscapeSplattingDiffuseMaterialFilenameAttribute("splatting_diffuse_material_filename"),
-kLandscapeSplattingNormalMaterialFilenameAttribute("splatting_nomral_material_filename"),
+kLandscapeSplattingNormalMaterialFilenameAttribute("splatting_normal_material_filename"),
 kLandscapeIsEdgesEnabledAttribute("is_edges_enabled"),
 kLandscapeEdgesNode("edges"),
 kLandscapeEdgesSizeXAttribute("size_x"),
@@ -997,7 +997,7 @@ COutputRenderOperationTemplate::COutputRenderOperationTemplate(void) :
 CTemplateCommon(),
 kOutputRenderOperationMainNode("operation"),
 kOutputRenderOperationGuidAttribute("guid"),
-kOutputRenderOperationMaterialTemplateFilenameAttribute("material_filename")
+kOutputRenderOperationMaterialTemplateFilenameAttribute("filename")
 {
     
 }
@@ -1113,11 +1113,14 @@ std::vector<std::string> CGameTransitionTemplate::Get_ScreenSpaceRenderOperation
                                              kGameTransitionScreenSpaceRenderOperationsTemplatesNode + ":" +
                                              kGameTransitionScreenSpaceRenderOperationTemplateNode + ":" +
                                              kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute);
-    assert(iterator != m_attributes.end());
+    
     std::vector<std::string> filenames;
-    for(const auto& filename : iterator->second)
+    if(iterator != m_attributes.end())
     {
-        filenames.push_back(filename->Get_String());
+        for(const auto& filename : iterator->second)
+        {
+            filenames.push_back(filename->Get_String());
+        }
     }
     return filenames;
 }
@@ -1128,7 +1131,10 @@ std::vector<std::shared_ptr<I_RO_TemplateCommon>> CGameTransitionTemplate::Get_S
                                             kGameTransitionScreenSpaceRenderOperationsTemplatesNode + ":" +
                                             kGameTransitionScreenSpaceRenderOperationTemplateNode + ":" +
                                             kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute);
-    assert(iterator != m_templates.end());
+    if(iterator == m_templates.end())
+    {
+        return std::vector<std::shared_ptr<I_RO_TemplateCommon>>();
+    }
     return iterator->second;
 }
 

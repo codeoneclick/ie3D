@@ -163,7 +163,7 @@ std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplateSerializer::Serialize(cons
                                        E_TEMPLATE_META_TYPE_STRING,
                                        &filename);
         
-        std::string renderOperationName = texture.attribute(textureTemplate->kTextureFilenameAttribute.c_str()).as_string();
+        std::string renderOperationName = texture.attribute(textureTemplate->kTextureRenderOperationNameAttribute.c_str()).as_string();
         textureTemplate->Set_Attribute(Get_TemplateAttributeKey(textureTemplate->kTextureMainNode,
                                                                 textureTemplate->kTextureRenderOperationNameAttribute),
                                        E_TEMPLATE_META_TYPE_STRING,

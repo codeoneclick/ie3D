@@ -24,10 +24,5 @@
             render_operation_name=""
             sampler_id="0"
             wrap_mode="GL_REPEAT"/>
-        <texture
-            filename="ocean_nm.pvr"
-            render_operation_name=""
-            sampler_id="1"
-            wrap_mode="GL_REPEAT"/>
     </textures>
 </material>

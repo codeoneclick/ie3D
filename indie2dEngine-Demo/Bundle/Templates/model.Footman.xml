@@ -5,5 +5,7 @@
     </sequences>
 	<materials>
 		<material filename="material.model.Footman.common.xml"/>
+        <material filename="material.model.Footman.reflection.xml"/>
+        <material filename="material.model.Footman.refraction.xml"/>
 	</materials>
 </model>

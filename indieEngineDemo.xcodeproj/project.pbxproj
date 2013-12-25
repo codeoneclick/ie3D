@@ -55,7 +55,6 @@
 		21D07318181DB34F0019D264 /* material.model.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BB181DB34F0019D264 /* material.model.refraction.xml */; };
 		21D07319181DB34F0019D264 /* material.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BC181DB34F0019D264 /* material.ocean.xml */; };
 		21D0731A181DB34F0019D264 /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BD181DB34F0019D264 /* material.output.xml */; };
-		21D0731B181DB34F0019D264 /* material.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BE181DB34F0019D264 /* material.screen.xml */; };
 		21D0731C181DB34F0019D264 /* model.Building.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072BF181DB34F0019D264 /* model.Building.xml */; };
 		21D0731D181DB34F0019D264 /* model.Footman.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C0181DB34F0019D264 /* model.Footman.xml */; };
 		21D0731E181DB34F0019D264 /* ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D072C1181DB34F0019D264 /* ocean.xml */; };
@@ -246,7 +245,6 @@
 		21D072BB181DB34F0019D264 /* material.model.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.refraction.xml; sourceTree = "<group>"; };
 		21D072BC181DB34F0019D264 /* material.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.ocean.xml; sourceTree = "<group>"; };
 		21D072BD181DB34F0019D264 /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
-		21D072BE181DB34F0019D264 /* material.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.screen.xml; sourceTree = "<group>"; };
 		21D072BF181DB34F0019D264 /* model.Building.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Building.xml; sourceTree = "<group>"; };
 		21D072C0181DB34F0019D264 /* model.Footman.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Footman.xml; sourceTree = "<group>"; };
 		21D072C1181DB34F0019D264 /* ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ocean.xml; sourceTree = "<group>"; };
@@ -501,28 +499,8 @@
 				A4BB05171869F44600B226DB /* GameObjects */,
 				A4BB05161869F36900B226DB /* RenderOperations */,
 				A4BB05151869F35800B226DB /* Transitions */,
-				A49046541844B27B009734B8 /* material.landscape.edges.common.xml */,
-				A49046551844B27B009734B8 /* material.landscape.edges.reflection.xml */,
-				A49046561844B27B009734B8 /* material.landscape.edges.refraction.xml */,
-				A49046481843B9DE009734B8 /* material.landscape.common.xml */,
-				A49046491843B9DE009734B8 /* material.landscape.reflection.xml */,
-				A490464A1843B9DE009734B8 /* material.landscape.refraction.xml */,
-				A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */,
-				A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */,
-				A4F5D70C18436E4E00ADAC70 /* landscape.xml */,
 				21D072AF181DB34F0019D264 /* guicontainer.xml */,
 				21D072B5181DB34F0019D264 /* material.guicontainer.xml */,
-				21D072B6181DB34F0019D264 /* material.model.common.xml */,
-				21D072BA181DB34F0019D264 /* material.model.reflection.xml */,
-				21D072BB181DB34F0019D264 /* material.model.refraction.xml */,
-				21D072BC181DB34F0019D264 /* material.ocean.xml */,
-				21D072BD181DB34F0019D264 /* material.output.xml */,
-				21D072BE181DB34F0019D264 /* material.screen.xml */,
-				21D072BF181DB34F0019D264 /* model.Building.xml */,
-				21D072C1181DB34F0019D264 /* ocean.xml */,
-				21D072C2181DB34F0019D264 /* output.space.operation.xml */,
-				21D072C3181DB34F0019D264 /* particle.emitter.01.xml */,
-				21D072C4181DB34F0019D264 /* particle.emitter.material.xml */,
 			);
 			name = Templates;
 			path = "indie2dEngine-Demo/Bundle/Templates";
@@ -561,6 +539,8 @@
 		A4BB05161869F36900B226DB /* RenderOperations */ = {
 			isa = PBXGroup;
 			children = (
+				A4BB0519186AF39200B226DB /* Materials */,
+				21D072C2181DB34F0019D264 /* output.space.operation.xml */,
 				21D072CC181DB34F0019D264 /* world.space.operation.xml */,
 				21D072CD181DB34F0019D264 /* world.space.reflection.operation.xml */,
 				21D072CE181DB34F0019D264 /* world.space.refraction.operation.xml */,
@@ -573,6 +553,10 @@
 			children = (
 				A4BB05181869F44D00B226DB /* Materials */,
 				21D072C0181DB34F0019D264 /* model.Footman.xml */,
+				21D072BF181DB34F0019D264 /* model.Building.xml */,
+				21D072C1181DB34F0019D264 /* ocean.xml */,
+				21D072C3181DB34F0019D264 /* particle.emitter.01.xml */,
+				A4F5D70C18436E4E00ADAC70 /* landscape.xml */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -583,6 +567,27 @@
 				21D072B7181DB34F0019D264 /* material.model.Footman.common.xml */,
 				21D072B8181DB34F0019D264 /* material.model.Footman.reflection.xml */,
 				21D072B9181DB34F0019D264 /* material.model.Footman.refraction.xml */,
+				21D072B6181DB34F0019D264 /* material.model.common.xml */,
+				21D072BA181DB34F0019D264 /* material.model.reflection.xml */,
+				21D072BB181DB34F0019D264 /* material.model.refraction.xml */,
+				21D072BC181DB34F0019D264 /* material.ocean.xml */,
+				21D072C4181DB34F0019D264 /* particle.emitter.material.xml */,
+				A49046541844B27B009734B8 /* material.landscape.edges.common.xml */,
+				A49046551844B27B009734B8 /* material.landscape.edges.reflection.xml */,
+				A49046561844B27B009734B8 /* material.landscape.edges.refraction.xml */,
+				A49046481843B9DE009734B8 /* material.landscape.common.xml */,
+				A49046491843B9DE009734B8 /* material.landscape.reflection.xml */,
+				A490464A1843B9DE009734B8 /* material.landscape.refraction.xml */,
+				A4F5D71018436F6E00ADAC70 /* material.splatting.diffuse.xml */,
+				A4F5D71118436F6E00ADAC70 /* material.splatting.normal.xml */,
+			);
+			name = Materials;
+			sourceTree = "<group>";
+		};
+		A4BB0519186AF39200B226DB /* Materials */ = {
+			isa = PBXGroup;
+			children = (
+				21D072BD181DB34F0019D264 /* material.output.xml */,
 			);
 			name = Materials;
 			sourceTree = "<group>";
@@ -725,7 +730,6 @@
 				21D0731A181DB34F0019D264 /* material.output.xml in Resources */,
 				21D072DB181DB34F0019D264 /* Footman.mdl in Resources */,
 				21D072DF181DB34F0019D264 /* Ghoul_01.MDL in Resources */,
-				21D0731B181DB34F0019D264 /* material.screen.xml in Resources */,
 				21D07316181DB34F0019D264 /* material.model.Footman.refraction.xml in Resources */,
 				21D0731E181DB34F0019D264 /* ocean.xml in Resources */,
 				21D07319181DB34F0019D264 /* material.ocean.xml in Resources */,

@@ -1,4 +1,3 @@
-<operation guid="output.space.operation">
-    <material filename="material.output.xml"/>
+<operation guid="output.space.operation" filename="material.output.xml">
 </operation>
 

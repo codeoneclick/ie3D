@@ -100,7 +100,7 @@ f32 TTemplateAttribute::Get_F32(void)
 
 std::string TTemplateAttribute::Get_String(void)
 {
-    return m_data.m_STRING;
+    return m_STRING;
 }
 
 I_RO_TemplateCommon::I_RO_TemplateCommon(void)
