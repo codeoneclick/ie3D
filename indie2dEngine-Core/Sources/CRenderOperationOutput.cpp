@@ -24,8 +24,8 @@ m_renderBufferHandle(_renderBufferHandle)
     m_material->Set_RenderState(E_RENDER_STATE_BLEND_MODE, false);
     
     m_material->Set_CullFaceMode(GL_FRONT);
-    m_material->Set_BlendFunctionSource(GL_SRC_ALPHA);
-    m_material->Set_BlendFunctionDest(GL_ONE_MINUS_SRC_ALPHA);
+    m_material->Set_BlendingFunctionSource(GL_SRC_ALPHA);
+    m_material->Set_BlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
     
 	m_quad = std::make_shared<CQuad>();
 }

@@ -58,8 +58,8 @@ public:
 
 #if defined(__IOS__) || defined(__OSX__) || defined(__NDK__)
 
-extern std::map<std::string, GLenum> g_glenumToString;
-extern std::map<GLenum, std::string> g_stringToGLenum;
+extern std::map<std::string, GLenum> g_stringToGLenum;
+extern std::map<GLenum, std::string> g_glenumToString;
 
 #elif defined(__WIN32__)
 
@@ -92,7 +92,7 @@ public:
     ~I_RO_TemplateCommon(void);
 };
 
-class I_RW_TemplateCommon
+class I_WO_TemplateCommon
 {
 private:
     
@@ -100,8 +100,8 @@ protected:
     
 public:
     
-    I_RW_TemplateCommon(void);
-    ~I_RW_TemplateCommon(void);
+    I_WO_TemplateCommon(void);
+    ~I_WO_TemplateCommon(void);
     
     virtual void Set_Attribute(const std::string& _attributeName,
                                E_TEMPLATE_META_TYPE _metaType,
@@ -116,7 +116,7 @@ public:
 
 class CTemplateCommon :
 public I_RO_TemplateCommon,
-public I_RW_TemplateCommon
+public I_WO_TemplateCommon
 {
 private:
     

@@ -22,7 +22,7 @@ m_sceneGraph(_sceneGraph),
 m_sceneFabricator(_sceneFabricator)
 {
     m_resourceLoadingHandler = std::make_shared<std::function<void(const std::shared_ptr<IResource>&)>>(std::bind(&IGameObjectExtension::_OnExtensionResourceLoaded, this, std::placeholders::_1));
-    m_templateLoadingHandler = std::make_shared<std::function<void(const std::shared_ptr<ITemplate>&)>>(std::bind(&IGameObjectExtension::_OnExtensionTemplateLoaded, this, std::placeholders::_1));
+    m_templateLoadingHandler = std::make_shared<std::function<void(const std::shared_ptr<I_RO_TemplateCommon>&)>>(std::bind(&IGameObjectExtension::_OnExtensionTemplateLoaded, this, std::placeholders::_1));
 }
 
 IGameObjectExtension::~IGameObjectExtension(void)
@@ -69,7 +69,7 @@ void IGameObjectExtension::_OnExtensionResourceLoaded(const std::shared_ptr<IRes
     }
 }
 
-void IGameObjectExtension::_OnExtensionTemplateLoaded(const std::shared_ptr<ITemplate> _template)
+void IGameObjectExtension::_OnExtensionTemplateLoaded(const std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     m_template = _template;
 }

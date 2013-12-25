@@ -33,7 +33,7 @@ protected:
     TEMPLATE_LOADING_HANDLER m_templateLoadingHandler;
     
     void _OnExtensionResourceLoaded(const std::shared_ptr<IResource>& _resource);
-    void _OnExtensionTemplateLoaded(const std::shared_ptr<ITemplate> _template);
+    void _OnExtensionTemplateLoaded(const std::shared_ptr<I_RO_TemplateCommon> _template);
     
 public:
     

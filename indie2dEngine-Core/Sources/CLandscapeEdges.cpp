@@ -75,8 +75,8 @@ void CLandscapeEdges::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
     
     for(const auto& iterator : landscapeTemplate->Get_EdgesMaterialsTemplates())
     {
-        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(iterator);
-        std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+        std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(iterator);
+        std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
         std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
                                                                            shaderTemplate->Get_FSFilename());
         assert(shader != nullptr);

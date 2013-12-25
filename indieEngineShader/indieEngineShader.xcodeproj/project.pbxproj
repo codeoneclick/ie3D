@@ -27,7 +27,6 @@
 		A4BF8EEA182A850B00B0289E /* CommonOutput.vert in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ECA182A807C00B0289E /* CommonOutput.vert */; };
 		A4BF8EEB182A850B00B0289E /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ECB182A807C00B0289E /* main.transition.xml */; };
 		A4BF8EED182A850C00B0289E /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ECD182A807C00B0289E /* material.output.xml */; };
-		A4BF8EF2182A850C00B0289E /* model.Footman.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ED2182A807C00B0289E /* model.Footman.xml */; };
 		A4BF8EF3182A850C00B0289E /* output.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ED3182A807C00B0289E /* output.space.operation.xml */; };
 		A4BF8EF4182A850C00B0289E /* world.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = A4BF8ED4182A807C00B0289E /* world.space.operation.xml */; };
 		A4BF8EF6182A854600B0289E /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4BF8EDF182A84DF00B0289E /* libEGL.dylib */; };
@@ -113,7 +112,6 @@
 		A4BF8ECA182A807C00B0289E /* CommonOutput.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = CommonOutput.vert; path = Bundle/CommonOutput.vert; sourceTree = SOURCE_ROOT; };
 		A4BF8ECB182A807C00B0289E /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = main.transition.xml; path = Bundle/main.transition.xml; sourceTree = SOURCE_ROOT; };
 		A4BF8ECD182A807C00B0289E /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.output.xml; path = Bundle/material.output.xml; sourceTree = SOURCE_ROOT; };
-		A4BF8ED2182A807C00B0289E /* model.Footman.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = model.Footman.xml; path = Bundle/model.Footman.xml; sourceTree = SOURCE_ROOT; };
 		A4BF8ED3182A807C00B0289E /* output.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = output.space.operation.xml; path = Bundle/output.space.operation.xml; sourceTree = SOURCE_ROOT; };
 		A4BF8ED4182A807C00B0289E /* world.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = world.space.operation.xml; path = Bundle/world.space.operation.xml; sourceTree = SOURCE_ROOT; };
 		A4BF8ED9182A80A900B0289E /* CIESAWorkflow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIESAWorkflow.cpp; path = Sources/CIESAWorkflow.cpp; sourceTree = SOURCE_ROOT; };
@@ -243,7 +241,6 @@
 				A4BF8ECA182A807C00B0289E /* CommonOutput.vert */,
 				A4BF8ECB182A807C00B0289E /* main.transition.xml */,
 				A4BF8ECD182A807C00B0289E /* material.output.xml */,
-				A4BF8ED2182A807C00B0289E /* model.Footman.xml */,
 				A4BF8ED3182A807C00B0289E /* output.space.operation.xml */,
 				A4BF8ED4182A807C00B0289E /* world.space.operation.xml */,
 			);
@@ -406,7 +403,6 @@
 				A4BF8EEA182A850B00B0289E /* CommonOutput.vert in Resources */,
 				A4BF8EEB182A850B00B0289E /* main.transition.xml in Resources */,
 				A4BF8EED182A850C00B0289E /* material.output.xml in Resources */,
-				A4BF8EF2182A850C00B0289E /* model.Footman.xml in Resources */,
 				A4BF8EF3182A850C00B0289E /* output.space.operation.xml in Resources */,
 				A4BF8EF4182A850C00B0289E /* world.space.operation.xml in Resources */,
 			);
@@ -423,7 +419,7 @@
 			name = "Qt Preprocessors";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_preprocess.mak";
+			shellScript = "make -C /Users/sergey.sergeev/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_preprocess.mak";
 		};
 		D7BA7D76DAB5DD13389D6332 /* Qt Qmake */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -433,7 +429,7 @@
 			name = "Qt Qmake";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_makeqmake.mak";
+			shellScript = "make -C /Users/sergey.sergeev/Documents/Hobby/indieEngine/indieEngineShader -f indieEngineShader.xcodeproj/qt_makeqmake.mak";
 		};
 /* End PBXShellScriptBuildPhase section */
 

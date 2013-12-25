@@ -77,8 +77,8 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
     
     for(const auto& iterator : modelTemplate->Get_MaterialsTemplates())
     {
-        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(iterator);
-        std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+        std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(iterator);
+        std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
         std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
                                                                            shaderTemplate->Get_FSFilename());
         assert(shader != nullptr);
@@ -112,8 +112,8 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
     m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_BLEND_MODE, true);
     
     m_debugBoundBoxMaterial->Set_CullFaceMode(GL_FRONT);
-    m_debugBoundBoxMaterial->Set_BlendFunctionSource(GL_SRC_ALPHA);
-    m_debugBoundBoxMaterial->Set_BlendFunctionDest(GL_ONE_MINUS_SRC_ALPHA);
+    m_debugBoundBoxMaterial->Set_BlendingFunctionSource(GL_SRC_ALPHA);
+    m_debugBoundBoxMaterial->Set_BlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
     
 	IGameObject::ListenRenderMgr(m_isNeedToRender);
     IGameObject::ListenSceneUpdateMgr(m_isNeedToUpdate);

@@ -30,7 +30,7 @@ std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplateLoadingOperation::Seriali
     for(const auto& iterator : materialsTemplatesFilenames)
     {
         std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(iterator));
+        std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(materialLoadingOperation->Serialize(iterator));
         assert(materialTemplate != nullptr);
         landscapeTemplate->Set_Template(Get_TemplateAttributeKey(landscapeTemplate->kGameObjectMaterialsTemplatesNode,
                                                                  landscapeTemplate->kGameObjectMaterialTemplateNode,
@@ -39,7 +39,7 @@ std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplateLoadingOperation::Seriali
     }
 
     std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-    std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(landscapeTemplate->Get_SplattingDiffuseMaterialFilename()));
+    std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(materialLoadingOperation->Serialize(landscapeTemplate->Get_SplattingDiffuseMaterialFilename()));
     assert(materialTemplate != nullptr);
     
     landscapeTemplate->Set_Template(Get_TemplateAttributeKey(landscapeTemplate->kLandscapeMainNode,
@@ -47,7 +47,7 @@ std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplateLoadingOperation::Seriali
                                     materialTemplate);
     
     materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-    materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(landscapeTemplate->Get_SplattingNormalMaterialFilename()));
+    materialTemplate = std::static_pointer_cast<CMaterialTemplate>(materialLoadingOperation->Serialize(landscapeTemplate->Get_SplattingNormalMaterialFilename()));
     assert(materialTemplate != nullptr);
     landscapeTemplate->Set_Template(Get_TemplateAttributeKey(landscapeTemplate->kLandscapeMainNode,
                                                              landscapeTemplate->kLandscapeSplattingNormalMaterialFilenameAttribute),
@@ -57,7 +57,7 @@ std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplateLoadingOperation::Seriali
     for(const auto& iterator : edgesMaterialsTemplatesFilenames)
     {
         std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(iterator));
+        std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(materialLoadingOperation->Serialize(iterator));
         assert(materialTemplate != nullptr);
         landscapeTemplate->Set_Template(Get_TemplateAttributeKey(landscapeTemplate->kLandscapeMainNode,
                                                                  landscapeTemplate->kLandscapeEdgesNode,

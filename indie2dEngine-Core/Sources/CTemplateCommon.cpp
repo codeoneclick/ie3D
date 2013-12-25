@@ -10,7 +10,7 @@
 
 #if defined(__IOS__) || defined(__OSX__) || defined(__NDK__)
 
-std::map<std::string, GLenum> g_glenumToString = {
+std::map<std::string, GLenum> g_stringToGLenum = {
     {"GL_FRONT", GL_FRONT},
     {"GL_BACK", GL_BACK},
     {"GL_SRC_ALPHA", GL_SRC_ALPHA},
@@ -20,7 +20,7 @@ std::map<std::string, GLenum> g_glenumToString = {
     {"GL_MIRRORED_REPEAT", GL_MIRRORED_REPEAT }
 };
 
-std::map<GLenum, std::string> g_stringToGLenum = {
+std::map<GLenum, std::string> g_glenumToString = {
     {GL_FRONT, "GL_FRONT"},
     {GL_BACK, "GL_BACK"},
     {GL_SRC_ALPHA, "GL_SRC_ALPHA"},
@@ -114,19 +114,19 @@ I_RO_TemplateCommon::~I_RO_TemplateCommon(void)
     
 }
 
-I_RW_TemplateCommon::I_RW_TemplateCommon(void)
+I_WO_TemplateCommon::I_WO_TemplateCommon(void)
 {
     
 }
 
-I_RW_TemplateCommon::~I_RW_TemplateCommon(void)
+I_WO_TemplateCommon::~I_WO_TemplateCommon(void)
 {
     
 }
 
 CTemplateCommon::CTemplateCommon(void) :
 I_RO_TemplateCommon(),
-I_RW_TemplateCommon()
+I_WO_TemplateCommon()
 {
     
 }

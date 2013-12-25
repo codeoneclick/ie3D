@@ -27,7 +27,7 @@ std::shared_ptr<I_RO_TemplateCommon> COutputRenderOperationTemplateLoadingOperat
     std::shared_ptr<COutputRenderOperationTemplate> outputRenderOperationTemplate = std::static_pointer_cast<COutputRenderOperationTemplate>(outputRenderOperationTemplateSerializer->Serialize(_filename));
     assert(outputRenderOperationTemplate != nullptr);
     std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-    std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(outputRenderOperationTemplate->Get_MaterialTemplateFilename()));
+    std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(materialLoadingOperation->Serialize(outputRenderOperationTemplate->Get_MaterialTemplateFilename()));
     assert(materialTemplate != nullptr);
     outputRenderOperationTemplate->Set_Template(Get_TemplateAttributeKey(outputRenderOperationTemplate->kOutputRenderOperationMainNode,
                                                                          outputRenderOperationTemplate->kOutputRenderOperationMaterialTemplateFilenameAttribute),

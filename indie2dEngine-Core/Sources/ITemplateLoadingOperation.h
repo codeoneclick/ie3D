@@ -13,7 +13,7 @@
 #include "HEnums.h"
 
 class I_RO_TemplateCommon;
-class I_RW_TemplateCommon;
+class I_WO_TemplateCommon;
 class ITemplateLoadingOperation
 {
 private:

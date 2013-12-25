@@ -14,29 +14,60 @@
 #include "CResourceAccessor.h"
 #include "IResourceLoadingHandler.h"
 
-static bool s_states[E_RENDER_STATE_MAX] =
+I_RO_Material::I_RO_Material(void)
 {
-    false,
-    false,
-    true,
-    true
-};
-
-CMaterial::CMaterial(std::shared_ptr<CShader> _shader, const std::string& _guid) :
-IResource(E_RESOURCE_CLASS_MATERIAL, _guid),
-m_shader(_shader),
-m_guid(_guid),
-m_isDebug(false),
-m_isReflected(false),
-m_isBatching(false)
-{
-    std::for_each(m_textures.begin(), m_textures.end(), [](std::shared_ptr<CTexture> _texture)
-                  {
-                      _texture = nullptr;
-                  });
     
-    m_states[E_RENDER_STATE_DEPTH_TEST] = true;
-    m_states[E_RENDER_STATE_DEPTH_MASK] = true;
+}
+
+I_RO_Material::~I_RO_Material(void)
+{
+    
+}
+
+I_WO_Material::I_WO_Material(void)
+{
+    
+}
+
+I_WO_Material::~I_WO_Material(void)
+{
+    
+}
+
+CMaterialCachedParameters::CMaterialCachedParameters(void) :
+m_shader(nullptr)
+{
+    std::for_each(m_textures.begin(), m_textures.end(), [](std::shared_ptr<CTexture> _iterator){
+        _iterator = nullptr;
+    });
+}
+
+CMaterialCachedParameters::~CMaterialCachedParameters(void)
+{
+    
+}
+
+std::shared_ptr<CMaterialCachedParameters> CMaterial::m_cachedParameters = nullptr;
+
+std::shared_ptr<CMaterialCachedParameters> CMaterial::Get_CachedParameters(void)
+{
+    if(m_cachedParameters == nullptr)
+    {
+        m_cachedParameters = std::make_shared<CMaterialCachedParameters>();
+        m_cachedParameters->m_isDepthTest = true;
+        m_cachedParameters->m_isDepthMask = true;
+    }
+    return m_cachedParameters;
+}
+
+
+CMaterial::CMaterial(const std::string& _guid, bool _isCustom) :
+IResource(E_RESOURCE_CLASS_MATERIAL, _guid)
+{
+    if(_isCustom)
+    {
+        m_parameters = std::make_shared<CMaterialCachedParameters>();
+    }
 }
 
 CMaterial::~CMaterial(void)
@@ -44,32 +75,228 @@ CMaterial::~CMaterial(void)
     
 }
 
-void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template, const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<IResourceLoadingHandler>& _handler)
+bool CMaterial::Get_IsCulling(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isCulling;
+}
+
+GLenum CMaterial::Get_CullingMode(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_cullingMode;
+}
+
+bool CMaterial::Get_IsBlending(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isBlending;
+}
+
+GLenum CMaterial::Get_BlendingFunctionSource(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_blendingFunctionSource;
+}
+
+GLenum CMaterial::Get_BlendingFunctionDestination(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_blendingFunctionDestination;
+}
+
+bool CMaterial::Get_IsDepthTest(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isDepthTest;
+}
+
+bool CMaterial::Get_IsDepthMask(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isDepthMask;
+}
+
+bool CMaterial::Get_IsClipping(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isClipping;
+}
+
+glm::vec4 CMaterial::Get_ClippingPlane(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_clippingPlane;
+}
+
+bool CMaterial::Get_IsReflecting(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isReflecting;
+}
+
+bool CMaterial::Get_IsShadowing(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isShadowing;
+}
+
+bool CMaterial::Get_IsDebugging(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isDebugging;
+}
+
+std::shared_ptr<CShader> CMaterial::Get_Shader(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_shader;
+}
+
+std::shared_ptr<CTexture> CMaterial::Get_Texture(E_SHADER_SAMPLER _sampler) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_textures.at(_sampler);
+}
+
+E_SHADER_SAMPLER CMaterial::Get_SamplerId(const std::shared_ptr<CTexture>& _texture) const
+{
+    assert(m_parameters != nullptr);
+    for(ui32 i = 0; i < m_parameters->m_textures.size(); ++i)
+    {
+        if(_texture == m_parameters->m_textures.at(i))
+        {
+            return static_cast<E_SHADER_SAMPLER>(i);
+        }
+    }
+    assert(false);
+    return E_SHADER_SAMPLER_01;
+}
+
+void CMaterial::Set_IsCulling(bool _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_isCulling = _value;
+}
+
+void CMaterial::Set_CullingMode(GLenum _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_cullingMode = _value;
+}
+
+void CMaterial::Set_IsBlending(bool _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_isBlending = _value;
+}
+
+void CMaterial::Set_BlendingFunctionSource(GLenum _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_blendingFunctionSource = _value;
+}
+
+void CMaterial::Set_BlendingFunctionDestination(GLenum _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_blendingFunctionDestination = _value;
+}
+
+void CMaterial::Set_IsDepthTest(bool _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_isDepthTest = _value;
+}
+
+void CMaterial::Set_IsDepthMask(bool _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_isDepthMask =_value;
+}
+
+void CMaterial::Set_IsClipping(bool _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_isClipping = _value;
+}
+
+void CMaterial::Set_ClippingPlane(const glm::vec4& _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_clippingPlane = _value;
+}
+
+void CMaterial::Set_IsReflecting(bool _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_isReflecting = _value;
+}
+
+void CMaterial::Set_IsShadowing(bool _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_isShadowing = _value;
+}
+
+void CMaterial::Set_IsDebugging(bool _value)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_isDebugging = _value;
+}
+
+void CMaterial::Set_Shader(const std::shared_ptr<CShader>& _shader)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_shader = _shader;
+}
+
+void CMaterial::Set_Texture(const std::shared_ptr<CTexture>& _texture,
+                 E_SHADER_SAMPLER _sampler)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_textures.at(_sampler) = _texture;
+}
+
+void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
+               const std::shared_ptr<CResourceAccessor>& _resourceAccessor,
+               const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor,
+               const std::shared_ptr<IResourceLoadingHandler>& _handler)
 {
     assert(_template != nullptr);
     assert(_screenSpaceTextureAccessor != nullptr);
 	assert(_resourceAccessor != nullptr);
     
+    std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(_template);
+    assert(materialTemplate != nullptr);
     
-    std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(_template);
-    CMaterial::Set_RenderState(E_RENDER_STATE_CULL_MODE, materialTemplate->Get_IsCullFace());
-    CMaterial::Set_RenderState(E_RENDER_STATE_DEPTH_TEST, materialTemplate->Get_IsDepthTest());
-    CMaterial::Set_RenderState(E_RENDER_STATE_DEPTH_MASK, materialTemplate->Get_IsDepthMask());
-    CMaterial::Set_RenderState(E_RENDER_STATE_BLEND_MODE, materialTemplate->Get_IsBlending());
+    m_parameters = std::make_shared<CMaterialCachedParameters>();
     
-    CMaterial::Set_CullFaceMode(materialTemplate->Get_CullFaceMode());
-    CMaterial::Set_BlendFunctionSource(materialTemplate->Get_BlendingFunctionSource());
-    CMaterial::Set_BlendFunctionDest(materialTemplate->Get_BlendingFunctionDestination());
+    m_parameters->m_isCulling = materialTemplate->Get_IsCulling();
+    m_parameters->m_cullingMode = materialTemplate->Get_CullingMode();
     
-    CMaterial::Set_Clipping(materialTemplate->Get_IsClipping() ? materialTemplate->Get_ClippingPlane() : glm::vec4(FLT_MAX));
-    CMaterial::Set_IsReflected(materialTemplate->Get_IsReflecting());
-    CMaterial::Set_IsDebug(materialTemplate->Get_IsDebugging());
+    m_parameters->m_isBlending = materialTemplate->Get_IsBlending();
+    m_parameters->m_blendingFunctionSource = materialTemplate->Get_BlendingFunctionSource();
+    m_parameters->m_blendingFunctionDestination = materialTemplate->Get_BlendingFunctionDestination();
+    
+    m_parameters->m_isDepthTest = materialTemplate->Get_IsDepthTest();
+    m_parameters->m_isDepthMask = materialTemplate->Get_IsDepthMask();
+    
+    m_parameters->m_isClipping = materialTemplate->Get_IsClipping();
+    m_parameters->m_clippingPlane = materialTemplate->Get_ClippingPlane();
+    
+    m_parameters->m_isReflecting = materialTemplate->Get_IsReflecting();
+    m_parameters->m_isShadowing = materialTemplate->Get_IsShadowing();
+    m_parameters->m_isDebugging = materialTemplate->Get_IsDebugging();
     
     for(const auto& iterator : materialTemplate->Get_TexturesTemplates())
     {
-        std::shared_ptr<CTemplateTexture> textureTemplate = std::static_pointer_cast<CTemplateTexture>(iterator);
+        std::shared_ptr<CTextureTemplate> textureTemplate = std::static_pointer_cast<CTextureTemplate>(iterator);
+        assert(textureTemplate != nullptr);
         
-        std::shared_ptr<CTexture> texture = textureTemplate->Get_Filename().length() != 0 ? _resourceAccessor->CreateTexture(textureTemplate->Get_Filename()) : _screenSpaceTextureAccessor->Get_RenderOperationTexture(textureTemplate->Get_RenderOperationName());
+        std::shared_ptr<CTexture> texture = textureTemplate->Get_Filename().length() != 0 ?
+        _resourceAccessor->CreateTexture(textureTemplate->Get_Filename()) :
+        _screenSpaceTextureAccessor->Get_RenderOperationTexture(textureTemplate->Get_RenderOperationName());
         if(_handler != nullptr)
         {
             texture->Register_LoadingHandler(_handler);
@@ -80,162 +307,123 @@ void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
         CMaterial::Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->Get_SamplerId()));
     }
     
+    std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
+    assert(shaderTemplate != nullptr);
+    std::shared_ptr<CShader> shader = _resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(), shaderTemplate->Get_FSFilename());
+    CMaterial::Set_Shader(shader);
+    
     m_status |= E_RESOURCE_STATUS_LOADED;
     m_status |= E_RESOURCE_STATUS_COMMITED;
 }
 
+
 bool CMaterial::IsLoaded(void) const
 {
     bool value = false;
-    for(const auto& texture : m_textures)
+    if(m_parameters != nullptr)
     {
-        if(texture != nullptr)
+        for(const auto& texture : m_parameters->m_textures)
         {
-            value = texture->IsLoaded();
-            if(!value)
+            if(texture != nullptr)
             {
-                return value;
+                value = texture->IsLoaded();
+                if(!value)
+                {
+                    return value;
+                }
             }
         }
+        value = m_parameters->m_shader->IsLoaded();
     }
-    value = m_shader->IsLoaded();
     return value;
 }
 
 bool CMaterial::IsCommited(void) const
 {
     bool value = false;
-    for(const auto& texture : m_textures)
+    if(m_parameters != nullptr)
     {
-        if(texture != nullptr)
+        for(const auto& texture : m_parameters->m_textures)
         {
-            value = texture->IsCommited();
-            if(!value)
+            if(texture != nullptr)
             {
-                return value;
+                value = texture->IsCommited();
+                if(!value)
+                {
+                    return value;
+                }
             }
         }
+        value = m_parameters->m_shader->IsCommited();
     }
-    value = m_shader->IsCommited();
     return value;
-}
-
-void CMaterial::Set_CullFaceMode(GLenum _mode)
-{
-    m_cullFaceMode = _mode;
-}
-
-void CMaterial::Set_BlendFunctionSource(GLenum _blendFunction)
-{
-    m_blendFunctionSource = _blendFunction;
-}
-
-void CMaterial::Set_BlendFunctionDest(GLenum _blendFunction)
-{
-    m_blendFunctionDest = _blendFunction;
-}
-
-void CMaterial::Set_Clipping(const glm::vec4& _clipping)
-{
-    m_clipping = _clipping;
-}
-
-glm::vec4 CMaterial::Get_Clipping(void)
-{
-    return m_clipping;
-}
-
-void CMaterial::Set_RenderState(E_RENDER_STATE _state, bool _value)
-{
-    m_states[_state] = _value;
-}
-
-void CMaterial::Set_Texture(const std::shared_ptr<CTexture>& _texture, E_SHADER_SAMPLER _sampler)
-{
-    m_textures.at(_sampler) = _texture;
-}
-
-std::shared_ptr<CTexture> CMaterial::Get_Texture(E_SHADER_SAMPLER _sampler)
-{
-    return m_textures.at(_sampler);
-}
-
-
-E_SHADER_SAMPLER CMaterial::Get_Sampler(const std::shared_ptr<CTexture> &_texture)
-{
-    for(ui32 i = 0; i < m_textures.size(); ++i)
-    {
-        if(_texture == m_textures.at(i))
-        {
-            return static_cast<E_SHADER_SAMPLER>(i);
-        }
-    }
-    assert(false);
-    return E_SHADER_SAMPLER_01;
 }
 
 void CMaterial::Bind(void)
 {
-    assert(m_shader != nullptr);
+    assert(m_parameters != nullptr);
+    assert(m_parameters->m_shader != nullptr);
     
-    m_shader->Bind();
-    
+    m_parameters->m_shader->Bind();
+
     for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
     {
-        if(m_textures[i] != nullptr)
+        if(m_parameters->m_textures[i] != nullptr)
         {
-            m_shader->Set_Texture(m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
+            m_parameters->m_shader->Set_Texture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
         }
     }
     
-    if(m_states[E_RENDER_STATE_DEPTH_TEST] && s_states[E_RENDER_STATE_DEPTH_TEST] != m_states[E_RENDER_STATE_DEPTH_TEST])
+    if(m_parameters->m_isDepthTest &&
+       Get_CachedParameters()->m_isDepthTest != m_parameters->m_isDepthTest)
     {
         glEnable(GL_DEPTH_TEST);
-        s_states[E_RENDER_STATE_DEPTH_TEST] = m_states[E_RENDER_STATE_DEPTH_TEST];
     }
-    else if(s_states[E_RENDER_STATE_DEPTH_TEST] != m_states[E_RENDER_STATE_DEPTH_TEST])
+    else if(m_parameters->m_isDepthTest != m_parameters->m_isDepthTest)
     {
         glDisable(GL_DEPTH_TEST);
-        s_states[E_RENDER_STATE_DEPTH_TEST] = m_states[E_RENDER_STATE_DEPTH_TEST];
     }
+    Get_CachedParameters()->m_isDepthTest = m_parameters->m_isDepthTest;
     
-    if(m_states[E_RENDER_STATE_DEPTH_MASK] && s_states[E_RENDER_STATE_DEPTH_MASK] != m_states[E_RENDER_STATE_DEPTH_MASK])
+    if(m_parameters->m_isDepthMask &&
+       Get_CachedParameters()->m_isDepthMask != m_parameters->m_isDepthMask)
     {
         glDepthMask(GL_TRUE);
-        s_states[E_RENDER_STATE_DEPTH_MASK] = m_states[E_RENDER_STATE_DEPTH_MASK];
     }
-    else if(s_states[E_RENDER_STATE_DEPTH_MASK] != m_states[E_RENDER_STATE_DEPTH_MASK])
+    else if(m_parameters->m_isDepthMask != m_parameters->m_isDepthMask)
     {
         glDepthMask(GL_FALSE);
-        s_states[E_RENDER_STATE_DEPTH_MASK] = m_states[E_RENDER_STATE_DEPTH_MASK];
     }
+    Get_CachedParameters()->m_isDepthMask = m_parameters->m_isDepthMask;
     
-    if(m_states[E_RENDER_STATE_CULL_MODE] && s_states[E_RENDER_STATE_CULL_MODE] != m_states[E_RENDER_STATE_CULL_MODE])
+    if(m_parameters->m_isCulling &&
+       Get_CachedParameters()->m_isCulling != m_parameters->m_isCulling)
     {
         glEnable(GL_CULL_FACE);
-        glCullFace(m_cullFaceMode);
-        s_states[E_RENDER_STATE_CULL_MODE] = m_states[E_RENDER_STATE_CULL_MODE];
+        glCullFace(m_parameters->m_cullingMode);
     }
-    else if(s_states[E_RENDER_STATE_CULL_MODE] != m_states[E_RENDER_STATE_CULL_MODE])
+    else if(m_parameters->m_isCulling != m_parameters->m_isCulling)
     {
         glDisable(GL_CULL_FACE);
-        s_states[E_RENDER_STATE_CULL_MODE] = m_states[E_RENDER_STATE_CULL_MODE];
     }
+    Get_CachedParameters()->m_isCulling = m_parameters->m_isCulling;
     
-    if(m_states[E_RENDER_STATE_BLEND_MODE] && s_states[E_RENDER_STATE_BLEND_MODE] != m_states[E_RENDER_STATE_BLEND_MODE])
+    if(m_parameters->m_isBlending &&
+       Get_CachedParameters()->m_isBlending != m_parameters->m_isBlending)
     {
         glEnable(GL_BLEND);
-        glBlendFunc(m_blendFunctionSource, m_blendFunctionDest);
-        s_states[E_RENDER_STATE_BLEND_MODE] = m_states[E_RENDER_STATE_BLEND_MODE];
+        glBlendFunc(m_parameters->m_blendingFunctionSource, m_parameters->m_blendingFunctionDestination);
     }
-    else if(s_states[E_RENDER_STATE_BLEND_MODE] != m_states[E_RENDER_STATE_BLEND_MODE])
+    else if(m_parameters->m_isBlending != m_parameters->m_isBlending)
     {
         glDisable(GL_BLEND);
-        s_states[E_RENDER_STATE_BLEND_MODE] = m_states[E_RENDER_STATE_BLEND_MODE];
     }
+    Get_CachedParameters()->m_isBlending = m_parameters->m_isBlending;
 }
 
 void CMaterial::Unbind(void)
 {
-    m_shader->Unbind();
+    assert(m_parameters != nullptr);
+    assert(m_parameters->m_shader != nullptr);
+    m_parameters->m_shader->Unbind();
 }

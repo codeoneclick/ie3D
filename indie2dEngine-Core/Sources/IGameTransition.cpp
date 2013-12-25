@@ -106,10 +106,10 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
     for(const auto& iterator : gameTransitionTemplate->Get_ScreenSpaceRenderOperationsTemplates())
     {
         std::shared_ptr<CScreenSpaceRenderOperationTemplate> screenSpaceRenderOperationTemplate = std::static_pointer_cast<CScreenSpaceRenderOperationTemplate>(iterator);
-        std::shared_ptr<CTemplateMaterial> screenSpaceRenderOperationMaterialTemplate = std::static_pointer_cast<CTemplateMaterial>(screenSpaceRenderOperationTemplate->Get_MaterialTemplate());
+        std::shared_ptr<CMaterialTemplate> screenSpaceRenderOperationMaterialTemplate = std::static_pointer_cast<CMaterialTemplate>(screenSpaceRenderOperationTemplate->Get_MaterialTemplate());
         assert(screenSpaceRenderOperationMaterialTemplate != nullptr);
         
-        std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(screenSpaceRenderOperationMaterialTemplate->Get_ShaderTemplate());
+        std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(screenSpaceRenderOperationMaterialTemplate->Get_ShaderTemplate());
         std::shared_ptr<CShader> screenSpaceRenderOperationShader =
         m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
                                          shaderTemplate->Get_FSFilename());
@@ -127,10 +127,10 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
     }
     
     std::shared_ptr<COutputRenderOperationTemplate> outputRenderOperationTemplate = std::static_pointer_cast<COutputRenderOperationTemplate>(gameTransitionTemplate->Get_OutputRenderOperationTemplate());
-    std::shared_ptr<CTemplateMaterial> outputRenderOperationMaterialTemplate = std::static_pointer_cast<CTemplateMaterial>(outputRenderOperationTemplate->Get_MaterialTemplate());
+    std::shared_ptr<CMaterialTemplate> outputRenderOperationMaterialTemplate = std::static_pointer_cast<CMaterialTemplate>(outputRenderOperationTemplate->Get_MaterialTemplate());
     assert(outputRenderOperationMaterialTemplate != nullptr);
     
-    std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(outputRenderOperationMaterialTemplate->Get_ShaderTemplate());
+    std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(outputRenderOperationMaterialTemplate->Get_ShaderTemplate());
     std::shared_ptr<CShader> outputRenderOperationShader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
                                                                                             shaderTemplate->Get_FSFilename());
     assert(outputRenderOperationShader != nullptr);

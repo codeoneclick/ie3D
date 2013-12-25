@@ -11,7 +11,7 @@
 
 #include "CTemplateCommon.h"
 
-class CTemplateTexture : public CTemplateCommon
+class CTextureTemplate : public CTemplateCommon
 {
 public:
     
@@ -27,8 +27,8 @@ protected:
     
 public:
     
-    CTemplateTexture(void);
-    ~CTemplateTexture(void);
+    CTextureTemplate(void);
+    ~CTextureTemplate(void);
     
     std::string Get_Filename(void) const;
     std::string Get_RenderOperationName(void) const;
@@ -36,7 +36,7 @@ public:
     ui32 Get_WrapMode(void) const;
 };
 
-class CTemplateShader : public CTemplateCommon
+class CShaderTemplate : public CTemplateCommon
 {
 public:
     
@@ -50,14 +50,14 @@ protected:
     
 public:
     
-    CTemplateShader(void);
-    ~CTemplateShader(void);
+    CShaderTemplate(void);
+    ~CShaderTemplate(void);
     
     std::string Get_VSFilename(void) const;
     std::string Get_FSFilename(void) const;
 };
 
-class CTemplateMaterial : public CTemplateCommon
+class CMaterialTemplate : public CTemplateCommon
 {
 public:
     
@@ -88,12 +88,12 @@ protected:
     
 public:
     
-    CTemplateMaterial(void);
-    ~CTemplateMaterial(void);
+    CMaterialTemplate(void);
+    ~CMaterialTemplate(void);
     
     std::string Get_RenderOperationName(void) const;
-    bool Get_IsCullFace(void) const;
-    ui32 Get_CullFaceMode(void) const ;
+    bool Get_IsCulling(void) const;
+    ui32 Get_CullingMode(void) const ;
     bool Get_IsBlending(void) const;
     ui32 Get_BlendingFunctionSource(void) const;
     ui32 Get_BlendingFunctionDestination(void) const;

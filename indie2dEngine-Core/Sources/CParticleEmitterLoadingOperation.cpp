@@ -30,7 +30,7 @@ std::shared_ptr<I_RO_TemplateCommon> CParticleEmitterLoadingOperation::Serialize
     for(const auto& iterator : materialsTemplatesFilenames)
     {
         std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-        std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(materialLoadingOperation->Serialize(iterator));
+        std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(materialLoadingOperation->Serialize(iterator));
         assert(materialTemplate != nullptr);
         particleEmitterTemplate->Set_Template(Get_TemplateAttributeKey(particleEmitterTemplate->kGameObjectMaterialsTemplatesNode,
                                                                        particleEmitterTemplate->kGameObjectMaterialTemplateNode,

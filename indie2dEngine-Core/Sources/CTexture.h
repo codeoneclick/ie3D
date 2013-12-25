@@ -159,18 +159,18 @@ public:
     CTexture(const std::string& _guid);
     ~CTexture(void);
     
-    inline const ui32 Get_Handle(void) const
+    inline ui32 Get_Handle(void) const
     {
         return m_handle;
     };
     
-    inline const ui32 Get_Width(void) const 
+    inline ui32 Get_Width(void) const
     {
         assert(m_header != nullptr);
         return m_header->Get_Width();
     };
     
-    inline const ui32 Get_Height(void) const 
+    inline ui32 Get_Height(void) const
     {
         assert(m_header != nullptr);
         return m_header->Get_Height();

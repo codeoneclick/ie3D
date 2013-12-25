@@ -1,1 +1,9 @@
-<operation guid="world.space.operation" screenWidth="640" screenHeight="480" clear_color_r="1.0" clear_color_g="1.0" clear_color_b="1.0" clear_color_a="0.0"/>
+<operation
+    guid="world.space.operation"
+    index="2"
+    width="640"
+    height="480"
+    clear_color_r="1.0"
+    clear_color_g="1.0"
+    clear_color_b="1.0"
+    clear_color_a="0.0"/>

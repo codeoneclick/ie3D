@@ -8,7 +8,7 @@
 
 #include "CTemplateGameObjects.h"
 
-CTemplateTexture::CTemplateTexture(void) :
+CTextureTemplate::CTextureTemplate(void) :
 CTemplateCommon(),
 kTextureMainNode("texture"),
 kTextureFilenameAttribute("filename"),
@@ -19,13 +19,13 @@ kTextureWrapModeAttribute("wrap_mode")
 
 }
 
-CTemplateTexture::~CTemplateTexture(void)
+CTextureTemplate::~CTextureTemplate(void)
 {
     
     
 }
 
-std::string CTemplateTexture::Get_Filename(void) const
+std::string CTextureTemplate::Get_Filename(void) const
 {
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureFilenameAttribute);
@@ -34,7 +34,7 @@ std::string CTemplateTexture::Get_Filename(void) const
     return iterator->second[0]->Get_String();
 }
 
-std::string CTemplateTexture::Get_RenderOperationName(void) const
+std::string CTextureTemplate::Get_RenderOperationName(void) const
 {
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureRenderOperationNameAttribute);
@@ -43,7 +43,7 @@ std::string CTemplateTexture::Get_RenderOperationName(void) const
     return iterator->second[0]->Get_String();
 }
 
-ui32 CTemplateTexture::Get_SamplerId(void) const
+ui32 CTextureTemplate::Get_SamplerId(void) const
 {
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureSamplerIdAttribute);
@@ -52,7 +52,7 @@ ui32 CTemplateTexture::Get_SamplerId(void) const
     return iterator->second[0]->Get_UI32();
 }
 
-ui32 CTemplateTexture::Get_WrapMode(void) const
+ui32 CTextureTemplate::Get_WrapMode(void) const
 {
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureWrapModeAttribute);
@@ -61,7 +61,7 @@ ui32 CTemplateTexture::Get_WrapMode(void) const
     return iterator->second[0]->Get_UI32();
 }
 
-CTemplateShader::CTemplateShader(void) :
+CShaderTemplate::CShaderTemplate(void) :
 CTemplateCommon(),
 kShaderMainNode("shader"),
 kShaderVSFilenameAttribute("vs_filename"),
@@ -70,12 +70,12 @@ kShaderFSFilenameAttribute("fs_filename")
     
 }
 
-CTemplateShader::~CTemplateShader(void)
+CShaderTemplate::~CShaderTemplate(void)
 {
     
 }
 
-std::string CTemplateShader::Get_VSFilename(void) const
+std::string CShaderTemplate::Get_VSFilename(void) const
 {
     const auto& iterator = m_attributes.find(kShaderMainNode + ":" +
                                              kShaderVSFilenameAttribute);
@@ -84,7 +84,7 @@ std::string CTemplateShader::Get_VSFilename(void) const
     return iterator->second[0]->Get_String();
 }
 
-std::string CTemplateShader::Get_FSFilename(void) const
+std::string CShaderTemplate::Get_FSFilename(void) const
 {
     const auto& iterator = m_attributes.find(kShaderMainNode + ":" +
                                              kShaderFSFilenameAttribute);
@@ -93,7 +93,7 @@ std::string CTemplateShader::Get_FSFilename(void) const
     return iterator->second[0]->Get_String();
 }
 
-CTemplateMaterial::CTemplateMaterial(void) :
+CMaterialTemplate::CMaterialTemplate(void) :
 CTemplateCommon(),
 kMaterialMainNode("material"),
 kMaterialRenderOperationNameAttribute("render_operation_name"),
@@ -119,12 +119,12 @@ kMaterialShaderTemplateNode("shader")
     
 }
 
-CTemplateMaterial::~CTemplateMaterial(void)
+CMaterialTemplate::~CMaterialTemplate(void)
 {
     
 }
 
-std::string CTemplateMaterial::Get_RenderOperationName(void) const
+std::string CMaterialTemplate::Get_RenderOperationName(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialRenderOperationNameAttribute);
@@ -133,7 +133,7 @@ std::string CTemplateMaterial::Get_RenderOperationName(void) const
     return iterator->second[0]->Get_String();
 }
 
-bool CTemplateMaterial::Get_IsCullFace(void) const
+bool CMaterialTemplate::Get_IsCulling(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsCullFaceAttribute);
@@ -142,7 +142,7 @@ bool CTemplateMaterial::Get_IsCullFace(void) const
     return iterator->second[0]->Get_Bool();
 }
 
-ui32 CTemplateMaterial::Get_CullFaceMode(void) const
+ui32 CMaterialTemplate::Get_CullingMode(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialCullFaceModeAttribute);
@@ -151,7 +151,7 @@ ui32 CTemplateMaterial::Get_CullFaceMode(void) const
     return iterator->second[0]->Get_UI32();
 }
 
-bool CTemplateMaterial::Get_IsBlending(void) const
+bool CMaterialTemplate::Get_IsBlending(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsBlendingAttribute);
@@ -160,7 +160,7 @@ bool CTemplateMaterial::Get_IsBlending(void) const
     return iterator->second[0]->Get_Bool();
 }
 
-ui32 CTemplateMaterial::Get_BlendingFunctionSource(void) const
+ui32 CMaterialTemplate::Get_BlendingFunctionSource(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialBlendingFunctionSourceAttribute);
@@ -169,7 +169,7 @@ ui32 CTemplateMaterial::Get_BlendingFunctionSource(void) const
     return iterator->second[0]->Get_UI32();
 }
 
-ui32 CTemplateMaterial::Get_BlendingFunctionDestination(void) const
+ui32 CMaterialTemplate::Get_BlendingFunctionDestination(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialBlendingFunctionDestinationAttribute);
@@ -178,7 +178,7 @@ ui32 CTemplateMaterial::Get_BlendingFunctionDestination(void) const
     return iterator->second[0]->Get_UI32();
 }
 
-bool CTemplateMaterial::Get_IsDepthTest(void) const
+bool CMaterialTemplate::Get_IsDepthTest(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsDepthTestAttribute);
@@ -187,7 +187,7 @@ bool CTemplateMaterial::Get_IsDepthTest(void) const
     return iterator->second[0]->Get_Bool();
 }
 
-bool CTemplateMaterial::Get_IsDepthMask(void) const
+bool CMaterialTemplate::Get_IsDepthMask(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsDepthMaskAttribute);
@@ -196,7 +196,7 @@ bool CTemplateMaterial::Get_IsDepthMask(void) const
     return iterator->second[0]->Get_Bool();
 }
 
-bool CTemplateMaterial::Get_IsClipping(void) const
+bool CMaterialTemplate::Get_IsClipping(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsClippingAttribute);
@@ -205,7 +205,7 @@ bool CTemplateMaterial::Get_IsClipping(void) const
     return iterator->second[0]->Get_Bool();
 }
 
-glm::vec4 CTemplateMaterial::Get_ClippingPlane(void) const
+glm::vec4 CMaterialTemplate::Get_ClippingPlane(void) const
 {
     const auto& iteratorX = m_attributes.find(kMaterialMainNode + ":" +
                                               kMaterialClippingXAttribute);
@@ -233,7 +233,7 @@ glm::vec4 CTemplateMaterial::Get_ClippingPlane(void) const
     return glm::vec4(x, y, z, w);
 }
 
-bool CTemplateMaterial::Get_IsReflecting(void) const
+bool CMaterialTemplate::Get_IsReflecting(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsReflectingAttribute);
@@ -242,7 +242,7 @@ bool CTemplateMaterial::Get_IsReflecting(void) const
     return iterator->second[0]->Get_Bool();
 }
 
-bool CTemplateMaterial::Get_IsShadowing(void) const
+bool CMaterialTemplate::Get_IsShadowing(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsShadowingAttribute);
@@ -251,7 +251,7 @@ bool CTemplateMaterial::Get_IsShadowing(void) const
     return iterator->second[0]->Get_Bool();
 }
 
-bool CTemplateMaterial::Get_IsDebugging(void) const
+bool CMaterialTemplate::Get_IsDebugging(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsDebuggingAttribute);
@@ -260,7 +260,7 @@ bool CTemplateMaterial::Get_IsDebugging(void) const
     return iterator->second[0]->Get_Bool();
 }
 
-std::vector<std::shared_ptr<I_RO_TemplateCommon>> CTemplateMaterial::Get_TexturesTemplates(void) const
+std::vector<std::shared_ptr<I_RO_TemplateCommon>> CMaterialTemplate::Get_TexturesTemplates(void) const
 {
     const auto& iterator = m_templates.find(kMaterialMainNode + ":" +
                                             kMaterialTexturesTemplatesNode);
@@ -268,7 +268,7 @@ std::vector<std::shared_ptr<I_RO_TemplateCommon>> CTemplateMaterial::Get_Texture
     return iterator->second;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CTemplateMaterial::Get_ShaderTemplate(void) const
+std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplate::Get_ShaderTemplate(void) const
 {
     const auto& iterator = m_templates.find(kMaterialMainNode + ":" +
                                             kMaterialShaderTemplateNode);

@@ -54,8 +54,8 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _templat
     m_heightmapProcessor->PreprocessHeightmapTexture();
     m_heightmapProcessor->PreprocessEdgesMaskTexture();
     
-    std::shared_ptr<CTemplateMaterial> materialTemplate = std::static_pointer_cast<CTemplateMaterial>(landscapeTemplate->Get_SplattingDiffuseMaterialTemplate());
-    std::shared_ptr<CTemplateShader> shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+    std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(landscapeTemplate->Get_SplattingDiffuseMaterialTemplate());
+    std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
     m_splattingDiffuseMaterialShader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
                                                                         shaderTemplate->Get_FSFilename());
     assert(m_splattingDiffuseMaterialShader != nullptr);
@@ -65,8 +65,8 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _templat
     CLandscape::_OnResourceLoaded(m_splattingDiffuseMaterial, true);
     m_splattingDiffuseMaterialShader->Register_LoadingHandler(shared_from_this());
     
-    materialTemplate = std::static_pointer_cast<CTemplateMaterial>(landscapeTemplate->Get_SplattingNormalMaterialTemplate());
-    shaderTemplate = std::static_pointer_cast<CTemplateShader>(materialTemplate->Get_ShaderTemplate());
+    materialTemplate = std::static_pointer_cast<CMaterialTemplate>(landscapeTemplate->Get_SplattingNormalMaterialTemplate());
+    shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
     m_splattingNormalMaterialShader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
                                                                        shaderTemplate->Get_FSFilename());
     assert(m_splattingNormalMaterialShader != nullptr);

@@ -13,7 +13,7 @@
 #include "CCommonOS.h"
 #include "CGameLoopExecutor.h"
 #include "IGameObjectExtension.h"
-#include "ITemplate.h"
+#include "CTemplateGameObjects.h"
 #include "CUICommon.h"
 #endif
 
@@ -158,15 +158,17 @@ void CMainWindowGUI::on_btn_open_clicked()
         
         m_iesaTransition->LoadGameObject(filename.toUtf8().constData());
         ITemplateLoadingHandler::TEMPLATE_LOADING_HANDLER handler;
-        std::function<void(const std::shared_ptr<ITemplate>&)> function = [handler, this](const std::shared_ptr<ITemplate>& _template)
+        std::function<void(const std::shared_ptr<I_RO_TemplateCommon>&)> function = [handler, this](const std::shared_ptr<I_RO_TemplateCommon>& _template)
         {
             ui->materials_list->clear();
-            std::shared_ptr<SGameObjectTemplate> gameObjectTemplate = std::static_pointer_cast<SGameObjectTemplate>(_template);
+            std::shared_ptr<CGameObjectTemplate> gameObjectTemplate = std::static_pointer_cast<CGameObjectTemplate>(_template);
             
-            for(auto materialTemplate : gameObjectTemplate->m_materialsTemplates)
+            for(const auto& iterator : gameObjectTemplate->Get_MaterialsTemplates())
             {
-                ui->materials_list->addItem(materialTemplate->m_renderMode.c_str());
+                std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(iterator);
+                ui->materials_list->addItem(materialTemplate->Get_RenderOperationName().c_str());
             }
+
             m_mode = ui->materials_list->currentText().toUtf8().constData();
             ui->btn_shader_compile->setDisabled(ui->materials_list->count() == 0);
             ui->btn_shader_compile->setStyleSheet(ui->materials_list->count() == 0 ? kBtnDisableStyleSheet : kBtnFocusStyleSheet);
@@ -180,7 +182,7 @@ void CMainWindowGUI::on_btn_open_clicked()
             ui->btn_saveas->setDisabled(false);
             ui->btn_saveas->setStyleSheet(kBtnEnableStyleSheet);
         };
-        handler = std::make_shared<std::function<void(const std::shared_ptr<ITemplate>&)>>(function);
+        handler = std::make_shared<std::function<void(const std::shared_ptr<I_RO_TemplateCommon>&)>>(function);
         m_iesaTransition->Get_GameObjectExtension()->Get_Template(handler);
         
 #endif
@@ -200,5 +202,13 @@ void CMainWindowGUI::on_btn_saveas_clicked()
 void CMainWindowGUI::on_btn_material_editor_clicked()
 {
     m_materialSettingsGUI = new CMaterialSettingsGUI(this);
+    
+#if defined(__OSX__) || defined(__WIN32__)
+    
+    m_materialSettingsGUI->Set_Mode(m_mode);
+    m_materialSettingsGUI->Set_Transition(m_iesaTransition);
+    
+#endif
+    
     m_materialSettingsGUI->show();
 }
