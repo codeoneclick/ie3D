@@ -109,13 +109,7 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
         std::shared_ptr<CMaterialTemplate> screenSpaceRenderOperationMaterialTemplate = std::static_pointer_cast<CMaterialTemplate>(screenSpaceRenderOperationTemplate->Get_MaterialTemplate());
         assert(screenSpaceRenderOperationMaterialTemplate != nullptr);
         
-        std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(screenSpaceRenderOperationMaterialTemplate->Get_ShaderTemplate());
-        std::shared_ptr<CShader> screenSpaceRenderOperationShader =
-        m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
-                                         shaderTemplate->Get_FSFilename());
-        assert(screenSpaceRenderOperationShader != nullptr);
-        
-        std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>(screenSpaceRenderOperationShader, screenSpaceRenderOperationMaterialTemplate->Get_RenderOperationName());
+        std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>(screenSpaceRenderOperationMaterialTemplate->Get_RenderOperationName());
         screenSpaceRenderOperationMaterial->Serialize(screenSpaceRenderOperationMaterialTemplate, m_resourceAccessor, m_renderMgr);
         
         std::shared_ptr<CRenderOperationScreenSpace> screenSpaceRenderOperation =
@@ -130,12 +124,7 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
     std::shared_ptr<CMaterialTemplate> outputRenderOperationMaterialTemplate = std::static_pointer_cast<CMaterialTemplate>(outputRenderOperationTemplate->Get_MaterialTemplate());
     assert(outputRenderOperationMaterialTemplate != nullptr);
     
-    std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(outputRenderOperationMaterialTemplate->Get_ShaderTemplate());
-    std::shared_ptr<CShader> outputRenderOperationShader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
-                                                                                            shaderTemplate->Get_FSFilename());
-    assert(outputRenderOperationShader != nullptr);
-    
-    std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>(outputRenderOperationShader, outputRenderOperationMaterialTemplate->Get_RenderOperationName());
+    std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>(outputRenderOperationMaterialTemplate->Get_RenderOperationName());
     outputRenderOperationMaterial->Serialize(outputRenderOperationMaterialTemplate, m_resourceAccessor, m_renderMgr);
     m_renderMgr->RegisterOutputRenderOperation(outputRenderOperationMaterial);
     

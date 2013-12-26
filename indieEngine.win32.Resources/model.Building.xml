@@ -1,14 +1,11 @@
-<model name="building_01">
-	<mesh filename="model_03.MDL_mesh" is_batching="1"/>
+<model filename="model_03.MDL_mesh" is_batching="1">
     <skeleton filename="model_03.MDL_sk"/>
-    <animations>
-        <animation name="model_03.MDL_anim" filename="model_03.MDL_anim"/>
-    </animations>
+    <sequences>
+        <sequence animation_name="model_03.MDL_anim" filename="model_03.MDL_anim"/>
+    </sequences>
 	<materials>
 		<material filename="material.model.common.xml"/>
         <material filename="material.model.reflection.xml"/>
         <material filename="material.model.refraction.xml"/>
-        <!--<material filename="screen.gbuffer.position.model.material.xml"/>-->
-        <!--<material filename="gbuffer.normal.material.xml"/>-->
 	</materials>
 </model>

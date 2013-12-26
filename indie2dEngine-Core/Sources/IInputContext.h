@@ -26,7 +26,11 @@ protected:
 	static IInputContext* m_sharedInstance;
 	POINT m_mousePosition;
 	bool m_isTapped;
-
+    
+#elif defined(__NDK__)
+    
+    static IInputContext* m_sharedInstance;
+    
 #endif
 
 public:
@@ -46,6 +50,14 @@ public:
 
     void RegisterTapRecognizerHandler(std::shared_ptr<IInputTapRecognizerHandler> _handler);
     void UnregisterTapRecognizerHandler(std::shared_ptr<IInputTapRecognizerHandler> _handler);
+    
+#if defined(__NDK__)
+    
+    static void NativeCallTapRecognizerPressed(const glm::ivec2& _point);
+    static void NativeCallTapRecognizerMoved(const glm::ivec2& _point);
+    static void NativeCallTapRecognizerReleased(const glm::ivec2& _point);
+    
+#endif
 };
 
 #endif 

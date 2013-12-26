@@ -31,9 +31,9 @@ m_skeleton(nullptr)
 
 	m_materialImposer = [this](std::shared_ptr<CMaterial> _material)
     {
-        _material->Get_Shader()->Set_Matrix4x4(_material->Get_IsBatching() ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+        _material->Get_Shader()->Set_Matrix4x4(m_isBatching ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        _material->Get_Shader()->Set_Matrix4x4(!_material->Get_IsReflected() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        _material->Get_Shader()->Set_Matrix4x4(!_material->Get_IsReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         
         ui32 count = 0;
@@ -47,11 +47,11 @@ m_skeleton(nullptr)
         }
         
         _material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        _material->Get_Shader()->Set_Vector4(_material->Get_Clipping(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
+        _material->Get_Shader()->Set_Vector4(_material->Get_ClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         _material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         _material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
-        _material->Get_Shader()->Set_Int(_material->Get_IsBatching() ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_01);
+        _material->Get_Shader()->Set_Int(m_isBatching ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_01);
     };
 }
 
@@ -74,18 +74,13 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
         assert(m_skeleton != nullptr);
         m_skeleton->Register_LoadingHandler(shared_from_this());
     }
+    m_isBatching = modelTemplate->Get_IsBatching();
     
     for(const auto& iterator : modelTemplate->Get_MaterialsTemplates())
     {
         std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(iterator);
-        std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
-        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
-                                                                           shaderTemplate->Get_FSFilename());
-        assert(shader != nullptr);
-        shader->Register_LoadingHandler(shared_from_this());
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->Get_RenderOperationName());
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(materialTemplate->Get_RenderOperationName());
 		material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
-        material->Set_IsBatching(modelTemplate->Get_IsBatching());
         m_materials.insert(std::make_pair(materialTemplate->Get_RenderOperationName(), material));
         CModel::_OnResourceLoaded(material, true);
     }
@@ -105,13 +100,13 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
     std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(k_vsBoundBoxFilename,
                                                                        k_fsBoundBoxFilename);
     assert(shader != nullptr);
-    m_debugBoundBoxMaterial = std::make_shared<CMaterial>(shader, "bound.box");
-    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_CULL_MODE, false);
-    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, false);
-    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_DEPTH_MASK, true);
-    m_debugBoundBoxMaterial->Set_RenderState(E_RENDER_STATE_BLEND_MODE, true);
+    m_debugBoundBoxMaterial = std::make_shared<CMaterial>("bound.box", true);
+    m_debugBoundBoxMaterial->Set_IsCulling(false);
+    m_debugBoundBoxMaterial->Set_IsDepthTest(false);
+    m_debugBoundBoxMaterial->Set_IsDepthMask(true);
+    m_debugBoundBoxMaterial->Set_IsBlending(true);
     
-    m_debugBoundBoxMaterial->Set_CullFaceMode(GL_FRONT);
+    m_debugBoundBoxMaterial->Set_CullingMode(GL_FRONT);
     m_debugBoundBoxMaterial->Set_BlendingFunctionSource(GL_SRC_ALPHA);
     m_debugBoundBoxMaterial->Set_BlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
     
@@ -174,7 +169,7 @@ void CModel::_OnBatch(const std::string& _mode)
     std::shared_ptr<CMaterial> material = m_materials.find(_mode)->second;
     assert(material->Get_Shader() != nullptr);
 
-    if(m_mesh->IsLoaded() && m_animationMixer != nullptr && material->Get_IsBatching())
+    if(m_mesh->IsLoaded() && m_animationMixer != nullptr && m_isBatching)
     {
         m_renderMgr->Get_BatchingMgr()->Batch(_mode, m_renderQueuePosition, std::make_tuple(m_mesh, m_animationMixer), material, m_materialImposer, m_matrixWorld);
     }
@@ -204,10 +199,12 @@ void CModel::_OnDraw(const std::string& _mode)
         std::shared_ptr<CMaterial> material = m_materials.find(_mode)->second;
         assert(material->Get_Shader() != nullptr);
         
-        if(!material->Get_IsBatching() && m_animationMixer != nullptr)
+        if(!m_isBatching && m_animationMixer != nullptr)
         {
             m_materialImposer(material);
-            material->Get_Shader()->Set_MatrixArray4x4(m_animationMixer->Get_Transformations(), m_animationMixer->Get_TransformationSize(), E_SHADER_UNIFORM_MATRIX_BONES);
+            material->Get_Shader()->Set_MatrixArray4x4(m_animationMixer->Get_Transformations(),
+                                                       m_animationMixer->Get_TransformationSize(),
+                                                       E_SHADER_UNIFORM_MATRIX_BONES);
             IGameObject::_OnDraw(_mode);
         }
     }

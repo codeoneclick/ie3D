@@ -11,9 +11,11 @@
 
 #if defined(__NDK__)
 
+IInputContext* IInputContext::m_sharedInstance = nullptr;
+
 IInputContext::IInputContext(void* _hwnd)
 {
-    
+    m_sharedInstance = this;
 }
 
 IInputContext::~IInputContext(void)
@@ -53,6 +55,24 @@ void IInputContext::RegisterTapRecognizerHandler(std::shared_ptr<IInputTapRecogn
 void IInputContext::UnregisterTapRecognizerHandler(std::shared_ptr<IInputTapRecognizerHandler> _handler)
 {
     m_handlers.erase(_handler);
+}
+
+void IInputContext::NativeCallTapRecognizerPressed(const glm::ivec2& _point)
+{
+    assert(m_sharedInstance != nullptr);
+    m_sharedInstance->TapRecognizerPressed(_point);
+}
+
+void IInputContext::NativeCallTapRecognizerMoved(const glm::ivec2& _point)
+{
+    assert(m_sharedInstance != nullptr);
+    m_sharedInstance->TapRecognizerMoved(_point);
+}
+
+void IInputContext::NativeCallTapRecognizerReleased(const glm::ivec2& _point)
+{
+    assert(m_sharedInstance != nullptr);
+    m_sharedInstance->TapRecognizerReleased(_point);
 }
 
 #endif

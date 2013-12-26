@@ -50,7 +50,7 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<location>/Users/codeoneclick/Documents/Hobby/indieEngine/indieEngine.win32.Resources</location>
+			<location>/Users/sergey.sergeev/Documents/Hobby/indieEngine/indieEngine.win32.Resources</location>
 		</link>
 		<link>
 			<name>libs/IndieEngineCore</name>

@@ -77,12 +77,7 @@ void COcean::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
     for(const auto& iterator : oceanTemplate->Get_MaterialsTemplates())
     {
         std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(iterator);
-        std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
-        std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
-                                                                           shaderTemplate->Get_FSFilename());
-        assert(shader != nullptr);
-        shader->Register_LoadingHandler(shared_from_this());
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(shader, materialTemplate->Get_RenderOperationName());
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(materialTemplate->Get_RenderOperationName());
         material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
         m_materials.insert(std::make_pair(materialTemplate->Get_RenderOperationName(), material));
         COcean::_OnResourceLoaded(material, true);

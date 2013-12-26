@@ -7,7 +7,6 @@
 //
 
 #include "CGUITemplateSerializer.h"
-#include "ITemplate.h"
 
 /*CGUITemplateSerializer::CGUITemplateSerializer(E_GUI_LOADING_SCHEME _scheme) :
 m_scheme(_scheme)

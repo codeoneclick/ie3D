@@ -147,7 +147,7 @@ public:
     bool Get_IsCulling(void) const;
     GLenum Get_CullingMode(void) const;
     
-    bool Get_IsBlending(void) const = 0;
+    bool Get_IsBlending(void) const;
     GLenum Get_BlendingFunctionSource(void) const;
     GLenum Get_BlendingFunctionDestination(void) const;
     

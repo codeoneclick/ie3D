@@ -33,6 +33,7 @@ m_sceneUpdateMgr(nullptr),
 m_materialImposer(nullptr),
 m_isNeedToRender(false),
 m_isNeedToUpdate(false),
+m_isBatching(false),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
     std::for_each(m_lights.begin(), m_lights.end(), [](std::shared_ptr<CLight> _light)
@@ -79,11 +80,11 @@ void IGameObject::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPL
     iterator->second->Set_Texture(_texture, _sampler);
 }
 
-void IGameObject::Set_Clipping(const glm::vec4 &_clipping, const std::string& _renderMode)
+void IGameObject::Set_ClippingPlane(const glm::vec4 &_clippingPlane, const std::string& _renderMode)
 {
     assert(m_materials.find(_renderMode) != m_materials.end());
     auto iterator = m_materials.find(_renderMode);
-    iterator->second->Set_Clipping(_clipping);
+    iterator->second->Set_ClippingPlane(_clippingPlane);
 }
 
 std::shared_ptr<CVertexBuffer> IGameObject::Get_HardwareVertexBuffer(void)
@@ -253,7 +254,7 @@ void IGameObject::_OnBind(const std::string &_mode)
     assert(m_materials.find(_mode) != m_materials.end());
     auto iterator = m_materials.find(_mode);
 
-    if(!iterator->second->Get_IsBatching())
+    if(!m_isBatching)
     {
         assert(m_mesh != nullptr);
         iterator->second->Bind();
@@ -272,7 +273,7 @@ void IGameObject::_OnUnbind(const std::string &_mode)
     assert(m_materials.find(_mode) != m_materials.end());
     auto iterator = m_materials.find(_mode);
     
-    if(!iterator->second->Get_IsBatching())
+    if(!m_isBatching)
     {
         assert(m_mesh != nullptr);
         iterator->second->Unbind();

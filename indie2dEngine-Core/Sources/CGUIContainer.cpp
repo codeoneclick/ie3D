@@ -10,7 +10,6 @@
 #include "CQuad.h"
 #include "CMaterial.h"
 #include "CShader.h"
-#include "ITemplate.h"
 #include "HEnums.h"
 #include "CResourceAccessor.h"
 #include "CRenderMgr.h"
@@ -77,7 +76,7 @@ void CGUIContainer::_OnSceneUpdate(f32 _deltatime)
     {
 		IGUIControl::_OnSceneUpdate(_deltatime);
 
-		if(m_material != nullptr && !m_material->Get_IsBatching())
+		/*if(m_material != nullptr && !m_material->Get_IsBatching())
 		{
 			SHardwareVertex* vertexData = m_quad->Get_VertexBuffer()->Lock();
 
@@ -99,7 +98,7 @@ void CGUIContainer::_OnSceneUpdate(f32 _deltatime)
 			vertexData[3].m_position = glm::vec3(frame.z, frame.w, 0.0f);
 			vertexData[3].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 1.0f));
 			m_quad->Get_VertexBuffer()->Unlock();
-		}
+		}*/
     }
 }
 
@@ -108,10 +107,10 @@ void CGUIContainer::_OnBatch(const std::string& _mode)
 	assert(m_materialModeName == _mode);
     assert(m_material->Get_Shader() != nullptr);
 
-    if(m_material->Get_IsBatching())
+    /*if(m_material->Get_IsBatching())
     {
 		m_renderMgr->Get_BatchingMgr()->Batch(_mode, m_renderQueuePosition, m_quad, m_material, m_materialImposer, glm::vec2(m_position.x, m_position.y), m_size);
-    }
+    }*/
 }
 
 void CGUIContainer::_OnBind(const std::string& _mode)
@@ -130,11 +129,11 @@ void CGUIContainer::_OnDraw(const std::string& _mode)
         assert(m_materialModeName == _mode);
         assert(m_material->Get_Shader() != nullptr);
         
-        if(!m_material->Get_IsBatching())
+        /*if(!m_material->Get_IsBatching())
         {
             m_materialImposer(m_material);
             IGUIControl::_OnDraw(_mode);
-        }
+        }*/
     }
 }
 

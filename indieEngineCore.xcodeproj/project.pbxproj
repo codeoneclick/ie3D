@@ -95,7 +95,6 @@
 		2111AA89181EFF30007FE7A8 /* CScreenSpaceRenderOperationTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748817621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp */; };
 		2111AA8A181EFF30007FE7A8 /* COutputRenderOperationTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748B17621DDF00E1DC6E /* COutputRenderOperationTemplateSerializer.cpp */; };
 		2111AA8B181EFF30007FE7A8 /* CGameTransitionTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748E17621E0600E1DC6E /* CGameTransitionTemplateSerializer.cpp */; };
-		2111AA8C181EFF30007FE7A8 /* ITemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138DF175602D50056461B /* ITemplate.cpp */; };
 		2111AA8D181EFF30007FE7A8 /* CTemplateAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E217560F5E0056461B /* CTemplateAccessor.cpp */; };
 		2111AA8E181EFF30007FE7A8 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		2111AA8F181EFF30007FE7A8 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
@@ -235,7 +234,6 @@
 		21D0720B181DA6C20019D264 /* CScreenSpaceRenderOperationTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748817621D1C00E1DC6E /* CScreenSpaceRenderOperationTemplateSerializer.cpp */; };
 		21D0720C181DA6C20019D264 /* COutputRenderOperationTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748B17621DDF00E1DC6E /* COutputRenderOperationTemplateSerializer.cpp */; };
 		21D0720D181DA6C20019D264 /* CGameTransitionTemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748E17621E0600E1DC6E /* CGameTransitionTemplateSerializer.cpp */; };
-		21D0720E181DA6C20019D264 /* ITemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138DF175602D50056461B /* ITemplate.cpp */; };
 		21D0720F181DA6C20019D264 /* CTemplateAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E217560F5E0056461B /* CTemplateAccessor.cpp */; };
 		21D07210181DA6C20019D264 /* ITemplateLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588C9175628F400802609 /* ITemplateLoadingHandler.cpp */; };
 		21D07211181DA6C20019D264 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
@@ -571,8 +569,6 @@
 		A40138DA1756020B0056461B /* CModelTemplateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModelTemplateLoader.h; path = Sources/CModelTemplateLoader.h; sourceTree = "<group>"; };
 		A40138DC175602370056461B /* CParticleEmitterTemplateLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitterTemplateLoader.cpp; path = Sources/CParticleEmitterTemplateLoader.cpp; sourceTree = "<group>"; };
 		A40138DD175602380056461B /* CParticleEmitterTemplateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CParticleEmitterTemplateLoader.h; path = Sources/CParticleEmitterTemplateLoader.h; sourceTree = "<group>"; };
-		A40138DF175602D50056461B /* ITemplate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ITemplate.cpp; path = Sources/ITemplate.cpp; sourceTree = "<group>"; };
-		A40138E0175602D50056461B /* ITemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITemplate.h; path = Sources/ITemplate.h; sourceTree = "<group>"; };
 		A40138E217560F5E0056461B /* CTemplateAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTemplateAccessor.cpp; path = Sources/CTemplateAccessor.cpp; sourceTree = "<group>"; };
 		A40138E317560F610056461B /* CTemplateAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTemplateAccessor.h; path = Sources/CTemplateAccessor.h; sourceTree = "<group>"; };
 		A40138E5175613080056461B /* CMaterialTemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMaterialTemplateLoadingOperation.cpp; path = Sources/CMaterialTemplateLoadingOperation.cpp; sourceTree = "<group>"; };
@@ -1206,8 +1202,6 @@
 		A40138BC1754E9CE0056461B /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				A40138E0175602D50056461B /* ITemplate.h */,
-				A40138DF175602D50056461B /* ITemplate.cpp */,
 				21E4D58918658466006F84D6 /* CTemplateCommon.h */,
 				21E4D58818658466006F84D6 /* CTemplateCommon.cpp */,
 				21E4D59B1865944D006F84D6 /* CTemplateGameObjects.h */,
@@ -2397,7 +2391,6 @@
 				2111AA89181EFF30007FE7A8 /* CScreenSpaceRenderOperationTemplateSerializer.cpp in Sources */,
 				2111AA8A181EFF30007FE7A8 /* COutputRenderOperationTemplateSerializer.cpp in Sources */,
 				2111AA8B181EFF30007FE7A8 /* CGameTransitionTemplateSerializer.cpp in Sources */,
-				2111AA8C181EFF30007FE7A8 /* ITemplate.cpp in Sources */,
 				2111AA8D181EFF30007FE7A8 /* CTemplateAccessor.cpp in Sources */,
 				2111AA8E181EFF30007FE7A8 /* ITemplateLoadingHandler.cpp in Sources */,
 				21E4D58C18658466006F84D6 /* CTemplateCommon.cpp in Sources */,
@@ -2548,7 +2541,6 @@
 				A4D21A231848DDE100595FEA /* CGraphicsContext_ndk.cpp in Sources */,
 				21D0720C181DA6C20019D264 /* COutputRenderOperationTemplateSerializer.cpp in Sources */,
 				21D0720D181DA6C20019D264 /* CGameTransitionTemplateSerializer.cpp in Sources */,
-				21D0720E181DA6C20019D264 /* ITemplate.cpp in Sources */,
 				21D0720F181DA6C20019D264 /* CTemplateAccessor.cpp in Sources */,
 				21D07210181DA6C20019D264 /* ITemplateLoadingHandler.cpp in Sources */,
 				21D07211181DA6C20019D264 /* CCollisionMgr.cpp in Sources */,

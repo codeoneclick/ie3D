@@ -8,7 +8,6 @@
 
 #include "CGUITemplateLoader.h"
 #include "CGUITemplateLoadingOperation.h"
-#include "ITemplate.h"
 #include "ITemplateLoadingHandler.h"
 
 CGUITemplateLoader::CGUITemplateLoader(void)

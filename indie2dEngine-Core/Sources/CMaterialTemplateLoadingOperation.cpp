@@ -8,7 +8,6 @@
 
 #include "CMaterialTemplateLoadingOperation.h"
 #include "CMaterialTemplateSerializer.h"
-#include "ITemplate.h"
 
 CMaterialTemplateLoadingOperation::CMaterialTemplateLoadingOperation(void)
 {

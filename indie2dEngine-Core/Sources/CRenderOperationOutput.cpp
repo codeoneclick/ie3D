@@ -18,12 +18,13 @@ m_material(_material),
 m_frameBufferHandle(_frameBufferHandle),
 m_renderBufferHandle(_renderBufferHandle)
 {
-    m_material->Set_RenderState(E_RENDER_STATE_CULL_MODE, false);
-    m_material->Set_RenderState(E_RENDER_STATE_DEPTH_MASK, true);
-    m_material->Set_RenderState(E_RENDER_STATE_DEPTH_TEST, false);
-    m_material->Set_RenderState(E_RENDER_STATE_BLEND_MODE, false);
+    assert(m_material != nullptr);
+    m_material->Set_IsCulling(false);
+    m_material->Set_IsDepthMask(true);
+    m_material->Set_IsDepthTest(false);
+    m_material->Set_IsBlending(false);
     
-    m_material->Set_CullFaceMode(GL_FRONT);
+    m_material->Set_CullingMode(GL_FRONT);
     m_material->Set_BlendingFunctionSource(GL_SRC_ALPHA);
     m_material->Set_BlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
     

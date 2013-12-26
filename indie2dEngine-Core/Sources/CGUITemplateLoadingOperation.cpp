@@ -9,7 +9,6 @@
 #include "CGUITemplateLoadingOperation.h"
 #include "CMaterialTemplateLoadingOperation.h"
 #include "CGUITemplateSerializer.h"
-#include "ITemplate.h"
 
 CGUITemplateLoadingOperation::CGUITemplateLoadingOperation(E_GUI_LOADING_SCHEME _scheme) :
 m_scheme(_scheme)

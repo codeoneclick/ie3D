@@ -140,12 +140,12 @@ void IGUIControl::_OnBind(const std::string &_mode)
 	assert(m_materialModeName == _mode);
 	assert(m_material != nullptr);
 
-    if(!m_material->Get_IsBatching())
+    /*if(!m_material->Get_IsBatching())
     {
 		assert(m_quad != nullptr);
         m_material->Bind();
         m_quad->Bind(m_material->Get_Shader()->Get_Attributes());
-    }
+    }*/
 }
 
 void IGUIControl::_OnDraw(const std::string &_mode)
@@ -159,12 +159,12 @@ void IGUIControl::_OnUnbind(const std::string &_mode)
     assert(m_materialModeName == _mode);
 	assert(m_material != nullptr);
     
-    if(!m_material->Get_IsBatching())
+    /*if(!m_material->Get_IsBatching())
     {
 		assert(m_quad != nullptr);
         m_material->Unbind();
         m_quad->Unbind(m_material->Get_Shader()->Get_Attributes());
-    }
+    }*/
 }
 
 void IGUIControl::_OnDebugDraw(const std::string &_mode)

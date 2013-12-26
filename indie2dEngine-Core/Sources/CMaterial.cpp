@@ -56,6 +56,8 @@ std::shared_ptr<CMaterialCachedParameters> CMaterial::Get_CachedParameters(void)
         m_cachedParameters = std::make_shared<CMaterialCachedParameters>();
         m_cachedParameters->m_isDepthTest = true;
         m_cachedParameters->m_isDepthMask = true;
+        m_cachedParameters->m_isCulling = false;
+        m_cachedParameters->m_isBlending = false;
     }
     return m_cachedParameters;
 }
@@ -309,8 +311,14 @@ void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
     
     std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
     assert(shaderTemplate != nullptr);
-    std::shared_ptr<CShader> shader = _resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(), shaderTemplate->Get_FSFilename());
+    std::shared_ptr<CShader> shader = _resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+                                                                      shaderTemplate->Get_FSFilename());
+    assert(shader != nullptr);
     CMaterial::Set_Shader(shader);
+    if(_handler != nullptr)
+    {
+        shader->Register_LoadingHandler(_handler);
+    }
     
     m_status |= E_RESOURCE_STATUS_LOADED;
     m_status |= E_RESOURCE_STATUS_COMMITED;
@@ -365,7 +373,6 @@ void CMaterial::Bind(void)
     assert(m_parameters->m_shader != nullptr);
     
     m_parameters->m_shader->Bind();
-
     for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
     {
         if(m_parameters->m_textures[i] != nullptr)
@@ -378,47 +385,53 @@ void CMaterial::Bind(void)
        Get_CachedParameters()->m_isDepthTest != m_parameters->m_isDepthTest)
     {
         glEnable(GL_DEPTH_TEST);
+        Get_CachedParameters()->m_isDepthTest = m_parameters->m_isDepthTest;
     }
-    else if(m_parameters->m_isDepthTest != m_parameters->m_isDepthTest)
+    else if(Get_CachedParameters()->m_isDepthTest != m_parameters->m_isDepthTest)
     {
         glDisable(GL_DEPTH_TEST);
+        Get_CachedParameters()->m_isDepthTest = m_parameters->m_isDepthTest;
     }
-    Get_CachedParameters()->m_isDepthTest = m_parameters->m_isDepthTest;
+    
     
     if(m_parameters->m_isDepthMask &&
        Get_CachedParameters()->m_isDepthMask != m_parameters->m_isDepthMask)
     {
         glDepthMask(GL_TRUE);
+        Get_CachedParameters()->m_isDepthMask = m_parameters->m_isDepthMask;
     }
-    else if(m_parameters->m_isDepthMask != m_parameters->m_isDepthMask)
+    else if(Get_CachedParameters()->m_isDepthMask != m_parameters->m_isDepthMask)
     {
         glDepthMask(GL_FALSE);
+        Get_CachedParameters()->m_isDepthMask = m_parameters->m_isDepthMask;
     }
-    Get_CachedParameters()->m_isDepthMask = m_parameters->m_isDepthMask;
     
     if(m_parameters->m_isCulling &&
        Get_CachedParameters()->m_isCulling != m_parameters->m_isCulling)
     {
         glEnable(GL_CULL_FACE);
         glCullFace(m_parameters->m_cullingMode);
+        Get_CachedParameters()->m_isCulling = m_parameters->m_isCulling;
     }
-    else if(m_parameters->m_isCulling != m_parameters->m_isCulling)
+    else if(Get_CachedParameters()->m_isCulling != m_parameters->m_isCulling)
     {
         glDisable(GL_CULL_FACE);
+        Get_CachedParameters()->m_isCulling = m_parameters->m_isCulling;
     }
-    Get_CachedParameters()->m_isCulling = m_parameters->m_isCulling;
     
     if(m_parameters->m_isBlending &&
        Get_CachedParameters()->m_isBlending != m_parameters->m_isBlending)
     {
         glEnable(GL_BLEND);
         glBlendFunc(m_parameters->m_blendingFunctionSource, m_parameters->m_blendingFunctionDestination);
+        Get_CachedParameters()->m_isBlending = m_parameters->m_isBlending;
     }
-    else if(m_parameters->m_isBlending != m_parameters->m_isBlending)
+    else if(Get_CachedParameters()->m_isBlending != m_parameters->m_isBlending)
     {
         glDisable(GL_BLEND);
+        Get_CachedParameters()->m_isBlending = m_parameters->m_isBlending;
     }
-    Get_CachedParameters()->m_isBlending = m_parameters->m_isBlending;
+    
 }
 
 void CMaterial::Unbind(void)

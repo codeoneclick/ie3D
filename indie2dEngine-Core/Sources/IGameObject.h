@@ -68,6 +68,7 @@ protected:
     std::function<void(std::shared_ptr<CMaterial>)> m_materialImposer;
 	bool m_isNeedToRender;
     bool m_isNeedToUpdate;
+    bool m_isBatching;
     
     bool _IsBoundBoxInFrustum(void);
     
@@ -142,7 +143,7 @@ public:
     std::shared_ptr<CIndexBuffer> Get_BoundIndexBuffer(void);
     
     void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode);
-    void Set_Clipping(const glm::vec4& _clipping, const std::string& _renderMode);
+    void Set_ClippingPlane(const glm::vec4& _clippingPlane, const std::string& _renderMode);
     
     virtual inline void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
     {
