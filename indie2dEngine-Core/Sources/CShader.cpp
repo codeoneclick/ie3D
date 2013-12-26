@@ -148,7 +148,41 @@ CShader::~CShader(void)
     
 }
 
-void CShader::_Set_Handle(ui32 _handle)
+std::string CShader::Get_VertexShaderFilename(void) const
+{
+    assert(m_vsFilename.length() != 0);
+    return m_vsFilename;
+}
+
+std::string CShader::Get_FragmentShaderFilename(void) const
+{
+    assert(m_fsFilename.length() != 0);
+    return m_fsFilename;
+}
+
+std::string CShader::Get_VertexShaderSourceCode(void) const
+{
+    return m_vsSourceCode;
+}
+
+std::string CShader::Get_FragmentShaderSourceCode(void) const
+{
+    return m_fsSourceCode;
+}
+
+void CShader::Set_SourceCode(const std::string &_vsFilename,
+                             const std::string &_vsSourceCode,
+                             const std::string &_fsFilename,
+                             const std::string &_fsSourceCode)
+{
+    m_vsFilename = _vsFilename;
+    m_fsFilename = _fsFilename;
+    m_vsSourceCode = _vsSourceCode;
+    m_fsSourceCode = _fsSourceCode;
+    m_status |= E_RESOURCE_STATUS_LOADED;
+}
+
+void CShader::Set_Handle(ui32 _handle)
 {
     m_handle = _handle;
     
@@ -199,6 +233,11 @@ void CShader::_Set_Handle(ui32 _handle)
     m_attributes[E_SHADER_ATTRIBUTE_EXTRA] = glGetAttribLocation(m_handle, SAttributes.m_extra.c_str());
     
     m_status |= E_RESOURCE_STATUS_COMMITED;
+}
+
+const i32* CShader::Get_Attributes(void) const
+{
+    return m_attributes;
 }
 
 void CShader::Set_Matrix3x3(const glm::mat3x3 &_matrix, E_SHADER_UNIFORM _uniform)

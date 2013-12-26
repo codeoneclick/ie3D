@@ -304,7 +304,7 @@ void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
             texture->Register_LoadingHandler(_handler);
         }
         assert(texture != nullptr);
-        texture->Set_Wrap(textureTemplate->Get_WrapMode());
+        texture->Set_WrapMode(textureTemplate->Get_WrapMode());
         assert(textureTemplate->Get_SamplerId() >= 0 && textureTemplate->Get_SamplerId() < E_SHADER_SAMPLER_MAX);
         CMaterial::Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->Get_SamplerId()));
     }

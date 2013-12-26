@@ -41,9 +41,9 @@ m_material(_material)
     header->_Set_Width(m_frameWidth);
     header->_Set_Height(m_frameHeight);
     m_operatingTexture = std::make_shared<CTexture>(m_mode);
-    m_operatingTexture->_Set_Header(header);
-    m_operatingTexture->_Set_Handle(textureHandle);
-    m_operatingTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
+    m_operatingTexture->Set_Header(header);
+    m_operatingTexture->Set_Handle(textureHandle);
+    m_operatingTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
     
     m_material->Set_IsCulling(false);
     m_material->Set_IsDepthMask(true);

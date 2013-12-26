@@ -122,9 +122,9 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessHeightmapTexture(void)
     heightmapTextureHeader->_Set_Height(m_height);
     
     m_heightmapTexture = std::make_shared<CTexture>("heightmap");
-    m_heightmapTexture->_Set_Header(heightmapTextureHeader);
-    m_heightmapTexture->_Set_Handle(textureHandle);
-    m_heightmapTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
+    m_heightmapTexture->Set_Header(heightmapTextureHeader);
+    m_heightmapTexture->Set_Handle(textureHandle);
+    m_heightmapTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
     return m_heightmapTexture;
 }
 
@@ -171,9 +171,9 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingTexture(void)
     splattingTextureHeader->_Set_Height(m_height);
     
     m_splattingTexture = std::make_shared<CTexture>("splatting");
-    m_splattingTexture->_Set_Header(splattingTextureHeader);
-    m_splattingTexture->_Set_Handle(textureHandle);
-    m_splattingTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
+    m_splattingTexture->Set_Header(splattingTextureHeader);
+    m_splattingTexture->Set_Handle(textureHandle);
+    m_splattingTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
     
     return m_splattingTexture;
 }
@@ -254,9 +254,9 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessEdgesMaskTexture(void)
     edgesMaskTextureHeader->_Set_Height(edgesMaskHeight);
     
     m_edgesMaskTexture = std::make_shared<CTexture>("edges");
-    m_edgesMaskTexture->_Set_Header(edgesMaskTextureHeader);
-    m_edgesMaskTexture->_Set_Handle(textureHandle);
-    m_edgesMaskTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
+    m_edgesMaskTexture->Set_Header(edgesMaskTextureHeader);
+    m_edgesMaskTexture->Set_Handle(textureHandle);
+    m_edgesMaskTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
 
     return m_edgesMaskTexture;
 }

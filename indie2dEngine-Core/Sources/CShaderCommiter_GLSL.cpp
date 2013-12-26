@@ -116,7 +116,7 @@ void CShaderCommiter_GLSL::Commit(void)
     assert(m_resource != nullptr);
     assert(m_resource->IsLoaded() == true);
     std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
-    shader->_Set_Handle(shHandle);
+    shader->Set_Handle(shHandle);
     m_status = m_status == E_COMMITER_STATUS_INPROGRESS ? E_COMMITER_STATUS_SUCCESS : E_COMMITER_STATUS_FAILURE;
 }
 

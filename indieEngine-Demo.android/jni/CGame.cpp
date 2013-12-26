@@ -54,12 +54,6 @@ static void custom_handle_cmd(struct android_app* _application, int32_t _command
 
 static int32_t custom_handle_input(struct android_app* _application, AInputEvent* _event)
 {
-    /*if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION)
-    {
-    	NDK_LOG("Motion Event: x %f / y %f", AMotionEvent_getX(event, 0), AMotionEvent_getY(event, 0));
-    	return 1;
-    }*/
-
     if( AInputEvent_getType(_event) == AINPUT_EVENT_TYPE_MOTION )
     {
     	i32 pointerCount = AMotionEvent_getPointerCount(_event);

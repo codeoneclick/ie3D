@@ -99,7 +99,7 @@ void CTextureSerializer_PVR::Serialize(void)
         textureheader->_Set_Height(header->dwHeight);
         textureheader->_Set_Data(texturedata);
         textureheader->_Set_NumMips(header->dwMipMapCount);
-        texture->_Set_Header(textureheader);
+        texture->Set_Header(textureheader);
         
         m_status = E_SERIALIZER_STATUS_SUCCESS;
     }
@@ -169,7 +169,7 @@ void CTextureSerializer_PVR::Serialize(void)
         textureheader->_Set_Height(header->u32Height);
         textureheader->_Set_Data(texturedata);
         textureheader->_Set_NumMips(header->u32MIPMapCount);
-        texture->_Set_Header(textureheader);
+        texture->Set_Header(textureheader);
         
         m_status = E_SERIALIZER_STATUS_SUCCESS;
     }

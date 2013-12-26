@@ -110,76 +110,69 @@ public:
     };
 };
 
-class CTexture final : public IResource
+class I_RO_Texture
 {
 private:
     
 protected:
     
-    friend class CRenderOperationWorldSpace;
-    friend class CRenderOperationScreenSpace;
-    friend class CTextureSerializer_PVR;
-    friend class CTextureCommiter_PVR;
-    friend class CTextureLoadingOperation;
-    friend class CHeightmapProcessor;
+public:
+    
+    I_RO_Texture(void) = default;
+    ~I_RO_Texture(void) = default;
+    
+    virtual std::shared_ptr<CTextureHeader> Get_Header(void) const = 0;
+    virtual ui32 Get_Handle(void) const = 0;
+    virtual ui32 Get_Width(void) const = 0;
+    virtual ui32 Get_Height(void) const = 0;
+    virtual ui32 Get_WrapMode(void) const = 0;
+};
+
+class I_WO_Texture
+{
+private:
+    
+protected:
+    
+public:
+    
+    I_WO_Texture(void) = default;
+    ~I_WO_Texture(void) = default;
+    
+    virtual void Set_Header(const std::shared_ptr<CTextureHeader>& _header) = 0;
+    virtual void Set_Handle(ui32 _handle) = 0;
+    virtual void Set_WrapMode(ui32 _wrapMode) = 0;
+};
+
+class CTexture final :
+public IResource,
+public I_RO_Texture,
+public I_WO_Texture
+{
+private:
+    
+protected:
     
     std::shared_ptr<CTextureHeader> m_header;
     ui32 m_handle;
     
-    mutable ui32 m_settedWrap;
-    ui32 m_presettedWrap;
+    mutable ui32 m_settedWrapMode;
+    ui32 m_presettedWrapMode;
     
-    inline void _Set_Header(const std::shared_ptr<CTextureHeader>& _header)
-    {
-        m_header = _header;
-        m_status |= E_RESOURCE_STATUS_LOADED;
-    };
-
-#ifdef TESTING
-public:
-#endif
-    
-    inline std::shared_ptr<CTextureHeader> _Get_Header(void)
-    {
-        return m_header;
-    };
-    
-#ifdef TESTING
-protected:
-#endif
-        
-    inline void _Set_Handle(ui32 _handle)
-    {
-        m_handle = _handle;
-        m_status |= E_RESOURCE_STATUS_COMMITED;
-    };
- 
 public:
     
     CTexture(const std::string& _guid);
     ~CTexture(void);
     
-    inline ui32 Get_Handle(void) const
-    {
-        return m_handle;
-    };
+    std::shared_ptr<CTextureHeader> Get_Header(void) const;
+    ui32 Get_Handle(void) const;
+    ui32 Get_Width(void) const;
+    ui32 Get_Height(void) const;
+    ui32 Get_WrapMode(void) const;
     
-    inline ui32 Get_Width(void) const
-    {
-        assert(m_header != nullptr);
-        return m_header->Get_Width();
-    };
-    
-    inline ui32 Get_Height(void) const
-    {
-        assert(m_header != nullptr);
-        return m_header->Get_Height();
-    };
-    
-    inline void Set_Wrap(ui32 _wrap)
-    {
-        m_presettedWrap = _wrap;
-    };
+    void Set_Header(const std::shared_ptr<CTextureHeader>& _header);
+    void Set_Handle(ui32 _handle);
+    void Set_WrapMode(ui32 _wrapMode);
     
     void Bind(void) const;
     void Unbind(void) const;

@@ -39,7 +39,7 @@ void CTextureLoadingOperation::Commit(void)
     assert(m_resource->IsLoaded() == true);
     std::shared_ptr<CTexture> texture = std::static_pointer_cast<CTexture >(m_resource);
     m_commiter = std::make_shared<CTextureCommiter_PVR>(m_serializer->Get_Guid(),
-                                                        texture->_Get_Header(),
+                                                        texture->Get_Header(),
                                                         m_resource);
     m_commiter->Commit();
     m_status = m_commiter->Get_Status() == E_COMMITER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;

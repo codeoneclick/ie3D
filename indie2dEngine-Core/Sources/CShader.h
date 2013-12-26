@@ -140,62 +140,80 @@ public:
     };
 };
 
-class CShader : public IResource
+class I_RO_Shader
+{
+private:
+    
+protected:
+    
+public:
+    
+    I_RO_Shader(void) = default;
+    ~I_RO_Shader(void) = default;
+    
+    virtual std::string Get_VertexShaderFilename(void) const = 0;
+    virtual std::string Get_FragmentShaderFilename(void) const = 0;
+    virtual std::string Get_VertexShaderSourceCode(void) const = 0;
+    virtual std::string Get_FragmentShaderSourceCode(void) const = 0;
+};
+
+class I_WO_Shader
+{
+private:
+    
+protected:
+    
+public:
+    
+    I_WO_Shader(void) = default;
+    ~I_WO_Shader(void) = default;
+    
+    virtual void Set_SourceCode(const std::string& _vsFilename,
+                                const std::string& _vsSourceCode,
+                                const std::string& _fsFilename,
+                                const std::string& _fsSourceCode) = 0;
+    virtual void Set_Handle(ui32 _handle) = 0;
+    
+};
+
+class CShader :
+public IResource,
+I_RO_Shader,
+I_WO_Shader
 {
 private:
 
 protected:
-    
-    friend class CShaderSerializer_GLSL;
-    friend class CShaderCommiter_GLSL;
-    friend class CShaderLoadingOperation;
-    friend class CShaderExtension;
     
     i32 m_uniforms[E_SHADER_UNIFORM_MAX];
     i32 m_samplers[E_SHADER_SAMPLER_MAX];
     i32 m_attributes[E_SHADER_ATTRIBUTE_MAX];
     std::array<std::shared_ptr<CShaderUniform>, E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX> m_values;
     
+    std::string m_vsFilename;
+    std::string m_fsFilename;
     std::string m_vsSourceCode;
     std::string m_fsSourceCode;
     ui32 m_handle;
-    
-    inline void _Set_SourceCode(const std::string& _vsSourceCode, const std::string& _fsSourceCode)
-    {
-        m_vsSourceCode = _vsSourceCode;
-        m_fsSourceCode = _fsSourceCode;
-        m_status |= E_RESOURCE_STATUS_LOADED;
-    };
-
-#ifdef TESTING
-public:
-#endif
-    
-    inline std::string _Get_VertexShaderSourceCode(void)
-    {
-        return m_vsSourceCode;
-    };
-    
-    inline std::string _Get_FragmentShaderSourceCode(void)
-    {
-        return m_fsSourceCode;
-    };
-    
-#ifdef TESTING
-protected:
-#endif
-    
-    void _Set_Handle(ui32 _handle);
     
 public:
     
     CShader(const std::string& _guid);
     ~CShader(void);
     
-    inline const i32* Get_Attributes(void)
-    {
-        return m_attributes;
-    };
+    std::string Get_VertexShaderFilename(void) const;
+    std::string Get_FragmentShaderFilename(void) const;
+    std::string Get_VertexShaderSourceCode(void) const;
+    std::string Get_FragmentShaderSourceCode(void) const;
+    
+
+    void Set_SourceCode(const std::string& _vsFilename,
+                        const std::string& _vsSourceCode,
+                        const std::string& _fsFilename,
+                        const std::string& _fsSourceCode);
+    void Set_Handle(ui32 _handle);
+    
+    const i32* Get_Attributes(void) const;
     
     void Set_Matrix3x3(const glm::mat3x3& _matrix, E_SHADER_UNIFORM _uniform);
     void Set_Matrix3x3Custom(const glm::mat3x3& _matrix, const std::string& _uniform);

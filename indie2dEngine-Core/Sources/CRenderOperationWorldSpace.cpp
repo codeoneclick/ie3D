@@ -55,9 +55,9 @@ m_numTriangles(0)
     std::string m_operatingColorTextureGuid = m_mode;
     m_operatingColorTextureGuid.append("color");
     m_operatingColorTexture = std::make_shared<CTexture>(m_operatingColorTextureGuid);
-    m_operatingColorTexture->_Set_Header(m_operatingColorTextureHeader);
-    m_operatingColorTexture->_Set_Handle(textureColorHandle);
-    m_operatingColorTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
+    m_operatingColorTexture->Set_Header(m_operatingColorTextureHeader);
+    m_operatingColorTexture->Set_Handle(textureColorHandle);
+    m_operatingColorTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
     
     std::shared_ptr<CTextureHeader> m_operatingDepthTextureHeader = std::make_shared<CTextureHeader>();
     m_operatingDepthTextureHeader->_Set_Width(m_frameWidth);
@@ -66,9 +66,9 @@ m_numTriangles(0)
     std::string m_operatingDepthTextureGuid = m_mode;
     m_operatingDepthTextureGuid.append("depth");
     m_operatingDepthTexture = std::make_shared<CTexture>(m_operatingDepthTextureGuid);
-    m_operatingDepthTexture->_Set_Header(m_operatingDepthTextureHeader);
-    m_operatingDepthTexture->_Set_Handle(textureDepthHandle);
-    m_operatingDepthTexture->Set_Wrap(GL_CLAMP_TO_EDGE);
+    m_operatingDepthTexture->Set_Header(m_operatingDepthTextureHeader);
+    m_operatingDepthTexture->Set_Handle(textureDepthHandle);
+    m_operatingDepthTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
 }
 
 CRenderOperationWorldSpace::~CRenderOperationWorldSpace(void)

@@ -25,8 +25,8 @@ CTexture::CTexture(const std::string& _guid) :
 IResource(E_RESOURCE_CLASS_TEXTURE, _guid),
 m_handle(0),
 m_header(nullptr),
-m_presettedWrap(GL_REPEAT),
-m_settedWrap(0)
+m_presettedWrapMode(GL_REPEAT),
+m_settedWrapMode(0)
 {
     
 }
@@ -36,16 +36,62 @@ CTexture::~CTexture(void)
     glDeleteTextures(1, &m_handle);
 }
 
-void CTexture::Bind(void) const 
+std::shared_ptr<CTextureHeader> CTexture::Get_Header(void) const
+{
+    assert(m_header != nullptr);
+    return m_header;
+}
+
+ui32 CTexture::Get_Handle(void) const
+{
+    return m_handle;
+}
+
+ui32 CTexture::Get_Width(void) const
+{
+    assert(m_header != nullptr);
+    return m_header->Get_Width();
+}
+
+ui32 CTexture::Get_Height(void) const
+{
+    assert(m_header != nullptr);
+    return m_header->Get_Height();
+}
+
+ui32 CTexture::Get_WrapMode(void) const
+{
+    return m_settedWrapMode;
+}
+
+void CTexture::Set_Header(const std::shared_ptr<CTextureHeader>& _header)
+{
+    assert(_header != nullptr);
+    m_header = _header;
+    m_status |= E_RESOURCE_STATUS_LOADED;
+}
+
+void CTexture::Set_Handle(ui32 _handle)
+{
+    m_handle = _handle;
+    m_status |= E_RESOURCE_STATUS_COMMITED;
+}
+
+void CTexture::Set_WrapMode(ui32 _wrapMode)
+{
+    m_presettedWrapMode = _wrapMode;
+}
+
+void CTexture::Bind(void) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
         glBindTexture(GL_TEXTURE_2D, m_handle);
-        if(m_settedWrap == 0 || m_presettedWrap != m_settedWrap)
+        if(m_settedWrapMode == 0 || m_presettedWrapMode != m_settedWrapMode)
         {
-            m_settedWrap = m_presettedWrap;
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_settedWrap);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_settedWrap);
+            m_settedWrapMode = m_presettedWrapMode;
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_settedWrapMode);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_settedWrapMode);
         }
     }
 }

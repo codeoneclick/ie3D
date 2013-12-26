@@ -41,7 +41,10 @@ void CShaderSerializer_GLSL::Serialize(void)
     
     assert(m_resource != nullptr);
     std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
-    shader->_Set_SourceCode(vsSourceCode, fsSourceCode);
+    shader->Set_SourceCode(m_vsFilename,
+                           vsSourceCode,
+                           m_fsFilename,
+                           fsSourceCode);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
 }
 

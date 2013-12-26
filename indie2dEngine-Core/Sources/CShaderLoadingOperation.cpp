@@ -41,8 +41,8 @@ void CShaderLoadingOperation::Commit(void)
     assert(m_resource->IsLoaded() == true);
     std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
     m_commiter = std::make_shared<CShaderCommiter_GLSL>(m_serializer->Get_Guid(),
-                                                        shader->_Get_VertexShaderSourceCode(),
-                                                        shader->_Get_FragmentShaderSourceCode(),
+                                                        shader->Get_VertexShaderSourceCode(),
+                                                        shader->Get_FragmentShaderSourceCode(),
                                                         m_resource);
     m_commiter->Commit();
     m_status = m_commiter->Get_Status() == E_COMMITER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;

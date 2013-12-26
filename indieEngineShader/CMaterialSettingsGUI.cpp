@@ -8,6 +8,8 @@
 #include "CTemplateGameObjects.h"
 #include "CShaderExtension.h"
 #include "CMaterialExtension.h"
+#include "CShader.h"
+#include "CTexture.h"
 #include "CUICommon.h"
 
 #endif
@@ -88,7 +90,7 @@ void CMaterialSettingsGUI::Set_Transition(const std::shared_ptr<CIESAMainTransit
         
         if(material->Get_Texture(E_SHADER_SAMPLER_01) != nullptr)
         {
-            //ui->eb_texture_slot_1->setText(material->Get_Texture(E_SHADER_SAMPLER_01)->Get_Guid().c_str());
+            ui->eb_texture_slot_1->setText(material->Get_Texture(E_SHADER_SAMPLER_01)->Get_Guid().c_str());
             //ui->cb_texture_slot1_wrap->setCurrentText(g_glenumToString[material->Get_Texture(E_SHADER_SAMPLER_01)->Get_Wrap()].c_str());
             ui->cb_texture_slot1_wrap->setDisabled(false);
             ui->cb_texture_slot1_wrap->setStyleSheet(kBtnEnableStyleSheet);
