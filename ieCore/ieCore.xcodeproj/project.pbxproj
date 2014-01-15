@@ -2317,7 +2317,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries\"",
 					"\"$(SRCROOT)/Libraries/curl/include\"",
+					"\"$(SRCROOT)/Libraries/gcdpp/include\"",
 					"\"$(SRCROOT)/Libraries/jsoncpp/include\"",
+					"\"$(SRCROOT)/Libraries/ogles2/include\"",
+					"\"$(SRCROOT)/Libraries/pvrtextool/include\"",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -2358,7 +2361,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries\"",
 					"\"$(SRCROOT)/Libraries/curl/include\"",
+					"\"$(SRCROOT)/Libraries/gcdpp/include\"",
 					"\"$(SRCROOT)/Libraries/jsoncpp/include\"",
+					"\"$(SRCROOT)/Libraries/ogles2/include\"",
+					"\"$(SRCROOT)/Libraries/pvrtextool/include\"",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -2367,7 +2373,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)_d";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SYMROOT = "$(BUILD_DIR)";
 				VALID_ARCHS = "armv7 armv7s";

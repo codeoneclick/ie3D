@@ -41,3 +41,5 @@
 # Directories
 Debug/
 Release/
+bin/
+intermediates/
