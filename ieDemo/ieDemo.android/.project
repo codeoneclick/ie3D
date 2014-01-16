@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>IndieEngine-Demo</name>
+	<name>ieDemo</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -50,12 +50,7 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<location>/Users/sergey.sergeev/Documents/Hobby/indieEngine/indieEngine.win32.Resources</location>
-		</link>
-		<link>
-			<name>libs/IndieEngineCore</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
+			<location>/Users/codeoneclick/Documents/Hobby/indieEngine/ieBundle</location>
 		</link>
 	</linkedResources>
 </projectDescription>
