@@ -1,0 +1,11 @@
+<model filename="cube.MDL_mesh" is_batching="1">
+    <skeleton filename="cube.MDL_sk"/>
+    <sequences>
+        <sequence animation_name="cube.MDL_anim" filename="cube.MDL_anim"/>
+    </sequences>
+	<materials>
+		<material filename="material.model.cube.common.xml"/>
+        <material filename="material.model.cube.reflection.xml"/>
+        <material filename="material.model.cube.refraction.xml"/>
+	</materials>
+</model>
