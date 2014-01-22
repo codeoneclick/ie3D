@@ -114,7 +114,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		21D070C1181D9D460019D264 /* ieDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ieDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		21D070C1181D9D460019D264 /* ieDemo_d.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ieDemo_d.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		21D070C8181D9D460019D264 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -243,7 +243,7 @@
 		21D070C2181D9D460019D264 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21D070C1181D9D460019D264 /* ieDemo.app */,
+				21D070C1181D9D460019D264 /* ieDemo_d.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 			);
 			name = ieDemo;
 			productName = ieDemo;
-			productReference = 21D070C1181D9D460019D264 /* ieDemo.app */;
+			productReference = 21D070C1181D9D460019D264 /* ieDemo_d.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
