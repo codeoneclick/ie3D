@@ -1198,11 +1198,11 @@
 			children = (
 				2159B9A4188742E100BA098A /* libEGL.dylib */,
 				2159B9A5188742E100BA098A /* libGLESv2.dylib */,
+				A45588F41757602600802609 /* libz.dylib */,
 				217317491821AE6700FF3D1E /* OpenGL.framework */,
 				2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */,
 				A4C7034818030DCF00B3DEEC /* CoreAudio.framework */,
 				A4C7034618030DC800B3DEEC /* AudioToolbox.framework */,
-				A45588F41757602600802609 /* libz.dylib */,
 				A45588F21757600200802609 /* Security.framework */,
 				A45588F017575FF900802609 /* CFNetwork.framework */,
 				A4F204B417423E540063AB07 /* QuartzCore.framework */,
