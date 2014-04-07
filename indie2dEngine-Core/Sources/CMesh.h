@@ -10,77 +10,113 @@
 #define CMesh_h
 
 #include "IResource.h"
+#include "HDeclaration.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
-class CMeshHeader final
+class CMeshData final
 {
 private:
     
 protected:
     
-    friend class CMesh;
-    friend class CMeshSerializer_MDL;
-    friend class CMeshCommiter_MDL;
-    
-    SVertex* m_vertexData;
-    ui16* m_indexData;
-    
-    ui32 m_numIndices;
-    ui32 m_numVerticies;
+    std::vector<SVertex> m_vertexData;
+    std::vector<ui16> m_indexData;
     
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
     
-    inline void _Set_VertexData(SVertex* _vertexData, ui32 _numVerticies)
-    {
-        m_vertexData = _vertexData;
-        m_numVerticies = _numVerticies;
-    };
+public:
     
-    inline void _Set_IndexData(ui16* _indexData, ui32 _numIndices)
-    {
-        m_indexData = _indexData;
-        m_numIndices = _numIndices;
-    };
+    CMeshData(const std::vector<SVertex>& vertexData,
+              const std::vector<ui16>& indexData,
+              const glm::vec3& maxBound,
+              const glm::vec3& minBound);
     
-    inline void _Set_MaxBound(const glm::vec3& _maxBound)
-    {
-        m_maxBound = _maxBound;
-    };
+    ~CMeshData(void);
     
-    inline void _Set_MinBound(const glm::vec3& _minBound)
-    {
-        m_minBound = _minBound;
-    };
+    const std::vector<SVertex>& getVertexData(void) const;
+    const std::vector<ui16>& getIndexData(void) const;
     
-    inline ui32 _Get_NumVerticies(void) const
-    {
-        return m_numVerticies;
-    };
+    const ui32 getNumVertices(void) const;
+    const ui32 getNumIndices(void) const;
     
-    inline ui32 _Get_NumIndices(void) const
-    {
-        return m_numIndices;
-    };
+    const glm::vec3& getMaxBound(void) const;
+    const glm::vec3& getMinBound(void) const;
+};
+
+class CFrameData final
+{
+private:
     
-    inline SVertex* _Get_VertexData(void) const
-    {
-        return m_vertexData;
-    };
+protected:
     
-    inline ui16* _Get_IndexData(void) const
-    {
-        return m_indexData;
-    };
+    std::vector<glm::quat> m_rotations;
+	std::vector<glm::vec3> m_positions;
+    std::vector<glm::vec3> m_scales;
     
 public:
     
-    CMeshHeader(void);
-    ~CMeshHeader(void);
+    CFrameData(const std::vector<glm::quat>& rotations,
+               const std::vector<glm::vec3>& positions,
+               const std::vector<glm::vec3>& scales);
+    
+    ~CFrameData(void);
+    
+    const glm::quat& getRotation(ui32 index) const;
+    const glm::vec3& getPosition(ui32 index) const;
+    const glm::vec3& getScale(ui32 index) const;
 };
 
-class CAABoundBox;
+class CSequenceData final
+{
+private:
+    
+protected:
+    
+    std::vector<CSharedFrameData> m_frames;
+    ui32 m_fps;
+    std::string m_name;
+    
+public:
+    
+    CSequenceData(const std::string& name,
+                  ui32 fps,
+                  const std::vector<CSharedFrameData>& frames);
+    
+    ~CSequenceData(void);
+    
+    const ui32 getNumFrames(void) const;
+    
+    const ui32 getFPS(void) const;
+    
+    const std::string getName(void) const;
+    
+    CSharedFrameData getFrame(ui32 index) const;
+};
+
+class CSkeletonData final
+{
+private:
+    
+protected:
+    
+    ui32 m_numBones;
+    
+    std::set<CSharedBone> m_roots;
+    std::unordered_map<std::string, glm::mat4> m_transformations;
+    
+public:
+    
+    CSkeletonData(ui32 numBones);
+    ~CSkeletonData(void);
+    
+    void addBone(CSharedBoneRef bone);
+    CSharedBone getBone(ui32 index) const;
+    
+    ui32 getNumBones(void) const;
+};
+
 
 class CMesh : public IResource
 {
@@ -88,48 +124,21 @@ private:
     
 protected:
     
-    friend class CMeshSerializer_MDL;
-    friend class CMeshCommiter_MDL;
-    friend class CMeshLoadingOperation;
+    CSharedMeshData m_meshData;
+    CSharedSkeletonData m_skeletonData;
+    CSharedSequenceData m_sequenceData;
     
-    std::shared_ptr<CMeshHeader> m_header;
-    
-    std::shared_ptr<CVertexBuffer> m_vertexBuffer;
-    std::shared_ptr<CIndexBuffer> m_indexBuffer;
-    
-    std::vector<std::shared_ptr<CAABoundBox> > m_bounds;
-    
-    void _Set_Header(std::shared_ptr<CMeshHeader> _header);
-    
-#ifdef TESTING
-public:
-#endif
-    
-    inline std::shared_ptr<CMeshHeader> _Get_Header(void)
-    {
-        return m_header;
-    };
-        
-#ifdef TESTING
-protected:
-#endif
-    
-    inline void _Set_Handlers(std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer)
-    {
-        assert(_vertexBuffer != nullptr);
-        assert(_indexBuffer != nullptr);
-        m_vertexBuffer = _vertexBuffer;
-        m_indexBuffer = _indexBuffer;
-        m_status |= E_RESOURCE_STATUS_COMMITED;
-    };
+    CSharedVertexBuffer m_vertexBuffer;
+    CSharedIndexBuffer m_indexBuffer;
     
 public:
     
-    CMesh(const std::string& _guid);
-    CMesh(const std::string& _guid, std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer);
+    CMesh(const std::string& guid);
+    CMesh(const std::string& guid,
+          CSharedVertexBufferRef vertexBuffer,
+          CSharedIndexBufferRef indexBuffer);
+    
     ~CMesh(void);
-    
-    std::shared_ptr<CAABoundBox> CreateBoundBox(void);
     
     inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)
     {
