@@ -9,25 +9,8 @@
 #ifndef CResourceAccessor_h
 #define CResourceAccessor_h
 
-#include "HCommon.h"
-
-class CTexture;
-class CShader;
-class CMesh;
-class CSkeleton;
-class CSequence;
-class CTextureLoader;
-class CShaderLoader;
-class CMeshLoader;
-class CSkeletonLoader;
-class CSequenceLoader;
-class IResourceLoadingHandler;
-
-#if defined(__NDK__)
-
-struct AAssetManager;
-
-#endif
+#include "HDeclaration.h"
+#include "HEnums.h"
 
 class CResourceAccessor
 {
@@ -35,45 +18,28 @@ private:
     
 protected:
     
-    std::shared_ptr<CTextureLoader> m_textureLoader;
-    std::shared_ptr<CShaderLoader> m_shaderLoader;
-    std::shared_ptr<CMeshLoader> m_meshLoader;
-    std::shared_ptr<CSkeletonLoader> m_skeletonLoader;
-    std::shared_ptr<CSequenceLoader> m_sequenceLoader;
+    std::array<ISharedResourceLoader, E_RESOURCE_LOADER_MAX> m_resourceLoaders;
     
 #if defined(__NDK__)
     
-    static AAssetManager* m_assetManager;
+    struct AAssetManager* m_assetManager;
 
 #endif
     
 public:
     
-    CResourceAccessor(void);
-    ~CResourceAccessor(void);
-    
 #if defined(__NDK__)
     
-    void static Set_AAssetManager(AAssetManager* _assetManager)
-    {
-        assert(_assetManager != nullptr);
-        m_assetManager = _assetManager;
-    };
-    
-    static AAssetManager* Get_AAssetManager(void)
-    {
-        assert(m_assetManager != nullptr);
-        return m_assetManager;
-    };
+    CResourceAccessor(const AAssetManager* assetManager);
     
 #endif
     
-    std::shared_ptr<CTexture> CreateTexture(const std::string& _filename);
-    std::shared_ptr<CShader> CreateShader(const std::string& _vsFilename, const std::string& _fsFilename);
-    std::shared_ptr<CMesh> CreateMesh(const std::string& _filename);
-    std::shared_ptr<CSkeleton> CreateSkeleton(const std::string& _filename);
-    std::shared_ptr<CSequence> CreateSequence(const std::string& _filename);
+    CResourceAccessor(void);
+    ~CResourceAccessor(void);
     
+    CSharedTexture getTexture(const std::string& filename);
+    CSharedShader getShader(const std::string& vsFilename, const std::string& fsFilename);
+    CSharedMesh getMesh(const std::string& filename);
 };
 
 #endif 

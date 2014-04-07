@@ -509,6 +509,7 @@
 		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
 		21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IScreenSpaceTextureAccessor.cpp; path = Sources/IScreenSpaceTextureAccessor.cpp; sourceTree = "<group>"; };
 		21457FEE181C4C060071839E /* IScreenSpaceTextureAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IScreenSpaceTextureAccessor.h; path = Sources/IScreenSpaceTextureAccessor.h; sourceTree = "<group>"; };
+		2172A02C18F337D300D4D317 /* HDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HDeclaration.h; path = Sources/HDeclaration.h; sourceTree = "<group>"; };
 		2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_osx.cpp; path = Sources/COGLWindow_osx.cpp; sourceTree = "<group>"; };
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
@@ -1451,6 +1452,7 @@
 				A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */,
 				A4AB15BC177C73D400FFC12E /* CTimer.h */,
 				A4AB15BB177C73D400FFC12E /* CTimer.cpp */,
+				2172A02C18F337D300D4D317 /* HDeclaration.h */,
 			);
 			name = Common;
 			sourceTree = "<group>";

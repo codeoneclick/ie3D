@@ -297,7 +297,7 @@ void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
         assert(textureTemplate != nullptr);
         
         std::shared_ptr<CTexture> texture = textureTemplate->Get_Filename().length() != 0 ?
-        _resourceAccessor->CreateTexture(textureTemplate->Get_Filename()) :
+        _resourceAccessor->getTexture(textureTemplate->Get_Filename()) :
         _screenSpaceTextureAccessor->Get_RenderOperationTexture(textureTemplate->Get_RenderOperationName());
         if(_handler != nullptr)
         {
@@ -311,7 +311,7 @@ void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
     
     std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
     assert(shaderTemplate != nullptr);
-    std::shared_ptr<CShader> shader = _resourceAccessor->CreateShader(shaderTemplate->Get_VSFilename(),
+    std::shared_ptr<CShader> shader = _resourceAccessor->getShader(shaderTemplate->Get_VSFilename(),
                                                                       shaderTemplate->Get_FSFilename());
     assert(shader != nullptr);
     CMaterial::Set_Shader(shader);

@@ -97,8 +97,8 @@ void CModel::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
     m_boundBox = m_mesh->CreateBoundBox();
     assert(m_boundBox != nullptr);
     
-    std::shared_ptr<CShader> shader = m_resourceAccessor->CreateShader(k_vsBoundBoxFilename,
-                                                                       k_fsBoundBoxFilename);
+    std::shared_ptr<CShader> shader = m_resourceAccessor->getShader(k_vsBoundBoxFilename,
+                                                                    k_fsBoundBoxFilename);
     assert(shader != nullptr);
     m_debugBoundBoxMaterial = std::make_shared<CMaterial>("bound.box", true);
     m_debugBoundBoxMaterial->Set_IsCulling(false);
