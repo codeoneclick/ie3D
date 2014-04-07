@@ -753,13 +753,14 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Support/ieDemo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OBJROOT = "$(SYMROOT)";
+				OBJROOT = "$(BUILD_DIR)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)_d";
-				PROVISIONING_PROFILE = "6B2C6C87-2FD9-40B8-ACC1-77C2071CAC0E";
+				PROVISIONING_PROFILE = "";
+
 				SYMROOT = "$(BUILD_DIR)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
@@ -795,13 +796,13 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Support/ieDemo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LLVM_VECTORIZE_LOOPS = YES;
-				OBJROOT = "$(SYMROOT)";
+				OBJROOT = "$(BUILD_DIR)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6B2C6C87-2FD9-40B8-ACC1-77C2071CAC0E";
+				PROVISIONING_PROFILE = "";
 				SYMROOT = "$(BUILD_DIR)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
