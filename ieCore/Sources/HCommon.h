@@ -26,6 +26,7 @@
 #include <iostream>
 #include <assert.h>
 #include <functional>
+#include <unordered_map>
 
 #if defined(__IOS__) || defined(__OSX__)
 

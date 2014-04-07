@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		2111AA30181EFEB0007FE7A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */; };
 		2111AAB8181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */; };
+		213421CC18F2A55A0022C08E /* ieDisplayObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213421CA18F2A55A0022C08E /* ieDisplayObject.cpp */; };
+		213421D018F2C7B60022C08E /* ieInteractiveObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213421CE18F2C7B60022C08E /* ieInteractiveObject.cpp */; };
+		213421D318F2C7D70022C08E /* ieDisplayObjectContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213421D118F2C7D70022C08E /* ieDisplayObjectContainer.cpp */; };
+		213421D418F2CC9E0022C08E /* ieDisplayObjectContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213421D118F2C7D70022C08E /* ieDisplayObjectContainer.cpp */; };
+		213421D718F2D9820022C08E /* ieResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213421D518F2D9820022C08E /* ieResource.cpp */; };
 		2159B9A6188742E100BA098A /* libEGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2159B9A4188742E100BA098A /* libEGL.dylib */; };
 		2159B9A7188742E100BA098A /* libGLESv2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2159B9A5188742E100BA098A /* libGLESv2.dylib */; };
 		2159B9A81887444200BA098A /* gcdppImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4DD180DCB10001C72D4 /* gcdppImpl.cpp */; };
@@ -291,6 +296,14 @@
 		21D0723A181DA6F10019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A420815E1733A9370004729E /* UIKit.framework */; };
 		21E4D58B18658466006F84D6 /* CTemplateCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E4D58818658466006F84D6 /* CTemplateCommon.cpp */; };
 		21E4D59D1865944D006F84D6 /* CTemplateGameObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E4D59A1865944D006F84D6 /* CTemplateGameObjects.cpp */; };
+		21F8015418F29001006FCA3C /* ieObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8015218F29001006FCA3C /* ieObject.cpp */; };
+		21F8015518F29001006FCA3C /* ieObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8015218F29001006FCA3C /* ieObject.cpp */; };
+		21F8015818F29066006FCA3C /* ieValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8015618F29066006FCA3C /* ieValue.cpp */; };
+		21F8015918F29066006FCA3C /* ieValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8015618F29066006FCA3C /* ieValue.cpp */; };
+		21F8016618F2987C006FCA3C /* ieEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8016418F2987C006FCA3C /* ieEventDispatcher.cpp */; };
+		21F8016718F2987C006FCA3C /* ieEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8016418F2987C006FCA3C /* ieEventDispatcher.cpp */; };
+		21F8016A18F298A6006FCA3C /* ieEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8016818F298A6006FCA3C /* ieEvent.cpp */; };
+		21F8016B18F298A6006FCA3C /* ieEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8016818F298A6006FCA3C /* ieEvent.cpp */; };
 		A46B1C88183E426B00A3EF49 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
 		A46B1C8B183E533A00A3EF49 /* CLandscapeChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */; };
 		A46B1C93183E69F700A3EF49 /* CHeightmapProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C8E183E610900A3EF49 /* CHeightmapProcessor.cpp */; };
@@ -352,6 +365,14 @@
 		2111AAC5181FF826007FE7A8 /* CGraphicsContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_osx.cpp; path = Sources/CGraphicsContext_osx.cpp; sourceTree = "<group>"; };
 		211D30E117C2A61A0038B703 /* IResourceLoadingHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceLoadingHandler.cpp; path = Sources/IResourceLoadingHandler.cpp; sourceTree = "<group>"; };
 		211D30E217C2A61C0038B703 /* IResourceLoadingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceLoadingHandler.h; path = Sources/IResourceLoadingHandler.h; sourceTree = "<group>"; };
+		213421CA18F2A55A0022C08E /* ieDisplayObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieDisplayObject.cpp; path = Sources/ieDisplayObject.cpp; sourceTree = "<group>"; };
+		213421CB18F2A55A0022C08E /* ieDisplayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieDisplayObject.h; path = Sources/ieDisplayObject.h; sourceTree = "<group>"; };
+		213421CE18F2C7B60022C08E /* ieInteractiveObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieInteractiveObject.cpp; path = Sources/ieInteractiveObject.cpp; sourceTree = "<group>"; };
+		213421CF18F2C7B60022C08E /* ieInteractiveObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieInteractiveObject.h; path = Sources/ieInteractiveObject.h; sourceTree = "<group>"; };
+		213421D118F2C7D70022C08E /* ieDisplayObjectContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieDisplayObjectContainer.cpp; path = Sources/ieDisplayObjectContainer.cpp; sourceTree = "<group>"; };
+		213421D218F2C7D70022C08E /* ieDisplayObjectContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieDisplayObjectContainer.h; path = Sources/ieDisplayObjectContainer.h; sourceTree = "<group>"; };
+		213421D518F2D9820022C08E /* ieResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieResource.cpp; path = Sources/ieResource.cpp; sourceTree = "<group>"; };
+		213421D618F2D9820022C08E /* ieResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieResource.h; path = Sources/ieResource.h; sourceTree = "<group>"; };
 		21457FE1181C4BCC0071839E /* CGUIFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIFabricator.cpp; path = Sources/CGUIFabricator.cpp; sourceTree = "<group>"; };
 		21457FE2181C4BCC0071839E /* CGUIFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIFabricator.h; path = Sources/CGUIFabricator.h; sourceTree = "<group>"; };
 		21457FE3181C4BCC0071839E /* CGUIGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIGraph.cpp; path = Sources/CGUIGraph.cpp; sourceTree = "<group>"; };
@@ -405,6 +426,15 @@
 		21E4D58918658466006F84D6 /* CTemplateCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTemplateCommon.h; path = Sources/CTemplateCommon.h; sourceTree = "<group>"; };
 		21E4D59A1865944D006F84D6 /* CTemplateGameObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTemplateGameObjects.cpp; path = Sources/CTemplateGameObjects.cpp; sourceTree = "<group>"; };
 		21E4D59B1865944D006F84D6 /* CTemplateGameObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTemplateGameObjects.h; path = Sources/CTemplateGameObjects.h; sourceTree = "<group>"; };
+		21F8015218F29001006FCA3C /* ieObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieObject.cpp; path = Sources/ieObject.cpp; sourceTree = "<group>"; };
+		21F8015318F29001006FCA3C /* ieObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieObject.h; path = Sources/ieObject.h; sourceTree = "<group>"; };
+		21F8015618F29066006FCA3C /* ieValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieValue.cpp; path = Sources/ieValue.cpp; sourceTree = "<group>"; };
+		21F8015718F29066006FCA3C /* ieValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieValue.h; path = Sources/ieValue.h; sourceTree = "<group>"; };
+		21F8015B18F29103006FCA3C /* ieDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieDeclaration.h; path = Sources/ieDeclaration.h; sourceTree = "<group>"; };
+		21F8016418F2987C006FCA3C /* ieEventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieEventDispatcher.cpp; path = Sources/ieEventDispatcher.cpp; sourceTree = "<group>"; };
+		21F8016518F2987C006FCA3C /* ieEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieEventDispatcher.h; path = Sources/ieEventDispatcher.h; sourceTree = "<group>"; };
+		21F8016818F298A6006FCA3C /* ieEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieEvent.cpp; path = Sources/ieEvent.cpp; sourceTree = "<group>"; };
+		21F8016918F298A6006FCA3C /* ieEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieEvent.h; path = Sources/ieEvent.h; sourceTree = "<group>"; };
 		A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelTemplateSerializer.cpp; path = Sources/CModelTemplateSerializer.cpp; sourceTree = "<group>"; };
 		A40138C31754EF060056461B /* CModelTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModelTemplateSerializer.h; path = Sources/CModelTemplateSerializer.h; sourceTree = "<group>"; };
 		A40138C51754EF280056461B /* CParticleEmitterTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitterTemplateSerializer.cpp; path = Sources/CParticleEmitterTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -1243,6 +1273,21 @@
 				A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */,
 				A4AB15BC177C73D400FFC12E /* CTimer.h */,
 				A4AB15BB177C73D400FFC12E /* CTimer.cpp */,
+				21F8015B18F29103006FCA3C /* ieDeclaration.h */,
+				21F8015718F29066006FCA3C /* ieValue.h */,
+				21F8015618F29066006FCA3C /* ieValue.cpp */,
+				21F8015318F29001006FCA3C /* ieObject.h */,
+				21F8015218F29001006FCA3C /* ieObject.cpp */,
+				21F8016918F298A6006FCA3C /* ieEvent.h */,
+				21F8016818F298A6006FCA3C /* ieEvent.cpp */,
+				21F8016518F2987C006FCA3C /* ieEventDispatcher.h */,
+				21F8016418F2987C006FCA3C /* ieEventDispatcher.cpp */,
+				213421D218F2C7D70022C08E /* ieDisplayObjectContainer.h */,
+				213421D118F2C7D70022C08E /* ieDisplayObjectContainer.cpp */,
+				213421CB18F2A55A0022C08E /* ieDisplayObject.h */,
+				213421CA18F2A55A0022C08E /* ieDisplayObject.cpp */,
+				213421CF18F2C7B60022C08E /* ieInteractiveObject.h */,
+				213421CE18F2C7B60022C08E /* ieInteractiveObject.cpp */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1502,6 +1547,8 @@
 				A42FF51C17A15C4700C0B419 /* CSequence.cpp */,
 				A46A3182174640BD0044643E /* CMaterial.h */,
 				A46A3181174640BC0044643E /* CMaterial.cpp */,
+				213421D618F2D9820022C08E /* ieResource.h */,
+				213421D518F2D9820022C08E /* ieResource.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1933,12 +1980,14 @@
 				2159B9D61887444200BA098A /* CGameLoopExecutor_osx.cpp in Sources */,
 				2159B9D71887444200BA098A /* CGameLoopExecutor_ndk.cpp in Sources */,
 				2159B9D81887444200BA098A /* CGameLoopExecutor.cpp in Sources */,
+				21F8016718F2987C006FCA3C /* ieEventDispatcher.cpp in Sources */,
 				2159B9D91887444200BA098A /* IGameLoopHandler.cpp in Sources */,
 				2159B9DA1887444200BA098A /* IGameWorkflow.cpp in Sources */,
 				2159B9DB1887444200BA098A /* IGameObject.cpp in Sources */,
 				2159B9DC1887444200BA098A /* CSprite.cpp in Sources */,
 				2159B9DD1887444200BA098A /* CBillboard.cpp in Sources */,
 				2159B9DE1887444200BA098A /* CParticleEmitter.cpp in Sources */,
+				21F8015918F29066006FCA3C /* ieValue.cpp in Sources */,
 				2159B9DF1887444200BA098A /* CModel.cpp in Sources */,
 				2159B9E01887444200BA098A /* COcean.cpp in Sources */,
 				2159B9E11887444200BA098A /* CLandscape.cpp in Sources */,
@@ -1963,6 +2012,7 @@
 				2159B9F41887444200BA098A /* CModelTemplateLoader.cpp in Sources */,
 				2159B9F51887444200BA098A /* COceanTemplateLoader.cpp in Sources */,
 				2159B9F61887444200BA098A /* CLandscapeTemplateLoader.cpp in Sources */,
+				21F8016B18F298A6006FCA3C /* ieEvent.cpp in Sources */,
 				2159B9F71887444200BA098A /* CParticleEmitterTemplateLoader.cpp in Sources */,
 				2159B9F81887444200BA098A /* CGameTransitionTemplateLoader.cpp in Sources */,
 				2159B9F91887444200BA098A /* ITemplateLoadingOperation.cpp in Sources */,
@@ -1982,6 +2032,7 @@
 				2159BA071887444200BA098A /* CModelTemplateSerializer.cpp in Sources */,
 				2159BA081887444200BA098A /* COceanTemplateSerializer.cpp in Sources */,
 				2159BA091887444200BA098A /* CLandscapeTemplateSerializer.cpp in Sources */,
+				21F8015518F29001006FCA3C /* ieObject.cpp in Sources */,
 				2159BA0A1887444200BA098A /* CParticleEmitterTemplateSerializer.cpp in Sources */,
 				2159BA0B1887444200BA098A /* CWorldSpaceRenderOperationTemplateSerializer.cpp in Sources */,
 				2159BA0C1887444200BA098A /* CScreenSpaceRenderOperationTemplateSerializer.cpp in Sources */,
@@ -2003,6 +2054,7 @@
 				2159BA1C1887444200BA098A /* CAABoundBox.cpp in Sources */,
 				2159BA1D1887444200BA098A /* CBone.cpp in Sources */,
 				2159BA1E1887444200BA098A /* CSkeleton.cpp in Sources */,
+				213421D418F2CC9E0022C08E /* ieDisplayObjectContainer.cpp in Sources */,
 				2159BA1F1887444200BA098A /* CSequence.cpp in Sources */,
 				2159BA201887444200BA098A /* CMaterial.cpp in Sources */,
 				2159BA211887444200BA098A /* IResourceCommiter.cpp in Sources */,
@@ -2072,6 +2124,7 @@
 				21D071D3181DA6C20019D264 /* CGraphicsContext_ios.cpp in Sources */,
 				21D071D4181DA6C20019D264 /* CGraphicsContext_win32.cpp in Sources */,
 				21D071D5181DA6C20019D264 /* COGLWindow_ios.cpp in Sources */,
+				21F8015418F29001006FCA3C /* ieObject.cpp in Sources */,
 				21D071D6181DA6C20019D264 /* COGLWindow_win32.cpp in Sources */,
 				21D071D7181DA6C20019D264 /* CRenderMgr.cpp in Sources */,
 				21D071D8181DA6C20019D264 /* IRenderHandler.cpp in Sources */,
@@ -2080,6 +2133,7 @@
 				21D071DB181DA6C20019D264 /* CBatch.cpp in Sources */,
 				21D071DC181DA6C20019D264 /* IScreenSpaceTextureAccessor.cpp in Sources */,
 				21D071DD181DA6C20019D264 /* IGameTransition.cpp in Sources */,
+				213421CC18F2A55A0022C08E /* ieDisplayObject.cpp in Sources */,
 				21D071DE181DA6C20019D264 /* CGameLoopExecutor_ios.cpp in Sources */,
 				21D071DF181DA6C20019D264 /* CGameLoopExecutor_win32.cpp in Sources */,
 				21D071E0181DA6C20019D264 /* CGameLoopExecutor.cpp in Sources */,
@@ -2089,6 +2143,7 @@
 				21D071E4181DA6C20019D264 /* CSprite.cpp in Sources */,
 				21D071E5181DA6C20019D264 /* CBillboard.cpp in Sources */,
 				21D071E6181DA6C20019D264 /* CParticleEmitter.cpp in Sources */,
+				21F8015818F29066006FCA3C /* ieValue.cpp in Sources */,
 				21D071E7181DA6C20019D264 /* CModel.cpp in Sources */,
 				21D071E8181DA6C20019D264 /* COcean.cpp in Sources */,
 				21D071E9181DA6C20019D264 /* CCamera.cpp in Sources */,
@@ -2098,6 +2153,7 @@
 				21D071EC181DA6C20019D264 /* CAnimationMixer.cpp in Sources */,
 				21D071ED181DA6C20019D264 /* CSceneGraph.cpp in Sources */,
 				21D071EE181DA6C20019D264 /* CSceneFabricator.cpp in Sources */,
+				213421D318F2C7D70022C08E /* ieDisplayObjectContainer.cpp in Sources */,
 				21D071EF181DA6C20019D264 /* CSceneUpdateMgr.cpp in Sources */,
 				21D071F0181DA6C20019D264 /* ISceneUpdateHandler.cpp in Sources */,
 				21D071F1181DA6C20019D264 /* IScene.cpp in Sources */,
@@ -2116,8 +2172,10 @@
 				21D071FC181DA6C20019D264 /* CMaterialTemplateLoadingOperation.cpp in Sources */,
 				21D071FD181DA6C20019D264 /* CModelTemplateLoadingOperation.cpp in Sources */,
 				21D071FE181DA6C20019D264 /* COceanTemplateLoadingOperation.cpp in Sources */,
+				213421D718F2D9820022C08E /* ieResource.cpp in Sources */,
 				21D071FF181DA6C20019D264 /* CParticleEmitterLoadingOperation.cpp in Sources */,
 				21D07200181DA6C20019D264 /* CWorldSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */,
+				213421D018F2C7B60022C08E /* ieInteractiveObject.cpp in Sources */,
 				21D07201181DA6C20019D264 /* CScreenSpaceRenderOperationTemplateLoadingOperation.cpp in Sources */,
 				A4D21A1F1848D27200595FEA /* COGLWindow_ndk.cpp in Sources */,
 				21D07202181DA6C20019D264 /* COutputRenderOperationTemplateLoadingOperation.cpp in Sources */,
@@ -2133,6 +2191,7 @@
 				21D0720B181DA6C20019D264 /* CScreenSpaceRenderOperationTemplateSerializer.cpp in Sources */,
 				A4D21A231848DDE100595FEA /* CGraphicsContext_ndk.cpp in Sources */,
 				21D0720C181DA6C20019D264 /* COutputRenderOperationTemplateSerializer.cpp in Sources */,
+				21F8016618F2987C006FCA3C /* ieEventDispatcher.cpp in Sources */,
 				21D0720D181DA6C20019D264 /* CGameTransitionTemplateSerializer.cpp in Sources */,
 				21D0720F181DA6C20019D264 /* CTemplateAccessor.cpp in Sources */,
 				21D07210181DA6C20019D264 /* ITemplateLoadingHandler.cpp in Sources */,
@@ -2165,6 +2224,7 @@
 				21D0722A181DA6C20019D264 /* IResourceLoadingOperation.cpp in Sources */,
 				21D0722B181DA6C20019D264 /* CShaderLoadingOperation.cpp in Sources */,
 				A4D21A0C1848C7C500595FEA /* CCommonOS_ndk.cpp in Sources */,
+				21F8016A18F298A6006FCA3C /* ieEvent.cpp in Sources */,
 				A4D21A181848CA6000595FEA /* CGameLoopExecutor_ndk.cpp in Sources */,
 				21D0722C181DA6C20019D264 /* CTextureLoadingOperation.cpp in Sources */,
 				21D0722D181DA6C20019D264 /* CMeshLoadingOperation.cpp in Sources */,
@@ -2196,6 +2256,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				CONFIGURATION_TEMP_DIR = "$(BUILD_DIR)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2229,6 +2290,7 @@
 					"/Users/codeoneclick/Documents/Hobby/indieEngine/ieCore/Libraries/ogles2/mac-osx_x86/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OBJROOT = "$(BUILD_DIR)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -2249,6 +2311,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				CONFIGURATION_TEMP_DIR = "$(BUILD_DIR)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2280,6 +2343,7 @@
 					"/Users/codeoneclick/Documents/Hobby/indieEngine/ieCore/Libraries/ogles2/mac-osx_x86/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OBJROOT = "$(BUILD_DIR)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -2300,8 +2364,8 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
-				CONFIGURATION_TEMP_DIR = "$(BUILD_DIR)";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_TEMP_DIR)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
 				DSTROOT = /tmp/ieCore.dst;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -2326,6 +2390,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LLVM_VECTORIZE_LOOPS = NO;
+				OBJROOT = "$(BUILD_DIR)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -2346,8 +2411,8 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
-				CONFIGURATION_TEMP_DIR = "$(BUILD_DIR)";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_TEMP_DIR)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
 				DSTROOT = /tmp/ieCore.dst;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
@@ -2371,6 +2436,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LLVM_VECTORIZE_LOOPS = YES;
+				OBJROOT = "$(BUILD_DIR)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",

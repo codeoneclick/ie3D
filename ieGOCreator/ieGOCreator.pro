@@ -17,3 +17,13 @@ SOURCES += Sources/main.cpp\
 HEADERS += Sources/CMainWindow.h
 
 FORMS += Forms/CMainWindow.ui
+
+unix: LIBS += -L$$PWD/../bin/ -lieCore-osx_d
+
+INCLUDEPATH += $$PWD/../ieCore/Sources
+DEPENDPATH += $$PWD/../ieCore/Sources
+
+unix: PRE_TARGETDEPS += $$PWD/../bin/libieCore-osx_d.a
+
+RESOURCES += \
+    Resources/Bundle.qrc

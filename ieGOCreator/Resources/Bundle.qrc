@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/Bundle" lang="en">
+        <file>transition.main.xml</file>
+        <file>CommonOutput.frag</file>
+        <file>CommonOutput.vert</file>
+        <file>render.operation.output.xml</file>
+        <file>render.operation.world.space.common.xml</file>
+        <file>material.render.operation.output.xml</file>
+    </qresource>
+</RCC>

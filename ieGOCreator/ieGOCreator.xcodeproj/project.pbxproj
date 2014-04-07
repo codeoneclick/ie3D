@@ -1,0 +1,537 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+		5E618435888B9D49F8540165 = {
+			buildActionMask = 2147483647;
+			files = (
+				);
+			isa = PBXShellScriptBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Qt Qmake";
+			shellPath = "/bin/sh";
+			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/ieGOCreator -f ieGOCreator.xcodeproj/qt_makeqmake.mak";
+		};
+		09BF715167B7A0149FD2FBB8 = {
+			isa = PBXFileReference;
+			path = "Sources/main.cpp";
+			name = "main.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		5690CEAF73F573032D29A200 = {
+			fileRef = "09BF715167B7A0149FD2FBB8";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		9D88140FBB133F956E1F6166 = {
+			isa = PBXFileReference;
+			path = "Sources/CMainWindow.cpp";
+			name = "CMainWindow.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		5C697E14BC49275245E9B4A3 = {
+			fileRef = "9D88140FBB133F956E1F6166";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		E386093CE0C6884951C2F21E = {
+			isa = PBXFileReference;
+			path = "qrc_Bundle.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		7B55DE044DB64F5DA242D3ED = {
+			fileRef = "E386093CE0C6884951C2F21E";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		DCB612036D136E89ACC8CAC3 = {
+			isa = PBXFileReference;
+			path = "moc_CMainWindow.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		626A71DAA3D899DFEC358778 = {
+			fileRef = "DCB612036D136E89ACC8CAC3";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		E0D0B78F9906B539A5AF66C0 = {
+			isa = PBXFileReference;
+			path = "ui_CMainWindow.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		A4024724E546B6C12F58CF61 = {
+			isa = PBXFileReference;
+			path = "Sources/CMainWindow.h";
+			name = "CMainWindow.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		FE20825133C95DF79B9A7802 = {
+			isa = PBXFileReference;
+			path = "ieGOCreator.pro";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "text";
+		};
+		25A1A80DEE7CBE0D3DE19588 = {
+			isa = PBXFileReference;
+			path = "Resources/Bundle.qrc";
+			name = "Bundle.qrc";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "text";
+		};
+		BE0F8AFC69792CC916E104E5 = {
+			isa = PBXFileReference;
+			path = "Forms/CMainWindow.ui";
+			name = "CMainWindow.ui";
+			sourceTree = "<absolute>";
+		};
+		25B08E2869634E9BCBA333A2 = {
+			isa = PBXGroup;
+			children = (
+				"E386093CE0C6884951C2F21E",
+				"DCB612036D136E89ACC8CAC3",
+				"E0D0B78F9906B539A5AF66C0");
+			name = "Generated Sources";
+			sourceTree = "<Group>";
+		};
+		03C6F296F78B4AA54799A35F = {
+			isa = PBXGroup;
+			children = (
+				"25A1A80DEE7CBE0D3DE19588");
+			name = "Resources";
+			sourceTree = "<Group>";
+		};
+		0E703739B3546C55491E339E = {
+			isa = PBXGroup;
+			children = (
+				"BE0F8AFC69792CC916E104E5");
+			name = "Forms";
+			sourceTree = "<Group>";
+		};
+		4288B89518A5AEAF50AB6AC0 = {
+			isa = PBXGroup;
+			children = (
+				"09BF715167B7A0149FD2FBB8",
+				"9D88140FBB133F956E1F6166",
+				"A4024724E546B6C12F58CF61");
+			name = "Sources";
+			sourceTree = "<Group>";
+		};
+		87DF60DE337FB58864343E39 = {
+			isa = PBXGroup;
+			children = (
+				"03C6F296F78B4AA54799A35F");
+			name = "Resources";
+			sourceTree = "<Group>";
+		};
+		2EB56BE3C2D93CDAB0C52E67 = {
+			isa = PBXGroup;
+			children = (
+				"4288B89518A5AEAF50AB6AC0");
+			name = "Sources";
+			sourceTree = "<Group>";
+		};
+		12E908B8A1C3C07C115504F5 = {
+			isa = PBXGroup;
+			children = (
+				"0E703739B3546C55491E339E");
+			name = "Sources [uic]";
+			sourceTree = "<Group>";
+		};
+		74B182DB50CB5611B5C1C297 = {
+			isa = PBXGroup;
+			children = (
+				"FE20825133C95DF79B9A7802");
+			name = "Supporting Files";
+			sourceTree = "<Group>";
+		};
+		7EF0942E79C014DCEC8976BC = {
+			buildActionMask = 2147483647;
+			files = (
+				);
+			isa = PBXShellScriptBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Qt Preprocessors";
+			shellPath = "/bin/sh";
+			shellScript = "make -C /Users/codeoneclick/Documents/Hobby/indieEngine/ieGOCreator -f ieGOCreator.xcodeproj/qt_preprocess.mak";
+		};
+		F7E50F631C51CD5B5DC0BC43 = {
+			buildActionMask = 2147483647;
+			files = (
+				"5690CEAF73F573032D29A200",
+				"5C697E14BC49275245E9B4A3",
+				"7B55DE044DB64F5DA242D3ED",
+				"626A71DAA3D899DFEC358778");
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Compile Sources";
+		};
+		9F42A8396659E756F8BCFECF = {
+			isa = PBXFileReference;
+			name = "ieCore-osx_d";
+			path = "../bin/libieCore-osx_d.a";
+			refType = 4;
+			sourceTree = "<absolute>";
+		};
+		2BA8150614E2B876EB254A20 = {
+			fileRef = "9F42A8396659E756F8BCFECF";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		3CB7D36C73D2CDDDDCDE4ECF = {
+			isa = PBXFileReference;
+			name = "QtWidgets.framework";
+			path = "/Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtWidgets.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		9A290DBD886EF4A9C2FD8254 = {
+			fileRef = "3CB7D36C73D2CDDDDCDE4ECF";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C5B89D9BFC5D52D34817F202 = {
+			isa = PBXFileReference;
+			name = "QtGui.framework";
+			path = "/Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtGui.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		538D611A8FAAD3FCF5BC5A71 = {
+			fileRef = "C5B89D9BFC5D52D34817F202";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		DC632F1DDE85584624762C93 = {
+			isa = PBXFileReference;
+			name = "QtCore.framework";
+			path = "/Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtCore.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		5D30746E3C44968AB32C2DC9 = {
+			fileRef = "DC632F1DDE85584624762C93";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		D4B32C2222F82AC56BADEB21 = {
+			isa = PBXFileReference;
+			name = "OpenGL.framework";
+			path = "/System/Library/Frameworks/OpenGL.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		8771A8C96E9C391044035D99 = {
+			fileRef = "D4B32C2222F82AC56BADEB21";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8D9815BDB5BD9F90D2BC05C5 = {
+			isa = PBXFileReference;
+			name = "AGL.framework";
+			path = "/System/Library/Frameworks/AGL.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		E45E51A644D5FC9F942ECE55 = {
+			fileRef = "8D9815BDB5BD9F90D2BC05C5";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		AF39DD055C3EF8226FBE929D = {
+			children = (
+				"9F42A8396659E756F8BCFECF",
+				"3CB7D36C73D2CDDDDCDE4ECF",
+				"C5B89D9BFC5D52D34817F202",
+				"DC632F1DDE85584624762C93",
+				"D4B32C2222F82AC56BADEB21",
+				"8D9815BDB5BD9F90D2BC05C5");
+			isa = PBXGroup;
+			name = "Frameworks";
+			sourceTree = "<Group>";
+		};
+		D1C883685E82D5676953459A = {
+			buildActionMask = 2147483647;
+			files = (
+				"2BA8150614E2B876EB254A20",
+				"9A290DBD886EF4A9C2FD8254",
+				"538D611A8FAAD3FCF5BC5A71",
+				"5D30746E3C44968AB32C2DC9",
+				"8771A8C96E9C391044035D99",
+				"E45E51A644D5FC9F942ECE55");
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Link Binary With Libraries";
+		};
+		AC8388F975C1E010E91A4FAF = {
+			isa = PBXFileReference;
+			includeInIndex = 0;
+			explicitFileType = "wrapper.application";
+			path = "ieGOCreator.app";
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE0A091FDBFB3E9C31B7A1BD = {
+			children = (
+				"AC8388F975C1E010E91A4FAF");
+			isa = PBXGroup;
+			name = "Products";
+			sourceTree = "<Group>";
+		};
+		E8C543AB96796ECAA2E65C57 = {
+			children = (
+				"2EB56BE3C2D93CDAB0C52E67",
+				"25B08E2869634E9BCBA333A2",
+				"74B182DB50CB5611B5C1C297",
+				"87DF60DE337FB58864343E39",
+				"12E908B8A1C3C07C115504F5",
+				"AF39DD055C3EF8226FBE929D",
+				"FE0A091FDBFB3E9C31B7A1BD");
+			isa = PBXGroup;
+			name = "ieGOCreator";
+			sourceTree = "<Group>";
+		};
+		C95E823214D58F068358A91F = {
+			buildPhases = (
+				"5E618435888B9D49F8540165",
+				"7EF0942E79C014DCEC8976BC");
+			dependencies = (
+				);
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59;
+			isa = PBXAggregateTarget;
+			buildRules = (
+);
+			productName = "Qt Preprocess";
+			name = "Qt Preprocess";
+		};
+		70DB41201A467282C399D866 = {
+			isa = PBXTargetDependency;
+			target = "C95E823214D58F068358A91F";
+		};
+		DD9E8383EDBA07DDEAF0F6ED = {
+			buildPhases = (
+				"F7E50F631C51CD5B5DC0BC43",
+				"D1C883685E82D5676953459A");
+			dependencies = (
+				"70DB41201A467282C399D866");
+			productReference = "AC8388F975C1E010E91A4FAF";
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59;
+			isa = PBXNativeTarget;
+			buildRules = (
+);
+			productType = "com.apple.product-type.application";
+			name = "ieGOCreator";
+			productName = "ieGOCreator";
+		};
+		3AA6C32AC930069E80220CF1 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
+				GCC_OPTIMIZATION_LEVEL = "0";
+				PRODUCT_NAME = "ieGOCreator";
+				QT_LIBRARY_SUFFIX = "_debug";
+				SDKROOT = "macosx";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				INFOPLIST_FILE = "Info.plist";
+				SYMROOT = "/Users/codeoneclick/Documents/Hobby/indieEngine/ieGOCreator";
+				DYLIB_CURRENT_VERSION = "1.0.0";
+				DYLIB_COMPATIBILITY_VERSION = "1.0";
+				MACOSX_DEPLOYMENT_TARGET = "10.6";
+				HEADER_SEARCH_PATHS = (
+					"../ieCore/Sources",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtWidgets.framework/Versions/5/Headers",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtGui.framework/Versions/5/Headers",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtCore.framework/Versions/5/Headers",
+					".",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AGL.framework/Headers",
+					".",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/mkspecs/macx-clang");
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/codeoneclick/Documents/Hobby/indieEngine/ieGOCreator/../bin/",
+					"/Users/codeoneclick/Documents/Hobby/indieEngine/bin/",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib",
+					"/System/Library/Frameworks/");
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib");
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_LDFLAGS = (
+						"-headerpad_max_install_names",
+						"-F/Applications/Qt/5.2.0/5.2.0/clang_64/lib",
+						"-L/Users/codeoneclick/Documents/Hobby/indieEngine/ieGOCreator/../bin/");
+				ARCHS = "x86_64";
+			};
+			name = "Debug";
+		};
+		77418F46922677BB04ED38DD = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
+				GCC_OPTIMIZATION_LEVEL = "0";
+				PRODUCT_NAME = "ieGOCreator";
+				QT_LIBRARY_SUFFIX = "_debug";
+				SDKROOT = "macosx";
+				PRODUCT_NAME = "ieGOCreator";
+			};
+			name = "Debug";
+		};
+		339EE1B2CC4FC24589A0EA95 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "YES";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				PRODUCT_NAME = "ieGOCreator";
+				QT_LIBRARY_SUFFIX = "";
+				SDKROOT = "macosx";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				INFOPLIST_FILE = "Info.plist";
+				SYMROOT = "/Users/codeoneclick/Documents/Hobby/indieEngine/ieGOCreator";
+				DYLIB_CURRENT_VERSION = "1.0.0";
+				DYLIB_COMPATIBILITY_VERSION = "1.0";
+				MACOSX_DEPLOYMENT_TARGET = "10.6";
+				HEADER_SEARCH_PATHS = (
+					"../ieCore/Sources",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtWidgets.framework/Versions/5/Headers",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtGui.framework/Versions/5/Headers",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtCore.framework/Versions/5/Headers",
+					".",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AGL.framework/Headers",
+					".",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/mkspecs/macx-clang");
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/codeoneclick/Documents/Hobby/indieEngine/ieGOCreator/../bin/",
+					"/Users/codeoneclick/Documents/Hobby/indieEngine/bin/",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib",
+					"/System/Library/Frameworks/");
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib",
+					"/Applications/Qt/5.2.0/5.2.0/clang_64/lib");
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DQT_NO_DEBUG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_LDFLAGS = (
+						"-headerpad_max_install_names",
+						"-F/Applications/Qt/5.2.0/5.2.0/clang_64/lib",
+						"-L/Users/codeoneclick/Documents/Hobby/indieEngine/ieGOCreator/../bin/");
+				ARCHS = "x86_64";
+			};
+			name = "Release";
+		};
+		6666AA5E688052234F6758D8 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "YES";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				PRODUCT_NAME = "ieGOCreator";
+				QT_LIBRARY_SUFFIX = "";
+				SDKROOT = "macosx";
+				PRODUCT_NAME = "ieGOCreator";
+			};
+			name = "Release";
+		};
+		DAC4C1AA5EDEA1C85E9CA5E6 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				"3AA6C32AC930069E80220CF1",
+				"339EE1B2CC4FC24589A0EA95");
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release";
+		};
+		6CC3B5D2136C7CD6A5CF5A59 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				"77418F46922677BB04ED38DD",
+				"6666AA5E688052234F6758D8");
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release";
+		};
+		6DB9C3763D02B1415CD9D565 = {
+			hasScannedForEncodings = 1;
+			compatibilityVersion = "Xcode 3.2";
+			isa = PBXProject;
+			mainGroup = "E8C543AB96796ECAA2E65C57";
+			productRefGroup = "FE0A091FDBFB3E9C31B7A1BD";
+			buildConfigurationList = "DAC4C1AA5EDEA1C85E9CA5E6";
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"DD9E8383EDBA07DDEAF0F6ED",
+				"C95E823214D58F068358A91F");
+		};
+	};
+	rootObject = "6DB9C3763D02B1415CD9D565";
+}
