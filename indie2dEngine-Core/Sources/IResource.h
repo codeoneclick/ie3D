@@ -11,6 +11,8 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
+#include "HDeclaration.h"
+
 
 class IResourceLoadingHandler;
 class IResource : public std::enable_shared_from_this<IResource>
@@ -33,9 +35,10 @@ protected:
     
     void _OnLoaded(void);
     
+    IResource(E_RESOURCE_CLASS _class, const std::string& _guid);
+    
 public:
     
-    IResource(E_RESOURCE_CLASS _class, const std::string& _guid);
     virtual ~IResource(void);
     
     inline const std::string& Get_Guid(void) const
@@ -59,6 +62,12 @@ public:
 		const bool value = 0 != (m_status & E_RESOURCE_STATUS_COMMITED);
 		return value;
     };
+    
+    virtual void onResourceDataSerialized(ISharedResourceDataRef resourceData,
+                                          E_RESOURCE_DATA_STATUS status);
+    
+    virtual void onResourceDataCommited(ISharedResourceDataRef resourceData,
+                                        E_RESOURCE_DATA_STATUS status);
     
     void Register_LoadingHandler(const std::shared_ptr<IResourceLoadingHandler>& _handler);
     void Unregister_LoadingHandler(const std::shared_ptr<IResourceLoadingHandler>& _handler);

@@ -10,15 +10,16 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
-CBone::CBone(i32 _id, i32 _parentId) :
-m_id(_id),
-m_parentId(_parentId),
+
+CBone::CBone(i32 id, i32 parentId) :
+m_id(id),
+m_parentId(parentId),
 m_parent(nullptr),
 m_transformation(nullptr),
-m_bindTransformation(glm::mat4x4(1.0f)),
-m_baseTransformation(glm::mat4x4(1.0f))
+m_baseTransformation(glm::mat4(1.0)),
+m_bindTransformation(glm::mat4(1.0))
 {
-   
+    
 }
 
 CBone::~CBone(void)
@@ -26,28 +27,29 @@ CBone::~CBone(void)
     
 }
 
-void CBone::AddChild(std::shared_ptr<CBone> _bone)
+void CBone::addChild(CSharedBoneRef bone)
 {
-    m_childs.push_back(_bone);
-    _bone->m_parent = shared_from_this();
-    _bone->m_parentId = m_id;
+    assert(bone != nullptr);
+    m_children.push_back(bone);
+    bone->m_parent = shared_from_this();
+    bone->m_parentId = m_id;
 }
 
-std::shared_ptr<CBone> CBone::FindChild(i32 _id)
+CSharedBone CBone::findChild(i32 id)
 {
-    if(m_childs.size() == 0)
+    if(m_children.size() == 0)
     {
         return nullptr;
     }
-    std::shared_ptr<CBone> bone = nullptr;
-    for(const auto& iterator : m_childs)
+    CSharedBone bone = nullptr;
+    for(const auto& iterator : m_children)
     {
-        if(iterator->m_id == _id)
+        if(iterator->m_id == id)
         {
             bone = iterator;
             break;
         }
-        bone = iterator->FindChild(_id);
+        bone = iterator->findChild(id);
         if(bone != nullptr)
         {
             break;
@@ -56,25 +58,59 @@ std::shared_ptr<CBone> CBone::FindChild(i32 _id)
     return bone;
 }
 
-void CBone::Update(void)
+const std::vector<CSharedBone>& CBone::getChildren(void) const
 {
-    for(const auto& iterator : m_childs)
+    return m_children;
+}
+
+CSharedBone CBone::getParent(void) const
+{
+    return m_parent;
+}
+
+i32 CBone::getId(void) const
+{
+    return m_id;
+}
+
+i32 CBone::getParentId(void) const
+{
+    return m_parentId;
+}
+
+void CBone::setTransformation(glm::mat4* transformation)
+{
+    m_transformation = transformation;
+}
+
+glm::mat4* CBone::getTransformation(void) const
+{
+    return m_transformation;
+}
+
+glm::mat4 CBone::getBaseTransformation(void) const
+{
+    return m_baseTransformation;
+}
+
+void CBone::update(void)
+{
+    for(const auto& iterator : m_children)
     {
-        iterator->Update();
+        iterator->update();
     }
     m_baseTransformation = (*m_transformation) * glm::inverse(m_bindTransformation);
     (*m_transformation) = (*m_transformation) * m_bindTransformation;
 }
 
-void CBone::Set_BindTransformation(void)
+void CBone::bindPoseTransformation(void)
 {
     if (m_transformation != nullptr)
     {
         m_bindTransformation = glm::inverse(*m_transformation);
     }
-    
-    for(const auto& iterator : m_childs)
+    for(const auto& iterator : m_children)
     {
-        iterator->Set_BindTransformation();
+        iterator->bindPoseTransformation();
     }
 }

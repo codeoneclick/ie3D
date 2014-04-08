@@ -11,8 +11,6 @@
 
 #include "IResource.h"
 #include "HDeclaration.h"
-#include "CVertexBuffer.h"
-#include "CIndexBuffer.h"
 
 class CMeshData final
 {
@@ -75,22 +73,22 @@ private:
 protected:
     
     std::vector<CSharedFrameData> m_frames;
-    ui32 m_fps;
-    std::string m_name;
+    ui32 m_animationFPS;
+    std::string m_animationName;
     
 public:
     
-    CSequenceData(const std::string& name,
-                  ui32 fps,
+    CSequenceData(const std::string& animationName,
+                  ui32 animationFPS,
                   const std::vector<CSharedFrameData>& frames);
     
     ~CSequenceData(void);
     
     const ui32 getNumFrames(void) const;
     
-    const ui32 getFPS(void) const;
+    const ui32 getAnimationFPS(void) const;
     
-    const std::string getName(void) const;
+    const std::string getAnimationName(void) const;
     
     CSharedFrameData getFrame(ui32 index) const;
 };
@@ -104,7 +102,6 @@ protected:
     ui32 m_numBones;
     
     std::set<CSharedBone> m_roots;
-    std::unordered_map<std::string, glm::mat4> m_transformations;
     
 public:
     
@@ -134,49 +131,29 @@ protected:
 public:
     
     CMesh(const std::string& guid);
-    CMesh(const std::string& guid,
-          CSharedVertexBufferRef vertexBuffer,
-          CSharedIndexBufferRef indexBuffer);
-    
     ~CMesh(void);
     
-    inline std::shared_ptr<CVertexBuffer> Get_VertexBuffer(void)
-    {
-        return m_vertexBuffer;
-    };
+    CSharedVertexBuffer getVertexBuffer(void) const;
+    CSharedIndexBuffer getIndexBuffer(void) const;
     
-    inline std::shared_ptr<CIndexBuffer> Get_IndexBuffer(void)
-    {
-        return m_indexBuffer;
-    };
+    const ui32 getNumVertices(void) const;
+    const ui32 getNumIndices(void) const;
     
-    inline const ui32 Get_NumVertexes(void)
-    {
-        assert(m_vertexBuffer != nullptr);
-        return m_vertexBuffer->Get_Size();
-    };
+    const glm::vec3 getMaxBound(void) const;
+    const glm::vec3 getMinBound(void) const;
     
-    inline const ui32 Get_NumIndexes(void)
-    {
-        assert(m_indexBuffer != nullptr);
-        return m_indexBuffer->Get_Size();
-    };
+    const ui32 getNumFrames(void) const;
+    const ui32 getAnimationFPS(void) const;
+    const std::string getAnimationName(void) const;
+    CSharedFrameData getFrame(ui32 index) const;
     
-    inline const glm::vec3 Get_MaxBound(void)
-    {
-        return m_header != nullptr ? m_header->m_maxBound : glm::vec3(0.0f);
-    };
-    
-    inline const glm::vec3 Get_MinBound(void)
-    {
-        return m_header != nullptr ? m_header->m_minBound : glm::vec3(0.0f);
-    };
-    
-    void Bind(const i32* _attributes) const;
-    void Draw(void) const;
-    void Draw(ui32 _indices) const;
-    void Unbind(const i32* _attributes) const;
+    CSharedBone getBone(ui32 index) const;
+    ui32 getNumBones(void) const;
 
+    void bind(const i32* attributes) const;
+    void draw(void) const;
+    void draw(ui32 indices) const;
+    void unbind(const i32* attributes) const;
 };
 
 #endif

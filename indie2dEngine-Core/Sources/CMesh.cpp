@@ -7,11 +7,254 @@
 //
 
 #include "CMesh.h"
-#include "CAABoundBox.h"
-#include "CSkeleton.h"
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
 #include "CBone.h"
-#include "CTimer.h"
-#include "CSequence.h"
+
+CMeshData::CMeshData(const std::vector<SVertex>& vertexData,
+                     const std::vector<ui16>& indexData,
+                     const glm::vec3& maxBound,
+                     const glm::vec3& minBound) :
+m_vertexData(vertexData),
+m_indexData(indexData),
+m_maxBound(maxBound),
+m_minBound(minBound)
+{
+    
+}
+
+CMeshData::~CMeshData(void)
+{
+    m_vertexData.clear();
+    m_indexData.clear();
+}
+
+const std::vector<SVertex>& CMeshData::getVertexData(void) const
+{
+    return m_vertexData;
+}
+
+const std::vector<ui16>& CMeshData::getIndexData(void) const
+{
+    return m_indexData;
+}
+
+const ui32 CMeshData::getNumVertices(void) const
+{
+    return m_vertexData.size();
+}
+
+const ui32 CMeshData::getNumIndices(void) const
+{
+    return m_indexData.size();
+}
+
+const glm::vec3& CMeshData::getMaxBound(void) const
+{
+    return m_maxBound;
+}
+
+const glm::vec3& CMeshData::getMinBound(void) const
+{
+    return m_minBound;
+}
+
+CFrameData::CFrameData(const std::vector<glm::quat>& rotations,
+                       const std::vector<glm::vec3>& positions,
+                       const std::vector<glm::vec3>& scales) :
+m_rotations(rotations),
+m_positions(positions),
+m_scales(scales)
+{
+    
+}
+
+CFrameData::~CFrameData(void)
+{
+    m_rotations.clear();
+    m_positions.clear();
+    m_scales.clear();
+}
+
+const glm::quat& CFrameData::getRotation(ui32 index) const
+{
+    assert(m_rotations.size() > index);
+    return m_rotations.at(index);
+}
+
+const glm::vec3& CFrameData::getPosition(ui32 index) const
+{
+    assert(m_positions.size() > index);
+    return m_positions.at(index);
+}
+
+const glm::vec3& CFrameData::getScale(ui32 index) const
+{
+    assert(m_scales.size() > index);
+    return m_scales.at(index);
+}
+
+CSequenceData::CSequenceData(const std::string& animationName,
+                             ui32 animationFPS,
+                             const std::vector<CSharedFrameData>& frames) :
+m_animationName(animationName),
+m_animationFPS(animationFPS),
+m_frames(frames)
+{
+    
+}
+
+CSequenceData::~CSequenceData(void)
+{
+    m_frames.clear();
+}
+
+const ui32 CSequenceData::getNumFrames(void) const
+{
+    return m_frames.size();
+}
+
+const ui32 CSequenceData::getAnimationFPS(void) const
+{
+    return m_animationFPS;
+}
+
+const std::string CSequenceData::getAnimationName(void) const
+{
+    return m_animationName;
+}
+
+CSharedFrameData CSequenceData::getFrame(ui32 index) const
+{
+    assert(m_frames.size() > index);
+    return m_frames.at(index);
+}
+
+CSkeletonData::CSkeletonData(ui32 numBones) :
+m_numBones(numBones)
+{
+    
+}
+
+CSkeletonData::~CSkeletonData(void)
+{
+    // TODO#: remove all bones
+}
+
+void CSkeletonData::addBone(CSharedBoneRef bone)
+{
+    if(bone == nullptr)
+    {
+        return;
+    }
+    
+    if (bone->getParentId() == -1)
+    {
+        m_roots.insert(bone);
+        return;
+    }
+    
+    CSharedBone parent = CSkeletonData::getBone(bone->getParentId());
+    if (parent != nullptr)
+    {
+        parent->addChild(bone);
+        return;
+    }
+    assert(false);
+}
+
+CSharedBone CSkeletonData::getBone(ui32 index) const
+{
+    for(const auto& root : m_roots)
+    {
+        if (root->getId() == index)
+        {
+            return root;
+        }
+        else
+        {
+            CSharedBone child = root->findChild(index);
+            if(child != nullptr)
+            {
+                return child;
+            }
+        }
+    }
+    return nullptr;
+}
+
+ui32 CSkeletonData::getNumBones(void) const
+{
+    return m_numBones;
+}
+
+CMesh::CMesh(const std::string& guid) : IResource(E_RESOURCE_CLASS_MESH, guid),
+m_vertexBuffer(nullptr),
+m_indexBuffer(nullptr),
+m_meshData(nullptr),
+m_skeletonData(nullptr),
+m_sequenceData(nullptr)
+{
+    
+}
+
+CMesh::~CMesh(void)
+{
+    
+}
+
+void CMesh::init(CSharedMeshDataRef meshData,
+                 CSharedSkeletonDataRef skeletonData,
+                 CSharedSequenceDataRef sequenceData)
+{
+    m_meshData = meshData;
+    m_skeletonData = skeletonData;
+    m_sequenceData = sequenceData;
+    
+    m_status |= E_RESOURCE_STATUS_LOADED;
+    m_status |= E_RESOURCE_STATUS_COMMITED;
+}
+
+CSharedVertexBuffer CMesh::getVertexBuffer(void) const;
+CSharedIndexBuffer CMesh::getIndexBuffer(void) const;
+
+const ui32 getNumVertices(void) const;
+const ui32 getNumIndices(void) const;
+
+const glm::vec3 getMaxBound(void) const;
+const glm::vec3 getMinBound(void) const;
+
+const ui32 getNumFrames(void) const;
+const ui32 getAnimationFPS(void) const;
+const std::string getAnimationName(void) const;
+CSharedFrameData getFrame(ui32 index) const;
+
+CSharedBone getBone(ui32 index) const;
+ui32 getNumBones(void) const;
+
+void bind(const i32* attributes) const;
+void draw(void) const;
+void draw(ui32 indices) const;
+void unbind(const i32* attributes) const;
+
+class CMesh : public IResource
+{
+private:
+    
+protected:
+    
+    CSharedMeshData m_meshData;
+    CSharedSkeletonData m_skeletonData;
+    CSharedSequenceData m_sequenceData;
+    
+    CSharedVertexBuffer m_vertexBuffer;
+    CSharedIndexBuffer m_indexBuffer;
+    
+public:
+    
+    
+};
+
 
 CMeshHeader::CMeshHeader(void) :
 m_vertexData(nullptr),
