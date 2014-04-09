@@ -9,6 +9,23 @@
 #include "IResource.h"
 #include "IResourceLoadingHandler.h"
 
+
+IResourceData::IResourceData(E_RESOURCE_DATA_CLASS resourceDataClass) :
+m_resourceDataClass(resourceDataClass)
+{
+
+}
+
+IResourceData::~IResourceData(void)
+{
+    
+}
+
+E_RESOURCE_DATA_CLASS IResourceData::getResourceDataClass(void) const
+{
+    return m_resourceDataClass;
+}
+
 IResource::IResource(E_RESOURCE_CLASS _class, const std::string& _guid) :
 m_class(_class),
 m_guid(_guid),

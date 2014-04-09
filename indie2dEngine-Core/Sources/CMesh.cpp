@@ -203,26 +203,111 @@ CMesh::~CMesh(void)
     
 }
 
-void CMesh::init(CSharedMeshDataRef meshData,
-                 CSharedSkeletonDataRef skeletonData,
-                 CSharedSequenceDataRef sequenceData)
+void CMesh::onResourceDataSerialized(ISharedResourceDataRef resourceData,
+                                     E_RESOURCE_DATA_STATUS status)
 {
-    m_meshData = meshData;
-    m_skeletonData = skeletonData;
-    m_sequenceData = sequenceData;
-    
-    m_status |= E_RESOURCE_STATUS_LOADED;
-    m_status |= E_RESOURCE_STATUS_COMMITED;
+    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    {
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
+        assert(resourceData != nullptr);
+        
+        switch(resourceData->getResourceDataClass())
+        {
+            case E_RESOURCE_DATA_CLASS_NATIVE_MESH_DATA:
+            {
+                m_meshData = std::static_pointer_cast<CMeshData>(resourceData);
+            }
+                break;
+                
+            case E_RESOURCE_DATA_CLASS_SKELETON_DATA:
+            {
+                m_skeletonData = std::static_pointer_cast<CSkeletonData>(resourceData);
+            }
+                break;
+                
+            case E_RESOURCE_DATA_CLASS_SEQUENCE_DATA:
+            {
+                m_sequenceData = std::static_pointer_cast<CSequenceData>(resourceData);
+            }
+                break;
+                
+            default:
+            {
+                assert(false);
+            }
+                break;
+        }
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
+        m_status |= E_RESOURCE_STATUS_LOADED;
+    }
 }
 
-CSharedVertexBuffer CMesh::getVertexBuffer(void) const;
-CSharedIndexBuffer CMesh::getIndexBuffer(void) const;
+void CMesh::onResourceDataCommited(ISharedResourceDataRef resourceData,
+                                   E_RESOURCE_DATA_STATUS status)
+{
+    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    {
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
+        assert(resourceData != nullptr);
+        
+        switch(resourceData->getResourceDataClass())
+        {
+            case E_RESOURCE_DATA_CLASS_VERTEX_BUFFER_DATA:
+            {
+                m_vertexBuffer = std::static_pointer_cast<CVertexBuffer>(resourceData);
+            }
+                break;
+                
+            case E_RESOURCE_DATA_CLASS_SKELETON_DATA:
+            {
+                m_indexBuffer = std::static_pointer_cast<CIndexBuffer>(resourceData);
+            }
+                break;
+                
+            default:
+            {
+                assert(false);
+            }
+                break;
+        }
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
+        m_status |= E_RESOURCE_STATUS_COMMITED;
+    }
+}
 
-const ui32 getNumVertices(void) const;
-const ui32 getNumIndices(void) const;
+CSharedVertexBuffer CMesh::getVertexBuffer(void) const
+{
+    return IResource::IsCommited() ? m_vertexBuffer : nullptr;
+}
 
-const glm::vec3 getMaxBound(void) const;
-const glm::vec3 getMinBound(void) const;
+CSharedIndexBuffer CMesh::getIndexBuffer(void) const
+{
+    return IResource::IsCommited() ? m_indexBuffer : nullptr;
+}
+
+const ui32 CMesh::getNumVertices(void) const
+{
+    return IResource::IsLoaded() ? m_meshData->getNumVertices() : 0;
+}
+
+const ui32 CMesh::getNumIndices(void) const
+{
+    return IResource::IsLoaded() ? m_meshData->getNumIndices() : 0;
+}
+
+const glm::vec3 CMesh::getMaxBound(void) const
+{
+    return IResource::IsLoaded() ? m_meshData->getMaxBound() : glm::vec3(0.0, 0.0, 0.0);
+}
+
+const glm::vec3 CMesh::getMinBound(void) const
+{
+    return IResource::IsLoaded() ? m_meshData->getMaxBound() : glm::vec3(0.0, 0.0, 0.0);
+}
 
 const ui32 getNumFrames(void) const;
 const ui32 getAnimationFPS(void) const;

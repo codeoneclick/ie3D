@@ -9,11 +9,12 @@
 #ifndef CIndexBuffer_h
 #define CIndexBuffer_h
 
-#include "HCommon.h"
+#include "IResource.h"
+#include "HDeclaration.h"
 
 #define K_NUM_REPLACEMENT_INDEX_BUFFERS 3
 
-class CIndexBuffer
+class CIndexBuffer : public IResourceData
 {
 private:
     

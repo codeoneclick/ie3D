@@ -12,7 +12,7 @@
 #include "IResource.h"
 #include "HDeclaration.h"
 
-class CMeshData final
+class CMeshData final : public IResourceData
 {
 private:
     
@@ -43,7 +43,7 @@ public:
     const glm::vec3& getMinBound(void) const;
 };
 
-class CFrameData final
+class CFrameData final : public IResourceData
 {
 private:
     
@@ -66,7 +66,7 @@ public:
     const glm::vec3& getScale(ui32 index) const;
 };
 
-class CSequenceData final
+class CSequenceData final : public IResourceData
 {
 private:
     
@@ -93,7 +93,7 @@ public:
     CSharedFrameData getFrame(ui32 index) const;
 };
 
-class CSkeletonData final
+class CSkeletonData final : public IResourceData
 {
 private:
     
@@ -127,6 +127,12 @@ protected:
     
     CSharedVertexBuffer m_vertexBuffer;
     CSharedIndexBuffer m_indexBuffer;
+    
+    void onResourceDataSerialized(ISharedResourceDataRef resourceData,
+                                  E_RESOURCE_DATA_STATUS status);
+    
+    void onResourceDataCommited(ISharedResourceDataRef resourceData,
+                                E_RESOURCE_DATA_STATUS status);
     
 public:
     

@@ -9,7 +9,8 @@
 #ifndef CVertexBuffer_h
 #define CVertexBuffer_h
 
-#include "HCommon.h"
+#include "IResource.h"
+#include "HDeclaration.h"
 
 #define k_NUM_REPLACEMENT_VERTEX_BUFFERS 3
 
@@ -38,7 +39,7 @@ struct SHardwareVertex
     glm::u8vec4  m_extra;
 };
 
-class CVertexBuffer
+class CVertexBuffer final : public IResourceData
 {
 private:
     

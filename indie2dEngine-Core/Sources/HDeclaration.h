@@ -89,7 +89,7 @@ typedef std::shared_ptr<IResource> ISharedResource;
 typedef const ISharedResource& ISharedResourceRef;
 
 class IResourceData;
-typedef std::shared_ptr<IResource> ISharedResourceData;
+typedef std::shared_ptr<IResourceData> ISharedResourceData;
 typedef const ISharedResourceData& ISharedResourceDataRef;
 
 #endif
