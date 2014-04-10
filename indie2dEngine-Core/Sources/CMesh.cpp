@@ -15,6 +15,7 @@ CMeshData::CMeshData(const std::vector<SVertex>& vertexData,
                      const std::vector<ui16>& indexData,
                      const glm::vec3& maxBound,
                      const glm::vec3& minBound) :
+IResourceData(E_RESOURCE_DATA_CLASS_MESH_DATA),
 m_vertexData(vertexData),
 m_indexData(indexData),
 m_maxBound(maxBound),
@@ -97,6 +98,7 @@ const glm::vec3& CFrameData::getScale(ui32 index) const
 CSequenceData::CSequenceData(const std::string& animationName,
                              ui32 animationFPS,
                              const std::vector<CSharedFrameData>& frames) :
+IResourceData(E_RESOURCE_DATA_CLASS_SEQUENCE_DATA),
 m_animationName(animationName),
 m_animationFPS(animationFPS),
 m_frames(frames)
@@ -131,6 +133,7 @@ CSharedFrameData CSequenceData::getFrame(ui32 index) const
 }
 
 CSkeletonData::CSkeletonData(ui32 numBones) :
+IResourceData(E_RESOURCE_DATA_CLASS_SKELETON_DATA),
 m_numBones(numBones)
 {
     
@@ -214,7 +217,7 @@ void CMesh::onResourceDataSerialized(ISharedResourceDataRef resourceData,
         
         switch(resourceData->getResourceDataClass())
         {
-            case E_RESOURCE_DATA_CLASS_NATIVE_MESH_DATA:
+            case E_RESOURCE_DATA_CLASS_MESH_DATA:
             {
                 m_meshData = std::static_pointer_cast<CMeshData>(resourceData);
             }
@@ -309,147 +312,48 @@ const glm::vec3 CMesh::getMinBound(void) const
     return IResource::IsLoaded() ? m_meshData->getMaxBound() : glm::vec3(0.0, 0.0, 0.0);
 }
 
-const ui32 getNumFrames(void) const;
-const ui32 getAnimationFPS(void) const;
-const std::string getAnimationName(void) const;
-CSharedFrameData getFrame(ui32 index) const;
-
-CSharedBone getBone(ui32 index) const;
-ui32 getNumBones(void) const;
-
-void bind(const i32* attributes) const;
-void draw(void) const;
-void draw(ui32 indices) const;
-void unbind(const i32* attributes) const;
-
-class CMesh : public IResource
+const ui32 CMesh::getNumFrames(void) const
 {
-private:
-    
-protected:
-    
-    CSharedMeshData m_meshData;
-    CSharedSkeletonData m_skeletonData;
-    CSharedSequenceData m_sequenceData;
-    
-    CSharedVertexBuffer m_vertexBuffer;
-    CSharedIndexBuffer m_indexBuffer;
-    
-public:
-    
-    
-};
-
-
-CMeshHeader::CMeshHeader(void) :
-m_vertexData(nullptr),
-m_indexData(nullptr),
-m_numIndices(0),
-m_numVerticies(0),
-m_maxBound(glm::vec3(-4096.0f)),
-m_minBound(glm::vec3( 4096.0f))
-{
-    
+    return IResource::IsLoaded() && m_sequenceData != nullptr ? m_sequenceData->getNumFrames() : 0;
 }
 
-CMeshHeader::~CMeshHeader(void)
+const ui32 CMesh::getAnimationFPS(void) const
 {
-    delete[] m_vertexData;
-    delete[] m_indexData;
+    return IResource::IsLoaded() && m_sequenceData != nullptr ? m_sequenceData->getAnimationFPS() : 0;
 }
 
-CMesh::CMesh(const std::string& _guid) :
-IResource(E_RESOURCE_CLASS_MESH, _guid),
-m_header(nullptr),
-m_vertexBuffer(nullptr),
-m_indexBuffer(nullptr)
+const std::string CMesh::getAnimationName(void) const
 {
-    
+    return IResource::IsLoaded() && m_sequenceData != nullptr ? m_sequenceData->getAnimationName() : 0;
 }
 
-CMesh::CMesh(const std::string& _guid, std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer) :
-IResource(E_RESOURCE_CLASS_MESH, _guid),
-m_header(std::make_shared<CMeshHeader>()),
-m_vertexBuffer(_vertexBuffer),
-m_indexBuffer(_indexBuffer)
+CSharedFrameData CMesh::getFrame(ui32 index) const
 {
-    m_header->m_numVerticies = m_vertexBuffer->Get_Size();
-    m_header->m_numIndices = m_indexBuffer->Get_Size();
-    m_header->m_vertexData = nullptr;
-    m_header->m_indexData = nullptr;
-    
-    SHardwareVertex* vertexData = m_vertexBuffer->Lock();
-    
-    for(ui32 i = 0; i < m_header->m_numVerticies; ++i)
-    {
-        if(vertexData[i].m_position.x > m_header->m_maxBound.x)
-        {
-            m_header->m_maxBound.x = vertexData[i].m_position.x;
-        }
-        if(vertexData[i].m_position.y > m_header->m_maxBound.y)
-        {
-            m_header->m_maxBound.y = vertexData[i].m_position.y;
-        }
-        if(vertexData[i].m_position.z > m_header->m_maxBound.z)
-        {
-            m_header->m_maxBound.z = vertexData[i].m_position.z;
-        }
-        if(vertexData[i].m_position.x < m_header->m_minBound.x)
-        {
-            m_header->m_minBound.x = vertexData[i].m_position.x;
-        }
-        if(vertexData[i].m_position.y < m_header->m_minBound.y)
-        {
-            m_header->m_minBound.y = vertexData[i].m_position.y;
-        }
-        if(vertexData[i].m_position.z < m_header->m_minBound.z)
-        {
-            m_header->m_minBound.z = vertexData[i].m_position.z;
-        }
-    }
-    
-    m_status |= E_RESOURCE_STATUS_LOADED;
-    m_status |= E_RESOURCE_STATUS_COMMITED;
+    return IResource::IsLoaded() && m_sequenceData != nullptr ? m_sequenceData->getFrame(index) : nullptr;
 }
 
-CMesh::~CMesh(void)
+CSharedBone CMesh::getBone(ui32 index) const
 {
-    m_bounds.clear();
+    return IResource::IsLoaded() && m_skeletonData != nullptr ? m_skeletonData->getBone(index) : nullptr;
 }
 
-void CMesh::_Set_Header(std::shared_ptr<CMeshHeader> _header)
+ui32 CMesh::getNumBones(void) const
 {
-    assert(_header != nullptr);
-    m_header = _header;
-    m_status |= E_RESOURCE_STATUS_LOADED;
-    
-    for(const auto& bound : m_bounds)
-    {
-        bound->_Set_MaxBound(m_header->m_maxBound);
-        bound->_Set_MinBound(m_header->m_minBound);
-    }
-};
-
-std::shared_ptr<CAABoundBox> CMesh::CreateBoundBox(void)
-{
-    std::shared_ptr<CAABoundBox> bound(std::make_shared<CAABoundBox>(m_header == nullptr ? glm::vec3(0.0f) : m_header->m_maxBound, m_header == nullptr ? glm::vec3(0.0f) : m_header->m_minBound));
-    assert(bound != nullptr);
-    m_bounds.push_back(bound);
-    return bound;
+    return IResource::IsLoaded() && m_skeletonData != nullptr ? m_skeletonData->getNumBones() : 0;
 }
 
-void CMesh::Bind(const i32 *_attributes) const
+void CMesh::bind(const i32* attributes) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
-        m_vertexBuffer->Bind(_attributes);
+        m_vertexBuffer->Bind(attributes);
         m_indexBuffer->Bind();
     }
 }
 
-void CMesh::Draw(void) const
+void CMesh::draw(void) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
@@ -459,23 +363,23 @@ void CMesh::Draw(void) const
     }
 }
 
-void CMesh::Draw(ui32 _indices) const
+void CMesh::draw(ui32 indices) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
-        glDrawElements(GL_TRIANGLES, _indices, GL_UNSIGNED_SHORT, NULL);
+        glDrawElements(GL_TRIANGLES, indices, GL_UNSIGNED_SHORT, NULL);
     }
 }
 
-void CMesh::Unbind(const i32 *_attributes) const
+void CMesh::unbind(const i32* attributes) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
         m_indexBuffer->Unbind();
-        m_vertexBuffer->Unbind(_attributes);
+        m_vertexBuffer->Unbind(attributes);
     }
 }

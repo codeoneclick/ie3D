@@ -92,4 +92,8 @@ class IResourceData;
 typedef std::shared_ptr<IResourceData> ISharedResourceData;
 typedef const ISharedResourceData& ISharedResourceDataRef;
 
+class CTextureData;
+typedef std::shared_ptr<CTextureData> CSharedTextureData;
+typedef const CSharedTextureData& CSharedTextureDataRef;
+
 #endif

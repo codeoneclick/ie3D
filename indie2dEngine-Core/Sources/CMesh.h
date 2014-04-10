@@ -43,7 +43,7 @@ public:
     const glm::vec3& getMinBound(void) const;
 };
 
-class CFrameData final : public IResourceData
+class CFrameData final
 {
 private:
     

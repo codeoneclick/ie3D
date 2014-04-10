@@ -18,6 +18,8 @@
 #include "CRenderMgr.h"
 #include "CBatchingMgr.h"
 #include "CMesh.h"
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
 
 CLandscapeEdges::CLandscapeEdges(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor) :
 IGameObject(_resourceAccessor, _screenSpaceTextureAccessor),

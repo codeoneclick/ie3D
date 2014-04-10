@@ -10,154 +10,54 @@
 #define CTexture_h
 
 #include "IResource.h"
+#include "HDeclaration.h"
 
-class CTextureHeader final
-{
-private:
-    
-protected:
-    
-    friend class CRenderOperationWorldSpace;
-    friend class CRenderOperationScreenSpace;
-    friend class CTextureSerializer_PVR;
-    friend class CTextureCommiter_PVR;
-    friend class CTextureLoadingOperation;
-    friend class CHeightmapProcessor;
-    friend class CTexture;
-    
-    ui32 m_width;
-    ui32 m_height;
-    ui8* m_data;
-    
-    GLenum m_format;
-    i32 m_bpp;
-	ui32 m_numMips;
-    bool m_isCompressed;
-    
-    inline void _Set_Data(ui8* _data)
-    {
-        m_data = _data;
-    };
-    
-    inline ui8* _Get_Data(void)
-    {
-        return m_data;
-    };
-    
-    inline void _Set_Format(GLenum _format)
-    {
-        m_format = _format;
-    };
-    
-    inline void _Set_Bpp(i32 _bpp)
-    {
-        m_bpp = _bpp;
-    };
-    
-    inline void _Set_NumMips(ui32 _numMips)
-    {
-        m_numMips = _numMips;
-    };
-    
-    inline void _Set_IsCompressed(bool _isCompressed)
-    {
-        m_isCompressed = _isCompressed;
-    };
-    
-    inline void _Set_Width(ui32 _width)
-    {
-        m_width = _width;
-    };
-    
-    inline void _Set_Height(ui32 _height)
-    {
-        m_height = _height;
-    };
-    
-public:
-    
-    CTextureHeader(void);
-    ~CTextureHeader(void);
-    
-    inline ui32 Get_Width(void)
-    {
-        return m_width;
-    };
-    
-    inline ui32 Get_Height(void)
-    {
-        return m_height;
-    };
-    
-    inline GLenum Get_Format(void)
-    {
-        return m_format;
-    };
-    
-    inline i32 Get_Bpp(void)
-    {
-        return m_bpp;
-    };
-
-    inline ui32 Get_NumMips(void)
-    {
-        return m_numMips;
-    };
-
-    inline bool Get_IsCompressed(void)
-    {
-        return m_isCompressed;
-    };
-};
-
-class I_RO_Texture
+class CTextureData final : public IResourceData
 {
 private:
     
 protected:
     
 public:
+    CTextureData(ui32 width,
+                 ui32 height,
+                 ui8* data,
+                 GLenum format,
+                 ui32 bpp,
+                 ui32 mips,
+                 bool isCompressed);
     
-    I_RO_Texture(void) = default;
-    ~I_RO_Texture(void) = default;
+    ~CTextureData(void);
     
-    virtual std::shared_ptr<CTextureHeader> Get_Header(void) const = 0;
-    virtual ui32 Get_Handle(void) const = 0;
-    virtual ui32 Get_Width(void) const = 0;
-    virtual ui32 Get_Height(void) const = 0;
-    virtual ui32 Get_WrapMode(void) const = 0;
+    ui32 getWidth(void) const;
+    ui32 getHeight(void) const;
+    
+    const ui8* getData(void) const;
+    
+    GLenum getFormat(void) const;
+    ui32 getBPP(void) const;
+    ui32 getMips(void) const;
+    
+    bool isCompressed(void) const;
 };
 
-class I_WO_Texture
+class CTexture final : public IResource
 {
 private:
     
 protected:
     
-public:
-    
-    I_WO_Texture(void) = default;
-    ~I_WO_Texture(void) = default;
-    
-    virtual void Set_Header(const std::shared_ptr<CTextureHeader>& _header) = 0;
-    virtual void Set_Handle(ui32 _handle) = 0;
-    virtual void Set_WrapMode(ui32 _wrapMode) = 0;
-};
-
-class CTexture final :
-public IResource,
-public I_RO_Texture,
-public I_WO_Texture
-{
-private:
-    
-protected:
-    
-    std::shared_ptr<CTextureHeader> m_header;
+    CSharedTextureData m_textureData;
     ui32 m_handle;
     
     mutable ui32 m_settedWrapMode;
     ui32 m_presettedWrapMode;
+    
+    void onResourceDataSerialized(ISharedResourceDataRef resourceData,
+                                  E_RESOURCE_DATA_STATUS status);
+    
+    void onResourceDataCommited(ISharedResourceDataRef resourceData,
+                                E_RESOURCE_DATA_STATUS status);
     
 public:
     
