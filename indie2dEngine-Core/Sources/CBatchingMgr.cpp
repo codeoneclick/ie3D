@@ -55,8 +55,8 @@ void CBatchingMgr::Batch(const std::string& _mode, ui32 _renderQueuePosition, co
     assert(_material != nullptr);
     assert(_material->Get_Shader() != nullptr);
 	assert(std::get<1>(_model)->Get_TransformationSize() <= CBatch::k_MAX_NUM_TRANSFORMATION);
-    assert(std::get<0>(_model)->Get_NumVertexes() <= CBatch::k_MAX_NUM_VERTICES);
-    assert(std::get<0>(_model)->Get_NumIndexes() <= CBatch::k_MAX_NUM_INDICES);
+    assert(std::get<0>(_model)->getNumVertices() <= CBatch::k_MAX_NUM_VERTICES);
+    assert(std::get<0>(_model)->getNumIndices() <= CBatch::k_MAX_NUM_INDICES);
     
     for(ui32 i = 0; i < k_MAX_BATCHES_PER_MESH_TYPE; ++i)
     {
@@ -75,8 +75,8 @@ void CBatchingMgr::Batch(const std::string& _mode, ui32 _renderQueuePosition, co
             break;
         }
         else if((iterator->second->Get_NumBatchedTransformations() + std::get<1>(_model)->Get_TransformationSize()) > CBatch::k_MAX_NUM_TRANSFORMATION ||
-                (iterator->second->Get_NumBatchedVertices() + std::get<0>(_model)->Get_NumVertexes()) > CBatch::k_MAX_NUM_VERTICES ||
-                (iterator->second->Get_NumBatchedIndices() + std::get<0>(_model)->Get_NumIndexes()) > CBatch::k_MAX_NUM_INDICES)
+                (iterator->second->Get_NumBatchedVertices() + std::get<0>(_model)->getNumVertices()) > CBatch::k_MAX_NUM_VERTICES ||
+                (iterator->second->Get_NumBatchedIndices() + std::get<0>(_model)->getNumIndices()) > CBatch::k_MAX_NUM_INDICES)
         {
             continue;
         }

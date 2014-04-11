@@ -31,25 +31,25 @@ m_heightBounds(glm::vec2(0.0f, 0.0f))
     
     m_materialImposer = [this](std::shared_ptr<CMaterial> _material)
     {
-        _material->Get_Shader()->Set_Matrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        _material->Get_Shader()->Set_Matrix4x4(!_material->Get_IsReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
+        _material->Get_Shader()->setMatrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+        _material->Get_Shader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
+        _material->Get_Shader()->setMatrix4x4(!_material->Get_IsReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        _material->Get_Shader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         
         ui32 count = 0;
         for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
         {
             if(m_lights[i] != nullptr)
             {
-                _material->Get_Shader()->Set_Vector3(m_lights[i]->Get_Position(), static_cast<E_SHADER_UNIFORM>(E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION + i));
+                _material->Get_Shader()->setVector3(m_lights[i]->Get_Position(), static_cast<E_SHADER_UNIFORM>(E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION + i));
                 count++;
             }
         }
         
-        _material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        _material->Get_Shader()->Set_Vector4(_material->Get_ClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
-        _material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
-        _material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+        _material->Get_Shader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
+        _material->Get_Shader()->setVector4(_material->Get_ClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
+        _material->Get_Shader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
+        _material->Get_Shader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
     };
 }
 
@@ -133,7 +133,7 @@ void CLandscapeEdges::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
     vertexBuffer->Unlock();
     
     std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(24, GL_STATIC_DRAW);
-    ui16* indexData = indexBuffer->Lock();
+    ui16* indexData = indexBuffer->lock();
     
     indexData[0] = 0;
     indexData[1] = 1;
@@ -163,7 +163,7 @@ void CLandscapeEdges::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
     indexData[22] = 14;
     indexData[23] = 15;
     
-    indexBuffer->Unlock();
+    indexBuffer->unlock();
     
     m_mesh = std::make_shared<CMesh>("landscape.edges", vertexBuffer, indexBuffer);
     

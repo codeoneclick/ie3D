@@ -30,24 +30,15 @@ protected:
     
 public:
     
-    CIndexBuffer(ui32 _size, GLenum _mode);
+    CIndexBuffer(ui32 size, GLenum mode);
     ~CIndexBuffer(void);
     
-    inline const ui32 Get_Size(void) const
-    {
-        return m_size;
-    };
+    const ui32 getSize(void) const;
     
-    inline ui16* Lock(void) const
-    {
-        assert(m_data != nullptr);
-		return m_data;
-    };
+    ui16* lock(void) const;
+    void unlock(ui32 size = 0);
     
-    void Unlock(ui32 _size = 0);
-    
-    void Bind(void) const;
-    void Unbind(void) const;
-    
+    void bind(void) const;
+    void unbind(void) const;
 };
 #endif 

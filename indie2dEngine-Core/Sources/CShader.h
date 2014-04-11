@@ -10,8 +10,7 @@
 #define CShader_h
 
 #include "IResource.h"
-
-class CTexture;
+#include "HDeclaration.h"
 
 class CShaderUniform
 {
@@ -19,7 +18,7 @@ private:
     
 protected:
     
-    E_UNIFORM_CLASS m_class;
+    E_UNIFORM_CLASS m_uniformClass;
     
     glm::mat4x4 m_mat4x4_value;
     glm::mat3x3 m_mat3x3_value;
@@ -30,156 +29,68 @@ protected:
     i32 m_i32_value;
     
     E_SHADER_SAMPLER m_sampler_value;
-    std::shared_ptr<CTexture> m_texture_value;
+    CSharedTexture m_texture_value;
     
 public:
     
-    CShaderUniform(E_UNIFORM_CLASS _class);
+    CShaderUniform(E_UNIFORM_CLASS uniformClass);
+    
     ~CShaderUniform(void);
     
-    inline E_UNIFORM_CLASS Get_Class(void) const
-    {
-        return m_class;
-    };
+    E_UNIFORM_CLASS getClass(void) const;
     
-    inline void Set_Matrix3x3(const glm::mat3x3& _matrix)
-    {
-        assert(m_class == E_UNIFORM_CLASS_MAT3X3);
-        m_mat3x3_value = _matrix;
-    };
-    inline void Set_Matrix4x4(const glm::mat4x4& _matrix)
-    {
-        assert(m_class == E_UNIFORM_CLASS_MAT4X4);
-        m_mat4x4_value = _matrix;
-    };
-
-    inline void Set_Vector2(const glm::vec2& _vector)
-    {
-        assert(m_class == E_UNIFORM_CLASS_VECTOR2);
-        m_vec2_value = _vector;
-    };
-    inline void Set_Vector3(const glm::vec3& _vector)
-    {
-        assert(m_class == E_UNIFORM_CLASS_VECTOR3);
-        m_vec3_value = _vector;
-    };
-    inline void Set_Vector4(const glm::vec4& _vector)
-    {
-        assert(m_class == E_UNIFORM_CLASS_VECTOR4);
-        m_vec4_value = _vector;
-    };
+    void setMatrix3x3(const glm::mat3x3& matrix);
+    void setMatrix4x4(const glm::mat4x4& matrix);
+    void setVector2(const glm::vec2& vector);
+    void setVector3(const glm::vec3& vector);
+    void setVector4(const glm::vec4& vector);
+    void setFloat(f32 value);
+    void setInt(i32 value);
+    void setSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler);
     
-    inline void Set_Float(f32 _value)
-    {
-        assert(m_class == E_UNIFORM_CLASS_FLOAT);
-        m_f32_value = _value;
-    };
-    
-    inline void Set_Int(i32 _value)
-    {
-        assert(m_class = E_UNIFORM_CLASS_INT);
-        m_i32_value = _value;
-    };
-    
-    inline void Set_Sampler(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler)
-    {
-        assert(m_class == E_UNIFORM_CLASS_SAMPLER);
-        m_sampler_value = _sampler;
-        m_texture_value = _texture;
-    };
-    
-    inline const glm::mat3x3& Get_Matrix3x3(void)
-    {
-        assert(m_class == E_UNIFORM_CLASS_MAT3X3);
-        return m_mat3x3_value;
-    };
-    inline const glm::mat4x4& Get_Matrix4x4(void)
-    {
-        assert(m_class == E_UNIFORM_CLASS_MAT4X4);
-        return m_mat4x4_value;
-    };
-    
-    inline const glm::vec2& Get_Vector2(void)
-    {
-        assert(m_class == E_UNIFORM_CLASS_VECTOR2);
-        return m_vec2_value;
-    };
-    inline const glm::vec3& Get_Vector3(void)
-    {
-        assert(m_class == E_UNIFORM_CLASS_VECTOR3);
-        return m_vec3_value;
-    };
-    inline const glm::vec4& Get_Vector4(void)
-    {
-        assert(m_class == E_UNIFORM_CLASS_VECTOR4);
-        return m_vec4_value;
-    };
-    
-    inline f32 Get_Float(void)
-    {
-        assert(m_class == E_UNIFORM_CLASS_FLOAT);
-        return m_f32_value;
-    };
-    
-    inline i32 Get_Int(void)
-    {
-        assert(m_class == E_UNIFORM_CLASS_INT);
-        return m_i32_value;
-    };
-    
-    inline E_SHADER_SAMPLER Get_Sampler(void)
-    {
-        assert(m_class == E_UNIFORM_CLASS_SAMPLER);
-        return m_sampler_value;
-    };
-    
-    inline std::shared_ptr<CTexture> Get_Texture(void)
-    {
-        assert(m_class == E_UNIFORM_CLASS_SAMPLER);
-        return m_texture_value;
-    };
+    const glm::mat3x3& getMatrix3x3(void) const;
+    const glm::mat4x4& getMatrix4x4(void) const;
+    const glm::vec2& getVector2(void) const;
+    const glm::vec3& getVector3(void) const;
+    const glm::vec4& getVector4(void) const;
+    f32 getFloat(void) const;
+    i32 getInt(void) const;
+    E_SHADER_SAMPLER getSampler(void) const;
+    CSharedTexture getTexture(void) const;
 };
 
-class I_RO_Shader
+class CShaderData : public IResourceData
 {
 private:
     
 protected:
     
-public:
-    
-    I_RO_Shader(void) = default;
-    ~I_RO_Shader(void) = default;
-    
-    virtual std::string Get_VertexShaderFilename(void) const = 0;
-    virtual std::string Get_FragmentShaderFilename(void) const = 0;
-    virtual std::string Get_VertexShaderSourceCode(void) const = 0;
-    virtual std::string Get_FragmentShaderSourceCode(void) const = 0;
-};
-
-class I_WO_Shader
-{
-private:
-    
-protected:
+    std::string m_vsFilename;
+    std::string m_fsFilename;
+    std::string m_vsSourceCode;
+    std::string m_fsSourceCode;
+    ui32 m_shaderId;
     
 public:
     
-    I_WO_Shader(void) = default;
-    ~I_WO_Shader(void) = default;
+    CShaderData(const std::string& vsFilename,
+                const std::string& fsFilename,
+                const std::string& vsSourceCode,
+                const std::string& fsSourceCode);
     
-    virtual void Set_SourceCode(const std::string& _vsFilename,
-                                const std::string& _vsSourceCode,
-                                const std::string& _fsFilename,
-                                const std::string& _fsSourceCode) = 0;
-    virtual void Set_Handle(ui32 _handle) = 0;
+    CShaderData(ui32 shaderId);
     
+    ~CShaderData(void);
+    
+    std::string getVSFilename(void) const;
+    std::string getFSFilename(void) const;
+    std::string getVSSourceCode(void) const;
+    std::string getFSSourceCode(void) const;
+    
+    ui32 getShaderId(void) const;
 };
 
-class CShader :
-public IResource,
-I_RO_Shader,
-I_WO_Shader
+class CShader : public IResource
 {
 private:
 
@@ -188,53 +99,48 @@ protected:
     i32 m_uniforms[E_SHADER_UNIFORM_MAX];
     i32 m_samplers[E_SHADER_SAMPLER_MAX];
     i32 m_attributes[E_SHADER_ATTRIBUTE_MAX];
-    std::array<std::shared_ptr<CShaderUniform>, E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX> m_values;
     
-    std::string m_vsFilename;
-    std::string m_fsFilename;
-    std::string m_vsSourceCode;
-    std::string m_fsSourceCode;
-    ui32 m_handle;
+    ui32 m_shaderId;
+    
+    std::array<CSharedShaderUniform, E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX> m_values;
+    
+    CSharedShaderData m_shaderData;
+    
+    void onResourceDataSerialized(ISharedResourceDataRef resourceData,
+                                  E_RESOURCE_DATA_STATUS status);
+    
+    void onResourceDataCommited(ISharedResourceDataRef resourceData,
+                                E_RESOURCE_DATA_STATUS status);
+    
+    void setupUniforms(void);
     
 public:
     
-    CShader(const std::string& _guid);
+    CShader(const std::string& guid);
     ~CShader(void);
-    
-    std::string Get_VertexShaderFilename(void) const;
-    std::string Get_FragmentShaderFilename(void) const;
-    std::string Get_VertexShaderSourceCode(void) const;
-    std::string Get_FragmentShaderSourceCode(void) const;
-    
 
-    void Set_SourceCode(const std::string& _vsFilename,
-                        const std::string& _vsSourceCode,
-                        const std::string& _fsFilename,
-                        const std::string& _fsSourceCode);
-    void Set_Handle(ui32 _handle);
+    const i32* getAttributesRef(void) const;
     
-    const i32* Get_Attributes(void) const;
+    void setMatrix3x3(const glm::mat3x3& matrix, E_SHADER_UNIFORM uniform);
+    void setMatrix3x3Custom(const glm::mat3x3& matrix, const std::string& uniform);
+    void setMatrix4x4(const glm::mat4x4& matrix, E_SHADER_UNIFORM uniform);
+    void setMatrix4x4Custom(const glm::mat4x4& matrix, const std::string& uniform);
+    void setMatrixArray4x4(const glm::mat4x4* matrix, ui32 size, E_SHADER_UNIFORM uniform);
+    void setMatrixArray4x4Custom(const glm::mat4x4* matrix, ui32 size, const std::string& uniform);
+    void setVector2(const glm::vec2& vector, E_SHADER_UNIFORM uniform);
+    void setVector2Custom(const glm::vec2& vector, const std::string& uniform);
+    void setVector3(const glm::vec3& vector, E_SHADER_UNIFORM uniform);
+    void setVector3Custom(const glm::vec3& vector, const std::string& uniform);
+    void setVector4(const glm::vec4& vector, E_SHADER_UNIFORM uniform);
+    void setVector4Custom(const glm::vec4& vector, const std::string& uniform);
+    void setFloat(f32 value, E_SHADER_UNIFORM uniform);
+    void setFloatCustom(f32 value, const std::string& uniform);
+    void setInt(i32 value, E_SHADER_UNIFORM uniform);
+    void setIntCustom(i32 value, const std::string& uniform);
+    void setTexture(const CSharedTexture texture, E_SHADER_SAMPLER sampler);
     
-    void Set_Matrix3x3(const glm::mat3x3& _matrix, E_SHADER_UNIFORM _uniform);
-    void Set_Matrix3x3Custom(const glm::mat3x3& _matrix, const std::string& _uniform);
-    void Set_Matrix4x4(const glm::mat4x4& _matrix, E_SHADER_UNIFORM _uniform);
-    void Set_Matrix4x4Custom(const glm::mat4x4& _matrix, const std::string& _uniform);
-    void Set_MatrixArray4x4(const glm::mat4x4* _matrix, ui32 _size, E_SHADER_UNIFORM _uniform);
-    void Set_MatrixArray4x4Custom(const glm::mat4x4* _matrix, ui32 _size, const std::string& _uniform);
-    void Set_Vector2(const glm::vec2& _vector, E_SHADER_UNIFORM _uniform);
-    void Set_Vector2Custom(const glm::vec2& _vector, const std::string& _uniform);
-    void Set_Vector3(const glm::vec3& _vector, E_SHADER_UNIFORM _uniform);
-    void Set_Vector3Custom(const glm::vec3& _vector, const std::string& _uniform);
-    void Set_Vector4(const glm::vec4& _vector, E_SHADER_UNIFORM _uniform);
-    void Set_Vector4Custom(const glm::vec4& _vector, const std::string& _uniform);
-    void Set_Float(f32 _value, E_SHADER_UNIFORM _uniform);
-    void Set_FloatCustom(f32 _value, const std::string& _uniform);
-    void Set_Int(i32 _value, E_SHADER_UNIFORM _uniform);
-    void Set_IntCustom(i32 _value, const std::string& _uniform);
-    void Set_Texture(const std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler);
-    
-    void Bind(void) const;
-    void Unbind(void) const;
+    void bind(void) const;
+    void unbind(void) const;
 };
 
 #endif 

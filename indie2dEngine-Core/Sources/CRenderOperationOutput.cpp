@@ -44,12 +44,12 @@ void CRenderOperationOutput::Bind(void)
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
     m_material->Bind();
-    m_quad->Bind(m_material->Get_Shader()->Get_Attributes());
+    m_quad->Bind(m_material->Get_Shader()->getAttributesRef());
 }
 
 void CRenderOperationOutput::Unbind(void)
 {
-    m_quad->Unbind(m_material->Get_Shader()->Get_Attributes());
+    m_quad->Unbind(m_material->Get_Shader()->getAttributesRef());
     m_material->Unbind();
 
 #if defined(__IOS__)

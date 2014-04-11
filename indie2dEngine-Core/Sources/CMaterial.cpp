@@ -304,7 +304,7 @@ void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
             texture->Register_LoadingHandler(_handler);
         }
         assert(texture != nullptr);
-        texture->Set_WrapMode(textureTemplate->Get_WrapMode());
+        texture->setWrapMode(textureTemplate->Get_WrapMode());
         assert(textureTemplate->Get_SamplerId() >= 0 && textureTemplate->Get_SamplerId() < E_SHADER_SAMPLER_MAX);
         CMaterial::Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->Get_SamplerId()));
     }
@@ -372,12 +372,12 @@ void CMaterial::Bind(void)
     assert(m_parameters != nullptr);
     assert(m_parameters->m_shader != nullptr);
     
-    m_parameters->m_shader->Bind();
+    m_parameters->m_shader->bind();
     for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
     {
         if(m_parameters->m_textures[i] != nullptr)
         {
-            m_parameters->m_shader->Set_Texture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
+            m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
         }
     }
     
@@ -438,5 +438,5 @@ void CMaterial::Unbind(void)
 {
     assert(m_parameters != nullptr);
     assert(m_parameters->m_shader != nullptr);
-    m_parameters->m_shader->Unbind();
+    m_parameters->m_shader->unbind();
 }

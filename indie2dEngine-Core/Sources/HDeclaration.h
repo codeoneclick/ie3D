@@ -96,4 +96,12 @@ class CTextureData;
 typedef std::shared_ptr<CTextureData> CSharedTextureData;
 typedef const CSharedTextureData& CSharedTextureDataRef;
 
+class CShaderData;
+typedef std::shared_ptr<CShaderData> CSharedShaderData;
+typedef const CSharedShaderData& CSharedShaderDataRef;
+
+class CShaderUniform;
+typedef std::shared_ptr<CShaderUniform> CSharedShaderUniform;
+typedef const CSharedShaderUniform& CSharedShaderUniformRef;
+
 #endif

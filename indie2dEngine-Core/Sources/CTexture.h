@@ -18,7 +18,17 @@ private:
     
 protected:
     
+    ui32 m_textureId;
+    ui32 m_width;
+    ui32 m_height;
+    ui8* m_data;
+    GLenum m_format;
+    ui32 m_bpp;
+    ui32 m_mips;
+    bool m_isCompressed;
+    
 public:
+    
     CTextureData(ui32 width,
                  ui32 height,
                  ui8* data,
@@ -27,12 +37,15 @@ public:
                  ui32 mips,
                  bool isCompressed);
     
+    CTextureData(ui32 textureId);
+    
     ~CTextureData(void);
     
     ui32 getWidth(void) const;
     ui32 getHeight(void) const;
     
     const ui8* getData(void) const;
+    ui32 getTextureId(void) const;
     
     GLenum getFormat(void) const;
     ui32 getBPP(void) const;
@@ -48,7 +61,7 @@ private:
 protected:
     
     CSharedTextureData m_textureData;
-    ui32 m_handle;
+    ui32 m_textureId;
     
     mutable ui32 m_settedWrapMode;
     ui32 m_presettedWrapMode;
@@ -61,21 +74,23 @@ protected:
     
 public:
     
-    CTexture(const std::string& _guid);
+    CTexture(const std::string& guid);
+    CTexture(const std::string& guid,
+             ui32 textureId,
+             ui32 witdh,
+             ui32 height);
+    
     ~CTexture(void);
     
-    std::shared_ptr<CTextureHeader> Get_Header(void) const;
-    ui32 Get_Handle(void) const;
-    ui32 Get_Width(void) const;
-    ui32 Get_Height(void) const;
-    ui32 Get_WrapMode(void) const;
+    ui32 getTextureId(void) const;
     
-    void Set_Header(const std::shared_ptr<CTextureHeader>& _header);
-    void Set_Handle(ui32 _handle);
-    void Set_WrapMode(ui32 _wrapMode);
+    ui32 getTextureWidth(void) const;
+    ui32 getTextureHeight(void) const;
     
-    void Bind(void) const;
-    void Unbind(void) const;
+    void setWrapMode(ui32 wrapMode);
+    
+    void bind(void) const;
+    void unbind(void) const;
 };
 
 #endif

@@ -8,85 +8,185 @@
 
 #include "CTexture.h"
 
-CTextureHeader::CTextureHeader(void) :
-m_data(nullptr),
-m_width(0),
-m_height(0)
+
+CTextureData::CTextureData(ui32 width,
+                           ui32 height,
+                           ui8* data,
+                           GLenum format,
+                           ui32 bpp,
+                           ui32 mips,
+                           bool isCompressed) : IResourceData(E_RESOURCE_DATA_CLASS_TEXTURE_DATA),
+m_textureId(0),
+m_width(width),
+m_height(height),
+m_data(data),
+m_format(format),
+m_bpp(bpp),
+m_mips(mips),
+m_isCompressed(isCompressed)
 {
     
 }
 
-CTextureHeader::~CTextureHeader(void)
+CTextureData::CTextureData(ui32 textureId) : IResourceData(E_RESOURCE_DATA_CLASS_TEXTURE_DATA),
+m_textureId(textureId),
+m_data(nullptr)
+{
+    
+}
+
+CTextureData::~CTextureData(void)
 {
     delete[] m_data;
 }
 
-CTexture::CTexture(const std::string& _guid) :
-IResource(E_RESOURCE_CLASS_TEXTURE, _guid),
-m_handle(0),
-m_header(nullptr),
+ui32 CTextureData::getWidth(void) const
+{
+    return m_width;
+}
+
+ui32 CTextureData::getHeight(void) const
+{
+    return m_height;
+}
+
+const ui8* CTextureData::getData(void) const
+{
+    return m_data;
+}
+
+ui32 CTextureData::getTextureId(void) const
+{
+    return m_textureId;
+}
+
+GLenum CTextureData::getFormat(void) const
+{
+    return m_format;
+}
+
+ui32 CTextureData::getBPP(void) const
+{
+    return m_bpp;
+}
+
+ui32 CTextureData::getMips(void) const
+{
+    return m_mips;
+}
+
+bool CTextureData::isCompressed(void) const
+{
+    return m_isCompressed;
+}
+
+CTexture::CTexture(const std::string& guid) : IResource(E_RESOURCE_CLASS_TEXTURE, guid),
+m_textureData(nullptr),
+m_textureId(0),
 m_presettedWrapMode(GL_REPEAT),
 m_settedWrapMode(0)
 {
     
 }
 
+CTexture::CTexture(const std::string& guid,
+                   ui32 textureId,
+                   ui32 witdh,
+                   ui32 height) : IResource(E_RESOURCE_CLASS_TEXTURE, guid),
+m_textureId(textureId)
+{
+    m_textureData = std::make_shared<CTextureData>(witdh, height, nullptr,
+                                                   0, 0, 0, false);
+}
+
 CTexture::~CTexture(void)
 {
-    glDeleteTextures(1, &m_handle);
+    glDeleteTextures(1, &m_textureId);
 }
 
-std::shared_ptr<CTextureHeader> CTexture::Get_Header(void) const
+void CTexture::onResourceDataSerialized(ISharedResourceDataRef resourceData,
+                                        E_RESOURCE_DATA_STATUS status)
 {
-    assert(m_header != nullptr);
-    return m_header;
+    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    {
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
+        assert(resourceData != nullptr);
+        
+        switch(resourceData->getResourceDataClass())
+        {
+            case E_RESOURCE_DATA_CLASS_TEXTURE_DATA:
+            {
+                m_textureData = std::static_pointer_cast<CTextureData>(resourceData);
+            }
+                break;
+            default:
+            {
+                assert(false);
+            }
+                break;
+        }
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
+        m_status |= E_RESOURCE_STATUS_LOADED;
+    }
 }
 
-ui32 CTexture::Get_Handle(void) const
+void CTexture::onResourceDataCommited(ISharedResourceDataRef resourceData,
+                                      E_RESOURCE_DATA_STATUS status)
 {
-    return m_handle;
+    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    {
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
+        assert(resourceData != nullptr);
+        
+        switch(resourceData->getResourceDataClass())
+        {
+            case E_RESOURCE_DATA_CLASS_TEXTURE_DATA:
+            {
+                CSharedTextureData textureData = std::static_pointer_cast<CTextureData>(resourceData);
+                m_textureId = textureData->getTextureId();
+                assert(m_textureId != 0);
+            }
+                break;
+            default:
+            {
+                assert(false);
+            }
+                break;
+        }
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
+        m_status |= E_RESOURCE_STATUS_COMMITED;
+    }
 }
 
-ui32 CTexture::Get_Width(void) const
+ui32 CTexture::getTextureId(void) const
 {
-    assert(m_header != nullptr);
-    return m_header->Get_Width();
+    return m_textureId;
 }
 
-ui32 CTexture::Get_Height(void) const
+ui32 CTexture::getTextureWidth(void) const
 {
-    assert(m_header != nullptr);
-    return m_header->Get_Height();
+    return IResource::IsLoaded() ? m_textureData->getWidth() : 0;
 }
 
-ui32 CTexture::Get_WrapMode(void) const
+ui32 CTexture::getTextureHeight(void) const
 {
-    return m_settedWrapMode;
+    return IResource::IsLoaded() ? m_textureData->getHeight() : 0;
 }
 
-void CTexture::Set_Header(const std::shared_ptr<CTextureHeader>& _header)
+void CTexture::setWrapMode(ui32 wrapMode)
 {
-    assert(_header != nullptr);
-    m_header = _header;
-    m_status |= E_RESOURCE_STATUS_LOADED;
+    m_presettedWrapMode = wrapMode;
 }
 
-void CTexture::Set_Handle(ui32 _handle)
-{
-    m_handle = _handle;
-    m_status |= E_RESOURCE_STATUS_COMMITED;
-}
-
-void CTexture::Set_WrapMode(ui32 _wrapMode)
-{
-    m_presettedWrapMode = _wrapMode;
-}
-
-void CTexture::Bind(void) const
+void CTexture::bind(void) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {
-        glBindTexture(GL_TEXTURE_2D, m_handle);
+        glBindTexture(GL_TEXTURE_2D, m_textureId);
         if(m_settedWrapMode == 0 || m_presettedWrapMode != m_settedWrapMode)
         {
             m_settedWrapMode = m_presettedWrapMode;
@@ -95,8 +195,7 @@ void CTexture::Bind(void) const
         }
     }
 }
-
-void CTexture::Unbind(void) const
+void CTexture::unbind(void) const
 {
     if(IResource::IsLoaded() && IResource::IsCommited())
     {

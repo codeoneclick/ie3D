@@ -18,18 +18,18 @@ m_frameHeight(_frameHeight),
 m_clearColor(_clearColor),
 m_numTriangles(0)
 {
-    ui32 textureColorHandle;
-    glGenTextures(1, &textureColorHandle);
-    glBindTexture(GL_TEXTURE_2D, textureColorHandle);
+    ui32 colorAttachmentId;
+    glGenTextures(1, &colorAttachmentId);
+    glBindTexture(GL_TEXTURE_2D, colorAttachmentId);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_frameWidth, m_frameHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     
-    ui32 textureDepthHandle;
-    glGenTextures(1, &textureDepthHandle);
-    glBindTexture(GL_TEXTURE_2D, textureDepthHandle);
+    ui32 depthAttachmentId;
+    glGenTextures(1, &depthAttachmentId);
+    glBindTexture(GL_TEXTURE_2D, depthAttachmentId);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -43,32 +43,26 @@ m_numTriangles(0)
     
     glGenFramebuffers(1, &m_frameBufferHandle);
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorHandle, 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, textureDepthHandle, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttachmentId, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthAttachmentId, 0);
     
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     
-    std::shared_ptr<CTextureHeader> m_operatingColorTextureHeader = std::make_shared<CTextureHeader>();
-    m_operatingColorTextureHeader->_Set_Width(m_frameWidth);
-    m_operatingColorTextureHeader->_Set_Height(m_frameHeight);
+    std::string operatingColorTextureGuid = m_mode;
+    operatingColorTextureGuid.append("color");
+    m_operatingColorTexture = std::make_shared<CTexture>(operatingColorTextureGuid,
+                                                         colorAttachmentId,
+                                                         m_frameWidth,
+                                                         m_frameHeight);
+    m_operatingColorTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     
-    std::string m_operatingColorTextureGuid = m_mode;
-    m_operatingColorTextureGuid.append("color");
-    m_operatingColorTexture = std::make_shared<CTexture>(m_operatingColorTextureGuid);
-    m_operatingColorTexture->Set_Header(m_operatingColorTextureHeader);
-    m_operatingColorTexture->Set_Handle(textureColorHandle);
-    m_operatingColorTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
-    
-    std::shared_ptr<CTextureHeader> m_operatingDepthTextureHeader = std::make_shared<CTextureHeader>();
-    m_operatingDepthTextureHeader->_Set_Width(m_frameWidth);
-    m_operatingDepthTextureHeader->_Set_Height(m_frameHeight);
-    
-    std::string m_operatingDepthTextureGuid = m_mode;
-    m_operatingDepthTextureGuid.append("depth");
-    m_operatingDepthTexture = std::make_shared<CTexture>(m_operatingDepthTextureGuid);
-    m_operatingDepthTexture->Set_Header(m_operatingDepthTextureHeader);
-    m_operatingDepthTexture->Set_Handle(textureDepthHandle);
-    m_operatingDepthTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
+    std::string operatingDepthTextureGuid = m_mode;
+    operatingDepthTextureGuid.append("depth");
+    m_operatingDepthTexture = std::make_shared<CTexture>(operatingDepthTextureGuid,
+                                                         depthAttachmentId,
+                                                         m_frameWidth,
+                                                         m_frameHeight);
+    m_operatingDepthTexture->setWrapMode(GL_CLAMP_TO_EDGE);
 }
 
 CRenderOperationWorldSpace::~CRenderOperationWorldSpace(void)
@@ -160,12 +154,4 @@ void CRenderOperationWorldSpace::Draw(void)
         }
     }
 }
-
-
-
-
-
-
-
-
 
