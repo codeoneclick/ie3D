@@ -164,17 +164,17 @@ void CTexture::onResourceDataCommited(ISharedResourceDataRef resourceData,
 
 ui32 CTexture::getWidth(void) const
 {
-    return IResource::IsLoaded() ? m_textureData->getWidth() : 0;
+    return IResource::isLoaded() ? m_textureData->getWidth() : 0;
 }
 
 ui32 CTexture::getHeight(void) const
 {
-    return IResource::IsLoaded() ? m_textureData->getHeight() : 0;
+    return IResource::isLoaded() ? m_textureData->getHeight() : 0;
 }
 
 const ui8* CTexture::getData(void) const
 {
-    return IResource::IsLoaded() ? m_textureData->getData() : nullptr;
+    return IResource::isLoaded() ? m_textureData->getData() : nullptr;
 }
 
 ui32 CTexture::getTextureId(void) const
@@ -184,22 +184,22 @@ ui32 CTexture::getTextureId(void) const
 
 GLenum CTexture::getFormat(void) const
 {
-    return IResource::IsLoaded() ? m_textureData->getFormat() : 0;
+    return IResource::isLoaded() ? m_textureData->getFormat() : 0;
 }
 
 ui32 CTexture::getBPP(void) const
 {
-    return IResource::IsLoaded() ? m_textureData->getBPP() : 0;
+    return IResource::isLoaded() ? m_textureData->getBPP() : 0;
 }
 
 ui32 CTexture::getNumMips(void) const
 {
-    return IResource::IsLoaded() ? m_textureData->getMips() : 0;
+    return IResource::isLoaded() ? m_textureData->getMips() : 0;
 }
 
 bool CTexture::isCompressed(void) const
 {
-    return IResource::IsLoaded() ? m_textureData->isCompressed() : false;
+    return IResource::isLoaded() ? m_textureData->isCompressed() : false;
 }
 
 void CTexture::setWrapMode(ui32 wrapMode)
@@ -209,7 +209,7 @@ void CTexture::setWrapMode(ui32 wrapMode)
 
 void CTexture::bind(void) const
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         glBindTexture(GL_TEXTURE_2D, m_textureId);
         if(m_settedWrapMode == 0 || m_presettedWrapMode != m_settedWrapMode)
@@ -222,7 +222,7 @@ void CTexture::bind(void) const
 }
 void CTexture::unbind(void) const
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         glBindTexture(GL_TEXTURE_2D, 0);
     }

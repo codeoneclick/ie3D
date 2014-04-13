@@ -10,11 +10,8 @@
 #define IResourceLoadingOperation_h
 
 #include "HCommon.h"
+#include "HDeclaration.h"
 #include "HEnums.h"
-
-class IResourceSerializer;
-class IResourceCommiter;
-class IResource;
 
 class IResourceLoadingOperation
 {
@@ -22,30 +19,26 @@ private:
     
 protected:
     
-    std::shared_ptr<IResourceSerializer> m_serializer;
-    std::shared_ptr<IResourceCommiter> m_commiter;
-    std::shared_ptr<IResource> m_resource;
+    ISharedResourceSerializer m_serializer;
+    ISharedResourceCommiter m_commiter;
+    ISharedResource m_resource;
     
     std::string m_guid;
     E_RESOURCE_LOADING_OPERATION_STATUS m_status;
     
+    void onResourceLoaded(void);
+    
 public:
     
-    IResourceLoadingOperation(const std::string& _guid, std::shared_ptr<IResource> _resource);
+    IResourceLoadingOperation(const std::string& guid,
+                              ISharedResourceRef resource);
     virtual ~IResourceLoadingOperation(void);
     
-    virtual void Serialize(void) = 0;
-    virtual void Commit(void) = 0;
+    virtual void serialize(void) = 0;
+    virtual void commit(void) = 0;
     
-    inline std::string Get_Guid(void)
-    {
-        return m_guid;
-    };
-    
-    inline E_RESOURCE_LOADING_OPERATION_STATUS Get_Status(void)
-    {
-        return m_status;
-    };
+    std::string getGuid(void) const;
+    E_RESOURCE_LOADING_OPERATION_STATUS getStatus(void) const;
 };
 
 #endif 

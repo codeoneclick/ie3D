@@ -109,4 +109,16 @@ class IResourceCommiter;
 typedef std::shared_ptr<IResourceCommiter> ISharedResourceCommiter;
 typedef const ISharedResourceCommiter& ISharedResourceCommiterRef;
 
+class IResourceSerializer;
+typedef std::shared_ptr<IResourceSerializer> ISharedResourceSerializer;
+typedef const ISharedResourceSerializer& ISharedResourceSerializerRef;
+
+class IResourceLoadingOperation;
+typedef std::shared_ptr<IResourceLoadingOperation> ISharedResourceLoadingOperation;
+typedef const ISharedResourceLoadingOperation& ISharedResourceLoadingOperationRef;
+
+class IResourceLoadingHandler;
+typedef std::shared_ptr<IResourceLoadingHandler> ISharedResourceLoadingHandler;
+typedef const ISharedResourceLoadingHandler& ISharedResourceLoadingHandlerRef;
+
 #endif

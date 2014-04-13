@@ -117,6 +117,11 @@ public:
     
     CShader(const std::string& guid);
     ~CShader(void);
+    
+    std::string getVSFilename(void) const;
+    std::string getFSFilename(void) const;
+    std::string getVSSourceCode(void) const;
+    std::string getFSSourceCode(void) const;
 
     const i32* getAttributesRef(void) const;
     

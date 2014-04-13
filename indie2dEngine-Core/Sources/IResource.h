@@ -13,6 +13,31 @@
 #include "HEnums.h"
 #include "HDeclaration.h"
 
+class IResourceLoadingHandler
+{
+public:
+    
+    typedef std::shared_ptr<std::function<void(ISharedResourceRef)>> RESOURCE_LOADING_HANDLER_FUNCTION;
+    
+private:
+    
+    friend class IResource;
+    
+protected:
+    
+    IResourceLoadingHandler(void);
+    std::array<std::set<RESOURCE_LOADING_HANDLER_FUNCTION>, E_RESOURCE_CLASS_MAX> m_resourceLoadingHandlers;
+    
+    virtual void onResourceLoaded(ISharedResourceRef resource, bool success);
+    
+public:
+    
+    virtual ~IResourceLoadingHandler(void);
+    
+    void registerResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler, E_RESOURCE_CLASS resourceClass);
+    void unregisterResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler, E_RESOURCE_CLASS resourceClass);
+};
+
 class IResourceData : public std::enable_shared_from_this<IResourceData>
 {
 private:
@@ -29,29 +54,23 @@ public:
     E_RESOURCE_DATA_CLASS getResourceDataClass(void) const;
 };
 
-class IResourceLoadingHandler;
 class IResource : public std::enable_shared_from_this<IResource>
 {
 private:
     
     friend class IResourceCommiter;
     friend class IResourceSerializer;
-    
-    friend class CTextureLoadingOperation;
-    friend class CShaderLoadingOperation;
-    friend class CMeshLoadingOperation;
-    friend class CSkeletonLoadingOperation;
-    friend class CSequenceLoadingOperation;
+    friend class IResourceLoadingOperation;
     
 protected:
     
     std::string m_guid;
-    E_RESOURCE_CLASS m_class;
+    E_RESOURCE_CLASS m_resourceClass;
     ui8 m_status;
     
-    std::set<std::shared_ptr<IResourceLoadingHandler> > m_handlers;
+    std::set<ISharedResourceLoadingHandler> m_handlers;
     
-    void _OnLoaded(void);
+    void onResourceLoaded(void);
     
     IResource(E_RESOURCE_CLASS resourceClass,
               const std::string& guid);
@@ -66,30 +85,14 @@ public:
     
     virtual ~IResource(void);
     
-    inline const std::string& Get_Guid(void) const
-    {
-        return m_guid;
-    };
+    const std::string& getGuid(void) const;
+    E_RESOURCE_CLASS getResourceClass(void) const;
     
-    inline E_RESOURCE_CLASS Get_Class(void) const
-    {
-        return m_class;
-    };
+    virtual bool isLoaded(void) const;
+    virtual bool isCommited(void) const;
     
-    inline virtual bool IsLoaded(void) const
-    {
-		const bool value = 0 != (m_status & E_RESOURCE_STATUS_LOADED);
-		return value;
-    };
-    
-    inline virtual bool IsCommited(void) const
-    {
-		const bool value = 0 != (m_status & E_RESOURCE_STATUS_COMMITED);
-		return value;
-    };
-    
-    void Register_LoadingHandler(const std::shared_ptr<IResourceLoadingHandler>& _handler);
-    void Unregister_LoadingHandler(const std::shared_ptr<IResourceLoadingHandler>& _handler);
+    void registerLoadingHandler(ISharedResourceLoadingHandlerRef handler);
+    void unregisterLoadingHandler(ISharedResourceLoadingHandlerRef handler);
 };
 
 #endif 

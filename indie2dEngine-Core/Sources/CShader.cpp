@@ -361,6 +361,26 @@ void CShader::setupUniforms(void)
     }
 }
 
+std::string CShader::getVSFilename(void) const
+{
+    return IResource::isLoaded() ? m_shaderData->getVSFilename() : "";
+}
+
+std::string CShader::getFSFilename(void) const
+{
+    return IResource::isLoaded() ? m_shaderData->getFSFilename() : "";
+}
+
+std::string CShader::getVSSourceCode(void) const
+{
+    return IResource::isLoaded() ? m_shaderData->getVSSourceCode() : "";
+}
+
+std::string CShader::getFSSourceCode(void) const
+{
+    return IResource::isLoaded() ? m_shaderData->getFSSourceCode() : "";
+}
+
 const i32* CShader::getAttributesRef(void) const
 {
     return m_attributes;
@@ -368,7 +388,7 @@ const i32* CShader::getAttributesRef(void) const
 
 void CShader::setMatrix3x3(const glm::mat3x3 &matrix, E_SHADER_UNIFORM uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         if(m_values[uniform] != nullptr && m_values[uniform]->getMatrix3x3() == matrix)
         {
@@ -387,7 +407,7 @@ void CShader::setMatrix3x3(const glm::mat3x3 &matrix, E_SHADER_UNIFORM uniform)
 
 void CShader::setMatrix3x3Custom(const glm::mat3x3 &matrix, const std::string &uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
         glUniformMatrix3fv(handle, 1, 0, &matrix[0][0]);
@@ -396,7 +416,7 @@ void CShader::setMatrix3x3Custom(const glm::mat3x3 &matrix, const std::string &u
 
 void CShader::setMatrix4x4(const glm::mat4x4 &matrix, E_SHADER_UNIFORM uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         if(m_values[uniform] != nullptr && m_values[uniform]->getMatrix4x4() == matrix)
         {
@@ -415,7 +435,7 @@ void CShader::setMatrix4x4(const glm::mat4x4 &matrix, E_SHADER_UNIFORM uniform)
 
 void CShader::setMatrix4x4Custom(const glm::mat4x4 &matrix, const std::string &uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
         glUniformMatrix4fv(handle, 1, 0, &matrix[0][0]);
@@ -424,7 +444,7 @@ void CShader::setMatrix4x4Custom(const glm::mat4x4 &matrix, const std::string &u
 
 void CShader::setMatrixArray4x4(const glm::mat4x4* matrix, ui32 size, E_SHADER_UNIFORM uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = m_uniforms[uniform];
         glUniformMatrix4fv(handle, size, 0, &matrix[0][0][0]);
@@ -433,7 +453,7 @@ void CShader::setMatrixArray4x4(const glm::mat4x4* matrix, ui32 size, E_SHADER_U
 
 void CShader::setMatrixArray4x4Custom(const glm::mat4x4* matrix, ui32 size, const std::string& uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
         glUniformMatrix4fv(handle, size, 0, &matrix[0][0][0]);
@@ -442,7 +462,7 @@ void CShader::setMatrixArray4x4Custom(const glm::mat4x4* matrix, ui32 size, cons
 
 void CShader::setVector2(const glm::vec2 &vector, E_SHADER_UNIFORM uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         if(m_values[uniform] != nullptr && m_values[uniform]->getVector2() == vector)
         {
@@ -461,7 +481,7 @@ void CShader::setVector2(const glm::vec2 &vector, E_SHADER_UNIFORM uniform)
 
 void CShader::setVector2Custom(const glm::vec2 &vector, const std::string &uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
         glUniform2fv(handle, 1, &vector[0]);
@@ -470,7 +490,7 @@ void CShader::setVector2Custom(const glm::vec2 &vector, const std::string &unifo
 
 void CShader::setVector3(const glm::vec3 &vector, E_SHADER_UNIFORM uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         if(m_values[uniform] != nullptr && m_values[uniform]->getVector3() == vector)
         {
@@ -489,7 +509,7 @@ void CShader::setVector3(const glm::vec3 &vector, E_SHADER_UNIFORM uniform)
 
 void CShader::setVector3Custom(const glm::vec3 &vector, const std::string &uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
         glUniform3fv(handle, 1, &vector[0]);
@@ -498,7 +518,7 @@ void CShader::setVector3Custom(const glm::vec3 &vector, const std::string &unifo
 
 void CShader::setVector4(const glm::vec4 &vector, E_SHADER_UNIFORM uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         if(m_values[uniform] != nullptr && m_values[uniform]->getVector4() == vector)
         {
@@ -517,7 +537,7 @@ void CShader::setVector4(const glm::vec4 &vector, E_SHADER_UNIFORM uniform)
 
 void CShader::setVector4Custom(const glm::vec4 &vector, const std::string &uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
         glUniform4fv(handle, 1, &vector[0]);
@@ -526,7 +546,7 @@ void CShader::setVector4Custom(const glm::vec4 &vector, const std::string &unifo
 
 void CShader::setFloat(f32 value, E_SHADER_UNIFORM uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         if(m_values[uniform] != nullptr && m_values[uniform]->getFloat() == value)
         {
@@ -545,7 +565,7 @@ void CShader::setFloat(f32 value, E_SHADER_UNIFORM uniform)
 
 void CShader::setFloatCustom(f32 value, const std::string &uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
         glUniform1f(handle, value);
@@ -554,7 +574,7 @@ void CShader::setFloatCustom(f32 value, const std::string &uniform)
 
 void CShader::setInt(i32 value, E_SHADER_UNIFORM uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         if(m_values[uniform] != nullptr && m_values[uniform]->getInt() == value)
         {
@@ -573,7 +593,7 @@ void CShader::setInt(i32 value, E_SHADER_UNIFORM uniform)
 
 void CShader::setIntCustom(i32 value, const std::string &uniform)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
         glUniform1i(handle, value);
@@ -582,7 +602,7 @@ void CShader::setIntCustom(i32 value, const std::string &uniform)
 
 void CShader::setTexture(std::shared_ptr<CTexture> texture, E_SHADER_SAMPLER sampler)
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         assert(sampler < E_SHADER_SAMPLER_MAX);
         glActiveTexture(GL_TEXTURE0 + sampler);
@@ -593,7 +613,7 @@ void CShader::setTexture(std::shared_ptr<CTexture> texture, E_SHADER_SAMPLER sam
 
 void CShader::bind(void) const
 {
-    if(IResource::IsLoaded() && IResource::IsCommited() && g_shaderId != m_shaderId)
+    if(IResource::isLoaded() && IResource::isCommited() && g_shaderId != m_shaderId)
     {
         g_shaderId = m_shaderId;
         glUseProgram(m_shaderId);

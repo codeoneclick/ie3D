@@ -7,10 +7,12 @@
 //
 
 #include "IResourceLoadingOperation.h"
+#include "IResource.h"
 
-IResourceLoadingOperation::IResourceLoadingOperation(const std::string& _guid, std::shared_ptr<IResource> _resource) :
-m_guid(_guid),
-m_resource(_resource),
+IResourceLoadingOperation::IResourceLoadingOperation(const std::string& guid,
+                                                     ISharedResourceRef resource) :
+m_guid(guid),
+m_resource(resource),
 m_status(E_RESOURCE_LOADING_OPERATION_STATUS_UNKNOWN),
 m_serializer(nullptr),
 m_commiter(nullptr)
@@ -23,3 +25,17 @@ IResourceLoadingOperation::~IResourceLoadingOperation(void)
     
 }
 
+std::string IResourceLoadingOperation::getGuid(void) const
+{
+    return m_guid;
+}
+
+E_RESOURCE_LOADING_OPERATION_STATUS IResourceLoadingOperation::getStatus(void) const
+{
+    return m_status;
+}
+
+void IResourceLoadingOperation::onResourceLoaded(void)
+{
+    m_resource->onResourceLoaded();
+}

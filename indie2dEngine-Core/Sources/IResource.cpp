@@ -7,7 +7,42 @@
 //
 
 #include "IResource.h"
-#include "IResourceLoadingHandler.h"
+
+IResourceLoadingHandler::IResourceLoadingHandler(void)
+{
+    
+}
+
+void IResourceLoadingHandler::onResourceLoaded(ISharedResourceRef resource, bool success)
+{
+    if(success)
+    {
+        const auto& iterator = m_resourceLoadingHandlers.at(resource->getResourceClass());
+        std::for_each(iterator.begin(), iterator.end(), [resource](RESOURCE_LOADING_HANDLER_FUNCTION& function){
+            (*function)(resource);
+        });
+    }
+}
+
+
+IResourceLoadingHandler::~IResourceLoadingHandler(void)
+{
+    std::for_each(m_resourceLoadingHandlers.begin(), m_resourceLoadingHandlers.end(),
+                  [](std::set<RESOURCE_LOADING_HANDLER_FUNCTION>& iterator){
+        iterator.clear();
+    });
+}
+
+void IResourceLoadingHandler::registerResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler,
+                                                             E_RESOURCE_CLASS resourceClass)
+{
+    m_resourceLoadingHandlers.at(resourceClass).insert(handler);
+}
+void IResourceLoadingHandler::unregisterResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler,
+                                                               E_RESOURCE_CLASS resourceClass)
+{
+    m_resourceLoadingHandlers.at(resourceClass).erase(handler);
+}
 
 
 IResourceData::IResourceData(E_RESOURCE_DATA_CLASS resourceDataClass) :
@@ -26,9 +61,9 @@ E_RESOURCE_DATA_CLASS IResourceData::getResourceDataClass(void) const
     return m_resourceDataClass;
 }
 
-IResource::IResource(E_RESOURCE_CLASS _class, const std::string& _guid) :
-m_class(_class),
-m_guid(_guid),
+IResource::IResource(E_RESOURCE_CLASS resourceClass, const std::string& guid) :
+m_resourceClass(resourceClass),
+m_guid(guid),
 m_status(E_RESOURCE_STATUS_UNLOADED)
 {
 
@@ -39,29 +74,39 @@ IResource::~IResource(void)
     m_handlers.clear();
 }
 
-void IResource::Register_LoadingHandler(const std::shared_ptr<IResourceLoadingHandler>& _handler)
+bool IResource::isLoaded(void) const
 {
-    assert(_handler != nullptr);
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    const bool value = 0 != (m_status & E_RESOURCE_STATUS_LOADED);
+    return value;
+};
+
+bool IResource::isCommited(void) const
+{
+    const bool value = 0 != (m_status & E_RESOURCE_STATUS_COMMITED);
+    return value;
+};
+
+void IResource::registerLoadingHandler(ISharedResourceLoadingHandlerRef handler)
+{
+    assert(handler != nullptr);
+    if(IResource::isLoaded() && IResource::isCommited())
     {
-        _handler->_Get_Commands()._ExecuteLoadedResourceCommand(shared_from_this(), true);
-    }
-    else
-    {
-        m_handlers.insert(_handler);
+        handler->onResourceLoaded(shared_from_this(), true);
+    } else {
+        m_handlers.insert(handler);
     }
 }
 
-void IResource::Unregister_LoadingHandler(const std::shared_ptr<IResourceLoadingHandler> &_handler)
+void IResource::unregisterLoadingHandler(ISharedResourceLoadingHandlerRef handler)
 {
-    assert(_handler != nullptr);
-    m_handlers.erase(_handler);
+    assert(handler != nullptr);
+    m_handlers.erase(handler);
 }
 
-void IResource::_OnLoaded(void)
+void IResource::onResourceLoaded(void)
 {
     for(const auto& handler : m_handlers)
     {
-        handler->_Get_Commands()._ExecuteLoadedResourceCommand(shared_from_this(), true);
+        handler->onResourceLoaded(shared_from_this(), true);
     }
 }

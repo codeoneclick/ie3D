@@ -284,79 +284,79 @@ void CMesh::onResourceDataCommited(ISharedResourceDataRef resourceData,
 
 CSharedVertexBuffer CMesh::getVertexBuffer(void) const
 {
-    return IResource::IsCommited() ? m_vertexBuffer : nullptr;
+    return IResource::isCommited() ? m_vertexBuffer : nullptr;
 }
 
 CSharedIndexBuffer CMesh::getIndexBuffer(void) const
 {
-    return IResource::IsCommited() ? m_indexBuffer : nullptr;
+    return IResource::isCommited() ? m_indexBuffer : nullptr;
 }
 
 const std::vector<SVertexData>& CMesh::getVertexData(void) const
 {
     static std::vector<SVertexData> stub;
-    return IResource::IsLoaded() ? m_meshData->getVertexData() : stub;
+    return IResource::isLoaded() ? m_meshData->getVertexData() : stub;
 }
 
 const std::vector<ui16>& CMesh::getIndexData(void) const
 {
     static std::vector<ui16> stub;
-    return IResource::IsLoaded() ? m_meshData->getIndexData() : stub;
+    return IResource::isLoaded() ? m_meshData->getIndexData() : stub;
 }
 
 const ui32 CMesh::getNumVertices(void) const
 {
-    return IResource::IsLoaded() ? m_meshData->getNumVertices() : 0;
+    return IResource::isLoaded() ? m_meshData->getNumVertices() : 0;
 }
 
 const ui32 CMesh::getNumIndices(void) const
 {
-    return IResource::IsLoaded() ? m_meshData->getNumIndices() : 0;
+    return IResource::isLoaded() ? m_meshData->getNumIndices() : 0;
 }
 
 const glm::vec3 CMesh::getMaxBound(void) const
 {
-    return IResource::IsLoaded() ? m_meshData->getMaxBound() : glm::vec3(0.0, 0.0, 0.0);
+    return IResource::isLoaded() ? m_meshData->getMaxBound() : glm::vec3(0.0, 0.0, 0.0);
 }
 
 const glm::vec3 CMesh::getMinBound(void) const
 {
-    return IResource::IsLoaded() ? m_meshData->getMaxBound() : glm::vec3(0.0, 0.0, 0.0);
+    return IResource::isLoaded() ? m_meshData->getMaxBound() : glm::vec3(0.0, 0.0, 0.0);
 }
 
 const ui32 CMesh::getNumFrames(void) const
 {
-    return IResource::IsLoaded() && m_sequenceData != nullptr ? m_sequenceData->getNumFrames() : 0;
+    return IResource::isLoaded() && m_sequenceData != nullptr ? m_sequenceData->getNumFrames() : 0;
 }
 
 const ui32 CMesh::getAnimationFPS(void) const
 {
-    return IResource::IsLoaded() && m_sequenceData != nullptr ? m_sequenceData->getAnimationFPS() : 0;
+    return IResource::isLoaded() && m_sequenceData != nullptr ? m_sequenceData->getAnimationFPS() : 0;
 }
 
 const std::string CMesh::getAnimationName(void) const
 {
-    return IResource::IsLoaded() && m_sequenceData != nullptr ? m_sequenceData->getAnimationName() : 0;
+    return IResource::isLoaded() && m_sequenceData != nullptr ? m_sequenceData->getAnimationName() : 0;
 }
 
 CSharedFrameData CMesh::getFrame(ui32 index) const
 {
-    return IResource::IsLoaded() && m_sequenceData != nullptr ? m_sequenceData->getFrame(index) : nullptr;
+    return IResource::isLoaded() && m_sequenceData != nullptr ? m_sequenceData->getFrame(index) : nullptr;
 }
 
 CSharedBone CMesh::getBone(ui32 index) const
 {
-    return IResource::IsLoaded() && m_skeletonData != nullptr ? m_skeletonData->getBone(index) : nullptr;
+    return IResource::isLoaded() && m_skeletonData != nullptr ? m_skeletonData->getBone(index) : nullptr;
 }
 
 ui32 CMesh::getNumBones(void) const
 {
-    return IResource::IsLoaded() && m_skeletonData != nullptr ? m_skeletonData->getNumBones() : 0;
+    return IResource::isLoaded() && m_skeletonData != nullptr ? m_skeletonData->getNumBones() : 0;
 }
 
 void CMesh::bind(const i32* attributes) const
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
@@ -367,7 +367,7 @@ void CMesh::bind(const i32* attributes) const
 
 void CMesh::draw(void) const
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
@@ -377,7 +377,7 @@ void CMesh::draw(void) const
 
 void CMesh::draw(ui32 indices) const
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
@@ -387,7 +387,7 @@ void CMesh::draw(ui32 indices) const
 
 void CMesh::unbind(const i32* attributes) const
 {
-    if(IResource::IsLoaded() && IResource::IsCommited())
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
