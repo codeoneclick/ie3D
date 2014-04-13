@@ -21,20 +21,20 @@ protected:
     std::string m_fsSourceCode;
     std::string m_message;
     
-    ui32 _Compile(const std::string& _sourceCode, GLenum _shader);
-    ui32 _Link(ui32 _vsHandle, ui32 _fsHandle);
+    ui32 compile(const std::string& sourceCode, GLenum shaderType);
+    ui32 link(ui32 vsHandle, ui32 fsHandle);
     
 public:
     
-    CShaderCommiter_GLSL(const std::string& _guid, const std::string& _vsSourceCode, const std::string& _fsSourceCode, std::shared_ptr<IResource> _resource);
+    CShaderCommiter_GLSL(const std::string& guid,
+                         const std::string& vsSourceCode,
+                         const std::string& fsSourceCode,
+                         ISharedResourceRef resource);
     ~CShaderCommiter_GLSL(void);
     
-    void Commit(void);
+    std::string getStatusMessage(void);
     
-    inline std::string Get_StatusMessage(void)
-    {
-        return m_message;
-    };
+    void commit(void);
 };
 
 #endif 

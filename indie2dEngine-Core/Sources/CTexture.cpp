@@ -162,19 +162,44 @@ void CTexture::onResourceDataCommited(ISharedResourceDataRef resourceData,
     }
 }
 
+ui32 CTexture::getWidth(void) const
+{
+    return IResource::IsLoaded() ? m_textureData->getWidth() : 0;
+}
+
+ui32 CTexture::getHeight(void) const
+{
+    return IResource::IsLoaded() ? m_textureData->getHeight() : 0;
+}
+
+const ui8* CTexture::getData(void) const
+{
+    return IResource::IsLoaded() ? m_textureData->getData() : nullptr;
+}
+
 ui32 CTexture::getTextureId(void) const
 {
     return m_textureId;
 }
 
-ui32 CTexture::getTextureWidth(void) const
+GLenum CTexture::getFormat(void) const
 {
-    return IResource::IsLoaded() ? m_textureData->getWidth() : 0;
+    return IResource::IsLoaded() ? m_textureData->getFormat() : 0;
 }
 
-ui32 CTexture::getTextureHeight(void) const
+ui32 CTexture::getBPP(void) const
 {
-    return IResource::IsLoaded() ? m_textureData->getHeight() : 0;
+    return IResource::IsLoaded() ? m_textureData->getBPP() : 0;
+}
+
+ui32 CTexture::getNumMips(void) const
+{
+    return IResource::IsLoaded() ? m_textureData->getMips() : 0;
+}
+
+bool CTexture::isCompressed(void) const
+{
+    return IResource::IsLoaded() ? m_textureData->isCompressed() : false;
 }
 
 void CTexture::setWrapMode(ui32 wrapMode)

@@ -21,10 +21,11 @@ protected:
     
 public:
     
-    CTextureSerializer_PVR(const std::string& _filename, std::shared_ptr<IResource> _resource);
+    CTextureSerializer_PVR(const std::string& filename,
+                           ISharedResourceRef resource);
     ~CTextureSerializer_PVR(void);
     
-    void Serialize(void);
+    void serialize(void);
 };
 
 #endif

@@ -18,14 +18,12 @@ private:
     
 protected:
     
-    std::shared_ptr<CMeshHeader> m_header;
-    
 public:
     
-    CMeshCommiter_MDL(const std::string& _guid, std::shared_ptr<CMeshHeader> _header,  std::shared_ptr<IResource> _resource);
+    CMeshCommiter_MDL(const std::string& guid, ISharedResourceRef resource);
     ~CMeshCommiter_MDL(void);
     
-    void Commit(void);
+    void commit(void);
 };
 
 

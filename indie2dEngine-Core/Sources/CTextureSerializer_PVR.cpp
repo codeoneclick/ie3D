@@ -10,9 +10,10 @@
 #include "CTexture.h"
 #include "PVRTTexture.h"
 
-CTextureSerializer_PVR::CTextureSerializer_PVR(const std::string& _filename, std::shared_ptr<IResource> _resource) :
-IResourceSerializer(_filename, _resource),
-m_filename(_filename)
+CTextureSerializer_PVR::CTextureSerializer_PVR(const std::string& filename,
+                                               ISharedResourceRef resource) :
+IResourceSerializer(filename, resource),
+m_filename(filename)
 {
     
 }
@@ -22,12 +23,12 @@ CTextureSerializer_PVR::~CTextureSerializer_PVR(void)
     
 }
 
-void CTextureSerializer_PVR::Serialize(void)
+void CTextureSerializer_PVR::serialize(void)
 {
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::istream* filestream = IResourceSerializer::_LoadData(m_filename);
+    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename);
     
 #if defined(__NDK__)
     i64 size = static_cast<std::memstream*>(filestream)->size();
@@ -39,10 +40,10 @@ void CTextureSerializer_PVR::Serialize(void)
     
 	ui8* sourcedata = new ui8[size];
 	filestream->read((char*)sourcedata, static_cast<i32>(size));
-    IResourceSerializer::_FreeData(filestream);
+    IResourceSerializer::closeStream(filestream);
     
-    std::shared_ptr<CTexture> texture = std::static_pointer_cast<CTexture >(m_resource);
-    std::shared_ptr<CTextureHeader> textureheader = std::make_shared<CTextureHeader>();
+    std::shared_ptr<CTexture> texture = std::static_pointer_cast<CTexture>(m_resource);
+    ui32 bpp; GLenum format; bool isCompressed;
     
 	if(*(PVRTuint32*)sourcedata != PVRTEX3_IDENT)
 	{
@@ -53,36 +54,36 @@ void CTextureSerializer_PVR::Serialize(void)
             case OGL_PVRTC2:
                 if(header->dwAlphaBitMask)
                 {
-                    textureheader->_Set_Bpp(2);
-                    textureheader->_Set_Format(GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG);
-                    textureheader->_Set_IsCompressed(true);
+                    bpp = 2;
+                    format = GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+                    isCompressed = true;
                 }
                 else
                 {
-                    textureheader->_Set_Bpp(2);
-                    textureheader->_Set_Format(GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG);
-                    textureheader->_Set_IsCompressed(true);
+                    bpp = 2;
+                    format = GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
+                    isCompressed = true;
                 }
                 break;
             case OGL_PVRTC4:
                 if(header->dwAlphaBitMask)
                 {
-                    textureheader->_Set_Bpp(4);
-                    textureheader->_Set_Format(GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG);
-                    textureheader->_Set_IsCompressed(true);
+                    bpp = 4;
+                    format = GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+                    isCompressed = true;
                 }
                 else
                 {
-                    textureheader->_Set_Bpp(4);
-                    textureheader->_Set_Format(GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG);
-                    textureheader->_Set_IsCompressed(true);
+                    bpp = 4;
+                    format = GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
+                    isCompressed = true;
                 }
                 break;
 			case OGL_RGBA_8888:
                 {
-                    textureheader->_Set_Bpp(32);
-                    textureheader->_Set_Format(GL_RGBA);
-                    textureheader->_Set_IsCompressed(false);
+                    bpp = 32;
+                    format = GL_RGBA;
+                    isCompressed = false;
                 }
 				break;
             default:
@@ -94,13 +95,15 @@ void CTextureSerializer_PVR::Serialize(void)
         
         ui8* texturedata = new ui8[size - header->dwHeaderSize];
         memcpy(texturedata, sourcedata + header->dwHeaderSize, static_cast<ui32>(size) - header->dwHeaderSize);
+        std::shared_ptr<CTextureData> textureData = std::make_shared<CTextureData>(header->dwWidth,
+                                                                                   header->dwHeight,
+                                                                                   texturedata,
+                                                                                   format,
+                                                                                   bpp,
+                                                                                   header->dwMipMapCount,
+                                                                                   isCompressed);
         
-        textureheader->_Set_Width(header->dwWidth);
-        textureheader->_Set_Height(header->dwHeight);
-        textureheader->_Set_Data(texturedata);
-        textureheader->_Set_NumMips(header->dwMipMapCount);
-        texture->Set_Header(textureheader);
-        
+        IResourceSerializer::onResourceDataSerialized(textureData);
         m_status = E_SERIALIZER_STATUS_SUCCESS;
     }
     else
@@ -114,30 +117,30 @@ void CTextureSerializer_PVR::Serialize(void)
 			{
                 case 0:
 				{
-                    textureheader->_Set_Bpp(2);
-                    textureheader->_Set_Format(GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG);
-                    textureheader->_Set_IsCompressed(true);
+                    bpp = 2;
+                    format = GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
+                    isCompressed = true;
 				}
                     break;
                 case 1:
 				{
-                    textureheader->_Set_Bpp(2);
-                    textureheader->_Set_Format(GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG);
-                    textureheader->_Set_IsCompressed(true);
+                    bpp = 2;
+                    format = GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+                    isCompressed = true;
 				}
                     break;
                 case 2:
 				{
-                    textureheader->_Set_Bpp(4);
-                    textureheader->_Set_Format(GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG);
-                    textureheader->_Set_IsCompressed(true);
+                    bpp = 4;
+                    format = GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
+                    isCompressed = true;
 				}
                     break;
                 case 3:
 				{
-                    textureheader->_Set_Bpp(4);
-                    textureheader->_Set_Format(GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG);
-                    textureheader->_Set_IsCompressed(true);
+                    bpp = 4;
+                    format = GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+                    isCompressed = true;
 				}
                     break;
                 default:
@@ -152,9 +155,9 @@ void CTextureSerializer_PVR::Serialize(void)
 			EPVRTVariableType channelType = (EPVRTVariableType)header->u32ChannelType;
 			if(channelType == ePVRTVarTypeUnsignedByteNorm)
 			{
-                textureheader->_Set_Bpp(32);
-                textureheader->_Set_Format(GL_RGBA);
-                textureheader->_Set_IsCompressed(false);
+                bpp = 32;
+                format = GL_RGBA;
+                isCompressed = false;
 			}
 			else
 			{
@@ -165,12 +168,15 @@ void CTextureSerializer_PVR::Serialize(void)
         ui8* texturedata = new ui8[size - (PVRTEX3_HEADERSIZE + header->u32MetaDataSize)];
         memcpy(texturedata, sourcedata + (PVRTEX3_HEADERSIZE + header->u32MetaDataSize), static_cast<ui32>(size) - (PVRTEX3_HEADERSIZE + header->u32MetaDataSize));
         
-        textureheader->_Set_Width(header->u32Width);
-        textureheader->_Set_Height(header->u32Height);
-        textureheader->_Set_Data(texturedata);
-        textureheader->_Set_NumMips(header->u32MIPMapCount);
-        texture->Set_Header(textureheader);
+        std::shared_ptr<CTextureData> textureData = std::make_shared<CTextureData>(header->u32Width,
+                                                                                   header->u32Height,
+                                                                                   texturedata,
+                                                                                   format,
+                                                                                   bpp,
+                                                                                   header->u32MIPMapCount,
+                                                                                   isCompressed);
         
+        IResourceSerializer::onResourceDataSerialized(textureData);
         m_status = E_SERIALIZER_STATUS_SUCCESS;
     }
     delete[] sourcedata;

@@ -52,20 +52,20 @@ bool IGameObject::_IsBoundBoxInFrustum(void)
     assert(m_camera != nullptr);
     assert(m_camera->Get_Frustum() != nullptr);
     assert(m_mesh != nullptr);
-    i32 result =  m_camera->Get_Frustum()->IsBoundBoxInFrustum(m_mesh->Get_MaxBound() + m_position, m_mesh->Get_MinBound() + m_position);
+    i32 result =  m_camera->Get_Frustum()->IsBoundBoxInFrustum(m_mesh->getMaxBound() + m_position, m_mesh->getMinBound() + m_position);
     return result == E_FRUSTUM_BOUND_RESULT_OUTSIDE ? false : true;
 }
 
 glm::vec3 IGameObject::Get_MaxBound(void)
 {
     assert(m_mesh != nullptr);
-    return m_mesh->Get_MaxBound() * m_scale;
+    return m_mesh->getMaxBound() * m_scale;
 }
 
 glm::vec3 IGameObject::Get_MinBound(void)
 {
     assert(m_mesh != nullptr);
-    return m_mesh->Get_MinBound() * m_scale;
+    return m_mesh->getMinBound() * m_scale;
 }
 
 void IGameObject::Set_Camera(std::shared_ptr<CCamera> _camera)
@@ -90,15 +90,15 @@ void IGameObject::Set_ClippingPlane(const glm::vec4 &_clippingPlane, const std::
 std::shared_ptr<CVertexBuffer> IGameObject::Get_HardwareVertexBuffer(void)
 {
     assert(m_mesh != nullptr);
-    assert(m_mesh->Get_VertexBuffer() != nullptr);
-    return m_mesh->Get_VertexBuffer();
+    assert(m_mesh->getVertexBuffer() != nullptr);
+    return m_mesh->getVertexBuffer();
 }
 
 std::shared_ptr<CIndexBuffer> IGameObject::Get_HardwareIndexBuffer(void)
 {
     assert(m_mesh != nullptr);
-    assert(m_mesh->Get_IndexBuffer() != nullptr);
-    return m_mesh->Get_IndexBuffer();
+    assert(m_mesh->getIndexBuffer() != nullptr);
+    return m_mesh->getIndexBuffer();
 }
 
 std::shared_ptr<CVertexBuffer> IGameObject::Get_BoundVertexBuffer(void)
@@ -117,7 +117,7 @@ std::shared_ptr<CIndexBuffer> IGameObject::Get_BoundIndexBuffer(void)
 
 ui32 IGameObject::Get_NumTriangles(void)
 {
-    return m_mesh != nullptr && m_mesh->Get_IndexBuffer() != nullptr ? m_mesh->Get_NumIndexes() / 3 : 0;
+    return m_mesh != nullptr && m_mesh->getIndexBuffer() != nullptr ? m_mesh->getNumIndices() / 3 : 0;
 }
 
 void IGameObject::ListenRenderMgr(bool _value)
@@ -258,14 +258,14 @@ void IGameObject::_OnBind(const std::string &_mode)
     {
         assert(m_mesh != nullptr);
         iterator->second->Bind();
-        m_mesh->Bind(iterator->second->Get_Shader()->Get_Attributes());
+        m_mesh->bind(iterator->second->Get_Shader()->getAttributesRef());
     }
 }
 
 void IGameObject::_OnDraw(const std::string &_mode)
 {
     assert(m_mesh != nullptr);
-    m_mesh->Draw();
+    m_mesh->draw();
 }
 
 void IGameObject::_OnUnbind(const std::string &_mode)
@@ -277,7 +277,7 @@ void IGameObject::_OnUnbind(const std::string &_mode)
     {
         assert(m_mesh != nullptr);
         iterator->second->Unbind();
-        m_mesh->Unbind(iterator->second->Get_Shader()->Get_Attributes());
+        m_mesh->unbind(iterator->second->Get_Shader()->getAttributesRef());
     }
 }
 

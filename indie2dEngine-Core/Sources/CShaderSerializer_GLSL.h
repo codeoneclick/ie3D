@@ -22,10 +22,12 @@ protected:
     
 public:
     
-    CShaderSerializer_GLSL(const std::string& _vsFilename, const std::string& _fsFilename, std::shared_ptr<IResource> _resource);
+    CShaderSerializer_GLSL(const std::string& vsFilename,
+                           const std::string& fsFilename,
+                           ISharedResourceRef resource);
     ~CShaderSerializer_GLSL(void);
 
-    void Serialize(void);
+    void serialize(void);
 };
 
 #endif 

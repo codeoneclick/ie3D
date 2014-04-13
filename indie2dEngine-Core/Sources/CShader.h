@@ -100,11 +100,10 @@ protected:
     i32 m_samplers[E_SHADER_SAMPLER_MAX];
     i32 m_attributes[E_SHADER_ATTRIBUTE_MAX];
     
+    CSharedShaderData m_shaderData;
     ui32 m_shaderId;
     
     std::array<CSharedShaderUniform, E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX> m_values;
-    
-    CSharedShaderData m_shaderData;
     
     void onResourceDataSerialized(ISharedResourceDataRef resourceData,
                                   E_RESOURCE_DATA_STATUS status);

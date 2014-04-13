@@ -82,10 +82,17 @@ public:
     
     ~CTexture(void);
     
+    ui32 getWidth(void) const;
+    ui32 getHeight(void) const;
+    
+    const ui8* getData(void) const;
     ui32 getTextureId(void) const;
     
-    ui32 getTextureWidth(void) const;
-    ui32 getTextureHeight(void) const;
+    GLenum getFormat(void) const;
+    ui32 getBPP(void) const;
+    ui32 getNumMips(void) const;
+    
+    bool isCompressed(void) const;
     
     void setWrapMode(ui32 wrapMode);
     

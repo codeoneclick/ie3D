@@ -10,10 +10,12 @@
 #include "CShader.h"
 #include "CResourceAccessor.h"
 
-CShaderSerializer_GLSL::CShaderSerializer_GLSL(const std::string& _vsFilename, const std::string& _fsFilename, std::shared_ptr<IResource> _resource) :
-IResourceSerializer(std::string().append(_vsFilename).append(_fsFilename), _resource),
-m_vsFilename(_vsFilename),
-m_fsFilename(_fsFilename)
+CShaderSerializer_GLSL::CShaderSerializer_GLSL(const std::string& vsFilename,
+                                               const std::string& fsFilename,
+                                               ISharedResourceRef resource) :
+IResourceSerializer(std::string().append(vsFilename).append(fsFilename), resource),
+m_vsFilename(vsFilename),
+m_fsFilename(fsFilename)
 {
     
 }
@@ -23,28 +25,28 @@ CShaderSerializer_GLSL::~CShaderSerializer_GLSL(void)
     
 }
 
-void CShaderSerializer_GLSL::Serialize(void)
+void CShaderSerializer_GLSL::serialize(void)
 {
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::istream* filestream = IResourceSerializer::_LoadData(m_vsFilename);
+    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_vsFilename);
     std::stringstream vsStringstream;
     vsStringstream<<filestream->rdbuf();
     std::string vsSourceCode(vsStringstream.str());
-    IResourceSerializer::_FreeData(filestream);
+    IResourceSerializer::closeStream(filestream);
     
-    filestream = IResourceSerializer::_LoadData(m_fsFilename);
+    filestream = IResourceSerializer::openStream(m_fsFilename);
     std::stringstream fsStringstream;
     fsStringstream<<filestream->rdbuf();
     std::string fsSourceCode(fsStringstream.str());
-    IResourceSerializer::_FreeData(filestream);
+    IResourceSerializer::closeStream(filestream);
     
     assert(m_resource != nullptr);
-    std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
-    shader->Set_SourceCode(m_vsFilename,
-                           vsSourceCode,
-                           m_fsFilename,
-                           fsSourceCode);
+    std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader>(m_resource);
+    std::shared_ptr<CShaderData> sharedData = std::make_shared<CShaderData>(m_vsFilename,
+                                                                            m_fsFilename,
+                                                                            vsSourceCode,
+                                                                            fsSourceCode);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
 }
 

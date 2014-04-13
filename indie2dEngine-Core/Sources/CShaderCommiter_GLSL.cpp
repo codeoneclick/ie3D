@@ -9,10 +9,13 @@
 #include "CShaderCommiter_GLSL.h"
 #include "CShader.h"
 
-CShaderCommiter_GLSL::CShaderCommiter_GLSL(const std::string& _guid, const std::string& _vsSourceCode, const std::string& _fsSourceCode, std::shared_ptr<IResource> _resource) :
-IResourceCommiter(_guid, _resource),
-m_vsSourceCode(_vsSourceCode),
-m_fsSourceCode(_fsSourceCode)
+CShaderCommiter_GLSL::CShaderCommiter_GLSL(const std::string& guid,
+                                           const std::string& vsSourceCode,
+                                           const std::string& fsSourceCode,
+                                           ISharedResourceRef resource) :
+IResourceCommiter(guid, resource),
+m_vsSourceCode(vsSourceCode),
+m_fsSourceCode(fsSourceCode)
 {
     
 }
@@ -22,10 +25,11 @@ CShaderCommiter_GLSL::~CShaderCommiter_GLSL(void)
     
 }
 
-ui32 CShaderCommiter_GLSL::_Compile(const std::string &_sourceCode,  GLenum _shader)
+ui32 CShaderCommiter_GLSL::compile(const std::string &sourceCode,
+                                   GLenum shaderType)
 {
-    ui32 handle = glCreateShader(_shader);
-    const char* data = _sourceCode.c_str();
+    ui32 handle = glCreateShader(shaderType);
+    const char* data = sourceCode.c_str();
     glShaderSource(handle, 1, &data, 0);
     glCompileShader(handle);
     
@@ -39,7 +43,7 @@ ui32 CShaderCommiter_GLSL::_Compile(const std::string &_sourceCode,  GLenum _sha
         m_message = message;
 #if defined(__NDK__)
         NDK_LOG("Error: GLSL guid %s", m_guid.c_str());
-        NDK_LOG("Error: GLSL sourcecode %s", _sourceCode.c_str());
+        NDK_LOG("Error: GLSL sourcecode %s", sourceCode.c_str());
         NDK_LOG("Error: GLSL compile %s", m_message.c_str());
 #endif
         std::cout<<message<<std::endl;
@@ -51,11 +55,12 @@ ui32 CShaderCommiter_GLSL::_Compile(const std::string &_sourceCode,  GLenum _sha
     return handle;
 }
 
-ui32 CShaderCommiter_GLSL::_Link(ui32 _vsHandle, ui32 _fsHandle)
+ui32 CShaderCommiter_GLSL::link(ui32 vsHandle,
+                                ui32 fsHandle)
 {
     ui32 handle = glCreateProgram();
-    glAttachShader(handle, _vsHandle);
-    glAttachShader(handle, _fsHandle);
+    glAttachShader(handle, vsHandle);
+    glAttachShader(handle, fsHandle);
     glLinkProgram(handle);
     
     i32 success;
@@ -74,11 +79,11 @@ ui32 CShaderCommiter_GLSL::_Link(ui32 _vsHandle, ui32 _fsHandle)
     return handle;
 }
 
-void CShaderCommiter_GLSL::Commit(void)
+void CShaderCommiter_GLSL::commit(void)
 {
     std::string message = "";
     m_status = E_COMMITER_STATUS_INPROGRESS;
-    ui32 vsHandle = _Compile(m_vsSourceCode, GL_VERTEX_SHADER);
+    ui32 vsHandle = CShaderCommiter_GLSL::compile(m_vsSourceCode, GL_VERTEX_SHADER);
     if(m_status == E_COMMITER_STATUS_FAILURE)
     {
         message = "<font color=\"red\"><b>VERTEX SHADER COMPILE ERROR:</b><br>" + m_message + "</font><br>";
@@ -89,7 +94,7 @@ void CShaderCommiter_GLSL::Commit(void)
     {
         message = "<font color=\"green\"><b>VERTEX SHADER COMPILE SUCCESS.</b></font><br>";
     }
-    ui32 fsHandle = _Compile(m_fsSourceCode, GL_FRAGMENT_SHADER);
+    ui32 fsHandle = CShaderCommiter_GLSL::compile(m_fsSourceCode, GL_FRAGMENT_SHADER);
     if(m_status == E_COMMITER_STATUS_FAILURE)
     {
         message += "<font color=\"red\"><b>FRAGMENT SHADER COMPILE ERROR:</b><br>" + m_message + "</font><br>";
@@ -101,7 +106,7 @@ void CShaderCommiter_GLSL::Commit(void)
         message += "<font color=\"green\"><b>FRAGMENT SHADER COMPILE SUCCESS.</b></font><br>";
     }
     
-    ui32 shHandle = _Link(vsHandle, fsHandle);
+    ui32 shaderId = CShaderCommiter_GLSL::link(vsHandle, fsHandle);
     if(m_status == E_COMMITER_STATUS_FAILURE)
     {
         message += "<font color=\"red\"><b>SHADER LINKING ERROR:</b><br>" + m_message + "</font>";
@@ -115,8 +120,8 @@ void CShaderCommiter_GLSL::Commit(void)
     m_message = message;
     assert(m_resource != nullptr);
     assert(m_resource->IsLoaded() == true);
-    std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
-    shader->Set_Handle(shHandle);
+    std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader>(m_resource);
+    IResourceCommiter::onResourceDataCommited(std::make_shared<CShaderData>(shaderId));
     m_status = m_status == E_COMMITER_STATUS_INPROGRESS ? E_COMMITER_STATUS_SUCCESS : E_COMMITER_STATUS_FAILURE;
 }
 

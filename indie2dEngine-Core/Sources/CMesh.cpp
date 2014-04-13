@@ -11,7 +11,7 @@
 #include "CIndexBuffer.h"
 #include "CBone.h"
 
-CMeshData::CMeshData(const std::vector<SVertex>& vertexData,
+CMeshData::CMeshData(const std::vector<SVertexData>& vertexData,
                      const std::vector<ui16>& indexData,
                      const glm::vec3& maxBound,
                      const glm::vec3& minBound) :
@@ -30,7 +30,7 @@ CMeshData::~CMeshData(void)
     m_indexData.clear();
 }
 
-const std::vector<SVertex>& CMeshData::getVertexData(void) const
+const std::vector<SVertexData>& CMeshData::getVertexData(void) const
 {
     return m_vertexData;
 }
@@ -292,6 +292,18 @@ CSharedIndexBuffer CMesh::getIndexBuffer(void) const
     return IResource::IsCommited() ? m_indexBuffer : nullptr;
 }
 
+const std::vector<SVertexData>& CMesh::getVertexData(void) const
+{
+    static std::vector<SVertexData> stub;
+    return IResource::IsLoaded() ? m_meshData->getVertexData() : stub;
+}
+
+const std::vector<ui16>& CMesh::getIndexData(void) const
+{
+    static std::vector<ui16> stub;
+    return IResource::IsLoaded() ? m_meshData->getIndexData() : stub;
+}
+
 const ui32 CMesh::getNumVertices(void) const
 {
     return IResource::IsLoaded() ? m_meshData->getNumVertices() : 0;
@@ -348,8 +360,8 @@ void CMesh::bind(const i32* attributes) const
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
-        m_vertexBuffer->Bind(attributes);
-        m_indexBuffer->Bind();
+        m_vertexBuffer->bind(attributes);
+        m_indexBuffer->bind();
     }
 }
 
@@ -359,7 +371,7 @@ void CMesh::draw(void) const
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
-        glDrawElements(GL_TRIANGLES, m_indexBuffer->Get_Size(), GL_UNSIGNED_SHORT, NULL);
+        glDrawElements(GL_TRIANGLES, m_indexBuffer->getSize(), GL_UNSIGNED_SHORT, NULL);
     }
 }
 
@@ -379,7 +391,7 @@ void CMesh::unbind(const i32* attributes) const
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
-        m_indexBuffer->Unbind();
-        m_vertexBuffer->Unbind(attributes);
+        m_indexBuffer->unbind();
+        m_vertexBuffer->unbind(attributes);
     }
 }

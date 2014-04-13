@@ -56,7 +56,7 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _t
     vertexBuffer->Unlock();
     
     std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(m_settings->Get_NumParticles() * 6, GL_STATIC_DRAW);
-    ui16* indexData = indexBuffer->Lock();
+    ui16* indexData = indexBuffer->lock();
     for(ui32 i = 0; i < m_settings->Get_NumParticles(); ++i)
     {
         indexData[i * 6 + 0] = static_cast<ui16>(i * 4 + 0);
@@ -67,7 +67,7 @@ void CParticleEmitter::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _t
         indexData[i * 6 + 4] = static_cast<ui16>(i * 4 + 2);
         indexData[i * 6 + 5] = static_cast<ui16>(i * 4 + 3);
     }
-    indexBuffer->Unlock();
+    indexBuffer->unlock();
     
     m_mesh = std::make_shared<CMesh>("particle.emitter", vertexBuffer, indexBuffer);
     assert(m_mesh != nullptr);
@@ -124,7 +124,7 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
             std::function<void(void)> function = [this]()
             {
 #endif
-                SHardwareVertex* vertexData = m_mesh->Get_VertexBuffer()->Lock();
+                SHardwareVertex* vertexData = m_mesh->getVertexBuffer()->Lock();
                 ui64 currentTime = CTimer::Get_TickCount();
                 
                 for(ui32 i = 0; i < m_settings->Get_NumParticles(); ++i)
@@ -188,7 +188,7 @@ void CParticleEmitter::_OnSceneUpdate(f32 _deltatime)
                 std::function<void(void)> main = [this]()
                 {
 #endif
-                    m_mesh->Get_VertexBuffer()->Unlock();
+                    m_mesh->getVertexBuffer()->Unlock();
                     m_locked = 0;
 #if defined(__USE_GCDPP__)
                 };
@@ -226,9 +226,9 @@ void CParticleEmitter::_OnDraw(const std::string& _renderMode)
         std::shared_ptr<CMaterial> material = m_materials.find(_renderMode)->second;
         assert(material->Get_Shader() != nullptr);
         
-        material->Get_Shader()->Set_Matrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        material->Get_Shader()->setMatrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+        material->Get_Shader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
+        material->Get_Shader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         
         IGameObject::_OnDraw(_renderMode);
     }

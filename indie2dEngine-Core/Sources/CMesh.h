@@ -18,7 +18,7 @@ private:
     
 protected:
     
-    std::vector<SVertex> m_vertexData;
+    std::vector<SVertexData> m_vertexData;
     std::vector<ui16> m_indexData;
     
     glm::vec3 m_maxBound;
@@ -26,14 +26,14 @@ protected:
     
 public:
     
-    CMeshData(const std::vector<SVertex>& vertexData,
+    CMeshData(const std::vector<SVertexData>& vertexData,
               const std::vector<ui16>& indexData,
               const glm::vec3& maxBound,
               const glm::vec3& minBound);
     
     ~CMeshData(void);
     
-    const std::vector<SVertex>& getVertexData(void) const;
+    const std::vector<SVertexData>& getVertexData(void) const;
     const std::vector<ui16>& getIndexData(void) const;
     
     const ui32 getNumVertices(void) const;
@@ -141,6 +141,9 @@ public:
     
     CSharedVertexBuffer getVertexBuffer(void) const;
     CSharedIndexBuffer getIndexBuffer(void) const;
+    
+    const std::vector<SVertexData>& getVertexData(void) const;
+    const std::vector<ui16>& getIndexData(void) const;
     
     const ui32 getNumVertices(void) const;
     const ui32 getNumIndices(void) const;

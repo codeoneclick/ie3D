@@ -21,10 +21,10 @@ protected:
     
 public:
     
-    CMeshSerializer_MDL(const std::string& _filename, std::shared_ptr<IResource> _resource);
+    CMeshSerializer_MDL(const std::string& filename, ISharedResourceRef resource);
     ~CMeshSerializer_MDL(void);
     
-    void Serialize(void);
+    void serialize(void);
 };
 
 #endif

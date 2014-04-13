@@ -10,6 +10,7 @@
 #define IResourceCommiter_h
 
 #include "HCommon.h"
+#include "HDeclaration.h"
 #include "HEnums.h"
 
 class IResource;
@@ -20,25 +21,21 @@ private:
 protected:
     
     std::string m_guid;
-    std::shared_ptr<IResource> m_resource;
+    ISharedResource m_resource;
     E_COMMITER_STATUS m_status;
+    
+    void onResourceDataCommited(ISharedResourceDataRef resourceData);
     
 public:
     
-    IResourceCommiter(const std::string& _guid, std::shared_ptr<IResource> _resource);
+    IResourceCommiter(const std::string& guid, ISharedResourceRef resource);
     virtual ~IResourceCommiter(void);
     
-    virtual void Commit(void) = 0;
+    std::string getGuid(void) const;
+    E_COMMITER_STATUS getStatus(void) const;
     
-    inline std::string Get_Guid(void)
-    {
-        return m_guid;
-    };
+    virtual void commit(void) = 0;
     
-    inline E_COMMITER_STATUS Get_Status(void)
-    {
-        return m_status;
-    };
 };
 
 #endif 

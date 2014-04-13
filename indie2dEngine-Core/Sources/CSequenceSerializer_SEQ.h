@@ -21,10 +21,11 @@ protected:
     
 public:
     
-    CSequenceSerializer_SEQ(const std::string& _filename, std::shared_ptr<IResource> _resource);
+    CSequenceSerializer_SEQ(const std::string& filename,
+                            ISharedResourceRef resource);
     ~CSequenceSerializer_SEQ(void);
     
-    void Serialize(void);
+    void serialize(void);
 };
 
 

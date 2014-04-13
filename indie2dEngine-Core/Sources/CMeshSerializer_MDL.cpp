@@ -8,13 +8,13 @@
 
 #include "CMeshSerializer_MDL.h"
 #include "CMesh.h"
-#include "CSkeleton.h"
-#include "CSequence.h"
-#include "PVRTTexture.h"
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
 
-CMeshSerializer_MDL::CMeshSerializer_MDL(const std::string& _filename, std::shared_ptr<IResource> _resource) :
-IResourceSerializer(_filename, _resource),
-m_filename(_filename)
+CMeshSerializer_MDL::CMeshSerializer_MDL(const std::string& filename,
+                                         ISharedResourceRef resource) :
+IResourceSerializer(filename, resource),
+m_filename(filename)
 {
     
 }
@@ -24,22 +24,27 @@ CMeshSerializer_MDL::~CMeshSerializer_MDL(void)
     
 }
 
-void CMeshSerializer_MDL::Serialize(void)
+void CMeshSerializer_MDL::serialize(void)
 {
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::istream* filestream = IResourceSerializer::_LoadData(m_filename);
+    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename);
     
-    std::shared_ptr<CMeshHeader> header = std::make_shared<CMeshHeader>();
     std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh>(m_resource);
     
-    filestream->read((char*)&header->m_numVerticies, sizeof(ui32));
-    filestream->read((char*)&header->m_numIndices, sizeof(ui32));
+    ui32 numVertices = 0;
+    ui32 numIndices = 0;
+    glm::vec3 maxBound(-4096.0, -4096.0, -4096.0);
+    glm::vec3 minBound(4096.0, 4096.0, 4096.0);
     
-    header->m_vertexData = new SVertex[header->m_numVerticies];
+    filestream->read((char*)&numVertices, sizeof(ui32));
+    filestream->read((char*)&numIndices, sizeof(ui32));
     
-    for(ui32 i = 0; i < header->m_numVerticies; ++i)
+    std::vector<SVertexData> vertexData;
+    vertexData.resize(numVertices);
+    
+    for(ui32 i = 0; i < numVertices; ++i)
     {
         glm::vec3 position;
         filestream->read((char*)&position, sizeof(glm::vec3));
@@ -55,58 +60,62 @@ void CMeshSerializer_MDL::Serialize(void)
 
         for(ui32 j = 0; j < numWeights; ++j)
         {
-            SBone bone;
+            SBoneData bone;
             filestream->read((char*)&bone.m_id, sizeof(i32));
             filestream->read((char*)&bone.m_weigth, sizeof(f32));
-            header->m_vertexData[i].m_bones.push_back(bone);
+            vertexData[i].m_bones.push_back(bone);
         }
         
-		header->m_vertexData[i].m_position = position;
-        header->m_vertexData[i].m_texcoord = texcoord;
-        header->m_vertexData[i].m_normal = normal;
-        header->m_vertexData[i].m_tangent = tangent;
+		vertexData[i].m_position = position;
+        vertexData[i].m_texcoord = texcoord;
+        vertexData[i].m_normal = normal;
+        vertexData[i].m_tangent = tangent;
         
-        if(header->m_vertexData[i].m_position.x > header->m_maxBound.x)
+        if(vertexData[i].m_position.x > maxBound.x)
         {
-            header->m_maxBound.x = header->m_vertexData[i].m_position.x;
+            maxBound.x = vertexData[i].m_position.x;
         }
-        if(header->m_vertexData[i].m_position.y > header->m_maxBound.y)
+        if(vertexData[i].m_position.y > maxBound.y)
         {
-            header->m_maxBound.y = header->m_vertexData[i].m_position.y;
+            maxBound.y = vertexData[i].m_position.y;
         }
-        if(header->m_vertexData[i].m_position.z > header->m_maxBound.z)
+        if(vertexData[i].m_position.z > maxBound.z)
         {
-            header->m_maxBound.z = header->m_vertexData[i].m_position.z;
+            maxBound.z = vertexData[i].m_position.z;
         }
-        if(header->m_vertexData[i].m_position.x < header->m_minBound.x)
+        if(vertexData[i].m_position.x < minBound.x)
         {
-            header->m_minBound.x = header->m_vertexData[i].m_position.x;
+            minBound.x = vertexData[i].m_position.x;
         }
-        if(header->m_vertexData[i].m_position.y < header->m_minBound.y)
+        if(vertexData[i].m_position.y < minBound.y)
         {
-            header->m_minBound.y = header->m_vertexData[i].m_position.y;
+            minBound.y = vertexData[i].m_position.y;
         }
-        if(header->m_vertexData[i].m_position.z < header->m_minBound.z)
+        if(vertexData[i].m_position.z < minBound.z)
         {
-            header->m_minBound.z = header->m_vertexData[i].m_position.z;
+            minBound.z = vertexData[i].m_position.z;
         }
     }
     
-	header->m_indexData = new ui16[header->m_numIndices];
+    std::vector<ui16> indexData;
+    indexData.resize(numIndices);
     
-    for(ui32 i = 0; i < header->m_numIndices; ++i)
+    for(ui32 i = 0; i < numIndices; ++i)
     {
-        filestream->read((char*)&header->m_indexData[i], sizeof(ui16));
+        filestream->read((char*)&indexData[i], sizeof(ui16));
     }
     
-    for(ui32 i = 0; i < header->m_numIndices; i += 3)
+    for(ui32 i = 0; i < numIndices; i += 3)
     {
-        ui16 index = header->m_indexData[i + 1];
-        header->m_indexData[i + 1] = header->m_indexData[i + 2];
-        header->m_indexData[i + 2] = index;
+        ui16 index = indexData[i + 1];
+        indexData[i + 1] = indexData[i + 2];
+        indexData[i + 2] = index;
     }
-    IResourceSerializer::_FreeData(filestream);
-    mesh->_Set_Header(header);
-    
+    IResourceSerializer::closeStream(filestream);
+    std::shared_ptr<CMeshData> meshData = std::make_shared<CMeshData>(vertexData,
+                                                                      indexData,
+                                                                      maxBound,
+                                                                      minBound);
+    IResourceSerializer::onResourceDataSerialized(meshData);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
 }

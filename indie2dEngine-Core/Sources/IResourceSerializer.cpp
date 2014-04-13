@@ -7,12 +7,11 @@
 //
 
 #include "IResourceSerializer.h"
-#include "CResourceAccessor.h"
-#include "CCommonOS.h"
+#include "IResource.h"
 
-IResourceSerializer::IResourceSerializer(const std::string& _guid, std::shared_ptr<IResource> _resource) :
-m_guid(_guid),
-m_resource(_resource),
+IResourceSerializer::IResourceSerializer(const std::string& guid, ISharedResourceRef resource) :
+m_guid(guid),
+m_resource(resource),
 m_status(E_SERIALIZER_STATUS_UNKNOWN)
 {
     
@@ -23,18 +22,11 @@ IResourceSerializer::~IResourceSerializer(void)
     
 }
 
-std::istream* IResourceSerializer::_LoadData(const std::string &_filename)
+std::shared_ptr<std::istream> IResourceSerializer::openStream(const std::string &filename)
 {
-    std::string path_filename(Get_BundlePath());
-    path_filename.append(_filename);
 #if defined(__NDK__)
     std::memstream* mstream;
-    AAssetManager* manager = CResourceAccessor::Get_AAssetManager();
-    AAsset* asset = AAssetManager_open(manager, _filename.c_str(), AASSET_MODE_UNKNOWN);
-    if(asset == nullptr)
-    {
-        asset = AAssetManager_open(manager, path_filename.c_str(), AASSET_MODE_UNKNOWN);
-    }
+    AAsset* asset = AAssetManager_open(m_assetManager, filename.c_str(), AASSET_MODE_UNKNOWN);
     if(asset)
     {
         ui32 size = AAsset_getLength(asset);
@@ -48,28 +40,37 @@ std::istream* IResourceSerializer::_LoadData(const std::string &_filename)
         return mstream;
     }
 #else
-    std::ifstream* filestream = new std::ifstream();
-    filestream->open(_filename.c_str());
+    std::shared_ptr<std::ifstream> filestream = std::make_shared<std::ifstream>();
+    filestream->open(filename.c_str());
     if (!filestream->is_open())
     {
-        filestream->open(path_filename);
-        if (!filestream->is_open())
-        {
-            m_status = E_SERIALIZER_STATUS_FAILURE;
-            assert(false);
-        }
+        m_status = E_SERIALIZER_STATUS_FAILURE;
+        assert(false);
     }
     return filestream;
 #endif
 }
 
-void IResourceSerializer::_FreeData(std::istream *_stream)
+void IResourceSerializer::closeStream(const std::shared_ptr<std::istream> &stream)
 {
 #if defined(__NDK__)
 
 #else
-    static_cast<std::ifstream*>(_stream)->close();
+    std::static_pointer_cast<std::ifstream>(stream)->close();
 #endif
-    delete _stream;
-    _stream = nullptr;
+}
+
+void IResourceSerializer::onResourceDataSerialized(ISharedResourceDataRef resourceData)
+{
+    m_resource->onResourceDataSerialized(resourceData, E_RESOURCE_DATA_STATUS_PROGRESS);
+}
+
+std::string IResourceSerializer::getGuid(void) const
+{
+    return m_guid;
+}
+
+E_SERIALIZER_STATUS IResourceSerializer::getStatus(void) const
+{
+    return m_status;
 }

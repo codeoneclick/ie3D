@@ -19,10 +19,10 @@ protected:
     
 public:
     
-    CSkeletonCommiter_SK(const std::string& _guid, std::shared_ptr<IResource> _resource);
+    CSkeletonCommiter_SK(const std::string& guid, ISharedResourceRef resource);
     ~CSkeletonCommiter_SK(void);
     
-    void Commit(void);
+    void commit(void);
 };
 
 #endif 

@@ -10,9 +10,9 @@
 #define IResourceSerializer_h
 
 #include "HCommon.h"
+#include "HDeclaration.h"
 #include "HEnums.h"
 
-class IResource;
 class IResourceSerializer : public std::enable_shared_from_this<IResourceSerializer>
 {
 private:
@@ -20,28 +20,38 @@ private:
 protected:
     
     std::string m_guid;
-    std::shared_ptr<IResource> m_resource;
+    ISharedResource m_resource;
     E_SERIALIZER_STATUS m_status;
     
-    std::istream* _LoadData(const std::string &_filename);
-    void _FreeData(std::istream* _stream);
+#if defined(__NDK__)
+    
+    const AAssetManager* m_assetManager;
+    
+#endif
+    
+    std::shared_ptr<std::istream> openStream(const std::string &filename);
+    void closeStream(const std::shared_ptr<std::istream>& stream);
+    void onResourceDataSerialized(ISharedResourceDataRef resourceData);
     
 public:
     
-    IResourceSerializer(const std::string& _guid, std::shared_ptr<IResource> _resource);
+    IResourceSerializer(const std::string& guid,
+                        ISharedResourceRef resource);
+    
+#if defined(__NDK__)
+    
+    IResourceSerializer(const std::string& guid,
+                        ISharedResourceRef resource,
+                        const AAssetManager* assetManager);
+    
+#endif
+    
     virtual ~IResourceSerializer(void);
     
-    virtual void Serialize(void) = 0;
+    std::string getGuid(void) const;
+    E_SERIALIZER_STATUS getStatus(void) const;
     
-    inline std::string Get_Guid(void)
-    {
-        return m_guid;
-    };
-    
-    inline E_SERIALIZER_STATUS Get_Status(void)
-    {
-        return m_status;
-    };
+    virtual void serialize(void) = 0;
 };
 
 #endif 

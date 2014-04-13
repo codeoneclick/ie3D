@@ -31,27 +31,27 @@ m_skeleton(nullptr)
 
 	m_materialImposer = [this](std::shared_ptr<CMaterial> _material)
     {
-        _material->Get_Shader()->Set_Matrix4x4(m_isBatching ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        _material->Get_Shader()->Set_Matrix4x4(!_material->Get_IsReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        _material->Get_Shader()->Set_Matrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
+        _material->Get_Shader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+        _material->Get_Shader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
+        _material->Get_Shader()->setMatrix4x4(!_material->Get_IsReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        _material->Get_Shader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         
         ui32 count = 0;
         for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
         {
             if(m_lights[i] != nullptr)
             {
-                _material->Get_Shader()->Set_Vector3(m_lights[i]->Get_Position(), static_cast<E_SHADER_UNIFORM>(E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION + i));
+                _material->Get_Shader()->setVector3(m_lights[i]->Get_Position(), static_cast<E_SHADER_UNIFORM>(E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION + i));
                 count++;
             }
         }
         
-        _material->Get_Shader()->Set_Vector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        _material->Get_Shader()->Set_Vector4(_material->Get_ClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
-        _material->Get_Shader()->Set_Float(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
-        _material->Get_Shader()->Set_Float(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+        _material->Get_Shader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
+        _material->Get_Shader()->setVector4(_material->Get_ClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
+        _material->Get_Shader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
+        _material->Get_Shader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
-        _material->Get_Shader()->Set_Int(m_isBatching ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_01);
+        _material->Get_Shader()->setInt(m_isBatching ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_01);
     };
 }
 
@@ -202,7 +202,7 @@ void CModel::_OnDraw(const std::string& _mode)
         if(!m_isBatching && m_animationMixer != nullptr)
         {
             m_materialImposer(material);
-            material->Get_Shader()->Set_MatrixArray4x4(m_animationMixer->Get_Transformations(),
+            material->Get_Shader()->setMatrixArray4x4(m_animationMixer->Get_Transformations(),
                                                        m_animationMixer->Get_TransformationSize(),
                                                        E_SHADER_UNIFORM_MATRIX_BONES);
             IGameObject::_OnDraw(_mode);

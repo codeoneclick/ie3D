@@ -8,7 +8,7 @@
 
 #include "CIndexBuffer.h"
 
-CIndexBuffer::CIndexBuffer(ui32 size, GLenum mode) : IResourceData(E_RESOURCE_DATA_CLASS_INDEX_BUFFER_DATA)
+CIndexBuffer::CIndexBuffer(ui32 size, GLenum mode) : IResourceData(E_RESOURCE_DATA_CLASS_INDEX_BUFFER_DATA),
 m_size(size),
 m_mode(mode)
 {

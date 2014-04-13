@@ -7,11 +7,12 @@
 //
 
 #include "CSkeletonSerializer_SK.h"
-#include "CSkeleton.h"
+#include "CMesh.h"
 
-CSkeletonSerializer_SK::CSkeletonSerializer_SK(const std::string& _filename, std::shared_ptr<IResource> _resource) :
-IResourceSerializer(_filename, _resource),
-m_filename(_filename)
+CSkeletonSerializer_SK::CSkeletonSerializer_SK(const std::string& filename,
+                                               ISharedResourceRef resource) :
+IResourceSerializer(filename, resource),
+m_filename(filename)
 {
     
 }
@@ -21,15 +22,31 @@ CSkeletonSerializer_SK::~CSkeletonSerializer_SK(void)
     
 }
 
-void CSkeletonSerializer_SK::Serialize(void)
+void CSkeletonSerializer_SK::serialize(void)
 {
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::istream* filestream = IResourceSerializer::_LoadData(m_filename);
-    std::shared_ptr<CSkeleton> skeleton = std::static_pointer_cast<CSkeleton >(m_resource);
-    skeleton->_Serialize(filestream);
-    IResourceSerializer::_FreeData(filestream);
+    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename);
     
+    ui32 numBones; i32 id, parentId;
+    filestream->read((char*)&numBones, sizeof(i32));
+    
+    std::shared_ptr<CSkeletonData> skeletonData = std::make_shared<CSkeletonData>(numBones);
+    
+    for (ui32 i = 0; i < numBones; ++i)
+    {
+        filestream->read((char*)&id, sizeof(i32));
+        filestream->read((char*)&parentId, sizeof(i32));
+        CSharedBone bone = skeletonData->getBone(id);
+        if(bone == nullptr)
+        {
+            bone = std::make_shared<CBone>(id, parentId);
+        }
+        skeletonData->addBone(bone);
+    }
+    IResourceSerializer::closeStream(filestream);
+    
+    IResourceSerializer::onResourceDataSerialized(skeletonData);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
 }

@@ -11,21 +11,18 @@
 
 #include "IResourceCommiter.h"
 
-class CTextureHeader;
 class CTextureCommiter_PVR final : public IResourceCommiter
 {
 private:
     
 protected:
     
-    std::shared_ptr<CTextureHeader> m_header;
-    
 public:
     
-    CTextureCommiter_PVR(const std::string& _guid, std::shared_ptr<CTextureHeader> _header,  std::shared_ptr<IResource> _resource);
+    CTextureCommiter_PVR(const std::string& guid, ISharedResourceRef resource);
     ~CTextureCommiter_PVR(void);
     
-    void Commit(void);
+    void commit(void);
 };
 
 

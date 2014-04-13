@@ -7,10 +7,11 @@
 //
 
 #include "IResourceCommiter.h"
+#include "IResource.h"
 
-IResourceCommiter::IResourceCommiter(const std::string& _guid, std::shared_ptr<IResource> _resource) :
-m_guid(_guid),
-m_resource(_resource),
+IResourceCommiter::IResourceCommiter(const std::string& guid, ISharedResourceRef resource) :
+m_guid(guid),
+m_resource(resource),
 m_status(E_COMMITER_STATUS_UNKNOWN)
 {
     
@@ -19,4 +20,20 @@ m_status(E_COMMITER_STATUS_UNKNOWN)
 IResourceCommiter::~IResourceCommiter(void)
 {
     
+}
+
+void IResourceCommiter::onResourceDataCommited(ISharedResourceDataRef resourceData)
+{
+    m_resource->onResourceDataCommited(resourceData,
+                                       E_RESOURCE_DATA_STATUS_PROGRESS);
+}
+
+std::string IResourceCommiter::getGuid(void) const
+{
+    return m_guid;
+}
+
+E_COMMITER_STATUS IResourceCommiter::getStatus(void) const
+{
+    return m_status;
 }

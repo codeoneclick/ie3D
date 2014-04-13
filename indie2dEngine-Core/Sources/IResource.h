@@ -34,6 +34,9 @@ class IResource : public std::enable_shared_from_this<IResource>
 {
 private:
     
+    friend class IResourceCommiter;
+    friend class IResourceSerializer;
+    
     friend class CTextureLoadingOperation;
     friend class CShaderLoadingOperation;
     friend class CMeshLoadingOperation;

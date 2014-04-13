@@ -19,10 +19,10 @@ protected:
     
 public:
     
-    CSequenceCommiter_SEQ(const std::string& _guid, std::shared_ptr<IResource> _resource);
+    CSequenceCommiter_SEQ(const std::string& guid, ISharedResourceRef resource);
     ~CSequenceCommiter_SEQ(void);
     
-    void Commit(void);
+    void commit(void);
 };
 
 

@@ -68,7 +68,7 @@ typedef std::shared_ptr<CSequenceData> CSharedSequenceData;
 typedef const CSharedSequenceData& CSharedSequenceDataRef;
 
 class CVertexBuffer;
-struct SVertex;
+struct SVertexData;
 typedef std::shared_ptr<CVertexBuffer> CSharedVertexBuffer;
 typedef const CSharedVertexBuffer& CSharedVertexBufferRef;
 
@@ -77,6 +77,7 @@ typedef std::shared_ptr<CIndexBuffer> CSharedIndexBuffer;
 typedef const CSharedIndexBuffer& CSharedIndexBufferRef;
 
 class CBone;
+struct SBoneData;
 typedef std::shared_ptr<CBone> CSharedBone;
 typedef const CSharedBone& CSharedBoneRef;
 
@@ -103,5 +104,9 @@ typedef const CSharedShaderData& CSharedShaderDataRef;
 class CShaderUniform;
 typedef std::shared_ptr<CShaderUniform> CSharedShaderUniform;
 typedef const CSharedShaderUniform& CSharedShaderUniformRef;
+
+class IResourceCommiter;
+typedef std::shared_ptr<IResourceCommiter> ISharedResourceCommiter;
+typedef const ISharedResourceCommiter& ISharedResourceCommiterRef;
 
 #endif

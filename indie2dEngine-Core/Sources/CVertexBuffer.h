@@ -14,22 +14,22 @@
 
 #define k_NUM_REPLACEMENT_VERTEX_BUFFERS 3
 
-struct SBone
+struct SBoneData
 {
     i32	m_id;
 	f32 m_weigth;
 };
 
-struct SVertex
+struct SVertexData
 {
     glm::vec3 m_position;
     glm::vec2 m_texcoord;
     glm::vec3 m_normal;
     glm::vec3 m_tangent;
-    std::vector<SBone> m_bones;
+    std::vector<SBoneData> m_bones;
 };
 
-struct SHardwareVertex
+struct SAttributeVertex
 {
     glm::vec3    m_position;
     glm::u16vec2 m_texcoord;
@@ -45,36 +45,32 @@ private:
     
 protected:
     
-    ui32 m_size;
-    SHardwareVertex* m_data;
-    
     ui32 m_handles[k_NUM_REPLACEMENT_VERTEX_BUFFERS];
     i32 m_index;
+    
+    SAttributeVertex* m_data;
+    ui32 m_size;
     
     GLenum m_mode;
     
 public:
     
-    CVertexBuffer(ui32 _size, GLenum _mode);
+    CVertexBuffer(ui32 size, GLenum mode);
     ~CVertexBuffer(void);
     
-    inline const ui32 Get_Size(void) const
-    {
-        assert(m_size != 0);
-        return m_size;
-    };
+    static glm::u8vec4 compressVec3(const glm::vec3& uncompressed);
+    static glm::vec3 uncompressU8Vec4(const glm::u8vec4& compressed);
     
-    static glm::u8vec4 CompressVec3(const glm::vec3& _uncompressed);
-    static glm::vec3 UncompressU8Vec4(const glm::u8vec4& _compressed);
+    static glm::u16vec2 compressVec2(const glm::vec2& uncompressed);
+    static glm::vec2 uncompressU16Vec2(const glm::u16vec2& compressed);
     
-    static glm::u16vec2 CompressVec2(const glm::vec2& _uncompressed);
-    static glm::vec2 UncompressU16Vec2(const glm::u16vec2& _compressed);
+    ui32 getSize(void) const;
     
-    SHardwareVertex* Lock(void) const;
-    void Unlock(ui32 _size = 0);
+    SAttributeVertex* lock(void) const;
+    void unlock(ui32 size = 0);
     
-    void Bind(const i32* _attributes);
-    void Unbind(const i32* _attributes);
+    void bind(const i32* attributes) const;
+    void unbind(const i32* attributes) const;
 };
 
 #endif 

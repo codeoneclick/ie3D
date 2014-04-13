@@ -21,10 +21,11 @@ protected:
     
 public:
     
-    CSkeletonSerializer_SK(const std::string& _filename, std::shared_ptr<IResource> _resource);
+    CSkeletonSerializer_SK(const std::string& filename,
+                           ISharedResourceRef resource);
     ~CSkeletonSerializer_SK(void);
     
-    void Serialize(void);
+    void serialize(void);
 };
 
 #endif
