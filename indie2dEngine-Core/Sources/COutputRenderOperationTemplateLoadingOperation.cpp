@@ -6,28 +6,28 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "COutputRenderOperationTemplateLoadingOperation.h"
-#include "CMaterialTemplateLoadingOperation.h"
-#include "COutputRenderOperationTemplateSerializer.h"
+#include "CConfigurationORenderOperationLoadingOperation.h"
+#include "CConfigurationMaterialLoadingOperation.h"
+#include "CConfigurationORenderOperationSerializer.h"
 #include "CTemplateGameObjects.h"
 
-COutputRenderOperationTemplateLoadingOperation::COutputRenderOperationTemplateLoadingOperation(void)
+CConfigurationORenderOperationLoadingOperation::CConfigurationORenderOperationLoadingOperation(void)
 {
     
 }
 
-COutputRenderOperationTemplateLoadingOperation::~COutputRenderOperationTemplateLoadingOperation(void)
+CConfigurationORenderOperationLoadingOperation::~CConfigurationORenderOperationLoadingOperation(void)
 {
     
 }
 
-std::shared_ptr<I_RO_TemplateCommon> COutputRenderOperationTemplateLoadingOperation::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationORenderOperationLoadingOperation::Serialize(const std::string& _filename)
 {
-    std::shared_ptr<COutputRenderOperationTemplateSerializer> outputRenderOperationTemplateSerializer = std::make_shared<COutputRenderOperationTemplateSerializer>();
-    std::shared_ptr<COutputRenderOperationTemplate> outputRenderOperationTemplate = std::static_pointer_cast<COutputRenderOperationTemplate>(outputRenderOperationTemplateSerializer->Serialize(_filename));
+    std::shared_ptr<CConfigurationORenderOperationSerializer> outputRenderOperationTemplateSerializer = std::make_shared<CConfigurationORenderOperationSerializer>();
+    std::shared_ptr<CConfigurationORenderOperation> outputRenderOperationTemplate = std::static_pointer_cast<CConfigurationORenderOperation>(outputRenderOperationTemplateSerializer->Serialize(_filename));
     assert(outputRenderOperationTemplate != nullptr);
-    std::shared_ptr<CMaterialTemplateLoadingOperation> materialLoadingOperation = std::make_shared<CMaterialTemplateLoadingOperation>();
-    std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(materialLoadingOperation->Serialize(outputRenderOperationTemplate->Get_MaterialTemplateFilename()));
+    std::shared_ptr<CConfigurationMaterialLoadingOperation> materialLoadingOperation = std::make_shared<CConfigurationMaterialLoadingOperation>();
+    std::shared_ptr<CConfigurationMaterial> materialTemplate = std::static_pointer_cast<CConfigurationMaterial>(materialLoadingOperation->Serialize(outputRenderOperationTemplate->Get_MaterialTemplateFilename()));
     assert(materialTemplate != nullptr);
     outputRenderOperationTemplate->Set_Template(Get_TemplateAttributeKey(outputRenderOperationTemplate->kOutputRenderOperationMainNode,
                                                                          outputRenderOperationTemplate->kOutputRenderOperationMaterialTemplateFilenameAttribute),

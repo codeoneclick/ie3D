@@ -1,17 +1,17 @@
 //
-//  CMaterialTemplateSerializer.h
+//  CConfigurationMaterialSerializer.h
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef CMaterialTemplateSerializer_h
-#define CMaterialTemplateSerializer_h
+#ifndef CConfigurationMaterialSerializer_h
+#define CConfigurationMaterialSerializer_h
 
 #include "ITemplateSerializer.h"
 
-class CMaterialTemplateSerializer final : public ITemplateSerializer
+class CConfigurationMaterialSerializer final : public ITemplateSerializer
 {
 private:
     
@@ -19,12 +19,11 @@ protected:
     
 public:
     
-    CMaterialTemplateSerializer(void);
-    ~CMaterialTemplateSerializer(void);
+    CConfigurationMaterialSerializer(void);
+    ~CConfigurationMaterialSerializer(void);
     
-    std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename);
-    std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _host, ui32 _port, const std::string& _filename);
-    void Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template);
+    CSharedTemplateCommon serialize(const std::string& filename);
+    void deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template);
 };
 
 #endif 

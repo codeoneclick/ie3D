@@ -39,7 +39,7 @@ CLandscape::~CLandscape(void)
 
 void CLandscape::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
-    std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<CLandscapeTemplate>(_template);
+    std::shared_ptr<CConfigurationLandscape> landscapeTemplate = std::static_pointer_cast<CConfigurationLandscape>(_template);
     assert(m_resourceAccessor != nullptr);
     assert(m_screenSpaceTextureAccessor != nullptr);
     
@@ -52,13 +52,13 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _templat
     m_heightmapProcessor->PreprocessHeightmapTexture();
     m_heightmapProcessor->PreprocessEdgesMaskTexture();
     
-    std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(landscapeTemplate->Get_SplattingDiffuseMaterialTemplate());
+    std::shared_ptr<CConfigurationMaterial> materialTemplate = std::static_pointer_cast<CConfigurationMaterial>(landscapeTemplate->Get_SplattingDiffuseMaterialTemplate());
     m_splattingDiffuseMaterial = std::make_shared<CMaterial>(materialTemplate->Get_RenderOperationName());
     m_splattingDiffuseMaterial->Serialize(landscapeTemplate->Get_SplattingDiffuseMaterialTemplate(), m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
     m_splattingDiffuseMaterial->Set_Texture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     CLandscape::_OnResourceLoaded(m_splattingDiffuseMaterial, true);
     
-    materialTemplate = std::static_pointer_cast<CMaterialTemplate>(landscapeTemplate->Get_SplattingNormalMaterialTemplate());
+    materialTemplate = std::static_pointer_cast<CConfigurationMaterial>(landscapeTemplate->Get_SplattingNormalMaterialTemplate());
     m_splattingNormalMaterial = std::make_shared<CMaterial>(materialTemplate->Get_RenderOperationName());
     m_splattingNormalMaterial->Serialize(landscapeTemplate->Get_SplattingNormalMaterialTemplate(), m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
     m_splattingNormalMaterial->Set_Texture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);

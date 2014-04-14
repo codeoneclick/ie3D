@@ -84,12 +84,12 @@ void CLandscapeChunk::_Set_SplattingNormalTexture(const std::shared_ptr<CTexture
 
 void CLandscapeChunk::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
 {
-    std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<CLandscapeTemplate>(_template);
+    std::shared_ptr<CConfigurationLandscape> landscapeTemplate = std::static_pointer_cast<CConfigurationLandscape>(_template);
     assert(m_resourceAccessor != nullptr);
     
     for(const auto& iterator : landscapeTemplate->Get_MaterialsTemplates())
     {
-        std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(iterator);
+        std::shared_ptr<CConfigurationMaterial> materialTemplate = std::static_pointer_cast<CConfigurationMaterial>(iterator);
         std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>(materialTemplate->Get_RenderOperationName());
 		material->Serialize(materialTemplate, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
         m_materials.insert(std::make_pair(materialTemplate->Get_RenderOperationName(), material));

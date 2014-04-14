@@ -6,26 +6,26 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CWorldSpaceRenderOperationTemplateSerializer.h"
+#include "CConfigurationWSRenderOperationSerializer.h"
 #include "CTemplateGameObjects.h"
 
-CWorldSpaceRenderOperationTemplateSerializer::CWorldSpaceRenderOperationTemplateSerializer(void)
+CConfigurationWSRenderOperationSerializer::CConfigurationWSRenderOperationSerializer(void)
 {
     
 }
 
-CWorldSpaceRenderOperationTemplateSerializer::~CWorldSpaceRenderOperationTemplateSerializer(void)
+CConfigurationWSRenderOperationSerializer::~CConfigurationWSRenderOperationSerializer(void)
 {
     
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CWorldSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationWSRenderOperationSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     
-    std::shared_ptr<CWorldSpaceRenderOperationTemplate> worldSpaceRenderOperationTemplate = std::make_shared<CWorldSpaceRenderOperationTemplate>();
+    std::shared_ptr<CConfigurationWSRenderOperation> worldSpaceRenderOperationTemplate = std::make_shared<CConfigurationWSRenderOperation>();
     pugi::xml_node node = document.child(worldSpaceRenderOperationTemplate->kWorldSpaceRenderOperationMainNode.c_str());
     
     std::string guid = node.attribute(worldSpaceRenderOperationTemplate->kWorldSpaceRenderOperationGuidAttribute.c_str()).as_string();
@@ -78,12 +78,12 @@ std::shared_ptr<I_RO_TemplateCommon> CWorldSpaceRenderOperationTemplateSerialize
     return worldSpaceRenderOperationTemplate;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CWorldSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationWSRenderOperationSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CWorldSpaceRenderOperationTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
+void CConfigurationWSRenderOperationSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     
 }

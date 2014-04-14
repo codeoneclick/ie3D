@@ -7,20 +7,20 @@
 //
 
 #include "CTemplateAccessor.h"
-#include "CModelTemplateLoader.h"
-#include "COceanTemplateLoader.h"
-#include "CLandscapeTemplateLoader.h"
-#include "CParticleEmitterTemplateLoader.h"
-#include "CGameTransitionTemplateLoader.h"
+#include "CConfigurationModelLoader.h"
+#include "CConfigurationOceanLoader.h"
+#include "CConfigurationLandscapeLoader.h"
+#include "CConfigurationParticleEmitterLoader.h"
+#include "CConfigurationGameTransitionLoader.h"
 #include "CGUITemplateLoader.h"
 
 CTemplateAccessor::CTemplateAccessor(void)
 {
-    m_loaders[E_TEMPLATE_LOADERS_MODEL] = std::make_shared<CModelTemplateLoader>();
-    m_loaders[E_TEMPLATE_LOADERS_OCEAN] = std::make_shared<COceanTemplateLoader>();
-    m_loaders[E_TEMPLATE_LOADERS_LANDSCAPE] = std::make_shared<CLandscapeTemplateLoader>();
-    m_loaders[E_TEMPLATE_LOADERS_PARTICLE_EMITTER] = std::make_shared<CParticleEmitterTemplateLoader>();
-    m_loaders[E_TEMPLATE_LOADERS_GAME_TRANSITIONS] = std::make_shared<CGameTransitionTemplateLoader>();
+    m_loaders[E_TEMPLATE_LOADERS_MODEL] = std::make_shared<CConfigurationModelLoader>();
+    m_loaders[E_TEMPLATE_LOADERS_OCEAN] = std::make_shared<CConfigurationOceanLoader>();
+    m_loaders[E_TEMPLATE_LOADERS_LANDSCAPE] = std::make_shared<CConfigurationLandscapeLoader>();
+    m_loaders[E_TEMPLATE_LOADERS_PARTICLE_EMITTER] = std::make_shared<CConfigurationParticleEmitterLoader>();
+    m_loaders[E_TEMPLATE_LOADERS_GAME_TRANSITIONS] = std::make_shared<CConfigurationGameTransitionLoader>();
 	m_loaders[E_TEMPLATE_LOADERS_GUI] = std::make_shared<CGUITemplateLoader>();
 }
 

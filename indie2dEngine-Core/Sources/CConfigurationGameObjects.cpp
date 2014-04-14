@@ -1,68 +1,68 @@
 //
-//  CTemplateGameObjects.cpp
+//  CConfigurationGameObjects.cpp
 //  indieEngineCore
 //
 //  Created by Sergey Sergeev on 12/21/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CTemplateGameObjects.h"
+#include "CConfigurationGameObjects.h"
 
-CTextureTemplate::CTextureTemplate(void) :
-CTemplateCommon(),
+CConfigurationTexture::CConfigurationTexture(void) :
+IConfiguration(),
 kTextureMainNode("texture"),
 kTextureFilenameAttribute("filename"),
 kTextureRenderOperationNameAttribute("render_operation_name"),
-kTextureSamplerIdAttribute("sampler_id"),
+kTextureSamplerIndexAttribute("sampler_id"),
 kTextureWrapModeAttribute("wrap_mode")
 {
 
 }
 
-CTextureTemplate::~CTextureTemplate(void)
+CConfigurationTexture::~CConfigurationTexture(void)
 {
     
     
 }
 
-std::string CTextureTemplate::Get_Filename(void) const
+std::string CConfigurationTexture::getFilename(void) const
 {
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::string CTextureTemplate::Get_RenderOperationName(void) const
+std::string CConfigurationTexture::getRenderOperationName(void) const
 {
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureRenderOperationNameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-ui32 CTextureTemplate::Get_SamplerId(void) const
+ui32 CConfigurationTexture::getSamplerIndex(void) const
 {
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
-                                             kTextureSamplerIdAttribute);
+                                             kTextureSamplerIndexAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-ui32 CTextureTemplate::Get_WrapMode(void) const
+ui32 CConfigurationTexture::getWrapMode(void) const
 {
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureWrapModeAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-CShaderTemplate::CShaderTemplate(void) :
-CTemplateCommon(),
+CConfigurationShader::CConfigurationShader(void) :
+IConfiguration(),
 kShaderMainNode("shader"),
 kShaderVSFilenameAttribute("vs_filename"),
 kShaderFSFilenameAttribute("fs_filename")
@@ -70,31 +70,31 @@ kShaderFSFilenameAttribute("fs_filename")
     
 }
 
-CShaderTemplate::~CShaderTemplate(void)
+CConfigurationShader::~CConfigurationShader(void)
 {
     
 }
 
-std::string CShaderTemplate::Get_VSFilename(void) const
+std::string CConfigurationShader::getVSFilename(void) const
 {
     const auto& iterator = m_attributes.find(kShaderMainNode + ":" +
                                              kShaderVSFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::string CShaderTemplate::Get_FSFilename(void) const
+std::string CConfigurationShader::getFSFilename(void) const
 {
     const auto& iterator = m_attributes.find(kShaderMainNode + ":" +
                                              kShaderFSFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-CMaterialTemplate::CMaterialTemplate(void) :
-CTemplateCommon(),
+CConfigurationMaterial::CConfigurationMaterial(void) :
+IConfiguration(),
 kMaterialMainNode("material"),
 kMaterialRenderOperationNameAttribute("render_operation_name"),
 kMaterialIsCullFaceAttribute("is_cull_face"),
@@ -112,210 +112,210 @@ kMaterialClippingWAttribute("clipping_w"),
 kMaterialIsReflectingAttribute("is_reflecting"),
 kMaterialIsShadowingAttribute("is_shadowing"),
 kMaterialIsDebuggingAttribute("is_debugging"),
-kMaterialTexturesTemplatesNode("textures"),
-kMaterialTextureTemplateNode("texture"),
-kMaterialShaderTemplateNode("shader")
+kMaterialTexturesConfigurationsNode("textures"),
+kMaterialTextureConfigurationNode("texture"),
+kMaterialShaderConfigurationNode("shader")
 {
     
 }
 
-CMaterialTemplate::~CMaterialTemplate(void)
+CConfigurationMaterial::~CConfigurationMaterial(void)
 {
     
 }
 
-std::string CMaterialTemplate::Get_RenderOperationName(void) const
+std::string CConfigurationMaterial::getRenderOperationName(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialRenderOperationNameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-bool CMaterialTemplate::Get_IsCulling(void) const
+bool CConfigurationMaterial::isCulling(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsCullFaceAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-ui32 CMaterialTemplate::Get_CullingMode(void) const
+ui32 CConfigurationMaterial::getCullingMode(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialCullFaceModeAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-bool CMaterialTemplate::Get_IsBlending(void) const
+bool CConfigurationMaterial::isBlending(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsBlendingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-ui32 CMaterialTemplate::Get_BlendingFunctionSource(void) const
+ui32 CConfigurationMaterial::getBlendingFunctionSource(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialBlendingFunctionSourceAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-ui32 CMaterialTemplate::Get_BlendingFunctionDestination(void) const
+ui32 CConfigurationMaterial::getBlendingFunctionDestination(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialBlendingFunctionDestinationAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-bool CMaterialTemplate::Get_IsDepthTest(void) const
+bool CConfigurationMaterial::isDepthTest(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsDepthTestAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-bool CMaterialTemplate::Get_IsDepthMask(void) const
+bool CConfigurationMaterial::isDepthMask(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsDepthMaskAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-bool CMaterialTemplate::Get_IsClipping(void) const
+bool CConfigurationMaterial::isClipping(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsClippingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-glm::vec4 CMaterialTemplate::Get_ClippingPlane(void) const
+glm::vec4 CConfigurationMaterial::getClippingPlane(void) const
 {
     const auto& iteratorX = m_attributes.find(kMaterialMainNode + ":" +
                                               kMaterialClippingXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
-    f32 x = iteratorX->second[0]->Get_F32();
+    f32 x = iteratorX->second[0]->getScalar<f32>();
     
     const auto& iteratorY = m_attributes.find(kMaterialMainNode + ":" +
                                               kMaterialClippingYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    f32 y = iteratorY->second[0]->Get_F32();
+    f32 y = iteratorY->second[0]->getScalar<f32>();
     
     const auto& iteratorZ = m_attributes.find(kMaterialMainNode + ":" +
                                               kMaterialClippingZAttribute);
     assert(iteratorZ != m_attributes.end());
     assert(iteratorZ->second.size() != 0);
-    f32 z = iteratorZ->second[0]->Get_F32();
+    f32 z = iteratorZ->second[0]->getScalar<f32>();
     
     const auto& iteratorW = m_attributes.find(kMaterialMainNode+ ":" +
                                               kMaterialClippingWAttribute);
     assert(iteratorW != m_attributes.end());
     assert(iteratorW->second.size() != 0);
-    f32 w = iteratorW->second[0]->Get_F32();
+    f32 w = iteratorW->second[0]->getScalar<f32>();
     return glm::vec4(x, y, z, w);
 }
 
-bool CMaterialTemplate::Get_IsReflecting(void) const
+bool CConfigurationMaterial::isReflecting(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsReflectingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-bool CMaterialTemplate::Get_IsShadowing(void) const
+bool CConfigurationMaterial::isShadowing(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsShadowingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-bool CMaterialTemplate::Get_IsDebugging(void) const
+bool CConfigurationMaterial::isDebugging(void) const
 {
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsDebuggingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-std::vector<std::shared_ptr<I_RO_TemplateCommon>> CMaterialTemplate::Get_TexturesTemplates(void) const
+std::vector<ISharedConfiguration> CConfigurationMaterial::getTexturesConfigurations(void) const
 {
-    const auto& iterator = m_templates.find(kMaterialMainNode + ":" +
-                                            kMaterialTexturesTemplatesNode);
-    assert(iterator != m_templates.end());
+    const auto& iterator = m_configurations.find(kMaterialMainNode + ":" +
+                                                 kMaterialTexturesConfigurationsNode);
+    assert(iterator != m_configurations.end());
     return iterator->second;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplate::Get_ShaderTemplate(void) const
+ISharedConfiguration CConfigurationMaterial::getShaderConfiguration(void) const
 {
-    const auto& iterator = m_templates.find(kMaterialMainNode + ":" +
-                                            kMaterialShaderTemplateNode);
-    assert(iterator != m_templates.end());
+    const auto& iterator = m_configurations.find(kMaterialMainNode + ":" +
+                                                 kMaterialShaderConfigurationNode);
+    assert(iterator != m_configurations.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0];
 }
 
-CGameObjectTemplate::CGameObjectTemplate(void) :
-CTemplateCommon(),
-kGameObjectMaterialsTemplatesNode("materials"),
-kGameObjectMaterialTemplateNode("material"),
+CConfigurationGameObject::CConfigurationGameObject(void) :
+IConfiguration(),
+kGameObjectMaterialsConfigurationsNode("materials"),
+kGameObjectMaterialConfigurationNode("material"),
 kGameObjectMaterialFilenameAttribute("filename")
 {
     
 }
 
-CGameObjectTemplate::~CGameObjectTemplate(void)
+CConfigurationGameObject::~CConfigurationGameObject(void)
 {
     
 }
 
-std::vector<std::string> CGameObjectTemplate::Get_MaterialsTemplatesFilenames(void) const
+std::vector<std::string> CConfigurationGameObject::getMaterialsConfigurationsFilenames(void) const
 {
-    const auto& iterator = m_attributes.find(kGameObjectMaterialsTemplatesNode + ":" +
-                                             kGameObjectMaterialTemplateNode + ":" +
+    const auto& iterator = m_attributes.find(kGameObjectMaterialsConfigurationsNode + ":" +
+                                             kGameObjectMaterialConfigurationNode + ":" +
                                              kGameObjectMaterialFilenameAttribute);
     assert(iterator != m_attributes.end());
     std::vector<std::string> filenames;
     for(const auto& filename : iterator->second)
     {
-        filenames.push_back(filename->Get_String());
+        filenames.push_back(filename->getString());
     }
     return filenames;
 }
 
-std::vector<std::shared_ptr<I_RO_TemplateCommon>> CGameObjectTemplate::Get_MaterialsTemplates(void) const
+std::vector<ISharedConfiguration> CConfigurationGameObject::getMaterialsConfigurations(void) const
 {
-    const auto& iterator = m_templates.find(kGameObjectMaterialsTemplatesNode + ":" +
-                                            kGameObjectMaterialTemplateNode + ":" +
+    const auto& iterator = m_configurations.find(kGameObjectMaterialsConfigurationsNode + ":" +
+                                            kGameObjectMaterialConfigurationNode + ":" +
                                             kGameObjectMaterialFilenameAttribute);
-    assert(iterator != m_templates.end());
+    assert(iterator != m_configurations.end());
     return iterator->second;
 }
 
-CModelTemplate::CModelTemplate(void) :
-CGameObjectTemplate(),
+CConfigurationModel::CConfigurationModel(void) :
+CConfigurationGameObject(),
 kModelMainNode("model"),
 kModelMeshFilenameAttribute("filename"),
 kModelMeshIsBatchingAttribute("is_batching"),
@@ -329,31 +329,31 @@ kModelSequenceAnimationNameAttribute("animation_name")
     
 }
 
-CModelTemplate::~CModelTemplate(void)
+CConfigurationModel::~CConfigurationModel(void)
 {
     
 }
 
-std::string CModelTemplate::Get_MeshFilename(void) const
+std::string CConfigurationModel::getMeshFilename(void) const
 {
     const auto& iterator = m_attributes.find(kModelMainNode + ":" +
                                              kModelMeshFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::string CModelTemplate::Get_SkeletonFilename(void) const
+std::string CConfigurationModel::getSkeletonFilename(void) const
 {
     const auto& iterator = m_attributes.find(kModelMainNode + ":" +
                                              kModelSkeletonNode + ":" +
                                              kModelSkeletonFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::vector<std::string> CModelTemplate::Get_SequencesFilenames(void) const
+std::vector<std::string> CConfigurationModel::getSequencesFilenames(void) const
 {
     const auto& iterator = m_attributes.find(kModelMainNode + ":" +
                                              kModelSequencesNode + ":" +
@@ -363,12 +363,12 @@ std::vector<std::string> CModelTemplate::Get_SequencesFilenames(void) const
     std::vector<std::string> filenames;
     for(const auto& filename : iterator->second)
     {
-        filenames.push_back(filename->Get_String());
+        filenames.push_back(filename->getString());
     }
     return filenames;
 }
 
-std::vector<std::string> CModelTemplate::Get_SequenceAnimationsNames(void) const
+std::vector<std::string> CConfigurationModel::getSequenceAnimationsNames(void) const
 {
     const auto& iterator = m_attributes.find(kModelMainNode + ":" +
                                              kModelSequencesNode + ":" +
@@ -378,22 +378,22 @@ std::vector<std::string> CModelTemplate::Get_SequenceAnimationsNames(void) const
     std::vector<std::string> animationsNames;
     for(const auto& animationName : iterator->second)
     {
-        animationsNames.push_back(animationName->Get_String());
+        animationsNames.push_back(animationName->getString());
     }
     return animationsNames;
 }
 
-bool CModelTemplate::Get_IsBatching(void) const
+bool CConfigurationModel::isBatching(void) const
 {
     const auto& iterator = m_attributes.find(kModelMainNode + ":" +
                                              kModelMeshIsBatchingAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-COceanTemplate::COceanTemplate(void) :
-CGameObjectTemplate(),
+CConfigurationOcean::CConfigurationOcean(void) :
+CConfigurationGameObject(),
 kOceanMainNode("ocean"),
 kOceanSizeXAttribute("size_x"),
 kOceanSizeYAttribute("size_y"),
@@ -403,48 +403,48 @@ kOceanWaveGenerationIntervalAttribute("wave_generation_interval")
     
 }
 
-COceanTemplate::~COceanTemplate(void)
+CConfigurationOcean::~CConfigurationOcean(void)
 {
     
 }
 
-glm::vec2 COceanTemplate::Get_Size(void) const
+glm::vec2 CConfigurationOcean::getSize(void) const
 {
     const auto& iteratorX = m_attributes.find(kOceanMainNode + ":" +
                                               kOceanSizeXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
-    f32 x = iteratorX->second[0]->Get_F32();
+    f32 x = iteratorX->second[0]->getScalar<f32>();
     
     const auto& iteratorY = m_attributes.find(kOceanMainNode + ":" +
                                               kOceanSizeYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    f32 y = iteratorY->second[0]->Get_F32();
+    f32 y = iteratorY->second[0]->getScalar<f32>();
     
     return glm::vec2(x, y);
 }
 
-f32 COceanTemplate::Get_Altitude(void) const
+f32 CConfigurationOcean::getAltitude(void) const
 {
     const auto& iterator = m_attributes.find(kOceanMainNode + ":" +
                                              kOceanAltitudeAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_F32();
+    return iterator->second[0]->getScalar<f32>();
 }
 
-f32 COceanTemplate::Get_WaveGenerationInterval(void) const
+f32 CConfigurationOcean::getWaveGenerationInterval(void) const
 {
     const auto& iterator = m_attributes.find(kOceanMainNode + ":" +
                                              kOceanWaveGenerationIntervalAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_F32();
+    return iterator->second[0]->getScalar<f32>();
 }
 
-CParticleEmitterTemplate::CParticleEmitterTemplate(void) :
-CGameObjectTemplate(),
+CConfigurationParticleEmitter::CConfigurationParticleEmitter(void) :
+CConfigurationGameObject(),
 kParticleEmitterMainNode("particle_emitter"),
 kParticleEmitterNumParticlesAttribute("num_particles"),
 kParticleEmitterDurationAttribute("duration"),
@@ -477,228 +477,228 @@ kParticleEmitterMinEmittIntervalAttribute("min_emitt_interval")
     
 }
 
-CParticleEmitterTemplate::~CParticleEmitterTemplate(void)
+CConfigurationParticleEmitter::~CConfigurationParticleEmitter(void)
 {
     
 }
 
-ui32 CParticleEmitterTemplate::Get_NumParticles(void) const
+ui32 CConfigurationParticleEmitter::getNumParticles(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterNumParticlesAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-ui64 CParticleEmitterTemplate::Get_Duration(void) const
+ui64 CConfigurationParticleEmitter::getDuration(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterDurationAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-f32 CParticleEmitterTemplate::Get_DurationRandomness(void) const
+f32 CConfigurationParticleEmitter::getDurationRandomness(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterDurationAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_F32();
+    return iterator->second[0]->getScalar<f32>();
 }
 
-f32 CParticleEmitterTemplate::Get_VelocitySensitivity(void) const
+f32 CConfigurationParticleEmitter::getVelocitySensitivity(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterVelocitySensitivityAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_F32();
+    return iterator->second[0]->getScalar<f32>();
 
 }
 
-f32 CParticleEmitterTemplate::Get_MinHorizontalVelocity(void) const
+f32 CConfigurationParticleEmitter::getMinHorizontalVelocity(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterMinHorizontalVelocityAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_F32();
+    return iterator->second[0]->getScalar<f32>();
 }
 
-f32 CParticleEmitterTemplate::Get_MaxHorizontalVelocity(void) const
+f32 CConfigurationParticleEmitter::getMaxHorizontalVelocity(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterMaxHorizontalVelocityAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_F32();
+    return iterator->second[0]->getScalar<f32>();
 }
 
-f32 CParticleEmitterTemplate::Get_MinVerticalVelocity(void) const
+f32 CConfigurationParticleEmitter::getMinVerticalVelocity(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterMinVerticalVelocityAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_F32();
+    return iterator->second[0]->getScalar<f32>();
 }
 
-f32 CParticleEmitterTemplate::Get_MaxVerticalVelocity(void) const
+f32 CConfigurationParticleEmitter::getMaxVerticalVelocity(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                            kParticleEmitterMaxVerticalVelocityAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_F32();
+    return iterator->second[0]->getScalar<f32>();
     
 }
 
-f32 CParticleEmitterTemplate::Get_EndVelocity(void) const
+f32 CConfigurationParticleEmitter::getEndVelocity(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterEndVelocityAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_F32();
+    return iterator->second[0]->getScalar<f32>();
 }
 
-glm::vec3 CParticleEmitterTemplate::Get_Gravity(void) const
+glm::vec3 CConfigurationParticleEmitter::getGravity(void) const
 {
     const auto& iteratorX = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterGravityXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
-    f32 x = iteratorX->second[0]->Get_F32();
+    f32 x = iteratorX->second[0]->getScalar<f32>();
     
     const auto& iteratorY = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterGravityYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    ui8 y = iteratorY->second[0]->Get_F32();
+    ui8 y = iteratorY->second[0]->getScalar<f32>();
     
     const auto& iteratorZ = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterGravityZAttribute);
     assert(iteratorZ != m_attributes.end());
     assert(iteratorZ->second.size() != 0);
-    ui8 z = iteratorZ->second[0]->Get_F32();
+    ui8 z = iteratorZ->second[0]->getScalar<f32>();
     
     return glm::vec3(x, y, z);
 }
 
-glm::u8vec4 CParticleEmitterTemplate::Get_SourceColor(void) const
+glm::u8vec4 CConfigurationParticleEmitter::getSourceColor(void) const
 {
     const auto& iteratorR = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterSourceColorRAttribute);
     assert(iteratorR != m_attributes.end());
     assert(iteratorR->second.size() != 0);
-    ui8 r = iteratorR->second[0]->Get_UI8();
+    ui8 r = iteratorR->second[0]->getScalar<ui8>();
     
     const auto& iteratorG = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterSourceColorGAttribute);
     assert(iteratorG != m_attributes.end());
     assert(iteratorG->second.size() != 0);
-    ui8 g = iteratorG->second[0]->Get_UI8();
+    ui8 g = iteratorG->second[0]->getScalar<ui8>();
     
     const auto& iteratorB = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterSourceColorBAttribute);
     assert(iteratorB != m_attributes.end());
     assert(iteratorB->second.size() != 0);
-    ui8 b = iteratorB->second[0]->Get_UI8();
+    ui8 b = iteratorB->second[0]->getScalar<ui8>();
     
     const auto& iteratorA = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterSourceColorAAttribute);
     assert(iteratorA != m_attributes.end());
     assert(iteratorA->second.size() != 0);
-    ui8 a = iteratorA->second[0]->Get_UI8();
+    ui8 a = iteratorA->second[0]->getScalar<ui8>();
     return glm::u8vec4(r, g, b, a);
 }
 
-glm::u8vec4 CParticleEmitterTemplate::Get_DestinationColor(void) const
+glm::u8vec4 CConfigurationParticleEmitter::getDestinationColor(void) const
 {
     const auto& iteratorR = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterDestinationColorRAttribute);
     assert(iteratorR != m_attributes.end());
     assert(iteratorR->second.size() != 0);
-    ui8 r = iteratorR->second[0]->Get_UI8();
+    ui8 r = iteratorR->second[0]->getScalar<ui8>();
     
     const auto& iteratorG = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterDestinationColorGAttribute);
     assert(iteratorG != m_attributes.end());
     assert(iteratorG->second.size() != 0);
-    ui8 g = iteratorG->second[0]->Get_UI8();
+    ui8 g = iteratorG->second[0]->getScalar<ui8>();
     
     const auto& iteratorB = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterDestinationColorBAttribute);
     assert(iteratorB != m_attributes.end());
     assert(iteratorB->second.size() != 0);
-    ui8 b = iteratorB->second[0]->Get_UI8();
+    ui8 b = iteratorB->second[0]->getScalar<ui8>();
     
     const auto& iteratorA = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterDestinationColorAAttribute);
     assert(iteratorA != m_attributes.end());
     assert(iteratorA->second.size() != 0);
-    ui8 a = iteratorA->second[0]->Get_UI8();
+    ui8 a = iteratorA->second[0]->getScalar<ui8>();
     
     return glm::u8vec4(r, g, b, a);
 }
 
-glm::vec2 CParticleEmitterTemplate::Get_SourceSize(void) const
+glm::vec2 CConfigurationParticleEmitter::getSourceSize(void) const
 {
     const auto& iteratorX = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterSourceSizeXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
-    f32 x = iteratorX->second[0]->Get_F32();
+    f32 x = iteratorX->second[0]->getScalar<f32>();
     
     const auto& iteratorY = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterSourceSizeYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    ui8 y = iteratorY->second[0]->Get_F32();
+    ui8 y = iteratorY->second[0]->getScalar<f32>();
     
     return glm::vec2(x, y);
 }
 
-glm::vec2 CParticleEmitterTemplate::Get_DestinationSize(void) const
+glm::vec2 CConfigurationParticleEmitter::getDestinationSize(void) const
 {
     const auto& iteratorX = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterDestinationSizeXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
-    f32 x = iteratorX->second[0]->Get_F32();
+    f32 x = iteratorX->second[0]->getScalar<f32>();
     
     const auto& iteratorY = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterDestinationSizeXAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    ui8 y = iteratorY->second[0]->Get_F32();
+    ui8 y = iteratorY->second[0]->getScalar<f32>();
     
     return glm::vec2(x, y);
 }
 
-ui64 CParticleEmitterTemplate::Get_MinEmittInterval(void) const
+ui64 CConfigurationParticleEmitter::getMinEmittInterval(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                               kParticleEmitterMaxEmittIntervalAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-ui64 CParticleEmitterTemplate::Get_MaxEmittInterval(void) const
+ui64 CConfigurationParticleEmitter::getMaxEmittInterval(void) const
 {
     const auto& iterator = m_attributes.find(kParticleEmitterMainNode + ":" +
                                              kParticleEmitterMinEmittIntervalAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-CLandscapeTemplate::CLandscapeTemplate(void) :
-CGameObjectTemplate(),
+CConfigurationLandscape::CConfigurationLandscape(void) :
+CConfigurationGameObject(),
 kLandscapeMainNode("landscape"),
 kLandscapeHeightmapDataFilenameAttribute("heightmap_data_filename"),
 kLandscapeSplattingDataFilenameAttribute("splatting_data_filename"),
@@ -710,118 +710,118 @@ kLandscapeIsEdgesEnabledAttribute("is_edges_enabled"),
 kLandscapeEdgesNode("edges"),
 kLandscapeEdgesSizeXAttribute("size_x"),
 kLandscapeEdgesSizeYAttribute("size_y"),
-kLandscapeEdgesMaterialsTemplatesNode("edges_materials"),
-kLandscapeEdgeMaterialTemplateNode("material"),
-kLandscapeEdgeMaterialTemplateFilenameAttribute("filename")
+kLandscapeEdgesMaterialsConfigurationsNode("edges_materials"),
+kLandscapeEdgeMaterialConfigurationNode("material"),
+kLandscapeEdgeMaterialConfigurationFilenameAttribute("filename")
 {
     
 }
 
-CLandscapeTemplate::~CLandscapeTemplate(void)
+CConfigurationLandscape::~CConfigurationLandscape(void)
 {
     
 }
 
-std::string CLandscapeTemplate::Get_HeightmapDataFilename(void) const
+std::string CConfigurationLandscape::getHeightmapDataFilename(void) const
 {
     const auto& iterator = m_attributes.find(kLandscapeMainNode + ":" +
                                              kLandscapeHeightmapDataFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::string CLandscapeTemplate::Get_SplattingDataFilename(void) const
+std::string CConfigurationLandscape::getSplattingDataFilename(void) const
 {
     const auto& iterator = m_attributes.find(kLandscapeMainNode + ":" +
                                              kLandscapeSplattingDataFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-glm::vec2 CLandscapeTemplate::Get_Size(void) const
+glm::vec2 CConfigurationLandscape::getSize(void) const
 {
     const auto& iteratorX = m_attributes.find(kLandscapeMainNode + ":" +
                                               kLandscapeSizeXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
-    f32 x = iteratorX->second[0]->Get_F32();
+    f32 x = iteratorX->second[0]->getScalar<f32>();
     
     const auto& iteratorY = m_attributes.find(kLandscapeMainNode + ":" +
                                               kLandscapeSizeYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    ui8 y = iteratorY->second[0]->Get_F32();
+    ui8 y = iteratorY->second[0]->getScalar<f32>();
     
     return glm::vec2(x, y);
 }
 
-std::string CLandscapeTemplate::Get_SplattingDiffuseMaterialFilename(void) const
+std::string CConfigurationLandscape::getSplattingDiffuseMaterialFilename(void) const
 {
     const auto& iterator = m_attributes.find(kLandscapeMainNode + ":" +
                                              kLandscapeSplattingDiffuseMaterialFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::string CLandscapeTemplate::Get_SplattingNormalMaterialFilename(void) const
+std::string CConfigurationLandscape::getSplattingNormalMaterialFilename(void) const
 {
     const auto& iterator = m_attributes.find(kLandscapeMainNode + ":" +
                                              kLandscapeSplattingNormalMaterialFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplate::Get_SplattingDiffuseMaterialTemplate(void) const
+ISharedConfiguration CConfigurationLandscape::getSplattingDiffuseMaterialConfiguration(void) const
 {
-    const auto& iterator = m_templates.find(kLandscapeMainNode + ":" +
-                                             kLandscapeSplattingDiffuseMaterialFilenameAttribute);
-    assert(iterator != m_templates.end());
+    const auto& iterator = m_configurations.find(kLandscapeMainNode + ":" +
+                                                 kLandscapeSplattingDiffuseMaterialFilenameAttribute);
+    assert(iterator != m_configurations.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0];
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplate::Get_SplattingNormalMaterialTemplate(void) const
+ISharedConfiguration CConfigurationLandscape::getSplattingNormalMaterialConfiguration(void) const
 {
-    const auto& iterator = m_templates.find(kLandscapeMainNode + ":" +
-                                            kLandscapeSplattingNormalMaterialFilenameAttribute);
-    assert(iterator != m_templates.end());
+    const auto& iterator = m_configurations.find(kLandscapeMainNode + ":" +
+                                                 kLandscapeSplattingNormalMaterialFilenameAttribute);
+    assert(iterator != m_configurations.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0];
+    return std::static_pointer_cast<CConfigurationMaterial>(iterator->second[0]);
 }
 
-bool CLandscapeTemplate::Get_IsEdgesEnabled(void) const
+bool CConfigurationLandscape::isEdgesEnabled(void) const
 {
     const auto& iterator = m_attributes.find(kLandscapeMainNode + ":" +
                                              kLandscapeIsEdgesEnabledAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_Bool();
+    return iterator->second[0]->getScalar<bool>();
 }
 
-glm::vec2 CLandscapeTemplate::Get_EdgesSize(void) const
+glm::vec2 CConfigurationLandscape::getEdgesSize(void) const
 {
     const auto& iteratorX = m_attributes.find(kLandscapeMainNode + ":" +
                                               kLandscapeEdgesNode + ":" +
                                               kLandscapeEdgesSizeXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
-    f32 x = iteratorX->second[0]->Get_F32();
+    f32 x = iteratorX->second[0]->getF32();
     
     const auto& iteratorY = m_attributes.find(kLandscapeMainNode + ":" +
                                               kLandscapeEdgesNode + ":" +
                                               kLandscapeEdgesSizeYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    ui8 y = iteratorY->second[0]->Get_F32();
+    ui8 y = iteratorY->second[0]->getF32();
     
     return glm::vec2(x, y);
 }
 
-std::vector<std::string> CLandscapeTemplate::Get_EdgesMaterialsFilenames(void) const
+std::vector<std::string> CConfigurationLandscape::getEdgesMaterialsFilenames(void) const
 {
     const auto& iterator = m_attributes.find(kLandscapeMainNode + ":" +
                                              kLandscapeEdgesNode + ":" +
@@ -832,12 +832,12 @@ std::vector<std::string> CLandscapeTemplate::Get_EdgesMaterialsFilenames(void) c
     std::vector<std::string> filenames;
     for(const auto& filename : iterator->second)
     {
-        filenames.push_back(filename->Get_String());
+        filenames.push_back(filename->getString());
     }
     return filenames;
 }
 
-std::vector<std::shared_ptr<I_RO_TemplateCommon>> CLandscapeTemplate::Get_EdgesMaterialsTemplates(void) const
+std::vector<CSharedTemplateCommon> CConfigurationLandscape::getEdgesMaterialsTemplates(void) const
 {
     const auto& iterator = m_templates.find(kLandscapeMainNode + ":" +
                                             kLandscapeEdgesNode + ":" +
@@ -848,8 +848,8 @@ std::vector<std::shared_ptr<I_RO_TemplateCommon>> CLandscapeTemplate::Get_EdgesM
     return iterator->second;
 }
 
-CWorldSpaceRenderOperationTemplate::CWorldSpaceRenderOperationTemplate(void) :
-CTemplateCommon(),
+CConfigurationWSRenderOperation::CConfigurationWSRenderOperation(void) :
+IConfiguration(),
 kWorldSpaceRenderOperationMainNode("operation"),
 kWorldSpaceRenderOperationGuidAttribute("guid"),
 kWorldSpaceRenderOperationIndexAttribute("index"),
@@ -863,78 +863,78 @@ kWorldSpaceRenderOperationClearColorAAttribute("clear_color_a")
     
 }
 
-CWorldSpaceRenderOperationTemplate::~CWorldSpaceRenderOperationTemplate(void)
+CConfigurationWSRenderOperation::~CConfigurationWSRenderOperation(void)
 {
     
 }
 
-std::string CWorldSpaceRenderOperationTemplate::Get_Guid(void) const
+std::string CConfigurationWSRenderOperation::getGuid(void) const
 {
     const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
                                              kWorldSpaceRenderOperationGuidAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-ui32 CWorldSpaceRenderOperationTemplate::Get_Index(void) const
+ui32 CConfigurationWSRenderOperation::getIndex(void) const
 {
     const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
                                              kWorldSpaceRenderOperationIndexAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getUI32();
 }
 
-ui32 CWorldSpaceRenderOperationTemplate::Get_ScreenWidth(void) const
+ui32 CConfigurationWSRenderOperation::getScreenWidth(void) const
 {
     const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
                                              kWorldSpaceRenderOperationScreenWidthAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getUI32();
 }
 
-ui32 CWorldSpaceRenderOperationTemplate::Get_ScreenHeight(void) const
+ui32 CConfigurationWSRenderOperation::getScreenHeight(void) const
 {
     const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
                                              kWorldSpaceRenderOperationScreenHeightAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getUI32();
 }
 
-glm::vec4 CWorldSpaceRenderOperationTemplate::Get_ClearColor(void) const
+glm::vec4 CConfigurationWSRenderOperation::getClearColor(void) const
 {
     const auto& iteratorR = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
                                               kWorldSpaceRenderOperationClearColorRAttribute);
     assert(iteratorR != m_attributes.end());
     assert(iteratorR->second.size() != 0);
-    f32 r = iteratorR->second[0]->Get_F32();
+    f32 r = iteratorR->second[0]->getF32();
     
     const auto& iteratorG = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
                                               kWorldSpaceRenderOperationClearColorGAttribute);
     assert(iteratorG != m_attributes.end());
     assert(iteratorG->second.size() != 0);
-    ui8 g = iteratorG->second[0]->Get_F32();
+    ui8 g = iteratorG->second[0]->getF32();
     
     const auto& iteratorB = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
                                               kWorldSpaceRenderOperationClearColorBAttribute);
     assert(iteratorB != m_attributes.end());
     assert(iteratorB->second.size() != 0);
-    ui8 b = iteratorB->second[0]->Get_F32();
+    ui8 b = iteratorB->second[0]->getF32();
     
     const auto& iteratorA = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
                                               kWorldSpaceRenderOperationClearColorAAttribute);
     assert(iteratorA != m_attributes.end());
     assert(iteratorA->second.size() != 0);
-    ui8 a = iteratorA->second[0]->Get_F32();
+    ui8 a = iteratorA->second[0]->getF32();
     
     return glm::vec4(r, g, b, a);
 }
 
-CScreenSpaceRenderOperationTemplate::CScreenSpaceRenderOperationTemplate(void) :
-CTemplateCommon(),
+CConfigurationSSRenderOperation::CConfigurationSSRenderOperation(void) :
+IConfiguration(),
 kScreenSpaceRenderOperationMainNode("operation"),
 kScreenSpaceRenderOperationGuidAttribute("guid"),
 kScreenSpaceRenderOperationScreenWidthAttribute("width"),
@@ -944,57 +944,57 @@ kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute("material_filename"
     
 }
 
-CScreenSpaceRenderOperationTemplate::~CScreenSpaceRenderOperationTemplate(void)
+CConfigurationSSRenderOperation::~CConfigurationSSRenderOperation(void)
 {
     
 }
 
-std::string CScreenSpaceRenderOperationTemplate::Get_Guid(void) const
+std::string CConfigurationSSRenderOperation::getGuid(void) const
 {
     const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
                                              kScreenSpaceRenderOperationGuidAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-ui32 CScreenSpaceRenderOperationTemplate::Get_ScreenWidth(void) const
+ui32 CConfigurationSSRenderOperation::getScreenWidth(void) const
 {
     const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
                                              kScreenSpaceRenderOperationScreenWidthAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getUI32();
 }
 
-ui32 CScreenSpaceRenderOperationTemplate::Get_ScreenHeight(void) const
+ui32 CConfigurationSSRenderOperation::getScreenHeight(void) const
 {
     const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
                                              kScreenSpaceRenderOperationScreenHeightAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_UI32();
+    return iterator->second[0]->getUI32();
 }
 
-std::string CScreenSpaceRenderOperationTemplate::Get_MaterialTemplateFilename(void) const
+std::string CConfigurationSSRenderOperation::getMaterialTemplateFilename(void) const
 {
     const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
                                              kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CScreenSpaceRenderOperationTemplate::Get_MaterialTemplate(void) const
+CSharedMaterialTemplate CConfigurationSSRenderOperation::getMaterialTemplate(void) const
 {
     const auto& iterator = m_templates.find(kScreenSpaceRenderOperationMainNode + ":" +
                                             kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute);
     assert(iterator != m_templates.end());
-    return iterator->second[0];
+    return std::static_pointer_cast<CConfigurationMaterial>(iterator->second[0]);
 }
 
-COutputRenderOperationTemplate::COutputRenderOperationTemplate(void) :
-CTemplateCommon(),
+CConfigurationORenderOperation::CConfigurationORenderOperation(void) :
+IConfiguration(),
 kOutputRenderOperationMainNode("operation"),
 kOutputRenderOperationGuidAttribute("guid"),
 kOutputRenderOperationMaterialTemplateFilenameAttribute("filename")
@@ -1002,39 +1002,39 @@ kOutputRenderOperationMaterialTemplateFilenameAttribute("filename")
     
 }
 
-COutputRenderOperationTemplate::~COutputRenderOperationTemplate(void)
+CConfigurationORenderOperation::~CConfigurationORenderOperation(void)
 {
     
 }
 
-std::string COutputRenderOperationTemplate::Get_Guid(void) const
+std::string CConfigurationORenderOperation::getGuid(void) const
 {
     const auto& iterator = m_attributes.find(kOutputRenderOperationMainNode + ":" +
                                              kOutputRenderOperationGuidAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::string COutputRenderOperationTemplate::Get_MaterialTemplateFilename(void) const
+std::string CConfigurationORenderOperation::getMaterialTemplateFilename(void) const
 {
     const auto& iterator = m_attributes.find(kOutputRenderOperationMainNode + ":" +
                                              kOutputRenderOperationMaterialTemplateFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::shared_ptr<I_RO_TemplateCommon> COutputRenderOperationTemplate::Get_MaterialTemplate(void) const
+CSharedMaterialTemplate CConfigurationORenderOperation::getMaterialTemplate(void) const
 {
     const auto& iterator = m_templates.find(kOutputRenderOperationMainNode + ":" +
                                             kOutputRenderOperationMaterialTemplateFilenameAttribute);
     assert(iterator != m_templates.end());
-    return iterator->second[0];
+    return std::static_pointer_cast<CConfigurationMaterial>(iterator->second[0]);
 }
 
-CGameTransitionTemplate::CGameTransitionTemplate(void) :
-CTemplateCommon(),
+CConfigurationGameTransition::CConfigurationGameTransition(void) :
+IConfiguration(),
 kGameTransitionMainNode("transition"),
 kGameTransitionGuidAttribute("guid"),
 kGameTransitionOutputRenderOperationTemplateNode("output_render_operation"),
@@ -1049,40 +1049,40 @@ kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute("filename")
     
 }
 
-CGameTransitionTemplate::~CGameTransitionTemplate(void)
+CConfigurationGameTransition::~CConfigurationGameTransition(void)
 {
     
 }
 
-std::string CGameTransitionTemplate::Get_Guid(void) const
+std::string CConfigurationGameTransition::getGuid(void) const
 {
     const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
                                              kGameTransitionOutputRenderOperationTemplateNode);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::string CGameTransitionTemplate::Get_OutputRenderOperationTemplateFilename(void) const
+std::string CConfigurationGameTransition::getOutputRenderOperationTemplateFilename(void) const
 {
     const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
                                              kGameTransitionOutputRenderOperationTemplateNode + ":" +
                                              kGameTransitionOutputRenderOperationTemplateFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->Get_String();
+    return iterator->second[0]->getString();
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CGameTransitionTemplate::Get_OutputRenderOperationTemplate(void) const
+CSharedOutputRenderOperationTemplate CConfigurationGameTransition::getOutputRenderOperationTemplate(void) const
 {
     const auto& iterator = m_templates.find(kGameTransitionMainNode + ":" +
                                             kGameTransitionOutputRenderOperationTemplateNode + ":" +
                                             kGameTransitionOutputRenderOperationTemplateFilenameAttribute);
     assert(iterator != m_templates.end());
-    return iterator->second[0];
+    return std::static_pointer_cast<CConfigurationORenderOperation>(iterator->second[0]);
 }
 
-std::vector<std::string> CGameTransitionTemplate::Get_WorldSpaceRenderOperationsTemplatesFilenames(void) const
+std::vector<std::string> CConfigurationGameTransition::getWorldSpaceRenderOperationsTemplatesFilenames(void) const
 {
     const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
                                              kGameTransitionWorldSpaceRenderOperationsTemplatesNode + ":" +
@@ -1092,12 +1092,12 @@ std::vector<std::string> CGameTransitionTemplate::Get_WorldSpaceRenderOperations
     std::vector<std::string> filenames;
     for(const auto& filename : iterator->second)
     {
-        filenames.push_back(filename->Get_String());
+        filenames.push_back(filename->getString());
     }
     return filenames;
 }
 
-std::vector<std::shared_ptr<I_RO_TemplateCommon>> CGameTransitionTemplate::Get_WorldSpaceRenderOperationsTemplates(void) const
+std::vector<CSharedTemplateCommon> CConfigurationGameTransition::getWorldSpaceRenderOperationsTemplates(void) const
 {
     const auto& iterator = m_templates.find(kGameTransitionMainNode + ":" +
                                             kGameTransitionWorldSpaceRenderOperationsTemplatesNode + ":" +
@@ -1107,7 +1107,7 @@ std::vector<std::shared_ptr<I_RO_TemplateCommon>> CGameTransitionTemplate::Get_W
     return iterator->second;
 }
 
-std::vector<std::string> CGameTransitionTemplate::Get_ScreenSpaceRenderOperationsTemplatesFilenames(void) const
+std::vector<std::string> CConfigurationGameTransition::getScreenSpaceRenderOperationsTemplatesFilenames(void) const
 {
     const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
                                              kGameTransitionScreenSpaceRenderOperationsTemplatesNode + ":" +
@@ -1119,13 +1119,13 @@ std::vector<std::string> CGameTransitionTemplate::Get_ScreenSpaceRenderOperation
     {
         for(const auto& filename : iterator->second)
         {
-            filenames.push_back(filename->Get_String());
+            filenames.push_back(filename->getString());
         }
     }
     return filenames;
 }
 
-std::vector<std::shared_ptr<I_RO_TemplateCommon>> CGameTransitionTemplate::Get_ScreenSpaceRenderOperationsTemplates(void) const
+std::vector<CSharedTemplateCommon> CConfigurationGameTransition::getScreenSpaceRenderOperationsTemplates(void) const
 {
     const auto& iterator = m_templates.find(kGameTransitionMainNode + ":" +
                                             kGameTransitionScreenSpaceRenderOperationsTemplatesNode + ":" +
@@ -1133,7 +1133,7 @@ std::vector<std::shared_ptr<I_RO_TemplateCommon>> CGameTransitionTemplate::Get_S
                                             kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute);
     if(iterator == m_templates.end())
     {
-        return std::vector<std::shared_ptr<I_RO_TemplateCommon>>();
+        return std::vector<CSharedTemplateCommon>();
     }
     return iterator->second;
 }

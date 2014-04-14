@@ -1,31 +1,31 @@
 //
-//  CGameTransitionTemplateSerializer.cpp
+//  CConfigurationGameTransitionSerializer.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 6/7/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CGameTransitionTemplateSerializer.h"
+#include "CConfigurationGameTransitionSerializer.h"
 #include "CTemplateGameObjects.h"
 
-CGameTransitionTemplateSerializer::CGameTransitionTemplateSerializer(void)
+CConfigurationGameTransitionSerializer::CConfigurationGameTransitionSerializer(void)
 {
     
 }
 
-CGameTransitionTemplateSerializer::~CGameTransitionTemplateSerializer(void)
+CConfigurationGameTransitionSerializer::~CConfigurationGameTransitionSerializer(void)
 {
     
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CGameTransitionTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationGameTransitionSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     
-    std::shared_ptr<CGameTransitionTemplate> gameTransitionTemplate = std::make_shared<CGameTransitionTemplate>();
+    std::shared_ptr<CConfigurationGameTransition> gameTransitionTemplate = std::make_shared<CConfigurationGameTransition>();
     pugi::xml_node node = document.child(gameTransitionTemplate->kGameTransitionMainNode.c_str());
     
     std::string guid = node.attribute(gameTransitionTemplate->kGameTransitionGuidAttribute.c_str()).as_string();
@@ -76,12 +76,12 @@ std::shared_ptr<I_RO_TemplateCommon> CGameTransitionTemplateSerializer::Serializ
     return gameTransitionTemplate;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CGameTransitionTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationGameTransitionSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CGameTransitionTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
+void CConfigurationGameTransitionSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     
 }

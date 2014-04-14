@@ -17,11 +17,11 @@ class CTemplateLoadingCommands final
 private:
     
     friend class ITemplateLoadingHandler;
-    friend class CModelTemplateLoader;
-    friend class CParticleEmitterTemplateLoader;
-    friend class CGameTransitionTemplateLoader;
-    friend class COceanTemplateLoader;
-    friend class CLandscapeTemplateLoader;
+    friend class CConfigurationModelLoader;
+    friend class CConfigurationParticleEmitterLoader;
+    friend class CConfigurationGameTransitionLoader;
+    friend class CConfigurationOceanLoader;
+    friend class CConfigurationLandscapeLoader;
 	friend class CGUITemplateLoader;
     
     typedef std::function<void(std::shared_ptr<I_RO_TemplateCommon> _template)> __TEMPLATE_LOADED_COMMAND;
@@ -50,11 +50,11 @@ private:
     
     CTemplateLoadingCommands m_commands;
     
-    friend class CModelTemplateLoader;
-    friend class CParticleEmitterTemplateLoader;
-    friend class CGameTransitionTemplateLoader;
-    friend class COceanTemplateLoader;
-    friend class CLandscapeTemplateLoader;
+    friend class CConfigurationModelLoader;
+    friend class CConfigurationParticleEmitterLoader;
+    friend class CConfigurationGameTransitionLoader;
+    friend class CConfigurationOceanLoader;
+    friend class CConfigurationLandscapeLoader;
 	friend class CGUITemplateLoader;
     
     void _ConnectCommands(void);

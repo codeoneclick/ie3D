@@ -6,26 +6,26 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CScreenSpaceRenderOperationTemplateSerializer.h"
+#include "CConfigurationSSRenderOperationSerializer.h"
 #include "CTemplateGameObjects.h"
 
-CScreenSpaceRenderOperationTemplateSerializer::CScreenSpaceRenderOperationTemplateSerializer(void)
+CConfigurationSSRenderOperationSerializer::CConfigurationSSRenderOperationSerializer(void)
 {
     
 }
 
-CScreenSpaceRenderOperationTemplateSerializer::~CScreenSpaceRenderOperationTemplateSerializer(void)
+CConfigurationSSRenderOperationSerializer::~CConfigurationSSRenderOperationSerializer(void)
 {
     
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CScreenSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationSSRenderOperationSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     
-    std::shared_ptr<CScreenSpaceRenderOperationTemplate> screenSpaceRenderOperationTemplate = std::make_shared<CScreenSpaceRenderOperationTemplate>();
+    std::shared_ptr<CConfigurationSSRenderOperation> screenSpaceRenderOperationTemplate = std::make_shared<CConfigurationSSRenderOperation>();
     pugi::xml_node node = document.child(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMainNode.c_str());
     
     std::string guid = node.attribute(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationGuidAttribute.c_str()).as_string();
@@ -55,12 +55,12 @@ std::shared_ptr<I_RO_TemplateCommon> CScreenSpaceRenderOperationTemplateSerializ
     return screenSpaceRenderOperationTemplate;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CScreenSpaceRenderOperationTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationSSRenderOperationSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CScreenSpaceRenderOperationTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
+void CConfigurationSSRenderOperationSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     
 }

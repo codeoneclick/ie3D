@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef COutputRenderOperationTemplateLoadingOperation_h
-#define COutputRenderOperationTemplateLoadingOperation_h
+#ifndef CConfigurationORenderOperationLoadingOperation_h
+#define CConfigurationORenderOperationLoadingOperation_h
 
 #include "ITemplateLoadingOperation.h"
 
-class COutputRenderOperationTemplateLoadingOperation : public ITemplateLoadingOperation
+class CConfigurationORenderOperationLoadingOperation : public ITemplateLoadingOperation
 {
 private:
     
@@ -19,8 +19,8 @@ protected:
     
 public:
     
-    COutputRenderOperationTemplateLoadingOperation(void);
-    ~COutputRenderOperationTemplateLoadingOperation(void);
+    CConfigurationORenderOperationLoadingOperation(void);
+    ~CConfigurationORenderOperationLoadingOperation(void);
     
     std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename);
     

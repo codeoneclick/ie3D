@@ -11,7 +11,7 @@
 
 #include "IGameObject.h"
 
-class CParticleEmitterTemplate;
+class CConfigurationParticleEmitter;
 struct SParticle
 {
     glm::vec3 m_position;
@@ -27,7 +27,7 @@ private:
     
 protected:
     
-    std::shared_ptr<CParticleEmitterTemplate> m_settings;
+    std::shared_ptr<CConfigurationParticleEmitter> m_settings;
     SParticle* m_particles;
     f32 m_lastEmittTimestamp;
     f32 m_lastParticleEmittTime;

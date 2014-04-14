@@ -1,27 +1,27 @@
 //
-//  CModelTemplateLoader.cpp
+//  CConfigurationModelLoader.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CModelTemplateLoader.h"
-#include "CModelTemplateLoadingOperation.h"
+#include "CConfigurationModelLoader.h"
+#include "CConfigurationModelLoadingOperation.h"
 #include "CTemplateGameObjects.h"
 #include "ITemplateLoadingHandler.h"
 
-CModelTemplateLoader::CModelTemplateLoader(void)
+CConfigurationModelLoader::CConfigurationModelLoader(void)
 {
     
 }
 
-CModelTemplateLoader::~CModelTemplateLoader(void)
+CConfigurationModelLoader::~CConfigurationModelLoader(void)
 {
     
 }
 
-void CModelTemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
+void CConfigurationModelLoader::Load(const std::string& _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
 {
 #if defined(__USE_GCDPP__)
     
@@ -30,14 +30,14 @@ void CModelTemplateLoader::Load(const std::string& _filename, std::shared_ptr<IT
         
 #endif
         
-        std::shared_ptr<CModelTemplateLoadingOperation> operation = std::make_shared<CModelTemplateLoadingOperation>();
-        std::shared_ptr<CModelTemplate> modelTemplate = std::static_pointer_cast<CModelTemplate>(operation->Serialize(_filename));
+        std::shared_ptr<CConfigurationModelLoadingOperation> operation = std::make_shared<CConfigurationModelLoadingOperation>();
+        std::shared_ptr<CConfigurationModel> modelTemplate = std::static_pointer_cast<CConfigurationModel>(operation->Serialize(_filename));
         assert(modelTemplate != nullptr);
         assert(_handler != nullptr);
         
 #if defined(__USE_GCDPP__)
         
-        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<CModelTemplate>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<CModelTemplate> _template)
+        std::function<void(std::shared_ptr<ITemplateLoadingHandler>, std::shared_ptr<CConfigurationModel>)> function = []( std::shared_ptr<ITemplateLoadingHandler> _handler, std::shared_ptr<CConfigurationModel> _template)
         {
             _handler->_Get_Commands()._ExecuteTemplateLoadedCommand(_template);
         };

@@ -1,31 +1,31 @@
 //
-//  CParticleEmitterTemplateSerializer.cpp
+//  CConfigurationParticleEmitterSerializer.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/28/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CParticleEmitterTemplateSerializer.h"
+#include "CConfigurationParticleEmitterSerializer.h"
 #include "CTemplateGameObjects.h"
 
-CParticleEmitterTemplateSerializer::CParticleEmitterTemplateSerializer(void)
+CConfigurationParticleEmitterSerializer::CConfigurationParticleEmitterSerializer(void)
 {
     
 }
 
-CParticleEmitterTemplateSerializer::~CParticleEmitterTemplateSerializer(void)
+CConfigurationParticleEmitterSerializer::~CConfigurationParticleEmitterSerializer(void)
 {
     
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CParticleEmitterTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationParticleEmitterSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     
-    std::shared_ptr<CParticleEmitterTemplate> particleEmitterTemplate = std::make_shared<CParticleEmitterTemplate>();
+    std::shared_ptr<CConfigurationParticleEmitter> particleEmitterTemplate = std::make_shared<CConfigurationParticleEmitter>();
     
     pugi::xml_node node = document.child(particleEmitterTemplate->kParticleEmitterMainNode.c_str());
     
@@ -201,12 +201,12 @@ std::shared_ptr<I_RO_TemplateCommon> CParticleEmitterTemplateSerializer::Seriali
     return particleEmitterTemplate;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CParticleEmitterTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationParticleEmitterSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CParticleEmitterTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
+void CConfigurationParticleEmitterSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     
 }

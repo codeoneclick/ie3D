@@ -1,31 +1,31 @@
 //
-//  CLandscapeTemplateSerializer.cpp
+//  CConfigurationLandscapeSerializer.cpp
 //  indieEngineCore
 //
 //  Created by Sergey Sergeev on 11/25/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CLandscapeTemplateSerializer.h"
+#include "CConfigurationLandscapeSerializer.h"
 #include "CTemplateGameObjects.h"
 
-CLandscapeTemplateSerializer::CLandscapeTemplateSerializer(void)
+CConfigurationLandscapeSerializer::CConfigurationLandscapeSerializer(void)
 {
     
 }
 
-CLandscapeTemplateSerializer::~CLandscapeTemplateSerializer(void)
+CConfigurationLandscapeSerializer::~CConfigurationLandscapeSerializer(void)
 {
     
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationLandscapeSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     
-    std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::make_shared<CLandscapeTemplate>();
+    std::shared_ptr<CConfigurationLandscape> landscapeTemplate = std::make_shared<CConfigurationLandscape>();
     pugi::xml_node node = document.child(landscapeTemplate->kLandscapeMainNode.c_str());
     
     f32 sizeX = node.attribute(landscapeTemplate->kLandscapeSizeXAttribute.c_str()).as_float();
@@ -118,12 +118,12 @@ std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplateSerializer::Serialize(con
     return landscapeTemplate;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CLandscapeTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationLandscapeSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CLandscapeTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
+void CConfigurationLandscapeSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     
 }

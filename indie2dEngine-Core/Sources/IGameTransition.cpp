@@ -88,12 +88,12 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
     assert(m_renderMgr != nullptr);
     assert(m_resourceAccessor != nullptr);
     
-    std::shared_ptr<CGameTransitionTemplate> gameTransitionTemplate = std::static_pointer_cast<CGameTransitionTemplate>(_template);
+    std::shared_ptr<CConfigurationGameTransition> gameTransitionTemplate = std::static_pointer_cast<CConfigurationGameTransition>(_template);
     assert(gameTransitionTemplate != nullptr);
     
     for(const auto& iterator : gameTransitionTemplate->Get_WorldSpaceRenderOperationsTemplates())
     {
-        std::shared_ptr<CWorldSpaceRenderOperationTemplate> worldSpaceRenderOperationTemplate = std::static_pointer_cast<CWorldSpaceRenderOperationTemplate>(iterator);
+        std::shared_ptr<CConfigurationWSRenderOperation> worldSpaceRenderOperationTemplate = std::static_pointer_cast<CConfigurationWSRenderOperation>(iterator);
         std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation =
         std::make_shared<CRenderOperationWorldSpace>(worldSpaceRenderOperationTemplate->Get_ScreenWidth(),
                                                      worldSpaceRenderOperationTemplate->Get_ScreenHeight(),
@@ -105,8 +105,8 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
     
     for(const auto& iterator : gameTransitionTemplate->Get_ScreenSpaceRenderOperationsTemplates())
     {
-        std::shared_ptr<CScreenSpaceRenderOperationTemplate> screenSpaceRenderOperationTemplate = std::static_pointer_cast<CScreenSpaceRenderOperationTemplate>(iterator);
-        std::shared_ptr<CMaterialTemplate> screenSpaceRenderOperationMaterialTemplate = std::static_pointer_cast<CMaterialTemplate>(screenSpaceRenderOperationTemplate->Get_MaterialTemplate());
+        std::shared_ptr<CConfigurationSSRenderOperation> screenSpaceRenderOperationTemplate = std::static_pointer_cast<CConfigurationSSRenderOperation>(iterator);
+        std::shared_ptr<CConfigurationMaterial> screenSpaceRenderOperationMaterialTemplate = std::static_pointer_cast<CConfigurationMaterial>(screenSpaceRenderOperationTemplate->Get_MaterialTemplate());
         assert(screenSpaceRenderOperationMaterialTemplate != nullptr);
         
         std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>(screenSpaceRenderOperationMaterialTemplate->Get_RenderOperationName());
@@ -120,8 +120,8 @@ void IGameTransition::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _te
         m_renderMgr->RegisterScreenSpaceRenderOperation( screenSpaceRenderOperationTemplate->Get_Guid(), screenSpaceRenderOperation);
     }
     
-    std::shared_ptr<COutputRenderOperationTemplate> outputRenderOperationTemplate = std::static_pointer_cast<COutputRenderOperationTemplate>(gameTransitionTemplate->Get_OutputRenderOperationTemplate());
-    std::shared_ptr<CMaterialTemplate> outputRenderOperationMaterialTemplate = std::static_pointer_cast<CMaterialTemplate>(outputRenderOperationTemplate->Get_MaterialTemplate());
+    std::shared_ptr<CConfigurationORenderOperation> outputRenderOperationTemplate = std::static_pointer_cast<CConfigurationORenderOperation>(gameTransitionTemplate->Get_OutputRenderOperationTemplate());
+    std::shared_ptr<CConfigurationMaterial> outputRenderOperationMaterialTemplate = std::static_pointer_cast<CConfigurationMaterial>(outputRenderOperationTemplate->Get_MaterialTemplate());
     assert(outputRenderOperationMaterialTemplate != nullptr);
     
     std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>(outputRenderOperationMaterialTemplate->Get_RenderOperationName());

@@ -1,31 +1,31 @@
 //
-//  CModelTemplateSerializer.cpp
+//  CConfigurationModelSerializer.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/28/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CModelTemplateSerializer.h"
+#include "CConfigurationModelSerializer.h"
 #include "CTemplateGameObjects.h"
 
-CModelTemplateSerializer::CModelTemplateSerializer(void)
+CConfigurationModelSerializer::CConfigurationModelSerializer(void)
 {
     
 }
 
-CModelTemplateSerializer::~CModelTemplateSerializer(void)
+CConfigurationModelSerializer::~CConfigurationModelSerializer(void)
 {
     
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CModelTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationModelSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     
-    std::shared_ptr<CModelTemplate> modelTemplate = std::make_shared<CModelTemplate>();
+    std::shared_ptr<CConfigurationModel> modelTemplate = std::make_shared<CConfigurationModel>();
     pugi::xml_node node = document.child(modelTemplate->kModelMainNode.c_str());
     
     std::string meshFilename = node.attribute(modelTemplate->kModelMeshFilenameAttribute.c_str()).as_string();
@@ -87,12 +87,12 @@ std::shared_ptr<I_RO_TemplateCommon> CModelTemplateSerializer::Serialize(const s
     return modelTemplate;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CModelTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationModelSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CModelTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
+void CConfigurationModelSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     /*std::shared_ptr<SModelTemplate> modelTemplate = std::static_pointer_cast<SModelTemplate>(_template);
     pugi::xml_document document;

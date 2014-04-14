@@ -1,32 +1,32 @@
 //
-//  CMaterialTemplateSerializer.cpp
+//  CConfigurationMaterialSerializer.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CMaterialTemplateSerializer.h"
+#include "CConfigurationMaterialSerializer.h"
 #include "CTemplateGameObjects.h"
 
 
-CMaterialTemplateSerializer::CMaterialTemplateSerializer(void)
+CConfigurationMaterialSerializer::CConfigurationMaterialSerializer(void)
 {
     
 }
 
-CMaterialTemplateSerializer::~CMaterialTemplateSerializer(void)
+CConfigurationMaterialSerializer::~CConfigurationMaterialSerializer(void)
 {
     
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationMaterialSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     
-    std::shared_ptr<CMaterialTemplate> materialTemplate = std::make_shared<CMaterialTemplate>();
+    std::shared_ptr<CConfigurationMaterial> materialTemplate = std::make_shared<CConfigurationMaterial>();
     
     pugi::xml_node node = document.child(materialTemplate->kMaterialMainNode.c_str());
     
@@ -133,7 +133,7 @@ std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplateSerializer::Serialize(cons
                                     &isDebugging);
     
     
-    std::shared_ptr<CShaderTemplate> shaderTemplate = std::make_shared<CShaderTemplate>();
+    std::shared_ptr<CConfigurationShader> shaderTemplate = std::make_shared<CConfigurationShader>();
     std::string vsFilename = node.child(materialTemplate->kMaterialShaderTemplateNode.c_str()).attribute(shaderTemplate->kShaderVSFilenameAttribute.c_str()).as_string();
     shaderTemplate->Set_Attribute(Get_TemplateAttributeKey(shaderTemplate->kShaderMainNode,
                                                            shaderTemplate->kShaderVSFilenameAttribute),
@@ -155,7 +155,7 @@ std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplateSerializer::Serialize(cons
          texture;
          texture = texture.next_sibling(materialTemplate->kMaterialTextureTemplateNode.c_str()))
     {
-        std::shared_ptr<CTextureTemplate> textureTemplate = std::make_shared<CTextureTemplate>();
+        std::shared_ptr<CConfigurationTexture> textureTemplate = std::make_shared<CConfigurationTexture>();
         
         std::string filename = texture.attribute(textureTemplate->kTextureFilenameAttribute.c_str()).as_string();
         textureTemplate->Set_Attribute(Get_TemplateAttributeKey(textureTemplate->kTextureMainNode,
@@ -191,12 +191,12 @@ std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplateSerializer::Serialize(cons
     return materialTemplate;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CMaterialTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationMaterialSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CMaterialTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
+void CConfigurationMaterialSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     
 }

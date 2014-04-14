@@ -101,12 +101,36 @@ class IResourceLoadingHandler;
 typedef std::shared_ptr<IResourceLoadingHandler> ISharedResourceLoadingHandler;
 typedef const ISharedResourceLoadingHandler& ISharedResourceLoadingHandlerRef;
 
-class CTemplateAttribute;
-typedef std::shared_ptr<CTemplateAttribute> CSharedTemplateAttribute;
-typedef const CSharedTemplateAttribute& CSharedTemplateAttributeRef;
+class CConfigurationAttribute;
+typedef std::shared_ptr<CConfigurationAttribute> CSharedConfigurationAttribute;
+typedef const CSharedConfigurationAttribute& CSharedConfigurationAttributeRef;
 
-class CTemplateCommon;
-typedef std::shared_ptr<CTemplateCommon> CSharedTemplateCommon;
-typedef const CSharedTemplateCommon& CSharedTemplateCommonRef;
+class IConfiguration;
+typedef std::shared_ptr<IConfiguration> ISharedConfiguration;
+typedef const ISharedConfiguration& ISharedConfigurationRef;
+
+class CConfigurationTexture;
+typedef std::shared_ptr<CConfigurationTexture> CSharedConfigurationTexture;
+typedef const CSharedConfigurationTexture& CSharedConfigurationTextureRef;
+
+class CConfigurationShader;
+typedef std::shared_ptr<CConfigurationShader> CSharedConfigurationShader;
+typedef const CSharedConfigurationShader& CSharedConfigurationShaderRef;
+
+class CConfigurationMaterial;
+typedef std::shared_ptr<CConfigurationMaterial> CSharedConfigurationMaterial;
+typedef const CSharedConfigurationMaterial& CSharedConfigurationMaterialRef;
+
+class CConfigurationWSRenderOperation;
+typedef std::shared_ptr<CConfigurationWSRenderOperation> CSharedConfigurationWSRenderOperation;
+typedef const CSharedConfigurationWSRenderOperation& CSharedConfigurationWSRenderOperationRef;
+
+class CConfigurationSSRenderOperation;
+typedef std::shared_ptr<CConfigurationSSRenderOperation> CSharedConfigurationSSRenderOperation;
+typedef const CSharedConfigurationSSRenderOperation& CSharedConfigurationSSRenderOperationRef;
+
+class CConfigurationORenderOperation;
+typedef std::shared_ptr<CConfigurationORenderOperation> CSharedConfigurationORenderOperation;
+typedef const CSharedConfigurationORenderOperation& CSharedConfigurationORenderOperationRef;
 
 #endif

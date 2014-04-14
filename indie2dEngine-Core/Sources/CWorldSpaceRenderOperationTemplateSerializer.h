@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef CWorldSpaceRenderOperationTemplateSerializer_h
-#define CWorldSpaceRenderOperationTemplateSerializer_h
+#ifndef CConfigurationWSRenderOperationSerializer_h
+#define CConfigurationWSRenderOperationSerializer_h
 
 #include "ITemplateSerializer.h"
 
-class CWorldSpaceRenderOperationTemplateSerializer final : public ITemplateSerializer
+class CConfigurationWSRenderOperationSerializer final : public ITemplateSerializer
 {
 private:
     
@@ -19,8 +19,8 @@ protected:
     
 public:
     
-    CWorldSpaceRenderOperationTemplateSerializer(void);
-    ~CWorldSpaceRenderOperationTemplateSerializer(void);
+    CConfigurationWSRenderOperationSerializer(void);
+    ~CConfigurationWSRenderOperationSerializer(void);
     
     std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename);
     std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _host, ui32 _port, const std::string& _filename);

@@ -1,31 +1,31 @@
 //
-//  COceanTemplateSerializer.cpp
+//  CConfigurationOceanSerializer.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 7/24/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "COceanTemplateSerializer.h"
+#include "CConfigurationOceanSerializer.h"
 #include "CTemplateGameObjects.h"
 
-COceanTemplateSerializer::COceanTemplateSerializer(void)
+CConfigurationOceanSerializer::CConfigurationOceanSerializer(void)
 {
     
 }
 
-COceanTemplateSerializer::~COceanTemplateSerializer(void)
+CConfigurationOceanSerializer::~CConfigurationOceanSerializer(void)
 {
 
 }
 
-std::shared_ptr<I_RO_TemplateCommon> COceanTemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationOceanSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
     pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     
-    std::shared_ptr<COceanTemplate> oceanTemplate = std::make_shared<COceanTemplate>();
+    std::shared_ptr<CConfigurationOcean> oceanTemplate = std::make_shared<CConfigurationOcean>();
     pugi::xml_node node = document.child(oceanTemplate->kOceanMainNode.c_str());
     
     f32 sizeX = node.attribute(oceanTemplate->kOceanSizeXAttribute.c_str()).as_float();
@@ -67,12 +67,12 @@ std::shared_ptr<I_RO_TemplateCommon> COceanTemplateSerializer::Serialize(const s
     return oceanTemplate;
 }
 
-std::shared_ptr<I_RO_TemplateCommon> COceanTemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<I_RO_TemplateCommon> CConfigurationOceanSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void COceanTemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
+void CConfigurationOceanSerializer::Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template)
 {
     
 }

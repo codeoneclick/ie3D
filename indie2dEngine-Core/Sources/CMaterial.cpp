@@ -268,7 +268,7 @@ void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
     assert(_screenSpaceTextureAccessor != nullptr);
 	assert(_resourceAccessor != nullptr);
     
-    std::shared_ptr<CMaterialTemplate> materialTemplate = std::static_pointer_cast<CMaterialTemplate>(_template);
+    std::shared_ptr<CConfigurationMaterial> materialTemplate = std::static_pointer_cast<CConfigurationMaterial>(_template);
     assert(materialTemplate != nullptr);
     
     m_parameters = std::make_shared<CMaterialCachedParameters>();
@@ -292,7 +292,7 @@ void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
     
     for(const auto& iterator : materialTemplate->Get_TexturesTemplates())
     {
-        std::shared_ptr<CTextureTemplate> textureTemplate = std::static_pointer_cast<CTextureTemplate>(iterator);
+        std::shared_ptr<CConfigurationTexture> textureTemplate = std::static_pointer_cast<CConfigurationTexture>(iterator);
         assert(textureTemplate != nullptr);
         
         std::shared_ptr<CTexture> texture = textureTemplate->Get_Filename().length() != 0 ?
@@ -308,7 +308,7 @@ void CMaterial::Serialize(const std::shared_ptr<I_RO_TemplateCommon>& _template,
         CMaterial::Set_Texture(texture, static_cast<E_SHADER_SAMPLER>(textureTemplate->Get_SamplerId()));
     }
     
-    std::shared_ptr<CShaderTemplate> shaderTemplate = std::static_pointer_cast<CShaderTemplate>(materialTemplate->Get_ShaderTemplate());
+    std::shared_ptr<CConfigurationShader> shaderTemplate = std::static_pointer_cast<CConfigurationShader>(materialTemplate->Get_ShaderTemplate());
     assert(shaderTemplate != nullptr);
     std::shared_ptr<CShader> shader = _resourceAccessor->getShader(shaderTemplate->Get_VSFilename(),
                                                                       shaderTemplate->Get_FSFilename());

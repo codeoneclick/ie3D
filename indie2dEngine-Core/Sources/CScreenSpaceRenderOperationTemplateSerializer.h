@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef CScreenSpaceRenderOperationTemplateSerializer_h
-#define CScreenSpaceRenderOperationTemplateSerializer_h
+#ifndef CConfigurationSSRenderOperationSerializer_h
+#define CConfigurationSSRenderOperationSerializer_h
 
 #include "ITemplateSerializer.h"
 
-class CScreenSpaceRenderOperationTemplateSerializer final : public ITemplateSerializer
+class CConfigurationSSRenderOperationSerializer final : public ITemplateSerializer
 {
 private:
     
@@ -19,8 +19,8 @@ protected:
     
 public:
     
-    CScreenSpaceRenderOperationTemplateSerializer(void);
-    ~CScreenSpaceRenderOperationTemplateSerializer(void);
+    CConfigurationSSRenderOperationSerializer(void);
+    ~CConfigurationSSRenderOperationSerializer(void);
     
     std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename);
     std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _host, ui32 _port, const std::string& _filename);

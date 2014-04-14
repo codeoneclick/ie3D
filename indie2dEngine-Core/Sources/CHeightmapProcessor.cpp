@@ -31,7 +31,7 @@ m_edgesMaskTexture(nullptr)
     m_maxHeight = -FLT_MAX;
     m_minHeight = FLT_MAX;
     
-    std::shared_ptr<CLandscapeTemplate> landscapeTemplate = std::static_pointer_cast<CLandscapeTemplate>(_template);
+    std::shared_ptr<CConfigurationLandscape> landscapeTemplate = std::static_pointer_cast<CConfigurationLandscape>(_template);
     
     m_width = landscapeTemplate->Get_Size().x;
     m_height = landscapeTemplate->Get_Size().y;
