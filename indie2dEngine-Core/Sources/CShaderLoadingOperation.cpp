@@ -41,7 +41,7 @@ void CShaderLoadingOperation::commit(void)
 {
     assert(m_resource != nullptr);
     assert(m_resource->isLoaded() == true);
-    std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader >(m_resource);
+    std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader>(m_resource);
     m_commiter = std::make_shared<CShaderCommiter_GLSL>(m_serializer->getGuid(),
                                                         shader->getVSSourceCode(),
                                                         shader->getFSSourceCode(),

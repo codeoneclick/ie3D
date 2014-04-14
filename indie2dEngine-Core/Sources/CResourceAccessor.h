@@ -18,7 +18,7 @@ private:
     
 protected:
     
-    std::array<ISharedResourceLoader, E_RESOURCE_LOADER_MAX> m_resourceLoaders;
+    CSharedResourceLoader m_resourceLoader;
     
 #if defined(__NDK__)
     

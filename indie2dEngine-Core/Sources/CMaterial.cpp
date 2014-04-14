@@ -12,7 +12,6 @@
 #include "CRenderMgr.h"
 #include "CTemplateGameObjects.h"
 #include "CResourceAccessor.h"
-#include "IResourceLoadingHandler.h"
 
 I_RO_Material::I_RO_Material(void)
 {

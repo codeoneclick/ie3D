@@ -7,13 +7,13 @@
 //
 
 #include "CTextureLoadingOperation.h"
-#include "CTexture.h"
 #include "CTextureSerializer_PVR.h"
 #include "CTextureCommiter_PVR.h"
+#include "IResource.h"
 
-CTextureLoadingOperation::CTextureLoadingOperation(const std::string& _filename, std::shared_ptr<IResource> _resource) :
-IResourceLoadingOperation(_filename, _resource),
-m_filename(_filename)
+CTextureLoadingOperation::CTextureLoadingOperation(const std::string& filename, ISharedResourceRef resource) :
+IResourceLoadingOperation(filename, resource),
+m_filename(filename)
 {
     
 }
@@ -23,25 +23,24 @@ CTextureLoadingOperation::~CTextureLoadingOperation(void)
     
 }
 
-void CTextureLoadingOperation::Serialize(void)
+void CTextureLoadingOperation::serialize(void)
 {
     assert(m_resource != nullptr);
     m_status = E_RESOURCE_LOADING_OPERATION_STATUS_INPROGRESS;
     m_serializer = std::make_shared<CTextureSerializer_PVR>(m_filename,
                                                             m_resource);
-    m_serializer->Serialize();
-    m_status = m_serializer->Get_Status() == E_SERIALIZER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
+    m_serializer->serialize();
+    m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
 }
 
-void CTextureLoadingOperation::Commit(void)
+void CTextureLoadingOperation::commit(void)
 {
     assert(m_resource != nullptr);
-    assert(m_resource->IsLoaded() == true);
-    std::shared_ptr<CTexture> texture = std::static_pointer_cast<CTexture >(m_resource);
-    m_commiter = std::make_shared<CTextureCommiter_PVR>(m_serializer->Get_Guid(),
-                                                        texture->Get_Header(),
+    assert(m_resource->isLoaded() == true);
+    std::shared_ptr<CTexture> texture = std::static_pointer_cast<CTexture>(m_resource);
+    m_commiter = std::make_shared<CTextureCommiter_PVR>(m_serializer->getGuid(),
                                                         m_resource);
-    m_commiter->Commit();
-    m_status = m_commiter->Get_Status() == E_COMMITER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
-    m_resource->_OnLoaded();
+    m_commiter->commit();
+    m_status = m_commiter->getStatus() == E_COMMITER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
+    IResourceLoadingOperation::onResourceLoaded();
 }

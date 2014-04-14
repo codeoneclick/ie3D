@@ -9,7 +9,6 @@
 #ifndef CTextureLoadingOperation_h
 #define CTextureLoadingOperation_h
 
-#include "HCommon.h"
 #include "IResourceLoadingOperation.h"
 
 class IResource;
@@ -24,11 +23,11 @@ protected:
     
 public:
     
-    CTextureLoadingOperation(const std::string& _filename, std::shared_ptr<IResource> _resource);
+    CTextureLoadingOperation(const std::string& filename, ISharedResourceRef resource);
     ~CTextureLoadingOperation(void);
     
-    void Serialize(void);
-    void Commit(void);
+    void serialize(void);
+    void commit(void);
     
 };
 #endif 

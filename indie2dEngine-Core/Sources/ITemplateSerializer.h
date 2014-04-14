@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 
+
 #define USE_PROXY_SERVER 1
 
 class I_RO_TemplateCommon;

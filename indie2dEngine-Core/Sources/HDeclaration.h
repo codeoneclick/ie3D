@@ -31,29 +31,9 @@ class CSequence;
 typedef std::shared_ptr<CSequence> CSharedSequence;
 typedef const CSharedSequence& CSharedSequenceRef;
 
-class IResourceLoader;
-typedef std::shared_ptr<IResourceLoader> ISharedResourceLoader;
-typedef const ISharedResourceLoader& ISharedResourceLoaderRef;
-
-class CTextureLoader;
-typedef std::shared_ptr<CTextureLoader> CSharedTextureLoader;
-typedef const CSharedTextureLoader& CSharedTextureLoaderRef;
-
-class CShaderLoader;
-typedef std::shared_ptr<CShaderLoader> CSharedShaderLoader;
-typedef const CSharedShaderLoader& CSharedShaderLoaderRef;
-
-class CMeshLoader;
-typedef std::shared_ptr<CMeshLoader> CSharedMeshLoader;
-typedef const CSharedMeshLoader& CSharedMeshLoaderRef;
-
-class CSkeletonLoader;
-typedef std::shared_ptr<CSkeletonLoader> CSharedSkeletonLoader;
-typedef const CSharedSkeletonLoader& CSharedSkeletonLoaderRef;
-
-class CSequenceLoader;
-typedef std::shared_ptr<CSequenceLoader> CSharedSequenceLoader;
-typedef const CSharedSequenceLoader& CSharedSequenceLoaderRef;
+class CResourceLoader;
+typedef std::shared_ptr<CResourceLoader> CSharedResourceLoader;
+typedef const CSharedResourceLoader& CSharedResourceLoaderRef;
 
 class CMeshData;
 typedef std::shared_ptr<CMeshData> CSharedMeshData;
@@ -120,5 +100,13 @@ typedef const ISharedResourceLoadingOperation& ISharedResourceLoadingOperationRe
 class IResourceLoadingHandler;
 typedef std::shared_ptr<IResourceLoadingHandler> ISharedResourceLoadingHandler;
 typedef const ISharedResourceLoadingHandler& ISharedResourceLoadingHandlerRef;
+
+class CTemplateAttribute;
+typedef std::shared_ptr<CTemplateAttribute> CSharedTemplateAttribute;
+typedef const CSharedTemplateAttribute& CSharedTemplateAttributeRef;
+
+class CTemplateCommon;
+typedef std::shared_ptr<CTemplateCommon> CSharedTemplateCommon;
+typedef const CSharedTemplateCommon& CSharedTemplateCommonRef;
 
 #endif

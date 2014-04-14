@@ -38,12 +38,12 @@ void IResourceLoadingHandler::registerResourceLoadingHandler(const RESOURCE_LOAD
 {
     m_resourceLoadingHandlers.at(resourceClass).insert(handler);
 }
+
 void IResourceLoadingHandler::unregisterResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler,
                                                                E_RESOURCE_CLASS resourceClass)
 {
     m_resourceLoadingHandlers.at(resourceClass).erase(handler);
 }
-
 
 IResourceData::IResourceData(E_RESOURCE_DATA_CLASS resourceDataClass) :
 m_resourceDataClass(resourceDataClass)

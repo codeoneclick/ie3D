@@ -53,150 +53,128 @@ std::map<std::string, GLenum> g_glEnumContainer = __CreateGlEnumContainer();
 #endif
 
 
-E_TEMPLATE_META_TYPE TTemplateAttribute::Get_MetaType(void)
+E_TEMPLATE_META_TYPE CTemplateAttribute::getMetaType(void)
 {
     return m_metaType;
 }
 
-bool TTemplateAttribute::Get_Bool(void)
+bool CTemplateAttribute::getBool(void) const
 {
     return m_data.m_BOOL;
 }
 
-i8 TTemplateAttribute::Get_I8(void)
+i8 CTemplateAttribute::getI8(void) const
 {
     return m_data.m_I8;
 }
 
-ui8 TTemplateAttribute::Get_UI8(void)
+ui8 CTemplateAttribute::getUI8(void) const
 {
     return m_data.m_UI8;
 }
 
-i16 TTemplateAttribute::Get_I16(void)
+i16 CTemplateAttribute::getI16(void) const
 {
     return m_data.m_I16;
 }
 
-ui16 TTemplateAttribute::Get_UI16(void)
+ui16 CTemplateAttribute::getUI16(void) const
 {
     return m_data.m_UI16;
 }
 
-i32 TTemplateAttribute::Get_I32(void)
+i32 CTemplateAttribute::getI32(void) const
 {
     return m_data.m_I32;
 }
 
-ui32 TTemplateAttribute::Get_UI32(void)
+ui32 CTemplateAttribute::getUI32(void) const
 {
     return m_data.m_UI32;
 }
 
-f32 TTemplateAttribute::Get_F32(void)
+f32 CTemplateAttribute::getF32(void) const
 {
     return m_data.m_F32;
 }
 
-std::string TTemplateAttribute::Get_String(void)
+std::string CTemplateAttribute::getString(void) const
 {
     return m_STRING;
 }
 
-I_RO_TemplateCommon::I_RO_TemplateCommon(void)
-{
-    
-}
-
-I_RO_TemplateCommon::~I_RO_TemplateCommon(void)
-{
-    
-    
-}
-
-I_WO_TemplateCommon::I_WO_TemplateCommon(void)
-{
-    
-}
-
-I_WO_TemplateCommon::~I_WO_TemplateCommon(void)
-{
-    
-}
-
-CTemplateCommon::CTemplateCommon(void) :
-I_RO_TemplateCommon(),
-I_WO_TemplateCommon()
+CTemplateCommon::CTemplateCommon(void)
 {
     
 }
 
 CTemplateCommon::~CTemplateCommon(void)
 {
-    
+    m_attributes.clear();
+    m_templates.clear();
 }
 
-void CTemplateCommon::Set_Attribute(const std::string& _attributeName,
-                                    E_TEMPLATE_META_TYPE _metaType,
-                                    void* _value,
-                                    bool _isReplacing,
-                                    ui32 _replacingIndex)
+void CTemplateCommon::setAttribute(const std::string& attributeName,
+                                    E_TEMPLATE_META_TYPE metaType,
+                                    void* inValue,
+                                    bool isReplacing,
+                                    ui32 replacingIndex)
 {
-    std::shared_ptr<TTemplateAttribute> attribute;
-    switch (_metaType)
+    std::shared_ptr<CTemplateAttribute> attribute;
+    switch (metaType)
     {
         case E_TEMPLATE_META_TYPE_BOOL:
         {
-            bool value = *static_cast<bool*>(_value);
-            attribute = std::make_shared<TTemplateAttribute>(value);
+            bool value = *static_cast<bool*>(inValue);
+            attribute = std::make_shared<CTemplateAttribute>(value);
         }
         break;
         case E_TEMPLATE_META_TYPE_I8:
         {
-            i8 value = *static_cast<i8*>(_value);
-            attribute = std::make_shared<TTemplateAttribute>(value);
+            i8 value = *static_cast<i8*>(inValue);
+            attribute = std::make_shared<CTemplateAttribute>(value);
         }
         break;
         case E_TEMPLATE_META_TYPE_UI8:
         {
-            ui8 value = *static_cast<ui8*>(_value);
-            attribute = std::make_shared<TTemplateAttribute>(value);
+            ui8 value = *static_cast<ui8*>(inValue);
+            attribute = std::make_shared<CTemplateAttribute>(value);
         }
         break;
         case E_TEMPLATE_META_TYPE_I16:
         {
-            i16 value = *static_cast<i16*>(_value);
-            attribute = std::make_shared<TTemplateAttribute>(value);
+            i16 value = *static_cast<i16*>(inValue);
+            attribute = std::make_shared<CTemplateAttribute>(value);
         }
         break;
         case E_TEMPLATE_META_TYPE_UI16:
         {
-            ui16 value = *static_cast<ui16*>(_value);
-            attribute = std::make_shared<TTemplateAttribute>(value);
+            ui16 value = *static_cast<ui16*>(inValue);
+            attribute = std::make_shared<CTemplateAttribute>(value);
         }
         break;
         case E_TEMPLATE_META_TYPE_I32:
         {
-            i32 value = *static_cast<i32*>(_value);
-            attribute = std::make_shared<TTemplateAttribute>(value);
+            i32 value = *static_cast<i32*>(inValue);
+            attribute = std::make_shared<CTemplateAttribute>(value);
         }
         break;
         case E_TEMPLATE_META_TYPE_UI32:
         {
-            ui32 value = *static_cast<ui32*>(_value);
-            attribute = std::make_shared<TTemplateAttribute>(value);
+            ui32 value = *static_cast<ui32*>(inValue);
+            attribute = std::make_shared<CTemplateAttribute>(value);
         }
         break;
         case E_TEMPLATE_META_TYPE_F32:
         {
-            f32 value = *static_cast<f32*>(_value);
-            attribute = std::make_shared<TTemplateAttribute>(value);
+            f32 value = *static_cast<f32*>(inValue);
+            attribute = std::make_shared<CTemplateAttribute>(value);
         }
         break;
         case E_TEMPLATE_META_TYPE_STRING:
         {
-            std::string value = *static_cast<std::string*>(_value);
-            attribute = std::make_shared<TTemplateAttribute>(value.c_str());
+            std::string value = *static_cast<std::string*>(inValue);
+            attribute = std::make_shared<CTemplateAttribute>(value.c_str());
         }
         break;
         
@@ -207,7 +185,7 @@ void CTemplateCommon::Set_Attribute(const std::string& _attributeName,
         break;
     }
     
-    const auto& iterator = m_attributes.find(_attributeName);
+    const auto& iterator = m_attributes.find(attributeName);
     if(iterator != m_attributes.end())
     {
         if(_isReplacing && _replacingIndex < iterator->second.size())

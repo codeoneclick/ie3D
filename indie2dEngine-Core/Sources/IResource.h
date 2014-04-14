@@ -70,8 +70,6 @@ protected:
     
     std::set<ISharedResourceLoadingHandler> m_handlers;
     
-    void onResourceLoaded(void);
-    
     IResource(E_RESOURCE_CLASS resourceClass,
               const std::string& guid);
     
@@ -80,6 +78,8 @@ protected:
     
     virtual void onResourceDataCommited(ISharedResourceDataRef resourceData,
                                         E_RESOURCE_DATA_STATUS status) = 0;
+    
+     void onResourceLoaded(void);
     
 public:
     

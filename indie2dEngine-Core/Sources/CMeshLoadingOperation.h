@@ -9,7 +9,6 @@
 #ifndef CMeshLoadingOperation_h
 #define CMeshLoadingOperation_h
 
-#include "HCommon.h"
 #include "IResourceLoadingOperation.h"
 
 class IResource;
@@ -20,15 +19,20 @@ private:
     
 protected:
     
-    std::string m_filename;
+    std::string m_meshFilename;
+    std::string m_skeletonFilename;
+    std::string m_sequenceFilename;
     
 public:
     
-    CMeshLoadingOperation(const std::string& _filename, std::shared_ptr<IResource> _resource);
+    CMeshLoadingOperation(const std::string& meshFilename,
+                          const std::string& skeletonFilename,
+                          const std::string& sequenceFilename,
+                          ISharedResourceRef resource);
     ~CMeshLoadingOperation(void);
     
-    void Serialize(void);
-    void Commit(void);
+    void serialize(void);
+    void commit(void);
     
 };
 

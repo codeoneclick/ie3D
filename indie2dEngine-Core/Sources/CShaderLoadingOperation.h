@@ -9,7 +9,6 @@
 #ifndef CShaderLoadingOperation_h
 #define CShaderLoadingOperation_h
 
-#include "HCommon.h"
 #include "IResourceLoadingOperation.h"
 
 class IResource;
