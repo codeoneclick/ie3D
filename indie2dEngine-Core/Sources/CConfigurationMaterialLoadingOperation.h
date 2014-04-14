@@ -9,9 +9,9 @@
 #ifndef CConfigurationMaterialLoadingOperation_h
 #define CConfigurationMaterialLoadingOperation_h
 
-#include "ITemplateLoadingOperation.h"
+#include "IConfigurationLoadingOperation.h"
 
-class CConfigurationMaterialLoadingOperation : public ITemplateLoadingOperation
+class CConfigurationMaterialLoadingOperation : public IConfigurationLoadingOperation
 {
 private:
     

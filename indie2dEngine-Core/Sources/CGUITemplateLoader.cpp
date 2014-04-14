@@ -7,7 +7,7 @@
 //
 
 #include "CGUITemplateLoader.h"
-#include "CGUITemplateLoadingOperation.h"
+#include "CGUIConfigurationLoadingOperation.h"
 #include "ITemplateLoadingHandler.h"
 
 CGUITemplateLoader::CGUITemplateLoader(void)
@@ -31,7 +31,7 @@ void CGUITemplateLoader::Load(const std::string& _filename, std::shared_ptr<ITem
     std::function<void(std::string, std::shared_ptr<ITemplateLoadingHandler>)> function = [_scheme](std::string _filename, std::shared_ptr<ITemplateLoadingHandler> _handler)
     {
 #endif
-        std::shared_ptr<CGUITemplateLoadingOperation> operation = std::make_shared<CGUITemplateLoadingOperation>(_scheme);
+        std::shared_ptr<CGUIConfigurationLoadingOperation> operation = std::make_shared<CGUIConfigurationLoadingOperation>(_scheme);
         std::shared_ptr<SModelTemplate> guiTemplate = std::static_pointer_cast<SModelTemplate>(operation->Serialize(_filename));
         assert(guiTemplate != nullptr);
         assert(_handler != nullptr);

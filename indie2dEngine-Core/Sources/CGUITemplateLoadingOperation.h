@@ -1,18 +1,18 @@
 //
-//  CGUITemplateLoadingOperation.h
+//  CGUIConfigurationLoadingOperation.h
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef CGUITemplateLoadingOperation_h
-#define CGUITemplateLoadingOperation_h
+#ifndef CGUIConfigurationLoadingOperation_h
+#define CGUIConfigurationLoadingOperation_h
 
-/*#include "ITemplateLoadingOperation.h"
+/*#include "IConfigurationLoadingOperation.h"
 #include "HEnums.h"
 
-class CGUITemplateLoadingOperation : public ITemplateLoadingOperation
+class CGUIConfigurationLoadingOperation : public IConfigurationLoadingOperation
 {
 private:
     
@@ -22,8 +22,8 @@ protected:
 
 public:
     
-    CGUITemplateLoadingOperation(E_GUI_LOADING_SCHEME _scheme);
-    ~CGUITemplateLoadingOperation(void);
+    CGUIConfigurationLoadingOperation(E_GUI_LOADING_SCHEME _scheme);
+    ~CGUIConfigurationLoadingOperation(void);
     
     std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename);
 };*/

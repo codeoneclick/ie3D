@@ -9,9 +9,9 @@
 #ifndef CConfigurationGameTransitionLoadingOperation_h
 #define CConfigurationGameTransitionLoadingOperation_h
 
-#include "ITemplateLoadingOperation.h"
+#include "IConfigurationLoadingOperation.h"
 
-class CConfigurationGameTransitionLoadingOperation : public ITemplateLoadingOperation
+class CConfigurationGameTransitionLoadingOperation : public IConfigurationLoadingOperation
 {
 private:
     

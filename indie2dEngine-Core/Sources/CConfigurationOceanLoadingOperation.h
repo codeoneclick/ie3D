@@ -9,9 +9,9 @@
 #ifndef CConfigurationOceanLoadingOperation_h
 #define CConfigurationOceanLoadingOperation_h
 
-#include "ITemplateLoadingOperation.h"
+#include "IConfigurationLoadingOperation.h"
 
-class CConfigurationOceanLoadingOperation : public ITemplateLoadingOperation
+class CConfigurationOceanLoadingOperation : public IConfigurationLoadingOperation
 {
 private:
     

@@ -9,9 +9,9 @@
 #ifndef CConfigurationSSRenderOperationLoadingOperation_h
 #define CConfigurationSSRenderOperationLoadingOperation_h
 
-#include "ITemplateLoadingOperation.h"
+#include "IConfigurationLoadingOperation.h"
 
-class CConfigurationSSRenderOperationLoadingOperation : public ITemplateLoadingOperation
+class CConfigurationSSRenderOperationLoadingOperation : public IConfigurationLoadingOperation
 {
 private:
     

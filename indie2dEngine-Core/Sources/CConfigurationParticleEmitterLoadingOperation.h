@@ -9,9 +9,9 @@
 #ifndef CConfigurationParticleEmitterLoadingOperation_h
 #define CConfigurationParticleEmitterLoadingOperation_h
 
-#include "ITemplateLoadingOperation.h"
+#include "IConfigurationLoadingOperation.h"
 
-class CConfigurationParticleEmitterLoadingOperation : public ITemplateLoadingOperation
+class CConfigurationParticleEmitterLoadingOperation : public IConfigurationLoadingOperation
 {
 private:
     

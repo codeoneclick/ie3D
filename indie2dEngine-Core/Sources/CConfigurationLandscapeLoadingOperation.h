@@ -9,9 +9,9 @@
 #ifndef CConfigurationLandscapeLoadingOperation_h
 #define CConfigurationLandscapeLoadingOperation_h
 
-#include "ITemplateLoadingOperation.h"
+#include "IConfigurationLoadingOperation.h"
 
-class CConfigurationLandscapeLoadingOperation : public ITemplateLoadingOperation
+class CConfigurationLandscapeLoadingOperation : public IConfigurationLoadingOperation
 {
 private:
     
