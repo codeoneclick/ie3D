@@ -29,7 +29,7 @@ std::shared_ptr<I_RO_TemplateCommon> CConfigurationSSRenderOperationLoadingOpera
     std::shared_ptr<CConfigurationMaterialLoadingOperation> materialLoadingOperation = std::make_shared<CConfigurationMaterialLoadingOperation>();
     std::shared_ptr<CConfigurationMaterial> materialTemplate = std::static_pointer_cast<CConfigurationMaterial>(materialLoadingOperation->Serialize(screenSpaceRenderOperationTemplate->Get_MaterialTemplateFilename()));
     assert(materialTemplate != nullptr);
-    screenSpaceRenderOperationTemplate->Set_Template(Get_TemplateAttributeKey(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMainNode,
+    screenSpaceRenderOperationTemplate->Set_Template(getConfigurationAttributeKey(screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMainNode,
                                                      screenSpaceRenderOperationTemplate->kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute),
                                                      materialTemplate);
     return screenSpaceRenderOperationTemplate;

@@ -11,9 +11,8 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
+#include "HDeclaration.h"
 
-class I_RO_TemplateCommon;
-class I_WO_TemplateCommon;
 class ITemplateLoadingOperation
 {
 private:
@@ -25,7 +24,7 @@ public:
     ITemplateLoadingOperation(void);
     virtual ~ITemplateLoadingOperation(void);
     
-    virtual std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename) = 0;
+    virtual ISharedConfiguration serialize(const std::string& filename) = 0;
 };
 
 #endif 

@@ -29,7 +29,7 @@ std::shared_ptr<I_RO_TemplateCommon> CConfigurationORenderOperationLoadingOperat
     std::shared_ptr<CConfigurationMaterialLoadingOperation> materialLoadingOperation = std::make_shared<CConfigurationMaterialLoadingOperation>();
     std::shared_ptr<CConfigurationMaterial> materialTemplate = std::static_pointer_cast<CConfigurationMaterial>(materialLoadingOperation->Serialize(outputRenderOperationTemplate->Get_MaterialTemplateFilename()));
     assert(materialTemplate != nullptr);
-    outputRenderOperationTemplate->Set_Template(Get_TemplateAttributeKey(outputRenderOperationTemplate->kOutputRenderOperationMainNode,
+    outputRenderOperationTemplate->Set_Template(getConfigurationAttributeKey(outputRenderOperationTemplate->kOutputRenderOperationMainNode,
                                                                          outputRenderOperationTemplate->kOutputRenderOperationMaterialTemplateFilenameAttribute),
                                                 materialTemplate);
     return outputRenderOperationTemplate;

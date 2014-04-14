@@ -1,28 +1,28 @@
 //
-//  CGUITemplateSerializer.cpp
+//  CGUIConfigurationSerializer.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CGUITemplateSerializer.h"
+//#include "CGUIConfigurationSerializer.h"
 
-/*CGUITemplateSerializer::CGUITemplateSerializer(E_GUI_LOADING_SCHEME _scheme) :
+/*CGUIConfigurationSerializer::CGUIConfigurationSerializer(E_GUI_LOADING_SCHEME _scheme) :
 m_scheme(_scheme)
 {
     
 }
 
-CGUITemplateSerializer::~CGUITemplateSerializer(void)
+CGUIConfigurationSerializer::~CGUIConfigurationSerializer(void)
 {
     
 }
 
-std::shared_ptr<ITemplate> CGUITemplateSerializer::Serialize(const std::string& _filename)
+std::shared_ptr<ITemplate> CGUIConfigurationSerializer::Serialize(const std::string& _filename)
 {
     pugi::xml_document document;
-    pugi::xml_parse_result result = ITemplateSerializer::_LoadDocument(document, _filename);
+    pugi::xml_parse_result result = IConfigurationSerializer::_LoadDocument(document, _filename);
     assert(result.status == pugi::status_ok);
     pugi::xml_node node = document.child("control");
 	std::shared_ptr<SGUIControlTemplate> guicontrolTemplate = nullptr;
@@ -58,12 +58,12 @@ std::shared_ptr<ITemplate> CGUITemplateSerializer::Serialize(const std::string& 
 	return guicontrolTemplate;
 }
 
-std::shared_ptr<ITemplate> CGUITemplateSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
+std::shared_ptr<ITemplate> CGUIConfigurationSerializer::Serialize(const std::string& _host, ui32 _port, const std::string& _filename)
 {
     return nullptr;
 }
 
-void CGUITemplateSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
+void CGUIConfigurationSerializer::Deserialize(const std::string& _filename, std::shared_ptr<ITemplate> _template)
 {
 
 }*/

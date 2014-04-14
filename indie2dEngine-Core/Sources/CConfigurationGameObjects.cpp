@@ -809,14 +809,14 @@ glm::vec2 CConfigurationLandscape::getEdgesSize(void) const
                                               kLandscapeEdgesSizeXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
-    f32 x = iteratorX->second[0]->getF32();
+    f32 x = iteratorX->second[0]->getScalar<f32>();
     
     const auto& iteratorY = m_attributes.find(kLandscapeMainNode + ":" +
                                               kLandscapeEdgesNode + ":" +
                                               kLandscapeEdgesSizeYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    ui8 y = iteratorY->second[0]->getF32();
+    ui8 y = iteratorY->second[0]->getScalar<f32>();
     
     return glm::vec2(x, y);
 }
@@ -825,9 +825,9 @@ std::vector<std::string> CConfigurationLandscape::getEdgesMaterialsFilenames(voi
 {
     const auto& iterator = m_attributes.find(kLandscapeMainNode + ":" +
                                              kLandscapeEdgesNode + ":" +
-                                             kLandscapeEdgesMaterialsTemplatesNode + ":" +
-                                             kLandscapeEdgeMaterialTemplateNode + ":" +
-                                             kLandscapeEdgeMaterialTemplateFilenameAttribute);
+                                             kLandscapeEdgesMaterialsConfigurationsNode + ":" +
+                                             kLandscapeEdgeMaterialConfigurationNode + ":" +
+                                             kLandscapeEdgeMaterialConfigurationFilenameAttribute);
     assert(iterator != m_attributes.end());
     std::vector<std::string> filenames;
     for(const auto& filename : iterator->second)
@@ -837,28 +837,28 @@ std::vector<std::string> CConfigurationLandscape::getEdgesMaterialsFilenames(voi
     return filenames;
 }
 
-std::vector<CSharedTemplateCommon> CConfigurationLandscape::getEdgesMaterialsTemplates(void) const
+std::vector<ISharedConfiguration> CConfigurationLandscape::getEdgesMaterialsConfigurations(void) const
 {
-    const auto& iterator = m_templates.find(kLandscapeMainNode + ":" +
-                                            kLandscapeEdgesNode + ":" +
-                                            kLandscapeEdgesMaterialsTemplatesNode + ":" +
-                                            kLandscapeEdgeMaterialTemplateNode + ":" +
-                                            kLandscapeEdgeMaterialTemplateFilenameAttribute);
-    assert(iterator != m_templates.end());
+    const auto& iterator = m_configurations.find(kLandscapeMainNode + ":" +
+                                                 kLandscapeEdgesNode + ":" +
+                                                 kLandscapeEdgesMaterialsConfigurationsNode + ":" +
+                                                 kLandscapeEdgeMaterialConfigurationNode + ":" +
+                                                 kLandscapeEdgeMaterialConfigurationFilenameAttribute);
+    assert(iterator != m_configurations.end());
     return iterator->second;
 }
 
 CConfigurationWSRenderOperation::CConfigurationWSRenderOperation(void) :
 IConfiguration(),
-kWorldSpaceRenderOperationMainNode("operation"),
-kWorldSpaceRenderOperationGuidAttribute("guid"),
-kWorldSpaceRenderOperationIndexAttribute("index"),
-kWorldSpaceRenderOperationScreenWidthAttribute("width"),
-kWorldSpaceRenderOperationScreenHeightAttribute("height"),
-kWorldSpaceRenderOperationClearColorRAttribute("clear_color_r"),
-kWorldSpaceRenderOperationClearColorGAttribute("clear_color_g"),
-kWorldSpaceRenderOperationClearColorBAttribute("clear_color_b"),
-kWorldSpaceRenderOperationClearColorAAttribute("clear_color_a")
+kWSRenderOperationMainNode("operation"),
+kWSRenderOperationGuidAttribute("guid"),
+kWSRenderOperationIndexAttribute("index"),
+kWSRenderOperationScreenWidthAttribute("width"),
+kWSRenderOperationScreenHeightAttribute("height"),
+kWSRenderOperationClearColorRAttribute("clear_color_r"),
+kWSRenderOperationClearColorGAttribute("clear_color_g"),
+kWSRenderOperationClearColorBAttribute("clear_color_b"),
+kWSRenderOperationClearColorAAttribute("clear_color_a")
 {
     
 }
@@ -870,8 +870,8 @@ CConfigurationWSRenderOperation::~CConfigurationWSRenderOperation(void)
 
 std::string CConfigurationWSRenderOperation::getGuid(void) const
 {
-    const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
-                                             kWorldSpaceRenderOperationGuidAttribute);
+    const auto& iterator = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                             kWSRenderOperationGuidAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getString();
@@ -879,67 +879,67 @@ std::string CConfigurationWSRenderOperation::getGuid(void) const
 
 ui32 CConfigurationWSRenderOperation::getIndex(void) const
 {
-    const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
-                                             kWorldSpaceRenderOperationIndexAttribute);
+    const auto& iterator = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                             kWSRenderOperationIndexAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->getUI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
 ui32 CConfigurationWSRenderOperation::getScreenWidth(void) const
 {
-    const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
-                                             kWorldSpaceRenderOperationScreenWidthAttribute);
+    const auto& iterator = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                             kWSRenderOperationScreenWidthAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->getUI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
 ui32 CConfigurationWSRenderOperation::getScreenHeight(void) const
 {
-    const auto& iterator = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
-                                             kWorldSpaceRenderOperationScreenHeightAttribute);
+    const auto& iterator = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                             kWSRenderOperationScreenHeightAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->getUI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
 glm::vec4 CConfigurationWSRenderOperation::getClearColor(void) const
 {
-    const auto& iteratorR = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
-                                              kWorldSpaceRenderOperationClearColorRAttribute);
+    const auto& iteratorR = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                              kWSRenderOperationClearColorRAttribute);
     assert(iteratorR != m_attributes.end());
     assert(iteratorR->second.size() != 0);
-    f32 r = iteratorR->second[0]->getF32();
+    f32 r = iteratorR->second[0]->getScalar<f32>();
     
-    const auto& iteratorG = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
-                                              kWorldSpaceRenderOperationClearColorGAttribute);
+    const auto& iteratorG = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                              kWSRenderOperationClearColorGAttribute);
     assert(iteratorG != m_attributes.end());
     assert(iteratorG->second.size() != 0);
-    ui8 g = iteratorG->second[0]->getF32();
+    ui8 g = iteratorG->second[0]->getScalar<f32>();
     
-    const auto& iteratorB = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
-                                              kWorldSpaceRenderOperationClearColorBAttribute);
+    const auto& iteratorB = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                              kWSRenderOperationClearColorBAttribute);
     assert(iteratorB != m_attributes.end());
     assert(iteratorB->second.size() != 0);
-    ui8 b = iteratorB->second[0]->getF32();
+    ui8 b = iteratorB->second[0]->getScalar<f32>();
     
-    const auto& iteratorA = m_attributes.find(kWorldSpaceRenderOperationMainNode + ":" +
-                                              kWorldSpaceRenderOperationClearColorAAttribute);
+    const auto& iteratorA = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                              kWSRenderOperationClearColorAAttribute);
     assert(iteratorA != m_attributes.end());
     assert(iteratorA->second.size() != 0);
-    ui8 a = iteratorA->second[0]->getF32();
+    ui8 a = iteratorA->second[0]->getScalar<f32>();
     
     return glm::vec4(r, g, b, a);
 }
 
 CConfigurationSSRenderOperation::CConfigurationSSRenderOperation(void) :
 IConfiguration(),
-kScreenSpaceRenderOperationMainNode("operation"),
-kScreenSpaceRenderOperationGuidAttribute("guid"),
-kScreenSpaceRenderOperationScreenWidthAttribute("width"),
-kScreenSpaceRenderOperationScreenHeightAttribute("height"),
-kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute("material_filename")
+kSSRenderOperationMainNode("operation"),
+kSSRenderOperationGuidAttribute("guid"),
+kSSRenderOperationScreenWidthAttribute("width"),
+kSSRenderOperationScreenHeightAttribute("height"),
+kSSRenderOperationMaterialConfigurationFilenameAttribute("material_filename")
 {
     
 }
@@ -951,8 +951,8 @@ CConfigurationSSRenderOperation::~CConfigurationSSRenderOperation(void)
 
 std::string CConfigurationSSRenderOperation::getGuid(void) const
 {
-    const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
-                                             kScreenSpaceRenderOperationGuidAttribute);
+    const auto& iterator = m_attributes.find(kSSRenderOperationMainNode + ":" +
+                                             kSSRenderOperationGuidAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getString();
@@ -960,44 +960,44 @@ std::string CConfigurationSSRenderOperation::getGuid(void) const
 
 ui32 CConfigurationSSRenderOperation::getScreenWidth(void) const
 {
-    const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
-                                             kScreenSpaceRenderOperationScreenWidthAttribute);
+    const auto& iterator = m_attributes.find(kSSRenderOperationMainNode + ":" +
+                                             kSSRenderOperationScreenWidthAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->getUI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
 ui32 CConfigurationSSRenderOperation::getScreenHeight(void) const
 {
-    const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
-                                             kScreenSpaceRenderOperationScreenHeightAttribute);
+    const auto& iterator = m_attributes.find(kSSRenderOperationMainNode + ":" +
+                                             kSSRenderOperationScreenHeightAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
-    return iterator->second[0]->getUI32();
+    return iterator->second[0]->getScalar<ui32>();
 }
 
-std::string CConfigurationSSRenderOperation::getMaterialTemplateFilename(void) const
+std::string CConfigurationSSRenderOperation::getMaterialConfigurationFilename(void) const
 {
-    const auto& iterator = m_attributes.find(kScreenSpaceRenderOperationMainNode + ":" +
-                                             kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute);
+    const auto& iterator = m_attributes.find(kSSRenderOperationMainNode + ":" +
+                                             kSSRenderOperationMaterialConfigurationFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getString();
 }
 
-CSharedMaterialTemplate CConfigurationSSRenderOperation::getMaterialTemplate(void) const
+ISharedConfiguration CConfigurationSSRenderOperation::getMaterialConfiguration(void) const
 {
-    const auto& iterator = m_templates.find(kScreenSpaceRenderOperationMainNode + ":" +
-                                            kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute);
-    assert(iterator != m_templates.end());
-    return std::static_pointer_cast<CConfigurationMaterial>(iterator->second[0]);
+    const auto& iterator = m_configurations.find(kSSRenderOperationMainNode + ":" +
+                                                 kSSRenderOperationMaterialConfigurationFilenameAttribute);
+    assert(iterator != m_configurations.end());
+    return iterator->second[0];
 }
 
 CConfigurationORenderOperation::CConfigurationORenderOperation(void) :
 IConfiguration(),
-kOutputRenderOperationMainNode("operation"),
-kOutputRenderOperationGuidAttribute("guid"),
-kOutputRenderOperationMaterialTemplateFilenameAttribute("filename")
+kORenderOperationMainNode("operation"),
+kORenderOperationGuidAttribute("guid"),
+kORenderOperationMaterialConfigurationFilenameAttribute("filename")
 {
     
 }
@@ -1009,42 +1009,42 @@ CConfigurationORenderOperation::~CConfigurationORenderOperation(void)
 
 std::string CConfigurationORenderOperation::getGuid(void) const
 {
-    const auto& iterator = m_attributes.find(kOutputRenderOperationMainNode + ":" +
-                                             kOutputRenderOperationGuidAttribute);
+    const auto& iterator = m_attributes.find(kORenderOperationMainNode + ":" +
+                                             kORenderOperationGuidAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getString();
 }
 
-std::string CConfigurationORenderOperation::getMaterialTemplateFilename(void) const
+std::string CConfigurationORenderOperation::getMaterialConfigurationFilename(void) const
 {
-    const auto& iterator = m_attributes.find(kOutputRenderOperationMainNode + ":" +
-                                             kOutputRenderOperationMaterialTemplateFilenameAttribute);
+    const auto& iterator = m_attributes.find(kORenderOperationMainNode + ":" +
+                                             kORenderOperationMaterialConfigurationFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getString();
 }
 
-CSharedMaterialTemplate CConfigurationORenderOperation::getMaterialTemplate(void) const
+ISharedConfiguration CConfigurationORenderOperation::getMaterialConfiguration(void) const
 {
-    const auto& iterator = m_templates.find(kOutputRenderOperationMainNode + ":" +
-                                            kOutputRenderOperationMaterialTemplateFilenameAttribute);
-    assert(iterator != m_templates.end());
-    return std::static_pointer_cast<CConfigurationMaterial>(iterator->second[0]);
+    const auto& iterator = m_configurations.find(kORenderOperationMainNode + ":" +
+                                            kORenderOperationMaterialConfigurationFilenameAttribute);
+    assert(iterator != m_configurations.end());
+    return iterator->second[0];
 }
 
 CConfigurationGameTransition::CConfigurationGameTransition(void) :
 IConfiguration(),
 kGameTransitionMainNode("transition"),
 kGameTransitionGuidAttribute("guid"),
-kGameTransitionOutputRenderOperationTemplateNode("output_render_operation"),
-kGameTransitionOutputRenderOperationTemplateFilenameAttribute("filename"),
-kGameTransitionWorldSpaceRenderOperationsTemplatesNode("world_space_operations"),
-kGameTransitionWorldSpaceRenderOperationTemplateNode("operation"),
-kGameTransitionWorldSpaceRenderOperationTemplateFilenameAttribute("filename"),
-kGameTransitionScreenSpaceRenderOperationsTemplatesNode("screen_space_operations"),
-kGameTransitionScreenSpaceRenderOperationTemplateNode("operation"),
-kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute("filename")
+kGameTransitionORenderOperationConfigurationNode("output_render_operation"),
+kGameTransitionORenderOperationConfigurationFilenameAttribute("filename"),
+kGameTransitionWSRenderOperationsConfigurationsNode("world_space_operations"),
+kGameTransitionWSRenderOperationConfigurationNode("operation"),
+kGameTransitionWSRenderOperationConfigurationFilenameAttribute("filename"),
+kGameTransitionSSRenderOperationsConfigurationsNode("screen_space_operations"),
+kGameTransitionSSRenderOperationConfigurationNode("operation"),
+kGameTransitionSSRenderOperationConfigurationFilenameAttribute("filename")
 {
     
 }
@@ -1057,37 +1057,37 @@ CConfigurationGameTransition::~CConfigurationGameTransition(void)
 std::string CConfigurationGameTransition::getGuid(void) const
 {
     const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
-                                             kGameTransitionOutputRenderOperationTemplateNode);
+                                             kGameTransitionORenderOperationConfigurationNode);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getString();
 }
 
-std::string CConfigurationGameTransition::getOutputRenderOperationTemplateFilename(void) const
+std::string CConfigurationGameTransition::getORenderOperationConfigurationFilename(void) const
 {
     const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
-                                             kGameTransitionOutputRenderOperationTemplateNode + ":" +
-                                             kGameTransitionOutputRenderOperationTemplateFilenameAttribute);
+                                             kGameTransitionORenderOperationConfigurationNode + ":" +
+                                             kGameTransitionORenderOperationConfigurationFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getString();
 }
 
-CSharedOutputRenderOperationTemplate CConfigurationGameTransition::getOutputRenderOperationTemplate(void) const
+ISharedConfiguration CConfigurationGameTransition::getORenderOperationConfiguration(void) const
 {
-    const auto& iterator = m_templates.find(kGameTransitionMainNode + ":" +
-                                            kGameTransitionOutputRenderOperationTemplateNode + ":" +
-                                            kGameTransitionOutputRenderOperationTemplateFilenameAttribute);
-    assert(iterator != m_templates.end());
+    const auto& iterator = m_configurations.find(kGameTransitionMainNode + ":" +
+                                            kGameTransitionORenderOperationConfigurationNode + ":" +
+                                            kGameTransitionORenderOperationConfigurationFilenameAttribute);
+    assert(iterator != m_configurations.end());
     return std::static_pointer_cast<CConfigurationORenderOperation>(iterator->second[0]);
 }
 
-std::vector<std::string> CConfigurationGameTransition::getWorldSpaceRenderOperationsTemplatesFilenames(void) const
+std::vector<std::string> CConfigurationGameTransition::getWSRenderOperationsConfigurationsFilenames(void) const
 {
     const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
-                                             kGameTransitionWorldSpaceRenderOperationsTemplatesNode + ":" +
-                                             kGameTransitionWorldSpaceRenderOperationTemplateNode + ":" +
-                                             kGameTransitionWorldSpaceRenderOperationTemplateFilenameAttribute);
+                                             kGameTransitionWSRenderOperationsConfigurationsNode + ":" +
+                                             kGameTransitionWSRenderOperationConfigurationNode + ":" +
+                                             kGameTransitionWSRenderOperationConfigurationFilenameAttribute);
     assert(iterator != m_attributes.end());
     std::vector<std::string> filenames;
     for(const auto& filename : iterator->second)
@@ -1097,22 +1097,22 @@ std::vector<std::string> CConfigurationGameTransition::getWorldSpaceRenderOperat
     return filenames;
 }
 
-std::vector<CSharedTemplateCommon> CConfigurationGameTransition::getWorldSpaceRenderOperationsTemplates(void) const
+std::vector<ISharedConfiguration> CConfigurationGameTransition::getWSRenderOperationsConfigurations(void) const
 {
-    const auto& iterator = m_templates.find(kGameTransitionMainNode + ":" +
-                                            kGameTransitionWorldSpaceRenderOperationsTemplatesNode + ":" +
-                                            kGameTransitionWorldSpaceRenderOperationTemplateNode + ":" +
-                                            kGameTransitionWorldSpaceRenderOperationTemplateFilenameAttribute);
-    assert(iterator != m_templates.end());
+    const auto& iterator = m_configurations.find(kGameTransitionMainNode + ":" +
+                                            kGameTransitionWSRenderOperationsConfigurationsNode + ":" +
+                                            kGameTransitionWSRenderOperationConfigurationNode + ":" +
+                                            kGameTransitionWSRenderOperationConfigurationFilenameAttribute);
+    assert(iterator != m_configurations.end());
     return iterator->second;
 }
 
-std::vector<std::string> CConfigurationGameTransition::getScreenSpaceRenderOperationsTemplatesFilenames(void) const
+std::vector<std::string> CConfigurationGameTransition::getSSRenderOperationsConfigurationsFilenames(void) const
 {
     const auto& iterator = m_attributes.find(kGameTransitionMainNode + ":" +
-                                             kGameTransitionScreenSpaceRenderOperationsTemplatesNode + ":" +
-                                             kGameTransitionScreenSpaceRenderOperationTemplateNode + ":" +
-                                             kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute);
+                                             kGameTransitionSSRenderOperationsConfigurationsNode + ":" +
+                                             kGameTransitionSSRenderOperationConfigurationNode + ":" +
+                                             kGameTransitionSSRenderOperationConfigurationFilenameAttribute);
     
     std::vector<std::string> filenames;
     if(iterator != m_attributes.end())
@@ -1125,15 +1125,15 @@ std::vector<std::string> CConfigurationGameTransition::getScreenSpaceRenderOpera
     return filenames;
 }
 
-std::vector<CSharedTemplateCommon> CConfigurationGameTransition::getScreenSpaceRenderOperationsTemplates(void) const
+std::vector<ISharedConfiguration> CConfigurationGameTransition::getSSRenderOperationsConfigurations(void) const
 {
-    const auto& iterator = m_templates.find(kGameTransitionMainNode + ":" +
-                                            kGameTransitionScreenSpaceRenderOperationsTemplatesNode + ":" +
-                                            kGameTransitionScreenSpaceRenderOperationTemplateNode + ":" +
-                                            kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute);
-    if(iterator == m_templates.end())
+    const auto& iterator = m_configurations.find(kGameTransitionMainNode + ":" +
+                                            kGameTransitionSSRenderOperationsConfigurationsNode + ":" +
+                                            kGameTransitionSSRenderOperationConfigurationNode + ":" +
+                                            kGameTransitionSSRenderOperationConfigurationFilenameAttribute);
+    if(iterator == m_configurations.end())
     {
-        return std::vector<CSharedTemplateCommon>();
+        return std::vector<ISharedConfiguration>();
     }
     return iterator->second;
 }

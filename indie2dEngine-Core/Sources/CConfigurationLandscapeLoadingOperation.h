@@ -22,7 +22,7 @@ public:
     CConfigurationLandscapeLoadingOperation(void);
     ~CConfigurationLandscapeLoadingOperation(void);
     
-    std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename);
+    ISharedConfiguration serialize(const std::string& filename);
 };
 
 

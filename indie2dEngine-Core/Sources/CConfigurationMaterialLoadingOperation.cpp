@@ -19,8 +19,8 @@ CConfigurationMaterialLoadingOperation::~CConfigurationMaterialLoadingOperation(
     
 }
 
-std::shared_ptr<I_RO_TemplateCommon> CConfigurationMaterialLoadingOperation::Serialize(const std::string& _filename)
+ISharedConfiguration CConfigurationMaterialLoadingOperation::serialize(const std::string& filename)
 {
     std::shared_ptr<CConfigurationMaterialSerializer> serializer = std::make_shared<CConfigurationMaterialSerializer>();
-    return serializer->Serialize(_filename);
+    return serializer->serialize(filename);
 }

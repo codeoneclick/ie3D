@@ -316,15 +316,15 @@ struct CConfigurationWSRenderOperation : public IConfiguration
 {
 public:
     
-    const std::string kWorldSpaceRenderOperationMainNode;
-    const std::string kWorldSpaceRenderOperationGuidAttribute;
-    const std::string kWorldSpaceRenderOperationIndexAttribute;
-    const std::string kWorldSpaceRenderOperationScreenWidthAttribute;
-    const std::string kWorldSpaceRenderOperationScreenHeightAttribute;
-    const std::string kWorldSpaceRenderOperationClearColorRAttribute;
-    const std::string kWorldSpaceRenderOperationClearColorGAttribute;
-    const std::string kWorldSpaceRenderOperationClearColorBAttribute;
-    const std::string kWorldSpaceRenderOperationClearColorAAttribute;
+    const std::string kWSRenderOperationMainNode;
+    const std::string kWSRenderOperationGuidAttribute;
+    const std::string kWSRenderOperationIndexAttribute;
+    const std::string kWSRenderOperationScreenWidthAttribute;
+    const std::string kWSRenderOperationScreenHeightAttribute;
+    const std::string kWSRenderOperationClearColorRAttribute;
+    const std::string kWSRenderOperationClearColorGAttribute;
+    const std::string kWSRenderOperationClearColorBAttribute;
+    const std::string kWSRenderOperationClearColorAAttribute;
     
 private:
     
@@ -349,11 +349,11 @@ class CConfigurationSSRenderOperation : public IConfiguration
 {
 public:
     
-    const std::string kScreenSpaceRenderOperationMainNode;
-    const std::string kScreenSpaceRenderOperationGuidAttribute;
-    const std::string kScreenSpaceRenderOperationScreenWidthAttribute;
-    const std::string kScreenSpaceRenderOperationScreenHeightAttribute;
-    const std::string kScreenSpaceRenderOperationMaterialTemplateFilenameAttribute;
+    const std::string kSSRenderOperationMainNode;
+    const std::string kSSRenderOperationGuidAttribute;
+    const std::string kSSRenderOperationScreenWidthAttribute;
+    const std::string kSSRenderOperationScreenHeightAttribute;
+    const std::string kSSRenderOperationMaterialConfigurationFilenameAttribute;
     
 private:
     
@@ -377,9 +377,9 @@ class CConfigurationORenderOperation : public IConfiguration
 {
 public:
     
-    const std::string kOutputRenderOperationMainNode;
-    const std::string kOutputRenderOperationGuidAttribute;
-    const std::string kOutputRenderOperationMaterialConfigurationFilenameAttribute;
+    const std::string kORenderOperationMainNode;
+    const std::string kORenderOperationGuidAttribute;
+    const std::string kORenderOperationMaterialConfigurationFilenameAttribute;
     
 private:
     

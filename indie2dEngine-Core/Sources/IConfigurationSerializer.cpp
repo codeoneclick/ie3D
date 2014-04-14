@@ -1,26 +1,26 @@
 //
-//  ITemplateSerializer.cpp
+//  IConfigurationSerializer.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "ITemplateSerializer.h"
+#include "IConfigurationSerializer.h"
 #include "CResourceAccessor.h"
 #include "CCommonOS.h"
 
-ITemplateSerializer::ITemplateSerializer(void)
+IConfigurationSerializer::IConfigurationSerializer(void)
 {
     
 }
 
-ITemplateSerializer::~ITemplateSerializer(void)
+IConfigurationSerializer::~IConfigurationSerializer(void)
 {
     
 }
 
-pugi::xml_parse_result ITemplateSerializer::openXMLDocument(pugi::xml_document &document, const std::string &filename)
+pugi::xml_parse_result IConfigurationSerializer::openXMLDocument(pugi::xml_document &document, const std::string &filename)
 {
     pugi::xml_parse_result result;
 #if defined(__NDK__)

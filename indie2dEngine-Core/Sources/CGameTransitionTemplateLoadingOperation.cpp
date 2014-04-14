@@ -35,7 +35,7 @@ std::shared_ptr<I_RO_TemplateCommon> CConfigurationGameTransitionLoadingOperatio
 
         std::shared_ptr<CConfigurationWSRenderOperationLoadingOperation> worldSpaceRenderOperationTemplateLoadingOperation = std::make_shared<CConfigurationWSRenderOperationLoadingOperation>();
         std::shared_ptr<CConfigurationWSRenderOperation> worldSpaceRenderOperationTemplate = std::static_pointer_cast<CConfigurationWSRenderOperation>(worldSpaceRenderOperationTemplateLoadingOperation->Serialize(iterator));
-        gameTransitionTemplate->Set_Template(Get_TemplateAttributeKey(gameTransitionTemplate->kGameTransitionMainNode,
+        gameTransitionTemplate->Set_Template(getConfigurationAttributeKey(gameTransitionTemplate->kGameTransitionMainNode,
                                                                       gameTransitionTemplate->kGameTransitionWorldSpaceRenderOperationsTemplatesNode,
                                                                       gameTransitionTemplate->kGameTransitionWorldSpaceRenderOperationTemplateNode,
                                                                       gameTransitionTemplate->kGameTransitionWorldSpaceRenderOperationTemplateFilenameAttribute),
@@ -48,7 +48,7 @@ std::shared_ptr<I_RO_TemplateCommon> CConfigurationGameTransitionLoadingOperatio
         
         std::shared_ptr<CConfigurationSSRenderOperationLoadingOperation> screenSpaceRenderOperationTemplateLoadingOperation = std::make_shared<CConfigurationSSRenderOperationLoadingOperation>();
         std::shared_ptr<CConfigurationSSRenderOperation> screenSpaceRenderOperationTemplate = std::static_pointer_cast<CConfigurationSSRenderOperation>(screenSpaceRenderOperationTemplateLoadingOperation->Serialize(iterator));
-        gameTransitionTemplate->Set_Template(Get_TemplateAttributeKey(gameTransitionTemplate->kGameTransitionMainNode,
+        gameTransitionTemplate->Set_Template(getConfigurationAttributeKey(gameTransitionTemplate->kGameTransitionMainNode,
                                                                       gameTransitionTemplate->kGameTransitionScreenSpaceRenderOperationsTemplatesNode,
                                                                       gameTransitionTemplate->kGameTransitionScreenSpaceRenderOperationTemplateNode,
                                                                       gameTransitionTemplate->kGameTransitionScreenSpaceRenderOperationTemplateFilenameAttribute),
@@ -58,7 +58,7 @@ std::shared_ptr<I_RO_TemplateCommon> CConfigurationGameTransitionLoadingOperatio
     std::shared_ptr<CConfigurationORenderOperationLoadingOperation> outputRenderOperationTemplateLoadingOperation = std::make_shared<CConfigurationORenderOperationLoadingOperation>();
     std::shared_ptr<CConfigurationORenderOperation> outputRenderOperationTemplate = std::static_pointer_cast<CConfigurationORenderOperation>(outputRenderOperationTemplateLoadingOperation->Serialize(gameTransitionTemplate->Get_OutputRenderOperationTemplateFilename()));
     assert(outputRenderOperationTemplate != nullptr);
-    gameTransitionTemplate->Set_Template(Get_TemplateAttributeKey(gameTransitionTemplate->kGameTransitionMainNode,
+    gameTransitionTemplate->Set_Template(getConfigurationAttributeKey(gameTransitionTemplate->kGameTransitionMainNode,
                                                                   gameTransitionTemplate->kGameTransitionOutputRenderOperationTemplateNode,
                                                                   gameTransitionTemplate->kGameTransitionOutputRenderOperationTemplateFilenameAttribute),
                                          outputRenderOperationTemplate);

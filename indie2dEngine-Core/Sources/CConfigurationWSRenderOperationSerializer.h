@@ -9,9 +9,9 @@
 #ifndef CConfigurationWSRenderOperationSerializer_h
 #define CConfigurationWSRenderOperationSerializer_h
 
-#include "ITemplateSerializer.h"
+#include "IConfigurationSerializer.h"
 
-class CConfigurationWSRenderOperationSerializer final : public ITemplateSerializer
+class CConfigurationWSRenderOperationSerializer final : public IConfigurationSerializer
 {
 private:
     
@@ -22,9 +22,8 @@ public:
     CConfigurationWSRenderOperationSerializer(void);
     ~CConfigurationWSRenderOperationSerializer(void);
     
-    std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _filename);
-    std::shared_ptr<I_RO_TemplateCommon> Serialize(const std::string& _host, ui32 _port, const std::string& _filename);
-    void Deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template);
+    ISharedConfiguration serialize(const std::string& filename);
+    void deserialize(const std::string& filename, ISharedConfigurationRef configuration);
 };
 
 #endif

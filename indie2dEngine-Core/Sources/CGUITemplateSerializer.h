@@ -1,18 +1,18 @@
 //
-//  CGUITemplateSerializer.h
+//  CGUIConfigurationSerializer.h
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/29/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef CGUITemplateSerializer_h
-#define CGUITemplateSerializer_h
+#ifndef CGUIConfigurationSerializer_h
+#define CGUIConfigurationSerializer_h
 
-#include "ITemplateSerializer.h"
+#include "IConfigurationSerializer.h"
 #include "HEnums.h"
 
-/*class CGUITemplateSerializer final : public ITemplateSerializer
+/*class CGUIConfigurationSerializer final : public IConfigurationSerializer
 {
 private:
     
@@ -22,8 +22,8 @@ protected:
 
 public:
     
-    CGUITemplateSerializer(E_GUI_LOADING_SCHEME _scheme);
-    ~CGUITemplateSerializer(void);
+    CGUIConfigurationSerializer(E_GUI_LOADING_SCHEME _scheme);
+    ~CGUIConfigurationSerializer(void);
     
     std::shared_ptr<ITemplate> Serialize(const std::string& _filename);
     std::shared_ptr<ITemplate> Serialize(const std::string& _host, ui32 _port, const std::string& _filename);

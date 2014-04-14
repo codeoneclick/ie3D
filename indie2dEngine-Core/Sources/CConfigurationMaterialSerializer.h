@@ -9,9 +9,9 @@
 #ifndef CConfigurationMaterialSerializer_h
 #define CConfigurationMaterialSerializer_h
 
-#include "ITemplateSerializer.h"
+#include "IConfigurationSerializer.h"
 
-class CConfigurationMaterialSerializer final : public ITemplateSerializer
+class CConfigurationMaterialSerializer final : public IConfigurationSerializer
 {
 private:
     
@@ -22,8 +22,9 @@ public:
     CConfigurationMaterialSerializer(void);
     ~CConfigurationMaterialSerializer(void);
     
-    CSharedTemplateCommon serialize(const std::string& filename);
-    void deserialize(const std::string& _filename, std::shared_ptr<I_RO_TemplateCommon> _template);
+    ISharedConfiguration serialize(const std::string& filename);
+    void deserialize(const std::string& filename,
+                     ISharedConfigurationRef configuration);
 };
 
 #endif 
