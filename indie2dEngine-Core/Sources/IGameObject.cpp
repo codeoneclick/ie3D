@@ -11,9 +11,13 @@
 #include "CFrustum.h"
 #include "CMesh.h"
 #include "CShader.h"
+#include "CTexture.h"
 #include "CMaterial.h"
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
+#include "CResourceAccessor.h"
+#include "IScreenSpaceTextureAccessor.h"
+#include "CConfigurationGameObjects.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
                          ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
@@ -47,29 +51,39 @@ IGameObject::~IGameObject(void)
 
 void IGameObject::onSceneUpdate(f32 deltatime)
 {
-    
+    m_matrixWorld = m_matrixTranslation * m_matrixRotation * m_matrixScale;
+    if(m_boundBox != nullptr)
+    {
+
+    }
 }
 
 void IGameObject::onResourceLoaded(ISharedResourceRef resource,
                                    bool success)
 {
-    
+    IResourceLoadingHandler::onResourceLoaded(resource, success);
 }
 
 void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
                                         bool success)
 {
-    
+    IConfigurationLoadingHandler::onConfigurationLoaded(configuration, success);
+    m_configuration = configuration;
 }
 
 i32  IGameObject::getZOrder(void)
 {
-    
+    return 0;
 }
 
 bool IGameObject::checkOcclusion(void)
 {
+    assert(m_camera != nullptr);
+    assert(m_camera->Get_Frustum() != nullptr);
     
+    glm::vec3 maxBound = IGameObject::getMaxBound() + m_position;
+    glm::vec3 minBound = IGameObject::getMinBound() + m_position;
+    return !m_camera->Get_Frustum()->IsBoundBoxInFrustum(maxBound, minBound);
 }
 
 ui32 IGameObject::numTriangles(void)
@@ -79,17 +93,34 @@ ui32 IGameObject::numTriangles(void)
 
 void IGameObject::onBind(const std::string& mode)
 {
+    assert(m_materials.find(mode) != m_materials.end());
+    auto iterator = m_materials.find(mode);
     
+    if(!m_isBatching)
+    {
+        assert(m_mesh != nullptr);
+        iterator->second->bind();
+        m_mesh->bind(iterator->second->getShader()->getAttributesRef());
+    }
 }
 
 void IGameObject::onDraw(const std::string& mode)
 {
-    
+    assert(m_mesh != nullptr);
+    m_mesh->draw();
 }
 
 void IGameObject::onUnbind(const std::string& mode)
 {
+    assert(m_materials.find(mode) != m_materials.end());
+    auto iterator = m_materials.find(mode);
     
+    if(!m_isBatching)
+    {
+        assert(m_mesh != nullptr);
+        iterator->second->unbind();
+        m_mesh->unbind(iterator->second->getShader()->getAttributesRef());
+    }
 }
 
 void IGameObject::onBatch(const std::string& mode)
@@ -220,164 +251,64 @@ void IGameObject::listenRenderMgr(bool value)
 			m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
 		}
     }
-	m_isNeedToRender = _value;
+	m_isNeedToRender = value;
 }
 
 void IGameObject::listenSceneUpdateMgr(bool value)
 {
-    
-}
-
-void IGameObject::ListenRenderMgr(bool _value)
-{
-	
-}
-
-void IGameObject::ListenSceneUpdateMgr(bool _value)
-{
     if(m_sceneUpdateMgr != nullptr)
     {
-        _value == true ? m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this()) :
+        value == true ? m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this()) :
         m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
     }
-    m_isNeedToUpdate = _value;
+    m_isNeedToUpdate = value;
 }
 
-void IGameObject::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
+void IGameObject::setupMaterial(CSharedMaterialRef material,
+                                CSharedConfigurationMaterialRef configuration)
 {
-    m_template = _template;
-    for(TEMPLATE_LOADING_HANDLER handler : m_templateLoadingHandlers)
+    assert(configuration != nullptr);
+    assert(m_screenSpaceTextureAccessor != nullptr);
+	assert(m_resourceAccessor != nullptr);
+    
+    material->setCulling(configuration->isCulling());
+    material->setCullingMode(configuration->getCullingMode());
+    
+    material->setBlending(configuration->isBlending());
+    material->setBlendingFunctionSource(configuration->getBlendingFunctionSource());
+    material->setBlendingFunctionDestination(configuration->getBlendingFunctionDestination());
+    
+    material->setDepthTest(configuration->isDepthTest());
+    material->setDepthMask(configuration->isDepthMask());
+    
+    material->setClipping(configuration->isClipping());
+    material->setClippingPlane(configuration->getClippingPlane());
+    
+    material->setReflecting(configuration->isReflecting());
+    material->setShadowing(configuration->isShadowing());
+    material->setDebugging(configuration->isDebugging());
+    
+    for(const auto& iterator : configuration->getTexturesConfigurations())
     {
-        (*handler)(m_template);
-    }
-}
-
-void IGameObject::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)
-{
-    std::string resourcename = "resource";
-    switch (_resource->Get_Class())
-    {
-        case E_RESOURCE_CLASS_SHADER:
-        {
-            m_status |= E_LOADING_STATUS_SHADER_LOADED;
-            resourcename = "shader";
-        }
-            break;
-        case E_RESOURCE_CLASS_MESH:
-        {
-            m_status |= E_LOADING_STATUS_MESH_LOADED;
-            resourcename = "mesh";
-        }
-            break;
-        case E_RESOURCE_CLASS_SKELETON:
-        {
-            m_status |= E_LOADING_STATUS_SKELETON_LOADED;
-            resourcename = "skeleton";
-        }
-            break;
-        case E_RESOURCE_CLASS_SEQUENCE:
-        {
-            m_status |= E_LOADING_STATUS_SEQUENCE_LOADED;
-            resourcename = "sequence";
-        }
-            break;
-        case E_RESOURCE_CLASS_TEXTURE:
-        {
-            resourcename = "texture";
-        }
-            break;
-        case E_RESOURCE_CLASS_MATERIAL:
-        {
-            resourcename = "material";
-        }
-            break;
-
-        default:
-            break;
+        CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
+        assert(textureConfiguration != nullptr);
+        
+        CSharedTexture texture = textureConfiguration->getFilename().length() != 0 ?
+        m_resourceAccessor->getTexture(textureConfiguration->getFilename()) :
+        m_screenSpaceTextureAccessor->Get_RenderOperationTexture(textureConfiguration->getRenderOperationName());
+        texture->registerLoadingHandler(shared_from_this());
+        assert(texture != nullptr);
+        texture->setWrapMode(textureConfiguration->getWrapMode());
+        assert(textureConfiguration->getSamplerIndex() >= 0 &&
+               textureConfiguration->getSamplerIndex() < E_SHADER_SAMPLER_MAX);
+        material->setTexture(texture, static_cast<E_SHADER_SAMPLER>(textureConfiguration->getSamplerIndex()));
     }
     
-    std::set<RESOURCE_LOADING_HANDLER> handlers = m_resourceLoadingHandlers[_resource->Get_Class()];
-    for(RESOURCE_LOADING_HANDLER handler : handlers)
-    {
-        (*handler)(_resource);
-    }
-    std::cout<<"Loaded: "<<resourcename<<". Guid: "<<_resource->Get_Guid()<<std::endl;
+    CSharedConfigurationShader shaderConfiguration = std::static_pointer_cast<CConfigurationShader>(configuration->getShaderConfiguration());
+    assert(shaderConfiguration != nullptr);
+    CSharedShader shader = m_resourceAccessor->getShader(shaderConfiguration->getVSFilename(),
+                                                         shaderConfiguration->getFSFilename());
+    assert(shader != nullptr);
+    material->setShader(shader);
+    shader->registerLoadingHandler(shared_from_this());
 }
-
-void IGameObject::_OnSceneUpdate(f32 _deltatime)
-{
-    m_matrixRotation = glm::rotate(glm::mat4(1.0f), m_rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
-    m_matrixRotation = glm::rotate(m_matrixRotation, m_rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-    m_matrixRotation = glm::rotate(m_matrixRotation, m_rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-    m_matrixTranslation = glm::translate(glm::mat4(1.0f), m_position);
-    m_matrixScale = glm::scale(glm::mat4(1.0f), m_scale);
-    m_matrixWorld = m_matrixTranslation * m_matrixRotation * m_matrixScale;
-    
-    if(m_boundBox != nullptr)
-    {
-        m_boundBox->Update(m_matrixWorld);
-    }
-}
-
-i32 IGameObject::_OnQueuePosition(void)
-{
-    return 0;
-}
-
-bool IGameObject::_OnOcclusion(void)
-{
-    assert(m_camera != nullptr);
-    assert(m_camera->Get_Frustum() != nullptr);
-    
-    glm::vec3 maxBound = IGameObject::Get_MaxBound() + m_position;
-    glm::vec3 minBound = IGameObject::Get_MinBound() + m_position;
-    return !m_camera->Get_Frustum()->IsBoundBoxInFrustum(maxBound, minBound);
-}
-
-ui32 IGameObject::_OnGet_NumTriangles(void)
-{
-    return IGameObject::Get_NumTriangles();
-}
-
-void IGameObject::_OnBatch(const std::string& _mode)
-{
-    
-}
-
-void IGameObject::_OnBind(const std::string &_mode)
-{
-    assert(m_materials.find(_mode) != m_materials.end());
-    auto iterator = m_materials.find(_mode);
-
-    if(!m_isBatching)
-    {
-        assert(m_mesh != nullptr);
-        iterator->second->Bind();
-        m_mesh->bind(iterator->second->Get_Shader()->getAttributesRef());
-    }
-}
-
-void IGameObject::_OnDraw(const std::string &_mode)
-{
-    assert(m_mesh != nullptr);
-    m_mesh->draw();
-}
-
-void IGameObject::_OnUnbind(const std::string &_mode)
-{
-    assert(m_materials.find(_mode) != m_materials.end());
-    auto iterator = m_materials.find(_mode);
-    
-    if(!m_isBatching)
-    {
-        assert(m_mesh != nullptr);
-        iterator->second->Unbind();
-        m_mesh->unbind(iterator->second->Get_Shader()->getAttributesRef());
-    }
-}
-
-void IGameObject::_OnDebugDraw(const std::string &_mode)
-{
-
-}
-

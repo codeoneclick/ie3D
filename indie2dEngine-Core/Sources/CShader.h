@@ -141,7 +141,7 @@ public:
     void setFloatCustom(f32 value, const std::string& uniform);
     void setInt(i32 value, E_SHADER_UNIFORM uniform);
     void setIntCustom(i32 value, const std::string& uniform);
-    void setTexture(const CSharedTexture texture, E_SHADER_SAMPLER sampler);
+    void setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler);
     
     void bind(void) const;
     void unbind(void) const;

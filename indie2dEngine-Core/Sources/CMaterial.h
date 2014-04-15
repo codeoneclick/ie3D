@@ -60,8 +60,7 @@ protected:
     
 public:
     
-    CMaterial(const std::string& guid,
-              bool isCustom = false);
+    CMaterial(void);
     ~CMaterial(void);
     
     bool isCulling(void) const;

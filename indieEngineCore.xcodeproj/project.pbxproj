@@ -53,8 +53,6 @@
 		2111AA5F181EFF30007FE7A8 /* IGameLoopHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204AA17423C7F0063AB07 /* IGameLoopHandler.cpp */; };
 		2111AA60181EFF30007FE7A8 /* IGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418526817609D86002FC042 /* IGameController.cpp */; };
 		2111AA61181EFF30007FE7A8 /* IGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B4174F5D1B005B475E /* IGameObject.cpp */; };
-		2111AA62181EFF30007FE7A8 /* CSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B7174F5D2F005B475E /* CSprite.cpp */; };
-		2111AA63181EFF30007FE7A8 /* CBillboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BA174F5D42005B475E /* CBillboard.cpp */; };
 		2111AA64181EFF30007FE7A8 /* CParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */; };
 		2111AA65181EFF30007FE7A8 /* CModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B83821754C07200AEB4DC /* CModel.cpp */; };
 		2111AA66181EFF30007FE7A8 /* COcean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789CF17A01CF800FE26FA /* COcean.cpp */; };
@@ -175,8 +173,6 @@
 		21D071E1181DA6C20019D264 /* IGameLoopHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204AA17423C7F0063AB07 /* IGameLoopHandler.cpp */; };
 		21D071E2181DA6C20019D264 /* IGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418526817609D86002FC042 /* IGameController.cpp */; };
 		21D071E3181DA6C20019D264 /* IGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B4174F5D1B005B475E /* IGameObject.cpp */; };
-		21D071E4181DA6C20019D264 /* CSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B7174F5D2F005B475E /* CSprite.cpp */; };
-		21D071E5181DA6C20019D264 /* CBillboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BA174F5D42005B475E /* CBillboard.cpp */; };
 		21D071E6181DA6C20019D264 /* CParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */; };
 		21D071E7181DA6C20019D264 /* CModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B83821754C07200AEB4DC /* CModel.cpp */; };
 		21D071E8181DA6C20019D264 /* COcean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789CF17A01CF800FE26FA /* COcean.cpp */; };
@@ -254,8 +250,6 @@
 		21E4D59F1865944D006F84D6 /* CConfigurationGameObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 21E4D59B1865944D006F84D6 /* CConfigurationGameObjects.h */; };
 		A40A6A581753A552005B475E /* CMeshLoader_Testing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A6A571753A552005B475E /* CMeshLoader_Testing.cpp */; };
 		A40A6A611753AF38005B475E /* IGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B4174F5D1B005B475E /* IGameObject.cpp */; };
-		A40A6A621753AF38005B475E /* CSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B7174F5D2F005B475E /* CSprite.cpp */; };
-		A40A6A631753AF38005B475E /* CBillboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BA174F5D42005B475E /* CBillboard.cpp */; };
 		A40A6A641753AF38005B475E /* CParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */; };
 		A40A6A651753AF38005B475E /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
 		A40A6A661753AF38005B475E /* CFrustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B1174F5215005B475E /* CFrustum.cpp */; };
@@ -538,10 +532,6 @@
 		A40A69B2174F5215005B475E /* CFrustum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFrustum.h; path = Sources/CFrustum.h; sourceTree = "<group>"; };
 		A40A69B4174F5D1B005B475E /* IGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGameObject.cpp; path = Sources/IGameObject.cpp; sourceTree = "<group>"; };
 		A40A69B5174F5D1B005B475E /* IGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGameObject.h; path = Sources/IGameObject.h; sourceTree = "<group>"; };
-		A40A69B7174F5D2F005B475E /* CSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSprite.cpp; path = Sources/CSprite.cpp; sourceTree = "<group>"; };
-		A40A69B8174F5D2F005B475E /* CSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSprite.h; path = Sources/CSprite.h; sourceTree = "<group>"; };
-		A40A69BA174F5D42005B475E /* CBillboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBillboard.cpp; path = Sources/CBillboard.cpp; sourceTree = "<group>"; };
-		A40A69BB174F5D42005B475E /* CBillboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBillboard.h; path = Sources/CBillboard.h; sourceTree = "<group>"; };
 		A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitter.cpp; path = Sources/CParticleEmitter.cpp; sourceTree = "<group>"; };
 		A40A69BE174F5D64005B475E /* CParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CParticleEmitter.h; path = Sources/CParticleEmitter.h; sourceTree = "<group>"; };
 		A40A6A571753A552005B475E /* CMeshLoader_Testing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMeshLoader_Testing.cpp; sourceTree = "<group>"; };
@@ -1220,10 +1210,6 @@
 			children = (
 				A40A69B5174F5D1B005B475E /* IGameObject.h */,
 				A40A69B4174F5D1B005B475E /* IGameObject.cpp */,
-				A40A69B8174F5D2F005B475E /* CSprite.h */,
-				A40A69B7174F5D2F005B475E /* CSprite.cpp */,
-				A40A69BB174F5D42005B475E /* CBillboard.h */,
-				A40A69BA174F5D42005B475E /* CBillboard.cpp */,
 				A40A69BE174F5D64005B475E /* CParticleEmitter.h */,
 				A40A69BD174F5D64005B475E /* CParticleEmitter.cpp */,
 				A49B83831754C07200AEB4DC /* CModel.h */,
@@ -2220,8 +2206,6 @@
 				2111AA5F181EFF30007FE7A8 /* IGameLoopHandler.cpp in Sources */,
 				2111AA60181EFF30007FE7A8 /* IGameController.cpp in Sources */,
 				2111AA61181EFF30007FE7A8 /* IGameObject.cpp in Sources */,
-				2111AA62181EFF30007FE7A8 /* CSprite.cpp in Sources */,
-				2111AA63181EFF30007FE7A8 /* CBillboard.cpp in Sources */,
 				2111AA64181EFF30007FE7A8 /* CParticleEmitter.cpp in Sources */,
 				2111AA65181EFF30007FE7A8 /* CModel.cpp in Sources */,
 				2111AA66181EFF30007FE7A8 /* COcean.cpp in Sources */,
@@ -2348,8 +2332,6 @@
 				21D071E1181DA6C20019D264 /* IGameLoopHandler.cpp in Sources */,
 				21D071E2181DA6C20019D264 /* IGameController.cpp in Sources */,
 				21D071E3181DA6C20019D264 /* IGameObject.cpp in Sources */,
-				21D071E4181DA6C20019D264 /* CSprite.cpp in Sources */,
-				21D071E5181DA6C20019D264 /* CBillboard.cpp in Sources */,
 				21D071E6181DA6C20019D264 /* CParticleEmitter.cpp in Sources */,
 				21D071E7181DA6C20019D264 /* CModel.cpp in Sources */,
 				21D071E8181DA6C20019D264 /* COcean.cpp in Sources */,
@@ -2436,9 +2418,7 @@
 				A40A6A6E1753AF75005B475E /* CMeshCommiter_MDL.cpp in Sources */,
 				A40A6A611753AF38005B475E /* IGameObject.cpp in Sources */,
 				A4D21A171848CA6000595FEA /* CGameLoopExecutor_ndk.cpp in Sources */,
-				A40A6A621753AF38005B475E /* CSprite.cpp in Sources */,
 				A49046511844A7F6009734B8 /* CLandscapeEdges.cpp in Sources */,
-				A40A6A631753AF38005B475E /* CBillboard.cpp in Sources */,
 				A40A6A641753AF38005B475E /* CParticleEmitter.cpp in Sources */,
 				A40A6A651753AF38005B475E /* CCamera.cpp in Sources */,
 				A40A6A661753AF38005B475E /* CFrustum.cpp in Sources */,

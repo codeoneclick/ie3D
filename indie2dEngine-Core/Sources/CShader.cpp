@@ -600,7 +600,7 @@ void CShader::setIntCustom(i32 value, const std::string &uniform)
     }
 }
 
-void CShader::setTexture(std::shared_ptr<CTexture> texture, E_SHADER_SAMPLER sampler)
+void CShader::setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {

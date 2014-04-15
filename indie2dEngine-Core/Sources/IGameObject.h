@@ -15,12 +15,14 @@
 #include "IResource.h"
 #include "IConfiguration.h"
 #include "IRenderHandler.h"
+#include "ISceneUpdateHandler.h"
 
 class IGameObject :
 public std::enable_shared_from_this<IGameObject>,
 public IConfigurationLoadingHandler,
 public IResourceLoadingHandler,
-public IRenderHandler
+public IRenderHandler,
+public ISceneUpdateHandler
 {
 private:
     
@@ -56,6 +58,9 @@ protected:
 	bool m_isNeedToRender;
     bool m_isNeedToUpdate;
     bool m_isBatching;
+    
+    virtual void setupMaterial(CSharedMaterialRef material,
+                               CSharedConfigurationMaterialRef configuration);
     
     virtual void onSceneUpdate(f32 deltatime);
     

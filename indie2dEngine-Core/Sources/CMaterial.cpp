@@ -40,9 +40,10 @@ CSharedMaterialCachedParameters CMaterial::getCachedParameters(void)
 }
 
 
-CMaterial::CMaterial(const std::string& guid, bool isCustom)
+CMaterial::CMaterial(void) :
+m_parameters(std::make_shared<CMaterialCachedParameters>())
 {
-    m_parameters = isCustom ? std::make_shared<CMaterialCachedParameters>() : nullptr;
+
 }
 
 CMaterial::~CMaterial(void)
