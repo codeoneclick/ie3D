@@ -11,30 +11,16 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
+#include "HDeclaration.h"
+#include "IResource.h"
+#include "IConfiguration.h"
 #include "IRenderHandler.h"
-#include "ISceneUpdateHandler.h"
-#include "ITemplateLoadingHandler.h"
-#include "IResourceLoadingHandler.h"
-
-class CCamera;
-class CLight;
-class CMesh;
-class CVertexBuffer;
-class CIndexBuffer;
-class CTexture;
-class CMaterial;
-class CRenderMgr;
-class CSceneUpdateMgr;
-class CResourceAccessor;
-class IScreenSpaceTextureAccessor;
-class CAABoundBox;
 
 class IGameObject :
 public std::enable_shared_from_this<IGameObject>,
-public IRenderHandler,
-public ISceneUpdateHandler,
-public ITemplateLoadingHandler,
-public IResourceLoadingHandler
+public IConfigurationLoadingHandler,
+public IResourceLoadingHandler,
+public IRenderHandler
 {
 private:
     
@@ -49,117 +35,84 @@ protected:
     glm::vec3 m_rotation;
     glm::vec3 m_scale;
     
-    std::map<std::string, std::shared_ptr<CMaterial> > m_materials;
-    std::shared_ptr<I_RO_TemplateCommon> m_template;
-    std::shared_ptr<CMaterial> m_debugBoundBoxMaterial;
-    std::shared_ptr<CMesh> m_mesh;
+    std::unordered_map<std::string, CSharedMaterial> m_materials;
+    std::function<void(CSharedMaterialRef)> m_materialBindImposer;
+    ISharedConfiguration m_configuration;
     
-    std::shared_ptr<CCamera> m_camera;
-    std::array<std::shared_ptr<CLight>, E_LIGHT_MAX> m_lights;
-    std::shared_ptr<CAABoundBox> m_boundBox;
+    CSharedMesh m_mesh;
+    CSharedBoundBox m_boundBox;
     
-    std::shared_ptr<CRenderMgr> m_renderMgr;
-    std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
-    std::shared_ptr<CResourceAccessor> m_resourceAccessor;
-	std::shared_ptr<IScreenSpaceTextureAccessor> m_screenSpaceTextureAccessor;
+    CSharedCamera m_camera;
+    std::array<CSharedLightSource, E_LIGHT_SOURCE_MAX> m_lightSources;
+    
+    CSharedRenderMgr m_renderMgr;
+    CSharedSceneUpdateMgr m_sceneUpdateMgr;
+    CSharedResourceAccessor m_resourceAccessor;
+	ISharedScreenSpaceTextureAccessor m_screenSpaceTextureAccessor;
+    ui32 m_renderQueuePosition;
     
     ui8 m_status;
-    ui32 m_renderQueuePosition;
-    std::function<void(std::shared_ptr<CMaterial>)> m_materialImposer;
+    
 	bool m_isNeedToRender;
     bool m_isNeedToUpdate;
     bool m_isBatching;
     
-    bool _IsBoundBoxInFrustum(void);
+    virtual void onSceneUpdate(f32 deltatime);
     
-    virtual void _OnSceneUpdate(f32 _deltatime);
+    virtual void onResourceLoaded(ISharedResourceRef resource, bool success);
+    virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
-    virtual void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
-    virtual void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
-    
-    virtual i32 _OnQueuePosition(void);
-    virtual bool _OnOcclusion(void);
-    virtual ui32 _OnGet_NumTriangles(void);
-    virtual void _OnBind(const std::string& _mode);
-    virtual void _OnDraw(const std::string& _mode);
-    virtual void _OnUnbind(const std::string& _mode);
-    virtual void _OnDebugDraw(const std::string& _mode);
-    virtual void _OnBatch(const std::string& _mode);
+    virtual i32  getZOrder(void);
+    virtual bool checkOcclusion(void);
+    virtual ui32 numTriangles(void);
+    virtual void onBind(const std::string& mode);
+    virtual void onDraw(const std::string& mode);
+    virtual void onUnbind(const std::string& mode);
+    virtual void onBatch(const std::string& mode);
     
 public:
     
-	IGameObject(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
+	IGameObject(CSharedResourceAccessorRef resourceAccessor,
+                ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
     virtual ~IGameObject(void);
     
-    inline void Set_Position(const glm::vec3& _position)
-    {
-        m_position = _position;
-    };
+    void setPosition(const glm::vec3& position);
+    glm::vec3 getPosition(void) const;
     
-    inline glm::vec3 Get_Position(void)
-    {
-        return m_position;
-    };
+    void setRotation(const glm::vec3& rotation);
+    glm::vec3 getRotation(void) const;
     
-    inline void Set_Rotation(const glm::vec3& _rotation)
-    {
-        m_rotation = _rotation;
-    };
+    void setScale(const glm::vec3& scale);
+    glm::vec3 getScale(void) const;
     
-    inline glm::vec3 Get_Rotation(void)
-    {
-        return m_rotation;
-    };
+    glm::mat4x4 getWorldMatrix(void) const;
     
-    inline void Set_Scale(const glm::vec3& _scale)
-    {
-        m_scale = _scale;
-    };
+    glm::vec3 getMaxBound(void) const;
+    glm::vec3 getMinBound(void) const;
     
-    inline glm::vec3 Get_Scale(void)
-    {
-        return m_scale;
-    };
+    virtual void setCamera(CSharedCameraRef camera);
     
-    inline glm::mat4x4 Get_WorldMatrix(void)
-    {
-        return m_matrixWorld;
-    };
+    virtual void setLightSource(CSharedLightSourceRef lightSource,
+                                E_LIGHT_SOURCE index);
     
-    glm::vec3 Get_MaxBound(void);
-    glm::vec3 Get_MinBound(void);
+    CSharedVertexBuffer getVertexBuffer(void) const;
+    CSharedIndexBuffer getIndexBuffer(void) const;
     
-    virtual void Set_Camera(std::shared_ptr<CCamera> _camera);
+    virtual CSharedVertexBuffer getCollisionVertexBuffer(void) const;
+    virtual CSharedIndexBuffer getCollisionIndexBuffer(void) const;
     
-    virtual inline void Set_Light(std::shared_ptr<CLight> _light, E_LIGHTS _id)
-    {
-        m_lights[_id] = _light;
-    };
+    void setTexture(CSharedTextureRef texture,
+                    E_SHADER_SAMPLER sampler,
+                    const std::string& mode);
     
-    std::shared_ptr<CVertexBuffer> Get_HardwareVertexBuffer(void);
-    std::shared_ptr<CIndexBuffer> Get_HardwareIndexBuffer(void);
+    void setClippingPlane(const glm::vec4& clippingPlane,
+                          const std::string& mode);
     
-    std::shared_ptr<CVertexBuffer> Get_BoundVertexBuffer(void);
-    std::shared_ptr<CIndexBuffer> Get_BoundIndexBuffer(void);
+    virtual void setRenderMgr(CSharedRenderMgrRef renderMgr);
+    virtual void setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr);
     
-    void Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode);
-    void Set_ClippingPlane(const glm::vec4& _clippingPlane, const std::string& _renderMode);
-    
-    virtual inline void Set_RenderMgr(std::shared_ptr<CRenderMgr> _renderMgr)
-    {
-        m_renderMgr = _renderMgr;
-    };
-    
-    virtual inline void Set_SceneUpdateMgr(std::shared_ptr<CSceneUpdateMgr> _sceneUpdateMgr)
-    {
-        m_sceneUpdateMgr = _sceneUpdateMgr;
-    };
-    
-    virtual ui32 Get_NumTriangles(void);
-    
-    virtual void ListenRenderMgr(bool _value);
-    virtual void ListenSceneUpdateMgr(bool _value);
-    
+    virtual void listenRenderMgr(bool value);
+    virtual void listenSceneUpdateMgr(bool value);
 };
 
 #endif 

@@ -136,7 +136,9 @@ protected:
     
 public:
     
-    CMesh(const std::string& guid);
+    CMesh(const std::string& guid,
+          CSharedVertexBufferRef vertexBuffer = nullptr,
+          CSharedIndexBufferRef indexBuffer = nullptr);
     ~CMesh(void);
     
     CSharedVertexBuffer getVertexBuffer(void) const;

@@ -9,7 +9,7 @@
 #include "CConfigurationGameObjects.h"
 
 CConfigurationTexture::CConfigurationTexture(void) :
-IConfiguration(),
+IConfiguration(E_CONFIGURATION_CLASS_TEXTURE),
 kTextureMainNode("texture"),
 kTextureFilenameAttribute("filename"),
 kTextureRenderOperationNameAttribute("render_operation_name"),
@@ -62,7 +62,7 @@ ui32 CConfigurationTexture::getWrapMode(void) const
 }
 
 CConfigurationShader::CConfigurationShader(void) :
-IConfiguration(),
+IConfiguration(E_CONFIGURATION_CLASS_SHADER),
 kShaderMainNode("shader"),
 kShaderVSFilenameAttribute("vs_filename"),
 kShaderFSFilenameAttribute("fs_filename")
@@ -94,7 +94,7 @@ std::string CConfigurationShader::getFSFilename(void) const
 }
 
 CConfigurationMaterial::CConfigurationMaterial(void) :
-IConfiguration(),
+IConfiguration(E_CONFIGURATION_CLASS_MATERIAL),
 kMaterialMainNode("material"),
 kMaterialRenderOperationNameAttribute("render_operation_name"),
 kMaterialIsCullFaceAttribute("is_cull_face"),
@@ -277,8 +277,8 @@ ISharedConfiguration CConfigurationMaterial::getShaderConfiguration(void) const
     return iterator->second[0];
 }
 
-CConfigurationGameObject::CConfigurationGameObject(void) :
-IConfiguration(),
+CConfigurationGameObject::CConfigurationGameObject(E_CONFIGURATION_CLASS configurationClass) :
+IConfiguration(configurationClass),
 kGameObjectMaterialsConfigurationsNode("materials"),
 kGameObjectMaterialConfigurationNode("material"),
 kGameObjectMaterialFilenameAttribute("filename")
@@ -315,7 +315,7 @@ std::vector<ISharedConfiguration> CConfigurationGameObject::getMaterialsConfigur
 }
 
 CConfigurationModel::CConfigurationModel(void) :
-CConfigurationGameObject(),
+CConfigurationGameObject(E_CONFIGURATION_CLASS_MODEL),
 kModelMainNode("model"),
 kModelMeshFilenameAttribute("filename"),
 kModelMeshIsBatchingAttribute("is_batching"),
@@ -393,7 +393,7 @@ bool CConfigurationModel::isBatching(void) const
 }
 
 CConfigurationOcean::CConfigurationOcean(void) :
-CConfigurationGameObject(),
+CConfigurationGameObject(E_CONFIGURATION_CLASS_OCEAN),
 kOceanMainNode("ocean"),
 kOceanSizeXAttribute("size_x"),
 kOceanSizeYAttribute("size_y"),
@@ -444,7 +444,7 @@ f32 CConfigurationOcean::getWaveGenerationInterval(void) const
 }
 
 CConfigurationParticleEmitter::CConfigurationParticleEmitter(void) :
-CConfigurationGameObject(),
+CConfigurationGameObject(E_CONFIGURATION_CLASS_PARTICLE_EMITTER),
 kParticleEmitterMainNode("particle_emitter"),
 kParticleEmitterNumParticlesAttribute("num_particles"),
 kParticleEmitterDurationAttribute("duration"),
@@ -698,7 +698,7 @@ ui64 CConfigurationParticleEmitter::getMaxEmittInterval(void) const
 }
 
 CConfigurationLandscape::CConfigurationLandscape(void) :
-CConfigurationGameObject(),
+CConfigurationGameObject(E_CONFIGURATION_CLASS_LANDSCAPE),
 kLandscapeMainNode("landscape"),
 kLandscapeHeightmapDataFilenameAttribute("heightmap_data_filename"),
 kLandscapeSplattingDataFilenameAttribute("splatting_data_filename"),
@@ -849,7 +849,7 @@ std::vector<ISharedConfiguration> CConfigurationLandscape::getEdgesMaterialsConf
 }
 
 CConfigurationWSRenderOperation::CConfigurationWSRenderOperation(void) :
-IConfiguration(),
+IConfiguration(E_CONFIGURATION_CLASS_WS_RENDEROPERATION),
 kWSRenderOperationMainNode("operation"),
 kWSRenderOperationGuidAttribute("guid"),
 kWSRenderOperationIndexAttribute("index"),
@@ -934,7 +934,7 @@ glm::vec4 CConfigurationWSRenderOperation::getClearColor(void) const
 }
 
 CConfigurationSSRenderOperation::CConfigurationSSRenderOperation(void) :
-IConfiguration(),
+IConfiguration(E_CONFIGURATION_CLASS_SS_RENDEROPERATION),
 kSSRenderOperationMainNode("operation"),
 kSSRenderOperationGuidAttribute("guid"),
 kSSRenderOperationScreenWidthAttribute("width"),
@@ -994,7 +994,7 @@ ISharedConfiguration CConfigurationSSRenderOperation::getMaterialConfiguration(v
 }
 
 CConfigurationORenderOperation::CConfigurationORenderOperation(void) :
-IConfiguration(),
+IConfiguration(E_CONFIGURATION_CLASS_O_RENDEROPERATION),
 kORenderOperationMainNode("operation"),
 kORenderOperationGuidAttribute("guid"),
 kORenderOperationMaterialConfigurationFilenameAttribute("filename")
@@ -1034,7 +1034,7 @@ ISharedConfiguration CConfigurationORenderOperation::getMaterialConfiguration(vo
 }
 
 CConfigurationGameTransition::CConfigurationGameTransition(void) :
-IConfiguration(),
+IConfiguration(E_CONFIGURATION_CLASS_GAMETRANSITION),
 kGameTransitionMainNode("transition"),
 kGameTransitionGuidAttribute("guid"),
 kGameTransitionORenderOperationConfigurationNode("output_render_operation"),

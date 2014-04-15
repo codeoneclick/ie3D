@@ -26,7 +26,7 @@ protected:
 
 public:
 
-	CGUIFabricator(const std::shared_ptr<CTemplateAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
+	CGUIFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
 	~CGUIFabricator(void);
 
 	std::shared_ptr<CGUIContainer> CreateGUIContainer(const std::string& _filename);

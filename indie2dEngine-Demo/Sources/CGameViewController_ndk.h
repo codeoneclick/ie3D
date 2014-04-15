@@ -12,7 +12,7 @@
 #if defined(__NDK__)
 
 class IOGLWindow;
-class IGameWorkflow;
+class IGameController;
 class CGameViewController_ndk
 {
 private:
@@ -20,7 +20,7 @@ private:
 protected:
     
 	IOGLWindow* m_window;
-	IGameWorkflow* m_workflow;
+	IGameController* m_workflow;
     
 public:
     

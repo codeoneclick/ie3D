@@ -14,32 +14,30 @@
 #include "CMaterial.h"
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
-#include "CAABoundBox.h"
 
-IGameObject::IGameObject(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor) :
-m_resourceAccessor(_resourceAccessor),
-m_screenSpaceTextureAccessor(_screenSpaceTextureAccessor),
+IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
+                         ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+m_resourceAccessor(resourceAccessor),
+m_screenSpaceTextureAccessor(screenSpaceTextureAccessor),
 m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
 m_renderQueuePosition(0),
 m_mesh(nullptr),
-m_template(nullptr),
+m_configuration(nullptr),
 m_camera(nullptr),
 m_boundBox(nullptr),
-m_debugBoundBoxMaterial(nullptr),
 m_renderMgr(nullptr),
 m_sceneUpdateMgr(nullptr),
-m_materialImposer(nullptr),
+m_materialBindImposer(nullptr),
 m_isNeedToRender(false),
 m_isNeedToUpdate(false),
 m_isBatching(false),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
-    std::for_each(m_lights.begin(), m_lights.end(), [](std::shared_ptr<CLight> _light)
-                  {
-                      _light = nullptr;
-                  });
+    std::for_each(m_lightSources.begin(), m_lightSources.end(), [](CSharedLightSource& lightSource){
+        lightSource = nullptr;
+    });
 }
 
 IGameObject::~IGameObject(void)
@@ -47,95 +45,192 @@ IGameObject::~IGameObject(void)
     m_materials.clear();
 }
 
-bool IGameObject::_IsBoundBoxInFrustum(void)
+void IGameObject::onSceneUpdate(f32 deltatime)
 {
-    assert(m_camera != nullptr);
-    assert(m_camera->Get_Frustum() != nullptr);
-    assert(m_mesh != nullptr);
-    i32 result =  m_camera->Get_Frustum()->IsBoundBoxInFrustum(m_mesh->getMaxBound() + m_position, m_mesh->getMinBound() + m_position);
-    return result == E_FRUSTUM_BOUND_RESULT_OUTSIDE ? false : true;
+    
 }
 
-glm::vec3 IGameObject::Get_MaxBound(void)
+void IGameObject::onResourceLoaded(ISharedResourceRef resource,
+                                   bool success)
 {
-    assert(m_mesh != nullptr);
-    return m_mesh->getMaxBound() * m_scale;
+    
 }
 
-glm::vec3 IGameObject::Get_MinBound(void)
+void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
+                                        bool success)
 {
-    assert(m_mesh != nullptr);
-    return m_mesh->getMinBound() * m_scale;
+    
 }
 
-void IGameObject::Set_Camera(std::shared_ptr<CCamera> _camera)
+i32  IGameObject::getZOrder(void)
 {
-    m_camera = _camera;
+    
 }
 
-void IGameObject::Set_Texture(std::shared_ptr<CTexture> _texture, E_SHADER_SAMPLER _sampler, const std::string& _renderMode)
+bool IGameObject::checkOcclusion(void)
 {
-    assert(m_materials.find(_renderMode) != m_materials.end());
-    auto iterator = m_materials.find(_renderMode);
-    iterator->second->Set_Texture(_texture, _sampler);
+    
 }
 
-void IGameObject::Set_ClippingPlane(const glm::vec4 &_clippingPlane, const std::string& _renderMode)
+ui32 IGameObject::numTriangles(void)
 {
-    assert(m_materials.find(_renderMode) != m_materials.end());
-    auto iterator = m_materials.find(_renderMode);
-    iterator->second->Set_ClippingPlane(_clippingPlane);
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getNumIndices() / 3 : 0;
 }
 
-std::shared_ptr<CVertexBuffer> IGameObject::Get_HardwareVertexBuffer(void)
+void IGameObject::onBind(const std::string& mode)
 {
-    assert(m_mesh != nullptr);
-    assert(m_mesh->getVertexBuffer() != nullptr);
-    return m_mesh->getVertexBuffer();
+    
 }
 
-std::shared_ptr<CIndexBuffer> IGameObject::Get_HardwareIndexBuffer(void)
+void IGameObject::onDraw(const std::string& mode)
 {
-    assert(m_mesh != nullptr);
-    assert(m_mesh->getIndexBuffer() != nullptr);
-    return m_mesh->getIndexBuffer();
+    
 }
 
-std::shared_ptr<CVertexBuffer> IGameObject::Get_BoundVertexBuffer(void)
+void IGameObject::onUnbind(const std::string& mode)
 {
-    assert(m_boundBox != nullptr);
-    assert(m_boundBox->Get_VertexBuffer() != nullptr);
-    return m_boundBox->Get_VertexBuffer();
+    
 }
 
-std::shared_ptr<CIndexBuffer> IGameObject::Get_BoundIndexBuffer(void)
+void IGameObject::onBatch(const std::string& mode)
 {
-    assert(m_boundBox != nullptr);
-    assert(m_boundBox->Get_IndexBuffer() != nullptr);
-    return m_boundBox->Get_IndexBuffer();
+    
 }
 
-ui32 IGameObject::Get_NumTriangles(void)
+void IGameObject::setPosition(const glm::vec3& position)
 {
-    return m_mesh != nullptr && m_mesh->getIndexBuffer() != nullptr ? m_mesh->getNumIndices() / 3 : 0;
+    m_position = position;
+    m_matrixTranslation = glm::translate(glm::mat4(1.0f), m_position);
 }
 
-void IGameObject::ListenRenderMgr(bool _value)
+glm::vec3 IGameObject::getPosition(void) const
 {
-	if(_value)
+    return m_position;
+}
+
+void IGameObject::setRotation(const glm::vec3& rotation)
+{
+    m_rotation = rotation;
+    m_matrixRotation = glm::rotate(glm::mat4(1.0f), m_rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
+    m_matrixRotation = glm::rotate(m_matrixRotation, m_rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+    m_matrixRotation = glm::rotate(m_matrixRotation, m_rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+}
+
+glm::vec3 IGameObject::getRotation(void) const
+{
+    return m_rotation;
+}
+
+void IGameObject::setScale(const glm::vec3& scale)
+{
+    m_scale = scale;
+    m_matrixScale = glm::scale(glm::mat4(1.0f), m_scale);
+}
+
+glm::vec3 IGameObject::getScale(void) const
+{
+    return m_scale;
+}
+
+glm::mat4x4 IGameObject::getWorldMatrix(void) const
+{
+    return m_matrixWorld;
+}
+
+glm::vec3 IGameObject::getMaxBound(void) const
+{
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMaxBound() * m_scale : glm::vec3(0, 0, 0);
+}
+
+glm::vec3 IGameObject::getMinBound(void) const
+{
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMinBound() * m_scale : glm::vec3(0, 0, 0);
+}
+
+void IGameObject::setCamera(CSharedCameraRef camera)
+{
+    m_camera = camera;
+}
+
+void IGameObject::setLightSource(CSharedLightSourceRef lightSource,
+                            E_LIGHT_SOURCE index)
+{
+    m_lightSources.at(index) = lightSource;
+}
+
+CSharedVertexBuffer IGameObject::getVertexBuffer(void) const
+{
+    return m_mesh && m_mesh->isCommited() ? m_mesh->getVertexBuffer() : nullptr;
+}
+
+CSharedIndexBuffer IGameObject::getIndexBuffer(void) const
+{
+    return m_mesh && m_mesh->isCommited() ? m_mesh->getIndexBuffer() : nullptr;
+}
+
+CSharedVertexBuffer IGameObject::getCollisionVertexBuffer(void) const
+{
+    return nullptr;
+}
+
+CSharedIndexBuffer IGameObject::getCollisionIndexBuffer(void) const
+{
+    return nullptr;
+}
+
+void IGameObject::setTexture(CSharedTextureRef texture,
+                E_SHADER_SAMPLER sampler,
+                const std::string& mode)
+{
+    assert(m_materials.find(mode) != m_materials.end());
+    auto iterator = m_materials.find(mode);
+    iterator->second->setTexture(texture, sampler);
+}
+
+void IGameObject::setClippingPlane(const glm::vec4& clippingPlane,
+                      const std::string& mode)
+{
+    assert(m_materials.find(mode) != m_materials.end());
+    auto iterator = m_materials.find(mode);
+    iterator->second->setClippingPlane(clippingPlane);
+}
+
+void IGameObject::setRenderMgr(CSharedRenderMgrRef renderMgr)
+{
+    
+}
+
+void IGameObject::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
+{
+    
+}
+
+void IGameObject::listenRenderMgr(bool value)
+{
+    if(value)
 	{
 		assert(m_renderMgr != nullptr);
 	}
-
+    
     for(const auto& iterator : m_materials)
     {
 		if(m_renderMgr != nullptr)
 		{
-			_value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
+			value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
 			m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
 		}
     }
 	m_isNeedToRender = _value;
+}
+
+void IGameObject::listenSceneUpdateMgr(bool value)
+{
+    
+}
+
+void IGameObject::ListenRenderMgr(bool _value)
+{
+	
 }
 
 void IGameObject::ListenSceneUpdateMgr(bool _value)

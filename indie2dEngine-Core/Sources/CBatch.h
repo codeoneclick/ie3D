@@ -11,12 +11,8 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
+#include "HDeclaration.h"
 #include "IRenderHandler.h"
-
-class CMaterial;
-class CMesh;
-class CQuad;
-class CAnimationMixer;
 
 class CBatch : public IRenderHandler
 {
@@ -24,89 +20,59 @@ private:
     
 protected:
     
-    std::shared_ptr<CMaterial> m_material;
-    std::function<void(std::shared_ptr<CMaterial>)> m_materialImposer;
-    std::shared_ptr<CMesh> m_mesh;
+    CSharedMaterial m_material;
+    std::function<void(CSharedMaterialRef)> m_materialBindImposer;
+    CSharedMesh m_mesh;
+    
     std::string m_guid;
     std::string m_mode;
     
-    std::vector<std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>> m_meshes;
-	std::vector<std::shared_ptr<CQuad>> m_controls;
+    std::vector<std::tuple<CSharedMesh, CSharedAnimationMixer>> m_models;
     std::vector<glm::mat4x4> m_matrices;
 	std::vector<glm::mat4x4> m_transformations;
-	std::vector<glm::vec2> m_positions;
-	std::vector<glm::vec2> m_sizes;
     
-    ui8 m_locked;
-    ui8 m_proccessed;
-    ui8 m_unlocked;
+    ui32 m_numUnlockedIndices;
+    ui32 m_numUnlockedVertices;
+    ui32 m_numUnlockedTransformations;
     
-    ui32 m_numIndices;
-    ui32 m_numVertices;
-    
-    ui32 m_numPushedIndices;
-    ui32 m_numPushedVertices;
+    ui32 m_numLockedIndices;
+    ui32 m_numLockedVertices;
+    ui32 m_numLockedTransformations;
     
     ui32 m_renderQueuePosition;
     
-    ui32 m_numBatchedVertices;
-    ui32 m_numBatchedIndices;
-    ui32 m_numBatchedTransformations;
-
-	E_BATCH_GEOMETRY_MODE m_geometryMode;
-
-	std::function<void(void)> _UnlockModelsGeometry(void);
-	std::function<void(void)> _UnlockControlsGeometry(void);
-	std::function<void(void)> _UnlockPatriclesGeometry(void);
-    
-    i32 _OnQueuePosition(void);
-    bool _OnOcclusion(void);
-    ui32 _OnGet_NumTriangles(void);
-    void _OnBind(const std::string& _mode);
-    void _OnDraw(const std::string& _mode);
-    void _OnUnbind(const std::string& _mode);
-    void _OnDebugDraw(const std::string& _mode);
-    void _OnBatch(const std::string& _mode);
+    i32  getZOrder(void);
+    bool checkOcclusion(void);
+    ui32 numTriangles(void);
+    void onBind(const std::string& mode);
+    void onDraw(const std::string& mode);
+    void onUnbind(const std::string& mode);
+    void onBatch(const std::string& mode);
     
 public:
     
-    CBatch(const std::string& _mode, E_BATCH_GEOMETRY_MODE _geometryMode, ui32 _renderQueuePosition, const std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _materialImposer);
+    CBatch(const std::string& mode,
+           ui32 renderQueuePosition,
+           CSharedMaterialRef material,
+           const std::function<void(CSharedMaterialRef)>& materialBindImposer);
     ~CBatch(void);
     
     static const ui32 k_MAX_NUM_VERTICES;
     static const ui32 k_MAX_NUM_INDICES;
     static const ui32 k_MAX_NUM_TRANSFORMATION;
     
-    inline std::string Get_Guid(void) const
-    {
-        return m_guid;
-    };
+    std::string getGuid(void) const;
+    std::string getMode(void) const;
     
-    inline std::string Get_Mode(void) const
-    {
-        return m_mode;
-    };
+    ui32 getNumUnlockedNumVertices(void) const;
+    ui32 getNumUnlockedNumIndices(void) const;
+    ui32 getNumUnlockedNumTransformations(void) const;
     
-    inline ui32 Get_NumBatchedVertices(void)
-    {
-        return m_numBatchedVertices;
-    };
+    void lock(void);
+    void unlock(void);
     
-    inline ui32 Get_NumBatchedIndices(void)
-    {
-        return m_numBatchedIndices;
-    };
-    
-    inline ui32 Get_NumBatchedTransformations(void)
-    {
-        return m_numBatchedTransformations;
-    };
-
-    void Lock(void);
-    void Unlock(void);
-    
-    void Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>& _model, const glm::mat4x4& _worldMatrix);
-	void Batch(const std::shared_ptr<CQuad>& _control, const glm::vec2& _position, const glm::vec2& _size); 
+    void batch(const std::tuple<CSharedMesh, CSharedAnimationMixer>& model,
+               const glm::mat4x4& matrix);
 };
 
 #endif 

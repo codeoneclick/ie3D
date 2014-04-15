@@ -20,7 +20,7 @@
 class IGraphicsContext;
 class IInputContext;
 class CResourceAccessor;
-class CTemplateAccessor;
+class CConfigurationAccessor;
 class IScene;
 
 class IGameTransition :
@@ -35,7 +35,7 @@ private:
     
 protected:
     
-    friend class IGameWorkflow;
+    friend class IGameController;
     
     std::string m_guid;
     std::shared_ptr<IScene> m_scene;
@@ -54,7 +54,7 @@ protected:
     
 public:
     
-    IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor);
+    IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> _templateAccessor);
     virtual ~IGameTransition(void);
 
     inline std::string Get_Guid(void)

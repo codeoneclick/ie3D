@@ -10,7 +10,7 @@
 #include "IGraphicsContext.h"
 #include "IInputContext.h"
 #include "CKOTHInGameTransition.h"
-#include "CTemplateAccessor.h"
+#include "CConfigurationAccessor.h"
 
 CKOTHWorkflow::CKOTHWorkflow(void)
 {

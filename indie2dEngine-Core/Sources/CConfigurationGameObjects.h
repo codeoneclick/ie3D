@@ -129,9 +129,10 @@ private:
     
 protected:
     
+    CConfigurationGameObject(E_CONFIGURATION_CLASS configurationClass);
+    
 public:
     
-    CConfigurationGameObject(void);
     ~CConfigurationGameObject(void);
     
     std::vector<std::string> getMaterialsConfigurationsFilenames(void) const;

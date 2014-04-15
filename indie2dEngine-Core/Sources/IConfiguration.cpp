@@ -50,7 +50,42 @@ static std::map<std::string, GLenum> g_glenumToString(void)
 
 #endif
 
-IConfiguration::IConfiguration(void)
+IConfigurationLoadingHandler::IConfigurationLoadingHandler(void)
+{
+    
+}
+
+IConfigurationLoadingHandler::~IConfigurationLoadingHandler(void)
+{
+    std::for_each(m_configurationLoadingHandlers.begin(), m_configurationLoadingHandlers.end(),
+                  [](std::set<CONFIGURATION_LOADING_HANDLER_FUNCTION>& iterator){
+                      iterator.clear();
+                  });
+}
+
+void IConfigurationLoadingHandler::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
+{
+    if(success)
+    {
+        const auto& iterator = m_configurationLoadingHandlers.at(configuration->getConfigurationClass());
+        std::for_each(iterator.begin(), iterator.end(), [configuration](CONFIGURATION_LOADING_HANDLER_FUNCTION& function){
+            (*function)(configuration);
+        });
+    }
+}
+
+void IConfigurationLoadingHandler::registerConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass)
+{
+    m_configurationLoadingHandlers.at(configurationClass).insert(handler);
+}
+
+void IConfigurationLoadingHandler::unregisterConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass)
+{
+    m_configurationLoadingHandlers.at(configurationClass).erase(handler);
+}
+
+IConfiguration::IConfiguration(E_CONFIGURATION_CLASS configurationClass) :
+m_configurationClass(configurationClass)
 {
     
 }
@@ -59,6 +94,11 @@ IConfiguration::~IConfiguration(void)
 {
     m_attributes.clear();
     m_configurations.clear();
+}
+
+E_CONFIGURATION_CLASS IConfiguration::getConfigurationClass(void) const
+{
+    return m_configurationClass;
 }
 
 void IConfiguration::setAttribute(const std::string& attributeName,

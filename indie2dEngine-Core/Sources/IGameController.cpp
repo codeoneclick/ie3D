@@ -1,46 +1,46 @@
 //
-//  IGameWorkflow.cpp
+//  IGameController.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 6/6/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "IGameWorkflow.h"
+#include "IGameController.h"
 #include "IGameTransition.h"
-#include "CTemplateAccessor.h"
+#include "CConfigurationAccessor.h"
 #include "CResourceAccessor.h"
 #include "CGameLoopExecutor.h"
 
-static IGameWorkflow* g_workflow = nullptr;
+static IGameController* g_workflow = nullptr;
 
-IGameWorkflow::IGameWorkflow(void) :
-m_templateAccessor(std::make_shared<CTemplateAccessor>()),
+IGameController::IGameController(void) :
+m_templateAccessor(std::make_shared<CConfigurationAccessor>()),
 m_resourceAccessor(std::make_shared<CResourceAccessor>()),
 m_currentTransition(nullptr)
 {
     g_workflow = this;
 }
 
-IGameWorkflow::~IGameWorkflow(void)
+IGameController::~IGameController(void)
 {
     g_workflow = nullptr;
     m_transitions.clear();
 }
 
-void IGameWorkflow::RegisterTransition(std::shared_ptr<IGameTransition> _transition)
+void IGameController::RegisterTransition(std::shared_ptr<IGameTransition> _transition)
 {
     assert(m_transitions.find(_transition->Get_Guid()) == m_transitions.end());
     m_transitions.insert(std::make_pair(_transition->Get_Guid(), _transition));
 }
 
-void IGameWorkflow::UnregisterTransition(std::shared_ptr<IGameTransition> _transition)
+void IGameController::UnregisterTransition(std::shared_ptr<IGameTransition> _transition)
 {
     assert(m_transitions.find(_transition->Get_Guid()) != m_transitions.end());
     m_transitions.erase(m_transitions.find(_transition->Get_Guid()));
 }
 
-void IGameWorkflow::GoToTransition(const std::string &_guid)
+void IGameController::GoToTransition(const std::string &_guid)
 {
     assert(m_transitions.find(_guid) != m_transitions.end());
     if(m_currentTransition != nullptr)
@@ -53,12 +53,12 @@ void IGameWorkflow::GoToTransition(const std::string &_guid)
     ConnectToGameLoop(m_currentTransition);
 }
 
-ui32 IGameWorkflow::Get_CurrentNumTriagles(void)
+ui32 IGameController::Get_CurrentNumTriagles(void)
 {
     return m_currentTransition != nullptr ? m_currentTransition->Get_CurrentNumTriangles() : 0;
 }
 
-ui32 IGameWorkflow::Get_TotalNumTriangles(void)
+ui32 IGameController::Get_TotalNumTriangles(void)
 {
     return m_currentTransition != nullptr ? m_currentTransition->Get_TotalNumTriangles() : 0;
 }

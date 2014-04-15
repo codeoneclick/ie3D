@@ -12,36 +12,36 @@
 #include "CQuad.h"
 #include "CShader.h"
 #include "CAnimationMixer.h"
-#include "CCommonOS.h"
 
 const ui32 CBatch::k_MAX_NUM_VERTICES = 65535 / 4; // 16k vertices
 const ui32 CBatch::k_MAX_NUM_INDICES = 65535 / 2;  // 32k indices
 const ui32 CBatch::k_MAX_NUM_TRANSFORMATION = 255;
 
-CBatch::CBatch(const std::string& _mode, E_BATCH_GEOMETRY_MODE _geometryMode, ui32 _renderQueuePosition, std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _materialImposer) :
-m_material(_material),
-m_renderQueuePosition(_renderQueuePosition),
-m_materialImposer(_materialImposer),
-m_mode(_mode),
-m_geometryMode(_geometryMode),
-m_numVertices(0),
-m_numIndices(0),
-m_numPushedVertices(0),
-m_numPushedIndices(0),
-m_locked(0),
-m_proccessed(0),
-m_unlocked(0)
+CBatch::CBatch(const std::string& mode,
+               ui32 renderQueuePosition,
+               CSharedMaterialRef material,
+               const std::function<void(CSharedMaterialRef)>& materialBindImposer) :
+m_material(material),
+m_renderQueuePosition(renderQueuePosition),
+m_materialBindImposer(materialBindImposer),
+m_mode(mode),
+m_numLockedVertices(0),
+m_numLockedIndices(0),
+m_numLockedTransformations(0),
+m_numUnlockedVertices(0),
+m_numUnlockedIndices(0),
+m_numUnlockedTransformations(0)
 {
     assert(m_material != nullptr);
-    assert(m_material->Get_Shader() != nullptr);
-    m_guid = m_material->Get_Shader()->Get_Guid() + ".batch";
+    assert(m_material->getShader() != nullptr);
+    m_guid = m_material->getShader()->getGuid() + ".batch";
     
-    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(k_MAX_NUM_VERTICES, GL_DYNAMIC_DRAW);
-    SHardwareVertex* vertexData = vertexBuffer->Lock();
-    memset(vertexData, 0x0, k_MAX_NUM_VERTICES * sizeof(SHardwareVertex));
-    vertexBuffer->Unlock();
+    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(k_MAX_NUM_VERTICES, GL_STREAM_DRAW);
+    SAttributeVertex* vertexData = vertexBuffer->lock();
+    memset(vertexData, 0x0, k_MAX_NUM_VERTICES * sizeof(SAttributeVertex));
+    vertexBuffer->unlock();
    
-    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(k_MAX_NUM_INDICES, GL_DYNAMIC_DRAW);
+    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>(k_MAX_NUM_INDICES, GL_STREAM_DRAW);
     ui16* indexData = indexBuffer->lock();
     memset(indexData, 0x0, k_MAX_NUM_INDICES * sizeof(ui16));
     indexBuffer->unlock();
@@ -55,284 +55,131 @@ CBatch::~CBatch(void)
     
 }
 
-void CBatch::Lock(void)
+void CBatch::lock(void)
 {
-    if(m_locked == 0 && m_proccessed == 0)
+    m_models.clear();
+    m_matrices.clear();
+    m_transformations.clear();
+    
+    m_numUnlockedVertices = 0;
+    m_numUnlockedIndices = 0;
+    m_numUnlockedTransformations = 0;
+}
+
+void CBatch::unlock(void)
+{
+    m_numLockedVertices = 0;
+    m_numLockedIndices = 0;
+    m_numLockedTransformations = 0;
+    
+    for(ui32 i = 0; i < m_models.size(); ++i)
     {
-        m_meshes.clear();
-        m_matrices.clear();
-        m_transformations.clear();
-
-		m_controls.clear();
-		m_positions.clear();
-		m_sizes.clear();
+        CSharedMesh mesh = std::get<0>(m_models[i]);
+        CSharedAnimationMixer mixer = std::get<1>(m_models[i]);
+        glm::mat4x4& matrix = m_matrices[i];
         
-        m_numBatchedVertices = 0;
-        m_numBatchedIndices = 0;
-        m_numBatchedTransformations = 0;
-    }
-    m_locked = 1;
-}
-
-std::function<void(void)> CBatch::_UnlockModelsGeometry()
-{
-	return [this]()
+        ui16* indexData_01 = m_mesh->getIndexBuffer()->lock();
+        ui16* indexData_02 = mesh->getIndexBuffer()->lock();
+        
+        for(ui32 j = 0; j < mesh->getNumIndices(); ++j)
         {
-            ui32 numVertices = 0;
-            ui32 numIndices = 0;
-            ui32 numTransformations = 0;
-            
-            for(ui32 i = 0; i < m_meshes.size(); ++i)
-            {
-                std::shared_ptr<CMesh> mesh = std::get<0>(m_meshes[i]);
-                std::shared_ptr<CAnimationMixer> mixer = std::get<1>(m_meshes[i]);
-                glm::mat4x4& matrix = m_matrices[i];
-                
-                ui16* indexData_01 = m_mesh->getIndexBuffer()->lock();
-                ui16* indexData_02 = mesh->getIndexBuffer()->lock();
-                
-                for(ui32 j = 0; j < mesh->getNumIndices(); ++j)
-                {
-                    indexData_01[numIndices + j] = indexData_02[j] + numVertices;
-                }
-                
-                SHardwareVertex* vertexData_01 = m_mesh->getVertexBuffer()->Lock();
-                SHardwareVertex* vertexData_02 = mesh->getVertexBuffer()->Lock();
-                for(ui32 j = 0; j < mesh->getNumVertices(); ++j)
-                {
-                    glm::vec3 position = glm::vec3(0.0f);
-                    glm::vec3 normal = glm::vec3(0.0f);
-                    glm::vec3 tangent = glm::vec3(0.0f);
-                    
-                    for(ui32 k = 0; k < 4; ++k)
-                    {
-                        f32 weight = static_cast<f32>(vertexData_02[j].m_extra[k]) / 255.0f;
-                        position += glm::transform(vertexData_02[j].m_position, m_transformations[vertexData_02[j].m_color[k] + numTransformations]) * weight;
-                        normal += glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_02[j].m_normal), m_transformations[vertexData_02[j].m_color[k] + numTransformations]) * weight;
-                        tangent += glm::transform(CVertexBuffer::UncompressU8Vec4(vertexData_02[j].m_tangent), m_transformations[vertexData_02[j].m_color[k] + numTransformations]) * weight;
-                    }
-                    
-                    vertexData_01[numVertices + j] = vertexData_02[j];
-                    vertexData_01[numVertices + j].m_position = glm::transform(position, matrix);
-                    vertexData_01[numVertices + j].m_normal = CVertexBuffer::CompressVec3(glm::transform(normal, matrix));
-                    vertexData_01[numVertices + j].m_tangent = CVertexBuffer::CompressVec3(glm::transform(tangent, matrix));
-                }
-                
-                numVertices += mesh->getNumVertices();
-                numIndices += mesh->getNumIndices();
-                numTransformations += mixer->Get_TransformationSize();
-                assert(numTransformations < k_MAX_NUM_TRANSFORMATION);
-            }
-            
-            m_numPushedVertices = numVertices;
-            m_numPushedIndices = numIndices;
-            m_proccessed = 0;
-            m_locked = 0;
-            m_unlocked = 1;
-        };
-}
-
-std::function<void(void)> CBatch::_UnlockControlsGeometry()
-{
-	return [this]()
-	{
-		ui32 numVertices = 0;
-        ui32 numIndices = 0;
-            
-		for(ui32 i = 0; i < m_controls.size(); ++i)
-        {
-			std::shared_ptr<CQuad> quad = m_controls[i];
-				
-			glm::vec2 position = m_positions[i];
-			glm::vec2 size = m_sizes[i];
-                
-            ui16* indexData_01 = m_mesh->getIndexBuffer()->lock();
-            ui16* indexData_02 = quad->Get_IndexBuffer()->lock();
-                
-            for(ui32 j = 0; j < quad->Get_NumIndexes(); ++j)
-            {
-                indexData_01[numIndices + j] = indexData_02[j] + numVertices;
-            }
-                
-            SHardwareVertex* vertexData_01 = m_mesh->getVertexBuffer()->Lock();
-
-			f32 screenWidth = Get_ScreenWidth();
-			f32 screenHeight = Get_ScreenHeight();
-
-			glm::vec4 frame(0.0f);
-			frame.x = (position.x / screenWidth) * 2.0f - 1.0f;
-			frame.y = ((screenHeight - position.y) / screenHeight) * 2.0f - 1.0f;
-			frame.z = ((position.x + size.x) / screenWidth) * 2.0f - 1.0f;
-			frame.w = ((screenHeight - (position.y + size.y)) / screenHeight) * 2.0f - 1.0f;
-
-			vertexData_01[numVertices + 0].m_position = glm::vec3(frame.x, frame.y, 0.0f);
-			vertexData_01[numVertices + 0].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 0.0f));
-			vertexData_01[numVertices + 1].m_position = glm::vec3(frame.x, frame.w, 0.0f);
-			vertexData_01[numVertices + 1].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(0.0f, 1.0f));
-			vertexData_01[numVertices + 2].m_position = glm::vec3(frame.z, frame.y, 0.0f);
-			vertexData_01[numVertices + 2].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 0.0f));
-			vertexData_01[numVertices + 3].m_position = glm::vec3(frame.z, frame.w, 0.0f);
-			vertexData_01[numVertices + 3].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(1.0f, 1.0f));
-
-            numVertices += quad->Get_NumVertexes();
-            numIndices += quad->Get_NumIndexes();
-		}
-            
-        m_numPushedVertices = numVertices;
-        m_numPushedIndices = numIndices;
-        m_proccessed = 0;
-        m_locked = 0;
-        m_unlocked = 1;
-	};
-}
-
-std::function<void(void)> CBatch::_UnlockPatriclesGeometry()
-{
-	return nullptr;
-}
-
-void CBatch::Unlock(void)
-{
-    if(m_locked == 1 && m_proccessed == 0 && m_unlocked == 0)
-    {
-        m_proccessed = 1;
-
-		std::function<void(void)> unlock = nullptr;
-		switch (m_geometryMode)
-		{
-		case E_BATCH_GEOMETRY_MODE_NONE:
-			{
-				assert(false);
-			}
-			break;
-		case E_BATCH_GEOMETRY_MODE_MODELS:
-			{
-				unlock = _UnlockModelsGeometry();
-				assert(m_matrices.size() == m_meshes.size());
-			}
-			break;
-		case E_BATCH_GEOMETRY_MODE_CONTROLS:
-			{
-				unlock = _UnlockControlsGeometry();
-				assert(m_positions.size() == m_sizes.size());
-				assert(m_positions.size() == m_controls.size());
-			}
-			break;
-		case E_BATCH_GEOMETRY_MODE_PARTICLES:
-			{
-
-			}
-			break;
-		default:
-			{
-				assert(false);
-			}
-			break;
-		}
-
-		assert(unlock != nullptr);
-        
-#if defined(__USE_GCDPP__)
-        //gcdpp::impl::DispatchAsync(gcdpp::queue::GetGlobalQueue(gcdpp::queue::GCDPP_DISPATCH_QUEUE_PRIORITY_LOW), unlock);
-        unlock();
-#else
-        unlock();
-		//std::async(std::launch::async, unlock);
-#endif
-    }
-}
-
-void CBatch::Batch(const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>& _mesh, const glm::mat4x4 &_matrix)
-{
-    if(m_locked == 1 && m_proccessed == 0)
-    {
-        m_meshes.push_back(_mesh);
-        m_matrices.push_back(_matrix);
-        
-        m_numBatchedVertices += std::get<0>(_mesh)->getNumVertices();
-        m_numBatchedIndices += std::get<0>(_mesh)->getNumIndices();
-        m_numBatchedTransformations += std::get<1>(_mesh)->Get_TransformationSize();
-        
-        std::shared_ptr<CAnimationMixer> mixer = std::get<1>(_mesh);
-        for(ui32 i = 0; i < mixer->Get_TransformationSize(); ++i)
-        {
-            m_transformations.push_back(mixer->Get_Transformations()[i]);
+            indexData_01[m_numLockedIndices + j] = indexData_02[j] + m_numLockedVertices;
         }
-    }
-}
-
-void CBatch::Batch(const std::shared_ptr<CQuad>& _control, const glm::vec2& _position, const glm::vec2& _size)
-{ 
-	if(m_locked == 1 && m_proccessed == 0)
-    {
-		m_controls.push_back(_control);
-		m_positions.push_back(_position);
-		m_sizes.push_back(_size);
         
-        m_numBatchedVertices += _control->Get_NumVertexes();
-        m_numBatchedIndices += _control->Get_NumIndexes();
+        SAttributeVertex* vertexData_01 = m_mesh->getVertexBuffer()->lock();
+        SAttributeVertex* vertexData_02 = mesh->getVertexBuffer()->lock();
+        for(ui32 j = 0; j < mesh->getNumVertices(); ++j)
+        {
+            glm::vec3 position = glm::vec3(0.0f);
+            glm::vec3 normal = glm::vec3(0.0f);
+            glm::vec3 tangent = glm::vec3(0.0f);
+            
+            for(ui32 k = 0; k < 4; ++k)
+            {
+                f32 weight = static_cast<f32>(vertexData_02[j].m_extra[k]) / 255.0f;
+                position += glm::transform(vertexData_02[j].m_position, m_transformations[vertexData_02[j].m_color[k] + m_numLockedTransformations]) * weight;
+                normal += glm::transform(CVertexBuffer::uncompressU8Vec4(vertexData_02[j].m_normal), m_transformations[vertexData_02[j].m_color[k] + m_numLockedTransformations]) * weight;
+                tangent += glm::transform(CVertexBuffer::uncompressU8Vec4(vertexData_02[j].m_tangent), m_transformations[vertexData_02[j].m_color[k] + m_numLockedTransformations]) * weight;
+            }
+            
+            vertexData_01[m_numLockedVertices + j] = vertexData_02[j];
+            vertexData_01[m_numLockedVertices + j].m_position = glm::transform(position, matrix);
+            vertexData_01[m_numLockedVertices + j].m_normal = CVertexBuffer::compressVec3(glm::transform(normal, matrix));
+            vertexData_01[m_numLockedVertices + j].m_tangent = CVertexBuffer::compressVec3(glm::transform(tangent, matrix));
+        }
+        
+        m_numLockedVertices += mesh->getNumVertices();
+        m_numLockedIndices += mesh->getNumIndices();
+        m_numLockedTransformations += mixer->Get_TransformationSize();
+        assert(m_numLockedTransformations < k_MAX_NUM_TRANSFORMATION);
     }
 }
 
-i32 CBatch::_OnQueuePosition(void)
+void CBatch::batch(const std::tuple<CSharedMesh, CSharedAnimationMixer>& model,
+                   const glm::mat4x4 &matrix)
+{
+    m_models.push_back(model);
+    m_matrices.push_back(matrix);
+    
+    m_numUnlockedVertices += std::get<0>(model)->getNumVertices();
+    m_numUnlockedIndices += std::get<0>(model)->getNumIndices();
+    m_numUnlockedTransformations += std::get<1>(model)->Get_TransformationSize();
+    
+    std::shared_ptr<CAnimationMixer> mixer = std::get<1>(model);
+    for(ui32 i = 0; i < mixer->Get_TransformationSize(); ++i)
+    {
+        m_transformations.push_back(mixer->Get_Transformations()[i]);
+    }
+}
+
+i32 CBatch::getZOrder(void)
 {
     return m_renderQueuePosition;
 }
 
-bool CBatch::_OnOcclusion(void)
+bool CBatch::checkOcclusion(void)
 {
     return false;
 }
 
-ui32 CBatch::_OnGet_NumTriangles(void)
+ui32 CBatch::numTriangles(void)
 {
     return 0;
 }
 
-void CBatch::_OnBind(const std::string& _mode)
+void CBatch::onBind(const std::string& mode)
 {
     
 }
 
-void CBatch::_OnDraw(const std::string& _mode)
+void CBatch::onDraw(const std::string& mode)
 {
     assert(m_mesh != nullptr);
     assert(m_material != nullptr);
-    assert(m_material->Get_Shader() != nullptr);
+    assert(m_material->getShader() != nullptr);
     
-    if(m_unlocked == 1)
+    m_mesh->getVertexBuffer()->unlock(m_numLockedVertices);
+    m_mesh->getIndexBuffer()->unlock(m_numLockedIndices);
+
+    if(m_numLockedIndices != 0 &&
+       m_numLockedVertices != 0)
     {
-        m_unlocked = 0;
-        m_numVertices = m_numPushedVertices;
-        m_numIndices = m_numPushedIndices;
-        m_mesh->getVertexBuffer()->Unlock(m_numVertices);
-        m_mesh->getIndexBuffer()->unlock(m_numIndices);
-    }
-    
-    if(m_numIndices != 0 && m_numVertices != 0)
-    {
-        m_material->Bind();
-		m_materialImposer(m_material);
+        m_material->bind();
+		m_materialBindImposer(m_material);
         
-        m_mesh->bind(m_material->Get_Shader()->getAttributesRef());
-        m_mesh->draw(m_numIndices);
-        m_mesh->unbind(m_material->Get_Shader()->getAttributesRef());
+        m_mesh->bind(m_material->getShader()->getAttributesRef());
+        m_mesh->draw(m_numLockedIndices);
+        m_mesh->unbind(m_material->getShader()->getAttributesRef());
         
-        m_material->Unbind();
+        m_material->unbind();
     }
 }
 
-void CBatch::_OnUnbind(const std::string& _mode)
+void CBatch::onUnbind(const std::string& _mode)
 {
     
 }
-
-void CBatch::_OnDebugDraw(const std::string& _mode)
-{
-    
-}
-
-void CBatch::_OnBatch(const std::string& _mode)
+void CBatch::onBatch(const std::string& _mode)
 {
     
 }

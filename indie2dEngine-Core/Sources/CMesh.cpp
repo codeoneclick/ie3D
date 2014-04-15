@@ -191,14 +191,20 @@ ui32 CSkeletonData::getNumBones(void) const
     return m_numBones;
 }
 
-CMesh::CMesh(const std::string& guid) : IResource(E_RESOURCE_CLASS_MESH, guid),
-m_vertexBuffer(nullptr),
-m_indexBuffer(nullptr),
+CMesh::CMesh(const std::string& guid,
+             CSharedVertexBufferRef vertexBuffer,
+             CSharedIndexBufferRef indexBuffer) : IResource(E_RESOURCE_CLASS_MESH, guid),
+m_vertexBuffer(vertexBuffer),
+m_indexBuffer(indexBuffer),
 m_meshData(nullptr),
 m_skeletonData(nullptr),
 m_sequenceData(nullptr)
 {
-    
+    if(m_vertexBuffer != nullptr &&
+       m_indexBuffer != nullptr)
+    {
+        m_status |= E_RESOURCE_STATUS_COMMITED;
+    }
 }
 
 CMesh::~CMesh(void)
@@ -306,12 +312,12 @@ const std::vector<ui16>& CMesh::getIndexData(void) const
 
 const ui32 CMesh::getNumVertices(void) const
 {
-    return IResource::isLoaded() ? m_meshData->getNumVertices() : 0;
+    return IResource::isCommited() ? m_vertexBuffer->getSize() : 0;
 }
 
 const ui32 CMesh::getNumIndices(void) const
 {
-    return IResource::isLoaded() ? m_meshData->getNumIndices() : 0;
+    return IResource::isCommited() ? m_indexBuffer->getSize() : 0;
 }
 
 const glm::vec3 CMesh::getMaxBound(void) const

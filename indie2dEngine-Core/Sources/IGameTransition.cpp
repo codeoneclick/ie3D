@@ -8,7 +8,7 @@
 
 #include "IGameTransition.h"
 #include "CResourceAccessor.h"
-#include "CTemplateAccessor.h"
+#include "CConfigurationAccessor.h"
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CTexture.h"
@@ -25,7 +25,7 @@
 #include "IGraphicsContext.h"
 #include "IInputContext.h"
 
-IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CTemplateAccessor> _templateAccessor) :
+IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> _templateAccessor) :
 IFabricator(_templateAccessor, _resourceAccessor),
 CSceneFabricator(_templateAccessor, _resourceAccessor),
 CGUIFabricator(_templateAccessor, _resourceAccessor),

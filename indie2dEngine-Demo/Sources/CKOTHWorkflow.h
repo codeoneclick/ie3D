@@ -10,9 +10,9 @@
 #define CKOTHWorkflow_h
 
 #include "HCommon.h"
-#include "IGameWorkflow.h"
+#include "IGameController.h"
 
-class CKOTHWorkflow : public IGameWorkflow
+class CKOTHWorkflow : public IGameController
 {
 private:
     

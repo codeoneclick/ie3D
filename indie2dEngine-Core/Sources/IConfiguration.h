@@ -154,20 +154,48 @@ std::string getConfigurationAttributeKey(const Args&... args)
     return key;
 }
 
+class IConfigurationLoadingHandler
+{
+public:
+    
+    typedef std::shared_ptr<std::function<void(ISharedConfigurationRef)>> CONFIGURATION_LOADING_HANDLER_FUNCTION;
+    
+private:
+    
+    friend class CConfigurationAccessor;
+    
+protected:
+    
+    IConfigurationLoadingHandler(void);
+    std::array<std::set<CONFIGURATION_LOADING_HANDLER_FUNCTION>, E_CONFIGURATION_CLASS_MAX> m_configurationLoadingHandlers;
+    
+    virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
+    
+public:
+    
+    virtual ~IConfigurationLoadingHandler(void);
+    
+    void registerConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass);
+    void unregisterConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass);
+};
+
 class IConfiguration
 {
 private:
     
 protected:
     
+    E_CONFIGURATION_CLASS m_configurationClass;
     std::unordered_map<std::string, std::vector<CSharedConfigurationAttribute>> m_attributes;
     std::unordered_map<std::string, std::vector<ISharedConfiguration>> m_configurations;
     
-    IConfiguration(void);
+    IConfiguration(E_CONFIGURATION_CLASS configurationClass);
     
 public:
     
     ~IConfiguration(void);
+    
+    E_CONFIGURATION_CLASS getConfigurationClass(void) const;
     
     void setAttribute(const std::string& attributeName,
                       CSharedConfigurationAttributeRef attribute,

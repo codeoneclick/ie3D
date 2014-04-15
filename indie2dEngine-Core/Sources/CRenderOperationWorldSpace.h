@@ -10,6 +10,7 @@
 #define CRenderOperationWorldSpace_h
 
 #include "HCommon.h"
+#include "HDeclaration.h"
 
 class CTexture;
 class IRenderHandler;

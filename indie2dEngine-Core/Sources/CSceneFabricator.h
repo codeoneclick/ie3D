@@ -35,7 +35,7 @@ protected:
 
 public:
     
-    CSceneFabricator(const std::shared_ptr<CTemplateAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
+    CSceneFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
     virtual ~CSceneFabricator(void);
     
     std::shared_ptr<CCamera> CreateCamera(f32 _fov, f32 _near, f32 _far,const glm::ivec4& _viewport);

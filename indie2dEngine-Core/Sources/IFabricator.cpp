@@ -8,7 +8,7 @@
 
 #include "IFabricator.h"
 
-IFabricator::IFabricator(const std::shared_ptr<CTemplateAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
+IFabricator::IFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
 m_templateAccessor(_templateAccessor),
 m_resourceAccessor(_resourceAccessor)
 {

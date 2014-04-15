@@ -7,7 +7,7 @@
 //
 
 #include "CSceneFabricator.h"
-#include "CTemplateAccessor.h"
+#include "CConfigurationAccessor.h"
 #include "CCamera.h"
 #include "CLight.h"
 #include "CSprite.h"
@@ -19,7 +19,7 @@
 #include "CResourceAccessor.h"
 #include "CRenderMgr.h"
 
-CSceneFabricator::CSceneFabricator(const std::shared_ptr<CTemplateAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
+CSceneFabricator::CSceneFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
 IFabricator(_templateAccessor, _resourceAccessor)
 {
     

@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 
-class CTemplateAccessor;
+class CConfigurationAccessor;
 class CResourceAccessor;
 class IScreenSpaceTextureAccessor;
 
@@ -21,7 +21,7 @@ private:
 
 protected:
     
-    std::shared_ptr<CTemplateAccessor> m_templateAccessor;
+    std::shared_ptr<CConfigurationAccessor> m_templateAccessor;
     std::shared_ptr<CResourceAccessor> m_resourceAccessor;
 	std::shared_ptr<IScreenSpaceTextureAccessor> m_screenSpaceTextureAccessor;
 	
@@ -32,7 +32,7 @@ protected:
 
 public:
     
-    IFabricator(const std::shared_ptr<CTemplateAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
+    IFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
     virtual ~IFabricator(void);
     
 };

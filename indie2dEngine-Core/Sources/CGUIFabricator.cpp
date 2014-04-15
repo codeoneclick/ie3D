@@ -7,12 +7,12 @@
 //
 
 #include "CGUIFabricator.h"
-#include "CTemplateAccessor.h"
+#include "CConfigurationAccessor.h"
 #include "CResourceAccessor.h"
 #include "CGUIContainer.h"
 #include "CGUIButton.h"
 
-CGUIFabricator::CGUIFabricator(const std::shared_ptr<CTemplateAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
+CGUIFabricator::CGUIFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
 IFabricator(_templateAccessor, _resourceAccessor)
 {
 

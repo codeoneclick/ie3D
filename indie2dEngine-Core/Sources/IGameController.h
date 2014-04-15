@@ -1,20 +1,20 @@
 //
-//  IGameWorkflow.h
+//  IGameController.h
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 6/6/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef IGameWorkflow_h
-#define IGameWorkflow_h
+#ifndef IGameController_h
+#define IGameController_h
 
 #include "HCommon.h"
 
-class CTemplateAccessor;
+class CConfigurationAccessor;
 class CResourceAccessor;
 class IGameTransition;
-class IGameWorkflow
+class IGameController
 {
 private:
     
@@ -23,13 +23,13 @@ protected:
     std::map<std::string, std::shared_ptr<IGameTransition> > m_transitions;
     std::shared_ptr<IGameTransition> m_currentTransition;
     
-    std::shared_ptr<CTemplateAccessor> m_templateAccessor;
+    std::shared_ptr<CConfigurationAccessor> m_templateAccessor;
     std::shared_ptr<CResourceAccessor> m_resourceAccessor;
     
 public:
     
-    IGameWorkflow(void);
-    virtual ~IGameWorkflow(void);
+    IGameController(void);
+    virtual ~IGameController(void);
     
     void RegisterTransition(std::shared_ptr<IGameTransition> _transition);
     void UnregisterTransition(std::shared_ptr<IGameTransition> _transition);

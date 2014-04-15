@@ -14,7 +14,7 @@
 #if defined(__WIN32__)
 
 class IOGLWindow;
-class IGameWorkflow;
+class IGameController;
 class CGameViewController_win32
 {
 private:
@@ -22,7 +22,7 @@ private:
 protected:
 
 	IOGLWindow* m_window;
-	IGameWorkflow* m_workflow;
+	IGameController* m_workflow;
 
 public:
 

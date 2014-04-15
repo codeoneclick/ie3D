@@ -133,4 +133,60 @@ class CConfigurationORenderOperation;
 typedef std::shared_ptr<CConfigurationORenderOperation> CSharedConfigurationORenderOperation;
 typedef const CSharedConfigurationORenderOperation& CSharedConfigurationORenderOperationRef;
 
+class IConfigurationLoadingHandler;
+typedef std::shared_ptr<IConfigurationLoadingHandler> ISharedConfigurationLoadingHandler;
+typedef const ISharedConfigurationLoadingHandler& ISharedConfigurationLoadingHandlerRef;
+
+class CConfigurationModelLoadingOperation;
+typedef std::shared_ptr<CConfigurationModelLoadingOperation> CSharedConfigurationModelLoadingOperation;
+typedef const CSharedConfigurationModelLoadingOperation& CSharedConfigurationModelLoadingOperationRef;
+
+class CMaterial;
+typedef std::shared_ptr<CMaterial> CSharedMaterial;
+typedef const CSharedMaterial& CSharedMaterialRef;
+
+class CMaterialCachedParameters;
+typedef std::shared_ptr<CMaterialCachedParameters> CSharedMaterialCachedParameters;
+typedef const CSharedMaterialCachedParameters& CSharedMaterialCachedParametersRef;
+
+class CCamera;
+typedef std::shared_ptr<CCamera> CSharedCamera;
+typedef const CSharedCamera& CSharedCameraRef;
+
+class CLightSource;
+typedef std::shared_ptr<CLightSource> CSharedLightSource;
+typedef const CSharedLightSource& CSharedLightSourceRef;
+
+class CRenderMgr;
+typedef std::shared_ptr<CRenderMgr> CSharedRenderMgr;
+typedef const CSharedRenderMgr& CSharedRenderMgrRef;
+
+class CSceneUpdateMgr;
+typedef std::shared_ptr<CSceneUpdateMgr> CSharedSceneUpdateMgr;
+typedef const CSharedSceneUpdateMgr& CSharedSceneUpdateMgrRef;
+
+class CResourceAccessor;
+typedef std::shared_ptr<CResourceAccessor> CSharedResourceAccessor;
+typedef const CSharedResourceAccessor& CSharedResourceAccessorRef;
+
+class IScreenSpaceTextureAccessor;
+typedef std::shared_ptr<IScreenSpaceTextureAccessor> ISharedScreenSpaceTextureAccessor;
+typedef const ISharedScreenSpaceTextureAccessor& ISharedScreenSpaceTextureAccessorRef;
+
+class CBoundBox;
+typedef std::shared_ptr<CBoundBox> CSharedBoundBox;
+typedef const CSharedBoundBox& CSharedBoundBoxRef;
+
+class IRenderHandler;
+typedef std::shared_ptr<IRenderHandler> ISharedRenderHandler;
+typedef const ISharedRenderHandler& ISharedRenderHandlerRef;
+
+class CAnimationMixer;
+typedef std::shared_ptr<CAnimationMixer> CSharedAnimationMixer;
+typedef const CSharedAnimationMixer& CSharedAnimationMixerRef;
+
+class CBatch;
+typedef std::shared_ptr<CBatch> CSharedBatch;
+typedef const CSharedBatch& CSharedBatchRef;
+
 #endif

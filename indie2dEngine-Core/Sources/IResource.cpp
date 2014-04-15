@@ -13,6 +13,14 @@ IResourceLoadingHandler::IResourceLoadingHandler(void)
     
 }
 
+IResourceLoadingHandler::~IResourceLoadingHandler(void)
+{
+    std::for_each(m_resourceLoadingHandlers.begin(), m_resourceLoadingHandlers.end(),
+                  [](std::set<RESOURCE_LOADING_HANDLER_FUNCTION>& iterator){
+                      iterator.clear();
+                  });
+}
+
 void IResourceLoadingHandler::onResourceLoaded(ISharedResourceRef resource, bool success)
 {
     if(success)
@@ -22,15 +30,6 @@ void IResourceLoadingHandler::onResourceLoaded(ISharedResourceRef resource, bool
             (*function)(resource);
         });
     }
-}
-
-
-IResourceLoadingHandler::~IResourceLoadingHandler(void)
-{
-    std::for_each(m_resourceLoadingHandlers.begin(), m_resourceLoadingHandlers.end(),
-                  [](std::set<RESOURCE_LOADING_HANDLER_FUNCTION>& iterator){
-        iterator.clear();
-    });
 }
 
 void IResourceLoadingHandler::registerResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler,

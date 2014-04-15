@@ -10,13 +10,7 @@
 #define CBatchingMgr_h
 
 #include "HCommon.h"
-
-class CMesh;
-class CQuad;
-class CMaterial;
-class CAnimationMixer;
-class CBatch;
-class CRenderMgr;
+#include "HDeclaration.h"
 
 class CBatchingMgr
 {
@@ -24,20 +18,24 @@ private:
     
 protected:
     
-    std::shared_ptr<CRenderMgr> m_renderMgr;
-    std::map<std::string, std::shared_ptr<CBatch>> m_batches;
+    CSharedRenderMgr m_renderMgr;
+    std::unordered_map<std::string, CSharedBatch> m_batches;
     
 public:
     
-    static const ui32 k_MAX_BATCHES_PER_MESH_TYPE;
+    static const ui32 k_MAX_BATCHES_PER_MODELTYPE;
     
-    CBatchingMgr(const std::shared_ptr<CRenderMgr>& _renderMgr);
+    CBatchingMgr(CSharedRenderMgrRef renderMgr);
     ~CBatchingMgr(void);
     
-    void Lock(const std::string& _mode);
-    void Unlock(const std::string& _mode);
-    void Batch(const std::string& _mode, ui32 _renderQueuePosition, const std::tuple<std::shared_ptr<CMesh>, std::shared_ptr<CAnimationMixer>>& _model, std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _materialImposer, const glm::mat4x4& _worldMatrix);
-	void Batch(const std::string& _mode, ui32 _renderQueuePosition, const std::shared_ptr<CQuad> _control, std::shared_ptr<CMaterial> _material, const std::function<void(std::shared_ptr<CMaterial>)>& _materialImposer, const glm::vec2& _position, const glm::vec2& _size);
+    void lock(const std::string& mode);
+    void unlock(const std::string& mode);
+    void batch(const std::string& mode,
+               ui32 renderQueuePosition,
+               const std::tuple<CSharedMesh, CSharedAnimationMixer>& model,
+               CSharedMaterialRef material,
+               const std::function<void(CSharedMaterialRef)>& materialBindImposer,
+               const glm::mat4x4& matrix);
 };
 
 #endif 
