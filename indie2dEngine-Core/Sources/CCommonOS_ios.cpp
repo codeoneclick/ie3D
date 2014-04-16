@@ -13,7 +13,7 @@
 #include <Foundation/Foundation.h>
 #include <UIKit/UIKit.h>
 
-std::string Get_BundlePath(void)
+std::string bundlepath(void)
 {
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");

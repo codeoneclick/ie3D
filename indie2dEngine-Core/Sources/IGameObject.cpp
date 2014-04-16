@@ -228,12 +228,12 @@ void IGameObject::setClippingPlane(const glm::vec4& clippingPlane,
 
 void IGameObject::setRenderMgr(CSharedRenderMgrRef renderMgr)
 {
-    
+    m_renderMgr = renderMgr;
 }
 
 void IGameObject::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
 {
-    
+    m_sceneUpdateMgr = sceneUpdateMgr;
 }
 
 void IGameObject::listenRenderMgr(bool value)

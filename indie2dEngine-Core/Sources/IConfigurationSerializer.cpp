@@ -20,7 +20,8 @@ IConfigurationSerializer::~IConfigurationSerializer(void)
     
 }
 
-pugi::xml_parse_result IConfigurationSerializer::openXMLDocument(pugi::xml_document &document, const std::string &filename)
+pugi::xml_parse_result IConfigurationSerializer::openXMLDocument(pugi::xml_document &document,
+                                                                 const std::string &filename)
 {
     pugi::xml_parse_result result;
 #if defined(__NDK__)
@@ -43,11 +44,7 @@ pugi::xml_parse_result IConfigurationSerializer::openXMLDocument(pugi::xml_docum
         result = _document.load(content.c_str());
     }
 #else
-    result = document.load_file(filename.c_str());
-    if(result.status == pugi::status_file_not_found)
-    {
-        result = document.load_file(filename.c_str());
-    }
+    result = document.load_file(bundlepath().append(filename).c_str());
 #endif
     return result;
 }
