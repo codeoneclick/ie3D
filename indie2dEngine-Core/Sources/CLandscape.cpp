@@ -13,21 +13,22 @@
 #include "CCamera.h"
 #include "CLight.h"
 #include "CResourceAccessor.h"
-#include "CTemplateGameObjects.h"
-#include "CAABoundBox.h"
+#include "CConfigurationGameObjects.h"
 #include "CRenderMgr.h"
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CLandscapeChunk.h"
 #include "CLandscapeEdges.h"
+#include "CHeightmapProcessor.h"
 
-CLandscape::CLandscape(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor) :
-IGameObject(_resourceAccessor, _screenSpaceTextureAccessor),
+CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
+                       ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+IGameObject(resourceAccessor, screenSpaceTextureAccessor),
 m_splattingDiffuseMaterial(nullptr),
 m_splattingNormalMaterial(nullptr),
 m_isSplattingDiffuseTextureCommited(false),
 m_isSplattingNormalTextureCommited(false),
-m_edges(std::make_shared<CLandscapeEdges>(_resourceAccessor, _screenSpaceTextureAccessor))
+m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, screenSpaceTextureAccessor))
 {
 
 }
@@ -37,22 +38,32 @@ CLandscape::~CLandscape(void)
 
 }
 
-void CLandscape::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
+void CLandscape::onSceneUpdate(f32 deltatime)
 {
-    std::shared_ptr<CConfigurationLandscape> landscapeTemplate = std::static_pointer_cast<CConfigurationLandscape>(_template);
+    
+}
+
+void CLandscape::onResourceLoaded(ISharedResourceRef resource, bool success)
+{
+    
+}
+
+void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
+{
+    std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     assert(m_resourceAccessor != nullptr);
     assert(m_screenSpaceTextureAccessor != nullptr);
     
     m_isSplattingDiffuseTextureCommited = false;
     m_isSplattingNormalTextureCommited = false;
     
-    m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_screenSpaceTextureAccessor, landscapeTemplate);
+    m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_screenSpaceTextureAccessor, landscapeConfiguration);
     
     m_heightmapProcessor->PreprocessSplattingTexture();
     m_heightmapProcessor->PreprocessHeightmapTexture();
     m_heightmapProcessor->PreprocessEdgesMaskTexture();
     
-    std::shared_ptr<CConfigurationMaterial> materialTemplate = std::static_pointer_cast<CConfigurationMaterial>(landscapeTemplate->Get_SplattingDiffuseMaterialTemplate());
+    CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingDiffuseMaterialConf());
     m_splattingDiffuseMaterial = std::make_shared<CMaterial>(materialTemplate->Get_RenderOperationName());
     m_splattingDiffuseMaterial->Serialize(landscapeTemplate->Get_SplattingDiffuseMaterialTemplate(), m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
     m_splattingDiffuseMaterial->Set_Texture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
@@ -93,6 +104,97 @@ void CLandscape::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _templat
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
     IGameObject::_OnTemplateLoaded(_template);
+}
+
+i32  CLandscape::getZOrder(void)
+{
+    
+}
+
+bool CLandscape::checkOcclusion(void)
+{
+    
+}
+
+ui32 CLandscape::numTriangles(void)
+{
+    
+}
+
+void CLandscape::onBind(const std::string& mode)
+{
+    
+}
+
+void CLandscape::onDraw(const std::string& mode)
+{
+    
+}
+
+void CLandscape::onUnbind(const std::string& mode)
+{
+    
+}
+
+void CLandscape::onBatch(const std::string& mode)
+{
+    
+}
+
+void CLandscape::setCamera(CSharedCameraRef camera)
+{
+    
+}
+
+void CLandscape::setLightSource(CSharedLightSourceRef lightSource,
+                                E_LIGHT_SOURCE index)
+{
+    
+}
+
+void CLandscape::setRenderMgr(CSharedRenderMgrRef renderMgr)
+{
+    
+}
+
+void CLandscape::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
+{
+    
+}
+
+void CLandscape::listenRenderMgr(bool value)
+{
+    
+}
+
+void CLandscape::listenSceneUpdateMgr(bool value)
+{
+    
+}
+
+CSharedTexture CLandscape::getHeightmapTexture(void) const
+{
+    
+}
+
+f32* CLandscape::getHeightmapData(void) const
+{
+    
+}
+
+ui32 CLandscape::getHeightmapWidth(void) const
+{
+    
+}
+
+ui32 CLandscape::getHeightmapHeight(void) const
+{
+    
+}
+
+void CLandscape::_OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template)
+{
+    
 }
 
 void CLandscape::_OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success)
@@ -280,4 +382,32 @@ ui32 CLandscape::Get_NumTriangles(void)
     }
     return numTriangles;
 }
+
+inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
+{
+    assert(m_heightmapProcessor != nullptr);
+    assert(m_heightmapProcessor->Get_HeightmapTexture() != nullptr);
+    return m_heightmapProcessor->Get_HeightmapTexture();
+}
+
+inline f32* Get_HeightmapData(void)
+{
+    assert(m_heightmapProcessor != nullptr);
+    assert(m_heightmapProcessor->Get_HeightmapData() != nullptr);
+    return m_heightmapProcessor->Get_HeightmapData();
+};
+
+inline ui32 Get_HeightmapWidth(void)
+{
+    assert(m_heightmapProcessor != nullptr);
+    assert(m_heightmapProcessor->Get_Width() != 0);
+    return m_heightmapProcessor->Get_Width();
+};
+
+inline ui32 Get_HeightmapHeight(void)
+{
+    assert(m_heightmapProcessor != nullptr);
+    assert(m_heightmapProcessor->Get_Height() != 0);
+    return m_heightmapProcessor->Get_Height();
+};
 

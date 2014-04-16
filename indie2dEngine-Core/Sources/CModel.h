@@ -10,10 +10,7 @@
 #define CModel_h
 
 #include "IGameObject.h"
-
-class CSkeleton;
-class CSequence;
-class CAnimationMixer;
+#include "HDeclaration.h"
 
 class CModel final : public IGameObject
 {
@@ -21,27 +18,28 @@ private:
     
 protected:
     
-    std::shared_ptr<CSkeleton> m_skeleton;
-    std::set<std::shared_ptr<CSequence>> m_sequences;
     std::shared_ptr<CAnimationMixer> m_animationMixer;
     
-    void _OnSceneUpdate(f32 _deltatime);
+    void onSceneUpdate(f32 deltatime);
     
-    i32 _OnQueuePosition(void);
-    void _OnBind(const std::string& _mode);
-    void _OnDraw(const std::string& _mode);
-    void _OnUnbind(const std::string& _mode);
-    void _OnBatch(const std::string& _mode);
+    void onResourceLoaded(ISharedResourceRef resource, bool success);
+    void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
-    void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
-    void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
+    i32  getZOrder(void);
+    bool checkOcclusion(void);
+    ui32 numTriangles(void);
+    void onBind(const std::string& mode);
+    void onDraw(const std::string& mode);
+    void onUnbind(const std::string& mode);
+    void onBatch(const std::string& mode);
     
 public:
     
-    CModel(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
+    CModel(CSharedResourceAccessorRef resourceAccessor,
+           ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
     ~CModel(void);
     
-    void Set_Animation(const std::string& _name);
+    void setAnimation(const std::string& name);
 };
 
 

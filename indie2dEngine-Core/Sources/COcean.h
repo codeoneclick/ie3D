@@ -25,19 +25,23 @@ private:
     
 protected:
     
-    void _OnSceneUpdate(f32 _deltatime);
+    void onSceneUpdate(f32 deltatime);
     
-    i32 _OnQueuePosition(void);
-    void _OnBind(const std::string& _renderMode);
-    void _OnDraw(const std::string& _renderMode);
-    void _OnUnbind(const std::string& _renderMode);
+    void onResourceLoaded(ISharedResourceRef resource, bool success);
+    void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
-    void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
-    void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
+    i32  getZOrder(void);
+    bool checkOcclusion(void);
+    ui32 numTriangles(void);
+    void onBind(const std::string& mode);
+    void onDraw(const std::string& mode);
+    void onUnbind(const std::string& mode);
+    void onBatch(const std::string& mode);
     
 public:
     
-    COcean(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
+    COcean(CSharedResourceAccessorRef resourceAccessor,
+           ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
     ~COcean(void);
 };
 

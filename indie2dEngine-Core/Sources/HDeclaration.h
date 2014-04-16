@@ -49,6 +49,7 @@ typedef const CSharedSequenceData& CSharedSequenceDataRef;
 
 class CVertexBuffer;
 struct SVertexData;
+struct SAttributeVertex;
 typedef std::shared_ptr<CVertexBuffer> CSharedVertexBuffer;
 typedef const CSharedVertexBuffer& CSharedVertexBufferRef;
 
@@ -188,5 +189,25 @@ typedef const CSharedAnimationMixer& CSharedAnimationMixerRef;
 class CBatch;
 typedef std::shared_ptr<CBatch> CSharedBatch;
 typedef const CSharedBatch& CSharedBatchRef;
+
+class CQuadTree;
+typedef std::shared_ptr<CQuadTree> CSharedQuadTree;
+typedef const CSharedQuadTree& CSharedQuadTreeRef;
+
+class CFrustum;
+typedef std::shared_ptr<CFrustum> CSharedFrustum;
+typedef const CSharedFrustum& CSharedFrustumRef;
+
+class CHeightmapProcessor;
+typedef std::shared_ptr<CHeightmapProcessor> CSharedHeightmapProcessor;
+typedef const CSharedHeightmapProcessor& CSharedHeightmapProcessorRef;
+
+class CLandscapeChunk;
+typedef std::shared_ptr<CLandscapeChunk> CSharedLandscapeChunk;
+typedef const CSharedLandscapeChunk& CSharedLandscapeChunkRef;
+
+class CLandscapeEdges;
+typedef std::shared_ptr<CLandscapeEdges> CSharedLandscapeEdges;
+typedef const CSharedLandscapeEdges& CSharedLandscapeEdgesRef;
 
 #endif

@@ -23,21 +23,25 @@ private:
 
 protected:
 
-    void _OnSceneUpdate(f32 _deltatime);
-    void _Set_EdgeTexture(const std::shared_ptr<CTexture>& _texture);
+    void setEdgeTexture(CSharedTextureRef texture);
     
-    i32 _OnQueuePosition(void);
-    void _OnBind(const std::string& _mode);
-    void _OnDraw(const std::string& _mode);
-    void _OnUnbind(const std::string& _mode);
-    void _OnBatch(const std::string& _mode);
+    void onSceneUpdate(f32 deltatime);
     
-    void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
-    void _OnResourceLoaded(std::shared_ptr<IResource> _resource, bool _success);
+    void onResourceLoaded(ISharedResourceRef resource, bool success);
+    void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
+    
+    i32  getZOrder(void);
+    bool checkOcclusion(void);
+    ui32 numTriangles(void);
+    void onBind(const std::string& mode);
+    void onDraw(const std::string& mode);
+    void onUnbind(const std::string& mode);
+    void onBatch(const std::string& mode);
     
 public:
     
-    CLandscapeEdges(const std::shared_ptr<CResourceAccessor>& _resourceAccessor, const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor);
+    CLandscapeEdges(CSharedResourceAccessorRef resourceAccessor,
+                    ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
     ~CLandscapeEdges(void);
 };
 
