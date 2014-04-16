@@ -27,11 +27,6 @@
 		2111AA45181EFF30007FE7A8 /* CCommonOS_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */; };
 		2111AA46181EFF30007FE7A8 /* CFPSCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */; };
 		2111AA47181EFF30007FE7A8 /* CTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15BB177C73D400FFC12E /* CTimer.cpp */; };
-		2111AA48181EFF30007FE7A8 /* CGUIButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A01815A4B000DB8ECC /* CGUIButton.cpp */; };
-		2111AA49181EFF30007FE7A8 /* CGUIContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A21815A4B000DB8ECC /* CGUIContainer.cpp */; };
-		2111AA4A181EFF30007FE7A8 /* IGUIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BB784018069E6B00E050F6 /* IGUIControl.cpp */; };
-		2111AA4B181EFF30007FE7A8 /* CGUIFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE1181C4BCC0071839E /* CGUIFabricator.cpp */; };
-		2111AA4C181EFF30007FE7A8 /* CGUIGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE3181C4BCC0071839E /* CGUIGraph.cpp */; };
 		2111AA4D181EFF30007FE7A8 /* CRenderOperationWorldSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A31871746411C0044643E /* CRenderOperationWorldSpace.cpp */; };
 		2111AA4E181EFF30007FE7A8 /* CRenderOperationScreenSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A318A174641320044643E /* CRenderOperationScreenSpace.cpp */; };
 		2111AA4F181EFF30007FE7A8 /* CRenderOperationOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A318D174641760044643E /* CRenderOperationOutput.cpp */; };
@@ -147,11 +142,6 @@
 		21D071C7181DA6C20019D264 /* CCommonOS_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */; };
 		21D071C8181DA6C20019D264 /* CFPSCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15B0177C4E1B00FFC12E /* CFPSCounter.cpp */; };
 		21D071C9181DA6C20019D264 /* CTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4AB15BB177C73D400FFC12E /* CTimer.cpp */; };
-		21D071CA181DA6C20019D264 /* CGUIButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A01815A4B000DB8ECC /* CGUIButton.cpp */; };
-		21D071CB181DA6C20019D264 /* CGUIContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A21815A4B000DB8ECC /* CGUIContainer.cpp */; };
-		21D071CC181DA6C20019D264 /* IGUIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BB784018069E6B00E050F6 /* IGUIControl.cpp */; };
-		21D071CD181DA6C20019D264 /* CGUIFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE1181C4BCC0071839E /* CGUIFabricator.cpp */; };
-		21D071CE181DA6C20019D264 /* CGUIGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE3181C4BCC0071839E /* CGUIGraph.cpp */; };
 		21D071CF181DA6C20019D264 /* CRenderOperationWorldSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A31871746411C0044643E /* CRenderOperationWorldSpace.cpp */; };
 		21D071D0181DA6C20019D264 /* CRenderOperationScreenSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A318A174641320044643E /* CRenderOperationScreenSpace.cpp */; };
 		21D071D1181DA6C20019D264 /* CRenderOperationOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A318D174641760044643E /* CRenderOperationOutput.cpp */; };
@@ -449,10 +439,6 @@
 		2111AA33181EFED8007FE7A8 /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "indie2dEngine-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<group>"; };
 		2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGameLoopExecutor_osx.cpp; path = Sources/CGameLoopExecutor_osx.cpp; sourceTree = "<group>"; };
 		2111AAC5181FF826007FE7A8 /* CGraphicsContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_osx.cpp; path = Sources/CGraphicsContext_osx.cpp; sourceTree = "<group>"; };
-		21457FE1181C4BCC0071839E /* CGUIFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIFabricator.cpp; path = Sources/CGUIFabricator.cpp; sourceTree = "<group>"; };
-		21457FE2181C4BCC0071839E /* CGUIFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIFabricator.h; path = Sources/CGUIFabricator.h; sourceTree = "<group>"; };
-		21457FE3181C4BCC0071839E /* CGUIGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIGraph.cpp; path = Sources/CGUIGraph.cpp; sourceTree = "<group>"; };
-		21457FE4181C4BCC0071839E /* CGUIGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIGraph.h; path = Sources/CGUIGraph.h; sourceTree = "<group>"; };
 		21457FE7181C4BEA0071839E /* IFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IFabricator.cpp; path = Sources/IFabricator.cpp; sourceTree = "<group>"; };
 		21457FE8181C4BEA0071839E /* IFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IFabricator.h; path = Sources/IFabricator.h; sourceTree = "<group>"; };
 		21457FE9181C4BEA0071839E /* IGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGraph.cpp; path = Sources/IGraph.cpp; sourceTree = "<group>"; };
@@ -464,10 +450,6 @@
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
 		217BB29E1815A48700DB8ECC /* CQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuad.h; path = Sources/CQuad.h; sourceTree = "<group>"; };
-		217BB2A01815A4B000DB8ECC /* CGUIButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIButton.cpp; path = Sources/CGUIButton.cpp; sourceTree = "<group>"; };
-		217BB2A11815A4B000DB8ECC /* CGUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIButton.h; path = Sources/CGUIButton.h; sourceTree = "<group>"; };
-		217BB2A21815A4B000DB8ECC /* CGUIContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUIContainer.cpp; path = Sources/CGUIContainer.cpp; sourceTree = "<group>"; };
-		217BB2A31815A4B000DB8ECC /* CGUIContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUIContainer.h; path = Sources/CGUIContainer.h; sourceTree = "<group>"; };
 		217BB2A91815A4CE00DB8ECC /* CGUITemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUITemplateSerializer.cpp; path = Sources/CGUITemplateSerializer.cpp; sourceTree = "<group>"; };
 		217BB2AA1815A4CE00DB8ECC /* CGUITemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUITemplateSerializer.h; path = Sources/CGUITemplateSerializer.h; sourceTree = "<group>"; };
 		217BB2AC1815A4E300DB8ECC /* CGUITemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUITemplateLoadingOperation.cpp; path = Sources/CGUITemplateLoadingOperation.cpp; sourceTree = "<group>"; };
@@ -693,8 +675,6 @@
 		A4AB15B1177C4E1B00FFC12E /* CFPSCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFPSCounter.h; path = Sources/CFPSCounter.h; sourceTree = "<group>"; };
 		A4AB15BB177C73D400FFC12E /* CTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTimer.cpp; path = Sources/CTimer.cpp; sourceTree = "<group>"; };
 		A4AB15BC177C73D400FFC12E /* CTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimer.h; path = Sources/CTimer.h; sourceTree = "<group>"; };
-		A4BB784018069E6B00E050F6 /* IGUIControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGUIControl.cpp; path = Sources/IGUIControl.cpp; sourceTree = "<group>"; };
-		A4BB784118069E6B00E050F6 /* IGUIControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGUIControl.h; path = Sources/IGUIControl.h; sourceTree = "<group>"; };
 		A4BE460317450198000D831E /* IResourceSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceSerializer.cpp; path = Sources/IResourceSerializer.cpp; sourceTree = "<group>"; };
 		A4BE460417450198000D831E /* IResourceSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IResourceSerializer.h; path = Sources/IResourceSerializer.h; sourceTree = "<group>"; };
 		A4BE460617450200000D831E /* IResourceCommiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IResourceCommiter.cpp; path = Sources/IResourceCommiter.cpp; sourceTree = "<group>"; };
@@ -1053,19 +1033,6 @@
 			path = lib_json;
 			sourceTree = "<group>";
 		};
-		21457FF0181C4C160071839E /* Controls */ = {
-			isa = PBXGroup;
-			children = (
-				217BB2A01815A4B000DB8ECC /* CGUIButton.cpp */,
-				217BB2A11815A4B000DB8ECC /* CGUIButton.h */,
-				217BB2A21815A4B000DB8ECC /* CGUIContainer.cpp */,
-				217BB2A31815A4B000DB8ECC /* CGUIContainer.h */,
-				A4BB784118069E6B00E050F6 /* IGUIControl.h */,
-				A4BB784018069E6B00E050F6 /* IGUIControl.cpp */,
-			);
-			name = Controls;
-			sourceTree = "<group>";
-		};
 		21853418181EFC6200315CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1288,7 +1255,6 @@
 			children = (
 				A4364898179D74E900C51AC4 /* Input Managment */,
 				A42081921733AB070004729E /* Common */,
-				A494D36817392DAC00228936 /* GUI Managment */,
 				A494D36417392D3600228936 /* Render Managment */,
 				A494D36717392D8100228936 /* StateMachine Managment */,
 				A494D36517392D4B00228936 /* SceneGraph Managment */,
@@ -1610,18 +1576,6 @@
 				A418526817609D86002FC042 /* IGameController.cpp */,
 			);
 			name = "StateMachine Managment";
-			sourceTree = "<group>";
-		};
-		A494D36817392DAC00228936 /* GUI Managment */ = {
-			isa = PBXGroup;
-			children = (
-				21457FF0181C4C160071839E /* Controls */,
-				21457FE1181C4BCC0071839E /* CGUIFabricator.cpp */,
-				21457FE2181C4BCC0071839E /* CGUIFabricator.h */,
-				21457FE3181C4BCC0071839E /* CGUIGraph.cpp */,
-				21457FE4181C4BCC0071839E /* CGUIGraph.h */,
-			);
-			name = "GUI Managment";
 			sourceTree = "<group>";
 		};
 		A494D379173946E500228936 /* Operations */ = {
@@ -2178,11 +2132,6 @@
 				2111AA45181EFF30007FE7A8 /* CCommonOS_win32.cpp in Sources */,
 				2111AA46181EFF30007FE7A8 /* CFPSCounter.cpp in Sources */,
 				2111AA47181EFF30007FE7A8 /* CTimer.cpp in Sources */,
-				2111AA48181EFF30007FE7A8 /* CGUIButton.cpp in Sources */,
-				2111AA49181EFF30007FE7A8 /* CGUIContainer.cpp in Sources */,
-				2111AA4A181EFF30007FE7A8 /* IGUIControl.cpp in Sources */,
-				2111AA4B181EFF30007FE7A8 /* CGUIFabricator.cpp in Sources */,
-				2111AA4C181EFF30007FE7A8 /* CGUIGraph.cpp in Sources */,
 				2111AA4D181EFF30007FE7A8 /* CRenderOperationWorldSpace.cpp in Sources */,
 				2111AA4E181EFF30007FE7A8 /* CRenderOperationScreenSpace.cpp in Sources */,
 				A46B1C89183E426B00A3EF49 /* CQuadTree.cpp in Sources */,
@@ -2304,11 +2253,6 @@
 				21D071C7181DA6C20019D264 /* CCommonOS_win32.cpp in Sources */,
 				21D071C8181DA6C20019D264 /* CFPSCounter.cpp in Sources */,
 				21D071C9181DA6C20019D264 /* CTimer.cpp in Sources */,
-				21D071CA181DA6C20019D264 /* CGUIButton.cpp in Sources */,
-				21D071CB181DA6C20019D264 /* CGUIContainer.cpp in Sources */,
-				21D071CC181DA6C20019D264 /* IGUIControl.cpp in Sources */,
-				21D071CD181DA6C20019D264 /* CGUIFabricator.cpp in Sources */,
-				21D071CE181DA6C20019D264 /* CGUIGraph.cpp in Sources */,
 				A4D21A031848C07100595FEA /* CConfigurationLandscapeSerializer.cpp in Sources */,
 				A49046521844A7F6009734B8 /* CLandscapeEdges.cpp in Sources */,
 				21D071CF181DA6C20019D264 /* CRenderOperationWorldSpace.cpp in Sources */,

@@ -75,7 +75,7 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     for(const auto& iterator : modelConfiguration->getMaterialsConfigurations())
     {
         CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        CSharedMaterial material = std::make_shared<CMaterial>(materialConfiguration->getRenderOperationName());
+        CSharedMaterial material = std::make_shared<CMaterial>();
         IGameObject::setupMaterial(material, materialConfiguration);
         m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
     }
@@ -154,5 +154,10 @@ void CModel::onBatch(const std::string& mode)
                                               m_materialBindImposer,
                                               m_matrixWorld);
     }
+}
+
+void CModel::setAnimation(const std::string& name)
+{
+    
 }
 

@@ -8,6 +8,7 @@
 
 #include "CSkeletonSerializer_SK.h"
 #include "CMesh.h"
+#include "CBone.h"
 
 CSkeletonSerializer_SK::CSkeletonSerializer_SK(const std::string& filename,
                                                ISharedResourceRef resource) :

@@ -16,6 +16,7 @@ class IRenderHandler
 private:
     
     friend class CRenderMgr;
+    friend class CRenderOperationWorldSpace;
     
 protected:
     

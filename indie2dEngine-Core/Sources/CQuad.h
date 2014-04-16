@@ -44,7 +44,7 @@ public:
     inline const ui32 Get_NumVertexes(void)
     {
         assert(m_vertexBuffer != nullptr);
-        return m_vertexBuffer->Get_Size();
+        return m_vertexBuffer->getSize();
     };
     
     inline const ui32 Get_NumIndexes(void)

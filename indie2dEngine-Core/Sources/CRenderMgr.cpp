@@ -122,9 +122,9 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
     {
         std::shared_ptr<CRenderOperationWorldSpace> operation = iterator.second;
         
-        m_batchingMgr->Lock(operation->Get_Mode());
+        m_batchingMgr->lock(operation->Get_Mode());
         operation->Batch();
-        m_batchingMgr->Unlock(operation->Get_Mode());
+        m_batchingMgr->unlock(operation->Get_Mode());
         
         operation->Bind();
         operation->Draw();

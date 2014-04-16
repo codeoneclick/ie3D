@@ -11,7 +11,7 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
-CSkeleton::CSkeleton(const std::string& _guid) :
+/*CSkeleton::CSkeleton(const std::string& _guid) :
 IResource(E_RESOURCE_CLASS_SKELETON, _guid),
 m_numBones(0),
 m_boneWidth(3.0f)
@@ -149,4 +149,4 @@ void CSkeleton::Draw(const i32 *_attributes, const std::string& _guid)
 {
 
 }
-
+*/

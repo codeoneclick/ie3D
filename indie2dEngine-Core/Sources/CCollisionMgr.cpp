@@ -47,7 +47,7 @@ void CCollisionMgr::_OnInputTapRecognizerPressed(const glm::ivec2& _point)
         for(const auto& collider : colliders)
         {
             glm::vec3 point;
-            if(CCollisionMgr::_CollisionPoint(collider->Get_BoundVertexBuffer(), collider->Get_BoundIndexBuffer(), glm::mat4x4(1.0f), origin, direction, &point))
+            if(CCollisionMgr::_CollisionPoint(collider->getCollisionVertexBuffer(), collider->getCollisionIndexBuffer(), glm::mat4x4(1.0f), origin, direction, &point))
             {
                 handler->_Get_Commands()._ExecuteCollisionCommand(point, collider);
             }
@@ -119,9 +119,9 @@ bool CCollisionMgr::_TriangleIntersection(const glm::vec3 &_trianglePoint_01, gl
 
 bool CCollisionMgr::_CollisionPoint(std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer, const glm::mat4x4& _worldMatrix, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _point)
 {
-    SHardwareVertex* vertexData = _vertexBuffer->Lock();
-    ui16* indexData = _indexBuffer->Lock();
-    ui32 numIndices = _indexBuffer->Get_Size();
+    SAttributeVertex* vertexData = _vertexBuffer->lock();
+    ui16* indexData = _indexBuffer->lock();
+    ui32 numIndices = _indexBuffer->getSize();
 
     for(ui32 index = 0; index < numIndices; index += 3)
     {

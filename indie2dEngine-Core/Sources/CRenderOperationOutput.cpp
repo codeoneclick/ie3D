@@ -19,14 +19,14 @@ m_frameBufferHandle(_frameBufferHandle),
 m_renderBufferHandle(_renderBufferHandle)
 {
     assert(m_material != nullptr);
-    m_material->Set_IsCulling(false);
-    m_material->Set_IsDepthMask(true);
-    m_material->Set_IsDepthTest(false);
-    m_material->Set_IsBlending(false);
+    m_material->setCulling(false);
+    m_material->setDepthMask(true);
+    m_material->setDepthTest(false);
+    m_material->setBlending(false);
     
-    m_material->Set_CullingMode(GL_FRONT);
-    m_material->Set_BlendingFunctionSource(GL_SRC_ALPHA);
-    m_material->Set_BlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
+    m_material->setCullingMode(GL_FRONT);
+    m_material->setBlendingFunctionSource(GL_SRC_ALPHA);
+    m_material->setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
     
 	m_quad = std::make_shared<CQuad>();
 }
@@ -43,14 +43,14 @@ void CRenderOperationOutput::Bind(void)
     glViewport(0, 0, m_frameWidth, m_frameHeight);
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
-    m_material->Bind();
-    m_quad->Bind(m_material->Get_Shader()->getAttributesRef());
+    m_material->bind();
+    m_quad->Bind(m_material->getShader()->getAttributesRef());
 }
 
 void CRenderOperationOutput::Unbind(void)
 {
-    m_quad->Unbind(m_material->Get_Shader()->getAttributesRef());
-    m_material->Unbind();
+    m_quad->Unbind(m_material->getShader()->getAttributesRef());
+    m_material->unbind();
 
 #if defined(__IOS__)
     

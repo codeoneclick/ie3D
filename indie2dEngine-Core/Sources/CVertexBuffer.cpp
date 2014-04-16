@@ -61,6 +61,11 @@ glm::vec2 CVertexBuffer::uncompressU16Vec2(const glm::u16vec2& compressed)
     return uncompressed;
 }
 
+ui32 CVertexBuffer::getSize(void) const
+{
+    return m_size;
+}
+
 SAttributeVertex* CVertexBuffer::lock(void) const
 {
     assert(m_data != nullptr);

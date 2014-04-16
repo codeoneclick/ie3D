@@ -14,6 +14,7 @@
 #include "CSequenceSerializer_SEQ.h"
 #include "CSequenceCommiter_SEQ.h"
 #include "IResource.h"
+#include "CMesh.h"
 
 CMeshLoadingOperation::CMeshLoadingOperation(const std::string& meshFilename,
                                              const std::string& skeletonFilename,
@@ -59,7 +60,7 @@ void CMeshLoadingOperation::commit(void)
 {
     assert(m_resource != nullptr);
     assert(m_resource->isLoaded() == true);
-    std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh>(m_resource);
+    CSharedMesh mesh = std::static_pointer_cast<CMesh>(m_resource);
     m_commiter = std::make_shared<CMeshCommiter_MDL>(m_meshFilename,
                                                      m_resource);
     m_commiter->commit();

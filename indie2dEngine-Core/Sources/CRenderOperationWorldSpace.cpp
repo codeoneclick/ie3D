@@ -74,13 +74,13 @@ void CRenderOperationWorldSpace::RegisterRenderHandler(const std::shared_ptr<IRe
 {
     assert(_handler != nullptr);
     
-    if(m_handlers.find(_handler->_Get_Commands()._ExecuteRenderQueuePositionCommand()) != m_handlers.end())
+    if(m_handlers.find(_handler->getZOrder()) != m_handlers.end())
     {
-        m_handlers.find(_handler->_Get_Commands()._ExecuteRenderQueuePositionCommand())->second.insert(_handler);
+        m_handlers.find(_handler->getZOrder())->second.insert(_handler);
     }
     else
     {
-        m_handlers[_handler->_Get_Commands()._ExecuteRenderQueuePositionCommand()].insert(_handler);
+        m_handlers[_handler->getZOrder()].insert(_handler);
     }
 }
 
@@ -88,13 +88,13 @@ void CRenderOperationWorldSpace::UnregisterRenderHandler(const std::shared_ptr<I
 {
     assert(_handler != nullptr);
     
-    if(m_handlers.find(_handler->_Get_Commands()._ExecuteRenderQueuePositionCommand()) != m_handlers.end())
+    if(m_handlers.find(_handler->getZOrder()) != m_handlers.end())
     {
-        m_handlers.find(_handler->_Get_Commands()._ExecuteRenderQueuePositionCommand())->second.erase(_handler);
+        m_handlers.find(_handler->getZOrder())->second.erase(_handler);
     }
     else
     {
-        m_handlers[_handler->_Get_Commands()._ExecuteRenderQueuePositionCommand()].erase(_handler);
+        m_handlers[_handler->getZOrder()].erase(_handler);
     }
 }
 
@@ -106,9 +106,9 @@ void CRenderOperationWorldSpace::Batch(void)
         {
             std::shared_ptr<IRenderHandler> handler = (*iterator_02);
             assert(handler != nullptr);
-            if(!handler->_OnOcclusion())
+            if(!handler->checkOcclusion())
             {
-                handler->_Get_Commands()._ExecuteRenderBatchCommand(m_mode);
+                handler->onBatch(m_mode);
             }
         }
     }
@@ -143,13 +143,12 @@ void CRenderOperationWorldSpace::Draw(void)
         {
             std::shared_ptr<IRenderHandler> handler = (*iterator_02);
             assert(handler != nullptr);
-            if(!handler->_OnOcclusion())
+            if(!handler->checkOcclusion())
             {
-                handler->_Get_Commands()._ExecuteRenderBindCommand(m_mode);
-                handler->_Get_Commands()._ExecuteRenderDrawCommand(m_mode);
-                handler->_Get_Commands()._ExecuteRenderUnbindCommand(m_mode);
-                handler->_Get_Commands()._ExecuteRenderDebugDrawCommand(m_mode);
-                m_numTriangles += handler->_Get_Commands()._ExecuteRenderGetNumTrianglesCommand();
+                handler->onBind(m_mode);
+                handler->onDraw(m_mode);
+                handler->onUnbind(m_mode);
+                m_numTriangles += handler->numTriangles();
             }
         }
     }

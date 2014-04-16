@@ -38,6 +38,6 @@ void CSceneUpdateMgr::_OnGameLoopUpdate(f32 _deltatime)
     for(auto iterator = m_handlers.begin(); iterator != m_handlers.end(); ++iterator)
     {
         std::shared_ptr<ISceneUpdateHandler> handler = (*iterator);
-        handler->_Get_Commands()._ExecuteSceneUpdateCommand(_deltatime);
+        handler->onSceneUpdate(_deltatime);
     }
 }

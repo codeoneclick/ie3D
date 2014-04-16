@@ -94,7 +94,7 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     for(const auto& iterator : oceanConfiguration->getMaterialsConfigurations())
     {
         CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        CSharedMaterial material = std::make_shared<CMaterial>(materialConfiguration->getRenderOperationName());
+        CSharedMaterial material = std::make_shared<CMaterial>();
         IGameObject::setupMaterial(material, materialConfiguration);
         m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
     }

@@ -19,7 +19,7 @@
 #include "CNavigator.h"
 #include "CCharacterController.h"
 #include "CMoveControllerRecognizer.h"
-#include "CGUIContainer.h"
+//#include "CGUIContainer.h"
 
 CKOTHInGameScene::CKOTHInGameScene(IGameTransition* _root) :
 IScene(_root),
@@ -51,15 +51,15 @@ void CKOTHInGameScene::Load(void)
     
     std::shared_ptr<CLight> light_01 = m_root->CreateLight();
     m_lights.push_back(light_01);
-    m_root->Set_Light(light_01, E_LIGHT_01);
+    //m_root->Set_Light(light_01, E_LIGHT_01);
     
     std::shared_ptr<CLight> light_02 = m_root->CreateLight();
     m_lights.push_back(light_02);
-    m_root->Set_Light(light_02, E_LIGHT_02);
+    //m_root->Set_Light(light_02, E_LIGHT_02);
     
     std::shared_ptr<CModel> model = m_root->CreateModel("model.Footman.xml");
-    model->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
-    model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
+    model->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
     m_models.push_back(model);
     m_colliders.push_back(model);
     m_root->InsertModel(model);
@@ -71,8 +71,8 @@ void CKOTHInGameScene::Load(void)
             if(i == 1 || i == 11 || j == 1 || j == 11)
             {
                 std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
-                model->Set_Position(glm::vec3(i * 10, 0.0f, j * 10));
-                model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
+                model->setPosition(glm::vec3(i * 10, 0.0f, j * 10));
+                model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
                 m_models.push_back(model);
                 m_colliders.push_back(model);
                 m_root->InsertModel(model);
@@ -80,8 +80,8 @@ void CKOTHInGameScene::Load(void)
             else if((i > 3 && i < 11) && (j > 3 && j < 11) && (i%2 == 0 || j%2 == 0))
             {
                 std::shared_ptr<CModel> model = m_root->CreateModel("model.Building.xml");
-                model->Set_Position(glm::vec3(i * 10, -7.5f, j * 10));
-                model->Set_Scale(glm::vec3(10.0f, 10.0f, 10.0f));
+                model->setPosition(glm::vec3(i * 10, -7.5f, j * 10));
+                model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
                 m_models.push_back(model);
                 m_colliders.push_back(model);
                 m_root->InsertModel(model);
@@ -91,10 +91,10 @@ void CKOTHInGameScene::Load(void)
     
     std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
     m_root->InsertOcean(ocean);
-    ocean->Set_Position(glm::vec3(-128.0f, 0.0f, -128.0f));
+    ocean->setPosition(glm::vec3(-128.0f, 0.0f, -128.0f));
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
-    particleEmitter->Set_Position(glm::vec3(12.0f, 2.0f, 12.0f));
+    particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
     
     m_particles.push_back(particleEmitter);
     m_root->InsertParticleEmitter(particleEmitter);
@@ -127,13 +127,13 @@ void CKOTHInGameScene::Load(void)
 void CKOTHInGameScene::OnUpdate(f32 _deltatime)
 {
     static float angle = 0.0f;
-    m_models[0]->Set_Animation("model_02.MDL_anim");
+    m_models[0]->setAnimation("model_02.MDL_anim");
     
     for(ui32 i = 1; i < m_models.size(); ++i)
     {
         if(i % 2 == 0)
         {
-            m_models[i]->Set_Animation("model_03.MDL_anim");
+            m_models[i]->setAnimation("model_03.MDL_anim");
         }
     }
     angle += 0.33f;

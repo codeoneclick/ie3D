@@ -26,7 +26,7 @@ void IResourceLoadingHandler::onResourceLoaded(ISharedResourceRef resource, bool
     if(success)
     {
         const auto& iterator = m_resourceLoadingHandlers.at(resource->getResourceClass());
-        std::for_each(iterator.begin(), iterator.end(), [resource](RESOURCE_LOADING_HANDLER_FUNCTION& function){
+        std::for_each(iterator.begin(), iterator.end(), [resource](RESOURCE_LOADING_HANDLER_FUNCTION function){
             (*function)(resource);
         });
     }
@@ -71,6 +71,16 @@ m_status(E_RESOURCE_STATUS_UNLOADED)
 IResource::~IResource(void)
 {
     m_handlers.clear();
+}
+
+const std::string& IResource::getGuid(void) const
+{
+    return m_guid;
+}
+
+E_RESOURCE_CLASS IResource::getResourceClass(void) const
+{
+    return m_resourceClass;
 }
 
 bool IResource::isLoaded(void) const

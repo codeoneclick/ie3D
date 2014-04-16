@@ -23,6 +23,11 @@ CIndexBuffer::~CIndexBuffer(void)
     glDeleteBuffers(K_NUM_REPLACEMENT_INDEX_BUFFERS, m_handles);
 }
 
+ui32 CIndexBuffer::getSize(void) const
+{
+    return m_size;
+}
+
 ui16* CIndexBuffer::lock(void) const
 {
     return m_data;

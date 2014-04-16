@@ -7,7 +7,6 @@
 //
 
 #include "CSequenceCommiter_SEQ.h"
-#include "CSequence.h"
 
 CSequenceCommiter_SEQ::CSequenceCommiter_SEQ(const std::string& guid, ISharedResourceRef resource) :
 IResourceCommiter(guid, resource)

@@ -34,7 +34,7 @@ class CSceneGraph : public virtual IGraph
 private:
     
     std::shared_ptr<CCamera> m_camera;
-    std::array<std::shared_ptr<CLight>, E_LIGHT_MAX> m_lights;
+    //std::array<std::shared_ptr<CLight>, E_LIGHT_MAX> m_lights;
     
     std::set<std::shared_ptr<IGameObject> > m_gameObjectsContainer;
     
@@ -59,7 +59,7 @@ public:
     virtual ~CSceneGraph(void);
     
     void Set_Camera(const std::shared_ptr<CCamera>& _camera);
-    void Set_Light(const std::shared_ptr<CLight>& _light, E_LIGHTS _id);
+    //void Set_Light(const std::shared_ptr<CLight>& _light, E_LIGHTS _id);
     
     void InsertSprite(const std::shared_ptr<CSprite>& _sprite);
     void RemoveSprite(const std::shared_ptr<CSprite>& _sprite);

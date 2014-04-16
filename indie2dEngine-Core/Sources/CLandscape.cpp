@@ -99,12 +99,12 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_heightmapProcessor->PreprocessEdgesMaskTexture();
     
     CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingDiffuseMaterialConfiguration());
-    m_splattingDiffuseMaterial = std::make_shared<CMaterial>(materialConfiguration->getRenderOperationName());
+    m_splattingDiffuseMaterial = std::make_shared<CMaterial>();
     IGameObject::setupMaterial(m_splattingDiffuseMaterial, materialConfiguration);
     m_splattingDiffuseMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
     materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingNormalMaterialConfiguration());
-    m_splattingNormalMaterial = std::make_shared<CMaterial>(materialConfiguration->getRenderOperationName());
+    m_splattingNormalMaterial = std::make_shared<CMaterial>();
     IGameObject::setupMaterial(m_splattingNormalMaterial, materialConfiguration);
     m_splattingNormalMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     

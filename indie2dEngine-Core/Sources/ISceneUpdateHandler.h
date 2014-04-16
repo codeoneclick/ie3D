@@ -15,7 +15,7 @@
 class ISceneUpdateHandler
 {
 private:
-    
+    friend class CSceneUpdateMgr;
 protected:
     
     ISceneUpdateHandler(void);

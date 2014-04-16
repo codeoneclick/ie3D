@@ -10,6 +10,7 @@
 #include "CTextureSerializer_PVR.h"
 #include "CTextureCommiter_PVR.h"
 #include "IResource.h"
+#include "CTexture.h"
 
 CTextureLoadingOperation::CTextureLoadingOperation(const std::string& filename, ISharedResourceRef resource) :
 IResourceLoadingOperation(filename, resource),
@@ -37,7 +38,7 @@ void CTextureLoadingOperation::commit(void)
 {
     assert(m_resource != nullptr);
     assert(m_resource->isLoaded() == true);
-    std::shared_ptr<CTexture> texture = std::static_pointer_cast<CTexture>(m_resource);
+    CSharedTexture texture = std::static_pointer_cast<CTexture>(m_resource);
     m_commiter = std::make_shared<CTextureCommiter_PVR>(m_serializer->getGuid(),
                                                         m_resource);
     m_commiter->commit();

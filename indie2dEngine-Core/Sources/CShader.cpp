@@ -126,6 +126,11 @@ m_texture_value(nullptr)
     
 }
 
+CShaderUniform::~CShaderUniform(void)
+{
+    
+}
+
 E_UNIFORM_CLASS CShaderUniform::getClass(void) const
 {
     return m_uniformClass;

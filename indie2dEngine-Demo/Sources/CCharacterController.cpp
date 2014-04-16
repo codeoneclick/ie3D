@@ -108,6 +108,6 @@ void CCharacterController::OnUpdate(f32 _deltatime)
     m_camera->Set_Rotation(m_rotation.y);
     
     assert(m_character != nullptr);
-    m_character->Set_Position(m_position);
-    m_character->Set_Rotation(m_rotation);
+    m_character->setPosition(m_position);
+    m_character->setRotation(m_rotation);
 }

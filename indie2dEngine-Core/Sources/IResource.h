@@ -79,7 +79,7 @@ protected:
     virtual void onResourceDataCommited(ISharedResourceDataRef resourceData,
                                         E_RESOURCE_DATA_STATUS status) = 0;
     
-     void onResourceLoaded(void);
+    void onResourceLoaded(void);
     
 public:
     

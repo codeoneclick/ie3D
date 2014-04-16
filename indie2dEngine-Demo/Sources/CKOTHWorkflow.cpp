@@ -33,7 +33,7 @@ std::shared_ptr<IGameTransition> CKOTHWorkflow::CreateKOTHInGameTransition(const
 #endif
     std::shared_ptr<IInputContext> inputContext = std::make_shared<IInputContext>(_hwnd);
     std::shared_ptr<CKOTHInGameTransition> gameKOTHInGameTransition = std::make_shared<CKOTHInGameTransition>(_filename, graphicsContext, inputContext, m_resourceAccessor, m_templateAccessor);
-    m_templateAccessor->LoadGameTransitionTemplate(_filename, gameKOTHInGameTransition);
+    m_templateAccessor->LoadGameTransitionConfiguration(_filename, gameKOTHInGameTransition);
     assert(gameKOTHInGameTransition != nullptr);
     return gameKOTHInGameTransition;
 }

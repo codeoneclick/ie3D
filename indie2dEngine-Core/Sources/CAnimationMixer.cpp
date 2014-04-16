@@ -10,7 +10,7 @@
 #include "CMesh.h"
 #include "CSkeleton.h"
 #include "CBone.h"
-#include "CSequence.h"
+//#include "CSequence.h"
 
 CAnimationMixer::CAnimationMixer(std::shared_ptr<CMesh> _mesh, std::shared_ptr<CSkeleton> _skeleton) :
 m_mesh(_mesh),
@@ -19,8 +19,8 @@ m_oldSequence(nullptr),
 m_currentSequence(nullptr),
 m_animationTime(0.0f)
 {
-    m_skeletonGuid = m_skeleton->CreateTransformations();
-    m_transformations = new glm::mat4x4[m_skeleton->Get_NumBones()];
+    //m_skeletonGuid = m_skeleton->CreateTransformations();
+    //m_transformations = new glm::mat4x4[m_skeleton->Get_NumBones()];
 }
 
 CAnimationMixer::~CAnimationMixer(void)
@@ -40,7 +40,7 @@ void CAnimationMixer::AddSequence(const std::string& _name, std::shared_ptr<CSeq
 
 void CAnimationMixer::SetAnimation(const std::string& _name)
 {
-    if(m_sequences.find(_name) == m_sequences.end())
+    /*if(m_sequences.find(_name) == m_sequences.end())
     {
         return;
     }
@@ -55,7 +55,7 @@ void CAnimationMixer::SetAnimation(const std::string& _name)
         m_oldSequence = m_currentSequence;
         m_currentSequence = m_sequences.find(_name)->second;
         CAnimationMixer::_BindSequence();
-    }
+    }*/
 }
 
 void CAnimationMixer::MixAnimation(const std::string& _name)
@@ -83,7 +83,7 @@ void CAnimationMixer::GoTo(const std::string& _name, i32 _frame)
 
 void CAnimationMixer::_BindSequence(void)
 {
-    assert(m_skeleton != nullptr);
+    /*assert(m_skeleton != nullptr);
     assert(m_currentSequence != nullptr);
     
     std::shared_ptr<CFrame> frame = m_currentSequence->Get_AnimationFrame(0);
@@ -103,12 +103,12 @@ void CAnimationMixer::_BindSequence(void)
     }
     
     m_skeleton->Update(m_skeletonGuid);
-    m_skeleton->BindTransformation();
+    m_skeleton->BindTransformation();*/
 }
 
 void CAnimationMixer::OnUpdate(f32 _deltatime)
 {
-    assert(m_mesh != nullptr);
+    /*assert(m_mesh != nullptr);
     assert(m_skeleton != nullptr);
     
     if(m_currentSequence)
@@ -149,12 +149,12 @@ void CAnimationMixer::OnUpdate(f32 _deltatime)
         function();
 		//std::async(std::launch::async, function);
 #endif
-    }
+    }*/
 }
 
 glm::mat4x4* CAnimationMixer::Get_Transformations(void)
 {
-    for(ui32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
+    /*for(ui32 i = 0; i < m_skeleton->Get_NumBones(); ++i)
     {
         std::shared_ptr<CBone> bone = m_skeleton->Get_Bone(i);
         if(bone->Get_Transformation() != nullptr)
@@ -166,7 +166,7 @@ glm::mat4x4* CAnimationMixer::Get_Transformations(void)
         {
             m_transformations[i] = glm::mat4x4(1.0f);
         }
-    }
+    }*/
     return m_transformations;
 }
 

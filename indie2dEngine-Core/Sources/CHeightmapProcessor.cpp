@@ -13,10 +13,10 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "IScreenSpaceTextureAccessor.h"
-#include "CTemplateGameObjects.h"
+#include "CConfigurationGameObjects.h"
 #include "CHeightmapHelper.h"
 
-CHeightmapProcessor::CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<I_RO_TemplateCommon>& _template) :
+CHeightmapProcessor::CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, ISharedConfigurationRef _template) :
 m_heightmapData(nullptr),
 m_screenSpaceTextureAccessor(_screenSpaceTextureAccessor),
 m_heightmapTexture(nullptr),
@@ -33,8 +33,8 @@ m_edgesMaskTexture(nullptr)
     
     std::shared_ptr<CConfigurationLandscape> landscapeTemplate = std::static_pointer_cast<CConfigurationLandscape>(_template);
     
-    m_width = landscapeTemplate->Get_Size().x;
-    m_height = landscapeTemplate->Get_Size().y;
+    m_width = landscapeTemplate->getSize().x;
+    m_height = landscapeTemplate->getSize().y;
     
     m_heightmapData = new f32[m_width * m_height];
     m_maxAltitude = 0.0f;
@@ -117,14 +117,17 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessHeightmapTexture(void)
     }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
 
-    std::shared_ptr<CTextureHeader> heightmapTextureHeader = std::make_shared<CTextureHeader>();
-    heightmapTextureHeader->_Set_Width(m_width);
-    heightmapTextureHeader->_Set_Height(m_height);
+    //std::shared_ptr<CTextureHeader> heightmapTextureHeader = std::make_shared<CTextureHeader>();
+    //heightmapTextureHeader->_Set_Width(m_width);
+    //heightmapTextureHeader->_Set_Height(m_height);
     
-    m_heightmapTexture = std::make_shared<CTexture>("heightmap");
-    m_heightmapTexture->Set_Header(heightmapTextureHeader);
-    m_heightmapTexture->Set_Handle(textureHandle);
-    m_heightmapTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
+    m_heightmapTexture = std::make_shared<CTexture>("heightmap",
+                                                    textureHandle,
+                                                    m_width,
+                                                    m_height);
+    //m_heightmapTexture->Set_Header(heightmapTextureHeader);
+    //m_heightmapTexture->Set_Handle(textureHandle);
+    m_heightmapTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     return m_heightmapTexture;
 }
 
@@ -166,14 +169,17 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingTexture(void)
     }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
     
-    std::shared_ptr<CTextureHeader> splattingTextureHeader = std::make_shared<CTextureHeader>();
-    splattingTextureHeader->_Set_Width(m_width);
-    splattingTextureHeader->_Set_Height(m_height);
+    //std::shared_ptr<CTextureHeader> splattingTextureHeader = std::make_shared<CTextureHeader>();
+    //splattingTextureHeader->_Set_Width(m_width);
+    //splattingTextureHeader->_Set_Height(m_height);
     
-    m_splattingTexture = std::make_shared<CTexture>("splatting");
-    m_splattingTexture->Set_Header(splattingTextureHeader);
-    m_splattingTexture->Set_Handle(textureHandle);
-    m_splattingTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
+    m_splattingTexture = std::make_shared<CTexture>("splatting",
+                                                    textureHandle,
+                                                    m_width,
+                                                    m_height);
+    //m_splattingTexture->Set_Header(splattingTextureHeader);
+    //m_splattingTexture->Set_Handle(textureHandle);
+    m_splattingTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     
     return m_splattingTexture;
 }
@@ -249,14 +255,17 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessEdgesMaskTexture(void)
     }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, edgesMaskWidth, edgesMaskHeight, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
     
-    std::shared_ptr<CTextureHeader> edgesMaskTextureHeader = std::make_shared<CTextureHeader>();
-    edgesMaskTextureHeader->_Set_Width(edgesMaskWidth);
-    edgesMaskTextureHeader->_Set_Height(edgesMaskHeight);
+    //std::shared_ptr<CTextureHeader> edgesMaskTextureHeader = std::make_shared<CTextureHeader>();
+    //edgesMaskTextureHeader->_Set_Width(edgesMaskWidth);
+    //edgesMaskTextureHeader->_Set_Height(edgesMaskHeight);
     
-    m_edgesMaskTexture = std::make_shared<CTexture>("edges");
-    m_edgesMaskTexture->Set_Header(edgesMaskTextureHeader);
-    m_edgesMaskTexture->Set_Handle(textureHandle);
-    m_edgesMaskTexture->Set_WrapMode(GL_CLAMP_TO_EDGE);
+    m_edgesMaskTexture = std::make_shared<CTexture>("edges",
+                                                    textureHandle,
+                                                    edgesMaskWidth,
+                                                    edgesMaskHeight);
+    //m_edgesMaskTexture->Set_Header(edgesMaskTextureHeader);
+    //m_edgesMaskTexture->Set_Handle(textureHandle);
+    m_edgesMaskTexture->setWrapMode(GL_CLAMP_TO_EDGE);
 
     return m_edgesMaskTexture;
 }
@@ -286,7 +295,7 @@ std::shared_ptr<CIndexBuffer> CHeightmapProcessor::_CreateIndexBuffer(void)
     assert(m_chunkHeight != 0);
     
     std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>((m_chunkWidth - 1) * (m_chunkHeight - 1) * 6, GL_DYNAMIC_DRAW);
-    ui16* indexData = indexBuffer->Lock();
+    ui16* indexData = indexBuffer->lock();
     
     ui32 index = 0;
     for(ui32 i = 0; i < (m_chunkWidth - 1); ++i)
@@ -308,7 +317,7 @@ std::shared_ptr<CIndexBuffer> CHeightmapProcessor::_CreateIndexBuffer(void)
             index++;
         }
     }
-    indexBuffer->Unlock();
+    indexBuffer->unlock();
     return indexBuffer;
 }
 
@@ -319,7 +328,7 @@ std::shared_ptr<CVertexBuffer> CHeightmapProcessor::_CreateVertexBuffer(ui32 _wi
     assert(m_chunkHeight != 0);
     
     std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(_numVertexes, _mode);
-    SHardwareVertex* vertexData = vertexBuffer->Lock();
+    SAttributeVertex* vertexData = vertexBuffer->lock();
     
     ui32 index = 0;
     for(ui32 i = 0; i < m_chunkWidth;++i)
@@ -336,7 +345,7 @@ std::shared_ptr<CVertexBuffer> CHeightmapProcessor::_CreateVertexBuffer(ui32 _wi
             ui32 indexOffset = indexOffset_x + indexOffset_z * m_height;
 
             vertexData[index].m_position.y = m_heightmapData[indexOffset];
-            vertexData[index].m_texcoord = CVertexBuffer::CompressVec2(glm::vec2(static_cast<ui32>(position.x) / static_cast<f32>(m_width), static_cast<ui32>(position.y) / static_cast<f32>(m_height)));
+            vertexData[index].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(position.x) / static_cast<f32>(m_width), static_cast<ui32>(position.y) / static_cast<f32>(m_height)));
             
             if(vertexData[index].m_position.x > _maxBound->x)
             {
@@ -365,6 +374,6 @@ std::shared_ptr<CVertexBuffer> CHeightmapProcessor::_CreateVertexBuffer(ui32 _wi
             ++index;
         }
     }
-    vertexBuffer->Unlock();
+    vertexBuffer->unlock();
     return vertexBuffer;
 }

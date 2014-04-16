@@ -141,3 +141,8 @@ void CResourceLoader::unloadResource(ISharedResourceRef resource)
 {
 
 }
+
+void CResourceLoader::_OnGameLoopUpdate(f32 _deltatime)
+{
+    
+}

@@ -33,7 +33,7 @@ public:
     CIndexBuffer(ui32 size, GLenum mode);
     ~CIndexBuffer(void);
     
-    const ui32 getSize(void) const;
+    ui32 getSize(void) const;
     
     ui16* lock(void) const;
     void unlock(ui32 size = 0);

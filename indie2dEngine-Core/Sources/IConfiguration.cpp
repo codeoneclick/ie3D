@@ -68,7 +68,7 @@ void IConfigurationLoadingHandler::onConfigurationLoaded(ISharedConfigurationRef
     if(success)
     {
         const auto& iterator = m_configurationLoadingHandlers.at(configuration->getConfigurationClass());
-        std::for_each(iterator.begin(), iterator.end(), [configuration](CONFIGURATION_LOADING_HANDLER_FUNCTION& function){
+        std::for_each(iterator.begin(), iterator.end(), [configuration](CONFIGURATION_LOADING_HANDLER_FUNCTION function){
             (*function)(configuration);
         });
     }

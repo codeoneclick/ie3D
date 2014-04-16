@@ -55,6 +55,31 @@ CBatch::~CBatch(void)
     
 }
 
+std::string CBatch::getGuid(void) const
+{
+    return m_material->getShader()->getGuid();
+}
+
+std::string CBatch::getMode(void) const
+{
+    return m_mode;
+}
+
+ui32 CBatch::getNumUnlockedNumVertices(void) const
+{
+    return m_numUnlockedVertices;
+}
+
+ui32 CBatch::getNumUnlockedNumIndices(void) const
+{
+    return m_numUnlockedIndices;
+}
+
+ui32 CBatch::getNumUnlockedNumTransformations(void) const
+{
+    return m_numUnlockedTransformations;
+}
+
 void CBatch::lock(void)
 {
     m_models.clear();

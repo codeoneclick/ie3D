@@ -29,6 +29,8 @@ protected:
     virtual void onGameLoopUpdate(f32 deltatime);
     virtual void onThreadUpdate(void);
     
+    void _OnGameLoopUpdate(f32 _deltatime);
+    
 public:
     
     CResourceLoader(void);

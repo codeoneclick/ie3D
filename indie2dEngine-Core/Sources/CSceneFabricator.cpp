@@ -10,11 +10,11 @@
 #include "CConfigurationAccessor.h"
 #include "CCamera.h"
 #include "CLight.h"
-#include "CSprite.h"
+//#include "CSprite.h"
 #include "CModel.h"
 #include "COcean.h"
 #include "CLandscape.h"
-#include "CBillboard.h"
+//#include "CBillboard.h"
 #include "CParticleEmitter.h"
 #include "CResourceAccessor.h"
 #include "CRenderMgr.h"
@@ -72,7 +72,7 @@ std::shared_ptr<CModel> CSceneFabricator::CreateModel(const std::string& _filena
 	assert(m_screenSpaceTextureAccessor != nullptr);
     std::shared_ptr<CModel> model = std::make_shared<CModel>(m_resourceAccessor, m_screenSpaceTextureAccessor);
     assert(m_templateAccessor != nullptr);
-    m_templateAccessor->LoadModelTemplate(_filename, model);
+    m_templateAccessor->LoadModelConfiguration(_filename, model);
     m_gameObjectsContainer.insert(model);
     return model;
 }
@@ -88,7 +88,7 @@ std::shared_ptr<COcean> CSceneFabricator::CreateOcean(const std::string &_filena
 	assert(m_screenSpaceTextureAccessor != nullptr);
     std::shared_ptr<COcean> ocean = std::make_shared<COcean>(m_resourceAccessor, m_screenSpaceTextureAccessor);
     assert(m_templateAccessor != nullptr);
-    m_templateAccessor->LoadOceanTemplate(_filename, ocean);
+    m_templateAccessor->LoadOceanConfiguration(_filename, ocean);
     m_gameObjectsContainer.insert(ocean);
     return ocean;
 }
@@ -104,7 +104,7 @@ std::shared_ptr<CLandscape> CSceneFabricator::CreateLandscape(const std::string 
 	assert(m_screenSpaceTextureAccessor != nullptr);
     std::shared_ptr<CLandscape> landscape = std::make_shared<CLandscape>(m_resourceAccessor, m_screenSpaceTextureAccessor);
     assert(m_templateAccessor != nullptr);
-    m_templateAccessor->LoadLandscapeTemplate(_filename, landscape);
+    m_templateAccessor->LoadLandscapeConfiguration(_filename, landscape);
     m_gameObjectsContainer.insert(landscape);
     return landscape;
 }
@@ -130,7 +130,7 @@ std::shared_ptr<CParticleEmitter> CSceneFabricator::CreateParticleEmitter(const 
 	assert(m_screenSpaceTextureAccessor != nullptr);
     std::shared_ptr<CParticleEmitter> particleEmitter = std::make_shared<CParticleEmitter>(m_resourceAccessor, m_screenSpaceTextureAccessor);
     assert(m_templateAccessor != nullptr);
-    m_templateAccessor->LoadParticleEmitterTemplate(_filename, particleEmitter);
+    m_templateAccessor->LoadParticleEmitterConfiguration(_filename, particleEmitter);
     m_gameObjectsContainer.insert(particleEmitter);
     return particleEmitter;
 }

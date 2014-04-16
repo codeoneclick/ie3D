@@ -27,7 +27,7 @@ CCamera::~CCamera(void)
     
 }
 
-void CCamera::_OnSceneUpdate(f32 _deltatime)
+void CCamera::onSceneUpdate(f32 _deltatime)
 {
     m_position.y = m_look.y + m_height;
     m_position.x = m_look.x + cosf(-m_rotation) * -m_distance;

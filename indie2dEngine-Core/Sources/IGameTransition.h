@@ -12,9 +12,10 @@
 #include "HCommon.h"
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
-#include "CGUIFabricator.h"
-#include "CGUIGraph.h"
-#include "ITemplateLoadingHandler.h"
+//#include "CGUIFabricator.h"
+//#include "CGUIGraph.h"
+#include "IConfiguration.h"
+#include "HDeclaration.h"
 #include "IGameLoopHandler.h"
 
 class IGraphicsContext;
@@ -26,9 +27,9 @@ class IScene;
 class IGameTransition :
 public CSceneGraph,
 public CSceneFabricator,
-public CGUIFabricator,
-public CGUIGraph,
-public ITemplateLoadingHandler,
+//public CGUIFabricator,
+//public CGUIGraph,
+public IConfigurationLoadingHandler,
 public IGameLoopHandler
 {
 private:
@@ -47,7 +48,8 @@ protected:
     virtual void _OnActivate(void);
     virtual void _OnDeactivate(void);
     
-    virtual void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
+    virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
+    //virtual void _OnTemplateLoaded(std::shared_ptr<I_RO_TemplateCommon> _template);
     virtual void _OnLoaded(void);
     
     virtual void _OnGameLoopUpdate(f32 _deltatime);

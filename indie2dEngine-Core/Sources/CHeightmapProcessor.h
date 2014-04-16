@@ -10,6 +10,7 @@
 #define CHeightmapProcessor_h
 
 #include "HCommon.h"
+#include "HDeclaration.h"
 
 class CTexture;
 class CMaterial;
@@ -17,7 +18,6 @@ class CMesh;
 class CVertexBuffer;
 class CIndexBuffer;
 class IScreenSpaceTextureAccessor;
-class I_RO_TemplateCommon;
 
 class CHeightmapProcessor
 {
@@ -58,7 +58,7 @@ protected:
 
 public:
 
-    CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, const std::shared_ptr<I_RO_TemplateCommon>& _template);
+    CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, ISharedConfigurationRef _template);
     ~CHeightmapProcessor(void);
 
     std::shared_ptr<CTexture> PreprocessHeightmapTexture(void);
