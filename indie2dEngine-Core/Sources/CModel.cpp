@@ -24,7 +24,7 @@ CModel::CModel(CSharedResourceAccessorRef resourceAccessor,
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
 m_animationMixer(nullptr)
 {
-    m_renderQueuePosition = 8;
+    m_zOrder = 8;
 
 	m_materialBindImposer = [this](CSharedMaterialRef material)
     {
@@ -77,9 +77,9 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32  CModel::getZOrder(void)
+i32  CModel::zOrder(void)
 {
-    return m_renderQueuePosition;
+    return m_zOrder;
 }
 
 bool CModel::checkOcclusion(void)
@@ -140,7 +140,7 @@ void CModel::onBatch(const std::string& mode)
     if(m_mesh->isLoaded() && m_isBatching)
     {
         m_renderMgr->Get_BatchingMgr()->batch(mode,
-                                              m_renderQueuePosition,
+                                              m_zOrder,
                                               std::make_tuple(m_mesh, m_animationMixer),
                                               material,
                                               m_materialBindImposer,

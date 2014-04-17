@@ -37,7 +37,7 @@ protected:
     void onResourceLoaded(ISharedResourceRef resource, bool success);
     void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
-    i32  getZOrder(void);
+    i32  zOrder(void);
     bool checkOcclusion(void);
     ui32 numTriangles(void);
     void onBind(const std::string& mode);

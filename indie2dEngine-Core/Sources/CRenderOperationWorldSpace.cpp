@@ -75,13 +75,13 @@ void CRenderOperationWorldSpace::RegisterRenderHandler(const std::shared_ptr<IRe
 {
     assert(_handler != nullptr);
     
-    if(m_handlers.find(_handler->getZOrder()) != m_handlers.end())
+    if(m_handlers.find(_handler->zOrder()) != m_handlers.end())
     {
-        m_handlers.find(_handler->getZOrder())->second.insert(_handler);
+        m_handlers.find(_handler->zOrder())->second.insert(_handler);
     }
     else
     {
-        m_handlers[_handler->getZOrder()].insert(_handler);
+        m_handlers[_handler->zOrder()].insert(_handler);
     }
 }
 
@@ -89,13 +89,13 @@ void CRenderOperationWorldSpace::UnregisterRenderHandler(const std::shared_ptr<I
 {
     assert(_handler != nullptr);
     
-    if(m_handlers.find(_handler->getZOrder()) != m_handlers.end())
+    if(m_handlers.find(_handler->zOrder()) != m_handlers.end())
     {
-        m_handlers.find(_handler->getZOrder())->second.erase(_handler);
+        m_handlers.find(_handler->zOrder())->second.erase(_handler);
     }
     else
     {
-        m_handlers[_handler->getZOrder()].erase(_handler);
+        m_handlers[_handler->zOrder()].erase(_handler);
     }
 }
 

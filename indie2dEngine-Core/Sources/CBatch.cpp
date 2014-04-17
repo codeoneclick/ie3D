@@ -22,7 +22,7 @@ CBatch::CBatch(const std::string& mode,
                CSharedMaterialRef material,
                const std::function<void(CSharedMaterialRef)>& materialBindImposer) :
 m_material(material),
-m_renderQueuePosition(renderQueuePosition),
+m_zOrder(renderQueuePosition),
 m_materialBindImposer(materialBindImposer),
 m_mode(mode),
 m_numLockedVertices(0),
@@ -158,9 +158,9 @@ void CBatch::batch(const std::tuple<CSharedMesh, CSharedAnimationMixer>& model,
     }
 }
 
-i32 CBatch::getZOrder(void)
+i32 CBatch::zOrder(void)
 {
-    return m_renderQueuePosition;
+    return m_zOrder;
 }
 
 bool CBatch::checkOcclusion(void)

@@ -27,7 +27,7 @@ m_width(0),
 m_height(0),
 m_heightBounds(glm::vec2(0.0f, 0.0f))
 {
-    m_renderQueuePosition = 4;
+    m_zOrder = 6;
     
     m_materialBindImposer = [this](CSharedMaterialRef material)
     {
@@ -175,9 +175,9 @@ void CLandscapeEdges::onConfigurationLoaded(ISharedConfigurationRef configuratio
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32  CLandscapeEdges::getZOrder(void)
+i32  CLandscapeEdges::zOrder(void)
 {
-    return m_renderQueuePosition;
+    return m_zOrder;
 }
 
 bool CLandscapeEdges::checkOcclusion(void)

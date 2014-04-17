@@ -112,16 +112,16 @@ void CKOTHInGameScene::Load(void)
 	m_root->InsertGUIContainer(guicontainer2);
 	guicontainer2->Set_Position(glm::vec2(300.0f, 300.0f));*/
     
-    /*m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
+    m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
     m_characterController = std::make_shared<CCharacterController>();
     m_characterController->Set_Camera(m_camera);
-    m_characterController->Set_Character(m_models[0]);
+    m_characterController->Set_Character(particleEmitter);
     m_characterController->Set_Navigator(m_navigator);
 	m_characterController->Set_Position(glm::vec3(24.0f, 0.0f, 24.0f));
     
     m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
     m_root->RegisterTapRecognizerHandler(m_moveControllerRecognizer);
-    m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);*/
+    m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);
 }
 
 void CKOTHInGameScene::OnUpdate(f32 _deltatime)
@@ -148,9 +148,9 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
     lightPosition_02.x = 48.0f + cosf(-angle) * -16.0f;
     lightPosition_02.y = 16.0f;
     lightPosition_02.z = 48.0f + sinf(-angle) * -16.0f;
-    m_lights[1]->Set_Position(lightPosition_02);
+    m_lights[1]->Set_Position(lightPosition_02);*/
     
-    m_characterController->OnUpdate(_deltatime);*/
+    m_characterController->OnUpdate(_deltatime);
 }
 
 void CKOTHInGameScene::_OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _collider)

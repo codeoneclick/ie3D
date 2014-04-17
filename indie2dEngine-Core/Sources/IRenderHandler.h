@@ -22,7 +22,7 @@ protected:
     
     IRenderHandler(void);
     
-    virtual i32  getZOrder(void) = 0;
+    virtual i32  zOrder(void) = 0;
     virtual bool checkOcclusion(void) = 0;
     virtual ui32 numTriangles(void) = 0;
     virtual void onBind(const std::string& mode) = 0;

@@ -43,7 +43,7 @@ m_edgesMaskTexture(nullptr)
     {
         for(ui32 j = 0; j < m_height; ++j)
         {
-			m_heightmapData[i + j * m_height] = sin(i * 0.33f) + cos(j * 0.33f);;
+			m_heightmapData[i + j * m_height] = sin(i * 0.1) * 10.0 + cos(j * 0.1) * 10.0;
             
             if(fabsf(m_heightmapData[i +j * m_height]) > m_maxAltitude)
             {
@@ -108,11 +108,11 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessHeightmapTexture(void)
             height /= m_maxAltitude;
             if(height > 0.0f || height < -1.0f)
             {
-                data[i + j * m_height] = TO_RGB(0, static_cast<ui8>(255), 0);
+                data[i + j * m_height] = TO_RGB565(0, static_cast<ui8>(255), 0);
             }
             else
             {
-                data[i + j * m_height] = TO_RGB(static_cast<ui8>(fabsf(height) * 255), 0, 0);
+                data[i + j * m_height] = TO_RGB565(static_cast<ui8>(fabsf(height) * 255), 0, 0);
             }
         }
     }
@@ -144,21 +144,21 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingTexture(void)
     {
         for(int j = 0; j < m_height; j++)
         {
-            data[i + j * m_height] = TO_RGB(255, 0, 0);
+            data[i + j * m_height] = TO_RGB565(255, 0, 0);
 
             f32 height = CHeightmapHelper::Get_HeightValue(m_heightmapData, m_width, m_height, glm::vec3(i , 0.0f, j));
             if(height > 5.0f)
             {
-                data[i + j * m_width] = TO_RGB(0, 255, 0);
+                data[i + j * m_width] = TO_RGB565(0, 255, 0);
             }
             if(height < 0.5f)
             {
-                data[i + j * m_width] = TO_RGB(0, 0, 255);
+                data[i + j * m_width] = TO_RGB565(0, 0, 255);
             }
 
             if( i == 0 || j == 0 || i == (m_width - 1) || j == (m_height - 1))
             {
-                data[i + j * m_width] = TO_RGB(255, 0, 0);
+                data[i + j * m_width] = TO_RGB565(255, 0, 0);
             }
         }
     }
@@ -177,18 +177,18 @@ void CHeightmapProcessor::_FillEdgesMaskTextureBlock(ui16* _data, ui32 _index, u
 {
     for(ui32 j = 0; j < _edgesMaskHeight / 4; ++j)
     {
-        f32 currentEdgeHeight = (static_cast<f32>(j) - (static_cast<f32>((_edgesMaskHeight / 4)) / 2.0f)) / 8.0f;
+        f32 currentEdgeHeight = (static_cast<f32>(j) - static_cast<f32>(_edgesMaskHeight / 8.0)) / 16.0;
         f32 height = CHeightmapHelper::Get_HeightValue(m_heightmapData, m_width, m_height, _point);
 
         ui32 indexOffset = _reverse == true ? (_edgesMaskWidth - 1) - _index + j * _edgesMaskWidth + _textureBlockSize : _index + j * _edgesMaskWidth + _textureBlockSize;
-        _data[indexOffset] = TO_RGB(0, 0, 0);
-        if(currentEdgeHeight < height)
+        _data[indexOffset] = TO_RGBA4444(0, 0, 0, 0);
+        if(currentEdgeHeight < height && currentEdgeHeight > 0.0)
         {
-            _data[indexOffset] = TO_RGB(255, 0, 0);
+            _data[indexOffset] = TO_RGBA4444(255, 0, 0, 255);
         }
         else
         {
-            _data[indexOffset] = TO_RGB(0, 255, 0);
+            _data[indexOffset] = TO_RGBA4444(0, 255, 0, 0);
         }
     }
 }
@@ -203,8 +203,8 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessEdgesMaskTexture(void)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
-    ui32 edgesMaskWidth = 512;
-    ui32 edgesMaskHeight = 512;
+    ui32 edgesMaskWidth = 2048;
+    ui32 edgesMaskHeight = 2048;
 
     ui16* data = new ui16[edgesMaskWidth * edgesMaskHeight];
     for(ui32 i = 0; i < edgesMaskWidth; ++i)
@@ -242,7 +242,7 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessEdgesMaskTexture(void)
                                                         glm::vec3((m_width - 1), 0.0f, static_cast<float>(i) / static_cast<float>(edgesMaskWidth) * m_width),
                                                         true);
     }
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, edgesMaskWidth, edgesMaskHeight, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, edgesMaskWidth, edgesMaskHeight, 0, GL_RGBA, GL_UNSIGNED_SHORT_4_4_4_4, data);
     
     m_edgesMaskTexture = CTexture::constructCustomTexture("edges",
                                                        textureHandle,

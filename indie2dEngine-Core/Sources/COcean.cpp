@@ -22,7 +22,7 @@ COcean::COcean(CSharedResourceAccessorRef resourceAccessor,
                ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor)
 {
-    m_renderQueuePosition = 0;
+    m_zOrder = 0;
 }
 
 COcean::~COcean(void)
@@ -97,9 +97,9 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32  COcean::getZOrder(void)
+i32  COcean::zOrder(void)
 {
-    return m_renderQueuePosition;
+    return m_zOrder;
 }
 
 bool COcean::checkOcclusion(void)

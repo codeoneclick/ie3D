@@ -207,7 +207,8 @@ namespace glm
 };
 
 
-#define MAX_VALUE(a,b) (((a) > (b)) ? (a) : (b))
-#define TO_RGB(r,g,b) (unsigned short)(((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3))
+#define MAX_VALUE(a, b) (((a) > (b)) ? (a) : (b))
+#define TO_RGB565(r, g, b) (unsigned short) (r << 11 | g << 5 | b)
+#define TO_RGBA4444(r, g, b, a) (unsigned short) ((r >> 4) << 12 | (g >> 4) << 8 | (b >> 4) << 4 | (a >> 4))
 
 #endif

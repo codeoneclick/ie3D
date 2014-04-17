@@ -138,9 +138,9 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32  CLandscape::getZOrder(void)
+i32  CLandscape::zOrder(void)
 {
-    return m_renderQueuePosition;
+    return m_zOrder;
 }
 
 bool CLandscape::checkOcclusion(void)

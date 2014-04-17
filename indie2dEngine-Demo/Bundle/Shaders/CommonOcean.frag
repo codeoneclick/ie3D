@@ -34,14 +34,10 @@ void main(void)
     lowp vec4 vDiffuseColor = mix(vDiffuseColor_01, vDiffuseColor_02, 0.5);
     
     mediump vec2 vTexCoordProj = OUT_TexCoordProjection.xy;
-	vTexCoordProj.x = 0.5 - 0.5 * vTexCoordProj.x / OUT_TexCoordProjection.w;
-	vTexCoordProj.y = 0.5 + 0.5 * vTexCoordProj.y / OUT_TexCoordProjection.w;
+    vTexCoordProj = 0.5 + 0.5 * vTexCoordProj / OUT_TexCoordProjection.w * vec2(-1.0, 1.0);
     
-    mediump vec2 vPerturbation = vPerturbationFactor * vNormalColor.xy;
-    mediump vec2 vPerturbatedTexCoord = vTexCoordProj + vPerturbation;
-    
-    lowp vec4 vReflectionColor = texture2D(SAMPLER_01, vPerturbatedTexCoord);
-    lowp vec4 vRefractionColor = texture2D(SAMPLER_02, vec2(0.5 + (0.5 - vPerturbatedTexCoord.x), vPerturbatedTexCoord.y));
+    lowp vec4 vReflectionColor = texture2D(SAMPLER_01, vTexCoordProj);
+    lowp vec4 vRefractionColor = texture2D(SAMPLER_02, vec2(0.5 + (0.5 - vTexCoordProj.x), vTexCoordProj.y));
     
     /*mediump vec3 vCameraDirection = normalize(OUT_Position - OUT_CameraPosition);
     mediump vec3 vTemp;
@@ -63,6 +59,9 @@ void main(void)
     vReflectionColor = mix(vDiffuseColor, vReflectionColor, vReflectionColor.a);
     //vReflectionColor = mix(vReflectionColor, vDiffuseColor, vRefractionColor.a);
     vRefractionColor = mix(vDiffuseColor, vRefractionColor, vRefractionColor.a);
-    gl_FragColor = mix(vReflectionColor, vRefractionColor, fresnel)/* + vSpecularColor * fSpecularFactor*/;
+    
+	mediump vec4 vSpecularColor = vec4(pow(max(0.0, dot(vec3(0.0, 1.0, 0.0), vNormalColor)), 1024.0));
+    
+    gl_FragColor = mix(vReflectionColor, vRefractionColor, fresnel) + vSpecularColor/* + vSpecularColor * fSpecularFactor*/;
 }
 

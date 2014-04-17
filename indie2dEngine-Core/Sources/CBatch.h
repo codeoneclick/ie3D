@@ -39,9 +39,9 @@ protected:
     ui32 m_numLockedVertices;
     ui32 m_numLockedTransformations;
     
-    ui32 m_renderQueuePosition;
+    ui32 m_zOrder;
     
-    i32  getZOrder(void);
+    i32  zOrder(void);
     bool checkOcclusion(void);
     ui32 numTriangles(void);
     void onBind(const std::string& mode);

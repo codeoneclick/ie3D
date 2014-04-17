@@ -26,7 +26,7 @@ m_screenSpaceTextureAccessor(screenSpaceTextureAccessor),
 m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
-m_renderQueuePosition(0),
+m_zOrder(0),
 m_mesh(nullptr),
 m_configuration(nullptr),
 m_camera(nullptr),
@@ -79,7 +79,7 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
     }
 }
 
-i32  IGameObject::getZOrder(void)
+i32  IGameObject::zOrder(void)
 {
     return 0;
 }

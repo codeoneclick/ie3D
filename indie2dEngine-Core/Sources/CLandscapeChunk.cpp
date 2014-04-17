@@ -26,7 +26,7 @@ m_width(0),
 m_height(0),
 m_numIndexesToRender(0)
 {
-    m_renderQueuePosition = 4;
+    m_zOrder = 4;
     
     m_materialBindImposer = [this](CSharedMaterialRef material)
     {
@@ -107,9 +107,9 @@ void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuratio
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32  CLandscapeChunk::getZOrder(void)
+i32 CLandscapeChunk::zOrder(void)
 {
-    return m_renderQueuePosition;
+    return m_zOrder;
 }
 
 bool CLandscapeChunk::checkOcclusion(void)
@@ -119,7 +119,7 @@ bool CLandscapeChunk::checkOcclusion(void)
 
 ui32 CLandscapeChunk::numTriangles(void)
 {
-    return IGameObject::numTriangles();
+    return m_mesh && m_mesh->isLoaded() ? m_numIndexesToRender / 3 : 0;
 }
 
 void CLandscapeChunk::onBind(const std::string& mode)

@@ -26,7 +26,7 @@ IGameObject(resourceAccessor, screenSpaceTextureAccessor)
 {
     m_settings = nullptr;
     m_lastEmittTimestamp = 0;
-    m_renderQueuePosition = 16;
+    m_zOrder = 5;
 }
 
 CParticleEmitter::~CParticleEmitter(void)
@@ -176,9 +176,9 @@ void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configurati
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32  CParticleEmitter::getZOrder(void)
+i32  CParticleEmitter::zOrder(void)
 {
-    return m_renderQueuePosition;
+    return m_zOrder;
 }
 
 bool CParticleEmitter::checkOcclusion(void)

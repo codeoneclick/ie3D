@@ -51,7 +51,7 @@ protected:
     CSharedSceneUpdateMgr m_sceneUpdateMgr;
     CSharedResourceAccessor m_resourceAccessor;
 	ISharedScreenSpaceTextureAccessor m_screenSpaceTextureAccessor;
-    ui32 m_renderQueuePosition;
+    ui32 m_zOrder;
     
     ui8 m_status;
     
@@ -64,7 +64,7 @@ protected:
     virtual void onResourceLoaded(ISharedResourceRef resource, bool success);
     virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
-    virtual i32  getZOrder(void);
+    virtual i32  zOrder(void);
     virtual bool checkOcclusion(void);
     virtual ui32 numTriangles(void);
     virtual void onBind(const std::string& mode);
