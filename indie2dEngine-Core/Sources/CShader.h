@@ -105,11 +105,11 @@ protected:
     
     std::array<CSharedShaderUniform, E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX> m_values;
     
-    void onResourceDataSerialized(ISharedResourceDataRef resourceData,
-                                  E_RESOURCE_DATA_STATUS status);
+    void onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
+                                                  E_RESOURCE_DATA_STATUS status);
     
-    void onResourceDataCommited(ISharedResourceDataRef resourceData,
-                                E_RESOURCE_DATA_STATUS status);
+    void onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
+                                           E_RESOURCE_DATA_STATUS status);
     
     void setupUniforms(void);
     

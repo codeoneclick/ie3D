@@ -27,6 +27,8 @@ CShaderSerializer_GLSL::~CShaderSerializer_GLSL(void)
 
 void CShaderSerializer_GLSL::serialize(void)
 {
+    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_STARTED);
+    assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
     std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_vsFilename);
@@ -47,6 +49,8 @@ void CShaderSerializer_GLSL::serialize(void)
                                                                             m_fsFilename,
                                                                             vsSourceCode,
                                                                             fsSourceCode);
+    IResourceSerializer::onResourceDataSerializationStatusChanged(sharedData, E_RESOURCE_DATA_STATUS_PROGRESS);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
+    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_FINISHED);
 }
 

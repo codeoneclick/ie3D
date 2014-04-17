@@ -37,12 +37,16 @@ public:
     CResourceAccessor(void);
     ~CResourceAccessor(void);
     
-    CSharedTexture getTexture(const std::string& filename);
+    CSharedResourceLoader getResourceLoader(void) const;
+    
+    CSharedTexture getTexture(const std::string& filename) const;
+    
     CSharedShader getShader(const std::string& vsFilename,
-                            const std::string& fsFilename);
+                            const std::string& fsFilename) const;
+    
     CSharedMesh getMesh(const std::string& meshFilename,
                         const std::string& skeletonFilename,
-                        const std::string& sequenceFilename);
+                        const std::string& sequenceFilename) const;
 };
 
 #endif 

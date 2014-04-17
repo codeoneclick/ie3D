@@ -26,8 +26,8 @@ protected:
     ui8 m_isRunning;
     std::thread m_thread;
     
-    virtual void onGameLoopUpdate(f32 deltatime);
-    virtual void onThreadUpdate(void);
+    void onGameLoopUpdate(f32 deltatime);
+    void onThreadUpdate(void);
     
     void _OnGameLoopUpdate(f32 _deltatime);
     

@@ -49,7 +49,7 @@ m_numTriangles(0)
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     
     std::string operatingColorTextureGuid = m_mode;
-    operatingColorTextureGuid.append("color");
+    operatingColorTextureGuid.append(".color");
     m_operatingColorTexture = std::make_shared<CTexture>(operatingColorTextureGuid,
                                                          colorAttachmentId,
                                                          m_frameWidth,
@@ -57,7 +57,7 @@ m_numTriangles(0)
     m_operatingColorTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     
     std::string operatingDepthTextureGuid = m_mode;
-    operatingDepthTextureGuid.append("depth");
+    operatingDepthTextureGuid.append(".depth");
     m_operatingDepthTexture = std::make_shared<CTexture>(operatingDepthTextureGuid,
                                                          depthAttachmentId,
                                                          m_frameWidth,

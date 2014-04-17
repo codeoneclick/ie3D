@@ -25,6 +25,7 @@ CTextureSerializer_PVR::~CTextureSerializer_PVR(void)
 
 void CTextureSerializer_PVR::serialize(void)
 {
+    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_STARTED);
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
@@ -44,6 +45,8 @@ void CTextureSerializer_PVR::serialize(void)
     
     std::shared_ptr<CTexture> texture = std::static_pointer_cast<CTexture>(m_resource);
     ui32 bpp; GLenum format; bool isCompressed;
+    
+    CSharedTextureData textureData = nullptr;
     
 	if(*(PVRTuint32*)sourcedata != PVRTEX3_IDENT)
 	{
@@ -89,22 +92,20 @@ void CTextureSerializer_PVR::serialize(void)
             default:
                 {
                     m_status = E_SERIALIZER_STATUS_FAILURE;
+                    return;
                 }
                 break;
         }
         
         ui8* texturedata = new ui8[size - header->dwHeaderSize];
         memcpy(texturedata, sourcedata + header->dwHeaderSize, static_cast<ui32>(size) - header->dwHeaderSize);
-        std::shared_ptr<CTextureData> textureData = std::make_shared<CTextureData>(header->dwWidth,
-                                                                                   header->dwHeight,
-                                                                                   texturedata,
-                                                                                   format,
-                                                                                   bpp,
-                                                                                   header->dwMipMapCount,
-                                                                                   isCompressed);
-        
-        IResourceSerializer::onResourceDataSerialized(textureData);
-        m_status = E_SERIALIZER_STATUS_SUCCESS;
+        textureData = std::make_shared<CTextureData>(header->dwWidth,
+                                                     header->dwHeight,
+                                                     texturedata,
+                                                     format,
+                                                     bpp,
+                                                     header->dwMipMapCount,
+                                                     isCompressed);
     }
     else
     {
@@ -146,6 +147,7 @@ void CTextureSerializer_PVR::serialize(void)
                 default:
 				{
 					m_status = E_SERIALIZER_STATUS_FAILURE;
+                    return;
 				}
                     break;
 			}
@@ -168,16 +170,16 @@ void CTextureSerializer_PVR::serialize(void)
         ui8* texturedata = new ui8[size - (PVRTEX3_HEADERSIZE + header->u32MetaDataSize)];
         memcpy(texturedata, sourcedata + (PVRTEX3_HEADERSIZE + header->u32MetaDataSize), static_cast<ui32>(size) - (PVRTEX3_HEADERSIZE + header->u32MetaDataSize));
         
-        std::shared_ptr<CTextureData> textureData = std::make_shared<CTextureData>(header->u32Width,
-                                                                                   header->u32Height,
-                                                                                   texturedata,
-                                                                                   format,
-                                                                                   bpp,
-                                                                                   header->u32MIPMapCount,
-                                                                                   isCompressed);
-        
-        IResourceSerializer::onResourceDataSerialized(textureData);
-        m_status = E_SERIALIZER_STATUS_SUCCESS;
+        textureData = std::make_shared<CTextureData>(header->u32Width,
+                                                     header->u32Height,
+                                                     texturedata,
+                                                     format,
+                                                     bpp,
+                                                     header->u32MIPMapCount,
+                                                     isCompressed);
     }
+    IResourceSerializer::onResourceDataSerializationStatusChanged(textureData, E_RESOURCE_DATA_STATUS_PROGRESS);
+    m_status = E_SERIALIZER_STATUS_SUCCESS;
+    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_FINISHED);
     delete[] sourcedata;
 }

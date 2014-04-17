@@ -48,7 +48,7 @@ void CResourceLoader::onThreadUpdate(void)
     }
 }
 
-void CResourceLoader::onGameLoopUpdate(f32 deltatime)
+void CResourceLoader::_OnGameLoopUpdate(f32 deltatime)
 {
     auto iterator = m_operationsQueue.begin();
     while(iterator != m_operationsQueue.end())
@@ -140,9 +140,4 @@ CSharedMesh CResourceLoader::startMeshLoadingOperation(const std::string& meshFi
 void CResourceLoader::unloadResource(ISharedResourceRef resource)
 {
 
-}
-
-void CResourceLoader::_OnGameLoopUpdate(f32 _deltatime)
-{
-    
 }

@@ -203,6 +203,64 @@ m_sequenceData(nullptr)
     if(m_vertexBuffer != nullptr &&
        m_indexBuffer != nullptr)
     {
+        glm::vec3 maxBound(-4096.0, -4096.0, -4096.0);
+        glm::vec3 minBound(4096.0, 4096.0, 4096.0);
+        
+        ui32 numVertices = m_vertexBuffer->getSize();
+        ui32 numIndices = m_indexBuffer->getSize();
+        
+        std::vector<SVertexData> vertexData;
+        vertexData.resize(numVertices);
+        
+        std::vector<ui16> indexData;
+        indexData.resize(numIndices);
+        
+        SAttributeVertex* vertexAttributedData = m_vertexBuffer->lock();
+        ui16* indexAttributedData = m_indexBuffer->lock();
+        
+        for(ui32 i = 0; i < numVertices; ++i)
+        {
+            vertexData[i].m_position = vertexAttributedData[i].m_position;
+            vertexData[i].m_texcoord = CVertexBuffer::uncompressU16Vec2(vertexAttributedData[i].m_texcoord);
+            vertexData[i].m_normal = CVertexBuffer::uncompressU8Vec4(vertexAttributedData[i].m_normal);
+            vertexData[i].m_tangent = CVertexBuffer::uncompressU8Vec4(vertexAttributedData[i].m_tangent);
+            
+            if(vertexData[i].m_position.x > maxBound.x)
+            {
+                maxBound.x = vertexData[i].m_position.x;
+            }
+            if(vertexData[i].m_position.y > maxBound.y)
+            {
+                maxBound.y = vertexData[i].m_position.y;
+            }
+            if(vertexData[i].m_position.z > maxBound.z)
+            {
+                maxBound.z = vertexData[i].m_position.z;
+            }
+            if(vertexData[i].m_position.x < minBound.x)
+            {
+                minBound.x = vertexData[i].m_position.x;
+            }
+            if(vertexData[i].m_position.y < minBound.y)
+            {
+                minBound.y = vertexData[i].m_position.y;
+            }
+            if(vertexData[i].m_position.z < minBound.z)
+            {
+                minBound.z = vertexData[i].m_position.z;
+            }
+        }
+        
+        for(ui32 i = 0; i < numIndices; ++i)
+        {
+            indexData[i] = indexAttributedData[i];
+        }
+        
+        m_meshData = std::make_shared<CMeshData>(vertexData,
+                                                 indexData,
+                                                 maxBound,
+                                                 minBound);
+        m_status |= E_RESOURCE_STATUS_LOADED;
         m_status |= E_RESOURCE_STATUS_COMMITED;
     }
 }
@@ -212,8 +270,8 @@ CMesh::~CMesh(void)
     
 }
 
-void CMesh::onResourceDataSerialized(ISharedResourceDataRef resourceData,
-                                     E_RESOURCE_DATA_STATUS status)
+void CMesh::onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
+                                                     E_RESOURCE_DATA_STATUS status)
 {
     if(status == E_RESOURCE_DATA_STATUS_STARTED)
     {
@@ -253,8 +311,8 @@ void CMesh::onResourceDataSerialized(ISharedResourceDataRef resourceData,
     }
 }
 
-void CMesh::onResourceDataCommited(ISharedResourceDataRef resourceData,
-                                   E_RESOURCE_DATA_STATUS status)
+void CMesh::onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
+                                              E_RESOURCE_DATA_STATUS status)
 {
     if(status == E_RESOURCE_DATA_STATUS_STARTED)
     {
@@ -327,7 +385,7 @@ const glm::vec3 CMesh::getMaxBound(void) const
 
 const glm::vec3 CMesh::getMinBound(void) const
 {
-    return IResource::isLoaded() ? m_meshData->getMaxBound() : glm::vec3(0.0, 0.0, 0.0);
+    return IResource::isLoaded() ? m_meshData->getMinBound() : glm::vec3(0.0, 0.0, 0.0);
 }
 
 const ui32 CMesh::getNumFrames(void) const

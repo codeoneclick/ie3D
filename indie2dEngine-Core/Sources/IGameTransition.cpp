@@ -24,6 +24,7 @@
 #include "CConfigurationGameObjects.h"
 #include "IGraphicsContext.h"
 #include "IInputContext.h"
+#include "CResourceLoader.h"
 
 IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> _templateAccessor) :
 IFabricator(_templateAccessor, _resourceAccessor),
@@ -65,12 +66,14 @@ void IGameTransition::_OnActivate(void)
 {
     ConnectToGameLoop(m_renderMgr);
     ConnectToGameLoop(m_sceneUpdateMgr);
+    ConnectToGameLoop(m_resourceAccessor->getResourceLoader());
 }
 
 void IGameTransition::_OnDeactivate(void)
 {
     DisconnectFromGameLoop(m_renderMgr);
     DisconnectFromGameLoop(m_sceneUpdateMgr);
+    DisconnectFromGameLoop(m_resourceAccessor->getResourceLoader());
 }
 
 void IGameTransition::_OnLoaded(void)

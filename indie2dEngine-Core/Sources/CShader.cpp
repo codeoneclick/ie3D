@@ -305,16 +305,63 @@ CShader::~CShader(void)
     glDeleteProgram(m_shaderId);
 }
 
-void CShader::onResourceDataSerialized(ISharedResourceDataRef resourceData,
-                              E_RESOURCE_DATA_STATUS status)
+void CShader::onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
+                                                       E_RESOURCE_DATA_STATUS status)
 {
-    
+    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    {
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
+        assert(resourceData != nullptr);
+        
+        switch(resourceData->getResourceDataClass())
+        {
+            case E_RESOURCE_DATA_CLASS_SHADER_DATA:
+            {
+                m_shaderData = std::static_pointer_cast<CShaderData>(resourceData);
+            }
+                break;
+            default:
+            {
+                assert(false);
+            }
+                break;
+        }
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
+        m_status |= E_RESOURCE_STATUS_LOADED;
+    }
 }
 
-void CShader::onResourceDataCommited(ISharedResourceDataRef resourceData,
-                            E_RESOURCE_DATA_STATUS status)
+void CShader::onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
+                                                E_RESOURCE_DATA_STATUS status)
 {
-    
+    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    {
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
+        assert(resourceData != nullptr);
+        
+        switch(resourceData->getResourceDataClass())
+        {
+            case E_RESOURCE_DATA_CLASS_SHADER_DATA:
+            {
+                CSharedShaderData shaderData = std::static_pointer_cast<CShaderData>(resourceData);
+                m_shaderId = shaderData->getShaderId();
+                assert(m_shaderId != 0);
+                CShader::setupUniforms();
+            }
+                break;
+            default:
+            {
+                assert(false);
+            }
+                break;
+        }
+        
+    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
+        m_status |= E_RESOURCE_STATUS_COMMITED;
+    }
 }
 
 void CShader::setupUniforms(void)

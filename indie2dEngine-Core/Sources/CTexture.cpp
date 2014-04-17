@@ -97,6 +97,9 @@ m_textureId(textureId)
 {
     m_textureData = std::make_shared<CTextureData>(witdh, height, nullptr,
                                                    0, 0, 0, false);
+    
+    m_status |= E_RESOURCE_STATUS_LOADED;
+    m_status |= E_RESOURCE_STATUS_COMMITED;
 }
 
 CTexture::~CTexture(void)
@@ -104,8 +107,8 @@ CTexture::~CTexture(void)
     glDeleteTextures(1, &m_textureId);
 }
 
-void CTexture::onResourceDataSerialized(ISharedResourceDataRef resourceData,
-                                        E_RESOURCE_DATA_STATUS status)
+void CTexture::onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
+                                                        E_RESOURCE_DATA_STATUS status)
 {
     if(status == E_RESOURCE_DATA_STATUS_STARTED)
     {
@@ -132,8 +135,8 @@ void CTexture::onResourceDataSerialized(ISharedResourceDataRef resourceData,
     }
 }
 
-void CTexture::onResourceDataCommited(ISharedResourceDataRef resourceData,
-                                      E_RESOURCE_DATA_STATUS status)
+void CTexture::onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
+                                                 E_RESOURCE_DATA_STATUS status)
 {
     if(status == E_RESOURCE_DATA_STATUS_STARTED)
     {

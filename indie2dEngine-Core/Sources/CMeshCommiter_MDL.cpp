@@ -24,6 +24,7 @@ CMeshCommiter_MDL::~CMeshCommiter_MDL(void)
 
 void CMeshCommiter_MDL::commit(void)
 {
+    IResourceCommiter::onResourceDataCommitStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_STARTED);
     m_status = E_COMMITER_STATUS_INPROGRESS;
     assert(m_resource != nullptr);
     
@@ -60,7 +61,8 @@ void CMeshCommiter_MDL::commit(void)
 	memcpy(indexData, &mesh->getIndexData()[0], sizeof(ui16) * mesh->getNumIndices());
     indexBuffer->unlock();
 
-    IResourceCommiter::onResourceDataCommited(vertexBuffer);
-    IResourceCommiter::onResourceDataCommited(indexBuffer);
+    IResourceCommiter::onResourceDataCommitStatusChanged(vertexBuffer, E_RESOURCE_DATA_STATUS_PROGRESS);
+    IResourceCommiter::onResourceDataCommitStatusChanged(indexBuffer, E_RESOURCE_DATA_STATUS_PROGRESS);
     m_status = E_COMMITER_STATUS_SUCCESS;
+    IResourceCommiter::onResourceDataCommitStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_FINISHED);
 }

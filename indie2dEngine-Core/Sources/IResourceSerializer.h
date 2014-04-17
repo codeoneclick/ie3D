@@ -31,7 +31,8 @@ protected:
     
     std::shared_ptr<std::istream> openStream(const std::string &filename);
     void closeStream(const std::shared_ptr<std::istream>& stream);
-    void onResourceDataSerialized(ISharedResourceDataRef resourceData);
+    
+    void onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData, E_RESOURCE_DATA_STATUS status);
     
 public:
     

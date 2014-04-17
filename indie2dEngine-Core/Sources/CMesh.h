@@ -128,11 +128,11 @@ protected:
     CSharedVertexBuffer m_vertexBuffer;
     CSharedIndexBuffer m_indexBuffer;
     
-    void onResourceDataSerialized(ISharedResourceDataRef resourceData,
-                                  E_RESOURCE_DATA_STATUS status);
+    void onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
+                                                  E_RESOURCE_DATA_STATUS status);
     
-    void onResourceDataCommited(ISharedResourceDataRef resourceData,
-                                E_RESOURCE_DATA_STATUS status);
+    void onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
+                                           E_RESOURCE_DATA_STATUS status);
     
 public:
     

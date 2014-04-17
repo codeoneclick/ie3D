@@ -57,7 +57,7 @@ void CKOTHInGameScene::Load(void)
     m_lights.push_back(light_02);
     //m_root->Set_Light(light_02, E_LIGHT_02);
     
-    std::shared_ptr<CModel> model = m_root->CreateModel("model.Footman.xml");
+    /*std::shared_ptr<CModel> model = m_root->CreateModel("model.Footman.xml");
     model->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
     model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
     m_models.push_back(model);
@@ -87,9 +87,9 @@ void CKOTHInGameScene::Load(void)
                 m_root->InsertModel(model);
             }
         }
-    }
+    }*/
     
-    std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
+    /*std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
     m_root->InsertOcean(ocean);
     ocean->setPosition(glm::vec3(-128.0f, 0.0f, -128.0f));
     
@@ -97,12 +97,12 @@ void CKOTHInGameScene::Load(void)
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
     
     m_particles.push_back(particleEmitter);
-    m_root->InsertParticleEmitter(particleEmitter);
+    m_root->InsertParticleEmitter(particleEmitter);*/
     
     std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("landscape.xml");
     m_root->InsertLandscape(landscape);
     
-    m_root->RegisterCollisionHandler(shared_from_this());
+    //m_root->RegisterCollisionHandler(shared_from_this());
 
 	/*std::shared_ptr<CGUIContainer> guicontainer = m_root->CreateGUIContainer("guicontainer.xml");
 	m_root->InsertGUIContainer(guicontainer);
@@ -112,7 +112,7 @@ void CKOTHInGameScene::Load(void)
 	m_root->InsertGUIContainer(guicontainer2);
 	guicontainer2->Set_Position(glm::vec2(300.0f, 300.0f));*/
     
-    m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
+    /*m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
     m_characterController = std::make_shared<CCharacterController>();
     m_characterController->Set_Camera(m_camera);
     m_characterController->Set_Character(m_models[0]);
@@ -121,12 +121,12 @@ void CKOTHInGameScene::Load(void)
     
     m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
     m_root->RegisterTapRecognizerHandler(m_moveControllerRecognizer);
-    m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);
+    m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);*/
 }
 
 void CKOTHInGameScene::OnUpdate(f32 _deltatime)
 {
-    static float angle = 0.0f;
+    /*static float angle = 0.0f;
     m_models[0]->setAnimation("model_02.MDL_anim");
     
     for(ui32 i = 1; i < m_models.size(); ++i)
@@ -150,7 +150,7 @@ void CKOTHInGameScene::OnUpdate(f32 _deltatime)
     lightPosition_02.z = 48.0f + sinf(-angle) * -16.0f;
     m_lights[1]->Set_Position(lightPosition_02);
     
-    m_characterController->OnUpdate(_deltatime);
+    m_characterController->OnUpdate(_deltatime);*/
 }
 
 void CKOTHInGameScene::_OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _collider)

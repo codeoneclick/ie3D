@@ -61,9 +61,9 @@ void IResourceSerializer::closeStream(const std::shared_ptr<std::istream> &strea
 #endif
 }
 
-void IResourceSerializer::onResourceDataSerialized(ISharedResourceDataRef resourceData)
+void IResourceSerializer::onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData, E_RESOURCE_DATA_STATUS status)
 {
-    m_resource->onResourceDataSerialized(resourceData, E_RESOURCE_DATA_STATUS_PROGRESS);
+    m_resource->onResourceDataSerializationStatusChanged(resourceData, status);
 }
 
 std::string IResourceSerializer::getGuid(void) const

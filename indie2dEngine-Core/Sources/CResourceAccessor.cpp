@@ -23,7 +23,13 @@ CResourceAccessor::~CResourceAccessor(void)
     
 }
 
-CSharedTexture CResourceAccessor::getTexture(const std::string &filename)
+CSharedResourceLoader CResourceAccessor::getResourceLoader(void) const
+{
+    assert(m_resourceLoader != nullptr);
+    return m_resourceLoader;
+}
+
+CSharedTexture CResourceAccessor::getTexture(const std::string &filename) const
 {
     assert(m_resourceLoader != nullptr);
     CSharedTexture texture = m_resourceLoader->startTextureLoadingOperation(filename);
@@ -31,7 +37,7 @@ CSharedTexture CResourceAccessor::getTexture(const std::string &filename)
     return texture;
 }
 
-CSharedShader CResourceAccessor::getShader(const std::string &vsFilename, const std::string &fsFilename)
+CSharedShader CResourceAccessor::getShader(const std::string &vsFilename, const std::string &fsFilename) const
 {
     assert(m_resourceLoader != nullptr);
     CSharedShader shader = m_resourceLoader->startShaderLoadingOperation(vsFilename, fsFilename);
@@ -41,7 +47,7 @@ CSharedShader CResourceAccessor::getShader(const std::string &vsFilename, const 
 
 CSharedMesh CResourceAccessor::getMesh(const std::string& meshFilename,
                                        const std::string& skeletonFilename,
-                                       const std::string& sequenceFilename)
+                                       const std::string& sequenceFilename) const
 {
     assert(m_resourceLoader != nullptr);
     CSharedMesh mesh = m_resourceLoader->startMeshLoadingOperation(meshFilename,

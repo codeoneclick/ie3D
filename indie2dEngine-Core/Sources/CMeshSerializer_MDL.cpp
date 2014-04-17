@@ -26,6 +26,7 @@ CMeshSerializer_MDL::~CMeshSerializer_MDL(void)
 
 void CMeshSerializer_MDL::serialize(void)
 {
+    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_STARTED);
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
@@ -116,6 +117,7 @@ void CMeshSerializer_MDL::serialize(void)
                                                                       indexData,
                                                                       maxBound,
                                                                       minBound);
-    IResourceSerializer::onResourceDataSerialized(meshData);
+    IResourceSerializer::onResourceDataSerializationStatusChanged(meshData, E_RESOURCE_DATA_STATUS_PROGRESS);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
+    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_FINISHED);
 }

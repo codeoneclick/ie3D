@@ -13,7 +13,6 @@
 #include "HDeclaration.h"
 #include "HEnums.h"
 
-class IResource;
 class IResourceCommiter  : public std::enable_shared_from_this<IResourceCommiter>
 {
 private:
@@ -24,7 +23,7 @@ protected:
     ISharedResource m_resource;
     E_COMMITER_STATUS m_status;
     
-    void onResourceDataCommited(ISharedResourceDataRef resourceData);
+    void onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData, E_RESOURCE_DATA_STATUS status);
     
 public:
     
