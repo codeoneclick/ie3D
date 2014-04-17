@@ -66,19 +66,18 @@ protected:
     mutable ui32 m_settedWrapMode;
     ui32 m_presettedWrapMode;
     
-    void onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
-                                                  E_RESOURCE_DATA_STATUS status);
+    void onResourceDataSerializationFinished(ISharedResourceDataRef resourceData);
     
-    void onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
-                                           E_RESOURCE_DATA_STATUS status);
+    void onResourceDataCommitFinished(ISharedResourceDataRef resourceData);
     
 public:
     
     CTexture(const std::string& guid);
-    CTexture(const std::string& guid,
-             ui32 textureId,
-             ui32 witdh,
-             ui32 height);
+    
+    static CSharedTexture constructCustomTexture(const std::string& guid,
+                                                 ui32 textureId,
+                                                 ui32 width,
+                                                 ui32 height);
     
     ~CTexture(void);
     

@@ -46,7 +46,8 @@ m_numUnlockedTransformations(0)
     memset(indexData, 0x0, k_MAX_NUM_INDICES * sizeof(ui16));
     indexBuffer->unlock();
     
-    m_mesh = std::make_shared<CMesh>(m_guid, vertexBuffer, indexBuffer);
+    m_mesh = CMesh::constructCustomMesh(m_guid, vertexBuffer, indexBuffer,
+                                     glm::vec3(4096.0), glm::vec3(-4096));
     assert(m_mesh != nullptr);
 }
 

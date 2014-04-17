@@ -72,14 +72,6 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     assert(m_mesh != nullptr);
     m_isBatching = modelConfiguration->isBatching();
     
-    for(const auto& iterator : modelConfiguration->getMaterialsConfigurations())
-    {
-        CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        CSharedMaterial material = std::make_shared<CMaterial>();
-        IGameObject::setupMaterial(material, materialConfiguration);
-        m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
-    }
-    
 	IGameObject::listenRenderMgr(m_isNeedToRender);
     IGameObject::listenSceneUpdateMgr(m_isNeedToUpdate);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;

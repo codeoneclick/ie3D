@@ -50,18 +50,19 @@ m_numTriangles(0)
     
     std::string operatingColorTextureGuid = m_mode;
     operatingColorTextureGuid.append(".color");
-    m_operatingColorTexture = std::make_shared<CTexture>(operatingColorTextureGuid,
-                                                         colorAttachmentId,
-                                                         m_frameWidth,
-                                                         m_frameHeight);
+    m_operatingColorTexture = CTexture::constructCustomTexture(operatingColorTextureGuid,
+                                                            colorAttachmentId,
+                                                            m_frameWidth,
+                                                            m_frameHeight);
+    
     m_operatingColorTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     
     std::string operatingDepthTextureGuid = m_mode;
     operatingDepthTextureGuid.append(".depth");
-    m_operatingDepthTexture = std::make_shared<CTexture>(operatingDepthTextureGuid,
-                                                         depthAttachmentId,
-                                                         m_frameWidth,
-                                                         m_frameHeight);
+    m_operatingDepthTexture = CTexture::constructCustomTexture(operatingDepthTextureGuid,
+                                                            depthAttachmentId,
+                                                            m_frameWidth,
+                                                            m_frameHeight);
     m_operatingDepthTexture->setWrapMode(GL_CLAMP_TO_EDGE);
 }
 

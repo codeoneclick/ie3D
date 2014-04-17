@@ -48,8 +48,9 @@ void COcean::onResourceLoaded(ISharedResourceRef resource, bool success)
 
 void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
-    std::shared_ptr<CConfigurationOcean> oceanConfiguration = std::static_pointer_cast<CConfigurationOcean>(configuration);
+    IGameObject::onConfigurationLoaded(configuration, success);
     
+    std::shared_ptr<CConfigurationOcean> oceanConfiguration = std::static_pointer_cast<CConfigurationOcean>(configuration);
     assert(m_resourceAccessor != nullptr);
     
     m_width = oceanConfiguration->getSize().x;
@@ -88,16 +89,9 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     
     indexBuffer->unlock();
     
-    m_mesh = std::make_shared<CMesh>("ocean", vertexBuffer, indexBuffer);
+    m_mesh = CMesh::constructCustomMesh("ocean", vertexBuffer, indexBuffer,
+                                     glm::vec3(4096.0), glm::vec3(4096.0));
     assert(m_mesh != nullptr);
-    
-    for(const auto& iterator : oceanConfiguration->getMaterialsConfigurations())
-    {
-        CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        CSharedMaterial material = std::make_shared<CMaterial>();
-        IGameObject::setupMaterial(material, materialConfiguration);
-        m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
-    }
     
 	IGameObject::listenRenderMgr(m_isNeedToRender);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
@@ -110,7 +104,7 @@ i32  COcean::getZOrder(void)
 
 bool COcean::checkOcclusion(void)
 {
-    return IGameObject::checkOcclusion();
+    return false;
 }
 
 ui32 COcean::numTriangles(void)

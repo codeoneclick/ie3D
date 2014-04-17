@@ -73,11 +73,9 @@ protected:
     IResource(E_RESOURCE_CLASS resourceClass,
               const std::string& guid);
     
-    virtual void onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
-                                                          E_RESOURCE_DATA_STATUS status) = 0;
+    virtual void onResourceDataSerializationFinished(ISharedResourceDataRef resourceData) = 0;
     
-    virtual void onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
-                                                   E_RESOURCE_DATA_STATUS status) = 0;
+    virtual void onResourceDataCommitFinished(ISharedResourceDataRef resourceData) = 0;
     
     void onResourceLoaded(void);
     

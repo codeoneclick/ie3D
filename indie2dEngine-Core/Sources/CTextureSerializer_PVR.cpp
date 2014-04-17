@@ -25,7 +25,6 @@ CTextureSerializer_PVR::~CTextureSerializer_PVR(void)
 
 void CTextureSerializer_PVR::serialize(void)
 {
-    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_STARTED);
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
@@ -178,8 +177,8 @@ void CTextureSerializer_PVR::serialize(void)
                                                      header->u32MIPMapCount,
                                                      isCompressed);
     }
-    IResourceSerializer::onResourceDataSerializationStatusChanged(textureData, E_RESOURCE_DATA_STATUS_PROGRESS);
+    
     m_status = E_SERIALIZER_STATUS_SUCCESS;
-    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_FINISHED);
+    IResourceSerializer::onResourceDataSerializationFinished(textureData);
     delete[] sourcedata;
 }

@@ -122,6 +122,10 @@ class CConfigurationMaterial;
 typedef std::shared_ptr<CConfigurationMaterial> CSharedConfigurationMaterial;
 typedef const CSharedConfigurationMaterial& CSharedConfigurationMaterialRef;
 
+class CConfigurationGameObject;
+typedef std::shared_ptr<CConfigurationGameObject> CSharedConfigurationGameObject;
+typedef const CSharedConfigurationGameObject& CSharedConfigurationGameObjectRef;
+
 class CConfigurationWSRenderOperation;
 typedef std::shared_ptr<CConfigurationWSRenderOperation> CSharedConfigurationWSRenderOperation;
 typedef const CSharedConfigurationWSRenderOperation& CSharedConfigurationWSRenderOperationRef;

@@ -89,7 +89,7 @@ void CKOTHInGameScene::Load(void)
         }
     }*/
     
-    /*std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
+    std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
     m_root->InsertOcean(ocean);
     ocean->setPosition(glm::vec3(-128.0f, 0.0f, -128.0f));
     
@@ -97,7 +97,7 @@ void CKOTHInGameScene::Load(void)
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
     
     m_particles.push_back(particleEmitter);
-    m_root->InsertParticleEmitter(particleEmitter);*/
+    m_root->InsertParticleEmitter(particleEmitter);
     
     std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("landscape.xml");
     m_root->InsertLandscape(landscape);

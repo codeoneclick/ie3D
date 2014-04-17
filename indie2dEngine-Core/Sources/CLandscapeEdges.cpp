@@ -83,35 +83,35 @@ void CLandscapeEdges::onConfigurationLoaded(ISharedConfigurationRef configuratio
     {
         CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
         CSharedMaterial material = std::make_shared<CMaterial>();
-        IGameObject::setupMaterial(material, materialConfiguration);
+        CMaterial::setupMaterial(material, materialConfiguration, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
         m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
     }
     
     CSharedVertexBuffer vertexBuffer =std::make_shared<CVertexBuffer>(16, GL_STATIC_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
     
-    glm::vec3 boundMin = glm::vec3(0.0f, m_heightBounds.x, 0.0f);
-    glm::vec3 boundMax = glm::vec3(m_width, m_heightBounds.y, m_height);
+    glm::vec3 minBound = glm::vec3(0.0f, m_heightBounds.x, 0.0f);
+    glm::vec3 maxBound = glm::vec3(m_width, m_heightBounds.y, m_height);
     
-    vertexData[0].m_position = glm::vec3(boundMin.x,  boundMin.y, boundMax.z);
-    vertexData[1].m_position = glm::vec3(boundMax.x,  boundMin.y, boundMax.z);
-    vertexData[2].m_position = glm::vec3(boundMax.x,  boundMax.y, boundMax.z);
-    vertexData[3].m_position = glm::vec3(boundMin.x,  boundMax.y, boundMax.z);
+    vertexData[0].m_position = glm::vec3(minBound.x,  minBound.y, maxBound.z);
+    vertexData[1].m_position = glm::vec3(maxBound.x,  minBound.y, maxBound.z);
+    vertexData[2].m_position = glm::vec3(maxBound.x,  maxBound.y, maxBound.z);
+    vertexData[3].m_position = glm::vec3(minBound.x,  maxBound.y, maxBound.z);
     
-    vertexData[4].m_position = glm::vec3(boundMin.x,  boundMin.y,  boundMin.z);
-    vertexData[5].m_position = glm::vec3(boundMin.x,  boundMax.y,  boundMin.z);
-    vertexData[6].m_position = glm::vec3(boundMax.x,  boundMax.y,  boundMin.z);
-    vertexData[7].m_position = glm::vec3(boundMax.x,  boundMin.y,  boundMin.z);
+    vertexData[4].m_position = glm::vec3(minBound.x,  minBound.y,  minBound.z);
+    vertexData[5].m_position = glm::vec3(minBound.x,  maxBound.y,  minBound.z);
+    vertexData[6].m_position = glm::vec3(maxBound.x,  maxBound.y,  minBound.z);
+    vertexData[7].m_position = glm::vec3(maxBound.x,  minBound.y,  minBound.z);
     
-    vertexData[8].m_position = glm::vec3(boundMax.x,  boundMin.y,   boundMax.z);
-    vertexData[9].m_position = glm::vec3(boundMax.x,  boundMin.y,   boundMin.z);
-    vertexData[10].m_position = glm::vec3(boundMax.x,  boundMax.y,  boundMin.z);
-    vertexData[11].m_position = glm::vec3(boundMax.x,  boundMax.y,  boundMax.z);
+    vertexData[8].m_position = glm::vec3(maxBound.x,  minBound.y,   maxBound.z);
+    vertexData[9].m_position = glm::vec3(maxBound.x,  minBound.y,   minBound.z);
+    vertexData[10].m_position = glm::vec3(maxBound.x,  maxBound.y,  minBound.z);
+    vertexData[11].m_position = glm::vec3(maxBound.x,  maxBound.y,  maxBound.z);
     
-    vertexData[12].m_position = glm::vec3(boundMin.x,  boundMin.y,  boundMin.z);
-    vertexData[13].m_position = glm::vec3(boundMin.x,  boundMin.y,  boundMax.z);
-    vertexData[14].m_position = glm::vec3(boundMin.x,  boundMax.y,  boundMax.z);
-    vertexData[15].m_position = glm::vec3(boundMin.x,  boundMax.y,  boundMin.z);
+    vertexData[12].m_position = glm::vec3(minBound.x,  minBound.y,  minBound.z);
+    vertexData[13].m_position = glm::vec3(minBound.x,  minBound.y,  maxBound.z);
+    vertexData[14].m_position = glm::vec3(minBound.x,  maxBound.y,  maxBound.z);
+    vertexData[15].m_position = glm::vec3(minBound.x,  maxBound.y,  minBound.z);
     
     vertexData[0].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f, 1.0f / 4.0f));
     vertexData[1].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f - 0.001f, 1.0f / 4.0f));
@@ -168,7 +168,8 @@ void CLandscapeEdges::onConfigurationLoaded(ISharedConfigurationRef configuratio
     
     indexBuffer->unlock();
     
-    m_mesh = std::make_shared<CMesh>("landscape.edges", vertexBuffer, indexBuffer);
+    m_mesh = CMesh::constructCustomMesh("landscape.edges", vertexBuffer, indexBuffer,
+                                     maxBound, minBound);
     
 	IGameObject::listenRenderMgr(m_isNeedToRender);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;

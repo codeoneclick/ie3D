@@ -90,16 +90,10 @@ void CLandscapeChunk::onResourceLoaded(ISharedResourceRef resource, bool success
 
 void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
+    IGameObject::onConfigurationLoaded(configuration, success);
+    
     std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     assert(m_resourceAccessor != nullptr);
-    
-    for(const auto& iterator : landscapeConfiguration->getMaterialsConfigurations())
-    {
-        CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        CSharedMaterial material = std::make_shared<CMaterial>();
-        IGameObject::setupMaterial(material, materialConfiguration);
-        m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
-    }
     
     m_quadTree = std::make_shared<CQuadTree>();
     m_quadTree->generate(m_mesh->getVertexBuffer(),

@@ -81,7 +81,6 @@ ui32 CShaderCommiter_GLSL::link(ui32 vsHandle,
 
 void CShaderCommiter_GLSL::commit(void)
 {
-    IResourceCommiter::onResourceDataCommitStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_STARTED);
     std::string message = "";
     m_status = E_COMMITER_STATUS_INPROGRESS;
     ui32 vsHandle = CShaderCommiter_GLSL::compile(m_vsSourceCode, GL_VERTEX_SHADER);
@@ -122,8 +121,7 @@ void CShaderCommiter_GLSL::commit(void)
     assert(m_resource != nullptr);
     assert(m_resource->isLoaded() == true);
     std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader>(m_resource);
-    IResourceCommiter::onResourceDataCommitStatusChanged(std::make_shared<CShaderData>(shaderId), E_RESOURCE_DATA_STATUS_PROGRESS);
     m_status = m_status == E_COMMITER_STATUS_INPROGRESS ? E_COMMITER_STATUS_SUCCESS : E_COMMITER_STATUS_FAILURE;
-    IResourceCommiter::onResourceDataCommitStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_FINISHED);
+    IResourceCommiter::onResourceDataCommitFinished(std::make_shared<CShaderData>(shaderId));
 }
 

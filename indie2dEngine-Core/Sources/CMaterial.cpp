@@ -10,6 +10,8 @@
 #include "CShader.h"
 #include "CTexture.h"
 #include "CRenderMgr.h"
+#include "CConfigurationGameObjects.h"
+#include "CResourceAccessor.h"
 
 CMaterialCachedParameters::CMaterialCachedParameters(void) :
 m_shader(nullptr)
@@ -232,6 +234,65 @@ void CMaterial::setTexture(CSharedTextureRef texture,
 {
     assert(m_parameters != nullptr);
     m_parameters->m_textures.at(sampler) = texture;
+}
+
+void CMaterial::setupMaterial(CSharedMaterialRef material,
+                              CSharedConfigurationMaterialRef configuration,
+                              CSharedResourceAccessor resourceAccessor,
+                              ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor,
+                              ISharedResourceLoadingHandlerRef handler)
+{
+    assert(configuration != nullptr);
+    assert(screenSpaceTextureAccessor != nullptr);
+	assert(resourceAccessor != nullptr);
+    
+    material->setCulling(configuration->isCulling());
+    material->setCullingMode(configuration->getCullingMode());
+    
+    material->setBlending(configuration->isBlending());
+    material->setBlendingFunctionSource(configuration->getBlendingFunctionSource());
+    material->setBlendingFunctionDestination(configuration->getBlendingFunctionDestination());
+    
+    material->setDepthTest(configuration->isDepthTest());
+    material->setDepthMask(configuration->isDepthMask());
+    
+    material->setClipping(configuration->isClipping());
+    material->setClippingPlane(configuration->getClippingPlane());
+    
+    material->setReflecting(configuration->isReflecting());
+    material->setShadowing(configuration->isShadowing());
+    material->setDebugging(configuration->isDebugging());
+    
+    for(const auto& iterator : configuration->getTexturesConfigurations())
+    {
+        CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
+        assert(textureConfiguration != nullptr);
+        
+        CSharedTexture texture = textureConfiguration->getFilename().length() != 0 ?
+        resourceAccessor->getTexture(textureConfiguration->getFilename()) :
+        screenSpaceTextureAccessor->Get_RenderOperationTexture(textureConfiguration->getRenderOperationName());
+        assert(texture != nullptr);
+        texture->setWrapMode(textureConfiguration->getWrapMode());
+        assert(textureConfiguration->getSamplerIndex() >= 0 &&
+               textureConfiguration->getSamplerIndex() < E_SHADER_SAMPLER_MAX);
+        material->setTexture(texture, static_cast<E_SHADER_SAMPLER>(textureConfiguration->getSamplerIndex()));
+        
+        if(handler != nullptr)
+        {
+            texture->registerLoadingHandler(handler);
+        }
+    }
+    
+    CSharedConfigurationShader shaderConfiguration = std::static_pointer_cast<CConfigurationShader>(configuration->getShaderConfiguration());
+    assert(shaderConfiguration != nullptr);
+    CSharedShader shader = resourceAccessor->getShader(shaderConfiguration->getVSFilename(),
+                                                       shaderConfiguration->getFSFilename());
+    assert(shader != nullptr);
+    material->setShader(shader);
+    if(handler != nullptr)
+    {
+        shader->registerLoadingHandler(handler);
+    }
 }
 
 bool CMaterial::isLoaded(void) const

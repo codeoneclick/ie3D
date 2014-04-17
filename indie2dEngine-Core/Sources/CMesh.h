@@ -18,29 +18,36 @@ private:
     
 protected:
     
-    std::vector<SVertexData> m_vertexData;
-    std::vector<ui16> m_indexData;
+    SVertexData* m_vertexData;
+    ui16* m_indexData;
+    
+    ui32 m_numVertices;
+    ui32 m_numIndices;
     
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
     
 public:
     
-    CMeshData(const std::vector<SVertexData>& vertexData,
-              const std::vector<ui16>& indexData,
+    CMeshData(SVertexData* vertexData,
+              ui16* indexData,
+              ui32 numVertices,
+              ui32 numIndices,
               const glm::vec3& maxBound,
               const glm::vec3& minBound);
     
     ~CMeshData(void);
     
-    const std::vector<SVertexData>& getVertexData(void) const;
-    const std::vector<ui16>& getIndexData(void) const;
+    const SVertexData* getVertexData(void) const;
+    const ui16* getIndexData(void) const;
     
-    const ui32 getNumVertices(void) const;
-    const ui32 getNumIndices(void) const;
+    ui32 getNumVertices(void) const;
+    ui32 getNumIndices(void) const;
     
     const glm::vec3& getMaxBound(void) const;
     const glm::vec3& getMinBound(void) const;
+    
+    void removeData(void);
 };
 
 class CFrameData final
@@ -128,24 +135,26 @@ protected:
     CSharedVertexBuffer m_vertexBuffer;
     CSharedIndexBuffer m_indexBuffer;
     
-    void onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
-                                                  E_RESOURCE_DATA_STATUS status);
+    void onResourceDataSerializationFinished(ISharedResourceDataRef resourceData);
     
-    void onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
-                                           E_RESOURCE_DATA_STATUS status);
+    void onResourceDataCommitFinished(ISharedResourceDataRef resourceData);
     
 public:
     
-    CMesh(const std::string& guid,
-          CSharedVertexBufferRef vertexBuffer = nullptr,
-          CSharedIndexBufferRef indexBuffer = nullptr);
+    CMesh(const std::string& guid);
+    
+    static CSharedMesh constructCustomMesh(const std::string& guid,
+                                           CSharedVertexBufferRef vertexBuffer,
+                                           CSharedIndexBufferRef indexBuffer,
+                                           const glm::vec3& maxBound,
+                                           const glm::vec3& minBound);
     ~CMesh(void);
     
     CSharedVertexBuffer getVertexBuffer(void) const;
     CSharedIndexBuffer getIndexBuffer(void) const;
     
-    const std::vector<SVertexData>& getVertexData(void) const;
-    const std::vector<ui16>& getIndexData(void) const;
+    const SVertexData* getVertexData(void) const;
+    const ui16* getIndexData(void) const;
     
     const ui32 getNumVertices(void) const;
     const ui32 getNumIndices(void) const;

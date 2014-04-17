@@ -38,10 +38,10 @@ m_material(_material)
     
     std::string operatingColorTextureGuid = m_mode;
     operatingColorTextureGuid.append("color");
-    m_operatingTexture = std::make_shared<CTexture>(operatingColorTextureGuid,
-                                                         textureId,
-                                                         m_frameWidth,
-                                                         m_frameHeight);
+    m_operatingTexture = CTexture::constructCustomTexture(operatingColorTextureGuid,
+                                                       textureId,
+                                                       m_frameWidth,
+                                                       m_frameHeight);
     m_operatingTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     
     m_material->setCulling(false);

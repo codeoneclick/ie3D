@@ -25,7 +25,6 @@ CSkeletonSerializer_SK::~CSkeletonSerializer_SK(void)
 
 void CSkeletonSerializer_SK::serialize(void)
 {
-    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_STARTED);
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
@@ -49,7 +48,6 @@ void CSkeletonSerializer_SK::serialize(void)
     }
     IResourceSerializer::closeStream(filestream);
     
-    IResourceSerializer::onResourceDataSerializationStatusChanged(skeletonData, E_RESOURCE_DATA_STATUS_PROGRESS);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
-    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_FINISHED);
+    IResourceSerializer::onResourceDataSerializationFinished(skeletonData);
 }

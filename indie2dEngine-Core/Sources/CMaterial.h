@@ -63,6 +63,12 @@ public:
     CMaterial(void);
     ~CMaterial(void);
     
+    static void setupMaterial(CSharedMaterialRef material,
+                              CSharedConfigurationMaterialRef configuration,
+                              CSharedResourceAccessor resourceAccessor,
+                              ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor,
+                              ISharedResourceLoadingHandlerRef handler = nullptr);
+    
     bool isCulling(void) const;
     GLenum getCullingMode(void) const;
     

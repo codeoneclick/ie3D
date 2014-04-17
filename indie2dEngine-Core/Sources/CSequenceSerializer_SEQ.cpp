@@ -24,7 +24,6 @@ CSequenceSerializer_SEQ::~CSequenceSerializer_SEQ(void)
 
 void CSequenceSerializer_SEQ::serialize(void)
 {
-    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_STARTED);
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
@@ -69,8 +68,6 @@ void CSequenceSerializer_SEQ::serialize(void)
                                                                        frames);
     
     IResourceSerializer::closeStream(filestream);
-    
-    IResourceSerializer::onResourceDataSerializationStatusChanged(sequenceData, E_RESOURCE_DATA_STATUS_PROGRESS);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
-    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_FINISHED);
+    IResourceSerializer::onResourceDataSerializationFinished(sequenceData);
 }

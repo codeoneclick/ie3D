@@ -22,11 +22,9 @@ IResourceCommiter::~IResourceCommiter(void)
     
 }
 
-void IResourceCommiter::onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
-                                                          E_RESOURCE_DATA_STATUS status)
+void IResourceCommiter::onResourceDataCommitFinished(ISharedResourceDataRef resourceData)
 {
-    m_resource->onResourceDataCommitStatusChanged(resourceData,
-                                                  status);
+    m_resource->onResourceDataCommitFinished(resourceData);
 }
 
 std::string IResourceCommiter::getGuid(void) const

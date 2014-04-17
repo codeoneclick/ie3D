@@ -168,17 +168,9 @@ void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configurati
     }
     indexBuffer->unlock();
     
-    m_mesh = std::make_shared<CMesh>("particle.emitter", vertexBuffer, indexBuffer);
+    m_mesh = CMesh::constructCustomMesh("particle.emitter", vertexBuffer, indexBuffer,
+                                     glm::vec3(0.0), glm::vec3(0.0));
     assert(m_mesh != nullptr);
-    
-    for(const auto& iterator : m_settings->getMaterialsConfigurations())
-    {
-        
-        CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        CSharedMaterial material = std::make_shared<CMaterial>();
-        IGameObject::setupMaterial(material, materialConfiguration);
-        m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
-    }
     
 	IGameObject::listenRenderMgr(m_isNeedToRender);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;

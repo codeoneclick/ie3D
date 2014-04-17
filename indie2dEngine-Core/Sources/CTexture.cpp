@@ -89,17 +89,18 @@ m_settedWrapMode(0)
     
 }
 
-CTexture::CTexture(const std::string& guid,
-                   ui32 textureId,
-                   ui32 witdh,
-                   ui32 height) : IResource(E_RESOURCE_CLASS_TEXTURE, guid),
-m_textureId(textureId)
+CSharedTexture CTexture::constructCustomTexture(const std::string& guid,
+                                             ui32 textureId,
+                                             ui32 width,
+                                             ui32 height)
 {
-    m_textureData = std::make_shared<CTextureData>(witdh, height, nullptr,
-                                                   0, 0, 0, false);
-    
-    m_status |= E_RESOURCE_STATUS_LOADED;
-    m_status |= E_RESOURCE_STATUS_COMMITED;
+    CSharedTexture texture = std::make_shared<CTexture>(guid);
+    texture->m_textureId = textureId;
+    texture->m_textureData = std::make_shared<CTextureData>(width, height, nullptr,
+                                                            0, 0, 0, false);
+    texture->m_status |= E_RESOURCE_STATUS_LOADED;
+    texture->m_status |= E_RESOURCE_STATUS_COMMITED;
+    return texture;
 }
 
 CTexture::~CTexture(void)
@@ -107,61 +108,43 @@ CTexture::~CTexture(void)
     glDeleteTextures(1, &m_textureId);
 }
 
-void CTexture::onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
-                                                        E_RESOURCE_DATA_STATUS status)
+void CTexture::onResourceDataSerializationFinished(ISharedResourceDataRef resourceData)
 {
-    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    assert(resourceData != nullptr);
+    switch(resourceData->getResourceDataClass())
     {
-        
-    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
-        assert(resourceData != nullptr);
-        
-        switch(resourceData->getResourceDataClass())
+        case E_RESOURCE_DATA_CLASS_TEXTURE_DATA:
         {
-            case E_RESOURCE_DATA_CLASS_TEXTURE_DATA:
-            {
-                m_textureData = std::static_pointer_cast<CTextureData>(resourceData);
-            }
-                break;
-            default:
-            {
-                assert(false);
-            }
-                break;
+            m_textureData = std::static_pointer_cast<CTextureData>(resourceData);
+            m_status |= E_RESOURCE_STATUS_LOADED;
         }
-        
-    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
-        m_status |= E_RESOURCE_STATUS_LOADED;
+            break;
+        default:
+        {
+            assert(false);
+        }
+            break;
     }
 }
 
-void CTexture::onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
-                                                 E_RESOURCE_DATA_STATUS status)
+void CTexture::onResourceDataCommitFinished(ISharedResourceDataRef resourceData)
 {
-    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    assert(resourceData != nullptr);
+    switch(resourceData->getResourceDataClass())
     {
-        
-    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
-        assert(resourceData != nullptr);
-        
-        switch(resourceData->getResourceDataClass())
+        case E_RESOURCE_DATA_CLASS_TEXTURE_DATA:
         {
-            case E_RESOURCE_DATA_CLASS_TEXTURE_DATA:
-            {
-                CSharedTextureData textureData = std::static_pointer_cast<CTextureData>(resourceData);
-                m_textureId = textureData->getTextureId();
-                assert(m_textureId != 0);
-            }
-                break;
-            default:
-            {
-                assert(false);
-            }
-                break;
+            CSharedTextureData textureData = std::static_pointer_cast<CTextureData>(resourceData);
+            m_textureId = textureData->getTextureId();
+            assert(m_textureId != 0);
+            m_status |= E_RESOURCE_STATUS_COMMITED;
         }
-        
-    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
-        m_status |= E_RESOURCE_STATUS_COMMITED;
+            break;
+        default:
+        {
+            assert(false);
+        }
+            break;
     }
 }
 

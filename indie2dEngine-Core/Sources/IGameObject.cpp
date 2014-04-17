@@ -69,6 +69,14 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
 {
     IConfigurationLoadingHandler::onConfigurationLoaded(configuration, success);
     m_configuration = configuration;
+    CSharedConfigurationGameObject gameObjectConfiguration = std::static_pointer_cast<CConfigurationGameObject>(configuration);
+    for(const auto& iterator : gameObjectConfiguration->getMaterialsConfigurations())
+    {
+        CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
+        CSharedMaterial material = std::make_shared<CMaterial>();
+        CMaterial::setupMaterial(material, materialConfiguration, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
+        m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
+    }
 }
 
 i32  IGameObject::getZOrder(void)
@@ -262,53 +270,4 @@ void IGameObject::listenSceneUpdateMgr(bool value)
         m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
     }
     m_isNeedToUpdate = value;
-}
-
-void IGameObject::setupMaterial(CSharedMaterialRef material,
-                                CSharedConfigurationMaterialRef configuration)
-{
-    assert(configuration != nullptr);
-    assert(m_screenSpaceTextureAccessor != nullptr);
-	assert(m_resourceAccessor != nullptr);
-    
-    material->setCulling(configuration->isCulling());
-    material->setCullingMode(configuration->getCullingMode());
-    
-    material->setBlending(configuration->isBlending());
-    material->setBlendingFunctionSource(configuration->getBlendingFunctionSource());
-    material->setBlendingFunctionDestination(configuration->getBlendingFunctionDestination());
-    
-    material->setDepthTest(configuration->isDepthTest());
-    material->setDepthMask(configuration->isDepthMask());
-    
-    material->setClipping(configuration->isClipping());
-    material->setClippingPlane(configuration->getClippingPlane());
-    
-    material->setReflecting(configuration->isReflecting());
-    material->setShadowing(configuration->isShadowing());
-    material->setDebugging(configuration->isDebugging());
-    
-    for(const auto& iterator : configuration->getTexturesConfigurations())
-    {
-        CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
-        assert(textureConfiguration != nullptr);
-        
-        CSharedTexture texture = textureConfiguration->getFilename().length() != 0 ?
-        m_resourceAccessor->getTexture(textureConfiguration->getFilename()) :
-        m_screenSpaceTextureAccessor->Get_RenderOperationTexture(textureConfiguration->getRenderOperationName());
-        texture->registerLoadingHandler(shared_from_this());
-        assert(texture != nullptr);
-        texture->setWrapMode(textureConfiguration->getWrapMode());
-        assert(textureConfiguration->getSamplerIndex() >= 0 &&
-               textureConfiguration->getSamplerIndex() < E_SHADER_SAMPLER_MAX);
-        material->setTexture(texture, static_cast<E_SHADER_SAMPLER>(textureConfiguration->getSamplerIndex()));
-    }
-    
-    CSharedConfigurationShader shaderConfiguration = std::static_pointer_cast<CConfigurationShader>(configuration->getShaderConfiguration());
-    assert(shaderConfiguration != nullptr);
-    CSharedShader shader = m_resourceAccessor->getShader(shaderConfiguration->getVSFilename(),
-                                                         shaderConfiguration->getFSFilename());
-    assert(shader != nullptr);
-    material->setShader(shader);
-    shader->registerLoadingHandler(shared_from_this());
 }

@@ -26,13 +26,12 @@ CMeshSerializer_MDL::~CMeshSerializer_MDL(void)
 
 void CMeshSerializer_MDL::serialize(void)
 {
-    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_STARTED);
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
     std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename);
     
-    std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh>(m_resource);
+    CSharedMesh mesh = std::static_pointer_cast<CMesh>(m_resource);
     
     ui32 numVertices = 0;
     ui32 numIndices = 0;
@@ -42,8 +41,7 @@ void CMeshSerializer_MDL::serialize(void)
     filestream->read((char*)&numVertices, sizeof(ui32));
     filestream->read((char*)&numIndices, sizeof(ui32));
     
-    std::vector<SVertexData> vertexData;
-    vertexData.resize(numVertices);
+    SVertexData* vertexData = new SVertexData[numVertices];
     
     for(ui32 i = 0; i < numVertices; ++i)
     {
@@ -98,8 +96,7 @@ void CMeshSerializer_MDL::serialize(void)
         }
     }
     
-    std::vector<ui16> indexData;
-    indexData.resize(numIndices);
+    ui16* indexData = new ui16[numIndices];
     
     for(ui32 i = 0; i < numIndices; ++i)
     {
@@ -113,11 +110,12 @@ void CMeshSerializer_MDL::serialize(void)
         indexData[i + 2] = index;
     }
     IResourceSerializer::closeStream(filestream);
-    std::shared_ptr<CMeshData> meshData = std::make_shared<CMeshData>(vertexData,
-                                                                      indexData,
-                                                                      maxBound,
-                                                                      minBound);
-    IResourceSerializer::onResourceDataSerializationStatusChanged(meshData, E_RESOURCE_DATA_STATUS_PROGRESS);
+    CSharedMeshData meshData = std::make_shared<CMeshData>(vertexData,
+                                                           indexData,
+                                                           numVertices,
+                                                           numIndices,
+                                                           maxBound,
+                                                           minBound);
     m_status = E_SERIALIZER_STATUS_SUCCESS;
-    IResourceSerializer::onResourceDataSerializationStatusChanged(nullptr, E_RESOURCE_DATA_STATUS_FINISHED);
+    IResourceSerializer::onResourceDataSerializationFinished(meshData);
 }

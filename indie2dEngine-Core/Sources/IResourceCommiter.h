@@ -23,7 +23,7 @@ protected:
     ISharedResource m_resource;
     E_COMMITER_STATUS m_status;
     
-    void onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData, E_RESOURCE_DATA_STATUS status);
+    void onResourceDataCommitFinished(ISharedResourceDataRef resourceData);
     
 public:
     

@@ -305,62 +305,44 @@ CShader::~CShader(void)
     glDeleteProgram(m_shaderId);
 }
 
-void CShader::onResourceDataSerializationStatusChanged(ISharedResourceDataRef resourceData,
-                                                       E_RESOURCE_DATA_STATUS status)
+void CShader::onResourceDataSerializationFinished(ISharedResourceDataRef resourceData)
 {
-    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    assert(resourceData != nullptr);
+    switch(resourceData->getResourceDataClass())
     {
-        
-    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
-        assert(resourceData != nullptr);
-        
-        switch(resourceData->getResourceDataClass())
+        case E_RESOURCE_DATA_CLASS_SHADER_DATA:
         {
-            case E_RESOURCE_DATA_CLASS_SHADER_DATA:
-            {
-                m_shaderData = std::static_pointer_cast<CShaderData>(resourceData);
-            }
-                break;
-            default:
-            {
-                assert(false);
-            }
-                break;
+            m_shaderData = std::static_pointer_cast<CShaderData>(resourceData);
+            m_status |= E_RESOURCE_STATUS_LOADED;
         }
-        
-    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
-        m_status |= E_RESOURCE_STATUS_LOADED;
+            break;
+        default:
+        {
+            assert(false);
+        }
+            break;
     }
 }
 
-void CShader::onResourceDataCommitStatusChanged(ISharedResourceDataRef resourceData,
-                                                E_RESOURCE_DATA_STATUS status)
+void CShader::onResourceDataCommitFinished(ISharedResourceDataRef resourceData)
 {
-    if(status == E_RESOURCE_DATA_STATUS_STARTED)
+    assert(resourceData != nullptr);
+    switch(resourceData->getResourceDataClass())
     {
-        
-    } else if(status == E_RESOURCE_DATA_STATUS_PROGRESS) {
-        assert(resourceData != nullptr);
-        
-        switch(resourceData->getResourceDataClass())
+        case E_RESOURCE_DATA_CLASS_SHADER_DATA:
         {
-            case E_RESOURCE_DATA_CLASS_SHADER_DATA:
-            {
-                CSharedShaderData shaderData = std::static_pointer_cast<CShaderData>(resourceData);
-                m_shaderId = shaderData->getShaderId();
-                assert(m_shaderId != 0);
-                CShader::setupUniforms();
-            }
-                break;
-            default:
-            {
-                assert(false);
-            }
-                break;
+            CSharedShaderData shaderData = std::static_pointer_cast<CShaderData>(resourceData);
+            m_shaderId = shaderData->getShaderId();
+            assert(m_shaderId != 0);
+            CShader::setupUniforms();
+            m_status |= E_RESOURCE_STATUS_COMMITED;
         }
-        
-    } else if(status == E_RESOURCE_DATA_STATUS_FINISHED) {
-        m_status |= E_RESOURCE_STATUS_COMMITED;
+            break;
+        default:
+        {
+            assert(false);
+        }
+            break;
     }
 }
 

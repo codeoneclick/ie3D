@@ -74,7 +74,8 @@ m_edgesMaskTexture(nullptr)
             
             std::shared_ptr<CVertexBuffer> vertexBuffer = CHeightmapProcessor::_CreateVertexBuffer(i, j, m_chunkWidth * m_chunkHeight, GL_STATIC_DRAW, &maxBound, &minBound);
             std::shared_ptr<CIndexBuffer> indexBuffer =CHeightmapProcessor::_CreateIndexBuffer();
-            std::shared_ptr<CMesh> mesh = std::make_shared<CMesh>("landscape", vertexBuffer, indexBuffer);
+            std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh("landscape", vertexBuffer, indexBuffer,
+                                                                  maxBound, minBound);
             m_chunks[i + j * m_numChunkRows] = mesh;
             
         }
@@ -116,17 +117,11 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessHeightmapTexture(void)
         }
     }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
-
-    //std::shared_ptr<CTextureHeader> heightmapTextureHeader = std::make_shared<CTextureHeader>();
-    //heightmapTextureHeader->_Set_Width(m_width);
-    //heightmapTextureHeader->_Set_Height(m_height);
     
-    m_heightmapTexture = std::make_shared<CTexture>("heightmap",
-                                                    textureHandle,
-                                                    m_width,
-                                                    m_height);
-    //m_heightmapTexture->Set_Header(heightmapTextureHeader);
-    //m_heightmapTexture->Set_Handle(textureHandle);
+    m_heightmapTexture = CTexture::constructCustomTexture("heightmap",
+                                                       textureHandle,
+                                                       m_width,
+                                                       m_height);
     m_heightmapTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     return m_heightmapTexture;
 }
@@ -169,16 +164,10 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingTexture(void)
     }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
     
-    //std::shared_ptr<CTextureHeader> splattingTextureHeader = std::make_shared<CTextureHeader>();
-    //splattingTextureHeader->_Set_Width(m_width);
-    //splattingTextureHeader->_Set_Height(m_height);
-    
-    m_splattingTexture = std::make_shared<CTexture>("splatting",
-                                                    textureHandle,
-                                                    m_width,
-                                                    m_height);
-    //m_splattingTexture->Set_Header(splattingTextureHeader);
-    //m_splattingTexture->Set_Handle(textureHandle);
+    m_splattingTexture = CTexture::constructCustomTexture("splatting",
+                                                       textureHandle,
+                                                       m_width,
+                                                       m_height);
     m_splattingTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     
     return m_splattingTexture;
@@ -250,23 +239,17 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessEdgesMaskTexture(void)
                                   edgesMaskWidth,
                                   edgesMaskHeight,
                                   edgesMaskWidth * (edgesMaskHeight / 4) * 3,
-                                  glm::vec3((m_width - 1), 0.0f, static_cast<float>(i) / static_cast<float>(edgesMaskWidth) * m_width),
-                                  true);
+                                                        glm::vec3((m_width - 1), 0.0f, static_cast<float>(i) / static_cast<float>(edgesMaskWidth) * m_width),
+                                                        true);
     }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, edgesMaskWidth, edgesMaskHeight, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
     
-    //std::shared_ptr<CTextureHeader> edgesMaskTextureHeader = std::make_shared<CTextureHeader>();
-    //edgesMaskTextureHeader->_Set_Width(edgesMaskWidth);
-    //edgesMaskTextureHeader->_Set_Height(edgesMaskHeight);
-    
-    m_edgesMaskTexture = std::make_shared<CTexture>("edges",
-                                                    textureHandle,
-                                                    edgesMaskWidth,
-                                                    edgesMaskHeight);
-    //m_edgesMaskTexture->Set_Header(edgesMaskTextureHeader);
-    //m_edgesMaskTexture->Set_Handle(textureHandle);
+    m_edgesMaskTexture = CTexture::constructCustomTexture("edges",
+                                                       textureHandle,
+                                                       edgesMaskWidth,
+                                                       edgesMaskHeight);
     m_edgesMaskTexture->setWrapMode(GL_CLAMP_TO_EDGE);
-
+    
     return m_edgesMaskTexture;
 }
 

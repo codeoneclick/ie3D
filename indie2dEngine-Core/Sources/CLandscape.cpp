@@ -100,12 +100,12 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     
     CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingDiffuseMaterialConfiguration());
     m_splattingDiffuseMaterial = std::make_shared<CMaterial>();
-    IGameObject::setupMaterial(m_splattingDiffuseMaterial, materialConfiguration);
+    CMaterial::setupMaterial(m_splattingDiffuseMaterial, materialConfiguration, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
     m_splattingDiffuseMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
     materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingNormalMaterialConfiguration());
     m_splattingNormalMaterial = std::make_shared<CMaterial>();
-    IGameObject::setupMaterial(m_splattingNormalMaterial, materialConfiguration);
+    CMaterial::setupMaterial(m_splattingNormalMaterial, materialConfiguration, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
     m_splattingNormalMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
     m_numChunkRows = m_heightmapProcessor->Get_NumChunkRows();

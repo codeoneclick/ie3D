@@ -59,9 +59,6 @@ protected:
     bool m_isNeedToUpdate;
     bool m_isBatching;
     
-    virtual void setupMaterial(CSharedMaterialRef material,
-                               CSharedConfigurationMaterialRef configuration);
-    
     virtual void onSceneUpdate(f32 deltatime);
     
     virtual void onResourceLoaded(ISharedResourceRef resource, bool success);
