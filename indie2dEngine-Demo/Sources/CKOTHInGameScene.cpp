@@ -38,7 +38,7 @@ CKOTHInGameScene::~CKOTHInGameScene(void)
 void CKOTHInGameScene::Load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->CreateCamera(60.0f,
+    m_camera = m_root->CreateCamera(90.0f,
                                     0.1f,
                                     256.0f,
                                     glm::ivec4(0, 0, static_cast<i32>(Get_ScreenWidth()), static_cast<i32>(Get_ScreenHeight())));
@@ -91,7 +91,7 @@ void CKOTHInGameScene::Load(void)
     
     std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
     m_root->InsertOcean(ocean);
-    ocean->setPosition(glm::vec3(-128.0f, 0.0f, -128.0f));
+    ocean->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));

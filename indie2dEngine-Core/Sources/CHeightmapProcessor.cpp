@@ -87,41 +87,39 @@ CHeightmapProcessor::~CHeightmapProcessor(void)
     
 }
 
-std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessHeightmapTexture(void)
+ui32 CHeightmapProcessor::createTextureId(void)
 {
-    assert(m_heightmapTexture == nullptr);
-    
-    ui32 textureHandle;
-    glGenTextures(1, &textureHandle);
-    glBindTexture(GL_TEXTURE_2D, textureHandle);
+    ui32 textureId;
+    glGenTextures(1, &textureId);
+    glBindTexture(GL_TEXTURE_2D, textureId);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    return textureId;
+}
 
-    ui16* data = new ui16[m_width * m_height];
+std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessHeightmapTexture(void)
+{
+    assert(m_heightmapTexture == nullptr);
+    ui32 textureId = CHeightmapProcessor::createTextureId();
+    ui8* data = new ui8[m_width * m_height];
     for(int i = 0; i < m_width; i++)
     {
         for(int j = 0; j < m_height; j++)
         {
             f32 height = CHeightmapHelper::Get_HeightValue(m_heightmapData, m_width, m_height, glm::vec3(i , 0.0f, j));
             height /= m_maxAltitude;
-            if(height > 0.0f || height < -1.0f)
-            {
-                data[i + j * m_height] = TO_RGB565(0, static_cast<ui8>(255), 0);
-            }
-            else
-            {
-                data[i + j * m_height] = TO_RGB565(static_cast<ui8>(fabsf(height) * 255), 0, 0);
-            }
+            ui8 color = static_cast<ui8>((height + 1.0) / 2.0 * 255);
+            data[i + j * m_height] = color;//TO_RGB565(color, color, color);
         }
     }
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, m_width, m_height, 0, GL_ALPHA, GL_UNSIGNED_BYTE, data);
     
-    m_heightmapTexture = CTexture::constructCustomTexture("heightmap",
-                                                       textureHandle,
-                                                       m_width,
-                                                       m_height);
+    m_heightmapTexture = CTexture::constructCustomTexture("landscape.heightmap",
+                                                          textureId,
+                                                          m_width,
+                                                          m_height);
     m_heightmapTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     return m_heightmapTexture;
 }
@@ -129,17 +127,8 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessHeightmapTexture(void)
 std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingTexture(void)
 {
     assert(m_splattingTexture == nullptr);
-    
-    ui32 textureHandle;
-    glGenTextures(1, &textureHandle);
-    glBindTexture(GL_TEXTURE_2D, textureHandle);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    
+    ui32 textureId = CHeightmapProcessor::createTextureId();
     ui16* data = new ui16[m_width * m_height];
-    
     for(int i = 0; i < m_width; i++)
     {
         for(int j = 0; j < m_height; j++)
@@ -155,7 +144,7 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingTexture(void)
             {
                 data[i + j * m_width] = TO_RGB565(0, 0, 255);
             }
-
+            
             if( i == 0 || j == 0 || i == (m_width - 1) || j == (m_height - 1))
             {
                 data[i + j * m_width] = TO_RGB565(255, 0, 0);
@@ -164,10 +153,10 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingTexture(void)
     }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
     
-    m_splattingTexture = CTexture::constructCustomTexture("splatting",
-                                                       textureHandle,
-                                                       m_width,
-                                                       m_height);
+    m_splattingTexture = CTexture::constructCustomTexture("landscape.splatting",
+                                                          textureId,
+                                                          m_width,
+                                                          m_height);
     m_splattingTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     
     return m_splattingTexture;
@@ -195,59 +184,52 @@ void CHeightmapProcessor::_FillEdgesMaskTextureBlock(ui16* _data, ui32 _index, u
 
 std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessEdgesMaskTexture(void)
 {
-    ui32 textureHandle;
-    glGenTextures(1, &textureHandle);
-    glBindTexture(GL_TEXTURE_2D, textureHandle);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    
     ui32 edgesMaskWidth = 2048;
     ui32 edgesMaskHeight = 2048;
 
+    ui32 textureId = CHeightmapProcessor::createTextureId();
     ui16* data = new ui16[edgesMaskWidth * edgesMaskHeight];
     for(ui32 i = 0; i < edgesMaskWidth; ++i)
     {
         CHeightmapProcessor::_FillEdgesMaskTextureBlock(data,
-                                  i,
-                                  edgesMaskWidth,
-                                  edgesMaskHeight,
-                                  0,
-                                  glm::vec3(static_cast<f32>(i) / static_cast<f32>(edgesMaskWidth) * m_width, 0.0f, 0.0f),
-                                  true);
+                                                        i,
+                                                        edgesMaskWidth,
+                                                        edgesMaskHeight,
+                                                        0,
+                                                        glm::vec3(static_cast<f32>(i) / static_cast<f32>(edgesMaskWidth) * m_width, 0.0f, 0.0f),
+                                                        true);
         
         CHeightmapProcessor::_FillEdgesMaskTextureBlock(data,
-                                  i,
-                                  edgesMaskWidth,
-                                  edgesMaskHeight,
-                                  edgesMaskWidth * (edgesMaskHeight / 4),
-                                  glm::vec3(static_cast<f32>(i) / static_cast<f32>(edgesMaskWidth) * m_width, 0.0f, (m_width - 1)),
-                                  false);
-
+                                                        i,
+                                                        edgesMaskWidth,
+                                                        edgesMaskHeight,
+                                                        edgesMaskWidth * (edgesMaskHeight / 4),
+                                                        glm::vec3(static_cast<f32>(i) / static_cast<f32>(edgesMaskWidth) * m_width, 0.0f, (m_width - 1)),
+                                                        false);
+        
         
         CHeightmapProcessor::_FillEdgesMaskTextureBlock(data,
-                                  i,
-                                  edgesMaskWidth,
-                                  edgesMaskHeight,
-                                  edgesMaskWidth * (edgesMaskHeight / 4) * 2,
-                                  glm::vec3(0.0f, 0.0f, static_cast<float>(i) / static_cast<float>(edgesMaskWidth) * m_width),
-                                  false);
+                                                        i,
+                                                        edgesMaskWidth,
+                                                        edgesMaskHeight,
+                                                        edgesMaskWidth * (edgesMaskHeight / 4) * 2,
+                                                        glm::vec3(0.0f, 0.0f, static_cast<float>(i) / static_cast<float>(edgesMaskWidth) * m_width),
+                                                        false);
         
         CHeightmapProcessor::_FillEdgesMaskTextureBlock(data,
-                                  i,
-                                  edgesMaskWidth,
-                                  edgesMaskHeight,
-                                  edgesMaskWidth * (edgesMaskHeight / 4) * 3,
+                                                        i,
+                                                        edgesMaskWidth,
+                                                        edgesMaskHeight,
+                                                        edgesMaskWidth * (edgesMaskHeight / 4) * 3,
                                                         glm::vec3((m_width - 1), 0.0f, static_cast<float>(i) / static_cast<float>(edgesMaskWidth) * m_width),
                                                         true);
     }
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, edgesMaskWidth, edgesMaskHeight, 0, GL_RGBA, GL_UNSIGNED_SHORT_4_4_4_4, data);
     
-    m_edgesMaskTexture = CTexture::constructCustomTexture("edges",
-                                                       textureHandle,
-                                                       edgesMaskWidth,
-                                                       edgesMaskHeight);
+    m_edgesMaskTexture = CTexture::constructCustomTexture("landscape.edges",
+                                                          textureId,
+                                                          edgesMaskWidth,
+                                                          edgesMaskHeight);
     m_edgesMaskTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     
     return m_edgesMaskTexture;

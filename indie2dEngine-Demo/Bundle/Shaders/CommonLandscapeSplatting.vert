@@ -14,6 +14,6 @@ varying vec2   OUT_TexCoordScaled;
 void main(void)
 {
     OUT_TexCoord = IN_TexCoord / 32767.0  - 1.0;
-    OUT_TexCoordScaled = OUT_TexCoord * 16.0;
+    OUT_TexCoordScaled = OUT_TexCoord * 8.0;
     gl_Position = vec4(IN_Position, 1.0);
 }

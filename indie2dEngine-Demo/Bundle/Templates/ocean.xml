@@ -1,6 +1,6 @@
 <ocean
-    size_x="512"
-    size_y="512"
+    size_x="128"
+    size_y="128"
     altitude="-0.25"
     wave_generation_interval="0.005">
 	<materials>

@@ -99,9 +99,9 @@ std::shared_ptr<CTexture> CRenderMgr::Get_RenderOperationTexture(const std::stri
     return texture;
 }
 
-std::shared_ptr<CTexture> CRenderMgr::Get_CustomScreenSpaceOperationTexture(const std::shared_ptr<CMaterial> _material, ui32 _textureWidth, ui32 _textureHeight)
+std::shared_ptr<CTexture> CRenderMgr::Get_CustomScreenSpaceOperationTexture(CSharedMaterialRef material, ui32 width, ui32 height)
 {
-    std::shared_ptr<CRenderOperationScreenSpace> operation = std::make_shared<CRenderOperationScreenSpace>(_textureWidth, _textureHeight, "render.mode.custom", _material);
+    std::shared_ptr<CRenderOperationScreenSpace> operation = std::make_shared<CRenderOperationScreenSpace>(width, height, "render.mode.custom", material);
     m_customScreenSpaceOperationsQueue.push(operation);
     return operation->Get_OperatingTexture();
 }

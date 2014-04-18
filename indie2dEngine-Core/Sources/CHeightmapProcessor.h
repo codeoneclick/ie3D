@@ -27,11 +27,11 @@ protected:
 
     f32* m_heightmapData;
 
-    std::shared_ptr<CTexture> m_heightmapTexture;
-    std::shared_ptr<CTexture> m_splattingTexture;
-    std::shared_ptr<CTexture> m_diffuseTexture;
-    std::shared_ptr<CTexture> m_normalTexture;
-    std::shared_ptr<CTexture> m_edgesMaskTexture;
+    CSharedTexture m_heightmapTexture;
+    CSharedTexture m_splattingTexture;
+    CSharedTexture m_diffuseTexture;
+    CSharedTexture m_normalTexture;
+    CSharedTexture m_edgesMaskTexture;
 
     ui32 m_width;
     ui32 m_height;
@@ -55,6 +55,8 @@ protected:
     std::shared_ptr<CVertexBuffer> _CreateVertexBuffer(ui32 _widthOffset, ui32 _heightOffset, ui32 _numVertexes, GLenum _mode, glm::vec3* _maxBound, glm::vec3* _minBound);
 
     void _FillEdgesMaskTextureBlock(ui16* _data,ui32 _index, ui32 _edgesMaskWidth, ui32 _edgesMaskHeight, ui32 _textureBlockSize, const glm::vec3& _point, bool _reverse);
+    
+    ui32 createTextureId(void);
 
 public:
 

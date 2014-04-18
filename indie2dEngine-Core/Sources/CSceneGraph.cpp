@@ -146,6 +146,8 @@ void CSceneGraph::InsertLandscape(const std::shared_ptr<CLandscape> &_landscape)
 {
     CSceneGraph::_InsertGameObject(_landscape);
     m_landscapeContainer = _landscape;
+    
+    
 }
 
 void CSceneGraph::RemoveLandscape(const std::shared_ptr<CLandscape> &_landscape)

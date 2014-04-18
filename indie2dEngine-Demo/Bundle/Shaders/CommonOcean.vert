@@ -27,23 +27,26 @@ varying vec3   OUT_LightPosition;
 varying vec3   OUT_CameraDirection;
 varying vec3   OUT_CameraPosition;
 varying vec3   OUT_Position;
+varying vec2   OUT_TexCoord;
 varying vec4   OUT_TexCoordProjection;
 varying vec2   OUT_TexCoordDisplace_01;
 varying vec2   OUT_TexCoordDisplace_02;
 
-const float k_fTexCoordScale = 16.0;
+const float k_fTexCoordScale = 8.0;
 
 void main(void)
 {
     vec4 vPosition = MATRIX_World * vec4(IN_Position, 1.0);
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
     
-    vec2 vTexCoord = (IN_TexCoord / 32767.0  - 1.0) * k_fTexCoordScale;
-    OUT_TexCoordDisplace_01 = vec2(vTexCoord.x + sin(FLOAT_Timer),
-                                   vTexCoord.y - cos(FLOAT_Timer));
+    vec2 vTexCoord = (IN_TexCoord / 32767.0  - 1.0);
+    OUT_TexCoord = vTexCoord;
+    vTexCoord *= k_fTexCoordScale;
+    OUT_TexCoordDisplace_01 = vec2(vTexCoord.x + sin(FLOAT_Timer) * 0.25,
+                                   vTexCoord.y - cos(FLOAT_Timer) * 0.75);
 	
-	OUT_TexCoordDisplace_02 = vec2(vTexCoord.x - sin(FLOAT_Timer),
-                                   vTexCoord.y + cos(FLOAT_Timer));
+	OUT_TexCoordDisplace_02 = vec2(vTexCoord.x - sin(FLOAT_Timer) * 0.75,
+                                   vTexCoord.y + cos(FLOAT_Timer) * 0.25);
     OUT_TexCoordProjection = gl_Position;
     
     OUT_LightPosition = VECTOR_LightPosition_01;

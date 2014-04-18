@@ -29,7 +29,6 @@
 IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> _ConfigurationAccessor) :
 IFabricator(_ConfigurationAccessor, _resourceAccessor),
 CSceneFabricator(_ConfigurationAccessor, _resourceAccessor),
-//CGUIFabricator(_ConfigurationAccessor, _resourceAccessor),
 m_guid(_filename),
 m_scene(nullptr),
 m_isLoaded(false)

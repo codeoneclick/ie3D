@@ -10,9 +10,7 @@
 #define IScreenSpaceTextureAccessor_h
 
 #include "HCommon.h"
-
-class CTexture;
-class CMaterial;
+#include "HDeclaration.h"
 
 class IScreenSpaceTextureAccessor
 {
@@ -20,13 +18,21 @@ private:
 
 protected:
 
+    std::unordered_map<std::string, CSharedTexture> m_customTextures;
+    
 public:
     
     IScreenSpaceTextureAccessor(void);
     virtual ~IScreenSpaceTextureAccessor(void);
     
-	virtual std::shared_ptr<CTexture> Get_RenderOperationTexture(const std::string& _mode) = 0;
-    virtual std::shared_ptr<CTexture> Get_CustomScreenSpaceOperationTexture(const std::shared_ptr<CMaterial> _material, ui32 _textureWidth, ui32 _textureHeight) = 0;
+	virtual CSharedTexture Get_RenderOperationTexture(const std::string& mode) = 0;
+    
+    virtual CSharedTexture Get_CustomScreenSpaceOperationTexture(CSharedMaterialRef material,
+                                                                 ui32 width,
+                                                                 ui32 height) = 0;
+    
+    void addCustomTexture(CSharedTextureRef texture);
+    CSharedTexture getCustomTexture(const std::string& guid);
 };
 
 #endif
