@@ -73,6 +73,7 @@ void CParticleEmitter::onSceneUpdate(f32 deltatime)
                 {
                     m_lastEmittTimestamp = currentTime;
                     CParticleEmitter::emittParticle(i);
+                    particleAge = 0;
                 }
                 else
                 {
