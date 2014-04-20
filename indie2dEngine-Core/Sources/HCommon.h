@@ -53,7 +53,7 @@
 #include <pugixml/pugixml.hpp>
 
 #if defined(__USE_GCDPP__)
-#include "gcdppLib.h"
+
 #endif
 
 #if defined(__USE_CURL__)

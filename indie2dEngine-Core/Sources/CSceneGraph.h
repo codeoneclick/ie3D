@@ -12,6 +12,7 @@
 #include "HCommon.h"
 #include "HEnums.h"
 #include "IGraph.h"
+#include "HDeclaration.h"
 
 class CCamera;
 class CLight;
@@ -26,8 +27,6 @@ class CRenderMgr;
 class CSceneUpdateMgr;
 class CCollisionMgr;
 class ICollisionHandler;
-class IInputTapRecognizerHandler;
-class IInputContext;
 
 class CSceneGraph : public virtual IGraph
 {
@@ -79,8 +78,8 @@ public:
     void InsertParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter);
     void RemoveParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter);
     
-    void RegisterTapRecognizerHandler(const std::shared_ptr<IInputTapRecognizerHandler>& _handler);
-    void UnregisterTapRecognizerHandler(const std::shared_ptr<IInputTapRecognizerHandler>& _handler);
+    void addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
+    void removeGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
     
     void RegisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler);
     void UnregisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler);

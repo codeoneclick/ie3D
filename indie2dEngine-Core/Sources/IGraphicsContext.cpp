@@ -7,49 +7,25 @@
 //
 
 #include "IGraphicsContext.h"
+#include "IOGLWindow.h"
 
-class CGraphicsContext_iOS;
+extern std::shared_ptr<IGraphicsContext> createGraphicsContext_ios(const std::shared_ptr<IOGLWindow>& window);
+extern std::shared_ptr<IGraphicsContext> createGraphicsContext_win32(const std::shared_ptr<IOGLWindow>& window);
+extern std::shared_ptr<IGraphicsContext> createGraphicsContext_osx(const std::shared_ptr<IOGLWindow>& window);
+extern std::shared_ptr<IGraphicsContext> createGraphicsContext_ndk(const std::shared_ptr<IOGLWindow>& window);
 
-#if defined(__NDK__)
-
-ANativeWindow* IGraphicsContext::m_AWindow = nullptr;
-
-#endif
-
-extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_iOS(const void* _hwnd);
-extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_win32(const void* _hwnd);
-extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_osx(const void* _hwnd);
-extern std::shared_ptr<IGraphicsContext> CreateGraphicsContext_ndk(const void* _hwnd);
-
-std::vector<std::shared_ptr<IGraphicsContext> > IGraphicsContext::m_contexts;
-
-IGraphicsContext::IGraphicsContext(void)
-{
-}
-
-IGraphicsContext::~IGraphicsContext(void)
-{
-    std::vector<std::shared_ptr<IGraphicsContext>>::iterator iterator = std::find(m_contexts.begin(), m_contexts.end(), shared_from_this());
-    assert(iterator != m_contexts.end());
-    m_contexts.erase(iterator);
-}
-
-std::shared_ptr<IGraphicsContext> IGraphicsContext::CreateGraphicsContext(const void* _hwnd, E_PLATFORM_API _api)
+std::shared_ptr<IGraphicsContext> IGraphicsContext::createGraphicsContext(ISharedOGLWindowRef window,
+                                                                          E_PLATFORM_API api)
 {
     std::shared_ptr<IGraphicsContext> context = nullptr;
-    switch (_api)
+    switch (api)
     {
         case E_PLATFORM_API_IOS:
         {
 #if defined(__IOS__)
-            
-            context = CreateGraphicsContext_iOS(_hwnd);
-            m_contexts.push_back(context);
-            
+            context = createGraphicsContext_ios(window);
 #else
-            
             assert(false);
-            
 #endif
         }
             break;
@@ -57,37 +33,31 @@ std::shared_ptr<IGraphicsContext> IGraphicsContext::CreateGraphicsContext(const 
         case E_PLATFORM_API_WIN32:
         {
 #if defined(__WIN32__)
-            
-            context = CreateGraphicsContext_win32(_hwnd);
-            m_contexts.push_back(context);
-            
+            context = createGraphicsContext_win32(window);
 #else
             assert(false);
-            
 #endif
         }
             break;
-#if defined(__OSX__)
+            
         case E_PLATFORM_API_OSX:
         {
-            context = CreateGraphicsContext_osx(_hwnd);
-            m_contexts.push_back(context);
-        }
-            break;
+#if defined(__OSX__)
+            context = createGraphicsContext_osx(window);
 #else
             assert(false);
 #endif
-#if defined(__NDK__)
+        }
+            break;
         case E_PLATFORM_API_NDK:
         {
-            context = CreateGraphicsContext_ndk(_hwnd);
-            m_contexts.push_back(context);
-        }
-            break;
+#if defined(__NDK__)
+            context = createGraphicsContext_ndk(window);
 #else
             assert(false);
 #endif
-            
+        }
+            break;
         default:
         {
             assert(false);
@@ -97,3 +67,30 @@ std::shared_ptr<IGraphicsContext> IGraphicsContext::CreateGraphicsContext(const 
     assert(context != nullptr);
     return context;
 }
+
+ui32 IGraphicsContext::getFrameBuffer(void) const
+{
+    return m_frameBuffer;
+}
+
+ui32 IGraphicsContext::getRenderBuffer(void) const
+{
+    return m_renderBuffer;
+}
+
+ui32 IGraphicsContext::getDepthBuffer(void) const
+{
+    return m_depthBuffer;
+}
+
+ui32 IGraphicsContext::getWidth(void) const
+{
+    return m_window->getWidth();
+}
+
+ui32 IGraphicsContext::getHeight(void) const
+{
+    return m_window->getHeight();
+}
+
+

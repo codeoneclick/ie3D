@@ -7,52 +7,34 @@
 //
 
 #include "IInputContext.h"
-#include "IInputTapRecognizerHandler.h"
 
 #if defined(__OSX__)
 
-IInputContext::IInputContext(void* _hwnd)
+class IInputContext_osx : public IInputContext
+{
+private:
+    
+protected:
+    
+public:
+    
+    IInputContext_osx(ISharedOGLWindowRef window);
+    ~IInputContext_osx(void);
+};
+
+std::shared_ptr<IInputContext> createInputContext_osx(ISharedOGLWindowRef window)
+{
+    return std::make_shared<IInputContext_osx>(window);
+};
+
+IInputContext_osx::IInputContext_osx(ISharedOGLWindowRef window)
 {
 
 }
 
-IInputContext::~IInputContext(void)
+IInputContext_osx::~IInputContext_osx(void)
 {
     
-}
-
-void IInputContext::TapRecognizerPressed(const glm::ivec2& _point)
-{
-	for(const auto& handler : m_handlers)
-    {
-        handler->_Get_Commands()._ExecuteInputTapRecognizerDidPressedCommand(_point);
-    }
-}
-
-void IInputContext::TapRecognizerMoved(const glm::ivec2& _point)
-{
-	for(const auto& handler : m_handlers)
-    {
-        handler->_Get_Commands()._ExecuteInputTapRecognizerDidMovedCommand(_point);
-    }
-}
-
-void IInputContext::TapRecognizerReleased(const glm::ivec2& _point)
-{
-	for(const auto& handler : m_handlers)
-    {
-        handler->_Get_Commands()._ExecuteInputTapRecognizerDidReleasedCommand(_point);
-    }
-}
-
-void IInputContext::RegisterTapRecognizerHandler(std::shared_ptr<IInputTapRecognizerHandler> _handler)
-{
-    m_handlers.insert(_handler);
-}
-
-void IInputContext::UnregisterTapRecognizerHandler(std::shared_ptr<IInputTapRecognizerHandler> _handler)
-{
-    m_handlers.erase(_handler);
 }
 
 #endif

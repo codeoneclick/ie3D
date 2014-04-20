@@ -7,7 +7,6 @@
 //
 
 #include "IInputContext.h"
-#include "IInputTapRecognizerHandler.h"
 
 #if defined(__NDK__)
 

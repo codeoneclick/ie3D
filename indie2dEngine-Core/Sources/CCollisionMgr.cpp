@@ -35,11 +35,11 @@ void CCollisionMgr::UnregisterCollisionHandler(std::shared_ptr<ICollisionHandler
     m_handlers.erase(_handler);
 }
 
-void CCollisionMgr::_OnInputTapRecognizerPressed(const glm::ivec2& _point)
+void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point)
 {
     assert(m_camera != nullptr);
     glm::vec3 origin, direction;
-    CCollisionMgr::Unproject(_point, m_camera->Get_ViewMatrix(), m_camera->Get_ProjectionMatrix(), m_camera->Get_Viewport(), &origin, &direction);
+    CCollisionMgr::Unproject(point, m_camera->Get_ViewMatrix(), m_camera->Get_ProjectionMatrix(), m_camera->Get_Viewport(), &origin, &direction);
     
     for(const auto& handler : m_handlers)
     {
@@ -55,12 +55,12 @@ void CCollisionMgr::_OnInputTapRecognizerPressed(const glm::ivec2& _point)
     }
 }
 
-void CCollisionMgr::_OnInputTapRecognizerMoved(const glm::ivec2& _point)
+void CCollisionMgr::onGestureRecognizerMoved(const glm::ivec2& point)
 {
     
 }
 
-void CCollisionMgr::_OnInputTapRecognizerReleased(const glm::ivec2& _point)
+void CCollisionMgr::onGestureRecognizerReleased(const glm::ivec2& point)
 {
     
 }

@@ -37,11 +37,11 @@ protected:
     
 public:
     
-    IScene(IGameTransition* _root);
+    IScene(IGameTransition* root);
     virtual ~IScene(void);
     
-    virtual void Load(void) = 0;
-    virtual void OnUpdate(f32 _deltatime) = 0;
+    virtual void load(void) = 0;
+    virtual void update(f32 deltatime) = 0;
 };
 
 #endif 

@@ -192,15 +192,15 @@ void CSceneGraph::UnregisterCollisionHandler(const std::shared_ptr<ICollisionHan
     m_collisionMgr->UnregisterCollisionHandler(_handler);
 }
 
-void CSceneGraph::RegisterTapRecognizerHandler(const std::shared_ptr<IInputTapRecognizerHandler>& _handler)
+void CSceneGraph::addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler)
 {
     assert(m_inputContext != nullptr);
-    m_inputContext->RegisterTapRecognizerHandler(_handler);
+    m_inputContext->addGestureRecognizerHandler(handler);
 }
 
-void CSceneGraph::UnregisterTapRecognizerHandler(const std::shared_ptr<IInputTapRecognizerHandler>& _handler)
+void CSceneGraph::removeGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler)
 {
     assert(m_inputContext != nullptr);
-    m_inputContext->UnregisterTapRecognizerHandler(_handler);
+    m_inputContext->removeGestureRecognizerHandler(handler);
 }
 

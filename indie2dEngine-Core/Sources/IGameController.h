@@ -23,7 +23,7 @@ protected:
     std::map<std::string, std::shared_ptr<IGameTransition> > m_transitions;
     std::shared_ptr<IGameTransition> m_currentTransition;
     
-    std::shared_ptr<CConfigurationAccessor> m_templateAccessor;
+    std::shared_ptr<CConfigurationAccessor> m_configurationAccessor;
     std::shared_ptr<CResourceAccessor> m_resourceAccessor;
     
 public:

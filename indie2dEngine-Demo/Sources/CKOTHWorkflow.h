@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "IGameController.h"
+#include "HDeclaration.h"
 
 class CKOTHWorkflow : public IGameController
 {
@@ -23,7 +24,7 @@ public:
     CKOTHWorkflow(void);
     ~CKOTHWorkflow(void);
     
-    std::shared_ptr<IGameTransition> CreateKOTHInGameTransition(const std::string& _filename, void* _hwnd);
+    std::shared_ptr<IGameTransition> CreateKOTHInGameTransition(const std::string& filename, ISharedOGLWindowRef window);
 };
 
 #endif 

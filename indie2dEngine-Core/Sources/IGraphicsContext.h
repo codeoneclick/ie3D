@@ -11,12 +11,7 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
-
-#if defined(__NDK__)
-
-struct ANativeWindow;
-
-#endif
+#include "HDeclaration.h"
 
 class IGraphicsContext : public std::enable_shared_from_this<IGraphicsContext>
 {
@@ -24,57 +19,35 @@ private:
     
 protected:
     
-    ui32 m_frameBufferHandle;
-    ui32 m_renderBufferHandle;
-	ui32 m_depthBufferHandle;
+    ui32 m_frameBuffer;
+    ui32 m_renderBuffer;
+	ui32 m_depthBuffer;
     
-    static std::vector<std::shared_ptr<IGraphicsContext> > m_contexts;
+    ISharedOGLWindow m_window;
     
 #if defined(__NDK__)
     
-    static ANativeWindow* m_AWindow;
+    ANativeWindow* m_NDKwindow;
     
 #endif
+    
+    IGraphicsContext(void) = default;
     
 public:
     
-    IGraphicsContext(void);
-    virtual ~IGraphicsContext(void);
+    virtual ~IGraphicsContext(void) = default;
     
-    static std::shared_ptr<IGraphicsContext> CreateGraphicsContext(const void* _hwnd, E_PLATFORM_API _api);
+    static std::shared_ptr<IGraphicsContext> createGraphicsContext(ISharedOGLWindowRef window,
+                                                                   E_PLATFORM_API api);
     
-    inline const ui32 Get_FrameBufferHandle(void) const
-    {
-        return m_frameBufferHandle;
-    };
+    ui32 getFrameBuffer(void) const;
+    ui32 getRenderBuffer(void) const;
+    ui32 getDepthBuffer(void) const;
     
-    inline const ui32 Get_RenderBufferHandle(void) const
-    {
-        return m_renderBufferHandle;
-    };
+    ui32 getWidth(void) const;
+    ui32 getHeight(void) const;
     
-    inline const i32 Get_DepthBufferHandle(void) const
-    {
-        return m_depthBufferHandle;
-    };
-    
-#if defined(__NDK__)
-    
-    void static Set_AWindow(ANativeWindow* _AWindow)
-    {
-        assert(_AWindow != nullptr);
-        m_AWindow = _AWindow;
-    };
-    
-    static ANativeWindow* Get_AWindow(void)
-    {
-        assert(m_AWindow != nullptr);
-        return m_AWindow;
-    };
-    
-#endif
-    
-    virtual void Output(void) const = 0;
+    virtual void draw(void) const = 0;
 };
 
 #endif

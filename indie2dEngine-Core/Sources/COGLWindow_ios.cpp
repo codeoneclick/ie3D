@@ -10,7 +10,7 @@
 
 #if defined(__IOS__)
 
-@implementation IOGLWindow
+@implementation OpenGLView
 
 + (Class) layerClass
 {
@@ -27,5 +27,35 @@
 }
 
 @end
+
+IOGLWindow::IOGLWindow(void* hwnd) :
+m_hwnd(hwnd)
+{
+    assert(m_hwnd != nullptr);
+}
+
+IOGLWindow::~IOGLWindow(void)
+{
+    
+}
+
+const void* IOGLWindow::getHWND(void) const
+{
+    return m_hwnd;
+}
+
+ui32 IOGLWindow::getWidth(void)
+{
+    assert(m_hwnd != nullptr);
+    const UIView* hwnd = (__bridge UIView*)m_hwnd;
+    return static_cast<ui32>(hwnd.frame.size.width);
+}
+
+ui32 IOGLWindow::getHeight(void)
+{
+    assert(m_hwnd != nullptr);
+    const UIView* hwnd = (__bridge UIView*)m_hwnd;
+    return static_cast<ui32>(hwnd.frame.size.height);
+}
 
 #endif

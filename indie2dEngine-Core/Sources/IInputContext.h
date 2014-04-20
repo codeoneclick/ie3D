@@ -10,16 +10,33 @@
 #define IInputContext_h
 
 #include "HCommon.h"
+#include "HDeclaration.h"
+#include "HEnums.h"
 
-class IInputTapRecognizerHandler;
+class IGestureRecognizerHandler
+{
+private:
+    
+    friend class IInputContext;
+    
+protected:
+    
+    IGestureRecognizerHandler(void) = default;
+    
+    virtual void onGestureRecognizerPressed(const glm::ivec2& point) = 0;
+    virtual void onGestureRecognizerMoved(const glm::ivec2& point) = 0;
+    virtual void onGestureRecognizerReleased(const glm::ivec2& point) = 0;
+    
+public:
+    
+    virtual ~IGestureRecognizerHandler(void) = default;
+};
 
 class IInputContext
 {
 private:
 
 protected:
-
-    std::set<std::shared_ptr<IInputTapRecognizerHandler> > m_handlers;
 
 #if defined(__WIN32__)
 
@@ -29,35 +46,42 @@ protected:
     
 #elif defined(__NDK__)
     
-    static IInputContext* m_sharedInstance;
+#endif
+
+    std::set<ISharedGestureRecognizerHandler> m_handlers;
+    IInputContext(void) = default;
+    
+public:
+    
+    virtual ~IInputContext(void);
+    
+#if defined(__WIN32__)
+    
+	static LRESULT CALLBACK inputProcess(HWND hwnd,
+                                         UINT message,
+                                         WPARAM paramW,
+                                         LPARAM paramL);
     
 #endif
-
-public:
-
-    IInputContext(void* _window);
-    ~IInputContext(void);
-
-#if defined(__WIN32__)
-
-	static LRESULT CALLBACK InputProcess(HWND _hwnd, UINT _message, WPARAM _paramW, LPARAM _paramL);
-
-#endif
-
-    void TapRecognizerPressed(const glm::ivec2& _point);
-    void TapRecognizerMoved(const glm::ivec2& _point);
-    void TapRecognizerReleased(const glm::ivec2& _point);
-
-    void RegisterTapRecognizerHandler(std::shared_ptr<IInputTapRecognizerHandler> _handler);
-    void UnregisterTapRecognizerHandler(std::shared_ptr<IInputTapRecognizerHandler> _handler);
+    
+    static std::shared_ptr<IInputContext> createInputContext(ISharedOGLWindowRef window,
+                                                             E_PLATFORM_API api);
+    
+    void gestureRecognizerPressed(const glm::ivec2& point);
+    void gestureRecognizerMoved(const glm::ivec2& point);
+    void gestureRecognizerReleased(const glm::ivec2& point);
+    
+    void addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
+    void removeGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
     
 #if defined(__NDK__)
     
-    static void NativeCallTapRecognizerPressed(const glm::ivec2& _point);
-    static void NativeCallTapRecognizerMoved(const glm::ivec2& _point);
-    static void NativeCallTapRecognizerReleased(const glm::ivec2& _point);
+    static void nativeCallTapRecognizerPressed(const glm::ivec2& point);
+    static void nativeCallTapRecognizerMoved(const glm::ivec2& point);
+    static void nativeCallTapRecognizerReleased(const glm::ivec2& point);
     
 #endif
+    
 };
 
 #endif 

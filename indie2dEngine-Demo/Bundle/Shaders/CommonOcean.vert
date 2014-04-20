@@ -32,7 +32,7 @@ varying vec4   OUT_TexCoordProjection;
 varying vec2   OUT_TexCoordDisplace_01;
 varying vec2   OUT_TexCoordDisplace_02;
 
-const float k_fTexCoordScale = 8.0;
+const float k_fTexCoordScale = 4.0;
 
 void main(void)
 {

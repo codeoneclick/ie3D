@@ -203,6 +203,7 @@ void CParticleEmitter::onBind(const std::string& mode)
 
 void CParticleEmitter::onDraw(const std::string& mode)
 {
+    return;
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_camera != nullptr);

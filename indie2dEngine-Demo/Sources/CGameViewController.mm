@@ -14,7 +14,7 @@
 
 @interface CGameViewController ()
 
-@property (weak, nonatomic) IBOutlet IOGLWindow *m_glWindow;
+@property (weak, nonatomic) IBOutlet OpenGLView *m_openglView;
 @property (unsafe_unretained, nonatomic) std::string result;
 @property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *trianglesLabel;
@@ -37,7 +37,8 @@
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
     
     CKOTHWorkflow* workflow = new CKOTHWorkflow();
-    std::shared_ptr<IGameTransition> transition = workflow->CreateKOTHInGameTransition("main.transition.xml", (__bridge void*)self.m_glWindow);
+    std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)self.m_openglView);
+    std::shared_ptr<IGameTransition> transition = workflow->CreateKOTHInGameTransition("main.transition.xml", window);
     workflow->RegisterTransition(transition);
     workflow->GoToTransition("main.transition.xml");
 }

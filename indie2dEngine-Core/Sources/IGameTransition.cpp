@@ -26,9 +26,9 @@
 #include "IInputContext.h"
 #include "CResourceLoader.h"
 
-IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> _ConfigurationAccessor) :
-IFabricator(_ConfigurationAccessor, _resourceAccessor),
-CSceneFabricator(_ConfigurationAccessor, _resourceAccessor),
+IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> configurationAccessor) :
+IFabricator(configurationAccessor, _resourceAccessor),
+CSceneFabricator(configurationAccessor, _resourceAccessor),
 m_guid(_filename),
 m_scene(nullptr),
 m_isLoaded(false)
@@ -43,7 +43,7 @@ m_isLoaded(false)
     m_collisionMgr = std::make_shared<CCollisionMgr>();
     
     m_inputContext = _inputContext;
-    m_inputContext->RegisterTapRecognizerHandler(m_collisionMgr);
+    m_inputContext->addGestureRecognizerHandler(m_collisionMgr);
 }
 
 IGameTransition::~IGameTransition(void)
@@ -165,3 +165,14 @@ ui32 IGameTransition::Get_TotalNumTriangles(void)
     }
     return numTriangles;
 }
+
+ui32 IGameTransition::getWindowWidth(void) const
+{
+    return m_renderMgr->getWidth();
+}
+
+ui32 IGameTransition::getWindowHeight(void) const
+{
+    return m_renderMgr->getHeight();
+}
+

@@ -38,7 +38,7 @@ CKOTHInGameScene::~CKOTHInGameScene(void)
 void CKOTHInGameScene::Load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->CreateCamera(90.0f,
+    m_camera = m_root->CreateCamera(60.0f,
                                     0.1f,
                                     256.0f,
                                     glm::ivec4(0, 0, static_cast<i32>(Get_ScreenWidth()), static_cast<i32>(Get_ScreenHeight())));
@@ -120,7 +120,7 @@ void CKOTHInGameScene::Load(void)
 	m_characterController->Set_Position(glm::vec3(24.0f, 0.0f, 24.0f));
     
     m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
-    m_root->RegisterTapRecognizerHandler(m_moveControllerRecognizer);
+    m_root->addGestureRecognizerHandler(m_moveControllerRecognizer);
     m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);
 }
 

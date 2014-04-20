@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "IScene.h"
+#include "HDeclaration.h"
 
 class IGameTransition;
 class IGameObject;

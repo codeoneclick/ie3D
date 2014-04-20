@@ -10,14 +10,12 @@
 #define CCollisionMgr_h
 
 #include "HCommon.h"
-#include "IInputTapRecognizerHandler.h"
+#include "IInputContext.h"
+#include "HDeclaration.h"
 
-class CCamera;
 class ICollisionHandler;
-class CVertexBuffer;
-class CIndexBuffer;
 
-class CCollisionMgr final : public IInputTapRecognizerHandler
+class CCollisionMgr final : public IGestureRecognizerHandler
 {
 private:
     
@@ -29,9 +27,9 @@ protected:
     bool _CollisionPoint(std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer, const glm::mat4x4& _worldMatrix, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _point);
     bool _TriangleIntersection(const glm::vec3& _trianglePoint_01, glm::vec3& _trianglePoint_02, glm::vec3& _trianglePoint_03, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _intersectPoint);
     
-    void _OnInputTapRecognizerPressed(const glm::ivec2& _point);
-    void _OnInputTapRecognizerMoved(const glm::ivec2& _point);
-    void _OnInputTapRecognizerReleased(const glm::ivec2& _point);
+    void onGestureRecognizerPressed(const glm::ivec2& point);
+    void onGestureRecognizerMoved(const glm::ivec2& point);
+    void onGestureRecognizerReleased(const glm::ivec2& point);
     
 public:
     

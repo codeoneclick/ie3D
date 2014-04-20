@@ -70,6 +70,9 @@ public:
     {
         return m_numTriangles;
     };
+    
+    ui32 getWidth(void) const;
+    ui32 getHeight(void) const;
 };
 
 

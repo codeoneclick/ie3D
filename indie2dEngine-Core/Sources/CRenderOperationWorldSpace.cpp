@@ -35,7 +35,7 @@ m_numTriangles(0)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
-#if defined(__NDK__)
+#if defined(__NDK__) || defined(__OSX__)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 #else
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);

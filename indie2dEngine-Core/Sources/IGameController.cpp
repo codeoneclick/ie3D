@@ -15,7 +15,7 @@
 static IGameController* g_workflow = nullptr;
 
 IGameController::IGameController(void) :
-m_templateAccessor(std::make_shared<CConfigurationAccessor>()),
+m_configurationAccessor(std::make_shared<CConfigurationAccessor>()),
 m_resourceAccessor(std::make_shared<CResourceAccessor>()),
 m_currentTransition(nullptr)
 {

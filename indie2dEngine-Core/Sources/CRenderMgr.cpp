@@ -36,15 +36,17 @@ CRenderMgr::~CRenderMgr(void)
 
 }
 
-void CRenderMgr::RegisterOutputRenderOperation(std::shared_ptr<CMaterial> _material)
+void CRenderMgr::RegisterOutputRenderOperation(std::shared_ptr<CMaterial> material)
 {
-    assert(_material != nullptr);
-    m_outputOperation = std::make_shared<CRenderOperationOutput>(Get_ScreenWidth(),
-                                                                 Get_ScreenHeight(),
-                                                                 _material,
-                                                                 m_graphicsContext->Get_FrameBufferHandle(),
-                                                                 m_graphicsContext->Get_RenderBufferHandle());
-    std::cout<<"[Output resolution] : "<<Get_ScreenWidth()<<"x"<<Get_ScreenHeight()<<std::endl;
+    assert(m_graphicsContext != nullptr);
+    assert(material != nullptr);
+    m_outputOperation = std::make_shared<CRenderOperationOutput>(m_graphicsContext->getWidth(),
+                                                                 m_graphicsContext->getHeight(),
+                                                                 material,
+                                                                 m_graphicsContext->getFrameBuffer(),
+                                                                 m_graphicsContext->getRenderBuffer());
+    std::cout<<"[Output resolution] : "<<m_graphicsContext->getWidth()<<
+    "x"<<m_graphicsContext->getHeight()<<std::endl;
 }
 
 void CRenderMgr::RegisterWorldSpaceRenderOperation(const std::string &_mode, std::shared_ptr<CRenderOperationWorldSpace> _operation)
@@ -157,5 +159,16 @@ void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)
         m_outputOperation->Unbind();
     }
     
-    m_graphicsContext->Output();
+    m_graphicsContext->draw();
 }
+
+ui32 CRenderMgr::getWidth(void) const
+{
+    return m_graphicsContext->getWidth();
+}
+
+ui32 CRenderMgr::getHeight(void) const
+{
+    return m_graphicsContext->getHeight();
+}
+

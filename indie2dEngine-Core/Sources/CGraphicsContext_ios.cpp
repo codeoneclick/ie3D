@@ -7,6 +7,7 @@
 //
 
 #include "IGraphicsContext.h"
+#include "IOGLWindow.h"
 
 #if defined(__IOS__)
 
@@ -14,7 +15,7 @@
 #include <UIKit/UIKit.h>
 #include <QuartzCore/QuartzCore.h>
 
-class CGraphicsContext_iOS final : public IGraphicsContext
+class CGraphicsContext_ios : public IGraphicsContext
 {
 private:
     
@@ -24,43 +25,46 @@ protected:
     
 public:
     
-    CGraphicsContext_iOS(const CAEAGLLayer* _hwnd);
-    ~CGraphicsContext_iOS(void);
+    CGraphicsContext_ios(ISharedOGLWindowRef window);
+    ~CGraphicsContext_ios(void);
     
-    void Output(void) const;
+    void draw(void) const;
 };
 
-std::shared_ptr<IGraphicsContext> CreateGraphicsContext_iOS(const void* _hwnd)
+std::shared_ptr<IGraphicsContext> createGraphicsContext_ios(ISharedOGLWindowRef window)
 {
-    const UIView* hwnd = (__bridge UIView*)_hwnd;
+    return std::make_shared<CGraphicsContext_ios>(window);
+};
+
+CGraphicsContext_ios::CGraphicsContext_ios(ISharedOGLWindowRef window)
+{
+    m_window = window;
+    
+    const UIView* hwnd = (__bridge UIView*)m_window->getHWND();
     assert([hwnd.layer isKindOfClass:[CAEAGLLayer class]]);
-    return std::make_shared<CGraphicsContext_iOS>(hwnd.layer);
-};
-
-CGraphicsContext_iOS::CGraphicsContext_iOS(const CAEAGLLayer* _hwnd)
-{
+    
     m_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     assert(m_context != nullptr);
     
     ui8 result = [EAGLContext setCurrentContext:m_context];
     assert(result == true);
     
-    glGenRenderbuffers(1, &m_renderBufferHandle);
-    glBindRenderbuffer(GL_RENDERBUFFER, m_renderBufferHandle);
-    [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_hwnd];
+    glGenRenderbuffers(1, &m_renderBuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, m_renderBuffer);
+    [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:static_cast<CAEAGLLayer*>(hwnd.layer)];
     
-    glGenFramebuffers(1, &m_frameBufferHandle);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_renderBufferHandle);
+    glGenFramebuffers(1, &m_frameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_renderBuffer);
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 }
 
-CGraphicsContext_iOS::~CGraphicsContext_iOS(void)
+CGraphicsContext_ios::~CGraphicsContext_ios(void)
 {
     
 }
 
-void CGraphicsContext_iOS::Output(void) const
+void CGraphicsContext_ios::draw(void) const
 {
     assert(m_context != nullptr);
     [m_context presentRenderbuffer:GL_RENDERBUFFER];

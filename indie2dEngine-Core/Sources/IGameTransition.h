@@ -64,6 +64,9 @@ public:
         return m_guid;
     };
     
+    ui32 getWindowWidth(void) const;
+    ui32 getWindowHeight(void) const;
+    
     ui32 Get_CurrentNumTriangles(void);
     ui32 Get_TotalNumTriangles(void);
 };

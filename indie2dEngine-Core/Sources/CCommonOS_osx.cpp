@@ -16,15 +16,11 @@ static ui32 g_screenWidth = 0;
 static ui32 g_screenHeight = 0;
 static std::string g_path = "";
 
-std::string Get_BundlePath(void)
+std::string bundlepath(void)
 {
-    if(g_path.length() == 0)
-    {
-        std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
-        path.append("/");
-        return path;
-    }
-    return g_path;
+    std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
+    path.append("/");
+    return path;
 };
 
 void Set_BundlePath(const std::string& _path)

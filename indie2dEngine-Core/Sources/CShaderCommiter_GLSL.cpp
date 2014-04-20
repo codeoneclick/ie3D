@@ -38,7 +38,7 @@ ui32 CShaderCommiter_GLSL::compile(const std::string &sourceCode,
     
     if (success == GL_FALSE)
     {
-        GLchar message[256];
+        GLchar message[1024];
         glGetShaderInfoLog(handle, sizeof(message), 0, &message[0]);
         m_message = message;
 #if defined(__NDK__)
@@ -67,7 +67,7 @@ ui32 CShaderCommiter_GLSL::link(ui32 vsHandle,
     glGetProgramiv(handle, GL_LINK_STATUS, &success);
     if (success == GL_FALSE)
     {
-        GLchar message[256];
+        GLchar message[1024];
         glGetProgramInfoLog(handle, sizeof(message), 0, &message[0]);
         m_message = message;
         std::cout<<m_message<<std::endl;

@@ -9,12 +9,12 @@
 #ifndef CMoveControllerRecognizer_h
 #define CMoveControllerRecognizer_h
 
-#include "IInputTapRecognizerHandler.h"
+#include "IInputContext.h"
 
 class IMoveControllerHandler;
 
 class CMoveControllerRecognizer :
-public IInputTapRecognizerHandler
+public IGestureRecognizerHandler
 {
 private:
     
@@ -23,9 +23,9 @@ protected:
     std::set<std::shared_ptr<IMoveControllerHandler> > m_handlers;
     glm::ivec2 m_point;
     
-    void _OnInputTapRecognizerPressed(const glm::ivec2& _point);
-    void _OnInputTapRecognizerMoved(const glm::ivec2& _point);
-    void _OnInputTapRecognizerReleased(const glm::ivec2& _point);
+    void onGestureRecognizerPressed(const glm::ivec2& point);
+    void onGestureRecognizerMoved(const glm::ivec2& point);
+    void onGestureRecognizerReleased(const glm::ivec2& point);
     
     void _OnUpdate(ui32 _direction);
     

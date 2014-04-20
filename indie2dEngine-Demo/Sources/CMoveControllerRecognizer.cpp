@@ -38,43 +38,43 @@ void CMoveControllerRecognizer::_OnUpdate(ui32 _direction)
     }
 }
 
-void CMoveControllerRecognizer::_OnInputTapRecognizerPressed(const glm::ivec2& _point)
+void CMoveControllerRecognizer::onGestureRecognizerPressed(const glm::ivec2& point)
 {
     CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_NONE);
-    m_point = _point;
+    m_point = point;
 }
 
-void CMoveControllerRecognizer::_OnInputTapRecognizerMoved(const glm::ivec2& _point)
+void CMoveControllerRecognizer::onGestureRecognizerMoved(const glm::ivec2& point)
 {
-    if(_point.x < m_point.x && _point.y < m_point.y)
+    if(point.x < m_point.x && point.y < m_point.y)
     {
         CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_NORTH_EAST);
     }
-    else if(_point.x < m_point.x && _point.y > m_point.y)
+    else if(point.x < m_point.x && point.y > m_point.y)
     {
         CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_SOUTH_WEST);
     }
-    else if(_point.x > m_point.x && _point.y < m_point.y)
+    else if(point.x > m_point.x && point.y < m_point.y)
     {
         CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_NORTH_WEST);
     }
-    else if(_point.x > m_point.x && _point.y > m_point.y)
+    else if(point.x > m_point.x && point.y > m_point.y)
     {
         CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_SOUTH_EAST);
     }
-    else if(_point.x < m_point.x)
+    else if(point.x < m_point.x)
     {
         CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_WEST);
     }
-    else if(_point.x > m_point.x)
+    else if(point.x > m_point.x)
     {
         CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_EAST);
     }
-    else if(_point.y < m_point.y)
+    else if(point.y < m_point.y)
     {
         CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_NORTH);
     }
-    else if(_point.y > m_point.y)
+    else if(point.y > m_point.y)
     {
         CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_SOUTH);
     }
@@ -84,7 +84,7 @@ void CMoveControllerRecognizer::_OnInputTapRecognizerMoved(const glm::ivec2& _po
     }
 }
 
-void CMoveControllerRecognizer::_OnInputTapRecognizerReleased(const glm::ivec2& _point)
+void CMoveControllerRecognizer::onGestureRecognizerReleased(const glm::ivec2& point)
 {
     CMoveControllerRecognizer::_OnUpdate(E_MOVE_CONTROLLER_DIRECTION_NONE);
 }

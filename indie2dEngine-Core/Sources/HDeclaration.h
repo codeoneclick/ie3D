@@ -11,6 +11,12 @@
 
 #include "HCommon.h"
 
+#if defined(__NDK__)
+
+struct ANativeWindow;
+
+#endif
+
 class CTexture;
 typedef std::shared_ptr<CTexture> CSharedTexture;
 typedef const CSharedTexture& CSharedTextureRef;
@@ -213,5 +219,17 @@ typedef const CSharedLandscapeChunk& CSharedLandscapeChunkRef;
 class CLandscapeEdges;
 typedef std::shared_ptr<CLandscapeEdges> CSharedLandscapeEdges;
 typedef const CSharedLandscapeEdges& CSharedLandscapeEdgesRef;
+
+class IOGLWindow;
+typedef std::shared_ptr<IOGLWindow> ISharedOGLWindow;
+typedef const ISharedOGLWindow& ISharedOGLWindowRef;
+
+class IInputContext;
+typedef std::shared_ptr<IInputContext> ISharedInputContext;
+typedef const ISharedInputContext& ISharedInputContextRef;
+
+class IGestureRecognizerHandler;
+typedef std::shared_ptr<IGestureRecognizerHandler> ISharedGestureRecognizerHandler;
+typedef const ISharedGestureRecognizerHandler& ISharedGestureRecognizerHandlerRef;
 
 #endif

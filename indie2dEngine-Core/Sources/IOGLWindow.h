@@ -17,7 +17,9 @@
 #include <UIKit/UIKit.h>
 #include <QuartzCore/QuartzCore.h>
 
-@interface IOGLWindow : UIView
+@interface OpenGLView : UIView
+
+@property (nonatomic, assign) UIInterfaceOrientation orientation;
 
 @end
 
@@ -26,51 +28,52 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/CVDisplayLink.h>
 
-@interface IOGLWindow : NSOpenGLView
+@interface OpenGLView : NSOpenGLView
 
 @end
 
-#elif defined(__WIN32__)
-
-class IOGLWindow
-{
-private:
-
-	HWND m_hWnd;
-	HDC	m_hDC;
-
-protected:
-
-public:
-
-	IOGLWindow(void);
-	~IOGLWindow(void);
-
-	inline HWND Get_HWND(void)
-	{
-		return m_hWnd;
-	};
-
-	inline HDC Get_HDC(void)
-	{
-		return m_hDC;
-	};
-};
-
-#elif defined(__NDK__)
-
-class IOGLWindow
-{
-private:
-
-protected:
-
-public:
-
-	IOGLWindow(void);
-	~IOGLWindow(void);
-};
-
 #endif
+
+class IOGLWindow
+{
+private:
+    
+protected:
+    
+#if defined(__IOS__) || defined(__OSX__)
+    
+    void* m_hwnd;
+    
+#elif defined(__NDK__)
+    
+#elif defined(__WIN32__)
+    
+    HWND m_hwnd;
+	HDC	m_hdc;
+    
+#endif
+    
+public:
+    
+    IOGLWindow(void* hwnd);
+    virtual ~IOGLWindow(void);
+    
+    virtual ui32 getWidth(void);
+    virtual ui32 getHeight(void);
+    
+#if defined(__WIN32__)
+    
+    HWND getHWND(void) const;
+    HDC getHDC(void) const;
+    
+#elif defined(__NDK__)
+    
+#elif defined(__IOS__) || defined(__OSX__)
+    
+    const void* getHWND(void) const;
+    
+#endif
+    
+};
 
 #endif 
