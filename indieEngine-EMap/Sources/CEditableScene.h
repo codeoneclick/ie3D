@@ -12,11 +12,19 @@
 #include "IScene.h"
 #include "HDeclaration.h"
 
+class CNavigator;
+class CCharacterController;
+class CMoveControllerRecognizer;
+
 class CEditableScene final : public IScene
 {
 private:
     
 protected:
+    
+    std::shared_ptr<CMoveControllerRecognizer> m_moveControllerRecognizer;
+    std::shared_ptr<CCharacterController> m_characterController;
+    std::shared_ptr<CNavigator> m_navigator;
     
     void _OnCollision(const glm::vec3& position,
                       std::shared_ptr<IGameObject> collider);

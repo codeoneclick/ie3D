@@ -13,6 +13,9 @@
 #include "CLandscape.h"
 #include "COcean.h"
 #include "CParticleEmitter.h"
+#include "CNavigator.h"
+#include "CCharacterController.h"
+#include "CMoveControllerRecognizer.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
 IScene(root)
@@ -54,11 +57,22 @@ void CEditableScene::load(void)
     
     std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("landscape.xml");
     m_root->InsertLandscape(landscape);
+    
+    m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
+    m_characterController = std::make_shared<CCharacterController>();
+    m_characterController->Set_Camera(m_camera);
+    m_characterController->Set_Character(particleEmitter);
+    m_characterController->Set_Navigator(m_navigator);
+	m_characterController->Set_Position(glm::vec3(24.0f, 0.0f, 24.0f));
+    
+    m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
+    m_root->addGestureRecognizerHandler(m_moveControllerRecognizer);
+    m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);
 }
 
-void CEditableScene::update(f32)
+void CEditableScene::update(f32 deltatime)
 {
-    
+    m_characterController->OnUpdate(deltatime);
 }
 
 void CEditableScene::_OnCollision(const glm::vec3& position,

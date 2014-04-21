@@ -43,10 +43,18 @@ public:
         CMainWindow->setStyleSheet(QStringLiteral("background-color: rgb(128, 128, 128);"));
         centralWidget = new QWidget(CMainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        centralWidget->setStyleSheet(QStringLiteral("background-color: rgb(64, 64, 64);"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(760, 10, 251, 721));
-        tabWidget->setStyleSheet(QStringLiteral("background-color: rgb(128, 128, 128);"));
+        tabWidget->setGeometry(QRect(760, 12, 251, 721));
+        QFont font;
+        font.setFamily(QStringLiteral("Menlo"));
+        font.setPointSize(14);
+        font.setBold(true);
+        font.setWeight(75);
+        tabWidget->setFont(font);
+        tabWidget->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
+"background-color: rgb(64, 64, 64);ssss"));
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setTabShape(QTabWidget::Rounded);
         tab = new QWidget();
@@ -57,7 +65,9 @@ public:
         tabWidget->addTab(tab_2, QString());
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(10, 2, 741, 731));
+        groupBox->setGeometry(QRect(10, 0, 740, 734));
+        groupBox->setFont(font);
+        groupBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_oglWindow = new QWidget(groupBox);
         m_oglWindow->setObjectName(QStringLiteral("m_oglWindow"));
         m_oglWindow->setGeometry(QRect(10, 30, 721, 691));

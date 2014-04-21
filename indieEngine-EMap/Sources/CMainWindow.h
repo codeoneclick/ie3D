@@ -35,4 +35,4 @@ private:
     Ui::CMainWindow *ui;
 };
 
-#endif // CMAINWINDOW_H
+#endif

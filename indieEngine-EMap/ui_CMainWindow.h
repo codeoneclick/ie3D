@@ -65,7 +65,7 @@ public:
         tabWidget->addTab(tab_2, QString());
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(10, 0, 740, 734));
+        groupBox->setGeometry(QRect(10, 0, 740, 735));
         groupBox->setFont(font);
         groupBox->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);"));
         m_oglWindow = new QWidget(groupBox);

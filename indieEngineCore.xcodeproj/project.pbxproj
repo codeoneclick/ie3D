@@ -478,7 +478,7 @@
 		219DC4E1180DCB10001C72D4 /* gcdppTask_i.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppTask_i.cpp; sourceTree = "<group>"; };
 		219DC4E2180DCB10001C72D4 /* gcdppTask_t.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcdppTask_t.cpp; sourceTree = "<group>"; };
 		21ADAA0518214AD00082E8BA /* CCommonOS_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CCommonOS_osx.cpp; path = Sources/CCommonOS_osx.cpp; sourceTree = "<group>"; };
-		21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInputContext_osx.cpp; path = Sources/CInputContext_osx.cpp; sourceTree = "<group>"; };
+		21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CInputContext_osx.cpp; path = Sources/CInputContext_osx.cpp; sourceTree = "<group>"; };
 		21D0712A181DA5620019D264 /* libindieEngineCore-ios-Lib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libindieEngineCore-ios-Lib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D07138181DA5620019D264 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		21DEC3E31903F07B00B41221 /* IInputContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IInputContext.cpp; path = Sources/IInputContext.cpp; sourceTree = "<group>"; };
