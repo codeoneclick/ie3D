@@ -20,7 +20,7 @@ class CLight;
 class CCamera;
 class CNavigator;
 class CCharacterController;
-class CMoveControllerRecognizer;
+class CMoveController;
 
 class CKOTHInGameScene final : public IScene
 {
@@ -28,7 +28,7 @@ private:
     
 protected:
     
-    std::shared_ptr<CMoveControllerRecognizer> m_moveControllerRecognizer;
+    std::shared_ptr<CMoveController> m_moveController;
     std::shared_ptr<CCharacterController> m_characterController;
     std::shared_ptr<CNavigator> m_navigator;
     

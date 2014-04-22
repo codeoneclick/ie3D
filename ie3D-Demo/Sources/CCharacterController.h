@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 #include "HKOTHEnums.h"
-#include "IMoveControllerHandler.h"
+#include "CMoveController.h"
 
 class CCamera;
 class IGameObject;
@@ -32,7 +32,7 @@ protected:
     glm::vec3 m_position;
     glm::vec3 m_rotation;
     
-    void _OnMoveControllerUpdate(ui32 _direction);
+    void onMoveControllerUpdate(ui32 _direction);
     
 public:
     

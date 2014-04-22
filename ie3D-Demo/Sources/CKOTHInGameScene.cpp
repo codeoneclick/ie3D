@@ -18,13 +18,12 @@
 #include "CCamera.h"
 #include "CNavigator.h"
 #include "CCharacterController.h"
-#include "CMoveControllerRecognizer.h"
-//#include "CGUIContainer.h"
+#include "CMoveController.h"
 
 CKOTHInGameScene::CKOTHInGameScene(IGameTransition* _root) :
 IScene(_root),
 m_navigator(nullptr),
-m_moveControllerRecognizer(nullptr),
+m_moveController(nullptr),
 m_characterController(nullptr)
 {
 
@@ -119,9 +118,9 @@ void CKOTHInGameScene::load(void)
     m_characterController->Set_Navigator(m_navigator);
 	m_characterController->Set_Position(glm::vec3(24.0f, 0.0f, 24.0f));
     
-    m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
-    m_root->addGestureRecognizerHandler(m_moveControllerRecognizer);
-    m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);
+    m_moveController = std::make_shared<CMoveController>();
+    m_root->addGestureRecognizerHandler(m_moveController);
+    m_moveController->addMoveControllerHandler(m_characterController);
 }
 
 void CKOTHInGameScene::update(f32 deltatime)
