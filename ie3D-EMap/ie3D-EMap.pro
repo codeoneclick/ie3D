@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = indieEngine-EMap
+TARGET = ie3D-EMap
 TEMPLATE = app
 
 

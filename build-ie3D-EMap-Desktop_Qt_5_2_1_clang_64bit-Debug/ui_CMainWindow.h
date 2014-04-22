@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'CMainWindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.0
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -17,6 +17,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
 
@@ -28,6 +29,7 @@ public:
     QWidget *centralWidget;
     QTabWidget *tabWidget;
     QWidget *tab;
+    QPushButton *pushButton;
     QWidget *tab_2;
     QGroupBox *groupBox;
     QWidget *m_oglWindow;
@@ -54,18 +56,21 @@ public:
         font.setWeight(75);
         tabWidget->setFont(font);
         tabWidget->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
-"background-color: rgb(64, 64, 64);ssss"));
+"background-color: rgb(64, 64, 64);"));
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setTabShape(QTabWidget::Rounded);
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
+        pushButton = new QPushButton(tab);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(70, 20, 114, 32));
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         tabWidget->addTab(tab_2, QString());
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(10, 0, 740, 734));
+        groupBox->setGeometry(QRect(10, 0, 740, 735));
         groupBox->setFont(font);
         groupBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_oglWindow = new QWidget(groupBox);
@@ -89,6 +94,7 @@ public:
     void retranslateUi(QMainWindow *CMainWindow)
     {
         CMainWindow->setWindowTitle(QApplication::translate("CMainWindow", "CMainWindow", 0));
+        pushButton->setText(QApplication::translate("CMainWindow", "PushButton", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("CMainWindow", "Tab 1", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("CMainWindow", "Tab 2", 0));
         groupBox->setTitle(QApplication::translate("CMainWindow", "3D", 0));
