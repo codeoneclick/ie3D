@@ -1,4 +1,4 @@
-indie2dEngine
+indieEngine 3D
 =======
 
-Win32/iOS 2d game engine based on OGL ES 2.0
+Crossplatform 3d game engine based on OGL ES 2.0.

@@ -1,3 +1,0 @@
-<operation guid="screen.space.blur.operation" screenWidth="320" screenHeight="240">
-    <material filename="material.blur.screen.xml"/>
-</operation>
