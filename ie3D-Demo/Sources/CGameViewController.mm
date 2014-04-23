@@ -38,9 +38,9 @@
     
     CKOTHWorkflow* workflow = new CKOTHWorkflow();
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)self.m_openglView);
-    std::shared_ptr<IGameTransition> transition = workflow->CreateKOTHInGameTransition("main.transition.xml", window);
+    std::shared_ptr<IGameTransition> transition = workflow->CreateKOTHInGameTransition("transition.main.xml", window);
     workflow->RegisterTransition(transition);
-    workflow->GoToTransition("main.transition.xml");
+    workflow->GoToTransition("transition.main.xml");
 }
 
 - (void)didReceiveMemoryWarning

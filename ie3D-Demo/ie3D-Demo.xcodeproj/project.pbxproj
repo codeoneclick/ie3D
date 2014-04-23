@@ -7,113 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2132671E1906A9E7001C98F7 /* Footman.mdl in Resources */ = {isa = PBXBuildFile; fileRef = 213266B21906A9E7001C98F7 /* Footman.mdl */; };
-		2132671F1906A9E7001C98F7 /* Footman2.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 213266B31906A9E7001C98F7 /* Footman2.MDL */; };
-		213267201906A9E7001C98F7 /* Footman3.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 213266B41906A9E7001C98F7 /* Footman3.MDL */; };
-		213267211906A9E7001C98F7 /* Footman4.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 213266B51906A9E7001C98F7 /* Footman4.MDL */; };
-		213267221906A9E7001C98F7 /* Ghoul_01.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 213266B61906A9E7001C98F7 /* Ghoul_01.MDL */; };
-		213267231906A9E7001C98F7 /* mesh.mdl in Resources */ = {isa = PBXBuildFile; fileRef = 213266B71906A9E7001C98F7 /* mesh.mdl */; };
-		213267241906A9E7001C98F7 /* mesh_01.MDL in Resources */ = {isa = PBXBuildFile; fileRef = 213266B81906A9E7001C98F7 /* mesh_01.MDL */; };
-		213267251906A9E7001C98F7 /* model_01.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 213266B91906A9E7001C98F7 /* model_01.MDL_anim */; };
-		213267261906A9E7001C98F7 /* model_01.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 213266BA1906A9E7001C98F7 /* model_01.MDL_mesh */; };
-		213267271906A9E7001C98F7 /* model_01.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 213266BB1906A9E7001C98F7 /* model_01.MDL_sk */; };
-		213267281906A9E7001C98F7 /* model_02.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 213266BC1906A9E7001C98F7 /* model_02.MDL_anim */; };
-		213267291906A9E7001C98F7 /* model_02.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 213266BD1906A9E7001C98F7 /* model_02.MDL_mesh */; };
-		2132672A1906A9E7001C98F7 /* model_02.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 213266BE1906A9E7001C98F7 /* model_02.MDL_sk */; };
-		2132672B1906A9E7001C98F7 /* model_03.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 213266BF1906A9E7001C98F7 /* model_03.MDL_anim */; };
-		2132672C1906A9E7001C98F7 /* model_03.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 213266C01906A9E7001C98F7 /* model_03.MDL_mesh */; };
-		2132672D1906A9E7001C98F7 /* model_03.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 213266C11906A9E7001C98F7 /* model_03.MDL_sk */; };
-		2132672E1906A9E7001C98F7 /* BloomCombineScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266C31906A9E7001C98F7 /* BloomCombineScreen.frag */; };
-		2132672F1906A9E7001C98F7 /* BloomCombineScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266C41906A9E7001C98F7 /* BloomCombineScreen.vert */; };
-		213267301906A9E7001C98F7 /* BloomExtractScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266C51906A9E7001C98F7 /* BloomExtractScreen.frag */; };
-		213267311906A9E7001C98F7 /* BloomExtractScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266C61906A9E7001C98F7 /* BloomExtractScreen.vert */; };
-		213267321906A9E7001C98F7 /* BlurScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266C71906A9E7001C98F7 /* BlurScreen.frag */; };
-		213267331906A9E7001C98F7 /* BlurScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266C81906A9E7001C98F7 /* BlurScreen.vert */; };
-		213267341906A9E7001C98F7 /* CommonBoundBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266C91906A9E7001C98F7 /* CommonBoundBox.frag */; };
-		213267351906A9E7001C98F7 /* CommonBoundBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266CA1906A9E7001C98F7 /* CommonBoundBox.vert */; };
-		213267361906A9E7001C98F7 /* CommonGUI.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266CB1906A9E7001C98F7 /* CommonGUI.frag */; };
-		213267371906A9E7001C98F7 /* CommonGUI.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266CC1906A9E7001C98F7 /* CommonGUI.vert */; };
-		213267381906A9E7001C98F7 /* CommonLandscape.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266CD1906A9E7001C98F7 /* CommonLandscape.frag */; };
-		213267391906A9E7001C98F7 /* CommonLandscape.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266CE1906A9E7001C98F7 /* CommonLandscape.vert */; };
-		2132673A1906A9E7001C98F7 /* CommonLandscapeSplatting.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266CF1906A9E7001C98F7 /* CommonLandscapeSplatting.frag */; };
-		2132673B1906A9E7001C98F7 /* CommonLandscapeSplatting.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266D01906A9E7001C98F7 /* CommonLandscapeSplatting.vert */; };
-		2132673C1906A9E7001C98F7 /* CommonModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266D11906A9E7001C98F7 /* CommonModel.frag */; };
-		2132673D1906A9E7001C98F7 /* CommonModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266D21906A9E7001C98F7 /* CommonModel.vert */; };
-		2132673E1906A9E7001C98F7 /* CommonOcean.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266D31906A9E7001C98F7 /* CommonOcean.frag */; };
-		2132673F1906A9E7001C98F7 /* CommonOcean.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266D41906A9E7001C98F7 /* CommonOcean.vert */; };
-		213267401906A9E7001C98F7 /* CommonOutput.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266D51906A9E7001C98F7 /* CommonOutput.frag */; };
-		213267411906A9E7001C98F7 /* CommonOutput.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266D61906A9E7001C98F7 /* CommonOutput.vert */; };
-		213267421906A9E7001C98F7 /* CommonScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266D71906A9E7001C98F7 /* CommonScreen.frag */; };
-		213267431906A9E8001C98F7 /* CommonScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266D81906A9E7001C98F7 /* CommonScreen.vert */; };
-		213267441906A9E8001C98F7 /* DefferedScreen.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266D91906A9E7001C98F7 /* DefferedScreen.frag */; };
-		213267451906A9E8001C98F7 /* DefferedScreen.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266DA1906A9E7001C98F7 /* DefferedScreen.vert */; };
-		213267461906A9E8001C98F7 /* ParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266DB1906A9E7001C98F7 /* ParticleEmitter.frag */; };
-		213267471906A9E8001C98F7 /* ParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266DC1906A9E7001C98F7 /* ParticleEmitter.vert */; };
-		213267481906A9E8001C98F7 /* ScreenGBufferNormalModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266DD1906A9E7001C98F7 /* ScreenGBufferNormalModel.frag */; };
-		213267491906A9E8001C98F7 /* ScreenGBufferNormalModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266DE1906A9E7001C98F7 /* ScreenGBufferNormalModel.vert */; };
-		2132674A1906A9E8001C98F7 /* ScreenGBufferPositionModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266DF1906A9E7001C98F7 /* ScreenGBufferPositionModel.frag */; };
-		2132674B1906A9E8001C98F7 /* ScreenGBufferPositionModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266E01906A9E7001C98F7 /* ScreenGBufferPositionModel.vert */; };
-		2132674C1906A9E8001C98F7 /* ShaderCommon.frag in Resources */ = {isa = PBXBuildFile; fileRef = 213266E11906A9E7001C98F7 /* ShaderCommon.frag */; };
-		2132674D1906A9E8001C98F7 /* ShaderCommon.vert in Resources */ = {isa = PBXBuildFile; fileRef = 213266E21906A9E7001C98F7 /* ShaderCommon.vert */; };
-		2132674E1906A9E8001C98F7 /* gbuffer.normal.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266E41906A9E7001C98F7 /* gbuffer.normal.material.xml */; };
-		2132674F1906A9E8001C98F7 /* gbuffer.normal.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266E51906A9E7001C98F7 /* gbuffer.normal.operation.xml */; };
-		213267501906A9E8001C98F7 /* guicontainer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266E61906A9E7001C98F7 /* guicontainer.xml */; };
-		213267511906A9E8001C98F7 /* landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266E71906A9E7001C98F7 /* landscape.xml */; };
-		213267521906A9E8001C98F7 /* main.transition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266E81906A9E7001C98F7 /* main.transition.xml */; };
-		213267531906A9E8001C98F7 /* material.bloomcombine.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266E91906A9E7001C98F7 /* material.bloomcombine.screen.xml */; };
-		213267541906A9E8001C98F7 /* material.bloomextract.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266EA1906A9E7001C98F7 /* material.bloomextract.screen.xml */; };
-		213267551906A9E8001C98F7 /* material.blur.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266EB1906A9E7001C98F7 /* material.blur.screen.xml */; };
-		213267561906A9E8001C98F7 /* material.deffered.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266EC1906A9E7001C98F7 /* material.deffered.screen.xml */; };
-		213267571906A9E8001C98F7 /* material.guicontainer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266ED1906A9E7001C98F7 /* material.guicontainer.xml */; };
-		213267581906A9E8001C98F7 /* material.landscape.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266EE1906A9E7001C98F7 /* material.landscape.common.xml */; };
-		213267591906A9E8001C98F7 /* material.landscape.edges.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266EF1906A9E7001C98F7 /* material.landscape.edges.common.xml */; };
-		2132675A1906A9E8001C98F7 /* material.landscape.edges.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F01906A9E7001C98F7 /* material.landscape.edges.reflection.xml */; };
-		2132675B1906A9E8001C98F7 /* material.landscape.edges.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F11906A9E7001C98F7 /* material.landscape.edges.refraction.xml */; };
-		2132675C1906A9E8001C98F7 /* material.landscape.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F21906A9E7001C98F7 /* material.landscape.reflection.xml */; };
-		2132675D1906A9E8001C98F7 /* material.landscape.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F31906A9E7001C98F7 /* material.landscape.refraction.xml */; };
-		2132675E1906A9E8001C98F7 /* material.model.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F41906A9E7001C98F7 /* material.model.common.xml */; };
-		2132675F1906A9E8001C98F7 /* material.model.Footman.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F51906A9E7001C98F7 /* material.model.Footman.common.xml */; };
-		213267601906A9E8001C98F7 /* material.model.Footman.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F61906A9E7001C98F7 /* material.model.Footman.reflection.xml */; };
-		213267611906A9E8001C98F7 /* material.model.Footman.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F71906A9E7001C98F7 /* material.model.Footman.refraction.xml */; };
-		213267621906A9E8001C98F7 /* material.model.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F81906A9E7001C98F7 /* material.model.reflection.xml */; };
-		213267631906A9E8001C98F7 /* material.model.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266F91906A9E7001C98F7 /* material.model.refraction.xml */; };
-		213267641906A9E8001C98F7 /* material.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266FA1906A9E7001C98F7 /* material.ocean.xml */; };
-		213267651906A9E8001C98F7 /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266FB1906A9E7001C98F7 /* material.output.xml */; };
-		213267661906A9E8001C98F7 /* material.screen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266FC1906A9E7001C98F7 /* material.screen.xml */; };
-		213267671906A9E8001C98F7 /* material.splatting.diffuse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266FD1906A9E7001C98F7 /* material.splatting.diffuse.xml */; };
-		213267681906A9E8001C98F7 /* material.splatting.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266FE1906A9E7001C98F7 /* material.splatting.normal.xml */; };
-		213267691906A9E8001C98F7 /* model.Building.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213266FF1906A9E7001C98F7 /* model.Building.xml */; };
-		2132676A1906A9E8001C98F7 /* model.Footman.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267001906A9E7001C98F7 /* model.Footman.xml */; };
-		2132676B1906A9E8001C98F7 /* ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267011906A9E7001C98F7 /* ocean.xml */; };
-		2132676C1906A9E8001C98F7 /* output.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267021906A9E7001C98F7 /* output.space.operation.xml */; };
-		2132676D1906A9E8001C98F7 /* particle.emitter.01.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267031906A9E7001C98F7 /* particle.emitter.01.xml */; };
-		2132676E1906A9E8001C98F7 /* particle.emitter.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267041906A9E7001C98F7 /* particle.emitter.material.xml */; };
-		2132676F1906A9E8001C98F7 /* screen.gbuffer.position.model.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267051906A9E7001C98F7 /* screen.gbuffer.position.model.material.xml */; };
-		213267701906A9E8001C98F7 /* screen.space.bloomcombine.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267061906A9E7001C98F7 /* screen.space.bloomcombine.operation.xml */; };
-		213267711906A9E8001C98F7 /* screen.space.bloomextract.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267071906A9E7001C98F7 /* screen.space.bloomextract.operation.xml */; };
-		213267721906A9E8001C98F7 /* screen.space.blur.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267081906A9E7001C98F7 /* screen.space.blur.operation.xml */; };
-		213267731906A9E8001C98F7 /* screen.space.deffered.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 213267091906A9E7001C98F7 /* screen.space.deffered.operation.xml */; };
-		213267741906A9E8001C98F7 /* screen.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2132670A1906A9E7001C98F7 /* screen.space.operation.xml */; };
-		213267751906A9E8001C98F7 /* world.space.gbuffer.position.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2132670B1906A9E7001C98F7 /* world.space.gbuffer.position.operation.xml */; };
-		213267761906A9E8001C98F7 /* world.space.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2132670C1906A9E7001C98F7 /* world.space.operation.xml */; };
-		213267771906A9E8001C98F7 /* world.space.reflection.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2132670D1906A9E7001C98F7 /* world.space.reflection.operation.xml */; };
-		213267781906A9E8001C98F7 /* world.space.refraction.operation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2132670E1906A9E7001C98F7 /* world.space.refraction.operation.xml */; };
-		213267791906A9E8001C98F7 /* buildings_atlas.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267101906A9E7001C98F7 /* buildings_atlas.pvr */; };
-		2132677A1906A9E8001C98F7 /* Footman.Diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267111906A9E7001C98F7 /* Footman.Diffuse.pvr */; };
-		2132677B1906A9E8001C98F7 /* Footman2.Diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267121906A9E7001C98F7 /* Footman2.Diffuse.pvr */; };
-		2132677C1906A9E8001C98F7 /* layer_01_diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267131906A9E7001C98F7 /* layer_01_diffuse.pvr */; };
-		2132677D1906A9E8001C98F7 /* layer_02_diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267141906A9E7001C98F7 /* layer_02_diffuse.pvr */; };
-		2132677E1906A9E8001C98F7 /* layer_03_diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267151906A9E7001C98F7 /* layer_03_diffuse.pvr */; };
-		2132677F1906A9E8001C98F7 /* model_02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267161906A9E7001C98F7 /* model_02.pvr */; };
-		213267801906A9E8001C98F7 /* ocean.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267171906A9E7001C98F7 /* ocean.pvr */; };
-		213267811906A9E8001C98F7 /* ocean_hm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267181906A9E7001C98F7 /* ocean_hm.pvr */; };
-		213267821906A9E8001C98F7 /* ocean_nm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 213267191906A9E7001C98F7 /* ocean_nm.pvr */; };
-		213267831906A9E8001C98F7 /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 2132671A1906A9E7001C98F7 /* particle.emitter.01.pvr */; };
-		213267841906A9E8001C98F7 /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 2132671B1906A9E7001C98F7 /* particle.emitter.02.pvr */; };
-		213267851906A9E8001C98F7 /* texture_01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 2132671C1906A9E7001C98F7 /* texture_01.pvr */; };
-		213267861906A9E8001C98F7 /* texture_02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 2132671D1906A9E7001C98F7 /* texture_02.pvr */; };
 		213267931906AA37001C98F7 /* libie3DCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2132678E1906AA26001C98F7 /* libie3DCore-ios.a */; };
 		213267961906B51C001C98F7 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
+		21BC34F419081510007B99DA /* gameobject.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34CE19081510007B99DA /* gameobject.landscape.xml */; };
+		21BC34F519081510007B99DA /* gameobject.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34CF19081510007B99DA /* gameobject.ocean.xml */; };
+		21BC34F619081510007B99DA /* gameobject.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D019081510007B99DA /* gameobject.particle.emitter.xml */; };
+		21BC34F719081510007B99DA /* material.landscape.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D119081510007B99DA /* material.landscape.base.xml */; };
+		21BC34F819081510007B99DA /* material.landscape.edges.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D219081510007B99DA /* material.landscape.edges.base.xml */; };
+		21BC34F919081510007B99DA /* material.landscape.edges.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D319081510007B99DA /* material.landscape.edges.reflection.xml */; };
+		21BC34FA19081510007B99DA /* material.landscape.edges.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D419081510007B99DA /* material.landscape.edges.refraction.xml */; };
+		21BC34FB19081510007B99DA /* material.landscape.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D519081510007B99DA /* material.landscape.reflection.xml */; };
+		21BC34FC19081510007B99DA /* material.landscape.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D619081510007B99DA /* material.landscape.refraction.xml */; };
+		21BC34FD19081510007B99DA /* material.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D719081510007B99DA /* material.ocean.xml */; };
+		21BC34FE19081510007B99DA /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D819081510007B99DA /* material.output.xml */; };
+		21BC34FF19081510007B99DA /* material.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D919081510007B99DA /* material.particle.emitter.xml */; };
+		21BC350019081510007B99DA /* material.splatting.diffuse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DA19081510007B99DA /* material.splatting.diffuse.xml */; };
+		21BC350119081510007B99DA /* material.splatting.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DB19081510007B99DA /* material.splatting.normal.xml */; };
+		21BC350219081510007B99DA /* render.operation.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DC19081510007B99DA /* render.operation.output.xml */; };
+		21BC350319081510007B99DA /* render.operation.world.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DD19081510007B99DA /* render.operation.world.base.xml */; };
+		21BC350419081510007B99DA /* render.operation.world.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DE19081510007B99DA /* render.operation.world.reflection.xml */; };
+		21BC350519081510007B99DA /* render.operation.world.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DF19081510007B99DA /* render.operation.world.refraction.xml */; };
+		21BC350619081510007B99DA /* transition.main.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E019081510007B99DA /* transition.main.xml */; };
+		21BC350719081510007B99DA /* shaderLandscape.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E319081510007B99DA /* shaderLandscape.frag */; };
+		21BC350819081510007B99DA /* shaderLandscape.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E419081510007B99DA /* shaderLandscape.vert */; };
+		21BC350919081510007B99DA /* shaderLandscapeSplatting.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E519081510007B99DA /* shaderLandscapeSplatting.frag */; };
+		21BC350A19081510007B99DA /* shaderLandscapeSplatting.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E619081510007B99DA /* shaderLandscapeSplatting.vert */; };
+		21BC350B19081510007B99DA /* shaderOcean.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E719081510007B99DA /* shaderOcean.frag */; };
+		21BC350C19081510007B99DA /* shaderOcean.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E819081510007B99DA /* shaderOcean.vert */; };
+		21BC350D19081510007B99DA /* shaderParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E919081510007B99DA /* shaderParticleEmitter.frag */; };
+		21BC350E19081510007B99DA /* shaderParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EA19081510007B99DA /* shaderParticleEmitter.vert */; };
+		21BC350F19081510007B99DA /* shaderScreenQuad.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EB19081510007B99DA /* shaderScreenQuad.frag */; };
+		21BC351019081510007B99DA /* shaderScreenQuad.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EC19081510007B99DA /* shaderScreenQuad.vert */; };
+		21BC351119081510007B99DA /* landscape.01.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EE19081510007B99DA /* landscape.01.diffuse.pvr */; };
+		21BC351219081510007B99DA /* landscape.02.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EF19081510007B99DA /* landscape.02.diffuse.pvr */; };
+		21BC351319081510007B99DA /* landscape.03.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34F019081510007B99DA /* landscape.03.diffuse.pvr */; };
+		21BC351419081510007B99DA /* ocean.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34F119081510007B99DA /* ocean.normal.pvr */; };
+		21BC351519081510007B99DA /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34F219081510007B99DA /* particle.emitter.01.pvr */; };
+		21BC351619081510007B99DA /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34F319081510007B99DA /* particle.emitter.02.pvr */; };
 		21D070C5181D9D460019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C4181D9D460019D264 /* Foundation.framework */; };
 		21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C6181D9D460019D264 /* CoreGraphics.framework */; };
 		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
@@ -159,112 +89,42 @@
 
 /* Begin PBXFileReference section */
 		2132664F1906A84D001C98F7 /* ie3D-Demo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ie3D-Demo.plist"; path = "Support/ie3D-Demo.plist"; sourceTree = SOURCE_ROOT; };
-		213266B21906A9E7001C98F7 /* Footman.mdl */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman.mdl; sourceTree = "<group>"; };
-		213266B31906A9E7001C98F7 /* Footman2.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman2.MDL; sourceTree = "<group>"; };
-		213266B41906A9E7001C98F7 /* Footman3.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman3.MDL; sourceTree = "<group>"; };
-		213266B51906A9E7001C98F7 /* Footman4.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman4.MDL; sourceTree = "<group>"; };
-		213266B61906A9E7001C98F7 /* Ghoul_01.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ghoul_01.MDL; sourceTree = "<group>"; };
-		213266B71906A9E7001C98F7 /* mesh.mdl */ = {isa = PBXFileReference; lastKnownFileType = file; path = mesh.mdl; sourceTree = "<group>"; };
-		213266B81906A9E7001C98F7 /* mesh_01.MDL */ = {isa = PBXFileReference; lastKnownFileType = file; path = mesh_01.MDL; sourceTree = "<group>"; };
-		213266B91906A9E7001C98F7 /* model_01.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_01.MDL_anim; sourceTree = "<group>"; };
-		213266BA1906A9E7001C98F7 /* model_01.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_01.MDL_mesh; sourceTree = "<group>"; };
-		213266BB1906A9E7001C98F7 /* model_01.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_01.MDL_sk; sourceTree = "<group>"; };
-		213266BC1906A9E7001C98F7 /* model_02.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_anim; sourceTree = "<group>"; };
-		213266BD1906A9E7001C98F7 /* model_02.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_mesh; sourceTree = "<group>"; };
-		213266BE1906A9E7001C98F7 /* model_02.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.MDL_sk; sourceTree = "<group>"; };
-		213266BF1906A9E7001C98F7 /* model_03.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_03.MDL_anim; sourceTree = "<group>"; };
-		213266C01906A9E7001C98F7 /* model_03.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_03.MDL_mesh; sourceTree = "<group>"; };
-		213266C11906A9E7001C98F7 /* model_03.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_03.MDL_sk; sourceTree = "<group>"; };
-		213266C31906A9E7001C98F7 /* BloomCombineScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomCombineScreen.frag; sourceTree = "<group>"; };
-		213266C41906A9E7001C98F7 /* BloomCombineScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomCombineScreen.vert; sourceTree = "<group>"; };
-		213266C51906A9E7001C98F7 /* BloomExtractScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomExtractScreen.frag; sourceTree = "<group>"; };
-		213266C61906A9E7001C98F7 /* BloomExtractScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BloomExtractScreen.vert; sourceTree = "<group>"; };
-		213266C71906A9E7001C98F7 /* BlurScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlurScreen.frag; sourceTree = "<group>"; };
-		213266C81906A9E7001C98F7 /* BlurScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlurScreen.vert; sourceTree = "<group>"; };
-		213266C91906A9E7001C98F7 /* CommonBoundBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.frag; sourceTree = "<group>"; };
-		213266CA1906A9E7001C98F7 /* CommonBoundBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonBoundBox.vert; sourceTree = "<group>"; };
-		213266CB1906A9E7001C98F7 /* CommonGUI.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonGUI.frag; sourceTree = "<group>"; };
-		213266CC1906A9E7001C98F7 /* CommonGUI.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonGUI.vert; sourceTree = "<group>"; };
-		213266CD1906A9E7001C98F7 /* CommonLandscape.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonLandscape.frag; sourceTree = "<group>"; };
-		213266CE1906A9E7001C98F7 /* CommonLandscape.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonLandscape.vert; sourceTree = "<group>"; };
-		213266CF1906A9E7001C98F7 /* CommonLandscapeSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonLandscapeSplatting.frag; sourceTree = "<group>"; };
-		213266D01906A9E7001C98F7 /* CommonLandscapeSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonLandscapeSplatting.vert; sourceTree = "<group>"; };
-		213266D11906A9E7001C98F7 /* CommonModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonModel.frag; sourceTree = "<group>"; };
-		213266D21906A9E7001C98F7 /* CommonModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonModel.vert; sourceTree = "<group>"; };
-		213266D31906A9E7001C98F7 /* CommonOcean.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOcean.frag; sourceTree = "<group>"; };
-		213266D41906A9E7001C98F7 /* CommonOcean.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOcean.vert; sourceTree = "<group>"; };
-		213266D51906A9E7001C98F7 /* CommonOutput.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.frag; sourceTree = "<group>"; };
-		213266D61906A9E7001C98F7 /* CommonOutput.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonOutput.vert; sourceTree = "<group>"; };
-		213266D71906A9E7001C98F7 /* CommonScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.frag; sourceTree = "<group>"; };
-		213266D81906A9E7001C98F7 /* CommonScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CommonScreen.vert; sourceTree = "<group>"; };
-		213266D91906A9E7001C98F7 /* DefferedScreen.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DefferedScreen.frag; sourceTree = "<group>"; };
-		213266DA1906A9E7001C98F7 /* DefferedScreen.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DefferedScreen.vert; sourceTree = "<group>"; };
-		213266DB1906A9E7001C98F7 /* ParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.frag; sourceTree = "<group>"; };
-		213266DC1906A9E7001C98F7 /* ParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleEmitter.vert; sourceTree = "<group>"; };
-		213266DD1906A9E7001C98F7 /* ScreenGBufferNormalModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferNormalModel.frag; sourceTree = "<group>"; };
-		213266DE1906A9E7001C98F7 /* ScreenGBufferNormalModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferNormalModel.vert; sourceTree = "<group>"; };
-		213266DF1906A9E7001C98F7 /* ScreenGBufferPositionModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferPositionModel.frag; sourceTree = "<group>"; };
-		213266E01906A9E7001C98F7 /* ScreenGBufferPositionModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ScreenGBufferPositionModel.vert; sourceTree = "<group>"; };
-		213266E11906A9E7001C98F7 /* ShaderCommon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShaderCommon.frag; sourceTree = "<group>"; };
-		213266E21906A9E7001C98F7 /* ShaderCommon.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShaderCommon.vert; sourceTree = "<group>"; };
-		213266E41906A9E7001C98F7 /* gbuffer.normal.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.material.xml; sourceTree = "<group>"; };
-		213266E51906A9E7001C98F7 /* gbuffer.normal.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gbuffer.normal.operation.xml; sourceTree = "<group>"; };
-		213266E61906A9E7001C98F7 /* guicontainer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = guicontainer.xml; sourceTree = "<group>"; };
-		213266E71906A9E7001C98F7 /* landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = landscape.xml; sourceTree = "<group>"; };
-		213266E81906A9E7001C98F7 /* main.transition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = main.transition.xml; sourceTree = "<group>"; };
-		213266E91906A9E7001C98F7 /* material.bloomcombine.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.bloomcombine.screen.xml; sourceTree = "<group>"; };
-		213266EA1906A9E7001C98F7 /* material.bloomextract.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.bloomextract.screen.xml; sourceTree = "<group>"; };
-		213266EB1906A9E7001C98F7 /* material.blur.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.blur.screen.xml; sourceTree = "<group>"; };
-		213266EC1906A9E7001C98F7 /* material.deffered.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.deffered.screen.xml; sourceTree = "<group>"; };
-		213266ED1906A9E7001C98F7 /* material.guicontainer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.guicontainer.xml; sourceTree = "<group>"; };
-		213266EE1906A9E7001C98F7 /* material.landscape.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.common.xml; sourceTree = "<group>"; };
-		213266EF1906A9E7001C98F7 /* material.landscape.edges.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.common.xml; sourceTree = "<group>"; };
-		213266F01906A9E7001C98F7 /* material.landscape.edges.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.reflection.xml; sourceTree = "<group>"; };
-		213266F11906A9E7001C98F7 /* material.landscape.edges.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.refraction.xml; sourceTree = "<group>"; };
-		213266F21906A9E7001C98F7 /* material.landscape.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.reflection.xml; sourceTree = "<group>"; };
-		213266F31906A9E7001C98F7 /* material.landscape.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.refraction.xml; sourceTree = "<group>"; };
-		213266F41906A9E7001C98F7 /* material.model.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.common.xml; sourceTree = "<group>"; };
-		213266F51906A9E7001C98F7 /* material.model.Footman.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.common.xml; sourceTree = "<group>"; };
-		213266F61906A9E7001C98F7 /* material.model.Footman.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.reflection.xml; sourceTree = "<group>"; };
-		213266F71906A9E7001C98F7 /* material.model.Footman.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.Footman.refraction.xml; sourceTree = "<group>"; };
-		213266F81906A9E7001C98F7 /* material.model.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.reflection.xml; sourceTree = "<group>"; };
-		213266F91906A9E7001C98F7 /* material.model.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.model.refraction.xml; sourceTree = "<group>"; };
-		213266FA1906A9E7001C98F7 /* material.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.ocean.xml; sourceTree = "<group>"; };
-		213266FB1906A9E7001C98F7 /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
-		213266FC1906A9E7001C98F7 /* material.screen.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.screen.xml; sourceTree = "<group>"; };
-		213266FD1906A9E7001C98F7 /* material.splatting.diffuse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.diffuse.xml; sourceTree = "<group>"; };
-		213266FE1906A9E7001C98F7 /* material.splatting.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.normal.xml; sourceTree = "<group>"; };
-		213266FF1906A9E7001C98F7 /* model.Building.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Building.xml; sourceTree = "<group>"; };
-		213267001906A9E7001C98F7 /* model.Footman.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.Footman.xml; sourceTree = "<group>"; };
-		213267011906A9E7001C98F7 /* ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ocean.xml; sourceTree = "<group>"; };
-		213267021906A9E7001C98F7 /* output.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = output.space.operation.xml; sourceTree = "<group>"; };
-		213267031906A9E7001C98F7 /* particle.emitter.01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.01.xml; sourceTree = "<group>"; };
-		213267041906A9E7001C98F7 /* particle.emitter.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = particle.emitter.material.xml; sourceTree = "<group>"; };
-		213267051906A9E7001C98F7 /* screen.gbuffer.position.model.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.gbuffer.position.model.material.xml; sourceTree = "<group>"; };
-		213267061906A9E7001C98F7 /* screen.space.bloomcombine.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomcombine.operation.xml; sourceTree = "<group>"; };
-		213267071906A9E7001C98F7 /* screen.space.bloomextract.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.bloomextract.operation.xml; sourceTree = "<group>"; };
-		213267081906A9E7001C98F7 /* screen.space.blur.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.blur.operation.xml; sourceTree = "<group>"; };
-		213267091906A9E7001C98F7 /* screen.space.deffered.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.deffered.operation.xml; sourceTree = "<group>"; };
-		2132670A1906A9E7001C98F7 /* screen.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = screen.space.operation.xml; sourceTree = "<group>"; };
-		2132670B1906A9E7001C98F7 /* world.space.gbuffer.position.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.gbuffer.position.operation.xml; sourceTree = "<group>"; };
-		2132670C1906A9E7001C98F7 /* world.space.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.operation.xml; sourceTree = "<group>"; };
-		2132670D1906A9E7001C98F7 /* world.space.reflection.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.reflection.operation.xml; sourceTree = "<group>"; };
-		2132670E1906A9E7001C98F7 /* world.space.refraction.operation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world.space.refraction.operation.xml; sourceTree = "<group>"; };
-		213267101906A9E7001C98F7 /* buildings_atlas.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = buildings_atlas.pvr; sourceTree = "<group>"; };
-		213267111906A9E7001C98F7 /* Footman.Diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman.Diffuse.pvr; sourceTree = "<group>"; };
-		213267121906A9E7001C98F7 /* Footman2.Diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = Footman2.Diffuse.pvr; sourceTree = "<group>"; };
-		213267131906A9E7001C98F7 /* layer_01_diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = layer_01_diffuse.pvr; sourceTree = "<group>"; };
-		213267141906A9E7001C98F7 /* layer_02_diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = layer_02_diffuse.pvr; sourceTree = "<group>"; };
-		213267151906A9E7001C98F7 /* layer_03_diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = layer_03_diffuse.pvr; sourceTree = "<group>"; };
-		213267161906A9E7001C98F7 /* model_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_02.pvr; sourceTree = "<group>"; };
-		213267171906A9E7001C98F7 /* ocean.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean.pvr; sourceTree = "<group>"; };
-		213267181906A9E7001C98F7 /* ocean_hm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean_hm.pvr; sourceTree = "<group>"; };
-		213267191906A9E7001C98F7 /* ocean_nm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean_nm.pvr; sourceTree = "<group>"; };
-		2132671A1906A9E7001C98F7 /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
-		2132671B1906A9E7001C98F7 /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
-		2132671C1906A9E7001C98F7 /* texture_01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_01.pvr; sourceTree = "<group>"; };
-		2132671D1906A9E7001C98F7 /* texture_02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = texture_02.pvr; sourceTree = "<group>"; };
 		213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
+		21BC34CE19081510007B99DA /* gameobject.landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.landscape.xml; sourceTree = "<group>"; };
+		21BC34CF19081510007B99DA /* gameobject.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.ocean.xml; sourceTree = "<group>"; };
+		21BC34D019081510007B99DA /* gameobject.particle.emitter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.particle.emitter.xml; sourceTree = "<group>"; };
+		21BC34D119081510007B99DA /* material.landscape.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.base.xml; sourceTree = "<group>"; };
+		21BC34D219081510007B99DA /* material.landscape.edges.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.base.xml; sourceTree = "<group>"; };
+		21BC34D319081510007B99DA /* material.landscape.edges.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.reflection.xml; sourceTree = "<group>"; };
+		21BC34D419081510007B99DA /* material.landscape.edges.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.refraction.xml; sourceTree = "<group>"; };
+		21BC34D519081510007B99DA /* material.landscape.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.reflection.xml; sourceTree = "<group>"; };
+		21BC34D619081510007B99DA /* material.landscape.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.refraction.xml; sourceTree = "<group>"; };
+		21BC34D719081510007B99DA /* material.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.ocean.xml; sourceTree = "<group>"; };
+		21BC34D819081510007B99DA /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
+		21BC34D919081510007B99DA /* material.particle.emitter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.particle.emitter.xml; sourceTree = "<group>"; };
+		21BC34DA19081510007B99DA /* material.splatting.diffuse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.diffuse.xml; sourceTree = "<group>"; };
+		21BC34DB19081510007B99DA /* material.splatting.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.normal.xml; sourceTree = "<group>"; };
+		21BC34DC19081510007B99DA /* render.operation.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.output.xml; sourceTree = "<group>"; };
+		21BC34DD19081510007B99DA /* render.operation.world.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.base.xml; sourceTree = "<group>"; };
+		21BC34DE19081510007B99DA /* render.operation.world.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.reflection.xml; sourceTree = "<group>"; };
+		21BC34DF19081510007B99DA /* render.operation.world.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.refraction.xml; sourceTree = "<group>"; };
+		21BC34E019081510007B99DA /* transition.main.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transition.main.xml; sourceTree = "<group>"; };
+		21BC34E319081510007B99DA /* shaderLandscape.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscape.frag; sourceTree = "<group>"; };
+		21BC34E419081510007B99DA /* shaderLandscape.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscape.vert; sourceTree = "<group>"; };
+		21BC34E519081510007B99DA /* shaderLandscapeSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscapeSplatting.frag; sourceTree = "<group>"; };
+		21BC34E619081510007B99DA /* shaderLandscapeSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscapeSplatting.vert; sourceTree = "<group>"; };
+		21BC34E719081510007B99DA /* shaderOcean.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderOcean.frag; sourceTree = "<group>"; };
+		21BC34E819081510007B99DA /* shaderOcean.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderOcean.vert; sourceTree = "<group>"; };
+		21BC34E919081510007B99DA /* shaderParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderParticleEmitter.frag; sourceTree = "<group>"; };
+		21BC34EA19081510007B99DA /* shaderParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderParticleEmitter.vert; sourceTree = "<group>"; };
+		21BC34EB19081510007B99DA /* shaderScreenQuad.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderScreenQuad.frag; sourceTree = "<group>"; };
+		21BC34EC19081510007B99DA /* shaderScreenQuad.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderScreenQuad.vert; sourceTree = "<group>"; };
+		21BC34EE19081510007B99DA /* landscape.01.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.01.diffuse.pvr; sourceTree = "<group>"; };
+		21BC34EF19081510007B99DA /* landscape.02.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.02.diffuse.pvr; sourceTree = "<group>"; };
+		21BC34F019081510007B99DA /* landscape.03.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.03.diffuse.pvr; sourceTree = "<group>"; };
+		21BC34F119081510007B99DA /* ocean.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean.normal.pvr; sourceTree = "<group>"; };
+		21BC34F219081510007B99DA /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
+		21BC34F319081510007B99DA /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
 		21D070C1181D9D460019D264 /* ie3D-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ie3D-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -314,143 +174,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		213266B11906A9E7001C98F7 /* Meshes */ = {
-			isa = PBXGroup;
-			children = (
-				213266B21906A9E7001C98F7 /* Footman.mdl */,
-				213266B31906A9E7001C98F7 /* Footman2.MDL */,
-				213266B41906A9E7001C98F7 /* Footman3.MDL */,
-				213266B51906A9E7001C98F7 /* Footman4.MDL */,
-				213266B61906A9E7001C98F7 /* Ghoul_01.MDL */,
-				213266B71906A9E7001C98F7 /* mesh.mdl */,
-				213266B81906A9E7001C98F7 /* mesh_01.MDL */,
-				213266B91906A9E7001C98F7 /* model_01.MDL_anim */,
-				213266BA1906A9E7001C98F7 /* model_01.MDL_mesh */,
-				213266BB1906A9E7001C98F7 /* model_01.MDL_sk */,
-				213266BC1906A9E7001C98F7 /* model_02.MDL_anim */,
-				213266BD1906A9E7001C98F7 /* model_02.MDL_mesh */,
-				213266BE1906A9E7001C98F7 /* model_02.MDL_sk */,
-				213266BF1906A9E7001C98F7 /* model_03.MDL_anim */,
-				213266C01906A9E7001C98F7 /* model_03.MDL_mesh */,
-				213266C11906A9E7001C98F7 /* model_03.MDL_sk */,
-			);
-			name = Meshes;
-			path = "../../ie3D-Bundle/Meshes";
-			sourceTree = "<group>";
-		};
-		213266C21906A9E7001C98F7 /* Shaders */ = {
-			isa = PBXGroup;
-			children = (
-				213266C31906A9E7001C98F7 /* BloomCombineScreen.frag */,
-				213266C41906A9E7001C98F7 /* BloomCombineScreen.vert */,
-				213266C51906A9E7001C98F7 /* BloomExtractScreen.frag */,
-				213266C61906A9E7001C98F7 /* BloomExtractScreen.vert */,
-				213266C71906A9E7001C98F7 /* BlurScreen.frag */,
-				213266C81906A9E7001C98F7 /* BlurScreen.vert */,
-				213266C91906A9E7001C98F7 /* CommonBoundBox.frag */,
-				213266CA1906A9E7001C98F7 /* CommonBoundBox.vert */,
-				213266CB1906A9E7001C98F7 /* CommonGUI.frag */,
-				213266CC1906A9E7001C98F7 /* CommonGUI.vert */,
-				213266CD1906A9E7001C98F7 /* CommonLandscape.frag */,
-				213266CE1906A9E7001C98F7 /* CommonLandscape.vert */,
-				213266CF1906A9E7001C98F7 /* CommonLandscapeSplatting.frag */,
-				213266D01906A9E7001C98F7 /* CommonLandscapeSplatting.vert */,
-				213266D11906A9E7001C98F7 /* CommonModel.frag */,
-				213266D21906A9E7001C98F7 /* CommonModel.vert */,
-				213266D31906A9E7001C98F7 /* CommonOcean.frag */,
-				213266D41906A9E7001C98F7 /* CommonOcean.vert */,
-				213266D51906A9E7001C98F7 /* CommonOutput.frag */,
-				213266D61906A9E7001C98F7 /* CommonOutput.vert */,
-				213266D71906A9E7001C98F7 /* CommonScreen.frag */,
-				213266D81906A9E7001C98F7 /* CommonScreen.vert */,
-				213266D91906A9E7001C98F7 /* DefferedScreen.frag */,
-				213266DA1906A9E7001C98F7 /* DefferedScreen.vert */,
-				213266DB1906A9E7001C98F7 /* ParticleEmitter.frag */,
-				213266DC1906A9E7001C98F7 /* ParticleEmitter.vert */,
-				213266DD1906A9E7001C98F7 /* ScreenGBufferNormalModel.frag */,
-				213266DE1906A9E7001C98F7 /* ScreenGBufferNormalModel.vert */,
-				213266DF1906A9E7001C98F7 /* ScreenGBufferPositionModel.frag */,
-				213266E01906A9E7001C98F7 /* ScreenGBufferPositionModel.vert */,
-				213266E11906A9E7001C98F7 /* ShaderCommon.frag */,
-				213266E21906A9E7001C98F7 /* ShaderCommon.vert */,
-			);
-			name = Shaders;
-			path = "../../ie3D-Bundle/Shaders";
-			sourceTree = "<group>";
-		};
-		213266E31906A9E7001C98F7 /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-				213266E41906A9E7001C98F7 /* gbuffer.normal.material.xml */,
-				213266E51906A9E7001C98F7 /* gbuffer.normal.operation.xml */,
-				213266E61906A9E7001C98F7 /* guicontainer.xml */,
-				213266E71906A9E7001C98F7 /* landscape.xml */,
-				213266E81906A9E7001C98F7 /* main.transition.xml */,
-				213266E91906A9E7001C98F7 /* material.bloomcombine.screen.xml */,
-				213266EA1906A9E7001C98F7 /* material.bloomextract.screen.xml */,
-				213266EB1906A9E7001C98F7 /* material.blur.screen.xml */,
-				213266EC1906A9E7001C98F7 /* material.deffered.screen.xml */,
-				213266ED1906A9E7001C98F7 /* material.guicontainer.xml */,
-				213266EE1906A9E7001C98F7 /* material.landscape.common.xml */,
-				213266EF1906A9E7001C98F7 /* material.landscape.edges.common.xml */,
-				213266F01906A9E7001C98F7 /* material.landscape.edges.reflection.xml */,
-				213266F11906A9E7001C98F7 /* material.landscape.edges.refraction.xml */,
-				213266F21906A9E7001C98F7 /* material.landscape.reflection.xml */,
-				213266F31906A9E7001C98F7 /* material.landscape.refraction.xml */,
-				213266F41906A9E7001C98F7 /* material.model.common.xml */,
-				213266F51906A9E7001C98F7 /* material.model.Footman.common.xml */,
-				213266F61906A9E7001C98F7 /* material.model.Footman.reflection.xml */,
-				213266F71906A9E7001C98F7 /* material.model.Footman.refraction.xml */,
-				213266F81906A9E7001C98F7 /* material.model.reflection.xml */,
-				213266F91906A9E7001C98F7 /* material.model.refraction.xml */,
-				213266FA1906A9E7001C98F7 /* material.ocean.xml */,
-				213266FB1906A9E7001C98F7 /* material.output.xml */,
-				213266FC1906A9E7001C98F7 /* material.screen.xml */,
-				213266FD1906A9E7001C98F7 /* material.splatting.diffuse.xml */,
-				213266FE1906A9E7001C98F7 /* material.splatting.normal.xml */,
-				213266FF1906A9E7001C98F7 /* model.Building.xml */,
-				213267001906A9E7001C98F7 /* model.Footman.xml */,
-				213267011906A9E7001C98F7 /* ocean.xml */,
-				213267021906A9E7001C98F7 /* output.space.operation.xml */,
-				213267031906A9E7001C98F7 /* particle.emitter.01.xml */,
-				213267041906A9E7001C98F7 /* particle.emitter.material.xml */,
-				213267051906A9E7001C98F7 /* screen.gbuffer.position.model.material.xml */,
-				213267061906A9E7001C98F7 /* screen.space.bloomcombine.operation.xml */,
-				213267071906A9E7001C98F7 /* screen.space.bloomextract.operation.xml */,
-				213267081906A9E7001C98F7 /* screen.space.blur.operation.xml */,
-				213267091906A9E7001C98F7 /* screen.space.deffered.operation.xml */,
-				2132670A1906A9E7001C98F7 /* screen.space.operation.xml */,
-				2132670B1906A9E7001C98F7 /* world.space.gbuffer.position.operation.xml */,
-				2132670C1906A9E7001C98F7 /* world.space.operation.xml */,
-				2132670D1906A9E7001C98F7 /* world.space.reflection.operation.xml */,
-				2132670E1906A9E7001C98F7 /* world.space.refraction.operation.xml */,
-			);
-			name = Templates;
-			path = "../../ie3D-Bundle/Templates";
-			sourceTree = "<group>";
-		};
-		2132670F1906A9E7001C98F7 /* Textures */ = {
-			isa = PBXGroup;
-			children = (
-				213267101906A9E7001C98F7 /* buildings_atlas.pvr */,
-				213267111906A9E7001C98F7 /* Footman.Diffuse.pvr */,
-				213267121906A9E7001C98F7 /* Footman2.Diffuse.pvr */,
-				213267131906A9E7001C98F7 /* layer_01_diffuse.pvr */,
-				213267141906A9E7001C98F7 /* layer_02_diffuse.pvr */,
-				213267151906A9E7001C98F7 /* layer_03_diffuse.pvr */,
-				213267161906A9E7001C98F7 /* model_02.pvr */,
-				213267171906A9E7001C98F7 /* ocean.pvr */,
-				213267181906A9E7001C98F7 /* ocean_hm.pvr */,
-				213267191906A9E7001C98F7 /* ocean_nm.pvr */,
-				2132671A1906A9E7001C98F7 /* particle.emitter.01.pvr */,
-				2132671B1906A9E7001C98F7 /* particle.emitter.02.pvr */,
-				2132671C1906A9E7001C98F7 /* texture_01.pvr */,
-				2132671D1906A9E7001C98F7 /* texture_02.pvr */,
-			);
-			name = Textures;
-			path = "../../ie3D-Bundle/Textures";
-			sourceTree = "<group>";
-		};
 		213267871906AA13001C98F7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,6 +189,73 @@
 				213267901906AA26001C98F7 /* libie3DCore-osx.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		21BC34CD19081510007B99DA /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				21BC34CE19081510007B99DA /* gameobject.landscape.xml */,
+				21BC34CF19081510007B99DA /* gameobject.ocean.xml */,
+				21BC34D019081510007B99DA /* gameobject.particle.emitter.xml */,
+				21BC34D119081510007B99DA /* material.landscape.base.xml */,
+				21BC34D219081510007B99DA /* material.landscape.edges.base.xml */,
+				21BC34D319081510007B99DA /* material.landscape.edges.reflection.xml */,
+				21BC34D419081510007B99DA /* material.landscape.edges.refraction.xml */,
+				21BC34D519081510007B99DA /* material.landscape.reflection.xml */,
+				21BC34D619081510007B99DA /* material.landscape.refraction.xml */,
+				21BC34D719081510007B99DA /* material.ocean.xml */,
+				21BC34D819081510007B99DA /* material.output.xml */,
+				21BC34D919081510007B99DA /* material.particle.emitter.xml */,
+				21BC34DA19081510007B99DA /* material.splatting.diffuse.xml */,
+				21BC34DB19081510007B99DA /* material.splatting.normal.xml */,
+				21BC34DC19081510007B99DA /* render.operation.output.xml */,
+				21BC34DD19081510007B99DA /* render.operation.world.base.xml */,
+				21BC34DE19081510007B99DA /* render.operation.world.reflection.xml */,
+				21BC34DF19081510007B99DA /* render.operation.world.refraction.xml */,
+				21BC34E019081510007B99DA /* transition.main.xml */,
+			);
+			name = Configurations;
+			path = "../../ie3D-Bundle/Configurations";
+			sourceTree = "<group>";
+		};
+		21BC34E119081510007B99DA /* Meshes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Meshes;
+			path = "../../ie3D-Bundle/Meshes";
+			sourceTree = "<group>";
+		};
+		21BC34E219081510007B99DA /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				21BC34E319081510007B99DA /* shaderLandscape.frag */,
+				21BC34E419081510007B99DA /* shaderLandscape.vert */,
+				21BC34E519081510007B99DA /* shaderLandscapeSplatting.frag */,
+				21BC34E619081510007B99DA /* shaderLandscapeSplatting.vert */,
+				21BC34E719081510007B99DA /* shaderOcean.frag */,
+				21BC34E819081510007B99DA /* shaderOcean.vert */,
+				21BC34E919081510007B99DA /* shaderParticleEmitter.frag */,
+				21BC34EA19081510007B99DA /* shaderParticleEmitter.vert */,
+				21BC34EB19081510007B99DA /* shaderScreenQuad.frag */,
+				21BC34EC19081510007B99DA /* shaderScreenQuad.vert */,
+			);
+			name = Shaders;
+			path = "../../ie3D-Bundle/Shaders";
+			sourceTree = "<group>";
+		};
+		21BC34ED19081510007B99DA /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				21BC34EE19081510007B99DA /* landscape.01.diffuse.pvr */,
+				21BC34EF19081510007B99DA /* landscape.02.diffuse.pvr */,
+				21BC34F019081510007B99DA /* landscape.03.diffuse.pvr */,
+				21BC34F119081510007B99DA /* ocean.normal.pvr */,
+				21BC34F219081510007B99DA /* particle.emitter.01.pvr */,
+				21BC34F319081510007B99DA /* particle.emitter.02.pvr */,
+			);
+			name = Textures;
+			path = "../../ie3D-Bundle/Textures";
 			sourceTree = "<group>";
 		};
 		21D070B8181D9D460019D264 = {
@@ -544,10 +334,10 @@
 		21D07279181DB33E0019D264 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				213266B11906A9E7001C98F7 /* Meshes */,
-				213266C21906A9E7001C98F7 /* Shaders */,
-				213266E31906A9E7001C98F7 /* Templates */,
-				2132670F1906A9E7001C98F7 /* Textures */,
+				21BC34CD19081510007B99DA /* Configurations */,
+				21BC34E119081510007B99DA /* Meshes */,
+				21BC34E219081510007B99DA /* Shaders */,
+				21BC34ED19081510007B99DA /* Textures */,
 			);
 			name = Resources;
 			path = indieEngineDemo;
@@ -628,112 +418,42 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21BC350C19081510007B99DA /* shaderOcean.vert in Resources */,
+				21BC350E19081510007B99DA /* shaderParticleEmitter.vert in Resources */,
+				21BC350D19081510007B99DA /* shaderParticleEmitter.frag in Resources */,
+				21BC350A19081510007B99DA /* shaderLandscapeSplatting.vert in Resources */,
+				21BC351019081510007B99DA /* shaderScreenQuad.vert in Resources */,
+				21BC350F19081510007B99DA /* shaderScreenQuad.frag in Resources */,
+				21BC350B19081510007B99DA /* shaderOcean.frag in Resources */,
+				21BC350919081510007B99DA /* shaderLandscapeSplatting.frag in Resources */,
+				21BC350819081510007B99DA /* shaderLandscape.vert in Resources */,
+				21BC350719081510007B99DA /* shaderLandscape.frag in Resources */,
+				21BC351119081510007B99DA /* landscape.01.diffuse.pvr in Resources */,
+				21BC34FE19081510007B99DA /* material.output.xml in Resources */,
+				21BC34F719081510007B99DA /* material.landscape.base.xml in Resources */,
+				21BC351419081510007B99DA /* ocean.normal.pvr in Resources */,
+				21BC350019081510007B99DA /* material.splatting.diffuse.xml in Resources */,
+				21BC34FD19081510007B99DA /* material.ocean.xml in Resources */,
+				21BC350619081510007B99DA /* transition.main.xml in Resources */,
+				21BC351519081510007B99DA /* particle.emitter.01.pvr in Resources */,
 				213267961906B51C001C98F7 /* CGameViewController.xib in Resources */,
-				2132676B1906A9E8001C98F7 /* ocean.xml in Resources */,
-				2132676D1906A9E8001C98F7 /* particle.emitter.01.xml in Resources */,
-				2132674E1906A9E8001C98F7 /* gbuffer.normal.material.xml in Resources */,
-				213267841906A9E8001C98F7 /* particle.emitter.02.pvr in Resources */,
-				2132671E1906A9E7001C98F7 /* Footman.mdl in Resources */,
-				2132674F1906A9E8001C98F7 /* gbuffer.normal.operation.xml in Resources */,
-				213267771906A9E8001C98F7 /* world.space.reflection.operation.xml in Resources */,
-				213267611906A9E8001C98F7 /* material.model.Footman.refraction.xml in Resources */,
-				213267731906A9E8001C98F7 /* screen.space.deffered.operation.xml in Resources */,
-				2132677F1906A9E8001C98F7 /* model_02.pvr in Resources */,
-				213267541906A9E8001C98F7 /* material.bloomextract.screen.xml in Resources */,
-				213267561906A9E8001C98F7 /* material.deffered.screen.xml in Resources */,
-				213267581906A9E8001C98F7 /* material.landscape.common.xml in Resources */,
-				2132676C1906A9E8001C98F7 /* output.space.operation.xml in Resources */,
-				213267281906A9E7001C98F7 /* model_02.MDL_anim in Resources */,
-				213267531906A9E8001C98F7 /* material.bloomcombine.screen.xml in Resources */,
-				2132677B1906A9E8001C98F7 /* Footman2.Diffuse.pvr in Resources */,
-				213267811906A9E8001C98F7 /* ocean_hm.pvr in Resources */,
-				2132676A1906A9E8001C98F7 /* model.Footman.xml in Resources */,
-				213267631906A9E8001C98F7 /* material.model.refraction.xml in Resources */,
-				213267251906A9E7001C98F7 /* model_01.MDL_anim in Resources */,
-				213267821906A9E8001C98F7 /* ocean_nm.pvr in Resources */,
-				2132675D1906A9E8001C98F7 /* material.landscape.refraction.xml in Resources */,
-				2132677E1906A9E8001C98F7 /* layer_03_diffuse.pvr in Resources */,
-				2132672B1906A9E7001C98F7 /* model_03.MDL_anim in Resources */,
-				213267711906A9E8001C98F7 /* screen.space.bloomextract.operation.xml in Resources */,
-				213267641906A9E8001C98F7 /* material.ocean.xml in Resources */,
-				2132675E1906A9E8001C98F7 /* material.model.common.xml in Resources */,
-				213267241906A9E7001C98F7 /* mesh_01.MDL in Resources */,
-				213267651906A9E8001C98F7 /* material.output.xml in Resources */,
-				2132672C1906A9E7001C98F7 /* model_03.MDL_mesh in Resources */,
-				213267761906A9E8001C98F7 /* world.space.operation.xml in Resources */,
-				213267201906A9E7001C98F7 /* Footman3.MDL in Resources */,
-				2132676F1906A9E8001C98F7 /* screen.gbuffer.position.model.material.xml in Resources */,
-				213267501906A9E8001C98F7 /* guicontainer.xml in Resources */,
-				213267231906A9E7001C98F7 /* mesh.mdl in Resources */,
-				213267751906A9E8001C98F7 /* world.space.gbuffer.position.operation.xml in Resources */,
-				213267851906A9E8001C98F7 /* texture_01.pvr in Resources */,
-				2132672A1906A9E7001C98F7 /* model_02.MDL_sk in Resources */,
-				2132671F1906A9E7001C98F7 /* Footman2.MDL in Resources */,
-				213267551906A9E8001C98F7 /* material.blur.screen.xml in Resources */,
-				213267681906A9E8001C98F7 /* material.splatting.normal.xml in Resources */,
-				2132675C1906A9E8001C98F7 /* material.landscape.reflection.xml in Resources */,
-				2132675F1906A9E8001C98F7 /* material.model.Footman.common.xml in Resources */,
-				213267831906A9E8001C98F7 /* particle.emitter.01.pvr in Resources */,
-				2132677A1906A9E8001C98F7 /* Footman.Diffuse.pvr in Resources */,
-				2132672D1906A9E7001C98F7 /* model_03.MDL_sk in Resources */,
-				2132676E1906A9E8001C98F7 /* particle.emitter.material.xml in Resources */,
-				213267591906A9E8001C98F7 /* material.landscape.edges.common.xml in Resources */,
-				213267271906A9E7001C98F7 /* model_01.MDL_sk in Resources */,
-				2132675B1906A9E8001C98F7 /* material.landscape.edges.refraction.xml in Resources */,
-				213267801906A9E8001C98F7 /* ocean.pvr in Resources */,
-				213267721906A9E8001C98F7 /* screen.space.blur.operation.xml in Resources */,
-				213267671906A9E8001C98F7 /* material.splatting.diffuse.xml in Resources */,
-				213267261906A9E7001C98F7 /* model_01.MDL_mesh in Resources */,
-				213267741906A9E8001C98F7 /* screen.space.operation.xml in Resources */,
-				2132677C1906A9E8001C98F7 /* layer_01_diffuse.pvr in Resources */,
-				2132675A1906A9E8001C98F7 /* material.landscape.edges.reflection.xml in Resources */,
-				213267521906A9E8001C98F7 /* main.transition.xml in Resources */,
-				213267781906A9E8001C98F7 /* world.space.refraction.operation.xml in Resources */,
-				213267221906A9E7001C98F7 /* Ghoul_01.MDL in Resources */,
-				213267661906A9E8001C98F7 /* material.screen.xml in Resources */,
-				213267601906A9E8001C98F7 /* material.model.Footman.reflection.xml in Resources */,
-				213267691906A9E8001C98F7 /* model.Building.xml in Resources */,
-				213267291906A9E7001C98F7 /* model_02.MDL_mesh in Resources */,
-				213267621906A9E8001C98F7 /* material.model.reflection.xml in Resources */,
-				213267701906A9E8001C98F7 /* screen.space.bloomcombine.operation.xml in Resources */,
-				213267211906A9E7001C98F7 /* Footman4.MDL in Resources */,
-				213267511906A9E8001C98F7 /* landscape.xml in Resources */,
-				213267861906A9E8001C98F7 /* texture_02.pvr in Resources */,
-				2132677D1906A9E8001C98F7 /* layer_02_diffuse.pvr in Resources */,
-				213267791906A9E8001C98F7 /* buildings_atlas.pvr in Resources */,
-				213267571906A9E8001C98F7 /* material.guicontainer.xml in Resources */,
-				213267351906A9E7001C98F7 /* CommonBoundBox.vert in Resources */,
-				213267321906A9E7001C98F7 /* BlurScreen.frag in Resources */,
-				2132673B1906A9E7001C98F7 /* CommonLandscapeSplatting.vert in Resources */,
-				2132674C1906A9E8001C98F7 /* ShaderCommon.frag in Resources */,
-				213267371906A9E7001C98F7 /* CommonGUI.vert in Resources */,
-				2132673F1906A9E7001C98F7 /* CommonOcean.vert in Resources */,
-				213267381906A9E7001C98F7 /* CommonLandscape.frag in Resources */,
-				2132673C1906A9E7001C98F7 /* CommonModel.frag in Resources */,
-				213267461906A9E8001C98F7 /* ParticleEmitter.frag in Resources */,
-				2132673A1906A9E7001C98F7 /* CommonLandscapeSplatting.frag in Resources */,
-				213267491906A9E8001C98F7 /* ScreenGBufferNormalModel.vert in Resources */,
-				213267451906A9E8001C98F7 /* DefferedScreen.vert in Resources */,
-				213267361906A9E7001C98F7 /* CommonGUI.frag in Resources */,
-				213267411906A9E7001C98F7 /* CommonOutput.vert in Resources */,
-				2132674D1906A9E8001C98F7 /* ShaderCommon.vert in Resources */,
-				2132674B1906A9E8001C98F7 /* ScreenGBufferPositionModel.vert in Resources */,
-				213267311906A9E7001C98F7 /* BloomExtractScreen.vert in Resources */,
-				213267301906A9E7001C98F7 /* BloomExtractScreen.frag in Resources */,
-				2132674A1906A9E8001C98F7 /* ScreenGBufferPositionModel.frag in Resources */,
-				213267431906A9E8001C98F7 /* CommonScreen.vert in Resources */,
-				213267471906A9E8001C98F7 /* ParticleEmitter.vert in Resources */,
-				213267391906A9E7001C98F7 /* CommonLandscape.vert in Resources */,
-				2132672E1906A9E7001C98F7 /* BloomCombineScreen.frag in Resources */,
-				213267341906A9E7001C98F7 /* CommonBoundBox.frag in Resources */,
-				213267481906A9E8001C98F7 /* ScreenGBufferNormalModel.frag in Resources */,
-				213267401906A9E7001C98F7 /* CommonOutput.frag in Resources */,
-				2132673D1906A9E7001C98F7 /* CommonModel.vert in Resources */,
-				213267421906A9E7001C98F7 /* CommonScreen.frag in Resources */,
-				2132672F1906A9E7001C98F7 /* BloomCombineScreen.vert in Resources */,
-				2132673E1906A9E7001C98F7 /* CommonOcean.frag in Resources */,
-				213267331906A9E7001C98F7 /* BlurScreen.vert in Resources */,
-				213267441906A9E8001C98F7 /* DefferedScreen.frag in Resources */,
+				21BC351619081510007B99DA /* particle.emitter.02.pvr in Resources */,
+				21BC34FF19081510007B99DA /* material.particle.emitter.xml in Resources */,
+				21BC34F619081510007B99DA /* gameobject.particle.emitter.xml in Resources */,
+				21BC350319081510007B99DA /* render.operation.world.base.xml in Resources */,
+				21BC350119081510007B99DA /* material.splatting.normal.xml in Resources */,
+				21BC350219081510007B99DA /* render.operation.output.xml in Resources */,
+				21BC34F419081510007B99DA /* gameobject.landscape.xml in Resources */,
+				21BC34FB19081510007B99DA /* material.landscape.reflection.xml in Resources */,
+				21BC34F519081510007B99DA /* gameobject.ocean.xml in Resources */,
+				21BC34F819081510007B99DA /* material.landscape.edges.base.xml in Resources */,
+				21BC351319081510007B99DA /* landscape.03.diffuse.pvr in Resources */,
+				21BC34FC19081510007B99DA /* material.landscape.refraction.xml in Resources */,
+				21BC34F919081510007B99DA /* material.landscape.edges.reflection.xml in Resources */,
+				21BC350419081510007B99DA /* render.operation.world.reflection.xml in Resources */,
+				21BC351219081510007B99DA /* landscape.02.diffuse.pvr in Resources */,
+				21BC34FA19081510007B99DA /* material.landscape.edges.refraction.xml in Resources */,
+				21BC350519081510007B99DA /* render.operation.world.refraction.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

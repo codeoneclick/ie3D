@@ -88,17 +88,17 @@ void CKOTHInGameScene::load(void)
         }
     }*/
     
-    std::shared_ptr<COcean> ocean = m_root->CreateOcean("ocean.xml");
+    std::shared_ptr<COcean> ocean = m_root->CreateOcean("gameobject.ocean.xml");
     m_root->InsertOcean(ocean);
     ocean->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
     
-    std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("particle.emitter.01.xml");
+    std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
     
     m_particles.push_back(particleEmitter);
     m_root->InsertParticleEmitter(particleEmitter);
     
-    std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("landscape.xml");
+    std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("gameobject.landscape.xml");
     m_root->InsertLandscape(landscape);
     
     //m_root->RegisterCollisionHandler(shared_from_this());

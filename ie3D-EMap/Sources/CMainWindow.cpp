@@ -42,9 +42,9 @@ void CMainWindow::execute(void)
     
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)view);
     m_editableSceneController = std::make_shared<CEditableSceneController>();
-    m_editableSceneTransition = std::static_pointer_cast<CEditableSceneTransition>(m_editableSceneController->createEditableSceneTransition("main.transition.xml", window));
+    m_editableSceneTransition = std::static_pointer_cast<CEditableSceneTransition>(m_editableSceneController->createEditableSceneTransition("transition.main.xml", window));
     m_editableSceneController->RegisterTransition(m_editableSceneTransition);
-    m_editableSceneController->GoToTransition("main.transition.xml");
+    m_editableSceneController->GoToTransition("transition.main.xml");
     
 #endif
 }

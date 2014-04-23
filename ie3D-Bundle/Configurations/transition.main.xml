@@ -1,0 +1,10 @@
+<transition guid="transition.main">
+    <output_render_operation filename="render.operation.output.xml"/>
+    <world_space_operations>
+        <operation filename="render.operation.world.base.xml"/>
+        <operation filename="render.operation.world.reflection.xml"/>
+        <operation filename="render.operation.world.refraction.xml"/>
+    </world_space_operations>
+    <screen_space_operations>
+    </screen_space_operations>
+</transition>
