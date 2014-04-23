@@ -15,7 +15,6 @@
 #include "COcean.h"
 #include "CLandscape.h"
 #include "CParticleEmitter.h"
-#include "ICollisionHandler.h"
 #include "IInputContext.h"
 
 CSceneGraph::CSceneGraph(void) :

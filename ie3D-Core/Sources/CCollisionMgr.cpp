@@ -7,7 +7,6 @@
 //
 
 #include "CCollisionMgr.h"
-#include "ICollisionHandler.h"
 #include "CCamera.h"
 #include "IGameObject.h"
 #include "CMesh.h"
@@ -43,13 +42,13 @@ void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point)
     
     for(const auto& handler : m_handlers)
     {
-        std::vector<std::shared_ptr<IGameObject> > colliders = handler->_Get_Commands()._ExecuteGetCollidersCommand();
+        std::vector<ISharedGameObject> colliders = handler->colliders();
         for(const auto& collider : colliders)
         {
             glm::vec3 point;
             if(CCollisionMgr::_CollisionPoint(collider->getCollisionVertexBuffer(), collider->getCollisionIndexBuffer(), glm::mat4x4(1.0f), origin, direction, &point))
             {
-                handler->_Get_Commands()._ExecuteCollisionCommand(point, collider);
+                handler->onCollision(point, collider);
             }
         }
     }

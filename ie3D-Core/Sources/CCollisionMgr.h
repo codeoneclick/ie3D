@@ -13,7 +13,23 @@
 #include "IInputContext.h"
 #include "HDeclaration.h"
 
-class ICollisionHandler;
+class ICollisionHandler
+{
+private:
+    
+    friend class CCollisionMgr;
+    
+protected:
+    
+    ICollisionHandler(void) = default;
+    
+    virtual std::vector<ISharedGameObject> colliders(void) = 0;
+    virtual void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject) = 0;
+    
+public:
+    
+    virtual ~ICollisionHandler(void) = default;
+};
 
 class CCollisionMgr final : public IGestureRecognizerHandler
 {

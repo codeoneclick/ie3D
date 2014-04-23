@@ -61,6 +61,8 @@ public:
     
     void listenRenderMgr(bool value);
     void listenSceneUpdateMgr(bool value);
+    
+    std::vector<ISharedGameObject> getChunks(void) const;
 
     CSharedTexture getHeightmapTexture(void) const;
     f32* getHeightmapData(void) const;

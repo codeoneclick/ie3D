@@ -10,7 +10,7 @@
 #define IScene_h
 
 #include "HCommon.h"
-#include "ICollisionHandler.h"
+#include "CCollisionMgr.h"
 
 class CCamera;
 class CLight;
@@ -30,10 +30,10 @@ protected:
     std::vector<std::shared_ptr<CLight>> m_lights;
     std::vector<std::shared_ptr<CModel> > m_models;
     std::vector<std::shared_ptr<CParticleEmitter> > m_particles;
-    std::vector<std::shared_ptr<IGameObject> > m_colliders;
+    std::vector<ISharedGameObject> m_colliders;
     
-    std::vector<std::shared_ptr<IGameObject> > _OnGetColliders(void);
-    virtual void _OnCollision(const glm::vec3& _position, std::shared_ptr<IGameObject> _collider) = 0;
+    virtual std::vector<ISharedGameObject> colliders(void);
+    virtual void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject);
     
 public:
     

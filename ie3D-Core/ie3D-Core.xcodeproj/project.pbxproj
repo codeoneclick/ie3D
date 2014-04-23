@@ -92,7 +92,6 @@
 		21208FEA1906FB5F00FFC8D4 /* CConfigurationGameObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E4D59A1865944D006F84D6 /* CConfigurationGameObjects.cpp */; };
 		21208FEB1906FB5F00FFC8D4 /* CConfigurationAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E217560F5E0056461B /* CConfigurationAccessor.cpp */; };
 		21208FEC1906FB5F00FFC8D4 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
-		21208FED1906FB5F00FFC8D4 /* ICollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364842179953E000C51AC4 /* ICollisionHandler.cpp */; };
 		21208FEE1906FB5F00FFC8D4 /* IResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204CB17427D4C0063AB07 /* IResource.cpp */; };
 		21208FEF1906FB5F00FFC8D4 /* CQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB29D1815A48700DB8ECC /* CQuad.cpp */; };
 		21208FF01906FB5F00FFC8D4 /* CTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C717427D4C0063AB07 /* CTexture.cpp */; };
@@ -205,7 +204,6 @@
 		2132662E1906A4AF001C98F7 /* CConfigurationGameObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E4D59A1865944D006F84D6 /* CConfigurationGameObjects.cpp */; };
 		2132662F1906A4AF001C98F7 /* CConfigurationAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E217560F5E0056461B /* CConfigurationAccessor.cpp */; };
 		213266301906A4AF001C98F7 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
-		213266311906A4AF001C98F7 /* ICollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4364842179953E000C51AC4 /* ICollisionHandler.cpp */; };
 		213266321906A4AF001C98F7 /* IResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204CB17427D4C0063AB07 /* IResource.cpp */; };
 		213266331906A4AF001C98F7 /* CQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB29D1815A48700DB8ECC /* CQuad.cpp */; };
 		213266341906A4AF001C98F7 /* CTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204C717427D4C0063AB07 /* CTexture.cpp */; };
@@ -352,8 +350,6 @@
 		A42FF51A17A150A600C0B419 /* CSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSkeleton.h; path = Sources/CSkeleton.h; sourceTree = "<group>"; };
 		A436483F179952D300C51AC4 /* CCollisionMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCollisionMgr.cpp; path = Sources/CCollisionMgr.cpp; sourceTree = "<group>"; };
 		A4364840179952D300C51AC4 /* CCollisionMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCollisionMgr.h; path = Sources/CCollisionMgr.h; sourceTree = "<group>"; };
-		A4364842179953E000C51AC4 /* ICollisionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICollisionHandler.cpp; path = Sources/ICollisionHandler.cpp; sourceTree = "<group>"; };
-		A4364843179953E000C51AC4 /* ICollisionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICollisionHandler.h; path = Sources/ICollisionHandler.h; sourceTree = "<group>"; };
 		A436489C179D767400C51AC4 /* CInputContext_ios.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CInputContext_ios.cpp; path = Sources/CInputContext_ios.cpp; sourceTree = "<group>"; };
 		A436489D179D767400C51AC4 /* CInputContext_win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInputContext_win32.cpp; path = Sources/CInputContext_win32.cpp; sourceTree = "<group>"; };
 		A436489E179D767400C51AC4 /* IInputContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IInputContext.h; path = Sources/IInputContext.h; sourceTree = "<group>"; };
@@ -963,8 +959,6 @@
 			children = (
 				A4364840179952D300C51AC4 /* CCollisionMgr.h */,
 				A436483F179952D300C51AC4 /* CCollisionMgr.cpp */,
-				A4364843179953E000C51AC4 /* ICollisionHandler.h */,
-				A4364842179953E000C51AC4 /* ICollisionHandler.cpp */,
 			);
 			name = "Collision Managment";
 			sourceTree = "<group>";
@@ -1620,7 +1614,6 @@
 				21208FEA1906FB5F00FFC8D4 /* CConfigurationGameObjects.cpp in Sources */,
 				21208FEB1906FB5F00FFC8D4 /* CConfigurationAccessor.cpp in Sources */,
 				21208FEC1906FB5F00FFC8D4 /* CCollisionMgr.cpp in Sources */,
-				21208FED1906FB5F00FFC8D4 /* ICollisionHandler.cpp in Sources */,
 				21208FEE1906FB5F00FFC8D4 /* IResource.cpp in Sources */,
 				21208FEF1906FB5F00FFC8D4 /* CQuad.cpp in Sources */,
 				21208FF01906FB5F00FFC8D4 /* CTexture.cpp in Sources */,
@@ -1740,7 +1733,6 @@
 				2132662E1906A4AF001C98F7 /* CConfigurationGameObjects.cpp in Sources */,
 				2132662F1906A4AF001C98F7 /* CConfigurationAccessor.cpp in Sources */,
 				213266301906A4AF001C98F7 /* CCollisionMgr.cpp in Sources */,
-				213266311906A4AF001C98F7 /* ICollisionHandler.cpp in Sources */,
 				213266321906A4AF001C98F7 /* IResource.cpp in Sources */,
 				213266331906A4AF001C98F7 /* CQuad.cpp in Sources */,
 				213266341906A4AF001C98F7 /* CTexture.cpp in Sources */,

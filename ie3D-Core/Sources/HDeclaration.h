@@ -232,4 +232,20 @@ class IGestureRecognizerHandler;
 typedef std::shared_ptr<IGestureRecognizerHandler> ISharedGestureRecognizerHandler;
 typedef const ISharedGestureRecognizerHandler& ISharedGestureRecognizerHandlerRef;
 
+class IGameObject;
+typedef std::shared_ptr<IGameObject> ISharedGameObject;
+typedef const ISharedGameObject& ISharedGameObjectRef;
+
+class COcean;
+typedef std::shared_ptr<COcean> CSharedOcean;
+typedef const CSharedOcean& CSharedOceanRef;
+
+class CLandscape;
+typedef std::shared_ptr<CLandscape> CSharedLandscape;
+typedef const CSharedLandscape& CSharedLandscapeRef;
+
+class CLandscapeChunk;
+typedef std::shared_ptr<CLandscapeChunk> CSharedLandscapeChunk;
+typedef const CSharedLandscapeChunk& CSharedLandscapeChunkRef;
+
 #endif

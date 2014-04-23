@@ -138,7 +138,16 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32  CLandscape::zOrder(void)
+std::vector<ISharedGameObject> CLandscape::getChunks(void) const
+{
+    std::vector<ISharedGameObject> chunks;
+    std::for_each(m_chunks.begin(), m_chunks.end(), [&chunks](CSharedLandscapeChunk chunk){
+        chunks.push_back(chunk);
+    });
+    return chunks;
+}
+
+i32 CLandscape::zOrder(void)
 {
     return m_zOrder;
 }

@@ -22,7 +22,12 @@ IScene::~IScene(void)
     m_colliders.clear();
 }
 
-std::vector<std::shared_ptr<IGameObject> > IScene::_OnGetColliders(void)
+std::vector<std::shared_ptr<IGameObject> > IScene::colliders(void)
 {
     return m_colliders;
+}
+
+void IScene::onCollision(const glm::vec3 &position, ISharedGameObjectRef gameObject)
+{
+    
 }
