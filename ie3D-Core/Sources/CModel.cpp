@@ -24,7 +24,7 @@ CModel::CModel(CSharedResourceAccessorRef resourceAccessor,
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
 m_animationMixer(nullptr)
 {
-    m_zOrder = 8;
+    m_zOrder = E_GAME_OBJECT_Z_ORDER_MODEL;
 
 	m_materialBindImposer = [this](CSharedMaterialRef material)
     {

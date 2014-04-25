@@ -248,4 +248,8 @@ class CLandscapeChunk;
 typedef std::shared_ptr<CLandscapeChunk> CSharedLandscapeChunk;
 typedef const CSharedLandscapeChunk& CSharedLandscapeChunkRef;
 
+class ICollisionHandler;
+typedef std::shared_ptr<ICollisionHandler> ISharedCollisionHandler;
+typedef const ISharedCollisionHandler& ISharedCollisionHandlerRef;
+
 #endif

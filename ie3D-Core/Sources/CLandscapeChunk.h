@@ -50,6 +50,9 @@ public:
     CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
                     ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
     ~CLandscapeChunk(void);
+    
+    CSharedVertexBuffer getCollisionVertexBuffer(void) const;
+    CSharedIndexBuffer getCollisionIndexBuffer(void) const;
 };
 
 #endif

@@ -43,7 +43,7 @@ m_isLoaded(false)
     m_collisionMgr = std::make_shared<CCollisionMgr>();
     
     m_inputContext = _inputContext;
-    m_inputContext->addGestureRecognizerHandler(m_collisionMgr);
+    m_inputContext->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(m_collisionMgr));
 }
 
 IGameTransition::~IGameTransition(void)

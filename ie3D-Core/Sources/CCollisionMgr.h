@@ -37,11 +37,22 @@ private:
     
 protected:
     
-    std::shared_ptr<CCamera> m_camera;
-    std::set<std::shared_ptr<ICollisionHandler> > m_handlers;
+    CSharedCamera m_camera;
+    std::set<ISharedCollisionHandler> m_handlers;
     
-    bool _CollisionPoint(std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer, const glm::mat4x4& _worldMatrix, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _point);
-    bool _TriangleIntersection(const glm::vec3& _trianglePoint_01, glm::vec3& _trianglePoint_02, glm::vec3& _trianglePoint_03, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _intersectPoint);
+    bool collisionPoint(CSharedVertexBufferRef vertexBuffer,
+                        CSharedIndexBufferRef indexBuffer,
+                        const glm::mat4x4& worldMatrix,
+                        const glm::vec3& origin,
+                        const glm::vec3& direction,
+                        glm::vec3* _point);
+    
+    bool triangleIntersection(const glm::vec3& trianglePoint_01,
+                              const glm::vec3& trianglePoint_02,
+                              const glm::vec3& trianglePoint_03,
+                              const glm::vec3& origin,
+                              const glm::vec3& direction,
+                              glm::vec3* intersectPoint);
     
     void onGestureRecognizerPressed(const glm::ivec2& point);
     void onGestureRecognizerMoved(const glm::ivec2& point);
@@ -52,16 +63,18 @@ public:
     CCollisionMgr(void);
     ~CCollisionMgr(void);
     
-    void Set_Camera( std::shared_ptr<CCamera> _camera)
-    {
-        assert(_camera != NULL);
-        m_camera = _camera;
-    };
+    void setCamera(CSharedCameraRef camera);
+
     
-    static void Unproject(const glm::ivec2& _point, const glm::mat4x4& _viewMatrix, const glm::mat4x4& _projectionMatrix, glm::ivec4 _viewport, glm::vec3* _origin, glm::vec3* _direction);
+    static void unproject(const glm::ivec2& point,
+                          const glm::mat4x4& viewMatrix,
+                          const glm::mat4x4& projectionMatrix,
+                          const glm::ivec4& viewport,
+                          glm::vec3* origin,
+                          glm::vec3* direction);
     
-    void RegisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler);
-    void UnregisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler);
+    void addCollisionHandler(ISharedCollisionHandlerRef handler);
+    void removeCollisionHandler(ISharedCollisionHandlerRef handler);
 };
 
 #endif 

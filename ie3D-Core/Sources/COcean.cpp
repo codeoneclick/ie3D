@@ -23,7 +23,7 @@ COcean::COcean(CSharedResourceAccessorRef resourceAccessor,
                ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor)
 {
-    m_zOrder = 5;
+    m_zOrder = E_GAME_OBJECT_Z_ORDER_OCEAN;
 }
 
 COcean::~COcean(void)

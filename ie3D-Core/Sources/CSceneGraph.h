@@ -81,8 +81,8 @@ public:
     void addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
     void removeGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
     
-    void RegisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler);
-    void UnregisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler);
+    void addCollisionHandler(ISharedCollisionHandlerRef handler);
+    void removeCollisionHandler(ISharedCollisionHandlerRef handler);
 };
 
 #endif 

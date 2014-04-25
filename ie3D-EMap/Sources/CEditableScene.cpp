@@ -16,6 +16,7 @@
 #include "CNavigator.h"
 #include "CCharacterController.h"
 #include "CMoveControllerRecognizer.h"
+#include "CMapDragController.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
 IScene(root)
@@ -58,6 +59,12 @@ void CEditableScene::load(void)
     std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("gameobject.landscape.xml");
     m_root->InsertLandscape(landscape);
     
+    for(ui32 i = 0; i < landscape->getChunks().size(); ++i)
+    {
+        m_colliders.push_back(landscape->getChunks().at(i));
+    }
+    m_root->addCollisionHandler(shared_from_this());
+    
     m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
     m_characterController = std::make_shared<CCharacterController>();
     m_characterController->Set_Camera(m_camera);
@@ -68,16 +75,24 @@ void CEditableScene::load(void)
     m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
     m_root->addGestureRecognizerHandler(m_moveControllerRecognizer);
     m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);
+    
+    m_mapDragController = std::make_shared<CMapDragController>(m_camera);
+    m_root->addGestureRecognizerHandler(m_mapDragController);
 }
 
 void CEditableScene::update(f32 deltatime)
 {
-    m_characterController->OnUpdate(deltatime);
+    //m_characterController->OnUpdate(deltatime);
 }
 
-void CEditableScene::_OnCollision(const glm::vec3& position,
-                                  std::shared_ptr<IGameObject> collider)
+void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)
 {
+    m_particles.at(0)->setPosition(position);
+    /*std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("gameobject.particle.emitter.xml");
+    particleEmitter->setPosition(position);
     
+    m_particles.push_back(particleEmitter);
+    m_root->InsertParticleEmitter(particleEmitter);
+    std::cout<<"x: "<<position.x<<", y: "<<position.y<<", z: "<<position.z<<std::endl;*/
 }
 

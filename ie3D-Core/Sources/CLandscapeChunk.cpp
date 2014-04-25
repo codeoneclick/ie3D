@@ -26,7 +26,7 @@ m_width(0),
 m_height(0),
 m_numIndexesToRender(0)
 {
-    m_zOrder = 4;
+    m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
     
     m_materialBindImposer = [this](CSharedMaterialRef material)
     {
@@ -160,5 +160,19 @@ void CLandscapeChunk::onUnbind(const std::string& mode)
 void CLandscapeChunk::onBatch(const std::string& mode)
 {
     IGameObject::onBatch(mode);
+}
+
+CSharedVertexBuffer CLandscapeChunk::getCollisionVertexBuffer(void) const
+{
+    assert(m_mesh != nullptr);
+    assert(m_mesh->getVertexBuffer() != nullptr);
+    return m_mesh->getVertexBuffer();
+}
+
+CSharedIndexBuffer CLandscapeChunk::getCollisionIndexBuffer(void) const
+{
+    assert(m_mesh != nullptr);
+    assert(m_mesh->getIndexBuffer() != nullptr);
+    return m_mesh->getIndexBuffer();
 }
 

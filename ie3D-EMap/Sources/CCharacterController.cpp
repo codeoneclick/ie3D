@@ -41,6 +41,7 @@ void CCharacterController::Set_Rotation(const glm::vec3& _rotation)
 void CCharacterController::_OnMoveControllerUpdate(ui32 _direction)
 {
     m_moveDirection = static_cast<E_MOVE_CONTROLLER_DIRECTION>(_direction);
+    CCharacterController::OnUpdate(0);
 }
 
 void CCharacterController::OnUpdate(f32 _deltatime)

@@ -22,7 +22,7 @@ IScene::~IScene(void)
     m_colliders.clear();
 }
 
-std::vector<std::shared_ptr<IGameObject> > IScene::colliders(void)
+std::vector<ISharedGameObject> IScene::colliders(void)
 {
     return m_colliders;
 }

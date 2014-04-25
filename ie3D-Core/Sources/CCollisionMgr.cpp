@@ -24,21 +24,32 @@ CCollisionMgr::~CCollisionMgr(void)
     
 }
 
-void CCollisionMgr::RegisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler)
+void CCollisionMgr::setCamera(CSharedCameraRef camera)
 {
-    m_handlers.insert(_handler);
+    assert(camera != nullptr);
+    m_camera = camera;
 }
 
-void CCollisionMgr::UnregisterCollisionHandler(std::shared_ptr<ICollisionHandler> _handler)
+void CCollisionMgr::addCollisionHandler(ISharedCollisionHandlerRef handler)
 {
-    m_handlers.erase(_handler);
+    m_handlers.insert(handler);
+}
+
+void CCollisionMgr::removeCollisionHandler(ISharedCollisionHandlerRef handler)
+{
+    m_handlers.erase(handler);
 }
 
 void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point)
 {
     assert(m_camera != nullptr);
     glm::vec3 origin, direction;
-    CCollisionMgr::Unproject(point, m_camera->Get_ViewMatrix(), m_camera->Get_ProjectionMatrix(), m_camera->Get_Viewport(), &origin, &direction);
+    CCollisionMgr::unproject(point,
+                             m_camera->Get_ViewMatrix(),
+                             m_camera->Get_ProjectionMatrix(),
+                             m_camera->Get_Viewport(),
+                             &origin,
+                             &direction);
     
     for(const auto& handler : m_handlers)
     {
@@ -46,7 +57,12 @@ void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point)
         for(const auto& collider : colliders)
         {
             glm::vec3 point;
-            if(CCollisionMgr::_CollisionPoint(collider->getCollisionVertexBuffer(), collider->getCollisionIndexBuffer(), glm::mat4x4(1.0f), origin, direction, &point))
+            if(CCollisionMgr::collisionPoint(collider->getCollisionVertexBuffer(),
+                                             collider->getCollisionIndexBuffer(),
+                                             glm::mat4x4(1.0f),
+                                             origin,
+                                             direction,
+                                             &point))
             {
                 handler->onCollision(point, collider);
             }
@@ -64,12 +80,16 @@ void CCollisionMgr::onGestureRecognizerReleased(const glm::ivec2& point)
     
 }
 
-void CCollisionMgr::Unproject(const glm::ivec2& _point, const glm::mat4x4& _viewMatrix, const glm::mat4x4& _projectionMatrix, glm::ivec4 _viewport,glm::vec3* _origin, glm::vec3* _direction)
+void CCollisionMgr::unproject(const glm::ivec2& point,
+                              const glm::mat4x4& viewMatrix,
+                              const glm::mat4x4& projectionMatrix,
+                              const glm::ivec4& viewport,
+                              glm::vec3* _origin, glm::vec3* _direction)
 {
     glm::vec3 direction, origin;
-    float screenX =  -((( 2.0f * _point.x ) / _viewport[2]) - 1.0f ) / _projectionMatrix[0][0];
-    float screenY =  ((( 2.0f * _point.y ) / _viewport[3]) - 1.0f ) / _projectionMatrix[1][1];
-    glm::mat4x4 viewInverseMatrix = glm::inverse(_viewMatrix);
+    float screenX =  -((( 2.0f * point.x ) / viewport[2]) - 1.0f ) / projectionMatrix[0][0];
+    float screenY =  ((( 2.0f * point.y ) / viewport[3]) - 1.0f ) / projectionMatrix[1][1];
+    glm::mat4x4 viewInverseMatrix = glm::inverse(viewMatrix);
     
     direction.x  = (screenX * viewInverseMatrix[0][0] + screenY * viewInverseMatrix[1][0] + viewInverseMatrix[2][0]);
     direction.y  = (screenX * viewInverseMatrix[0][1] + screenY * viewInverseMatrix[1][1] + viewInverseMatrix[2][1]);
@@ -84,12 +104,17 @@ void CCollisionMgr::Unproject(const glm::ivec2& _point, const glm::mat4x4& _view
 }
 
 
-bool CCollisionMgr::_TriangleIntersection(const glm::vec3 &_trianglePoint_01, glm::vec3 &_trianglePoint_02, glm::vec3 &_trianglePoint_03, const glm::vec3 &_origin, const glm::vec3 &_direction, glm::vec3 *_intersectPoint)
+bool CCollisionMgr::triangleIntersection(const glm::vec3& trianglePoint_01,
+                                         const glm::vec3& trianglePoint_02,
+                                         const glm::vec3& trianglePoint_03,
+                                         const glm::vec3 &origin,
+                                         const glm::vec3 &direction,
+                                         glm::vec3 *intersectPoint)
 {
-    glm::vec3 edge_01 = _trianglePoint_02 - _trianglePoint_01;
-	glm::vec3 edge_02 = _trianglePoint_03 - _trianglePoint_01;
+    glm::vec3 edge_01 = trianglePoint_02 - trianglePoint_01;
+	glm::vec3 edge_02 = trianglePoint_03 - trianglePoint_01;
     
-    glm::vec3 pVector = glm::cross(_direction, edge_02);
+    glm::vec3 pVector = glm::cross(direction, edge_02);
 	f32 determinant = glm::dot(edge_01, pVector);
 	if(fabs(determinant) < 0.0001f)
     {
@@ -97,7 +122,7 @@ bool CCollisionMgr::_TriangleIntersection(const glm::vec3 &_trianglePoint_01, gl
     }
     
     f32 invDeterminant = 1.0f / determinant;
-	glm::vec3 tVector = _origin - _trianglePoint_01;
+	glm::vec3 tVector = origin - trianglePoint_01;
     
 	f32 u = glm::dot(tVector, pVector) * invDeterminant;
     if ( u < -0.0001f || u > 1.0001f )
@@ -106,32 +131,37 @@ bool CCollisionMgr::_TriangleIntersection(const glm::vec3 &_trianglePoint_01, gl
     }
     
     glm::vec3 qVector = glm::cross(tVector, edge_01);
-	f32 v = glm::dot(_direction, qVector) * invDeterminant;
+	f32 v = glm::dot(direction, qVector) * invDeterminant;
 	if ( v < -0.0001f || (v + u) > 1.0001f )
     {
         return false;
     }
     
-	(*_intersectPoint) = _trianglePoint_01 + (edge_01 * u) + (edge_02 * v);
+	(*intersectPoint) = trianglePoint_01 + (edge_01 * u) + (edge_02 * v);
 	return true;
 }
 
-bool CCollisionMgr::_CollisionPoint(std::shared_ptr<CVertexBuffer> _vertexBuffer, std::shared_ptr<CIndexBuffer> _indexBuffer, const glm::mat4x4& _worldMatrix, const glm::vec3& _origin, const glm::vec3& _direction, glm::vec3* _point)
+bool CCollisionMgr::collisionPoint(CSharedVertexBufferRef vertexBuffer,
+                                   CSharedIndexBufferRef indexBuffer,
+                                   const glm::mat4x4& worldMatrix,
+                                   const glm::vec3& origin,
+                                   const glm::vec3& direction,
+                                   glm::vec3* point)
 {
-    SAttributeVertex* vertexData = _vertexBuffer->lock();
-    ui16* indexData = _indexBuffer->lock();
-    ui32 numIndices = _indexBuffer->getSize();
+    SAttributeVertex* vertexData = vertexBuffer->lock();
+    ui16* indexData = indexBuffer->lock();
+    ui32 numIndices = indexBuffer->getSize();
 
     for(ui32 index = 0; index < numIndices; index += 3)
     {
-        glm::vec4 value = _worldMatrix * glm::vec4(vertexData[indexData[index + 0]].m_position, 1.0f);
+        glm::vec4 value = worldMatrix * glm::vec4(vertexData[indexData[index + 0]].m_position, 1.0f);
         glm::vec3 point_01 = glm::vec3(value.x, value.y, value.z);
-        value = _worldMatrix * glm::vec4(vertexData[indexData[index + 1]].m_position, 1.0f);
+        value = worldMatrix * glm::vec4(vertexData[indexData[index + 1]].m_position, 1.0f);
         glm::vec3 point_02 = glm::vec3(value.x, value.y, value.z);
-        value = _worldMatrix * glm::vec4(vertexData[indexData[index + 2]].m_position, 1.0f);
+        value = worldMatrix * glm::vec4(vertexData[indexData[index + 2]].m_position, 1.0f);
         glm::vec3 point_03 = glm::vec3(value.x, value.y, value.z);
         
-        if(CCollisionMgr::_TriangleIntersection(point_01, point_02, point_03, _origin, _direction, _point))
+        if(CCollisionMgr::triangleIntersection(point_01, point_02, point_03, origin, direction, point))
         {
             return true;
         }

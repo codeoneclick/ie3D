@@ -55,7 +55,7 @@ void CSceneGraph::Set_Camera(const std::shared_ptr<CCamera>& _camera)
     }
     
     assert(m_collisionMgr != nullptr);
-    m_collisionMgr->Set_Camera(m_camera);
+    m_collisionMgr->setCamera(m_camera);
 }
 
 /*void CSceneGraph::Set_Light(const std::shared_ptr<CLight>& _light, E_LIGHTS _id)
@@ -179,16 +179,16 @@ void CSceneGraph::RemoveParticleEmitter(const std::shared_ptr<CParticleEmitter>&
     m_particlesContainer.erase(_particleEmitter);
 }
 
-void CSceneGraph::RegisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler)
+void CSceneGraph::addCollisionHandler(ISharedCollisionHandlerRef handler)
 {
     assert(m_collisionMgr != nullptr);
-    m_collisionMgr->RegisterCollisionHandler(_handler);
+    m_collisionMgr->addCollisionHandler(handler);
 }
 
-void CSceneGraph::UnregisterCollisionHandler(const std::shared_ptr<ICollisionHandler>& _handler)
+void CSceneGraph::removeCollisionHandler(ISharedCollisionHandlerRef handler)
 {
     assert(m_collisionMgr != nullptr);
-    m_collisionMgr->UnregisterCollisionHandler(_handler);
+    m_collisionMgr->removeCollisionHandler(handler);
 }
 
 void CSceneGraph::addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler)

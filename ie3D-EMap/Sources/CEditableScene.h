@@ -15,6 +15,7 @@
 class CNavigator;
 class CCharacterController;
 class CMoveControllerRecognizer;
+class CMapDragController;
 
 class CEditableScene final : public IScene
 {
@@ -25,9 +26,9 @@ protected:
     std::shared_ptr<CMoveControllerRecognizer> m_moveControllerRecognizer;
     std::shared_ptr<CCharacterController> m_characterController;
     std::shared_ptr<CNavigator> m_navigator;
+    std::shared_ptr<CMapDragController> m_mapDragController;
     
-    void _OnCollision(const glm::vec3& position,
-                      std::shared_ptr<IGameObject> collider);
+    void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject);
     
 public:
     
