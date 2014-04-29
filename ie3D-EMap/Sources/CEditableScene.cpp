@@ -62,7 +62,9 @@ void CEditableScene::load(void)
     }
     m_root->addCollisionHandler(shared_from_this());
     
-    m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.01);
+    m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
+                                                               glm::vec3(0.0, 0.0, 0.0),
+                                                               glm::vec3(128.0, 0.0, 128.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);
 }
 

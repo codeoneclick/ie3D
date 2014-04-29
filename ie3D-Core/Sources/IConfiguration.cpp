@@ -14,6 +14,7 @@ std::map<std::string, GLenum> g_stringToGLenum = {
     {"GL_FRONT", GL_FRONT},
     {"GL_BACK", GL_BACK},
     {"GL_SRC_ALPHA", GL_SRC_ALPHA},
+    {"GL_ONE", GL_ONE},
     {"GL_ONE_MINUS_SRC_ALPHA", GL_ONE_MINUS_SRC_ALPHA},
     {"GL_REPEAT", GL_REPEAT},
     {"GL_CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE },
@@ -24,6 +25,7 @@ std::map<GLenum, std::string> g_glenumToString = {
     {GL_FRONT, "GL_FRONT"},
     {GL_BACK, "GL_BACK"},
     {GL_SRC_ALPHA, "GL_SRC_ALPHA"},
+    {GL_ONE, "GL_ONE"},
     {GL_ONE_MINUS_SRC_ALPHA, "GL_ONE_MINUS_SRC_ALPHA"},
     {GL_REPEAT, "GL_REPEAT"},
     {GL_CLAMP_TO_EDGE, "GL_CLAMP_TO_EDGE"},
@@ -40,6 +42,7 @@ static std::map<std::string, GLenum> g_glenumToString(void)
         container.insert(std::make_pair("GL_FRONT", GL_FRONT));
         container.insert(std::make_pair("GL_BACK", GL_BACK));
         container.insert(std::make_pair("GL_SRC_ALPHA", GL_SRC_ALPHA));
+        container.insert(std::make_pair("GL_ONE", GL_ONE));
         container.insert(std::make_pair("GL_ONE_MINUS_SRC_ALPHA", GL_ONE_MINUS_SRC_ALPHA));
         container.insert(std::make_pair("GL_REPEAT", GL_REPEAT));
         container.insert(std::make_pair("GL_CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE));

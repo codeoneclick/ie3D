@@ -21,8 +21,11 @@ protected:
     
     CSharedCamera m_camera;
     
-    glm::vec3 m_targetPosition;
-    glm::vec3 m_currentPosition;
+    glm::vec3 m_positionStarting;
+    glm::vec3 m_positionEnding;
+    
+    glm::vec3 m_maxBound;
+    glm::vec3 m_minBound;
     
     bool m_isPressed;
     f32 m_dragSpeed;
@@ -35,8 +38,15 @@ public:
     
     void update(f32 deltatime);
     
-    CMapDragController(CSharedCameraRef camera, f32 dragSpeed);
+    CMapDragController(CSharedCameraRef camera,
+                       f32 dragSpeed,
+                       const glm::vec3& maxBound,
+                       const glm::vec3& minBound);
+    
     ~CMapDragController(void);
+    
+    void setMaxBound(const glm::vec3& maxBound);
+    void setMinBound(const glm::vec3& minBound);
 };
 
 #endif

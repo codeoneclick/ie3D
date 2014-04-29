@@ -5,7 +5,7 @@
     is_depth_mask="0"
     is_blending="1"
     cull_face_mode="GL_FRONT"
-    blending_function_source="GL_SRC_ALPHA"
+    blending_function_source="GL_ONE"
     blending_function_destination="GL_ONE_MINUS_SRC_ALPHA"
     is_cliping="0"
     clipping_x="0.0"
