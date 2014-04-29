@@ -47,16 +47,16 @@ protected:
                         const glm::vec3& direction,
                         glm::vec3* _point);
     
-    bool triangleIntersection(const glm::vec3& trianglePoint_01,
-                              const glm::vec3& trianglePoint_02,
-                              const glm::vec3& trianglePoint_03,
-                              const glm::vec3& origin,
-                              const glm::vec3& direction,
-                              glm::vec3* intersectPoint);
+    static bool triangleIntersection(const glm::vec3& trianglePoint_01,
+                                     const glm::vec3& trianglePoint_02,
+                                     const glm::vec3& trianglePoint_03,
+                                     const glm::vec3& origin,
+                                     const glm::vec3& direction,
+                                     glm::vec3* intersectPoint);
     
-    void onGestureRecognizerPressed(const glm::ivec2& point);
+    void onGestureRecognizerPressed(const glm::ivec2& point, bool isRightButton = false);
     void onGestureRecognizerMoved(const glm::ivec2& point);
-    void onGestureRecognizerReleased(const glm::ivec2& point);
+    void onGestureRecognizerReleased(const glm::ivec2& point, bool isRightButton = false);
     
 public:
     
@@ -75,6 +75,10 @@ public:
     
     void addCollisionHandler(ISharedCollisionHandlerRef handler);
     void removeCollisionHandler(ISharedCollisionHandlerRef handler);
+    
+    static bool isIntersected(CSharedCameraRef camera,
+                              const glm::ivec2& point,
+                              glm::vec3* intersectPoint);
 };
 
 #endif 

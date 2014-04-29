@@ -889,7 +889,7 @@
 		A420817C1733AA6F0004729E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A4364898179D74E900C51AC4 /* GetureRecognizer Managment */,
+				A4364898179D74E900C51AC4 /* GestureRecognizer Managment */,
 				A42081921733AB070004729E /* Common */,
 				A494D36417392D3600228936 /* Render Managment */,
 				A494D36717392D8100228936 /* StateMachine Managment */,
@@ -963,7 +963,7 @@
 			name = "Collision Managment";
 			sourceTree = "<group>";
 		};
-		A4364898179D74E900C51AC4 /* GetureRecognizer Managment */ = {
+		A4364898179D74E900C51AC4 /* GestureRecognizer Managment */ = {
 			isa = PBXGroup;
 			children = (
 				A436489E179D767400C51AC4 /* IInputContext.h */,
@@ -973,7 +973,7 @@
 				A436489D179D767400C51AC4 /* CInputContext_win32.cpp */,
 				A4D21A0E1848C82700595FEA /* CInputContext_ndk.cpp */,
 			);
-			name = "GetureRecognizer Managment";
+			name = "GestureRecognizer Managment";
 			sourceTree = "<group>";
 		};
 		A46A317A174640450044643E /* Operations */ = {

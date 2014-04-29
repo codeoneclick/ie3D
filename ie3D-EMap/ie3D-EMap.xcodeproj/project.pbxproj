@@ -22,13 +22,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		21208EA41906F75D00FFC8D4 /* CCharacterController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E951906F75D00FFC8D4 /* CCharacterController.cpp */; };
 		21208EA51906F75D00FFC8D4 /* CEditableScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E971906F75D00FFC8D4 /* CEditableScene.cpp */; };
 		21208EA61906F75D00FFC8D4 /* CEditableSceneController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */; };
 		21208EA71906F75D00FFC8D4 /* CEditableSceneTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9B1906F75D00FFC8D4 /* CEditableSceneTransition.cpp */; };
-		21208EA81906F75D00FFC8D4 /* CMoveControllerRecognizer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9D1906F75D00FFC8D4 /* CMoveControllerRecognizer.cpp */; };
-		21208EA91906F75D00FFC8D4 /* CNavigator.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9F1906F75D00FFC8D4 /* CNavigator.cpp */; };
-		21208EAA1906F75D00FFC8D4 /* IMoveControllerHandler.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208EA21906F75D00FFC8D4 /* IMoveControllerHandler.cpp */; };
 		21208EBC1906F7D000FFC8D4 /* libEGL.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21208EBA1906F7CF00FFC8D4 /* libEGL.dylib */; };
 		21208EBD1906F7D000FFC8D4 /* libGLESv2.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21208EBB1906F7CF00FFC8D4 /* libGLESv2.dylib */; };
 		2120900B1906FBD600FFC8D4 /* Cocoa.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2120900A1906FBD600FFC8D4 /* Cocoa.framework */; };
@@ -137,21 +133,12 @@
 		1F379971561AECC752F4ADA1 /* qt_lib_positioning_private.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_positioning_private.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_positioning_private.pri; sourceTree = "<absolute>"; };
 		1FA4275F083C1248BFFBF88D /* qdevice.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qdevice.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/qdevice.pri; sourceTree = "<absolute>"; };
 		2058B06FF28E0FC72324895A /* qt_lib_gui.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_gui.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_gui.pri; sourceTree = "<absolute>"; };
-		21208E951906F75D00FFC8D4 /* CCharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCharacterController.cpp; path = Sources/CCharacterController.cpp; sourceTree = SOURCE_ROOT; };
-		21208E961906F75D00FFC8D4 /* CCharacterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCharacterController.h; path = Sources/CCharacterController.h; sourceTree = SOURCE_ROOT; };
 		21208E971906F75D00FFC8D4 /* CEditableScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEditableScene.cpp; path = Sources/CEditableScene.cpp; sourceTree = SOURCE_ROOT; };
 		21208E981906F75D00FFC8D4 /* CEditableScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEditableScene.h; path = Sources/CEditableScene.h; sourceTree = SOURCE_ROOT; };
 		21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEditableSceneController.cpp; path = Sources/CEditableSceneController.cpp; sourceTree = SOURCE_ROOT; };
 		21208E9A1906F75D00FFC8D4 /* CEditableSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEditableSceneController.h; path = Sources/CEditableSceneController.h; sourceTree = SOURCE_ROOT; };
 		21208E9B1906F75D00FFC8D4 /* CEditableSceneTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEditableSceneTransition.cpp; path = Sources/CEditableSceneTransition.cpp; sourceTree = SOURCE_ROOT; };
 		21208E9C1906F75D00FFC8D4 /* CEditableSceneTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEditableSceneTransition.h; path = Sources/CEditableSceneTransition.h; sourceTree = SOURCE_ROOT; };
-		21208E9D1906F75D00FFC8D4 /* CMoveControllerRecognizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMoveControllerRecognizer.cpp; path = Sources/CMoveControllerRecognizer.cpp; sourceTree = SOURCE_ROOT; };
-		21208E9E1906F75D00FFC8D4 /* CMoveControllerRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMoveControllerRecognizer.h; path = Sources/CMoveControllerRecognizer.h; sourceTree = SOURCE_ROOT; };
-		21208E9F1906F75D00FFC8D4 /* CNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNavigator.cpp; path = Sources/CNavigator.cpp; sourceTree = SOURCE_ROOT; };
-		21208EA01906F75D00FFC8D4 /* CNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNavigator.h; path = Sources/CNavigator.h; sourceTree = SOURCE_ROOT; };
-		21208EA11906F75D00FFC8D4 /* HKOTHEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKOTHEnums.h; path = Sources/HKOTHEnums.h; sourceTree = SOURCE_ROOT; };
-		21208EA21906F75D00FFC8D4 /* IMoveControllerHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IMoveControllerHandler.cpp; path = Sources/IMoveControllerHandler.cpp; sourceTree = SOURCE_ROOT; };
-		21208EA31906F75D00FFC8D4 /* IMoveControllerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMoveControllerHandler.h; path = Sources/IMoveControllerHandler.h; sourceTree = SOURCE_ROOT; };
 		21208EBA1906F7CF00FFC8D4 /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = "Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib/libEGL.dylib"; sourceTree = "<group>"; };
 		21208EBB1906F7CF00FFC8D4 /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<group>"; };
 		2120900A1906FBD600FFC8D4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -456,21 +443,12 @@
 		4288B89518A5AEAF50AB6AC0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				21208E951906F75D00FFC8D4 /* CCharacterController.cpp */,
-				21208E961906F75D00FFC8D4 /* CCharacterController.h */,
-				21208E971906F75D00FFC8D4 /* CEditableScene.cpp */,
 				21208E981906F75D00FFC8D4 /* CEditableScene.h */,
+				21208E971906F75D00FFC8D4 /* CEditableScene.cpp */,
 				21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */,
 				21208E9A1906F75D00FFC8D4 /* CEditableSceneController.h */,
 				21208E9B1906F75D00FFC8D4 /* CEditableSceneTransition.cpp */,
 				21208E9C1906F75D00FFC8D4 /* CEditableSceneTransition.h */,
-				21208E9D1906F75D00FFC8D4 /* CMoveControllerRecognizer.cpp */,
-				21208E9E1906F75D00FFC8D4 /* CMoveControllerRecognizer.h */,
-				21208E9F1906F75D00FFC8D4 /* CNavigator.cpp */,
-				21208EA01906F75D00FFC8D4 /* CNavigator.h */,
-				21208EA11906F75D00FFC8D4 /* HKOTHEnums.h */,
-				21208EA21906F75D00FFC8D4 /* IMoveControllerHandler.cpp */,
-				21208EA31906F75D00FFC8D4 /* IMoveControllerHandler.h */,
 				09BF715167B7A0149FD2FBB8 /* main.cpp */,
 				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
 				A4024724E546B6C12F58CF61 /* CMainWindow.h */,
@@ -829,15 +807,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				21208EA61906F75D00FFC8D4 /* CEditableSceneController.cpp in Compile Sources */,
-				21208EA91906F75D00FFC8D4 /* CNavigator.cpp in Compile Sources */,
 				212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */,
 				21208EA71906F75D00FFC8D4 /* CEditableSceneTransition.cpp in Compile Sources */,
 				21208EA51906F75D00FFC8D4 /* CEditableScene.cpp in Compile Sources */,
 				2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */,
 				5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */,
-				21208EA81906F75D00FFC8D4 /* CMoveControllerRecognizer.cpp in Compile Sources */,
-				21208EA41906F75D00FFC8D4 /* CCharacterController.cpp in Compile Sources */,
-				21208EAA1906F75D00FFC8D4 /* IMoveControllerHandler.cpp in Compile Sources */,
 				5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */,
 			);
 			name = "Compile Sources";

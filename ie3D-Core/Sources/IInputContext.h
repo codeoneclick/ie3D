@@ -23,9 +23,9 @@ protected:
     
     IGestureRecognizerHandler(void) = default;
     
-    virtual void onGestureRecognizerPressed(const glm::ivec2& point) = 0;
+    virtual void onGestureRecognizerPressed(const glm::ivec2& point, bool isRightButton = false) = 0;
     virtual void onGestureRecognizerMoved(const glm::ivec2& point) = 0;
-    virtual void onGestureRecognizerReleased(const glm::ivec2& point) = 0;
+    virtual void onGestureRecognizerReleased(const glm::ivec2& point, bool isRightButton = false) = 0;
     
 public:
     
@@ -67,9 +67,9 @@ public:
     static std::shared_ptr<IInputContext> createInputContext(ISharedOGLWindowRef window,
                                                              E_PLATFORM_API api);
     
-    void gestureRecognizerPressed(const glm::ivec2& point);
+    void gestureRecognizerPressed(const glm::ivec2& point, bool isRightButton = false);
     void gestureRecognizerMoved(const glm::ivec2& point);
-    void gestureRecognizerReleased(const glm::ivec2& point);
+    void gestureRecognizerReleased(const glm::ivec2& point, bool isRightButton = false);
     
     void addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
     void removeGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);

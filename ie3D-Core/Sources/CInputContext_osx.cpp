@@ -28,16 +28,40 @@
     self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, self.frame.size.height - point.y));
 }
 
-- (void)mouseDragged:(NSEvent *)event
+- (void)rightMouseDown:(NSEvent *)event;
+{
+    CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+    self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, self.frame.size.height - point.y), true);
+}
+
+- (void)mouseMoved:(NSEvent *)event
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
     self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y));
 }
 
-- (void)mouseUp:(NSEvent *)event
+- (void)mouseDragged:(NSEvent *)event;
+{
+    CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y));
+}
+
+- (void)rightMouseDragged:(NSEvent *)event;
+{
+    CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y));
+}
+
+- (void)mouseUp:(NSEvent *)event;
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
     self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, self.frame.size.height - point.y));
+}
+
+- (void)rightMouseUp:(NSEvent *)event;
+{
+    CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+    self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, self.frame.size.height - point.y), true);
 }
 
 @end

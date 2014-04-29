@@ -7,10 +7,15 @@
 //
 
 #include "CMapDragController.h"
+#include "CCollisionMgr.h"
+#include "CCamera.h"
 
-CMapDragController::CMapDragController(CSharedCameraRef camera) :
+CMapDragController::CMapDragController(CSharedCameraRef camera, f32 dragSpeed) :
 m_camera(camera),
-m_point(0)
+m_targetPosition(0),
+m_currentPosition(0),
+m_isPressed(false),
+m_dragSpeed(dragSpeed)
 {
     
 }
@@ -20,53 +25,28 @@ CMapDragController::~CMapDragController(void)
     
 }
 
-void CMapDragController::onGestureRecognizerPressed(const glm::ivec2& point)
+void CMapDragController::onGestureRecognizerPressed(const glm::ivec2& point, bool isRightButton)
 {
-
+    m_isPressed = isRightButton;
+    CCollisionMgr::isIntersected(m_camera, point, &m_targetPosition);
 }
 
 void CMapDragController::onGestureRecognizerMoved(const glm::ivec2& point)
 {
-    if(point.x < m_point.x && point.y < m_point.y)
+    if(CCollisionMgr::isIntersected(m_camera, point, &m_currentPosition) && m_isPressed)
     {
-       
+        m_currentPosition = m_targetPosition - m_currentPosition + m_camera->Get_LookAt();
     }
-    else if(point.x < m_point.x && point.y > m_point.y)
-    {
-        
-    }
-    else if(point.x > m_point.x && point.y < m_point.y)
-    {
-        
-    }
-    else if(point.x > m_point.x && point.y > m_point.y)
-    {
-        
-    }
-    else if(point.x < m_point.x)
-    {
-        
-    }
-    else if(point.x > m_point.x)
-    {
-        
-    }
-    else if(point.y < m_point.y)
-    {
-        
-    }
-    else if(point.y > m_point.y)
-    {
-        
-    }
-    else
-    {
-        
-    }
-    m_point = point;
 }
 
-void CMapDragController::onGestureRecognizerReleased(const glm::ivec2& point)
+void CMapDragController::onGestureRecognizerReleased(const glm::ivec2&, bool isRightButton)
 {
+    m_isPressed = !isRightButton;
+}
 
+void CMapDragController::update(f32)
+{
+    glm::vec3 position;
+    position = glm::mix(m_camera->Get_LookAt(), m_currentPosition, m_dragSpeed);
+    m_camera->Set_LookAt(position);
 }

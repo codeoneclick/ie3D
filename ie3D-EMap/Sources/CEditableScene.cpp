@@ -13,9 +13,6 @@
 #include "CLandscape.h"
 #include "COcean.h"
 #include "CParticleEmitter.h"
-#include "CNavigator.h"
-#include "CCharacterController.h"
-#include "CMoveControllerRecognizer.h"
 #include "CMapDragController.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
@@ -65,27 +62,16 @@ void CEditableScene::load(void)
     }
     m_root->addCollisionHandler(shared_from_this());
     
-    m_navigator = std::make_shared<CNavigator>(0.75f, 0.5f, 0.75f, 0.025f);
-    m_characterController = std::make_shared<CCharacterController>();
-    m_characterController->Set_Camera(m_camera);
-    m_characterController->Set_Character(particleEmitter);
-    m_characterController->Set_Navigator(m_navigator);
-	m_characterController->Set_Position(glm::vec3(24.0f, 0.0f, 24.0f));
-    
-    m_moveControllerRecognizer = std::make_shared<CMoveControllerRecognizer>();
-    m_root->addGestureRecognizerHandler(m_moveControllerRecognizer);
-    m_moveControllerRecognizer->RegisterMoveControllerHandler(m_characterController);
-    
-    m_mapDragController = std::make_shared<CMapDragController>(m_camera);
+    m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.01);
     m_root->addGestureRecognizerHandler(m_mapDragController);
 }
 
 void CEditableScene::update(f32 deltatime)
 {
-    //m_characterController->OnUpdate(deltatime);
+    m_mapDragController->update(deltatime);
 }
 
-void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)
+void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef)
 {
     m_particles.at(0)->setPosition(position);
     /*std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("gameobject.particle.emitter.xml");

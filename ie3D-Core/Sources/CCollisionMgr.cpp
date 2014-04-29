@@ -40,7 +40,7 @@ void CCollisionMgr::removeCollisionHandler(ISharedCollisionHandlerRef handler)
     m_handlers.erase(handler);
 }
 
-void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point)
+void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, bool isRightButton)
 {
     assert(m_camera != nullptr);
     glm::vec3 origin, direction;
@@ -75,7 +75,7 @@ void CCollisionMgr::onGestureRecognizerMoved(const glm::ivec2& point)
     
 }
 
-void CCollisionMgr::onGestureRecognizerReleased(const glm::ivec2& point)
+void CCollisionMgr::onGestureRecognizerReleased(const glm::ivec2& point, bool isRightButton)
 {
     
 }
@@ -103,6 +103,31 @@ void CCollisionMgr::unproject(const glm::ivec2& point,
     (*_origin) = origin;
 }
 
+bool CCollisionMgr::isIntersected(CSharedCameraRef camera,
+                                  const glm::ivec2& point,
+                                  glm::vec3* intersectPoint)
+{
+    glm::vec3 origin, direction;
+    CCollisionMgr::unproject(point,
+                             camera->Get_ViewMatrix(),
+                             camera->Get_ProjectionMatrix(),
+                             camera->Get_Viewport(),
+                             &origin,
+                             &direction);
+    if(CCollisionMgr::triangleIntersection(glm::vec3(-4096.0, 0.0, -4096.0),
+                                           glm::vec3( 4096.0, 0.0, -4096.0),
+                                           glm::vec3(-4096.0, 0.0,  4096.0),
+                                           origin,
+                                           direction, intersectPoint))
+    {
+        return true;
+    }
+    return CCollisionMgr::triangleIntersection(glm::vec3( 4096.0, 0.0,  4096.0),
+                                               glm::vec3( 4096.0, 0.0, -4096.0),
+                                               glm::vec3(-4096.0, 0.0,  4096.0),
+                                               origin,
+                                               direction, intersectPoint);
+}
 
 bool CCollisionMgr::triangleIntersection(const glm::vec3& trianglePoint_01,
                                          const glm::vec3& trianglePoint_02,
