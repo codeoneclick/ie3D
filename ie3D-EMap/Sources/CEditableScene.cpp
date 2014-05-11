@@ -12,6 +12,7 @@
 #include "CCamera.h"
 #include "CLandscape.h"
 #include "COcean.h"
+#include "CSkyBox.h"
 #include "CParticleEmitter.h"
 #include "CMapDragController.h"
 
@@ -29,7 +30,7 @@ CEditableScene::~CEditableScene(void)
 void CEditableScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->CreateCamera(60.0f,
+    m_camera = m_root->CreateCamera(90.0f,
                                     0.1f,
                                     256.0f,
                                     glm::ivec4(0, 0,
@@ -46,6 +47,9 @@ void CEditableScene::load(void)
     std::shared_ptr<COcean> ocean = m_root->CreateOcean("gameobject.ocean.xml");
     m_root->InsertOcean(ocean);
     ocean->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    
+    m_skyBox = m_root->createSkyBox("gameobject.skybox.xml");
+    m_root->InsertSkyBox(m_skyBox);
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
@@ -71,6 +75,9 @@ void CEditableScene::load(void)
 void CEditableScene::update(f32 deltatime)
 {
     m_mapDragController->update(deltatime);
+    static f32 angle = 0.0;
+    angle += 0.1;
+    m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
 }
 
 void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef)

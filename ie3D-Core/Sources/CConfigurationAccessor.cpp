@@ -10,6 +10,7 @@
 #include "CConfigurationGameObjects.h"
 #include "CConfigurationModelLoadingOperation.h"
 #include "CConfigurationOceanLoadingOperation.h"
+#include "CConfigurationSkyBoxLoadingOperation.h"
 #include "CConfigurationLandscapeLoadingOperation.h"
 #include "CConfigurationParticleEmitterLoadingOperation.h"
 #include "CConfigurationGameTransitionLoadingOperation.h"
@@ -72,4 +73,14 @@ void CConfigurationAccessor::LoadGameTransitionConfiguration(const std::string& 
     assert(gameTransitionConfiguration != nullptr);
     assert(handler != nullptr);
     handler->onConfigurationLoaded(gameTransitionConfiguration, true);
+}
+
+void CConfigurationAccessor::loadSkyBoxConfiguration(const std::string& filename,
+                                                     ISharedConfigurationLoadingHandlerRef handler)
+{
+    std::shared_ptr<CConfigurationSkyBoxLoadingOperation> operation = std::make_shared<CConfigurationSkyBoxLoadingOperation>();
+    std::shared_ptr<CConfigurationSkyBox> skyBoxConfiguration = std::static_pointer_cast<CConfigurationSkyBox>(operation->serialize(filename));
+    assert(skyBoxConfiguration != nullptr);
+    assert(handler != nullptr);
+    handler->onConfigurationLoaded(skyBoxConfiguration, true);
 }

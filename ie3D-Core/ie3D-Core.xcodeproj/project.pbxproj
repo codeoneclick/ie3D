@@ -120,6 +120,17 @@
 		212090071906FB6000FFC8D4 /* CMeshLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */; };
 		212090081906FB6000FFC8D4 /* CResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A319017466F720044643E /* CResourceLoader.cpp */; };
 		212090091906FB6000FFC8D4 /* CResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceAccessor.cpp */; };
+		212092AE19195CD000FFC8D4 /* CCubemapTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092AC19195CD000FFC8D4 /* CCubemapTexture.cpp */; };
+		212092B119195F4D00FFC8D4 /* CCubemapTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092AC19195CD000FFC8D4 /* CCubemapTexture.cpp */; };
+		212092B41919674400FFC8D4 /* CSkyBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092B21919674400FFC8D4 /* CSkyBox.cpp */; };
+		212092B51919674400FFC8D4 /* CSkyBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092B21919674400FFC8D4 /* CSkyBox.cpp */; };
+		212092B61919674400FFC8D4 /* CSkyBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 212092B31919674400FFC8D4 /* CSkyBox.h */; };
+		212092BA191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092B8191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp */; };
+		212092BB191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092B8191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp */; };
+		212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 212092B9191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h */; };
+		212092BF1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */; };
+		212092C01919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */; };
+		212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */; };
 		213265DD1906A4AF001C98F7 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F205B7174287450063AB07 /* pugixml.cpp */; };
 		213265DE1906A4AF001C98F7 /* IInputContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21DEC3E31903F07B00B41221 /* IInputContext.cpp */; };
 		213265DF1906A4AF001C98F7 /* CInputContext_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489C179D767400C51AC4 /* CInputContext_ios.cpp */; };
@@ -263,6 +274,14 @@
 		2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGameLoopExecutor_osx.cpp; path = Sources/CGameLoopExecutor_osx.cpp; sourceTree = "<group>"; };
 		2111AAC5181FF826007FE7A8 /* CGraphicsContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_osx.cpp; path = Sources/CGraphicsContext_osx.cpp; sourceTree = "<group>"; };
+		212092AC19195CD000FFC8D4 /* CCubemapTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCubemapTexture.cpp; path = Sources/CCubemapTexture.cpp; sourceTree = "<group>"; };
+		212092AD19195CD000FFC8D4 /* CCubemapTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCubemapTexture.h; path = Sources/CCubemapTexture.h; sourceTree = "<group>"; };
+		212092B21919674400FFC8D4 /* CSkyBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSkyBox.cpp; path = Sources/CSkyBox.cpp; sourceTree = "<group>"; };
+		212092B31919674400FFC8D4 /* CSkyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSkyBox.h; path = Sources/CSkyBox.h; sourceTree = "<group>"; };
+		212092B8191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationSkyBoxSerializer.cpp; path = Sources/CConfigurationSkyBoxSerializer.cpp; sourceTree = "<group>"; };
+		212092B9191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationSkyBoxSerializer.h; path = Sources/CConfigurationSkyBoxSerializer.h; sourceTree = "<group>"; };
+		212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationSkyBoxLoadingOperation.cpp; path = Sources/CConfigurationSkyBoxLoadingOperation.cpp; sourceTree = "<group>"; };
+		212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationSkyBoxLoadingOperation.h; path = Sources/CConfigurationSkyBoxLoadingOperation.h; sourceTree = "<group>"; };
 		213265D01906A3E0001C98F7 /* IGraphicsContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = IGraphicsContext.cpp; path = Sources/IGraphicsContext.cpp; sourceTree = SOURCE_ROOT; };
 		213265D11906A3E0001C98F7 /* IGraphicsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraphicsContext.h; path = Sources/IGraphicsContext.h; sourceTree = SOURCE_ROOT; };
 		213265D31906A407001C98F7 /* CGameLoopExecutor_ios.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGameLoopExecutor_ios.cpp; path = Sources/CGameLoopExecutor_ios.cpp; sourceTree = SOURCE_ROOT; };
@@ -760,6 +779,8 @@
 				A40138C21754EF060056461B /* CConfigurationModelSerializer.cpp */,
 				A46789D917A021AD00FE26FA /* CConfigurationOceanSerializer.h */,
 				A46789D817A021AD00FE26FA /* CConfigurationOceanSerializer.cpp */,
+				212092B9191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h */,
+				212092B8191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp */,
 				A490465E18463414009734B8 /* CConfigurationLandscapeSerializer.h */,
 				A490465D18463414009734B8 /* CConfigurationLandscapeSerializer.cpp */,
 				A40138C61754EF280056461B /* CConfigurationParticleEmitterSerializer.h */,
@@ -790,6 +811,8 @@
 				A40138E81756138F0056461B /* CConfigurationModelLoadingOperation.cpp */,
 				A46789D617A0212200FE26FA /* CConfigurationOceanLoadingOperation.h */,
 				A46789D517A0212200FE26FA /* CConfigurationOceanLoadingOperation.cpp */,
+				212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */,
+				212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */,
 				A490465B18463404009734B8 /* CConfigurationLandscapeLoadingOperation.h */,
 				A490465A18463404009734B8 /* CConfigurationLandscapeLoadingOperation.cpp */,
 				A40138EC1756144B0056461B /* CConfigurationParticleEmitterLoadingOperation.h */,
@@ -844,6 +867,8 @@
 				A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */,
 				A46B1C79183E3B3600A3EF49 /* CLandscapeEdges.h */,
 				A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */,
+				212092B31919674400FFC8D4 /* CSkyBox.h */,
+				212092B21919674400FFC8D4 /* CSkyBox.cpp */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -1137,6 +1162,8 @@
 				A42FF51917A150A600C0B419 /* CSkeleton.cpp */,
 				A46A3182174640BD0044643E /* CMaterial.h */,
 				A46A3181174640BC0044643E /* CMaterial.cpp */,
+				212092AD19195CD000FFC8D4 /* CCubemapTexture.h */,
+				212092AC19195CD000FFC8D4 /* CCubemapTexture.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1458,6 +1485,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */,
+				212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */,
+				212092B61919674400FFC8D4 /* CSkyBox.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1564,6 +1594,7 @@
 				21208FB81906FB5F00FFC8D4 /* CGameLoopExecutor_osx.cpp in Sources */,
 				21208FB91906FB5F00FFC8D4 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				21208FBA1906FB5F00FFC8D4 /* CGameLoopExecutor_ios.cpp in Sources */,
+				212092BB191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
 				21208FBB1906FB5F00FFC8D4 /* CGameLoopExecutor_win32.cpp in Sources */,
 				21208FBC1906FB5F00FFC8D4 /* IGameController.cpp in Sources */,
 				21208FBD1906FB5F00FFC8D4 /* IGameLoopHandler.cpp in Sources */,
@@ -1591,6 +1622,8 @@
 				21208FD31906FB5F00FFC8D4 /* IConfigurationSerializer.cpp in Sources */,
 				21208FD41906FB5F00FFC8D4 /* CGUITemplateSerializer.cpp in Sources */,
 				21208FD51906FB5F00FFC8D4 /* CConfigurationMaterialSerializer.cpp in Sources */,
+				212092B119195F4D00FFC8D4 /* CCubemapTexture.cpp in Sources */,
+				212092C01919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */,
 				21208FD61906FB5F00FFC8D4 /* CConfigurationModelSerializer.cpp in Sources */,
 				21208FD71906FB5F00FFC8D4 /* CConfigurationOceanSerializer.cpp in Sources */,
 				21208FD81906FB5F00FFC8D4 /* CConfigurationLandscapeSerializer.cpp in Sources */,
@@ -1624,6 +1657,7 @@
 				21208FF51906FB6000FFC8D4 /* CBone.cpp in Sources */,
 				21208FF61906FB6000FFC8D4 /* CSkeleton.cpp in Sources */,
 				21208FF71906FB6000FFC8D4 /* CMaterial.cpp in Sources */,
+				212092B51919674400FFC8D4 /* CSkyBox.cpp in Sources */,
 				21208FF81906FB6000FFC8D4 /* IResourceCommiter.cpp in Sources */,
 				21208FF91906FB6000FFC8D4 /* CShaderCommiter_GLSL.cpp in Sources */,
 				21208FFA1906FB6000FFC8D4 /* CTextureCommiter_PVR.cpp in Sources */,
@@ -1683,6 +1717,7 @@
 				213265FC1906A4AF001C98F7 /* CGameLoopExecutor_osx.cpp in Sources */,
 				213265FD1906A4AF001C98F7 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				213265FE1906A4AF001C98F7 /* CGameLoopExecutor_ios.cpp in Sources */,
+				212092BA191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
 				213265FF1906A4AF001C98F7 /* CGameLoopExecutor_win32.cpp in Sources */,
 				213266001906A4AF001C98F7 /* IGameController.cpp in Sources */,
 				213266011906A4AF001C98F7 /* IGameLoopHandler.cpp in Sources */,
@@ -1710,6 +1745,8 @@
 				213266171906A4AF001C98F7 /* IConfigurationSerializer.cpp in Sources */,
 				213266181906A4AF001C98F7 /* CGUITemplateSerializer.cpp in Sources */,
 				213266191906A4AF001C98F7 /* CConfigurationMaterialSerializer.cpp in Sources */,
+				212092AE19195CD000FFC8D4 /* CCubemapTexture.cpp in Sources */,
+				212092BF1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */,
 				2132661A1906A4AF001C98F7 /* CConfigurationModelSerializer.cpp in Sources */,
 				2132661B1906A4AF001C98F7 /* CConfigurationOceanSerializer.cpp in Sources */,
 				2132661C1906A4AF001C98F7 /* CConfigurationLandscapeSerializer.cpp in Sources */,
@@ -1743,6 +1780,7 @@
 				213266391906A4AF001C98F7 /* CBone.cpp in Sources */,
 				2132663A1906A4AF001C98F7 /* CSkeleton.cpp in Sources */,
 				2132663B1906A4AF001C98F7 /* CMaterial.cpp in Sources */,
+				212092B41919674400FFC8D4 /* CSkyBox.cpp in Sources */,
 				2132663C1906A4AF001C98F7 /* IResourceCommiter.cpp in Sources */,
 				2132663D1906A4AF001C98F7 /* CShaderCommiter_GLSL.cpp in Sources */,
 				2132663E1906A4AF001C98F7 /* CTextureCommiter_PVR.cpp in Sources */,

@@ -1,26 +1,19 @@
 //
-//  COcean.h
-//  indie2dEngine
+//  CSkyBox.h
+//  ie3D-Core
 //
-//  Created by Sergey Sergeev on 7/24/13.
-//  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
+//  Created by Sergey Sergeev on 5/6/14.
+//  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef COcean_h
-#define COcean_h
+#ifndef CSkyBox_h
+#define CSkyBox_h
 
 #include "IGameObject.h"
 
-class COcean: public IGameObject
+class CSkyBox: public IGameObject
 {
 private:
-
-    f32 m_width;
-    f32 m_height;
-    f32 m_altitude;
-    f32 m_waveGeneratorTimer;
-    f32 m_waveGeneratorInterval;
-    f32 m_textureTileFactor;
     
 protected:
     
@@ -39,9 +32,9 @@ protected:
     
 public:
     
-    COcean(CSharedResourceAccessorRef resourceAccessor,
-           ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
-    ~COcean(void);
+    CSkyBox(CSharedResourceAccessorRef resourceAccessor,
+            ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
+    ~CSkyBox(void);
 };
 
-#endif 
+#endif

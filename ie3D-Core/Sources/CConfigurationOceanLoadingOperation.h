@@ -25,5 +25,4 @@ public:
     ISharedConfiguration serialize(const std::string& filename);
 };
 
-
 #endif 

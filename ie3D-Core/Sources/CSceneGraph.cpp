@@ -13,6 +13,7 @@
 #include "IGameObject.h"
 #include "CModel.h"
 #include "COcean.h"
+#include "CSkyBox.h"
 #include "CLandscape.h"
 #include "CParticleEmitter.h"
 #include "IInputContext.h"
@@ -139,6 +140,16 @@ void CSceneGraph::RemoveOcean(const std::shared_ptr<COcean>& _ocean)
 {
     CSceneGraph::_RemoveGameObject(_ocean);
     m_oceansContainer = nullptr;
+}
+
+void CSceneGraph::InsertSkyBox(CSharedSkyBoxRef skybox)
+{
+    CSceneGraph::_InsertGameObject(skybox);
+}
+
+void CSceneGraph::RemoveSkyBox(CSharedSkyBoxRef skybox)
+{
+    CSceneGraph::_RemoveGameObject(skybox);
 }
 
 void CSceneGraph::InsertLandscape(const std::shared_ptr<CLandscape> &_landscape)

@@ -392,6 +392,78 @@ bool CConfigurationModel::isBatching(void) const
     return iterator->second[0]->getScalar<bool>();
 }
 
+CConfigurationSkyBox::CConfigurationSkyBox(void) :
+CConfigurationGameObject(E_CONFIGURATION_CLASS_SKYBOX),
+kSkyBoxMainNode("skybox"),
+kSkyBoxXPositiveTextureFilenameAttribute("x_positive"),
+kSkyBoxXNegativeTextureFilenameAttribute("x_negative"),
+kSkyBoxYPositiveTextureFilenameAttribute("y_positive"),
+kSkyBoxYNegativeTextureFilenameAttribute("y_negative"),
+kSkyBoxZPositiveTextureFilenameAttribute("z_positive"),
+kSkyBoxZNegativeTextureFilenameAttribute("z_negative")
+{
+    
+}
+
+CConfigurationSkyBox::~CConfigurationSkyBox(void)
+{
+    
+}
+
+std::string CConfigurationSkyBox::getXPositiveTextureFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kSkyBoxMainNode + ":" +
+                                             kSkyBoxXPositiveTextureFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getString();
+}
+
+std::string CConfigurationSkyBox::getXNegativeTextureFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kSkyBoxMainNode + ":" +
+                                             kSkyBoxXNegativeTextureFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getString();
+}
+
+std::string CConfigurationSkyBox::getYPositiveTextureFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kSkyBoxMainNode + ":" +
+                                             kSkyBoxYPositiveTextureFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getString();
+}
+
+std::string CConfigurationSkyBox::getYNegativeTextureFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kSkyBoxMainNode + ":" +
+                                             kSkyBoxYNegativeTextureFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getString();
+}
+
+std::string CConfigurationSkyBox::getZPositiveTextureFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kSkyBoxMainNode + ":" +
+                                             kSkyBoxZPositiveTextureFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getString();
+}
+
+std::string CConfigurationSkyBox::getZNegativeTextureFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kSkyBoxMainNode + ":" +
+                                             kSkyBoxZNegativeTextureFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getString();
+}
+
 CConfigurationOcean::CConfigurationOcean(void) :
 CConfigurationGameObject(E_CONFIGURATION_CLASS_OCEAN),
 kOceanMainNode("ocean"),

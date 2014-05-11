@@ -38,6 +38,9 @@ public:
     
     void LoadGameTransitionConfiguration(const std::string& filename,
                                          ISharedConfigurationLoadingHandlerRef handler);
+    
+    void loadSkyBoxConfiguration(const std::string& filename,
+                                 ISharedConfigurationLoadingHandlerRef handler);
 };
 
 #endif 

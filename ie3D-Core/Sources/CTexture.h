@@ -54,7 +54,7 @@ public:
     bool isCompressed(void) const;
 };
 
-class CTexture final : public IResource
+class CTexture : public IResource
 {
 private:
     
@@ -79,7 +79,7 @@ public:
                                                  ui32 width,
                                                  ui32 height);
     
-    ~CTexture(void);
+    virtual ~CTexture(void);
     
     ui32 getWidth(void) const;
     ui32 getHeight(void) const;
@@ -95,8 +95,8 @@ public:
     
     void setWrapMode(ui32 wrapMode);
     
-    void bind(void) const;
-    void unbind(void) const;
+    virtual void bind(void) const;
+    virtual void unbind(void) const;
 };
 
 #endif

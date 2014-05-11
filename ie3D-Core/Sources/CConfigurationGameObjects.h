@@ -171,7 +171,36 @@ public:
     bool isBatching(void) const;
 };
 
-class  CConfigurationOcean : public CConfigurationGameObject
+class CConfigurationSkyBox : public CConfigurationGameObject
+{
+public:
+    
+    const std::string kSkyBoxMainNode;
+    const std::string kSkyBoxXPositiveTextureFilenameAttribute;
+    const std::string kSkyBoxXNegativeTextureFilenameAttribute;
+    const std::string kSkyBoxYPositiveTextureFilenameAttribute;
+    const std::string kSkyBoxYNegativeTextureFilenameAttribute;
+    const std::string kSkyBoxZPositiveTextureFilenameAttribute;
+    const std::string kSkyBoxZNegativeTextureFilenameAttribute;
+    
+private:
+    
+protected:
+    
+public:
+    
+    CConfigurationSkyBox(void);
+    ~CConfigurationSkyBox(void);
+    
+    std::string getXPositiveTextureFilename(void) const;
+    std::string getXNegativeTextureFilename(void) const;
+    std::string getYPositiveTextureFilename(void) const;
+    std::string getYNegativeTextureFilename(void) const;
+    std::string getZPositiveTextureFilename(void) const;
+    std::string getZNegativeTextureFilename(void) const;
+};
+
+class CConfigurationOcean : public CConfigurationGameObject
 {
 public:
    

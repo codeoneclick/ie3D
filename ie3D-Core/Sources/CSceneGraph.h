@@ -69,6 +69,9 @@ public:
     void InsertOcean(const std::shared_ptr<COcean>& _ocean);
     void RemoveOcean(const std::shared_ptr<COcean>& _ocean);
     
+    void InsertSkyBox(CSharedSkyBoxRef skybox);
+    void RemoveSkyBox(CSharedSkyBoxRef skybox);
+    
     void InsertLandscape(const std::shared_ptr<CLandscape>& _landscape);
     void RemoveLandscape(const std::shared_ptr<CLandscape>& _landscape);
     

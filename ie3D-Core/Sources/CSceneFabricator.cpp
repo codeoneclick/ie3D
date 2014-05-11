@@ -10,11 +10,10 @@
 #include "CConfigurationAccessor.h"
 #include "CCamera.h"
 #include "CLight.h"
-//#include "CSprite.h"
 #include "CModel.h"
 #include "COcean.h"
+#include "CSkyBox.h"
 #include "CLandscape.h"
-//#include "CBillboard.h"
 #include "CParticleEmitter.h"
 #include "CResourceAccessor.h"
 #include "CRenderMgr.h"
@@ -138,4 +137,20 @@ std::shared_ptr<CParticleEmitter> CSceneFabricator::CreateParticleEmitter(const 
 void CSceneFabricator::DeleteParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter)
 {
     m_gameObjectsContainer.erase(_particleEmitter);
+}
+
+CSharedSkyBox CSceneFabricator::createSkyBox(const std::string& filename)
+{
+    assert(m_resourceAccessor != nullptr);
+	assert(m_screenSpaceTextureAccessor != nullptr);
+    std::shared_ptr<CSkyBox> skyBox = std::make_shared<CSkyBox>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+    assert(m_templateAccessor != nullptr);
+    m_templateAccessor->loadSkyBoxConfiguration(filename, skyBox);
+    m_gameObjectsContainer.insert(skyBox);
+    return skyBox;
+}
+
+void CSceneFabricator::deleteSkyBox(CSharedSkyBoxRef skyBox)
+{
+    
 }

@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "IFabricator.h"
+#include "HDeclaration.h"
 
 class CLight;
 class CCamera;
@@ -52,6 +53,9 @@ public:
     
     std::shared_ptr<COcean> CreateOcean(const std::string& _filename);
     void DeleteOcean(const std::shared_ptr<COcean>& _ocean);
+    
+    CSharedSkyBox createSkyBox(const std::string& filename);
+    void deleteSkyBox(CSharedSkyBoxRef skyBox);
     
     std::shared_ptr<CLandscape> CreateLandscape(const std::string& _filename);
     void DeleteLandscape(const std::shared_ptr<CLandscape>& _landscape);

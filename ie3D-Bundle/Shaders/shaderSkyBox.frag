@@ -33,7 +33,7 @@ void main(void)
     
     lowp vec4 vDiffuseColor_01 = texture2D(SAMPLER_03, OUT_TexCoordDisplace_01);
     lowp vec4 vDiffuseColor_02 = texture2D(SAMPLER_03, OUT_TexCoordDisplace_02) ;
-    lowp vec4 vDiffuseColor = mix(vDiffuseColor_01, vDiffuseColor_02, 0.5);
+    lowp vec4 vDiffuseColor = mix(vDiffuseColor_01, vDiffuseColor_02, 0.5);// * vec4(0.17, 0.26, 0.27, 1.0);
     
     mediump vec2 vTexCoordProj = OUT_TexCoordProjection.xy;
     vTexCoordProj = 0.5 + 0.5 * vTexCoordProj / OUT_TexCoordProjection.w * vec2(-1.0, 1.0);
@@ -65,8 +65,10 @@ void main(void)
     vDiffuseColor = fDiffuseFactor * mix(vec4(0.16, 0.32, 0.32, 1.0), vec4(0.16, 0.32, 0.16, 1.0), vHeightmapColor.a * 2.0);
     vDiffuseColor.a = 1.0;
     vReflectionColor = mix(vDiffuseColor, vReflectionColor, vReflectionColor.a);
+    //vReflectionColor = mix(vReflectionColor, vDiffuseColor, vRefractionColor.a);
     vRefractionColor = mix(vDiffuseColor, vRefractionColor, vHeightmapColor.a * 2.0 * fresnel);
     
+	//mediump vec4 vSpecularColor = vec4(pow(max(0.0, dot(vec3(0.0, 0.0, 0.0), vNormalColor)), 1024.0));
     lowp vec4 vColor = mix(vReflectionColor, vRefractionColor, fresnel) + vec4(fSpecularFactor);
     gl_FragColor = vColor;
 }
