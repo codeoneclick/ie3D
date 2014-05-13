@@ -142,9 +142,8 @@ void COcean::onDraw(const std::string& mode)
         CSharedTexture heightmapTexture = m_screenSpaceTextureAccessor->getCustomTexture("landscape.heightmap");
         if(heightmapTexture)
         {
-            material->setTexture(heightmapTexture, E_SHADER_SAMPLER_05);
+            material->setTexture(heightmapTexture, E_SHADER_SAMPLER_04);
         }
-        
         IGameObject::onDraw(mode);
     }
 }

@@ -9,57 +9,67 @@
 /* Begin PBXBuildFile section */
 		213267931906AA37001C98F7 /* libie3DCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2132678E1906AA26001C98F7 /* libie3DCore-ios.a */; };
 		213267961906B51C001C98F7 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
-		21BC34F419081510007B99DA /* gameobject.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34CE19081510007B99DA /* gameobject.landscape.xml */; };
-		21BC34F519081510007B99DA /* gameobject.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34CF19081510007B99DA /* gameobject.ocean.xml */; };
-		21BC34F619081510007B99DA /* gameobject.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D019081510007B99DA /* gameobject.particle.emitter.xml */; };
-		21BC34F719081510007B99DA /* material.landscape.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D119081510007B99DA /* material.landscape.base.xml */; };
-		21BC34F819081510007B99DA /* material.landscape.edges.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D219081510007B99DA /* material.landscape.edges.base.xml */; };
-		21BC34F919081510007B99DA /* material.landscape.edges.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D319081510007B99DA /* material.landscape.edges.reflection.xml */; };
-		21BC34FA19081510007B99DA /* material.landscape.edges.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D419081510007B99DA /* material.landscape.edges.refraction.xml */; };
-		21BC34FB19081510007B99DA /* material.landscape.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D519081510007B99DA /* material.landscape.reflection.xml */; };
-		21BC34FC19081510007B99DA /* material.landscape.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D619081510007B99DA /* material.landscape.refraction.xml */; };
-		21BC34FD19081510007B99DA /* material.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D719081510007B99DA /* material.ocean.xml */; };
-		21BC34FE19081510007B99DA /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D819081510007B99DA /* material.output.xml */; };
-		21BC34FF19081510007B99DA /* material.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34D919081510007B99DA /* material.particle.emitter.xml */; };
-		21BC350019081510007B99DA /* material.splatting.diffuse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DA19081510007B99DA /* material.splatting.diffuse.xml */; };
-		21BC350119081510007B99DA /* material.splatting.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DB19081510007B99DA /* material.splatting.normal.xml */; };
-		21BC350219081510007B99DA /* render.operation.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DC19081510007B99DA /* render.operation.output.xml */; };
-		21BC350319081510007B99DA /* render.operation.world.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DD19081510007B99DA /* render.operation.world.base.xml */; };
-		21BC350419081510007B99DA /* render.operation.world.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DE19081510007B99DA /* render.operation.world.reflection.xml */; };
-		21BC350519081510007B99DA /* render.operation.world.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34DF19081510007B99DA /* render.operation.world.refraction.xml */; };
-		21BC350619081510007B99DA /* transition.main.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E019081510007B99DA /* transition.main.xml */; };
-		21BC350719081510007B99DA /* shaderLandscape.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E319081510007B99DA /* shaderLandscape.frag */; };
-		21BC350819081510007B99DA /* shaderLandscape.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E419081510007B99DA /* shaderLandscape.vert */; };
-		21BC350919081510007B99DA /* shaderLandscapeSplatting.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E519081510007B99DA /* shaderLandscapeSplatting.frag */; };
-		21BC350A19081510007B99DA /* shaderLandscapeSplatting.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E619081510007B99DA /* shaderLandscapeSplatting.vert */; };
-		21BC350B19081510007B99DA /* shaderOcean.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E719081510007B99DA /* shaderOcean.frag */; };
-		21BC350C19081510007B99DA /* shaderOcean.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E819081510007B99DA /* shaderOcean.vert */; };
-		21BC350D19081510007B99DA /* shaderParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34E919081510007B99DA /* shaderParticleEmitter.frag */; };
-		21BC350E19081510007B99DA /* shaderParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EA19081510007B99DA /* shaderParticleEmitter.vert */; };
-		21BC350F19081510007B99DA /* shaderScreenQuad.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EB19081510007B99DA /* shaderScreenQuad.frag */; };
-		21BC351019081510007B99DA /* shaderScreenQuad.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EC19081510007B99DA /* shaderScreenQuad.vert */; };
-		21BC351119081510007B99DA /* landscape.01.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EE19081510007B99DA /* landscape.01.diffuse.pvr */; };
-		21BC351219081510007B99DA /* landscape.02.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34EF19081510007B99DA /* landscape.02.diffuse.pvr */; };
-		21BC351319081510007B99DA /* landscape.03.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34F019081510007B99DA /* landscape.03.diffuse.pvr */; };
-		21BC351419081510007B99DA /* ocean.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34F119081510007B99DA /* ocean.normal.pvr */; };
-		21BC351519081510007B99DA /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34F219081510007B99DA /* particle.emitter.01.pvr */; };
-		21BC351619081510007B99DA /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34F319081510007B99DA /* particle.emitter.02.pvr */; };
+		21B08D7C1920CA2000C5D5CC /* CMapDragController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B08D7A1920CA2000C5D5CC /* CMapDragController.cpp */; };
+		21B08DB91920CCF600C5D5CC /* shaderParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAD1920CCF600C5D5CC /* shaderParticleEmitter.frag */; };
+		21B08DBA1920CCF600C5D5CC /* shaderParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAE1920CCF600C5D5CC /* shaderParticleEmitter.vert */; };
+		21B08DBB1920CCF600C5D5CC /* shaderScreenQuad.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAF1920CCF600C5D5CC /* shaderScreenQuad.frag */; };
+		21B08DBC1920CCF600C5D5CC /* shaderScreenQuad.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DB01920CCF600C5D5CC /* shaderScreenQuad.vert */; };
+		21B08DCB1920CD0900C5D5CC /* landscape.01.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DBF1920CD0900C5D5CC /* landscape.01.diffuse.pvr */; };
+		21B08DCC1920CD0900C5D5CC /* landscape.02.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC01920CD0900C5D5CC /* landscape.02.diffuse.pvr */; };
+		21B08DCD1920CD0900C5D5CC /* landscape.03.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC11920CD0900C5D5CC /* landscape.03.diffuse.pvr */; };
+		21B08DCE1920CD0900C5D5CC /* ocean.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC21920CD0900C5D5CC /* ocean.normal.pvr */; };
+		21B08DCF1920CD0900C5D5CC /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC31920CD0900C5D5CC /* particle.emitter.01.pvr */; };
+		21B08DD01920CD0900C5D5CC /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC41920CD0900C5D5CC /* particle.emitter.02.pvr */; };
+		21B08DD11920CD0900C5D5CC /* xneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC51920CD0900C5D5CC /* xneg.pvr */; };
+		21B08DD21920CD0900C5D5CC /* xpos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC61920CD0900C5D5CC /* xpos.pvr */; };
+		21B08DD31920CD0900C5D5CC /* yneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC71920CD0900C5D5CC /* yneg.pvr */; };
+		21B08DD41920CD0900C5D5CC /* ypos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC81920CD0900C5D5CC /* ypos.pvr */; };
+		21B08DD51920CD0900C5D5CC /* zneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC91920CD0900C5D5CC /* zneg.pvr */; };
+		21B08DD61920CD0900C5D5CC /* zpos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DCA1920CD0900C5D5CC /* zpos.pvr */; };
+		21B08E221922527400C5D5CC /* material.landscape.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0F1922527400C5D5CC /* material.landscape.base.xml */; };
+		21B08E231922527400C5D5CC /* material.landscape.edges.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E101922527400C5D5CC /* material.landscape.edges.base.xml */; };
+		21B08E241922527400C5D5CC /* material.landscape.edges.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E111922527400C5D5CC /* material.landscape.edges.reflection.xml */; };
+		21B08E251922527400C5D5CC /* material.landscape.edges.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E121922527400C5D5CC /* material.landscape.edges.refraction.xml */; };
+		21B08E261922527400C5D5CC /* material.landscape.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E131922527400C5D5CC /* material.landscape.reflection.xml */; };
+		21B08E271922527400C5D5CC /* material.landscape.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E141922527400C5D5CC /* material.landscape.refraction.xml */; };
+		21B08E281922527400C5D5CC /* material.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E151922527400C5D5CC /* material.ocean.xml */; };
+		21B08E291922527400C5D5CC /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E161922527400C5D5CC /* material.output.xml */; };
+		21B08E2A1922527400C5D5CC /* material.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E171922527400C5D5CC /* material.particle.emitter.xml */; };
+		21B08E2B1922527400C5D5CC /* material.skybox.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E181922527400C5D5CC /* material.skybox.base.xml */; };
+		21B08E2C1922527400C5D5CC /* material.skybox.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E191922527400C5D5CC /* material.skybox.reflection.xml */; };
+		21B08E2D1922527400C5D5CC /* material.skybox.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1A1922527400C5D5CC /* material.skybox.refraction.xml */; };
+		21B08E2E1922527400C5D5CC /* material.splatting.diffuse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1B1922527400C5D5CC /* material.splatting.diffuse.xml */; };
+		21B08E2F1922527400C5D5CC /* material.splatting.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1C1922527400C5D5CC /* material.splatting.normal.xml */; };
+		21B08E301922527400C5D5CC /* render.operation.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1D1922527400C5D5CC /* render.operation.output.xml */; };
+		21B08E311922527400C5D5CC /* render.operation.world.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1E1922527400C5D5CC /* render.operation.world.base.xml */; };
+		21B08E321922527400C5D5CC /* render.operation.world.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1F1922527400C5D5CC /* render.operation.world.reflection.xml */; };
+		21B08E331922527400C5D5CC /* render.operation.world.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E201922527400C5D5CC /* render.operation.world.refraction.xml */; };
+		21B08E341922527400C5D5CC /* transition.main.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E211922527400C5D5CC /* transition.main.xml */; };
+		21B08E3B192252E400C5D5CC /* shaderLandscape.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E35192252E400C5D5CC /* shaderLandscape.frag */; };
+		21B08E3C192252E400C5D5CC /* shaderLandscape.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E36192252E400C5D5CC /* shaderLandscape.vert */; };
+		21B08E3D192252E400C5D5CC /* shaderLandscapeSplatting.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E37192252E400C5D5CC /* shaderLandscapeSplatting.frag */; };
+		21B08E3E192252E400C5D5CC /* shaderLandscapeSplatting.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E38192252E400C5D5CC /* shaderLandscapeSplatting.vert */; };
+		21B08E3F192252E400C5D5CC /* shaderOcean.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E39192252E400C5D5CC /* shaderOcean.frag */; };
+		21B08E40192252E400C5D5CC /* shaderOcean.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E3A192252E400C5D5CC /* shaderOcean.vert */; };
+		21B08E45192252FF00C5D5CC /* gameobject.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E41192252FF00C5D5CC /* gameobject.landscape.xml */; };
+		21B08E46192252FF00C5D5CC /* gameobject.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E42192252FF00C5D5CC /* gameobject.ocean.xml */; };
+		21B08E47192252FF00C5D5CC /* gameobject.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E43192252FF00C5D5CC /* gameobject.particle.emitter.xml */; };
+		21B08E48192252FF00C5D5CC /* gameobject.skybox.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E44192252FF00C5D5CC /* gameobject.skybox.xml */; };
+		21B08E4B1922531700C5D5CC /* shaderSkyBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E491922531700C5D5CC /* shaderSkyBox.frag */; };
+		21B08E4C1922531700C5D5CC /* shaderSkyBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E4A1922531700C5D5CC /* shaderSkyBox.vert */; };
 		21D070C5181D9D460019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C4181D9D460019D264 /* Foundation.framework */; };
 		21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C6181D9D460019D264 /* CoreGraphics.framework */; };
 		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
 		21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D0724F181DAEA00019D264 /* QuartzCore.framework */; };
 		21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D07251181DAEA60019D264 /* OpenGLES.framework */; };
 		21D0726C181DB1910019D264 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D07255181DB1910019D264 /* AppDelegate.mm */; };
-		21D0726D181DB1910019D264 /* CCharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07256181DB1910019D264 /* CCharacterController.cpp */; };
 		21D0726E181DB1910019D264 /* CGameViewController_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07258181DB1910019D264 /* CGameViewController_win32.cpp */; };
 		21D0726F181DB1910019D264 /* CGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725B181DB1910019D264 /* CGameViewController.mm */; };
-		21D07271181DB1910019D264 /* CKOTHInGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725D181DB1910019D264 /* CKOTHInGameScene.cpp */; };
-		21D07272181DB1910019D264 /* CKOTHInGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725F181DB1910019D264 /* CKOTHInGameTransition.cpp */; };
-		21D07273181DB1910019D264 /* CKOTHWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07261181DB1910019D264 /* CKOTHWorkflow.cpp */; };
-		21D07275181DB1910019D264 /* CNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07265181DB1910019D264 /* CNavigator.cpp */; };
+		21D07271181DB1910019D264 /* CDemoGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725D181DB1910019D264 /* CDemoGameScene.cpp */; };
+		21D07272181DB1910019D264 /* CDemoGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725F181DB1910019D264 /* CDemoGameTransition.cpp */; };
+		21D07273181DB1910019D264 /* CDemoGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07261181DB1910019D264 /* CDemoGameController.cpp */; };
 		21D07277181DB1910019D264 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D0726A181DB1910019D264 /* main.mm */; };
 		21D07278181DB1910019D264 /* Win32-Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0726B181DB1910019D264 /* Win32-Main.cpp */; };
-		A49994981861B04E003DA222 /* CMoveController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49994961861B04E003DA222 /* CMoveController.cpp */; };
 		A4D21A1C1848CFB900595FEA /* CGameViewController_ndk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4D21A1A1848CFB900595FEA /* CGameViewController_ndk.cpp */; };
 /* End PBXBuildFile section */
 
@@ -90,41 +100,55 @@
 /* Begin PBXFileReference section */
 		2132664F1906A84D001C98F7 /* ie3D-Demo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ie3D-Demo.plist"; path = "Support/ie3D-Demo.plist"; sourceTree = SOURCE_ROOT; };
 		213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
-		21BC34CE19081510007B99DA /* gameobject.landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.landscape.xml; sourceTree = "<group>"; };
-		21BC34CF19081510007B99DA /* gameobject.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.ocean.xml; sourceTree = "<group>"; };
-		21BC34D019081510007B99DA /* gameobject.particle.emitter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.particle.emitter.xml; sourceTree = "<group>"; };
-		21BC34D119081510007B99DA /* material.landscape.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.base.xml; sourceTree = "<group>"; };
-		21BC34D219081510007B99DA /* material.landscape.edges.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.base.xml; sourceTree = "<group>"; };
-		21BC34D319081510007B99DA /* material.landscape.edges.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.reflection.xml; sourceTree = "<group>"; };
-		21BC34D419081510007B99DA /* material.landscape.edges.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.refraction.xml; sourceTree = "<group>"; };
-		21BC34D519081510007B99DA /* material.landscape.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.reflection.xml; sourceTree = "<group>"; };
-		21BC34D619081510007B99DA /* material.landscape.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.refraction.xml; sourceTree = "<group>"; };
-		21BC34D719081510007B99DA /* material.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.ocean.xml; sourceTree = "<group>"; };
-		21BC34D819081510007B99DA /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
-		21BC34D919081510007B99DA /* material.particle.emitter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.particle.emitter.xml; sourceTree = "<group>"; };
-		21BC34DA19081510007B99DA /* material.splatting.diffuse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.diffuse.xml; sourceTree = "<group>"; };
-		21BC34DB19081510007B99DA /* material.splatting.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.normal.xml; sourceTree = "<group>"; };
-		21BC34DC19081510007B99DA /* render.operation.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.output.xml; sourceTree = "<group>"; };
-		21BC34DD19081510007B99DA /* render.operation.world.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.base.xml; sourceTree = "<group>"; };
-		21BC34DE19081510007B99DA /* render.operation.world.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.reflection.xml; sourceTree = "<group>"; };
-		21BC34DF19081510007B99DA /* render.operation.world.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.refraction.xml; sourceTree = "<group>"; };
-		21BC34E019081510007B99DA /* transition.main.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transition.main.xml; sourceTree = "<group>"; };
-		21BC34E319081510007B99DA /* shaderLandscape.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscape.frag; sourceTree = "<group>"; };
-		21BC34E419081510007B99DA /* shaderLandscape.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscape.vert; sourceTree = "<group>"; };
-		21BC34E519081510007B99DA /* shaderLandscapeSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscapeSplatting.frag; sourceTree = "<group>"; };
-		21BC34E619081510007B99DA /* shaderLandscapeSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscapeSplatting.vert; sourceTree = "<group>"; };
-		21BC34E719081510007B99DA /* shaderOcean.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderOcean.frag; sourceTree = "<group>"; };
-		21BC34E819081510007B99DA /* shaderOcean.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderOcean.vert; sourceTree = "<group>"; };
-		21BC34E919081510007B99DA /* shaderParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderParticleEmitter.frag; sourceTree = "<group>"; };
-		21BC34EA19081510007B99DA /* shaderParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderParticleEmitter.vert; sourceTree = "<group>"; };
-		21BC34EB19081510007B99DA /* shaderScreenQuad.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderScreenQuad.frag; sourceTree = "<group>"; };
-		21BC34EC19081510007B99DA /* shaderScreenQuad.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderScreenQuad.vert; sourceTree = "<group>"; };
-		21BC34EE19081510007B99DA /* landscape.01.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.01.diffuse.pvr; sourceTree = "<group>"; };
-		21BC34EF19081510007B99DA /* landscape.02.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.02.diffuse.pvr; sourceTree = "<group>"; };
-		21BC34F019081510007B99DA /* landscape.03.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.03.diffuse.pvr; sourceTree = "<group>"; };
-		21BC34F119081510007B99DA /* ocean.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean.normal.pvr; sourceTree = "<group>"; };
-		21BC34F219081510007B99DA /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
-		21BC34F319081510007B99DA /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
+		21B08D7A1920CA2000C5D5CC /* CMapDragController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapDragController.cpp; path = Sources/CMapDragController.cpp; sourceTree = SOURCE_ROOT; };
+		21B08D7B1920CA2000C5D5CC /* CMapDragController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMapDragController.h; path = Sources/CMapDragController.h; sourceTree = SOURCE_ROOT; };
+		21B08DAD1920CCF600C5D5CC /* shaderParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderParticleEmitter.frag; sourceTree = "<group>"; };
+		21B08DAE1920CCF600C5D5CC /* shaderParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderParticleEmitter.vert; sourceTree = "<group>"; };
+		21B08DAF1920CCF600C5D5CC /* shaderScreenQuad.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderScreenQuad.frag; sourceTree = "<group>"; };
+		21B08DB01920CCF600C5D5CC /* shaderScreenQuad.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderScreenQuad.vert; sourceTree = "<group>"; };
+		21B08DBF1920CD0900C5D5CC /* landscape.01.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.01.diffuse.pvr; sourceTree = "<group>"; };
+		21B08DC01920CD0900C5D5CC /* landscape.02.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.02.diffuse.pvr; sourceTree = "<group>"; };
+		21B08DC11920CD0900C5D5CC /* landscape.03.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.03.diffuse.pvr; sourceTree = "<group>"; };
+		21B08DC21920CD0900C5D5CC /* ocean.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean.normal.pvr; sourceTree = "<group>"; };
+		21B08DC31920CD0900C5D5CC /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
+		21B08DC41920CD0900C5D5CC /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
+		21B08DC51920CD0900C5D5CC /* xneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = xneg.pvr; sourceTree = "<group>"; };
+		21B08DC61920CD0900C5D5CC /* xpos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = xpos.pvr; sourceTree = "<group>"; };
+		21B08DC71920CD0900C5D5CC /* yneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = yneg.pvr; sourceTree = "<group>"; };
+		21B08DC81920CD0900C5D5CC /* ypos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ypos.pvr; sourceTree = "<group>"; };
+		21B08DC91920CD0900C5D5CC /* zneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = zneg.pvr; sourceTree = "<group>"; };
+		21B08DCA1920CD0900C5D5CC /* zpos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = zpos.pvr; sourceTree = "<group>"; };
+		21B08E0F1922527400C5D5CC /* material.landscape.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.base.xml; sourceTree = "<group>"; };
+		21B08E101922527400C5D5CC /* material.landscape.edges.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.base.xml; sourceTree = "<group>"; };
+		21B08E111922527400C5D5CC /* material.landscape.edges.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.reflection.xml; sourceTree = "<group>"; };
+		21B08E121922527400C5D5CC /* material.landscape.edges.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.edges.refraction.xml; sourceTree = "<group>"; };
+		21B08E131922527400C5D5CC /* material.landscape.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.reflection.xml; sourceTree = "<group>"; };
+		21B08E141922527400C5D5CC /* material.landscape.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.refraction.xml; sourceTree = "<group>"; };
+		21B08E151922527400C5D5CC /* material.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.ocean.xml; sourceTree = "<group>"; };
+		21B08E161922527400C5D5CC /* material.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.xml; sourceTree = "<group>"; };
+		21B08E171922527400C5D5CC /* material.particle.emitter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.particle.emitter.xml; sourceTree = "<group>"; };
+		21B08E181922527400C5D5CC /* material.skybox.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.skybox.base.xml; sourceTree = "<group>"; };
+		21B08E191922527400C5D5CC /* material.skybox.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.skybox.reflection.xml; sourceTree = "<group>"; };
+		21B08E1A1922527400C5D5CC /* material.skybox.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.skybox.refraction.xml; sourceTree = "<group>"; };
+		21B08E1B1922527400C5D5CC /* material.splatting.diffuse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.diffuse.xml; sourceTree = "<group>"; };
+		21B08E1C1922527400C5D5CC /* material.splatting.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.splatting.normal.xml; sourceTree = "<group>"; };
+		21B08E1D1922527400C5D5CC /* render.operation.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.output.xml; sourceTree = "<group>"; };
+		21B08E1E1922527400C5D5CC /* render.operation.world.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.base.xml; sourceTree = "<group>"; };
+		21B08E1F1922527400C5D5CC /* render.operation.world.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.reflection.xml; sourceTree = "<group>"; };
+		21B08E201922527400C5D5CC /* render.operation.world.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.refraction.xml; sourceTree = "<group>"; };
+		21B08E211922527400C5D5CC /* transition.main.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transition.main.xml; sourceTree = "<group>"; };
+		21B08E35192252E400C5D5CC /* shaderLandscape.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscape.frag; sourceTree = "<group>"; };
+		21B08E36192252E400C5D5CC /* shaderLandscape.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscape.vert; sourceTree = "<group>"; };
+		21B08E37192252E400C5D5CC /* shaderLandscapeSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscapeSplatting.frag; sourceTree = "<group>"; };
+		21B08E38192252E400C5D5CC /* shaderLandscapeSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderLandscapeSplatting.vert; sourceTree = "<group>"; };
+		21B08E39192252E400C5D5CC /* shaderOcean.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderOcean.frag; sourceTree = "<group>"; };
+		21B08E3A192252E400C5D5CC /* shaderOcean.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderOcean.vert; sourceTree = "<group>"; };
+		21B08E41192252FF00C5D5CC /* gameobject.landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.landscape.xml; sourceTree = "<group>"; };
+		21B08E42192252FF00C5D5CC /* gameobject.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.ocean.xml; sourceTree = "<group>"; };
+		21B08E43192252FF00C5D5CC /* gameobject.particle.emitter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.particle.emitter.xml; sourceTree = "<group>"; };
+		21B08E44192252FF00C5D5CC /* gameobject.skybox.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameobject.skybox.xml; sourceTree = "<group>"; };
+		21B08E491922531700C5D5CC /* shaderSkyBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderSkyBox.frag; sourceTree = "<group>"; };
+		21B08E4A1922531700C5D5CC /* shaderSkyBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderSkyBox.vert; sourceTree = "<group>"; };
 		21D070C1181D9D460019D264 /* ie3D-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ie3D-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -133,26 +157,19 @@
 		21D07251181DAEA60019D264 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		21D07254181DB1910019D264 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Sources/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		21D07255181DB1910019D264 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Sources/AppDelegate.mm; sourceTree = SOURCE_ROOT; };
-		21D07256181DB1910019D264 /* CCharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCharacterController.cpp; path = Sources/CCharacterController.cpp; sourceTree = SOURCE_ROOT; };
-		21D07257181DB1910019D264 /* CCharacterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCharacterController.h; path = Sources/CCharacterController.h; sourceTree = SOURCE_ROOT; };
 		21D07258181DB1910019D264 /* CGameViewController_win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameViewController_win32.cpp; path = Sources/CGameViewController_win32.cpp; sourceTree = SOURCE_ROOT; };
 		21D07259181DB1910019D264 /* CGameViewController_win32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController_win32.h; path = Sources/CGameViewController_win32.h; sourceTree = SOURCE_ROOT; };
 		21D0725A181DB1910019D264 /* CGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController.h; path = Sources/CGameViewController.h; sourceTree = SOURCE_ROOT; };
 		21D0725B181DB1910019D264 /* CGameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CGameViewController.mm; path = Sources/CGameViewController.mm; sourceTree = SOURCE_ROOT; };
 		21D0725C181DB1910019D264 /* CGameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CGameViewController.xib; path = Sources/CGameViewController.xib; sourceTree = SOURCE_ROOT; };
-		21D0725D181DB1910019D264 /* CKOTHInGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CKOTHInGameScene.cpp; path = Sources/CKOTHInGameScene.cpp; sourceTree = SOURCE_ROOT; };
-		21D0725E181DB1910019D264 /* CKOTHInGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHInGameScene.h; path = Sources/CKOTHInGameScene.h; sourceTree = SOURCE_ROOT; };
-		21D0725F181DB1910019D264 /* CKOTHInGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CKOTHInGameTransition.cpp; path = Sources/CKOTHInGameTransition.cpp; sourceTree = SOURCE_ROOT; };
-		21D07260181DB1910019D264 /* CKOTHInGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHInGameTransition.h; path = Sources/CKOTHInGameTransition.h; sourceTree = SOURCE_ROOT; };
-		21D07261181DB1910019D264 /* CKOTHWorkflow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CKOTHWorkflow.cpp; path = Sources/CKOTHWorkflow.cpp; sourceTree = SOURCE_ROOT; };
-		21D07262181DB1910019D264 /* CKOTHWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOTHWorkflow.h; path = Sources/CKOTHWorkflow.h; sourceTree = SOURCE_ROOT; };
-		21D07265181DB1910019D264 /* CNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNavigator.cpp; path = Sources/CNavigator.cpp; sourceTree = SOURCE_ROOT; };
-		21D07266181DB1910019D264 /* CNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNavigator.h; path = Sources/CNavigator.h; sourceTree = SOURCE_ROOT; };
-		21D07267181DB1910019D264 /* HKOTHEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKOTHEnums.h; path = Sources/HKOTHEnums.h; sourceTree = SOURCE_ROOT; };
+		21D0725D181DB1910019D264 /* CDemoGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDemoGameScene.cpp; path = Sources/CDemoGameScene.cpp; sourceTree = SOURCE_ROOT; };
+		21D0725E181DB1910019D264 /* CDemoGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDemoGameScene.h; path = Sources/CDemoGameScene.h; sourceTree = SOURCE_ROOT; };
+		21D0725F181DB1910019D264 /* CDemoGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDemoGameTransition.cpp; path = Sources/CDemoGameTransition.cpp; sourceTree = SOURCE_ROOT; };
+		21D07260181DB1910019D264 /* CDemoGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDemoGameTransition.h; path = Sources/CDemoGameTransition.h; sourceTree = SOURCE_ROOT; };
+		21D07261181DB1910019D264 /* CDemoGameController.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CDemoGameController.cpp; path = Sources/CDemoGameController.cpp; sourceTree = SOURCE_ROOT; };
+		21D07262181DB1910019D264 /* CDemoGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDemoGameController.h; path = Sources/CDemoGameController.h; sourceTree = SOURCE_ROOT; };
 		21D0726A181DB1910019D264 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = Sources/main.mm; sourceTree = SOURCE_ROOT; };
 		21D0726B181DB1910019D264 /* Win32-Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Win32-Main.cpp"; path = "Sources/Win32-Main.cpp"; sourceTree = SOURCE_ROOT; };
-		A49994961861B04E003DA222 /* CMoveController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMoveController.cpp; path = Sources/CMoveController.cpp; sourceTree = SOURCE_ROOT; };
-		A49994971861B04E003DA222 /* CMoveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMoveController.h; path = Sources/CMoveController.h; sourceTree = SOURCE_ROOT; };
 		A4D21A1A1848CFB900595FEA /* CGameViewController_ndk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameViewController_ndk.cpp; path = Sources/CGameViewController_ndk.cpp; sourceTree = SOURCE_ROOT; };
 		A4D21A1B1848CFB900595FEA /* CGameViewController_ndk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController_ndk.h; path = Sources/CGameViewController_ndk.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -194,25 +211,29 @@
 		21BC34CD19081510007B99DA /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				21BC34CE19081510007B99DA /* gameobject.landscape.xml */,
-				21BC34CF19081510007B99DA /* gameobject.ocean.xml */,
-				21BC34D019081510007B99DA /* gameobject.particle.emitter.xml */,
-				21BC34D119081510007B99DA /* material.landscape.base.xml */,
-				21BC34D219081510007B99DA /* material.landscape.edges.base.xml */,
-				21BC34D319081510007B99DA /* material.landscape.edges.reflection.xml */,
-				21BC34D419081510007B99DA /* material.landscape.edges.refraction.xml */,
-				21BC34D519081510007B99DA /* material.landscape.reflection.xml */,
-				21BC34D619081510007B99DA /* material.landscape.refraction.xml */,
-				21BC34D719081510007B99DA /* material.ocean.xml */,
-				21BC34D819081510007B99DA /* material.output.xml */,
-				21BC34D919081510007B99DA /* material.particle.emitter.xml */,
-				21BC34DA19081510007B99DA /* material.splatting.diffuse.xml */,
-				21BC34DB19081510007B99DA /* material.splatting.normal.xml */,
-				21BC34DC19081510007B99DA /* render.operation.output.xml */,
-				21BC34DD19081510007B99DA /* render.operation.world.base.xml */,
-				21BC34DE19081510007B99DA /* render.operation.world.reflection.xml */,
-				21BC34DF19081510007B99DA /* render.operation.world.refraction.xml */,
-				21BC34E019081510007B99DA /* transition.main.xml */,
+				21B08E41192252FF00C5D5CC /* gameobject.landscape.xml */,
+				21B08E42192252FF00C5D5CC /* gameobject.ocean.xml */,
+				21B08E43192252FF00C5D5CC /* gameobject.particle.emitter.xml */,
+				21B08E44192252FF00C5D5CC /* gameobject.skybox.xml */,
+				21B08E0F1922527400C5D5CC /* material.landscape.base.xml */,
+				21B08E101922527400C5D5CC /* material.landscape.edges.base.xml */,
+				21B08E111922527400C5D5CC /* material.landscape.edges.reflection.xml */,
+				21B08E121922527400C5D5CC /* material.landscape.edges.refraction.xml */,
+				21B08E131922527400C5D5CC /* material.landscape.reflection.xml */,
+				21B08E141922527400C5D5CC /* material.landscape.refraction.xml */,
+				21B08E151922527400C5D5CC /* material.ocean.xml */,
+				21B08E161922527400C5D5CC /* material.output.xml */,
+				21B08E171922527400C5D5CC /* material.particle.emitter.xml */,
+				21B08E181922527400C5D5CC /* material.skybox.base.xml */,
+				21B08E191922527400C5D5CC /* material.skybox.reflection.xml */,
+				21B08E1A1922527400C5D5CC /* material.skybox.refraction.xml */,
+				21B08E1B1922527400C5D5CC /* material.splatting.diffuse.xml */,
+				21B08E1C1922527400C5D5CC /* material.splatting.normal.xml */,
+				21B08E1D1922527400C5D5CC /* render.operation.output.xml */,
+				21B08E1E1922527400C5D5CC /* render.operation.world.base.xml */,
+				21B08E1F1922527400C5D5CC /* render.operation.world.reflection.xml */,
+				21B08E201922527400C5D5CC /* render.operation.world.refraction.xml */,
+				21B08E211922527400C5D5CC /* transition.main.xml */,
 			);
 			name = Configurations;
 			path = "../../ie3D-Bundle/Configurations";
@@ -229,16 +250,18 @@
 		21BC34E219081510007B99DA /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				21BC34E319081510007B99DA /* shaderLandscape.frag */,
-				21BC34E419081510007B99DA /* shaderLandscape.vert */,
-				21BC34E519081510007B99DA /* shaderLandscapeSplatting.frag */,
-				21BC34E619081510007B99DA /* shaderLandscapeSplatting.vert */,
-				21BC34E719081510007B99DA /* shaderOcean.frag */,
-				21BC34E819081510007B99DA /* shaderOcean.vert */,
-				21BC34E919081510007B99DA /* shaderParticleEmitter.frag */,
-				21BC34EA19081510007B99DA /* shaderParticleEmitter.vert */,
-				21BC34EB19081510007B99DA /* shaderScreenQuad.frag */,
-				21BC34EC19081510007B99DA /* shaderScreenQuad.vert */,
+				21B08E491922531700C5D5CC /* shaderSkyBox.frag */,
+				21B08E4A1922531700C5D5CC /* shaderSkyBox.vert */,
+				21B08E35192252E400C5D5CC /* shaderLandscape.frag */,
+				21B08E36192252E400C5D5CC /* shaderLandscape.vert */,
+				21B08E37192252E400C5D5CC /* shaderLandscapeSplatting.frag */,
+				21B08E38192252E400C5D5CC /* shaderLandscapeSplatting.vert */,
+				21B08E39192252E400C5D5CC /* shaderOcean.frag */,
+				21B08E3A192252E400C5D5CC /* shaderOcean.vert */,
+				21B08DAD1920CCF600C5D5CC /* shaderParticleEmitter.frag */,
+				21B08DAE1920CCF600C5D5CC /* shaderParticleEmitter.vert */,
+				21B08DAF1920CCF600C5D5CC /* shaderScreenQuad.frag */,
+				21B08DB01920CCF600C5D5CC /* shaderScreenQuad.vert */,
 			);
 			name = Shaders;
 			path = "../../ie3D-Bundle/Shaders";
@@ -247,12 +270,18 @@
 		21BC34ED19081510007B99DA /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				21BC34EE19081510007B99DA /* landscape.01.diffuse.pvr */,
-				21BC34EF19081510007B99DA /* landscape.02.diffuse.pvr */,
-				21BC34F019081510007B99DA /* landscape.03.diffuse.pvr */,
-				21BC34F119081510007B99DA /* ocean.normal.pvr */,
-				21BC34F219081510007B99DA /* particle.emitter.01.pvr */,
-				21BC34F319081510007B99DA /* particle.emitter.02.pvr */,
+				21B08DBF1920CD0900C5D5CC /* landscape.01.diffuse.pvr */,
+				21B08DC01920CD0900C5D5CC /* landscape.02.diffuse.pvr */,
+				21B08DC11920CD0900C5D5CC /* landscape.03.diffuse.pvr */,
+				21B08DC21920CD0900C5D5CC /* ocean.normal.pvr */,
+				21B08DC31920CD0900C5D5CC /* particle.emitter.01.pvr */,
+				21B08DC41920CD0900C5D5CC /* particle.emitter.02.pvr */,
+				21B08DC51920CD0900C5D5CC /* xneg.pvr */,
+				21B08DC61920CD0900C5D5CC /* xpos.pvr */,
+				21B08DC71920CD0900C5D5CC /* yneg.pvr */,
+				21B08DC81920CD0900C5D5CC /* ypos.pvr */,
+				21B08DC91920CD0900C5D5CC /* zneg.pvr */,
+				21B08DCA1920CD0900C5D5CC /* zpos.pvr */,
 			);
 			name = Textures;
 			path = "../../ie3D-Bundle/Textures";
@@ -311,19 +340,14 @@
 				21D0725A181DB1910019D264 /* CGameViewController.h */,
 				21D0725B181DB1910019D264 /* CGameViewController.mm */,
 				21D0725C181DB1910019D264 /* CGameViewController.xib */,
-				21D0725E181DB1910019D264 /* CKOTHInGameScene.h */,
-				21D0725D181DB1910019D264 /* CKOTHInGameScene.cpp */,
-				21D0725F181DB1910019D264 /* CKOTHInGameTransition.cpp */,
-				21D07260181DB1910019D264 /* CKOTHInGameTransition.h */,
-				21D07261181DB1910019D264 /* CKOTHWorkflow.cpp */,
-				21D07262181DB1910019D264 /* CKOTHWorkflow.h */,
-				A49994971861B04E003DA222 /* CMoveController.h */,
-				A49994961861B04E003DA222 /* CMoveController.cpp */,
-				21D07257181DB1910019D264 /* CCharacterController.h */,
-				21D07256181DB1910019D264 /* CCharacterController.cpp */,
-				21D07265181DB1910019D264 /* CNavigator.cpp */,
-				21D07266181DB1910019D264 /* CNavigator.h */,
-				21D07267181DB1910019D264 /* HKOTHEnums.h */,
+				21B08D7B1920CA2000C5D5CC /* CMapDragController.h */,
+				21B08D7A1920CA2000C5D5CC /* CMapDragController.cpp */,
+				21D0725E181DB1910019D264 /* CDemoGameScene.h */,
+				21D0725D181DB1910019D264 /* CDemoGameScene.cpp */,
+				21D07260181DB1910019D264 /* CDemoGameTransition.h */,
+				21D0725F181DB1910019D264 /* CDemoGameTransition.cpp */,
+				21D07262181DB1910019D264 /* CDemoGameController.h */,
+				21D07261181DB1910019D264 /* CDemoGameController.cpp */,
 				21D0726A181DB1910019D264 /* main.mm */,
 				21D0726B181DB1910019D264 /* Win32-Main.cpp */,
 			);
@@ -418,42 +442,54 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21BC350C19081510007B99DA /* shaderOcean.vert in Resources */,
-				21BC350E19081510007B99DA /* shaderParticleEmitter.vert in Resources */,
-				21BC350D19081510007B99DA /* shaderParticleEmitter.frag in Resources */,
-				21BC350A19081510007B99DA /* shaderLandscapeSplatting.vert in Resources */,
-				21BC351019081510007B99DA /* shaderScreenQuad.vert in Resources */,
-				21BC350F19081510007B99DA /* shaderScreenQuad.frag in Resources */,
-				21BC350B19081510007B99DA /* shaderOcean.frag in Resources */,
-				21BC350919081510007B99DA /* shaderLandscapeSplatting.frag in Resources */,
-				21BC350819081510007B99DA /* shaderLandscape.vert in Resources */,
-				21BC350719081510007B99DA /* shaderLandscape.frag in Resources */,
-				21BC351119081510007B99DA /* landscape.01.diffuse.pvr in Resources */,
-				21BC34FE19081510007B99DA /* material.output.xml in Resources */,
-				21BC34F719081510007B99DA /* material.landscape.base.xml in Resources */,
-				21BC351419081510007B99DA /* ocean.normal.pvr in Resources */,
-				21BC350019081510007B99DA /* material.splatting.diffuse.xml in Resources */,
-				21BC34FD19081510007B99DA /* material.ocean.xml in Resources */,
-				21BC350619081510007B99DA /* transition.main.xml in Resources */,
-				21BC351519081510007B99DA /* particle.emitter.01.pvr in Resources */,
+				21B08DD01920CD0900C5D5CC /* particle.emitter.02.pvr in Resources */,
+				21B08E231922527400C5D5CC /* material.landscape.edges.base.xml in Resources */,
+				21B08E47192252FF00C5D5CC /* gameobject.particle.emitter.xml in Resources */,
+				21B08E48192252FF00C5D5CC /* gameobject.skybox.xml in Resources */,
+				21B08E311922527400C5D5CC /* render.operation.world.base.xml in Resources */,
+				21B08E331922527400C5D5CC /* render.operation.world.refraction.xml in Resources */,
+				21B08E281922527400C5D5CC /* material.ocean.xml in Resources */,
+				21B08E4C1922531700C5D5CC /* shaderSkyBox.vert in Resources */,
+				21B08DD51920CD0900C5D5CC /* zneg.pvr in Resources */,
+				21B08DBB1920CCF600C5D5CC /* shaderScreenQuad.frag in Resources */,
+				21B08E3F192252E400C5D5CC /* shaderOcean.frag in Resources */,
+				21B08E301922527400C5D5CC /* render.operation.output.xml in Resources */,
+				21B08DD61920CD0900C5D5CC /* zpos.pvr in Resources */,
+				21B08E40192252E400C5D5CC /* shaderOcean.vert in Resources */,
+				21B08DBC1920CCF600C5D5CC /* shaderScreenQuad.vert in Resources */,
+				21B08E341922527400C5D5CC /* transition.main.xml in Resources */,
+				21B08E251922527400C5D5CC /* material.landscape.edges.refraction.xml in Resources */,
+				21B08E321922527400C5D5CC /* render.operation.world.reflection.xml in Resources */,
+				21B08E45192252FF00C5D5CC /* gameobject.landscape.xml in Resources */,
+				21B08E2B1922527400C5D5CC /* material.skybox.base.xml in Resources */,
+				21B08E2A1922527400C5D5CC /* material.particle.emitter.xml in Resources */,
+				21B08E2D1922527400C5D5CC /* material.skybox.refraction.xml in Resources */,
+				21B08E2C1922527400C5D5CC /* material.skybox.reflection.xml in Resources */,
+				21B08E221922527400C5D5CC /* material.landscape.base.xml in Resources */,
+				21B08DCC1920CD0900C5D5CC /* landscape.02.diffuse.pvr in Resources */,
+				21B08E2F1922527400C5D5CC /* material.splatting.normal.xml in Resources */,
+				21B08E3C192252E400C5D5CC /* shaderLandscape.vert in Resources */,
+				21B08E3E192252E400C5D5CC /* shaderLandscapeSplatting.vert in Resources */,
+				21B08DCD1920CD0900C5D5CC /* landscape.03.diffuse.pvr in Resources */,
 				213267961906B51C001C98F7 /* CGameViewController.xib in Resources */,
-				21BC351619081510007B99DA /* particle.emitter.02.pvr in Resources */,
-				21BC34FF19081510007B99DA /* material.particle.emitter.xml in Resources */,
-				21BC34F619081510007B99DA /* gameobject.particle.emitter.xml in Resources */,
-				21BC350319081510007B99DA /* render.operation.world.base.xml in Resources */,
-				21BC350119081510007B99DA /* material.splatting.normal.xml in Resources */,
-				21BC350219081510007B99DA /* render.operation.output.xml in Resources */,
-				21BC34F419081510007B99DA /* gameobject.landscape.xml in Resources */,
-				21BC34FB19081510007B99DA /* material.landscape.reflection.xml in Resources */,
-				21BC34F519081510007B99DA /* gameobject.ocean.xml in Resources */,
-				21BC34F819081510007B99DA /* material.landscape.edges.base.xml in Resources */,
-				21BC351319081510007B99DA /* landscape.03.diffuse.pvr in Resources */,
-				21BC34FC19081510007B99DA /* material.landscape.refraction.xml in Resources */,
-				21BC34F919081510007B99DA /* material.landscape.edges.reflection.xml in Resources */,
-				21BC350419081510007B99DA /* render.operation.world.reflection.xml in Resources */,
-				21BC351219081510007B99DA /* landscape.02.diffuse.pvr in Resources */,
-				21BC34FA19081510007B99DA /* material.landscape.edges.refraction.xml in Resources */,
-				21BC350519081510007B99DA /* render.operation.world.refraction.xml in Resources */,
+				21B08DD31920CD0900C5D5CC /* yneg.pvr in Resources */,
+				21B08DCB1920CD0900C5D5CC /* landscape.01.diffuse.pvr in Resources */,
+				21B08E2E1922527400C5D5CC /* material.splatting.diffuse.xml in Resources */,
+				21B08DD21920CD0900C5D5CC /* xpos.pvr in Resources */,
+				21B08DCE1920CD0900C5D5CC /* ocean.normal.pvr in Resources */,
+				21B08E3B192252E400C5D5CC /* shaderLandscape.frag in Resources */,
+				21B08E271922527400C5D5CC /* material.landscape.refraction.xml in Resources */,
+				21B08E46192252FF00C5D5CC /* gameobject.ocean.xml in Resources */,
+				21B08E4B1922531700C5D5CC /* shaderSkyBox.frag in Resources */,
+				21B08DD41920CD0900C5D5CC /* ypos.pvr in Resources */,
+				21B08DBA1920CCF600C5D5CC /* shaderParticleEmitter.vert in Resources */,
+				21B08E261922527400C5D5CC /* material.landscape.reflection.xml in Resources */,
+				21B08E291922527400C5D5CC /* material.output.xml in Resources */,
+				21B08DB91920CCF600C5D5CC /* shaderParticleEmitter.frag in Resources */,
+				21B08E3D192252E400C5D5CC /* shaderLandscapeSplatting.frag in Resources */,
+				21B08E241922527400C5D5CC /* material.landscape.edges.reflection.xml in Resources */,
+				21B08DD11920CD0900C5D5CC /* xneg.pvr in Resources */,
+				21B08DCF1920CD0900C5D5CC /* particle.emitter.01.pvr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,14 +501,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				21D07278181DB1910019D264 /* Win32-Main.cpp in Sources */,
-				21D07273181DB1910019D264 /* CKOTHWorkflow.cpp in Sources */,
-				21D07275181DB1910019D264 /* CNavigator.cpp in Sources */,
+				21D07273181DB1910019D264 /* CDemoGameController.cpp in Sources */,
+				21B08D7C1920CA2000C5D5CC /* CMapDragController.cpp in Sources */,
 				21D0726C181DB1910019D264 /* AppDelegate.mm in Sources */,
-				21D07272181DB1910019D264 /* CKOTHInGameTransition.cpp in Sources */,
-				21D07271181DB1910019D264 /* CKOTHInGameScene.cpp in Sources */,
-				21D0726D181DB1910019D264 /* CCharacterController.cpp in Sources */,
+				21D07272181DB1910019D264 /* CDemoGameTransition.cpp in Sources */,
+				21D07271181DB1910019D264 /* CDemoGameScene.cpp in Sources */,
 				A4D21A1C1848CFB900595FEA /* CGameViewController_ndk.cpp in Sources */,
-				A49994981861B04E003DA222 /* CMoveController.cpp in Sources */,
 				21D07277181DB1910019D264 /* main.mm in Sources */,
 				21D0726F181DB1910019D264 /* CGameViewController.mm in Sources */,
 				21D0726E181DB1910019D264 /* CGameViewController_win32.cpp in Sources */,
@@ -570,7 +604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -593,7 +627,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6B2C6C87-2FD9-40B8-ACC1-77C2071CAC0E";
+				PROVISIONING_PROFILE = "77A53B6B-38CF-4425-B4DA-A8E3F52A94A7";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -606,7 +640,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -627,7 +661,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6B2C6C87-2FD9-40B8-ACC1-77C2071CAC0E";
+				PROVISIONING_PROFILE = "77A53B6B-38CF-4425-B4DA-A8E3F52A94A7";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

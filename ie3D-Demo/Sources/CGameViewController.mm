@@ -8,8 +8,8 @@
 
 #include "CGameViewController.h"
 #include "IOGLWindow.h"
-#include "CKOTHWorkflow.h"
-#include "CKOTHInGameTransition.h"
+#include "CDemoGameController.h"
+#include "CDemoGameTransition.h"
 #include "CGameLoopExecutor.h"
 
 @interface CGameViewController ()
@@ -36,11 +36,11 @@
     NSRunLoop *runner = [NSRunLoop currentRunLoop];
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
     
-    CKOTHWorkflow* workflow = new CKOTHWorkflow();
+    CDemoGameController* controller = new CDemoGameController();
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)self.m_openglView);
-    std::shared_ptr<IGameTransition> transition = workflow->CreateKOTHInGameTransition("transition.main.xml", window);
-    workflow->RegisterTransition(transition);
-    workflow->GoToTransition("transition.main.xml");
+    std::shared_ptr<IGameTransition> transition = controller->CreateKOTHInGameTransition("transition.main.xml", window);
+    controller->RegisterTransition(transition);
+    controller->GoToTransition("transition.main.xml");
 }
 
 - (void)didReceiveMemoryWarning

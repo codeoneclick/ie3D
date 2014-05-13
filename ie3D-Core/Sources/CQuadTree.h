@@ -58,6 +58,7 @@ public:
                   const glm::vec3& minBound,
                   f32 depth,
                   ui32 size);
+    void destroy(void);
     
     ui32 update(CSharedFrustumRef frustum);
 };

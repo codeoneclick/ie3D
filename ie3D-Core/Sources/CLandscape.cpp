@@ -20,6 +20,7 @@
 #include "CLandscapeChunk.h"
 #include "CLandscapeEdges.h"
 #include "CHeightmapProcessor.h"
+#include "CFrustum.h"
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
@@ -28,6 +29,7 @@ m_splattingDiffuseMaterial(nullptr),
 m_splattingNormalMaterial(nullptr),
 m_isSplattingDiffuseTextureCommited(false),
 m_isSplattingNormalTextureCommited(false),
+m_configuration(nullptr),
 m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, screenSpaceTextureAccessor))
 {
 
@@ -76,6 +78,48 @@ void CLandscape::onSceneUpdate(f32 deltatime)
             m_isSplattingNormalTextureCommited = true;
         }
     }
+    
+    ui32 chunkWidth = m_heightmapProcessor->Get_ChunkWidth();
+    ui32 chunkHeight = m_heightmapProcessor->Get_ChunkHeight();
+    
+    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    {
+        for(ui32 j = 0; j < m_numChunkCells; ++j)
+        {
+            glm::vec3 maxBound = std::get<0>(m_heightmapProcessor->getChunkBounds(i, j));
+            glm::vec3 minBound = std::get<1>(m_heightmapProcessor->getChunkBounds(i, j));
+            
+            i32 result = m_camera->Get_Frustum()->IsBoundBoxInFrustum(maxBound,
+                                                                      minBound);
+            if(result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
+               result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
+            {
+                if(m_chunks[i + j * m_numChunkRows] == nullptr)
+                {
+                    std::shared_ptr<CMesh> mesh = m_heightmapProcessor->Get_Chunk(i, j);
+                    m_chunks[i + j * m_numChunkRows] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+                    
+                    m_chunks[i + j * m_numChunkRows]->setCamera(m_camera);
+                    
+                    m_chunks[i + j * m_numChunkRows]->setRenderMgr(m_renderMgr);
+                    m_chunks[i + j * m_numChunkRows]->setSceneUpdateMgr(m_sceneUpdateMgr);
+                    
+                    m_chunks[i + j * m_numChunkRows]->listenRenderMgr(m_isNeedToRender);
+                    m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(m_isNeedToUpdate);
+                    
+                    m_chunks[i + j * m_numChunkRows]->setMesh(mesh, chunkWidth, chunkHeight);
+                    m_chunks[i + j * m_numChunkRows]->onConfigurationLoaded(m_configuration, true);
+                    
+                }
+            }
+            else if(m_chunks[i + j * m_numChunkRows] != nullptr)
+            {
+                m_chunks[i + j * m_numChunkRows]->listenRenderMgr(false);
+                m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(false);
+                m_chunks[i + j * m_numChunkRows] = nullptr;
+            }
+        }
+    }
 }
 
 void CLandscape::onResourceLoaded(ISharedResourceRef resource, bool success)
@@ -86,6 +130,7 @@ void CLandscape::onResourceLoaded(ISharedResourceRef resource, bool success)
 void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
+    m_configuration = configuration;
     assert(m_resourceAccessor != nullptr);
     assert(m_screenSpaceTextureAccessor != nullptr);
     
@@ -111,12 +156,12 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_numChunkRows = m_heightmapProcessor->Get_NumChunkRows();
     m_numChunkCells = m_heightmapProcessor->Get_NumChunkCells();
     
-    ui32 chunkWidth = m_heightmapProcessor->Get_ChunkWidth();
-    ui32 chunkHeight = m_heightmapProcessor->Get_ChunkHeight();
+    //ui32 chunkWidth = m_heightmapProcessor->Get_ChunkWidth();
+    //ui32 chunkHeight = m_heightmapProcessor->Get_ChunkHeight();
     
     m_chunks.resize(m_numChunkRows * m_numChunkCells);
     
-    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
         {
@@ -125,15 +170,15 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
             m_chunks[i + j * m_numChunkRows]->setMesh(mesh, chunkWidth, chunkHeight);
             m_chunks[i + j * m_numChunkRows]->onConfigurationLoaded(configuration, success);
         }
-    }
+    }*/
     m_edges->onConfigurationLoaded(configuration, success);
     m_edges->setEdgeTexture(m_heightmapProcessor->Get_EdgesMaskTexture());
     
-    CLandscape::setCamera(m_camera);
-    CLandscape::setRenderMgr(m_renderMgr);
-    CLandscape::setSceneUpdateMgr(m_sceneUpdateMgr);
-	CLandscape::listenRenderMgr(m_isNeedToRender);
-    CLandscape::listenSceneUpdateMgr(m_isNeedToUpdate);
+    //IGameObject::setCamera(m_camera);
+    //IGameObject::setRenderMgr(m_renderMgr);
+    //IGameObject::setSceneUpdateMgr(m_sceneUpdateMgr);
+	//IGameObject::listenRenderMgr(m_isNeedToRender);
+    //IGameObject::listenSceneUpdateMgr(m_isNeedToUpdate);
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
@@ -196,7 +241,7 @@ void CLandscape::setCamera(CSharedCameraRef camera)
 {
     IGameObject::setCamera(camera);
     
-    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
         {
@@ -204,7 +249,7 @@ void CLandscape::setCamera(CSharedCameraRef camera)
             assert(m_chunks[i + j * m_numChunkRows] != nullptr);
             m_chunks[i + j * m_numChunkRows]->setCamera(camera);
         }
-    }
+    }*/
     assert(m_edges != nullptr);
     m_edges->setCamera(camera);
 }
@@ -214,7 +259,7 @@ void CLandscape::setLightSource(CSharedLightSourceRef lightSource,
 {
     IGameObject::setLightSource(lightSource, index);
     
-    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
         {
@@ -222,7 +267,7 @@ void CLandscape::setLightSource(CSharedLightSourceRef lightSource,
             assert(m_chunks[i + j * m_numChunkRows] != nullptr);
             m_chunks[i + j * m_numChunkRows]->setLightSource(lightSource, index);
         }
-    }
+    }*/
     assert(m_edges != nullptr);
     m_edges->setLightSource(lightSource, index);
 }
@@ -231,7 +276,7 @@ void CLandscape::setRenderMgr(CSharedRenderMgrRef renderMgr)
 {
     IGameObject::setRenderMgr(renderMgr);
     
-    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
         {
@@ -239,7 +284,7 @@ void CLandscape::setRenderMgr(CSharedRenderMgrRef renderMgr)
             assert(m_chunks[i + j * m_numChunkRows] != nullptr);
             m_chunks[i + j * m_numChunkRows]->setRenderMgr(renderMgr);
         }
-    }
+    }*/
     assert(m_edges != nullptr);
     m_edges->setRenderMgr(renderMgr);
 }
@@ -248,7 +293,7 @@ void CLandscape::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
 {
     IGameObject::setSceneUpdateMgr(sceneUpdateMgr);
     
-    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
         {
@@ -256,7 +301,7 @@ void CLandscape::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
             assert(m_chunks[i + j * m_numChunkRows] != nullptr);
             m_chunks[i + j * m_numChunkRows]->setSceneUpdateMgr(sceneUpdateMgr);
         }
-    }
+    }*/
     assert(m_edges != nullptr);
     m_edges->setSceneUpdateMgr(sceneUpdateMgr);
 }
@@ -264,7 +309,7 @@ void CLandscape::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
 void CLandscape::listenRenderMgr(bool value)
 {
     m_isNeedToRender = value;
-    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
         {
@@ -272,7 +317,7 @@ void CLandscape::listenRenderMgr(bool value)
             assert(m_chunks[i + j * m_numChunkRows] != nullptr);
             m_chunks[i + j * m_numChunkRows]->listenRenderMgr(value);
         }
-    }
+    }*/
     assert(m_edges != nullptr);
     m_edges->listenRenderMgr(value);
 }
@@ -280,7 +325,7 @@ void CLandscape::listenRenderMgr(bool value)
 void CLandscape::listenSceneUpdateMgr(bool value)
 {
     IGameObject::listenSceneUpdateMgr(value);
-    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
         {
@@ -288,7 +333,7 @@ void CLandscape::listenSceneUpdateMgr(bool value)
             assert(m_chunks[i + j * m_numChunkRows] != nullptr);
             m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(value);
         }
-    }
+    }*/
     assert(m_edges != nullptr);
     m_edges->listenSceneUpdateMgr(value);
 }

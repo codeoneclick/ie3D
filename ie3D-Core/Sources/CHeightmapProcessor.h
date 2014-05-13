@@ -12,13 +12,6 @@
 #include "HCommon.h"
 #include "HDeclaration.h"
 
-class CTexture;
-class CMaterial;
-class CMesh;
-class CVertexBuffer;
-class CIndexBuffer;
-class IScreenSpaceTextureAccessor;
-
 class CHeightmapProcessor
 {
 private:
@@ -46,10 +39,10 @@ protected:
     f32 m_maxHeight;
     f32 m_minHeight;
     
-    std::vector<std::shared_ptr<CMesh>> m_chunks;
+    std::vector<CSharedMesh> m_chunks;
+    std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunkBounds;
     
     std::shared_ptr<IScreenSpaceTextureAccessor> m_screenSpaceTextureAccessor;
-
     
     std::shared_ptr<CIndexBuffer> _CreateIndexBuffer(void);
     std::shared_ptr<CVertexBuffer> _CreateVertexBuffer(ui32 _widthOffset, ui32 _heightOffset, ui32 _numVertexes, GLenum _mode, glm::vec3* _maxBound, glm::vec3* _minBound);
@@ -85,6 +78,8 @@ public:
         assert(m_chunks[_i + _j * m_numChunkRows] != nullptr);
         return m_chunks[_i + _j * m_numChunkRows];
     };
+    
+    const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
     
     inline ui32 Get_NumChunkRows(void)
     {

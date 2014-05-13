@@ -260,4 +260,8 @@ class CCubemapTexture;
 typedef std::shared_ptr<CCubemapTexture> CSharedCubemapTexture;
 typedef const CSharedCubemapTexture& CSharedCubemapTextureRef;
 
+class CConfigurationGameObject;
+typedef std::shared_ptr<CConfigurationGameObject> CSharedConfigurationGameObject;
+typedef const CSharedConfigurationGameObject& CSharedConfigurationGameObjectRef;
+
 #endif

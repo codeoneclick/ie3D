@@ -1,6 +1,6 @@
 <material
-    render_operation_name="render.operation.world.base"
-    is_cull_face="1"
+    render_operation_name="render.operation.world.reflection"
+    is_cull_face="0"
     is_depth_test="0"
     is_depth_mask="1"
     is_blending="0"
@@ -12,12 +12,12 @@
     clipping_y="0.0"
     clipping_z="0.0"
     clipping_w="0.0"
-    is_reflecting="0"
+    is_reflecting="1"
     is_shadowing="0"
     is_debugging="0">
     <shader
-        vs_filename="shaderSkyBox.vert"
-        fs_filename="shaderSkyBox.frag"/>
+    vs_filename="shaderSkyBox.vert"
+    fs_filename="shaderSkyBox.frag"/>
     <textures>
         <texture
         filename="xpos.pvr"

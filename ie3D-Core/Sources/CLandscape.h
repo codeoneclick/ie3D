@@ -22,6 +22,7 @@ private:
     CSharedHeightmapProcessor m_heightmapProcessor;
     std::vector<CSharedLandscapeChunk> m_chunks;
     CSharedLandscapeEdges m_edges;
+    ISharedConfiguration m_configuration;
     
     ui32 m_numChunkRows;
     ui32 m_numChunkCells;

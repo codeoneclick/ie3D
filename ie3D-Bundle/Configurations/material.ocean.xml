@@ -34,10 +34,5 @@
             render_operation_name=""
             sampler_id="2"
             wrap_mode="GL_MIRRORED_REPEAT"/>
-        <texture
-            filename="ocean.normal.pvr"
-            render_operation_name=""
-            sampler_id="3"
-            wrap_mode="GL_MIRRORED_REPEAT"/>
     </textures>
 </material>

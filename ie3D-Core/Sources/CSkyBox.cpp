@@ -60,12 +60,16 @@ void CSkyBox::onConfigurationLoaded(ISharedConfigurationRef configuration, bool 
     CSharedTexture zpositiveTexture = m_resourceAccessor->getTexture(skyBoxConfiguration->getZPositiveTextureFilename());
     CSharedTexture znegativeTexture = m_resourceAccessor->getTexture(skyBoxConfiguration->getZNegativeTextureFilename());
     
-    CSharedCubemapTexture texture = CCubemapTexture::constructCustomCubemapTexture(xpositiveTexture,
+    CSharedCubemapTexture texture = CCubemapTexture::constructCustomCubemapTexture("skybox.cubemap.texture",
+                                                                                   xpositiveTexture,
                                                                                    xnegativeTexture,
                                                                                    ypositiveTexture,
                                                                                    ynegativeTexture,
                                                                                    zpositiveTexture,
                                                                                    znegativeTexture);
+    
+    m_screenSpaceTextureAccessor->addCustomTexture(texture);
+    
     for(const auto& iterator : m_materials)
     {
         CSharedMaterial material = iterator.second;
@@ -176,6 +180,12 @@ void CSkyBox::onDraw(const std::string& mode)
         std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
         assert(material->getShader() != nullptr);
         
+        if(material->isReflecting())
+        {
+            IGameObject::setRotation(glm::vec3(180.0, m_rotation.y, m_rotation.z));
+            IGameObject::onSceneUpdate(0);
+        }
+        
         material->getShader()->setMatrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
@@ -186,6 +196,12 @@ void CSkyBox::onDraw(const std::string& mode)
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
         IGameObject::onDraw(mode);
+        
+        if(material->isReflecting())
+        {
+            IGameObject::setRotation(glm::vec3(0.0, m_rotation.y, m_rotation.z));
+            IGameObject::onSceneUpdate(0);
+        }
     }
 }
 

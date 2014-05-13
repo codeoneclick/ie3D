@@ -6,24 +6,24 @@
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "CKOTHWorkflow.h"
+#include "CDemoGameController.h"
 #include "IGraphicsContext.h"
 #include "IInputContext.h"
-#include "CKOTHInGameTransition.h"
+#include "CDemoGameTransition.h"
 #include "CConfigurationAccessor.h"
 #include "IOGLWindow.h"
 
-CKOTHWorkflow::CKOTHWorkflow(void)
+CDemoGameController::CDemoGameController(void)
 {
     
 }
 
-CKOTHWorkflow::~CKOTHWorkflow(void)
+CDemoGameController::~CDemoGameController(void)
 {
     
 }
 
-std::shared_ptr<IGameTransition> CKOTHWorkflow::CreateKOTHInGameTransition(const std::string &filename, ISharedOGLWindowRef window)
+std::shared_ptr<IGameTransition> CDemoGameController::CreateKOTHInGameTransition(const std::string &filename, ISharedOGLWindowRef window)
 {
 #if defined (__IOS__)
     std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_IOS);
@@ -35,12 +35,12 @@ std::shared_ptr<IGameTransition> CKOTHWorkflow::CreateKOTHInGameTransition(const
     std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_NDK);
     std::shared_ptr<IInputContext> inputContext = IInputContext::createInputContext(window, E_PLATFORM_API_NDK);
 #endif
-
-    std::shared_ptr<CKOTHInGameTransition> gameKOTHInGameTransition = std::make_shared<CKOTHInGameTransition>(filename,
-                                                                                                              graphicsContext,
-                                                                                                              inputContext,
-                                                                                                              m_resourceAccessor,
-                                                                                                              m_configurationAccessor);
+    
+    std::shared_ptr<CDemoGameTransition> gameKOTHInGameTransition = std::make_shared<CDemoGameTransition>(filename,
+                                                                                                          graphicsContext,
+                                                                                                          inputContext,
+                                                                                                          m_resourceAccessor,
+                                                                                                          m_configurationAccessor);
     m_configurationAccessor->LoadGameTransitionConfiguration(filename, gameKOTHInGameTransition);
     assert(gameKOTHInGameTransition != nullptr);
     return gameKOTHInGameTransition;

@@ -64,7 +64,7 @@ m_edgesMaskTexture(nullptr)
     m_chunkHeight++;
     
     m_chunks.resize(m_numChunkRows * m_numChunkCells);
-    
+    m_chunkBounds.resize(m_numChunkRows * m_numChunkCells);
     for(ui32 i = 0; i < m_numChunkRows; ++i)
     {
         for(ui32 j = 0; j < m_numChunkCells; ++j)
@@ -77,7 +77,7 @@ m_edgesMaskTexture(nullptr)
             std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh("landscape", vertexBuffer, indexBuffer,
                                                                   maxBound, minBound);
             m_chunks[i + j * m_numChunkRows] = mesh;
-            
+            m_chunkBounds[i + j * m_numChunkRows] = std::make_tuple(maxBound, minBound);
         }
     }
 }
@@ -341,4 +341,10 @@ std::shared_ptr<CVertexBuffer> CHeightmapProcessor::_CreateVertexBuffer(ui32 _wi
     }
     vertexBuffer->unlock();
     return vertexBuffer;
+}
+
+const std::tuple<glm::vec3, glm::vec3> CHeightmapProcessor::getChunkBounds(ui32 i, ui32 j) const
+{
+    assert(m_chunkBounds.size() != 0);
+    return m_chunkBounds[i + j * m_numChunkRows];
 }

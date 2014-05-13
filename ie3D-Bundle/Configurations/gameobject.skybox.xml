@@ -1,9 +1,12 @@
-<ocean
-    size_x="128"
-    size_y="128"
-    altitude="-0.25"
-    wave_generation_interval="0.005">
-	<materials>
-		<material filename="material.ocean.xml"/>
-	</materials>
-</ocean>
+<skybox
+    x_positive="xpos.pvr"
+    x_negative="xneg.pvr"
+    y_positive="ypos.pvr"
+    y_negative="yneg.pvr"
+    z_positive="zpos.pvr"
+    z_negative="zneg.pvr">
+    <materials>
+        <material filename="material.skybox.base.xml"/>
+        <material filename="material.skybox.reflection.xml"/>
+    </materials>
+</skybox>

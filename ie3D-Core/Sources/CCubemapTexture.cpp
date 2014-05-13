@@ -8,15 +8,16 @@
 
 #include "CCubemapTexture.h"
 
-CCubemapTexture::CCubemapTexture(CSharedTextureRef xpositive, CSharedTextureRef xnegative,
+CCubemapTexture::CCubemapTexture(const std::string& guid,
+                                 CSharedTextureRef xpositive, CSharedTextureRef xnegative,
                                  CSharedTextureRef ypositive, CSharedTextureRef ynegative,
                                  CSharedTextureRef zpositive, CSharedTextureRef znegative) :
-CTexture(xpositive->getGuid() +
-         xnegative->getGuid() +
-         ypositive->getGuid() +
-         ynegative->getGuid() +
-         zpositive->getGuid() +
-         znegative->getGuid()),
+CTexture(/*xpositive->getGuid() +
+          xnegative->getGuid() +
+          ypositive->getGuid() +
+          ynegative->getGuid() +
+          zpositive->getGuid() +
+          znegative->getGuid()*/ guid),
 m_xpositive(xpositive),
 m_xnegative(xnegative),
 m_ypositive(ypositive),
@@ -40,11 +41,13 @@ CCubemapTexture::~CCubemapTexture(void)
     
 }
 
-CSharedCubemapTexture CCubemapTexture::constructCustomCubemapTexture(CSharedTextureRef xpositive, CSharedTextureRef xnegative,
+CSharedCubemapTexture CCubemapTexture::constructCustomCubemapTexture(const std::string& guid,
+                                                                     CSharedTextureRef xpositive, CSharedTextureRef xnegative,
                                                                      CSharedTextureRef ypositive, CSharedTextureRef ynegative,
                                                                      CSharedTextureRef zpositive, CSharedTextureRef znegative)
 {
-    CSharedCubemapTexture texture = std::make_shared<CCubemapTexture>(xpositive, xnegative,
+    CSharedCubemapTexture texture = std::make_shared<CCubemapTexture>(guid,
+                                                                      xpositive, xnegative,
                                                                       ypositive, ynegative,
                                                                       zpositive, znegative);
     xpositive->registerLoadingHandler(texture);

@@ -28,11 +28,13 @@ protected:
     
 public:
     
-    CCubemapTexture(CSharedTextureRef xpositive, CSharedTextureRef xnegative,
+    CCubemapTexture(const std::string& guid,
+                    CSharedTextureRef xpositive, CSharedTextureRef xnegative,
                     CSharedTextureRef ypositive, CSharedTextureRef ynegative,
                     CSharedTextureRef zpositive, CSharedTextureRef znegative);
     
-    static CSharedCubemapTexture constructCustomCubemapTexture(CSharedTextureRef xpositive, CSharedTextureRef xnegative,
+    static CSharedCubemapTexture constructCustomCubemapTexture(const std::string& guid,
+                                                               CSharedTextureRef xpositive, CSharedTextureRef xnegative,
                                                                CSharedTextureRef ypositive, CSharedTextureRef ynegative,
                                                                CSharedTextureRef zpositive, CSharedTextureRef znegative);
     ~CCubemapTexture(void);

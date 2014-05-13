@@ -22,7 +22,7 @@ m_numIndexes(0)
 
 CQuadTree::~CQuadTree(void)
 {
-
+    std::cout<<"[CQuadTree::~CQuadTree]"<<std::endl;
 }
 
 void CQuadTree::createQuadTreeNode(i32 size, i32 depth,
@@ -243,6 +243,15 @@ void CQuadTree::generate(CSharedVertexBufferRef vertexBuffer,
     memset(m_indexesIds, 0x0, m_numIndexes * sizeof(ui16));
     m_vertexes = vertexBuffer->lock();
     CQuadTree::createQuadTreeNode(size, depth, shared_from_this());
+}
+
+void CQuadTree::destroy(void)
+{
+    for(const auto& iterator : m_childs)
+    {
+        iterator->destroy();
+    }
+    m_childs.clear();
 }
 
 ui32 CQuadTree::update(CSharedFrustumRef frustum)
