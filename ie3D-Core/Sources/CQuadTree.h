@@ -24,8 +24,8 @@ private:
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
 
-    ui16* m_indexes;
-    ui16* m_indexesIds;
+    std::vector<ui16> m_indexes;
+    std::vector<ui16> m_indexesIds;
     ui32 m_numIndexes;
 
     SAttributeVertex* m_vertexes;

@@ -39,18 +39,39 @@ protected:
     f32 m_maxHeight;
     f32 m_minHeight;
     
-    std::vector<CSharedMesh> m_chunks;
-    std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunkBounds;
+    std::vector<CSharedMesh> m_chunksUnused;
+    std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
     std::shared_ptr<IScreenSpaceTextureAccessor> m_screenSpaceTextureAccessor;
     
-    std::shared_ptr<CIndexBuffer> _CreateIndexBuffer(void);
-    std::shared_ptr<CVertexBuffer> _CreateVertexBuffer(ui32 _widthOffset, ui32 _heightOffset, ui32 _numVertexes, GLenum _mode, glm::vec3* _maxBound, glm::vec3* _minBound);
-
+    CSharedIndexBuffer createIndexBuffer(void);
+    CSharedVertexBuffer createVertexBuffer(ui32 widthOffset,
+                                           ui32 heightOffset,
+                                           ui32 numVertexes,
+                                           GLenum mode,
+                                           glm::vec3* maxBound, glm::vec3* minBound);
+    
     void _FillEdgesMaskTextureBlock(ui16* _data,ui32 _index, ui32 _edgesMaskWidth, ui32 _edgesMaskHeight, ui32 _textureBlockSize, const glm::vec3& _point, bool _reverse);
     
     ui32 createTextureId(void);
-
+    void createChunkBound(ui32 widthOffset, ui32 heightOffset, glm::vec3* maxBound, glm::vec3* minBound);
+    
+    void fillVertexBuffer(CSharedVertexBufferRef vertexBuffer, ui32 widthOffset, ui32 heightOffset, ui32 numVertexes);
+    void fillIndexBuffer(CSharedIndexBufferRef indexBuffer);
+    
+    void fillNormals(CSharedVertexBufferRef vertexBuffer,
+                     CSharedIndexBufferRef indexBuffer);
+    
+    void fillTangentsAndBinormals(CSharedVertexBufferRef vertexBuffer,
+                                  CSharedIndexBufferRef indexBuffer);
+    
+    
+    void getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
+                          f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,
+                          glm::vec3& tangentX, glm::vec3& tangentY);
+    glm::vec3 getClosestPointOnLine(const glm::vec3& a, const glm::vec3& b, const glm::vec3& p);
+    glm::vec3 ortogonalize(const glm::vec3& v1, const glm::vec3& v2);
+    
 public:
 
     CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, ISharedConfigurationRef _template);
@@ -72,12 +93,8 @@ public:
         return m_height;
     };
 
-    inline std::shared_ptr<CMesh> Get_Chunk(ui32 _i, ui32 _j)
-    {
-        assert(m_chunks.size() != 0);
-        assert(m_chunks[_i + _j * m_numChunkRows] != nullptr);
-        return m_chunks[_i + _j * m_numChunkRows];
-    };
+    CSharedMesh getChunk(ui32 i, ui32 j);
+    void freeChunk(CSharedMeshRef chunk);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
     

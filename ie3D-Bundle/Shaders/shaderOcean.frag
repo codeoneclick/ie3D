@@ -2,9 +2,7 @@ varying mediump vec4   OUT_TexCoordProjection;
 varying mediump vec2   OUT_TexCoordDisplace_01;
 varying mediump vec2   OUT_TexCoordDisplace_02;
 varying mediump vec2   OUT_TexCoord;
-varying mediump vec3   OUT_LightDirection;
 varying mediump vec3   OUT_LightPosition;
-varying mediump vec3   OUT_CameraDirection;
 varying mediump vec3   OUT_CameraPosition;
 varying mediump vec3   OUT_Position;
 

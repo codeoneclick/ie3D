@@ -824,7 +824,7 @@ glm::vec2 CConfigurationLandscape::getSize(void) const
                                               kLandscapeSizeYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
-    ui8 y = iteratorY->second[0]->getScalar<f32>();
+    f32 y = iteratorY->second[0]->getScalar<f32>();
     
     return glm::vec2(x, y);
 }

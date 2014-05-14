@@ -54,6 +54,42 @@ ui32 CMeshData::getNumIndices(void) const
     return m_numIndices;
 }
 
+glm::vec3 CMeshData::calculateMaxBound(const glm::vec3& point_01, const glm::vec3& point_02)
+{
+    glm::vec3 result = point_02;
+    if(point_01.x > point_02.x)
+    {
+        result.x = point_01.x;
+    }
+    if(point_01.y > point_02.y)
+    {
+        result.y = point_01.y;
+    }
+    if(point_01.z > point_02.z)
+    {
+        result.z = point_01.z;
+    }
+    return result;
+}
+
+glm::vec3 CMeshData::calculateMinBound(const glm::vec3& point_01, const glm::vec3& point_02)
+{
+    glm::vec3 result = point_02;
+    if(point_01.x < point_02.x)
+    {
+        result.x = point_01.x;
+    }
+    if(point_01.y < point_02.y)
+    {
+        result.y = point_01.y;
+    }
+    if(point_01.z < point_02.z)
+    {
+        result.z = point_01.z;
+    }
+    return result;
+}
+
 const glm::vec3& CMeshData::getMaxBound(void) const
 {
     return m_maxBound;
@@ -62,6 +98,19 @@ const glm::vec3& CMeshData::getMaxBound(void) const
 const glm::vec3& CMeshData::getMinBound(void) const
 {
     return m_minBound;
+}
+
+void CMeshData::updateBounds(SAttributeVertex *data, ui32 numVertices)
+{
+    m_maxBound = glm::vec3( -4096.0f, -4096.0f, -4096.0f );
+    m_minBound = glm::vec3( 4096.0f, 4096.0f, 4096.0f );
+    assert(data != nullptr);
+    for(ui32 i = 0; i < numVertices; ++i)
+    {
+        glm::vec3 point = data[i].m_position;
+        m_maxBound = CMeshData::calculateMaxBound(point, m_maxBound);
+        m_minBound = CMeshData::calculateMinBound(point, m_minBound);
+    }
 }
 
 void CMeshData::removeData(void)
@@ -342,6 +391,16 @@ const glm::vec3 CMesh::getMaxBound(void) const
 const glm::vec3 CMesh::getMinBound(void) const
 {
     return IResource::isLoaded() ? m_meshData->getMinBound() : glm::vec3(0.0, 0.0, 0.0);
+}
+
+void CMesh::updateBounds(void)
+{
+    if(IResource::isLoaded())
+    {
+        assert(m_meshData != nullptr);
+        assert(m_vertexBuffer != nullptr);
+        m_meshData->updateBounds(m_vertexBuffer->lock(), m_vertexBuffer->getSize());
+    }
 }
 
 const ui32 CMesh::getNumFrames(void) const

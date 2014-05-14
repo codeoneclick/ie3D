@@ -22,9 +22,7 @@ uniform vec4   VECTOR_ClipPlane;
 uniform int    INT_LightsCount;
 uniform float  FLOAT_Timer;
 
-varying vec3   OUT_LightDirection;
 varying vec3   OUT_LightPosition;
-varying vec3   OUT_CameraDirection;
 varying vec3   OUT_CameraPosition;
 varying vec3   OUT_Position;
 varying vec2   OUT_TexCoord;
@@ -32,7 +30,7 @@ varying vec4   OUT_TexCoordProjection;
 varying vec2   OUT_TexCoordDisplace_01;
 varying vec2   OUT_TexCoordDisplace_02;
 
-const float k_fTexCoordScale = 4.0;
+const float k_fTexCoordScale = 8.0;
 
 void main(void)
 {

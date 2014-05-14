@@ -45,7 +45,7 @@ m_numIndexesToRender(0)
 CLandscapeChunk::~CLandscapeChunk(void)
 {
     m_quadTree->destroy();
-    std::cout<<"[CLandscapeChunk::~CLandscapeChunk]"<<std::endl;
+    m_materialBindImposer = nullptr;
 }
 
 void CLandscapeChunk::setMesh(CSharedMeshRef mesh,

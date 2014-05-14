@@ -26,11 +26,18 @@ private:
     
     ui32 m_numChunkRows;
     ui32 m_numChunkCells;
-
+    
+    CSharedTexture m_splattingDiffuseTexture;
+    CSharedTexture m_splattingNormalTexture;
+    
     CSharedMaterial m_splattingDiffuseMaterial;
     CSharedMaterial m_splattingNormalMaterial;
-    bool m_isSplattingDiffuseTextureCommited;
-    bool m_isSplattingNormalTextureCommited;
+    
+    bool m_isSplattingDiffuseTextureProcessed;
+    bool m_isSplattingNormalTextureProcessed;
+    
+    void processSplattingDiffuseTexture(void);
+    void processSplattingNormalTexture(void);
     
 protected:
 

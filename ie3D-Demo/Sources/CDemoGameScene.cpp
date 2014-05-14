@@ -72,7 +72,7 @@ void CDemoGameScene::load(void)
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
-                                                               glm::vec3(512.0, 0.0, 512.0));
+                                                               glm::vec3(256.0, 0.0, 256.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);
 }
 

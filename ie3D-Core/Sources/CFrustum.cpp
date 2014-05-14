@@ -39,7 +39,7 @@ f32 CFrustum::_Get_DistanceToPlane(const glm::vec4 &_plane, const glm::vec3 &_po
 
 void CFrustum::Update(void)
 {
-    f32 tan = tanf(glm::radians(m_camera->Get_Fov()));
+    f32 tan = tanf(glm::radians(m_camera->Get_Fov()) * 0.5);
 	f32 nearHeight = m_camera->Get_Near() * tan;
 	f32 nearWidth = nearHeight * m_camera->Get_Aspect();
 	f32 farHeight = m_camera->Get_Far()  * tan;

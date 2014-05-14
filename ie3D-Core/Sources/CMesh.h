@@ -44,8 +44,12 @@ public:
     ui32 getNumVertices(void) const;
     ui32 getNumIndices(void) const;
     
+    static glm::vec3 calculateMaxBound(const glm::vec3& point_01, const glm::vec3& point_02);
+    static glm::vec3 calculateMinBound(const glm::vec3& point_01, const glm::vec3& point_02);
+    
     const glm::vec3& getMaxBound(void) const;
     const glm::vec3& getMinBound(void) const;
+    void updateBounds(SAttributeVertex *data, ui32 numVertices);
     
     void removeData(void);
 };
@@ -161,6 +165,7 @@ public:
     
     const glm::vec3 getMaxBound(void) const;
     const glm::vec3 getMinBound(void) const;
+    void updateBounds(void);
     
     const ui32 getNumFrames(void) const;
     const ui32 getAnimationFPS(void) const;

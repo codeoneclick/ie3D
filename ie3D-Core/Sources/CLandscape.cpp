@@ -25,10 +25,12 @@
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
+m_splattingDiffuseTexture(nullptr),
+m_splattingNormalTexture(nullptr),
 m_splattingDiffuseMaterial(nullptr),
 m_splattingNormalMaterial(nullptr),
-m_isSplattingDiffuseTextureCommited(false),
-m_isSplattingNormalTextureCommited(false),
+m_isSplattingDiffuseTextureProcessed(false),
+m_isSplattingNormalTextureProcessed(false),
 m_configuration(nullptr),
 m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, screenSpaceTextureAccessor))
 {
@@ -44,79 +46,58 @@ void CLandscape::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_splattingDiffuseMaterial != nullptr);
-        if(!m_isSplattingDiffuseTextureCommited && m_splattingDiffuseMaterial->isCommited())
-        {
-            assert(m_heightmapProcessor != nullptr);
-            std::shared_ptr<CTexture> splattingDiffuseTexture = m_heightmapProcessor->PreprocessSplattingDiffuseTexture(m_splattingDiffuseMaterial);
-            for(ui32 i = 0; i < m_numChunkRows; ++i)
-            {
-                for(ui32 j = 0; j < m_numChunkCells; ++j)
-                {
-                    assert(m_chunks.size() != 0);
-                    assert(m_chunks[i + j * m_numChunkRows] != nullptr);
-                    m_chunks[i + j * m_numChunkRows]->setSplattingDiffuseTexture(splattingDiffuseTexture);
-                }
-            }
-            m_isSplattingDiffuseTextureCommited = true;
-        }
         
-        assert(m_splattingNormalMaterial != nullptr);
-        if(!m_isSplattingNormalTextureCommited && m_splattingNormalMaterial->isCommited())
+        CLandscape::processSplattingDiffuseTexture();
+        CLandscape::processSplattingNormalTexture();
+        
+        ui32 chunkWidth = m_heightmapProcessor->Get_ChunkWidth();
+        ui32 chunkHeight = m_heightmapProcessor->Get_ChunkHeight();
+        
+        for(ui32 i = 0; i < m_numChunkRows; ++i)
         {
-            assert(m_heightmapProcessor != nullptr);
-            std::shared_ptr<CTexture> splattingNormalTexture = m_heightmapProcessor->PreprocessSplattingNormalTexture(m_splattingNormalMaterial);
-            for(ui32 i = 0; i < m_numChunkRows; ++i)
+            for(ui32 j = 0; j < m_numChunkCells; ++j)
             {
-                for(ui32 j = 0; j < m_numChunkCells; ++j)
+                glm::vec3 maxBound = std::get<0>(m_heightmapProcessor->getChunkBounds(i, j));
+                glm::vec3 minBound = std::get<1>(m_heightmapProcessor->getChunkBounds(i, j));
+                
+                i32 result = m_camera->Get_Frustum()->IsBoundBoxInFrustum(maxBound,
+                                                                          minBound);
+                if(result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
+                   result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
                 {
-                    assert(m_chunks.size() != 0);
-                    assert(m_chunks[i + j * m_numChunkRows] != nullptr);
-                    m_chunks[i + j * m_numChunkRows]->setSplattingNormalTexture(splattingNormalTexture);
+                    if(m_chunks[i + j * m_numChunkRows] == nullptr)
+                    {
+                        std::shared_ptr<CMesh> mesh = m_heightmapProcessor->getChunk(i, j);
+                        m_chunks[i + j * m_numChunkRows] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+                        
+                        m_chunks[i + j * m_numChunkRows]->setCamera(m_camera);
+                        
+                        m_chunks[i + j * m_numChunkRows]->setRenderMgr(m_renderMgr);
+                        m_chunks[i + j * m_numChunkRows]->setSceneUpdateMgr(m_sceneUpdateMgr);
+                        
+                        m_chunks[i + j * m_numChunkRows]->listenRenderMgr(m_isNeedToRender);
+                        m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(m_isNeedToUpdate);
+                        
+                        m_chunks[i + j * m_numChunkRows]->setMesh(mesh, chunkWidth, chunkHeight);
+                        m_chunks[i + j * m_numChunkRows]->onConfigurationLoaded(m_configuration, true);
+                        
+                        if(m_splattingDiffuseTexture != nullptr)
+                        {
+                            m_chunks[i + j * m_numChunkRows]->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
+                        }
+                        if(m_splattingNormalTexture != nullptr)
+                        {
+                            m_chunks[i + j * m_numChunkRows]->setSplattingNormalTexture(m_splattingNormalTexture);
+                        }
+                    }
                 }
-            }
-            m_isSplattingNormalTextureCommited = true;
-        }
-    }
-    
-    ui32 chunkWidth = m_heightmapProcessor->Get_ChunkWidth();
-    ui32 chunkHeight = m_heightmapProcessor->Get_ChunkHeight();
-    
-    for(ui32 i = 0; i < m_numChunkRows; ++i)
-    {
-        for(ui32 j = 0; j < m_numChunkCells; ++j)
-        {
-            glm::vec3 maxBound = std::get<0>(m_heightmapProcessor->getChunkBounds(i, j));
-            glm::vec3 minBound = std::get<1>(m_heightmapProcessor->getChunkBounds(i, j));
-            
-            i32 result = m_camera->Get_Frustum()->IsBoundBoxInFrustum(maxBound,
-                                                                      minBound);
-            if(result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
-               result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
-            {
-                if(m_chunks[i + j * m_numChunkRows] == nullptr)
+                else if(m_chunks[i + j * m_numChunkRows] != nullptr)
                 {
-                    std::shared_ptr<CMesh> mesh = m_heightmapProcessor->Get_Chunk(i, j);
-                    m_chunks[i + j * m_numChunkRows] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_screenSpaceTextureAccessor);
-                    
-                    m_chunks[i + j * m_numChunkRows]->setCamera(m_camera);
-                    
-                    m_chunks[i + j * m_numChunkRows]->setRenderMgr(m_renderMgr);
-                    m_chunks[i + j * m_numChunkRows]->setSceneUpdateMgr(m_sceneUpdateMgr);
-                    
-                    m_chunks[i + j * m_numChunkRows]->listenRenderMgr(m_isNeedToRender);
-                    m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(m_isNeedToUpdate);
-                    
-                    m_chunks[i + j * m_numChunkRows]->setMesh(mesh, chunkWidth, chunkHeight);
-                    m_chunks[i + j * m_numChunkRows]->onConfigurationLoaded(m_configuration, true);
-                    
+                    m_chunks[i + j * m_numChunkRows]->listenRenderMgr(false);
+                    m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(false);
+                    m_heightmapProcessor->freeChunk(m_chunks[i + j * m_numChunkRows]->m_mesh);
+                    m_chunks[i + j * m_numChunkRows] = nullptr;
                 }
-            }
-            else if(m_chunks[i + j * m_numChunkRows] != nullptr)
-            {
-                m_chunks[i + j * m_numChunkRows]->listenRenderMgr(false);
-                m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(false);
-                m_chunks[i + j * m_numChunkRows] = nullptr;
             }
         }
     }
@@ -134,8 +115,8 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     assert(m_resourceAccessor != nullptr);
     assert(m_screenSpaceTextureAccessor != nullptr);
     
-    m_isSplattingDiffuseTextureCommited = false;
-    m_isSplattingNormalTextureCommited = false;
+    m_isSplattingDiffuseTextureProcessed = false;
+    m_isSplattingNormalTextureProcessed = false;
     
     m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_screenSpaceTextureAccessor, landscapeConfiguration);
     
@@ -155,32 +136,51 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     
     m_numChunkRows = m_heightmapProcessor->Get_NumChunkRows();
     m_numChunkCells = m_heightmapProcessor->Get_NumChunkCells();
-    
-    //ui32 chunkWidth = m_heightmapProcessor->Get_ChunkWidth();
-    //ui32 chunkHeight = m_heightmapProcessor->Get_ChunkHeight();
-    
+
     m_chunks.resize(m_numChunkRows * m_numChunkCells);
     
-    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
-    {
-        for(ui32 j = 0; j < m_numChunkCells; ++j)
-        {
-            std::shared_ptr<CMesh> mesh = m_heightmapProcessor->Get_Chunk(i, j);
-            m_chunks[i + j * m_numChunkRows] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_screenSpaceTextureAccessor);
-            m_chunks[i + j * m_numChunkRows]->setMesh(mesh, chunkWidth, chunkHeight);
-            m_chunks[i + j * m_numChunkRows]->onConfigurationLoaded(configuration, success);
-        }
-    }*/
     m_edges->onConfigurationLoaded(configuration, success);
     m_edges->setEdgeTexture(m_heightmapProcessor->Get_EdgesMaskTexture());
     
-    //IGameObject::setCamera(m_camera);
-    //IGameObject::setRenderMgr(m_renderMgr);
-    //IGameObject::setSceneUpdateMgr(m_sceneUpdateMgr);
-	//IGameObject::listenRenderMgr(m_isNeedToRender);
-    //IGameObject::listenSceneUpdateMgr(m_isNeedToUpdate);
-    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+}
+
+void CLandscape::processSplattingDiffuseTexture(void)
+{
+    if(m_splattingDiffuseMaterial->isCommited() && !m_isSplattingDiffuseTextureProcessed)
+    {
+        m_splattingDiffuseTexture = m_heightmapProcessor->PreprocessSplattingDiffuseTexture(m_splattingDiffuseMaterial);
+        m_isSplattingDiffuseTextureProcessed = true;
+        for(ui32 i = 0; i < m_numChunkRows; ++i)
+        {
+            for(ui32 j = 0; j < m_numChunkCells; ++j)
+            {
+                if(m_chunks[i + j * m_numChunkRows] != nullptr)
+                {
+                    m_chunks[i + j * m_numChunkRows]->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
+                }
+            }
+        }
+    }
+}
+
+void CLandscape::processSplattingNormalTexture(void)
+{
+    if(m_splattingNormalMaterial->isCommited() && !m_isSplattingNormalTextureProcessed)
+    {
+        m_splattingNormalTexture = m_heightmapProcessor->PreprocessSplattingNormalTexture(m_splattingNormalMaterial);
+        m_isSplattingNormalTextureProcessed = true;
+        for(ui32 i = 0; i < m_numChunkRows; ++i)
+        {
+            for(ui32 j = 0; j < m_numChunkCells; ++j)
+            {
+                if(m_chunks[i + j * m_numChunkRows] != nullptr)
+                {
+                    m_chunks[i + j * m_numChunkRows]->setSplattingNormalTexture(m_splattingNormalTexture);
+                }
+            }
+        }
+    }
 }
 
 std::vector<ISharedGameObject> CLandscape::getChunks(void) const

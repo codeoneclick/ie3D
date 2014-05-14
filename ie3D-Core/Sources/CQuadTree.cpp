@@ -13,7 +13,6 @@
 
 CQuadTree::CQuadTree(void) :
 m_parent(nullptr),
-m_indexes(nullptr),
 m_indexBuffer(nullptr), 
 m_numIndexes(0)
 {
@@ -22,7 +21,8 @@ m_numIndexes(0)
 
 CQuadTree::~CQuadTree(void)
 {
-    std::cout<<"[CQuadTree::~CQuadTree]"<<std::endl;
+    m_indexes.clear();
+    m_indexesIds.clear();
 }
 
 void CQuadTree::createQuadTreeNode(i32 size, i32 depth,
@@ -88,7 +88,6 @@ void CQuadTree::createQuadTreeNode(i32 size, i32 depth,
 void CQuadTree::createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node)
 {
     ui32 parentNumIndexes = node->m_parent->m_numIndexes;
-    node->m_indexes = static_cast<ui16*>(malloc(sizeof(ui16)));
     f32 maxY = -4096.0f;
     f32 minY =  4096.0f;
     
@@ -127,8 +126,8 @@ void CQuadTree::createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node)
             }
             
             node->m_numIndexes += 3;
-            node->m_indexes = static_cast<ui16*>(realloc(node->m_indexes, sizeof(ui16) * node->m_numIndexes));
-            
+            node->m_indexes.resize(node->m_numIndexes);
+
             node->m_indexes[node->m_numIndexes - 3] = node->m_parent->m_indexes[i + 0];
             node->m_indexes[node->m_numIndexes - 2] = node->m_parent->m_indexes[i + 1];
             node->m_indexes[node->m_numIndexes - 1] = node->m_parent->m_indexes[i + 2];
@@ -168,8 +167,7 @@ void CQuadTree::createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node)
             }
         }
     }
-    node->m_indexesIds = static_cast<ui16*>(malloc(node->m_numIndexes * sizeof(ui16)));
-    memset(node->m_indexesIds, 0x0, node->m_numIndexes * sizeof(ui16));
+    node->m_indexesIds.resize(node->m_numIndexes);
     node->m_maxBound.y = maxY;
     node->m_minBound.y = minY;
 }
@@ -206,14 +204,14 @@ void CQuadTree::generateQuadTreeNode(CSharedFrustumRef frustum,
                                                   root->m_childs[i]->m_minBound);
         if(result == E_FRUSTUM_BOUND_RESULT_INSIDE)
         {
-            memcpy(&indexes[numIndexes], root->m_childs[i]->m_indexes, sizeof(ui16) * root->m_childs[i]->m_numIndexes);
+            memcpy(&indexes[numIndexes], &root->m_childs[i]->m_indexes[0], sizeof(ui16) * root->m_childs[i]->m_numIndexes);
             numIndexes += root->m_childs[i]->m_numIndexes;
         }
         else if(result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
         {
             if(root->m_childs[i]->m_childs.size() == 0)
             {
-                memcpy(&indexes[numIndexes], root->m_childs[i]->m_indexes, sizeof(ui16) * root->m_childs[i]->m_numIndexes);
+                memcpy(&indexes[numIndexes], &root->m_childs[i]->m_indexes[0], sizeof(ui16) * root->m_childs[i]->m_numIndexes);
                 numIndexes += root->m_childs[i]->m_numIndexes;
             }
             else
@@ -236,11 +234,10 @@ void CQuadTree::generate(CSharedVertexBufferRef vertexBuffer,
     m_maxBound = maxBound;
     m_minBound = minBound;
     m_numIndexes = m_indexBuffer->getSize();
-    m_indexes = static_cast<ui16*>(malloc(m_numIndexes * sizeof(ui16)));
-    m_indexesIds = static_cast<ui16*>(malloc(m_numIndexes * sizeof(ui16)));
+    m_indexes.resize(m_numIndexes);
+    m_indexesIds.resize(m_numIndexes);
     ui16* indexData = indexBuffer->lock();
-    memcpy(m_indexes , indexData, m_numIndexes * sizeof(ui16));
-    memset(m_indexesIds, 0x0, m_numIndexes * sizeof(ui16));
+    std::copy(indexData, indexData + m_numIndexes, m_indexes.begin());
     m_vertexes = vertexBuffer->lock();
     CQuadTree::createQuadTreeNode(size, depth, shared_from_this());
 }
@@ -252,6 +249,7 @@ void CQuadTree::destroy(void)
         iterator->destroy();
     }
     m_childs.clear();
+    m_parent = nullptr;
 }
 
 ui32 CQuadTree::update(CSharedFrustumRef frustum)
