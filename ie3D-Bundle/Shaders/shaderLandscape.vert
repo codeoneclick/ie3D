@@ -15,10 +15,8 @@ uniform vec3   VECTOR_CameraPosition;
 varying vec2   OUT_TexCoord;
 varying float  OUT_ClipPlane;
 varying vec3   OUT_CameraPosition;
+varying vec3   OUT_LightDirection;
 varying vec3   OUT_Position;
-varying vec3   OUT_Tangent;
-varying vec3   OUT_Normal;
-varying vec3   OUT_Binormal;
 
 void main(void)
 {
@@ -33,7 +31,10 @@ void main(void)
     vec3 vTangent = IN_Tangent.xyz / 127.0 - 1.0;
     vec3 vBinormal = cross(vNormal, vTangent);
     
-    OUT_Tangent = vTangent;
-    OUT_Normal = vNormal;
-    OUT_Binormal = vBinormal;
+    mat3 mTangentSpace = mat3(vTangent.x, vBinormal.x, vNormal.x,
+                              vTangent.y, vBinormal.y, vNormal.y,
+                              vTangent.z, vBinormal.z, vNormal.z);
+    
+    vec3 vLightDirection = vec3(vPosition) - vec3(512.0, 1024.0, 64.0);
+    OUT_LightDirection = normalize(mTangentSpace * vLightDirection);
 }

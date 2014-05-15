@@ -16,6 +16,8 @@
 #include "CConfigurationGameObjects.h"
 #include "CHeightmapHelper.h"
 
+#import <UIKit/UIKit.h>
+
 CHeightmapProcessor::CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, ISharedConfigurationRef _template) :
 m_heightmapData(nullptr),
 m_screenSpaceTextureAccessor(_screenSpaceTextureAccessor),
@@ -39,12 +41,31 @@ m_edgesMaskTexture(nullptr)
     m_heightmapData = new f32[m_width * m_height];
     m_maxAltitude = 0.0f;
     
+    UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"mesa_heightmap" encoding:NSUTF8StringEncoding]];
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    size_t bytesPerRow = image.size.width * 4;
+    ui8* data = (ui8 *)malloc(image.size.height * bytesPerRow);
+    CGContextRef context = CGBitmapContextCreate(data,
+                                                 image.size.width,
+                                                 image.size.height,
+                                                 8,
+                                                 bytesPerRow,
+                                                 colorSpace,
+                                                 kCGImageAlphaNoneSkipFirst);
+    UIGraphicsPushContext(context);
+    CGContextTranslateCTM(context, 0.0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    [image drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+    UIGraphicsPopContext();
+    
+    ui32 index = 0;
     for(ui32 i = 0; i < m_width; ++i)
     {
         for(ui32 j = 0; j < m_height; ++j)
         {
-			m_heightmapData[i + j * m_height] = sin(i * 0.1) * 10.0 + cos(j * 0.1) * 10.0;
-            
+            m_heightmapData[i + j * m_height] = (static_cast<f32>(data[(i + j * m_width) * 4 + 1] - 64) / 255) * 32.0;
+			//m_heightmapData[i + j * m_height] = bytes[index] / 255 * 10.0;//sin(i * 0.1) * 10.0 + cos(j * 0.1) * 10.0;
+            index += 4;
             if(fabsf(m_heightmapData[i +j * m_height]) > m_maxAltitude)
             {
                 m_maxAltitude = fabsf(m_heightmapData[i +j * m_height]);
@@ -400,91 +421,112 @@ void CHeightmapProcessor::fillIndexBuffer(CSharedIndexBufferRef indexBuffer)
     indexBuffer->unlock();
 }
 
-void CHeightmapProcessor::fillNormals(CSharedVertexBufferRef vertexBuffer,
-                                      CSharedIndexBufferRef indexBuffer)
+dispatch_queue_t backgroundQueue(void)
 {
-    SAttributeVertex* vertexData = vertexBuffer->lock();
-    ui16* indexData = indexBuffer->lock();
-    ui32 numIndexes = indexBuffer->getSize();
-    
-    for(ui32 index = 0; index < numIndexes; index += 3)
-    {
-        glm::vec3 point_01 = vertexData[indexData[index + 0]].m_position;
-        glm::vec3 point_02 = vertexData[indexData[index + 1]].m_position;
-        glm::vec3 point_03 = vertexData[indexData[index + 2]].m_position;
-        
-        glm::vec3 edge_01 = point_02 - point_01;
-        glm::vec3 edge_02 = point_03 - point_01;
-        glm::vec3 normal = glm::cross(edge_01, edge_02);
-        normal = glm::normalize(normal);
-        glm::u8vec4 complessedNormal = CVertexBuffer::compressVec3(normal);
-        vertexData[indexData[index + 0]].m_normal = complessedNormal;
-        vertexData[indexData[index + 1]].m_normal = complessedNormal;
-        vertexData[indexData[index + 2]].m_normal = complessedNormal;
-    }
-    vertexBuffer->unlock();
+    static dispatch_queue_t queue;
+    static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            queue = dispatch_queue_create("update.tangent.space.queue", DISPATCH_QUEUE_SERIAL);
+        });
+    return queue;
 }
 
-void CHeightmapProcessor::fillTangentsAndBinormals(CSharedVertexBufferRef vertexBuffer,
-                                                   CSharedIndexBufferRef indexBuffer)
+void CHeightmapProcessor::fillNormals(CSharedVertexBufferRef _vertexBuffer,
+                                      CSharedIndexBufferRef _indexBuffer)
 {
-    std::vector<glm::vec3> tangents, binormals;
-    
-    SAttributeVertex* vertexData = vertexBuffer->lock();
-    ui32 numVertexes = vertexBuffer->getSize();
-    
-    ui16* indexData = indexBuffer->lock();
-    ui32 numIndexes = indexBuffer->getSize();
-    
-    for (ui32 i = 0; i < numIndexes; i += 3 )
-    {
-        glm::vec3 v1 = vertexData[indexData[i + 0]].m_position;
-        glm::vec3 v2 = vertexData[indexData[i + 1]].m_position;
-        glm::vec3 v3 = vertexData[indexData[i + 2]].m_position;
-        float s1 = vertexData[indexData[i + 0]].m_texcoord.x;
-        float t1 = vertexData[indexData[i + 0]].m_texcoord.y;
-        float s2 = vertexData[indexData[i + 1]].m_texcoord.x;
-        float t2 = vertexData[indexData[i + 1]].m_texcoord.y;
-        float s3 = vertexData[indexData[i + 2]].m_texcoord.x;
-        float t3 = vertexData[indexData[i + 2]].m_texcoord.y;
+    __block CSharedVertexBuffer vertexBuffer = _vertexBuffer;
+    __block CSharedIndexBuffer indexBuffer = _indexBuffer;
+    dispatch_async(backgroundQueue(), ^{
+        SAttributeVertex* vertexData = vertexBuffer->lock();
+        ui16* indexData = indexBuffer->lock();
+        ui32 numIndexes = indexBuffer->getSize();
         
-        glm::vec3 t, b;
-        CHeightmapProcessor::getTriangleBasis(v1, v2, v3, s1, t1, s2, t2, s3, t3, t, b);
-        tangents.push_back(t);
-        binormals.push_back(b);
-    }
-    
-    
-    for (ui32 i = 0; i < numVertexes; i++)
-    {
-        std::vector<glm::vec3> lrt, lrb;
-        for (ui32 j = 0; j < numIndexes; j += 3)
+        for(ui32 index = 0; index < numIndexes; index += 3)
         {
-            if ((indexData[j + 0]) == i || (indexData[j + 1]) == i || (indexData[j + 2]) == i)
+            glm::vec3 point_01 = vertexData[indexData[index + 0]].m_position;
+            glm::vec3 point_02 = vertexData[indexData[index + 1]].m_position;
+            glm::vec3 point_03 = vertexData[indexData[index + 2]].m_position;
+            
+            glm::vec3 edge_01 = point_02 - point_01;
+            glm::vec3 edge_02 = point_03 - point_01;
+            glm::vec3 normal = glm::cross(edge_01, edge_02);
+            normal = glm::normalize(normal);
+            glm::u8vec4 complessedNormal = CVertexBuffer::compressVec3(normal);
+            vertexData[indexData[index + 0]].m_normal = complessedNormal;
+            vertexData[indexData[index + 1]].m_normal = complessedNormal;
+            vertexData[indexData[index + 2]].m_normal = complessedNormal;
+        }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            vertexBuffer->unlock();
+        });
+    });
+}
+
+void CHeightmapProcessor::fillTangentsAndBinormals(CSharedVertexBufferRef _vertexBuffer,
+                                                   CSharedIndexBufferRef _indexBuffer)
+{
+    __block CSharedVertexBuffer vertexBuffer = _vertexBuffer;
+    __block CSharedIndexBuffer indexBuffer = _indexBuffer;
+    dispatch_async(backgroundQueue(), ^{
+        std::vector<glm::vec3> tangents, binormals;
+        
+        SAttributeVertex* vertexData = vertexBuffer->lock();
+        ui32 numVertexes = vertexBuffer->getSize();
+        
+        ui16* indexData = indexBuffer->lock();
+        ui32 numIndexes = indexBuffer->getSize();
+        
+        for (ui32 i = 0; i < numIndexes; i += 3 )
+        {
+            glm::vec3 v1 = vertexData[indexData[i + 0]].m_position;
+            glm::vec3 v2 = vertexData[indexData[i + 1]].m_position;
+            glm::vec3 v3 = vertexData[indexData[i + 2]].m_position;
+            float s1 = vertexData[indexData[i + 0]].m_texcoord.x;
+            float t1 = vertexData[indexData[i + 0]].m_texcoord.y;
+            float s2 = vertexData[indexData[i + 1]].m_texcoord.x;
+            float t2 = vertexData[indexData[i + 1]].m_texcoord.y;
+            float s3 = vertexData[indexData[i + 2]].m_texcoord.x;
+            float t3 = vertexData[indexData[i + 2]].m_texcoord.y;
+            
+            glm::vec3 t, b;
+            CHeightmapProcessor::getTriangleBasis(v1, v2, v3, s1, t1, s2, t2, s3, t3, t, b);
+            tangents.push_back(t);
+            binormals.push_back(b);
+        }
+        
+        for (ui32 i = 0; i < numVertexes; i++)
+        {
+            std::vector<glm::vec3> lrt, lrb;
+            for (ui32 j = 0; j < numIndexes; j += 3)
             {
-                lrt.push_back(tangents[i]);
-                lrb.push_back(binormals[i]);
+                if ((indexData[j + 0]) == i || (indexData[j + 1]) == i || (indexData[j + 2]) == i)
+                {
+                    lrt.push_back(tangents[i]);
+                    lrb.push_back(binormals[i]);
+                }
             }
+            
+            glm::vec3 tangentRes(0.0f, 0.0f, 0.0f);
+            glm::vec3 binormalRes(0.0f, 0.0f, 0.0f);
+            for (ui32 j = 0; j < lrt.size(); j++)
+            {
+                tangentRes += lrt[j];
+                binormalRes += lrb[j];
+            }
+            tangentRes /= static_cast<f32>(lrt.size());
+            binormalRes /= static_cast<f32>(lrb.size());
+            
+            glm::vec3 normal =  CVertexBuffer::uncompressU8Vec4(vertexData[i].m_normal);
+            tangentRes = CHeightmapProcessor::ortogonalize(normal, tangentRes);
+            binormalRes = CHeightmapProcessor::ortogonalize(normal, binormalRes);
+            
+            vertexData[i].m_tangent = CVertexBuffer::compressVec3(tangentRes);
         }
-        
-        glm::vec3 tangentRes(0.0f, 0.0f, 0.0f);
-        glm::vec3 binormalRes(0.0f, 0.0f, 0.0f);
-        for (ui32 j = 0; j < lrt.size(); j++)
-        {
-            tangentRes += lrt[j];
-            binormalRes += lrb[j];
-        }
-        tangentRes /= static_cast<f32>(lrt.size());
-        binormalRes /= static_cast<f32>(lrb.size());
-        
-        glm::vec3 normal =  CVertexBuffer::uncompressU8Vec4(vertexData[i].m_normal);
-        tangentRes = CHeightmapProcessor::ortogonalize(normal, tangentRes);
-        binormalRes = CHeightmapProcessor::ortogonalize(normal, binormalRes);
-        
-        vertexData[i].m_tangent = CVertexBuffer::compressVec3(tangentRes);
-    }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            vertexBuffer->unlock();
+        });
+    });
 }
-
 
 void CHeightmapProcessor::getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
                                            f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,

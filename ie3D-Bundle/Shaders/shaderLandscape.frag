@@ -2,6 +2,7 @@
 varying highp   vec2   OUT_TexCoord;
 varying mediump float  OUT_ClipPlane;
 varying mediump vec3   OUT_CameraPosition;
+varying mediump vec3   OUT_LightDirection;
 varying mediump vec3   OUT_Position;
 varying mediump vec3   OUT_Tangent;
 varying mediump vec3   OUT_Normal;
@@ -16,21 +17,11 @@ void main(void)
         discard;
     
     lowp vec4 vDiffuseColor = texture2D(SAMPLER_01, OUT_TexCoord);
+    lowp vec3 vNormalColor = normalize(texture2D(SAMPLER_02, OUT_TexCoord).rgb * 2.0 - 1.0);
     
-    
-    mediump vec3 vCameraDirection = normalize(OUT_Position - OUT_CameraPosition);
-    
-    mediump vec3 vTemp;
-    vTemp.x = dot(vCameraDirection, OUT_Tangent);
-    vTemp.y = dot(vCameraDirection, OUT_Binormal);
-    vTemp.z = dot(vCameraDirection, OUT_Normal);
-    vCameraDirection = normalize(vTemp);
-    
-    mediump vec3 vLightDirection = normalize(vec3(512.0, 1024.0, 64.0) - OUT_Position);
-    vTemp.x = dot(vLightDirection, OUT_Tangent);
-    vTemp.y = dot(vLightDirection, OUT_Binormal);
-    vTemp.z = dot(vLightDirection, OUT_Normal);
-    vLightDirection = normalize(vTemp);
-    
+    lowp float fSelfShadow = clamp( 3.0 * OUT_LightDirection.z, 0.0, 1.0);
+    lowp float fDiffuseFactor = max(dot(vNormalColor, OUT_LightDirection), 0.0);
+    vDiffuseColor.rgb = vDiffuseColor.rgb * fDiffuseFactor;
+
     gl_FragColor = vDiffuseColor;
 }

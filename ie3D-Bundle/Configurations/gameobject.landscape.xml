@@ -1,8 +1,8 @@
 <landscape
     heightmap_data_filename="heightmap.data"
     splatting_data_filename="splatting.data"
-    size_x="256"
-    size_y="256"
+    size_x="512"
+    size_y="512"
     splatting_diffuse_material_filename="material.splatting.diffuse.xml"
     splatting_normal_material_filename="material.splatting.normal.xml"
     is_edges_enabled="1">
