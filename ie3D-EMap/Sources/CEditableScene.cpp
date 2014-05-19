@@ -60,11 +60,11 @@ void CEditableScene::load(void)
     std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("gameobject.landscape.xml");
     m_root->InsertLandscape(landscape);
     
-    for(ui32 i = 0; i < landscape->getChunks().size(); ++i)
+    /*for(ui32 i = 0; i < landscape->getChunks().size(); ++i)
     {
         m_colliders.push_back(landscape->getChunks().at(i));
     }
-    m_root->addCollisionHandler(shared_from_this());
+    m_root->addCollisionHandler(shared_from_this());*/
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),

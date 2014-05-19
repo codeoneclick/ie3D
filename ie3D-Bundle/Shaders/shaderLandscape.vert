@@ -17,6 +17,7 @@ varying float  OUT_ClipPlane;
 varying vec3   OUT_CameraPosition;
 varying vec3   OUT_LightDirection;
 varying vec3   OUT_Position;
+varying vec3   OUT_Normal;
 
 void main(void)
 {
@@ -36,5 +37,6 @@ void main(void)
                               vTangent.z, vBinormal.z, vNormal.z);
     
     vec3 vLightDirection = vec3(vPosition) - vec3(512.0, 1024.0, 64.0);
+    OUT_Normal = vNormal;
     OUT_LightDirection = normalize(mTangentSpace * vLightDirection);
 }

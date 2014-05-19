@@ -16,7 +16,89 @@
 #include "CConfigurationGameObjects.h"
 #include "CHeightmapHelper.h"
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#include <Cocoa/Cocoa.h>
+
+
+CHeightmapProcessingOperation::CHeightmapProcessingOperation(CSharedVertexBufferRef vertexBuffer,
+                                                             CSharedIndexBufferRef indexBuffer,
+                                                             ui32 indexX,
+                                                             ui32 indexZ) :
+m_vertexBuffer(vertexBuffer),
+m_indexBuffer(indexBuffer),
+m_isRunning(false),
+m_isCanceled(false),
+m_isBackgroundThreadOperationDone(false),
+m_isMainThreadOperationDone(false),
+m_indexX(indexX),
+m_indexZ(indexZ)
+{
+
+}
+
+CHeightmapProcessingOperation::~CHeightmapProcessingOperation(void)
+{
+    
+}
+
+void CHeightmapProcessingOperation::executeBackgroundThreadOperation(void)
+{
+    assert(m_vertexBuffer != nullptr);
+    assert(m_indexBuffer != nullptr);
+    m_isRunning = true;
+    std::async(std::launch::async, [this](){
+        CHeightmapProcessor::generateNormalSpace(m_vertexBuffer,
+                                                 m_indexBuffer);
+        CHeightmapProcessor::generateTangentSpace(m_vertexBuffer,
+                                                  m_indexBuffer);
+        m_isBackgroundThreadOperationDone = true;
+    });
+}
+
+void CHeightmapProcessingOperation::executeMainThreadOperation(void)
+{
+    assert(m_vertexBuffer != nullptr);
+    assert(m_indexBuffer != nullptr);
+    
+    m_vertexBuffer->unlock();
+    m_isMainThreadOperationDone = true;
+}
+
+void CHeightmapProcessingOperation::cancel(void)
+{
+    m_isCanceled = true;
+    m_isRunning = false;
+}
+
+bool CHeightmapProcessingOperation::isRunning(void) const
+{
+    return m_isRunning;
+}
+
+bool CHeightmapProcessingOperation::isCanceled(void) const
+{
+    return m_isCanceled;
+}
+
+bool CHeightmapProcessingOperation::isBackgroundThreadOperationDone(void) const
+{
+    return m_isBackgroundThreadOperationDone;
+}
+
+bool CHeightmapProcessingOperation::isMainThreadOperationDone(void) const
+{
+    return m_isMainThreadOperationDone;
+}
+
+ui32 CHeightmapProcessingOperation::getIndexX(void) const
+{
+    return m_indexX;
+}
+
+ui32 CHeightmapProcessingOperation::getIndexZ(void) const
+{
+    return m_indexZ;
+}
 
 CHeightmapProcessor::CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, ISharedConfigurationRef _template) :
 m_heightmapData(nullptr),
@@ -41,7 +123,7 @@ m_edgesMaskTexture(nullptr)
     m_heightmapData = new f32[m_width * m_height];
     m_maxAltitude = 0.0f;
     
-    UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"mesa_heightmap" encoding:NSUTF8StringEncoding]];
+    /*UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"mesa_heightmap" encoding:NSUTF8StringEncoding]];
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     size_t bytesPerRow = image.size.width * 4;
     ui8* data = (ui8 *)malloc(image.size.height * bytesPerRow);
@@ -56,15 +138,15 @@ m_edgesMaskTexture(nullptr)
     CGContextTranslateCTM(context, 0.0, image.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
     [image drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
-    UIGraphicsPopContext();
+    UIGraphicsPopContext();*/
     
     ui32 index = 0;
     for(ui32 i = 0; i < m_width; ++i)
     {
         for(ui32 j = 0; j < m_height; ++j)
         {
-            m_heightmapData[i + j * m_height] = (static_cast<f32>(data[(i + j * m_width) * 4 + 1] - 64) / 255) * 32.0;
-			//m_heightmapData[i + j * m_height] = bytes[index] / 255 * 10.0;//sin(i * 0.1) * 10.0 + cos(j * 0.1) * 10.0;
+            //m_heightmapData[i + j * m_height] = (static_cast<f32>(data[(i + j * m_width) * 4 + 1] - 64) / 255) * 32.0;
+			m_heightmapData[i + j * m_height] = sin(i * 0.1) * 10.0 + cos(j * 0.1) * 10.0;
             index += 4;
             if(fabsf(m_heightmapData[i +j * m_height]) > m_maxAltitude)
             {
@@ -310,8 +392,8 @@ CSharedMesh CHeightmapProcessor::getChunk(ui32 i, ui32 j)
         m_chunksUnused.pop_back();
         CHeightmapProcessor::fillVertexBuffer(mesh->getVertexBuffer(), i, j,  m_chunkWidth * m_chunkHeight);
         CHeightmapProcessor::fillIndexBuffer(mesh->getIndexBuffer());
-        CHeightmapProcessor::fillNormals(mesh->getVertexBuffer(), mesh->getIndexBuffer());
-        CHeightmapProcessor::fillTangentsAndBinormals(mesh->getVertexBuffer(), mesh->getIndexBuffer());
+        //CHeightmapProcessor::fillNormals(mesh->getVertexBuffer(), mesh->getIndexBuffer());
+        //CHeightmapProcessor::fillTangentsAndBinormals(mesh->getVertexBuffer(), mesh->getIndexBuffer());
         mesh->updateBounds();
     }
     else
@@ -326,15 +408,41 @@ CSharedMesh CHeightmapProcessor::getChunk(ui32 i, ui32 j)
         CSharedIndexBuffer indexBuffer = CHeightmapProcessor::createIndexBuffer();
         mesh = CMesh::constructCustomMesh("landscape.chunk", vertexBuffer, indexBuffer,
                                           maxBound, minBound);
-        CHeightmapProcessor::fillNormals(mesh->getVertexBuffer(), mesh->getIndexBuffer());
-        CHeightmapProcessor::fillTangentsAndBinormals(mesh->getVertexBuffer(), mesh->getIndexBuffer());
+        //CHeightmapProcessor::fillNormals(mesh->getVertexBuffer(), mesh->getIndexBuffer());
+        //CHeightmapProcessor::fillTangentsAndBinormals(mesh->getVertexBuffer(), mesh->getIndexBuffer());
     }
+    CSharedHeightmapProcessingOperation operation = std::make_shared<CHeightmapProcessingOperation>(mesh->getVertexBuffer(),
+                                                                                                    mesh->getIndexBuffer());
+    m_processingOperationQueue.push(operation);
+    m_uniqueProcessingOperations.insert(std::make_pair(std::make_tuple(i, j), operation));
     return mesh;
 }
 
 void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk)
 {
     m_chunksUnused.push_back(chunk);
+}
+
+void CHeightmapProcessor::update(void)
+{
+    CSharedHeightmapProcessingOperation operation = m_processingOperationQueue.back();
+    if(!operation->isCanceled() && !operation->isRunning())
+    {
+        operation->executeBackgroundThreadOperation();
+    }
+    else if(operation->isRunning() &&
+            operation->isBackgroundThreadOperationDone() &&
+            !operation->isMainThreadOperationDone())
+    {
+        operation->executeMainThreadOperation();
+    }
+    else if(operation->isRunning() &&
+            operation->isBackgroundThreadOperationDone() &&
+            operation->isMainThreadOperationDone())
+    {
+        m_processingOperationQueue.pop();
+        const auto& iterator = m_uniqueProcessingOperations.find(std::make_tuple()
+    }
 }
 
 void CHeightmapProcessor::createChunkBound(ui32 widthOffset, ui32 heightOffset, glm::vec3* maxBound, glm::vec3* minBound)
@@ -425,53 +533,46 @@ dispatch_queue_t backgroundQueue(void)
 {
     static dispatch_queue_t queue;
     static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            queue = dispatch_queue_create("update.tangent.space.queue", DISPATCH_QUEUE_SERIAL);
-        });
+    dispatch_once(&onceToken, ^{
+        queue = dispatch_queue_create("update.tangent.space.queue", DISPATCH_QUEUE_SERIAL);
+    });
     return queue;
 }
 
-void CHeightmapProcessor::fillNormals(CSharedVertexBufferRef _vertexBuffer,
-                                      CSharedIndexBufferRef _indexBuffer)
+void CHeightmapProcessor::generateNormalSpace(CSharedVertexBufferRef vertexBuffer,
+                                              CSharedIndexBufferRef indexBuffer)
 {
-    __block CSharedVertexBuffer vertexBuffer = _vertexBuffer;
-    __block CSharedIndexBuffer indexBuffer = _indexBuffer;
-    dispatch_async(backgroundQueue(), ^{
-        SAttributeVertex* vertexData = vertexBuffer->lock();
-        ui16* indexData = indexBuffer->lock();
-        ui32 numIndexes = indexBuffer->getSize();
+    SAttributeVertex* vertexData = vertexBuffer->lock();
+    ui16* indexData = indexBuffer->lock();
+    ui32 numIndexes = indexBuffer->getSize();
+    
+    for(ui32 index = 0; index < numIndexes; index += 3)
+    {
+        glm::vec3 point_01 = vertexData[indexData[index + 0]].m_position;
+        glm::vec3 point_02 = vertexData[indexData[index + 1]].m_position;
+        glm::vec3 point_03 = vertexData[indexData[index + 2]].m_position;
         
-        for(ui32 index = 0; index < numIndexes; index += 3)
-        {
-            glm::vec3 point_01 = vertexData[indexData[index + 0]].m_position;
-            glm::vec3 point_02 = vertexData[indexData[index + 1]].m_position;
-            glm::vec3 point_03 = vertexData[indexData[index + 2]].m_position;
-            
-            glm::vec3 edge_01 = point_02 - point_01;
-            glm::vec3 edge_02 = point_03 - point_01;
-            glm::vec3 normal = glm::cross(edge_01, edge_02);
-            normal = glm::normalize(normal);
-            glm::u8vec4 complessedNormal = CVertexBuffer::compressVec3(normal);
-            vertexData[indexData[index + 0]].m_normal = complessedNormal;
-            vertexData[indexData[index + 1]].m_normal = complessedNormal;
-            vertexData[indexData[index + 2]].m_normal = complessedNormal;
-        }
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            vertexBuffer->unlock();
-        });
-    });
+        glm::vec3 edge_01 = point_02 - point_01;
+        glm::vec3 edge_02 = point_03 - point_01;
+        glm::vec3 normal = glm::cross(edge_01, edge_02);
+        normal = glm::normalize(normal);
+        glm::u8vec4 complessedNormal = CVertexBuffer::compressVec3(normal);
+        vertexData[indexData[index + 0]].m_normal = complessedNormal;
+        vertexData[indexData[index + 1]].m_normal = complessedNormal;
+        vertexData[indexData[index + 2]].m_normal = complessedNormal;
+    }
 }
 
-void CHeightmapProcessor::fillTangentsAndBinormals(CSharedVertexBufferRef _vertexBuffer,
-                                                   CSharedIndexBufferRef _indexBuffer)
+void CHeightmapProcessor::generateTangentSpace(CSharedVertexBufferRef _vertexBuffer,
+                                               CSharedIndexBufferRef _indexBuffer)
 {
     __block CSharedVertexBuffer vertexBuffer = _vertexBuffer;
     __block CSharedIndexBuffer indexBuffer = _indexBuffer;
-    dispatch_async(backgroundQueue(), ^{
-        std::vector<glm::vec3> tangents, binormals;
-        
-        SAttributeVertex* vertexData = vertexBuffer->lock();
-        ui32 numVertexes = vertexBuffer->getSize();
+    //dispatch_async(backgroundQueue(), ^{
+    std::vector<glm::vec3> tangents, binormals;
+    
+    SAttributeVertex* vertexData = vertexBuffer->lock();
+    ui32 numVertexes = vertexBuffer->getSize();
         
         ui16* indexData = indexBuffer->lock();
         ui32 numIndexes = indexBuffer->getSize();
@@ -522,10 +623,10 @@ void CHeightmapProcessor::fillTangentsAndBinormals(CSharedVertexBufferRef _verte
             
             vertexData[i].m_tangent = CVertexBuffer::compressVec3(tangentRes);
         }
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            vertexBuffer->unlock();
-        });
-    });
+        //dispatch_sync(dispatch_get_main_queue(), ^{
+        //    vertexBuffer->unlock();
+        //});
+    //});
 }
 
 void CHeightmapProcessor::getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,

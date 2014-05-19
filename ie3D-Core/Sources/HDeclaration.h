@@ -264,4 +264,8 @@ class CConfigurationGameObject;
 typedef std::shared_ptr<CConfigurationGameObject> CSharedConfigurationGameObject;
 typedef const CSharedConfigurationGameObject& CSharedConfigurationGameObjectRef;
 
+class CHeightmapProcessingOperation;
+typedef std::shared_ptr<CHeightmapProcessingOperation> CSharedHeightmapProcessingOperation;
+typedef const CSharedHeightmapProcessingOperation& CSharedHeightmapProcessingOperationRef;
+
 #endif

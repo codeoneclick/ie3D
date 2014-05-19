@@ -12,6 +12,41 @@
 #include "HCommon.h"
 #include "HDeclaration.h"
 
+class CHeightmapProcessingOperation
+{
+private:
+    
+protected:
+    
+    CSharedVertexBuffer m_vertexBuffer;
+    CSharedIndexBuffer m_indexBuffer;
+    ui32 m_indexX;
+    ui32 m_indexZ;
+    bool m_isCanceled;
+    bool m_isRunning;
+    bool m_isBackgroundThreadOperationDone;
+    bool m_isMainThreadOperationDone;
+    
+public:
+    
+    CHeightmapProcessingOperation(CSharedVertexBufferRef vertexBuffer,
+                                  CSharedIndexBufferRef indexBuffer,
+                                  ui32 indexX,
+                                  ui32 indexZ);
+    ~CHeightmapProcessingOperation(void);
+    
+    void executeBackgroundThreadOperation(void);
+    void executeMainThreadOperation(void);
+    void cancel(void);
+    bool isRunning(void) const;
+    bool isCanceled(void) const;
+    bool isBackgroundThreadOperationDone(void) const;
+    bool isMainThreadOperationDone(void) const;
+    
+    ui32 getIndexX(void) const;
+    ui32 getIndexZ(void) const;
+};
+
 class CHeightmapProcessor
 {
 private:
@@ -25,6 +60,9 @@ protected:
     CSharedTexture m_diffuseTexture;
     CSharedTexture m_normalTexture;
     CSharedTexture m_edgesMaskTexture;
+    
+    std::queue<CSharedHeightmapProcessingOperation> m_processingOperationQueue;
+    std::map<std::tuple<ui32, ui32>, CSharedHeightmapProcessingOperation> m_uniqueProcessingOperations;
 
     ui32 m_width;
     ui32 m_height;
@@ -59,21 +97,14 @@ protected:
     void fillVertexBuffer(CSharedVertexBufferRef vertexBuffer, ui32 widthOffset, ui32 heightOffset, ui32 numVertexes);
     void fillIndexBuffer(CSharedIndexBufferRef indexBuffer);
     
-    void fillNormals(CSharedVertexBufferRef vertexBuffer,
-                     CSharedIndexBufferRef indexBuffer);
-    
-    void fillTangentsAndBinormals(CSharedVertexBufferRef vertexBuffer,
-                                  CSharedIndexBufferRef indexBuffer);
-    
-    
-    void getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
-                          f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,
-                          glm::vec3& tangentX, glm::vec3& tangentY);
-    glm::vec3 getClosestPointOnLine(const glm::vec3& a, const glm::vec3& b, const glm::vec3& p);
-    glm::vec3 ortogonalize(const glm::vec3& v1, const glm::vec3& v2);
+    static void getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
+                                 f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,
+                                 glm::vec3& tangentX, glm::vec3& tangentY);
+    static glm::vec3 getClosestPointOnLine(const glm::vec3& a, const glm::vec3& b, const glm::vec3& p);
+    static glm::vec3 ortogonalize(const glm::vec3& v1, const glm::vec3& v2);
     
 public:
-
+    
     CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, ISharedConfigurationRef _template);
     ~CHeightmapProcessor(void);
 
@@ -82,6 +113,14 @@ public:
     std::shared_ptr<CTexture> PreprocessEdgesMaskTexture(void);
     std::shared_ptr<CTexture> PreprocessSplattingDiffuseTexture(const std::shared_ptr<CMaterial>& _material);
     std::shared_ptr<CTexture> PreprocessSplattingNormalTexture(const std::shared_ptr<CMaterial>& _material);
+    
+    static void generateNormalSpace(CSharedVertexBufferRef vertexBuffer,
+                                    CSharedIndexBufferRef indexBuffer);
+    
+    static void generateTangentSpace(CSharedVertexBufferRef vertexBuffer,
+                                     CSharedIndexBufferRef indexBuffer);
+    
+    void update(void);
 
     inline ui32 Get_Width(void)
     {

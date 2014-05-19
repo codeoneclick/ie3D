@@ -81,6 +81,10 @@
 		21BC34C819080B9E007B99DA /* ocean.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C219080B9E007B99DA /* ocean.normal.pvr */; };
 		21BC34C919080B9E007B99DA /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C319080B9E007B99DA /* particle.emitter.01.pvr */; };
 		21BC34CA19080B9E007B99DA /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C419080B9E007B99DA /* particle.emitter.02.pvr */; };
+		21DC2B751929E895008DA3C1 /* mesa_heightmap.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B741929E895008DA3C1 /* mesa_heightmap.png */; };
+		21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */; };
+		21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */; };
+		21DC2B7B1929EDEC008DA3C1 /* landscape.01.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B7A1929EDEC008DA3C1 /* landscape.01.normal.pvr */; };
 		350B621B91997A1D3DB08A50 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1ACE512F3E4E1427AACF434A /* QtGui.framework */; };
 		5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 09BF715167B7A0149FD2FBB8 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9D88140FBB133F956E1F6166 /* CMainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
@@ -212,6 +216,10 @@
 		21BC34C219080B9E007B99DA /* ocean.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = ocean.normal.pvr; path = "../ie3D-Bundle/Textures/ocean.normal.pvr"; sourceTree = "<group>"; };
 		21BC34C319080B9E007B99DA /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = particle.emitter.01.pvr; path = "../ie3D-Bundle/Textures/particle.emitter.01.pvr"; sourceTree = "<group>"; };
 		21BC34C419080B9E007B99DA /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = particle.emitter.02.pvr; path = "../ie3D-Bundle/Textures/particle.emitter.02.pvr"; sourceTree = "<group>"; };
+		21DC2B741929E895008DA3C1 /* mesa_heightmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mesa_heightmap.png; path = "../ie3D-Bundle/Temp/mesa_heightmap.png"; sourceTree = "<group>"; };
+		21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.frag"; sourceTree = "<group>"; };
+		21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.vert"; sourceTree = "<group>"; };
+		21DC2B7A1929EDEC008DA3C1 /* landscape.01.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.01.normal.pvr; path = "../ie3D-Bundle/Textures/landscape.01.normal.pvr"; sourceTree = "<group>"; };
 		288C01068066B0AAD960F2E5 /* unix.conf */ = {isa = PBXFileReference; lastKnownFileType = file; name = unix.conf; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/common/unix.conf; sourceTree = "<absolute>"; };
 		2AFE0E29D2D43DE9EEA679F0 /* qt_lib_help.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_help.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_help.pri; sourceTree = "<absolute>"; };
 		2ECDE1AA4A7F457B30B62E5C /* qconfig.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qconfig.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/qconfig.pri; sourceTree = "<absolute>"; };
@@ -362,6 +370,7 @@
 		21208EC11906F81200FFC8D4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				21DC2B721929E88A008DA3C1 /* Temp */,
 				212090EC1906FD5300FFC8D4 /* Configurations */,
 				212090EB1906FD4900FFC8D4 /* Shaders */,
 				212090EA1906FD3E00FFC8D4 /* Textures */,
@@ -389,6 +398,7 @@
 				21BC34BF19080B9E007B99DA /* landscape.01.diffuse.pvr */,
 				21BC34C019080B9E007B99DA /* landscape.02.diffuse.pvr */,
 				21BC34C119080B9E007B99DA /* landscape.03.diffuse.pvr */,
+				21DC2B7A1929EDEC008DA3C1 /* landscape.01.normal.pvr */,
 				21BC34C219080B9E007B99DA /* ocean.normal.pvr */,
 				21BC34C319080B9E007B99DA /* particle.emitter.01.pvr */,
 				21BC34C419080B9E007B99DA /* particle.emitter.02.pvr */,
@@ -403,6 +413,8 @@
 				212092C8191978D300FFC8D4 /* shaderSkyBox.vert */,
 				21BC34AB19080B47007B99DA /* shaderLandscape.frag */,
 				21BC34AC19080B47007B99DA /* shaderLandscape.vert */,
+				21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */,
+				21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */,
 				21BC34AD19080B47007B99DA /* shaderLandscapeSplatting.frag */,
 				21BC34AE19080B47007B99DA /* shaderLandscapeSplatting.vert */,
 				21BC34AF19080B47007B99DA /* shaderOcean.frag */,
@@ -452,6 +464,14 @@
 				212091D21906FE9100FFC8D4 /* libie3DCore-osx.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		21DC2B721929E88A008DA3C1 /* Temp */ = {
+			isa = PBXGroup;
+			children = (
+				21DC2B741929E895008DA3C1 /* mesa_heightmap.png */,
+			);
+			name = Temp;
 			sourceTree = "<group>";
 		};
 		25B08E2869634E9BCBA333A2 /* Generated Sources */ = {
@@ -789,13 +809,16 @@
 				212092D619197ADD00FFC8D4 /* zpos.pvr in Resources */,
 				21BC349719080A39007B99DA /* material.landscape.edges.base.xml in Resources */,
 				21BC34A719080A39007B99DA /* render.operation.world.base.xml in Resources */,
+				21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */,
 				21BC349A19080A39007B99DA /* material.landscape.reflection.xml in Resources */,
 				21BC34A819080A39007B99DA /* render.operation.world.reflection.xml in Resources */,
+				21DC2B7B1929EDEC008DA3C1 /* landscape.01.normal.pvr in Resources */,
 				212092D219197ADD00FFC8D4 /* xpos.pvr in Resources */,
 				21BC349919080A39007B99DA /* material.landscape.edges.refraction.xml in Resources */,
 				21BC34A019080A39007B99DA /* material.output.xml in Resources */,
 				21BC349B19080A39007B99DA /* material.landscape.refraction.xml in Resources */,
 				21BC34A319080A39007B99DA /* material.splatting.diffuse.xml in Resources */,
+				21DC2B751929E895008DA3C1 /* mesa_heightmap.png in Resources */,
 				21BC34A919080A39007B99DA /* render.operation.world.refraction.xml in Resources */,
 				21BC34A119080A39007B99DA /* material.particle.emitter.xml in Resources */,
 				21BC34AA19080A39007B99DA /* transition.main.xml in Resources */,
@@ -820,6 +843,7 @@
 				21BC34B819080B47007B99DA /* shaderLandscapeSplatting.vert in Resources */,
 				21BC34BC19080B47007B99DA /* shaderParticleEmitter.vert in Resources */,
 				212092D319197ADD00FFC8D4 /* yneg.pvr in Resources */,
+				21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */,
 				21BC34BE19080B47007B99DA /* shaderScreenQuad.vert in Resources */,
 				21BC34BA19080B47007B99DA /* shaderOcean.vert in Resources */,
 				21BC34B719080B47007B99DA /* shaderLandscapeSplatting.frag in Resources */,
