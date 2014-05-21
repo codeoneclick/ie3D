@@ -46,6 +46,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
+        m_heightmapProcessor->update();
         
         CLandscape::processSplattingDiffuseTexture();
         CLandscape::processSplattingNormalTexture();
@@ -95,7 +96,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 {
                     m_chunks[i + j * m_numChunkRows]->listenRenderMgr(false);
                     m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(false);
-                    m_heightmapProcessor->freeChunk(m_chunks[i + j * m_numChunkRows]->m_mesh);
+                    m_heightmapProcessor->freeChunk(m_chunks[i + j * m_numChunkRows]->m_mesh, i, j);
                     m_chunks[i + j * m_numChunkRows] = nullptr;
                 }
             }

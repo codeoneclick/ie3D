@@ -20,6 +20,7 @@ protected:
     
     CSharedVertexBuffer m_vertexBuffer;
     CSharedIndexBuffer m_indexBuffer;
+    std::future<void> m_currentExecutedFunction;
     ui32 m_indexX;
     ui32 m_indexZ;
     bool m_isCanceled;
@@ -133,7 +134,7 @@ public:
     };
 
     CSharedMesh getChunk(ui32 i, ui32 j);
-    void freeChunk(CSharedMeshRef chunk);
+    void freeChunk(CSharedMeshRef chunk, ui32 i, ui32 j);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
     

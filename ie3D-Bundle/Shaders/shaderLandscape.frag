@@ -35,5 +35,19 @@ void main(void)
     // blend the results of the 3 planar projections.
     lowp vec4 tex = xaxis * blending.x + yaxis * blending.y + zaxis * blending.z;
     
+    /*lowp vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
+    if(blending.x >= blending.y && blending.x >= blending.z)
+    {
+        color = texture2D( SAMPLER_01, OUT_Position.yz / 8.0);
+    }
+    else if(blending.y >= blending.x && blending.y >= blending.z)
+    {
+        color = texture2D( SAMPLER_01, OUT_Position.xz / 8.0);
+    }
+    else if(blending.z >= blending.x && blending.z >= blending.y)
+    {
+        color = texture2D( SAMPLER_01, OUT_Position.xy / 8.0);
+    }*/
+    
     gl_FragColor = tex;
 }

@@ -33,7 +33,7 @@ CDemoGameScene::~CDemoGameScene(void)
 void CDemoGameScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->CreateCamera(90.0f,
+    m_camera = m_root->CreateCamera(60.0f,
                                     0.1f,
                                     1024.0f,
                                     glm::ivec4(0, 0,
