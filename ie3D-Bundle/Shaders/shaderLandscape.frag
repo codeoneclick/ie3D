@@ -24,14 +24,14 @@ void main(void)
      vDiffuseColor.rgb = vDiffuseColor.rgb * fDiffuseFactor;*/
     
     highp vec3 blending = abs(OUT_Normal);
-    blending = (blending - 0.2) * 7.0;
+    blending = blending - 0.5;
     blending = max(blending, 0.0); // Force weights to sum to 1.0
     highp float b = (blending.x + blending.y + blending.z);
     blending /= vec3(b, b, b);
     
-    lowp vec4 xaxis = texture2D( SAMPLER_01, OUT_Position.yz / 8.0);
-    lowp vec4 yaxis = texture2D( SAMPLER_01, OUT_Position.xz / 8.0);
-    lowp vec4 zaxis = texture2D( SAMPLER_01, OUT_Position.xy / 8.0);
+    lowp vec4 xaxis = texture2D( SAMPLER_01, OUT_Position.yz / 4.0);
+    lowp vec4 yaxis = texture2D( SAMPLER_01, OUT_Position.xz / 4.0);
+    lowp vec4 zaxis = texture2D( SAMPLER_01, OUT_Position.xy / 4.0);
     // blend the results of the 3 planar projections.
     lowp vec4 tex = xaxis * blending.x + yaxis * blending.y + zaxis * blending.z;
     

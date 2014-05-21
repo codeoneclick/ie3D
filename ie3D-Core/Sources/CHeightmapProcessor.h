@@ -48,13 +48,50 @@ public:
     ui32 getIndexZ(void) const;
 };
 
+class CHeightmapData
+{
+    
+private:
+    
+    struct SVertex
+    {
+        glm::vec3 m_position;
+        glm::u8vec4 m_normal;
+        glm::u16vec2 m_texcoord;
+        glm::u8vec4 m_tangent;
+        std::vector<ui32> m_containInFace;
+    };
+    
+    struct SFace
+    {
+        glm::u8vec4 m_normal;
+        std::array<ui32, 3> m_indexes;
+    };
+    
+    std::vector<SVertex> m_vertexes;
+    std::vector<SFace> m_faces;
+    
+    ui32 m_width;
+    ui32 m_height;
+    
+public:
+    
+    CHeightmapData(const std::string& filename);
+    CHeightmapData(void);
+    
+    glm::vec3 getVertexPosition(ui32 i, ui32 j) const;
+    glm::u16vec2 getVertexTexcoord(ui32 i, ui32 j) const;
+    glm::u8vec4 getVertexNormal(ui32 i, ui32 j) const;
+    
+};
+
 class CHeightmapProcessor
 {
 private:
 
 protected:
 
-    f32* m_heightmapData;
+    std::shared_ptr<CHeightmapData> m_heightmapData;
 
     CSharedTexture m_heightmapTexture;
     CSharedTexture m_splattingTexture;
@@ -160,8 +197,8 @@ public:
     
     inline f32* Get_HeightmapData(void)
     {
-        assert(m_heightmapData != nullptr);
-        return m_heightmapData;
+        //assert(m_heightmapData != nullptr);
+        return nullptr;
     };
 
     inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
