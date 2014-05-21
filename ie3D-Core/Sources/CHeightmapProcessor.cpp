@@ -26,8 +26,11 @@
 
 #endif
 
-struct SHeightmapData
+class CHeightmapData
 {
+    
+private:
+    
     struct SVertex
     {
         glm::vec3 m_position;
@@ -48,8 +51,111 @@ struct SHeightmapData
     
     ui32 m_width;
     ui32 m_height;
+    
+public:
+    
+    CHeightmapData(const std::string& filename);
+    CHeightmapData(void);
+    
+    glm::vec3 getVertexPosition(ui32 i, ui32 j) const;
 };
 
+CHeightmapData::CHeightmapData(const std::string& filename)
+{
+    
+#if defined(__IOS__)
+    
+    UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"mesa_heightmap" encoding:NSUTF8StringEncoding]];
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    size_t bytesPerRow = image.size.width * 4;
+    ui8* data = (ui8 *)malloc(image.size.height * bytesPerRow);
+    CGContextRef context = CGBitmapContextCreate(data,
+                                                 image.size.width,
+                                                 image.size.height,
+                                                 8,
+                                                 bytesPerRow,
+                                                 colorSpace,
+                                                 kCGImageAlphaNoneSkipFirst);
+    UIGraphicsPushContext(context);
+    CGContextTranslateCTM(context, 0.0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    [image drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+    UIGraphicsPopContext();
+    
+    m_width = image.size.width;
+    m_height = image.size.height;
+    
+#endif
+    
+    m_vertexes.resize(m_width * m_height);
+    m_faces.resize((m_width - 1) * (m_height - 1) * 2);
+    
+    for(ui32 i = 0; i < m_width; ++i)
+    {
+        for(ui32 j = 0; j < m_height; ++j)
+        {
+            m_vertexes[i + j * m_height].m_position = glm::vec3(static_cast<f32>(i),
+                                                                (static_cast<f32>(data[(i + j * m_width) * 4 + 1] - 64) / 255) * 32.0,
+                                                                static_cast<f32>(j));
+            m_vertexes[i + j * m_height].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(i) /
+                                                                                            static_cast<f32>(m_width),
+                                                                                            static_cast<ui32>(j) /
+                                                                                            static_cast<f32>(m_height)));
+        }
+    }
+    
+    ui32 index_01 = 0;
+    ui32 index_02 = 0;
+    for(ui32 i = 0; i < (m_width - 1); ++i)
+    {
+        for(ui32 j = 0; j < (m_height - 1); ++j)
+        {
+            SFace face;
+            face.m_indexes[index_01] = i + j * m_width;
+            m_vertexes[face.m_indexes[index_01]].m_containInFace.push_back(index_02);
+            glm::vec3 point_01 = m_vertexes[face.m_indexes[index_01]].m_position;
+            index_01++;
+            face.m_indexes[index_01] = i + (j + 1) * m_width;
+            m_vertexes[face.m_indexes[index_01]].m_containInFace.push_back(index_02);
+            glm::vec3 point_02 = m_vertexes[face.m_indexes[index_01]].m_position;
+            index_01++;
+            face.m_indexes[index_01] = i + 1 + j * m_width;
+            m_vertexes[face.m_indexes[index_01]].m_containInFace.push_back(index_02);
+            glm::vec3 point_03 = m_vertexes[face.m_indexes[index_01]].m_position;
+            index_01++;
+            m_faces[index_02] = face;
+            index_02++;
+            
+            glm::vec3 point_02 = vertexData[indexData[index + 1]].m_position;
+            glm::vec3 point_03 = vertexData[indexData[index + 2]].m_position;
+            
+            glm::vec3 edge_01 = point_02 - point_01;
+            glm::vec3 edge_02 = point_03 - point_01;
+            glm::vec3 normal = glm::cross(edge_01, edge_02);
+            f32 sin = glm::length(normal) / (glm::length(edge_01) * glm::length(edge_02));
+            normal = glm::normalize(normal) * asinf(sin);
+            glm::u8vec4 complessedNormal = CVertexBuffer::compressVec3(normal);
+            vertexData[indexData[index + 0]].m_normal = complessedNormal;
+            vertexData[indexData[index + 1]].m_normal = complessedNormal;
+            vertexData[indexData[index + 2]].m_normal = complessedNormal;
+            
+            face.m_indexes[index_01] = i + (j + 1) * m_width;
+            m_vertexes[face.m_indexes[index_01]].m_containInFace.push_back(index_02);
+            glm::vec3 point_01 = m_vertexes[face.m_indexes[index_01]].m_position;
+            index_01++;
+            face.m_indexes[index_01] = i + 1 + (j + 1) * m_width;
+            m_vertexes[face.m_indexes[index_01]].m_containInFace.push_back(index_02);
+            glm::vec3 point_02 = m_vertexes[face.m_indexes[index_01]].m_position;
+            index_01++;
+            face.m_indexes[index_01] = i + 1 + j * m_width;
+            m_vertexes[face.m_indexes[index_01]].m_containInFace.push_back(index_02);
+            glm::vec3 point_03 = m_vertexes[face.m_indexes[index_01]].m_position;
+            index_01++;
+            m_faces[index_02] = face;
+            index_02++;
+        }
+    }
+}
 
 CHeightmapProcessingOperation::CHeightmapProcessingOperation(CSharedVertexBufferRef vertexBuffer,
                                                              CSharedIndexBufferRef indexBuffer,
