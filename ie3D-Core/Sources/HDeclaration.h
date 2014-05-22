@@ -268,4 +268,8 @@ class CHeightmapProcessingOperation;
 typedef std::shared_ptr<CHeightmapProcessingOperation> CSharedHeightmapProcessingOperation;
 typedef const CSharedHeightmapProcessingOperation& CSharedHeightmapProcessingOperationRef;
 
+class CHeightmapData;
+typedef std::shared_ptr<CHeightmapData> CSharedHeightmapData;
+typedef const CSharedHeightmapData& CSharedHeightmapDataRef;
+
 #endif

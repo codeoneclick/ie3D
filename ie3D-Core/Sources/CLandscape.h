@@ -24,9 +24,6 @@ private:
     CSharedLandscapeEdges m_edges;
     ISharedConfiguration m_configuration;
     
-    ui32 m_numChunkRows;
-    ui32 m_numChunkCells;
-    
     CSharedTexture m_splattingDiffuseTexture;
     CSharedTexture m_splattingNormalTexture;
     
@@ -73,9 +70,9 @@ public:
     std::vector<ISharedGameObject> getChunks(void) const;
 
     CSharedTexture getHeightmapTexture(void) const;
-    f32* getHeightmapData(void) const;
-    ui32 getHeightmapWidth(void) const;
-    ui32 getHeightmapHeight(void) const;
+    
+    ui32 getHeightmapSizeX(void) const;
+    ui32 getHeightmapSizeZ(void) const;
 };
 
 #endif

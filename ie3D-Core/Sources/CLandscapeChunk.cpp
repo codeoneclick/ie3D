@@ -63,7 +63,7 @@ void CLandscapeChunk::setSplattingDiffuseTexture(CSharedTextureRef texture)
 {
     for(const auto& material : m_materials)
     {
-        //material.second->setTexture(texture, E_SHADER_SAMPLER_01);
+        material.second->setTexture(texture, E_SHADER_SAMPLER_01);
     }
 }
 

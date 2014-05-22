@@ -51,12 +51,15 @@ void CLandscape::onSceneUpdate(f32 deltatime)
         CLandscape::processSplattingDiffuseTexture();
         CLandscape::processSplattingNormalTexture();
         
-        ui32 chunkWidth = m_heightmapProcessor->Get_ChunkWidth();
-        ui32 chunkHeight = m_heightmapProcessor->Get_ChunkHeight();
+        ui32 chunkSizeX = m_heightmapProcessor->getChunkSizeX();
+        ui32 chunkSizeZ = m_heightmapProcessor->getChunkSizeZ();
         
-        for(ui32 i = 0; i < m_numChunkRows; ++i)
+        ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
+        ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
+        
+        for(ui32 i = 0; i < numChunksX; ++i)
         {
-            for(ui32 j = 0; j < m_numChunkCells; ++j)
+            for(ui32 j = 0; j < numChunksZ; ++j)
             {
                 glm::vec3 maxBound = std::get<0>(m_heightmapProcessor->getChunkBounds(i, j));
                 glm::vec3 minBound = std::get<1>(m_heightmapProcessor->getChunkBounds(i, j));
@@ -66,38 +69,38 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 if(result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
                    result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
                 {
-                    if(m_chunks[i + j * m_numChunkRows] == nullptr)
+                    if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
                         std::shared_ptr<CMesh> mesh = m_heightmapProcessor->getChunk(i, j);
-                        m_chunks[i + j * m_numChunkRows] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+                        m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_screenSpaceTextureAccessor);
                         
-                        m_chunks[i + j * m_numChunkRows]->setCamera(m_camera);
+                        m_chunks[i + j * numChunksZ]->setCamera(m_camera);
                         
-                        m_chunks[i + j * m_numChunkRows]->setRenderMgr(m_renderMgr);
-                        m_chunks[i + j * m_numChunkRows]->setSceneUpdateMgr(m_sceneUpdateMgr);
+                        m_chunks[i + j * numChunksZ]->setRenderMgr(m_renderMgr);
+                        m_chunks[i + j * numChunksZ]->setSceneUpdateMgr(m_sceneUpdateMgr);
                         
-                        m_chunks[i + j * m_numChunkRows]->listenRenderMgr(m_isNeedToRender);
-                        m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(m_isNeedToUpdate);
+                        m_chunks[i + j * numChunksZ]->listenRenderMgr(m_isNeedToRender);
+                        m_chunks[i + j * numChunksZ]->listenSceneUpdateMgr(m_isNeedToUpdate);
                         
-                        m_chunks[i + j * m_numChunkRows]->setMesh(mesh, chunkWidth, chunkHeight);
-                        m_chunks[i + j * m_numChunkRows]->onConfigurationLoaded(m_configuration, true);
+                        m_chunks[i + j * numChunksZ]->setMesh(mesh, chunkSizeX, chunkSizeZ);
+                        m_chunks[i + j * numChunksZ]->onConfigurationLoaded(m_configuration, true);
                         
                         if(m_splattingDiffuseTexture != nullptr)
                         {
-                            m_chunks[i + j * m_numChunkRows]->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
+                            m_chunks[i + j * numChunksZ]->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
                         }
                         if(m_splattingNormalTexture != nullptr)
                         {
-                            m_chunks[i + j * m_numChunkRows]->setSplattingNormalTexture(m_splattingNormalTexture);
+                            m_chunks[i + j * numChunksZ]->setSplattingNormalTexture(m_splattingNormalTexture);
                         }
                     }
                 }
-                else if(m_chunks[i + j * m_numChunkRows] != nullptr)
+                else if(m_chunks[i + j * numChunksZ] != nullptr)
                 {
-                    m_chunks[i + j * m_numChunkRows]->listenRenderMgr(false);
-                    m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(false);
-                    m_heightmapProcessor->freeChunk(m_chunks[i + j * m_numChunkRows]->m_mesh, i, j);
-                    m_chunks[i + j * m_numChunkRows] = nullptr;
+                    m_chunks[i + j * numChunksZ]->listenRenderMgr(false);
+                    m_chunks[i + j * numChunksZ]->listenSceneUpdateMgr(false);
+                    m_heightmapProcessor->freeChunk(m_chunks[i + j * numChunksZ]->m_mesh, i, j);
+                    m_chunks[i + j * numChunksZ] = nullptr;
                 }
             }
         }
@@ -135,10 +138,7 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     CMaterial::setupMaterial(m_splattingNormalMaterial, materialConfiguration, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
     m_splattingNormalMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
-    m_numChunkRows = m_heightmapProcessor->Get_NumChunkRows();
-    m_numChunkCells = m_heightmapProcessor->Get_NumChunkCells();
-
-    m_chunks.resize(m_numChunkRows * m_numChunkCells);
+    m_chunks.resize(m_heightmapProcessor->getNumChunksX() * m_heightmapProcessor->getNumChunksZ());
     
     m_edges->onConfigurationLoaded(configuration, success);
     m_edges->setEdgeTexture(m_heightmapProcessor->Get_EdgesMaskTexture());
@@ -150,15 +150,18 @@ void CLandscape::processSplattingDiffuseTexture(void)
 {
     if(m_splattingDiffuseMaterial->isCommited() && !m_isSplattingDiffuseTextureProcessed)
     {
+        ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
+        ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
+        
         m_splattingDiffuseTexture = m_heightmapProcessor->PreprocessSplattingDiffuseTexture(m_splattingDiffuseMaterial);
         m_isSplattingDiffuseTextureProcessed = true;
-        for(ui32 i = 0; i < m_numChunkRows; ++i)
+        for(ui32 i = 0; i < numChunksX; ++i)
         {
-            for(ui32 j = 0; j < m_numChunkCells; ++j)
+            for(ui32 j = 0; j < numChunksZ; ++j)
             {
-                if(m_chunks[i + j * m_numChunkRows] != nullptr)
+                if(m_chunks[i + j * numChunksZ] != nullptr)
                 {
-                    m_chunks[i + j * m_numChunkRows]->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
+                    m_chunks[i + j * numChunksZ]->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
                 }
             }
         }
@@ -169,15 +172,18 @@ void CLandscape::processSplattingNormalTexture(void)
 {
     if(m_splattingNormalMaterial->isCommited() && !m_isSplattingNormalTextureProcessed)
     {
+        ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
+        ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
+        
         m_splattingNormalTexture = m_heightmapProcessor->PreprocessSplattingNormalTexture(m_splattingNormalMaterial);
         m_isSplattingNormalTextureProcessed = true;
-        for(ui32 i = 0; i < m_numChunkRows; ++i)
+        for(ui32 i = 0; i < numChunksX; ++i)
         {
-            for(ui32 j = 0; j < m_numChunkCells; ++j)
+            for(ui32 j = 0; j < numChunksZ; ++j)
             {
-                if(m_chunks[i + j * m_numChunkRows] != nullptr)
+                if(m_chunks[i + j * numChunksZ] != nullptr)
                 {
-                    m_chunks[i + j * m_numChunkRows]->setSplattingNormalTexture(m_splattingNormalTexture);
+                    m_chunks[i + j * numChunksZ]->setSplattingNormalTexture(m_splattingNormalTexture);
                 }
             }
         }
@@ -205,14 +211,17 @@ bool CLandscape::checkOcclusion(void)
 
 ui32 CLandscape::numTriangles(void)
 {
+    ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
+    ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
+    
     ui32 numTriangles = 0;
-    for(ui32 i = 0; i < m_numChunkRows; ++i)
+    for(ui32 i = 0; i < numChunksX; ++i)
     {
-        for(ui32 j = 0; j < m_numChunkCells; ++j)
+        for(ui32 j = 0; j < numChunksZ; ++j)
         {
             assert(m_chunks.size() != 0);
-            assert(m_chunks[i + j * m_numChunkRows] != nullptr);
-            numTriangles += m_chunks[i + j * m_numChunkRows]->numTriangles();
+            assert(m_chunks[i + j * numChunksZ] != nullptr);
+            numTriangles += m_chunks[i + j * numChunksZ]->numTriangles();
         }
     }
     return numTriangles;
@@ -241,16 +250,6 @@ void CLandscape::onBatch(const std::string& mode)
 void CLandscape::setCamera(CSharedCameraRef camera)
 {
     IGameObject::setCamera(camera);
-    
-    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
-    {
-        for(ui32 j = 0; j < m_numChunkCells; ++j)
-        {
-            assert(m_chunks.size() != 0);
-            assert(m_chunks[i + j * m_numChunkRows] != nullptr);
-            m_chunks[i + j * m_numChunkRows]->setCamera(camera);
-        }
-    }*/
     assert(m_edges != nullptr);
     m_edges->setCamera(camera);
 }
@@ -259,16 +258,6 @@ void CLandscape::setLightSource(CSharedLightSourceRef lightSource,
                                 E_LIGHT_SOURCE index)
 {
     IGameObject::setLightSource(lightSource, index);
-    
-    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
-    {
-        for(ui32 j = 0; j < m_numChunkCells; ++j)
-        {
-            assert(m_chunks.size() != 0);
-            assert(m_chunks[i + j * m_numChunkRows] != nullptr);
-            m_chunks[i + j * m_numChunkRows]->setLightSource(lightSource, index);
-        }
-    }*/
     assert(m_edges != nullptr);
     m_edges->setLightSource(lightSource, index);
 }
@@ -276,16 +265,6 @@ void CLandscape::setLightSource(CSharedLightSourceRef lightSource,
 void CLandscape::setRenderMgr(CSharedRenderMgrRef renderMgr)
 {
     IGameObject::setRenderMgr(renderMgr);
-    
-    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
-    {
-        for(ui32 j = 0; j < m_numChunkCells; ++j)
-        {
-            assert(m_chunks.size() != 0);
-            assert(m_chunks[i + j * m_numChunkRows] != nullptr);
-            m_chunks[i + j * m_numChunkRows]->setRenderMgr(renderMgr);
-        }
-    }*/
     assert(m_edges != nullptr);
     m_edges->setRenderMgr(renderMgr);
 }
@@ -293,16 +272,6 @@ void CLandscape::setRenderMgr(CSharedRenderMgrRef renderMgr)
 void CLandscape::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
 {
     IGameObject::setSceneUpdateMgr(sceneUpdateMgr);
-    
-    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
-    {
-        for(ui32 j = 0; j < m_numChunkCells; ++j)
-        {
-            assert(m_chunks.size() != 0);
-            assert(m_chunks[i + j * m_numChunkRows] != nullptr);
-            m_chunks[i + j * m_numChunkRows]->setSceneUpdateMgr(sceneUpdateMgr);
-        }
-    }*/
     assert(m_edges != nullptr);
     m_edges->setSceneUpdateMgr(sceneUpdateMgr);
 }
@@ -310,15 +279,6 @@ void CLandscape::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
 void CLandscape::listenRenderMgr(bool value)
 {
     m_isNeedToRender = value;
-    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
-    {
-        for(ui32 j = 0; j < m_numChunkCells; ++j)
-        {
-            assert(m_chunks.size() != 0);
-            assert(m_chunks[i + j * m_numChunkRows] != nullptr);
-            m_chunks[i + j * m_numChunkRows]->listenRenderMgr(value);
-        }
-    }*/
     assert(m_edges != nullptr);
     m_edges->listenRenderMgr(value);
 }
@@ -326,15 +286,6 @@ void CLandscape::listenRenderMgr(bool value)
 void CLandscape::listenSceneUpdateMgr(bool value)
 {
     IGameObject::listenSceneUpdateMgr(value);
-    /*for(ui32 i = 0; i < m_numChunkRows; ++i)
-    {
-        for(ui32 j = 0; j < m_numChunkCells; ++j)
-        {
-            assert(m_chunks.size() != 0);
-            assert(m_chunks[i + j * m_numChunkRows] != nullptr);
-            m_chunks[i + j * m_numChunkRows]->listenSceneUpdateMgr(value);
-        }
-    }*/
     assert(m_edges != nullptr);
     m_edges->listenSceneUpdateMgr(value);
 }
@@ -346,24 +297,17 @@ CSharedTexture CLandscape::getHeightmapTexture(void) const
     return m_heightmapProcessor->Get_HeightmapTexture();
 }
 
-f32* CLandscape::getHeightmapData(void) const
+ui32 CLandscape::getHeightmapSizeX(void) const
 {
     assert(m_heightmapProcessor != nullptr);
-    assert(m_heightmapProcessor->Get_HeightmapData() != nullptr);
-    return m_heightmapProcessor->Get_HeightmapData();
+    assert(m_heightmapProcessor->getSizeX() != 0);
+    return m_heightmapProcessor->getSizeX();
 }
 
-ui32 CLandscape::getHeightmapWidth(void) const
+ui32 CLandscape::getHeightmapSizeZ(void) const
 {
     assert(m_heightmapProcessor != nullptr);
-    assert(m_heightmapProcessor->Get_Width() != 0);
-    return m_heightmapProcessor->Get_Width();
-}
-
-ui32 CLandscape::getHeightmapHeight(void) const
-{
-    assert(m_heightmapProcessor != nullptr);
-    assert(m_heightmapProcessor->Get_Height() != 0);
-    return m_heightmapProcessor->Get_Height();
+    assert(m_heightmapProcessor->getSizeZ() != 0);
+    return m_heightmapProcessor->getSizeZ();
 }
 

@@ -18,8 +18,11 @@ private:
     
 protected:
     
+    CSharedHeightmapData m_heightmapData;
+    
     CSharedVertexBuffer m_vertexBuffer;
     CSharedIndexBuffer m_indexBuffer;
+    
     std::future<void> m_currentExecutedFunction;
     ui32 m_indexX;
     ui32 m_indexZ;
@@ -30,7 +33,8 @@ protected:
     
 public:
     
-    CHeightmapProcessingOperation(CSharedVertexBufferRef vertexBuffer,
+    CHeightmapProcessingOperation(CSharedHeightmapDataRef heightmapData,
+                                  CSharedVertexBufferRef vertexBuffer,
                                   CSharedIndexBufferRef indexBuffer,
                                   ui32 indexX,
                                   ui32 indexZ);
@@ -50,29 +54,54 @@ public:
 
 class CHeightmapData
 {
-    
 private:
     
-    struct SVertex
+    struct SUncomressedVertex
     {
         glm::vec3 m_position;
         glm::u8vec4 m_normal;
         glm::u16vec2 m_texcoord;
         glm::u8vec4 m_tangent;
         std::vector<ui32> m_containInFace;
+        
+        SUncomressedVertex(void) = default;
+        ~SUncomressedVertex(void)
+        {
+            m_containInFace.clear();
+        };
+    };
+    
+    struct SCompressedVertex
+    {
+        glm::vec3 m_position;
+        glm::u8vec4 m_normal;
+        glm::u16vec2 m_texcoord;
+        
+        SCompressedVertex(void) = default;
+        ~SCompressedVertex(void) = default;
     };
     
     struct SFace
     {
         glm::u8vec4 m_normal;
         std::array<ui32, 3> m_indexes;
+        
+        SFace(void) = default;
+        ~SFace(void) = default;
     };
     
-    std::vector<SVertex> m_vertexes;
+protected:
+    
+    std::vector<SUncomressedVertex> m_uncopressedVertexes;
+    std::vector<SCompressedVertex> m_compressedVertexes;
     std::vector<SFace> m_faces;
     
-    ui32 m_width;
-    ui32 m_height;
+    ui32 m_sizeX;
+    ui32 m_sizeZ;
+    
+    f32 m_maxAltitude;
+    f32 m_maxHeight;
+    f32 m_minHeight;
     
 public:
     
@@ -83,6 +112,31 @@ public:
     glm::u16vec2 getVertexTexcoord(ui32 i, ui32 j) const;
     glm::u8vec4 getVertexNormal(ui32 i, ui32 j) const;
     
+    ui32 getSizeX(void) const;
+    ui32 getSizeZ(void) const;
+    
+    f32 getMaxAltitude(void) const;
+    f32 getMaxHeight(void) const;
+    f32 getMinHeight(void) const;
+};
+
+class CHeightmapDataAccessor
+{
+private:
+    
+    static f32 getAngleOnHeightmapSuface(const glm::vec3& point_01,
+                                         const glm::vec3& point_02,
+                                         const glm::vec3& point_03);
+    
+protected:
+    
+public:
+    
+    CHeightmapDataAccessor(void) = default;
+    ~CHeightmapDataAccessor(void) = default;
+    
+    static f32 getHeight(CSharedHeightmapDataRef data, const glm::vec3& position);
+    static glm::vec2 getAngleOnHeightmapSuface(CSharedHeightmapDataRef data, const glm::vec3& position);
 };
 
 class CHeightmapProcessor
@@ -102,18 +156,11 @@ protected:
     std::queue<CSharedHeightmapProcessingOperation> m_processingOperationQueue;
     std::map<std::tuple<ui32, ui32>, CSharedHeightmapProcessingOperation> m_uniqueProcessingOperations;
 
-    ui32 m_width;
-    ui32 m_height;
+    ui32 m_chunkSizeX;
+    ui32 m_chunkSizeZ;
     
-    ui32 m_chunkWidth;
-    ui32 m_chunkHeight;
-    
-    ui32 m_numChunkRows;
-    ui32 m_numChunkCells;
-
-    f32 m_maxAltitude;
-    f32 m_maxHeight;
-    f32 m_minHeight;
+    ui32 m_numChunksX;
+    ui32 m_numChunksZ;
     
     std::vector<CSharedMesh> m_chunksUnused;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
@@ -121,8 +168,7 @@ protected:
     std::shared_ptr<IScreenSpaceTextureAccessor> m_screenSpaceTextureAccessor;
     
     CSharedIndexBuffer createIndexBuffer(void);
-    CSharedVertexBuffer createVertexBuffer(ui32 widthOffset,
-                                           ui32 heightOffset,
+    CSharedVertexBuffer createVertexBuffer(ui32 sizeXOffset, ui32 sizeZOffset,
                                            ui32 numVertexes,
                                            GLenum mode,
                                            glm::vec3* maxBound, glm::vec3* minBound);
@@ -130,9 +176,13 @@ protected:
     void _FillEdgesMaskTextureBlock(ui16* _data,ui32 _index, ui32 _edgesMaskWidth, ui32 _edgesMaskHeight, ui32 _textureBlockSize, const glm::vec3& _point, bool _reverse);
     
     ui32 createTextureId(void);
-    void createChunkBound(ui32 widthOffset, ui32 heightOffset, glm::vec3* maxBound, glm::vec3* minBound);
+    void createChunkBound(ui32 sizeXOffset, ui32 sizeZOffset,
+                          glm::vec3* maxBound, glm::vec3* minBound);
     
-    void fillVertexBuffer(CSharedVertexBufferRef vertexBuffer, ui32 widthOffset, ui32 heightOffset, ui32 numVertexes);
+    void fillVertexBuffer(CSharedVertexBufferRef vertexBuffer,
+                          ui32 sizeXOffset, ui32 sizeZOffset,
+                          ui32 numVertexes);
+    
     void fillIndexBuffer(CSharedIndexBufferRef indexBuffer);
     
     static void getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
@@ -152,55 +202,26 @@ public:
     std::shared_ptr<CTexture> PreprocessSplattingDiffuseTexture(const std::shared_ptr<CMaterial>& _material);
     std::shared_ptr<CTexture> PreprocessSplattingNormalTexture(const std::shared_ptr<CMaterial>& _material);
     
-    static void generateNormalSpace(CSharedVertexBufferRef vertexBuffer,
-                                    CSharedIndexBufferRef indexBuffer);
-    
-    static void generateTangentSpace(CSharedVertexBufferRef vertexBuffer,
+    static void generateTangentSpace(CSharedHeightmapDataRef heightmapData,
+                                     CSharedVertexBufferRef vertexBuffer,
                                      CSharedIndexBufferRef indexBuffer);
     
+    ui32 getSizeX(void) const;
+    ui32 getSizeZ(void) const;
+    
     void update(void);
-
-    inline ui32 Get_Width(void)
-    {
-        return m_width;
-    };
-
-    inline ui32 Get_Height(void)
-    {
-        return m_height;
-    };
 
     CSharedMesh getChunk(ui32 i, ui32 j);
     void freeChunk(CSharedMeshRef chunk, ui32 i, ui32 j);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
     
-    inline ui32 Get_NumChunkRows(void)
-    {
-        return m_numChunkRows;
-    };
+    ui32 getNumChunksX(void) const;
+    ui32 getNumChunksZ(void) const;
     
-    inline ui32 Get_NumChunkCells(void)
-    {
-        return m_numChunkCells;
-    };
+    ui32 getChunkSizeX(void) const;
+    ui32 getChunkSizeZ(void) const;
     
-    inline ui32 Get_ChunkWidth(void)
-    {
-        return m_chunkWidth;
-    };
-    
-    inline ui32 Get_ChunkHeight(void)
-    {
-        return m_chunkHeight;
-    };
-    
-    inline f32* Get_HeightmapData(void)
-    {
-        //assert(m_heightmapData != nullptr);
-        return nullptr;
-    };
-
     inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
     {
         assert(m_heightmapTexture != nullptr);
@@ -229,16 +250,6 @@ public:
     {
         assert(m_edgesMaskTexture != nullptr);
         return m_edgesMaskTexture;
-    };
-
-    inline f32 Get_MinHeight(void)
-    {
-        return m_minHeight;
-    };
-
-    inline f32 Get_MaxHeight(void)
-    {
-        return m_maxHeight;
     };
 };
 
