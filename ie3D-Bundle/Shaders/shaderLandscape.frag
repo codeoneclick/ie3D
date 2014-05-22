@@ -17,7 +17,7 @@ void main(void)
     lowp vec3 normalColor = normalize(texture2D(SAMPLER_02, OUT_TexCoord).rgb * 2.0 - 1.0);
     
     lowp float selfShadow = clamp(3.0 * OUT_LightDirection.z, 0.0, 1.0);
-    lowp float diffuseFactor = max(dot(abs(OUT_Normal), OUT_LightDirection), 0.0);
+    lowp float diffuseFactor = max(dot(normalColor, OUT_LightDirection), 0.0);
     
     highp vec3 blending = abs(OUT_Normal);
     blending = blending - 0.5;

@@ -36,8 +36,8 @@ void main(void)
                               vTangent.y, vBinormal.y, vNormal.y,
                               vTangent.z, vBinormal.z, vNormal.z);
     
-    vec3 vLightDirection = vec3(vPosition) - vec3(512.0, 1024.0, 64.0);
-    OUT_LightDirection = normalize(vLightDirection);//normalize(mTangentSpace * vLightDirection);
+    vec3 vLightDirection = vec3(512.0, 1024.0, 64.0) - vec3(vPosition);
+    OUT_LightDirection = normalize(mTangentSpace * vLightDirection);
     
     OUT_Normal = vNormal;
 }
