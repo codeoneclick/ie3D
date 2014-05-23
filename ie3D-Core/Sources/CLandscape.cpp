@@ -71,35 +71,38 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 {
                     if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
-                        std::shared_ptr<CMesh> mesh = m_heightmapProcessor->getChunk(i, j);
-                        m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+                        CSharedMesh mesh = m_heightmapProcessor->getChunk(i, j);
+                        CSharedLandscapeChunk chunk = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_screenSpaceTextureAccessor);
                         
-                        m_chunks[i + j * numChunksZ]->setCamera(m_camera);
+                        chunk->setCamera(m_camera);
                         
-                        m_chunks[i + j * numChunksZ]->setRenderMgr(m_renderMgr);
-                        m_chunks[i + j * numChunksZ]->setSceneUpdateMgr(m_sceneUpdateMgr);
+                        chunk->setRenderMgr(m_renderMgr);
+                        chunk->setSceneUpdateMgr(m_sceneUpdateMgr);
                         
-                        m_chunks[i + j * numChunksZ]->listenRenderMgr(m_isNeedToRender);
-                        m_chunks[i + j * numChunksZ]->listenSceneUpdateMgr(m_isNeedToUpdate);
+                        chunk->listenRenderMgr(m_isNeedToRender);
+                        chunk->listenSceneUpdateMgr(m_isNeedToUpdate);
                         
-                        m_chunks[i + j * numChunksZ]->setMesh(mesh, chunkSizeX, chunkSizeZ);
-                        m_chunks[i + j * numChunksZ]->onConfigurationLoaded(m_configuration, true);
+                        chunk->setMesh(mesh, chunkSizeX, chunkSizeZ);
+                        chunk->onConfigurationLoaded(m_configuration, true);
                         
-                        if(m_splattingDiffuseTexture != nullptr)
+                        /*if(m_splattingDiffuseTexture != nullptr)
                         {
-                            m_chunks[i + j * numChunksZ]->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
+                            chunk->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
                         }
                         if(m_splattingNormalTexture != nullptr)
                         {
-                            m_chunks[i + j * numChunksZ]->setSplattingNormalTexture(m_splattingNormalTexture);
-                        }
+                            chunk->setSplattingNormalTexture(m_splattingNormalTexture);
+                        }*/
+                        chunk->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
+                        m_chunks[i + j * numChunksZ] = chunk;
                     }
                 }
                 else if(m_chunks[i + j * numChunksZ] != nullptr)
                 {
-                    m_chunks[i + j * numChunksZ]->listenRenderMgr(false);
-                    m_chunks[i + j * numChunksZ]->listenSceneUpdateMgr(false);
-                    m_heightmapProcessor->freeChunk(m_chunks[i + j * numChunksZ]->m_mesh, i, j);
+                    CSharedLandscapeChunk chunk = m_chunks[i + j * numChunksZ];
+                    chunk->listenRenderMgr(false);
+                    chunk->listenSceneUpdateMgr(false);
+                    m_heightmapProcessor->freeChunk(chunk->m_mesh, i, j);
                     m_chunks[i + j * numChunksZ] = nullptr;
                 }
             }

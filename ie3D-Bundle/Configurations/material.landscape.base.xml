@@ -20,9 +20,19 @@
         fs_filename="shaderLandscape.frag"/>
     <textures>
         <texture
-            filename="landscape.00.diffuse.pvr"
+            filename="landscape.01.diffuse.pvr"
             render_operation_name=""
             sampler_id="0"
+            wrap_mode="GL_REPEAT"/>
+            <texture
+            filename="landscape.02.diffuse.pvr"
+            render_operation_name=""
+            sampler_id="1"
+            wrap_mode="GL_REPEAT"/>
+            <texture
+            filename="landscape.03.diffuse.pvr"
+            render_operation_name=""
+            sampler_id="2"
             wrap_mode="GL_REPEAT"/>
     </textures>
 </material>

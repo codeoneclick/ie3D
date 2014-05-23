@@ -43,6 +43,7 @@
 		212092D419197ADD00FFC8D4 /* ypos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092CE19197ADD00FFC8D4 /* ypos.pvr */; };
 		212092D519197ADD00FFC8D4 /* zneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092CF19197ADD00FFC8D4 /* zneg.pvr */; };
 		212092D619197ADD00FFC8D4 /* zpos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092D019197ADD00FFC8D4 /* zpos.pvr */; };
+		21216F42192F7C0200854995 /* landscape.00.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21216F41192F7C0200854995 /* landscape.00.diffuse.pvr */; };
 		21B08E0419224FE100C5D5CC /* material.skybox.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0119224FE100C5D5CC /* material.skybox.base.xml */; };
 		21B08E0519224FE100C5D5CC /* material.skybox.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0219224FE100C5D5CC /* material.skybox.reflection.xml */; };
 		21B08E0619224FE100C5D5CC /* material.skybox.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0319224FE100C5D5CC /* material.skybox.refraction.xml */; };
@@ -177,6 +178,7 @@
 		212092CE19197ADD00FFC8D4 /* ypos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = ypos.pvr; path = "../ie3D-Bundle/Textures/ypos.pvr"; sourceTree = SOURCE_ROOT; };
 		212092CF19197ADD00FFC8D4 /* zneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = zneg.pvr; path = "../ie3D-Bundle/Textures/zneg.pvr"; sourceTree = SOURCE_ROOT; };
 		212092D019197ADD00FFC8D4 /* zpos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = zpos.pvr; path = "../ie3D-Bundle/Textures/zpos.pvr"; sourceTree = SOURCE_ROOT; };
+		21216F41192F7C0200854995 /* landscape.00.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.00.diffuse.pvr; path = "../ie3D-Bundle/Textures/landscape.00.diffuse.pvr"; sourceTree = SOURCE_ROOT; };
 		2121751DE1C919D3E0D744BA /* qt_lib_uitools_private.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_uitools_private.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_uitools_private.pri; sourceTree = "<absolute>"; };
 		21B08E0119224FE100C5D5CC /* material.skybox.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.base.xml; path = "../ie3D-Bundle/Configurations/material.skybox.base.xml"; sourceTree = "<group>"; };
 		21B08E0219224FE100C5D5CC /* material.skybox.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.reflection.xml; path = "../ie3D-Bundle/Configurations/material.skybox.reflection.xml"; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				212092CE19197ADD00FFC8D4 /* ypos.pvr */,
 				212092CF19197ADD00FFC8D4 /* zneg.pvr */,
 				212092D019197ADD00FFC8D4 /* zpos.pvr */,
+				21216F41192F7C0200854995 /* landscape.00.diffuse.pvr */,
 				21BC34BF19080B9E007B99DA /* landscape.01.diffuse.pvr */,
 				21BC34C019080B9E007B99DA /* landscape.02.diffuse.pvr */,
 				21BC34C119080B9E007B99DA /* landscape.03.diffuse.pvr */,
@@ -818,6 +821,7 @@
 				21BC34A019080A39007B99DA /* material.output.xml in Resources */,
 				21BC349B19080A39007B99DA /* material.landscape.refraction.xml in Resources */,
 				21BC34A319080A39007B99DA /* material.splatting.diffuse.xml in Resources */,
+				21216F42192F7C0200854995 /* landscape.00.diffuse.pvr in Resources */,
 				21DC2B751929E895008DA3C1 /* mesa_heightmap.png in Resources */,
 				21BC34A919080A39007B99DA /* render.operation.world.refraction.xml in Resources */,
 				21BC34A119080A39007B99DA /* material.particle.emitter.xml in Resources */,

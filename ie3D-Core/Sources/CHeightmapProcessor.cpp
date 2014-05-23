@@ -30,13 +30,13 @@ m_maxAltitude(-FLT_MAX),
 m_maxHeight(-FLT_MAX),
 m_minHeight(FLT_MAX)
 {
-    
+    ui8* data = nullptr;
 #if defined(__IOS__)
     
     UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"mesa_heightmap" encoding:NSUTF8StringEncoding]];
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     size_t bytesPerRow = image.size.width * 4;
-    ui8* data = (ui8 *)malloc(image.size.height * bytesPerRow);
+    data = (ui8 *)malloc(image.size.height * bytesPerRow);
     CGContextRef context = CGBitmapContextCreate(data,
                                                  image.size.width,
                                                  image.size.height,
@@ -49,6 +49,20 @@ m_minHeight(FLT_MAX)
     CGContextScaleCTM(context, 1.0, -1.0);
     [image drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
     UIGraphicsPopContext();
+    
+    m_sizeX = image.size.width;
+    m_sizeZ = image.size.height;
+
+#elif defined(__OSX__)
+    
+    NSImage* image = [NSImage imageNamed:[NSString stringWithCString:"mesa_heightmap" encoding:NSUTF8StringEncoding]];
+    [image lockFocus];
+    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0, 0,
+                                                                                            image.size.width,
+                                                                                            image.size.height)];
+    [image unlockFocus];
+    
+    data = [bitmap bitmapData];
     
     m_sizeX = image.size.width;
     m_sizeZ = image.size.height;
@@ -131,11 +145,16 @@ m_minHeight(FLT_MAX)
     for(ui32 i = 0; i < m_uncopressedVertexes.size(); ++i)
     {
         SUncomressedVertex vertex = m_uncopressedVertexes.at(i);
-        glm::vec3 normal(0.0);
         assert(vertex.m_containInFace.size() != 0);
-        for(ui32 j = 0; j < vertex.m_containInFace.size(); ++j)
+        glm::vec3 normal = CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(0)).m_normal);
+        for(ui32 j = 1; j < vertex.m_containInFace.size(); ++j)
         {
-            normal += CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(j)).m_normal);
+            /*f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(j)).m_normal));
+            value = glm::degrees(acosf(value));
+            if(value < 45.0)
+            {*/
+                normal += CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(j)).m_normal);
+            //}
         }
         normal = glm::normalize(normal);
         m_uncopressedVertexes.at(i).m_normal = CVertexBuffer::compressVec3(normal);
@@ -470,11 +489,14 @@ std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingTexture(void)
         {
             data[i + j * m_heightmapData->getSizeZ()] = TO_RGB565(255, 0, 0);
             f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0, j));
-            if(height > 10.0)
+            f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), CVertexBuffer::uncompressU8Vec4(m_heightmapData->getVertexNormal(i, j)));
+            value = glm::degrees(acosf(value));
+            assert(value >= 0.0);
+            if(height >= 0.25 && value > 45.0)
             {
                 data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(0, 255, 0);
             }
-            if(height < 1.0)
+            if(height < 0.25)
             {
                 data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(0, 0, 255);
             }

@@ -61,17 +61,25 @@ void CLandscapeChunk::setMesh(CSharedMeshRef mesh,
 
 void CLandscapeChunk::setSplattingDiffuseTexture(CSharedTextureRef texture)
 {
-    for(const auto& material : m_materials)
+    /*for(const auto& material : m_materials)
     {
         material.second->setTexture(texture, E_SHADER_SAMPLER_01);
-    }
+    }*/
 }
 
 void CLandscapeChunk::setSplattingNormalTexture(CSharedTextureRef texture)
 {
-    for(const auto& material : m_materials)
+    /*for(const auto& material : m_materials)
     {
         material.second->setTexture(texture, E_SHADER_SAMPLER_02);
+    }*/
+}
+
+void CLandscapeChunk::setSplattinMaskTexture(CSharedTextureRef texture)
+{
+    for(const auto& material : m_materials)
+    {
+        material.second->setTexture(texture, E_SHADER_SAMPLER_04);
     }
 }
 

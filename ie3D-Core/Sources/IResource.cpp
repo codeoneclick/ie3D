@@ -118,4 +118,8 @@ void IResource::onResourceLoaded(void)
     {
         handler->onResourceLoaded(shared_from_this(), true);
     }
+    
+    m_handlers.clear();
+    std::set<ISharedResourceLoadingHandler> deleter;
+    m_handlers.swap(deleter);
 }

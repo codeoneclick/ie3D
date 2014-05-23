@@ -31,6 +31,7 @@ protected:
     
     void setSplattingDiffuseTexture(CSharedTextureRef texture);
     void setSplattingNormalTexture(CSharedTextureRef texture);
+    void setSplattinMaskTexture(CSharedTextureRef texture);
     
     void onSceneUpdate(f32 deltatime);
     
