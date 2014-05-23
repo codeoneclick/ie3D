@@ -57,14 +57,10 @@ void CEditableScene::load(void)
     m_particles.push_back(particleEmitter);
     m_root->InsertParticleEmitter(particleEmitter);
     
-    std::shared_ptr<CLandscape> landscape = m_root->CreateLandscape("gameobject.landscape.xml");
-    m_root->InsertLandscape(landscape);
+    m_landscape = m_root->CreateLandscape("gameobject.landscape.xml");
+    m_root->InsertLandscape(m_landscape);
     
-    /*for(ui32 i = 0; i < landscape->getChunks().size(); ++i)
-    {
-        m_colliders.push_back(landscape->getChunks().at(i));
-    }
-    m_root->addCollisionHandler(shared_from_this());*/
+    m_root->addCollisionHandler(shared_from_this());
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
@@ -78,6 +74,19 @@ void CEditableScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.1;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
+}
+
+std::vector<ISharedGameObject> CEditableScene::colliders(void)
+{
+    std::vector<ISharedGameObject> colliders;
+    for(ui32 i = 0; i < m_landscape->getChunks().size(); ++i)
+    {
+        if(m_landscape->getChunks().at(i) != nullptr)
+        {
+            colliders.push_back(m_landscape->getChunks().at(i));
+        }
+    }
+    return colliders;
 }
 
 void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef)
