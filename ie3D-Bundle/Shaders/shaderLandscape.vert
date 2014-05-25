@@ -18,6 +18,7 @@ varying vec3   OUT_CameraPosition;
 varying vec3   OUT_LightDirection;
 varying vec3   OUT_Position;
 varying vec3   OUT_Normal;
+varying float  OUT_Fog;
 
 void main(void)
 {
@@ -38,6 +39,8 @@ void main(void)
     
     vec3 vLightDirection = vec3(512.0, 1024.0, 64.0) - vec3(vPosition);
     OUT_LightDirection = normalize(vLightDirection);//normalize(mTangentSpace * vLightDirection);
+    
+    OUT_Fog = clamp(((MATRIX_View * vPosition).z + 192.0) / (192.0 - 396.0) * -1.0, 0.0, 1.0);
     
     OUT_Normal = vNormal;
 }

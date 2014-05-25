@@ -56,12 +56,9 @@ m_minHeight(FLT_MAX)
 #elif defined(__OSX__)
     
     NSImage* image = [NSImage imageNamed:[NSString stringWithCString:"mesa_heightmap" encoding:NSUTF8StringEncoding]];
-    [image lockFocus];
-    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0, 0,
-                                                                                            image.size.width,
-                                                                                            image.size.height)];
-    [image unlockFocus];
-    
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)[image TIFFRepresentation], NULL);
+    CGImageRef mask =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
+    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:mask];
     data = [bitmap bitmapData];
     
     m_sizeX = image.size.width;
@@ -77,7 +74,7 @@ m_minHeight(FLT_MAX)
         for(ui32 j = 0; j < m_sizeZ; ++j)
         {
             m_uncopressedVertexes[i + j * m_sizeZ].m_position = glm::vec3(static_cast<f32>(i),
-                                                                          (static_cast<f32>(data[(i + j * m_sizeZ) * 4 + 1] - 64) / 255) * 32.0,
+                                                                          (static_cast<f32>(data[(i + j * m_sizeZ) * 4 + 2] - 64) / 255) * 32.0,
                                                                           static_cast<f32>(j));
             m_uncopressedVertexes[i + j * m_sizeZ].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(i) /
                                                                                                       static_cast<f32>(m_sizeX),
@@ -170,23 +167,23 @@ m_minHeight(FLT_MAX)
         vertex.m_texcoord = m_uncopressedVertexes.at(i).m_texcoord;
         m_compressedVertexes.push_back(vertex);
     }
-    std::vector<SUncomressedVertex> uncompressedVertexesDeleter;
-    m_uncopressedVertexes.swap(uncompressedVertexesDeleter);
+    //std::vector<SUncomressedVertex> uncompressedVertexesDeleter;
+    //m_uncopressedVertexes.swap(uncompressedVertexesDeleter);
 }
 
 glm::vec3 CHeightmapData::getVertexPosition(ui32 i, ui32 j) const
 {
-    return m_compressedVertexes[i + j * m_sizeZ].m_position;
+    return m_uncopressedVertexes[i + j * m_sizeZ].m_position;
 }
 
 glm::u16vec2 CHeightmapData::getVertexTexcoord(ui32 i, ui32 j) const
 {
-    return m_compressedVertexes[i + j * m_sizeZ].m_texcoord;
+    return m_uncopressedVertexes[i + j * m_sizeZ].m_texcoord;
 }
 
 glm::u8vec4 CHeightmapData::getVertexNormal(ui32 i, ui32 j) const
 {
-    return m_compressedVertexes[i + j * m_sizeZ].m_normal;
+    return m_uncopressedVertexes[i + j * m_sizeZ].m_normal;
 }
 
 ui32 CHeightmapData::getSizeX(void) const

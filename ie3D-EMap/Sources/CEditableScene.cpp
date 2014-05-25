@@ -32,7 +32,7 @@ void CEditableScene::load(void)
     assert(m_root != nullptr);
     m_camera = m_root->CreateCamera(90.0f,
                                     0.1f,
-                                    256.0f,
+                                    2048.0f,
                                     glm::ivec4(0, 0,
                                                m_root->getWindowWidth(),
                                                m_root->getWindowHeight()));
@@ -64,7 +64,7 @@ void CEditableScene::load(void)
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
-                                                               glm::vec3(512.0, 0.0, 512.0));
+                                                               glm::vec3(2048.0, 0.0, 2048.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);
 }
 
