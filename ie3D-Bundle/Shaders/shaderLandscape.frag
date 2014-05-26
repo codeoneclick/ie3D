@@ -28,26 +28,45 @@ void main(void)
     lowp vec4 diffuseColor = vec4(0.0, 0.0, 0.0, 1.0);
     lowp vec4 splattingMask = texture2D(SAMPLER_04, OUT_TexCoord);
     
-    if(splattingMask.x > 0.0)
+    bool isTriplanarFeatureEnabled = false;
+    if(isTriplanarFeatureEnabled)
     {
-        lowp vec4 xAxisColor = texture2D(SAMPLER_01, OUT_Position.yz / 16.0);
-        lowp vec4 yAxisColor = texture2D(SAMPLER_01, OUT_Position.xz / 16.0);
-        lowp vec4 zAxisColor = texture2D(SAMPLER_01, OUT_Position.xy / 16.0);
-        diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.x;
+        if(splattingMask.x > 0.0)
+        {
+            lowp vec4 xAxisColor = texture2D(SAMPLER_01, OUT_Position.yz / 16.0);
+            lowp vec4 yAxisColor = texture2D(SAMPLER_01, OUT_Position.xz / 16.0);
+            lowp vec4 zAxisColor = texture2D(SAMPLER_01, OUT_Position.xy / 16.0);
+            diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.x;
+        }
+        if(splattingMask.y > 0.0)
+        {
+            lowp vec4 xAxisColor = texture2D(SAMPLER_02, OUT_Position.yz / 8.0);
+            lowp vec4 yAxisColor = texture2D(SAMPLER_02, OUT_Position.xz / 8.0);
+            lowp vec4 zAxisColor = texture2D(SAMPLER_02, OUT_Position.xy / 8.0);
+            diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.y;
+        }
+        if(splattingMask.z > 0.0)
+        {
+            lowp vec4 xAxisColor = texture2D(SAMPLER_03, OUT_Position.yz / 8.0);
+            lowp vec4 yAxisColor = texture2D(SAMPLER_03, OUT_Position.xz / 8.0);
+            lowp vec4 zAxisColor = texture2D(SAMPLER_03, OUT_Position.xy / 8.0);
+            diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.z;
+        }
     }
-    if(splattingMask.y > 0.0)
+    else
     {
-        lowp vec4 xAxisColor = texture2D(SAMPLER_02, OUT_Position.yz / 8.0);
-        lowp vec4 yAxisColor = texture2D(SAMPLER_02, OUT_Position.xz / 8.0);
-        lowp vec4 zAxisColor = texture2D(SAMPLER_02, OUT_Position.xy / 8.0);
-        diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.y;
-    }
-    if(splattingMask.z > 0.0)
-    {
-        lowp vec4 xAxisColor = texture2D(SAMPLER_03, OUT_Position.yz / 8.0);
-        lowp vec4 yAxisColor = texture2D(SAMPLER_03, OUT_Position.xz / 8.0);
-        lowp vec4 zAxisColor = texture2D(SAMPLER_03, OUT_Position.xy / 8.0);
-        diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.z;
+        if(splattingMask.x > 0.0)
+        {
+            diffuseColor = diffuseColor + texture2D(SAMPLER_01, OUT_TexCoord * 16.0) * splattingMask.x;
+        }
+        if(splattingMask.y > 0.0)
+        {
+            diffuseColor = diffuseColor + texture2D(SAMPLER_02, OUT_TexCoord * 8.0) * splattingMask.y;
+        }
+        if(splattingMask.z > 0.0)
+        {
+            diffuseColor = diffuseColor + texture2D(SAMPLER_03, OUT_TexCoord * 8.0) * splattingMask.z;
+        }
     }
     diffuseColor = vec4(diffuseColor.rgb * diffuseFactor, 1.0);
     diffuseColor = mix(vec4(0.16, 0.32, 0.32, 1.0), diffuseColor, OUT_Fog);
