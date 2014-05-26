@@ -74,7 +74,7 @@ m_minHeight(FLT_MAX)
         for(ui32 j = 0; j < m_sizeZ; ++j)
         {
             m_uncopressedVertexes[i + j * m_sizeZ].m_position = glm::vec3(static_cast<f32>(i),
-                                                                          (static_cast<f32>(data[(i + j * m_sizeZ) * 4 + 2] - 64) / 255) * 32.0,
+                                                                          (static_cast<f32>(data[(i + j * m_sizeZ) * 4] - 64) / 255) * 32.0,
                                                                           static_cast<f32>(j));
             m_uncopressedVertexes[i + j * m_sizeZ].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(i) /
                                                                                                       static_cast<f32>(m_sizeX),
@@ -146,12 +146,7 @@ m_minHeight(FLT_MAX)
         glm::vec3 normal = CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(0)).m_normal);
         for(ui32 j = 1; j < vertex.m_containInFace.size(); ++j)
         {
-            /*f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(j)).m_normal));
-            value = glm::degrees(acosf(value));
-            if(value < 45.0)
-            {*/
-                normal += CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(j)).m_normal);
-            //}
+            normal += CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(j)).m_normal);
         }
         normal = glm::normalize(normal);
         m_uncopressedVertexes.at(i).m_normal = CVertexBuffer::compressVec3(normal);
@@ -167,23 +162,23 @@ m_minHeight(FLT_MAX)
         vertex.m_texcoord = m_uncopressedVertexes.at(i).m_texcoord;
         m_compressedVertexes.push_back(vertex);
     }
-    //std::vector<SUncomressedVertex> uncompressedVertexesDeleter;
-    //m_uncopressedVertexes.swap(uncompressedVertexesDeleter);
+    std::vector<SUncomressedVertex> uncompressedVertexesDeleter;
+    m_uncopressedVertexes.swap(uncompressedVertexesDeleter);
 }
 
 glm::vec3 CHeightmapData::getVertexPosition(ui32 i, ui32 j) const
 {
-    return m_uncopressedVertexes[i + j * m_sizeZ].m_position;
+    return m_compressedVertexes[i + j * m_sizeZ].m_position;
 }
 
 glm::u16vec2 CHeightmapData::getVertexTexcoord(ui32 i, ui32 j) const
 {
-    return m_uncopressedVertexes[i + j * m_sizeZ].m_texcoord;
+    return m_compressedVertexes[i + j * m_sizeZ].m_texcoord;
 }
 
 glm::u8vec4 CHeightmapData::getVertexNormal(ui32 i, ui32 j) const
 {
-    return m_uncopressedVertexes[i + j * m_sizeZ].m_normal;
+    return m_compressedVertexes[i + j * m_sizeZ].m_normal;
 }
 
 ui32 CHeightmapData::getSizeX(void) const
