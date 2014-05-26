@@ -57,15 +57,15 @@ void main(void)
     {
         if(splattingMask.x > 0.0)
         {
-            diffuseColor = diffuseColor + texture2D(SAMPLER_01, OUT_TexCoord * 16.0) * splattingMask.x;
+            diffuseColor = diffuseColor + texture2D(SAMPLER_01, OUT_TexCoord * 32.0) * splattingMask.x;
         }
         if(splattingMask.y > 0.0)
         {
-            diffuseColor = diffuseColor + texture2D(SAMPLER_02, OUT_TexCoord * 8.0) * splattingMask.y;
+            diffuseColor = diffuseColor + texture2D(SAMPLER_02, OUT_TexCoord * 64.0) * splattingMask.y;
         }
         if(splattingMask.z > 0.0)
         {
-            diffuseColor = diffuseColor + texture2D(SAMPLER_03, OUT_TexCoord * 8.0) * splattingMask.z;
+            diffuseColor = diffuseColor + texture2D(SAMPLER_03, OUT_TexCoord * 64.0) * splattingMask.z;
         }
     }
     diffuseColor = vec4(diffuseColor.rgb * diffuseFactor, 1.0);
