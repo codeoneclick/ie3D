@@ -51,9 +51,6 @@ void CLandscape::onSceneUpdate(f32 deltatime)
         CLandscape::processSplattingDiffuseTexture();
         CLandscape::processSplattingNormalTexture();
         
-        ui32 chunkSizeX = m_heightmapProcessor->getChunkSizeX();
-        ui32 chunkSizeZ = m_heightmapProcessor->getChunkSizeZ();
-        
         ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
         ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
         
@@ -81,6 +78,9 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         
                         chunk->listenRenderMgr(m_isNeedToRender);
                         chunk->listenSceneUpdateMgr(m_isNeedToUpdate);
+                        
+                        ui32 chunkSizeX = m_heightmapProcessor->getChunkSizeX(i, j);
+                        ui32 chunkSizeZ = m_heightmapProcessor->getChunkSizeZ(i, j);
                         
                         chunk->setMesh(mesh, chunkSizeX, chunkSizeZ);
                         chunk->onConfigurationLoaded(m_configuration, true);

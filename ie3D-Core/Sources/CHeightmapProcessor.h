@@ -158,6 +158,8 @@ protected:
 
     ui32 m_chunkSizeX;
     ui32 m_chunkSizeZ;
+    ui32 m_chunkLODSizeX;
+    ui32 m_chunkLODSizeZ;
     
     ui32 m_numChunksX;
     ui32 m_numChunksZ;
@@ -167,23 +169,27 @@ protected:
     
     std::shared_ptr<IScreenSpaceTextureAccessor> m_screenSpaceTextureAccessor;
     
-    CSharedIndexBuffer createIndexBuffer(void);
-    CSharedVertexBuffer createVertexBuffer(ui32 sizeXOffset, ui32 sizeZOffset,
-                                           ui32 numVertexes,
-                                           GLenum mode,
+    CSharedVertexBuffer createVertexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                                           ui32 chunkOffsetX, ui32 chunkOffsetZ,
                                            glm::vec3* maxBound, glm::vec3* minBound);
+    
+    CSharedIndexBuffer createIndexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ);
+    
+    void createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                          ui32 chunkOffsetX, ui32 chunkOffsetZ,
+                          glm::vec3* maxBound, glm::vec3* minBound);
+    
+    void fillVertexBuffer(CSharedVertexBufferRef vertexBuffer,
+                          ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                          ui32 chunkOffsetX, ui32 chunkOffsetZ);
+    
+    void fillIndexBuffer(CSharedIndexBufferRef indexBuffer,
+                         ui32 chunkLODSizeX, ui32 chunkLODSizeZ);
     
     void _FillEdgesMaskTextureBlock(ui16* _data,ui32 _index, ui32 _edgesMaskWidth, ui32 _edgesMaskHeight, ui32 _textureBlockSize, const glm::vec3& _point, bool _reverse);
     
     ui32 createTextureId(void);
-    void createChunkBound(ui32 sizeXOffset, ui32 sizeZOffset,
-                          glm::vec3* maxBound, glm::vec3* minBound);
     
-    void fillVertexBuffer(CSharedVertexBufferRef vertexBuffer,
-                          ui32 sizeXOffset, ui32 sizeZOffset,
-                          ui32 numVertexes);
-    
-    void fillIndexBuffer(CSharedIndexBufferRef indexBuffer);
     
     static void getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
                                  f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,
@@ -219,8 +225,8 @@ public:
     ui32 getNumChunksX(void) const;
     ui32 getNumChunksZ(void) const;
     
-    ui32 getChunkSizeX(void) const;
-    ui32 getChunkSizeZ(void) const;
+    ui32 getChunkSizeX(ui32 i, ui32 j) const;
+    ui32 getChunkSizeZ(ui32 i, ui32 j) const;
     
     inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
     {
