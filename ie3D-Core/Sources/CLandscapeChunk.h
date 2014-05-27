@@ -18,16 +18,28 @@ private:
     
     friend class CLandscape;
     
-    ui32 m_width;
-    ui32 m_height;
+    ui32 m_chunkSizeX;
+    ui32 m_chunkSizeZ;
+    
+    ui32 m_heightmapSizeX;
+    ui32 m_heightmapSizeZ;
+    
+    f32 m_splattingTillingLayer_01;
+    f32 m_splattingTillingLayer_02;
+    f32 m_splattingTillingLayer_03;
+    
     ui32 m_numIndexesToRender;
     CSharedQuadTree m_quadTree;
     
 protected:
     
     void setMesh(CSharedMeshRef mesh,
-                 ui32 width,
-                 ui32 height);
+                 ui32 chunkSizeX, ui32 chunkSizeZ,
+                 ui32 heightmapSizeX, ui32 heightmapSizeZ);
+    
+    void setSplattingSettings(f32 splattingTillingLayer_01,
+                              f32 splattingTillingLayer_02,
+                              f32 splattingTillingLayer_03);
     
     void setSplattingDiffuseTexture(CSharedTextureRef texture);
     void setSplattingNormalTexture(CSharedTextureRef texture);

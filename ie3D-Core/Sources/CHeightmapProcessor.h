@@ -112,6 +112,8 @@ public:
     glm::u16vec2 getVertexTexcoord(ui32 i, ui32 j) const;
     glm::u8vec4 getVertexNormal(ui32 i, ui32 j) const;
     
+    void setVertexPosition(ui32 i, ui32 j, f32 value);
+    
     ui32 getSizeX(void) const;
     ui32 getSizeZ(void) const;
     
@@ -164,6 +166,7 @@ protected:
     ui32 m_numChunksX;
     ui32 m_numChunksZ;
     
+    std::vector<CSharedMesh> m_chunksUsed;
     std::vector<CSharedMesh> m_chunksUnused;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
@@ -227,6 +230,9 @@ public:
     
     ui32 getChunkSizeX(ui32 i, ui32 j) const;
     ui32 getChunkSizeZ(ui32 i, ui32 j) const;
+    
+    f32 getHeight(const glm::vec3& position) const;
+    void updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights);
     
     inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
     {

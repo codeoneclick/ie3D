@@ -11,11 +11,13 @@
 
 #include "IGameObject.h"
 #include "HDeclaration.h"
+#include "IEditableLandscape.h"
 
 class CLandscapeChunk;
 class CLandscapeEdges;
 
-class CLandscape : public IGameObject
+class CLandscape : public IGameObject,
+public IEditableLandscape
 {
 private:
 

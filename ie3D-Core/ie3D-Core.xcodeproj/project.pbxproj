@@ -130,6 +130,9 @@
 		212092BF1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */; };
 		212092C01919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */; };
 		212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */; };
+		2127E85B1935056100D408C9 /* IEditableLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2127E8591935056100D408C9 /* IEditableLandscape.cpp */; };
+		2127E85C1935056100D408C9 /* IEditableLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2127E8591935056100D408C9 /* IEditableLandscape.cpp */; };
+		2127E85D1935056100D408C9 /* IEditableLandscape.h in Headers */ = {isa = PBXBuildFile; fileRef = 2127E85A1935056100D408C9 /* IEditableLandscape.h */; };
 		213265DD1906A4AF001C98F7 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F205B7174287450063AB07 /* pugixml.cpp */; };
 		213265DE1906A4AF001C98F7 /* IInputContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21DEC3E31903F07B00B41221 /* IInputContext.cpp */; };
 		213265DF1906A4AF001C98F7 /* CInputContext_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489C179D767400C51AC4 /* CInputContext_ios.cpp */; };
@@ -280,6 +283,8 @@
 		212092B9191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationSkyBoxSerializer.h; path = Sources/CConfigurationSkyBoxSerializer.h; sourceTree = "<group>"; };
 		212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationSkyBoxLoadingOperation.cpp; path = Sources/CConfigurationSkyBoxLoadingOperation.cpp; sourceTree = "<group>"; };
 		212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationSkyBoxLoadingOperation.h; path = Sources/CConfigurationSkyBoxLoadingOperation.h; sourceTree = "<group>"; };
+		2127E8591935056100D408C9 /* IEditableLandscape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IEditableLandscape.cpp; path = Sources/IEditableLandscape.cpp; sourceTree = "<group>"; };
+		2127E85A1935056100D408C9 /* IEditableLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEditableLandscape.h; path = Sources/IEditableLandscape.h; sourceTree = "<group>"; };
 		213265D01906A3E0001C98F7 /* IGraphicsContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = IGraphicsContext.cpp; path = Sources/IGraphicsContext.cpp; sourceTree = SOURCE_ROOT; };
 		213265D11906A3E0001C98F7 /* IGraphicsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraphicsContext.h; path = Sources/IGraphicsContext.h; sourceTree = SOURCE_ROOT; };
 		213265D31906A407001C98F7 /* CGameLoopExecutor_ios.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGameLoopExecutor_ios.cpp; path = Sources/CGameLoopExecutor_ios.cpp; sourceTree = SOURCE_ROOT; };
@@ -751,6 +756,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2127E8581935042300D408C9 /* Editable Managment */ = {
+			isa = PBXGroup;
+			children = (
+				2127E85A1935056100D408C9 /* IEditableLandscape.h */,
+				2127E8591935056100D408C9 /* IEditableLandscape.cpp */,
+			);
+			name = "Editable Managment";
+			sourceTree = "<group>";
+		};
 		A40138BC1754E9CE0056461B /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -908,6 +922,7 @@
 		A420817C1733AA6F0004729E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2127E8581935042300D408C9 /* Editable Managment */,
 				A4364898179D74E900C51AC4 /* GestureRecognizer Managment */,
 				A42081921733AB070004729E /* Common */,
 				A494D36417392D3600228936 /* Render Managment */,
@@ -1479,6 +1494,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2127E85D1935056100D408C9 /* IEditableLandscape.h in Headers */,
 				212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */,
 				212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */,
 				212092B61919674400FFC8D4 /* CSkyBox.h in Headers */,
@@ -1615,6 +1631,7 @@
 				21208FD31906FB5F00FFC8D4 /* IConfigurationSerializer.cpp in Sources */,
 				21208FD41906FB5F00FFC8D4 /* CGUITemplateSerializer.cpp in Sources */,
 				21208FD51906FB5F00FFC8D4 /* CConfigurationMaterialSerializer.cpp in Sources */,
+				2127E85C1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
 				212092B119195F4D00FFC8D4 /* CCubemapTexture.cpp in Sources */,
 				212092C01919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */,
 				21208FD61906FB5F00FFC8D4 /* CConfigurationModelSerializer.cpp in Sources */,
@@ -1737,6 +1754,7 @@
 				213266171906A4AF001C98F7 /* IConfigurationSerializer.cpp in Sources */,
 				213266181906A4AF001C98F7 /* CGUITemplateSerializer.cpp in Sources */,
 				213266191906A4AF001C98F7 /* CConfigurationMaterialSerializer.cpp in Sources */,
+				2127E85B1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
 				212092AE19195CD000FFC8D4 /* CCubemapTexture.cpp in Sources */,
 				212092BF1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */,
 				2132661A1906A4AF001C98F7 /* CConfigurationModelSerializer.cpp in Sources */,

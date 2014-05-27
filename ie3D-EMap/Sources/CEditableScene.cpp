@@ -92,6 +92,7 @@ std::vector<ISharedGameObject> CEditableScene::colliders(void)
 void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef)
 {
     m_particles.at(0)->setPosition(position);
+    m_landscape->pressureHeightIn(position, 10.0, true);
     /*std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(position);
     

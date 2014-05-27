@@ -181,6 +181,13 @@ glm::u8vec4 CHeightmapData::getVertexNormal(ui32 i, ui32 j) const
     return m_compressedVertexes[i + j * m_sizeZ].m_normal;
 }
 
+void CHeightmapData::setVertexPosition(ui32 i, ui32 j, f32 value)
+{
+    m_compressedVertexes[i + j * m_sizeZ].m_position = glm::vec3(m_compressedVertexes[i + j * m_sizeZ].m_position.x,
+                                                                 value,
+                                                                 m_compressedVertexes[i + j * m_sizeZ].m_position.z);
+}
+
 ui32 CHeightmapData::getSizeX(void) const
 {
     return m_sizeX;
@@ -373,8 +380,8 @@ m_edgesMaskTexture(nullptr)
     m_chunkSizeX = 64;
     m_chunkSizeZ = 64;
     
-    m_chunkLODSizeX = 9;
-    m_chunkLODSizeZ = 9;
+    m_chunkLODSizeX = 65;
+    m_chunkLODSizeZ = 65;
     
     m_numChunksX = m_heightmapData->getSizeX() / m_chunkSizeX;
     m_numChunksZ = m_heightmapData->getSizeZ() / m_chunkSizeZ;
@@ -383,6 +390,7 @@ m_edgesMaskTexture(nullptr)
     m_chunkSizeZ++;
     
     m_chunksBounds.resize(m_numChunksX * m_numChunksZ);
+    m_chunksUsed.resize(m_numChunksX * m_numChunksZ);
     for(ui32 i = 0; i < m_numChunksX; ++i)
     {
         for(ui32 j = 0; j < m_numChunksZ; ++j)
@@ -392,7 +400,8 @@ m_edgesMaskTexture(nullptr)
             CHeightmapProcessor::createChunkBound(m_chunkSizeX, m_chunkSizeZ,
                                                   i, j,
                                                   &maxBound, &minBound);
-            m_chunksBounds[i + j * m_numChunksZ] = std::make_tuple(maxBound, minBound);
+            m_chunksBounds[i + j * m_numChunksX] = std::make_tuple(maxBound, minBound);
+            m_chunksUsed[i + j * m_numChunksX] = nullptr;
         }
     }
 }
@@ -432,6 +441,49 @@ ui32 CHeightmapProcessor::getChunkSizeX(ui32 i, ui32 j) const
 ui32 CHeightmapProcessor::getChunkSizeZ(ui32 i, ui32 j) const
 {
     return m_chunkLODSizeZ;
+}
+
+f32 CHeightmapProcessor::getHeight(const glm::vec3& position) const
+{
+    assert(m_heightmapData != nullptr);
+    assert(position.x < CHeightmapProcessor::getSizeX());
+    assert(position.z < CHeightmapProcessor::getSizeZ());
+    assert(position.x >= 0.0);
+    assert(position.z >= 0.0);
+    if(position.x < CHeightmapProcessor::getSizeX() &&
+       position.z < CHeightmapProcessor::getSizeZ() &&
+       position.x >= 0.0 &&
+       position.z >= 0.0)
+    {
+        return CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(position.x , 0.0, position.z));
+    }
+    return 0.0;
+}
+
+void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights)
+{
+    assert(m_heightmapData != nullptr);
+    for(ui32 i = 0; i < modifiedHeights.size(); ++i)
+    {
+        m_heightmapData->setVertexPosition(std::get<0>(modifiedHeights.at(i)),
+                                           std::get<1>(modifiedHeights.at(i)),
+                                           std::get<2>(modifiedHeights.at(i)));
+    }
+    
+    for(ui32 i = 0; i < CHeightmapProcessor::getNumChunksX(); ++i)
+    {
+        for(ui32 j = 0; j < CHeightmapProcessor::getNumChunksZ(); ++j)
+        {
+            ui32 index = i + j * CHeightmapProcessor::getNumChunksX();
+            if(m_chunksUsed.at(index) != nullptr)
+            {
+                CHeightmapProcessor::fillVertexBuffer(m_chunksUsed.at(index)->getVertexBuffer(),
+                                                      CHeightmapProcessor::getChunkSizeX(i, j),
+                                                      CHeightmapProcessor::getChunkSizeZ(i, j),
+                                                      i, j);
+            }
+        }
+    }
 }
 
 ui32 CHeightmapProcessor::createTextureId(void)
@@ -681,13 +733,14 @@ CSharedMesh CHeightmapProcessor::getChunk(ui32 i, ui32 j)
                                                                                                     i, j);
     m_processingOperationQueue.push(operation);
     m_uniqueProcessingOperations.insert(std::make_pair(std::make_tuple(i, j), operation));
-    
+    m_chunksUsed[i + j * m_numChunksX] = mesh;
     return mesh;
 }
 
 void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, ui32 i, ui32 j)
 {
     m_chunksUnused.push_back(chunk);
+    m_chunksUsed[i + j * m_numChunksX] = nullptr;
     const auto& iterator = m_uniqueProcessingOperations.find(std::make_tuple(i, j));
     if(iterator != m_uniqueProcessingOperations.end())
     {

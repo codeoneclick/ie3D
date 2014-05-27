@@ -24,7 +24,7 @@ protected:
     CSharedSkyBox m_skyBox;
     CSharedLandscape m_landscape;
     
-     std::vector<ISharedGameObject> colliders(void);
+    std::vector<ISharedGameObject> colliders(void);
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject);
     
 public:

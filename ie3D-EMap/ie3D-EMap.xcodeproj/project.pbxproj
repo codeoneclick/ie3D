@@ -1051,7 +1051,10 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = __OSX__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__OSX__,
+					__EDITOR__,
+				);
 				HEADER_SEARCH_PATHS = (
 					../../../../Qt5.2.1/5.2.1/clang_64/lib/QtWidgets.framework/Versions/5/Headers,
 					../../../../Qt5.2.1/5.2.1/clang_64/lib/QtGui.framework/Versions/5/Headers,
@@ -1085,7 +1088,10 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = __OSX__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__OSX__,
+					__EDITOR__,
+				);
 				HEADER_SEARCH_PATHS = (
 					../../../../Qt5.2.1/5.2.1/clang_64/lib/QtWidgets.framework/Versions/5/Headers,
 					../../../../Qt5.2.1/5.2.1/clang_64/lib/QtGui.framework/Versions/5/Headers,

@@ -22,8 +22,10 @@
 CLandscapeChunk::CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
                                  ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
-m_width(0),
-m_height(0),
+m_chunkSizeX(0),
+m_chunkSizeZ(0),
+m_heightmapSizeX(0),
+m_heightmapSizeZ(0),
 m_numIndexesToRender(0)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
@@ -39,6 +41,13 @@ m_numIndexesToRender(0)
         material->getShader()->setVector4(material->getClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+        
+        material->getShader()->setFloatCustom(static_cast<f32>(m_heightmapSizeX), "IN_HeightmapSizeX");
+        material->getShader()->setFloatCustom(static_cast<f32>(m_heightmapSizeZ), "IN_HeightmapSizeZ");
+        
+        material->getShader()->setFloatCustom(m_splattingTillingLayer_01, "IN_SplattingTillingLayer_01");
+        material->getShader()->setFloatCustom(m_splattingTillingLayer_02, "IN_SplattingTillingLayer_02");
+        material->getShader()->setFloatCustom(m_splattingTillingLayer_03, "IN_SplattingTillingLayer_03");
     };
 }
 
@@ -49,14 +58,28 @@ CLandscapeChunk::~CLandscapeChunk(void)
 }
 
 void CLandscapeChunk::setMesh(CSharedMeshRef mesh,
-             ui32 width,
-             ui32 height)
+                              ui32 chunkSizeX, ui32 chunkSizeZ,
+                              ui32 heightmapSizeX, ui32 heightmapSizeZ)
 {
     assert(m_mesh == nullptr);
     assert(mesh != nullptr);
+    
     m_mesh = mesh;
-    m_width = width;
-    m_height = height;
+    
+    m_chunkSizeX = chunkSizeX;
+    m_chunkSizeZ = chunkSizeZ;
+    
+    m_heightmapSizeX = heightmapSizeX;
+    m_heightmapSizeZ = heightmapSizeZ;
+}
+
+void CLandscapeChunk::setSplattingSettings(f32 splattingTillingLayer_01,
+                                           f32 splattingTillingLayer_02,
+                                           f32 splattingTillingLayer_03)
+{
+    m_splattingTillingLayer_01 = splattingTillingLayer_01;
+    m_splattingTillingLayer_02 = splattingTillingLayer_02;
+    m_splattingTillingLayer_03 = splattingTillingLayer_03;
 }
 
 void CLandscapeChunk::setSplattingDiffuseTexture(CSharedTextureRef texture)
@@ -110,7 +133,7 @@ void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuratio
                          m_mesh->getMaxBound(),
                          m_mesh->getMinBound(),
                          4,
-                         m_width);
+                         m_chunkSizeX);
     
 	IGameObject::listenRenderMgr(m_isNeedToRender);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;

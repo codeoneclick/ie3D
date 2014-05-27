@@ -82,7 +82,11 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         ui32 chunkSizeX = m_heightmapProcessor->getChunkSizeX(i, j);
                         ui32 chunkSizeZ = m_heightmapProcessor->getChunkSizeZ(i, j);
                         
-                        chunk->setMesh(mesh, chunkSizeX, chunkSizeZ);
+                        chunk->setMesh(mesh,
+                                       chunkSizeX, chunkSizeZ,
+                                       m_heightmapProcessor->getSizeX(),
+                                       m_heightmapProcessor->getSizeZ());
+                        chunk->setSplattingSettings(16.0, 8.0, 8.0);
                         chunk->onConfigurationLoaded(m_configuration, true);
                         
                         /*if(m_splattingDiffuseTexture != nullptr)
@@ -126,6 +130,7 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_isSplattingNormalTextureProcessed = false;
     
     m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_screenSpaceTextureAccessor, landscapeConfiguration);
+    IEditableLandscape::setHeightmapProcessor(m_heightmapProcessor);
     
     m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->PreprocessSplattingTexture());
     m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->PreprocessHeightmapTexture());

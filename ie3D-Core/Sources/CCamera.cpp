@@ -13,6 +13,7 @@ CCamera::CCamera(f32 _fov, f32 _near, f32 _far, glm::ivec4 _viewport) :
 m_fov(_fov),
 m_near(_near),
 m_far(_far),
+m_rotation(0.0),
 m_viewport(_viewport)
 {
     m_aspect = static_cast<f32>(_viewport.z) / static_cast<f32>(_viewport.w);
