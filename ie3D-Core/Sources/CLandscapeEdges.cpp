@@ -91,7 +91,7 @@ void CLandscapeEdges::onConfigurationLoaded(ISharedConfigurationRef configuratio
     SAttributeVertex* vertexData = vertexBuffer->lock();
     
     glm::vec3 minBound = glm::vec3(0.0f, m_heightBounds.x, 0.0f);
-    glm::vec3 maxBound = glm::vec3(m_width, m_heightBounds.y, m_height);
+    glm::vec3 maxBound = glm::vec3(m_width - 1.0, m_heightBounds.y, m_height - 1.0);
     
     vertexData[0].m_position = glm::vec3(minBound.x,  minBound.y, maxBound.z);
     vertexData[1].m_position = glm::vec3(maxBound.x,  minBound.y, maxBound.z);

@@ -53,7 +53,7 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 radius,
 	{
         for(i32 z = minIndZ; z < maxIndZ; z++)
         {
-            if((x <= 0) || (z <= 0) ||
+            if((x < 0) || (z < 0) ||
                x >= m_heightmapProcessor->getSizeX() ||
                z >= m_heightmapProcessor->getSizeZ())
                 continue;

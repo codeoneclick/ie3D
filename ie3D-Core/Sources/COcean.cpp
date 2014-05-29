@@ -63,9 +63,9 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     SAttributeVertex* vertexData = vertexBuffer->lock();
     
     vertexData[0].m_position = glm::vec3(0.0f,  m_altitude,  0.0f);
-    vertexData[1].m_position = glm::vec3(m_width, m_altitude,  0.0f);
-    vertexData[2].m_position = glm::vec3(m_width, m_altitude,  m_height);
-    vertexData[3].m_position = glm::vec3(0.0f,  m_altitude,  m_height);
+    vertexData[1].m_position = glm::vec3(m_width - 1.0, m_altitude,  0.0f);
+    vertexData[2].m_position = glm::vec3(m_width - 1.0, m_altitude,  m_height - 1.0);
+    vertexData[3].m_position = glm::vec3(0.0f,  m_altitude,  m_height - 1.0);
     
     m_textureTileFactor = 8.0f;
     

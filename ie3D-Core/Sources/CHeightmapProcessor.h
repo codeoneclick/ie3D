@@ -112,7 +112,7 @@ public:
     glm::u16vec2 getVertexTexcoord(ui32 i, ui32 j) const;
     glm::u8vec4 getVertexNormal(ui32 i, ui32 j) const;
     
-    void setVertexPosition(ui32 i, ui32 j, f32 value);
+    void updateVertexesData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertexes);
     
     ui32 getSizeX(void) const;
     ui32 getSizeZ(void) const;
@@ -153,7 +153,10 @@ protected:
     CSharedTexture m_splattingTexture;
     CSharedTexture m_diffuseTexture;
     CSharedTexture m_normalTexture;
+    
     CSharedTexture m_edgesMaskTexture;
+    ui32 m_edgesMaskTextureWidth;
+    ui32 m_edgesMaskTextureHeight;
     
     std::queue<CSharedHeightmapProcessingOperation> m_processingOperationQueue;
     std::map<std::tuple<ui32, ui32>, CSharedHeightmapProcessingOperation> m_uniqueProcessingOperations;
@@ -182,14 +185,21 @@ protected:
                           ui32 chunkOffsetX, ui32 chunkOffsetZ,
                           glm::vec3* maxBound, glm::vec3* minBound);
     
-    void fillVertexBuffer(CSharedVertexBufferRef vertexBuffer,
-                          ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
-                          ui32 chunkOffsetX, ui32 chunkOffsetZ);
+    void updateVertexBuffer(CSharedVertexBufferRef vertexBuffer,
+                            ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                            ui32 chunkOffsetX, ui32 chunkOffsetZ);
     
-    void fillIndexBuffer(CSharedIndexBufferRef indexBuffer,
-                         ui32 chunkLODSizeX, ui32 chunkLODSizeZ);
+    void updateIndexBuffer(CSharedIndexBufferRef indexBuffer,
+                           ui32 chunkLODSizeX, ui32 chunkLODSizeZ);
     
-    void _FillEdgesMaskTextureBlock(ui16* _data,ui32 _index, ui32 _edgesMaskWidth, ui32 _edgesMaskHeight, ui32 _textureBlockSize, const glm::vec3& _point, bool _reverse);
+    void updateSplattingTexture(CSharedTextureRef texture);
+    void updateHeightmapTexture(CSharedTextureRef texture);
+    void updateEdgeChunkMaskTexture(ui16* data, ui32 index,
+                                    ui32 edgesMaskWidth,
+                                    ui32 edgesMaskHeight,
+                                    ui32 textureEdgeSize,
+                                    const glm::vec3& point, bool isReverse);
+    void updateEdgesMaskTexture(CSharedTextureRef texture);
     
     ui32 createTextureId(void);
     
@@ -205,9 +215,9 @@ public:
     CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, ISharedConfigurationRef _template);
     ~CHeightmapProcessor(void);
 
-    std::shared_ptr<CTexture> PreprocessHeightmapTexture(void);
-    std::shared_ptr<CTexture> PreprocessSplattingTexture(void);
-    std::shared_ptr<CTexture> PreprocessEdgesMaskTexture(void);
+    CSharedTexture createHeightmapTexture(void);
+    CSharedTexture createSplattingTexture(void);
+    CSharedTexture createEdgesMaskTexture(void);
     std::shared_ptr<CTexture> PreprocessSplattingDiffuseTexture(const std::shared_ptr<CMaterial>& _material);
     std::shared_ptr<CTexture> PreprocessSplattingNormalTexture(const std::shared_ptr<CMaterial>& _material);
     

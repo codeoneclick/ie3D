@@ -132,9 +132,9 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_screenSpaceTextureAccessor, landscapeConfiguration);
     IEditableLandscape::setHeightmapProcessor(m_heightmapProcessor);
     
-    m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->PreprocessSplattingTexture());
-    m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->PreprocessHeightmapTexture());
-    m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->PreprocessEdgesMaskTexture());
+    m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->createSplattingTexture());
+    m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->createHeightmapTexture());
+    m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->createEdgesMaskTexture());
     
     CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingDiffuseMaterialConfiguration());
     m_splattingDiffuseMaterial = std::make_shared<CMaterial>();
