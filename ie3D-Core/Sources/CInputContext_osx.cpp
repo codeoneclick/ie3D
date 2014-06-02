@@ -25,43 +25,37 @@
 - (void)mouseDown:(NSEvent*)event
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, self.frame.size.height - point.y));
+    self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_LEFT);
 }
 
 - (void)rightMouseDown:(NSEvent *)event;
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, self.frame.size.height - point.y), true);
-}
-
-- (void)mouseMoved:(NSEvent *)event
-{
-    CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y));
+    self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_RIGHT);
 }
 
 - (void)mouseDragged:(NSEvent *)event;
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y));
+    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_LEFT);
 }
 
 - (void)rightMouseDragged:(NSEvent *)event;
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y));
+    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_RIGHT);
 }
 
 - (void)mouseUp:(NSEvent *)event;
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, self.frame.size.height - point.y));
+    self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_LEFT);
 }
 
 - (void)rightMouseUp:(NSEvent *)event;
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, self.frame.size.height - point.y), true);
+    self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_RIGHT);
 }
 
 @end

@@ -17,7 +17,8 @@
 #include "CMapDragController.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
-IScene(root)
+IScene(root),
+m_isLeftButtonPressed(false)
 {
     
 }
@@ -66,6 +67,7 @@ void CEditableScene::load(void)
                                                                glm::vec3(0.0, 0.0, 0.0),
                                                                glm::vec3(2048.0, 0.0, 2048.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);
+    m_root->addGestureRecognizerHandler(std::dynamic_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
 }
 
 void CEditableScene::update(f32 deltatime)
@@ -92,12 +94,32 @@ std::vector<ISharedGameObject> CEditableScene::colliders(void)
 void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef)
 {
     m_particles.at(0)->setPosition(position);
-    m_landscape->pressureHeightIn(position, 10.0, true);
+    
+    if(m_isLeftButtonPressed)
+    {
+        m_landscape->pressureHeightIn(position, 10.0, true);
+    }
+    
     /*std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(position);
     
     m_particles.push_back(particleEmitter);
     m_root->InsertParticleEmitter(particleEmitter);
     std::cout<<"x: "<<position.x<<", y: "<<position.y<<", z: "<<position.z<<std::endl;*/
+}
+
+void CEditableScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTON inputButton)
+{
+    m_isLeftButtonPressed = inputButton == E_INPUT_BUTTON_MOUSE_LEFT;
+}
+
+void CEditableScene::onGestureRecognizerMoved(const glm::ivec2&, E_INPUT_BUTTON inputButton)
+{
+    m_isLeftButtonPressed = inputButton == E_INPUT_BUTTON_MOUSE_LEFT;
+}
+
+void CEditableScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
+{
+    m_isLeftButtonPressed = false;
 }
 

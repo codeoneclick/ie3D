@@ -30,16 +30,16 @@ CMapDragController::~CMapDragController(void)
     
 }
 
-void CMapDragController::onGestureRecognizerPressed(const glm::ivec2& point, bool isRightButton)
+void CMapDragController::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
-    if(isRightButton)
+    if(inputButton == E_INPUT_BUTTON_MOUSE_RIGHT)
     {
         m_isPressed = true;
         CCollisionMgr::isIntersected(m_camera, point, &m_positionStarting);
     }
 }
 
-void CMapDragController::onGestureRecognizerMoved(const glm::ivec2& point)
+void CMapDragController::onGestureRecognizerMoved(const glm::ivec2& point, E_INPUT_BUTTON)
 {
     glm::vec3 position;
     if(CCollisionMgr::isIntersected(m_camera, point, &position) && m_isPressed)
@@ -52,9 +52,9 @@ void CMapDragController::onGestureRecognizerMoved(const glm::ivec2& point)
     }
 }
 
-void CMapDragController::onGestureRecognizerReleased(const glm::ivec2&, bool isRightButton)
+void CMapDragController::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON inputButton)
 {
-    if(isRightButton)
+    if(inputButton == E_INPUT_BUTTON_MOUSE_RIGHT)
     {
         m_isPressed = false;
     }

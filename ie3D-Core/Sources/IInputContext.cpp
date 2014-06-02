@@ -72,24 +72,24 @@ IInputContext::~IInputContext(void)
     m_handlers.clear();
 }
 
-void IInputContext::gestureRecognizerPressed(const glm::ivec2& point, bool isRightButton)
+void IInputContext::gestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
-    std::for_each(m_handlers.begin(), m_handlers.end(), [point, isRightButton](ISharedGestureRecognizerHandler handler) {
-        handler->onGestureRecognizerPressed(point, isRightButton);
+    std::for_each(m_handlers.begin(), m_handlers.end(), [point, inputButton](ISharedGestureRecognizerHandler handler) {
+        handler->onGestureRecognizerPressed(point, inputButton);
     });
 }
 
-void IInputContext::gestureRecognizerMoved(const glm::ivec2& point)
+void IInputContext::gestureRecognizerMoved(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
-    std::for_each(m_handlers.begin(), m_handlers.end(), [point](ISharedGestureRecognizerHandler handler) {
-        handler->onGestureRecognizerMoved(point);
+    std::for_each(m_handlers.begin(), m_handlers.end(), [point, inputButton](ISharedGestureRecognizerHandler handler) {
+        handler->onGestureRecognizerMoved(point, inputButton);
     });
 }
 
-void IInputContext::gestureRecognizerReleased(const glm::ivec2& point, bool isRightButton)
+void IInputContext::gestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
-    std::for_each(m_handlers.begin(), m_handlers.end(), [point, isRightButton](ISharedGestureRecognizerHandler handler) {
-        handler->onGestureRecognizerReleased(point, isRightButton);
+    std::for_each(m_handlers.begin(), m_handlers.end(), [point, inputButton](ISharedGestureRecognizerHandler handler) {
+        handler->onGestureRecognizerReleased(point, inputButton);
     });
 }
 

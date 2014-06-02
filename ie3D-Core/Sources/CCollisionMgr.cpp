@@ -40,7 +40,7 @@ void CCollisionMgr::removeCollisionHandler(ISharedCollisionHandlerRef handler)
     m_handlers.erase(handler);
 }
 
-void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, bool isRightButton)
+void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
     assert(m_camera != nullptr);
     glm::vec3 origin, direction;
@@ -70,12 +70,12 @@ void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, bool isR
     }
 }
 
-void CCollisionMgr::onGestureRecognizerMoved(const glm::ivec2& point)
+void CCollisionMgr::onGestureRecognizerMoved(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
     
 }
 
-void CCollisionMgr::onGestureRecognizerReleased(const glm::ivec2& point, bool isRightButton)
+void CCollisionMgr::onGestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
     
 }

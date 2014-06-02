@@ -30,9 +30,9 @@ protected:
     bool m_isPressed;
     f32 m_dragSpeed;
     
-    void onGestureRecognizerPressed(const glm::ivec2& point, bool isRightButton = false);
-    void onGestureRecognizerMoved(const glm::ivec2& point);
-    void onGestureRecognizerReleased(const glm::ivec2& point, bool isRightButton = false);
+    void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
+    void onGestureRecognizerMoved(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
+    void onGestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     
 public:
     

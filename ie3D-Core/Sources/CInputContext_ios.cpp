@@ -27,7 +27,7 @@
     for (UITouch* touch in touches)
     {
         CGPoint point = [touch locationInView:self];
-        self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, point.y));
+        self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, point.y), E_INPUT_BUTTON_MOUSE_LEFT);
     }
 }
 
@@ -37,7 +37,7 @@
     for (UITouch* touch in touches)
     {
         CGPoint point = [touch locationInView:self];
-        self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, point.y));
+        self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, point.y), E_INPUT_BUTTON_MOUSE_LEFT);
     }
 }
 
@@ -47,7 +47,7 @@
     for (UITouch* touch in touches)
     {
         CGPoint point = [touch locationInView:self];
-        self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, point.y));
+        self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, point.y), E_INPUT_BUTTON_MOUSE_LEFT);
     }
 }
 
@@ -57,7 +57,7 @@
     for (UITouch* touch in touches)
     {
         CGPoint point = [touch locationInView:self];
-        self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, point.y));
+        self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, point.y), E_INPUT_BUTTON_MOUSE_LEFT);
     }
 }
 

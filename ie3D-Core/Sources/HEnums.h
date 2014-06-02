@@ -9,6 +9,12 @@
 #ifndef HEnums_h
 #define HEnums_h
 
+enum E_INPUT_BUTTON
+{
+    E_INPUT_BUTTON_MOUSE_LEFT = 0,
+    E_INPUT_BUTTON_MOUSE_RIGHT
+};
+
 enum E_PLATFORM_API
 {
     E_PLATFORM_API_IOS = 0,
