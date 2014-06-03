@@ -36,7 +36,6 @@ void CSkyBox::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::setPosition(m_camera->Get_Position());
         IGameObject::onSceneUpdate(deltatime);
     }
 }
@@ -176,6 +175,9 @@ void CSkyBox::onDraw(const std::string& mode)
     {
         assert(m_camera != nullptr);
         assert(m_materials.find(mode) != m_materials.end());
+        
+        IGameObject::setPosition(m_camera->Get_Position());
+        m_matrixWorld = m_matrixTranslation * m_matrixRotation * m_matrixScale;
         
         std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
         assert(material->getShader() != nullptr);

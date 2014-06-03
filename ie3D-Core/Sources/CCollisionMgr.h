@@ -24,7 +24,7 @@ protected:
     ICollisionHandler(void) = default;
     
     virtual std::vector<ISharedGameObject> colliders(void) = 0;
-    virtual void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject) = 0;
+    virtual void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton) = 0;
     
 public:
     

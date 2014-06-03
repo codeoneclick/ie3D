@@ -12,8 +12,8 @@
         <material filename="material.landscape.refraction.xml"/>
 	</materials>
     <edges
-        size_x="-16.0"
-        size_y="16.0">
+        size_x="-64.0"
+        size_y="64.0">
         <edges_materials>
             <material filename="material.landscape.edges.base.xml"/>
             <material filename="material.landscape.edges.reflection.xml"/>

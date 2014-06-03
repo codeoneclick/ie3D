@@ -1,5 +1,4 @@
 varying highp vec2 OUT_TexCoord;
-varying highp vec2 OUT_BTexCoord[5];
 uniform sampler2D  SAMPLER_01;
 
 void main()

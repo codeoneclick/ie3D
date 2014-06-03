@@ -144,11 +144,11 @@ public:
 class CHeightmapProcessor
 {
 private:
-
+    
 protected:
-
+    
     std::shared_ptr<CHeightmapData> m_heightmapData;
-
+    
     CSharedTexture m_heightmapTexture;
     CSharedTexture m_splattingTexture;
     CSharedTexture m_diffuseTexture;
@@ -160,7 +160,7 @@ protected:
     
     std::queue<CSharedHeightmapProcessingOperation> m_processingOperationQueue;
     std::map<std::tuple<ui32, ui32>, CSharedHeightmapProcessingOperation> m_uniqueProcessingOperations;
-
+    
     ui32 m_chunkSizeX;
     ui32 m_chunkSizeZ;
     ui32 m_chunkLODSizeX;
@@ -214,7 +214,7 @@ public:
     
     CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& _screenSpaceTextureAccessor, ISharedConfigurationRef _template);
     ~CHeightmapProcessor(void);
-
+    
     CSharedTexture createHeightmapTexture(void);
     CSharedTexture createSplattingTexture(void);
     CSharedTexture createEdgesMaskTexture(void);
@@ -229,7 +229,7 @@ public:
     ui32 getSizeZ(void) const;
     
     void update(void);
-
+    
     CSharedMesh getChunk(ui32 i, ui32 j);
     void freeChunk(CSharedMeshRef chunk, ui32 i, ui32 j);
     
@@ -255,7 +255,7 @@ public:
         assert(m_splattingTexture != nullptr);
         return m_splattingTexture;
     };
-
+    
     inline std::shared_ptr<CTexture> Get_DiffuseTexture(void)
     {
         assert(m_diffuseTexture != nullptr);
@@ -267,7 +267,7 @@ public:
         assert(m_normalTexture != nullptr);
         return m_normalTexture;
     };
-
+    
     inline std::shared_ptr<CTexture> Get_EdgesMaskTexture(void)
     {
         assert(m_edgesMaskTexture != nullptr);

@@ -391,7 +391,7 @@ void CShader::setupUniforms(void)
     
     for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
     {
-        m_values[i] = nullptr;
+        m_cachedUniformValues[i] = nullptr;
     }
 }
 
@@ -420,22 +420,39 @@ const i32* CShader::getAttributesRef(void) const
     return m_attributes;
 }
 
+i32 CShader::getCustomUniform(const std::string& uniform)
+{
+    i32 handle = -1;
+    const auto iterator = m_customUniforms.find(uniform);
+    if(iterator != m_customUniforms.end())
+    {
+        handle = iterator->second;
+    }
+    else
+    {
+        handle = glGetUniformLocation(m_shaderId, uniform.c_str());
+        m_customUniforms.insert(std::make_pair(uniform, handle));
+    }
+    //assert(handle != -1);
+    return handle;
+}
+
 void CShader::setMatrix3x3(const glm::mat3x3 &matrix, E_SHADER_UNIFORM uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        if(m_values[uniform] != nullptr && m_values[uniform]->getMatrix3x3() == matrix)
+        if(m_cachedUniformValues[uniform] != nullptr && m_cachedUniformValues[uniform]->getMatrix3x3() == matrix)
         {
             return;
         }
-        else if(m_values[uniform] == nullptr)
+        else if(m_cachedUniformValues[uniform] == nullptr)
         {
-            m_values[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_MAT3X3);
+            m_cachedUniformValues[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_MAT3X3);
         }
         
         i32 handle = m_uniforms[uniform];
         glUniformMatrix3fv(handle, 1, 0, &matrix[0][0]);
-        m_values[uniform]->setMatrix3x3(matrix);
+        m_cachedUniformValues[uniform]->setMatrix3x3(matrix);
     }
 }
 
@@ -443,8 +460,7 @@ void CShader::setMatrix3x3Custom(const glm::mat3x3 &matrix, const std::string &u
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
-        glUniformMatrix3fv(handle, 1, 0, &matrix[0][0]);
+        glUniformMatrix3fv(CShader::getCustomUniform(uniform), 1, 0, &matrix[0][0]);
     }
 }
 
@@ -452,18 +468,18 @@ void CShader::setMatrix4x4(const glm::mat4x4 &matrix, E_SHADER_UNIFORM uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        if(m_values[uniform] != nullptr && m_values[uniform]->getMatrix4x4() == matrix)
+        if(m_cachedUniformValues[uniform] != nullptr && m_cachedUniformValues[uniform]->getMatrix4x4() == matrix)
         {
             return;
         }
-        else if(m_values[uniform] == nullptr)
+        else if(m_cachedUniformValues[uniform] == nullptr)
         {
-            m_values[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_MAT4X4);
+            m_cachedUniformValues[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_MAT4X4);
         }
 
         i32 handle = m_uniforms[uniform];
         glUniformMatrix4fv(handle, 1, 0, &matrix[0][0]);
-        m_values[uniform]->setMatrix4x4(matrix);
+        m_cachedUniformValues[uniform]->setMatrix4x4(matrix);
     }
 }
 
@@ -471,8 +487,7 @@ void CShader::setMatrix4x4Custom(const glm::mat4x4 &matrix, const std::string &u
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
-        glUniformMatrix4fv(handle, 1, 0, &matrix[0][0]);
+        glUniformMatrix4fv(CShader::getCustomUniform(uniform), 1, 0, &matrix[0][0]);
     }
 }
 
@@ -489,8 +504,7 @@ void CShader::setMatrixArray4x4Custom(const glm::mat4x4* matrix, ui32 size, cons
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
-        glUniformMatrix4fv(handle, size, 0, &matrix[0][0][0]);
+        glUniformMatrix4fv(CShader::getCustomUniform(uniform), size, 0, &matrix[0][0][0]);
     }
 }
 
@@ -498,18 +512,18 @@ void CShader::setVector2(const glm::vec2 &vector, E_SHADER_UNIFORM uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        if(m_values[uniform] != nullptr && m_values[uniform]->getVector2() == vector)
+        if(m_cachedUniformValues[uniform] != nullptr && m_cachedUniformValues[uniform]->getVector2() == vector)
         {
             return;
         }
-        else if(m_values[uniform] == nullptr)
+        else if(m_cachedUniformValues[uniform] == nullptr)
         {
-            m_values[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR2);
+            m_cachedUniformValues[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR2);
         }
         
         i32 handle = m_uniforms[uniform];
         glUniform2fv(handle, 1, &vector[0]);
-        m_values[uniform]->setVector2(vector);
+        m_cachedUniformValues[uniform]->setVector2(vector);
     }
 }
 
@@ -517,8 +531,7 @@ void CShader::setVector2Custom(const glm::vec2 &vector, const std::string &unifo
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
-        glUniform2fv(handle, 1, &vector[0]);
+        glUniform2fv(CShader::getCustomUniform(uniform), 1, &vector[0]);
     }
 }
 
@@ -526,18 +539,18 @@ void CShader::setVector3(const glm::vec3 &vector, E_SHADER_UNIFORM uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        if(m_values[uniform] != nullptr && m_values[uniform]->getVector3() == vector)
+        if(m_cachedUniformValues[uniform] != nullptr && m_cachedUniformValues[uniform]->getVector3() == vector)
         {
             return;
         }
-        else if(m_values[uniform] == nullptr)
+        else if(m_cachedUniformValues[uniform] == nullptr)
         {
-            m_values[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR3);
+            m_cachedUniformValues[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR3);
         }
         
         i32 handle = m_uniforms[uniform];
         glUniform3fv(handle, 1, &vector[0]);
-        m_values[uniform]->setVector3(vector);
+        m_cachedUniformValues[uniform]->setVector3(vector);
     }
 }
 
@@ -545,8 +558,7 @@ void CShader::setVector3Custom(const glm::vec3 &vector, const std::string &unifo
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
-        glUniform3fv(handle, 1, &vector[0]);
+        glUniform3fv(CShader::getCustomUniform(uniform), 1, &vector[0]);
     }
 }
 
@@ -554,18 +566,18 @@ void CShader::setVector4(const glm::vec4 &vector, E_SHADER_UNIFORM uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        if(m_values[uniform] != nullptr && m_values[uniform]->getVector4() == vector)
+        if(m_cachedUniformValues[uniform] != nullptr && m_cachedUniformValues[uniform]->getVector4() == vector)
         {
             return;
         }
-        else if(m_values[uniform] == nullptr)
+        else if(m_cachedUniformValues[uniform] == nullptr)
         {
-            m_values[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR4);
+            m_cachedUniformValues[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR4);
         }
 
         i32 handle = m_uniforms[uniform];
         glUniform4fv(handle, 1, &vector[0]);
-        m_values[uniform]->setVector4(vector);
+        m_cachedUniformValues[uniform]->setVector4(vector);
     }
 }
 
@@ -573,8 +585,7 @@ void CShader::setVector4Custom(const glm::vec4 &vector, const std::string &unifo
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
-        glUniform4fv(handle, 1, &vector[0]);
+        glUniform4fv(CShader::getCustomUniform(uniform), 1, &vector[0]);
     }
 }
 
@@ -582,18 +593,18 @@ void CShader::setFloat(f32 value, E_SHADER_UNIFORM uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        if(m_values[uniform] != nullptr && m_values[uniform]->getFloat() == value)
+        if(m_cachedUniformValues[uniform] != nullptr && m_cachedUniformValues[uniform]->getFloat() == value)
         {
             return;
         }
-        else if(m_values[uniform] == nullptr)
+        else if(m_cachedUniformValues[uniform] == nullptr)
         {
-            m_values[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_FLOAT);
+            m_cachedUniformValues[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_FLOAT);
         }
 
         i32 handle = m_uniforms[uniform];
         glUniform1f(handle, value);
-        m_values[uniform]->setFloat(value);
+        m_cachedUniformValues[uniform]->setFloat(value);
     }
 }
 
@@ -601,8 +612,7 @@ void CShader::setFloatCustom(f32 value, const std::string &uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
-        glUniform1f(handle, value);
+        glUniform1f(CShader::getCustomUniform(uniform), value);
     }
 }
 
@@ -610,18 +620,18 @@ void CShader::setInt(i32 value, E_SHADER_UNIFORM uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        if(m_values[uniform] != nullptr && m_values[uniform]->getInt() == value)
+        if(m_cachedUniformValues[uniform] != nullptr && m_cachedUniformValues[uniform]->getInt() == value)
         {
             return;
         }
-        else if(m_values[uniform] == nullptr)
+        else if(m_cachedUniformValues[uniform] == nullptr)
         {
-            m_values[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_INT);
+            m_cachedUniformValues[uniform] = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_INT);
         }
         
         i32 handle = m_uniforms[uniform];
         glUniform1i(handle, value);
-        m_values[uniform]->setInt(value);
+        m_cachedUniformValues[uniform]->setInt(value);
     }
 }
 
@@ -629,8 +639,7 @@ void CShader::setIntCustom(i32 value, const std::string &uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        i32 handle = glGetUniformLocation(m_shaderId, uniform.c_str());
-        glUniform1i(handle, value);
+        glUniform1i(CShader::getCustomUniform(uniform), value);
     }
 }
 

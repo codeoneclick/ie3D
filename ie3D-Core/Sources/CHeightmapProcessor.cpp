@@ -436,8 +436,8 @@ m_edgesMaskTextureHeight(2048)
     m_chunkSizeX = 64;
     m_chunkSizeZ = 64;
     
-    m_chunkLODSizeX = 65;
-    m_chunkLODSizeZ = 65;
+    m_chunkLODSizeX = 17;
+    m_chunkLODSizeZ = 17;
     
     m_numChunksX = m_heightmapData->getSizeX() / m_chunkSizeX;
     m_numChunksZ = m_heightmapData->getSizeZ() / m_chunkSizeZ;
@@ -648,14 +648,14 @@ void CHeightmapProcessor::updateEdgeChunkMaskTexture(ui16* data, ui32 index,
 {
     for(ui32 j = 0; j < edgesMaskHeight / 4; ++j)
     {
-        f32 currentEdgeHeight = (static_cast<f32>(j) - static_cast<f32>(edgesMaskHeight / 8.0)) / 16.0;
+        f32 currentEdgeHeight = (static_cast<f32>(j) - static_cast<f32>(edgesMaskHeight / 8.0)) / 4.0;
         f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, point);
         
         ui32 indexOffset = isReverse == true ? (edgesMaskWidth - 1) - index + j * edgesMaskWidth + textureEdgeSize : index + j * edgesMaskWidth + textureEdgeSize;
         data[indexOffset] = TO_RGBA4444(0, 0, 0, 0);
         if(currentEdgeHeight < height && currentEdgeHeight > 0.0)
         {
-            data[indexOffset] = TO_RGBA4444(255, 0, 0, 255);
+            data[indexOffset] = TO_RGBA4444(255, 0, 0, 0);
         }
         else
         {

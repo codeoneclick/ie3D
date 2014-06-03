@@ -33,9 +33,9 @@ CDemoGameScene::~CDemoGameScene(void)
 void CDemoGameScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->CreateCamera(90.0f,
-                                    0.1f,
-                                    1024.0f,
+    m_camera = m_root->CreateCamera(45.0,
+                                    0.1,
+                                    1024.0,
                                     glm::ivec4(0, 0,
                                                m_root->getWindowWidth(),
                                                m_root->getWindowHeight()));

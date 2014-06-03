@@ -59,6 +59,8 @@ public:
     CSharedTexture getTexture(void) const;
 };
 
+#define k_MAX_CACHED_UNIFORM_VALUES 512
+
 class CShaderData : public IResourceData
 {
 private:
@@ -99,17 +101,19 @@ protected:
     i32 m_uniforms[E_SHADER_UNIFORM_MAX];
     i32 m_samplers[E_SHADER_SAMPLER_MAX];
     i32 m_attributes[E_SHADER_ATTRIBUTE_MAX];
+    std::unordered_map<std::string, i32> m_customUniforms;
     
     CSharedShaderData m_shaderData;
     ui32 m_shaderId;
     
-    std::array<CSharedShaderUniform, E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX> m_values;
+    std::array<CSharedShaderUniform, k_MAX_CACHED_UNIFORM_VALUES> m_cachedUniformValues;
     
     void onResourceDataSerializationFinished(ISharedResourceDataRef resourceData);
     
     void onResourceDataCommitFinished(ISharedResourceDataRef resourceData);
     
     void setupUniforms(void);
+    i32 getCustomUniform(const std::string& uniform);
     
 public:
     

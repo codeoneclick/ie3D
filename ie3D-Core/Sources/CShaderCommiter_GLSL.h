@@ -19,6 +19,8 @@ protected:
     
     std::string m_vsSourceCode;
     std::string m_fsSourceCode;
+    std::string m_vsFilename;
+    std::string m_fsFilename;
     std::string m_message;
     
     ui32 compile(const std::string& sourceCode, GLenum shaderType);
@@ -27,6 +29,8 @@ protected:
 public:
     
     CShaderCommiter_GLSL(const std::string& guid,
+                         const std::string& vsFilename,
+                         const std::string& fsFilename,
                          const std::string& vsSourceCode,
                          const std::string& fsSourceCode,
                          ISharedResourceRef resource);

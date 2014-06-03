@@ -117,12 +117,12 @@
 		21B08DC21920CD0900C5D5CC /* ocean.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean.normal.pvr; sourceTree = "<group>"; };
 		21B08DC31920CD0900C5D5CC /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.01.pvr; sourceTree = "<group>"; };
 		21B08DC41920CD0900C5D5CC /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = particle.emitter.02.pvr; sourceTree = "<group>"; };
-		21B08DC51920CD0900C5D5CC /* xneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = xneg.pvr; sourceTree = "<group>"; };
-		21B08DC61920CD0900C5D5CC /* xpos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = xpos.pvr; sourceTree = "<group>"; };
-		21B08DC71920CD0900C5D5CC /* yneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = yneg.pvr; sourceTree = "<group>"; };
-		21B08DC81920CD0900C5D5CC /* ypos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = ypos.pvr; sourceTree = "<group>"; };
-		21B08DC91920CD0900C5D5CC /* zneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = zneg.pvr; sourceTree = "<group>"; };
-		21B08DCA1920CD0900C5D5CC /* zpos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = zpos.pvr; sourceTree = "<group>"; };
+		21B08DC51920CD0900C5D5CC /* xneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = xneg.pvr; path = "../ie3D-Bundle/Textures/xneg.pvr"; sourceTree = SOURCE_ROOT; };
+		21B08DC61920CD0900C5D5CC /* xpos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = xpos.pvr; path = "../ie3D-Bundle/Textures/xpos.pvr"; sourceTree = SOURCE_ROOT; };
+		21B08DC71920CD0900C5D5CC /* yneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = yneg.pvr; path = "../ie3D-Bundle/Textures/yneg.pvr"; sourceTree = SOURCE_ROOT; };
+		21B08DC81920CD0900C5D5CC /* ypos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = ypos.pvr; path = "../ie3D-Bundle/Textures/ypos.pvr"; sourceTree = SOURCE_ROOT; };
+		21B08DC91920CD0900C5D5CC /* zneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = zneg.pvr; path = "../ie3D-Bundle/Textures/zneg.pvr"; sourceTree = SOURCE_ROOT; };
+		21B08DCA1920CD0900C5D5CC /* zpos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = zpos.pvr; path = "../ie3D-Bundle/Textures/zpos.pvr"; sourceTree = SOURCE_ROOT; };
 		21B08E0F1922527400C5D5CC /* material.landscape.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.base.xml; path = "../ie3D-Bundle/Configurations/material.landscape.base.xml"; sourceTree = SOURCE_ROOT; };
 		21B08E101922527400C5D5CC /* material.landscape.edges.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.edges.base.xml; path = "../ie3D-Bundle/Configurations/material.landscape.edges.base.xml"; sourceTree = SOURCE_ROOT; };
 		21B08E111922527400C5D5CC /* material.landscape.edges.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.edges.reflection.xml; path = "../ie3D-Bundle/Configurations/material.landscape.edges.reflection.xml"; sourceTree = SOURCE_ROOT; };

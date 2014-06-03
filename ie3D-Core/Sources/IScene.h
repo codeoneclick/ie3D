@@ -33,7 +33,7 @@ protected:
     std::vector<ISharedGameObject> m_colliders;
     
     virtual std::vector<ISharedGameObject> colliders(void);
-    virtual void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject);
+    virtual void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);
     
 public:
     

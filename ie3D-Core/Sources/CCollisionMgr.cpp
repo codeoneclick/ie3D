@@ -64,7 +64,7 @@ void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_
                                              direction,
                                              &point))
             {
-                handler->onCollision(point, collider);
+                handler->onCollision(point, collider, inputButton);
             }
         }
     }
