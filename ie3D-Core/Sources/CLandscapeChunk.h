@@ -11,6 +11,7 @@
 
 #include "IGameObject.h"
 #include "HDeclaration.h"
+#include "HEnums.h"
 
 class CLandscapeChunk : public IGameObject
 {
@@ -24,12 +25,22 @@ private:
     ui32 m_heightmapSizeX;
     ui32 m_heightmapSizeZ;
     
-    f32 m_splattingTillingLayer_01;
-    f32 m_splattingTillingLayer_02;
-    f32 m_splattingTillingLayer_03;
+    f32 m_fogLinearStart;
+    f32 m_fogLinearEnd;
+    
+    f32 m_splattingTillingFactor;
     
     ui32 m_numIndexesToRender;
     CSharedQuadTree m_quadTree;
+    
+    CSharedTexture m_diffuseTextureLayer_01;
+    CSharedTexture m_diffuseTextureLayer_02;
+    CSharedTexture m_diffuseTextureLayer_03;
+    
+    CSharedTexture m_prerenderedSplattingDiffuseTexture;
+    CSharedTexture m_prerenderedSplattingNormalTexture;
+    
+    E_LANDSCAPE_DETAIL_LEVEL m_detailLevel;
     
 protected:
     
@@ -37,12 +48,16 @@ protected:
                  ui32 chunkSizeX, ui32 chunkSizeZ,
                  ui32 heightmapSizeX, ui32 heightmapSizeZ);
     
-    void setSplattingSettings(f32 splattingTillingLayer_01,
-                              f32 splattingTillingLayer_02,
-                              f32 splattingTillingLayer_03);
+    void setSplattingSettings(f32 splattingTillingFactor,
+                              E_LANDSCAPE_DETAIL_LEVEL detailLevel);
     
-    void setSplattingDiffuseTexture(CSharedTextureRef texture);
-    void setSplattingNormalTexture(CSharedTextureRef texture);
+    void setPrerenderedSplattingDiffuseTexture(CSharedTextureRef texture);
+    void setPrerenderedSplattingNormalTexture(CSharedTextureRef texture);
+    
+    void setDiffuseTextureLayer_01(CSharedTextureRef texture);
+    void setDiffuseTextureLayer_02(CSharedTextureRef texture);
+    void setDiffuseTextureLayer_03(CSharedTextureRef texture);
+    
     void setSplattinMaskTexture(CSharedTextureRef texture);
     
     void onSceneUpdate(f32 deltatime);

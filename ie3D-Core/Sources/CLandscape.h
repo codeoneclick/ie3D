@@ -26,17 +26,17 @@ private:
     CSharedLandscapeEdges m_edges;
     ISharedConfiguration m_configuration;
     
-    CSharedTexture m_splattingDiffuseTexture;
-    CSharedTexture m_splattingNormalTexture;
+    CSharedTexture m_prerenderedSplattingDiffuseTexture;
+    CSharedTexture m_prerenderedSplattingNormalTexture;
     
     CSharedMaterial m_splattingDiffuseMaterial;
     CSharedMaterial m_splattingNormalMaterial;
     
-    bool m_isSplattingDiffuseTextureProcessed;
-    bool m_isSplattingNormalTextureProcessed;
+    bool m_isSplattingDiffuseTexturePrerendered;
+    bool m_isSplattingNormalTexturePrerendered;
     
-    void processSplattingDiffuseTexture(void);
-    void processSplattingNormalTexture(void);
+    void prerenderSplattingDiffuseTexture(void);
+    void prerenderSplattingNormalTexture(void);
     
 protected:
 

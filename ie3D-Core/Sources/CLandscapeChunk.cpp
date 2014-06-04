@@ -26,7 +26,8 @@ m_chunkSizeX(0),
 m_chunkSizeZ(0),
 m_heightmapSizeX(0),
 m_heightmapSizeZ(0),
-m_numIndexesToRender(0)
+m_numIndexesToRender(0),
+m_detailLevel(E_LANDSCAPE_DETAIL_LEVEL_PRERENDERED)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
     
@@ -34,7 +35,8 @@ m_numIndexesToRender(0)
     {
         material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(),
+                                            E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         
         material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
@@ -42,12 +44,41 @@ m_numIndexesToRender(0)
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
-        material->getShader()->setFloatCustom(static_cast<f32>(m_heightmapSizeX), "IN_HeightmapSizeX");
-        material->getShader()->setFloatCustom(static_cast<f32>(m_heightmapSizeZ), "IN_HeightmapSizeZ");
+        switch (m_detailLevel)
+        {
+            case E_LANDSCAPE_DETAIL_LEVEL_PRERENDERED:
+            {
+                material->getShader()->setTexture(m_prerenderedSplattingDiffuseTexture, E_SHADER_SAMPLER_01);
+                material->getShader()->setTexture(m_prerenderedSplattingNormalTexture, E_SHADER_SAMPLER_02);
+                material->getShader()->setFloatCustom(0.0, "IN_LandscapeDetailLevel");
+            }
+                break;
+            case E_LANDSCAPE_DETAIL_LEVEL_SPLATTING:
+            {
+                material->getShader()->setTexture(m_diffuseTextureLayer_01, E_SHADER_SAMPLER_01);
+                material->getShader()->setTexture(m_diffuseTextureLayer_02, E_SHADER_SAMPLER_02);
+                material->getShader()->setTexture(m_diffuseTextureLayer_03, E_SHADER_SAMPLER_03);
+                material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSizeX, m_heightmapSizeZ) / m_splattingTillingFactor,
+                                                      "IN_SplattingTillingFactor");
+                material->getShader()->setFloatCustom(1.0, "IN_LandscapeDetailLevel");
+            }
+                break;
+            case E_LANDSCAPE_DETAIL_LEVEL_TRIPLANAR_SPLATTING:
+            {
+                material->getShader()->setTexture(m_diffuseTextureLayer_01, E_SHADER_SAMPLER_01);
+                material->getShader()->setTexture(m_diffuseTextureLayer_02, E_SHADER_SAMPLER_02);
+                material->getShader()->setTexture(m_diffuseTextureLayer_03, E_SHADER_SAMPLER_03);
+                material->getShader()->setFloatCustom(m_splattingTillingFactor, "IN_SplattingTillingFactor");
+                material->getShader()->setFloatCustom(2.0, "IN_LandscapeDetailLevel");
+            }
+                break;
+                
+            default:
+                break;
+        }
         
-        material->getShader()->setFloatCustom(m_splattingTillingLayer_01, "IN_SplattingTillingLayer_01");
-        material->getShader()->setFloatCustom(m_splattingTillingLayer_02, "IN_SplattingTillingLayer_02");
-        material->getShader()->setFloatCustom(m_splattingTillingLayer_03, "IN_SplattingTillingLayer_03");
+        material->getShader()->setFloatCustom(192.0, "IN_fogLinearStart");
+        material->getShader()->setFloatCustom(396.0, "IN_fogLinearEnd");
     };
 }
 
@@ -73,29 +104,36 @@ void CLandscapeChunk::setMesh(CSharedMeshRef mesh,
     m_heightmapSizeZ = heightmapSizeZ;
 }
 
-void CLandscapeChunk::setSplattingSettings(f32 splattingTillingLayer_01,
-                                           f32 splattingTillingLayer_02,
-                                           f32 splattingTillingLayer_03)
+void CLandscapeChunk::setSplattingSettings(f32 splattingTillingFactor,
+                                           E_LANDSCAPE_DETAIL_LEVEL detailLevel)
 {
-    m_splattingTillingLayer_01 = splattingTillingLayer_01;
-    m_splattingTillingLayer_02 = splattingTillingLayer_02;
-    m_splattingTillingLayer_03 = splattingTillingLayer_03;
+    m_splattingTillingFactor = splattingTillingFactor;
+    m_detailLevel = detailLevel;
 }
 
-void CLandscapeChunk::setSplattingDiffuseTexture(CSharedTextureRef texture)
+void CLandscapeChunk::setPrerenderedSplattingDiffuseTexture(CSharedTextureRef texture)
 {
-    /*for(const auto& material : m_materials)
-    {
-        material.second->setTexture(texture, E_SHADER_SAMPLER_01);
-    }*/
+    m_prerenderedSplattingDiffuseTexture = texture;
 }
 
-void CLandscapeChunk::setSplattingNormalTexture(CSharedTextureRef texture)
+void CLandscapeChunk::setPrerenderedSplattingNormalTexture(CSharedTextureRef texture)
 {
-    /*for(const auto& material : m_materials)
-    {
-        material.second->setTexture(texture, E_SHADER_SAMPLER_02);
-    }*/
+    m_prerenderedSplattingNormalTexture = texture;
+}
+
+void CLandscapeChunk::setDiffuseTextureLayer_01(CSharedTextureRef texture)
+{
+    m_diffuseTextureLayer_01 = texture;
+}
+
+void CLandscapeChunk::setDiffuseTextureLayer_02(CSharedTextureRef texture)
+{
+    m_diffuseTextureLayer_02 = texture;
+}
+
+void CLandscapeChunk::setDiffuseTextureLayer_03(CSharedTextureRef texture)
+{
+    m_diffuseTextureLayer_03 = texture;
 }
 
 void CLandscapeChunk::setSplattinMaskTexture(CSharedTextureRef texture)
@@ -123,6 +161,11 @@ void CLandscapeChunk::onResourceLoaded(ISharedResourceRef resource, bool success
 void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     IGameObject::onConfigurationLoaded(configuration, success);
+    
+    assert(m_materials.begin() != m_materials.end());
+    CLandscapeChunk::setDiffuseTextureLayer_01(m_materials.begin()->second->getTexture(E_SHADER_SAMPLER_01));
+    CLandscapeChunk::setDiffuseTextureLayer_02(m_materials.begin()->second->getTexture(E_SHADER_SAMPLER_02));
+    CLandscapeChunk::setDiffuseTextureLayer_03(m_materials.begin()->second->getTexture(E_SHADER_SAMPLER_03));
     
     std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     assert(m_resourceAccessor != nullptr);

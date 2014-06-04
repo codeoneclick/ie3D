@@ -25,12 +25,12 @@
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
-m_splattingDiffuseTexture(nullptr),
-m_splattingNormalTexture(nullptr),
+m_prerenderedSplattingDiffuseTexture(nullptr),
+m_prerenderedSplattingNormalTexture(nullptr),
 m_splattingDiffuseMaterial(nullptr),
 m_splattingNormalMaterial(nullptr),
-m_isSplattingDiffuseTextureProcessed(false),
-m_isSplattingNormalTextureProcessed(false),
+m_isSplattingDiffuseTexturePrerendered(false),
+m_isSplattingNormalTexturePrerendered(false),
 m_configuration(nullptr),
 m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, screenSpaceTextureAccessor))
 {
@@ -48,8 +48,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
     {
         m_heightmapProcessor->update();
         
-        CLandscape::processSplattingDiffuseTexture();
-        CLandscape::processSplattingNormalTexture();
+        CLandscape::prerenderSplattingDiffuseTexture();
+        CLandscape::prerenderSplattingNormalTexture();
         
         ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
         ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
@@ -86,17 +86,17 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                                        chunkSizeX, chunkSizeZ,
                                        m_heightmapProcessor->getSizeX(),
                                        m_heightmapProcessor->getSizeZ());
-                        chunk->setSplattingSettings(16.0, 8.0, 8.0);
+                        chunk->setSplattingSettings(16.0, E_LANDSCAPE_DETAIL_LEVEL_PRERENDERED);
                         chunk->onConfigurationLoaded(m_configuration, true);
                         
-                        /*if(m_splattingDiffuseTexture != nullptr)
+                        if(m_prerenderedSplattingDiffuseTexture != nullptr)
                         {
-                            chunk->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
+                            chunk->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
                         }
-                        if(m_splattingNormalTexture != nullptr)
+                        if(m_prerenderedSplattingNormalTexture != nullptr)
                         {
-                            chunk->setSplattingNormalTexture(m_splattingNormalTexture);
-                        }*/
+                            chunk->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
+                        }
                         chunk->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
                         m_chunks[i + j * numChunksZ] = chunk;
                     }
@@ -126,8 +126,8 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     assert(m_resourceAccessor != nullptr);
     assert(m_screenSpaceTextureAccessor != nullptr);
     
-    m_isSplattingDiffuseTextureProcessed = false;
-    m_isSplattingNormalTextureProcessed = false;
+    m_isSplattingDiffuseTexturePrerendered = false;
+    m_isSplattingNormalTexturePrerendered = false;
     
     m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_screenSpaceTextureAccessor, landscapeConfiguration);
     IEditableLandscape::setHeightmapProcessor(m_heightmapProcessor);
@@ -154,44 +154,44 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-void CLandscape::processSplattingDiffuseTexture(void)
+void CLandscape::prerenderSplattingDiffuseTexture(void)
 {
-    if(m_splattingDiffuseMaterial->isCommited() && !m_isSplattingDiffuseTextureProcessed)
+    if(m_splattingDiffuseMaterial->isCommited() && !m_isSplattingDiffuseTexturePrerendered)
     {
         ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
         ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
         
-        m_splattingDiffuseTexture = m_heightmapProcessor->PreprocessSplattingDiffuseTexture(m_splattingDiffuseMaterial);
-        m_isSplattingDiffuseTextureProcessed = true;
+        m_prerenderedSplattingDiffuseTexture = m_heightmapProcessor->PreprocessSplattingDiffuseTexture(m_splattingDiffuseMaterial);
+        m_isSplattingDiffuseTexturePrerendered = true;
         for(ui32 i = 0; i < numChunksX; ++i)
         {
             for(ui32 j = 0; j < numChunksZ; ++j)
             {
                 if(m_chunks[i + j * numChunksZ] != nullptr)
                 {
-                    m_chunks[i + j * numChunksZ]->setSplattingDiffuseTexture(m_splattingDiffuseTexture);
+                    m_chunks[i + j * numChunksZ]->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
                 }
             }
         }
     }
 }
 
-void CLandscape::processSplattingNormalTexture(void)
+void CLandscape::prerenderSplattingNormalTexture(void)
 {
-    if(m_splattingNormalMaterial->isCommited() && !m_isSplattingNormalTextureProcessed)
+    if(m_splattingNormalMaterial->isCommited() && !m_isSplattingNormalTexturePrerendered)
     {
         ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
         ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
         
-        m_splattingNormalTexture = m_heightmapProcessor->PreprocessSplattingNormalTexture(m_splattingNormalMaterial);
-        m_isSplattingNormalTextureProcessed = true;
+        m_prerenderedSplattingNormalTexture = m_heightmapProcessor->PreprocessSplattingNormalTexture(m_splattingNormalMaterial);
+        m_isSplattingNormalTexturePrerendered = true;
         for(ui32 i = 0; i < numChunksX; ++i)
         {
             for(ui32 j = 0; j < numChunksZ; ++j)
             {
                 if(m_chunks[i + j * numChunksZ] != nullptr)
                 {
-                    m_chunks[i + j * numChunksZ]->setSplattingNormalTexture(m_splattingNormalTexture);
+                    m_chunks[i + j * numChunksZ]->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
                 }
             }
         }

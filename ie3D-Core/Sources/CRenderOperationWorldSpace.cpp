@@ -128,8 +128,8 @@ void CRenderOperationWorldSpace::Unbind(void)
 {
 #if defined(__IOS__)
     
-    const GLenum discards[]  = {GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT};
-    glDiscardFramebufferEXT(GL_FRAMEBUFFER, 2, discards);
+    /*const GLenum discards[]  = {GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT};
+    glDiscardFramebufferEXT(GL_FRAMEBUFFER, 2, discards);*/
     
 #elif defined(__WIN32__)
 
