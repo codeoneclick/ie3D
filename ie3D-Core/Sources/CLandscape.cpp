@@ -86,7 +86,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                                        chunkSizeX, chunkSizeZ,
                                        m_heightmapProcessor->getSizeX(),
                                        m_heightmapProcessor->getSizeZ());
-                        chunk->setSplattingSettings(16.0, E_LANDSCAPE_DETAIL_LEVEL_PRERENDERED);
+                        chunk->setSplattingSettings(16.0, E_LANDSCAPE_DETAIL_LEVEL_TRIPLANAR_SPLATTING);
                         chunk->onConfigurationLoaded(m_configuration, true);
                         
                         if(m_prerenderedSplattingDiffuseTexture != nullptr)

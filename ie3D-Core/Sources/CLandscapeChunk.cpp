@@ -27,7 +27,12 @@ m_chunkSizeZ(0),
 m_heightmapSizeX(0),
 m_heightmapSizeZ(0),
 m_numIndexesToRender(0),
-m_detailLevel(E_LANDSCAPE_DETAIL_LEVEL_PRERENDERED)
+m_detailLevel(E_LANDSCAPE_DETAIL_LEVEL_PRERENDERED),
+m_prerenderedSplattingDiffuseTexture(nullptr),
+m_prerenderedSplattingNormalTexture(nullptr),
+m_diffuseTextureLayer_01(nullptr),
+m_diffuseTextureLayer_02(nullptr),
+m_diffuseTextureLayer_03(nullptr)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
     
@@ -44,12 +49,18 @@ m_detailLevel(E_LANDSCAPE_DETAIL_LEVEL_PRERENDERED)
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
-        switch (m_detailLevel)
+        /*switch (m_detailLevel)
         {
             case E_LANDSCAPE_DETAIL_LEVEL_PRERENDERED:
             {
-                material->getShader()->setTexture(m_prerenderedSplattingDiffuseTexture, E_SHADER_SAMPLER_01);
-                material->getShader()->setTexture(m_prerenderedSplattingNormalTexture, E_SHADER_SAMPLER_02);
+                if(m_prerenderedSplattingDiffuseTexture)
+                {
+                    material->getShader()->setTexture(m_prerenderedSplattingDiffuseTexture, E_SHADER_SAMPLER_01);
+                }
+                if(m_prerenderedSplattingNormalTexture)
+                {
+                    material->getShader()->setTexture(m_prerenderedSplattingNormalTexture, E_SHADER_SAMPLER_02);
+                }
                 material->getShader()->setFloatCustom(0.0, "IN_LandscapeDetailLevel");
             }
                 break;
@@ -72,10 +83,9 @@ m_detailLevel(E_LANDSCAPE_DETAIL_LEVEL_PRERENDERED)
                 material->getShader()->setFloatCustom(2.0, "IN_LandscapeDetailLevel");
             }
                 break;
-                
             default:
                 break;
-        }
+        }*/
         
         material->getShader()->setFloatCustom(192.0, "IN_fogLinearStart");
         material->getShader()->setFloatCustom(396.0, "IN_fogLinearEnd");

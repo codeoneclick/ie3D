@@ -137,11 +137,11 @@
 		21B08E1A1922527400C5D5CC /* material.skybox.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.skybox.refraction.xml; sourceTree = "<group>"; };
 		21B08E1B1922527400C5D5CC /* material.splatting.diffuse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.splatting.diffuse.xml; path = "../ie3D-Bundle/Configurations/material.splatting.diffuse.xml"; sourceTree = SOURCE_ROOT; };
 		21B08E1C1922527400C5D5CC /* material.splatting.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.splatting.normal.xml; path = "../ie3D-Bundle/Configurations/material.splatting.normal.xml"; sourceTree = SOURCE_ROOT; };
-		21B08E1D1922527400C5D5CC /* render.operation.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.output.xml; sourceTree = "<group>"; };
-		21B08E1E1922527400C5D5CC /* render.operation.world.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.base.xml; sourceTree = "<group>"; };
-		21B08E1F1922527400C5D5CC /* render.operation.world.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.reflection.xml; sourceTree = "<group>"; };
-		21B08E201922527400C5D5CC /* render.operation.world.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = render.operation.world.refraction.xml; sourceTree = "<group>"; };
-		21B08E211922527400C5D5CC /* transition.main.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transition.main.xml; sourceTree = "<group>"; };
+		21B08E1D1922527400C5D5CC /* render.operation.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.output.xml; path = "../ie3D-Bundle/Configurations/render.operation.output.xml"; sourceTree = SOURCE_ROOT; };
+		21B08E1E1922527400C5D5CC /* render.operation.world.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.world.base.xml; path = "../ie3D-Bundle/Configurations/render.operation.world.base.xml"; sourceTree = SOURCE_ROOT; };
+		21B08E1F1922527400C5D5CC /* render.operation.world.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.world.reflection.xml; path = "../ie3D-Bundle/Configurations/render.operation.world.reflection.xml"; sourceTree = SOURCE_ROOT; };
+		21B08E201922527400C5D5CC /* render.operation.world.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.world.refraction.xml; path = "../ie3D-Bundle/Configurations/render.operation.world.refraction.xml"; sourceTree = SOURCE_ROOT; };
+		21B08E211922527400C5D5CC /* transition.main.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = transition.main.xml; path = "../ie3D-Bundle/Configurations/transition.main.xml"; sourceTree = SOURCE_ROOT; };
 		21B08E35192252E400C5D5CC /* shaderLandscape.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscape.frag; path = "../ie3D-Bundle/Shaders/shaderLandscape.frag"; sourceTree = SOURCE_ROOT; };
 		21B08E36192252E400C5D5CC /* shaderLandscape.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscape.vert; path = "../ie3D-Bundle/Shaders/shaderLandscape.vert"; sourceTree = SOURCE_ROOT; };
 		21B08E37192252E400C5D5CC /* shaderLandscapeSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeSplatting.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeSplatting.frag"; sourceTree = SOURCE_ROOT; };
@@ -656,7 +656,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EC3F806D-BAD0-4BA7-8EAA-7371D3DCD634";
+				PROVISIONING_PROFILE = "2EEB3929-CD40-4144-A845-2AA3C989D21A";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -691,7 +691,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EC3F806D-BAD0-4BA7-8EAA-7371D3DCD634";
+				PROVISIONING_PROFILE = "2EEB3929-CD40-4144-A845-2AA3C989D21A";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
