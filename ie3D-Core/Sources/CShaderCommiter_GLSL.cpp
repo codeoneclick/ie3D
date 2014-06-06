@@ -29,13 +29,12 @@ CShaderCommiter_GLSL::~CShaderCommiter_GLSL(void)
     
 }
 
-#define DETAIL_LEVEL_0 = 1;
-
 ui32 CShaderCommiter_GLSL::compile(const std::string &sourceCode,
                                    GLenum shaderType)
 {
     ui32 handle = glCreateShader(shaderType);
-    char* define;
+    
+    std::string define;
 #if defined(DETAIL_LEVEL_2)
     define = "#define DETAIL_LEVEL_2\n";
 #elif defined(DETAIL_LEVEL_1)
@@ -44,8 +43,9 @@ ui32 CShaderCommiter_GLSL::compile(const std::string &sourceCode,
     define = "#define DETAIL_LEVEL_0\n";
 #endif
     
-    char* data = const_cast<char*>(sourceCode.c_str());
-    char* sources[2] = { define, data};
+    char* shaderData = const_cast<char*>(sourceCode.c_str());
+    char* defineData = const_cast<char*>(define.c_str());
+    char* sources[2] = { defineData, shaderData};
     glShaderSource(handle, 2, sources, NULL);
     glCompileShader(handle);
     

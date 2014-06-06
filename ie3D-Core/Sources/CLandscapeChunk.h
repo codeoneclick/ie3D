@@ -40,16 +40,13 @@ private:
     CSharedTexture m_prerenderedSplattingDiffuseTexture;
     CSharedTexture m_prerenderedSplattingNormalTexture;
     
-    E_LANDSCAPE_DETAIL_LEVEL m_detailLevel;
-    
 protected:
     
     void setMesh(CSharedMeshRef mesh,
                  ui32 chunkSizeX, ui32 chunkSizeZ,
                  ui32 heightmapSizeX, ui32 heightmapSizeZ);
     
-    void setSplattingSettings(f32 splattingTillingFactor,
-                              E_LANDSCAPE_DETAIL_LEVEL detailLevel);
+    void setSplattingSettings(f32 splattingTillingFactor);
     
     void setPrerenderedSplattingDiffuseTexture(CSharedTextureRef texture);
     void setPrerenderedSplattingNormalTexture(CSharedTextureRef texture);

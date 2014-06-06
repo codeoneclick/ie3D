@@ -433,7 +433,6 @@ i32 CShader::getCustomUniform(const std::string& uniform)
         handle = glGetUniformLocation(m_shaderId, uniform.c_str());
         m_customUniforms.insert(std::make_pair(uniform, handle));
     }
-    //assert(handle != -1);
     return handle;
 }
 

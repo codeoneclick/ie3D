@@ -20,10 +20,8 @@ varying vec3   OUT_LightDirection;
 varying vec3   OUT_Position;
 varying vec3   OUT_Normal;
 varying float  OUT_Fog;
-varying float  OUT_LandscapeDetailLevel;
 
 uniform float IN_SplattingTillingFactor;
-uniform float IN_LandscapeDetailLevel;
 
 uniform float IN_fogLinearStart;
 uniform float IN_fogLinearEnd;
@@ -42,13 +40,10 @@ void main(void)
     OUT_LightDirection = normalize(vLightDirection);
     
     OUT_Fog = clamp(((MATRIX_View * vPosition).z + IN_fogLinearStart) / (IN_fogLinearStart - IN_fogLinearEnd) * -1.0, 0.0, 1.0);
-    if(IN_LandscapeDetailLevel == 2.0)
-    {
-        OUT_SplattingTexCoord = vPosition / IN_SplattingTillingFactor;
-    }
-    else if(IN_LandscapeDetailLevel == 1.0)
-    {
-        OUT_SplattingTexCoord = vec4(OUT_TexCoord * IN_SplattingTillingFactor, 0.0, 0.0);
-    }
-    OUT_LandscapeDetailLevel = IN_LandscapeDetailLevel;
+    
+#if defined(DETAIL_LEVEL_2)
+    OUT_SplattingTexCoord = vPosition / IN_SplattingTillingFactor;
+#elif defined(DETAIL_LEVEL_1)
+    OUT_SplattingTexCoord = vec4(OUT_TexCoord * IN_SplattingTillingFactor, 0.0, 0.0);
+#endif
 }
