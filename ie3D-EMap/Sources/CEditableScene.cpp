@@ -30,7 +30,7 @@ CEditableScene::~CEditableScene(void)
 void CEditableScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->CreateCamera(60.0,
+    m_camera = m_root->createCamera(60.0,
                                     0.1,
                                     2048.0,
                                     glm::ivec4(0, 0,
@@ -42,23 +42,23 @@ void CEditableScene::load(void)
     m_camera->Set_Distance(32.0f);
     m_camera->Set_Height(32.0f);
     
-    m_root->Set_Camera(m_camera);
+    m_root->setCamera(m_camera);
     
-    std::shared_ptr<COcean> ocean = m_root->CreateOcean("gameobject.ocean.xml");
-    m_root->InsertOcean(ocean);
+    std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
+    m_root->setOcean(ocean);
     ocean->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
     
     m_skyBox = m_root->createSkyBox("gameobject.skybox.xml");
-    m_root->InsertSkyBox(m_skyBox);
+    m_root->setSkyBox(m_skyBox);
     
-    std::shared_ptr<CParticleEmitter> particleEmitter = m_root->CreateParticleEmitter("gameobject.particle.emitter.xml");
+    std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
     
     m_particles.push_back(particleEmitter);
-    m_root->InsertParticleEmitter(particleEmitter);
+    m_root->addParticleEmitter(particleEmitter);
     
-    m_landscape = m_root->CreateLandscape("gameobject.landscape.xml");
-    m_root->InsertLandscape(m_landscape);
+    m_landscape = m_root->createLandscape("gameobject.landscape.xml");
+    m_root->setLandscape(m_landscape);
     
     m_root->addCollisionHandler(shared_from_this());
     

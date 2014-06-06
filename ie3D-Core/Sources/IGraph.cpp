@@ -8,9 +8,10 @@
 
 #include "IGraph.h"
 
-IGraph::IGraph(void) :
-m_renderMgr(nullptr),
-m_sceneUpdateMgr(nullptr)
+IGraph::IGraph(CSharedRenderMgrRef renderMgr,
+               CSharedSceneUpdateMgrRef sceneUpdateMgr) :
+m_renderMgr(renderMgr),
+m_sceneUpdateMgr(sceneUpdateMgr)
 {
 
 }

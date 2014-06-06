@@ -25,25 +25,39 @@
 #include "IGraphicsContext.h"
 #include "IInputContext.h"
 #include "CResourceLoader.h"
+#include "CSceneGraph.h"
+#include "CSceneFabricator.h"
 
-IGameTransition::IGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> configurationAccessor) :
-IFabricator(configurationAccessor, _resourceAccessor),
-CSceneFabricator(configurationAccessor, _resourceAccessor),
-m_guid(_filename),
+IGameTransition::IGameTransition(const std::string& filename,
+                                 ISharedGraphicsContextRef graphicsContext,
+                                 ISharedInputContextRef inputContext,
+                                 CSharedResourceAccessorRef resourceAccessor,
+                                 CSharedConfigurationAccessorRef configurationAccessor) :
+m_guid(filename),
 m_scene(nullptr),
-m_isLoaded(false)
+m_isLoaded(false),
+m_resourceAccessor(resourceAccessor)
 {
-    assert(_graphicsContext != nullptr);
-    assert(_inputContext != nullptr);
-    m_renderMgr = std::make_shared<CRenderMgr>(_graphicsContext);
-	_Set_ScreenSpaceTextureAccessor(m_renderMgr);
+    assert(graphicsContext != nullptr);
+    assert(inputContext != nullptr);
+    ass
+    
+    m_renderMgr = std::make_shared<CRenderMgr>(graphicsContext);
+    m_screenSpaceTextureAccessor = m_renderMgr;
+    m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
+    CSharedCollisionMgr collisionMgr = std::make_shared<CCollisionMgr>();
+    
+    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderMgr, m_sceneUpdateMgr,
+                                                 collisionMgr, inputContext);
+    
+    m_sceneFabricator = std::make_shared<CSceneFabricator>(configurationAccessor,
+                                                           resourceAccessor,
+                                                           m_screenSpaceTextureAccessor);
+    
     std::shared_ptr<CBatchingMgr> batchingMgr = std::make_shared<CBatchingMgr>(m_renderMgr);
     m_renderMgr->Set_BatchingMgr(batchingMgr);
-    m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
-    m_collisionMgr = std::make_shared<CCollisionMgr>();
     
-    m_inputContext = _inputContext;
-    m_inputContext->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(m_collisionMgr));
+    inputContext->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(collisionMgr));
 }
 
 IGameTransition::~IGameTransition(void)
@@ -149,6 +163,185 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
     _OnLoaded();
 }
 
+std::string IGameTransition::getGuid(void) const
+{
+    return m_guid;
+}
+
+void IGameTransition::setCamera(CSharedCameraRef camera)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->setCamera(camera);
+}
+
+void IGameTransition::addModel(CSharedModelRef model)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->addModel(model);
+}
+
+void IGameTransition::removeModel(CSharedModelRef model)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeModel(model);
+}
+
+void IGameTransition::setOcean(CSharedOceanRef ocean)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->setOcean(ocean);
+}
+
+void IGameTransition::removeOcean(CSharedOceanRef ocean)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeOcean(ocean);
+}
+
+void IGameTransition::setSkyBox(CSharedSkyBoxRef skybox)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->setSkyBox(skybox);
+}
+
+void IGameTransition::removeSkyBox(CSharedSkyBoxRef skybox)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeSkyBox(skybox);
+}
+
+void IGameTransition::setLandscape(CSharedLandscapeRef landscape)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->setLandscape(landscape);
+}
+
+void IGameTransition::removeLandscape(CSharedLandscapeRef landscape)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeLandscape(landscape);
+}
+
+void IGameTransition::addParticleEmitter(CSharedParticleEmitterRef particleEmitter)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->addParticleEmitter(particleEmitter);
+}
+
+void IGameTransition::removeParticleEmitter(CSharedParticleEmitterRef particleEmitter)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeParticleEmitter(particleEmitter);
+}
+
+void IGameTransition::addCustomGameObject(ISharedGameObjectRef gameObject)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->addCustomGameObject(gameObject);
+}
+
+void IGameTransition::removeCustomGameObject(ISharedGameObjectRef gameObject)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeCustomGameObject(gameObject);
+}
+
+void IGameTransition::addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->addGestureRecognizerHandler(handler);
+}
+
+void IGameTransition::removeGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeGestureRecognizerHandler(handler);
+}
+
+void IGameTransition::addCollisionHandler(ISharedCollisionHandlerRef handler)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->addCollisionHandler(handler);
+}
+
+void IGameTransition::removeCollisionHandler(ISharedCollisionHandlerRef handler)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeCollisionHandler(handler);
+}
+
+CSharedCamera IGameTransition::createCamera(f32 fov, f32 near, f32 far,const glm::ivec4& viewport)
+{
+    assert(m_sceneFabricator != nullptr);
+    return m_sceneFabricator->createCamera(fov, near, far, viewport);
+}
+
+void IGameTransition::deleteCamera(CSharedCameraRef camera)
+{
+    assert(m_sceneFabricator != nullptr);
+    m_sceneFabricator->deleteCamera(camera);
+}
+
+CSharedModel IGameTransition::createModel(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    return m_sceneFabricator->createModel(filename);
+}
+
+void IGameTransition::deleteModel(CSharedModelRef model)
+{
+    assert(m_sceneFabricator != nullptr);
+    m_sceneFabricator->deleteModel(model);
+}
+
+CSharedOcean IGameTransition::createOcean(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    return m_sceneFabricator->createOcean(filename);
+}
+
+void IGameTransition::deleteOcean(CSharedOceanRef ocean)
+{
+    assert(m_sceneFabricator != nullptr);
+    m_sceneFabricator->deleteOcean(ocean);
+}
+
+CSharedSkyBox IGameTransition::createSkyBox(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    return m_sceneFabricator->createSkyBox(filename);
+}
+
+void IGameTransition::deleteSkyBox(CSharedSkyBoxRef skyBox)
+{
+    assert(m_sceneFabricator != nullptr);
+    m_sceneFabricator->deleteSkyBox(skyBox);
+}
+
+CSharedLandscape IGameTransition::createLandscape(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    return m_sceneFabricator->createLandscape(filename);
+}
+
+void IGameTransition::deleteLandscape(CSharedLandscapeRef landscape)
+{
+    assert(m_sceneFabricator != nullptr);
+    m_sceneFabricator->deleteLandscape(landscape);
+}
+
+CSharedParticleEmitter IGameTransition::createParticleEmitter(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    return m_sceneFabricator->createParticleEmitter(filename);
+}
+
+void IGameTransition::deleteParticleEmitter(CSharedParticleEmitterRef particleEmitter)
+{
+    assert(m_sceneFabricator != nullptr);
+    m_sceneFabricator->deleteParticleEmitter(particleEmitter);
+}
+
 ui32 IGameTransition::Get_CurrentNumTriangles(void)
 {
     assert(m_renderMgr != nullptr);
@@ -158,12 +351,7 @@ ui32 IGameTransition::Get_CurrentNumTriangles(void)
 
 ui32 IGameTransition::Get_TotalNumTriangles(void)
 {
-    ui32 numTriangles = 0;
-    for(const auto& gameObject : CSceneFabricator::m_gameObjectsContainer)
-    {
-        numTriangles += 0;//gameObject->Get_NumTriangles();
-    }
-    return numTriangles;
+    return 0;
 }
 
 ui32 IGameTransition::getWindowWidth(void) const

@@ -18,27 +18,27 @@
 #include "CParticleEmitter.h"
 #include "IInputContext.h"
 
-CSceneGraph::CSceneGraph(void) :
+CSceneGraph::CSceneGraph(CSharedRenderMgrRef renderMgr,
+                         CSharedSceneUpdateMgrRef sceneUpdateMgr,
+                         CSharedCollisionMgr collisionMgr,
+                         ISharedInputContext inputContext) :
+IGraph(renderMgr, sceneUpdateMgr),
 m_camera(nullptr),
-m_oceansContainer(nullptr),
-m_landscapeContainer(nullptr),
-m_collisionMgr(nullptr),
-m_inputContext(nullptr)
+m_ocean(nullptr),
+m_landscape(nullptr),
+m_skyBox(nullptr),
+m_collisionMgr(collisionMgr),
+m_inputContext(inputContext)
 {
-    /*std::for_each(m_lights.begin(), m_lights.end(), [](std::shared_ptr<CLight> _light)
-                  {
-                      _light = nullptr;
-                  });*/
+
 }
 
 CSceneGraph::~CSceneGraph(void)
 {
-    m_spritesContainer.clear();
-    m_billboardsContainer.clear();
-    m_particlesContainer.clear();
+    m_gameObjectsContainer.clear();
 }
 
-void CSceneGraph::Set_Camera(const std::shared_ptr<CCamera>& _camera)
+void CSceneGraph::setCamera(CSharedCameraRef camera)
 {
     assert(m_sceneUpdateMgr != nullptr);
     if(m_camera != nullptr)
@@ -46,7 +46,7 @@ void CSceneGraph::Set_Camera(const std::shared_ptr<CCamera>& _camera)
         m_sceneUpdateMgr->UnregisterSceneUpdateHandler(m_camera);
     }
     
-    m_camera = _camera;
+    m_camera = camera;
     assert(m_sceneUpdateMgr != nullptr);
     m_sceneUpdateMgr->RegisterSceneUpdateHandler(m_camera);
     
@@ -59,135 +59,111 @@ void CSceneGraph::Set_Camera(const std::shared_ptr<CCamera>& _camera)
     m_collisionMgr->setCamera(m_camera);
 }
 
-/*void CSceneGraph::Set_Light(const std::shared_ptr<CLight>& _light, E_LIGHTS _id)
-{
-   m_lights[_id] = _light;
-    
-    std::for_each(m_gameObjectsContainer.begin(), m_gameObjectsContainer.end(), [_light, _id](std::shared_ptr<IGameObject> _gameObject)
-                  {
-                      _gameObject->Set_Light(_light, _id);
-                  });
-}
-*/
-void CSceneGraph::_InsertGameObject(const std::shared_ptr<IGameObject>& _gameObject)
+void CSceneGraph::addGameObject(ISharedGameObjectRef gameObject)
 {
     if(m_camera != nullptr)
     {
-        _gameObject->setCamera(m_camera);
+        gameObject->setCamera(m_camera);
     }
     
-    /*for(ui32 i = 0; i < E_LIGHT_MAX; ++i)
+    assert(m_sceneUpdateMgr != nullptr);
+    assert(m_renderMgr != nullptr);
+    
+    gameObject->setSceneUpdateMgr(m_sceneUpdateMgr);
+    gameObject->setRenderMgr(m_renderMgr);
+    gameObject->listenSceneUpdateMgr(true);
+    gameObject->listenRenderMgr(true);
+    m_gameObjectsContainer.insert(gameObject);
+}
+
+void CSceneGraph::removeGameObject(ISharedGameObjectRef gameObject)
+{
+    assert(m_sceneUpdateMgr != nullptr);
+    assert(m_renderMgr != nullptr);
+    
+    gameObject->setSceneUpdateMgr(nullptr);
+    gameObject->setRenderMgr(nullptr);
+    gameObject->listenSceneUpdateMgr(false);
+    gameObject->listenRenderMgr(false);
+    m_gameObjectsContainer.erase(gameObject);
+}
+
+void CSceneGraph::addModel(CSharedModelRef model)
+{
+    CSceneGraph::addGameObject(model);
+}
+
+void CSceneGraph::removeModel(CSharedModelRef model)
+{
+    CSceneGraph::removeGameObject(model);
+}
+
+void CSceneGraph::setOcean(CSharedOceanRef ocean)
+{
+    if(m_ocean != nullptr)
     {
-        if(m_lights[i] != nullptr)
-        {
-            _gameObject->Set_Light(m_lights[i], static_cast<E_LIGHTS>(i));
-        }
-    }*/
-    
-    assert(m_sceneUpdateMgr != nullptr);
-    assert(m_renderMgr != nullptr);
-    
-    _gameObject->setSceneUpdateMgr(m_sceneUpdateMgr);
-    _gameObject->setRenderMgr(m_renderMgr);
-    _gameObject->listenSceneUpdateMgr(true);
-    _gameObject->listenRenderMgr(true);
-    m_gameObjectsContainer.insert(_gameObject);
+        CSceneGraph::removeGameObject(m_ocean);
+    }
+    CSceneGraph::addGameObject(ocean);
+    m_ocean = ocean;
 }
 
-void CSceneGraph::_RemoveGameObject(const std::shared_ptr<IGameObject>& _gameObject)
+void CSceneGraph::removeOcean(CSharedOceanRef ocean)
 {
-    assert(m_sceneUpdateMgr != nullptr);
-    assert(m_renderMgr != nullptr);
-    
-    _gameObject->setSceneUpdateMgr(nullptr);
-    _gameObject->setRenderMgr(nullptr);
-    _gameObject->listenSceneUpdateMgr(false);
-    _gameObject->listenRenderMgr(false);
-    m_gameObjectsContainer.erase(_gameObject);
+    CSceneGraph::removeGameObject(ocean);
+    m_ocean = nullptr;
 }
 
-void CSceneGraph::InsertSprite(const std::shared_ptr<CSprite>& _sprite)
+void CSceneGraph::setSkyBox(CSharedSkyBoxRef skyBox)
 {
-    //CSceneGraph::_InsertGameObject(_sprite);
-    //m_spritesContainer.insert(_sprite);
+    if(m_skyBox != nullptr)
+    {
+        CSceneGraph::removeGameObject(m_skyBox);
+    }
+    CSceneGraph::addGameObject(skyBox);
+    m_skyBox = skyBox;
 }
 
-void CSceneGraph::RemoveSprite(const std::shared_ptr<CSprite>& _sprite)
+void CSceneGraph::removeSkyBox(CSharedSkyBoxRef skyBox)
 {
-    //CSceneGraph::_RemoveGameObject(_sprite);
-    //m_spritesContainer.erase(_sprite);
+    CSceneGraph::removeGameObject(skyBox);
+    m_skyBox = nullptr;
 }
 
-void CSceneGraph::InsertModel(const std::shared_ptr<CModel>& _model)
+void CSceneGraph::setLandscape(CSharedLandscapeRef landscape)
 {
-    CSceneGraph::_InsertGameObject(_model);
-    m_modelsContainer.insert(_model);
+    if(m_landscape != nullptr)
+    {
+        CSceneGraph::removeGameObject(m_landscape);
+    }
+    CSceneGraph::addGameObject(landscape);
+    m_landscape = landscape;
 }
 
-void CSceneGraph::RemoveModel(const std::shared_ptr<CModel>& _model)
+void CSceneGraph::removeLandscape(CSharedLandscapeRef landscape)
 {
-    CSceneGraph::_RemoveGameObject(_model);
-    m_modelsContainer.erase(_model);
+    CSceneGraph::removeGameObject(landscape);
+    m_landscape = nullptr;
 }
 
-void CSceneGraph::InsertOcean(const std::shared_ptr<COcean>& _ocean)
+void CSceneGraph::addParticleEmitter(CSharedParticleEmitterRef particleEmitter)
 {
-    CSceneGraph::_InsertGameObject(_ocean);
-    m_oceansContainer = _ocean;
+    CSceneGraph::addGameObject(particleEmitter);
 }
 
-void CSceneGraph::RemoveOcean(const std::shared_ptr<COcean>& _ocean)
+void CSceneGraph::removeParticleEmitter(CSharedParticleEmitterRef particleEmitter)
 {
-    CSceneGraph::_RemoveGameObject(_ocean);
-    m_oceansContainer = nullptr;
+    CSceneGraph::removeGameObject(particleEmitter);
 }
 
-void CSceneGraph::InsertSkyBox(CSharedSkyBoxRef skybox)
+void CSceneGraph::addCustomGameObject(ISharedGameObjectRef gameObject)
 {
-    CSceneGraph::_InsertGameObject(skybox);
+    CSceneGraph::addGameObject(gameObject);
 }
 
-void CSceneGraph::RemoveSkyBox(CSharedSkyBoxRef skybox)
+void CSceneGraph::removeCustomGameObject(ISharedGameObjectRef gameObject)
 {
-    CSceneGraph::_RemoveGameObject(skybox);
-}
-
-void CSceneGraph::InsertLandscape(const std::shared_ptr<CLandscape> &_landscape)
-{
-    CSceneGraph::_InsertGameObject(_landscape);
-    m_landscapeContainer = _landscape;
-    
-    
-}
-
-void CSceneGraph::RemoveLandscape(const std::shared_ptr<CLandscape> &_landscape)
-{
-    CSceneGraph::_RemoveGameObject(_landscape);
-    m_landscapeContainer = nullptr;
-}
-
-void CSceneGraph::InsertBillboard(const std::shared_ptr<CBillboard>& _billboard)
-{
-    //CSceneGraph::_InsertGameObject(_billboard);
-    //m_billboardsContainer.insert(_billboard);
-}
-
-void CSceneGraph::RemoveBillboard(const std::shared_ptr<CBillboard>& _billboard)
-{
-    //CSceneGraph::_RemoveGameObject(_billboard);
-    //m_billboardsContainer.erase(_billboard);
-}
-
-void CSceneGraph::InsertParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter)
-{
-    CSceneGraph::_InsertGameObject(_particleEmitter);
-    m_particlesContainer.insert(_particleEmitter);
-}
-
-void CSceneGraph::RemoveParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter)
-{
-    CSceneGraph::_RemoveGameObject(_particleEmitter);
-    m_particlesContainer.erase(_particleEmitter);
+    CSceneGraph::removeGameObject(gameObject);
 }
 
 void CSceneGraph::addCollisionHandler(ISharedCollisionHandlerRef handler)

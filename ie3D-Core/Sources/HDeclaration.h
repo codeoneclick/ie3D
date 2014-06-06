@@ -272,4 +272,36 @@ class CHeightmapData;
 typedef std::shared_ptr<CHeightmapData> CSharedHeightmapData;
 typedef const CSharedHeightmapData& CSharedHeightmapDataRef;
 
+class CModel;
+typedef std::shared_ptr<CModel> CSharedModel;
+typedef const CSharedModel& CSharedModelRef;
+
+class CParticleEmitter;
+typedef std::shared_ptr<CParticleEmitter> CSharedParticleEmitter;
+typedef const CSharedParticleEmitter& CSharedParticleEmitterRef;
+
+class CCollisionMgr;
+typedef std::shared_ptr<CCollisionMgr> CSharedCollisionMgr;
+typedef const CSharedCollisionMgr& CSharedCollisionMgrRef;
+
+class IScene;
+typedef std::shared_ptr<IScene> ISharedScene;
+typedef const ISharedScene& ISharedSceneRef;
+
+class CSceneGraph;
+typedef std::shared_ptr<CSceneGraph> CSharedSceneGraph;
+typedef const CSharedSceneGraph& CSharedSceneGraphRef;
+
+class IGraphicsContext;
+typedef std::shared_ptr<IGraphicsContext> ISharedGraphicsContext;
+typedef const ISharedGraphicsContext& ISharedGraphicsContextRef;
+
+class CConfigurationAccessor;
+typedef std::shared_ptr<CConfigurationAccessor> CSharedConfigurationAccessor;
+typedef const CSharedConfigurationAccessor& CSharedConfigurationAccessorRef;
+
+class CSceneFabricator;
+typedef std::shared_ptr<CSceneFabricator> CSharedSceneFabricator;
+typedef const CSharedSceneFabricator& CSharedSceneFabricatorRef;
+
 #endif

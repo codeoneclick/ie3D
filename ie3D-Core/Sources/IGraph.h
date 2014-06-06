@@ -10,6 +10,7 @@
 #define IGraph_h
 
 #include "HCommon.h"
+#include "HDeclaration.h"
 
 class CRenderMgr;
 class CSceneUpdateMgr;
@@ -20,12 +21,13 @@ private:
 
 protected:
 
-	std::shared_ptr<CRenderMgr> m_renderMgr;
-    std::shared_ptr<CSceneUpdateMgr> m_sceneUpdateMgr;
+	CSharedRenderMgr m_renderMgr;
+    CSharedSceneUpdateMgr m_sceneUpdateMgr;
 
 public:
     
-    IGraph(void);
+    IGraph(CSharedRenderMgrRef renderMgr,
+           CSharedSceneUpdateMgrRef sceneUpdateMgr);
     virtual ~IGraph(void);
     
 };

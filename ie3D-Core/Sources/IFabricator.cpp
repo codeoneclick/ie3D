@@ -8,13 +8,15 @@
 
 #include "IFabricator.h"
 
-IFabricator::IFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
-m_templateAccessor(_templateAccessor),
-m_resourceAccessor(_resourceAccessor)
+IFabricator::IFabricator(CSharedConfigurationAccessorRef configurationAccessor,
+                         CSharedResourceAccessorRef resourceAccessor,
+                         ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor) :
+m_configurationAccessor(configurationAccessor),
+m_resourceAccessor(resourceAccessor),
+m_screenSpaceTextureAccessor(screenSpaceTextureAccessor)
 {
 
 }
-
 
 IFabricator::~IFabricator(void)
 {

@@ -14,72 +14,52 @@
 #include "IGraph.h"
 #include "HDeclaration.h"
 
-class CCamera;
-class CLight;
-class IGameObject;
-class CSprite;
-class CModel;
-class COcean;
-class CLandscape;
-class CBillboard;
-class CParticleEmitter;
-class CRenderMgr;
-class CSceneUpdateMgr;
-class CCollisionMgr;
-class ICollisionHandler;
-
-class CSceneGraph : public virtual IGraph
+class CSceneGraph : public IGraph
 {
 private:
     
-    std::shared_ptr<CCamera> m_camera;
-    //std::array<std::shared_ptr<CLight>, E_LIGHT_MAX> m_lights;
+    CSharedCamera m_camera;
     
-    std::set<std::shared_ptr<IGameObject> > m_gameObjectsContainer;
-    
-    std::set<std::shared_ptr<CSprite> > m_spritesContainer;
-    std::set<std::shared_ptr<CBillboard> > m_billboardsContainer;
-    std::set<std::shared_ptr<CParticleEmitter> > m_particlesContainer;
-    std::set<std::shared_ptr<CModel> > m_modelsContainer;
-    std::shared_ptr<COcean> m_oceansContainer;
-    std::shared_ptr<CLandscape> m_landscapeContainer;
+    std::set<ISharedGameObject> m_gameObjectsContainer;
+    CSharedOcean m_ocean;
+    CSharedLandscape m_landscape;
+    CSharedSkyBox m_skyBox;
     
 protected:
     
-    std::shared_ptr<CCollisionMgr> m_collisionMgr;
-    std::shared_ptr<IInputContext> m_inputContext;
+    CSharedCollisionMgr m_collisionMgr;
+    ISharedInputContext m_inputContext;
     
-    void _InsertGameObject(const std::shared_ptr<IGameObject>& _gameObject);
-    void _RemoveGameObject(const std::shared_ptr<IGameObject>& _gameObject);
+    void addGameObject(ISharedGameObjectRef gameObject);
+    void removeGameObject(ISharedGameObjectRef gameObject);
     
 public:
     
-    CSceneGraph(void);
+    CSceneGraph(CSharedRenderMgrRef renderMgr,
+                CSharedSceneUpdateMgrRef sceneUpdateMgr,
+                CSharedCollisionMgr collisionMgr,
+                ISharedInputContext inputContext);
     virtual ~CSceneGraph(void);
     
-    void Set_Camera(const std::shared_ptr<CCamera>& _camera);
-    //void Set_Light(const std::shared_ptr<CLight>& _light, E_LIGHTS _id);
+    void setCamera(CSharedCameraRef camera);
+
+    void addModel(CSharedModelRef model);
+    void removeModel(CSharedModelRef model);
     
-    void InsertSprite(const std::shared_ptr<CSprite>& _sprite);
-    void RemoveSprite(const std::shared_ptr<CSprite>& _sprite);
+    void setOcean(CSharedOceanRef ocean);
+    void removeOcean(CSharedOceanRef ocean);
     
-    void InsertModel(const std::shared_ptr<CModel>& _model);
-    void RemoveModel(const std::shared_ptr<CModel>& _model);
+    void setSkyBox(CSharedSkyBoxRef skybox);
+    void removeSkyBox(CSharedSkyBoxRef skybox);
     
-    void InsertOcean(const std::shared_ptr<COcean>& _ocean);
-    void RemoveOcean(const std::shared_ptr<COcean>& _ocean);
+    void setLandscape(CSharedLandscapeRef landscape);
+    void removeLandscape(CSharedLandscapeRef landscape);
     
-    void InsertSkyBox(CSharedSkyBoxRef skybox);
-    void RemoveSkyBox(CSharedSkyBoxRef skybox);
+    void addParticleEmitter(CSharedParticleEmitterRef particleEmitter);
+    void removeParticleEmitter(CSharedParticleEmitterRef particleEmitter);
     
-    void InsertLandscape(const std::shared_ptr<CLandscape>& _landscape);
-    void RemoveLandscape(const std::shared_ptr<CLandscape>& _landscape);
-    
-    void InsertBillboard(const std::shared_ptr<CBillboard>& _billboard);
-    void RemoveBillboard(const std::shared_ptr<CBillboard>& _billboard);
-    
-    void InsertParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter);
-    void RemoveParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter);
+    void addCustomGameObject(ISharedGameObjectRef gameObject);
+    void removeCustomGameObject(ISharedGameObjectRef gameObject);
     
     void addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
     void removeGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);

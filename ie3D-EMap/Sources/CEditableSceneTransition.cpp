@@ -14,7 +14,6 @@ CEditableSceneTransition::CEditableSceneTransition(const std::string& filename,
                                                    std::shared_ptr<IInputContext> gestureRecognizerContext,
                                                    std::shared_ptr<CResourceAccessor> resourceAccessor,
                                                    std::shared_ptr<CConfigurationAccessor> configurationAccessor) :
-IFabricator(configurationAccessor, resourceAccessor),
 IGameTransition(filename,
                 graphicsContext,
                 gestureRecognizerContext,

@@ -30,14 +30,14 @@ IGameController::~IGameController(void)
 
 void IGameController::RegisterTransition(std::shared_ptr<IGameTransition> _transition)
 {
-    assert(m_transitions.find(_transition->Get_Guid()) == m_transitions.end());
-    m_transitions.insert(std::make_pair(_transition->Get_Guid(), _transition));
+    assert(m_transitions.find(_transition->getGuid()) == m_transitions.end());
+    m_transitions.insert(std::make_pair(_transition->getGuid(), _transition));
 }
 
 void IGameController::UnregisterTransition(std::shared_ptr<IGameTransition> _transition)
 {
-    assert(m_transitions.find(_transition->Get_Guid()) != m_transitions.end());
-    m_transitions.erase(m_transitions.find(_transition->Get_Guid()));
+    assert(m_transitions.find(_transition->getGuid()) != m_transitions.end());
+    m_transitions.erase(m_transitions.find(_transition->getGuid()));
 }
 
 void IGameController::GoToTransition(const std::string &_guid)

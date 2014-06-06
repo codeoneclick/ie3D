@@ -18,139 +18,108 @@
 #include "CResourceAccessor.h"
 #include "CRenderMgr.h"
 
-CSceneFabricator::CSceneFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor) :
-IFabricator(_templateAccessor, _resourceAccessor)
+CSceneFabricator::CSceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
+                                   CSharedResourceAccessorRef resourceAccessor,
+                                   ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor) :
+IFabricator(configurationAccessor, resourceAccessor, screenSpaceTextureAccessor)
 {
     
 }
 
 CSceneFabricator::~CSceneFabricator(void)
 {
-    m_lightsContainer.clear();
     m_camerasContainer.clear();
     m_gameObjectsContainer.clear();
 }
 
-std::shared_ptr<CCamera> CSceneFabricator::CreateCamera(f32 _fov, f32 _near, f32 _far,const glm::ivec4& _viewport)
+CSharedCamera CSceneFabricator::createCamera(f32 fov, f32 near, f32 far,const glm::ivec4& viewport)
 {
-    std::shared_ptr<CCamera> camera = std::make_shared<CCamera>(_fov, _near, _far, _viewport);
+    CSharedCamera camera = std::make_shared<CCamera>(fov, near, far, viewport);
     m_camerasContainer.insert(camera);
     return camera;
 }
 
-void CSceneFabricator::DeleteCamera(const std::shared_ptr<CCamera>& _camera)
+void CSceneFabricator::deleteCamera(CSharedCameraRef camera)
 {
-    m_camerasContainer.erase(_camera);
+    m_camerasContainer.erase(camera);
 }
 
-std::shared_ptr<CLight> CSceneFabricator::CreateLight(void)
-{
-    std::shared_ptr<CLight> light = std::make_shared<CLight>();
-    m_lightsContainer.insert(light);
-    return light;
-}
-
-void CSceneFabricator::DeleteLight(const std::shared_ptr<CLight>& _light)
-{
-    m_lightsContainer.erase(_light);
-}
-
-std::shared_ptr<CSprite> CSceneFabricator::CreateSprite(const std::string& _filename)
-{
-    return nullptr;
-}
-
-void CSceneFabricator::DeleteSprite(const std::shared_ptr<CSprite>& _sprite)
-{
-    
-}
-
-std::shared_ptr<CModel> CSceneFabricator::CreateModel(const std::string& _filename)
+CSharedModel CSceneFabricator::createModel(const std::string& filename)
 {
     assert(m_resourceAccessor != nullptr);
 	assert(m_screenSpaceTextureAccessor != nullptr);
-    std::shared_ptr<CModel> model = std::make_shared<CModel>(m_resourceAccessor, m_screenSpaceTextureAccessor);
-    assert(m_templateAccessor != nullptr);
-    m_templateAccessor->LoadModelConfiguration(_filename, model);
+    CSharedModel model = std::make_shared<CModel>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+    assert(m_configurationAccessor != nullptr);
+    m_configurationAccessor->LoadModelConfiguration(filename, model);
     m_gameObjectsContainer.insert(model);
     return model;
 }
 
-void CSceneFabricator::DeleteModel(const std::shared_ptr<CModel>& _model)
+void CSceneFabricator::deleteModel(CSharedModelRef model)
 {
-    m_gameObjectsContainer.erase(_model);
+    m_gameObjectsContainer.erase(model);
 }
 
-std::shared_ptr<COcean> CSceneFabricator::CreateOcean(const std::string &_filename)
+CSharedOcean CSceneFabricator::createOcean(const std::string &filename)
 {
     assert(m_resourceAccessor != nullptr);
 	assert(m_screenSpaceTextureAccessor != nullptr);
-    std::shared_ptr<COcean> ocean = std::make_shared<COcean>(m_resourceAccessor, m_screenSpaceTextureAccessor);
-    assert(m_templateAccessor != nullptr);
-    m_templateAccessor->LoadOceanConfiguration(_filename, ocean);
+    CSharedOcean ocean = std::make_shared<COcean>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+    assert(m_configurationAccessor != nullptr);
+    m_configurationAccessor->LoadOceanConfiguration(filename, ocean);
     m_gameObjectsContainer.insert(ocean);
     return ocean;
 }
 
-void CSceneFabricator::DeleteOcean(const std::shared_ptr<COcean>& _ocean)
+void CSceneFabricator::deleteOcean(CSharedOceanRef ocean)
 {
-    m_gameObjectsContainer.erase(_ocean);
+    m_gameObjectsContainer.erase(ocean);
 }
 
-std::shared_ptr<CLandscape> CSceneFabricator::CreateLandscape(const std::string &_filename)
+CSharedLandscape CSceneFabricator::createLandscape(const std::string &filename)
 {
     assert(m_resourceAccessor != nullptr);
 	assert(m_screenSpaceTextureAccessor != nullptr);
-    std::shared_ptr<CLandscape> landscape = std::make_shared<CLandscape>(m_resourceAccessor, m_screenSpaceTextureAccessor);
-    assert(m_templateAccessor != nullptr);
-    m_templateAccessor->LoadLandscapeConfiguration(_filename, landscape);
+    CSharedLandscape landscape = std::make_shared<CLandscape>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+    assert(m_configurationAccessor != nullptr);
+    m_configurationAccessor->LoadLandscapeConfiguration(filename, landscape);
     m_gameObjectsContainer.insert(landscape);
     return landscape;
 }
 
-void CSceneFabricator::DeleteLandscape(const std::shared_ptr<CLandscape> &_landscape)
+void CSceneFabricator::deleteLandscape(CSharedLandscapeRef landscape)
 {
-    
+    m_gameObjectsContainer.erase(landscape);
 }
 
-std::shared_ptr<CBillboard> CSceneFabricator::CreateBillboard(const std::string& _filename)
-{
-    return nullptr;
-}
-
-void CSceneFabricator::DeleteBillboard(const std::shared_ptr<CBillboard>& _billboard)
-{
-    
-}
-
-std::shared_ptr<CParticleEmitter> CSceneFabricator::CreateParticleEmitter(const std::string& _filename)
+CSharedParticleEmitter CSceneFabricator::createParticleEmitter(const std::string& filename)
 {
     assert(m_resourceAccessor != nullptr);
 	assert(m_screenSpaceTextureAccessor != nullptr);
-    std::shared_ptr<CParticleEmitter> particleEmitter = std::make_shared<CParticleEmitter>(m_resourceAccessor, m_screenSpaceTextureAccessor);
-    assert(m_templateAccessor != nullptr);
-    m_templateAccessor->LoadParticleEmitterConfiguration(_filename, particleEmitter);
+    CSharedParticleEmitter particleEmitter = std::make_shared<CParticleEmitter>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+    assert(m_configurationAccessor != nullptr);
+    m_configurationAccessor->LoadParticleEmitterConfiguration(filename, particleEmitter);
     m_gameObjectsContainer.insert(particleEmitter);
     return particleEmitter;
 }
 
-void CSceneFabricator::DeleteParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter)
+void CSceneFabricator::deleteParticleEmitter(CSharedParticleEmitterRef particleEmitter)
 {
-    m_gameObjectsContainer.erase(_particleEmitter);
+    m_gameObjectsContainer.erase(particleEmitter);
 }
 
 CSharedSkyBox CSceneFabricator::createSkyBox(const std::string& filename)
 {
     assert(m_resourceAccessor != nullptr);
 	assert(m_screenSpaceTextureAccessor != nullptr);
-    std::shared_ptr<CSkyBox> skyBox = std::make_shared<CSkyBox>(m_resourceAccessor, m_screenSpaceTextureAccessor);
-    assert(m_templateAccessor != nullptr);
-    m_templateAccessor->loadSkyBoxConfiguration(filename, skyBox);
+    CSharedSkyBox skyBox = std::make_shared<CSkyBox>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+    assert(m_configurationAccessor != nullptr);
+    m_configurationAccessor->loadSkyBoxConfiguration(filename, skyBox);
     m_gameObjectsContainer.insert(skyBox);
     return skyBox;
 }
 
 void CSceneFabricator::deleteSkyBox(CSharedSkyBoxRef skyBox)
 {
-    
+    m_gameObjectsContainer.erase(skyBox);
 }

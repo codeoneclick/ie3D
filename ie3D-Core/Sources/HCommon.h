@@ -192,7 +192,7 @@ namespace glm
     }
 };
 
-#define DETAIL_LEVEL_2 = 1;
+#define DETAIL_LEVEL_2 1
 
 #define MAX_VALUE(a, b) (((a) > (b)) ? (a) : (b))
 #define TO_RGB565(r, g, b) (unsigned short) (((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3))

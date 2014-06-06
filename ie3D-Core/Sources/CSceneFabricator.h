@@ -13,58 +13,40 @@
 #include "IFabricator.h"
 #include "HDeclaration.h"
 
-class CLight;
-class CCamera;
-class IGameObject;
-class CSprite;
-class CModel;
-class COcean;
-class CLandscape;
-class CBillboard;
-class CParticleEmitter;
-class CRenderMgr;
-
-class CSceneFabricator : public virtual IFabricator
+class CSceneFabricator : public IFabricator
 {
 private:
 
 protected:
     
-    std::set<std::shared_ptr<IGameObject> > m_gameObjectsContainer;
-    std::set<std::shared_ptr<CCamera> > m_camerasContainer;
-    std::set<std::shared_ptr<CLight> > m_lightsContainer;
+    std::set<ISharedGameObject> m_gameObjectsContainer;
+    std::set<CSharedCamera> m_camerasContainer;
 
 public:
     
-    CSceneFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
+    CSceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
+                     CSharedResourceAccessorRef resourceAccessor,
+                     ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor);
+    
     virtual ~CSceneFabricator(void);
     
-    std::shared_ptr<CCamera> CreateCamera(f32 _fov, f32 _near, f32 _far,const glm::ivec4& _viewport);
-    void DeleteCamera(const std::shared_ptr<CCamera>& _camera);
+    CSharedCamera createCamera(f32 fov, f32 near, f32 far,const glm::ivec4& viewport);
+    void deleteCamera(CSharedCameraRef camera);
     
-    std::shared_ptr<CLight> CreateLight(void);
-    void DeleteLight(const std::shared_ptr<CLight>& _light);
+    CSharedModel createModel(const std::string& filename);
+    void deleteModel(CSharedModelRef model);
     
-    std::shared_ptr<CSprite> CreateSprite(const std::string& _filename);
-    void DeleteSprite(const std::shared_ptr<CSprite>& _sprite);
-    
-    std::shared_ptr<CModel> CreateModel(const std::string& _filename);
-    void DeleteModel(const std::shared_ptr<CModel>& _model);
-    
-    std::shared_ptr<COcean> CreateOcean(const std::string& _filename);
-    void DeleteOcean(const std::shared_ptr<COcean>& _ocean);
+    CSharedOcean createOcean(const std::string& filename);
+    void deleteOcean(CSharedOceanRef ocean);
     
     CSharedSkyBox createSkyBox(const std::string& filename);
     void deleteSkyBox(CSharedSkyBoxRef skyBox);
     
-    std::shared_ptr<CLandscape> CreateLandscape(const std::string& _filename);
-    void DeleteLandscape(const std::shared_ptr<CLandscape>& _landscape);
+    CSharedLandscape createLandscape(const std::string& filename);
+    void deleteLandscape(CSharedLandscapeRef landscape);
     
-    std::shared_ptr<CBillboard> CreateBillboard(const std::string& _filename);
-    void DeleteBillboard(const std::shared_ptr<CBillboard>& _billboard);
-    
-    std::shared_ptr<CParticleEmitter> CreateParticleEmitter(const std::string& _filename);
-    void DeleteParticleEmitter(const std::shared_ptr<CParticleEmitter>& _particleEmitter);
+    CSharedParticleEmitter createParticleEmitter(const std::string& filename);
+    void deleteParticleEmitter(CSharedParticleEmitterRef particleEmitter);
 };
 
 #endif

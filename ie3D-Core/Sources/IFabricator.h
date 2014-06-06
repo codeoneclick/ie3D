@@ -10,10 +10,7 @@
 #define IFabricator_h
 
 #include "HCommon.h"
-
-class CConfigurationAccessor;
-class CResourceAccessor;
-class IScreenSpaceTextureAccessor;
+#include "HDeclaration.h"
 
 class IFabricator
 {
@@ -21,20 +18,17 @@ private:
 
 protected:
     
-    std::shared_ptr<CConfigurationAccessor> m_templateAccessor;
-    std::shared_ptr<CResourceAccessor> m_resourceAccessor;
-	std::shared_ptr<IScreenSpaceTextureAccessor> m_screenSpaceTextureAccessor;
+    CSharedConfigurationAccessor m_configurationAccessor;
+    CSharedResourceAccessor m_resourceAccessor;
+    ISharedScreenSpaceTextureAccessor m_screenSpaceTextureAccessor;
 	
-	inline void _Set_ScreenSpaceTextureAccessor(std::shared_ptr<IScreenSpaceTextureAccessor> _screenSpaceTextureAccessor)
-	{
-		m_screenSpaceTextureAccessor = _screenSpaceTextureAccessor;
-	};
-
 public:
     
-    IFabricator(const std::shared_ptr<CConfigurationAccessor>& _templateAccessor, const std::shared_ptr<CResourceAccessor>& _resourceAccessor);
-    virtual ~IFabricator(void);
+    IFabricator(CSharedConfigurationAccessorRef configurationAccessor,
+                CSharedResourceAccessorRef resourceAccessor,
+                ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor);
     
+    virtual ~IFabricator(void);
 };
 
 #endif
