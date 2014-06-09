@@ -36,32 +36,44 @@ IGameTransition::IGameTransition(const std::string& filename,
 m_guid(filename),
 m_scene(nullptr),
 m_isLoaded(false),
-m_resourceAccessor(resourceAccessor)
+m_graphicsContext(graphicsContext),
+m_inputContext(inputContext),
+m_resourceAccessor(resourceAccessor),
+m_configurationAccessor(configurationAccessor)
 {
-    assert(graphicsContext != nullptr);
-    assert(inputContext != nullptr);
+    assert(m_graphicsContext != nullptr);
+    assert(m_inputContext != nullptr);
     
-    m_renderMgr = std::make_shared<CRenderMgr>(graphicsContext);
+    m_renderMgr = std::make_shared<CRenderMgr>(m_graphicsContext);
     m_screenSpaceTextureAccessor = m_renderMgr;
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
-    CSharedCollisionMgr collisionMgr = std::make_shared<CCollisionMgr>();
-    
-    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderMgr, m_sceneUpdateMgr,
-                                                 collisionMgr, inputContext);
-    
-    m_sceneFabricator = std::make_shared<CSceneFabricator>(configurationAccessor,
-                                                           resourceAccessor,
-                                                           m_screenSpaceTextureAccessor);
     
     std::shared_ptr<CBatchingMgr> batchingMgr = std::make_shared<CBatchingMgr>(m_renderMgr);
     m_renderMgr->Set_BatchingMgr(batchingMgr);
     
-    inputContext->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(collisionMgr));
+    m_collisionMgr = std::make_shared<CCollisionMgr>();
+    m_inputContext->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(m_collisionMgr));
 }
 
 IGameTransition::~IGameTransition(void)
 {
     
+}
+
+void IGameTransition::initScene(void)
+{
+    assert(m_graphicsContext != nullptr);
+    assert(m_inputContext != nullptr);
+    assert(m_sceneUpdateMgr != nullptr);
+    assert(m_collisionMgr != nullptr);
+    assert(m_screenSpaceTextureAccessor != nullptr);
+    
+    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderMgr, m_sceneUpdateMgr,
+                                                 m_collisionMgr, m_inputContext);
+    
+    m_sceneFabricator = std::make_shared<CSceneFabricator>(m_configurationAccessor,
+                                                           m_resourceAccessor,
+                                                           m_screenSpaceTextureAccessor);
 }
 
 void IGameTransition::_OnRegistered(void)

@@ -11,4 +11,21 @@
 
 #include "CConfigurationAccessor.h"
 
+class CMEConfigurationAccessor : public CConfigurationAccessor
+{
+private:
+    
+protected:
+    
+public:
+    
+    CMEConfigurationAccessor(void);
+    ~CMEConfigurationAccessor(void);
+    
+    void loadSelectionAreaConfiguration(const std::string& filename,
+                                        ISharedConfigurationLoadingHandlerRef handler);
+    
+};
+
+
 #endif

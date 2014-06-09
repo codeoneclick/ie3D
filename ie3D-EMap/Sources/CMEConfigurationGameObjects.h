@@ -9,6 +9,28 @@
 #ifndef CMEConfigurationGameObjects_h
 #define CMEConfigurationGameObjects_h
 
-#include <iostream>
+#include "CConfigurationGameObjects.h"
+#include "HDeclaration.h"
+
+class CMEConfigurationSelectionArea : public CConfigurationGameObject
+{
+public:
+    
+    const std::string kSelectionAreaMainNode;
+    const std::string kSelectionAreaSizeXAttribute;
+    const std::string kSelectionAreaSizeYAttribute;
+    
+private:
+    
+protected:
+    
+public:
+    
+    CMEConfigurationSelectionArea(void);
+    ~CMEConfigurationSelectionArea(void);
+    
+    glm::vec2 getSize(void) const;
+};
+
 
 #endif

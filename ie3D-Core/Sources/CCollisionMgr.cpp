@@ -70,7 +70,12 @@ void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_
     }
 }
 
-void CCollisionMgr::onGestureRecognizerMoved(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
+void CCollisionMgr::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
+{
+    
+}
+
+void CCollisionMgr::onGestureRecognizerMoved(const glm::ivec2& point)
 {
     
 }

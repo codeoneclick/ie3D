@@ -75,6 +75,8 @@ public:
     
     ui32 getHeightmapSizeX(void) const;
     ui32 getHeightmapSizeZ(void) const;
+    
+    f32 getHeight(const glm::vec3& position) const;
 };
 
 #endif

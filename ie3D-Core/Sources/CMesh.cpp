@@ -177,12 +177,12 @@ CSequenceData::~CSequenceData(void)
     m_frames.clear();
 }
 
-const ui32 CSequenceData::getNumFrames(void) const
+ui32 CSequenceData::getNumFrames(void) const
 {
     return m_frames.size();
 }
 
-const ui32 CSequenceData::getAnimationFPS(void) const
+ui32 CSequenceData::getAnimationFPS(void) const
 {
     return m_animationFPS;
 }

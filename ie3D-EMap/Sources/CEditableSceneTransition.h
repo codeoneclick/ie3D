@@ -10,6 +10,7 @@
 #define CEditableSceneTransition_h
 
 #include "IGameTransition.h"
+#include "HMEDeclaration.h"
 
 class CEditableSceneTransition : public IGameTransition
 {
@@ -29,6 +30,11 @@ public:
                              std::shared_ptr<CConfigurationAccessor> configurationAccessor);
     
     ~CEditableSceneTransition(void);
+    
+    void initScene(void);
+    
+    CSharedSelectionArea createSelectionArea(const std::string& filename);
+    void deleteSelectionArea(CSharedSelectionAreaRef selectionArea);
 };
 
 

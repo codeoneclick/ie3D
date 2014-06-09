@@ -39,7 +39,12 @@ void CMapDragController::onGestureRecognizerPressed(const glm::ivec2& point, E_I
     }
 }
 
-void CMapDragController::onGestureRecognizerMoved(const glm::ivec2& point, E_INPUT_BUTTON)
+void CMapDragController::onGestureRecognizerMoved(const glm::ivec2&)
+{
+    
+}
+
+void CMapDragController::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON)
 {
     glm::vec3 position;
     if(CCollisionMgr::isIntersected(m_camera, point, &position) && m_isPressed)

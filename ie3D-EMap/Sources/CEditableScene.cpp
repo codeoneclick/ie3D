@@ -15,6 +15,8 @@
 #include "CSkyBox.h"
 #include "CParticleEmitter.h"
 #include "CMapDragController.h"
+#include "CEditableSceneTransition.h"
+#include "CSelectionArea.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
 IScene(root)
@@ -62,6 +64,11 @@ void CEditableScene::load(void)
     
     m_root->addCollisionHandler(shared_from_this());
     
+    CEditableSceneTransition* transition = static_cast<CEditableSceneTransition*>(m_root);
+    m_selectionArea = transition->createSelectionArea("gameobject.selection.area.xml");
+    m_root->addCustomGameObject(m_selectionArea);
+    m_selectionArea->setLandscape(m_landscape);
+    
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
                                                                glm::vec3(512.0, 0.0, 512.0));
@@ -97,6 +104,7 @@ void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
     {
         m_landscape->pressureHeightIn(position, 10.0, true);
+        m_selectionArea->setPosition(position);
     }
 }
 
@@ -105,7 +113,12 @@ void CEditableScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTO
     
 }
 
-void CEditableScene::onGestureRecognizerMoved(const glm::ivec2&, E_INPUT_BUTTON)
+void CEditableScene::onGestureRecognizerMoved(const glm::ivec2&)
+{
+    std::cout<<"move"<<std::endl;
+}
+
+void CEditableScene::onGestureRecognizerDragged(const glm::ivec2&, E_INPUT_BUTTON)
 {
     
 }

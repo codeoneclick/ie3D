@@ -95,9 +95,9 @@ public:
     
     ~CSequenceData(void);
     
-    const ui32 getNumFrames(void) const;
+    ui32 getNumFrames(void) const;
     
-    const ui32 getAnimationFPS(void) const;
+    ui32 getAnimationFPS(void) const;
     
     const std::string getAnimationName(void) const;
     

@@ -22,14 +22,28 @@
 
 @implementation InputHWND
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+    }
+    return self;
+}
+
 - (void)mouseDown:(NSEvent*)event
 {
+    [[self window] setAcceptsMouseMovedEvents:YES];
+    [[self window] makeFirstResponder:self];
+    
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
     self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_LEFT);
 }
 
 - (void)rightMouseDown:(NSEvent *)event;
 {
+    [[self window] setAcceptsMouseMovedEvents:YES];
+    [[self window] makeFirstResponder:self];
+    
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
     self.m_context->gestureRecognizerPressed(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_RIGHT);
 }
@@ -37,13 +51,19 @@
 - (void)mouseDragged:(NSEvent *)event;
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_LEFT);
+    self.m_context->gestureRecognizerDragged(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_LEFT);
 }
 
 - (void)rightMouseDragged:(NSEvent *)event;
 {
     CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_RIGHT);
+    self.m_context->gestureRecognizerDragged(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_RIGHT);
+}
+
+- (void)mouseMoved:(NSEvent *)event
+{
+    CGPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+    self.m_context->gestureRecognizerMoved(glm::ivec2(point.x, self.frame.size.height - point.y));
 }
 
 - (void)mouseUp:(NSEvent *)event;

@@ -6,9 +6,23 @@
 //  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __ie3D_Demo__CMEConfigurationSelectionAreaLoadingOperation__
-#define __ie3D_Demo__CMEConfigurationSelectionAreaLoadingOperation__
+#ifndef CMEConfigurationSelectionAreaLoadingOperation_h
+#define CMEConfigurationSelectionAreaLoadingOperation_h
 
-#include <iostream>
+#include "IConfigurationLoadingOperation.h"
 
-#endif /* defined(__ie3D_Demo__CMEConfigurationSelectionAreaLoadingOperation__) */
+class CMEConfigurationSelectionAreaLoadingOperation : public IConfigurationLoadingOperation
+{
+private:
+    
+protected:
+    
+public:
+    
+    CMEConfigurationSelectionAreaLoadingOperation(void);
+    ~CMEConfigurationSelectionAreaLoadingOperation(void);
+    
+    ISharedConfiguration serialize(const std::string& filename);
+};
+
+#endif

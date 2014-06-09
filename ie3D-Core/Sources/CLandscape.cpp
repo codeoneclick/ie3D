@@ -319,3 +319,9 @@ ui32 CLandscape::getHeightmapSizeZ(void) const
     return m_heightmapProcessor->getSizeZ();
 }
 
+f32 CLandscape::getHeight(const glm::vec3& position) const
+{
+    assert(m_heightmapProcessor != nullptr);
+    return m_heightmapProcessor->getHeight(position);
+}
+

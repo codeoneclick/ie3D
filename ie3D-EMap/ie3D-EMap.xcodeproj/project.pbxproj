@@ -37,7 +37,7 @@
 		212090121906FC9B00FFC8D4 /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212090101906FC9B00FFC8D4 /* libGLESv2.dylib */; };
 		212091D51906FEAE00FFC8D4 /* libie3DCore-osx.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 212091D21906FE9100FFC8D4 /* libie3DCore-osx.a */; };
 		212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A3190859AD00FFC8D4 /* CMapDragController.cpp */; };
-		212092AB19106B6100FFC8D4 /* CMapAreaSelector.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A919106B6100FFC8D4 /* CMapAreaSelector.cpp */; };
+		212092AB19106B6100FFC8D4 /* CSelectionArea.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A919106B6100FFC8D4 /* CSelectionArea.cpp */; };
 		212092C41919786500FFC8D4 /* gameobject.skybox.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212092C21919786500FFC8D4 /* gameobject.skybox.xml */; };
 		212092C9191978D300FFC8D4 /* shaderSkyBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 212092C7191978D300FFC8D4 /* shaderSkyBox.frag */; };
 		212092CA191978D300FFC8D4 /* shaderSkyBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 212092C8191978D300FFC8D4 /* shaderSkyBox.vert */; };
@@ -49,6 +49,11 @@
 		212092D619197ADD00FFC8D4 /* zpos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092D019197ADD00FFC8D4 /* zpos.pvr */; };
 		21216F42192F7C0200854995 /* landscape.00.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21216F41192F7C0200854995 /* landscape.00.diffuse.pvr */; };
 		214182C9193CC6C2000B66F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214182C8193CC6C2000B66F1 /* Images.xcassets */; };
+		217AF1751945BAD70045CF9D /* CMESceneFabricator.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 217AF1731945BAD70045CF9D /* CMESceneFabricator.cpp */; };
+		217AF17E1945EB010045CF9D /* gameobject.selection.area.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217AF17C1945EB010045CF9D /* gameobject.selection.area.xml */; };
+		217AF17F1945EB010045CF9D /* material.selection.area.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217AF17D1945EB010045CF9D /* material.selection.area.xml */; };
+		217AF1821945EE1E0045CF9D /* shaderSelectionArea.frag in Resources */ = {isa = PBXBuildFile; fileRef = 217AF1801945EE1E0045CF9D /* shaderSelectionArea.frag */; };
+		217AF1831945EE1E0045CF9D /* shaderSelectionArea.vert in Resources */ = {isa = PBXBuildFile; fileRef = 217AF1811945EE1E0045CF9D /* shaderSelectionArea.vert */; };
 		21B08E0419224FE100C5D5CC /* material.skybox.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0119224FE100C5D5CC /* material.skybox.base.xml */; };
 		21B08E0519224FE100C5D5CC /* material.skybox.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0219224FE100C5D5CC /* material.skybox.reflection.xml */; };
 		21B08E0619224FE100C5D5CC /* material.skybox.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0319224FE100C5D5CC /* material.skybox.refraction.xml */; };
@@ -180,8 +185,8 @@
 		212091C01906FE5200FFC8D4 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		212092A3190859AD00FFC8D4 /* CMapDragController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapDragController.cpp; path = Sources/CMapDragController.cpp; sourceTree = SOURCE_ROOT; };
 		212092A4190859AD00FFC8D4 /* CMapDragController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMapDragController.h; path = Sources/CMapDragController.h; sourceTree = SOURCE_ROOT; };
-		212092A919106B6100FFC8D4 /* CMapAreaSelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapAreaSelector.cpp; path = Sources/CMapAreaSelector.cpp; sourceTree = SOURCE_ROOT; };
-		212092AA19106B6100FFC8D4 /* CMapAreaSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMapAreaSelector.h; path = Sources/CMapAreaSelector.h; sourceTree = SOURCE_ROOT; };
+		212092A919106B6100FFC8D4 /* CSelectionArea.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSelectionArea.cpp; path = Sources/CSelectionArea.cpp; sourceTree = SOURCE_ROOT; };
+		212092AA19106B6100FFC8D4 /* CSelectionArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSelectionArea.h; path = Sources/CSelectionArea.h; sourceTree = SOURCE_ROOT; };
 		212092C21919786500FFC8D4 /* gameobject.skybox.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.skybox.xml; path = "../ie3D-Bundle/Configurations/gameobject.skybox.xml"; sourceTree = SOURCE_ROOT; };
 		212092C7191978D300FFC8D4 /* shaderSkyBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.frag; path = "../ie3D-Bundle/Shaders/shaderSkyBox.frag"; sourceTree = SOURCE_ROOT; };
 		212092C8191978D300FFC8D4 /* shaderSkyBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.vert; path = "../ie3D-Bundle/Shaders/shaderSkyBox.vert"; sourceTree = SOURCE_ROOT; };
@@ -194,6 +199,13 @@
 		21216F41192F7C0200854995 /* landscape.00.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.00.diffuse.pvr; path = "../ie3D-Bundle/Textures/landscape.00.diffuse.pvr"; sourceTree = SOURCE_ROOT; };
 		2121751DE1C919D3E0D744BA /* qt_lib_uitools_private.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_uitools_private.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_uitools_private.pri; sourceTree = "<absolute>"; };
 		214182C8193CC6C2000B66F1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ie3D-EMap/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		217AF1731945BAD70045CF9D /* CMESceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMESceneFabricator.cpp; path = Sources/CMESceneFabricator.cpp; sourceTree = SOURCE_ROOT; };
+		217AF1741945BAD70045CF9D /* CMESceneFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMESceneFabricator.h; path = Sources/CMESceneFabricator.h; sourceTree = SOURCE_ROOT; };
+		217AF1791945BB9E0045CF9D /* HMEDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HMEDeclaration.h; path = Sources/HMEDeclaration.h; sourceTree = SOURCE_ROOT; };
+		217AF17C1945EB010045CF9D /* gameobject.selection.area.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.selection.area.xml; path = "../ie3D-Bundle/Configurations/gameobject.selection.area.xml"; sourceTree = SOURCE_ROOT; };
+		217AF17D1945EB010045CF9D /* material.selection.area.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.selection.area.xml; path = "../ie3D-Bundle/Configurations/material.selection.area.xml"; sourceTree = SOURCE_ROOT; };
+		217AF1801945EE1E0045CF9D /* shaderSelectionArea.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSelectionArea.frag; path = "../ie3D-Bundle/Shaders/shaderSelectionArea.frag"; sourceTree = "<group>"; };
+		217AF1811945EE1E0045CF9D /* shaderSelectionArea.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSelectionArea.vert; path = "../ie3D-Bundle/Shaders/shaderSelectionArea.vert"; sourceTree = "<group>"; };
 		21B08E0119224FE100C5D5CC /* material.skybox.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.base.xml; path = "../ie3D-Bundle/Configurations/material.skybox.base.xml"; sourceTree = "<group>"; };
 		21B08E0219224FE100C5D5CC /* material.skybox.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.reflection.xml; path = "../ie3D-Bundle/Configurations/material.skybox.reflection.xml"; sourceTree = "<group>"; };
 		21B08E0319224FE100C5D5CC /* material.skybox.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.refraction.xml; path = "../ie3D-Bundle/Configurations/material.skybox.refraction.xml"; sourceTree = "<group>"; };
@@ -407,9 +419,9 @@
 		21138509194351AC0041A18A /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				211385071943519A0041A18A /* Serializers */,
 				21138511194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.h */,
 				21138510194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.cpp */,
-				211385071943519A0041A18A /* Serializers */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -466,6 +478,8 @@
 		212090EB1906FD4900FFC8D4 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				217AF1801945EE1E0045CF9D /* shaderSelectionArea.frag */,
+				217AF1811945EE1E0045CF9D /* shaderSelectionArea.vert */,
 				212092C7191978D300FFC8D4 /* shaderSkyBox.frag */,
 				212092C8191978D300FFC8D4 /* shaderSkyBox.vert */,
 				21BC34AB19080B47007B99DA /* shaderLandscape.frag */,
@@ -487,13 +501,15 @@
 		212090EC1906FD5300FFC8D4 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				21B08E0119224FE100C5D5CC /* material.skybox.base.xml */,
-				21B08E0219224FE100C5D5CC /* material.skybox.reflection.xml */,
-				21B08E0319224FE100C5D5CC /* material.skybox.refraction.xml */,
+				217AF17C1945EB010045CF9D /* gameobject.selection.area.xml */,
 				212092C21919786500FFC8D4 /* gameobject.skybox.xml */,
 				21BC347B19080A39007B99DA /* gameobject.landscape.xml */,
 				21BC347C19080A39007B99DA /* gameobject.ocean.xml */,
 				21BC347D19080A39007B99DA /* gameobject.particle.emitter.xml */,
+				217AF17D1945EB010045CF9D /* material.selection.area.xml */,
+				21B08E0119224FE100C5D5CC /* material.skybox.base.xml */,
+				21B08E0219224FE100C5D5CC /* material.skybox.reflection.xml */,
+				21B08E0319224FE100C5D5CC /* material.skybox.refraction.xml */,
 				21BC347E19080A39007B99DA /* material.landscape.base.xml */,
 				21BC347F19080A39007B99DA /* material.landscape.edges.base.xml */,
 				21BC348019080A39007B99DA /* material.landscape.edges.reflection.xml */,
@@ -523,6 +539,52 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		217AF1711945BAA50045CF9D /* SceneGraph Managment */ = {
+			isa = PBXGroup;
+			children = (
+				217AF1721945BAB60045CF9D /* GameObjects */,
+				217AF1741945BAD70045CF9D /* CMESceneFabricator.h */,
+				217AF1731945BAD70045CF9D /* CMESceneFabricator.cpp */,
+			);
+			name = "SceneGraph Managment";
+			sourceTree = "<group>";
+		};
+		217AF1721945BAB60045CF9D /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				212092AA19106B6100FFC8D4 /* CSelectionArea.h */,
+				212092A919106B6100FFC8D4 /* CSelectionArea.cpp */,
+			);
+			name = GameObjects;
+			sourceTree = "<group>";
+		};
+		217AF1771945BB820045CF9D /* Common  */ = {
+			isa = PBXGroup;
+			children = (
+				217AF1791945BB9E0045CF9D /* HMEDeclaration.h */,
+			);
+			name = "Common ";
+			sourceTree = "<group>";
+		};
+		217AF17A1945D9790045CF9D /* StateMachine Managment */ = {
+			isa = PBXGroup;
+			children = (
+				217AF17B1945D98A0045CF9D /* Transitions */,
+				21208E9A1906F75D00FFC8D4 /* CEditableSceneController.h */,
+				21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */,
+			);
+			name = "StateMachine Managment";
+			sourceTree = "<group>";
+		};
+		217AF17B1945D98A0045CF9D /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				21208E9C1906F75D00FFC8D4 /* CEditableSceneTransition.h */,
+				21208E9B1906F75D00FFC8D4 /* CEditableSceneTransition.cpp */,
+			);
+			name = Transitions;
+			sourceTree = "<group>";
+		};
 		21DC2B721929E88A008DA3C1 /* Temp */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,20 +605,17 @@
 		2EB56BE3C2D93CDAB0C52E67 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				217AF17A1945D9790045CF9D /* StateMachine Managment */,
+				217AF1771945BB820045CF9D /* Common  */,
+				217AF1711945BAA50045CF9D /* SceneGraph Managment */,
 				211385061943518B0041A18A /* Configurations Managment */,
 				21208E981906F75D00FFC8D4 /* CEditableScene.h */,
 				21208E971906F75D00FFC8D4 /* CEditableScene.cpp */,
-				21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */,
-				21208E9A1906F75D00FFC8D4 /* CEditableSceneController.h */,
-				21208E9B1906F75D00FFC8D4 /* CEditableSceneTransition.cpp */,
-				21208E9C1906F75D00FFC8D4 /* CEditableSceneTransition.h */,
 				09BF715167B7A0149FD2FBB8 /* main.cpp */,
 				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
 				A4024724E546B6C12F58CF61 /* CMainWindow.h */,
 				212092A4190859AD00FFC8D4 /* CMapDragController.h */,
 				212092A3190859AD00FFC8D4 /* CMapDragController.cpp */,
-				212092AA19106B6100FFC8D4 /* CMapAreaSelector.h */,
-				212092A919106B6100FFC8D4 /* CMapAreaSelector.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<Group>";
@@ -868,6 +927,7 @@
 				21BC34A019080A39007B99DA /* material.output.xml in Resources */,
 				21BC349B19080A39007B99DA /* material.landscape.refraction.xml in Resources */,
 				21BC34A319080A39007B99DA /* material.splatting.diffuse.xml in Resources */,
+				217AF1831945EE1E0045CF9D /* shaderSelectionArea.vert in Resources */,
 				21216F42192F7C0200854995 /* landscape.00.diffuse.pvr in Resources */,
 				21DC2B751929E895008DA3C1 /* mesa_heightmap.png in Resources */,
 				21BC34A919080A39007B99DA /* render.operation.world.refraction.xml in Resources */,
@@ -885,12 +945,15 @@
 				21BC34CA19080B9E007B99DA /* particle.emitter.02.pvr in Resources */,
 				21BC34C519080B9E007B99DA /* landscape.01.diffuse.pvr in Resources */,
 				21BC34C619080B9E007B99DA /* landscape.02.diffuse.pvr in Resources */,
+				217AF1821945EE1E0045CF9D /* shaderSelectionArea.frag in Resources */,
 				21BC34C719080B9E007B99DA /* landscape.03.diffuse.pvr in Resources */,
 				21BC34C819080B9E007B99DA /* ocean.normal.pvr in Resources */,
 				21BC34BB19080B47007B99DA /* shaderParticleEmitter.frag in Resources */,
 				21B08E0519224FE100C5D5CC /* material.skybox.reflection.xml in Resources */,
 				21BC34B519080B47007B99DA /* shaderLandscape.frag in Resources */,
+				217AF17F1945EB010045CF9D /* material.selection.area.xml in Resources */,
 				21BC34B919080B47007B99DA /* shaderOcean.frag in Resources */,
+				217AF17E1945EB010045CF9D /* gameobject.selection.area.xml in Resources */,
 				21BC34B619080B47007B99DA /* shaderLandscape.vert in Resources */,
 				21BC34B819080B47007B99DA /* shaderLandscapeSplatting.vert in Resources */,
 				21BC34BC19080B47007B99DA /* shaderParticleEmitter.vert in Resources */,
@@ -937,13 +1000,14 @@
 			files = (
 				2113850C194351CF0041A18A /* CMEConfigurationGameObjects.cpp in Compile Sources */,
 				21138515194351F80041A18A /* CMEConfigurationAccessor.cpp in Compile Sources */,
-				212092AB19106B6100FFC8D4 /* CMapAreaSelector.cpp in Compile Sources */,
+				212092AB19106B6100FFC8D4 /* CSelectionArea.cpp in Compile Sources */,
 				21208EA61906F75D00FFC8D4 /* CEditableSceneController.cpp in Compile Sources */,
 				212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */,
 				21208EA71906F75D00FFC8D4 /* CEditableSceneTransition.cpp in Compile Sources */,
 				21208EA51906F75D00FFC8D4 /* CEditableScene.cpp in Compile Sources */,
 				2113850F194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.cpp in Compile Sources */,
 				21138512194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.cpp in Compile Sources */,
+				217AF1751945BAD70045CF9D /* CMESceneFabricator.cpp in Compile Sources */,
 				2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */,
 				5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */,
 				5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */,

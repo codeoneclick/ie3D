@@ -24,14 +24,18 @@ protected:
     
     friend class IGameController;
     
+    ISharedGraphicsContext m_graphicsContext;
+    ISharedInputContext m_inputContext;
+    CSharedResourceAccessor m_resourceAccessor;
+    CSharedConfigurationAccessor m_configurationAccessor;
+    
     CSharedSceneGraph m_sceneGraph;
     CSharedSceneFabricator m_sceneFabricator;
     ISharedScene m_scene;
     
     CSharedRenderMgr m_renderMgr;
     CSharedSceneUpdateMgr m_sceneUpdateMgr;
-    
-    CSharedResourceAccessor m_resourceAccessor;
+    CSharedCollisionMgr m_collisionMgr;
     ISharedScreenSpaceTextureAccessor m_screenSpaceTextureAccessor;
     
     std::string m_guid;
@@ -58,6 +62,8 @@ public:
                     CSharedConfigurationAccessorRef configurationAccessor);
     
     virtual ~IGameTransition(void);
+    
+    virtual void initScene(void);
 
     std::string getGuid(void) const;
     

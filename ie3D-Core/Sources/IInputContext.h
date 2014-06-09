@@ -24,7 +24,8 @@ protected:
     IGestureRecognizerHandler(void) = default;
     
     virtual void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton) = 0;
-    virtual void onGestureRecognizerMoved(const glm::ivec2& point, E_INPUT_BUTTON inputButton) = 0;
+    virtual void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton) = 0;
+    virtual void onGestureRecognizerMoved(const glm::ivec2& point) = 0;
     virtual void onGestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton) = 0;
     
 public:
@@ -68,7 +69,8 @@ public:
                                                              E_PLATFORM_API api);
     
     void gestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
-    void gestureRecognizerMoved(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
+    void gestureRecognizerMoved(const glm::ivec2& point);
+    void gestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void gestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     
     void addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);

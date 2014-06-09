@@ -1125,8 +1125,8 @@
 				213265D41906A407001C98F7 /* CGameLoopExecutor_win32.cpp */,
 				A418526917609D86002FC042 /* IGameController.h */,
 				A418526817609D86002FC042 /* IGameController.cpp */,
-				213265D61906A407001C98F7 /* IGameLoopHandler.cpp */,
 				213265D71906A407001C98F7 /* IGameLoopHandler.h */,
+				213265D61906A407001C98F7 /* IGameLoopHandler.cpp */,
 			);
 			name = "StateMachine Managment";
 			sourceTree = "<group>";

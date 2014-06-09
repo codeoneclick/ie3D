@@ -78,13 +78,13 @@ public:
                 ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
     virtual ~IGameObject(void);
     
-    void setPosition(const glm::vec3& position);
+    virtual void setPosition(const glm::vec3& position);
     glm::vec3 getPosition(void) const;
     
-    void setRotation(const glm::vec3& rotation);
+    virtual void setRotation(const glm::vec3& rotation);
     glm::vec3 getRotation(void) const;
     
-    void setScale(const glm::vec3& scale);
+    virtual void setScale(const glm::vec3& scale);
     glm::vec3 getScale(void) const;
     
     glm::mat4x4 getWorldMatrix(void) const;

@@ -8,6 +8,8 @@
 
 #include "CEditableSceneTransition.h"
 #include "CEditableScene.h"
+#include "CMESceneFabricator.h"
+#include "CSceneGraph.h"
 
 CEditableSceneTransition::CEditableSceneTransition(const std::string& filename,
                                                    std::shared_ptr<IGraphicsContext> graphicsContext,
@@ -28,6 +30,22 @@ CEditableSceneTransition::~CEditableSceneTransition(void)
     
 }
 
+void CEditableSceneTransition::initScene(void)
+{
+    assert(m_graphicsContext != nullptr);
+    assert(m_inputContext != nullptr);
+    assert(m_sceneUpdateMgr != nullptr);
+    assert(m_collisionMgr != nullptr);
+    assert(m_screenSpaceTextureAccessor != nullptr);
+    
+    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderMgr, m_sceneUpdateMgr,
+                                                 m_collisionMgr, m_inputContext);
+    
+    m_sceneFabricator = std::make_shared<CMESceneFabricator>(m_configurationAccessor,
+                                                             m_resourceAccessor,
+                                                             m_screenSpaceTextureAccessor);
+}
+
 void CEditableSceneTransition::_OnLoaded(void)
 {
     m_scene = std::make_shared<CEditableScene>(this);
@@ -42,3 +60,18 @@ void CEditableSceneTransition::_OnGameLoopUpdate(f32 deltatime)
         m_scene->update(deltatime);
     }
 }
+
+CSharedSelectionArea CEditableSceneTransition::createSelectionArea(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
+    return sceneFabricator->createSelectionArea(filename);
+}
+
+void CEditableSceneTransition::deleteSelectionArea(CSharedSelectionAreaRef selectionArea)
+{
+    assert(m_sceneFabricator != nullptr);
+    std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
+    sceneFabricator->deleteSelectionArea(selectionArea);
+}
+

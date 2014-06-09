@@ -79,10 +79,17 @@ void IInputContext::gestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
     });
 }
 
-void IInputContext::gestureRecognizerMoved(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
+void IInputContext::gestureRecognizerDragged(const glm::ivec2 &point, E_INPUT_BUTTON inputButton)
 {
     std::for_each(m_handlers.begin(), m_handlers.end(), [point, inputButton](ISharedGestureRecognizerHandler handler) {
-        handler->onGestureRecognizerMoved(point, inputButton);
+        handler->onGestureRecognizerDragged(point, inputButton);
+    });
+}
+
+void IInputContext::gestureRecognizerMoved(const glm::ivec2& point)
+{
+    std::for_each(m_handlers.begin(), m_handlers.end(), [point](ISharedGestureRecognizerHandler handler) {
+        handler->onGestureRecognizerMoved(point);
     });
 }
 

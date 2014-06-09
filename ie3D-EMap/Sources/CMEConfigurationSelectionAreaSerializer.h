@@ -6,9 +6,26 @@
 //  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __ie3D_Demo__CMEConfigurationSelectionAreaSerializer__
-#define __ie3D_Demo__CMEConfigurationSelectionAreaSerializer__
+#ifndef CMEConfigurationSelectionAreaSerializer_h
+#define CMEConfigurationSelectionAreaSerializer_h
 
-#include <iostream>
+#include "IConfigurationSerializer.h"
 
-#endif /* defined(__ie3D_Demo__CMEConfigurationSelectionAreaSerializer__) */
+class CMEConfigurationSelectionAreaSerializer final : public IConfigurationSerializer
+{
+private:
+    
+protected:
+    
+public:
+    
+    CMEConfigurationSelectionAreaSerializer(void);
+    ~CMEConfigurationSelectionAreaSerializer(void);
+    
+    ISharedConfiguration serialize(const std::string& filename);
+    void deserialize(const std::string& filename,
+                     ISharedConfigurationRef configuration);
+};
+
+
+#endif

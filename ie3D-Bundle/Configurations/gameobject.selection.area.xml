@@ -1,0 +1,7 @@
+<selection_area
+    size_x="16"
+    size_y="16">
+	<materials>
+		<material filename="material.selection.area.xml"/>
+	</materials>
+</selection_area>

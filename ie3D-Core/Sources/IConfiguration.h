@@ -162,18 +162,16 @@ public:
     
 private:
     
-    friend class CConfigurationAccessor;
-    
 protected:
     
     IConfigurationLoadingHandler(void);
     std::array<std::set<CONFIGURATION_LOADING_HANDLER_FUNCTION>, E_CONFIGURATION_CLASS_MAX> m_configurationLoadingHandlers;
-    
-    virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
-    
+
 public:
     
     virtual ~IConfigurationLoadingHandler(void);
+    
+    virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
     void registerConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass);
     void unregisterConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass);

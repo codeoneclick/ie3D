@@ -1,19 +1,22 @@
 //
-//  CMapAreaSelector.h
+//  CSelectionArea.h
 //  ie3D-EMap
 //
 //  Created by Sergey Sergeev on 4/30/14.
 //
 //
 
-#ifndef CMapAreaSelector_h
-#define CMapAreaSelector_h
+#ifndef CSelectionArea_h
+#define CSelectionArea_h
 
 #include "IGameObject.h"
 
-class CMapAreaSelector
+class CSelectionArea : public IGameObject
 {
 private:
+    
+    ui32 m_sizeX;
+    ui32 m_sizeZ;
     
 protected:
     
@@ -30,8 +33,17 @@ protected:
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
     
+    CSharedLandscape m_landscape;
+    
 public:
-
+    
+    CSelectionArea(CSharedResourceAccessorRef resourceAccessor,
+                   ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
+    ~CSelectionArea(void);
+    
+    void setLandscape(CSharedLandscapeRef landscape);
+    
+    void setPosition(const glm::vec3& position);
 };
 
 #endif
