@@ -108,9 +108,10 @@ void CCollisionMgr::unproject(const glm::ivec2& point,
     (*_origin) = origin;
 }
 
-bool CCollisionMgr::isIntersected(CSharedCameraRef camera,
-                                  const glm::ivec2& point,
-                                  glm::vec3* intersectPoint)
+bool CCollisionMgr::isTrianglesIntersected(CSharedCameraRef camera,
+                                       const std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>>& triangles,
+                                       const glm::ivec2& point,
+                                       glm::vec3* intersectPoint)
 {
     glm::vec3 origin, direction;
     CCollisionMgr::unproject(point,
@@ -119,19 +120,42 @@ bool CCollisionMgr::isIntersected(CSharedCameraRef camera,
                              camera->Get_Viewport(),
                              &origin,
                              &direction);
-    if(CCollisionMgr::triangleIntersection(glm::vec3(-4096.0, 0.0, -4096.0),
-                                           glm::vec3( 4096.0, 0.0, -4096.0),
-                                           glm::vec3(-4096.0, 0.0,  4096.0),
-                                           origin,
-                                           direction, intersectPoint))
+    for(const auto& iterator : triangles)
     {
-        return true;
-    }
-    return CCollisionMgr::triangleIntersection(glm::vec3( 4096.0, 0.0,  4096.0),
-                                               glm::vec3( 4096.0, 0.0, -4096.0),
-                                               glm::vec3(-4096.0, 0.0,  4096.0),
+        if(CCollisionMgr::triangleIntersection(std::get<0>(iterator),
+                                               std::get<1>(iterator),
+                                               std::get<2>(iterator),
                                                origin,
-                                               direction, intersectPoint);
+                                               direction, intersectPoint))
+        {
+            return true;
+        }
+
+    }
+    return false;
+}
+
+bool CCollisionMgr::isGameObjectIntersected(CSharedCameraRef camera,
+                                            ISharedGameObjectRef gameObject,
+                                            const glm::ivec2& point,
+                                            glm::vec3* intersectedPoint)
+{
+    assert(camera != nullptr);
+    assert(gameObject != nullptr);
+    glm::vec3 origin, direction;
+    CCollisionMgr::unproject(point,
+                             camera->Get_ViewMatrix(),
+                             camera->Get_ProjectionMatrix(),
+                             camera->Get_Viewport(),
+                             &origin,
+                             &direction);
+    
+    return CCollisionMgr::collisionPoint(gameObject->getCollisionVertexBuffer(),
+                                         gameObject->getCollisionIndexBuffer(),
+                                         glm::mat4x4(1.0f),
+                                         origin,
+                                         direction,
+                                         intersectedPoint);
 }
 
 bool CCollisionMgr::triangleIntersection(const glm::vec3& trianglePoint_01,

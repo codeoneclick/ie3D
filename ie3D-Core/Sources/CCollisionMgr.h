@@ -40,12 +40,12 @@ protected:
     CSharedCamera m_camera;
     std::set<ISharedCollisionHandler> m_handlers;
     
-    bool collisionPoint(CSharedVertexBufferRef vertexBuffer,
-                        CSharedIndexBufferRef indexBuffer,
-                        const glm::mat4x4& worldMatrix,
-                        const glm::vec3& origin,
-                        const glm::vec3& direction,
-                        glm::vec3* _point);
+    static bool collisionPoint(CSharedVertexBufferRef vertexBuffer,
+                               CSharedIndexBufferRef indexBuffer,
+                               const glm::mat4x4& worldMatrix,
+                               const glm::vec3& origin,
+                               const glm::vec3& direction,
+                               glm::vec3* point);
     
     static bool triangleIntersection(const glm::vec3& trianglePoint_01,
                                      const glm::vec3& trianglePoint_02,
@@ -77,9 +77,15 @@ public:
     void addCollisionHandler(ISharedCollisionHandlerRef handler);
     void removeCollisionHandler(ISharedCollisionHandlerRef handler);
     
-    static bool isIntersected(CSharedCameraRef camera,
-                              const glm::ivec2& point,
-                              glm::vec3* intersectPoint);
+    static bool isTrianglesIntersected(CSharedCameraRef camera,
+                                       const std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>>& triangles,
+                                       const glm::ivec2& point,
+                                       glm::vec3* intersectPoint);
+    
+    static bool isGameObjectIntersected(CSharedCameraRef camera,
+                                        ISharedGameObjectRef gameObject,
+                                        const glm::ivec2& point,
+                                        glm::vec3* intersectedPoint);
 };
 
 #endif 

@@ -17,6 +17,7 @@
 #include "CMapDragController.h"
 #include "CEditableSceneTransition.h"
 #include "CSelectionArea.h"
+#include "CCollisionMgr.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
 IScene(root)
@@ -104,7 +105,6 @@ void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
     {
         m_landscape->pressureHeightIn(position, 10.0, true);
-        m_selectionArea->setPosition(position);
     }
 }
 
@@ -113,9 +113,17 @@ void CEditableScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTO
     
 }
 
-void CEditableScene::onGestureRecognizerMoved(const glm::ivec2&)
+void CEditableScene::onGestureRecognizerMoved(const glm::ivec2& point)
 {
-    std::cout<<"move"<<std::endl;
+    glm::vec3 position;
+    for(const auto& iterator : m_landscape->getChunks())
+    {
+        if(iterator != nullptr && CCollisionMgr::isGameObjectIntersected(m_camera, iterator, point, &position))
+        {
+            m_selectionArea->setPosition(position);
+            break;
+        }
+    }
 }
 
 void CEditableScene::onGestureRecognizerDragged(const glm::ivec2&, E_INPUT_BUTTON)

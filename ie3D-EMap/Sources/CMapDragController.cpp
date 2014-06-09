@@ -35,7 +35,16 @@ void CMapDragController::onGestureRecognizerPressed(const glm::ivec2& point, E_I
     if(inputButton == E_INPUT_BUTTON_MOUSE_RIGHT)
     {
         m_isPressed = true;
-        CCollisionMgr::isIntersected(m_camera, point, &m_positionStarting);
+        std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> triangles;
+        triangles.push_back(std::make_tuple(glm::vec3(-4096.0, 0.0, -4096.0),
+                                            glm::vec3( 4096.0, 0.0, -4096.0),
+                                            glm::vec3(-4096.0, 0.0,  4096.0)));
+        
+        triangles.push_back(std::make_tuple(glm::vec3( 4096.0, 0.0,  4096.0),
+                                            glm::vec3( 4096.0, 0.0, -4096.0),
+                                            glm::vec3(-4096.0, 0.0,  4096.0)));
+        
+        CCollisionMgr::isTrianglesIntersected(m_camera, triangles, point, &m_positionStarting);
     }
 }
 
@@ -46,8 +55,17 @@ void CMapDragController::onGestureRecognizerMoved(const glm::ivec2&)
 
 void CMapDragController::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON)
 {
+    std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> triangles;
+    triangles.push_back(std::make_tuple(glm::vec3(-4096.0, 0.0, -4096.0),
+                                        glm::vec3( 4096.0, 0.0, -4096.0),
+                                        glm::vec3(-4096.0, 0.0,  4096.0)));
+    
+    triangles.push_back(std::make_tuple(glm::vec3( 4096.0, 0.0,  4096.0),
+                                        glm::vec3( 4096.0, 0.0, -4096.0),
+                                        glm::vec3(-4096.0, 0.0,  4096.0)));
+    
     glm::vec3 position;
-    if(CCollisionMgr::isIntersected(m_camera, point, &position) && m_isPressed)
+    if(CCollisionMgr::isTrianglesIntersected(m_camera, triangles, point, &position) && m_isPressed)
     {
         m_positionEnding = m_positionStarting - position + m_camera->Get_LookAt();
         m_positionEnding.x = glm::min(m_positionEnding.x, m_minBound.x);
