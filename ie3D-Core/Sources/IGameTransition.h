@@ -31,7 +31,7 @@ protected:
     CSharedRenderMgr m_renderMgr;
     CSharedSceneUpdateMgr m_sceneUpdateMgr;
     
-    CSharedResourceAccessorRef m_resourceAccessor;
+    CSharedResourceAccessor m_resourceAccessor;
     ISharedScreenSpaceTextureAccessor m_screenSpaceTextureAccessor;
     
     std::string m_guid;

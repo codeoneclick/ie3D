@@ -40,7 +40,6 @@ m_resourceAccessor(resourceAccessor)
 {
     assert(graphicsContext != nullptr);
     assert(inputContext != nullptr);
-    ass
     
     m_renderMgr = std::make_shared<CRenderMgr>(graphicsContext);
     m_screenSpaceTextureAccessor = m_renderMgr;

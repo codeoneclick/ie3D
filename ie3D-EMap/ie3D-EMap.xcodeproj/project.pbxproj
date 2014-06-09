@@ -22,6 +22,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		2113850C194351CF0041A18A /* CMEConfigurationGameObjects.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2113850A194351CF0041A18A /* CMEConfigurationGameObjects.cpp */; };
+		2113850F194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2113850D194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.cpp */; };
+		21138512194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21138510194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.cpp */; };
+		21138515194351F80041A18A /* CMEConfigurationAccessor.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21138513194351F80041A18A /* CMEConfigurationAccessor.cpp */; };
 		21208EA51906F75D00FFC8D4 /* CEditableScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E971906F75D00FFC8D4 /* CEditableScene.cpp */; };
 		21208EA61906F75D00FFC8D4 /* CEditableSceneController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */; };
 		21208EA71906F75D00FFC8D4 /* CEditableSceneTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9B1906F75D00FFC8D4 /* CEditableSceneTransition.cpp */; };
@@ -152,6 +156,14 @@
 		1F379971561AECC752F4ADA1 /* qt_lib_positioning_private.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_positioning_private.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_positioning_private.pri; sourceTree = "<absolute>"; };
 		1FA4275F083C1248BFFBF88D /* qdevice.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qdevice.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/qdevice.pri; sourceTree = "<absolute>"; };
 		2058B06FF28E0FC72324895A /* qt_lib_gui.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_gui.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_gui.pri; sourceTree = "<absolute>"; };
+		2113850A194351CF0041A18A /* CMEConfigurationGameObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationGameObjects.cpp; path = Sources/CMEConfigurationGameObjects.cpp; sourceTree = SOURCE_ROOT; };
+		2113850B194351CF0041A18A /* CMEConfigurationGameObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationGameObjects.h; path = Sources/CMEConfigurationGameObjects.h; sourceTree = SOURCE_ROOT; };
+		2113850D194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationSelectionAreaSerializer.cpp; path = Sources/CMEConfigurationSelectionAreaSerializer.cpp; sourceTree = SOURCE_ROOT; };
+		2113850E194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationSelectionAreaSerializer.h; path = Sources/CMEConfigurationSelectionAreaSerializer.h; sourceTree = SOURCE_ROOT; };
+		21138510194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationSelectionAreaLoadingOperation.cpp; path = Sources/CMEConfigurationSelectionAreaLoadingOperation.cpp; sourceTree = SOURCE_ROOT; };
+		21138511194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationSelectionAreaLoadingOperation.h; path = Sources/CMEConfigurationSelectionAreaLoadingOperation.h; sourceTree = SOURCE_ROOT; };
+		21138513194351F80041A18A /* CMEConfigurationAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationAccessor.cpp; path = Sources/CMEConfigurationAccessor.cpp; sourceTree = SOURCE_ROOT; };
+		21138514194351F80041A18A /* CMEConfigurationAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationAccessor.h; path = Sources/CMEConfigurationAccessor.h; sourceTree = SOURCE_ROOT; };
 		21208E971906F75D00FFC8D4 /* CEditableScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEditableScene.cpp; path = Sources/CEditableScene.cpp; sourceTree = SOURCE_ROOT; };
 		21208E981906F75D00FFC8D4 /* CEditableScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEditableScene.h; path = Sources/CEditableScene.h; sourceTree = SOURCE_ROOT; };
 		21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEditableSceneController.cpp; path = Sources/CEditableSceneController.cpp; sourceTree = SOURCE_ROOT; };
@@ -363,6 +375,45 @@
 			name = ..;
 			sourceTree = "<Group>";
 		};
+		211385061943518B0041A18A /* Configurations Managment */ = {
+			isa = PBXGroup;
+			children = (
+				21138508194351A10041A18A /* Configurations */,
+				21138509194351AC0041A18A /* Operations */,
+				21138514194351F80041A18A /* CMEConfigurationAccessor.h */,
+				21138513194351F80041A18A /* CMEConfigurationAccessor.cpp */,
+			);
+			name = "Configurations Managment";
+			sourceTree = "<group>";
+		};
+		211385071943519A0041A18A /* Serializers */ = {
+			isa = PBXGroup;
+			children = (
+				2113850E194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.h */,
+				2113850D194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.cpp */,
+			);
+			name = Serializers;
+			sourceTree = "<group>";
+		};
+		21138508194351A10041A18A /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				2113850B194351CF0041A18A /* CMEConfigurationGameObjects.h */,
+				2113850A194351CF0041A18A /* CMEConfigurationGameObjects.cpp */,
+			);
+			name = Configurations;
+			sourceTree = "<group>";
+		};
+		21138509194351AC0041A18A /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				21138511194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.h */,
+				21138510194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.cpp */,
+				211385071943519A0041A18A /* Serializers */,
+			);
+			name = Operations;
+			sourceTree = "<group>";
+		};
 		21208EAB1906F77100FFC8D4 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,22 +543,7 @@
 		2EB56BE3C2D93CDAB0C52E67 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				4288B89518A5AEAF50AB6AC0 /* Sources */,
-			);
-			name = Sources;
-			sourceTree = "<Group>";
-		};
-		35A022BA52A944E55BE8A2F8 /* .. */ = {
-			isa = PBXGroup;
-			children = (
-				EEC2917E61EF201566DE28DF /* .. */,
-			);
-			name = ..;
-			sourceTree = "<Group>";
-		};
-		4288B89518A5AEAF50AB6AC0 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
+				211385061943518B0041A18A /* Configurations Managment */,
 				21208E981906F75D00FFC8D4 /* CEditableScene.h */,
 				21208E971906F75D00FFC8D4 /* CEditableScene.cpp */,
 				21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */,
@@ -523,6 +559,14 @@
 				212092A919106B6100FFC8D4 /* CMapAreaSelector.cpp */,
 			);
 			name = Sources;
+			sourceTree = "<Group>";
+		};
+		35A022BA52A944E55BE8A2F8 /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				EEC2917E61EF201566DE28DF /* .. */,
+			);
+			name = ..;
 			sourceTree = "<Group>";
 		};
 		4DED0DADB07C7F70E49261A2 /* macx-xcode */ = {
@@ -891,11 +935,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2113850C194351CF0041A18A /* CMEConfigurationGameObjects.cpp in Compile Sources */,
+				21138515194351F80041A18A /* CMEConfigurationAccessor.cpp in Compile Sources */,
 				212092AB19106B6100FFC8D4 /* CMapAreaSelector.cpp in Compile Sources */,
 				21208EA61906F75D00FFC8D4 /* CEditableSceneController.cpp in Compile Sources */,
 				212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */,
 				21208EA71906F75D00FFC8D4 /* CEditableSceneTransition.cpp in Compile Sources */,
 				21208EA51906F75D00FFC8D4 /* CEditableScene.cpp in Compile Sources */,
+				2113850F194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.cpp in Compile Sources */,
+				21138512194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.cpp in Compile Sources */,
 				2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */,
 				5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */,
 				5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */,

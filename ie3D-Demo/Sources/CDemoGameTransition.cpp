@@ -10,7 +10,6 @@
 #include "CDemoGameScene.h"
 
 CDemoGameTransition::CDemoGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> _templateAccessor) :
-IFabricator(_templateAccessor, _resourceAccessor),
 IGameTransition(_filename, _graphicsContext, _inputContext, _resourceAccessor, _templateAccessor)
 {
     
