@@ -536,7 +536,7 @@ void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32,
     }
     CHeightmapProcessor::updateSplattingTexture(m_splattingTexture);
     CHeightmapProcessor::updateHeightmapTexture(m_heightmapTexture);
-    CHeightmapProcessor::updateEdgesMaskTexture(m_edgesMaskTexture);
+    //CHeightmapProcessor::updateEdgesMaskTexture(m_edgesMaskTexture);
 }
 
 ui32 CHeightmapProcessor::createTextureId(void)
@@ -637,6 +637,20 @@ void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture)
                  m_heightmapData->getSizeX(),
                  m_heightmapData->getSizeZ(),
                  0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
+    delete[] data;
+    
+    data = new ui16[64 * 64];
+    for(int i = 0; i < 64; i++)
+    {
+        for(int j = 0; j < 64; j++)
+        {
+            data[i + j * 64] = TO_RGB565(0, 0, 255);
+        }
+    }
+    glTexSubImage2D(GL_TEXTURE_2D, 0,
+                    8, 8,
+                    64, 64,
+                    GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
     delete[] data;
 }
 

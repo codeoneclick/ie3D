@@ -136,6 +136,7 @@ void CEditableScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT
             m_landscape->pressureHeightOut(m_selectionArea->getPosition(), 10.0, true);
         }
         m_previousDraggedPoint = point;
+        m_selectionArea->setPosition(m_selectionArea->getPosition());
     }
 }
 
