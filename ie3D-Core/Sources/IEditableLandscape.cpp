@@ -30,7 +30,7 @@ void IEditableLandscape::pressureHeightIn(const glm::vec3& point, f32 radius,
 {
     assert(m_heightmapProcessor != nullptr);
     IEditableLandscape::pressureHeight(point, radius,
-                                       isSmooth, 5.0);
+                                       isSmooth, 0.5);
 }
 
 void IEditableLandscape::pressureHeightOut(const glm::vec3& point, f32 radius,
@@ -38,7 +38,7 @@ void IEditableLandscape::pressureHeightOut(const glm::vec3& point, f32 radius,
 {
     assert(m_heightmapProcessor != nullptr);
     IEditableLandscape::pressureHeight(point, radius,
-                                       isSmooth, -5.0);
+                                       isSmooth, -0.5);
 }
 
 void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 radius,

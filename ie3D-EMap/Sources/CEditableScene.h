@@ -26,6 +26,7 @@ protected:
     CSharedSkyBox m_skyBox;
     CSharedLandscape m_landscape;
     CSharedSelectionArea m_selectionArea;
+    glm::ivec2 m_previousDraggedPoint;
     
     std::vector<ISharedGameObject> colliders(void);
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);

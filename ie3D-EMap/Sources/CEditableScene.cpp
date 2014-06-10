@@ -20,7 +20,8 @@
 #include "CCollisionMgr.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
-IScene(root)
+IScene(root),
+m_previousDraggedPoint(glm::ivec2(0, 0))
 {
     
 }
@@ -100,12 +101,7 @@ std::vector<ISharedGameObject> CEditableScene::colliders(void)
 
 void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef, E_INPUT_BUTTON inputButton)
 {
-    m_particles.at(0)->setPosition(position);
-    
-    if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
-    {
-        m_landscape->pressureHeightIn(position, 10.0, true);
-    }
+
 }
 
 void CEditableScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTON)
@@ -126,9 +122,21 @@ void CEditableScene::onGestureRecognizerMoved(const glm::ivec2& point)
     }
 }
 
-void CEditableScene::onGestureRecognizerDragged(const glm::ivec2&, E_INPUT_BUTTON)
+void CEditableScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
-    
+    if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
+    {
+        assert(m_selectionArea != nullptr);
+        if(m_previousDraggedPoint.y > point.y)
+        {
+            m_landscape->pressureHeightIn(m_selectionArea->getPosition(), 10.0, true);
+        }
+        else if(m_previousDraggedPoint.y < point.y)
+        {
+            m_landscape->pressureHeightOut(m_selectionArea->getPosition(), 10.0, true);
+        }
+        m_previousDraggedPoint = point;
+    }
 }
 
 void CEditableScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
