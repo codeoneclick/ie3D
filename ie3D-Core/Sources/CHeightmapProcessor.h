@@ -248,9 +248,9 @@ public:
     ui32 getChunkSizeZ(ui32 i, ui32 j) const;
     
     f32 getHeight(const glm::vec3& position) const;
-    void updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights,
-                             ui32 offsetX, ui32 offsetZ,
-                             ui32 subWidth, ui32 subHeight);
+    void updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights);
+    void updateHeightmap(ui32 offsetX, ui32 offsetZ,
+                         ui32 subWidth, ui32 subHeight);
     
     inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
     {

@@ -85,6 +85,11 @@ void CCollisionMgr::onGestureRecognizerReleased(const glm::ivec2& point, E_INPUT
     
 }
 
+void CCollisionMgr::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
+{
+    
+}
+
 void CCollisionMgr::unproject(const glm::ivec2& point,
                               const glm::mat4x4& viewMatrix,
                               const glm::mat4x4& projectionMatrix,

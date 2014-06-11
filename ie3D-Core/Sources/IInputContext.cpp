@@ -100,6 +100,13 @@ void IInputContext::gestureRecognizerReleased(const glm::ivec2& point, E_INPUT_B
     });
 }
 
+void IInputContext::gestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
+{
+    std::for_each(m_handlers.begin(), m_handlers.end(), [direction](ISharedGestureRecognizerHandler handler) {
+        handler->onGestureRecognizerWheelScroll(direction);
+    });
+}
+
 void IInputContext::addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler)
 {
     m_handlers.insert(handler);

@@ -63,7 +63,6 @@ void CSelectionArea::createMesh(f32 radius)
     CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(sizeX * sizeZ, GL_DYNAMIC_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
     
-    
     ui32 index = 0;
     for(i32 i = -static_cast<i32>(sizeX) / 2; i < static_cast<i32>(sizeX) / 2; ++i)
     {
@@ -77,44 +76,36 @@ void CSelectionArea::createMesh(f32 radius)
             position.z < m_landscape->getHeightmapSizeZ() ?
             m_landscape->getHeight(position) : 0.0;
             vertexData[index].m_position = position;
-            ++index;
-        }
-    }
-    
-    ui32 index = 0;
-    for(i32 i = -static_cast<i32>(m_sizeX) / 2; i < static_cast<i32>(m_sizeX) / 2; ++i)
-    {
-        for(i32 j = -static_cast<i32>(m_sizeZ) / 2; j < static_cast<i32>(m_sizeZ) / 2; ++j)
-        {
-            vertexData[index].m_position = glm::vec3(i, 0.0, j);
-            glm::u16vec2 texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<f32>(i + static_cast<i32>(m_sizeX) / 2) / static_cast<f32>(m_sizeX),
-                                                                          static_cast<f32>(j + static_cast<i32>(m_sizeZ) / 2) / static_cast<f32>(m_sizeZ)));
+            
+            glm::u16vec2 texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<f32>(i + static_cast<i32>(sizeX) / 2) / static_cast<f32>(sizeX),
+                                                                          static_cast<f32>(j + static_cast<i32>(sizeZ) / 2) / static_cast<f32>(sizeZ)));
             vertexData[index].m_texcoord = texcoord;
+            
             ++index;
         }
     }
     vertexBuffer->unlock();
     
-    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((m_sizeX - 1) * (m_sizeZ - 1) * 6, GL_STATIC_DRAW);
+    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((sizeX - 1) * (sizeZ - 1) * 6, GL_STATIC_DRAW);
     ui16* indexData = indexBuffer->lock();
     
     index = 0;
-    for(ui32 i = 0; i < (m_sizeX - 1); ++i)
+    for(ui32 i = 0; i < (sizeX - 1); ++i)
     {
-        for(ui32 j = 0; j < (m_sizeZ - 1); ++j)
+        for(ui32 j = 0; j < (sizeZ - 1); ++j)
         {
-            indexData[index] = i + j * m_sizeX;
+            indexData[index] = i + j * sizeX;
             index++;
-            indexData[index] = i + (j + 1) * m_sizeX;
+            indexData[index] = i + (j + 1) * sizeX;
             index++;
-            indexData[index] = i + 1 + j * m_sizeX;
+            indexData[index] = i + 1 + j * sizeX;
             index++;
             
-            indexData[index] = i + (j + 1) * m_sizeX;
+            indexData[index] = i + (j + 1) * sizeX;
             index++;
-            indexData[index] = i + 1 + (j + 1) * m_sizeX;
+            indexData[index] = i + 1 + (j + 1) * sizeX;
             index++;
-            indexData[index] = i + 1 + j * m_sizeX;
+            indexData[index] = i + 1 + j * sizeX;
             index++;
         }
     }
@@ -163,7 +154,7 @@ void CSelectionArea::onDraw(const std::string& mode)
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        material->getShader()->setVector2Custom(glm::vec2(m_position.x, m_position.z), "IN_Center");
+        material->getShader()->setVector2Custom(glm::vec2(m_position.x - 0.5, m_position.z - 0.5), "IN_Center");
         material->getShader()->setFloatCustom(m_radius * 0.75, "IN_Radius");
         
         IGameObject::onDraw(mode);
@@ -196,12 +187,16 @@ void CSelectionArea::setPosition(const glm::vec3 &position)
     if(m_landscape != nullptr &&
        m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
+        assert(m_radius > 0);
+        ui32 sizeX = static_cast<ui32>(m_radius * 2);
+        ui32 sizeZ = static_cast<ui32>(m_radius * 2);
+        
         SAttributeVertex* vertexData = m_mesh->getVertexBuffer()->lock();
         
         ui32 index = 0;
-        for(i32 i = -static_cast<i32>(m_sizeX) / 2; i < static_cast<i32>(m_sizeX) / 2; ++i)
+        for(i32 i = -static_cast<i32>(sizeX) / 2; i < static_cast<i32>(sizeX) / 2; ++i)
         {
-            for(i32 j = -static_cast<i32>(m_sizeZ) / 2; j < static_cast<i32>(m_sizeZ) / 2; ++j)
+            for(i32 j = -static_cast<i32>(sizeZ) / 2; j < static_cast<i32>(sizeZ) / 2; ++j)
             {
                 glm::vec3 position = glm::vec3(i + m_position.x, 0.0, j + m_position.z);
                 position.y = position.x > 0.0 &&

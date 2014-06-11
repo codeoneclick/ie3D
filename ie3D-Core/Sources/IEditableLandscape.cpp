@@ -25,22 +25,6 @@ void IEditableLandscape::setHeightmapProcessor(CSharedHeightmapProcessorRef heig
     m_heightmapProcessor = heightmapProcessor;
 }
 
-void IEditableLandscape::pressureHeightIn(const glm::vec3& point, f32 radius,
-                                          bool isSmooth)
-{
-    assert(m_heightmapProcessor != nullptr);
-    IEditableLandscape::pressureHeight(point, radius,
-                                       isSmooth, 0.5);
-}
-
-void IEditableLandscape::pressureHeightOut(const glm::vec3& point, f32 radius,
-                                           bool isSmooth)
-{
-    assert(m_heightmapProcessor != nullptr);
-    IEditableLandscape::pressureHeight(point, radius,
-                                       isSmooth, -0.5);
-}
-
 void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 radius,
                                         bool isSmooth, f32 pressureForce)
 {
@@ -70,46 +54,47 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 radius,
             modifiedHeights.push_back(std::make_tuple(x, z, height));
         }
 	}
+    m_heightmapProcessor->updateHeightmapData(modifiedHeights);
+
+    /*f32 middleHeight = 0;
+    for (i32 x = minIndX; x < maxIndX; x++)
+    {
+        for (i32 z = minIndZ; z < maxIndZ; z++)
+        {
+            if((x < 0) || (z < 0) ||
+               x >= m_heightmapProcessor->getSizeX() ||
+               z >= m_heightmapProcessor->getSizeZ())
+                continue;
+            
+            f32 distance = glm::length(glm::vec3(x - point.x, 0.0, z - point.z));
+            f32 coefficient = radius - distance;
+            
+            float height = m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z));
+            middleHeight = 0;
+            if (coefficient > 0)
+            {
+                middleHeight = height;
+                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x - 1, 0.0, z));
+                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x + 1, 0.0, z));
+                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x - 1, 0.0, z - 1));
+                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z - 1));
+                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x + 1, 0.0, z - 1));
+                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x - 1, 0.0, z + 1));
+                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z + 1));
+                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x + 1, 0.0, z + 1));
+                height = middleHeight / 9.0f;
+                height = floor(height + 0.5f);
+            }
+            modifiedHeights.push_back(std::make_tuple(x, z, height));
+        }
+    }
+    m_heightmapProcessor->updateHeightmapData(modifiedHeights);*/
+    
     ui32 offsetX = MAX_VALUE(minIndX, 0);
     ui32 offsetZ = MAX_VALUE(minIndZ, 0);
     ui32 subWidth = MIN_VALUE(maxIndX, m_heightmapProcessor->getSizeX() - 1) - offsetX;
     ui32 subHeight = MIN_VALUE(maxIndZ, m_heightmapProcessor->getSizeZ() - 1) - offsetZ;
-    
-    m_heightmapProcessor->updateHeightmapData(modifiedHeights,
-                                              offsetX, offsetZ,
-                                              subWidth, subHeight);
-    
-	/*if(m_editSmoothing == E_SMOOTH)
-	{
-		float middleHeight = 0;
-		for (int x = minIndX; x < maxIndX; x++)
-		{
-            for (int z = minIndZ; z < maxIndZ; z++)
-            {
-                if((x <= 0) || (z <= 0) || x >= landscapeWidth || z >= landscapeHeight)
-                    continue;
-                
-                float distance = math::Vector3d(x - m_vWorkingPosition.x, 0.0f, z - m_vWorkingPosition.z).length();
-                float coeff = m_fWorkingArea - distance;
-                
-                float height = landscapeData[x][z];
-                middleHeight = 0;
-                if (coeff > 0)
-                {
-                    middleHeight = height;
-                    middleHeight += landscapeData[x-1][z];
-                    middleHeight += landscapeData[x+1][z];
-                    middleHeight += landscapeData[x-1][z-1];
-                    middleHeight += landscapeData[x][z-1];
-                    middleHeight += landscapeData[x+1][z-1];
-                    middleHeight += landscapeData[x-1][z+1];
-                    middleHeight += landscapeData[x][z+1];
-                    middleHeight += landscapeData[x+1][z+1];
-                    height = middleHeight / 9.0f;
-                    height = floor(height + 0.5f);
-                }
-                landscapeData[x][z] = height;
-            }
-		}
-	}*/
+
+    m_heightmapProcessor->updateHeightmap(offsetX, offsetZ,
+                                          subWidth, subHeight);
 }

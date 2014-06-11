@@ -21,17 +21,15 @@ private:
 protected:
 
     void setHeightmapProcessor(CSharedHeightmapProcessorRef heightmapProcessor);
-    void pressureHeight(const glm::vec3& point, f32 radius, bool isSmooth, f32 pressureForce);
+    
     
 public:
     IEditableLandscape(void);
     ~IEditableLandscape(void);
     
-    void pressureHeightIn(const glm::vec3& point, f32 radius,
-                 bool isSmooth);
+    void pressureHeight(const glm::vec3& point, f32 radius,
+                        bool isSmooth, f32 pressureForce);
     
-    void pressureHeightOut(const glm::vec3& point, f32 radius,
-                  bool isSmooth);
 };
 
 #endif

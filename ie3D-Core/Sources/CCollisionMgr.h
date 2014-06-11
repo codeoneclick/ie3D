@@ -58,6 +58,7 @@ protected:
     void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void onGestureRecognizerMoved(const glm::ivec2& point);
     void onGestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
+    void onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction);
     
 public:
     

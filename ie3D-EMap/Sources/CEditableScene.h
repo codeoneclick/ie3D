@@ -27,6 +27,7 @@ protected:
     CSharedLandscape m_landscape;
     CSharedSelectionArea m_selectionArea;
     glm::ivec2 m_previousDraggedPoint;
+    ui32 m_editableRadius;
     
     std::vector<ISharedGameObject> colliders(void);
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);
@@ -35,6 +36,7 @@ protected:
     void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void onGestureRecognizerMoved(const glm::ivec2& point);
     void onGestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
+    void onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction);
     
 public:
     

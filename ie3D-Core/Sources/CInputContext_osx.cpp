@@ -78,6 +78,11 @@
     self.m_context->gestureRecognizerReleased(glm::ivec2(point.x, self.frame.size.height - point.y), E_INPUT_BUTTON_MOUSE_RIGHT);
 }
 
+- (void)scrollWheel:(NSEvent *)event;
+{
+    self.m_context->gestureRecognizerWheelScroll([event deltaY] > 0.0 ? E_SCROLL_WHEEL_DIRECTION_FORWARD : E_SCROLL_WHEEL_DIRECTION_BACKWARD);
+}
+
 @end
 
 class IInputContext_osx : public IInputContext

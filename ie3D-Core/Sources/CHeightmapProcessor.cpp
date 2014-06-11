@@ -516,12 +516,15 @@ f32 CHeightmapProcessor::getHeight(const glm::vec3& position) const
     return 0.0;
 }
 
-void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights,
-                                              ui32 offsetX, ui32 offsetZ,
-                                              ui32 subWidth, ui32 subHeight)
+void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights)
 {
     assert(m_heightmapData != nullptr);
     m_heightmapData->updateVertexesData(modifiedHeights);
+}
+
+void CHeightmapProcessor::updateHeightmap(ui32 offsetX, ui32 offsetZ,
+                                          ui32 subWidth, ui32 subHeight)
+{
     for(ui32 i = 0; i < CHeightmapProcessor::getNumChunksX(); ++i)
     {
         for(ui32 j = 0; j < CHeightmapProcessor::getNumChunksZ(); ++j)
@@ -543,6 +546,7 @@ void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32,
     CHeightmapProcessor::updateHeightmapTexture(m_heightmapTexture, false,
                                                 offsetX, offsetZ,
                                                 subWidth, subHeight);
+    
     //CHeightmapProcessor::updateEdgesMaskTexture(m_edgesMaskTexture);
 }
 

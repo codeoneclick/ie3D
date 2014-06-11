@@ -27,6 +27,7 @@ protected:
     virtual void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton) = 0;
     virtual void onGestureRecognizerMoved(const glm::ivec2& point) = 0;
     virtual void onGestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton) = 0;
+    virtual void onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction) = 0;
     
 public:
     
@@ -72,6 +73,7 @@ public:
     void gestureRecognizerMoved(const glm::ivec2& point);
     void gestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void gestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
+    void gestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction);
     
     void addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
     void removeGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);

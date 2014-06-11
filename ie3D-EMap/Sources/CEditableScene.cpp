@@ -21,7 +21,8 @@
 
 CEditableScene::CEditableScene(IGameTransition* root) :
 IScene(root),
-m_previousDraggedPoint(glm::ivec2(0, 0))
+m_previousDraggedPoint(glm::ivec2(0, 0)),
+m_editableRadius(2)
 {
     
 }
@@ -70,6 +71,7 @@ void CEditableScene::load(void)
     m_selectionArea = transition->createSelectionArea("gameobject.selection.area.xml");
     m_root->addCustomGameObject(m_selectionArea);
     m_selectionArea->setLandscape(m_landscape);
+    m_selectionArea->setRadius(m_editableRadius);
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
@@ -101,12 +103,15 @@ std::vector<ISharedGameObject> CEditableScene::colliders(void)
 
 void CEditableScene::onCollision(const glm::vec3& position, ISharedGameObjectRef, E_INPUT_BUTTON inputButton)
 {
-
+    
 }
 
-void CEditableScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTON)
+void CEditableScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
-    
+    if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
+    {
+        m_previousDraggedPoint = point;
+    }
 }
 
 void CEditableScene::onGestureRecognizerMoved(const glm::ivec2& point)
@@ -127,14 +132,7 @@ void CEditableScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
     {
         assert(m_selectionArea != nullptr);
-        if(m_previousDraggedPoint.y > point.y)
-        {
-            m_landscape->pressureHeightIn(m_selectionArea->getPosition(), 10.0, true);
-        }
-        else if(m_previousDraggedPoint.y < point.y)
-        {
-            m_landscape->pressureHeightOut(m_selectionArea->getPosition(), 10.0, true);
-        }
+        m_landscape->pressureHeight(m_selectionArea->getPosition(), m_editableRadius, true, (m_previousDraggedPoint.y - point.y) / 10.0);
         m_previousDraggedPoint = point;
         m_selectionArea->setPosition(m_selectionArea->getPosition());
     }
@@ -143,5 +141,20 @@ void CEditableScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT
 void CEditableScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
 {
 
+}
+
+void CEditableScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
+{
+    if(direction == E_SCROLL_WHEEL_DIRECTION_FORWARD &&
+       m_editableRadius > 2.0)
+    {
+        m_editableRadius++;
+    }
+    else if(direction == E_SCROLL_WHEEL_DIRECTION_BACKWARD &&
+            m_editableRadius <= 32.0)
+    {
+        m_editableRadius--;
+    }
+    m_selectionArea->setRadius(m_editableRadius);
 }
 

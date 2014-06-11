@@ -83,6 +83,11 @@ void CMapDragController::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_
     }
 }
 
+void CMapDragController::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION)
+{
+    
+}
+
 void CMapDragController::update(f32)
 {
     glm::vec3 position;
