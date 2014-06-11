@@ -146,12 +146,12 @@ void CEditableScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTT
 void CEditableScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
 {
     if(direction == E_SCROLL_WHEEL_DIRECTION_FORWARD &&
-       m_editableRadius > 2.0)
+       m_editableRadius <= 32.0)
     {
         m_editableRadius++;
     }
     else if(direction == E_SCROLL_WHEEL_DIRECTION_BACKWARD &&
-            m_editableRadius <= 32.0)
+            m_editableRadius > 2.0)
     {
         m_editableRadius--;
     }
