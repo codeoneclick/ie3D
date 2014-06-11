@@ -18,7 +18,9 @@
 
 CSelectionArea::CSelectionArea(CSharedResourceAccessorRef resourceAccessor,
                                ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
-IGameObject(resourceAccessor, screenSpaceTextureAccessor)
+IGameObject(resourceAccessor, screenSpaceTextureAccessor),
+m_radius(2),
+m_landscape(nullptr)
 {
     m_zOrder = 6;
 }
@@ -48,11 +50,36 @@ void CSelectionArea::onConfigurationLoaded(ISharedConfigurationRef configuration
     std::shared_ptr<CMEConfigurationSelectionArea> selectionAreaConfiguration = std::static_pointer_cast<CMEConfigurationSelectionArea>(configuration);
     assert(m_resourceAccessor != nullptr);
     
-    m_sizeX = selectionAreaConfiguration->getSize().x;
-    m_sizeZ = selectionAreaConfiguration->getSize().y;
+    CSelectionArea::createMesh(m_radius);
     
-    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(m_sizeX * m_sizeZ, GL_DYNAMIC_DRAW);
+	IGameObject::listenRenderMgr(m_isNeedToRender);
+    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+}
+
+void CSelectionArea::createMesh(f32 radius)
+{
+    ui32 sizeX = static_cast<ui32>(radius * 2);
+    ui32 sizeZ = static_cast<ui32>(radius * 2);
+    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(sizeX * sizeZ, GL_DYNAMIC_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
+    
+    
+    ui32 index = 0;
+    for(i32 i = -static_cast<i32>(sizeX) / 2; i < static_cast<i32>(sizeX) / 2; ++i)
+    {
+        for(i32 j = -static_cast<i32>(sizeZ) / 2; j < static_cast<i32>(sizeZ) / 2; ++j)
+        {
+            glm::vec3 position = glm::vec3(i + m_position.x, 0.0, j + m_position.z);
+            position.y = m_landscape != nullptr &&
+            position.x > 0.0 &&
+            position.z > 0.0 &&
+            position.x < m_landscape->getHeightmapSizeX() &&
+            position.z < m_landscape->getHeightmapSizeZ() ?
+            m_landscape->getHeight(position) : 0.0;
+            vertexData[index].m_position = position;
+            ++index;
+        }
+    }
     
     ui32 index = 0;
     for(i32 i = -static_cast<i32>(m_sizeX) / 2; i < static_cast<i32>(m_sizeX) / 2; ++i)
@@ -60,6 +87,9 @@ void CSelectionArea::onConfigurationLoaded(ISharedConfigurationRef configuration
         for(i32 j = -static_cast<i32>(m_sizeZ) / 2; j < static_cast<i32>(m_sizeZ) / 2; ++j)
         {
             vertexData[index].m_position = glm::vec3(i, 0.0, j);
+            glm::u16vec2 texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<f32>(i + static_cast<i32>(m_sizeX) / 2) / static_cast<f32>(m_sizeX),
+                                                                          static_cast<f32>(j + static_cast<i32>(m_sizeZ) / 2) / static_cast<f32>(m_sizeZ)));
+            vertexData[index].m_texcoord = texcoord;
             ++index;
         }
     }
@@ -93,9 +123,6 @@ void CSelectionArea::onConfigurationLoaded(ISharedConfigurationRef configuration
     m_mesh = CMesh::constructCustomMesh("selectionArea", vertexBuffer, indexBuffer,
                                         glm::vec3(4096.0), glm::vec3(4096.0));
     assert(m_mesh != nullptr);
-    
-	IGameObject::listenRenderMgr(m_isNeedToRender);
-    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
 i32 CSelectionArea::zOrder(void)
@@ -136,7 +163,9 @@ void CSelectionArea::onDraw(const std::string& mode)
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-
+        material->getShader()->setVector2Custom(glm::vec2(m_position.x, m_position.z), "IN_Center");
+        material->getShader()->setFloatCustom(m_radius * 0.75, "IN_Radius");
+        
         IGameObject::onDraw(mode);
     }
 }
@@ -186,4 +215,13 @@ void CSelectionArea::setPosition(const glm::vec3 &position)
         }
         m_mesh->getVertexBuffer()->unlock();
     }
+}
+
+void CSelectionArea::setRadius(f32 radius)
+{
+    if(m_radius != radius)
+    {
+        CSelectionArea::createMesh(radius);
+    }
+    m_radius = radius;
 }

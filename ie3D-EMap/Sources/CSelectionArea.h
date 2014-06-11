@@ -15,8 +15,9 @@ class CSelectionArea : public IGameObject
 {
 private:
     
-    ui32 m_sizeX;
-    ui32 m_sizeZ;
+    f32 m_radius;
+    
+    CSharedLandscape m_landscape;
     
 protected:
     
@@ -33,7 +34,7 @@ protected:
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
     
-    CSharedLandscape m_landscape;
+    void createMesh(f32 radius);
     
 public:
     
@@ -44,6 +45,8 @@ public:
     void setLandscape(CSharedLandscapeRef landscape);
     
     void setPosition(const glm::vec3& position);
+    
+    void setRadius(f32 radius);
 };
 
 #endif

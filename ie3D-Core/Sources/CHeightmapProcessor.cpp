@@ -516,7 +516,9 @@ f32 CHeightmapProcessor::getHeight(const glm::vec3& position) const
     return 0.0;
 }
 
-void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights)
+void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights,
+                                              ui32 offsetX, ui32 offsetZ,
+                                              ui32 subWidth, ui32 subHeight)
 {
     assert(m_heightmapData != nullptr);
     m_heightmapData->updateVertexesData(modifiedHeights);
@@ -534,8 +536,13 @@ void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32,
             }
         }
     }
-    CHeightmapProcessor::updateSplattingTexture(m_splattingTexture);
-    CHeightmapProcessor::updateHeightmapTexture(m_heightmapTexture);
+    CHeightmapProcessor::updateSplattingTexture(m_splattingTexture, false,
+                                                offsetX, offsetZ,
+                                                subWidth, subHeight);
+    
+    CHeightmapProcessor::updateHeightmapTexture(m_heightmapTexture, false,
+                                                offsetX, offsetZ,
+                                                subWidth, subHeight);
     //CHeightmapProcessor::updateEdgesMaskTexture(m_edgesMaskTexture);
 }
 
@@ -565,26 +572,59 @@ CSharedTexture CHeightmapProcessor::createHeightmapTexture(void)
     return m_heightmapTexture;
 }
 
-void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture)
+void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool isCreation,
+                                                 ui32 offsetX, ui32 offsetY,
+                                                 ui32 subWidth, ui32 subHeight)
 {
     assert(texture != nullptr);
     texture->bind();
     
-    ui8* data = new ui8[m_heightmapData->getSizeX() * m_heightmapData->getSizeZ()];
-    for(int i = 0; i < m_heightmapData->getSizeX(); i++)
+    ui8* data = nullptr;
+    
+    if(isCreation)
     {
-        for(int j = 0; j < m_heightmapData->getSizeZ(); j++)
+        data = new ui8[m_heightmapData->getSizeX() * m_heightmapData->getSizeZ()];
+        for(int i = 0; i < m_heightmapData->getSizeX(); i++)
         {
-            f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0f, j));
-            height /= m_heightmapData->getMaxAltitude();
-            ui8 color = static_cast<ui8>((height + 1.0) / 2.0 * 255);
-            data[i + j * m_heightmapData->getSizeZ()] = color;
+            for(int j = 0; j < m_heightmapData->getSizeZ(); j++)
+            {
+                f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0f, j));
+                height /= m_heightmapData->getMaxAltitude();
+                ui8 color = static_cast<ui8>((height + 1.0) / 2.0 * 255);
+                data[i + j * m_heightmapData->getSizeZ()] = color;
+            }
         }
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA,
+                     m_heightmapData->getSizeX(),
+                     m_heightmapData->getSizeZ(),
+                     0, GL_ALPHA, GL_UNSIGNED_BYTE, data);
+        
     }
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA,
-                 m_heightmapData->getSizeX(),
-                 m_heightmapData->getSizeZ(),
-                 0, GL_ALPHA, GL_UNSIGNED_BYTE, data);
+    else
+    {
+        assert(offsetX >= 0);
+        assert(offsetX + subWidth < texture->getWidth());
+        assert(offsetY >= 0);
+        assert(offsetY + subHeight < texture->getHeight());
+        
+        data = new ui8[subWidth * subHeight];
+        for(int i = 0; i < subWidth; i++)
+        {
+            for(int j = 0; j < subHeight; j++)
+            {
+                f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData,
+                                                               glm::vec3(i + offsetX , 0.0, j + offsetY));
+                height /= m_heightmapData->getMaxAltitude();
+                ui8 color = static_cast<ui8>((height + 1.0) / 2.0 * 255);
+                data[i + j * subWidth] = color;
+            }
+        }
+        glTexSubImage2D(GL_TEXTURE_2D, 0,
+                        offsetX, offsetY,
+                        subWidth, subHeight,
+                        GL_ALPHA, GL_UNSIGNED_BYTE, data);
+    }
+    
     delete[] data;
 }
 
@@ -601,56 +641,89 @@ std::shared_ptr<CTexture> CHeightmapProcessor::createSplattingTexture(void)
     return m_splattingTexture;
 }
 
-void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture)
+void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture, bool isCreation,
+                                                 ui32 offsetX, ui32 offsetY,
+                                                 ui32 subWidth, ui32 subHeight)
 {
     assert(texture != nullptr);
     texture->bind();
     
-    ui16* data = new ui16[m_heightmapData->getSizeX() * m_heightmapData->getSizeZ()];
-    for(int i = 0; i < m_heightmapData->getSizeX(); i++)
-    {
-        for(int j = 0; j < m_heightmapData->getSizeZ(); j++)
-        {
-            data[i + j * m_heightmapData->getSizeZ()] = TO_RGB565(255, 0, 0);
-            f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0, j));
-            f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), CVertexBuffer::uncompressU8Vec4(m_heightmapData->getVertexNormal(i, j)));
-            value = glm::degrees(acosf(value));
-            assert(value >= 0.0);
-            if(height >= 0.25 && value > 45.0)
-            {
-                data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(0, 255, 0);
-            }
-            if(height < 0.25)
-            {
-                data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(0, 0, 255);
-            }
-            
-            if(i == 0 || j == 0 ||
-               i == (m_heightmapData->getSizeX() - 1) ||
-               j == (m_heightmapData->getSizeZ() - 1))
-            {
-                data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(255, 0, 0);
-            }
-        }
-    }
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
-                 m_heightmapData->getSizeX(),
-                 m_heightmapData->getSizeZ(),
-                 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
-    delete[] data;
+    ui16* data = nullptr;
     
-    data = new ui16[64 * 64];
-    for(int i = 0; i < 64; i++)
+    if(isCreation)
     {
-        for(int j = 0; j < 64; j++)
+        data = new ui16[m_heightmapData->getSizeX() * m_heightmapData->getSizeZ()];
+        for(int i = 0; i < m_heightmapData->getSizeX(); i++)
         {
-            data[i + j * 64] = TO_RGB565(0, 0, 255);
+            for(int j = 0; j < m_heightmapData->getSizeZ(); j++)
+            {
+                data[i + j * m_heightmapData->getSizeZ()] = TO_RGB565(255, 0, 0);
+                f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0, j));
+                f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), CVertexBuffer::uncompressU8Vec4(m_heightmapData->getVertexNormal(i, j)));
+                value = glm::degrees(acosf(value));
+                assert(value >= 0.0);
+                if(height >= 0.25 && value > 45.0)
+                {
+                    data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(0, 255, 0);
+                }
+                if(height < 0.25)
+                {
+                    data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(0, 0, 255);
+                }
+                
+                if(i == 0 || j == 0 ||
+                   i == (m_heightmapData->getSizeX() - 1) ||
+                   j == (m_heightmapData->getSizeZ() - 1))
+                {
+                    data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(255, 0, 0);
+                }
+            }
         }
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
+                     m_heightmapData->getSizeX(),
+                     m_heightmapData->getSizeZ(),
+                     0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
     }
-    glTexSubImage2D(GL_TEXTURE_2D, 0,
-                    8, 8,
-                    64, 64,
-                    GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
+    else
+    {
+        assert(offsetX >= 0);
+        assert(offsetX + subWidth < texture->getWidth());
+        assert(offsetY >= 0);
+        assert(offsetY + subHeight < texture->getHeight());
+        
+        data = new ui16[subWidth * subHeight];
+        for(int i = 0; i < subWidth; i++)
+        {
+            for(int j = 0; j < subHeight; j++)
+            {
+                data[i + j * subWidth] = TO_RGB565(255, 0, 0);
+                f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i + offsetX , 0.0, j + offsetY));
+                f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), CVertexBuffer::uncompressU8Vec4(m_heightmapData->getVertexNormal(i + offsetX, j + offsetY)));
+                value = glm::degrees(acosf(value));
+                assert(value >= 0.0);
+                if(height >= 0.25 && value > 45.0)
+                {
+                    data[i + j * subWidth] = TO_RGB565(0, 255, 0);
+                }
+                if(height < 0.25)
+                {
+                    data[i + j * subWidth] = TO_RGB565(0, 0, 255);
+                }
+                
+                if(i == 0 || j == 0 ||
+                   i == (m_heightmapData->getSizeX() - 1) ||
+                   j == (m_heightmapData->getSizeZ() - 1))
+                {
+                    data[i + j * subWidth] = TO_RGB565(255, 0, 0);
+                }
+            }
+        }
+        glTexSubImage2D(GL_TEXTURE_2D, 0,
+                        offsetX, offsetY,
+                        subWidth, subHeight,
+                        GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
+    }
+
     delete[] data;
 }
 

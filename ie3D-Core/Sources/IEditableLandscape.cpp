@@ -70,7 +70,14 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 radius,
             modifiedHeights.push_back(std::make_tuple(x, z, height));
         }
 	}
-    m_heightmapProcessor->updateHeightmapData(modifiedHeights);
+    ui32 offsetX = MAX_VALUE(minIndX, 0);
+    ui32 offsetZ = MAX_VALUE(minIndZ, 0);
+    ui32 subWidth = MIN_VALUE(maxIndX, m_heightmapProcessor->getSizeX() - 1) - offsetX;
+    ui32 subHeight = MIN_VALUE(maxIndZ, m_heightmapProcessor->getSizeZ() - 1) - offsetZ;
+    
+    m_heightmapProcessor->updateHeightmapData(modifiedHeights,
+                                              offsetX, offsetZ,
+                                              subWidth, subHeight);
     
 	/*if(m_editSmoothing == E_SMOOTH)
 	{

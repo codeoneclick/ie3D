@@ -192,8 +192,14 @@ protected:
     void updateIndexBuffer(CSharedIndexBufferRef indexBuffer,
                            ui32 chunkLODSizeX, ui32 chunkLODSizeZ);
     
-    void updateSplattingTexture(CSharedTextureRef texture);
-    void updateHeightmapTexture(CSharedTextureRef texture);
+    void updateSplattingTexture(CSharedTextureRef texture, bool isCreation = true,
+                                ui32 offsetX = 0, ui32 offsetY = 0,
+                                ui32 subWidth = 0, ui32 subHeight = 0);
+    
+    void updateHeightmapTexture(CSharedTextureRef texture, bool isCreation = true,
+                                ui32 offsetX = 0, ui32 offsetY = 0,
+                                ui32 subWidth = 0, ui32 subHeight = 0);
+    
     void updateEdgeChunkMaskTexture(ui16* data, ui32 index,
                                     ui32 edgesMaskWidth,
                                     ui32 edgesMaskHeight,
@@ -242,7 +248,9 @@ public:
     ui32 getChunkSizeZ(ui32 i, ui32 j) const;
     
     f32 getHeight(const glm::vec3& position) const;
-    void updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights);
+    void updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights,
+                             ui32 offsetX, ui32 offsetZ,
+                             ui32 subWidth, ui32 subHeight);
     
     inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
     {

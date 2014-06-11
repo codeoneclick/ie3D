@@ -20,7 +20,7 @@
         fs_filename="shaderSelectionArea.frag"/>
     <textures>
         <texture
-        filename="landscape.00.diffuse.pvr"
+        filename="editable.ring.pvr"
         render_operation_name=""
         sampler_id="0"
         wrap_mode="GL_REPEAT"/>
