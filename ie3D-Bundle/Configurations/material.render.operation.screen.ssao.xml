@@ -16,13 +16,18 @@
     is_shadowing="0"
     is_debugging="0">
     <shader
-    vs_filename="shaderScreenQuad.vert"
-    fs_filename="shaderScreenQuad.frag"/>
+    vs_filename="shaderScreenSSAO.vert"
+    fs_filename="shaderScreenSSAO.frag"/>
     <textures>
         <texture
         filename=""
-        render_operation_name="render.operation.screen.ssao"
+        render_operation_name="render.operation.world.base.depth"
         sampler_id="0"
+        wrap_mode="GL_CLAMP_TO_EDGE"/>
+        <texture
+        filename="ssao.random.pvr"
+        render_operation_name=""
+        sampler_id="1"
         wrap_mode="GL_CLAMP_TO_EDGE"/>
     </textures>
 </material>

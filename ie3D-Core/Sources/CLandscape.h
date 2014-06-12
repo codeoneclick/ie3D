@@ -56,7 +56,7 @@ protected:
 public:
 
     CLandscape(CSharedResourceAccessorRef resourceAccessor,
-               ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
+               ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
     ~CLandscape(void);
     
     void setCamera(CSharedCameraRef camera);

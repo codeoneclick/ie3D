@@ -180,9 +180,9 @@ class CResourceAccessor;
 typedef std::shared_ptr<CResourceAccessor> CSharedResourceAccessor;
 typedef const CSharedResourceAccessor& CSharedResourceAccessorRef;
 
-class IScreenSpaceTextureAccessor;
-typedef std::shared_ptr<IScreenSpaceTextureAccessor> ISharedScreenSpaceTextureAccessor;
-typedef const ISharedScreenSpaceTextureAccessor& ISharedScreenSpaceTextureAccessorRef;
+class IScreenSpaceRenderAccessor;
+typedef std::shared_ptr<IScreenSpaceRenderAccessor> ISharedScreenSpaceRenderAccessor;
+typedef const ISharedScreenSpaceRenderAccessor& ISharedScreenSpaceRenderAccessorRef;
 
 class CBoundBox;
 typedef std::shared_ptr<CBoundBox> CSharedBoundBox;

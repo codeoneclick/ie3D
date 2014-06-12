@@ -21,7 +21,7 @@
 #include "CIndexBuffer.h"
 
 CLandscapeEdges::CLandscapeEdges(CSharedResourceAccessorRef resourceAccessor,
-                                 ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+                                 ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
 m_width(0),
 m_height(0),

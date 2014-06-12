@@ -1,31 +1,31 @@
 //
-//  IScreenSpaceTextureAccessor.cpp
+//  IScreenSpaceRenderAccessor.cpp
 //  indie2dEngine
 //
 //  Created by Sergey Sergeev on 5/28/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "IScreenSpaceTextureAccessor.h"
+#include "IScreenSpaceRenderAccessor.h"
 #include "CTexture.h"
 
-IScreenSpaceTextureAccessor::IScreenSpaceTextureAccessor(void)
+IScreenSpaceRenderAccessor::IScreenSpaceRenderAccessor(void)
 {
 
 }
 
-IScreenSpaceTextureAccessor::~IScreenSpaceTextureAccessor(void)
+IScreenSpaceRenderAccessor::~IScreenSpaceRenderAccessor(void)
 {
     m_customTextures.clear();
 }
 
 
-void IScreenSpaceTextureAccessor::addCustomTexture(CSharedTextureRef texture)
+void IScreenSpaceRenderAccessor::addCustomTexture(CSharedTextureRef texture)
 {
     m_customTextures.insert(std::make_pair(texture->getGuid(), texture));
 }
 
-CSharedTexture IScreenSpaceTextureAccessor::getCustomTexture(const std::string& guid)
+CSharedTexture IScreenSpaceRenderAccessor::getCustomTexture(const std::string& guid)
 {
     CSharedTexture texture = nullptr;
     const auto& iterator = m_customTextures.find(guid);

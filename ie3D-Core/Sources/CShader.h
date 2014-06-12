@@ -137,6 +137,7 @@ public:
     void setVector2Custom(const glm::vec2& vector, const std::string& uniform);
     void setVector3(const glm::vec3& vector, E_SHADER_UNIFORM uniform);
     void setVector3Custom(const glm::vec3& vector, const std::string& uniform);
+    void setVector3ArrayCustom(const glm::vec3* vectors, ui32 size, const std::string& uniform);
     void setVector4(const glm::vec4& vector, E_SHADER_UNIFORM uniform);
     void setVector4Custom(const glm::vec4& vector, const std::string& uniform);
     void setFloat(f32 value, E_SHADER_UNIFORM uniform);

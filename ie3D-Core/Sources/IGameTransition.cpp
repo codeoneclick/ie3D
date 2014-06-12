@@ -45,7 +45,7 @@ m_configurationAccessor(configurationAccessor)
     assert(m_inputContext != nullptr);
     
     m_renderMgr = std::make_shared<CRenderMgr>(m_graphicsContext);
-    m_screenSpaceTextureAccessor = m_renderMgr;
+    m_screenSpaceRenderAccessor = m_renderMgr;
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
     
     std::shared_ptr<CBatchingMgr> batchingMgr = std::make_shared<CBatchingMgr>(m_renderMgr);
@@ -66,14 +66,14 @@ void IGameTransition::initScene(void)
     assert(m_inputContext != nullptr);
     assert(m_sceneUpdateMgr != nullptr);
     assert(m_collisionMgr != nullptr);
-    assert(m_screenSpaceTextureAccessor != nullptr);
+    assert(m_screenSpaceRenderAccessor != nullptr);
     
     m_sceneGraph = std::make_shared<CSceneGraph>(m_renderMgr, m_sceneUpdateMgr,
                                                  m_collisionMgr, m_inputContext);
     
     m_sceneFabricator = std::make_shared<CSceneFabricator>(m_configurationAccessor,
                                                            m_resourceAccessor,
-                                                           m_screenSpaceTextureAccessor);
+                                                           m_screenSpaceRenderAccessor);
 }
 
 void IGameTransition::_OnRegistered(void)
@@ -139,13 +139,13 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
         std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>();
         
         assert(screenSpaceRenderOperationMaterialConfiguration != nullptr);
-        assert(m_screenSpaceTextureAccessor != nullptr);
+        assert(m_screenSpaceRenderAccessor != nullptr);
         assert(m_resourceAccessor != nullptr);
         
         CMaterial::setupMaterial(screenSpaceRenderOperationMaterial,
                                  screenSpaceRenderOperationMaterialConfiguration,
                                  m_resourceAccessor,
-                                 m_screenSpaceTextureAccessor);
+                                 m_screenSpaceRenderAccessor);
         
         std::shared_ptr<CRenderOperationScreenSpace> screenSpaceRenderOperation =
         std::make_shared<CRenderOperationScreenSpace>(screenSpaceRenderOperationConfiguration->getScreenWidth(),
@@ -162,13 +162,13 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
     std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>();
     
     assert(outputRenderOperationMaterialConfiguration != nullptr);
-    assert(m_screenSpaceTextureAccessor != nullptr);
+    assert(m_screenSpaceRenderAccessor != nullptr);
 	assert(m_resourceAccessor != nullptr);
     
     CMaterial::setupMaterial(outputRenderOperationMaterial,
                              outputRenderOperationMaterialConfiguration,
                              m_resourceAccessor,
-                             m_screenSpaceTextureAccessor);
+                             m_screenSpaceRenderAccessor);
     m_renderMgr->RegisterOutputRenderOperation(outputRenderOperationMaterial);
     
     _OnLoaded();
@@ -177,6 +177,12 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
 std::string IGameTransition::getGuid(void) const
 {
     return m_guid;
+}
+
+ISharedScreenSpaceRenderAccessor IGameTransition::getSSRenderAccessor(void)
+{
+    assert(m_screenSpaceRenderAccessor != nullptr);
+    return m_screenSpaceRenderAccessor;
 }
 
 void IGameTransition::setCamera(CSharedCameraRef camera)

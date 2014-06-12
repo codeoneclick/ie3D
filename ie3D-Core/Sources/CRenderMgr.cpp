@@ -89,23 +89,31 @@ void CRenderMgr::UnregisterWorldSpaceRenderHandler(const std::string &_mode, std
     iterator->second->UnregisterRenderHandler(_handler);
 }
 
-std::shared_ptr<CTexture> CRenderMgr::Get_RenderOperationTexture(const std::string& _mode)
+std::shared_ptr<CTexture> CRenderMgr::getSSOperationTexture(const std::string& mode)
 {
-    std::string mode = _mode;
-    std::string::size_type location = _mode.find(".depth");
+    std::string findmode = mode;
+    std::string::size_type location = mode.find(".depth");
     if (std::string::npos != location)
     {
-        mode = std::string(_mode, 0, location);
+        findmode = std::string(mode, 0, location);
     }
-    std::shared_ptr<CTexture> texture = m_worldSpaceOperations.find(mode) != m_worldSpaceOperations.end() ? std::string::npos == location ? m_worldSpaceOperations.find(mode)->second->Get_OperatingColorTexture() : m_worldSpaceOperations.find(mode)->second->Get_OperatingDepthTexture() : m_screenSpaceOperations.find(mode) != m_screenSpaceOperations.end() ? m_screenSpaceOperations.find(mode)->second->Get_OperatingTexture() : nullptr;
+    std::shared_ptr<CTexture> texture = m_worldSpaceOperations.find(findmode) != m_worldSpaceOperations.end() ? std::string::npos == location ? m_worldSpaceOperations.find(findmode)->second->Get_OperatingColorTexture() : m_worldSpaceOperations.find(findmode)->second->Get_OperatingDepthTexture() : m_screenSpaceOperations.find(findmode) != m_screenSpaceOperations.end() ? m_screenSpaceOperations.find(findmode)->second->Get_OperatingTexture() : nullptr;
+    assert(texture != nullptr);
     return texture;
 }
 
-std::shared_ptr<CTexture> CRenderMgr::Get_CustomScreenSpaceOperationTexture(CSharedMaterialRef material, ui32 width, ui32 height)
+std::shared_ptr<CTexture> CRenderMgr::preprocessSSOperationTexture(CSharedMaterialRef material, ui32 width, ui32 height)
 {
     std::shared_ptr<CRenderOperationScreenSpace> operation = std::make_shared<CRenderOperationScreenSpace>(width, height, "render.mode.custom", material);
     m_customScreenSpaceOperationsQueue.push(operation);
     return operation->Get_OperatingTexture();
+}
+
+CSharedMaterial CRenderMgr::getSSOperationMaterial(const std::string& mode)
+{
+    CSharedMaterial material = m_screenSpaceOperations.find(mode) != m_screenSpaceOperations.end() ? m_screenSpaceOperations.find(mode)->second->Get_Material(): nullptr;
+    assert(material != nullptr);
+    return material;
 }
 
 void CRenderMgr::_OnGameLoopUpdate(f32 _deltatime)

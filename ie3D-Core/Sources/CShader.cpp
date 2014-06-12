@@ -561,6 +561,14 @@ void CShader::setVector3Custom(const glm::vec3 &vector, const std::string &unifo
     }
 }
 
+void CShader::setVector3ArrayCustom(const glm::vec3* vectors, ui32 size, const std::string& uniform)
+{
+    if(IResource::isLoaded() && IResource::isCommited())
+    {
+        glUniform3fv(CShader::getCustomUniform(uniform), size, &vectors[0][0]);
+    }
+}
+
 void CShader::setVector4(const glm::vec4 &vector, E_SHADER_UNIFORM uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())

@@ -22,8 +22,15 @@ protected:
     void _OnGameLoopUpdate(f32 _deltatime);
     
 public:
-    CDemoGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> _templateAccessor);
+    CDemoGameTransition(const std::string& filename,
+                        std::shared_ptr<IGraphicsContext> graphicsContext,
+                        std::shared_ptr<IInputContext> inputContext,
+                        std::shared_ptr<CResourceAccessor> resourceAccessor,
+                        std::shared_ptr<CConfigurationAccessor> configurationAccessor);
+    
     ~CDemoGameTransition(void);
+    
+    void initScene(void);
 };
 
-#endif 
+#endif

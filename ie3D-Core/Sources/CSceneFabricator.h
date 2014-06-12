@@ -26,7 +26,7 @@ public:
     
     CSceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                      CSharedResourceAccessorRef resourceAccessor,
-                     ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor);
+                     ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor);
     
     virtual ~CSceneFabricator(void);
     

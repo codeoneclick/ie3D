@@ -35,13 +35,14 @@ std::shared_ptr<IGameTransition> CDemoGameController::CreateKOTHInGameTransition
     std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_NDK);
     std::shared_ptr<IInputContext> inputContext = IInputContext::createInputContext(window, E_PLATFORM_API_NDK);
 #endif
-    
-    std::shared_ptr<CDemoGameTransition> gameKOTHInGameTransition = std::make_shared<CDemoGameTransition>(filename,
-                                                                                                          graphicsContext,
-                                                                                                          inputContext,
-                                                                                                          m_resourceAccessor,
-                                                                                                          m_configurationAccessor);
-    m_configurationAccessor->LoadGameTransitionConfiguration(filename, gameKOTHInGameTransition);
-    assert(gameKOTHInGameTransition != nullptr);
-    return gameKOTHInGameTransition;
+    m_configurationAccessor = std::make_shared<CConfigurationAccessor>();
+    std::shared_ptr<CDemoGameTransition> mainTransition = std::make_shared<CDemoGameTransition>(filename,
+                                                                                                graphicsContext,
+                                                                                                inputContext,
+                                                                                                m_resourceAccessor,
+                                                                                                m_configurationAccessor);
+    mainTransition->initScene();
+    m_configurationAccessor->LoadGameTransitionConfiguration(filename, mainTransition);
+    assert(mainTransition != nullptr);
+    return mainTransition;
 }

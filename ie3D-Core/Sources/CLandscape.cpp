@@ -23,7 +23,7 @@
 #include "CFrustum.h"
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
-                       ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+                       ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
 m_prerenderedSplattingDiffuseTexture(nullptr),
 m_prerenderedSplattingNormalTexture(nullptr),

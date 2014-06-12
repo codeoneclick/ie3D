@@ -36,7 +36,7 @@
 		21208FB21906FB5F00FFC8D4 /* IRenderHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A317E174640A30044643E /* IRenderHandler.cpp */; };
 		21208FB31906FB5F00FFC8D4 /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
 		21208FB41906FB5F00FFC8D4 /* CBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E9117C633EA0058CD47 /* CBatch.cpp */; };
-		21208FB51906FB5F00FFC8D4 /* IScreenSpaceTextureAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */; };
+		21208FB51906FB5F00FFC8D4 /* IScreenSpaceRenderAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FED181C4C060071839E /* IScreenSpaceRenderAccessor.cpp */; };
 		21208FB61906FB5F00FFC8D4 /* IGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418527317609D9C002FC042 /* IGameTransition.cpp */; };
 		21208FB71906FB5F00FFC8D4 /* CGameLoopExecutor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */; };
 		21208FB81906FB5F00FFC8D4 /* CGameLoopExecutor_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */; };
@@ -161,7 +161,7 @@
 		213265F61906A4AF001C98F7 /* IRenderHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A317E174640A30044643E /* IRenderHandler.cpp */; };
 		213265F71906A4AF001C98F7 /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
 		213265F81906A4AF001C98F7 /* CBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E9117C633EA0058CD47 /* CBatch.cpp */; };
-		213265F91906A4AF001C98F7 /* IScreenSpaceTextureAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */; };
+		213265F91906A4AF001C98F7 /* IScreenSpaceRenderAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FED181C4C060071839E /* IScreenSpaceRenderAccessor.cpp */; };
 		213265FA1906A4AF001C98F7 /* IGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418527317609D9C002FC042 /* IGameTransition.cpp */; };
 		213265FB1906A4AF001C98F7 /* CGameLoopExecutor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */; };
 		213265FC1906A4AF001C98F7 /* CGameLoopExecutor_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */; };
@@ -298,8 +298,8 @@
 		21457FE8181C4BEA0071839E /* IFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IFabricator.h; path = Sources/IFabricator.h; sourceTree = "<group>"; };
 		21457FE9181C4BEA0071839E /* IGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGraph.cpp; path = Sources/IGraph.cpp; sourceTree = "<group>"; };
 		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
-		21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IScreenSpaceTextureAccessor.cpp; path = Sources/IScreenSpaceTextureAccessor.cpp; sourceTree = "<group>"; };
-		21457FEE181C4C060071839E /* IScreenSpaceTextureAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IScreenSpaceTextureAccessor.h; path = Sources/IScreenSpaceTextureAccessor.h; sourceTree = "<group>"; };
+		21457FED181C4C060071839E /* IScreenSpaceRenderAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IScreenSpaceRenderAccessor.cpp; path = Sources/IScreenSpaceRenderAccessor.cpp; sourceTree = "<group>"; };
+		21457FEE181C4C060071839E /* IScreenSpaceRenderAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IScreenSpaceRenderAccessor.h; path = Sources/IScreenSpaceRenderAccessor.h; sourceTree = "<group>"; };
 		2172A02C18F337D300D4D317 /* HDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HDeclaration.h; path = Sources/HDeclaration.h; sourceTree = "<group>"; };
 		2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_osx.cpp; path = Sources/COGLWindow_osx.cpp; sourceTree = "<group>"; };
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
@@ -1084,8 +1084,8 @@
 				A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */,
 				A4535E9217C633EA0058CD47 /* CBatch.h */,
 				A4535E9117C633EA0058CD47 /* CBatch.cpp */,
-				21457FEE181C4C060071839E /* IScreenSpaceTextureAccessor.h */,
-				21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */,
+				21457FEE181C4C060071839E /* IScreenSpaceRenderAccessor.h */,
+				21457FED181C4C060071839E /* IScreenSpaceRenderAccessor.cpp */,
 			);
 			name = "Render Managment";
 			sourceTree = "<group>";
@@ -1598,7 +1598,7 @@
 				21208FB21906FB5F00FFC8D4 /* IRenderHandler.cpp in Sources */,
 				21208FB31906FB5F00FFC8D4 /* CBatchingMgr.cpp in Sources */,
 				21208FB41906FB5F00FFC8D4 /* CBatch.cpp in Sources */,
-				21208FB51906FB5F00FFC8D4 /* IScreenSpaceTextureAccessor.cpp in Sources */,
+				21208FB51906FB5F00FFC8D4 /* IScreenSpaceRenderAccessor.cpp in Sources */,
 				21208FB61906FB5F00FFC8D4 /* IGameTransition.cpp in Sources */,
 				21208FB71906FB5F00FFC8D4 /* CGameLoopExecutor.cpp in Sources */,
 				21208FB81906FB5F00FFC8D4 /* CGameLoopExecutor_osx.cpp in Sources */,
@@ -1721,7 +1721,7 @@
 				213265F61906A4AF001C98F7 /* IRenderHandler.cpp in Sources */,
 				213265F71906A4AF001C98F7 /* CBatchingMgr.cpp in Sources */,
 				213265F81906A4AF001C98F7 /* CBatch.cpp in Sources */,
-				213265F91906A4AF001C98F7 /* IScreenSpaceTextureAccessor.cpp in Sources */,
+				213265F91906A4AF001C98F7 /* IScreenSpaceRenderAccessor.cpp in Sources */,
 				213265FA1906A4AF001C98F7 /* IGameTransition.cpp in Sources */,
 				213265FB1906A4AF001C98F7 /* CGameLoopExecutor.cpp in Sources */,
 				213265FC1906A4AF001C98F7 /* CGameLoopExecutor_osx.cpp in Sources */,
@@ -1944,7 +1944,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -1981,7 +1981,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};

@@ -239,7 +239,7 @@ void CMaterial::setTexture(CSharedTextureRef texture,
 void CMaterial::setupMaterial(CSharedMaterialRef material,
                               CSharedConfigurationMaterialRef configuration,
                               CSharedResourceAccessor resourceAccessor,
-                              ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor,
+                              ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor,
                               ISharedResourceLoadingHandlerRef handler)
 {
     assert(configuration != nullptr);
@@ -270,7 +270,7 @@ void CMaterial::setupMaterial(CSharedMaterialRef material,
         
         CSharedTexture texture = textureConfiguration->getFilename().length() != 0 ?
         resourceAccessor->getTexture(textureConfiguration->getFilename()) :
-        screenSpaceTextureAccessor->Get_RenderOperationTexture(textureConfiguration->getRenderOperationName());
+        screenSpaceTextureAccessor->getSSOperationTexture(textureConfiguration->getRenderOperationName());
         assert(texture != nullptr);
         texture->setWrapMode(textureConfiguration->getWrapMode());
         assert(textureConfiguration->getSamplerIndex() >= 0 &&

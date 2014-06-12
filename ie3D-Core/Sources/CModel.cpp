@@ -20,7 +20,7 @@
 #include "CAnimationMixer.h"
 
 CModel::CModel(CSharedResourceAccessorRef resourceAccessor,
-               ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+               ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
 m_animationMixer(nullptr)
 {

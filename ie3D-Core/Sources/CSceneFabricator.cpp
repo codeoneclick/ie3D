@@ -20,7 +20,7 @@
 
 CSceneFabricator::CSceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                                    CSharedResourceAccessorRef resourceAccessor,
-                                   ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor) :
+                                   ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor) :
 IFabricator(configurationAccessor, resourceAccessor, screenSpaceTextureAccessor)
 {
     

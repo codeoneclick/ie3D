@@ -50,7 +50,7 @@ protected:
     CSharedRenderMgr m_renderMgr;
     CSharedSceneUpdateMgr m_sceneUpdateMgr;
     CSharedResourceAccessor m_resourceAccessor;
-	ISharedScreenSpaceTextureAccessor m_screenSpaceTextureAccessor;
+	ISharedScreenSpaceRenderAccessor m_screenSpaceTextureAccessor;
     ui32 m_zOrder;
     
     ui8 m_status;
@@ -75,7 +75,7 @@ protected:
 public:
     
 	IGameObject(CSharedResourceAccessorRef resourceAccessor,
-                ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
+                ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
     virtual ~IGameObject(void);
     
     virtual void setPosition(const glm::vec3& position);

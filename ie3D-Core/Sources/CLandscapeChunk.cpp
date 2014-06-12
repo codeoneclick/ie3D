@@ -20,7 +20,7 @@
 #include "CQuadTree.h"
 
 CLandscapeChunk::CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
-                                 ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+                                 ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
 m_chunkSizeX(0),
 m_chunkSizeZ(0),

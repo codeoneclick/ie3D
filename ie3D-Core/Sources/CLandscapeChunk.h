@@ -73,7 +73,7 @@ protected:
 public:
     
     CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
-                    ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor);
+                    ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
     ~CLandscapeChunk(void);
     
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;

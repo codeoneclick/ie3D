@@ -21,7 +21,7 @@
 #include "CTimer.h"
 
 CParticleEmitter::CParticleEmitter(CSharedResourceAccessorRef resourceAccessor,
-                                   ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+                                   ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor)
 {
     m_settings = nullptr;

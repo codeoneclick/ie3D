@@ -12,7 +12,7 @@
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
-#include "IScreenSpaceTextureAccessor.h"
+#include "IScreenSpaceRenderAccessor.h"
 #include "CConfigurationGameObjects.h"
 
 #if defined(__IOS__)
@@ -415,7 +415,7 @@ ui32 CHeightmapProcessingOperation::getIndexZ(void) const
     return m_indexZ;
 }
 
-CHeightmapProcessor::CHeightmapProcessor(const std::shared_ptr<IScreenSpaceTextureAccessor>& screenSpaceTextureAccessor,
+CHeightmapProcessor::CHeightmapProcessor(const std::shared_ptr<IScreenSpaceRenderAccessor>& screenSpaceTextureAccessor,
                                          ISharedConfigurationRef configuration) :
 m_heightmapData(nullptr),
 m_screenSpaceTextureAccessor(screenSpaceTextureAccessor),
@@ -713,13 +713,6 @@ void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture, bool
                 {
                     data[i + j * subWidth] = TO_RGB565(0, 0, 255);
                 }
-                
-                if(i == 0 || j == 0 ||
-                   i == (m_heightmapData->getSizeX() - 1) ||
-                   j == (m_heightmapData->getSizeZ() - 1))
-                {
-                    data[i + j * subWidth] = TO_RGB565(255, 0, 0);
-                }
             }
         }
         glTexSubImage2D(GL_TEXTURE_2D, 0,
@@ -820,21 +813,21 @@ std::shared_ptr<CTexture> CHeightmapProcessor::createEdgesMaskTexture(void)
 }
 
 
-std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingDiffuseTexture(const std::shared_ptr<CMaterial> &_material)
+std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingDiffuseTexture(CSharedMaterialRef material)
 {
     assert(m_screenSpaceTextureAccessor != nullptr);
     assert(m_diffuseTexture == nullptr);
     assert(m_splattingTexture != nullptr);
-    m_diffuseTexture = m_screenSpaceTextureAccessor->Get_CustomScreenSpaceOperationTexture(_material, 2048, 2048);
+    m_diffuseTexture = m_screenSpaceTextureAccessor->preprocessSSOperationTexture(material, 2048, 2048);
     return m_diffuseTexture;
 }
 
-std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingNormalTexture(const std::shared_ptr<CMaterial> &_material)
+std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingNormalTexture(CSharedMaterialRef material)
 {
     assert(m_screenSpaceTextureAccessor != nullptr);
     assert(m_normalTexture == nullptr);
     assert(m_splattingTexture != nullptr);
-    m_normalTexture = m_screenSpaceTextureAccessor->Get_CustomScreenSpaceOperationTexture(_material, 2048, 2048);
+    m_normalTexture = m_screenSpaceTextureAccessor->preprocessSSOperationTexture(material, 2048, 2048);
     return m_normalTexture;
 }
 
@@ -844,7 +837,7 @@ CSharedIndexBuffer CHeightmapProcessor::createIndexBuffer(ui32 chunkLODSizeX, ui
     assert(chunkLODSizeZ != 0);
     
     CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((chunkLODSizeX - 1) * (chunkLODSizeX - 1) * 6,
-                                                                    GL_DYNAMIC_DRAW);
+                                                                    GL_STREAM_DRAW);
     CHeightmapProcessor::updateIndexBuffer(indexBuffer,
                                          chunkLODSizeX, chunkLODSizeZ);
     return indexBuffer;

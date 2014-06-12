@@ -16,11 +16,11 @@
 #include "CRenderMgr.h"
 #include "CSceneUpdateMgr.h"
 #include "CResourceAccessor.h"
-#include "IScreenSpaceTextureAccessor.h"
+#include "IScreenSpaceRenderAccessor.h"
 #include "CConfigurationGameObjects.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
-                         ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+                         ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
 m_resourceAccessor(resourceAccessor),
 m_screenSpaceTextureAccessor(screenSpaceTextureAccessor),
 m_position(glm::vec3(0.0f, 0.0f, 0.0f)),

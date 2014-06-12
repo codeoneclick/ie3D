@@ -36,7 +36,7 @@ protected:
     CSharedRenderMgr m_renderMgr;
     CSharedSceneUpdateMgr m_sceneUpdateMgr;
     CSharedCollisionMgr m_collisionMgr;
-    ISharedScreenSpaceTextureAccessor m_screenSpaceTextureAccessor;
+    ISharedScreenSpaceRenderAccessor m_screenSpaceRenderAccessor;
     
     std::string m_guid;
     
@@ -69,6 +69,8 @@ public:
     
     ui32 getWindowWidth(void) const;
     ui32 getWindowHeight(void) const;
+    
+    ISharedScreenSpaceRenderAccessor getSSRenderAccessor(void);
     
     void setCamera(CSharedCameraRef camera);
     

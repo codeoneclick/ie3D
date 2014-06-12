@@ -6,5 +6,6 @@
         <operation filename="render.operation.world.refraction.xml"/>
     </world_space_operations>
     <screen_space_operations>
+        <operation filename="render.operation.screen.ssao.xml"/>
     </screen_space_operations>
 </transition>

@@ -18,6 +18,9 @@
 #include "CParticleEmitter.h"
 #include "CCamera.h"
 #include "CMapDragController.h"
+#include "IScreenSpaceRenderAccessor.h"
+#include "CMaterial.h"
+#include "CShader.h"
 
 CDemoGameScene::CDemoGameScene(IGameTransition* root) :
 IScene(root)
@@ -82,6 +85,23 @@ void CDemoGameScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.1;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
+    
+    CSharedMaterial material = m_root->getSSRenderAccessor()->getSSOperationMaterial("render.operation.screen.ssao");
+    if(material != nullptr &&
+       material->getShader() != nullptr)
+    {
+        glm::vec3 randomTable[8] = {
+            glm::vec3(-0.5, -0.5, -0.5),
+            glm::vec3( 0.5, -0.5, -0.5),
+            glm::vec3(-0.5,  0.5, -0.5),
+            glm::vec3( 0.5,  0.5, -0.5),
+            glm::vec3(-0.5, -0.5,  0.5),
+            glm::vec3( 0.5, -0.5,  0.5),
+            glm::vec3(-0.5,  0.5,  0.5),
+            glm::vec3( 0.5,  0.5,  0.5) };
+        
+        material->getShader()->setVector3ArrayCustom(randomTable, 8, "rndTable");
+    }
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

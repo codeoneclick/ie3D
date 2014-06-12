@@ -8,9 +8,19 @@
 
 #include "CDemoGameTransition.h"
 #include "CDemoGameScene.h"
+#include "CSceneGraph.h"
+#include "CSceneFabricator.h"
 
-CDemoGameTransition::CDemoGameTransition(const std::string& _filename, std::shared_ptr<IGraphicsContext> _graphicsContext, std::shared_ptr<IInputContext> _inputContext, std::shared_ptr<CResourceAccessor> _resourceAccessor, std::shared_ptr<CConfigurationAccessor> _templateAccessor) :
-IGameTransition(_filename, _graphicsContext, _inputContext, _resourceAccessor, _templateAccessor)
+CDemoGameTransition::CDemoGameTransition(const std::string& filename,
+                                         std::shared_ptr<IGraphicsContext> graphicsContext,
+                                         std::shared_ptr<IInputContext> inputContext,
+                                         std::shared_ptr<CResourceAccessor> resourceAccessor,
+                                         std::shared_ptr<CConfigurationAccessor> configurationAccessor) :
+IGameTransition(filename,
+                graphicsContext,
+                inputContext,
+                resourceAccessor,
+                configurationAccessor)
 {
     
 }
@@ -18,6 +28,22 @@ IGameTransition(_filename, _graphicsContext, _inputContext, _resourceAccessor, _
 CDemoGameTransition::~CDemoGameTransition(void)
 {
     
+}
+
+void CDemoGameTransition::initScene(void)
+{
+    assert(m_graphicsContext != nullptr);
+    assert(m_inputContext != nullptr);
+    assert(m_sceneUpdateMgr != nullptr);
+    assert(m_collisionMgr != nullptr);
+    assert(m_screenSpaceRenderAccessor != nullptr);
+    
+    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderMgr, m_sceneUpdateMgr,
+                                                 m_collisionMgr, m_inputContext);
+    
+    m_sceneFabricator = std::make_shared<CSceneFabricator>(m_configurationAccessor,
+                                                           m_resourceAccessor,
+                                                           m_screenSpaceRenderAccessor);
 }
 
 void CDemoGameTransition::_OnLoaded(void)

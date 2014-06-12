@@ -14,14 +14,14 @@
 #include "CLight.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
-#include "IScreenSpaceTextureAccessor.h"
+#include "IScreenSpaceRenderAccessor.h"
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CCubemapTexture.h"
 
 CSkyBox::CSkyBox(CSharedResourceAccessorRef resourceAccessor,
-               ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+               ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_SKYBOX;

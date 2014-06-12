@@ -60,7 +60,7 @@ void CSelectionArea::createMesh(f32 radius)
 {
     ui32 sizeX = static_cast<ui32>(radius * 2);
     ui32 sizeZ = static_cast<ui32>(radius * 2);
-    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(sizeX * sizeZ, GL_DYNAMIC_DRAW);
+    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(sizeX * sizeZ, GL_STREAM_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
     
     ui32 index = 0;
@@ -154,7 +154,7 @@ void CSelectionArea::onDraw(const std::string& mode)
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        material->getShader()->setVector2Custom(glm::vec2(m_position.x - 0.5, m_position.z - 0.5), "IN_Center");
+        material->getShader()->setVector2Custom(glm::vec2(m_position.x, m_position.z), "IN_Center");
         material->getShader()->setFloatCustom(m_radius * 0.75, "IN_Radius");
         
         IGameObject::onDraw(mode);
@@ -198,7 +198,7 @@ void CSelectionArea::setPosition(const glm::vec3 &position)
         {
             for(i32 j = -static_cast<i32>(sizeZ) / 2; j < static_cast<i32>(sizeZ) / 2; ++j)
             {
-                glm::vec3 position = glm::vec3(i + m_position.x, 0.0, j + m_position.z);
+                glm::vec3 position = glm::vec3(i + m_position.x + 0.5, 0.0, j + m_position.z + 0.5);
                 position.y = position.x > 0.0 &&
                 position.z > 0.0 &&
                 position.x < m_landscape->getHeightmapSizeX() &&

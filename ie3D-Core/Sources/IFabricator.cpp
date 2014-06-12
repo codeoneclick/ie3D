@@ -10,7 +10,7 @@
 
 IFabricator::IFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                          CSharedResourceAccessorRef resourceAccessor,
-                         ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor) :
+                         ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor) :
 m_configurationAccessor(configurationAccessor),
 m_resourceAccessor(resourceAccessor),
 m_screenSpaceTextureAccessor(screenSpaceTextureAccessor)

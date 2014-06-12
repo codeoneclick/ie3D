@@ -10,7 +10,7 @@
 #define CRenderMgr_h
 
 #include "IGameLoopHandler.h"
-#include "IScreenSpaceTextureAccessor.h"
+#include "IScreenSpaceRenderAccessor.h"
 
 class IGraphicsContext;
 class CMaterial;
@@ -21,7 +21,7 @@ class CRenderOperationOutput;
 class CBatchingMgr;
 class IRenderHandler;
 
-class CRenderMgr final : public IGameLoopHandler, public IScreenSpaceTextureAccessor
+class CRenderMgr final : public IGameLoopHandler, public IScreenSpaceRenderAccessor
 {
 private:
     
@@ -39,10 +39,10 @@ protected:
     
 public:
     
-    CRenderMgr(const std::shared_ptr<IGraphicsContext> _graphicsContext);
+    CRenderMgr(const std::shared_ptr<IGraphicsContext> graphicsContext);
     ~CRenderMgr(void);
     
-    void RegisterOutputRenderOperation(std::shared_ptr<CMaterial> _material);
+    void RegisterOutputRenderOperation(std::shared_ptr<CMaterial> material);
     
     void RegisterWorldSpaceRenderOperation(const std::string& _mode, std::shared_ptr<CRenderOperationWorldSpace> _operation);
     void UnregisterWorldSpaceRenderOperation(const std::string& _mode);
@@ -52,9 +52,12 @@ public:
     
     void RegisterWorldSpaceRenderHandler(const std::string& _mode, std::shared_ptr<IRenderHandler> _handler);
     void UnregisterWorldSpaceRenderHandler(const std::string& _mode, std::shared_ptr<IRenderHandler> _handler);
-
-	CSharedTexture Get_RenderOperationTexture(const std::string& mode);
-    CSharedTexture Get_CustomScreenSpaceOperationTexture(CSharedMaterialRef material, ui32 width, ui32 height);
+    
+    CSharedTexture getSSOperationTexture(const std::string& mode);
+    CSharedMaterial getSSOperationMaterial(const std::string& mode);
+    CSharedTexture preprocessSSOperationTexture(CSharedMaterialRef material,
+                                                ui32 width,
+                                                ui32 height);
     
     inline void Set_BatchingMgr(const std::shared_ptr<CBatchingMgr>& _batchingMgr)
     {
