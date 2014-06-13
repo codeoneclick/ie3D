@@ -132,9 +132,10 @@ public:
     void setMatrix4x4(const glm::mat4x4& matrix, E_SHADER_UNIFORM uniform);
     void setMatrix4x4Custom(const glm::mat4x4& matrix, const std::string& uniform);
     void setMatrixArray4x4(const glm::mat4x4* matrix, ui32 size, E_SHADER_UNIFORM uniform);
-    void setMatrixArray4x4Custom(const glm::mat4x4* matrix, ui32 size, const std::string& uniform);
+    void setMatrixArray4x4Custom(const glm::mat4x4* matrices, ui32 size, const std::string& uniform);
     void setVector2(const glm::vec2& vector, E_SHADER_UNIFORM uniform);
     void setVector2Custom(const glm::vec2& vector, const std::string& uniform);
+    void setVector2ArrayCustom(const glm::vec2* vectors, ui32 size, const std::string& uniform);
     void setVector3(const glm::vec3& vector, E_SHADER_UNIFORM uniform);
     void setVector3Custom(const glm::vec3& vector, const std::string& uniform);
     void setVector3ArrayCustom(const glm::vec3* vectors, ui32 size, const std::string& uniform);

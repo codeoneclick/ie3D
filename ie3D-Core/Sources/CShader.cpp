@@ -534,6 +534,14 @@ void CShader::setVector2Custom(const glm::vec2 &vector, const std::string &unifo
     }
 }
 
+void CShader::setVector2ArrayCustom(const glm::vec2* vectors, ui32 size, const std::string& uniform)
+{
+    if(IResource::isLoaded() && IResource::isCommited())
+    {
+        glUniform2fv(CShader::getCustomUniform(uniform), size, &vectors[0][0]);
+    }
+}
+
 void CShader::setVector3(const glm::vec3 &vector, E_SHADER_UNIFORM uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
@@ -652,7 +660,7 @@ void CShader::setIntCustom(i32 value, const std::string &uniform)
 
 void CShader::setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
-    if(IResource::isLoaded() && IResource::isCommited())
+    if(IResource::isLoaded() && IResource::isCommited() && texture != nullptr)
     {
         assert(sampler < E_SHADER_SAMPLER_MAX);
         glActiveTexture(GL_TEXTURE0 + sampler);

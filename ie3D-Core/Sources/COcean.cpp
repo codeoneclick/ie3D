@@ -67,6 +67,11 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     vertexData[2].m_position = glm::vec3(m_width - 1.0, m_altitude,  m_height - 1.0);
     vertexData[3].m_position = glm::vec3(0.0f,  m_altitude,  m_height - 1.0);
     
+    vertexData[0].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
+    vertexData[1].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
+    vertexData[2].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
+    vertexData[3].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
+    
     m_textureTileFactor = 8.0f;
     
     vertexData[0].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f,  0.0f));

@@ -264,8 +264,12 @@ std::vector<ISharedConfiguration> CConfigurationMaterial::getTexturesConfigurati
 {
     const auto& iterator = m_configurations.find(kMaterialMainNode + ":" +
                                                  kMaterialTexturesConfigurationsNode);
-    assert(iterator != m_configurations.end());
-    return iterator->second;
+    if(iterator != m_configurations.end())
+    {
+        return iterator->second;
+    }
+    static std::vector<ISharedConfiguration> configurations;
+    return configurations;
 }
 
 ISharedConfiguration CConfigurationMaterial::getShaderConfiguration(void) const
