@@ -43,15 +43,13 @@ protected:
     static bool collisionPoint(CSharedVertexBufferRef vertexBuffer,
                                CSharedIndexBufferRef indexBuffer,
                                const glm::mat4x4& worldMatrix,
-                               const glm::vec3& origin,
-                               const glm::vec3& direction,
+                               const glm::ray& ray,
                                glm::vec3* point);
     
     static bool triangleIntersection(const glm::vec3& trianglePoint_01,
                                      const glm::vec3& trianglePoint_02,
                                      const glm::vec3& trianglePoint_03,
-                                     const glm::vec3& origin,
-                                     const glm::vec3& direction,
+                                     const glm::ray& ray,
                                      glm::vec3* intersectPoint);
     
     void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
@@ -72,8 +70,7 @@ public:
                           const glm::mat4x4& viewMatrix,
                           const glm::mat4x4& projectionMatrix,
                           const glm::ivec4& viewport,
-                          glm::vec3* origin,
-                          glm::vec3* direction);
+                          glm::ray *ray);
     
     void addCollisionHandler(ISharedCollisionHandlerRef handler);
     void removeCollisionHandler(ISharedCollisionHandlerRef handler);

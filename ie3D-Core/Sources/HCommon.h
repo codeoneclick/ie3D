@@ -190,6 +190,103 @@ namespace glm
         glm::vec4 value = _matrix * glm::vec4(_vertex, 1.0f);
         return glm::vec3(value.x, value.y, value.z);
     }
+    
+    struct ray
+    {
+    protected:
+        
+        glm::vec3 m_origin;
+        glm::vec3 m_direction;
+        glm::vec3 m_invertedDirection;
+        i32 m_signs[3];
+        
+    public:
+        ray(void) : m_origin(0.0),
+                    m_direction(0.0)
+        {
+            
+        };
+        ray(const glm::vec3& origin, const glm::vec3& direction)
+        {
+            m_origin = origin;
+            ray::setDirection(direction);
+        };
+        
+        ray(const ray &copy)
+        {
+            m_origin = copy.m_origin;
+            m_direction = copy.m_direction;
+            m_invertedDirection = copy.m_invertedDirection;
+            m_signs[0] = copy.m_signs[0]; m_signs[1] = copy.m_signs[1]; m_signs[2] = copy.m_signs[2];
+        };
+        
+        void setOrigin(const glm::vec3& origin)
+        {
+            m_origin = origin;
+        };
+        
+        glm::vec3 getOrigin(void) const
+        {
+            return m_origin;
+        };
+        
+        void setDirection(const glm::vec3& direction)
+        {
+            m_direction = direction;
+            m_invertedDirection = glm::vec3(1.0 / m_direction.x,
+                                            1.0 / m_direction.y,
+                                            1.0 / m_direction.z);
+            m_signs[0] = (m_invertedDirection.x < 0);
+            m_signs[1] = (m_invertedDirection.y < 0);
+            m_signs[2] = (m_invertedDirection.z < 0);
+        };
+        
+        glm::vec3 getDirection(void) const
+        {
+            return m_direction;
+        };
+        
+        glm::vec3 getInvertedDirection(void) const
+        {
+            return m_invertedDirection;
+        };
+        
+        i32 getSign(ui32 index) const
+        {
+            assert(index < 3);
+            return m_signs[index];
+        }
+    };
+    
+    inline bool intersect(const glm::ray &ray,
+                          const glm::vec3& minBound,
+                          const glm::vec3& maxBound)
+    {
+        glm::vec3 parameters[2];
+        parameters[0] = minBound;
+        parameters[1] = maxBound;
+        f32 tmin, tmax, tymin, tymax, tzmin, tzmax;
+        
+        tmin = (parameters[ray.getSign(0)].x - ray.getOrigin().x) * ray.getInvertedDirection().x;
+        tmax = (parameters[1 - ray.getSign(0)].x - ray.getOrigin().x) * ray.getInvertedDirection().x;
+        tymin = (parameters[ray.getSign(1)].y - ray.getOrigin().y) * ray.getInvertedDirection().y;
+        tymax = (parameters[1 - ray.getSign(1)].y - ray.getOrigin().y) * ray.getInvertedDirection().y;
+        if ( (tmin > tymax) || (tymin > tmax) )
+            return false;
+        if (tymin > tmin)
+            tmin = tymin;
+        if (tymax < tmax)
+            tmax = tymax;
+        tzmin = (parameters[ray.getSign(2)].z - ray.getOrigin().z) * ray.getInvertedDirection().z;
+        tzmax = (parameters[1 - ray.getSign(2)].z - ray.getOrigin().z) * ray.getInvertedDirection().z;
+        if ( (tmin > tzmax) || (tzmin > tmax) )
+            return false;
+        if (tzmin > tmin)
+            tmin = tzmin;
+        if (tzmax < tmax)
+            tmax = tzmax;
+        return true;
+    };
 };
 
 #define DETAIL_LEVEL_2 1

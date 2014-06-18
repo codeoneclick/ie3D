@@ -26,6 +26,11 @@
 		2113850F194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2113850D194351DD0041A18A /* CMEConfigurationSelectionAreaSerializer.cpp */; };
 		21138512194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21138510194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.cpp */; };
 		21138515194351F80041A18A /* CMEConfigurationAccessor.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21138513194351F80041A18A /* CMEConfigurationAccessor.cpp */; };
+		2113851E194C40820041A18A /* material.landscape.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2113851B194C40820041A18A /* material.landscape.normal.xml */; };
+		2113851F194C40820041A18A /* material.ocean.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2113851C194C40820041A18A /* material.ocean.normal.xml */; };
+		21138520194C40820041A18A /* render.operation.world.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2113851D194C40820041A18A /* render.operation.world.normal.xml */; };
+		21138524194C40B30041A18A /* shaderGameObjectNormal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21138522194C40B30041A18A /* shaderGameObjectNormal.frag */; };
+		21138525194C40B30041A18A /* shaderGameObjectNormal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21138523194C40B30041A18A /* shaderGameObjectNormal.vert */; };
 		21208EA51906F75D00FFC8D4 /* CEditableScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E971906F75D00FFC8D4 /* CEditableScene.cpp */; };
 		21208EA61906F75D00FFC8D4 /* CEditableSceneController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */; };
 		21208EA71906F75D00FFC8D4 /* CEditableSceneTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9B1906F75D00FFC8D4 /* CEditableSceneTransition.cpp */; };
@@ -175,6 +180,11 @@
 		21138511194351EB0041A18A /* CMEConfigurationSelectionAreaLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationSelectionAreaLoadingOperation.h; path = Sources/CMEConfigurationSelectionAreaLoadingOperation.h; sourceTree = SOURCE_ROOT; };
 		21138513194351F80041A18A /* CMEConfigurationAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationAccessor.cpp; path = Sources/CMEConfigurationAccessor.cpp; sourceTree = SOURCE_ROOT; };
 		21138514194351F80041A18A /* CMEConfigurationAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationAccessor.h; path = Sources/CMEConfigurationAccessor.h; sourceTree = SOURCE_ROOT; };
+		2113851B194C40820041A18A /* material.landscape.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.normal.xml; path = "../ie3D-Bundle/Configurations/material.landscape.normal.xml"; sourceTree = SOURCE_ROOT; };
+		2113851C194C40820041A18A /* material.ocean.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.ocean.normal.xml; path = "../ie3D-Bundle/Configurations/material.ocean.normal.xml"; sourceTree = SOURCE_ROOT; };
+		2113851D194C40820041A18A /* render.operation.world.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.world.normal.xml; path = "../ie3D-Bundle/Configurations/render.operation.world.normal.xml"; sourceTree = SOURCE_ROOT; };
+		21138522194C40B30041A18A /* shaderGameObjectNormal.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderGameObjectNormal.frag; path = "../ie3D-Bundle/Shaders/shaderGameObjectNormal.frag"; sourceTree = SOURCE_ROOT; };
+		21138523194C40B30041A18A /* shaderGameObjectNormal.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderGameObjectNormal.vert; path = "../ie3D-Bundle/Shaders/shaderGameObjectNormal.vert"; sourceTree = SOURCE_ROOT; };
 		21208E971906F75D00FFC8D4 /* CEditableScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEditableScene.cpp; path = Sources/CEditableScene.cpp; sourceTree = SOURCE_ROOT; };
 		21208E981906F75D00FFC8D4 /* CEditableScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEditableScene.h; path = Sources/CEditableScene.h; sourceTree = SOURCE_ROOT; };
 		21208E991906F75D00FFC8D4 /* CEditableSceneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEditableSceneController.cpp; path = Sources/CEditableSceneController.cpp; sourceTree = SOURCE_ROOT; };
@@ -490,6 +500,8 @@
 		212090EB1906FD4900FFC8D4 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				21138522194C40B30041A18A /* shaderGameObjectNormal.frag */,
+				21138523194C40B30041A18A /* shaderGameObjectNormal.vert */,
 				216204331949A88100D129AD /* shaderScreenSSAO.frag */,
 				216204341949A88100D129AD /* shaderScreenSSAO.vert */,
 				217AF1801945EE1E0045CF9D /* shaderSelectionArea.frag */,
@@ -531,7 +543,9 @@
 				21BC348119080A39007B99DA /* material.landscape.edges.refraction.xml */,
 				21BC348219080A39007B99DA /* material.landscape.reflection.xml */,
 				21BC348319080A39007B99DA /* material.landscape.refraction.xml */,
+				2113851B194C40820041A18A /* material.landscape.normal.xml */,
 				21BC348719080A39007B99DA /* material.ocean.xml */,
+				2113851C194C40820041A18A /* material.ocean.normal.xml */,
 				21BC348819080A39007B99DA /* material.output.xml */,
 				21BC348919080A39007B99DA /* material.particle.emitter.xml */,
 				21BC348B19080A39007B99DA /* material.splatting.diffuse.xml */,
@@ -541,6 +555,7 @@
 				21BC348F19080A39007B99DA /* render.operation.world.base.xml */,
 				21BC349019080A39007B99DA /* render.operation.world.reflection.xml */,
 				21BC349119080A39007B99DA /* render.operation.world.refraction.xml */,
+				2113851D194C40820041A18A /* render.operation.world.normal.xml */,
 				21BC349219080A39007B99DA /* transition.main.xml */,
 			);
 			name = Configurations;
@@ -922,9 +937,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21138524194C40B30041A18A /* shaderGameObjectNormal.frag in Resources */,
+				21138525194C40B30041A18A /* shaderGameObjectNormal.vert in Resources */,
 				212092D119197ADD00FFC8D4 /* xneg.pvr in Resources */,
 				21BC349F19080A39007B99DA /* material.ocean.xml in Resources */,
 				212092D419197ADD00FFC8D4 /* ypos.pvr in Resources */,
+				2113851F194C40820041A18A /* material.ocean.normal.xml in Resources */,
 				21BC349419080A39007B99DA /* gameobject.ocean.xml in Resources */,
 				21B08E0619224FE100C5D5CC /* material.skybox.refraction.xml in Resources */,
 				21B08E0419224FE100C5D5CC /* material.skybox.base.xml in Resources */,
@@ -963,6 +981,7 @@
 				21BC34C519080B9E007B99DA /* landscape.01.diffuse.pvr in Resources */,
 				21BC34C619080B9E007B99DA /* landscape.02.diffuse.pvr in Resources */,
 				217AF1821945EE1E0045CF9D /* shaderSelectionArea.frag in Resources */,
+				21138520194C40820041A18A /* render.operation.world.normal.xml in Resources */,
 				21BC34C719080B9E007B99DA /* landscape.03.diffuse.pvr in Resources */,
 				21BC34C819080B9E007B99DA /* ocean.normal.pvr in Resources */,
 				21BC34BB19080B47007B99DA /* shaderParticleEmitter.frag in Resources */,
@@ -981,6 +1000,7 @@
 				21BC34BE19080B47007B99DA /* shaderScreenQuad.vert in Resources */,
 				21BC34BA19080B47007B99DA /* shaderOcean.vert in Resources */,
 				21BC34B719080B47007B99DA /* shaderLandscapeSplatting.frag in Resources */,
+				2113851E194C40820041A18A /* material.landscape.normal.xml in Resources */,
 				21BC34BD19080B47007B99DA /* shaderScreenQuad.frag in Resources */,
 				216204311949A74E00D129AD /* material.render.operation.screen.ssao.xml in Resources */,
 				212092CA191978D300FFC8D4 /* shaderSkyBox.vert in Resources */,

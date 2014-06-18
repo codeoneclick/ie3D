@@ -1,6 +1,6 @@
 <operation
     guid="render.operation.world.base"
-    index="2"
+    index="3"
     width="1024"
     height="768"
     clear_color_r="1.0"

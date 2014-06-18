@@ -660,7 +660,7 @@ void CShader::setIntCustom(i32 value, const std::string &uniform)
 
 void CShader::setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
-    if(IResource::isLoaded() && IResource::isCommited() && texture != nullptr)
+    if(IResource::isLoaded() && IResource::isCommited())
     {
         assert(sampler < E_SHADER_SAMPLER_MAX);
         glActiveTexture(GL_TEXTURE0 + sampler);

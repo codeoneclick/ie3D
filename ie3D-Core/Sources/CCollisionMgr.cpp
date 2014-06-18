@@ -43,13 +43,12 @@ void CCollisionMgr::removeCollisionHandler(ISharedCollisionHandlerRef handler)
 void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
     assert(m_camera != nullptr);
-    glm::vec3 origin, direction;
+    glm::ray ray;
     CCollisionMgr::unproject(point,
                              m_camera->Get_ViewMatrix(),
                              m_camera->Get_ProjectionMatrix(),
                              m_camera->Get_Viewport(),
-                             &origin,
-                             &direction);
+                             &ray);
     
     for(const auto& handler : m_handlers)
     {
@@ -57,11 +56,16 @@ void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_
         for(const auto& collider : colliders)
         {
             glm::vec3 point;
+            if(!glm::intersect(ray,
+                               collider->getMinBound(),
+                               collider->getMaxBound()))
+            {
+                continue;
+            }
             if(CCollisionMgr::collisionPoint(collider->getCollisionVertexBuffer(),
                                              collider->getCollisionIndexBuffer(),
                                              glm::mat4x4(1.0f),
-                                             origin,
-                                             direction,
+                                             ray,
                                              &point))
             {
                 handler->onCollision(point, collider, inputButton);
@@ -94,11 +98,11 @@ void CCollisionMgr::unproject(const glm::ivec2& point,
                               const glm::mat4x4& viewMatrix,
                               const glm::mat4x4& projectionMatrix,
                               const glm::ivec4& viewport,
-                              glm::vec3* _origin, glm::vec3* _direction)
+                              glm::ray* ray)
 {
     glm::vec3 direction, origin;
-    float screenX =  -((( 2.0f * point.x ) / viewport[2]) - 1.0f ) / projectionMatrix[0][0];
-    float screenY =  ((( 2.0f * point.y ) / viewport[3]) - 1.0f ) / projectionMatrix[1][1];
+    f32 screenX =  -((( 2.0f * point.x ) / viewport[2]) - 1.0f ) / projectionMatrix[0][0];
+    f32 screenY =  ((( 2.0f * point.y ) / viewport[3]) - 1.0f ) / projectionMatrix[1][1];
     glm::mat4x4 viewInverseMatrix = glm::inverse(viewMatrix);
     
     direction.x  = (screenX * viewInverseMatrix[0][0] + screenY * viewInverseMatrix[1][0] + viewInverseMatrix[2][0]);
@@ -109,8 +113,8 @@ void CCollisionMgr::unproject(const glm::ivec2& point,
     origin.y = viewInverseMatrix[3][1];
     origin.z = viewInverseMatrix[3][2];
     
-    (*_direction) = direction;
-    (*_origin) = origin;
+    ray->setDirection(direction);
+    ray->setOrigin(origin);
 }
 
 bool CCollisionMgr::isTrianglesIntersected(CSharedCameraRef camera,
@@ -118,20 +122,18 @@ bool CCollisionMgr::isTrianglesIntersected(CSharedCameraRef camera,
                                        const glm::ivec2& point,
                                        glm::vec3* intersectPoint)
 {
-    glm::vec3 origin, direction;
+    glm::ray ray;
     CCollisionMgr::unproject(point,
                              camera->Get_ViewMatrix(),
                              camera->Get_ProjectionMatrix(),
                              camera->Get_Viewport(),
-                             &origin,
-                             &direction);
+                             &ray);
     for(const auto& iterator : triangles)
     {
         if(CCollisionMgr::triangleIntersection(std::get<0>(iterator),
                                                std::get<1>(iterator),
                                                std::get<2>(iterator),
-                                               origin,
-                                               direction, intersectPoint))
+                                               ray, intersectPoint))
         {
             return true;
         }
@@ -147,33 +149,37 @@ bool CCollisionMgr::isGameObjectIntersected(CSharedCameraRef camera,
 {
     assert(camera != nullptr);
     assert(gameObject != nullptr);
-    glm::vec3 origin, direction;
+    glm::ray ray;
     CCollisionMgr::unproject(point,
                              camera->Get_ViewMatrix(),
                              camera->Get_ProjectionMatrix(),
                              camera->Get_Viewport(),
-                             &origin,
-                             &direction);
+                             &ray);
+    
+    if(!glm::intersect(ray,
+                       gameObject->getMinBound(),
+                       gameObject->getMaxBound()))
+    {
+        return false;
+    }
     
     return CCollisionMgr::collisionPoint(gameObject->getCollisionVertexBuffer(),
                                          gameObject->getCollisionIndexBuffer(),
                                          glm::mat4x4(1.0f),
-                                         origin,
-                                         direction,
+                                         ray,
                                          intersectedPoint);
 }
 
 bool CCollisionMgr::triangleIntersection(const glm::vec3& trianglePoint_01,
                                          const glm::vec3& trianglePoint_02,
                                          const glm::vec3& trianglePoint_03,
-                                         const glm::vec3 &origin,
-                                         const glm::vec3 &direction,
+                                         const glm::ray& ray,
                                          glm::vec3 *intersectPoint)
 {
     glm::vec3 edge_01 = trianglePoint_02 - trianglePoint_01;
 	glm::vec3 edge_02 = trianglePoint_03 - trianglePoint_01;
     
-    glm::vec3 pVector = glm::cross(direction, edge_02);
+    glm::vec3 pVector = glm::cross(ray.getDirection(), edge_02);
 	f32 determinant = glm::dot(edge_01, pVector);
 	if(fabs(determinant) < 0.0001f)
     {
@@ -181,7 +187,7 @@ bool CCollisionMgr::triangleIntersection(const glm::vec3& trianglePoint_01,
     }
     
     f32 invDeterminant = 1.0f / determinant;
-	glm::vec3 tVector = origin - trianglePoint_01;
+	glm::vec3 tVector = ray.getOrigin() - trianglePoint_01;
     
 	f32 u = glm::dot(tVector, pVector) * invDeterminant;
     if ( u < -0.0001f || u > 1.0001f )
@@ -190,7 +196,7 @@ bool CCollisionMgr::triangleIntersection(const glm::vec3& trianglePoint_01,
     }
     
     glm::vec3 qVector = glm::cross(tVector, edge_01);
-	f32 v = glm::dot(direction, qVector) * invDeterminant;
+	f32 v = glm::dot(ray.getDirection(), qVector) * invDeterminant;
 	if ( v < -0.0001f || (v + u) > 1.0001f )
     {
         return false;
@@ -203,8 +209,7 @@ bool CCollisionMgr::triangleIntersection(const glm::vec3& trianglePoint_01,
 bool CCollisionMgr::collisionPoint(CSharedVertexBufferRef vertexBuffer,
                                    CSharedIndexBufferRef indexBuffer,
                                    const glm::mat4x4& worldMatrix,
-                                   const glm::vec3& origin,
-                                   const glm::vec3& direction,
+                                   const glm::ray& ray,
                                    glm::vec3* point)
 {
     SAttributeVertex* vertexData = vertexBuffer->lock();
@@ -220,7 +225,7 @@ bool CCollisionMgr::collisionPoint(CSharedVertexBufferRef vertexBuffer,
         value = worldMatrix * glm::vec4(vertexData[indexData[index + 2]].m_position, 1.0f);
         glm::vec3 point_03 = glm::vec3(value.x, value.y, value.z);
         
-        if(CCollisionMgr::triangleIntersection(point_01, point_02, point_03, origin, direction, point))
+        if(CCollisionMgr::triangleIntersection(point_01, point_02, point_03, ray, point))
         {
             return true;
         }

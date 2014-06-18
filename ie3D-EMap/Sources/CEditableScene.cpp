@@ -18,6 +18,9 @@
 #include "CEditableSceneTransition.h"
 #include "CSelectionArea.h"
 #include "CCollisionMgr.h"
+#include "IScreenSpaceRenderAccessor.h"
+#include "CMaterial.h"
+#include "CShader.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
 IScene(root),
@@ -36,8 +39,8 @@ void CEditableScene::load(void)
 {
     assert(m_root != nullptr);
     m_camera = m_root->createCamera(60.0,
-                                    0.1,
-                                    2048.0,
+                                    0.01,
+                                    1024.0,
                                     glm::ivec4(0, 0,
                                                m_root->getWindowWidth(),
                                                m_root->getWindowHeight()));
@@ -86,6 +89,24 @@ void CEditableScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.1;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
+    
+    CSharedMaterial material = m_root->getSSRenderAccessor()->getSSOperationMaterial("render.operation.screen.ssao");
+    if(material != nullptr &&
+       material->getShader() != nullptr)
+    {
+        material->bind();
+        static glm::vec3 randomTable[8] = {
+            glm::vec3(-0.5, -0.5, -0.5),
+            glm::vec3( 0.5, -0.5, -0.5),
+            glm::vec3(-0.5,  0.5, -0.5),
+            glm::vec3( 0.5,  0.5, -0.5),
+            glm::vec3(-0.5, -0.5,  0.5),
+            glm::vec3( 0.5, -0.5,  0.5),
+            glm::vec3(-0.5,  0.5,  0.5),
+            glm::vec3( 0.5,  0.5,  0.5) };
+        
+        material->getShader()->setVector3ArrayCustom(randomTable, 8, "randomTable");
+    }
 }
 
 std::vector<ISharedGameObject> CEditableScene::colliders(void)
@@ -117,6 +138,8 @@ void CEditableScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT
 void CEditableScene::onGestureRecognizerMoved(const glm::ivec2& point)
 {
     glm::vec3 position;
+    static ui32 index = 0;
+    index = 0;
     for(const auto& iterator : m_landscape->getChunks())
     {
         if(iterator != nullptr && CCollisionMgr::isGameObjectIntersected(m_camera, iterator, point, &position))

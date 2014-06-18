@@ -33,10 +33,6 @@ private:
     ui32 m_numIndexesToRender;
     CSharedQuadTree m_quadTree;
     
-    CSharedTexture m_diffuseTextureLayer_01;
-    CSharedTexture m_diffuseTextureLayer_02;
-    CSharedTexture m_diffuseTextureLayer_03;
-    
     CSharedTexture m_prerenderedSplattingDiffuseTexture;
     CSharedTexture m_prerenderedSplattingNormalTexture;
     

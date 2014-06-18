@@ -14,7 +14,7 @@
 
 CMESceneFabricator::CMESceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                                        CSharedResourceAccessorRef resourceAccessor,
-                                       ISharedScreenSpaceTextureAccessor screenSpaceTextureAccessor) :
+                                       ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor) :
 CSceneFabricator(configurationAccessor, resourceAccessor, screenSpaceTextureAccessor)
 {
     

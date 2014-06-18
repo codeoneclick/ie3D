@@ -17,7 +17,7 @@
 #include "CCamera.h"
 
 CSelectionArea::CSelectionArea(CSharedResourceAccessorRef resourceAccessor,
-                               ISharedScreenSpaceTextureAccessorRef screenSpaceTextureAccessor) :
+                               ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
 IGameObject(resourceAccessor, screenSpaceTextureAccessor),
 m_radius(2),
 m_landscape(nullptr)

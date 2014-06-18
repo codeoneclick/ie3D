@@ -8,16 +8,16 @@ uniform highp vec3 randomTable[8];
 
 void main()
 {
-	const highp float zFar = 1024.0;
-    const highp float zNear = 0.01;
-    const highp float radius = 0.2;
-    const highp float attBias = 0.3;
+	const highp float zFar = 1024.0 * 0.1;
+    const highp float zNear = 0.01 * 0.1;
+    const highp float radius = 0.01;
+    const highp float attBias = 0.1;
     const highp float attScale = 1.0;
     
     lowp float   zb    = texture2D ( SAMPLER_02, OUT_TexCoord).x;
-    highp float   z     = zFar*zNear/(zb * (zFar - zNear) - zFar);
+    highp float   z     = zFar*zNear / (zb * (zFar - zNear) - zFar);
     highp float   att   = 0.0;
-    highp vec3    plane = 2.0 * texture2D (SAMPLER_03, OUT_TexCoord).xyz - vec3 ( 1.0 );
+    highp vec3    plane = 2.0 * texture2D (SAMPLER_03, OUT_TexCoord / 4.0).xyz - vec3 ( 1.0 );
     
     for ( int i = 0; i < 8; i++ )
     {

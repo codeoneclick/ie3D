@@ -28,10 +28,7 @@ m_heightmapSizeX(0),
 m_heightmapSizeZ(0),
 m_numIndexesToRender(0),
 m_prerenderedSplattingDiffuseTexture(nullptr),
-m_prerenderedSplattingNormalTexture(nullptr),
-m_diffuseTextureLayer_01(nullptr),
-m_diffuseTextureLayer_02(nullptr),
-m_diffuseTextureLayer_03(nullptr)
+m_prerenderedSplattingNormalTexture(nullptr)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
     
@@ -49,14 +46,8 @@ m_diffuseTextureLayer_03(nullptr)
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
 #if defined(DETAIL_LEVEL_2)
-        material->getShader()->setTexture(m_diffuseTextureLayer_01, E_SHADER_SAMPLER_01);
-        material->getShader()->setTexture(m_diffuseTextureLayer_02, E_SHADER_SAMPLER_02);
-        material->getShader()->setTexture(m_diffuseTextureLayer_03, E_SHADER_SAMPLER_03);
         material->getShader()->setFloatCustom(m_splattingTillingFactor, "IN_SplattingTillingFactor");
 #elif defined(DETAIL_LEVEL_1)
-        material->getShader()->setTexture(m_diffuseTextureLayer_01, E_SHADER_SAMPLER_01);
-        material->getShader()->setTexture(m_diffuseTextureLayer_02, E_SHADER_SAMPLER_02);
-        material->getShader()->setTexture(m_diffuseTextureLayer_03, E_SHADER_SAMPLER_03);
         material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSizeX, m_heightmapSizeZ) / m_splattingTillingFactor,
                                               "IN_SplattingTillingFactor");
 #else
@@ -113,17 +104,17 @@ void CLandscapeChunk::setPrerenderedSplattingNormalTexture(CSharedTextureRef tex
 
 void CLandscapeChunk::setDiffuseTextureLayer_01(CSharedTextureRef texture)
 {
-    m_diffuseTextureLayer_01 = texture;
+    // #TODO:
 }
 
 void CLandscapeChunk::setDiffuseTextureLayer_02(CSharedTextureRef texture)
 {
-    m_diffuseTextureLayer_02 = texture;
+    // #TODO:
 }
 
 void CLandscapeChunk::setDiffuseTextureLayer_03(CSharedTextureRef texture)
 {
-    m_diffuseTextureLayer_03 = texture;
+    // #TODO:
 }
 
 void CLandscapeChunk::setSplattinMaskTexture(CSharedTextureRef texture)
@@ -151,11 +142,6 @@ void CLandscapeChunk::onResourceLoaded(ISharedResourceRef resource, bool success
 void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     IGameObject::onConfigurationLoaded(configuration, success);
-    
-    assert(m_materials.begin() != m_materials.end());
-    CLandscapeChunk::setDiffuseTextureLayer_01(m_materials.begin()->second->getTexture(E_SHADER_SAMPLER_01));
-    CLandscapeChunk::setDiffuseTextureLayer_02(m_materials.begin()->second->getTexture(E_SHADER_SAMPLER_02));
-    CLandscapeChunk::setDiffuseTextureLayer_03(m_materials.begin()->second->getTexture(E_SHADER_SAMPLER_03));
     
     std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     assert(m_resourceAccessor != nullptr);

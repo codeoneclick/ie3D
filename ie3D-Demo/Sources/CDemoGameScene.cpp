@@ -91,7 +91,7 @@ void CDemoGameScene::update(f32 deltatime)
        material->getShader() != nullptr)
     {
         material->bind();
-        /*static glm::vec3 randomTable[8] = {
+        static glm::vec3 randomTable[8] = {
             glm::vec3(-0.5, -0.5, -0.5),
             glm::vec3( 0.5, -0.5, -0.5),
             glm::vec3(-0.5,  0.5, -0.5),
@@ -101,9 +101,9 @@ void CDemoGameScene::update(f32 deltatime)
             glm::vec3(-0.5,  0.5,  0.5),
             glm::vec3( 0.5,  0.5,  0.5) };
         
-        material->getShader()->setVector3ArrayCustom(randomTable, 8, "randomTable");*/
+        material->getShader()->setVector3ArrayCustom(randomTable, 8, "randomTable");
         
-        static glm::vec2 randomTable[12] = {
+        /*static glm::vec2 randomTable[12] = {
             glm::vec2 ( -0.326212, -0.405805 ),
             glm::vec2 ( -0.840144, -0.073580 ),
             glm::vec2 ( -0.695914,  0.457137 ),
@@ -116,8 +116,7 @@ void CDemoGameScene::update(f32 deltatime)
             glm::vec2 (  0.896420,  0.412458 ),
             glm::vec2 ( -0.321940, -0.932615 ),
             glm::vec2 ( -0.791559, -0.597705 ) };
-        material->getShader()->setVector2ArrayCustom(randomTable, 8, "randomTable");
-        
+        material->getShader()->setVector2ArrayCustom(randomTable, 8, "randomTable");*/
     }
 }
 
