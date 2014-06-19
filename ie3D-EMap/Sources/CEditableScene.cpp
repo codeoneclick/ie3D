@@ -38,7 +38,7 @@ CEditableScene::~CEditableScene(void)
 void CEditableScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->createCamera(60.0,
+    m_camera = m_root->createCamera(90.0,
                                     0.01,
                                     1024.0,
                                     glm::ivec4(0, 0,

@@ -1,9 +1,0 @@
-<operation
-guid="render.operation.world.normal"
-index="3"
-width="1024"
-height="768"
-clear_color_r="0.5"
-clear_color_g="0.5"
-clear_color_b="0.5"
-clear_color_a="0.0"/>

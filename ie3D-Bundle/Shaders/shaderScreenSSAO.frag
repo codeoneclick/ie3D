@@ -3,39 +3,73 @@ varying highp vec2 OUT_TexCoord;
 uniform sampler2D  SAMPLER_01;
 uniform sampler2D  SAMPLER_02;
 uniform sampler2D  SAMPLER_03;
-
 uniform highp vec3 randomTable[8];
 
-void main()
+const highp vec2 camerarange = vec2(0.01, 1024.0);
+highp float pw = 1.0 / 1024.0 * 0.5;
+highp float ph = 1.0 / 768.0 * 0.5;
+
+highp float getDepth(in mediump vec2 texCoord)
 {
-	const highp float zFar = 1024.0 * 0.1;
-    const highp float zNear = 0.01 * 0.1;
-    const highp float radius = 0.01;
-    const highp float attBias = 0.1;
-    const highp float attScale = 1.0;
-    
-    lowp float   zb    = texture2D ( SAMPLER_02, OUT_TexCoord).x;
-    highp float   z     = zFar*zNear / (zb * (zFar - zNear) - zFar);
-    highp float   att   = 0.0;
-    highp vec3    plane = 2.0 * texture2D (SAMPLER_03, OUT_TexCoord / 4.0).xyz - vec3 ( 1.0 );
-    
-    for ( int i = 0; i < 8; i++ )
+    if (texCoord.x < 0.0 || texCoord.y < 0.0)
     {
-        highp vec3    sample  = reflect   ( randomTable[i], plane );
-        highp float   zSample = texture2D ( SAMPLER_02, OUT_TexCoord + radius*sample.xy / z ).x;
-        
-        zSample = zFar * zNear / (zSample * (zFar - zNear) - zFar );
-        
-        if ( zSample - z > 0.1 )
-            continue;
-        
-        highp float   dz = max ( zSample - z, 0.0 ) * 30.0;
-        
-        att += 1.0 / ( 1.0 + dz*dz );
+        return 1.0;
     }
+    highp float nearZ = camerarange.x;
+    highp float farZ = camerarange.y;
+    lowp float depth = texture2D(SAMPLER_02, texCoord).x;
+    return (2.0 * nearZ) / (nearZ + farZ - depth * (farZ - nearZ));
+}
+
+highp float compareDepths(in highp float depth1, in highp float depth2)
+{
+    highp float gauss = 0.0;
+    highp float depthDifference = (depth1 - depth2) * 100.0; //depth difference (0 - 100)
+    highp float gaussDisplace = 0.2;
+    highp float gaussArea = 2.0;
+    if (depthDifference < gaussDisplace)
+    {
+        gaussArea = 0.2;
+    }
+    gauss = pow(2.7182, -2.0 * (depthDifference - gaussDisplace) * (depthDifference - gaussDisplace) / (gaussArea * gaussArea));
+    return gauss;
+}
+
+highp float getAmbientOcclusion(highp float depth, highp float dw, highp float dh)
+{
+    highp float coordw = OUT_TexCoord.x + dw / depth;
+    highp float coordh = OUT_TexCoord.y + dh / depth;
     
-    att = clamp ( (att / 8.0 + attBias) * attScale, 0.0, 1.0 );
+    if (coordw  < 1.0 && coordw  > 0.0 && coordh < 1.0 && coordh  > 0.0)
+    {
+     	highp vec2 coord = vec2(coordw , coordh);
+     	return compareDepths(depth, getDepth(coord));
+    }
+    return 0.0;
+}
+
+void main(void)
+{
+    highp vec3 random = texture2D(SAMPLER_03, OUT_TexCoord * vec2(8.0, 8.0)).xyz;
+    random = random * 2.0 -  vec3(1.0);
     
-    gl_FragColor = vec4 (att) * texture2D ( SAMPLER_01, OUT_TexCoord);
+    highp float depth = getDepth(OUT_TexCoord);
+    highp float ambientOcclusion = 0.0;
+    
+    for(int i = 0; i < 4; ++i)
+    {
+        ambientOcclusion += getAmbientOcclusion(depth,  pw,  ph);
+        ambientOcclusion += getAmbientOcclusion(depth,  pw, -ph);
+        ambientOcclusion += getAmbientOcclusion(depth, -pw,  ph);
+        ambientOcclusion += getAmbientOcclusion(depth, -pw, -ph);
+        
+        pw += random.x * 0.0001;
+        ph += random.y * 0.0001;
+        
+        //pw *= 1.7;
+        //ph *= 1.7;
+    }
+    ambientOcclusion = 0.3 + (1.0 - (ambientOcclusion / 16.0)) * 0.7;
+    gl_FragColor = vec4(ambientOcclusion, ambientOcclusion, ambientOcclusion, 1.0) * texture2D(SAMPLER_01, OUT_TexCoord);
 }
 
