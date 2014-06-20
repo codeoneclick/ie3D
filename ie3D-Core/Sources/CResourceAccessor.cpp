@@ -56,3 +56,9 @@ CSharedMesh CResourceAccessor::getMesh(const std::string& meshFilename,
     assert(mesh != nullptr);
     return mesh;
 }
+
+std::tuple<CSharedMesh, CSharedSkeleton, CSharedSequence> CResourceAccessor::getMesh(const std::string& filename) const
+{
+    assert(m_resourceLoader != nullptr);
+    
+}

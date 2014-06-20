@@ -45,6 +45,8 @@ public:
                                           const std::string& skeletonFilename,
                                           const std::string& sequenceFilename);
     
+    std::tuple<CSharedMesh, CSharedSkeleton, CSharedSequence> startMeshLoadingOperation(const std::string& filename) const;
+    
 	void unloadResource(ISharedResourceRef resource);
 };
 

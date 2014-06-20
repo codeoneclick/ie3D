@@ -34,5 +34,10 @@
         render_operation_name=""
         sampler_id="2"
         wrap_mode="GL_CLAMP_TO_EDGE"/>
+        <texture
+        filename=""
+        render_operation_name="render.operation.world.normal"
+        sampler_id="3"
+        wrap_mode="GL_CLAMP_TO_EDGE"/>
     </textures>
 </material>

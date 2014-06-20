@@ -136,6 +136,14 @@ CSharedMesh CResourceLoader::startMeshLoadingOperation(const std::string& meshFi
     }
     return resource;
 }
+std::tuple<CSharedMesh, CSharedSkeleton, CSharedSequence> CResourceLoader::startMeshLoadingOperation(const std::string& filename) const
+{
+    CSharedMesh mesh = nullptr;
+    CSharedSkeleton skeleton = nullptr;
+    CSharedSequence sequence = nullptr;
+    
+    
+}
 
 void CResourceLoader::unloadResource(ISharedResourceRef resource)
 {

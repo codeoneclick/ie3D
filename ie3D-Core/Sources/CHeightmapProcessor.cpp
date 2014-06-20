@@ -26,7 +26,6 @@
 #endif
 
 CHeightmapData::CHeightmapData(const std::string& filename) :
-m_maxAltitude(-FLT_MAX),
 m_maxHeight(-FLT_MAX),
 m_minHeight(FLT_MAX)
 {
@@ -80,10 +79,6 @@ m_minHeight(FLT_MAX)
                                                                                                       static_cast<f32>(m_sizeX),
                                                                                                       static_cast<ui32>(j) /
                                                                                                       static_cast<f32>(m_sizeZ)));
-            if(fabsf(data[i +j * m_sizeZ]) > m_maxAltitude)
-            {
-                m_maxAltitude = fabsf(data[i +j * m_sizeZ]);
-            }
             m_maxHeight = m_maxHeight < data[i + j * m_sizeZ] ? data[i + j * m_sizeZ] : m_maxHeight;
             m_minHeight = m_minHeight > data[i + j * m_sizeZ] ? data[i + j * m_sizeZ] : m_minHeight;
         }
@@ -252,19 +247,22 @@ ui32 CHeightmapData::getSizeZ(void) const
     return m_sizeZ;
 }
 
-f32 CHeightmapData::getMaxAltitude(void) const
-{
-    return m_maxAltitude;
-}
-
 f32 CHeightmapData::getMaxHeight(void) const
 {
-    return m_maxHeight;
+    decltype(m_compressedVertexes)::iterator minHeight, maxHeight;
+    auto values = std::minmax_element(begin(m_compressedVertexes), end(m_compressedVertexes), [] (SCompressedVertex const& value_01, SCompressedVertex const& value_02) {
+        return value_01.m_position.y < value_02.m_position.y;
+    });
+    return values.second->m_position.y;
 }
 
 f32 CHeightmapData::getMinHeight(void) const
 {
-    return m_minHeight;
+    decltype(m_compressedVertexes)::iterator minHeight, maxHeight;
+    auto values = std::minmax_element(begin(m_compressedVertexes), end(m_compressedVertexes), [] (SCompressedVertex const& value_01, SCompressedVertex const& value_02) {
+        return value_01.m_position.y < value_02.m_position.y;
+    });
+    return values.first->m_position.y;
 }
 
 f32 CHeightmapDataAccessor::getAngleOnHeightmapSuface(const glm::vec3& point_01,
@@ -588,12 +586,13 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
     if(isCreation)
     {
         data = new ui8[m_heightmapData->getSizeX() * m_heightmapData->getSizeZ()];
+        f32 maxHeight = MAX_VALUE(m_heightmapData->getMaxHeight(), abs(m_heightmapData->getMinHeight()));
         for(int i = 0; i < m_heightmapData->getSizeX(); i++)
         {
             for(int j = 0; j < m_heightmapData->getSizeZ(); j++)
             {
                 f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0f, j));
-                height /= m_heightmapData->getMaxAltitude();
+                height /= maxHeight;
                 ui8 color = static_cast<ui8>((height + 1.0) / 2.0 * 255);
                 data[i + j * m_heightmapData->getSizeZ()] = color;
             }
@@ -611,6 +610,8 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
         assert(offsetY >= 0);
         assert(offsetY + subHeight < texture->getHeight());
         
+        f32 maxHeight = MAX_VALUE(m_heightmapData->getMaxHeight(), abs(m_heightmapData->getMinHeight()));
+        
         data = new ui8[subWidth * subHeight];
         for(int i = 0; i < subWidth; i++)
         {
@@ -618,7 +619,7 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
             {
                 f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData,
                                                                glm::vec3(i + offsetX , 0.0, j + offsetY));
-                height /= m_heightmapData->getMaxAltitude();
+                height /= maxHeight;
                 ui8 color = static_cast<ui8>((height + 1.0) / 2.0 * 255);
                 data[i + j * subWidth] = color;
             }

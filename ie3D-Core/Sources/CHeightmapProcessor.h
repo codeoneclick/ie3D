@@ -99,7 +99,6 @@ protected:
     ui32 m_sizeX;
     ui32 m_sizeZ;
     
-    f32 m_maxAltitude;
     f32 m_maxHeight;
     f32 m_minHeight;
     
@@ -117,7 +116,6 @@ public:
     ui32 getSizeX(void) const;
     ui32 getSizeZ(void) const;
     
-    f32 getMaxAltitude(void) const;
     f32 getMaxHeight(void) const;
     f32 getMinHeight(void) const;
 };
