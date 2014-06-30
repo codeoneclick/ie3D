@@ -112,13 +112,9 @@ CSharedShader CResourceLoader::startShaderLoadingOperation(const std::string& vs
     return resource;
 }
 
-CSharedMesh CResourceLoader::startMeshLoadingOperation(const std::string& meshFilename,
-                                                       const std::string& skeletonFilename,
-                                                       const std::string& sequenceFilename)
+CSharedMesh CResourceLoader::startMeshLoadingOperation(const std::string& filename)
 {
-    std::string guid = meshFilename;
-    guid = guid.append(skeletonFilename);
-    guid = guid.append(sequenceFilename);
+    std::string guid = filename;
     CSharedMesh resource = nullptr;
     if(m_resourceContainer.find(guid) != m_resourceContainer.end())
     {
@@ -127,22 +123,12 @@ CSharedMesh CResourceLoader::startMeshLoadingOperation(const std::string& meshFi
     else
     {
         resource = std::make_shared<CMesh>(guid);
-        ISharedResourceLoadingOperation operation = std::make_shared<CMeshLoadingOperation>(meshFilename,
-                                                                                            skeletonFilename,
-                                                                                            sequenceFilename,
+        ISharedResourceLoadingOperation operation = std::make_shared<CMeshLoadingOperation>(filename,
                                                                                             resource);
         m_resourceContainer.insert(std::make_pair(guid, resource));
         m_operationsQueue.insert(std::make_pair(guid, operation));
     }
     return resource;
-}
-std::tuple<CSharedMesh, CSharedSkeleton, CSharedSequence> CResourceLoader::startMeshLoadingOperation(const std::string& filename) const
-{
-    CSharedMesh mesh = nullptr;
-    CSharedSkeleton skeleton = nullptr;
-    CSharedSequence sequence = nullptr;
-    
-    
 }
 
 void CResourceLoader::unloadResource(ISharedResourceRef resource)

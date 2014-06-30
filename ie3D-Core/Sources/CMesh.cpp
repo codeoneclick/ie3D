@@ -219,7 +219,7 @@ void CSkeletonData::addBone(CSharedBoneRef bone)
     
     if (bone->getParentId() == -1)
     {
-        m_roots.insert(bone);
+        m_rootBones.insert(bone);
         return;
     }
     
@@ -234,7 +234,7 @@ void CSkeletonData::addBone(CSharedBoneRef bone)
 
 CSharedBone CSkeletonData::getBone(ui32 index) const
 {
-    for(const auto& root : m_roots)
+    for(const auto& root : m_rootBones)
     {
         if (root->getId() == index)
         {
@@ -255,6 +255,11 @@ CSharedBone CSkeletonData::getBone(ui32 index) const
 ui32 CSkeletonData::getNumBones(void) const
 {
     return m_numBones;
+}
+
+const std::set<CSharedBone> CSkeletonData::getRootBones(void) const
+{
+    return m_rootBones;
 }
 
 CMesh::CMesh(const std::string& guid) : IResource(E_RESOURCE_CLASS_MESH, guid),
@@ -336,7 +341,7 @@ void CMesh::onResourceDataCommitFinished(ISharedResourceDataRef resourceData)
         }
             break;
             
-        case E_RESOURCE_DATA_CLASS_SKELETON_DATA:
+        case E_RESOURCE_DATA_CLASS_INDEX_BUFFER_DATA:
         {
             m_indexBuffer = std::static_pointer_cast<CIndexBuffer>(resourceData);
         }
@@ -374,14 +379,14 @@ const ui16* CMesh::getIndexData(void) const
     return IResource::isLoaded() ? m_meshData->getIndexData() : nullptr;
 }
 
-const ui32 CMesh::getNumVertices(void) const
+ui32 CMesh::getNumVertices(void) const
 {
-    return IResource::isCommited() ? m_vertexBuffer->getSize() : 0;
+    return IResource::isLoaded() ? m_meshData->getNumVertices() : 0;
 }
 
-const ui32 CMesh::getNumIndices(void) const
+ui32 CMesh::getNumIndices(void) const
 {
-    return IResource::isCommited() ? m_indexBuffer->getSize() : 0;
+    return IResource::isLoaded() ? m_meshData->getNumIndices() : 0;
 }
 
 const glm::vec3 CMesh::getMaxBound(void) const
@@ -404,34 +409,14 @@ void CMesh::updateBounds(void)
     }
 }
 
-const ui32 CMesh::getNumFrames(void) const
+const CSharedSkeletonData CMesh::getSkeletonData(void) const
 {
-    return IResource::isLoaded() && m_sequenceData != nullptr ? m_sequenceData->getNumFrames() : 0;
+    return IResource::isLoaded() ? m_skeletonData : nullptr;
 }
 
-const ui32 CMesh::getAnimationFPS(void) const
+const CSharedSequenceData CMesh::getSequenceData(void) const
 {
-    return IResource::isLoaded() && m_sequenceData != nullptr ? m_sequenceData->getAnimationFPS() : 0;
-}
-
-const std::string CMesh::getAnimationName(void) const
-{
-    return IResource::isLoaded() && m_sequenceData != nullptr ? m_sequenceData->getAnimationName() : 0;
-}
-
-CSharedFrameData CMesh::getFrame(ui32 index) const
-{
-    return IResource::isLoaded() && m_sequenceData != nullptr ? m_sequenceData->getFrame(index) : nullptr;
-}
-
-CSharedBone CMesh::getBone(ui32 index) const
-{
-    return IResource::isLoaded() && m_skeletonData != nullptr ? m_skeletonData->getBone(index) : nullptr;
-}
-
-ui32 CMesh::getNumBones(void) const
-{
-    return IResource::isLoaded() && m_skeletonData != nullptr ? m_skeletonData->getNumBones() : 0;
+    return IResource::isLoaded() ? m_sequenceData : nullptr;
 }
 
 void CMesh::bind(const i32* attributes) const

@@ -19,15 +19,11 @@ private:
     
 protected:
     
-    std::string m_meshFilename;
-    std::string m_skeletonFilename;
-    std::string m_sequenceFilename;
+    std::string m_filename;
     
 public:
     
-    CMeshLoadingOperation(const std::string& meshFilename,
-                          const std::string& skeletonFilename,
-                          const std::string& sequenceFilename,
+    CMeshLoadingOperation(const std::string& filename,
                           ISharedResourceRef resource);
     ~CMeshLoadingOperation(void);
     

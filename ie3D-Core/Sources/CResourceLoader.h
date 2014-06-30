@@ -41,11 +41,7 @@ public:
     CSharedShader startShaderLoadingOperation(const std::string& vsFilename,
                                               const std::string& fsFilename);
     
-    CSharedMesh startMeshLoadingOperation(const std::string& meshFilename,
-                                          const std::string& skeletonFilename,
-                                          const std::string& sequenceFilename);
-    
-    std::tuple<CSharedMesh, CSharedSkeleton, CSharedSequence> startMeshLoadingOperation(const std::string& filename) const;
+    CSharedMesh startMeshLoadingOperation(const std::string& filename);
     
 	void unloadResource(ISharedResourceRef resource);
 };

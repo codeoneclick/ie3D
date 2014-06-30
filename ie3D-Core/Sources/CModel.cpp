@@ -52,12 +52,23 @@ void CModel::onSceneUpdate(f32 deltatime)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         IGameObject::onSceneUpdate(deltatime);
+        if(m_animationMixer != nullptr)
+        {
+            m_animationMixer->update(deltatime);
+        }
     }
 }
 
 void CModel::onResourceLoaded(ISharedResourceRef resource, bool success)
 {
     IGameObject::onResourceLoaded(resource, success);
+    if(resource->getResourceClass() == E_RESOURCE_CLASS_MESH)
+    {
+        assert(m_animationMixer == nullptr);
+        CSharedMesh mesh = std::static_pointer_cast<CMesh>(resource);
+        m_animationMixer = std::make_shared<CAnimationMixer>(mesh->getSkeletonData(),
+                                                             mesh->getSequenceData());
+    }
 }
 
 void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
@@ -65,9 +76,7 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     IGameObject::onConfigurationLoaded(configuration, success);
     std::shared_ptr<CConfigurationModel> modelConfiguration = std::static_pointer_cast<CConfigurationModel>(configuration);
     assert(m_resourceAccessor != nullptr);
-    m_mesh = m_resourceAccessor->getMesh(modelConfiguration->getMeshFilename(),
-                                         modelConfiguration->getSkeletonFilename(),
-                                         modelConfiguration->getSequencesFilenames().at(0));
+    m_mesh = m_resourceAccessor->getMesh(modelConfiguration->getFilename());
     m_mesh->registerLoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
     m_isBatching = modelConfiguration->isBatching();
@@ -114,9 +123,9 @@ void CModel::onDraw(const std::string& mode)
         if(!m_isBatching && m_animationMixer != nullptr)
         {
             m_materialBindImposer(material);
-            material->getShader()->setMatrixArray4x4(m_animationMixer->Get_Transformations(),
-                                                      m_animationMixer->Get_TransformationSize(),
-                                                      E_SHADER_UNIFORM_MATRIX_BONES);
+            material->getShader()->setMatrixArray4x4(m_animationMixer->getTransformations(),
+                                                     m_animationMixer->getTransformationSize(),
+                                                     E_SHADER_UNIFORM_MATRIX_BONES);
             IGameObject::onDraw(mode);
         }
     }
@@ -133,23 +142,11 @@ void CModel::onUnbind(const std::string& mode)
 
 void CModel::onBatch(const std::string& mode)
 {
-    assert(m_materials.find(mode) != m_materials.end());
-    std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
-    assert(material->getShader() != nullptr);
-    
-    if(m_mesh->isLoaded() && m_isBatching)
-    {
-        m_renderMgr->Get_BatchingMgr()->batch(mode,
-                                              m_zOrder,
-                                              std::make_tuple(m_mesh, m_animationMixer),
-                                              material,
-                                              m_materialBindImposer,
-                                              m_matrixWorld);
-    }
+    IGameObject::onBatch(mode);
 }
 
 void CModel::setAnimation(const std::string& name)
 {
-    
+
 }
 

@@ -21,6 +21,7 @@
 #include "IScreenSpaceRenderAccessor.h"
 #include "CMaterial.h"
 #include "CShader.h"
+#include "CModel.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
 IScene(root),
@@ -65,6 +66,10 @@ void CEditableScene::load(void)
     m_particles.push_back(particleEmitter);
     m_root->addParticleEmitter(particleEmitter);
     
+    m_model = m_root->createModel("gameobject.model.xml");
+    m_model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
+    m_root->addModel(m_model);
+    
     m_landscape = m_root->createLandscape("gameobject.landscape.xml");
     m_root->setLandscape(m_landscape);
     
@@ -107,6 +112,10 @@ void CEditableScene::update(f32 deltatime)
         
         material->getShader()->setVector3ArrayCustom(randomTable, 8, "randomTable");
     }
+    
+    glm::vec3 position = m_camera->Get_LookAt();
+    position.y = m_landscape->getHeight(position);
+    m_model->setPosition(position);
 }
 
 std::vector<ISharedGameObject> CEditableScene::colliders(void)
@@ -172,11 +181,13 @@ void CEditableScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION dir
        m_editableRadius <= 32.0)
     {
         m_editableRadius++;
+        m_editableRadius = m_editableRadius % 2 != 0 ? m_editableRadius + 1 : m_editableRadius;
     }
     else if(direction == E_SCROLL_WHEEL_DIRECTION_BACKWARD &&
             m_editableRadius > 2.0)
     {
         m_editableRadius--;
+        m_editableRadius = m_editableRadius % 2 != 0 ? m_editableRadius - 1 : m_editableRadius;
     }
     m_selectionArea->setRadius(m_editableRadius);
 }

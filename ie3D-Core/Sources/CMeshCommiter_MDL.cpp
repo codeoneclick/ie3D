@@ -27,10 +27,10 @@ void CMeshCommiter_MDL::commit(void)
     m_status = E_COMMITER_STATUS_INPROGRESS;
     assert(m_resource != nullptr);
     
-    std::shared_ptr<CMesh> mesh = std::static_pointer_cast<CMesh >(m_resource);
+    CSharedMesh mesh = std::static_pointer_cast<CMesh>(m_resource);
     
-    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(mesh->getNumVertices(),
-                                                                                  GL_STATIC_DRAW);
+    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(mesh->getNumVertices(),
+                                                                       GL_STATIC_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
     
     for(ui32 i = 0; i < mesh->getNumVertices(); ++i)

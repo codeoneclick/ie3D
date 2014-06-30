@@ -38,35 +38,6 @@ ISharedConfiguration CConfigurationModelSerializer::serialize(const std::string&
                                                              modelConfiguration->kModelMeshIsBatchingAttribute),
                                 std::make_shared<CConfigurationAttribute>(isBatching));
     
-    pugi::xml_node skeletonNode = node.child(modelConfiguration->kModelSkeletonNode.c_str());
-    std::string skeletonFilename = skeletonNode.attribute(modelConfiguration->kModelSkeletonFilenameAttribute.c_str()).as_string();
-    modelConfiguration->setAttribute(getConfigurationAttributeKey(modelConfiguration->kModelMainNode,
-                                                             modelConfiguration->kModelSkeletonNode,
-                                                             modelConfiguration->kModelSkeletonFilenameAttribute),
-                                std::make_shared<CConfigurationAttribute>(skeletonFilename));
-    
-    pugi::xml_node sequencesNode = node.child(modelConfiguration->kModelSequencesNode.c_str());
-    for (pugi::xml_node sequence = sequencesNode.child(modelConfiguration->kModelSequenceNode.c_str());
-         sequence;
-         sequence = sequencesNode.next_sibling(modelConfiguration->kModelSequenceNode.c_str()))
-    {
-        std::string filename = sequence.attribute(modelConfiguration->kModelSequenceFilenameAttribute.c_str()).as_string();
-        modelConfiguration->setAttribute(getConfigurationAttributeKey(modelConfiguration->kModelMainNode,
-                                                                 modelConfiguration->kModelSequencesNode,
-                                                                 modelConfiguration->kModelSequenceNode,
-                                                                 modelConfiguration->kModelSequenceFilenameAttribute),
-                                    std::make_shared<CConfigurationAttribute>(filename));
-        
-        
-        std::string animation = sequence.attribute(modelConfiguration->kModelSequenceAnimationNameAttribute.c_str()).as_string();
-        modelConfiguration->setAttribute(getConfigurationAttributeKey(modelConfiguration->kModelMainNode,
-                                                                 modelConfiguration->kModelSequencesNode,
-                                                                 modelConfiguration->kModelSequenceNode,
-                                                                 modelConfiguration->kModelSequenceAnimationNameAttribute),
-                                    std::make_shared<CConfigurationAttribute>(filename));
-        
-    }
-    
     pugi::xml_node materialsNode = node.child(modelConfiguration->kGameObjectMaterialsConfigurationsNode.c_str());
     for (pugi::xml_node material = materialsNode.child(modelConfiguration->kGameObjectMaterialConfigurationNode.c_str());
          material;

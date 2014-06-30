@@ -25,6 +25,7 @@ protected:
     std::shared_ptr<CMapDragController> m_mapDragController;
     CSharedSkyBox m_skyBox;
     CSharedLandscape m_landscape;
+    CSharedModel m_model;
     CSharedSelectionArea m_selectionArea;
     glm::ivec2 m_previousDraggedPoint;
     ui32 m_editableRadius;

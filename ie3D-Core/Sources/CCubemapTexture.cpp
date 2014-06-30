@@ -90,6 +90,10 @@ void CCubemapTexture::onResourceLoaded(ISharedResourceRef resource, bool success
     {
         face = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
     }
+    else
+    {
+        assert(false);
+    }
     
     i32 width = texture->getWidth();
     i32 height = texture->getHeight();

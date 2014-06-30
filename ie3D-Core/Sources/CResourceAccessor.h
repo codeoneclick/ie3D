@@ -44,11 +44,7 @@ public:
     CSharedShader getShader(const std::string& vsFilename,
                             const std::string& fsFilename) const;
     
-    std::tuple<CSharedMesh, CSharedSkeleton, CSharedSequence> getMesh(const std::string& filename) const;
-    
-    CSharedMesh getMesh(const std::string& meshFilename,
-                        const std::string& skeletonFilename,
-                        const std::string& sequenceFilename) const;
+    CSharedMesh getMesh(const std::string& filename) const;
 };
 
 #endif 

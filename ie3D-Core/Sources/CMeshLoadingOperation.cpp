@@ -16,14 +16,10 @@
 #include "IResource.h"
 #include "CMesh.h"
 
-CMeshLoadingOperation::CMeshLoadingOperation(const std::string& meshFilename,
-                                             const std::string& skeletonFilename,
-                                             const std::string& sequenceFilename,
+CMeshLoadingOperation::CMeshLoadingOperation(const std::string& filename,
                                              ISharedResourceRef resource) :
-IResourceLoadingOperation(meshFilename, resource),
-m_meshFilename(meshFilename),
-m_skeletonFilename(skeletonFilename),
-m_sequenceFilename(sequenceFilename)
+IResourceLoadingOperation(filename, resource),
+m_filename(filename)
 {
     
 }
@@ -37,19 +33,25 @@ void CMeshLoadingOperation::serialize(void)
 {
     assert(m_resource != nullptr);
     m_status = E_RESOURCE_LOADING_OPERATION_STATUS_INPROGRESS;
-    m_serializer = std::make_shared<CMeshSerializer_MDL>(m_meshFilename,
+    std::string meshFilename = m_filename;
+    meshFilename.append("_mesh");
+    m_serializer = std::make_shared<CMeshSerializer_MDL>(meshFilename,
                                                          m_resource);
     m_serializer->serialize();
     
     m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
     
-    m_serializer = std::make_shared<CSkeletonSerializer_SK>(m_skeletonFilename,
+    std::string skeletonFilename = m_filename;
+    skeletonFilename.append("_sk");
+    m_serializer = std::make_shared<CSkeletonSerializer_SK>(skeletonFilename,
                                                             m_resource);
     m_serializer->serialize();
     
     m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS && m_status != E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
     
-    m_serializer = std::make_shared<CSequenceSerializer_SEQ>(m_sequenceFilename,
+    std::string sequenceFilename = m_filename;
+    sequenceFilename.append("_anim");
+    m_serializer = std::make_shared<CSequenceSerializer_SEQ>(sequenceFilename,
                                                              m_resource);
     m_serializer->serialize();
     
@@ -60,20 +62,20 @@ void CMeshLoadingOperation::commit(void)
 {
     assert(m_resource != nullptr);
     assert(m_resource->isLoaded() == true);
-    CSharedMesh mesh = std::static_pointer_cast<CMesh>(m_resource);
-    m_commiter = std::make_shared<CMeshCommiter_MDL>(m_meshFilename,
+
+    m_commiter = std::make_shared<CMeshCommiter_MDL>(m_filename,
                                                      m_resource);
     m_commiter->commit();
     m_status = m_commiter->getStatus() == E_COMMITER_STATUS_SUCCESS ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
     
     
-    m_commiter = std::make_shared<CSkeletonCommiter_SK>(m_skeletonFilename,
+    m_commiter = std::make_shared<CSkeletonCommiter_SK>(m_filename,
                                                         m_resource);
     m_commiter->commit();
     
     m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS && m_status != E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
     
-    m_commiter = std::make_shared<CSequenceCommiter_SEQ>(m_serializer->getGuid(),
+    m_commiter = std::make_shared<CSequenceCommiter_SEQ>(m_filename,
                                                          m_resource);
     m_commiter->commit();
     

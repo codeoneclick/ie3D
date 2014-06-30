@@ -10,7 +10,6 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
-
 CBone::CBone(i32 id, i32 parentId) :
 m_id(id),
 m_parentId(parentId),

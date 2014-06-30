@@ -8,145 +8,60 @@
 
 #include "CSkeleton.h"
 #include "CBone.h"
-#include "CVertexBuffer.h"
-#include "CIndexBuffer.h"
+#include "CMesh.h"
 
-/*CSkeleton::CSkeleton(const std::string& _guid) :
-IResource(E_RESOURCE_CLASS_SKELETON, _guid),
-m_numBones(0),
-m_boneWidth(3.0f)
+CSkeleton::CSkeleton(CSharedSkeletonDataRef skeletonData) :
+m_skeletonData(skeletonData)
 {
-    
+    assert(m_skeletonData != nullptr);
+    m_bonesTransformations = new glm::mat4x4[m_skeletonData->getNumBones()];
 }
 
 CSkeleton::~CSkeleton(void)
 {
-    for(const auto& transformation : m_transformations)
-    {
-        delete[] transformation.second;
-    }
-    m_transformations.clear();
-}
-
-void CSkeleton::_Serialize(std::istream *_stream)
-{
-    _stream->read((char*)&m_numBones, sizeof(i32));
-    i32 id, parentId;
-
-    for (ui32 i = 0; i < m_numBones; ++i)
-    {
-        _stream->read((char*)&id, sizeof(i32));
-        _stream->read((char*)&parentId, sizeof(i32));
-        std::shared_ptr<CBone> bone = CSkeleton::Get_Bone(id);
-        if(bone == nullptr)
-        {
-            bone = std::make_shared<CBone>(id, parentId);
-            bone->Set_Name("");
-        }
-        CSkeleton::AddBone(bone);
-    }
-    m_status |= E_RESOURCE_STATUS_LOADED;
-}
-
-void CSkeleton::_BindSkeleton(void)
-{
-    m_status |= E_RESOURCE_STATUS_COMMITED;
-}
-
-
-void CSkeleton::AddBone(std::shared_ptr<CBone> _bone)
-{
-    if(_bone == nullptr)
-    {
-        return;
-    }
     
-    if (_bone->Get_ParentId() == -1)
-    {
-        m_roots.insert(_bone);
-        return;
-    }
-    
-    std::shared_ptr<CBone> parent = Get_Bone(_bone->Get_ParentId());
-    if (parent != nullptr)
-    {
-        parent->AddChild(_bone);
-        return;
-    }
-    assert(false);
 }
 
-std::shared_ptr<CBone> CSkeleton::Get_Bone(i32 _id)
+ui32 CSkeleton::getNumBones(void) const
 {
-    for(const auto& root : m_roots)
-    {
-        if (root->Get_Id() == _id)
-        {
-            return root;
-        }
-        else
-        {
-            std::shared_ptr<CBone> child = root->FindChild(_id);
-            if(child != nullptr)
-            {
-                return child;
-            }
-        }
-    }
-    return nullptr;
+    assert(m_skeletonData != nullptr);
+    return m_skeletonData->getNumBones();
 }
 
-void CSkeleton::Update(const std::string& _guid)
+CSharedBone CSkeleton::getBone(ui32 index) const
 {
-    assert(m_transformations.find(_guid) != m_transformations.end());
-    glm::mat4x4* transformation = m_transformations.find(_guid)->second;
-    std::shared_ptr<CBone> bone;
-    for (ui32 i = 0; i < CSkeleton::Get_NumBones(); ++i)
+    assert(m_skeletonData != nullptr);
+    return m_skeletonData->getBone(index);
+}
+
+glm::mat4* CSkeleton::getBonesTransformations(void) const
+{
+    return m_bonesTransformations;
+}
+
+void CSkeleton::update(void)
+{
+    assert(m_skeletonData != nullptr);
+    CSharedBone bone = nullptr;
+    for (ui32 i = 0; i < m_skeletonData->getNumBones(); ++i)
     {
-        bone = CSkeleton::Get_Bone(i);
+        bone = m_skeletonData->getBone(i);
         if (bone != nullptr)
         {
-            bone->Set_Transformation(transformation + i);
+            bone->setTransformation(m_bonesTransformations + i);
         }
     }
-
-    for(const auto& root : m_roots)
+    for(const auto& rootBone : m_skeletonData->getRootBones())
     {
-        root->Update();
+        rootBone->update();
     }
 }
 
-const std::string CSkeleton::_GenerateGuid(void)
+void CSkeleton::bindPoseTransformation(void)
 {
-    static ui32 value = 0;
-    std::stringstream stringstream;
-    stringstream<<"skeleton.reference."<<++value;
-    return stringstream.str();
-}
-
-std::string CSkeleton::CreateTransformations(void)
-{
-    std::string guid = CSkeleton::_GenerateGuid();
-    m_transformations.insert(std::make_pair(guid, new glm::mat4x4[CSkeleton::Get_NumBones()]));
-    return guid;
-}
-
-glm::mat4* CSkeleton::Get_Transformations(const std::string &_guid)
-{
-    assert(m_transformations.find(_guid) != m_transformations.end());
-    return m_transformations.find(_guid)->second;
-}
-
-void CSkeleton::BindTransformation(void)
-{
-    for(const auto& root : m_roots)
+    assert(m_skeletonData != nullptr);
+    for(const auto& rootBone : m_skeletonData->getRootBones())
     {
-        root->Set_BindTransformation();
+        rootBone->bindPoseTransformation();
     }
 }
-
-void CSkeleton::Draw(const i32 *_attributes, const std::string& _guid)
-{
-
-}
-*/

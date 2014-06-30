@@ -80,7 +80,14 @@
 
 - (void)scrollWheel:(NSEvent *)event;
 {
-    self.m_context->gestureRecognizerWheelScroll([event deltaY] > 0.0 ? E_SCROLL_WHEEL_DIRECTION_FORWARD : E_SCROLL_WHEEL_DIRECTION_BACKWARD);
+    if([event deltaY] > 0.0)
+    {
+        self.m_context->gestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION_FORWARD);
+    }
+    else if([event deltaY] < 0.0)
+    {
+        self.m_context->gestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION_BACKWARD);
+    }
 }
 
 @end

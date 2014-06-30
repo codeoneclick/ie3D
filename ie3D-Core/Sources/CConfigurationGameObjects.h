@@ -146,12 +146,6 @@ public:
     const std::string kModelMainNode;
     const std::string kModelMeshFilenameAttribute;
     const std::string kModelMeshIsBatchingAttribute;
-    const std::string kModelSkeletonNode;
-    const std::string kModelSkeletonFilenameAttribute;
-    const std::string kModelSequencesNode;
-    const std::string kModelSequenceNode;
-    const std::string kModelSequenceFilenameAttribute;
-    const std::string kModelSequenceAnimationNameAttribute;
     
 private:
     
@@ -162,11 +156,7 @@ public:
     CConfigurationModel(void);
     ~CConfigurationModel(void);
     
-    std::string getMeshFilename(void) const;
-    std::string getSkeletonFilename(void) const;
-    
-    std::vector<std::string> getSequencesFilenames(void) const;
-    std::vector<std::string> getSequenceAnimationsNames(void) const;
+    std::string getFilename(void) const;
     
     bool isBatching(void) const;
 };

@@ -322,13 +322,7 @@ CConfigurationModel::CConfigurationModel(void) :
 CConfigurationGameObject(E_CONFIGURATION_CLASS_MODEL),
 kModelMainNode("model"),
 kModelMeshFilenameAttribute("filename"),
-kModelMeshIsBatchingAttribute("is_batching"),
-kModelSkeletonNode("skeleton"),
-kModelSkeletonFilenameAttribute("filename"),
-kModelSequencesNode("sequences"),
-kModelSequenceNode("sequence"),
-kModelSequenceFilenameAttribute("filename"),
-kModelSequenceAnimationNameAttribute("animation_name")
+kModelMeshIsBatchingAttribute("is_batching")
 {
     
 }
@@ -338,53 +332,13 @@ CConfigurationModel::~CConfigurationModel(void)
     
 }
 
-std::string CConfigurationModel::getMeshFilename(void) const
+std::string CConfigurationModel::getFilename(void) const
 {
     const auto& iterator = m_attributes.find(kModelMainNode + ":" +
                                              kModelMeshFilenameAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getString();
-}
-
-std::string CConfigurationModel::getSkeletonFilename(void) const
-{
-    const auto& iterator = m_attributes.find(kModelMainNode + ":" +
-                                             kModelSkeletonNode + ":" +
-                                             kModelSkeletonFilenameAttribute);
-    assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getString();
-}
-
-std::vector<std::string> CConfigurationModel::getSequencesFilenames(void) const
-{
-    const auto& iterator = m_attributes.find(kModelMainNode + ":" +
-                                             kModelSequencesNode + ":" +
-                                             kModelSequenceNode + ":" +
-                                             kModelSequenceFilenameAttribute);
-    assert(iterator != m_attributes.end());
-    std::vector<std::string> filenames;
-    for(const auto& filename : iterator->second)
-    {
-        filenames.push_back(filename->getString());
-    }
-    return filenames;
-}
-
-std::vector<std::string> CConfigurationModel::getSequenceAnimationsNames(void) const
-{
-    const auto& iterator = m_attributes.find(kModelMainNode + ":" +
-                                             kModelSequencesNode + ":" +
-                                             kModelSequenceNode + ":" +
-                                             kModelSequenceAnimationNameAttribute);
-    assert(iterator != m_attributes.end());
-    std::vector<std::string> animationsNames;
-    for(const auto& animationName : iterator->second)
-    {
-        animationsNames.push_back(animationName->getString());
-    }
-    return animationsNames;
 }
 
 bool CConfigurationModel::isBatching(void) const

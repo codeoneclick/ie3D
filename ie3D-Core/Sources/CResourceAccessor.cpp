@@ -45,20 +45,10 @@ CSharedShader CResourceAccessor::getShader(const std::string &vsFilename, const 
     return shader;
 }
 
-CSharedMesh CResourceAccessor::getMesh(const std::string& meshFilename,
-                                       const std::string& skeletonFilename,
-                                       const std::string& sequenceFilename) const
+CSharedMesh CResourceAccessor::getMesh(const std::string& filename) const
 {
     assert(m_resourceLoader != nullptr);
-    CSharedMesh mesh = m_resourceLoader->startMeshLoadingOperation(meshFilename,
-                                                                   skeletonFilename,
-                                                                   sequenceFilename);
+    CSharedMesh mesh = m_resourceLoader->startMeshLoadingOperation(filename);
     assert(mesh != nullptr);
     return mesh;
-}
-
-std::tuple<CSharedMesh, CSharedSkeleton, CSharedSequence> CResourceAccessor::getMesh(const std::string& filename) const
-{
-    assert(m_resourceLoader != nullptr);
-    
 }

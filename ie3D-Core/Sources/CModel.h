@@ -18,7 +18,7 @@ private:
     
 protected:
     
-    std::shared_ptr<CAnimationMixer> m_animationMixer;
+    CSharedAnimationMixer m_animationMixer;
     
     void onSceneUpdate(f32 deltatime);
     

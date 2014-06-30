@@ -58,10 +58,9 @@ void CSequenceSerializer_SEQ::serialize(void)
             filestream->read((char*)&scale, sizeof(glm::vec3));
             scales.push_back(scale);
         }
-        CSharedFrameData frame = std::make_shared<CFrameData>(rotations,
-                                                              positions,
-                                                              scales);
-        frames.push_back(frame);
+        frames[i] = std::make_shared<CFrameData>(rotations,
+                                                 positions,
+                                                 scales);
     }
     CSharedSequenceData sequenceData = std::make_shared<CSequenceData>(m_filename,
                                                                        30,

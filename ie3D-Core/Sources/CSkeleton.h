@@ -10,54 +10,28 @@
 #define CSkeleton_h
 
 #include "HCommon.h"
-#include "IResource.h"
+#include "HDeclaration.h"
 
-class CBone;
-class CHVertexBuffer;
-class CSVertexBuffer;
-class CHIndexBuffer;
-class CSIndexBuffer;
-
-class CSkeleton final : public IResource
+class CSkeleton
 {
 private:
     
-    friend class CSkeletonSerializer_SK;
-    friend class CSkeletonCommiter_SK;
-    
 protected:
     
-    f32 m_boneWidth;
-    
-    ui32 m_numBones;
-    std::set<std::shared_ptr<CBone> > m_roots;
-    std::map<std::string, glm::mat4x4*> m_transformations;
-    
-    void _Serialize(std::istream* _stream);
-    void _BindSkeleton(void);
-    
-    static const std::string _GenerateGuid(void);
+    glm::mat4x4* m_bonesTransformations;
+    CSharedSkeletonData m_skeletonData;
     
 public:
     
-    CSkeleton(const std::string& _guid);
+    CSkeleton(CSharedSkeletonDataRef skeletonData);
     ~CSkeleton(void);
     
-    void BindTransformation(void);
+    ui32 getNumBones(void) const;
+    CSharedBone getBone(ui32 index) const;
+    glm::mat4* getBonesTransformations(void) const;
     
-    void AddBone(std::shared_ptr<CBone> _bone);
-    std::shared_ptr<CBone> Get_Bone(i32 _id);
-    
-    inline ui32 Get_NumBones(void)
-    {
-        return m_numBones;
-    };
-    
-    void Update(const std::string& _guid);
-	void Draw(const i32* _attributes, const std::string& _guid);
-    
-    std::string CreateTransformations(void);
-    glm::mat4* Get_Transformations(const std::string& _guid);
+    void update(void);
+    void bindPoseTransformation(void);
 };
 
 #endif

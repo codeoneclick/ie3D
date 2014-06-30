@@ -10,12 +10,7 @@
 #define CAnimationMixer_h
 
 #include "HCommon.h"
-
-class CSequence;
-class CMesh;
-class CVertexBuffer;
-class CIndexBuffer;
-class CSkeleton;
+#include "HDeclaration.h"
 
 class CAnimationMixer
 {
@@ -23,34 +18,23 @@ private:
     
 protected:
     
-    std::map<std::string, std::shared_ptr<CSequence> > m_sequences;
-    std::shared_ptr<CMesh> m_mesh;
-    std::shared_ptr<CSkeleton> m_skeleton;
-    glm::mat4x4* m_transformations;
-    
-    std::shared_ptr<CSequence> m_oldSequence;
-    std::shared_ptr<CSequence> m_currentSequence;
-    
     f32 m_animationTime;
+    CSharedSkeleton m_skeleton;
+    CSharedSequenceData m_sequenceData;
+    glm::mat4x4* m_bonesTransformations;
     
-    std::string m_skeletonGuid;
-    
-    void _BindSequence(void);
+    void bindPoseTransformation(void);
     
 public:
     
-    CAnimationMixer(std::shared_ptr<CMesh> _mesh, std::shared_ptr<CSkeleton> _skeleton);
+    CAnimationMixer(CSharedSkeletonDataRef skeletonData, CSharedSequenceDataRef sequenceData);
     ~CAnimationMixer(void);
     
-    glm::mat4x4* Get_Transformations(void);
-    const ui32 Get_TransformationSize(void);
+    glm::mat4x4* getTransformations(void) const;
+    ui32 getTransformationSize(void) const;
     
-    void AddSequence(const std::string& _name, std::shared_ptr<CSequence> _sequence);
-    void SetAnimation(const std::string& _name);
-    void MixAnimation(const std::string& _name);
-    void GoTo(const std::string& _name, i32 _frame);
-    void OnUpdate(f32 _deltatime);
-    void OnDraw(void);
+    void setAnimation(const std::string& name);
+    void update(f32 deltatime);
 };
 
 #endif 

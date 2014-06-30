@@ -136,7 +136,7 @@ void CBatch::unlock(void)
         
         m_numLockedVertices += mesh->getNumVertices();
         m_numLockedIndices += mesh->getNumIndices();
-        m_numLockedTransformations += mixer->Get_TransformationSize();
+        //m_numLockedTransformations += mixer->Get_TransformationSize();
         assert(m_numLockedTransformations < k_MAX_NUM_TRANSFORMATION);
     }
 }
@@ -149,13 +149,13 @@ void CBatch::batch(const std::tuple<CSharedMesh, CSharedAnimationMixer>& model,
     
     m_numUnlockedVertices += std::get<0>(model)->getNumVertices();
     m_numUnlockedIndices += std::get<0>(model)->getNumIndices();
-    m_numUnlockedTransformations += std::get<1>(model)->Get_TransformationSize();
+    //m_numUnlockedTransformations += std::get<1>(model)->Get_TransformationSize();
     
     std::shared_ptr<CAnimationMixer> mixer = std::get<1>(model);
-    for(ui32 i = 0; i < mixer->Get_TransformationSize(); ++i)
-    {
-        m_transformations.push_back(mixer->Get_Transformations()[i]);
-    }
+    /*for(ui32 i = 0; i < mixer->Get_TransformationSize(); ++i)
+     {
+     m_transformations.push_back(mixer->Get_Transformations()[i]);
+     }*/
 }
 
 i32 CBatch::zOrder(void)

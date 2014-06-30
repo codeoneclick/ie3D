@@ -59,7 +59,7 @@ void CBatchingMgr::batch(const std::string& mode,
 {
     assert(material != nullptr);
     assert(material->getShader() != nullptr);
-	assert(std::get<1>(model)->Get_TransformationSize() <= CBatch::k_MAX_NUM_TRANSFORMATION);
+	//assert(std::get<1>(model)->Get_TransformationSize() <= CBatch::k_MAX_NUM_TRANSFORMATION);
     assert(std::get<0>(model)->getNumVertices() <= CBatch::k_MAX_NUM_VERTICES);
     assert(std::get<0>(model)->getNumIndices() <= CBatch::k_MAX_NUM_INDICES);
     
@@ -81,12 +81,12 @@ void CBatchingMgr::batch(const std::string& mode,
 			iterator->second->batch(model, matrix);
             break;
         }
-        else if((iterator->second->getNumUnlockedNumTransformations() + std::get<1>(model)->Get_TransformationSize()) > CBatch::k_MAX_NUM_TRANSFORMATION ||
+        /*else if((iterator->second->getNumUnlockedNumTransformations() + std::get<1>(model)->Get_TransformationSize()) > CBatch::k_MAX_NUM_TRANSFORMATION ||
                 (iterator->second->getNumUnlockedNumVertices() + std::get<0>(model)->getNumVertices()) > CBatch::k_MAX_NUM_VERTICES ||
-                (iterator->second->getNumUnlockedNumIndices() + std::get<0>(model)->getNumIndices()) > CBatch::k_MAX_NUM_INDICES)
-        {
-            continue;
-        }
+                (iterator->second->getNumUnlockedNumIndices() + std::get<0>(model)->getNumIndices()) > CBatch::k_MAX_NUM_INDICES)*/
+        //{
+        //    continue;
+        //}
         else
         {
 			iterator->second->batch(model, matrix);

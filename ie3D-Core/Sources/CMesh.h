@@ -111,8 +111,7 @@ private:
 protected:
     
     ui32 m_numBones;
-    
-    std::set<CSharedBone> m_roots;
+    std::set<CSharedBone> m_rootBones;
     
 public:
     
@@ -123,6 +122,7 @@ public:
     CSharedBone getBone(ui32 index) const;
     
     ui32 getNumBones(void) const;
+    const std::set<CSharedBone> getRootBones(void) const;
 };
 
 
@@ -160,20 +160,15 @@ public:
     const SVertexData* getVertexData(void) const;
     const ui16* getIndexData(void) const;
     
-    const ui32 getNumVertices(void) const;
-    const ui32 getNumIndices(void) const;
+    ui32 getNumVertices(void) const;
+    ui32 getNumIndices(void) const;
     
     const glm::vec3 getMaxBound(void) const;
     const glm::vec3 getMinBound(void) const;
     void updateBounds(void);
     
-    const ui32 getNumFrames(void) const;
-    const ui32 getAnimationFPS(void) const;
-    const std::string getAnimationName(void) const;
-    CSharedFrameData getFrame(ui32 index) const;
-    
-    CSharedBone getBone(ui32 index) const;
-    ui32 getNumBones(void) const;
+    const CSharedSkeletonData getSkeletonData(void) const;
+    const CSharedSequenceData getSequenceData(void) const;
 
     void bind(const i32* attributes) const;
     void draw(void) const;
