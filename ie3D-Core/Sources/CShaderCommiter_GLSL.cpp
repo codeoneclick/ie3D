@@ -34,13 +34,13 @@ ui32 CShaderCommiter_GLSL::compile(const std::string &sourceCode,
 {
     ui32 handle = glCreateShader(shaderType);
     
-    std::string define;
-#if defined(DETAIL_LEVEL_2)
-    define = "#define DETAIL_LEVEL_2\n";
-#elif defined(DETAIL_LEVEL_1)
-    define = "#define DETAIL_LEVEL_1\n";
+    std::string define = "";
+#if defined(__OSX__)
+    define = "#define __OSX__\n";
+#elif defined(__IOS__)
+    define = "#define __IOS__\n";
 #else
-    define = "#define DETAIL_LEVEL_0\n";
+    define = "";
 #endif
     
     char* shaderData = const_cast<char*>(sourceCode.c_str());

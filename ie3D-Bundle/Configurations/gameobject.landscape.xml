@@ -10,7 +10,7 @@
 		<material filename="material.landscape.base.xml"/>
         <material filename="material.landscape.reflection.xml"/>
         <material filename="material.landscape.refraction.xml"/>
-        <material filename="material.landscape.normal.xml"/>
+        <!--<material filename="material.landscape.normal.xml"/>-->
 	</materials>
     <edges
         size_x="-64.0"

@@ -45,12 +45,9 @@ m_prerenderedSplattingNormalTexture(nullptr)
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
-#if defined(DETAIL_LEVEL_2)
+#if defined(__OSX__)
         material->getShader()->setFloatCustom(m_splattingTillingFactor, "IN_SplattingTillingFactor");
-#elif defined(DETAIL_LEVEL_1)
-        material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSizeX, m_heightmapSizeZ) / m_splattingTillingFactor,
-                                              "IN_SplattingTillingFactor");
-#else
+#elif defined(__IOS__)
         if(m_prerenderedSplattingDiffuseTexture)
         {
             material->getShader()->setTexture(m_prerenderedSplattingDiffuseTexture, E_SHADER_SAMPLER_01);
@@ -59,6 +56,9 @@ m_prerenderedSplattingNormalTexture(nullptr)
         {
             material->getShader()->setTexture(m_prerenderedSplattingNormalTexture, E_SHADER_SAMPLER_02);
         }
+#else
+        material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSizeX, m_heightmapSizeZ) / m_splattingTillingFactor,
+                                              "IN_SplattingTillingFactor");
 #endif
         material->getShader()->setFloatCustom(192.0, "IN_fogLinearStart");
         material->getShader()->setFloatCustom(396.0, "IN_fogLinearEnd");

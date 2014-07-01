@@ -20,7 +20,7 @@ void main(void)
     lowp float diffuseFactor = max(dot(OUT_Normal, OUT_LightDirection), 0.25);
     lowp vec4 diffuseColor = vec4(0.0, 0.0, 0.0, 1.0);
     
-#if defined(DETAIL_LEVEL_2)
+#if defined(__OSX__)
     
     lowp vec4 splattingMask = texture2D(SAMPLER_04, OUT_TexCoord);
     
@@ -55,7 +55,9 @@ void main(void)
         zAxisColor = texture2D(SAMPLER_03, OUT_SplattingTexCoord.xy);
         diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.z;
     }
-#elif defined(DETAIL_LEVEL_1)
+#elif defined(__IOS__)
+    diffuseColor = texture2D(SAMPLER_01, OUT_TexCoord);
+#else
     lowp vec4 splattingMask = texture2D(SAMPLER_04, OUT_TexCoord);
     
     if(splattingMask.x > 0.0)
@@ -70,8 +72,6 @@ void main(void)
     {
         diffuseColor = diffuseColor + texture2D(SAMPLER_03, OUT_SplattingTexCoord.xy) * splattingMask.z;
     }
-#else
-    diffuseColor = texture2D(SAMPLER_01, OUT_TexCoord);
 #endif
     diffuseColor = vec4(diffuseColor.rgb * diffuseFactor, 1.0);
     diffuseColor = mix(vec4(0.16, 0.32, 0.32, 1.0), diffuseColor, OUT_Fog);

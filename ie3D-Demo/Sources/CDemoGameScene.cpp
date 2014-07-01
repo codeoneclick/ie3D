@@ -85,39 +85,6 @@ void CDemoGameScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.1;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
-    
-    CSharedMaterial material = m_root->getSSRenderAccessor()->getSSOperationMaterial("render.operation.screen.ssao");
-    if(material != nullptr &&
-       material->getShader() != nullptr)
-    {
-        material->bind();
-        static glm::vec3 randomTable[8] = {
-            glm::vec3(-0.5, -0.5, -0.5),
-            glm::vec3( 0.5, -0.5, -0.5),
-            glm::vec3(-0.5,  0.5, -0.5),
-            glm::vec3( 0.5,  0.5, -0.5),
-            glm::vec3(-0.5, -0.5,  0.5),
-            glm::vec3( 0.5, -0.5,  0.5),
-            glm::vec3(-0.5,  0.5,  0.5),
-            glm::vec3( 0.5,  0.5,  0.5) };
-        
-        material->getShader()->setVector3ArrayCustom(randomTable, 8, "randomTable");
-        
-        /*static glm::vec2 randomTable[12] = {
-            glm::vec2 ( -0.326212, -0.405805 ),
-            glm::vec2 ( -0.840144, -0.073580 ),
-            glm::vec2 ( -0.695914,  0.457137 ),
-            glm::vec2 ( -0.203345,  0.620716 ),
-            glm::vec2 (  0.962340, -0.194983 ),
-            glm::vec2 (  0.473434, -0.480026 ),
-            glm::vec2 (  0.519456,  0.767022 ),
-            glm::vec2 (  0.185461, -0.893124 ),
-            glm::vec2 (  0.507431,  0.064425 ),
-            glm::vec2 (  0.896420,  0.412458 ),
-            glm::vec2 ( -0.321940, -0.932615 ),
-            glm::vec2 ( -0.791559, -0.597705 ) };
-        material->getShader()->setVector2ArrayCustom(randomTable, 8, "randomTable");*/
-    }
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

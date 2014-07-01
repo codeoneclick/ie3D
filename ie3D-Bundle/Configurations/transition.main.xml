@@ -4,9 +4,9 @@
         <operation filename="render.operation.world.base.xml"/>
         <operation filename="render.operation.world.reflection.xml"/>
         <operation filename="render.operation.world.refraction.xml"/>
-        <operation filename="render.operation.world.normal.xml"/>
+        <!--<operation filename="render.operation.world.normal.xml"/>-->
     </world_space_operations>
     <screen_space_operations>
-        <operation filename="render.operation.screen.ssao.xml"/>
+        <!--<operation filename="render.operation.screen.ssao.xml"/>-->
     </screen_space_operations>
 </transition>

@@ -21,8 +21,9 @@
     <textures>
         <texture
         filename=""
-        render_operation_name="render.operation.screen.ssao"
+        render_operation_name="render.operation.world.base"
         sampler_id="0"
         wrap_mode="GL_CLAMP_TO_EDGE"/>
     </textures>
 </material>
+<!--render_operation_name="render.operation.screen.ssao"-->

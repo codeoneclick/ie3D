@@ -70,13 +70,10 @@ void main(void)
         ambientOcclusion += getAmbientOcclusion(depth, -pw,  ph, normal);
         ambientOcclusion += getAmbientOcclusion(depth, -pw, -ph, normal);
         
-        pw += random.x * 0.0001;
-        ph += random.y * 0.0001;
-        
-        pw *= 1.5;
-        ph *= 1.5;
+        pw += random.x * 0.001;
+        ph += random.y * 0.001;
     }
-    ambientOcclusion = 1.0 - ambientOcclusion / 16.0;
+    ambientOcclusion = pow(1.0 - ambientOcclusion / 16.0, 2.0);
     gl_FragColor = vec4(ambientOcclusion, ambientOcclusion, ambientOcclusion, 1.0) * texture2D(SAMPLER_01, OUT_TexCoord);
 }
 
