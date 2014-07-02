@@ -304,4 +304,12 @@ class CSceneFabricator;
 typedef std::shared_ptr<CSceneFabricator> CSharedSceneFabricator;
 typedef const CSharedSceneFabricator& CSharedSceneFabricatorRef;
 
+class CQuad;
+typedef std::shared_ptr<CQuad> CSharedQuad;
+typedef const CSharedQuad& CSharedQuadRef;
+
+class IRenderTechniqueHandler;
+typedef std::shared_ptr<IRenderTechniqueHandler> ISharedRenderTechniqueHandler;
+typedef const ISharedRenderTechniqueHandler& ISharedRenderTechniqueHandlerRef;
+
 #endif

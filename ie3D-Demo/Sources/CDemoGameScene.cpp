@@ -63,8 +63,12 @@ void CDemoGameScene::load(void)
     m_particles.push_back(particleEmitter);
     m_root->addParticleEmitter(particleEmitter);
     
-    std::shared_ptr<CLandscape> landscape = m_root->createLandscape("gameobject.landscape.xml");
-    m_root->setLandscape(landscape);
+    m_landscape = m_root->createLandscape("gameobject.landscape.xml");
+    m_root->setLandscape(m_landscape);
+    
+    m_model = m_root->createModel("gameobject.model.xml");
+    m_root->addModel(m_model);
+    m_model->setScale(glm::vec3(10.0, 10.0, 10.0));
     
     /*for(ui32 i = 0; i < landscape->getChunks().size(); ++i)
     {
@@ -85,6 +89,10 @@ void CDemoGameScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.1;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
+    
+    glm::vec3 position = m_camera->Get_LookAt();
+    position.y = m_landscape->getHeight(position);
+    m_model->setPosition(position);
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

@@ -39,6 +39,10 @@ ui32 CShaderCommiter_GLSL::compile(const std::string &sourceCode,
     define = "#define __OSX__\n";
 #elif defined(__IOS__)
     define = "#define __IOS__\n";
+    if(g_highPerformancePlatforms.count(getPlatform()) != 0)
+    {
+        define.append("#define __IOS_HIGH_PERFORMANCE__\n");
+    }
 #else
     define = "";
 #endif

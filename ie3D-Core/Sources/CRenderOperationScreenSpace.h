@@ -24,7 +24,6 @@ protected:
     std::shared_ptr<CTexture> m_operatingTexture;
     std::shared_ptr<CMaterial> m_material;
     ui32 m_frameBufferHandle;
-    ui32 m_depthBufferHandle;
     ui32 m_frameWidth;
     ui32 m_frameHeight;
     std::shared_ptr<CQuad> m_quad;

@@ -56,6 +56,9 @@
 #include <OpenGLES/ES2/glext.h>
 #include <QuartzCore/QuartzCore.h>
 
+#include <sys/types.h>
+#include <sys/sysctl.h>
+
 #elif defined(__WIN32__)
 
 #include <windows.h>
@@ -288,6 +291,60 @@ namespace glm
         return true;
     };
 };
+
+#if defined(__IOS__)
+
+static std::map<std::string, std::string> g_platforms = {
+    {"i386", "simulator" },
+    {"iPod1,1", "iPod Touch" },
+    {"iPod2,1", "iPod Touch Second Generation" },
+    {"iPod3,1", "iPod Touch Third Generation" },
+    {"iPod4,1", "iPod Touch Fourth Generation" },
+    {"iPhone1,1", "iPhone" },
+    {"iPhone1,2", "iPhone 3G" },
+    {"iPhone2,1", "iPhone 3GS" },
+    {"iPad1,1",   "iPad" },
+    {"iPad2,1",   "iPad 2" },
+    {"iPad3,1",   "3rd Generation iPad" },
+    {"iPhone3,1", "iPhone 4" },
+    {"iPhone4,1", "iPhone 4S" },
+    {"iPhone5,1", "iPhone 5 (model A1428, AT&T/Canada)" },
+    {"iPhone5,2", "iPhone 5 (model A1429)" },
+    {"iPad3,4", "4th Generation iPad" },
+    {"iPad2,5", "iPad Mini" },
+    {"iPhone5,3", "iPhone 5c (model A1456, A1532 | GSM)" },
+    {"iPhone5,4", "iPhone 5c (model A1507, A1516, A1526 (China), A1529 | Global)" },
+    {"iPhone6,1", "iPhone 5s (model A1433, A1533 | GSM)" },
+    {"iPhone6,2", "iPhone 5s (model A1457, A1518, A1528 (China), A1530 | Global)" },
+    {"iPad4,1", "5th Generation iPad (iPad Air) - Wifi" },
+    {"iPad4,2", "5th Generation iPad (iPad Air) - Cellular" },
+    {"iPad4,4", "2nd Generation iPad Mini - Wifi" },
+    {"iPad4,5", "2nd Generation iPad Mini - Cellular" }
+};
+
+static std::set<std::string> g_highPerformancePlatforms = {
+    "iPhone5,3",
+    "iPhone5,4",
+    "iPhone6,1",
+    "iPhone6,2"
+    "iPad4,1",
+    "iPad4,2",
+    "iPad4,4",
+    "iPad4,5"
+};
+
+static std::string getPlatform(void)
+{
+    size_t size;
+    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+    char *machine = (char *)malloc(size);
+    sysctlbyname("hw.machine", machine, &size, NULL, 0);
+    std::string platform(machine);
+    free(machine);
+    return platform;
+};
+
+#endif
 
 #define MIN_VALUE(a, b) (((a) < (b)) ? (a) : (b))
 #define MAX_VALUE(a, b) (((a) > (b)) ? (a) : (b))

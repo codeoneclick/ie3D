@@ -19,15 +19,6 @@ m_frameBufferHandle(_frameBufferHandle),
 m_renderBufferHandle(_renderBufferHandle)
 {
     assert(m_material != nullptr);
-    m_material->setCulling(false);
-    m_material->setDepthMask(true);
-    m_material->setDepthTest(false);
-    m_material->setBlending(false);
-    
-    m_material->setCullingMode(GL_FRONT);
-    m_material->setBlendingFunctionSource(GL_SRC_ALPHA);
-    m_material->setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
-    
 	m_quad = std::make_shared<CQuad>();
 }
 

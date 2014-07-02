@@ -20,7 +20,7 @@ void main(void)
     lowp float diffuseFactor = max(dot(OUT_Normal, OUT_LightDirection), 0.25);
     lowp vec4 diffuseColor = vec4(0.0, 0.0, 0.0, 1.0);
     
-#if defined(__OSX__)
+#if defined(__OSX__) || (defined(__IOS__) && defined(__IOS_HIGH_PERFORMANCE__))
     
     lowp vec4 splattingMask = texture2D(SAMPLER_04, OUT_TexCoord);
     

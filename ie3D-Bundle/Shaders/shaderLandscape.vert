@@ -41,7 +41,7 @@ void main(void)
     
     OUT_Fog = clamp(((MATRIX_View * vPosition).z + IN_fogLinearStart) / (IN_fogLinearStart - IN_fogLinearEnd) * -1.0, 0.0, 1.0);
     
-#if defined(__OSX__)
+#if defined(__OSX__) || (defined(__IOS__) && defined(__IOS_HIGH_PERFORMANCE__))
     OUT_SplattingTexCoord = vPosition / IN_SplattingTillingFactor;
 #elif defined(__IOS__)
     

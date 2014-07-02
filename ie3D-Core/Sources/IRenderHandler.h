@@ -35,5 +35,4 @@ public:
     virtual ~IRenderHandler(void);
 };
 
-
 #endif 

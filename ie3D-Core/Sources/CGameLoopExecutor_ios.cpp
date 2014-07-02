@@ -12,6 +12,7 @@
 
 #include "IGameLoopHandler.h"
 #include <Foundation/Foundation.h>
+
 #include <UIKit/UIKit.h>
 #include "CFPSCounter.h"
 
@@ -42,7 +43,7 @@
 {
     self = [super init];
     if(self)
-    {
+    {     
         self.m_gameLoopExecutor = new CGameLoopExecutor();
         CADisplayLink* displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(onUpdate:)];
         [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];

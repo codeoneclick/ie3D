@@ -48,13 +48,20 @@ m_prerenderedSplattingNormalTexture(nullptr)
 #if defined(__OSX__)
         material->getShader()->setFloatCustom(m_splattingTillingFactor, "IN_SplattingTillingFactor");
 #elif defined(__IOS__)
-        if(m_prerenderedSplattingDiffuseTexture)
+        if(g_highPerformancePlatforms.count(getPlatform()) != 0)
         {
-            material->getShader()->setTexture(m_prerenderedSplattingDiffuseTexture, E_SHADER_SAMPLER_01);
+            material->getShader()->setFloatCustom(m_splattingTillingFactor, "IN_SplattingTillingFactor");
         }
-        if(m_prerenderedSplattingNormalTexture)
+        else
         {
-            material->getShader()->setTexture(m_prerenderedSplattingNormalTexture, E_SHADER_SAMPLER_02);
+            if(m_prerenderedSplattingDiffuseTexture)
+            {
+                material->getShader()->setTexture(m_prerenderedSplattingDiffuseTexture, E_SHADER_SAMPLER_01);
+            }
+            if(m_prerenderedSplattingNormalTexture)
+            {
+                material->getShader()->setTexture(m_prerenderedSplattingNormalTexture, E_SHADER_SAMPLER_02);
+            }
         }
 #else
         material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSizeX, m_heightmapSizeZ) / m_splattingTillingFactor,

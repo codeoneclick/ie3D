@@ -18,9 +18,9 @@ const mediump float fLightLinear = 0.007;
 const mediump float fLightExponential = 0.00008;
 const mediump vec2 vPerturbationFactor = vec2(0.025, 0.025);
 
-const mediump vec3 k_vBinormal = vec3(1.0, 0.0, 0.0);
-const mediump vec3 k_vTangent = vec3(0.0, 0.0, 1.0);
-const mediump vec3 k_vNormal = vec3(0.0, 1.0, 0.0);
+const lowp vec3 k_vBinormal = vec3(1.0, 0.0, 0.0);
+const lowp vec3 k_vTangent = vec3(0.0, 0.0, 1.0);
+const lowp vec3 k_vNormal = vec3(0.0, 1.0, 0.0);
 
 void main(void)
 {
@@ -62,7 +62,6 @@ void main(void)
     vReflectionColor = mix(vDiffuseColor, vReflectionColor, vReflectionColor.a);
     vRefractionColor = mix(vDiffuseColor, vRefractionColor, vHeightmapColor.a * 2.0 * fresnel);
     
-    lowp vec4 vColor = mix(vReflectionColor, vRefractionColor, fresnel) + vec4(fSpecularFactor);
-    gl_FragColor = vColor;
+    gl_FragColor = mix(vReflectionColor, vRefractionColor, fresnel) + vec4(fSpecularFactor);
 }
 

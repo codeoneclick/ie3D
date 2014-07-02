@@ -45,6 +45,9 @@ void CRenderMgr::RegisterOutputRenderOperation(std::shared_ptr<CMaterial> materi
                                                                  material,
                                                                  m_graphicsContext->getFrameBuffer(),
                                                                  m_graphicsContext->getRenderBuffer());
+    const auto& platform = g_platforms.find(getPlatform());
+    assert(platform != g_platforms.end());
+    std::cout<<"[Device] : "<<platform->second<<std::endl;
     std::cout<<"[Output resolution] : "<<m_graphicsContext->getWidth()<<
     "x"<<m_graphicsContext->getHeight()<<std::endl;
 }

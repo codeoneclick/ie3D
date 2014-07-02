@@ -23,6 +23,8 @@ protected:
     
     std::shared_ptr<CMapDragController> m_mapDragController;
     CSharedSkyBox m_skyBox;
+    CSharedModel m_model;
+    CSharedLandscape m_landscape;
     
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject);
     

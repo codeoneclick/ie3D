@@ -121,9 +121,13 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
     for(const auto& iterator : gameTransitionConfiguration->getWSRenderOperationsConfigurations())
     {
         std::shared_ptr<CConfigurationWSRenderOperation> worldSpaceRenderOperationConfiguration = std::static_pointer_cast<CConfigurationWSRenderOperation>(iterator);
+        
+        ui32 screenWidth = MIN_VALUE(worldSpaceRenderOperationConfiguration->getScreenWidth(), m_graphicsContext->getWidth());
+        ui32 screenHeight = MIN_VALUE(worldSpaceRenderOperationConfiguration->getScreenHeight(), m_graphicsContext->getHeight());
+        
         std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation =
-        std::make_shared<CRenderOperationWorldSpace>(worldSpaceRenderOperationConfiguration->getScreenWidth(),
-                                                     worldSpaceRenderOperationConfiguration->getScreenHeight(),
+        std::make_shared<CRenderOperationWorldSpace>(screenWidth,
+                                                     screenHeight,
                                                      worldSpaceRenderOperationConfiguration->getClearColor(),
                                                      worldSpaceRenderOperationConfiguration->getGuid(),
                                                      worldSpaceRenderOperationConfiguration->getIndex());
@@ -147,9 +151,12 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
                                  m_resourceAccessor,
                                  m_screenSpaceRenderAccessor);
         
+        ui32 screenWidth = MIN_VALUE(screenSpaceRenderOperationConfiguration->getScreenWidth(), m_graphicsContext->getWidth());
+        ui32 screenHeight = MIN_VALUE(screenSpaceRenderOperationConfiguration->getScreenHeight(), m_graphicsContext->getHeight());
+        
         std::shared_ptr<CRenderOperationScreenSpace> screenSpaceRenderOperation =
-        std::make_shared<CRenderOperationScreenSpace>(screenSpaceRenderOperationConfiguration->getScreenWidth(),
-                                                      screenSpaceRenderOperationConfiguration->getScreenHeight(),
+        std::make_shared<CRenderOperationScreenSpace>(screenWidth,
+                                                      screenHeight,
                                                       screenSpaceRenderOperationConfiguration->getGuid(),
                                                       screenSpaceRenderOperationMaterial);
         m_renderMgr->RegisterScreenSpaceRenderOperation( screenSpaceRenderOperationConfiguration->getGuid(), screenSpaceRenderOperation);

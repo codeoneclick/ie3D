@@ -245,6 +245,30 @@
 		2132664C1906A4AF001C98F7 /* CResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A319017466F720044643E /* CResourceLoader.cpp */; };
 		2132664D1906A4AF001C98F7 /* CResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceAccessor.cpp */; };
 		2173174A1821AE6700FF3D1E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217317491821AE6700FF3D1E /* OpenGL.framework */; };
+		21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */; };
+		21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */; };
+		21733479196440EB002B3F90 /* IRenderTechniqueBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 21733476196440EB002B3F90 /* IRenderTechniqueBase.h */; };
+		2173347C19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173347A19644107002B3F90 /* CRenderTechniqueMain.cpp */; };
+		2173347D19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173347A19644107002B3F90 /* CRenderTechniqueMain.cpp */; };
+		2173347E19644107002B3F90 /* CRenderTechniqueMain.h in Headers */ = {isa = PBXBuildFile; fileRef = 2173347B19644107002B3F90 /* CRenderTechniqueMain.h */; };
+		2173348119644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173347F19644123002B3F90 /* CRenderTechniqueScreenSpace.cpp */; };
+		2173348219644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173347F19644123002B3F90 /* CRenderTechniqueScreenSpace.cpp */; };
+		2173348319644123002B3F90 /* CRenderTechniqueScreenSpace.h in Headers */ = {isa = PBXBuildFile; fileRef = 2173348019644123002B3F90 /* CRenderTechniqueScreenSpace.h */; };
+		2173348619644139002B3F90 /* CRenderTechniqueWorldSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173348419644139002B3F90 /* CRenderTechniqueWorldSpace.cpp */; };
+		2173348719644139002B3F90 /* CRenderTechniqueWorldSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173348419644139002B3F90 /* CRenderTechniqueWorldSpace.cpp */; };
+		2173348819644139002B3F90 /* CRenderTechniqueWorldSpace.h in Headers */ = {isa = PBXBuildFile; fileRef = 2173348519644139002B3F90 /* CRenderTechniqueWorldSpace.h */; };
+		2173348B19644157002B3F90 /* IRenderTechniqueImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173348919644157002B3F90 /* IRenderTechniqueImporter.cpp */; };
+		2173348C19644157002B3F90 /* IRenderTechniqueImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173348919644157002B3F90 /* IRenderTechniqueImporter.cpp */; };
+		2173348D19644157002B3F90 /* IRenderTechniqueImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2173348A19644157002B3F90 /* IRenderTechniqueImporter.h */; };
+		217334901964416D002B3F90 /* IRenderTechniqueAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173348E1964416D002B3F90 /* IRenderTechniqueAccessor.cpp */; };
+		217334911964416D002B3F90 /* IRenderTechniqueAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173348E1964416D002B3F90 /* IRenderTechniqueAccessor.cpp */; };
+		217334921964416D002B3F90 /* IRenderTechniqueAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 2173348F1964416D002B3F90 /* IRenderTechniqueAccessor.h */; };
+		217334951964425B002B3F90 /* CRenderPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217334931964425B002B3F90 /* CRenderPipeline.cpp */; };
+		217334961964425B002B3F90 /* CRenderPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217334931964425B002B3F90 /* CRenderPipeline.cpp */; };
+		217334971964425B002B3F90 /* CRenderPipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 217334941964425B002B3F90 /* CRenderPipeline.h */; };
+		2173349A19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */; };
+		2173349B19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */; };
+		2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */; };
 		21D0712B181DA5620019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		21D07238181DA6E60019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
 		21D07239181DA6EB0019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B217423E4D0063AB07 /* OpenGLES.framework */; };
@@ -303,6 +327,22 @@
 		2172A02C18F337D300D4D317 /* HDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HDeclaration.h; path = Sources/HDeclaration.h; sourceTree = "<group>"; };
 		2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_osx.cpp; path = Sources/COGLWindow_osx.cpp; sourceTree = "<group>"; };
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
+		21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueBase.cpp; path = Sources/IRenderTechniqueBase.cpp; sourceTree = "<group>"; };
+		21733476196440EB002B3F90 /* IRenderTechniqueBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueBase.h; path = Sources/IRenderTechniqueBase.h; sourceTree = "<group>"; };
+		2173347A19644107002B3F90 /* CRenderTechniqueMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRenderTechniqueMain.cpp; path = Sources/CRenderTechniqueMain.cpp; sourceTree = "<group>"; };
+		2173347B19644107002B3F90 /* CRenderTechniqueMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderTechniqueMain.h; path = Sources/CRenderTechniqueMain.h; sourceTree = "<group>"; };
+		2173347F19644123002B3F90 /* CRenderTechniqueScreenSpace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRenderTechniqueScreenSpace.cpp; path = Sources/CRenderTechniqueScreenSpace.cpp; sourceTree = "<group>"; };
+		2173348019644123002B3F90 /* CRenderTechniqueScreenSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderTechniqueScreenSpace.h; path = Sources/CRenderTechniqueScreenSpace.h; sourceTree = "<group>"; };
+		2173348419644139002B3F90 /* CRenderTechniqueWorldSpace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRenderTechniqueWorldSpace.cpp; path = Sources/CRenderTechniqueWorldSpace.cpp; sourceTree = "<group>"; };
+		2173348519644139002B3F90 /* CRenderTechniqueWorldSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderTechniqueWorldSpace.h; path = Sources/CRenderTechniqueWorldSpace.h; sourceTree = "<group>"; };
+		2173348919644157002B3F90 /* IRenderTechniqueImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueImporter.cpp; path = Sources/IRenderTechniqueImporter.cpp; sourceTree = "<group>"; };
+		2173348A19644157002B3F90 /* IRenderTechniqueImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueImporter.h; path = Sources/IRenderTechniqueImporter.h; sourceTree = "<group>"; };
+		2173348E1964416D002B3F90 /* IRenderTechniqueAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueAccessor.cpp; path = Sources/IRenderTechniqueAccessor.cpp; sourceTree = "<group>"; };
+		2173348F1964416D002B3F90 /* IRenderTechniqueAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueAccessor.h; path = Sources/IRenderTechniqueAccessor.h; sourceTree = "<group>"; };
+		217334931964425B002B3F90 /* CRenderPipeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRenderPipeline.cpp; path = Sources/CRenderPipeline.cpp; sourceTree = "<group>"; };
+		217334941964425B002B3F90 /* CRenderPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderPipeline.h; path = Sources/CRenderPipeline.h; sourceTree = "<group>"; };
+		2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueHandler.cpp; path = Sources/IRenderTechniqueHandler.cpp; sourceTree = "<group>"; };
+		2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueHandler.h; path = Sources/IRenderTechniqueHandler.h; sourceTree = "<group>"; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
 		217BB29E1815A48700DB8ECC /* CQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuad.h; path = Sources/CQuad.h; sourceTree = "<group>"; };
 		217BB2A91815A4CE00DB8ECC /* CGUITemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUITemplateSerializer.cpp; path = Sources/CGUITemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -1088,6 +1128,22 @@
 				A4535E9117C633EA0058CD47 /* CBatch.cpp */,
 				21457FEE181C4C060071839E /* IScreenSpaceRenderAccessor.h */,
 				21457FED181C4C060071839E /* IScreenSpaceRenderAccessor.cpp */,
+				2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */,
+				2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */,
+				21733476196440EB002B3F90 /* IRenderTechniqueBase.h */,
+				21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */,
+				2173347B19644107002B3F90 /* CRenderTechniqueMain.h */,
+				2173347A19644107002B3F90 /* CRenderTechniqueMain.cpp */,
+				2173348519644139002B3F90 /* CRenderTechniqueWorldSpace.h */,
+				2173348419644139002B3F90 /* CRenderTechniqueWorldSpace.cpp */,
+				2173348019644123002B3F90 /* CRenderTechniqueScreenSpace.h */,
+				2173347F19644123002B3F90 /* CRenderTechniqueScreenSpace.cpp */,
+				2173348919644157002B3F90 /* IRenderTechniqueImporter.cpp */,
+				2173348A19644157002B3F90 /* IRenderTechniqueImporter.h */,
+				2173348E1964416D002B3F90 /* IRenderTechniqueAccessor.cpp */,
+				2173348F1964416D002B3F90 /* IRenderTechniqueAccessor.h */,
+				217334931964425B002B3F90 /* CRenderPipeline.cpp */,
+				217334941964425B002B3F90 /* CRenderPipeline.h */,
 			);
 			name = "Render Managment";
 			sourceTree = "<group>";
@@ -1494,10 +1550,18 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21733479196440EB002B3F90 /* IRenderTechniqueBase.h in Headers */,
 				2127E85D1935056100D408C9 /* IEditableLandscape.h in Headers */,
+				2173347E19644107002B3F90 /* CRenderTechniqueMain.h in Headers */,
 				212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */,
+				2173348319644123002B3F90 /* CRenderTechniqueScreenSpace.h in Headers */,
+				2173348D19644157002B3F90 /* IRenderTechniqueImporter.h in Headers */,
+				217334921964416D002B3F90 /* IRenderTechniqueAccessor.h in Headers */,
 				212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */,
+				2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */,
+				217334971964425B002B3F90 /* CRenderPipeline.h in Headers */,
 				212092B61919674400FFC8D4 /* CSkyBox.h in Headers */,
+				2173348819644139002B3F90 /* CRenderTechniqueWorldSpace.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1583,12 +1647,15 @@
 				21208FA31906FB5F00FFC8D4 /* CFPSCounter.cpp in Sources */,
 				21208FA41906FB5F00FFC8D4 /* CTimer.cpp in Sources */,
 				21208FA51906FB5F00FFC8D4 /* CRenderOperationWorldSpace.cpp in Sources */,
+				2173347D19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				21208FA61906FB5F00FFC8D4 /* CRenderOperationScreenSpace.cpp in Sources */,
 				21208FA71906FB5F00FFC8D4 /* CRenderOperationOutput.cpp in Sources */,
 				21208FA81906FB5F00FFC8D4 /* COGLWindow_ios.cpp in Sources */,
+				2173348C19644157002B3F90 /* IRenderTechniqueImporter.cpp in Sources */,
 				21208FA91906FB5F00FFC8D4 /* COGLWindow_osx.cpp in Sources */,
 				21208FAA1906FB5F00FFC8D4 /* COGLWindow_win32.cpp in Sources */,
 				21208FAB1906FB5F00FFC8D4 /* COGLWindow_ndk.cpp in Sources */,
+				2173348719644139002B3F90 /* CRenderTechniqueWorldSpace.cpp in Sources */,
 				21208FAC1906FB5F00FFC8D4 /* IGraphicsContext.cpp in Sources */,
 				21208FAD1906FB5F00FFC8D4 /* CGraphicsContext_ios.cpp in Sources */,
 				21208FAE1906FB5F00FFC8D4 /* CGraphicsContext_osx.cpp in Sources */,
@@ -1609,6 +1676,7 @@
 				21208FBC1906FB5F00FFC8D4 /* IGameController.cpp in Sources */,
 				21208FBD1906FB5F00FFC8D4 /* IGameLoopHandler.cpp in Sources */,
 				21208FBE1906FB5F00FFC8D4 /* IGameObject.cpp in Sources */,
+				217334961964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				21208FBF1906FB5F00FFC8D4 /* CParticleEmitter.cpp in Sources */,
 				21208FC01906FB5F00FFC8D4 /* CModel.cpp in Sources */,
 				21208FC11906FB5F00FFC8D4 /* COcean.cpp in Sources */,
@@ -1619,12 +1687,14 @@
 				21208FC71906FB5F00FFC8D4 /* CQuadTree.cpp in Sources */,
 				21208FC81906FB5F00FFC8D4 /* CCamera.cpp in Sources */,
 				21208FC91906FB5F00FFC8D4 /* CFrustum.cpp in Sources */,
+				2173349B19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */,
 				21208FCA1906FB5F00FFC8D4 /* CLight.cpp in Sources */,
 				21208FCB1906FB5F00FFC8D4 /* CAnimationMixer.cpp in Sources */,
 				21208FCC1906FB5F00FFC8D4 /* CSceneGraph.cpp in Sources */,
 				21208FCD1906FB5F00FFC8D4 /* CSceneFabricator.cpp in Sources */,
 				21208FCE1906FB5F00FFC8D4 /* CSceneUpdateMgr.cpp in Sources */,
 				21208FCF1906FB5F00FFC8D4 /* ISceneUpdateHandler.cpp in Sources */,
+				2173348219644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */,
 				21208FD01906FB5F00FFC8D4 /* IScene.cpp in Sources */,
 				21208FD11906FB5F00FFC8D4 /* IFabricator.cpp in Sources */,
 				21208FD21906FB5F00FFC8D4 /* IGraph.cpp in Sources */,
@@ -1672,10 +1742,12 @@
 				21208FF91906FB6000FFC8D4 /* CShaderCommiter_GLSL.cpp in Sources */,
 				21208FFA1906FB6000FFC8D4 /* CTextureCommiter_PVR.cpp in Sources */,
 				21208FFB1906FB6000FFC8D4 /* CMeshCommiter_MDL.cpp in Sources */,
+				21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				21208FFC1906FB6000FFC8D4 /* CSkeletonCommiter_SK.cpp in Sources */,
 				21208FFD1906FB6000FFC8D4 /* CSequenceCommiter_SEQ.cpp in Sources */,
 				21208FFE1906FB6000FFC8D4 /* IResourceSerializer.cpp in Sources */,
 				21208FFF1906FB6000FFC8D4 /* CShaderSerializer_GLSL.cpp in Sources */,
+				217334911964416D002B3F90 /* IRenderTechniqueAccessor.cpp in Sources */,
 				212090001906FB6000FFC8D4 /* CTextureSerializer_PVR.cpp in Sources */,
 				212090011906FB6000FFC8D4 /* CMeshSerializer_MDL.cpp in Sources */,
 				212090021906FB6000FFC8D4 /* CSkeletonSerializer_SK.cpp in Sources */,
@@ -1706,12 +1778,15 @@
 				213265E71906A4AF001C98F7 /* CFPSCounter.cpp in Sources */,
 				213265E81906A4AF001C98F7 /* CTimer.cpp in Sources */,
 				213265E91906A4AF001C98F7 /* CRenderOperationWorldSpace.cpp in Sources */,
+				2173347C19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				213265EA1906A4AF001C98F7 /* CRenderOperationScreenSpace.cpp in Sources */,
 				213265EB1906A4AF001C98F7 /* CRenderOperationOutput.cpp in Sources */,
 				213265EC1906A4AF001C98F7 /* COGLWindow_ios.cpp in Sources */,
+				2173348B19644157002B3F90 /* IRenderTechniqueImporter.cpp in Sources */,
 				213265ED1906A4AF001C98F7 /* COGLWindow_osx.cpp in Sources */,
 				213265EE1906A4AF001C98F7 /* COGLWindow_win32.cpp in Sources */,
 				213265EF1906A4AF001C98F7 /* COGLWindow_ndk.cpp in Sources */,
+				2173348619644139002B3F90 /* CRenderTechniqueWorldSpace.cpp in Sources */,
 				213265F01906A4AF001C98F7 /* IGraphicsContext.cpp in Sources */,
 				213265F11906A4AF001C98F7 /* CGraphicsContext_ios.cpp in Sources */,
 				213265F21906A4AF001C98F7 /* CGraphicsContext_osx.cpp in Sources */,
@@ -1732,6 +1807,7 @@
 				213266001906A4AF001C98F7 /* IGameController.cpp in Sources */,
 				213266011906A4AF001C98F7 /* IGameLoopHandler.cpp in Sources */,
 				213266021906A4AF001C98F7 /* IGameObject.cpp in Sources */,
+				217334951964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				213266031906A4AF001C98F7 /* CParticleEmitter.cpp in Sources */,
 				213266041906A4AF001C98F7 /* CModel.cpp in Sources */,
 				213266051906A4AF001C98F7 /* COcean.cpp in Sources */,
@@ -1742,12 +1818,14 @@
 				2132660B1906A4AF001C98F7 /* CQuadTree.cpp in Sources */,
 				2132660C1906A4AF001C98F7 /* CCamera.cpp in Sources */,
 				2132660D1906A4AF001C98F7 /* CFrustum.cpp in Sources */,
+				2173349A19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */,
 				2132660E1906A4AF001C98F7 /* CLight.cpp in Sources */,
 				2132660F1906A4AF001C98F7 /* CAnimationMixer.cpp in Sources */,
 				213266101906A4AF001C98F7 /* CSceneGraph.cpp in Sources */,
 				213266111906A4AF001C98F7 /* CSceneFabricator.cpp in Sources */,
 				213266121906A4AF001C98F7 /* CSceneUpdateMgr.cpp in Sources */,
 				213266131906A4AF001C98F7 /* ISceneUpdateHandler.cpp in Sources */,
+				2173348119644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */,
 				213266141906A4AF001C98F7 /* IScene.cpp in Sources */,
 				213266151906A4AF001C98F7 /* IFabricator.cpp in Sources */,
 				213266161906A4AF001C98F7 /* IGraph.cpp in Sources */,
@@ -1795,10 +1873,12 @@
 				2132663D1906A4AF001C98F7 /* CShaderCommiter_GLSL.cpp in Sources */,
 				2132663E1906A4AF001C98F7 /* CTextureCommiter_PVR.cpp in Sources */,
 				2132663F1906A4AF001C98F7 /* CMeshCommiter_MDL.cpp in Sources */,
+				21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				213266401906A4AF001C98F7 /* CSkeletonCommiter_SK.cpp in Sources */,
 				213266411906A4AF001C98F7 /* CSequenceCommiter_SEQ.cpp in Sources */,
 				213266421906A4AF001C98F7 /* IResourceSerializer.cpp in Sources */,
 				213266431906A4AF001C98F7 /* CShaderSerializer_GLSL.cpp in Sources */,
+				217334901964416D002B3F90 /* IRenderTechniqueAccessor.cpp in Sources */,
 				213266441906A4AF001C98F7 /* CTextureSerializer_PVR.cpp in Sources */,
 				213266451906A4AF001C98F7 /* CMeshSerializer_MDL.cpp in Sources */,
 				213266461906A4AF001C98F7 /* CSkeletonSerializer_SK.cpp in Sources */,
