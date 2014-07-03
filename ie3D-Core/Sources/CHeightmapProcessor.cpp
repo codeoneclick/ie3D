@@ -12,7 +12,8 @@
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
-#include "IScreenSpaceRenderAccessor.h"
+#include "IRenderTechniqueImporter.h"
+#include "IRenderTechniqueAccessor.h"
 #include "CConfigurationGameObjects.h"
 
 #if defined(__IOS__)
@@ -413,10 +414,9 @@ ui32 CHeightmapProcessingOperation::getIndexZ(void) const
     return m_indexZ;
 }
 
-CHeightmapProcessor::CHeightmapProcessor(const std::shared_ptr<IScreenSpaceRenderAccessor>& screenSpaceTextureAccessor,
-                                         ISharedConfigurationRef configuration) :
+CHeightmapProcessor::CHeightmapProcessor(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration) :
 m_heightmapData(nullptr),
-m_screenSpaceTextureAccessor(screenSpaceTextureAccessor),
+m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_heightmapTexture(nullptr),
 m_splattingTexture(nullptr),
 m_diffuseTexture(nullptr),
@@ -425,7 +425,7 @@ m_edgesMaskTexture(nullptr),
 m_edgesMaskTextureWidth(2048),
 m_edgesMaskTextureHeight(2048)
 {
-    assert(m_screenSpaceTextureAccessor != nullptr);
+    assert(m_renderTechniqueAccessor != nullptr);
     assert(configuration != nullptr);
     
     std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
@@ -814,21 +814,21 @@ std::shared_ptr<CTexture> CHeightmapProcessor::createEdgesMaskTexture(void)
 }
 
 
-std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingDiffuseTexture(CSharedMaterialRef material)
+CSharedTexture CHeightmapProcessor::PreprocessSplattingDiffuseTexture(CSharedMaterialRef material)
 {
-    assert(m_screenSpaceTextureAccessor != nullptr);
+    assert(m_renderTechniqueAccessor != nullptr);
     assert(m_diffuseTexture == nullptr);
     assert(m_splattingTexture != nullptr);
-    m_diffuseTexture = m_screenSpaceTextureAccessor->preprocessSSOperationTexture(material, 2048, 2048);
+    m_diffuseTexture = m_renderTechniqueAccessor->preprocessTexture(material, 2048, 2048);
     return m_diffuseTexture;
 }
 
-std::shared_ptr<CTexture> CHeightmapProcessor::PreprocessSplattingNormalTexture(CSharedMaterialRef material)
+CSharedTexture CHeightmapProcessor::PreprocessSplattingNormalTexture(CSharedMaterialRef material)
 {
-    assert(m_screenSpaceTextureAccessor != nullptr);
+    assert(m_renderTechniqueAccessor != nullptr);
     assert(m_normalTexture == nullptr);
     assert(m_splattingTexture != nullptr);
-    m_normalTexture = m_screenSpaceTextureAccessor->preprocessSSOperationTexture(material, 2048, 2048);
+    m_normalTexture = m_renderTechniqueAccessor->preprocessTexture(material, 2048, 2048);
     return m_normalTexture;
 }
 

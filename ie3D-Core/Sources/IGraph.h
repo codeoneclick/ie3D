@@ -12,21 +12,18 @@
 #include "HCommon.h"
 #include "HDeclaration.h"
 
-class CRenderMgr;
-class CSceneUpdateMgr;
-
 class IGraph
 {
 private:
 
 protected:
 
-	CSharedRenderMgr m_renderMgr;
+	CSharedRenderPipeline m_renderPipeline;
     CSharedSceneUpdateMgr m_sceneUpdateMgr;
 
 public:
     
-    IGraph(CSharedRenderMgrRef renderMgr,
+    IGraph(CSharedRenderPipelineRef renderPipeline,
            CSharedSceneUpdateMgrRef sceneUpdateMgr);
     virtual ~IGraph(void);
     

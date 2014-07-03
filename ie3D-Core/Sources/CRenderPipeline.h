@@ -6,9 +6,34 @@
 //  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __ie3D_Core__CRenderPipeline__
-#define __ie3D_Core__CRenderPipeline__
+#ifndef CRenderPipeline_h
+#define CRenderPipeline_h
 
-#include <iostream>
+#include "IGameLoopHandler.h"
+#include "IRenderTechniqueImporter.h"
+#include "IRenderTechniqueAccessor.h"
 
-#endif /* defined(__ie3D_Core__CRenderPipeline__) */
+class CRenderPipeline : public IGameLoopHandler, public IRenderTechniqueImporter, public IRenderTechniqueAccessor
+{
+private:
+    
+protected:
+    
+    void _OnGameLoopUpdate(f32 deltatime);
+    
+public:
+    
+    CRenderPipeline(ISharedGraphicsContextRef graphicContext);
+    ~CRenderPipeline(void);
+    
+    CSharedTexture preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height);
+    CSharedTexture getTechniqueTexture(const std::string& techniqueName);
+    CSharedMaterial getTechniqueMaterial(const std::string& techniqueName);
+    
+    ui32 getScreenWidth(void);
+    ui32 getScreenHeight(void);
+    
+    ui32 getFrameNumTriagles(void);
+};
+
+#endif 

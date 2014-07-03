@@ -17,8 +17,8 @@
 #include "CCamera.h"
 
 CSelectionArea::CSelectionArea(CSharedResourceAccessorRef resourceAccessor,
-                               ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
-IGameObject(resourceAccessor, screenSpaceTextureAccessor),
+                               ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_radius(2),
 m_landscape(nullptr)
 {
@@ -52,7 +52,9 @@ void CSelectionArea::onConfigurationLoaded(ISharedConfigurationRef configuration
     
     CSelectionArea::createMesh(m_radius);
     
-	IGameObject::listenRenderMgr(m_isNeedToRender);
+	IGameObject::enableRender(m_isNeedToRender);
+    IGameObject::enableUpdate(m_isNeedToUpdate);
+    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

@@ -14,15 +14,14 @@
 #include "CLight.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
-#include "IScreenSpaceRenderAccessor.h"
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CCubemapTexture.h"
 
 CSkyBox::CSkyBox(CSharedResourceAccessorRef resourceAccessor,
-               ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
-IGameObject(resourceAccessor, screenSpaceTextureAccessor)
+                 ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_SKYBOX;
 }
@@ -67,7 +66,7 @@ void CSkyBox::onConfigurationLoaded(ISharedConfigurationRef configuration, bool 
                                                                                    zpositiveTexture,
                                                                                    znegativeTexture);
     
-    m_screenSpaceTextureAccessor->addCustomTexture(texture);
+    m_resourceAccessor->addCustomTexture("skybox.cubemap.texture", texture);
     
     for(const auto& iterator : m_materials)
     {
@@ -141,7 +140,9 @@ void CSkyBox::onConfigurationLoaded(ISharedConfigurationRef configuration, bool 
                                         glm::vec3(4096.0), glm::vec3(4096.0));
     assert(m_mesh != nullptr);
     
-	IGameObject::listenRenderMgr(m_isNeedToRender);
+	IGameObject::enableRender(m_isNeedToRender);
+    IGameObject::enableUpdate(m_isNeedToUpdate);
+    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

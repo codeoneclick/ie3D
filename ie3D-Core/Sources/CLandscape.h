@@ -56,18 +56,19 @@ protected:
 public:
 
     CLandscape(CSharedResourceAccessorRef resourceAccessor,
-               ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
+               ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CLandscape(void);
     
     void setCamera(CSharedCameraRef camera);
     void setLightSource(CSharedLightSourceRef lightSource,
                         E_LIGHT_SOURCE index);
     
-    void setRenderMgr(CSharedRenderMgrRef renderMgr);
+    void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);
+    void setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor);
     void setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr);
     
-    void listenRenderMgr(bool value);
-    void listenSceneUpdateMgr(bool value);
+    void enableRender(bool value);
+    void enableUpdate(bool value);
     
     std::vector<ISharedGameObject> getChunks(void) const;
 

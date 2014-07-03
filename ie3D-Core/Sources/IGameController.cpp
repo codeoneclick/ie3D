@@ -55,12 +55,12 @@ void IGameController::GoToTransition(const std::string &_guid)
 
 ui32 IGameController::Get_CurrentNumTriagles(void)
 {
-    return m_currentTransition != nullptr ? m_currentTransition->Get_CurrentNumTriangles() : 0;
+    return m_currentTransition != nullptr ? m_currentTransition->getFrameNumTriangles() : 0;
 }
 
 ui32 IGameController::Get_TotalNumTriangles(void)
 {
-    return m_currentTransition != nullptr ? m_currentTransition->Get_TotalNumTriangles() : 0;
+    return m_currentTransition != nullptr ? m_currentTransition->getSceneNumTriangles() : 0;
 }
 
 ui32 Get_CurrentNumTriagles(void)

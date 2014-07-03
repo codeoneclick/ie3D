@@ -19,6 +19,7 @@ private:
 protected:
     
     CSharedResourceLoader m_resourceLoader;
+    std::unordered_map<std::string, CSharedTexture> m_customTextures;
     
 #if defined(__NDK__)
     
@@ -39,6 +40,7 @@ public:
     
     CSharedResourceLoader getResourceLoader(void) const;
     
+    void addCustomTexture(const std::string& textureName, CSharedTextureRef texture);
     CSharedTexture getTexture(const std::string& filename) const;
     
     CSharedShader getShader(const std::string& vsFilename,

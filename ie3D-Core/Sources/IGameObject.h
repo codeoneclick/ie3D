@@ -14,14 +14,14 @@
 #include "HDeclaration.h"
 #include "IResource.h"
 #include "IConfiguration.h"
-#include "IRenderHandler.h"
+#include "IRenderTechniqueHandler.h"
 #include "ISceneUpdateHandler.h"
 
 class IGameObject :
 public std::enable_shared_from_this<IGameObject>,
 public IConfigurationLoadingHandler,
 public IResourceLoadingHandler,
-public IRenderHandler,
+public IRenderTechniqueHandler,
 public ISceneUpdateHandler
 {
 private:
@@ -47,10 +47,13 @@ protected:
     CSharedCamera m_camera;
     std::array<CSharedLightSource, E_LIGHT_SOURCE_MAX> m_lightSources;
     
-    CSharedRenderMgr m_renderMgr;
+    ISharedRenderTechniqueImporter m_renderTechniqueImporter;
+    ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
+
     CSharedSceneUpdateMgr m_sceneUpdateMgr;
+    
     CSharedResourceAccessor m_resourceAccessor;
-	ISharedScreenSpaceRenderAccessor m_screenSpaceTextureAccessor;
+    
     ui32 m_zOrder;
     
     ui8 m_status;
@@ -75,7 +78,7 @@ protected:
 public:
     
 	IGameObject(CSharedResourceAccessorRef resourceAccessor,
-                ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
+                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     virtual ~IGameObject(void);
     
     virtual void setPosition(const glm::vec3& position);
@@ -110,11 +113,12 @@ public:
     void setClippingPlane(const glm::vec4& clippingPlane,
                           const std::string& mode);
     
-    virtual void setRenderMgr(CSharedRenderMgrRef renderMgr);
+    virtual void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);
+    virtual void setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor);
     virtual void setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr);
     
-    virtual void listenRenderMgr(bool value);
-    virtual void listenSceneUpdateMgr(bool value);
+    virtual void enableRender(bool value);
+    virtual void enableUpdate(bool value);
 };
 
 #endif 

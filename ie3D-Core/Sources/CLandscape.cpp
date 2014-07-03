@@ -14,7 +14,6 @@
 #include "CLight.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
-#include "CRenderMgr.h"
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CLandscapeChunk.h"
@@ -23,8 +22,8 @@
 #include "CFrustum.h"
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
-                       ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
-IGameObject(resourceAccessor, screenSpaceTextureAccessor),
+                       ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_prerenderedSplattingDiffuseTexture(nullptr),
 m_prerenderedSplattingNormalTexture(nullptr),
 m_splattingDiffuseMaterial(nullptr),
@@ -32,7 +31,7 @@ m_splattingNormalMaterial(nullptr),
 m_isSplattingDiffuseTexturePrerendered(false),
 m_isSplattingNormalTexturePrerendered(false),
 m_configuration(nullptr),
-m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, screenSpaceTextureAccessor))
+m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, renderTechniqueAccessor))
 {
 
 }
@@ -69,15 +68,16 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
                         CSharedMesh mesh = m_heightmapProcessor->getChunk(i, j);
-                        CSharedLandscapeChunk chunk = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+                        CSharedLandscapeChunk chunk = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
                         
                         chunk->setCamera(m_camera);
                         
-                        chunk->setRenderMgr(m_renderMgr);
+                        chunk->setRenderTechniqueImporter(m_renderTechniqueImporter);
+                        chunk->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
                         chunk->setSceneUpdateMgr(m_sceneUpdateMgr);
                         
-                        chunk->listenRenderMgr(m_isNeedToRender);
-                        chunk->listenSceneUpdateMgr(m_isNeedToUpdate);
+                        chunk->enableRender(m_isNeedToRender);
+                        chunk->enableUpdate(m_isNeedToUpdate);
                         
                         ui32 chunkSizeX = m_heightmapProcessor->getChunkSizeX(i, j);
                         ui32 chunkSizeZ = m_heightmapProcessor->getChunkSizeZ(i, j);
@@ -104,8 +104,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 else if(m_chunks[i + j * numChunksZ] != nullptr)
                 {
                     CSharedLandscapeChunk chunk = m_chunks[i + j * numChunksZ];
-                    chunk->listenRenderMgr(false);
-                    chunk->listenSceneUpdateMgr(false);
+                    chunk->enableRender(false);
+                    chunk->enableUpdate(false);
                     m_heightmapProcessor->freeChunk(chunk->m_mesh, i, j);
                     m_chunks[i + j * numChunksZ] = nullptr;
                 }
@@ -124,26 +124,26 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     m_configuration = configuration;
     assert(m_resourceAccessor != nullptr);
-    assert(m_screenSpaceTextureAccessor != nullptr);
+    assert(m_renderTechniqueAccessor != nullptr);
     
     m_isSplattingDiffuseTexturePrerendered = false;
     m_isSplattingNormalTexturePrerendered = false;
     
-    m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_screenSpaceTextureAccessor, landscapeConfiguration);
+    m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_renderTechniqueAccessor, landscapeConfiguration);
     IEditableLandscape::setHeightmapProcessor(m_heightmapProcessor);
     
-    m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->createSplattingTexture());
-    m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->createHeightmapTexture());
-    m_screenSpaceTextureAccessor->addCustomTexture(m_heightmapProcessor->createEdgesMaskTexture());
+    m_resourceAccessor->addCustomTexture("landscape.splatting.texture" , m_heightmapProcessor->createSplattingTexture());
+    m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapProcessor->createHeightmapTexture());
+    m_resourceAccessor->addCustomTexture("landscape.edgesmask.texture", m_heightmapProcessor->createEdgesMaskTexture());
     
     CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingDiffuseMaterialConfiguration());
     m_splattingDiffuseMaterial = std::make_shared<CMaterial>();
-    CMaterial::setupMaterial(m_splattingDiffuseMaterial, materialConfiguration, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
+    CMaterial::setupMaterial(m_splattingDiffuseMaterial, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
     m_splattingDiffuseMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
     materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingNormalMaterialConfiguration());
     m_splattingNormalMaterial = std::make_shared<CMaterial>();
-    CMaterial::setupMaterial(m_splattingNormalMaterial, materialConfiguration, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
+    CMaterial::setupMaterial(m_splattingNormalMaterial, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
     m_splattingNormalMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
     m_chunks.resize(m_heightmapProcessor->getNumChunksX() * m_heightmapProcessor->getNumChunksZ());
@@ -270,32 +270,39 @@ void CLandscape::setLightSource(CSharedLightSourceRef lightSource,
     m_edges->setLightSource(lightSource, index);
 }
 
-void CLandscape::setRenderMgr(CSharedRenderMgrRef renderMgr)
+void CLandscape::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)
 {
-    IGameObject::setRenderMgr(renderMgr);
     assert(m_edges != nullptr);
-    m_edges->setRenderMgr(renderMgr);
+    IGameObject::setRenderTechniqueImporter(techniqueImporter);
+    m_edges->setRenderTechniqueImporter(techniqueImporter);
+}
+
+void CLandscape::setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor)
+{
+    assert(m_edges != nullptr);
+    IGameObject::setRenderTechniqueAccessor(techniqueAccessor);
+    m_edges->setRenderTechniqueAccessor(techniqueAccessor);
 }
 
 void CLandscape::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
 {
-    IGameObject::setSceneUpdateMgr(sceneUpdateMgr);
     assert(m_edges != nullptr);
+    IGameObject::setSceneUpdateMgr(sceneUpdateMgr);
     m_edges->setSceneUpdateMgr(sceneUpdateMgr);
 }
 
-void CLandscape::listenRenderMgr(bool value)
+void CLandscape::enableRender(bool value)
 {
-    m_isNeedToRender = value;
     assert(m_edges != nullptr);
-    m_edges->listenRenderMgr(value);
+    m_isNeedToRender = value;
+    m_edges->enableRender(value);
 }
 
-void CLandscape::listenSceneUpdateMgr(bool value)
+void CLandscape::enableUpdate(bool value)
 {
-    IGameObject::listenSceneUpdateMgr(value);
     assert(m_edges != nullptr);
-    m_edges->listenSceneUpdateMgr(value);
+    IGameObject::enableUpdate(value);
+    m_edges->enableUpdate(value);
 }
 
 CSharedTexture CLandscape::getHeightmapTexture(void) const

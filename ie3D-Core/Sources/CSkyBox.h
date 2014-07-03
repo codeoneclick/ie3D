@@ -33,7 +33,7 @@ protected:
 public:
     
     CSkyBox(CSharedResourceAccessorRef resourceAccessor,
-            ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
+            ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CSkyBox(void);
 };
 

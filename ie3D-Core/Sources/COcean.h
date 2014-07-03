@@ -40,7 +40,7 @@ protected:
 public:
     
     COcean(CSharedResourceAccessorRef resourceAccessor,
-           ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
+           ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~COcean(void);
 };
 

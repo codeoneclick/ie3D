@@ -22,7 +22,7 @@ public:
     
     CMESceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                        CSharedResourceAccessorRef resourceAccessor,
-                       ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor);
+                       ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     
     virtual ~CMESceneFabricator(void);
     

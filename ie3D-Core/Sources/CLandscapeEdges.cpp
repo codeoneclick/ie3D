@@ -14,15 +14,14 @@
 #include "CLight.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
-#include "CRenderMgr.h"
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
 CLandscapeEdges::CLandscapeEdges(CSharedResourceAccessorRef resourceAccessor,
-                                 ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
-IGameObject(resourceAccessor, screenSpaceTextureAccessor),
+                                 ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_width(0),
 m_height(0),
 m_heightBounds(glm::vec2(0.0f, 0.0f))
@@ -83,7 +82,7 @@ void CLandscapeEdges::onConfigurationLoaded(ISharedConfigurationRef configuratio
     {
         CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
         CSharedMaterial material = std::make_shared<CMaterial>();
-        CMaterial::setupMaterial(material, materialConfiguration, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
+        CMaterial::setupMaterial(material, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
         m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
     }
     
@@ -171,7 +170,9 @@ void CLandscapeEdges::onConfigurationLoaded(ISharedConfigurationRef configuratio
     m_mesh = CMesh::constructCustomMesh("landscape.edges", vertexBuffer, indexBuffer,
                                      maxBound, minBound);
     
-	IGameObject::listenRenderMgr(m_isNeedToRender);
+	IGameObject::enableRender(m_isNeedToRender);
+    IGameObject::enableUpdate(m_isNeedToUpdate);
+    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

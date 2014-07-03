@@ -14,12 +14,8 @@
 #include "CTexture.h"
 #include "IGameObject.h"
 #include "CGameLoopExecutor.h"
-#include "CRenderMgr.h"
-#include "CBatchingMgr.h"
 #include "CSceneUpdateMgr.h"
 #include "CCollisionMgr.h"
-#include "CRenderOperationWorldSpace.h"
-#include "CRenderOperationScreenSpace.h"
 #include "CCommonOS.h"
 #include "CConfigurationGameObjects.h"
 #include "IGraphicsContext.h"
@@ -27,6 +23,10 @@
 #include "CResourceLoader.h"
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
+#include "CRenderPipeline.h"
+#include "CRenderTechniqueMain.h"
+#include "CRenderTechniqueWorldSpace.h"
+#include "CRenderTechniqueScreenSpace.h"
 
 IGameTransition::IGameTransition(const std::string& filename,
                                  ISharedGraphicsContextRef graphicsContext,
@@ -44,12 +44,8 @@ m_configurationAccessor(configurationAccessor)
     assert(m_graphicsContext != nullptr);
     assert(m_inputContext != nullptr);
     
-    m_renderMgr = std::make_shared<CRenderMgr>(m_graphicsContext);
-    m_screenSpaceRenderAccessor = m_renderMgr;
+    m_renderPipeline = std::make_shared<CRenderPipeline>(m_graphicsContext);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
-    
-    std::shared_ptr<CBatchingMgr> batchingMgr = std::make_shared<CBatchingMgr>(m_renderMgr);
-    m_renderMgr->Set_BatchingMgr(batchingMgr);
     
     m_collisionMgr = std::make_shared<CCollisionMgr>();
     m_inputContext->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(m_collisionMgr));
@@ -66,14 +62,14 @@ void IGameTransition::initScene(void)
     assert(m_inputContext != nullptr);
     assert(m_sceneUpdateMgr != nullptr);
     assert(m_collisionMgr != nullptr);
-    assert(m_screenSpaceRenderAccessor != nullptr);
+    assert(m_renderPipeline != nullptr);
     
-    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderMgr, m_sceneUpdateMgr,
+    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderPipeline, m_sceneUpdateMgr,
                                                  m_collisionMgr, m_inputContext);
     
     m_sceneFabricator = std::make_shared<CSceneFabricator>(m_configurationAccessor,
                                                            m_resourceAccessor,
-                                                           m_screenSpaceRenderAccessor);
+                                                           m_renderPipeline);
 }
 
 void IGameTransition::_OnRegistered(void)
@@ -88,14 +84,14 @@ void IGameTransition::_OnUnregistered(void)
 
 void IGameTransition::_OnActivate(void)
 {
-    ConnectToGameLoop(m_renderMgr);
+    ConnectToGameLoop(m_renderPipeline);
     ConnectToGameLoop(m_sceneUpdateMgr);
     ConnectToGameLoop(m_resourceAccessor->getResourceLoader());
 }
 
 void IGameTransition::_OnDeactivate(void)
 {
-    DisconnectFromGameLoop(m_renderMgr);
+    DisconnectFromGameLoop(m_renderPipeline);
     DisconnectFromGameLoop(m_sceneUpdateMgr);
     DisconnectFromGameLoop(m_resourceAccessor->getResourceLoader());
 }
@@ -112,7 +108,7 @@ void IGameTransition::_OnGameLoopUpdate(f32 _deltatime)
 
 void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
-    assert(m_renderMgr != nullptr);
+    assert(m_renderPipeline != nullptr);
     assert(m_resourceAccessor != nullptr);
     
     std::shared_ptr<CConfigurationGameTransition> gameTransitionConfiguration = std::static_pointer_cast<CConfigurationGameTransition>(configuration);
@@ -125,13 +121,15 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
         ui32 screenWidth = MIN_VALUE(worldSpaceRenderOperationConfiguration->getScreenWidth(), m_graphicsContext->getWidth());
         ui32 screenHeight = MIN_VALUE(worldSpaceRenderOperationConfiguration->getScreenHeight(), m_graphicsContext->getHeight());
         
-        std::shared_ptr<CRenderOperationWorldSpace> worldSpaceRenderOperation =
-        std::make_shared<CRenderOperationWorldSpace>(screenWidth,
+        
+        
+        CSharedRenderTechniqueWorldSpace worldSpaceRenderTechnique =
+        std::make_shared<CRenderTechniqueWorldSpace>(screenWidth,
                                                      screenHeight,
-                                                     worldSpaceRenderOperationConfiguration->getClearColor(),
                                                      worldSpaceRenderOperationConfiguration->getGuid(),
                                                      worldSpaceRenderOperationConfiguration->getIndex());
-        m_renderMgr->RegisterWorldSpaceRenderOperation(worldSpaceRenderOperationConfiguration->getGuid(), worldSpaceRenderOperation);
+        worldSpaceRenderTechnique->setClearColor(worldSpaceRenderOperationConfiguration->getClearColor());
+        m_renderPipeline->addWorldSpaceRenderTechnique(worldSpaceRenderOperationConfiguration->getGuid(), worldSpaceRenderTechnique);
     }
     
     for(const auto& iterator : gameTransitionConfiguration->getSSRenderOperationsConfigurations())
@@ -143,23 +141,22 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
         std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>();
         
         assert(screenSpaceRenderOperationMaterialConfiguration != nullptr);
-        assert(m_screenSpaceRenderAccessor != nullptr);
         assert(m_resourceAccessor != nullptr);
         
         CMaterial::setupMaterial(screenSpaceRenderOperationMaterial,
                                  screenSpaceRenderOperationMaterialConfiguration,
                                  m_resourceAccessor,
-                                 m_screenSpaceRenderAccessor);
+                                 m_renderPipeline);
         
         ui32 screenWidth = MIN_VALUE(screenSpaceRenderOperationConfiguration->getScreenWidth(), m_graphicsContext->getWidth());
         ui32 screenHeight = MIN_VALUE(screenSpaceRenderOperationConfiguration->getScreenHeight(), m_graphicsContext->getHeight());
         
-        std::shared_ptr<CRenderOperationScreenSpace> screenSpaceRenderOperation =
-        std::make_shared<CRenderOperationScreenSpace>(screenWidth,
+        CSharedRenderTechniqueScreenSpace screenSpaceRenderTechnique =
+        std::make_shared<CRenderTechniqueScreenSpace>(screenWidth,
                                                       screenHeight,
                                                       screenSpaceRenderOperationConfiguration->getGuid(),
                                                       screenSpaceRenderOperationMaterial);
-        m_renderMgr->RegisterScreenSpaceRenderOperation( screenSpaceRenderOperationConfiguration->getGuid(), screenSpaceRenderOperation);
+        m_renderPipeline->addScreenSpaceRenderTechnique(screenSpaceRenderOperationConfiguration->getGuid(), screenSpaceRenderTechnique);
     }
     
     std::shared_ptr<CConfigurationORenderOperation> outputRenderOperationConfiguration = std::static_pointer_cast<CConfigurationORenderOperation>(gameTransitionConfiguration->getORenderOperationConfiguration());
@@ -169,14 +166,13 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
     std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>();
     
     assert(outputRenderOperationMaterialConfiguration != nullptr);
-    assert(m_screenSpaceRenderAccessor != nullptr);
 	assert(m_resourceAccessor != nullptr);
     
     CMaterial::setupMaterial(outputRenderOperationMaterial,
                              outputRenderOperationMaterialConfiguration,
                              m_resourceAccessor,
-                             m_screenSpaceRenderAccessor);
-    m_renderMgr->RegisterOutputRenderOperation(outputRenderOperationMaterial);
+                             m_renderPipeline);
+    m_renderPipeline->setMainRenderTechnique(outputRenderOperationMaterial);
     
     _OnLoaded();
 }
@@ -186,10 +182,16 @@ std::string IGameTransition::getGuid(void) const
     return m_guid;
 }
 
-ISharedScreenSpaceRenderAccessor IGameTransition::getSSRenderAccessor(void)
+ISharedRenderTechniqueImporter IGameTransition::getRenderTechniqueImporter(void) const
 {
-    assert(m_screenSpaceRenderAccessor != nullptr);
-    return m_screenSpaceRenderAccessor;
+    assert(m_renderPipeline != nullptr);
+    return m_renderPipeline;
+}
+
+ISharedRenderTechniqueAccessor IGameTransition::getRenderTechniqueAccessor(void) const
+{
+    assert(m_renderPipeline != nullptr);
+    return m_renderPipeline;
 }
 
 void IGameTransition::setCamera(CSharedCameraRef camera)
@@ -366,25 +368,25 @@ void IGameTransition::deleteParticleEmitter(CSharedParticleEmitterRef particleEm
     m_sceneFabricator->deleteParticleEmitter(particleEmitter);
 }
 
-ui32 IGameTransition::Get_CurrentNumTriangles(void)
+ui32 IGameTransition::getFrameNumTriangles(void)
 {
-    assert(m_renderMgr != nullptr);
-    return m_renderMgr->Get_NumTriangles();
+    assert(m_renderPipeline != nullptr);
+    return m_renderPipeline->getFrameNumTriagles();
 }
 
 
-ui32 IGameTransition::Get_TotalNumTriangles(void)
+ui32 IGameTransition::getSceneNumTriangles(void)
 {
     return 0;
 }
 
-ui32 IGameTransition::getWindowWidth(void) const
+ui32 IGameTransition::getScreenWidth(void) const
 {
-    return m_renderMgr->getWidth();
+    return m_renderPipeline->getScreenWidth();
 }
 
-ui32 IGameTransition::getWindowHeight(void) const
+ui32 IGameTransition::getScreenHeight(void) const
 {
-    return m_renderMgr->getHeight();
+    return m_renderPipeline->getScreenHeight();
 }
 

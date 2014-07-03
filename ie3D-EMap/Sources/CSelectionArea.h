@@ -39,7 +39,7 @@ protected:
 public:
     
     CSelectionArea(CSharedResourceAccessorRef resourceAccessor,
-                   ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
+                   ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CSelectionArea(void);
     
     void setLandscape(CSharedLandscapeRef landscape);

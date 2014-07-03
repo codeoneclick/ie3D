@@ -16,6 +16,7 @@ IRenderTechniqueBase(frameWidth, frameHeight, "render.technique.main", 0),
 m_renderBuffer(renderBuffer),
 m_material(material)
 {
+    m_frameBuffer = frameBuffer;
     assert(m_material != nullptr);
 	m_quad = std::make_shared<CQuad>();
 }
@@ -31,7 +32,7 @@ void CRenderTechniqueMain::bind(void)
     glBindRenderbuffer(GL_RENDERBUFFER, m_renderBuffer);
     glViewport(0, 0, m_frameWidth, m_frameHeight);
     glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    glClear(GL_COLOR_BUFFER_BIT);
     
     m_material->bind();
     m_quad->Bind(m_material->getShader()->getAttributesRef());

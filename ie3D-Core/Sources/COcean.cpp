@@ -14,14 +14,13 @@
 #include "CLight.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
-#include "IScreenSpaceRenderAccessor.h"
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
 COcean::COcean(CSharedResourceAccessorRef resourceAccessor,
-               ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
-IGameObject(resourceAccessor, screenSpaceTextureAccessor)
+               ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_OCEAN;
 }
@@ -97,7 +96,9 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
                                      glm::vec3(4096.0), glm::vec3(4096.0));
     assert(m_mesh != nullptr);
     
-	IGameObject::listenRenderMgr(m_isNeedToRender);
+	IGameObject::enableRender(m_isNeedToRender);
+    IGameObject::enableUpdate(m_isNeedToUpdate);
+    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
@@ -144,7 +145,7 @@ void COcean::onDraw(const std::string& mode)
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         material->getShader()->setFloat(m_waveGeneratorTimer, E_SHADER_UNIFORM_FLOAT_TIMER);
-        CSharedTexture heightmapTexture = m_screenSpaceTextureAccessor->getCustomTexture("landscape.heightmap");
+        CSharedTexture heightmapTexture = m_resourceAccessor->getTexture("landscape.heightmap.texture");
         if(heightmapTexture)
         {
             material->setTexture(heightmapTexture, E_SHADER_SAMPLER_04);

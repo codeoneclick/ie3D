@@ -66,7 +66,7 @@ public:
     static void setupMaterial(CSharedMaterialRef material,
                               CSharedConfigurationMaterialRef configuration,
                               CSharedResourceAccessor resourceAccessor,
-                              ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor,
+                              ISharedRenderTechniqueAccessor renderTechniqueAccessor,
                               ISharedResourceLoadingHandlerRef handler = nullptr);
     
     bool isCulling(void) const;

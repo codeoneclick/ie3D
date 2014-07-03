@@ -18,7 +18,6 @@
 #include "CParticleEmitter.h"
 #include "CCamera.h"
 #include "CMapDragController.h"
-#include "IScreenSpaceRenderAccessor.h"
 #include "CMaterial.h"
 #include "CShader.h"
 
@@ -36,12 +35,10 @@ CDemoGameScene::~CDemoGameScene(void)
 void CDemoGameScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->createCamera(60.0,
-                                    0.1,
-                                    1024.0,
+    m_camera = m_root->createCamera(60.0, 0.1, 1024.0,
                                     glm::ivec4(0, 0,
-                                               m_root->getWindowWidth(),
-                                               m_root->getWindowHeight()));
+                                               m_root->getScreenWidth(),
+                                               m_root->getScreenHeight()));
     
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
@@ -69,11 +66,6 @@ void CDemoGameScene::load(void)
     m_model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(m_model);
     m_model->setScale(glm::vec3(10.0, 10.0, 10.0));
-    
-    /*for(ui32 i = 0; i < landscape->getChunks().size(); ++i)
-    {
-        m_colliders.push_back(landscape->getChunks().at(i));
-    }*/
     
     m_root->addCollisionHandler(shared_from_this());
     

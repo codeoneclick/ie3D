@@ -171,7 +171,7 @@ protected:
     std::vector<CSharedMesh> m_chunksUnused;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
-    std::shared_ptr<IScreenSpaceRenderAccessor> m_screenSpaceTextureAccessor;
+    ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
     
     CSharedVertexBuffer createVertexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
                                            ui32 chunkOffsetX, ui32 chunkOffsetZ,
@@ -216,7 +216,7 @@ protected:
     
 public:
     
-    CHeightmapProcessor(const std::shared_ptr<IScreenSpaceRenderAccessor>& _screenSpaceTextureAccessor, ISharedConfigurationRef _template);
+    CHeightmapProcessor(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration);
     ~CHeightmapProcessor(void);
     
     CSharedTexture createHeightmapTexture(void);

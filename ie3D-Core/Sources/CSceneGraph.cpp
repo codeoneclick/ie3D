@@ -17,12 +17,13 @@
 #include "CLandscape.h"
 #include "CParticleEmitter.h"
 #include "IInputContext.h"
+#include "CRenderPipeline.h"
 
-CSceneGraph::CSceneGraph(CSharedRenderMgrRef renderMgr,
+CSceneGraph::CSceneGraph(CSharedRenderPipelineRef renderPipeline,
                          CSharedSceneUpdateMgrRef sceneUpdateMgr,
                          CSharedCollisionMgr collisionMgr,
                          ISharedInputContext inputContext) :
-IGraph(renderMgr, sceneUpdateMgr),
+IGraph(renderPipeline, sceneUpdateMgr),
 m_camera(nullptr),
 m_ocean(nullptr),
 m_landscape(nullptr),
@@ -67,24 +68,26 @@ void CSceneGraph::addGameObject(ISharedGameObjectRef gameObject)
     }
     
     assert(m_sceneUpdateMgr != nullptr);
-    assert(m_renderMgr != nullptr);
+    assert(m_renderPipeline != nullptr);
     
     gameObject->setSceneUpdateMgr(m_sceneUpdateMgr);
-    gameObject->setRenderMgr(m_renderMgr);
-    gameObject->listenSceneUpdateMgr(true);
-    gameObject->listenRenderMgr(true);
+    gameObject->setRenderTechniqueImporter(m_renderPipeline);
+    gameObject->setRenderTechniqueAccessor(m_renderPipeline);
+    gameObject->enableRender(true);
+    gameObject->enableUpdate(true);
     m_gameObjectsContainer.insert(gameObject);
 }
 
 void CSceneGraph::removeGameObject(ISharedGameObjectRef gameObject)
 {
     assert(m_sceneUpdateMgr != nullptr);
-    assert(m_renderMgr != nullptr);
+    assert(m_renderPipeline != nullptr);
     
     gameObject->setSceneUpdateMgr(nullptr);
-    gameObject->setRenderMgr(nullptr);
-    gameObject->listenSceneUpdateMgr(false);
-    gameObject->listenRenderMgr(false);
+    gameObject->setRenderTechniqueImporter(nullptr);
+    gameObject->setRenderTechniqueAccessor(nullptr);
+    gameObject->enableRender(false);
+    gameObject->enableUpdate(false);
     m_gameObjectsContainer.erase(gameObject);
 }
 

@@ -21,8 +21,8 @@
 #include "CTimer.h"
 
 CParticleEmitter::CParticleEmitter(CSharedResourceAccessorRef resourceAccessor,
-                                   ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
-IGameObject(resourceAccessor, screenSpaceTextureAccessor)
+                                   ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
     m_settings = nullptr;
     m_lastEmittTimestamp = 0;
@@ -173,7 +173,9 @@ void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configurati
                                      glm::vec3(0.0), glm::vec3(0.0));
     assert(m_mesh != nullptr);
     
-	IGameObject::listenRenderMgr(m_isNeedToRender);
+	IGameObject::enableRender(m_isNeedToRender);
+    IGameObject::enableUpdate(m_isNeedToUpdate);
+    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

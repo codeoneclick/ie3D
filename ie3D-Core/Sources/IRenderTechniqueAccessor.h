@@ -6,9 +6,33 @@
 //  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __ie3D_Core__IRenderTechniqueAccessor__
-#define __ie3D_Core__IRenderTechniqueAccessor__
+#ifndef IRenderTechniqueAccessor_h
+#define IRenderTechniqueAccessor_h
 
-#include <iostream>
+#include "HCommon.h"
+#include "HDeclaration.h"
 
-#endif /* defined(__ie3D_Core__IRenderTechniqueAccessor__) */
+class IRenderTechniqueAccessor
+{
+private:
+    
+protected:
+    
+    ui32 m_numTriangles;
+    
+public:
+    
+    IRenderTechniqueAccessor(void);
+    virtual ~IRenderTechniqueAccessor(void);
+    
+    virtual CSharedTexture preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height) = 0;
+    virtual CSharedTexture getTechniqueTexture(const std::string& techniqueName) = 0;
+    virtual CSharedMaterial getTechniqueMaterial(const std::string& techniqueName) = 0;
+    
+    virtual ui32 getScreenWidth(void) = 0;
+    virtual ui32 getScreenHeight(void) = 0;
+    
+    virtual ui32 getFrameNumTriagles(void) = 0;
+};
+
+#endif

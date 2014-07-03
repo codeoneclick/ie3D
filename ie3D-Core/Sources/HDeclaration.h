@@ -168,10 +168,6 @@ class CLightSource;
 typedef std::shared_ptr<CLightSource> CSharedLightSource;
 typedef const CSharedLightSource& CSharedLightSourceRef;
 
-class CRenderMgr;
-typedef std::shared_ptr<CRenderMgr> CSharedRenderMgr;
-typedef const CSharedRenderMgr& CSharedRenderMgrRef;
-
 class CSceneUpdateMgr;
 typedef std::shared_ptr<CSceneUpdateMgr> CSharedSceneUpdateMgr;
 typedef const CSharedSceneUpdateMgr& CSharedSceneUpdateMgrRef;
@@ -179,10 +175,6 @@ typedef const CSharedSceneUpdateMgr& CSharedSceneUpdateMgrRef;
 class CResourceAccessor;
 typedef std::shared_ptr<CResourceAccessor> CSharedResourceAccessor;
 typedef const CSharedResourceAccessor& CSharedResourceAccessorRef;
-
-class IScreenSpaceRenderAccessor;
-typedef std::shared_ptr<IScreenSpaceRenderAccessor> ISharedScreenSpaceRenderAccessor;
-typedef const ISharedScreenSpaceRenderAccessor& ISharedScreenSpaceRenderAccessorRef;
 
 class CBoundBox;
 typedef std::shared_ptr<CBoundBox> CSharedBoundBox;
@@ -311,5 +303,33 @@ typedef const CSharedQuad& CSharedQuadRef;
 class IRenderTechniqueHandler;
 typedef std::shared_ptr<IRenderTechniqueHandler> ISharedRenderTechniqueHandler;
 typedef const ISharedRenderTechniqueHandler& ISharedRenderTechniqueHandlerRef;
+
+class IRenderTechniqueBase;
+typedef std::shared_ptr<IRenderTechniqueBase> ISharedRenderTechniqueBase;
+typedef const ISharedRenderTechniqueBase& ISharedRenderTechniqueBaseRef;
+
+class CRenderTechniqueMain;
+typedef std::shared_ptr<CRenderTechniqueMain> CSharedRenderTechniqueMain;
+typedef const CSharedRenderTechniqueMain& CSharedRenderTechniqueMainRef;
+
+class CRenderTechniqueWorldSpace;
+typedef std::shared_ptr<CRenderTechniqueWorldSpace> CSharedRenderTechniqueWorldSpace;
+typedef const CSharedRenderTechniqueWorldSpace& CSharedRenderTechniqueWorldSpaceRef;
+
+class CRenderTechniqueScreenSpace;
+typedef std::shared_ptr<CRenderTechniqueScreenSpace> CSharedRenderTechniqueScreenSpace;
+typedef const CSharedRenderTechniqueScreenSpace& CSharedRenderTechniqueScreenSpaceRef;
+
+class CRenderPipeline;
+typedef std::shared_ptr<CRenderPipeline> CSharedRenderPipeline;
+typedef const CSharedRenderPipeline& CSharedRenderPipelineRef;
+
+class IRenderTechniqueImporter;
+typedef std::shared_ptr<IRenderTechniqueImporter> ISharedRenderTechniqueImporter;
+typedef const ISharedRenderTechniqueImporter& ISharedRenderTechniqueImporterRef;
+
+class IRenderTechniqueAccessor;
+typedef std::shared_ptr<IRenderTechniqueAccessor> ISharedRenderTechniqueAccessor;
+typedef const ISharedRenderTechniqueAccessor& ISharedRenderTechniqueAccessorRef;
 
 #endif

@@ -18,7 +18,6 @@
 #include "CEditableSceneTransition.h"
 #include "CSelectionArea.h"
 #include "CCollisionMgr.h"
-#include "IScreenSpaceRenderAccessor.h"
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CModel.h"
@@ -39,12 +38,10 @@ CEditableScene::~CEditableScene(void)
 void CEditableScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->createCamera(90.0,
-                                    0.01,
-                                    1024.0,
+    m_camera = m_root->createCamera(90.0, 0.01, 1024.0,
                                     glm::ivec4(0, 0,
-                                               m_root->getWindowWidth(),
-                                               m_root->getWindowHeight()));
+                                               m_root->getScreenWidth(),
+                                               m_root->getScreenHeight()));
     
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
@@ -94,24 +91,6 @@ void CEditableScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.1;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
-    
-    CSharedMaterial material = m_root->getSSRenderAccessor()->getSSOperationMaterial("render.operation.screen.ssao");
-    if(material != nullptr &&
-       material->getShader() != nullptr)
-    {
-        material->bind();
-        static glm::vec3 randomTable[8] = {
-            glm::vec3(-0.5, -0.5, -0.5),
-            glm::vec3( 0.5, -0.5, -0.5),
-            glm::vec3(-0.5,  0.5, -0.5),
-            glm::vec3( 0.5,  0.5, -0.5),
-            glm::vec3(-0.5, -0.5,  0.5),
-            glm::vec3( 0.5, -0.5,  0.5),
-            glm::vec3(-0.5,  0.5,  0.5),
-            glm::vec3( 0.5,  0.5,  0.5) };
-        
-        material->getShader()->setVector3ArrayCustom(randomTable, 8, "randomTable");
-    }
     
     glm::vec3 position = m_camera->Get_LookAt();
     position.y = m_landscape->getHeight(position);

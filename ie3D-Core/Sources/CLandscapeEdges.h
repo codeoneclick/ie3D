@@ -41,7 +41,7 @@ protected:
 public:
     
     CLandscapeEdges(CSharedResourceAccessorRef resourceAccessor,
-                    ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
+                    ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CLandscapeEdges(void);
 };
 

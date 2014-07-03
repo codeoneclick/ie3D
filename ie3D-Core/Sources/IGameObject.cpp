@@ -13,16 +13,15 @@
 #include "CShader.h"
 #include "CTexture.h"
 #include "CMaterial.h"
-#include "CRenderMgr.h"
+#include "IRenderTechniqueImporter.h"
+#include "IRenderTechniqueAccessor.h"
 #include "CSceneUpdateMgr.h"
 #include "CResourceAccessor.h"
-#include "IScreenSpaceRenderAccessor.h"
 #include "CConfigurationGameObjects.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
-                         ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
+                         ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 m_resourceAccessor(resourceAccessor),
-m_screenSpaceTextureAccessor(screenSpaceTextureAccessor),
 m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
 m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
@@ -31,7 +30,8 @@ m_mesh(nullptr),
 m_configuration(nullptr),
 m_camera(nullptr),
 m_boundBox(nullptr),
-m_renderMgr(nullptr),
+m_renderTechniqueAccessor(renderTechniqueAccessor),
+m_renderTechniqueImporter(nullptr),
 m_sceneUpdateMgr(nullptr),
 m_materialBindImposer(nullptr),
 m_isNeedToRender(false),
@@ -74,7 +74,7 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
     {
         CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
         CSharedMaterial material = std::make_shared<CMaterial>();
-        CMaterial::setupMaterial(material, materialConfiguration, m_resourceAccessor, m_screenSpaceTextureAccessor, shared_from_this());
+        CMaterial::setupMaterial(material, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
         m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
     }
 }
@@ -234,9 +234,14 @@ void IGameObject::setClippingPlane(const glm::vec4& clippingPlane,
     iterator->second->setClippingPlane(clippingPlane);
 }
 
-void IGameObject::setRenderMgr(CSharedRenderMgrRef renderMgr)
+void IGameObject::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)
 {
-    m_renderMgr = renderMgr;
+    m_renderTechniqueImporter = techniqueImporter;
+}
+
+void IGameObject::setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor)
+{
+    m_renderTechniqueAccessor = techniqueAccessor;
 }
 
 void IGameObject::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
@@ -244,25 +249,25 @@ void IGameObject::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
     m_sceneUpdateMgr = sceneUpdateMgr;
 }
 
-void IGameObject::listenRenderMgr(bool value)
+void IGameObject::enableRender(bool value)
 {
     if(value)
 	{
-		assert(m_renderMgr != nullptr);
+		assert(m_renderTechniqueImporter != nullptr);
 	}
     
     for(const auto& iterator : m_materials)
     {
-		if(m_renderMgr != nullptr)
+		if(m_renderTechniqueImporter != nullptr)
 		{
-			value == true ? m_renderMgr->RegisterWorldSpaceRenderHandler(iterator.first, shared_from_this()) :
-			m_renderMgr->UnregisterWorldSpaceRenderHandler(iterator.first, shared_from_this());
+			value == true ? m_renderTechniqueImporter->addRenderTechniqueHandler(iterator.first, shared_from_this()) :
+			m_renderTechniqueImporter->removeRenderTechniqueHandler(iterator.first, shared_from_this());
 		}
     }
 	m_isNeedToRender = value;
 }
 
-void IGameObject::listenSceneUpdateMgr(bool value)
+void IGameObject::enableUpdate(bool value)
 {
     if(m_sceneUpdateMgr != nullptr)
     {

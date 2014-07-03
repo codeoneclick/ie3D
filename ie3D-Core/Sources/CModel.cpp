@@ -14,14 +14,13 @@
 #include "CLight.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
-#include "CRenderMgr.h"
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CAnimationMixer.h"
 
 CModel::CModel(CSharedResourceAccessorRef resourceAccessor,
-               ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
-IGameObject(resourceAccessor, screenSpaceTextureAccessor),
+               ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_animationMixer(nullptr)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_MODEL;
@@ -81,8 +80,8 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     assert(m_mesh != nullptr);
     m_isBatching = modelConfiguration->isBatching();
     
-	IGameObject::listenRenderMgr(m_isNeedToRender);
-    IGameObject::listenSceneUpdateMgr(m_isNeedToUpdate);
+	IGameObject::enableRender(m_isNeedToRender);
+    IGameObject::enableUpdate(m_isNeedToUpdate);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

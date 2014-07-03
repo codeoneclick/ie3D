@@ -51,7 +51,7 @@ protected:
 public:
     
     CParticleEmitter(CSharedResourceAccessorRef resourceAccessor,
-                     ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
+                     ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CParticleEmitter(void);
 };
 

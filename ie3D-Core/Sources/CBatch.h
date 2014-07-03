@@ -12,9 +12,9 @@
 #include "HCommon.h"
 #include "HEnums.h"
 #include "HDeclaration.h"
-#include "IRenderHandler.h"
+#include "IRenderTechniqueHandler.h"
 
-class CBatch : public IRenderHandler
+class CBatch : public IRenderTechniqueHandler
 {
 private:
     

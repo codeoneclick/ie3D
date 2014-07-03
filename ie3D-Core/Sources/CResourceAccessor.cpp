@@ -29,8 +29,26 @@ CSharedResourceLoader CResourceAccessor::getResourceLoader(void) const
     return m_resourceLoader;
 }
 
+void CResourceAccessor::addCustomTexture(const std::string& textureName, CSharedTextureRef texture)
+{
+    const auto& iterator = m_customTextures.find(textureName);
+    if(iterator != m_customTextures.end())
+    {
+        m_customTextures[textureName] = texture;
+    }
+    else
+    {
+        m_customTextures.insert(std::make_pair(textureName, texture));
+    }
+}
+
 CSharedTexture CResourceAccessor::getTexture(const std::string &filename) const
 {
+    const auto& iterator = m_customTextures.find(filename);
+    if(iterator != m_customTextures.end())
+    {
+        return iterator->second;
+    }
     assert(m_resourceLoader != nullptr);
     CSharedTexture texture = m_resourceLoader->startTextureLoadingOperation(filename);
     assert(texture != nullptr);

@@ -10,6 +10,7 @@
 #include "CEditableScene.h"
 #include "CMESceneFabricator.h"
 #include "CSceneGraph.h"
+#include "CRenderPipeline.h"
 
 CEditableSceneTransition::CEditableSceneTransition(const std::string& filename,
                                                    std::shared_ptr<IGraphicsContext> graphicsContext,
@@ -36,14 +37,14 @@ void CEditableSceneTransition::initScene(void)
     assert(m_inputContext != nullptr);
     assert(m_sceneUpdateMgr != nullptr);
     assert(m_collisionMgr != nullptr);
-    assert(m_screenSpaceRenderAccessor != nullptr);
+    assert(m_renderPipeline != nullptr);
     
-    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderMgr, m_sceneUpdateMgr,
+    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderPipeline, m_sceneUpdateMgr,
                                                  m_collisionMgr, m_inputContext);
     
     m_sceneFabricator = std::make_shared<CMESceneFabricator>(m_configurationAccessor,
                                                              m_resourceAccessor,
-                                                             m_screenSpaceRenderAccessor);
+                                                             m_renderPipeline);
 }
 
 void CEditableSceneTransition::_OnLoaded(void)

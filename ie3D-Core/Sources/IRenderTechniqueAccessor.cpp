@@ -7,3 +7,14 @@
 //
 
 #include "IRenderTechniqueAccessor.h"
+
+IRenderTechniqueAccessor::IRenderTechniqueAccessor(void) :
+m_numTriangles(0)
+{
+    
+}
+
+IRenderTechniqueAccessor::~IRenderTechniqueAccessor(void)
+{
+    
+}

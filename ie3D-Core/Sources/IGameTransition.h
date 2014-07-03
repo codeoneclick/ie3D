@@ -33,10 +33,9 @@ protected:
     CSharedSceneFabricator m_sceneFabricator;
     ISharedScene m_scene;
     
-    CSharedRenderMgr m_renderMgr;
+    CSharedRenderPipeline m_renderPipeline;
     CSharedSceneUpdateMgr m_sceneUpdateMgr;
     CSharedCollisionMgr m_collisionMgr;
-    ISharedScreenSpaceRenderAccessor m_screenSpaceRenderAccessor;
     
     std::string m_guid;
     
@@ -67,10 +66,11 @@ public:
 
     std::string getGuid(void) const;
     
-    ui32 getWindowWidth(void) const;
-    ui32 getWindowHeight(void) const;
+    ui32 getScreenWidth(void) const;
+    ui32 getScreenHeight(void) const;
     
-    ISharedScreenSpaceRenderAccessor getSSRenderAccessor(void);
+    ISharedRenderTechniqueImporter getRenderTechniqueImporter(void) const;
+    ISharedRenderTechniqueAccessor getRenderTechniqueAccessor(void) const;
     
     void setCamera(CSharedCameraRef camera);
     
@@ -116,8 +116,8 @@ public:
     CSharedParticleEmitter createParticleEmitter(const std::string& filename);
     void deleteParticleEmitter(CSharedParticleEmitterRef particleEmitter);
     
-    ui32 Get_CurrentNumTriangles(void);
-    ui32 Get_TotalNumTriangles(void);
+    ui32 getFrameNumTriangles(void);
+    ui32 getSceneNumTriangles(void);
 };
 
 #endif 

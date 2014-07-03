@@ -36,7 +36,7 @@ protected:
 public:
     
     CModel(CSharedResourceAccessorRef resourceAccessor,
-           ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor);
+           ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CModel(void);
     
     void setAnimation(const std::string& name);

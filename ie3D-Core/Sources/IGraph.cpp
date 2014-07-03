@@ -8,9 +8,9 @@
 
 #include "IGraph.h"
 
-IGraph::IGraph(CSharedRenderMgrRef renderMgr,
+IGraph::IGraph(CSharedRenderPipelineRef renderPipeline,
                CSharedSceneUpdateMgrRef sceneUpdateMgr) :
-m_renderMgr(renderMgr),
+m_renderPipeline(renderPipeline),
 m_sceneUpdateMgr(sceneUpdateMgr)
 {
 

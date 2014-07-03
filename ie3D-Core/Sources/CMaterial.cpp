@@ -9,7 +9,8 @@
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CTexture.h"
-#include "CRenderMgr.h"
+#include "IRenderTechniqueImporter.h"
+#include "IRenderTechniqueAccessor.h"
 #include "CConfigurationGameObjects.h"
 #include "CResourceAccessor.h"
 
@@ -239,11 +240,11 @@ void CMaterial::setTexture(CSharedTextureRef texture,
 void CMaterial::setupMaterial(CSharedMaterialRef material,
                               CSharedConfigurationMaterialRef configuration,
                               CSharedResourceAccessor resourceAccessor,
-                              ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor,
+                              ISharedRenderTechniqueAccessor renderTechniqueAccessor,
                               ISharedResourceLoadingHandlerRef handler)
 {
     assert(configuration != nullptr);
-    assert(screenSpaceTextureAccessor != nullptr);
+    assert(renderTechniqueAccessor != nullptr);
 	assert(resourceAccessor != nullptr);
     
     material->setCulling(configuration->isCulling());
@@ -270,7 +271,7 @@ void CMaterial::setupMaterial(CSharedMaterialRef material,
         
         CSharedTexture texture = textureConfiguration->getFilename().length() != 0 ?
         resourceAccessor->getTexture(textureConfiguration->getFilename()) :
-        screenSpaceTextureAccessor->getSSOperationTexture(textureConfiguration->getRenderOperationName());
+        renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderOperationName());
         assert(texture != nullptr);
         texture->setWrapMode(textureConfiguration->getWrapMode());
         assert(textureConfiguration->getSamplerIndex() >= 0 &&

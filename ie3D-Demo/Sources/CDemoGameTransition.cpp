@@ -10,6 +10,7 @@
 #include "CDemoGameScene.h"
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
+#include "CRenderPipeline.h"
 
 CDemoGameTransition::CDemoGameTransition(const std::string& filename,
                                          std::shared_ptr<IGraphicsContext> graphicsContext,
@@ -36,14 +37,14 @@ void CDemoGameTransition::initScene(void)
     assert(m_inputContext != nullptr);
     assert(m_sceneUpdateMgr != nullptr);
     assert(m_collisionMgr != nullptr);
-    assert(m_screenSpaceRenderAccessor != nullptr);
+    assert(m_renderPipeline != nullptr);
     
-    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderMgr, m_sceneUpdateMgr,
+    m_sceneGraph = std::make_shared<CSceneGraph>(m_renderPipeline, m_sceneUpdateMgr,
                                                  m_collisionMgr, m_inputContext);
     
     m_sceneFabricator = std::make_shared<CSceneFabricator>(m_configurationAccessor,
                                                            m_resourceAccessor,
-                                                           m_screenSpaceRenderAccessor);
+                                                           m_renderPipeline);
 }
 
 void CDemoGameTransition::_OnLoaded(void)

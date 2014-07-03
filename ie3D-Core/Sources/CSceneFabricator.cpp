@@ -16,12 +16,11 @@
 #include "CLandscape.h"
 #include "CParticleEmitter.h"
 #include "CResourceAccessor.h"
-#include "CRenderMgr.h"
 
 CSceneFabricator::CSceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                                    CSharedResourceAccessorRef resourceAccessor,
-                                   ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor) :
-IFabricator(configurationAccessor, resourceAccessor, screenSpaceTextureAccessor)
+                                   ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+IFabricator(configurationAccessor, resourceAccessor, renderTechniqueAccessor)
 {
     
 }
@@ -47,8 +46,8 @@ void CSceneFabricator::deleteCamera(CSharedCameraRef camera)
 CSharedModel CSceneFabricator::createModel(const std::string& filename)
 {
     assert(m_resourceAccessor != nullptr);
-	assert(m_screenSpaceTextureAccessor != nullptr);
-    CSharedModel model = std::make_shared<CModel>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+	assert(m_renderTechniqueAccessor != nullptr);
+    CSharedModel model = std::make_shared<CModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     m_configurationAccessor->LoadModelConfiguration(filename, model);
     m_gameObjectsContainer.insert(model);
@@ -63,8 +62,8 @@ void CSceneFabricator::deleteModel(CSharedModelRef model)
 CSharedOcean CSceneFabricator::createOcean(const std::string &filename)
 {
     assert(m_resourceAccessor != nullptr);
-	assert(m_screenSpaceTextureAccessor != nullptr);
-    CSharedOcean ocean = std::make_shared<COcean>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+	assert(m_renderTechniqueAccessor != nullptr);
+    CSharedOcean ocean = std::make_shared<COcean>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     m_configurationAccessor->LoadOceanConfiguration(filename, ocean);
     m_gameObjectsContainer.insert(ocean);
@@ -79,8 +78,8 @@ void CSceneFabricator::deleteOcean(CSharedOceanRef ocean)
 CSharedLandscape CSceneFabricator::createLandscape(const std::string &filename)
 {
     assert(m_resourceAccessor != nullptr);
-	assert(m_screenSpaceTextureAccessor != nullptr);
-    CSharedLandscape landscape = std::make_shared<CLandscape>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+	assert(m_renderTechniqueAccessor != nullptr);
+    CSharedLandscape landscape = std::make_shared<CLandscape>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     m_configurationAccessor->LoadLandscapeConfiguration(filename, landscape);
     m_gameObjectsContainer.insert(landscape);
@@ -95,8 +94,8 @@ void CSceneFabricator::deleteLandscape(CSharedLandscapeRef landscape)
 CSharedParticleEmitter CSceneFabricator::createParticleEmitter(const std::string& filename)
 {
     assert(m_resourceAccessor != nullptr);
-	assert(m_screenSpaceTextureAccessor != nullptr);
-    CSharedParticleEmitter particleEmitter = std::make_shared<CParticleEmitter>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+	assert(m_renderTechniqueAccessor != nullptr);
+    CSharedParticleEmitter particleEmitter = std::make_shared<CParticleEmitter>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     m_configurationAccessor->LoadParticleEmitterConfiguration(filename, particleEmitter);
     m_gameObjectsContainer.insert(particleEmitter);
@@ -111,8 +110,8 @@ void CSceneFabricator::deleteParticleEmitter(CSharedParticleEmitterRef particleE
 CSharedSkyBox CSceneFabricator::createSkyBox(const std::string& filename)
 {
     assert(m_resourceAccessor != nullptr);
-	assert(m_screenSpaceTextureAccessor != nullptr);
-    CSharedSkyBox skyBox = std::make_shared<CSkyBox>(m_resourceAccessor, m_screenSpaceTextureAccessor);
+	assert(m_renderTechniqueAccessor != nullptr);
+    CSharedSkyBox skyBox = std::make_shared<CSkyBox>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     m_configurationAccessor->loadSkyBoxConfiguration(filename, skyBox);
     m_gameObjectsContainer.insert(skyBox);

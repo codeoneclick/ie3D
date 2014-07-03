@@ -14,14 +14,13 @@
 #include "CLight.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
-#include "CRenderMgr.h"
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CQuadTree.h"
 
 CLandscapeChunk::CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
-                                 ISharedScreenSpaceRenderAccessorRef screenSpaceTextureAccessor) :
-IGameObject(resourceAccessor, screenSpaceTextureAccessor),
+                                 ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_chunkSizeX(0),
 m_chunkSizeZ(0),
 m_heightmapSizeX(0),
@@ -161,7 +160,9 @@ void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuratio
                          4,
                          m_chunkSizeX);
     
-	IGameObject::listenRenderMgr(m_isNeedToRender);
+	IGameObject::enableRender(m_isNeedToRender);
+    IGameObject::enableUpdate(m_isNeedToUpdate);
+    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

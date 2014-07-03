@@ -9,6 +9,7 @@
 #ifndef CBatchingMgr_h
 #define CBatchingMgr_h
 
+/*
 #include "HCommon.h"
 #include "HDeclaration.h"
 
@@ -37,5 +38,5 @@ public:
                const std::function<void(CSharedMaterialRef)>& materialBindImposer,
                const glm::mat4x4& matrix);
 };
-
+*/
 #endif 

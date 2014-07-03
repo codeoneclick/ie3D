@@ -35,7 +35,7 @@ protected:
     
 public:
     
-    CSceneGraph(CSharedRenderMgrRef renderMgr,
+    CSceneGraph(CSharedRenderPipelineRef renderPipeline,
                 CSharedSceneUpdateMgrRef sceneUpdateMgr,
                 CSharedCollisionMgr collisionMgr,
                 ISharedInputContext inputContext);

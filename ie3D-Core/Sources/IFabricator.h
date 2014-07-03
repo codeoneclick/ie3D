@@ -20,13 +20,13 @@ protected:
     
     CSharedConfigurationAccessor m_configurationAccessor;
     CSharedResourceAccessor m_resourceAccessor;
-    ISharedScreenSpaceRenderAccessor m_screenSpaceTextureAccessor;
+    ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
 	
 public:
     
     IFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                 CSharedResourceAccessorRef resourceAccessor,
-                ISharedScreenSpaceRenderAccessor screenSpaceTextureAccessor);
+                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     
     virtual ~IFabricator(void);
 };
