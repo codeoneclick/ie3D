@@ -51,44 +51,26 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 radius,
             riseCoefficient = 1.0 - riseCoefficient * riseCoefficient;
             f32 deltaHeight = pressureForce * riseCoefficient;
             f32 height = m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z)) + deltaHeight;
+            
+            i32 delimiter = 1;
+            for(i32 i = x - 1; i <= x + 1; ++i)
+            {
+                for(i32 j = z - 1; j <= z + 1; ++j)
+                {
+                    if(i > 0 && j > 0 &&
+                       i < m_heightmapProcessor->getSizeX() && j < m_heightmapProcessor->getSizeZ())
+                    {
+                        height += m_heightmapProcessor->getHeight(glm::vec3(i, 0.0, j));
+                        delimiter++;
+                    }
+                }
+            }
+            height /= static_cast<f32>(delimiter);
+
             modifiedHeights.push_back(std::make_tuple(x, z, height));
         }
 	}
     m_heightmapProcessor->updateHeightmapData(modifiedHeights);
-
-    /*f32 middleHeight = 0;
-    for (i32 x = minIndX; x < maxIndX; x++)
-    {
-        for (i32 z = minIndZ; z < maxIndZ; z++)
-        {
-            if((x < 0) || (z < 0) ||
-               x >= m_heightmapProcessor->getSizeX() ||
-               z >= m_heightmapProcessor->getSizeZ())
-                continue;
-            
-            f32 distance = glm::length(glm::vec3(x - point.x, 0.0, z - point.z));
-            f32 coefficient = radius - distance;
-            
-            float height = m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z));
-            middleHeight = 0;
-            if (coefficient > 0)
-            {
-                middleHeight = height;
-                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x - 1, 0.0, z));
-                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x + 1, 0.0, z));
-                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x - 1, 0.0, z - 1));
-                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z - 1));
-                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x + 1, 0.0, z - 1));
-                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x - 1, 0.0, z + 1));
-                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z + 1));
-                middleHeight += m_heightmapProcessor->getHeight(glm::vec3(x + 1, 0.0, z + 1));
-                height = middleHeight / 9.0f;
-                height = floor(height + 0.5f);
-            }
-            modifiedHeights.push_back(std::make_tuple(x, z, height));
-        }
-    }
-    m_heightmapProcessor->updateHeightmapData(modifiedHeights);*/
     
     ui32 offsetX = MAX_VALUE(minIndX, 0);
     ui32 offsetZ = MAX_VALUE(minIndZ, 0);
