@@ -33,8 +33,11 @@ public:
     
     void initScene(void);
     
-    CSharedSelectionArea createSelectionArea(const std::string& filename);
-    void deleteSelectionArea(CSharedSelectionAreaRef selectionArea);
+    CSharedEditableBrush createEditableBrush(const std::string& filename);
+    void deleteEditableBrush(CSharedEditableBrushRef editableBrush);
+    
+    CSharedMEUIToSceneCommands getUIToSceneCommands(void) const;
+    void setSceneToUICommands(CSharedMESceneToUICommandsRef commands);
 };
 
 

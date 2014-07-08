@@ -62,17 +62,28 @@ void CEditableSceneTransition::_OnGameLoopUpdate(f32 deltatime)
     }
 }
 
-CSharedSelectionArea CEditableSceneTransition::createSelectionArea(const std::string& filename)
+CSharedMEUIToSceneCommands CEditableSceneTransition::getUIToSceneCommands(void) const
 {
-    assert(m_sceneFabricator != nullptr);
-    std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
-    return sceneFabricator->createSelectionArea(filename);
+    return m_isLoaded && m_scene != nullptr ? std::static_pointer_cast<CEditableScene>(m_scene)->getUIToSceneCommands() : nullptr;
 }
 
-void CEditableSceneTransition::deleteSelectionArea(CSharedSelectionAreaRef selectionArea)
+void CEditableSceneTransition::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
+{
+    assert(m_isLoaded && m_scene != nullptr);
+    std::static_pointer_cast<CEditableScene>(m_scene)->setSceneToUICommands(commands);
+}
+
+CSharedEditableBrush CEditableSceneTransition::createEditableBrush(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
     std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
-    sceneFabricator->deleteSelectionArea(selectionArea);
+    return sceneFabricator->createEditableBrush(filename);
+}
+
+void CEditableSceneTransition::deleteEditableBrush(CSharedEditableBrushRef editableBrush)
+{
+    assert(m_sceneFabricator != nullptr);
+    std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
+    sceneFabricator->deleteEditableBrush(editableBrush);
 }
 

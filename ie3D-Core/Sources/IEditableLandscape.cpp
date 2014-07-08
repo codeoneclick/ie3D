@@ -9,7 +9,12 @@
 #include "IEditableLandscape.h"
 #include "CHeightmapProcessor.h"
 
-IEditableLandscape::IEditableLandscape(void)
+IEditableLandscape::IEditableLandscape(void) :
+m_editableSize(4),
+m_editableStrength(1),
+m_editableFalloffCoefficient(0),
+m_editableSmoothCoefficient(0),
+m_heightmapProcessor(nullptr)
 {
     
 }
@@ -25,13 +30,32 @@ void IEditableLandscape::setHeightmapProcessor(CSharedHeightmapProcessorRef heig
     m_heightmapProcessor = heightmapProcessor;
 }
 
-void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 radius,
-                                        bool isSmooth, f32 pressureForce)
+void IEditableLandscape::setEditableSize(ui32 value)
 {
-	i32 minIndX = static_cast<i32>(floor(point.x - radius));
-	i32 minIndZ = static_cast<i32>(floor(point.z - radius));
-	i32 maxIndX = static_cast<i32>(floor(point.x + radius));
-	i32 maxIndZ = static_cast<i32>(floor(point.z + radius));
+    m_editableSize = value;
+}
+
+void IEditableLandscape::setEditableStrength(ui32 value)
+{
+    m_editableStrength = value;
+}
+
+void IEditableLandscape::setEditableFalloffCoefficient(ui32 value)
+{
+    m_editableFalloffCoefficient = value;
+}
+
+void IEditableLandscape::setEditableSmoothCoefficient(ui32 value)
+{
+    m_editableSmoothCoefficient = value;
+}
+
+void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForce)
+{
+	i32 minIndX = static_cast<i32>(floor(point.x - m_editableSize));
+	i32 minIndZ = static_cast<i32>(floor(point.z - m_editableSize));
+	i32 maxIndX = static_cast<i32>(floor(point.x + m_editableSize));
+	i32 maxIndZ = static_cast<i32>(floor(point.z + m_editableSize));
     std::vector<std::tuple<ui32, ui32, f32>> modifiedHeights;
 	for(i32 x = minIndX; x < maxIndX; x++)
 	{
@@ -44,18 +68,18 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 radius,
             
             f32 distance = glm::length(glm::vec3(x - point.x, 0.0, z - point.z));
             
-            if (distance > radius)
+            if (distance > m_editableSize)
                 continue;
             
-            f32 riseCoefficient = distance / radius;
+            f32 riseCoefficient = distance / static_cast<f32>(m_editableSize);
             riseCoefficient = 1.0 - riseCoefficient * riseCoefficient;
             f32 deltaHeight = pressureForce * riseCoefficient;
             f32 height = m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z)) + deltaHeight;
             
             i32 delimiter = 1;
-            for(i32 i = x - 1; i <= x + 1; ++i)
+            for(i32 i = x - m_editableSmoothCoefficient; i <= x + m_editableSmoothCoefficient; ++i)
             {
-                for(i32 j = z - 1; j <= z + 1; ++j)
+                for(i32 j = z - m_editableSmoothCoefficient; j <= z + m_editableSmoothCoefficient; ++j)
                 {
                     if(i > 0 && j > 0 &&
                        i < m_heightmapProcessor->getSizeX() && j < m_heightmapProcessor->getSizeZ())

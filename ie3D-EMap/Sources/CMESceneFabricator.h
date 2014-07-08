@@ -26,8 +26,8 @@ public:
     
     virtual ~CMESceneFabricator(void);
     
-    CSharedSelectionArea createSelectionArea(const std::string& filename);
-    void deleteSelectionArea(CSharedSelectionAreaRef selectionArea);
+    CSharedEditableBrush createEditableBrush(const std::string& filename);
+    void deleteEditableBrush(CSharedEditableBrushRef editableBrush);
 };
 
 

@@ -40,7 +40,7 @@
 		212090121906FC9B00FFC8D4 /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212090101906FC9B00FFC8D4 /* libGLESv2.dylib */; };
 		212091D51906FEAE00FFC8D4 /* libie3DCore-osx.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 212091D21906FE9100FFC8D4 /* libie3DCore-osx.a */; };
 		212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A3190859AD00FFC8D4 /* CMapDragController.cpp */; };
-		212092AB19106B6100FFC8D4 /* CSelectionArea.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A919106B6100FFC8D4 /* CSelectionArea.cpp */; };
+		212092AB19106B6100FFC8D4 /* CEditableBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A919106B6100FFC8D4 /* CEditableBrush.cpp */; };
 		212092C41919786500FFC8D4 /* gameobject.skybox.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212092C21919786500FFC8D4 /* gameobject.skybox.xml */; };
 		212092C9191978D300FFC8D4 /* shaderSkyBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 212092C7191978D300FFC8D4 /* shaderSkyBox.frag */; };
 		212092CA191978D300FFC8D4 /* shaderSkyBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 212092C8191978D300FFC8D4 /* shaderSkyBox.vert */; };
@@ -116,6 +116,8 @@
 		21BC34C819080B9E007B99DA /* ocean.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C219080B9E007B99DA /* ocean.normal.pvr */; };
 		21BC34C919080B9E007B99DA /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C319080B9E007B99DA /* particle.emitter.01.pvr */; };
 		21BC34CA19080B9E007B99DA /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C419080B9E007B99DA /* particle.emitter.02.pvr */; };
+		21CB5312196C05610066EC6D /* CMEUIToSceneCommands.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21CB5310196C05610066EC6D /* CMEUIToSceneCommands.cpp */; };
+		21CB5315196C16A10066EC6D /* CMESceneToUICommands.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21CB5313196C16A10066EC6D /* CMESceneToUICommands.cpp */; };
 		21DC2B751929E895008DA3C1 /* mesa_heightmap.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B741929E895008DA3C1 /* mesa_heightmap.png */; };
 		21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */; };
 		21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */; };
@@ -212,8 +214,8 @@
 		212091C01906FE5200FFC8D4 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		212092A3190859AD00FFC8D4 /* CMapDragController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapDragController.cpp; path = Sources/CMapDragController.cpp; sourceTree = SOURCE_ROOT; };
 		212092A4190859AD00FFC8D4 /* CMapDragController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMapDragController.h; path = Sources/CMapDragController.h; sourceTree = SOURCE_ROOT; };
-		212092A919106B6100FFC8D4 /* CSelectionArea.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSelectionArea.cpp; path = Sources/CSelectionArea.cpp; sourceTree = SOURCE_ROOT; };
-		212092AA19106B6100FFC8D4 /* CSelectionArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSelectionArea.h; path = Sources/CSelectionArea.h; sourceTree = SOURCE_ROOT; };
+		212092A919106B6100FFC8D4 /* CEditableBrush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEditableBrush.cpp; path = Sources/CEditableBrush.cpp; sourceTree = SOURCE_ROOT; };
+		212092AA19106B6100FFC8D4 /* CEditableBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEditableBrush.h; path = Sources/CEditableBrush.h; sourceTree = SOURCE_ROOT; };
 		212092C21919786500FFC8D4 /* gameobject.skybox.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.skybox.xml; path = "../ie3D-Bundle/Configurations/gameobject.skybox.xml"; sourceTree = SOURCE_ROOT; };
 		212092C7191978D300FFC8D4 /* shaderSkyBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.frag; path = "../ie3D-Bundle/Shaders/shaderSkyBox.frag"; sourceTree = SOURCE_ROOT; };
 		212092C8191978D300FFC8D4 /* shaderSkyBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.vert; path = "../ie3D-Bundle/Shaders/shaderSkyBox.vert"; sourceTree = SOURCE_ROOT; };
@@ -290,6 +292,10 @@
 		21BC34C219080B9E007B99DA /* ocean.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = ocean.normal.pvr; path = "../ie3D-Bundle/Textures/ocean.normal.pvr"; sourceTree = "<group>"; };
 		21BC34C319080B9E007B99DA /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = particle.emitter.01.pvr; path = "../ie3D-Bundle/Textures/particle.emitter.01.pvr"; sourceTree = "<group>"; };
 		21BC34C419080B9E007B99DA /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = particle.emitter.02.pvr; path = "../ie3D-Bundle/Textures/particle.emitter.02.pvr"; sourceTree = "<group>"; };
+		21CB5310196C05610066EC6D /* CMEUIToSceneCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEUIToSceneCommands.cpp; path = Sources/CMEUIToSceneCommands.cpp; sourceTree = SOURCE_ROOT; };
+		21CB5311196C05610066EC6D /* CMEUIToSceneCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEUIToSceneCommands.h; path = Sources/CMEUIToSceneCommands.h; sourceTree = SOURCE_ROOT; };
+		21CB5313196C16A10066EC6D /* CMESceneToUICommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMESceneToUICommands.cpp; path = Sources/CMESceneToUICommands.cpp; sourceTree = SOURCE_ROOT; };
+		21CB5314196C16A10066EC6D /* CMESceneToUICommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMESceneToUICommands.h; path = Sources/CMESceneToUICommands.h; sourceTree = SOURCE_ROOT; };
 		21DC2B741929E895008DA3C1 /* mesa_heightmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mesa_heightmap.png; path = "../ie3D-Bundle/Temp/mesa_heightmap.png"; sourceTree = "<group>"; };
 		21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.frag"; sourceTree = "<group>"; };
 		21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.vert"; sourceTree = "<group>"; };
@@ -622,8 +628,8 @@
 		217AF1721945BAB60045CF9D /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
-				212092AA19106B6100FFC8D4 /* CSelectionArea.h */,
-				212092A919106B6100FFC8D4 /* CSelectionArea.cpp */,
+				212092AA19106B6100FFC8D4 /* CEditableBrush.h */,
+				212092A919106B6100FFC8D4 /* CEditableBrush.cpp */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -682,10 +688,14 @@
 				21208E981906F75D00FFC8D4 /* CEditableScene.h */,
 				21208E971906F75D00FFC8D4 /* CEditableScene.cpp */,
 				09BF715167B7A0149FD2FBB8 /* main.cpp */,
-				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
 				A4024724E546B6C12F58CF61 /* CMainWindow.h */,
+				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
 				212092A4190859AD00FFC8D4 /* CMapDragController.h */,
 				212092A3190859AD00FFC8D4 /* CMapDragController.cpp */,
+				21CB5311196C05610066EC6D /* CMEUIToSceneCommands.h */,
+				21CB5310196C05610066EC6D /* CMEUIToSceneCommands.cpp */,
+				21CB5314196C16A10066EC6D /* CMESceneToUICommands.h */,
+				21CB5313196C16A10066EC6D /* CMESceneToUICommands.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<Group>";
@@ -1090,9 +1100,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21CB5315196C16A10066EC6D /* CMESceneToUICommands.cpp in Compile Sources */,
 				2113850C194351CF0041A18A /* CMEConfigurationGameObjects.cpp in Compile Sources */,
 				21138515194351F80041A18A /* CMEConfigurationAccessor.cpp in Compile Sources */,
-				212092AB19106B6100FFC8D4 /* CSelectionArea.cpp in Compile Sources */,
+				212092AB19106B6100FFC8D4 /* CEditableBrush.cpp in Compile Sources */,
+				21CB5312196C05610066EC6D /* CMEUIToSceneCommands.cpp in Compile Sources */,
 				21208EA61906F75D00FFC8D4 /* CEditableSceneController.cpp in Compile Sources */,
 				212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */,
 				21208EA71906F75D00FFC8D4 /* CEditableSceneTransition.cpp in Compile Sources */,

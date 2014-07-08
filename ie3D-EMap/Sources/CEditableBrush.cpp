@@ -1,12 +1,12 @@
 //
-//  CSelectionArea.cpp
+//  CEditableBrush.cpp
 //  ie3D-EMap
 //
 //  Created by Sergey Sergeev on 4/30/14.
 //
 //
 
-#include "CSelectionArea.h"
+#include "CEditableBrush.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CMEConfigurationGameObjects.h"
@@ -16,21 +16,21 @@
 #include "CShader.h"
 #include "CCamera.h"
 
-CSelectionArea::CSelectionArea(CSharedResourceAccessorRef resourceAccessor,
+CEditableBrush::CEditableBrush(CSharedResourceAccessorRef resourceAccessor,
                                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor),
-m_radius(2),
+m_size(4),
 m_landscape(nullptr)
 {
     m_zOrder = 6;
 }
 
-CSelectionArea::~CSelectionArea(void)
+CEditableBrush::~CEditableBrush(void)
 {
     
 }
 
-void CSelectionArea::onSceneUpdate(f32 deltatime)
+void CEditableBrush::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
@@ -38,19 +38,19 @@ void CSelectionArea::onSceneUpdate(f32 deltatime)
     }
 }
 
-void CSelectionArea::onResourceLoaded(ISharedResourceRef resource, bool success)
+void CEditableBrush::onResourceLoaded(ISharedResourceRef resource, bool success)
 {
     IGameObject::onResourceLoaded(resource, success);
 }
 
-void CSelectionArea::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
+void CEditableBrush::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     IGameObject::onConfigurationLoaded(configuration, success);
     
     std::shared_ptr<CMEConfigurationSelectionArea> selectionAreaConfiguration = std::static_pointer_cast<CMEConfigurationSelectionArea>(configuration);
     assert(m_resourceAccessor != nullptr);
     
-    CSelectionArea::createMesh(m_radius);
+    CEditableBrush::createMesh(m_size);
     
 	IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);
@@ -58,7 +58,7 @@ void CSelectionArea::onConfigurationLoaded(ISharedConfigurationRef configuration
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-void CSelectionArea::createMesh(f32 radius)
+void CEditableBrush::createMesh(f32 radius)
 {
     ui32 sizeX = static_cast<ui32>(radius * 2);
     ui32 sizeZ = static_cast<ui32>(radius * 2);
@@ -118,22 +118,22 @@ void CSelectionArea::createMesh(f32 radius)
     assert(m_mesh != nullptr);
 }
 
-i32 CSelectionArea::zOrder(void)
+i32 CEditableBrush::zOrder(void)
 {
     return m_zOrder;
 }
 
-bool CSelectionArea::checkOcclusion(void)
+bool CEditableBrush::checkOcclusion(void)
 {
     return false;
 }
 
-ui32 CSelectionArea::numTriangles(void)
+ui32 CEditableBrush::numTriangles(void)
 {
     return IGameObject::numTriangles();
 }
 
-void CSelectionArea::onBind(const std::string& mode)
+void CEditableBrush::onBind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
@@ -142,7 +142,7 @@ void CSelectionArea::onBind(const std::string& mode)
     }
 }
 
-void CSelectionArea::onDraw(const std::string& mode)
+void CEditableBrush::onDraw(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
@@ -157,13 +157,13 @@ void CSelectionArea::onDraw(const std::string& mode)
         material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         material->getShader()->setVector2Custom(glm::vec2(m_position.x, m_position.z), "IN_Center");
-        material->getShader()->setFloatCustom(m_radius * 0.75, "IN_Radius");
+        material->getShader()->setFloatCustom(m_size * 0.75, "IN_Radius");
         
         IGameObject::onDraw(mode);
     }
 }
 
-void CSelectionArea::onUnbind(const std::string& mode)
+void CEditableBrush::onUnbind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
@@ -172,26 +172,26 @@ void CSelectionArea::onUnbind(const std::string& mode)
     }
 }
 
-void CSelectionArea::onBatch(const std::string& mode)
+void CEditableBrush::onBatch(const std::string& mode)
 {
     IGameObject::onBatch(mode);
 }
 
-void CSelectionArea::setLandscape(CSharedLandscapeRef landscape)
+void CEditableBrush::setLandscape(CSharedLandscapeRef landscape)
 {
     assert(landscape != nullptr);
     m_landscape = landscape;
 }
 
-void CSelectionArea::setPosition(const glm::vec3 &position)
+void CEditableBrush::setPosition(const glm::vec3 &position)
 {
     IGameObject::setPosition(position);
     if(m_landscape != nullptr &&
        m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_radius > 0);
-        ui32 sizeX = static_cast<ui32>(m_radius * 2);
-        ui32 sizeZ = static_cast<ui32>(m_radius * 2);
+        assert(m_size > 0);
+        ui32 sizeX = static_cast<ui32>(m_size * 2);
+        ui32 sizeZ = static_cast<ui32>(m_size * 2);
         
         SAttributeVertex* vertexData = m_mesh->getVertexBuffer()->lock();
         
@@ -214,11 +214,11 @@ void CSelectionArea::setPosition(const glm::vec3 &position)
     }
 }
 
-void CSelectionArea::setRadius(f32 radius)
+void CEditableBrush::setSize(f32 size)
 {
-    if(m_radius != radius)
+    if(m_size != size)
     {
-        CSelectionArea::createMesh(radius);
+        CEditableBrush::createMesh(size);
     }
-    m_radius = radius;
+    m_size = size;
 }

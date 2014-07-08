@@ -1,21 +1,21 @@
 //
-//  CSelectionArea.h
+//  CEditableBrush.h
 //  ie3D-EMap
 //
 //  Created by Sergey Sergeev on 4/30/14.
 //
 //
 
-#ifndef CSelectionArea_h
-#define CSelectionArea_h
+#ifndef CEditableBrush_h
+#define CEditableBrush_h
 
 #include "IGameObject.h"
 
-class CSelectionArea : public IGameObject
+class CEditableBrush : public IGameObject
 {
 private:
     
-    f32 m_radius;
+    f32 m_size;
     
     CSharedLandscape m_landscape;
     
@@ -38,15 +38,15 @@ protected:
     
 public:
     
-    CSelectionArea(CSharedResourceAccessorRef resourceAccessor,
+    CEditableBrush(CSharedResourceAccessorRef resourceAccessor,
                    ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
-    ~CSelectionArea(void);
+    ~CEditableBrush(void);
     
     void setLandscape(CSharedLandscapeRef landscape);
     
     void setPosition(const glm::vec3& position);
     
-    void setRadius(f32 radius);
+    void setSize(f32 size);
 };
 
 #endif

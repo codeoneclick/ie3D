@@ -20,15 +20,34 @@ public IGestureRecognizerHandler
 {
 private:
     
+    struct SEditableSettings
+    {
+        ui32 m_brushSize;
+        ui32 m_brushStrength;
+        ui32 m_falloffCoefficient;
+        ui32 m_smoothCoefficient;
+    };
+    
 protected:
     
     std::shared_ptr<CMapDragController> m_mapDragController;
     CSharedSkyBox m_skyBox;
     CSharedLandscape m_landscape;
     CSharedModel m_model;
-    CSharedSelectionArea m_selectionArea;
+    
+    CSharedEditableBrush m_editableBrush;
+    
     glm::ivec2 m_previousDraggedPoint;
-    ui32 m_editableRadius;
+    
+    SEditableSettings m_editableSettings;
+    
+    CSharedMEUIToSceneCommands m_uiToSceneCommands;
+    CSharedMESceneToUICommands m_sceneToUICommands;
+    
+    void setBrushSize(ui32 value);
+    void setBrushStrength(ui32 value);
+    void setFalloffCoefficient(ui32 value);
+    void setSmoothCoefficient(ui32 value);
     
     std::vector<ISharedGameObject> colliders(void);
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);
@@ -46,6 +65,9 @@ public:
     
     void load(void);
     void update(f32 deltatime);
+    
+    CSharedMEUIToSceneCommands getUIToSceneCommands(void) const;
+    void setSceneToUICommands(CSharedMESceneToUICommandsRef commands);
 };
 
 #endif

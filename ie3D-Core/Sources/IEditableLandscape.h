@@ -18,6 +18,11 @@ private:
     
     CSharedHeightmapProcessor m_heightmapProcessor;
     
+    ui32 m_editableSize;
+    ui32 m_editableStrength;
+    ui32 m_editableFalloffCoefficient;
+    ui32 m_editableSmoothCoefficient;
+    
 protected:
 
     void setHeightmapProcessor(CSharedHeightmapProcessorRef heightmapProcessor);
@@ -27,8 +32,12 @@ public:
     IEditableLandscape(void);
     ~IEditableLandscape(void);
     
-    void pressureHeight(const glm::vec3& point, f32 radius,
-                        bool isSmooth, f32 pressureForce);
+    void setEditableSize(ui32 value);
+    void setEditableStrength(ui32 value);
+    void setEditableFalloffCoefficient(ui32 value);
+    void setEditableSmoothCoefficient(ui32 value);
+    
+    void pressureHeight(const glm::vec3& point, f32 pressureForce);
     
 };
 

@@ -11,8 +11,16 @@
 
 #include "HDeclaration.h"
 
-class CSelectionArea;
-typedef std::shared_ptr<CSelectionArea> CSharedSelectionArea;
-typedef const CSharedSelectionArea& CSharedSelectionAreaRef;
+class CEditableBrush;
+typedef std::shared_ptr<CEditableBrush> CSharedEditableBrush;
+typedef const CSharedEditableBrush& CSharedEditableBrushRef;
+
+class CMEUIToSceneCommands;
+typedef std::shared_ptr<CMEUIToSceneCommands> CSharedMEUIToSceneCommands;
+typedef const CSharedMEUIToSceneCommands& CSharedMEUIToSceneCommandsRef;
+
+class CMESceneToUICommands;
+typedef std::shared_ptr<CMESceneToUICommands> CSharedMESceneToUICommands;
+typedef const CSharedMESceneToUICommands& CSharedMESceneToUICommandsRef;
 
 #endif

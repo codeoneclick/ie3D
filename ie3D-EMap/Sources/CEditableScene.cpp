@@ -16,17 +16,24 @@
 #include "CParticleEmitter.h"
 #include "CMapDragController.h"
 #include "CEditableSceneTransition.h"
-#include "CSelectionArea.h"
+#include "CEditableBrush.h"
 #include "CCollisionMgr.h"
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CModel.h"
+#include "CMEUIToSceneCommands.h"
+#include "CMESceneToUICommands.h"
 
 CEditableScene::CEditableScene(IGameTransition* root) :
 IScene(root),
 m_previousDraggedPoint(glm::ivec2(0, 0)),
-m_editableRadius(2)
+m_uiToSceneCommands(std::make_shared<CMEUIToSceneCommands>()),
+m_sceneToUICommands(nullptr)
 {
+    m_editableSettings.m_brushSize = 4;
+    m_editableSettings.m_brushStrength = 1;
+    m_editableSettings.m_falloffCoefficient = 0;
+    m_editableSettings.m_smoothCoefficient = 0;
     
 }
 
@@ -73,16 +80,21 @@ void CEditableScene::load(void)
     m_root->addCollisionHandler(shared_from_this());
     
     CEditableSceneTransition* transition = static_cast<CEditableSceneTransition*>(m_root);
-    m_selectionArea = transition->createSelectionArea("gameobject.selection.area.xml");
-    m_root->addCustomGameObject(m_selectionArea);
-    m_selectionArea->setLandscape(m_landscape);
-    m_selectionArea->setRadius(m_editableRadius);
+    m_editableBrush = transition->createEditableBrush("gameobject.selection.area.xml");
+    m_root->addCustomGameObject(m_editableBrush);
+    m_editableBrush->setLandscape(m_landscape);
+    m_editableBrush->setSize(m_editableSettings.m_brushSize);
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
                                                                glm::vec3(512.0, 0.0, 512.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);
     m_root->addGestureRecognizerHandler(std::dynamic_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
+    
+    m_uiToSceneCommands->connectSetBrushSizeCommand(std::bind(&CEditableScene::setBrushSize, this, std::placeholders::_1));
+    m_uiToSceneCommands->connectSetBrushStrengthCommand(std::bind(&CEditableScene::setBrushStrength, this, std::placeholders::_1));
+    m_uiToSceneCommands->connectSetFalloffCoefficientCommand(std::bind(&CEditableScene::setFalloffCoefficient, this, std::placeholders::_1));
+    m_uiToSceneCommands->connectSetSmoothCoefficientCommand(std::bind(&CEditableScene::setSmoothCoefficient, this, std::placeholders::_1));
 }
 
 void CEditableScene::update(f32 deltatime)
@@ -132,7 +144,7 @@ void CEditableScene::onGestureRecognizerMoved(const glm::ivec2& point)
     {
         if(iterator != nullptr && CCollisionMgr::isGameObjectIntersected(m_camera, iterator, point, &position))
         {
-            m_selectionArea->setPosition(position);
+            m_editableBrush->setPosition(position);
             break;
         }
     }
@@ -142,10 +154,10 @@ void CEditableScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT
 {
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
     {
-        assert(m_selectionArea != nullptr);
-        m_landscape->pressureHeight(m_selectionArea->getPosition(), m_editableRadius, true, (m_previousDraggedPoint.y - point.y) / 1.0);
+        assert(m_editableBrush != nullptr);
+        m_landscape->pressureHeight(m_editableBrush->getPosition(), (m_previousDraggedPoint.y - point.y));
         m_previousDraggedPoint = point;
-        m_selectionArea->setPosition(m_selectionArea->getPosition());
+        m_editableBrush->setPosition(m_editableBrush->getPosition());
     }
 }
 
@@ -157,17 +169,56 @@ void CEditableScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTT
 void CEditableScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
 {
     if(direction == E_SCROLL_WHEEL_DIRECTION_FORWARD &&
-       m_editableRadius <= 32.0)
+       m_editableSettings.m_brushSize < 32.0)
     {
-        m_editableRadius++;
-        m_editableRadius = m_editableRadius % 2 != 0 ? m_editableRadius + 1 : m_editableRadius;
+        m_editableSettings.m_brushSize++;
+        m_editableSettings.m_brushSize = m_editableSettings.m_brushSize % 2 != 0 ? m_editableSettings.m_brushSize + 1 : m_editableSettings.m_brushSize;
     }
     else if(direction == E_SCROLL_WHEEL_DIRECTION_BACKWARD &&
-            m_editableRadius > 2.0)
+            m_editableSettings.m_brushSize > 4.0)
     {
-        m_editableRadius--;
-        m_editableRadius = m_editableRadius % 2 != 0 ? m_editableRadius - 1 : m_editableRadius;
+        m_editableSettings.m_brushSize--;
+        m_editableSettings.m_brushSize = m_editableSettings.m_brushSize % 2 != 0 ? m_editableSettings.m_brushSize - 1 : m_editableSettings.m_brushSize;
     }
-    m_selectionArea->setRadius(m_editableRadius);
+    CEditableScene::setBrushSize(m_editableSettings.m_brushSize);
+    if(m_sceneToUICommands != nullptr)
+    {
+        m_sceneToUICommands->executeSetBrushSizeCommand(m_editableSettings.m_brushSize);
+    }
 }
 
+CSharedMEUIToSceneCommands CEditableScene::getUIToSceneCommands(void) const
+{
+    assert(m_uiToSceneCommands != nullptr);
+    return m_uiToSceneCommands;
+}
+
+void CEditableScene::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
+{
+    m_sceneToUICommands = commands;
+}
+
+void CEditableScene::setBrushSize(ui32 value)
+{
+    m_editableSettings.m_brushSize = value;
+    m_editableBrush->setSize(m_editableSettings.m_brushSize);
+    m_landscape->setEditableSize(m_editableSettings.m_brushSize);
+}
+
+void CEditableScene::setBrushStrength(ui32 value)
+{
+    m_editableSettings.m_brushStrength = value;
+    m_landscape->setEditableStrength(value);
+}
+
+void CEditableScene::setFalloffCoefficient(ui32 value)
+{
+    m_editableSettings.m_falloffCoefficient = value;
+    m_landscape->setEditableFalloffCoefficient(value);
+}
+
+void CEditableScene::setSmoothCoefficient(ui32 value)
+{
+    m_editableSettings.m_smoothCoefficient = value;
+    m_landscape->setEditableSmoothCoefficient(value);
+}
