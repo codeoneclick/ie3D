@@ -1,19 +1,19 @@
 //
-//  CEditableSceneController.cpp
+//  CMESceneController.cpp
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#include "CEditableSceneController.h"
+#include "CMESceneController.h"
 #include "IGraphicsContext.h"
 #include "IInputContext.h"
-#include "CEditableSceneTransition.h"
+#include "CMESceneTransition.h"
 #include "CConfigurationAccessor.h"
 #include "CMEConfigurationAccessor.h"
 
-std::shared_ptr<IGameTransition> CEditableSceneController::createEditableSceneTransition(const std::string& filename,
+std::shared_ptr<IGameTransition> CMESceneController::createEditableSceneTransition(const std::string& filename,
                                                                                          ISharedOGLWindowRef window)
 {
 #if defined(__OSX__)
@@ -22,7 +22,7 @@ std::shared_ptr<IGameTransition> CEditableSceneController::createEditableSceneTr
 #endif
     m_configurationAccessor = std::make_shared<CMEConfigurationAccessor>();
 
-    std::shared_ptr<CEditableSceneTransition> mainTransition = std::make_shared<CEditableSceneTransition>(filename,
+    std::shared_ptr<CMESceneTransition> mainTransition = std::make_shared<CMESceneTransition>(filename,
                                                                                                           graphicsContext,
                                                                                                           gestureRecognizerContext,
                                                                                                           m_resourceAccessor,

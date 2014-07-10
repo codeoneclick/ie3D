@@ -140,8 +140,8 @@ ISharedConfiguration CConfigurationMaterialSerializer::serialize(const std::stri
         
         std::string filename = texture.attribute(textureConfiguration->kTextureFilenameAttribute.c_str()).as_string();
         textureConfiguration->setAttribute(getConfigurationAttributeKey(textureConfiguration->kTextureMainNode,
-                                                                textureConfiguration->kTextureFilenameAttribute),
-                                       std::make_shared<CConfigurationAttribute>(filename));
+                                                                        textureConfiguration->kTextureFilenameAttribute),
+                                           std::make_shared<CConfigurationAttribute>(filename));
         
         std::string renderOperationName = texture.attribute(textureConfiguration->kTextureRenderOperationNameAttribute.c_str()).as_string();
         textureConfiguration->setAttribute(getConfigurationAttributeKey(textureConfiguration->kTextureMainNode,

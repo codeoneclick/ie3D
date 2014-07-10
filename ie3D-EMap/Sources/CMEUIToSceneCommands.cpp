@@ -73,3 +73,16 @@ void CMEUIToSceneCommands::executeSetSmoothCoefficientCommand(ui32 value)
         m_setSmoothCoefficientCommand(value);
     }
 }
+
+void CMEUIToSceneCommands::connectSetTextureSamplerCommand(const __SET_TEXTURE_SAMPLER& command)
+{
+    m_setTextureSampler = command;
+}
+
+void CMEUIToSceneCommands::executeSetTextureSampler(const std::string& filename, E_SHADER_SAMPLER sampler)
+{
+    if(m_setTextureSampler != nullptr)
+    {
+        m_setTextureSampler(filename, sampler);
+    }
+}

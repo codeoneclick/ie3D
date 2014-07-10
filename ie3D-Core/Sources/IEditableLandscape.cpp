@@ -66,6 +66,7 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForc
                z >= m_heightmapProcessor->getSizeZ())
                 continue;
             
+            f32 height = m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z));
             f32 distance = glm::length(glm::vec3(x - point.x, 0.0, z - point.z));
             
             if (distance > m_editableSize)
@@ -73,8 +74,8 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForc
             
             f32 riseCoefficient = distance / static_cast<f32>(m_editableSize);
             riseCoefficient = 1.0 - riseCoefficient * riseCoefficient;
-            f32 deltaHeight = pressureForce * riseCoefficient;
-            f32 height = m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z)) + deltaHeight;
+            f32 deltaHeight = pressureForce * riseCoefficient * (m_editableStrength * 0.1);
+            height += deltaHeight;
             
             i32 delimiter = 1;
             for(i32 i = x - m_editableSmoothCoefficient; i <= x + m_editableSmoothCoefficient; ++i)

@@ -42,11 +42,15 @@ std::shared_ptr<std::istream> IResourceSerializer::openStream(const std::string 
     }
 #else
     std::shared_ptr<std::ifstream> filestream = std::make_shared<std::ifstream>();
-    filestream->open(bundlepath().append(filename).c_str());
-    if (!filestream->is_open())
+    filestream->open(filename.c_str());
+    if(!filestream->is_open())
     {
-        m_status = E_SERIALIZER_STATUS_FAILURE;
-        assert(false);
+        filestream->open(bundlepath().append(filename).c_str());
+        if (!filestream->is_open())
+        {
+            m_status = E_SERIALIZER_STATUS_FAILURE;
+            assert(false);
+        }
     }
     return filestream;
 #endif

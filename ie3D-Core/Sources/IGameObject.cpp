@@ -218,19 +218,29 @@ CSharedIndexBuffer IGameObject::getCollisionIndexBuffer(void) const
 }
 
 void IGameObject::setTexture(CSharedTextureRef texture,
-                E_SHADER_SAMPLER sampler,
-                const std::string& mode)
+                             E_SHADER_SAMPLER sampler,
+                             const std::string& renderTechnique)
 {
-    assert(m_materials.find(mode) != m_materials.end());
-    auto iterator = m_materials.find(mode);
-    iterator->second->setTexture(texture, sampler);
+    if(renderTechnique.length() != 0)
+    {
+        assert(m_materials.find(renderTechnique) != m_materials.end());
+        auto iterator = m_materials.find(renderTechnique);
+        iterator->second->setTexture(texture, sampler);
+    }
+    else
+    {
+        for(const auto& iterator : m_materials)
+        {
+            iterator.second->setTexture(texture, sampler);
+        }
+    }
 }
 
 void IGameObject::setClippingPlane(const glm::vec4& clippingPlane,
-                      const std::string& mode)
+                      const std::string& renderTechnique)
 {
-    assert(m_materials.find(mode) != m_materials.end());
-    auto iterator = m_materials.find(mode);
+    assert(m_materials.find(renderTechnique) != m_materials.end());
+    auto iterator = m_materials.find(renderTechnique);
     iterator->second->setClippingPlane(clippingPlane);
 }
 

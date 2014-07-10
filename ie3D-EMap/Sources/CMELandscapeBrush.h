@@ -1,17 +1,17 @@
 //
-//  CEditableBrush.h
+//  CMELandscapeBrush.h
 //  ie3D-EMap
 //
 //  Created by Sergey Sergeev on 4/30/14.
 //
 //
 
-#ifndef CEditableBrush_h
-#define CEditableBrush_h
+#ifndef CMELandscapeBrush_h
+#define CMELandscapeBrush_h
 
 #include "IGameObject.h"
 
-class CEditableBrush : public IGameObject
+class CMELandscapeBrush : public IGameObject
 {
 private:
     
@@ -38,9 +38,9 @@ protected:
     
 public:
     
-    CEditableBrush(CSharedResourceAccessorRef resourceAccessor,
+    CMELandscapeBrush(CSharedResourceAccessorRef resourceAccessor,
                    ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
-    ~CEditableBrush(void);
+    ~CMELandscapeBrush(void);
     
     void setLandscape(CSharedLandscapeRef landscape);
     

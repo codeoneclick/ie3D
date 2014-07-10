@@ -9,7 +9,7 @@
 #include "CMESceneFabricator.h"
 #include "CMEConfigurationAccessor.h"
 #include "CResourceAccessor.h"
-#include "CEditableBrush.h"
+#include "CMELandscapeBrush.h"
 
 CMESceneFabricator::CMESceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                                        CSharedResourceAccessorRef resourceAccessor,
@@ -24,19 +24,19 @@ CMESceneFabricator::~CMESceneFabricator(void)
 
 }
 
-CSharedEditableBrush CMESceneFabricator::createEditableBrush(const std::string &filename)
+CSharedMELandscapeBrush CMESceneFabricator::createLandscapeBrush(const std::string &filename)
 {
     assert(m_resourceAccessor != nullptr);
 	assert(m_renderTechniqueAccessor != nullptr);
-    CSharedEditableBrush editableBrush = std::make_shared<CEditableBrush>(m_resourceAccessor, m_renderTechniqueAccessor);
+    CSharedMELandscapeBrush landscapeBrush = std::make_shared<CMELandscapeBrush>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     std::shared_ptr<CMEConfigurationAccessor> configurationAccessor = std::static_pointer_cast<CMEConfigurationAccessor>(m_configurationAccessor);
-    configurationAccessor->loadSelectionAreaConfiguration(filename, editableBrush);
-    m_gameObjectsContainer.insert(editableBrush);
-    return editableBrush;
+    configurationAccessor->loadSelectionAreaConfiguration(filename, landscapeBrush);
+    m_gameObjectsContainer.insert(landscapeBrush);
+    return landscapeBrush;
 }
 
-void CMESceneFabricator::deleteEditableBrush(CSharedEditableBrushRef editableBrush)
+void CMESceneFabricator::deleteLandscapeBrush(CSharedMELandscapeBrushRef gameObject)
 {
-    m_gameObjectsContainer.erase(editableBrush);
+    m_gameObjectsContainer.erase(gameObject);
 }

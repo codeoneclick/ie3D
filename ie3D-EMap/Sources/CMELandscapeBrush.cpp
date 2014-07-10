@@ -1,12 +1,12 @@
 //
-//  CEditableBrush.cpp
+//  CMELandscapeBrush.cpp
 //  ie3D-EMap
 //
 //  Created by Sergey Sergeev on 4/30/14.
 //
 //
 
-#include "CEditableBrush.h"
+#include "CMELandscapeBrush.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CMEConfigurationGameObjects.h"
@@ -16,7 +16,7 @@
 #include "CShader.h"
 #include "CCamera.h"
 
-CEditableBrush::CEditableBrush(CSharedResourceAccessorRef resourceAccessor,
+CMELandscapeBrush::CMELandscapeBrush(CSharedResourceAccessorRef resourceAccessor,
                                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_size(4),
@@ -25,12 +25,12 @@ m_landscape(nullptr)
     m_zOrder = 6;
 }
 
-CEditableBrush::~CEditableBrush(void)
+CMELandscapeBrush::~CMELandscapeBrush(void)
 {
     
 }
 
-void CEditableBrush::onSceneUpdate(f32 deltatime)
+void CMELandscapeBrush::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
@@ -38,19 +38,19 @@ void CEditableBrush::onSceneUpdate(f32 deltatime)
     }
 }
 
-void CEditableBrush::onResourceLoaded(ISharedResourceRef resource, bool success)
+void CMELandscapeBrush::onResourceLoaded(ISharedResourceRef resource, bool success)
 {
     IGameObject::onResourceLoaded(resource, success);
 }
 
-void CEditableBrush::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
+void CMELandscapeBrush::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     IGameObject::onConfigurationLoaded(configuration, success);
     
     std::shared_ptr<CMEConfigurationSelectionArea> selectionAreaConfiguration = std::static_pointer_cast<CMEConfigurationSelectionArea>(configuration);
     assert(m_resourceAccessor != nullptr);
     
-    CEditableBrush::createMesh(m_size);
+    CMELandscapeBrush::createMesh(m_size);
     
 	IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);
@@ -58,7 +58,7 @@ void CEditableBrush::onConfigurationLoaded(ISharedConfigurationRef configuration
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-void CEditableBrush::createMesh(f32 radius)
+void CMELandscapeBrush::createMesh(f32 radius)
 {
     ui32 sizeX = static_cast<ui32>(radius * 2);
     ui32 sizeZ = static_cast<ui32>(radius * 2);
@@ -118,22 +118,22 @@ void CEditableBrush::createMesh(f32 radius)
     assert(m_mesh != nullptr);
 }
 
-i32 CEditableBrush::zOrder(void)
+i32 CMELandscapeBrush::zOrder(void)
 {
     return m_zOrder;
 }
 
-bool CEditableBrush::checkOcclusion(void)
+bool CMELandscapeBrush::checkOcclusion(void)
 {
     return false;
 }
 
-ui32 CEditableBrush::numTriangles(void)
+ui32 CMELandscapeBrush::numTriangles(void)
 {
     return IGameObject::numTriangles();
 }
 
-void CEditableBrush::onBind(const std::string& mode)
+void CMELandscapeBrush::onBind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
@@ -142,7 +142,7 @@ void CEditableBrush::onBind(const std::string& mode)
     }
 }
 
-void CEditableBrush::onDraw(const std::string& mode)
+void CMELandscapeBrush::onDraw(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
@@ -163,7 +163,7 @@ void CEditableBrush::onDraw(const std::string& mode)
     }
 }
 
-void CEditableBrush::onUnbind(const std::string& mode)
+void CMELandscapeBrush::onUnbind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
@@ -172,18 +172,18 @@ void CEditableBrush::onUnbind(const std::string& mode)
     }
 }
 
-void CEditableBrush::onBatch(const std::string& mode)
+void CMELandscapeBrush::onBatch(const std::string& mode)
 {
     IGameObject::onBatch(mode);
 }
 
-void CEditableBrush::setLandscape(CSharedLandscapeRef landscape)
+void CMELandscapeBrush::setLandscape(CSharedLandscapeRef landscape)
 {
     assert(landscape != nullptr);
     m_landscape = landscape;
 }
 
-void CEditableBrush::setPosition(const glm::vec3 &position)
+void CMELandscapeBrush::setPosition(const glm::vec3 &position)
 {
     IGameObject::setPosition(position);
     if(m_landscape != nullptr &&
@@ -214,11 +214,11 @@ void CEditableBrush::setPosition(const glm::vec3 &position)
     }
 }
 
-void CEditableBrush::setSize(f32 size)
+void CMELandscapeBrush::setSize(f32 size)
 {
     if(m_size != size)
     {
-        CEditableBrush::createMesh(size);
+        CMELandscapeBrush::createMesh(size);
     }
     m_size = size;
 }

@@ -106,12 +106,12 @@ public:
     virtual CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     virtual CSharedIndexBuffer getCollisionIndexBuffer(void) const;
     
-    void setTexture(CSharedTextureRef texture,
-                    E_SHADER_SAMPLER sampler,
-                    const std::string& mode);
+    virtual void setTexture(CSharedTextureRef texture,
+                            E_SHADER_SAMPLER sampler,
+                            const std::string& renderTechnique = "");
     
-    void setClippingPlane(const glm::vec4& clippingPlane,
-                          const std::string& mode);
+    virtual void setClippingPlane(const glm::vec4& clippingPlane,
+                                  const std::string& renderTechnique);
     
     virtual void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);
     virtual void setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor);

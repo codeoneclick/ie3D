@@ -1,18 +1,18 @@
 //
-//  CEditableSceneTransition.h
+//  CMESceneTransition.h
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#ifndef CEditableSceneTransition_h
-#define CEditableSceneTransition_h
+#ifndef CMESceneTransition_h
+#define CMESceneTransition_h
 
 #include "IGameTransition.h"
 #include "HMEDeclaration.h"
 
-class CEditableSceneTransition : public IGameTransition
+class CMESceneTransition : public IGameTransition
 {
 private:
     
@@ -23,18 +23,18 @@ protected:
     
 public:
     
-    CEditableSceneTransition(const std::string& filename,
+    CMESceneTransition(const std::string& filename,
                              std::shared_ptr<IGraphicsContext> graphicsContext,
                              std::shared_ptr<IInputContext> gestureRecognizerContext,
                              std::shared_ptr<CResourceAccessor> resourceAccessor,
                              std::shared_ptr<CConfigurationAccessor> configurationAccessor);
     
-    ~CEditableSceneTransition(void);
+    ~CMESceneTransition(void);
     
     void initScene(void);
     
-    CSharedEditableBrush createEditableBrush(const std::string& filename);
-    void deleteEditableBrush(CSharedEditableBrushRef editableBrush);
+    CSharedMELandscapeBrush createLandscapeBrush(const std::string& filename);
+    void deleteLandscapeBrush(CSharedMELandscapeBrushRef gameObject);
     
     CSharedMEUIToSceneCommands getUIToSceneCommands(void) const;
     void setSceneToUICommands(CSharedMESceneToUICommandsRef commands);

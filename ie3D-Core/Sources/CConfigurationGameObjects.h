@@ -332,7 +332,7 @@ public:
 };
 
 
-struct CConfigurationWSRenderOperation : public IConfiguration
+class CConfigurationWSRenderOperation : public IConfiguration
 {
 public:
     

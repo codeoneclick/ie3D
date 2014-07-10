@@ -270,6 +270,38 @@ void CLandscape::setLightSource(CSharedLightSourceRef lightSource,
     m_edges->setLightSource(lightSource, index);
 }
 
+void CLandscape::setTexture(CSharedTextureRef texture,
+                            E_SHADER_SAMPLER sampler,
+                            const std::string& renderTechnique)
+{
+    std::shared_ptr<CConfigurationLandscape> gameObjectConfiguration = std::static_pointer_cast<CConfigurationLandscape>(m_configuration);
+    assert(gameObjectConfiguration != nullptr);
+    
+    for(const auto& iterator_01 : gameObjectConfiguration->getMaterialsConfigurations())
+    {
+        CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator_01);
+        for(const auto& iterator_02 : materialConfiguration->getTexturesConfigurations())
+        {
+            CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator_02);
+            if(textureConfiguration->getSamplerIndex() == sampler)
+            {
+                std::string filename = texture->getGuid();
+                textureConfiguration->setAttribute(getConfigurationAttributeKey(textureConfiguration->kTextureMainNode,
+                                                                                textureConfiguration->kTextureFilenameAttribute),
+                                                   std::make_shared<CConfigurationAttribute>(filename), true, 0);
+            }
+        }
+    }
+    
+    for(const auto& iterator : m_chunks)
+    {
+        if(iterator != nullptr)
+        {
+            iterator->setTexture(texture, sampler);
+        }
+    }
+}
+
 void CLandscape::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)
 {
     assert(m_edges != nullptr);

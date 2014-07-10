@@ -26,8 +26,8 @@ public:
     
     virtual ~CMESceneFabricator(void);
     
-    CSharedEditableBrush createEditableBrush(const std::string& filename);
-    void deleteEditableBrush(CSharedEditableBrushRef editableBrush);
+    CSharedMELandscapeBrush createLandscapeBrush(const std::string& filename);
+    void deleteLandscapeBrush(CSharedMELandscapeBrushRef editableBrush);
 };
 
 

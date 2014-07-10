@@ -200,6 +200,12 @@ void IGameTransition::setCamera(CSharedCameraRef camera)
     m_sceneGraph->setCamera(camera);
 }
 
+const CSharedResourceAccessor IGameTransition::getResourceAccessor(void) const
+{
+    assert(m_resourceAccessor != nullptr);
+    return m_resourceAccessor;
+}
+
 void IGameTransition::addModel(CSharedModelRef model)
 {
     assert(m_sceneGraph != nullptr);

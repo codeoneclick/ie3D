@@ -5,8 +5,8 @@
 #include "HCommon.h"
 #include "HMEDeclaration.h"
 
-class CEditableSceneController;
-class CEditableSceneTransition;
+class CMESceneController;
+class CMESceneTransition;
 
 namespace Ui {
     class CMainWindow;
@@ -20,8 +20,8 @@ protected:
     
 #if defined(__OSX__) || defined(__WIN32__)
     
-    std::shared_ptr<CEditableSceneController> m_editableSceneController;
-    std::shared_ptr<CEditableSceneTransition> m_editableSceneTransition;
+    std::shared_ptr<CMESceneController> m_editableSceneController;
+    std::shared_ptr<CMESceneTransition> m_editableSceneTransition;
     
     CSharedMESceneToUICommands m_sceneToUICommands;
     
@@ -30,7 +30,8 @@ protected:
     void setFalloffCoefficient(ui32 value);
     void setSmoothCoefficient(ui32 value);
     
-    int m_previousBrushSize;
+    i32 m_previousBrushSize;
+    std::string m_recentFilename;
     
 #endif
     
@@ -49,6 +50,14 @@ private slots:
     void on_m_falloffSlider_valueChanged(int value);
 
     void on_m_smoothSlider_valueChanged(int value);
+
+    void on_m_texture01Btn_pressed();
+
+    void on_m_texture01Btn_clicked();
+
+    void on_m_texture02Btn_clicked();
+
+    void on_m_texture03Btn_clicked();
 
 private:
     

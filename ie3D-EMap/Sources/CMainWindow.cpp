@@ -1,11 +1,13 @@
 #include "CMainWindow.h"
 #include "ui_CMainWindow.h"
+#include "QFileDialog.h"
+#include "QMessageBox.h"
 
 #if defined(__OSX__) || defined(__WIN32__)
 
-#include "CEditableSceneController.h"
-#include "CEditableSceneTransition.h"
-#include "CEditableScene.h"
+#include "CMESceneController.h"
+#include "CMESceneTransition.h"
+#include "CMEScene.h"
 #include "IOGLWindow.h"
 #include "CMEUIToSceneCommands.h"
 #include "CMESceneToUICommands.h"
@@ -24,6 +26,7 @@ QMainWindow(parent),
 
 m_editableSceneController(nullptr),
 m_editableSceneTransition(nullptr),
+m_recentFilename(""),
 
 #endif
 ui(new Ui::CMainWindow)
@@ -68,8 +71,8 @@ void CMainWindow::execute(void)
     m_sceneToUICommands->connectSetSmoothCoefficientCommand(std::bind(&CMainWindow::setSmoothCoefficient, this, std::placeholders::_1));
     
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)view);
-    m_editableSceneController = std::make_shared<CEditableSceneController>();
-    m_editableSceneTransition = std::static_pointer_cast<CEditableSceneTransition>(m_editableSceneController->createEditableSceneTransition("transition.main.xml", window));
+    m_editableSceneController = std::make_shared<CMESceneController>();
+    m_editableSceneTransition = std::static_pointer_cast<CMESceneTransition>(m_editableSceneController->createEditableSceneTransition("transition.main.xml", window));
     m_editableSceneController->RegisterTransition(m_editableSceneTransition);
     m_editableSceneController->GoToTransition("transition.main.xml");
     m_editableSceneTransition->setSceneToUICommands(m_sceneToUICommands);
@@ -120,6 +123,68 @@ void CMainWindow::on_m_smoothSlider_valueChanged(int value)
     stream<<"Smooth coefficient: "<<value<<" [0:3]";
     ui->m_smoothLabel->setText(QString::fromUtf8(stream.str().c_str()));
     m_editableSceneTransition->getUIToSceneCommands()->executeSetSmoothCoefficientCommand(value);
+}
+
+void CMainWindow::on_m_texture01Btn_pressed()
+{
+
+}
+
+void CMainWindow::on_m_texture01Btn_clicked()
+{
+    QString recentFilename = m_recentFilename.length() != 0 ? QString(m_recentFilename.c_str()) : "";
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.pvr)"));
+    if (filename.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        QImage image;
+        if(image.load(filename))
+        {
+            std::cout<<"image "<<image.width()<<"x"<<image.height()<<std::endl;
+        }
+        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSampler(filename.toUtf8().constData(), E_SHADER_SAMPLER_01);
+    }
+}
+
+void CMainWindow::on_m_texture02Btn_clicked()
+{
+    QString recentFilename = m_recentFilename.length() != 0 ? QString(m_recentFilename.c_str()) : "";
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.pvr)"));
+    if (filename.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        QImage image;
+        if(image.load(filename))
+        {
+            std::cout<<"image "<<image.width()<<"x"<<image.height()<<std::endl;
+        }
+        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSampler(filename.toUtf8().constData(), E_SHADER_SAMPLER_02);
+    }
+}
+
+void CMainWindow::on_m_texture03Btn_clicked()
+{
+    QString recentFilename = m_recentFilename.length() != 0 ? QString(m_recentFilename.c_str()) : "";
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.pvr)"));
+    if (filename.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        QImage image;
+        if(image.load(filename))
+        {
+            std::cout<<"image "<<image.width()<<"x"<<image.height()<<std::endl;
+        }
+        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSampler(filename.toUtf8().constData(), E_SHADER_SAMPLER_03);
+    }
 }
 
 void CMainWindow::setBrushSize(ui32 value)

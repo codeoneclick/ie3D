@@ -1,18 +1,18 @@
 //
-//  CEditableSceneTransition.cpp
+//  CMESceneTransition.cpp
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#include "CEditableSceneTransition.h"
-#include "CEditableScene.h"
+#include "CMESceneTransition.h"
+#include "CMEScene.h"
 #include "CMESceneFabricator.h"
 #include "CSceneGraph.h"
 #include "CRenderPipeline.h"
 
-CEditableSceneTransition::CEditableSceneTransition(const std::string& filename,
+CMESceneTransition::CMESceneTransition(const std::string& filename,
                                                    std::shared_ptr<IGraphicsContext> graphicsContext,
                                                    std::shared_ptr<IInputContext> gestureRecognizerContext,
                                                    std::shared_ptr<CResourceAccessor> resourceAccessor,
@@ -26,12 +26,12 @@ IGameTransition(filename,
     
 }
 
-CEditableSceneTransition::~CEditableSceneTransition(void)
+CMESceneTransition::~CMESceneTransition(void)
 {
     
 }
 
-void CEditableSceneTransition::initScene(void)
+void CMESceneTransition::initScene(void)
 {
     assert(m_graphicsContext != nullptr);
     assert(m_inputContext != nullptr);
@@ -47,14 +47,14 @@ void CEditableSceneTransition::initScene(void)
                                                              m_renderPipeline);
 }
 
-void CEditableSceneTransition::_OnLoaded(void)
+void CMESceneTransition::_OnLoaded(void)
 {
-    m_scene = std::make_shared<CEditableScene>(this);
+    m_scene = std::make_shared<CMEScene>(this);
     m_scene->load();
     m_isLoaded = true;
 }
 
-void CEditableSceneTransition::_OnGameLoopUpdate(f32 deltatime)
+void CMESceneTransition::_OnGameLoopUpdate(f32 deltatime)
 {
     if(m_isLoaded && m_scene != nullptr)
     {
@@ -62,28 +62,28 @@ void CEditableSceneTransition::_OnGameLoopUpdate(f32 deltatime)
     }
 }
 
-CSharedMEUIToSceneCommands CEditableSceneTransition::getUIToSceneCommands(void) const
+CSharedMEUIToSceneCommands CMESceneTransition::getUIToSceneCommands(void) const
 {
-    return m_isLoaded && m_scene != nullptr ? std::static_pointer_cast<CEditableScene>(m_scene)->getUIToSceneCommands() : nullptr;
+    return m_isLoaded && m_scene != nullptr ? std::static_pointer_cast<CMEScene>(m_scene)->getUIToSceneCommands() : nullptr;
 }
 
-void CEditableSceneTransition::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
+void CMESceneTransition::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
 {
     assert(m_isLoaded && m_scene != nullptr);
-    std::static_pointer_cast<CEditableScene>(m_scene)->setSceneToUICommands(commands);
+    std::static_pointer_cast<CMEScene>(m_scene)->setSceneToUICommands(commands);
 }
 
-CSharedEditableBrush CEditableSceneTransition::createEditableBrush(const std::string& filename)
+CSharedMELandscapeBrush CMESceneTransition::createLandscapeBrush(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
     std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
-    return sceneFabricator->createEditableBrush(filename);
+    return sceneFabricator->createLandscapeBrush(filename);
 }
 
-void CEditableSceneTransition::deleteEditableBrush(CSharedEditableBrushRef editableBrush)
+void CMESceneTransition::deleteLandscapeBrush(CSharedMELandscapeBrushRef gameObject)
 {
     assert(m_sceneFabricator != nullptr);
     std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
-    sceneFabricator->deleteEditableBrush(editableBrush);
+    sceneFabricator->deleteLandscapeBrush(gameObject);
 }
 

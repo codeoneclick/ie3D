@@ -70,6 +70,10 @@ public:
     void enableRender(bool value);
     void enableUpdate(bool value);
     
+    void setTexture(CSharedTextureRef texture,
+                    E_SHADER_SAMPLER sampler,
+                    const std::string& renderTechnique = "");
+    
     std::vector<ISharedGameObject> getChunks(void) const;
 
     CSharedTexture getHeightmapTexture(void) const;

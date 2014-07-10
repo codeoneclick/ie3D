@@ -11,9 +11,9 @@
 
 #include "HDeclaration.h"
 
-class CEditableBrush;
-typedef std::shared_ptr<CEditableBrush> CSharedEditableBrush;
-typedef const CSharedEditableBrush& CSharedEditableBrushRef;
+class CMELandscapeBrush;
+typedef std::shared_ptr<CMELandscapeBrush> CSharedMELandscapeBrush;
+typedef const CSharedMELandscapeBrush& CSharedMELandscapeBrushRef;
 
 class CMEUIToSceneCommands;
 typedef std::shared_ptr<CMEUIToSceneCommands> CSharedMEUIToSceneCommands;

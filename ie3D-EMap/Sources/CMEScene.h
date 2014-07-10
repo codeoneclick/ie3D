@@ -1,20 +1,20 @@
 //
-//  CEditableScene.h
+//  CMEScene.h
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#ifndef CEditableScene_h
-#define CEditableScene_h
+#ifndef CMEScene_h
+#define CMEScene_h
 
 #include "IScene.h"
 #include "HMEDeclaration.h"
 
 class CMapDragController;
 
-class CEditableScene final :
+class CMEScene final :
 public IScene,
 public IGestureRecognizerHandler
 {
@@ -35,7 +35,7 @@ protected:
     CSharedLandscape m_landscape;
     CSharedModel m_model;
     
-    CSharedEditableBrush m_editableBrush;
+    CSharedMELandscapeBrush m_landscapeBrush;
     
     glm::ivec2 m_previousDraggedPoint;
     
@@ -48,6 +48,7 @@ protected:
     void setBrushStrength(ui32 value);
     void setFalloffCoefficient(ui32 value);
     void setSmoothCoefficient(ui32 value);
+    void setTextureSampler(const std::string& filename, E_SHADER_SAMPLER sampler);
     
     std::vector<ISharedGameObject> colliders(void);
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);
@@ -60,8 +61,8 @@ protected:
     
 public:
     
-    CEditableScene(IGameTransition* root);
-    ~CEditableScene(void);
+    CMEScene(IGameTransition* root);
+    ~CMEScene(void);
     
     void load(void);
     void update(f32 deltatime);

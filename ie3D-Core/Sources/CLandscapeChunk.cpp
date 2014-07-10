@@ -149,9 +149,6 @@ void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuratio
 {
     IGameObject::onConfigurationLoaded(configuration, success);
     
-    std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
-    assert(m_resourceAccessor != nullptr);
-    
     m_quadTree = std::make_shared<CQuadTree>();
     m_quadTree->generate(m_mesh->getVertexBuffer(),
                          m_mesh->getIndexBuffer(),
