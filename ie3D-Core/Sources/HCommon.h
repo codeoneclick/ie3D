@@ -42,6 +42,8 @@
 
 #endif
 
+#include <libpng-1.6.9/png.h>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/type_precision.hpp>
 #include <glm/gtc/matrix_transform.hpp>

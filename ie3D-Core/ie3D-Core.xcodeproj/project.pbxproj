@@ -255,6 +255,90 @@
 		2173349A19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */; };
 		2173349B19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */; };
 		2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */; };
+		2191CE4A196EDBEF00CE2813 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE34196EDBEF00CE2813 /* png.c */; };
+		2191CE4B196EDBEF00CE2813 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE34196EDBEF00CE2813 /* png.c */; };
+		2191CE4C196EDBEF00CE2813 /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE35196EDBEF00CE2813 /* png.h */; };
+		2191CE4D196EDBEF00CE2813 /* pngconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE36196EDBEF00CE2813 /* pngconf.h */; };
+		2191CE4E196EDBEF00CE2813 /* pngdebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE37196EDBEF00CE2813 /* pngdebug.h */; };
+		2191CE4F196EDBEF00CE2813 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE38196EDBEF00CE2813 /* pngerror.c */; };
+		2191CE50196EDBEF00CE2813 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE38196EDBEF00CE2813 /* pngerror.c */; };
+		2191CE51196EDBEF00CE2813 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE39196EDBEF00CE2813 /* pngget.c */; };
+		2191CE52196EDBEF00CE2813 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE39196EDBEF00CE2813 /* pngget.c */; };
+		2191CE53196EDBEF00CE2813 /* pnginfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE3A196EDBEF00CE2813 /* pnginfo.h */; };
+		2191CE54196EDBEF00CE2813 /* pnglibconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE3B196EDBEF00CE2813 /* pnglibconf.h */; };
+		2191CE55196EDBEF00CE2813 /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE3C196EDBEF00CE2813 /* pngmem.c */; };
+		2191CE56196EDBEF00CE2813 /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE3C196EDBEF00CE2813 /* pngmem.c */; };
+		2191CE57196EDBEF00CE2813 /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE3D196EDBEF00CE2813 /* pngpread.c */; };
+		2191CE58196EDBEF00CE2813 /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE3D196EDBEF00CE2813 /* pngpread.c */; };
+		2191CE59196EDBEF00CE2813 /* pngpriv.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE3E196EDBEF00CE2813 /* pngpriv.h */; };
+		2191CE5A196EDBEF00CE2813 /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE3F196EDBEF00CE2813 /* pngread.c */; };
+		2191CE5B196EDBEF00CE2813 /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE3F196EDBEF00CE2813 /* pngread.c */; };
+		2191CE5C196EDBEF00CE2813 /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE40196EDBEF00CE2813 /* pngrio.c */; };
+		2191CE5D196EDBEF00CE2813 /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE40196EDBEF00CE2813 /* pngrio.c */; };
+		2191CE5E196EDBEF00CE2813 /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE41196EDBEF00CE2813 /* pngrtran.c */; };
+		2191CE5F196EDBEF00CE2813 /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE41196EDBEF00CE2813 /* pngrtran.c */; };
+		2191CE60196EDBEF00CE2813 /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE42196EDBEF00CE2813 /* pngrutil.c */; };
+		2191CE61196EDBEF00CE2813 /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE42196EDBEF00CE2813 /* pngrutil.c */; };
+		2191CE62196EDBEF00CE2813 /* pngset.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE43196EDBEF00CE2813 /* pngset.c */; };
+		2191CE63196EDBEF00CE2813 /* pngset.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE43196EDBEF00CE2813 /* pngset.c */; };
+		2191CE64196EDBEF00CE2813 /* pngstruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE44196EDBEF00CE2813 /* pngstruct.h */; };
+		2191CE65196EDBEF00CE2813 /* pngtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE45196EDBEF00CE2813 /* pngtrans.c */; };
+		2191CE66196EDBEF00CE2813 /* pngtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE45196EDBEF00CE2813 /* pngtrans.c */; };
+		2191CE67196EDBEF00CE2813 /* pngwio.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE46196EDBEF00CE2813 /* pngwio.c */; };
+		2191CE68196EDBEF00CE2813 /* pngwio.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE46196EDBEF00CE2813 /* pngwio.c */; };
+		2191CE69196EDBEF00CE2813 /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE47196EDBEF00CE2813 /* pngwrite.c */; };
+		2191CE6A196EDBEF00CE2813 /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE47196EDBEF00CE2813 /* pngwrite.c */; };
+		2191CE6B196EDBEF00CE2813 /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE48196EDBEF00CE2813 /* pngwtran.c */; };
+		2191CE6C196EDBEF00CE2813 /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE48196EDBEF00CE2813 /* pngwtran.c */; };
+		2191CE6D196EDBEF00CE2813 /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE49196EDBEF00CE2813 /* pngwutil.c */; };
+		2191CE6E196EDBEF00CE2813 /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE49196EDBEF00CE2813 /* pngwutil.c */; };
+		2191CE71196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE6F196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp */; };
+		2191CE72196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE6F196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp */; };
+		2191CE73196EDCDE00CE2813 /* CTextureSerializer_PNG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE70196EDCDE00CE2813 /* CTextureSerializer_PNG.h */; };
+		2191CE76196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE74196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp */; };
+		2191CE77196EE0B000CE2813 /* CTextureCommiter_PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE74196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp */; };
+		2191CE78196EE0B000CE2813 /* CTextureCommiter_PNG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE75196EE0AF00CE2813 /* CTextureCommiter_PNG.h */; };
+		2191CE96196EE95100CE2813 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE7C196EE95100CE2813 /* adler32.c */; };
+		2191CE97196EE95100CE2813 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE7C196EE95100CE2813 /* adler32.c */; };
+		2191CE98196EE95100CE2813 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE7D196EE95100CE2813 /* compress.c */; };
+		2191CE99196EE95100CE2813 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE7D196EE95100CE2813 /* compress.c */; };
+		2191CE9A196EE95100CE2813 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE7E196EE95100CE2813 /* crc32.c */; };
+		2191CE9B196EE95100CE2813 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE7E196EE95100CE2813 /* crc32.c */; };
+		2191CE9C196EE95100CE2813 /* crc32.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE7F196EE95100CE2813 /* crc32.h */; };
+		2191CE9D196EE95100CE2813 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE80196EE95100CE2813 /* deflate.c */; };
+		2191CE9E196EE95100CE2813 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE80196EE95100CE2813 /* deflate.c */; };
+		2191CE9F196EE95100CE2813 /* deflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE81196EE95100CE2813 /* deflate.h */; };
+		2191CEA0196EE95100CE2813 /* gzclose.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE82196EE95100CE2813 /* gzclose.c */; };
+		2191CEA1196EE95100CE2813 /* gzclose.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE82196EE95100CE2813 /* gzclose.c */; };
+		2191CEA2196EE95100CE2813 /* gzguts.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE83196EE95100CE2813 /* gzguts.h */; };
+		2191CEA3196EE95100CE2813 /* gzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE84196EE95100CE2813 /* gzlib.c */; };
+		2191CEA4196EE95100CE2813 /* gzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE84196EE95100CE2813 /* gzlib.c */; };
+		2191CEA5196EE95100CE2813 /* gzread.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE85196EE95100CE2813 /* gzread.c */; };
+		2191CEA6196EE95100CE2813 /* gzread.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE85196EE95100CE2813 /* gzread.c */; };
+		2191CEA7196EE95100CE2813 /* gzwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE86196EE95100CE2813 /* gzwrite.c */; };
+		2191CEA8196EE95100CE2813 /* gzwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE86196EE95100CE2813 /* gzwrite.c */; };
+		2191CEA9196EE95100CE2813 /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE87196EE95100CE2813 /* infback.c */; };
+		2191CEAA196EE95100CE2813 /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE87196EE95100CE2813 /* infback.c */; };
+		2191CEAB196EE95100CE2813 /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE88196EE95100CE2813 /* inffast.c */; };
+		2191CEAC196EE95100CE2813 /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE88196EE95100CE2813 /* inffast.c */; };
+		2191CEAD196EE95100CE2813 /* inffast.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE89196EE95100CE2813 /* inffast.h */; };
+		2191CEAE196EE95100CE2813 /* inffixed.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE8A196EE95100CE2813 /* inffixed.h */; };
+		2191CEAF196EE95100CE2813 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE8B196EE95100CE2813 /* inflate.c */; };
+		2191CEB0196EE95100CE2813 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE8B196EE95100CE2813 /* inflate.c */; };
+		2191CEB1196EE95100CE2813 /* inflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE8C196EE95100CE2813 /* inflate.h */; };
+		2191CEB2196EE95100CE2813 /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE8D196EE95100CE2813 /* inftrees.c */; };
+		2191CEB3196EE95100CE2813 /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE8D196EE95100CE2813 /* inftrees.c */; };
+		2191CEB4196EE95100CE2813 /* inftrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE8E196EE95100CE2813 /* inftrees.h */; };
+		2191CEB5196EE95100CE2813 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE8F196EE95100CE2813 /* trees.c */; };
+		2191CEB6196EE95100CE2813 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE8F196EE95100CE2813 /* trees.c */; };
+		2191CEB7196EE95100CE2813 /* trees.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE90196EE95100CE2813 /* trees.h */; };
+		2191CEB8196EE95100CE2813 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE91196EE95100CE2813 /* uncompr.c */; };
+		2191CEB9196EE95100CE2813 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE91196EE95100CE2813 /* uncompr.c */; };
+		2191CEBA196EE95100CE2813 /* zconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE92196EE95100CE2813 /* zconf.h */; };
+		2191CEBB196EE95100CE2813 /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE93196EE95100CE2813 /* zlib.h */; };
+		2191CEBC196EE95100CE2813 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE94196EE95100CE2813 /* zutil.c */; };
+		2191CEBD196EE95100CE2813 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE94196EE95100CE2813 /* zutil.c */; };
+		2191CEBE196EE95100CE2813 /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE95196EE95100CE2813 /* zutil.h */; };
 		21D0712B181DA5620019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		21D07238181DA6E60019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
 		21D07239181DA6EB0019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B217423E4D0063AB07 /* OpenGLES.framework */; };
@@ -335,6 +419,58 @@
 		217BB2AD1815A4E300DB8ECC /* CGUITemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUITemplateLoadingOperation.h; path = Sources/CGUITemplateLoadingOperation.h; sourceTree = "<group>"; };
 		217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameLoopExecutor.cpp; path = Sources/CGameLoopExecutor.cpp; sourceTree = "<group>"; };
 		21853415181EFC6200315CBB /* libie3DCore-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DCore-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2191CE34196EDBEF00CE2813 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
+		2191CE35196EDBEF00CE2813 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
+		2191CE36196EDBEF00CE2813 /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
+		2191CE37196EDBEF00CE2813 /* pngdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngdebug.h; sourceTree = "<group>"; };
+		2191CE38196EDBEF00CE2813 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngerror.c; sourceTree = "<group>"; };
+		2191CE39196EDBEF00CE2813 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngget.c; sourceTree = "<group>"; };
+		2191CE3A196EDBEF00CE2813 /* pnginfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnginfo.h; sourceTree = "<group>"; };
+		2191CE3B196EDBEF00CE2813 /* pnglibconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnglibconf.h; sourceTree = "<group>"; };
+		2191CE3C196EDBEF00CE2813 /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngmem.c; sourceTree = "<group>"; };
+		2191CE3D196EDBEF00CE2813 /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngpread.c; sourceTree = "<group>"; };
+		2191CE3E196EDBEF00CE2813 /* pngpriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngpriv.h; sourceTree = "<group>"; };
+		2191CE3F196EDBEF00CE2813 /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngread.c; sourceTree = "<group>"; };
+		2191CE40196EDBEF00CE2813 /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrio.c; sourceTree = "<group>"; };
+		2191CE41196EDBEF00CE2813 /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrtran.c; sourceTree = "<group>"; };
+		2191CE42196EDBEF00CE2813 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrutil.c; sourceTree = "<group>"; };
+		2191CE43196EDBEF00CE2813 /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngset.c; sourceTree = "<group>"; };
+		2191CE44196EDBEF00CE2813 /* pngstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngstruct.h; sourceTree = "<group>"; };
+		2191CE45196EDBEF00CE2813 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngtrans.c; sourceTree = "<group>"; };
+		2191CE46196EDBEF00CE2813 /* pngwio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwio.c; sourceTree = "<group>"; };
+		2191CE47196EDBEF00CE2813 /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwrite.c; sourceTree = "<group>"; };
+		2191CE48196EDBEF00CE2813 /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwtran.c; sourceTree = "<group>"; };
+		2191CE49196EDBEF00CE2813 /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwutil.c; sourceTree = "<group>"; };
+		2191CE6F196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureSerializer_PNG.cpp; path = Sources/CTextureSerializer_PNG.cpp; sourceTree = "<group>"; };
+		2191CE70196EDCDE00CE2813 /* CTextureSerializer_PNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureSerializer_PNG.h; path = Sources/CTextureSerializer_PNG.h; sourceTree = "<group>"; };
+		2191CE74196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureCommiter_PNG.cpp; path = Sources/CTextureCommiter_PNG.cpp; sourceTree = "<group>"; };
+		2191CE75196EE0AF00CE2813 /* CTextureCommiter_PNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTextureCommiter_PNG.h; path = Sources/CTextureCommiter_PNG.h; sourceTree = "<group>"; };
+		2191CE7C196EE95100CE2813 /* adler32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adler32.c; sourceTree = "<group>"; };
+		2191CE7D196EE95100CE2813 /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compress.c; sourceTree = "<group>"; };
+		2191CE7E196EE95100CE2813 /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crc32.c; sourceTree = "<group>"; };
+		2191CE7F196EE95100CE2813 /* crc32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crc32.h; sourceTree = "<group>"; };
+		2191CE80196EE95100CE2813 /* deflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = deflate.c; sourceTree = "<group>"; };
+		2191CE81196EE95100CE2813 /* deflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deflate.h; sourceTree = "<group>"; };
+		2191CE82196EE95100CE2813 /* gzclose.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzclose.c; sourceTree = "<group>"; };
+		2191CE83196EE95100CE2813 /* gzguts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gzguts.h; sourceTree = "<group>"; };
+		2191CE84196EE95100CE2813 /* gzlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzlib.c; sourceTree = "<group>"; };
+		2191CE85196EE95100CE2813 /* gzread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzread.c; sourceTree = "<group>"; };
+		2191CE86196EE95100CE2813 /* gzwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzwrite.c; sourceTree = "<group>"; };
+		2191CE87196EE95100CE2813 /* infback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = infback.c; sourceTree = "<group>"; };
+		2191CE88196EE95100CE2813 /* inffast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inffast.c; sourceTree = "<group>"; };
+		2191CE89196EE95100CE2813 /* inffast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inffast.h; sourceTree = "<group>"; };
+		2191CE8A196EE95100CE2813 /* inffixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inffixed.h; sourceTree = "<group>"; };
+		2191CE8B196EE95100CE2813 /* inflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inflate.c; sourceTree = "<group>"; };
+		2191CE8C196EE95100CE2813 /* inflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inflate.h; sourceTree = "<group>"; };
+		2191CE8D196EE95100CE2813 /* inftrees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inftrees.c; sourceTree = "<group>"; };
+		2191CE8E196EE95100CE2813 /* inftrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inftrees.h; sourceTree = "<group>"; };
+		2191CE8F196EE95100CE2813 /* trees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trees.c; sourceTree = "<group>"; };
+		2191CE90196EE95100CE2813 /* trees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trees.h; sourceTree = "<group>"; };
+		2191CE91196EE95100CE2813 /* uncompr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = uncompr.c; sourceTree = "<group>"; };
+		2191CE92196EE95100CE2813 /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zconf.h; sourceTree = "<group>"; };
+		2191CE93196EE95100CE2813 /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
+		2191CE94196EE95100CE2813 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
+		2191CE95196EE95100CE2813 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
 		219DC4C9180DC0F9001C72D4 /* IOGLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOGLWindow.h; path = Sources/IOGLWindow.h; sourceTree = "<group>"; };
 		219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_win32.cpp; path = Sources/CGraphicsContext_win32.cpp; sourceTree = "<group>"; };
 		219DC4CC180DC465001C72D4 /* COGLWindow_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_win32.cpp; path = Sources/COGLWindow_win32.cpp; sourceTree = "<group>"; };
@@ -821,6 +957,70 @@
 			name = Window;
 			sourceTree = "<group>";
 		};
+		2191CE33196EDBEF00CE2813 /* libpng-1.6.9 */ = {
+			isa = PBXGroup;
+			children = (
+				2191CE34196EDBEF00CE2813 /* png.c */,
+				2191CE35196EDBEF00CE2813 /* png.h */,
+				2191CE36196EDBEF00CE2813 /* pngconf.h */,
+				2191CE37196EDBEF00CE2813 /* pngdebug.h */,
+				2191CE38196EDBEF00CE2813 /* pngerror.c */,
+				2191CE39196EDBEF00CE2813 /* pngget.c */,
+				2191CE3A196EDBEF00CE2813 /* pnginfo.h */,
+				2191CE3B196EDBEF00CE2813 /* pnglibconf.h */,
+				2191CE3C196EDBEF00CE2813 /* pngmem.c */,
+				2191CE3D196EDBEF00CE2813 /* pngpread.c */,
+				2191CE3E196EDBEF00CE2813 /* pngpriv.h */,
+				2191CE3F196EDBEF00CE2813 /* pngread.c */,
+				2191CE40196EDBEF00CE2813 /* pngrio.c */,
+				2191CE41196EDBEF00CE2813 /* pngrtran.c */,
+				2191CE42196EDBEF00CE2813 /* pngrutil.c */,
+				2191CE43196EDBEF00CE2813 /* pngset.c */,
+				2191CE44196EDBEF00CE2813 /* pngstruct.h */,
+				2191CE45196EDBEF00CE2813 /* pngtrans.c */,
+				2191CE46196EDBEF00CE2813 /* pngwio.c */,
+				2191CE47196EDBEF00CE2813 /* pngwrite.c */,
+				2191CE48196EDBEF00CE2813 /* pngwtran.c */,
+				2191CE49196EDBEF00CE2813 /* pngwutil.c */,
+			);
+			name = "libpng-1.6.9";
+			path = "Libraries/libpng-1.6.9";
+			sourceTree = "<group>";
+		};
+		2191CE7B196EE95100CE2813 /* zlib-1.2.8 */ = {
+			isa = PBXGroup;
+			children = (
+				2191CE7C196EE95100CE2813 /* adler32.c */,
+				2191CE7D196EE95100CE2813 /* compress.c */,
+				2191CE7E196EE95100CE2813 /* crc32.c */,
+				2191CE7F196EE95100CE2813 /* crc32.h */,
+				2191CE80196EE95100CE2813 /* deflate.c */,
+				2191CE81196EE95100CE2813 /* deflate.h */,
+				2191CE82196EE95100CE2813 /* gzclose.c */,
+				2191CE83196EE95100CE2813 /* gzguts.h */,
+				2191CE84196EE95100CE2813 /* gzlib.c */,
+				2191CE85196EE95100CE2813 /* gzread.c */,
+				2191CE86196EE95100CE2813 /* gzwrite.c */,
+				2191CE87196EE95100CE2813 /* infback.c */,
+				2191CE88196EE95100CE2813 /* inffast.c */,
+				2191CE89196EE95100CE2813 /* inffast.h */,
+				2191CE8A196EE95100CE2813 /* inffixed.h */,
+				2191CE8B196EE95100CE2813 /* inflate.c */,
+				2191CE8C196EE95100CE2813 /* inflate.h */,
+				2191CE8D196EE95100CE2813 /* inftrees.c */,
+				2191CE8E196EE95100CE2813 /* inftrees.h */,
+				2191CE8F196EE95100CE2813 /* trees.c */,
+				2191CE90196EE95100CE2813 /* trees.h */,
+				2191CE91196EE95100CE2813 /* uncompr.c */,
+				2191CE92196EE95100CE2813 /* zconf.h */,
+				2191CE93196EE95100CE2813 /* zlib.h */,
+				2191CE94196EE95100CE2813 /* zutil.c */,
+				2191CE95196EE95100CE2813 /* zutil.h */,
+			);
+			name = "zlib-1.2.8";
+			path = "Libraries/zlib-1.2.8";
+			sourceTree = "<group>";
+		};
 		A40138BC1754E9CE0056461B /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1039,6 +1239,8 @@
 		A42081941733ABB20004729E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2191CE7B196EE95100CE2813 /* zlib-1.2.8 */,
+				2191CE33196EDBEF00CE2813 /* libpng-1.6.9 */,
 				A4F204D3174287440063AB07 /* glm */,
 				A4F205B5174287450063AB07 /* pugixml */,
 				A46A31FD174D21130044643E /* pvrtextool */,
@@ -1220,6 +1422,8 @@
 				A40D47BA17453AA100CA59D0 /* CShaderSerializer_GLSL.cpp */,
 				A40D47BE17453AC000CA59D0 /* CTextureSerializer_PVR.h */,
 				A40D47BD17453AC000CA59D0 /* CTextureSerializer_PVR.cpp */,
+				2191CE70196EDCDE00CE2813 /* CTextureSerializer_PNG.h */,
+				2191CE6F196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp */,
 				210EFD1B1752674A00DDB182 /* CMeshSerializer_MDL.h */,
 				210EFD1A1752674A00DDB182 /* CMeshSerializer_MDL.cpp */,
 				A49C4E4917BA4B0900C1484F /* CSkeletonSerializer_SK.h */,
@@ -1239,6 +1443,8 @@
 				A46A316917462BA50044643E /* CShaderCommiter_GLSL.cpp */,
 				A46A316D17462BBF0044643E /* CTextureCommiter_PVR.h */,
 				A46A316C17462BBF0044643E /* CTextureCommiter_PVR.cpp */,
+				2191CE75196EE0AF00CE2813 /* CTextureCommiter_PNG.h */,
+				2191CE74196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp */,
 				210EFD181752672500DDB182 /* CMeshCommiter_MDL.h */,
 				210EFD171752672500DDB182 /* CMeshCommiter_MDL.cpp */,
 				A49C4E4F17BA554100C1484F /* CSkeletonCommiter_SK.h */,
@@ -1528,16 +1734,36 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2191CE53196EDBEF00CE2813 /* pnginfo.h in Headers */,
+				2191CE4C196EDBEF00CE2813 /* png.h in Headers */,
+				2191CE9F196EE95100CE2813 /* deflate.h in Headers */,
+				2191CE9C196EE95100CE2813 /* crc32.h in Headers */,
+				2191CEB4196EE95100CE2813 /* inftrees.h in Headers */,
 				21733479196440EB002B3F90 /* IRenderTechniqueBase.h in Headers */,
 				2127E85D1935056100D408C9 /* IEditableLandscape.h in Headers */,
+				2191CE73196EDCDE00CE2813 /* CTextureSerializer_PNG.h in Headers */,
+				2191CE4E196EDBEF00CE2813 /* pngdebug.h in Headers */,
+				2191CEBA196EE95100CE2813 /* zconf.h in Headers */,
+				2191CE59196EDBEF00CE2813 /* pngpriv.h in Headers */,
 				2173347E19644107002B3F90 /* CRenderTechniqueMain.h in Headers */,
+				2191CEB7196EE95100CE2813 /* trees.h in Headers */,
+				2191CEAD196EE95100CE2813 /* inffast.h in Headers */,
+				2191CEA2196EE95100CE2813 /* gzguts.h in Headers */,
 				212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */,
+				2191CEAE196EE95100CE2813 /* inffixed.h in Headers */,
 				2173348319644123002B3F90 /* CRenderTechniqueScreenSpace.h in Headers */,
 				2173348D19644157002B3F90 /* IRenderTechniqueImporter.h in Headers */,
+				2191CEBB196EE95100CE2813 /* zlib.h in Headers */,
 				217334921964416D002B3F90 /* IRenderTechniqueAccessor.h in Headers */,
+				2191CEBE196EE95100CE2813 /* zutil.h in Headers */,
+				2191CEB1196EE95100CE2813 /* inflate.h in Headers */,
 				212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */,
 				2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */,
+				2191CE54196EDBEF00CE2813 /* pnglibconf.h in Headers */,
+				2191CE4D196EDBEF00CE2813 /* pngconf.h in Headers */,
 				217334971964425B002B3F90 /* CRenderPipeline.h in Headers */,
+				2191CE78196EE0B000CE2813 /* CTextureCommiter_PNG.h in Headers */,
+				2191CE64196EDBEF00CE2813 /* pngstruct.h in Headers */,
 				212092B61919674400FFC8D4 /* CSkyBox.h in Headers */,
 				2173348819644139002B3F90 /* CRenderTechniqueWorldSpace.h in Headers */,
 			);
@@ -1614,33 +1840,43 @@
 			files = (
 				21208F991906FB5F00FFC8D4 /* pugixml.cpp in Sources */,
 				21208F9A1906FB5F00FFC8D4 /* IInputContext.cpp in Sources */,
+				2191CEB9196EE95100CE2813 /* uncompr.c in Sources */,
 				21208F9B1906FB5F00FFC8D4 /* CInputContext_ios.cpp in Sources */,
 				21208F9C1906FB5F00FFC8D4 /* CInputContext_osx.cpp in Sources */,
 				21208F9D1906FB5F00FFC8D4 /* CInputContext_win32.cpp in Sources */,
 				21208F9E1906FB5F00FFC8D4 /* CInputContext_ndk.cpp in Sources */,
 				21208F9F1906FB5F00FFC8D4 /* CCommonOS_ios.cpp in Sources */,
 				21208FA01906FB5F00FFC8D4 /* CCommonOS_osx.cpp in Sources */,
+				2191CE66196EDBEF00CE2813 /* pngtrans.c in Sources */,
 				21208FA11906FB5F00FFC8D4 /* CCommonOS_win32.cpp in Sources */,
 				21208FA21906FB5F00FFC8D4 /* CCommonOS_ndk.cpp in Sources */,
 				21208FA31906FB5F00FFC8D4 /* CFPSCounter.cpp in Sources */,
 				21208FA41906FB5F00FFC8D4 /* CTimer.cpp in Sources */,
+				2191CE9E196EE95100CE2813 /* deflate.c in Sources */,
+				2191CEB0196EE95100CE2813 /* inflate.c in Sources */,
 				2173347D19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				21208FA81906FB5F00FFC8D4 /* COGLWindow_ios.cpp in Sources */,
+				2191CEB3196EE95100CE2813 /* inftrees.c in Sources */,
+				2191CE52196EDBEF00CE2813 /* pngget.c in Sources */,
 				2173348C19644157002B3F90 /* IRenderTechniqueImporter.cpp in Sources */,
 				21208FA91906FB5F00FFC8D4 /* COGLWindow_osx.cpp in Sources */,
 				21208FAA1906FB5F00FFC8D4 /* COGLWindow_win32.cpp in Sources */,
 				21208FAB1906FB5F00FFC8D4 /* COGLWindow_ndk.cpp in Sources */,
 				2173348719644139002B3F90 /* CRenderTechniqueWorldSpace.cpp in Sources */,
+				2191CE5D196EDBEF00CE2813 /* pngrio.c in Sources */,
 				21208FAC1906FB5F00FFC8D4 /* IGraphicsContext.cpp in Sources */,
+				2191CE6C196EDBEF00CE2813 /* pngwtran.c in Sources */,
 				21208FAD1906FB5F00FFC8D4 /* CGraphicsContext_ios.cpp in Sources */,
 				21208FAE1906FB5F00FFC8D4 /* CGraphicsContext_osx.cpp in Sources */,
 				21208FAF1906FB5F00FFC8D4 /* CGraphicsContext_win32.cpp in Sources */,
 				21208FB01906FB5F00FFC8D4 /* CGraphicsContext_ndk.cpp in Sources */,
 				21208FB41906FB5F00FFC8D4 /* CBatch.cpp in Sources */,
+				2191CE9B196EE95100CE2813 /* crc32.c in Sources */,
 				21208FB61906FB5F00FFC8D4 /* IGameTransition.cpp in Sources */,
 				21208FB71906FB5F00FFC8D4 /* CGameLoopExecutor.cpp in Sources */,
 				21208FB81906FB5F00FFC8D4 /* CGameLoopExecutor_osx.cpp in Sources */,
 				21208FB91906FB5F00FFC8D4 /* CGameLoopExecutor_ndk.cpp in Sources */,
+				2191CE68196EDBEF00CE2813 /* pngwio.c in Sources */,
 				21208FBA1906FB5F00FFC8D4 /* CGameLoopExecutor_ios.cpp in Sources */,
 				212092BB191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
 				21208FBB1906FB5F00FFC8D4 /* CGameLoopExecutor_win32.cpp in Sources */,
@@ -1651,15 +1887,20 @@
 				21208FBF1906FB5F00FFC8D4 /* CParticleEmitter.cpp in Sources */,
 				21208FC01906FB5F00FFC8D4 /* CModel.cpp in Sources */,
 				21208FC11906FB5F00FFC8D4 /* COcean.cpp in Sources */,
+				2191CE63196EDBEF00CE2813 /* pngset.c in Sources */,
 				21208FC21906FB5F00FFC8D4 /* CLandscape.cpp in Sources */,
 				21208FC31906FB5F00FFC8D4 /* CLandscapeChunk.cpp in Sources */,
+				2191CE99196EE95100CE2813 /* compress.c in Sources */,
 				21208FC41906FB5F00FFC8D4 /* CLandscapeEdges.cpp in Sources */,
 				21208FC61906FB5F00FFC8D4 /* CHeightmapProcessor.cpp in Sources */,
+				2191CEAA196EE95100CE2813 /* infback.c in Sources */,
+				2191CEAC196EE95100CE2813 /* inffast.c in Sources */,
 				21208FC71906FB5F00FFC8D4 /* CQuadTree.cpp in Sources */,
 				21208FC81906FB5F00FFC8D4 /* CCamera.cpp in Sources */,
 				21208FC91906FB5F00FFC8D4 /* CFrustum.cpp in Sources */,
 				2173349B19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */,
 				21208FCA1906FB5F00FFC8D4 /* CLight.cpp in Sources */,
+				2191CE6A196EDBEF00CE2813 /* pngwrite.c in Sources */,
 				21208FCB1906FB5F00FFC8D4 /* CAnimationMixer.cpp in Sources */,
 				21208FCC1906FB5F00FFC8D4 /* CSceneGraph.cpp in Sources */,
 				21208FCD1906FB5F00FFC8D4 /* CSceneFabricator.cpp in Sources */,
@@ -1670,6 +1911,7 @@
 				21208FD11906FB5F00FFC8D4 /* IFabricator.cpp in Sources */,
 				21208FD21906FB5F00FFC8D4 /* IGraph.cpp in Sources */,
 				21208FD31906FB5F00FFC8D4 /* IConfigurationSerializer.cpp in Sources */,
+				2191CE50196EDBEF00CE2813 /* pngerror.c in Sources */,
 				21208FD41906FB5F00FFC8D4 /* CGUITemplateSerializer.cpp in Sources */,
 				21208FD51906FB5F00FFC8D4 /* CConfigurationMaterialSerializer.cpp in Sources */,
 				2127E85C1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
@@ -1677,24 +1919,34 @@
 				212092C01919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */,
 				21208FD61906FB5F00FFC8D4 /* CConfigurationModelSerializer.cpp in Sources */,
 				21208FD71906FB5F00FFC8D4 /* CConfigurationOceanSerializer.cpp in Sources */,
+				2191CE6E196EDBEF00CE2813 /* pngwutil.c in Sources */,
+				2191CE97196EE95100CE2813 /* adler32.c in Sources */,
+				2191CE5F196EDBEF00CE2813 /* pngrtran.c in Sources */,
 				21208FD81906FB5F00FFC8D4 /* CConfigurationLandscapeSerializer.cpp in Sources */,
 				21208FD91906FB5F00FFC8D4 /* CConfigurationParticleEmitterSerializer.cpp in Sources */,
 				21208FDA1906FB5F00FFC8D4 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */,
+				2191CE58196EDBEF00CE2813 /* pngpread.c in Sources */,
 				21208FDB1906FB5F00FFC8D4 /* CConfigurationSSRenderOperationSerializer.cpp in Sources */,
 				21208FDC1906FB5F00FFC8D4 /* CConfigurationORenderOperationSerializer.cpp in Sources */,
 				21208FDD1906FB5F00FFC8D4 /* CConfigurationGameTransitionSerializer.cpp in Sources */,
 				21208FDE1906FB5F00FFC8D4 /* IConfigurationLoadingOperation.cpp in Sources */,
 				21208FDF1906FB5F00FFC8D4 /* CGUITemplateLoadingOperation.cpp in Sources */,
+				2191CEA4196EE95100CE2813 /* gzlib.c in Sources */,
+				2191CEA1196EE95100CE2813 /* gzclose.c in Sources */,
 				21208FE01906FB5F00FFC8D4 /* CConfigurationMaterialLoadingOperation.cpp in Sources */,
 				21208FE11906FB5F00FFC8D4 /* CConfigurationModelLoadingOperation.cpp in Sources */,
+				2191CEB6196EE95100CE2813 /* trees.c in Sources */,
 				21208FE21906FB5F00FFC8D4 /* CConfigurationOceanLoadingOperation.cpp in Sources */,
 				21208FE31906FB5F00FFC8D4 /* CConfigurationLandscapeLoadingOperation.cpp in Sources */,
 				21208FE41906FB5F00FFC8D4 /* CConfigurationParticleEmitterLoadingOperation.cpp in Sources */,
 				21208FE51906FB5F00FFC8D4 /* CConfigurationWSRenderOperationLoadingOperation.cpp in Sources */,
 				21208FE61906FB5F00FFC8D4 /* CConfigurationSSRenderOperationLoadingOperation.cpp in Sources */,
 				21208FE71906FB5F00FFC8D4 /* CConfigurationORenderOperationLoadingOperation.cpp in Sources */,
+				2191CEA8196EE95100CE2813 /* gzwrite.c in Sources */,
 				21208FE81906FB5F00FFC8D4 /* CConfigurationGameTransitionLoadingOperation.cpp in Sources */,
 				21208FE91906FB5F00FFC8D4 /* IConfiguration.cpp in Sources */,
+				2191CE61196EDBEF00CE2813 /* pngrutil.c in Sources */,
+				2191CE5B196EDBEF00CE2813 /* pngread.c in Sources */,
 				21208FEA1906FB5F00FFC8D4 /* CConfigurationGameObjects.cpp in Sources */,
 				21208FEB1906FB5F00FFC8D4 /* CConfigurationAccessor.cpp in Sources */,
 				21208FEC1906FB5F00FFC8D4 /* CCollisionMgr.cpp in Sources */,
@@ -1716,19 +1968,25 @@
 				21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				21208FFC1906FB6000FFC8D4 /* CSkeletonCommiter_SK.cpp in Sources */,
 				21208FFD1906FB6000FFC8D4 /* CSequenceCommiter_SEQ.cpp in Sources */,
+				2191CE56196EDBEF00CE2813 /* pngmem.c in Sources */,
 				21208FFE1906FB6000FFC8D4 /* IResourceSerializer.cpp in Sources */,
 				21208FFF1906FB6000FFC8D4 /* CShaderSerializer_GLSL.cpp in Sources */,
 				217334911964416D002B3F90 /* IRenderTechniqueAccessor.cpp in Sources */,
 				212090001906FB6000FFC8D4 /* CTextureSerializer_PVR.cpp in Sources */,
 				212090011906FB6000FFC8D4 /* CMeshSerializer_MDL.cpp in Sources */,
 				212090021906FB6000FFC8D4 /* CSkeletonSerializer_SK.cpp in Sources */,
+				2191CE72196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */,
 				212090031906FB6000FFC8D4 /* CSequenceSerializer_SEQ.cpp in Sources */,
+				2191CE4B196EDBEF00CE2813 /* png.c in Sources */,
 				212090041906FB6000FFC8D4 /* IResourceLoadingOperation.cpp in Sources */,
 				212090051906FB6000FFC8D4 /* CShaderLoadingOperation.cpp in Sources */,
 				212090061906FB6000FFC8D4 /* CTextureLoadingOperation.cpp in Sources */,
 				212090071906FB6000FFC8D4 /* CMeshLoadingOperation.cpp in Sources */,
+				2191CE77196EE0B000CE2813 /* CTextureCommiter_PNG.cpp in Sources */,
+				2191CEBD196EE95100CE2813 /* zutil.c in Sources */,
 				212090081906FB6000FFC8D4 /* CResourceLoader.cpp in Sources */,
 				212090091906FB6000FFC8D4 /* CResourceAccessor.cpp in Sources */,
+				2191CEA6196EE95100CE2813 /* gzread.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1738,33 +1996,43 @@
 			files = (
 				213265DD1906A4AF001C98F7 /* pugixml.cpp in Sources */,
 				213265DE1906A4AF001C98F7 /* IInputContext.cpp in Sources */,
+				2191CEB8196EE95100CE2813 /* uncompr.c in Sources */,
 				213265DF1906A4AF001C98F7 /* CInputContext_ios.cpp in Sources */,
 				213265E01906A4AF001C98F7 /* CInputContext_osx.cpp in Sources */,
 				213265E11906A4AF001C98F7 /* CInputContext_win32.cpp in Sources */,
 				213265E21906A4AF001C98F7 /* CInputContext_ndk.cpp in Sources */,
 				213265E31906A4AF001C98F7 /* CCommonOS_ios.cpp in Sources */,
 				213265E41906A4AF001C98F7 /* CCommonOS_osx.cpp in Sources */,
+				2191CE65196EDBEF00CE2813 /* pngtrans.c in Sources */,
 				213265E51906A4AF001C98F7 /* CCommonOS_win32.cpp in Sources */,
 				213265E61906A4AF001C98F7 /* CCommonOS_ndk.cpp in Sources */,
 				213265E71906A4AF001C98F7 /* CFPSCounter.cpp in Sources */,
 				213265E81906A4AF001C98F7 /* CTimer.cpp in Sources */,
+				2191CE9D196EE95100CE2813 /* deflate.c in Sources */,
+				2191CEAF196EE95100CE2813 /* inflate.c in Sources */,
 				2173347C19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				213265EC1906A4AF001C98F7 /* COGLWindow_ios.cpp in Sources */,
+				2191CEB2196EE95100CE2813 /* inftrees.c in Sources */,
+				2191CE51196EDBEF00CE2813 /* pngget.c in Sources */,
 				2173348B19644157002B3F90 /* IRenderTechniqueImporter.cpp in Sources */,
 				213265ED1906A4AF001C98F7 /* COGLWindow_osx.cpp in Sources */,
 				213265EE1906A4AF001C98F7 /* COGLWindow_win32.cpp in Sources */,
 				213265EF1906A4AF001C98F7 /* COGLWindow_ndk.cpp in Sources */,
 				2173348619644139002B3F90 /* CRenderTechniqueWorldSpace.cpp in Sources */,
+				2191CE5C196EDBEF00CE2813 /* pngrio.c in Sources */,
 				213265F01906A4AF001C98F7 /* IGraphicsContext.cpp in Sources */,
+				2191CE6B196EDBEF00CE2813 /* pngwtran.c in Sources */,
 				213265F11906A4AF001C98F7 /* CGraphicsContext_ios.cpp in Sources */,
 				213265F21906A4AF001C98F7 /* CGraphicsContext_osx.cpp in Sources */,
 				213265F31906A4AF001C98F7 /* CGraphicsContext_win32.cpp in Sources */,
 				213265F41906A4AF001C98F7 /* CGraphicsContext_ndk.cpp in Sources */,
 				213265F81906A4AF001C98F7 /* CBatch.cpp in Sources */,
+				2191CE9A196EE95100CE2813 /* crc32.c in Sources */,
 				213265FA1906A4AF001C98F7 /* IGameTransition.cpp in Sources */,
 				213265FB1906A4AF001C98F7 /* CGameLoopExecutor.cpp in Sources */,
 				213265FC1906A4AF001C98F7 /* CGameLoopExecutor_osx.cpp in Sources */,
 				213265FD1906A4AF001C98F7 /* CGameLoopExecutor_ndk.cpp in Sources */,
+				2191CE67196EDBEF00CE2813 /* pngwio.c in Sources */,
 				213265FE1906A4AF001C98F7 /* CGameLoopExecutor_ios.cpp in Sources */,
 				212092BA191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
 				213265FF1906A4AF001C98F7 /* CGameLoopExecutor_win32.cpp in Sources */,
@@ -1775,15 +2043,20 @@
 				213266031906A4AF001C98F7 /* CParticleEmitter.cpp in Sources */,
 				213266041906A4AF001C98F7 /* CModel.cpp in Sources */,
 				213266051906A4AF001C98F7 /* COcean.cpp in Sources */,
+				2191CE62196EDBEF00CE2813 /* pngset.c in Sources */,
 				213266061906A4AF001C98F7 /* CLandscape.cpp in Sources */,
 				213266071906A4AF001C98F7 /* CLandscapeChunk.cpp in Sources */,
+				2191CE98196EE95100CE2813 /* compress.c in Sources */,
 				213266081906A4AF001C98F7 /* CLandscapeEdges.cpp in Sources */,
 				2132660A1906A4AF001C98F7 /* CHeightmapProcessor.cpp in Sources */,
+				2191CEA9196EE95100CE2813 /* infback.c in Sources */,
+				2191CEAB196EE95100CE2813 /* inffast.c in Sources */,
 				2132660B1906A4AF001C98F7 /* CQuadTree.cpp in Sources */,
 				2132660C1906A4AF001C98F7 /* CCamera.cpp in Sources */,
 				2132660D1906A4AF001C98F7 /* CFrustum.cpp in Sources */,
 				2173349A19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */,
 				2132660E1906A4AF001C98F7 /* CLight.cpp in Sources */,
+				2191CE69196EDBEF00CE2813 /* pngwrite.c in Sources */,
 				2132660F1906A4AF001C98F7 /* CAnimationMixer.cpp in Sources */,
 				213266101906A4AF001C98F7 /* CSceneGraph.cpp in Sources */,
 				213266111906A4AF001C98F7 /* CSceneFabricator.cpp in Sources */,
@@ -1794,6 +2067,7 @@
 				213266151906A4AF001C98F7 /* IFabricator.cpp in Sources */,
 				213266161906A4AF001C98F7 /* IGraph.cpp in Sources */,
 				213266171906A4AF001C98F7 /* IConfigurationSerializer.cpp in Sources */,
+				2191CE4F196EDBEF00CE2813 /* pngerror.c in Sources */,
 				213266181906A4AF001C98F7 /* CGUITemplateSerializer.cpp in Sources */,
 				213266191906A4AF001C98F7 /* CConfigurationMaterialSerializer.cpp in Sources */,
 				2127E85B1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
@@ -1801,24 +2075,34 @@
 				212092BF1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */,
 				2132661A1906A4AF001C98F7 /* CConfigurationModelSerializer.cpp in Sources */,
 				2132661B1906A4AF001C98F7 /* CConfigurationOceanSerializer.cpp in Sources */,
+				2191CE6D196EDBEF00CE2813 /* pngwutil.c in Sources */,
+				2191CE96196EE95100CE2813 /* adler32.c in Sources */,
+				2191CE5E196EDBEF00CE2813 /* pngrtran.c in Sources */,
 				2132661C1906A4AF001C98F7 /* CConfigurationLandscapeSerializer.cpp in Sources */,
 				2132661D1906A4AF001C98F7 /* CConfigurationParticleEmitterSerializer.cpp in Sources */,
 				2132661E1906A4AF001C98F7 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */,
+				2191CE57196EDBEF00CE2813 /* pngpread.c in Sources */,
 				2132661F1906A4AF001C98F7 /* CConfigurationSSRenderOperationSerializer.cpp in Sources */,
 				213266201906A4AF001C98F7 /* CConfigurationORenderOperationSerializer.cpp in Sources */,
 				213266211906A4AF001C98F7 /* CConfigurationGameTransitionSerializer.cpp in Sources */,
 				213266221906A4AF001C98F7 /* IConfigurationLoadingOperation.cpp in Sources */,
 				213266231906A4AF001C98F7 /* CGUITemplateLoadingOperation.cpp in Sources */,
+				2191CEA3196EE95100CE2813 /* gzlib.c in Sources */,
+				2191CEA0196EE95100CE2813 /* gzclose.c in Sources */,
 				213266241906A4AF001C98F7 /* CConfigurationMaterialLoadingOperation.cpp in Sources */,
 				213266251906A4AF001C98F7 /* CConfigurationModelLoadingOperation.cpp in Sources */,
+				2191CEB5196EE95100CE2813 /* trees.c in Sources */,
 				213266261906A4AF001C98F7 /* CConfigurationOceanLoadingOperation.cpp in Sources */,
 				213266271906A4AF001C98F7 /* CConfigurationLandscapeLoadingOperation.cpp in Sources */,
 				213266281906A4AF001C98F7 /* CConfigurationParticleEmitterLoadingOperation.cpp in Sources */,
 				213266291906A4AF001C98F7 /* CConfigurationWSRenderOperationLoadingOperation.cpp in Sources */,
 				2132662A1906A4AF001C98F7 /* CConfigurationSSRenderOperationLoadingOperation.cpp in Sources */,
 				2132662B1906A4AF001C98F7 /* CConfigurationORenderOperationLoadingOperation.cpp in Sources */,
+				2191CEA7196EE95100CE2813 /* gzwrite.c in Sources */,
 				2132662C1906A4AF001C98F7 /* CConfigurationGameTransitionLoadingOperation.cpp in Sources */,
 				2132662D1906A4AF001C98F7 /* IConfiguration.cpp in Sources */,
+				2191CE60196EDBEF00CE2813 /* pngrutil.c in Sources */,
+				2191CE5A196EDBEF00CE2813 /* pngread.c in Sources */,
 				2132662E1906A4AF001C98F7 /* CConfigurationGameObjects.cpp in Sources */,
 				2132662F1906A4AF001C98F7 /* CConfigurationAccessor.cpp in Sources */,
 				213266301906A4AF001C98F7 /* CCollisionMgr.cpp in Sources */,
@@ -1840,19 +2124,25 @@
 				21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				213266401906A4AF001C98F7 /* CSkeletonCommiter_SK.cpp in Sources */,
 				213266411906A4AF001C98F7 /* CSequenceCommiter_SEQ.cpp in Sources */,
+				2191CE55196EDBEF00CE2813 /* pngmem.c in Sources */,
 				213266421906A4AF001C98F7 /* IResourceSerializer.cpp in Sources */,
 				213266431906A4AF001C98F7 /* CShaderSerializer_GLSL.cpp in Sources */,
 				217334901964416D002B3F90 /* IRenderTechniqueAccessor.cpp in Sources */,
 				213266441906A4AF001C98F7 /* CTextureSerializer_PVR.cpp in Sources */,
 				213266451906A4AF001C98F7 /* CMeshSerializer_MDL.cpp in Sources */,
 				213266461906A4AF001C98F7 /* CSkeletonSerializer_SK.cpp in Sources */,
+				2191CE71196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */,
 				213266471906A4AF001C98F7 /* CSequenceSerializer_SEQ.cpp in Sources */,
+				2191CE4A196EDBEF00CE2813 /* png.c in Sources */,
 				213266481906A4AF001C98F7 /* IResourceLoadingOperation.cpp in Sources */,
 				213266491906A4AF001C98F7 /* CShaderLoadingOperation.cpp in Sources */,
 				2132664A1906A4AF001C98F7 /* CTextureLoadingOperation.cpp in Sources */,
 				2132664B1906A4AF001C98F7 /* CMeshLoadingOperation.cpp in Sources */,
+				2191CE76196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp in Sources */,
+				2191CEBC196EE95100CE2813 /* zutil.c in Sources */,
 				2132664C1906A4AF001C98F7 /* CResourceLoader.cpp in Sources */,
 				2132664D1906A4AF001C98F7 /* CResourceAccessor.cpp in Sources */,
+				2191CEA5196EE95100CE2813 /* gzread.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

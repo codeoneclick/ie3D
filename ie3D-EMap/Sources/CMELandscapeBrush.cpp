@@ -17,7 +17,7 @@
 #include "CCamera.h"
 
 CMELandscapeBrush::CMELandscapeBrush(CSharedResourceAccessorRef resourceAccessor,
-                               ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
+                                     ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_size(4),
 m_landscape(nullptr)
@@ -113,7 +113,7 @@ void CMELandscapeBrush::createMesh(f32 radius)
     }
     indexBuffer->unlock();
     
-    m_mesh = CMesh::constructCustomMesh("selectionArea", vertexBuffer, indexBuffer,
+    m_mesh = CMesh::constructCustomMesh("landscape.brush", vertexBuffer, indexBuffer,
                                         glm::vec3(4096.0), glm::vec3(4096.0));
     assert(m_mesh != nullptr);
 }

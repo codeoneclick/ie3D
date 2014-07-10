@@ -25,5 +25,4 @@ public:
     void commit(void);
 };
 
-
 #endif 
