@@ -205,5 +205,5 @@ void CMainWindow::setSmoothCoefficient(ui32)
 
 void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
-    
+    std::cout<<"Texture"<<std::endl;
 }
