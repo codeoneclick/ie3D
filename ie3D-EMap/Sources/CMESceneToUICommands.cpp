@@ -12,7 +12,8 @@ CMESceneToUICommands::CMESceneToUICommands(void) :
 m_setBrushSizeCommand(nullptr),
 m_setBrushStrengthCommnand(nullptr),
 m_setFalloffCoefficientCommand(nullptr),
-m_setSmoothCoefficientCommand(nullptr)
+m_setSmoothCoefficientCommand(nullptr),
+m_setTextureSampler(nullptr)
 {
     
 }
@@ -71,5 +72,18 @@ void CMESceneToUICommands::executeSetSmoothCoefficientCommand(ui32 value)
     if(m_setSmoothCoefficientCommand != nullptr)
     {
         m_setSmoothCoefficientCommand(value);
+    }
+}
+
+void CMESceneToUICommands::connectSetTextureSamplerCommand(const __SET_TEXTURE_SAMPLER& command)
+{
+    m_setTextureSampler = command;
+}
+
+void CMESceneToUICommands::executeSetTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
+{
+    if(m_setTextureSampler != nullptr)
+    {
+        m_setTextureSampler(texture, sampler);
     }
 }

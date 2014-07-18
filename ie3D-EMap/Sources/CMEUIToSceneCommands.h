@@ -20,7 +20,6 @@ private:
     typedef std::function<void(ui32)> __SET_BRUSH_STRENGTH_COMMAND;
     typedef std::function<void(ui32)> __SET_FALLOFF_COEFFICIENT_COMMAND;
     typedef std::function<void(ui32)> __SET_SMOOTH_COEFFICIENT_COMMAND;
-    
     typedef std::function<void(const std::string&, E_SHADER_SAMPLER)> __SET_TEXTURE_SAMPLER;
     
     __SET_BRUSH_SIZE_COMMAND m_setBrushSizeCommand;

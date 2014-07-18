@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "HCommon.h"
 #include "HMEDeclaration.h"
+#include "HEnums.h"
 
 class CMESceneController;
 class CMESceneTransition;
@@ -29,6 +30,7 @@ protected:
     void setBrushStrength(ui32 value);
     void setFalloffCoefficient(ui32 value);
     void setSmoothCoefficient(ui32 value);
+    void setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler);
     
     i32 m_previousBrushSize;
     std::string m_recentFilename;

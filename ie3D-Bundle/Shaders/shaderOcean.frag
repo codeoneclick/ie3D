@@ -60,7 +60,7 @@ void main(void)
     vDiffuseColor.a = 1.0;
     
     vReflectionColor = mix(vDiffuseColor, vReflectionColor, vReflectionColor.a);
-    vRefractionColor = mix(vDiffuseColor, vRefractionColor, vHeightmapColor.a * 2.0 * fresnel);
+    vRefractionColor = mix(vDiffuseColor, vRefractionColor, vHeightmapColor.a * 4.0 * fresnel);
     
     gl_FragColor = mix(vReflectionColor, vRefractionColor, fresnel) + vec4(fSpecularFactor);
 }

@@ -66,8 +66,8 @@ m_prerenderedSplattingNormalTexture(nullptr)
         material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSizeX, m_heightmapSizeZ) / m_splattingTillingFactor,
                                               "IN_SplattingTillingFactor");
 #endif
-        material->getShader()->setFloatCustom(192.0, "IN_fogLinearStart");
-        material->getShader()->setFloatCustom(396.0, "IN_fogLinearEnd");
+        material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
+        material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
     };
 }
 

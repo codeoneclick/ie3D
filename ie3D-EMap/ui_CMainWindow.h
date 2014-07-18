@@ -13,7 +13,6 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -43,13 +42,13 @@ public:
     QWidget *tab_2;
     QPushButton *m_texture01Btn;
     QLabel *m_texture01Label;
-    QGraphicsView *m_texture01Img;
     QLabel *m_texture02Label;
-    QGraphicsView *m_texture02Img;
     QPushButton *m_texture02Btn;
     QLabel *m_texture03Label;
-    QGraphicsView *m_texture03Img;
     QPushButton *m_texture03Btn;
+    QLabel *m_texture01Img;
+    QLabel *m_texture02Img;
+    QLabel *m_texture03Img;
     QGroupBox *groupBox;
     QWidget *m_oglWindow;
     QMenuBar *menuBar;
@@ -142,16 +141,10 @@ public:
         font1.setBold(true);
         font1.setWeight(75);
         m_texture01Label->setFont(font1);
-        m_texture01Img = new QGraphicsView(tab_2);
-        m_texture01Img->setObjectName(QStringLiteral("m_texture01Img"));
-        m_texture01Img->setGeometry(QRect(10, 40, 128, 128));
         m_texture02Label = new QLabel(tab_2);
         m_texture02Label->setObjectName(QStringLiteral("m_texture02Label"));
         m_texture02Label->setGeometry(QRect(10, 180, 221, 16));
         m_texture02Label->setFont(font1);
-        m_texture02Img = new QGraphicsView(tab_2);
-        m_texture02Img->setObjectName(QStringLiteral("m_texture02Img"));
-        m_texture02Img->setGeometry(QRect(10, 210, 128, 128));
         m_texture02Btn = new QPushButton(tab_2);
         m_texture02Btn->setObjectName(QStringLiteral("m_texture02Btn"));
         m_texture02Btn->setGeometry(QRect(150, 210, 91, 32));
@@ -159,13 +152,28 @@ public:
         m_texture03Label->setObjectName(QStringLiteral("m_texture03Label"));
         m_texture03Label->setGeometry(QRect(10, 350, 221, 16));
         m_texture03Label->setFont(font1);
-        m_texture03Img = new QGraphicsView(tab_2);
-        m_texture03Img->setObjectName(QStringLiteral("m_texture03Img"));
-        m_texture03Img->setGeometry(QRect(10, 380, 128, 128));
         m_texture03Btn = new QPushButton(tab_2);
         m_texture03Btn->setObjectName(QStringLiteral("m_texture03Btn"));
         m_texture03Btn->setGeometry(QRect(150, 380, 91, 32));
+        m_texture01Img = new QLabel(tab_2);
+        m_texture01Img->setObjectName(QStringLiteral("m_texture01Img"));
+        m_texture01Img->setGeometry(QRect(10, 40, 128, 128));
+        m_texture02Img = new QLabel(tab_2);
+        m_texture02Img->setObjectName(QStringLiteral("m_texture02Img"));
+        m_texture02Img->setGeometry(QRect(10, 210, 128, 128));
+        m_texture03Img = new QLabel(tab_2);
+        m_texture03Img->setObjectName(QStringLiteral("m_texture03Img"));
+        m_texture03Img->setGeometry(QRect(10, 380, 128, 128));
         tabWidget->addTab(tab_2, QString());
+        m_texture01Btn->raise();
+        m_texture01Label->raise();
+        m_texture02Label->raise();
+        m_texture02Btn->raise();
+        m_texture03Label->raise();
+        m_texture03Btn->raise();
+        m_texture01Img->raise();
+        m_texture02Img->raise();
+        m_texture03Img->raise();
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setGeometry(QRect(10, 0, 740, 735));
@@ -208,6 +216,9 @@ public:
         m_texture02Btn->setText(QApplication::translate("CMainWindow", "Open...", 0));
         m_texture03Label->setText(QApplication::translate("CMainWindow", "Texture sampler 3:", 0));
         m_texture03Btn->setText(QApplication::translate("CMainWindow", "Open...", 0));
+        m_texture01Img->setText(QString());
+        m_texture02Img->setText(QString());
+        m_texture03Img->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("CMainWindow", "Textures", 0));
         groupBox->setTitle(QApplication::translate("CMainWindow", "3D", 0));
     } // retranslateUi

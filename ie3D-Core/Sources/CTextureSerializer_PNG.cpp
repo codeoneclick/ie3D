@@ -138,6 +138,23 @@ void CTextureSerializer_PNG::serialize(void)
     png_destroy_read_struct(&pngstruct, &pnginfo, &pngendinfo);
     delete[] rowpointers;
     
+    switch (format)
+    {
+        case PNG_COLOR_TYPE_RGB:
+        {
+            format = GL_RGB;
+        }
+            break;
+        case PNG_COLOR_TYPE_RGB_ALPHA:
+        {
+            format = GL_RGBA;
+        }
+            break;
+        default:
+            assert(false);
+            break;
+    }
+    
     IResourceSerializer::closeStream(filestream);
     
     CSharedTextureData textureData = std::make_shared<CTextureData>(width,
@@ -146,7 +163,7 @@ void CTextureSerializer_PNG::serialize(void)
                                                                     format,
                                                                     8,
                                                                     0,
-                                                                    false);;
+                                                                    false);
     
     m_status = E_SERIALIZER_STATUS_SUCCESS;
     IResourceSerializer::onResourceDataSerializationFinished(textureData);

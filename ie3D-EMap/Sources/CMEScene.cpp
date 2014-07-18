@@ -47,14 +47,14 @@ CMEScene::~CMEScene(void)
 void CMEScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->createCamera(90.0, 0.01, 1024.0,
+    m_camera = m_root->createCamera(45.0, 0.01, 1024.0,
                                     glm::ivec4(0, 0,
                                                m_root->getScreenWidth(),
                                                m_root->getScreenHeight()));
     
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
-    m_camera->Set_Distance(32.0f);
+    m_camera->Set_Distance(64.0f);
     m_camera->Set_Height(32.0f);
     
     m_root->setCamera(m_camera);
@@ -231,4 +231,5 @@ void CMEScene::setTextureSampler(const std::string& filename, E_SHADER_SAMPLER s
     CSharedTexture texture = m_root->getResourceAccessor()->getTexture(filename);
     assert(texture != nullptr);
     m_landscape->setTexture(texture, sampler);
+    m_sceneToUICommands->executeSetTextureSampler(texture, sampler);
 }

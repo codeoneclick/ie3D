@@ -69,6 +69,7 @@ void CMainWindow::execute(void)
     m_sceneToUICommands->connectSetBrushStrengthCommand(std::bind(&CMainWindow::setBrushStrength, this, std::placeholders::_1));
     m_sceneToUICommands->connectSetFalloffCoefficientCommand(std::bind(&CMainWindow::setFalloffCoefficient, this, std::placeholders::_1));
     m_sceneToUICommands->connectSetSmoothCoefficientCommand(std::bind(&CMainWindow::setSmoothCoefficient, this, std::placeholders::_1));
+    m_sceneToUICommands->connectSetTextureSamplerCommand(std::bind(&CMainWindow::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
     
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)view);
     m_editableSceneController = std::make_shared<CMESceneController>();
@@ -133,18 +134,15 @@ void CMainWindow::on_m_texture01Btn_pressed()
 void CMainWindow::on_m_texture01Btn_clicked()
 {
     QString recentFilename = m_recentFilename.length() != 0 ? QString(m_recentFilename.c_str()) : "";
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.pvr)"));
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.*)"));
     if (filename.isEmpty())
     {
         return;
     }
     else
     {
-        QImage image;
-        if(image.load(filename))
-        {
-            std::cout<<"image "<<image.width()<<"x"<<image.height()<<std::endl;
-        }
+        QPixmap pixmap(filename);
+        ui->m_texture01Img->setPixmap(pixmap);
         m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSampler(filename.toUtf8().constData(), E_SHADER_SAMPLER_01);
     }
 }
@@ -152,18 +150,15 @@ void CMainWindow::on_m_texture01Btn_clicked()
 void CMainWindow::on_m_texture02Btn_clicked()
 {
     QString recentFilename = m_recentFilename.length() != 0 ? QString(m_recentFilename.c_str()) : "";
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.pvr)"));
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.*)"));
     if (filename.isEmpty())
     {
         return;
     }
     else
     {
-        QImage image;
-        if(image.load(filename))
-        {
-            std::cout<<"image "<<image.width()<<"x"<<image.height()<<std::endl;
-        }
+        QPixmap pixmap(filename);
+        ui->m_texture02Img->setPixmap(pixmap);
         m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSampler(filename.toUtf8().constData(), E_SHADER_SAMPLER_02);
     }
 }
@@ -171,18 +166,15 @@ void CMainWindow::on_m_texture02Btn_clicked()
 void CMainWindow::on_m_texture03Btn_clicked()
 {
     QString recentFilename = m_recentFilename.length() != 0 ? QString(m_recentFilename.c_str()) : "";
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.pvr)"));
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.*)"));
     if (filename.isEmpty())
     {
         return;
     }
     else
     {
-        QImage image;
-        if(image.load(filename))
-        {
-            std::cout<<"image "<<image.width()<<"x"<<image.height()<<std::endl;
-        }
+        QPixmap pixmap(filename);
+        ui->m_texture03Img->setPixmap(pixmap);
         m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSampler(filename.toUtf8().constData(), E_SHADER_SAMPLER_03);
     }
 }
@@ -207,6 +199,11 @@ void CMainWindow::setFalloffCoefficient(ui32)
 }
 
 void CMainWindow::setSmoothCoefficient(ui32)
+{
+    
+}
+
+void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
     
 }
