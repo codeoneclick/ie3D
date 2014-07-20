@@ -45,11 +45,15 @@ m_prerenderedSplattingNormalTexture(nullptr)
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
 #if defined(__OSX__)
-        material->getShader()->setFloatCustom(m_splattingTillingFactor, "IN_SplattingTillingFactor");
+        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
+        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
+        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
 #elif defined(__IOS__)
         if(g_highPerformancePlatforms.count(getPlatform()) != 0)
         {
-            material->getShader()->setFloatCustom(m_splattingTillingFactor, "IN_SplattingTillingFactor");
+            material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
+            material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
+            material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
         }
         else
         {
@@ -93,9 +97,9 @@ void CLandscapeChunk::setMesh(CSharedMeshRef mesh,
     m_heightmapSizeZ = heightmapSizeZ;
 }
 
-void CLandscapeChunk::setSplattingSettings(f32 splattingTillingFactor)
+void CLandscapeChunk::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 {
-    m_splattingTillingFactor = splattingTillingFactor;
+    m_tillingTexcoord[sampler] = value;
 }
 
 void CLandscapeChunk::setPrerenderedSplattingDiffuseTexture(CSharedTextureRef texture)
@@ -143,6 +147,7 @@ void CLandscapeChunk::onSceneUpdate(f32 deltatime)
 void CLandscapeChunk::onResourceLoaded(ISharedResourceRef resource, bool success)
 {
     IGameObject::onResourceLoaded(resource, success);
+    IResourceLoadingHandler::onResourceLoaded(resource, success);
 }
 
 void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)

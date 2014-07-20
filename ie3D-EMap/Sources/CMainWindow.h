@@ -5,6 +5,7 @@
 #include "HCommon.h"
 #include "HMEDeclaration.h"
 #include "HEnums.h"
+#include "IConfiguration.h"
 
 class CMESceneController;
 class CMESceneTransition;
@@ -13,7 +14,7 @@ namespace Ui {
     class CMainWindow;
 }
 
-class CMainWindow : public QMainWindow
+class CMainWindow : public QMainWindow, public IConfigurationLoadingHandler, public std::enable_shared_from_this<CMainWindow>
 {
     Q_OBJECT
     
@@ -31,6 +32,8 @@ protected:
     void setFalloffCoefficient(ui32 value);
     void setSmoothCoefficient(ui32 value);
     void setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler);
+    
+    void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
     i32 m_previousBrushSize;
     std::string m_recentFilename;
@@ -60,6 +63,12 @@ private slots:
     void on_m_texture02Btn_clicked();
 
     void on_m_texture03Btn_clicked();
+
+    void on_m_textureTilling01SpinBox_valueChanged(int arg1);
+
+    void on_m_textureTilling02SpinBox_valueChanged(int arg1);
+
+    void on_m_textureTilling03SpinBox_valueChanged(int arg1);
 
 private:
     

@@ -339,6 +339,12 @@
 		2191CEBC196EE95100CE2813 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE94196EE95100CE2813 /* zutil.c */; };
 		2191CEBD196EE95100CE2813 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE94196EE95100CE2813 /* zutil.c */; };
 		2191CEBE196EE95100CE2813 /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE95196EE95100CE2813 /* zutil.h */; };
+		21C409A5197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
+		21C409A6197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
+		21C409A7197B0B4B0063D62D /* CMeshSerializer_MDL_01.h in Headers */ = {isa = PBXBuildFile; fileRef = 21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */; };
+		21C409AA197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A8197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp */; };
+		21C409AB197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A8197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp */; };
+		21C409AC197B0BA40063D62D /* CMeshCommiter_MDL_01.h in Headers */ = {isa = PBXBuildFile; fileRef = 21C409A9197B0BA40063D62D /* CMeshCommiter_MDL_01.h */; };
 		21D0712B181DA5620019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		21D07238181DA6E60019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
 		21D07239181DA6EB0019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B217423E4D0063AB07 /* OpenGLES.framework */; };
@@ -477,6 +483,10 @@
 		219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCommonOS_win32.cpp; path = Sources/CCommonOS_win32.cpp; sourceTree = "<group>"; };
 		21ADAA0518214AD00082E8BA /* CCommonOS_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CCommonOS_osx.cpp; path = Sources/CCommonOS_osx.cpp; sourceTree = "<group>"; };
 		21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CInputContext_osx.cpp; path = Sources/CInputContext_osx.cpp; sourceTree = "<group>"; };
+		21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshSerializer_MDL_01.cpp; path = Sources/CMeshSerializer_MDL_01.cpp; sourceTree = "<group>"; };
+		21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshSerializer_MDL_01.h; path = Sources/CMeshSerializer_MDL_01.h; sourceTree = "<group>"; };
+		21C409A8197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshCommiter_MDL_01.cpp; path = Sources/CMeshCommiter_MDL_01.cpp; sourceTree = "<group>"; };
+		21C409A9197B0BA40063D62D /* CMeshCommiter_MDL_01.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshCommiter_MDL_01.h; path = Sources/CMeshCommiter_MDL_01.h; sourceTree = "<group>"; };
 		21D0712A181DA5620019D264 /* libie3DCore-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DCore-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21DEC3E31903F07B00B41221 /* IInputContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IInputContext.cpp; path = Sources/IInputContext.cpp; sourceTree = "<group>"; };
 		21E4D58818658466006F84D6 /* IConfiguration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IConfiguration.cpp; path = Sources/IConfiguration.cpp; sourceTree = "<group>"; };
@@ -1426,6 +1436,8 @@
 				2191CE6F196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp */,
 				210EFD1B1752674A00DDB182 /* CMeshSerializer_MDL.h */,
 				210EFD1A1752674A00DDB182 /* CMeshSerializer_MDL.cpp */,
+				21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */,
+				21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */,
 				A49C4E4917BA4B0900C1484F /* CSkeletonSerializer_SK.h */,
 				A49C4E4817BA4B0800C1484F /* CSkeletonSerializer_SK.cpp */,
 				A49C4E4C17BA4B6200C1484F /* CSequenceSerializer_SEQ.h */,
@@ -1447,6 +1459,8 @@
 				2191CE74196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp */,
 				210EFD181752672500DDB182 /* CMeshCommiter_MDL.h */,
 				210EFD171752672500DDB182 /* CMeshCommiter_MDL.cpp */,
+				21C409A9197B0BA40063D62D /* CMeshCommiter_MDL_01.h */,
+				21C409A8197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp */,
 				A49C4E4F17BA554100C1484F /* CSkeletonCommiter_SK.h */,
 				A49C4E4E17BA554000C1484F /* CSkeletonCommiter_SK.cpp */,
 				A49C4E5217BA557300C1484F /* CSequenceCommiter_SEQ.h */,
@@ -1748,10 +1762,12 @@
 				2173347E19644107002B3F90 /* CRenderTechniqueMain.h in Headers */,
 				2191CEB7196EE95100CE2813 /* trees.h in Headers */,
 				2191CEAD196EE95100CE2813 /* inffast.h in Headers */,
+				21C409A7197B0B4B0063D62D /* CMeshSerializer_MDL_01.h in Headers */,
 				2191CEA2196EE95100CE2813 /* gzguts.h in Headers */,
 				212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */,
 				2191CEAE196EE95100CE2813 /* inffixed.h in Headers */,
 				2173348319644123002B3F90 /* CRenderTechniqueScreenSpace.h in Headers */,
+				21C409AC197B0BA40063D62D /* CMeshCommiter_MDL_01.h in Headers */,
 				2173348D19644157002B3F90 /* IRenderTechniqueImporter.h in Headers */,
 				2191CEBB196EE95100CE2813 /* zlib.h in Headers */,
 				217334921964416D002B3F90 /* IRenderTechniqueAccessor.h in Headers */,
@@ -1954,6 +1970,7 @@
 				21208FEF1906FB5F00FFC8D4 /* CQuad.cpp in Sources */,
 				21208FF01906FB5F00FFC8D4 /* CTexture.cpp in Sources */,
 				21208FF11906FB6000FFC8D4 /* CShader.cpp in Sources */,
+				21C409A6197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */,
 				21208FF21906FB6000FFC8D4 /* CIndexBuffer.cpp in Sources */,
 				21208FF31906FB6000FFC8D4 /* CVertexBuffer.cpp in Sources */,
 				21208FF41906FB6000FFC8D4 /* CMesh.cpp in Sources */,
@@ -1978,6 +1995,7 @@
 				2191CE72196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */,
 				212090031906FB6000FFC8D4 /* CSequenceSerializer_SEQ.cpp in Sources */,
 				2191CE4B196EDBEF00CE2813 /* png.c in Sources */,
+				21C409AB197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp in Sources */,
 				212090041906FB6000FFC8D4 /* IResourceLoadingOperation.cpp in Sources */,
 				212090051906FB6000FFC8D4 /* CShaderLoadingOperation.cpp in Sources */,
 				212090061906FB6000FFC8D4 /* CTextureLoadingOperation.cpp in Sources */,
@@ -2110,6 +2128,7 @@
 				213266331906A4AF001C98F7 /* CQuad.cpp in Sources */,
 				213266341906A4AF001C98F7 /* CTexture.cpp in Sources */,
 				213266351906A4AF001C98F7 /* CShader.cpp in Sources */,
+				21C409A5197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */,
 				213266361906A4AF001C98F7 /* CIndexBuffer.cpp in Sources */,
 				213266371906A4AF001C98F7 /* CVertexBuffer.cpp in Sources */,
 				213266381906A4AF001C98F7 /* CMesh.cpp in Sources */,
@@ -2134,6 +2153,7 @@
 				2191CE71196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */,
 				213266471906A4AF001C98F7 /* CSequenceSerializer_SEQ.cpp in Sources */,
 				2191CE4A196EDBEF00CE2813 /* png.c in Sources */,
+				21C409AA197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp in Sources */,
 				213266481906A4AF001C98F7 /* IResourceLoadingOperation.cpp in Sources */,
 				213266491906A4AF001C98F7 /* CShaderLoadingOperation.cpp in Sources */,
 				2132664A1906A4AF001C98F7 /* CTextureLoadingOperation.cpp in Sources */,

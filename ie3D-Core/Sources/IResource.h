@@ -17,25 +17,23 @@ class IResourceLoadingHandler
 {
 public:
     
-    typedef std::shared_ptr<std::function<void(ISharedResourceRef)>> RESOURCE_LOADING_HANDLER_FUNCTION;
+    typedef std::function<void(ISharedResourceRef)> RESOURCE_LOADING_COMMAND;
     
 private:
-    
-    friend class IResource;
     
 protected:
     
     IResourceLoadingHandler(void);
-    std::array<std::set<RESOURCE_LOADING_HANDLER_FUNCTION>, E_RESOURCE_CLASS_MAX> m_resourceLoadingHandlers;
-    
-    virtual void onResourceLoaded(ISharedResourceRef resource, bool success);
+    std::vector<RESOURCE_LOADING_COMMAND> m_commands;
+    std::set<ISharedResource> m_resources;
     
 public:
     
     virtual ~IResourceLoadingHandler(void);
     
-    void registerResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler, E_RESOURCE_CLASS resourceClass);
-    void unregisterResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler, E_RESOURCE_CLASS resourceClass);
+    virtual void onResourceLoaded(ISharedResourceRef resource, bool success);
+    void addResourceLoadingCommand(const RESOURCE_LOADING_COMMAND& command);
+    void removeResourceLoadingCommand(const RESOURCE_LOADING_COMMAND& command);
 };
 
 class IResourceData : public std::enable_shared_from_this<IResourceData>
@@ -89,8 +87,8 @@ public:
     virtual bool isLoaded(void) const;
     virtual bool isCommited(void) const;
     
-    void registerLoadingHandler(ISharedResourceLoadingHandlerRef handler);
-    void unregisterLoadingHandler(ISharedResourceLoadingHandlerRef handler);
+    void addLoadingHandler(ISharedResourceLoadingHandlerRef handler);
+    void removeLoadingHandler(ISharedResourceLoadingHandlerRef handler);
 };
 
 #endif 

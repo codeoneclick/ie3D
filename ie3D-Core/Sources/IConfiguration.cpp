@@ -60,31 +60,32 @@ IConfigurationLoadingHandler::IConfigurationLoadingHandler(void)
 
 IConfigurationLoadingHandler::~IConfigurationLoadingHandler(void)
 {
-    std::for_each(m_configurationLoadingHandlers.begin(), m_configurationLoadingHandlers.end(),
-                  [](std::set<CONFIGURATION_LOADING_HANDLER_FUNCTION>& iterator){
-                      iterator.clear();
-                  });
+
 }
 
 void IConfigurationLoadingHandler::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     if(success)
     {
-        const auto& iterator = m_configurationLoadingHandlers.at(configuration->getConfigurationClass());
-        std::for_each(iterator.begin(), iterator.end(), [configuration](CONFIGURATION_LOADING_HANDLER_FUNCTION function){
-            (*function)(configuration);
+        m_configurations.insert(configuration);
+        std::for_each(m_commands.begin(), m_commands.end(), [configuration](CONFIGURATION_LOADING_COMMAND command){
+            command(configuration);
         });
     }
 }
 
-void IConfigurationLoadingHandler::registerConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass)
+void IConfigurationLoadingHandler::addConfigurationLoadingCommand(const CONFIGURATION_LOADING_COMMAND& command)
 {
-    m_configurationLoadingHandlers.at(configurationClass).insert(handler);
+    std::for_each(m_configurations.begin(), m_configurations.end(), [command](ISharedConfiguration configuration){
+        command(configuration);
+    });
+    m_commands.push_back(command);
 }
 
-void IConfigurationLoadingHandler::unregisterConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass)
+void IConfigurationLoadingHandler::removeConfigurationLoadingCommand(const CONFIGURATION_LOADING_COMMAND& command)
 {
-    m_configurationLoadingHandlers.at(configurationClass).erase(handler);
+    /*const auto& iterator = std::find(m_commands.begin(), m_commands.end(), command);
+    m_commands.erase(iterator);*/
 }
 
 IConfiguration::IConfiguration(E_CONFIGURATION_CLASS configurationClass) :

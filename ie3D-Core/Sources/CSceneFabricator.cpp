@@ -49,7 +49,7 @@ CSharedModel CSceneFabricator::createModel(const std::string& filename)
 	assert(m_renderTechniqueAccessor != nullptr);
     CSharedModel model = std::make_shared<CModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
-    m_configurationAccessor->LoadModelConfiguration(filename, model);
+    m_configurationAccessor->loadModelConfiguration(filename, model);
     m_gameObjectsContainer.insert(model);
     return model;
 }
@@ -65,7 +65,7 @@ CSharedOcean CSceneFabricator::createOcean(const std::string &filename)
 	assert(m_renderTechniqueAccessor != nullptr);
     CSharedOcean ocean = std::make_shared<COcean>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
-    m_configurationAccessor->LoadOceanConfiguration(filename, ocean);
+    m_configurationAccessor->loadOceanConfiguration(filename, ocean);
     m_gameObjectsContainer.insert(ocean);
     return ocean;
 }
@@ -81,7 +81,7 @@ CSharedLandscape CSceneFabricator::createLandscape(const std::string &filename)
 	assert(m_renderTechniqueAccessor != nullptr);
     CSharedLandscape landscape = std::make_shared<CLandscape>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
-    m_configurationAccessor->LoadLandscapeConfiguration(filename, landscape);
+    m_configurationAccessor->loadLandscapeConfiguration(filename, landscape);
     m_gameObjectsContainer.insert(landscape);
     return landscape;
 }
@@ -97,7 +97,7 @@ CSharedParticleEmitter CSceneFabricator::createParticleEmitter(const std::string
 	assert(m_renderTechniqueAccessor != nullptr);
     CSharedParticleEmitter particleEmitter = std::make_shared<CParticleEmitter>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
-    m_configurationAccessor->LoadParticleEmitterConfiguration(filename, particleEmitter);
+    m_configurationAccessor->loadParticleEmitterConfiguration(filename, particleEmitter);
     m_gameObjectsContainer.insert(particleEmitter);
     return particleEmitter;
 }

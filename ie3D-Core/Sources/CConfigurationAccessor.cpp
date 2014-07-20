@@ -14,6 +14,7 @@
 #include "CConfigurationLandscapeLoadingOperation.h"
 #include "CConfigurationParticleEmitterLoadingOperation.h"
 #include "CConfigurationGameTransitionLoadingOperation.h"
+#include "CConfigurationMaterialLoadingOperation.h"
 
 CConfigurationAccessor::CConfigurationAccessor(void)
 {
@@ -25,7 +26,18 @@ CConfigurationAccessor::~CConfigurationAccessor(void)
     
 }
 
-void CConfigurationAccessor::LoadModelConfiguration(const std::string& filename,
+void CConfigurationAccessor::loadMaterialConfiguration(const std::string& filename,
+                               ISharedConfigurationLoadingHandlerRef handler)
+{
+    std::shared_ptr<CConfigurationMaterialLoadingOperation> operation = std::make_shared<CConfigurationMaterialLoadingOperation>();
+    std::shared_ptr<CConfigurationMaterial> materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(operation->serialize(filename));
+    assert(materialConfiguration != nullptr);
+    assert(handler != nullptr);
+    handler->onConfigurationLoaded(materialConfiguration, true);
+    
+}
+
+void CConfigurationAccessor::loadModelConfiguration(const std::string& filename,
                                                     ISharedConfigurationLoadingHandlerRef handler)
 {
     std::shared_ptr<CConfigurationModelLoadingOperation> operation = std::make_shared<CConfigurationModelLoadingOperation>();
@@ -35,7 +47,7 @@ void CConfigurationAccessor::LoadModelConfiguration(const std::string& filename,
     handler->onConfigurationLoaded(modelConfiguration, true);
 }
 
-void CConfigurationAccessor::LoadOceanConfiguration(const std::string& filename,
+void CConfigurationAccessor::loadOceanConfiguration(const std::string& filename,
                                                     ISharedConfigurationLoadingHandlerRef handler)
 {
     std::shared_ptr<CConfigurationOceanLoadingOperation> operation = std::make_shared<CConfigurationOceanLoadingOperation>();
@@ -45,7 +57,7 @@ void CConfigurationAccessor::LoadOceanConfiguration(const std::string& filename,
     handler->onConfigurationLoaded(oceanConfiguration, true);
 }
 
-void CConfigurationAccessor::LoadLandscapeConfiguration(const std::string& filename,
+void CConfigurationAccessor::loadLandscapeConfiguration(const std::string& filename,
                                                         ISharedConfigurationLoadingHandlerRef handler)
 {
     std::shared_ptr<CConfigurationLandscapeLoadingOperation> operation = std::make_shared<CConfigurationLandscapeLoadingOperation>();
@@ -55,7 +67,7 @@ void CConfigurationAccessor::LoadLandscapeConfiguration(const std::string& filen
     handler->onConfigurationLoaded(landscapeConfiguration, true);
 }
 
-void CConfigurationAccessor::LoadParticleEmitterConfiguration(const std::string& filename,
+void CConfigurationAccessor::loadParticleEmitterConfiguration(const std::string& filename,
                                                               ISharedConfigurationLoadingHandlerRef handler)
 {
     std::shared_ptr<CConfigurationParticleEmitterLoadingOperation> operation = std::make_shared<CConfigurationParticleEmitterLoadingOperation>();
@@ -65,7 +77,7 @@ void CConfigurationAccessor::LoadParticleEmitterConfiguration(const std::string&
     handler->onConfigurationLoaded(particleEmitterConfiguration, true);
 }
 
-void CConfigurationAccessor::LoadGameTransitionConfiguration(const std::string& filename,
+void CConfigurationAccessor::loadGameTransitionConfiguration(const std::string& filename,
                                                              ISharedConfigurationLoadingHandlerRef handler)
 {
     std::shared_ptr<CConfigurationGameTransitionLoadingOperation> operation = std::make_shared<CConfigurationGameTransitionLoadingOperation>();

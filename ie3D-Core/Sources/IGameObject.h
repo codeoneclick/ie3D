@@ -103,6 +103,8 @@ public:
     CSharedVertexBuffer getVertexBuffer(void) const;
     CSharedIndexBuffer getIndexBuffer(void) const;
     
+    CSharedMaterial getMaterial(const std::string& renderTechique) const;
+    
     virtual CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     virtual CSharedIndexBuffer getCollisionIndexBuffer(void) const;
     

@@ -50,12 +50,12 @@ CSharedCubemapTexture CCubemapTexture::constructCustomCubemapTexture(const std::
                                                                       xpositive, xnegative,
                                                                       ypositive, ynegative,
                                                                       zpositive, znegative);
-    xpositive->registerLoadingHandler(texture);
-    xnegative->registerLoadingHandler(texture);
-    ypositive->registerLoadingHandler(texture);
-    ynegative->registerLoadingHandler(texture);
-    zpositive->registerLoadingHandler(texture);
-    znegative->registerLoadingHandler(texture);
+    xpositive->addLoadingHandler(texture);
+    xnegative->addLoadingHandler(texture);
+    ypositive->addLoadingHandler(texture);
+    ynegative->addLoadingHandler(texture);
+    zpositive->addLoadingHandler(texture);
+    znegative->addLoadingHandler(texture);
     return texture;
 }
 

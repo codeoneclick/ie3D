@@ -206,6 +206,12 @@ const CSharedResourceAccessor IGameTransition::getResourceAccessor(void) const
     return m_resourceAccessor;
 }
 
+const CSharedConfigurationAccessor IGameTransition::getConfigurationAccessor(void) const
+{
+    assert(m_configurationAccessor != nullptr);
+    return m_configurationAccessor;
+}
+
 void IGameTransition::addModel(CSharedModelRef model)
 {
     assert(m_sceneGraph != nullptr);

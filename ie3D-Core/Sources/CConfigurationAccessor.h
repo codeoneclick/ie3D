@@ -24,19 +24,22 @@ public:
     CConfigurationAccessor(void);
     ~CConfigurationAccessor(void);
     
-    void LoadModelConfiguration(const std::string& filename,
+    void loadMaterialConfiguration(const std::string& filename,
+                                   ISharedConfigurationLoadingHandlerRef handler);
+    
+    void loadModelConfiguration(const std::string& filename,
                                 ISharedConfigurationLoadingHandlerRef handler);
     
-    void LoadOceanConfiguration(const std::string& filename,
+    void loadOceanConfiguration(const std::string& filename,
                                 ISharedConfigurationLoadingHandlerRef handler);
     
-    void LoadLandscapeConfiguration(const std::string& filename,
+    void loadLandscapeConfiguration(const std::string& filename,
                                     ISharedConfigurationLoadingHandlerRef handler);
     
-    void LoadParticleEmitterConfiguration(const std::string& filename,
+    void loadParticleEmitterConfiguration(const std::string& filename,
                                           ISharedConfigurationLoadingHandlerRef handler);
     
-    void LoadGameTransitionConfiguration(const std::string& filename,
+    void loadGameTransitionConfiguration(const std::string& filename,
                                          ISharedConfigurationLoadingHandlerRef handler);
     
     void loadSkyBoxConfiguration(const std::string& filename,

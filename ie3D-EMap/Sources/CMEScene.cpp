@@ -24,13 +24,15 @@
 #include "CMEUIToSceneCommands.h"
 #include "CMESceneToUICommands.h"
 #include "CResourceAccessor.h"
+#include "CTexture.h"
 
 CMEScene::CMEScene(IGameTransition* root) :
 IScene(root),
 m_landscapeBrush(nullptr),
 m_previousDraggedPoint(glm::ivec2(0, 0)),
 m_uiToSceneCommands(std::make_shared<CMEUIToSceneCommands>()),
-m_sceneToUICommands(nullptr)
+m_sceneToUICommands(nullptr),
+m_landscapeMaterial(nullptr)
 {
     m_editableSettings.m_brushSize = 4;
     m_editableSettings.m_brushStrength = 1;
@@ -98,6 +100,9 @@ void CMEScene::load(void)
     m_uiToSceneCommands->connectSetFalloffCoefficientCommand(std::bind(&CMEScene::setFalloffCoefficient, this, std::placeholders::_1));
     m_uiToSceneCommands->connectSetSmoothCoefficientCommand(std::bind(&CMEScene::setSmoothCoefficient, this, std::placeholders::_1));
     m_uiToSceneCommands->connectSetTextureSamplerCommand(std::bind(&CMEScene::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
+    m_uiToSceneCommands->connectSetTillingTexcoordCommand(std::bind(&CMEScene::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
+    
+    m_landscape->addConfigurationLoadingCommand(std::bind(&CMEScene::onConfigurationLoaded, this, std::placeholders::_1));
 }
 
 void CMEScene::update(f32 deltatime)
@@ -232,4 +237,35 @@ void CMEScene::setTextureSampler(const std::string& filename, E_SHADER_SAMPLER s
     assert(texture != nullptr);
     m_landscape->setTexture(texture, sampler);
     m_sceneToUICommands->executeSetTextureSampler(texture, sampler);
+}
+
+void CMEScene::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
+{
+    m_landscape->setTillingTexcoord(value, sampler);
+}
+
+void CMEScene::onConfigurationLoaded(ISharedConfigurationRef)
+{
+    m_landscape->addResourceLoadingCommand(std::bind(&CMEScene::onResourceLoaded, this, std::placeholders::_1));
+    m_landscapeMaterial = m_landscape->getMaterial("render.operation.world.base");
+}
+
+void CMEScene::onResourceLoaded(ISharedResourceRef resource)
+{
+    assert(m_landscapeMaterial != nullptr);
+    if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_01) == resource)
+    {
+        CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
+        m_sceneToUICommands->executeSetTextureSampler(texture, E_SHADER_SAMPLER_01);
+    }
+    else if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_02) == resource)
+    {
+        CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
+        m_sceneToUICommands->executeSetTextureSampler(texture, E_SHADER_SAMPLER_02);
+    }
+    else if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_03) == resource)
+    {
+        CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
+        m_sceneToUICommands->executeSetTextureSampler(texture, E_SHADER_SAMPLER_03);
+    }
 }

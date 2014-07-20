@@ -28,7 +28,7 @@ private:
     f32 m_fogLinearStart;
     f32 m_fogLinearEnd;
     
-    f32 m_splattingTillingFactor;
+    f32 m_tillingTexcoord[E_SHADER_SAMPLER_MAX];
     
     ui32 m_numIndexesToRender;
     CSharedQuadTree m_quadTree;
@@ -42,7 +42,7 @@ protected:
                  ui32 chunkSizeX, ui32 chunkSizeZ,
                  ui32 heightmapSizeX, ui32 heightmapSizeZ);
     
-    void setSplattingSettings(f32 splattingTillingFactor);
+    void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     
     void setPrerenderedSplattingDiffuseTexture(CSharedTextureRef texture);
     void setPrerenderedSplattingNormalTexture(CSharedTextureRef texture);

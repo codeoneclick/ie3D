@@ -33,6 +33,7 @@ protected:
     std::shared_ptr<CMapDragController> m_mapDragController;
     CSharedSkyBox m_skyBox;
     CSharedLandscape m_landscape;
+    CSharedMaterial m_landscapeMaterial;
     CSharedModel m_model;
     
     CSharedMELandscapeBrush m_landscapeBrush;
@@ -49,6 +50,10 @@ protected:
     void setFalloffCoefficient(ui32 value);
     void setSmoothCoefficient(ui32 value);
     void setTextureSampler(const std::string& filename, E_SHADER_SAMPLER sampler);
+    void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
+    
+    void onConfigurationLoaded(ISharedConfigurationRef configuration);
+    void onResourceLoaded(ISharedResourceRef resource);
     
     std::vector<ISharedGameObject> colliders(void);
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);

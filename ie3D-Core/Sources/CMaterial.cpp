@@ -280,7 +280,7 @@ void CMaterial::setupMaterial(CSharedMaterialRef material,
         
         if(handler != nullptr)
         {
-            texture->registerLoadingHandler(handler);
+            texture->addLoadingHandler(handler);
         }
     }
     
@@ -292,7 +292,7 @@ void CMaterial::setupMaterial(CSharedMaterialRef material,
     material->setShader(shader);
     if(handler != nullptr)
     {
-        shader->registerLoadingHandler(handler);
+        shader->addLoadingHandler(handler);
     }
 }
 

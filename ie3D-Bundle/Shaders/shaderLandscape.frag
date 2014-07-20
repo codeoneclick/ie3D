@@ -1,6 +1,8 @@
 
 varying highp   vec2   OUT_TexCoord;
-varying highp   vec4   OUT_SplattingTexCoord;
+varying highp   vec4   OUT_TillingTexcoordLayer_01;
+varying highp   vec4   OUT_TillingTexcoordLayer_02;
+varying highp   vec4   OUT_TillingTexcoordLayer_03;
 varying mediump float  OUT_ClipPlane;
 varying mediump vec3   OUT_CameraPosition;
 varying mediump vec3   OUT_LightDirection;
@@ -36,23 +38,23 @@ void main(void)
     
     if(splattingMask.x > 0.0)
     {
-        xAxisColor = texture2D(SAMPLER_01, OUT_SplattingTexCoord.yz);
-        yAxisColor = texture2D(SAMPLER_01, OUT_SplattingTexCoord.xz);
-        zAxisColor = texture2D(SAMPLER_01, OUT_SplattingTexCoord.xy);
+        xAxisColor = texture2D(SAMPLER_01, OUT_TillingTexcoordLayer_01.yz);
+        yAxisColor = texture2D(SAMPLER_01, OUT_TillingTexcoordLayer_01.xz);
+        zAxisColor = texture2D(SAMPLER_01, OUT_TillingTexcoordLayer_01.xy);
         diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.x;
     }
     if(splattingMask.y > 0.0)
     {
-        xAxisColor = texture2D(SAMPLER_02, OUT_SplattingTexCoord.yz);
-        yAxisColor = texture2D(SAMPLER_02, OUT_SplattingTexCoord.xz);
-        zAxisColor = texture2D(SAMPLER_02, OUT_SplattingTexCoord.xy);
+        xAxisColor = texture2D(SAMPLER_02, OUT_TillingTexcoordLayer_02.yz);
+        yAxisColor = texture2D(SAMPLER_02, OUT_TillingTexcoordLayer_02.xz);
+        zAxisColor = texture2D(SAMPLER_02, OUT_TillingTexcoordLayer_02.xy);
         diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.y;
     }
     if(splattingMask.z > 0.0)
     {
-        xAxisColor = texture2D(SAMPLER_03, OUT_SplattingTexCoord.yz);
-        yAxisColor = texture2D(SAMPLER_03, OUT_SplattingTexCoord.xz);
-        zAxisColor = texture2D(SAMPLER_03, OUT_SplattingTexCoord.xy);
+        xAxisColor = texture2D(SAMPLER_03, OUT_TillingTexcoordLayer_03.yz);
+        yAxisColor = texture2D(SAMPLER_03, OUT_TillingTexcoordLayer_03.xz);
+        zAxisColor = texture2D(SAMPLER_03, OUT_TillingTexcoordLayer_03.xy);
         diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.z;
     }
 #elif defined(__IOS__)
@@ -62,15 +64,15 @@ void main(void)
     
     if(splattingMask.x > 0.0)
     {
-        diffuseColor = diffuseColor + texture2D(SAMPLER_01, OUT_SplattingTexCoord.xy) * splattingMask.x;
+        diffuseColor = diffuseColor + texture2D(SAMPLER_01, OUT_TillingTexcoordLayer_01.xy) * splattingMask.x;
     }
     if(splattingMask.y > 0.0)
     {
-        diffuseColor = diffuseColor + texture2D(SAMPLER_02, OUT_SplattingTexCoord.xy) * splattingMask.y;
+        diffuseColor = diffuseColor + texture2D(SAMPLER_02, OUT_TillingTexcoordLayer_02.xy) * splattingMask.y;
     }
     if(splattingMask.z > 0.0)
     {
-        diffuseColor = diffuseColor + texture2D(SAMPLER_03, OUT_SplattingTexCoord.xy) * splattingMask.z;
+        diffuseColor = diffuseColor + texture2D(SAMPLER_03, OUT_TillingTexcoordLayer_03.xy) * splattingMask.z;
     }
 #endif
     diffuseColor = vec4(diffuseColor.rgb * diffuseFactor, 1.0);

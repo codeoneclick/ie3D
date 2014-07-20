@@ -11,6 +11,8 @@
 #include "IOGLWindow.h"
 #include "CMEUIToSceneCommands.h"
 #include "CMESceneToUICommands.h"
+#include "CConfigurationAccessor.h"
+#include "CTexture.h"
 
 #endif
 
@@ -74,6 +76,9 @@ void CMainWindow::execute(void)
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)view);
     m_editableSceneController = std::make_shared<CMESceneController>();
     m_editableSceneTransition = std::static_pointer_cast<CMESceneTransition>(m_editableSceneController->createEditableSceneTransition("transition.main.xml", window));
+    
+    m_editableSceneTransition->getConfigurationAccessor()->loadMaterialConfiguration("material.texture2D.xml", shared_from_this());
+    
     m_editableSceneController->RegisterTransition(m_editableSceneTransition);
     m_editableSceneController->GoToTransition("transition.main.xml");
     m_editableSceneTransition->setSceneToUICommands(m_sceneToUICommands);
@@ -143,7 +148,7 @@ void CMainWindow::on_m_texture01Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture01Img->setPixmap(pixmap);
-        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSampler(filename.toUtf8().constData(), E_SHADER_SAMPLER_01);
+        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_01);
     }
 }
 
@@ -159,7 +164,7 @@ void CMainWindow::on_m_texture02Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture02Img->setPixmap(pixmap);
-        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSampler(filename.toUtf8().constData(), E_SHADER_SAMPLER_02);
+        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_02);
     }
 }
 
@@ -175,7 +180,7 @@ void CMainWindow::on_m_texture03Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture03Img->setPixmap(pixmap);
-        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSampler(filename.toUtf8().constData(), E_SHADER_SAMPLER_03);
+        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_03);
     }
 }
 
@@ -205,5 +210,25 @@ void CMainWindow::setSmoothCoefficient(ui32)
 
 void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
-    std::cout<<"Texture"<<std::endl;
+    std::cout<<"[Texture 2D]"<<texture->getGuid()<<" , sampler: "<<sampler<<::std::endl;
+}
+
+void CMainWindow::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
+{
+    
+}
+
+void CMainWindow::on_m_textureTilling01SpinBox_valueChanged(int value)
+{
+    m_editableSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_01);
+}
+
+void CMainWindow::on_m_textureTilling02SpinBox_valueChanged(int value)
+{
+    m_editableSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_02);
+}
+
+void CMainWindow::on_m_textureTilling03SpinBox_valueChanged(int value)
+{
+    m_editableSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_03);
 }

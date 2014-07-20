@@ -75,6 +75,7 @@ public:
     void setCamera(CSharedCameraRef camera);
     
     const CSharedResourceAccessor getResourceAccessor(void) const;
+    const CSharedConfigurationAccessor getConfigurationAccessor(void) const;
     
     void addModel(CSharedModelRef model);
     void removeModel(CSharedModelRef model);

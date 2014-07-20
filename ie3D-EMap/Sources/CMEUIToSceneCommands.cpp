@@ -79,10 +79,23 @@ void CMEUIToSceneCommands::connectSetTextureSamplerCommand(const __SET_TEXTURE_S
     m_setTextureSampler = command;
 }
 
-void CMEUIToSceneCommands::executeSetTextureSampler(const std::string& filename, E_SHADER_SAMPLER sampler)
+void CMEUIToSceneCommands::executeSetTextureSamplerCommand(const std::string& filename, E_SHADER_SAMPLER sampler)
 {
     if(m_setTextureSampler != nullptr)
     {
         m_setTextureSampler(filename, sampler);
+    }
+}
+
+void CMEUIToSceneCommands::connectSetTillingTexcoordCommand(const __SET_TILLING_TEXCOORD& command)
+{
+    m_setTillingTexcoordCommand = command;
+}
+
+void CMEUIToSceneCommands::executeSetTillingTexcoordCommand(f32 value, E_SHADER_SAMPLER sampler)
+{
+    if(m_setTillingTexcoordCommand != nullptr)
+    {
+        m_setTillingTexcoordCommand(value, sampler);
     }
 }

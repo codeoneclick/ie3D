@@ -158,14 +158,15 @@ class IConfigurationLoadingHandler
 {
 public:
     
-    typedef std::shared_ptr<std::function<void(ISharedConfigurationRef)>> CONFIGURATION_LOADING_HANDLER_FUNCTION;
+    typedef std::function<void(ISharedConfigurationRef)> CONFIGURATION_LOADING_COMMAND;
     
 private:
     
 protected:
     
     IConfigurationLoadingHandler(void);
-    std::array<std::set<CONFIGURATION_LOADING_HANDLER_FUNCTION>, E_CONFIGURATION_CLASS_MAX> m_configurationLoadingHandlers;
+    std::vector<CONFIGURATION_LOADING_COMMAND> m_commands;
+    std::set<ISharedConfiguration> m_configurations;
 
 public:
     
@@ -173,8 +174,8 @@ public:
     
     virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
-    void registerConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass);
-    void unregisterConfigurationLoadingHandler(const CONFIGURATION_LOADING_HANDLER_FUNCTION& handler, E_CONFIGURATION_CLASS configurationClass);
+    void addConfigurationLoadingCommand(const CONFIGURATION_LOADING_COMMAND& command);
+    void removeConfigurationLoadingCommand(const CONFIGURATION_LOADING_COMMAND& command);
 };
 
 class IConfiguration

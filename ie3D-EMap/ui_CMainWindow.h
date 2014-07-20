@@ -20,6 +20,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
 
@@ -49,6 +50,12 @@ public:
     QLabel *m_texture01Img;
     QLabel *m_texture02Img;
     QLabel *m_texture03Img;
+    QSpinBox *m_textureTilling01SpinBox;
+    QLabel *m_textureTilling01Label;
+    QLabel *m_textureTilling02Label;
+    QSpinBox *m_textureTilling02SpinBox;
+    QLabel *m_textureTilling03Label;
+    QSpinBox *m_textureTilling03SpinBox;
     QGroupBox *groupBox;
     QWidget *m_oglWindow;
     QMenuBar *menuBar;
@@ -132,7 +139,7 @@ public:
         tab_2->setObjectName(QStringLiteral("tab_2"));
         m_texture01Btn = new QPushButton(tab_2);
         m_texture01Btn->setObjectName(QStringLiteral("m_texture01Btn"));
-        m_texture01Btn->setGeometry(QRect(150, 40, 91, 32));
+        m_texture01Btn->setGeometry(QRect(142, 40, 91, 32));
         m_texture01Label = new QLabel(tab_2);
         m_texture01Label->setObjectName(QStringLiteral("m_texture01Label"));
         m_texture01Label->setGeometry(QRect(10, 10, 221, 16));
@@ -147,14 +154,14 @@ public:
         m_texture02Label->setFont(font1);
         m_texture02Btn = new QPushButton(tab_2);
         m_texture02Btn->setObjectName(QStringLiteral("m_texture02Btn"));
-        m_texture02Btn->setGeometry(QRect(150, 210, 91, 32));
+        m_texture02Btn->setGeometry(QRect(142, 210, 91, 32));
         m_texture03Label = new QLabel(tab_2);
         m_texture03Label->setObjectName(QStringLiteral("m_texture03Label"));
         m_texture03Label->setGeometry(QRect(10, 350, 221, 16));
         m_texture03Label->setFont(font1);
         m_texture03Btn = new QPushButton(tab_2);
         m_texture03Btn->setObjectName(QStringLiteral("m_texture03Btn"));
-        m_texture03Btn->setGeometry(QRect(150, 380, 91, 32));
+        m_texture03Btn->setGeometry(QRect(142, 380, 91, 32));
         m_texture01Img = new QLabel(tab_2);
         m_texture01Img->setObjectName(QStringLiteral("m_texture01Img"));
         m_texture01Img->setGeometry(QRect(10, 40, 128, 128));
@@ -164,16 +171,34 @@ public:
         m_texture03Img = new QLabel(tab_2);
         m_texture03Img->setObjectName(QStringLiteral("m_texture03Img"));
         m_texture03Img->setGeometry(QRect(10, 380, 128, 128));
+        m_textureTilling01SpinBox = new QSpinBox(tab_2);
+        m_textureTilling01SpinBox->setObjectName(QStringLiteral("m_textureTilling01SpinBox"));
+        m_textureTilling01SpinBox->setGeometry(QRect(150, 100, 91, 24));
+        m_textureTilling01SpinBox->setMinimum(1);
+        m_textureTilling01SpinBox->setMaximum(128);
+        m_textureTilling01Label = new QLabel(tab_2);
+        m_textureTilling01Label->setObjectName(QStringLiteral("m_textureTilling01Label"));
+        m_textureTilling01Label->setGeometry(QRect(150, 80, 91, 20));
+        m_textureTilling01Label->setFont(font1);
+        m_textureTilling02Label = new QLabel(tab_2);
+        m_textureTilling02Label->setObjectName(QStringLiteral("m_textureTilling02Label"));
+        m_textureTilling02Label->setGeometry(QRect(150, 250, 91, 20));
+        m_textureTilling02Label->setFont(font1);
+        m_textureTilling02SpinBox = new QSpinBox(tab_2);
+        m_textureTilling02SpinBox->setObjectName(QStringLiteral("m_textureTilling02SpinBox"));
+        m_textureTilling02SpinBox->setGeometry(QRect(150, 270, 91, 24));
+        m_textureTilling02SpinBox->setMinimum(1);
+        m_textureTilling02SpinBox->setMaximum(128);
+        m_textureTilling03Label = new QLabel(tab_2);
+        m_textureTilling03Label->setObjectName(QStringLiteral("m_textureTilling03Label"));
+        m_textureTilling03Label->setGeometry(QRect(150, 420, 91, 20));
+        m_textureTilling03Label->setFont(font1);
+        m_textureTilling03SpinBox = new QSpinBox(tab_2);
+        m_textureTilling03SpinBox->setObjectName(QStringLiteral("m_textureTilling03SpinBox"));
+        m_textureTilling03SpinBox->setGeometry(QRect(150, 440, 91, 24));
+        m_textureTilling03SpinBox->setMinimum(1);
+        m_textureTilling03SpinBox->setMaximum(128);
         tabWidget->addTab(tab_2, QString());
-        m_texture01Btn->raise();
-        m_texture01Label->raise();
-        m_texture02Label->raise();
-        m_texture02Btn->raise();
-        m_texture03Label->raise();
-        m_texture03Btn->raise();
-        m_texture01Img->raise();
-        m_texture02Img->raise();
-        m_texture03Img->raise();
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setGeometry(QRect(10, 0, 740, 735));
@@ -219,6 +244,9 @@ public:
         m_texture01Img->setText(QString());
         m_texture02Img->setText(QString());
         m_texture03Img->setText(QString());
+        m_textureTilling01Label->setText(QApplication::translate("CMainWindow", "Tilling:", 0));
+        m_textureTilling02Label->setText(QApplication::translate("CMainWindow", "Tilling:", 0));
+        m_textureTilling03Label->setText(QApplication::translate("CMainWindow", "Tilling:", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("CMainWindow", "Textures", 0));
         groupBox->setTitle(QApplication::translate("CMainWindow", "3D", 0));
     } // retranslateUi

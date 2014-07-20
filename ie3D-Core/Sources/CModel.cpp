@@ -76,7 +76,7 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     std::shared_ptr<CConfigurationModel> modelConfiguration = std::static_pointer_cast<CConfigurationModel>(configuration);
     assert(m_resourceAccessor != nullptr);
     m_mesh = m_resourceAccessor->getMesh(modelConfiguration->getFilename());
-    m_mesh->registerLoadingHandler(shared_from_this());
+    m_mesh->addLoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
     m_isBatching = modelConfiguration->isBatching();
     

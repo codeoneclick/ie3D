@@ -86,7 +86,11 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                                        chunkSizeX, chunkSizeZ,
                                        m_heightmapProcessor->getSizeX(),
                                        m_heightmapProcessor->getSizeZ());
-                        chunk->setSplattingSettings(16.0);
+                        
+                        chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
+                        chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
+                        chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
+                        
                         chunk->onConfigurationLoaded(m_configuration, true);
                         
                         if(m_prerenderedSplattingDiffuseTexture != nullptr)
@@ -121,6 +125,8 @@ void CLandscape::onResourceLoaded(ISharedResourceRef resource, bool success)
 
 void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
+    IGameObject::onConfigurationLoaded(configuration, success);
+    
     std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     m_configuration = configuration;
     assert(m_resourceAccessor != nullptr);
@@ -150,6 +156,10 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     
     m_edges->onConfigurationLoaded(configuration, success);
     m_edges->setEdgeTexture(m_heightmapProcessor->Get_EdgesMaskTexture());
+    
+    m_tillingTexcoord[E_SHADER_SAMPLER_01] = 16;
+    m_tillingTexcoord[E_SHADER_SAMPLER_02] = 16;
+    m_tillingTexcoord[E_SHADER_SAMPLER_03] = 16;
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
@@ -300,6 +310,29 @@ void CLandscape::setTexture(CSharedTextureRef texture,
             iterator->setTexture(texture, sampler);
         }
     }
+}
+
+void CLandscape::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
+{
+    m_tillingTexcoord[sampler] = value;
+    ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
+    ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
+    
+    for(ui32 i = 0; i < numChunksX; ++i)
+    {
+        for(ui32 j = 0; j < numChunksZ; ++j)
+        {
+            if(m_chunks[i + j * numChunksZ] != nullptr)
+            {
+                m_chunks[i + j * numChunksZ]->setTillingTexcoord(value, sampler);
+            }
+        }
+    }
+}
+
+f32 CLandscape::getTillingTexcooed(E_SHADER_SAMPLER sampler) const
+{
+    return m_tillingTexcoord[sampler];
 }
 
 void CLandscape::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)

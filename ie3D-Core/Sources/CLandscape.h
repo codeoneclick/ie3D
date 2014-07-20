@@ -26,6 +26,8 @@ private:
     CSharedLandscapeEdges m_edges;
     ISharedConfiguration m_configuration;
     
+    f32 m_tillingTexcoord[E_SHADER_SAMPLER_MAX];
+    
     CSharedTexture m_prerenderedSplattingDiffuseTexture;
     CSharedTexture m_prerenderedSplattingNormalTexture;
     
@@ -69,6 +71,9 @@ public:
     
     void enableRender(bool value);
     void enableUpdate(bool value);
+    
+    void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
+    f32 getTillingTexcooed(E_SHADER_SAMPLER sampler) const;
     
     void setTexture(CSharedTextureRef texture,
                     E_SHADER_SAMPLER sampler,

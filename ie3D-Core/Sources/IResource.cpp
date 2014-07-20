@@ -15,33 +15,30 @@ IResourceLoadingHandler::IResourceLoadingHandler(void)
 
 IResourceLoadingHandler::~IResourceLoadingHandler(void)
 {
-    std::for_each(m_resourceLoadingHandlers.begin(), m_resourceLoadingHandlers.end(),
-                  [](std::set<RESOURCE_LOADING_HANDLER_FUNCTION>& iterator){
-                      iterator.clear();
-                  });
+
 }
 
 void IResourceLoadingHandler::onResourceLoaded(ISharedResourceRef resource, bool success)
 {
     if(success)
     {
-        const auto& iterator = m_resourceLoadingHandlers.at(resource->getResourceClass());
-        std::for_each(iterator.begin(), iterator.end(), [resource](RESOURCE_LOADING_HANDLER_FUNCTION function){
-            (*function)(resource);
+        m_resources.insert(resource);
+        std::for_each(m_commands.begin(), m_commands.end(), [resource](RESOURCE_LOADING_COMMAND function){
+            function(resource);
         });
     }
 }
 
-void IResourceLoadingHandler::registerResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler,
-                                                             E_RESOURCE_CLASS resourceClass)
+void IResourceLoadingHandler::addResourceLoadingCommand(const RESOURCE_LOADING_COMMAND& command)
 {
-    m_resourceLoadingHandlers.at(resourceClass).insert(handler);
+    m_commands.push_back(command);
+    std::for_each(m_resources.begin(), m_resources.end(), [command](ISharedResource resource){
+        command(resource);
+    });
 }
 
-void IResourceLoadingHandler::unregisterResourceLoadingHandler(const RESOURCE_LOADING_HANDLER_FUNCTION& handler,
-                                                               E_RESOURCE_CLASS resourceClass)
+void IResourceLoadingHandler::removeResourceLoadingCommand(const RESOURCE_LOADING_COMMAND& command)
 {
-    m_resourceLoadingHandlers.at(resourceClass).erase(handler);
 }
 
 IResourceData::IResourceData(E_RESOURCE_DATA_CLASS resourceDataClass) :
@@ -95,18 +92,17 @@ bool IResource::isCommited(void) const
     return value;
 };
 
-void IResource::registerLoadingHandler(ISharedResourceLoadingHandlerRef handler)
+void IResource::addLoadingHandler(ISharedResourceLoadingHandlerRef handler)
 {
     assert(handler != nullptr);
     if(IResource::isLoaded() && IResource::isCommited())
     {
         handler->onResourceLoaded(shared_from_this(), true);
-    } else {
-        m_handlers.insert(handler);
     }
+    m_handlers.insert(handler);
 }
 
-void IResource::unregisterLoadingHandler(ISharedResourceLoadingHandlerRef handler)
+void IResource::removeLoadingHandler(ISharedResourceLoadingHandlerRef handler)
 {
     assert(handler != nullptr);
     m_handlers.erase(handler);

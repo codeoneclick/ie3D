@@ -207,6 +207,13 @@ CSharedIndexBuffer IGameObject::getIndexBuffer(void) const
     return m_mesh && m_mesh->isCommited() ? m_mesh->getIndexBuffer() : nullptr;
 }
 
+CSharedMaterial IGameObject::getMaterial(const std::string& renderTechique) const
+{
+    const auto& material = m_materials.find(renderTechique);
+    assert(material != m_materials.end());
+    return material->second;
+}
+
 CSharedVertexBuffer IGameObject::getCollisionVertexBuffer(void) const
 {
     return nullptr;

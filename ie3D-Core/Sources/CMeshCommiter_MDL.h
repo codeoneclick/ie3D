@@ -11,7 +11,6 @@
 
 #include "IResourceCommiter.h"
 
-class CMeshHeader;
 class CMeshCommiter_MDL final : public IResourceCommiter
 {
 private:
@@ -25,6 +24,5 @@ public:
     
     void commit(void);
 };
-
 
 #endif
