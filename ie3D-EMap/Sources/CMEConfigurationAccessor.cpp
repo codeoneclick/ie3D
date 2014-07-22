@@ -8,7 +8,7 @@
 
 #include "CMEConfigurationAccessor.h"
 #include "CMEConfigurationGameObjects.h"
-#include "CMEConfigurationSelectionAreaLoadingOperation.h"
+#include "CMEConfigurationLandscapeBrushLoadingOperation.h"
 
 CMEConfigurationAccessor::CMEConfigurationAccessor(void)
 {
@@ -20,10 +20,10 @@ CMEConfigurationAccessor::~CMEConfigurationAccessor(void)
     
 }
 
-void CMEConfigurationAccessor::loadSelectionAreaConfiguration(const std::string& filename,
-                                                              ISharedConfigurationLoadingHandlerRef handler)
+void CMEConfigurationAccessor::loadLandscapeBrushConfiguration(const std::string& filename,
+                                                               ISharedConfigurationLoadingHandlerRef handler)
 {
-    std::shared_ptr<CMEConfigurationSelectionAreaLoadingOperation> operation = std::make_shared<CMEConfigurationSelectionAreaLoadingOperation>();
+    std::shared_ptr<CMEConfigurationLandscapeBrushLoadingOperation> operation = std::make_shared<CMEConfigurationLandscapeBrushLoadingOperation>();
     std::shared_ptr<CConfigurationModel> configuration = std::static_pointer_cast<CConfigurationModel>(operation->serialize(filename));
     assert(configuration != nullptr);
     assert(handler != nullptr);

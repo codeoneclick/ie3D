@@ -16,13 +16,8 @@
     is_shadowing="0"
     is_debugging="0">
     <shader
-        vs_filename="shaderSelectionArea.vert"
-        fs_filename="shaderSelectionArea.frag"/>
+        vs_filename="shaderLandscapeBrush.vert"
+        fs_filename="shaderLandscapeBrush.frag"/>
     <textures>
-        <texture
-        filename="editable.ring.pvr"
-        render_operation_name=""
-        sampler_id="0"
-        wrap_mode="GL_REPEAT"/>
     </textures>
 </material>

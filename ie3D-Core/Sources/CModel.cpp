@@ -21,7 +21,8 @@
 CModel::CModel(CSharedResourceAccessorRef resourceAccessor,
                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor),
-m_animationMixer(nullptr)
+m_animationMixer(nullptr),
+m_isAnimated(false)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_MODEL;
 
@@ -38,6 +39,7 @@ m_animationMixer(nullptr)
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
         material->getShader()->setInt(m_isBatching ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_01);
+        material->getShader()->setInt(m_isAnimated ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_02);
     };
 }
 
@@ -51,7 +53,7 @@ void CModel::onSceneUpdate(f32 deltatime)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         IGameObject::onSceneUpdate(deltatime);
-        if(m_animationMixer != nullptr)
+        if(m_animationMixer != nullptr && m_isAnimated)
         {
             m_animationMixer->update(deltatime);
         }
@@ -65,8 +67,12 @@ void CModel::onResourceLoaded(ISharedResourceRef resource, bool success)
     {
         assert(m_animationMixer == nullptr);
         CSharedMesh mesh = std::static_pointer_cast<CMesh>(resource);
-        m_animationMixer = std::make_shared<CAnimationMixer>(mesh->getSkeletonData(),
-                                                             mesh->getSequenceData());
+        m_isAnimated = mesh->getSkeletonData() != nullptr && mesh->getSequenceData() != nullptr;
+        if(m_isAnimated)
+        {
+            m_animationMixer = std::make_shared<CAnimationMixer>(mesh->getSkeletonData(),
+                                                                 mesh->getSequenceData());
+        }
     }
 }
 
@@ -119,12 +125,17 @@ void CModel::onDraw(const std::string& mode)
         CSharedMaterial material = m_materials.find(mode)->second;
         assert(material->getShader() != nullptr);
         
-        if(!m_isBatching && m_animationMixer != nullptr)
+        if(!m_isBatching && m_animationMixer != nullptr && m_isAnimated)
         {
             m_materialBindImposer(material);
             material->getShader()->setMatrixArray4x4(m_animationMixer->getTransformations(),
                                                      m_animationMixer->getTransformationSize(),
                                                      E_SHADER_UNIFORM_MATRIX_BONES);
+            IGameObject::onDraw(mode);
+        }
+        else if(!m_isAnimated)
+        {
+            m_materialBindImposer(material);
             IGameObject::onDraw(mode);
         }
     }

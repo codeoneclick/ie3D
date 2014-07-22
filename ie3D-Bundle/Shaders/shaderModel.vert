@@ -26,7 +26,7 @@ void main(void)
     vec4 vPosition = vec4(IN_Position, 1.0);
     vec4 vWeights = IN_Extra / 255.0;
     
-    if(INT_FLAG_01 == 1)
+    /*if(INT_FLAG_01 == 1 && INT_FLAG_02 == 1)
     {
         int index = 0;
         vec4 vBonePosition = vec4(0.0, 0.0, 0.0, 0.0);
@@ -38,7 +38,7 @@ void main(void)
         }
         vPosition = MATRIX_World * vBonePosition;
     }
-    else
+    else*/
     {
         vPosition = MATRIX_World * vPosition;
     }

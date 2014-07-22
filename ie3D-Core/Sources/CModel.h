@@ -18,6 +18,7 @@ private:
     
 protected:
     
+    bool m_isAnimated;
     CSharedAnimationMixer m_animationMixer;
     
     void onSceneUpdate(f32 deltatime);

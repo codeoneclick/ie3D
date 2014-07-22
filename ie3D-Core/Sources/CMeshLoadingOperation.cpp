@@ -35,8 +35,13 @@ void CMeshLoadingOperation::serialize(void)
 {
     assert(m_resource != nullptr);
     m_status = E_RESOURCE_LOADING_OPERATION_STATUS_INPROGRESS;
-    
-    if(m_filename.find(".mdl") != std::string::npos)
+    if(m_filename.find(".mdl_01") != std::string::npos)
+    {
+        m_serializer = std::make_shared<CMeshSerializer_MDL_01>(m_filename,
+                                                                m_resource);
+        m_serializer->serialize();
+    }
+    else if(m_filename.find(".mdl") != std::string::npos)
     {
         std::string meshFilename = m_filename;
         meshFilename.append("_mesh");
@@ -58,12 +63,6 @@ void CMeshLoadingOperation::serialize(void)
         sequenceFilename.append("_anim");
         m_serializer = std::make_shared<CSequenceSerializer_SEQ>(sequenceFilename,
                                                                  m_resource);
-        m_serializer->serialize();
-    }
-    else if(m_filename.find(".mdl_01") != std::string::npos)
-    {
-        m_serializer = std::make_shared<CMeshSerializer_MDL_01>(m_filename,
-                                                                m_resource);
         m_serializer->serialize();
     }
     else

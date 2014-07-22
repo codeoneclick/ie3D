@@ -84,7 +84,7 @@ void CMEScene::load(void)
     m_root->addCollisionHandler(shared_from_this());
     
     CMESceneTransition* transition = static_cast<CMESceneTransition*>(m_root);
-    m_landscapeBrush = transition->createLandscapeBrush("gameobject.selection.area.xml");
+    m_landscapeBrush = transition->createLandscapeBrush("gameobject.landscape.brush.xml");
     m_root->addCustomGameObject(m_landscapeBrush);
     m_landscapeBrush->setLandscape(m_landscape);
     m_landscapeBrush->setSize(m_editableSettings.m_brushSize);
@@ -140,6 +140,9 @@ void CMEScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTO
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
     {
         m_previousDraggedPoint = point;
+        CSharedModel model = m_root->createModel("gameobject.tank.light.body.xml");
+        model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
+        m_root->addModel(model);
     }
 }
 

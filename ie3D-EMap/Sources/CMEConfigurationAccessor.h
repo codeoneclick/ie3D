@@ -22,8 +22,8 @@ public:
     CMEConfigurationAccessor(void);
     ~CMEConfigurationAccessor(void);
     
-    void loadSelectionAreaConfiguration(const std::string& filename,
-                                        ISharedConfigurationLoadingHandlerRef handler);
+    void loadLandscapeBrushConfiguration(const std::string& filename,
+                                         ISharedConfigurationLoadingHandlerRef handler);
     
 };
 

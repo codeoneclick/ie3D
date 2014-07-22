@@ -8,30 +8,30 @@
 
 #include "CMEConfigurationGameObjects.h"
 
-CMEConfigurationSelectionArea::CMEConfigurationSelectionArea(void) :
+CMEConfigurationLandscapeBrush::CMEConfigurationLandscapeBrush(void) :
 CConfigurationGameObject(E_CONFIGURATION_CLASS_CUSTOM),
-kSelectionAreaMainNode("selection_area"),
-kSelectionAreaSizeXAttribute("size_x"),
-kSelectionAreaSizeYAttribute("size_y")
+kLandscapeBrushMainNode("landscape_brush"),
+kLandscapeBrushSizeXAttribute("size_x"),
+kLandscapeBrushSizeYAttribute("size_y")
 {
     
 }
 
-CMEConfigurationSelectionArea::~CMEConfigurationSelectionArea(void)
+CMEConfigurationLandscapeBrush::~CMEConfigurationLandscapeBrush(void)
 {
     
 }
 
-glm::vec2 CMEConfigurationSelectionArea::getSize(void) const
+glm::vec2 CMEConfigurationLandscapeBrush::getSize(void) const
 {
-    const auto& iteratorX = m_attributes.find(kSelectionAreaMainNode + ":" +
-                                              kSelectionAreaSizeXAttribute);
+    const auto& iteratorX = m_attributes.find(kLandscapeBrushMainNode + ":" +
+                                              kLandscapeBrushSizeXAttribute);
     assert(iteratorX != m_attributes.end());
     assert(iteratorX->second.size() != 0);
     f32 x = iteratorX->second[0]->getScalar<f32>();
     
-    const auto& iteratorY = m_attributes.find(kSelectionAreaMainNode + ":" +
-                                              kSelectionAreaSizeYAttribute);
+    const auto& iteratorY = m_attributes.find(kLandscapeBrushMainNode + ":" +
+                                              kLandscapeBrushSizeYAttribute);
     assert(iteratorY != m_attributes.end());
     assert(iteratorY->second.size() != 0);
     f32 y = iteratorY->second[0]->getScalar<f32>();

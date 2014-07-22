@@ -47,7 +47,7 @@ void CMELandscapeBrush::onConfigurationLoaded(ISharedConfigurationRef configurat
 {
     IGameObject::onConfigurationLoaded(configuration, success);
     
-    std::shared_ptr<CMEConfigurationSelectionArea> selectionAreaConfiguration = std::static_pointer_cast<CMEConfigurationSelectionArea>(configuration);
+    std::shared_ptr<CMEConfigurationLandscapeBrush> landscapeBrushConfiguration = std::static_pointer_cast<CMEConfigurationLandscapeBrush>(configuration);
     assert(m_resourceAccessor != nullptr);
     
     CMELandscapeBrush::createMesh(m_size);

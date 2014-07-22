@@ -12,13 +12,13 @@
 #include "CConfigurationGameObjects.h"
 #include "HDeclaration.h"
 
-class CMEConfigurationSelectionArea : public CConfigurationGameObject
+class CMEConfigurationLandscapeBrush : public CConfigurationGameObject
 {
 public:
     
-    const std::string kSelectionAreaMainNode;
-    const std::string kSelectionAreaSizeXAttribute;
-    const std::string kSelectionAreaSizeYAttribute;
+    const std::string kLandscapeBrushMainNode;
+    const std::string kLandscapeBrushSizeXAttribute;
+    const std::string kLandscapeBrushSizeYAttribute;
     
 private:
     
@@ -26,8 +26,8 @@ protected:
     
 public:
     
-    CMEConfigurationSelectionArea(void);
-    ~CMEConfigurationSelectionArea(void);
+    CMEConfigurationLandscapeBrush(void);
+    ~CMEConfigurationLandscapeBrush(void);
     
     glm::vec2 getSize(void) const;
 };

@@ -31,7 +31,7 @@ CSharedMELandscapeBrush CMESceneFabricator::createLandscapeBrush(const std::stri
     CSharedMELandscapeBrush landscapeBrush = std::make_shared<CMELandscapeBrush>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     std::shared_ptr<CMEConfigurationAccessor> configurationAccessor = std::static_pointer_cast<CMEConfigurationAccessor>(m_configurationAccessor);
-    configurationAccessor->loadSelectionAreaConfiguration(filename, landscapeBrush);
+    configurationAccessor->loadLandscapeBrushConfiguration(filename, landscapeBrush);
     m_gameObjectsContainer.insert(landscapeBrush);
     return landscapeBrush;
 }
