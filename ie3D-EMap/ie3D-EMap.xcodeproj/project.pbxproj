@@ -142,6 +142,9 @@
 		21C409D5197C132B0063D62D /* tank_light.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21C409D1197C132B0063D62D /* tank_light.pvr */; };
 		21C409D6197C132B0063D62D /* tank_medium.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21C409D2197C132B0063D62D /* tank_medium.pvr */; };
 		21C409D7197C132B0063D62D /* tank_track.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21C409D3197C132B0063D62D /* tank_track.pvr */; };
+		21C409DC197EE8E10063D62D /* material.tank.light.left.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21C409D9197EE8E00063D62D /* material.tank.light.left.track.common.xml */; };
+		21C409DD197EE8E10063D62D /* material.tank.light.right.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21C409DA197EE8E00063D62D /* material.tank.light.right.track.common.xml */; };
+		21C409DE197EE8E10063D62D /* material.tank.light.tower.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21C409DB197EE8E00063D62D /* material.tank.light.tower.common.xml */; };
 		21CB5312196C05610066EC6D /* CMEUIToSceneCommands.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21CB5310196C05610066EC6D /* CMEUIToSceneCommands.cpp */; };
 		21CB5315196C16A10066EC6D /* CMESceneToUICommands.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21CB5313196C16A10066EC6D /* CMESceneToUICommands.cpp */; };
 		21DC2B751929E895008DA3C1 /* mesa_heightmap.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B741929E895008DA3C1 /* mesa_heightmap.png */; };
@@ -345,6 +348,9 @@
 		21C409D1197C132B0063D62D /* tank_light.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_light.pvr; path = "../ie3D-Bundle/Textures/tank_light.pvr"; sourceTree = SOURCE_ROOT; };
 		21C409D2197C132B0063D62D /* tank_medium.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium.pvr; path = "../ie3D-Bundle/Textures/tank_medium.pvr"; sourceTree = SOURCE_ROOT; };
 		21C409D3197C132B0063D62D /* tank_track.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_track.pvr; path = "../ie3D-Bundle/Textures/tank_track.pvr"; sourceTree = SOURCE_ROOT; };
+		21C409D9197EE8E00063D62D /* material.tank.light.left.track.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.left.track.common.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.left.track.common.xml"; sourceTree = SOURCE_ROOT; };
+		21C409DA197EE8E00063D62D /* material.tank.light.right.track.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.right.track.common.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.right.track.common.xml"; sourceTree = SOURCE_ROOT; };
+		21C409DB197EE8E00063D62D /* material.tank.light.tower.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.tower.common.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.tower.common.xml"; sourceTree = SOURCE_ROOT; };
 		21CB5310196C05610066EC6D /* CMEUIToSceneCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEUIToSceneCommands.cpp; path = Sources/CMEUIToSceneCommands.cpp; sourceTree = SOURCE_ROOT; };
 		21CB5311196C05610066EC6D /* CMEUIToSceneCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEUIToSceneCommands.h; path = Sources/CMEUIToSceneCommands.h; sourceTree = SOURCE_ROOT; };
 		21CB5313196C16A10066EC6D /* CMESceneToUICommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMESceneToUICommands.cpp; path = Sources/CMESceneToUICommands.cpp; sourceTree = SOURCE_ROOT; };
@@ -651,6 +657,9 @@
 				21BC347D19080A39007B99DA /* gameobject.particle.emitter.xml */,
 				21C409961979B8370063D62D /* material.texture2D.xml */,
 				21C409B1197C11060063D62D /* material.tank.light.body.common.xml */,
+				21C409D9197EE8E00063D62D /* material.tank.light.left.track.common.xml */,
+				21C409DA197EE8E00063D62D /* material.tank.light.right.track.common.xml */,
+				21C409DB197EE8E00063D62D /* material.tank.light.tower.common.xml */,
 				2162042F1949A74E00D129AD /* material.render.operation.screen.ssao.xml */,
 				217AF17D1945EB010045CF9D /* material.landscape.brush.xml */,
 				21B08E0119224FE100C5D5CC /* material.skybox.base.xml */,
@@ -1135,6 +1144,7 @@
 				21C409B6197C11060063D62D /* material.tank.light.body.common.xml in Resources */,
 				21138520194C40820041A18A /* render.operation.world.normal.xml in Resources */,
 				21BC34C719080B9E007B99DA /* landscape.03.diffuse.pvr in Resources */,
+				21C409DC197EE8E10063D62D /* material.tank.light.left.track.common.xml in Resources */,
 				21BC34C819080B9E007B99DA /* ocean.normal.pvr in Resources */,
 				21A9D868196162DE00A1B62C /* model.diffuse.pvr in Resources */,
 				21BC34BB19080B47007B99DA /* shaderParticleEmitter.frag in Resources */,
@@ -1145,6 +1155,7 @@
 				21BC34B919080B47007B99DA /* shaderOcean.frag in Resources */,
 				21A9D86219615F9700A1B62C /* material.model.refraction.xml in Resources */,
 				21A9D84C1961581600A1B62C /* model.MDL_sk in Resources */,
+				21C409DD197EE8E10063D62D /* material.tank.light.right.track.common.xml in Resources */,
 				21C409B5197C11060063D62D /* gameobject.tank.light.tower.xml in Resources */,
 				217AF17E1945EB010045CF9D /* gameobject.landscape.brush.xml in Resources */,
 				21A9D86019615F9700A1B62C /* material.model.common.xml in Resources */,
@@ -1165,6 +1176,7 @@
 				21BC34BD19080B47007B99DA /* shaderScreenQuad.frag in Resources */,
 				216204311949A74E00D129AD /* material.render.operation.screen.ssao.xml in Resources */,
 				21C409CC197C123D0063D62D /* tank_medium_body.mdl_01 in Resources */,
+				21C409DE197EE8E10063D62D /* material.tank.light.tower.common.xml in Resources */,
 				21A9D84B1961581600A1B62C /* model.MDL_mesh in Resources */,
 				212092CA191978D300FFC8D4 /* shaderSkyBox.vert in Resources */,
 				212092C9191978D300FFC8D4 /* shaderSkyBox.frag in Resources */,

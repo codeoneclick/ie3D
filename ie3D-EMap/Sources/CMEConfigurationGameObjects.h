@@ -32,5 +32,21 @@ public:
     glm::vec2 getSize(void) const;
 };
 
+class CMEConfigurationTankComplex : public CConfigurationGameObject
+{
+public:
+
+private:
+    
+protected:
+    
+public:
+    
+    CMEConfigurationTankComplex(void);
+    ~CMEConfigurationTankComplex(void);
+    
+    
+};
+
 
 #endif

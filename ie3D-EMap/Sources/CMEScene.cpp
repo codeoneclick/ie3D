@@ -140,7 +140,20 @@ void CMEScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTO
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
     {
         m_previousDraggedPoint = point;
+        
         CSharedModel model = m_root->createModel("gameobject.tank.light.body.xml");
+        model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
+        m_root->addModel(model);
+        
+        model = m_root->createModel("gameobject.tank.light.left.track.xml");
+        model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
+        m_root->addModel(model);
+        
+        model = m_root->createModel("gameobject.tank.light.right.track.xml");
+        model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
+        m_root->addModel(model);
+        
+        model = m_root->createModel("gameobject.tank.light.tower.xml");
         model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
         m_root->addModel(model);
     }
