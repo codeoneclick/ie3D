@@ -268,11 +268,6 @@ void IGameObject::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
 
 void IGameObject::enableRender(bool value)
 {
-    if(value)
-	{
-		assert(m_renderTechniqueImporter != nullptr);
-	}
-    
     for(const auto& iterator : m_materials)
     {
 		if(m_renderTechniqueImporter != nullptr)

@@ -27,7 +27,10 @@ public:
     virtual ~CMESceneFabricator(void);
     
     CSharedMELandscapeBrush createLandscapeBrush(const std::string& filename);
-    void deleteLandscapeBrush(CSharedMELandscapeBrushRef editableBrush);
+    void deleteLandscapeBrush(CSharedMELandscapeBrushRef gameObject);
+    
+    CSharedMETankComplex createTankComplex(const std::string& filename);
+    void deleteTankComplex(CSharedMETankComplexRef gameObject);
 };
 
 

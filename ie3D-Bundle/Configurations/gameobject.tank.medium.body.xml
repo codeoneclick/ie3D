@@ -1,0 +1,5 @@
+<model filename="tank_medium_body.mdl_01" is_batching="0">
+    <materials>
+		<material filename="material.tank.medium.body.common.xml"/>
+	</materials>
+</model>

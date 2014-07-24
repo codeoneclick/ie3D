@@ -24,6 +24,8 @@ public:
     
     void loadLandscapeBrushConfiguration(const std::string& filename,
                                          ISharedConfigurationLoadingHandlerRef handler);
+    void loadTankComplexConfiguration(const std::string& filename,
+                                      ISharedConfigurationLoadingHandlerRef handler);
     
 };
 

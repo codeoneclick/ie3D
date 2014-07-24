@@ -108,6 +108,10 @@ class IResourceLoadingHandler;
 typedef std::shared_ptr<IResourceLoadingHandler> ISharedResourceLoadingHandler;
 typedef const ISharedResourceLoadingHandler& ISharedResourceLoadingHandlerRef;
 
+class ISceneUpdateHandler;
+typedef std::shared_ptr<ISceneUpdateHandler> ISharedSceneUpdateHandler;
+typedef const ISharedSceneUpdateHandler& ISharedSceneUpdateHandlerRef;
+
 class CConfigurationAttribute;
 typedef std::shared_ptr<CConfigurationAttribute> CSharedConfigurationAttribute;
 typedef const CSharedConfigurationAttribute& CSharedConfigurationAttributeRef;
@@ -179,10 +183,6 @@ typedef const CSharedResourceAccessor& CSharedResourceAccessorRef;
 class CBoundBox;
 typedef std::shared_ptr<CBoundBox> CSharedBoundBox;
 typedef const CSharedBoundBox& CSharedBoundBoxRef;
-
-class IRenderHandler;
-typedef std::shared_ptr<IRenderHandler> ISharedRenderHandler;
-typedef const ISharedRenderHandler& ISharedRenderHandlerRef;
 
 class CAnimationMixer;
 typedef std::shared_ptr<CAnimationMixer> CSharedAnimationMixer;

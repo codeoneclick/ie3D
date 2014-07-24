@@ -87,3 +87,17 @@ void CMESceneTransition::deleteLandscapeBrush(CSharedMELandscapeBrushRef gameObj
     sceneFabricator->deleteLandscapeBrush(gameObject);
 }
 
+CSharedMETankComplex CMESceneTransition::createTankComplex(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
+    return sceneFabricator->createTankComplex(filename);
+}
+
+void CMESceneTransition::deleteTankComplex(CSharedMETankComplexRef gameObject)
+{
+    assert(m_sceneFabricator != nullptr);
+    std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
+    sceneFabricator->deleteTankComplex(gameObject);
+}
+

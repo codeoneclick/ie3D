@@ -16,12 +16,13 @@ class IRenderTechniqueHandler
 {
 private:
     
-    friend class CRenderPipeline;
-    friend class CRenderTechniqueWorldSpace;
-    
 protected:
     
     IRenderTechniqueHandler(void);
+    
+public:
+
+    virtual ~IRenderTechniqueHandler(void);
     
     virtual i32  zOrder(void) = 0;
     virtual bool checkOcclusion(void) = 0;
@@ -30,10 +31,6 @@ protected:
     virtual void onDraw(const std::string& techniqueName) = 0;
     virtual void onUnbind(const std::string& techniqueName) = 0;
     virtual void onBatch(const std::string& techniqueName) = 0;
-    
-public:
-    
-    virtual ~IRenderTechniqueHandler(void);
 };
 
 #endif

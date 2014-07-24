@@ -35,6 +35,9 @@ protected:
     CSharedLandscape m_landscape;
     CSharedMaterial m_landscapeMaterial;
     CSharedModel m_model;
+    CSharedMETankComplex m_lightTank;
+    CSharedMETankComplex m_mediumTank;
+    CSharedMETankComplex m_heavyTank;
     
     CSharedMELandscapeBrush m_landscapeBrush;
     

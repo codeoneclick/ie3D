@@ -1,0 +1,5 @@
+<model filename="tank_heavy_left_track.mdl_01" is_batching="0">
+    <materials>
+		<material filename="material.tank.heavy.left.track.common.xml"/>
+	</materials>
+</model>

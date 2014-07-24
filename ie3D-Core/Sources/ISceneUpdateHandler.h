@@ -15,16 +15,16 @@
 class ISceneUpdateHandler
 {
 private:
-    friend class CSceneUpdateMgr;
+    
 protected:
     
     ISceneUpdateHandler(void);
     
-    virtual void onSceneUpdate(f32 deltatime) = 0;
-    
 public:
     
     virtual ~ISceneUpdateHandler(void);
+    
+    virtual void onSceneUpdate(f32 deltatime) = 0;
 };
 
 #endif 

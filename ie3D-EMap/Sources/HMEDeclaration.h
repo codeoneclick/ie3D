@@ -15,6 +15,10 @@ class CMELandscapeBrush;
 typedef std::shared_ptr<CMELandscapeBrush> CSharedMELandscapeBrush;
 typedef const CSharedMELandscapeBrush& CSharedMELandscapeBrushRef;
 
+class CMETankComplex;
+typedef std::shared_ptr<CMETankComplex> CSharedMETankComplex;
+typedef const CSharedMETankComplex& CSharedMETankComplexRef;
+
 class CMEUIToSceneCommands;
 typedef std::shared_ptr<CMEUIToSceneCommands> CSharedMEUIToSceneCommands;
 typedef const CSharedMEUIToSceneCommands& CSharedMEUIToSceneCommandsRef;

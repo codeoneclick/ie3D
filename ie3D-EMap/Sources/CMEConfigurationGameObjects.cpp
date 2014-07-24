@@ -38,3 +38,57 @@ glm::vec2 CMEConfigurationLandscapeBrush::getSize(void) const
     
     return glm::vec2(x, y);
 }
+
+
+CMEConfigurationTankComplex::CMEConfigurationTankComplex(void) :
+CConfigurationGameObject(E_CONFIGURATION_CLASS_CUSTOM),
+kTankComplexMainNode("complex_model"),
+kTankComplexModelsConfigurationsNode("models"),
+kTankComplexModelConfigurationsNode("model"),
+kTankComplexModelFilenameAttribute("filename"),
+kTankComplexModelPartAttribute("part")
+{
+    
+}
+
+CMEConfigurationTankComplex::~CMEConfigurationTankComplex(void)
+{
+    
+}
+
+std::vector<std::string> CMEConfigurationTankComplex::getModelsConfigurationsFilenames(void) const
+{
+    const auto& iterator = m_attributes.find(kTankComplexModelsConfigurationsNode + ":" +
+                                             kTankComplexModelConfigurationsNode + ":" +
+                                             kTankComplexModelFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    std::vector<std::string> filenames;
+    for(const auto& filename : iterator->second)
+    {
+        filenames.push_back(filename->getString());
+    }
+    return filenames;
+}
+
+std::vector<std::string> CMEConfigurationTankComplex::getModelsConfigurationParts(void) const
+{
+    const auto& iterator = m_attributes.find(kTankComplexModelsConfigurationsNode + ":" +
+                                             kTankComplexModelConfigurationsNode + ":" +
+                                             kTankComplexModelPartAttribute);
+    assert(iterator != m_attributes.end());
+    std::vector<std::string> filenames;
+    for(const auto& filename : iterator->second)
+    {
+        filenames.push_back(filename->getString());
+    }
+    return filenames;
+}
+
+std::vector<ISharedConfiguration> CMEConfigurationTankComplex::getModelsConfigurations(void) const
+{
+    const auto& iterator = m_configurations.find(kTankComplexModelsConfigurationsNode + ":" +
+                                                 kTankComplexModelConfigurationsNode + ":" +
+                                                 kTankComplexModelFilenameAttribute);
+    assert(iterator != m_configurations.end());
+    return iterator->second;
+}

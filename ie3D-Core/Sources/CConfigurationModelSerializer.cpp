@@ -42,7 +42,8 @@ ISharedConfiguration CConfigurationModelSerializer::serialize(const std::string&
     for (pugi::xml_node material = materialsNode.child(modelConfiguration->kGameObjectMaterialConfigurationNode.c_str());
          material;
          material = material.next_sibling(modelConfiguration->kGameObjectMaterialConfigurationNode.c_str()))
-    {        std::string filename = material.attribute(modelConfiguration->kGameObjectMaterialFilenameAttribute.c_str()).as_string();
+    {
+        std::string filename = material.attribute(modelConfiguration->kGameObjectMaterialFilenameAttribute.c_str()).as_string();
         modelConfiguration->setAttribute(getConfigurationAttributeKey(modelConfiguration->kGameObjectMaterialsConfigurationsNode,
                                                                  modelConfiguration->kGameObjectMaterialConfigurationNode,
                                                                  modelConfiguration->kGameObjectMaterialFilenameAttribute),
