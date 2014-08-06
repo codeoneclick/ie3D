@@ -9,9 +9,9 @@
 #ifndef CMEConfigurationAccessor_h
 #define CMEConfigurationAccessor_h
 
-#include "CConfigurationAccessor.h"
+#include "CEConfigurationAccessor.h"
 
-class CMEConfigurationAccessor : public CConfigurationAccessor
+class CMEConfigurationAccessor : public CEConfigurationAccessor
 {
 private:
     
@@ -24,8 +24,6 @@ public:
     
     void loadLandscapeBrushConfiguration(const std::string& filename,
                                          ISharedConfigurationLoadingHandlerRef handler);
-    void loadTankComplexConfiguration(const std::string& filename,
-                                      ISharedConfigurationLoadingHandlerRef handler);
     
 };
 

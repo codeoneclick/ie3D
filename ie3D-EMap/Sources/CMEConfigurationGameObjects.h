@@ -32,30 +32,4 @@ public:
     glm::vec2 getSize(void) const;
 };
 
-class CMEConfigurationTankComplex : public CConfigurationGameObject
-{
-public:
-
-    const std::string kTankComplexMainNode;
-    const std::string kTankComplexModelsConfigurationsNode;
-    const std::string kTankComplexModelConfigurationsNode;
-    const std::string kTankComplexModelFilenameAttribute;
-    const std::string kTankComplexModelPartAttribute;
-    
-private:
-    
-protected:
-    
-public:
-    
-    CMEConfigurationTankComplex(void);
-    ~CMEConfigurationTankComplex(void);
-    
-    std::vector<std::string> getModelsConfigurationParts(void) const;
-    std::vector<std::string> getModelsConfigurationsFilenames(void) const;
-    std::vector<ISharedConfiguration> getModelsConfigurations(void) const;
-
-};
-
-
 #endif

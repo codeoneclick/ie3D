@@ -9,6 +9,8 @@
 #ifndef HEDeclaration_h
 #define HEDeclaration_h
 
+#include "HDeclaration.h"
+
 class CEComplexModel;
 typedef std::shared_ptr<CEComplexModel> CESharedComplexModel;
 typedef const CESharedComplexModel& CESharedComplexModelRef;

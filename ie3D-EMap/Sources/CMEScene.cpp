@@ -15,7 +15,7 @@
 #include "CSkyBox.h"
 #include "CParticleEmitter.h"
 #include "CMapDragController.h"
-#include "CMESceneTransition.h"
+#include "CMEGameTransition.h"
 #include "CMELandscapeBrush.h"
 #include "CCollisionMgr.h"
 #include "CMaterial.h"
@@ -25,7 +25,7 @@
 #include "CMESceneToUICommands.h"
 #include "CResourceAccessor.h"
 #include "CTexture.h"
-#include "CMETankComplex.h"
+#include "CEComplexModel.h"
 
 CMEScene::CMEScene(IGameTransition* root) :
 IScene(root),
@@ -84,22 +84,22 @@ void CMEScene::load(void)
     
     m_root->addCollisionHandler(shared_from_this());
     
-    CMESceneTransition* transition = static_cast<CMESceneTransition*>(m_root);
+    CMEGameTransition* transition = static_cast<CMEGameTransition*>(m_root);
     m_landscapeBrush = transition->createLandscapeBrush("gameobject.landscape.brush.xml");
     m_root->addCustomGameObject(m_landscapeBrush);
     m_landscapeBrush->setLandscape(m_landscape);
     m_landscapeBrush->setSize(m_editableSettings.m_brushSize);
     
-    m_lightTank = transition->createTankComplex("gameobject.tank.light.xml");
+    m_lightTank = transition->createComplexModel("gameobject.tank.light.xml");
     m_root->addCustomGameObject(m_lightTank);
     m_lightTank->setScale(glm::vec3(7.0, 7.0, 7.0));
     
-    m_mediumTank = transition->createTankComplex("gameobject.tank.medium.xml");
+    m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
     m_root->addCustomGameObject(m_mediumTank);
     m_mediumTank->setScale(glm::vec3(7.0, 7.0, 7.0));
     m_mediumTank->setPosition(glm::vec3(0.0, 0.0, 32.0));
     
-    m_heavyTank = transition->createTankComplex("gameobject.tank.heavy.xml");
+    m_heavyTank = transition->createComplexModel("gameobject.tank.heavy.xml");
     m_root->addCustomGameObject(m_heavyTank);
     m_heavyTank->setScale(glm::vec3(7.0, 7.0, 7.0));
     m_heavyTank->setPosition(glm::vec3(0.0, 0.0, 64.0));

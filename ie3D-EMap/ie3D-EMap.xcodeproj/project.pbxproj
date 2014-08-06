@@ -32,7 +32,7 @@
 		21138524194C40B30041A18A /* shaderGameObjectNormal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21138522194C40B30041A18A /* shaderGameObjectNormal.frag */; };
 		21138525194C40B30041A18A /* shaderGameObjectNormal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21138523194C40B30041A18A /* shaderGameObjectNormal.vert */; };
 		21208EA51906F75D00FFC8D4 /* CMEScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E971906F75D00FFC8D4 /* CMEScene.cpp */; };
-		21208EA61906F75D00FFC8D4 /* CMESceneController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E991906F75D00FFC8D4 /* CMESceneController.cpp */; };
+		21208EA61906F75D00FFC8D4 /* CMEGameController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E991906F75D00FFC8D4 /* CMEGameController.cpp */; };
 		21208EA71906F75D00FFC8D4 /* CMEGameTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9B1906F75D00FFC8D4 /* CMEGameTransition.cpp */; };
 		2120900B1906FBD600FFC8D4 /* Cocoa.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2120900A1906FBD600FFC8D4 /* Cocoa.framework */; };
 		2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2120900C1906FC5000FFC8D4 /* moc_CMainWindow.cpp */; };
@@ -65,9 +65,6 @@
 		217AF1821945EE1E0045CF9D /* shaderLandscapeBrush.frag in Resources */ = {isa = PBXBuildFile; fileRef = 217AF1801945EE1E0045CF9D /* shaderLandscapeBrush.frag */; };
 		217AF1831945EE1E0045CF9D /* shaderLandscapeBrush.vert in Resources */ = {isa = PBXBuildFile; fileRef = 217AF1811945EE1E0045CF9D /* shaderLandscapeBrush.vert */; };
 		217C32F0197FA14F001224CE /* gameobject.tank.light.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217C32EF197FA14F001224CE /* gameobject.tank.light.xml */; };
-		217C32F4197FABFF001224CE /* CMEConfigurationTankComplexSerializer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 217C32F2197FABFF001224CE /* CMEConfigurationTankComplexSerializer.cpp */; };
-		217C32F7197FAE2B001224CE /* CMEConfigurationTankComplexLoadingOperation.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 217C32F5197FAE2B001224CE /* CMEConfigurationTankComplexLoadingOperation.cpp */; };
-		217C32FA197FB736001224CE /* CMETankComplex.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 217C32F8197FB736001224CE /* CMETankComplex.cpp */; };
 		2191CE30196E872200CE2813 /* CMEPlacementModel.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */; };
 		2191CE7A196EE8D800CE2813 /* temp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2191CE79196EE8D800CE2813 /* temp.png */; };
 		21A9D84B1961581600A1B62C /* model.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D8481961581600A1B62C /* model.MDL_mesh */; };
@@ -275,8 +272,8 @@
 		21138523194C40B30041A18A /* shaderGameObjectNormal.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderGameObjectNormal.vert; path = "../ie3D-Bundle/Shaders/shaderGameObjectNormal.vert"; sourceTree = SOURCE_ROOT; };
 		21208E971906F75D00FFC8D4 /* CMEScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEScene.cpp; path = Sources/CMEScene.cpp; sourceTree = SOURCE_ROOT; };
 		21208E981906F75D00FFC8D4 /* CMEScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEScene.h; path = Sources/CMEScene.h; sourceTree = SOURCE_ROOT; };
-		21208E991906F75D00FFC8D4 /* CMESceneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMESceneController.cpp; path = Sources/CMESceneController.cpp; sourceTree = SOURCE_ROOT; };
-		21208E9A1906F75D00FFC8D4 /* CMESceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMESceneController.h; path = Sources/CMESceneController.h; sourceTree = SOURCE_ROOT; };
+		21208E991906F75D00FFC8D4 /* CMEGameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEGameController.cpp; path = Sources/CMEGameController.cpp; sourceTree = SOURCE_ROOT; };
+		21208E9A1906F75D00FFC8D4 /* CMEGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEGameController.h; path = Sources/CMEGameController.h; sourceTree = SOURCE_ROOT; };
 		21208E9B1906F75D00FFC8D4 /* CMEGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEGameTransition.cpp; path = Sources/CMEGameTransition.cpp; sourceTree = SOURCE_ROOT; };
 		21208E9C1906F75D00FFC8D4 /* CMEGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEGameTransition.h; path = Sources/CMEGameTransition.h; sourceTree = SOURCE_ROOT; };
 		2120900A1906FBD600FFC8D4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -315,12 +312,6 @@
 		217AF1801945EE1E0045CF9D /* shaderLandscapeBrush.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeBrush.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeBrush.frag"; sourceTree = "<group>"; };
 		217AF1811945EE1E0045CF9D /* shaderLandscapeBrush.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeBrush.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeBrush.vert"; sourceTree = "<group>"; };
 		217C32EF197FA14F001224CE /* gameobject.tank.light.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.tank.light.xml; path = "../ie3D-Bundle/Configurations/gameobject.tank.light.xml"; sourceTree = SOURCE_ROOT; };
-		217C32F2197FABFF001224CE /* CMEConfigurationTankComplexSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationTankComplexSerializer.cpp; path = Sources/CMEConfigurationTankComplexSerializer.cpp; sourceTree = SOURCE_ROOT; };
-		217C32F3197FABFF001224CE /* CMEConfigurationTankComplexSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationTankComplexSerializer.h; path = Sources/CMEConfigurationTankComplexSerializer.h; sourceTree = SOURCE_ROOT; };
-		217C32F5197FAE2B001224CE /* CMEConfigurationTankComplexLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationTankComplexLoadingOperation.cpp; path = Sources/CMEConfigurationTankComplexLoadingOperation.cpp; sourceTree = SOURCE_ROOT; };
-		217C32F6197FAE2B001224CE /* CMEConfigurationTankComplexLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationTankComplexLoadingOperation.h; path = Sources/CMEConfigurationTankComplexLoadingOperation.h; sourceTree = SOURCE_ROOT; };
-		217C32F8197FB736001224CE /* CMETankComplex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMETankComplex.cpp; path = Sources/CMETankComplex.cpp; sourceTree = SOURCE_ROOT; };
-		217C32F9197FB736001224CE /* CMETankComplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMETankComplex.h; path = Sources/CMETankComplex.h; sourceTree = SOURCE_ROOT; };
 		217C32FB197FD1D3001224CE /* HMEEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HMEEnums.h; path = Sources/HMEEnums.h; sourceTree = SOURCE_ROOT; };
 		2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEPlacementModel.cpp; path = Sources/CMEPlacementModel.cpp; sourceTree = SOURCE_ROOT; };
 		2191CE2F196E872200CE2813 /* CMEPlacementModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEPlacementModel.h; path = Sources/CMEPlacementModel.h; sourceTree = SOURCE_ROOT; };
@@ -586,8 +577,6 @@
 			children = (
 				2113850E194351DD0041A18A /* CMEConfigurationLandscapeBrushSerializer.h */,
 				2113850D194351DD0041A18A /* CMEConfigurationLandscapeBrushSerializer.cpp */,
-				217C32F3197FABFF001224CE /* CMEConfigurationTankComplexSerializer.h */,
-				217C32F2197FABFF001224CE /* CMEConfigurationTankComplexSerializer.cpp */,
 			);
 			name = Serializers;
 			sourceTree = "<group>";
@@ -607,8 +596,6 @@
 				211385071943519A0041A18A /* Serializers */,
 				21138511194351EB0041A18A /* CMEConfigurationLandscapeBrushLoadingOperation.h */,
 				21138510194351EB0041A18A /* CMEConfigurationLandscapeBrushLoadingOperation.cpp */,
-				217C32F6197FAE2B001224CE /* CMEConfigurationTankComplexLoadingOperation.h */,
-				217C32F5197FAE2B001224CE /* CMEConfigurationTankComplexLoadingOperation.cpp */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -815,8 +802,6 @@
 				212092A919106B6100FFC8D4 /* CMELandscapeBrush.cpp */,
 				2191CE2F196E872200CE2813 /* CMEPlacementModel.h */,
 				2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */,
-				217C32F9197FB736001224CE /* CMETankComplex.h */,
-				217C32F8197FB736001224CE /* CMETankComplex.cpp */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -834,8 +819,8 @@
 			isa = PBXGroup;
 			children = (
 				217AF17B1945D98A0045CF9D /* Transitions */,
-				21208E9A1906F75D00FFC8D4 /* CMESceneController.h */,
-				21208E991906F75D00FFC8D4 /* CMESceneController.cpp */,
+				21208E9A1906F75D00FFC8D4 /* CMEGameController.h */,
+				21208E991906F75D00FFC8D4 /* CMEGameController.cpp */,
 			);
 			name = "StateMachine Managment";
 			sourceTree = "<group>";
@@ -1367,17 +1352,14 @@
 				2113850C194351CF0041A18A /* CMEConfigurationGameObjects.cpp in Compile Sources */,
 				21138515194351F80041A18A /* CMEConfigurationAccessor.cpp in Compile Sources */,
 				212092AB19106B6100FFC8D4 /* CMELandscapeBrush.cpp in Compile Sources */,
-				217C32F7197FAE2B001224CE /* CMEConfigurationTankComplexLoadingOperation.cpp in Compile Sources */,
 				21CB5312196C05610066EC6D /* CMEUIToSceneCommands.cpp in Compile Sources */,
-				21208EA61906F75D00FFC8D4 /* CMESceneController.cpp in Compile Sources */,
+				21208EA61906F75D00FFC8D4 /* CMEGameController.cpp in Compile Sources */,
 				212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */,
 				21208EA71906F75D00FFC8D4 /* CMEGameTransition.cpp in Compile Sources */,
 				21208EA51906F75D00FFC8D4 /* CMEScene.cpp in Compile Sources */,
 				2113850F194351DD0041A18A /* CMEConfigurationLandscapeBrushSerializer.cpp in Compile Sources */,
 				21138512194351EB0041A18A /* CMEConfigurationLandscapeBrushLoadingOperation.cpp in Compile Sources */,
-				217C32FA197FB736001224CE /* CMETankComplex.cpp in Compile Sources */,
 				217AF1751945BAD70045CF9D /* CMESceneFabricator.cpp in Compile Sources */,
-				217C32F4197FABFF001224CE /* CMEConfigurationTankComplexSerializer.cpp in Compile Sources */,
 				2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */,
 				5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */,
 				21C4099B1979B85E0063D62D /* shaderTexture2D.frag in Compile Sources */,

@@ -5,8 +5,8 @@
 
 #if defined(__OSX__) || defined(__WIN32__)
 
-#include "CMESceneController.h"
-#include "CMESceneTransition.h"
+#include "CMEGameController.h"
+#include "CMEGameTransition.h"
 #include "CMEScene.h"
 #include "IOGLWindow.h"
 #include "CMEUIToSceneCommands.h"
@@ -26,8 +26,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
 QMainWindow(parent),
 #if defined(__OSX__) || defined(__WIN32__)
 
-m_editableSceneController(nullptr),
-m_editableSceneTransition(nullptr),
+m_editableGameController(nullptr),
+m_editableGameTransition(nullptr),
 m_recentFilename(""),
 
 #endif
@@ -74,14 +74,14 @@ void CMainWindow::execute(void)
     m_sceneToUICommands->connectSetTextureSamplerCommand(std::bind(&CMainWindow::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
     
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)view);
-    m_editableSceneController = std::make_shared<CMESceneController>();
-    m_editableSceneTransition = std::static_pointer_cast<CMESceneTransition>(m_editableSceneController->createEditableSceneTransition("transition.main.xml", window));
+    m_editableGameController = std::make_shared<CMEGameController>();
+    m_editableGameTransition = std::static_pointer_cast<CMEGameTransition>(m_editableGameController->createEditableGameTransition("transition.main.xml", window));
     
-    m_editableSceneTransition->getConfigurationAccessor()->loadMaterialConfiguration("material.texture2D.xml", shared_from_this());
+    m_editableGameTransition->getConfigurationAccessor()->loadMaterialConfiguration("material.texture2D.xml", shared_from_this());
     
-    m_editableSceneController->RegisterTransition(m_editableSceneTransition);
-    m_editableSceneController->GoToTransition("transition.main.xml");
-    m_editableSceneTransition->setSceneToUICommands(m_sceneToUICommands);
+    m_editableGameController->RegisterTransition(m_editableGameTransition);
+    m_editableGameController->GoToTransition("transition.main.xml");
+    m_editableGameTransition->setSceneToUICommands(m_sceneToUICommands);
     
 #endif
 }
@@ -104,7 +104,7 @@ void CMainWindow::on_m_brushSizeSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Brush size: "<<m_previousBrushSize<<" [4:32]";
     ui->m_brushSizeLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_editableSceneTransition->getUIToSceneCommands()->executeSetBrushSizeCommand(m_previousBrushSize);
+    m_editableGameTransition->getUIToSceneCommands()->executeSetBrushSizeCommand(m_previousBrushSize);
 }
 
 void CMainWindow::on_m_brushStrengthSlider_valueChanged(int value)
@@ -112,7 +112,7 @@ void CMainWindow::on_m_brushStrengthSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Brush strength: "<<value<<" [1:10]";
     ui->m_brushStrengthLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_editableSceneTransition->getUIToSceneCommands()->executeSetBrushStrengthCommand(value);
+    m_editableGameTransition->getUIToSceneCommands()->executeSetBrushStrengthCommand(value);
 }
 
 void CMainWindow::on_m_falloffSlider_valueChanged(int value)
@@ -120,7 +120,7 @@ void CMainWindow::on_m_falloffSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Falloff coefficient: "<<value<<" [0:99]";
     ui->m_falloffLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_editableSceneTransition->getUIToSceneCommands()->executeSetFalloffCoefficientCommand(value);
+    m_editableGameTransition->getUIToSceneCommands()->executeSetFalloffCoefficientCommand(value);
 }
 
 void CMainWindow::on_m_smoothSlider_valueChanged(int value)
@@ -128,7 +128,7 @@ void CMainWindow::on_m_smoothSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Smooth coefficient: "<<value<<" [0:3]";
     ui->m_smoothLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_editableSceneTransition->getUIToSceneCommands()->executeSetSmoothCoefficientCommand(value);
+    m_editableGameTransition->getUIToSceneCommands()->executeSetSmoothCoefficientCommand(value);
 }
 
 void CMainWindow::on_m_texture01Btn_pressed()
@@ -148,7 +148,7 @@ void CMainWindow::on_m_texture01Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture01Img->setPixmap(pixmap);
-        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_01);
+        m_editableGameTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_01);
     }
 }
 
@@ -164,7 +164,7 @@ void CMainWindow::on_m_texture02Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture02Img->setPixmap(pixmap);
-        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_02);
+        m_editableGameTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_02);
     }
 }
 
@@ -180,7 +180,7 @@ void CMainWindow::on_m_texture03Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture03Img->setPixmap(pixmap);
-        m_editableSceneTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_03);
+        m_editableGameTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_03);
     }
 }
 
@@ -220,15 +220,15 @@ void CMainWindow::onConfigurationLoaded(ISharedConfigurationRef configuration, b
 
 void CMainWindow::on_m_textureTilling01SpinBox_valueChanged(int value)
 {
-    m_editableSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_01);
+    m_editableGameTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_01);
 }
 
 void CMainWindow::on_m_textureTilling02SpinBox_valueChanged(int value)
 {
-    m_editableSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_02);
+    m_editableGameTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_02);
 }
 
 void CMainWindow::on_m_textureTilling03SpinBox_valueChanged(int value)
 {
-    m_editableSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_03);
+    m_editableGameTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_03);
 }

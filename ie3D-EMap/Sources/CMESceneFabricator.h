@@ -9,10 +9,10 @@
 #ifndef CMESceneFabricator_h
 #define CMESceneFabricator_h
 
-#include "CSceneFabricator.h"
+#include "CESceneFabricator.h"
 #include "HMEDeclaration.h"
 
-class CMESceneFabricator : public CSceneFabricator
+class CMESceneFabricator : public CESceneFabricator
 {
 private:
     
@@ -27,10 +27,6 @@ public:
     virtual ~CMESceneFabricator(void);
     
     CSharedMELandscapeBrush createLandscapeBrush(const std::string& filename);
-    void deleteLandscapeBrush(CSharedMELandscapeBrushRef gameObject);
-    
-    CSharedMETankComplex createTankComplex(const std::string& filename);
-    void deleteTankComplex(CSharedMETankComplexRef gameObject);
 };
 
 
