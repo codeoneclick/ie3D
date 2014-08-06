@@ -105,19 +105,12 @@ public:
     void deleteCamera(CSharedCameraRef camera);
     
     CSharedModel createModel(const std::string& filename);
-    void deleteModel(CSharedModelRef model);
-    
     CSharedOcean createOcean(const std::string& filename);
-    void deleteOcean(CSharedOceanRef ocean);
-    
     CSharedSkyBox createSkyBox(const std::string& filename);
-    void deleteSkyBox(CSharedSkyBoxRef skyBox);
-    
     CSharedLandscape createLandscape(const std::string& filename);
-    void deleteLandscape(CSharedLandscapeRef landscape);
-    
     CSharedParticleEmitter createParticleEmitter(const std::string& filename);
-    void deleteParticleEmitter(CSharedParticleEmitterRef particleEmitter);
+    
+    void deleteGameObject(ISharedGameObjectRef gameObject);
     
     ui32 getFrameNumTriangles(void);
     ui32 getSceneNumTriangles(void);

@@ -1,26 +1,21 @@
 //
-//  CMETankComplex.h
-//  ie3D-EMap
+//  CEComplexModel.h
+//  ie3D-Engine
 //
-//  Created by sergey.sergeev on 7/23/14.
-//
+//  Created by sergey.sergeev on 8/6/14.
+//  Copyright (c) 2014 sergey.sergeev. All rights reserved.
 //
 
-#ifndef CMETankComplex_h
-#define CMETankComplex_h
+#ifndef CEComplexModel_h
+#define CEComplexModel_h
 
 #include "IGameObject.h"
-#include "HMEEnums.h"
 
-class CMETankComplex : public IGameObject
+class CEComplexModel : public IGameObject
 {
 private:
     
-    const std::string kTankPartBody;
-    const std::string kTankPartTower;
-    const std::string kTankPartLeftTrack;
-    const std::string kTankPartRightTrack;
-    std::array<CSharedModel, E_ME_TANK_PART_MAX> m_parts;
+    std::unordered_map<std::string, CSharedModel> m_parts;
     
 protected:
     
@@ -39,9 +34,9 @@ protected:
     
 public:
     
-    CMETankComplex(CSharedResourceAccessorRef resourceAccessor,
+    CEComplexModel(CSharedResourceAccessorRef resourceAccessor,
                    ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
-    ~CMETankComplex(void);
+    ~CEComplexModel(void);
     
     void setPosition(const glm::vec3& position);
     void setRotation(const glm::vec3& rotation);
@@ -56,5 +51,6 @@ public:
     void enableRender(bool value);
     void enableUpdate(bool value);
 };
+
 
 #endif

@@ -326,22 +326,10 @@ CSharedModel IGameTransition::createModel(const std::string& filename)
     return m_sceneFabricator->createModel(filename);
 }
 
-void IGameTransition::deleteModel(CSharedModelRef model)
-{
-    assert(m_sceneFabricator != nullptr);
-    m_sceneFabricator->deleteModel(model);
-}
-
 CSharedOcean IGameTransition::createOcean(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
     return m_sceneFabricator->createOcean(filename);
-}
-
-void IGameTransition::deleteOcean(CSharedOceanRef ocean)
-{
-    assert(m_sceneFabricator != nullptr);
-    m_sceneFabricator->deleteOcean(ocean);
 }
 
 CSharedSkyBox IGameTransition::createSkyBox(const std::string& filename)
@@ -350,22 +338,10 @@ CSharedSkyBox IGameTransition::createSkyBox(const std::string& filename)
     return m_sceneFabricator->createSkyBox(filename);
 }
 
-void IGameTransition::deleteSkyBox(CSharedSkyBoxRef skyBox)
-{
-    assert(m_sceneFabricator != nullptr);
-    m_sceneFabricator->deleteSkyBox(skyBox);
-}
-
 CSharedLandscape IGameTransition::createLandscape(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
     return m_sceneFabricator->createLandscape(filename);
-}
-
-void IGameTransition::deleteLandscape(CSharedLandscapeRef landscape)
-{
-    assert(m_sceneFabricator != nullptr);
-    m_sceneFabricator->deleteLandscape(landscape);
 }
 
 CSharedParticleEmitter IGameTransition::createParticleEmitter(const std::string& filename)
@@ -374,10 +350,10 @@ CSharedParticleEmitter IGameTransition::createParticleEmitter(const std::string&
     return m_sceneFabricator->createParticleEmitter(filename);
 }
 
-void IGameTransition::deleteParticleEmitter(CSharedParticleEmitterRef particleEmitter)
+void IGameTransition::deleteGameObject(ISharedGameObjectRef gameObject)
 {
     assert(m_sceneFabricator != nullptr);
-    m_sceneFabricator->deleteParticleEmitter(particleEmitter);
+    m_sceneFabricator->deleteGameObject(gameObject);
 }
 
 ui32 IGameTransition::getFrameNumTriangles(void)

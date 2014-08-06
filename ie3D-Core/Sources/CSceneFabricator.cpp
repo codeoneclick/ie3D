@@ -54,11 +54,6 @@ CSharedModel CSceneFabricator::createModel(const std::string& filename)
     return model;
 }
 
-void CSceneFabricator::deleteModel(CSharedModelRef model)
-{
-    m_gameObjectsContainer.erase(model);
-}
-
 CSharedOcean CSceneFabricator::createOcean(const std::string &filename)
 {
     assert(m_resourceAccessor != nullptr);
@@ -68,11 +63,6 @@ CSharedOcean CSceneFabricator::createOcean(const std::string &filename)
     m_configurationAccessor->loadOceanConfiguration(filename, ocean);
     m_gameObjectsContainer.insert(ocean);
     return ocean;
-}
-
-void CSceneFabricator::deleteOcean(CSharedOceanRef ocean)
-{
-    m_gameObjectsContainer.erase(ocean);
 }
 
 CSharedLandscape CSceneFabricator::createLandscape(const std::string &filename)
@@ -86,11 +76,6 @@ CSharedLandscape CSceneFabricator::createLandscape(const std::string &filename)
     return landscape;
 }
 
-void CSceneFabricator::deleteLandscape(CSharedLandscapeRef landscape)
-{
-    m_gameObjectsContainer.erase(landscape);
-}
-
 CSharedParticleEmitter CSceneFabricator::createParticleEmitter(const std::string& filename)
 {
     assert(m_resourceAccessor != nullptr);
@@ -100,11 +85,6 @@ CSharedParticleEmitter CSceneFabricator::createParticleEmitter(const std::string
     m_configurationAccessor->loadParticleEmitterConfiguration(filename, particleEmitter);
     m_gameObjectsContainer.insert(particleEmitter);
     return particleEmitter;
-}
-
-void CSceneFabricator::deleteParticleEmitter(CSharedParticleEmitterRef particleEmitter)
-{
-    m_gameObjectsContainer.erase(particleEmitter);
 }
 
 CSharedSkyBox CSceneFabricator::createSkyBox(const std::string& filename)
@@ -118,7 +98,9 @@ CSharedSkyBox CSceneFabricator::createSkyBox(const std::string& filename)
     return skyBox;
 }
 
-void CSceneFabricator::deleteSkyBox(CSharedSkyBoxRef skyBox)
+void CSceneFabricator::deleteGameObject(ISharedGameObjectRef gameObject)
 {
-    m_gameObjectsContainer.erase(skyBox);
+    m_gameObjectsContainer.erase(gameObject);
 }
+
+
