@@ -300,6 +300,17 @@ m_shaderId(0)
     m_attributes[E_SHADER_ATTRIBUTE_EXTRA] = -1;
 }
 
+CSharedShader CShader::constructCustomShader(const std::string& guid,
+                                             const std::string& vsSourceCode,
+                                             const std::string& fsSourceCode)
+{
+    CSharedShader shader = std::make_shared<CShader>(guid);
+    shader->m_status |= E_RESOURCE_STATUS_LOADED;
+    shader->m_status |= E_RESOURCE_STATUS_COMMITED;
+    return shader;
+
+}
+
 CShader::~CShader(void)
 {
     glDeleteProgram(m_shaderId);

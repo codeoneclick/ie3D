@@ -118,6 +118,11 @@ protected:
 public:
     
     CShader(const std::string& guid);
+    
+    static CSharedShader constructCustomShader(const std::string& guid,
+                                               const std::string& vsSourceCode,
+                                               const std::string& fsSourceCode);
+    
     ~CShader(void);
     
     std::string getVSFilename(void) const;

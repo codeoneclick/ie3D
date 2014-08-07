@@ -8,6 +8,7 @@
 
 #include "CShaderCommiter_GLSL.h"
 #include "CShader.h"
+#include "CShaderCompiler_GLSL.h"
 
 CShaderCommiter_GLSL::CShaderCommiter_GLSL(const std::string& guid,
                                            const std::string& vsFilename,
@@ -32,34 +33,9 @@ CShaderCommiter_GLSL::~CShaderCommiter_GLSL(void)
 ui32 CShaderCommiter_GLSL::compile(const std::string &sourceCode,
                                    GLenum shaderType)
 {
-    ui32 handle = glCreateShader(shaderType);
-    
-    std::string define = "";
-#if defined(__OSX__)
-    define = "#define __OSX__\n";
-#elif defined(__IOS__)
-    define = "#define __IOS__\n";
-    if(g_highPerformancePlatforms.count(getPlatform()) != 0)
-    {
-        define.append("#define __IOS_HIGH_PERFORMANCE__\n");
-    }
-#else
-    define = "";
-#endif
-    
-    char* shaderData = const_cast<char*>(sourceCode.c_str());
-    char* defineData = const_cast<char*>(define.c_str());
-    char* sources[2] = { defineData, shaderData};
-    glShaderSource(handle, 2, sources, NULL);
-    glCompileShader(handle);
-    
-    i32 success;
-    glGetShaderiv(handle, GL_COMPILE_STATUS, &success);
-    
-    GLchar message[1024];
-    memset(message, 0x0, 1024 * sizeof(GLchar));
-    glGetShaderInfoLog(handle, sizeof(message), 0, &message[0]);
-    m_message = message;
+    std::string outMessage = "";
+    bool outSuccess = false;
+    ui32 handle = CShaderCompiler_GLSL::compile(sourceCode, shaderType, &outMessage, &outSuccess);
     
     std::string messageTemplate = "";
     if(shaderType == GL_VERTEX_SHADER)
@@ -70,12 +46,12 @@ ui32 CShaderCommiter_GLSL::compile(const std::string &sourceCode,
     {
         messageTemplate.append("Fragment shader: ").append(m_fsFilename);
     }
-    if(message[0] != 0)
+    if(outMessage.length() != 0)
     {
-        std::cout<<messageTemplate<<"\n"<<message<<std::endl;
+        std::cout<<messageTemplate<<"\n"<<outMessage<<std::endl;
     }
     
-    if (success == GL_FALSE)
+    if (outSuccess == GL_FALSE)
     {
 #if defined(__NDK__)
         NDK_LOG("Error: GLSL guid %s", m_guid.c_str());
@@ -93,24 +69,16 @@ ui32 CShaderCommiter_GLSL::compile(const std::string &sourceCode,
 ui32 CShaderCommiter_GLSL::link(ui32 vsHandle,
                                 ui32 fsHandle)
 {
-    ui32 handle = glCreateProgram();
-    glAttachShader(handle, vsHandle);
-    glAttachShader(handle, fsHandle);
-    glLinkProgram(handle);
+    std::string outMessage = "";
+    bool outSuccess = false;
+    ui32 handle = CShaderCompiler_GLSL::link(vsHandle, fsHandle, &outMessage, &outSuccess);
     
-    i32 success;
-    glGetProgramiv(handle, GL_LINK_STATUS, &success);
-    
-    GLchar message[1024];
-    memset(message, 0x0, 1024 * sizeof(GLchar));
-    glGetProgramInfoLog(handle, sizeof(message), 0, &message[0]);
-    m_message = message;
-    if(message[0] != 0)
+    if(outMessage.length() != 0)
     {
-        std::cout<<"Vertex shader: "<<m_vsFilename<<" Fragment shader: "<<m_fsFilename<<"\n"<<message<<std::endl;
+        std::cout<<"Vertex shader: "<<m_vsFilename<<" Fragment shader: "<<m_fsFilename<<"\n"<<outMessage<<std::endl;
     }
     
-    if (success == GL_FALSE)
+    if (outSuccess == GL_FALSE)
     {
         m_status = E_COMMITER_STATUS_FAILURE;
 #if defined(__IOS__)
