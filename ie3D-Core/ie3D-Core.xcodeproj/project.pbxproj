@@ -233,6 +233,9 @@
 		213B7F311993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F321993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F331993CC5B006F3976 /* CShaderCompiler_GLSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */; };
+		213B7F391994CDFC006F3976 /* CRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F371994CDFC006F3976 /* CRenderTarget.cpp */; };
+		213B7F3A1994CDFC006F3976 /* CRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F371994CDFC006F3976 /* CRenderTarget.cpp */; };
+		213B7F3B1994CDFC006F3976 /* CRenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 213B7F381994CDFC006F3976 /* CRenderTarget.h */; };
 		2173174A1821AE6700FF3D1E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217317491821AE6700FF3D1E /* OpenGL.framework */; };
 		21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */; };
 		21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */; };
@@ -399,6 +402,9 @@
 		213265DC1906A42E001C98F7 /* HEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEnums.h; path = Sources/HEnums.h; sourceTree = SOURCE_ROOT; };
 		213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCompiler_GLSL.cpp; path = Sources/CShaderCompiler_GLSL.cpp; sourceTree = "<group>"; };
 		213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCompiler_GLSL.h; path = Sources/CShaderCompiler_GLSL.h; sourceTree = "<group>"; };
+		213B7F361994B78C006F3976 /* ShaderTexure2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShaderTexure2D.h; path = Sources/ShaderTexure2D.h; sourceTree = "<group>"; };
+		213B7F371994CDFC006F3976 /* CRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRenderTarget.cpp; path = Sources/CRenderTarget.cpp; sourceTree = "<group>"; };
+		213B7F381994CDFC006F3976 /* CRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderTarget.h; path = Sources/CRenderTarget.h; sourceTree = "<group>"; };
 		21457FE7181C4BEA0071839E /* IFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IFabricator.cpp; path = Sources/IFabricator.cpp; sourceTree = "<group>"; };
 		21457FE8181C4BEA0071839E /* IFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IFabricator.h; path = Sources/IFabricator.h; sourceTree = "<group>"; };
 		21457FE9181C4BEA0071839E /* IGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGraph.cpp; path = Sources/IGraph.cpp; sourceTree = "<group>"; };
@@ -414,7 +420,7 @@
 		2173348019644123002B3F90 /* CRenderTechniqueScreenSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderTechniqueScreenSpace.h; path = Sources/CRenderTechniqueScreenSpace.h; sourceTree = "<group>"; };
 		2173348419644139002B3F90 /* CRenderTechniqueWorldSpace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRenderTechniqueWorldSpace.cpp; path = Sources/CRenderTechniqueWorldSpace.cpp; sourceTree = "<group>"; };
 		2173348519644139002B3F90 /* CRenderTechniqueWorldSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderTechniqueWorldSpace.h; path = Sources/CRenderTechniqueWorldSpace.h; sourceTree = "<group>"; };
-		2173348919644157002B3F90 /* IRenderTechniqueImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueImporter.cpp; path = Sources/IRenderTechniqueImporter.cpp; sourceTree = "<group>"; };
+		2173348919644157002B3F90 /* IRenderTechniqueImporter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = IRenderTechniqueImporter.cpp; path = Sources/IRenderTechniqueImporter.cpp; sourceTree = "<group>"; };
 		2173348A19644157002B3F90 /* IRenderTechniqueImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueImporter.h; path = Sources/IRenderTechniqueImporter.h; sourceTree = "<group>"; };
 		2173348E1964416D002B3F90 /* IRenderTechniqueAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueAccessor.cpp; path = Sources/IRenderTechniqueAccessor.cpp; sourceTree = "<group>"; };
 		2173348F1964416D002B3F90 /* IRenderTechniqueAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueAccessor.h; path = Sources/IRenderTechniqueAccessor.h; sourceTree = "<group>"; };
@@ -939,6 +945,14 @@
 			name = Compilers;
 			sourceTree = "<group>";
 		};
+		213B7F351994B39D006F3976 /* Built-in Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				213B7F361994B78C006F3976 /* ShaderTexure2D.h */,
+			);
+			name = "Built-in Shaders";
+			sourceTree = "<group>";
+		};
 		217334BB1965AC74002B3F90 /* Techiques */ = {
 			isa = PBXGroup;
 			children = (
@@ -1204,6 +1218,7 @@
 		A420817C1733AA6F0004729E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				213B7F351994B39D006F3976 /* Built-in Shaders */,
 				2127E8581935042300D408C9 /* Editable Managment */,
 				A4364898179D74E900C51AC4 /* GestureRecognizer Managment */,
 				A42081921733AB070004729E /* Common */,
@@ -1348,6 +1363,8 @@
 				2173348E1964416D002B3F90 /* IRenderTechniqueAccessor.cpp */,
 				217334941964425B002B3F90 /* CRenderPipeline.h */,
 				217334931964425B002B3F90 /* CRenderPipeline.cpp */,
+				213B7F381994CDFC006F3976 /* CRenderTarget.h */,
+				213B7F371994CDFC006F3976 /* CRenderTarget.cpp */,
 			);
 			name = "Render Managment";
 			sourceTree = "<group>";
@@ -1770,6 +1787,7 @@
 				2191CEB4196EE95100CE2813 /* inftrees.h in Headers */,
 				21733479196440EB002B3F90 /* IRenderTechniqueBase.h in Headers */,
 				2127E85D1935056100D408C9 /* IEditableLandscape.h in Headers */,
+				213B7F3B1994CDFC006F3976 /* CRenderTarget.h in Headers */,
 				213B7F331993CC5B006F3976 /* CShaderCompiler_GLSL.h in Headers */,
 				2191CE73196EDCDE00CE2813 /* CTextureSerializer_PNG.h in Headers */,
 				2191CE4E196EDBEF00CE2813 /* pngdebug.h in Headers */,
@@ -1957,6 +1975,7 @@
 				21208FD81906FB5F00FFC8D4 /* CConfigurationLandscapeSerializer.cpp in Sources */,
 				21208FD91906FB5F00FFC8D4 /* CConfigurationParticleEmitterSerializer.cpp in Sources */,
 				21208FDA1906FB5F00FFC8D4 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */,
+				213B7F3A1994CDFC006F3976 /* CRenderTarget.cpp in Sources */,
 				2191CE58196EDBEF00CE2813 /* pngpread.c in Sources */,
 				21208FDB1906FB5F00FFC8D4 /* CConfigurationSSRenderOperationSerializer.cpp in Sources */,
 				21208FDC1906FB5F00FFC8D4 /* CConfigurationORenderOperationSerializer.cpp in Sources */,
@@ -2116,6 +2135,7 @@
 				2132661C1906A4AF001C98F7 /* CConfigurationLandscapeSerializer.cpp in Sources */,
 				2132661D1906A4AF001C98F7 /* CConfigurationParticleEmitterSerializer.cpp in Sources */,
 				2132661E1906A4AF001C98F7 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */,
+				213B7F391994CDFC006F3976 /* CRenderTarget.cpp in Sources */,
 				2191CE57196EDBEF00CE2813 /* pngpread.c in Sources */,
 				2132661F1906A4AF001C98F7 /* CConfigurationSSRenderOperationSerializer.cpp in Sources */,
 				213266201906A4AF001C98F7 /* CConfigurationORenderOperationSerializer.cpp in Sources */,

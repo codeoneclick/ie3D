@@ -8,6 +8,7 @@
 
 #include "CShader.h"
 #include "CTexture.h"
+#include "CShaderCompiler_GLSL.h"
 
 static ui32 g_shaderId = 0;
 
@@ -305,6 +306,35 @@ CSharedShader CShader::constructCustomShader(const std::string& guid,
                                              const std::string& fsSourceCode)
 {
     CSharedShader shader = std::make_shared<CShader>(guid);
+    
+    std::string outMessage = "";
+    bool outSuccess = false;
+    ui32 vsHandle = CShaderCompiler_GLSL::compile(vsSourceCode, GL_VERTEX_SHADER, &outMessage, &outSuccess);
+    if(!outSuccess)
+    {
+        std::cout<<outSuccess<<std::endl;
+        return nullptr;
+    }
+    
+    ui32 fsHandle = CShaderCompiler_GLSL::compile(fsSourceCode, GL_FRAGMENT_SHADER, &outMessage, &outSuccess);
+    if(!outSuccess)
+    {
+        std::cout<<outSuccess<<std::endl;
+        return nullptr;
+    }
+    
+    ui32 shaderId = CShaderCompiler_GLSL::link(vsHandle, fsHandle, &outMessage, &outSuccess);
+    if(!outSuccess)
+    {
+        std::cout<<outSuccess<<std::endl;
+        return nullptr;
+    }
+    
+    shader->m_shaderData = std::make_shared<CShaderData>(shaderId);
+    shader->m_shaderId = shaderId;
+    assert(shaderId != 0);
+    shader->setupUniforms();
+    
     shader->m_status |= E_RESOURCE_STATUS_LOADED;
     shader->m_status |= E_RESOURCE_STATUS_COMMITED;
     return shader;

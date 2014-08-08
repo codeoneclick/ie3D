@@ -13,6 +13,7 @@
 #include "CMESceneToUICommands.h"
 #include "CConfigurationAccessor.h"
 #include "CTexture.h"
+#include "IRenderTechniqueImporter.h"
 
 #endif
 
@@ -210,7 +211,36 @@ void CMainWindow::setSmoothCoefficient(ui32)
 
 void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
-    std::cout<<"[Texture 2D]"<<texture->getGuid()<<" , sampler: "<<sampler<<::std::endl;
+    std::stringstream stringstream;
+    stringstream<<"image_"<<sampler<<".png";
+    std::string filename(stringstream.str());
+    m_editableGameTransition->getRenderTechniqueImporter()->saveTexture(texture, filename, 256, 256);
+    
+    switch (sampler) {
+        case E_SHADER_SAMPLER_01:
+        {
+            QPixmap pixmap(QString(filename.c_str()));
+            ui->m_texture01Img->setPixmap(pixmap);
+        }
+            break;
+            
+        case E_SHADER_SAMPLER_02:
+        {
+            QPixmap pixmap(QString(filename.c_str()));
+            ui->m_texture02Img->setPixmap(pixmap);
+        }
+            break;
+            
+        case E_SHADER_SAMPLER_03:
+        {
+            QPixmap pixmap(QString(filename.c_str()));
+            ui->m_texture03Img->setPixmap(pixmap);
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 void CMainWindow::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)

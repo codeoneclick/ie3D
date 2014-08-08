@@ -31,6 +31,8 @@ public:
     
     void setMainRenderTechnique(CSharedMaterialRef material);
     
+    void saveTexture(CSharedTextureRef texture, const std::string& filename, ui32 width, ui32 height);
+    
     void addWorldSpaceRenderTechnique(const std::string& techniqueName, CSharedRenderTechniqueWorldSpaceRef technique);
     void removeWorldSpaceRenderTechnique(const std::string& techniqueName);
     

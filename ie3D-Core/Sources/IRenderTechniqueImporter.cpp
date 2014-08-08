@@ -11,6 +11,22 @@
 #include "CRenderTechniqueWorldSpace.h"
 #include "CRenderTechniqueScreenSpace.h"
 #include "IGraphicsContext.h"
+#include "CRenderTarget.h"
+#include "CShader.h"
+#include "CMaterial.h"
+#include "CQuad.h"
+
+#if defined(__OSX__)
+
+#include <Cocoa/Cocoa.h>
+#include <QuartzCore/QuartzCore.h>
+
+#elif defined(__IOS__)
+
+#include <UIKit/UIKit.h>
+#include <QuartzCore/QuartzCore.h>
+
+#endif
 
 IRenderTechniqueImporter::IRenderTechniqueImporter(ISharedGraphicsContextRef graphicsContext) :
 m_graphicsContext(graphicsContext),
@@ -79,4 +95,97 @@ void IRenderTechniqueImporter::removeRenderTechniqueHandler(const std::string& t
     const auto& iterator = m_worldSpaceRenderTechniques.find(techniqueName);
     assert(iterator != m_worldSpaceRenderTechniques.end());
     iterator->second->removeRenderTechniqueHandler(handler);
+}
+
+void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std::string& filename, ui32 width, ui32 height)
+{
+    CSharedMaterial material = std::make_shared<CMaterial>();
+    CSharedShader shader = CShader::constructCustomShader("texture2D", ShaderTexure2D_vert, ShaderTexure2D_frag);
+    CSharedQuad quad = std::make_shared<CQuad>();
+    material->setShader(shader);
+    material->setTexture(texture, E_SHADER_SAMPLER_01);
+    CSharedRenderTarget renderTarget = std::make_shared<CRenderTarget>(m_graphicsContext, width, height);
+    
+    renderTarget->begin();
+    renderTarget->clear();
+    
+    material->bind();
+    quad->Bind(material->getShader()->getAttributesRef());
+    
+    quad->Draw();
+    
+    quad->Unbind(material->getShader()->getAttributesRef());
+    material->unbind();
+    
+    ui32 rawdataSize = static_cast<ui32>(width) * static_cast<ui32>(height) * 4;
+    ui8 *rawdata = new ui8[rawdataSize];
+    glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, rawdata);
+    
+    renderTarget->end();
+    
+#if defined(__OSX__)
+    
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, rawdata, rawdataSize, NULL);
+    ui32 bitsPerComponent = 8;
+    ui32 bitsPerPixel = 32;
+    ui32 bytesPerRow = 4 * width;
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    CGImageRef image = CGImageCreate(width,
+                                     height,
+                                     bitsPerComponent,
+                                     bitsPerPixel,
+                                     bytesPerRow,
+                                     colorSpaceRef,
+                                     bitmapInfo,
+                                     provider, NULL, NO, renderingIntent);
+    
+    CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:[NSString stringWithUTF8String:filename.c_str()]];
+    CGImageDestinationRef destination = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, NULL);
+    CGImageDestinationAddImage(destination, image, nil);
+    
+    if (!CGImageDestinationFinalize(destination))
+    {
+        assert(false);
+    }
+    CFRelease(destination);
+    
+#elif defined(__IOS__)
+    
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, rawdata, rawdataSize, NULL);
+    
+    ui32 bitsPerComponent = 8;
+    ui32 bitsPerPixel = 32;
+    ui32 bytesPerRow = 4 * m_frame.z;
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    CGImageRef imageRef = CGImageCreate(m_frame.z,
+                                        m_frame.w,
+                                        bitsPerComponent,
+                                        bitsPerPixel,
+                                        bytesPerRow,
+                                        colorSpaceRef,
+                                        bitmapInfo,
+                                        provider, NULL, NO, renderingIntent);
+    UIImage *image = [UIImage imageWithCGImage:imageRef];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    UIGraphicsBeginImageContext(CGSizeMake(m_frame.z, m_frame.w));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGAffineTransform flip = CGAffineTransformMake(1, 0, 0, -1, 0, m_frame.w);
+    CGContextConcatCTM(context, flip);
+    [imageView.layer renderInContext:context];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *imageFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:
+                               [NSString stringWithCString:imageFilename.c_str()
+                                                  encoding:[NSString defaultCStringEncoding]]];
+    [UIImagePNGRepresentation(image) writeToFile:imageFilePath atomically:YES];
+    
+#endif
+    
 }

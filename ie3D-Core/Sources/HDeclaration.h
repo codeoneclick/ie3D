@@ -332,4 +332,8 @@ class IRenderTechniqueAccessor;
 typedef std::shared_ptr<IRenderTechniqueAccessor> ISharedRenderTechniqueAccessor;
 typedef const ISharedRenderTechniqueAccessor& ISharedRenderTechniqueAccessorRef;
 
+class CRenderTarget;
+typedef std::shared_ptr<CRenderTarget> CSharedRenderTarget;
+typedef const CSharedRenderTarget& CSharedRenderTargetRef;
+
 #endif
