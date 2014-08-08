@@ -13,11 +13,11 @@ ie3D-Demo - basic demo, playground for engine feature testing on iOS.
 
 Screenshots:
 
-![alt tag](https://www.dropbox.com/s/56xhgulnb7kul7d/Screen%20Shot%202014-05-23%20at%2016.36.55.png)
+![](https://www.dropbox.com/s/56xhgulnb7kul7d/Screen%20Shot%202014-05-23%20at%2016.36.55.png)
 
-![alt tag](https://www.dropbox.com/s/ez0yx0czvvp8pb6/Screen%20Shot%202014-05-23%20at%2016.52.15.png)
+![](https://www.dropbox.com/s/ez0yx0czvvp8pb6/Screen%20Shot%202014-05-23%20at%2016.52.15.png)
 
-![alt tag](https://www.dropbox.com/s/wb0n6xgoqbhkihf/Screen%20Shot%202014-08-08%20at%2018.33.20.png)
+![](https://www.dropbox.com/s/wb0n6xgoqbhkihf/Screen%20Shot%202014-08-08%20at%2018.33.20.png)
 
 ie3D-Bundle - just folder with resources (textures, meshes, shaders etc).
 
