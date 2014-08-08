@@ -42,7 +42,7 @@ std::shared_ptr<IGameTransition> CDemoGameController::CreateKOTHInGameTransition
                                                                                                 m_resourceAccessor,
                                                                                                 m_configurationAccessor);
     mainTransition->initScene();
-    m_configurationAccessor->LoadGameTransitionConfiguration(filename, mainTransition);
+    m_configurationAccessor->loadGameTransitionConfiguration(filename, mainTransition);
     assert(mainTransition != nullptr);
     return mainTransition;
 }

@@ -73,13 +73,12 @@ void CMainWindow::execute(void)
     m_sceneToUICommands->connectSetFalloffCoefficientCommand(std::bind(&CMainWindow::setFalloffCoefficient, this, std::placeholders::_1));
     m_sceneToUICommands->connectSetSmoothCoefficientCommand(std::bind(&CMainWindow::setSmoothCoefficient, this, std::placeholders::_1));
     m_sceneToUICommands->connectSetTextureSamplerCommand(std::bind(&CMainWindow::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
+    m_sceneToUICommands->connectSetTillingTexcoordCommand(std::bind(&CMainWindow::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
     
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)view);
     m_editableGameController = std::make_shared<CMEGameController>();
     m_editableGameTransition = std::static_pointer_cast<CMEGameTransition>(m_editableGameController->createEditableGameTransition("transition.main.xml", window));
-    
-    m_editableGameTransition->getConfigurationAccessor()->loadMaterialConfiguration("material.texture2D.xml", shared_from_this());
-    
+
     m_editableGameController->RegisterTransition(m_editableGameTransition);
     m_editableGameController->GoToTransition("transition.main.xml");
     m_editableGameTransition->setSceneToUICommands(m_sceneToUICommands);
@@ -237,15 +236,34 @@ void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER 
             ui->m_texture03Img->setPixmap(pixmap);
         }
             break;
-            
         default:
             break;
     }
 }
 
-void CMainWindow::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
+void CMainWindow::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 {
-    
+    switch (sampler) {
+        case E_SHADER_SAMPLER_01:
+        {
+            ui->m_textureTilling01SpinBox->setValue(value);
+        }
+            break;
+            
+        case E_SHADER_SAMPLER_02:
+        {
+            ui->m_textureTilling02SpinBox->setValue(value);
+        }
+            break;
+            
+        case E_SHADER_SAMPLER_03:
+        {
+            ui->m_textureTilling03SpinBox->setValue(value);
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 void CMainWindow::on_m_textureTilling01SpinBox_valueChanged(int value)

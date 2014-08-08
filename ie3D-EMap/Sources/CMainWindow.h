@@ -32,8 +32,7 @@ protected:
     void setFalloffCoefficient(ui32 value);
     void setSmoothCoefficient(ui32 value);
     void setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler);
-    
-    void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
+    void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     
     i32 m_previousBrushSize;
     std::string m_recentFilename;

@@ -241,6 +241,7 @@ void IGameObject::setTexture(CSharedTextureRef texture,
             iterator.second->setTexture(texture, sampler);
         }
     }
+    texture->addLoadingHandler(shared_from_this());
 }
 
 void IGameObject::setClippingPlane(const glm::vec4& clippingPlane,

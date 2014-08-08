@@ -284,6 +284,7 @@ void CLandscape::setTexture(CSharedTextureRef texture,
                             E_SHADER_SAMPLER sampler,
                             const std::string& renderTechnique)
 {
+    IGameObject::setTexture(texture, sampler, renderTechnique);
     std::shared_ptr<CConfigurationLandscape> gameObjectConfiguration = std::static_pointer_cast<CConfigurationLandscape>(m_configuration);
     assert(gameObjectConfiguration != nullptr);
     
@@ -310,6 +311,7 @@ void CLandscape::setTexture(CSharedTextureRef texture,
             iterator->setTexture(texture, sampler);
         }
     }
+    texture->addLoadingHandler(shared_from_this());
 }
 
 void CLandscape::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)

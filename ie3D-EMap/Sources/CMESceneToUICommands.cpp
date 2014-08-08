@@ -13,7 +13,8 @@ m_setBrushSizeCommand(nullptr),
 m_setBrushStrengthCommnand(nullptr),
 m_setFalloffCoefficientCommand(nullptr),
 m_setSmoothCoefficientCommand(nullptr),
-m_setTextureSampler(nullptr)
+m_setTextureSampler(nullptr),
+m_setTillingTexcoordCommand(nullptr)
 {
     
 }
@@ -85,5 +86,18 @@ void CMESceneToUICommands::executeSetTextureSampler(CSharedTextureRef texture, E
     if(m_setTextureSampler != nullptr)
     {
         m_setTextureSampler(texture, sampler);
+    }
+}
+
+void CMESceneToUICommands::connectSetTillingTexcoordCommand(const __SET_TILLING_TEXCOORD& command)
+{
+    m_setTillingTexcoordCommand = command;
+}
+
+void CMESceneToUICommands::executeSetTillingTexcoordCommand(f32 value, E_SHADER_SAMPLER sampler)
+{
+    if(m_setTillingTexcoordCommand != nullptr)
+    {
+        m_setTillingTexcoordCommand(value, sampler);
     }
 }

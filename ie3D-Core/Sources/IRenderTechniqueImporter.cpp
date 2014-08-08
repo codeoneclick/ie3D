@@ -15,6 +15,7 @@
 #include "CShader.h"
 #include "CMaterial.h"
 #include "CQuad.h"
+#include "CTexture.h"
 
 #if defined(__OSX__)
 
@@ -51,8 +52,14 @@ void IRenderTechniqueImporter::setMainRenderTechnique(CSharedMaterialRef materia
                                                                    m_graphicsContext->getRenderBuffer());
 #if defined(__IOS__)
     const auto& platform = g_platforms.find(getPlatform());
-    assert(platform != g_platforms.end());
-    std::cout<<"[Device] : "<<platform->second<<std::endl;
+    if(platform == g_platforms.end())
+    {
+        std::cout<<"[Device] : Simulator"<<std::endl;
+    }
+    else
+    {
+        std::cout<<"[Device] : "<<platform->second<<std::endl;
+    }
 #endif
     std::cout<<"[Output resolution] : "<<m_graphicsContext->getWidth()<<"x"<<m_graphicsContext->getHeight()<<std::endl;
 }
@@ -99,6 +106,9 @@ void IRenderTechniqueImporter::removeRenderTechniqueHandler(const std::string& t
 
 void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std::string& filename, ui32 width, ui32 height)
 {
+    assert(texture != nullptr);
+    assert(texture->isLoaded() && texture->isCommited());
+    
     CSharedMaterial material = std::make_shared<CMaterial>();
     CSharedShader shader = CShader::constructCustomShader("texture2D", ShaderTexure2D_vert, ShaderTexure2D_frag);
     CSharedQuad quad = std::make_shared<CQuad>();
@@ -157,12 +167,12 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     
     ui32 bitsPerComponent = 8;
     ui32 bitsPerPixel = 32;
-    ui32 bytesPerRow = 4 * m_frame.z;
+    ui32 bytesPerRow = 4 * width;
     CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
     CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast;
     CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
-    CGImageRef imageRef = CGImageCreate(m_frame.z,
-                                        m_frame.w,
+    CGImageRef imageRef = CGImageCreate(width,
+                                        height,
                                         bitsPerComponent,
                                         bitsPerPixel,
                                         bytesPerRow,
@@ -172,9 +182,9 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     UIImage *image = [UIImage imageWithCGImage:imageRef];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    UIGraphicsBeginImageContext(CGSizeMake(m_frame.z, m_frame.w));
+    UIGraphicsBeginImageContext(CGSizeMake(width, height));
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGAffineTransform flip = CGAffineTransformMake(1, 0, 0, -1, 0, m_frame.w);
+    CGAffineTransform flip = CGAffineTransformMake(1, 0, 0, -1, 0, width);
     CGContextConcatCTM(context, flip);
     [imageView.layer renderInContext:context];
     image = UIGraphicsGetImageFromCurrentImageContext();
@@ -182,7 +192,7 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *imageFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:
-                               [NSString stringWithCString:imageFilename.c_str()
+                               [NSString stringWithCString:filename.c_str()
                                                   encoding:[NSString defaultCStringEncoding]]];
     [UIImagePNGRepresentation(image) writeToFile:imageFilePath atomically:YES];
     

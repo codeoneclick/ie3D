@@ -254,7 +254,6 @@ void CMEScene::setTextureSampler(const std::string& filename, E_SHADER_SAMPLER s
     CSharedTexture texture = m_root->getResourceAccessor()->getTexture(filename);
     assert(texture != nullptr);
     m_landscape->setTexture(texture, sampler);
-    m_sceneToUICommands->executeSetTextureSampler(texture, sampler);
 }
 
 void CMEScene::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
@@ -275,15 +274,18 @@ void CMEScene::onResourceLoaded(ISharedResourceRef resource)
     {
         CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
         m_sceneToUICommands->executeSetTextureSampler(texture, E_SHADER_SAMPLER_01);
+        m_sceneToUICommands->executeSetTillingTexcoordCommand(m_landscape->getTillingTexcooed(E_SHADER_SAMPLER_01), E_SHADER_SAMPLER_01);
     }
     else if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_02) == resource)
     {
         CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
         m_sceneToUICommands->executeSetTextureSampler(texture, E_SHADER_SAMPLER_02);
+        m_sceneToUICommands->executeSetTillingTexcoordCommand(m_landscape->getTillingTexcooed(E_SHADER_SAMPLER_02), E_SHADER_SAMPLER_02);
     }
     else if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_03) == resource)
     {
         CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
         m_sceneToUICommands->executeSetTextureSampler(texture, E_SHADER_SAMPLER_03);
+        m_sceneToUICommands->executeSetTillingTexcoordCommand(m_landscape->getTillingTexcooed(E_SHADER_SAMPLER_03), E_SHADER_SAMPLER_03);
     }
 }
