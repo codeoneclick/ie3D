@@ -20,12 +20,14 @@ private:
 protected:
     
     CSharedCamera m_camera;
+    CSharedLandscape m_landscape;
     
     glm::vec3 m_positionStarting;
     glm::vec3 m_positionEnding;
     
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
+    std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> m_triangles;
     
     bool m_isPressed;
     f32 m_dragSpeed;
@@ -41,6 +43,7 @@ public:
     void update(f32 deltatime);
     
     CMapDragController(CSharedCameraRef camera,
+                       CSharedLandscapeRef landscape,
                        f32 dragSpeed,
                        const glm::vec3& maxBound,
                        const glm::vec3& minBound);

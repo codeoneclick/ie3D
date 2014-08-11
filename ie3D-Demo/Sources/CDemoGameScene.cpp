@@ -86,7 +86,9 @@ void CDemoGameScene::load(void)
     
     m_root->addCollisionHandler(shared_from_this());
     
-    m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
+    m_mapDragController = std::make_shared<CMapDragController>(m_camera,
+                                                               m_landscape,
+                                                               0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
                                                                glm::vec3(512.0, 0.0, 512.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);
@@ -105,7 +107,7 @@ void CDemoGameScene::update(f32 deltatime)
     
     glm::vec3 position = m_camera->Get_LookAt();
     position.y = m_landscape->getHeight(position);
-    m_model->setPosition(position);
+    m_lightTank->setPosition(position);
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)
