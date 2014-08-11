@@ -44,7 +44,7 @@ void CDemoGameScene::load(void)
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
     m_camera->Set_Distance(32.0f);
-    m_camera->Set_Height(32.0f);
+    m_camera->Set_Height(24.0f);
     
     m_root->setCamera(m_camera);
     

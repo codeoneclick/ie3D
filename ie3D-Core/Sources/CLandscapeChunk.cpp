@@ -95,6 +95,14 @@ void CLandscapeChunk::setMesh(CSharedMeshRef mesh,
     
     m_heightmapSizeX = heightmapSizeX;
     m_heightmapSizeZ = heightmapSizeZ;
+    
+    m_quadTree = std::make_shared<CQuadTree>();
+    m_quadTree->generate(m_mesh->getVertexBuffer(),
+                         m_mesh->getIndexBuffer(),
+                         m_mesh->getMaxBound(),
+                         m_mesh->getMinBound(),
+                         4,
+                         m_chunkSizeX);
 }
 
 void CLandscapeChunk::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
@@ -153,14 +161,6 @@ void CLandscapeChunk::onResourceLoaded(ISharedResourceRef resource, bool success
 void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     IGameObject::onConfigurationLoaded(configuration, success);
-    
-    m_quadTree = std::make_shared<CQuadTree>();
-    m_quadTree->generate(m_mesh->getVertexBuffer(),
-                         m_mesh->getIndexBuffer(),
-                         m_mesh->getMaxBound(),
-                         m_mesh->getMinBound(),
-                         4,
-                         m_chunkSizeX);
     
 	IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);
