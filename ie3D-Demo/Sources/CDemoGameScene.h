@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 #include "IScene.h"
-#include "HDeclaration.h"
+#include "HEDeclaration.h"
 
 class CMapDragController;
 
@@ -25,6 +25,10 @@ protected:
     CSharedSkyBox m_skyBox;
     CSharedModel m_model;
     CSharedLandscape m_landscape;
+    
+    CESharedComplexModel m_lightTank;
+    CESharedComplexModel m_mediumTank;
+    CESharedComplexModel m_heavyTank;
     
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject);
     

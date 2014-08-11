@@ -7,7 +7,7 @@
 //
 
 #include "CDemoGameScene.h"
-#include "IGameTransition.h"
+#include "IEGameTransition.h"
 #include "IGameObject.h"
 #include "CCommonOS.h"
 #include "CLight.h"
@@ -20,6 +20,7 @@
 #include "CMapDragController.h"
 #include "CMaterial.h"
 #include "CShader.h"
+#include "CEComplexModel.h"
 
 CDemoGameScene::CDemoGameScene(IGameTransition* root) :
 IScene(root)
@@ -67,6 +68,22 @@ void CDemoGameScene::load(void)
     m_root->addModel(m_model);
     m_model->setScale(glm::vec3(10.0, 10.0, 10.0));
     
+    IEGameTransition* transition = static_cast<IEGameTransition*>(m_root);
+    
+    m_lightTank = transition->createComplexModel("gameobject.tank.light.xml");
+    m_root->addCustomGameObject(m_lightTank);
+    m_lightTank->setScale(glm::vec3(5.0, 5.0, 5.0));
+    
+    m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
+    m_root->addCustomGameObject(m_mediumTank);
+    m_mediumTank->setScale(glm::vec3(6.0, 6.0, 6.0));
+    m_mediumTank->setPosition(glm::vec3(0.0, 0.0, 32.0));
+    
+    m_heavyTank = transition->createComplexModel("gameobject.tank.heavy.xml");
+    m_root->addCustomGameObject(m_heavyTank);
+    m_heavyTank->setScale(glm::vec3(7.0, 7.0, 7.0));
+    m_heavyTank->setPosition(glm::vec3(0.0, 0.0, 64.0));
+    
     m_root->addCollisionHandler(shared_from_this());
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
@@ -81,6 +98,10 @@ void CDemoGameScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.1;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
+    
+    m_lightTank->setRotation(glm::vec3(0.0, angle * 10.0, 0.0));
+    m_mediumTank->setRotation(glm::vec3(0.0, angle * 10.0, 0.0));
+    m_heavyTank->setRotation(glm::vec3(0.0, angle * 10.0, 0.0));
     
     glm::vec3 position = m_camera->Get_LookAt();
     position.y = m_landscape->getHeight(position);

@@ -75,10 +75,6 @@ void CMEScene::load(void)
     m_particles.push_back(particleEmitter);
     m_root->addParticleEmitter(particleEmitter);
     
-    m_model = m_root->createModel("gameobject.model.xml");
-    m_model->setScale(glm::vec3(10.0f, 10.0f, 10.0f));
-    m_root->addModel(m_model);
-
     m_landscape = m_root->createLandscape("gameobject.landscape.xml");
     m_root->setLandscape(m_landscape);
     
@@ -89,20 +85,6 @@ void CMEScene::load(void)
     m_root->addCustomGameObject(m_landscapeBrush);
     m_landscapeBrush->setLandscape(m_landscape);
     m_landscapeBrush->setSize(m_editableSettings.m_brushSize);
-    
-    m_lightTank = transition->createComplexModel("gameobject.tank.light.xml");
-    m_root->addCustomGameObject(m_lightTank);
-    m_lightTank->setScale(glm::vec3(7.0, 7.0, 7.0));
-    
-    m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
-    m_root->addCustomGameObject(m_mediumTank);
-    m_mediumTank->setScale(glm::vec3(7.0, 7.0, 7.0));
-    m_mediumTank->setPosition(glm::vec3(0.0, 0.0, 32.0));
-    
-    m_heavyTank = transition->createComplexModel("gameobject.tank.heavy.xml");
-    m_root->addCustomGameObject(m_heavyTank);
-    m_heavyTank->setScale(glm::vec3(7.0, 7.0, 7.0));
-    m_heavyTank->setPosition(glm::vec3(0.0, 0.0, 64.0));
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
@@ -126,13 +108,6 @@ void CMEScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.1;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
-    m_lightTank->setRotation(glm::vec3(0.0, angle * 10.0, 0.0));
-    m_mediumTank->setRotation(glm::vec3(0.0, angle * 10.0, 0.0));
-    m_heavyTank->setRotation(glm::vec3(0.0, angle * 10.0, 0.0));
-    
-    glm::vec3 position = m_camera->Get_LookAt();
-    position.y = m_landscape->getHeight(position);
-    m_model->setPosition(position);
 }
 
 std::vector<ISharedGameObject> CMEScene::colliders(void)

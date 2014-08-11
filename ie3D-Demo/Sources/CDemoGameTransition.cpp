@@ -17,11 +17,11 @@ CDemoGameTransition::CDemoGameTransition(const std::string& filename,
                                          std::shared_ptr<IInputContext> inputContext,
                                          std::shared_ptr<CResourceAccessor> resourceAccessor,
                                          std::shared_ptr<CConfigurationAccessor> configurationAccessor) :
-IGameTransition(filename,
-                graphicsContext,
-                inputContext,
-                resourceAccessor,
-                configurationAccessor)
+IEGameTransition(filename,
+                 graphicsContext,
+                 inputContext,
+                 resourceAccessor,
+                 configurationAccessor)
 {
     
 }

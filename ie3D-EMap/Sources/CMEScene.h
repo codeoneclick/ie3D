@@ -34,10 +34,6 @@ protected:
     CSharedSkyBox m_skyBox;
     CSharedLandscape m_landscape;
     CSharedMaterial m_landscapeMaterial;
-    CSharedModel m_model;
-    CESharedComplexModel m_lightTank;
-    CESharedComplexModel m_mediumTank;
-    CESharedComplexModel m_heavyTank;
     
     CSharedMELandscapeBrush m_landscapeBrush;
     

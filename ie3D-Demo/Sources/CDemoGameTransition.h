@@ -10,9 +10,9 @@
 #define CDemoGameTransition_h
 
 #include "HCommon.h"
-#include "IGameTransition.h"
+#include "IEGameTransition.h"
 
-class CDemoGameTransition : public IGameTransition
+class CDemoGameTransition : public IEGameTransition
 {
 private:
     
