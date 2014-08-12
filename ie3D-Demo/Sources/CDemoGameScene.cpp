@@ -21,9 +21,12 @@
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CEComplexModel.h"
+#include "CDEUIToSceneCommands.h"
 
 CDemoGameScene::CDemoGameScene(IGameTransition* root) :
-IScene(root)
+IScene(root),
+m_uiToSceneCommands(std::make_shared<CDEUIToSceneCommands>()),
+m_sceneToUICommands(nullptr)
 {
 
 }
@@ -115,3 +118,13 @@ void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef
     
 }
 
+CDESharedUIToSceneCommands CDemoGameScene::getUIToSceneCommands(void) const
+{
+    assert(m_uiToSceneCommands != nullptr);
+    return m_uiToSceneCommands;
+}
+
+void CDemoGameScene::setSceneToUICommands(CDESharedSceneToUICommandsRef commands)
+{
+    m_sceneToUICommands = commands;
+}

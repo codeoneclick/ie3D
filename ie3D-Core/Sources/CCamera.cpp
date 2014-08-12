@@ -116,3 +116,8 @@ glm::mat4x4 CCamera::Get_SphericalMatrixForPosition(const glm::vec3 &_position)
     return sphericalMatrix;
 }
 
+void CCamera::setFov(f32 value)
+{
+    m_fov = value;
+    m_projection = glm::perspective(m_fov, m_aspect, m_near, m_far);
+}

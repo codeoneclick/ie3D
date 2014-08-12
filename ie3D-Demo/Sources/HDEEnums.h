@@ -1,0 +1,23 @@
+//
+//  HDEEnums.h
+//  ie3D-Demo
+//
+//  Created by sergey.sergeev on 8/12/14.
+//  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
+//
+
+#ifndef HDEEnums_h
+#define HDEEnums_h
+
+enum E_UI_NAVIGATION_COMMAND
+{
+    E_UI_NAVIGATION_COMMAND_NONE = 0,
+    E_UI_NAVIGATION_COMMAND_MOVE_FORWARD,
+    E_UI_NAVIGATION_COMMAND_MOVE_BACKWARD,
+    E_UI_NAVIGATION_COMMAND_STEER_LEFT,
+    E_UI_NAVIGATION_COMMAND_STEER_RIGHT,
+    E_UI_NAVIGATION_COMMAND_MOVE_LEFT,
+    E_UI_NAVIGATION_COMMAND_MOVE_RIGHT
+};
+
+#endif

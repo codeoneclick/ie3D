@@ -61,3 +61,14 @@ void CDemoGameTransition::_OnGameLoopUpdate(f32 deltatime)
         m_scene->update(deltatime);
     }
 }
+
+CDESharedUIToSceneCommands CDemoGameTransition::getUIToSceneCommands(void) const
+{
+    return m_isLoaded && m_scene != nullptr ? std::static_pointer_cast<CDemoGameScene>(m_scene)->getUIToSceneCommands() : nullptr;
+}
+
+void CDemoGameTransition::setSceneToUICommands(CDESharedSceneToUICommandsRef commands)
+{
+    assert(m_isLoaded && m_scene != nullptr);
+    std::static_pointer_cast<CDemoGameScene>(m_scene)->setSceneToUICommands(commands);
+}

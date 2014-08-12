@@ -11,7 +11,7 @@
 
 #include "HCommon.h"
 #include "IScene.h"
-#include "HEDeclaration.h"
+#include "HDEDeclaration.h"
 
 class CMapDragController;
 
@@ -30,6 +30,9 @@ protected:
     CESharedComplexModel m_mediumTank;
     CESharedComplexModel m_heavyTank;
     
+    CDESharedUIToSceneCommands m_uiToSceneCommands;
+    CDESharedSceneToUICommands m_sceneToUICommands;
+    
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject);
     
 public:
@@ -39,6 +42,9 @@ public:
     
     void load(void);
     void update(f32 deltatime);
+    
+    CDESharedUIToSceneCommands getUIToSceneCommands(void) const;
+    void setSceneToUICommands(CDESharedSceneToUICommandsRef commands);
 };
 
 #endif 

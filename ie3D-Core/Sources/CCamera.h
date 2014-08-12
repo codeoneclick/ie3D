@@ -163,6 +163,8 @@ public:
         return m_viewport;
     };
     
+    void setFov(f32 value);
+    
     glm::mat4x4 Get_SphericalMatrixForPosition(const glm::vec3& _position);
     glm::mat4x4 Get_CylindricalMatrixForPosition(const glm::vec3& _position);
 };

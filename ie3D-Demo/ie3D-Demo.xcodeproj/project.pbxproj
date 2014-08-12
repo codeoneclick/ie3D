@@ -74,6 +74,10 @@
 		219A13381998BBA000E674CB /* tank_light.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 219A13341998BBA000E674CB /* tank_light.pvr */; };
 		219A13391998BBA000E674CB /* tank_medium.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 219A13351998BBA000E674CB /* tank_medium.pvr */; };
 		219A133A1998BBA000E674CB /* tank_track.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 219A13361998BBA000E674CB /* tank_track.pvr */; };
+		219A1374199A0A2600E674CB /* ICharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A1372199A0A2600E674CB /* ICharacterController.cpp */; };
+		219A1377199A0A5600E674CB /* CGameObjectNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A1375199A0A5600E674CB /* CGameObjectNavigator.cpp */; };
+		219A13A1199A613D00E674CB /* CDEUIToSceneCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A139F199A613D00E674CB /* CDEUIToSceneCommands.cpp */; };
+		219A13A4199A616200E674CB /* CDESceneToUICommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A13A2199A616200E674CB /* CDESceneToUICommands.cpp */; };
 		21B08D7C1920CA2000C5D5CC /* CMapDragController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B08D7A1920CA2000C5D5CC /* CMapDragController.cpp */; };
 		21B08DB91920CCF600C5D5CC /* shaderParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAD1920CCF600C5D5CC /* shaderParticleEmitter.frag */; };
 		21B08DBA1920CCF600C5D5CC /* shaderParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAE1920CCF600C5D5CC /* shaderParticleEmitter.vert */; };
@@ -253,6 +257,16 @@
 		219A13341998BBA000E674CB /* tank_light.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_light.pvr; path = "../ie3D-Bundle/Textures/tank_light.pvr"; sourceTree = SOURCE_ROOT; };
 		219A13351998BBA000E674CB /* tank_medium.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium.pvr; path = "../ie3D-Bundle/Textures/tank_medium.pvr"; sourceTree = SOURCE_ROOT; };
 		219A13361998BBA000E674CB /* tank_track.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_track.pvr; path = "../ie3D-Bundle/Textures/tank_track.pvr"; sourceTree = SOURCE_ROOT; };
+		219A1372199A0A2600E674CB /* ICharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICharacterController.cpp; path = Sources/ICharacterController.cpp; sourceTree = SOURCE_ROOT; };
+		219A1373199A0A2600E674CB /* ICharacterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICharacterController.h; path = Sources/ICharacterController.h; sourceTree = SOURCE_ROOT; };
+		219A1375199A0A5600E674CB /* CGameObjectNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameObjectNavigator.cpp; path = Sources/CGameObjectNavigator.cpp; sourceTree = SOURCE_ROOT; };
+		219A1376199A0A5600E674CB /* CGameObjectNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameObjectNavigator.h; path = Sources/CGameObjectNavigator.h; sourceTree = SOURCE_ROOT; };
+		219A1384199A478C00E674CB /* HDEDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HDEDeclaration.h; path = Sources/HDEDeclaration.h; sourceTree = SOURCE_ROOT; };
+		219A139F199A613D00E674CB /* CDEUIToSceneCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDEUIToSceneCommands.cpp; path = Sources/CDEUIToSceneCommands.cpp; sourceTree = SOURCE_ROOT; };
+		219A13A0199A613D00E674CB /* CDEUIToSceneCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDEUIToSceneCommands.h; path = Sources/CDEUIToSceneCommands.h; sourceTree = SOURCE_ROOT; };
+		219A13A2199A616200E674CB /* CDESceneToUICommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDESceneToUICommands.cpp; path = Sources/CDESceneToUICommands.cpp; sourceTree = SOURCE_ROOT; };
+		219A13A3199A616200E674CB /* CDESceneToUICommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDESceneToUICommands.h; path = Sources/CDESceneToUICommands.h; sourceTree = SOURCE_ROOT; };
+		219A13A5199A619A00E674CB /* HDEEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HDEEnums.h; path = Sources/HDEEnums.h; sourceTree = SOURCE_ROOT; };
 		21B08D7A1920CA2000C5D5CC /* CMapDragController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapDragController.cpp; path = Sources/CMapDragController.cpp; sourceTree = SOURCE_ROOT; };
 		21B08D7B1920CA2000C5D5CC /* CMapDragController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMapDragController.h; path = Sources/CMapDragController.h; sourceTree = SOURCE_ROOT; };
 		21B08DAD1920CCF600C5D5CC /* shaderParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderParticleEmitter.frag; path = "../ie3D-Bundle/Shaders/shaderParticleEmitter.frag"; sourceTree = SOURCE_ROOT; };
@@ -389,6 +403,26 @@
 				21D0725F181DB1910019D264 /* CDemoGameTransition.cpp */,
 			);
 			name = Transitions;
+			sourceTree = "<group>";
+		};
+		219A1383199A476300E674CB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				219A1384199A478C00E674CB /* HDEDeclaration.h */,
+				219A13A5199A619A00E674CB /* HDEEnums.h */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		219A139E199A60A300E674CB /* UICommands */ = {
+			isa = PBXGroup;
+			children = (
+				219A13A0199A613D00E674CB /* CDEUIToSceneCommands.h */,
+				219A139F199A613D00E674CB /* CDEUIToSceneCommands.cpp */,
+				219A13A3199A616200E674CB /* CDESceneToUICommands.h */,
+				219A13A2199A616200E674CB /* CDESceneToUICommands.cpp */,
+			);
+			name = UICommands;
 			sourceTree = "<group>";
 		};
 		21BC34CD19081510007B99DA /* Configurations */ = {
@@ -581,6 +615,8 @@
 		21D070F3181D9ECF0019D264 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				219A139E199A60A300E674CB /* UICommands */,
+				219A1383199A476300E674CB /* Common */,
 				219A12DB1998B01B00E674CB /* StateMachine Managment */,
 				21D07254181DB1910019D264 /* AppDelegate.h */,
 				21D07255181DB1910019D264 /* AppDelegate.mm */,
@@ -592,6 +628,10 @@
 				21D0725E181DB1910019D264 /* CDemoGameScene.h */,
 				21D0725D181DB1910019D264 /* CDemoGameScene.cpp */,
 				21D0726A181DB1910019D264 /* main.mm */,
+				219A1373199A0A2600E674CB /* ICharacterController.h */,
+				219A1372199A0A2600E674CB /* ICharacterController.cpp */,
+				219A1376199A0A5600E674CB /* CGameObjectNavigator.h */,
+				219A1375199A0A5600E674CB /* CGameObjectNavigator.cpp */,
 			);
 			name = Sources;
 			path = indieEngineDemo;
@@ -845,12 +885,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				219A1374199A0A2600E674CB /* ICharacterController.cpp in Sources */,
+				219A1377199A0A5600E674CB /* CGameObjectNavigator.cpp in Sources */,
 				21D07273181DB1910019D264 /* CDemoGameController.cpp in Sources */,
 				21B08D7C1920CA2000C5D5CC /* CMapDragController.cpp in Sources */,
 				21D0726C181DB1910019D264 /* AppDelegate.mm in Sources */,
 				21D07272181DB1910019D264 /* CDemoGameTransition.cpp in Sources */,
 				21D07271181DB1910019D264 /* CDemoGameScene.cpp in Sources */,
 				21D07277181DB1910019D264 /* main.mm in Sources */,
+				219A13A4199A616200E674CB /* CDESceneToUICommands.cpp in Sources */,
+				219A13A1199A613D00E674CB /* CDEUIToSceneCommands.cpp in Sources */,
 				21D0726F181DB1910019D264 /* CGameViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

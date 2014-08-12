@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "IEGameTransition.h"
+#include "HDEDeclaration.h"
 
 class CDemoGameTransition : public IEGameTransition
 {
@@ -31,6 +32,9 @@ public:
     ~CDemoGameTransition(void);
     
     void initScene(void);
+    
+    CDESharedUIToSceneCommands getUIToSceneCommands(void) const;
+    void setSceneToUICommands(CDESharedSceneToUICommandsRef commands);
 };
 
 #endif
