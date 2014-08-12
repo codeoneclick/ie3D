@@ -355,6 +355,8 @@
 		21D07238181DA6E60019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
 		21D07239181DA6EB0019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B217423E4D0063AB07 /* OpenGLES.framework */; };
 		21D0723A181DA6F10019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A420815E1733A9370004729E /* UIKit.framework */; };
+		21FCC8E0199A95D400F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
+		21FCC8E1199A95D500F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -402,13 +404,14 @@
 		213265DC1906A42E001C98F7 /* HEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEnums.h; path = Sources/HEnums.h; sourceTree = SOURCE_ROOT; };
 		213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCompiler_GLSL.cpp; path = Sources/CShaderCompiler_GLSL.cpp; sourceTree = "<group>"; };
 		213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCompiler_GLSL.h; path = Sources/CShaderCompiler_GLSL.h; sourceTree = "<group>"; };
-		213B7F361994B78C006F3976 /* ShaderTexure2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShaderTexure2D.h; path = Sources/ShaderTexure2D.h; sourceTree = "<group>"; };
+		213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ShaderTexure2D.cpp; path = Sources/ShaderTexure2D.cpp; sourceTree = "<group>"; };
 		213B7F371994CDFC006F3976 /* CRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRenderTarget.cpp; path = Sources/CRenderTarget.cpp; sourceTree = "<group>"; };
 		213B7F381994CDFC006F3976 /* CRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderTarget.h; path = Sources/CRenderTarget.h; sourceTree = "<group>"; };
 		21457FE7181C4BEA0071839E /* IFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IFabricator.cpp; path = Sources/IFabricator.cpp; sourceTree = "<group>"; };
 		21457FE8181C4BEA0071839E /* IFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IFabricator.h; path = Sources/IFabricator.h; sourceTree = "<group>"; };
 		21457FE9181C4BEA0071839E /* IGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGraph.cpp; path = Sources/IGraph.cpp; sourceTree = "<group>"; };
 		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
+		216E479D199A905A00632243 /* HShaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HShaders.h; path = Sources/HShaders.h; sourceTree = "<group>"; };
 		2172A02C18F337D300D4D317 /* HDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HDeclaration.h; path = Sources/HDeclaration.h; sourceTree = "<group>"; };
 		2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_osx.cpp; path = Sources/COGLWindow_osx.cpp; sourceTree = "<group>"; };
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
@@ -948,7 +951,8 @@
 		213B7F351994B39D006F3976 /* Built-in Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				213B7F361994B78C006F3976 /* ShaderTexure2D.h */,
+				216E479D199A905A00632243 /* HShaders.h */,
+				213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */,
 			);
 			name = "Built-in Shaders";
 			sourceTree = "<group>";
@@ -1913,6 +1917,7 @@
 				21208FAA1906FB5F00FFC8D4 /* COGLWindow_win32.cpp in Sources */,
 				21208FAB1906FB5F00FFC8D4 /* COGLWindow_ndk.cpp in Sources */,
 				2173348719644139002B3F90 /* CRenderTechniqueWorldSpace.cpp in Sources */,
+				21FCC8E1199A95D500F2CA1E /* ShaderTexure2D.cpp in Sources */,
 				2191CE5D196EDBEF00CE2813 /* pngrio.c in Sources */,
 				21208FAC1906FB5F00FFC8D4 /* IGraphicsContext.cpp in Sources */,
 				2191CE6C196EDBEF00CE2813 /* pngwtran.c in Sources */,
@@ -2073,6 +2078,7 @@
 				213265EE1906A4AF001C98F7 /* COGLWindow_win32.cpp in Sources */,
 				213265EF1906A4AF001C98F7 /* COGLWindow_ndk.cpp in Sources */,
 				2173348619644139002B3F90 /* CRenderTechniqueWorldSpace.cpp in Sources */,
+				21FCC8E0199A95D400F2CA1E /* ShaderTexure2D.cpp in Sources */,
 				2191CE5C196EDBEF00CE2813 /* pngrio.c in Sources */,
 				213265F01906A4AF001C98F7 /* IGraphicsContext.cpp in Sources */,
 				2191CE6B196EDBEF00CE2813 /* pngwtran.c in Sources */,

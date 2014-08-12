@@ -1,15 +1,13 @@
 //
-//  ShaderTexure2D.h
+//  ShaderTexure2D.cpp
 //  ie3D-Core
 //
 //  Created by sergey.sergeev on 8/8/14.
 //  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
+#include "HCommon.h"
 
-#ifndef ShaderTexure2D_h
-#define ShaderTexure2D_h
-
-static const char* ShaderTexure2D_vert = STRING_SHADER
+const char* ShaderTexure2D_vert = STRING_SHADER
 (
  attribute vec3 IN_Position;
  attribute vec2 IN_TexCoord;
@@ -26,7 +24,7 @@ static const char* ShaderTexure2D_vert = STRING_SHADER
 }
  );
 
-static const char* ShaderTexure2D_frag = STRING_SHADER
+const char* ShaderTexure2D_frag = STRING_SHADER
 (
  varying highp vec2 OUT_TexCoord;
  uniform sampler2D  SAMPLER_01;
@@ -36,5 +34,3 @@ static const char* ShaderTexure2D_frag = STRING_SHADER
 	gl_FragColor = texture2D(SAMPLER_01, OUT_TexCoord);
 }
  );
-
-#endif

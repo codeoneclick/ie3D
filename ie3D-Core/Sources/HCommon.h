@@ -93,7 +93,7 @@
 #endif
 
 #define STRING_SHADER(SHADER)  #SHADER
-#include "ShaderTexure2D.h"
+#include "HShaders.h"
 
 typedef signed char i8;
 typedef unsigned char ui8;

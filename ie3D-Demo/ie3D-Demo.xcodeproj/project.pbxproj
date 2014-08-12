@@ -10,7 +10,6 @@
 		211384ED194300DE0041A18A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211384EC194300DE0041A18A /* Images.xcassets */; };
 		213267931906AA37001C98F7 /* libie3DCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2132678E1906AA26001C98F7 /* libie3DCore-ios.a */; };
 		213267961906B51C001C98F7 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
-		213B7F6C199520F8006F3976 /* libie3DEngine-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 213B7F67199520DE006F3976 /* libie3DEngine-ios.a */; };
 		2162043A1949AEFF00D129AD /* material.render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */; };
 		2162043B1949AEFF00D129AD /* render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */; };
 		2162043F1949AF2300D129AD /* shaderScreenSSAO.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2162043D1949AF2300D129AD /* shaderScreenSSAO.frag */; };
@@ -21,6 +20,7 @@
 		21620460194AFC3900D129AD /* shaderGameObjectNormal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2162045E194AFC3900D129AD /* shaderGameObjectNormal.frag */; };
 		21620461194AFC3900D129AD /* shaderGameObjectNormal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2162045F194AFC3900D129AD /* shaderGameObjectNormal.vert */; };
 		21620463194AFF4C00D129AD /* material.ocean.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21620462194AFF4C00D129AD /* material.ocean.normal.xml */; };
+		216E47A2199A91D900632243 /* libie3DEngine-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 213B7F67199520DE006F3976 /* libie3DEngine-ios.a */; };
 		2173345819642B47002B3F90 /* shaderModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2173345619642B47002B3F90 /* shaderModel.frag */; };
 		2173345919642B47002B3F90 /* shaderModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2173345719642B47002B3F90 /* shaderModel.vert */; };
 		2173345E19642B72002B3F90 /* gameobject.model.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2173345A19642B72002B3F90 /* gameobject.model.xml */; };
@@ -180,7 +180,7 @@
 			remoteGlobalIDString = 21F1150E199225C500F4A378;
 			remoteInfo = "ie3DEngine-osx";
 		};
-		213B7F6D19952100006F3976 /* PBXContainerItemProxy */ = {
+		216E47A0199A91D200632243 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 213B7F5F199520DE006F3976 /* ie3D-Engine.xcodeproj */;
 			proxyType = 1;
@@ -346,8 +346,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				213B7F6C199520F8006F3976 /* libie3DEngine-ios.a in Frameworks */,
 				213267931906AA37001C98F7 /* libie3DCore-ios.a in Frameworks */,
+				216E47A2199A91D900632243 /* libie3DEngine-ios.a in Frameworks */,
 				21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */,
 				21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */,
 				21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */,
@@ -673,8 +673,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				213B7F6E19952100006F3976 /* PBXTargetDependency */,
 				213267921906AA2E001C98F7 /* PBXTargetDependency */,
+				216E47A1199A91D200632243 /* PBXTargetDependency */,
 			);
 			name = "ie3D-Demo";
 			productName = indieEngineDemo;
@@ -907,10 +907,10 @@
 			name = "ie3DCore-ios";
 			targetProxy = 213267911906AA2E001C98F7 /* PBXContainerItemProxy */;
 		};
-		213B7F6E19952100006F3976 /* PBXTargetDependency */ = {
+		216E47A1199A91D200632243 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ie3DEngine-ios";
-			targetProxy = 213B7F6D19952100006F3976 /* PBXContainerItemProxy */;
+			targetProxy = 216E47A0199A91D200632243 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
