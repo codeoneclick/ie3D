@@ -9,7 +9,8 @@
 #include "CDEUIToSceneCommands.h"
 
 CDEUIToSceneCommands::CDEUIToSceneCommands(void) :
-m_setNavigationCommand(nullptr)
+m_setCharacterMoveStateCommand(nullptr),
+m_setCharacterSteerStateCommand(nullptr)
 {
     
 }
@@ -19,15 +20,28 @@ CDEUIToSceneCommands::~CDEUIToSceneCommands(void)
     
 }
 
-void CDEUIToSceneCommands::connectSetNavigationCommand(const __SET_NAVIGATION_COMMAND& command)
+void CDEUIToSceneCommands::connectSetCharacterMoveStateCommand(const __SET_CHARACTER_MOVE_STATE_COMMAND& command)
 {
-    m_setNavigationCommand = command;
+    m_setCharacterMoveStateCommand = command;
 }
 
-void CDEUIToSceneCommands::executeSetNavigationCommand(E_UI_NAVIGATION_COMMAND direction)
+void CDEUIToSceneCommands::executeSetCharacterMoveStateCommand(E_CHARACTER_CONTROLLER_MOVE_STATE state)
 {
-    if(m_setNavigationCommand != nullptr)
+    if(m_setCharacterMoveStateCommand != nullptr)
     {
-        m_setNavigationCommand(direction);
+        m_setCharacterMoveStateCommand(state);
+    }
+}
+
+void CDEUIToSceneCommands::connectSetCharacterSteerStateCommand(const __SET_CHARACTER_STEER_STATE_COMMAND& command)
+{
+    m_setCharacterSteerStateCommand = command;
+}
+
+void CDEUIToSceneCommands::executeSetCharacterSteerStateCommand(E_CHARACTER_CONTROLLER_STEER_STATE state)
+{
+    if(m_setCharacterSteerStateCommand != nullptr)
+    {
+        m_setCharacterSteerStateCommand(state);
     }
 }

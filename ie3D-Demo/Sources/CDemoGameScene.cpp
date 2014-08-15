@@ -28,7 +28,8 @@ IScene(root),
 m_uiToSceneCommands(std::make_shared<CDEUIToSceneCommands>()),
 m_sceneToUICommands(nullptr)
 {
-
+    m_uiToSceneCommands->connectSetCharacterMoveStateCommand(std::bind(&CDemoGameScene::onCharacterMoveStateChanged, this, std::placeholders::_1));
+    m_uiToSceneCommands->connectSetCharacterSteerStateCommand(std::bind(&CDemoGameScene::onCharacterSteerStateChanged, this, std::placeholders::_1));
 }
 
 CDemoGameScene::~CDemoGameScene(void)
@@ -127,4 +128,14 @@ CDESharedUIToSceneCommands CDemoGameScene::getUIToSceneCommands(void) const
 void CDemoGameScene::setSceneToUICommands(CDESharedSceneToUICommandsRef commands)
 {
     m_sceneToUICommands = commands;
+}
+
+void CDemoGameScene::onCharacterMoveStateChanged(E_CHARACTER_CONTROLLER_MOVE_STATE state)
+{
+    std::cout<<state<<std::endl;
+}
+
+void CDemoGameScene::onCharacterSteerStateChanged(E_CHARACTER_CONTROLLER_STEER_STATE state)
+{
+    std::cout<<state<<std::endl;
 }

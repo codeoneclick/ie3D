@@ -16,9 +16,11 @@ class CDEUIToSceneCommands
 {
 private:
     
-    typedef std::function<void(E_UI_NAVIGATION_COMMAND)> __SET_NAVIGATION_COMMAND;
+    typedef std::function<void(E_CHARACTER_CONTROLLER_MOVE_STATE)> __SET_CHARACTER_MOVE_STATE_COMMAND;
+    typedef std::function<void(E_CHARACTER_CONTROLLER_STEER_STATE)> __SET_CHARACTER_STEER_STATE_COMMAND;
 
-    __SET_NAVIGATION_COMMAND m_setNavigationCommand;
+    __SET_CHARACTER_MOVE_STATE_COMMAND m_setCharacterMoveStateCommand;
+    __SET_CHARACTER_STEER_STATE_COMMAND m_setCharacterSteerStateCommand;
     
 protected:
     
@@ -27,8 +29,11 @@ public:
     CDEUIToSceneCommands(void);
     ~CDEUIToSceneCommands(void);
     
-    void connectSetNavigationCommand(const __SET_NAVIGATION_COMMAND& command);
-    void executeSetNavigationCommand(E_UI_NAVIGATION_COMMAND direction);
+    void connectSetCharacterMoveStateCommand(const __SET_CHARACTER_MOVE_STATE_COMMAND& command);
+    void executeSetCharacterMoveStateCommand(E_CHARACTER_CONTROLLER_MOVE_STATE state);
+    
+    void connectSetCharacterSteerStateCommand(const __SET_CHARACTER_STEER_STATE_COMMAND& command);
+    void executeSetCharacterSteerStateCommand(E_CHARACTER_CONTROLLER_STEER_STATE state);
 };
 
 

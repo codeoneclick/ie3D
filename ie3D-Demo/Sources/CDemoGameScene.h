@@ -12,6 +12,7 @@
 #include "HCommon.h"
 #include "IScene.h"
 #include "HDEDeclaration.h"
+#include "HDEEnums.h"
 
 class CMapDragController;
 
@@ -32,6 +33,9 @@ protected:
     
     CDESharedUIToSceneCommands m_uiToSceneCommands;
     CDESharedSceneToUICommands m_sceneToUICommands;
+    
+    void onCharacterMoveStateChanged(E_CHARACTER_CONTROLLER_MOVE_STATE state);
+    void onCharacterSteerStateChanged(E_CHARACTER_CONTROLLER_STEER_STATE state);
     
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject);
     
