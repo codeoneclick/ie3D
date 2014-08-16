@@ -27,6 +27,12 @@ protected:
     CSharedModel m_model;
     CSharedLandscape m_landscape;
     
+    E_CHARACTER_CONTROLLER_MOVE_STATE m_characterControllerMoveState;
+    E_CHARACTER_CONTROLLER_STEER_STATE m_characterControllerSteerState;
+    
+    CSharedGameObjectNavigator m_gameObjectNavigator;
+    ISharedCharacterController m_characterController;
+    
     CESharedComplexModel m_lightTank;
     CESharedComplexModel m_mediumTank;
     CESharedComplexModel m_heavyTank;

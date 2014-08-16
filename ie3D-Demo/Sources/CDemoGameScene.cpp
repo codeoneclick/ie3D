@@ -22,11 +22,17 @@
 #include "CShader.h"
 #include "CEComplexModel.h"
 #include "CDEUIToSceneCommands.h"
+#include "CGameObjectNavigator.h"
+#include "ICharacterController.h"
 
 CDemoGameScene::CDemoGameScene(IGameTransition* root) :
 IScene(root),
 m_uiToSceneCommands(std::make_shared<CDEUIToSceneCommands>()),
-m_sceneToUICommands(nullptr)
+m_sceneToUICommands(nullptr),
+m_gameObjectNavigator(nullptr),
+m_characterController(nullptr),
+m_characterControllerMoveState(E_CHARACTER_CONTROLLER_MOVE_STATE_NONE),
+m_characterControllerSteerState(E_CHARACTER_CONTROLLER_STEER_STATE_NONE)
 {
     m_uiToSceneCommands->connectSetCharacterMoveStateCommand(std::bind(&CDemoGameScene::onCharacterMoveStateChanged, this, std::placeholders::_1));
     m_uiToSceneCommands->connectSetCharacterSteerStateCommand(std::bind(&CDemoGameScene::onCharacterSteerStateChanged, this, std::placeholders::_1));
@@ -48,7 +54,7 @@ void CDemoGameScene::load(void)
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
     m_camera->Set_Distance(32.0f);
-    m_camera->Set_Height(24.0f);
+    m_camera->Set_Height(16.0f);
     
     m_root->setCamera(m_camera);
     
@@ -90,28 +96,73 @@ void CDemoGameScene::load(void)
     
     m_root->addCollisionHandler(shared_from_this());
     
-    m_mapDragController = std::make_shared<CMapDragController>(m_camera,
-                                                               m_landscape,
-                                                               0.1,
-                                                               glm::vec3(0.0, 0.0, 0.0),
-                                                               glm::vec3(512.0, 0.0, 512.0));
-    m_root->addGestureRecognizerHandler(m_mapDragController);
+    m_characterController = std::make_shared<ICharacterController>(m_lightTank,
+                                                                   m_camera);
+    
+    m_gameObjectNavigator = std::make_shared<CGameObjectNavigator>(2.5,
+                                                                   2.5,
+                                                                   0.0,
+                                                                   5.0,
+                                                                   m_landscape,
+                                                                   glm::vec3(512.0, 0.0, 512.0),
+                                                                   glm::vec3(0.0, 0.0, 0.0));
+    m_gameObjectNavigator->addNavigatorHandler(m_characterController);
+    
+    m_gameObjectNavigator->setPosition(glm::vec3(128.0, 0.0, 64.0));
+    m_gameObjectNavigator->setRotation(glm::vec3(0.0, 90.0, 0.0));
 }
 
 void CDemoGameScene::update(f32 deltatime)
 {
-    m_mapDragController->update(deltatime);
     static f32 angle = 0.0;
     angle += 0.1;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
     
-    m_lightTank->setRotation(glm::vec3(0.0, angle * 10.0, 0.0));
-    m_mediumTank->setRotation(glm::vec3(0.0, angle * 10.0, 0.0));
-    m_heavyTank->setRotation(glm::vec3(0.0, angle * 10.0, 0.0));
+    switch (m_characterControllerMoveState)
+    {
+        case E_CHARACTER_CONTROLLER_MOVE_STATE_NONE:
+        {
+            
+        }
+            break;
+        case E_CHARACTER_CONTROLLER_MOVE_STATE_FORWARD:
+        {
+            m_gameObjectNavigator->moveForward();
+        }
+            break;
+        case E_CHARACTER_CONTROLLER_MOVE_STATE_BACKWARD:
+        {
+            m_gameObjectNavigator->moveBackward();
+        }
+            break;
+        default:
+        {
+            assert(false);
+        }
+            break;
+    }
     
-    glm::vec3 position = m_camera->Get_LookAt();
-    position.y = m_landscape->getHeight(position);
-    m_lightTank->setPosition(position);
+    switch (m_characterControllerSteerState)
+    {
+        case E_CHARACTER_CONTROLLER_STEER_STATE_NONE:
+            
+            break;
+        case E_CHARACTER_CONTROLLER_STEER_STATE_LEFT:
+        {
+            m_gameObjectNavigator->steerLeft();
+        }
+            break;
+        case E_CHARACTER_CONTROLLER_STEER_STATE_RIGHT:
+        {
+            m_gameObjectNavigator->steerRight();
+        }
+            break;
+        default:
+        {
+            assert(false);
+        }
+            break;
+    }
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)
@@ -132,10 +183,10 @@ void CDemoGameScene::setSceneToUICommands(CDESharedSceneToUICommandsRef commands
 
 void CDemoGameScene::onCharacterMoveStateChanged(E_CHARACTER_CONTROLLER_MOVE_STATE state)
 {
-    std::cout<<state<<std::endl;
+    m_characterControllerMoveState = state;
 }
 
 void CDemoGameScene::onCharacterSteerStateChanged(E_CHARACTER_CONTROLLER_STEER_STATE state)
 {
-    std::cout<<state<<std::endl;
+    m_characterControllerSteerState = state;
 }

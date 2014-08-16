@@ -43,9 +43,9 @@ void CGameObjectNavigator::setRotation(const glm::vec3& rotation)
 
 bool CGameObjectNavigator::moveForward(void)
 {
-    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x + sinf(m_currentRotation.y) * m_moveForwardSpeed,
+    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x + sinf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed,
                                               0.0,
-                                              m_currentPosition.z + cosf(m_currentRotation.y) * m_moveForwardSpeed);
+                                              m_currentPosition.z + cosf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed);
     
     if(precomputedPosition.x < m_minBound.x ||
        precomputedPosition.z < m_minBound.z ||
@@ -63,9 +63,9 @@ bool CGameObjectNavigator::moveForward(void)
 
 bool CGameObjectNavigator::moveBackward(void)
 {
-    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x - sinf(m_currentRotation.y) * m_moveBackwardSpeed,
+    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x - sinf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed,
                                               0.0f,
-                                              m_currentPosition.z - cosf(m_currentRotation.y) * m_moveBackwardSpeed);
+                                              m_currentPosition.z - cosf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed);
     
     if(precomputedPosition.x < m_minBound.x ||
        precomputedPosition.z < m_minBound.z ||
@@ -83,9 +83,9 @@ bool CGameObjectNavigator::moveBackward(void)
 
 bool CGameObjectNavigator::moveLeft(void)
 {
-    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x - sinf(-m_currentRotation.y) * m_strafeSpeed,
+    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x - sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed,
                                               0.0f,
-                                              m_currentPosition.z - cosf(-m_currentRotation.y) * m_strafeSpeed);
+                                              m_currentPosition.z - cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed);
     
     if(precomputedPosition.x < m_minBound.x ||
        precomputedPosition.z < m_minBound.z ||
@@ -103,9 +103,9 @@ bool CGameObjectNavigator::moveLeft(void)
 
 bool CGameObjectNavigator::moveRight(void)
 {
-    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x + sinf(-m_currentRotation.y) * m_strafeSpeed,
+    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x + sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed,
                                               0.0f,
-                                              m_currentPosition.z + cosf(-m_currentRotation.y) * m_strafeSpeed);
+                                              m_currentPosition.z + cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed);
     
     if(precomputedPosition.x < m_minBound.x ||
        precomputedPosition.z < m_minBound.z ||
@@ -123,13 +123,13 @@ bool CGameObjectNavigator::moveRight(void)
 
 void CGameObjectNavigator::steerLeft(void)
 {
-    m_currentRotation.y -= m_steerSpeed;
+    m_currentRotation.y += m_steerSpeed;
     CGameObjectNavigator::notifyHandlersAboutRotationChanged();
 }
 
 void CGameObjectNavigator::steerRight(void)
 {
-    m_currentRotation.y += m_steerSpeed;
+    m_currentRotation.y -= m_steerSpeed;
     CGameObjectNavigator::notifyHandlersAboutRotationChanged();
 }
 

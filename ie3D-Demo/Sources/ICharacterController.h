@@ -10,6 +10,7 @@
 #define ICharacterController_h
 
 #include "CGameObjectNavigator.h"
+#include "HDEDeclaration.h"
 
 class ICharacterController : public IGameObjectNavigatorHandler
 {
@@ -20,8 +21,14 @@ protected:
     void onPositionChanged(const glm::vec3& position);
     void onRotationChanged(const glm::vec3& rotation);
     
+    ISharedGameObject m_gameObject;
+    CSharedCamera m_camera;
+    
 public:
     
+    ICharacterController(ISharedGameObjectRef gameObject,
+                         CSharedCameraRef camera);
+    ~ICharacterController(void);
 };
 
 #endif

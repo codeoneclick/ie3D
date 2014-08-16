@@ -25,8 +25,8 @@ protected:
     
 public:
     
-    IGameObjectNavigatorHandler(void);
-    ~IGameObjectNavigatorHandler(void);
+    IGameObjectNavigatorHandler(void) = default;
+    ~IGameObjectNavigatorHandler(void) = default;
 };
 
 class CGameObjectNavigator

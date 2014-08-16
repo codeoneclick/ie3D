@@ -55,7 +55,7 @@ void CMapDragController::onGestureRecognizerDragged(const glm::ivec2& point, E_I
         m_positionEnding.z = glm::min(m_positionEnding.z, m_minBound.z);
         m_positionEnding.x = glm::max(m_positionEnding.x, m_maxBound.x);
         m_positionEnding.z = glm::max(m_positionEnding.z, m_maxBound.z);
-        m_positionEnding.y = m_landscape->getHeight(m_positionEnding) + 16.0;
+        m_positionEnding.y = m_landscape->getHeight(m_positionEnding);
     }
 }
 
