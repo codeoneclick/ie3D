@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		211384ED194300DE0041A18A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211384EC194300DE0041A18A /* Images.xcassets */; };
-		213267931906AA37001C98F7 /* libie3DCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2132678E1906AA26001C98F7 /* libie3DCore-ios.a */; };
 		213267961906B51C001C98F7 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
 		2162043A1949AEFF00D129AD /* material.render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */; };
 		2162043B1949AEFF00D129AD /* render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */; };
@@ -21,7 +20,6 @@
 		21620461194AFC3900D129AD /* shaderGameObjectNormal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2162045F194AFC3900D129AD /* shaderGameObjectNormal.vert */; };
 		21620463194AFF4C00D129AD /* material.ocean.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21620462194AFF4C00D129AD /* material.ocean.normal.xml */; };
 		216A50DF199E032500E46DDE /* CDEJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 216A50DE199E032500E46DDE /* CDEJoystick.m */; };
-		216E47A2199A91D900632243 /* libie3DEngine-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 213B7F67199520DE006F3976 /* libie3DEngine-ios.a */; };
 		2173345819642B47002B3F90 /* shaderModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2173345619642B47002B3F90 /* shaderModel.frag */; };
 		2173345919642B47002B3F90 /* shaderModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2173345719642B47002B3F90 /* shaderModel.vert */; };
 		2173345E19642B72002B3F90 /* gameobject.model.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2173345A19642B72002B3F90 /* gameobject.model.xml */; };
@@ -143,6 +141,8 @@
 		21DC2B3A1924D282008DA3C1 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B381924D282008DA3C1 /* shaderLandscapeEdges.vert */; };
 		21DC2B3D1924DC86008DA3C1 /* mesa_heightmap.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B3C1924DC86008DA3C1 /* mesa_heightmap.png */; };
 		21DC2BB3192CD3D0008DA3C1 /* landscape.00.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2BB2192CD3D0008DA3C1 /* landscape.00.diffuse.pvr */; };
+		21FCC8F9199FA65C00F2CA1E /* libie3DCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2132678E1906AA26001C98F7 /* libie3DCore-ios.a */; };
+		21FCC907199FA6A300F2CA1E /* libie3DEngine-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FCC902199FA69200F2CA1E /* libie3DEngine-ios.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,30 +160,30 @@
 			remoteGlobalIDString = 21853415181EFC6200315CBB;
 			remoteInfo = "ie3DCore-osx";
 		};
-		213267911906AA2E001C98F7 /* PBXContainerItemProxy */ = {
+		21FCC8F7199FA65100F2CA1E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 21D07129181DA5620019D264;
 			remoteInfo = "ie3DCore-ios";
 		};
-		213B7F66199520DE006F3976 /* PBXContainerItemProxy */ = {
+		21FCC901199FA69200F2CA1E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 213B7F5F199520DE006F3976 /* ie3D-Engine.xcodeproj */;
+			containerPortal = 21FCC8FB199FA69200F2CA1E /* ie3D-Engine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 21F114D0199224FF00F4A378;
 			remoteInfo = "ie3DEngine-ios";
 		};
-		213B7F68199520DE006F3976 /* PBXContainerItemProxy */ = {
+		21FCC903199FA69200F2CA1E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 213B7F5F199520DE006F3976 /* ie3D-Engine.xcodeproj */;
+			containerPortal = 21FCC8FB199FA69200F2CA1E /* ie3D-Engine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 21F1150E199225C500F4A378;
 			remoteInfo = "ie3DEngine-osx";
 		};
-		216E47A0199A91D200632243 /* PBXContainerItemProxy */ = {
+		21FCC905199FA69C00F2CA1E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 213B7F5F199520DE006F3976 /* ie3D-Engine.xcodeproj */;
+			containerPortal = 21FCC8FB199FA69200F2CA1E /* ie3D-Engine.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 21F114CF199224FF00F4A378;
 			remoteInfo = "ie3DEngine-ios";
@@ -194,7 +194,6 @@
 		211384EC194300DE0041A18A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ie3D-Demo/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		2132664F1906A84D001C98F7 /* ie3D-Demo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ie3D-Demo.plist"; path = "Support/ie3D-Demo.plist"; sourceTree = SOURCE_ROOT; };
 		213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
-		213B7F5F199520DE006F3976 /* ie3D-Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Engine.xcodeproj"; path = "../ie3D-Engine/ie3D-Engine.xcodeproj"; sourceTree = "<group>"; };
 		216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
 		216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
 		2162043D1949AF2300D129AD /* shaderScreenSSAO.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenSSAO.frag; path = "../ie3D-Bundle/Shaders/shaderScreenSSAO.frag"; sourceTree = SOURCE_ROOT; };
@@ -342,6 +341,7 @@
 		21DC2B381924D282008DA3C1 /* shaderLandscapeEdges.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.vert"; sourceTree = SOURCE_ROOT; };
 		21DC2B3C1924DC86008DA3C1 /* mesa_heightmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mesa_heightmap.png; path = "../ie3D-Bundle/Temp/mesa_heightmap.png"; sourceTree = SOURCE_ROOT; };
 		21DC2BB2192CD3D0008DA3C1 /* landscape.00.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.00.diffuse.pvr; path = "../ie3D-Bundle/Textures/landscape.00.diffuse.pvr"; sourceTree = SOURCE_ROOT; };
+		21FCC8FB199FA69200F2CA1E /* ie3D-Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Engine.xcodeproj"; path = "../ie3D-Engine/ie3D-Engine.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,8 +349,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				213267931906AA37001C98F7 /* libie3DCore-ios.a in Frameworks */,
-				216E47A2199A91D900632243 /* libie3DEngine-ios.a in Frameworks */,
+				21FCC8F9199FA65C00F2CA1E /* libie3DCore-ios.a in Frameworks */,
+				21FCC907199FA6A300F2CA1E /* libie3DEngine-ios.a in Frameworks */,
 				21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */,
 				21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */,
 				21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */,
@@ -365,7 +365,7 @@
 		213267871906AA13001C98F7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				213B7F5F199520DE006F3976 /* ie3D-Engine.xcodeproj */,
+				21FCC8FB199FA69200F2CA1E /* ie3D-Engine.xcodeproj */,
 				213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */,
 			);
 			name = Libraries;
@@ -376,15 +376,6 @@
 			children = (
 				2132678E1906AA26001C98F7 /* libie3DCore-ios.a */,
 				213267901906AA26001C98F7 /* libie3DCore-osx.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		213B7F60199520DE006F3976 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				213B7F67199520DE006F3976 /* libie3DEngine-ios.a */,
-				213B7F69199520DE006F3976 /* libie3DEngine-osx.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -672,6 +663,15 @@
 			name = Temp;
 			sourceTree = "<group>";
 		};
+		21FCC8FC199FA69200F2CA1E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21FCC902199FA69200F2CA1E /* libie3DEngine-ios.a */,
+				21FCC904199FA69200F2CA1E /* libie3DEngine-osx.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -686,8 +686,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				213267921906AA2E001C98F7 /* PBXTargetDependency */,
-				216E47A1199A91D200632243 /* PBXTargetDependency */,
+				21FCC8F8199FA65100F2CA1E /* PBXTargetDependency */,
+				21FCC906199FA69C00F2CA1E /* PBXTargetDependency */,
 			);
 			name = "ie3D-Demo";
 			productName = indieEngineDemo;
@@ -724,8 +724,8 @@
 					ProjectRef = 213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */;
 				},
 				{
-					ProductGroup = 213B7F60199520DE006F3976 /* Products */;
-					ProjectRef = 213B7F5F199520DE006F3976 /* ie3D-Engine.xcodeproj */;
+					ProductGroup = 21FCC8FC199FA69200F2CA1E /* Products */;
+					ProjectRef = 21FCC8FB199FA69200F2CA1E /* ie3D-Engine.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -750,18 +750,18 @@
 			remoteRef = 2132678F1906AA26001C98F7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		213B7F67199520DE006F3976 /* libie3DEngine-ios.a */ = {
+		21FCC902199FA69200F2CA1E /* libie3DEngine-ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libie3DEngine-ios.a";
-			remoteRef = 213B7F66199520DE006F3976 /* PBXContainerItemProxy */;
+			remoteRef = 21FCC901199FA69200F2CA1E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		213B7F69199520DE006F3976 /* libie3DEngine-osx.a */ = {
+		21FCC904199FA69200F2CA1E /* libie3DEngine-osx.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libie3DEngine-osx.a";
-			remoteRef = 213B7F68199520DE006F3976 /* PBXContainerItemProxy */;
+			remoteRef = 21FCC903199FA69200F2CA1E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -916,15 +916,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		213267921906AA2E001C98F7 /* PBXTargetDependency */ = {
+		21FCC8F8199FA65100F2CA1E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ie3DCore-ios";
-			targetProxy = 213267911906AA2E001C98F7 /* PBXContainerItemProxy */;
+			targetProxy = 21FCC8F7199FA65100F2CA1E /* PBXContainerItemProxy */;
 		};
-		216E47A1199A91D200632243 /* PBXTargetDependency */ = {
+		21FCC906199FA69C00F2CA1E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ie3DEngine-ios";
-			targetProxy = 216E47A0199A91D200632243 /* PBXContainerItemProxy */;
+			targetProxy = 21FCC905199FA69C00F2CA1E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1029,11 +1029,9 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LLVM_VECTORIZE_LOOPS = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1065,12 +1063,9 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_VECTORIZE_LOOPS = YES;
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

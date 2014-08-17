@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21C016E319924BBF00CB59AB /* IEGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C016E119924BBF00CB59AB /* IEGameTransition.cpp */; };
-		21C016E419924BBF00CB59AB /* IEGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C016E119924BBF00CB59AB /* IEGameTransition.cpp */; };
 		21F114D4199224FF00F4A378 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F114D3199224FF00F4A378 /* Foundation.framework */; };
 		21F11509199225C500F4A378 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F114D3199224FF00F4A378 /* Foundation.framework */; };
 		21F115151992290900F4A378 /* CEComplexModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F115131992290900F4A378 /* CEComplexModel.cpp */; };
@@ -23,6 +21,8 @@
 		21F1152D1992319400F4A378 /* CESceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F1152A1992319400F4A378 /* CESceneFabricator.cpp */; };
 		21F115321992487700F4A378 /* CEConfigurationAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F115301992487700F4A378 /* CEConfigurationAccessor.cpp */; };
 		21F115331992487700F4A378 /* CEConfigurationAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F115301992487700F4A378 /* CEConfigurationAccessor.cpp */; };
+		21FCC908199FA7D700F2CA1E /* IEGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C016E119924BBF00CB59AB /* IEGameTransition.cpp */; };
+		21FCC909199FA7D900F2CA1E /* IEGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C016E119924BBF00CB59AB /* IEGameTransition.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -358,7 +358,7 @@
 			files = (
 				21F1152C1992319400F4A378 /* CESceneFabricator.cpp in Sources */,
 				21F1152819922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp in Sources */,
-				21C016E319924BBF00CB59AB /* IEGameTransition.cpp in Sources */,
+				21FCC909199FA7D900F2CA1E /* IEGameTransition.cpp in Sources */,
 				21F1152419922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp in Sources */,
 				21F115151992290900F4A378 /* CEComplexModel.cpp in Sources */,
 				21F1152019922C5100F4A378 /* CEConfigurationGameObjects.cpp in Sources */,
@@ -372,7 +372,7 @@
 			files = (
 				21F1152D1992319400F4A378 /* CESceneFabricator.cpp in Sources */,
 				21F1152919922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp in Sources */,
-				21C016E419924BBF00CB59AB /* IEGameTransition.cpp in Sources */,
+				21FCC908199FA7D700F2CA1E /* IEGameTransition.cpp in Sources */,
 				21F1152519922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp in Sources */,
 				21F115161992290900F4A378 /* CEComplexModel.cpp in Sources */,
 				21F1152119922C5100F4A378 /* CEConfigurationGameObjects.cpp in Sources */,
@@ -467,7 +467,10 @@
 		21F114F4199224FF00F4A378 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				DSTROOT = /tmp/ie3D_Engine.dst;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -482,17 +485,22 @@
 					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		21F114F5199224FF00F4A378 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				DSTROOT = /tmp/ie3D_Engine.dst;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = "__IOS__=1";
@@ -503,10 +511,11 @@
 					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

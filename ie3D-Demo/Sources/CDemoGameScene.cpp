@@ -53,8 +53,8 @@ void CDemoGameScene::load(void)
     
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
-    m_camera->Set_Distance(32.0f);
-    m_camera->Set_Height(16.0f);
+    m_camera->Set_Distance(12.0f);
+    m_camera->Set_Height(12.0f);
     
     m_root->setCamera(m_camera);
     
@@ -82,7 +82,7 @@ void CDemoGameScene::load(void)
     
     m_lightTank = transition->createComplexModel("gameobject.tank.light.xml");
     m_root->addCustomGameObject(m_lightTank);
-    m_lightTank->setScale(glm::vec3(5.0, 5.0, 5.0));
+    m_lightTank->setScale(glm::vec3(2.0, 2.0, 2.0));
     
     m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
     m_root->addCustomGameObject(m_mediumTank);

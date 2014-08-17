@@ -28,7 +28,7 @@ void ICharacterController::onPositionChanged(const glm::vec3& position)
 {
     assert(m_gameObject != nullptr);
     m_gameObject->setPosition(position);
-    m_camera->Set_LookAt(glm::vec3(position.x, position.y + 16.0, position.z));
+    m_camera->Set_LookAt(glm::vec3(position.x, position.y + 12.0, position.z));
 }
 
 void ICharacterController::onRotationChanged(const glm::vec3& rotation)
