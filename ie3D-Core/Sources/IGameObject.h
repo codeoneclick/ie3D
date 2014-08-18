@@ -115,6 +115,8 @@ public:
     virtual void setClippingPlane(const glm::vec4& clippingPlane,
                                   const std::string& renderTechnique);
     
+    virtual void removeLoadingDependencies(void);
+    
     virtual void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);
     virtual void setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor);
     virtual void setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr);

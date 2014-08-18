@@ -605,7 +605,7 @@
 		A46A320B174D21130044643E /* PVRTTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTTexture.h; sourceTree = "<group>"; };
 		A46A331A174E4C700044643E /* CResourceAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CResourceAccessor.cpp; path = Sources/CResourceAccessor.cpp; sourceTree = "<group>"; };
 		A46A331B174E4C770044643E /* CResourceAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CResourceAccessor.h; path = Sources/CResourceAccessor.h; sourceTree = "<group>"; };
-		A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLandscape.cpp; path = Sources/CLandscape.cpp; sourceTree = "<group>"; };
+		A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CLandscape.cpp; path = Sources/CLandscape.cpp; sourceTree = "<group>"; };
 		A46B1C75183E3B3600A3EF49 /* CLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLandscape.h; path = Sources/CLandscape.h; sourceTree = "<group>"; };
 		A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLandscapeChunk.cpp; path = Sources/CLandscapeChunk.cpp; sourceTree = "<group>"; };
 		A46B1C77183E3B3600A3EF49 /* CLandscapeChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLandscapeChunk.h; path = Sources/CLandscapeChunk.h; sourceTree = "<group>"; };
@@ -957,6 +957,13 @@
 			name = "Built-in Shaders";
 			sourceTree = "<group>";
 		};
+		2162094419A20B1A00DECBBC /* ThreadPool Managment */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "ThreadPool Managment";
+			sourceTree = "<group>";
+		};
 		217334BB1965AC74002B3F90 /* Techiques */ = {
 			isa = PBXGroup;
 			children = (
@@ -1222,6 +1229,7 @@
 		A420817C1733AA6F0004729E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2162094419A20B1A00DECBBC /* ThreadPool Managment */,
 				213B7F351994B39D006F3976 /* Built-in Shaders */,
 				2127E8581935042300D408C9 /* Editable Managment */,
 				A4364898179D74E900C51AC4 /* GestureRecognizer Managment */,

@@ -244,6 +244,31 @@ void IGameObject::setTexture(CSharedTextureRef texture,
     texture->addLoadingHandler(shared_from_this());
 }
 
+void IGameObject::removeLoadingDependencies(void)
+{
+    for(const auto& iterator : m_materials)
+    {
+        for(ui32 i = E_SHADER_SAMPLER_01; i < E_SHADER_SAMPLER_MAX; ++i)
+        {
+            CSharedTexture texture = iterator.second->getTexture(static_cast<E_SHADER_SAMPLER>(i));
+            if(texture != nullptr)
+            {
+                texture->removeLoadingHandler(shared_from_this());
+            }
+            
+            CSharedShader shader = iterator.second->getShader();
+            if(shader != nullptr)
+            {
+                shader->removeLoadingHandler(shared_from_this());
+            }
+        }
+    }
+    if(m_mesh != nullptr)
+    {
+        m_mesh->removeLoadingHandler(shared_from_this());
+    }
+}
+
 void IGameObject::setClippingPlane(const glm::vec4& clippingPlane,
                       const std::string& renderTechnique)
 {

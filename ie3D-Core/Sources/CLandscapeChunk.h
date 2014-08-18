@@ -18,12 +18,7 @@ class CLandscapeChunk : public IGameObject
 private:
     
     friend class CLandscape;
-    
-    ui32 m_chunkSizeX;
-    ui32 m_chunkSizeZ;
-    
-    ui32 m_heightmapSizeX;
-    ui32 m_heightmapSizeZ;
+    glm::ivec2 m_heightmapSize;
     
     f32 m_fogLinearStart;
     f32 m_fogLinearEnd;
@@ -38,9 +33,8 @@ private:
     
 protected:
     
-    void setMesh(CSharedMeshRef mesh,
-                 ui32 chunkSizeX, ui32 chunkSizeZ,
-                 ui32 heightmapSizeX, ui32 heightmapSizeZ);
+    void setMesh(CSharedMeshRef mesh);
+    void setQuadTree(CSharedQuadTreeRef quadTree);
     
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     
@@ -71,6 +65,8 @@ public:
     CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
                     ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CLandscapeChunk(void);
+    
+    void setHeightmapSize(const glm::ivec2& size);
     
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;

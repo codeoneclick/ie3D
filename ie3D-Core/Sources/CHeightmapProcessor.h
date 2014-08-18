@@ -179,6 +179,15 @@ protected:
     
     CSharedIndexBuffer createIndexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ);
     
+    void createVertexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                            ui32 chunkOffsetX, ui32 chunkOffsetZ,
+                            glm::vec3* maxBound, glm::vec3* minBound,
+                            const std::function<void(CSharedVertexBufferRef)>& callback);
+    
+    void createIndexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                           const std::function<void(CSharedIndexBufferRef)>& callback);
+    
+    
     void createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
                           ui32 chunkOffsetX, ui32 chunkOffsetZ,
                           glm::vec3* maxBound, glm::vec3* minBound);
@@ -187,8 +196,17 @@ protected:
                             ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
                             ui32 chunkOffsetX, ui32 chunkOffsetZ);
     
+    void updateVertexBuffer(CSharedVertexBufferRef vertexBuffer,
+                            ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                            ui32 chunkOffsetX, ui32 chunkOffsetZ,
+                            std::function<void(void)> callback);
+    
     void updateIndexBuffer(CSharedIndexBufferRef indexBuffer,
                            ui32 chunkLODSizeX, ui32 chunkLODSizeZ);
+    
+    void updateIndexBuffer(CSharedIndexBufferRef indexBuffer,
+                           ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                           const std::function<void(void)>& callback);
     
     void updateSplattingTexture(CSharedTextureRef texture, bool isCreation = true,
                                 ui32 offsetX = 0, ui32 offsetY = 0,
@@ -233,6 +251,8 @@ public:
     ui32 getSizeZ(void) const;
     
     void update(void);
+    
+    void getChunk(ui32 i, ui32 j, const std::function<void(CSharedMeshRef, CSharedQuadTreeRef)>& callback);
     
     CSharedMesh getChunk(ui32 i, ui32 j);
     void freeChunk(CSharedMeshRef chunk, ui32 i, ui32 j);

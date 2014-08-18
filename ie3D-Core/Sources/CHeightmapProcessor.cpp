@@ -15,6 +15,7 @@
 #include "IRenderTechniqueImporter.h"
 #include "IRenderTechniqueAccessor.h"
 #include "CConfigurationGameObjects.h"
+#include "CQuadTree.h"
 
 #if defined(__IOS__)
 
@@ -33,7 +34,7 @@ m_minHeight(FLT_MAX)
     ui8* data = nullptr;
 #if defined(__IOS__)
     
-    UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"mesa_heightmap" encoding:NSUTF8StringEncoding]];
+    UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"map_01" encoding:NSUTF8StringEncoding]];
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     size_t bytesPerRow = image.size.width * 4;
     data = (ui8 *)malloc(image.size.height * bytesPerRow);
@@ -55,7 +56,7 @@ m_minHeight(FLT_MAX)
 
 #elif defined(__OSX__)
     
-    NSImage* image = [NSImage imageNamed:[NSString stringWithCString:"mesa_heightmap" encoding:NSUTF8StringEncoding]];
+    NSImage* image = [NSImage imageNamed:[NSString stringWithCString:"map_01" encoding:NSUTF8StringEncoding]];
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)[image TIFFRepresentation], NULL);
     CGImageRef mask =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:mask];
@@ -844,6 +845,20 @@ CSharedIndexBuffer CHeightmapProcessor::createIndexBuffer(ui32 chunkLODSizeX, ui
     return indexBuffer;
 }
 
+void CHeightmapProcessor::createIndexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                                            const std::function<void(CSharedIndexBufferRef)>& callback)
+{
+    assert(chunkLODSizeX != 0);
+    assert(chunkLODSizeZ != 0);
+    assert(callback != nullptr);
+    
+    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((chunkLODSizeX - 1) * (chunkLODSizeX - 1) * 6,
+                                                                    GL_STREAM_DRAW);
+    CHeightmapProcessor::updateIndexBuffer(indexBuffer, chunkLODSizeX, chunkLODSizeZ, [indexBuffer, callback](){
+        callback(indexBuffer);
+    });
+}
+
 CSharedVertexBuffer CHeightmapProcessor::createVertexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
                                                             ui32 chunkOffsetX, ui32 chunkOffsetZ,
                                                             glm::vec3* maxBound, glm::vec3* minBound)
@@ -858,6 +873,28 @@ CSharedVertexBuffer CHeightmapProcessor::createVertexBuffer(ui32 chunkLODSizeX, 
                                           chunkOffsetX, chunkOffsetZ,
                                           maxBound, minBound);
     return vertexBuffer;
+}
+
+void CHeightmapProcessor::createVertexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                                             ui32 chunkOffsetX, ui32 chunkOffsetZ,
+                                             glm::vec3* maxBound, glm::vec3* minBound,
+                                             const std::function<void(CSharedVertexBufferRef)>& callback)
+{
+    assert(m_heightmapData != nullptr);
+    assert(chunkLODSizeX != 0);
+    assert(chunkLODSizeZ != 0);
+    assert(callback != nullptr);
+    
+    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(chunkLODSizeX * chunkLODSizeZ, GL_STATIC_DRAW);
+    CHeightmapProcessor::updateVertexBuffer(vertexBuffer, chunkLODSizeX, chunkLODSizeZ, chunkOffsetX, chunkOffsetZ, [this,
+                                                                                                                     chunkOffsetX, chunkOffsetZ,
+                                                                                                                     maxBound, minBound,
+                                                                                                                     callback, vertexBuffer](){
+        CHeightmapProcessor::createChunkBound(m_chunkSizeX, m_chunkSizeZ,
+                                              chunkOffsetX, chunkOffsetZ,
+                                              maxBound, minBound);
+        callback(vertexBuffer);
+    });
 }
 
 const std::tuple<glm::vec3, glm::vec3> CHeightmapProcessor::getChunkBounds(ui32 i, ui32 j) const
@@ -901,6 +938,64 @@ CSharedMesh CHeightmapProcessor::getChunk(ui32 i, ui32 j)
     m_uniqueProcessingOperations.insert(std::make_pair(std::make_tuple(i, j), operation));
     m_chunksUsed[i + j * m_numChunksX] = mesh;
     return mesh;
+}
+
+void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSharedMeshRef, CSharedQuadTreeRef)> &callback)
+{
+    CSharedMesh mesh = nullptr;
+    if(m_chunksUnused.size() != 0)
+    {
+        mesh = m_chunksUnused.at(m_chunksUnused.size() - 1);
+        m_chunksUnused.pop_back();
+        assert(callback != nullptr);
+        CHeightmapProcessor::updateVertexBuffer(mesh->getVertexBuffer(),
+                                                m_chunkLODSizeX, m_chunkLODSizeZ,
+                                                i, j, [this, mesh, callback](){
+                                                    CHeightmapProcessor::updateIndexBuffer(mesh->getIndexBuffer(), m_chunkLODSizeX, m_chunkLODSizeZ, [this, mesh, callback](){
+                                                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                                            CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
+                                                            quadTree->generate(mesh->getVertexBuffer(),
+                                                                               mesh->getIndexBuffer(),
+                                                                               mesh->getMaxBound(),
+                                                                               mesh->getMinBound(),
+                                                                               4,
+                                                                               m_chunkLODSizeX);
+                                                            dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                mesh->updateBounds();
+                                                                callback(mesh, quadTree);
+                                                            });
+                                                        });
+                                                    });
+                                                });
+    }
+    else
+    {
+        glm::vec3 maxBound = glm::vec3(-4096.0, -4096.0, -4096.0);
+        glm::vec3 minBound = glm::vec3(4096.0, 4096.0, 4096.0);
+        
+        CSharedVertexBuffer vertexBuffer = CHeightmapProcessor::createVertexBuffer(m_chunkLODSizeX, m_chunkLODSizeZ,
+                                                                                   i, j,
+                                                                                   &maxBound, &minBound);
+        CSharedIndexBuffer indexBuffer = CHeightmapProcessor::createIndexBuffer(m_chunkLODSizeX, m_chunkLODSizeZ);
+        mesh = CMesh::constructCustomMesh("landscape.chunk", vertexBuffer, indexBuffer,
+                                          maxBound, minBound);
+        CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
+        quadTree->generate(mesh->getVertexBuffer(),
+                           mesh->getIndexBuffer(),
+                           mesh->getMaxBound(),
+                           mesh->getMinBound(),
+                           4,
+                           m_chunkLODSizeX);
+        callback(mesh, quadTree);
+    }
+    
+    CSharedHeightmapProcessingOperation operation = std::make_shared<CHeightmapProcessingOperation>(m_heightmapData,
+                                                                                                    mesh->getVertexBuffer(),
+                                                                                                    mesh->getIndexBuffer(),
+                                                                                                    i, j);
+    m_processingOperationQueue.push(operation);
+    m_uniqueProcessingOperations.insert(std::make_pair(std::make_tuple(i, j), operation));
+    m_chunksUsed[i + j * m_numChunksX] = mesh;
 }
 
 void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, ui32 i, ui32 j)
@@ -1024,6 +1119,56 @@ void CHeightmapProcessor::updateVertexBuffer(CSharedVertexBufferRef vertexBuffer
     vertexBuffer->unlock();
 }
 
+void CHeightmapProcessor::updateVertexBuffer(CSharedVertexBufferRef vertexBuffer,
+                                             ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                                             ui32 chunkOffsetX, ui32 chunkOffsetZ,
+                                             std::function<void(void)> callback)
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        assert(callback != nullptr);
+        assert(vertexBuffer != nullptr);
+        assert((m_chunkSizeX - 1) % (chunkLODSizeX - 1) == 0.0);
+        assert((m_chunkSizeZ - 1) % (chunkLODSizeZ - 1) == 0.0);
+        
+        ui32 chunkLODOffsetX = (m_chunkSizeX - 1) / (chunkLODSizeX - 1);
+        ui32 chunkLODOffsetZ = (m_chunkSizeZ - 1) / (chunkLODSizeZ - 1);
+        
+        SAttributeVertex* vertexData = vertexBuffer->lock();
+        ui32 index = 0;
+        for(ui32 i = 0; i < chunkLODSizeX;++i)
+        {
+            for(ui32 j = 0; j < chunkLODSizeZ;++j)
+            {
+                glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSizeX - chunkOffsetX,
+                                               j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSizeZ - chunkOffsetZ);
+                
+                ui32 indexXOffset = static_cast<ui32>(position.x) < m_heightmapData->getSizeX() ?
+                static_cast<ui32>(position.x) :
+                static_cast<ui32>(m_heightmapData->getSizeX() - 1);
+                
+                ui32 indexZOffset = static_cast<ui32>(position.y) < m_heightmapData->getSizeZ() ?
+                static_cast<ui32>(position.y) :
+                static_cast<ui32>(m_heightmapData->getSizeZ() - 1);
+                
+                glm::vec3 point = m_heightmapData->getVertexPosition(indexXOffset, indexZOffset);
+                vertexData[index].m_position = point;
+                glm::u16vec2 texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(point.x) / static_cast<f32>(m_heightmapData->getSizeX()),
+                                                                              static_cast<ui32>(point.z) / static_cast<f32>(m_heightmapData->getSizeZ())));
+                vertexData[index].m_texcoord = texcoord;
+                
+                glm::u8vec4 normal = m_heightmapData->getVertexNormal(indexXOffset, indexZOffset);
+                vertexData[index].m_normal = normal;
+                ++index;
+            }
+        }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            vertexBuffer->unlock();
+            callback();
+        });
+    });
+}
+
 void CHeightmapProcessor::updateIndexBuffer(CSharedIndexBufferRef indexBuffer,
                                             ui32 chunkLODSizeX, ui32 chunkLODSizeZ)
 {
@@ -1050,6 +1195,44 @@ void CHeightmapProcessor::updateIndexBuffer(CSharedIndexBufferRef indexBuffer,
         }
     }
     indexBuffer->unlock();
+}
+
+void CHeightmapProcessor::updateIndexBuffer(CSharedIndexBufferRef indexBuffer,
+                                            ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+                                            const std::function<void(void)>& callback)
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        assert(callback != nullptr);
+        assert(indexBuffer != nullptr);
+        
+        ui16* indexData = indexBuffer->lock();
+        
+        ui32 index = 0;
+        for(ui32 i = 0; i < (chunkLODSizeX - 1); ++i)
+        {
+            for(ui32 j = 0; j < (chunkLODSizeZ - 1); ++j)
+            {
+                indexData[index] = i + j * chunkLODSizeX;
+                index++;
+                indexData[index] = i + (j + 1) * chunkLODSizeX;
+                index++;
+                indexData[index] = i + 1 + j * chunkLODSizeX;
+                index++;
+                
+                indexData[index] = i + (j + 1) * chunkLODSizeX;
+                index++;
+                indexData[index] = i + 1 + (j + 1) * chunkLODSizeX;
+                index++;
+                indexData[index] = i + 1 + j * chunkLODSizeX;
+                index++;
+            }
+        }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            indexBuffer->unlock();
+            callback();
+        });
+    });
 }
 
 void CHeightmapProcessor::generateTangentSpace(CSharedHeightmapDataRef heightmapData,

@@ -20,6 +20,7 @@
 #include "CLandscapeEdges.h"
 #include "CHeightmapProcessor.h"
 #include "CFrustum.h"
+#include "CQuadTree.h"
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -79,13 +80,18 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         chunk->enableRender(m_isNeedToRender);
                         chunk->enableUpdate(m_isNeedToUpdate);
                         
-                        ui32 chunkSizeX = m_heightmapProcessor->getChunkSizeX(i, j);
-                        ui32 chunkSizeZ = m_heightmapProcessor->getChunkSizeZ(i, j);
+                        ui32 chunkSize = m_heightmapProcessor->getChunkSizeX(i, j);
                         
-                        chunk->setMesh(mesh,
-                                       chunkSizeX, chunkSizeZ,
-                                       m_heightmapProcessor->getSizeX(),
-                                       m_heightmapProcessor->getSizeZ());
+                        chunk->setMesh(mesh);
+                        
+                        CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
+                        quadTree->generate(mesh->getVertexBuffer(),
+                                           mesh->getIndexBuffer(),
+                                           mesh->getMaxBound(),
+                                           mesh->getMinBound(),
+                                           4,
+                                           chunkSize);
+                        chunk->setQuadTree(quadTree);
                         
                         chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
                         chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
@@ -107,10 +113,10 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 }
                 else if(m_chunks[i + j * numChunksZ] != nullptr)
                 {
-                    CSharedLandscapeChunk chunk = m_chunks[i + j * numChunksZ];
-                    chunk->enableRender(false);
-                    chunk->enableUpdate(false);
-                    m_heightmapProcessor->freeChunk(chunk->m_mesh, i, j);
+                    m_chunks[i + j * numChunksZ]->enableRender(false);
+                    m_chunks[i + j * numChunksZ]->enableUpdate(false);
+                    m_chunks[i + j * numChunksZ]->removeLoadingDependencies();
+                    m_heightmapProcessor->freeChunk(m_chunks[i + j * numChunksZ]->m_mesh, i, j);
                     m_chunks[i + j * numChunksZ] = nullptr;
                 }
             }

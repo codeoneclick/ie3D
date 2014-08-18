@@ -21,13 +21,11 @@
 CLandscapeChunk::CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
                                  ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor),
-m_chunkSizeX(0),
-m_chunkSizeZ(0),
-m_heightmapSizeX(0),
-m_heightmapSizeZ(0),
+m_heightmapSize(glm::ivec2(0)),
 m_numIndexesToRender(0),
 m_prerenderedSplattingDiffuseTexture(nullptr),
-m_prerenderedSplattingNormalTexture(nullptr)
+m_prerenderedSplattingNormalTexture(nullptr),
+m_quadTree(nullptr)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
     
@@ -67,7 +65,7 @@ m_prerenderedSplattingNormalTexture(nullptr)
             }
         }
 #else
-        material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSizeX, m_heightmapSizeZ) / m_splattingTillingFactor,
+        material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSize.x, m_heightmapSize.y) / m_splattingTillingFactor,
                                               "IN_SplattingTillingFactor");
 #endif
         material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
@@ -81,28 +79,23 @@ CLandscapeChunk::~CLandscapeChunk(void)
     m_materialBindImposer = nullptr;
 }
 
-void CLandscapeChunk::setMesh(CSharedMeshRef mesh,
-                              ui32 chunkSizeX, ui32 chunkSizeZ,
-                              ui32 heightmapSizeX, ui32 heightmapSizeZ)
+void CLandscapeChunk::setMesh(CSharedMeshRef mesh)
 {
     assert(m_mesh == nullptr);
     assert(mesh != nullptr);
-    
     m_mesh = mesh;
-    
-    m_chunkSizeX = chunkSizeX;
-    m_chunkSizeZ = chunkSizeZ;
-    
-    m_heightmapSizeX = heightmapSizeX;
-    m_heightmapSizeZ = heightmapSizeZ;
-    
-    m_quadTree = std::make_shared<CQuadTree>();
-    m_quadTree->generate(m_mesh->getVertexBuffer(),
-                         m_mesh->getIndexBuffer(),
-                         m_mesh->getMaxBound(),
-                         m_mesh->getMinBound(),
-                         4,
-                         m_chunkSizeX);
+}
+
+void CLandscapeChunk::setQuadTree(CSharedQuadTreeRef quadTree)
+{
+    assert(m_quadTree == nullptr);
+    assert(quadTree != nullptr);
+    m_quadTree = quadTree;
+}
+
+void CLandscapeChunk::setHeightmapSize(const glm::ivec2 &size)
+{
+    m_heightmapSize = size;
 }
 
 void CLandscapeChunk::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
