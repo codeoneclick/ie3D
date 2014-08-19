@@ -949,6 +949,10 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     {
         m_chunksUsed[i + j * m_numChunksX].first = m_chunksUnused.at(m_chunksUnused.size() - 1).first;
         m_chunksUsed[i + j * m_numChunksX].second = m_chunksUnused.at(m_chunksUnused.size() - 1).second;
+        
+        assert(m_chunksUsed[i + j * m_numChunksX].first != nullptr);
+        assert(m_chunksUsed[i + j * m_numChunksX].second != nullptr);
+        
         m_chunksUnused.pop_back();
     }
     else
@@ -1092,9 +1096,10 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     completionOperation->addDependency(writeToIndexBufferOperation);
     completionOperation->addDependency(commitIndexBufferOperation);
     completionOperation->addDependency(createQuadTreeOperation);
-    completionOperation->execute();
     
     m_operations[i + j * m_numChunksX] = completionOperation;
+    
+    completionOperation->execute();
     
     /*CSharedHeightmapProcessingOperation operation = std::make_shared<CHeightmapProcessingOperation>(m_heightmapData,
                                                                                                     mesh->getVertexBuffer(),
@@ -1107,20 +1112,20 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
 
 void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef quadTree, ui32 i, ui32 j)
 {
-    m_chunksUnused.push_back(std::make_pair(chunk, quadTree));
-    
-    if(m_operations[i + j * m_numChunksX] != nullptr)
+    if(chunk != nullptr && quadTree != nullptr)
     {
-        m_operations[i + j * m_numChunksX]->cancel();
+        m_chunksUnused.push_back(std::make_pair(chunk, quadTree));
     }
     
+    m_operations[i + j * m_numChunksX]->cancel();
     m_chunksUsed[i + j * m_numChunksX].first = nullptr;
     m_chunksUsed[i + j * m_numChunksX].second = nullptr;
-    const auto& iterator = m_uniqueProcessingOperations.find(std::make_tuple(i, j));
+    
+    /*const auto& iterator = m_uniqueProcessingOperations.find(std::make_tuple(i, j));
     if(iterator != m_uniqueProcessingOperations.end())
     {
         iterator->second->cancel();
-    }
+    }*/
 }
 
 void CHeightmapProcessor::update(void)

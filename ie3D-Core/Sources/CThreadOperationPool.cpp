@@ -50,7 +50,10 @@ void CThreadOperationPool::updateThread(void)
             CSharedThreadOperation dependencyOperation = operation->nextOperation();
             if(dependencyOperation->m_operationQueue == E_THREAD_OPERATION_QUEUE_BACKGROUND)
             {
-                dependencyOperation->m_executionBlock();
+                if(!dependencyOperation->getIsCanceled())
+                {
+                    dependencyOperation->m_executionBlock();
+                }
                 operation->popOperation();
             }
             if(dependencyOperation == operation)
@@ -69,7 +72,10 @@ void CThreadOperationPool::updateThread(void)
             CSharedThreadOperation dependencyOperation = operation->nextOperation();
             if(dependencyOperation->m_operationQueue == E_THREAD_OPERATION_QUEUE_BACKGROUND)
             {
-                dependencyOperation->m_executionBlock();
+                if(!dependencyOperation->getIsCanceled())
+                {
+                    dependencyOperation->m_executionBlock();
+                }
                 operation->popOperation();
             }
         }
@@ -88,7 +94,10 @@ void CThreadOperationPool::update(void)
         CSharedThreadOperation dependencyOperation = operation->nextOperation();
         if(dependencyOperation->m_operationQueue == E_THREAD_OPERATION_QUEUE_MAIN)
         {
-            dependencyOperation->m_executionBlock();
+            if(!dependencyOperation->getIsCanceled())
+            {
+                dependencyOperation->m_executionBlock();
+            }
             operation->popOperation();
         }
         if(dependencyOperation == operation)
@@ -107,7 +116,10 @@ void CThreadOperationPool::update(void)
         CSharedThreadOperation dependencyOperation = operation->nextOperation();
         if(dependencyOperation->m_operationQueue == E_THREAD_OPERATION_QUEUE_MAIN)
         {
-            dependencyOperation->m_executionBlock();
+            if(!dependencyOperation->getIsCanceled())
+            {
+                dependencyOperation->m_executionBlock();
+            }
             operation->popOperation();
         }
     }

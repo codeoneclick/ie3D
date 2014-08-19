@@ -75,7 +75,10 @@ m_quadTree(nullptr)
 
 CLandscapeChunk::~CLandscapeChunk(void)
 {
-    m_quadTree->destroy();
+    if(m_quadTree != nullptr)
+    {
+        m_quadTree->destroy();
+    }
     m_materialBindImposer = nullptr;
 }
 

@@ -37,6 +37,7 @@ void CThreadOperation::setCancelBlock(std::function<void(void)> callback)
 void CThreadOperation::addDependency(CSharedThreadOperationRef operation)
 {
     m_dependecies.push(operation);
+    m_dependeciesReferences.insert(operation);
 }
 
 CSharedThreadOperation CThreadOperation::nextOperation(void)
@@ -57,6 +58,7 @@ bool CThreadOperation::popOperation(void)
         if(operation->popOperation())
         {
             m_dependecies.pop();
+            m_dependeciesReferences.erase(operation);
         }
     }
     else
@@ -73,11 +75,9 @@ void CThreadOperation::execute(void)
 
 void CThreadOperation::cancel(void)
 {
-    while (!m_dependecies.empty())
+    for(const auto& operation : m_dependeciesReferences)
     {
-        CSharedThreadOperation operation = m_dependecies.front();
         operation->cancel();
-        m_dependecies.pop();
     }
     m_isCanceled = true;
 }
