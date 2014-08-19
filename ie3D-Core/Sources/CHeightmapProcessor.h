@@ -167,8 +167,9 @@ protected:
     ui32 m_numChunksX;
     ui32 m_numChunksZ;
     
-    std::vector<CSharedMesh> m_chunksUsed;
-    std::vector<CSharedMesh> m_chunksUnused;
+    std::vector<std::pair<CSharedMesh, CSharedQuadTree>> m_chunksUsed;
+    std::vector<std::pair<CSharedMesh, CSharedQuadTree>> m_chunksUnused;
+    std::vector<CSharedThreadOperation> m_operations;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
@@ -255,7 +256,7 @@ public:
     void getChunk(ui32 i, ui32 j, const std::function<void(CSharedMeshRef, CSharedQuadTreeRef)>& callback);
     
     CSharedMesh getChunk(ui32 i, ui32 j);
-    void freeChunk(CSharedMeshRef chunk, ui32 i, ui32 j);
+    void freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef quadTree, ui32 i, ui32 j);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
     

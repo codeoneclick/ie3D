@@ -68,36 +68,57 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 {
                     if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
-                        CSharedMesh mesh = m_heightmapProcessor->getChunk(i, j);
                         CSharedLandscapeChunk chunk = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
                         
-                        chunk->setCamera(m_camera);
+                        m_heightmapProcessor->getChunk(i, j, [this, chunk](CSharedMeshRef mesh, CSharedQuadTreeRef quadTree) {
+                            
+                            chunk->setMesh(mesh);
+                            chunk->setQuadTree(quadTree);
+                            
+                            chunk->onConfigurationLoaded(m_configuration, true);
+                            
+                            if(m_prerenderedSplattingDiffuseTexture != nullptr)
+                            {
+                                chunk->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
+                            }
+                            if(m_prerenderedSplattingNormalTexture != nullptr)
+                            {
+                                chunk->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
+                            }
+                            chunk->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
+                            
+                            chunk->setCamera(m_camera);
+                            
+                            chunk->setRenderTechniqueImporter(m_renderTechniqueImporter);
+                            chunk->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
+                            chunk->setSceneUpdateMgr(m_sceneUpdateMgr);
+                            
+                            chunk->enableRender(m_isNeedToRender);
+                            chunk->enableUpdate(m_isNeedToUpdate);
+                            
+                            chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
+                            chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
+                            chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
+                        });
                         
-                        chunk->setRenderTechniqueImporter(m_renderTechniqueImporter);
-                        chunk->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
-                        chunk->setSceneUpdateMgr(m_sceneUpdateMgr);
                         
-                        chunk->enableRender(m_isNeedToRender);
-                        chunk->enableUpdate(m_isNeedToUpdate);
                         
-                        ui32 chunkSize = m_heightmapProcessor->getChunkSizeX(i, j);
+                        //ui32 chunkSize = m_heightmapProcessor->getChunkSizeX(i, j);
                         
-                        chunk->setMesh(mesh);
+                        //chunk->setMesh(mesh);
                         
-                        CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
-                        quadTree->generate(mesh->getVertexBuffer(),
-                                           mesh->getIndexBuffer(),
-                                           mesh->getMaxBound(),
-                                           mesh->getMinBound(),
-                                           4,
-                                           chunkSize);
-                        chunk->setQuadTree(quadTree);
+                        //CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
+                        //quadTree->generate(mesh->getVertexBuffer(),
+                        //                   mesh->getIndexBuffer(),
+                        //                   mesh->getMaxBound(),
+                        //                   mesh->getMinBound(),
+                        //                   4,
+                        //                   chunkSize);
+                        //chunk->setQuadTree(quadTree);
                         
-                        chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
-                        chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
-                        chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
                         
-                        chunk->onConfigurationLoaded(m_configuration, true);
+                        
+                        /*chunk->onConfigurationLoaded(m_configuration, true);
                         
                         if(m_prerenderedSplattingDiffuseTexture != nullptr)
                         {
@@ -107,7 +128,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         {
                             chunk->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
                         }
-                        chunk->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
+                        chunk->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());*/
                         m_chunks[i + j * numChunksZ] = chunk;
                     }
                 }
@@ -116,7 +137,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     m_chunks[i + j * numChunksZ]->enableRender(false);
                     m_chunks[i + j * numChunksZ]->enableUpdate(false);
                     m_chunks[i + j * numChunksZ]->removeLoadingDependencies();
-                    m_heightmapProcessor->freeChunk(m_chunks[i + j * numChunksZ]->m_mesh, i, j);
+                    m_heightmapProcessor->freeChunk(m_chunks[i + j * numChunksZ]->m_mesh, m_chunks[i + j * numChunksZ]->m_quadTree, i, j);
                     m_chunks[i + j * numChunksZ] = nullptr;
                 }
             }

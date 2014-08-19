@@ -8,6 +8,7 @@
 
 #include "CGameLoopExecutor.h"
 #include "CFPSCounter.h"
+#include "CThreadOperationPool.h"
 
 #if defined(__WIN32__) || defined(__NDK__)
 
@@ -54,6 +55,7 @@ void CGameLoopExecutor::OnGameLoopUpdate(void)
     {
         handler->_Get_Commands()._ExecuteGameLoopUpdateCommand(deltatime);
     }
+    CThreadOperationPool::sharedInstance()->update();
 }
 
 void CGameLoopExecutor::ConnectToGameLoop(std::shared_ptr<IGameLoopHandler> _handler)

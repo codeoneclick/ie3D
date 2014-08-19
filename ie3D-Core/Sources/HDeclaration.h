@@ -336,4 +336,8 @@ class CRenderTarget;
 typedef std::shared_ptr<CRenderTarget> CSharedRenderTarget;
 typedef const CSharedRenderTarget& CSharedRenderTargetRef;
 
+class CThreadOperation;
+typedef std::shared_ptr<CThreadOperation> CSharedThreadOperation;
+typedef const CSharedThreadOperation& CSharedThreadOperationRef;
+
 #endif

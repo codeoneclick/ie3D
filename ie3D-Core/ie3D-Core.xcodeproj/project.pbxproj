@@ -236,6 +236,12 @@
 		213B7F391994CDFC006F3976 /* CRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F371994CDFC006F3976 /* CRenderTarget.cpp */; };
 		213B7F3A1994CDFC006F3976 /* CRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F371994CDFC006F3976 /* CRenderTarget.cpp */; };
 		213B7F3B1994CDFC006F3976 /* CRenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 213B7F381994CDFC006F3976 /* CRenderTarget.h */; };
+		2162096819A3312D00DECBBC /* CThreadOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096619A3312D00DECBBC /* CThreadOperation.cpp */; };
+		2162096919A3312D00DECBBC /* CThreadOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096619A3312D00DECBBC /* CThreadOperation.cpp */; };
+		2162096A19A3312D00DECBBC /* CThreadOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2162096719A3312D00DECBBC /* CThreadOperation.h */; };
+		2162096D19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096B19A3364200DECBBC /* CThreadOperationPool.cpp */; };
+		2162096E19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096B19A3364200DECBBC /* CThreadOperationPool.cpp */; };
+		2162096F19A3364200DECBBC /* CThreadOperationPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 2162096C19A3364200DECBBC /* CThreadOperationPool.h */; };
 		2173174A1821AE6700FF3D1E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217317491821AE6700FF3D1E /* OpenGL.framework */; };
 		21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */; };
 		21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */; };
@@ -411,6 +417,10 @@
 		21457FE8181C4BEA0071839E /* IFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IFabricator.h; path = Sources/IFabricator.h; sourceTree = "<group>"; };
 		21457FE9181C4BEA0071839E /* IGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGraph.cpp; path = Sources/IGraph.cpp; sourceTree = "<group>"; };
 		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
+		2162096619A3312D00DECBBC /* CThreadOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CThreadOperation.cpp; path = Sources/CThreadOperation.cpp; sourceTree = "<group>"; };
+		2162096719A3312D00DECBBC /* CThreadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CThreadOperation.h; path = Sources/CThreadOperation.h; sourceTree = "<group>"; };
+		2162096B19A3364200DECBBC /* CThreadOperationPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CThreadOperationPool.cpp; path = Sources/CThreadOperationPool.cpp; sourceTree = "<group>"; };
+		2162096C19A3364200DECBBC /* CThreadOperationPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CThreadOperationPool.h; path = Sources/CThreadOperationPool.h; sourceTree = "<group>"; };
 		216E479D199A905A00632243 /* HShaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HShaders.h; path = Sources/HShaders.h; sourceTree = "<group>"; };
 		2172A02C18F337D300D4D317 /* HDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HDeclaration.h; path = Sources/HDeclaration.h; sourceTree = "<group>"; };
 		2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_osx.cpp; path = Sources/COGLWindow_osx.cpp; sourceTree = "<group>"; };
@@ -960,6 +970,10 @@
 		2162094419A20B1A00DECBBC /* ThreadPool Managment */ = {
 			isa = PBXGroup;
 			children = (
+				2162096719A3312D00DECBBC /* CThreadOperation.h */,
+				2162096619A3312D00DECBBC /* CThreadOperation.cpp */,
+				2162096C19A3364200DECBBC /* CThreadOperationPool.h */,
+				2162096B19A3364200DECBBC /* CThreadOperationPool.cpp */,
 			);
 			name = "ThreadPool Managment";
 			sourceTree = "<group>";
@@ -1813,8 +1827,10 @@
 				212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */,
 				2191CEAE196EE95100CE2813 /* inffixed.h in Headers */,
 				2173348319644123002B3F90 /* CRenderTechniqueScreenSpace.h in Headers */,
+				2162096A19A3312D00DECBBC /* CThreadOperation.h in Headers */,
 				21C409AC197B0BA40063D62D /* CMeshCommiter_MDL_01.h in Headers */,
 				2173348D19644157002B3F90 /* IRenderTechniqueImporter.h in Headers */,
+				2162096F19A3364200DECBBC /* CThreadOperationPool.h in Headers */,
 				2191CEBB196EE95100CE2813 /* zlib.h in Headers */,
 				217334921964416D002B3F90 /* IRenderTechniqueAccessor.h in Headers */,
 				2191CEBE196EE95100CE2813 /* zutil.h in Headers */,
@@ -1942,6 +1958,7 @@
 				2191CE68196EDBEF00CE2813 /* pngwio.c in Sources */,
 				21208FBA1906FB5F00FFC8D4 /* CGameLoopExecutor_ios.cpp in Sources */,
 				212092BB191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
+				2162096919A3312D00DECBBC /* CThreadOperation.cpp in Sources */,
 				21208FBB1906FB5F00FFC8D4 /* CGameLoopExecutor_win32.cpp in Sources */,
 				21208FBC1906FB5F00FFC8D4 /* IGameController.cpp in Sources */,
 				21208FBD1906FB5F00FFC8D4 /* IGameLoopHandler.cpp in Sources */,
@@ -1994,6 +2011,7 @@
 				21208FDC1906FB5F00FFC8D4 /* CConfigurationORenderOperationSerializer.cpp in Sources */,
 				21208FDD1906FB5F00FFC8D4 /* CConfigurationGameTransitionSerializer.cpp in Sources */,
 				21208FDE1906FB5F00FFC8D4 /* IConfigurationLoadingOperation.cpp in Sources */,
+				2162096E19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */,
 				21208FDF1906FB5F00FFC8D4 /* CGUITemplateLoadingOperation.cpp in Sources */,
 				2191CEA4196EE95100CE2813 /* gzlib.c in Sources */,
 				2191CEA1196EE95100CE2813 /* gzclose.c in Sources */,
@@ -2103,6 +2121,7 @@
 				2191CE67196EDBEF00CE2813 /* pngwio.c in Sources */,
 				213265FE1906A4AF001C98F7 /* CGameLoopExecutor_ios.cpp in Sources */,
 				212092BA191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
+				2162096819A3312D00DECBBC /* CThreadOperation.cpp in Sources */,
 				213265FF1906A4AF001C98F7 /* CGameLoopExecutor_win32.cpp in Sources */,
 				213266001906A4AF001C98F7 /* IGameController.cpp in Sources */,
 				213266011906A4AF001C98F7 /* IGameLoopHandler.cpp in Sources */,
@@ -2155,6 +2174,7 @@
 				213266201906A4AF001C98F7 /* CConfigurationORenderOperationSerializer.cpp in Sources */,
 				213266211906A4AF001C98F7 /* CConfigurationGameTransitionSerializer.cpp in Sources */,
 				213266221906A4AF001C98F7 /* IConfigurationLoadingOperation.cpp in Sources */,
+				2162096D19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */,
 				213266231906A4AF001C98F7 /* CGUITemplateLoadingOperation.cpp in Sources */,
 				2191CEA3196EE95100CE2813 /* gzlib.c in Sources */,
 				2191CEA0196EE95100CE2813 /* gzclose.c in Sources */,
