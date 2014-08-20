@@ -177,17 +177,15 @@ void CSkyBox::onDraw(const std::string& mode)
         assert(m_camera != nullptr);
         assert(m_materials.find(mode) != m_materials.end());
         
-        IGameObject::setPosition(m_camera->Get_Position());
-        m_matrixWorld = m_matrixTranslation * m_matrixRotation * m_matrixScale;
-        
         std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
         assert(material->getShader() != nullptr);
         
         if(material->isReflecting())
         {
             IGameObject::setRotation(glm::vec3(180.0, m_rotation.y, m_rotation.z));
-            IGameObject::onSceneUpdate(0);
         }
+        IGameObject::setPosition(m_camera->Get_Position());
+        IGameObject::onSceneUpdate(0);
         
         material->getShader()->setMatrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);

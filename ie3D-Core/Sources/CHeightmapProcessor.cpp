@@ -948,7 +948,7 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     if(m_chunksUnused.size() != 0)
     {
         m_chunksUsed[i + j * m_numChunksX].first = m_chunksUnused.at(m_chunksUnused.size() - 1).first;
-        m_chunksUsed[i + j * m_numChunksX].second = m_chunksUnused.at(m_chunksUnused.size() - 1).second;
+        m_chunksUsed[i + j * m_numChunksX].second = std::make_shared<CQuadTree>();
         
         assert(m_chunksUsed[i + j * m_numChunksX].first != nullptr);
         assert(m_chunksUsed[i + j * m_numChunksX].second != nullptr);
@@ -1072,6 +1072,7 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     CSharedThreadOperation createQuadTreeOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     createQuadTreeOperation->setExecutionBlock([this, i, j](){
         
+        m_chunksUsed[i + j * m_numChunksX].first->updateBounds();
         m_chunksUsed[i + j * m_numChunksX].second->generate(m_chunksUsed[i + j * m_numChunksX].first->getVertexBuffer(),
                                                             m_chunksUsed[i + j * m_numChunksX].first->getIndexBuffer(),
                                                             m_chunksUsed[i + j * m_numChunksX].first->getMaxBound(),
@@ -1084,8 +1085,6 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     completionOperation->setExecutionBlock([this, callback, i, j](){
         
         assert(callback != nullptr);
-        
-        CSharedQuadTree quadTree = m_chunksUsed[i + j * m_numChunksX].second;
         
         callback(m_chunksUsed[i + j * m_numChunksX].first,
                  m_chunksUsed[i + j * m_numChunksX].second);
@@ -1114,7 +1113,7 @@ void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef qua
 {
     if(chunk != nullptr && quadTree != nullptr)
     {
-        m_chunksUnused.push_back(std::make_pair(chunk, quadTree));
+        m_chunksUnused.push_back(std::make_pair(chunk, nullptr));
     }
     
     m_operations[i + j * m_numChunksX]->cancel();

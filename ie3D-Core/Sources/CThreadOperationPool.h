@@ -29,6 +29,7 @@ protected:
     
     CSharedThreadOperation nextOperation(E_THREAD_OPERATION_QUEUE operationQueue);
     void popOperation(E_THREAD_OPERATION_QUEUE operationQueue);
+    bool isQueueEmpty(E_THREAD_OPERATION_QUEUE operationQueue);
     
     void updateThread(void);
     

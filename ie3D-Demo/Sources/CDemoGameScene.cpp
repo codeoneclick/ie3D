@@ -114,10 +114,6 @@ void CDemoGameScene::load(void)
 
 void CDemoGameScene::update(f32 deltatime)
 {
-    static f32 angle = 0.0;
-    angle += 0.1;
-    m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
-    
     switch (m_characterControllerMoveState)
     {
         case E_CHARACTER_CONTROLLER_MOVE_STATE_NONE:

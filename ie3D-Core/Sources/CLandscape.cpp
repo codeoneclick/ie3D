@@ -68,37 +68,37 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 {
                     if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
-                        CSharedLandscapeChunk chunk = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
+                        m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
                         
-                        m_heightmapProcessor->getChunk(i, j, [this, chunk](CSharedMeshRef mesh, CSharedQuadTreeRef quadTree) {
+                        m_heightmapProcessor->getChunk(i, j, [this, i , j, numChunksZ](CSharedMeshRef mesh, CSharedQuadTreeRef quadTree) {
                             
-                            chunk->setMesh(mesh);
-                            chunk->setQuadTree(quadTree);
+                            m_chunks[i + j * numChunksZ]->setMesh(mesh);
+                            m_chunks[i + j * numChunksZ]->setQuadTree(quadTree);
                             
-                            chunk->onConfigurationLoaded(m_configuration, true);
+                            m_chunks[i + j * numChunksZ]->onConfigurationLoaded(m_configuration, true);
                             
                             if(m_prerenderedSplattingDiffuseTexture != nullptr)
                             {
-                                chunk->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
+                                m_chunks[i + j * numChunksZ]->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
                             }
                             if(m_prerenderedSplattingNormalTexture != nullptr)
                             {
-                                chunk->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
+                                m_chunks[i + j * numChunksZ]->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
                             }
-                            chunk->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
+                            m_chunks[i + j * numChunksZ]->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
                             
-                            chunk->setCamera(m_camera);
+                            m_chunks[i + j * numChunksZ]->setCamera(m_camera);
                             
-                            chunk->setRenderTechniqueImporter(m_renderTechniqueImporter);
-                            chunk->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
-                            chunk->setSceneUpdateMgr(m_sceneUpdateMgr);
+                            m_chunks[i + j * numChunksZ]->setRenderTechniqueImporter(m_renderTechniqueImporter);
+                            m_chunks[i + j * numChunksZ]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
+                            m_chunks[i + j * numChunksZ]->setSceneUpdateMgr(m_sceneUpdateMgr);
                             
-                            chunk->enableRender(m_isNeedToRender);
-                            chunk->enableUpdate(m_isNeedToUpdate);
+                            m_chunks[i + j * numChunksZ]->enableRender(m_isNeedToRender);
+                            m_chunks[i + j * numChunksZ]->enableUpdate(m_isNeedToUpdate);
                             
-                            chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
-                            chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
-                            chunk->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
+                            m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
+                            m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
+                            m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
                         });
                         
                         
@@ -129,7 +129,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             chunk->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
                         }
                         chunk->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());*/
-                        m_chunks[i + j * numChunksZ] = chunk;
+                        
                     }
                 }
                 else if(m_chunks[i + j * numChunksZ] != nullptr)

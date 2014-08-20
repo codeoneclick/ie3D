@@ -58,7 +58,7 @@ bool CThreadOperation::popOperation(void)
         if(operation->popOperation())
         {
             m_dependecies.pop();
-            m_dependeciesReferences.erase(operation);
+            //m_dependeciesReferences.erase(operation);
         }
     }
     else
