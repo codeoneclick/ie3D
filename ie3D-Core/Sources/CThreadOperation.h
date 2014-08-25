@@ -29,11 +29,14 @@ protected:
     std::function<void(void)> m_executionBlock;
     std::function<void(void)> m_cancelBlock;
     
+    std::mutex m_mutex;
+    
     bool m_isDone;
     bool m_isCanceled;
     
     CSharedThreadOperation nextOperation(void);
     bool popOperation(void);
+    bool isQueueEmpty(void);
     
 public:
     

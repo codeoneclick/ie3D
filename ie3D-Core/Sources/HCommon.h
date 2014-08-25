@@ -332,6 +332,8 @@ static std::set<std::string> g_highPerformancePlatforms = {
     "iPhone5,4",
     "iPhone6,1",
     "iPhone6,2"
+    "iPad3,1",
+    "iPad3,4",
     "iPad4,1",
     "iPad4,2",
     "iPad4,4",

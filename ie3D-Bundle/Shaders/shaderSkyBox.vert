@@ -9,7 +9,7 @@ uniform mat4 MATRIX_View;
 uniform mat4 MATRIX_Normal;
 uniform mat4 MATRIX_World;
 
-varying vec3   OUT_TexCoord;
+varying vec3 OUT_TexCoord;
 
 void main(void)
 {
