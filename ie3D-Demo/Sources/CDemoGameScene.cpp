@@ -114,21 +114,25 @@ void CDemoGameScene::load(void)
 
 void CDemoGameScene::update(f32 deltatime)
 {
+    assert(m_characterController != nullptr);
+    
     switch (m_characterControllerMoveState)
     {
         case E_CHARACTER_CONTROLLER_MOVE_STATE_NONE:
         {
-            
+            m_characterController->decreaseSpeed();
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_FORWARD:
         {
             m_gameObjectNavigator->moveForward();
+            m_characterController->increaseSpeed();
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_BACKWARD:
         {
             m_gameObjectNavigator->moveBackward();
+            m_characterController->decreaseSpeed();
         }
             break;
         default:
@@ -159,6 +163,7 @@ void CDemoGameScene::update(f32 deltatime)
         }
             break;
     }
+    m_characterController->update(deltatime);
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

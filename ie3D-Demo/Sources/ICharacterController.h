@@ -24,11 +24,21 @@ protected:
     ISharedGameObject m_gameObject;
     CSharedCamera m_camera;
     
+    glm::vec3 m_position;
+    glm::vec3 m_rotation;
+    
+    f32 m_speed;
+    
 public:
     
     ICharacterController(ISharedGameObjectRef gameObject,
                          CSharedCameraRef camera);
     ~ICharacterController(void);
+    
+    void increaseSpeed(void);
+    void decreaseSpeed(void);
+    
+    void update(f32 deltatime);
 };
 
 #endif
