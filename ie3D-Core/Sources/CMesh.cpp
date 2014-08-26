@@ -30,7 +30,6 @@ m_minBound(minBound)
 
 CMeshData::~CMeshData(void)
 {
-    std::cout<<"[CMeshData::~CMeshData]"<<std::endl;
     delete[] m_vertexData;
     delete[] m_indexData;
 }

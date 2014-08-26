@@ -30,6 +30,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#define __PERFORMANCE_TIMER__ 1
+
 #if defined(__IOS__) || defined(__OSX__)
 
 #define __USE_OPENGLES__

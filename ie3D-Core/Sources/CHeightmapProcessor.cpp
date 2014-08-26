@@ -945,6 +945,10 @@ CSharedMesh CHeightmapProcessor::getChunk(ui32 i, ui32 j)
 
 void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSharedMeshRef, CSharedQuadTreeRef)> &callback)
 {
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+    
     if(m_chunksUnused.size() != 0)
     {
         m_chunksUsed[i + j * m_numChunksX].first = m_chunksUnused.at(m_chunksUnused.size() - 1).first;
@@ -977,6 +981,10 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     CSharedThreadOperation writeToVertexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     writeToVertexBufferOperation->setExecutionBlock([this, i, j](){
 
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+
         assert(m_chunksUsed[i + j * m_numChunksX].first != nullptr);
         assert(m_chunksUsed[i + j * m_numChunksX].first->getVertexBuffer() != nullptr);
         assert((m_chunkSizeX - 1) % (m_chunkLODSizeX - 1) == 0.0);
@@ -1005,30 +1013,51 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
                 static_cast<ui32>(position.y) :
                 static_cast<ui32>(m_heightmapData->getSizeZ() - 1);
                 
-                glm::vec3 point = m_heightmapData->getVertexPosition(indexXOffset, indexZOffset);
-                vertexData[index].m_position = point;
-                glm::u16vec2 texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(point.x) / static_cast<f32>(m_heightmapData->getSizeX()),
-                                                                              static_cast<ui32>(point.z) / static_cast<f32>(m_heightmapData->getSizeZ())));
-                vertexData[index].m_texcoord = texcoord;
+                vertexData[index].m_position = m_heightmapData->getVertexPosition(indexXOffset, indexZOffset);
+
+                vertexData[index].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(vertexData[index].m_position.x) /
+                                                                                     static_cast<f32>(m_heightmapData->getSizeX()),
+                                                                                     
+                                                                                     static_cast<ui32>(vertexData[index].m_position.z) /
+                                                                                     static_cast<f32>(m_heightmapData->getSizeZ())));
                 
-                glm::u8vec4 normal = m_heightmapData->getVertexNormal(indexXOffset, indexZOffset);
-                vertexData[index].m_normal = normal;
+                vertexData[index].m_normal = m_heightmapData->getVertexNormal(indexXOffset, indexZOffset);;
                 ++index;
             }
         }
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+        std::cout<<"writeToVertexBufferOperation: "<<duration<<std::endl;
+#endif
     });
     
     CSharedThreadOperation commitVertexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     commitVertexBufferOperation->setExecutionBlock([this, i, j](){
         
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+        
         assert(m_chunksUsed[i + j * m_numChunksX].first != nullptr);
         assert(m_chunksUsed[i + j * m_numChunksX].first->getVertexBuffer() != nullptr);
         
         m_chunksUsed[i + j * m_numChunksX].first->getVertexBuffer()->unlock();
+        
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+        std::cout<<"commitVertexBufferOperation: "<<duration<<std::endl;
+#endif
+        
     });
     
     CSharedThreadOperation writeToIndexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     writeToIndexBufferOperation->setExecutionBlock([this, i, j](){
+        
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
         
         assert(m_chunksUsed[i + j * m_numChunksX].first != nullptr);
         assert(m_chunksUsed[i + j * m_numChunksX].first->getIndexBuffer() != nullptr);
@@ -1057,15 +1086,31 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
                 index++;
             }
         }
+        
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+        std::cout<<"writeToIndexBufferOperation: "<<duration<<std::endl;
+#endif
     });
     
     CSharedThreadOperation commitIndexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     commitIndexBufferOperation->setExecutionBlock([this, i, j](){
         
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+        
         assert(m_chunksUsed[i + j * m_numChunksX].first != nullptr);
         assert(m_chunksUsed[i + j * m_numChunksX].first->getIndexBuffer() != nullptr);
         
         m_chunksUsed[i + j * m_numChunksX].first->getIndexBuffer()->unlock();
+        
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+        std::cout<<"commitIndexBufferOperation: "<<duration<<std::endl;
+#endif
     });
     
     
@@ -1073,21 +1118,38 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     createQuadTreeOperation->setExecutionBlock([this, i, j](){
         
         m_chunksUsed[i + j * m_numChunksX].first->updateBounds();
+        
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+
         m_chunksUsed[i + j * m_numChunksX].second->generate(m_chunksUsed[i + j * m_numChunksX].first->getVertexBuffer(),
                                                             m_chunksUsed[i + j * m_numChunksX].first->getIndexBuffer(),
                                                             m_chunksUsed[i + j * m_numChunksX].first->getMaxBound(),
                                                             m_chunksUsed[i + j * m_numChunksX].first->getMinBound(),
                                                             4,
                                                             m_chunkLODSizeX);
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+        std::cout<<"createQuadTreeOperation: "<<duration<<std::endl;
+#endif
+        
     });
     
     CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
-    completionOperation->setExecutionBlock([this, callback, i, j](){
+    completionOperation->setExecutionBlock([this, callback, startTimestamp, i, j](){
         
         assert(callback != nullptr);
         
         callback(m_chunksUsed[i + j * m_numChunksX].first,
                  m_chunksUsed[i + j * m_numChunksX].second);
+        
+#if defined(__PERFORMANCE_TIMER__)
+        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+        std::cout<<"getChunk: "<<duration<<std::endl;
+#endif
     });
     
     completionOperation->addDependency(writeToVertexBufferOperation);
