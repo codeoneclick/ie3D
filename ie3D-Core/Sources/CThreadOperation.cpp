@@ -36,19 +36,17 @@ void CThreadOperation::setCancelBlock(std::function<void(void)> callback)
 
 void CThreadOperation::addDependency(CSharedThreadOperationRef operation)
 {
-    std::unique_lock<std::mutex> mutexLock(m_mutex);
+    std::lock_guard<std::mutex> lockGuard(m_mutex);
     m_dependecies.push(operation);
     m_dependeciesReferences.insert(operation);
-    mutexLock.unlock();
 }
 
 CSharedThreadOperation CThreadOperation::nextOperation(void)
 {
     if(!CThreadOperation::isQueueEmpty())
     {
-        std::unique_lock<std::mutex> mutexLock(m_mutex);
+        std::lock_guard<std::mutex> lockGuard(m_mutex);
         CSharedThreadOperation operation = m_dependecies.front();
-        mutexLock.unlock();
         return operation->nextOperation();
     }
     return shared_from_this();
@@ -61,10 +59,9 @@ bool CThreadOperation::popOperation(void)
         CSharedThreadOperation operation = m_dependecies.front();
         if(operation->popOperation())
         {
-            std::unique_lock<std::mutex> mutexLock(m_mutex);
+            std::lock_guard<std::mutex> lockGuard(m_mutex);
             m_dependecies.pop();
             m_dependeciesReferences.erase(operation);
-            mutexLock.unlock();
         }
     }
     else
@@ -100,8 +97,6 @@ bool CThreadOperation::getIsCanceled(void)
 
 bool CThreadOperation::isQueueEmpty(void)
 {
-    std::unique_lock<std::mutex> mutexLock(m_mutex);
-    bool isQueueEmpty = m_dependecies.empty();
-    mutexLock.unlock();
-    return isQueueEmpty;
+    std::lock_guard<std::mutex> lockGuard(m_mutex);
+    return m_dependecies.empty();
 }

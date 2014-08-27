@@ -33,9 +33,8 @@ CThreadOperationPool::~CThreadOperationPool(void)
 
 void CThreadOperationPool::addOperation(CSharedThreadOperationRef operation, E_THREAD_OPERATION_QUEUE operationQueue)
 {
-    std::unique_lock<std::mutex> mutexLock(m_mutex);
+    std::lock_guard<std::mutex> lockGuard(m_mutex);
     m_operations.at(operationQueue).push(operation);
-    mutexLock.unlock();
 }
 
 void CThreadOperationPool::updateThread(void)
@@ -129,25 +128,20 @@ void CThreadOperationPool::update(void)
 
 CSharedThreadOperation CThreadOperationPool::nextOperation(E_THREAD_OPERATION_QUEUE operationQueue)
 {
-    std::unique_lock<std::mutex> mutexLock(m_mutex);
+    std::lock_guard<std::mutex> lockGuard(m_mutex);
     CSharedThreadOperation operation = m_operations.empty() ? nullptr : m_operations.at(operationQueue).front();
-    mutexLock.unlock();
-    
     return operation;
 }
 
 void CThreadOperationPool::popOperation(E_THREAD_OPERATION_QUEUE operationQueue)
 {
-    std::unique_lock<std::mutex> mutexLock(m_mutex);
+    std::lock_guard<std::mutex> lockGuard(m_mutex);
     m_operations.at(E_THREAD_OPERATION_QUEUE_MAIN).pop();
-    mutexLock.unlock();
 }
 
 bool CThreadOperationPool::isQueueEmpty(E_THREAD_OPERATION_QUEUE operationQueue)
 {
-    std::unique_lock<std::mutex> mutexLock(m_mutex);
-    bool isQueueEmpty = m_operations.at(operationQueue).empty();
-    mutexLock.unlock();
-    return isQueueEmpty;
+    std::lock_guard<std::mutex> lockGuard(m_mutex);
+    return m_operations.at(operationQueue).empty();
 }
 
