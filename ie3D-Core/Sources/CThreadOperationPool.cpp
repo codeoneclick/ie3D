@@ -129,14 +129,14 @@ void CThreadOperationPool::update(void)
 CSharedThreadOperation CThreadOperationPool::nextOperation(E_THREAD_OPERATION_QUEUE operationQueue)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
-    CSharedThreadOperation operation = m_operations.empty() ? nullptr : m_operations.at(operationQueue).front();
+    CSharedThreadOperation operation = m_operations.at(operationQueue).empty() ? nullptr : m_operations.at(operationQueue).front();
     return operation;
 }
 
 void CThreadOperationPool::popOperation(E_THREAD_OPERATION_QUEUE operationQueue)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
-    m_operations.at(E_THREAD_OPERATION_QUEUE_MAIN).pop();
+    m_operations.at(operationQueue).pop();
 }
 
 bool CThreadOperationPool::isQueueEmpty(E_THREAD_OPERATION_QUEUE operationQueue)
