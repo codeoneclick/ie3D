@@ -30,7 +30,11 @@
 #include <unordered_map>
 #include <unordered_set>
 
-//#define __PERFORMANCE_TIMER__ 1
+#if defined(__DEBUG__)
+
+#define __PERFORMANCE_TIMER__
+
+#endif
 
 #if defined(__IOS__) || defined(__OSX__)
 
