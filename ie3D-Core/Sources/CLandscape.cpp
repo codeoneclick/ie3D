@@ -69,7 +69,6 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
                         m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
-                        
                         m_heightmapProcessor->getChunk(i, j, [this, i , j, numChunksZ](CSharedMeshRef mesh, CSharedQuadTreeRef quadTree) {
                             
                             m_chunks[i + j * numChunksZ]->setMesh(mesh);
@@ -100,36 +99,6 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
                             m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
                         });
-                        
-                        
-                        
-                        //ui32 chunkSize = m_heightmapProcessor->getChunkSizeX(i, j);
-                        
-                        //chunk->setMesh(mesh);
-                        
-                        //CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
-                        //quadTree->generate(mesh->getVertexBuffer(),
-                        //                   mesh->getIndexBuffer(),
-                        //                   mesh->getMaxBound(),
-                        //                   mesh->getMinBound(),
-                        //                   4,
-                        //                   chunkSize);
-                        //chunk->setQuadTree(quadTree);
-                        
-                        
-                        
-                        /*chunk->onConfigurationLoaded(m_configuration, true);
-                        
-                        if(m_prerenderedSplattingDiffuseTexture != nullptr)
-                        {
-                            chunk->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
-                        }
-                        if(m_prerenderedSplattingNormalTexture != nullptr)
-                        {
-                            chunk->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
-                        }
-                        chunk->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());*/
-                        
                     }
                 }
                 else if(m_chunks[i + j * numChunksZ] != nullptr)
@@ -138,6 +107,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     m_chunks[i + j * numChunksZ]->enableUpdate(false);
                     m_chunks[i + j * numChunksZ]->removeLoadingDependencies();
                     m_heightmapProcessor->freeChunk(m_chunks[i + j * numChunksZ]->m_mesh, m_chunks[i + j * numChunksZ]->m_quadTree, i, j);
+                    i64 references = m_chunks[i + j * numChunksZ].use_count();
+                    assert(references == 1);
                     m_chunks[i + j * numChunksZ] = nullptr;
                 }
             }

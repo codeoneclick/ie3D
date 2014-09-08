@@ -268,7 +268,7 @@ m_meshData(nullptr),
 m_skeletonData(nullptr),
 m_sequenceData(nullptr)
 {
-    
+
 }
 
 CSharedMesh CMesh::constructCustomMesh(const std::string& guid,

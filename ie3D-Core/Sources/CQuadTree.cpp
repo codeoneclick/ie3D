@@ -11,18 +11,24 @@
 #include "CIndexBuffer.h"
 #include "CFrustum.h"
 
+static ui32 allocations = 0;
+
 CQuadTree::CQuadTree(void) :
 m_parent(nullptr),
 m_indexBuffer(nullptr), 
 m_numIndexes(0)
 {
-
+    allocations++;
+    //std::cout<<"allocations: "<<allocations<<std::endl;
 }
 
 CQuadTree::~CQuadTree(void)
 {
-    m_indexes.clear();
-    m_indexesIds.clear();
+    std::vector<ui16> deleter;
+    m_indexes.swap(deleter);
+    m_indexesIds.swap(deleter);
+    allocations--;
+    //std::cout<<"allocations: "<<allocations<<std::endl;
 }
 
 void CQuadTree::createQuadTreeNode(i32 size, i32 depth,
@@ -35,54 +41,54 @@ void CQuadTree::createQuadTreeNode(i32 size, i32 depth,
     
     root->m_childs.resize(k_MAX_QUAD_TREE_CHILDS);
     
-    root->m_childs[0] = std::make_shared<CQuadTree>();
-    root->m_childs[0]->m_parent = root;
-    root->m_childs[0]->m_minBound = glm::vec3(root->m_minBound.x,
+    root->m_childs.at(0) = std::make_shared<CQuadTree>();
+    root->m_childs.at(0)->m_parent = root;
+    root->m_childs.at(0)->m_minBound = glm::vec3(root->m_minBound.x,
                                               root->m_minBound.y,
                                               root->m_minBound.z );
-    root->m_childs[0]->m_maxBound = glm::vec3(root->m_minBound.x + (root->m_maxBound.x - root->m_minBound.x) / 2.0f,
+    root->m_childs.at(0)->m_maxBound = glm::vec3(root->m_minBound.x + (root->m_maxBound.x - root->m_minBound.x) / 2.0,
                                               root->m_maxBound.y,
-                                              root->m_minBound.z + (root->m_maxBound.z - root->m_minBound.z) / 2.0f);
-    root->m_childs[0]->m_vertexes = m_vertexes;
-    CQuadTree::createIndexBufferForQuadTreeNode(root->m_childs[0]);
+                                              root->m_minBound.z + (root->m_maxBound.z - root->m_minBound.z) / 2.0);
+    root->m_childs.at(0)->m_vertexes = m_vertexes;
+    CQuadTree::createIndexBufferForQuadTreeNode(root->m_childs.at(0));
     
-    root->m_childs[1] = std::make_shared<CQuadTree>();
-    root->m_childs[1]->m_parent = root;
-    root->m_childs[1]->m_minBound = glm::vec3(root->m_minBound.x,
+    root->m_childs.at(1) = std::make_shared<CQuadTree>();
+    root->m_childs.at(1)->m_parent = root;
+    root->m_childs.at(1)->m_minBound = glm::vec3(root->m_minBound.x,
                                               root->m_minBound.y,
-                                              root->m_minBound.z + (root->m_maxBound.z - root->m_minBound.z) / 2.0f);
-    root->m_childs[1]->m_maxBound = glm::vec3(root->m_minBound.x + (root->m_maxBound.x - root->m_minBound.x) / 2.0f,
+                                              root->m_minBound.z + (root->m_maxBound.z - root->m_minBound.z) / 2.0);
+    root->m_childs.at(1)->m_maxBound = glm::vec3(root->m_minBound.x + (root->m_maxBound.x - root->m_minBound.x) / 2.0,
                                               root->m_maxBound.y,
                                               root->m_maxBound.z);
-    root->m_childs[1]->m_vertexes = m_vertexes;
-    CQuadTree::createIndexBufferForQuadTreeNode(root->m_childs[1]);
+    root->m_childs.at(1)->m_vertexes = m_vertexes;
+    CQuadTree::createIndexBufferForQuadTreeNode(root->m_childs.at(1));
     
-    root->m_childs[2] = std::make_shared<CQuadTree>();
-    root->m_childs[2]->m_parent = root;
-    root->m_childs[2]->m_minBound = glm::vec3(root->m_minBound.x + (root->m_maxBound.x - root->m_minBound.x) / 2.0f,
+    root->m_childs.at(2) = std::make_shared<CQuadTree>();
+    root->m_childs.at(2)->m_parent = root;
+    root->m_childs.at(2)->m_minBound = glm::vec3(root->m_minBound.x + (root->m_maxBound.x - root->m_minBound.x) / 2.0,
                                               root->m_minBound.y,
-                                              root->m_minBound.z + (root->m_maxBound.z - root->m_minBound.z) / 2.0f);
-    root->m_childs[2]->m_maxBound = glm::vec3(root->m_maxBound.x,
+                                              root->m_minBound.z + (root->m_maxBound.z - root->m_minBound.z) / 2.0);
+    root->m_childs.at(2)->m_maxBound = glm::vec3(root->m_maxBound.x,
                                                root->m_maxBound.y,
                                                root->m_maxBound.z);
-    root->m_childs[2]->m_vertexes = m_vertexes;
-    CQuadTree::createIndexBufferForQuadTreeNode(root->m_childs[2]);
+    root->m_childs.at(2)->m_vertexes = m_vertexes;
+    CQuadTree::createIndexBufferForQuadTreeNode(root->m_childs.at(2));
     
-    root->m_childs[3] = std::make_shared<CQuadTree>();
-    root->m_childs[3]->m_parent = root;
-    root->m_childs[3]->m_minBound = glm::vec3(root->m_minBound.x + (root->m_maxBound.x - root->m_minBound.x) / 2.0f,
+    root->m_childs.at(3) = std::make_shared<CQuadTree>();
+    root->m_childs.at(3)->m_parent = root;
+    root->m_childs.at(3)->m_minBound = glm::vec3(root->m_minBound.x + (root->m_maxBound.x - root->m_minBound.x) / 2.0,
                                               root->m_minBound.y,
                                               root->m_minBound.z);
-    root->m_childs[3]->m_maxBound = glm::vec3(root->m_maxBound.x,
+    root->m_childs.at(3)->m_maxBound = glm::vec3(root->m_maxBound.x,
                                               root->m_maxBound.y,
-                                              root->m_minBound.z + (root->m_maxBound.z - root->m_minBound.z) / 2.0f);
-    root->m_childs[3]->m_vertexes = m_vertexes;
-    CQuadTree::createIndexBufferForQuadTreeNode(root->m_childs[3]);
+                                              root->m_minBound.z + (root->m_maxBound.z - root->m_minBound.z) / 2.0);
+    root->m_childs.at(3)->m_vertexes = m_vertexes;
+    CQuadTree::createIndexBufferForQuadTreeNode(root->m_childs.at(3));
     
-    CQuadTree::createQuadTreeNode(size / 2, depth, root->m_childs[0]);
-    CQuadTree::createQuadTreeNode(size / 2, depth, root->m_childs[1]);
-    CQuadTree::createQuadTreeNode(size / 2, depth, root->m_childs[2]);
-    CQuadTree::createQuadTreeNode(size / 2, depth, root->m_childs[3]);
+    CQuadTree::createQuadTreeNode(size / 2, depth, root->m_childs.at(0));
+    CQuadTree::createQuadTreeNode(size / 2, depth, root->m_childs.at(1));
+    CQuadTree::createQuadTreeNode(size / 2, depth, root->m_childs.at(2));
+    CQuadTree::createQuadTreeNode(size / 2, depth, root->m_childs.at(3));
 }
 
 void CQuadTree::createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node)
@@ -200,8 +206,8 @@ void CQuadTree::generateQuadTreeNode(CSharedFrustumRef frustum,
     
     for(ui32 i = 0; i < k_MAX_QUAD_TREE_CHILDS; i++)
     {
-        i32 result = frustum->IsBoundBoxInFrustum(root->m_childs[i]->m_maxBound,
-                                                  root->m_childs[i]->m_minBound);
+        i32 result = frustum->IsBoundBoxInFrustum(root->m_childs.at(i)->m_maxBound,
+                                                  root->m_childs.at(i)->m_minBound);
         if(result == E_FRUSTUM_BOUND_RESULT_INSIDE)
         {
             memcpy(&indexes[numIndexes], &root->m_childs[i]->m_indexes[0], sizeof(ui16) * root->m_childs[i]->m_numIndexes);
@@ -239,7 +245,14 @@ void CQuadTree::generate(CSharedVertexBufferRef vertexBuffer,
     ui16* indexData = indexBuffer->lock();
     std::copy(indexData, indexData + m_numIndexes, m_indexes.begin());
     m_vertexes = vertexBuffer->lock();
-    CQuadTree::createQuadTreeNode(size, depth, shared_from_this());
+    CSharedQuadTree root = shared_from_this();
+    CQuadTree::createQuadTreeNode(size, depth, root);
+    
+    assert(m_indexBuffer != nullptr);
+    assert(m_childs.at(0) != nullptr);
+    assert(m_childs.at(1) != nullptr);
+    assert(m_childs.at(2) != nullptr);
+    assert(m_childs.at(3) != nullptr);
 }
 
 void CQuadTree::destroy(void)
@@ -248,15 +261,20 @@ void CQuadTree::destroy(void)
     {
         iterator->destroy();
     }
-    m_childs.clear();
+    std::vector<CSharedQuadTree> deleter;
+    m_childs.swap(deleter);
     m_parent = nullptr;
+    i64 references = shared_from_this().use_count();
+    assert(references == 2);
+    std::cout<<references<<std::endl;
 }
 
 ui32 CQuadTree::update(CSharedFrustumRef frustum)
 {
     ui16* indexes = m_indexBuffer->lock();
     ui32 numIndexes = 0;
-    CQuadTree::generateQuadTreeNode(frustum, shared_from_this(), indexes, numIndexes);
+    CSharedQuadTree root = shared_from_this();
+    CQuadTree::generateQuadTreeNode(frustum, root, indexes, numIndexes);
     m_indexBuffer->unlock(numIndexes);
     return numIndexes;
 }

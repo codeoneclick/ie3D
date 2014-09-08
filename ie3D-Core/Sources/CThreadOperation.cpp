@@ -21,7 +21,12 @@ m_isCanceled(false)
 
 CThreadOperation::~CThreadOperation(void)
 {
-    
+    m_executionBlock = nullptr;
+    m_cancelBlock = nullptr;
+    while (!m_dependecies.empty()) {
+        m_dependecies.pop();
+    }
+    m_uniqueDependecies.clear();
 }
 
 void CThreadOperation::setExecutionBlock(std::function<void(void)> callback)
@@ -38,7 +43,7 @@ void CThreadOperation::addDependency(CSharedThreadOperationRef operation)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
     m_dependecies.push(operation);
-    m_dependeciesReferences.insert(operation);
+    m_uniqueDependecies.insert(operation);
 }
 
 CSharedThreadOperation CThreadOperation::nextOperation(void)
@@ -61,7 +66,7 @@ bool CThreadOperation::popOperation(void)
         {
             std::lock_guard<std::mutex> lockGuard(m_mutex);
             m_dependecies.pop();
-            m_dependeciesReferences.erase(operation);
+            m_uniqueDependecies.erase(operation);
         }
     }
     else
@@ -78,7 +83,7 @@ void CThreadOperation::execute(void)
 
 void CThreadOperation::cancel(void)
 {
-    for(const auto& operation : m_dependeciesReferences)
+    for(const auto& operation : m_uniqueDependecies)
     {
         operation->cancel();
     }

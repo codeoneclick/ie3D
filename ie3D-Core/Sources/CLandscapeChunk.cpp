@@ -28,7 +28,6 @@ m_prerenderedSplattingNormalTexture(nullptr),
 m_quadTree(nullptr)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
-    
     m_materialBindImposer = [this](CSharedMaterialRef material)
     {
         material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
@@ -84,15 +83,11 @@ CLandscapeChunk::~CLandscapeChunk(void)
 
 void CLandscapeChunk::setMesh(CSharedMeshRef mesh)
 {
-    assert(m_mesh == nullptr);
-    assert(mesh != nullptr);
     m_mesh = mesh;
 }
 
 void CLandscapeChunk::setQuadTree(CSharedQuadTreeRef quadTree)
 {
-    assert(m_quadTree == nullptr);
-    assert(quadTree != nullptr);
     m_quadTree = quadTree;
 }
 

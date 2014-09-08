@@ -96,8 +96,8 @@ protected:
     std::vector<SCompressedVertex> m_compressedVertexes;
     std::vector<SFace> m_faces;
     
-    ui32 m_sizeX;
-    ui32 m_sizeZ;
+    i32 m_sizeX;
+    i32 m_sizeZ;
     
     f32 m_maxHeight;
     f32 m_minHeight;
@@ -113,8 +113,8 @@ public:
     
     void updateVertexesData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertexes);
     
-    ui32 getSizeX(void) const;
-    ui32 getSizeZ(void) const;
+    i32 getSizeX(void) const;
+    i32 getSizeZ(void) const;
     
     f32 getMaxHeight(void) const;
     f32 getMinHeight(void) const;
@@ -167,8 +167,8 @@ protected:
     ui32 m_numChunksX;
     ui32 m_numChunksZ;
     
-    std::vector<std::pair<CSharedMesh, CSharedQuadTree>> m_chunksUsed;
-    std::vector<std::pair<CSharedMesh, CSharedQuadTree>> m_chunksUnused;
+    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef, CSharedQuadTreeRef)>>> m_chunksUsed;
+    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef, CSharedQuadTreeRef)>>> m_chunksUnused;
     std::vector<CSharedThreadOperation> m_operations;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
@@ -254,8 +254,6 @@ public:
     void update(void);
     
     void getChunk(ui32 i, ui32 j, const std::function<void(CSharedMeshRef, CSharedQuadTreeRef)>& callback);
-    
-    CSharedMesh getChunk(ui32 i, ui32 j);
     void freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef quadTree, ui32 i, ui32 j);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;

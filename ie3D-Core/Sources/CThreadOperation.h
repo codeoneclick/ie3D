@@ -24,7 +24,7 @@ protected:
     E_THREAD_OPERATION_QUEUE m_operationQueue;
     
     std::queue<CSharedThreadOperation> m_dependecies;
-    std::set<CSharedThreadOperation> m_dependeciesReferences;
+    std::set<CSharedThreadOperation> m_uniqueDependecies;
     
     std::function<void(void)> m_executionBlock;
     std::function<void(void)> m_cancelBlock;

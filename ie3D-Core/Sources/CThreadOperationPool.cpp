@@ -23,7 +23,11 @@ CThreadOperationPool* CThreadOperationPool::sharedInstance(void)
 CThreadOperationPool::CThreadOperationPool(void)
 {
     m_isRunning = 1;
-    m_thread = std::thread(&CThreadOperationPool::updateThread, this);
+    m_threads.at(0) = std::thread(&CThreadOperationPool::updateThread_01, this);
+    m_threads.at(1) = std::thread(&CThreadOperationPool::updateThread_02, this);
+    m_threads.at(2) = std::thread(&CThreadOperationPool::updateThread_03, this);
+    m_threads.at(3) = std::thread(&CThreadOperationPool::updateThread_04, this);
+    m_threads.at(4) = std::thread(&CThreadOperationPool::updateThread_05, this);
 }
 
 CThreadOperationPool::~CThreadOperationPool(void)
@@ -34,16 +38,52 @@ CThreadOperationPool::~CThreadOperationPool(void)
 void CThreadOperationPool::addOperation(CSharedThreadOperationRef operation, E_THREAD_OPERATION_QUEUE operationQueue)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
-    m_operations.at(operationQueue).push(operation);
+    ui32 threadId = 0;
+    ui32 minOperationCount = m_operations.at(0).at(operationQueue).size();
+    for (ui32 i = 0; i < m_operations.size(); ++i)
+    {
+        if(m_operations.at(i).at(operationQueue).size() < minOperationCount)
+        {
+            minOperationCount = m_operations.at(i).at(operationQueue).size();
+            threadId = i;
+        }
+        std::cout<<"Thread "<<i<<" operations count: "<<m_operations.at(i).at(operationQueue).size()<<std::endl;
+    }
+    m_operations.at(threadId).at(operationQueue).push(operation);
 }
 
-void CThreadOperationPool::updateThread(void)
+void CThreadOperationPool::updateThread_01(void)
+{
+    CThreadOperationPool::updateThread(0);
+}
+
+void CThreadOperationPool::updateThread_02(void)
+{
+    CThreadOperationPool::updateThread(1);
+}
+
+void CThreadOperationPool::updateThread_03(void)
+{
+    CThreadOperationPool::updateThread(2);
+}
+
+void CThreadOperationPool::updateThread_04(void)
+{
+    CThreadOperationPool::updateThread(3);
+}
+
+void CThreadOperationPool::updateThread_05(void)
+{
+    CThreadOperationPool::updateThread(4);
+}
+
+void CThreadOperationPool::updateThread(ui32 threadId)
 {
     while (m_isRunning)
     {
-        if(!CThreadOperationPool::isQueueEmpty(E_THREAD_OPERATION_QUEUE_BACKGROUND))
+        if(!CThreadOperationPool::isQueueEmpty(threadId, E_THREAD_OPERATION_QUEUE_BACKGROUND))
         {
-            CSharedThreadOperation operation = CThreadOperationPool::nextOperation(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+            CSharedThreadOperation operation = CThreadOperationPool::nextOperation(threadId, E_THREAD_OPERATION_QUEUE_BACKGROUND);
             if(operation == nullptr)
             {
                 continue;
@@ -59,13 +99,13 @@ void CThreadOperationPool::updateThread(void)
             }
             if(dependencyOperation == operation)
             {
-                CThreadOperationPool::popOperation(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+                CThreadOperationPool::popOperation(threadId, E_THREAD_OPERATION_QUEUE_BACKGROUND);
             }
         }
         
-        if(!CThreadOperationPool::isQueueEmpty(E_THREAD_OPERATION_QUEUE_MAIN))
+        if(!CThreadOperationPool::isQueueEmpty(threadId, E_THREAD_OPERATION_QUEUE_MAIN))
         {
-            CSharedThreadOperation operation = CThreadOperationPool::nextOperation(E_THREAD_OPERATION_QUEUE_MAIN);
+            CSharedThreadOperation operation = CThreadOperationPool::nextOperation(threadId, E_THREAD_OPERATION_QUEUE_MAIN);
             if(operation == nullptr)
             {
                 continue;
@@ -85,63 +125,66 @@ void CThreadOperationPool::updateThread(void)
 
 void CThreadOperationPool::update(void)
 {
-    if(!CThreadOperationPool::isQueueEmpty(E_THREAD_OPERATION_QUEUE_MAIN))
+    for(ui32 threadId = 0; threadId < m_threads.size(); ++threadId)
     {
-        CSharedThreadOperation operation = CThreadOperationPool::nextOperation(E_THREAD_OPERATION_QUEUE_MAIN);
-        if(operation == nullptr)
+        if(!CThreadOperationPool::isQueueEmpty(threadId, E_THREAD_OPERATION_QUEUE_MAIN))
         {
-            return;
-        }
-        CSharedThreadOperation dependencyOperation = operation->nextOperation();
-        if(dependencyOperation->m_operationQueue == E_THREAD_OPERATION_QUEUE_MAIN)
-        {
-            if(!dependencyOperation->getIsCanceled())
+            CSharedThreadOperation operation = CThreadOperationPool::nextOperation(threadId, E_THREAD_OPERATION_QUEUE_MAIN);
+            if(operation == nullptr)
             {
-                dependencyOperation->m_executionBlock();
+                return;
             }
-            operation->popOperation();
-        }
-        if(dependencyOperation == operation)
-        {
-            CThreadOperationPool::popOperation(E_THREAD_OPERATION_QUEUE_MAIN);
-        }
-    }
-    
-    if(!CThreadOperationPool::isQueueEmpty(E_THREAD_OPERATION_QUEUE_BACKGROUND))
-    {
-        CSharedThreadOperation operation = CThreadOperationPool::nextOperation(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-        if(operation == nullptr)
-        {
-            return;
-        }
-        CSharedThreadOperation dependencyOperation = operation->nextOperation();
-        if(dependencyOperation->m_operationQueue == E_THREAD_OPERATION_QUEUE_MAIN)
-        {
-            if(!dependencyOperation->getIsCanceled())
+            CSharedThreadOperation dependencyOperation = operation->nextOperation();
+            if(dependencyOperation->m_operationQueue == E_THREAD_OPERATION_QUEUE_MAIN)
             {
-                dependencyOperation->m_executionBlock();
+                if(!dependencyOperation->getIsCanceled())
+                {
+                    dependencyOperation->m_executionBlock();
+                }
+                operation->popOperation();
             }
-            operation->popOperation();
+            if(dependencyOperation == operation)
+            {
+                CThreadOperationPool::popOperation(threadId, E_THREAD_OPERATION_QUEUE_MAIN);
+            }
+        }
+        
+        if(!CThreadOperationPool::isQueueEmpty(threadId, E_THREAD_OPERATION_QUEUE_BACKGROUND))
+        {
+            CSharedThreadOperation operation = CThreadOperationPool::nextOperation(threadId, E_THREAD_OPERATION_QUEUE_BACKGROUND);
+            if(operation == nullptr)
+            {
+                return;
+            }
+            CSharedThreadOperation dependencyOperation = operation->nextOperation();
+            if(dependencyOperation->m_operationQueue == E_THREAD_OPERATION_QUEUE_MAIN)
+            {
+                if(!dependencyOperation->getIsCanceled())
+                {
+                    dependencyOperation->m_executionBlock();
+                }
+                operation->popOperation();
+            }
         }
     }
 }
 
-CSharedThreadOperation CThreadOperationPool::nextOperation(E_THREAD_OPERATION_QUEUE operationQueue)
+CSharedThreadOperation CThreadOperationPool::nextOperation(ui32 threadId, E_THREAD_OPERATION_QUEUE operationQueue)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
-    CSharedThreadOperation operation = m_operations.at(operationQueue).empty() ? nullptr : m_operations.at(operationQueue).front();
+    CSharedThreadOperation operation = m_operations.at(threadId).at(operationQueue).empty() ? nullptr : m_operations.at(threadId).at(operationQueue).front();
     return operation;
 }
 
-void CThreadOperationPool::popOperation(E_THREAD_OPERATION_QUEUE operationQueue)
+void CThreadOperationPool::popOperation(ui32 threadId, E_THREAD_OPERATION_QUEUE operationQueue)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
-    m_operations.at(operationQueue).pop();
+    m_operations.at(threadId).at(operationQueue).pop();
 }
 
-bool CThreadOperationPool::isQueueEmpty(E_THREAD_OPERATION_QUEUE operationQueue)
+bool CThreadOperationPool::isQueueEmpty(ui32 threadId, E_THREAD_OPERATION_QUEUE operationQueue)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
-    return m_operations.at(operationQueue).empty();
+    return m_operations.at(threadId).at(operationQueue).empty();
 }
 
