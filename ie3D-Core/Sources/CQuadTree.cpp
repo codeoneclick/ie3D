@@ -14,25 +14,28 @@
 static ui32 allocations = 0;
 
 CQuadTree::CQuadTree(void) :
-m_parent(nullptr),
 m_indexBuffer(nullptr), 
 m_numIndexes(0)
 {
     allocations++;
-    //std::cout<<"allocations: "<<allocations<<std::endl;
+    std::cout<<"allocations: "<<allocations<<std::endl;
 }
 
 CQuadTree::~CQuadTree(void)
 {
-    std::vector<ui16> deleter;
-    m_indexes.swap(deleter);
-    m_indexesIds.swap(deleter);
+    std::vector<CSharedQuadTree> childsDeleter;
+    m_childs.swap(childsDeleter);
+    
+    std::vector<ui16> indexesDeleter;
+    m_indexes.swap(indexesDeleter);
+    m_indexesIds.swap(indexesDeleter);
+    
     allocations--;
-    //std::cout<<"allocations: "<<allocations<<std::endl;
+    std::cout<<"allocations: "<<allocations<<std::endl;
 }
 
 void CQuadTree::createQuadTreeNode(i32 size, i32 depth,
-                        CSharedQuadTreeRef root)
+                                   CSharedQuadTreeRef root)
 {
     if(size <= depth)
     {
@@ -93,83 +96,83 @@ void CQuadTree::createQuadTreeNode(i32 size, i32 depth,
 
 void CQuadTree::createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node)
 {
-    ui32 parentNumIndexes = node->m_parent->m_numIndexes;
+    ui32 parentNumIndexes = node->m_parent.lock()->m_numIndexes;
     f32 maxY = -4096.0f;
     f32 minY =  4096.0f;
     
     ui32 quadTreeNodeId = 0;
-    std::shared_ptr<CQuadTree> parentNode = node->m_parent;
+    std::shared_ptr<CQuadTree> parentNode = node->m_parent.lock();
     while (parentNode != nullptr)
     {
         quadTreeNodeId++;
-        parentNode = parentNode->m_parent;
+        parentNode = parentNode->m_parent.lock();
     }
     
     for(ui32 i = 0; i < parentNumIndexes; i += 3)
     {
-        if(CQuadTree::isPointInBoundBox(glm::vec3(m_vertexes[node->m_parent->m_indexes[i + 0]].m_position.x,
-                                                  m_vertexes[node->m_parent->m_indexes[i + 0]].m_position.y,
-                                                  m_vertexes[node->m_parent->m_indexes[i + 0]].m_position.z) ,
+        if(CQuadTree::isPointInBoundBox(glm::vec3(m_vertexes[node->m_parent.lock()->m_indexes[i + 0]].m_position.x,
+                                                  m_vertexes[node->m_parent.lock()->m_indexes[i + 0]].m_position.y,
+                                                  m_vertexes[node->m_parent.lock()->m_indexes[i + 0]].m_position.z) ,
                                         node->m_minBound,
                                         node->m_maxBound) ||
-           CQuadTree::isPointInBoundBox(glm::vec3(m_vertexes[node->m_parent->m_indexes[i + 1]].m_position.x,
-                                                  m_vertexes[node->m_parent->m_indexes[i + 1]].m_position.y,
-                                                  m_vertexes[node->m_parent->m_indexes[i + 1]].m_position.z),
+           CQuadTree::isPointInBoundBox(glm::vec3(m_vertexes[node->m_parent.lock()->m_indexes[i + 1]].m_position.x,
+                                                  m_vertexes[node->m_parent.lock()->m_indexes[i + 1]].m_position.y,
+                                                  m_vertexes[node->m_parent.lock()->m_indexes[i + 1]].m_position.z),
                                         node->m_minBound,
                                         node->m_maxBound) ||
-           CQuadTree::isPointInBoundBox(glm::vec3(m_vertexes[node->m_parent->m_indexes[i + 2]].m_position.x,
-                                                  m_vertexes[node->m_parent->m_indexes[i + 2]].m_position.y,
-                                                  m_vertexes[node->m_parent->m_indexes[i + 2]].m_position.z),
+           CQuadTree::isPointInBoundBox(glm::vec3(m_vertexes[node->m_parent.lock()->m_indexes[i + 2]].m_position.x,
+                                                  m_vertexes[node->m_parent.lock()->m_indexes[i + 2]].m_position.y,
+                                                  m_vertexes[node->m_parent.lock()->m_indexes[i + 2]].m_position.z),
                                         node->m_minBound,
                                         node->m_maxBound))
         {
             
-            if(node->m_parent->m_indexesIds[i + 0] == quadTreeNodeId ||
-               node->m_parent->m_indexesIds[i + 1] == quadTreeNodeId ||
-               node->m_parent->m_indexesIds[i + 2] == quadTreeNodeId)
+            if(node->m_parent.lock()->m_indexesIds[i + 0] == quadTreeNodeId ||
+               node->m_parent.lock()->m_indexesIds[i + 1] == quadTreeNodeId ||
+               node->m_parent.lock()->m_indexesIds[i + 2] == quadTreeNodeId)
             {
                 continue;
             }
             
             node->m_numIndexes += 3;
             node->m_indexes.resize(node->m_numIndexes);
-
-            node->m_indexes[node->m_numIndexes - 3] = node->m_parent->m_indexes[i + 0];
-            node->m_indexes[node->m_numIndexes - 2] = node->m_parent->m_indexes[i + 1];
-            node->m_indexes[node->m_numIndexes - 1] = node->m_parent->m_indexes[i + 2];
             
-            node->m_parent->m_indexesIds[i + 0] = quadTreeNodeId;
-            node->m_parent->m_indexesIds[i + 1] = quadTreeNodeId;
-            node->m_parent->m_indexesIds[i + 2] = quadTreeNodeId;
+            node->m_indexes[node->m_numIndexes - 3] = node->m_parent.lock()->m_indexes[i + 0];
+            node->m_indexes[node->m_numIndexes - 2] = node->m_parent.lock()->m_indexes[i + 1];
+            node->m_indexes[node->m_numIndexes - 1] = node->m_parent.lock()->m_indexes[i + 2];
             
-            if(m_vertexes[node->m_parent->m_indexes[i + 0]].m_position.y > maxY)
+            node->m_parent.lock()->m_indexesIds[i + 0] = quadTreeNodeId;
+            node->m_parent.lock()->m_indexesIds[i + 1] = quadTreeNodeId;
+            node->m_parent.lock()->m_indexesIds[i + 2] = quadTreeNodeId;
+            
+            if(m_vertexes[node->m_parent.lock()->m_indexes[i + 0]].m_position.y > maxY)
             {
-                maxY = m_vertexes[node->m_parent->m_indexes[i + 0]].m_position.y;
+                maxY = m_vertexes[node->m_parent.lock()->m_indexes[i + 0]].m_position.y;
             }
             
-            if(m_vertexes[node->m_parent->m_indexes[i + 1]].m_position.y > maxY)
+            if(m_vertexes[node->m_parent.lock()->m_indexes[i + 1]].m_position.y > maxY)
             {
-                maxY = m_vertexes[node->m_parent->m_indexes[i + 1]].m_position.y;
+                maxY = m_vertexes[node->m_parent.lock()->m_indexes[i + 1]].m_position.y;
             }
             
-            if(m_vertexes[node->m_parent->m_indexes[i + 2]].m_position.y > maxY)
+            if(m_vertexes[node->m_parent.lock()->m_indexes[i + 2]].m_position.y > maxY)
             {
-                maxY = m_vertexes[node->m_parent->m_indexes[i + 2]].m_position.y;
+                maxY = m_vertexes[node->m_parent.lock()->m_indexes[i + 2]].m_position.y;
             }
             
-            if(m_vertexes[node->m_parent->m_indexes[i + 0]].m_position.y < minY)
+            if(m_vertexes[node->m_parent.lock()->m_indexes[i + 0]].m_position.y < minY)
             {
-                minY = m_vertexes[node->m_parent->m_indexes[i + 0]].m_position.y;
+                minY = m_vertexes[node->m_parent.lock()->m_indexes[i + 0]].m_position.y;
             }
             
-            if(m_vertexes[node->m_parent->m_indexes[i + 1]].m_position.y < minY)
+            if(m_vertexes[node->m_parent.lock()->m_indexes[i + 1]].m_position.y < minY)
             {
-                minY = m_vertexes[node->m_parent->m_indexes[i + 1]].m_position.y;
+                minY = m_vertexes[node->m_parent.lock()->m_indexes[i + 1]].m_position.y;
             }
             
-            if(m_vertexes[node->m_parent->m_indexes[i + 2]].m_position.y < minY)
+            if(m_vertexes[node->m_parent.lock()->m_indexes[i + 2]].m_position.y < minY)
             {
-                minY = m_vertexes[node->m_parent->m_indexes[i + 2]].m_position.y;
+                minY = m_vertexes[node->m_parent.lock()->m_indexes[i + 2]].m_position.y;
             }
         }
     }
@@ -236,7 +239,6 @@ void CQuadTree::generate(CSharedVertexBufferRef vertexBuffer,
               ui32 size)
 {
     m_indexBuffer = indexBuffer;
-    m_parent = nullptr;
     m_maxBound = maxBound;
     m_minBound = minBound;
     m_numIndexes = m_indexBuffer->getSize();
@@ -253,20 +255,6 @@ void CQuadTree::generate(CSharedVertexBufferRef vertexBuffer,
     assert(m_childs.at(1) != nullptr);
     assert(m_childs.at(2) != nullptr);
     assert(m_childs.at(3) != nullptr);
-}
-
-void CQuadTree::destroy(void)
-{
-    for(const auto& iterator : m_childs)
-    {
-        iterator->destroy();
-    }
-    std::vector<CSharedQuadTree> deleter;
-    m_childs.swap(deleter);
-    m_parent = nullptr;
-    i64 references = shared_from_this().use_count();
-    assert(references == 2);
-    std::cout<<references<<std::endl;
 }
 
 ui32 CQuadTree::update(CSharedFrustumRef frustum)

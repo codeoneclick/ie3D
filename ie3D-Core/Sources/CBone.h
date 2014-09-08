@@ -20,7 +20,7 @@ protected:
     
 	i32	m_id;
 	i32	m_parentId;
-    
+
     CSharedBone m_parent;
     std::vector<CSharedBone> m_children;
    

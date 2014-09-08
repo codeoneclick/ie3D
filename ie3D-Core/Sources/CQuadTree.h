@@ -18,7 +18,7 @@ class CQuadTree : public std::enable_shared_from_this<CQuadTree>
 {
 private:
     
-    CSharedQuadTree m_parent;
+    std::weak_ptr<CQuadTree> m_parent;
     std::vector<CSharedQuadTree> m_childs;
 
     glm::vec3 m_maxBound;
@@ -58,7 +58,6 @@ public:
                   const glm::vec3& minBound,
                   f32 depth,
                   ui32 size);
-    void destroy(void);
     
     ui32 update(CSharedFrustumRef frustum);
 };

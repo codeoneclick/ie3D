@@ -106,7 +106,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     m_chunks[i + j * numChunksZ]->enableRender(false);
                     m_chunks[i + j * numChunksZ]->enableUpdate(false);
                     m_chunks[i + j * numChunksZ]->removeLoadingDependencies();
-                    m_heightmapProcessor->freeChunk(m_chunks[i + j * numChunksZ]->m_mesh, m_chunks[i + j * numChunksZ]->m_quadTree, i, j);
+                    m_heightmapProcessor->freeChunk(m_chunks[i + j * numChunksZ]->m_mesh,
+                                                    m_chunks[i + j * numChunksZ]->m_quadTree, i, j);
                     i64 references = m_chunks[i + j * numChunksZ].use_count();
                     assert(references == 1);
                     m_chunks[i + j * numChunksZ] = nullptr;

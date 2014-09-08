@@ -914,7 +914,11 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     
     if(m_chunksUnused.size() != 0)
     {
-        std::get<0>(m_chunksUsed[i + j * m_numChunksX]) = std::get<0>(m_chunksUnused.at(m_chunksUnused.size() - 1));
+        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
+        assert(std::get<1>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
+        assert(std::get<2>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
+        
+        std::get<0>(m_chunksUsed[i + j * m_numChunksX]) = m_chunksUnused.at(m_chunksUnused.size() - 1);
         std::get<1>(m_chunksUsed[i + j * m_numChunksX]) = std::make_shared<CQuadTree>();
         std::get<2>(m_chunksUsed[i + j * m_numChunksX]) = callback;
         
@@ -929,7 +933,8 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
         glm::vec3 maxBound = glm::vec3(-4096.0, -4096.0, -4096.0);
         glm::vec3 minBound = glm::vec3(4096.0, 4096.0, 4096.0);
         
-        CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(m_chunkLODSizeX * m_chunkLODSizeZ, GL_STATIC_DRAW);
+        CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(m_chunkLODSizeX * m_chunkLODSizeZ,
+                                                                           GL_STATIC_DRAW);
         
         CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((m_chunkLODSizeX - 1) * (m_chunkLODSizeZ - 1) * 6,
                                                                         GL_STREAM_DRAW);
@@ -937,6 +942,10 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
         CHeightmapProcessor::createChunkBound(m_chunkSizeX, m_chunkSizeZ,
                                               i, j,
                                               &maxBound, &minBound);
+        
+        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
+        assert(std::get<1>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
+        assert(std::get<2>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
         
         std::get<0>(m_chunksUsed[i + j * m_numChunksX]) = CMesh::constructCustomMesh("landscape.chunk", vertexBuffer, indexBuffer,
                                                                                      maxBound, minBound);
@@ -1135,17 +1144,13 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
 
 void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef quadTree, ui32 i, ui32 j)
 {
+    m_operations[i + j * m_numChunksX]->cancel();
+    
     if(chunk != nullptr)
     {
-        m_chunksUnused.push_back(std::make_tuple(chunk, nullptr, nullptr));
+        m_chunksUnused.push_back(chunk);
     }
-    if(quadTree != nullptr)
-    {
-        i64 references = quadTree.use_count();
-        std::cout<<"references: "<<references<<std::endl;
-        quadTree->destroy();
-    }
-    m_operations[i + j * m_numChunksX]->cancel();
+    
     std::get<0>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
     std::get<1>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
     std::get<2>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
@@ -1153,7 +1158,7 @@ void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef qua
 
 void CHeightmapProcessor::update(void)
 {
-    if(!m_processingOperationQueue.empty())
+    /*if(!m_processingOperationQueue.empty())
     {
         CSharedHeightmapProcessingOperation operation = m_processingOperationQueue.front();
         if(!operation->isCanceled() && !operation->isRunning())
@@ -1179,7 +1184,7 @@ void CHeightmapProcessor::update(void)
                 m_uniqueProcessingOperations.erase(iterator);
             }
         }
-    }
+    }*/
 }
 
 void CHeightmapProcessor::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,

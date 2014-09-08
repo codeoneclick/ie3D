@@ -168,7 +168,7 @@ protected:
     ui32 m_numChunksZ;
     
     std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef, CSharedQuadTreeRef)>>> m_chunksUsed;
-    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef, CSharedQuadTreeRef)>>> m_chunksUnused;
+    std::vector<CSharedMesh> m_chunksUnused;
     std::vector<CSharedThreadOperation> m_operations;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
