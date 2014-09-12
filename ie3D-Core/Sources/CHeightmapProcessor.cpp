@@ -534,10 +534,8 @@ void CHeightmapProcessor::updateHeightmap(ui32 offsetX, ui32 offsetZ,
             ui32 index = i + j * CHeightmapProcessor::getNumChunksX();
             if(std::get<0>(m_chunksUsed.at(index)) != nullptr)
             {
-                CHeightmapProcessor::updateVertexBuffer(std::get<0>(m_chunksUsed.at(index))->getVertexBuffer(),
-                                                        CHeightmapProcessor::getChunkSizeX(i, j),
-                                                        CHeightmapProcessor::getChunkSizeZ(i, j),
-                                                        i, j);
+                CHeightmapProcessor::writeToVertexBuffer(i, j);
+                CHeightmapProcessor::commitVertexBufferToVRAM(i, j);
             }
         }
     }
@@ -836,74 +834,162 @@ CSharedTexture CHeightmapProcessor::PreprocessSplattingNormalTexture(CSharedMate
     return m_normalTexture;
 }
 
-CSharedIndexBuffer CHeightmapProcessor::createIndexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ)
-{
-    assert(chunkLODSizeX != 0);
-    assert(chunkLODSizeZ != 0);
-    
-    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((chunkLODSizeX - 1) * (chunkLODSizeX - 1) * 6,
-                                                                    GL_STREAM_DRAW);
-    CHeightmapProcessor::updateIndexBuffer(indexBuffer,
-                                         chunkLODSizeX, chunkLODSizeZ);
-    return indexBuffer;
-}
-
-void CHeightmapProcessor::createIndexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
-                                            const std::function<void(CSharedIndexBufferRef)>& callback)
-{
-    assert(chunkLODSizeX != 0);
-    assert(chunkLODSizeZ != 0);
-    assert(callback != nullptr);
-    
-    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((chunkLODSizeX - 1) * (chunkLODSizeX - 1) * 6,
-                                                                    GL_STREAM_DRAW);
-    CHeightmapProcessor::updateIndexBuffer(indexBuffer, chunkLODSizeX, chunkLODSizeZ, [indexBuffer, callback](){
-        callback(indexBuffer);
-    });
-}
-
-CSharedVertexBuffer CHeightmapProcessor::createVertexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
-                                                            ui32 chunkOffsetX, ui32 chunkOffsetZ,
-                                                            glm::vec3* maxBound, glm::vec3* minBound)
-{
-    assert(m_heightmapData != nullptr);
-    assert(chunkLODSizeX != 0);
-    assert(chunkLODSizeZ != 0);
-    
-    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(chunkLODSizeX * chunkLODSizeZ, GL_STATIC_DRAW);
-    CHeightmapProcessor::updateVertexBuffer(vertexBuffer, chunkLODSizeX, chunkLODSizeZ, chunkOffsetX, chunkOffsetZ);
-    CHeightmapProcessor::createChunkBound(m_chunkSizeX, m_chunkSizeZ,
-                                          chunkOffsetX, chunkOffsetZ,
-                                          maxBound, minBound);
-    return vertexBuffer;
-}
-
-void CHeightmapProcessor::createVertexBuffer(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
-                                             ui32 chunkOffsetX, ui32 chunkOffsetZ,
-                                             glm::vec3* maxBound, glm::vec3* minBound,
-                                             const std::function<void(CSharedVertexBufferRef)>& callback)
-{
-    assert(m_heightmapData != nullptr);
-    assert(chunkLODSizeX != 0);
-    assert(chunkLODSizeZ != 0);
-    assert(callback != nullptr);
-    
-    std::shared_ptr<CVertexBuffer> vertexBuffer = std::make_shared<CVertexBuffer>(chunkLODSizeX * chunkLODSizeZ, GL_STATIC_DRAW);
-    CHeightmapProcessor::updateVertexBuffer(vertexBuffer, chunkLODSizeX, chunkLODSizeZ, chunkOffsetX, chunkOffsetZ, [this,
-                                                                                                                     chunkOffsetX, chunkOffsetZ,
-                                                                                                                     maxBound, minBound,
-                                                                                                                     callback, vertexBuffer](){
-        CHeightmapProcessor::createChunkBound(m_chunkSizeX, m_chunkSizeZ,
-                                              chunkOffsetX, chunkOffsetZ,
-                                              maxBound, minBound);
-        callback(vertexBuffer);
-    });
-}
-
 const std::tuple<glm::vec3, glm::vec3> CHeightmapProcessor::getChunkBounds(ui32 i, ui32 j) const
 {
     assert(m_chunksBounds.size() != 0);
     return m_chunksBounds[i + j * m_numChunksZ];
+}
+
+void CHeightmapProcessor::writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ)
+{
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+    
+    assert(std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]) != nullptr);
+    assert(std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getVertexBuffer() != nullptr);
+    assert((m_chunkSizeX - 1) % (m_chunkLODSizeX - 1) == 0.0);
+    assert((m_chunkSizeZ - 1) % (m_chunkLODSizeZ - 1) == 0.0);
+    
+    ui32 chunkLODOffsetX = (m_chunkSizeX - 1) / (m_chunkLODSizeX - 1);
+    ui32 chunkLODOffsetZ = (m_chunkSizeZ - 1) / (m_chunkLODSizeZ - 1);
+    
+    SAttributeVertex* vertexData = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getVertexBuffer()->lock();
+    ui32 index = 0;
+    for(ui32 i = 0; i < m_chunkLODSizeX; ++i)
+    {
+        for(ui32 j = 0; j < m_chunkLODSizeZ; ++j)
+        {
+            glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSizeX - chunkOffsetX,
+                                           j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSizeZ - chunkOffsetZ);
+            
+            i32 indexXOffset = static_cast<i32>(position.x) < m_heightmapData->getSizeX() ?
+            static_cast<i32>(position.x) :
+            static_cast<i32>(m_heightmapData->getSizeX() - 1);
+            
+            i32 indexZOffset = static_cast<i32>(position.y) < m_heightmapData->getSizeZ() ?
+            static_cast<i32>(position.y) :
+            static_cast<i32>(m_heightmapData->getSizeZ() - 1);
+            
+            vertexData[index].m_position = m_heightmapData->getVertexPosition(indexXOffset, indexZOffset);
+            
+            vertexData[index].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<i32>(vertexData[index].m_position.x) /
+                                                                                 static_cast<f32>(m_heightmapData->getSizeX()),
+                                                                                 
+                                                                                 static_cast<i32>(vertexData[index].m_position.z) /
+                                                                                 static_cast<f32>(m_heightmapData->getSizeZ())));
+            
+            vertexData[index].m_normal = m_heightmapData->getVertexNormal(indexXOffset, indexZOffset);
+            ++index;
+        }
+    }
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+    f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+    std::cout<<"writeToVertexBufferOperation: "<<duration<<std::endl;
+#endif
+}
+
+void CHeightmapProcessor::commitVertexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ)
+{
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+    
+    assert(std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]) != nullptr);
+    assert(std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getVertexBuffer() != nullptr);
+    
+    std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getVertexBuffer()->unlock();
+    
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+    f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+    std::cout<<"commitVertexBufferOperation: "<<duration<<std::endl;
+#endif
+}
+
+void CHeightmapProcessor::writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ)
+{
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+    
+    assert(std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]) != nullptr);
+    assert(std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getIndexBuffer() != nullptr);
+    assert((m_chunkSizeX - 1) % (m_chunkLODSizeX - 1) == 0.0);
+    assert((m_chunkSizeZ - 1) % (m_chunkLODSizeZ - 1) == 0.0);
+    
+    ui16* indexData = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getIndexBuffer()->lock();
+    
+    ui32 index = 0;
+    for(ui32 i = 0; i < (m_chunkLODSizeX - 1); ++i)
+    {
+        for(ui32 j = 0; j < (m_chunkLODSizeZ - 1); ++j)
+        {
+            indexData[index] = i + j * m_chunkLODSizeX;
+            index++;
+            indexData[index] = i + (j + 1) * m_chunkLODSizeX;
+            index++;
+            indexData[index] = i + 1 + j * m_chunkLODSizeX;
+            index++;
+            
+            indexData[index] = i + (j + 1) * m_chunkLODSizeX;
+            index++;
+            indexData[index] = i + 1 + (j + 1) * m_chunkLODSizeX;
+            index++;
+            indexData[index] = i + 1 + j * m_chunkLODSizeX;
+            index++;
+        }
+    }
+    
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+    f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+    std::cout<<"writeToIndexBufferOperation: "<<duration<<std::endl;
+#endif
+}
+
+void CHeightmapProcessor::commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ)
+{
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+    
+    assert(std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]) != nullptr);
+    assert(std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getIndexBuffer() != nullptr);
+    
+    std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getIndexBuffer()->unlock();
+    
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+    f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+    std::cout<<"commitIndexBufferOperation: "<<duration<<std::endl;
+#endif
+}
+
+void CHeightmapProcessor::createQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
+{
+    std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->updateBounds();
+    
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+    
+    CSharedVertexBuffer vertexBuffer = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getVertexBuffer();
+    CSharedIndexBuffer indexBuffer = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getIndexBuffer();
+    glm::vec3 maxBound = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getMaxBound();
+    glm::vec3 minBound = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->getMinBound();
+    std::get<1>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->generate(vertexBuffer,
+                                                                                    indexBuffer,
+                                                                                    maxBound,
+                                                                                    minBound,
+                                                                                    4,
+                                                                                    m_chunkLODSizeX);
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+    f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+    std::cout<<"createQuadTreeOperation: "<<duration<<std::endl;
+#endif
 }
 
 void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSharedMeshRef, CSharedQuadTreeRef)> &callback)
@@ -954,162 +1040,28 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     }
     
     CSharedThreadOperation writeToVertexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    writeToVertexBufferOperation->setExecutionBlock([this, i, j](){
-
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
-#endif
-
-        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
-        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getVertexBuffer() != nullptr);
-        assert((m_chunkSizeX - 1) % (m_chunkLODSizeX - 1) == 0.0);
-        assert((m_chunkSizeZ - 1) % (m_chunkLODSizeZ - 1) == 0.0);
-        
-        ui32 chunkLODOffsetX = (m_chunkSizeX - 1) / (m_chunkLODSizeX - 1);
-        ui32 chunkLODOffsetZ = (m_chunkSizeZ - 1) / (m_chunkLODSizeZ - 1);
-        
-        ui32 chunkOffsetX = i;
-        ui32 chunkOffsetZ = j;
-        
-        SAttributeVertex* vertexData = std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getVertexBuffer()->lock();
-        ui32 index = 0;
-        for(ui32 i = 0; i < m_chunkLODSizeX;++i)
-        {
-            for(ui32 j = 0; j < m_chunkLODSizeZ;++j)
-            {
-                glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSizeX - chunkOffsetX,
-                                               j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSizeZ - chunkOffsetZ);
-                
-                i32 indexXOffset = static_cast<i32>(position.x) < m_heightmapData->getSizeX() ?
-                static_cast<i32>(position.x) :
-                static_cast<i32>(m_heightmapData->getSizeX() - 1);
-                
-                i32 indexZOffset = static_cast<i32>(position.y) < m_heightmapData->getSizeZ() ?
-                static_cast<i32>(position.y) :
-                static_cast<i32>(m_heightmapData->getSizeZ() - 1);
-                
-                vertexData[index].m_position = m_heightmapData->getVertexPosition(indexXOffset, indexZOffset);
-
-                vertexData[index].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(vertexData[index].m_position.x) /
-                                                                                     static_cast<f32>(m_heightmapData->getSizeX()),
-                                                                                     
-                                                                                     static_cast<ui32>(vertexData[index].m_position.z) /
-                                                                                     static_cast<f32>(m_heightmapData->getSizeZ())));
-                
-                vertexData[index].m_normal = m_heightmapData->getVertexNormal(indexXOffset, indexZOffset);
-                ++index;
-            }
-        }
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
-        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
-        std::cout<<"writeToVertexBufferOperation: "<<duration<<std::endl;
-#endif
+    writeToVertexBufferOperation->setExecutionBlock([this, i, j](void) {
+        CHeightmapProcessor::writeToVertexBuffer(i, j);
     });
     
     CSharedThreadOperation commitVertexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
-    commitVertexBufferOperation->setExecutionBlock([this, i, j](){
-        
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
-#endif
-        
-        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
-        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getVertexBuffer() != nullptr);
-        
-        std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getVertexBuffer()->unlock();
-        
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
-        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
-        std::cout<<"commitVertexBufferOperation: "<<duration<<std::endl;
-#endif
-        
+    commitVertexBufferOperation->setExecutionBlock([this, i, j](void) {
+        CHeightmapProcessor::commitVertexBufferToVRAM(i, j);
     });
     
     CSharedThreadOperation writeToIndexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    writeToIndexBufferOperation->setExecutionBlock([this, i, j](){
-        
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
-#endif
-        
-        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
-        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getIndexBuffer() != nullptr);
-        assert((m_chunkSizeX - 1) % (m_chunkLODSizeX - 1) == 0.0);
-        assert((m_chunkSizeZ - 1) % (m_chunkLODSizeZ - 1) == 0.0);
-        
-        ui16* indexData = std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getIndexBuffer()->lock();
-        
-        ui32 index = 0;
-        for(ui32 i = 0; i < (m_chunkLODSizeX - 1); ++i)
-        {
-            for(ui32 j = 0; j < (m_chunkLODSizeZ - 1); ++j)
-            {
-                indexData[index] = i + j * m_chunkLODSizeX;
-                index++;
-                indexData[index] = i + (j + 1) * m_chunkLODSizeX;
-                index++;
-                indexData[index] = i + 1 + j * m_chunkLODSizeX;
-                index++;
-                
-                indexData[index] = i + (j + 1) * m_chunkLODSizeX;
-                index++;
-                indexData[index] = i + 1 + (j + 1) * m_chunkLODSizeX;
-                index++;
-                indexData[index] = i + 1 + j * m_chunkLODSizeX;
-                index++;
-            }
-        }
-        
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
-        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
-        std::cout<<"writeToIndexBufferOperation: "<<duration<<std::endl;
-#endif
+    writeToIndexBufferOperation->setExecutionBlock([this, i, j](void) {
+        CHeightmapProcessor::writeToIndexBuffer(i, j);
     });
     
     CSharedThreadOperation commitIndexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
-    commitIndexBufferOperation->setExecutionBlock([this, i, j](){
-        
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
-#endif
-        
-        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
-        assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getIndexBuffer() != nullptr);
-        
-        std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getIndexBuffer()->unlock();
-        
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
-        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
-        std::cout<<"commitIndexBufferOperation: "<<duration<<std::endl;
-#endif
+    commitIndexBufferOperation->setExecutionBlock([this, i, j](void) {
+        CHeightmapProcessor::commitIndexBufferToVRAM(i, j);
     });
     
-    
     CSharedThreadOperation createQuadTreeOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    createQuadTreeOperation->setExecutionBlock([this, i, j](){
-        
-        std::get<0>(m_chunksUsed[i + j * m_numChunksX])->updateBounds();
-        
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
-#endif
-        
-        std::get<1>(m_chunksUsed[i + j * m_numChunksX])->generate(std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getVertexBuffer(),
-                                                                  std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getIndexBuffer(),
-                                                                  std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getMaxBound(),
-                                                                  std::get<0>(m_chunksUsed[i + j * m_numChunksX])->getMinBound(),
-                                                                  4,
-                                                                  m_chunkLODSizeX);
-#if defined(__PERFORMANCE_TIMER__)
-        std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
-        f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
-        std::cout<<"createQuadTreeOperation: "<<duration<<std::endl;
-#endif
-        
+    createQuadTreeOperation->setExecutionBlock([this, i, j](void) {
+        CHeightmapProcessor::createQuadTree(i, j);
     });
     
     CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
@@ -1158,33 +1110,7 @@ void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef qua
 
 void CHeightmapProcessor::update(void)
 {
-    /*if(!m_processingOperationQueue.empty())
-    {
-        CSharedHeightmapProcessingOperation operation = m_processingOperationQueue.front();
-        if(!operation->isCanceled() && !operation->isRunning())
-        {
-            operation->executeBackgroundThreadOperation();
-        }
-        else if(operation->isRunning() &&
-                operation->isBackgroundThreadOperationDone() &&
-                !operation->isMainThreadOperationDone())
-        {
-            operation->executeMainThreadOperation();
-        }
-        else if((operation->isRunning() &&
-                 operation->isBackgroundThreadOperationDone() &&
-                 operation->isMainThreadOperationDone()) ||
-                operation->isCanceled())
-        {
-            m_processingOperationQueue.pop();
-            const auto& iterator = m_uniqueProcessingOperations.find(std::make_tuple(operation->getIndexX(),
-                                                                                     operation->getIndexZ()));
-            if(iterator != m_uniqueProcessingOperations.end())
-            {
-                m_uniqueProcessingOperations.erase(iterator);
-            }
-        }
-    }*/
+
 }
 
 void CHeightmapProcessor::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
@@ -1222,164 +1148,6 @@ void CHeightmapProcessor::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSize
             *minBound = CMeshData::calculateMinBound(point, *minBound);
         }
     }
-}
-
-void CHeightmapProcessor::updateVertexBuffer(CSharedVertexBufferRef vertexBuffer,
-                                             ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
-                                             ui32 chunkOffsetX, ui32 chunkOffsetZ)
-{
-    assert(vertexBuffer != nullptr);
-    assert((m_chunkSizeX - 1) % (chunkLODSizeX - 1) == 0.0);
-    assert((m_chunkSizeZ - 1) % (chunkLODSizeZ - 1) == 0.0);
-    
-    ui32 chunkLODOffsetX = (m_chunkSizeX - 1) / (chunkLODSizeX - 1);
-    ui32 chunkLODOffsetZ = (m_chunkSizeZ - 1) / (chunkLODSizeZ - 1);
-    
-    SAttributeVertex* vertexData = vertexBuffer->lock();
-    ui32 index = 0;
-    for(ui32 i = 0; i < chunkLODSizeX;++i)
-    {
-        for(ui32 j = 0; j < chunkLODSizeZ;++j)
-        {
-            glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSizeX - chunkOffsetX,
-                                           j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSizeZ - chunkOffsetZ);
-            
-            ui32 indexXOffset = static_cast<ui32>(position.x) < m_heightmapData->getSizeX() ?
-            static_cast<ui32>(position.x) :
-            static_cast<ui32>(m_heightmapData->getSizeX() - 1);
-            
-            ui32 indexZOffset = static_cast<ui32>(position.y) < m_heightmapData->getSizeZ() ?
-            static_cast<ui32>(position.y) :
-            static_cast<ui32>(m_heightmapData->getSizeZ() - 1);
-            
-            glm::vec3 point = m_heightmapData->getVertexPosition(indexXOffset, indexZOffset);
-            vertexData[index].m_position = point;
-            glm::u16vec2 texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(point.x) / static_cast<f32>(m_heightmapData->getSizeX()),
-                                                                          static_cast<ui32>(point.z) / static_cast<f32>(m_heightmapData->getSizeZ())));
-            vertexData[index].m_texcoord = texcoord;
-            
-            glm::u8vec4 normal = m_heightmapData->getVertexNormal(indexXOffset, indexZOffset);
-            vertexData[index].m_normal = normal;
-            ++index;
-        }
-    }
-    vertexBuffer->unlock();
-}
-
-void CHeightmapProcessor::updateVertexBuffer(CSharedVertexBufferRef vertexBuffer,
-                                             ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
-                                             ui32 chunkOffsetX, ui32 chunkOffsetZ,
-                                             std::function<void(void)> callback)
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        assert(callback != nullptr);
-        assert(vertexBuffer != nullptr);
-        assert((m_chunkSizeX - 1) % (chunkLODSizeX - 1) == 0.0);
-        assert((m_chunkSizeZ - 1) % (chunkLODSizeZ - 1) == 0.0);
-        
-        ui32 chunkLODOffsetX = (m_chunkSizeX - 1) / (chunkLODSizeX - 1);
-        ui32 chunkLODOffsetZ = (m_chunkSizeZ - 1) / (chunkLODSizeZ - 1);
-        
-        SAttributeVertex* vertexData = vertexBuffer->lock();
-        ui32 index = 0;
-        for(ui32 i = 0; i < chunkLODSizeX;++i)
-        {
-            for(ui32 j = 0; j < chunkLODSizeZ;++j)
-            {
-                glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSizeX - chunkOffsetX,
-                                               j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSizeZ - chunkOffsetZ);
-                
-                ui32 indexXOffset = static_cast<ui32>(position.x) < m_heightmapData->getSizeX() ?
-                static_cast<ui32>(position.x) :
-                static_cast<ui32>(m_heightmapData->getSizeX() - 1);
-                
-                ui32 indexZOffset = static_cast<ui32>(position.y) < m_heightmapData->getSizeZ() ?
-                static_cast<ui32>(position.y) :
-                static_cast<ui32>(m_heightmapData->getSizeZ() - 1);
-                
-                glm::vec3 point = m_heightmapData->getVertexPosition(indexXOffset, indexZOffset);
-                vertexData[index].m_position = point;
-                glm::u16vec2 texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(point.x) / static_cast<f32>(m_heightmapData->getSizeX()),
-                                                                              static_cast<ui32>(point.z) / static_cast<f32>(m_heightmapData->getSizeZ())));
-                vertexData[index].m_texcoord = texcoord;
-                
-                glm::u8vec4 normal = m_heightmapData->getVertexNormal(indexXOffset, indexZOffset);
-                vertexData[index].m_normal = normal;
-                ++index;
-            }
-        }
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            vertexBuffer->unlock();
-            callback();
-        });
-    });
-}
-
-void CHeightmapProcessor::updateIndexBuffer(CSharedIndexBufferRef indexBuffer,
-                                            ui32 chunkLODSizeX, ui32 chunkLODSizeZ)
-{
-    ui16* indexData = indexBuffer->lock();
-    
-    ui32 index = 0;
-    for(ui32 i = 0; i < (chunkLODSizeX - 1); ++i)
-    {
-        for(ui32 j = 0; j < (chunkLODSizeZ - 1); ++j)
-        {
-            indexData[index] = i + j * chunkLODSizeX;
-            index++;
-            indexData[index] = i + (j + 1) * chunkLODSizeX;
-            index++;
-            indexData[index] = i + 1 + j * chunkLODSizeX;
-            index++;
-            
-            indexData[index] = i + (j + 1) * chunkLODSizeX;
-            index++;
-            indexData[index] = i + 1 + (j + 1) * chunkLODSizeX;
-            index++;
-            indexData[index] = i + 1 + j * chunkLODSizeX;
-            index++;
-        }
-    }
-    indexBuffer->unlock();
-}
-
-void CHeightmapProcessor::updateIndexBuffer(CSharedIndexBufferRef indexBuffer,
-                                            ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
-                                            const std::function<void(void)>& callback)
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        assert(callback != nullptr);
-        assert(indexBuffer != nullptr);
-        
-        ui16* indexData = indexBuffer->lock();
-        
-        ui32 index = 0;
-        for(ui32 i = 0; i < (chunkLODSizeX - 1); ++i)
-        {
-            for(ui32 j = 0; j < (chunkLODSizeZ - 1); ++j)
-            {
-                indexData[index] = i + j * chunkLODSizeX;
-                index++;
-                indexData[index] = i + (j + 1) * chunkLODSizeX;
-                index++;
-                indexData[index] = i + 1 + j * chunkLODSizeX;
-                index++;
-                
-                indexData[index] = i + (j + 1) * chunkLODSizeX;
-                index++;
-                indexData[index] = i + 1 + (j + 1) * chunkLODSizeX;
-                index++;
-                indexData[index] = i + 1 + j * chunkLODSizeX;
-                index++;
-            }
-        }
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            indexBuffer->unlock();
-            callback();
-        });
-    });
 }
 
 void CHeightmapProcessor::generateTangentSpace(CSharedHeightmapDataRef heightmapData,

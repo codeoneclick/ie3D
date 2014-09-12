@@ -11,14 +11,11 @@
 #include "CIndexBuffer.h"
 #include "CFrustum.h"
 
-static ui32 allocations = 0;
-
 CQuadTree::CQuadTree(void) :
 m_indexBuffer(nullptr), 
 m_numIndexes(0)
 {
-    allocations++;
-    std::cout<<"allocations: "<<allocations<<std::endl;
+
 }
 
 CQuadTree::~CQuadTree(void)
@@ -29,9 +26,6 @@ CQuadTree::~CQuadTree(void)
     std::vector<ui16> indexesDeleter;
     m_indexes.swap(indexesDeleter);
     m_indexesIds.swap(indexesDeleter);
-    
-    allocations--;
-    std::cout<<"allocations: "<<allocations<<std::endl;
 }
 
 void CQuadTree::createQuadTreeNode(i32 size, i32 depth,
