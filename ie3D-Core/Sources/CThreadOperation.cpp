@@ -87,6 +87,10 @@ void CThreadOperation::cancel(void)
     {
         operation->cancel();
     }
+    if(m_cancelBlock != nullptr)
+    {
+        m_cancelBlock();
+    }
     m_isCanceled = true;
 }
 
