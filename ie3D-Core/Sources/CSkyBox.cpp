@@ -177,12 +177,13 @@ void CSkyBox::onDraw(const std::string& mode)
         assert(m_camera != nullptr);
         assert(m_materials.find(mode) != m_materials.end());
         
-        std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
+        CSharedMaterial material = m_materials.find(mode)->second;
         assert(material->getShader() != nullptr);
         
+        glm::vec3 currentRotation = m_rotation;
         if(material->isReflecting())
         {
-            IGameObject::setRotation(glm::vec3(180.0, 0.0, 0.0));
+            IGameObject::setRotation(glm::vec3(180.0, -glm::degrees(m_camera->Get_Rotation()) * 2.0, m_rotation.z));
             IGameObject::onSceneUpdate(0);
         }
 
@@ -199,7 +200,7 @@ void CSkyBox::onDraw(const std::string& mode)
         
         if(material->isReflecting())
         {
-            IGameObject::setRotation(glm::vec3(0.0, 0.0, 0.0));
+            IGameObject::setRotation(currentRotation);
             IGameObject::onSceneUpdate(0);
         }
     }
