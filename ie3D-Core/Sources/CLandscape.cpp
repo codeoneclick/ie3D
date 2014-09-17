@@ -69,10 +69,10 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
                         m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
-                        m_heightmapProcessor->getChunk(i, j, [this, i , j, numChunksZ](CSharedMeshRef mesh, CSharedQuadTreeRef quadTree) {
+                        m_heightmapProcessor->getChunk(i, j, [this, i , j, numChunksZ](CSharedMeshRef mesh) {
                             
                             m_chunks[i + j * numChunksZ]->setMesh(mesh);
-                            m_chunks[i + j * numChunksZ]->setQuadTree(quadTree);
+                            
                             
                             m_chunks[i + j * numChunksZ]->onConfigurationLoaded(m_configuration, true);
                             
@@ -98,6 +98,9 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
                             m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
                             m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
+                            
+                        }, [this, i , j, numChunksZ](CSharedQuadTreeRef quadTree) {
+                            m_chunks[i + j * numChunksZ]->setQuadTree(quadTree);
                         });
                     }
                 }
@@ -396,3 +399,8 @@ f32 CLandscape::getHeight(const glm::vec3& position) const
     return m_heightmapProcessor->getHeight(position);
 }
 
+glm::vec2 CLandscape::getAngleOnHeightmapSuface(const glm::vec3& position) const
+{
+    assert(m_heightmapProcessor != nullptr);
+    return m_heightmapProcessor->getAngleOnHeightmapSuface(position);
+}

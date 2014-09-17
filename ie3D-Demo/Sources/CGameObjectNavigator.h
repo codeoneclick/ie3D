@@ -50,6 +50,8 @@ protected:
     
     std::set<ISharedGameObjectNavigatorHandler> m_handlers;
     
+    void updateRotationOnHeightmapSurface(const glm::vec3& position);
+    
     void notifyHandlersAboutPositionChanged(void);
     void notifyHandlersAboutRotationChanged(void);
     

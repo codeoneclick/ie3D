@@ -17,6 +17,7 @@
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CQuadTree.h"
+#include "CIndexBuffer.h"
 
 CLandscapeChunk::CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
                                  ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -135,7 +136,7 @@ void CLandscapeChunk::onSceneUpdate(f32 deltatime)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         IGameObject::onSceneUpdate(deltatime);
-        m_numIndexesToRender = m_quadTree->update(m_camera->Get_Frustum());
+        m_numIndexesToRender = m_quadTree != nullptr ? m_quadTree->update(m_camera->Get_Frustum()) : m_mesh->getIndexBuffer()->getSize();
     }
 }
 

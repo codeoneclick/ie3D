@@ -167,7 +167,7 @@ protected:
     ui32 m_numChunksX;
     ui32 m_numChunksZ;
     
-    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef, CSharedQuadTreeRef)>>> m_chunksUsed;
+    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_chunksUsed;
     std::set<CSharedMesh> m_chunksInLoading;
     std::vector<CSharedMesh> m_chunksUnused;
     std::vector<CSharedThreadOperation> m_operations;
@@ -231,7 +231,9 @@ public:
     
     void update(void);
     
-    void getChunk(ui32 i, ui32 j, const std::function<void(CSharedMeshRef, CSharedQuadTreeRef)>& callback);
+    void getChunk(ui32 i, ui32 j,
+                  const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
+                  const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback);
     void freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef quadTree, ui32 i, ui32 j);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
@@ -243,6 +245,7 @@ public:
     ui32 getChunkSizeZ(ui32 i, ui32 j) const;
     
     f32 getHeight(const glm::vec3& position) const;
+    glm::vec2 getAngleOnHeightmapSuface(const glm::vec3& position) const;
     void updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights);
     void updateHeightmap(ui32 offsetX, ui32 offsetZ,
                          ui32 subWidth, ui32 subHeight);

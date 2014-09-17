@@ -63,7 +63,9 @@ void ICharacterController::update(f32 deltatime)
     m_gameObject->setPosition(m_position);
     m_camera->Set_LookAt(glm::vec3(m_position.x, m_position.y + glm::mix(12.0, 6.0, m_speed), m_position.z));
     
-    f32 currentRotation = glm::mix(glm::degrees(m_camera->Get_Rotation()) - 90.0f, m_gameObject->getRotation().y, 0.1);
-    m_gameObject->setRotation(m_rotation);
-    m_camera->Set_Rotation(glm::radians(currentRotation));
+    f32 currentCameraRotation = glm::mix(glm::degrees(m_camera->Get_Rotation()) - 90.0f, m_gameObject->getRotation().y, 0.1);
+    glm::vec3 currentGameObjectRotation = glm::mix(glm::vec3(m_gameObject->getRotation().x, m_rotation.y, m_gameObject->getRotation().z),
+                                                   m_rotation, 0.25);
+    m_gameObject->setRotation(currentGameObjectRotation);
+    m_camera->Set_Rotation(glm::radians(currentCameraRotation));
 }

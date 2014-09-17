@@ -272,8 +272,8 @@ f32 CHeightmapDataAccessor::getAngleOnHeightmapSuface(const glm::vec3& point_01,
                                                       const glm::vec3& point_02,
                                                       const glm::vec3& point_03)
 {
-    f32 vectorLength_01 = sqrtf(powf(point_02.x - point_01.x, 2) + powf(point_02.y - point_01.y, 2) + powf(point_02.z - point_01.z, 2));
-    f32 vectorLength_02 = sqrtf(powf(point_03.x - point_01.x, 2) + powf(point_03.y - point_01.y, 2) + powf(point_03.z - point_01.z, 2));
+    f32 vectorLength_01 = sqrt(pow(point_02.x - point_01.x, 2) + pow(point_02.y - point_01.y, 2) + pow(point_02.z - point_01.z, 2));
+    f32 vectorLength_02 = sqrt(pow(point_03.x - point_01.x, 2) + pow(point_03.y - point_01.y, 2) + pow(point_03.z - point_01.z, 2));
     
     f32 scalar = (point_02.x - point_01.x) * (point_03.x - point_01.x) +
     (point_02.y - point_01.y) * (point_03.y - point_01.y) +
@@ -332,7 +332,7 @@ glm::vec2 CHeightmapDataAccessor::getAngleOnHeightmapSuface(CSharedHeightmapData
     f32 angle_01 = CHeightmapDataAccessor::getAngleOnHeightmapSuface(point_01, point_02, point_03);
     f32 angle_02 = CHeightmapDataAccessor::getAngleOnHeightmapSuface(point_01, point_02, point_04);
     
-    return glm::vec2(-(-acosf(angle_02) + M_PI_2), -acosf(angle_01) + M_PI_2);
+    return glm::vec2(glm::degrees(acos(angle_02) - M_PI_2), glm::degrees(asin(angle_01)));
 }
 
 CHeightmapProcessingOperation::CHeightmapProcessingOperation(CSharedHeightmapDataRef heightmapData,
@@ -458,7 +458,7 @@ m_edgesMaskTextureHeight(2048)
                                                   i, j,
                                                   &maxBound, &minBound);
             m_chunksBounds[i + j * m_numChunksX] = std::make_tuple(maxBound, minBound);
-            m_chunksUsed[i + j * m_numChunksX] = std::make_tuple(nullptr, nullptr, nullptr);
+            m_chunksUsed[i + j * m_numChunksX] = std::make_tuple(nullptr, nullptr, nullptr, nullptr);
             m_operations[i + j * m_numChunksX] = nullptr;
         }
     }
@@ -516,6 +516,23 @@ f32 CHeightmapProcessor::getHeight(const glm::vec3& position) const
         return CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(position.x , 0.0, position.z));
     }
     return 0.0;
+}
+
+glm::vec2 CHeightmapProcessor::getAngleOnHeightmapSuface(const glm::vec3& position) const
+{
+    assert(m_heightmapData != nullptr);
+    assert(position.x < CHeightmapProcessor::getSizeX());
+    assert(position.z < CHeightmapProcessor::getSizeZ());
+    assert(position.x >= 0.0);
+    assert(position.z >= 0.0);
+    if(position.x < CHeightmapProcessor::getSizeX() &&
+       position.z < CHeightmapProcessor::getSizeZ() &&
+       position.x >= 0.0 &&
+       position.z >= 0.0)
+    {
+        return CHeightmapDataAccessor::getAngleOnHeightmapSuface(m_heightmapData, position);
+    }
+    return glm::vec2(0.0, 0.0);
 }
 
 void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights)
@@ -969,33 +986,38 @@ void CHeightmapProcessor::commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkO
 
 void CHeightmapProcessor::createQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
 {
-    std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->updateBounds();
-    
+    CSharedMesh mesh = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]);
+    CSharedQuadTree quadTree = std::get<1>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]);
+    if((m_operations[chunkOffsetX + chunkOffsetZ * m_numChunksX] == nullptr ||
+        m_operations[chunkOffsetX + chunkOffsetZ * m_numChunksX]->getIsCanceled()) &&
+       mesh != nullptr)
+    {
+        m_chunksInLoading.insert(mesh);
+    }
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
 #endif
     
-    CSharedMesh mesh = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]);
-    std::get<1>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX])->generate(mesh->getVertexBuffer(),
-                                                                                    mesh->getIndexBuffer(),
-                                                                                    mesh->getMaxBound(),
-                                                                                    mesh->getMinBound(),
-                                                                                    4,
-                                                                                    m_chunkLODSizeX);
+    if(mesh != nullptr && quadTree != nullptr)
+    {
+        mesh->updateBounds();
+        quadTree->generate(mesh->getVertexBuffer(),
+                           mesh->getIndexBuffer(),
+                           mesh->getMaxBound(),
+                           mesh->getMinBound(),
+                           4,
+                           m_chunkLODSizeX);
+    }
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
     f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
     std::cout<<"createQuadTreeOperation: "<<duration<<std::endl;
 #endif
-    
-    if(m_operations[chunkOffsetX + chunkOffsetZ * m_numChunksX] == nullptr ||
-       m_operations[chunkOffsetX + chunkOffsetZ * m_numChunksX]->getIsCanceled())
-    {
-        m_chunksInLoading.insert(mesh);
-    }
 }
 
-void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSharedMeshRef, CSharedQuadTreeRef)> &callback)
+void CHeightmapProcessor::getChunk(ui32 i, ui32 j,
+                                   const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
+                                   const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback)
 {
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
@@ -1006,14 +1028,17 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
         assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
         assert(std::get<1>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
         assert(std::get<2>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
+        assert(std::get<3>(m_chunksUsed[i + j * m_numChunksX]) == nullptr);
         
         std::get<0>(m_chunksUsed[i + j * m_numChunksX]) = m_chunksUnused.at(m_chunksUnused.size() - 1);
         std::get<1>(m_chunksUsed[i + j * m_numChunksX]) = std::make_shared<CQuadTree>();
-        std::get<2>(m_chunksUsed[i + j * m_numChunksX]) = callback;
+        std::get<2>(m_chunksUsed[i + j * m_numChunksX]) = meshCreatedCallback;
+        std::get<3>(m_chunksUsed[i + j * m_numChunksX]) = quadTreeGeneratedCallback;
         
         assert(std::get<0>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
         assert(std::get<1>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
         assert(std::get<2>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
+        assert(std::get<3>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
         
         m_chunksUnused.pop_back();
     }
@@ -1039,7 +1064,8 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
         std::get<0>(m_chunksUsed[i + j * m_numChunksX]) = CMesh::constructCustomMesh("landscape.chunk", vertexBuffer, indexBuffer,
                                                                                      maxBound, minBound);
         std::get<1>(m_chunksUsed[i + j * m_numChunksX]) = std::make_shared<CQuadTree>();
-        std::get<2>(m_chunksUsed[i + j * m_numChunksX]) = callback;
+        std::get<2>(m_chunksUsed[i + j * m_numChunksX]) = meshCreatedCallback;
+        std::get<3>(m_chunksUsed[i + j * m_numChunksX]) = quadTreeGeneratedCallback;
     }
     
     CSharedThreadOperation writeToVertexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
@@ -1060,6 +1086,8 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
     CSharedThreadOperation commitIndexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     commitIndexBufferOperation->setExecutionBlock([this, i, j](void) {
         CHeightmapProcessor::commitIndexBufferToVRAM(i, j);
+        assert(std::get<2>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
+        std::get<2>(m_chunksUsed[i + j * m_numChunksX])(std::get<0>(m_chunksUsed[i + j * m_numChunksX]));
     });
     
     CSharedThreadOperation createQuadTreeOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
@@ -1076,8 +1104,7 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j, const std::function<void (CSh
         
         assert(std::get<2>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
         m_chunksInLoading.erase(std::get<0>(m_chunksUsed[i + j * m_numChunksX]));
-        std::get<2>(m_chunksUsed[i + j * m_numChunksX])(std::get<0>(m_chunksUsed[i + j * m_numChunksX]),
-                                                        std::get<1>(m_chunksUsed[i + j * m_numChunksX]));
+        std::get<3>(m_chunksUsed[i + j * m_numChunksX])(std::get<1>(m_chunksUsed[i + j * m_numChunksX]));
         
 #if defined(__PERFORMANCE_TIMER__)
         std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
@@ -1111,6 +1138,7 @@ void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef qua
     std::get<0>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
     std::get<1>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
     std::get<2>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
+    std::get<3>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
     
     std::set<CSharedMesh> deleter;
     m_chunksInLoading.swap(deleter);

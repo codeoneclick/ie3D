@@ -57,7 +57,9 @@ bool CGameObjectNavigator::moveForward(void)
 
     precomputedPosition.y = m_landscape != nullptr ? m_landscape->getHeight(precomputedPosition) : 0.0;
     m_currentPosition = precomputedPosition;
+    
     CGameObjectNavigator::notifyHandlersAboutPositionChanged();
+    CGameObjectNavigator::updateRotationOnHeightmapSurface(precomputedPosition);
     return true;
 }
 
@@ -77,7 +79,9 @@ bool CGameObjectNavigator::moveBackward(void)
     
     precomputedPosition.y = m_landscape != nullptr ? m_landscape->getHeight(precomputedPosition) : 0.0;
     m_currentPosition = precomputedPosition;
+    
     CGameObjectNavigator::notifyHandlersAboutPositionChanged();
+    CGameObjectNavigator::updateRotationOnHeightmapSurface(precomputedPosition);
     return true;
 }
 
@@ -97,7 +101,9 @@ bool CGameObjectNavigator::moveLeft(void)
     
     precomputedPosition.y = m_landscape != nullptr ? m_landscape->getHeight(precomputedPosition) : 0.0;
     m_currentPosition = precomputedPosition;
+    
     CGameObjectNavigator::notifyHandlersAboutPositionChanged();
+    CGameObjectNavigator::updateRotationOnHeightmapSurface(precomputedPosition);
     return true;
 }
 
@@ -117,7 +123,9 @@ bool CGameObjectNavigator::moveRight(void)
     
     precomputedPosition.y = m_landscape != nullptr ? m_landscape->getHeight(precomputedPosition) : 0.0;
     m_currentPosition = precomputedPosition;
+    
     CGameObjectNavigator::notifyHandlersAboutPositionChanged();
+    CGameObjectNavigator::updateRotationOnHeightmapSurface(precomputedPosition);
     return true;
 }
 
@@ -157,4 +165,12 @@ void CGameObjectNavigator::notifyHandlersAboutRotationChanged(void)
     {
         iterator->onRotationChanged(m_currentRotation);
     }
+}
+
+void CGameObjectNavigator::updateRotationOnHeightmapSurface(const glm::vec3& position)
+{
+    glm::vec2 precomputedRotation = m_landscape != nullptr ? m_landscape->getAngleOnHeightmapSuface(position) : glm::vec2(0.0, 0.0);
+    m_currentRotation.x = precomputedRotation.x;
+    m_currentRotation.z = precomputedRotation.y;
+    CGameObjectNavigator::notifyHandlersAboutRotationChanged();
 }

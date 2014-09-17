@@ -52,10 +52,6 @@ IGameObject::~IGameObject(void)
 void IGameObject::onSceneUpdate(f32 deltatime)
 {
     m_matrixWorld = m_matrixTranslation * m_matrixRotation * m_matrixScale;
-    if(m_boundBox != nullptr)
-    {
-
-    }
 }
 
 void IGameObject::onResourceLoaded(ISharedResourceRef resource,

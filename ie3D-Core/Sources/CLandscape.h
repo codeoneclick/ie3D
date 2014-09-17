@@ -87,6 +87,7 @@ public:
     ui32 getHeightmapSizeZ(void) const;
     
     f32 getHeight(const glm::vec3& position) const;
+    glm::vec2 getAngleOnHeightmapSuface(const glm::vec3& position) const;
 };
 
 #endif

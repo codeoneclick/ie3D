@@ -74,17 +74,17 @@ void CDemoGameScene::load(void)
     m_landscape = m_root->createLandscape("gameobject.landscape.xml");
     m_root->setLandscape(m_landscape);
     
-    m_model = m_root->createModel("gameobject.model.xml");
+    /*m_model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(m_model);
-    m_model->setScale(glm::vec3(10.0, 10.0, 10.0));
+    m_model->setScale(glm::vec3(10.0, 10.0, 10.0));*/
     
     IEGameTransition* transition = static_cast<IEGameTransition*>(m_root);
     
     m_lightTank = transition->createComplexModel("gameobject.tank.light.xml");
     m_root->addCustomGameObject(m_lightTank);
-    m_lightTank->setScale(glm::vec3(2.0, 2.0, 2.0));
+    m_lightTank->setScale(glm::vec3(1.0, 1.0, 1.0));
     
-    m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
+    /*m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
     m_root->addCustomGameObject(m_mediumTank);
     m_mediumTank->setScale(glm::vec3(6.0, 6.0, 6.0));
     m_mediumTank->setPosition(glm::vec3(0.0, 0.0, 32.0));
@@ -92,24 +92,24 @@ void CDemoGameScene::load(void)
     m_heavyTank = transition->createComplexModel("gameobject.tank.heavy.xml");
     m_root->addCustomGameObject(m_heavyTank);
     m_heavyTank->setScale(glm::vec3(7.0, 7.0, 7.0));
-    m_heavyTank->setPosition(glm::vec3(0.0, 0.0, 64.0));
+    m_heavyTank->setPosition(glm::vec3(0.0, 0.0, 64.0));*/
     
     m_root->addCollisionHandler(shared_from_this());
     
     m_characterController = std::make_shared<ICharacterController>(m_lightTank,
                                                                    m_camera);
     
-    m_gameObjectNavigator = std::make_shared<CGameObjectNavigator>(2.5,
-                                                                   2.5,
+    m_gameObjectNavigator = std::make_shared<CGameObjectNavigator>(0.5,
+                                                                   0.25,
                                                                    0.0,
-                                                                   5.0,
+                                                                   2.5,
                                                                    m_landscape,
                                                                    glm::vec3(512.0, 0.0, 512.0),
                                                                    glm::vec3(0.0, 0.0, 0.0));
     m_gameObjectNavigator->addNavigatorHandler(m_characterController);
     
-    m_gameObjectNavigator->setPosition(glm::vec3(128.0, 0.0, 64.0));
-    m_gameObjectNavigator->setRotation(glm::vec3(0.0, 90.0, 0.0));
+    m_gameObjectNavigator->setPosition(glm::vec3(2.0, 0.0, 2.0));
+    m_gameObjectNavigator->setRotation(glm::vec3(0.0, 0.0, 0.0));
 }
 
 void CDemoGameScene::update(f32 deltatime)
