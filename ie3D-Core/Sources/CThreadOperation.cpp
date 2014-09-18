@@ -13,8 +13,7 @@ CThreadOperation::CThreadOperation(E_THREAD_OPERATION_QUEUE operationQueue) :
 m_operationQueue(operationQueue),
 m_executionBlock(nullptr),
 m_cancelBlock(nullptr),
-m_isDone(false),
-m_isCanceled(false)
+m_status(E_THREAD_OPERATION_STATUS_NONE)
 {
     
 }
@@ -78,6 +77,17 @@ bool CThreadOperation::popOperation(void)
 
 void CThreadOperation::execute(void)
 {
+    assert(m_executionBlock != nullptr);
+    if(m_executionBlock != nullptr)
+    {
+        m_status |= E_THREAD_OPERATION_STATUS_EXECUTED;
+        m_executionBlock();
+        m_status |= E_THREAD_OPERATION_STATUS_COMPLETED;
+    }
+}
+
+void CThreadOperation::addToExecutionQueue(void)
+{
     CThreadOperationPool::sharedInstance()->addOperation(shared_from_this(), m_operationQueue);
 }
 
@@ -91,21 +101,35 @@ void CThreadOperation::cancel(void)
     {
         m_cancelBlock();
     }
-    m_isCanceled = true;
+    if(!CThreadOperation::isExecuted())
+    {
+        m_status |= E_THREAD_OPERATION_STATUS_COMPLETED;
+    }
+    m_status |= E_THREAD_OPERATION_STATUS_CANCELED;
 }
 
-bool CThreadOperation::getIsDone(void)
+bool CThreadOperation::isExecuted(void)
 {
-    return m_isDone;
+    return m_status & E_THREAD_OPERATION_STATUS_EXECUTED;
 }
 
-bool CThreadOperation::getIsCanceled(void)
+bool CThreadOperation::isCanceled(void)
 {
-    return m_isCanceled;
+    return m_status & E_THREAD_OPERATION_STATUS_CANCELED;
+}
+
+bool CThreadOperation::isCompleted(void)
+{
+    return m_status & E_THREAD_OPERATION_STATUS_COMPLETED;
 }
 
 bool CThreadOperation::isQueueEmpty(void)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
     return m_dependecies.empty();
+}
+
+E_THREAD_OPERATION_QUEUE CThreadOperation::getOperationQueueName(void)
+{
+    return m_operationQueue;
 }

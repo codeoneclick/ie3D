@@ -13,6 +13,8 @@
 #include "HDeclaration.h"
 #include "HEnums.h"
 
+#define MAX_THREADS_PER_QUEUE 5
+
 class CThreadOperationPool
 {
 private:
@@ -21,10 +23,10 @@ protected:
     
     static CThreadOperationPool* m_sharedInstance;
     
-    std::array<std::array<std::queue<CSharedThreadOperation>, E_THREAD_OPERATION_QUEUE_MAX>, 5> m_operations;
+    std::array<std::array<std::queue<CSharedThreadOperation>, E_THREAD_OPERATION_QUEUE_MAX>, MAX_THREADS_PER_QUEUE> m_operations;
     
     ui8 m_isRunning;
-    std::array<std::thread, 5> m_threads;
+    std::array<std::thread, MAX_THREADS_PER_QUEUE> m_threads;
     std::mutex m_mutex;
     std::set<CSharedThreadOperation> m_uniqueOperations;
     
@@ -33,12 +35,6 @@ protected:
     bool isQueueEmpty(ui32 threadId, E_THREAD_OPERATION_QUEUE operationQueue);
     
     void updateThread(ui32 threadId);
-    
-    void updateThread_01(void);
-    void updateThread_02(void);
-    void updateThread_03(void);
-    void updateThread_04(void);
-    void updateThread_05(void);
     
 public:
     

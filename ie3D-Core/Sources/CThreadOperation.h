@@ -18,9 +18,7 @@ class CThreadOperation : public std::enable_shared_from_this<CThreadOperation>
 private:
     
 protected:
-    
-    friend class CThreadOperationPool;
-    
+
     E_THREAD_OPERATION_QUEUE m_operationQueue;
     
     std::queue<CSharedThreadOperation> m_dependecies;
@@ -30,13 +28,7 @@ protected:
     std::function<void(void)> m_cancelBlock;
     
     std::mutex m_mutex;
-    
-    bool m_isDone;
-    bool m_isCanceled;
-    
-    CSharedThreadOperation nextOperation(void);
-    bool popOperation(void);
-    bool isQueueEmpty(void);
+    ui8 m_status;
     
 public:
     
@@ -48,10 +40,17 @@ public:
     
     void addDependency(CSharedThreadOperationRef operation);
     void execute(void);
+    void addToExecutionQueue(void);
     void cancel(void);
     
-    bool getIsDone(void);
-    bool getIsCanceled(void);
+    bool isExecuted(void);
+    bool isCanceled(void);
+    bool isCompleted(void);
+    
+    E_THREAD_OPERATION_QUEUE getOperationQueueName(void);
+    CSharedThreadOperation nextOperation(void);
+    bool popOperation(void);
+    bool isQueueEmpty(void);
 };
 
 #endif

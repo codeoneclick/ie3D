@@ -989,7 +989,7 @@ void CHeightmapProcessor::createQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
     CSharedMesh mesh = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]);
     CSharedQuadTree quadTree = std::get<1>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]);
     if((m_operations[chunkOffsetX + chunkOffsetZ * m_numChunksX] == nullptr ||
-        m_operations[chunkOffsetX + chunkOffsetZ * m_numChunksX]->getIsCanceled()) &&
+        m_operations[chunkOffsetX + chunkOffsetZ * m_numChunksX]->isCanceled()) &&
        mesh != nullptr)
     {
         m_chunksInLoading.insert(mesh);
@@ -1122,7 +1122,7 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j,
     assert(m_operations[i + j * m_numChunksX] == nullptr);
     m_operations[i + j * m_numChunksX] = completionOperation;
     
-    completionOperation->execute();
+    completionOperation->addToExecutionQueue();
 }
 
 void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef quadTree, ui32 i, ui32 j)
