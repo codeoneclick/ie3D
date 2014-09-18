@@ -447,19 +447,25 @@ m_edgesMaskTextureHeight(2048)
     
     m_chunksBounds.resize(m_numChunksX * m_numChunksZ);
     m_chunksUsed.resize(m_numChunksX * m_numChunksZ);
-    m_operations.resize(m_numChunksX * m_numChunksZ);
+    m_executedOperations.resize(m_numChunksX * m_numChunksZ);
+    m_canceledOperations.resize(m_numChunksX * m_numChunksZ);
+    
     for(ui32 i = 0; i < m_numChunksX; ++i)
     {
         for(ui32 j = 0; j < m_numChunksZ; ++j)
         {
+            ui32 index = i + j * m_numChunksX;
             glm::vec3 maxBound = glm::vec3( -4096.0f, -4096.0f, -4096.0f );
             glm::vec3 minBound = glm::vec3(  4096.0f,  4096.0f,  4096.0f );
             CHeightmapProcessor::createChunkBound(m_chunkSizeX, m_chunkSizeZ,
                                                   i, j,
                                                   &maxBound, &minBound);
-            m_chunksBounds[i + j * m_numChunksX] = std::make_tuple(maxBound, minBound);
-            m_chunksUsed[i + j * m_numChunksX] = std::make_tuple(nullptr, nullptr, nullptr, nullptr);
-            m_operations[i + j * m_numChunksX] = nullptr;
+            
+            m_chunksBounds[index] = std::make_tuple(maxBound, minBound);
+            m_chunksUsed[index] = std::make_tuple(nullptr, nullptr, nullptr, nullptr);
+            
+            m_executedOperations[index] = nullptr;
+            m_canceledOperations[index] = nullptr;
         }
     }
 }
@@ -988,26 +994,18 @@ void CHeightmapProcessor::createQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
 {
     CSharedMesh mesh = std::get<0>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]);
     CSharedQuadTree quadTree = std::get<1>(m_chunksUsed[chunkOffsetX + chunkOffsetZ * m_numChunksX]);
-    if((m_operations[chunkOffsetX + chunkOffsetZ * m_numChunksX] == nullptr ||
-        m_operations[chunkOffsetX + chunkOffsetZ * m_numChunksX]->isCanceled()) &&
-       mesh != nullptr)
-    {
-        m_chunksInLoading.insert(mesh);
-    }
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
 #endif
     
-    if(mesh != nullptr && quadTree != nullptr)
-    {
-        mesh->updateBounds();
-        quadTree->generate(mesh->getVertexBuffer(),
-                           mesh->getIndexBuffer(),
-                           mesh->getMaxBound(),
-                           mesh->getMinBound(),
-                           4,
-                           m_chunkLODSizeX);
-    }
+    mesh->updateBounds();
+    quadTree->generate(mesh->getVertexBuffer(),
+                       mesh->getIndexBuffer(),
+                       mesh->getMaxBound(),
+                       mesh->getMinBound(),
+                       4,
+                       m_chunkLODSizeX);
+    
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
     f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
@@ -1103,7 +1101,6 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j,
                                             i, j](void){
         
         assert(std::get<2>(m_chunksUsed[i + j * m_numChunksX]) != nullptr);
-        m_chunksInLoading.erase(std::get<0>(m_chunksUsed[i + j * m_numChunksX]));
         std::get<3>(m_chunksUsed[i + j * m_numChunksX])(std::get<1>(m_chunksUsed[i + j * m_numChunksX]));
         
 #if defined(__PERFORMANCE_TIMER__)
@@ -1119,29 +1116,32 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j,
     completionOperation->addDependency(commitIndexBufferOperation);
     completionOperation->addDependency(createQuadTreeOperation);
     
-    assert(m_operations[i + j * m_numChunksX] == nullptr);
-    m_operations[i + j * m_numChunksX] = completionOperation;
+    assert(m_executedOperations[i + j * m_numChunksX] == nullptr);
+    m_executedOperations[i + j * m_numChunksX] = completionOperation;
     
     completionOperation->addToExecutionQueue();
 }
 
 void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef quadTree, ui32 i, ui32 j)
 {
-    m_operations[i + j * m_numChunksX]->cancel();
-    m_operations[i + j * m_numChunksX] = nullptr;
-    
-    if(chunk != nullptr)
+    ui32 index = i + j * m_numChunksX;
+    m_executedOperations[index]->cancel();
+    m_canceledOperations[index] = m_executedOperations[index];
+    m_executedOperations[index] = nullptr;
+    for(ui32 index = 0; index < m_canceledOperations.size(); ++index)
     {
-        m_chunksUnused.push_back(chunk);
+        if(m_canceledOperations.at(index) != nullptr &&
+           m_canceledOperations.at(index)->isCompleted())
+        {
+            m_canceledOperations.at(index) = nullptr;
+            assert(std::get<0>(m_chunksUsed[index]) != nullptr);
+            m_chunksUnused.push_back(std::get<0>(m_chunksUsed[index]));
+            std::get<0>(m_chunksUsed[index]) = nullptr;
+            std::get<1>(m_chunksUsed[index]) = nullptr;
+            std::get<2>(m_chunksUsed[index]) = nullptr;
+            std::get<3>(m_chunksUsed[index]) = nullptr;
+        }
     }
-    
-    std::get<0>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
-    std::get<1>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
-    std::get<2>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
-    std::get<3>(m_chunksUsed[i + j * m_numChunksX]) = nullptr;
-    
-    std::set<CSharedMesh> deleter;
-    m_chunksInLoading.swap(deleter);
 }
 
 void CHeightmapProcessor::update(void)
