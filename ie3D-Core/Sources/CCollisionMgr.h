@@ -58,6 +58,9 @@ protected:
     void onGestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction);
     
+    void onKeyUp(i32 key);
+    void onKeyDown(i32 key);
+    
 public:
     
     CCollisionMgr(void);

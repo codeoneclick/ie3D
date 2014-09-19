@@ -90,6 +90,18 @@
     }
 }
 
+- (void)keyDown:(NSEvent *)event
+{
+    unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
+    std::cout<<"key down: "<<key<<std::endl;
+}
+
+- (void)keyUp:(NSEvent *)event
+{
+    unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
+    std::cout<<"key up: "<<key<<std::endl;
+}
+
 @end
 
 class IInputContext_osx : public IInputContext
