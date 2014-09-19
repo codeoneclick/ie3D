@@ -7,7 +7,148 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		211384ED194300DE0041A18A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211384EC194300DE0041A18A /* Images.xcassets */; };
+		212EEC8119CC5D9C00DA02B7 /* ICharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A1372199A0A2600E674CB /* ICharacterController.cpp */; };
+		212EEC8219CC5D9C00DA02B7 /* CGameObjectNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A1375199A0A5600E674CB /* CGameObjectNavigator.cpp */; };
+		212EEC8319CC5D9C00DA02B7 /* CDemoGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07261181DB1910019D264 /* CDemoGameController.cpp */; };
+		212EEC8419CC5D9C00DA02B7 /* CMapDragController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B08D7A1920CA2000C5D5CC /* CMapDragController.cpp */; };
+		212EEC8719CC5D9C00DA02B7 /* CDemoGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725F181DB1910019D264 /* CDemoGameTransition.cpp */; };
+		212EEC8819CC5D9C00DA02B7 /* AppDelegate-OSX.mm in Sources */ = {isa = PBXBuildFile; fileRef = 212EEC7919CC5D5C00DA02B7 /* AppDelegate-OSX.mm */; };
+		212EEC8919CC5D9C00DA02B7 /* CDemoGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725D181DB1910019D264 /* CDemoGameScene.cpp */; };
+		212EEC8A19CC5D9C00DA02B7 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D0726A181DB1910019D264 /* main.mm */; };
+		212EEC8B19CC5D9C00DA02B7 /* CDESceneToUICommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A13A2199A616200E674CB /* CDESceneToUICommands.cpp */; };
+		212EEC8C19CC5D9C00DA02B7 /* CDEUIToSceneCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A139F199A613D00E674CB /* CDEUIToSceneCommands.cpp */; };
+		212EEC9719CC5D9C00DA02B7 /* gameobject.tank.medium.tower.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A130A1998B8E800E674CB /* gameobject.tank.medium.tower.xml */; };
+		212EEC9819CC5D9C00DA02B7 /* gameobject.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E41192252FF00C5D5CC /* gameobject.landscape.xml */; };
+		212EEC9919CC5D9C00DA02B7 /* shaderModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2173345719642B47002B3F90 /* shaderModel.vert */; };
+		212EEC9A19CC5D9C00DA02B7 /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC41920CD0900C5D5CC /* particle.emitter.02.pvr */; };
+		212EEC9B19CC5D9C00DA02B7 /* material.landscape.edges.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E101922527400C5D5CC /* material.landscape.edges.base.xml */; };
+		212EEC9C19CC5D9C00DA02B7 /* gameobject.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E43192252FF00C5D5CC /* gameobject.particle.emitter.xml */; };
+		212EEC9D19CC5D9C00DA02B7 /* tank_heavy_right_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E41998B54100E674CB /* tank_heavy_right_track.mdl_01 */; };
+		212EEC9E19CC5D9C00DA02B7 /* gameobject.tank.medium.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A130B1998B8E800E674CB /* gameobject.tank.medium.xml */; };
+		212EEC9F19CC5D9C00DA02B7 /* map_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 2162093119A1F04C00DECBBC /* map_03.png */; };
+		212EECA019CC5D9C00DA02B7 /* gameobject.skybox.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E44192252FF00C5D5CC /* gameobject.skybox.xml */; };
+		212EECA119CC5D9C00DA02B7 /* render.operation.world.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1E1922527400C5D5CC /* render.operation.world.base.xml */; };
+		212EECA219CC5D9C00DA02B7 /* render.operation.world.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E201922527400C5D5CC /* render.operation.world.refraction.xml */; };
+		212EECA319CC5D9C00DA02B7 /* gameobject.model.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2173345A19642B72002B3F90 /* gameobject.model.xml */; };
+		212EECA419CC5D9C00DA02B7 /* tank_light_left_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E71998B54100E674CB /* tank_light_left_track.mdl_01 */; };
+		212EECA519CC5D9C00DA02B7 /* material.tank.light.tower.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13221998B8F800E674CB /* material.tank.light.tower.common.xml */; };
+		212EECA619CC5D9C00DA02B7 /* gameobject.tank.light.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13061998B8E800E674CB /* gameobject.tank.light.xml */; };
+		212EECA719CC5D9C00DA02B7 /* material.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E151922527400C5D5CC /* material.ocean.xml */; };
+		212EECA819CC5D9C00DA02B7 /* render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */; };
+		212EECA919CC5D9C00DA02B7 /* shaderSkyBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E4A1922531700C5D5CC /* shaderSkyBox.vert */; };
+		212EECAB19CC5D9C00DA02B7 /* material.tank.heavy.left.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A131C1998B8F800E674CB /* material.tank.heavy.left.track.common.xml */; };
+		212EECAC19CC5D9C00DA02B7 /* gameobject.tank.heavy.tower.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13001998B8E800E674CB /* gameobject.tank.heavy.tower.xml */; };
+		212EECAD19CC5D9C00DA02B7 /* gameobject.tank.light.left.track.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13031998B8E800E674CB /* gameobject.tank.light.left.track.xml */; };
+		212EECAE19CC5D9C00DA02B7 /* tank_heavy_body.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E21998B54100E674CB /* tank_heavy_body.mdl_01 */; };
+		212EECAF19CC5D9C00DA02B7 /* zneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC91920CD0900C5D5CC /* zneg.pvr */; };
+		212EECB019CC5D9C00DA02B7 /* gameobject.tank.medium.right.track.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13091998B8E800E674CB /* gameobject.tank.medium.right.track.xml */; };
+		212EECB119CC5D9C00DA02B7 /* landscape.01.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E591923AE0300C5D5CC /* landscape.01.normal.pvr */; };
+		212EECB219CC5D9C00DA02B7 /* shaderScreenQuad.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAF1920CCF600C5D5CC /* shaderScreenQuad.frag */; };
+		212EECB319CC5D9C00DA02B7 /* gameobject.tank.light.body.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13021998B8E800E674CB /* gameobject.tank.light.body.xml */; };
+		212EECB419CC5D9C00DA02B7 /* shaderOcean.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E39192252E400C5D5CC /* shaderOcean.frag */; };
+		212EECB519CC5D9C00DA02B7 /* material.model.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2173345C19642B72002B3F90 /* material.model.reflection.xml */; };
+		212EECB619CC5D9C00DA02B7 /* render.operation.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1D1922527400C5D5CC /* render.operation.output.xml */; };
+		212EECB719CC5D9C00DA02B7 /* zpos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DCA1920CD0900C5D5CC /* zpos.pvr */; };
+		212EECB819CC5D9C00DA02B7 /* tank_medium_body.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12EA1998B54100E674CB /* tank_medium_body.mdl_01 */; };
+		212EECB919CC5D9C00DA02B7 /* shaderOcean.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E3A192252E400C5D5CC /* shaderOcean.vert */; };
+		212EECBA19CC5D9C00DA02B7 /* material.ocean.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21620462194AFF4C00D129AD /* material.ocean.normal.xml */; };
+		212EECBB19CC5D9C00DA02B7 /* gameobject.tank.medium.left.track.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13081998B8E800E674CB /* gameobject.tank.medium.left.track.xml */; };
+		212EECBC19CC5D9C00DA02B7 /* shaderScreenQuad.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DB01920CCF600C5D5CC /* shaderScreenQuad.vert */; };
+		212EECBD19CC5D9C00DA02B7 /* material.tank.light.right.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13211998B8F800E674CB /* material.tank.light.right.track.common.xml */; };
+		212EECBE19CC5D9C00DA02B7 /* render.operation.world.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2162045B194AFC0900D129AD /* render.operation.world.normal.xml */; };
+		212EECBF19CC5D9C00DA02B7 /* material.tank.heavy.right.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A131D1998B8F800E674CB /* material.tank.heavy.right.track.common.xml */; };
+		212EECC019CC5D9C00DA02B7 /* gameobject.tank.light.tower.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13051998B8E800E674CB /* gameobject.tank.light.tower.xml */; };
+		212EECC119CC5D9C00DA02B7 /* transition.main.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E211922527400C5D5CC /* transition.main.xml */; };
+		212EECC219CC5D9C00DA02B7 /* material.tank.medium.right.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13251998B8F800E674CB /* material.tank.medium.right.track.common.xml */; };
+		212EECC319CC5D9C00DA02B7 /* material.landscape.edges.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E121922527400C5D5CC /* material.landscape.edges.refraction.xml */; };
+		212EECC419CC5D9C00DA02B7 /* render.operation.world.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1F1922527400C5D5CC /* render.operation.world.reflection.xml */; };
+		212EECC519CC5D9C00DA02B7 /* gameobject.tank.heavy.left.track.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A12FE1998B8E800E674CB /* gameobject.tank.heavy.left.track.xml */; };
+		212EECC619CC5D9C00DA02B7 /* shaderGameObjectNormal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2162045E194AFC3900D129AD /* shaderGameObjectNormal.frag */; };
+		212EECC719CC5D9C00DA02B7 /* tank_heavy_tower.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E51998B54100E674CB /* tank_heavy_tower.mdl_01 */; };
+		212EECC819CC5D9C00DA02B7 /* material.skybox.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E181922527400C5D5CC /* material.skybox.base.xml */; };
+		212EECC919CC5D9C00DA02B7 /* shaderLandscapeEdges.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B371924D282008DA3C1 /* shaderLandscapeEdges.frag */; };
+		212EECCA19CC5D9C00DA02B7 /* material.tank.heavy.body.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A131B1998B8F800E674CB /* material.tank.heavy.body.common.xml */; };
+		212EECCB19CC5D9C00DA02B7 /* model.mdl_anim in Resources */ = {isa = PBXBuildFile; fileRef = 219A12DF1998B54100E674CB /* model.mdl_anim */; };
+		212EECCC19CC5D9C00DA02B7 /* tank_light_right_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E81998B54100E674CB /* tank_light_right_track.mdl_01 */; };
+		212EECCD19CC5D9C00DA02B7 /* material.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E171922527400C5D5CC /* material.particle.emitter.xml */; };
+		212EECCE19CC5D9C00DA02B7 /* material.skybox.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1A1922527400C5D5CC /* material.skybox.refraction.xml */; };
+		212EECCF19CC5D9C00DA02B7 /* material.skybox.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E191922527400C5D5CC /* material.skybox.reflection.xml */; };
+		212EECD019CC5D9C00DA02B7 /* material.landscape.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2162045A194AFC0900D129AD /* material.landscape.normal.xml */; };
+		212EECD119CC5D9C00DA02B7 /* material.landscape.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0F1922527400C5D5CC /* material.landscape.base.xml */; };
+		212EECD219CC5D9C00DA02B7 /* landscape.02.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC01920CD0900C5D5CC /* landscape.02.diffuse.pvr */; };
+		212EECD319CC5D9C00DA02B7 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B381924D282008DA3C1 /* shaderLandscapeEdges.vert */; };
+		212EECD419CC5D9C00DA02B7 /* tank_heavy.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 219A13331998BBA000E674CB /* tank_heavy.pvr */; };
+		212EECD519CC5D9C00DA02B7 /* landscape.00.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2BB2192CD3D0008DA3C1 /* landscape.00.diffuse.pvr */; };
+		212EECD619CC5D9C00DA02B7 /* map_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 2162093019A1F04C00DECBBC /* map_02.png */; };
+		212EECD719CC5D9C00DA02B7 /* material.tank.light.body.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A131F1998B8F800E674CB /* material.tank.light.body.common.xml */; };
+		212EECD819CC5D9C00DA02B7 /* model.mdl_sk in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E11998B54100E674CB /* model.mdl_sk */; };
+		212EECD919CC5D9C00DA02B7 /* gameobject.tank.medium.body.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13071998B8E800E674CB /* gameobject.tank.medium.body.xml */; };
+		212EECDA19CC5D9C00DA02B7 /* tank_light_tower.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E91998B54100E674CB /* tank_light_tower.mdl_01 */; };
+		212EECDB19CC5D9C00DA02B7 /* tank_medium_tower.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12ED1998B54100E674CB /* tank_medium_tower.mdl_01 */; };
+		212EECDC19CC5D9C00DA02B7 /* gameobject.tank.heavy.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13011998B8E800E674CB /* gameobject.tank.heavy.xml */; };
+		212EECDD19CC5D9C00DA02B7 /* model.mdl_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E01998B54100E674CB /* model.mdl_mesh */; };
+		212EECDE19CC5D9C00DA02B7 /* material.tank.heavy.tower.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A131E1998B8F800E674CB /* material.tank.heavy.tower.common.xml */; };
+		212EECDF19CC5D9C00DA02B7 /* material.splatting.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1C1922527400C5D5CC /* material.splatting.normal.xml */; };
+		212EECE019CC5D9C00DA02B7 /* tank_medium.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 219A13351998BBA000E674CB /* tank_medium.pvr */; };
+		212EECE119CC5D9C00DA02B7 /* shaderLandscape.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E36192252E400C5D5CC /* shaderLandscape.vert */; };
+		212EECE219CC5D9C00DA02B7 /* ssao.random.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 216204411949D7DC00D129AD /* ssao.random.pvr */; };
+		212EECE319CC5D9C00DA02B7 /* shaderLandscapeSplatting.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E38192252E400C5D5CC /* shaderLandscapeSplatting.vert */; };
+		212EECE419CC5D9C00DA02B7 /* material.model.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2173345B19642B72002B3F90 /* material.model.common.xml */; };
+		212EECE519CC5D9C00DA02B7 /* shaderGameObjectNormal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2162045F194AFC3900D129AD /* shaderGameObjectNormal.vert */; };
+		212EECE619CC5D9C00DA02B7 /* material.tank.medium.left.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13241998B8F800E674CB /* material.tank.medium.left.track.common.xml */; };
+		212EECE719CC5D9C00DA02B7 /* landscape.03.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC11920CD0900C5D5CC /* landscape.03.diffuse.pvr */; };
+		212EECE819CC5D9C00DA02B7 /* material.model.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2173345D19642B72002B3F90 /* material.model.refraction.xml */; };
+		212EECEA19CC5D9C00DA02B7 /* tank_heavy_left_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E31998B54100E674CB /* tank_heavy_left_track.mdl_01 */; };
+		212EECEB19CC5D9C00DA02B7 /* yneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC71920CD0900C5D5CC /* yneg.pvr */; };
+		212EECEC19CC5D9C00DA02B7 /* tank_light_body.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E61998B54100E674CB /* tank_light_body.mdl_01 */; };
+		212EECED19CC5D9C00DA02B7 /* map_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 2162093219A1F04C00DECBBC /* map_04.png */; };
+		212EECEE19CC5D9C00DA02B7 /* landscape.01.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DBF1920CD0900C5D5CC /* landscape.01.diffuse.pvr */; };
+		212EECEF19CC5D9C00DA02B7 /* UIWindowOSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212EEC7419CC5CFD00DA02B7 /* UIWindowOSX.xib */; };
+		212EECF019CC5D9C00DA02B7 /* gameobject.tank.heavy.body.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A12FD1998B8E800E674CB /* gameobject.tank.heavy.body.xml */; };
+		212EECF119CC5D9C00DA02B7 /* gameobject.tank.light.right.track.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13041998B8E800E674CB /* gameobject.tank.light.right.track.xml */; };
+		212EECF219CC5D9C00DA02B7 /* material.splatting.diffuse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E1B1922527400C5D5CC /* material.splatting.diffuse.xml */; };
+		212EECF319CC5D9C00DA02B7 /* shaderScreenSSAO.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2162043E1949AF2300D129AD /* shaderScreenSSAO.vert */; };
+		212EECF419CC5D9C00DA02B7 /* tank_track.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 219A13361998BBA000E674CB /* tank_track.pvr */; };
+		212EECF519CC5D9C00DA02B7 /* xpos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC61920CD0900C5D5CC /* xpos.pvr */; };
+		212EECF619CC5D9C00DA02B7 /* gameobject.tank.heavy.right.track.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A12FF1998B8E800E674CB /* gameobject.tank.heavy.right.track.xml */; };
+		212EECF719CC5D9C00DA02B7 /* shaderScreenSSAO.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2162043D1949AF2300D129AD /* shaderScreenSSAO.frag */; };
+		212EECF819CC5D9C00DA02B7 /* map_05.png in Resources */ = {isa = PBXBuildFile; fileRef = 2162093319A1F04C00DECBBC /* map_05.png */; };
+		212EECF919CC5D9C00DA02B7 /* ocean.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC21920CD0900C5D5CC /* ocean.normal.pvr */; };
+		212EECFA19CC5D9C00DA02B7 /* shaderModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2173345619642B47002B3F90 /* shaderModel.frag */; };
+		212EECFB19CC5D9C00DA02B7 /* shaderLandscape.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E35192252E400C5D5CC /* shaderLandscape.frag */; };
+		212EECFC19CC5D9C00DA02B7 /* tank_medium_right_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12EC1998B54100E674CB /* tank_medium_right_track.mdl_01 */; };
+		212EECFD19CC5D9C00DA02B7 /* material.landscape.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E141922527400C5D5CC /* material.landscape.refraction.xml */; };
+		212EECFE19CC5D9C00DA02B7 /* gameobject.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E42192252FF00C5D5CC /* gameobject.ocean.xml */; };
+		212EECFF19CC5D9C00DA02B7 /* shaderSkyBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E491922531700C5D5CC /* shaderSkyBox.frag */; };
+		212EED0019CC5D9C00DA02B7 /* ypos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC81920CD0900C5D5CC /* ypos.pvr */; };
+		212EED0119CC5D9C00DA02B7 /* material.tank.light.left.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13201998B8F800E674CB /* material.tank.light.left.track.common.xml */; };
+		212EED0219CC5D9C00DA02B7 /* material.tank.medium.body.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13231998B8F800E674CB /* material.tank.medium.body.common.xml */; };
+		212EED0319CC5D9C00DA02B7 /* tank_light.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 219A13341998BBA000E674CB /* tank_light.pvr */; };
+		212EED0419CC5D9C00DA02B7 /* map_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 2162092F19A1F04C00DECBBC /* map_01.png */; };
+		212EED0519CC5D9C00DA02B7 /* shaderParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAE1920CCF600C5D5CC /* shaderParticleEmitter.vert */; };
+		212EED0619CC5D9C00DA02B7 /* material.landscape.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E131922527400C5D5CC /* material.landscape.reflection.xml */; };
+		212EED0719CC5D9C00DA02B7 /* material.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E161922527400C5D5CC /* material.output.xml */; };
+		212EED0819CC5D9C00DA02B7 /* material.render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */; };
+		212EED0919CC5D9C00DA02B7 /* shaderParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAD1920CCF600C5D5CC /* shaderParticleEmitter.frag */; };
+		212EED0A19CC5D9C00DA02B7 /* model.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 2173347319643CB8002B3F90 /* model.diffuse.pvr */; };
+		212EED0B19CC5D9C00DA02B7 /* shaderLandscapeSplatting.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E37192252E400C5D5CC /* shaderLandscapeSplatting.frag */; };
+		212EED0C19CC5D9C00DA02B7 /* material.tank.medium.tower.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 219A13261998B8F800E674CB /* material.tank.medium.tower.common.xml */; };
+		212EED0D19CC5D9C00DA02B7 /* tank_medium_left_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 219A12EB1998B54100E674CB /* tank_medium_left_track.mdl_01 */; };
+		212EED0E19CC5D9C00DA02B7 /* material.landscape.edges.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E111922527400C5D5CC /* material.landscape.edges.reflection.xml */; };
+		212EED0F19CC5D9C00DA02B7 /* xneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC51920CD0900C5D5CC /* xneg.pvr */; };
+		212EED1019CC5D9C00DA02B7 /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DC31920CD0900C5D5CC /* particle.emitter.01.pvr */; };
+		212EED1819CC607F00DA02B7 /* ie3D-Demo-ios.plist in Resources */ = {isa = PBXBuildFile; fileRef = 212EED1619CC607F00DA02B7 /* ie3D-Demo-ios.plist */; };
+		212EED1A19CC608400DA02B7 /* ie3D-Demo-osx.plist in Resources */ = {isa = PBXBuildFile; fileRef = 212EED1719CC607F00DA02B7 /* ie3D-Demo-osx.plist */; };
+		212EED2119CC649E00DA02B7 /* libie3DCore-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 213267901906AA26001C98F7 /* libie3DCore-osx.a */; };
+		212EED2219CC649E00DA02B7 /* libie3DEngine-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FCC904199FA69200F2CA1E /* libie3DEngine-osx.a */; };
+		212EED2519CC653700DA02B7 /* libEGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 212EED2319CC653700DA02B7 /* libEGL.dylib */; };
+		212EED2619CC653700DA02B7 /* libGLESv2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 212EED2419CC653700DA02B7 /* libGLESv2.dylib */; };
+		212EED2819CC655A00DA02B7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212EED2719CC655A00DA02B7 /* OpenGL.framework */; };
+		212EED2A19CC656200DA02B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212EED2919CC656200DA02B7 /* Cocoa.framework */; };
+		212EED3519CC6A1D00DA02B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211384EC194300DE0041A18A /* Images.xcassets */; };
+		212EED3619CC6A2500DA02B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211384EC194300DE0041A18A /* Images.xcassets */; };
+		212EED3819CC6B1D00DA02B7 /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212EED2319CC653700DA02B7 /* libEGL.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		212EED3919CC6B1D00DA02B7 /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212EED2419CC653700DA02B7 /* libGLESv2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		213267961906B51C001C98F7 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
 		2162043A1949AEFF00D129AD /* material.render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */; };
 		2162043B1949AEFF00D129AD /* render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */; };
@@ -136,7 +277,7 @@
 		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
 		21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D0724F181DAEA00019D264 /* QuartzCore.framework */; };
 		21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D07251181DAEA60019D264 /* OpenGLES.framework */; };
-		21D0726C181DB1910019D264 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D07255181DB1910019D264 /* AppDelegate.mm */; };
+		21D0726C181DB1910019D264 /* AppDelegate-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D07255181DB1910019D264 /* AppDelegate-iOS.mm */; };
 		21D0726F181DB1910019D264 /* CGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725B181DB1910019D264 /* CGameViewController.mm */; };
 		21D07271181DB1910019D264 /* CDemoGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725D181DB1910019D264 /* CDemoGameScene.cpp */; };
 		21D07272181DB1910019D264 /* CDemoGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D0725F181DB1910019D264 /* CDemoGameTransition.cpp */; };
@@ -150,6 +291,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		212EED1D19CC648A00DA02B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 21853414181EFC6200315CBB;
+			remoteInfo = "ie3DCore-osx";
+		};
+		212EED1F19CC648D00DA02B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21FCC8FB199FA69200F2CA1E /* ie3D-Engine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 21F11506199225C500F4A378;
+			remoteInfo = "ie3DEngine-osx";
+		};
 		2132678D1906AA26001C98F7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */;
@@ -194,9 +349,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		212EED3719CC6AF900DA02B7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				212EED3819CC6B1D00DA02B7 /* libEGL.dylib in CopyFiles */,
+				212EED3919CC6B1D00DA02B7 /* libGLESv2.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		211384EC194300DE0041A18A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ie3D-Demo/Images.xcassets"; sourceTree = SOURCE_ROOT; };
-		2132664F1906A84D001C98F7 /* ie3D-Demo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ie3D-Demo.plist"; path = "Support/ie3D-Demo.plist"; sourceTree = SOURCE_ROOT; };
+		212EEC7419CC5CFD00DA02B7 /* UIWindowOSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UIWindowOSX.xib; path = Sources/UIWindowOSX.xib; sourceTree = SOURCE_ROOT; };
+		212EEC7819CC5D5C00DA02B7 /* AppDelegate-OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AppDelegate-OSX.h"; path = "Sources/AppDelegate-OSX.h"; sourceTree = SOURCE_ROOT; };
+		212EEC7919CC5D5C00DA02B7 /* AppDelegate-OSX.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "AppDelegate-OSX.mm"; path = "Sources/AppDelegate-OSX.mm"; sourceTree = SOURCE_ROOT; };
+		212EED1419CC5D9C00DA02B7 /* ie3D-Demo-osx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ie3D-Demo-osx.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		212EED1619CC607F00DA02B7 /* ie3D-Demo-ios.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ie3D-Demo-ios.plist"; path = "Support/ie3D-Demo-ios.plist"; sourceTree = SOURCE_ROOT; };
+		212EED1719CC607F00DA02B7 /* ie3D-Demo-osx.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ie3D-Demo-osx.plist"; path = "Support/ie3D-Demo-osx.plist"; sourceTree = SOURCE_ROOT; };
+		212EED2319CC653700DA02B7 /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = "../ie3D-Core/Libraries/ogles2/mac-osx_x86/lib/libEGL.dylib"; sourceTree = "<group>"; };
+		212EED2419CC653700DA02B7 /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "../ie3D-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<group>"; };
+		212EED2719CC655A00DA02B7 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
+		212EED2919CC656200DA02B7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
 		216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
 		216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
@@ -328,14 +506,14 @@
 		21B08E491922531700C5D5CC /* shaderSkyBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.frag; path = "../ie3D-Bundle/Shaders/shaderSkyBox.frag"; sourceTree = SOURCE_ROOT; };
 		21B08E4A1922531700C5D5CC /* shaderSkyBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.vert; path = "../ie3D-Bundle/Shaders/shaderSkyBox.vert"; sourceTree = SOURCE_ROOT; };
 		21B08E591923AE0300C5D5CC /* landscape.01.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.01.normal.pvr; path = "../ie3D-Bundle/Textures/landscape.01.normal.pvr"; sourceTree = SOURCE_ROOT; };
-		21D070C1181D9D460019D264 /* ie3D-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ie3D-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21D070C1181D9D460019D264 /* ie3D-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "ie3D-Demo.app"; path = "ie3D-Demo-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		21D070C8181D9D460019D264 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		21D0724F181DAEA00019D264 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		21D07251181DAEA60019D264 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		21D07254181DB1910019D264 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Sources/AppDelegate.h; sourceTree = SOURCE_ROOT; };
-		21D07255181DB1910019D264 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Sources/AppDelegate.mm; sourceTree = SOURCE_ROOT; };
+		21D07254181DB1910019D264 /* AppDelegate-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AppDelegate-iOS.h"; path = "Sources/AppDelegate-iOS.h"; sourceTree = SOURCE_ROOT; };
+		21D07255181DB1910019D264 /* AppDelegate-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "AppDelegate-iOS.mm"; path = "Sources/AppDelegate-iOS.mm"; sourceTree = SOURCE_ROOT; };
 		21D0725A181DB1910019D264 /* CGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController.h; path = Sources/CGameViewController.h; sourceTree = SOURCE_ROOT; };
 		21D0725B181DB1910019D264 /* CGameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CGameViewController.mm; path = Sources/CGameViewController.mm; sourceTree = SOURCE_ROOT; };
 		21D0725C181DB1910019D264 /* CGameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CGameViewController.xib; path = Sources/CGameViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -353,6 +531,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		212EEC8E19CC5D9C00DA02B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				212EED2519CC653700DA02B7 /* libEGL.dylib in Frameworks */,
+				212EED2619CC653700DA02B7 /* libGLESv2.dylib in Frameworks */,
+				212EED2119CC649E00DA02B7 /* libie3DCore-osx.a in Frameworks */,
+				212EED2219CC649E00DA02B7 /* libie3DEngine-osx.a in Frameworks */,
+				212EED2819CC655A00DA02B7 /* OpenGL.framework in Frameworks */,
+				212EED2A19CC656200DA02B7 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		21D070BE181D9D460019D264 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -370,6 +561,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		212EEC7619CC5D0C00DA02B7 /* IOS */ = {
+			isa = PBXGroup;
+			children = (
+				21D07254181DB1910019D264 /* AppDelegate-iOS.h */,
+				21D07255181DB1910019D264 /* AppDelegate-iOS.mm */,
+				21D0725A181DB1910019D264 /* CGameViewController.h */,
+				21D0725B181DB1910019D264 /* CGameViewController.mm */,
+				21D0725C181DB1910019D264 /* CGameViewController.xib */,
+			);
+			name = IOS;
+			sourceTree = "<group>";
+		};
+		212EEC7719CC5D1400DA02B7 /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				212EEC7819CC5D5C00DA02B7 /* AppDelegate-OSX.h */,
+				212EEC7919CC5D5C00DA02B7 /* AppDelegate-OSX.mm */,
+				212EEC7419CC5CFD00DA02B7 /* UIWindowOSX.xib */,
+			);
+			name = OSX;
+			sourceTree = "<group>";
+		};
 		213267871906AA13001C98F7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,6 +811,7 @@
 			isa = PBXGroup;
 			children = (
 				21D070C1181D9D460019D264 /* ie3D-Demo.app */,
+				212EED1419CC5D9C00DA02B7 /* ie3D-Demo-osx.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -605,6 +819,10 @@
 		21D070C3181D9D460019D264 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				212EED2919CC656200DA02B7 /* Cocoa.framework */,
+				212EED2719CC655A00DA02B7 /* OpenGL.framework */,
+				212EED2319CC653700DA02B7 /* libEGL.dylib */,
+				212EED2419CC653700DA02B7 /* libGLESv2.dylib */,
 				21D07251181DAEA60019D264 /* OpenGLES.framework */,
 				21D0724F181DAEA00019D264 /* QuartzCore.framework */,
 				21D070C4181D9D460019D264 /* Foundation.framework */,
@@ -617,7 +835,8 @@
 		21D070CB181D9D460019D264 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				2132664F1906A84D001C98F7 /* ie3D-Demo.plist */,
+				212EED1619CC607F00DA02B7 /* ie3D-Demo-ios.plist */,
+				212EED1719CC607F00DA02B7 /* ie3D-Demo-osx.plist */,
 			);
 			name = Supporting;
 			path = indieEngineDemo;
@@ -626,24 +845,21 @@
 		21D070F3181D9ECF0019D264 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				212EEC7719CC5D1400DA02B7 /* OSX */,
+				212EEC7619CC5D0C00DA02B7 /* IOS */,
 				216A50C4199DFB4C00E46DDE /* UIElements */,
 				219A139E199A60A300E674CB /* UICommands */,
 				219A1383199A476300E674CB /* Common */,
 				219A12DB1998B01B00E674CB /* StateMachine Managment */,
-				21D07254181DB1910019D264 /* AppDelegate.h */,
-				21D07255181DB1910019D264 /* AppDelegate.mm */,
-				21D0725A181DB1910019D264 /* CGameViewController.h */,
-				21D0725B181DB1910019D264 /* CGameViewController.mm */,
-				21D0725C181DB1910019D264 /* CGameViewController.xib */,
 				21B08D7B1920CA2000C5D5CC /* CMapDragController.h */,
 				21B08D7A1920CA2000C5D5CC /* CMapDragController.cpp */,
 				21D0725E181DB1910019D264 /* CDemoGameScene.h */,
 				21D0725D181DB1910019D264 /* CDemoGameScene.cpp */,
-				21D0726A181DB1910019D264 /* main.mm */,
 				219A1373199A0A2600E674CB /* ICharacterController.h */,
 				219A1372199A0A2600E674CB /* ICharacterController.cpp */,
 				219A1376199A0A5600E674CB /* CGameObjectNavigator.h */,
 				219A1375199A0A5600E674CB /* CGameObjectNavigator.cpp */,
+				21D0726A181DB1910019D264 /* main.mm */,
 			);
 			name = Sources;
 			path = indieEngineDemo;
@@ -687,9 +903,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		21D070C0181D9D460019D264 /* ie3D-Demo */ = {
+		212EEC7B19CC5D9C00DA02B7 /* ie3D-Demo-osx */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21D070ED181D9D460019D264 /* Build configuration list for PBXNativeTarget "ie3D-Demo" */;
+			buildConfigurationList = 212EED1119CC5D9C00DA02B7 /* Build configuration list for PBXNativeTarget "ie3D-Demo-osx" */;
+			buildPhases = (
+				212EEC8019CC5D9C00DA02B7 /* Sources */,
+				212EEC8E19CC5D9C00DA02B7 /* Frameworks */,
+				212EEC9619CC5D9C00DA02B7 /* Resources */,
+				212EED3719CC6AF900DA02B7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				212EED2019CC648D00DA02B7 /* PBXTargetDependency */,
+				212EED1E19CC648A00DA02B7 /* PBXTargetDependency */,
+			);
+			name = "ie3D-Demo-osx";
+			productName = indieEngineDemo;
+			productReference = 212EED1419CC5D9C00DA02B7 /* ie3D-Demo-osx.app */;
+			productType = "com.apple.product-type.application";
+		};
+		21D070C0181D9D460019D264 /* ie3D-Demo-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21D070ED181D9D460019D264 /* Build configuration list for PBXNativeTarget "ie3D-Demo-ios" */;
 			buildPhases = (
 				21D070BD181D9D460019D264 /* Sources */,
 				21D070BE181D9D460019D264 /* Frameworks */,
@@ -701,7 +937,7 @@
 				21FCC8F8199FA65100F2CA1E /* PBXTargetDependency */,
 				21FCC906199FA69C00F2CA1E /* PBXTargetDependency */,
 			);
-			name = "ie3D-Demo";
+			name = "ie3D-Demo-ios";
 			productName = indieEngineDemo;
 			productReference = 21D070C1181D9D460019D264 /* ie3D-Demo.app */;
 			productType = "com.apple.product-type.application";
@@ -742,7 +978,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				21D070C0181D9D460019D264 /* ie3D-Demo */,
+				21D070C0181D9D460019D264 /* ie3D-Demo-ios */,
+				212EEC7B19CC5D9C00DA02B7 /* ie3D-Demo-osx */,
 			);
 		};
 /* End PBXProject section */
@@ -779,6 +1016,135 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		212EEC9619CC5D9C00DA02B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				212EEC9719CC5D9C00DA02B7 /* gameobject.tank.medium.tower.xml in Resources */,
+				212EEC9819CC5D9C00DA02B7 /* gameobject.landscape.xml in Resources */,
+				212EEC9919CC5D9C00DA02B7 /* shaderModel.vert in Resources */,
+				212EEC9A19CC5D9C00DA02B7 /* particle.emitter.02.pvr in Resources */,
+				212EEC9B19CC5D9C00DA02B7 /* material.landscape.edges.base.xml in Resources */,
+				212EEC9C19CC5D9C00DA02B7 /* gameobject.particle.emitter.xml in Resources */,
+				212EEC9D19CC5D9C00DA02B7 /* tank_heavy_right_track.mdl_01 in Resources */,
+				212EEC9E19CC5D9C00DA02B7 /* gameobject.tank.medium.xml in Resources */,
+				212EEC9F19CC5D9C00DA02B7 /* map_03.png in Resources */,
+				212EECA019CC5D9C00DA02B7 /* gameobject.skybox.xml in Resources */,
+				212EECA119CC5D9C00DA02B7 /* render.operation.world.base.xml in Resources */,
+				212EECA219CC5D9C00DA02B7 /* render.operation.world.refraction.xml in Resources */,
+				212EECA319CC5D9C00DA02B7 /* gameobject.model.xml in Resources */,
+				212EECA419CC5D9C00DA02B7 /* tank_light_left_track.mdl_01 in Resources */,
+				212EECA519CC5D9C00DA02B7 /* material.tank.light.tower.common.xml in Resources */,
+				212EECA619CC5D9C00DA02B7 /* gameobject.tank.light.xml in Resources */,
+				212EECA719CC5D9C00DA02B7 /* material.ocean.xml in Resources */,
+				212EECA819CC5D9C00DA02B7 /* render.operation.screen.ssao.xml in Resources */,
+				212EECA919CC5D9C00DA02B7 /* shaderSkyBox.vert in Resources */,
+				212EECAB19CC5D9C00DA02B7 /* material.tank.heavy.left.track.common.xml in Resources */,
+				212EECAC19CC5D9C00DA02B7 /* gameobject.tank.heavy.tower.xml in Resources */,
+				212EECAD19CC5D9C00DA02B7 /* gameobject.tank.light.left.track.xml in Resources */,
+				212EECAE19CC5D9C00DA02B7 /* tank_heavy_body.mdl_01 in Resources */,
+				212EECAF19CC5D9C00DA02B7 /* zneg.pvr in Resources */,
+				212EECB019CC5D9C00DA02B7 /* gameobject.tank.medium.right.track.xml in Resources */,
+				212EECB119CC5D9C00DA02B7 /* landscape.01.normal.pvr in Resources */,
+				212EECB219CC5D9C00DA02B7 /* shaderScreenQuad.frag in Resources */,
+				212EECB319CC5D9C00DA02B7 /* gameobject.tank.light.body.xml in Resources */,
+				212EECB419CC5D9C00DA02B7 /* shaderOcean.frag in Resources */,
+				212EECB519CC5D9C00DA02B7 /* material.model.reflection.xml in Resources */,
+				212EECB619CC5D9C00DA02B7 /* render.operation.output.xml in Resources */,
+				212EECB719CC5D9C00DA02B7 /* zpos.pvr in Resources */,
+				212EECB819CC5D9C00DA02B7 /* tank_medium_body.mdl_01 in Resources */,
+				212EECB919CC5D9C00DA02B7 /* shaderOcean.vert in Resources */,
+				212EECBA19CC5D9C00DA02B7 /* material.ocean.normal.xml in Resources */,
+				212EECBB19CC5D9C00DA02B7 /* gameobject.tank.medium.left.track.xml in Resources */,
+				212EECBC19CC5D9C00DA02B7 /* shaderScreenQuad.vert in Resources */,
+				212EECBD19CC5D9C00DA02B7 /* material.tank.light.right.track.common.xml in Resources */,
+				212EECBE19CC5D9C00DA02B7 /* render.operation.world.normal.xml in Resources */,
+				212EECBF19CC5D9C00DA02B7 /* material.tank.heavy.right.track.common.xml in Resources */,
+				212EECC019CC5D9C00DA02B7 /* gameobject.tank.light.tower.xml in Resources */,
+				212EECC119CC5D9C00DA02B7 /* transition.main.xml in Resources */,
+				212EECC219CC5D9C00DA02B7 /* material.tank.medium.right.track.common.xml in Resources */,
+				212EECC319CC5D9C00DA02B7 /* material.landscape.edges.refraction.xml in Resources */,
+				212EECC419CC5D9C00DA02B7 /* render.operation.world.reflection.xml in Resources */,
+				212EECC519CC5D9C00DA02B7 /* gameobject.tank.heavy.left.track.xml in Resources */,
+				212EECC619CC5D9C00DA02B7 /* shaderGameObjectNormal.frag in Resources */,
+				212EECC719CC5D9C00DA02B7 /* tank_heavy_tower.mdl_01 in Resources */,
+				212EECC819CC5D9C00DA02B7 /* material.skybox.base.xml in Resources */,
+				212EECC919CC5D9C00DA02B7 /* shaderLandscapeEdges.frag in Resources */,
+				212EECCA19CC5D9C00DA02B7 /* material.tank.heavy.body.common.xml in Resources */,
+				212EECCB19CC5D9C00DA02B7 /* model.mdl_anim in Resources */,
+				212EECCC19CC5D9C00DA02B7 /* tank_light_right_track.mdl_01 in Resources */,
+				212EECCD19CC5D9C00DA02B7 /* material.particle.emitter.xml in Resources */,
+				212EECCE19CC5D9C00DA02B7 /* material.skybox.refraction.xml in Resources */,
+				212EECCF19CC5D9C00DA02B7 /* material.skybox.reflection.xml in Resources */,
+				212EECD019CC5D9C00DA02B7 /* material.landscape.normal.xml in Resources */,
+				212EECD119CC5D9C00DA02B7 /* material.landscape.base.xml in Resources */,
+				212EECD219CC5D9C00DA02B7 /* landscape.02.diffuse.pvr in Resources */,
+				212EECD319CC5D9C00DA02B7 /* shaderLandscapeEdges.vert in Resources */,
+				212EECD419CC5D9C00DA02B7 /* tank_heavy.pvr in Resources */,
+				212EECD519CC5D9C00DA02B7 /* landscape.00.diffuse.pvr in Resources */,
+				212EECD619CC5D9C00DA02B7 /* map_02.png in Resources */,
+				212EECD719CC5D9C00DA02B7 /* material.tank.light.body.common.xml in Resources */,
+				212EECD819CC5D9C00DA02B7 /* model.mdl_sk in Resources */,
+				212EED3519CC6A1D00DA02B7 /* Images.xcassets in Resources */,
+				212EECD919CC5D9C00DA02B7 /* gameobject.tank.medium.body.xml in Resources */,
+				212EECDA19CC5D9C00DA02B7 /* tank_light_tower.mdl_01 in Resources */,
+				212EECDB19CC5D9C00DA02B7 /* tank_medium_tower.mdl_01 in Resources */,
+				212EED1A19CC608400DA02B7 /* ie3D-Demo-osx.plist in Resources */,
+				212EECDC19CC5D9C00DA02B7 /* gameobject.tank.heavy.xml in Resources */,
+				212EECDD19CC5D9C00DA02B7 /* model.mdl_mesh in Resources */,
+				212EECDE19CC5D9C00DA02B7 /* material.tank.heavy.tower.common.xml in Resources */,
+				212EECDF19CC5D9C00DA02B7 /* material.splatting.normal.xml in Resources */,
+				212EECE019CC5D9C00DA02B7 /* tank_medium.pvr in Resources */,
+				212EECE119CC5D9C00DA02B7 /* shaderLandscape.vert in Resources */,
+				212EECE219CC5D9C00DA02B7 /* ssao.random.pvr in Resources */,
+				212EECE319CC5D9C00DA02B7 /* shaderLandscapeSplatting.vert in Resources */,
+				212EECE419CC5D9C00DA02B7 /* material.model.common.xml in Resources */,
+				212EECE519CC5D9C00DA02B7 /* shaderGameObjectNormal.vert in Resources */,
+				212EECE619CC5D9C00DA02B7 /* material.tank.medium.left.track.common.xml in Resources */,
+				212EECE719CC5D9C00DA02B7 /* landscape.03.diffuse.pvr in Resources */,
+				212EECE819CC5D9C00DA02B7 /* material.model.refraction.xml in Resources */,
+				212EECEA19CC5D9C00DA02B7 /* tank_heavy_left_track.mdl_01 in Resources */,
+				212EECEB19CC5D9C00DA02B7 /* yneg.pvr in Resources */,
+				212EECEC19CC5D9C00DA02B7 /* tank_light_body.mdl_01 in Resources */,
+				212EECED19CC5D9C00DA02B7 /* map_04.png in Resources */,
+				212EECEE19CC5D9C00DA02B7 /* landscape.01.diffuse.pvr in Resources */,
+				212EECEF19CC5D9C00DA02B7 /* UIWindowOSX.xib in Resources */,
+				212EECF019CC5D9C00DA02B7 /* gameobject.tank.heavy.body.xml in Resources */,
+				212EECF119CC5D9C00DA02B7 /* gameobject.tank.light.right.track.xml in Resources */,
+				212EECF219CC5D9C00DA02B7 /* material.splatting.diffuse.xml in Resources */,
+				212EECF319CC5D9C00DA02B7 /* shaderScreenSSAO.vert in Resources */,
+				212EECF419CC5D9C00DA02B7 /* tank_track.pvr in Resources */,
+				212EECF519CC5D9C00DA02B7 /* xpos.pvr in Resources */,
+				212EECF619CC5D9C00DA02B7 /* gameobject.tank.heavy.right.track.xml in Resources */,
+				212EECF719CC5D9C00DA02B7 /* shaderScreenSSAO.frag in Resources */,
+				212EECF819CC5D9C00DA02B7 /* map_05.png in Resources */,
+				212EECF919CC5D9C00DA02B7 /* ocean.normal.pvr in Resources */,
+				212EECFA19CC5D9C00DA02B7 /* shaderModel.frag in Resources */,
+				212EECFB19CC5D9C00DA02B7 /* shaderLandscape.frag in Resources */,
+				212EECFC19CC5D9C00DA02B7 /* tank_medium_right_track.mdl_01 in Resources */,
+				212EECFD19CC5D9C00DA02B7 /* material.landscape.refraction.xml in Resources */,
+				212EECFE19CC5D9C00DA02B7 /* gameobject.ocean.xml in Resources */,
+				212EECFF19CC5D9C00DA02B7 /* shaderSkyBox.frag in Resources */,
+				212EED0019CC5D9C00DA02B7 /* ypos.pvr in Resources */,
+				212EED0119CC5D9C00DA02B7 /* material.tank.light.left.track.common.xml in Resources */,
+				212EED0219CC5D9C00DA02B7 /* material.tank.medium.body.common.xml in Resources */,
+				212EED0319CC5D9C00DA02B7 /* tank_light.pvr in Resources */,
+				212EED0419CC5D9C00DA02B7 /* map_01.png in Resources */,
+				212EED0519CC5D9C00DA02B7 /* shaderParticleEmitter.vert in Resources */,
+				212EED0619CC5D9C00DA02B7 /* material.landscape.reflection.xml in Resources */,
+				212EED0719CC5D9C00DA02B7 /* material.output.xml in Resources */,
+				212EED0819CC5D9C00DA02B7 /* material.render.operation.screen.ssao.xml in Resources */,
+				212EED0919CC5D9C00DA02B7 /* shaderParticleEmitter.frag in Resources */,
+				212EED0A19CC5D9C00DA02B7 /* model.diffuse.pvr in Resources */,
+				212EED0B19CC5D9C00DA02B7 /* shaderLandscapeSplatting.frag in Resources */,
+				212EED0C19CC5D9C00DA02B7 /* material.tank.medium.tower.common.xml in Resources */,
+				212EED0D19CC5D9C00DA02B7 /* tank_medium_left_track.mdl_01 in Resources */,
+				212EED0E19CC5D9C00DA02B7 /* material.landscape.edges.reflection.xml in Resources */,
+				212EED0F19CC5D9C00DA02B7 /* xneg.pvr in Resources */,
+				212EED1019CC5D9C00DA02B7 /* particle.emitter.01.pvr in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		21D070BF181D9D460019D264 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -802,7 +1168,6 @@
 				21B08E281922527400C5D5CC /* material.ocean.xml in Resources */,
 				2162043B1949AEFF00D129AD /* render.operation.screen.ssao.xml in Resources */,
 				21B08E4C1922531700C5D5CC /* shaderSkyBox.vert in Resources */,
-				211384ED194300DE0041A18A /* Images.xcassets in Resources */,
 				219A13281998B8F800E674CB /* material.tank.heavy.left.track.common.xml in Resources */,
 				219A130F1998B8E800E674CB /* gameobject.tank.heavy.tower.xml in Resources */,
 				219A13121998B8E800E674CB /* gameobject.tank.light.left.track.xml in Resources */,
@@ -815,6 +1180,7 @@
 				21B08E3F192252E400C5D5CC /* shaderOcean.frag in Resources */,
 				2173346019642B72002B3F90 /* material.model.reflection.xml in Resources */,
 				21B08E301922527400C5D5CC /* render.operation.output.xml in Resources */,
+				212EED1819CC607F00DA02B7 /* ie3D-Demo-ios.plist in Resources */,
 				21B08DD61920CD0900C5D5CC /* zpos.pvr in Resources */,
 				219A12F91998B54100E674CB /* tank_medium_body.mdl_01 in Resources */,
 				21B08E40192252E400C5D5CC /* shaderOcean.vert in Resources */,
@@ -848,6 +1214,7 @@
 				21DC2BB3192CD3D0008DA3C1 /* landscape.00.diffuse.pvr in Resources */,
 				2162093519A1F04C00DECBBC /* map_02.png in Resources */,
 				219A132B1998B8F800E674CB /* material.tank.light.body.common.xml in Resources */,
+				212EED3619CC6A2500DA02B7 /* Images.xcassets in Resources */,
 				219A12F01998B54100E674CB /* model.mdl_sk in Resources */,
 				219A13161998B8E800E674CB /* gameobject.tank.medium.body.xml in Resources */,
 				219A12F81998B54100E674CB /* tank_light_tower.mdl_01 in Resources */,
@@ -910,6 +1277,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		212EEC8019CC5D9C00DA02B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				212EEC8119CC5D9C00DA02B7 /* ICharacterController.cpp in Sources */,
+				212EEC8219CC5D9C00DA02B7 /* CGameObjectNavigator.cpp in Sources */,
+				212EEC8319CC5D9C00DA02B7 /* CDemoGameController.cpp in Sources */,
+				212EEC8419CC5D9C00DA02B7 /* CMapDragController.cpp in Sources */,
+				212EEC8719CC5D9C00DA02B7 /* CDemoGameTransition.cpp in Sources */,
+				212EEC8819CC5D9C00DA02B7 /* AppDelegate-OSX.mm in Sources */,
+				212EEC8919CC5D9C00DA02B7 /* CDemoGameScene.cpp in Sources */,
+				212EEC8A19CC5D9C00DA02B7 /* main.mm in Sources */,
+				212EEC8B19CC5D9C00DA02B7 /* CDESceneToUICommands.cpp in Sources */,
+				212EEC8C19CC5D9C00DA02B7 /* CDEUIToSceneCommands.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		21D070BD181D9D460019D264 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -919,7 +1303,7 @@
 				21D07273181DB1910019D264 /* CDemoGameController.cpp in Sources */,
 				21B08D7C1920CA2000C5D5CC /* CMapDragController.cpp in Sources */,
 				216A50DF199E032500E46DDE /* CDEJoystick.m in Sources */,
-				21D0726C181DB1910019D264 /* AppDelegate.mm in Sources */,
+				21D0726C181DB1910019D264 /* AppDelegate-iOS.mm in Sources */,
 				21D07272181DB1910019D264 /* CDemoGameTransition.cpp in Sources */,
 				21D07271181DB1910019D264 /* CDemoGameScene.cpp in Sources */,
 				21D07277181DB1910019D264 /* main.mm in Sources */,
@@ -932,6 +1316,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		212EED1E19CC648A00DA02B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ie3DCore-osx";
+			targetProxy = 212EED1D19CC648A00DA02B7 /* PBXContainerItemProxy */;
+		};
+		212EED2019CC648D00DA02B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ie3DEngine-osx";
+			targetProxy = 212EED1F19CC648D00DA02B7 /* PBXContainerItemProxy */;
+		};
 		21FCC8F8199FA65100F2CA1E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ie3DCore-ios";
@@ -945,6 +1339,91 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		212EED1219CC5D9C00DA02B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-osx";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMPRESS_PNG_FILES = NO;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__DEBUG__,
+					"$(inherited)",
+					__OSX__,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../ie3D-Core/Sources\"",
+					"\"$(SRCROOT)/../ie3D-Engine/Sources\"",
+					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
+					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",
+					"\"$(SRCROOT)/../ie3D-Core/Libraries/pvrtextool/include\"",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo-osx.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib",
+				);
+				LLVM_VECTORIZE_LOOPS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "ie3D-Demo-osx";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		212EED1319CC5D9C00DA02B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-osx";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMPRESS_PNG_FILES = NO;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = __OSX__;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../ie3D-Core/Sources\"",
+					"\"$(SRCROOT)/../ie3D-Engine/Sources\"",
+					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
+					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",
+					"\"$(SRCROOT)/../ie3D-Core/Libraries/pvrtextool/include\"",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo-osx.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib",
+				);
+				LLVM_VECTORIZE_LOOPS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "ie3D-Demo-osx";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		21D070EB181D9D460019D264 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1024,7 +1503,7 @@
 		21D070EE181D9D460019D264 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-ios";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1046,7 +1525,7 @@
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/pvrtextool/include\"",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_VECTORIZE_LOOPS = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1061,7 +1540,7 @@
 		21D070EF181D9D460019D264 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-ios";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1080,7 +1559,7 @@
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/pvrtextool/include\"",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_VECTORIZE_LOOPS = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1095,6 +1574,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		212EED1119CC5D9C00DA02B7 /* Build configuration list for PBXNativeTarget "ie3D-Demo-osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				212EED1219CC5D9C00DA02B7 /* Debug */,
+				212EED1319CC5D9C00DA02B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		21D070BC181D9D460019D264 /* Build configuration list for PBXProject "ie3D-Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1104,7 +1592,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21D070ED181D9D460019D264 /* Build configuration list for PBXNativeTarget "ie3D-Demo" */ = {
+		21D070ED181D9D460019D264 /* Build configuration list for PBXNativeTarget "ie3D-Demo-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21D070EE181D9D460019D264 /* Debug */,

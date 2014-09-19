@@ -27,18 +27,22 @@ std::shared_ptr<IGameTransition> CDemoGameController::CreateKOTHInGameTransition
 {
 #if defined (__IOS__)
     std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_IOS);
-    std::shared_ptr<IInputContext> inputContext = IInputContext::createInputContext(window, E_PLATFORM_API_IOS);
+    std::shared_ptr<IInputContext> gestureRecognizerContext = IInputContext::createInputContext(window, E_PLATFORM_API_IOS);
 #elif defined(__WIN32__)
-	std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_WIN32);
-    std::shared_ptr<IInputContext> inputContext = IInputContext::createInputContext(window, E_PLATFORM_API_WIN32);
+    std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_WIN32);
+    std::shared_ptr<IInputContext> gestureRecognizerContext = IInputContext::createInputContext(window, E_PLATFORM_API_WIN32);
 #elif defined(__NDK__)
     std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_NDK);
-    std::shared_ptr<IInputContext> inputContext = IInputContext::createInputContext(window, E_PLATFORM_API_NDK);
+    std::shared_ptr<IInputContext> gestureRecognizerContext = IInputContext::createInputContext(window, E_PLATFORM_API_NDK);
+#elif defined(__OSX__)
+    std::shared_ptr<IGraphicsContext> graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_OSX);
+    std::shared_ptr<IInputContext> gestureRecognizerContext = IInputContext::createInputContext(window, E_PLATFORM_API_OSX);
 #endif
+    
     m_configurationAccessor = std::make_shared<CConfigurationAccessor>();
     std::shared_ptr<CDemoGameTransition> mainTransition = std::make_shared<CDemoGameTransition>(filename,
                                                                                                 graphicsContext,
-                                                                                                inputContext,
+                                                                                                gestureRecognizerContext,
                                                                                                 m_resourceAccessor,
                                                                                                 m_configurationAccessor);
     mainTransition->initScene();

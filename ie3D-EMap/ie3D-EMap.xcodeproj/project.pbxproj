@@ -1570,6 +1570,7 @@
 				PRODUCT_NAME = "ie3D-EMap";
 				QT_LIBRARY_SUFFIX = "";
 				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};
@@ -1610,6 +1611,7 @@
 				PRODUCT_NAME = "ie3D-EMap";
 				QT_LIBRARY_SUFFIX = _debug;
 				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};

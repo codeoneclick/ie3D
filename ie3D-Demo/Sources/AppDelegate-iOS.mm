@@ -1,15 +1,15 @@
 //
-//  AppDelegate.m
+//  AppDelegate-iOS.m
 //  indi2dEngine-Core
 //
 //  Created by Sergey Sergeev on 5/3/13.
 //  Copyright (c) 2013 Sergey Sergeev. All rights reserved.
 //
 
-#include "AppDelegate.h"
+#include "AppDelegate-iOS.h"
 #include "CGameViewController.h"
 
-@implementation AppDelegate
+@implementation AppDelegateIOS
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
