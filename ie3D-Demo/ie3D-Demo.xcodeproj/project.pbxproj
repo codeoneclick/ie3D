@@ -149,6 +149,7 @@
 		212EED3619CC6A2500DA02B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211384EC194300DE0041A18A /* Images.xcassets */; };
 		212EED3819CC6B1D00DA02B7 /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212EED2319CC653700DA02B7 /* libEGL.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		212EED3919CC6B1D00DA02B7 /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212EED2419CC653700DA02B7 /* libGLESv2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		212EED4A19CC7A4D00DA02B7 /* CDemoController-OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EED4519CC715000DA02B7 /* CDemoController-OSX.cpp */; };
 		213267961906B51C001C98F7 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
 		2162043A1949AEFF00D129AD /* material.render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */; };
 		2162043B1949AEFF00D129AD /* render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */; };
@@ -375,6 +376,8 @@
 		212EED2419CC653700DA02B7 /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "../ie3D-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<group>"; };
 		212EED2719CC655A00DA02B7 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		212EED2919CC656200DA02B7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		212EED4519CC715000DA02B7 /* CDemoController-OSX.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "CDemoController-OSX.cpp"; path = "Sources/CDemoController-OSX.cpp"; sourceTree = SOURCE_ROOT; };
+		212EED4619CC715000DA02B7 /* CDemoController-OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDemoController-OSX.h"; path = "Sources/CDemoController-OSX.h"; sourceTree = SOURCE_ROOT; };
 		213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
 		216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
 		216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
@@ -579,6 +582,8 @@
 				212EEC7819CC5D5C00DA02B7 /* AppDelegate-OSX.h */,
 				212EEC7919CC5D5C00DA02B7 /* AppDelegate-OSX.mm */,
 				212EEC7419CC5CFD00DA02B7 /* UIWindowOSX.xib */,
+				212EED4619CC715000DA02B7 /* CDemoController-OSX.h */,
+				212EED4519CC715000DA02B7 /* CDemoController-OSX.cpp */,
 			);
 			name = OSX;
 			sourceTree = "<group>";
@@ -1284,6 +1289,7 @@
 				212EEC8119CC5D9C00DA02B7 /* ICharacterController.cpp in Sources */,
 				212EEC8219CC5D9C00DA02B7 /* CGameObjectNavigator.cpp in Sources */,
 				212EEC8319CC5D9C00DA02B7 /* CDemoGameController.cpp in Sources */,
+				212EED4A19CC7A4D00DA02B7 /* CDemoController-OSX.cpp in Sources */,
 				212EEC8419CC5D9C00DA02B7 /* CMapDragController.cpp in Sources */,
 				212EEC8719CC5D9C00DA02B7 /* CDemoGameTransition.cpp in Sources */,
 				212EEC8819CC5D9C00DA02B7 /* AppDelegate-OSX.mm in Sources */,

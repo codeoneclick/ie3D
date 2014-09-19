@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 sergey.sergeev. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#include <Cocoa/Cocoa.h>
 
 @interface AppDelegateOSX : NSObject <NSApplicationDelegate>
 

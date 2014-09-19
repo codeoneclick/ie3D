@@ -6,11 +6,14 @@
 //  Copyright (c) 2014 sergey.sergeev. All rights reserved.
 //
 
-#import "AppDelegate-OSX.h"
+#include "AppDelegate-OSX.h"
+#include "CDemoController-OSX.h"
 
 @interface AppDelegateOSX ()
 
 @property (weak) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSView *openGLView;
+@property (nonatomic, unsafe_unretained) std::shared_ptr<CDemoControllerOSX> demoController;
 
 @end
 
@@ -18,7 +21,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-
+    self.demoController = std::make_shared<CDemoControllerOSX>(self.openGLView);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
