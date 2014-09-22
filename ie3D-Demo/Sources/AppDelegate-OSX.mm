@@ -22,6 +22,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     self.demoController = std::make_shared<CDemoControllerOSX>(self.openGLView);
+    self.demoController->create();
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification

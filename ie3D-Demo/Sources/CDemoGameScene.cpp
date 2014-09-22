@@ -115,7 +115,6 @@ void CDemoGameScene::load(void)
 void CDemoGameScene::update(f32 deltatime)
 {
     assert(m_characterController != nullptr);
-    
     switch (m_characterControllerMoveState)
     {
         case E_CHARACTER_CONTROLLER_MOVE_STATE_NONE:

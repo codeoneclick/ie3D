@@ -107,6 +107,20 @@ void IInputContext::gestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direct
     });
 }
 
+void IInputContext::keyUp(i32 key)
+{
+    std::for_each(m_handlers.begin(), m_handlers.end(), [key](ISharedGestureRecognizerHandler handler) {
+        handler->onKeyUp(key);
+    });
+}
+
+void IInputContext::keyDown(i32 key)
+{
+    std::for_each(m_handlers.begin(), m_handlers.end(), [key](ISharedGestureRecognizerHandler handler) {
+        handler->onKeyDown(key);
+    });
+}
+
 void IInputContext::addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler)
 {
     m_handlers.insert(handler);

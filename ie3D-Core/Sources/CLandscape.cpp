@@ -69,7 +69,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
                         m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
-                        m_heightmapProcessor->getChunk(i, j, [this, i , j, numChunksZ](CSharedMeshRef mesh) {
+                        m_heightmapProcessor->captureChunk(i, j, [this, i , j, numChunksZ](CSharedMeshRef mesh) {
                             
                             m_chunks[i + j * numChunksZ]->setMesh(mesh);
                             
@@ -109,8 +109,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     m_chunks[i + j * numChunksZ]->enableRender(false);
                     m_chunks[i + j * numChunksZ]->enableUpdate(false);
                     m_chunks[i + j * numChunksZ]->removeLoadingDependencies();
-                    m_heightmapProcessor->freeChunk(m_chunks[i + j * numChunksZ]->m_mesh,
-                                                    m_chunks[i + j * numChunksZ]->m_quadTree, i, j);
+                    m_heightmapProcessor->releaseChunk(i, j);
                     m_chunks[i + j * numChunksZ] = nullptr;
                 }
             }
@@ -171,7 +170,7 @@ void CLandscape::prerenderSplattingDiffuseTexture(void)
         ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
         ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
         
-        m_prerenderedSplattingDiffuseTexture = m_heightmapProcessor->PreprocessSplattingDiffuseTexture(m_splattingDiffuseMaterial);
+        m_prerenderedSplattingDiffuseTexture = m_heightmapProcessor->createSplattingDiffuseTexture(m_splattingDiffuseMaterial);
         m_isSplattingDiffuseTexturePrerendered = true;
         for(ui32 i = 0; i < numChunksX; ++i)
         {
@@ -193,7 +192,7 @@ void CLandscape::prerenderSplattingNormalTexture(void)
         ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
         ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
         
-        m_prerenderedSplattingNormalTexture = m_heightmapProcessor->PreprocessSplattingNormalTexture(m_splattingNormalMaterial);
+        m_prerenderedSplattingNormalTexture = m_heightmapProcessor->createSplattingNormalTexture(m_splattingNormalMaterial);
         m_isSplattingNormalTexturePrerendered = true;
         for(ui32 i = 0; i < numChunksX; ++i)
         {
@@ -399,8 +398,8 @@ f32 CLandscape::getHeight(const glm::vec3& position) const
     return m_heightmapProcessor->getHeight(position);
 }
 
-glm::vec2 CLandscape::getAngleOnHeightmapSuface(const glm::vec3& position) const
+glm::vec2 CLandscape::getAngleOnHeightmapSurface(const glm::vec3& position) const
 {
     assert(m_heightmapProcessor != nullptr);
-    return m_heightmapProcessor->getAngleOnHeightmapSuface(position);
+    return m_heightmapProcessor->getAngleOnHeightmapSurface(position);
 }

@@ -268,7 +268,7 @@ f32 CHeightmapData::getMinHeight(void) const
     return values.first->m_position.y;
 }
 
-f32 CHeightmapDataAccessor::getAngleOnHeightmapSuface(const glm::vec3& point_01,
+f32 CHeightmapDataAccessor::getAngleOnHeightmapSurface(const glm::vec3& point_01,
                                                       const glm::vec3& point_02,
                                                       const glm::vec3& point_03)
 {
@@ -319,7 +319,7 @@ f32 CHeightmapDataAccessor::getHeight(CSharedHeightmapDataRef data, const glm::v
     return height_0 * (1.0f - dx) + height_1 * dx;
 }
 
-glm::vec2 CHeightmapDataAccessor::getAngleOnHeightmapSuface(CSharedHeightmapDataRef data, const glm::vec3& position)
+glm::vec2 CHeightmapDataAccessor::getAngleOnHeightmapSurface(CSharedHeightmapDataRef data, const glm::vec3& position)
 {
     f32 offset = 0.25;
     glm::vec3 point_01 = position;
@@ -329,91 +329,10 @@ glm::vec2 CHeightmapDataAccessor::getAngleOnHeightmapSuface(CSharedHeightmapData
     height = CHeightmapDataAccessor::getHeight(data, glm::vec3(position.x, 0.0f, position.z + offset));
     glm::vec3 point_04 = glm::vec3(position.x, height, position.z + offset);
     
-    f32 angle_01 = CHeightmapDataAccessor::getAngleOnHeightmapSuface(point_01, point_02, point_03);
-    f32 angle_02 = CHeightmapDataAccessor::getAngleOnHeightmapSuface(point_01, point_02, point_04);
+    f32 angle_01 = CHeightmapDataAccessor::getAngleOnHeightmapSurface(point_01, point_02, point_03);
+    f32 angle_02 = CHeightmapDataAccessor::getAngleOnHeightmapSurface(point_01, point_02, point_04);
     
     return glm::vec2(glm::degrees(acos(angle_02) - M_PI_2), glm::degrees(asin(angle_01)));
-}
-
-CHeightmapProcessingOperation::CHeightmapProcessingOperation(CSharedHeightmapDataRef heightmapData,
-                                                             CSharedVertexBufferRef vertexBuffer,
-                                                             CSharedIndexBufferRef indexBuffer,
-                                                             ui32 indexX,
-                                                             ui32 indexZ) :
-m_heightmapData(heightmapData),
-m_vertexBuffer(vertexBuffer),
-m_indexBuffer(indexBuffer),
-m_isRunning(false),
-m_isCanceled(false),
-m_isBackgroundThreadOperationDone(false),
-m_isMainThreadOperationDone(false),
-m_indexX(indexX),
-m_indexZ(indexZ)
-{
-
-}
-
-CHeightmapProcessingOperation::~CHeightmapProcessingOperation(void)
-{
-    
-}
-
-void CHeightmapProcessingOperation::executeBackgroundThreadOperation(void)
-{
-    assert(m_vertexBuffer != nullptr);
-    assert(m_indexBuffer != nullptr);
-    m_isRunning = true;
-    m_currentExecutedFunction = std::async(std::launch::async, [this](){
-        CHeightmapProcessor::generateTangentSpace(m_heightmapData,
-                                                  m_vertexBuffer,
-                                                  m_indexBuffer);
-        m_isBackgroundThreadOperationDone = true;
-    });
-}
-
-void CHeightmapProcessingOperation::executeMainThreadOperation(void)
-{
-    assert(m_vertexBuffer != nullptr);
-    assert(m_indexBuffer != nullptr);
-    
-    m_vertexBuffer->unlock();
-    m_isMainThreadOperationDone = true;
-}
-
-void CHeightmapProcessingOperation::cancel(void)
-{
-    m_isCanceled = true;
-    m_isRunning = false;
-}
-
-bool CHeightmapProcessingOperation::isRunning(void) const
-{
-    return m_isRunning;
-}
-
-bool CHeightmapProcessingOperation::isCanceled(void) const
-{
-    return m_isCanceled;
-}
-
-bool CHeightmapProcessingOperation::isBackgroundThreadOperationDone(void) const
-{
-    return m_isBackgroundThreadOperationDone;
-}
-
-bool CHeightmapProcessingOperation::isMainThreadOperationDone(void) const
-{
-    return m_isMainThreadOperationDone;
-}
-
-ui32 CHeightmapProcessingOperation::getIndexX(void) const
-{
-    return m_indexX;
-}
-
-ui32 CHeightmapProcessingOperation::getIndexZ(void) const
-{
-    return m_indexZ;
 }
 
 CHeightmapProcessor::CHeightmapProcessor(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration) :
@@ -520,7 +439,7 @@ f32 CHeightmapProcessor::getHeight(const glm::vec3& position) const
     return 0.0;
 }
 
-glm::vec2 CHeightmapProcessor::getAngleOnHeightmapSuface(const glm::vec3& position) const
+glm::vec2 CHeightmapProcessor::getAngleOnHeightmapSurface(const glm::vec3& position) const
 {
     assert(m_heightmapData != nullptr);
     assert(position.x < CHeightmapProcessor::getSizeX());
@@ -532,7 +451,7 @@ glm::vec2 CHeightmapProcessor::getAngleOnHeightmapSuface(const glm::vec3& positi
        position.x >= 0.0 &&
        position.z >= 0.0)
     {
-        return CHeightmapDataAccessor::getAngleOnHeightmapSuface(m_heightmapData, position);
+        return CHeightmapDataAccessor::getAngleOnHeightmapSurface(m_heightmapData, position);
     }
     return glm::vec2(0.0, 0.0);
 }
@@ -835,7 +754,7 @@ std::shared_ptr<CTexture> CHeightmapProcessor::createEdgesMaskTexture(void)
 }
 
 
-CSharedTexture CHeightmapProcessor::PreprocessSplattingDiffuseTexture(CSharedMaterialRef material)
+CSharedTexture CHeightmapProcessor::createSplattingDiffuseTexture(CSharedMaterialRef material)
 {
     assert(m_renderTechniqueAccessor != nullptr);
     assert(m_diffuseTexture == nullptr);
@@ -844,7 +763,7 @@ CSharedTexture CHeightmapProcessor::PreprocessSplattingDiffuseTexture(CSharedMat
     return m_diffuseTexture;
 }
 
-CSharedTexture CHeightmapProcessor::PreprocessSplattingNormalTexture(CSharedMaterialRef material)
+CSharedTexture CHeightmapProcessor::createSplattingNormalTexture(CSharedMaterialRef material)
 {
     assert(m_renderTechniqueAccessor != nullptr);
     assert(m_normalTexture == nullptr);
@@ -986,7 +905,7 @@ void CHeightmapProcessor::commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkO
 #endif
 }
 
-void CHeightmapProcessor::createQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
+void CHeightmapProcessor::generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
 {
     ui32 index = chunkOffsetX + chunkOffsetZ * m_numChunksX;
     CSharedMesh mesh = std::get<0>(m_chunksUsed[index]);
@@ -1010,9 +929,9 @@ void CHeightmapProcessor::createQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
 #endif
 }
 
-void CHeightmapProcessor::getChunk(ui32 i, ui32 j,
-                                   const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
-                                   const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback)
+void CHeightmapProcessor::captureChunk(ui32 i, ui32 j,
+                                       const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
+                                       const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback)
 {
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
@@ -1088,7 +1007,7 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j,
     
     CSharedThreadOperation createQuadTreeOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     createQuadTreeOperation->setExecutionBlock([this, i, j](void) {
-        CHeightmapProcessor::createQuadTree(i, j);
+        CHeightmapProcessor::generateQuadTree(i, j);
     });
     
     CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
@@ -1119,12 +1038,16 @@ void CHeightmapProcessor::getChunk(ui32 i, ui32 j,
     completionOperation->addToExecutionQueue();
 }
 
-void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef quadTree, ui32 i, ui32 j)
+void CHeightmapProcessor::releaseChunk(ui32 i, ui32 j)
 {
     ui32 index = i + j * m_numChunksX;
     m_executedOperations[index]->cancel();
     m_canceledOperations[index] = m_executedOperations[index];
     m_executedOperations[index] = nullptr;
+}
+
+void CHeightmapProcessor::update(void)
+{
     for(ui32 index = 0; index < m_canceledOperations.size(); ++index)
     {
         if(m_canceledOperations.at(index) != nullptr &&
@@ -1139,11 +1062,6 @@ void CHeightmapProcessor::freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef qua
             std::get<3>(m_chunksUsed[index]) = nullptr;
         }
     }
-}
-
-void CHeightmapProcessor::update(void)
-{
-
 }
 
 void CHeightmapProcessor::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,

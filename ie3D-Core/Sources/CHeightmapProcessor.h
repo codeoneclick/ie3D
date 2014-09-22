@@ -12,46 +12,6 @@
 #include "HCommon.h"
 #include "HDeclaration.h"
 
-class CHeightmapProcessingOperation
-{
-private:
-    
-protected:
-    
-    CSharedHeightmapData m_heightmapData;
-    
-    CSharedVertexBuffer m_vertexBuffer;
-    CSharedIndexBuffer m_indexBuffer;
-    
-    std::future<void> m_currentExecutedFunction;
-    ui32 m_indexX;
-    ui32 m_indexZ;
-    bool m_isCanceled;
-    bool m_isRunning;
-    bool m_isBackgroundThreadOperationDone;
-    bool m_isMainThreadOperationDone;
-    
-public:
-    
-    CHeightmapProcessingOperation(CSharedHeightmapDataRef heightmapData,
-                                  CSharedVertexBufferRef vertexBuffer,
-                                  CSharedIndexBufferRef indexBuffer,
-                                  ui32 indexX,
-                                  ui32 indexZ);
-    ~CHeightmapProcessingOperation(void);
-    
-    void executeBackgroundThreadOperation(void);
-    void executeMainThreadOperation(void);
-    void cancel(void);
-    bool isRunning(void) const;
-    bool isCanceled(void) const;
-    bool isBackgroundThreadOperationDone(void) const;
-    bool isMainThreadOperationDone(void) const;
-    
-    ui32 getIndexX(void) const;
-    ui32 getIndexZ(void) const;
-};
-
 class CHeightmapData
 {
 private:
@@ -124,7 +84,7 @@ class CHeightmapDataAccessor
 {
 private:
     
-    static f32 getAngleOnHeightmapSuface(const glm::vec3& point_01,
+    static f32 getAngleOnHeightmapSurface(const glm::vec3& point_01,
                                          const glm::vec3& point_02,
                                          const glm::vec3& point_03);
     
@@ -136,7 +96,7 @@ public:
     ~CHeightmapDataAccessor(void) = default;
     
     static f32 getHeight(CSharedHeightmapDataRef data, const glm::vec3& position);
-    static glm::vec2 getAngleOnHeightmapSuface(CSharedHeightmapDataRef data, const glm::vec3& position);
+    static glm::vec2 getAngleOnHeightmapSurface(CSharedHeightmapDataRef data, const glm::vec3& position);
 };
 
 class CHeightmapProcessor
@@ -185,7 +145,7 @@ protected:
     void writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ);
     void commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ);
                              
-    void createQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ);
+    void generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ);
     
     void updateSplattingTexture(CSharedTextureRef texture, bool isCreation = true,
                                 ui32 offsetX = 0, ui32 offsetY = 0,
@@ -219,8 +179,8 @@ public:
     CSharedTexture createHeightmapTexture(void);
     CSharedTexture createSplattingTexture(void);
     CSharedTexture createEdgesMaskTexture(void);
-    std::shared_ptr<CTexture> PreprocessSplattingDiffuseTexture(const std::shared_ptr<CMaterial>& _material);
-    std::shared_ptr<CTexture> PreprocessSplattingNormalTexture(const std::shared_ptr<CMaterial>& _material);
+    CSharedTexture createSplattingDiffuseTexture(CSharedMaterialRef material);
+    CSharedTexture createSplattingNormalTexture(CSharedMaterialRef material);
     
     static void generateTangentSpace(CSharedHeightmapDataRef heightmapData,
                                      CSharedVertexBufferRef vertexBuffer,
@@ -231,10 +191,10 @@ public:
     
     void update(void);
     
-    void getChunk(ui32 i, ui32 j,
-                  const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
-                  const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback);
-    void freeChunk(CSharedMeshRef chunk, CSharedQuadTreeRef quadTree, ui32 i, ui32 j);
+    void captureChunk(ui32 i, ui32 j,
+                      const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
+                      const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback);
+    void releaseChunk(ui32 i, ui32 j);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
     
@@ -245,7 +205,7 @@ public:
     ui32 getChunkSizeZ(ui32 i, ui32 j) const;
     
     f32 getHeight(const glm::vec3& position) const;
-    glm::vec2 getAngleOnHeightmapSuface(const glm::vec3& position) const;
+    glm::vec2 getAngleOnHeightmapSurface(const glm::vec3& position) const;
     void updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights);
     void updateHeightmap(ui32 offsetX, ui32 offsetZ,
                          ui32 subWidth, ui32 subHeight);
