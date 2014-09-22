@@ -158,6 +158,22 @@
 		212EED3819CC6B1D00DA02B7 /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212EED2319CC653700DA02B7 /* libEGL.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		212EED3919CC6B1D00DA02B7 /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212EED2419CC653700DA02B7 /* libGLESv2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		212EED4A19CC7A4D00DA02B7 /* CDemoController-OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EED4519CC715000DA02B7 /* CDemoController-OSX.cpp */; };
+		212EED7919D068D400DA02B7 /* material.tank.medium.body.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7519D068D400DA02B7 /* material.tank.medium.body.reflection.xml */; };
+		212EED7A19D068D400DA02B7 /* material.tank.medium.body.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7519D068D400DA02B7 /* material.tank.medium.body.reflection.xml */; };
+		212EED7B19D068D400DA02B7 /* material.tank.medium.left.track.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7619D068D400DA02B7 /* material.tank.medium.left.track.reflection.xml */; };
+		212EED7C19D068D400DA02B7 /* material.tank.medium.left.track.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7619D068D400DA02B7 /* material.tank.medium.left.track.reflection.xml */; };
+		212EED7D19D068D400DA02B7 /* material.tank.medium.right.track.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7719D068D400DA02B7 /* material.tank.medium.right.track.reflection.xml */; };
+		212EED7E19D068D400DA02B7 /* material.tank.medium.right.track.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7719D068D400DA02B7 /* material.tank.medium.right.track.reflection.xml */; };
+		212EED7F19D068D400DA02B7 /* material.tank.medium.tower.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7819D068D400DA02B7 /* material.tank.medium.tower.reflection.xml */; };
+		212EED8019D068D400DA02B7 /* material.tank.medium.tower.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7819D068D400DA02B7 /* material.tank.medium.tower.reflection.xml */; };
+		212EED8519D0698900DA02B7 /* material.tank.heavy.body.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8119D0698900DA02B7 /* material.tank.heavy.body.reflection.xml */; };
+		212EED8619D0698900DA02B7 /* material.tank.heavy.body.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8119D0698900DA02B7 /* material.tank.heavy.body.reflection.xml */; };
+		212EED8719D0698900DA02B7 /* material.tank.heavy.left.track.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8219D0698900DA02B7 /* material.tank.heavy.left.track.reflection.xml */; };
+		212EED8819D0698900DA02B7 /* material.tank.heavy.left.track.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8219D0698900DA02B7 /* material.tank.heavy.left.track.reflection.xml */; };
+		212EED8919D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8319D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml */; };
+		212EED8A19D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8319D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml */; };
+		212EED8B19D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8419D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml */; };
+		212EED8C19D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8419D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml */; };
 		213267961906B51C001C98F7 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
 		2162043A1949AEFF00D129AD /* material.render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */; };
 		2162043B1949AEFF00D129AD /* render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */; };
@@ -390,6 +406,14 @@
 		212EED2919CC656200DA02B7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		212EED4519CC715000DA02B7 /* CDemoController-OSX.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "CDemoController-OSX.cpp"; path = "Sources/CDemoController-OSX.cpp"; sourceTree = SOURCE_ROOT; };
 		212EED4619CC715000DA02B7 /* CDemoController-OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDemoController-OSX.h"; path = "Sources/CDemoController-OSX.h"; sourceTree = SOURCE_ROOT; };
+		212EED7519D068D400DA02B7 /* material.tank.medium.body.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.medium.body.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.medium.body.reflection.xml"; sourceTree = SOURCE_ROOT; };
+		212EED7619D068D400DA02B7 /* material.tank.medium.left.track.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.medium.left.track.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.medium.left.track.reflection.xml"; sourceTree = SOURCE_ROOT; };
+		212EED7719D068D400DA02B7 /* material.tank.medium.right.track.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.medium.right.track.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.medium.right.track.reflection.xml"; sourceTree = SOURCE_ROOT; };
+		212EED7819D068D400DA02B7 /* material.tank.medium.tower.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.medium.tower.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.medium.tower.reflection.xml"; sourceTree = SOURCE_ROOT; };
+		212EED8119D0698900DA02B7 /* material.tank.heavy.body.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.heavy.body.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.heavy.body.reflection.xml"; sourceTree = SOURCE_ROOT; };
+		212EED8219D0698900DA02B7 /* material.tank.heavy.left.track.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.heavy.left.track.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.heavy.left.track.reflection.xml"; sourceTree = SOURCE_ROOT; };
+		212EED8319D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.heavy.right.track.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.heavy.right.track.reflection.xml"; sourceTree = SOURCE_ROOT; };
+		212EED8419D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.heavy.tower.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.heavy.tower.reflection.xml"; sourceTree = SOURCE_ROOT; };
 		213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
 		216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
 		216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
@@ -693,6 +717,10 @@
 				219A131C1998B8F800E674CB /* material.tank.heavy.left.track.common.xml */,
 				219A131D1998B8F800E674CB /* material.tank.heavy.right.track.common.xml */,
 				219A131E1998B8F800E674CB /* material.tank.heavy.tower.common.xml */,
+				212EED8119D0698900DA02B7 /* material.tank.heavy.body.reflection.xml */,
+				212EED8219D0698900DA02B7 /* material.tank.heavy.left.track.reflection.xml */,
+				212EED8319D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml */,
+				212EED8419D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml */,
 				219A131F1998B8F800E674CB /* material.tank.light.body.common.xml */,
 				219A13201998B8F800E674CB /* material.tank.light.left.track.common.xml */,
 				219A13211998B8F800E674CB /* material.tank.light.right.track.common.xml */,
@@ -705,6 +733,10 @@
 				219A13241998B8F800E674CB /* material.tank.medium.left.track.common.xml */,
 				219A13251998B8F800E674CB /* material.tank.medium.right.track.common.xml */,
 				219A13261998B8F800E674CB /* material.tank.medium.tower.common.xml */,
+				212EED7519D068D400DA02B7 /* material.tank.medium.body.reflection.xml */,
+				212EED7619D068D400DA02B7 /* material.tank.medium.left.track.reflection.xml */,
+				212EED7719D068D400DA02B7 /* material.tank.medium.right.track.reflection.xml */,
+				212EED7819D068D400DA02B7 /* material.tank.medium.tower.reflection.xml */,
 				216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */,
 				21B08E0F1922527400C5D5CC /* material.landscape.base.xml */,
 				21B08E101922527400C5D5CC /* material.landscape.edges.base.xml */,
@@ -1053,6 +1085,7 @@
 				212EEC9F19CC5D9C00DA02B7 /* map_03.png in Resources */,
 				212EECA019CC5D9C00DA02B7 /* gameobject.skybox.xml in Resources */,
 				212EECA119CC5D9C00DA02B7 /* render.operation.world.base.xml in Resources */,
+				212EED8019D068D400DA02B7 /* material.tank.medium.tower.reflection.xml in Resources */,
 				212EECA219CC5D9C00DA02B7 /* render.operation.world.refraction.xml in Resources */,
 				212EECA319CC5D9C00DA02B7 /* gameobject.model.xml in Resources */,
 				212EECA419CC5D9C00DA02B7 /* tank_light_left_track.mdl_01 in Resources */,
@@ -1075,6 +1108,7 @@
 				212EECB519CC5D9C00DA02B7 /* material.model.reflection.xml in Resources */,
 				212EECB619CC5D9C00DA02B7 /* render.operation.output.xml in Resources */,
 				212EECB719CC5D9C00DA02B7 /* zpos.pvr in Resources */,
+				212EED8819D0698900DA02B7 /* material.tank.heavy.left.track.reflection.xml in Resources */,
 				212EECB819CC5D9C00DA02B7 /* tank_medium_body.mdl_01 in Resources */,
 				212EECB919CC5D9C00DA02B7 /* shaderOcean.vert in Resources */,
 				2127321319D00EBA000AD16B /* material.tank.light.left.track.reflection.xml in Resources */,
@@ -1093,6 +1127,8 @@
 				212EECC619CC5D9C00DA02B7 /* shaderGameObjectNormal.frag in Resources */,
 				212EECC719CC5D9C00DA02B7 /* tank_heavy_tower.mdl_01 in Resources */,
 				212EECC819CC5D9C00DA02B7 /* material.skybox.base.xml in Resources */,
+				212EED8619D0698900DA02B7 /* material.tank.heavy.body.reflection.xml in Resources */,
+				212EED8A19D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml in Resources */,
 				212EECC919CC5D9C00DA02B7 /* shaderLandscapeEdges.frag in Resources */,
 				212EECCA19CC5D9C00DA02B7 /* material.tank.heavy.body.common.xml in Resources */,
 				212EECCB19CC5D9C00DA02B7 /* model.mdl_anim in Resources */,
@@ -1100,6 +1136,7 @@
 				212EECCD19CC5D9C00DA02B7 /* material.particle.emitter.xml in Resources */,
 				212EECCE19CC5D9C00DA02B7 /* material.skybox.refraction.xml in Resources */,
 				212EECCF19CC5D9C00DA02B7 /* material.skybox.reflection.xml in Resources */,
+				212EED7E19D068D400DA02B7 /* material.tank.medium.right.track.reflection.xml in Resources */,
 				212EECD019CC5D9C00DA02B7 /* material.landscape.normal.xml in Resources */,
 				212EECD119CC5D9C00DA02B7 /* material.landscape.base.xml in Resources */,
 				212EECD219CC5D9C00DA02B7 /* landscape.02.diffuse.pvr in Resources */,
@@ -1113,6 +1150,7 @@
 				212EECD919CC5D9C00DA02B7 /* gameobject.tank.medium.body.xml in Resources */,
 				212EECDA19CC5D9C00DA02B7 /* tank_light_tower.mdl_01 in Resources */,
 				212EECDB19CC5D9C00DA02B7 /* tank_medium_tower.mdl_01 in Resources */,
+				212EED8C19D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml in Resources */,
 				212EED1A19CC608400DA02B7 /* ie3D-Demo-osx.plist in Resources */,
 				212EECDC19CC5D9C00DA02B7 /* gameobject.tank.heavy.xml in Resources */,
 				212EECDD19CC5D9C00DA02B7 /* model.mdl_mesh in Resources */,
@@ -1154,6 +1192,7 @@
 				212EED0219CC5D9C00DA02B7 /* material.tank.medium.body.common.xml in Resources */,
 				2127321119D00EBA000AD16B /* material.tank.light.body.reflection.xml in Resources */,
 				212EED0319CC5D9C00DA02B7 /* tank_light.pvr in Resources */,
+				212EED7A19D068D400DA02B7 /* material.tank.medium.body.reflection.xml in Resources */,
 				212EED0419CC5D9C00DA02B7 /* map_01.png in Resources */,
 				212EED0519CC5D9C00DA02B7 /* shaderParticleEmitter.vert in Resources */,
 				212EED0619CC5D9C00DA02B7 /* material.landscape.reflection.xml in Resources */,
@@ -1164,6 +1203,7 @@
 				212EED0B19CC5D9C00DA02B7 /* shaderLandscapeSplatting.frag in Resources */,
 				212EED0C19CC5D9C00DA02B7 /* material.tank.medium.tower.common.xml in Resources */,
 				212EED0D19CC5D9C00DA02B7 /* tank_medium_left_track.mdl_01 in Resources */,
+				212EED7C19D068D400DA02B7 /* material.tank.medium.left.track.reflection.xml in Resources */,
 				212EED0E19CC5D9C00DA02B7 /* material.landscape.edges.reflection.xml in Resources */,
 				212EED0F19CC5D9C00DA02B7 /* xneg.pvr in Resources */,
 				212EED1019CC5D9C00DA02B7 /* particle.emitter.01.pvr in Resources */,
@@ -1186,6 +1226,7 @@
 				2162093619A1F04C00DECBBC /* map_03.png in Resources */,
 				21B08E48192252FF00C5D5CC /* gameobject.skybox.xml in Resources */,
 				21B08E311922527400C5D5CC /* render.operation.world.base.xml in Resources */,
+				212EED7F19D068D400DA02B7 /* material.tank.medium.tower.reflection.xml in Resources */,
 				21B08E331922527400C5D5CC /* render.operation.world.refraction.xml in Resources */,
 				2173345E19642B72002B3F90 /* gameobject.model.xml in Resources */,
 				219A12F61998B54100E674CB /* tank_light_left_track.mdl_01 in Resources */,
@@ -1208,6 +1249,7 @@
 				2173346019642B72002B3F90 /* material.model.reflection.xml in Resources */,
 				21B08E301922527400C5D5CC /* render.operation.output.xml in Resources */,
 				212EED1819CC607F00DA02B7 /* ie3D-Demo-ios.plist in Resources */,
+				212EED8719D0698900DA02B7 /* material.tank.heavy.left.track.reflection.xml in Resources */,
 				21B08DD61920CD0900C5D5CC /* zpos.pvr in Resources */,
 				219A12F91998B54100E674CB /* tank_medium_body.mdl_01 in Resources */,
 				2127321219D00EBA000AD16B /* material.tank.light.left.track.reflection.xml in Resources */,
@@ -1226,6 +1268,8 @@
 				219A130D1998B8E800E674CB /* gameobject.tank.heavy.left.track.xml in Resources */,
 				21620460194AFC3900D129AD /* shaderGameObjectNormal.frag in Resources */,
 				219A12F41998B54100E674CB /* tank_heavy_tower.mdl_01 in Resources */,
+				212EED8519D0698900DA02B7 /* material.tank.heavy.body.reflection.xml in Resources */,
+				212EED8919D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml in Resources */,
 				21B08E2B1922527400C5D5CC /* material.skybox.base.xml in Resources */,
 				21DC2B391924D282008DA3C1 /* shaderLandscapeEdges.frag in Resources */,
 				219A13271998B8F800E674CB /* material.tank.heavy.body.common.xml in Resources */,
@@ -1233,6 +1277,7 @@
 				219A12F71998B54100E674CB /* tank_light_right_track.mdl_01 in Resources */,
 				21B08E2A1922527400C5D5CC /* material.particle.emitter.xml in Resources */,
 				21B08E2D1922527400C5D5CC /* material.skybox.refraction.xml in Resources */,
+				212EED7D19D068D400DA02B7 /* material.tank.medium.right.track.reflection.xml in Resources */,
 				21B08E2C1922527400C5D5CC /* material.skybox.reflection.xml in Resources */,
 				2162045C194AFC0900D129AD /* material.landscape.normal.xml in Resources */,
 				21B08E221922527400C5D5CC /* material.landscape.base.xml in Resources */,
@@ -1246,6 +1291,7 @@
 				219A12F01998B54100E674CB /* model.mdl_sk in Resources */,
 				219A13161998B8E800E674CB /* gameobject.tank.medium.body.xml in Resources */,
 				219A12F81998B54100E674CB /* tank_light_tower.mdl_01 in Resources */,
+				212EED8B19D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml in Resources */,
 				219A12FC1998B54100E674CB /* tank_medium_tower.mdl_01 in Resources */,
 				219A13101998B8E800E674CB /* gameobject.tank.heavy.xml in Resources */,
 				219A12EF1998B54100E674CB /* model.mdl_mesh in Resources */,
@@ -1287,6 +1333,7 @@
 				219A132F1998B8F800E674CB /* material.tank.medium.body.common.xml in Resources */,
 				2127321019D00EBA000AD16B /* material.tank.light.body.reflection.xml in Resources */,
 				219A13381998BBA000E674CB /* tank_light.pvr in Resources */,
+				212EED7919D068D400DA02B7 /* material.tank.medium.body.reflection.xml in Resources */,
 				2162093419A1F04C00DECBBC /* map_01.png in Resources */,
 				21B08DBA1920CCF600C5D5CC /* shaderParticleEmitter.vert in Resources */,
 				21B08E261922527400C5D5CC /* material.landscape.reflection.xml in Resources */,
@@ -1297,6 +1344,7 @@
 				21B08E3D192252E400C5D5CC /* shaderLandscapeSplatting.frag in Resources */,
 				219A13321998B8F800E674CB /* material.tank.medium.tower.common.xml in Resources */,
 				219A12FA1998B54100E674CB /* tank_medium_left_track.mdl_01 in Resources */,
+				212EED7B19D068D400DA02B7 /* material.tank.medium.left.track.reflection.xml in Resources */,
 				21B08E241922527400C5D5CC /* material.landscape.edges.reflection.xml in Resources */,
 				21B08DD11920CD0900C5D5CC /* xneg.pvr in Resources */,
 				21B08DCF1920CD0900C5D5CC /* particle.emitter.01.pvr in Resources */,

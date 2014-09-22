@@ -84,15 +84,15 @@ void CDemoGameScene::load(void)
     m_root->addCustomGameObject(m_lightTank);
     m_lightTank->setScale(glm::vec3(1.0, 1.0, 1.0));
     
-    /*m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
+    m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
     m_root->addCustomGameObject(m_mediumTank);
-    m_mediumTank->setScale(glm::vec3(6.0, 6.0, 6.0));
-    m_mediumTank->setPosition(glm::vec3(0.0, 0.0, 32.0));
+    m_mediumTank->setScale(glm::vec3(2.0, 2.0, 2.0));
+    m_mediumTank->setPosition(glm::vec3(16.0, 0.0, 16.0));
     
     m_heavyTank = transition->createComplexModel("gameobject.tank.heavy.xml");
     m_root->addCustomGameObject(m_heavyTank);
-    m_heavyTank->setScale(glm::vec3(7.0, 7.0, 7.0));
-    m_heavyTank->setPosition(glm::vec3(0.0, 0.0, 64.0));*/
+    m_heavyTank->setScale(glm::vec3(2.0, 2.0, 2.0));
+    m_heavyTank->setPosition(glm::vec3(24.0, 0.0, 32.0));
     
     m_root->addCollisionHandler(shared_from_this());
     
