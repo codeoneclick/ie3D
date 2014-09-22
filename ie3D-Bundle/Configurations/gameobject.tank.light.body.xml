@@ -2,5 +2,6 @@
     <materials>
 		<material filename="material.tank.light.body.common.xml"/>
         <material filename="material.tank.light.body.reflection.xml"/>
+        <material filename="material.tank.light.body.refraction.xml"/>
 	</materials>
 </model>

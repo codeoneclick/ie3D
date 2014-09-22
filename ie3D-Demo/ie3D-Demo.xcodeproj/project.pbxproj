@@ -174,6 +174,14 @@
 		212EED8A19D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8319D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml */; };
 		212EED8B19D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8419D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml */; };
 		212EED8C19D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8419D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml */; };
+		212EED9119D0707E00DA02B7 /* material.tank.light.body.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8D19D0707E00DA02B7 /* material.tank.light.body.refraction.xml */; };
+		212EED9219D0707E00DA02B7 /* material.tank.light.body.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8D19D0707E00DA02B7 /* material.tank.light.body.refraction.xml */; };
+		212EED9319D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8E19D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml */; };
+		212EED9419D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8E19D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml */; };
+		212EED9519D0707E00DA02B7 /* material.tank.light.right.track.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8F19D0707E00DA02B7 /* material.tank.light.right.track.refraction.xml */; };
+		212EED9619D0707E00DA02B7 /* material.tank.light.right.track.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED8F19D0707E00DA02B7 /* material.tank.light.right.track.refraction.xml */; };
+		212EED9719D0707E00DA02B7 /* material.tank.light.tower.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED9019D0707E00DA02B7 /* material.tank.light.tower.refraction.xml */; };
+		212EED9819D0707E00DA02B7 /* material.tank.light.tower.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED9019D0707E00DA02B7 /* material.tank.light.tower.refraction.xml */; };
 		213267961906B51C001C98F7 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
 		2162043A1949AEFF00D129AD /* material.render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */; };
 		2162043B1949AEFF00D129AD /* render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */; };
@@ -414,6 +422,10 @@
 		212EED8219D0698900DA02B7 /* material.tank.heavy.left.track.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.heavy.left.track.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.heavy.left.track.reflection.xml"; sourceTree = SOURCE_ROOT; };
 		212EED8319D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.heavy.right.track.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.heavy.right.track.reflection.xml"; sourceTree = SOURCE_ROOT; };
 		212EED8419D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.heavy.tower.reflection.xml; path = "../ie3D-Bundle/Configurations/material.tank.heavy.tower.reflection.xml"; sourceTree = SOURCE_ROOT; };
+		212EED8D19D0707E00DA02B7 /* material.tank.light.body.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.body.refraction.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.body.refraction.xml"; sourceTree = SOURCE_ROOT; };
+		212EED8E19D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.left.track.refraction.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.left.track.refraction.xml"; sourceTree = SOURCE_ROOT; };
+		212EED8F19D0707E00DA02B7 /* material.tank.light.right.track.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.right.track.refraction.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.right.track.refraction.xml"; sourceTree = SOURCE_ROOT; };
+		212EED9019D0707E00DA02B7 /* material.tank.light.tower.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.tower.refraction.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.tower.refraction.xml"; sourceTree = SOURCE_ROOT; };
 		213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
 		216204381949AEFF00D129AD /* material.render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
 		216204391949AEFF00D129AD /* render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
@@ -729,6 +741,10 @@
 				2127320D19D00EBA000AD16B /* material.tank.light.left.track.reflection.xml */,
 				2127320E19D00EBA000AD16B /* material.tank.light.right.track.reflection.xml */,
 				2127320F19D00EBA000AD16B /* material.tank.light.tower.reflection.xml */,
+				212EED8D19D0707E00DA02B7 /* material.tank.light.body.refraction.xml */,
+				212EED8E19D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml */,
+				212EED8F19D0707E00DA02B7 /* material.tank.light.right.track.refraction.xml */,
+				212EED9019D0707E00DA02B7 /* material.tank.light.tower.refraction.xml */,
 				219A13231998B8F800E674CB /* material.tank.medium.body.common.xml */,
 				219A13241998B8F800E674CB /* material.tank.medium.left.track.common.xml */,
 				219A13251998B8F800E674CB /* material.tank.medium.right.track.common.xml */,
@@ -1073,6 +1089,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				212EED9219D0707E00DA02B7 /* material.tank.light.body.refraction.xml in Resources */,
 				212EEC9719CC5D9C00DA02B7 /* gameobject.tank.medium.tower.xml in Resources */,
 				212EEC9819CC5D9C00DA02B7 /* gameobject.landscape.xml in Resources */,
 				212EEC9919CC5D9C00DA02B7 /* shaderModel.vert in Resources */,
@@ -1122,10 +1139,12 @@
 				212EECC119CC5D9C00DA02B7 /* transition.main.xml in Resources */,
 				212EECC219CC5D9C00DA02B7 /* material.tank.medium.right.track.common.xml in Resources */,
 				212EECC319CC5D9C00DA02B7 /* material.landscape.edges.refraction.xml in Resources */,
+				212EED9819D0707E00DA02B7 /* material.tank.light.tower.refraction.xml in Resources */,
 				212EECC419CC5D9C00DA02B7 /* render.operation.world.reflection.xml in Resources */,
 				212EECC519CC5D9C00DA02B7 /* gameobject.tank.heavy.left.track.xml in Resources */,
 				212EECC619CC5D9C00DA02B7 /* shaderGameObjectNormal.frag in Resources */,
 				212EECC719CC5D9C00DA02B7 /* tank_heavy_tower.mdl_01 in Resources */,
+				212EED9619D0707E00DA02B7 /* material.tank.light.right.track.refraction.xml in Resources */,
 				212EECC819CC5D9C00DA02B7 /* material.skybox.base.xml in Resources */,
 				212EED8619D0698900DA02B7 /* material.tank.heavy.body.reflection.xml in Resources */,
 				212EED8A19D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml in Resources */,
@@ -1196,6 +1215,7 @@
 				212EED0419CC5D9C00DA02B7 /* map_01.png in Resources */,
 				212EED0519CC5D9C00DA02B7 /* shaderParticleEmitter.vert in Resources */,
 				212EED0619CC5D9C00DA02B7 /* material.landscape.reflection.xml in Resources */,
+				212EED9419D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml in Resources */,
 				212EED0719CC5D9C00DA02B7 /* material.output.xml in Resources */,
 				212EED0819CC5D9C00DA02B7 /* material.render.operation.screen.ssao.xml in Resources */,
 				212EED0919CC5D9C00DA02B7 /* shaderParticleEmitter.frag in Resources */,
@@ -1214,6 +1234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				212EED9119D0707E00DA02B7 /* material.tank.light.body.refraction.xml in Resources */,
 				219A13191998B8E800E674CB /* gameobject.tank.medium.tower.xml in Resources */,
 				21B08E561923956200C5D5CC /* gameobject.landscape.xml in Resources */,
 				2173345919642B47002B3F90 /* shaderModel.vert in Resources */,
@@ -1263,10 +1284,12 @@
 				219A13141998B8E800E674CB /* gameobject.tank.light.tower.xml in Resources */,
 				21B08E341922527400C5D5CC /* transition.main.xml in Resources */,
 				219A13311998B8F800E674CB /* material.tank.medium.right.track.common.xml in Resources */,
+				212EED9719D0707E00DA02B7 /* material.tank.light.tower.refraction.xml in Resources */,
 				21B08E251922527400C5D5CC /* material.landscape.edges.refraction.xml in Resources */,
 				21B08E321922527400C5D5CC /* render.operation.world.reflection.xml in Resources */,
 				219A130D1998B8E800E674CB /* gameobject.tank.heavy.left.track.xml in Resources */,
 				21620460194AFC3900D129AD /* shaderGameObjectNormal.frag in Resources */,
+				212EED9519D0707E00DA02B7 /* material.tank.light.right.track.refraction.xml in Resources */,
 				219A12F41998B54100E674CB /* tank_heavy_tower.mdl_01 in Resources */,
 				212EED8519D0698900DA02B7 /* material.tank.heavy.body.reflection.xml in Resources */,
 				212EED8919D0698900DA02B7 /* material.tank.heavy.right.track.reflection.xml in Resources */,
@@ -1337,6 +1360,7 @@
 				2162093419A1F04C00DECBBC /* map_01.png in Resources */,
 				21B08DBA1920CCF600C5D5CC /* shaderParticleEmitter.vert in Resources */,
 				21B08E261922527400C5D5CC /* material.landscape.reflection.xml in Resources */,
+				212EED9319D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml in Resources */,
 				21B08E291922527400C5D5CC /* material.output.xml in Resources */,
 				2162043A1949AEFF00D129AD /* material.render.operation.screen.ssao.xml in Resources */,
 				21B08DB91920CCF600C5D5CC /* shaderParticleEmitter.frag in Resources */,
