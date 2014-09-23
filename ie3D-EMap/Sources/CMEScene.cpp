@@ -188,6 +188,16 @@ void CMEScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction
     }
 }
 
+void CMEScene::onKeyUp(i32 key)
+{
+    
+}
+
+void CMEScene::onKeyDown(i32 key)
+{
+    
+}
+
 CSharedMEUIToSceneCommands CMEScene::getUIToSceneCommands(void) const
 {
     assert(m_uiToSceneCommands != nullptr);

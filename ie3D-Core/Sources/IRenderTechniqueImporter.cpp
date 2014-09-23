@@ -111,6 +111,7 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     
     CSharedMaterial material = std::make_shared<CMaterial>();
     CSharedShader shader = CShader::constructCustomShader("texture2D", ShaderTexure2D_vert, ShaderTexure2D_frag);
+    assert(shader != nullptr);
     CSharedQuad quad = std::make_shared<CQuad>();
     material->setShader(shader);
     material->setTexture(texture, E_SHADER_SAMPLER_01);
@@ -120,11 +121,13 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     renderTarget->clear();
     
     material->bind();
-    quad->Bind(material->getShader()->getAttributesRef());
+    assert(material->getShader()->getAttributesRef()[E_SHADER_ATTRIBUTE_POSITION] >= 0);
+    assert(material->getShader()->getAttributesRef()[E_SHADER_ATTRIBUTE_TEXCOORD] >= 0);
+    quad->bind(material->getShader()->getAttributesRef());
     
-    quad->Draw();
+    quad->draw();
     
-    quad->Unbind(material->getShader()->getAttributesRef());
+    quad->unbind(material->getShader()->getAttributesRef());
     material->unbind();
     
     ui32 rawdataSize = static_cast<ui32>(width) * static_cast<ui32>(height) * 4;

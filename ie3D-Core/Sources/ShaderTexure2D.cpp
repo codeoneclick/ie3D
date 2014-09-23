@@ -11,10 +11,7 @@ const char* ShaderTexure2D_vert = STRING_SHADER
 (
  attribute vec3 IN_Position;
  attribute vec2 IN_TexCoord;
- attribute vec4 IN_Normal;
- attribute vec4 IN_Tangent;
- attribute vec4 IN_Color;
- 
+
  varying vec2   OUT_TexCoord;
  
  void main(void)

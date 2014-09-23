@@ -88,6 +88,16 @@ void CMapDragController::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION
     
 }
 
+void CMapDragController::onKeyUp(i32 key)
+{
+    
+}
+
+void CMapDragController::onKeyDown(i32 key)
+{
+    
+}
+
 void CMapDragController::update(f32)
 {
     glm::vec3 position;

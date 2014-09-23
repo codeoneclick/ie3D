@@ -12,6 +12,8 @@
 #include "CQuad.h"
 #include "CShader.h"
 #include "CAnimationMixer.h"
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
 
 const ui32 CBatch::k_MAX_NUM_VERTICES = 65535 / 4; // 16k vertices
 const ui32 CBatch::k_MAX_NUM_INDICES = 65535 / 2;  // 32k indices

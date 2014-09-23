@@ -100,7 +100,7 @@ void IGameObject::onBind(const std::string& mode)
     assert(m_materials.find(mode) != m_materials.end());
     auto iterator = m_materials.find(mode);
     
-    if(!m_isBatching)
+    if(!m_isBatching && iterator->second->getShader()->isLoaded())
     {
         assert(m_mesh != nullptr);
         iterator->second->bind();
@@ -111,7 +111,13 @@ void IGameObject::onBind(const std::string& mode)
 void IGameObject::onDraw(const std::string& mode)
 {
     assert(m_mesh != nullptr);
-    m_mesh->draw();
+    assert(m_materials.find(mode) != m_materials.end());
+    auto iterator = m_materials.find(mode);
+
+    if(iterator->second->getShader()->isLoaded())
+    {
+        m_mesh->draw();
+    }
 }
 
 void IGameObject::onUnbind(const std::string& mode)
@@ -119,7 +125,7 @@ void IGameObject::onUnbind(const std::string& mode)
     assert(m_materials.find(mode) != m_materials.end());
     auto iterator = m_materials.find(mode);
     
-    if(!m_isBatching)
+    if(!m_isBatching && iterator->second->getShader()->isLoaded())
     {
         assert(m_mesh != nullptr);
         iterator->second->unbind();
