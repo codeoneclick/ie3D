@@ -115,6 +115,24 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     CSharedQuad quad = std::make_shared<CQuad>();
     material->setShader(shader);
     material->setTexture(texture, E_SHADER_SAMPLER_01);
+    
+    material->setCulling(false);
+    material->setCullingMode(GL_BACK);
+    
+    material->setBlending(false);
+    material->setBlendingFunctionSource(GL_SRC_ALPHA);
+    material->setBlendingFunctionDestination(GL_ONE);
+    
+    material->setDepthTest(false);
+    material->setDepthMask(true);
+    
+    material->setClipping(false);
+    material->setClippingPlane(glm::vec4(0.0, 0.0, 0.0, 0.0));
+    
+    material->setReflecting(false);
+    material->setShadowing(false);
+    material->setDebugging(false);
+    
     CSharedRenderTarget renderTarget = std::make_shared<CRenderTarget>(m_graphicsContext, width, height);
     
     renderTarget->begin();
