@@ -14,6 +14,7 @@
 #include "CModel.h"
 #include "COcean.h"
 #include "CSkyBox.h"
+#include "CAtmosphericScattering.h"
 #include "CLandscape.h"
 #include "CParticleEmitter.h"
 #include "IInputContext.h"
@@ -28,6 +29,7 @@ m_camera(nullptr),
 m_ocean(nullptr),
 m_landscape(nullptr),
 m_skyBox(nullptr),
+m_atmosphericScattering(nullptr),
 m_collisionMgr(collisionMgr),
 m_inputContext(inputContext)
 {
@@ -131,6 +133,22 @@ void CSceneGraph::removeSkyBox(CSharedSkyBoxRef skyBox)
 {
     CSceneGraph::removeGameObject(skyBox);
     m_skyBox = nullptr;
+}
+
+void CSceneGraph::setAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering)
+{
+    if(m_atmosphericScattering != nullptr)
+    {
+        CSceneGraph::removeGameObject(m_atmosphericScattering);
+    }
+    CSceneGraph::addGameObject(m_atmosphericScattering);
+    m_atmosphericScattering = atmosphericScattering;
+}
+
+void CSceneGraph::removeAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering)
+{
+    CSceneGraph::removeGameObject(atmosphericScattering);
+    m_atmosphericScattering = nullptr;
 }
 
 void CSceneGraph::setLandscape(CSharedLandscapeRef landscape)

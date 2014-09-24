@@ -15,6 +15,7 @@
 #include "CConfigurationParticleEmitterLoadingOperation.h"
 #include "CConfigurationGameTransitionLoadingOperation.h"
 #include "CConfigurationMaterialLoadingOperation.h"
+#include "CConfigurationAtmosphericScatteringLoadingOperation.h"
 
 CConfigurationAccessor::CConfigurationAccessor(void)
 {
@@ -95,4 +96,14 @@ void CConfigurationAccessor::loadSkyBoxConfiguration(const std::string& filename
     assert(skyBoxConfiguration != nullptr);
     assert(handler != nullptr);
     handler->onConfigurationLoaded(skyBoxConfiguration, true);
+}
+
+void CConfigurationAccessor::loadAtmosphericScatteringConfiguration(const std::string& filename,
+                                                                    ISharedConfigurationLoadingHandlerRef handler)
+{
+    std::shared_ptr<CConfigurationAtmosphericScatteringLoadingOperation> operation = std::make_shared<CConfigurationAtmosphericScatteringLoadingOperation>();
+    std::shared_ptr<CConfigurationAtmosphericScattering> atmosphericScatteringConfiguration = std::static_pointer_cast<CConfigurationAtmosphericScattering>(operation->serialize(filename));
+    assert(atmosphericScatteringConfiguration != nullptr);
+    assert(handler != nullptr);
+    handler->onConfigurationLoaded(atmosphericScatteringConfiguration, true);
 }

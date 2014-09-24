@@ -422,6 +422,154 @@ std::string CConfigurationSkyBox::getZNegativeTextureFilename(void) const
     return iterator->second[0]->getString();
 }
 
+CConfigurationAtmosphericScattering::CConfigurationAtmosphericScattering(void) :
+CConfigurationGameObject(E_CONFIGURATION_CLASS_ATMOSPHERIC_SCATTERING),
+kAtmosphericScatteringMainNode("atmospheric_scattering"),
+kAtmosphericScatteringNumColsAttribute("num_cols"),
+kAtmosphericScatteringNumRowsAttribute("num_rows"),
+kAtmosphericScatteringSizeAttribute("size"),
+kAtmosphericScatteringNumSamplesAttribute("num_samples"),
+kAtmosphericScatteringInnerRadiusAttribute("inner_radius"),
+kAtmosphericScatteringOuterRadiusAttribute("outer_radius"),
+kAtmosphericScatteringKrCoefficientAttribute("kr_coefficient"),
+kAtmosphericScatteringKmCoefficientAttribute("km_coefficient"),
+kAtmosphericScatteringESunCoefficientAttribute("esun_coefficient"),
+kAtmosphericScatteringGCoefficientAttribute("g_coefficient"),
+kAtmosphericScatteringRayleighScaleDepthCoefficientAttribute("rayleigh_scale_depth_coefficient"),
+kAtmosphericScatteringWaveLengthXAttribute("wave_length_x"),
+kAtmosphericScatteringWaveLengthYAttribute("wave_length_y"),
+kAtmosphericScatteringWaveLengthZAttribute("wave_length_z")
+{
+    
+}
+
+CConfigurationAtmosphericScattering::~CConfigurationAtmosphericScattering(void)
+{
+    
+}
+
+i32 CConfigurationAtmosphericScattering::getNumCols(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringNumColsAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<i32>();
+}
+
+i32 CConfigurationAtmosphericScattering::getNumRows(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringNumRowsAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<i32>();
+}
+
+i32 CConfigurationAtmosphericScattering::getSize(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringSizeAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<i32>();
+}
+
+i32 CConfigurationAtmosphericScattering::getNumSamples(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringNumSamplesAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<i32>();
+}
+
+f32 CConfigurationAtmosphericScattering::getInnerRadius(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringInnerRadiusAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<f32>();
+}
+
+f32 CConfigurationAtmosphericScattering::getOuterRadius(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringOuterRadiusAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<f32>();
+}
+
+f32 CConfigurationAtmosphericScattering::getKrCoefficient(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringKrCoefficientAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<f32>();
+}
+
+f32 CConfigurationAtmosphericScattering::getKmCoefficient(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringKmCoefficientAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<f32>();
+}
+
+f32 CConfigurationAtmosphericScattering::getESunCoefficient(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringESunCoefficientAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<f32>();
+}
+
+f32 CConfigurationAtmosphericScattering::getGCoefficient(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringGCoefficientAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<f32>();
+}
+
+f32 CConfigurationAtmosphericScattering::getRayleighScaleDepthCoefficient(void) const
+{
+    const auto& iterator = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                             kAtmosphericScatteringRayleighScaleDepthCoefficientAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<f32>();
+}
+
+glm::vec3 CConfigurationAtmosphericScattering::getWaveLength(void) const
+{
+    const auto& iteratorX = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                              kAtmosphericScatteringWaveLengthXAttribute);
+    assert(iteratorX != m_attributes.end());
+    assert(iteratorX->second.size() != 0);
+    f32 x = iteratorX->second[0]->getScalar<f32>();
+    
+    const auto& iteratorY = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                              kAtmosphericScatteringWaveLengthYAttribute);
+    assert(iteratorY != m_attributes.end());
+    assert(iteratorY->second.size() != 0);
+    ui8 y = iteratorY->second[0]->getScalar<f32>();
+    
+    const auto& iteratorZ = m_attributes.find(kAtmosphericScatteringMainNode + ":" +
+                                              kAtmosphericScatteringWaveLengthZAttribute);
+    assert(iteratorZ != m_attributes.end());
+    assert(iteratorZ->second.size() != 0);
+    ui8 z = iteratorZ->second[0]->getScalar<f32>();
+    
+    return glm::vec3(x, y, z);
+}
+
 CConfigurationOcean::CConfigurationOcean(void) :
 CConfigurationGameObject(E_CONFIGURATION_CLASS_OCEAN),
 kOceanMainNode("ocean"),

@@ -24,6 +24,7 @@ private:
     CSharedOcean m_ocean;
     CSharedLandscape m_landscape;
     CSharedSkyBox m_skyBox;
+    CSharedAtmosphericScattering m_atmosphericScattering;
     
 protected:
     
@@ -51,6 +52,9 @@ public:
     
     void setSkyBox(CSharedSkyBoxRef skybox);
     void removeSkyBox(CSharedSkyBoxRef skybox);
+    
+    void setAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering);
+    void removeAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering);
     
     void setLandscape(CSharedLandscapeRef landscape);
     void removeLandscape(CSharedLandscapeRef landscape);

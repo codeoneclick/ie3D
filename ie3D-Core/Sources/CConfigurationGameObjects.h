@@ -206,7 +206,7 @@ public:
     const std::string kAtmosphericScatteringESunCoefficientAttribute;
     const std::string kAtmosphericScatteringGCoefficientAttribute;
     const std::string kAtmosphericScatteringRayleighScaleDepthCoefficientAttribute;
-    const std::string kAtmosphericScatteringWaveLengthXtAttribute;
+    const std::string kAtmosphericScatteringWaveLengthXAttribute;
     const std::string kAtmosphericScatteringWaveLengthYAttribute;
     const std::string kAtmosphericScatteringWaveLengthZAttribute;
     

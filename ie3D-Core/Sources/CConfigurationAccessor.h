@@ -44,6 +44,9 @@ public:
     
     void loadSkyBoxConfiguration(const std::string& filename,
                                  ISharedConfigurationLoadingHandlerRef handler);
+    
+    void loadAtmosphericScatteringConfiguration(const std::string& filename,
+                                                ISharedConfigurationLoadingHandlerRef handler);
 };
 
 #endif 

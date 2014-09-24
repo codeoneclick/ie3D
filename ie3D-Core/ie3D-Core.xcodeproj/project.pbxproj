@@ -231,6 +231,14 @@
 		2132664B1906A4AF001C98F7 /* CMeshLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */; };
 		2132664C1906A4AF001C98F7 /* CResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A319017466F720044643E /* CResourceLoader.cpp */; };
 		2132664D1906A4AF001C98F7 /* CResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceAccessor.cpp */; };
+		213396A519D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213396A319D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp */; };
+		213396A619D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213396A319D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp */; };
+		213396A719D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 213396A419D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h */; };
+		213396AA19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213396A819D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp */; };
+		213396AB19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213396A819D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp */; };
+		213396AC19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 213396A919D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h */; };
+		213396AD19D3198600B7C2A2 /* CAtmosphericScattering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EEDAA19D2FA9B00DA02B7 /* CAtmosphericScattering.cpp */; };
+		213396AE19D3198700B7C2A2 /* CAtmosphericScattering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EEDAA19D2FA9B00DA02B7 /* CAtmosphericScattering.cpp */; };
 		213B7F311993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F321993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F331993CC5B006F3976 /* CShaderCompiler_GLSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */; };
@@ -411,6 +419,10 @@
 		213265D71906A407001C98F7 /* IGameLoopHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGameLoopHandler.h; path = Sources/IGameLoopHandler.h; sourceTree = SOURCE_ROOT; };
 		213265DB1906A42E001C98F7 /* HCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCommon.h; path = Sources/HCommon.h; sourceTree = SOURCE_ROOT; };
 		213265DC1906A42E001C98F7 /* HEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEnums.h; path = Sources/HEnums.h; sourceTree = SOURCE_ROOT; };
+		213396A319D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationAtmosphericScatteringSerializer.cpp; path = Sources/CConfigurationAtmosphericScatteringSerializer.cpp; sourceTree = "<group>"; };
+		213396A419D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationAtmosphericScatteringSerializer.h; path = Sources/CConfigurationAtmosphericScatteringSerializer.h; sourceTree = "<group>"; };
+		213396A819D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationAtmosphericScatteringLoadingOperation.cpp; path = Sources/CConfigurationAtmosphericScatteringLoadingOperation.cpp; sourceTree = "<group>"; };
+		213396A919D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationAtmosphericScatteringLoadingOperation.h; path = Sources/CConfigurationAtmosphericScatteringLoadingOperation.h; sourceTree = "<group>"; };
 		213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCompiler_GLSL.cpp; path = Sources/CShaderCompiler_GLSL.cpp; sourceTree = "<group>"; };
 		213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCompiler_GLSL.h; path = Sources/CShaderCompiler_GLSL.h; sourceTree = "<group>"; };
 		213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ShaderTexure2D.cpp; path = Sources/ShaderTexure2D.cpp; sourceTree = "<group>"; };
@@ -1113,6 +1125,8 @@
 				A46789D817A021AD00FE26FA /* CConfigurationOceanSerializer.cpp */,
 				212092B9191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h */,
 				212092B8191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp */,
+				213396A419D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h */,
+				213396A319D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp */,
 				A490465E18463414009734B8 /* CConfigurationLandscapeSerializer.h */,
 				A490465D18463414009734B8 /* CConfigurationLandscapeSerializer.cpp */,
 				A40138C61754EF280056461B /* CConfigurationParticleEmitterSerializer.h */,
@@ -1145,6 +1159,8 @@
 				A46789D517A0212200FE26FA /* CConfigurationOceanLoadingOperation.cpp */,
 				212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */,
 				212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */,
+				213396A919D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h */,
+				213396A819D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp */,
 				A490465B18463404009734B8 /* CConfigurationLandscapeLoadingOperation.h */,
 				A490465A18463404009734B8 /* CConfigurationLandscapeLoadingOperation.cpp */,
 				A40138EC1756144B0056461B /* CConfigurationParticleEmitterLoadingOperation.h */,
@@ -1814,6 +1830,7 @@
 				2191CE53196EDBEF00CE2813 /* pnginfo.h in Headers */,
 				2191CE4C196EDBEF00CE2813 /* png.h in Headers */,
 				2191CE9F196EE95100CE2813 /* deflate.h in Headers */,
+				213396AC19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h in Headers */,
 				2191CE9C196EE95100CE2813 /* crc32.h in Headers */,
 				2191CEB4196EE95100CE2813 /* inftrees.h in Headers */,
 				21733479196440EB002B3F90 /* IRenderTechniqueBase.h in Headers */,
@@ -1848,6 +1865,7 @@
 				217334971964425B002B3F90 /* CRenderPipeline.h in Headers */,
 				2191CE78196EE0B000CE2813 /* CTextureCommiter_PNG.h in Headers */,
 				2191CE64196EDBEF00CE2813 /* pngstruct.h in Headers */,
+				213396A719D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h in Headers */,
 				212092B61919674400FFC8D4 /* CSkyBox.h in Headers */,
 				2173348819644139002B3F90 /* CRenderTechniqueWorldSpace.h in Headers */,
 			);
@@ -1937,6 +1955,7 @@
 				21208FA31906FB5F00FFC8D4 /* CFPSCounter.cpp in Sources */,
 				21208FA41906FB5F00FFC8D4 /* CTimer.cpp in Sources */,
 				2191CE9E196EE95100CE2813 /* deflate.c in Sources */,
+				213396A619D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp in Sources */,
 				2191CEB0196EE95100CE2813 /* inflate.c in Sources */,
 				2173347D19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				21208FA81906FB5F00FFC8D4 /* COGLWindow_ios.cpp in Sources */,
@@ -1990,6 +2009,7 @@
 				21208FCB1906FB5F00FFC8D4 /* CAnimationMixer.cpp in Sources */,
 				21208FCC1906FB5F00FFC8D4 /* CSceneGraph.cpp in Sources */,
 				21208FCD1906FB5F00FFC8D4 /* CSceneFabricator.cpp in Sources */,
+				213396AE19D3198700B7C2A2 /* CAtmosphericScattering.cpp in Sources */,
 				21208FCE1906FB5F00FFC8D4 /* CSceneUpdateMgr.cpp in Sources */,
 				21208FCF1906FB5F00FFC8D4 /* ISceneUpdateHandler.cpp in Sources */,
 				2173348219644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */,
@@ -2008,6 +2028,7 @@
 				2191CE6E196EDBEF00CE2813 /* pngwutil.c in Sources */,
 				2191CE97196EE95100CE2813 /* adler32.c in Sources */,
 				2191CE5F196EDBEF00CE2813 /* pngrtran.c in Sources */,
+				213396AB19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp in Sources */,
 				21208FD81906FB5F00FFC8D4 /* CConfigurationLandscapeSerializer.cpp in Sources */,
 				21208FD91906FB5F00FFC8D4 /* CConfigurationParticleEmitterSerializer.cpp in Sources */,
 				21208FDA1906FB5F00FFC8D4 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */,
@@ -2100,6 +2121,7 @@
 				213265E71906A4AF001C98F7 /* CFPSCounter.cpp in Sources */,
 				213265E81906A4AF001C98F7 /* CTimer.cpp in Sources */,
 				2191CE9D196EE95100CE2813 /* deflate.c in Sources */,
+				213396A519D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp in Sources */,
 				2191CEAF196EE95100CE2813 /* inflate.c in Sources */,
 				2173347C19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				213265EC1906A4AF001C98F7 /* COGLWindow_ios.cpp in Sources */,
@@ -2153,6 +2175,7 @@
 				2132660F1906A4AF001C98F7 /* CAnimationMixer.cpp in Sources */,
 				213266101906A4AF001C98F7 /* CSceneGraph.cpp in Sources */,
 				213266111906A4AF001C98F7 /* CSceneFabricator.cpp in Sources */,
+				213396AD19D3198600B7C2A2 /* CAtmosphericScattering.cpp in Sources */,
 				213266121906A4AF001C98F7 /* CSceneUpdateMgr.cpp in Sources */,
 				213266131906A4AF001C98F7 /* ISceneUpdateHandler.cpp in Sources */,
 				2173348119644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */,
@@ -2171,6 +2194,7 @@
 				2191CE6D196EDBEF00CE2813 /* pngwutil.c in Sources */,
 				2191CE96196EE95100CE2813 /* adler32.c in Sources */,
 				2191CE5E196EDBEF00CE2813 /* pngrtran.c in Sources */,
+				213396AA19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp in Sources */,
 				2132661C1906A4AF001C98F7 /* CConfigurationLandscapeSerializer.cpp in Sources */,
 				2132661D1906A4AF001C98F7 /* CConfigurationParticleEmitterSerializer.cpp in Sources */,
 				2132661E1906A4AF001C98F7 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */,

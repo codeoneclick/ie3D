@@ -244,6 +244,10 @@ class CSkyBox;
 typedef std::shared_ptr<CSkyBox> CSharedSkyBox;
 typedef const CSharedSkyBox& CSharedSkyBoxRef;
 
+class CAtmosphericScattering;
+typedef std::shared_ptr<CAtmosphericScattering> CSharedAtmosphericScattering;
+typedef const CSharedAtmosphericScattering& CSharedAtmosphericScatteringRef;
+
 class ICollisionHandler;
 typedef std::shared_ptr<ICollisionHandler> ISharedCollisionHandler;
 typedef const ISharedCollisionHandler& ISharedCollisionHandlerRef;

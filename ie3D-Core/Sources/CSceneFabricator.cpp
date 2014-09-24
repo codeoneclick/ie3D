@@ -14,6 +14,7 @@
 #include "COcean.h"
 #include "CSkyBox.h"
 #include "CLandscape.h"
+#include "CAtmosphericScattering.h"
 #include "CParticleEmitter.h"
 #include "CResourceAccessor.h"
 
@@ -96,6 +97,17 @@ CSharedSkyBox CSceneFabricator::createSkyBox(const std::string& filename)
     m_configurationAccessor->loadSkyBoxConfiguration(filename, skyBox);
     m_gameObjectsContainer.insert(skyBox);
     return skyBox;
+}
+
+CSharedAtmosphericScattering CSceneFabricator::createAtmosphericScattering(const std::string& filename)
+{
+    assert(m_resourceAccessor != nullptr);
+    assert(m_renderTechniqueAccessor != nullptr);
+    CSharedAtmosphericScattering atmosphericScattering = std::make_shared<CAtmosphericScattering>(m_resourceAccessor, m_renderTechniqueAccessor);
+    assert(m_configurationAccessor != nullptr);
+    m_configurationAccessor->loadAtmosphericScatteringConfiguration(filename, atmosphericScattering);
+    m_gameObjectsContainer.insert(atmosphericScattering);
+    return atmosphericScattering;
 }
 
 void CSceneFabricator::deleteGameObject(ISharedGameObjectRef gameObject)
