@@ -17,6 +17,15 @@ private:
     
 protected:
     
+    i32 m_size;
+    f32 m_innerRadius;
+    f32 m_outerRadius;
+    f32 m_scale_01;
+    f32 m_scale_02;
+    f32 m_rayleighScaleDepth;
+    
+    f32 scaleAngle(f32 value);
+    
     void onSceneUpdate(f32 deltatime);
     
     void onResourceLoaded(ISharedResourceRef resource, bool success);
