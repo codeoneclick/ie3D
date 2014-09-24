@@ -190,6 +190,49 @@ public:
     std::string getZNegativeTextureFilename(void) const;
 };
 
+class CConfigurationAtmosphericScattering : public CConfigurationGameObject
+{
+public:
+    
+    const std::string kAtmosphericScatteringMainNode;
+    const std::string kAtmosphericScatteringNumColsAttribute;
+    const std::string kAtmosphericScatteringNumRowsAttribute;
+    const std::string kAtmosphericScatteringSizeAttribute;
+    const std::string kAtmosphericScatteringNumSamplesAttribute;
+    const std::string kAtmosphericScatteringInnerRadiusAttribute;
+    const std::string kAtmosphericScatteringOuterRadiusAttribute;
+    const std::string kAtmosphericScatteringKrCoefficientAttribute;
+    const std::string kAtmosphericScatteringKmCoefficientAttribute;
+    const std::string kAtmosphericScatteringESunCoefficientAttribute;
+    const std::string kAtmosphericScatteringGCoefficientAttribute;
+    const std::string kAtmosphericScatteringRayleighScaleDepthCoefficientAttribute;
+    const std::string kAtmosphericScatteringWaveLengthXtAttribute;
+    const std::string kAtmosphericScatteringWaveLengthYAttribute;
+    const std::string kAtmosphericScatteringWaveLengthZAttribute;
+    
+private:
+    
+protected:
+    
+public:
+    
+    CConfigurationAtmosphericScattering(void);
+    ~CConfigurationAtmosphericScattering(void);
+    
+    i32 getNumCols(void) const;
+    i32 getNumRows(void) const;
+    i32 getSize(void) const;
+    i32 getNumSamples(void) const;
+    f32 getInnerRadius(void) const;
+    f32 getOuterRadius(void) const;
+    f32 getKrCoefficient(void) const;
+    f32 getKmCoefficient(void) const;
+    f32 getESunCoefficient(void) const;
+    f32 getGCoefficient(void) const;
+    f32 getRayleighScaleDepthCoefficient(void) const;
+    glm::vec3 getWaveLength(void) const;
+};
+
 class CConfigurationOcean : public CConfigurationGameObject
 {
 public:

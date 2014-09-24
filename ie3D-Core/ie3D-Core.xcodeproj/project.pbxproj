@@ -126,6 +126,7 @@
 		2127E85B1935056100D408C9 /* IEditableLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2127E8591935056100D408C9 /* IEditableLandscape.cpp */; };
 		2127E85C1935056100D408C9 /* IEditableLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2127E8591935056100D408C9 /* IEditableLandscape.cpp */; };
 		2127E85D1935056100D408C9 /* IEditableLandscape.h in Headers */ = {isa = PBXBuildFile; fileRef = 2127E85A1935056100D408C9 /* IEditableLandscape.h */; };
+		212EEDAE19D2FA9B00DA02B7 /* CAtmosphericScattering.h in Headers */ = {isa = PBXBuildFile; fileRef = 212EEDAB19D2FA9B00DA02B7 /* CAtmosphericScattering.h */; };
 		213265DD1906A4AF001C98F7 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F205B7174287450063AB07 /* pugixml.cpp */; };
 		213265DE1906A4AF001C98F7 /* IInputContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21DEC3E31903F07B00B41221 /* IInputContext.cpp */; };
 		213265DF1906A4AF001C98F7 /* CInputContext_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489C179D767400C51AC4 /* CInputContext_ios.cpp */; };
@@ -399,6 +400,8 @@
 		212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationSkyBoxLoadingOperation.h; path = Sources/CConfigurationSkyBoxLoadingOperation.h; sourceTree = "<group>"; };
 		2127E8591935056100D408C9 /* IEditableLandscape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IEditableLandscape.cpp; path = Sources/IEditableLandscape.cpp; sourceTree = "<group>"; };
 		2127E85A1935056100D408C9 /* IEditableLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEditableLandscape.h; path = Sources/IEditableLandscape.h; sourceTree = "<group>"; };
+		212EEDAA19D2FA9B00DA02B7 /* CAtmosphericScattering.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAtmosphericScattering.cpp; path = Sources/CAtmosphericScattering.cpp; sourceTree = "<group>"; };
+		212EEDAB19D2FA9B00DA02B7 /* CAtmosphericScattering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAtmosphericScattering.h; path = Sources/CAtmosphericScattering.h; sourceTree = "<group>"; };
 		213265D01906A3E0001C98F7 /* IGraphicsContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = IGraphicsContext.cpp; path = Sources/IGraphicsContext.cpp; sourceTree = SOURCE_ROOT; };
 		213265D11906A3E0001C98F7 /* IGraphicsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraphicsContext.h; path = Sources/IGraphicsContext.h; sourceTree = SOURCE_ROOT; };
 		213265D31906A407001C98F7 /* CGameLoopExecutor_ios.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGameLoopExecutor_ios.cpp; path = Sources/CGameLoopExecutor_ios.cpp; sourceTree = SOURCE_ROOT; };
@@ -1198,6 +1201,8 @@
 				A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */,
 				212092B31919674400FFC8D4 /* CSkyBox.h */,
 				212092B21919674400FFC8D4 /* CSkyBox.cpp */,
+				212EEDAB19D2FA9B00DA02B7 /* CAtmosphericScattering.h */,
+				212EEDAA19D2FA9B00DA02B7 /* CAtmosphericScattering.cpp */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -1828,6 +1833,7 @@
 				2191CEAE196EE95100CE2813 /* inffixed.h in Headers */,
 				2173348319644123002B3F90 /* CRenderTechniqueScreenSpace.h in Headers */,
 				2162096A19A3312D00DECBBC /* CThreadOperation.h in Headers */,
+				212EEDAE19D2FA9B00DA02B7 /* CAtmosphericScattering.h in Headers */,
 				21C409AC197B0BA40063D62D /* CMeshCommiter_MDL_01.h in Headers */,
 				2173348D19644157002B3F90 /* IRenderTechniqueImporter.h in Headers */,
 				2162096F19A3364200DECBBC /* CThreadOperationPool.h in Headers */,

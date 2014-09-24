@@ -557,7 +557,7 @@
 		21B08E491922531700C5D5CC /* shaderSkyBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.frag; path = "../ie3D-Bundle/Shaders/shaderSkyBox.frag"; sourceTree = SOURCE_ROOT; };
 		21B08E4A1922531700C5D5CC /* shaderSkyBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.vert; path = "../ie3D-Bundle/Shaders/shaderSkyBox.vert"; sourceTree = SOURCE_ROOT; };
 		21B08E591923AE0300C5D5CC /* landscape.01.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.01.normal.pvr; path = "../ie3D-Bundle/Textures/landscape.01.normal.pvr"; sourceTree = SOURCE_ROOT; };
-		21D070C1181D9D460019D264 /* ie3D-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "ie3D-Demo.app"; path = "ie3D-Demo-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21D070C1181D9D460019D264 /* ie3D-Demo-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ie3D-Demo-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		21D070C8181D9D460019D264 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -879,7 +879,7 @@
 		21D070C2181D9D460019D264 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21D070C1181D9D460019D264 /* ie3D-Demo.app */,
+				21D070C1181D9D460019D264 /* ie3D-Demo-ios.app */,
 				212EED1419CC5D9C00DA02B7 /* ie3D-Demo-osx.app */,
 			);
 			name = Products;
@@ -1008,7 +1008,7 @@
 			);
 			name = "ie3D-Demo-ios";
 			productName = indieEngineDemo;
-			productReference = 21D070C1181D9D460019D264 /* ie3D-Demo.app */;
+			productReference = 21D070C1181D9D460019D264 /* ie3D-Demo-ios.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
