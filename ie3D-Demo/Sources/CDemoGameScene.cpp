@@ -65,6 +65,9 @@ void CDemoGameScene::load(void)
     m_skyBox = m_root->createSkyBox("gameobject.skybox.xml");
     m_root->setSkyBox(m_skyBox);
     
+    m_atmosphericScattering = m_root->createAtmosphericScattering("gameobject.atmospheric.scattering.xml");
+    m_root->setAtmosphericScattering(m_atmosphericScattering);
+    
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
     

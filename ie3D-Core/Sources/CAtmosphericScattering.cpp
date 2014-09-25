@@ -58,37 +58,30 @@ void CAtmosphericScattering::onSceneUpdate(f32 deltatime)
                 f32 startAngle = glm::dot(direction, start) / height;
                 f32 startOffset = depth * CAtmosphericScattering::scaleAngle(startAngle);
                 
-                float fSampleLength = fFar / m_nSamples;
-                float fScaledLength = fSampleLength * m_fScale;
-                math::Vector3d v3SampleRay = v3Ray * fSampleLength;
-                math::Vector3d v3SamplePoint = v3Start + v3SampleRay * 0.5f;
+                f32 sampleLength = far / m_numSamples;
+                f32 scaledSampleLength = sampleLength * m_scale_01;
+                glm::vec3 sampleDirection = direction * sampleLength;
+                glm::vec3 sampleOrigin = start + sampleDirection * 0.5f;
                 
-                math::Vector3d v3FrontColor = math::Vector3d(0.0f, 0.0f, 0.0f);
-                for(unsigned int i=0; i<m_nSamples; i++)
+                glm::vec3 color(0.0);
+                
+                for(ui32 i = 0; i < m_numSamples; ++i)
                 {
-                    float fHeight = v3SamplePoint.length();
-                    float fDepth = exp(m_fScaleOverScaleDepth * (m_fInnerRadius - fHeight));
-                    float fLightAngle = math::dot(m_LightRef->GetDirection(),v3SamplePoint) / fHeight;
-                    float fCameraAngle = math::dot(v3Ray, v3SamplePoint) / fHeight;
-                    float fScatter = (fStartOffset + fDepth*(scale(fLightAngle) - scale(fCameraAngle)));
-                    math::Vector3d v3Attenuate = expv((m_vInvWavelength4 * m_fKr4PI + math::Vector3d(m_fKm4PI, m_fKm4PI, m_fKm4PI)) * -fScatter);
-                    v3FrontColor += v3Attenuate * (fDepth * fScaledLength);
-                    v3SamplePoint += v3SampleRay;
+                    f32 height = sampleOrigin.length();
+                    f32 depth = expf(m_scale_02 * (m_innerRadius - height));
+                    f32 lightSourceAngle = glm::dot(glm::vec3(0.0, 1.0, 0.0), sampleOrigin) / height;
+                    f32 cameraAngle = glm::dot(direction, sampleOrigin) / height;
+                    f32 scatter = startOffset + depth * ( scaleAngle(lightSourceAngle) - scaleAngle(cameraAngle));
+                    glm::vec3 attenuate = (m_invWaveLength * m_kr4PI + glm::vec3(m_km4PI)) *-scatter;
+                    attenuate.x = expf(attenuate.x);
+                    attenuate.y = expf(attenuate.y);
+                    attenuate.z = expf(attenuate.z);
+                    color += attenuate * (depth * scaledSampleLength);
+                    sampleOrigin += sampleDirection;
                 }
-                
-                if(x == m_nSize / 2)
-                    Game::GetEnviromentControllerInstance()->GetCameraInstance()->m_FogColor = v3FrontColor;
-                
-                pBuffer[nIndex].x = v3FrontColor.x;//min( v3FrontColor.x, 6.5519996e4f);
-                pBuffer[nIndex].y = v3FrontColor.y;//min( v3FrontColor.y, 6.5519996e4f);
-                pBuffer[nIndex].z = v3FrontColor.z;//min( v3FrontColor.z, 6.5519996e4f);
-                pBuffer[nIndex].w = 0.0f;
-                
-                nIndex++;
+                index++;
             }
         }
-        m_MeshList[m_Name]->m_TextureArray[0]->Unlock();*/
-        
         IGameObject::setPosition(m_camera->Get_Position());
         IGameObject::onSceneUpdate(deltatime);
     }
@@ -118,9 +111,20 @@ void CAtmosphericScattering::onConfigurationLoaded(ISharedConfigurationRef confi
     m_innerRadius = atmosphericScatteringConfiguration->getInnerRadius();
     m_outerRadius = atmosphericScatteringConfiguration->getOuterRadius();
     m_size = atmosphericScatteringConfiguration->getSize();
+    m_numSamples = atmosphericScatteringConfiguration->getNumSamples();
     m_scale_01 = 1.0 / (m_outerRadius - m_innerRadius);
     m_rayleighScaleDepth = atmosphericScatteringConfiguration->getRayleighScaleDepthCoefficient();
     m_scale_02 = m_scale_01 / m_rayleighScaleDepth;
+    
+    glm::vec3 waveLength = atmosphericScatteringConfiguration->getWaveLength();
+    m_invWaveLength.x = 1.0 / powf(waveLength.x, 4.0);
+    m_invWaveLength.y = 1.0 / powf(waveLength.y, 4.0);
+    m_invWaveLength.z = 1.0 / powf(waveLength.z, 4.0);
+    
+    f32 kr = atmosphericScatteringConfiguration->getKrCoefficient();
+    f32 km = atmosphericScatteringConfiguration->getKmCoefficient();
+    m_kr4PI = kr * 4.0 * M_PI;
+    m_km4PI = km * 4.0 * M_PI;
     
     CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(numCols * numRows, GL_STATIC_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
@@ -136,7 +140,7 @@ void CAtmosphericScattering::onConfigurationLoaded(ISharedConfigurationRef confi
             vertexData[index].m_position.x = sinf(offsetXZ) * cosf(offsetY);
             vertexData[index].m_position.y = cosf(offsetXZ);
             vertexData[index].m_position.z = sinf(offsetXZ) * sinf(offsetY);
-            vertexData[index].m_position *= outerRadius;
+            vertexData[index].m_position *= m_outerRadius;
             
             vertexData[index].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(j / (numRows - 1.0),
                                                                                  i / (numCols - 1.0)));

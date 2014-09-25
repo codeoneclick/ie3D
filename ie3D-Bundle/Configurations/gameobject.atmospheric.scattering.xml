@@ -1,0 +1,19 @@
+<atmospheric_scattering
+    num_cols="32"
+    num_rows="32"
+    size="8"
+    num_samples="2"
+    inner_radius="20.0"
+    outer_radius="20.5"
+    kr_coefficient="0.0025"
+    km_coefficient="0.001"
+    esun_coefficient="20.0"
+    g_coefficient="-9.5"
+    rayleigh_scale_depth_coefficient="0.25"
+    wave_length_x="0.65"
+    wave_length_y="0.57"
+    wave_length_z="0.47">
+    <materials>
+        <material filename="material.atmospheric.scattering.base.xml"/>
+    </materials>
+</atmospheric_scattering>

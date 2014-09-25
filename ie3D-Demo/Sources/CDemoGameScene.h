@@ -24,6 +24,7 @@ protected:
     
     std::shared_ptr<CMapDragController> m_mapDragController;
     CSharedSkyBox m_skyBox;
+    CSharedAtmosphericScattering m_atmosphericScattering;
     CSharedModel m_model;
     CSharedLandscape m_landscape;
     

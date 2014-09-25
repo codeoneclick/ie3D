@@ -248,6 +248,18 @@ void IGameTransition::removeSkyBox(CSharedSkyBoxRef skybox)
     m_sceneGraph->removeSkyBox(skybox);
 }
 
+void IGameTransition::setAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->setAtmosphericScattering(atmosphericScattering);
+}
+
+void IGameTransition::removeAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeAtmosphericScattering(atmosphericScattering);
+}
+
 void IGameTransition::setLandscape(CSharedLandscapeRef landscape)
 {
     assert(m_sceneGraph != nullptr);
@@ -336,6 +348,12 @@ CSharedSkyBox IGameTransition::createSkyBox(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
     return m_sceneFabricator->createSkyBox(filename);
+}
+
+CSharedAtmosphericScattering IGameTransition::createAtmosphericScattering(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    return m_sceneFabricator->createAtmosphericScattering(filename);
 }
 
 CSharedLandscape IGameTransition::createLandscape(const std::string& filename)

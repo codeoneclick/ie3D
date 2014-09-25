@@ -141,7 +141,7 @@ void CSceneGraph::setAtmosphericScattering(CSharedAtmosphericScatteringRef atmos
     {
         CSceneGraph::removeGameObject(m_atmosphericScattering);
     }
-    CSceneGraph::addGameObject(m_atmosphericScattering);
+    CSceneGraph::addGameObject(atmosphericScattering);
     m_atmosphericScattering = atmosphericScattering;
 }
 
