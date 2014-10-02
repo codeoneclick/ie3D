@@ -28,9 +28,6 @@ protected:
     f32 m_kr4PI;
     f32 m_km4PI;
 
-    
-    f32 scaleAngle(f32 value);
-    
     void onSceneUpdate(f32 deltatime);
     
     void onResourceLoaded(ISharedResourceRef resource, bool success);

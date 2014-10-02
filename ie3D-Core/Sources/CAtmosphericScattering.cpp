@@ -34,63 +34,10 @@ void CAtmosphericScattering::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        ui32 index = 0;
-        for(ui32 x = 0; x < m_size; x++)
-        {
-            const f32 offsetXZ = cosf( 1.0f ) * x / static_cast<f32>(m_size - 1.0);
-            for(ui32 y = 0; y < m_size; y++)
-            {
-                const f32 offsetY = (M_PI * 2.0) * static_cast<f32>(y) / static_cast<f32>(m_size - 1.0);
-                glm::vec3 position = glm::vec3(0.0, m_innerRadius + 1e-6, 0.0);
-                
-                position.x = sinf(offsetXZ) * cosf(offsetY) * m_outerRadius;
-                position.y = cosf(offsetXZ) * m_outerRadius;
-                position.z = sinf(offsetXZ) * sinf(offsetY) * m_outerRadius;
-                
-                glm::vec3 origin = position;
-                glm::vec3 direction = origin - glm::vec3(0.0, m_innerRadius  + 1e-6, 0.0);
-                f32 far = direction.length();
-                direction /= far;
-                
-                glm::vec3 start = glm::vec3(0.0, m_innerRadius  + 1e-6, 0.0);
-                f32 height = start.length();
-                f32 depth = expf(m_scale_02 * (m_innerRadius - start.y));
-                f32 startAngle = glm::dot(direction, start) / height;
-                f32 startOffset = depth * CAtmosphericScattering::scaleAngle(startAngle);
-                
-                f32 sampleLength = far / m_numSamples;
-                f32 scaledSampleLength = sampleLength * m_scale_01;
-                glm::vec3 sampleDirection = direction * sampleLength;
-                glm::vec3 sampleOrigin = start + sampleDirection * 0.5f;
-                
-                glm::vec3 color(0.0);
-                
-                for(ui32 i = 0; i < m_numSamples; ++i)
-                {
-                    f32 height = sampleOrigin.length();
-                    f32 depth = expf(m_scale_02 * (m_innerRadius - height));
-                    f32 lightSourceAngle = glm::dot(glm::vec3(0.0, 1.0, 0.0), sampleOrigin) / height;
-                    f32 cameraAngle = glm::dot(direction, sampleOrigin) / height;
-                    f32 scatter = startOffset + depth * ( scaleAngle(lightSourceAngle) - scaleAngle(cameraAngle));
-                    glm::vec3 attenuate = (m_invWaveLength * m_kr4PI + glm::vec3(m_km4PI)) *-scatter;
-                    attenuate.x = expf(attenuate.x);
-                    attenuate.y = expf(attenuate.y);
-                    attenuate.z = expf(attenuate.z);
-                    color += attenuate * (depth * scaledSampleLength);
-                    sampleOrigin += sampleDirection;
-                }
-                index++;
-            }
-        }
         IGameObject::setPosition(m_camera->Get_Position());
+        IGameObject::setRotation(glm::vec3(0.0, m_camera->Get_Rotation(), 0.0));
         IGameObject::onSceneUpdate(deltatime);
     }
-}
-
-f32 CAtmosphericScattering::scaleAngle(f32 value)
-{
-    f32 x = 1.0 - value;
-    return m_rayleighScaleDepth * exp(-0.00287 + x * (0.459 + x * (3.83 + x * (-6.80 + x * 5.25))));
 }
 
 void CAtmosphericScattering::onResourceLoaded(ISharedResourceRef resource, bool success)
@@ -105,8 +52,8 @@ void CAtmosphericScattering::onConfigurationLoaded(ISharedConfigurationRef confi
     std::shared_ptr<CConfigurationAtmosphericScattering> atmosphericScatteringConfiguration = std::static_pointer_cast<CConfigurationAtmosphericScattering>(configuration);
     assert(m_resourceAccessor != nullptr);
     
-    i32 numCols = atmosphericScatteringConfiguration->getNumCols();
-    i32 numRows = atmosphericScatteringConfiguration->getNumRows();
+    //i32 numCols = atmosphericScatteringConfiguration->getNumCols();
+    //i32 numRows = atmosphericScatteringConfiguration->getNumRows();
     
     m_innerRadius = atmosphericScatteringConfiguration->getInnerRadius();
     m_outerRadius = atmosphericScatteringConfiguration->getOuterRadius();
@@ -126,10 +73,98 @@ void CAtmosphericScattering::onConfigurationLoaded(ISharedConfigurationRef confi
     m_kr4PI = kr * 4.0 * M_PI;
     m_km4PI = km * 4.0 * M_PI;
     
-    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(numCols * numRows, GL_STATIC_DRAW);
-    SAttributeVertex* vertexData = vertexBuffer->lock();
+    std::vector<glm::vec3> vertexes;
+    glm::vec3 *pVertex = nullptr;
     
-    ui32 index = 0;
+    size_t sLevel = 0, sNumInLevel = 0, i =-1;
+    size_t sCurrentRaduis = 0;
+    float fCurRadiusAlpha = 0.0f, fCurRadiusBetta = 0.0f;
+    size_t m_sGridLevelsCount = 32;
+    f32 m_fGridRadius = 32;
+    
+    // проход по уровням
+    for( sLevel = 0; sLevel < m_sGridLevelsCount + 1; sLevel++ )
+    {
+        // выделяем место для новой строки
+        vertexes.resize(vertexes.size() + m_sGridLevelsCount - sLevel + 1 );
+        
+        // проходим по вершинам в уровне
+        for( sNumInLevel = 0; sNumInLevel < m_sGridLevelsCount - sLevel + 1; sNumInLevel++ )
+        {
+            // новая вершина
+            i++;
+            // получаем
+            pVertex = &vertexes[i];
+            
+            // текущий радиус
+            sCurrentRaduis  = sNumInLevel + sLevel;
+            
+            // считаем угол смещения в радиусе ( сектор в радианах делим на число вершин )
+            fCurRadiusAlpha  = sCurrentRaduis == 0 ? 0.0f : sLevel * M_PI_2 / sCurrentRaduis;
+            // угол смещения по высоте
+            fCurRadiusBetta  = M_PI_2 - sCurrentRaduis * M_PI_2 / m_sGridLevelsCount;
+            
+            // позиция
+            pVertex->x  = m_fGridRadius * cosf( fCurRadiusBetta ) * cosf( fCurRadiusAlpha );
+            pVertex->y  = m_fGridRadius * sinf( fCurRadiusBetta );
+            pVertex->z  = m_fGridRadius * cosf( fCurRadiusBetta ) * sinf( fCurRadiusAlpha );
+        }
+    }
+    
+    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(vertexes.size(), GL_STATIC_DRAW);
+    SAttributeVertex* vertexData = vertexBuffer->lock();
+    for(size_t i = 0; i < vertexes.size(); ++i)
+    {
+        vertexData[i].m_position = vertexes.at(i);
+    }
+    vertexBuffer->unlock();
+    
+    std::vector<ui16> indexes;
+    
+    sLevel = 0, sNumInLevel = 0, i = 0;
+    
+    size_t sCurLevelBegin = 0, sNextLevelBegin = 0, sCurLevelVertexesCount = 0;
+    
+    // проход по уровням
+    for( sLevel = 0; sLevel < m_sGridLevelsCount; sLevel++ )
+    {
+        // число вершин в уровне
+        sCurLevelVertexesCount = m_sGridLevelsCount - sLevel + 1;
+        
+        // выделяем место для новой строки
+        indexes.resize( indexes.size() + ( m_sGridLevelsCount - sLevel - 1) * 6 + 3 );
+        
+        // первая вершина следующего уровня
+        sNextLevelBegin = sCurLevelBegin + sCurLevelVertexesCount;
+        
+        // проходим по вершинам в уровне кроме последней
+        for( sNumInLevel = 0; sNumInLevel < m_sGridLevelsCount - sLevel; sNumInLevel++ )
+        {
+            // 2 грани на 4 точки
+            indexes[i++] = sNextLevelBegin + sNumInLevel;
+            indexes[i++] = sCurLevelBegin + sNumInLevel;
+            indexes[i++] = sCurLevelBegin + sNumInLevel + 1;
+            
+            if( sNumInLevel != m_sGridLevelsCount - sLevel - 1 )
+            {
+                indexes[i++] = sCurLevelBegin + sNumInLevel + 1;
+                indexes[i++] = sNextLevelBegin + sNumInLevel + 1;
+                indexes[i++] = sNextLevelBegin + sNumInLevel;
+            }
+        }
+        
+        // заканчиваем
+        sCurLevelBegin = sNextLevelBegin;
+    }
+    
+    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>(indexes.size(), GL_STATIC_DRAW);
+    ui16* indexData = indexBuffer->lock();
+    for (ui32 i = 0; i < indexes.size(); ++i) {
+        indexData[i] = indexes.at(i);
+    }
+    indexBuffer->unlock();
+    
+    /*ui32 index = 0;
     for(ui32 i = 0; i < numCols; i++)
     {
         const f32 offsetXZ = cosf(1.0) * static_cast<f32>(i) / static_cast<f32>(numCols - 1);
@@ -165,7 +200,7 @@ void CAtmosphericScattering::onConfigurationLoaded(ISharedConfigurationRef confi
             *(indexData++) = i * numRows + j;
         }
     }
-    indexBuffer->unlock();
+    indexBuffer->unlock();*/
     
     m_mesh = CMesh::constructCustomMesh("atmosphericScattering", vertexBuffer, indexBuffer,
                                         glm::vec3(4096.0), glm::vec3(4096.0));
@@ -211,13 +246,6 @@ void CAtmosphericScattering::onDraw(const std::string& mode)
         CSharedMaterial material = m_materials.find(mode)->second;
         assert(material->getShader() != nullptr);
         
-        glm::vec3 currentRotation = m_rotation;
-        if(material->isReflecting())
-        {
-            IGameObject::setRotation(glm::vec3(180.0, -glm::degrees(m_camera->Get_Rotation()) * 2.0, m_rotation.z));
-            IGameObject::onSceneUpdate(0);
-        }
-        
         material->getShader()->setMatrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
@@ -228,12 +256,6 @@ void CAtmosphericScattering::onDraw(const std::string& mode)
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
         IGameObject::onDraw(mode);
-        
-        if(material->isReflecting())
-        {
-            IGameObject::setRotation(currentRotation);
-            IGameObject::onSceneUpdate(0);
-        }
     }
 }
 

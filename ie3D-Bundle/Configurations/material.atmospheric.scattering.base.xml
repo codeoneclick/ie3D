@@ -1,7 +1,7 @@
 <material
     render_operation_name="render.operation.world.base"
-    is_cull_face="1"
-    is_depth_test="1"
+    is_cull_face="0"
+    is_depth_test="0"
     is_depth_mask="1"
     is_blending="0"
     cull_face_mode="GL_FRONT"
@@ -16,8 +16,8 @@
     is_shadowing="0"
     is_debugging="0">
     <shader
-    vs_filename="shaderModel.vert"
-    fs_filename="shaderModel.frag"/>
+    vs_filename="shaderAtmosphericScattering.vert"
+    fs_filename="shaderAtmosphericScattering.frag"/>
     <textures>
         <texture
         filename="model.diffuse.pvr"
