@@ -11,6 +11,7 @@ uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
 
 uniform vec3   VECTOR_CameraPosition;
+uniform vec3   VECTOR_LightPosition_01;
 
 const vec4 scaleIteration = vec4(0.01, 0.25, 0.04, 10.0);
 const vec4 radiusInOutHeightMinMax = vec4(6356.75, 6456.55, -100.0, 2000.0);
@@ -46,8 +47,8 @@ void main(void)
     vPosition = MATRIX_World * vPosition;
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
 
-    OUT_LightDirection = normalize(vPosition.xyz - VECTOR_CameraPosition);
-    vec3 vCameraPosition = vec3(0.0, 0.0, 0.0);
+    OUT_LightDirection = normalize(vPosition.xyz - VECTOR_LightPosition_01);
+    vec3 vCameraPosition = VECTOR_CameraPosition;
     vec3 vCameraRay = normalize(vPosition.xyz - vCameraPosition);
     
     float fCameraHeight = (VECTOR_CameraPosition.y - radiusInOutHeightMinMax.z) / (radiusInOutHeightMinMax.w - radiusInOutHeightMinMax.z);

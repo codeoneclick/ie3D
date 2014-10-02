@@ -34,8 +34,8 @@ void CAtmosphericScattering::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::setPosition(m_camera->Get_Position());
-        IGameObject::setRotation(glm::vec3(0.0, m_camera->Get_Rotation(), 0.0));
+        IGameObject::setPosition(glm::vec3(m_camera->Get_Position().x, m_camera->Get_Position().y, m_camera->Get_Position().z));
+        IGameObject::setRotation(glm::vec3(0.0, glm::degrees(m_camera->Get_Rotation()) + 45.0, 0.0));
         IGameObject::onSceneUpdate(deltatime);
     }
 }
@@ -251,7 +251,15 @@ void CAtmosphericScattering::onDraw(const std::string& mode)
         material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         
+        static f32 angle = 0.0;
+        angle += 0.01;
+        glm::vec3 position(0.0);
+        position.y = cosf(angle) * -100.0;
+        position.x = sinf(angle) * -100.0;
+        position.z = 0.;
+        
         material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
+        material->getShader()->setVector3(position, E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION);
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
