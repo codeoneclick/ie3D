@@ -75,7 +75,7 @@ void main(void)
         diffuseColor = diffuseColor + texture2D(SAMPLER_03, OUT_TillingTexcoordLayer_03.xy) * splattingMask.z;
     }
 #endif
-    diffuseColor = vec4(diffuseColor.rgb * diffuseFactor, 1.0);
-    diffuseColor = mix(vec4(0.16, 0.32, 0.32, 1.0), diffuseColor, OUT_Fog);
+    diffuseColor = vec4(diffuseColor.rgb * min(diffuseFactor, 1.0), 1.0);
+    diffuseColor = mix(vec4(vec3(0.16, 0.32, 0.32) * diffuseFactor, 1.0), diffuseColor, OUT_Fog);
     gl_FragColor = diffuseColor;
 }

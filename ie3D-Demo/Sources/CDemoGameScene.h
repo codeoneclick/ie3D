@@ -45,6 +45,9 @@ protected:
     void onCharacterMoveStateChanged(E_CHARACTER_CONTROLLER_MOVE_STATE state);
     void onCharacterSteerStateChanged(E_CHARACTER_CONTROLLER_STEER_STATE state);
     
+    void onKeyDown(i32 key);
+    void onKeyUp(i32 key);
+    
     void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject);
     
 public:

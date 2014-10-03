@@ -17,8 +17,6 @@
 #define key_a 97
 #define key_d 100
 #define key_s 115
-#define key_z 122
-#define key_x 120
 
 CDemoControllerOSX::CDemoControllerOSX(NSView *openGLView)
 {
@@ -32,8 +30,6 @@ CDemoControllerOSX::CDemoControllerOSX(NSView *openGLView)
     m_keysState[key_a] = false;
     m_keysState[key_d] = false;
     m_keysState[key_s] = false;
-    m_keysState[key_z] = false;
-    m_keysState[key_x] = false;
 }
 
 CDemoControllerOSX::~CDemoControllerOSX(void)
@@ -75,12 +71,18 @@ void CDemoControllerOSX::onKeyDown(i32 key)
 {
     m_keysState[key] = true;
     CDemoControllerOSX::updateState();
+    
+    std::shared_ptr<CDemoGameTransition> transition = std::static_pointer_cast<CDemoGameTransition>(gameTransition);
+    transition->getUIToSceneCommands()->executeOnKeyDownCommand(key);
 }
 
 void CDemoControllerOSX::onKeyUp(i32 key)
 {
     m_keysState[key] = false;
     CDemoControllerOSX::updateState();
+    
+    std::shared_ptr<CDemoGameTransition> transition = std::static_pointer_cast<CDemoGameTransition>(gameTransition);
+    transition->getUIToSceneCommands()->executeOnKeyUpCommand(key);
 }
 
 void CDemoControllerOSX::updateState(void)

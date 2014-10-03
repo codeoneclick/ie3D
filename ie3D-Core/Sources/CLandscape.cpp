@@ -70,9 +70,17 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
                         m_heightmapProcessor->captureChunk(i, j, [this, i , j, numChunksZ](CSharedMeshRef mesh) {
                             
+                            m_chunks[i + j * numChunksZ]->setCamera(m_camera);
+                            
+                            for(ui32 index = 0; index < m_lightSources.size(); ++index)
+                            {
+                                if(m_lightSources.at(index) != nullptr)
+                                {
+                                    m_chunks[i + j * numChunksZ]->setLightSource(m_lightSources.at(index), static_cast<E_LIGHT_SOURCE>(index));
+                                }
+                            }
+                            
                             m_chunks[i + j * numChunksZ]->setMesh(mesh);
-                            
-                            
                             m_chunks[i + j * numChunksZ]->onConfigurationLoaded(m_configuration, true);
                             
                             if(m_prerenderedSplattingDiffuseTexture != nullptr)
@@ -84,8 +92,6 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                                 m_chunks[i + j * numChunksZ]->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
                             }
                             m_chunks[i + j * numChunksZ]->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
-                            
-                            m_chunks[i + j * numChunksZ]->setCamera(m_camera);
                             
                             m_chunks[i + j * numChunksZ]->setRenderTechniqueImporter(m_renderTechniqueImporter);
                             m_chunks[i + j * numChunksZ]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);

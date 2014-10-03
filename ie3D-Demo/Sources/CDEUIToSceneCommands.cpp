@@ -10,7 +10,9 @@
 
 CDEUIToSceneCommands::CDEUIToSceneCommands(void) :
 m_setCharacterMoveStateCommand(nullptr),
-m_setCharacterSteerStateCommand(nullptr)
+m_setCharacterSteerStateCommand(nullptr),
+m_onKeyUpCommand(nullptr),
+m_onKeyDownCommand(nullptr)
 {
     
 }
@@ -44,4 +46,30 @@ void CDEUIToSceneCommands::executeSetCharacterSteerStateCommand(E_CHARACTER_CONT
     {
         m_setCharacterSteerStateCommand(state);
     }
+}
+
+void CDEUIToSceneCommands::connectOnKeyUpCommand(const __ON_KEY_UP& command)
+{
+    m_onKeyUpCommand = command;
+}
+
+void CDEUIToSceneCommands::executeOnKeyUpCommand(i32 key)
+{
+    if(m_onKeyUpCommand != nullptr)
+    {
+        m_onKeyUpCommand(key);
+    }
+}
+
+void CDEUIToSceneCommands::connectOnKeyDownCommand(const __ON_KEY_DOWN& command)
+{
+    m_onKeyDownCommand = command;
+}
+
+void CDEUIToSceneCommands::executeOnKeyDownCommand(i32 key)
+{
+     if(m_onKeyDownCommand != nullptr)
+     {
+         m_onKeyDownCommand(key);
+     }
 }

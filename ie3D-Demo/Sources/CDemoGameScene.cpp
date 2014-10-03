@@ -25,6 +25,9 @@
 #include "CGameObjectNavigator.h"
 #include "ICharacterController.h"
 
+#define key_z 122
+#define key_x 120
+
 CDemoGameScene::CDemoGameScene(IGameTransition* root) :
 IScene(root),
 m_uiToSceneCommands(std::make_shared<CDEUIToSceneCommands>()),
@@ -36,6 +39,9 @@ m_characterControllerSteerState(E_CHARACTER_CONTROLLER_STEER_STATE_NONE)
 {
     m_uiToSceneCommands->connectSetCharacterMoveStateCommand(std::bind(&CDemoGameScene::onCharacterMoveStateChanged, this, std::placeholders::_1));
     m_uiToSceneCommands->connectSetCharacterSteerStateCommand(std::bind(&CDemoGameScene::onCharacterSteerStateChanged, this, std::placeholders::_1));
+    
+    m_uiToSceneCommands->connectOnKeyDownCommand(std::bind(&CDemoGameScene::onKeyDown, this, std::placeholders::_1));
+    m_uiToSceneCommands->connectOnKeyUpCommand(std::bind(&CDemoGameScene::onKeyUp, this, std::placeholders::_1));
 }
 
 CDemoGameScene::~CDemoGameScene(void)
@@ -53,13 +59,19 @@ void CDemoGameScene::load(void)
     
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
-    m_camera->Set_Distance(32.0f);
+    m_camera->Set_Distance(18.0f);
     m_camera->Set_Height(6.0f);
     
     m_root->setCamera(m_camera);
     
     m_lightSource = m_root->createLightSource();
     m_root->setLightSource(m_lightSource, E_LIGHT_SOURCE_1);
+    
+    glm::vec3 position(0.0);
+    position.y = cosf(3.0) * -512.0 + 256.0;
+    position.x = sinf(3.0) * -512.0 + 256.0;
+    position.z = 0.0;
+    m_lightSource->setPosition(position);
     
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
@@ -169,14 +181,6 @@ void CDemoGameScene::update(f32 deltatime)
             break;
     }
     m_characterController->update(deltatime);
-    
-    static f32 angle = 0.0;
-    angle += 0.01;
-    glm::vec3 position(0.0);
-    position.y = cosf(angle) * -512.0 + 256.0;
-    position.x = sinf(angle) * -512.0 + 256.0;
-    position.z = 0.0;
-    m_lightSource->setPosition(position);
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)
@@ -203,4 +207,28 @@ void CDemoGameScene::onCharacterMoveStateChanged(E_CHARACTER_CONTROLLER_MOVE_STA
 void CDemoGameScene::onCharacterSteerStateChanged(E_CHARACTER_CONTROLLER_STEER_STATE state)
 {
     m_characterControllerSteerState = state;
+}
+
+void CDemoGameScene::onKeyDown(i32 key)
+{
+    static f32 angle = 3.0;
+    if(key == key_z)
+    {
+        angle += 0.05;
+    }
+    else if(key == key_x)
+    {
+        angle -= 0.05;
+    }
+    
+    glm::vec3 position(0.0);
+    position.y = cosf(angle) * -512.0 + 256.0;
+    position.x = sinf(angle) * -512.0 + 256.0;
+    position.z = 0.0;
+    m_lightSource->setPosition(position);
+}
+
+void CDemoGameScene::onKeyUp(i32 key)
+{
+    
 }

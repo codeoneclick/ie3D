@@ -9,7 +9,7 @@ const highp vec4 gravity = vec4(-0.991, 0.982, 0.0, 0.0);
 
 highp float getRayleighPhase(highp float cosin2)
 {
-    return 0.75 * (1.0 + cosin2);
+    return 0.75 + 0.75 * cosin2;
 }
 
 highp float getMiePhase(highp float cosin, highp float cosin2)
@@ -31,6 +31,6 @@ void main(void)
     
     color.rgb = getRayleighPhase(cosin.y) * OUT_ColorRayleigh.rgb + getMiePhase(cosin.x, cosin.y) * OUT_ColorMie.rgb;
     
-    color.a = 0.5;
+    color.a = 0.75;
     gl_FragColor = color;
 }

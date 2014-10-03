@@ -57,11 +57,12 @@ void main(void)
     mediump float fSpecularFactor = clamp(pow(max(dot(vLightDirection, vReflect), 0.0), 32.0), 0.0, 1.0);
     lowp float fDiffuseFactor = max(dot(vNormalColor, vLightDirection), 0.5);
     lowp vec4 vDiffuseColor = fDiffuseFactor * mix(vec4(0.16, 0.32, 0.32, 1.0), vec4(0.16, 0.32, 0.16, 1.0), vHeightmapColor.a * 2.0);
-    vDiffuseColor.a = 1.0;
-    
+    lowp float diffuseFactor = max(dot(k_vNormal, normalize(OUT_LightPosition - OUT_Position)), 0.25);
+
     vReflectionColor = mix(vDiffuseColor, vReflectionColor, vReflectionColor.a);
     vRefractionColor = mix(vDiffuseColor, vRefractionColor, vHeightmapColor.a * 4.0 * fresnel);
-    
-    gl_FragColor = mix(vReflectionColor, vRefractionColor, fresnel) + vec4(fSpecularFactor);
+    lowp vec4 color = mix(vReflectionColor, vRefractionColor, fresnel) * min(diffuseFactor, 1.0);
+    color.a = 1.0;
+    gl_FragColor = color + vec4(fSpecularFactor);
 }
 

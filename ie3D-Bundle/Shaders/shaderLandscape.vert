@@ -11,6 +11,7 @@ uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
 uniform vec4   VECTOR_ClipPlane;
 uniform vec3   VECTOR_CameraPosition;
+uniform vec3   VECTOR_LightPosition_01;
 
 varying vec2   OUT_TexCoord;
 varying vec4   OUT_TillingTexcoordLayer_01;
@@ -40,7 +41,7 @@ void main(void)
     
     OUT_Normal = IN_Normal.xyz / 127.0 - 1.0;
 
-    vec3 vLightDirection = vec3(512.0, 1024.0, 64.0) - vec3(vPosition);
+    vec3 vLightDirection = VECTOR_LightPosition_01 - vPosition.xyz;
     OUT_LightDirection = normalize(vLightDirection);
     
     OUT_Fog = clamp(((MATRIX_View * vPosition).z + IN_fogLinearStart) / (IN_fogLinearStart - IN_fogLinearEnd) * -1.0, 0.0, 1.0);
