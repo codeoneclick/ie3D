@@ -11,7 +11,6 @@
 #include "CShader.h"
 #include "CTexture.h"
 #include "CCamera.h"
-#include "CLight.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
 #include "CBatchingMgr.h"

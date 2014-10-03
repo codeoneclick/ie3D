@@ -45,6 +45,7 @@ void main(void)
 {
     vec4 vPosition = vec4(IN_Position, 1.0);
     vPosition = MATRIX_World * vPosition;
+    
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
 
     OUT_LightDirection = normalize(vPosition.xyz - VECTOR_LightPosition_01);
@@ -54,7 +55,7 @@ void main(void)
     float fCameraHeight = (VECTOR_CameraPosition.y - radiusInOutHeightMinMax.z) / (radiusInOutHeightMinMax.w - radiusInOutHeightMinMax.z);
     fCameraHeight = radiusInOutHeightMinMax.x + fCameraHeight * (radiusInOutHeightMinMax.y - radiusInOutHeightMinMax.x);
     
-    vec3 vStart = vec3(0.0, fCameraHeight, 0.0);
+    vec3 vStart = vec3(VECTOR_CameraPosition.x, fCameraHeight, VECTOR_CameraPosition.z);
     float fDistance = rayIntersection(vStart, vCameraRay, radiusInOutHeightMinMax.y);
     
     float fStartAngle = dot(vCameraRay, vStart) / fCameraHeight;

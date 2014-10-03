@@ -10,7 +10,7 @@
 #include "IEGameTransition.h"
 #include "IGameObject.h"
 #include "CCommonOS.h"
-#include "CLight.h"
+#include "CLightSource.h"
 #include "CModel.h"
 #include "COcean.h"
 #include "CLandscape.h"
@@ -57,6 +57,9 @@ void CDemoGameScene::load(void)
     m_camera->Set_Height(6.0f);
     
     m_root->setCamera(m_camera);
+    
+    m_lightSource = m_root->createLightSource();
+    m_root->setLightSource(m_lightSource, E_LIGHT_SOURCE_1);
     
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
@@ -166,6 +169,14 @@ void CDemoGameScene::update(f32 deltatime)
             break;
     }
     m_characterController->update(deltatime);
+    
+    static f32 angle = 0.0;
+    angle += 0.01;
+    glm::vec3 position(0.0);
+    position.y = cosf(angle) * -512.0 + 256.0;
+    position.x = sinf(angle) * -512.0 + 256.0;
+    position.z = 0.0;
+    m_lightSource->setPosition(position);
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

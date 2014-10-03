@@ -49,7 +49,7 @@
 		21208FC71906FB5F00FFC8D4 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
 		21208FC81906FB5F00FFC8D4 /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
 		21208FC91906FB5F00FFC8D4 /* CFrustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B1174F5215005B475E /* CFrustum.cpp */; };
-		21208FCA1906FB5F00FFC8D4 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
+		21208FCA1906FB5F00FFC8D4 /* CLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLightSource.cpp */; };
 		21208FCB1906FB5F00FFC8D4 /* CAnimationMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4EC917BA6B0C00C1484F /* CAnimationMixer.cpp */; };
 		21208FCC1906FB5F00FFC8D4 /* CSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BB17427C700063AB07 /* CSceneGraph.cpp */; };
 		21208FCD1906FB5F00FFC8D4 /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
@@ -168,7 +168,7 @@
 		2132660B1906A4AF001C98F7 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
 		2132660C1906A4AF001C98F7 /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
 		2132660D1906A4AF001C98F7 /* CFrustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B1174F5215005B475E /* CFrustum.cpp */; };
-		2132660E1906A4AF001C98F7 /* CLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLight.cpp */; };
+		2132660E1906A4AF001C98F7 /* CLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLightSource.cpp */; };
 		2132660F1906A4AF001C98F7 /* CAnimationMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4EC917BA6B0C00C1484F /* CAnimationMixer.cpp */; };
 		213266101906A4AF001C98F7 /* CSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BB17427C700063AB07 /* CSceneGraph.cpp */; };
 		213266111906A4AF001C98F7 /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
@@ -588,8 +588,8 @@
 		A4535E8717C633D50058CD47 /* CBatchingMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBatchingMgr.h; path = Sources/CBatchingMgr.h; sourceTree = "<group>"; };
 		A4535E9117C633EA0058CD47 /* CBatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBatch.cpp; path = Sources/CBatch.cpp; sourceTree = "<group>"; };
 		A4535E9217C633EA0058CD47 /* CBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBatch.h; path = Sources/CBatch.h; sourceTree = "<group>"; };
-		A45588D41756406C00802609 /* CLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLight.cpp; path = Sources/CLight.cpp; sourceTree = "<group>"; };
-		A45588D51756406C00802609 /* CLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLight.h; path = Sources/CLight.h; sourceTree = "<group>"; };
+		A45588D41756406C00802609 /* CLightSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLightSource.cpp; path = Sources/CLightSource.cpp; sourceTree = "<group>"; };
+		A45588D51756406C00802609 /* CLightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLightSource.h; path = Sources/CLightSource.h; sourceTree = "<group>"; };
 		A45588F017575FF900802609 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A45588F21757600200802609 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A45588F41757602600802609 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1188,8 +1188,8 @@
 				A40A69AE174F5203005B475E /* CCamera.cpp */,
 				A40A69B2174F5215005B475E /* CFrustum.h */,
 				A40A69B1174F5215005B475E /* CFrustum.cpp */,
-				A45588D51756406C00802609 /* CLight.h */,
-				A45588D41756406C00802609 /* CLight.cpp */,
+				A45588D51756406C00802609 /* CLightSource.h */,
+				A45588D41756406C00802609 /* CLightSource.cpp */,
 				A42FF51A17A150A600C0B419 /* CSkeleton.h */,
 				A42FF51917A150A600C0B419 /* CSkeleton.cpp */,
 				A49C4ECA17BA6B0C00C1484F /* CAnimationMixer.h */,
@@ -2004,7 +2004,7 @@
 				21208FC81906FB5F00FFC8D4 /* CCamera.cpp in Sources */,
 				21208FC91906FB5F00FFC8D4 /* CFrustum.cpp in Sources */,
 				2173349B19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */,
-				21208FCA1906FB5F00FFC8D4 /* CLight.cpp in Sources */,
+				21208FCA1906FB5F00FFC8D4 /* CLightSource.cpp in Sources */,
 				2191CE6A196EDBEF00CE2813 /* pngwrite.c in Sources */,
 				21208FCB1906FB5F00FFC8D4 /* CAnimationMixer.cpp in Sources */,
 				21208FCC1906FB5F00FFC8D4 /* CSceneGraph.cpp in Sources */,
@@ -2170,7 +2170,7 @@
 				2132660C1906A4AF001C98F7 /* CCamera.cpp in Sources */,
 				2132660D1906A4AF001C98F7 /* CFrustum.cpp in Sources */,
 				2173349A19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */,
-				2132660E1906A4AF001C98F7 /* CLight.cpp in Sources */,
+				2132660E1906A4AF001C98F7 /* CLightSource.cpp in Sources */,
 				2191CE69196EDBEF00CE2813 /* pngwrite.c in Sources */,
 				2132660F1906A4AF001C98F7 /* CAnimationMixer.cpp in Sources */,
 				213266101906A4AF001C98F7 /* CSceneGraph.cpp in Sources */,

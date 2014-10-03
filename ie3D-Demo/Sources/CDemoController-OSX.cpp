@@ -17,6 +17,8 @@
 #define key_a 97
 #define key_d 100
 #define key_s 115
+#define key_z 122
+#define key_x 120
 
 CDemoControllerOSX::CDemoControllerOSX(NSView *openGLView)
 {
@@ -30,6 +32,8 @@ CDemoControllerOSX::CDemoControllerOSX(NSView *openGLView)
     m_keysState[key_a] = false;
     m_keysState[key_d] = false;
     m_keysState[key_s] = false;
+    m_keysState[key_z] = false;
+    m_keysState[key_x] = false;
 }
 
 CDemoControllerOSX::~CDemoControllerOSX(void)

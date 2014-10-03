@@ -33,7 +33,10 @@ m_atmosphericScattering(nullptr),
 m_collisionMgr(collisionMgr),
 m_inputContext(inputContext)
 {
-
+    m_lightSources.at(0) = nullptr;
+    m_lightSources.at(1) = nullptr;
+    m_lightSources.at(2) = nullptr;
+    m_lightSources.at(3) = nullptr;
 }
 
 CSceneGraph::~CSceneGraph(void)
@@ -62,15 +65,35 @@ void CSceneGraph::setCamera(CSharedCameraRef camera)
     m_collisionMgr->setCamera(m_camera);
 }
 
+void CSceneGraph::setLightSource(CSharedLightSourceRef lightSource, E_LIGHT_SOURCE index)
+{
+    if(index < E_LIGHT_SOURCE_MAX)
+    {
+        m_lightSources.at(index) = lightSource;
+        for(const auto& iterator : m_gameObjectsContainer)
+        {
+            iterator->setLightSource(lightSource, index);
+        }
+    }
+}
+
 void CSceneGraph::addGameObject(ISharedGameObjectRef gameObject)
 {
+    assert(m_sceneUpdateMgr != nullptr);
+    assert(m_renderPipeline != nullptr);
+    
     if(m_camera != nullptr)
     {
         gameObject->setCamera(m_camera);
     }
     
-    assert(m_sceneUpdateMgr != nullptr);
-    assert(m_renderPipeline != nullptr);
+    for(ui32 i = 0; i < m_lightSources.size(); ++i)
+    {
+        if(m_lightSources.at(i) != nullptr)
+        {
+            gameObject->setLightSource(m_lightSources.at(i), static_cast<E_LIGHT_SOURCE>(i));
+        }
+    }
     
     gameObject->setSceneUpdateMgr(m_sceneUpdateMgr);
     gameObject->setRenderTechniqueImporter(m_renderPipeline);

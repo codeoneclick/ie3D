@@ -21,6 +21,7 @@ protected:
     
     std::set<ISharedGameObject> m_gameObjectsContainer;
     std::set<CSharedCamera> m_camerasContainer;
+    std::set<CSharedLightSource> m_lightSourcesContainer;
 
 public:
     
@@ -32,6 +33,9 @@ public:
     
     CSharedCamera createCamera(f32 fov, f32 near, f32 far,const glm::ivec4& viewport);
     void deleteCamera(CSharedCameraRef camera);
+    
+    CSharedLightSource createLightSource(void);
+    void deleteLightSource(CSharedLightSourceRef lightSource);
     
     CSharedModel createModel(const std::string& filename);
     CSharedOcean createOcean(const std::string& filename);

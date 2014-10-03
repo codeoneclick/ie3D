@@ -31,6 +31,6 @@ void main(void)
     
     color.rgb = getRayleighPhase(cosin.y) * OUT_ColorRayleigh.rgb + getMiePhase(cosin.x, cosin.y) * OUT_ColorMie.rgb;
     
-    color.a = 1.0;
+    color.a = 0.5;
     gl_FragColor = color;
 }

@@ -74,6 +74,8 @@ public:
     
     void setCamera(CSharedCameraRef camera);
     
+    void setLightSource(CSharedLightSourceRef lightSource, E_LIGHT_SOURCE index);
+    
     const CSharedResourceAccessor getResourceAccessor(void) const;
     const CSharedConfigurationAccessor getConfigurationAccessor(void) const;
     
@@ -106,6 +108,9 @@ public:
     
     CSharedCamera createCamera(f32 fov, f32 near, f32 far,const glm::ivec4& viewport);
     void deleteCamera(CSharedCameraRef camera);
+    
+    CSharedLightSource createLightSource(void);
+    void deleteLightSource(CSharedLightSourceRef lightSource);
     
     CSharedModel createModel(const std::string& filename);
     CSharedOcean createOcean(const std::string& filename);

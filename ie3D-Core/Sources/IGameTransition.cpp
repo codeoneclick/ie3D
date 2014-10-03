@@ -200,6 +200,12 @@ void IGameTransition::setCamera(CSharedCameraRef camera)
     m_sceneGraph->setCamera(camera);
 }
 
+void IGameTransition::setLightSource(CSharedLightSourceRef lightSource, E_LIGHT_SOURCE index)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->setLightSource(lightSource, index);
+}
+
 const CSharedResourceAccessor IGameTransition::getResourceAccessor(void) const
 {
     assert(m_resourceAccessor != nullptr);
@@ -330,6 +336,18 @@ void IGameTransition::deleteCamera(CSharedCameraRef camera)
 {
     assert(m_sceneFabricator != nullptr);
     m_sceneFabricator->deleteCamera(camera);
+}
+
+CSharedLightSource IGameTransition::createLightSource(void)
+{
+    assert(m_sceneFabricator != nullptr);
+    return m_sceneFabricator->createLightSource();
+}
+
+void IGameTransition::deleteLightSource(CSharedLightSourceRef lightSource)
+{
+    assert(m_sceneFabricator != nullptr);
+    m_sceneFabricator->deleteLightSource(lightSource);
 }
 
 CSharedModel IGameTransition::createModel(const std::string& filename)

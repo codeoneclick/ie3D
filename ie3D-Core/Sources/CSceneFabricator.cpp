@@ -9,7 +9,7 @@
 #include "CSceneFabricator.h"
 #include "CConfigurationAccessor.h"
 #include "CCamera.h"
-#include "CLight.h"
+#include "CLightSource.h"
 #include "CModel.h"
 #include "COcean.h"
 #include "CSkyBox.h"
@@ -30,6 +30,7 @@ CSceneFabricator::~CSceneFabricator(void)
 {
     m_camerasContainer.clear();
     m_gameObjectsContainer.clear();
+    m_lightSourcesContainer.clear();
 }
 
 CSharedCamera CSceneFabricator::createCamera(f32 fov, f32 near, f32 far,const glm::ivec4& viewport)
@@ -42,6 +43,18 @@ CSharedCamera CSceneFabricator::createCamera(f32 fov, f32 near, f32 far,const gl
 void CSceneFabricator::deleteCamera(CSharedCameraRef camera)
 {
     m_camerasContainer.erase(camera);
+}
+
+CSharedLightSource CSceneFabricator::createLightSource(void)
+{
+    CSharedLightSource lightSource = std::make_shared<CLightSource>();
+    m_lightSourcesContainer.insert(lightSource);
+    return lightSource;
+}
+
+void CSceneFabricator::deleteLightSource(CSharedLightSourceRef lightSource)
+{
+    m_lightSourcesContainer.erase(lightSource);
 }
 
 CSharedModel CSceneFabricator::createModel(const std::string& filename)

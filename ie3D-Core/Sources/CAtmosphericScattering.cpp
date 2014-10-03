@@ -11,7 +11,7 @@
 #include "CShader.h"
 #include "CTexture.h"
 #include "CCamera.h"
-#include "CLight.h"
+#include "CLightSource.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
 #include "CMesh.h"
@@ -164,44 +164,6 @@ void CAtmosphericScattering::onConfigurationLoaded(ISharedConfigurationRef confi
     }
     indexBuffer->unlock();
     
-    /*ui32 index = 0;
-    for(ui32 i = 0; i < numCols; i++)
-    {
-        const f32 offsetXZ = cosf(1.0) * static_cast<f32>(i) / static_cast<f32>(numCols - 1);
-        for(ui32 j = 0; j < numRows; j++)
-        {
-            const f32 offsetY = (M_PI * 2.0) * static_cast<f32>(j) / static_cast<f32>(numRows - 1.0) ;
-            
-            vertexData[index].m_position.x = sinf(offsetXZ) * cosf(offsetY);
-            vertexData[index].m_position.y = cosf(offsetXZ);
-            vertexData[index].m_position.z = sinf(offsetXZ) * sinf(offsetY);
-            vertexData[index].m_position *= m_outerRadius;
-            
-            vertexData[index].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(j / (numRows - 1.0),
-                                                                                 i / (numCols - 1.0)));
-            index++;
-        }
-    }
-    vertexBuffer->unlock();
-    
-    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((numCols - 1) * (numRows - 1) * 6, GL_STATIC_DRAW);
-    ui16* indexData = indexBuffer->lock();
-    
-    for(ui32 i = 0; i < numRows - 1; i++)
-    {
-        for(ui32 j = 0; j < numCols - 1; j++)
-        {
-            *(indexData++) = i * numRows + j;
-            *(indexData++) = (i + 1) * numRows + j;
-            *(indexData++) = (i + 1) * numRows + j + 1;
-            
-            *(indexData++) = (i + 1) * numRows + j + 1;
-            *(indexData++) = i * numRows + j + 1;
-            *(indexData++) = i * numRows + j;
-        }
-    }
-    indexBuffer->unlock();*/
-    
     m_mesh = CMesh::constructCustomMesh("atmosphericScattering", vertexBuffer, indexBuffer,
                                         glm::vec3(4096.0), glm::vec3(4096.0));
     assert(m_mesh != nullptr);
@@ -241,6 +203,7 @@ void CAtmosphericScattering::onDraw(const std::string& mode)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_camera != nullptr);
+        assert(m_lightSources.at(E_LIGHT_SOURCE_1) != nullptr);
         assert(m_materials.find(mode) != m_materials.end());
         
         CSharedMaterial material = m_materials.find(mode)->second;
@@ -251,15 +214,8 @@ void CAtmosphericScattering::onDraw(const std::string& mode)
         material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         
-        static f32 angle = 0.0;
-        angle += 0.01;
-        glm::vec3 position(0.0);
-        position.y = cosf(angle) * -100.0;
-        position.x = sinf(angle) * -100.0;
-        position.z = 0.;
-        
         material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->getShader()->setVector3(position, E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION);
+        material->getShader()->setVector3(m_lightSources.at(E_LIGHT_SOURCE_1)->getPosition(), E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION);
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
