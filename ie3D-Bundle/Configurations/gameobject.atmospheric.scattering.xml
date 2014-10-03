@@ -4,7 +4,7 @@
     size="8"
     num_samples="2"
     inner_radius="20.0"
-    outer_radius="20.5"
+    outer_radius="21.0"
     kr_coefficient="0.0025"
     km_coefficient="0.001"
     esun_coefficient="20.0"

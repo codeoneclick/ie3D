@@ -1,36 +1,35 @@
 uniform sampler2D SAMPLER_01;
 
-varying highp vec4 OUT_ColorRayleigh;
-varying highp vec4 OUT_ColorMie;
+varying highp vec3 OUT_RayleighPhase;
+varying highp vec3 OUT_Mie;
 varying highp vec3 OUT_Direction;
 varying highp vec3 OUT_LightDirection;
 
-const highp vec4 gravity = vec4(-0.991, 0.982, 0.0, 0.0);
+const highp float fG = -0.99;
+const highp float fG2 = -0.99 * -0.99;
 
 highp float getRayleighPhase(highp float cosin2)
 {
     return 0.75 + 0.75 * cosin2;
 }
 
-highp float getMiePhase(highp float cosin, highp float cosin2)
+highp float getMiePhase(highp float fCos, highp float fCos2)
 {
-    highp vec3 t3;
-    t3.x = 1.5 * ((1.0 - gravity.y) / (2.0 + gravity.y));
-    t3.y = 1.0 + gravity.y;
-    t3.z = 2.0 * gravity.x;
-    return t3.x * (1.0 + cosin2) / pow(t3.y - t3.z * cosin, 1.5);
+    highp vec3 vHG = vec3(1.5 * ((1.0 - fG2) / (2.0 + fG2)), 1.0 + fG2, 2.0 * fG);
+    return vHG.x * (1.0 + fCos2) / pow(vHG.y - vHG.z * fCos, 1.5);
 }
 
 void main(void)
 {
-    lowp vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
+    lowp vec4 vColor = vec4(1.0, 1.0, 1.0, 1.0);
     
-    highp vec2 cosin;
-    cosin.x = dot(-OUT_LightDirection, OUT_Direction) / length(OUT_Direction);
-    cosin.y = cosin.x * cosin.x;
+    highp vec2 fCos;
+    fCos.x = dot(OUT_LightDirection, OUT_Direction) / length(OUT_Direction);
+    fCos.y = fCos.x * fCos.x;
     
-    color.rgb = getRayleighPhase(cosin.y) * OUT_ColorRayleigh.rgb + getMiePhase(cosin.x, cosin.y) * OUT_ColorMie.rgb;
-    
-    color.a = 0.75;
-    gl_FragColor = color;
+    lowp vec3 vMie = getMiePhase(fCos.x, fCos.y) * OUT_Mie;
+    lowp vec3 vRayleighPhase = getRayleighPhase(fCos.y) * OUT_RayleighPhase;
+    vColor.rgb = vRayleighPhase + vMie;
+    vColor.a = 0.75;
+    gl_FragColor = vColor;
 }

@@ -16,10 +16,11 @@ uniform vec3   VECTOR_LightPosition_01;
 const vec4 scaleIteration = vec4(0.01, 0.25, 0.04, 10.0);
 const vec4 radiusInOutHeightMinMax = vec4(6356.75, 6456.55, -100.0, 2000.0);
 const vec4 scatterFactors = vec4(0.04, 0.03, 0.025, 0.0188);
-const vec4 invertWaveLength = vec4(5.602,9.473, 19.644, 0.0);
+const float fKrESun = 20.0 * 0.0025;
+const float fKmESun = 20.0 * 0.001;
 
-varying vec4 OUT_ColorRayleigh;
-varying vec4 OUT_ColorMie;
+varying vec3 OUT_RayleighPhase;
+varying vec3 OUT_Mie;
 varying vec3 OUT_Direction;
 varying vec3 OUT_LightDirection;
 
@@ -47,8 +48,10 @@ void main(void)
     vPosition = MATRIX_World * vPosition;
     
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
+    
+    vec3 vInvertWavelength = vec3(1.0 / pow(0.650, 4.0), 1.0 / pow(0.570, 4.0), 1.0 / pow(0.475, 4.0));
 
-    OUT_LightDirection = normalize(vPosition.xyz - VECTOR_LightPosition_01);
+    OUT_LightDirection = normalize(VECTOR_LightPosition_01 - vPosition.xyz);
     vec3 vCameraPosition = VECTOR_CameraPosition;
     vec3 vCameraRay = normalize(vPosition.xyz - vCameraPosition);
     
@@ -77,24 +80,21 @@ void main(void)
         float fHeight = length(vSamplePoint);
         float fDepth = exp(scaleIteration.z * (radiusInOutHeightMinMax.x - fHeight));
         
-        float fLightAngle = dot(-OUT_LightDirection, vSamplePoint) / fHeight;
+        float fLightAngle = dot(OUT_LightDirection, vSamplePoint) / fHeight;
         
         float fCameraAngle = dot(vCameraRay, vSamplePoint) / fHeight;
         
         float fScatter = (fStartOffset + fDepth * (scale(fLightAngle) - scale(fCameraAngle)));
         
-        vec3 vAttenuate = exp(-fScatter * (invertWaveLength.xyz * scatterFactors.z + scatterFactors.w));
+        vec3 vAttenuate = exp(-fScatter * (vInvertWavelength * scatterFactors.z + scatterFactors.w));
         
         color += vAttenuate * (fDepth * fScaledLength);
         
         vSamplePoint += vSampleRay;
     }
 
-    OUT_ColorRayleigh.xyz = color * (invertWaveLength.xyz * scatterFactors.x);
-    OUT_ColorRayleigh.w = 1.0;
-    
-    OUT_ColorMie.xyz = color * scatterFactors.y;
-    OUT_ColorMie.w = 1.0;
+    OUT_RayleighPhase = color * (vInvertWavelength * fKrESun);
+    OUT_Mie = color * fKmESun;
 
     OUT_Direction = vCameraPosition - vPosition.xyz;
 }
