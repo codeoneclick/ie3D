@@ -16,6 +16,7 @@
 #include "CLandscape.h"
 #include "CSkyBox.h"
 #include "CParticleEmitter.h"
+#include "CAtmosphericScattering.h"
 #include "CCamera.h"
 #include "CMapDragController.h"
 #include "CMaterial.h"

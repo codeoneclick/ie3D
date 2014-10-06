@@ -34,8 +34,8 @@ void CAtmosphericScattering::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::setPosition(glm::vec3(m_camera->Get_Position().x, m_camera->Get_Position().y - m_innerRadius, m_camera->Get_Position().z));
-        IGameObject::setRotation(glm::vec3(0.0, glm::degrees(m_camera->Get_Rotation()) + 45.0, 0.0));
+        IGameObject::setPosition(glm::vec3(m_camera->Get_Position().x, m_camera->Get_Position().y, m_camera->Get_Position().z));
+        //IGameObject::setRotation(glm::vec3(0.0, glm::degrees(m_camera->Get_Rotation()) + 45.0, 0.0));
         IGameObject::onSceneUpdate(deltatime);
     }
 }
@@ -84,7 +84,7 @@ void CAtmosphericScattering::onConfigurationLoaded(ISharedConfigurationRef confi
         {
             const f32 offsetY = (M_PI * 2.0) * static_cast<f32>(j) / static_cast<f32>(numRows - 1.0) ;
             vertexData[index].m_position.x = sinf(offsetXZ) * cosf(offsetY) * m_outerRadius;
-            vertexData[index].m_position.y = cosf(offsetXZ) * m_outerRadius;
+            vertexData[index].m_position.y = cosf(offsetXZ) * m_outerRadius - m_innerRadius;
             vertexData[index].m_position.z = sinf(offsetXZ) * sinf(offsetY) * m_outerRadius;
             index++;
         }

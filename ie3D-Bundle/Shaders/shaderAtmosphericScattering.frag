@@ -1,7 +1,7 @@
 uniform sampler2D SAMPLER_01;
 
 varying highp vec3 OUT_RayleighPhase;
-varying highp vec3 OUT_Mie;
+varying highp vec4 OUT_Mie;
 varying highp vec3 OUT_Direction;
 varying highp vec3 OUT_LightDirection;
 
@@ -27,9 +27,9 @@ void main(void)
     fCos.x = dot(OUT_LightDirection, OUT_Direction) / length(OUT_Direction);
     fCos.y = fCos.x * fCos.x;
     
-    lowp vec3 vMie = getMiePhase(fCos.x, fCos.y) * OUT_Mie;
+    lowp vec3 vMie = getMiePhase(fCos.x, fCos.y) * OUT_Mie.rgb;
     lowp vec3 vRayleighPhase = getRayleighPhase(fCos.y) * OUT_RayleighPhase;
     vColor.rgb = vRayleighPhase + vMie;
-    vColor.a = 0.75;
+    vColor.a = min(OUT_Mie.a, 0.75);
     gl_FragColor = vColor;
 }

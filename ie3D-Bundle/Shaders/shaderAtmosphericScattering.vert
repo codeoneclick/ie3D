@@ -20,7 +20,7 @@ const float fKrESun = 20.0 * 0.0025;
 const float fKmESun = 20.0 * 0.001;
 
 varying vec3 OUT_RayleighPhase;
-varying vec3 OUT_Mie;
+varying vec4 OUT_Mie;
 varying vec3 OUT_Direction;
 varying vec3 OUT_LightDirection;
 
@@ -94,7 +94,7 @@ void main(void)
     }
 
     OUT_RayleighPhase = color * (vInvertWavelength * fKrESun);
-    OUT_Mie = color * fKmESun;
-
+    OUT_Mie = vec4(color * fKmESun, clamp(vPosition.y, 0.0, 1.0));
+    OUT_Mie.a = max(0.0, min(IN_Position.y + 1.0, 1.0));
     OUT_Direction = vCameraPosition - vPosition.xyz;
 }
