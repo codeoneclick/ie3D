@@ -5,8 +5,9 @@ varying highp vec4 OUT_Mie;
 varying highp vec3 OUT_Direction;
 varying highp vec3 OUT_LightDirection;
 
-const highp float fG = -0.99;
-const highp float fG2 = -0.99 * -0.99;
+const highp float fG = -0.98;
+const highp float fG2 = -0.98 * -0.98;
+const highp float fExposure =  -1.0;
 
 highp float getRayleighPhase(highp float cosin2)
 {
@@ -29,7 +30,7 @@ void main(void)
     
     lowp vec3 vMie = getMiePhase(fCos.x, fCos.y) * OUT_Mie.rgb;
     lowp vec3 vRayleighPhase = getRayleighPhase(fCos.y) * OUT_RayleighPhase;
-    vColor.rgb = vRayleighPhase + vMie;
+    vColor.rgb = 1.0 - exp(fExposure * (vRayleighPhase + vMie));
     vColor.a = min(OUT_Mie.a, 0.75);
     gl_FragColor = vColor;
 }
