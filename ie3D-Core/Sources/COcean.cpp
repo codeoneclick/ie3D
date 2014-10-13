@@ -58,38 +58,55 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     m_waveGeneratorTimer = 0.0f;
     m_waveGeneratorInterval = oceanConfiguration->getWaveGenerationInterval();
     
-    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(4, GL_STATIC_DRAW);
+    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(9 * 4, GL_STATIC_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
-    
-    vertexData[0].m_position = glm::vec3(0.0f,  m_altitude,  0.0f);
-    vertexData[1].m_position = glm::vec3(m_width - 1.0, m_altitude,  0.0f);
-    vertexData[2].m_position = glm::vec3(m_width - 1.0, m_altitude,  m_height - 1.0);
-    vertexData[3].m_position = glm::vec3(0.0f,  m_altitude,  m_height - 1.0);
-    
-    vertexData[0].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
-    vertexData[1].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
-    vertexData[2].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
-    vertexData[3].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
-    
-    m_textureTileFactor = 8.0f;
-    
-    vertexData[0].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f,  0.0f));
-    vertexData[1].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f,  0.0f));
-    vertexData[2].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f,  1.0f));
-    vertexData[3].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f,  1.0f));
-    
+    ui32 index = 0;
+    for(i32 i = -1; i <= 1; ++i)
+    {
+        for(i32 j = -1; j <= 1; ++j)
+        {
+            vertexData[index * 4 + 0].m_position = glm::vec3(m_width * i, m_altitude, m_height * j);
+            vertexData[index * 4 + 1].m_position = glm::vec3(m_width * i + m_width, m_altitude, m_height * j);
+            vertexData[index * 4 + 2].m_position = glm::vec3(m_width * i + m_width, m_altitude, m_height * j + m_height);
+            vertexData[index * 4 + 3].m_position = glm::vec3(m_width * i, m_altitude, m_height * j + m_height);
+            
+            vertexData[index * 4 + 0].m_extra = glm::u8vec4(i == 0 && j == 0 ? 1 : 0, i == 0 && j == 0 ? 1 : 2, 0, 0);
+            vertexData[index * 4 + 1].m_extra = glm::u8vec4(i == 0 && j == 0 ? 1 : 0, i == 0 && j == 0 ? 1 : 2, 0, 0);
+            vertexData[index * 4 + 2].m_extra = glm::u8vec4(i == 0 && j == 0 ? 1 : 0, i == 0 && j == 0 ? 1 : 2, 0, 0);
+            vertexData[index * 4 + 3].m_extra = glm::u8vec4(i == 0 && j == 0 ? 1 : 0, i == 0 && j == 0 ? 1 : 2, 0, 0);
+            
+            vertexData[index * 4 + 0].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
+            vertexData[index * 4 + 1].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
+            vertexData[index * 4 + 2].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
+            vertexData[index * 4 + 3].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
+            
+            vertexData[index * 4 + 0].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f,  0.0f));
+            vertexData[index * 4 + 1].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f,  0.0f));
+            vertexData[index * 4 + 2].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f,  1.0f));
+            vertexData[index * 4 + 3].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f,  1.0f));
+            
+            index++;
+        }
+    }
     vertexBuffer->unlock();
     
-    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>(6, GL_STATIC_DRAW);
+    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>(9 * 6, GL_STATIC_DRAW);
     ui16* indexData = indexBuffer->lock();
-    
-    indexData[0] = 0;
-    indexData[1] = 1;
-    indexData[2] = 2;
-    indexData[3] = 0;
-    indexData[4] = 2;
-    indexData[5] = 3;
-    
+    index = 0;
+    for(i32 i = -1; i <= 1; ++i)
+    {
+        for(i32 j = -1; j <= 1; ++j)
+        {
+            indexData[index * 6 + 0] = index * 4 + 0;
+            indexData[index * 6 + 1] = index * 4 + 1;
+            indexData[index * 6 + 2] = index * 4 + 2;
+            indexData[index * 6 + 3] = index * 4 + 0;
+            indexData[index * 6 + 4] = index * 4 + 2;
+            indexData[index * 6 + 5] = index * 4 + 3;
+            
+            index++;
+        }
+    }
     indexBuffer->unlock();
     
     m_mesh = CMesh::constructCustomMesh("ocean", vertexBuffer, indexBuffer,
@@ -102,7 +119,7 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32  COcean::zOrder(void)
+i32 COcean::zOrder(void)
 {
     return m_zOrder;
 }
@@ -147,6 +164,10 @@ void COcean::onDraw(const std::string& mode)
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         material->getShader()->setFloat(m_waveGeneratorTimer, E_SHADER_UNIFORM_FLOAT_TIMER);
+        
+        material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
+        material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
+        
         CSharedTexture heightmapTexture = m_resourceAccessor->getTexture("landscape.heightmap.texture");
         if(heightmapTexture)
         {

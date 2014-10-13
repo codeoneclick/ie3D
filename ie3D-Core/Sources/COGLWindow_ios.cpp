@@ -48,14 +48,14 @@ ui32 IOGLWindow::getWidth(void)
 {
     assert(m_hwnd != nullptr);
     const UIView* hwnd = (__bridge UIView*)m_hwnd;
-    return static_cast<ui32>(hwnd.frame.size.width);
+    return static_cast<ui32>(MAX_VALUE(hwnd.frame.size.width, hwnd.frame.size.height));
 }
 
 ui32 IOGLWindow::getHeight(void)
 {
     assert(m_hwnd != nullptr);
     const UIView* hwnd = (__bridge UIView*)m_hwnd;
-    return static_cast<ui32>(hwnd.frame.size.height);
+    return static_cast<ui32>(MIN_VALUE(hwnd.frame.size.width, hwnd.frame.size.height));
 }
 
 #endif

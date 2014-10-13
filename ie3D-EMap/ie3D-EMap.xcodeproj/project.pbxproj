@@ -72,6 +72,10 @@
 		218BCFF419C339700041048E /* map_05.png in Resources */ = {isa = PBXBuildFile; fileRef = 218BCFEF19C339700041048E /* map_05.png */; };
 		2191CE30196E872200CE2813 /* CMEPlacementModel.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */; };
 		2191CE7A196EE8D800CE2813 /* temp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2191CE79196EE8D800CE2813 /* temp.png */; };
+		21A38D4C19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4A19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag */; };
+		21A38D4D19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */; };
+		21A38D5119EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4F19EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml */; };
+		21A38D5219EBCDCE008CAFE7 /* material.atmospheric.scattering.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D5019EBCDCE008CAFE7 /* material.atmospheric.scattering.base.xml */; };
 		21A9D84B1961581600A1B62C /* model.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D8481961581600A1B62C /* model.MDL_mesh */; };
 		21A9D84C1961581600A1B62C /* model.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D8491961581600A1B62C /* model.MDL_sk */; };
 		21A9D84F1961582D00A1B62C /* model.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D84E1961582D00A1B62C /* model.MDL_anim */; };
@@ -325,6 +329,10 @@
 		2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEPlacementModel.cpp; path = Sources/CMEPlacementModel.cpp; sourceTree = SOURCE_ROOT; };
 		2191CE2F196E872200CE2813 /* CMEPlacementModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEPlacementModel.h; path = Sources/CMEPlacementModel.h; sourceTree = SOURCE_ROOT; };
 		2191CE79196EE8D800CE2813 /* temp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = temp.png; path = "../ie3D-Bundle/Textures/temp.png"; sourceTree = SOURCE_ROOT; };
+		21A38D4A19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderAtmosphericScattering.frag; path = "../ie3D-Bundle/Shaders/shaderAtmosphericScattering.frag"; sourceTree = SOURCE_ROOT; };
+		21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderAtmosphericScattering.vert; path = "../ie3D-Bundle/Shaders/shaderAtmosphericScattering.vert"; sourceTree = SOURCE_ROOT; };
+		21A38D4F19EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.atmospheric.scattering.xml; path = "../ie3D-Bundle/Configurations/gameobject.atmospheric.scattering.xml"; sourceTree = SOURCE_ROOT; };
+		21A38D5019EBCDCE008CAFE7 /* material.atmospheric.scattering.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.atmospheric.scattering.base.xml; path = "../ie3D-Bundle/Configurations/material.atmospheric.scattering.base.xml"; sourceTree = SOURCE_ROOT; };
 		21A9D8481961581600A1B62C /* model.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; name = model.MDL_mesh; path = "../ie3D-Bundle/Meshes/model.MDL_mesh"; sourceTree = SOURCE_ROOT; };
 		21A9D8491961581600A1B62C /* model.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; name = model.MDL_sk; path = "../ie3D-Bundle/Meshes/model.MDL_sk"; sourceTree = SOURCE_ROOT; };
 		21A9D84E1961582D00A1B62C /* model.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; name = model.MDL_anim; path = "../ie3D-Bundle/Meshes/model.MDL_anim"; sourceTree = SOURCE_ROOT; };
@@ -684,6 +692,8 @@
 		212090EB1906FD4900FFC8D4 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				21A38D4A19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag */,
+				21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */,
 				21C409991979B85E0063D62D /* shaderTexture2D.frag */,
 				21C4099A1979B85E0063D62D /* shaderTexture2D.vert */,
 				21A9D86F1961ACE500A1B62C /* shaderModelNormal.frag */,
@@ -717,6 +727,7 @@
 		212090EC1906FD5300FFC8D4 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				21A38D4F19EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml */,
 				21D9943F19810C43003D4CD1 /* gameobject.tank.heavy.xml */,
 				21D9943B19810C43003D4CD1 /* gameobject.tank.heavy.body.xml */,
 				21D9943C19810C43003D4CD1 /* gameobject.tank.heavy.left.track.xml */,
@@ -738,6 +749,7 @@
 				21BC347B19080A39007B99DA /* gameobject.landscape.xml */,
 				21BC347C19080A39007B99DA /* gameobject.ocean.xml */,
 				21BC347D19080A39007B99DA /* gameobject.particle.emitter.xml */,
+				21A38D5019EBCDCE008CAFE7 /* material.atmospheric.scattering.base.xml */,
 				21C409961979B8370063D62D /* material.texture2D.xml */,
 				21D9944019810C43003D4CD1 /* material.tank.heavy.body.common.xml */,
 				21D9944119810C43003D4CD1 /* material.tank.heavy.left.track.common.xml */,
@@ -1219,6 +1231,7 @@
 				21B08E0419224FE100C5D5CC /* material.skybox.base.xml in Resources */,
 				21BC349319080A39007B99DA /* gameobject.landscape.xml in Resources */,
 				21D9944519810C43003D4CD1 /* gameobject.tank.heavy.left.track.xml in Resources */,
+				21A38D4C19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag in Resources */,
 				21D9944919810C43003D4CD1 /* material.tank.heavy.body.common.xml in Resources */,
 				212092D619197ADD00FFC8D4 /* zpos.pvr in Resources */,
 				21BC349719080A39007B99DA /* material.landscape.edges.base.xml in Resources */,
@@ -1284,6 +1297,7 @@
 				21C409B6197C11060063D62D /* material.tank.light.body.common.xml in Resources */,
 				21138520194C40820041A18A /* render.operation.world.normal.xml in Resources */,
 				21D9943819810976003D4CD1 /* material.tank.medium.left.track.common.xml in Resources */,
+				21A38D5219EBCDCE008CAFE7 /* material.atmospheric.scattering.base.xml in Resources */,
 				21D9943419810976003D4CD1 /* gameobject.tank.medium.right.track.xml in Resources */,
 				21BC34C719080B9E007B99DA /* landscape.03.diffuse.pvr in Resources */,
 				21D9944C19810C43003D4CD1 /* material.tank.heavy.tower.common.xml in Resources */,
@@ -1292,6 +1306,7 @@
 				21A9D868196162DE00A1B62C /* model.diffuse.pvr in Resources */,
 				21BC34BB19080B47007B99DA /* shaderParticleEmitter.frag in Resources */,
 				21C409CF197C123D0063D62D /* tank_medium_tower.mdl_01 in Resources */,
+				21A38D4D19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert in Resources */,
 				21B08E0519224FE100C5D5CC /* material.skybox.reflection.xml in Resources */,
 				21BC34B519080B47007B99DA /* shaderLandscape.frag in Resources */,
 				217AF17F1945EB010045CF9D /* material.landscape.brush.xml in Resources */,
@@ -1311,6 +1326,7 @@
 				21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */,
 				216204321949A74E00D129AD /* render.operation.screen.ssao.xml in Resources */,
 				21A9D86E1961AC9900A1B62C /* material.model.normal.xml in Resources */,
+				21A38D5119EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml in Resources */,
 				21A9D8711961ACE600A1B62C /* shaderModelNormal.frag in Resources */,
 				216204451949F93000D129AD /* ssao.random.pvr in Resources */,
 				21D9944719810C43003D4CD1 /* gameobject.tank.heavy.tower.xml in Resources */,

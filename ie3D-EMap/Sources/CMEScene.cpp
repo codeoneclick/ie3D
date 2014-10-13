@@ -10,9 +10,11 @@
 #include "IGameTransition.h"
 #include "IGameObject.h"
 #include "CCamera.h"
+#include "CLightSource.h"
 #include "CLandscape.h"
 #include "COcean.h"
 #include "CSkyBox.h"
+#include "CAtmosphericScattering.h"
 #include "CParticleEmitter.h"
 #include "CMapDragController.h"
 #include "CMEGameTransition.h"
@@ -58,16 +60,27 @@ void CMEScene::load(void)
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
     m_camera->Set_Distance(64.0f);
-    m_camera->Set_Height(32.0f);
-    
+    m_camera->Set_Height(16.0f);
     m_root->setCamera(m_camera);
     
+    m_lightSource = m_root->createLightSource();
+    m_root->setLightSource(m_lightSource, E_LIGHT_SOURCE_1);
+    
+    glm::vec3 position(0.0);
+    position.y = cosf(3.0) * -512.0 + 256.0;
+    position.x = sinf(3.0) * -512.0 + 256.0;
+    position.z = 0.0;
+    m_lightSource->setPosition(position);
+
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
-    ocean->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    //ocean->setPosition(glm::vec3(-512.0f, 0.0f, -512.0f));
     
     m_skyBox = m_root->createSkyBox("gameobject.skybox.xml");
     m_root->setSkyBox(m_skyBox);
+    
+    m_atmosphericScattering = m_root->createAtmosphericScattering("gameobject.atmospheric.scattering.xml");
+    m_root->setAtmosphericScattering(m_atmosphericScattering);
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));

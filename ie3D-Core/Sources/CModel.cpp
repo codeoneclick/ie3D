@@ -37,8 +37,7 @@ m_isAnimated(false)
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         
-        material->getShader()->setInt(m_isBatching ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_01);
-        material->getShader()->setInt(m_isAnimated ? 0 : 1, E_SHADER_UNIFORM_INT_FLAG_02);
+        material->getShader()->setInt(m_isAnimated ? 1 : 0, E_SHADER_UNIFORM_INT_FLAG_01);
     };
 }
 
@@ -156,6 +155,10 @@ void CModel::onBatch(const std::string& mode)
 
 void CModel::setAnimation(const std::string& name)
 {
-
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED &&
+       m_animationMixer != nullptr)
+    {
+        m_animationMixer->setAnimation(name);
+    }
 }
 

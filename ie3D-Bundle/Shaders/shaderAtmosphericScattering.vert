@@ -14,7 +14,7 @@ uniform vec3   VECTOR_CameraPosition;
 uniform vec3   VECTOR_LightPosition_01;
 
 const vec4 scaleIteration = vec4(0.01, 0.25, 0.04, 10.0);
-const vec4 radiusInOutHeightMinMax = vec4(6356.75, 6456.55, -100.0, 2000.0);
+const vec4 radiusInOutHeightMinMax = vec4(6356.75, 6456.55, 0.0, 256.0);
 const vec4 scatterFactors = vec4(0.04, 0.03, 0.025, 0.0188);
 const float fKrESun = 20.0 * 0.0025;
 const float fKmESun = 20.0 * 0.001;

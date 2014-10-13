@@ -533,7 +533,8 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
             {
                 f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0f, j));
                 height /= maxHeight;
-                ui8 color = static_cast<ui8>((height + 1.0) / 2.0 * 255);
+                height = std::max(0.0f, std::min((height + 1.0f) / 2.0f, 1.0f));
+                ui8 color = static_cast<ui8>(height * 255);
                 data[i + j * m_heightmapData->getSizeZ()] = color;
             }
         }
@@ -560,7 +561,8 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
                 f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData,
                                                                glm::vec3(i + offsetX , 0.0, j + offsetY));
                 height /= maxHeight;
-                ui8 color = static_cast<ui8>((height + 1.0) / 2.0 * 255);
+                height = std::max(0.0f, std::min((height + 1.0f) / 2.0f, 1.0f));
+                ui8 color = static_cast<ui8>(height * 255);
                 data[i + j * subWidth] = color;
             }
         }
@@ -682,7 +684,7 @@ void CHeightmapProcessor::updateEdgeChunkMaskTexture(ui16* data, ui32 index,
         {
             data[indexOffset] = TO_RGBA4444(255, 0, 0, 0);
         }
-        else
+        else if(currentEdgeHeight < height && currentEdgeHeight <= 0.0)
         {
             data[indexOffset] = TO_RGBA4444(0, 255, 0, 0);
         }

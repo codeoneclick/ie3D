@@ -93,9 +93,9 @@ void CDemoGameScene::load(void)
     m_landscape = m_root->createLandscape("gameobject.landscape.xml");
     m_root->setLandscape(m_landscape);
     
-    /*m_model = m_root->createModel("gameobject.model.xml");
+    m_model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(m_model);
-    m_model->setScale(glm::vec3(10.0, 10.0, 10.0));*/
+    m_model->setScale(glm::vec3(4.0, 4.0, 4.0));
     
     IEGameTransition* transition = static_cast<IEGameTransition*>(m_root);
     
@@ -115,7 +115,7 @@ void CDemoGameScene::load(void)
     
     m_root->addCollisionHandler(shared_from_this());
     
-    m_characterController = std::make_shared<ICharacterController>(m_lightTank,
+    m_characterController = std::make_shared<ICharacterController>(m_model,
                                                                    m_camera);
     
     m_gameObjectNavigator = std::make_shared<CGameObjectNavigator>(0.5,
@@ -182,6 +182,10 @@ void CDemoGameScene::update(f32 deltatime)
             break;
     }
     m_characterController->update(deltatime);
+    
+    static f32 angle = 0.0;
+    angle += 0.033;
+    m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

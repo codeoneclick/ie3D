@@ -27,8 +27,19 @@ protected:
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
     
-    bool m_isPressed;
+    glm::ivec2 m_mouseLastPosition;
+    
+    bool m_isMouseRightButtonPressed;
+    bool m_isSpaceButtonPressed;
+    
     f32 m_dragSpeed;
+    f32 m_cameraLeftRightRotationSpeed;
+    f32 m_cameraUpDownRotationSpeed;
+    f32 m_cameraDistanceChangeSpeed;
+    
+    f32 m_cameraPrecomputedRotationY;
+    f32 m_cameraPrecomputedHeight;
+    f32 m_cameraPrecomputedDistance;
     
     void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);

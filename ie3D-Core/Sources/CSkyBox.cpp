@@ -183,7 +183,9 @@ void CSkyBox::onDraw(const std::string& mode)
         glm::vec3 currentRotation = m_rotation;
         if(material->isReflecting())
         {
-            IGameObject::setRotation(glm::vec3(180.0, -glm::degrees(m_camera->Get_Rotation()) * 2.0, m_rotation.z));
+            IGameObject::setRotation(glm::vec3(m_rotation.x + glm::degrees(M_PI),
+                                               -glm::degrees(m_camera->Get_Rotation()) * 2.0 + m_rotation.y,
+                                               m_rotation.z));
             IGameObject::onSceneUpdate(0);
         }
 

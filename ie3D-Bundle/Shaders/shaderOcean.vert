@@ -3,6 +3,7 @@ attribute vec2 IN_TexCoord;
 attribute vec4 IN_Normal;
 attribute vec4 IN_Tangent;
 attribute vec4 IN_Color;
+attribute vec4 IN_Extra;
 
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
@@ -29,6 +30,8 @@ varying vec2   OUT_TexCoord;
 varying vec4   OUT_TexCoordProjection;
 varying vec2   OUT_TexCoordDisplace_01;
 varying vec2   OUT_TexCoordDisplace_02;
+varying vec4   OUT_Extra;
+varying float  OUT_Fog;
 
 const float k_fTexCoordScale = 16.0;
 
@@ -50,5 +53,7 @@ void main(void)
     OUT_LightPosition = VECTOR_LightPosition_01;
     OUT_CameraPosition = VECTOR_CameraPosition;
     OUT_Position = vPosition.xyz;
+    OUT_Fog = clamp(((MATRIX_View * vPosition).z + 256.0) / (256.0 - 512.0) * -1.0, 0.0, 1.0);
+    OUT_Extra = IN_Extra;
 }
 
