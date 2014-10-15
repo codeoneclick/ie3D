@@ -49,13 +49,14 @@ protected:
     i32 m_index;
     
     SAttributeVertex* m_data;
-    ui32 m_size;
+    ui32 m_allocatedSize;
+    ui32 m_usedSize;
     
     GLenum m_mode;
     
 public:
     
-    CVertexBuffer(ui32 size, GLenum mode);
+    CVertexBuffer(ui32 sizeToAllocate, GLenum mode);
     ~CVertexBuffer(void);
     
     static glm::u8vec4 compressVec3(const glm::vec3& uncompressed);
@@ -64,10 +65,11 @@ public:
     static glm::u16vec2 compressVec2(const glm::vec2& uncompressed);
     static glm::vec2 uncompressU16Vec2(const glm::u16vec2& compressed);
     
-    ui32 getSize(void) const;
+    ui32 getAllocatedSize(void) const;
+    ui32 getUsedSize(void) const;
     
     SAttributeVertex* lock(void) const;
-    void unlock(ui32 size = 0);
+    void unlock(ui32 sizeToUse = 0);
     
     void bind(const i32* attributes) const;
     void unbind(const i32* attributes) const;

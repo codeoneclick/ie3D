@@ -235,7 +235,7 @@ void CQuadTree::generate(CSharedVertexBufferRef vertexBuffer,
     m_indexBuffer = indexBuffer;
     m_maxBound = maxBound;
     m_minBound = minBound;
-    m_numIndexes = m_indexBuffer->getSize();
+    m_numIndexes = m_indexBuffer->getUsedSize();
     m_indexes.resize(m_numIndexes);
     m_indexesIds.resize(m_numIndexes);
     ui16* indexData = indexBuffer->lock();

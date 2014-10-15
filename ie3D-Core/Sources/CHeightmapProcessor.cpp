@@ -352,31 +352,28 @@ m_edgesMaskTextureHeight(2048)
     std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     m_heightmapData = std::make_shared<CHeightmapData>("");
     
-    m_chunkSizeX = 64;
-    m_chunkSizeZ = 64;
+    m_chunkSize = glm::ivec2(64, 64);
+    m_chunkLODsSizes.at(0) = glm::ivec2(64, 64);
+    m_chunkLODsSizes.at(1) = glm::ivec2(32, 32);
+    m_chunkLODsSizes.at(2) = glm::ivec2(16, 16);
+    m_chunkLODsSizes.at(3) = glm::ivec2(8, 8);
     
-    m_chunkLODSizeX = 65;
-    m_chunkLODSizeZ = 65;
+    m_chunksNum = glm::ivec2(m_heightmapData->getSizeX() / m_chunkSize.x,
+                             m_heightmapData->getSizeZ() / m_chunkSize.y);
     
-    m_numChunksX = m_heightmapData->getSizeX() / m_chunkSizeX;
-    m_numChunksZ = m_heightmapData->getSizeZ() / m_chunkSizeZ;
+    m_chunksUsed.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(nullptr, nullptr, nullptr, nullptr));
+    m_executedOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
+    m_canceledOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
     
-    m_chunkSizeX++;
-    m_chunkSizeZ++;
-    
-    m_chunksUsed.resize(m_numChunksX * m_numChunksZ, std::make_tuple(nullptr, nullptr, nullptr, nullptr));
-    m_executedOperations.resize(m_numChunksX * m_numChunksZ, nullptr);
-    m_canceledOperations.resize(m_numChunksX * m_numChunksZ, nullptr);
-    
-    m_chunksBounds.resize(m_numChunksX * m_numChunksZ);
-    for(ui32 i = 0; i < m_numChunksX; ++i)
+    m_chunksBounds.resize(m_chunksNum.x * m_chunksNum.y);
+    for(ui32 i = 0; i < m_chunksNum.x; ++i)
     {
-        for(ui32 j = 0; j < m_numChunksZ; ++j)
+        for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
-            ui32 index = i + j * m_numChunksX;
+            ui32 index = i + j * m_chunksNum.x;
             glm::vec3 maxBound = glm::vec3( -4096.0f, -4096.0f, -4096.0f );
             glm::vec3 minBound = glm::vec3(  4096.0f,  4096.0f,  4096.0f );
-            CHeightmapProcessor::createChunkBound(m_chunkSizeX, m_chunkSizeZ,
+            CHeightmapProcessor::createChunkBound(m_chunksNum.x, m_chunksNum.y,
                                                   i, j,
                                                   &maxBound, &minBound);
             
@@ -404,22 +401,12 @@ ui32 CHeightmapProcessor::getSizeZ(void) const
 
 ui32 CHeightmapProcessor::getNumChunksX(void) const
 {
-    return m_numChunksX;
+    return m_chunksNum.x;
 }
 
 ui32 CHeightmapProcessor::getNumChunksZ(void) const
 {
-    return m_numChunksZ;
-}
-
-ui32 CHeightmapProcessor::getChunkSizeX(ui32 i, ui32 j) const
-{
-    return m_chunkLODSizeX;
-}
-
-ui32 CHeightmapProcessor::getChunkSizeZ(ui32 i, ui32 j) const
-{
-    return m_chunkLODSizeZ;
+    return m_chunksNum.y;
 }
 
 f32 CHeightmapProcessor::getHeight(const glm::vec3& position) const
@@ -777,7 +764,7 @@ CSharedTexture CHeightmapProcessor::createSplattingNormalTexture(CSharedMaterial
 const std::tuple<glm::vec3, glm::vec3> CHeightmapProcessor::getChunkBounds(ui32 i, ui32 j) const
 {
     assert(m_chunksBounds.size() != 0);
-    return m_chunksBounds[i + j * m_numChunksZ];
+    return m_chunksBounds[i + j * m_chunksNum.x];
 }
 
 void CHeightmapProcessor::writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ)
@@ -785,23 +772,23 @@ void CHeightmapProcessor::writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffse
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
 #endif
-    ui32 index = chunkOffsetX + chunkOffsetZ * m_numChunksX;
+    ui32 index = chunkOffsetX + chunkOffsetZ * m_chunksNum.x;
     assert(std::get<0>(m_chunksUsed[index]) != nullptr);
     assert(std::get<0>(m_chunksUsed[index])->getVertexBuffer() != nullptr);
-    assert((m_chunkSizeX - 1) % (m_chunkLODSizeX - 1) == 0.0);
-    assert((m_chunkSizeZ - 1) % (m_chunkLODSizeZ - 1) == 0.0);
+    assert((m_chunkSize.x - 1) % (m_chunkLODsSizes.at(0).x - 1) == 0.0);
+    assert((m_chunkSize.y - 1) % (m_chunkLODsSizes.at(0).y - 1) == 0.0);
     
-    ui32 chunkLODOffsetX = (m_chunkSizeX - 1) / (m_chunkLODSizeX - 1);
-    ui32 chunkLODOffsetZ = (m_chunkSizeZ - 1) / (m_chunkLODSizeZ - 1);
+    ui32 chunkLODOffsetX = (m_chunkSize.x - 1) / (m_chunkLODsSizes.at(0).x - 1);
+    ui32 chunkLODOffsetZ = (m_chunkSize.y - 1) / (m_chunkLODsSizes.at(0).y - 1);
     
     SAttributeVertex* vertexData = std::get<0>(m_chunksUsed[index])->getVertexBuffer()->lock();
     index = 0;
-    for(ui32 i = 0; i < m_chunkLODSizeX; ++i)
+    for(ui32 i = 0; i < m_chunkLODsSizes.at(0).x; ++i)
     {
-        for(ui32 j = 0; j < m_chunkLODSizeZ; ++j)
+        for(ui32 j = 0; j < m_chunkLODsSizes.at(0).y; ++j)
         {
-            glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSizeX - chunkOffsetX,
-                                           j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSizeZ - chunkOffsetZ);
+            glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSize.x - chunkOffsetX,
+                                           j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSize.y - chunkOffsetZ);
             
             i32 indexXOffset = static_cast<i32>(position.x) < m_heightmapData->getSizeX() ?
             static_cast<i32>(position.x) :
@@ -835,7 +822,7 @@ void CHeightmapProcessor::commitVertexBufferToVRAM(ui32 chunkOffsetX, ui32 chunk
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
 #endif
-    ui32 index = chunkOffsetX + chunkOffsetZ * m_numChunksX;
+    ui32 index = chunkOffsetX + chunkOffsetZ * m_chunksNum.x;
     assert(std::get<0>(m_chunksUsed[index]) != nullptr);
     assert(std::get<0>(m_chunksUsed[index])->getVertexBuffer() != nullptr);
     
@@ -853,31 +840,31 @@ void CHeightmapProcessor::writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffset
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
 #endif
-    ui32 index = chunkOffsetX + chunkOffsetZ * m_numChunksX;
+    ui32 index = chunkOffsetX + chunkOffsetZ * m_chunksNum.x;
     assert(std::get<0>(m_chunksUsed[index]) != nullptr);
     assert(std::get<0>(m_chunksUsed[index])->getIndexBuffer() != nullptr);
-    assert((m_chunkSizeX - 1) % (m_chunkLODSizeX - 1) == 0.0);
-    assert((m_chunkSizeZ - 1) % (m_chunkLODSizeZ - 1) == 0.0);
+    assert((m_chunkSize.x - 1) % (m_chunkLODsSizes.at(0).x - 1) == 0.0);
+    assert((m_chunkSize.y - 1) % (m_chunkLODsSizes.at(0).y - 1) == 0.0);
     
     ui16* indexData = std::get<0>(m_chunksUsed[index])->getIndexBuffer()->lock();
     
     index = 0;
-    for(ui32 i = 0; i < (m_chunkLODSizeX - 1); ++i)
+    for(ui32 i = 0; i < (m_chunkLODsSizes.at(0).x - 1); ++i)
     {
-        for(ui32 j = 0; j < (m_chunkLODSizeZ - 1); ++j)
+        for(ui32 j = 0; j < (m_chunkLODsSizes.at(0).y - 1); ++j)
         {
-            indexData[index] = i + j * m_chunkLODSizeX;
+            indexData[index] = i + j * m_chunkLODsSizes.at(0).x;
             index++;
-            indexData[index] = i + (j + 1) * m_chunkLODSizeX;
+            indexData[index] = i + (j + 1) * m_chunkLODsSizes.at(0).x;
             index++;
-            indexData[index] = i + 1 + j * m_chunkLODSizeX;
+            indexData[index] = i + 1 + j * m_chunkLODsSizes.at(0).x;
             index++;
             
-            indexData[index] = i + (j + 1) * m_chunkLODSizeX;
+            indexData[index] = i + (j + 1) * m_chunkLODsSizes.at(0).x;
             index++;
-            indexData[index] = i + 1 + (j + 1) * m_chunkLODSizeX;
+            indexData[index] = i + 1 + (j + 1) * m_chunkLODsSizes.at(0).x;
             index++;
-            indexData[index] = i + 1 + j * m_chunkLODSizeX;
+            indexData[index] = i + 1 + j * m_chunkLODsSizes.at(0).x;
             index++;
         }
     }
@@ -894,7 +881,7 @@ void CHeightmapProcessor::commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkO
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
 #endif
-    ui32 index = chunkOffsetX + chunkOffsetZ * m_numChunksX;
+    ui32 index = chunkOffsetX + chunkOffsetZ * m_chunksNum.x;
     assert(std::get<0>(m_chunksUsed[index]) != nullptr);
     assert(std::get<0>(m_chunksUsed[index])->getIndexBuffer() != nullptr);
     
@@ -909,7 +896,7 @@ void CHeightmapProcessor::commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkO
 
 void CHeightmapProcessor::generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
 {
-    ui32 index = chunkOffsetX + chunkOffsetZ * m_numChunksX;
+    ui32 index = chunkOffsetX + chunkOffsetZ * m_chunksNum.x;
     CSharedMesh mesh = std::get<0>(m_chunksUsed[index]);
     CSharedQuadTree quadTree = std::get<1>(m_chunksUsed[index]);
 #if defined(__PERFORMANCE_TIMER__)
@@ -922,7 +909,7 @@ void CHeightmapProcessor::generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
                        mesh->getMaxBound(),
                        mesh->getMinBound(),
                        4,
-                       m_chunkLODSizeX);
+                       m_chunkLODsSizes.at(0).x);
     
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
@@ -939,7 +926,7 @@ void CHeightmapProcessor::captureChunk(ui32 i, ui32 j,
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
 #endif
     
-    ui32 index = i + j * m_numChunksX;
+    ui32 index = i + j * m_chunksNum.x;
     if(m_chunksUnused.size() != 0)
     {
         assert(std::get<0>(m_chunksUsed[index]) == nullptr);
@@ -964,13 +951,13 @@ void CHeightmapProcessor::captureChunk(ui32 i, ui32 j,
         glm::vec3 maxBound = glm::vec3(-4096.0, -4096.0, -4096.0);
         glm::vec3 minBound = glm::vec3(4096.0, 4096.0, 4096.0);
         
-        CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(m_chunkLODSizeX * m_chunkLODSizeZ,
+        CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(m_chunkLODsSizes.at(0).x * m_chunkLODsSizes.at(0).y,
                                                                            GL_STATIC_DRAW);
         
-        CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((m_chunkLODSizeX - 1) * (m_chunkLODSizeZ - 1) * 6,
+        CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((m_chunkLODsSizes.at(0).x - 1) * (m_chunkLODsSizes.at(0).y - 1) * 6,
                                                                         GL_STREAM_DRAW);
         
-        CHeightmapProcessor::createChunkBound(m_chunkSizeX, m_chunkSizeZ,
+        CHeightmapProcessor::createChunkBound(m_chunksNum.x, m_chunksNum.y,
                                               i, j,
                                               &maxBound, &minBound);
         
@@ -1042,7 +1029,7 @@ void CHeightmapProcessor::captureChunk(ui32 i, ui32 j,
 
 void CHeightmapProcessor::releaseChunk(ui32 i, ui32 j)
 {
-    ui32 index = i + j * m_numChunksX;
+    ui32 index = i + j * m_chunksNum.x;
     m_executedOperations[index]->cancel();
     m_canceledOperations[index] = m_executedOperations[index];
     m_executedOperations[index] = nullptr;
@@ -1073,18 +1060,18 @@ void CHeightmapProcessor::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSize
     assert(m_heightmapData != nullptr);
     assert(chunkLODSizeX != 0);
     assert(chunkLODSizeZ != 0);
-    assert((m_chunkSizeX - 1) % (chunkLODSizeX - 1) == 0.0);
-    assert((m_chunkSizeZ - 1) % (chunkLODSizeZ - 1) == 0.0);
+    assert((m_chunkSize.x - 1) % (chunkLODSizeX - 1) == 0.0);
+    assert((m_chunkSize.y - 1) % (chunkLODSizeZ - 1) == 0.0);
     
-    ui32 chunkLODOffsetX = (m_chunkSizeX - 1) / (chunkLODSizeX - 1);
-    ui32 chunkLODOffsetZ = (m_chunkSizeZ - 1) / (chunkLODSizeZ - 1);
+    ui32 chunkLODOffsetX = (m_chunkSize.x - 1) / (chunkLODSizeX - 1);
+    ui32 chunkLODOffsetZ = (m_chunkSize.y - 1) / (chunkLODSizeZ - 1);
     
     for(ui32 i = 0; i < chunkLODSizeX; ++i)
     {
         for(ui32 j = 0; j < chunkLODSizeZ; ++j)
         {
-            glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSizeX - chunkOffsetX,
-                                           j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSizeZ - chunkOffsetZ);
+            glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSize.x - chunkOffsetX,
+                                           j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSize.y - chunkOffsetZ);
             
             ui32 indexXOffset = static_cast<ui32>(position.x) < m_heightmapData->getSizeX() ?
             static_cast<ui32>(position.x) :
@@ -1110,10 +1097,10 @@ void CHeightmapProcessor::generateTangentSpace(CSharedHeightmapDataRef heightmap
     std::vector<glm::vec3> tangents, binormals;
     
     SAttributeVertex* vertexData = vertexBuffer->lock();
-    ui32 numVertexes = vertexBuffer->getSize();
+    ui32 numVertexes = vertexBuffer->getUsedSize();
     
     ui16* indexData = indexBuffer->lock();
-    ui32 numIndexes = indexBuffer->getSize();
+    ui32 numIndexes = indexBuffer->getUsedSize();
     
     for (ui32 i = 0; i < numIndexes; i += 3 )
     {

@@ -119,13 +119,17 @@ protected:
     std::queue<CSharedHeightmapProcessingOperation> m_processingOperationQueue;
     std::map<std::tuple<ui32, ui32>, CSharedHeightmapProcessingOperation> m_uniqueProcessingOperations;
     
-    ui32 m_chunkSizeX;
-    ui32 m_chunkSizeZ;
-    ui32 m_chunkLODSizeX;
-    ui32 m_chunkLODSizeZ;
+    glm::ivec2 m_chunkSize;
+    glm::ivec2 m_chunksNum;
+    std::array<glm::ivec2, 4> m_chunkLODsSizes;
     
-    ui32 m_numChunksX;
-    ui32 m_numChunksZ;
+    //ui32 m_chunkSizeX;
+    //ui32 m_chunkSizeZ;
+    //ui32 m_chunkLODSizeX;
+    //ui32 m_chunkLODSizeZ;
+    
+    //ui32 m_numChunksX;
+    //ui32 m_numChunksZ;
     
     std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_chunksUsed;
     std::vector<CSharedMesh> m_chunksUnused;
@@ -200,9 +204,6 @@ public:
     
     ui32 getNumChunksX(void) const;
     ui32 getNumChunksZ(void) const;
-    
-    ui32 getChunkSizeX(ui32 i, ui32 j) const;
-    ui32 getChunkSizeZ(ui32 i, ui32 j) const;
     
     f32 getHeight(const glm::vec3& position) const;
     glm::vec2 getAngleOnHeightmapSurface(const glm::vec3& position) const;

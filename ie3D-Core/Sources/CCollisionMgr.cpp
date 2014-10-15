@@ -224,7 +224,7 @@ bool CCollisionMgr::collisionPoint(CSharedVertexBufferRef vertexBuffer,
 {
     SAttributeVertex* vertexData = vertexBuffer->lock();
     ui16* indexData = indexBuffer->lock();
-    ui32 numIndices = indexBuffer->getSize();
+    ui32 numIndices = indexBuffer->getUsedSize();
 
     for(ui32 index = 0; index < numIndices; index += 3)
     {

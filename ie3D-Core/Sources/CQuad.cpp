@@ -57,7 +57,7 @@ void CQuad::draw(void)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
-    glDrawElements(GL_TRIANGLES, m_indexBuffer->getSize(), GL_UNSIGNED_SHORT, NULL);
+    glDrawElements(GL_TRIANGLES, m_indexBuffer->getUsedSize(), GL_UNSIGNED_SHORT, NULL);
 }
 
 void CQuad::unbind(const i32* attributes)

@@ -9,12 +9,13 @@
 #include "CVertexBuffer.h"
 #include "HEnums.h"
 
-CVertexBuffer::CVertexBuffer(ui32 size, GLenum mode) : IResourceData(E_RESOURCE_DATA_CLASS_VERTEX_BUFFER_DATA),
-m_size(size),
+CVertexBuffer::CVertexBuffer(ui32 sizeToAllocate, GLenum mode) : IResourceData(E_RESOURCE_DATA_CLASS_VERTEX_BUFFER_DATA),
+m_allocatedSize(sizeToAllocate),
+m_usedSize(0),
 m_mode(mode)
 {
-    assert(size != 0);
-    m_data = new SAttributeVertex[m_size];
+    assert(m_allocatedSize != 0);
+    m_data = new SAttributeVertex[m_allocatedSize];
     m_index = -1;
     glGenBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
 }
@@ -61,9 +62,14 @@ glm::vec2 CVertexBuffer::uncompressU16Vec2(const glm::u16vec2& compressed)
     return uncompressed;
 }
 
-ui32 CVertexBuffer::getSize(void) const
+ui32 CVertexBuffer::getAllocatedSize(void) const
 {
-    return m_size;
+    return m_allocatedSize;
+}
+
+ui32 CVertexBuffer::getUsedSize(void) const
+{
+    return m_usedSize;
 }
 
 SAttributeVertex* CVertexBuffer::lock(void) const
@@ -72,14 +78,14 @@ SAttributeVertex* CVertexBuffer::lock(void) const
     return m_data;
 }
 
-void CVertexBuffer::unlock(ui32 size)
+void CVertexBuffer::unlock(ui32 sizeToUse)
 {
     assert(m_data != nullptr);
-    assert(m_size != 0);
-    
+    assert(m_allocatedSize != 0);
+    m_usedSize = sizeToUse > 0 && sizeToUse < m_allocatedSize ? sizeToUse : m_allocatedSize;
     m_index = (m_index >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_index + 1;
     glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * (size > 0 ? size : m_size) , m_data, m_mode);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
 }
 
 void CVertexBuffer::bind(const i32* attributes) const

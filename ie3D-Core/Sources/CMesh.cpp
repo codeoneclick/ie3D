@@ -404,7 +404,7 @@ void CMesh::updateBounds(void)
     {
         assert(m_meshData != nullptr);
         assert(m_vertexBuffer != nullptr);
-        m_meshData->updateBounds(m_vertexBuffer->lock(), m_vertexBuffer->getSize());
+        m_meshData->updateBounds(m_vertexBuffer->lock(), m_vertexBuffer->getUsedSize());
     }
 }
 
@@ -435,7 +435,7 @@ void CMesh::draw(void) const
     {
         assert(m_vertexBuffer != nullptr);
         assert(m_indexBuffer != nullptr);
-        glDrawElements(GL_TRIANGLES, m_indexBuffer->getSize(), GL_UNSIGNED_SHORT, NULL);
+        glDrawElements(GL_TRIANGLES, m_indexBuffer->getUsedSize(), GL_UNSIGNED_SHORT, NULL);
     }
 }
 

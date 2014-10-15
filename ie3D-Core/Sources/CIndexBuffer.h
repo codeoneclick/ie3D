@@ -24,19 +24,21 @@ protected:
     i32  m_index;
     
 	ui16* m_data;
-    ui32 m_size;
+    ui32 m_allocatedSize;
+    ui32 m_usedSize;
     
     GLenum m_mode;
     
 public:
     
-    CIndexBuffer(ui32 size, GLenum mode);
+    CIndexBuffer(ui32 sizeToAllocate, GLenum mode);
     ~CIndexBuffer(void);
     
-    ui32 getSize(void) const;
+    ui32 getAllocatedSize(void) const;
+    ui32 getUsedSize(void) const;
     
     ui16* lock(void) const;
-    void unlock(ui32 size = 0);
+    void unlock(ui32 sizeToUse = 0);
     
     void bind(void) const;
     void unbind(void) const;
