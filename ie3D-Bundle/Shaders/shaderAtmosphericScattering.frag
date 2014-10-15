@@ -22,14 +22,14 @@ highp float getMiePhase(highp float fCos, highp float fCos2)
 
 void main(void)
 {
-    lowp vec4 vColor = vec4(1.0, 1.0, 1.0, 1.0);
+    highp vec4 vColor = vec4(1.0, 1.0, 1.0, 1.0);
     
     highp vec2 fCos;
     fCos.x = dot(OUT_LightDirection, OUT_Direction) / length(OUT_Direction);
     fCos.y = fCos.x * fCos.x;
     
-    lowp vec3 vMie = getMiePhase(fCos.x, fCos.y) * OUT_Mie.rgb;
-    lowp vec3 vRayleighPhase = getRayleighPhase(fCos.y) * OUT_RayleighPhase;
+    highp vec3 vMie = getMiePhase(fCos.x, fCos.y) * OUT_Mie.rgb;
+    highp vec3 vRayleighPhase = getRayleighPhase(fCos.y) * OUT_RayleighPhase;
     vColor.rgb = 1.0 - exp(fExposure * (vRayleighPhase + vMie));
     vColor.a = min(OUT_Mie.a, 0.75);
     gl_FragColor = vColor;

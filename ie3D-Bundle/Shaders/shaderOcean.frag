@@ -6,7 +6,6 @@ varying mediump vec3   OUT_LightPosition;
 varying mediump vec3   OUT_CameraPosition;
 varying mediump vec3   OUT_Position;
 varying mediump vec4   OUT_Extra;
-varying highp   float  OUT_Fog;
 
 uniform sampler2D SAMPLER_01;
 uniform sampler2D SAMPLER_02;
@@ -64,7 +63,11 @@ void main(void)
     vReflectionColor = mix(vDiffuseColor, vReflectionColor, vReflectionColor.a);
     vRefractionColor = mix(vDiffuseColor, vRefractionColor, vHeightmapColor.a * 4.0 * fresnel * OUT_Extra.x);
     lowp vec4 color = mix(vReflectionColor, vRefractionColor, fresnel) * min(diffuseFactor, 1.0);
-    color.a = mix(0.0, 1.0, OUT_Fog);
+    
+    highp float fFogDistance = length(vec3(256.0, 0.0, 256.0) - OUT_Position);
+    lowp float fFogFactor = clamp((fFogDistance - 384.0) / 512.0, 0.0, 1.0);
+    
+    color.a = 1.0 - fFogFactor;
     gl_FragColor = color + vec4(fSpecularFactor);
 }
 
