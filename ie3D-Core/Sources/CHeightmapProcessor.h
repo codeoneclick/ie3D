@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "HDeclaration.h"
+#include "HEnums.h"
 
 class CHeightmapData
 {
@@ -121,15 +122,7 @@ protected:
     
     glm::ivec2 m_chunkSize;
     glm::ivec2 m_chunksNum;
-    std::array<glm::ivec2, 4> m_chunkLODsSizes;
-    
-    //ui32 m_chunkSizeX;
-    //ui32 m_chunkSizeZ;
-    //ui32 m_chunkLODSizeX;
-    //ui32 m_chunkLODSizeZ;
-    
-    //ui32 m_numChunksX;
-    //ui32 m_numChunksZ;
+    std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_chunkLODsSizes;
     
     std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_chunksUsed;
     std::vector<CSharedMesh> m_chunksUnused;
@@ -143,11 +136,11 @@ protected:
                           ui32 chunkOffsetX, ui32 chunkOffsetZ,
                           glm::vec3* maxBound, glm::vec3* minBound);
     
-    void writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ);
-    void commitVertexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ);
+    void writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
+    void commitVertexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
     
-    void writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ);
-    void commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ);
+    void writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
+    void commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
                              
     void generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ);
     
@@ -195,10 +188,11 @@ public:
     
     void update(void);
     
-    void captureChunk(ui32 i, ui32 j,
-                      const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
-                      const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback);
-    void releaseChunk(ui32 i, ui32 j);
+    void runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
+                         const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
+                         const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback);
+    void stopChunkLoading(ui32 i, ui32 j);
+    void runChunkUnLoading(ui32 i, ui32 j);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
     

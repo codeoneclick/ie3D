@@ -68,7 +68,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
                         m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
-                        m_heightmapProcessor->captureChunk(i, j, [this, i , j, numChunksZ](CSharedMeshRef mesh) {
+                        m_heightmapProcessor->runChunkLoading(i, j, E_LANDSCAPE_CHUNK_LOD_04, [this, i , j, numChunksZ](CSharedMeshRef mesh) {
                             
                             m_chunks[i + j * numChunksZ]->setCamera(m_camera);
                             
@@ -114,7 +114,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     m_chunks[i + j * numChunksZ]->enableRender(false);
                     m_chunks[i + j * numChunksZ]->enableUpdate(false);
                     m_chunks[i + j * numChunksZ]->removeLoadingDependencies();
-                    m_heightmapProcessor->releaseChunk(i, j);
+                    m_heightmapProcessor->runChunkUnLoading(i, j);
                     m_chunks[i + j * numChunksZ] = nullptr;
                 }
             }

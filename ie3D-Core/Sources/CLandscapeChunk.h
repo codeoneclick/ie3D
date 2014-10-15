@@ -20,6 +20,8 @@ private:
     friend class CLandscape;
     glm::ivec2 m_heightmapSize;
     
+    E_LANDSCAPE_CHUNK_LOD m_LOD;
+    
     f32 m_fogLinearStart;
     f32 m_fogLinearEnd;
     
@@ -35,6 +37,7 @@ protected:
     
     void setMesh(CSharedMeshRef mesh);
     void setQuadTree(CSharedQuadTreeRef quadTree);
+    void setLOD(E_LANDSCAPE_CHUNK_LOD LOD);
     
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     
@@ -67,6 +70,8 @@ public:
     ~CLandscapeChunk(void);
     
     void setHeightmapSize(const glm::ivec2& size);
+    
+    E_LANDSCAPE_CHUNK_LOD getLOD(void) const;
     
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;

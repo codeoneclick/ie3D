@@ -26,7 +26,8 @@ m_heightmapSize(glm::ivec2(0)),
 m_numIndexesToRender(0),
 m_prerenderedSplattingDiffuseTexture(nullptr),
 m_prerenderedSplattingNormalTexture(nullptr),
-m_quadTree(nullptr)
+m_quadTree(nullptr),
+m_LOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
     m_materialBindImposer = [this](CSharedMaterialRef material)
@@ -90,6 +91,16 @@ void CLandscapeChunk::setMesh(CSharedMeshRef mesh)
 void CLandscapeChunk::setQuadTree(CSharedQuadTreeRef quadTree)
 {
     m_quadTree = quadTree;
+}
+
+void CLandscapeChunk::setLOD(E_LANDSCAPE_CHUNK_LOD LOD)
+{
+    m_LOD = LOD;
+}
+
+E_LANDSCAPE_CHUNK_LOD CLandscapeChunk::getLOD(void) const
+{
+    return m_LOD;
 }
 
 void CLandscapeChunk::setHeightmapSize(const glm::ivec2 &size)

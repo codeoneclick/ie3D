@@ -34,7 +34,6 @@ void CSkyBox::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::setPosition(m_camera->Get_Position());
         IGameObject::onSceneUpdate(deltatime);
     }
 }

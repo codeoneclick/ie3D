@@ -34,8 +34,6 @@ void CAtmosphericScattering::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::setPosition(glm::vec3(m_camera->Get_Position().x, m_camera->Get_Position().y, m_camera->Get_Position().z));
-        //IGameObject::setRotation(glm::vec3(0.0, glm::degrees(m_camera->Get_Rotation()) + 45.0, 0.0));
         IGameObject::onSceneUpdate(deltatime);
     }
 }
@@ -147,6 +145,9 @@ void CAtmosphericScattering::onDraw(const std::string& mode)
         assert(m_camera != nullptr);
         assert(m_lightSources.at(E_LIGHT_SOURCE_1) != nullptr);
         assert(m_materials.find(mode) != m_materials.end());
+        
+        IGameObject::setPosition(glm::vec3(m_camera->Get_Position().x, m_camera->Get_Position().y, m_camera->Get_Position().z));
+        IGameObject::onSceneUpdate(0);
         
         CSharedMaterial material = m_materials.find(mode)->second;
         assert(material->getShader() != nullptr);
