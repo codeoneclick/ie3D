@@ -54,7 +54,14 @@ protected:
     void onDraw(const std::string& mode);
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
-
+    
+    bool isPointInBoundPlane(const glm::vec3& point,
+                             const glm::vec3& minBound,
+                             const glm::vec3& maxBound);
+    E_LANDSCAPE_CHUNK_LOD getLOD(const glm::vec3& point,
+                                 const glm::vec3& minBound,
+                                 const glm::vec3& maxBound);
+    
 public:
 
     CLandscape(CSharedResourceAccessorRef resourceAccessor,

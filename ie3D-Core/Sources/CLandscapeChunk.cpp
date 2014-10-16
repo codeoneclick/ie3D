@@ -27,7 +27,8 @@ m_numIndexesToRender(0),
 m_prerenderedSplattingDiffuseTexture(nullptr),
 m_prerenderedSplattingNormalTexture(nullptr),
 m_quadTree(nullptr),
-m_LOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
+m_currentLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
+m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
     m_materialBindImposer = [this](CSharedMaterialRef material)
@@ -88,19 +89,25 @@ void CLandscapeChunk::setMesh(CSharedMeshRef mesh)
     m_mesh = mesh;
 }
 
-void CLandscapeChunk::setQuadTree(CSharedQuadTreeRef quadTree)
+void CLandscapeChunk::setQuadTree(CSharedQuadTreeRef quadTree, E_LANDSCAPE_CHUNK_LOD LOD)
 {
     m_quadTree = quadTree;
+    m_currentLOD = LOD;
 }
 
-void CLandscapeChunk::setLOD(E_LANDSCAPE_CHUNK_LOD LOD)
+E_LANDSCAPE_CHUNK_LOD CLandscapeChunk::getCurrentLOD(void) const
 {
-    m_LOD = LOD;
+    return m_currentLOD;
 }
 
-E_LANDSCAPE_CHUNK_LOD CLandscapeChunk::getLOD(void) const
+E_LANDSCAPE_CHUNK_LOD CLandscapeChunk::getInprogressLOD(void) const
 {
-    return m_LOD;
+    return m_inprogressLOD;
+}
+
+void CLandscapeChunk::setInprogressLOD(E_LANDSCAPE_CHUNK_LOD LOD)
+{
+    m_inprogressLOD = LOD;
 }
 
 void CLandscapeChunk::setHeightmapSize(const glm::ivec2 &size)

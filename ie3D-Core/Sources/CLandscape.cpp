@@ -38,7 +38,45 @@ m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, renderTechniqueAcces
 
 CLandscape::~CLandscape(void)
 {
+    
+}
 
+bool CLandscape::isPointInBoundPlane(const glm::vec3& point,
+                                   const glm::vec3& minBound,
+                                   const glm::vec3& maxBound)
+{
+    if(point.x >= minBound.x &&
+       point.x <= maxBound.x &&
+       point.z >= minBound.z &&
+       point.z <= maxBound.z)
+    {
+        return true;
+    }
+    return false;
+}
+
+E_LANDSCAPE_CHUNK_LOD CLandscape::getLOD(const glm::vec3& point,
+                                         const glm::vec3& minBound,
+                                         const glm::vec3& maxBound)
+{
+    glm::vec2 center = glm::vec2((maxBound.x - minBound.x) / 2.0 + minBound.x,
+                                 (maxBound.z - minBound.z) / 2.0 + minBound.z);
+    f32 distance = glm::distance(glm::vec2(point.x, point.z), center);
+    E_LANDSCAPE_CHUNK_LOD LOD = E_LANDSCAPE_CHUNK_LOD_04;
+    if(CLandscape::isPointInBoundPlane(point, minBound, maxBound))
+    {
+        LOD = E_LANDSCAPE_CHUNK_LOD_01;
+    }
+    else if(distance < 128.0)
+    {
+        LOD = E_LANDSCAPE_CHUNK_LOD_02;
+    }
+    else if(distance < 192.0)
+    {
+        LOD = E_LANDSCAPE_CHUNK_LOD_03;
+    }
+    
+    return LOD;
 }
 
 void CLandscape::onSceneUpdate(f32 deltatime)
@@ -65,10 +103,12 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 if(result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
                    result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
                 {
+                    E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->Get_LookAt(), minBound, maxBound);
                     if(m_chunks[i + j * numChunksZ] == nullptr)
                     {
                         m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
-                        m_heightmapProcessor->runChunkLoading(i, j, E_LANDSCAPE_CHUNK_LOD_04, [this, i , j, numChunksZ](CSharedMeshRef mesh) {
+                        m_chunks[i + j * numChunksZ]->setInprogressLOD(LOD);
+                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, i , j, numChunksZ, LOD](CSharedMeshRef mesh) {
                             
                             m_chunks[i + j * numChunksZ]->setCamera(m_camera);
                             
@@ -104,8 +144,20 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
                             m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
                             
-                        }, [this, i , j, numChunksZ](CSharedQuadTreeRef quadTree) {
-                            m_chunks[i + j * numChunksZ]->setQuadTree(quadTree);
+                        }, [this, i , j, numChunksZ, LOD](CSharedQuadTreeRef quadTree) {
+                            m_chunks[i + j * numChunksZ]->setQuadTree(quadTree, LOD);
+                        });
+                    }
+                    else if(m_chunks[i + j * numChunksZ]->getInprogressLOD() != LOD &&
+                            m_chunks[i + j * numChunksZ]->getInprogressLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
+                    {
+                        m_heightmapProcessor->stopChunkLoading(i, j);
+                        m_chunks[i + j * numChunksZ]->setQuadTree(nullptr, m_chunks[i + j * numChunksZ]->getCurrentLOD());
+                        m_chunks[i + j * numChunksZ]->setInprogressLOD(LOD);
+                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, i , j, numChunksZ, LOD](CSharedMeshRef mesh) {
+                            m_chunks[i + j * numChunksZ]->setMesh(mesh);
+                        }, [this, i , j, numChunksZ, LOD](CSharedQuadTreeRef quadTree) {
+                            m_chunks[i + j * numChunksZ]->setQuadTree(quadTree, LOD);
                         });
                     }
                 }
