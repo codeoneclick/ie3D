@@ -13,7 +13,8 @@
 
 CQuadTree::CQuadTree(void) :
 m_indexBuffer(nullptr), 
-m_numIndexes(0)
+m_numIndexes(0),
+m_isGenerated(false)
 {
 
 }
@@ -249,15 +250,23 @@ void CQuadTree::generate(CSharedVertexBufferRef vertexBuffer,
     assert(m_childs.at(1) != nullptr);
     assert(m_childs.at(2) != nullptr);
     assert(m_childs.at(3) != nullptr);
+    m_isGenerated = true;
 }
 
 ui32 CQuadTree::update(CSharedFrustumRef frustum)
 {
-    ui16* indexes = m_indexBuffer->lock();
     ui32 numIndexes = 0;
-    CSharedQuadTree root = shared_from_this();
-    CQuadTree::generateQuadTreeNode(frustum, root, indexes, numIndexes);
-    m_indexBuffer->unlock(numIndexes);
+    if(m_isGenerated)
+    {
+        ui16* indexes = m_indexBuffer->lock();
+        CSharedQuadTree root = shared_from_this();
+        CQuadTree::generateQuadTreeNode(frustum, root, indexes, numIndexes);
+        m_indexBuffer->unlock(numIndexes);
+    }
     return numIndexes;
 }
 
+bool CQuadTree::getIsGenerated(void) const
+{
+    return m_isGenerated;
+}

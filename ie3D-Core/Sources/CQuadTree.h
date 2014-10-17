@@ -30,6 +30,8 @@ private:
 
     SAttributeVertex* m_vertexes;
     CSharedIndexBuffer m_indexBuffer;
+    
+    bool m_isGenerated;
 
 protected:
     
@@ -60,6 +62,7 @@ public:
                   ui32 size);
     
     ui32 update(CSharedFrustumRef frustum);
+    bool getIsGenerated(void) const;
 };
 
 
