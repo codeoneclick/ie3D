@@ -109,7 +109,7 @@ public:
     CSharedCamera createCamera(f32 fov, f32 near, f32 far,const glm::ivec4& viewport);
     void deleteCamera(CSharedCameraRef camera);
     
-    CSharedLightSource createLightSource(void);
+    CSharedLightSource createLightSource(f32 fov, f32 near, f32 far, f32 aspect);
     void deleteLightSource(CSharedLightSourceRef lightSource);
     
     CSharedModel createModel(const std::string& filename);

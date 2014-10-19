@@ -34,5 +34,15 @@
             render_operation_name=""
             sampler_id="2"
             wrap_mode="GL_REPEAT"/>
+            <!--<texture
+            filename=""
+            render_operation_name="render.operation.world.splatting"
+            sampler_id="3"
+            wrap_mode="GL_CLAMP_TO_EDGE"/>-->
+            <texture
+            filename=""
+            render_operation_name="render.operation.world.shadowmap.depth"
+            sampler_id="4"
+            wrap_mode="GL_CLAMP_TO_EDGE"/>
     </textures>
 </material>

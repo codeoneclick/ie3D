@@ -65,7 +65,7 @@ void main(void)
     lowp vec4 color = mix(vReflectionColor, vRefractionColor, fresnel) * min(diffuseFactor, 1.0);
     
     highp float fFogDistance = length(vec3(256.0, 0.0, 256.0) - OUT_Position);
-    lowp float fFogFactor = clamp((fFogDistance - 384.0) / 512.0, 0.0, 1.0);
+    lowp float fFogFactor = clamp((fFogDistance - 384.0) / 448.0, 0.0, 1.0);
     
     color.a = 1.0 - fFogFactor;
     gl_FragColor = color + vec4(fSpecularFactor);

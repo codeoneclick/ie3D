@@ -35,10 +35,19 @@ ui32 CShaderCompiler_GLSL::compile(const std::string& sourceCode, GLenum shaderT
     i32 success;
     glGetShaderiv(handle, GL_COMPILE_STATUS, &success);
     
-    GLchar message[1024];
-    memset(message, 0x0, 1024 * sizeof(GLchar));
-    glGetShaderInfoLog(handle, sizeof(message), 0, &message[0]);
-    *outMessage = message;
+    if(!success)
+    {
+        i32 messageSize = 0;
+        glGetShaderiv(handle, GL_INFO_LOG_LENGTH, &messageSize);
+        GLchar *messageString = new GLchar[messageSize];
+        memset(messageString, NULL, messageSize * sizeof(GLchar));
+        glGetShaderInfoLog(handle, messageSize, NULL, messageString);
+        *outMessage = messageString;
+    }
+    else
+    {
+        outMessage = nullptr;
+    }
     *outSuccess = success;
     return handle;
 }
@@ -53,10 +62,19 @@ ui32 CShaderCompiler_GLSL::link(ui32 vsHandle, ui32 fsHandle, std::string* outMe
     i32 success;
     glGetProgramiv(handle, GL_LINK_STATUS, &success);
     
-    GLchar message[1024];
-    memset(message, 0x0, 1024 * sizeof(GLchar));
-    glGetProgramInfoLog(handle, sizeof(message), 0, &message[0]);
-    *outMessage = message;
+    if(!success)
+    {
+        i32 messageSize = 0;
+        glGetShaderiv(handle, GL_INFO_LOG_LENGTH, &messageSize);
+        GLchar *messageString = new GLchar[messageSize];
+        memset(messageString, NULL, messageSize * sizeof(GLchar));
+        glGetShaderInfoLog(handle, messageSize, NULL, messageString);
+        *outMessage = messageString;
+    }
+    else
+    {
+        outMessage = nullptr;
+    }
     *outSuccess = success;
     return handle;
 }

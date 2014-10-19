@@ -338,10 +338,10 @@ void IGameTransition::deleteCamera(CSharedCameraRef camera)
     m_sceneFabricator->deleteCamera(camera);
 }
 
-CSharedLightSource IGameTransition::createLightSource(void)
+CSharedLightSource IGameTransition::createLightSource(f32 fov, f32 near, f32 far, f32 aspect)
 {
     assert(m_sceneFabricator != nullptr);
-    return m_sceneFabricator->createLightSource();
+    return m_sceneFabricator->createLightSource(fov, near, far, aspect);
 }
 
 void IGameTransition::deleteLightSource(CSharedLightSourceRef lightSource)

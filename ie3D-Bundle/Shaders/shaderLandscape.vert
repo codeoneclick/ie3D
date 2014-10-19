@@ -9,6 +9,8 @@ attribute vec4 IN_Extra;
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
+uniform mat4   MATRIX_LightProjection_01;
+uniform mat4   MATRIX_LightView_01;
 uniform vec4   VECTOR_ClipPlane;
 uniform vec3   VECTOR_CameraPosition;
 uniform vec3   VECTOR_LightPosition_01;
@@ -20,9 +22,10 @@ varying vec4   OUT_TillingTexcoordLayer_03;
 varying float  OUT_ClipPlane;
 varying vec3   OUT_CameraPosition;
 varying vec3   OUT_LightDirection;
-varying vec3   OUT_Position;
 varying vec3   OUT_Normal;
 varying float  OUT_Fog;
+varying vec4   OUT_ShadowParameters;
+varying vec4   OUT_Position;
 
 uniform float IN_TillingTexcoordLayer_01;
 uniform float IN_TillingTexcoordLayer_02;
@@ -34,7 +37,15 @@ uniform float IN_fogLinearEnd;
 void main(void)
 {
     vec4 vPosition = MATRIX_World * vec4(IN_Position, 1.0);
-    gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
+    OUT_Position = MATRIX_Projection * MATRIX_View * vPosition;
+    gl_Position = OUT_Position;
+    
+    mat4 mBiasMatrix = mat4(0.5, 0.0, 0.0, 0.0,
+                            0.0, 0.5, 0.0, 0.0,
+                            0.0, 0.0, 0.5, 0.0,
+                            0.5, 0.5, 0.5, 1.0);
+    OUT_ShadowParameters = mBiasMatrix * MATRIX_LightProjection_01 * MATRIX_LightView_01 * vPosition;
+    
     OUT_TexCoord = (IN_TexCoord / 32767.0  - 1.0);
     OUT_ClipPlane = dot(vPosition.xyz, VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
     OUT_CameraPosition = VECTOR_CameraPosition;

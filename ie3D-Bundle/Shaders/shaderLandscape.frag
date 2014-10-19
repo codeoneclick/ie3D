@@ -8,11 +8,56 @@ varying mediump vec3   OUT_CameraPosition;
 varying mediump vec3   OUT_LightDirection;
 varying highp   vec3   OUT_Normal;
 varying highp   float  OUT_Fog;
+varying highp   vec4   OUT_ShadowParameters;
+varying highp   vec4   OUT_Position;
 
 uniform sampler2D SAMPLER_01;
 uniform sampler2D SAMPLER_02;
 uniform sampler2D SAMPLER_03;
 uniform sampler2D SAMPLER_04;
+uniform sampler2D SAMPLER_05;
+
+const highp vec2 vCameraRange = vec2(0.01, 1024.0);
+
+highp float getShadowMapPassDepth(in mediump vec2 vTexCoord)
+{
+    if (vTexCoord.x < 0.0 || vTexCoord.y < 0.0)
+    {
+        return 1.0;
+    }
+    highp float fNearZ = vCameraRange.x;
+    highp float fFarZ = vCameraRange.y;
+    lowp float fDepth = texture2D(SAMPLER_05, vTexCoord).x;
+    return (2.0 * fNearZ) / (fNearZ + fFarZ - fDepth * (fFarZ - fNearZ));
+}
+
+highp float getCurrentDepth(in highp float fZ)
+{
+    highp float fDepth = fZ;
+    highp float fNearZ = vCameraRange.x;
+    highp float fFarZ = vCameraRange.y;
+    fDepth = (2.0 * fNearZ) / (fNearZ + fFarZ - fDepth * (fFarZ - fNearZ));
+    return fDepth;
+}
+
+highp float texture2DCompare(in highp vec2 vTexCoord, in highp float fDepth, in highp float fBias)
+{
+    return step(fDepth, getShadowMapPassDepth(vTexCoord) + fBias);
+}
+
+highp float texture2DShadowLerp(in highp vec2 vSize, in highp vec2 vTexCoord, in highp float fDepth, in highp float fBias)
+{
+    highp float fCurrentDepth = 0.0;
+    for(int x = -1; x <= 1; x++)
+    {
+        for(int y = -1; y <= 1; y++)
+        {
+            highp vec2 vOffset = vec2(x, y) / vSize;
+            fCurrentDepth += texture2DCompare(vTexCoord + vOffset, fDepth, fBias);
+        }
+    }
+    return fCurrentDepth / 9.0;
+}
 
 void main(void)
 {
@@ -75,7 +120,19 @@ void main(void)
         diffuseColor = diffuseColor + texture2D(SAMPLER_03, OUT_TillingTexcoordLayer_03.xy) * splattingMask.z;
     }
 #endif
+    
+    highp vec2 vTexCoord = OUT_ShadowParameters.st / OUT_ShadowParameters.w;
+    highp float fZ = OUT_ShadowParameters.z / OUT_ShadowParameters.w;
+    highp float fBias = 0.005 * tan(acos(dot(OUT_Normal, OUT_LightDirection)));
+    fBias = clamp(fBias, 0.0, 0.01);
+    highp float fShadow = 1.0;
+    if (OUT_ShadowParameters.w > 0.0)
+    {
+        fShadow = max(texture2DShadowLerp(vec2(512.0, 512.0), vTexCoord, getCurrentDepth(fZ), fBias), 0.5);
+    }
+    
     diffuseColor = vec4(diffuseColor.rgb * min(diffuseFactor, 1.0), 1.0);
     diffuseColor = mix(vec4(vec3(0.16, 0.32, 0.32) * diffuseFactor, 1.0), diffuseColor, OUT_Fog);
+    diffuseColor.rgb *= fShadow;
     gl_FragColor = diffuseColor;
 }

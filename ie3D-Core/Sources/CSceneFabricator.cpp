@@ -45,9 +45,9 @@ void CSceneFabricator::deleteCamera(CSharedCameraRef camera)
     m_camerasContainer.erase(camera);
 }
 
-CSharedLightSource CSceneFabricator::createLightSource(void)
+CSharedLightSource CSceneFabricator::createLightSource(f32 fov, f32 near, f32 far, f32 aspect)
 {
-    CSharedLightSource lightSource = std::make_shared<CLightSource>();
+    CSharedLightSource lightSource = std::make_shared<CLightSource>(fov, near, far, aspect);
     m_lightSourcesContainer.insert(lightSource);
     return lightSource;
 }

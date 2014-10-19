@@ -43,10 +43,16 @@ m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         
         material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->getShader()->setVector3(m_lightSources.at(E_LIGHT_SOURCE_1)->getPosition(), E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION);
+        material->getShader()->setVector3(m_lightSources.at(E_LIGHT_SOURCE_1)->getPosition(),
+                                          E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION);
         material->getShader()->setVector4(material->getClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+        
+        material->getShader()->setMatrix4x4(m_lightSources.at(E_LIGHT_SOURCE_1)->getProjectionMatrix(),
+                                            E_SHADER_UNIFORM_MATRIX_LIGHT_01_PROJECTION);
+        material->getShader()->setMatrix4x4(m_lightSources.at(E_LIGHT_SOURCE_1)->getViewMatrix(),
+                                            E_SHADER_UNIFORM_MATRIX_LIGHT_01_VIEW);
         
 #if defined(__OSX__)
         material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");

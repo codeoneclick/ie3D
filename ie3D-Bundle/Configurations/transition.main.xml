@@ -4,6 +4,7 @@
         <operation filename="render.operation.world.base.xml"/>
         <operation filename="render.operation.world.reflection.xml"/>
         <operation filename="render.operation.world.refraction.xml"/>
+        <operation filename="render.operation.world.shadowmap.xml"/>
         <!--<operation filename="render.operation.world.normal.xml"/>-->
     </world_space_operations>
     <screen_space_operations>

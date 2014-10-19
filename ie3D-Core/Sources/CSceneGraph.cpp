@@ -10,6 +10,7 @@
 #include "CSceneUpdateMgr.h"
 #include "CCollisionMgr.h"
 #include "CCamera.h"
+#include "CLightSource.h"
 #include "IGameObject.h"
 #include "CModel.h"
 #include "COcean.h"
@@ -67,9 +68,17 @@ void CSceneGraph::setCamera(CSharedCameraRef camera)
 
 void CSceneGraph::setLightSource(CSharedLightSourceRef lightSource, E_LIGHT_SOURCE index)
 {
+    assert(m_sceneUpdateMgr != nullptr);
     if(index < E_LIGHT_SOURCE_MAX)
     {
+        if(m_lightSources.at(index) != nullptr)
+        {
+            m_sceneUpdateMgr->UnregisterSceneUpdateHandler(m_lightSources.at(index));
+        }
+        
         m_lightSources.at(index) = lightSource;
+        m_sceneUpdateMgr->RegisterSceneUpdateHandler(m_lightSources.at(index));
+        
         for(const auto& iterator : m_gameObjectsContainer)
         {
             iterator->setLightSource(lightSource, index);

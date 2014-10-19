@@ -327,6 +327,14 @@
 		21DC2B391924D282008DA3C1 /* shaderLandscapeEdges.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B371924D282008DA3C1 /* shaderLandscapeEdges.frag */; };
 		21DC2B3A1924D282008DA3C1 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B381924D282008DA3C1 /* shaderLandscapeEdges.vert */; };
 		21DC2BB3192CD3D0008DA3C1 /* landscape.00.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2BB2192CD3D0008DA3C1 /* landscape.00.diffuse.pvr */; };
+		21F083F319F3BEBE002FF9AE /* shaderScreenShadowMap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21F083F119F3BEBE002FF9AE /* shaderScreenShadowMap.frag */; };
+		21F083F419F3BEBE002FF9AE /* shaderScreenShadowMap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21F083F119F3BEBE002FF9AE /* shaderScreenShadowMap.frag */; };
+		21F083F519F3BEBE002FF9AE /* shaderScreenShadowMap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21F083F219F3BEBE002FF9AE /* shaderScreenShadowMap.vert */; };
+		21F083F619F3BEBE002FF9AE /* shaderScreenShadowMap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21F083F219F3BEBE002FF9AE /* shaderScreenShadowMap.vert */; };
+		21F083F819F3BF92002FF9AE /* render.operation.world.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21F083F719F3BF92002FF9AE /* render.operation.world.shadowmap.xml */; };
+		21F083F919F3BF92002FF9AE /* render.operation.world.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21F083F719F3BF92002FF9AE /* render.operation.world.shadowmap.xml */; };
+		21F083FB19F3C0E1002FF9AE /* material.landscape.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21F083FA19F3C0E1002FF9AE /* material.landscape.shadowmap.xml */; };
+		21F083FC19F3C0E1002FF9AE /* material.landscape.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21F083FA19F3C0E1002FF9AE /* material.landscape.shadowmap.xml */; };
 		21FCC8F9199FA65C00F2CA1E /* libie3DCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2132678E1906AA26001C98F7 /* libie3DCore-ios.a */; };
 		21FCC907199FA6A300F2CA1E /* libie3DEngine-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FCC902199FA69200F2CA1E /* libie3DEngine-ios.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
@@ -590,6 +598,10 @@
 		21DC2B371924D282008DA3C1 /* shaderLandscapeEdges.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.frag"; sourceTree = SOURCE_ROOT; };
 		21DC2B381924D282008DA3C1 /* shaderLandscapeEdges.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.vert"; sourceTree = SOURCE_ROOT; };
 		21DC2BB2192CD3D0008DA3C1 /* landscape.00.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.00.diffuse.pvr; path = "../ie3D-Bundle/Textures/landscape.00.diffuse.pvr"; sourceTree = SOURCE_ROOT; };
+		21F083F119F3BEBE002FF9AE /* shaderScreenShadowMap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenShadowMap.frag; path = "../ie3D-Bundle/Shaders/shaderScreenShadowMap.frag"; sourceTree = SOURCE_ROOT; };
+		21F083F219F3BEBE002FF9AE /* shaderScreenShadowMap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenShadowMap.vert; path = "../ie3D-Bundle/Shaders/shaderScreenShadowMap.vert"; sourceTree = SOURCE_ROOT; };
+		21F083F719F3BF92002FF9AE /* render.operation.world.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.world.shadowmap.xml; path = "../ie3D-Bundle/Configurations/render.operation.world.shadowmap.xml"; sourceTree = SOURCE_ROOT; };
+		21F083FA19F3C0E1002FF9AE /* material.landscape.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.shadowmap.xml; path = "../ie3D-Bundle/Configurations/material.landscape.shadowmap.xml"; sourceTree = SOURCE_ROOT; };
 		21FCC8FB199FA69200F2CA1E /* ie3D-Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Engine.xcodeproj"; path = "../ie3D-Engine/ie3D-Engine.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -775,6 +787,7 @@
 				21B08E131922527400C5D5CC /* material.landscape.reflection.xml */,
 				21B08E141922527400C5D5CC /* material.landscape.refraction.xml */,
 				2162045A194AFC0900D129AD /* material.landscape.normal.xml */,
+				21F083FA19F3C0E1002FF9AE /* material.landscape.shadowmap.xml */,
 				21B08E151922527400C5D5CC /* material.ocean.xml */,
 				21620462194AFF4C00D129AD /* material.ocean.normal.xml */,
 				21B08E161922527400C5D5CC /* material.output.xml */,
@@ -792,6 +805,7 @@
 				21B08E1E1922527400C5D5CC /* render.operation.world.base.xml */,
 				21B08E1F1922527400C5D5CC /* render.operation.world.reflection.xml */,
 				21B08E201922527400C5D5CC /* render.operation.world.refraction.xml */,
+				21F083F719F3BF92002FF9AE /* render.operation.world.shadowmap.xml */,
 				2162045B194AFC0900D129AD /* render.operation.world.normal.xml */,
 				21B08E211922527400C5D5CC /* transition.main.xml */,
 			);
@@ -847,6 +861,8 @@
 				21B08DAE1920CCF600C5D5CC /* shaderParticleEmitter.vert */,
 				21B08DAF1920CCF600C5D5CC /* shaderScreenQuad.frag */,
 				21B08DB01920CCF600C5D5CC /* shaderScreenQuad.vert */,
+				21F083F119F3BEBE002FF9AE /* shaderScreenShadowMap.frag */,
+				21F083F219F3BEBE002FF9AE /* shaderScreenShadowMap.vert */,
 			);
 			name = Shaders;
 			path = "../../ie3D-Bundle/Shaders";
@@ -1109,6 +1125,7 @@
 				212EEC9719CC5D9C00DA02B7 /* gameobject.tank.medium.tower.xml in Resources */,
 				212EEC9819CC5D9C00DA02B7 /* gameobject.landscape.xml in Resources */,
 				212EEC9919CC5D9C00DA02B7 /* shaderModel.vert in Resources */,
+				21F083F619F3BEBE002FF9AE /* shaderScreenShadowMap.vert in Resources */,
 				212EEC9A19CC5D9C00DA02B7 /* particle.emitter.02.pvr in Resources */,
 				212EEC9B19CC5D9C00DA02B7 /* material.landscape.edges.base.xml in Resources */,
 				212EEC9C19CC5D9C00DA02B7 /* gameobject.particle.emitter.xml in Resources */,
@@ -1134,6 +1151,7 @@
 				2127321719D00EBA000AD16B /* material.tank.light.tower.reflection.xml in Resources */,
 				212EECAF19CC5D9C00DA02B7 /* zneg.pvr in Resources */,
 				212EECB019CC5D9C00DA02B7 /* gameobject.tank.medium.right.track.xml in Resources */,
+				21F083F919F3BF92002FF9AE /* render.operation.world.shadowmap.xml in Resources */,
 				212EECB119CC5D9C00DA02B7 /* landscape.01.normal.pvr in Resources */,
 				212EECB219CC5D9C00DA02B7 /* shaderScreenQuad.frag in Resources */,
 				212EECB319CC5D9C00DA02B7 /* gameobject.tank.light.body.xml in Resources */,
@@ -1156,6 +1174,7 @@
 				212EECC219CC5D9C00DA02B7 /* material.tank.medium.right.track.common.xml in Resources */,
 				212EECC319CC5D9C00DA02B7 /* material.landscape.edges.refraction.xml in Resources */,
 				212EED9819D0707E00DA02B7 /* material.tank.light.tower.refraction.xml in Resources */,
+				21F083F419F3BEBE002FF9AE /* shaderScreenShadowMap.frag in Resources */,
 				212EECC419CC5D9C00DA02B7 /* render.operation.world.reflection.xml in Resources */,
 				212EECC519CC5D9C00DA02B7 /* gameobject.tank.heavy.left.track.xml in Resources */,
 				212EECC619CC5D9C00DA02B7 /* shaderGameObjectNormal.frag in Resources */,
@@ -1184,6 +1203,7 @@
 				212EECD719CC5D9C00DA02B7 /* material.tank.light.body.common.xml in Resources */,
 				212EECD819CC5D9C00DA02B7 /* model.mdl_sk in Resources */,
 				212EED3519CC6A1D00DA02B7 /* Images.xcassets in Resources */,
+				21F083FC19F3C0E1002FF9AE /* material.landscape.shadowmap.xml in Resources */,
 				212EECD919CC5D9C00DA02B7 /* gameobject.tank.medium.body.xml in Resources */,
 				212EECDA19CC5D9C00DA02B7 /* tank_light_tower.mdl_01 in Resources */,
 				212EECDB19CC5D9C00DA02B7 /* tank_medium_tower.mdl_01 in Resources */,
@@ -1258,6 +1278,7 @@
 				219A13191998B8E800E674CB /* gameobject.tank.medium.tower.xml in Resources */,
 				21B08E561923956200C5D5CC /* gameobject.landscape.xml in Resources */,
 				2173345919642B47002B3F90 /* shaderModel.vert in Resources */,
+				21F083F519F3BEBE002FF9AE /* shaderScreenShadowMap.vert in Resources */,
 				21B08DD01920CD0900C5D5CC /* particle.emitter.02.pvr in Resources */,
 				21B08E231922527400C5D5CC /* material.landscape.edges.base.xml in Resources */,
 				21B08E47192252FF00C5D5CC /* gameobject.particle.emitter.xml in Resources */,
@@ -1283,6 +1304,7 @@
 				2127321619D00EBA000AD16B /* material.tank.light.tower.reflection.xml in Resources */,
 				21B08DD51920CD0900C5D5CC /* zneg.pvr in Resources */,
 				219A13181998B8E800E674CB /* gameobject.tank.medium.right.track.xml in Resources */,
+				21F083F819F3BF92002FF9AE /* render.operation.world.shadowmap.xml in Resources */,
 				21B08E5A1923AE0300C5D5CC /* landscape.01.normal.pvr in Resources */,
 				21B08DBB1920CCF600C5D5CC /* shaderScreenQuad.frag in Resources */,
 				219A13111998B8E800E674CB /* gameobject.tank.light.body.xml in Resources */,
@@ -1305,6 +1327,7 @@
 				21B08E341922527400C5D5CC /* transition.main.xml in Resources */,
 				219A13311998B8F800E674CB /* material.tank.medium.right.track.common.xml in Resources */,
 				212EED9719D0707E00DA02B7 /* material.tank.light.tower.refraction.xml in Resources */,
+				21F083F319F3BEBE002FF9AE /* shaderScreenShadowMap.frag in Resources */,
 				21B08E251922527400C5D5CC /* material.landscape.edges.refraction.xml in Resources */,
 				21B08E321922527400C5D5CC /* render.operation.world.reflection.xml in Resources */,
 				219A130D1998B8E800E674CB /* gameobject.tank.heavy.left.track.xml in Resources */,
@@ -1333,6 +1356,7 @@
 				2162093519A1F04C00DECBBC /* map_02.png in Resources */,
 				219A132B1998B8F800E674CB /* material.tank.light.body.common.xml in Resources */,
 				212EED3619CC6A2500DA02B7 /* Images.xcassets in Resources */,
+				21F083FB19F3C0E1002FF9AE /* material.landscape.shadowmap.xml in Resources */,
 				219A12F01998B54100E674CB /* model.mdl_sk in Resources */,
 				219A13161998B8E800E674CB /* gameobject.tank.medium.body.xml in Resources */,
 				219A12F81998B54100E674CB /* tank_light_tower.mdl_01 in Resources */,

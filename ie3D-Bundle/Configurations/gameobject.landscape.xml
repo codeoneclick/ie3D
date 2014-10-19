@@ -10,6 +10,7 @@
 		<material filename="material.landscape.base.xml"/>
         <material filename="material.landscape.reflection.xml"/>
         <material filename="material.landscape.refraction.xml"/>
+        <material filename="material.landscape.shadowmap.xml"/>
         <!--<material filename="material.landscape.normal.xml"/>-->
 	</materials>
     <edges

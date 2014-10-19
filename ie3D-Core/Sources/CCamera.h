@@ -41,7 +41,7 @@ private:
     
 protected:
     
-    void onSceneUpdate(f32 _deltatime);
+    void onSceneUpdate(f32 deltatime);
     
 public:
     
