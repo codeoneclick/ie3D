@@ -53,7 +53,7 @@ CDemoGameScene::~CDemoGameScene(void)
 void CDemoGameScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->createCamera(60.0, 0.1, 1024.0,
+    m_camera = m_root->createCamera(45.0, 0.1, 1024.0,
                                     glm::ivec4(0, 0,
                                                m_root->getScreenWidth(),
                                                m_root->getScreenHeight()));
@@ -65,7 +65,7 @@ void CDemoGameScene::load(void)
     
     m_root->setCamera(m_camera);
     
-    m_globalLightSource = m_root->createGlobalLightSource(60.0 , 0.1, 1024.0);
+    m_globalLightSource = m_root->createGlobalLightSource(45.0 , 0.1, 1024.0);
     m_root->setGlobalLightSource(m_globalLightSource);
     
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");

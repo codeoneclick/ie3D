@@ -30,4 +30,9 @@
     
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)aSender
+{
+    return YES;
+}
+
 @end
