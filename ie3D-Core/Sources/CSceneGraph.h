@@ -19,8 +19,7 @@ class CSceneGraph : public IGraph
 private:
     
     CSharedCamera m_camera;
-    
-    std::array<CSharedLightSource, E_LIGHT_SOURCE_MAX> m_lightSources;
+    CSharedGlobalLightSource m_globalLightSource;
     
     std::set<ISharedGameObject> m_gameObjectsContainer;
     CSharedOcean m_ocean;
@@ -45,8 +44,7 @@ public:
     virtual ~CSceneGraph(void);
     
     void setCamera(CSharedCameraRef camera);
-    
-    void setLightSource(CSharedLightSourceRef lightSource, E_LIGHT_SOURCE index);
+    void setGlobalLightSource(CSharedGlobalLightSourceRef lightSource);
     
     void addModel(CSharedModelRef model);
     void removeModel(CSharedModelRef model);

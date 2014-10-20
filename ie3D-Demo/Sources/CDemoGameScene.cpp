@@ -10,7 +10,7 @@
 #include "IEGameTransition.h"
 #include "IGameObject.h"
 #include "CCommonOS.h"
-#include "CLightSource.h"
+#include "CGlobalLightSource.h"
 #include "CModel.h"
 #include "COcean.h"
 #include "CLandscape.h"
@@ -65,15 +65,8 @@ void CDemoGameScene::load(void)
     
     m_root->setCamera(m_camera);
     
-    m_lightSource = m_root->createLightSource(60.0 , 0.1, 1024, 1.33);
-    m_root->setLightSource(m_lightSource, E_LIGHT_SOURCE_1);
-    
-    glm::vec3 position(0.0);
-    position.y = cosf(3.0) * -512.0 + 256.0;
-    position.x = sinf(3.0) * -512.0 + 256.0;
-    position.z = 256.0;
-    m_lightSource->setPosition(position);
-    m_lightSource->setLookAt(glm::vec3(256.0, 0.0, 256.0));
+    m_globalLightSource = m_root->createGlobalLightSource(60.0 , 0.1, 1024);
+    m_root->setGlobalLightSource(m_globalLightSource);
     
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
@@ -130,6 +123,12 @@ void CDemoGameScene::load(void)
     
     m_gameObjectNavigator->setPosition(glm::vec3(2.0, 0.0, 2.0));
     m_gameObjectNavigator->setRotation(glm::vec3(0.0, 0.0, 0.0));
+    
+    m_globalLightSource->setAngle(3.0);
+    m_globalLightSource->setDistanceToSun(512.0);
+    m_globalLightSource->setDistanceToLookAt(32.0);
+    m_globalLightSource->setRotationCenter(glm::vec3(256.0, 0.0, 256.0));
+    m_globalLightSource->setLookAt(m_model->getPosition());
 }
 
 void CDemoGameScene::update(f32 deltatime)
@@ -187,12 +186,6 @@ void CDemoGameScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.033;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
-    
-    /*glm::vec3 position(0.0);
-    position.y = cosf(angle) * -512.0 + 256.0;
-    position.x = sinf(angle) * -512.0 + 256.0;
-    position.z = 256.0;
-    m_lightSource->setPosition(position);*/
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)
@@ -233,11 +226,8 @@ void CDemoGameScene::onKeyDown(i32 key)
         angle -= 0.05;
     }
     
-    glm::vec3 position(0.0);
-    position.y = cosf(angle) * -512.0 + 256.0;
-    position.x = sinf(angle) * -512.0 + 256.0;
-    position.z = 256.0;
-    m_lightSource->setPosition(position);
+    m_globalLightSource->setLookAt(m_model->getPosition());
+    m_globalLightSource->setAngle(angle);
 }
 
 void CDemoGameScene::onKeyUp(i32 key)

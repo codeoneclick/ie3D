@@ -11,14 +11,7 @@ uniform mat4   MATRIX_Normal;
 uniform mat4   MATRIX_World;
 
 uniform vec3   VECTOR_CameraPosition;
-uniform vec3   VECTOR_LightPosition_01;
-uniform vec3   VECTOR_LightPosition_02;
-uniform vec3   VECTOR_LightPosition_03;
-uniform vec3   VECTOR_LightPosition_04;
-uniform vec3   VECTOR_LightColor_01;
-uniform vec3   VECTOR_LightColor_02;
-uniform vec3   VECTOR_LightColor_03;
-uniform vec3   VECTOR_LightColor_04;
+uniform vec3   VECTOR_GlobalLightPosition;
 uniform vec4   VECTOR_ClipPlane;
 uniform int    INT_LightsCount;
 uniform float  FLOAT_Timer;
@@ -49,7 +42,7 @@ void main(void)
                                    vTexCoord.y + cos(FLOAT_Timer) * 0.25);
     OUT_TexCoordProjection = gl_Position;
     
-    OUT_LightPosition = VECTOR_LightPosition_01;
+    OUT_LightPosition = VECTOR_GlobalLightPosition;
     OUT_CameraPosition = VECTOR_CameraPosition;
     OUT_Position = vPosition.xyz;
     OUT_Extra = IN_Extra;

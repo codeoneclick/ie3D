@@ -9,11 +9,11 @@ attribute vec4 IN_Extra;
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
-uniform mat4   MATRIX_LightProjection_01;
-uniform mat4   MATRIX_LightView_01;
+uniform mat4   MATRIX_GlobalLightProjection;
+uniform mat4   MATRIX_GlobalLightView;
 uniform vec4   VECTOR_ClipPlane;
 uniform vec3   VECTOR_CameraPosition;
-uniform vec3   VECTOR_LightPosition_01;
+uniform vec3   VECTOR_GlobalLightPosition;
 
 varying vec2   OUT_TexCoord;
 varying vec4   OUT_TillingTexcoordLayer_01;
@@ -44,7 +44,7 @@ void main(void)
                             0.0, 0.5, 0.0, 0.0,
                             0.0, 0.0, 0.5, 0.0,
                             0.5, 0.5, 0.5, 1.0);
-    OUT_ShadowParameters = mBiasMatrix * MATRIX_LightProjection_01 * MATRIX_LightView_01 * vPosition;
+    OUT_ShadowParameters = mBiasMatrix * MATRIX_GlobalLightProjection * MATRIX_GlobalLightView * vPosition;
     
     OUT_TexCoord = (IN_TexCoord / 32767.0  - 1.0);
     OUT_ClipPlane = dot(vPosition.xyz, VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
@@ -52,7 +52,7 @@ void main(void)
     
     OUT_Normal = IN_Normal.xyz / 127.0 - 1.0;
 
-    vec3 vLightDirection = VECTOR_LightPosition_01 - vPosition.xyz;
+    vec3 vLightDirection = VECTOR_GlobalLightPosition - vPosition.xyz;
     OUT_LightDirection = normalize(vLightDirection);
     
     OUT_Fog = clamp(((MATRIX_View * vPosition).z + IN_fogLinearStart) / (IN_fogLinearStart - IN_fogLinearEnd) * -1.0, 0.0, 1.0);

@@ -111,14 +111,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, i , j, numChunksZ, LOD](CSharedMeshRef mesh) {
                             
                             m_chunks[i + j * numChunksZ]->setCamera(m_camera);
-                            
-                            for(ui32 index = 0; index < m_lightSources.size(); ++index)
-                            {
-                                if(m_lightSources.at(index) != nullptr)
-                                {
-                                    m_chunks[i + j * numChunksZ]->setLightSource(m_lightSources.at(index), static_cast<E_LIGHT_SOURCE>(index));
-                                }
-                            }
+                            m_chunks[i + j * numChunksZ]->setGlobalLightSource(m_globalLightSource);
                             
                             m_chunks[i + j * numChunksZ]->setMesh(mesh);
                             m_chunks[i + j * numChunksZ]->onConfigurationLoaded(m_configuration, true);
@@ -329,12 +322,11 @@ void CLandscape::setCamera(CSharedCameraRef camera)
     m_edges->setCamera(camera);
 }
 
-void CLandscape::setLightSource(CSharedLightSourceRef lightSource,
-                                E_LIGHT_SOURCE index)
+void CLandscape::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource)
 {
-    IGameObject::setLightSource(lightSource, index);
+    IGameObject::setGlobalLightSource(lightSource);
     assert(m_edges != nullptr);
-    m_edges->setLightSource(lightSource, index);
+    m_edges->setGlobalLightSource(lightSource);
 }
 
 void CLandscape::setTexture(CSharedTextureRef texture,

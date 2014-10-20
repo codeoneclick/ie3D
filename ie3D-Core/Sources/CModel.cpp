@@ -11,6 +11,7 @@
 #include "CShader.h"
 #include "CTexture.h"
 #include "CCamera.h"
+#include "CGlobalLightSource.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
 #include "CBatchingMgr.h"
@@ -24,8 +25,8 @@ m_animationMixer(nullptr),
 m_isAnimated(false)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_MODEL;
-
-	m_materialBindImposer = [this](CSharedMaterialRef material)
+    
+    m_materialBindImposer = [this](CSharedMaterialRef material)
     {
         material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
@@ -36,6 +37,11 @@ m_isAnimated(false)
         material->getShader()->setVector4(material->getClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+        
+        material->getShader()->setMatrix4x4(m_globalLightSource->getProjectionMatrix(),
+                                            E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_PROJECTION);
+        material->getShader()->setMatrix4x4(m_globalLightSource->getViewMatrix(),
+                                            E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_VIEW);
         
         material->getShader()->setInt(m_isAnimated ? 1 : 0, E_SHADER_UNIFORM_INT_FLAG_01);
     };

@@ -69,8 +69,7 @@ public:
     ~CLandscape(void);
     
     void setCamera(CSharedCameraRef camera);
-    void setLightSource(CSharedLightSourceRef lightSource,
-                        E_LIGHT_SOURCE index);
+    void setGlobalLightSource(CSharedGlobalLightSourceRef lightSource);
     
     void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);
     void setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor);

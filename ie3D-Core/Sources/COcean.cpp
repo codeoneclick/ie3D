@@ -11,12 +11,12 @@
 #include "CShader.h"
 #include "CTexture.h"
 #include "CCamera.h"
+#include "CGlobalLightSource.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
-#include "CLightSource.h"
 
 COcean::COcean(CSharedResourceAccessorRef resourceAccessor,
                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -148,7 +148,7 @@ void COcean::onDraw(const std::string& mode)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_camera != nullptr);
-        assert(m_lightSources.at(E_LIGHT_SOURCE_1) != nullptr);
+        assert(m_globalLightSource != nullptr);
         assert(m_materials.find(mode) != m_materials.end());
         
         std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
@@ -160,7 +160,7 @@ void COcean::onDraw(const std::string& mode)
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         
         material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->getShader()->setVector3(m_lightSources.at(E_LIGHT_SOURCE_1)->getPosition(), E_SHADER_UNIFORM_VECTOR_LIGHT_01_POSITION);
+        material->getShader()->setVector3(m_globalLightSource->getPosition(), E_SHADER_UNIFORM_VECTOR_GLOBAL_LIGHT_POSITION);
         material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
         material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
         material->getShader()->setFloat(m_waveGeneratorTimer, E_SHADER_UNIFORM_FLOAT_TIMER);

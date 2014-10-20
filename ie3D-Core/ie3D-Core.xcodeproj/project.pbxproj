@@ -49,7 +49,6 @@
 		21208FC71906FB5F00FFC8D4 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
 		21208FC81906FB5F00FFC8D4 /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
 		21208FC91906FB5F00FFC8D4 /* CFrustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B1174F5215005B475E /* CFrustum.cpp */; };
-		21208FCA1906FB5F00FFC8D4 /* CLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLightSource.cpp */; };
 		21208FCB1906FB5F00FFC8D4 /* CAnimationMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4EC917BA6B0C00C1484F /* CAnimationMixer.cpp */; };
 		21208FCC1906FB5F00FFC8D4 /* CSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BB17427C700063AB07 /* CSceneGraph.cpp */; };
 		21208FCD1906FB5F00FFC8D4 /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
@@ -168,7 +167,6 @@
 		2132660B1906A4AF001C98F7 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
 		2132660C1906A4AF001C98F7 /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
 		2132660D1906A4AF001C98F7 /* CFrustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B1174F5215005B475E /* CFrustum.cpp */; };
-		2132660E1906A4AF001C98F7 /* CLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45588D41756406C00802609 /* CLightSource.cpp */; };
 		2132660F1906A4AF001C98F7 /* CAnimationMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49C4EC917BA6B0C00C1484F /* CAnimationMixer.cpp */; };
 		213266101906A4AF001C98F7 /* CSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204BB17427C700063AB07 /* CSceneGraph.cpp */; };
 		213266111906A4AF001C98F7 /* CSceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */; };
@@ -279,6 +277,9 @@
 		2179740919F167CF00A98630 /* CLandscapeSeams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179740719F167CF00A98630 /* CLandscapeSeams.cpp */; };
 		2179740A19F167CF00A98630 /* CLandscapeSeams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179740719F167CF00A98630 /* CLandscapeSeams.cpp */; };
 		2179740B19F167CF00A98630 /* CLandscapeSeams.h in Headers */ = {isa = PBXBuildFile; fileRef = 2179740819F167CF00A98630 /* CLandscapeSeams.h */; };
+		2179741A19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
+		2179741B19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
+		2179741C19F534FA00A98630 /* CGlobalLightSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 2179741919F534FA00A98630 /* CGlobalLightSource.h */; };
 		2191CE4A196EDBEF00CE2813 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE34196EDBEF00CE2813 /* png.c */; };
 		2191CE4B196EDBEF00CE2813 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE34196EDBEF00CE2813 /* png.c */; };
 		2191CE4C196EDBEF00CE2813 /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE35196EDBEF00CE2813 /* png.h */; };
@@ -461,6 +462,8 @@
 		2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueHandler.h; path = Sources/IRenderTechniqueHandler.h; sourceTree = "<group>"; };
 		2179740719F167CF00A98630 /* CLandscapeSeams.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLandscapeSeams.cpp; path = Sources/CLandscapeSeams.cpp; sourceTree = "<group>"; };
 		2179740819F167CF00A98630 /* CLandscapeSeams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLandscapeSeams.h; path = Sources/CLandscapeSeams.h; sourceTree = "<group>"; };
+		2179741819F534FA00A98630 /* CGlobalLightSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGlobalLightSource.cpp; path = Sources/CGlobalLightSource.cpp; sourceTree = "<group>"; };
+		2179741919F534FA00A98630 /* CGlobalLightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGlobalLightSource.h; path = Sources/CGlobalLightSource.h; sourceTree = "<group>"; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
 		217BB29E1815A48700DB8ECC /* CQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuad.h; path = Sources/CQuad.h; sourceTree = "<group>"; };
 		217BB2A91815A4CE00DB8ECC /* CGUITemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUITemplateSerializer.cpp; path = Sources/CGUITemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -593,8 +596,6 @@
 		A4535E8717C633D50058CD47 /* CBatchingMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBatchingMgr.h; path = Sources/CBatchingMgr.h; sourceTree = "<group>"; };
 		A4535E9117C633EA0058CD47 /* CBatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBatch.cpp; path = Sources/CBatch.cpp; sourceTree = "<group>"; };
 		A4535E9217C633EA0058CD47 /* CBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBatch.h; path = Sources/CBatch.h; sourceTree = "<group>"; };
-		A45588D41756406C00802609 /* CLightSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLightSource.cpp; path = Sources/CLightSource.cpp; sourceTree = "<group>"; };
-		A45588D51756406C00802609 /* CLightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLightSource.h; path = Sources/CLightSource.h; sourceTree = "<group>"; };
 		A45588F017575FF900802609 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A45588F21757600200802609 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A45588F41757602600802609 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1193,12 +1194,12 @@
 				A40A69AE174F5203005B475E /* CCamera.cpp */,
 				A40A69B2174F5215005B475E /* CFrustum.h */,
 				A40A69B1174F5215005B475E /* CFrustum.cpp */,
-				A45588D51756406C00802609 /* CLightSource.h */,
-				A45588D41756406C00802609 /* CLightSource.cpp */,
 				A42FF51A17A150A600C0B419 /* CSkeleton.h */,
 				A42FF51917A150A600C0B419 /* CSkeleton.cpp */,
 				A49C4ECA17BA6B0C00C1484F /* CAnimationMixer.h */,
 				A49C4EC917BA6B0C00C1484F /* CAnimationMixer.cpp */,
+				2179741919F534FA00A98630 /* CGlobalLightSource.h */,
+				2179741819F534FA00A98630 /* CGlobalLightSource.cpp */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -1842,6 +1843,7 @@
 				2191CEB4196EE95100CE2813 /* inftrees.h in Headers */,
 				21733479196440EB002B3F90 /* IRenderTechniqueBase.h in Headers */,
 				2127E85D1935056100D408C9 /* IEditableLandscape.h in Headers */,
+				2179741C19F534FA00A98630 /* CGlobalLightSource.h in Headers */,
 				213B7F3B1994CDFC006F3976 /* CRenderTarget.h in Headers */,
 				213B7F331993CC5B006F3976 /* CShaderCompiler_GLSL.h in Headers */,
 				2191CE73196EDCDE00CE2813 /* CTextureSerializer_PNG.h in Headers */,
@@ -1986,6 +1988,7 @@
 				2191CE9B196EE95100CE2813 /* crc32.c in Sources */,
 				21208FB61906FB5F00FFC8D4 /* IGameTransition.cpp in Sources */,
 				21208FB71906FB5F00FFC8D4 /* CGameLoopExecutor.cpp in Sources */,
+				2179741B19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */,
 				21208FB81906FB5F00FFC8D4 /* CGameLoopExecutor_osx.cpp in Sources */,
 				21208FB91906FB5F00FFC8D4 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				2191CE68196EDBEF00CE2813 /* pngwio.c in Sources */,
@@ -2012,7 +2015,6 @@
 				21208FC81906FB5F00FFC8D4 /* CCamera.cpp in Sources */,
 				21208FC91906FB5F00FFC8D4 /* CFrustum.cpp in Sources */,
 				2173349B19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */,
-				21208FCA1906FB5F00FFC8D4 /* CLightSource.cpp in Sources */,
 				2191CE6A196EDBEF00CE2813 /* pngwrite.c in Sources */,
 				21208FCB1906FB5F00FFC8D4 /* CAnimationMixer.cpp in Sources */,
 				21208FCC1906FB5F00FFC8D4 /* CSceneGraph.cpp in Sources */,
@@ -2153,6 +2155,7 @@
 				2191CE9A196EE95100CE2813 /* crc32.c in Sources */,
 				213265FA1906A4AF001C98F7 /* IGameTransition.cpp in Sources */,
 				213265FB1906A4AF001C98F7 /* CGameLoopExecutor.cpp in Sources */,
+				2179741A19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */,
 				213265FC1906A4AF001C98F7 /* CGameLoopExecutor_osx.cpp in Sources */,
 				213265FD1906A4AF001C98F7 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				2191CE67196EDBEF00CE2813 /* pngwio.c in Sources */,
@@ -2179,7 +2182,6 @@
 				2132660C1906A4AF001C98F7 /* CCamera.cpp in Sources */,
 				2132660D1906A4AF001C98F7 /* CFrustum.cpp in Sources */,
 				2173349A19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */,
-				2132660E1906A4AF001C98F7 /* CLightSource.cpp in Sources */,
 				2191CE69196EDBEF00CE2813 /* pngwrite.c in Sources */,
 				2132660F1906A4AF001C98F7 /* CAnimationMixer.cpp in Sources */,
 				213266101906A4AF001C98F7 /* CSceneGraph.cpp in Sources */,

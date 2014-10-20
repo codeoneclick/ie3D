@@ -21,10 +21,6 @@ const highp vec2 vCameraRange = vec2(0.01, 1024.0);
 
 highp float getShadowMapPassDepth(in mediump vec2 vTexCoord)
 {
-    if (vTexCoord.x < 0.0 || vTexCoord.y < 0.0)
-    {
-        return 1.0;
-    }
     highp float fNearZ = vCameraRange.x;
     highp float fFarZ = vCameraRange.y;
     lowp float fDepth = texture2D(SAMPLER_05, vTexCoord).x;
@@ -123,12 +119,13 @@ void main(void)
     
     highp vec2 vTexCoord = OUT_ShadowParameters.st / OUT_ShadowParameters.w;
     highp float fZ = OUT_ShadowParameters.z / OUT_ShadowParameters.w;
-    highp float fBias = 0.005 * tan(acos(dot(OUT_Normal, OUT_LightDirection)));
-    fBias = clamp(fBias, 0.0, 0.01);
+    highp float fBias = 0.0005 * tan(acos(dot(OUT_Normal, OUT_LightDirection)));
+    //fBias = clamp(fBias, 0.0, 0.005);
     highp float fShadow = 1.0;
     if (OUT_ShadowParameters.w > 0.0)
     {
-        fShadow = max(texture2DShadowLerp(vec2(512.0, 512.0), vTexCoord, getCurrentDepth(fZ), fBias), 0.5);
+        fShadow = max(step(getCurrentDepth(fZ), getShadowMapPassDepth(vTexCoord)), 0.5);
+        //fShadow = max(texture2DShadowLerp(vec2(512.0, 512.0), vTexCoord, getCurrentDepth(fZ), fBias), 0.5);
     }
     
     diffuseColor = vec4(diffuseColor.rgb * min(diffuseFactor, 1.0), 1.0);

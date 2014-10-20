@@ -29,6 +29,7 @@ m_zOrder(0),
 m_mesh(nullptr),
 m_configuration(nullptr),
 m_camera(nullptr),
+m_globalLightSource(nullptr),
 m_boundBox(nullptr),
 m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_renderTechniqueImporter(nullptr),
@@ -39,9 +40,7 @@ m_isNeedToUpdate(false),
 m_isBatching(false),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
-    std::for_each(m_lightSources.begin(), m_lightSources.end(), [](CSharedLightSource& lightSource){
-        lightSource = nullptr;
-    });
+
 }
 
 IGameObject::~IGameObject(void)
@@ -193,10 +192,9 @@ void IGameObject::setCamera(CSharedCameraRef camera)
     m_camera = camera;
 }
 
-void IGameObject::setLightSource(CSharedLightSourceRef lightSource,
-                            E_LIGHT_SOURCE index)
+void IGameObject::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource)
 {
-    m_lightSources.at(index) = lightSource;
+    m_globalLightSource = lightSource;
 }
 
 CSharedVertexBuffer IGameObject::getVertexBuffer(void) const

@@ -45,7 +45,7 @@ protected:
     CSharedBoundBox m_boundBox;
     
     CSharedCamera m_camera;
-    std::array<CSharedLightSource, E_LIGHT_SOURCE_MAX> m_lightSources;
+    CSharedGlobalLightSource m_globalLightSource;
     
     ISharedRenderTechniqueImporter m_renderTechniqueImporter;
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
@@ -96,9 +96,7 @@ public:
     glm::vec3 getMinBound(void) const;
     
     virtual void setCamera(CSharedCameraRef camera);
-    
-    virtual void setLightSource(CSharedLightSourceRef lightSource,
-                                E_LIGHT_SOURCE index);
+    virtual void setGlobalLightSource(CSharedGlobalLightSourceRef lightSource);
     
     CSharedVertexBuffer getVertexBuffer(void) const;
     CSharedIndexBuffer getIndexBuffer(void) const;

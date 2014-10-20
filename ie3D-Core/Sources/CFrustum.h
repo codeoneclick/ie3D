@@ -36,7 +36,7 @@ protected:
     
 public:
     
-    CFrustum(CCamera* _camera);
+    CFrustum(CCamera* camera);
     ~CFrustum(void);
     
     void Update(void);

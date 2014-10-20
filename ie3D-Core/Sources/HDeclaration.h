@@ -168,9 +168,9 @@ class CCamera;
 typedef std::shared_ptr<CCamera> CSharedCamera;
 typedef const CSharedCamera& CSharedCameraRef;
 
-class CLightSource;
-typedef std::shared_ptr<CLightSource> CSharedLightSource;
-typedef const CSharedLightSource& CSharedLightSourceRef;
+class CGlobalLightSource;
+typedef std::shared_ptr<CGlobalLightSource> CSharedGlobalLightSource;
+typedef const CSharedGlobalLightSource& CSharedGlobalLightSourceRef;
 
 class CSceneUpdateMgr;
 typedef std::shared_ptr<CSceneUpdateMgr> CSharedSceneUpdateMgr;

@@ -10,7 +10,7 @@
 #include "CSceneUpdateMgr.h"
 #include "CCollisionMgr.h"
 #include "CCamera.h"
-#include "CLightSource.h"
+#include "CGlobalLightSource.h"
 #include "IGameObject.h"
 #include "CModel.h"
 #include "COcean.h"
@@ -27,6 +27,7 @@ CSceneGraph::CSceneGraph(CSharedRenderPipelineRef renderPipeline,
                          ISharedInputContext inputContext) :
 IGraph(renderPipeline, sceneUpdateMgr),
 m_camera(nullptr),
+m_globalLightSource(nullptr),
 m_ocean(nullptr),
 m_landscape(nullptr),
 m_skyBox(nullptr),
@@ -34,10 +35,7 @@ m_atmosphericScattering(nullptr),
 m_collisionMgr(collisionMgr),
 m_inputContext(inputContext)
 {
-    m_lightSources.at(0) = nullptr;
-    m_lightSources.at(1) = nullptr;
-    m_lightSources.at(2) = nullptr;
-    m_lightSources.at(3) = nullptr;
+
 }
 
 CSceneGraph::~CSceneGraph(void)
@@ -66,23 +64,20 @@ void CSceneGraph::setCamera(CSharedCameraRef camera)
     m_collisionMgr->setCamera(m_camera);
 }
 
-void CSceneGraph::setLightSource(CSharedLightSourceRef lightSource, E_LIGHT_SOURCE index)
+void CSceneGraph::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource)
 {
     assert(m_sceneUpdateMgr != nullptr);
-    if(index < E_LIGHT_SOURCE_MAX)
+    if(m_globalLightSource != nullptr)
     {
-        if(m_lightSources.at(index) != nullptr)
-        {
-            m_sceneUpdateMgr->UnregisterSceneUpdateHandler(m_lightSources.at(index));
-        }
-        
-        m_lightSources.at(index) = lightSource;
-        m_sceneUpdateMgr->RegisterSceneUpdateHandler(m_lightSources.at(index));
-        
-        for(const auto& iterator : m_gameObjectsContainer)
-        {
-            iterator->setLightSource(lightSource, index);
-        }
+        m_sceneUpdateMgr->UnregisterSceneUpdateHandler(m_globalLightSource);
+    }
+    
+    m_globalLightSource = lightSource;
+    m_sceneUpdateMgr->RegisterSceneUpdateHandler(m_globalLightSource);
+    
+    for(const auto& iterator : m_gameObjectsContainer)
+    {
+        iterator->setGlobalLightSource(lightSource);
     }
 }
 
@@ -95,13 +90,9 @@ void CSceneGraph::addGameObject(ISharedGameObjectRef gameObject)
     {
         gameObject->setCamera(m_camera);
     }
-    
-    for(ui32 i = 0; i < m_lightSources.size(); ++i)
+    if(m_globalLightSource != nullptr)
     {
-        if(m_lightSources.at(i) != nullptr)
-        {
-            gameObject->setLightSource(m_lightSources.at(i), static_cast<E_LIGHT_SOURCE>(i));
-        }
+        gameObject->setGlobalLightSource(m_globalLightSource);
     }
     
     gameObject->setSceneUpdateMgr(m_sceneUpdateMgr);

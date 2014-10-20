@@ -200,10 +200,10 @@ void IGameTransition::setCamera(CSharedCameraRef camera)
     m_sceneGraph->setCamera(camera);
 }
 
-void IGameTransition::setLightSource(CSharedLightSourceRef lightSource, E_LIGHT_SOURCE index)
+void IGameTransition::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource)
 {
     assert(m_sceneGraph != nullptr);
-    m_sceneGraph->setLightSource(lightSource, index);
+    m_sceneGraph->setGlobalLightSource(lightSource);
 }
 
 const CSharedResourceAccessor IGameTransition::getResourceAccessor(void) const
@@ -338,16 +338,16 @@ void IGameTransition::deleteCamera(CSharedCameraRef camera)
     m_sceneFabricator->deleteCamera(camera);
 }
 
-CSharedLightSource IGameTransition::createLightSource(f32 fov, f32 near, f32 far, f32 aspect)
+CSharedGlobalLightSource IGameTransition::createGlobalLightSource(f32 fov, f32 near, f32 far)
 {
     assert(m_sceneFabricator != nullptr);
-    return m_sceneFabricator->createLightSource(fov, near, far, aspect);
+    return m_sceneFabricator->createGlobalLightSource(fov, near, far);
 }
 
-void IGameTransition::deleteLightSource(CSharedLightSourceRef lightSource)
+void IGameTransition::deleteGlobalLightSource(CSharedGlobalLightSourceRef lightSource)
 {
     assert(m_sceneFabricator != nullptr);
-    m_sceneFabricator->deleteLightSource(lightSource);
+    m_sceneFabricator->deleteGlobalLightSource(lightSource);
 }
 
 CSharedModel IGameTransition::createModel(const std::string& filename)

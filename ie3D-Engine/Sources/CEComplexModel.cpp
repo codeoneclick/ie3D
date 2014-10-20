@@ -58,7 +58,8 @@ void CEComplexModel::onConfigurationLoaded(ISharedConfigurationRef configuration
         model->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
         
         model->setCamera(m_camera);
-        
+        model->setGlobalLightSource(m_globalLightSource);
+
         model->enableRender(true);
         model->enableUpdate(true);
         
@@ -163,6 +164,19 @@ void CEComplexModel::setCamera(CSharedCameraRef camera)
         {
             assert(iterator.second != nullptr);
             iterator.second->setCamera(camera);
+        }
+    }
+}
+
+void CEComplexModel::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource)
+{
+    IGameObject::setGlobalLightSource(lightSource);
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    {
+        for(const auto& iterator : m_parts)
+        {
+            assert(iterator.second != nullptr);
+            iterator.second->setGlobalLightSource(lightSource);
         }
     }
 }

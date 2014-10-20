@@ -11,7 +11,7 @@ uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
 
 uniform vec3   VECTOR_CameraPosition;
-uniform vec3   VECTOR_LightPosition_01;
+uniform vec3   VECTOR_GlobalLightPosition;
 
 const vec4 scaleIteration = vec4(0.01, 0.25, 0.04, 10.0);
 const vec4 radiusInOutHeightMinMax = vec4(6356.75, 6456.55, 0.0, 256.0);
@@ -51,7 +51,7 @@ void main(void)
     
     vec3 vInvertWavelength = vec3(1.0 / pow(0.650, 4.0), 1.0 / pow(0.570, 4.0), 1.0 / pow(0.475, 4.0));
 
-    OUT_LightDirection = normalize(VECTOR_LightPosition_01 - vPosition.xyz);
+    OUT_LightDirection = normalize(VECTOR_GlobalLightPosition - vPosition.xyz);
     vec3 vCameraPosition = VECTOR_CameraPosition;
     vec3 vCameraRay = normalize(vPosition.xyz - vCameraPosition);
     
