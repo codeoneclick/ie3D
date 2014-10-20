@@ -9,7 +9,7 @@ attribute vec4 IN_Extra;
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
-uniform mat4   MATRIX_Bones[64];
+uniform mat4   MATRIX_Bones[32];
 
 uniform vec4   VECTOR_ClipPlane;
 

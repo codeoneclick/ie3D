@@ -152,6 +152,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[i + j * numChunksZ]->onSceneUpdate(0);
                         }, [this, i , j, numChunksZ, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[i + j * numChunksZ]->setQuadTree(quadTree, LOD);
+                            m_chunks[i + j * numChunksZ]->onSceneUpdate(0);
                         });
                     }
                 }

@@ -120,7 +120,6 @@ void main(void)
     highp vec2 vTexCoord = OUT_ShadowParameters.st / OUT_ShadowParameters.w;
     highp float fZ = OUT_ShadowParameters.z / OUT_ShadowParameters.w;
     highp float fBias = 0.0005 * tan(acos(dot(OUT_Normal, OUT_LightDirection)));
-    //fBias = clamp(fBias, 0.0, 0.005);
     highp float fShadow = 1.0;
     if (OUT_ShadowParameters.w > 0.0)
     {

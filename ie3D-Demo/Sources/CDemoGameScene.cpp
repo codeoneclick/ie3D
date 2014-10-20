@@ -65,7 +65,7 @@ void CDemoGameScene::load(void)
     
     m_root->setCamera(m_camera);
     
-    m_globalLightSource = m_root->createGlobalLightSource(60.0 , 0.1, 1024);
+    m_globalLightSource = m_root->createGlobalLightSource(60.0 , 0.1, 1024.0);
     m_root->setGlobalLightSource(m_globalLightSource);
     
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
@@ -91,13 +91,13 @@ void CDemoGameScene::load(void)
     m_root->addModel(m_model);
     m_model->setScale(glm::vec3(4.0, 4.0, 4.0));
     
-    IEGameTransition* transition = static_cast<IEGameTransition*>(m_root);
+    /*IEGameTransition* transition = static_cast<IEGameTransition*>(m_root);
     
     m_lightTank = transition->createComplexModel("gameobject.tank.light.xml");
     m_root->addCustomGameObject(m_lightTank);
     m_lightTank->setScale(glm::vec3(1.0, 1.0, 1.0));
     
-    /*m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
+    m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
     m_root->addCustomGameObject(m_mediumTank);
     m_mediumTank->setScale(glm::vec3(2.0, 2.0, 2.0));
     m_mediumTank->setPosition(glm::vec3(16.0, 0.0, 16.0));

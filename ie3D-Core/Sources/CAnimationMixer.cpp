@@ -13,7 +13,8 @@
 
 CAnimationMixer::CAnimationMixer(CSharedSkeletonDataRef skeletonData,
                                  CSharedSequenceDataRef sequenceData) :
-m_sequenceData(sequenceData)
+m_sequenceData(sequenceData),
+m_animationTime(0.0)
 {
     assert(skeletonData != nullptr);
     m_skeleton = std::make_shared<CSkeleton>(skeletonData);
@@ -93,7 +94,6 @@ void CAnimationMixer::update(f32 deltatime)
     CSharedFrameData frame_01 = m_sequenceData->getFrame(frameIndex_01);
     CSharedFrameData frame_02 = m_sequenceData->getFrame(frameIndex_02);
     
-    CSharedBone bone = nullptr;
     for (ui32 i = 0; i < m_skeleton->getNumBones(); ++i)
     {
         glm::vec3 position = glm::mix(frame_01->getPosition(i), frame_02->getPosition(i), interpolation );
