@@ -14,5 +14,5 @@ highp float getDepth(in highp float fZ)
 void main(void)
 {
     highp float fZ = OUT_Position.z / OUT_Position.w;
-    gl_FragColor = vec4(vec3(getDepth(fZ)), 1.0);
+    gl_FragColor = vec4(vec3(getDepth(fZ)) * vCameraRange.y, 1.0);
 }

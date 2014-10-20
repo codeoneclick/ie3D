@@ -849,8 +849,6 @@
 		21BC34E219081510007B99DA /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				2179740F19F4F69E00A98630 /* shaderAnimatedGameObjectND.frag */,
-				2179741019F4F69E00A98630 /* shaderAnimatedGameObjectND.vert */,
 				211B0D5E19DD660100B760B7 /* shaderAtmosphericScattering.frag */,
 				211B0D5F19DD660100B760B7 /* shaderAtmosphericScattering.vert */,
 				2173345619642B47002B3F90 /* shaderModel.frag */,
@@ -875,6 +873,8 @@
 				21B08DB01920CCF600C5D5CC /* shaderScreenQuad.vert */,
 				21F083F119F3BEBE002FF9AE /* shaderStaticGameObjectND.frag */,
 				21F083F219F3BEBE002FF9AE /* shaderStaticGameObjectND.vert */,
+				2179740F19F4F69E00A98630 /* shaderAnimatedGameObjectND.frag */,
+				2179741019F4F69E00A98630 /* shaderAnimatedGameObjectND.vert */,
 			);
 			name = Shaders;
 			path = "../../ie3D-Bundle/Shaders";

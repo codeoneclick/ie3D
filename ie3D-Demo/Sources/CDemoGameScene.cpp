@@ -186,6 +186,7 @@ void CDemoGameScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.033;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
+    m_globalLightSource->setLookAt(m_model->getPosition());
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)
@@ -225,8 +226,6 @@ void CDemoGameScene::onKeyDown(i32 key)
     {
         angle -= 0.05;
     }
-    
-    m_globalLightSource->setLookAt(m_model->getPosition());
     m_globalLightSource->setAngle(angle);
 }
 
