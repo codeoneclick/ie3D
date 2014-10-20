@@ -36,25 +36,6 @@ highp float getCurrentDepth(in highp float fZ)
     return fDepth;
 }
 
-highp float texture2DCompare(in highp vec2 vTexCoord, in highp float fDepth, in highp float fBias)
-{
-    return step(fDepth, getShadowMapPassDepth(vTexCoord) + fBias);
-}
-
-highp float texture2DShadowLerp(in highp vec2 vSize, in highp vec2 vTexCoord, in highp float fDepth, in highp float fBias)
-{
-    highp float fCurrentDepth = 0.0;
-    for(int x = -1; x <= 1; x++)
-    {
-        for(int y = -1; y <= 1; y++)
-        {
-            highp vec2 vOffset = vec2(x, y) / vSize;
-            fCurrentDepth += texture2DCompare(vTexCoord + vOffset, fDepth, fBias);
-        }
-    }
-    return fCurrentDepth / 9.0;
-}
-
 void main(void)
 {
     if(OUT_ClipPlane < 0.0)
@@ -124,7 +105,6 @@ void main(void)
     if (OUT_ShadowParameters.w > 0.0)
     {
         fShadow = max(step(getCurrentDepth(fZ), getShadowMapPassDepth(vTexCoord)), 0.5);
-        //fShadow = max(texture2DShadowLerp(vec2(512.0, 512.0), vTexCoord, getCurrentDepth(fZ), fBias), 0.5);
     }
     
     diffuseColor = vec4(diffuseColor.rgb * min(diffuseFactor, 1.0), 1.0);
