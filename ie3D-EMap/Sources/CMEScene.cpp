@@ -10,7 +10,7 @@
 #include "IGameTransition.h"
 #include "IGameObject.h"
 #include "CCamera.h"
-#include "CLightSource.h"
+#include "CGlobalLightSource.h"
 #include "CLandscape.h"
 #include "COcean.h"
 #include "CSkyBox.h"
@@ -63,18 +63,15 @@ void CMEScene::load(void)
     m_camera->Set_Height(16.0f);
     m_root->setCamera(m_camera);
     
-    m_lightSource = m_root->createLightSource();
-    m_root->setLightSource(m_lightSource, E_LIGHT_SOURCE_1);
-    
-    glm::vec3 position(0.0);
-    position.y = cosf(3.0) * -512.0 + 256.0;
-    position.x = sinf(3.0) * -512.0 + 256.0;
-    position.z = 0.0;
-    m_lightSource->setPosition(position);
+    m_lightSource = m_root->createGlobalLightSource(45.0, 0.01, 1024.0);
+    m_root->setGlobalLightSource(m_lightSource);
+    m_lightSource->setDistanceToSun(512.0);
+    m_lightSource->setDistanceToLookAt(64.0);
+    m_lightSource->setRotationCenter(glm::vec3(256.0, 0.0, 256.0));
+    m_lightSource->setLookAt(glm::vec3(0.0, 0.0, 0.0));
 
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
-    //ocean->setPosition(glm::vec3(-512.0f, 0.0f, -512.0f));
     
     m_skyBox = m_root->createSkyBox("gameobject.skybox.xml");
     m_root->setSkyBox(m_skyBox);

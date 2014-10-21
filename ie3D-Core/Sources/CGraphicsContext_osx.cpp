@@ -19,9 +19,7 @@ private:
     
 protected:
     
-    //EGLDisplay m_display;
-	//EGLSurface m_surface;
-	//EGLContext m_context;
+	CGLContextObj m_context;
     
 public:
     
@@ -50,21 +48,21 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
         0
     };
     
-    NSOpenGLPixelFormat *pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
-    if (!pixelFormat)
+    NSOpenGLPixelFormat *pixelformat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
+    if (!pixelformat)
     {
         assert(false);
     }
 	   
-    NSOpenGLContext* context = [[NSOpenGLContext alloc] initWithFormat:pixelFormat shareContext:nil];
+    NSOpenGLContext* context = [[NSOpenGLContext alloc] initWithFormat:pixelformat shareContext:nil];
     NSOpenGLView *view = (__bridge NSOpenGLView*)m_window->getHWND();
-    [view setPixelFormat:pixelFormat];
+    [view setPixelFormat:pixelformat];
     [view setOpenGLContext:context];
+    [context makeCurrentContext];
+    m_context = (CGLContextObj)[context CGLContextObj];
     
-    [[view openGLContext] makeCurrentContext];
-    
-    GLint deltatime = 1;
-    [[view openGLContext] setValues:&deltatime forParameter:NSOpenGLCPSwapInterval];
+    GLint swap = 1;
+    [context setValues:&swap forParameter:NSOpenGLCPSwapInterval];
     
     i32 bindedFrameBuffer = 0;
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &bindedFrameBuffer);
@@ -73,72 +71,6 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
     i32 bindedRenderBuffer = 0;
     glGetIntegerv(GL_RENDERBUFFER_BINDING, &bindedRenderBuffer);
     m_renderBuffer = bindedRenderBuffer;
-    
-    /*m_window = window;
-    m_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-    
-	EGLint majorVersion, minorVersion;
-    
-	if(!eglInitialize(m_display, &majorVersion, &minorVersion))
-	{
-		assert(false);
-        return;
-	}
-    
-	eglBindAPI(EGL_OPENGL_ES_API);
-    
-	EGLint attributes[] =
-    {
-        EGL_LEVEL,	0,
-		EGL_SURFACE_TYPE,	EGL_WINDOW_BIT,
-		EGL_RENDERABLE_TYPE,	EGL_OPENGL_ES2_BIT,
-		EGL_NATIVE_RENDERABLE,	EGL_FALSE,
-		EGL_DEPTH_SIZE,	EGL_DONT_CARE,
-		EGL_NONE
-    };
-    
-    EGLConfig config;
-	i32 configs;
-	if (!eglChooseConfig(m_display, attributes, &config, 1, &configs) || (configs != 1))
-	{
-		assert(false);
-        return;
-	}
-    
-    EGLNativeWindowType nativeWindow = (EGLNativeWindowType)window->getHWND();
-	m_surface = eglCreateWindowSurface(m_display, config, nativeWindow, NULL);
-    
-	if(m_surface == EGL_NO_SURFACE)
-	{
-		assert(false);
-        return;
-	}
-    
-    EGLint contextAttributess[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
-    m_context = eglCreateContext(m_display, config, NULL, contextAttributess);
-    
-    if(m_context == EGL_NO_CONTEXT)
-    {
-        assert(false);
-        return;
-    }
-    
-	if(!eglMakeCurrent(m_display, m_surface, m_surface, m_context))
-    {
-        assert(false);
-        return;
-    }
-    
-    GLenum error = glGetError();
-    assert(error == GL_NO_ERROR);
-    
-	i32 bindedFrameBuffer = 0;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &bindedFrameBuffer);
-	m_frameBuffer = bindedFrameBuffer;
-    
-	i32 bindedRenderBuffer = 0;
-	glGetIntegerv(GL_RENDERBUFFER_BINDING, &bindedRenderBuffer);
-	m_renderBuffer = bindedRenderBuffer;*/
 }
 
 CGraphicsContext_osx::~CGraphicsContext_osx(void)
@@ -148,9 +80,7 @@ CGraphicsContext_osx::~CGraphicsContext_osx(void)
 
 void CGraphicsContext_osx::draw(void) const
 {
-    NSOpenGLView *view = (__bridge NSOpenGLView*)m_window->getHWND();
-    CGLContextObj context = (CGLContextObj)[[view openGLContext] CGLContextObj];
-    CGLFlushDrawable(context);
+    CGLFlushDrawable(m_context);
 }
 
 #endif

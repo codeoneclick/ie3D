@@ -31,7 +31,7 @@ private:
 protected:
     
     std::shared_ptr<CMapDragController> m_mapDragController;
-    CSharedLightSource m_lightSource;
+    CSharedGlobalLightSource m_lightSource;
     CSharedSkyBox m_skyBox;
     CSharedAtmosphericScattering m_atmosphericScattering;
     CSharedLandscape m_landscape;

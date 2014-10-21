@@ -23,9 +23,6 @@ m_numTriangles(0)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_frameWidth, m_frameHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     
-    GLenum error = glGetError();
-    assert(error == GL_NO_ERROR);
-    
     ui32 depthAttachmentId;
     glGenTextures(1, &depthAttachmentId);
     glBindTexture(GL_TEXTURE_2D, depthAttachmentId);
@@ -34,24 +31,12 @@ m_numTriangles(0)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
-#if defined(__NDK__) || defined(__OSX__)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
-#else
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
-#endif
-    
-    error = glGetError();
-    assert(error == GL_NO_ERROR);
     
     glGenFramebuffers(1, &m_frameBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttachmentId, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthAttachmentId, 0);
-    
-    std::cout<<glGetString(GL_RENDERER)<<" "<<glGetString(GL_VERSION)<<std::endl;
-    
-    error = glGetError();
-    assert(error == GL_NO_ERROR);
     
     GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     assert(status == GL_FRAMEBUFFER_COMPLETE);

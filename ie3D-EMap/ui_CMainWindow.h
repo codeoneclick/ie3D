@@ -212,7 +212,7 @@ public:
         m_oglWindow = new QWidget(groupBox);
         m_oglWindow->setObjectName(QStringLiteral("m_oglWindow"));
         m_oglWindow->setGeometry(QRect(10, 30, 721, 691));
-        m_oglWindow->setStyleSheet(QStringLiteral("background-color: rgb(64, 64, 64);"));
+        m_oglWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         CMainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CMainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));

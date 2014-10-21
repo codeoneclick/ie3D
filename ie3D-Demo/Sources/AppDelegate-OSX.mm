@@ -13,7 +13,7 @@
 @interface AppDelegateOSX ()
 
 @property (weak) IBOutlet NSWindow *window;
-@property (weak) IBOutlet NSView *openGLView;
+@property (weak) IBOutlet NSView *view;
 @property (nonatomic, unsafe_unretained) std::shared_ptr<CDemoControllerOSX> demoController;
 
 @end
@@ -22,12 +22,12 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    OpenGLView *customView = [[OpenGLView alloc] initWithFrame:CGRectMake(0.0,
-                                                                          0.0,
-                                                                          self.openGLView.frame.size.width,
-                                                                          self.openGLView.frame.size.height)];
-    [self.openGLView addSubview:customView];
-    self.demoController = std::make_shared<CDemoControllerOSX>(customView);
+    NSOpenGLView *openGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
+                                                                              0.0,
+                                                                              self.view.frame.size.width,
+                                                                              self.view.frame.size.height)];
+    [self.view addSubview:openGLView];
+    self.demoController = std::make_shared<CDemoControllerOSX>(openGLView);
     self.demoController->create();
 }
 

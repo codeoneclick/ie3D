@@ -11,7 +11,6 @@
 #include "CRenderTechniqueWorldSpace.h"
 #include "CRenderTechniqueScreenSpace.h"
 #include "IGraphicsContext.h"
-#include "CTexture.h"
 
 CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext) : IRenderTechniqueImporter(graphicContext), IRenderTechniqueAccessor()
 {
@@ -26,9 +25,6 @@ CRenderPipeline::~CRenderPipeline(void)
 void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
 {
     m_numTriangles = 0;
-    
-    GLenum error = glGetError();
-    assert(error == GL_NO_ERROR);
     
     typedef std::pair<std::string, CSharedRenderTechniqueWorldSpace> TechniquePair;
     typedef const TechniquePair& TechniquePairRef;
@@ -45,15 +41,9 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         technique->bind();
         technique->draw();
         technique->unbind();
-        
-        CSharedTexture texture = technique->getOperatingColorTexture();
-        CRenderPipeline::saveTexture(texture, iterator.first + ".png", texture->getWidth(), texture->getHeight());
-        
+    
         m_numTriangles += technique->getNumTriangles();
     }
-    
-    error = glGetError();
-    assert(error == GL_NO_ERROR);
     
     for(const auto& iterator : m_screenSpaceRenderTechniques)
     {
@@ -78,9 +68,6 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         
         m_numTriangles += 2;
     }
-    
-    error = glGetError();
-    assert(error == GL_NO_ERROR);
     
     if(m_mainRenderTechnique != nullptr)
     {

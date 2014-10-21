@@ -62,6 +62,7 @@ void IRenderTechniqueImporter::setMainRenderTechnique(CSharedMaterialRef materia
     }
 #endif
     std::cout<<"[Output resolution] : "<<m_graphicsContext->getWidth()<<"x"<<m_graphicsContext->getHeight()<<std::endl;
+    std::cout<<"["<<glGetString(GL_RENDERER)<<"] ["<<glGetString(GL_VERSION)<<"]"<<std::endl;
 }
 
 void IRenderTechniqueImporter::addWorldSpaceRenderTechnique(const std::string& techniqueName, CSharedRenderTechniqueWorldSpaceRef technique)

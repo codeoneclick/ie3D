@@ -48,7 +48,6 @@ void CThreadOperationPool::addOperation(CSharedThreadOperationRef operation, E_T
             minOperationCount = m_operations.at(i).at(operationQueue).size();
             threadId = i;
         }
-        std::cout<<"Thread "<<i<<" operations count: "<<m_operations.at(i).at(operationQueue).size()<<std::endl;
     }
     m_operations.at(threadId).at(operationQueue).push(operation);
 }

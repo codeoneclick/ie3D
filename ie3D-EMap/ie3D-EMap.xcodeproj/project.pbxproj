@@ -36,8 +36,6 @@
 		21208EA71906F75D00FFC8D4 /* CMEGameTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9B1906F75D00FFC8D4 /* CMEGameTransition.cpp */; };
 		2120900B1906FBD600FFC8D4 /* Cocoa.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2120900A1906FBD600FFC8D4 /* Cocoa.framework */; };
 		2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2120900C1906FC5000FFC8D4 /* moc_CMainWindow.cpp */; };
-		212090111906FC9B00FFC8D4 /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2120900F1906FC9B00FFC8D4 /* libEGL.dylib */; };
-		212090121906FC9B00FFC8D4 /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212090101906FC9B00FFC8D4 /* libGLESv2.dylib */; };
 		212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A3190859AD00FFC8D4 /* CMapDragController.cpp */; };
 		212092AB19106B6100FFC8D4 /* CMELandscapeBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A919106B6100FFC8D4 /* CMELandscapeBrush.cpp */; };
 		212092C41919786500FFC8D4 /* gameobject.skybox.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212092C21919786500FFC8D4 /* gameobject.skybox.xml */; };
@@ -57,8 +55,6 @@
 		216204351949A88100D129AD /* shaderScreenSSAO.frag in Resources */ = {isa = PBXBuildFile; fileRef = 216204331949A88100D129AD /* shaderScreenSSAO.frag */; };
 		216204361949A88100D129AD /* shaderScreenSSAO.vert in Resources */ = {isa = PBXBuildFile; fileRef = 216204341949A88100D129AD /* shaderScreenSSAO.vert */; };
 		216204451949F93000D129AD /* ssao.random.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 216204441949F93000D129AD /* ssao.random.pvr */; };
-		216204471949FA2C00D129AD /* libEGL.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2120900F1906FC9B00FFC8D4 /* libEGL.dylib */; };
-		216204481949FA2C00D129AD /* libGLESv2.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 212090101906FC9B00FFC8D4 /* libGLESv2.dylib */; };
 		217AF1751945BAD70045CF9D /* CMESceneFabricator.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 217AF1731945BAD70045CF9D /* CMESceneFabricator.cpp */; };
 		217AF17E1945EB010045CF9D /* gameobject.landscape.brush.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217AF17C1945EB010045CF9D /* gameobject.landscape.brush.xml */; };
 		217AF17F1945EB010045CF9D /* material.landscape.brush.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217AF17D1945EB010045CF9D /* material.landscape.brush.xml */; };
@@ -179,6 +175,7 @@
 		21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */; };
 		21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */; };
 		21DC2B7B1929EDEC008DA3C1 /* landscape.01.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B7A1929EDEC008DA3C1 /* landscape.01.normal.pvr */; };
+		21F0866C19F6E16C002FF9AE /* landscape.01.diffuse.01.png in Resources */ = {isa = PBXBuildFile; fileRef = 21F0866B19F6E16C002FF9AE /* landscape.01.diffuse.01.png */; };
 		350B621B91997A1D3DB08A50 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1ACE512F3E4E1427AACF434A /* QtGui.framework */; };
 		5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 09BF715167B7A0149FD2FBB8 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9D88140FBB133F956E1F6166 /* CMainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
@@ -247,8 +244,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				212090111906FC9B00FFC8D4 /* libEGL.dylib in CopyFiles */,
-				212090121906FC9B00FFC8D4 /* libGLESv2.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,8 +282,6 @@
 		2120900A1906FBD600FFC8D4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2120900C1906FC5000FFC8D4 /* moc_CMainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moc_CMainWindow.cpp; sourceTree = SOURCE_ROOT; };
 		2120900D1906FC5000FFC8D4 /* ui_CMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ui_CMainWindow.h; sourceTree = SOURCE_ROOT; };
-		2120900F1906FC9B00FFC8D4 /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = "/Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib/libEGL.dylib"; sourceTree = "<absolute>"; };
-		212090101906FC9B00FFC8D4 /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "/Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<absolute>"; };
 		212091C01906FE5200FFC8D4 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		212092A3190859AD00FFC8D4 /* CMapDragController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapDragController.cpp; path = Sources/CMapDragController.cpp; sourceTree = SOURCE_ROOT; };
 		212092A4190859AD00FFC8D4 /* CMapDragController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMapDragController.h; path = Sources/CMapDragController.h; sourceTree = SOURCE_ROOT; };
@@ -437,6 +430,7 @@
 		21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.frag"; sourceTree = "<group>"; };
 		21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.vert"; sourceTree = "<group>"; };
 		21DC2B7A1929EDEC008DA3C1 /* landscape.01.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.01.normal.pvr; path = "../ie3D-Bundle/Textures/landscape.01.normal.pvr"; sourceTree = "<group>"; };
+		21F0866B19F6E16C002FF9AE /* landscape.01.diffuse.01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = landscape.01.diffuse.01.png; path = "../ie3D-Bundle/Textures/landscape.01.diffuse.01.png"; sourceTree = SOURCE_ROOT; };
 		288C01068066B0AAD960F2E5 /* unix.conf */ = {isa = PBXFileReference; lastKnownFileType = file; name = unix.conf; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/common/unix.conf; sourceTree = "<absolute>"; };
 		2AFE0E29D2D43DE9EEA679F0 /* qt_lib_help.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_help.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_help.pri; sourceTree = "<absolute>"; };
 		2ECDE1AA4A7F457B30B62E5C /* qconfig.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qconfig.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/qconfig.pri; sourceTree = "<absolute>"; };
@@ -528,8 +522,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				216204471949FA2C00D129AD /* libEGL.dylib in Link Binary With Libraries */,
-				216204481949FA2C00D129AD /* libGLESv2.dylib in Link Binary With Libraries */,
 				21C0171519927A0B00CB59AB /* libie3DCore-osx.a in Link Binary With Libraries */,
 				21C017121992772500CB59AB /* libie3DEngine-osx.a in Link Binary With Libraries */,
 				5D6086784FF94DC62B94A3C3 /* QtWidgets.framework in Link Binary With Libraries */,
@@ -663,6 +655,7 @@
 		212090EA1906FD3E00FFC8D4 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				21F0866B19F6E16C002FF9AE /* landscape.01.diffuse.01.png */,
 				21C409D0197C132B0063D62D /* tank_heavy.pvr */,
 				21C409D1197C132B0063D62D /* tank_light.pvr */,
 				21C409D2197C132B0063D62D /* tank_medium.pvr */,
@@ -1065,8 +1058,6 @@
 		AF39DD055C3EF8226FBE929D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2120900F1906FC9B00FFC8D4 /* libEGL.dylib */,
-				212090101906FC9B00FFC8D4 /* libGLESv2.dylib */,
 				2120900A1906FBD600FFC8D4 /* Cocoa.framework */,
 				AA2A6445DD283CBEC6BDB18C /* QtWidgets.framework */,
 				1ACE512F3E4E1427AACF434A /* QtGui.framework */,
@@ -1299,6 +1290,7 @@
 				21D9943819810976003D4CD1 /* material.tank.medium.left.track.common.xml in Resources */,
 				21A38D5219EBCDCE008CAFE7 /* material.atmospheric.scattering.base.xml in Resources */,
 				21D9943419810976003D4CD1 /* gameobject.tank.medium.right.track.xml in Resources */,
+				21F0866C19F6E16C002FF9AE /* landscape.01.diffuse.01.png in Resources */,
 				21BC34C719080B9E007B99DA /* landscape.03.diffuse.pvr in Resources */,
 				21D9944C19810C43003D4CD1 /* material.tank.heavy.tower.common.xml in Resources */,
 				21C409DC197EE8E10063D62D /* material.tank.light.left.track.common.xml in Resources */,
@@ -1578,10 +1570,7 @@
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/pvrtextool/include\"",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "ie3D-EMap";
 				QT_LIBRARY_SUFFIX = "";
@@ -1619,10 +1608,7 @@
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/pvrtextool/include\"",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "ie3D-EMap";
 				QT_LIBRARY_SUFFIX = _debug;

@@ -66,7 +66,6 @@ void CMainWindow::execute(void)
 {
 #if defined(__OSX__) || defined(__WIN32__)
     
-    NSView* view = reinterpret_cast<NSView*>(ui->m_oglWindow->winId());
     m_sceneToUICommands = std::make_shared<CMESceneToUICommands>();
     m_sceneToUICommands->connectSetBrushSizeCommand(std::bind(&CMainWindow::setBrushSize, this, std::placeholders::_1));
     m_sceneToUICommands->connectSetBrushStrengthCommand(std::bind(&CMainWindow::setBrushStrength, this, std::placeholders::_1));
@@ -75,7 +74,14 @@ void CMainWindow::execute(void)
     m_sceneToUICommands->connectSetTextureSamplerCommand(std::bind(&CMainWindow::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
     m_sceneToUICommands->connectSetTillingTexcoordCommand(std::bind(&CMainWindow::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
     
-    std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)view);
+    NSView *view = reinterpret_cast<NSView*>(ui->m_oglWindow->winId());
+    NSOpenGLView *openGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
+                                                                              0.0,
+                                                                              view.frame.size.width,
+                                                                              view.frame.size.height)];
+    [view addSubview:openGLView];
+    std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)openGLView);
+    
     m_editableGameController = std::make_shared<CMEGameController>();
     m_editableGameTransition = std::static_pointer_cast<CMEGameTransition>(m_editableGameController->createEditableGameTransition("transition.main.xml", window));
 
@@ -210,7 +216,7 @@ void CMainWindow::setSmoothCoefficient(ui32)
 
 void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
-    std::stringstream stringstream;
+    /*std::stringstream stringstream;
     stringstream<<"image_"<<sampler<<".png";
     std::string filename(stringstream.str());
     m_editableGameTransition->getRenderTechniqueImporter()->saveTexture(texture, filename, 256, 256);
@@ -238,7 +244,7 @@ void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER 
             break;
         default:
             break;
-    }
+    }*/
 }
 
 void CMainWindow::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
