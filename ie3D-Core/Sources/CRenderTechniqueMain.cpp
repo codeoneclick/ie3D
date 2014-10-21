@@ -32,7 +32,7 @@ void CRenderTechniqueMain::bind(void)
     glBindRenderbuffer(GL_RENDERBUFFER, m_renderBuffer);
     glViewport(0, 0, m_frameWidth, m_frameHeight);
     glClearColor(0.0, 1.0, 1.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     m_material->bind();
     m_quad->bind(m_material->getShader()->getAttributesRef());
