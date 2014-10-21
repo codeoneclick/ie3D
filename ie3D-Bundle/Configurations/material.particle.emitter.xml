@@ -20,7 +20,7 @@
         fs_filename="shaderParticleEmitter.frag"/>
     <textures>
         <texture
-            filename="particle.emitter.02.pvr"
+            filename="landscape.01.diffuse.01.png"
             render_operation_name=""
             sampler_id="0"
             wrap_mode="GL_CLAMP_TO_EDGE"/>

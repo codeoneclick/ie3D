@@ -77,7 +77,13 @@
 #elif defined(__OSX__)
 
 #include <OpenGL/OpenGL.h>
-#include <OpenGL/gl3.h>
+#include <OpenGL/gl.h>
+//#include <OpenGL/gl3.h>
+
+#define glBindVertexArray glBindVertexArrayAPPLE
+#define glGenVertexArrays glGenVertexArraysAPPLE
+#define glGenerateMipmap glGenerateMipmapEXT
+#define glDeleteVertexArrays glDeleteVertexArraysAPPLE
 
 #elif defined(__NDK__)
 

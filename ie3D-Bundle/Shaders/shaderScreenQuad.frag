@@ -9,7 +9,7 @@ void main()
 	color += texture2D(SAMPLER_01, OUT_BTexCoord[2]) * 0.304005;
 	color += texture2D(SAMPLER_01, OUT_BTexCoord[3]) * 0.093913;
 	color += texture2D(SAMPLER_01, OUT_BTexCoord[4]) * 0.093913;*/
-    
+
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);//texture2D(SAMPLER_01, OUT_TexCoord);
 }
 

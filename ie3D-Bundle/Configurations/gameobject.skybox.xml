@@ -1,10 +1,10 @@
 <skybox
-    x_positive="xpos.pvr"
-    x_negative="xneg.pvr"
-    y_positive="ypos.pvr"
-    y_negative="yneg.pvr"
-    z_positive="zpos.pvr"
-    z_negative="zneg.pvr">
+    x_positive="landscape.01.diffuse.01.png"
+    x_negative="landscape.01.diffuse.01.png"
+    y_positive="landscape.01.diffuse.01.png"
+    y_negative="landscape.01.diffuse.01.png"
+    z_positive="landscape.01.diffuse.01.png"
+    z_negative="landscape.01.diffuse.01.png">
     <materials>
         <material filename="material.skybox.base.xml"/>
         <material filename="material.skybox.reflection.xml"/>

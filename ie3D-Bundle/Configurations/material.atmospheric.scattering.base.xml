@@ -20,7 +20,7 @@
     fs_filename="shaderAtmosphericScattering.frag"/>
     <textures>
         <texture
-        filename="model.diffuse.pvr"
+        filename="landscape.01.diffuse.01.png"
         render_operation_name=""
         sampler_id="0"
         wrap_mode="GL_REPEAT"/>

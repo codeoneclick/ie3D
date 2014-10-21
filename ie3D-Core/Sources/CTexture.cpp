@@ -210,6 +210,6 @@ void CTexture::unbind(void) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_2D, NULL);
     }
 }

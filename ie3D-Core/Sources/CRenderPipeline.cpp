@@ -26,6 +26,9 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
 {
     m_numTriangles = 0;
     
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
+    
     typedef std::pair<std::string, CSharedRenderTechniqueWorldSpace> TechniquePair;
     typedef const TechniquePair& TechniquePairRef;
     
@@ -44,6 +47,9 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         
         m_numTriangles += technique->getNumTriangles();
     }
+    
+    error = glGetError();
+    assert(error == GL_NO_ERROR);
     
     for(const auto& iterator : m_screenSpaceRenderTechniques)
     {
@@ -68,6 +74,9 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         
         m_numTriangles += 2;
     }
+    
+    error = glGetError();
+    assert(error == GL_NO_ERROR);
     
     if(m_mainRenderTechnique != nullptr)
     {
