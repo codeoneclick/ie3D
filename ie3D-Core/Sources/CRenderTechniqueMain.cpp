@@ -31,7 +31,7 @@ void CRenderTechniqueMain::bind(void)
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, m_renderBuffer);
     glViewport(0, 0, m_frameWidth, m_frameHeight);
-    glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
+    glClearColor(0.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     
     m_material->bind();

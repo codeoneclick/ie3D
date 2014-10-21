@@ -11,6 +11,7 @@
 #include "CRenderTechniqueWorldSpace.h"
 #include "CRenderTechniqueScreenSpace.h"
 #include "IGraphicsContext.h"
+#include "CTexture.h"
 
 CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext) : IRenderTechniqueImporter(graphicContext), IRenderTechniqueAccessor()
 {
@@ -44,6 +45,9 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         technique->bind();
         technique->draw();
         technique->unbind();
+        
+        CSharedTexture texture = technique->getOperatingColorTexture();
+        CRenderPipeline::saveTexture(texture, iterator.first + ".png", texture->getWidth(), texture->getHeight());
         
         m_numTriangles += technique->getNumTriangles();
     }

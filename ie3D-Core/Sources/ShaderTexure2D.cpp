@@ -23,7 +23,7 @@ const char* ShaderTexure2D_vert = STRING_SHADER
 
 const char* ShaderTexure2D_frag = STRING_SHADER
 (
- varying highp vec2 OUT_TexCoord;
+ varying vec2 OUT_TexCoord;
  uniform sampler2D  SAMPLER_01;
  
  void main()
