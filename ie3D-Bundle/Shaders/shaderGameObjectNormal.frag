@@ -1,4 +1,4 @@
-varying highp   vec3   OUT_Normal;
+varying vec3   OUT_Normal;
 
 void main(void)
 {

@@ -9,6 +9,9 @@
 #include "CTextureSerializer_PVR.h"
 #include "CTexture.h"
 #include "PVRTTexture.h"
+#include <EGL/egl.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 
 CTextureSerializer_PVR::CTextureSerializer_PVR(const std::string& filename,
                                                ISharedResourceRef resource) :

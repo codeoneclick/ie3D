@@ -8,6 +8,7 @@
 
 #include "AppDelegate-OSX.h"
 #include "CDemoController-OSX.h"
+#include "IOGLWindow.h"
 
 @interface AppDelegateOSX ()
 
@@ -21,7 +22,12 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.demoController = std::make_shared<CDemoControllerOSX>(self.openGLView);
+    OpenGLView *customView = [[OpenGLView alloc] initWithFrame:CGRectMake(0.0,
+                                                                          0.0,
+                                                                          self.openGLView.frame.size.width,
+                                                                          self.openGLView.frame.size.height)];
+    [self.openGLView addSubview:customView];
+    self.demoController = std::make_shared<CDemoControllerOSX>(customView);
     self.demoController->create();
 }
 

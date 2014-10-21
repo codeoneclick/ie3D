@@ -19,9 +19,9 @@ private:
     
 protected:
     
-    EGLDisplay m_display;
-	EGLSurface m_surface;
-	EGLContext m_context;
+    //EGLDisplay m_display;
+	//EGLSurface m_surface;
+	//EGLContext m_context;
     
 public:
     
@@ -40,6 +40,41 @@ std::shared_ptr<IGraphicsContext> createGraphicsContext_osx(ISharedOGLWindowRef 
 CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
 {
     m_window = window;
+    
+    NSOpenGLPixelFormatAttribute attributes[] =
+    {
+        NSOpenGLPFADoubleBuffer,
+        NSOpenGLPFADepthSize, 24,
+        //NSOpenGLPFAOpenGLProfile,
+        //NSOpenGLProfileVersion3_2Core,
+        0
+    };
+    
+    NSOpenGLPixelFormat *pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
+    if (!pixelFormat)
+    {
+        assert(false);
+    }
+	   
+    NSOpenGLContext* context = [[NSOpenGLContext alloc] initWithFormat:pixelFormat shareContext:nil];
+    NSOpenGLView *view = (__bridge NSOpenGLView*)m_window->getHWND();
+    [view setPixelFormat:pixelFormat];
+    [view setOpenGLContext:context];
+    
+    [[view openGLContext] makeCurrentContext];
+    
+    GLint deltatime = 1;
+    [[view openGLContext] setValues:&deltatime forParameter:NSOpenGLCPSwapInterval];
+    
+    i32 bindedFrameBuffer = 0;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &bindedFrameBuffer);
+    m_frameBuffer = bindedFrameBuffer;
+    
+    i32 bindedRenderBuffer = 0;
+    glGetIntegerv(GL_RENDERBUFFER_BINDING, &bindedRenderBuffer);
+    m_renderBuffer = bindedRenderBuffer;
+    
+    /*m_window = window;
     m_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     
 	EGLint majorVersion, minorVersion;
@@ -103,7 +138,7 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
     
 	i32 bindedRenderBuffer = 0;
 	glGetIntegerv(GL_RENDERBUFFER_BINDING, &bindedRenderBuffer);
-	m_renderBuffer = bindedRenderBuffer;
+	m_renderBuffer = bindedRenderBuffer;*/
 }
 
 CGraphicsContext_osx::~CGraphicsContext_osx(void)
@@ -113,7 +148,9 @@ CGraphicsContext_osx::~CGraphicsContext_osx(void)
 
 void CGraphicsContext_osx::draw(void) const
 {
-	eglSwapBuffers(m_display, m_surface);
+    NSOpenGLView *view = (__bridge NSOpenGLView*)m_window->getHWND();
+    CGLContextObj context = (CGLContextObj)[[view openGLContext] CGLContextObj];
+    CGLFlushDrawable(context);
 }
 
 #endif

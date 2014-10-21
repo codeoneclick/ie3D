@@ -1,5 +1,5 @@
-varying highp vec2   OUT_TexCoord;
-varying lowp  float  OUT_ClipPlane;
+varying vec2   OUT_TexCoord;
+varying float  OUT_ClipPlane;
 
 uniform sampler2D SAMPLER_01;
 

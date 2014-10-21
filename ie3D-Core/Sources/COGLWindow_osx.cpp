@@ -7,6 +7,7 @@
 //
 
 #include "IOGLWindow.h"
+#include <QuartzCore/CVDisplayLink.h>
 
 #if defined(__OSX__)
 
@@ -67,14 +68,14 @@ const void* IOGLWindow::getHWND(void) const
 ui32 IOGLWindow::getWidth(void)
 {
     assert(m_hwnd != nullptr);
-    const NSView *hwnd = (__bridge NSView*)m_hwnd;
+    const NSOpenGLView *hwnd = (__bridge NSOpenGLView*)m_hwnd;
     return static_cast<ui32>(hwnd.frame.size.width);
 }
 
 ui32 IOGLWindow::getHeight(void)
 {
     assert(m_hwnd != nullptr);
-    const NSView* hwnd = (__bridge NSView*)m_hwnd;
+    const NSOpenGLView* hwnd = (__bridge NSOpenGLView*)m_hwnd;
     return static_cast<ui32>(hwnd.frame.size.height);
 }
 

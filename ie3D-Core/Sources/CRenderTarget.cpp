@@ -26,7 +26,7 @@ m_size(glm::ivec2(width, height))
     
     glGenRenderbuffers(1, &m_depthAttachment);
     glBindRenderbuffer(GL_RENDERBUFFER, m_depthAttachment);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8_OES,
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16,
                           m_size.x,
                           m_size.y);
     

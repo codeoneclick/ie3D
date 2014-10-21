@@ -153,14 +153,10 @@
 		212EED1A19CC608400DA02B7 /* ie3D-Demo-osx.plist in Resources */ = {isa = PBXBuildFile; fileRef = 212EED1719CC607F00DA02B7 /* ie3D-Demo-osx.plist */; };
 		212EED2119CC649E00DA02B7 /* libie3DCore-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 213267901906AA26001C98F7 /* libie3DCore-osx.a */; };
 		212EED2219CC649E00DA02B7 /* libie3DEngine-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FCC904199FA69200F2CA1E /* libie3DEngine-osx.a */; };
-		212EED2519CC653700DA02B7 /* libEGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 212EED2319CC653700DA02B7 /* libEGL.dylib */; };
-		212EED2619CC653700DA02B7 /* libGLESv2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 212EED2419CC653700DA02B7 /* libGLESv2.dylib */; };
 		212EED2819CC655A00DA02B7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212EED2719CC655A00DA02B7 /* OpenGL.framework */; };
 		212EED2A19CC656200DA02B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212EED2919CC656200DA02B7 /* Cocoa.framework */; };
 		212EED3519CC6A1D00DA02B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211384EC194300DE0041A18A /* Images.xcassets */; };
 		212EED3619CC6A2500DA02B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211384EC194300DE0041A18A /* Images.xcassets */; };
-		212EED3819CC6B1D00DA02B7 /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212EED2319CC653700DA02B7 /* libEGL.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		212EED3919CC6B1D00DA02B7 /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212EED2419CC653700DA02B7 /* libGLESv2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		212EED4A19CC7A4D00DA02B7 /* CDemoController-OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EED4519CC715000DA02B7 /* CDemoController-OSX.cpp */; };
 		212EED7919D068D400DA02B7 /* material.tank.medium.body.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7519D068D400DA02B7 /* material.tank.medium.body.reflection.xml */; };
 		212EED7A19D068D400DA02B7 /* material.tank.medium.body.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212EED7519D068D400DA02B7 /* material.tank.medium.body.reflection.xml */; };
@@ -411,8 +407,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				212EED3819CC6B1D00DA02B7 /* libEGL.dylib in CopyFiles */,
-				212EED3919CC6B1D00DA02B7 /* libGLESv2.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,8 +613,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				212EED2519CC653700DA02B7 /* libEGL.dylib in Frameworks */,
-				212EED2619CC653700DA02B7 /* libGLESv2.dylib in Frameworks */,
 				212EED2119CC649E00DA02B7 /* libie3DCore-osx.a in Frameworks */,
 				212EED2219CC649E00DA02B7 /* libie3DEngine-osx.a in Frameworks */,
 				212EED2819CC655A00DA02B7 /* OpenGL.framework in Frameworks */,
@@ -1535,10 +1527,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo-osx.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				LLVM_VECTORIZE_LOOPS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1576,10 +1565,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo-osx.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/codeoneclick/Documents/hobby/indieEngine/ie3D-Core/Libraries/ogles2/mac-osx_x86/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				LLVM_VECTORIZE_LOOPS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-ObjC";
