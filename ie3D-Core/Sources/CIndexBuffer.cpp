@@ -51,12 +51,18 @@ void CIndexBuffer::unlock(ui32 sizeToUse)
 
 void CIndexBuffer::bind(void) const
 {
-    assert(m_index >= 0 && m_index <= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1));
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handles[m_index]);
+    if(m_usedSize != 0)
+    {
+        assert(m_index >= 0 && m_index <= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1));
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handles[m_index]);
+    }
 }
 
 void CIndexBuffer::unbind(void) const
 {
-    assert(m_index >= 0 && m_index <= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1));
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    if(m_usedSize != 0)
+    {
+        assert(m_index >= 0 && m_index <= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1));
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    }
 }

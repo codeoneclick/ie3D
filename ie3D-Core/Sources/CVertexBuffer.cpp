@@ -90,79 +90,85 @@ void CVertexBuffer::unlock(ui32 sizeToUse)
 
 void CVertexBuffer::bind(const i32* attributes) const
 {
-    assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
-    if(attributes[E_SHADER_ATTRIBUTE_POSITION] >= 0)
+    if(m_usedSize != 0)
     {
-        glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_POSITION]);
-        glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_POSITION], 3, GL_FLOAT, GL_FALSE,
-                              sizeof(SAttributeVertex),
-                              (GLvoid*)offsetof(SAttributeVertex, m_position));
-    }
-    if(attributes[E_SHADER_ATTRIBUTE_TEXCOORD] >= 0)
-    {
-        glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TEXCOORD]);
-        glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_TEXCOORD], 2, GL_UNSIGNED_SHORT, GL_FALSE,
-                              sizeof(SAttributeVertex),
-                              (GLvoid*)offsetof(SAttributeVertex, m_texcoord));
-    }
-    if(attributes[E_SHADER_ATTRIBUTE_NORMAL] >= 0)
-    {
-        glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_NORMAL]);
-        glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_NORMAL], 4, GL_UNSIGNED_BYTE, GL_FALSE,
-                              sizeof(SAttributeVertex),
-                              (GLvoid*)offsetof(SAttributeVertex, m_normal));
-    }
-    if(attributes[E_SHADER_ATTRIBUTE_TANGENT] >= 0)
-    {
-        glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TANGENT]);
-        glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_TANGENT], 4, GL_UNSIGNED_BYTE, GL_FALSE,
-                              sizeof(SAttributeVertex),
-                              (GLvoid*)offsetof(SAttributeVertex, m_tangent));
-    }
-    if(attributes[E_SHADER_ATTRIBUTE_COLOR] >= 0)
-    {
-        glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_COLOR]);
-        glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_COLOR], 4, GL_UNSIGNED_BYTE, GL_FALSE,
-                              sizeof(SAttributeVertex),
-                              (GLvoid*)offsetof(SAttributeVertex, m_color));
-    }
-    if(attributes[E_SHADER_ATTRIBUTE_EXTRA] >= 0)
-    {
-        glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_EXTRA]);
-        glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_EXTRA], 4, GL_UNSIGNED_BYTE, GL_FALSE,
-                              sizeof(SAttributeVertex),
-                              (GLvoid*)offsetof(SAttributeVertex, m_extra));
+        assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
+        glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
+        if(attributes[E_SHADER_ATTRIBUTE_POSITION] >= 0)
+        {
+            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_POSITION]);
+            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_POSITION], 3, GL_FLOAT, GL_FALSE,
+                                  sizeof(SAttributeVertex),
+                                  (GLvoid*)offsetof(SAttributeVertex, m_position));
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_TEXCOORD] >= 0)
+        {
+            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TEXCOORD]);
+            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_TEXCOORD], 2, GL_UNSIGNED_SHORT, GL_FALSE,
+                                  sizeof(SAttributeVertex),
+                                  (GLvoid*)offsetof(SAttributeVertex, m_texcoord));
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_NORMAL] >= 0)
+        {
+            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_NORMAL]);
+            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_NORMAL], 4, GL_UNSIGNED_BYTE, GL_FALSE,
+                                  sizeof(SAttributeVertex),
+                                  (GLvoid*)offsetof(SAttributeVertex, m_normal));
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_TANGENT] >= 0)
+        {
+            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TANGENT]);
+            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_TANGENT], 4, GL_UNSIGNED_BYTE, GL_FALSE,
+                                  sizeof(SAttributeVertex),
+                                  (GLvoid*)offsetof(SAttributeVertex, m_tangent));
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_COLOR] >= 0)
+        {
+            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_COLOR]);
+            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_COLOR], 4, GL_UNSIGNED_BYTE, GL_FALSE,
+                                  sizeof(SAttributeVertex),
+                                  (GLvoid*)offsetof(SAttributeVertex, m_color));
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_EXTRA] >= 0)
+        {
+            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_EXTRA]);
+            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_EXTRA], 4, GL_UNSIGNED_BYTE, GL_FALSE,
+                                  sizeof(SAttributeVertex),
+                                  (GLvoid*)offsetof(SAttributeVertex, m_extra));
+        }
     }
 }
 
 void CVertexBuffer::unbind(const i32* attributes) const
 {
-    assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
-    if(attributes[E_SHADER_ATTRIBUTE_POSITION] >= 0)
+    if(m_usedSize != 0)
     {
-        glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_POSITION]);
+        assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
+        glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
+        if(attributes[E_SHADER_ATTRIBUTE_POSITION] >= 0)
+        {
+            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_POSITION]);
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_TEXCOORD] >= 0)
+        {
+            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TEXCOORD]);
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_NORMAL] >= 0)
+        {
+            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_NORMAL]);
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_TANGENT] >= 0)
+        {
+            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TANGENT]);
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_COLOR] >= 0)
+        {
+            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_COLOR]);
+        }
+        if(attributes[E_SHADER_ATTRIBUTE_EXTRA] >= 0)
+        {
+            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_EXTRA]);
+        }
+        glBindBuffer(GL_ARRAY_BUFFER, NULL);
     }
-    if(attributes[E_SHADER_ATTRIBUTE_TEXCOORD] >= 0)
-    {
-        glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TEXCOORD]);
-    }
-    if(attributes[E_SHADER_ATTRIBUTE_NORMAL] >= 0)
-    {
-        glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_NORMAL]);
-    }
-    if(attributes[E_SHADER_ATTRIBUTE_TANGENT] >= 0)
-    {
-        glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TANGENT]);
-    }
-    if(attributes[E_SHADER_ATTRIBUTE_COLOR] >= 0)
-    {
-        glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_COLOR]);
-    }
-    if(attributes[E_SHADER_ATTRIBUTE_EXTRA] >= 0)
-    {
-        glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_EXTRA]);
-    }
-    glBindBuffer(GL_ARRAY_BUFFER, NULL);
 }

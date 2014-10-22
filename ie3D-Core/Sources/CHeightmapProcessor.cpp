@@ -363,7 +363,8 @@ m_edgesMaskTextureHeight(2048)
     
     m_chunkSize = glm::ivec2(65, 65);
     
-    m_chunksUsed.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(nullptr, nullptr, nullptr, nullptr));
+    m_chunksUsed.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(nullptr, nullptr, nullptr, nullptr,
+                                                                       E_LANDSCAPE_CHUNK_LOD_UNKNOWN));
     m_executedOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
     m_canceledOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
     
@@ -461,8 +462,9 @@ void CHeightmapProcessor::updateHeightmap(ui32 offsetX, ui32 offsetZ,
             ui32 index = i + j * CHeightmapProcessor::getNumChunksX();
             if(std::get<0>(m_chunksUsed.at(index)) != nullptr)
             {
-                CHeightmapProcessor::writeToVertexBuffer(i, j, E_LANDSCAPE_CHUNK_LOD_01);
-                CHeightmapProcessor::commitVertexBufferToVRAM(i, j, E_LANDSCAPE_CHUNK_LOD_01);
+                E_LANDSCAPE_CHUNK_LOD LOD = std::get<4>(m_chunksUsed[index]);
+                CHeightmapProcessor::writeToVertexBuffer(i, j, LOD);
+                CHeightmapProcessor::commitVertexBufferToVRAM(i, j, LOD);
             }
         }
     }
@@ -931,19 +933,9 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     {
         return;
     }
-    
     if(m_chunksUnused.size() != 0)
     {
         std::get<0>(m_chunksUsed[index]) = m_chunksUnused.at(m_chunksUnused.size() - 1);
-        std::get<1>(m_chunksUsed[index]) = std::make_shared<CQuadTree>();
-        std::get<2>(m_chunksUsed[index]) = meshCreatedCallback;
-        std::get<3>(m_chunksUsed[index]) = quadTreeGeneratedCallback;
-        
-        assert(std::get<0>(m_chunksUsed[index]) != nullptr);
-        assert(std::get<1>(m_chunksUsed[index]) != nullptr);
-        assert(std::get<2>(m_chunksUsed[index]) != nullptr);
-        assert(std::get<3>(m_chunksUsed[index]) != nullptr);
-        
         m_chunksUnused.pop_back();
     }
     else
@@ -963,10 +955,18 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
         
         std::get<0>(m_chunksUsed[index]) = CMesh::constructCustomMesh("landscape.chunk", vertexBuffer, indexBuffer,
                                                                       maxBound, minBound);
-        std::get<1>(m_chunksUsed[index]) = std::make_shared<CQuadTree>();
-        std::get<2>(m_chunksUsed[index]) = meshCreatedCallback;
-        std::get<3>(m_chunksUsed[index]) = quadTreeGeneratedCallback;
     }
+    
+    std::get<1>(m_chunksUsed[index]) = std::make_shared<CQuadTree>();
+    std::get<2>(m_chunksUsed[index]) = meshCreatedCallback;
+    std::get<3>(m_chunksUsed[index]) = quadTreeGeneratedCallback;
+    std::get<4>(m_chunksUsed[index]) = LOD;
+    
+    assert(std::get<0>(m_chunksUsed[index]) != nullptr);
+    assert(std::get<1>(m_chunksUsed[index]) != nullptr);
+    assert(std::get<2>(m_chunksUsed[index]) != nullptr);
+    assert(std::get<3>(m_chunksUsed[index]) != nullptr);
+    assert(std::get<4>(m_chunksUsed[index]) != E_LANDSCAPE_CHUNK_LOD_UNKNOWN);
     
     CSharedThreadOperation writeToVertexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     writeToVertexBufferOperation->setExecutionBlock([this, i, j, LOD](void) {
@@ -1004,7 +1004,7 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
         
         assert(std::get<3>(m_chunksUsed[index]) != nullptr);
         std::get<3>(m_chunksUsed[index])(std::get<1>(m_chunksUsed[index]));
-        
+        m_executedOperations[index] = nullptr;
 #if defined(__PERFORMANCE_TIMER__)
         std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
         f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
@@ -1020,21 +1020,39 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     
     assert(m_executedOperations[index] == nullptr);
     m_executedOperations[index] = completionOperation;
+    
+    completionOperation->setCancelBlock([this, index](void){
+        m_executedOperations[index] = nullptr;
+    });
     completionOperation->addToExecutionQueue();
 }
 
-void CHeightmapProcessor::stopChunkLoading(ui32 i, ui32 j)
+void CHeightmapProcessor::stopChunkLoading(ui32 i, ui32 j, const std::function<void(void)>& stopLoadingCallback)
 {
     ui32 index = i + j * m_chunksNum.x;
-    m_executedOperations[index] = nullptr;
+    if(m_executedOperations[index] != nullptr)
+    {
+        m_executedOperations[index]->setCancelBlock([this, stopLoadingCallback, index](void) {
+            stopLoadingCallback();
+            m_executedOperations[index] = nullptr;
+        });
+        m_executedOperations[index]->cancel();
+    }
+    else
+    {
+        stopLoadingCallback();
+    }
 }
 
 void CHeightmapProcessor::runChunkUnLoading(ui32 i, ui32 j)
 {
     ui32 index = i + j * m_chunksNum.x;
-    m_executedOperations[index]->cancel();
-    m_canceledOperations[index] = m_executedOperations[index];
-    m_executedOperations[index] = nullptr;
+    if(m_executedOperations[index] != nullptr)
+    {
+        m_executedOperations[index]->cancel();
+        m_canceledOperations[index] = m_executedOperations[index];
+        m_executedOperations[index] = nullptr;
+    }
 }
 
 void CHeightmapProcessor::update(void)
@@ -1051,6 +1069,7 @@ void CHeightmapProcessor::update(void)
             std::get<1>(m_chunksUsed[index]) = nullptr;
             std::get<2>(m_chunksUsed[index]) = nullptr;
             std::get<3>(m_chunksUsed[index]) = nullptr;
+            std::get<4>(m_chunksUsed[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
         }
     }
 }

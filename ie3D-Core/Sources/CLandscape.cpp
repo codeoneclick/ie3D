@@ -144,15 +144,16 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     else if(m_chunks[i + j * numChunksZ]->getInprogressLOD() != LOD &&
                             m_chunks[i + j * numChunksZ]->getInprogressLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
                     {
-                        m_heightmapProcessor->stopChunkLoading(i, j);
                         m_chunks[i + j * numChunksZ]->setInprogressLOD(LOD);
-                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, i , j, numChunksZ, LOD](CSharedMeshRef mesh) {
-                            m_chunks[i + j * numChunksZ]->setQuadTree(nullptr, m_chunks[i + j * numChunksZ]->getCurrentLOD());
-                            m_chunks[i + j * numChunksZ]->setMesh(mesh);
-                            m_chunks[i + j * numChunksZ]->onSceneUpdate(0);
-                        }, [this, i , j, numChunksZ, LOD](CSharedQuadTreeRef quadTree) {
-                            m_chunks[i + j * numChunksZ]->setQuadTree(quadTree, LOD);
-                            m_chunks[i + j * numChunksZ]->onSceneUpdate(0);
+                        m_heightmapProcessor->stopChunkLoading(i, j, [this, i , j, numChunksZ, LOD](void){
+                            m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, i , j, numChunksZ, LOD](CSharedMeshRef mesh) {
+                                m_chunks[i + j * numChunksZ]->setQuadTree(nullptr, m_chunks[i + j * numChunksZ]->getCurrentLOD());
+                                m_chunks[i + j * numChunksZ]->setMesh(mesh);
+                                m_chunks[i + j * numChunksZ]->onSceneUpdate(0);
+                            }, [this, i , j, numChunksZ, LOD](CSharedQuadTreeRef quadTree) {
+                                m_chunks[i + j * numChunksZ]->setQuadTree(quadTree, LOD);
+                                m_chunks[i + j * numChunksZ]->onSceneUpdate(0);
+                            });
                         });
                     }
                 }
