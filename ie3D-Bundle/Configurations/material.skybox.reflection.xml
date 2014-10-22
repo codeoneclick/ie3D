@@ -20,7 +20,7 @@
     fs_filename="shaderSkyBox.frag"/>
     <textures>
         <texture
-        filename="landscape.01.diffuse.01.png"
+        filename="skybox_xpos.png"
         render_operation_name=""
         sampler_id="0"
         wrap_mode="GL_REPEAT"/>

@@ -20,7 +20,7 @@
         fs_filename="shaderModel.frag"/>
     <textures>
         <texture
-            filename="landscape.01.diffuse.01.png"
+            filename="static_model_tank_medium.png"
             render_operation_name=""
             sampler_id="0"
             wrap_mode="GL_REPEAT"/>

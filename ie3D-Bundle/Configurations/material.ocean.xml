@@ -30,7 +30,7 @@
             sampler_id="1"
             wrap_mode="GL_CLAMP_TO_EDGE"/>
         <texture
-            filename="landscape.01.diffuse.01.png"
+            filename="ocean_ripples.png"
             render_operation_name=""
             sampler_id="2"
             wrap_mode="GL_MIRRORED_REPEAT"/>

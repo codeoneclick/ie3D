@@ -20,17 +20,17 @@
         fs_filename="shaderLandscapeSplatting.frag"/>
     <textures>
         <texture
-            filename="landscape.01.diffuse.01.png"
+            filename="landscape_01.png"
             render_operation_name=""
             sampler_id="0"
             wrap_mode="GL_REPEAT"/>
         <texture
-            filename="landscape.01.diffuse.01.png"
+            filename="landscape_02.png"
             render_operation_name=""
             sampler_id="1"
             wrap_mode="GL_REPEAT"/>
         <texture
-            filename="landscape.01.diffuse.01.png"
+            filename="landscape_03.png"
             render_operation_name=""
             sampler_id="2"
             wrap_mode="GL_REPEAT"/>
