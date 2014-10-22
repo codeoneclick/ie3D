@@ -19,10 +19,5 @@
     vs_filename="shaderSkyBox.vert"
     fs_filename="shaderSkyBox.frag"/>
     <textures>
-        <texture
-        filename="skybox_xpos.png"
-        render_operation_name=""
-        sampler_id="0"
-        wrap_mode="GL_REPEAT"/>
     </textures>
 </material>

@@ -102,10 +102,10 @@ void main(void)
      float fZ = OUT_ShadowParameters.z / OUT_ShadowParameters.w;
      float fBias = 0.0005 * tan(acos(dot(OUT_Normal, OUT_LightDirection)));
      float fShadow = 1.0;
-     /*if (OUT_ShadowParameters.w > 0.0)
+     if (OUT_ShadowParameters.w > 0.0)
      {
         fShadow = max(step(getCurrentDepth(fZ), getShadowMapPassDepth(vTexCoord)), 0.5);
-     }*/
+     }
     
     diffuseColor = vec4(diffuseColor.rgb * min(diffuseFactor, 1.0), 1.0);
     diffuseColor = mix(vec4(vec3(0.16, 0.32, 0.32) * diffuseFactor, 1.0), diffuseColor, OUT_Fog);

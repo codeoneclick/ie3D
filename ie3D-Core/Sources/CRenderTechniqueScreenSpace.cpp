@@ -61,7 +61,7 @@ void CRenderTechniqueScreenSpace::bind(void)
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
     glViewport(0, 0, m_frameWidth, m_frameHeight);
     glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     m_material->bind();
     m_quad->bind(m_material->getShader()->getAttributesRef());
 }

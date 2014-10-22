@@ -97,17 +97,28 @@ void CCubemapTexture::onResourceLoaded(ISharedResourceRef resource, bool success
     
     i32 width = texture->getWidth();
     i32 height = texture->getHeight();
+    i32 numMips = texture->getNumMips();
     const ui8* data = texture->getData();
     
-	for (ui32 mip = 0; mip < texture->getNumMips() && width > 0 && height > 0; ++mip)
-	{
-		GLsizei size = MAX_VALUE(32, static_cast<i32>(width) * static_cast<i32>(height) * texture->getBPP() / 8);
-		texture->isCompressed() ?
-        glCompressedTexImage2D(face, mip, texture->getFormat(), width, height, 0, size, data) :
-        glTexImage2D(face, mip, texture->getFormat(), width, height, 0, texture->getFormat(), GL_UNSIGNED_BYTE, data);
-		data += size;
-		width >>= 1; height >>= 1;
-	}
+    if(numMips != 0)
+    {
+        for (ui32 mip = 0; mip < texture->getNumMips() && width > 0 && height > 0; ++mip)
+        {
+            GLsizei size = MAX_VALUE(32, static_cast<i32>(width) * static_cast<i32>(height) * texture->getBPP() / 8);
+            texture->isCompressed() ?
+            glCompressedTexImage2D(face, mip, texture->getFormat(), width, height, 0, size, data) :
+            glTexImage2D(face, mip, texture->getFormat(), width, height, 0, texture->getFormat(), GL_UNSIGNED_BYTE, data);
+            data += size;
+            width >>= 1; height >>= 1;
+        }
+    }
+    else
+    {
+        GLsizei size = MAX_VALUE(32, static_cast<i32>(width) * static_cast<i32>(height) * texture->getBPP() / 8);
+        texture->isCompressed() ?
+        glCompressedTexImage2D(face, 0, texture->getFormat(), width, height, 0, size, data) :
+        glTexImage2D(face, 0, texture->getFormat(), width, height, 0, texture->getFormat(), GL_UNSIGNED_BYTE, data);
+    }
     
     if(m_xpositive->isCommited() && m_xpositive->isLoaded() &&
        m_xnegative->isCommited() && m_xnegative->isLoaded() &&

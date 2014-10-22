@@ -17,7 +17,7 @@ ui32 CShaderCompiler_GLSL::compile(const std::string& sourceCode, GLenum shaderT
 #if defined(__OSX__)
     define = "#define __OSX__\n";
 #elif defined(__IOS__)
-    define = "#define __IOS__\n";
+    define = "#define __IOS__\nprecision highp float;\n";
     if(g_highPerformancePlatforms.count(getPlatform()) != 0)
     {
         define.append("#define __IOS_HIGH_PERFORMANCE__\n");

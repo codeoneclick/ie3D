@@ -9,9 +9,6 @@
 #include "CTextureSerializer_PVR.h"
 #include "CTexture.h"
 #include "PVRTTexture.h"
-#include <EGL/egl.h>
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
 
 CTextureSerializer_PVR::CTextureSerializer_PVR(const std::string& filename,
                                                ISharedResourceRef resource) :
@@ -60,13 +57,21 @@ void CTextureSerializer_PVR::serialize(void)
                 if(header->dwAlphaBitMask)
                 {
                     bpp = 2;
+#if defined(__IOS__)
                     format = GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+#else
+                    assert(false);
+#endif
                     isCompressed = true;
                 }
                 else
                 {
                     bpp = 2;
+#if defined(__IOS__)
                     format = GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
+#else
+                    assert(false);
+#endif
                     isCompressed = true;
                 }
                 break;
@@ -74,28 +79,40 @@ void CTextureSerializer_PVR::serialize(void)
                 if(header->dwAlphaBitMask)
                 {
                     bpp = 4;
+#if defined(__IOS__)
                     format = GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+#else
+                    assert(false);
+#endif
                     isCompressed = true;
                 }
                 else
                 {
                     bpp = 4;
+#if defined(__IOS__)
                     format = GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
+#else
+                    assert(false);
+#endif
                     isCompressed = true;
                 }
                 break;
-			case OGL_RGBA_8888:
-                {
-                    bpp = 32;
-                    format = GL_RGBA;
-                    isCompressed = false;
-                }
-				break;
+            case OGL_RGBA_8888:
+            {
+                bpp = 32;
+#if defined(__IOS__)
+                format = GL_RGBA;
+#else
+                assert(false);
+#endif
+                isCompressed = false;
+            }
+                break;
             default:
-                {
-                    m_status = E_SERIALIZER_STATUS_FAILURE;
-                    return;
-                }
+            {
+                m_status = E_SERIALIZER_STATUS_FAILURE;
+                return;
+            }
                 break;
         }
         
@@ -113,38 +130,54 @@ void CTextureSerializer_PVR::serialize(void)
     {
         PVRTextureHeaderV3* header = (PVRTextureHeaderV3*)sourcedata;
         PVRTuint64 pixelFormat = header->u64PixelFormat;
-		PVRTuint64 pixelFormatPartHigh = pixelFormat & PVRTEX_PFHIGHMASK;
-		if (pixelFormatPartHigh == 0)
-		{
-			switch (pixelFormat)
-			{
+        PVRTuint64 pixelFormatPartHigh = pixelFormat & PVRTEX_PFHIGHMASK;
+        if (pixelFormatPartHigh == 0)
+        {
+            switch (pixelFormat)
+            {
                 case 0:
-				{
+                {
                     bpp = 2;
+#if defined(__IOS__)
                     format = GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
+#else
+                    assert(false);
+#endif
                     isCompressed = true;
-				}
+                }
                     break;
                 case 1:
-				{
+                {
                     bpp = 2;
+#if defined(__IOS__)
                     format = GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+#else
+                    assert(false);
+#endif
                     isCompressed = true;
-				}
+                }
                     break;
                 case 2:
-				{
+                {
                     bpp = 4;
+#if defined(__IOS__)
                     format = GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
+#else
+                    assert(false);
+#endif
                     isCompressed = true;
-				}
+                }
                     break;
                 case 3:
-				{
+                {
                     bpp = 4;
+#if defined(__IOS__)
                     format = GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+#else
+                    assert(false);
+#endif
                     isCompressed = true;
-				}
+                }
                     break;
                 default:
 				{

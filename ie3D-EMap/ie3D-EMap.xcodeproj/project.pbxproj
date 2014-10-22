@@ -41,33 +41,40 @@
 		212092C41919786500FFC8D4 /* gameobject.skybox.xml in Resources */ = {isa = PBXBuildFile; fileRef = 212092C21919786500FFC8D4 /* gameobject.skybox.xml */; };
 		212092C9191978D300FFC8D4 /* shaderSkyBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 212092C7191978D300FFC8D4 /* shaderSkyBox.frag */; };
 		212092CA191978D300FFC8D4 /* shaderSkyBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 212092C8191978D300FFC8D4 /* shaderSkyBox.vert */; };
-		212092D119197ADD00FFC8D4 /* xneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092CB19197ADD00FFC8D4 /* xneg.pvr */; };
-		212092D219197ADD00FFC8D4 /* xpos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092CC19197ADD00FFC8D4 /* xpos.pvr */; };
-		212092D319197ADD00FFC8D4 /* yneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092CD19197ADD00FFC8D4 /* yneg.pvr */; };
-		212092D419197ADD00FFC8D4 /* ypos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092CE19197ADD00FFC8D4 /* ypos.pvr */; };
-		212092D519197ADD00FFC8D4 /* zneg.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092CF19197ADD00FFC8D4 /* zneg.pvr */; };
-		212092D619197ADD00FFC8D4 /* zpos.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 212092D019197ADD00FFC8D4 /* zpos.pvr */; };
-		21216F42192F7C0200854995 /* landscape.00.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21216F41192F7C0200854995 /* landscape.00.diffuse.pvr */; };
 		214182C9193CC6C2000B66F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214182C8193CC6C2000B66F1 /* Images.xcassets */; };
-		2162041B194855E200D129AD /* editable.ring.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 2162041A194855E200D129AD /* editable.ring.pvr */; };
 		216204311949A74E00D129AD /* material.render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2162042F1949A74E00D129AD /* material.render.operation.screen.ssao.xml */; };
 		216204321949A74E00D129AD /* render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204301949A74E00D129AD /* render.operation.screen.ssao.xml */; };
 		216204351949A88100D129AD /* shaderScreenSSAO.frag in Resources */ = {isa = PBXBuildFile; fileRef = 216204331949A88100D129AD /* shaderScreenSSAO.frag */; };
 		216204361949A88100D129AD /* shaderScreenSSAO.vert in Resources */ = {isa = PBXBuildFile; fileRef = 216204341949A88100D129AD /* shaderScreenSSAO.vert */; };
-		216204451949F93000D129AD /* ssao.random.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 216204441949F93000D129AD /* ssao.random.pvr */; };
 		217AF1751945BAD70045CF9D /* CMESceneFabricator.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 217AF1731945BAD70045CF9D /* CMESceneFabricator.cpp */; };
 		217AF17E1945EB010045CF9D /* gameobject.landscape.brush.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217AF17C1945EB010045CF9D /* gameobject.landscape.brush.xml */; };
 		217AF17F1945EB010045CF9D /* material.landscape.brush.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217AF17D1945EB010045CF9D /* material.landscape.brush.xml */; };
 		217AF1821945EE1E0045CF9D /* shaderLandscapeBrush.frag in Resources */ = {isa = PBXBuildFile; fileRef = 217AF1801945EE1E0045CF9D /* shaderLandscapeBrush.frag */; };
 		217AF1831945EE1E0045CF9D /* shaderLandscapeBrush.vert in Resources */ = {isa = PBXBuildFile; fileRef = 217AF1811945EE1E0045CF9D /* shaderLandscapeBrush.vert */; };
 		217C32F0197FA14F001224CE /* gameobject.tank.light.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217C32EF197FA14F001224CE /* gameobject.tank.light.xml */; };
+		217EF8D119F7F52700F339A0 /* animated_model_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8C119F7F52700F339A0 /* animated_model_01.png */; };
+		217EF8D219F7F52700F339A0 /* landscape_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8C219F7F52700F339A0 /* landscape_01.png */; };
+		217EF8D319F7F52700F339A0 /* landscape_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8C319F7F52700F339A0 /* landscape_02.png */; };
+		217EF8D419F7F52700F339A0 /* landscape_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8C419F7F52700F339A0 /* landscape_03.png */; };
+		217EF8D519F7F52700F339A0 /* ocean_ripples.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8C519F7F52700F339A0 /* ocean_ripples.png */; };
+		217EF8D619F7F52700F339A0 /* particle_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8C619F7F52700F339A0 /* particle_01.png */; };
+		217EF8D719F7F52700F339A0 /* skybox_xneg.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8C719F7F52700F339A0 /* skybox_xneg.png */; };
+		217EF8D819F7F52700F339A0 /* skybox_xpos.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8C819F7F52700F339A0 /* skybox_xpos.png */; };
+		217EF8D919F7F52700F339A0 /* skybox_yneg.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8C919F7F52700F339A0 /* skybox_yneg.png */; };
+		217EF8DA19F7F52700F339A0 /* skybox_ypos.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8CA19F7F52700F339A0 /* skybox_ypos.png */; };
+		217EF8DB19F7F52700F339A0 /* skybox_zneg.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8CB19F7F52700F339A0 /* skybox_zneg.png */; };
+		217EF8DC19F7F52700F339A0 /* skybox_zpos.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8CC19F7F52700F339A0 /* skybox_zpos.png */; };
+		217EF8DD19F7F52700F339A0 /* static_model_tank_heavy.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8CD19F7F52700F339A0 /* static_model_tank_heavy.png */; };
+		217EF8DE19F7F52700F339A0 /* static_model_tank_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8CE19F7F52700F339A0 /* static_model_tank_light.png */; };
+		217EF8DF19F7F52700F339A0 /* static_model_tank_medium.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8CF19F7F52700F339A0 /* static_model_tank_medium.png */; };
+		217EF8E019F7F52700F339A0 /* static_model_tank_tracks.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8D019F7F52700F339A0 /* static_model_tank_tracks.png */; };
+		217EF8E219F7F71A00F339A0 /* render.operation.world.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217EF8E119F7F71A00F339A0 /* render.operation.world.shadowmap.xml */; };
 		218BCFF019C339700041048E /* map_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 218BCFEB19C339700041048E /* map_01.png */; };
 		218BCFF119C339700041048E /* map_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 218BCFEC19C339700041048E /* map_02.png */; };
 		218BCFF219C339700041048E /* map_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 218BCFED19C339700041048E /* map_03.png */; };
 		218BCFF319C339700041048E /* map_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 218BCFEE19C339700041048E /* map_04.png */; };
 		218BCFF419C339700041048E /* map_05.png in Resources */ = {isa = PBXBuildFile; fileRef = 218BCFEF19C339700041048E /* map_05.png */; };
 		2191CE30196E872200CE2813 /* CMEPlacementModel.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */; };
-		2191CE7A196EE8D800CE2813 /* temp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2191CE79196EE8D800CE2813 /* temp.png */; };
 		21A38D4C19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4A19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag */; };
 		21A38D4D19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */; };
 		21A38D5119EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4F19EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml */; };
@@ -81,7 +88,6 @@
 		21A9D86219615F9700A1B62C /* material.model.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D85E19615F9700A1B62C /* material.model.refraction.xml */; };
 		21A9D8651961616A00A1B62C /* shaderModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D8631961616A00A1B62C /* shaderModel.frag */; };
 		21A9D8661961616A00A1B62C /* shaderModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D8641961616A00A1B62C /* shaderModel.vert */; };
-		21A9D868196162DE00A1B62C /* model.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D867196162DE00A1B62C /* model.diffuse.pvr */; };
 		21A9D86E1961AC9900A1B62C /* material.model.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D86D1961AC9900A1B62C /* material.model.normal.xml */; };
 		21A9D8711961ACE600A1B62C /* shaderModelNormal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D86F1961ACE500A1B62C /* shaderModelNormal.frag */; };
 		21A9D8721961ACE600A1B62C /* shaderModelNormal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D8701961ACE600A1B62C /* shaderModelNormal.vert */; };
@@ -117,12 +123,6 @@
 		21BC34BC19080B47007B99DA /* shaderParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B219080B47007B99DA /* shaderParticleEmitter.vert */; };
 		21BC34BD19080B47007B99DA /* shaderScreenQuad.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B319080B47007B99DA /* shaderScreenQuad.frag */; };
 		21BC34BE19080B47007B99DA /* shaderScreenQuad.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B419080B47007B99DA /* shaderScreenQuad.vert */; };
-		21BC34C519080B9E007B99DA /* landscape.01.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34BF19080B9E007B99DA /* landscape.01.diffuse.pvr */; };
-		21BC34C619080B9E007B99DA /* landscape.02.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C019080B9E007B99DA /* landscape.02.diffuse.pvr */; };
-		21BC34C719080B9E007B99DA /* landscape.03.diffuse.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C119080B9E007B99DA /* landscape.03.diffuse.pvr */; };
-		21BC34C819080B9E007B99DA /* ocean.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C219080B9E007B99DA /* ocean.normal.pvr */; };
-		21BC34C919080B9E007B99DA /* particle.emitter.01.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C319080B9E007B99DA /* particle.emitter.01.pvr */; };
-		21BC34CA19080B9E007B99DA /* particle.emitter.02.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34C419080B9E007B99DA /* particle.emitter.02.pvr */; };
 		21C017121992772500CB59AB /* libie3DEngine-osx.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21C0170F199276EE00CB59AB /* libie3DEngine-osx.a */; };
 		21C0171519927A0B00CB59AB /* libie3DCore-osx.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 212091D21906FE9100FFC8D4 /* libie3DCore-osx.a */; };
 		21C409971979B8370063D62D /* material.texture2D.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21C409961979B8370063D62D /* material.texture2D.xml */; };
@@ -145,10 +145,6 @@
 		21C409CD197C123D0063D62D /* tank_medium_left_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 21C409C1197C123D0063D62D /* tank_medium_left_track.mdl_01 */; };
 		21C409CE197C123D0063D62D /* tank_medium_right_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 21C409C2197C123D0063D62D /* tank_medium_right_track.mdl_01 */; };
 		21C409CF197C123D0063D62D /* tank_medium_tower.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 21C409C3197C123D0063D62D /* tank_medium_tower.mdl_01 */; };
-		21C409D4197C132B0063D62D /* tank_heavy.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21C409D0197C132B0063D62D /* tank_heavy.pvr */; };
-		21C409D5197C132B0063D62D /* tank_light.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21C409D1197C132B0063D62D /* tank_light.pvr */; };
-		21C409D6197C132B0063D62D /* tank_medium.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21C409D2197C132B0063D62D /* tank_medium.pvr */; };
-		21C409D7197C132B0063D62D /* tank_track.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21C409D3197C132B0063D62D /* tank_track.pvr */; };
 		21C409DC197EE8E10063D62D /* material.tank.light.left.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21C409D9197EE8E00063D62D /* material.tank.light.left.track.common.xml */; };
 		21C409DD197EE8E10063D62D /* material.tank.light.right.track.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21C409DA197EE8E00063D62D /* material.tank.light.right.track.common.xml */; };
 		21C409DE197EE8E10063D62D /* material.tank.light.tower.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21C409DB197EE8E00063D62D /* material.tank.light.tower.common.xml */; };
@@ -174,8 +170,6 @@
 		21D9944C19810C43003D4CD1 /* material.tank.heavy.tower.common.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21D9944319810C43003D4CD1 /* material.tank.heavy.tower.common.xml */; };
 		21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */; };
 		21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */; };
-		21DC2B7B1929EDEC008DA3C1 /* landscape.01.normal.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B7A1929EDEC008DA3C1 /* landscape.01.normal.pvr */; };
-		21F0866C19F6E16C002FF9AE /* landscape.01.diffuse.01.png in Resources */ = {isa = PBXBuildFile; fileRef = 21F0866B19F6E16C002FF9AE /* landscape.01.diffuse.01.png */; };
 		350B621B91997A1D3DB08A50 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1ACE512F3E4E1427AACF434A /* QtGui.framework */; };
 		5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 09BF715167B7A0149FD2FBB8 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9D88140FBB133F956E1F6166 /* CMainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
@@ -290,21 +284,12 @@
 		212092C21919786500FFC8D4 /* gameobject.skybox.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.skybox.xml; path = "../ie3D-Bundle/Configurations/gameobject.skybox.xml"; sourceTree = SOURCE_ROOT; };
 		212092C7191978D300FFC8D4 /* shaderSkyBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.frag; path = "../ie3D-Bundle/Shaders/shaderSkyBox.frag"; sourceTree = SOURCE_ROOT; };
 		212092C8191978D300FFC8D4 /* shaderSkyBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.vert; path = "../ie3D-Bundle/Shaders/shaderSkyBox.vert"; sourceTree = SOURCE_ROOT; };
-		212092CB19197ADD00FFC8D4 /* xneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = xneg.pvr; path = "../ie3D-Bundle/Textures/xneg.pvr"; sourceTree = SOURCE_ROOT; };
-		212092CC19197ADD00FFC8D4 /* xpos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = xpos.pvr; path = "../ie3D-Bundle/Textures/xpos.pvr"; sourceTree = SOURCE_ROOT; };
-		212092CD19197ADD00FFC8D4 /* yneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = yneg.pvr; path = "../ie3D-Bundle/Textures/yneg.pvr"; sourceTree = SOURCE_ROOT; };
-		212092CE19197ADD00FFC8D4 /* ypos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = ypos.pvr; path = "../ie3D-Bundle/Textures/ypos.pvr"; sourceTree = SOURCE_ROOT; };
-		212092CF19197ADD00FFC8D4 /* zneg.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = zneg.pvr; path = "../ie3D-Bundle/Textures/zneg.pvr"; sourceTree = SOURCE_ROOT; };
-		212092D019197ADD00FFC8D4 /* zpos.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = zpos.pvr; path = "../ie3D-Bundle/Textures/zpos.pvr"; sourceTree = SOURCE_ROOT; };
-		21216F41192F7C0200854995 /* landscape.00.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.00.diffuse.pvr; path = "../ie3D-Bundle/Textures/landscape.00.diffuse.pvr"; sourceTree = SOURCE_ROOT; };
 		2121751DE1C919D3E0D744BA /* qt_lib_uitools_private.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_uitools_private.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_uitools_private.pri; sourceTree = "<absolute>"; };
 		214182C8193CC6C2000B66F1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ie3D-EMap/Images.xcassets"; sourceTree = SOURCE_ROOT; };
-		2162041A194855E200D129AD /* editable.ring.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = editable.ring.pvr; path = "../ie3D-Bundle/Textures/editable.ring.pvr"; sourceTree = SOURCE_ROOT; };
 		2162042F1949A74E00D129AD /* material.render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
 		216204301949A74E00D129AD /* render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
 		216204331949A88100D129AD /* shaderScreenSSAO.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenSSAO.frag; path = "../ie3D-Bundle/Shaders/shaderScreenSSAO.frag"; sourceTree = SOURCE_ROOT; };
 		216204341949A88100D129AD /* shaderScreenSSAO.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenSSAO.vert; path = "../ie3D-Bundle/Shaders/shaderScreenSSAO.vert"; sourceTree = SOURCE_ROOT; };
-		216204441949F93000D129AD /* ssao.random.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = ssao.random.pvr; path = "../ie3D-Bundle/Textures/ssao.random.pvr"; sourceTree = SOURCE_ROOT; };
 		217AF1731945BAD70045CF9D /* CMESceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMESceneFabricator.cpp; path = Sources/CMESceneFabricator.cpp; sourceTree = SOURCE_ROOT; };
 		217AF1741945BAD70045CF9D /* CMESceneFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMESceneFabricator.h; path = Sources/CMESceneFabricator.h; sourceTree = SOURCE_ROOT; };
 		217AF1791945BB9E0045CF9D /* HMEDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HMEDeclaration.h; path = Sources/HMEDeclaration.h; sourceTree = SOURCE_ROOT; };
@@ -314,6 +299,23 @@
 		217AF1811945EE1E0045CF9D /* shaderLandscapeBrush.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeBrush.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeBrush.vert"; sourceTree = "<group>"; };
 		217C32EF197FA14F001224CE /* gameobject.tank.light.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.tank.light.xml; path = "../ie3D-Bundle/Configurations/gameobject.tank.light.xml"; sourceTree = SOURCE_ROOT; };
 		217C32FB197FD1D3001224CE /* HMEEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HMEEnums.h; path = Sources/HMEEnums.h; sourceTree = SOURCE_ROOT; };
+		217EF8C119F7F52700F339A0 /* animated_model_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animated_model_01.png; path = "../ie3D-Bundle/Textures/animated_model_01.png"; sourceTree = SOURCE_ROOT; };
+		217EF8C219F7F52700F339A0 /* landscape_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = landscape_01.png; path = "../ie3D-Bundle/Textures/landscape_01.png"; sourceTree = SOURCE_ROOT; };
+		217EF8C319F7F52700F339A0 /* landscape_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = landscape_02.png; path = "../ie3D-Bundle/Textures/landscape_02.png"; sourceTree = SOURCE_ROOT; };
+		217EF8C419F7F52700F339A0 /* landscape_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = landscape_03.png; path = "../ie3D-Bundle/Textures/landscape_03.png"; sourceTree = SOURCE_ROOT; };
+		217EF8C519F7F52700F339A0 /* ocean_ripples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ocean_ripples.png; path = "../ie3D-Bundle/Textures/ocean_ripples.png"; sourceTree = SOURCE_ROOT; };
+		217EF8C619F7F52700F339A0 /* particle_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = particle_01.png; path = "../ie3D-Bundle/Textures/particle_01.png"; sourceTree = SOURCE_ROOT; };
+		217EF8C719F7F52700F339A0 /* skybox_xneg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skybox_xneg.png; path = "../ie3D-Bundle/Textures/skybox_xneg.png"; sourceTree = SOURCE_ROOT; };
+		217EF8C819F7F52700F339A0 /* skybox_xpos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skybox_xpos.png; path = "../ie3D-Bundle/Textures/skybox_xpos.png"; sourceTree = SOURCE_ROOT; };
+		217EF8C919F7F52700F339A0 /* skybox_yneg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skybox_yneg.png; path = "../ie3D-Bundle/Textures/skybox_yneg.png"; sourceTree = SOURCE_ROOT; };
+		217EF8CA19F7F52700F339A0 /* skybox_ypos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skybox_ypos.png; path = "../ie3D-Bundle/Textures/skybox_ypos.png"; sourceTree = SOURCE_ROOT; };
+		217EF8CB19F7F52700F339A0 /* skybox_zneg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skybox_zneg.png; path = "../ie3D-Bundle/Textures/skybox_zneg.png"; sourceTree = SOURCE_ROOT; };
+		217EF8CC19F7F52700F339A0 /* skybox_zpos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skybox_zpos.png; path = "../ie3D-Bundle/Textures/skybox_zpos.png"; sourceTree = SOURCE_ROOT; };
+		217EF8CD19F7F52700F339A0 /* static_model_tank_heavy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = static_model_tank_heavy.png; path = "../ie3D-Bundle/Textures/static_model_tank_heavy.png"; sourceTree = SOURCE_ROOT; };
+		217EF8CE19F7F52700F339A0 /* static_model_tank_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = static_model_tank_light.png; path = "../ie3D-Bundle/Textures/static_model_tank_light.png"; sourceTree = SOURCE_ROOT; };
+		217EF8CF19F7F52700F339A0 /* static_model_tank_medium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = static_model_tank_medium.png; path = "../ie3D-Bundle/Textures/static_model_tank_medium.png"; sourceTree = SOURCE_ROOT; };
+		217EF8D019F7F52700F339A0 /* static_model_tank_tracks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = static_model_tank_tracks.png; path = "../ie3D-Bundle/Textures/static_model_tank_tracks.png"; sourceTree = SOURCE_ROOT; };
+		217EF8E119F7F71A00F339A0 /* render.operation.world.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.world.shadowmap.xml; path = "../ie3D-Bundle/Configurations/render.operation.world.shadowmap.xml"; sourceTree = SOURCE_ROOT; };
 		218BCFEB19C339700041048E /* map_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_01.png; path = "../ie3D-Bundle/Temp/map_01.png"; sourceTree = SOURCE_ROOT; };
 		218BCFEC19C339700041048E /* map_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_02.png; path = "../ie3D-Bundle/Temp/map_02.png"; sourceTree = SOURCE_ROOT; };
 		218BCFED19C339700041048E /* map_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_03.png; path = "../ie3D-Bundle/Temp/map_03.png"; sourceTree = SOURCE_ROOT; };
@@ -321,7 +323,6 @@
 		218BCFEF19C339700041048E /* map_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_05.png; path = "../ie3D-Bundle/Temp/map_05.png"; sourceTree = SOURCE_ROOT; };
 		2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEPlacementModel.cpp; path = Sources/CMEPlacementModel.cpp; sourceTree = SOURCE_ROOT; };
 		2191CE2F196E872200CE2813 /* CMEPlacementModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEPlacementModel.h; path = Sources/CMEPlacementModel.h; sourceTree = SOURCE_ROOT; };
-		2191CE79196EE8D800CE2813 /* temp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = temp.png; path = "../ie3D-Bundle/Textures/temp.png"; sourceTree = SOURCE_ROOT; };
 		21A38D4A19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderAtmosphericScattering.frag; path = "../ie3D-Bundle/Shaders/shaderAtmosphericScattering.frag"; sourceTree = SOURCE_ROOT; };
 		21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderAtmosphericScattering.vert; path = "../ie3D-Bundle/Shaders/shaderAtmosphericScattering.vert"; sourceTree = SOURCE_ROOT; };
 		21A38D4F19EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.atmospheric.scattering.xml; path = "../ie3D-Bundle/Configurations/gameobject.atmospheric.scattering.xml"; sourceTree = SOURCE_ROOT; };
@@ -335,7 +336,6 @@
 		21A9D85E19615F9700A1B62C /* material.model.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.refraction.xml; path = "../ie3D-Bundle/Configurations/material.model.refraction.xml"; sourceTree = SOURCE_ROOT; };
 		21A9D8631961616A00A1B62C /* shaderModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModel.frag; path = "../ie3D-Bundle/Shaders/shaderModel.frag"; sourceTree = SOURCE_ROOT; };
 		21A9D8641961616A00A1B62C /* shaderModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModel.vert; path = "../ie3D-Bundle/Shaders/shaderModel.vert"; sourceTree = SOURCE_ROOT; };
-		21A9D867196162DE00A1B62C /* model.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = model.diffuse.pvr; path = "../ie3D-Bundle/Textures/model.diffuse.pvr"; sourceTree = SOURCE_ROOT; };
 		21A9D86D1961AC9900A1B62C /* material.model.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.normal.xml; path = "../ie3D-Bundle/Configurations/material.model.normal.xml"; sourceTree = SOURCE_ROOT; };
 		21A9D86F1961ACE500A1B62C /* shaderModelNormal.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelNormal.frag; path = "../ie3D-Bundle/Shaders/shaderModelNormal.frag"; sourceTree = SOURCE_ROOT; };
 		21A9D8701961ACE600A1B62C /* shaderModelNormal.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelNormal.vert; path = "../ie3D-Bundle/Shaders/shaderModelNormal.vert"; sourceTree = SOURCE_ROOT; };
@@ -371,12 +371,6 @@
 		21BC34B219080B47007B99DA /* shaderParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderParticleEmitter.vert; path = "../ie3D-Bundle/Shaders/shaderParticleEmitter.vert"; sourceTree = "<group>"; };
 		21BC34B319080B47007B99DA /* shaderScreenQuad.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenQuad.frag; path = "../ie3D-Bundle/Shaders/shaderScreenQuad.frag"; sourceTree = "<group>"; };
 		21BC34B419080B47007B99DA /* shaderScreenQuad.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenQuad.vert; path = "../ie3D-Bundle/Shaders/shaderScreenQuad.vert"; sourceTree = "<group>"; };
-		21BC34BF19080B9E007B99DA /* landscape.01.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.01.diffuse.pvr; path = "../ie3D-Bundle/Textures/landscape.01.diffuse.pvr"; sourceTree = "<group>"; };
-		21BC34C019080B9E007B99DA /* landscape.02.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.02.diffuse.pvr; path = "../ie3D-Bundle/Textures/landscape.02.diffuse.pvr"; sourceTree = "<group>"; };
-		21BC34C119080B9E007B99DA /* landscape.03.diffuse.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.03.diffuse.pvr; path = "../ie3D-Bundle/Textures/landscape.03.diffuse.pvr"; sourceTree = "<group>"; };
-		21BC34C219080B9E007B99DA /* ocean.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = ocean.normal.pvr; path = "../ie3D-Bundle/Textures/ocean.normal.pvr"; sourceTree = "<group>"; };
-		21BC34C319080B9E007B99DA /* particle.emitter.01.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = particle.emitter.01.pvr; path = "../ie3D-Bundle/Textures/particle.emitter.01.pvr"; sourceTree = "<group>"; };
-		21BC34C419080B9E007B99DA /* particle.emitter.02.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = particle.emitter.02.pvr; path = "../ie3D-Bundle/Textures/particle.emitter.02.pvr"; sourceTree = "<group>"; };
 		21C01703199276E000CB59AB /* ie3D-Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Engine.xcodeproj"; path = "../ie3D-Engine/ie3D-Engine.xcodeproj"; sourceTree = "<group>"; };
 		21C409961979B8370063D62D /* material.texture2D.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.texture2D.xml; path = "../ie3D-Bundle/Configurations/material.texture2D.xml"; sourceTree = SOURCE_ROOT; };
 		21C409991979B85E0063D62D /* shaderTexture2D.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderTexture2D.frag; path = "../ie3D-Bundle/Shaders/shaderTexture2D.frag"; sourceTree = SOURCE_ROOT; };
@@ -398,10 +392,6 @@
 		21C409C1197C123D0063D62D /* tank_medium_left_track.mdl_01 */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium_left_track.mdl_01; path = "../ie3D-Bundle/Meshes/tank_medium_left_track.mdl_01"; sourceTree = SOURCE_ROOT; };
 		21C409C2197C123D0063D62D /* tank_medium_right_track.mdl_01 */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium_right_track.mdl_01; path = "../ie3D-Bundle/Meshes/tank_medium_right_track.mdl_01"; sourceTree = SOURCE_ROOT; };
 		21C409C3197C123D0063D62D /* tank_medium_tower.mdl_01 */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium_tower.mdl_01; path = "../ie3D-Bundle/Meshes/tank_medium_tower.mdl_01"; sourceTree = SOURCE_ROOT; };
-		21C409D0197C132B0063D62D /* tank_heavy.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_heavy.pvr; path = "../ie3D-Bundle/Textures/tank_heavy.pvr"; sourceTree = SOURCE_ROOT; };
-		21C409D1197C132B0063D62D /* tank_light.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_light.pvr; path = "../ie3D-Bundle/Textures/tank_light.pvr"; sourceTree = SOURCE_ROOT; };
-		21C409D2197C132B0063D62D /* tank_medium.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium.pvr; path = "../ie3D-Bundle/Textures/tank_medium.pvr"; sourceTree = SOURCE_ROOT; };
-		21C409D3197C132B0063D62D /* tank_track.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_track.pvr; path = "../ie3D-Bundle/Textures/tank_track.pvr"; sourceTree = SOURCE_ROOT; };
 		21C409D9197EE8E00063D62D /* material.tank.light.left.track.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.left.track.common.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.left.track.common.xml"; sourceTree = SOURCE_ROOT; };
 		21C409DA197EE8E00063D62D /* material.tank.light.right.track.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.right.track.common.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.right.track.common.xml"; sourceTree = SOURCE_ROOT; };
 		21C409DB197EE8E00063D62D /* material.tank.light.tower.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.light.tower.common.xml; path = "../ie3D-Bundle/Configurations/material.tank.light.tower.common.xml"; sourceTree = SOURCE_ROOT; };
@@ -429,8 +419,6 @@
 		21D9944319810C43003D4CD1 /* material.tank.heavy.tower.common.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.tank.heavy.tower.common.xml; path = "../ie3D-Bundle/Configurations/material.tank.heavy.tower.common.xml"; sourceTree = SOURCE_ROOT; };
 		21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.frag"; sourceTree = "<group>"; };
 		21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.vert"; sourceTree = "<group>"; };
-		21DC2B7A1929EDEC008DA3C1 /* landscape.01.normal.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = landscape.01.normal.pvr; path = "../ie3D-Bundle/Textures/landscape.01.normal.pvr"; sourceTree = "<group>"; };
-		21F0866B19F6E16C002FF9AE /* landscape.01.diffuse.01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = landscape.01.diffuse.01.png; path = "../ie3D-Bundle/Textures/landscape.01.diffuse.01.png"; sourceTree = SOURCE_ROOT; };
 		288C01068066B0AAD960F2E5 /* unix.conf */ = {isa = PBXFileReference; lastKnownFileType = file; name = unix.conf; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/common/unix.conf; sourceTree = "<absolute>"; };
 		2AFE0E29D2D43DE9EEA679F0 /* qt_lib_help.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_help.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_help.pri; sourceTree = "<absolute>"; };
 		2ECDE1AA4A7F457B30B62E5C /* qconfig.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qconfig.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/qconfig.pri; sourceTree = "<absolute>"; };
@@ -655,29 +643,22 @@
 		212090EA1906FD3E00FFC8D4 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				21F0866B19F6E16C002FF9AE /* landscape.01.diffuse.01.png */,
-				21C409D0197C132B0063D62D /* tank_heavy.pvr */,
-				21C409D1197C132B0063D62D /* tank_light.pvr */,
-				21C409D2197C132B0063D62D /* tank_medium.pvr */,
-				21C409D3197C132B0063D62D /* tank_track.pvr */,
-				2191CE79196EE8D800CE2813 /* temp.png */,
-				212092CB19197ADD00FFC8D4 /* xneg.pvr */,
-				212092CC19197ADD00FFC8D4 /* xpos.pvr */,
-				212092CD19197ADD00FFC8D4 /* yneg.pvr */,
-				212092CE19197ADD00FFC8D4 /* ypos.pvr */,
-				212092CF19197ADD00FFC8D4 /* zneg.pvr */,
-				212092D019197ADD00FFC8D4 /* zpos.pvr */,
-				216204441949F93000D129AD /* ssao.random.pvr */,
-				2162041A194855E200D129AD /* editable.ring.pvr */,
-				21216F41192F7C0200854995 /* landscape.00.diffuse.pvr */,
-				21BC34BF19080B9E007B99DA /* landscape.01.diffuse.pvr */,
-				21BC34C019080B9E007B99DA /* landscape.02.diffuse.pvr */,
-				21BC34C119080B9E007B99DA /* landscape.03.diffuse.pvr */,
-				21DC2B7A1929EDEC008DA3C1 /* landscape.01.normal.pvr */,
-				21BC34C219080B9E007B99DA /* ocean.normal.pvr */,
-				21BC34C319080B9E007B99DA /* particle.emitter.01.pvr */,
-				21BC34C419080B9E007B99DA /* particle.emitter.02.pvr */,
-				21A9D867196162DE00A1B62C /* model.diffuse.pvr */,
+				217EF8C119F7F52700F339A0 /* animated_model_01.png */,
+				217EF8C219F7F52700F339A0 /* landscape_01.png */,
+				217EF8C319F7F52700F339A0 /* landscape_02.png */,
+				217EF8C419F7F52700F339A0 /* landscape_03.png */,
+				217EF8C519F7F52700F339A0 /* ocean_ripples.png */,
+				217EF8C619F7F52700F339A0 /* particle_01.png */,
+				217EF8C719F7F52700F339A0 /* skybox_xneg.png */,
+				217EF8C819F7F52700F339A0 /* skybox_xpos.png */,
+				217EF8C919F7F52700F339A0 /* skybox_yneg.png */,
+				217EF8CA19F7F52700F339A0 /* skybox_ypos.png */,
+				217EF8CB19F7F52700F339A0 /* skybox_zneg.png */,
+				217EF8CC19F7F52700F339A0 /* skybox_zpos.png */,
+				217EF8CD19F7F52700F339A0 /* static_model_tank_heavy.png */,
+				217EF8CE19F7F52700F339A0 /* static_model_tank_light.png */,
+				217EF8CF19F7F52700F339A0 /* static_model_tank_medium.png */,
+				217EF8D019F7F52700F339A0 /* static_model_tank_tracks.png */,
 			);
 			name = Textures;
 			sourceTree = "<group>";
@@ -784,6 +765,7 @@
 				21BC349019080A39007B99DA /* render.operation.world.reflection.xml */,
 				21BC349119080A39007B99DA /* render.operation.world.refraction.xml */,
 				2113851D194C40820041A18A /* render.operation.world.normal.xml */,
+				217EF8E119F7F71A00F339A0 /* render.operation.world.shadowmap.xml */,
 				21BC349219080A39007B99DA /* transition.main.xml */,
 			);
 			name = Configurations;
@@ -1202,18 +1184,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				217EF8DA19F7F52700F339A0 /* skybox_ypos.png in Resources */,
 				218BCFF119C339700041048E /* map_02.png in Resources */,
 				21138524194C40B30041A18A /* shaderGameObjectNormal.frag in Resources */,
 				21138525194C40B30041A18A /* shaderGameObjectNormal.vert in Resources */,
 				21A9D8651961616A00A1B62C /* shaderModel.frag in Resources */,
-				2191CE7A196EE8D800CE2813 /* temp.png in Resources */,
 				21D9943519810976003D4CD1 /* gameobject.tank.medium.tower.xml in Resources */,
 				21C409B2197C11060063D62D /* gameobject.tank.light.body.xml in Resources */,
-				212092D119197ADD00FFC8D4 /* xneg.pvr in Resources */,
+				217EF8D219F7F52700F339A0 /* landscape_01.png in Resources */,
 				21BC349F19080A39007B99DA /* material.ocean.xml in Resources */,
 				21A9D8721961ACE600A1B62C /* shaderModelNormal.vert in Resources */,
 				21D9944A19810C43003D4CD1 /* material.tank.heavy.left.track.common.xml in Resources */,
-				212092D419197ADD00FFC8D4 /* ypos.pvr in Resources */,
 				2113851F194C40820041A18A /* material.ocean.normal.xml in Resources */,
 				21C409CD197C123D0063D62D /* tank_medium_left_track.mdl_01 in Resources */,
 				21BC349419080A39007B99DA /* gameobject.ocean.xml in Resources */,
@@ -1224,7 +1205,6 @@
 				21D9944519810C43003D4CD1 /* gameobject.tank.heavy.left.track.xml in Resources */,
 				21A38D4C19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag in Resources */,
 				21D9944919810C43003D4CD1 /* material.tank.heavy.body.common.xml in Resources */,
-				212092D619197ADD00FFC8D4 /* zpos.pvr in Resources */,
 				21BC349719080A39007B99DA /* material.landscape.edges.base.xml in Resources */,
 				21BC34A719080A39007B99DA /* render.operation.world.base.xml in Resources */,
 				21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */,
@@ -1233,73 +1213,68 @@
 				21C409C6197C123D0063D62D /* tank_heavy_right_track.mdl_01 in Resources */,
 				21BC34A819080A39007B99DA /* render.operation.world.reflection.xml in Resources */,
 				21A9D84F1961582D00A1B62C /* model.MDL_anim in Resources */,
+				217EF8DF19F7F52700F339A0 /* static_model_tank_medium.png in Resources */,
+				217EF8D119F7F52700F339A0 /* animated_model_01.png in Resources */,
 				21D9943619810976003D4CD1 /* gameobject.tank.medium.xml in Resources */,
-				21C409D4197C132B0063D62D /* tank_heavy.pvr in Resources */,
-				21DC2B7B1929EDEC008DA3C1 /* landscape.01.normal.pvr in Resources */,
 				21C409C4197C123D0063D62D /* tank_heavy_body.mdl_01 in Resources */,
 				21C409CE197C123D0063D62D /* tank_medium_right_track.mdl_01 in Resources */,
-				212092D219197ADD00FFC8D4 /* xpos.pvr in Resources */,
 				21BC349919080A39007B99DA /* material.landscape.edges.refraction.xml in Resources */,
 				21BC34A019080A39007B99DA /* material.output.xml in Resources */,
 				21BC349B19080A39007B99DA /* material.landscape.refraction.xml in Resources */,
-				21C409D5197C132B0063D62D /* tank_light.pvr in Resources */,
+				217EF8D819F7F52700F339A0 /* skybox_xpos.png in Resources */,
 				21D9943219810976003D4CD1 /* gameobject.tank.medium.body.xml in Resources */,
 				218BCFF419C339700041048E /* map_05.png in Resources */,
 				21BC34A319080A39007B99DA /* material.splatting.diffuse.xml in Resources */,
 				21D9943719810976003D4CD1 /* material.tank.medium.body.common.xml in Resources */,
 				217AF1831945EE1E0045CF9D /* shaderLandscapeBrush.vert in Resources */,
-				21216F42192F7C0200854995 /* landscape.00.diffuse.pvr in Resources */,
 				21BC34A919080A39007B99DA /* render.operation.world.refraction.xml in Resources */,
 				21A9D85F19615F9700A1B62C /* gameobject.model.xml in Resources */,
 				21BC34A119080A39007B99DA /* material.particle.emitter.xml in Resources */,
 				21BC34AA19080A39007B99DA /* transition.main.xml in Resources */,
 				21BC349519080A39007B99DA /* gameobject.particle.emitter.xml in Resources */,
-				212092D519197ADD00FFC8D4 /* zneg.pvr in Resources */,
+				217EF8D319F7F52700F339A0 /* landscape_02.png in Resources */,
 				212092C41919786500FFC8D4 /* gameobject.skybox.xml in Resources */,
+				217EF8DC19F7F52700F339A0 /* skybox_zpos.png in Resources */,
 				21D9944419810C43003D4CD1 /* gameobject.tank.heavy.body.xml in Resources */,
 				21A9D86119615F9700A1B62C /* material.model.reflection.xml in Resources */,
 				21C409971979B8370063D62D /* material.texture2D.xml in Resources */,
 				21C409B3197C11060063D62D /* gameobject.tank.light.left.track.xml in Resources */,
 				214182C9193CC6C2000B66F1 /* Images.xcassets in Resources */,
 				21BC34A519080A39007B99DA /* render.operation.output.xml in Resources */,
+				217EF8D519F7F52700F339A0 /* ocean_ripples.png in Resources */,
+				217EF8DB19F7F52700F339A0 /* skybox_zneg.png in Resources */,
 				21C409C7197C123D0063D62D /* tank_heavy_tower.mdl_01 in Resources */,
 				21D9943319810976003D4CD1 /* gameobject.tank.medium.left.track.xml in Resources */,
 				218BCFF019C339700041048E /* map_01.png in Resources */,
 				21C409CA197C123D0063D62D /* tank_light_right_track.mdl_01 in Resources */,
 				21BC349619080A39007B99DA /* material.landscape.base.xml in Resources */,
-				2162041B194855E200D129AD /* editable.ring.pvr in Resources */,
 				21BC349819080A39007B99DA /* material.landscape.edges.reflection.xml in Resources */,
 				21D9944819810C43003D4CD1 /* gameobject.tank.heavy.xml in Resources */,
 				216204351949A88100D129AD /* shaderScreenSSAO.frag in Resources */,
-				21C409D6197C132B0063D62D /* tank_medium.pvr in Resources */,
 				21BC34A419080A39007B99DA /* material.splatting.normal.xml in Resources */,
 				216204361949A88100D129AD /* shaderScreenSSAO.vert in Resources */,
 				21D9944B19810C43003D4CD1 /* material.tank.heavy.right.track.common.xml in Resources */,
 				217C32F0197FA14F001224CE /* gameobject.tank.light.xml in Resources */,
-				21BC34C919080B9E007B99DA /* particle.emitter.01.pvr in Resources */,
 				21D9943A19810976003D4CD1 /* material.tank.medium.tower.common.xml in Resources */,
+				217EF8D719F7F52700F339A0 /* skybox_xneg.png in Resources */,
 				21C409CB197C123D0063D62D /* tank_light_tower.mdl_01 in Resources */,
-				21BC34CA19080B9E007B99DA /* particle.emitter.02.pvr in Resources */,
 				21A9D8661961616A00A1B62C /* shaderModel.vert in Resources */,
-				21BC34C519080B9E007B99DA /* landscape.01.diffuse.pvr in Resources */,
 				21D9943919810976003D4CD1 /* material.tank.medium.right.track.common.xml in Resources */,
-				21BC34C619080B9E007B99DA /* landscape.02.diffuse.pvr in Resources */,
 				217AF1821945EE1E0045CF9D /* shaderLandscapeBrush.frag in Resources */,
 				21C409B6197C11060063D62D /* material.tank.light.body.common.xml in Resources */,
 				21138520194C40820041A18A /* render.operation.world.normal.xml in Resources */,
 				21D9943819810976003D4CD1 /* material.tank.medium.left.track.common.xml in Resources */,
 				21A38D5219EBCDCE008CAFE7 /* material.atmospheric.scattering.base.xml in Resources */,
 				21D9943419810976003D4CD1 /* gameobject.tank.medium.right.track.xml in Resources */,
-				21F0866C19F6E16C002FF9AE /* landscape.01.diffuse.01.png in Resources */,
-				21BC34C719080B9E007B99DA /* landscape.03.diffuse.pvr in Resources */,
 				21D9944C19810C43003D4CD1 /* material.tank.heavy.tower.common.xml in Resources */,
 				21C409DC197EE8E10063D62D /* material.tank.light.left.track.common.xml in Resources */,
-				21BC34C819080B9E007B99DA /* ocean.normal.pvr in Resources */,
-				21A9D868196162DE00A1B62C /* model.diffuse.pvr in Resources */,
 				21BC34BB19080B47007B99DA /* shaderParticleEmitter.frag in Resources */,
 				21C409CF197C123D0063D62D /* tank_medium_tower.mdl_01 in Resources */,
+				217EF8DD19F7F52700F339A0 /* static_model_tank_heavy.png in Resources */,
+				217EF8DE19F7F52700F339A0 /* static_model_tank_light.png in Resources */,
 				21A38D4D19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert in Resources */,
 				21B08E0519224FE100C5D5CC /* material.skybox.reflection.xml in Resources */,
+				217EF8E219F7F71A00F339A0 /* render.operation.world.shadowmap.xml in Resources */,
 				21BC34B519080B47007B99DA /* shaderLandscape.frag in Resources */,
 				217AF17F1945EB010045CF9D /* material.landscape.brush.xml in Resources */,
 				21BC34B919080B47007B99DA /* shaderOcean.frag in Resources */,
@@ -1310,17 +1285,16 @@
 				21C409B5197C11060063D62D /* gameobject.tank.light.tower.xml in Resources */,
 				217AF17E1945EB010045CF9D /* gameobject.landscape.brush.xml in Resources */,
 				21A9D86019615F9700A1B62C /* material.model.common.xml in Resources */,
+				217EF8D919F7F52700F339A0 /* skybox_yneg.png in Resources */,
 				21BC34B619080B47007B99DA /* shaderLandscape.vert in Resources */,
 				21BC34B819080B47007B99DA /* shaderLandscapeSplatting.vert in Resources */,
 				21BC34BC19080B47007B99DA /* shaderParticleEmitter.vert in Resources */,
 				21C409B4197C11060063D62D /* gameobject.tank.light.right.track.xml in Resources */,
-				212092D319197ADD00FFC8D4 /* yneg.pvr in Resources */,
 				21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */,
 				216204321949A74E00D129AD /* render.operation.screen.ssao.xml in Resources */,
 				21A9D86E1961AC9900A1B62C /* material.model.normal.xml in Resources */,
 				21A38D5119EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml in Resources */,
 				21A9D8711961ACE600A1B62C /* shaderModelNormal.frag in Resources */,
-				216204451949F93000D129AD /* ssao.random.pvr in Resources */,
 				21D9944719810C43003D4CD1 /* gameobject.tank.heavy.tower.xml in Resources */,
 				21BC34BE19080B47007B99DA /* shaderScreenQuad.vert in Resources */,
 				21BC34BA19080B47007B99DA /* shaderOcean.vert in Resources */,
@@ -1333,9 +1307,11 @@
 				21C409DE197EE8E10063D62D /* material.tank.light.tower.common.xml in Resources */,
 				21A9D84B1961581600A1B62C /* model.MDL_mesh in Resources */,
 				212092CA191978D300FFC8D4 /* shaderSkyBox.vert in Resources */,
+				217EF8D419F7F52700F339A0 /* landscape_03.png in Resources */,
+				217EF8E019F7F52700F339A0 /* static_model_tank_tracks.png in Resources */,
+				217EF8D619F7F52700F339A0 /* particle_01.png in Resources */,
 				212092C9191978D300FFC8D4 /* shaderSkyBox.frag in Resources */,
 				218BCFF219C339700041048E /* map_03.png in Resources */,
-				21C409D7197C132B0063D62D /* tank_track.pvr in Resources */,
 				21C409C5197C123D0063D62D /* tank_heavy_left_track.mdl_01 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

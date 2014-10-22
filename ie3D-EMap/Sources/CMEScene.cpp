@@ -63,13 +63,9 @@ void CMEScene::load(void)
     m_camera->Set_Height(16.0f);
     m_root->setCamera(m_camera);
     
-    m_lightSource = m_root->createGlobalLightSource(45.0, 0.01, 1024.0);
-    m_root->setGlobalLightSource(m_lightSource);
-    m_lightSource->setDistanceToSun(512.0);
-    m_lightSource->setDistanceToLookAt(64.0);
-    m_lightSource->setRotationCenter(glm::vec3(256.0, 0.0, 256.0));
-    m_lightSource->setLookAt(glm::vec3(0.0, 0.0, 0.0));
-
+    m_globalLightSource = m_root->createGlobalLightSource(45.0, 0.01, 1024.0);
+    m_root->setGlobalLightSource(m_globalLightSource);
+   
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
     
@@ -110,6 +106,12 @@ void CMEScene::load(void)
     m_uiToSceneCommands->connectSetTillingTexcoordCommand(std::bind(&CMEScene::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
     
     m_landscape->addConfigurationLoadingCommand(std::bind(&CMEScene::onConfigurationLoaded, this, std::placeholders::_1));
+    
+    m_globalLightSource->setAngle(3.0);
+    m_globalLightSource->setDistanceToSun(512.0);
+    m_globalLightSource->setDistanceToLookAt(32.0);
+    m_globalLightSource->setRotationCenter(glm::vec3(256.0, 0.0, 256.0));
+    m_globalLightSource->setLookAt(glm::vec3(256.0, 0.0, 256.0));
 }
 
 void CMEScene::update(f32 deltatime)
@@ -258,8 +260,8 @@ void CMEScene::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 
 void CMEScene::onConfigurationLoaded(ISharedConfigurationRef)
 {
-    m_landscape->addResourceLoadingCommand(std::bind(&CMEScene::onResourceLoaded, this, std::placeholders::_1));
     m_landscapeMaterial = m_landscape->getMaterial("render.operation.world.base");
+    m_landscape->addResourceLoadingCommand(std::bind(&CMEScene::onResourceLoaded, this, std::placeholders::_1));
 }
 
 void CMEScene::onResourceLoaded(ISharedResourceRef resource)
