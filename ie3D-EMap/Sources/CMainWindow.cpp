@@ -216,12 +216,13 @@ void CMainWindow::setSmoothCoefficient(ui32)
 
 void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
-    /*std::stringstream stringstream;
+    std::stringstream stringstream;
     stringstream<<"image_"<<sampler<<".png";
     std::string filename(stringstream.str());
     m_editableGameTransition->getRenderTechniqueImporter()->saveTexture(texture, filename, 256, 256);
     
-    switch (sampler) {
+    switch (sampler)
+    {
         case E_SHADER_SAMPLER_01:
         {
             QPixmap pixmap(QString(filename.c_str()));
@@ -244,7 +245,7 @@ void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER 
             break;
         default:
             break;
-    }*/
+    }
 }
 
 void CMainWindow::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
@@ -286,3 +287,13 @@ void CMainWindow::on_m_textureTilling03SpinBox_valueChanged(int value)
 {
     m_editableGameTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_03);
 }
+
+bool CMainWindow::event(QEvent *event)
+{
+    if (event->type() == QEvent::Polish)
+    {
+        CMainWindow::execute();
+    }
+    return QWidget::event(event);
+}
+

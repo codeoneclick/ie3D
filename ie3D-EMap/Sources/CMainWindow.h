@@ -37,6 +37,8 @@ protected:
     i32 m_previousBrushSize;
     std::string m_recentFilename;
     
+    bool event(QEvent *event);
+    
 #endif
     
 public:

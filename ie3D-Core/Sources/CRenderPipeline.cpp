@@ -77,6 +77,12 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         
         m_numTriangles += 2;
     }
+    
+    GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    assert(status == GL_FRAMEBUFFER_COMPLETE);
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
+    
     m_graphicsContext->draw();
 }
 

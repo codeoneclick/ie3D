@@ -927,6 +927,11 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
 #endif
     
     ui32 index = i + j * m_chunksNum.x;
+    if(m_executedOperations[index] != nullptr)
+    {
+        return;
+    }
+    
     if(m_chunksUnused.size() != 0)
     {
         std::get<0>(m_chunksUsed[index]) = m_chunksUnused.at(m_chunksUnused.size() - 1);
@@ -997,7 +1002,7 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
 #endif
                                             i, j, index](void){
         
-        assert(std::get<2>(m_chunksUsed[index]) != nullptr);
+        assert(std::get<3>(m_chunksUsed[index]) != nullptr);
         std::get<3>(m_chunksUsed[index])(std::get<1>(m_chunksUsed[index]));
         
 #if defined(__PERFORMANCE_TIMER__)
@@ -1021,8 +1026,6 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
 void CHeightmapProcessor::stopChunkLoading(ui32 i, ui32 j)
 {
     ui32 index = i + j * m_chunksNum.x;
-    //m_executedOperations[index]->cancel();
-    //m_canceledOperations[index] = m_executedOperations[index];
     m_executedOperations[index] = nullptr;
 }
 
