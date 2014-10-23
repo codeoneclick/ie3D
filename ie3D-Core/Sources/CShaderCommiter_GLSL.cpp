@@ -130,6 +130,10 @@ void CShaderCommiter_GLSL::commit(void)
     assert(m_resource != nullptr);
     assert(m_resource->isLoaded() == true);
     std::shared_ptr<CShader> shader = std::static_pointer_cast<CShader>(m_resource);
+    
+    GLenum error = glGetError();
+    assert(error == 0);
+    
     m_status = m_status == E_COMMITER_STATUS_INPROGRESS ? E_COMMITER_STATUS_SUCCESS : E_COMMITER_STATUS_FAILURE;
     IResourceCommiter::onResourceDataCommitFinished(std::make_shared<CShaderData>(shaderId));
 }

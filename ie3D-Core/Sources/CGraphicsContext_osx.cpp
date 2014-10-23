@@ -43,8 +43,10 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
     {
         NSOpenGLPFADoubleBuffer,
         NSOpenGLPFADepthSize, 24,
-        //NSOpenGLPFAOpenGLProfile,
-        //NSOpenGLProfileVersion3_2Core,
+#if defined(__OPENGL_30__)
+        NSOpenGLPFAOpenGLProfile,
+        NSOpenGLProfileVersion3_2Core,
+#endif
         0
     };
     
@@ -63,6 +65,10 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
     
     GLint swap = 1;
     [context setValues:&swap forParameter:NSOpenGLCPSwapInterval];
+    
+#if __OPENGL_30__
+    CGLEnable(m_context, kCGLCECrashOnRemovedFunctions);
+#endif
     
     i32 bindedFrameBuffer = 0;
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &bindedFrameBuffer);

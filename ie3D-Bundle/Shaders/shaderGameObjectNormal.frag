@@ -1,4 +1,13 @@
-varying vec3   OUT_Normal;
+
+#if defined(__OPENGL_30__)
+
+in vec3 OUT_Normal;
+
+#else
+
+varying vec3 OUT_Normal;
+
+#endif
 
 void main(void)
 {

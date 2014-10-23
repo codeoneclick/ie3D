@@ -40,6 +40,10 @@ void CTextureCommiter_PNG::commit(void)
     glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0,
                  format, GL_UNSIGNED_BYTE, (GLvoid*)&data[0]);
     
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
+    
     m_status = E_COMMITER_STATUS_SUCCESS;
+    
     IResourceCommiter::onResourceDataCommitFinished(std::make_shared<CTextureData>(textureId));
 }

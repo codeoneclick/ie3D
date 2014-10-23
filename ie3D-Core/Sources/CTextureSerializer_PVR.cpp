@@ -28,7 +28,7 @@ void CTextureSerializer_PVR::serialize(void)
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename);
+    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename, &m_status);
     
 #if defined(__NDK__)
     i64 size = static_cast<std::memstream*>(filestream)->size();

@@ -47,7 +47,11 @@ void CMeshCommiter_MDL_01::commit(void)
 	memcpy(indexData, &mesh->getIndexData()[0], sizeof(ui16) * mesh->getNumIndices());
     indexBuffer->unlock();
     
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
+    
     m_status = E_COMMITER_STATUS_SUCCESS;
+    
     IResourceCommiter::onResourceDataCommitFinished(vertexBuffer);
     IResourceCommiter::onResourceDataCommitFinished(indexBuffer);
 }

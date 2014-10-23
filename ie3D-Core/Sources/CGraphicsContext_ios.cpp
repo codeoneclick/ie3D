@@ -43,7 +43,11 @@ CGraphicsContext_ios::CGraphicsContext_ios(ISharedOGLWindowRef window)
     const UIView* hwnd = (__bridge UIView*)m_window->getHWND();
     assert([hwnd.layer isKindOfClass:[CAEAGLLayer class]]);
     
+#if defined(__OPENGL_30__)
+    m_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+#else
     m_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+#endif
     assert(m_context != nullptr);
     
     ui8 result = [EAGLContext setCurrentContext:m_context];

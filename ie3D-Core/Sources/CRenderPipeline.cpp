@@ -11,6 +11,7 @@
 #include "CRenderTechniqueWorldSpace.h"
 #include "CRenderTechniqueScreenSpace.h"
 #include "IGraphicsContext.h"
+#include "CTexture.h"
 
 CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext) : IRenderTechniqueImporter(graphicContext), IRenderTechniqueAccessor()
 {
@@ -78,11 +79,11 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         m_numTriangles += 2;
     }
     
-    /*GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-    assert(status == GL_FRAMEBUFFER_COMPLETE);
     GLenum error = glGetError();
-    assert(error == GL_NO_ERROR);*/
-    
+    if(error != GL_NO_ERROR)
+    {
+        std::cout<<"OpenGL error: "<<error<<std::endl;
+    }
     m_graphicsContext->draw();
 }
 

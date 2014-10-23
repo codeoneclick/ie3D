@@ -1,3 +1,17 @@
+
+#if defined(__OPENGL_30__)
+
+in  vec4   OUT_TexCoordProjection;
+in  vec2   OUT_TexCoordDisplace_01;
+in  vec2   OUT_TexCoordDisplace_02;
+in  vec2   OUT_TexCoord;
+in  vec3   OUT_LightPosition;
+in  vec3   OUT_CameraPosition;
+in  vec3   OUT_Position;
+in  vec4   OUT_Extra;
+
+#else
+
 varying  vec4   OUT_TexCoordProjection;
 varying  vec2   OUT_TexCoordDisplace_01;
 varying  vec2   OUT_TexCoordDisplace_02;
@@ -6,6 +20,8 @@ varying  vec3   OUT_LightPosition;
 varying  vec3   OUT_CameraPosition;
 varying  vec3   OUT_Position;
 varying  vec4   OUT_Extra;
+
+#endif
 
 uniform sampler2D SAMPLER_01;
 uniform sampler2D SAMPLER_02;

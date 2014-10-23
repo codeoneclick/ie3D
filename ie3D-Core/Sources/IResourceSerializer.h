@@ -29,9 +29,6 @@ protected:
     
 #endif
     
-    std::shared_ptr<std::istream> openStream(const std::string &filename);
-    void closeStream(const std::shared_ptr<std::istream>& stream);
-    
     void onResourceDataSerializationFinished(ISharedResourceDataRef resourceData);
     
 public:
@@ -53,6 +50,9 @@ public:
     E_SERIALIZER_STATUS getStatus(void) const;
     
     virtual void serialize(void) = 0;
+    
+    static std::shared_ptr<std::istream> openStream(const std::string &filename, E_SERIALIZER_STATUS* status);
+    static void closeStream(const std::shared_ptr<std::istream>& stream);
 };
 
 #endif 

@@ -1,15 +1,18 @@
-attribute vec3 IN_Position;
-attribute vec2 IN_TexCoord;
-attribute vec4 IN_Normal;
-attribute vec4 IN_Tangent;
-attribute vec4 IN_Color;
+
+#if defined(__OPENGL_30__)
+
+out vec3 OUT_TexCoord;
+
+#else
+
+varying vec3 OUT_TexCoord;
+
+#endif
 
 uniform mat4 MATRIX_Projection;
 uniform mat4 MATRIX_View;
 uniform mat4 MATRIX_Normal;
 uniform mat4 MATRIX_World;
-
-varying vec3 OUT_TexCoord;
 
 void main(void)
 {

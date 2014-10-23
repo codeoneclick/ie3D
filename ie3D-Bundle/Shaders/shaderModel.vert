@@ -1,10 +1,15 @@
 
-attribute vec3 IN_Position;
-attribute vec2 IN_TexCoord;
-attribute vec4 IN_Normal;
-attribute vec4 IN_Tangent;
-attribute vec4 IN_Color;
-attribute vec4 IN_Extra;
+#if defined(__OPENGL_30__)
+
+out vec2   OUT_TexCoord;
+out float  OUT_ClipPlane;
+
+#else
+
+varying vec2   OUT_TexCoord;
+varying float  OUT_ClipPlane;
+
+#endif
 
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
@@ -17,9 +22,6 @@ uniform int    INT_FLAG_01;
 uniform int    INT_FLAG_02;
 uniform int    INT_FLAG_03;
 uniform int    INT_FLAG_04;
-
-varying vec2   OUT_TexCoord;
-varying float  OUT_ClipPlane;
 
 void main(void)
 {

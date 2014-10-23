@@ -1,4 +1,13 @@
+#if defined(__OPENGL_30__)
+
+in vec3 OUT_TexCoord;
+
+#else
+
 varying vec3 OUT_TexCoord;
+
+#endif
+
 uniform samplerCube SAMPLER_01;
 
 void main(void)

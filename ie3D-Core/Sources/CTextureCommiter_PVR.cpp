@@ -22,9 +22,6 @@ CTextureCommiter_PVR::~CTextureCommiter_PVR(void)
 
 void CTextureCommiter_PVR::commit(void)
 {
-    GLenum error = glGetError();
-    assert(error == GL_NO_ERROR);
-    
     m_status = E_COMMITER_STATUS_INPROGRESS;
     assert(m_resource != nullptr);
     CSharedTexture texture = std::static_pointer_cast<CTexture>(m_resource);
@@ -49,7 +46,7 @@ void CTextureCommiter_PVR::commit(void)
 		width >>= 1; height >>= 1;
 	}
     
-    error = glGetError();
+    GLenum error = glGetError();
     assert(error == GL_NO_ERROR);
     
     m_status = E_COMMITER_STATUS_SUCCESS;

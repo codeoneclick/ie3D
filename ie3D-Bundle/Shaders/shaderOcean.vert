@@ -1,9 +1,27 @@
-attribute vec3 IN_Position;
-attribute vec2 IN_TexCoord;
-attribute vec4 IN_Normal;
-attribute vec4 IN_Tangent;
-attribute vec4 IN_Color;
-attribute vec4 IN_Extra;
+
+#if defined(__OPENGL_30__)
+
+out vec3   OUT_LightPosition;
+out vec3   OUT_CameraPosition;
+out vec3   OUT_Position;
+out vec2   OUT_TexCoord;
+out vec4   OUT_TexCoordProjection;
+out vec2   OUT_TexCoordDisplace_01;
+out vec2   OUT_TexCoordDisplace_02;
+out vec4   OUT_Extra;
+
+#else
+
+varying vec3   OUT_LightPosition;
+varying vec3   OUT_CameraPosition;
+varying vec3   OUT_Position;
+varying vec2   OUT_TexCoord;
+varying vec4   OUT_TexCoordProjection;
+varying vec2   OUT_TexCoordDisplace_01;
+varying vec2   OUT_TexCoordDisplace_02;
+varying vec4   OUT_Extra;
+
+#endif
 
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
@@ -15,15 +33,6 @@ uniform vec3   VECTOR_GlobalLightPosition;
 uniform vec4   VECTOR_ClipPlane;
 uniform int    INT_LightsCount;
 uniform float  FLOAT_Timer;
-
-varying vec3   OUT_LightPosition;
-varying vec3   OUT_CameraPosition;
-varying vec3   OUT_Position;
-varying vec2   OUT_TexCoord;
-varying vec4   OUT_TexCoordProjection;
-varying vec2   OUT_TexCoordDisplace_01;
-varying vec2   OUT_TexCoordDisplace_02;
-varying vec4   OUT_Extra;
 
 const float k_fTexCoordScale = 16.0;
 

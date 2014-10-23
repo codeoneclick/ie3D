@@ -30,6 +30,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#define __OPENGL_20__ 1
+
 #if defined(__DEBUG__)
 
 #define __PERFORMANCE_TIMER__
@@ -38,13 +40,10 @@
 
 #if defined(__IOS__) || defined(__OSX__)
 
-#define __USE_OPENGLES__
-
 #elif defined(__WIN32__)
 
 #define M_PI 3.14f
 #define M_PI_2 1.57f
-#define __USE_OPENGLES__
 
 #endif
 
@@ -60,30 +59,41 @@
 
 #if defined(__IOS__)
 
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
 #include <QuartzCore/QuartzCore.h>
-
 #include <sys/types.h>
 #include <sys/sysctl.h>
+
+#if defined(__OPENGL_20__)
+
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
+
+#elif defined(__OPENGL_30__)
+
+#include <OpenGLES/ES3/gl.h>
+#include <OpenGLES/ES3/glext.h>
+
+#endif
 
 #elif defined(__WIN32__)
 
 #include <windows.h>
-#include <EGL/egl.h>
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
 
 #elif defined(__OSX__)
 
 #include <OpenGL/OpenGL.h>
-#include <OpenGL/gl.h>
-//#include <OpenGL/gl3.h>
 
-#define glBindVertexArray glBindVertexArrayAPPLE
-#define glGenVertexArrays glGenVertexArraysAPPLE
-#define glGenerateMipmap glGenerateMipmapEXT
-#define glDeleteVertexArrays glDeleteVertexArraysAPPLE
+#if defined(__OPENGL_20__)
+
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
+
+#elif defined(__OPENGL_30__)
+
+#include <OpenGL/gl3.h>
+#include <OpenGL/gl3ext.h>
+
+#endif
 
 #elif defined(__NDK__)
 

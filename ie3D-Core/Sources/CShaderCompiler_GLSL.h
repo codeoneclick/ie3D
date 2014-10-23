@@ -17,6 +17,16 @@ private:
     
 protected:
     
+    static bool m_isVSCommonShaderLoaded;
+    static bool m_isFSCommonShaderLoaded;
+    
+    static std::string m_vsShaderCommon;
+    static std::string m_fsShaderCommon;
+    
+    static std::string getVSCommonShader(void);
+    static std::string getFSCommonShader(void);
+    static std::string getCommonShader(const std::string& filename);
+    
 public:
     
     CShaderCompiler_GLSL(void) = default;

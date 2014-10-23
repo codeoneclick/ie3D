@@ -1,9 +1,19 @@
-uniform sampler2D SAMPLER_01;
+
+#if defined(__OPENGL_30__)
+
+in vec3 OUT_RayleighPhase;
+in vec4 OUT_Mie;
+in vec3 OUT_Direction;
+in vec3 OUT_LightDirection;
+
+#else
 
 varying vec3 OUT_RayleighPhase;
 varying vec4 OUT_Mie;
 varying vec3 OUT_Direction;
 varying vec3 OUT_LightDirection;
+
+#endif
 
 const float fG = -0.98;
 const float fG2 = -0.98 * -0.98;
@@ -32,5 +42,6 @@ void main(void)
     vec3 vRayleighPhase = getRayleighPhase(fCos.y) * OUT_RayleighPhase;
     vColor.rgb = 1.0 - exp(fExposure * (vRayleighPhase + vMie));
     vColor.a = min(OUT_Mie.a, 0.75);
+
     gl_FragColor = vColor;
 }

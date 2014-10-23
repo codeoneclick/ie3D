@@ -27,7 +27,7 @@ void CSequenceSerializer_SEQ::serialize(void)
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename);
+    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename, &m_status);
     
     i32 numBones = 0;
     filestream->read((char*)&numBones, sizeof(i32));

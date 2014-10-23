@@ -45,6 +45,7 @@ private:
     
 protected:
     
+    ui32 m_vao;
     ui32 m_handles[k_NUM_REPLACEMENT_VERTEX_BUFFERS];
     i32 m_index;
     

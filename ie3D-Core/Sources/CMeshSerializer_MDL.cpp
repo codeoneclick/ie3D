@@ -29,7 +29,7 @@ void CMeshSerializer_MDL::serialize(void)
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename);
+    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_filename, &m_status);
     
     CSharedMesh mesh = std::static_pointer_cast<CMesh>(m_resource);
     

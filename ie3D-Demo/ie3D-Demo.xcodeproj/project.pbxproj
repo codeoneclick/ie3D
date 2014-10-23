@@ -226,6 +226,10 @@
 		217EF8BA19F7E11300F339A0 /* static_model_tank_medium.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF89B19F7E11200F339A0 /* static_model_tank_medium.png */; };
 		217EF8BB19F7E11300F339A0 /* static_model_tank_tracks.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF89C19F7E11200F339A0 /* static_model_tank_tracks.png */; };
 		217EF8BC19F7E11300F339A0 /* static_model_tank_tracks.png in Resources */ = {isa = PBXBuildFile; fileRef = 217EF89C19F7E11200F339A0 /* static_model_tank_tracks.png */; };
+		217EF90819F9222A00F339A0 /* shaderCommon.frag in Resources */ = {isa = PBXBuildFile; fileRef = 217EF90619F9222A00F339A0 /* shaderCommon.frag */; };
+		217EF90919F9222A00F339A0 /* shaderCommon.frag in Resources */ = {isa = PBXBuildFile; fileRef = 217EF90619F9222A00F339A0 /* shaderCommon.frag */; };
+		217EF90A19F9222A00F339A0 /* shaderCommon.vert in Resources */ = {isa = PBXBuildFile; fileRef = 217EF90719F9222A00F339A0 /* shaderCommon.vert */; };
+		217EF90B19F9222A00F339A0 /* shaderCommon.vert in Resources */ = {isa = PBXBuildFile; fileRef = 217EF90719F9222A00F339A0 /* shaderCommon.vert */; };
 		219A12EE1998B54100E674CB /* model.mdl_anim in Resources */ = {isa = PBXBuildFile; fileRef = 219A12DF1998B54100E674CB /* model.mdl_anim */; };
 		219A12EF1998B54100E674CB /* model.mdl_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E01998B54100E674CB /* model.mdl_mesh */; };
 		219A12F01998B54100E674CB /* model.mdl_sk in Resources */ = {isa = PBXBuildFile; fileRef = 219A12E11998B54100E674CB /* model.mdl_sk */; };
@@ -480,6 +484,8 @@
 		217EF89A19F7E11200F339A0 /* static_model_tank_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = static_model_tank_light.png; path = "../ie3D-Bundle/Textures/static_model_tank_light.png"; sourceTree = SOURCE_ROOT; };
 		217EF89B19F7E11200F339A0 /* static_model_tank_medium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = static_model_tank_medium.png; path = "../ie3D-Bundle/Textures/static_model_tank_medium.png"; sourceTree = SOURCE_ROOT; };
 		217EF89C19F7E11200F339A0 /* static_model_tank_tracks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = static_model_tank_tracks.png; path = "../ie3D-Bundle/Textures/static_model_tank_tracks.png"; sourceTree = SOURCE_ROOT; };
+		217EF90619F9222A00F339A0 /* shaderCommon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderCommon.frag; path = "../ie3D-Bundle/Shaders/shaderCommon.frag"; sourceTree = SOURCE_ROOT; };
+		217EF90719F9222A00F339A0 /* shaderCommon.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderCommon.vert; path = "../ie3D-Bundle/Shaders/shaderCommon.vert"; sourceTree = SOURCE_ROOT; };
 		219A12DF1998B54100E674CB /* model.mdl_anim */ = {isa = PBXFileReference; lastKnownFileType = file; name = model.mdl_anim; path = "../ie3D-Bundle/Meshes/model.mdl_anim"; sourceTree = SOURCE_ROOT; };
 		219A12E01998B54100E674CB /* model.mdl_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; name = model.mdl_mesh; path = "../ie3D-Bundle/Meshes/model.mdl_mesh"; sourceTree = SOURCE_ROOT; };
 		219A12E11998B54100E674CB /* model.mdl_sk */ = {isa = PBXFileReference; lastKnownFileType = file; name = model.mdl_sk; path = "../ie3D-Bundle/Meshes/model.mdl_sk"; sourceTree = SOURCE_ROOT; };
@@ -853,6 +859,8 @@
 		21BC34E219081510007B99DA /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				217EF90619F9222A00F339A0 /* shaderCommon.frag */,
+				217EF90719F9222A00F339A0 /* shaderCommon.vert */,
 				211B0D5E19DD660100B760B7 /* shaderAtmosphericScattering.frag */,
 				211B0D5F19DD660100B760B7 /* shaderAtmosphericScattering.vert */,
 				2173345619642B47002B3F90 /* shaderModel.frag */,
@@ -1199,6 +1207,7 @@
 				212EECDA19CC5D9C00DA02B7 /* tank_light_tower.mdl_01 in Resources */,
 				212EECDB19CC5D9C00DA02B7 /* tank_medium_tower.mdl_01 in Resources */,
 				212EED8C19D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml in Resources */,
+				217EF90B19F9222A00F339A0 /* shaderCommon.vert in Resources */,
 				212EED1A19CC608400DA02B7 /* ie3D-Demo-osx.plist in Resources */,
 				212EECDC19CC5D9C00DA02B7 /* gameobject.tank.heavy.xml in Resources */,
 				212EECDD19CC5D9C00DA02B7 /* model.mdl_mesh in Resources */,
@@ -1222,6 +1231,7 @@
 				212EECF319CC5D9C00DA02B7 /* shaderScreenSSAO.vert in Resources */,
 				2179741219F4F69E00A98630 /* shaderAnimatedGameObjectND.frag in Resources */,
 				212EECF619CC5D9C00DA02B7 /* gameobject.tank.heavy.right.track.xml in Resources */,
+				217EF90919F9222A00F339A0 /* shaderCommon.frag in Resources */,
 				211B0D6319DD660100B760B7 /* shaderAtmosphericScattering.vert in Resources */,
 				212EECF719CC5D9C00DA02B7 /* shaderScreenSSAO.frag in Resources */,
 				212EECF819CC5D9C00DA02B7 /* map_05.png in Resources */,
@@ -1351,6 +1361,7 @@
 				219A13161998B8E800E674CB /* gameobject.tank.medium.body.xml in Resources */,
 				219A12F81998B54100E674CB /* tank_light_tower.mdl_01 in Resources */,
 				212EED8B19D0698900DA02B7 /* material.tank.heavy.tower.reflection.xml in Resources */,
+				217EF90A19F9222A00F339A0 /* shaderCommon.vert in Resources */,
 				219A12FC1998B54100E674CB /* tank_medium_tower.mdl_01 in Resources */,
 				219A13101998B8E800E674CB /* gameobject.tank.heavy.xml in Resources */,
 				219A12EF1998B54100E674CB /* model.mdl_mesh in Resources */,
@@ -1374,6 +1385,7 @@
 				216204401949AF2300D129AD /* shaderScreenSSAO.vert in Resources */,
 				2179741119F4F69E00A98630 /* shaderAnimatedGameObjectND.frag in Resources */,
 				219A130E1998B8E800E674CB /* gameobject.tank.heavy.right.track.xml in Resources */,
+				217EF90819F9222A00F339A0 /* shaderCommon.frag in Resources */,
 				211B0D6219DD660100B760B7 /* shaderAtmosphericScattering.vert in Resources */,
 				2162043F1949AF2300D129AD /* shaderScreenSSAO.frag in Resources */,
 				2162093819A1F04C00DECBBC /* map_05.png in Resources */,

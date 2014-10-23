@@ -94,14 +94,12 @@
 {
     unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
     self.m_context->keyDown(key);
-    std::cout<<"key down: "<<key<<std::endl;
 }
 
 - (void)keyUp:(NSEvent *)event
 {
     unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
     self.m_context->keyUp(key);
-    std::cout<<"key up: "<<key<<std::endl;
 }
 
 @end

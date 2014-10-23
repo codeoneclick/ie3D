@@ -18,11 +18,19 @@ m_mode(mode)
     m_data = new SAttributeVertex[m_allocatedSize];
     m_index = -1;
     glGenBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
+    
+#if defined(__OPENGL_30__)
+    glGenVertexArrays(1, &m_vao);
+    glBindVertexArray(m_vao);
+#endif
 }
 
 CVertexBuffer::~CVertexBuffer(void)
 {
     glDeleteBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
+#if defined(__OPENGL_30__)
+    glDeleteVertexArrays(1, &m_vao);
+#endif
     delete[] m_data;
 }
 
@@ -94,6 +102,9 @@ void CVertexBuffer::bind(const i32* attributes) const
     {
         assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
         glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
+#if defined(__OPENGL_30__)
+        glBindVertexArray(m_vao);
+#endif
         if(attributes[E_SHADER_ATTRIBUTE_POSITION] >= 0)
         {
             glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_POSITION]);

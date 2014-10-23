@@ -57,8 +57,11 @@ void CMeshCommiter_MDL::commit(void)
     
     std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(mesh->getNumIndices(), GL_STATIC_DRAW);
     ui16* indexData = indexBuffer->lock();
-	memcpy(indexData, &mesh->getIndexData()[0], sizeof(ui16) * mesh->getNumIndices());
+    memcpy(indexData, &mesh->getIndexData()[0], sizeof(ui16) * mesh->getNumIndices());
     indexBuffer->unlock();
+    
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
     
     m_status = E_COMMITER_STATUS_SUCCESS;
     IResourceCommiter::onResourceDataCommitFinished(vertexBuffer);

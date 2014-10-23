@@ -30,13 +30,13 @@ void CShaderSerializer_GLSL::serialize(void)
     assert(m_resource != nullptr);
     m_status = E_SERIALIZER_STATUS_INPROGRESS;
     
-    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_vsFilename);
+    std::shared_ptr<std::istream> filestream = IResourceSerializer::openStream(m_vsFilename, &m_status);
     std::stringstream vsStringstream;
     vsStringstream<<filestream->rdbuf();
     std::string vsSourceCode(vsStringstream.str());
     IResourceSerializer::closeStream(filestream);
     
-    filestream = IResourceSerializer::openStream(m_fsFilename);
+    filestream = IResourceSerializer::openStream(m_fsFilename, &m_status);
     std::stringstream fsStringstream;
     fsStringstream<<filestream->rdbuf();
     std::string fsSourceCode(fsStringstream.str());

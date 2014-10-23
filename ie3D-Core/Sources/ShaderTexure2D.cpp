@@ -9,10 +9,15 @@
 
 const char* ShaderTexure2D_vert = STRING_SHADER
 (
- attribute vec3 IN_Position;
- attribute vec2 IN_TexCoord;
-
+#if defined(__OPENGL_30__)
+ 
+ out vec2   OUT_TexCoord;
+ 
+#else
+ 
  varying vec2   OUT_TexCoord;
+ 
+#endif
  
  void main(void)
 {
@@ -23,11 +28,20 @@ const char* ShaderTexure2D_vert = STRING_SHADER
 
 const char* ShaderTexure2D_frag = STRING_SHADER
 (
+#if defined(__OPENGL_30__)
+ 
+ in vec2 OUT_TexCoord;
+ 
+#else
+ 
  varying vec2 OUT_TexCoord;
+ 
+#endif
+ 
  uniform sampler2D  SAMPLER_01;
  
  void main()
 {
-	gl_FragColor = texture2D(SAMPLER_01, OUT_TexCoord);
+    gl_FragColor = texture2D(SAMPLER_01, OUT_TexCoord);
 }
  );

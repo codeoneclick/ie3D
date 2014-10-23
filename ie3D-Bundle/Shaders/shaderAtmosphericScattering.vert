@@ -1,10 +1,19 @@
 
-attribute vec3 IN_Position;
-attribute vec2 IN_TexCoord;
-attribute vec4 IN_Normal;
-attribute vec4 IN_Tangent;
-attribute vec4 IN_Color;
-attribute vec4 IN_Extra;
+#if defined(__OPENGL_30__)
+
+out vec3 OUT_RayleighPhase;
+out vec4 OUT_Mie;
+out vec3 OUT_Direction;
+out vec3 OUT_LightDirection;
+
+#else
+
+varying vec3 OUT_RayleighPhase;
+varying vec4 OUT_Mie;
+varying vec3 OUT_Direction;
+varying vec3 OUT_LightDirection;
+
+#endif
 
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
@@ -18,11 +27,6 @@ const vec4 radiusInOutHeightMinMax = vec4(6356.75, 6456.55, 0.0, 256.0);
 const vec4 scatterFactors = vec4(0.04, 0.03, 0.025, 0.0188);
 const float fKrESun = 20.0 * 0.0025;
 const float fKmESun = 20.0 * 0.001;
-
-varying vec3 OUT_RayleighPhase;
-varying vec4 OUT_Mie;
-varying vec3 OUT_Direction;
-varying vec3 OUT_LightDirection;
 
 float rayIntersection(vec3 position, vec3 direction, float outerRadius)
 {

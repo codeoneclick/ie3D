@@ -1,5 +1,15 @@
+
+#if defined(__OPENGL_30__)
+
+in vec2 OUT_TexCoord;
+in vec2 OUT_TexCoordScaled;
+
+#else
+
 varying  vec2 OUT_TexCoord;
 varying vec2 OUT_TexCoordScaled;
+
+#endif
 
 uniform sampler2D SAMPLER_01;
 uniform sampler2D SAMPLER_02;

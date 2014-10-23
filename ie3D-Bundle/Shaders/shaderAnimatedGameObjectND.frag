@@ -1,5 +1,13 @@
 
+#if defined(__OPENGL_30__)
+
+in vec4 OUT_Position;
+
+#else
+
 varying vec4 OUT_Position;
+
+#endif
 
 const vec2 vCameraRange = vec2(0.01, 1024.0);
 

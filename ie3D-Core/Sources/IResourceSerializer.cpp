@@ -23,7 +23,7 @@ IResourceSerializer::~IResourceSerializer(void)
     
 }
 
-std::shared_ptr<std::istream> IResourceSerializer::openStream(const std::string &filename)
+std::shared_ptr<std::istream> IResourceSerializer::openStream(const std::string &filename, E_SERIALIZER_STATUS* status)
 {
 #if defined(__NDK__)
     std::memstream* mstream;
@@ -48,7 +48,7 @@ std::shared_ptr<std::istream> IResourceSerializer::openStream(const std::string 
         filestream->open(bundlepath().append(filename).c_str());
         if (!filestream->is_open())
         {
-            m_status = E_SERIALIZER_STATUS_FAILURE;
+            *status = E_SERIALIZER_STATUS_FAILURE;
             assert(false);
         }
     }
