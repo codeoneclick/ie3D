@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#define __OPENGL_20__ 1
+#define __OPENGL_30__ 1
 
 #if defined(__DEBUG__)
 
@@ -63,7 +63,7 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
-#if defined(__OPENGL_30__)
+#if defined(__OPENGL_20__)
 
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>

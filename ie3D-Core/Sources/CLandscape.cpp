@@ -142,7 +142,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         });
                     }
                     else if(m_chunks[i + j * numChunksZ]->getInprogressLOD() != LOD &&
-                            m_chunks[i + j * numChunksZ]->getInprogressLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
+                            m_chunks[i + j * numChunksZ]->getCurrentLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
                     {
                         m_chunks[i + j * numChunksZ]->setInprogressLOD(LOD);
                         m_heightmapProcessor->stopChunkLoading(i, j, [this, i , j, numChunksZ, LOD](void){
