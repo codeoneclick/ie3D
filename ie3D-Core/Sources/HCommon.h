@@ -63,7 +63,7 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
-#if defined(__OPENGL_20__)
+#if defined(__OPENGL_30__)
 
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>

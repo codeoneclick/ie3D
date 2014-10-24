@@ -1,5 +1,14 @@
+#if defined(__OPENGL_30__)
+
+in vec2 OUT_TexCoord;
+in vec2 OUT_Position;
+
+#else
+
 varying vec2 OUT_TexCoord;
 varying vec2 OUT_Position;
+
+#endif
 
 uniform vec2 IN_Center;
 uniform float IN_Radius;
