@@ -89,7 +89,15 @@ void CDemoGameScene::load(void)
     
     m_model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(m_model);
-    m_model->setScale(glm::vec3(4.0, 4.0, 4.0));
+    
+    CSharedModel model = m_root->createModel("gameobject.model.xml");
+    m_root->addModel(model);
+    model->setPosition(glm::vec3(3.0, 2.0, 24.0));
+    
+    model = m_root->createModel("gameobject.model.xml");
+    m_root->addModel(model);
+    model->setPosition(glm::vec3(3.0, 2.0, 32.0));
+    //m_model->setScale(glm::vec3(4.0, 4.0, 4.0));
     
     /*IEGameTransition* transition = static_cast<IEGameTransition*>(m_root);
     
