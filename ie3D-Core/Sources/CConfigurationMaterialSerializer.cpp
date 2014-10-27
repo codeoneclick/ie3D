@@ -172,3 +172,20 @@ void CConfigurationMaterialSerializer::deserialize(const std::string& filename, 
 {
     
 }
+
+void CConfigurationMaterialSerializer::serializeMaterialNodes(const std::string& filename,
+                                                              CSharedConfigurationGameObjectRef gameObjectConfiguration,
+                                                              const pugi::xml_node& mainNode)
+{
+    pugi::xml_node materialsNode = mainNode.child(gameObjectConfiguration->kGameObjectMaterialsConfigurationsNode.c_str());
+    for (pugi::xml_node material = materialsNode.child(gameObjectConfiguration->kGameObjectMaterialConfigurationNode.c_str());
+         material;
+         material = material.next_sibling(gameObjectConfiguration->kGameObjectMaterialConfigurationNode.c_str()))
+    {
+        std::string filename = material.attribute(gameObjectConfiguration->kGameObjectMaterialFilenameAttribute.c_str()).as_string();
+        gameObjectConfiguration->setAttribute(getConfigurationAttributeKey(gameObjectConfiguration->kGameObjectMaterialsConfigurationsNode,
+                                                                           gameObjectConfiguration->kGameObjectMaterialConfigurationNode,
+                                                                           gameObjectConfiguration->kGameObjectMaterialFilenameAttribute),
+                                              std::make_shared<CConfigurationAttribute>(filename));
+    }
+}

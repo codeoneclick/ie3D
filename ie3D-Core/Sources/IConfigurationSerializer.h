@@ -18,8 +18,8 @@ private:
     
 protected:
 
-    pugi::xml_parse_result openXMLDocument(pugi::xml_document& document, const std::string& filename);
-    
+    static pugi::xml_parse_result openXMLDocument(pugi::xml_document& document, const std::string& filename);
+
 public:
     
     IConfigurationSerializer(void);

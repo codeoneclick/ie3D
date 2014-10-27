@@ -25,6 +25,10 @@ public:
     ISharedConfiguration serialize(const std::string& filename);
     void deserialize(const std::string& filename,
                      ISharedConfigurationRef configuration);
+    
+    static void serializeMaterialNodes(const std::string& filename,
+                                       CSharedConfigurationGameObjectRef gameObjectConfiguration,
+                                       const pugi::xml_node& mainNode);
 };
 
-#endif 
+#endif

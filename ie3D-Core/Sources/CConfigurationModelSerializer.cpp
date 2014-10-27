@@ -7,6 +7,7 @@
 //
 
 #include "CConfigurationModelSerializer.h"
+#include "CConfigurationMaterialSerializer.h"
 #include "CConfigurationGameObjects.h"
 
 CConfigurationModelSerializer::CConfigurationModelSerializer(void)
@@ -26,30 +27,21 @@ ISharedConfiguration CConfigurationModelSerializer::serialize(const std::string&
     assert(result.status == pugi::status_ok);
     
     std::shared_ptr<CConfigurationModel> modelConfiguration = std::make_shared<CConfigurationModel>();
-    pugi::xml_node node = document.child(modelConfiguration->kModelMainNode.c_str());
+    pugi::xml_node mainNode = document.child(modelConfiguration->kModelMainNode.c_str());
     
-    std::string meshFilename = node.attribute(modelConfiguration->kModelMeshFilenameAttribute.c_str()).as_string();
+    std::string meshFilename = mainNode.attribute(modelConfiguration->kModelMeshFilenameAttribute.c_str()).as_string();
     modelConfiguration->setAttribute(getConfigurationAttributeKey(modelConfiguration->kModelMainNode,
                                                              modelConfiguration->kModelMeshFilenameAttribute),
                                 std::make_shared<CConfigurationAttribute>(meshFilename));
     
-    bool isBatching = node.attribute(modelConfiguration->kModelMeshIsBatchingAttribute.c_str()).as_bool();
+    bool isBatching = mainNode.attribute(modelConfiguration->kModelMeshIsBatchingAttribute.c_str()).as_bool();
     modelConfiguration->setAttribute(getConfigurationAttributeKey(modelConfiguration->kModelMainNode,
                                                              modelConfiguration->kModelMeshIsBatchingAttribute),
                                 std::make_shared<CConfigurationAttribute>(isBatching));
     
-    pugi::xml_node materialsNode = node.child(modelConfiguration->kGameObjectMaterialsConfigurationsNode.c_str());
-    for (pugi::xml_node material = materialsNode.child(modelConfiguration->kGameObjectMaterialConfigurationNode.c_str());
-         material;
-         material = material.next_sibling(modelConfiguration->kGameObjectMaterialConfigurationNode.c_str()))
-    {
-        std::string filename = material.attribute(modelConfiguration->kGameObjectMaterialFilenameAttribute.c_str()).as_string();
-        modelConfiguration->setAttribute(getConfigurationAttributeKey(modelConfiguration->kGameObjectMaterialsConfigurationsNode,
-                                                                 modelConfiguration->kGameObjectMaterialConfigurationNode,
-                                                                 modelConfiguration->kGameObjectMaterialFilenameAttribute),
-                                    std::make_shared<CConfigurationAttribute>(filename));
-    }
-    
+    CConfigurationMaterialSerializer::serializeMaterialNodes(filename,
+                                                             modelConfiguration,
+                                                             mainNode);
     return modelConfiguration;
 }
 

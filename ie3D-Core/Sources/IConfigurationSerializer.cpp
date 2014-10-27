@@ -7,6 +7,7 @@
 //
 
 #include "IConfigurationSerializer.h"
+#include "CConfigurationGameObjects.h"
 #include "CResourceAccessor.h"
 #include "CCommonOS.h"
 
@@ -48,4 +49,3 @@ pugi::xml_parse_result IConfigurationSerializer::openXMLDocument(pugi::xml_docum
 #endif
     return result;
 }
-
