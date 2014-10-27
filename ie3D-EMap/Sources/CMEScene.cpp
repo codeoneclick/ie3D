@@ -28,6 +28,7 @@
 #include "CResourceAccessor.h"
 #include "CTexture.h"
 #include "CEComplexModel.h"
+#include "CMEPlacementModel.h"
 
 CMEScene::CMEScene(IGameTransition* root) :
 IScene(root),
@@ -91,6 +92,10 @@ void CMEScene::load(void)
     m_root->addCustomGameObject(m_landscapeBrush);
     m_landscapeBrush->setLandscape(m_landscape);
     m_landscapeBrush->setSize(m_editableSettings.m_brushSize);
+    
+    m_placementModel = transition->createPlacementModel("gameobject.placement.model.xml");
+    m_root->addCustomGameObject(m_placementModel);
+    m_placementModel->setLandscape(m_landscape);
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),

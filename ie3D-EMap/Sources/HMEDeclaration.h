@@ -12,8 +12,12 @@
 #include "HEDeclaration.h"
 
 class CMELandscapeBrush;
-typedef std::shared_ptr<CMELandscapeBrush> CSharedMELandscapeBrush;
-typedef const CSharedMELandscapeBrush& CSharedMELandscapeBrushRef;
+typedef std::shared_ptr<CMELandscapeBrush> CMESharedLandscapeBrush;
+typedef const CMESharedLandscapeBrush& CMESharedLandscapeBrushRef;
+
+class CMEPlacementModel;
+typedef std::shared_ptr<CMEPlacementModel> CMESharedPlacementModel;
+typedef const CMESharedPlacementModel& CMESharedPlacementModelRef;
 
 class CMEUIToSceneCommands;
 typedef std::shared_ptr<CMEUIToSceneCommands> CSharedMEUIToSceneCommands;

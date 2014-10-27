@@ -32,4 +32,20 @@ public:
     glm::vec2 getSize(void) const;
 };
 
+class CMEConfigurationPlacementModel : public CConfigurationGameObject
+{
+public:
+    
+    const std::string kPlacementModelMainNode;
+    
+private:
+    
+protected:
+    
+public:
+    
+    CMEConfigurationPlacementModel(void);
+    ~CMEConfigurationPlacementModel(void);
+};
+
 #endif

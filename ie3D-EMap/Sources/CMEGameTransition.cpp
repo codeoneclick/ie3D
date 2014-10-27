@@ -73,9 +73,16 @@ void CMEGameTransition::setSceneToUICommands(CSharedMESceneToUICommandsRef comma
     std::static_pointer_cast<CMEScene>(m_scene)->setSceneToUICommands(commands);
 }
 
-CSharedMELandscapeBrush CMEGameTransition::createLandscapeBrush(const std::string& filename)
+CMESharedLandscapeBrush CMEGameTransition::createLandscapeBrush(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
     std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
     return sceneFabricator->createLandscapeBrush(filename);
+}
+
+CMESharedPlacementModel CMEGameTransition::createPlacementModel(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
+    return sceneFabricator->createPlacementModel(filename);
 }

@@ -25,6 +25,9 @@ public:
     void loadLandscapeBrushConfiguration(const std::string& filename,
                                          ISharedConfigurationLoadingHandlerRef handler);
     
+    void loadPlacementModelConfiguration(const std::string& filename,
+                                         ISharedConfigurationLoadingHandlerRef handler);
+    
 };
 
 

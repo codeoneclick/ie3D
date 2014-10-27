@@ -10,13 +10,16 @@
 #define CMEPlacementModel_h
 
 #include "IGameObject.h"
+#include "HMEEnums.h"
 
-class CMEPlacementMesh : public IGameObject
+class CMEPlacementModel : public IGameObject
 {
 private:
     
     CSharedLandscape m_landscape;
     CSharedModel m_model;
+    
+    std::array<CSharedMesh, E_PLACEMENT_MODEL_ARROW_MAX> m_arrows;
     
 protected:
     
@@ -33,20 +36,16 @@ protected:
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
     
-    void createMesh(f32 radius);
+    CSharedMesh createArrowMesh(E_PLACEMENT_MODEL_ARROW arrow);
     
 public:
     
-    CMEPlacementMesh(CSharedResourceAccessorRef resourceAccessor,
-                   ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
-    ~CMEPlacementMesh(void);
+    CMEPlacementModel(CSharedResourceAccessorRef resourceAccessor,
+                     ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
+    ~CMEPlacementModel(void);
     
     void setLandscape(CSharedLandscapeRef landscape);
-    
-    void setPosition(const glm::vec3& position);
-    
-    void setSize(f32 size);
 };
 
 
-#endif /* defined(__ie3D_EMap__CMEPlacementMesh__) */
+#endif

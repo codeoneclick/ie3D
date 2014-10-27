@@ -32,15 +32,12 @@ void CSkeletonSerializer_SK::serialize(void)
     
     ui32 numBones; i32 id, parentId;
     filestream->read((char*)&numBones, sizeof(i32));
-    std::cout<<"numBones: "<<numBones<<std::endl;
     std::shared_ptr<CSkeletonData> skeletonData = std::make_shared<CSkeletonData>(numBones);
     
     for (ui32 i = 0; i < numBones; ++i)
     {
         filestream->read((char*)&id, sizeof(i32));
-        std::cout<<"boneId: "<<id<<std::endl;
         filestream->read((char*)&parentId, sizeof(i32));
-        std::cout<<"parentId: "<<parentId<<std::endl;
         CSharedBone bone = skeletonData->getBone(id);
         if(bone == nullptr)
         {

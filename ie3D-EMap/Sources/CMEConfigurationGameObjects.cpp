@@ -38,3 +38,15 @@ glm::vec2 CMEConfigurationLandscapeBrush::getSize(void) const
     
     return glm::vec2(x, y);
 }
+
+CMEConfigurationPlacementModel::CMEConfigurationPlacementModel(void) :
+CConfigurationGameObject(E_CONFIGURATION_CLASS_CUSTOM),
+kPlacementModelMainNode("placement_model")
+{
+    
+}
+
+CMEConfigurationPlacementModel::~CMEConfigurationPlacementModel(void)
+{
+    
+}

@@ -9,6 +9,7 @@
 #include "CMEConfigurationAccessor.h"
 #include "CMEConfigurationGameObjects.h"
 #include "CMEConfigurationLandscapeBrushLoadingOperation.h"
+#include "CMEConfigurationPlacementModelLoadingOperation.h"
 
 CMEConfigurationAccessor::CMEConfigurationAccessor(void)
 {
@@ -24,6 +25,16 @@ void CMEConfigurationAccessor::loadLandscapeBrushConfiguration(const std::string
                                                                ISharedConfigurationLoadingHandlerRef handler)
 {
     std::shared_ptr<CMEConfigurationLandscapeBrushLoadingOperation> operation = std::make_shared<CMEConfigurationLandscapeBrushLoadingOperation>();
+    std::shared_ptr<CConfigurationModel> configuration = std::static_pointer_cast<CConfigurationModel>(operation->serialize(filename));
+    assert(configuration != nullptr);
+    assert(handler != nullptr);
+    handler->onConfigurationLoaded(configuration, true);
+}
+
+void CMEConfigurationAccessor::loadPlacementModelConfiguration(const std::string& filename,
+                                                               ISharedConfigurationLoadingHandlerRef handler)
+{
+    std::shared_ptr<CMEConfigurationPlacementModelLoadingOperation> operation = std::make_shared<CMEConfigurationPlacementModelLoadingOperation>();
     std::shared_ptr<CConfigurationModel> configuration = std::static_pointer_cast<CConfigurationModel>(operation->serialize(filename));
     assert(configuration != nullptr);
     assert(handler != nullptr);

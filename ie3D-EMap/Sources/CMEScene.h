@@ -37,7 +37,8 @@ protected:
     CSharedLandscape m_landscape;
     CSharedMaterial m_landscapeMaterial;
     
-    CSharedMELandscapeBrush m_landscapeBrush;
+    CMESharedLandscapeBrush m_landscapeBrush;
+    CMESharedPlacementModel m_placementModel;
     
     glm::ivec2 m_previousDraggedPoint;
     
