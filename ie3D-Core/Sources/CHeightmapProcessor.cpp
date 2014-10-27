@@ -530,10 +530,21 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
             }
         }
         
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED,
+        glTexImage2D(GL_TEXTURE_2D, 0,
+#if defined(__OPENG_30__)
+                     GL_RED,
+#else
+                     GL_ALPHA,
+#endif
                      m_heightmapData->getSizeX(),
                      m_heightmapData->getSizeZ(),
-                     0, GL_RED, GL_UNSIGNED_BYTE, data);
+                     0,
+#if defined(__OPENG_30__)
+                     GL_RED,
+#else
+                     GL_ALPHA,
+#endif
+                     GL_UNSIGNED_BYTE, data);
     }
     else
     {
@@ -560,7 +571,12 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
         glTexSubImage2D(GL_TEXTURE_2D, 0,
                         offsetX, offsetY,
                         subWidth, subHeight,
-                        GL_RED, GL_UNSIGNED_BYTE, data);
+#if defined(__OPENG_30__)
+                        GL_RED,
+#else
+                        GL_ALPHA,
+#endif
+                        GL_UNSIGNED_BYTE, data);
     }
     
     delete[] data;

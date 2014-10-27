@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#define __OPENGL_30__ 1
+#define __OPENGL_20__ 1
 
 #if defined(__DEBUG__)
 

@@ -41,7 +41,7 @@ void CMeshLoadingOperation::serialize(void)
                                                                 m_resource);
         m_serializer->serialize();
     }
-    else if(m_filename.find(".mdl") != std::string::npos)
+    else if(m_filename.find(".MDL") != std::string::npos)
     {
         std::string meshFilename = m_filename;
         meshFilename.append("_mesh");
@@ -77,7 +77,7 @@ void CMeshLoadingOperation::commit(void)
     assert(m_resource != nullptr);
     assert(m_resource->isLoaded() == true);
     
-    if(m_filename.find(".mdl") != std::string::npos)
+    if(m_filename.find(".MDL") != std::string::npos)
     {
         m_commiter = std::make_shared<CMeshCommiter_MDL>(m_filename,
                                                          m_resource);
