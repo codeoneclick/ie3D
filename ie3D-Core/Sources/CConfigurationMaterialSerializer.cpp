@@ -164,7 +164,7 @@ ISharedConfiguration CConfigurationMaterialSerializer::serialize(const std::stri
                                                                 materialConfiguration->kMaterialTexturesConfigurationsNode),
                                        textureConfiguration);
     }
-
+    
     return materialConfiguration;
 }
 
@@ -173,9 +173,8 @@ void CConfigurationMaterialSerializer::deserialize(const std::string& filename, 
     
 }
 
-void CConfigurationMaterialSerializer::serializeMaterialNodes(const std::string& filename,
-                                                              CSharedConfigurationGameObjectRef gameObjectConfiguration,
-                                                              const pugi::xml_node& mainNode)
+void CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(CSharedConfigurationGameObjectRef gameObjectConfiguration,
+                                                                        const pugi::xml_node& mainNode)
 {
     pugi::xml_node materialsNode = mainNode.child(gameObjectConfiguration->kGameObjectMaterialsConfigurationsNode.c_str());
     for (pugi::xml_node material = materialsNode.child(gameObjectConfiguration->kGameObjectMaterialConfigurationNode.c_str());

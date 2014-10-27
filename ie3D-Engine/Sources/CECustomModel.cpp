@@ -6,4 +6,4 @@
 //  Copyright (c) 2014 sergey.sergeev. All rights reserved.
 //
 
-#include "CCustomModel.h"
+#include "CECustomModel.h"

@@ -59,9 +59,8 @@ ISharedConfiguration CConfigurationSkyBoxSerializer::serialize(const std::string
                                                                    skyBoxConfiguration->kSkyBoxZNegativeTextureFilenameAttribute),
                                       std::make_shared<CConfigurationAttribute>(zNegativeTextureFilename));
     
-    CConfigurationMaterialSerializer::serializeMaterialNodes(filename,
-                                                             skyBoxConfiguration,
-                                                             mainNode);
+    CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(skyBoxConfiguration,
+                                                                       mainNode);
     return skyBoxConfiguration;
 }
 

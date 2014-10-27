@@ -57,7 +57,7 @@ void ICharacterController::update(f32 deltatime)
 {
     assert(m_gameObject != nullptr);
     
-    f32 fov = glm::mix(45.0, 60.0, m_speed);
+    f32 fov = glm::mix(45.0, 55.0, m_speed);
     m_camera->setFov(fov);
     
     m_gameObject->setPosition(m_position);

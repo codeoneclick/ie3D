@@ -152,17 +152,16 @@ ISharedConfiguration CConfigurationParticleEmitterSerializer::serialize(const st
     
     ui32 minEmittInterval = mainNode.attribute(particleEmitterConfiguration->kParticleEmitterMinEmittIntervalAttribute.c_str()).as_uint();
     particleEmitterConfiguration->setAttribute(getConfigurationAttributeKey(particleEmitterConfiguration->kParticleEmitterMainNode,
-                                                                    particleEmitterConfiguration->kParticleEmitterMinEmittIntervalAttribute),
-                                           std::make_shared<CConfigurationAttribute>(minEmittInterval));
+                                                                            particleEmitterConfiguration->kParticleEmitterMinEmittIntervalAttribute),
+                                               std::make_shared<CConfigurationAttribute>(minEmittInterval));
     
     ui32 maxEmittInterval = mainNode.attribute(particleEmitterConfiguration->kParticleEmitterMaxEmittIntervalAttribute.c_str()).as_uint();
     particleEmitterConfiguration->setAttribute(getConfigurationAttributeKey(particleEmitterConfiguration->kParticleEmitterMainNode,
-                                                                    particleEmitterConfiguration->kParticleEmitterMaxEmittIntervalAttribute),
-                                           std::make_shared<CConfigurationAttribute>(maxEmittInterval));
+                                                                            particleEmitterConfiguration->kParticleEmitterMaxEmittIntervalAttribute),
+                                               std::make_shared<CConfigurationAttribute>(maxEmittInterval));
     
-    CConfigurationMaterialSerializer::serializeMaterialNodes(filename,
-                                                             particleEmitterConfiguration,
-                                                             mainNode);
+    CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(particleEmitterConfiguration,
+                                                                       mainNode);
     
     return particleEmitterConfiguration;
 }

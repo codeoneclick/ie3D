@@ -31,17 +31,16 @@ ISharedConfiguration CConfigurationModelSerializer::serialize(const std::string&
     
     std::string meshFilename = mainNode.attribute(modelConfiguration->kModelMeshFilenameAttribute.c_str()).as_string();
     modelConfiguration->setAttribute(getConfigurationAttributeKey(modelConfiguration->kModelMainNode,
-                                                             modelConfiguration->kModelMeshFilenameAttribute),
-                                std::make_shared<CConfigurationAttribute>(meshFilename));
+                                                                  modelConfiguration->kModelMeshFilenameAttribute),
+                                     std::make_shared<CConfigurationAttribute>(meshFilename));
     
     bool isBatching = mainNode.attribute(modelConfiguration->kModelMeshIsBatchingAttribute.c_str()).as_bool();
     modelConfiguration->setAttribute(getConfigurationAttributeKey(modelConfiguration->kModelMainNode,
-                                                             modelConfiguration->kModelMeshIsBatchingAttribute),
-                                std::make_shared<CConfigurationAttribute>(isBatching));
+                                                                  modelConfiguration->kModelMeshIsBatchingAttribute),
+                                     std::make_shared<CConfigurationAttribute>(isBatching));
     
-    CConfigurationMaterialSerializer::serializeMaterialNodes(filename,
-                                                             modelConfiguration,
-                                                             mainNode);
+    CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(modelConfiguration,
+                                                                       mainNode);
     return modelConfiguration;
 }
 

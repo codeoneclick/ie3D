@@ -99,9 +99,8 @@ ISharedConfiguration CConfigurationAtmosphericScatteringSerializer::serialize(co
                                                                                   atmosphericScatteringConfiguration->kAtmosphericScatteringWaveLengthZAttribute),
                                                      std::make_shared<CConfigurationAttribute>(waveLengthZ));
     
-    CConfigurationMaterialSerializer::serializeMaterialNodes(filename,
-                                                             atmosphericScatteringConfiguration,
-                                                             mainNode);
+    CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(atmosphericScatteringConfiguration,
+                                                                       mainNode);
     
     return atmosphericScatteringConfiguration;
 }

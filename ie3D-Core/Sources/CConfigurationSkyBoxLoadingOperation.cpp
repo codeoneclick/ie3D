@@ -26,16 +26,6 @@ ISharedConfiguration CConfigurationSkyBoxLoadingOperation::serialize(const std::
     std::shared_ptr<CConfigurationSkyBoxSerializer> skyBoxSerializer = std::make_shared<CConfigurationSkyBoxSerializer>();
     std::shared_ptr<CConfigurationSkyBox> skyBoxConfiguration = std::static_pointer_cast<CConfigurationSkyBox>(skyBoxSerializer->serialize(filename));
     assert(skyBoxConfiguration != nullptr);
-    std::vector<std::string> materialsTemplatesFilenames = skyBoxConfiguration->getMaterialsConfigurationsFilenames();
-    for(const auto& iterator : materialsTemplatesFilenames)
-    {
-        std::shared_ptr<CConfigurationMaterialLoadingOperation> materialLoadingOperation = std::make_shared<CConfigurationMaterialLoadingOperation>();
-        std::shared_ptr<CConfigurationMaterial> materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(materialLoadingOperation->serialize(iterator));
-        assert(materialConfiguration != nullptr);
-        skyBoxConfiguration->setConfiguration(getConfigurationAttributeKey(skyBoxConfiguration->kGameObjectMaterialsConfigurationsNode,
-                                                                           skyBoxConfiguration->kGameObjectMaterialConfigurationNode,
-                                                                           skyBoxConfiguration->kGameObjectMaterialFilenameAttribute),
-                                              materialConfiguration);
-    }
+    CConfigurationMaterialLoadingOperation::serializeGameObjectMaterialsConfigurations(skyBoxConfiguration);
     return skyBoxConfiguration;
 }

@@ -15,4 +15,8 @@ class CEComplexModel;
 typedef std::shared_ptr<CEComplexModel> CESharedComplexModel;
 typedef const CESharedComplexModel& CESharedComplexModelRef;
 
+class CECustomModel;
+typedef std::shared_ptr<CECustomModel> CESharedCustomModel;
+typedef const CESharedCustomModel& CESharedCustomModelRef;
+
 #endif

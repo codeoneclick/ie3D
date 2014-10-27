@@ -26,17 +26,7 @@ ISharedConfiguration CConfigurationLandscapeLoadingOperation::serialize(const st
     std::shared_ptr<CConfigurationLandscapeSerializer> landscapeSerializer = std::make_shared<CConfigurationLandscapeSerializer>();
     std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(landscapeSerializer->serialize(filename));
     assert(landscapeConfiguration != nullptr);
-    std::vector<std::string> materialsTemplatesFilenames = landscapeConfiguration->getMaterialsConfigurationsFilenames();
-    for(const auto& iterator : materialsTemplatesFilenames)
-    {
-        std::shared_ptr<CConfigurationMaterialLoadingOperation> materialLoadingOperation = std::make_shared<CConfigurationMaterialLoadingOperation>();
-        std::shared_ptr<CConfigurationMaterial> materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(materialLoadingOperation->serialize(iterator));
-        assert(materialConfiguration != nullptr);
-        landscapeConfiguration->setConfiguration(getConfigurationAttributeKey(landscapeConfiguration->kGameObjectMaterialsConfigurationsNode,
-                                                                              landscapeConfiguration->kGameObjectMaterialConfigurationNode,
-                                                                              landscapeConfiguration->kGameObjectMaterialFilenameAttribute),
-                                                 materialConfiguration);
-    }
+    CConfigurationMaterialLoadingOperation::serializeGameObjectMaterialsConfigurations(landscapeConfiguration);
     
     std::shared_ptr<CConfigurationMaterialLoadingOperation> materialLoadingOperation = std::make_shared<CConfigurationMaterialLoadingOperation>();
     std::shared_ptr<CConfigurationMaterial> materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(materialLoadingOperation->serialize(landscapeConfiguration->getSplattingDiffuseMaterialFilename()));

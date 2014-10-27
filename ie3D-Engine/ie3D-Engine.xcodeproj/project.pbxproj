@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2171177C19FEB7BF00D92E14 /* CCustomModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171177A19FEB7BF00D92E14 /* CCustomModel.cpp */; };
-		2171177D19FEB7BF00D92E14 /* CCustomModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171177A19FEB7BF00D92E14 /* CCustomModel.cpp */; };
+		2171177C19FEB7BF00D92E14 /* CECustomModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171177A19FEB7BF00D92E14 /* CECustomModel.cpp */; };
+		2171177D19FEB7BF00D92E14 /* CECustomModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171177A19FEB7BF00D92E14 /* CECustomModel.cpp */; };
 		21F114D4199224FF00F4A378 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F114D3199224FF00F4A378 /* Foundation.framework */; };
 		21F11509199225C500F4A378 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F114D3199224FF00F4A378 /* Foundation.framework */; };
 		21F115151992290900F4A378 /* CEComplexModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F115131992290900F4A378 /* CEComplexModel.cpp */; };
@@ -80,8 +80,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2171177A19FEB7BF00D92E14 /* CCustomModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCustomModel.cpp; path = Sources/CCustomModel.cpp; sourceTree = SOURCE_ROOT; };
-		2171177B19FEB7BF00D92E14 /* CCustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCustomModel.h; path = Sources/CCustomModel.h; sourceTree = SOURCE_ROOT; };
+		2171177A19FEB7BF00D92E14 /* CECustomModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CECustomModel.cpp; path = Sources/CECustomModel.cpp; sourceTree = SOURCE_ROOT; };
+		2171177B19FEB7BF00D92E14 /* CECustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CECustomModel.h; path = Sources/CECustomModel.h; sourceTree = SOURCE_ROOT; };
 		21C016E119924BBF00CB59AB /* IEGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IEGameTransition.cpp; path = Sources/IEGameTransition.cpp; sourceTree = SOURCE_ROOT; };
 		21C016E219924BBF00CB59AB /* IEGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEGameTransition.h; path = Sources/IEGameTransition.h; sourceTree = SOURCE_ROOT; };
 		21F114D0199224FF00F4A378 /* libie3DEngine-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DEngine-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,8 +215,8 @@
 			children = (
 				21F115141992290900F4A378 /* CEComplexModel.h */,
 				21F115131992290900F4A378 /* CEComplexModel.cpp */,
-				2171177B19FEB7BF00D92E14 /* CCustomModel.h */,
-				2171177A19FEB7BF00D92E14 /* CCustomModel.cpp */,
+				2171177B19FEB7BF00D92E14 /* CECustomModel.h */,
+				2171177A19FEB7BF00D92E14 /* CECustomModel.cpp */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -362,7 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2171177C19FEB7BF00D92E14 /* CCustomModel.cpp in Sources */,
+				2171177C19FEB7BF00D92E14 /* CECustomModel.cpp in Sources */,
 				21F1152C1992319400F4A378 /* CESceneFabricator.cpp in Sources */,
 				21F1152819922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp in Sources */,
 				21FCC909199FA7D900F2CA1E /* IEGameTransition.cpp in Sources */,
@@ -377,7 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2171177D19FEB7BF00D92E14 /* CCustomModel.cpp in Sources */,
+				2171177D19FEB7BF00D92E14 /* CECustomModel.cpp in Sources */,
 				21F1152D1992319400F4A378 /* CESceneFabricator.cpp in Sources */,
 				21F1152919922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp in Sources */,
 				21FCC908199FA7D700F2CA1E /* IEGameTransition.cpp in Sources */,

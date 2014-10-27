@@ -61,22 +61,22 @@ ISharedConfiguration CConfigurationLandscapeSerializer::serialize(const std::str
     
     bool isEdgesEnabled = mainNode.attribute(landscapeConfiguration->kLandscapeIsEdgesEnabledAttribute.c_str()).as_bool();
     landscapeConfiguration->setAttribute(getConfigurationAttributeKey(landscapeConfiguration->kLandscapeMainNode,
-                                                              landscapeConfiguration->kLandscapeIsEdgesEnabledAttribute),
-                                     std::make_shared<CConfigurationAttribute>(isEdgesEnabled));
+                                                                      landscapeConfiguration->kLandscapeIsEdgesEnabledAttribute),
+                                         std::make_shared<CConfigurationAttribute>(isEdgesEnabled));
     
     pugi::xml_node edgesNode = mainNode.child(landscapeConfiguration->kLandscapeEdgesNode.c_str());
     
     f32 edgesSizeX = edgesNode.attribute(landscapeConfiguration->kLandscapeEdgesSizeXAttribute.c_str()).as_float();
     landscapeConfiguration->setAttribute(getConfigurationAttributeKey(landscapeConfiguration->kLandscapeMainNode,
-                                                              landscapeConfiguration->kLandscapeEdgesNode,
-                                                              landscapeConfiguration->kLandscapeEdgesSizeXAttribute),
-                                     std::make_shared<CConfigurationAttribute>(edgesSizeX));
+                                                                      landscapeConfiguration->kLandscapeEdgesNode,
+                                                                      landscapeConfiguration->kLandscapeEdgesSizeXAttribute),
+                                         std::make_shared<CConfigurationAttribute>(edgesSizeX));
     
     f32 edgesSizeY = edgesNode.attribute(landscapeConfiguration->kLandscapeEdgesSizeYAttribute.c_str()).as_float();
     landscapeConfiguration->setAttribute(getConfigurationAttributeKey(landscapeConfiguration->kLandscapeMainNode,
-                                                              landscapeConfiguration->kLandscapeEdgesNode,
-                                                              landscapeConfiguration->kLandscapeEdgesSizeYAttribute),
-                                     std::make_shared<CConfigurationAttribute>(edgesSizeY));
+                                                                      landscapeConfiguration->kLandscapeEdgesNode,
+                                                                      landscapeConfiguration->kLandscapeEdgesSizeYAttribute),
+                                         std::make_shared<CConfigurationAttribute>(edgesSizeY));
     
     pugi::xml_node edgesMaterialsNode = edgesNode.child(landscapeConfiguration->kLandscapeEdgesMaterialsConfigurationsNode.c_str());
     for (pugi::xml_node material = edgesMaterialsNode.child(landscapeConfiguration->kLandscapeEdgeMaterialConfigurationNode.c_str());
@@ -85,17 +85,16 @@ ISharedConfiguration CConfigurationLandscapeSerializer::serialize(const std::str
     {
         std::string filename = material.attribute(landscapeConfiguration->kLandscapeEdgeMaterialConfigurationFilenameAttribute.c_str()).as_string();
         landscapeConfiguration->setAttribute(getConfigurationAttributeKey(landscapeConfiguration->kLandscapeMainNode,
-                                                                  landscapeConfiguration->kLandscapeEdgesNode,
-                                                                  landscapeConfiguration->kLandscapeEdgesMaterialsConfigurationsNode,
-                                                                  landscapeConfiguration->kLandscapeEdgeMaterialConfigurationNode,
-                                                                  landscapeConfiguration->kLandscapeEdgeMaterialConfigurationFilenameAttribute),
-                                         std::make_shared<CConfigurationAttribute>(filename));
+                                                                          landscapeConfiguration->kLandscapeEdgesNode,
+                                                                          landscapeConfiguration->kLandscapeEdgesMaterialsConfigurationsNode,
+                                                                          landscapeConfiguration->kLandscapeEdgeMaterialConfigurationNode,
+                                                                          landscapeConfiguration->kLandscapeEdgeMaterialConfigurationFilenameAttribute),
+                                             std::make_shared<CConfigurationAttribute>(filename));
     }
-
-    CConfigurationMaterialSerializer::serializeMaterialNodes(filename,
-                                                             landscapeConfiguration,
-                                                             mainNode);
-
+    
+    CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(landscapeConfiguration,
+                                                                       mainNode);
+    
     return landscapeConfiguration;
 }
 

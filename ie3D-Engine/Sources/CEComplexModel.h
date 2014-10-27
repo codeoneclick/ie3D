@@ -53,5 +53,4 @@ public:
     void enableUpdate(bool value);
 };
 
-
 #endif

@@ -23,6 +23,8 @@ public:
     ~CConfigurationMaterialLoadingOperation(void);
     
     ISharedConfiguration serialize(const std::string& filename);
+    
+    static void serializeGameObjectMaterialsConfigurations(CSharedConfigurationGameObjectRef gameObjectConfiguration);
 };
 
 #endif 

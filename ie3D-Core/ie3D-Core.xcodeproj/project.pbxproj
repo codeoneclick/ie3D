@@ -58,7 +58,6 @@
 		21208FD11906FB5F00FFC8D4 /* IFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE7181C4BEA0071839E /* IFabricator.cpp */; };
 		21208FD21906FB5F00FFC8D4 /* IGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE9181C4BEA0071839E /* IGraph.cpp */; };
 		21208FD31906FB5F00FFC8D4 /* IConfigurationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138D01755FEE90056461B /* IConfigurationSerializer.cpp */; };
-		21208FD41906FB5F00FFC8D4 /* CGUITemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A91815A4CE00DB8ECC /* CGUITemplateSerializer.cpp */; };
 		21208FD51906FB5F00FFC8D4 /* CConfigurationMaterialSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138EE175614920056461B /* CConfigurationMaterialSerializer.cpp */; };
 		21208FD61906FB5F00FFC8D4 /* CConfigurationModelSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C21754EF060056461B /* CConfigurationModelSerializer.cpp */; };
 		21208FD71906FB5F00FFC8D4 /* CConfigurationOceanSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D817A021AD00FE26FA /* CConfigurationOceanSerializer.cpp */; };
@@ -69,7 +68,6 @@
 		21208FDC1906FB5F00FFC8D4 /* CConfigurationORenderOperationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748B17621DDF00E1DC6E /* CConfigurationORenderOperationSerializer.cpp */; };
 		21208FDD1906FB5F00FFC8D4 /* CConfigurationGameTransitionSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748E17621E0600E1DC6E /* CConfigurationGameTransitionSerializer.cpp */; };
 		21208FDE1906FB5F00FFC8D4 /* IConfigurationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138CD1755FE790056461B /* IConfigurationLoadingOperation.cpp */; };
-		21208FDF1906FB5F00FFC8D4 /* CGUITemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2AC1815A4E300DB8ECC /* CGUITemplateLoadingOperation.cpp */; };
 		21208FE01906FB5F00FFC8D4 /* CConfigurationMaterialLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E5175613080056461B /* CConfigurationMaterialLoadingOperation.cpp */; };
 		21208FE11906FB5F00FFC8D4 /* CConfigurationModelLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E81756138F0056461B /* CConfigurationModelLoadingOperation.cpp */; };
 		21208FE21906FB5F00FFC8D4 /* CConfigurationOceanLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D517A0212200FE26FA /* CConfigurationOceanLoadingOperation.cpp */; };
@@ -176,7 +174,6 @@
 		213266151906A4AF001C98F7 /* IFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE7181C4BEA0071839E /* IFabricator.cpp */; };
 		213266161906A4AF001C98F7 /* IGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE9181C4BEA0071839E /* IGraph.cpp */; };
 		213266171906A4AF001C98F7 /* IConfigurationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138D01755FEE90056461B /* IConfigurationSerializer.cpp */; };
-		213266181906A4AF001C98F7 /* CGUITemplateSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2A91815A4CE00DB8ECC /* CGUITemplateSerializer.cpp */; };
 		213266191906A4AF001C98F7 /* CConfigurationMaterialSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138EE175614920056461B /* CConfigurationMaterialSerializer.cpp */; };
 		2132661A1906A4AF001C98F7 /* CConfigurationModelSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C21754EF060056461B /* CConfigurationModelSerializer.cpp */; };
 		2132661B1906A4AF001C98F7 /* CConfigurationOceanSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D817A021AD00FE26FA /* CConfigurationOceanSerializer.cpp */; };
@@ -187,7 +184,6 @@
 		213266201906A4AF001C98F7 /* CConfigurationORenderOperationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748B17621DDF00E1DC6E /* CConfigurationORenderOperationSerializer.cpp */; };
 		213266211906A4AF001C98F7 /* CConfigurationGameTransitionSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748E17621E0600E1DC6E /* CConfigurationGameTransitionSerializer.cpp */; };
 		213266221906A4AF001C98F7 /* IConfigurationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138CD1755FE790056461B /* IConfigurationLoadingOperation.cpp */; };
-		213266231906A4AF001C98F7 /* CGUITemplateLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2AC1815A4E300DB8ECC /* CGUITemplateLoadingOperation.cpp */; };
 		213266241906A4AF001C98F7 /* CConfigurationMaterialLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E5175613080056461B /* CConfigurationMaterialLoadingOperation.cpp */; };
 		213266251906A4AF001C98F7 /* CConfigurationModelLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E81756138F0056461B /* CConfigurationModelLoadingOperation.cpp */; };
 		213266261906A4AF001C98F7 /* CConfigurationOceanLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D517A0212200FE26FA /* CConfigurationOceanLoadingOperation.cpp */; };
@@ -466,10 +462,6 @@
 		2179741919F534FA00A98630 /* CGlobalLightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGlobalLightSource.h; path = Sources/CGlobalLightSource.h; sourceTree = "<group>"; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
 		217BB29E1815A48700DB8ECC /* CQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuad.h; path = Sources/CQuad.h; sourceTree = "<group>"; };
-		217BB2A91815A4CE00DB8ECC /* CGUITemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUITemplateSerializer.cpp; path = Sources/CGUITemplateSerializer.cpp; sourceTree = "<group>"; };
-		217BB2AA1815A4CE00DB8ECC /* CGUITemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUITemplateSerializer.h; path = Sources/CGUITemplateSerializer.h; sourceTree = "<group>"; };
-		217BB2AC1815A4E300DB8ECC /* CGUITemplateLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGUITemplateLoadingOperation.cpp; path = Sources/CGUITemplateLoadingOperation.cpp; sourceTree = "<group>"; };
-		217BB2AD1815A4E300DB8ECC /* CGUITemplateLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUITemplateLoadingOperation.h; path = Sources/CGUITemplateLoadingOperation.h; sourceTree = "<group>"; };
 		217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameLoopExecutor.cpp; path = Sources/CGameLoopExecutor.cpp; sourceTree = "<group>"; };
 		21853415181EFC6200315CBB /* libie3DCore-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DCore-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2191CE34196EDBEF00CE2813 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
@@ -1121,8 +1113,6 @@
 			children = (
 				A40138D11755FEEA0056461B /* IConfigurationSerializer.h */,
 				A40138D01755FEE90056461B /* IConfigurationSerializer.cpp */,
-				217BB2AA1815A4CE00DB8ECC /* CGUITemplateSerializer.h */,
-				217BB2A91815A4CE00DB8ECC /* CGUITemplateSerializer.cpp */,
 				A40138EF175614930056461B /* CConfigurationMaterialSerializer.h */,
 				A40138EE175614920056461B /* CConfigurationMaterialSerializer.cpp */,
 				A40138C31754EF060056461B /* CConfigurationModelSerializer.h */,
@@ -1155,8 +1145,6 @@
 				A40138C01754EA310056461B /* Serializers */,
 				A40138CE1755FE790056461B /* IConfigurationLoadingOperation.h */,
 				A40138CD1755FE790056461B /* IConfigurationLoadingOperation.cpp */,
-				217BB2AD1815A4E300DB8ECC /* CGUITemplateLoadingOperation.h */,
-				217BB2AC1815A4E300DB8ECC /* CGUITemplateLoadingOperation.cpp */,
 				A40138E6175613080056461B /* CConfigurationMaterialLoadingOperation.h */,
 				A40138E5175613080056461B /* CConfigurationMaterialLoadingOperation.cpp */,
 				A40138E9175613900056461B /* CConfigurationModelLoadingOperation.h */,
@@ -2028,7 +2016,6 @@
 				21208FD21906FB5F00FFC8D4 /* IGraph.cpp in Sources */,
 				21208FD31906FB5F00FFC8D4 /* IConfigurationSerializer.cpp in Sources */,
 				2191CE50196EDBEF00CE2813 /* pngerror.c in Sources */,
-				21208FD41906FB5F00FFC8D4 /* CGUITemplateSerializer.cpp in Sources */,
 				21208FD51906FB5F00FFC8D4 /* CConfigurationMaterialSerializer.cpp in Sources */,
 				2127E85C1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
 				212092B119195F4D00FFC8D4 /* CCubemapTexture.cpp in Sources */,
@@ -2049,7 +2036,6 @@
 				21208FDD1906FB5F00FFC8D4 /* CConfigurationGameTransitionSerializer.cpp in Sources */,
 				21208FDE1906FB5F00FFC8D4 /* IConfigurationLoadingOperation.cpp in Sources */,
 				2162096E19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */,
-				21208FDF1906FB5F00FFC8D4 /* CGUITemplateLoadingOperation.cpp in Sources */,
 				2191CEA4196EE95100CE2813 /* gzlib.c in Sources */,
 				2191CEA1196EE95100CE2813 /* gzclose.c in Sources */,
 				21208FE01906FB5F00FFC8D4 /* CConfigurationMaterialLoadingOperation.cpp in Sources */,
@@ -2195,7 +2181,6 @@
 				213266161906A4AF001C98F7 /* IGraph.cpp in Sources */,
 				213266171906A4AF001C98F7 /* IConfigurationSerializer.cpp in Sources */,
 				2191CE4F196EDBEF00CE2813 /* pngerror.c in Sources */,
-				213266181906A4AF001C98F7 /* CGUITemplateSerializer.cpp in Sources */,
 				213266191906A4AF001C98F7 /* CConfigurationMaterialSerializer.cpp in Sources */,
 				2127E85B1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
 				212092AE19195CD000FFC8D4 /* CCubemapTexture.cpp in Sources */,
@@ -2216,7 +2201,6 @@
 				213266211906A4AF001C98F7 /* CConfigurationGameTransitionSerializer.cpp in Sources */,
 				213266221906A4AF001C98F7 /* IConfigurationLoadingOperation.cpp in Sources */,
 				2162096D19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */,
-				213266231906A4AF001C98F7 /* CGUITemplateLoadingOperation.cpp in Sources */,
 				2191CEA3196EE95100CE2813 /* gzlib.c in Sources */,
 				2191CEA0196EE95100CE2813 /* gzclose.c in Sources */,
 				213266241906A4AF001C98F7 /* CConfigurationMaterialLoadingOperation.cpp in Sources */,
