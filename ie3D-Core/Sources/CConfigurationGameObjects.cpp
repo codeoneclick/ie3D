@@ -312,8 +312,8 @@ std::vector<std::string> CConfigurationGameObject::getMaterialsConfigurationsFil
 std::vector<ISharedConfiguration> CConfigurationGameObject::getMaterialsConfigurations(void) const
 {
     const auto& iterator = m_configurations.find(kGameObjectMaterialsConfigurationsNode + ":" +
-                                            kGameObjectMaterialConfigurationNode + ":" +
-                                            kGameObjectMaterialFilenameAttribute);
+                                                 kGameObjectMaterialConfigurationNode + ":" +
+                                                 kGameObjectMaterialFilenameAttribute);
     assert(iterator != m_configurations.end());
     return iterator->second;
 }

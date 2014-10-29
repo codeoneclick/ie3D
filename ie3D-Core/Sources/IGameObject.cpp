@@ -214,6 +214,125 @@ CSharedMaterial IGameObject::getMaterial(const std::string& renderTechique) cons
     return material->second;
 }
 
+void IGameObject::setCustomShaderUniform(const glm::mat4x4& matrix, const std::string& uniform, const std::string& renderTechnique)
+{
+    if(renderTechnique.length() != 0)
+    {
+        assert(m_materials.find(renderTechnique) != m_materials.end());
+        auto iterator = m_materials.find(renderTechnique);
+        iterator->second->setCustomShaderUniform(matrix, uniform);
+    }
+    else
+    {
+        for(const auto& iterator : m_materials)
+        {
+            iterator.second->setCustomShaderUniform(matrix, uniform);
+        }
+    }
+}
+
+void IGameObject::setCustomShaderUniform(const glm::mat3x3& matrix, const std::string& uniform, const std::string& renderTechnique)
+{
+    if(renderTechnique.length() != 0)
+    {
+        assert(m_materials.find(renderTechnique) != m_materials.end());
+        auto iterator = m_materials.find(renderTechnique);
+        iterator->second->setCustomShaderUniform(matrix, uniform);
+    }
+    else
+    {
+        for(const auto& iterator : m_materials)
+        {
+            iterator.second->setCustomShaderUniform(matrix, uniform);
+        }
+    }
+}
+
+void IGameObject::setCustomShaderUniform(const glm::vec4& vector, const std::string& uniform, const std::string& renderTechnique)
+{
+    if(renderTechnique.length() != 0)
+    {
+        assert(m_materials.find(renderTechnique) != m_materials.end());
+        auto iterator = m_materials.find(renderTechnique);
+        iterator->second->setCustomShaderUniform(vector, uniform);
+    }
+    else
+    {
+        for(const auto& iterator : m_materials)
+        {
+            iterator.second->setCustomShaderUniform(vector, uniform);
+        }
+    }
+}
+
+void IGameObject::setCustomShaderUniform(const glm::vec3& vector, const std::string& uniform, const std::string& renderTechnique)
+{
+    if(renderTechnique.length() != 0)
+    {
+        assert(m_materials.find(renderTechnique) != m_materials.end());
+        auto iterator = m_materials.find(renderTechnique);
+        iterator->second->setCustomShaderUniform(vector, uniform);
+    }
+    else
+    {
+        for(const auto& iterator : m_materials)
+        {
+            iterator.second->setCustomShaderUniform(vector, uniform);
+        }
+    }
+}
+
+void IGameObject::setCustomShaderUniform(const glm::vec2& vector, const std::string& uniform, const std::string& renderTechnique)
+{
+    if(renderTechnique.length() != 0)
+    {
+        assert(m_materials.find(renderTechnique) != m_materials.end());
+        auto iterator = m_materials.find(renderTechnique);
+        iterator->second->setCustomShaderUniform(vector, uniform);
+    }
+    else
+    {
+        for(const auto& iterator : m_materials)
+        {
+            iterator.second->setCustomShaderUniform(vector, uniform);
+        }
+    }
+}
+
+void IGameObject::setCustomShaderUniform(f32 value, const std::string& uniform, const std::string& renderTechnique)
+{
+    if(renderTechnique.length() != 0)
+    {
+        assert(m_materials.find(renderTechnique) != m_materials.end());
+        auto iterator = m_materials.find(renderTechnique);
+        iterator->second->setCustomShaderUniform(value, uniform);
+    }
+    else
+    {
+        for(const auto& iterator : m_materials)
+        {
+            iterator.second->setCustomShaderUniform(value, uniform);
+        }
+    }
+}
+
+void IGameObject::setCustomShaderUniform(i32 value, const std::string& uniform, const std::string& renderTechnique)
+{
+    if(renderTechnique.length() != 0)
+    {
+        assert(m_materials.find(renderTechnique) != m_materials.end());
+        auto iterator = m_materials.find(renderTechnique);
+        iterator->second->setCustomShaderUniform(value, uniform);
+    }
+    else
+    {
+        for(const auto& iterator : m_materials)
+        {
+            iterator.second->setCustomShaderUniform(value, uniform);
+        }
+    }
+}
+
 CSharedVertexBuffer IGameObject::getCollisionVertexBuffer(void) const
 {
     return nullptr;

@@ -105,7 +105,7 @@ void CAtmosphericScattering::onConfigurationLoaded(ISharedConfigurationRef confi
     indexBuffer->unlock();
     
     m_mesh = CMesh::constructCustomMesh("atmosphericScattering", vertexBuffer, indexBuffer,
-                                        glm::vec3(4096.0), glm::vec3(4096.0));
+                                        glm::vec3(4096.0), glm::vec3(-4096.0));
     assert(m_mesh != nullptr);
     
     IGameObject::enableRender(m_isNeedToRender);

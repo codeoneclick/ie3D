@@ -32,11 +32,15 @@ public:
     glm::vec2 getSize(void) const;
 };
 
-class CMEConfigurationPlacementModel : public CConfigurationGameObject
+class CMEConfigurationModelBrush : public CConfigurationGameObject
 {
 public:
     
-    const std::string kPlacementModelMainNode;
+    const std::string kModelBrushMainNode;
+    const std::string kModelBrushElementsConfigurationsNode;
+    const std::string kModelBrushElementConfigurationNode;
+    const std::string kModelBrushElementNameAttribute;
+    const std::string kModelBrushElementFilenameAttribute;
     
 private:
     
@@ -44,8 +48,12 @@ protected:
     
 public:
     
-    CMEConfigurationPlacementModel(void);
-    ~CMEConfigurationPlacementModel(void);
+    CMEConfigurationModelBrush(void);
+    ~CMEConfigurationModelBrush(void);
+    
+    std::vector<std::string> getElementsNames(void) const;
+    std::vector<std::string> getElementsFilenames(void) const;
+    std::vector<ISharedConfiguration> getElementsConfigurations(void) const;
 };
 
 #endif

@@ -27,7 +27,7 @@ public:
     virtual ~CMESceneFabricator(void);
     
     CMESharedLandscapeBrush createLandscapeBrush(const std::string& filename);
-    CMESharedPlacementModel createPlacementModel(const std::string& filename);
+    CMESharedModelBrush createModelBrush(const std::string& filename);
 };
 
 

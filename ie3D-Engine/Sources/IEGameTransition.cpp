@@ -62,3 +62,10 @@ CESharedComplexModel IEGameTransition::createComplexModel(const std::string& fil
     std::shared_ptr<CESceneFabricator> sceneFabricator = std::static_pointer_cast<CESceneFabricator>(m_sceneFabricator);
     return sceneFabricator->createComplexModel(filename);
 }
+
+CESharedCustomModel IEGameTransition::createCustomModel(const std::string& filename)
+{
+    assert(m_sceneFabricator != nullptr);
+    std::shared_ptr<CESceneFabricator> sceneFabricator = std::static_pointer_cast<CESceneFabricator>(m_sceneFabricator);
+    return sceneFabricator->createCustomModel(filename);
+}

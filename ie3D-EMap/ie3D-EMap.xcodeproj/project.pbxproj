@@ -46,12 +46,12 @@
 		216204321949A74E00D129AD /* render.operation.screen.ssao.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216204301949A74E00D129AD /* render.operation.screen.ssao.xml */; };
 		216204351949A88100D129AD /* shaderScreenSSAO.frag in Resources */ = {isa = PBXBuildFile; fileRef = 216204331949A88100D129AD /* shaderScreenSSAO.frag */; };
 		216204361949A88100D129AD /* shaderScreenSSAO.vert in Resources */ = {isa = PBXBuildFile; fileRef = 216204341949A88100D129AD /* shaderScreenSSAO.vert */; };
-		2171175519FE79A600D92E14 /* shaderPlacementModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2171175319FE79A600D92E14 /* shaderPlacementModel.frag */; };
-		2171175619FE79A600D92E14 /* shaderPlacementModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2171175419FE79A600D92E14 /* shaderPlacementModel.vert */; };
-		2171175919FE79D600D92E14 /* gameobject.placement.model.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2171175719FE79D600D92E14 /* gameobject.placement.model.xml */; };
-		2171175A19FE79D600D92E14 /* material.placement.model.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2171175819FE79D600D92E14 /* material.placement.model.base.xml */; };
-		2171175D19FE7AFE00D92E14 /* CMEConfigurationPlacementModelSerializer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2171175B19FE7AFE00D92E14 /* CMEConfigurationPlacementModelSerializer.cpp */; };
-		2171176019FE7BB200D92E14 /* CMEConfigurationPlacementModelLoadingOperation.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2171175E19FE7BB200D92E14 /* CMEConfigurationPlacementModelLoadingOperation.cpp */; };
+		2171175519FE79A600D92E14 /* shaderModelBrush.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2171175319FE79A600D92E14 /* shaderModelBrush.frag */; };
+		2171175619FE79A600D92E14 /* shaderModelBrush.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2171175419FE79A600D92E14 /* shaderModelBrush.vert */; };
+		2171175919FE79D600D92E14 /* gameobject.model.brush.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2171175719FE79D600D92E14 /* gameobject.model.brush.xml */; };
+		2171175A19FE79D600D92E14 /* material.model.brush.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2171175819FE79D600D92E14 /* material.model.brush.base.xml */; };
+		2171175D19FE7AFE00D92E14 /* CMEConfigurationModelBrushSerializer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2171175B19FE7AFE00D92E14 /* CMEConfigurationModelBrushSerializer.cpp */; };
+		2171176019FE7BB200D92E14 /* CMEConfigurationModelBrushLoadingOperation.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2171175E19FE7BB200D92E14 /* CMEConfigurationModelBrushLoadingOperation.cpp */; };
 		217AF1751945BAD70045CF9D /* CMESceneFabricator.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 217AF1731945BAD70045CF9D /* CMESceneFabricator.cpp */; };
 		217AF17E1945EB010045CF9D /* gameobject.landscape.brush.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217AF17C1945EB010045CF9D /* gameobject.landscape.brush.xml */; };
 		217AF17F1945EB010045CF9D /* material.landscape.brush.xml in Resources */ = {isa = PBXBuildFile; fileRef = 217AF17D1945EB010045CF9D /* material.landscape.brush.xml */; };
@@ -80,7 +80,7 @@
 		218BCFF219C339700041048E /* map_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 218BCFED19C339700041048E /* map_03.png */; };
 		218BCFF319C339700041048E /* map_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 218BCFEE19C339700041048E /* map_04.png */; };
 		218BCFF419C339700041048E /* map_05.png in Resources */ = {isa = PBXBuildFile; fileRef = 218BCFEF19C339700041048E /* map_05.png */; };
-		2191CE30196E872200CE2813 /* CMEPlacementModel.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */; };
+		2191CE30196E872200CE2813 /* CMEModelBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2191CE2E196E872200CE2813 /* CMEModelBrush.cpp */; };
 		21A38D4C19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4A19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag */; };
 		21A38D4D19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */; };
 		21A38D5119EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4F19EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml */; };
@@ -100,6 +100,8 @@
 		21B08E0419224FE100C5D5CC /* material.skybox.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0119224FE100C5D5CC /* material.skybox.base.xml */; };
 		21B08E0519224FE100C5D5CC /* material.skybox.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0219224FE100C5D5CC /* material.skybox.reflection.xml */; };
 		21B08E0619224FE100C5D5CC /* material.skybox.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E0319224FE100C5D5CC /* material.skybox.refraction.xml */; };
+		21B76CAE1A01231F00DEC5EE /* gameobject.brush.arrow.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B76CAC1A01231F00DEC5EE /* gameobject.brush.arrow.xml */; };
+		21B76CAF1A01231F00DEC5EE /* material.brush.arrow.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B76CAD1A01231F00DEC5EE /* material.brush.arrow.base.xml */; };
 		21BC349319080A39007B99DA /* gameobject.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC347B19080A39007B99DA /* gameobject.landscape.xml */; };
 		21BC349419080A39007B99DA /* gameobject.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC347C19080A39007B99DA /* gameobject.ocean.xml */; };
 		21BC349519080A39007B99DA /* gameobject.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21BC347D19080A39007B99DA /* gameobject.particle.emitter.xml */; };
@@ -298,14 +300,14 @@
 		216204301949A74E00D129AD /* render.operation.screen.ssao.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.screen.ssao.xml; path = "../ie3D-Bundle/Configurations/render.operation.screen.ssao.xml"; sourceTree = SOURCE_ROOT; };
 		216204331949A88100D129AD /* shaderScreenSSAO.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenSSAO.frag; path = "../ie3D-Bundle/Shaders/shaderScreenSSAO.frag"; sourceTree = SOURCE_ROOT; };
 		216204341949A88100D129AD /* shaderScreenSSAO.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenSSAO.vert; path = "../ie3D-Bundle/Shaders/shaderScreenSSAO.vert"; sourceTree = SOURCE_ROOT; };
-		2171175319FE79A600D92E14 /* shaderPlacementModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderPlacementModel.frag; path = "../ie3D-Bundle/Shaders/shaderPlacementModel.frag"; sourceTree = SOURCE_ROOT; };
-		2171175419FE79A600D92E14 /* shaderPlacementModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderPlacementModel.vert; path = "../ie3D-Bundle/Shaders/shaderPlacementModel.vert"; sourceTree = SOURCE_ROOT; };
-		2171175719FE79D600D92E14 /* gameobject.placement.model.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.placement.model.xml; path = "../ie3D-Bundle/Configurations/gameobject.placement.model.xml"; sourceTree = SOURCE_ROOT; };
-		2171175819FE79D600D92E14 /* material.placement.model.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.placement.model.base.xml; path = "../ie3D-Bundle/Configurations/material.placement.model.base.xml"; sourceTree = SOURCE_ROOT; };
-		2171175B19FE7AFE00D92E14 /* CMEConfigurationPlacementModelSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationPlacementModelSerializer.cpp; path = Sources/CMEConfigurationPlacementModelSerializer.cpp; sourceTree = SOURCE_ROOT; };
-		2171175C19FE7AFE00D92E14 /* CMEConfigurationPlacementModelSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationPlacementModelSerializer.h; path = Sources/CMEConfigurationPlacementModelSerializer.h; sourceTree = SOURCE_ROOT; };
-		2171175E19FE7BB200D92E14 /* CMEConfigurationPlacementModelLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationPlacementModelLoadingOperation.cpp; path = Sources/CMEConfigurationPlacementModelLoadingOperation.cpp; sourceTree = SOURCE_ROOT; };
-		2171175F19FE7BB200D92E14 /* CMEConfigurationPlacementModelLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationPlacementModelLoadingOperation.h; path = Sources/CMEConfigurationPlacementModelLoadingOperation.h; sourceTree = SOURCE_ROOT; };
+		2171175319FE79A600D92E14 /* shaderModelBrush.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelBrush.frag; path = "../ie3D-Bundle/Shaders/shaderModelBrush.frag"; sourceTree = SOURCE_ROOT; };
+		2171175419FE79A600D92E14 /* shaderModelBrush.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelBrush.vert; path = "../ie3D-Bundle/Shaders/shaderModelBrush.vert"; sourceTree = SOURCE_ROOT; };
+		2171175719FE79D600D92E14 /* gameobject.model.brush.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.model.brush.xml; path = "../ie3D-Bundle/Configurations/gameobject.model.brush.xml"; sourceTree = SOURCE_ROOT; };
+		2171175819FE79D600D92E14 /* material.model.brush.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.brush.base.xml; path = "../ie3D-Bundle/Configurations/material.model.brush.base.xml"; sourceTree = SOURCE_ROOT; };
+		2171175B19FE7AFE00D92E14 /* CMEConfigurationModelBrushSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationModelBrushSerializer.cpp; path = Sources/CMEConfigurationModelBrushSerializer.cpp; sourceTree = SOURCE_ROOT; };
+		2171175C19FE7AFE00D92E14 /* CMEConfigurationModelBrushSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationModelBrushSerializer.h; path = Sources/CMEConfigurationModelBrushSerializer.h; sourceTree = SOURCE_ROOT; };
+		2171175E19FE7BB200D92E14 /* CMEConfigurationModelBrushLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationModelBrushLoadingOperation.cpp; path = Sources/CMEConfigurationModelBrushLoadingOperation.cpp; sourceTree = SOURCE_ROOT; };
+		2171175F19FE7BB200D92E14 /* CMEConfigurationModelBrushLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationModelBrushLoadingOperation.h; path = Sources/CMEConfigurationModelBrushLoadingOperation.h; sourceTree = SOURCE_ROOT; };
 		217AF1731945BAD70045CF9D /* CMESceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMESceneFabricator.cpp; path = Sources/CMESceneFabricator.cpp; sourceTree = SOURCE_ROOT; };
 		217AF1741945BAD70045CF9D /* CMESceneFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMESceneFabricator.h; path = Sources/CMESceneFabricator.h; sourceTree = SOURCE_ROOT; };
 		217AF1791945BB9E0045CF9D /* HMEDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HMEDeclaration.h; path = Sources/HMEDeclaration.h; sourceTree = SOURCE_ROOT; };
@@ -337,8 +339,8 @@
 		218BCFED19C339700041048E /* map_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_03.png; path = "../ie3D-Bundle/Temp/map_03.png"; sourceTree = SOURCE_ROOT; };
 		218BCFEE19C339700041048E /* map_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_04.png; path = "../ie3D-Bundle/Temp/map_04.png"; sourceTree = SOURCE_ROOT; };
 		218BCFEF19C339700041048E /* map_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_05.png; path = "../ie3D-Bundle/Temp/map_05.png"; sourceTree = SOURCE_ROOT; };
-		2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEPlacementModel.cpp; path = Sources/CMEPlacementModel.cpp; sourceTree = SOURCE_ROOT; };
-		2191CE2F196E872200CE2813 /* CMEPlacementModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEPlacementModel.h; path = Sources/CMEPlacementModel.h; sourceTree = SOURCE_ROOT; };
+		2191CE2E196E872200CE2813 /* CMEModelBrush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEModelBrush.cpp; path = Sources/CMEModelBrush.cpp; sourceTree = SOURCE_ROOT; };
+		2191CE2F196E872200CE2813 /* CMEModelBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEModelBrush.h; path = Sources/CMEModelBrush.h; sourceTree = SOURCE_ROOT; };
 		21A38D4A19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderAtmosphericScattering.frag; path = "../ie3D-Bundle/Shaders/shaderAtmosphericScattering.frag"; sourceTree = SOURCE_ROOT; };
 		21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderAtmosphericScattering.vert; path = "../ie3D-Bundle/Shaders/shaderAtmosphericScattering.vert"; sourceTree = SOURCE_ROOT; };
 		21A38D4F19EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.atmospheric.scattering.xml; path = "../ie3D-Bundle/Configurations/gameobject.atmospheric.scattering.xml"; sourceTree = SOURCE_ROOT; };
@@ -358,6 +360,8 @@
 		21B08E0119224FE100C5D5CC /* material.skybox.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.base.xml; path = "../ie3D-Bundle/Configurations/material.skybox.base.xml"; sourceTree = "<group>"; };
 		21B08E0219224FE100C5D5CC /* material.skybox.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.reflection.xml; path = "../ie3D-Bundle/Configurations/material.skybox.reflection.xml"; sourceTree = "<group>"; };
 		21B08E0319224FE100C5D5CC /* material.skybox.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.refraction.xml; path = "../ie3D-Bundle/Configurations/material.skybox.refraction.xml"; sourceTree = "<group>"; };
+		21B76CAC1A01231F00DEC5EE /* gameobject.brush.arrow.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.brush.arrow.xml; path = "../ie3D-Bundle/Configurations/gameobject.brush.arrow.xml"; sourceTree = SOURCE_ROOT; };
+		21B76CAD1A01231F00DEC5EE /* material.brush.arrow.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.brush.arrow.base.xml; path = "../ie3D-Bundle/Configurations/material.brush.arrow.base.xml"; sourceTree = SOURCE_ROOT; };
 		21BC347B19080A39007B99DA /* gameobject.landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.landscape.xml; path = "../ie3D-Bundle/Configurations/gameobject.landscape.xml"; sourceTree = "<group>"; };
 		21BC347C19080A39007B99DA /* gameobject.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.ocean.xml; path = "../ie3D-Bundle/Configurations/gameobject.ocean.xml"; sourceTree = "<group>"; };
 		21BC347D19080A39007B99DA /* gameobject.particle.emitter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.particle.emitter.xml; path = "../ie3D-Bundle/Configurations/gameobject.particle.emitter.xml"; sourceTree = "<group>"; };
@@ -591,8 +595,8 @@
 			children = (
 				2113850E194351DD0041A18A /* CMEConfigurationLandscapeBrushSerializer.h */,
 				2113850D194351DD0041A18A /* CMEConfigurationLandscapeBrushSerializer.cpp */,
-				2171175C19FE7AFE00D92E14 /* CMEConfigurationPlacementModelSerializer.h */,
-				2171175B19FE7AFE00D92E14 /* CMEConfigurationPlacementModelSerializer.cpp */,
+				2171175C19FE7AFE00D92E14 /* CMEConfigurationModelBrushSerializer.h */,
+				2171175B19FE7AFE00D92E14 /* CMEConfigurationModelBrushSerializer.cpp */,
 			);
 			name = Serializers;
 			sourceTree = "<group>";
@@ -612,8 +616,8 @@
 				211385071943519A0041A18A /* Serializers */,
 				21138511194351EB0041A18A /* CMEConfigurationLandscapeBrushLoadingOperation.h */,
 				21138510194351EB0041A18A /* CMEConfigurationLandscapeBrushLoadingOperation.cpp */,
-				2171175F19FE7BB200D92E14 /* CMEConfigurationPlacementModelLoadingOperation.h */,
-				2171175E19FE7BB200D92E14 /* CMEConfigurationPlacementModelLoadingOperation.cpp */,
+				2171175F19FE7BB200D92E14 /* CMEConfigurationModelBrushLoadingOperation.h */,
+				2171175E19FE7BB200D92E14 /* CMEConfigurationModelBrushLoadingOperation.cpp */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -688,8 +692,8 @@
 		212090EB1906FD4900FFC8D4 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				2171175319FE79A600D92E14 /* shaderPlacementModel.frag */,
-				2171175419FE79A600D92E14 /* shaderPlacementModel.vert */,
+				2171175319FE79A600D92E14 /* shaderModelBrush.frag */,
+				2171175419FE79A600D92E14 /* shaderModelBrush.vert */,
 				21E53BF919FA9DDA0018BDB9 /* shaderCommon.frag */,
 				21E53BFA19FA9DDA0018BDB9 /* shaderCommon.vert */,
 				21A38D4A19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag */,
@@ -727,8 +731,8 @@
 		212090EC1906FD5300FFC8D4 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				2171175719FE79D600D92E14 /* gameobject.placement.model.xml */,
-				2171175819FE79D600D92E14 /* material.placement.model.base.xml */,
+				2171175719FE79D600D92E14 /* gameobject.model.brush.xml */,
+				21B76CAC1A01231F00DEC5EE /* gameobject.brush.arrow.xml */,
 				21A38D4F19EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml */,
 				21D9943F19810C43003D4CD1 /* gameobject.tank.heavy.xml */,
 				21D9943B19810C43003D4CD1 /* gameobject.tank.heavy.body.xml */,
@@ -751,6 +755,8 @@
 				21BC347B19080A39007B99DA /* gameobject.landscape.xml */,
 				21BC347C19080A39007B99DA /* gameobject.ocean.xml */,
 				21BC347D19080A39007B99DA /* gameobject.particle.emitter.xml */,
+				21B76CAD1A01231F00DEC5EE /* material.brush.arrow.base.xml */,
+				2171175819FE79D600D92E14 /* material.model.brush.base.xml */,
 				21A38D5019EBCDCE008CAFE7 /* material.atmospheric.scattering.base.xml */,
 				21C409961979B8370063D62D /* material.texture2D.xml */,
 				21D9944019810C43003D4CD1 /* material.tank.heavy.body.common.xml */,
@@ -823,8 +829,8 @@
 			children = (
 				212092AA19106B6100FFC8D4 /* CMELandscapeBrush.h */,
 				212092A919106B6100FFC8D4 /* CMELandscapeBrush.cpp */,
-				2191CE2F196E872200CE2813 /* CMEPlacementModel.h */,
-				2191CE2E196E872200CE2813 /* CMEPlacementModel.cpp */,
+				2191CE2F196E872200CE2813 /* CMEModelBrush.h */,
+				2191CE2E196E872200CE2813 /* CMEModelBrush.cpp */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -1224,7 +1230,7 @@
 				21A9D8721961ACE600A1B62C /* shaderModelNormal.vert in Resources */,
 				21D9944A19810C43003D4CD1 /* material.tank.heavy.left.track.common.xml in Resources */,
 				2113851F194C40820041A18A /* material.ocean.normal.xml in Resources */,
-				2171175919FE79D600D92E14 /* gameobject.placement.model.xml in Resources */,
+				2171175919FE79D600D92E14 /* gameobject.model.brush.xml in Resources */,
 				21C409CD197C123D0063D62D /* tank_medium_left_track.mdl_01 in Resources */,
 				21BC349419080A39007B99DA /* gameobject.ocean.xml in Resources */,
 				21B08E0619224FE100C5D5CC /* material.skybox.refraction.xml in Resources */,
@@ -1242,6 +1248,7 @@
 				21C409C6197C123D0063D62D /* tank_heavy_right_track.mdl_01 in Resources */,
 				21BC34A819080A39007B99DA /* render.operation.world.reflection.xml in Resources */,
 				21A9D84F1961582D00A1B62C /* model.MDL_anim in Resources */,
+				21B76CAF1A01231F00DEC5EE /* material.brush.arrow.base.xml in Resources */,
 				217EF8DF19F7F52700F339A0 /* static_model_tank_medium.png in Resources */,
 				217EF8D119F7F52700F339A0 /* animated_model_01.png in Resources */,
 				21D9943619810976003D4CD1 /* gameobject.tank.medium.xml in Resources */,
@@ -1274,7 +1281,7 @@
 				217EF8DB19F7F52700F339A0 /* skybox_zneg.png in Resources */,
 				21C409C7197C123D0063D62D /* tank_heavy_tower.mdl_01 in Resources */,
 				21D9943319810976003D4CD1 /* gameobject.tank.medium.left.track.xml in Resources */,
-				2171175A19FE79D600D92E14 /* material.placement.model.base.xml in Resources */,
+				2171175A19FE79D600D92E14 /* material.model.brush.base.xml in Resources */,
 				218BCFF019C339700041048E /* map_01.png in Resources */,
 				21C409CA197C123D0063D62D /* tank_light_right_track.mdl_01 in Resources */,
 				21BC349619080A39007B99DA /* material.landscape.base.xml in Resources */,
@@ -1326,17 +1333,18 @@
 				216204321949A74E00D129AD /* render.operation.screen.ssao.xml in Resources */,
 				21A9D86E1961AC9900A1B62C /* material.model.normal.xml in Resources */,
 				21A38D5119EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml in Resources */,
-				2171175519FE79A600D92E14 /* shaderPlacementModel.frag in Resources */,
+				2171175519FE79A600D92E14 /* shaderModelBrush.frag in Resources */,
 				21A9D8711961ACE600A1B62C /* shaderModelNormal.frag in Resources */,
 				21D9944719810C43003D4CD1 /* gameobject.tank.heavy.tower.xml in Resources */,
 				21BC34BE19080B47007B99DA /* shaderScreenQuad.vert in Resources */,
-				2171175619FE79A600D92E14 /* shaderPlacementModel.vert in Resources */,
+				2171175619FE79A600D92E14 /* shaderModelBrush.vert in Resources */,
 				21BC34BA19080B47007B99DA /* shaderOcean.vert in Resources */,
 				218BCFF319C339700041048E /* map_04.png in Resources */,
 				21BC34B719080B47007B99DA /* shaderLandscapeSplatting.frag in Resources */,
 				2113851E194C40820041A18A /* material.landscape.normal.xml in Resources */,
 				21BC34BD19080B47007B99DA /* shaderScreenQuad.frag in Resources */,
 				216204311949A74E00D129AD /* material.render.operation.screen.ssao.xml in Resources */,
+				21B76CAE1A01231F00DEC5EE /* gameobject.brush.arrow.xml in Resources */,
 				21C409CC197C123D0063D62D /* tank_medium_body.mdl_01 in Resources */,
 				21C409DE197EE8E10063D62D /* material.tank.light.tower.common.xml in Resources */,
 				21A9D84B1961581600A1B62C /* model.MDL_mesh in Resources */,
@@ -1380,7 +1388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2191CE30196E872200CE2813 /* CMEPlacementModel.cpp in Compile Sources */,
+				2191CE30196E872200CE2813 /* CMEModelBrush.cpp in Compile Sources */,
 				21C4099C1979B85E0063D62D /* shaderTexture2D.vert in Compile Sources */,
 				21CB5315196C16A10066EC6D /* CMESceneToUICommands.cpp in Compile Sources */,
 				2113850C194351CF0041A18A /* CMEConfigurationGameObjects.cpp in Compile Sources */,
@@ -1395,9 +1403,9 @@
 				21138512194351EB0041A18A /* CMEConfigurationLandscapeBrushLoadingOperation.cpp in Compile Sources */,
 				217AF1751945BAD70045CF9D /* CMESceneFabricator.cpp in Compile Sources */,
 				2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */,
-				2171175D19FE7AFE00D92E14 /* CMEConfigurationPlacementModelSerializer.cpp in Compile Sources */,
+				2171175D19FE7AFE00D92E14 /* CMEConfigurationModelBrushSerializer.cpp in Compile Sources */,
 				5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */,
-				2171176019FE7BB200D92E14 /* CMEConfigurationPlacementModelLoadingOperation.cpp in Compile Sources */,
+				2171176019FE7BB200D92E14 /* CMEConfigurationModelBrushLoadingOperation.cpp in Compile Sources */,
 				21C4099B1979B85E0063D62D /* shaderTexture2D.frag in Compile Sources */,
 				5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */,
 			);
@@ -1559,7 +1567,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
@@ -1599,7 +1607,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;

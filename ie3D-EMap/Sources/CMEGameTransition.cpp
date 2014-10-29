@@ -80,9 +80,9 @@ CMESharedLandscapeBrush CMEGameTransition::createLandscapeBrush(const std::strin
     return sceneFabricator->createLandscapeBrush(filename);
 }
 
-CMESharedPlacementModel CMEGameTransition::createPlacementModel(const std::string& filename)
+CMESharedModelBrush CMEGameTransition::createModelBrush(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
     std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
-    return sceneFabricator->createPlacementModel(filename);
+    return sceneFabricator->createModelBrush(filename);
 }

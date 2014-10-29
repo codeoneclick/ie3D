@@ -10,7 +10,7 @@
 #include "CMEConfigurationAccessor.h"
 #include "CResourceAccessor.h"
 #include "CMELandscapeBrush.h"
-#include "CMEPlacementModel.h"
+#include "CMEModelBrush.h"
 
 CMESceneFabricator::CMESceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                                        CSharedResourceAccessorRef resourceAccessor,
@@ -37,14 +37,14 @@ CMESharedLandscapeBrush CMESceneFabricator::createLandscapeBrush(const std::stri
     return landscapeBrush;
 }
 
-CMESharedPlacementModel CMESceneFabricator::createPlacementModel(const std::string &filename)
+CMESharedModelBrush CMESceneFabricator::createModelBrush(const std::string &filename)
 {
     assert(m_resourceAccessor != nullptr);
     assert(m_renderTechniqueAccessor != nullptr);
-    CMESharedPlacementModel placementModel = std::make_shared<CMEPlacementModel>(m_resourceAccessor, m_renderTechniqueAccessor);
+    CMESharedModelBrush modelBrush = std::make_shared<CMEModelBrush>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     std::shared_ptr<CMEConfigurationAccessor> configurationAccessor = std::static_pointer_cast<CMEConfigurationAccessor>(m_configurationAccessor);
-    configurationAccessor->loadPlacementModelConfiguration(filename, placementModel);
-    m_gameObjectsContainer.insert(placementModel);
-    return placementModel;
+    configurationAccessor->loadModelBrushConfiguration(filename, modelBrush);
+    m_gameObjectsContainer.insert(modelBrush);
+    return modelBrush;
 }

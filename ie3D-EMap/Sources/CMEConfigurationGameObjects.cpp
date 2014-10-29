@@ -39,14 +39,56 @@ glm::vec2 CMEConfigurationLandscapeBrush::getSize(void) const
     return glm::vec2(x, y);
 }
 
-CMEConfigurationPlacementModel::CMEConfigurationPlacementModel(void) :
+CMEConfigurationModelBrush::CMEConfigurationModelBrush(void) :
 CConfigurationGameObject(E_CONFIGURATION_CLASS_CUSTOM),
-kPlacementModelMainNode("placement_model")
+kModelBrushMainNode("model_brush"),
+kModelBrushElementsConfigurationsNode("elements"),
+kModelBrushElementConfigurationNode("element"),
+kModelBrushElementNameAttribute("name"),
+kModelBrushElementFilenameAttribute("filename")
 {
     
 }
 
-CMEConfigurationPlacementModel::~CMEConfigurationPlacementModel(void)
+CMEConfigurationModelBrush::~CMEConfigurationModelBrush(void)
 {
     
+}
+
+std::vector<std::string> CMEConfigurationModelBrush::getElementsNames(void) const
+{
+    const auto& iterator = m_attributes.find(kModelBrushElementsConfigurationsNode + ":" +
+                                             kModelBrushElementConfigurationNode + ":" +
+                                             kModelBrushElementNameAttribute);
+    assert(iterator != m_attributes.end());
+    std::vector<std::string> names;
+    for(const auto& filename : iterator->second)
+    {
+        names.push_back(filename->getString());
+    }
+    return names;
+}
+
+std::vector<std::string> CMEConfigurationModelBrush::getElementsFilenames(void) const
+{
+    const auto& iterator = m_attributes.find(kModelBrushElementsConfigurationsNode + ":" +
+                                             kModelBrushElementConfigurationNode + ":" +
+                                             kModelBrushElementFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    std::vector<std::string> filenames;
+    for(const auto& filename : iterator->second)
+    {
+        filenames.push_back(filename->getString());
+    }
+    return filenames;
+    
+}
+
+std::vector<ISharedConfiguration> CMEConfigurationModelBrush::getElementsConfigurations(void) const
+{
+    const auto& iterator = m_configurations.find(kModelBrushElementsConfigurationsNode + ":" +
+                                                 kModelBrushElementConfigurationNode + ":" +
+                                                 kModelBrushElementFilenameAttribute);
+    assert(iterator != m_configurations.end());
+    return iterator->second;
 }

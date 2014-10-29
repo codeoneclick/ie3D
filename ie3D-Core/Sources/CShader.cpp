@@ -105,12 +105,12 @@ const struct SSamplers SSamplers =
 
 CShaderUniform::CShaderUniform(E_UNIFORM_CLASS _class) :
 m_uniformClass(_class),
-m_mat3x3_value(0.0f),
-m_mat4x4_value(0.0f),
-m_vec2_value(0.0f),
-m_vec3_value(0.0f),
-m_vec4_value(0.0f),
-m_f32_value(0.0f),
+m_mat3x3_value(0.0),
+m_mat4x4_value(0.0),
+m_vec2_value(0.0),
+m_vec3_value(0.0),
+m_vec4_value(0.0),
+m_f32_value(0.0),
 m_sampler_value(E_SHADER_SAMPLER_01),
 m_texture_value(nullptr)
 {

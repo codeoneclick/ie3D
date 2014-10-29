@@ -16,8 +16,8 @@
     is_shadowing="0"
     is_debugging="0">
     <shader
-        vs_filename="shaderPlacementModel.vert"
-        fs_filename="shaderPlacementModel.frag"/>
+        vs_filename="shaderModelBrush.vert"
+        fs_filename="shaderModelBrush.frag"/>
     <textures>
     </textures>
 </material>

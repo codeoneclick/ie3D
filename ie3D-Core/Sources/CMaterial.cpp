@@ -296,6 +296,123 @@ void CMaterial::setupMaterial(CSharedMaterialRef material,
     }
 }
 
+void CMaterial::setCustomShaderUniform(const glm::mat4x4& matrix, const std::string& uniform)
+{
+    const auto& iterator = m_customShaderUniforms.find(uniform);
+    CSharedShaderUniform currentUniform = nullptr;
+    if(iterator != m_customShaderUniforms.end())
+    {
+        currentUniform = iterator->second;
+    }
+    else
+    {
+        currentUniform = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_MAT4X4);
+        m_customShaderUniforms.insert(std::make_pair(uniform, currentUniform));
+    }
+    currentUniform->setMatrix4x4(matrix);
+}
+
+void CMaterial::setCustomShaderUniform(const glm::mat3x3& matrix, const std::string& uniform)
+{
+    const auto& iterator = m_customShaderUniforms.find(uniform);
+    CSharedShaderUniform currentUniform = nullptr;
+    if(iterator != m_customShaderUniforms.end())
+    {
+        currentUniform = iterator->second;
+    }
+    else
+    {
+        currentUniform = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_MAT3X3);
+        m_customShaderUniforms.insert(std::make_pair(uniform, currentUniform));
+    }
+    currentUniform->setMatrix3x3(matrix);
+}
+
+void CMaterial::setCustomShaderUniform(const glm::vec4& vector, const std::string& uniform)
+{
+    const auto& iterator = m_customShaderUniforms.find(uniform);
+    CSharedShaderUniform currentUniform = nullptr;
+    if(iterator != m_customShaderUniforms.end())
+    {
+        currentUniform = iterator->second;
+    }
+    else
+    {
+        currentUniform = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR4);
+        m_customShaderUniforms.insert(std::make_pair(uniform, currentUniform));
+    }
+    currentUniform->setVector4(vector);
+}
+
+void CMaterial::setCustomShaderUniform(const glm::vec3& vector, const std::string& uniform)
+{
+    const auto& iterator = m_customShaderUniforms.find(uniform);
+    CSharedShaderUniform currentUniform = nullptr;
+    if(iterator != m_customShaderUniforms.end())
+    {
+        currentUniform = iterator->second;
+    }
+    else
+    {
+        currentUniform = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR3);
+        m_customShaderUniforms.insert(std::make_pair(uniform, currentUniform));
+    }
+    currentUniform->setVector3(vector);
+}
+
+void CMaterial::setCustomShaderUniform(const glm::vec2& vector, const std::string& uniform)
+{
+    const auto& iterator = m_customShaderUniforms.find(uniform);
+    CSharedShaderUniform currentUniform = nullptr;
+    if(iterator != m_customShaderUniforms.end())
+    {
+        currentUniform = iterator->second;
+    }
+    else
+    {
+        currentUniform = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_VECTOR2);
+        m_customShaderUniforms.insert(std::make_pair(uniform, currentUniform));
+    }
+    currentUniform->setVector2(vector);
+}
+
+void CMaterial::setCustomShaderUniform(f32 value, const std::string& uniform)
+{
+    const auto& iterator = m_customShaderUniforms.find(uniform);
+    CSharedShaderUniform currentUniform = nullptr;
+    if(iterator != m_customShaderUniforms.end())
+    {
+        currentUniform = iterator->second;
+    }
+    else
+    {
+        currentUniform = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_FLOAT);
+        m_customShaderUniforms.insert(std::make_pair(uniform, currentUniform));
+    }
+    currentUniform->setFloat(value);
+}
+
+void CMaterial::setCustomShaderUniform(i32 value, const std::string& uniform)
+{
+    const auto& iterator = m_customShaderUniforms.find(uniform);
+    CSharedShaderUniform currentUniform = nullptr;
+    if(iterator != m_customShaderUniforms.end())
+    {
+        currentUniform = iterator->second;
+    }
+    else
+    {
+        currentUniform = std::make_shared<CShaderUniform>(E_UNIFORM_CLASS_INT);
+        m_customShaderUniforms.insert(std::make_pair(uniform, currentUniform));
+    }
+    currentUniform->setInt(value);
+}
+
+const std::map<std::string, CSharedShaderUniform>& CMaterial::getCustomUniforms(void) const
+{
+    return m_customShaderUniforms;
+}
+
 bool CMaterial::isLoaded(void) const
 {
     bool value = false;

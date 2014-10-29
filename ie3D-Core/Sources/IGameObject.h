@@ -103,6 +103,14 @@ public:
     
     CSharedMaterial getMaterial(const std::string& renderTechique) const;
     
+    virtual void setCustomShaderUniform(const glm::mat4x4& matrix, const std::string& uniform, const std::string& renderTechnique = "");
+    virtual void setCustomShaderUniform(const glm::mat3x3& matrix, const std::string& uniform, const std::string& renderTechnique = "");
+    virtual void setCustomShaderUniform(const glm::vec4& vector, const std::string& uniform, const std::string& renderTechnique = "");
+    virtual void setCustomShaderUniform(const glm::vec3& vector, const std::string& uniform, const std::string& renderTechnique = "");
+    virtual void setCustomShaderUniform(const glm::vec2& vector, const std::string& uniform, const std::string& renderTechnique = "");
+    virtual void setCustomShaderUniform(f32 value, const std::string& uniform, const std::string& renderTechnique = "");
+    virtual void setCustomShaderUniform(i32 value, const std::string& uniform, const std::string& renderTechnique = "");
+    
     virtual CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     virtual CSharedIndexBuffer getCollisionIndexBuffer(void) const;
     

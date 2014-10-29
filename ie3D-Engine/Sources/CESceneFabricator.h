@@ -27,6 +27,7 @@ public:
     virtual ~CESceneFabricator(void);
     
     CESharedComplexModel createComplexModel(const std::string& filename);
+    CESharedCustomModel createCustomModel(const std::string& filename);
 };
 
 

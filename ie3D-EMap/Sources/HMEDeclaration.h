@@ -15,9 +15,9 @@ class CMELandscapeBrush;
 typedef std::shared_ptr<CMELandscapeBrush> CMESharedLandscapeBrush;
 typedef const CMESharedLandscapeBrush& CMESharedLandscapeBrushRef;
 
-class CMEPlacementModel;
-typedef std::shared_ptr<CMEPlacementModel> CMESharedPlacementModel;
-typedef const CMESharedPlacementModel& CMESharedPlacementModelRef;
+class CMEModelBrush;
+typedef std::shared_ptr<CMEModelBrush> CMESharedModelBrush;
+typedef const CMESharedModelBrush& CMESharedModelBrushRef;
 
 class CMEUIToSceneCommands;
 typedef std::shared_ptr<CMEUIToSceneCommands> CSharedMEUIToSceneCommands;

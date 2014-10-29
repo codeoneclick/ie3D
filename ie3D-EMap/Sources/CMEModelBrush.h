@@ -1,21 +1,26 @@
 //
-//  CEComplexModel.h
-//  ie3D-Engine
+//  CMEModelBrush.h
+//  ie3D-EMap
 //
-//  Created by sergey.sergeev on 8/6/14.
-//  Copyright (c) 2014 sergey.sergeev. All rights reserved.
+//  Created by sergey.sergeev on 7/10/14.
+//
 //
 
-#ifndef CEComplexModel_h
-#define CEComplexModel_h
+#ifndef CMEModelBrush_h
+#define CMEModelBrush_h
 
 #include "IGameObject.h"
+#include "HMEEnums.h"
+#include "HMEDeclaration.h"
 
-class CEComplexModel : public IGameObject
+class CMEModelBrush : public IGameObject
 {
 private:
     
-    std::unordered_map<std::string, ISharedGameObject> m_parts;
+    CSharedLandscape m_landscape;
+    CSharedModel m_model;
+    
+    std::array<CESharedCustomModel, E_PLACEMENT_MODEL_ARROW_MAX> m_arrows;
     
 protected:
     
@@ -32,11 +37,13 @@ protected:
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
     
+    CESharedCustomModel createArrowModel(E_PLACEMENT_MODEL_ARROW arrow);
+    
 public:
     
-    CEComplexModel(CSharedResourceAccessorRef resourceAccessor,
-                   ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
-    ~CEComplexModel(void);
+    CMEModelBrush(CSharedResourceAccessorRef resourceAccessor,
+                  ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
+    ~CMEModelBrush(void);
     
     void setPosition(const glm::vec3& position);
     void setRotation(const glm::vec3& rotation);
@@ -51,6 +58,9 @@ public:
     
     void enableRender(bool value);
     void enableUpdate(bool value);
+    
+    void setLandscape(CSharedLandscapeRef landscape);
 };
+
 
 #endif

@@ -1,0 +1,10 @@
+<model_brush>
+    <elements>
+        <element name="arrowX" filename="gameobject.brush.arrow.xml"/>
+        <element name="arrowY" filename="gameobject.brush.arrow.xml"/>
+        <element name="arrowZ" filename="gameobject.brush.arrow.xml"/>
+    </elements>
+	<materials>
+		<material filename="material.model.brush.base.xml"/>
+	</materials>
+</model_brush>

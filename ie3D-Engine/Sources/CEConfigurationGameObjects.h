@@ -34,7 +34,22 @@ public:
     std::vector<std::string> getModelsConfigurationParts(void) const;
     std::vector<std::string> getModelsConfigurationsFilenames(void) const;
     std::vector<ISharedConfiguration> getModelsConfigurations(void) const;
+};
+
+class CEConfigurationCustomModel : public CConfigurationGameObject
+{
+public:
     
+    const std::string kCustomModelMainNode;
+
+private:
+    
+protected:
+    
+public:
+    
+    CEConfigurationCustomModel(void);
+    ~CEConfigurationCustomModel(void);
 };
 
 

@@ -25,6 +25,9 @@ public:
     void loadComplexModelConfiguration(const std::string& filename,
                                        ISharedConfigurationLoadingHandlerRef handler);
     
+    void loadCustomModelConfiguration(const std::string& filename,
+                                      ISharedConfigurationLoadingHandlerRef handler);
+    
 };
 
 #endif

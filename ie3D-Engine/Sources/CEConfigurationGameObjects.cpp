@@ -60,3 +60,15 @@ std::vector<ISharedConfiguration> CEConfigurationComplexModel::getModelsConfigur
     assert(iterator != m_configurations.end());
     return iterator->second;
 }
+
+CEConfigurationCustomModel::CEConfigurationCustomModel(void) :
+CConfigurationGameObject(E_CONFIGURATION_CLASS_CUSTOM),
+kCustomModelMainNode("custom_model")
+{
+    
+}
+
+CEConfigurationCustomModel::~CEConfigurationCustomModel(void)
+{
+    
+}

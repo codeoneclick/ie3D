@@ -54,6 +54,7 @@ private:
     
 protected:
     
+    std::map<std::string, CSharedShaderUniform> m_customShaderUniforms;
     CSharedMaterialCachedParameters m_parameters;
     static CSharedMaterialCachedParameters m_cachedParameters;
     static CSharedMaterialCachedParameters getCachedParameters(void);
@@ -109,7 +110,17 @@ public:
     
     void setShader(CSharedShaderRef shader);
     void setTexture(CSharedTextureRef texture,
-                    E_SHADER_SAMPLER _sampler);
+                    E_SHADER_SAMPLER sampler);
+    
+    void setCustomShaderUniform(const glm::mat4x4& matrix, const std::string& uniform);
+    void setCustomShaderUniform(const glm::mat3x3& matrix, const std::string& uniform);
+    void setCustomShaderUniform(const glm::vec4& vector, const std::string& uniform);
+    void setCustomShaderUniform(const glm::vec3& vector, const std::string& uniform);
+    void setCustomShaderUniform(const glm::vec2& vector, const std::string& uniform);
+    void setCustomShaderUniform(f32 value, const std::string& uniform);
+    void setCustomShaderUniform(i32 value, const std::string& uniform);
+    
+    const std::map<std::string, CSharedShaderUniform>& getCustomUniforms(void) const;
     
     bool isLoaded(void) const;
     bool isCommited(void) const;
