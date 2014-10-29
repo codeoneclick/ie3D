@@ -75,6 +75,9 @@ protected:
     virtual void onUnbind(const std::string& mode);
     virtual void onBatch(const std::string& mode);
     
+    virtual void bindBaseShaderUniforms(CSharedMaterialRef material);
+    virtual void bindCustomShaderUniforms(CSharedMaterialRef material);
+    
 public:
     
 	IGameObject(CSharedResourceAccessorRef resourceAccessor,

@@ -1,12 +1,12 @@
 #if defined(__OPENGL_30__)
 
-
 #else
-
 
 #endif
 
+uniform vec4 IN_color;
+
 void main(void)
 {
-    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+    gl_FragColor = IN_color;
 }

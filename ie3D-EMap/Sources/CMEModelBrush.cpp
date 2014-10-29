@@ -48,8 +48,11 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
     IGameObject::onConfigurationLoaded(configuration, success);
     
     m_arrows.at(E_PLACEMENT_MODEL_ARROW_X) = CMEModelBrush::createArrowModel(E_PLACEMENT_MODEL_ARROW_X);
+    m_arrows.at(E_PLACEMENT_MODEL_ARROW_X)->setCustomShaderUniform(glm::vec4(1.0, 0.0, 0.0, 1.0), "IN_color");
     m_arrows.at(E_PLACEMENT_MODEL_ARROW_Y) = CMEModelBrush::createArrowModel(E_PLACEMENT_MODEL_ARROW_Y);
+    m_arrows.at(E_PLACEMENT_MODEL_ARROW_Y)->setCustomShaderUniform(glm::vec4(0.0, 1.0, 0.0, 1.0), "IN_color");
     m_arrows.at(E_PLACEMENT_MODEL_ARROW_Z) = CMEModelBrush::createArrowModel(E_PLACEMENT_MODEL_ARROW_Z);
+    m_arrows.at(E_PLACEMENT_MODEL_ARROW_Z)->setCustomShaderUniform(glm::vec4(0.0, 0.0, 1.0, 1.0), "IN_color");
 
     IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);

@@ -137,6 +137,71 @@ void IGameObject::onBatch(const std::string& mode)
     
 }
 
+void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)
+{
+    assert(material != nullptr);
+    
+}
+
+void IGameObject::bindCustomShaderUniforms(CSharedMaterialRef material)
+{
+    assert(material != nullptr);
+    std::map<std::string, CSharedShaderUniform> customShaderUniforms = material->getCustomUniforms();
+    CSharedShaderUniform currentUniform = nullptr;
+    for(const auto& iterator : customShaderUniforms)
+    {
+        currentUniform = iterator.second;
+        assert(currentUniform != nullptr);
+        switch (currentUniform->getClass())
+        {
+            case E_UNIFORM_CLASS_MAT4X4:
+            {
+                material->getShader()->setMatrix4x4Custom(currentUniform->getMatrix4x4(), iterator.first);
+            }
+                break;
+                
+            case E_UNIFORM_CLASS_MAT3X3:
+            {
+                material->getShader()->setMatrix3x3Custom(currentUniform->getMatrix3x3(), iterator.first);
+            }
+                break;
+                
+            case E_UNIFORM_CLASS_VECTOR4:
+            {
+                material->getShader()->setVector4Custom(currentUniform->getVector4(), iterator.first);
+            }
+                break;
+                
+            case E_UNIFORM_CLASS_VECTOR3:
+            {
+                 material->getShader()->setVector3Custom(currentUniform->getVector3(), iterator.first);
+            }
+                break;
+                
+            case E_UNIFORM_CLASS_VECTOR2:
+            {
+                material->getShader()->setVector2Custom(currentUniform->getVector2(), iterator.first);
+            }
+                break;
+                
+            case E_UNIFORM_CLASS_FLOAT:
+            {
+                material->getShader()->setFloatCustom(currentUniform->getFloat(), iterator.first);
+            }
+                break;
+                
+            case E_UNIFORM_CLASS_INT:
+            {
+                material->getShader()->setIntCustom(currentUniform->getInt(), iterator.first);
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
 void IGameObject::setPosition(const glm::vec3& position)
 {
     m_position = position;

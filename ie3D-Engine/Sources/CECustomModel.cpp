@@ -82,6 +82,7 @@ void CECustomModel::onDraw(const std::string& mode)
         
         CSharedMaterial material = m_materials.find(mode)->second;
         assert(material->getShader() != nullptr);
+        IGameObject::bindCustomShaderUniforms(material);
         
         material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
