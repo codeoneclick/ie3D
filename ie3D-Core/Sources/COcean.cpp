@@ -110,10 +110,10 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     indexBuffer->unlock();
     
     m_mesh = CMesh::constructCustomMesh("ocean", vertexBuffer, indexBuffer,
-                                     glm::vec3(4096.0), glm::vec3(-4096.0));
+                                        glm::vec3(4096.0), glm::vec3(-4096.0));
     assert(m_mesh != nullptr);
     
-	IGameObject::enableRender(m_isNeedToRender);
+    IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
@@ -138,7 +138,6 @@ void COcean::onBind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(mode) != m_materials.end());
         IGameObject::onBind(mode);
     }
 }
@@ -147,32 +146,6 @@ void COcean::onDraw(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_camera != nullptr);
-        assert(m_globalLightSource != nullptr);
-        assert(m_materials.find(mode) != m_materials.end());
-        
-        std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
-        assert(material->getShader() != nullptr);
-        
-        material->getShader()->setMatrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        
-        material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->getShader()->setVector3(m_globalLightSource->getPosition(), E_SHADER_UNIFORM_VECTOR_GLOBAL_LIGHT_POSITION);
-        material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
-        material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
-        material->getShader()->setFloat(m_waveGeneratorTimer, E_SHADER_UNIFORM_FLOAT_TIMER);
-        
-        material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
-        material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
-        
-        CSharedTexture heightmapTexture = m_resourceAccessor->getTexture("landscape.heightmap.texture");
-        if(heightmapTexture)
-        {
-            material->setTexture(heightmapTexture, E_SHADER_SAMPLER_04);
-        }
         IGameObject::onDraw(mode);
     }
 }
@@ -181,7 +154,6 @@ void COcean::onUnbind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(mode) != m_materials.end());
         IGameObject::onUnbind(mode);
     }
 }
@@ -189,4 +161,19 @@ void COcean::onUnbind(const std::string& mode)
 void COcean::onBatch(const std::string& mode)
 {
     IGameObject::onBatch(mode);
+}
+
+void COcean::bindCustomShaderUniforms(CSharedMaterialRef material)
+{
+    IGameObject::bindCustomShaderUniforms(material);
+    
+    material->getShader()->setFloat(m_waveGeneratorTimer, E_SHADER_UNIFORM_FLOAT_TIMER);
+    material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
+    material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
+    
+    CSharedTexture heightmapTexture = m_resourceAccessor->getTexture("landscape.heightmap.texture");
+    if(heightmapTexture)
+    {
+        material->setTexture(heightmapTexture, E_SHADER_SAMPLER_04);
+    }
 }

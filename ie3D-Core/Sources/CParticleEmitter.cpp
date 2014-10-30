@@ -178,7 +178,7 @@ void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configurati
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32  CParticleEmitter::zOrder(void)
+i32 CParticleEmitter::zOrder(void)
 {
     return m_zOrder;
 }
@@ -197,7 +197,6 @@ void CParticleEmitter::onBind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(mode) != m_materials.end());
         IGameObject::onBind(mode);
     }
 }
@@ -206,16 +205,6 @@ void CParticleEmitter::onDraw(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_camera != nullptr);
-        assert(m_materials.find(mode) != m_materials.end());
-        
-        std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
-        assert(material->getShader() != nullptr);
-        
-        material->getShader()->setMatrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        
         IGameObject::onDraw(mode);
     }
 }
@@ -224,7 +213,6 @@ void CParticleEmitter::onUnbind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(mode) != m_materials.end());
         IGameObject::onUnbind(mode);
     }
 }

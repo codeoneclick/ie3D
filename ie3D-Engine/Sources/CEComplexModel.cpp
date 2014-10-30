@@ -85,31 +85,22 @@ bool CEComplexModel::checkOcclusion(void)
 
 ui32 CEComplexModel::numTriangles(void)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-    }
     return 0;
 }
 
 void CEComplexModel::onBind(const std::string&)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-    }
+
 }
 
 void CEComplexModel::onDraw(const std::string&)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-    }
+
 }
 
 void CEComplexModel::onUnbind(const std::string&)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-    }
+
 }
 
 void CEComplexModel::onBatch(const std::string&)

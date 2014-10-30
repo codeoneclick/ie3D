@@ -79,7 +79,7 @@ public:
     void enableUpdate(bool value);
     
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
-    f32 getTillingTexcooed(E_SHADER_SAMPLER sampler) const;
+    f32 getTillingTexcoord(E_SHADER_SAMPLER sampler) const;
     
     void setTexture(CSharedTextureRef texture,
                     E_SHADER_SAMPLER sampler,

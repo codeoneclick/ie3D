@@ -165,7 +165,28 @@ void CSkyBox::onBind(const std::string& mode)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         assert(m_materials.find(mode) != m_materials.end());
+        
+        IGameObject::setPosition(m_camera->Get_Position());
+        CSharedMaterial material = m_materials.find(mode)->second;
+        glm::vec3 currentRotation = m_rotation;
+        bool currentReflectingState = material->isReflecting();
+        if(currentReflectingState)
+        {
+            IGameObject::setRotation(glm::vec3(m_rotation.x + glm::degrees(M_PI),
+                                               -glm::degrees(m_camera->Get_Rotation()) * 2.0 + m_rotation.y,
+                                               m_rotation.z));
+            material->setReflecting(false);
+        }
+        
+        IGameObject::onSceneUpdate(0);
         IGameObject::onBind(mode);
+        
+        if(currentReflectingState)
+        {
+            IGameObject::setRotation(currentRotation);
+            IGameObject::onSceneUpdate(0);
+            material->setReflecting(true);
+        }
     }
 }
 
@@ -173,39 +194,7 @@ void CSkyBox::onDraw(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_camera != nullptr);
-        assert(m_materials.find(mode) != m_materials.end());
-        
-        CSharedMaterial material = m_materials.find(mode)->second;
-        assert(material->getShader() != nullptr);
-        
-        IGameObject::setPosition(m_camera->Get_Position());
-        
-        glm::vec3 currentRotation = m_rotation;
-        if(material->isReflecting())
-        {
-            IGameObject::setRotation(glm::vec3(m_rotation.x + glm::degrees(M_PI),
-                                               -glm::degrees(m_camera->Get_Rotation()) * 2.0 + m_rotation.y,
-                                               m_rotation.z));
-        }
-        IGameObject::onSceneUpdate(0);
-
-        material->getShader()->setMatrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        
-        material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
-        material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
-        
         IGameObject::onDraw(mode);
-        
-        if(material->isReflecting())
-        {
-            IGameObject::setRotation(currentRotation);
-            IGameObject::onSceneUpdate(0);
-        }
     }
 }
 

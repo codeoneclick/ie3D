@@ -34,6 +34,8 @@ protected:
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
     
+    void bindCustomShaderUniforms(CSharedMaterialRef material);
+    
 public:
     
     CModel(CSharedResourceAccessorRef resourceAccessor,

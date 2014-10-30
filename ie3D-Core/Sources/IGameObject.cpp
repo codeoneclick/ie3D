@@ -18,6 +18,7 @@
 #include "CSceneUpdateMgr.h"
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
+#include "CGlobalLightSource.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
                          ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -40,7 +41,11 @@ m_isNeedToUpdate(false),
 m_isBatching(false),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
-
+    m_materialBindImposer = [this](CSharedMaterialRef material)
+    {
+        bindBaseShaderUniforms(material);
+        bindCustomShaderUniforms(material);
+    };
 }
 
 IGameObject::~IGameObject(void)
@@ -96,23 +101,28 @@ ui32 IGameObject::numTriangles(void)
 
 void IGameObject::onBind(const std::string& mode)
 {
+    assert(m_mesh != nullptr);
+    assert(m_camera != nullptr);
+    assert(m_globalLightSource != nullptr);
     assert(m_materials.find(mode) != m_materials.end());
-    auto iterator = m_materials.find(mode);
     
+    auto iterator = m_materials.find(mode);
     if(!m_isBatching && iterator->second->getShader()->isLoaded())
     {
-        assert(m_mesh != nullptr);
         iterator->second->bind();
         m_mesh->bind(iterator->second->getShader()->getAttributesRef());
+        m_materialBindImposer(iterator->second);
     }
 }
 
 void IGameObject::onDraw(const std::string& mode)
 {
     assert(m_mesh != nullptr);
+    assert(m_camera != nullptr);
+    assert(m_globalLightSource != nullptr);
     assert(m_materials.find(mode) != m_materials.end());
+    
     auto iterator = m_materials.find(mode);
-
     if(iterator->second->getShader()->isLoaded())
     {
         m_mesh->draw();
@@ -121,12 +131,14 @@ void IGameObject::onDraw(const std::string& mode)
 
 void IGameObject::onUnbind(const std::string& mode)
 {
+    assert(m_mesh != nullptr);
+    assert(m_camera != nullptr);
+    assert(m_globalLightSource != nullptr);
     assert(m_materials.find(mode) != m_materials.end());
-    auto iterator = m_materials.find(mode);
     
+    auto iterator = m_materials.find(mode);
     if(!m_isBatching && iterator->second->getShader()->isLoaded())
     {
-        assert(m_mesh != nullptr);
         iterator->second->unbind();
         m_mesh->unbind(iterator->second->getShader()->getAttributesRef());
     }
@@ -141,6 +153,25 @@ void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)
 {
     assert(material != nullptr);
     
+    // base matrices
+    material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
+    material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+    material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
+    material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+    
+    // camera base parameters
+    material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
+    material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
+    material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+    material->getShader()->setVector4(material->getClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
+    
+    // global light parameters
+    material->getShader()->setVector3(m_globalLightSource->getPosition(),
+                                      E_SHADER_UNIFORM_VECTOR_GLOBAL_LIGHT_POSITION);
+    material->getShader()->setMatrix4x4(m_globalLightSource->getProjectionMatrix(),
+                                        E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_PROJECTION);
+    material->getShader()->setMatrix4x4(m_globalLightSource->getViewMatrix(),
+                                        E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_VIEW);
 }
 
 void IGameObject::bindCustomShaderUniforms(CSharedMaterialRef material)

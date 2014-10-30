@@ -31,58 +31,6 @@ m_currentLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
 m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
-    m_materialBindImposer = [this](CSharedMaterialRef material)
-    {
-        assert(m_camera != nullptr);
-        assert(m_globalLightSource != nullptr);
-        
-        material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(),
-                                            E_SHADER_UNIFORM_MATRIX_VIEW);
-        material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        
-        material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->getShader()->setVector3(m_globalLightSource->getPosition(),
-                                          E_SHADER_UNIFORM_VECTOR_GLOBAL_LIGHT_POSITION);
-        material->getShader()->setVector4(material->getClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
-        material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
-        material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
-        
-        material->getShader()->setMatrix4x4(m_globalLightSource->getProjectionMatrix(),
-                                            E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_PROJECTION);
-        material->getShader()->setMatrix4x4(m_globalLightSource->getViewMatrix(),
-                                            E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_VIEW);
-        
-#if defined(__OSX__)
-        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
-        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
-        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
-#elif defined(__IOS__)
-        if(g_highPerformancePlatforms.count(getPlatform()) != 0)
-        {
-            material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
-            material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
-            material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
-        }
-        else
-        {
-            if(m_prerenderedSplattingDiffuseTexture)
-            {
-                material->getShader()->setTexture(m_prerenderedSplattingDiffuseTexture, E_SHADER_SAMPLER_01);
-            }
-            if(m_prerenderedSplattingNormalTexture)
-            {
-                material->getShader()->setTexture(m_prerenderedSplattingNormalTexture, E_SHADER_SAMPLER_02);
-            }
-        }
-#else
-        material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSize.x, m_heightmapSize.y) / m_splattingTillingFactor,
-                                              "IN_SplattingTillingFactor");
-#endif
-        material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
-        material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
-    };
 }
 
 CLandscapeChunk::~CLandscapeChunk(void)
@@ -203,7 +151,6 @@ void CLandscapeChunk::onBind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(mode) != m_materials.end());
         IGameObject::onBind(mode);
     }
 }
@@ -212,15 +159,11 @@ void CLandscapeChunk::onDraw(const std::string& mode)
 {
     if((m_status & E_LOADING_STATUS_TEMPLATE_LOADED) && m_numIndexesToRender != 0)
     {
+        assert(m_mesh != nullptr);
         assert(m_camera != nullptr);
+        assert(m_globalLightSource != nullptr);
         assert(m_materials.find(mode) != m_materials.end());
         
-        std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
-        assert(material->getShader() != nullptr);
-        
-        m_materialBindImposer(material);
-        
-        assert(m_mesh != nullptr);
         m_mesh->draw(m_numIndexesToRender);
     }
 }
@@ -229,7 +172,6 @@ void CLandscapeChunk::onUnbind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(mode) != m_materials.end());
         IGameObject::onUnbind(mode);
     }
 }
@@ -237,6 +179,39 @@ void CLandscapeChunk::onUnbind(const std::string& mode)
 void CLandscapeChunk::onBatch(const std::string& mode)
 {
     IGameObject::onBatch(mode);
+}
+
+void CLandscapeChunk::bindCustomShaderUniforms(CSharedMaterialRef material)
+{
+    IGameObject::bindCustomShaderUniforms(material);
+#if defined(__OSX__)
+    material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
+    material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
+    material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
+#elif defined(__IOS__)
+    if(g_highPerformancePlatforms.count(getPlatform()) != 0)
+    {
+        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
+        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
+        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
+    }
+    else
+    {
+        if(m_prerenderedSplattingDiffuseTexture)
+        {
+            material->getShader()->setTexture(m_prerenderedSplattingDiffuseTexture, E_SHADER_SAMPLER_01);
+        }
+        if(m_prerenderedSplattingNormalTexture)
+        {
+            material->getShader()->setTexture(m_prerenderedSplattingNormalTexture, E_SHADER_SAMPLER_02);
+        }
+    }
+#else
+    material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSize.x, m_heightmapSize.y) / m_splattingTillingFactor,
+                                          "IN_SplattingTillingFactor");
+#endif
+    material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
+    material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
 }
 
 CSharedVertexBuffer CLandscapeChunk::getCollisionVertexBuffer(void) const

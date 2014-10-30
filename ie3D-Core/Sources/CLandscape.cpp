@@ -33,7 +33,7 @@ m_isSplattingNormalTexturePrerendered(false),
 m_configuration(nullptr),
 m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, renderTechniqueAccessor))
 {
-
+    m_materialBindImposer = nullptr;
 }
 
 CLandscape::~CLandscape(void)
@@ -383,7 +383,7 @@ void CLandscape::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
     }
 }
 
-f32 CLandscape::getTillingTexcooed(E_SHADER_SAMPLER sampler) const
+f32 CLandscape::getTillingTexcoord(E_SHADER_SAMPLER sampler) const
 {
     return m_tillingTexcoord[sampler];
 }

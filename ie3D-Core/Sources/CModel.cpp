@@ -25,26 +25,6 @@ m_animationMixer(nullptr),
 m_isAnimated(false)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_MODEL;
-    
-    m_materialBindImposer = [this](CSharedMaterialRef material)
-    {
-        material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0f) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        
-        material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-        material->getShader()->setVector4(material->getClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
-        material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
-        material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
-        
-        material->getShader()->setMatrix4x4(m_globalLightSource->getProjectionMatrix(),
-                                            E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_PROJECTION);
-        material->getShader()->setMatrix4x4(m_globalLightSource->getViewMatrix(),
-                                            E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_VIEW);
-        
-        material->getShader()->setInt(m_isAnimated ? 1 : 0, E_SHADER_UNIFORM_INT_FLAG_01);
-    };
 }
 
 CModel::~CModel(void)
@@ -114,7 +94,6 @@ void CModel::onBind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(mode) != m_materials.end());
         IGameObject::onBind(mode);
     }
 }
@@ -123,25 +102,7 @@ void CModel::onDraw(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_camera != nullptr);
-        assert(m_materials.find(mode) != m_materials.end());
-        
-        CSharedMaterial material = m_materials.find(mode)->second;
-        assert(material->getShader() != nullptr);
-        
-        if(!m_isBatching && m_animationMixer != nullptr && m_isAnimated)
-        {
-            m_materialBindImposer(material);
-            material->getShader()->setMatrixArray4x4(m_animationMixer->getTransformations(),
-                                                     m_animationMixer->getTransformationSize(),
-                                                     E_SHADER_UNIFORM_MATRIX_BONES);
-            IGameObject::onDraw(mode);
-        }
-        else if(!m_isAnimated)
-        {
-            m_materialBindImposer(material);
-            IGameObject::onDraw(mode);
-        }
+        IGameObject::onDraw(mode);
     }
 }
 
@@ -149,7 +110,6 @@ void CModel::onUnbind(const std::string& mode)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(mode) != m_materials.end());
         IGameObject::onUnbind(mode);
     }
 }
@@ -157,6 +117,18 @@ void CModel::onUnbind(const std::string& mode)
 void CModel::onBatch(const std::string& mode)
 {
     IGameObject::onBatch(mode);
+}
+
+void CModel::bindCustomShaderUniforms(CSharedMaterialRef material)
+{
+    IGameObject::bindCustomShaderUniforms(material);
+    material->getShader()->setInt(m_isAnimated ? 1 : 0, E_SHADER_UNIFORM_INT_FLAG_01);
+    if(!m_isBatching && m_animationMixer != nullptr && m_isAnimated)
+    {
+        material->getShader()->setMatrixArray4x4(m_animationMixer->getTransformations(),
+                                                 m_animationMixer->getTransformationSize(),
+                                                 E_SHADER_UNIFORM_MATRIX_BONES);
+    }
 }
 
 void CModel::setAnimation(const std::string& name)
