@@ -9,7 +9,7 @@
 #ifndef CBatchingMgr_h
 #define CBatchingMgr_h
 
-/*
+
 #include "HCommon.h"
 #include "HDeclaration.h"
 
@@ -19,14 +19,14 @@ private:
     
 protected:
     
-    CSharedRenderMgr m_renderMgr;
+    ISharedRenderTechniqueImporter m_renderTechniqueImporter;
     std::unordered_map<std::string, CSharedBatch> m_batches;
     
 public:
     
     static const ui32 k_MAX_BATCHES_PER_MODELTYPE;
     
-    CBatchingMgr(CSharedRenderMgrRef renderMgr);
+    CBatchingMgr(ISharedRenderTechniqueImporterRef renderTechniqueImporter);
     ~CBatchingMgr(void);
     
     void lock(const std::string& mode);
@@ -38,5 +38,5 @@ public:
                const std::function<void(CSharedMaterialRef)>& materialBindImposer,
                const glm::mat4x4& matrix);
 };
-*/
-#endif 
+
+#endif

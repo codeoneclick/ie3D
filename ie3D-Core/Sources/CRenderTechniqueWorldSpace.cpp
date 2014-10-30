@@ -147,3 +147,19 @@ void CRenderTechniqueWorldSpace::draw(void)
         }
     }
 }
+
+void CRenderTechniqueWorldSpace::batch(void)
+{
+    for(std::map<ui32, std::set<ISharedRenderTechniqueHandler>>::iterator iterator_01 = m_handlers.begin(); iterator_01 != m_handlers.end(); ++iterator_01)
+    {
+        for(std::set<ISharedRenderTechniqueHandler>::iterator iterator_02 = (*iterator_01).second.begin(); iterator_02 !=  (*iterator_01).second.end(); ++iterator_02)
+        {
+            ISharedRenderTechniqueHandler handler = (*iterator_02);
+            assert(handler != nullptr);
+            if(!handler->checkOcclusion())
+            {
+                handler->onBatch(m_name);
+            }
+        }
+    }
+}

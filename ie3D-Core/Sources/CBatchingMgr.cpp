@@ -13,12 +13,12 @@
 #include "CAnimationMixer.h"
 #include "CMaterial.h"
 #include "CShader.h"
-#include "CRenderMgr.h"
+#include "IRenderTechniqueImporter.h"
 
 const ui32 CBatchingMgr::k_MAX_BATCHES_PER_MODELTYPE = 8;
 
-CBatchingMgr::CBatchingMgr(CSharedRenderMgrRef renderMgr) :
-m_renderMgr(renderMgr)
+CBatchingMgr::CBatchingMgr(ISharedRenderTechniqueImporterRef renderTechniqueImporter) :
+m_renderTechniqueImporter(renderTechniqueImporter)
 {
     
 }
@@ -59,26 +59,26 @@ void CBatchingMgr::batch(const std::string& mode,
 {
     assert(material != nullptr);
     assert(material->getShader() != nullptr);
-	//assert(std::get<1>(model)->Get_TransformationSize() <= CBatch::k_MAX_NUM_TRANSFORMATION);
+    //assert(std::get<1>(model)->Get_TransformationSize() <= CBatch::k_MAX_NUM_TRANSFORMATION);
     assert(std::get<0>(model)->getNumVertices() <= CBatch::k_MAX_NUM_VERTICES);
     assert(std::get<0>(model)->getNumIndices() <= CBatch::k_MAX_NUM_INDICES);
     
     for(ui32 i = 0; i < k_MAX_BATCHES_PER_MODELTYPE; ++i)
     {
-    	std::ostringstream stream;
-    	stream<<i;
-    	std::string guid = material->getShader()->getGuid() + ".batch_" + stream.str();
+        std::ostringstream stream;
+        stream<<i;
+        std::string guid = material->getShader()->getGuid() + ".batch_" + stream.str();
         auto iterator = m_batches.find(guid);
         
         if(iterator == m_batches.end())
         {
-			m_batches.insert(std::make_pair(guid, std::make_shared<CBatch>(mode,
+            m_batches.insert(std::make_pair(guid, std::make_shared<CBatch>(mode,
                                                                            renderQueuePosition,
                                                                            material,
                                                                            materialBindImposer)));
             iterator = m_batches.find(guid);
-            m_renderMgr->RegisterWorldSpaceRenderHandler(mode, iterator->second);
-			iterator->second->batch(model, matrix);
+            //m_renderMgr->RegisterWorldSpaceRenderHandler(mode, iterator->second);
+            iterator->second->batch(model, matrix);
             break;
         }
         /*else if((iterator->second->getNumUnlockedNumTransformations() + std::get<1>(model)->Get_TransformationSize()) > CBatch::k_MAX_NUM_TRANSFORMATION ||

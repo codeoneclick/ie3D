@@ -12,7 +12,7 @@
 #include "HCommon.h"
 #include "HDeclaration.h"
 
-class IRenderTechniqueAccessor
+class IRenderTechniqueAccessor : public std::enable_shared_from_this<IRenderTechniqueAccessor>
 {
 private:
     

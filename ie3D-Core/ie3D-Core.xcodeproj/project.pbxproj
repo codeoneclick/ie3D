@@ -372,6 +372,7 @@
 		21D0723A181DA6F10019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A420815E1733A9370004729E /* UIKit.framework */; };
 		21FCC8E0199A95D400F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
 		21FCC8E1199A95D500F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
+		21FEEC991A029C70001E9ACB /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -2073,6 +2074,7 @@
 				21208FF91906FB6000FFC8D4 /* CShaderCommiter_GLSL.cpp in Sources */,
 				21208FFA1906FB6000FFC8D4 /* CTextureCommiter_PVR.cpp in Sources */,
 				21208FFB1906FB6000FFC8D4 /* CMeshCommiter_MDL.cpp in Sources */,
+				21FEEC991A029C70001E9ACB /* CBatchingMgr.cpp in Sources */,
 				21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				21208FFC1906FB6000FFC8D4 /* CSkeletonCommiter_SK.cpp in Sources */,
 				21208FFD1906FB6000FFC8D4 /* CSequenceCommiter_SEQ.cpp in Sources */,

@@ -203,11 +203,11 @@ void CBatch::onDraw(const std::string& mode)
     }
 }
 
-void CBatch::onUnbind(const std::string& _mode)
+void CBatch::onUnbind(const std::string& mode)
 {
     
 }
-void CBatch::onBatch(const std::string& _mode)
+void CBatch::onBatch(const std::string& mode)
 {
     
 }

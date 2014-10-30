@@ -42,6 +42,7 @@ public:
     virtual void bind(void) = 0;
     virtual void unbind(void) = 0;
     virtual void draw(void) = 0;
+    virtual void batch(void) = 0;
 };
 
 #endif

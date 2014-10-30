@@ -76,3 +76,8 @@ void CRenderTechniqueScreenSpace::draw(void)
 {
     m_quad->draw();
 }
+
+void CRenderTechniqueScreenSpace::batch(void)
+{
+    
+}

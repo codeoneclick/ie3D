@@ -192,6 +192,10 @@ class CBatch;
 typedef std::shared_ptr<CBatch> CSharedBatch;
 typedef const CSharedBatch& CSharedBatchRef;
 
+class CBatchingMgr;
+typedef std::shared_ptr<CBatchingMgr> CSharedBatchingMgr;
+typedef const CSharedBatchingMgr& CSharedBatchingMgrRef;
+
 class CQuadTree;
 typedef std::shared_ptr<CQuadTree> CSharedQuadTree;
 typedef const CSharedQuadTree& CSharedQuadTreeRef;

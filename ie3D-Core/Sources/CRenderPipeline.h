@@ -13,11 +13,18 @@
 #include "IRenderTechniqueImporter.h"
 #include "IRenderTechniqueAccessor.h"
 
-class CRenderPipeline : public IGameLoopHandler, public IRenderTechniqueImporter, public IRenderTechniqueAccessor
+class CRenderPipeline :
+virtual public IGameLoopHandler,
+virtual public IRenderTechniqueImporter,
+virtual public IRenderTechniqueAccessor,
+virtual public std::enable_shared_from_this<CRenderPipeline>
 {
 private:
     
 protected:
+    
+    static CSharedBatchingMgr m_batchingMgr;
+    CSharedBatchingMgr getBatchingMgr(void);
     
     void _OnGameLoopUpdate(f32 deltatime);
     

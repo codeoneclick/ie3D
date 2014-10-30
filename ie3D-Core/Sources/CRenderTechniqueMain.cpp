@@ -48,3 +48,8 @@ void CRenderTechniqueMain::draw(void)
 {
     m_quad->draw();
 }
+
+void CRenderTechniqueMain::batch(void)
+{
+    
+}

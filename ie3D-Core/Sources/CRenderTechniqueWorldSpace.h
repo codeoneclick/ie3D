@@ -38,6 +38,7 @@ public:
     void bind(void);
     void unbind(void);
     void draw(void);
+    void batch(void);
 };
 
 #endif
