@@ -24,6 +24,7 @@
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
 #include "CRenderPipeline.h"
+#include "CBatchingMgr.h"
 #include "CRenderTechniqueMain.h"
 #include "CRenderTechniqueWorldSpace.h"
 #include "CRenderTechniqueScreenSpace.h"
@@ -45,6 +46,8 @@ m_configurationAccessor(configurationAccessor)
     assert(m_inputContext != nullptr);
     
     m_renderPipeline = std::make_shared<CRenderPipeline>(m_graphicsContext);
+    CSharedBatchingMgr batchingMgr = std::make_shared<CBatchingMgr>(m_renderPipeline);
+    m_renderPipeline->setBatchingMgr(batchingMgr);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
     
     m_collisionMgr = std::make_shared<CCollisionMgr>();

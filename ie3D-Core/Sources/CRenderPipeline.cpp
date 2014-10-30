@@ -14,9 +14,9 @@
 #include "CTexture.h"
 #include "CBatchingMgr.h"
 
-CSharedBatchingMgr CRenderPipeline::m_batchingMgr = nullptr;
 
-CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext) : IRenderTechniqueImporter(graphicContext), IRenderTechniqueAccessor()
+CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext) : IRenderTechniqueImporter(graphicContext), IRenderTechniqueAccessor(),
+m_batchingMgr(nullptr)
 {
 
 }
@@ -26,13 +26,9 @@ CRenderPipeline::~CRenderPipeline(void)
     
 }
 
-CSharedBatchingMgr CRenderPipeline::getBatchingMgr(void)
+void CRenderPipeline::setBatchingMgr(CSharedBatchingMgrRef batchingMgr)
 {
-    if(m_batchingMgr == nullptr)
-    {
-        m_batchingMgr = std::make_shared<CBatchingMgr>(IRenderTechniqueImporter::shared_from_this());
-    }
-    return m_batchingMgr;
+    m_batchingMgr = batchingMgr;
 }
 
 void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
@@ -51,9 +47,12 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
     {
         CSharedRenderTechniqueWorldSpace technique = iterator.second;
         
-        CRenderPipeline::getBatchingMgr()->lock(iterator.first);
-        technique->batch();
-        m_batchingMgr->unlock(iterator.first);
+        if(m_batchingMgr != nullptr)
+        {
+            m_batchingMgr->lock(iterator.first);
+            technique->batch();
+            m_batchingMgr->unlock(iterator.first);
+        }
         
         technique->bind();
         technique->draw();

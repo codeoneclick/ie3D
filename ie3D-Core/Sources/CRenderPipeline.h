@@ -14,24 +14,23 @@
 #include "IRenderTechniqueAccessor.h"
 
 class CRenderPipeline :
-virtual public IGameLoopHandler,
-virtual public IRenderTechniqueImporter,
-virtual public IRenderTechniqueAccessor,
-virtual public std::enable_shared_from_this<CRenderPipeline>
+public IGameLoopHandler,
+public IRenderTechniqueImporter,
+public IRenderTechniqueAccessor
 {
 private:
     
 protected:
     
-    static CSharedBatchingMgr m_batchingMgr;
-    CSharedBatchingMgr getBatchingMgr(void);
-    
+    CSharedBatchingMgr m_batchingMgr;
     void _OnGameLoopUpdate(f32 deltatime);
     
 public:
     
     CRenderPipeline(ISharedGraphicsContextRef graphicContext);
     ~CRenderPipeline(void);
+    
+    void setBatchingMgr(CSharedBatchingMgrRef batchingMgr);
     
     CSharedTexture preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height);
     CSharedTexture getTechniqueTexture(const std::string& techniqueName);
