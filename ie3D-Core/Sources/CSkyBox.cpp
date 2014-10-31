@@ -209,5 +209,5 @@ void CSkyBox::onUnbind(const std::string& mode)
 
 void CSkyBox::onBatch(const std::string& mode)
 {
-    IGameObject::onBatch(mode);
+   
 }

@@ -29,11 +29,20 @@ public:
     CBatchingMgr(ISharedRenderTechniqueImporterRef renderTechniqueImporter);
     ~CBatchingMgr(void);
     
-    void lock(const std::string& mode);
-    void unlock(const std::string& mode);
-    void batch(const std::string& mode,
+    void lock(const std::string& techniqueName);
+    void unlock(const std::string& techniqueName);
+    
+    void batch(const std::string& techniqueName,
                ui32 renderQueuePosition,
-               const std::tuple<CSharedMesh, CSharedAnimationMixer>& model,
+               CSharedMeshRef mesh,
+               CSharedMaterialRef material,
+               const std::function<void(CSharedMaterialRef)>& materialBindImposer,
+               const glm::mat4x4& matrix);
+    
+    void batch(const std::string& techniqueName,
+               ui32 renderQueuePosition,
+               CSharedMeshRef mesh,
+               CSharedAnimationMixerRef animationMixer,
                CSharedMaterialRef material,
                const std::function<void(CSharedMaterialRef)>& materialBindImposer,
                const glm::mat4x4& matrix);

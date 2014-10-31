@@ -219,5 +219,5 @@ void CParticleEmitter::onUnbind(const std::string& mode)
 
 void CParticleEmitter::onBatch(const std::string& mode)
 {
-    IGameObject::onBatch(mode);
+
 }

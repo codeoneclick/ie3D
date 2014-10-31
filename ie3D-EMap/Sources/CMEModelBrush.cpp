@@ -48,11 +48,8 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
     IGameObject::onConfigurationLoaded(configuration, success);
     
     m_arrows.at(E_PLACEMENT_MODEL_ARROW_X) = CMEModelBrush::createArrowModel(E_PLACEMENT_MODEL_ARROW_X);
-    m_arrows.at(E_PLACEMENT_MODEL_ARROW_X)->setCustomShaderUniform(glm::vec4(1.0, 0.0, 0.0, 1.0), "IN_color");
     m_arrows.at(E_PLACEMENT_MODEL_ARROW_Y) = CMEModelBrush::createArrowModel(E_PLACEMENT_MODEL_ARROW_Y);
-    m_arrows.at(E_PLACEMENT_MODEL_ARROW_Y)->setCustomShaderUniform(glm::vec4(0.0, 1.0, 0.0, 1.0), "IN_color");
     m_arrows.at(E_PLACEMENT_MODEL_ARROW_Z) = CMEModelBrush::createArrowModel(E_PLACEMENT_MODEL_ARROW_Z);
-    m_arrows.at(E_PLACEMENT_MODEL_ARROW_Z)->setCustomShaderUniform(glm::vec4(0.0, 0.0, 1.0, 1.0), "IN_color");
 
     IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);
@@ -64,22 +61,28 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_PLACEMENT_MODEL_ARROW arro
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
-    
+    glm::u8vec4 color = glm::u8vec4(255);
     switch (arrow)
     {
         case E_PLACEMENT_MODEL_ARROW_X:
         {
-            maxBound = glm::vec3(8.0, 2.0, 2.0);
+            maxBound = glm::vec3(12.0, 1.0, 1.0);
+            minBound = glm::vec3(1.0, 0.0, 0.0);
+            color = glm::vec4(255, 0, 0, 255);
         }
             break;
         case E_PLACEMENT_MODEL_ARROW_Y:
         {
-            maxBound = glm::vec3(2.0, 8.0, 2.0);
+            maxBound = glm::vec3(1.0, 12.0, 1.0);
+            minBound = glm::vec3(0.0, 1.0, 0.0);
+            color = glm::vec4(0, 255, 0, 255);
         }
             break;
         case E_PLACEMENT_MODEL_ARROW_Z:
         {
-            maxBound = glm::vec3(2.0, 2.0, 8.0);
+            maxBound = glm::vec3(1.0, 1.0, 12.0);
+            minBound = glm::vec3(0.0, 0.0, 1.0);
+            color = glm::vec4(0, 0, 255, 255);
         }
             break;
             
@@ -102,6 +105,11 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_PLACEMENT_MODEL_ARROW arro
     vertexData[5].m_position = glm::vec3(maxBound.x, minBound.y, minBound.z);
     vertexData[6].m_position = glm::vec3(maxBound.x, maxBound.y, minBound.z);
     vertexData[7].m_position = glm::vec3(minBound.x, maxBound.y, minBound.z);
+    
+    for(ui32 i = 0; i < 8; ++i)
+    {
+        vertexData[i].m_color = color;
+    }
     
     vertexBuffer->unlock();
     

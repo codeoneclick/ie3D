@@ -203,5 +203,5 @@ void CLandscapeEdges::onUnbind(const std::string& mode)
 
 void CLandscapeEdges::onBatch(const std::string& mode)
 {
-    IGameObject::onBatch(mode);
+
 }

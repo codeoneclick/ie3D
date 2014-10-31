@@ -19,6 +19,7 @@ private:
 protected:
     
     ui32 m_numTriangles;
+    CSharedBatchingMgr m_batchingMgr;
     
 public:
     
@@ -28,6 +29,8 @@ public:
     virtual CSharedTexture preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height) = 0;
     virtual CSharedTexture getTechniqueTexture(const std::string& techniqueName) = 0;
     virtual CSharedMaterial getTechniqueMaterial(const std::string& techniqueName) = 0;
+    
+    CSharedBatchingMgr getBatchingMgr(void) const;
     
     virtual ui32 getScreenWidth(void) = 0;
     virtual ui32 getScreenHeight(void) = 0;

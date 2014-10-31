@@ -19,6 +19,7 @@
 #include "CResourceAccessor.h"
 #include "CConfigurationGameObjects.h"
 #include "CGlobalLightSource.h"
+#include "CBatchingMgr.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
                          ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -99,15 +100,16 @@ ui32 IGameObject::numTriangles(void)
     return m_mesh && m_mesh->isLoaded() ? m_mesh->getNumIndices() / 3 : 0;
 }
 
-void IGameObject::onBind(const std::string& mode)
+void IGameObject::onBind(const std::string& techniqueName)
 {
     assert(m_mesh != nullptr);
     assert(m_camera != nullptr);
     assert(m_globalLightSource != nullptr);
-    assert(m_materials.find(mode) != m_materials.end());
+    assert(m_materials.find(techniqueName) != m_materials.end());
     
-    auto iterator = m_materials.find(mode);
-    if(!m_isBatching && iterator->second->getShader()->isLoaded())
+    auto iterator = m_materials.find(techniqueName);
+    if(!m_isBatching &&
+       iterator->second->getShader()->isLoaded())
     {
         iterator->second->bind();
         m_mesh->bind(iterator->second->getShader()->getAttributesRef());
@@ -115,38 +117,53 @@ void IGameObject::onBind(const std::string& mode)
     }
 }
 
-void IGameObject::onDraw(const std::string& mode)
+void IGameObject::onDraw(const std::string& techniqueName)
 {
     assert(m_mesh != nullptr);
     assert(m_camera != nullptr);
     assert(m_globalLightSource != nullptr);
-    assert(m_materials.find(mode) != m_materials.end());
+    assert(m_materials.find(techniqueName) != m_materials.end());
     
-    auto iterator = m_materials.find(mode);
-    if(iterator->second->getShader()->isLoaded())
+    auto iterator = m_materials.find(techniqueName);
+    if(!m_isBatching &&
+       iterator->second->getShader()->isLoaded())
     {
         m_mesh->draw();
     }
 }
 
-void IGameObject::onUnbind(const std::string& mode)
+void IGameObject::onUnbind(const std::string& techniqueName)
 {
     assert(m_mesh != nullptr);
     assert(m_camera != nullptr);
     assert(m_globalLightSource != nullptr);
-    assert(m_materials.find(mode) != m_materials.end());
+    assert(m_materials.find(techniqueName) != m_materials.end());
     
-    auto iterator = m_materials.find(mode);
-    if(!m_isBatching && iterator->second->getShader()->isLoaded())
+    auto iterator = m_materials.find(techniqueName);
+    if(!m_isBatching &&
+       iterator->second->getShader()->isLoaded())
     {
         iterator->second->unbind();
         m_mesh->unbind(iterator->second->getShader()->getAttributesRef());
     }
 }
 
-void IGameObject::onBatch(const std::string& mode)
+void IGameObject::onBatch(const std::string& techniqueName)
 {
-    
+    assert(m_materials.find(techniqueName) != m_materials.end());
+    CSharedMaterial material = m_materials.find(techniqueName)->second;
+    assert(material->getShader() != nullptr);
+    if(m_mesh != nullptr &&
+       m_mesh->isLoaded() &&
+       m_isBatching)
+    {
+        m_renderTechniqueAccessor->getBatchingMgr()->batch(techniqueName,
+                                                           m_zOrder,
+                                                           m_mesh,
+                                                           material,
+                                                           m_materialBindImposer,
+                                                           m_matrixWorld);
+    }
 }
 
 void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)

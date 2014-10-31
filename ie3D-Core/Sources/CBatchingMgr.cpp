@@ -28,40 +28,39 @@ CBatchingMgr::~CBatchingMgr(void)
     m_batches.clear();
 }
 
-void CBatchingMgr::lock(const std::string& mode)
+void CBatchingMgr::lock(const std::string& techniqueName)
 {
     for(const auto& iterator : m_batches)
     {
-        if(iterator.second->getMode() == mode)
+        if(iterator.second->getTechniqueName() == techniqueName)
         {
             iterator.second->lock();
         }
     }
 }
 
-void CBatchingMgr::unlock(const std::string& mode)
+void CBatchingMgr::unlock(const std::string& techniqueName)
 {
     for(const auto& iterator : m_batches)
     {
-        if(iterator.second->getMode() == mode)
+        if(iterator.second->getTechniqueName() == techniqueName)
         {
             iterator.second->unlock();
         }
     }
 }
 
-void CBatchingMgr::batch(const std::string& mode,
+void CBatchingMgr::batch(const std::string& techniqueName,
                          ui32 renderQueuePosition,
-                         const std::tuple<CSharedMesh, CSharedAnimationMixer>& model,
+                         CSharedMeshRef mesh,
                          CSharedMaterialRef material,
                          const std::function<void(CSharedMaterialRef)>& materialBindImposer,
                          const glm::mat4x4& matrix)
 {
     assert(material != nullptr);
     assert(material->getShader() != nullptr);
-    //assert(std::get<1>(model)->Get_TransformationSize() <= CBatch::k_MAX_NUM_TRANSFORMATION);
-    assert(std::get<0>(model)->getNumVertices() <= CBatch::k_MAX_NUM_VERTICES);
-    assert(std::get<0>(model)->getNumIndices() <= CBatch::k_MAX_NUM_INDICES);
+    assert(mesh->getNumVertices() <= CBatch::k_MAX_NUM_VERTICES);
+    assert(mesh->getNumIndices() <= CBatch::k_MAX_NUM_INDICES);
     
     for(ui32 i = 0; i < k_MAX_BATCHES_PER_MODELTYPE; ++i)
     {
@@ -72,24 +71,69 @@ void CBatchingMgr::batch(const std::string& mode,
         
         if(iterator == m_batches.end())
         {
-            m_batches.insert(std::make_pair(guid, std::make_shared<CBatch>(mode,
+            m_batches.insert(std::make_pair(guid, std::make_shared<CBatch>(techniqueName,
                                                                            renderQueuePosition,
                                                                            material,
                                                                            materialBindImposer)));
             iterator = m_batches.find(guid);
-            //m_renderMgr->RegisterWorldSpaceRenderHandler(mode, iterator->second);
-            iterator->second->batch(model, matrix);
+            m_renderTechniqueImporter->addRenderTechniqueHandler(techniqueName, iterator->second);
+            iterator->second->batch(mesh, matrix);
             break;
         }
-        /*else if((iterator->second->getNumUnlockedNumTransformations() + std::get<1>(model)->Get_TransformationSize()) > CBatch::k_MAX_NUM_TRANSFORMATION ||
-                (iterator->second->getNumUnlockedNumVertices() + std::get<0>(model)->getNumVertices()) > CBatch::k_MAX_NUM_VERTICES ||
-                (iterator->second->getNumUnlockedNumIndices() + std::get<0>(model)->getNumIndices()) > CBatch::k_MAX_NUM_INDICES)*/
-        //{
-        //    continue;
-        //}
+        else if((iterator->second->getNumUnlockedVertices() + mesh->getNumVertices() > CBatch::k_MAX_NUM_VERTICES ||
+                (iterator->second->getNumUnlockedIndices() + mesh->getNumIndices()) > CBatch::k_MAX_NUM_INDICES))
+        {
+            continue;
+        }
         else
         {
-			iterator->second->batch(model, matrix);
+            iterator->second->batch(mesh, matrix);
+            break;
+        }
+        assert(false);
+    }
+}
+
+void CBatchingMgr::batch(const std::string& techniqueName,
+                         ui32 renderQueuePosition,
+                         CSharedMeshRef mesh,
+                         CSharedAnimationMixerRef animationMixer,
+                         CSharedMaterialRef material,
+                         const std::function<void(CSharedMaterialRef)>& materialBindImposer,
+                         const glm::mat4x4& matrix)
+{
+    assert(material != nullptr);
+    assert(material->getShader() != nullptr);
+    assert(mesh->getNumVertices() <= CBatch::k_MAX_NUM_VERTICES);
+    assert(mesh->getNumIndices() <= CBatch::k_MAX_NUM_INDICES);
+    
+    for(ui32 i = 0; i < k_MAX_BATCHES_PER_MODELTYPE; ++i)
+    {
+        std::ostringstream stream;
+        stream<<i;
+        std::string guid = material->getShader()->getGuid() + ".batch_" + stream.str();
+        auto iterator = m_batches.find(guid);
+        
+        if(iterator == m_batches.end())
+        {
+            m_batches.insert(std::make_pair(guid, std::make_shared<CBatch>(techniqueName,
+                                                                           renderQueuePosition,
+                                                                           material,
+                                                                           materialBindImposer)));
+            iterator = m_batches.find(guid);
+            m_renderTechniqueImporter->addRenderTechniqueHandler(techniqueName, iterator->second);
+            iterator->second->batch(mesh, animationMixer, matrix);
+            break;
+        }
+        else if((iterator->second->getNumUnlockedTransformations() + animationMixer->getTransformationSize() > CBatch::k_MAX_NUM_TRANSFORMATION) ||
+                (iterator->second->getNumUnlockedVertices() + mesh->getNumVertices() > CBatch::k_MAX_NUM_VERTICES ||
+                (iterator->second->getNumUnlockedIndices() + mesh->getNumIndices()) > CBatch::k_MAX_NUM_INDICES))
+        {
+            continue;
+        }
+        else
+        {
+            iterator->second->batch(mesh, animationMixer, matrix);
             break;
         }
         assert(false);

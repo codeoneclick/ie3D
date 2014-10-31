@@ -17,6 +17,8 @@
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CAnimationMixer.h"
+#include "IRenderTechniqueAccessor.h"
+#include "CBatchingMgr.h"
 
 CModel::CModel(CSharedResourceAccessorRef resourceAccessor,
                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -90,33 +92,48 @@ ui32 CModel::numTriangles(void)
     return IGameObject::numTriangles();
 }
 
-void CModel::onBind(const std::string& mode)
+void CModel::onBind(const std::string& techniqueName)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::onBind(mode);
+        IGameObject::onBind(techniqueName);
     }
 }
 
-void CModel::onDraw(const std::string& mode)
+void CModel::onDraw(const std::string& techniqueName)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::onDraw(mode);
+        IGameObject::onDraw(techniqueName);
     }
 }
 
-void CModel::onUnbind(const std::string& mode)
+void CModel::onUnbind(const std::string& techniqueName)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::onUnbind(mode);
+        IGameObject::onUnbind(techniqueName);
     }
 }
 
-void CModel::onBatch(const std::string& mode)
+void CModel::onBatch(const std::string& techniqueName)
 {
-    IGameObject::onBatch(mode);
+    assert(m_materials.find(techniqueName) != m_materials.end());
+    CSharedMaterial material = m_materials.find(techniqueName)->second;
+    assert(material->getShader() != nullptr);
+    if(m_animationMixer != nullptr &&
+       m_mesh != nullptr &&
+       m_mesh->isLoaded() &&
+       m_isBatching)
+    {
+        m_renderTechniqueAccessor->getBatchingMgr()->batch(techniqueName,
+                                                           m_zOrder,
+                                                           m_mesh,
+                                                           m_animationMixer,
+                                                           material,
+                                                           m_materialBindImposer,
+                                                           m_matrixWorld);
+    }
 }
 
 void CModel::bindCustomShaderUniforms(CSharedMaterialRef material)

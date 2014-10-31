@@ -9,7 +9,8 @@
 #include "IRenderTechniqueAccessor.h"
 
 IRenderTechniqueAccessor::IRenderTechniqueAccessor(void) :
-m_numTriangles(0)
+m_numTriangles(0),
+m_batchingMgr(nullptr)
 {
     
 }
@@ -17,4 +18,9 @@ m_numTriangles(0)
 IRenderTechniqueAccessor::~IRenderTechniqueAccessor(void)
 {
     
+}
+
+CSharedBatchingMgr IRenderTechniqueAccessor::getBatchingMgr(void) const
+{
+    return m_batchingMgr;
 }

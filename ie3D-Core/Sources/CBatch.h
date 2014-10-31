@@ -22,12 +22,13 @@ protected:
     
     CSharedMaterial m_material;
     std::function<void(CSharedMaterialRef)> m_materialBindImposer;
-    CSharedMesh m_mesh;
+    CSharedMesh m_batchMesh;
     
     std::string m_guid;
     std::string m_mode;
     
-    std::vector<std::tuple<CSharedMesh, CSharedAnimationMixer>> m_models;
+    std::vector<CSharedMesh> m_meshes;
+    std::vector<CSharedAnimationMixer> m_animationMixers;
     std::vector<glm::mat4x4> m_matrices;
 	std::vector<glm::mat4x4> m_transformations;
     
@@ -44,10 +45,10 @@ protected:
     i32  zOrder(void);
     bool checkOcclusion(void);
     ui32 numTriangles(void);
-    void onBind(const std::string& mode);
-    void onDraw(const std::string& mode);
-    void onUnbind(const std::string& mode);
-    void onBatch(const std::string& mode);
+    void onBind(const std::string& techniqueName);
+    void onDraw(const std::string& techniqueName);
+    void onUnbind(const std::string& techniqueName);
+    void onBatch(const std::string& techniqueName);
     
 public:
     
@@ -62,16 +63,22 @@ public:
     static const ui32 k_MAX_NUM_TRANSFORMATION;
     
     std::string getGuid(void) const;
-    std::string getMode(void) const;
+    std::string getTechniqueName(void) const;
     
-    ui32 getNumUnlockedNumVertices(void) const;
-    ui32 getNumUnlockedNumIndices(void) const;
-    ui32 getNumUnlockedNumTransformations(void) const;
+    ui32 getNumUnlockedVertices(void) const;
+    ui32 getNumUnlockedIndices(void) const;
+    ui32 getNumUnlockedTransformations(void) const;
+    
+    bool isAnimated(void) const;
     
     void lock(void);
     void unlock(void);
     
-    void batch(const std::tuple<CSharedMesh, CSharedAnimationMixer>& model,
+    void batch(CSharedMeshRef mesh,
+               const glm::mat4x4& matrix);
+    
+    void batch(CSharedMeshRef mesh,
+               CSharedAnimationMixerRef animationMixer,
                const glm::mat4x4& matrix);
 };
 

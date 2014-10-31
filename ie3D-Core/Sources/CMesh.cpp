@@ -284,7 +284,10 @@ CSharedMesh CMesh::constructCustomMesh(const std::string& guid,
     mesh->m_vertexBuffer = vertexBuffer;
     mesh->m_indexBuffer = indexBuffer;
     
-    mesh->m_meshData = std::make_shared<CMeshData>(nullptr, nullptr, 0, 0,
+    mesh->m_meshData = std::make_shared<CMeshData>(nullptr,
+                                                   nullptr,
+                                                   vertexBuffer->getUsedSize(),
+                                                   indexBuffer->getUsedSize(),
                                                    maxBound,
                                                    minBound);
     mesh->m_status |= E_RESOURCE_STATUS_LOADED;

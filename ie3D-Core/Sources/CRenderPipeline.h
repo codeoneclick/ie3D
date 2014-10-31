@@ -22,7 +22,6 @@ private:
     
 protected:
     
-    CSharedBatchingMgr m_batchingMgr;
     void _OnGameLoopUpdate(f32 deltatime);
     
 public:

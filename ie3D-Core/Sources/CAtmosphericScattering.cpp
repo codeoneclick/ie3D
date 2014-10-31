@@ -157,5 +157,5 @@ void CAtmosphericScattering::onUnbind(const std::string& mode)
 
 void CAtmosphericScattering::onBatch(const std::string& mode)
 {
-    IGameObject::onBatch(mode);
+   
 }

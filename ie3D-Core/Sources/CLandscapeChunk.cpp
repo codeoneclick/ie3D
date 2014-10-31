@@ -178,7 +178,7 @@ void CLandscapeChunk::onUnbind(const std::string& mode)
 
 void CLandscapeChunk::onBatch(const std::string& mode)
 {
-    IGameObject::onBatch(mode);
+   
 }
 
 void CLandscapeChunk::bindCustomShaderUniforms(CSharedMaterialRef material)

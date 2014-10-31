@@ -1,9 +1,9 @@
 <material
     render_operation_name="render.operation.world.base"
-    is_cull_face="1"
+    is_cull_face="0"
     is_depth_test="0"
-    is_depth_mask="0"
-    is_blending="1"
+    is_depth_mask="1"
+    is_blending="0"
     cull_face_mode="GL_FRONT"
     blending_function_source="GL_SRC_ALPHA"
     blending_function_destination="GL_ONE_MINUS_SRC_ALPHA"

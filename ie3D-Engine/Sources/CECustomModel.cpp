@@ -17,6 +17,7 @@ CECustomModel::CECustomModel(CSharedResourceAccessorRef resourceAccessor,
 IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
     m_zOrder = E_GAME_OBJECT_Z_ORDER_CUSTOM;
+    m_isBatching = true;
 }
 
 CECustomModel::~CECustomModel(void)

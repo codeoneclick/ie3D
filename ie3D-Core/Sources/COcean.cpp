@@ -160,7 +160,7 @@ void COcean::onUnbind(const std::string& mode)
 
 void COcean::onBatch(const std::string& mode)
 {
-    IGameObject::onBatch(mode);
+
 }
 
 void COcean::bindCustomShaderUniforms(CSharedMaterialRef material)

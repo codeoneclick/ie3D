@@ -15,8 +15,7 @@
 #include "CBatchingMgr.h"
 
 
-CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext) : IRenderTechniqueImporter(graphicContext), IRenderTechniqueAccessor(),
-m_batchingMgr(nullptr)
+CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext) : IRenderTechniqueImporter(graphicContext), IRenderTechniqueAccessor()
 {
 
 }
