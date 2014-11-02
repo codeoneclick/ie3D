@@ -1,7 +1,7 @@
 <material
     render_operation_name=""
     is_cull_face="0"
-    is_depth_test="0"
+    is_depth_test="1"
     is_depth_mask="1"
     is_blending="0"
     cull_face_mode="GL_FRONT"
@@ -16,14 +16,18 @@
     is_shadowing="0"
     is_debugging="0">
     <shader
-    vs_filename="shaderScreenQuad.vert"
-    fs_filename="shaderScreenQuad.frag"/>
+    vs_filename="shaderScreenMixOverlapping.vert"
+    fs_filename="shaderScreenMixOverlapping.frag"/>
     <textures>
         <texture
         filename=""
-        render_operation_name="render.operation.screen.mix.overlapping"
+        render_operation_name="render.operation.world.base"
         sampler_id="0"
+        wrap_mode="GL_CLAMP_TO_EDGE"/>
+        <texture
+        filename=""
+        render_operation_name="render.operation.world.overlapping"
+        sampler_id="1"
         wrap_mode="GL_CLAMP_TO_EDGE"/>
     </textures>
 </material>
-<!--render_operation_name="render.operation.screen.ssao"-->

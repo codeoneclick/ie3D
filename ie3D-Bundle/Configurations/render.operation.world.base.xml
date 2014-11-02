@@ -1,9 +1,9 @@
 <operation
     guid="render.operation.world.base"
-    index="3"
+    index="4"
     width="1024"
     height="768"
-    clear_color_r="1.0"
-    clear_color_g="1.0"
-    clear_color_b="1.0"
-    clear_color_a="0.0"/>
+    clear_color_r="0.16"
+    clear_color_g="0.32"
+    clear_color_b="0.32"
+    clear_color_a="1.0"/>

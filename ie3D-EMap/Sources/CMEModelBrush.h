@@ -20,7 +20,8 @@ private:
     CSharedLandscape m_landscape;
     CSharedModel m_model;
     
-    std::array<CESharedCustomModel, E_PLACEMENT_MODEL_ARROW_MAX> m_arrows;
+    std::array<CESharedCustomModel, E_MODEL_BRUSH_ARROW_MAX> m_arrows;
+    std::array<CESharedCustomModel, E_MODEL_BRUSH_PLANE_MAX> m_planes;
     
 protected:
     
@@ -37,7 +38,8 @@ protected:
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
     
-    CESharedCustomModel createArrowModel(E_PLACEMENT_MODEL_ARROW arrow);
+    CESharedCustomModel createArrowModel(E_MODEL_BRUSH_ARROW arrow);
+    CESharedCustomModel createPlaneModel(E_MODEL_BRUSH_PLANE plane);
     
 public:
     

@@ -473,6 +473,7 @@ void CMaterial::bind(void)
        getCachedParameters()->m_isDepthTest != m_parameters->m_isDepthTest)
     {
         glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LEQUAL);
         getCachedParameters()->m_isDepthTest = m_parameters->m_isDepthTest;
     }
     else if(getCachedParameters()->m_isDepthTest != m_parameters->m_isDepthTest)

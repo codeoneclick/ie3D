@@ -1,9 +1,9 @@
 <material
-    render_operation_name="render.operation.world.base"
-    is_cull_face="0"
-    is_depth_test="0"
+    render_operation_name="render.operation.world.overlapping"
+    is_cull_face="1"
+    is_depth_test="1"
     is_depth_mask="1"
-    is_blending="0"
+    is_blending="1"
     cull_face_mode="GL_FRONT"
     blending_function_source="GL_SRC_ALPHA"
     blending_function_destination="GL_ONE_MINUS_SRC_ALPHA"

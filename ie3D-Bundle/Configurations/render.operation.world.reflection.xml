@@ -1,9 +1,9 @@
 <operation
     guid="render.operation.world.reflection"
-    index="1"
+    index="0"
     width="512"
     height="512"
-    clear_color_r="0.5"
-    clear_color_g="0.5"
-    clear_color_b="0.5"
-    clear_color_a="0.0"/>
+    clear_color_r="0.16"
+    clear_color_g="0.32"
+    clear_color_b="0.32"
+    clear_color_a="1.0"/>
