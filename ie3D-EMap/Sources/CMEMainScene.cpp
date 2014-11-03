@@ -1,12 +1,12 @@
 //
-//  CMEScene.cpp
+//  CMEMainScene.cpp
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#include "CMEScene.h"
+#include "CMEMainScene.h"
 #include "IGameTransition.h"
 #include "IGameObject.h"
 #include "CCamera.h"
@@ -17,7 +17,7 @@
 #include "CAtmosphericScattering.h"
 #include "CParticleEmitter.h"
 #include "CMapDragController.h"
-#include "CMEGameTransition.h"
+#include "CMEMainSceneTransition.h"
 #include "CMELandscapeBrush.h"
 #include "CCollisionMgr.h"
 #include "CMaterial.h"
@@ -30,7 +30,7 @@
 #include "CEComplexModel.h"
 #include "CMEModelBrush.h"
 
-CMEScene::CMEScene(IGameTransition* root) :
+CMEMainScene::CMEMainScene(IGameTransition* root) :
 IScene(root),
 m_landscapeBrush(nullptr),
 m_previousDraggedPoint(glm::ivec2(0, 0)),
@@ -45,12 +45,12 @@ m_sceneToUICommands(nullptr)
     
 }
 
-CMEScene::~CMEScene(void)
+CMEMainScene::~CMEMainScene(void)
 {
     
 }
 
-void CMEScene::load(void)
+void CMEMainScene::load(void)
 {
     assert(m_root != nullptr);
     m_camera = m_root->createCamera(45.0, 0.01, 1024.0,
@@ -87,7 +87,7 @@ void CMEScene::load(void)
     
     m_root->addCollisionHandler(shared_from_this());
     
-    CMEGameTransition* transition = static_cast<CMEGameTransition*>(m_root);
+    CMEMainSceneTransition* transition = static_cast<CMEMainSceneTransition*>(m_root);
     m_landscapeBrush = transition->createLandscapeBrush("gameobject.landscape.brush.xml");
     m_root->addCustomGameObject(m_landscapeBrush);
     m_landscapeBrush->setLandscape(m_landscape);
@@ -103,14 +103,14 @@ void CMEScene::load(void)
     m_root->addGestureRecognizerHandler(m_mapDragController);
     m_root->addGestureRecognizerHandler(std::dynamic_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
     
-    m_uiToSceneCommands->connectSetBrushSizeCommand(std::bind(&CMEScene::setBrushSize, this, std::placeholders::_1));
-    m_uiToSceneCommands->connectSetBrushStrengthCommand(std::bind(&CMEScene::setBrushStrength, this, std::placeholders::_1));
-    m_uiToSceneCommands->connectSetFalloffCoefficientCommand(std::bind(&CMEScene::setFalloffCoefficient, this, std::placeholders::_1));
-    m_uiToSceneCommands->connectSetSmoothCoefficientCommand(std::bind(&CMEScene::setSmoothCoefficient, this, std::placeholders::_1));
-    m_uiToSceneCommands->connectSetTextureSamplerCommand(std::bind(&CMEScene::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
-    m_uiToSceneCommands->connectSetTillingTexcoordCommand(std::bind(&CMEScene::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
+    m_uiToSceneCommands->connectSetBrushSizeCommand(std::bind(&CMEMainScene::setBrushSize, this, std::placeholders::_1));
+    m_uiToSceneCommands->connectSetBrushStrengthCommand(std::bind(&CMEMainScene::setBrushStrength, this, std::placeholders::_1));
+    m_uiToSceneCommands->connectSetFalloffCoefficientCommand(std::bind(&CMEMainScene::setFalloffCoefficient, this, std::placeholders::_1));
+    m_uiToSceneCommands->connectSetSmoothCoefficientCommand(std::bind(&CMEMainScene::setSmoothCoefficient, this, std::placeholders::_1));
+    m_uiToSceneCommands->connectSetTextureSamplerCommand(std::bind(&CMEMainScene::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
+    m_uiToSceneCommands->connectSetTillingTexcoordCommand(std::bind(&CMEMainScene::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
     
-    m_landscape->addConfigurationLoadingCommand(std::bind(&CMEScene::onConfigurationLoaded, this, std::placeholders::_1));
+    m_landscape->addConfigurationLoadingCommand(std::bind(&CMEMainScene::onConfigurationLoaded, this, std::placeholders::_1));
     
     m_globalLightSource->setAngle(3.0);
     m_globalLightSource->setDistanceToSun(512.0);
@@ -119,7 +119,7 @@ void CMEScene::load(void)
     m_globalLightSource->setLookAt(glm::vec3(256.0, 0.0, 256.0));
 }
 
-void CMEScene::update(f32 deltatime)
+void CMEMainScene::update(f32 deltatime)
 {
     m_mapDragController->update(deltatime);
     static f32 angle = 0.0;
@@ -127,7 +127,7 @@ void CMEScene::update(f32 deltatime)
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
 }
 
-std::vector<ISharedGameObject> CMEScene::colliders(void)
+std::vector<ISharedGameObject> CMEMainScene::colliders(void)
 {
     std::vector<ISharedGameObject> colliders;
     for(ui32 i = 0; i < m_landscape->getChunks().size(); ++i)
@@ -140,12 +140,12 @@ std::vector<ISharedGameObject> CMEScene::colliders(void)
     return colliders;
 }
 
-void CMEScene::onCollision(const glm::vec3& position, ISharedGameObjectRef, E_INPUT_BUTTON inputButton)
+void CMEMainScene::onCollision(const glm::vec3& position, ISharedGameObjectRef, E_INPUT_BUTTON inputButton)
 {
     
 }
 
-void CMEScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
+void CMEMainScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
     {
@@ -153,7 +153,7 @@ void CMEScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTO
     }
 }
 
-void CMEScene::onGestureRecognizerMoved(const glm::ivec2& point)
+void CMEMainScene::onGestureRecognizerMoved(const glm::ivec2& point)
 {
     glm::vec3 position;
     static ui32 index = 0;
@@ -173,7 +173,7 @@ void CMEScene::onGestureRecognizerMoved(const glm::ivec2& point)
     }
 }
 
-void CMEScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
+void CMEMainScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
     {
@@ -184,12 +184,12 @@ void CMEScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTO
     }
 }
 
-void CMEScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
+void CMEMainScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
 {
     
 }
 
-void CMEScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
+void CMEMainScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
 {
     if(direction == E_SCROLL_WHEEL_DIRECTION_FORWARD &&
        m_editableSettings.m_brushSize < 32.0)
@@ -203,78 +203,78 @@ void CMEScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction
         m_editableSettings.m_brushSize--;
         m_editableSettings.m_brushSize = m_editableSettings.m_brushSize % 2 != 0 ? m_editableSettings.m_brushSize - 1 : m_editableSettings.m_brushSize;
     }
-    CMEScene::setBrushSize(m_editableSettings.m_brushSize);
+    CMEMainScene::setBrushSize(m_editableSettings.m_brushSize);
     if(m_sceneToUICommands != nullptr)
     {
         m_sceneToUICommands->executeSetBrushSizeCommand(m_editableSettings.m_brushSize);
     }
 }
 
-void CMEScene::onKeyUp(i32)
+void CMEMainScene::onKeyUp(i32)
 {
     
 }
 
-void CMEScene::onKeyDown(i32)
+void CMEMainScene::onKeyDown(i32)
 {
     
 }
 
-CSharedMEUIToSceneCommands CMEScene::getUIToSceneCommands(void) const
+CSharedMEUIToSceneCommands CMEMainScene::getUIToSceneCommands(void) const
 {
     assert(m_uiToSceneCommands != nullptr);
     return m_uiToSceneCommands;
 }
 
-void CMEScene::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
+void CMEMainScene::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
 {
     m_sceneToUICommands = commands;
 }
 
-void CMEScene::setBrushSize(ui32 value)
+void CMEMainScene::setBrushSize(ui32 value)
 {
     m_editableSettings.m_brushSize = value;
     m_landscapeBrush->setSize(m_editableSettings.m_brushSize);
     m_landscape->setEditableSize(m_editableSettings.m_brushSize);
 }
 
-void CMEScene::setBrushStrength(ui32 value)
+void CMEMainScene::setBrushStrength(ui32 value)
 {
     m_editableSettings.m_brushStrength = value;
     m_landscape->setEditableStrength(value);
 }
 
-void CMEScene::setFalloffCoefficient(ui32 value)
+void CMEMainScene::setFalloffCoefficient(ui32 value)
 {
     m_editableSettings.m_falloffCoefficient = value;
     m_landscape->setEditableFalloffCoefficient(value);
 }
 
-void CMEScene::setSmoothCoefficient(ui32 value)
+void CMEMainScene::setSmoothCoefficient(ui32 value)
 {
     m_editableSettings.m_smoothCoefficient = value;
     m_landscape->setEditableSmoothCoefficient(value);
 }
 
-void CMEScene::setTextureSampler(const std::string& filename, E_SHADER_SAMPLER sampler)
+void CMEMainScene::setTextureSampler(const std::string& filename, E_SHADER_SAMPLER sampler)
 {
     CSharedTexture texture = m_root->getResourceAccessor()->getTexture(filename);
     assert(texture != nullptr);
     m_landscape->setTexture(texture, sampler);
 }
 
-void CMEScene::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
+void CMEMainScene::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 {
     m_landscape->setTillingTexcoord(value, sampler);
 }
 
-void CMEScene::onConfigurationLoaded(ISharedConfigurationRef)
+void CMEMainScene::onConfigurationLoaded(ISharedConfigurationRef)
 {
     m_landscapeMaterial = m_landscape->getMaterial("render.operation.world.base");
-    m_landscape->addResourceLoadingCommand(std::bind(&CMEScene::onResourceLoaded, this, std::placeholders::_1));
+    m_landscape->addResourceLoadingCommand(std::bind(&CMEMainScene::onResourceLoaded, this, std::placeholders::_1));
 }
 
-void CMEScene::onResourceLoaded(ISharedResourceRef resource)
+void CMEMainScene::onResourceLoaded(ISharedResourceRef resource)
 {
     assert(m_landscapeMaterial != nullptr);
     if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_01) == resource)

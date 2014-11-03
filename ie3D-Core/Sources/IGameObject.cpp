@@ -528,7 +528,8 @@ void IGameObject::enableRender(bool value)
 {
     for(const auto& iterator : m_materials)
     {
-		if(m_renderTechniqueImporter != nullptr)
+		if(m_renderTechniqueImporter != nullptr &&
+           m_renderTechniqueImporter->isSupporingRenderTechnique(iterator.first))
 		{
 			value == true ? m_renderTechniqueImporter->addRenderTechniqueHandler(iterator.first, shared_from_this()) :
 			m_renderTechniqueImporter->removeRenderTechniqueHandler(iterator.first, shared_from_this());

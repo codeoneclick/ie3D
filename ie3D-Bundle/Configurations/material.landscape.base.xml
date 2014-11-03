@@ -39,10 +39,10 @@
             render_operation_name="render.operation.world.splatting"
             sampler_id="3"
             wrap_mode="GL_CLAMP_TO_EDGE"/>-->
-            <!--<texture
+            <texture
             filename=""
             render_operation_name="render.operation.world.shadowmap.depth"
             sampler_id="4"
-            wrap_mode="GL_CLAMP_TO_EDGE"/>-->
+            wrap_mode="GL_CLAMP_TO_EDGE"/>
     </textures>
 </material>

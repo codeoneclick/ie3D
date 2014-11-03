@@ -26,12 +26,12 @@ ISharedConfiguration CEConfigurationCustomModelSerializer::serialize(const std::
     pugi::xml_parse_result result = IConfigurationSerializer::openXMLDocument(document, filename);
     assert(result.status == pugi::status_ok);
     
-    std::shared_ptr<CConfigurationModel> modelConfiguration = std::make_shared<CConfigurationModel>();
-    pugi::xml_node mainNode = document.child(modelConfiguration->kModelMainNode.c_str());
+    std::shared_ptr<CEConfigurationCustomModel> customModelConfiguration = std::make_shared<CEConfigurationCustomModel>();
+    pugi::xml_node mainNode = document.child(customModelConfiguration->kCustomModelMainNode.c_str());
     
-    CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(modelConfiguration,
+    CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(customModelConfiguration,
                                                                        mainNode);
-    return modelConfiguration;
+    return customModelConfiguration;
 }
 
 void CEConfigurationCustomModelSerializer::deserialize(const std::string&,

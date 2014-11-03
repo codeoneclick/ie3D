@@ -1,0 +1,13 @@
+<transition guid="transition.map.editor.main.scene">
+    <output_render_operation filename="render.operation.output.xml"/>
+    <world_space_operations>
+        <operation filename="render.operation.world.base.xml"/>
+        <operation filename="render.operation.world.reflection.xml"/>
+        <operation filename="render.operation.world.refraction.xml"/>
+        <operation filename="render.operation.world.shadowmap.xml"/>
+        <operation filename="render.operation.world.overlapping.xml"/>
+    </world_space_operations>
+    <screen_space_operations>
+        <operation filename="render.operation.screen.mix.overlapping.xml"/>
+    </screen_space_operations>
+</transition>

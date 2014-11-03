@@ -1,20 +1,20 @@
 //
-//  CMEScene.h
+//  CMEMainScene.h
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#ifndef CMEScene_h
-#define CMEScene_h
+#ifndef CMEMainScene_h
+#define CMEMainScene_h
 
 #include "IScene.h"
 #include "HMEDeclaration.h"
 
 class CMapDragController;
 
-class CMEScene final :
+class CMEMainScene final :
 public IScene,
 public IGestureRecognizerHandler
 {
@@ -71,8 +71,8 @@ protected:
     
 public:
     
-    CMEScene(IGameTransition* root);
-    ~CMEScene(void);
+    CMEMainScene(IGameTransition* root);
+    ~CMEMainScene(void);
     
     void load(void);
     void update(f32 deltatime);

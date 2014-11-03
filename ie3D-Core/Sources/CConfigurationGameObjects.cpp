@@ -22,7 +22,6 @@ kTextureWrapModeAttribute("wrap_mode")
 CConfigurationTexture::~CConfigurationTexture(void)
 {
     
-    
 }
 
 std::string CConfigurationTexture::getFilename(void) const

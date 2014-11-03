@@ -29,21 +29,38 @@
 #include "CRenderTechniqueWorldSpace.h"
 #include "CRenderTechniqueScreenSpace.h"
 
-IGameTransition::IGameTransition(const std::string& filename,
-                                 ISharedGraphicsContextRef graphicsContext,
-                                 ISharedInputContextRef inputContext,
-                                 CSharedResourceAccessorRef resourceAccessor,
-                                 CSharedConfigurationAccessorRef configurationAccessor) :
+IGameTransition::IGameTransition(const std::string& filename) :
 m_guid(filename),
 m_scene(nullptr),
 m_isLoaded(false),
-m_graphicsContext(graphicsContext),
-m_inputContext(inputContext),
-m_resourceAccessor(resourceAccessor),
-m_configurationAccessor(configurationAccessor)
+m_graphicsContext(nullptr),
+m_inputContext(nullptr),
+m_resourceAccessor(nullptr),
+m_configurationAccessor(nullptr)
 {
-    assert(m_graphicsContext != nullptr);
-    assert(m_inputContext != nullptr);
+
+}
+
+IGameTransition::~IGameTransition(void)
+{
+    
+}
+
+void IGameTransition::setupOnce(ISharedGraphicsContextRef graphicsContext,
+                                ISharedInputContextRef inputContext,
+                                CSharedResourceAccessorRef resourceAccessor,
+                                CSharedConfigurationAccessorRef configurationAccessor)
+{
+    assert(m_graphicsContext == nullptr);
+    assert(m_inputContext == nullptr);
+    assert(m_sceneUpdateMgr == nullptr);
+    assert(m_collisionMgr == nullptr);
+    assert(m_renderPipeline == nullptr);
+    
+    m_graphicsContext = graphicsContext;
+    m_inputContext = inputContext;
+    m_resourceAccessor = resourceAccessor;
+    m_configurationAccessor = configurationAccessor;
     
     m_renderPipeline = std::make_shared<CRenderPipeline>(m_graphicsContext);
     CSharedBatchingMgr batchingMgr = std::make_shared<CBatchingMgr>(m_renderPipeline);
@@ -52,11 +69,12 @@ m_configurationAccessor(configurationAccessor)
     
     m_collisionMgr = std::make_shared<CCollisionMgr>();
     m_inputContext->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(m_collisionMgr));
-}
-
-IGameTransition::~IGameTransition(void)
-{
     
+    assert(m_graphicsContext != nullptr);
+    assert(m_inputContext != nullptr);
+    assert(m_sceneUpdateMgr != nullptr);
+    assert(m_collisionMgr != nullptr);
+    assert(m_renderPipeline != nullptr);
 }
 
 void IGameTransition::initScene(void)
@@ -104,7 +122,7 @@ void IGameTransition::_OnLoaded(void)
     assert(false);
 }
 
-void IGameTransition::_OnGameLoopUpdate(f32 _deltatime)
+void IGameTransition::_OnGameLoopUpdate(f32 deltatime)
 {
     assert(false);
 }

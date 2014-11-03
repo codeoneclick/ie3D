@@ -38,8 +38,12 @@ protected:
     CSharedCollisionMgr m_collisionMgr;
     
     std::string m_guid;
-    
     bool m_isLoaded;
+    
+    void setupOnce(ISharedGraphicsContextRef graphicsContext,
+                   ISharedInputContextRef inputContext,
+                   CSharedResourceAccessorRef resourceAccessor,
+                   CSharedConfigurationAccessorRef configurationAccessor);
     
     virtual void _OnRegistered(void);
     virtual void _OnUnregistered(void);
@@ -50,18 +54,14 @@ protected:
     virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     virtual void _OnLoaded(void);
     
-    virtual void _OnGameLoopUpdate(f32 _deltatime);
+    virtual void _OnGameLoopUpdate(f32 deltatime);
     
 public:
     
-    IGameTransition(const std::string& filename,
-                    ISharedGraphicsContextRef graphicsContext,
-                    ISharedInputContextRef inputContext,
-                    CSharedResourceAccessorRef resourceAccessor,
-                    CSharedConfigurationAccessorRef configurationAccessor);
+    IGameTransition(const std::string& filename);
     
     virtual ~IGameTransition(void);
-    
+                      
     virtual void initScene(void);
 
     std::string getGuid(void) const;

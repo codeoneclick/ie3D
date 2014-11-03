@@ -23,11 +23,7 @@ protected:
     
 public:
     
-    IEGameTransition(const std::string& filename,
-                     std::shared_ptr<IGraphicsContext> graphicsContext,
-                     std::shared_ptr<IInputContext> gestureRecognizerContext,
-                     std::shared_ptr<CResourceAccessor> resourceAccessor,
-                     std::shared_ptr<CConfigurationAccessor> configurationAccessor);
+    IEGameTransition(const std::string& filename);
     
     ~IEGameTransition(void);
     

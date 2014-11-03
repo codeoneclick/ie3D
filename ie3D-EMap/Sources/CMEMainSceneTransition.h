@@ -1,18 +1,18 @@
 //
-//  CMEGameTransition.h
+//  CMEMainSceneTransition.h
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#ifndef CMEGameTransition_h
-#define CMEGameTransition_h
+#ifndef CMEMainSceneTransition_h
+#define CMEMainSceneTransition_h
 
 #include "IEGameTransition.h"
 #include "HMEDeclaration.h"
 
-class CMEGameTransition : public IEGameTransition
+class CMEMainSceneTransition : public IEGameTransition
 {
 private:
     
@@ -23,13 +23,8 @@ protected:
     
 public:
     
-    CMEGameTransition(const std::string& filename,
-                      std::shared_ptr<IGraphicsContext> graphicsContext,
-                      std::shared_ptr<IInputContext> gestureRecognizerContext,
-                      std::shared_ptr<CResourceAccessor> resourceAccessor,
-                      std::shared_ptr<CConfigurationAccessor> configurationAccessor);
-    
-    ~CMEGameTransition(void);
+    CMEMainSceneTransition(const std::string& filename);
+    ~CMEMainSceneTransition(void);
     
     void initScene(void);
     

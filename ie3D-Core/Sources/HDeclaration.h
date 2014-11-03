@@ -348,4 +348,8 @@ class CThreadOperation;
 typedef std::shared_ptr<CThreadOperation> CSharedThreadOperation;
 typedef const CSharedThreadOperation& CSharedThreadOperationRef;
 
+class IGameTransition;
+typedef std::shared_ptr<IGameTransition> ISharedGameTransition;
+typedef const ISharedGameTransition& ISharedGameTransitionRef;
+
 #endif

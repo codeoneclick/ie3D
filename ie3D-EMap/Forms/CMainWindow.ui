@@ -60,9 +60,9 @@ background-color: rgb(64, 64, 64);</string>
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="landscape_heightmap">
      <attribute name="title">
       <string>Landscape</string>
      </attribute>
@@ -251,7 +251,7 @@ background-color: rgb(64, 64, 64);</string>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="landscape_textures">
      <attribute name="title">
       <string>Textures</string>
      </attribute>
@@ -499,6 +499,24 @@ background-color: rgb(64, 64, 64);</string>
       </property>
       <property name="maximum">
        <number>128</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="models">
+     <attribute name="title">
+      <string>Models</string>
+     </attribute>
+     <widget class="QWidget" name="m_modelsOpenGLView" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>226</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
       </property>
      </widget>
     </widget>

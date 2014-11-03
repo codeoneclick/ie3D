@@ -38,8 +38,8 @@ protected:
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
     
-    CESharedCustomModel createArrowModel(E_MODEL_BRUSH_ARROW arrow);
-    CESharedCustomModel createPlaneModel(E_MODEL_BRUSH_PLANE plane);
+    CESharedCustomModel createArrowModel(E_MODEL_BRUSH_ARROW arrow, ISharedConfigurationRef configuration);
+    CESharedCustomModel createPlaneModel(E_MODEL_BRUSH_PLANE plane, ISharedConfigurationRef configuration);
     
 public:
     

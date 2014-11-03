@@ -56,6 +56,9 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         technique->bind();
         technique->draw();
         technique->unbind();
+        
+        //CSharedTexture texture = technique->getOperatingColorTexture();
+        //IRenderTechniqueImporter::saveTexture(texture, iterator.first + ".png", texture->getWidth(), texture->getHeight());
     
         m_numTriangles += technique->getNumTriangles();
     }

@@ -8,7 +8,8 @@
 #include "IConfiguration.h"
 
 class CMEGameController;
-class CMEGameTransition;
+class CMEMainSceneTransition;
+class CMEModelsSceneTransition;
 
 namespace Ui {
     class CMainWindow;
@@ -22,8 +23,9 @@ protected:
     
 #if defined(__OSX__) || defined(__WIN32__)
     
-    std::shared_ptr<CMEGameController> m_editableGameController;
-    std::shared_ptr<CMEGameTransition> m_editableGameTransition;
+    std::shared_ptr<CMEGameController> m_gameController;
+    std::shared_ptr<CMEMainSceneTransition> m_mainSceneTransition;
+    std::shared_ptr<CMEModelsSceneTransition> m_modelsSceneTransition;
     
     CSharedMESceneToUICommands m_sceneToUICommands;
     

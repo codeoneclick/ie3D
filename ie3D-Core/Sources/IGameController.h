@@ -10,37 +10,41 @@
 #define IGameController_h
 
 #include "HCommon.h"
+#include "HDeclaration.h"
 
-class CConfigurationAccessor;
-class CResourceAccessor;
-class IGameTransition;
 class IGameController
 {
 private:
     
 protected:
     
-    std::map<std::string, std::shared_ptr<IGameTransition> > m_transitions;
-    std::shared_ptr<IGameTransition> m_currentTransition;
+    std::map<std::string, ISharedGameTransition> m_transitions;
+    ISharedGameTransition m_currentTransition;
+    std::map<std::string, ISharedGameTransition> m_chilrenTransitions;
+    
+    std::shared_ptr<IGraphicsContext> m_graphicsContext;
+    std::shared_ptr<IInputContext> m_gestureRecognizerContext;
     
     std::shared_ptr<CConfigurationAccessor> m_configurationAccessor;
     std::shared_ptr<CResourceAccessor> m_resourceAccessor;
     
 public:
     
-    IGameController(void);
+    IGameController(ISharedOGLWindowRef window);
     virtual ~IGameController(void);
     
-    void RegisterTransition(std::shared_ptr<IGameTransition> _transition);
-    void UnregisterTransition(std::shared_ptr<IGameTransition> _transition);
+    void addTransition(ISharedGameTransitionRef transition);
+    void removeTransition(ISharedGameTransitionRef transition);
     
-    void GoToTransition(const std::string& _guid);
+    void addChildTransition(ISharedGameTransitionRef transition);
+    void removeChildTransition(ISharedGameTransitionRef transition);
     
-    ui32 Get_CurrentNumTriagles(void);
-    ui32 Get_TotalNumTriangles(void);
+    void gotoTransition(const std::string& guid);
+    void activateChildTransition(const std::string& guid);
+    void deactivateChildTransition(const std::string& guid);
+    
+    ui32 getCurrentNumTriagles(void);
+    ui32 getTotalNumTriangles(void);
 };
-
-extern ui32 Get_CurrentNumTriagles(void);
-extern ui32 Get_TotalNumTriangles(void);
 
 #endif 

@@ -14,6 +14,7 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CECustomModel.h"
+#include "CMEConfigurationGameObjects.h"
 
 CMEModelBrush::CMEModelBrush(CSharedResourceAccessorRef resourceAccessor,
                              ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -47,17 +48,49 @@ void CMEModelBrush::onResourceLoaded(ISharedResourceRef, bool)
 
 }
 
-void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
+void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration, bool)
 {
-    IGameObject::onConfigurationLoaded(configuration, success);
+    std::shared_ptr<CMEConfigurationModelBrush> modelBrushConfiguration = std::static_pointer_cast<CMEConfigurationModelBrush>(configuration);
     
-    m_arrows.at(E_MODEL_BRUSH_ARROW_X) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_X);
-    m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Y);
-    m_arrows.at(E_MODEL_BRUSH_ARROW_Z) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Z);
-    
-    m_planes.at(E_MODEL_BRUSH_PLANE_X) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_X);
-    m_planes.at(E_MODEL_BRUSH_PLANE_Y) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Y);
-    m_planes.at(E_MODEL_BRUSH_PLANE_Z) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Z);
+    for(ui32 i = 0; i < modelBrushConfiguration->getElementsNames().size(); ++i)
+    {
+        std::string elementName = modelBrushConfiguration->getElementsNames().at(i);
+        ISharedConfiguration elementConfiguration = modelBrushConfiguration->getElementsConfigurations().at(i);
+        if(elementName == "arrowX")
+        {
+             m_arrows.at(E_MODEL_BRUSH_ARROW_X) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_X,
+                                                                                  elementConfiguration);
+        }
+        else if(elementName == "arrowY")
+        {
+            m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Y,
+                                                                                 elementConfiguration);
+        }
+        else if(elementName == "arrowZ")
+        {
+            m_arrows.at(E_MODEL_BRUSH_ARROW_Z) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Z,
+                                                                                 elementConfiguration);
+        }
+        else if(elementName == "planeX")
+        {
+            m_planes.at(E_MODEL_BRUSH_PLANE_X) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_X,
+                                                                                 elementConfiguration);
+        }
+        else if(elementName == "planeY")
+        {
+            m_planes.at(E_MODEL_BRUSH_PLANE_Y) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Y,
+                                                                                 elementConfiguration);
+        }
+        else if(elementName == "planeZ")
+        {
+            m_planes.at(E_MODEL_BRUSH_PLANE_Z) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Z,
+                                                                                 elementConfiguration);
+        }
+        else
+        {
+            assert(false);
+        }
+    }
 
     IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);
@@ -65,7 +98,7 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow)
+CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow, ISharedConfigurationRef configuration)
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
@@ -185,12 +218,12 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow)
     arrowModel->enableUpdate(m_isNeedToUpdate);
     
     ISharedConfigurationLoadingHandler handler = std::static_pointer_cast<IConfigurationLoadingHandler>(arrowModel);
-    handler->onConfigurationLoaded(m_configuration, true);
+    handler->onConfigurationLoaded(configuration, true);
     
     return arrowModel;
 }
 
-CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane)
+CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane, ISharedConfigurationRef configuration)
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
@@ -307,7 +340,7 @@ CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane)
     planeModel->enableUpdate(m_isNeedToUpdate);
     
     ISharedConfigurationLoadingHandler handler = std::static_pointer_cast<IConfigurationLoadingHandler>(planeModel);
-    handler->onConfigurationLoaded(m_configuration, true);
+    handler->onConfigurationLoaded(configuration, true);
     
     return planeModel;
 }

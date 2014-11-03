@@ -26,4 +26,3 @@
         wrap_mode="GL_CLAMP_TO_EDGE"/>
     </textures>
 </material>
-<!--render_operation_name="render.operation.screen.ssao"-->

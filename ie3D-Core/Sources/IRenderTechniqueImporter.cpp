@@ -105,6 +105,12 @@ void IRenderTechniqueImporter::removeRenderTechniqueHandler(const std::string& t
     iterator->second->removeRenderTechniqueHandler(handler);
 }
 
+bool IRenderTechniqueImporter::isSupporingRenderTechnique(const std::string& techniqueName)
+{
+    const auto& iterator = m_worldSpaceRenderTechniques.find(techniqueName);
+    return iterator != m_worldSpaceRenderTechniques.end();
+}
+
 void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std::string& filename, ui32 width, ui32 height)
 {
     assert(texture != nullptr);

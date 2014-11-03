@@ -1,0 +1,8 @@
+<transition guid="transition.map.editor.models.scene">
+    <output_render_operation filename="render.operation.models.scene.output.xml"/>
+    <world_space_operations>
+        <operation filename="render.operation.world.base.xml"/>
+    </world_space_operations>
+    <screen_space_operations>
+    </screen_space_operations>
+</transition>

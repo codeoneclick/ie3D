@@ -47,8 +47,6 @@ ISharedConfiguration CMEConfigurationModelBrushSerializer::serialize(const std::
                                                                  configuration->kModelBrushElementNameAttribute),
                                     std::make_shared<CConfigurationAttribute>(name));
     }
-    CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(configuration, mainNode);
-    
     return configuration;
 }
 

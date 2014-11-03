@@ -41,6 +41,7 @@ public:
     
     void addRenderTechniqueHandler(const std::string& techniqueName, ISharedRenderTechniqueHandlerRef handler);
     void removeRenderTechniqueHandler(const std::string& techniqueName, ISharedRenderTechniqueHandlerRef handler);
+    bool isSupporingRenderTechnique(const std::string& techniqueName);
 };
 
 #endif
