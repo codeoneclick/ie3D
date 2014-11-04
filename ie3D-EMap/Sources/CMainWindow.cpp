@@ -303,41 +303,13 @@ void CMainWindow::on_m_textureTilling03SpinBox_valueChanged(int value)
 
 void CMainWindow::onTextureRendered(const std::string& techniqueName, const ui8 *rawdata, ui32 width, ui32 height)
 {
-    QImage *image = new QImage(rawdata, width, height, QImage::Format_RGBA8888);
-    m_modelsSceneView->setImage(image);
+    QImage image(rawdata, width, height, QImage::Format_RGBA8888);
+    QTransform transform;
+    transform.rotate(180);
+    image = image.transformed(transform);
+    m_modelsSceneImage = image;
+    m_modelsSceneView->setImage(m_modelsSceneImage);
     m_modelsSceneView->update();
-    
-/*#if defined(__OSX__)
-    
-    std::string filename = techniqueName + ".png";
-    ui32 rawdataSize = width *height * 4;
-    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, rawdata, rawdataSize, NULL);
-    ui32 bitsPerComponent = 8;
-    ui32 bitsPerPixel = 32;
-    ui32 bytesPerRow = 4 * width;
-    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-    CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast;
-    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
-    CGImageRef image = CGImageCreate(width,
-                                     height,
-                                     bitsPerComponent,
-                                     bitsPerPixel,
-                                     bytesPerRow,
-                                     colorSpaceRef,
-                                     bitmapInfo,
-                                     provider, NULL, NO, renderingIntent);
-    
-    CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:[NSString stringWithUTF8String:filename.c_str()]];
-    CGImageDestinationRef destination = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, NULL);
-    CGImageDestinationAddImage(destination, image, nil);
-    
-    if (!CGImageDestinationFinalize(destination))
-    {
-        assert(false);
-    }
-    CFRelease(destination);
-    
-#endif*/
 }
 
 bool CMainWindow::event(QEvent *event)

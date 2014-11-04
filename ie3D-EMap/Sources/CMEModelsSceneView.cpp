@@ -9,22 +9,18 @@
 #include "QPainter.h"
 #include "HCommon.h"
 
-CMEModelsSceneView::CMEModelsSceneView(QWidget *parent) : QWidget(parent),
-m_image(nullptr)
+CMEModelsSceneView::CMEModelsSceneView(QWidget *parent) : QWidget(parent)
 {
     
 }
 
-void CMEModelsSceneView::setImage(QImage *image)
+void CMEModelsSceneView::setImage(const QImage& image)
 {
     m_image = image;
 }
 
-void CMEModelsSceneView::paintEvent(QPaintEvent *event)
+void CMEModelsSceneView::paintEvent(QPaintEvent *)
 {
-    if(m_image != NULL)
-    {
-        QPainter painter(this);
-        painter.drawImage(rect(), *m_image, m_image->rect());
-    }
+    QPainter painter(this);
+    painter.drawImage(rect(), m_image, m_image.rect());
 }

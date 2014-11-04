@@ -46,6 +46,7 @@ protected:
     std::string m_recentFilename;
     
     CMEModelsSceneView *m_modelsSceneView;
+    QImage m_modelsSceneImage;
     
     void onTextureRendered(const std::string& techniqueName, const ui8 *rawdata, ui32 width, ui32 height);
     
