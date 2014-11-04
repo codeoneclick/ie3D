@@ -6,6 +6,8 @@
 #include "HMEDeclaration.h"
 #include "HEnums.h"
 #include "IConfiguration.h"
+#include "IRenderTechniqueOperationTextureHandler.h"
+#include "CMEModelsSceneView.h"
 
 class CMEGameController;
 class CMEMainSceneTransition;
@@ -15,7 +17,11 @@ namespace Ui {
     class CMainWindow;
 }
 
-class CMainWindow : public QMainWindow, public IConfigurationLoadingHandler, public std::enable_shared_from_this<CMainWindow>
+class CMainWindow :
+public QMainWindow,
+public IConfigurationLoadingHandler,
+public IRenderTechniqueOperationTextureHandler,
+public std::enable_shared_from_this<CMainWindow>
 {
     Q_OBJECT
     
@@ -38,6 +44,10 @@ protected:
     
     i32 m_previousBrushSize;
     std::string m_recentFilename;
+    
+    CMEModelsSceneView *m_modelsSceneView;
+    
+    void onTextureRendered(const std::string& techniqueName, const ui8 *rawdata, ui32 width, ui32 height);
     
     bool event(QEvent *event);
     

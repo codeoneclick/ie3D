@@ -13,9 +13,11 @@
 #include "IGraphicsContext.h"
 #include "CTexture.h"
 #include "CBatchingMgr.h"
+#include "IRenderTechniqueOperationTextureHandler.h"
 
-
-CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext) : IRenderTechniqueImporter(graphicContext), IRenderTechniqueAccessor()
+CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext, bool isOffscreen) :
+IRenderTechniqueImporter(graphicContext, isOffscreen),
+IRenderTechniqueAccessor()
 {
 
 }
@@ -57,9 +59,22 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         technique->draw();
         technique->unbind();
         
+        auto techniqueOperationTextureHandlers = m_renderTechniqueOperationTextureHandlers.find(iterator.first);
+        if(techniqueOperationTextureHandlers != m_renderTechniqueOperationTextureHandlers.end())
+        {
+            glReadBuffer(GL_COLOR_ATTACHMENT0);
+            ui32 rawdataSize = technique->getFrameWidth() * technique->getFrameHeight() * 4;
+            ui8 *rawdata = new ui8[rawdataSize];
+            glReadPixels(0, 0, technique->getFrameWidth(), technique->getFrameHeight(), GL_RGBA, GL_UNSIGNED_BYTE, rawdata);
+            for(const auto& techniqueOperationTextureHandler : techniqueOperationTextureHandlers->second)
+            {
+                techniqueOperationTextureHandler->onTextureRendered(iterator.first, rawdata, technique->getFrameWidth(), technique->getFrameHeight());
+            }
+            delete[] rawdata;
+        }
+        
         //CSharedTexture texture = technique->getOperatingColorTexture();
         //IRenderTechniqueImporter::saveTexture(texture, iterator.first + ".png", texture->getWidth(), texture->getHeight());
-    
         m_numTriangles += technique->getNumTriangles();
     }
     
@@ -87,7 +102,7 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         m_numTriangles += 2;
     }
     
-    if(m_mainRenderTechnique != nullptr)
+    if(m_mainRenderTechnique != nullptr && !m_isOffscreen)
     {
         m_mainRenderTechnique->bind();
         m_mainRenderTechnique->draw();
@@ -101,7 +116,11 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
     {
         std::cout<<"OpenGL error: "<<error<<std::endl;
     }
-    m_graphicsContext->draw();
+    
+    if(!m_isOffscreen)
+    {
+        m_graphicsContext->draw();
+    }
 }
 
 CSharedTexture CRenderPipeline::preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height)

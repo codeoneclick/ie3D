@@ -29,8 +29,9 @@
 
 #endif
 
-IRenderTechniqueImporter::IRenderTechniqueImporter(ISharedGraphicsContextRef graphicsContext) :
+IRenderTechniqueImporter::IRenderTechniqueImporter(ISharedGraphicsContextRef graphicsContext, bool isOffscreen) :
 m_graphicsContext(graphicsContext),
+m_isOffscreen(isOffscreen),
 m_mainRenderTechnique(nullptr)
 {
     assert(m_graphicsContext != nullptr);
@@ -43,6 +44,7 @@ IRenderTechniqueImporter::~IRenderTechniqueImporter(void)
 
 void IRenderTechniqueImporter::setMainRenderTechnique(CSharedMaterialRef material)
 {
+    assert(m_isOffscreen == false);
     assert(m_graphicsContext != nullptr);
     assert(material != nullptr);
     m_mainRenderTechnique = std::make_shared<CRenderTechniqueMain>(m_graphicsContext->getWidth(),
@@ -109,6 +111,28 @@ bool IRenderTechniqueImporter::isSupporingRenderTechnique(const std::string& tec
 {
     const auto& iterator = m_worldSpaceRenderTechniques.find(techniqueName);
     return iterator != m_worldSpaceRenderTechniques.end();
+}
+
+void IRenderTechniqueImporter::addRenderTechninqueOperationTextureHandler(const std::string& techniqueName,
+                                                                          ISharedRenderTechniqueOperationTextureHandlerRef handler)
+{
+    auto iterator = m_renderTechniqueOperationTextureHandlers.find(techniqueName);
+    if(iterator == m_renderTechniqueOperationTextureHandlers.end())
+    {
+        std::set<ISharedRenderTechniqueOperationTextureHandler> handlers;
+        m_renderTechniqueOperationTextureHandlers.insert(std::make_pair(techniqueName, handlers));
+        iterator = m_renderTechniqueOperationTextureHandlers.find(techniqueName);
+    }
+    assert(iterator != m_renderTechniqueOperationTextureHandlers.end());
+    iterator->second.insert(handler);
+}
+
+void IRenderTechniqueImporter::removeRenderTechninqueOperationTextureHandler(ISharedRenderTechniqueOperationTextureHandlerRef handler)
+{
+    for(auto iterator : m_renderTechniqueOperationTextureHandlers)
+    {
+        iterator.second.erase(handler);
+    }
 }
 
 void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std::string& filename, ui32 width, ui32 height)
@@ -226,4 +250,5 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     
 #endif
     
+    delete[] rawdata;
 }

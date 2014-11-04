@@ -21,7 +21,7 @@
     <textures>
         <texture
         filename=""
-        render_operation_name="render.operation.world.base"
+        render_operation_name="render.operation.screen.mix.overlapping"
         sampler_id="0"
         wrap_mode="GL_CLAMP_TO_EDGE"/>
     </textures>

@@ -2,6 +2,7 @@
 #include "ui_CMainWindow.h"
 #include "QFileDialog.h"
 #include "QMessageBox.h"
+#include "QPainter.h"
 
 #if defined(__OSX__) || defined(__WIN32__)
 
@@ -57,6 +58,11 @@ ui(new Ui::CMainWindow)
     stream.clear();
     stream<<"Smooth coefficient: "<<ui->m_smoothSlider->value()<<" [0:3]";
     ui->m_smoothLabel->setText(QString::fromUtf8(stream.str().c_str()));
+    
+    m_modelsSceneView = new CMEModelsSceneView(ui->m_modelsOpenGLView);
+    m_modelsSceneView->setGeometry(ui->m_modelsOpenGLView->geometry());
+    m_modelsSceneView->setFont(ui->m_modelsOpenGLView->font());
+    m_modelsSceneView->setStyleSheet(ui->m_modelsOpenGLView->styleSheet());
 }
 
 CMainWindow::~CMainWindow()
@@ -85,15 +91,18 @@ void CMainWindow::execute(void)
     std::shared_ptr<IOGLWindow> mainSceneWindow = std::make_shared<IOGLWindow>((__bridge void*)mainSceneOpenGLView);
     
     m_gameController = std::make_shared<CMEGameController>(mainSceneWindow);
-    m_mainSceneTransition = std::make_shared<CMEMainSceneTransition>("transition.map.editor.main.scene.xml");
+    m_mainSceneTransition = std::make_shared<CMEMainSceneTransition>("transition.map.editor.main.scene.xml", false);
     m_gameController->addTransition(m_mainSceneTransition);
     m_gameController->gotoTransition("transition.map.editor.main.scene.xml");
     m_mainSceneTransition->setSceneToUICommands(m_sceneToUICommands);
     
-    /*m_modelsSceneTransition = std::static_pointer_cast<CMEModelsSceneTransition>(m_gameController->createModelsSceneTransition("transition.map.editor.models.scene.xml",
-                                                                                                                               mainScenceWindow));
+    m_modelsSceneTransition = std::make_shared<CMEModelsSceneTransition>("transition.map.editor.models.scene.xml", true);
     m_gameController->addChildTransition(m_modelsSceneTransition);
-    m_gameController->activateChildTransition("transition.map.editor.models.scene.xml");*/
+    m_gameController->activateChildTransition("transition.map.editor.models.scene.xml");
+    
+    m_modelsSceneTransition->getRenderTechniqueImporter()->addRenderTechninqueOperationTextureHandler("render.operation.world.base", shared_from_this());
+    
+    //ui->m_modelsOpenGLView->setAttribute(Qt::WA_PaintOutsidePaintEvent, true);
     
 #endif
 }
@@ -292,6 +301,43 @@ void CMainWindow::on_m_textureTilling02SpinBox_valueChanged(int value)
 void CMainWindow::on_m_textureTilling03SpinBox_valueChanged(int value)
 {
     m_mainSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_03);
+}
+
+void CMainWindow::onTextureRendered(const std::string& techniqueName, const ui8 *rawdata, ui32 width, ui32 height)
+{
+    QImage image(rawdata, width, height, QImage::Format_ARGB32);
+    
+/*#if defined(__OSX__)
+    
+    std::string filename = techniqueName + ".png";
+    ui32 rawdataSize = width *height * 4;
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, rawdata, rawdataSize, NULL);
+    ui32 bitsPerComponent = 8;
+    ui32 bitsPerPixel = 32;
+    ui32 bytesPerRow = 4 * width;
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    CGImageRef image = CGImageCreate(width,
+                                     height,
+                                     bitsPerComponent,
+                                     bitsPerPixel,
+                                     bytesPerRow,
+                                     colorSpaceRef,
+                                     bitmapInfo,
+                                     provider, NULL, NO, renderingIntent);
+    
+    CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:[NSString stringWithUTF8String:filename.c_str()]];
+    CGImageDestinationRef destination = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, NULL);
+    CGImageDestinationAddImage(destination, image, nil);
+    
+    if (!CGImageDestinationFinalize(destination))
+    {
+        assert(false);
+    }
+    CFRelease(destination);
+    
+#endif*/
 }
 
 bool CMainWindow::event(QEvent *event)

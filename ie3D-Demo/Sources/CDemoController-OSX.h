@@ -24,8 +24,8 @@ private:
     
 protected:
     
-    std::shared_ptr<CDemoGameController> gameController;
-    std::shared_ptr<IGameTransition> gameTransition;
+    std::shared_ptr<CDemoGameController> m_gameController;
+    std::shared_ptr<IGameTransition> m_gameTransition;
     std::map<i32, bool> m_keysState;
     
     void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);

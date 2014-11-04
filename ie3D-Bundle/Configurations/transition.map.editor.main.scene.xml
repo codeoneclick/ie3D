@@ -1,5 +1,5 @@
 <transition guid="transition.map.editor.main.scene">
-    <output_render_operation filename="render.operation.output.xml"/>
+    <output_render_operation filename="render.operation.map.editor.output.xml"/>
     <world_space_operations>
         <operation filename="render.operation.world.base.xml"/>
         <operation filename="render.operation.world.reflection.xml"/>

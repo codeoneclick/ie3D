@@ -21,10 +21,10 @@
 CDemoControllerOSX::CDemoControllerOSX(NSView *openGLView)
 {
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)openGLView);
-    gameController = std::make_shared<CDemoGameController>();
-    gameTransition = gameController->CreateKOTHInGameTransition("transition.main.xml", window);
-    gameController->RegisterTransition(gameTransition);
-    gameController->GoToTransition("transition.main.xml");
+    m_gameController = std::make_shared<CDemoGameController>(window);
+    m_gameTransition = std::make_shared<CDemoGameTransition>("transition.main.xml");
+    m_gameController->addTransition(m_gameTransition);
+    m_gameController->gotoTransition("transition.main.xml");
     
     m_keysState[key_w] = false;
     m_keysState[key_a] = false;
@@ -39,7 +39,7 @@ CDemoControllerOSX::~CDemoControllerOSX(void)
 
 void CDemoControllerOSX::create(void)
 {
-    gameTransition->addGestureRecognizerHandler(shared_from_this());
+    m_gameTransition->addGestureRecognizerHandler(shared_from_this());
 }
 
 void CDemoControllerOSX::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
@@ -72,7 +72,7 @@ void CDemoControllerOSX::onKeyDown(i32 key)
     m_keysState[key] = true;
     CDemoControllerOSX::updateState();
     
-    std::shared_ptr<CDemoGameTransition> transition = std::static_pointer_cast<CDemoGameTransition>(gameTransition);
+    std::shared_ptr<CDemoGameTransition> transition = std::static_pointer_cast<CDemoGameTransition>(m_gameTransition);
     transition->getUIToSceneCommands()->executeOnKeyDownCommand(key);
 }
 
@@ -81,13 +81,13 @@ void CDemoControllerOSX::onKeyUp(i32 key)
     m_keysState[key] = false;
     CDemoControllerOSX::updateState();
     
-    std::shared_ptr<CDemoGameTransition> transition = std::static_pointer_cast<CDemoGameTransition>(gameTransition);
+    std::shared_ptr<CDemoGameTransition> transition = std::static_pointer_cast<CDemoGameTransition>(m_gameTransition);
     transition->getUIToSceneCommands()->executeOnKeyUpCommand(key);
 }
 
 void CDemoControllerOSX::updateState(void)
 {
-    std::shared_ptr<CDemoGameTransition> transition = std::static_pointer_cast<CDemoGameTransition>(gameTransition);
+    std::shared_ptr<CDemoGameTransition> transition = std::static_pointer_cast<CDemoGameTransition>(m_gameTransition);
     
     if(m_keysState[key_s] && m_keysState[key_a])
     {

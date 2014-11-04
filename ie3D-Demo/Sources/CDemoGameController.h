@@ -21,10 +21,9 @@ protected:
     
 public:
     
-    CDemoGameController(void);
+    CDemoGameController(ISharedOGLWindowRef window);
     ~CDemoGameController(void);
     
-    std::shared_ptr<IGameTransition> CreateKOTHInGameTransition(const std::string& filename, ISharedOGLWindowRef window);
 };
 
 #endif 

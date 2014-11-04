@@ -28,6 +28,7 @@ protected:
     ISharedInputContext m_inputContext;
     CSharedResourceAccessor m_resourceAccessor;
     CSharedConfigurationAccessor m_configurationAccessor;
+    bool m_isOffscreen;
     
     CSharedSceneGraph m_sceneGraph;
     CSharedSceneFabricator m_sceneFabricator;
@@ -58,7 +59,7 @@ protected:
     
 public:
     
-    IGameTransition(const std::string& filename);
+    IGameTransition(const std::string& filename, bool isOffscreen);
     
     virtual ~IGameTransition(void);
                       

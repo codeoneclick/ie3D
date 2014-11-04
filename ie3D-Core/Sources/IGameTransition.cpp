@@ -29,14 +29,15 @@
 #include "CRenderTechniqueWorldSpace.h"
 #include "CRenderTechniqueScreenSpace.h"
 
-IGameTransition::IGameTransition(const std::string& filename) :
+IGameTransition::IGameTransition(const std::string& filename, bool isOffscreen) :
 m_guid(filename),
 m_scene(nullptr),
 m_isLoaded(false),
 m_graphicsContext(nullptr),
 m_inputContext(nullptr),
 m_resourceAccessor(nullptr),
-m_configurationAccessor(nullptr)
+m_configurationAccessor(nullptr),
+m_isOffscreen(isOffscreen)
 {
 
 }
@@ -61,8 +62,7 @@ void IGameTransition::setupOnce(ISharedGraphicsContextRef graphicsContext,
     m_inputContext = inputContext;
     m_resourceAccessor = resourceAccessor;
     m_configurationAccessor = configurationAccessor;
-    
-    m_renderPipeline = std::make_shared<CRenderPipeline>(m_graphicsContext);
+    m_renderPipeline = std::make_shared<CRenderPipeline>(m_graphicsContext, m_isOffscreen);
     CSharedBatchingMgr batchingMgr = std::make_shared<CBatchingMgr>(m_renderPipeline);
     m_renderPipeline->setBatchingMgr(batchingMgr);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
@@ -180,20 +180,23 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
         m_renderPipeline->addScreenSpaceRenderTechnique(screenSpaceRenderOperationConfiguration->getGuid(), screenSpaceRenderTechnique);
     }
     
-    std::shared_ptr<CConfigurationORenderOperation> outputRenderOperationConfiguration = std::static_pointer_cast<CConfigurationORenderOperation>(gameTransitionConfiguration->getORenderOperationConfiguration());
-    std::shared_ptr<CConfigurationMaterial> outputRenderOperationMaterialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(outputRenderOperationConfiguration->getMaterialConfiguration());
-    assert(outputRenderOperationMaterialConfiguration != nullptr);
-    
-    std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>();
-    
-    assert(outputRenderOperationMaterialConfiguration != nullptr);
-	assert(m_resourceAccessor != nullptr);
-    
-    CMaterial::setupMaterial(outputRenderOperationMaterial,
-                             outputRenderOperationMaterialConfiguration,
-                             m_resourceAccessor,
-                             m_renderPipeline);
-    m_renderPipeline->setMainRenderTechnique(outputRenderOperationMaterial);
+    if(!m_isOffscreen)
+    {
+        std::shared_ptr<CConfigurationORenderOperation> outputRenderOperationConfiguration = std::static_pointer_cast<CConfigurationORenderOperation>(gameTransitionConfiguration->getORenderOperationConfiguration());
+        std::shared_ptr<CConfigurationMaterial> outputRenderOperationMaterialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(outputRenderOperationConfiguration->getMaterialConfiguration());
+        assert(outputRenderOperationMaterialConfiguration != nullptr);
+        
+        std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>();
+        
+        assert(outputRenderOperationMaterialConfiguration != nullptr);
+        assert(m_resourceAccessor != nullptr);
+        
+        CMaterial::setupMaterial(outputRenderOperationMaterial,
+                                 outputRenderOperationMaterialConfiguration,
+                                 m_resourceAccessor,
+                                 m_renderPipeline);
+        m_renderPipeline->setMainRenderTechnique(outputRenderOperationMaterial);
+    }
     
     _OnLoaded();
 }

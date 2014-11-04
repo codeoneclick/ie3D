@@ -20,15 +20,11 @@ private:
 protected:
     
     void _OnLoaded(void);
-    void _OnGameLoopUpdate(f32 _deltatime);
+    void _OnGameLoopUpdate(f32 deltatime);
     
 public:
-    CDemoGameTransition(const std::string& filename,
-                        std::shared_ptr<IGraphicsContext> graphicsContext,
-                        std::shared_ptr<IInputContext> inputContext,
-                        std::shared_ptr<CResourceAccessor> resourceAccessor,
-                        std::shared_ptr<CConfigurationAccessor> configurationAccessor);
     
+    CDemoGameTransition(const std::string& filename);
     ~CDemoGameTransition(void);
     
     void initScene(void);

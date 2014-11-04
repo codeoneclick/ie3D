@@ -352,4 +352,8 @@ class IGameTransition;
 typedef std::shared_ptr<IGameTransition> ISharedGameTransition;
 typedef const ISharedGameTransition& ISharedGameTransitionRef;
 
+class IRenderTechniqueOperationTextureHandler;
+typedef std::shared_ptr<IRenderTechniqueOperationTextureHandler> ISharedRenderTechniqueOperationTextureHandler;
+typedef const ISharedRenderTechniqueOperationTextureHandler& ISharedRenderTechniqueOperationTextureHandlerRef;
+
 #endif

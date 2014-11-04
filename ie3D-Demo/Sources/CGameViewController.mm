@@ -48,10 +48,10 @@
     
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)self.m_openglView);
     
-    self.gameController = std::make_shared<CDemoGameController>();
-    self.gameTransition = self.gameController->CreateKOTHInGameTransition("transition.main.xml", window);
-    self.gameController->RegisterTransition(self.gameTransition);
-    self.gameController->GoToTransition("transition.main.xml");
+    self.gameController = std::make_shared<CDemoGameController>(window);
+    self.gameTransition = std::make_shared<CDemoGameTransition>("transition.main.xml");
+    self.gameController->addTransition(self.gameTransition);
+    self.gameController->gotoTransition("transition.main.xml");
 
     self.joystickView.delegate = self;
 }
@@ -76,7 +76,8 @@
 - (void)onTick:(NSTimer*)sender
 {
     [self.fpsLabel setText:[NSString stringWithFormat:@"FPS: %i", Get_FramesPerSecond()]];
-    [self.trianglesLabel setText:[NSString stringWithFormat:@"Current Triangles: %i, Total Triangles: %i", Get_CurrentNumTriagles(), Get_TotalNumTriangles()]];
+    [self.trianglesLabel setText:[NSString stringWithFormat:@"Current Triangles: %i, Total Triangles: %i",
+                                  self.gameController->getCurrentNumTriagles(), self.gameController->getTotalNumTriangles()]];
 }
 
 #pragma mark -

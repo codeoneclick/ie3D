@@ -12,8 +12,8 @@
 #include "CSceneGraph.h"
 #include "CRenderPipeline.h"
 
-CMEMainSceneTransition::CMEMainSceneTransition(const std::string& filename) :
-IEGameTransition(filename)
+CMEMainSceneTransition::CMEMainSceneTransition(const std::string& filename, bool isOffscreen) :
+IEGameTransition(filename, isOffscreen)
 {
     
 }

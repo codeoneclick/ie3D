@@ -23,8 +23,7 @@ protected:
     
 public:
     
-    IEGameTransition(const std::string& filename);
-    
+    IEGameTransition(const std::string& filename, bool isOffscreen);
     ~IEGameTransition(void);
     
     void initScene(void);

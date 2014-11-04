@@ -23,7 +23,7 @@ protected:
     
 public:
     
-    CMEMainSceneTransition(const std::string& filename);
+    CMEMainSceneTransition(const std::string& filename, bool isOffscreen);
     ~CMEMainSceneTransition(void);
     
     void initScene(void);

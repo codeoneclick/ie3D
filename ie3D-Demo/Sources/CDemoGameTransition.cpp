@@ -12,16 +12,8 @@
 #include "CSceneFabricator.h"
 #include "CRenderPipeline.h"
 
-CDemoGameTransition::CDemoGameTransition(const std::string& filename,
-                                         std::shared_ptr<IGraphicsContext> graphicsContext,
-                                         std::shared_ptr<IInputContext> inputContext,
-                                         std::shared_ptr<CResourceAccessor> resourceAccessor,
-                                         std::shared_ptr<CConfigurationAccessor> configurationAccessor) :
-IEGameTransition(filename,
-                 graphicsContext,
-                 inputContext,
-                 resourceAccessor,
-                 configurationAccessor)
+CDemoGameTransition::CDemoGameTransition(const std::string& filename) :
+IEGameTransition(filename)
 {
     
 }

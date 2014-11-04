@@ -1,2 +1,2 @@
-<operation guid="render.operation.screen.mix.overlapping" width="512" height="512" material_filename="material.render.operation.screen.mix.overlapping.xml">
+<operation guid="render.operation.screen.mix.overlapping" width="1024" height="768" material_filename="material.render.operation.screen.mix.overlapping.xml">
 </operation>

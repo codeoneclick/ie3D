@@ -19,11 +19,19 @@ m_configurationAccessor(std::make_shared<CConfigurationAccessor>()),
 m_resourceAccessor(std::make_shared<CResourceAccessor>()),
 m_currentTransition(nullptr)
 {
-#if defined(__OSX__)
+#if defined (__IOS__)
+    m_graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_IOS);
+    m_gestureRecognizerContext = IInputContext::createInputContext(window, E_PLATFORM_API_IOS);
+#elif defined(__WIN32__)
+    m_graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_WIN32);
+    m_gestureRecognizerContext = IInputContext::createInputContext(window, E_PLATFORM_API_WIN32);
+#elif defined(__NDK__)
+    m_graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_NDK);
+    m_gestureRecognizerContext = IInputContext::createInputContext(window, E_PLATFORM_API_NDK);
+#elif defined(__OSX__)
     m_graphicsContext = IGraphicsContext::createGraphicsContext(window, E_PLATFORM_API_OSX);
     m_gestureRecognizerContext = IInputContext::createInputContext(window, E_PLATFORM_API_OSX);
 #endif
-    
 }
 
 IGameController::~IGameController(void)
@@ -53,6 +61,10 @@ void IGameController::removeTransition(ISharedGameTransitionRef transition)
 void IGameController::addChildTransition(ISharedGameTransitionRef transition)
 {
     assert(m_chilrenTransitions.find(transition->getGuid()) == m_chilrenTransitions.end());
+    transition->setupOnce(m_graphicsContext, m_gestureRecognizerContext,
+                          m_resourceAccessor, m_configurationAccessor);
+    transition->initScene();
+    m_configurationAccessor->loadGameTransitionConfiguration(transition->getGuid(), transition);
     m_chilrenTransitions.insert(std::make_pair(transition->getGuid(), transition));
 }
 

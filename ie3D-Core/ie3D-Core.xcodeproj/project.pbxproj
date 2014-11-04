@@ -373,6 +373,10 @@
 		21FCC8E0199A95D400F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
 		21FCC8E1199A95D500F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
 		21FEEC991A029C70001E9ACB /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
+		21FEECE81A08CB0B001E9ACB /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
+		21FEECEE1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21FEECEC1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp */; };
+		21FEECEF1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21FEECEC1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp */; };
+		21FEECF01A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 21FEECED1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -533,6 +537,8 @@
 		21E4D58918658466006F84D6 /* IConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfiguration.h; path = Sources/IConfiguration.h; sourceTree = "<group>"; };
 		21E4D59A1865944D006F84D6 /* CConfigurationGameObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationGameObjects.cpp; path = Sources/CConfigurationGameObjects.cpp; sourceTree = "<group>"; };
 		21E4D59B1865944D006F84D6 /* CConfigurationGameObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationGameObjects.h; path = Sources/CConfigurationGameObjects.h; sourceTree = "<group>"; };
+		21FEECEC1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueOperationTextureHandler.cpp; path = Sources/IRenderTechniqueOperationTextureHandler.cpp; sourceTree = "<group>"; };
+		21FEECED1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueOperationTextureHandler.h; path = Sources/IRenderTechniqueOperationTextureHandler.h; sourceTree = "<group>"; };
 		A40138C21754EF060056461B /* CConfigurationModelSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationModelSerializer.cpp; path = Sources/CConfigurationModelSerializer.cpp; sourceTree = "<group>"; };
 		A40138C31754EF060056461B /* CConfigurationModelSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationModelSerializer.h; path = Sources/CConfigurationModelSerializer.h; sourceTree = "<group>"; };
 		A40138C51754EF280056461B /* CConfigurationParticleEmitterSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationParticleEmitterSerializer.cpp; path = Sources/CConfigurationParticleEmitterSerializer.cpp; sourceTree = "<group>"; };
@@ -997,6 +1003,8 @@
 			children = (
 				2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */,
 				2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */,
+				21FEECED1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h */,
+				21FEECEC1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp */,
 				21733476196440EB002B3F90 /* IRenderTechniqueBase.h */,
 				21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */,
 				2173347B19644107002B3F90 /* CRenderTechniqueMain.h */,
@@ -1830,6 +1838,7 @@
 				213396AC19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h in Headers */,
 				2191CE9C196EE95100CE2813 /* crc32.h in Headers */,
 				2191CEB4196EE95100CE2813 /* inftrees.h in Headers */,
+				21FEECF01A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h in Headers */,
 				21733479196440EB002B3F90 /* IRenderTechniqueBase.h in Headers */,
 				2127E85D1935056100D408C9 /* IEditableLandscape.h in Headers */,
 				2179741C19F534FA00A98630 /* CGlobalLightSource.h in Headers */,
@@ -1982,6 +1991,7 @@
 				21208FB91906FB5F00FFC8D4 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				2191CE68196EDBEF00CE2813 /* pngwio.c in Sources */,
 				21208FBA1906FB5F00FFC8D4 /* CGameLoopExecutor_ios.cpp in Sources */,
+				21FEECEF1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */,
 				212092BB191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
 				2162096919A3312D00DECBBC /* CThreadOperation.cpp in Sources */,
 				21208FBB1906FB5F00FFC8D4 /* CGameLoopExecutor_win32.cpp in Sources */,
@@ -2148,6 +2158,7 @@
 				213265FD1906A4AF001C98F7 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				2191CE67196EDBEF00CE2813 /* pngwio.c in Sources */,
 				213265FE1906A4AF001C98F7 /* CGameLoopExecutor_ios.cpp in Sources */,
+				21FEECEE1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */,
 				212092BA191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
 				2162096819A3312D00DECBBC /* CThreadOperation.cpp in Sources */,
 				213265FF1906A4AF001C98F7 /* CGameLoopExecutor_win32.cpp in Sources */,
@@ -2240,6 +2251,7 @@
 				2132663D1906A4AF001C98F7 /* CShaderCommiter_GLSL.cpp in Sources */,
 				2132663E1906A4AF001C98F7 /* CTextureCommiter_PVR.cpp in Sources */,
 				2132663F1906A4AF001C98F7 /* CMeshCommiter_MDL.cpp in Sources */,
+				21FEECE81A08CB0B001E9ACB /* CBatchingMgr.cpp in Sources */,
 				21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				213266401906A4AF001C98F7 /* CSkeletonCommiter_SK.cpp in Sources */,
 				213266411906A4AF001C98F7 /* CSequenceCommiter_SEQ.cpp in Sources */,

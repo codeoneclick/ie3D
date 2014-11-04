@@ -26,7 +26,7 @@ protected:
     
 public:
     
-    CRenderPipeline(ISharedGraphicsContextRef graphicContext);
+    CRenderPipeline(ISharedGraphicsContextRef graphicContext, bool isOffscreen);
     ~CRenderPipeline(void);
     
     void setBatchingMgr(CSharedBatchingMgrRef batchingMgr);

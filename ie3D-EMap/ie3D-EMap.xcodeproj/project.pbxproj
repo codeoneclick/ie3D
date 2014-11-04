@@ -197,6 +197,10 @@
 		21FEECD11A07A5DA001E9ACB /* shaderAnimatedGameObjectND.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECCD1A07A5DA001E9ACB /* shaderAnimatedGameObjectND.vert */; };
 		21FEECD21A07A5DA001E9ACB /* shaderStaticGameObjectND.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECCE1A07A5DA001E9ACB /* shaderStaticGameObjectND.vert */; };
 		21FEECE41A07D159001E9ACB /* CMEModelsSceneTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEECE31A07D159001E9ACB /* CMEModelsSceneTransition.cpp */; };
+		21FEED011A093737001E9ACB /* CMEModelsSceneView.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEED001A093737001E9ACB /* CMEModelsSceneView.cpp */; };
+		21FEED041A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEED031A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp */; };
+		21FEED071A09396E001E9ACB /* material.render.operation.map.editor.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */; };
+		21FEED081A09396E001E9ACB /* render.operation.map.editor.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */; };
 		350B621B91997A1D3DB08A50 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1ACE512F3E4E1427AACF434A /* QtGui.framework */; };
 		5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 09BF715167B7A0149FD2FBB8 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9D88140FBB133F956E1F6166 /* CMainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
@@ -477,6 +481,11 @@
 		21FEECCE1A07A5DA001E9ACB /* shaderStaticGameObjectND.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderStaticGameObjectND.vert; path = "../ie3D-Bundle/Shaders/shaderStaticGameObjectND.vert"; sourceTree = "<group>"; };
 		21FEECE21A07D159001E9ACB /* CMEModelsSceneTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEModelsSceneTransition.h; path = Sources/CMEModelsSceneTransition.h; sourceTree = SOURCE_ROOT; };
 		21FEECE31A07D159001E9ACB /* CMEModelsSceneTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEModelsSceneTransition.cpp; path = Sources/CMEModelsSceneTransition.cpp; sourceTree = SOURCE_ROOT; };
+		21FEECFF1A093737001E9ACB /* CMEModelsSceneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEModelsSceneView.h; path = Sources/CMEModelsSceneView.h; sourceTree = SOURCE_ROOT; };
+		21FEED001A093737001E9ACB /* CMEModelsSceneView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEModelsSceneView.cpp; path = Sources/CMEModelsSceneView.cpp; sourceTree = SOURCE_ROOT; };
+		21FEED031A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moc_CMEModelsSceneView.cpp; sourceTree = SOURCE_ROOT; };
+		21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.map.editor.output.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.map.editor.output.xml"; sourceTree = "<group>"; };
+		21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.map.editor.output.xml; path = "../ie3D-Bundle/Configurations/render.operation.map.editor.output.xml"; sourceTree = "<group>"; };
 		288C01068066B0AAD960F2E5 /* unix.conf */ = {isa = PBXFileReference; lastKnownFileType = file; name = unix.conf; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/common/unix.conf; sourceTree = "<absolute>"; };
 		2AFE0E29D2D43DE9EEA679F0 /* qt_lib_help.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_help.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_help.pri; sourceTree = "<absolute>"; };
 		2ECDE1AA4A7F457B30B62E5C /* qconfig.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qconfig.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/qconfig.pri; sourceTree = "<absolute>"; };
@@ -841,6 +850,7 @@
 				21FEECC11A07992F001E9ACB /* material.model.shadowmap.xml */,
 				21A9D86D1961AC9900A1B62C /* material.model.normal.xml */,
 				21FEECBB1A078B3E001E9ACB /* material.render.operation.models.scene.output.xml */,
+				21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */,
 				21BC349019080A39007B99DA /* render.operation.world.reflection.xml */,
 				21BC349119080A39007B99DA /* render.operation.world.refraction.xml */,
 				217EF8E119F7F71A00F339A0 /* render.operation.world.shadowmap.xml */,
@@ -849,6 +859,7 @@
 				216346971A06372A009950BC /* render.operation.screen.mix.overlapping.xml */,
 				21BC348D19080A39007B99DA /* render.operation.output.xml */,
 				21FEECBC1A078B3E001E9ACB /* render.operation.models.scene.output.xml */,
+				21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */,
 				21BC349219080A39007B99DA /* transition.main.xml */,
 				21FEECB11A078080001E9ACB /* transition.map.editor.main.scene.xml */,
 				21FEECB21A078080001E9ACB /* transition.map.editor.models.scene.xml */,
@@ -940,6 +951,7 @@
 		25B08E2869634E9BCBA333A2 /* Generated Sources */ = {
 			isa = PBXGroup;
 			children = (
+				21FEED031A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp */,
 				2120900C1906FC5000FFC8D4 /* moc_CMainWindow.cpp */,
 				2120900D1906FC5000FFC8D4 /* ui_CMainWindow.h */,
 			);
@@ -959,6 +971,8 @@
 				21FEECB81A07878E001E9ACB /* CMEModelsScene.cpp */,
 				A4024724E546B6C12F58CF61 /* CMainWindow.h */,
 				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
+				21FEECFF1A093737001E9ACB /* CMEModelsSceneView.h */,
+				21FEED001A093737001E9ACB /* CMEModelsSceneView.cpp */,
 				212092A4190859AD00FFC8D4 /* CMapDragController.h */,
 				212092A3190859AD00FFC8D4 /* CMapDragController.cpp */,
 				21CB5311196C05610066EC6D /* CMEUIToSceneCommands.h */,
@@ -1333,6 +1347,7 @@
 				212092C41919786500FFC8D4 /* gameobject.skybox.xml in Resources */,
 				217EF8DC19F7F52700F339A0 /* skybox_zpos.png in Resources */,
 				21D9944419810C43003D4CD1 /* gameobject.tank.heavy.body.xml in Resources */,
+				21FEED081A09396E001E9ACB /* render.operation.map.editor.output.xml in Resources */,
 				21A9D86119615F9700A1B62C /* material.model.reflection.xml in Resources */,
 				21C409971979B8370063D62D /* material.texture2D.xml in Resources */,
 				21FEECD21A07A5DA001E9ACB /* shaderStaticGameObjectND.vert in Resources */,
@@ -1362,6 +1377,7 @@
 				21C409CB197C123D0063D62D /* tank_light_tower.mdl_01 in Resources */,
 				21A9D8661961616A00A1B62C /* shaderModel.vert in Resources */,
 				21D9943919810976003D4CD1 /* material.tank.medium.right.track.common.xml in Resources */,
+				21FEED071A09396E001E9ACB /* material.render.operation.map.editor.output.xml in Resources */,
 				217AF1821945EE1E0045CF9D /* shaderLandscapeBrush.frag in Resources */,
 				21C409B6197C11060063D62D /* material.tank.light.body.common.xml in Resources */,
 				21D9943819810976003D4CD1 /* material.tank.medium.left.track.common.xml in Resources */,
@@ -1461,11 +1477,13 @@
 				2191CE30196E872200CE2813 /* CMEModelBrush.cpp in Compile Sources */,
 				21C4099C1979B85E0063D62D /* shaderTexture2D.vert in Compile Sources */,
 				21CB5315196C16A10066EC6D /* CMESceneToUICommands.cpp in Compile Sources */,
+				21FEED041A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp in Compile Sources */,
 				2113850C194351CF0041A18A /* CMEConfigurationGameObjects.cpp in Compile Sources */,
 				21FEECBA1A07878E001E9ACB /* CMEModelsScene.cpp in Compile Sources */,
 				21138515194351F80041A18A /* CMEConfigurationAccessor.cpp in Compile Sources */,
 				212092AB19106B6100FFC8D4 /* CMELandscapeBrush.cpp in Compile Sources */,
 				21CB5312196C05610066EC6D /* CMEUIToSceneCommands.cpp in Compile Sources */,
+				21FEED011A093737001E9ACB /* CMEModelsSceneView.cpp in Compile Sources */,
 				21208EA61906F75D00FFC8D4 /* CMEGameController.cpp in Compile Sources */,
 				212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */,
 				21208EA71906F75D00FFC8D4 /* CMEMainSceneTransition.cpp in Compile Sources */,
