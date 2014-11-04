@@ -102,8 +102,6 @@ void CMainWindow::execute(void)
     
     m_modelsSceneTransition->getRenderTechniqueImporter()->addRenderTechninqueOperationTextureHandler("render.operation.world.base", shared_from_this());
     
-    //ui->m_modelsOpenGLView->setAttribute(Qt::WA_PaintOutsidePaintEvent, true);
-    
 #endif
 }
 
@@ -305,7 +303,9 @@ void CMainWindow::on_m_textureTilling03SpinBox_valueChanged(int value)
 
 void CMainWindow::onTextureRendered(const std::string& techniqueName, const ui8 *rawdata, ui32 width, ui32 height)
 {
-    QImage image(rawdata, width, height, QImage::Format_ARGB32);
+    QImage *image = new QImage(rawdata, width, height, QImage::Format_RGBA8888);
+    m_modelsSceneView->setImage(image);
+    m_modelsSceneView->update();
     
 /*#if defined(__OSX__)
     

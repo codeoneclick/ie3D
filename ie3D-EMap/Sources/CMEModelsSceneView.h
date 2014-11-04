@@ -19,7 +19,11 @@ class CMEModelsSceneView : public QWidget
 public:
     CMEModelsSceneView(QWidget *parent = 0);
     
+    void setImage(QImage *image);
+    
 protected:
+    
+    QImage *m_image;
     
 private slots:
 
