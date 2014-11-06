@@ -62,7 +62,6 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         auto techniqueOperationTextureHandlers = m_renderTechniqueOperationTextureHandlers.find(iterator.first);
         if(techniqueOperationTextureHandlers != m_renderTechniqueOperationTextureHandlers.end())
         {
-            glReadBuffer(GL_COLOR_ATTACHMENT0);
             ui32 rawdataSize = technique->getFrameWidth() * technique->getFrameHeight() * 4;
             ui8 *rawdata = new ui8[rawdataSize];
             glReadPixels(0, 0, technique->getFrameWidth(), technique->getFrameHeight(), GL_RGBA, GL_UNSIGNED_BYTE, rawdata);

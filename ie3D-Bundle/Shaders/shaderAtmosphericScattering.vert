@@ -59,10 +59,10 @@ void main(void)
     vec3 vCameraPosition = VECTOR_CameraPosition;
     vec3 vCameraRay = normalize(vPosition.xyz - vCameraPosition);
     
-    float fCameraHeight = (VECTOR_CameraPosition.y - radiusInOutHeightMinMax.z) / (radiusInOutHeightMinMax.w - radiusInOutHeightMinMax.z);
+    float fCameraHeight = (radiusInOutHeightMinMax.z) / (radiusInOutHeightMinMax.w - radiusInOutHeightMinMax.z);
     fCameraHeight = radiusInOutHeightMinMax.x + fCameraHeight * (radiusInOutHeightMinMax.y - radiusInOutHeightMinMax.x);
     
-    vec3 vStart = vec3(VECTOR_CameraPosition.x, fCameraHeight, VECTOR_CameraPosition.z);
+    vec3 vStart = vec3(0.0, fCameraHeight, 0.0);
     float fDistance = rayIntersection(vStart, vCameraRay, radiusInOutHeightMinMax.y);
     
     float fStartAngle = dot(vCameraRay, vStart) / fCameraHeight;
@@ -80,7 +80,6 @@ void main(void)
     
     for(int i = 0; i < 8; i++)
     {
-        
         float fHeight = length(vSamplePoint);
         float fDepth = exp(scaleIteration.z * (radiusInOutHeightMinMax.x - fHeight));
         

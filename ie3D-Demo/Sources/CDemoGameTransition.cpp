@@ -12,8 +12,8 @@
 #include "CSceneFabricator.h"
 #include "CRenderPipeline.h"
 
-CDemoGameTransition::CDemoGameTransition(const std::string& filename) :
-IEGameTransition(filename)
+CDemoGameTransition::CDemoGameTransition(const std::string& filename, bool isOffscreen) :
+IEGameTransition(filename, isOffscreen)
 {
     
 }

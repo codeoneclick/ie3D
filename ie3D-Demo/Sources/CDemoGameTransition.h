@@ -24,7 +24,7 @@ protected:
     
 public:
     
-    CDemoGameTransition(const std::string& filename);
+    CDemoGameTransition(const std::string& filename, bool isOffscreen);
     ~CDemoGameTransition(void);
     
     void initScene(void);
