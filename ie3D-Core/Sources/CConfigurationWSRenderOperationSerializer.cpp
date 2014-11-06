@@ -48,22 +48,22 @@ ISharedConfiguration CConfigurationWSRenderOperationSerializer::serialize(const 
                                                                                  worldSpaceRenderOperationConfiguration->kWSRenderOperationScreenHeightAttribute),
                                                     std::make_shared<CConfigurationAttribute>(screenHeight));
     
-    f32 clearColorR = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorRAttribute.c_str()).as_uint();
+    f32 clearColorR = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorRAttribute.c_str()).as_float();
     worldSpaceRenderOperationConfiguration->setAttribute(getConfigurationAttributeKey(worldSpaceRenderOperationConfiguration->kWSRenderOperationMainNode,
                                                                               worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorRAttribute),
                                                      std::make_shared<CConfigurationAttribute>(clearColorR));
     
-    f32 clearColorG = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorGAttribute.c_str()).as_uint();
+    f32 clearColorG = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorGAttribute.c_str()).as_float();
     worldSpaceRenderOperationConfiguration->setAttribute(getConfigurationAttributeKey(worldSpaceRenderOperationConfiguration->kWSRenderOperationMainNode,
                                                                               worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorGAttribute),
                                                      std::make_shared<CConfigurationAttribute>(clearColorG));
     
-    f32 clearColorB = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorBAttribute.c_str()).as_uint();
+    f32 clearColorB = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorBAttribute.c_str()).as_float();
     worldSpaceRenderOperationConfiguration->setAttribute(getConfigurationAttributeKey(worldSpaceRenderOperationConfiguration->kWSRenderOperationMainNode,
                                                                               worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorBAttribute),
                                                      std::make_shared<CConfigurationAttribute>(clearColorB));
     
-    f32 clearColorA = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorAAttribute.c_str()).as_uint();
+    f32 clearColorA = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorAAttribute.c_str()).as_float();
     worldSpaceRenderOperationConfiguration->setAttribute(getConfigurationAttributeKey(worldSpaceRenderOperationConfiguration->kWSRenderOperationMainNode,
                                                                               worldSpaceRenderOperationConfiguration->kWSRenderOperationClearColorAAttribute),
                                                      std::make_shared<CConfigurationAttribute>(clearColorA));

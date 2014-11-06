@@ -1,12 +1,12 @@
 //
-//  CMEModelsScene.cpp
+//  CMEPreviewModelScene.cpp
 //  ie3D-EMap
 //
 //  Created by sergey.sergeev on 11/3/14.
 //
 //
 
-#include "CMEModelsScene.h"
+#include "CMEPreviewModelScene.h"
 #include "IGameTransition.h"
 #include "IGameObject.h"
 #include "CCamera.h"
@@ -18,18 +18,18 @@
 #include "CResourceAccessor.h"
 #include "CTexture.h"
 
-CMEModelsScene::CMEModelsScene(IGameTransition* root) :
+CMEPreviewModelScene::CMEPreviewModelScene(IGameTransition* root) :
 IScene(root)
 {
 
 }
 
-CMEModelsScene::~CMEModelsScene(void)
+CMEPreviewModelScene::~CMEPreviewModelScene(void)
 {
     
 }
 
-void CMEModelsScene::load(void)
+void CMEPreviewModelScene::load(void)
 {
     assert(m_root != nullptr);
     m_camera = m_root->createCamera(45.0, 0.01, 1024.0,
@@ -40,7 +40,7 @@ void CMEModelsScene::load(void)
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_LookAt(glm::vec3(0.0f, 0.0f, 0.0f));
     m_camera->Set_Distance(8.0f);
-    m_camera->Set_Height(8.0f);
+    m_camera->Set_Height(4.0f);
     m_root->setCamera(m_camera);
     
     m_globalLightSource = m_root->createGlobalLightSource(45.0, 0.01, 1024.0);
@@ -58,63 +58,65 @@ void CMEModelsScene::load(void)
     m_globalLightSource->setLookAt(glm::vec3(256.0, 0.0, 256.0));
 }
 
-void CMEModelsScene::update(f32)
+void CMEPreviewModelScene::update(f32)
 {
-
+    static f32 angle = 0.0;
+    angle += 3.0;
+    m_model->setRotation(glm::vec3(0.0, angle, 0.0));
 }
 
-std::vector<ISharedGameObject> CMEModelsScene::colliders(void)
+std::vector<ISharedGameObject> CMEPreviewModelScene::colliders(void)
 {
     std::vector<ISharedGameObject> colliders;
     return colliders;
 }
 
-void CMEModelsScene::onCollision(const glm::vec3&, ISharedGameObjectRef, E_INPUT_BUTTON)
+void CMEPreviewModelScene::onCollision(const glm::vec3&, ISharedGameObjectRef, E_INPUT_BUTTON)
 {
     
 }
 
-void CMEModelsScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTON)
+void CMEPreviewModelScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTON)
 {
     
 }
 
-void CMEModelsScene::onGestureRecognizerMoved(const glm::ivec2&)
+void CMEPreviewModelScene::onGestureRecognizerMoved(const glm::ivec2&)
 {
 
 }
 
-void CMEModelsScene::onGestureRecognizerDragged(const glm::ivec2&, E_INPUT_BUTTON)
+void CMEPreviewModelScene::onGestureRecognizerDragged(const glm::ivec2&, E_INPUT_BUTTON)
 {
 
 }
 
-void CMEModelsScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
-{
-    
-}
-
-void CMEModelsScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION)
-{
-
-}
-
-void CMEModelsScene::onKeyUp(i32)
+void CMEPreviewModelScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
 {
     
 }
 
-void CMEModelsScene::onKeyDown(i32)
+void CMEPreviewModelScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION)
+{
+
+}
+
+void CMEPreviewModelScene::onKeyUp(i32)
 {
     
 }
 
-void CMEModelsScene::onConfigurationLoaded(ISharedConfigurationRef)
+void CMEPreviewModelScene::onKeyDown(i32)
+{
+    
+}
+
+void CMEPreviewModelScene::onConfigurationLoaded(ISharedConfigurationRef)
 {
 
 }
 
-void CMEModelsScene::onResourceLoaded(ISharedResourceRef resource)
+void CMEPreviewModelScene::onResourceLoaded(ISharedResourceRef resource)
 {
 
 }

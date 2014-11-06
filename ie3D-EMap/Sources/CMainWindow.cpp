@@ -8,7 +8,7 @@
 
 #include "CMEGameController.h"
 #include "CMEMainSceneTransition.h"
-#include "CMEModelsSceneTransition.h"
+#include "CMEPreviewModelSceneTransition.h"
 #include "CMEMainScene.h"
 #include "IOGLWindow.h"
 #include "CMEUIToSceneCommands.h"
@@ -31,7 +31,7 @@ QMainWindow(parent),
 
 m_gameController(nullptr),
 m_mainSceneTransition(nullptr),
-m_modelsSceneTransition(nullptr),
+m_previewModelSceneTransition(nullptr),
 m_recentFilename(""),
 
 #endif
@@ -60,8 +60,9 @@ ui(new Ui::CMainWindow)
     ui->m_smoothLabel->setText(QString::fromUtf8(stream.str().c_str()));
     
     m_modelsSceneView = new CMEModelsSceneView(ui->m_modelsOpenGLView);
-    m_modelsSceneView->setGeometry(ui->m_modelsOpenGLView->geometry());
-    m_modelsSceneView->setFont(ui->m_modelsOpenGLView->font());
+    m_modelsSceneView->setGeometry(QRect(0, 0,
+                                         ui->m_modelsOpenGLView->width(),
+                                         ui->m_modelsOpenGLView->height()));
     m_modelsSceneView->setStyleSheet(ui->m_modelsOpenGLView->styleSheet());
 }
 
@@ -96,11 +97,10 @@ void CMainWindow::execute(void)
     m_gameController->gotoTransition("transition.map.editor.main.scene.xml");
     m_mainSceneTransition->setSceneToUICommands(m_sceneToUICommands);
     
-    m_modelsSceneTransition = std::make_shared<CMEModelsSceneTransition>("transition.map.editor.models.scene.xml", true);
-    m_gameController->addChildTransition(m_modelsSceneTransition);
-    m_gameController->activateChildTransition("transition.map.editor.models.scene.xml");
-    
-    m_modelsSceneTransition->getRenderTechniqueImporter()->addRenderTechninqueOperationTextureHandler("render.operation.world.base", shared_from_this());
+    m_previewModelSceneTransition = std::make_shared<CMEPreviewModelSceneTransition>("transition.map.editor.preview.model.xml", true);
+    m_gameController->addChildTransition(m_previewModelSceneTransition);
+    m_gameController->activateChildTransition("transition.map.editor.preview.model.xml");
+    m_previewModelSceneTransition->getRenderTechniqueImporter()->addRenderTechninqueOperationTextureHandler("render.operation.world.base", shared_from_this());
     
 #endif
 }

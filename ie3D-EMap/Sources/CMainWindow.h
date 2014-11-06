@@ -11,7 +11,7 @@
 
 class CMEGameController;
 class CMEMainSceneTransition;
-class CMEModelsSceneTransition;
+class CMEPreviewModelSceneTransition;
 
 namespace Ui {
     class CMainWindow;
@@ -31,7 +31,7 @@ protected:
     
     std::shared_ptr<CMEGameController> m_gameController;
     std::shared_ptr<CMEMainSceneTransition> m_mainSceneTransition;
-    std::shared_ptr<CMEModelsSceneTransition> m_modelsSceneTransition;
+    std::shared_ptr<CMEPreviewModelSceneTransition> m_previewModelSceneTransition;
     
     CSharedMESceneToUICommands m_sceneToUICommands;
     

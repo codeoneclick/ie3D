@@ -9,8 +9,6 @@
 #include "CMEGameController.h"
 #include "IGraphicsContext.h"
 #include "IInputContext.h"
-#include "CMEMainSceneTransition.h"
-#include "CMEModelsSceneTransition.h"
 #include "CConfigurationAccessor.h"
 #include "CMEConfigurationAccessor.h"
 

@@ -1,18 +1,18 @@
 //
-//  CMEModelsSceneTransition.h
+//  CMEPreviewModelSceneTransition.h
 //  ie3D-EMap
 //
 //  Created by sergey.sergeev on 11/3/14.
 //
 //
 
-#ifndef CMEModelsSceneTransition_h
-#define CMEModelsSceneTransition_h
+#ifndef CMEPreviewModelSceneTransition_h
+#define CMEPreviewModelSceneTransition_h
 
 #include "IEGameTransition.h"
 #include "HMEDeclaration.h"
 
-class CMEModelsSceneTransition : public IEGameTransition
+class CMEPreviewModelSceneTransition : public IEGameTransition
 {
 private:
     
@@ -23,8 +23,8 @@ protected:
     
 public:
     
-    CMEModelsSceneTransition(const std::string& filename, bool isOffscreen);
-    ~CMEModelsSceneTransition(void);
+    CMEPreviewModelSceneTransition(const std::string& filename, bool isOffscreen);
+    ~CMEPreviewModelSceneTransition(void);
     
     void initScene(void);
     

@@ -75,7 +75,7 @@ public:
         centralWidget->setStyleSheet(QStringLiteral("background-color: rgb(64, 64, 64);"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(760, 12, 251, 721));
+        tabWidget->setGeometry(QRect(758, 12, 256, 721));
         QFont font;
         font.setFamily(QStringLiteral("Menlo"));
         font.setPointSize(13);
@@ -205,7 +205,7 @@ public:
         models->setObjectName(QStringLiteral("models"));
         m_modelsOpenGLView = new QWidget(models);
         m_modelsOpenGLView->setObjectName(QStringLiteral("m_modelsOpenGLView"));
-        m_modelsOpenGLView->setGeometry(QRect(10, 10, 226, 181));
+        m_modelsOpenGLView->setGeometry(QRect(0, 40, 256, 256));
         m_modelsOpenGLView->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         tabWidget->addTab(models, QString());
         groupBox = new QGroupBox(centralWidget);

@@ -1,18 +1,18 @@
 //
-//  CMEModelsScene.h
+//  CMEPreviewModelScene.h
 //  ie3D-EMap
 //
 //  Created by sergey.sergeev on 11/3/14.
 //
 //
 
-#ifndef CMEModelsScene_h
-#define CMEModelsScene_h
+#ifndef CMEPreviewModelScene_h
+#define CMEPreviewModelScene_h
 
 #include "IScene.h"
 #include "HMEDeclaration.h"
 
-class CMEModelsScene final :
+class CMEPreviewModelScene final :
 public IScene,
 public IGestureRecognizerHandler
 {
@@ -40,8 +40,8 @@ protected:
     
 public:
     
-    CMEModelsScene(IGameTransition* root);
-    ~CMEModelsScene(void);
+    CMEPreviewModelScene(IGameTransition* root);
+    ~CMEPreviewModelScene(void);
     
     void load(void);
     void update(f32 deltatime);

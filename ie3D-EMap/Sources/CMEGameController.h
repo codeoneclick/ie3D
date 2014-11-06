@@ -22,12 +22,6 @@ public:
     
     CMEGameController(ISharedOGLWindowRef window);
     ~CMEGameController(void) = default;
-    
-    std::shared_ptr<IGameTransition> createMainSceneTransition(const std::string& filename,
-                                                               ISharedOGLWindowRef window);
-    
-    std::shared_ptr<IGameTransition> createModelsSceneTransition(const std::string& filename,
-                                                                 ISharedOGLWindowRef window);
 };
 
 #endif

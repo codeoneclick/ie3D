@@ -35,9 +35,9 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>760</x>
+      <x>758</x>
       <y>12</y>
-      <width>251</width>
+      <width>256</width>
       <height>721</height>
      </rect>
     </property>
@@ -509,10 +509,10 @@ background-color: rgb(64, 64, 64);</string>
      <widget class="QWidget" name="m_modelsOpenGLView" native="true">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>226</width>
-        <height>181</height>
+        <x>0</x>
+        <y>40</y>
+        <width>256</width>
+        <height>256</height>
        </rect>
       </property>
       <property name="styleSheet">

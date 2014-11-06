@@ -1093,19 +1093,19 @@ glm::vec4 CConfigurationWSRenderOperation::getClearColor(void) const
                                               kWSRenderOperationClearColorGAttribute);
     assert(iteratorG != m_attributes.end());
     assert(iteratorG->second.size() != 0);
-    ui8 g = iteratorG->second[0]->getScalar<f32>();
+    f32 g = iteratorG->second[0]->getScalar<f32>();
     
     const auto& iteratorB = m_attributes.find(kWSRenderOperationMainNode + ":" +
                                               kWSRenderOperationClearColorBAttribute);
     assert(iteratorB != m_attributes.end());
     assert(iteratorB->second.size() != 0);
-    ui8 b = iteratorB->second[0]->getScalar<f32>();
+    f32 b = iteratorB->second[0]->getScalar<f32>();
     
     const auto& iteratorA = m_attributes.find(kWSRenderOperationMainNode + ":" +
                                               kWSRenderOperationClearColorAAttribute);
     assert(iteratorA != m_attributes.end());
     assert(iteratorA->second.size() != 0);
-    ui8 a = iteratorA->second[0]->getScalar<f32>();
+    f32 a = iteratorA->second[0]->getScalar<f32>();
     
     return glm::vec4(r, g, b, a);
 }
