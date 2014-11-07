@@ -38,12 +38,7 @@ void CSkeletonSerializer_SK::serialize(void)
     {
         filestream->read((char*)&id, sizeof(i32));
         filestream->read((char*)&parentId, sizeof(i32));
-        CSharedBone bone = skeletonData->getBone(id);
-        if(bone == nullptr)
-        {
-            bone = std::make_shared<CBone>(id, parentId);
-        }
-        skeletonData->addBone(bone);
+        skeletonData->addBone(id, parentId);
     }
     IResourceSerializer::closeStream(filestream);
     

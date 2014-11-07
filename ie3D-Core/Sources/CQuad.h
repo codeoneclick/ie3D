@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "HDeclaration.h"
+#include "HEnums.h"
 
 class CQuad
 {
@@ -29,8 +30,8 @@ public:
 	CQuad(void);
     ~CQuad(void);
     
-    void bind(const i32* attributes);
+    void bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
     void draw(void);
-    void unbind(const i32* attributes);
+    void unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
 };
 #endif 

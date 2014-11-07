@@ -112,7 +112,7 @@ void IGameObject::onBind(const std::string& techniqueName)
        iterator->second->getShader()->isLoaded())
     {
         iterator->second->bind();
-        m_mesh->bind(iterator->second->getShader()->getAttributesRef());
+        m_mesh->bind(iterator->second->getShader()->getAttributes());
         m_materialBindImposer(iterator->second);
     }
 }
@@ -144,7 +144,7 @@ void IGameObject::onUnbind(const std::string& techniqueName)
        iterator->second->getShader()->isLoaded())
     {
         iterator->second->unbind();
-        m_mesh->unbind(iterator->second->getShader()->getAttributesRef());
+        m_mesh->unbind(iterator->second->getShader()->getAttributes());
     }
 }
 

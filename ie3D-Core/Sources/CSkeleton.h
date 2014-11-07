@@ -18,16 +18,21 @@ private:
     
 protected:
     
+    ui32 m_numBones;
+    std::set<CSharedBone> m_rootBones;
     glm::mat4x4* m_bonesTransformations;
-    CSharedSkeletonData m_skeletonData;
     
 public:
     
     CSkeleton(CSharedSkeletonDataRef skeletonData);
     ~CSkeleton(void);
     
-    ui32 getNumBones(void) const;
+    void addBone(CSharedBoneRef bone);
     CSharedBone getBone(ui32 index) const;
+    
+    ui32 getNumBones(void) const;
+    const std::set<CSharedBone> getRootBones(void) const;
+    
     glm::mat4* getBonesTransformations(void) const;
     
     void update(void);

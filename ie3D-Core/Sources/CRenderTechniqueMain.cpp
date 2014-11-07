@@ -35,12 +35,12 @@ void CRenderTechniqueMain::bind(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     m_material->bind();
-    m_quad->bind(m_material->getShader()->getAttributesRef());
+    m_quad->bind(m_material->getShader()->getAttributes());
 }
 
 void CRenderTechniqueMain::unbind(void)
 {
-    m_quad->unbind(m_material->getShader()->getAttributesRef());
+    m_quad->unbind(m_material->getShader()->getAttributes());
     m_material->unbind();
 }
 

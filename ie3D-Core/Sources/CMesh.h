@@ -111,18 +111,18 @@ private:
 protected:
     
     ui32 m_numBones;
-    std::set<CSharedBone> m_rootBones;
+    std::vector<CSharedBoneData> m_bonesRawData;
     
 public:
     
     CSkeletonData(ui32 numBones);
     ~CSkeletonData(void);
     
-    void addBone(CSharedBoneRef bone);
-    CSharedBone getBone(ui32 index) const;
+    void addBone(i32 id, i32 parentId);
     
     ui32 getNumBones(void) const;
-    const std::set<CSharedBone> getRootBones(void) const;
+    
+    const std::vector<CSharedBoneData> getBonesRawData(void) const;
 };
 
 
@@ -170,10 +170,10 @@ public:
     const CSharedSkeletonData getSkeletonData(void) const;
     const CSharedSequenceData getSequenceData(void) const;
 
-    void bind(const i32* attributes) const;
+    void bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const;
     void draw(void) const;
     void draw(ui32 indices) const;
-    void unbind(const i32* attributes) const;
+    void unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const;
 };
 
 #endif

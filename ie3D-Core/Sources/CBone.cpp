@@ -10,6 +10,28 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
+CBoneData::CBoneData(i32 id, i32 parentId) :
+m_id(id),
+m_parentId(parentId)
+{
+    
+}
+
+CBoneData::~CBoneData(void)
+{
+    
+}
+
+i32 CBoneData::getBoneId(void) const
+{
+    return m_id;
+}
+
+i32 CBoneData::getBoneParentId(void) const
+{
+    return m_parentId;
+}
+
 CBone::CBone(i32 id, i32 parentId) :
 m_id(id),
 m_parentId(parentId),

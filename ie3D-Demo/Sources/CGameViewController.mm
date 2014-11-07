@@ -49,7 +49,7 @@
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)self.m_openglView);
     
     self.gameController = std::make_shared<CDemoGameController>(window);
-    self.gameTransition = std::make_shared<CDemoGameTransition>("transition.main.xml");
+    self.gameTransition = std::make_shared<CDemoGameTransition>("transition.main.xml", false);
     self.gameController->addTransition(self.gameTransition);
     self.gameController->gotoTransition("transition.main.xml");
 

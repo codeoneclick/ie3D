@@ -45,7 +45,7 @@ CQuad::~CQuad(void)
 
 }
 
-void CQuad::bind(const i32* attributes)
+void CQuad::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
@@ -60,7 +60,7 @@ void CQuad::draw(void)
     glDrawElements(GL_TRIANGLES, m_indexBuffer->getUsedSize(), GL_UNSIGNED_SHORT, NULL);
 }
 
-void CQuad::unbind(const i32* attributes)
+void CQuad::unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);

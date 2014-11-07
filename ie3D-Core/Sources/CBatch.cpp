@@ -242,9 +242,9 @@ void CBatch::onDraw(const std::string& techniqueName)
         m_material->bind();
 		m_materialBindImposer(m_material);
         
-        m_batchMesh->bind(m_material->getShader()->getAttributesRef());
+        m_batchMesh->bind(m_material->getShader()->getAttributes());
         m_batchMesh->draw(m_numLockedIndices);
-        m_batchMesh->unbind(m_material->getShader()->getAttributesRef());
+        m_batchMesh->unbind(m_material->getShader()->getAttributes());
         
         m_material->unbind();
     }

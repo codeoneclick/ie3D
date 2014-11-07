@@ -68,6 +68,10 @@ struct SBoneData;
 typedef std::shared_ptr<CBone> CSharedBone;
 typedef const CSharedBone& CSharedBoneRef;
 
+class CBoneData;
+typedef std::shared_ptr<CBoneData> CSharedBoneData;
+typedef const CSharedBoneData& CSharedBoneDataRef;
+
 class CSkeletonData;
 typedef std::shared_ptr<CSkeletonData> CSharedSkeletonData;
 typedef const CSharedSkeletonData& CSharedSkeletonDataRef;

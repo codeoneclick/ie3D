@@ -96,7 +96,7 @@ void CVertexBuffer::unlock(ui32 sizeToUse)
     glBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
 }
 
-void CVertexBuffer::bind(const i32* attributes) const
+void CVertexBuffer::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
 {
     if(m_usedSize != 0)
     {
@@ -105,54 +105,54 @@ void CVertexBuffer::bind(const i32* attributes) const
 #if defined(__OPENGL_30__)
         glBindVertexArray(m_vao);
 #endif
-        if(attributes[E_SHADER_ATTRIBUTE_POSITION] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_POSITION) >= 0)
         {
-            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_POSITION]);
-            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_POSITION], 3, GL_FLOAT, GL_FALSE,
+            glEnableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_POSITION));
+            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_POSITION), 3, GL_FLOAT, GL_FALSE,
                                   sizeof(SAttributeVertex),
                                   (GLvoid*)offsetof(SAttributeVertex, m_position));
         }
-        if(attributes[E_SHADER_ATTRIBUTE_TEXCOORD] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD) >= 0)
         {
-            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TEXCOORD]);
-            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_TEXCOORD], 2, GL_UNSIGNED_SHORT, GL_FALSE,
+            glEnableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD));
+            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD), 2, GL_UNSIGNED_SHORT, GL_FALSE,
                                   sizeof(SAttributeVertex),
                                   (GLvoid*)offsetof(SAttributeVertex, m_texcoord));
         }
-        if(attributes[E_SHADER_ATTRIBUTE_NORMAL] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_NORMAL) >= 0)
         {
-            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_NORMAL]);
-            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_NORMAL], 4, GL_UNSIGNED_BYTE, GL_FALSE,
+            glEnableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_NORMAL));
+            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_NORMAL), 4, GL_UNSIGNED_BYTE, GL_FALSE,
                                   sizeof(SAttributeVertex),
                                   (GLvoid*)offsetof(SAttributeVertex, m_normal));
         }
         if(attributes[E_SHADER_ATTRIBUTE_TANGENT] >= 0)
         {
-            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TANGENT]);
-            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_TANGENT], 4, GL_UNSIGNED_BYTE, GL_FALSE,
+            glEnableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_TANGENT));
+            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_TANGENT), 4, GL_UNSIGNED_BYTE, GL_FALSE,
                                   sizeof(SAttributeVertex),
                                   (GLvoid*)offsetof(SAttributeVertex, m_tangent));
         }
-        if(attributes[E_SHADER_ATTRIBUTE_COLOR] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_COLOR) >= 0)
         {
-            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_COLOR]);
-            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_COLOR], 4, GL_UNSIGNED_BYTE, GL_FALSE,
+            glEnableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_COLOR));
+            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_COLOR), 4, GL_UNSIGNED_BYTE, GL_FALSE,
                                   sizeof(SAttributeVertex),
                                   (GLvoid*)offsetof(SAttributeVertex, m_color));
         }
-        if(attributes[E_SHADER_ATTRIBUTE_EXTRA] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_EXTRA) >= 0)
         {
-            glEnableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_EXTRA]);
-            glVertexAttribPointer(attributes[E_SHADER_ATTRIBUTE_EXTRA], 4, GL_UNSIGNED_BYTE, GL_FALSE,
+            glEnableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_EXTRA));
+            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_EXTRA), 4, GL_UNSIGNED_BYTE, GL_FALSE,
                                   sizeof(SAttributeVertex),
                                   (GLvoid*)offsetof(SAttributeVertex, m_extra));
         }
     }
 }
 
-void CVertexBuffer::unbind(const i32* attributes) const
+void CVertexBuffer::unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
 {
-    if(m_usedSize != 0)
+    /*if(m_usedSize != 0)
     {
         assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
         glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
@@ -181,5 +181,5 @@ void CVertexBuffer::unbind(const i32* attributes) const
             glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_EXTRA]);
         }
         glBindBuffer(GL_ARRAY_BUFFER, NULL);
-    }
+    }*/
 }

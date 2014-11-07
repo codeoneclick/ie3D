@@ -72,8 +72,8 @@ public:
     SAttributeVertex* lock(void) const;
     void unlock(ui32 sizeToUse = 0);
     
-    void bind(const i32* attributes) const;
-    void unbind(const i32* attributes) const;
+    void bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const;
+    void unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const;
 };
 
 #endif 

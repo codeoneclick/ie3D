@@ -100,7 +100,7 @@ protected:
     
     i32 m_uniforms[E_SHADER_UNIFORM_MAX];
     i32 m_samplers[E_SHADER_SAMPLER_MAX];
-    i32 m_attributes[E_SHADER_ATTRIBUTE_MAX];
+    std::array<i32, E_SHADER_ATTRIBUTE_MAX> m_attributes;
     std::unordered_map<std::string, i32> m_customUniforms;
     
     CSharedShaderData m_shaderData;
@@ -130,7 +130,7 @@ public:
     std::string getVSSourceCode(void) const;
     std::string getFSSourceCode(void) const;
 
-    const i32* getAttributesRef(void) const;
+    const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& getAttributes(void) const;
     
     void setMatrix3x3(const glm::mat3x3& matrix, E_SHADER_UNIFORM uniform);
     void setMatrix3x3Custom(const glm::mat3x3& matrix, const std::string& uniform);

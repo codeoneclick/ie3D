@@ -12,6 +12,24 @@
 #include "HCommon.h"
 #include "HDeclaration.h"
 
+class CBoneData
+{
+private:
+
+protected:
+    
+    i32 m_id;
+    i32 m_parentId;
+    
+public:
+    
+    CBoneData(i32 id, i32 parentId);
+    ~CBoneData(void);
+    
+    i32 getBoneId(void) const;
+    i32 getBoneParentId(void) const;
+};
+
 class CBone final : public std::enable_shared_from_this<CBone>
 {
 private:

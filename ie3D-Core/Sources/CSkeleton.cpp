@@ -11,10 +11,23 @@
 #include "CMesh.h"
 
 CSkeleton::CSkeleton(CSharedSkeletonDataRef skeletonData) :
-m_skeletonData(skeletonData)
+m_numBones(skeletonData->getNumBones())
 {
-    assert(m_skeletonData != nullptr);
-    m_bonesTransformations = new glm::mat4x4[m_skeletonData->getNumBones()];
+    assert(skeletonData != nullptr);
+    m_bonesTransformations = new glm::mat4x4[skeletonData->getNumBones()];
+    
+    std::vector<CSharedBoneData> bonesRawData = skeletonData->getBonesRawData();
+    for(const auto& boneRawData : bonesRawData)
+    {
+        i32 id = boneRawData->getBoneId();
+        i32 parentId = boneRawData->getBoneParentId();
+        CSharedBone bone = CSkeleton::getBone(id);
+        if(bone == nullptr)
+        {
+            bone = std::make_shared<CBone>(id, parentId);
+        }
+        CSkeleton::addBone(bone);
+    }
 }
 
 CSkeleton::~CSkeleton(void)
@@ -22,16 +35,56 @@ CSkeleton::~CSkeleton(void)
     
 }
 
-ui32 CSkeleton::getNumBones(void) const
+void CSkeleton::addBone(CSharedBoneRef bone)
 {
-    assert(m_skeletonData != nullptr);
-    return m_skeletonData->getNumBones();
+    if(bone == nullptr)
+    {
+        return;
+    }
+    
+    if (bone->getParentId() == -1)
+    {
+        m_rootBones.insert(bone);
+        return;
+    }
+    
+    CSharedBone parent = CSkeleton::getBone(bone->getParentId());
+    if (parent != nullptr)
+    {
+        parent->addChild(bone);
+        return;
+    }
+    assert(false);
 }
 
 CSharedBone CSkeleton::getBone(ui32 index) const
 {
-    assert(m_skeletonData != nullptr);
-    return m_skeletonData->getBone(index);
+    for(const auto& root : m_rootBones)
+    {
+        if (root->getId() == index)
+        {
+            return root;
+        }
+        else
+        {
+            CSharedBone child = root->findChild(index);
+            if(child != nullptr)
+            {
+                return child;
+            }
+        }
+    }
+    return nullptr;
+}
+
+ui32 CSkeleton::getNumBones(void) const
+{
+    return m_numBones;
+}
+
+const std::set<CSharedBone> CSkeleton::getRootBones(void) const
+{
+    return m_rootBones;
 }
 
 glm::mat4* CSkeleton::getBonesTransformations(void) const
@@ -41,17 +94,16 @@ glm::mat4* CSkeleton::getBonesTransformations(void) const
 
 void CSkeleton::update(void)
 {
-    assert(m_skeletonData != nullptr);
     CSharedBone bone = nullptr;
-    for (ui32 i = 0; i < m_skeletonData->getNumBones(); ++i)
+    for (ui32 i = 0; i < CSkeleton::getNumBones(); ++i)
     {
-        bone = m_skeletonData->getBone(i);
+        bone = CSkeleton::getBone(i);
         if (bone != nullptr)
         {
             bone->setTransformation(m_bonesTransformations + i);
         }
     }
-    for(const auto& rootBone : m_skeletonData->getRootBones())
+    for(const auto& rootBone : m_rootBones)
     {
         rootBone->update();
     }
@@ -59,8 +111,7 @@ void CSkeleton::update(void)
 
 void CSkeleton::bindPoseTransformation(void)
 {
-    assert(m_skeletonData != nullptr);
-    for(const auto& rootBone : m_skeletonData->getRootBones())
+    for(const auto& rootBone : m_rootBones)
     {
         rootBone->bindPoseTransformation();
     }

@@ -408,12 +408,12 @@ void CShader::setupUniforms(void)
     m_samplers[E_SHADER_SAMPLER_07] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_07.c_str());
     m_samplers[E_SHADER_SAMPLER_08] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_08.c_str());
     
-    m_attributes[E_SHADER_ATTRIBUTE_POSITION] = glGetAttribLocation(m_shaderId, SAttributes.m_position.c_str());
-    m_attributes[E_SHADER_ATTRIBUTE_TEXCOORD] = glGetAttribLocation(m_shaderId, SAttributes.m_texcoord.c_str());
-    m_attributes[E_SHADER_ATTRIBUTE_NORMAL] = glGetAttribLocation(m_shaderId, SAttributes.m_normal.c_str());
-    m_attributes[E_SHADER_ATTRIBUTE_TANGENT] = glGetAttribLocation(m_shaderId, SAttributes.m_tangent.c_str());
-    m_attributes[E_SHADER_ATTRIBUTE_COLOR] = glGetAttribLocation(m_shaderId, SAttributes.m_color.c_str());
-    m_attributes[E_SHADER_ATTRIBUTE_EXTRA] = glGetAttribLocation(m_shaderId, SAttributes.m_extra.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_POSITION) = glGetAttribLocation(m_shaderId, SAttributes.m_position.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD) = glGetAttribLocation(m_shaderId, SAttributes.m_texcoord.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_NORMAL) = glGetAttribLocation(m_shaderId, SAttributes.m_normal.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_TANGENT) = glGetAttribLocation(m_shaderId, SAttributes.m_tangent.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_COLOR) = glGetAttribLocation(m_shaderId, SAttributes.m_color.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_EXTRA) = glGetAttribLocation(m_shaderId, SAttributes.m_extra.c_str());
     
     for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
     {
@@ -441,7 +441,7 @@ std::string CShader::getFSSourceCode(void) const
     return IResource::isLoaded() ? m_shaderData->getFSSourceCode() : "";
 }
 
-const i32* CShader::getAttributesRef(void) const
+const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& CShader::getAttributes(void) const
 {
     return m_attributes;
 }

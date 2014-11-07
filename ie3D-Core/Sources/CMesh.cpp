@@ -178,7 +178,7 @@ CSequenceData::~CSequenceData(void)
 
 ui32 CSequenceData::getNumFrames(void) const
 {
-    return m_frames.size();
+    return static_cast<ui32>(m_frames.size());
 }
 
 ui32 CSequenceData::getAnimationFPS(void) const
@@ -206,49 +206,12 @@ m_numBones(numBones)
 
 CSkeletonData::~CSkeletonData(void)
 {
-    // TODO#: remove all bones
+    m_bonesRawData.clear();
 }
 
-void CSkeletonData::addBone(CSharedBoneRef bone)
+void CSkeletonData::addBone(i32 id, i32 parentId)
 {
-    if(bone == nullptr)
-    {
-        return;
-    }
-    
-    if (bone->getParentId() == -1)
-    {
-        m_rootBones.insert(bone);
-        return;
-    }
-    
-    CSharedBone parent = CSkeletonData::getBone(bone->getParentId());
-    if (parent != nullptr)
-    {
-        parent->addChild(bone);
-        return;
-    }
-    assert(false);
-}
-
-CSharedBone CSkeletonData::getBone(ui32 index) const
-{
-    for(const auto& root : m_rootBones)
-    {
-        if (root->getId() == index)
-        {
-            return root;
-        }
-        else
-        {
-            CSharedBone child = root->findChild(index);
-            if(child != nullptr)
-            {
-                return child;
-            }
-        }
-    }
-    return nullptr;
+    m_bonesRawData.push_back(std::make_shared<CBoneData>(id, parentId));
 }
 
 ui32 CSkeletonData::getNumBones(void) const
@@ -256,9 +219,9 @@ ui32 CSkeletonData::getNumBones(void) const
     return m_numBones;
 }
 
-const std::set<CSharedBone> CSkeletonData::getRootBones(void) const
+const std::vector<CSharedBoneData> CSkeletonData::getBonesRawData(void) const
 {
-    return m_rootBones;
+    return m_bonesRawData;
 }
 
 CMesh::CMesh(const std::string& guid) : IResource(E_RESOURCE_CLASS_MESH, guid),
@@ -421,7 +384,7 @@ const CSharedSequenceData CMesh::getSequenceData(void) const
     return IResource::isLoaded() ? m_sequenceData : nullptr;
 }
 
-void CMesh::bind(const i32* attributes) const
+void CMesh::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
@@ -452,7 +415,7 @@ void CMesh::draw(ui32 indices) const
     }
 }
 
-void CMesh::unbind(const i32* attributes) const
+void CMesh::unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
