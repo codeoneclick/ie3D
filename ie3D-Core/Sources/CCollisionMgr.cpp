@@ -53,7 +53,7 @@ void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_
     for(const auto& handler : m_handlers)
     {
         std::vector<ISharedGameObject> colliders = handler->colliders();
-        for(const auto& collider : colliders)
+        for(const ISharedGameObject& collider : colliders)
         {
             glm::vec3 point;
             if(!glm::intersect(ray,

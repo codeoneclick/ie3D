@@ -30,11 +30,23 @@ glm::vec4 CFrustum::_CreatePlane(const glm::vec3 &_point_01, const glm::vec3 &_p
     return glm::vec4(normal, offset);
 }
 
-f32 CFrustum::_Get_DistanceToPlane(const glm::vec4 &_plane, const glm::vec3 &_point)
+inline f32 CFrustum::getDistanceToPlane(const glm::vec4& plane, const glm::vec3& point)
 {
-    glm::vec3 normal = glm::vec3(_plane.x, _plane.y, _plane.z);
-	f32 offset = _plane.w;
-    return (offset + glm::dot(normal, _point)) * -1.0f;
+    static glm::vec3 abc = glm::vec3(0.0);
+    abc = CFrustum::getPlaneABC(plane);
+    static f32 d = 0.0;
+    d = CFrustum::getPlaneD(plane);
+    return (d + glm::dot(abc, point)) * -1.0;
+}
+
+inline glm::vec3 CFrustum::getPlaneABC(const glm::vec4& plane)
+{
+    return glm::vec3(plane.x, plane.y, plane.z);
+}
+
+inline f32 CFrustum::getPlaneD(const glm::vec4& plane)
+{
+    return plane.w;
 }
 
 void CFrustum::Update(void)
@@ -74,7 +86,7 @@ E_FRUSTUM_BOUND_RESULT CFrustum::IsPointInFrustum(const glm::vec3& _point)
 {
     for(ui32 i = 0; i < E_FRUSTUM_PLANE_MAX; ++i)
     {
-        if(CFrustum::_Get_DistanceToPlane(m_planes[i], _point) < 0.0f)
+        if(CFrustum::getDistanceToPlane(m_planes[i], _point) < 0.0f)
         {
 			return E_FRUSTUM_BOUND_RESULT_OUTSIDE;
         }
@@ -87,7 +99,7 @@ E_FRUSTUM_BOUND_RESULT CFrustum::IsSphereInFrumstum(const glm::vec3& _center, f3
     E_FRUSTUM_BOUND_RESULT result = E_FRUSTUM_BOUND_RESULT_INSIDE;
 	for(ui32 i = 0; i < E_FRUSTUM_PLANE_MAX; ++i)
     {
-		f32 distance = CFrustum::_Get_DistanceToPlane(m_planes[i], _center);
+		f32 distance = CFrustum::getDistanceToPlane(m_planes[i], _center);
 		if (distance < -_radius)
         {
 			return E_FRUSTUM_BOUND_RESULT_OUTSIDE;
@@ -100,47 +112,45 @@ E_FRUSTUM_BOUND_RESULT CFrustum::IsSphereInFrumstum(const glm::vec3& _center, f3
 	return result;
 }
 
-E_FRUSTUM_BOUND_RESULT CFrustum::IsBoundBoxInFrustum(const glm::vec3& _maxBound, const glm::vec3& _minBound)
+#define kMaxPointsInBoundingBox 8
+
+E_FRUSTUM_BOUND_RESULT CFrustum::IsBoundBoxInFrustum(const glm::vec3& maxBound,
+                                                     const glm::vec3& minBound)
 {
-    glm::vec3 points[8];
+    static glm::vec3 points[kMaxPointsInBoundingBox];
     
-    points[0] = _minBound;
-    points[1] = glm::vec3(_minBound.x, _minBound.y, _maxBound.z);
-    points[2] = glm::vec3(_maxBound.x, _minBound.y, _minBound.z);
-    points[3] = glm::vec3(_maxBound.x, _minBound.y, _maxBound.z);
+    points[0] = minBound;
+    points[1] = glm::vec3(minBound.x, minBound.y, maxBound.z);
+    points[2] = glm::vec3(maxBound.x, minBound.y, minBound.z);
+    points[3] = glm::vec3(maxBound.x, minBound.y, maxBound.z);
     
-    points[4] = _maxBound;
-    points[5] = glm::vec3(_maxBound.x, _maxBound.y, _minBound.z);
-    points[6] = glm::vec3(_minBound.x, _maxBound.y, _maxBound.z);
-    points[7] = glm::vec3(_minBound.x, _maxBound.y, _minBound.z);
+    points[4] = maxBound;
+    points[5] = glm::vec3(maxBound.x, maxBound.y, minBound.z);
+    points[6] = glm::vec3(minBound.x, maxBound.y, maxBound.z);
+    points[7] = glm::vec3(minBound.x, maxBound.y, minBound.z);
     
-    E_FRUSTUM_BOUND_RESULT result = E_FRUSTUM_BOUND_RESULT_INSIDE;
-    ui32 pointsIn, pointsOut;
+    static E_FRUSTUM_BOUND_RESULT result;
+    result = E_FRUSTUM_BOUND_RESULT_INSIDE;
+    static ui32 pointsIn, pointsOut;
     
 	for(ui32 i = 0; i < E_FRUSTUM_PLANE_MAX; ++i)
     {
         pointsIn = 0;
         pointsOut = 0;
         
-		for (ui32 j = 0; j < 8 && (pointsIn == 0 || pointsOut == 0); ++j)
+		for(ui32 j = 0; j < kMaxPointsInBoundingBox && (pointsIn == 0 || pointsOut == 0); ++j)
         {
-			if (CFrustum::_Get_DistanceToPlane(m_planes[i], points[j]) < 0.0f)
-            {
-				pointsOut++;
-            }
-			else
-            {
-				pointsIn++;
-            }
+            CFrustum::getDistanceToPlane(m_planes[i], points[j]) < 0.0 ? ++pointsOut : ++pointsIn;
 		}
         
 		if (!pointsIn)
         {
-			return E_FRUSTUM_BOUND_RESULT_OUTSIDE;
+			result = E_FRUSTUM_BOUND_RESULT_OUTSIDE;
         }
 		else if (pointsOut)
         {
 			result = E_FRUSTUM_BOUND_RESULT_INTERSECT;
+            break;
         }
 	}
 	return result;

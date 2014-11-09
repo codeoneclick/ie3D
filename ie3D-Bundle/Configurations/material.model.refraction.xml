@@ -20,7 +20,7 @@
         fs_filename="shaderModel.frag"/>
     <textures>
         <texture
-            filename="animated_model_07.png"
+            filename="animated_model_01.png"
             render_operation_name=""
             sampler_id="0"
             wrap_mode="GL_REPEAT"/>

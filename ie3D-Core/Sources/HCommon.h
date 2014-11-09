@@ -360,14 +360,18 @@ static std::set<std::string> g_highPerformancePlatforms = {
     "iPad4,5"
 };
 
-static std::string getPlatform(void)
+static inline std::string getPlatform(void)
 {
-    size_t size;
-    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-    char *machine = (char *)malloc(size);
-    sysctlbyname("hw.machine", machine, &size, NULL, 0);
-    std::string platform(machine);
-    free(machine);
+    static std::string platform = "";
+    if(platform.length() == 0)
+    {
+        size_t size;
+        sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+        char *machine = (char *)malloc(size);
+        sysctlbyname("hw.machine", machine, &size, NULL, 0);
+        platform = std::string(machine);
+        free(machine);
+    }
     return platform;
 };
 

@@ -23,16 +23,10 @@ private:
 protected:
     
     glm::vec4 _CreatePlane(const glm::vec3& _point_01, const glm::vec3& _point_02, const glm::vec3& _point_03);
-    f32 _Get_DistanceToPlane(const glm::vec4& _plane, const glm::vec3& _point);
-    inline glm::vec3 _Get_PlaneNormal(const glm::vec4& _plane)
-    {
-        return glm::vec3(_plane.x, _plane.y, _plane.z);
-    };
     
-    inline f32 _Get_PlaneOffset(const glm::vec4& _plane)
-    {
-        return _plane.w;
-    };
+    static f32 getDistanceToPlane(const glm::vec4& plane, const glm::vec3& point);
+    static glm::vec3 getPlaneABC(const glm::vec4& plane);
+    static f32 getPlaneD(const glm::vec4& plane);
     
 public:
     

@@ -320,6 +320,12 @@
 		21B08E4B1922531700C5D5CC /* shaderSkyBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E491922531700C5D5CC /* shaderSkyBox.frag */; };
 		21B08E4C1922531700C5D5CC /* shaderSkyBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E4A1922531700C5D5CC /* shaderSkyBox.vert */; };
 		21B08E561923956200C5D5CC /* gameobject.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E41192252FF00C5D5CC /* gameobject.landscape.xml */; };
+		21BC5E941A0F83450086CC76 /* model_01.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E911A0F83450086CC76 /* model_01.MDL_anim */; };
+		21BC5E951A0F83450086CC76 /* model_01.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E921A0F83450086CC76 /* model_01.MDL_mesh */; };
+		21BC5E961A0F83450086CC76 /* model_01.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E931A0F83450086CC76 /* model_01.MDL_sk */; };
+		21BC5E971A0F83800086CC76 /* model_01.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E911A0F83450086CC76 /* model_01.MDL_anim */; };
+		21BC5E981A0F83800086CC76 /* model_01.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E921A0F83450086CC76 /* model_01.MDL_mesh */; };
+		21BC5E991A0F83800086CC76 /* model_01.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E931A0F83450086CC76 /* model_01.MDL_sk */; };
 		21D070C5181D9D460019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C4181D9D460019D264 /* Foundation.framework */; };
 		21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C6181D9D460019D264 /* CoreGraphics.framework */; };
 		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
@@ -587,6 +593,9 @@
 		21B08E44192252FF00C5D5CC /* gameobject.skybox.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.skybox.xml; path = "../ie3D-Bundle/Configurations/gameobject.skybox.xml"; sourceTree = SOURCE_ROOT; };
 		21B08E491922531700C5D5CC /* shaderSkyBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.frag; path = "../ie3D-Bundle/Shaders/shaderSkyBox.frag"; sourceTree = SOURCE_ROOT; };
 		21B08E4A1922531700C5D5CC /* shaderSkyBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.vert; path = "../ie3D-Bundle/Shaders/shaderSkyBox.vert"; sourceTree = SOURCE_ROOT; };
+		21BC5E911A0F83450086CC76 /* model_01.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_01.MDL_anim; path = "../ie3D-Bundle/Meshes/model_01.MDL_anim"; sourceTree = SOURCE_ROOT; };
+		21BC5E921A0F83450086CC76 /* model_01.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_01.MDL_mesh; path = "../ie3D-Bundle/Meshes/model_01.MDL_mesh"; sourceTree = SOURCE_ROOT; };
+		21BC5E931A0F83450086CC76 /* model_01.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_01.MDL_sk; path = "../ie3D-Bundle/Meshes/model_01.MDL_sk"; sourceTree = SOURCE_ROOT; };
 		21D070C1181D9D460019D264 /* ie3D-Demo-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ie3D-Demo-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -717,7 +726,7 @@
 			);
 			name = Textures;
 			path = "../../ie3D-Bundle/Textures";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		219A12DB1998B01B00E674CB /* StateMachine Managment */ = {
 			isa = PBXGroup;
@@ -844,11 +853,14 @@
 			);
 			name = Configurations;
 			path = "../../ie3D-Bundle/Configurations";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		21BC34E119081510007B99DA /* Meshes */ = {
 			isa = PBXGroup;
 			children = (
+				21BC5E911A0F83450086CC76 /* model_01.MDL_anim */,
+				21BC5E921A0F83450086CC76 /* model_01.MDL_mesh */,
+				21BC5E931A0F83450086CC76 /* model_01.MDL_sk */,
 				2163466E19FD5F96009950BC /* model_07.MDL_anim */,
 				2163466F19FD5F96009950BC /* model_07.MDL_mesh */,
 				2163467019FD5F96009950BC /* model_07.MDL_sk */,
@@ -870,7 +882,7 @@
 			);
 			name = Meshes;
 			path = "../../ie3D-Bundle/Meshes";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		21BC34E219081510007B99DA /* Shaders */ = {
 			isa = PBXGroup;
@@ -906,7 +918,7 @@
 			);
 			name = Shaders;
 			path = "../../ie3D-Bundle/Shaders";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		21D070B8181D9D460019D264 = {
 			isa = PBXGroup;
@@ -990,7 +1002,7 @@
 			);
 			name = Resources;
 			path = indieEngineDemo;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		21DC2B3B1924DC78008DA3C1 /* Temp */ = {
 			isa = PBXGroup;
@@ -1002,7 +1014,7 @@
 				2162093319A1F04C00DECBBC /* map_05.png */,
 			);
 			name = Temp;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		21FCC8FC199FA69200F2CA1E /* Products */ = {
 			isa = PBXGroup;
@@ -1150,6 +1162,7 @@
 				212EED8019D068D400DA02B7 /* material.tank.medium.tower.reflection.xml in Resources */,
 				212EECA219CC5D9C00DA02B7 /* render.operation.world.refraction.xml in Resources */,
 				212EECA319CC5D9C00DA02B7 /* gameobject.model.xml in Resources */,
+				21BC5E971A0F83800086CC76 /* model_01.MDL_anim in Resources */,
 				212EECA419CC5D9C00DA02B7 /* tank_light_left_track.mdl_01 in Resources */,
 				212EECA519CC5D9C00DA02B7 /* material.tank.light.tower.common.xml in Resources */,
 				212EECA619CC5D9C00DA02B7 /* gameobject.tank.light.xml in Resources */,
@@ -1248,6 +1261,7 @@
 				212EECF119CC5D9C00DA02B7 /* gameobject.tank.light.right.track.xml in Resources */,
 				212EECF219CC5D9C00DA02B7 /* material.splatting.diffuse.xml in Resources */,
 				212EECF319CC5D9C00DA02B7 /* shaderScreenSSAO.vert in Resources */,
+				21BC5E991A0F83800086CC76 /* model_01.MDL_sk in Resources */,
 				2179741219F4F69E00A98630 /* shaderAnimatedGameObjectND.frag in Resources */,
 				212EECF619CC5D9C00DA02B7 /* gameobject.tank.heavy.right.track.xml in Resources */,
 				217EF90919F9222A00F339A0 /* shaderCommon.frag in Resources */,
@@ -1273,6 +1287,7 @@
 				212EED0419CC5D9C00DA02B7 /* map_01.png in Resources */,
 				212EED0519CC5D9C00DA02B7 /* shaderParticleEmitter.vert in Resources */,
 				2163467619FD5F96009950BC /* model_07.MDL_sk in Resources */,
+				21BC5E981A0F83800086CC76 /* model_01.MDL_mesh in Resources */,
 				212EED0619CC5D9C00DA02B7 /* material.landscape.reflection.xml in Resources */,
 				212EED9419D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml in Resources */,
 				212EED0719CC5D9C00DA02B7 /* material.output.xml in Resources */,
@@ -1308,6 +1323,7 @@
 				212EED7F19D068D400DA02B7 /* material.tank.medium.tower.reflection.xml in Resources */,
 				21B08E331922527400C5D5CC /* render.operation.world.refraction.xml in Resources */,
 				2173345E19642B72002B3F90 /* gameobject.model.xml in Resources */,
+				21BC5E941A0F83450086CC76 /* model_01.MDL_anim in Resources */,
 				219A12F61998B54100E674CB /* tank_light_left_track.mdl_01 in Resources */,
 				219A132E1998B8F800E674CB /* material.tank.light.tower.common.xml in Resources */,
 				219A13151998B8E800E674CB /* gameobject.tank.light.xml in Resources */,
@@ -1406,6 +1422,7 @@
 				219A13131998B8E800E674CB /* gameobject.tank.light.right.track.xml in Resources */,
 				21B08E2E1922527400C5D5CC /* material.splatting.diffuse.xml in Resources */,
 				216204401949AF2300D129AD /* shaderScreenSSAO.vert in Resources */,
+				21BC5E961A0F83450086CC76 /* model_01.MDL_sk in Resources */,
 				2179741119F4F69E00A98630 /* shaderAnimatedGameObjectND.frag in Resources */,
 				219A130E1998B8E800E674CB /* gameobject.tank.heavy.right.track.xml in Resources */,
 				217EF90819F9222A00F339A0 /* shaderCommon.frag in Resources */,
@@ -1431,6 +1448,7 @@
 				2162093419A1F04C00DECBBC /* map_01.png in Resources */,
 				21B08DBA1920CCF600C5D5CC /* shaderParticleEmitter.vert in Resources */,
 				2163467519FD5F96009950BC /* model_07.MDL_sk in Resources */,
+				21BC5E951A0F83450086CC76 /* model_01.MDL_mesh in Resources */,
 				21B08E261922527400C5D5CC /* material.landscape.reflection.xml in Resources */,
 				212EED9319D0707E00DA02B7 /* material.tank.light.left.track.refraction.xml in Resources */,
 				21B08E291922527400C5D5CC /* material.output.xml in Resources */,
@@ -1517,7 +1535,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-osx";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COMPRESS_PNG_FILES = NO;
@@ -1561,7 +1579,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-osx";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COMPRESS_PNG_FILES = NO;
@@ -1601,7 +1619,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1616,7 +1634,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1634,6 +1652,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7s";
 			};
 			name = Debug;
 		};
@@ -1642,7 +1661,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1658,7 +1677,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1669,33 +1689,29 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7s";
 			};
 			name = Release;
 		};
 		21D070EE181D9D460019D264 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					arm64,
-					armv7s,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-ios";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					__DEBUG__,
+					"__IOS__=1",
 					"$(inherited)",
-					__IOS__,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1707,12 +1723,11 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LLVM_VECTORIZE_LOOPS = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1720,25 +1735,21 @@
 		21D070EF181D9D460019D264 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					arm64,
-					armv7s,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-ios";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				GCC_PREPROCESSOR_DEFINITIONS = __IOS__;
+				GCC_PREPROCESSOR_DEFINITIONS = "__IOS__=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../ie3D-Core/Sources\"",
@@ -1749,13 +1760,12 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Support/ie3D-Demo-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LLVM_VECTORIZE_LOOPS = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

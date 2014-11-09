@@ -80,7 +80,7 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
     }
 }
 
-i32  IGameObject::zOrder(void)
+i32 IGameObject::zOrder(void)
 {
     return 0;
 }

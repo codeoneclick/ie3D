@@ -134,6 +134,9 @@
 		21BC34BC19080B47007B99DA /* shaderParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B219080B47007B99DA /* shaderParticleEmitter.vert */; };
 		21BC34BD19080B47007B99DA /* shaderScreenQuad.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B319080B47007B99DA /* shaderScreenQuad.frag */; };
 		21BC34BE19080B47007B99DA /* shaderScreenQuad.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B419080B47007B99DA /* shaderScreenQuad.vert */; };
+		21BC5E851A0F82470086CC76 /* model_01.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E821A0F82470086CC76 /* model_01.MDL_anim */; };
+		21BC5E861A0F82470086CC76 /* model_01.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E831A0F82470086CC76 /* model_01.MDL_mesh */; };
+		21BC5E871A0F82470086CC76 /* model_01.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E841A0F82470086CC76 /* model_01.MDL_sk */; };
 		21C017121992772500CB59AB /* libie3DEngine-osx.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21C0170F199276EE00CB59AB /* libie3DEngine-osx.a */; };
 		21C0171519927A0B00CB59AB /* libie3DCore-osx.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 212091D21906FE9100FFC8D4 /* libie3DCore-osx.a */; };
 		21C409971979B8370063D62D /* material.texture2D.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21C409961979B8370063D62D /* material.texture2D.xml */; };
@@ -416,6 +419,9 @@
 		21BC34B219080B47007B99DA /* shaderParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderParticleEmitter.vert; path = "../ie3D-Bundle/Shaders/shaderParticleEmitter.vert"; sourceTree = "<group>"; };
 		21BC34B319080B47007B99DA /* shaderScreenQuad.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenQuad.frag; path = "../ie3D-Bundle/Shaders/shaderScreenQuad.frag"; sourceTree = "<group>"; };
 		21BC34B419080B47007B99DA /* shaderScreenQuad.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenQuad.vert; path = "../ie3D-Bundle/Shaders/shaderScreenQuad.vert"; sourceTree = "<group>"; };
+		21BC5E821A0F82470086CC76 /* model_01.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_01.MDL_anim; path = "../ie3D-Bundle/Meshes/model_01.MDL_anim"; sourceTree = "<group>"; };
+		21BC5E831A0F82470086CC76 /* model_01.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_01.MDL_mesh; path = "../ie3D-Bundle/Meshes/model_01.MDL_mesh"; sourceTree = "<group>"; };
+		21BC5E841A0F82470086CC76 /* model_01.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_01.MDL_sk; path = "../ie3D-Bundle/Meshes/model_01.MDL_sk"; sourceTree = "<group>"; };
 		21C01703199276E000CB59AB /* ie3D-Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Engine.xcodeproj"; path = "../ie3D-Engine/ie3D-Engine.xcodeproj"; sourceTree = "<group>"; };
 		21C409961979B8370063D62D /* material.texture2D.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.texture2D.xml; path = "../ie3D-Bundle/Configurations/material.texture2D.xml"; sourceTree = SOURCE_ROOT; };
 		21C409991979B85E0063D62D /* shaderTexture2D.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderTexture2D.frag; path = "../ie3D-Bundle/Shaders/shaderTexture2D.frag"; sourceTree = SOURCE_ROOT; };
@@ -694,6 +700,9 @@
 		212090E91906FD3000FFC8D4 /* Meshes */ = {
 			isa = PBXGroup;
 			children = (
+				21BC5E821A0F82470086CC76 /* model_01.MDL_anim */,
+				21BC5E831A0F82470086CC76 /* model_01.MDL_mesh */,
+				21BC5E841A0F82470086CC76 /* model_01.MDL_sk */,
 				21FEECC31A079965001E9ACB /* model_07.MDL_anim */,
 				21FEECC41A079965001E9ACB /* model_07.MDL_mesh */,
 				21FEECC51A079965001E9ACB /* model_07.MDL_sk */,
@@ -1370,9 +1379,11 @@
 				21FEED081A09396E001E9ACB /* render.operation.map.editor.output.xml in Resources */,
 				21A9D86119615F9700A1B62C /* material.model.reflection.xml in Resources */,
 				21C409971979B8370063D62D /* material.texture2D.xml in Resources */,
+				21BC5E871A0F82470086CC76 /* model_01.MDL_sk in Resources */,
 				21FEECD21A07A5DA001E9ACB /* shaderStaticGameObjectND.vert in Resources */,
 				21C409B3197C11060063D62D /* gameobject.tank.light.left.track.xml in Resources */,
 				214182C9193CC6C2000B66F1 /* Images.xcassets in Resources */,
+				21BC5E861A0F82470086CC76 /* model_01.MDL_mesh in Resources */,
 				21BC34A519080A39007B99DA /* render.operation.output.xml in Resources */,
 				21FEECB41A078080001E9ACB /* transition.map.editor.preview.model.xml in Resources */,
 				217EF8D519F7F52700F339A0 /* ocean_ripples.png in Resources */,
@@ -1411,6 +1422,7 @@
 				21BC34BB19080B47007B99DA /* shaderParticleEmitter.frag in Resources */,
 				21C409CF197C123D0063D62D /* tank_medium_tower.mdl_01 in Resources */,
 				217EF8DD19F7F52700F339A0 /* static_model_tank_heavy.png in Resources */,
+				21BC5E851A0F82470086CC76 /* model_01.MDL_anim in Resources */,
 				217EF8DE19F7F52700F339A0 /* static_model_tank_light.png in Resources */,
 				21A38D4D19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert in Resources */,
 				21B08E0519224FE100C5D5CC /* material.skybox.reflection.xml in Resources */,
@@ -1677,13 +1689,14 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__OSX__,
 					__EDITOR__,
@@ -1717,10 +1730,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
