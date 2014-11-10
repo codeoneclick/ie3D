@@ -33,6 +33,11 @@ ISharedConfiguration CConfigurationWSRenderOperationSerializer::serialize(const 
                                                                                  worldSpaceRenderOperationConfiguration->kWSRenderOperationGuidAttribute),
                                                     std::make_shared<CConfigurationAttribute>(guid));
     
+    i8 areDrawBoundingBoxes = static_cast<i8>(node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationAreDrawBoundingBoxes.c_str()).as_bool());
+    worldSpaceRenderOperationConfiguration->setAttribute(getConfigurationAttributeKey(worldSpaceRenderOperationConfiguration->kWSRenderOperationMainNode,
+                                                                                      worldSpaceRenderOperationConfiguration->kWSRenderOperationAreDrawBoundingBoxes),
+                                                         std::make_shared<CConfigurationAttribute>(areDrawBoundingBoxes));
+
     ui32 index = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationIndexAttribute.c_str()).as_uint();
     worldSpaceRenderOperationConfiguration->setAttribute(getConfigurationAttributeKey(worldSpaceRenderOperationConfiguration->kWSRenderOperationMainNode,
                                                                                  worldSpaceRenderOperationConfiguration->kWSRenderOperationIndexAttribute),

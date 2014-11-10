@@ -26,6 +26,7 @@ IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_animationMixer(nullptr),
 m_isAnimated(false)
 {
+    m_isNeedBoundingBox = true;
     m_zOrder = E_GAME_OBJECT_Z_ORDER_MODEL;
 }
 

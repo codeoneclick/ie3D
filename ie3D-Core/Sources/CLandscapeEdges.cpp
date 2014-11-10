@@ -25,6 +25,7 @@ m_width(0),
 m_height(0),
 m_heightBounds(glm::vec2(0.0f, 0.0f))
 {
+    m_isNeedBoundingBox = false;
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE_EDGES;
 }
 

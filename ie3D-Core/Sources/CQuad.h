@@ -34,4 +34,5 @@ public:
     void draw(void);
     void unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
 };
+
 #endif 

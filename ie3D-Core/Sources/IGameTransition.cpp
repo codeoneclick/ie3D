@@ -142,14 +142,13 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
         ui32 screenWidth = MIN_VALUE(worldSpaceRenderOperationConfiguration->getScreenWidth(), m_graphicsContext->getWidth());
         ui32 screenHeight = MIN_VALUE(worldSpaceRenderOperationConfiguration->getScreenHeight(), m_graphicsContext->getHeight());
         
-        
-        
         CSharedRenderTechniqueWorldSpace worldSpaceRenderTechnique =
         std::make_shared<CRenderTechniqueWorldSpace>(screenWidth,
                                                      screenHeight,
                                                      worldSpaceRenderOperationConfiguration->getGuid(),
                                                      worldSpaceRenderOperationConfiguration->getIndex());
         worldSpaceRenderTechnique->setClearColor(worldSpaceRenderOperationConfiguration->getClearColor());
+        worldSpaceRenderTechnique->setAreDrawBoundingBoxes(worldSpaceRenderOperationConfiguration->areDrawBoundingBoxes());
         m_renderPipeline->addWorldSpaceRenderTechnique(worldSpaceRenderOperationConfiguration->getGuid(), worldSpaceRenderTechnique);
     }
     

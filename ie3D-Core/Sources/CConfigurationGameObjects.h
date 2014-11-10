@@ -381,6 +381,7 @@ public:
     
     const std::string kWSRenderOperationMainNode;
     const std::string kWSRenderOperationGuidAttribute;
+    const std::string kWSRenderOperationAreDrawBoundingBoxes;
     const std::string kWSRenderOperationIndexAttribute;
     const std::string kWSRenderOperationScreenWidthAttribute;
     const std::string kWSRenderOperationScreenHeightAttribute;
@@ -399,7 +400,7 @@ public:
     ~CConfigurationWSRenderOperation(void);
     
     std::string getGuid(void) const;
-    
+    bool areDrawBoundingBoxes(void) const;
     ui32 getIndex(void) const;
     
     ui32 getScreenWidth(void) const;

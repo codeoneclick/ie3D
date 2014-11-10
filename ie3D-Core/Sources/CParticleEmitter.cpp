@@ -25,6 +25,7 @@ IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
     m_settings = nullptr;
     m_lastEmittTimestamp = 0;
+    m_isNeedBoundingBox = false;
     m_zOrder = E_GAME_OBJECT_Z_ORDER_PARTICLE_EMITTER;
 }
 

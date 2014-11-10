@@ -30,6 +30,7 @@ m_quadTree(nullptr),
 m_currentLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
 m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
 {
+    m_isNeedBoundingBox = true;
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
 }
 

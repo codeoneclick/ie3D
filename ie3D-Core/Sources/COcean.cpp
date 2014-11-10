@@ -22,6 +22,7 @@ COcean::COcean(CSharedResourceAccessorRef resourceAccessor,
                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
+    m_isNeedBoundingBox = false;
     m_zOrder = E_GAME_OBJECT_Z_ORDER_OCEAN;
 }
 

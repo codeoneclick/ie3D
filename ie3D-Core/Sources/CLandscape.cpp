@@ -33,6 +33,7 @@ m_isSplattingNormalTexturePrerendered(false),
 m_configuration(nullptr),
 m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, renderTechniqueAccessor))
 {
+    m_isNeedBoundingBox = false;
     m_materialBindImposer = nullptr;
 }
 

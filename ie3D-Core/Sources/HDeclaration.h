@@ -184,10 +184,6 @@ class CResourceAccessor;
 typedef std::shared_ptr<CResourceAccessor> CSharedResourceAccessor;
 typedef const CSharedResourceAccessor& CSharedResourceAccessorRef;
 
-class CBoundBox;
-typedef std::shared_ptr<CBoundBox> CSharedBoundBox;
-typedef const CSharedBoundBox& CSharedBoundBoxRef;
-
 class CAnimationMixer;
 typedef std::shared_ptr<CAnimationMixer> CSharedAnimationMixer;
 typedef const CSharedAnimationMixer& CSharedAnimationMixerRef;
@@ -311,6 +307,10 @@ typedef const CSharedSceneFabricator& CSharedSceneFabricatorRef;
 class CQuad;
 typedef std::shared_ptr<CQuad> CSharedQuad;
 typedef const CSharedQuad& CSharedQuadRef;
+
+class CBoundingBox;
+typedef std::shared_ptr<CBoundingBox> CSharedBoundingBox;
+typedef const CSharedBoundingBox& CSharedBoundingBoxRef;
 
 class IRenderTechniqueHandler;
 typedef std::shared_ptr<IRenderTechniqueHandler> ISharedRenderTechniqueHandler;

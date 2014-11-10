@@ -12,7 +12,8 @@
 
 CRenderTechniqueWorldSpace::CRenderTechniqueWorldSpace(ui32 frameWidth, ui32 frameHeight, const std::string& name, ui32 index) :
 IRenderTechniqueBase(frameWidth, frameHeight, name, index),
-m_numTriangles(0)
+m_numTriangles(0),
+m_areDrawBoundingBoxes(false)
 {
     ui32 colorAttachmentId;
     glGenTextures(1, &colorAttachmentId);
@@ -72,6 +73,11 @@ CRenderTechniqueWorldSpace::~CRenderTechniqueWorldSpace(void)
     
 }
 
+void CRenderTechniqueWorldSpace::setAreDrawBoundingBoxes(bool value)
+{
+    m_areDrawBoundingBoxes = value;
+}
+
 CSharedTexture CRenderTechniqueWorldSpace::getOperatingColorTexture(void) const
 {
     assert(m_operatingColorTexture != nullptr);
@@ -124,6 +130,11 @@ void CRenderTechniqueWorldSpace::bind(void)
     m_numTriangles = 0;
 }
 
+void CRenderTechniqueWorldSpace::drawBoundingBox(void)
+{
+    
+}
+
 void CRenderTechniqueWorldSpace::unbind(void)
 {
     
@@ -142,6 +153,11 @@ void CRenderTechniqueWorldSpace::draw(void)
                 handler->onBind(m_name);
                 handler->onDraw(m_name);
                 handler->onUnbind(m_name);
+                
+                if(m_areDrawBoundingBoxes)
+                {
+                    handler->onDrawBoundingBox();
+                }
                 m_numTriangles += handler->numTriangles();
             }
         }

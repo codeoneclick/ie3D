@@ -222,6 +222,11 @@ ui32 CBatch::numTriangles(void)
     return 0;
 }
 
+void CBatch::onDrawBoundingBox(void)
+{
+    
+}
+
 void CBatch::onBind(const std::string& techniqueName)
 {
     

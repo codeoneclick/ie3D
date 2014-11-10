@@ -12,4 +12,7 @@
 extern const char* ShaderTexure2D_vert;
 extern const char* ShaderTexure2D_frag;
 
+extern const char* ShaderBoundingBox_vert;
+extern const char* ShaderBoundingBox_frag;
+
 #endif

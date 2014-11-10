@@ -20,6 +20,8 @@
 #include "CConfigurationGameObjects.h"
 #include "CGlobalLightSource.h"
 #include "CBatchingMgr.h"
+#include "CBoundingBox.h"
+#include "HShaders.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
                          ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -32,7 +34,8 @@ m_mesh(nullptr),
 m_configuration(nullptr),
 m_camera(nullptr),
 m_globalLightSource(nullptr),
-m_boundBox(nullptr),
+m_boundingBox(nullptr),
+m_boundingBoxMaterial(nullptr),
 m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_renderTechniqueImporter(nullptr),
 m_sceneUpdateMgr(nullptr),
@@ -47,11 +50,54 @@ m_status(E_LOADING_STATUS_UNLOADED)
         bindBaseShaderUniforms(material);
         bindCustomShaderUniforms(material);
     };
+    
+    m_boundingBoxMaterialBindImposer = [this](CSharedMaterialRef material)
+    {
+        bindBaseShaderUniforms(material);
+    };
 }
 
 IGameObject::~IGameObject(void)
 {
     m_materials.clear();
+}
+
+bool IGameObject::getBoundingBox(void)
+{
+    if(m_mesh != nullptr && m_mesh->isLoaded() && m_boundingBox == nullptr && m_isNeedBoundingBox)
+    {
+        m_boundingBox = std::make_shared<CBoundingBox>(m_mesh->getMinBound(),
+                                                       m_mesh->getMaxBound());
+        
+        m_boundingBoxMaterial = std::make_shared<CMaterial>();
+        CSharedShader shader = CShader::constructCustomShader("boundingBox", ShaderBoundingBox_vert, ShaderBoundingBox_frag);
+        assert(shader != nullptr);
+        m_boundingBoxMaterial->setShader(shader);
+        
+        m_boundingBoxMaterial->setCulling(false);
+        m_boundingBoxMaterial->setCullingMode(GL_BACK);
+        
+        m_boundingBoxMaterial->setBlending(false);
+        m_boundingBoxMaterial->setBlendingFunctionSource(GL_SRC_ALPHA);
+        m_boundingBoxMaterial->setBlendingFunctionDestination(GL_ONE);
+        
+        m_boundingBoxMaterial->setDepthTest(true);
+        m_boundingBoxMaterial->setDepthMask(true);
+        
+        m_boundingBoxMaterial->setClipping(false);
+        m_boundingBoxMaterial->setClippingPlane(glm::vec4(0.0, 0.0, 0.0, 0.0));
+        
+        m_boundingBoxMaterial->setReflecting(false);
+        m_boundingBoxMaterial->setShadowing(false);
+        m_boundingBoxMaterial->setDebugging(false);
+
+        return true;
+    }
+    else if(m_mesh != nullptr && m_mesh->isLoaded() && m_boundingBox != nullptr && m_isNeedBoundingBox)
+    {
+        return true;
+    }
+    return false;
 }
 
 void IGameObject::onSceneUpdate(f32 deltatime)
@@ -98,6 +144,19 @@ bool IGameObject::checkOcclusion(void)
 ui32 IGameObject::numTriangles(void)
 {
     return m_mesh && m_mesh->isLoaded() ? m_mesh->getNumIndices() / 3 : 0;
+}
+
+void IGameObject::onDrawBoundingBox(void)
+{
+    if(m_isNeedBoundingBox && IGameObject::getBoundingBox())
+    {
+        m_boundingBoxMaterial->bind();
+        m_boundingBox->bind(m_boundingBoxMaterial->getShader()->getAttributes(), true);
+        m_boundingBoxMaterialBindImposer(m_boundingBoxMaterial);
+        m_boundingBox->draw(true);
+        m_boundingBoxMaterial->unbind();
+        m_boundingBox->unbind(m_boundingBoxMaterial->getShader()->getAttributes(), true);
+    }
 }
 
 void IGameObject::onBind(const std::string& techniqueName)

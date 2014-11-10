@@ -1029,6 +1029,7 @@ CConfigurationWSRenderOperation::CConfigurationWSRenderOperation(void) :
 IConfiguration(E_CONFIGURATION_CLASS_WS_RENDEROPERATION),
 kWSRenderOperationMainNode("operation"),
 kWSRenderOperationGuidAttribute("guid"),
+kWSRenderOperationAreDrawBoundingBoxes("areDrawBoundingBoxes"),
 kWSRenderOperationIndexAttribute("index"),
 kWSRenderOperationScreenWidthAttribute("width"),
 kWSRenderOperationScreenHeightAttribute("height"),
@@ -1052,6 +1053,15 @@ std::string CConfigurationWSRenderOperation::getGuid(void) const
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getString();
+}
+
+bool CConfigurationWSRenderOperation::areDrawBoundingBoxes(void) const
+{
+    const auto& iterator = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                             kWSRenderOperationAreDrawBoundingBoxes);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<i8>();
 }
 
 ui32 CConfigurationWSRenderOperation::getIndex(void) const

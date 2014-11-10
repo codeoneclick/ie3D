@@ -45,6 +45,7 @@ protected:
     i32  zOrder(void);
     bool checkOcclusion(void);
     ui32 numTriangles(void);
+    void onDrawBoundingBox(void);
     void onBind(const std::string& techniqueName);
     void onDraw(const std::string& techniqueName);
     void onUnbind(const std::string& techniqueName);

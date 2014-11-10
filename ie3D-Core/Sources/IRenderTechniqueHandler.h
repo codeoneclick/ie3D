@@ -27,6 +27,7 @@ public:
     virtual i32  zOrder(void) = 0;
     virtual bool checkOcclusion(void) = 0;
     virtual ui32 numTriangles(void) = 0;
+    virtual void onDrawBoundingBox(void) = 0;
     virtual void onBind(const std::string& techniqueName) = 0;
     virtual void onDraw(const std::string& techniqueName) = 0;
     virtual void onUnbind(const std::string& techniqueName) = 0;

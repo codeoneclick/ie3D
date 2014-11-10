@@ -360,6 +360,11 @@
 		2191CEBC196EE95100CE2813 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE94196EE95100CE2813 /* zutil.c */; };
 		2191CEBD196EE95100CE2813 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE94196EE95100CE2813 /* zutil.c */; };
 		2191CEBE196EE95100CE2813 /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE95196EE95100CE2813 /* zutil.h */; };
+		219B5E701A10F3E600986953 /* CBoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219B5E6E1A10F3E600986953 /* CBoundingBox.cpp */; };
+		219B5E711A10F3E600986953 /* CBoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219B5E6E1A10F3E600986953 /* CBoundingBox.cpp */; };
+		219B5E721A10F3E600986953 /* CBoundingBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 219B5E6F1A10F3E600986953 /* CBoundingBox.h */; };
+		219B5E741A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219B5E731A10FF2C00986953 /* ShaderBoundingBox.cpp */; };
+		219B5E751A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219B5E731A10FF2C00986953 /* ShaderBoundingBox.cpp */; };
 		21C409A5197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A6197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A7197B0B4B0063D62D /* CMeshSerializer_MDL_01.h in Headers */ = {isa = PBXBuildFile; fileRef = 21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */; };
@@ -521,6 +526,9 @@
 		2191CE93196EE95100CE2813 /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		2191CE94196EE95100CE2813 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
 		2191CE95196EE95100CE2813 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
+		219B5E6E1A10F3E600986953 /* CBoundingBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBoundingBox.cpp; path = Sources/CBoundingBox.cpp; sourceTree = "<group>"; };
+		219B5E6F1A10F3E600986953 /* CBoundingBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBoundingBox.h; path = Sources/CBoundingBox.h; sourceTree = "<group>"; };
+		219B5E731A10FF2C00986953 /* ShaderBoundingBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShaderBoundingBox.cpp; path = Sources/ShaderBoundingBox.cpp; sourceTree = "<group>"; };
 		219DC4C9180DC0F9001C72D4 /* IOGLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOGLWindow.h; path = Sources/IOGLWindow.h; sourceTree = "<group>"; };
 		219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_win32.cpp; path = Sources/CGraphicsContext_win32.cpp; sourceTree = "<group>"; };
 		219DC4CC180DC465001C72D4 /* COGLWindow_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_win32.cpp; path = Sources/COGLWindow_win32.cpp; sourceTree = "<group>"; };
@@ -983,6 +991,7 @@
 			children = (
 				216E479D199A905A00632243 /* HShaders.h */,
 				213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */,
+				219B5E731A10FF2C00986953 /* ShaderBoundingBox.cpp */,
 			);
 			name = "Built-in Shaders";
 			sourceTree = "<group>";
@@ -1197,6 +1206,8 @@
 				A49C4EC917BA6B0C00C1484F /* CAnimationMixer.cpp */,
 				2179741919F534FA00A98630 /* CGlobalLightSource.h */,
 				2179741819F534FA00A98630 /* CGlobalLightSource.cpp */,
+				219B5E6F1A10F3E600986953 /* CBoundingBox.h */,
+				219B5E6E1A10F3E600986953 /* CBoundingBox.cpp */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -1837,6 +1848,7 @@
 				2191CE9F196EE95100CE2813 /* deflate.h in Headers */,
 				213396AC19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h in Headers */,
 				2191CE9C196EE95100CE2813 /* crc32.h in Headers */,
+				219B5E721A10F3E600986953 /* CBoundingBox.h in Headers */,
 				2191CEB4196EE95100CE2813 /* inftrees.h in Headers */,
 				21FEECF01A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h in Headers */,
 				21733479196440EB002B3F90 /* IRenderTechniqueBase.h in Headers */,
@@ -2018,6 +2030,7 @@
 				21208FCB1906FB5F00FFC8D4 /* CAnimationMixer.cpp in Sources */,
 				21208FCC1906FB5F00FFC8D4 /* CSceneGraph.cpp in Sources */,
 				21208FCD1906FB5F00FFC8D4 /* CSceneFabricator.cpp in Sources */,
+				219B5E751A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */,
 				213396AE19D3198700B7C2A2 /* CAtmosphericScattering.cpp in Sources */,
 				21208FCE1906FB5F00FFC8D4 /* CSceneUpdateMgr.cpp in Sources */,
 				21208FCF1906FB5F00FFC8D4 /* ISceneUpdateHandler.cpp in Sources */,
@@ -2081,6 +2094,7 @@
 				21208FF71906FB6000FFC8D4 /* CMaterial.cpp in Sources */,
 				212092B51919674400FFC8D4 /* CSkyBox.cpp in Sources */,
 				21208FF81906FB6000FFC8D4 /* IResourceCommiter.cpp in Sources */,
+				219B5E711A10F3E600986953 /* CBoundingBox.cpp in Sources */,
 				21208FF91906FB6000FFC8D4 /* CShaderCommiter_GLSL.cpp in Sources */,
 				21208FFA1906FB6000FFC8D4 /* CTextureCommiter_PVR.cpp in Sources */,
 				21208FFB1906FB6000FFC8D4 /* CMeshCommiter_MDL.cpp in Sources */,
@@ -2185,6 +2199,7 @@
 				2132660F1906A4AF001C98F7 /* CAnimationMixer.cpp in Sources */,
 				213266101906A4AF001C98F7 /* CSceneGraph.cpp in Sources */,
 				213266111906A4AF001C98F7 /* CSceneFabricator.cpp in Sources */,
+				219B5E741A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */,
 				213396AD19D3198600B7C2A2 /* CAtmosphericScattering.cpp in Sources */,
 				213266121906A4AF001C98F7 /* CSceneUpdateMgr.cpp in Sources */,
 				213266131906A4AF001C98F7 /* ISceneUpdateHandler.cpp in Sources */,
@@ -2248,6 +2263,7 @@
 				2132663B1906A4AF001C98F7 /* CMaterial.cpp in Sources */,
 				212092B41919674400FFC8D4 /* CSkyBox.cpp in Sources */,
 				2132663C1906A4AF001C98F7 /* IResourceCommiter.cpp in Sources */,
+				219B5E701A10F3E600986953 /* CBoundingBox.cpp in Sources */,
 				2132663D1906A4AF001C98F7 /* CShaderCommiter_GLSL.cpp in Sources */,
 				2132663E1906A4AF001C98F7 /* CTextureCommiter_PVR.cpp in Sources */,
 				2132663F1906A4AF001C98F7 /* CMeshCommiter_MDL.cpp in Sources */,

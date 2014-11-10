@@ -1,4 +1,5 @@
 <operation
+    areDrawBoundingBoxes="0"
     guid="render.operation.world.reflection"
     index="0"
     width="512"

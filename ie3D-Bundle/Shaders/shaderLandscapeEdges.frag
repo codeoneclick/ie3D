@@ -18,7 +18,7 @@ void main(void)
     if(OUT_ClipPlane < 0.0)
         discard;
     
-    vec4 vDiffuseColor = texture2D(SAMPLER_01, vec2(OUT_TexCoord.x * 64.0, OUT_TexCoord.y * 16.0));
+    vec4 vDiffuseColor = texture2D(SAMPLER_01, OUT_TexCoord);
     
     vec4 vMaskColor = texture2D(SAMPLER_02, OUT_TexCoord);
     

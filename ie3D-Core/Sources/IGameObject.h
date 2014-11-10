@@ -42,7 +42,10 @@ protected:
     ISharedConfiguration m_configuration;
     
     CSharedMesh m_mesh;
-    CSharedBoundBox m_boundBox;
+    
+    CSharedBoundingBox m_boundingBox;
+    CSharedMaterial m_boundingBoxMaterial;
+    std::function<void(CSharedMaterialRef)> m_boundingBoxMaterialBindImposer;
     
     CSharedCamera m_camera;
     CSharedGlobalLightSource m_globalLightSource;
@@ -61,6 +64,7 @@ protected:
 	bool m_isNeedToRender;
     bool m_isNeedToUpdate;
     bool m_isBatching;
+    bool m_isNeedBoundingBox;
     
     virtual void onSceneUpdate(f32 deltatime);
     
@@ -70,6 +74,7 @@ protected:
     virtual i32  zOrder(void);
     virtual bool checkOcclusion(void);
     virtual ui32 numTriangles(void);
+    virtual void onDrawBoundingBox(void);
     virtual void onBind(const std::string& mode);
     virtual void onDraw(const std::string& mode);
     virtual void onUnbind(const std::string& mode);
@@ -77,6 +82,8 @@ protected:
     
     virtual void bindBaseShaderUniforms(CSharedMaterialRef material);
     virtual void bindCustomShaderUniforms(CSharedMaterialRef material);
+    
+    bool getBoundingBox(void);
     
 public:
     
