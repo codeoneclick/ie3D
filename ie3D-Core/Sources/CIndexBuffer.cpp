@@ -49,7 +49,7 @@ void CIndexBuffer::unlock(ui32 sizeToUse)
     if(!m_isDataUploaded)
     {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * m_usedSize, m_data, m_mode);
-        //m_isDataUploaded = true;
+        m_isDataUploaded = true;
     }
     else
     {

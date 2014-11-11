@@ -89,7 +89,7 @@ void CDemoGameScene::load(void)
     
     m_model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(m_model);
-    m_model->setScale(glm::vec3(3.0));
+    m_model->setScale(glm::vec3(2.0));
     
     CSharedModel model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(model);
