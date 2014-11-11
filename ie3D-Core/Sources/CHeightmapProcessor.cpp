@@ -376,7 +376,7 @@ m_edgesMaskTextureHeight(2048)
             ui32 index = i + j * m_chunksNum.x;
             glm::vec3 maxBound = glm::vec3( -4096.0f, -4096.0f, -4096.0f );
             glm::vec3 minBound = glm::vec3(  4096.0f,  4096.0f,  4096.0f );
-            CHeightmapProcessor::createChunkBound(m_chunksNum.x, m_chunksNum.y,
+            CHeightmapProcessor::createChunkBound(m_chunkLODsSizes.at(0).x, m_chunkLODsSizes.at(0).y,
                                                   i, j,
                                                   &maxBound, &minBound);
             
@@ -965,7 +965,7 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
         CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((m_chunkSize.x - 1) * (m_chunkSize.y - 1) * 6,
                                                                         GL_STREAM_DRAW);
         
-        CHeightmapProcessor::createChunkBound(m_chunksNum.x, m_chunksNum.y,
+        CHeightmapProcessor::createChunkBound(m_chunkLODsSizes.at(LOD).x, m_chunkLODsSizes.at(LOD).y,
                                               i, j,
                                               &maxBound, &minBound);
         
@@ -1037,7 +1037,9 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     assert(m_executedOperations[index] == nullptr);
     m_executedOperations[index] = completionOperation;
     
-    completionOperation->setCancelBlock([this, index](void){
+    completionOperation->setCancelBlock([this, index](void) {
+        assert(m_executedOperations[index] != nullptr);
+        m_canceledOperations[index] = m_executedOperations[index];
         m_executedOperations[index] = nullptr;
     });
     completionOperation->addToExecutionQueue();
@@ -1050,6 +1052,8 @@ void CHeightmapProcessor::stopChunkLoading(ui32 i, ui32 j, const std::function<v
     {
         m_executedOperations[index]->setCancelBlock([this, stopLoadingCallback, index](void) {
             stopLoadingCallback();
+            assert(m_executedOperations[index] != nullptr);
+            m_canceledOperations[index] = m_executedOperations[index];
             m_executedOperations[index] = nullptr;
         });
         m_executedOperations[index]->cancel();
@@ -1066,8 +1070,14 @@ void CHeightmapProcessor::runChunkUnLoading(ui32 i, ui32 j)
     if(m_executedOperations[index] != nullptr)
     {
         m_executedOperations[index]->cancel();
-        m_canceledOperations[index] = m_executedOperations[index];
-        m_executedOperations[index] = nullptr;
+    }
+    else
+    {
+        std::get<0>(m_chunksUsed[index]) = nullptr;
+        std::get<1>(m_chunksUsed[index]) = nullptr;
+        std::get<2>(m_chunksUsed[index]) = nullptr;
+        std::get<3>(m_chunksUsed[index]) = nullptr;
+        std::get<4>(m_chunksUsed[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
     }
 }
 
@@ -1076,9 +1086,9 @@ void CHeightmapProcessor::update(void)
     for(ui32 index = 0; index < m_canceledOperations.size(); ++index)
     {
         if(m_canceledOperations.at(index) != nullptr &&
-           m_canceledOperations.at(index)->isCompleted())
+           (m_canceledOperations.at(index)->isCompleted() ||
+            m_canceledOperations.at(index)->isCanceled()))
         {
-            m_canceledOperations.at(index) = nullptr;
             assert(std::get<0>(m_chunksUsed[index]) != nullptr);
             m_chunksUnused.push_back(std::get<0>(m_chunksUsed[index]));
             std::get<0>(m_chunksUsed[index]) = nullptr;
@@ -1086,6 +1096,7 @@ void CHeightmapProcessor::update(void)
             std::get<2>(m_chunksUsed[index]) = nullptr;
             std::get<3>(m_chunksUsed[index]) = nullptr;
             std::get<4>(m_chunksUsed[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
+            m_canceledOperations.at(index) = nullptr;
         }
     }
 }
@@ -1097,11 +1108,9 @@ void CHeightmapProcessor::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSize
     assert(m_heightmapData != nullptr);
     assert(chunkLODSizeX != 0);
     assert(chunkLODSizeZ != 0);
-    assert((m_chunkSize.x - 1) % chunkLODSizeX == 0.0);
-    assert((m_chunkSize.y - 1) % chunkLODSizeZ == 0.0);
     
-    ui32 chunkLODOffsetX = (m_chunkSize.x - 1) / chunkLODSizeX;
-    ui32 chunkLODOffsetZ = (m_chunkSize.y - 1) / chunkLODSizeZ;
+    ui32 chunkLODOffsetX = (m_chunkSize.x - 1) / (chunkLODSizeX - 1);
+    ui32 chunkLODOffsetZ = (m_chunkSize.y - 1) / (chunkLODSizeZ - 1);
     
     for(ui32 i = 0; i < chunkLODSizeX; ++i)
     {

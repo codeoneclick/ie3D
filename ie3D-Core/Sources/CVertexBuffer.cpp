@@ -12,12 +12,12 @@
 CVertexBuffer::CVertexBuffer(ui32 sizeToAllocate, GLenum mode) : IResourceData(E_RESOURCE_DATA_CLASS_VERTEX_BUFFER_DATA),
 m_allocatedSize(sizeToAllocate),
 m_usedSize(0),
-m_mode(mode)
+m_mode(mode),
+m_isDataUploaded(false)
 {
     assert(m_allocatedSize != 0);
     m_data = new SAttributeVertex[m_allocatedSize];
-    m_index = -1;
-    glGenBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
+    glGenBuffers(1, &m_handle);
     
 #if defined(__OPENGL_30__)
     glGenVertexArrays(1, &m_vao);
@@ -27,7 +27,7 @@ m_mode(mode)
 
 CVertexBuffer::~CVertexBuffer(void)
 {
-    glDeleteBuffers(k_NUM_REPLACEMENT_VERTEX_BUFFERS, m_handles);
+    glDeleteBuffers(1, &m_handle);
 #if defined(__OPENGL_30__)
     glDeleteVertexArrays(1, &m_vao);
 #endif
@@ -91,17 +91,24 @@ void CVertexBuffer::unlock(ui32 sizeToUse)
     assert(m_data != nullptr);
     assert(m_allocatedSize != 0);
     m_usedSize = sizeToUse > 0 && sizeToUse < m_allocatedSize ? sizeToUse : m_allocatedSize;
-    m_index = (m_index >= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1)) ? 0 : m_index + 1;
-    glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
+    glBindBuffer(GL_ARRAY_BUFFER, m_handle);
+    
+    if(!m_isDataUploaded)
+    {
+        glBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
+        //m_isDataUploaded = true;
+    }
+    else
+    {
+        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(SAttributeVertex) * m_usedSize, m_data);
+    }
 }
 
 void CVertexBuffer::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
 {
     if(m_usedSize != 0)
     {
-        assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
-        glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
+        glBindBuffer(GL_ARRAY_BUFFER, m_handle);
 #if defined(__OPENGL_30__)
         glBindVertexArray(m_vao);
 #endif

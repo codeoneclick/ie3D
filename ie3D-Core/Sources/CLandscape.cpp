@@ -96,6 +96,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
         {
             for(ui32 j = 0; j < numChunksZ; ++j)
             {
+                ui32 index = i + j * numChunksZ;
                 glm::vec3 maxBound = std::get<0>(m_heightmapProcessor->getChunkBounds(i, j));
                 glm::vec3 minBound = std::get<1>(m_heightmapProcessor->getChunkBounds(i, j));
                 
@@ -105,66 +106,66 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                    result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
                 {
                     E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->Get_LookAt(), minBound, maxBound);
-                    if(m_chunks[i + j * numChunksZ] == nullptr)
+                    if(m_chunks[index] == nullptr)
                     {
-                        m_chunks[i + j * numChunksZ] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
-                        m_chunks[i + j * numChunksZ]->setInprogressLOD(LOD);
-                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, i , j, numChunksZ, LOD](CSharedMeshRef mesh) {
+                        m_chunks[index] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
+                        m_chunks[index]->setInprogressLOD(LOD);
+                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, index, LOD](CSharedMeshRef mesh) {
                             
-                            m_chunks[i + j * numChunksZ]->setCamera(m_camera);
-                            m_chunks[i + j * numChunksZ]->setGlobalLightSource(m_globalLightSource);
+                            m_chunks[index]->setCamera(m_camera);
+                            m_chunks[index]->setGlobalLightSource(m_globalLightSource);
                             
-                            m_chunks[i + j * numChunksZ]->setMesh(mesh);
-                            m_chunks[i + j * numChunksZ]->onConfigurationLoaded(m_configuration, true);
+                            m_chunks[index]->setMesh(mesh);
+                            m_chunks[index]->onConfigurationLoaded(m_configuration, true);
                             
                             if(m_prerenderedSplattingDiffuseTexture != nullptr)
                             {
-                                m_chunks[i + j * numChunksZ]->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
+                                m_chunks[index]->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
                             }
                             if(m_prerenderedSplattingNormalTexture != nullptr)
                             {
-                                m_chunks[i + j * numChunksZ]->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
+                                m_chunks[index]->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
                             }
-                            m_chunks[i + j * numChunksZ]->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
+                            m_chunks[index]->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
                             
-                            m_chunks[i + j * numChunksZ]->setRenderTechniqueImporter(m_renderTechniqueImporter);
-                            m_chunks[i + j * numChunksZ]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
-                            m_chunks[i + j * numChunksZ]->setSceneUpdateMgr(m_sceneUpdateMgr);
+                            m_chunks[index]->setRenderTechniqueImporter(m_renderTechniqueImporter);
+                            m_chunks[index]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
+                            m_chunks[index]->setSceneUpdateMgr(m_sceneUpdateMgr);
                             
-                            m_chunks[i + j * numChunksZ]->enableRender(m_isNeedToRender);
-                            m_chunks[i + j * numChunksZ]->enableUpdate(m_isNeedToUpdate);
+                            m_chunks[index]->enableRender(m_isNeedToRender);
+                            m_chunks[index]->enableUpdate(m_isNeedToUpdate);
                             
-                            m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
-                            m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
-                            m_chunks[i + j * numChunksZ]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
+                            m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
+                            m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
+                            m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
                             
-                        }, [this, i , j, numChunksZ, LOD](CSharedQuadTreeRef quadTree) {
-                            m_chunks[i + j * numChunksZ]->setQuadTree(quadTree, LOD);
+                        }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
+                            m_chunks[index]->setQuadTree(quadTree, LOD);
                         });
                     }
-                    else if(m_chunks[i + j * numChunksZ]->getInprogressLOD() != LOD &&
-                            m_chunks[i + j * numChunksZ]->getCurrentLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
+                    else if(m_chunks[index]->getInprogressLOD() != LOD &&
+                            m_chunks[index]->getCurrentLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
                     {
-                        m_chunks[i + j * numChunksZ]->setInprogressLOD(LOD);
-                        m_heightmapProcessor->stopChunkLoading(i, j, [this, i , j, numChunksZ, LOD](void){
-                            m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, i , j, numChunksZ, LOD](CSharedMeshRef mesh) {
-                                m_chunks[i + j * numChunksZ]->setQuadTree(nullptr, m_chunks[i + j * numChunksZ]->getCurrentLOD());
-                                m_chunks[i + j * numChunksZ]->setMesh(mesh);
-                                m_chunks[i + j * numChunksZ]->onSceneUpdate(0);
-                            }, [this, i , j, numChunksZ, LOD](CSharedQuadTreeRef quadTree) {
-                                m_chunks[i + j * numChunksZ]->setQuadTree(quadTree, LOD);
-                                m_chunks[i + j * numChunksZ]->onSceneUpdate(0);
+                        m_chunks[index]->setInprogressLOD(LOD);
+                        m_heightmapProcessor->stopChunkLoading(i, j, [this, i, j, index, LOD](void){
+                            m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, index, LOD](CSharedMeshRef mesh) {
+                                m_chunks[index]->setQuadTree(nullptr, m_chunks[index]->getCurrentLOD());
+                                m_chunks[index]->setMesh(mesh);
+                                m_chunks[index]->onSceneUpdate(0);
+                            }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
+                                m_chunks[index]->setQuadTree(quadTree, LOD);
+                                m_chunks[index]->onSceneUpdate(0);
                             });
                         });
                     }
                 }
-                else if(m_chunks[i + j * numChunksZ] != nullptr)
+                else if(m_chunks[index] != nullptr)
                 {
-                    m_chunks[i + j * numChunksZ]->enableRender(false);
-                    m_chunks[i + j * numChunksZ]->enableUpdate(false);
-                    m_chunks[i + j * numChunksZ]->removeLoadingDependencies();
+                    m_chunks[index]->enableRender(false);
+                    m_chunks[index]->enableUpdate(false);
+                    m_chunks[index]->removeLoadingDependencies();
                     m_heightmapProcessor->runChunkUnLoading(i, j);
-                    m_chunks[i + j * numChunksZ] = nullptr;
+                    m_chunks[index] = nullptr;
                 }
             }
         }

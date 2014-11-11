@@ -117,8 +117,7 @@ E_FRUSTUM_BOUND_RESULT CFrustum::IsSphereInFrumstum(const glm::vec3& _center, f3
 E_FRUSTUM_BOUND_RESULT CFrustum::IsBoundBoxInFrustum(const glm::vec3& maxBound,
                                                      const glm::vec3& minBound)
 {
-    static glm::vec3 points[kMaxPointsInBoundingBox];
-    
+    glm::vec3 points[kMaxPointsInBoundingBox];
     points[0] = minBound;
     points[1] = glm::vec3(minBound.x, minBound.y, maxBound.z);
     points[2] = glm::vec3(maxBound.x, minBound.y, minBound.z);
@@ -129,29 +128,26 @@ E_FRUSTUM_BOUND_RESULT CFrustum::IsBoundBoxInFrustum(const glm::vec3& maxBound,
     points[6] = glm::vec3(minBound.x, maxBound.y, maxBound.z);
     points[7] = glm::vec3(minBound.x, maxBound.y, minBound.z);
     
-    static E_FRUSTUM_BOUND_RESULT result;
-    result = E_FRUSTUM_BOUND_RESULT_INSIDE;
-    static ui32 pointsIn, pointsOut;
+    E_FRUSTUM_BOUND_RESULT result = E_FRUSTUM_BOUND_RESULT_INSIDE;
+    ui32 pointsIn, pointsOut;
     
-	for(ui32 i = 0; i < E_FRUSTUM_PLANE_MAX; ++i)
+    for(ui32 i = 0; i < E_FRUSTUM_PLANE_MAX; ++i)
     {
         pointsIn = 0;
         pointsOut = 0;
-        
-		for(ui32 j = 0; j < kMaxPointsInBoundingBox && (pointsIn == 0 || pointsOut == 0); ++j)
+        for (ui32 j = 0; j < kMaxPointsInBoundingBox && (pointsIn == 0 || pointsOut == 0); ++j)
         {
             CFrustum::getDistanceToPlane(m_planes[i], points[j]) < 0.0 ? ++pointsOut : ++pointsIn;
-		}
-        
-		if (!pointsIn)
-        {
-			result = E_FRUSTUM_BOUND_RESULT_OUTSIDE;
         }
-		else if (pointsOut)
+        if (!pointsIn)
         {
-			result = E_FRUSTUM_BOUND_RESULT_INTERSECT;
+            result = E_FRUSTUM_BOUND_RESULT_OUTSIDE;
             break;
         }
-	}
-	return result;
+        else if (pointsOut)
+        {
+            result = E_FRUSTUM_BOUND_RESULT_INTERSECT;
+        }
+    }
+    return result;
 }

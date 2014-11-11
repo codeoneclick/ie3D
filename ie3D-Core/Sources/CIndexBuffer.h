@@ -12,16 +12,14 @@
 #include "IResource.h"
 #include "HDeclaration.h"
 
-#define K_NUM_REPLACEMENT_INDEX_BUFFERS 3
-
 class CIndexBuffer : public IResourceData
 {
 private:
     
 protected:
     
-    ui32 m_handles[K_NUM_REPLACEMENT_INDEX_BUFFERS];
-    i32  m_index;
+    ui32 m_handle;
+    bool m_isDataUploaded;
     
 	ui16* m_data;
     ui32 m_allocatedSize;

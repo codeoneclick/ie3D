@@ -14,6 +14,7 @@
 CQuadTree::CQuadTree(void) :
 m_indexBuffer(nullptr), 
 m_numIndexes(0),
+m_vertexes(nullptr),
 m_isGenerated(false)
 {
 
@@ -233,6 +234,9 @@ void CQuadTree::generate(CSharedVertexBufferRef vertexBuffer,
               f32 depth,
               ui32 size)
 {
+    assert(m_indexBuffer == nullptr);
+    assert(m_vertexes == nullptr);
+    
     m_indexBuffer = indexBuffer;
     m_maxBound = maxBound;
     m_minBound = minBound;

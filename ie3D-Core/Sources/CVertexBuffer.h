@@ -12,8 +12,6 @@
 #include "IResource.h"
 #include "HDeclaration.h"
 
-#define k_NUM_REPLACEMENT_VERTEX_BUFFERS 3
-
 struct SBoneData
 {
     i32	m_id;
@@ -46,8 +44,8 @@ private:
 protected:
     
     ui32 m_vao;
-    ui32 m_handles[k_NUM_REPLACEMENT_VERTEX_BUFFERS];
-    i32 m_index;
+    ui32 m_handle;
+    bool m_isDataUploaded;
     
     SAttributeVertex* m_data;
     ui32 m_allocatedSize;

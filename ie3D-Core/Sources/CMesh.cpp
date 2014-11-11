@@ -260,7 +260,7 @@ CSharedMesh CMesh::constructCustomMesh(const std::string& guid,
 
 CMesh::~CMesh(void)
 {
-
+    
 }
 
 void CMesh::onResourceDataSerializationFinished(ISharedResourceDataRef resourceData)
