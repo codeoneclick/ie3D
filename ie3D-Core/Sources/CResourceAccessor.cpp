@@ -70,3 +70,11 @@ CSharedMesh CResourceAccessor::getMesh(const std::string& filename) const
     assert(mesh != nullptr);
     return mesh;
 }
+
+CSharedAnimationSequence CResourceAccessor::getAnimationSequence(const std::string& filename) const
+{
+    assert(m_resourceLoader != nullptr);
+    CSharedAnimationSequence animationSequence = m_resourceLoader->startAnimationSequenceLoadingOperation(filename);
+    assert(animationSequence != nullptr);
+    return animationSequence;
+}

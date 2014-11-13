@@ -8,6 +8,7 @@
 
 #include "CSequenceSerializer_SEQ.h"
 #include "CMesh.h"
+#include "CAnimationSequence.h"
 
 CSequenceSerializer_SEQ::CSequenceSerializer_SEQ(const std::string& filename,
                                                  ISharedResourceRef resource) :

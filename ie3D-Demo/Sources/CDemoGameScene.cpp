@@ -197,6 +197,7 @@ void CDemoGameScene::update(f32 deltatime)
     angle += 0.033;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
     m_globalLightSource->setLookAt(m_model->getPosition());
+    m_model->setAnimation("model_01.MDL_anim");
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

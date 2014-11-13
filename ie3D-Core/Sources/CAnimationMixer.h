@@ -19,22 +19,33 @@ private:
 protected:
     
     f32 m_animationTime;
+    
+    std::string m_currentAnimationName;
+    CSharedAnimationSequence m_currentAnimationSequence;
+    
     CSharedSkeleton m_skeleton;
-    CSharedSequenceData m_sequenceData;
+    
+    std::map<std::string, CSharedAnimationSequence> m_animationsSequences;
     glm::mat4x4* m_bonesTransformations;
     
     void bindPoseTransformation(void);
+    bool tryBindCurrentAnimationSequence(void);
     
 public:
     
-    CAnimationMixer(CSharedSkeletonDataRef skeletonData, CSharedSequenceDataRef sequenceData);
+    CAnimationMixer(CSharedSkeletonDataRef skeletonData);
     ~CAnimationMixer(void);
     
     glm::mat4x4* getTransformations(void) const;
     ui32 getTransformationSize(void) const;
     
+    void addAnimationSequence(CSharedAnimationSequenceRef animationSequence);
+    void removeAnimationSequence(CSharedAnimationSequenceRef animationSequence);
+    
     void setAnimation(const std::string& name);
     void update(f32 deltatime);
+    
+    bool isAnimated(void);
 };
 
 #endif 

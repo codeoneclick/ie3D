@@ -96,7 +96,7 @@ void CVertexBuffer::unlock(ui32 sizeToUse)
     if(!m_isDataUploaded)
     {
         glBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
-        //m_isDataUploaded = true;
+        m_isDataUploaded = true;
     }
     else
     {

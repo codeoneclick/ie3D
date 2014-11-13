@@ -139,6 +139,27 @@ public:
     std::vector<ISharedConfiguration> getMaterialsConfigurations(void) const;
 };
 
+class CConfigurationAnimation : public IConfiguration
+{
+public:
+    
+    const std::string kAnimationMainNode;
+    const std::string kAnimationNameAttribute;
+    const std::string kAnimationFilenameAttribute;
+    
+private:
+    
+protected:
+    
+public:
+    
+    CConfigurationAnimation(void);
+    ~CConfigurationAnimation(void);
+    
+    std::string getName(void) const;
+    std::string getFilename(void) const;
+};
+
 class CConfigurationModel : public CConfigurationGameObject
 {
 public:
@@ -146,6 +167,8 @@ public:
     const std::string kModelMainNode;
     const std::string kModelMeshFilenameAttribute;
     const std::string kModelMeshIsBatchingAttribute;
+    const std::string kModelAnimationsConfigurationsNode;
+    const std::string kModelAnimationConfigurationNode;
     
 private:
     
@@ -157,8 +180,9 @@ public:
     ~CConfigurationModel(void);
     
     std::string getFilename(void) const;
-    
     bool isBatching(void) const;
+    
+    std::vector<ISharedConfiguration> getAnimationsConfigurations(void) const;
 };
 
 class CConfigurationSkyBox : public CConfigurationGameObject

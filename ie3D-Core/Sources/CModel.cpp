@@ -19,12 +19,12 @@
 #include "CAnimationMixer.h"
 #include "IRenderTechniqueAccessor.h"
 #include "CBatchingMgr.h"
+#include "CAnimationSequence.h"
 
 CModel::CModel(CSharedResourceAccessorRef resourceAccessor,
                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor),
-m_animationMixer(nullptr),
-m_isAnimated(false)
+m_animationMixer(nullptr)
 {
     m_isNeedBoundingBox = true;
     m_zOrder = E_GAME_OBJECT_Z_ORDER_MODEL;
@@ -40,7 +40,7 @@ void CModel::onSceneUpdate(f32 deltatime)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         IGameObject::onSceneUpdate(deltatime);
-        if(m_animationMixer != nullptr && m_isAnimated)
+        if(m_animationMixer != nullptr)
         {
             m_animationMixer->update(deltatime);
         }
@@ -54,12 +54,25 @@ void CModel::onResourceLoaded(ISharedResourceRef resource, bool success)
     {
         assert(m_animationMixer == nullptr);
         CSharedMesh mesh = std::static_pointer_cast<CMesh>(resource);
-        m_isAnimated = mesh->getSkeletonData() != nullptr && mesh->getSequenceData() != nullptr;
-        if(m_isAnimated)
+        if(mesh->getSkeletonData() != nullptr)
         {
-            m_animationMixer = std::make_shared<CAnimationMixer>(mesh->getSkeletonData(),
-                                                                 mesh->getSequenceData());
+            m_animationMixer = std::make_shared<CAnimationMixer>(mesh->getSkeletonData());
         }
+        std::shared_ptr<CConfigurationModel> modelConfiguration = std::static_pointer_cast<CConfigurationModel>(m_configuration);
+        assert(m_resourceAccessor != nullptr);
+        for(const auto& iterator : modelConfiguration->getAnimationsConfigurations())
+        {
+            std::shared_ptr<CConfigurationAnimation> animationConfiguration = std::static_pointer_cast<CConfigurationAnimation>(iterator);
+            CSharedAnimationSequence animationSequence = m_resourceAccessor->getAnimationSequence(animationConfiguration->getFilename());
+            animationSequence->addLoadingHandler(shared_from_this());
+            assert(animationSequence != nullptr);
+        }
+    }
+    else if(resource->getResourceClass() == E_RESOURCE_CLASS_SEQUENCE)
+    {
+        assert(m_animationMixer != nullptr);
+        CSharedAnimationSequence animationSequence = std::static_pointer_cast<CAnimationSequence>(resource);
+        m_animationMixer->addAnimationSequence(animationSequence);
     }
 }
 
@@ -140,8 +153,8 @@ void CModel::onBatch(const std::string& techniqueName)
 void CModel::bindCustomShaderUniforms(CSharedMaterialRef material)
 {
     IGameObject::bindCustomShaderUniforms(material);
-    material->getShader()->setInt(m_isAnimated ? 1 : 0, E_SHADER_UNIFORM_INT_FLAG_01);
-    if(!m_isBatching && m_animationMixer != nullptr && m_isAnimated)
+    material->getShader()->setInt(m_animationMixer != nullptr && m_animationMixer->isAnimated() ? 1 : 0, E_SHADER_UNIFORM_INT_FLAG_01);
+    if(!m_isBatching && m_animationMixer != nullptr && m_animationMixer->isAnimated())
     {
         material->getShader()->setMatrixArray4x4(m_animationMixer->getTransformations(),
                                                  m_animationMixer->getTransformationSize(),

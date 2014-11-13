@@ -47,6 +47,8 @@ public:
                             const std::string& fsFilename) const;
     
     CSharedMesh getMesh(const std::string& filename) const;
+    
+    CSharedAnimationSequence getAnimationSequence(const std::string& filename) const;
 };
 
 #endif 

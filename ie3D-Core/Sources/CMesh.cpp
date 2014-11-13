@@ -125,78 +125,6 @@ void CMeshData::removeData(void)
     m_numIndices = 0;
 }
 
-CFrameData::CFrameData(const std::vector<glm::quat>& rotations,
-                       const std::vector<glm::vec3>& positions,
-                       const std::vector<glm::vec3>& scales) :
-m_rotations(rotations),
-m_positions(positions),
-m_scales(scales)
-{
-    
-}
-
-CFrameData::~CFrameData(void)
-{
-    m_rotations.clear();
-    m_positions.clear();
-    m_scales.clear();
-}
-
-const glm::quat& CFrameData::getRotation(ui32 index) const
-{
-    assert(m_rotations.size() > index);
-    return m_rotations.at(index);
-}
-
-const glm::vec3& CFrameData::getPosition(ui32 index) const
-{
-    assert(m_positions.size() > index);
-    return m_positions.at(index);
-}
-
-const glm::vec3& CFrameData::getScale(ui32 index) const
-{
-    assert(m_scales.size() > index);
-    return m_scales.at(index);
-}
-
-CSequenceData::CSequenceData(const std::string& animationName,
-                             ui32 animationFPS,
-                             const std::vector<CSharedFrameData>& frames) :
-IResourceData(E_RESOURCE_DATA_CLASS_SEQUENCE_DATA),
-m_animationName(animationName),
-m_animationFPS(animationFPS),
-m_frames(frames)
-{
-    
-}
-
-CSequenceData::~CSequenceData(void)
-{
-    m_frames.clear();
-}
-
-ui32 CSequenceData::getNumFrames(void) const
-{
-    return static_cast<ui32>(m_frames.size());
-}
-
-ui32 CSequenceData::getAnimationFPS(void) const
-{
-    return m_animationFPS;
-}
-
-const std::string CSequenceData::getAnimationName(void) const
-{
-    return m_animationName;
-}
-
-CSharedFrameData CSequenceData::getFrame(ui32 index) const
-{
-    assert(m_frames.size() > index);
-    return m_frames.at(index);
-}
-
 CSkeletonData::CSkeletonData(ui32 numBones) :
 IResourceData(E_RESOURCE_DATA_CLASS_SKELETON_DATA),
 m_numBones(numBones)
@@ -228,8 +156,7 @@ CMesh::CMesh(const std::string& guid) : IResource(E_RESOURCE_CLASS_MESH, guid),
 m_vertexBuffer(nullptr),
 m_indexBuffer(nullptr),
 m_meshData(nullptr),
-m_skeletonData(nullptr),
-m_sequenceData(nullptr)
+m_skeletonData(nullptr)
 {
 
 }
@@ -278,12 +205,6 @@ void CMesh::onResourceDataSerializationFinished(ISharedResourceDataRef resourceD
         case E_RESOURCE_DATA_CLASS_SKELETON_DATA:
         {
             m_skeletonData = std::static_pointer_cast<CSkeletonData>(resourceData);
-        }
-            break;
-            
-        case E_RESOURCE_DATA_CLASS_SEQUENCE_DATA:
-        {
-            m_sequenceData = std::static_pointer_cast<CSequenceData>(resourceData);
         }
             break;
             
@@ -377,11 +298,6 @@ void CMesh::updateBounds(void)
 const CSharedSkeletonData CMesh::getSkeletonData(void) const
 {
     return IResource::isLoaded() ? m_skeletonData : nullptr;
-}
-
-const CSharedSequenceData CMesh::getSequenceData(void) const
-{
-    return IResource::isLoaded() ? m_sequenceData : nullptr;
 }
 
 void CMesh::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const

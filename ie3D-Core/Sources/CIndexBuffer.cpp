@@ -46,7 +46,7 @@ void CIndexBuffer::unlock(ui32 sizeToUse)
     assert(m_allocatedSize != 0);
     m_usedSize = sizeToUse > 0 && sizeToUse < m_allocatedSize ? sizeToUse : m_allocatedSize;
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_handle);
-    if(!m_isDataUploaded)
+    if(!m_isDataUploaded || m_usedSize == m_allocatedSize)
     {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * m_usedSize, m_data, m_mode);
         m_isDataUploaded = true;

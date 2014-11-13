@@ -54,56 +54,6 @@ public:
     void removeData(void);
 };
 
-class CFrameData final
-{
-private:
-    
-protected:
-    
-    std::vector<glm::quat> m_rotations;
-	std::vector<glm::vec3> m_positions;
-    std::vector<glm::vec3> m_scales;
-    
-public:
-    
-    CFrameData(const std::vector<glm::quat>& rotations,
-               const std::vector<glm::vec3>& positions,
-               const std::vector<glm::vec3>& scales);
-    
-    ~CFrameData(void);
-    
-    const glm::quat& getRotation(ui32 index) const;
-    const glm::vec3& getPosition(ui32 index) const;
-    const glm::vec3& getScale(ui32 index) const;
-};
-
-class CSequenceData final : public IResourceData
-{
-private:
-    
-protected:
-    
-    std::vector<CSharedFrameData> m_frames;
-    ui32 m_animationFPS;
-    std::string m_animationName;
-    
-public:
-    
-    CSequenceData(const std::string& animationName,
-                  ui32 animationFPS,
-                  const std::vector<CSharedFrameData>& frames);
-    
-    ~CSequenceData(void);
-    
-    ui32 getNumFrames(void) const;
-    
-    ui32 getAnimationFPS(void) const;
-    
-    const std::string getAnimationName(void) const;
-    
-    CSharedFrameData getFrame(ui32 index) const;
-};
-
 class CSkeletonData final : public IResourceData
 {
 private:
@@ -134,7 +84,6 @@ protected:
     
     CSharedMeshData m_meshData;
     CSharedSkeletonData m_skeletonData;
-    CSharedSequenceData m_sequenceData;
     
     CSharedVertexBuffer m_vertexBuffer;
     CSharedIndexBuffer m_indexBuffer;
@@ -168,7 +117,6 @@ public:
     void updateBounds(void);
     
     const CSharedSkeletonData getSkeletonData(void) const;
-    const CSharedSequenceData getSequenceData(void) const;
 
     void bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const;
     void draw(void) const;

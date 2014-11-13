@@ -59,11 +59,11 @@ void CMeshLoadingOperation::serialize(void)
         
         m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS && m_status != E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
         
-        std::string sequenceFilename = m_filename;
+        /*std::string sequenceFilename = m_filename;
         sequenceFilename.append("_anim");
         m_serializer = std::make_shared<CSequenceSerializer_SEQ>(sequenceFilename,
                                                                  m_resource);
-        m_serializer->serialize();
+        m_serializer->serialize();*/
     }
     else
     {
@@ -91,9 +91,9 @@ void CMeshLoadingOperation::commit(void)
         
         m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS && m_status != E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
         
-        m_commiter = std::make_shared<CSequenceCommiter_SEQ>(m_filename,
+        /*m_commiter = std::make_shared<CSequenceCommiter_SEQ>(m_filename,
                                                              m_resource);
-        m_commiter->commit();
+        m_commiter->commit();*/
     }
     else if(m_filename.find(".mdl_01") != std::string::npos)
     {

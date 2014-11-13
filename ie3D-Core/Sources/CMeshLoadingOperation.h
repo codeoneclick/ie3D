@@ -29,7 +29,6 @@ public:
     
     void serialize(void);
     void commit(void);
-    
 };
 
 #endif 

@@ -375,6 +375,12 @@
 		21D07238181DA6E60019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
 		21D07239181DA6EB0019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B217423E4D0063AB07 /* OpenGLES.framework */; };
 		21D0723A181DA6F10019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A420815E1733A9370004729E /* UIKit.framework */; };
+		21FB5C361A14F60400222BEE /* CAnimationSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21FB5C341A14F60400222BEE /* CAnimationSequence.cpp */; };
+		21FB5C371A14F60400222BEE /* CAnimationSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21FB5C341A14F60400222BEE /* CAnimationSequence.cpp */; };
+		21FB5C381A14F60400222BEE /* CAnimationSequence.h in Headers */ = {isa = PBXBuildFile; fileRef = 21FB5C351A14F60400222BEE /* CAnimationSequence.h */; };
+		21FB5C3B1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21FB5C391A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp */; };
+		21FB5C3C1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21FB5C391A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp */; };
+		21FB5C3D1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 21FB5C3A1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.h */; };
 		21FCC8E0199A95D400F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
 		21FCC8E1199A95D500F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
 		21FEEC991A029C70001E9ACB /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
@@ -545,6 +551,10 @@
 		21E4D58918658466006F84D6 /* IConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfiguration.h; path = Sources/IConfiguration.h; sourceTree = "<group>"; };
 		21E4D59A1865944D006F84D6 /* CConfigurationGameObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationGameObjects.cpp; path = Sources/CConfigurationGameObjects.cpp; sourceTree = "<group>"; };
 		21E4D59B1865944D006F84D6 /* CConfigurationGameObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationGameObjects.h; path = Sources/CConfigurationGameObjects.h; sourceTree = "<group>"; };
+		21FB5C341A14F60400222BEE /* CAnimationSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnimationSequence.cpp; path = Sources/CAnimationSequence.cpp; sourceTree = "<group>"; };
+		21FB5C351A14F60400222BEE /* CAnimationSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAnimationSequence.h; path = Sources/CAnimationSequence.h; sourceTree = "<group>"; };
+		21FB5C391A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnimationSequenceLoadingOperation.cpp; path = Sources/CAnimationSequenceLoadingOperation.cpp; sourceTree = "<group>"; };
+		21FB5C3A1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAnimationSequenceLoadingOperation.h; path = Sources/CAnimationSequenceLoadingOperation.h; sourceTree = "<group>"; };
 		21FEECEC1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueOperationTextureHandler.cpp; path = Sources/IRenderTechniqueOperationTextureHandler.cpp; sourceTree = "<group>"; };
 		21FEECED1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueOperationTextureHandler.h; path = Sources/IRenderTechniqueOperationTextureHandler.h; sourceTree = "<group>"; };
 		A40138C21754EF060056461B /* CConfigurationModelSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationModelSerializer.cpp; path = Sources/CConfigurationModelSerializer.cpp; sourceTree = "<group>"; };
@@ -1486,6 +1496,8 @@
 				A46A31FA174D1E4C0044643E /* CTextureLoadingOperation.cpp */,
 				210EFD1E1752677300DDB182 /* CMeshLoadingOperation.h */,
 				210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */,
+				21FB5C3A1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.h */,
+				21FB5C391A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -1513,6 +1525,8 @@
 				A46A3181174640BC0044643E /* CMaterial.cpp */,
 				212092AD19195CD000FFC8D4 /* CCubemapTexture.h */,
 				212092AC19195CD000FFC8D4 /* CCubemapTexture.cpp */,
+				21FB5C351A14F60400222BEE /* CAnimationSequence.h */,
+				21FB5C341A14F60400222BEE /* CAnimationSequence.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1847,6 +1861,7 @@
 				2191CE4C196EDBEF00CE2813 /* png.h in Headers */,
 				2191CE9F196EE95100CE2813 /* deflate.h in Headers */,
 				213396AC19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h in Headers */,
+				21FB5C381A14F60400222BEE /* CAnimationSequence.h in Headers */,
 				2191CE9C196EE95100CE2813 /* crc32.h in Headers */,
 				219B5E721A10F3E600986953 /* CBoundingBox.h in Headers */,
 				2191CEB4196EE95100CE2813 /* inftrees.h in Headers */,
@@ -1883,6 +1898,7 @@
 				2191CE54196EDBEF00CE2813 /* pnglibconf.h in Headers */,
 				2191CE4D196EDBEF00CE2813 /* pngconf.h in Headers */,
 				217334971964425B002B3F90 /* CRenderPipeline.h in Headers */,
+				21FB5C3D1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.h in Headers */,
 				2191CE78196EE0B000CE2813 /* CTextureCommiter_PNG.h in Headers */,
 				2191CE64196EDBEF00CE2813 /* pngstruct.h in Headers */,
 				213396A719D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h in Headers */,
@@ -1962,6 +1978,7 @@
 			files = (
 				21208F991906FB5F00FFC8D4 /* pugixml.cpp in Sources */,
 				21208F9A1906FB5F00FFC8D4 /* IInputContext.cpp in Sources */,
+				21FB5C3C1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp in Sources */,
 				2191CEB9196EE95100CE2813 /* uncompr.c in Sources */,
 				21208F9B1906FB5F00FFC8D4 /* CInputContext_ios.cpp in Sources */,
 				21208F9C1906FB5F00FFC8D4 /* CInputContext_osx.cpp in Sources */,
@@ -2010,6 +2027,7 @@
 				21208FBC1906FB5F00FFC8D4 /* IGameController.cpp in Sources */,
 				21208FBD1906FB5F00FFC8D4 /* IGameLoopHandler.cpp in Sources */,
 				21208FBE1906FB5F00FFC8D4 /* IGameObject.cpp in Sources */,
+				21FB5C371A14F60400222BEE /* CAnimationSequence.cpp in Sources */,
 				217334961964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				21208FBF1906FB5F00FFC8D4 /* CParticleEmitter.cpp in Sources */,
 				21208FC01906FB5F00FFC8D4 /* CModel.cpp in Sources */,
@@ -2131,6 +2149,7 @@
 			files = (
 				213265DD1906A4AF001C98F7 /* pugixml.cpp in Sources */,
 				213265DE1906A4AF001C98F7 /* IInputContext.cpp in Sources */,
+				21FB5C3B1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp in Sources */,
 				2191CEB8196EE95100CE2813 /* uncompr.c in Sources */,
 				213265DF1906A4AF001C98F7 /* CInputContext_ios.cpp in Sources */,
 				213265E01906A4AF001C98F7 /* CInputContext_osx.cpp in Sources */,
@@ -2179,6 +2198,7 @@
 				213266001906A4AF001C98F7 /* IGameController.cpp in Sources */,
 				213266011906A4AF001C98F7 /* IGameLoopHandler.cpp in Sources */,
 				213266021906A4AF001C98F7 /* IGameObject.cpp in Sources */,
+				21FB5C361A14F60400222BEE /* CAnimationSequence.cpp in Sources */,
 				217334951964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				213266031906A4AF001C98F7 /* CParticleEmitter.cpp in Sources */,
 				213266041906A4AF001C98F7 /* CModel.cpp in Sources */,

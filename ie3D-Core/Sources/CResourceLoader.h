@@ -43,6 +43,8 @@ public:
     
     CSharedMesh startMeshLoadingOperation(const std::string& filename);
     
+    CSharedAnimationSequence startAnimationSequenceLoadingOperation(const std::string& filename);
+    
 	void unloadResource(ISharedResourceRef resource);
 };
 

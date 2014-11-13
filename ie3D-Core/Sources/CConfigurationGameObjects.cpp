@@ -317,11 +317,45 @@ std::vector<ISharedConfiguration> CConfigurationGameObject::getMaterialsConfigur
     return iterator->second;
 }
 
+CConfigurationAnimation::CConfigurationAnimation(void) :
+IConfiguration(E_CONFIGURATION_CLASS_ANIMATION),
+kAnimationMainNode("animation"),
+kAnimationNameAttribute("name"),
+kAnimationFilenameAttribute("filename")
+{
+    
+}
+
+CConfigurationAnimation::~CConfigurationAnimation(void)
+{
+    
+}
+
+std::string CConfigurationAnimation::getName(void) const
+{
+    const auto& iterator = m_attributes.find(kAnimationMainNode + ":" +
+                                             kAnimationNameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getString();
+}
+
+std::string CConfigurationAnimation::getFilename(void) const
+{
+    const auto& iterator = m_attributes.find(kAnimationMainNode + ":" +
+                                             kAnimationFilenameAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getString();
+}
+
 CConfigurationModel::CConfigurationModel(void) :
 CConfigurationGameObject(E_CONFIGURATION_CLASS_MODEL),
 kModelMainNode("model"),
 kModelMeshFilenameAttribute("filename"),
-kModelMeshIsBatchingAttribute("is_batching")
+kModelMeshIsBatchingAttribute("is_batching"),
+kModelAnimationsConfigurationsNode("animations"),
+kModelAnimationConfigurationNode("animation")
 {
     
 }
@@ -347,6 +381,18 @@ bool CConfigurationModel::isBatching(void) const
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getScalar<bool>();
+}
+
+std::vector<ISharedConfiguration> CConfigurationModel::getAnimationsConfigurations(void) const
+{
+    const auto& iterator = m_configurations.find(kModelMainNode + ":" +
+                                                 kModelAnimationsConfigurationsNode);
+    if(iterator != m_configurations.end())
+    {
+        return iterator->second;
+    }
+    static std::vector<ISharedConfiguration> configurations;
+    return configurations;
 }
 
 CConfigurationSkyBox::CConfigurationSkyBox(void) :

@@ -39,6 +39,30 @@ ISharedConfiguration CConfigurationModelSerializer::serialize(const std::string&
                                                                   modelConfiguration->kModelMeshIsBatchingAttribute),
                                      std::make_shared<CConfigurationAttribute>(isBatching));
     
+
+    pugi::xml_node animationsNode = mainNode.child(modelConfiguration->kModelAnimationsConfigurationsNode.c_str());
+    for (pugi::xml_node animationNode = animationsNode.child(modelConfiguration->kModelAnimationConfigurationNode.c_str());
+         animationNode;
+         animationNode = animationNode.next_sibling(modelConfiguration->kModelAnimationConfigurationNode.c_str()))
+    {
+        std::shared_ptr<CConfigurationAnimation> animationConfiguration = std::make_shared<CConfigurationAnimation>();
+        
+        std::string filename = animationNode.attribute(animationConfiguration->kAnimationFilenameAttribute.c_str()).as_string();
+        animationConfiguration->setAttribute(getConfigurationAttributeKey(animationConfiguration->kAnimationMainNode,
+                                                                          animationConfiguration->kAnimationFilenameAttribute),
+                                             std::make_shared<CConfigurationAttribute>(filename));
+        
+        std::string name = animationNode.attribute(animationConfiguration->kAnimationNameAttribute.c_str()).as_string();
+        animationConfiguration->setAttribute(getConfigurationAttributeKey(animationConfiguration->kAnimationMainNode,
+                                                                          animationConfiguration->kAnimationNameAttribute),
+                                             std::make_shared<CConfigurationAttribute>(name));
+        
+        modelConfiguration->setConfiguration(getConfigurationAttributeKey(modelConfiguration->kModelMainNode,
+                                                                          modelConfiguration->kModelAnimationsConfigurationsNode),
+                                             animationConfiguration);
+    }
+
+    
     CConfigurationMaterialSerializer::serializeGameObjectMaterialsNode(modelConfiguration,
                                                                        mainNode);
     return modelConfiguration;

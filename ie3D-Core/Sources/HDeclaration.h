@@ -33,9 +33,9 @@ class CSkeleton;
 typedef std::shared_ptr<CSkeleton> CSharedSkeleton;
 typedef const CSharedSkeleton& CSharedSkeletonRef;
 
-class CSequence;
-typedef std::shared_ptr<CSequence> CSharedSequence;
-typedef const CSharedSequence& CSharedSequenceRef;
+class CAnimationSequence;
+typedef std::shared_ptr<CAnimationSequence> CSharedAnimationSequence;
+typedef const CSharedAnimationSequence& CSharedAnimationSequenceRef;
 
 class CResourceLoader;
 typedef std::shared_ptr<CResourceLoader> CSharedResourceLoader;
@@ -53,9 +53,10 @@ class CSequenceData;
 typedef std::shared_ptr<CSequenceData> CSharedSequenceData;
 typedef const CSharedSequenceData& CSharedSequenceDataRef;
 
-class CVertexBuffer;
 struct SVertexData;
 struct SAttributeVertex;
+
+class CVertexBuffer;
 typedef std::shared_ptr<CVertexBuffer> CSharedVertexBuffer;
 typedef const CSharedVertexBuffer& CSharedVertexBufferRef;
 

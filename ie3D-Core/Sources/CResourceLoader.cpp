@@ -10,9 +10,11 @@
 #include "CTexture.h"
 #include "CShader.h"
 #include "CMesh.h"
+#include "CAnimationSequence.h"
 #include "CTextureLoadingOperation.h"
 #include "CShaderLoadingOperation.h"
 #include "CMeshLoadingOperation.h"
+#include "CAnimationSequenceLoadingOperation.h"
 
 CResourceLoader::CResourceLoader(void)
 {
@@ -125,6 +127,25 @@ CSharedMesh CResourceLoader::startMeshLoadingOperation(const std::string& filena
         resource = std::make_shared<CMesh>(guid);
         ISharedResourceLoadingOperation operation = std::make_shared<CMeshLoadingOperation>(filename,
                                                                                             resource);
+        m_resourceContainer.insert(std::make_pair(guid, resource));
+        m_operationsQueue.insert(std::make_pair(guid, operation));
+    }
+    return resource;
+}
+
+CSharedAnimationSequence CResourceLoader::startAnimationSequenceLoadingOperation(const std::string& filename)
+{
+    std::string guid = filename;
+    CSharedAnimationSequence resource = nullptr;
+    if(m_resourceContainer.find(guid) != m_resourceContainer.end())
+    {
+        resource = std::static_pointer_cast<CAnimationSequence>(m_resourceContainer.find(guid)->second);
+    }
+    else
+    {
+        resource = std::make_shared<CAnimationSequence>(guid);
+        ISharedResourceLoadingOperation operation = std::make_shared<CAnimationSequenceLoadingOperation>(filename,
+                                                                                                         resource);
         m_resourceContainer.insert(std::make_pair(guid, resource));
         m_operationsQueue.insert(std::make_pair(guid, operation));
     }

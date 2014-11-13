@@ -4,6 +4,9 @@
         <material filename="material.model.reflection.xml"/>
         <material filename="material.model.refraction.xml"/>
         <material filename="material.model.shadowmap.xml"/>
-        <!--<material filename="material.model.normal.xml"/>-->
 	</materials>
+    <animations>
+        <animation name="model_01.MDL_anim" filename="model_01.MDL_anim"/>
+        <animation name="model_03.MDL_anim" filename="model_03.MDL_anim"/>
+    </animations>
 </model>
