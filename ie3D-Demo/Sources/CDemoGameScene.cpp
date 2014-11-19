@@ -149,18 +149,21 @@ void CDemoGameScene::update(f32 deltatime)
         case E_CHARACTER_CONTROLLER_MOVE_STATE_NONE:
         {
             m_characterController->decreaseSpeed();
+            m_model->setAnimation("model_03.MDL_anim");
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_FORWARD:
         {
             m_gameObjectNavigator->moveForward();
             m_characterController->increaseSpeed();
+            m_model->setAnimation("model_01.MDL_anim");
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_BACKWARD:
         {
             m_gameObjectNavigator->moveBackward();
             m_characterController->decreaseSpeed();
+            m_model->setAnimation("model_01.MDL_anim");
         }
             break;
         default:
@@ -197,7 +200,6 @@ void CDemoGameScene::update(f32 deltatime)
     angle += 0.033;
     m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
     m_globalLightSource->setLookAt(m_model->getPosition());
-    m_model->setAnimation("model_01.MDL_anim");
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

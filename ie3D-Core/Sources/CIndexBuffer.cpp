@@ -55,6 +55,8 @@ void CIndexBuffer::unlock(ui32 sizeToUse)
     {
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(ui16) * m_usedSize, m_data);
     }
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
 }
 
 void CIndexBuffer::bind(void) const

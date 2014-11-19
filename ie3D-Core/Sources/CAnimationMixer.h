@@ -27,6 +27,7 @@ protected:
     
     std::map<std::string, CSharedAnimationSequence> m_animationsSequences;
     glm::mat4x4* m_bonesTransformations;
+    bool m_isBinded;
     
     void bindPoseTransformation(void);
     bool tryBindCurrentAnimationSequence(void);

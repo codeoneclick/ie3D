@@ -15,7 +15,8 @@
 CAnimationMixer::CAnimationMixer(CSharedSkeletonDataRef skeletonData) :
 m_animationTime(0.0),
 m_currentAnimationSequence(nullptr),
-m_currentAnimationName("")
+m_currentAnimationName(""),
+m_isBinded(false)
 {
     assert(skeletonData != nullptr);
     m_skeleton = std::make_shared<CSkeleton>(skeletonData);
@@ -48,6 +49,7 @@ void CAnimationMixer::bindPoseTransformation(void)
     }
     m_skeleton->update();
     m_skeleton->bindPoseTransformation();
+    m_isBinded = true;
 }
 
 glm::mat4x4* CAnimationMixer::getTransformations(void) const
@@ -81,7 +83,10 @@ bool CAnimationMixer::tryBindCurrentAnimationSequence(void)
         if(iterator->second->isLoaded())
         {
             m_currentAnimationSequence = iterator->second;
-            CAnimationMixer::bindPoseTransformation();
+            if(!m_isBinded)
+            {
+                CAnimationMixer::bindPoseTransformation();
+            }
             return true;
         }
     }

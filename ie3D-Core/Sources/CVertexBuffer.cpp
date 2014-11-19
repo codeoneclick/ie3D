@@ -102,6 +102,8 @@ void CVertexBuffer::unlock(ui32 sizeToUse)
     {
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(SAttributeVertex) * m_usedSize, m_data);
     }
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
 }
 
 void CVertexBuffer::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
