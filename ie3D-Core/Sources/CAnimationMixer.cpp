@@ -125,7 +125,7 @@ void CAnimationMixer::update(f32 deltatime)
             
             for (ui32 i = 0; i < m_skeleton->getNumBones(); ++i)
             {
-                glm::vec3 position = glm::mix(frame_01->getPosition(i), frame_02->getPosition(i), interpolation );
+                glm::vec3 position = glm::mix(frame_01->getPosition(i), frame_02->getPosition(i), interpolation);
                 glm::quat rotation = glm::slerp(frame_01->getRotation(i), frame_02->getRotation(i), interpolation);
                 glm::vec3 scale = glm::mix(frame_01->getScale(i), frame_02->getScale(i), interpolation);
                 

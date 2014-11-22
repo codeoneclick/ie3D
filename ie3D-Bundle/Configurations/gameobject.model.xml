@@ -1,4 +1,4 @@
-<model filename="model_01.MDL" is_batching="0">
+<model filename="model_00.MDL" is_batching="0">
     <materials>
 		<material filename="material.model.common.xml"/>
         <material filename="material.model.reflection.xml"/>
