@@ -1,5 +1,6 @@
 <operation
     areDrawBoundingBoxes="0"
+    isOcclusionQueryEnabled="0"
     guid="render.operation.world.shadowmap"
     index="2"
     width="512"

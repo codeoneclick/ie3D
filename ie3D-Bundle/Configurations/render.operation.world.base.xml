@@ -1,5 +1,6 @@
 <operation
     areDrawBoundingBoxes="1"
+    isOcclusionQueryEnabled="1"
     guid="render.operation.world.base"
     index="4"
     width="1024"

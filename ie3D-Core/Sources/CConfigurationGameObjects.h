@@ -409,6 +409,7 @@ public:
     const std::string kWSRenderOperationIndexAttribute;
     const std::string kWSRenderOperationScreenWidthAttribute;
     const std::string kWSRenderOperationScreenHeightAttribute;
+    const std::string kWSRenderOperationIsOcclusionQueryEnabledAttribute;
     const std::string kWSRenderOperationClearColorRAttribute;
     const std::string kWSRenderOperationClearColorGAttribute;
     const std::string kWSRenderOperationClearColorBAttribute;
@@ -425,6 +426,7 @@ public:
     
     std::string getGuid(void) const;
     bool areDrawBoundingBoxes(void) const;
+    bool isOcclusionQueryEnabled(void) const;
     ui32 getIndex(void) const;
     
     ui32 getScreenWidth(void) const;

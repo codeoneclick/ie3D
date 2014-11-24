@@ -22,6 +22,7 @@ protected:
     std::map<ui32, std::set<ISharedRenderTechniqueHandler>> m_handlers;
     ui32 m_numTriangles;
     bool m_areDrawBoundingBoxes;
+    bool m_isOcclusionQueryEnabled;
     
 public:
     
@@ -34,6 +35,9 @@ public:
     ui32 getNumTriangles(void) const;
     
     void setAreDrawBoundingBoxes(bool value);
+    
+    void setIsOcclusionQueryEnabled(bool value);
+    bool isOcclusionQueryEnabled(void) const;
     
     void addRenderTechniqueHandler(ISharedRenderTechniqueHandlerRef handler);
     void removeRenderTechniqueHandler(ISharedRenderTechniqueHandlerRef handler);

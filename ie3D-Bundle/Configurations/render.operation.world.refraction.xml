@@ -1,5 +1,6 @@
 <operation
     areDrawBoundingBoxes="0"
+    isOcclusionQueryEnabled="0"
     guid="render.operation.world.refraction"
     index="1"
     width="512"

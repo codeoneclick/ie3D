@@ -1079,6 +1079,7 @@ kWSRenderOperationAreDrawBoundingBoxes("areDrawBoundingBoxes"),
 kWSRenderOperationIndexAttribute("index"),
 kWSRenderOperationScreenWidthAttribute("width"),
 kWSRenderOperationScreenHeightAttribute("height"),
+kWSRenderOperationIsOcclusionQueryEnabledAttribute("isOcclusionQueryEnabled"),
 kWSRenderOperationClearColorRAttribute("clear_color_r"),
 kWSRenderOperationClearColorGAttribute("clear_color_g"),
 kWSRenderOperationClearColorBAttribute("clear_color_b"),
@@ -1105,6 +1106,15 @@ bool CConfigurationWSRenderOperation::areDrawBoundingBoxes(void) const
 {
     const auto& iterator = m_attributes.find(kWSRenderOperationMainNode + ":" +
                                              kWSRenderOperationAreDrawBoundingBoxes);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<i8>();
+}
+
+bool CConfigurationWSRenderOperation::isOcclusionQueryEnabled(void) const
+{
+    const auto& iterator = m_attributes.find(kWSRenderOperationMainNode + ":" +
+                                             kWSRenderOperationIsOcclusionQueryEnabledAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getScalar<i8>();

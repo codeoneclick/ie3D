@@ -64,6 +64,7 @@ protected:
     
     bool m_occlusionQueryOngoing;
     bool m_occlusionQueryVisible;
+    ui32 m_occlusionQueryHandler;
     
     ui8 m_status;
     

@@ -149,6 +149,7 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
                                                      worldSpaceRenderOperationConfiguration->getIndex());
         worldSpaceRenderTechnique->setClearColor(worldSpaceRenderOperationConfiguration->getClearColor());
         worldSpaceRenderTechnique->setAreDrawBoundingBoxes(worldSpaceRenderOperationConfiguration->areDrawBoundingBoxes());
+        worldSpaceRenderTechnique->setIsOcclusionQueryEnabled(worldSpaceRenderOperationConfiguration->isOcclusionQueryEnabled());
         m_renderPipeline->addWorldSpaceRenderTechnique(worldSpaceRenderOperationConfiguration->getGuid(), worldSpaceRenderTechnique);
     }
     

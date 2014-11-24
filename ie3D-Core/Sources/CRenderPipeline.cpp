@@ -14,6 +14,7 @@
 #include "CTexture.h"
 #include "CBatchingMgr.h"
 #include "IRenderTechniqueOperationTextureHandler.h"
+#include "COcclusionQueryManager.h"
 
 CRenderPipeline::CRenderPipeline(ISharedGraphicsContextRef graphicContext, bool isOffscreen) :
 IRenderTechniqueImporter(graphicContext, isOffscreen),
@@ -57,6 +58,13 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         
         technique->bind();
         technique->draw();
+        
+        if(technique->isOcclusionQueryEnabled())
+        {
+            assert(m_occlusionQueryManager != nullptr);
+            m_occlusionQueryManager->update(iterator.first);
+        }
+        
         technique->unbind();
         
         auto techniqueOperationTextureHandlers = m_renderTechniqueOperationTextureHandlers.find(iterator.first);

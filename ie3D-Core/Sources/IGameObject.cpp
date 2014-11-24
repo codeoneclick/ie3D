@@ -43,6 +43,8 @@ m_materialBindImposer(nullptr),
 m_isNeedToRender(false),
 m_isNeedToUpdate(false),
 m_isBatching(false),
+m_occlusionQueryOngoing(false),
+m_occlusionQueryVisible(true),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
     m_materialBindImposer = [this](CSharedMaterialRef material)
@@ -55,6 +57,7 @@ m_status(E_LOADING_STATUS_UNLOADED)
     {
         bindBaseShaderUniforms(material);
     };
+    glGenQueries(1, &m_occlusionQueryHandler);
 }
 
 IGameObject::~IGameObject(void)
@@ -615,10 +618,28 @@ void IGameObject::enableUpdate(bool value)
 
 void IGameObject::onOcclusionQueryDraw(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
 {
+    m_occlusionQueryOngoing = true;
+    glBeginQuery(GL_SAMPLES_PASSED, m_occlusionQueryHandler);
     
+    glEndQuery(GL_SAMPLES_PASSED);
 }
 
 void IGameObject::onOcclusionQueryUpdate(void)
 {
-    
+    GLint available = GL_FALSE;
+    glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT_AVAILABLE, &available);
+    if (available == GL_TRUE)
+    {
+        m_occlusionQueryOngoing = false;
+        GLint samplesPassed = 0;
+        glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT, &samplesPassed);
+        if (samplesPassed > 0)
+        {
+            m_occlusionQueryVisible = true;
+        }
+        else
+        {
+            m_occlusionQueryVisible = false;
+        }
+    }
 }

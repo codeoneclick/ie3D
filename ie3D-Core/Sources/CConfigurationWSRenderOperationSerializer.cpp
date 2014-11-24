@@ -37,6 +37,11 @@ ISharedConfiguration CConfigurationWSRenderOperationSerializer::serialize(const 
     worldSpaceRenderOperationConfiguration->setAttribute(getConfigurationAttributeKey(worldSpaceRenderOperationConfiguration->kWSRenderOperationMainNode,
                                                                                       worldSpaceRenderOperationConfiguration->kWSRenderOperationAreDrawBoundingBoxes),
                                                          std::make_shared<CConfigurationAttribute>(areDrawBoundingBoxes));
+    
+    i8 isOcclusionQueryEnabled = static_cast<i8>(node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationIsOcclusionQueryEnabledAttribute.c_str()).as_bool());
+    worldSpaceRenderOperationConfiguration->setAttribute(getConfigurationAttributeKey(worldSpaceRenderOperationConfiguration->kWSRenderOperationMainNode,
+                                                                                      worldSpaceRenderOperationConfiguration->kWSRenderOperationIsOcclusionQueryEnabledAttribute),
+                                                         std::make_shared<CConfigurationAttribute>(isOcclusionQueryEnabled));
 
     ui32 index = node.attribute(worldSpaceRenderOperationConfiguration->kWSRenderOperationIndexAttribute.c_str()).as_uint();
     worldSpaceRenderOperationConfiguration->setAttribute(getConfigurationAttributeKey(worldSpaceRenderOperationConfiguration->kWSRenderOperationMainNode,

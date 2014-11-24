@@ -13,7 +13,8 @@
 CRenderTechniqueWorldSpace::CRenderTechniqueWorldSpace(ui32 frameWidth, ui32 frameHeight, const std::string& name, ui32 index) :
 IRenderTechniqueBase(frameWidth, frameHeight, name, index),
 m_numTriangles(0),
-m_areDrawBoundingBoxes(false)
+m_areDrawBoundingBoxes(false),
+m_isOcclusionQueryEnabled(false)
 {
     ui32 colorAttachmentId;
     glGenTextures(1, &colorAttachmentId);
@@ -76,6 +77,15 @@ CRenderTechniqueWorldSpace::~CRenderTechniqueWorldSpace(void)
 void CRenderTechniqueWorldSpace::setAreDrawBoundingBoxes(bool value)
 {
     m_areDrawBoundingBoxes = value;
+}
+
+void CRenderTechniqueWorldSpace::setIsOcclusionQueryEnabled(bool value)
+{
+    m_isOcclusionQueryEnabled = value;
+}
+bool CRenderTechniqueWorldSpace::isOcclusionQueryEnabled(void) const
+{
+    return m_isOcclusionQueryEnabled;
 }
 
 CSharedTexture CRenderTechniqueWorldSpace::getOperatingColorTexture(void) const
