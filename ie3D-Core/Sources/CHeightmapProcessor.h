@@ -20,9 +20,9 @@ private:
     struct SUncomressedVertex
     {
         glm::vec3 m_position;
-        glm::u8vec4 m_normal;
-        glm::u16vec2 m_texcoord;
-        glm::u8vec4 m_tangent;
+        glm::uint32 m_normal;
+        glm::uint32 m_texcoord;
+        glm::uint32 m_tangent;
         std::vector<ui32> m_containInFace;
         
         SUncomressedVertex(void) = default;
@@ -35,8 +35,8 @@ private:
     struct SCompressedVertex
     {
         glm::vec3 m_position;
-        glm::u8vec4 m_normal;
-        glm::u16vec2 m_texcoord;
+        glm::uint32 m_normal;
+        glm::uint32 m_texcoord;
         
         SCompressedVertex(void) = default;
         ~SCompressedVertex(void) = default;
@@ -44,7 +44,7 @@ private:
     
     struct SFace
     {
-        glm::u8vec4 m_normal;
+        glm::uint32 m_normal;
         std::array<ui32, 3> m_indexes;
         
         SFace(void) = default;
@@ -69,8 +69,8 @@ public:
     CHeightmapData(void);
     
     glm::vec3 getVertexPosition(ui32 i, ui32 j) const;
-    glm::u16vec2 getVertexTexcoord(ui32 i, ui32 j) const;
-    glm::u8vec4 getVertexNormal(ui32 i, ui32 j) const;
+    glm::uint32 getVertexTexcoord(ui32 i, ui32 j) const;
+    glm::uint32 getVertexNormal(ui32 i, ui32 j) const;
     
     void updateVertexesData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertexes);
     

@@ -58,11 +58,11 @@ void main(void)
     
     OUT_ShadowParameters = mBiasMatrix * MATRIX_GlobalLightProjection * MATRIX_GlobalLightView * vPosition;
     
-    OUT_TexCoord = (IN_TexCoord / 32767.0  - 1.0);
+    OUT_TexCoord = IN_TexCoord;
     OUT_ClipPlane = dot(vPosition.xyz, VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
     OUT_CameraPosition = VECTOR_CameraPosition;
     
-    OUT_Normal = IN_Normal.xyz / 127.0 - 1.0;
+    OUT_Normal = IN_Normal.xyz;
 
     vec3 vLightDirection = VECTOR_GlobalLightPosition - vPosition.xyz;
     OUT_LightDirection = normalize(vLightDirection);

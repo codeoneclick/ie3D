@@ -34,42 +34,6 @@ CVertexBuffer::~CVertexBuffer(void)
     delete[] m_data;
 }
 
-glm::u8vec4 CVertexBuffer::compressVec3(const glm::vec3& uncompressed)
-{
-    glm::vec3 normalized = glm::normalize(uncompressed);
-    glm::u8vec4 compressed;
-    compressed.x = static_cast<ui8>((normalized.x + 1) * 0.5 * 255);
-    compressed.y = static_cast<ui8>((normalized.y + 1) * 0.5 * 255);
-    compressed.z = static_cast<ui8>((normalized.z + 1) * 0.5 * 255);
-    compressed.w = 0;
-    return compressed;
-}
-
-glm::vec3 CVertexBuffer::uncompressU8Vec4(const glm::u8vec4& compressed)
-{
-    glm::vec3 uncompressed;
-    uncompressed.x = static_cast<f32>(compressed.x / (255 * 0.5) - 1);
-    uncompressed.y = static_cast<f32>(compressed.y / (255 * 0.5) - 1);
-    uncompressed.z = static_cast<f32>(compressed.z / (255 * 0.5) - 1);
-    return uncompressed;
-}
-
-glm::u16vec2 CVertexBuffer::compressVec2(const glm::vec2& uncompressed)
-{
-    glm::u16vec2 compressed;
-    compressed.x = static_cast<ui16>((uncompressed.x + 1) * 0.5 * 65535);
-    compressed.y = static_cast<ui16>((uncompressed.y + 1) * 0.5 * 65535);
-    return compressed;
-}
-
-glm::vec2 CVertexBuffer::uncompressU16Vec2(const glm::u16vec2& compressed)
-{
-    glm::vec2 uncompressed;
-    uncompressed.x = static_cast<f32>(compressed.x / (65535 * 0.5) - 1);
-    uncompressed.y = static_cast<f32>(compressed.y / (65535 * 0.5) - 1);
-    return uncompressed;
-}
-
 ui32 CVertexBuffer::getAllocatedSize(void) const
 {
     return m_allocatedSize;
@@ -96,12 +60,14 @@ void CVertexBuffer::unlock(ui32 sizeToUse)
     if(!m_isDataUploaded)
     {
         glBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
-        m_isDataUploaded = true;
+        //m_isDataUploaded = true;
     }
     else
     {
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(SAttributeVertex) * m_usedSize, m_data);
     }
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
 }
 
 void CVertexBuffer::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
@@ -122,21 +88,21 @@ void CVertexBuffer::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attribut
         if(attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD) >= 0)
         {
             glEnableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD));
-            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD), 2, GL_UNSIGNED_SHORT, GL_FALSE,
+            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD), 2, GL_UNSIGNED_SHORT, GL_TRUE,
                                   sizeof(SAttributeVertex),
                                   (GLvoid*)offsetof(SAttributeVertex, m_texcoord));
         }
         if(attributes.at(E_SHADER_ATTRIBUTE_NORMAL) >= 0)
         {
             glEnableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_NORMAL));
-            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_NORMAL), 4, GL_UNSIGNED_BYTE, GL_FALSE,
+            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_NORMAL), 4, GL_BYTE, GL_TRUE,
                                   sizeof(SAttributeVertex),
                                   (GLvoid*)offsetof(SAttributeVertex, m_normal));
         }
         if(attributes[E_SHADER_ATTRIBUTE_TANGENT] >= 0)
         {
             glEnableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_TANGENT));
-            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_TANGENT), 4, GL_UNSIGNED_BYTE, GL_FALSE,
+            glVertexAttribPointer(attributes.at(E_SHADER_ATTRIBUTE_TANGENT), 4, GL_BYTE, GL_TRUE,
                                   sizeof(SAttributeVertex),
                                   (GLvoid*)offsetof(SAttributeVertex, m_tangent));
         }
@@ -159,34 +125,33 @@ void CVertexBuffer::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attribut
 
 void CVertexBuffer::unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
 {
-    /*if(m_usedSize != 0)
+    if(m_usedSize != 0)
     {
-        assert(m_index >= 0 && m_index <= (k_NUM_REPLACEMENT_VERTEX_BUFFERS - 1));
-        glBindBuffer(GL_ARRAY_BUFFER, m_handles[m_index]);
-        if(attributes[E_SHADER_ATTRIBUTE_POSITION] >= 0)
+        glBindBuffer(GL_ARRAY_BUFFER, m_handle);
+        if(attributes.at(E_SHADER_ATTRIBUTE_POSITION) >= 0)
         {
-            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_POSITION]);
+            glDisableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_POSITION));
         }
-        if(attributes[E_SHADER_ATTRIBUTE_TEXCOORD] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD) >= 0)
         {
-            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TEXCOORD]);
+            glDisableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD));
         }
-        if(attributes[E_SHADER_ATTRIBUTE_NORMAL] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_NORMAL) >= 0)
         {
-            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_NORMAL]);
+            glDisableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_NORMAL));
         }
-        if(attributes[E_SHADER_ATTRIBUTE_TANGENT] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_TANGENT) >= 0)
         {
-            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_TANGENT]);
+            glDisableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_TANGENT));
         }
-        if(attributes[E_SHADER_ATTRIBUTE_COLOR] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_COLOR) >= 0)
         {
-            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_COLOR]);
+            glDisableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_COLOR));
         }
-        if(attributes[E_SHADER_ATTRIBUTE_EXTRA] >= 0)
+        if(attributes.at(E_SHADER_ATTRIBUTE_EXTRA) >= 0)
         {
-            glDisableVertexAttribArray(attributes[E_SHADER_ATTRIBUTE_EXTRA]);
+            glDisableVertexAttribArray(attributes.at(E_SHADER_ATTRIBUTE_EXTRA));
         }
         glBindBuffer(GL_ARRAY_BUFFER, NULL);
-    }*/
+    }
 }

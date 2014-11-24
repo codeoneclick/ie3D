@@ -63,8 +63,6 @@ void CMeshSerializer_MDL::serialize(void)
             filestream->read((char*)&bone.m_id, sizeof(i32));
             filestream->read((char*)&bone.m_weigth, sizeof(f32));
             vertexData[i].m_bones.push_back(bone);
-            std::cout<<"boneId: "<<bone.m_id<<std::endl;
-            std::cout<<"boneWeight: "<<bone.m_weigth<<std::endl;
         }
         
 		vertexData[i].m_position = position;

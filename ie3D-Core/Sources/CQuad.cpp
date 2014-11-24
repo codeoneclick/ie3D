@@ -13,20 +13,20 @@
 CQuad::CQuad(void) :
 m_vertexBuffer(nullptr),
 m_indexBuffer(nullptr),
-m_maxBound(glm::vec3(-4096.0, -4096.0, -4096.0)),
-m_minBound(glm::vec3( 4096.0,  4096.0,  4096.0))
+m_maxBound(glm::vec3(-4096.0f, -4096.0f, -4096.0f)),
+m_minBound(glm::vec3( 4096.0f,  4096.0f,  4096.0f))
 {
     m_vertexBuffer = std::make_shared<CVertexBuffer>(4, GL_STATIC_DRAW);
     SAttributeVertex* vertexData = m_vertexBuffer->lock();
 
-    vertexData[0].m_position = glm::vec3(-1.0, -1.0, 0.0);
-    vertexData[0].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0, 0.0));
-    vertexData[1].m_position = glm::vec3(-1.0, 1.0, 0.0);
-    vertexData[1].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0, 1.0));
-    vertexData[2].m_position = glm::vec3(1.0, -1.0, 0.0);
-    vertexData[2].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0, 0.0));
-    vertexData[3].m_position = glm::vec3(1.0, 1.0, 0.0);
-    vertexData[3].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0, 1.0));
+    vertexData[0].m_position = glm::vec3(-1.0f, -1.0f, 0.0f);
+    vertexData[0].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f, 0.0f));
+    vertexData[1].m_position = glm::vec3(-1.0f, 1.0f, 0.0f);
+    vertexData[1].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f, 1.0f));
+    vertexData[2].m_position = glm::vec3(1.0f, -1.0f, 0.0f);
+    vertexData[2].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f, 0.0f));
+    vertexData[3].m_position = glm::vec3(1.0f, 1.0f, 0.0f);
+    vertexData[3].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f, 1.0f));
     m_vertexBuffer->unlock();
     
     m_indexBuffer = std::make_shared<CIndexBuffer>(6, GL_STATIC_DRAW);

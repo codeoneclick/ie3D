@@ -124,24 +124,31 @@ void CBatch::unlock(void)
             
             SAttributeVertex* vertexData_01 = m_batchMesh->getVertexBuffer()->lock();
             SAttributeVertex* vertexData_02 = mesh->getVertexBuffer()->lock();
+            
+            glm::vec4 originalNormal = glm::vec4(0.0);
+            glm::vec4 originalTangent = glm::vec4(0.0);
+            
             for(ui32 j = 0; j < mesh->getNumVertices(); ++j)
             {
-                glm::vec3 position = glm::vec3(0.0f);
-                glm::vec3 normal = glm::vec3(0.0f);
-                glm::vec3 tangent = glm::vec3(0.0f);
+                glm::vec3 position = glm::vec3(0.0);
+                glm::vec4 normal = glm::vec4(0.0);
+                glm::vec4 tangent = glm::vec4(0.0);
+                
+                originalNormal = glm::unpackSnorm4x8(vertexData_02[j].m_normal);
+                originalTangent = glm::unpackSnorm4x8(vertexData_02[j].m_tangent);
                 
                 for(ui32 k = 0; k < 4; ++k)
                 {
                     f32 weight = static_cast<f32>(vertexData_02[j].m_extra[k]) / 255.0f;
                     position += glm::transform(vertexData_02[j].m_position, m_transformations[vertexData_02[j].m_color[k] + m_numLockedTransformations]) * weight;
-                    normal += glm::transform(CVertexBuffer::uncompressU8Vec4(vertexData_02[j].m_normal), m_transformations[vertexData_02[j].m_color[k] + m_numLockedTransformations]) * weight;
-                    tangent += glm::transform(CVertexBuffer::uncompressU8Vec4(vertexData_02[j].m_tangent), m_transformations[vertexData_02[j].m_color[k] + m_numLockedTransformations]) * weight;
+                    normal += glm::transform(originalNormal, m_transformations[vertexData_02[j].m_color[k] + m_numLockedTransformations]) * weight;
+                    tangent += glm::transform(originalTangent, m_transformations[vertexData_02[j].m_color[k] + m_numLockedTransformations]) * weight;
                 }
                 
                 vertexData_01[m_numLockedVertices + j] = vertexData_02[j];
                 vertexData_01[m_numLockedVertices + j].m_position = glm::transform(position, matrix);
-                vertexData_01[m_numLockedVertices + j].m_normal = CVertexBuffer::compressVec3(glm::transform(normal, matrix));
-                vertexData_01[m_numLockedVertices + j].m_tangent = CVertexBuffer::compressVec3(glm::transform(tangent, matrix));
+                vertexData_01[m_numLockedVertices + j].m_normal = glm::packSnorm4x8(glm::transform(normal, matrix));
+                vertexData_01[m_numLockedVertices + j].m_tangent = glm::packSnorm4x8(glm::transform(tangent, matrix));
             }
             
             m_numLockedVertices += mesh->getNumVertices();
@@ -167,16 +174,21 @@ void CBatch::unlock(void)
             
             SAttributeVertex* vertexData_01 = m_batchMesh->getVertexBuffer()->lock();
             SAttributeVertex* vertexData_02 = mesh->getVertexBuffer()->lock();
+            
+            glm::vec3 position = glm::vec3(0.0);
+            glm::vec4 normal = glm::vec4(0.0);
+            glm::vec4 tangent = glm::vec4(0.0);
+            
             for(ui32 j = 0; j < mesh->getNumVertices(); ++j)
             {
                 glm::vec3 position = vertexData_02[j].m_position;
-                glm::vec3 normal = CVertexBuffer::uncompressU8Vec4(vertexData_02[j].m_normal);
-                glm::vec3 tangent = CVertexBuffer::uncompressU8Vec4(vertexData_02[j].m_tangent);
+                glm::vec4 normal = glm::unpackSnorm4x8(vertexData_02[j].m_normal);
+                glm::vec4 tangent = glm::unpackSnorm4x8(vertexData_02[j].m_tangent);
                 
                 vertexData_01[m_numLockedVertices + j] = vertexData_02[j];
                 vertexData_01[m_numLockedVertices + j].m_position = glm::transform(position, matrix);
-                vertexData_01[m_numLockedVertices + j].m_normal = CVertexBuffer::compressVec3(glm::transform(normal, matrix));
-                vertexData_01[m_numLockedVertices + j].m_tangent = CVertexBuffer::compressVec3(glm::transform(tangent, matrix));
+                vertexData_01[m_numLockedVertices + j].m_normal = glm::packSnorm4x8(glm::transform(normal, matrix));
+                vertexData_01[m_numLockedVertices + j].m_tangent = glm::packSnorm4x8(glm::transform(tangent, matrix));
             }
             
             m_numLockedVertices += mesh->getNumVertices();

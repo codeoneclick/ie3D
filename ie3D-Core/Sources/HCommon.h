@@ -213,11 +213,17 @@ namespace glm
         return ((_from * scale0) + (value * scale1));
     };
     
-    inline glm::vec3 transform(const glm::vec3 &_vertex, const glm::mat4x4 &_matrix)
+    inline glm::vec3 transform(const glm::vec3 &vertex, const glm::mat4x4 &matrix)
     {
-        glm::vec4 value = _matrix * glm::vec4(_vertex, 1.0f);
-        return glm::vec3(value.x, value.y, value.z);
-    }
+        glm::vec4 result = matrix * glm::vec4(vertex.x, vertex.y, vertex.z, 1.0f);
+        return glm::vec3(result.x, result.y, result.z);
+    };
+    
+    inline glm::vec4 transform(const glm::vec4 &vertex, const glm::mat4x4 &matrix)
+    {
+        glm::vec4 result = matrix * glm::vec4(vertex.x, vertex.y, vertex.z, 1.0f);
+        return glm::vec4(result.x, result.y, result.z, vertex.w);
+    };
     
     struct ray
     {

@@ -46,7 +46,7 @@ void main(void)
     }
 
     gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
-    OUT_TexCoord = IN_TexCoord / 32767.0  - 1.0;
+    OUT_TexCoord = IN_TexCoord;
     
     OUT_ClipPlane = dot(vPosition.xyz, VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
 }

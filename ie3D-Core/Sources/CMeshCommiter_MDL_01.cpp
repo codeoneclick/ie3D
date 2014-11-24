@@ -36,9 +36,12 @@ void CMeshCommiter_MDL_01::commit(void)
     for(ui32 i = 0; i < mesh->getNumVertices(); ++i)
     {
         vertexData[i].m_position = mesh->getVertexData()[i].m_position;
-        vertexData[i].m_texcoord = CVertexBuffer::compressVec2(mesh->getVertexData()[i].m_texcoord);
-        vertexData[i].m_normal = CVertexBuffer::compressVec3(mesh->getVertexData()[i].m_normal);
-        vertexData[i].m_tangent = CVertexBuffer::compressVec3(mesh->getVertexData()[i].m_tangent);
+        glm::vec2 texcoord = mesh->getVertexData()[i].m_texcoord;
+        vertexData[i].m_texcoord = glm::packUnorm2x16(texcoord);
+        glm::vec3 normal = mesh->getVertexData()[i].m_normal;
+        vertexData[i].m_normal = glm::packSnorm4x8(glm::vec4(normal.x, normal.y, normal.z, 0.0));
+        glm::vec3 tangent = mesh->getVertexData()[i].m_tangent;
+        vertexData[i].m_tangent = glm::packSnorm4x8(glm::vec4(tangent.x, tangent.y, tangent.z, 0.0));
     }
     vertexBuffer->unlock();
     

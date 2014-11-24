@@ -77,6 +77,10 @@ const std::string CSequenceData::getAnimationName(void) const
 CSharedFrameData CSequenceData::getFrame(ui32 index) const
 {
     assert(m_frames.size() > index);
+    if(index >= m_frames.size())
+    {
+        index = static_cast<ui32>(m_frames.size()) - 1;
+    }
     return m_frames.at(index);
 }
 

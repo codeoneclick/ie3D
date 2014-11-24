@@ -49,12 +49,14 @@ void CIndexBuffer::unlock(ui32 sizeToUse)
     if(!m_isDataUploaded || m_usedSize == m_allocatedSize)
     {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * m_usedSize, m_data, m_mode);
-        m_isDataUploaded = true;
+        //m_isDataUploaded = true;
     }
     else
     {
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(ui16) * m_usedSize, m_data);
     }
+    GLenum error = glGetError();
+    assert(error == GL_NO_ERROR);
 }
 
 void CIndexBuffer::bind(void) const
@@ -67,9 +69,8 @@ void CIndexBuffer::bind(void) const
 
 void CIndexBuffer::unbind(void) const
 {
-    /*if(m_usedSize != 0)
+    if(m_usedSize != 0)
     {
-        assert(m_index >= 0 && m_index <= (K_NUM_REPLACEMENT_INDEX_BUFFERS - 1));
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    }*/
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+    }
 }

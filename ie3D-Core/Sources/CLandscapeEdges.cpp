@@ -99,25 +99,25 @@ void CLandscapeEdges::onConfigurationLoaded(ISharedConfigurationRef configuratio
     vertexData[14].m_position = glm::vec3(minBound.x,  maxBound.y,  maxBound.z);
     vertexData[15].m_position = glm::vec3(minBound.x,  maxBound.y,  minBound.z);
     
-    vertexData[0].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f, 1.0f / 4.0f));
-    vertexData[1].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f - 0.001f, 1.0f / 4.0f));
-    vertexData[2].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f - 0.001f, (1.0f / 4.0f) * 2.0f - 0.001f));
-    vertexData[3].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f, (1.0f / 4.0f) * 2.0f - 0.001f));
+    vertexData[0].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f, 1.0f / 4.0f));
+    vertexData[1].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f - 0.001f, 1.0f / 4.0f));
+    vertexData[2].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f - 0.001f, (1.0f / 4.0f) * 2.0f - 0.001f));
+    vertexData[3].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f, (1.0f / 4.0f) * 2.0f - 0.001f));
     
-    vertexData[4].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f - 0.001f, 0.0f));
-    vertexData[5].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f - 0.001f, 1.0f / 4.0f - 0.001f));
-    vertexData[6].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f, 1.0f / 4.0f - 0.001f));
-    vertexData[7].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f, 0.0f));
+    vertexData[4].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f - 0.001f, 0.0f));
+    vertexData[5].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f - 0.001f, 1.0f / 4.0f - 0.001f));
+    vertexData[6].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f, 1.0f / 4.0f - 0.001f));
+    vertexData[7].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f, 0.0f));
     
-    vertexData[8].m_texcoord =  CVertexBuffer::compressVec2(glm::vec2(0.0f, (1.0f / 4.0f) * 3.0f));
-    vertexData[9].m_texcoord =  CVertexBuffer::compressVec2(glm::vec2(1.0f - 0.001f, (1.0f / 4.0f) * 3.0f));
-    vertexData[10].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f - 0.001f, 1.0f - 0.001f));
-    vertexData[11].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f, 1.0f - 0.001f));
+    vertexData[8].m_texcoord =  glm::packUnorm2x16(glm::vec2(0.0f, (1.0f / 4.0f) * 3.0f));
+    vertexData[9].m_texcoord =  glm::packUnorm2x16(glm::vec2(1.0f - 0.001f, (1.0f / 4.0f) * 3.0f));
+    vertexData[10].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f - 0.001f, 1.0f - 0.001f));
+    vertexData[11].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f, 1.0f - 0.001f));
     
-    vertexData[12].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f, (1.0f / 4.0f) * 2.0f));
-    vertexData[13].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f - 0.001f, (1.0f / 4.0f) * 2.0f));
-    vertexData[14].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f - 0.001f, (1.0f / 4.0f) * 3.0f - 0.001f));
-    vertexData[15].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f, (1.0f / 4.0f) * 3.0f - 0.001f));
+    vertexData[12].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f, (1.0f / 4.0f) * 2.0f));
+    vertexData[13].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f - 0.001f, (1.0f / 4.0f) * 2.0f));
+    vertexData[14].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f - 0.001f, (1.0f / 4.0f) * 3.0f - 0.001f));
+    vertexData[15].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f, (1.0f / 4.0f) * 3.0f - 0.001f));
     
     vertexBuffer->unlock();
     

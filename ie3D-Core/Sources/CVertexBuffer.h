@@ -29,12 +29,12 @@ struct SVertexData
 
 struct SAttributeVertex
 {
-    glm::vec3    m_position;
-    glm::u16vec2 m_texcoord;
-    glm::u8vec4  m_normal;
-    glm::u8vec4  m_tangent;
-    glm::u8vec4  m_color;
-    glm::u8vec4  m_extra;
+    glm::vec3 m_position;
+    glm::uint32 m_texcoord;
+    glm::uint32 m_normal;
+    glm::uint32 m_tangent;
+    glm::u8vec4 m_color;
+    glm::u8vec4 m_extra;
 };
 
 class CVertexBuffer final : public IResourceData
@@ -57,12 +57,6 @@ public:
     
     CVertexBuffer(ui32 sizeToAllocate, GLenum mode);
     ~CVertexBuffer(void);
-    
-    static glm::u8vec4 compressVec3(const glm::vec3& uncompressed);
-    static glm::vec3 uncompressU8Vec4(const glm::u8vec4& compressed);
-    
-    static glm::u16vec2 compressVec2(const glm::vec2& uncompressed);
-    static glm::vec2 uncompressU16Vec2(const glm::u16vec2& compressed);
     
     ui32 getAllocatedSize(void) const;
     ui32 getUsedSize(void) const;

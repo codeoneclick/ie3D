@@ -12,10 +12,16 @@
 #include "CSkeleton.h"
 #include "CAnimationSequence.h"
 
+#define kBlendingAnimationTimeinterval 0.25f
+#define kBlendingAnimationInterpolationMultiplier 1.0f / kBlendingAnimationTimeinterval
+
 CAnimationMixer::CAnimationMixer(CSharedSkeletonDataRef skeletonData) :
-m_animationTime(0.0),
+m_animationTime(0.0f),
+m_blendingAnimationTimeinterval(0.0f),
 m_currentAnimationSequence(nullptr),
-m_currentAnimationName("")
+m_previousAnimationSequence(nullptr),
+m_currentAnimationName(""),
+m_isBinded(false)
 {
     assert(skeletonData != nullptr);
     m_skeleton = std::make_shared<CSkeleton>(skeletonData);
@@ -48,6 +54,7 @@ void CAnimationMixer::bindPoseTransformation(void)
     }
     m_skeleton->update();
     m_skeleton->bindPoseTransformation();
+    m_isBinded = true;
 }
 
 glm::mat4x4* CAnimationMixer::getTransformations(void) const
@@ -81,7 +88,10 @@ bool CAnimationMixer::tryBindCurrentAnimationSequence(void)
         if(iterator->second->isLoaded())
         {
             m_currentAnimationSequence = iterator->second;
-            CAnimationMixer::bindPoseTransformation();
+            if(!m_isBinded)
+            {
+                CAnimationMixer::bindPoseTransformation();
+            }
             return true;
         }
     }
@@ -93,6 +103,11 @@ void CAnimationMixer::setAnimation(const std::string& name)
     if(m_currentAnimationName != name)
     {
         m_currentAnimationName = name;
+        
+        m_previousAnimationSequence = m_currentAnimationSequence;
+        m_blendingAnimationFrame = m_currentAnimationFrame;
+        m_blendingAnimationTimeinterval = kBlendingAnimationTimeinterval;
+        
         m_currentAnimationSequence = nullptr;
         CAnimationMixer::tryBindCurrentAnimationSequence();
     }
@@ -114,13 +129,46 @@ void CAnimationMixer::update(f32 deltatime)
         {
             m_animationTime += deltatime;
             
+            bool isBlending = false;
+            if(m_blendingAnimationTimeinterval > 0.0 && m_previousAnimationSequence != nullptr)
+            {
+                m_blendingAnimationTimeinterval -= deltatime;
+                isBlending = true;
+            }
+            else if(m_previousAnimationSequence != nullptr)
+            {
+                m_previousAnimationSequence = nullptr;
+                m_animationTime = 0.0;
+            }
+            else
+            {
+                m_previousAnimationSequence = nullptr;
+            }
+            
             f32 animationDeltaTime = m_animationTime * m_currentAnimationSequence->getAnimationFPS();
             i32 floorAnimationDeltaTime = static_cast<i32>(floorf(animationDeltaTime));
-            i32 frameIndex_01 = floorAnimationDeltaTime % m_currentAnimationSequence->getNumFrames();
-            i32 frameIndex_02 = (frameIndex_01 + 1) % m_currentAnimationSequence->getNumFrames();
-            f32 interpolation = animationDeltaTime - static_cast<f32>(floorAnimationDeltaTime);
             
-            CSharedFrameData frame_01 = m_currentAnimationSequence->getFrame(frameIndex_01);
+            i32 frameIndex_01 = 0;
+            i32 frameIndex_02 = 0;
+            f32 interpolation = 0.0f;
+            
+            if(isBlending)
+            {
+                frameIndex_01 = m_blendingAnimationFrame;
+                frameIndex_02 = 0;
+                interpolation = 1.0f - m_blendingAnimationTimeinterval * kBlendingAnimationInterpolationMultiplier;
+                m_currentAnimationFrame = 0;
+            }
+            else
+            {
+                frameIndex_01 = floorAnimationDeltaTime % m_currentAnimationSequence->getNumFrames();
+                frameIndex_02 = (frameIndex_01 + 1) % m_currentAnimationSequence->getNumFrames();
+                m_currentAnimationFrame = frameIndex_02;
+                interpolation = animationDeltaTime - static_cast<f32>(floorAnimationDeltaTime);
+            }
+            
+            CSharedFrameData frame_01 = isBlending ? m_previousAnimationSequence->getFrame(frameIndex_01) :
+            m_currentAnimationSequence->getFrame(frameIndex_01);
             CSharedFrameData frame_02 = m_currentAnimationSequence->getFrame(frameIndex_02);
             
             for (ui32 i = 0; i < m_skeleton->getNumBones(); ++i)

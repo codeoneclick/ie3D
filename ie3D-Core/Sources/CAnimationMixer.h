@@ -19,14 +19,21 @@ private:
 protected:
     
     f32 m_animationTime;
+    f32 m_blendingAnimationTimeinterval;
     
     std::string m_currentAnimationName;
+    
+    ui32 m_currentAnimationFrame;
+    ui32 m_blendingAnimationFrame;
+    
+    CSharedAnimationSequence m_previousAnimationSequence;
     CSharedAnimationSequence m_currentAnimationSequence;
     
     CSharedSkeleton m_skeleton;
     
     std::map<std::string, CSharedAnimationSequence> m_animationsSequences;
     glm::mat4x4* m_bonesTransformations;
+    bool m_isBinded;
     
     void bindPoseTransformation(void);
     bool tryBindCurrentAnimationSequence(void);

@@ -148,10 +148,10 @@ void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configurati
         m_particles[i].m_size = glm::vec2(0.0f, 0.0f);
         m_particles[i].m_color = glm::u8vec4(0, 0, 0, 0);
         
-        vertexData[i * 4 + 0].m_texcoord = CVertexBuffer::compressVec2(glm::vec2( 0.0f,  0.0f));
-        vertexData[i * 4 + 1].m_texcoord = CVertexBuffer::compressVec2(glm::vec2( 1.0f,  0.0f));
-        vertexData[i * 4 + 2].m_texcoord = CVertexBuffer::compressVec2(glm::vec2( 1.0f,  1.0f));
-        vertexData[i * 4 + 3].m_texcoord = CVertexBuffer::compressVec2(glm::vec2( 0.0f,  1.0f));
+        vertexData[i * 4 + 0].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f,  0.0f));
+        vertexData[i * 4 + 1].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f,  0.0f));
+        vertexData[i * 4 + 2].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f,  1.0f));
+        vertexData[i * 4 + 3].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f,  1.0f));
     }
     vertexBuffer->unlock();
     

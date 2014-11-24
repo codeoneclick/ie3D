@@ -76,15 +76,15 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
             vertexData[index * 4 + 2].m_extra = glm::u8vec4(i == 0 && j == 0 ? 1 : 0, i == 0 && j == 0 ? 1 : 2, 0, 0);
             vertexData[index * 4 + 3].m_extra = glm::u8vec4(i == 0 && j == 0 ? 1 : 0, i == 0 && j == 0 ? 1 : 2, 0, 0);
             
-            vertexData[index * 4 + 0].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
-            vertexData[index * 4 + 1].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
-            vertexData[index * 4 + 2].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
-            vertexData[index * 4 + 3].m_normal = CVertexBuffer::compressVec3(glm::vec3(0.0,  1.0,  0.0));
+            vertexData[index * 4 + 0].m_normal = glm::packSnorm4x8(glm::vec4(0.0f, 1.0f, 0.0f, 0.0f));
+            vertexData[index * 4 + 1].m_normal = glm::packSnorm4x8(glm::vec4(0.0f, 1.0f, 0.0f, 0.0f));
+            vertexData[index * 4 + 2].m_normal = glm::packSnorm4x8(glm::vec4(0.0f, 1.0f, 0.0f, 0.0f));
+            vertexData[index * 4 + 3].m_normal = glm::packSnorm4x8(glm::vec4(0.0f, 1.0f, 0.0f, 0.0f));
             
-            vertexData[index * 4 + 0].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f,  0.0f));
-            vertexData[index * 4 + 1].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f,  0.0f));
-            vertexData[index * 4 + 2].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(1.0f,  1.0f));
-            vertexData[index * 4 + 3].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(0.0f,  1.0f));
+            vertexData[index * 4 + 0].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f,  0.0f));
+            vertexData[index * 4 + 1].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f,  0.0f));
+            vertexData[index * 4 + 2].m_texcoord = glm::packUnorm2x16(glm::vec2(1.0f,  1.0f));
+            vertexData[index * 4 + 3].m_texcoord = glm::packUnorm2x16(glm::vec2(0.0f,  1.0f));
             
             index++;
         }

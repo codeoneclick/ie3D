@@ -78,15 +78,15 @@ m_minHeight(FLT_MAX)
             m_uncopressedVertexes[i + j * m_sizeZ].m_position = glm::vec3(static_cast<f32>(i),
                                                                           (static_cast<f32>(data[(i + j * m_sizeZ) * 4 + 1] - 64) / 255) * 32.0,
                                                                           static_cast<f32>(j));
-            m_uncopressedVertexes[i + j * m_sizeZ].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<ui32>(i) /
-                                                                                                      static_cast<f32>(m_sizeX),
-                                                                                                      static_cast<ui32>(j) /
-                                                                                                      static_cast<f32>(m_sizeZ)));
+            m_uncopressedVertexes[i + j * m_sizeZ].m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<ui32>(i) /
+                                                                                             static_cast<f32>(m_sizeX),
+                                                                                             static_cast<ui32>(j) /
+                                                                                             static_cast<f32>(m_sizeZ)));
             m_maxHeight = m_maxHeight < data[i + j * m_sizeZ] ? data[i + j * m_sizeZ] : m_maxHeight;
             m_minHeight = m_minHeight > data[i + j * m_sizeZ] ? data[i + j * m_sizeZ] : m_minHeight;
         }
     }
-
+    
     ui32 index = 0;
     for(ui32 i = 0; i < (m_sizeX - 1); ++i)
     {
@@ -108,8 +108,7 @@ m_minHeight(FLT_MAX)
             glm::vec3 normal = glm::cross(edge_01, edge_02);
             f32 sin = glm::length(normal) / (glm::length(edge_01) * glm::length(edge_02));
             normal = glm::normalize(normal) * asinf(sin);
-            glm::u8vec4 compressedNormal = CVertexBuffer::compressVec3(normal);
-            face.m_normal = compressedNormal;
+            face.m_normal = glm::packSnorm4x8(glm::vec4(normal.x, normal.y, normal.z, 0.0f));
             
             m_faces[index] = face;
             index++;
@@ -129,8 +128,7 @@ m_minHeight(FLT_MAX)
             normal = glm::cross(edge_01, edge_02);
             sin = glm::length(normal) / (glm::length(edge_01) * glm::length(edge_02));
             normal = glm::normalize(normal) * asinf(sin);
-            compressedNormal = CVertexBuffer::compressVec3(normal);
-            face.m_normal = compressedNormal;
+            face.m_normal = glm::packSnorm4x8(glm::vec4(normal.x, normal.y, normal.z, 0.0f));;
             
             m_faces[index] = face;
             index++;
@@ -141,13 +139,13 @@ m_minHeight(FLT_MAX)
     {
         SUncomressedVertex vertex = m_uncopressedVertexes.at(i);
         assert(vertex.m_containInFace.size() != 0);
-        glm::vec3 normal = CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(0)).m_normal);
+        glm::vec4 normal = glm::unpackSnorm4x8(m_faces.at(vertex.m_containInFace.at(0)).m_normal);
         for(ui32 j = 1; j < vertex.m_containInFace.size(); ++j)
         {
-            normal += CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(j)).m_normal);
+            normal += glm::unpackSnorm4x8(m_faces.at(vertex.m_containInFace.at(j)).m_normal);
         }
         normal = glm::normalize(normal);
-        m_uncopressedVertexes.at(i).m_normal = CVertexBuffer::compressVec3(normal);
+        m_uncopressedVertexes.at(i).m_normal = glm::packSnorm4x8(normal);
     }
     
 #if !defined(__EDITOR__)
@@ -175,12 +173,12 @@ glm::vec3 CHeightmapData::getVertexPosition(ui32 i, ui32 j) const
     return m_compressedVertexes[i + j * m_sizeX].m_position;
 }
 
-glm::u16vec2 CHeightmapData::getVertexTexcoord(ui32 i, ui32 j) const
+glm::uint32 CHeightmapData::getVertexTexcoord(ui32 i, ui32 j) const
 {
     return m_compressedVertexes[i + j * m_sizeX].m_texcoord;
 }
 
-glm::u8vec4 CHeightmapData::getVertexNormal(ui32 i, ui32 j) const
+glm::uint32 CHeightmapData::getVertexNormal(ui32 i, ui32 j) const
 {
     return m_compressedVertexes[i + j * m_sizeX].m_normal;
 }
@@ -216,8 +214,7 @@ void CHeightmapData::updateVertexesData(const std::vector<std::tuple<ui32, ui32,
             glm::vec3 normal = glm::cross(edge_01, edge_02);
             f32 sin = glm::length(normal) / (glm::length(edge_01) * glm::length(edge_02));
             normal = glm::normalize(normal) * asinf(sin);
-            glm::u8vec4 compressedNormal = CVertexBuffer::compressVec3(normal);
-            m_faces.at(index).m_normal = compressedNormal;
+            m_faces.at(index).m_normal = glm::packSnorm4x8(glm::vec4(normal.x, normal.y, normal.z, 0.0));
         }
     }
     
@@ -227,13 +224,13 @@ void CHeightmapData::updateVertexesData(const std::vector<std::tuple<ui32, ui32,
         ui32 indexZ = std::get<1>(modifiedVertexes.at(i));
         SUncomressedVertex vertex = m_uncopressedVertexes.at(indexX + indexZ * m_sizeX);
         assert(vertex.m_containInFace.size() != 0);
-        glm::vec3 normal = CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(0)).m_normal);
+        glm::vec4 normal = glm::unpackSnorm4x8(m_faces.at(vertex.m_containInFace.at(0)).m_normal);
         for(ui32 j = 1; j < vertex.m_containInFace.size(); ++j)
         {
-            normal += CVertexBuffer::uncompressU8Vec4(m_faces.at(vertex.m_containInFace.at(j)).m_normal);
+            normal += glm::unpackSnorm4x8(m_faces.at(vertex.m_containInFace.at(j)).m_normal);
         }
         normal = glm::normalize(normal);
-        m_uncopressedVertexes.at(indexX + indexZ * m_sizeX).m_normal = CVertexBuffer::compressVec3(normal);
+        m_uncopressedVertexes.at(indexX + indexZ * m_sizeX).m_normal = glm::packSnorm4x8(normal);
         
         m_compressedVertexes.at(indexX + indexZ * m_sizeX).m_position = m_uncopressedVertexes.at(indexX + indexZ * m_sizeX).m_position;
         m_compressedVertexes.at(indexX + indexZ * m_sizeX).m_normal = m_uncopressedVertexes.at(indexX + indexZ * m_sizeX).m_normal;
@@ -613,7 +610,8 @@ void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture, bool
             {
                 data[i + j * m_heightmapData->getSizeZ()] = TO_RGB565(255, 0, 0);
                 f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0, j));
-                f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), CVertexBuffer::uncompressU8Vec4(m_heightmapData->getVertexNormal(i, j)));
+                glm::vec4 normal = glm::unpackSnorm4x8(m_heightmapData->getVertexNormal(i, j));
+                f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), glm::vec3(normal.x, normal.y, normal.z));
                 value = glm::degrees(acosf(value));
                 assert(value >= 0.0);
                 if(height >= 0.25 && value > 45.0)
@@ -652,7 +650,8 @@ void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture, bool
             {
                 data[i + j * subWidth] = TO_RGB565(255, 0, 0);
                 f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i + offsetX , 0.0, j + offsetY));
-                f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), CVertexBuffer::uncompressU8Vec4(m_heightmapData->getVertexNormal(i + offsetX, j + offsetY)));
+                glm::vec4 normal = glm::unpackSnorm4x8(m_heightmapData->getVertexNormal(i + offsetX, j + offsetY));
+                f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), glm::vec3(normal.x, normal.y, normal.z));
                 value = glm::degrees(acosf(value));
                 assert(value >= 0.0);
                 if(height >= 0.25 && value > 45.0)
@@ -820,11 +819,10 @@ void CHeightmapProcessor::writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffse
             
             vertexData[index].m_position = m_heightmapData->getVertexPosition(indexXOffset, indexZOffset);
             
-            vertexData[index].m_texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<i32>(vertexData[index].m_position.x) /
-                                                                                 static_cast<f32>(m_heightmapData->getSizeX()),
-                                                                                 
-                                                                                 static_cast<i32>(vertexData[index].m_position.z) /
-                                                                                 static_cast<f32>(m_heightmapData->getSizeZ())));
+            vertexData[index].m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<i32>(vertexData[index].m_position.x) /
+                                                                        static_cast<f32>(m_heightmapData->getSizeX()),                                                                        
+                                                                        static_cast<i32>(vertexData[index].m_position.z) /
+                                                                        static_cast<f32>(m_heightmapData->getSizeZ())));
             
             vertexData[index].m_normal = m_heightmapData->getVertexNormal(indexXOffset, indexZOffset);
             ++index;
@@ -1153,12 +1151,12 @@ void CHeightmapProcessor::generateTangentSpace(CSharedHeightmapDataRef heightmap
         glm::vec3 v1 = vertexData[indexData[i + 0]].m_position;
         glm::vec3 v2 = vertexData[indexData[i + 1]].m_position;
         glm::vec3 v3 = vertexData[indexData[i + 2]].m_position;
-        f32 s1 = CVertexBuffer::uncompressU16Vec2(vertexData[indexData[i + 0]].m_texcoord).x;
-        f32 t1 = CVertexBuffer::uncompressU16Vec2(vertexData[indexData[i + 0]].m_texcoord).y;
-        f32 s2 = CVertexBuffer::uncompressU16Vec2(vertexData[indexData[i + 1]].m_texcoord).x;
-        f32 t2 = CVertexBuffer::uncompressU16Vec2(vertexData[indexData[i + 1]].m_texcoord).y;
-        f32 s3 = CVertexBuffer::uncompressU16Vec2(vertexData[indexData[i + 2]].m_texcoord).x;
-        f32 t3 = CVertexBuffer::uncompressU16Vec2(vertexData[indexData[i + 2]].m_texcoord).y;
+        f32 s1 = glm::unpackUnorm2x16(vertexData[indexData[i + 0]].m_texcoord).x;
+        f32 t1 = glm::unpackUnorm2x16(vertexData[indexData[i + 0]].m_texcoord).y;
+        f32 s2 = glm::unpackUnorm2x16(vertexData[indexData[i + 1]].m_texcoord).x;
+        f32 t2 = glm::unpackUnorm2x16(vertexData[indexData[i + 1]].m_texcoord).y;
+        f32 s3 = glm::unpackUnorm2x16(vertexData[indexData[i + 2]].m_texcoord).x;
+        f32 t3 = glm::unpackUnorm2x16(vertexData[indexData[i + 2]].m_texcoord).y;
         
         glm::vec3 t, b;
         CHeightmapProcessor::getTriangleBasis(v1, v2, v3, s1, t1, s2, t2, s3, t3, t, b);
@@ -1178,21 +1176,17 @@ void CHeightmapProcessor::generateTangentSpace(CSharedHeightmapDataRef heightmap
             }
         }
         
-        glm::vec3 tangentRes(0.0f, 0.0f, 0.0f);
-        glm::vec3 binormalRes(0.0f, 0.0f, 0.0f);
+        glm::vec3 tangent(0.0f);
+        glm::vec3 binormal(0.0f);
         for (ui32 j = 0; j < lrt.size(); j++)
         {
-            tangentRes += lrt[j];
-            binormalRes += lrb[j];
+            tangent += lrt[j];
         }
-        tangentRes /= static_cast<f32>(lrt.size());
-        binormalRes /= static_cast<f32>(lrb.size());
+        tangent /= static_cast<f32>(lrt.size());
         
-        glm::vec3 normal =  CVertexBuffer::uncompressU8Vec4(vertexData[i].m_normal);
-        tangentRes = CHeightmapProcessor::ortogonalize(normal, tangentRes);
-        binormalRes = CHeightmapProcessor::ortogonalize(normal, binormalRes);
-        
-        vertexData[i].m_tangent = CVertexBuffer::compressVec3(tangentRes);
+        glm::vec4 normal = glm::unpackSnorm4x8(vertexData[i].m_normal);
+        tangent = CHeightmapProcessor::ortogonalize(glm::vec3(normal.x, normal.y, normal.z), tangent);
+        vertexData[i].m_tangent = glm::packSnorm4x8(glm::vec4(tangent.x, tangent.y, tangent.z, 0.0));
     }
 }
 
