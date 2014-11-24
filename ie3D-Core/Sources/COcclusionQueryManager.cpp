@@ -42,7 +42,7 @@ COcclusionQueryManager::~COcclusionQueryManager(void)
     
 }
 
-void COcclusionQueryManager::addToOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string& techniqueName)
+void COcclusionQueryManager::addToOcluddingQuery(const std::string& techniqueName, ISharedOcclusionQueryHandlerRef handler)
 {
     auto iterator = m_occludingGeometry.find(techniqueName);
     if(iterator == m_occludingGeometry.end())
@@ -52,10 +52,10 @@ void COcclusionQueryManager::addToOcluddingQuery(ISharedOcclusionQueryHandlerRef
         iterator = m_occludingGeometry.find(techniqueName);
     }
     assert(iterator != m_occludingGeometry.end());
-    iterator->second.insert(gameObject);
+    iterator->second.insert(handler);
 }
 
-void COcclusionQueryManager::removeFromOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string &techniqueName)
+void COcclusionQueryManager::removeFromOcluddingQuery(const std::string &techniqueName, ISharedOcclusionQueryHandlerRef handler)
 {
     
 }

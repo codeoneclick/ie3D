@@ -255,14 +255,14 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     delete[] rawdata;
 }
 
-void IRenderTechniqueImporter::addToOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string& techniqueName)
+void IRenderTechniqueImporter::addToOcluddingQuery(const std::string& techniqueName, ISharedOcclusionQueryHandlerRef handler)
 {
     assert(m_occlusionQueryManager != nullptr);
-    m_occlusionQueryManager->addToOcluddingQuery(gameObject, techniqueName);
+    m_occlusionQueryManager->addToOcluddingQuery(techniqueName, handler);
 }
 
-void IRenderTechniqueImporter::removeFromOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string& techniqueName)
+void IRenderTechniqueImporter::removeFromOcluddingQuery(const std::string& techniqueName, ISharedOcclusionQueryHandlerRef handler)
 {
     assert(m_occlusionQueryManager != nullptr);
-    m_occlusionQueryManager->removeFromOcluddingQuery(gameObject, techniqueName);
+    m_occlusionQueryManager->removeFromOcluddingQuery(techniqueName, handler);
 }

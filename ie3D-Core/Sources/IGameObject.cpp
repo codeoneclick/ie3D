@@ -595,6 +595,9 @@ void IGameObject::enableRender(bool value)
 		{
 			value == true ? m_renderTechniqueImporter->addRenderTechniqueHandler(iterator.first, shared_from_this()) :
 			m_renderTechniqueImporter->removeRenderTechniqueHandler(iterator.first, shared_from_this());
+            
+            value == true ? m_renderTechniqueImporter->addToOcluddingQuery(iterator.first, shared_from_this()) :
+            m_renderTechniqueImporter->removeRenderTechniqueHandler(iterator.first, shared_from_this());
 		}
     }
 	m_isNeedToRender = value;

@@ -27,8 +27,8 @@ public:
     COcclusionQueryManager(void);
     ~COcclusionQueryManager(void);
     
-    void addToOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string& techniqueName);
-    void removeFromOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string& techniqueName);
+    void addToOcluddingQuery(const std::string& techniqueName, ISharedOcclusionQueryHandlerRef handler);
+    void removeFromOcluddingQuery(const std::string& techniqueName, ISharedOcclusionQueryHandlerRef hadnler);
     
     void update(const std::string& techniqueName);
 };
