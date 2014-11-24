@@ -100,8 +100,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 glm::vec3 maxBound = std::get<0>(m_heightmapProcessor->getChunkBounds(i, j));
                 glm::vec3 minBound = std::get<1>(m_heightmapProcessor->getChunkBounds(i, j));
                 
-                i32 result = m_camera->Get_Frustum()->IsBoundBoxInFrustum(maxBound,
-                                                                          minBound);
+                i32 result = m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
                 if(result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
                    result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
                 {
@@ -113,6 +112,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, index, LOD](CSharedMeshRef mesh) {
                             
                             m_chunks[index]->setCamera(m_camera);
+                            m_chunks[index]->setCameraFrustum(m_cameraFrustum);
                             m_chunks[index]->setGlobalLightSource(m_globalLightSource);
                             
                             m_chunks[index]->setMesh(mesh);
@@ -324,6 +324,13 @@ void CLandscape::setCamera(CSharedCameraRef camera)
     IGameObject::setCamera(camera);
     assert(m_edges != nullptr);
     m_edges->setCamera(camera);
+}
+
+void CLandscape::setCameraFrustum(CSharedFrustumRef frustum)
+{
+    IGameObject::setCameraFrustum(frustum);
+    assert(m_edges != nullptr);
+    m_edges->setCameraFrustum(frustum);
 }
 
 void CLandscape::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource)

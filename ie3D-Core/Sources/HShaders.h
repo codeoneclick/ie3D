@@ -15,4 +15,7 @@ extern const char* ShaderTexure2D_frag;
 extern const char* ShaderBoundingBox_vert;
 extern const char* ShaderBoundingBox_frag;
 
+extern const char* ShaderOcclusionQuery_vert;
+extern const char* ShaderOcclusionQuery_frag;
+
 #endif

@@ -43,6 +43,7 @@ public:
     void setScale(const glm::vec3& scale);
     
     void setCamera(CSharedCameraRef camera);
+    void setCameraFrustum(CSharedFrustumRef frustum);
     void setGlobalLightSource(CSharedGlobalLightSourceRef lightSource);
     
     void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);

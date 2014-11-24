@@ -12,7 +12,6 @@
 #include "HCommon.h"
 #include "ISceneUpdateHandler.h"
 
-class CFrustum;
 class CCamera : public ISceneUpdateHandler
 {
 private:
@@ -36,16 +35,14 @@ private:
     f32 m_far;
     
     glm::ivec4 m_viewport;
-    
-    std::shared_ptr<CFrustum> m_frustum;
-    
+
 protected:
     
     void onSceneUpdate(f32 deltatime);
     
 public:
     
-    CCamera(f32 _fov, f32 _near, f32 _far, glm::ivec4 _viewport);
+    CCamera(f32 fov, f32 near, f32 far, glm::ivec4 viewport);
     ~CCamera(void);
     
     inline glm::mat4x4 Get_ViewMatrix(void)
@@ -151,11 +148,6 @@ public:
     inline f32 Get_Far(void)
     {
         return m_far;
-    };
-    
-    inline const std::shared_ptr<CFrustum> Get_Frustum(void)
-    {
-        return m_frustum;
     };
     
     inline const glm::ivec4 Get_Viewport(void)

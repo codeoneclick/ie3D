@@ -10,6 +10,7 @@
 #include "CSceneUpdateMgr.h"
 #include "CCollisionMgr.h"
 #include "CCamera.h"
+#include "CFrustum.h"
 #include "CGlobalLightSource.h"
 #include "IGameObject.h"
 #include "CModel.h"
@@ -27,6 +28,7 @@ CSceneGraph::CSceneGraph(CSharedRenderPipelineRef renderPipeline,
                          ISharedInputContext inputContext) :
 IGraph(renderPipeline, sceneUpdateMgr),
 m_camera(nullptr),
+m_cameraFrustum(nullptr),
 m_globalLightSource(nullptr),
 m_ocean(nullptr),
 m_landscape(nullptr),
@@ -51,13 +53,22 @@ void CSceneGraph::setCamera(CSharedCameraRef camera)
         m_sceneUpdateMgr->UnregisterSceneUpdateHandler(m_camera);
     }
     
+    if(m_cameraFrustum != nullptr)
+    {
+        m_sceneUpdateMgr->UnregisterSceneUpdateHandler(m_cameraFrustum);
+    }
+    
     m_camera = camera;
     assert(m_sceneUpdateMgr != nullptr);
     m_sceneUpdateMgr->RegisterSceneUpdateHandler(m_camera);
     
+    m_cameraFrustum = std::make_shared<CFrustum>(m_camera);
+    m_sceneUpdateMgr->RegisterSceneUpdateHandler(m_cameraFrustum);
+    
     for(const auto& iterator : m_gameObjectsContainer)
     {
         iterator->setCamera(m_camera);
+        iterator->setCameraFrustum(m_cameraFrustum);
     }
     
     assert(m_collisionMgr != nullptr);
@@ -89,6 +100,10 @@ void CSceneGraph::addGameObject(ISharedGameObjectRef gameObject)
     if(m_camera != nullptr)
     {
         gameObject->setCamera(m_camera);
+    }
+    if(m_cameraFrustum != nullptr)
+    {
+        gameObject->setCameraFrustum(m_cameraFrustum);
     }
     if(m_globalLightSource != nullptr)
     {

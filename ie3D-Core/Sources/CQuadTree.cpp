@@ -205,7 +205,7 @@ void CQuadTree::generateQuadTreeNode(CSharedFrustumRef frustum,
     
     for(ui32 i = 0; i < k_MAX_QUAD_TREE_CHILDS; i++)
     {
-        i32 result = frustum->IsBoundBoxInFrustum(root->m_childs.at(i)->m_maxBound,
+        i32 result = frustum->isBoundBoxInFrustum(root->m_childs.at(i)->m_maxBound,
                                                   root->m_childs.at(i)->m_minBound);
         if(result == E_FRUSTUM_BOUND_RESULT_INSIDE)
         {

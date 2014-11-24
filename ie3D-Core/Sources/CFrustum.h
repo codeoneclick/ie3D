@@ -11,33 +11,34 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
+#include "HDeclaration.h"
+#include "ISceneUpdateHandler.h"
 
-class CCamera;
-class CFrustum
+class CFrustum : public ISceneUpdateHandler
 {
 private:
     
-    glm::vec4 m_planes[E_FRUSTUM_PLANE_MAX];
-    CCamera* m_camera;
+    std::array<glm::vec4, E_FRUSTUM_PLANE_MAX> m_planes;
+    CSharedCamera m_camera;
     
 protected:
     
-    glm::vec4 _CreatePlane(const glm::vec3& _point_01, const glm::vec3& _point_02, const glm::vec3& _point_03);
+    glm::vec4 createPlane(const glm::vec3& point_01, const glm::vec3& point_02, const glm::vec3& point_03);
     
     static f32 getDistanceToPlane(const glm::vec4& plane, const glm::vec3& point);
     static glm::vec3 getPlaneABC(const glm::vec4& plane);
     static f32 getPlaneD(const glm::vec4& plane);
     
+    void onSceneUpdate(f32 deltatime);
+    
 public:
     
-    CFrustum(CCamera* camera);
+    CFrustum(CSharedCameraRef camera);
     ~CFrustum(void);
     
-    void Update(void);
-    
-    E_FRUSTUM_BOUND_RESULT IsPointInFrustum(const glm::vec3& _point);
-    E_FRUSTUM_BOUND_RESULT IsSphereInFrumstum(const glm::vec3& _center, f32 _radius);
-    E_FRUSTUM_BOUND_RESULT IsBoundBoxInFrustum(const glm::vec3& _maxBound, const glm::vec3& _minBound);
+    E_FRUSTUM_BOUND_RESULT isPointInFrustum(const glm::vec3& point);
+    E_FRUSTUM_BOUND_RESULT isSphereInFrumstum(const glm::vec3& center, f32 radius);
+    E_FRUSTUM_BOUND_RESULT isBoundBoxInFrustum(const glm::vec3& maxBound, const glm::vec3& minBound);
 };
 
 #endif

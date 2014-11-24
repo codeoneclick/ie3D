@@ -19,6 +19,7 @@ class CSceneGraph : public IGraph
 private:
     
     CSharedCamera m_camera;
+    CSharedFrustum m_cameraFrustum;
     CSharedGlobalLightSource m_globalLightSource;
     
     std::set<ISharedGameObject> m_gameObjectsContainer;

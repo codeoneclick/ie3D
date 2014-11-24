@@ -25,6 +25,7 @@ protected:
     CSharedRenderTechniqueMain m_mainRenderTechnique;
     std::queue<CSharedRenderTechniqueScreenSpace> m_customScreenSpaceRenderTechniquesQueue;
     std::map<std::string, std::set<ISharedRenderTechniqueOperationTextureHandler>> m_renderTechniqueOperationTextureHandlers;
+    CSharedOcclusionQueryManager m_occlusionQueryManager;
     
 public:
     
@@ -49,6 +50,10 @@ public:
     void addRenderTechniqueHandler(const std::string& techniqueName, ISharedRenderTechniqueHandlerRef handler);
     void removeRenderTechniqueHandler(const std::string& techniqueName, ISharedRenderTechniqueHandlerRef handler);
     bool isSupporingRenderTechnique(const std::string& techniqueName);
+    
+    void addToOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string& techniqueName);
+    void removeFromOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string& techniqueName);
+    
 };
 
 #endif

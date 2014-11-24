@@ -9,7 +9,6 @@
 #ifndef CBatchingMgr_h
 #define CBatchingMgr_h
 
-
 #include "HCommon.h"
 #include "HDeclaration.h"
 

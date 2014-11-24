@@ -133,12 +133,10 @@ i32 IGameObject::zOrder(void)
 
 bool IGameObject::checkOcclusion(void)
 {
-    assert(m_camera != nullptr);
-    assert(m_camera->Get_Frustum() != nullptr);
-    
+    assert(m_cameraFrustum != nullptr);
     glm::vec3 maxBound = IGameObject::getMaxBound() + m_position;
     glm::vec3 minBound = IGameObject::getMinBound() + m_position;
-    return !m_camera->Get_Frustum()->IsBoundBoxInFrustum(maxBound, minBound);
+    return !m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
 }
 
 ui32 IGameObject::numTriangles(void)
@@ -362,6 +360,11 @@ glm::vec3 IGameObject::getMinBound(void) const
 void IGameObject::setCamera(CSharedCameraRef camera)
 {
     m_camera = camera;
+}
+
+void IGameObject::setCameraFrustum(CSharedFrustumRef frustum)
+{
+    m_cameraFrustum = frustum;
 }
 
 void IGameObject::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource)
@@ -605,4 +608,14 @@ void IGameObject::enableUpdate(bool value)
         m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
     }
     m_isNeedToUpdate = value;
+}
+
+void IGameObject::onOcclusionQueryDraw(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
+{
+    
+}
+
+void IGameObject::onOcclusionQueryUpdate(void)
+{
+    
 }

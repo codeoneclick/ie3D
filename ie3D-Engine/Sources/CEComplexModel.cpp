@@ -58,6 +58,7 @@ void CEComplexModel::onConfigurationLoaded(ISharedConfigurationRef configuration
         model->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
         
         model->setCamera(m_camera);
+        model->setCameraFrustum(m_cameraFrustum);
         model->setGlobalLightSource(m_globalLightSource);
 
         model->enableRender(true);
@@ -155,6 +156,19 @@ void CEComplexModel::setCamera(CSharedCameraRef camera)
         {
             assert(iterator.second != nullptr);
             iterator.second->setCamera(camera);
+        }
+    }
+}
+
+void CEComplexModel::setCameraFrustum(CSharedFrustumRef frustum)
+{
+    IGameObject::setCameraFrustum(frustum);
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    {
+        for(const auto& iterator : m_parts)
+        {
+            assert(iterator.second != nullptr);
+            iterator.second->setCameraFrustum(frustum);
         }
     }
 }

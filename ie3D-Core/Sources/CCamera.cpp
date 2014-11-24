@@ -20,7 +20,6 @@ m_viewport(_viewport)
     m_projection = glm::perspective(m_fov, m_aspect, m_near, m_far);
     m_altitude = 0.0f;
     m_up = glm::vec3(0.0f, 1.0f, 0.0f);
-    m_frustum =  std::make_shared<CFrustum>(this);
 }
 
 CCamera::~CCamera(void)
@@ -43,9 +42,6 @@ void CCamera::onSceneUpdate(f32 _deltatime)
     
     m_matrixNormal = glm::inverse(m_view);
     m_matrixNormal = glm::transpose(m_matrixNormal);
-    
-    assert(m_frustum != nullptr);
-    m_frustum->Update();
 }
 
 glm::mat4x4 CCamera::Get_CylindricalMatrixForPosition(const glm::vec3 &_position)

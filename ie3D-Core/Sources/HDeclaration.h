@@ -361,4 +361,12 @@ class IRenderTechniqueOperationTextureHandler;
 typedef std::shared_ptr<IRenderTechniqueOperationTextureHandler> ISharedRenderTechniqueOperationTextureHandler;
 typedef const ISharedRenderTechniqueOperationTextureHandler& ISharedRenderTechniqueOperationTextureHandlerRef;
 
+class IOcclusionQueryHandler;
+typedef std::shared_ptr<IOcclusionQueryHandler> ISharedOcclusionQueryHandler;
+typedef const ISharedOcclusionQueryHandler& ISharedOcclusionQueryHandlerRef;
+
+class COcclusionQueryManager;
+typedef std::shared_ptr<COcclusionQueryManager> CSharedOcclusionQueryManager;
+typedef const CSharedOcclusionQueryManager& CSharedOcclusionQueryManagerRef;
+
 #endif

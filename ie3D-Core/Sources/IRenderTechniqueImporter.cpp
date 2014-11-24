@@ -16,6 +16,7 @@
 #include "CMaterial.h"
 #include "CQuad.h"
 #include "CTexture.h"
+#include "COcclusionQueryManager.h"
 
 #if defined(__OSX__)
 
@@ -35,6 +36,7 @@ m_isOffscreen(isOffscreen),
 m_mainRenderTechnique(nullptr)
 {
     assert(m_graphicsContext != nullptr);
+    m_occlusionQueryManager = std::make_shared<COcclusionQueryManager>();
 }
 
 IRenderTechniqueImporter::~IRenderTechniqueImporter(void)
@@ -251,4 +253,16 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
 #endif
     
     delete[] rawdata;
+}
+
+void IRenderTechniqueImporter::addToOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string& techniqueName)
+{
+    assert(m_occlusionQueryManager != nullptr);
+    m_occlusionQueryManager->addToOcluddingQuery(gameObject, techniqueName);
+}
+
+void IRenderTechniqueImporter::removeFromOcluddingQuery(ISharedOcclusionQueryHandlerRef gameObject, const std::string& techniqueName)
+{
+    assert(m_occlusionQueryManager != nullptr);
+    m_occlusionQueryManager->removeFromOcluddingQuery(gameObject, techniqueName);
 }

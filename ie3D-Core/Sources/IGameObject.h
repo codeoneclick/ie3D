@@ -16,13 +16,15 @@
 #include "IConfiguration.h"
 #include "IRenderTechniqueHandler.h"
 #include "ISceneUpdateHandler.h"
+#include "IOcclusionQueryHandler.h"
 
 class IGameObject :
 public std::enable_shared_from_this<IGameObject>,
 public IConfigurationLoadingHandler,
 public IResourceLoadingHandler,
 public IRenderTechniqueHandler,
-public ISceneUpdateHandler
+public ISceneUpdateHandler,
+public IOcclusionQueryHandler
 {
 private:
     
@@ -48,6 +50,7 @@ protected:
     std::function<void(CSharedMaterialRef)> m_boundingBoxMaterialBindImposer;
     
     CSharedCamera m_camera;
+    CSharedFrustum m_cameraFrustum;
     CSharedGlobalLightSource m_globalLightSource;
     
     ISharedRenderTechniqueImporter m_renderTechniqueImporter;
@@ -58,6 +61,9 @@ protected:
     CSharedResourceAccessor m_resourceAccessor;
     
     ui32 m_zOrder;
+    
+    bool m_occlusionQueryOngoing;
+    bool m_occlusionQueryVisible;
     
     ui8 m_status;
     
@@ -79,6 +85,9 @@ protected:
     virtual void onDraw(const std::string& mode);
     virtual void onUnbind(const std::string& mode);
     virtual void onBatch(const std::string& mode);
+    
+    virtual void onOcclusionQueryDraw(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
+    virtual void onOcclusionQueryUpdate(void);
     
     virtual void bindBaseShaderUniforms(CSharedMaterialRef material);
     virtual void bindCustomShaderUniforms(CSharedMaterialRef material);
@@ -106,6 +115,7 @@ public:
     glm::vec3 getMinBound(void) const;
     
     virtual void setCamera(CSharedCameraRef camera);
+    virtual void setCameraFrustum(CSharedFrustumRef frustum);
     virtual void setGlobalLightSource(CSharedGlobalLightSourceRef lightSource);
     
     CSharedVertexBuffer getVertexBuffer(void) const;
