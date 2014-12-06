@@ -57,7 +57,7 @@ m_status(E_LOADING_STATUS_UNLOADED)
     {
         bindBaseShaderUniforms(material);
     };
-    glGenQueries(1, &m_occlusionQueryHandler);
+    //glGenQueriesEXT(1, &m_occlusionQueryHandler);
 }
 
 IGameObject::~IGameObject(void)
@@ -140,6 +140,7 @@ bool IGameObject::checkOcclusion(void)
     glm::vec3 maxBound = IGameObject::getMaxBound() + m_position;
     glm::vec3 minBound = IGameObject::getMinBound() + m_position;
     return !m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
+    return !m_occlusionQueryVisible;
 }
 
 ui32 IGameObject::numTriangles(void)
@@ -616,30 +617,45 @@ void IGameObject::enableUpdate(bool value)
     m_isNeedToUpdate = value;
 }
 
-void IGameObject::onOcclusionQueryDraw(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
+void IGameObject::onOcclusionQueryDraw(CSharedMaterialRef material)
 {
-    m_occlusionQueryOngoing = true;
-    glBeginQuery(GL_SAMPLES_PASSED, m_occlusionQueryHandler);
-    
-    glEndQuery(GL_SAMPLES_PASSED);
+    /*if(m_boundingBox != nullptr)
+    {
+        assert(material != nullptr);
+        
+        material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
+        material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+        material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
+        material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+        
+        m_occlusionQueryOngoing = true;
+        m_boundingBox->bind(material->getShader()->getAttributes(), false);
+        glBeginQuery(GL_SAMPLES_PASSED, m_occlusionQueryHandler);
+        m_boundingBox->draw(false);
+        glEndQuery(GL_SAMPLES_PASSED);
+        m_boundingBox->unbind(material->getShader()->getAttributes(), false);
+    }*/
 }
 
 void IGameObject::onOcclusionQueryUpdate(void)
 {
-    GLint available = GL_FALSE;
-    glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT_AVAILABLE, &available);
-    if (available == GL_TRUE)
+    /*if(m_boundingBox != nullptr)
     {
-        m_occlusionQueryOngoing = false;
-        GLint samplesPassed = 0;
-        glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT, &samplesPassed);
-        if (samplesPassed > 0)
+        GLint available = GL_FALSE;
+        glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT_AVAILABLE, &available);
+        if (available == GL_TRUE)
         {
-            m_occlusionQueryVisible = true;
+            m_occlusionQueryOngoing = false;
+            GLint samplesPassed = 0;
+            glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT, &samplesPassed);
+            if (samplesPassed > 0)
+            {
+                m_occlusionQueryVisible = true;
+            }
+            else
+            {
+                m_occlusionQueryVisible = false;
+            }
         }
-        else
-        {
-            m_occlusionQueryVisible = false;
-        }
-    }
+    }*/
 }

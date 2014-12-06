@@ -87,7 +87,7 @@ protected:
     virtual void onUnbind(const std::string& mode);
     virtual void onBatch(const std::string& mode);
     
-    virtual void onOcclusionQueryDraw(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
+    virtual void onOcclusionQueryDraw(CSharedMaterialRef material);
     virtual void onOcclusionQueryUpdate(void);
     
     virtual void bindBaseShaderUniforms(CSharedMaterialRef material);

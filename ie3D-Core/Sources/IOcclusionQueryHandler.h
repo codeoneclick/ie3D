@@ -25,7 +25,7 @@ public:
     
     virtual ~IOcclusionQueryHandler(void);
     
-    virtual void onOcclusionQueryDraw(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) = 0;
+    virtual void onOcclusionQueryDraw(CSharedMaterialRef material) = 0;
     virtual void onOcclusionQueryUpdate(void) = 0;
 };
 

@@ -177,4 +177,6 @@ void COcean::bindCustomShaderUniforms(CSharedMaterialRef material)
     {
         material->setTexture(heightmapTexture, E_SHADER_SAMPLER_04);
     }
+    glm::mat4x4 matrixViewInverse = glm::inverse(m_camera->Get_ViewMatrix());
+    material->getShader()->setMatrix4x4Custom(matrixViewInverse, "u_matrixViewInverse");
 }

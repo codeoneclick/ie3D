@@ -213,6 +213,8 @@ void CLandscapeChunk::bindCustomShaderUniforms(CSharedMaterialRef material)
 #endif
     material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
     material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
+    glm::mat4x4 matrixViewInverse = glm::inverse(m_camera->Get_ViewMatrix());
+    material->getShader()->setMatrix4x4Custom(matrixViewInverse, "u_matrixViewInverse");
 }
 
 CSharedVertexBuffer CLandscapeChunk::getCollisionVertexBuffer(void) const

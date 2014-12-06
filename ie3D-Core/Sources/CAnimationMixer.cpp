@@ -130,7 +130,7 @@ void CAnimationMixer::update(f32 deltatime)
             m_animationTime += deltatime;
             
             bool isBlending = false;
-            if(m_blendingAnimationTimeinterval > 0.0 && m_previousAnimationSequence != nullptr)
+            if(m_blendingAnimationTimeinterval > 0.0f && m_previousAnimationSequence != nullptr)
             {
                 m_blendingAnimationTimeinterval -= deltatime;
                 isBlending = true;
@@ -138,7 +138,7 @@ void CAnimationMixer::update(f32 deltatime)
             else if(m_previousAnimationSequence != nullptr)
             {
                 m_previousAnimationSequence = nullptr;
-                m_animationTime = 0.0;
+                m_animationTime = 0.0f;
             }
             else
             {

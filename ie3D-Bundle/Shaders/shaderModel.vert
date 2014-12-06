@@ -14,7 +14,7 @@ varying float  OUT_ClipPlane;
 uniform mat4   MATRIX_Projection;
 uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
-uniform mat4   MATRIX_Bones[32];
+uniform mat4   MATRIX_Bones[24];
 
 uniform vec4   VECTOR_ClipPlane;
 

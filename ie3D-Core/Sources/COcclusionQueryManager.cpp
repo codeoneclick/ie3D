@@ -73,7 +73,7 @@ void COcclusionQueryManager::update(const std::string& techniqueName)
         
         for(const auto& iterator_02 : iterator_01->second)
         {
-            iterator_02->onOcclusionQueryDraw(m_material->getShader()->getAttributes());
+            iterator_02->onOcclusionQueryDraw(m_material);
         }
         
         glDepthMask(GL_TRUE);

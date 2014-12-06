@@ -514,13 +514,14 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
     if(isCreation)
     {
         data = new ui8[m_heightmapData->getSizeX() * m_heightmapData->getSizeZ()];
-        f32 maxHeight = MAX_VALUE(m_heightmapData->getMaxHeight(), abs(m_heightmapData->getMinHeight()));
+        f32 maxDeep = abs(m_heightmapData->getMinHeight());
         for(int i = 0; i < m_heightmapData->getSizeX(); i++)
         {
             for(int j = 0; j < m_heightmapData->getSizeZ(); j++)
             {
                 f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0f, j));
-                height /= maxHeight;
+                height = height <= 0.0f ? height : 0.0f;
+                height /= maxDeep;
                 height = std::max(0.0f, std::min((height + 1.0f) / 2.0f, 1.0f));
                 ui8 color = static_cast<ui8>(height * 255);
                 data[i + j * m_heightmapData->getSizeZ()] = color;
@@ -550,7 +551,7 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
         assert(offsetY >= 0);
         assert(offsetY + subHeight < texture->getHeight());
         
-        f32 maxHeight = MAX_VALUE(m_heightmapData->getMaxHeight(), abs(m_heightmapData->getMinHeight()));
+        f32 maxDeep = abs(m_heightmapData->getMinHeight());
         
         data = new ui8[subWidth * subHeight];
         for(int i = 0; i < subWidth; i++)
@@ -559,7 +560,8 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
             {
                 f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData,
                                                                glm::vec3(i + offsetX , 0.0, j + offsetY));
-                height /= maxHeight;
+                height = height <= 0.0f ? height : 0.0f;
+                height /= maxDeep;
                 height = std::max(0.0f, std::min((height + 1.0f) / 2.0f, 1.0f));
                 ui8 color = static_cast<ui8>(height * 255);
                 data[i + j * subWidth] = color;

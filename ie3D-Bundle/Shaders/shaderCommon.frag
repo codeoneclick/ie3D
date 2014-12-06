@@ -1,6 +1,6 @@
 #if defined(__IOS__)
 
-precision highp float;
+precision mediump float;
 
 #endif
 
