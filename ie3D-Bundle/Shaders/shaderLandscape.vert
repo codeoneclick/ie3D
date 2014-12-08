@@ -37,7 +37,6 @@ uniform mat4   MATRIX_GlobalLightView;
 uniform vec4   VECTOR_ClipPlane;
 uniform vec3   VECTOR_CameraPosition;
 uniform vec3   VECTOR_GlobalLightPosition;
-uniform mat4 u_matrixViewInverse;
 
 uniform float IN_TillingTexcoordLayer_01;
 uniform float IN_TillingTexcoordLayer_02;
