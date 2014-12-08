@@ -1,29 +1,35 @@
 
 #if defined(__OPENGL_30__)
 
-varying vec3 v_cameraDirTS;
-varying vec3 v_cameraDirWS;
-varying vec3 v_lightDirTS;
-out vec2   OUT_TexCoord;
-out vec4   OUT_TexCoordProjection;
-out vec2   OUT_TexCoordDisplace_01;
-out vec2   OUT_TexCoordDisplace_02;
-out vec4   OUT_Extra;
+out vec4 v_texCoordProj;
+out vec2 v_texCoordDisplace_01;
+out vec2 v_texCoordDisplace_02;
+
+out vec3 v_eyePosWS;
+out vec3 v_eyeDirTS;
+
+out vec3 v_lightPosWS;
+out vec3 v_lightDirTS;
+
+out vec3 v_vertexPosWS;
+
+out float v_fogDistance;
 
 #else
 
-varying vec3 v_cameraDirWS;
-varying vec3 v_cameraDirTS;
-varying vec3 v_lightDirWS;
+varying vec4 v_texCoordProj;
+varying vec2 v_texCoordDisplace_01;
+varying vec2 v_texCoordDisplace_02;
+
+varying vec3 v_eyePosWS;
+varying vec3 v_eyeDirTS;
+
+varying vec3 v_lightPosWS;
 varying vec3 v_lightDirTS;
-varying vec3 v_positionWS;
+
+varying vec3 v_vertexPosWS;
+
 varying float v_fogDistance;
-//varying vec3   OUT_Position;
-varying vec2   OUT_TexCoord;
-varying vec4   OUT_TexCoordProjection;
-varying vec2   OUT_TexCoordDisplace_01;
-varying vec2   OUT_TexCoordDisplace_02;
-varying vec4   OUT_Extra;
 
 #endif
 
@@ -37,41 +43,38 @@ uniform vec3   VECTOR_GlobalLightPosition;
 uniform vec4   VECTOR_ClipPlane;
 uniform float  FLOAT_Timer;
 
-const float k_fTexCoordScale = 32.0;
+const float k_texCoordScale = 24.0;
 
-const  vec3 k_vBinormal = vec3(1.0, 0.0, 0.0);
-const  vec3 k_vTangent = vec3(0.0, 0.0, 1.0);
-const  vec3 k_vNormal = vec3(0.0, 1.0, 0.0);
+const  vec3 k_binormal = vec3(1.0, 0.0, 0.0);
+const  vec3 k_tangent = vec3(0.0, 0.0, 1.0);
+const  vec3 k_normal = vec3(0.0, 1.0, 0.0);
 
 void main(void)
 {
-    vec4 vPosition = MATRIX_World * vec4(IN_Position, 1.0);
-    gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
+    vec4 vertexPosWS = MATRIX_World * vec4(IN_Position, 1.0);
+    gl_Position = MATRIX_Projection * MATRIX_View * vertexPosWS;
     
-    vec2 vTexCoord = IN_TexCoord;
-    OUT_TexCoord = vTexCoord;
-    vTexCoord *= k_fTexCoordScale;
-    OUT_TexCoordDisplace_01 = vec2(vTexCoord.x + sin(FLOAT_Timer) * 0.25,
-                                   vTexCoord.y - cos(FLOAT_Timer) * 0.75);
-	
-	OUT_TexCoordDisplace_02 = vec2(vTexCoord.x - sin(FLOAT_Timer) * 0.75,
-                                   vTexCoord.y + cos(FLOAT_Timer) * 0.25);
-    OUT_TexCoordProjection = gl_Position;
+    vec2 texCoord = IN_TexCoord;
+    texCoord *= k_texCoordScale;
+    v_texCoordDisplace_01 = vec2(texCoord.x + sin(FLOAT_Timer) * 0.25,
+                                 texCoord.y - cos(FLOAT_Timer) * 0.75);
     
-    mat3 matrixTangent = mat3(k_vTangent,
-                              k_vBinormal,
-                              k_vNormal);
+    v_texCoordDisplace_02 = vec2(texCoord.x - sin(FLOAT_Timer) * 0.75,
+                                 texCoord.y + cos(FLOAT_Timer) * 0.25);
+    v_texCoordProj = gl_Position;
     
-    v_cameraDirWS = VECTOR_CameraPosition;
-    v_lightDirWS = VECTOR_GlobalLightPosition;
+    mat3 matrixTangent = mat3(k_tangent,
+                              k_binormal,
+                              k_normal);
     
-    v_cameraDirTS = (VECTOR_CameraPosition - vPosition.xyz) * matrixTangent;
-    v_lightDirTS = (VECTOR_GlobalLightPosition - vPosition.xyz) * matrixTangent;
+    v_eyePosWS = VECTOR_CameraPosition;
+    v_lightPosWS = VECTOR_GlobalLightPosition;
     
-    v_positionWS = vPosition.xyz;
+    v_eyeDirTS = (VECTOR_CameraPosition - vertexPosWS.xyz) * matrixTangent;
+    v_lightDirTS = (VECTOR_GlobalLightPosition - vertexPosWS.xyz) * matrixTangent;
     
-    v_fogDistance = length(vec3(256.0, 0.0, 256.0) - vPosition.xyz);
+    v_vertexPosWS = vertexPosWS.xyz;
+    
+    v_fogDistance = length(vec3(256.0, 0.0, 256.0) - vertexPosWS.xyz);
     v_fogDistance = clamp((v_fogDistance - 384.0) / 448.0, 0.0, 1.0);
-    OUT_Extra = IN_Extra;
 }
-
