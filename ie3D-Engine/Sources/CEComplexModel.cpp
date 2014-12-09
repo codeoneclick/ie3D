@@ -30,6 +30,7 @@ void CEComplexModel::onSceneUpdate(f32)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
+        
     }
 }
 

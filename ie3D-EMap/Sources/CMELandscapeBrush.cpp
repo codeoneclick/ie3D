@@ -79,8 +79,8 @@ void CMELandscapeBrush::createMesh(f32 radius)
             m_landscape->getHeight(position) : 0.0;
             vertexData[index].m_position = position;
             
-            glm::u16vec2 texcoord = CVertexBuffer::compressVec2(glm::vec2(static_cast<f32>(i + static_cast<i32>(sizeX) / 2) / static_cast<f32>(sizeX),
-                                                                          static_cast<f32>(j + static_cast<i32>(sizeZ) / 2) / static_cast<f32>(sizeZ)));
+            glm::uint32 texcoord = glm::packUnorm2x16(glm::vec2(static_cast<f32>(i + static_cast<i32>(sizeX) / 2) / static_cast<f32>(sizeX),
+                                                                static_cast<f32>(j + static_cast<i32>(sizeZ) / 2) / static_cast<f32>(sizeZ)));
             vertexData[index].m_texcoord = texcoord;
             
             ++index;

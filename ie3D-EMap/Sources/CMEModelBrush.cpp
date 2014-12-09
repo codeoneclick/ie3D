@@ -207,6 +207,7 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow, I
     
     CESharedCustomModel arrowModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     arrowModel->setCamera(m_camera);
+    arrowModel->setCameraFrustum(m_cameraFrustum);
     arrowModel->setGlobalLightSource(m_globalLightSource);
     arrowModel->setMesh(arrowMesh);
 
@@ -329,6 +330,7 @@ CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane, I
     
     CESharedCustomModel planeModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     planeModel->setCamera(m_camera);
+    planeModel->setCameraFrustum(m_cameraFrustum);
     planeModel->setGlobalLightSource(m_globalLightSource);
     planeModel->setMesh(planeMesh);
     
@@ -453,6 +455,24 @@ void CMEModelBrush::setCamera(CSharedCameraRef camera)
         {
             assert(iterator != nullptr);
             iterator->setCamera(camera);
+        }
+    }
+}
+
+void CMEModelBrush::setCameraFrustum(CSharedFrustumRef frustum)
+{
+    IGameObject::setCameraFrustum(frustum);
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    {
+        for(const auto& iterator : m_arrows)
+        {
+            assert(iterator != nullptr);
+            iterator->setCameraFrustum(frustum);
+        }
+        for(const auto& iterator : m_planes)
+        {
+            assert(iterator != nullptr);
+            iterator->setCameraFrustum(frustum);
         }
     }
 }
