@@ -15,6 +15,6 @@ uniform mat4   MATRIX_World;
                                        
 void main(void)
 {
-    OUT_TexCoord = IN_TexCoord / 32767.0  - 1.0;
+    OUT_TexCoord = IN_TexCoord;
     gl_Position = vec4(IN_Position, 1.0);
 }
