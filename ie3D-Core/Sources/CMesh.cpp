@@ -239,7 +239,8 @@ void CMesh::onResourceDataCommitFinished(ISharedResourceDataRef resourceData)
         }
             break;
     }
-    if(m_vertexBuffer != nullptr && m_indexBuffer != nullptr)
+    if(m_vertexBuffer != nullptr &&
+       m_indexBuffer != nullptr)
     {
         m_status |= E_RESOURCE_STATUS_COMMITED;
     }

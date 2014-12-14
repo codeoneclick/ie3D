@@ -57,7 +57,12 @@ void COcclusionQueryManager::addToOcluddingQuery(const std::string& techniqueNam
 
 void COcclusionQueryManager::removeFromOcluddingQuery(const std::string &techniqueName, ISharedOcclusionQueryHandlerRef handler)
 {
-    
+    auto iterator = m_occludingGeometry.find(techniqueName);
+    assert(iterator != m_occludingGeometry.end());
+    if(iterator == m_occludingGeometry.end())
+    {
+        iterator->second.erase(handler);
+    }
 }
 
 void COcclusionQueryManager::update(const std::string& techniqueName)

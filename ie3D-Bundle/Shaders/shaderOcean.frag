@@ -64,9 +64,9 @@ void main(void)
     vec3 eyeDirTS = normalize(v_eyeDirTS);
     vec3 lightDirTS = normalize(v_lightDirTS);
     
-    vec4 normalColor_01 = texture2D(SAMPLER_03, v_texCoordDisplace_01) * k_2 - k_1;
-    vec4 normalColor_02 = texture2D(SAMPLER_03, v_texCoordDisplace_02) * k_2 - k_1;
-    vec3 normalColor = normalize(mix(normalColor_01, normalColor_02, k_05).xyz);
+    vec3 normalColor = texture2D(SAMPLER_03, v_texCoordDisplace_01).rgb;
+    normalColor += texture2D(SAMPLER_03, v_texCoordDisplace_02).rgb;
+    normalColor -= 1.0;
     
     float diffuseIntensity = clamp(dot(normalColor, lightDirTS), k_0, k_1);
     vec3 reflectVector = normalize(k_2 * diffuseIntensity * normalColor - lightDirTS);

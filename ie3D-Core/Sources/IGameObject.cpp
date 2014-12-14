@@ -57,7 +57,15 @@ m_status(E_LOADING_STATUS_UNLOADED)
     {
         bindBaseShaderUniforms(material);
     };
-    //glGenQueriesEXT(1, &m_occlusionQueryHandler);
+#if defined(__OSX__)
+    
+    glGenQueries(1, &m_occlusionQueryHandler);
+    
+#elif defined(__IOS)
+    
+    glGenQueriesEXT(1, &m_occlusionQueryHandler);
+    
+#endif
 }
 
 IGameObject::~IGameObject(void)
@@ -136,10 +144,10 @@ i32 IGameObject::zOrder(void)
 
 bool IGameObject::checkOcclusion(void)
 {
-    assert(m_cameraFrustum != nullptr);
+    /*assert(m_cameraFrustum != nullptr);
     glm::vec3 maxBound = IGameObject::getMaxBound() + m_position;
     glm::vec3 minBound = IGameObject::getMinBound() + m_position;
-    return !m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
+    return !m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);*/
     return !m_occlusionQueryVisible;
 }
 
@@ -601,7 +609,7 @@ void IGameObject::enableRender(bool value)
 			m_renderTechniqueImporter->removeRenderTechniqueHandler(iterator.first, shared_from_this());
             
             value == true ? m_renderTechniqueImporter->addToOcluddingQuery(iterator.first, shared_from_this()) :
-            m_renderTechniqueImporter->removeRenderTechniqueHandler(iterator.first, shared_from_this());
+            m_renderTechniqueImporter->removeFromOcluddingQuery(iterator.first, shared_from_this());
 		}
     }
 	m_isNeedToRender = value;
@@ -619,7 +627,7 @@ void IGameObject::enableUpdate(bool value)
 
 void IGameObject::onOcclusionQueryDraw(CSharedMaterialRef material)
 {
-    /*if(m_boundingBox != nullptr)
+    if(m_boundingBox != nullptr && !m_occlusionQueryOngoing)
     {
         assert(material != nullptr);
         
@@ -628,26 +636,63 @@ void IGameObject::onOcclusionQueryDraw(CSharedMaterialRef material)
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
         
+        
+        
         m_occlusionQueryOngoing = true;
         m_boundingBox->bind(material->getShader()->getAttributes(), false);
+#if defined(__OSX__)
+        
         glBeginQuery(GL_SAMPLES_PASSED, m_occlusionQueryHandler);
+        
+#elif defined(__IOS__)
+        
+        glBeginQueryEXT(GL_ANY_SAMPLES_PASSED_EXT, m_occlusionQueryHandler);
+        
+#endif
         m_boundingBox->draw(false);
+#if defined(__OSX__)
+        
         glEndQuery(GL_SAMPLES_PASSED);
+        
+#elif defined(__IOS__)
+        
+        glEndQueryEXT(GL_ANY_SAMPLES_PASSED_EXT);
+        
+#endif
         m_boundingBox->unbind(material->getShader()->getAttributes(), false);
-    }*/
+    }
 }
 
 void IGameObject::onOcclusionQueryUpdate(void)
 {
-    /*if(m_boundingBox != nullptr)
+    if(m_boundingBox != nullptr)
     {
+#if defined(__OSX__)
+        
         GLint available = GL_FALSE;
         glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT_AVAILABLE, &available);
+        
+#elif defined(__IOS__)
+        
+        GLuint available = GL_FALSE;
+        glGetQueryObjectuivEXT(m_occlusionQueryHandler, GL_QUERY_RESULT_AVAILABLE_EXT, &available);
+        
+#endif
         if (available == GL_TRUE)
         {
             m_occlusionQueryOngoing = false;
+            
+#if defined(__OSX__)
+            
             GLint samplesPassed = 0;
             glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT, &samplesPassed);
+            
+#elif defined(__IOS__)
+            
+            GLuint samplesPassed = 0;
+            glGetQueryObjectuivEXT(m_occlusionQueryHandler, GL_QUERY_RESULT_EXT, &samplesPassed);
+            
+#endif
             if (samplesPassed > 0)
             {
                 m_occlusionQueryVisible = true;
@@ -657,5 +702,5 @@ void IGameObject::onOcclusionQueryUpdate(void)
                 m_occlusionQueryVisible = false;
             }
         }
-    }*/
+    }
 }
