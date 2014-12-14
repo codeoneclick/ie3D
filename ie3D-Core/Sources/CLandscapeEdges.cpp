@@ -206,3 +206,13 @@ void CLandscapeEdges::onBatch(const std::string& mode)
 {
 
 }
+
+void CLandscapeEdges::onOcclusionQueryDraw(CSharedMaterialRef material)
+{
+    
+}
+
+void CLandscapeEdges::onOcclusionQueryUpdate(void)
+{
+    
+}

@@ -590,6 +590,8 @@ std::shared_ptr<CTexture> CHeightmapProcessor::createSplattingTexture(void)
                                                           m_heightmapData->getSizeX(),
                                                           m_heightmapData->getSizeZ());
     m_splattingTexture->setWrapMode(GL_CLAMP_TO_EDGE);
+    m_splattingTexture->setMagFilter(GL_LINEAR);
+    m_splattingTexture->setMinFilter(GL_LINEAR);
     CHeightmapProcessor::updateSplattingTexture(m_splattingTexture);
     return m_splattingTexture;
 }

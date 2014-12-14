@@ -66,6 +66,12 @@ protected:
     mutable ui32 m_settedWrapMode;
     ui32 m_presettedWrapMode;
     
+    mutable ui32 m_settedMagFilter;
+    ui32 m_presettedMagFilter;
+    
+    mutable ui32 m_settedMinFilter;
+    ui32 m_pressetedMinFilter;
+    
     void onResourceDataSerializationFinished(ISharedResourceDataRef resourceData);
     
     void onResourceDataCommitFinished(ISharedResourceDataRef resourceData);
@@ -94,6 +100,8 @@ public:
     bool isCompressed(void) const;
     
     void setWrapMode(ui32 wrapMode);
+    void setMagFilter(ui32 magFilter);
+    void setMinFilter(ui32 minFilter);
     
     virtual void bind(void) const;
     virtual void unbind(void) const;

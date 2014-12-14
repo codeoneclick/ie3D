@@ -84,7 +84,11 @@ CTexture::CTexture(const std::string& guid) : IResource(E_RESOURCE_CLASS_TEXTURE
 m_textureData(nullptr),
 m_textureId(0),
 m_presettedWrapMode(GL_REPEAT),
-m_settedWrapMode(0)
+m_settedWrapMode(0),
+m_presettedMagFilter(GL_NEAREST),
+m_settedMagFilter(0),
+m_pressetedMinFilter(GL_NEAREST),
+m_settedMinFilter(0)
 {
     
 }
@@ -193,6 +197,16 @@ void CTexture::setWrapMode(ui32 wrapMode)
     m_presettedWrapMode = wrapMode;
 }
 
+void CTexture::setMagFilter(ui32 magFilter)
+{
+    m_presettedMagFilter = magFilter;
+}
+
+void CTexture::setMinFilter(ui32 minFilter)
+{
+    m_pressetedMinFilter = minFilter;
+}
+
 void CTexture::bind(void) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
@@ -203,6 +217,16 @@ void CTexture::bind(void) const
             m_settedWrapMode = m_presettedWrapMode;
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_settedWrapMode);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_settedWrapMode);
+        }
+        if(m_settedMagFilter == 0 || m_presettedMagFilter != m_settedMagFilter)
+        {
+            m_settedMagFilter = m_presettedMagFilter;
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_settedMagFilter);
+        }
+        if(m_settedMinFilter == 0 || m_pressetedMinFilter != m_settedMinFilter)
+        {
+            m_settedMinFilter = m_pressetedMinFilter;
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_settedMinFilter);
         }
     }
 }

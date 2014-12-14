@@ -23,6 +23,8 @@
             filename="animated_model_01.png"
             render_operation_name=""
             sampler_id="0"
-            wrap_mode="GL_REPEAT"/>
+            wrap_mode="GL_REPEAT"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_MIPMAP"/>
     </textures>
 </material>

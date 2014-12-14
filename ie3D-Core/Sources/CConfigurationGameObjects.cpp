@@ -14,7 +14,9 @@ kTextureMainNode("texture"),
 kTextureFilenameAttribute("filename"),
 kTextureRenderOperationNameAttribute("render_operation_name"),
 kTextureSamplerIndexAttribute("sampler_id"),
-kTextureWrapModeAttribute("wrap_mode")
+kTextureWrapModeAttribute("wrap_mode"),
+kTextureMagFilterAttribute("mag_filter"),
+kTextureMinFilterAttribute("min_filter")
 {
 
 }
@@ -55,6 +57,24 @@ ui32 CConfigurationTexture::getWrapMode(void) const
 {
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureWrapModeAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<ui32>();
+}
+
+ui32 CConfigurationTexture::getMagFilter(void) const
+{
+    const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
+                                             kTextureMagFilterAttribute);
+    assert(iterator != m_attributes.end());
+    assert(iterator->second.size() != 0);
+    return iterator->second[0]->getScalar<ui32>();
+}
+
+ui32 CConfigurationTexture::getMinFilter(void) const
+{
+    const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
+                                             kTextureMinFilterAttribute);
     assert(iterator != m_attributes.end());
     assert(iterator->second.size() != 0);
     return iterator->second[0]->getScalar<ui32>();

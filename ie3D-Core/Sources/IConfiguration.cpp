@@ -18,7 +18,10 @@ std::map<std::string, GLenum> g_stringToGLenum = {
     {"GL_ONE_MINUS_SRC_ALPHA", GL_ONE_MINUS_SRC_ALPHA},
     {"GL_REPEAT", GL_REPEAT},
     {"GL_CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE },
-    {"GL_MIRRORED_REPEAT", GL_MIRRORED_REPEAT }
+    {"GL_MIRRORED_REPEAT", GL_MIRRORED_REPEAT },
+    {"GL_NEAREST", GL_NEAREST },
+    {"GL_LINEAR", GL_LINEAR },
+    {"GL_MIPMAP", GL_LINEAR_MIPMAP_NEAREST }
 };
 
 std::map<GLenum, std::string> g_glenumToString = {

@@ -23,6 +23,8 @@
             filename="landscape_02.png"
             render_operation_name=""
             sampler_id="0"
-            wrap_mode="GL_REPEAT"/>
+            wrap_mode="GL_REPEAT"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_LINEAR"/>
     </textures>
 </material>

@@ -21,6 +21,8 @@ public:
     const std::string kTextureRenderOperationNameAttribute;
     const std::string kTextureSamplerIndexAttribute;
     const std::string kTextureWrapModeAttribute;
+    const std::string kTextureMagFilterAttribute;
+    const std::string kTextureMinFilterAttribute;
     
 private:
     
@@ -37,6 +39,9 @@ public:
     ui32 getSamplerIndex(void) const;
     
     ui32 getWrapMode(void) const;
+    
+    ui32 getMagFilter(void) const;
+    ui32 getMinFilter(void) const;
 };
 
 class CConfigurationShader : public IConfiguration

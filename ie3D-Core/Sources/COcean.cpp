@@ -180,3 +180,13 @@ void COcean::bindCustomShaderUniforms(CSharedMaterialRef material)
     glm::mat4x4 matrixViewInverse = glm::inverse(m_camera->Get_ViewMatrix());
     material->getShader()->setMatrix4x4Custom(matrixViewInverse, "u_matrixViewInverse");
 }
+
+void COcean::onOcclusionQueryDraw(CSharedMaterialRef material)
+{
+    
+}
+
+void COcean::onOcclusionQueryUpdate(void)
+{
+    
+}

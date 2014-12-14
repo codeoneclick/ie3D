@@ -89,7 +89,6 @@ void main(void)
     
     vec4 color = mix(reflectionColor, refractionColor, fresnel);
     color = color * diffuseIntensity + k_specularColor * specularIntensity + diffuseColor;
-
     color.a = k_1 - v_fogDistance;
     
     gl_FragColor = color;

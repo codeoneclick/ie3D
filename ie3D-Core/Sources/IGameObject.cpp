@@ -70,6 +70,16 @@ m_status(E_LOADING_STATUS_UNLOADED)
 
 IGameObject::~IGameObject(void)
 {
+#if defined(__OSX__)
+    
+    glDeleteQueries(1, &m_occlusionQueryHandler);
+    
+#elif defined(__IOS)
+    
+    glDeleteQueriesEXT(1, &m_occlusionQueryHandler);
+    
+#endif
+    
     m_materials.clear();
 }
 
@@ -635,8 +645,6 @@ void IGameObject::onOcclusionQueryDraw(CSharedMaterialRef material)
         material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
         material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
-        
-        
         
         m_occlusionQueryOngoing = true;
         m_boundingBox->bind(material->getShader()->getAttributes(), false);

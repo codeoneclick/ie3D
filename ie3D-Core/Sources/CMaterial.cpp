@@ -274,6 +274,8 @@ void CMaterial::setupMaterial(CSharedMaterialRef material,
         renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderOperationName());
         assert(texture != nullptr);
         texture->setWrapMode(textureConfiguration->getWrapMode());
+        texture->setMagFilter(textureConfiguration->getMagFilter());
+        texture->setMinFilter(textureConfiguration->getMinFilter());
         assert(textureConfiguration->getSamplerIndex() >= 0 &&
                textureConfiguration->getSamplerIndex() < E_SHADER_SAMPLER_MAX);
         material->setTexture(texture, static_cast<E_SHADER_SAMPLER>(textureConfiguration->getSamplerIndex()));

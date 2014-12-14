@@ -160,3 +160,13 @@ void CAtmosphericScattering::onBatch(const std::string& mode)
 {
    
 }
+
+void CAtmosphericScattering::onOcclusionQueryDraw(CSharedMaterialRef material)
+{
+    
+}
+
+void CAtmosphericScattering::onOcclusionQueryUpdate(void)
+{
+    
+}

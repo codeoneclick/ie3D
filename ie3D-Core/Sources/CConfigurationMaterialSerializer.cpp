@@ -160,6 +160,20 @@ ISharedConfiguration CConfigurationMaterialSerializer::serialize(const std::stri
                                                                 textureConfiguration->kTextureWrapModeAttribute),
                                        std::make_shared<CConfigurationAttribute>(textureWrapMode));
         
+        std::string textureMagFilterStr = texture.attribute(textureConfiguration->kTextureMagFilterAttribute.c_str()).as_string();
+        assert(g_stringToGLenum.find(textureMagFilterStr) != g_stringToGLenum.end());
+        ui32 textureMagFilter = g_stringToGLenum.find(textureMagFilterStr)->second;
+        textureConfiguration->setAttribute(getConfigurationAttributeKey(textureConfiguration->kTextureMainNode,
+                                                                        textureConfiguration->kTextureMagFilterAttribute),
+                                           std::make_shared<CConfigurationAttribute>(textureMagFilter));
+        
+        std::string textureMinFilterStr = texture.attribute(textureConfiguration->kTextureMinFilterAttribute.c_str()).as_string();
+        assert(g_stringToGLenum.find(textureMinFilterStr) != g_stringToGLenum.end());
+        ui32 textureMinFilter = g_stringToGLenum.find(textureMinFilterStr)->second;
+        textureConfiguration->setAttribute(getConfigurationAttributeKey(textureConfiguration->kTextureMainNode,
+                                                                        textureConfiguration->kTextureMinFilterAttribute),
+                                           std::make_shared<CConfigurationAttribute>(textureMinFilter));
+        
         materialConfiguration->setConfiguration(getConfigurationAttributeKey(materialConfiguration->kMaterialMainNode,
                                                                 materialConfiguration->kMaterialTexturesConfigurationsNode),
                                        textureConfiguration);

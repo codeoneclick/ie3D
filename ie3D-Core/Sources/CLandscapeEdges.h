@@ -38,6 +38,9 @@ protected:
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
     
+    void onOcclusionQueryDraw(CSharedMaterialRef material);
+    void onOcclusionQueryUpdate(void);
+    
 public:
     
     CLandscapeEdges(CSharedResourceAccessorRef resourceAccessor,

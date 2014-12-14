@@ -23,26 +23,36 @@
             filename="landscape_01.png"
             render_operation_name=""
             sampler_id="0"
-            wrap_mode="GL_REPEAT"/>
+            wrap_mode="GL_REPEAT"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_MIPMAP"/>
             <texture
             filename="landscape_02.png"
             render_operation_name=""
             sampler_id="1"
-            wrap_mode="GL_REPEAT"/>
+            wrap_mode="GL_REPEAT"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_MIPMAP"/>
             <texture
             filename="landscape_03.png"
             render_operation_name=""
             sampler_id="2"
-            wrap_mode="GL_REPEAT"/>
+            wrap_mode="GL_REPEAT"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_MIPMAP"/>
             <!--<texture
             filename=""
             render_operation_name="render.operation.world.splatting"
             sampler_id="3"
-            wrap_mode="GL_CLAMP_TO_EDGE"/>-->
+            wrap_mode="GL_CLAMP_TO_EDGE"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_LINEAR"/>-->
             <texture
             filename=""
             render_operation_name="render.operation.world.shadowmap.depth"
             sampler_id="4"
-            wrap_mode="GL_CLAMP_TO_EDGE"/>
+            wrap_mode="GL_CLAMP_TO_EDGE"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_LINEAR"/>
     </textures>
 </material>

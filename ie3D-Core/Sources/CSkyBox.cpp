@@ -212,3 +212,13 @@ void CSkyBox::onBatch(const std::string& mode)
 {
    
 }
+
+void CSkyBox::onOcclusionQueryDraw(CSharedMaterialRef material)
+{
+    
+}
+
+void CSkyBox::onOcclusionQueryUpdate(void)
+{
+    
+}

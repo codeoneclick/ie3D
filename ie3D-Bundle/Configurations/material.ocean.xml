@@ -23,16 +23,22 @@
             filename=""
             render_operation_name="render.operation.world.reflection"
             sampler_id="0"
-            wrap_mode="GL_CLAMP_TO_EDGE"/>
+            wrap_mode="GL_CLAMP_TO_EDGE"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_LINEAR"/>
         <texture
             filename=""
             render_operation_name="render.operation.world.refraction"
             sampler_id="1"
-            wrap_mode="GL_CLAMP_TO_EDGE"/>
+            wrap_mode="GL_CLAMP_TO_EDGE"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_LINEAR"/>
         <texture
             filename="ocean_ripples.png"
             render_operation_name=""
             sampler_id="2"
-            wrap_mode="GL_MIRRORED_REPEAT"/>
+            wrap_mode="GL_MIRRORED_REPEAT"
+            mag_filter="GL_NEAREST"
+            min_filter="GL_NEAREST"/>
     </textures>
 </material>

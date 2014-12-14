@@ -59,7 +59,7 @@ void COcclusionQueryManager::removeFromOcluddingQuery(const std::string &techniq
 {
     auto iterator = m_occludingGeometry.find(techniqueName);
     assert(iterator != m_occludingGeometry.end());
-    if(iterator == m_occludingGeometry.end())
+    if(iterator != m_occludingGeometry.end())
     {
         iterator->second.erase(handler);
     }
