@@ -59,11 +59,15 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         technique->bind();
         technique->draw();
         
+#if defined(__OCCLUSIOON_QUERY__)
+        
         if(technique->isOcclusionQueryEnabled())
         {
             assert(m_occlusionQueryManager != nullptr);
             m_occlusionQueryManager->update(iterator.first);
         }
+        
+#endif
         
         technique->unbind();
         

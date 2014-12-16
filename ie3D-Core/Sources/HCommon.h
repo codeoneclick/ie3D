@@ -35,6 +35,7 @@
 #if defined(__DEBUG__)
 
 #define __PERFORMANCE_TIMER__
+#define __OCCLUSIOON_QUERY__
 
 #endif
 

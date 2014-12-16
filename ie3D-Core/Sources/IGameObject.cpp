@@ -57,19 +57,27 @@ m_status(E_LOADING_STATUS_UNLOADED)
     {
         bindBaseShaderUniforms(material);
     };
+    
+#if defined(__OCCLUSIOON_QUERY__)
+    
 #if defined(__OSX__)
     
     glGenQueries(1, &m_occlusionQueryHandler);
     
-#elif defined(__IOS)
+#elif defined(__IOS__)
     
     glGenQueriesEXT(1, &m_occlusionQueryHandler);
+    
+#endif
     
 #endif
 }
 
 IGameObject::~IGameObject(void)
 {
+    
+#if defined(__OCCLUSIOON_QUERY__)
+    
 #if defined(__OSX__)
     
     glDeleteQueries(1, &m_occlusionQueryHandler);
@@ -77,6 +85,8 @@ IGameObject::~IGameObject(void)
 #elif defined(__IOS)
     
     glDeleteQueriesEXT(1, &m_occlusionQueryHandler);
+    
+#endif
     
 #endif
     
@@ -154,11 +164,20 @@ i32 IGameObject::zOrder(void)
 
 bool IGameObject::checkOcclusion(void)
 {
-    /*assert(m_cameraFrustum != nullptr);
+    
+#if defined(__OCCLUSIOON_QUERY__)
+    
+    return !m_occlusionQueryVisible;
+    
+#else
+    
+    assert(m_cameraFrustum != nullptr);
     glm::vec3 maxBound = IGameObject::getMaxBound() + m_position;
     glm::vec3 minBound = IGameObject::getMinBound() + m_position;
-    return !m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);*/
-    return !m_occlusionQueryVisible;
+    return !m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
+    
+#endif
+    
 }
 
 ui32 IGameObject::numTriangles(void)
@@ -617,9 +636,12 @@ void IGameObject::enableRender(bool value)
 		{
 			value == true ? m_renderTechniqueImporter->addRenderTechniqueHandler(iterator.first, shared_from_this()) :
 			m_renderTechniqueImporter->removeRenderTechniqueHandler(iterator.first, shared_from_this());
+#if defined(__OCCLUSIOON_QUERY__)
             
             value == true ? m_renderTechniqueImporter->addToOcluddingQuery(iterator.first, shared_from_this()) :
             m_renderTechniqueImporter->removeFromOcluddingQuery(iterator.first, shared_from_this());
+            
+#endif
 		}
     }
 	m_isNeedToRender = value;
@@ -637,6 +659,13 @@ void IGameObject::enableUpdate(bool value)
 
 void IGameObject::onOcclusionQueryDraw(CSharedMaterialRef material)
 {
+    
+#if not defined(__OCCLUSIOON_QUERY__)
+    
+    assert(false);
+    
+#endif
+    
     if(m_boundingBox != nullptr && !m_occlusionQueryOngoing)
     {
         assert(material != nullptr);
@@ -673,6 +702,13 @@ void IGameObject::onOcclusionQueryDraw(CSharedMaterialRef material)
 
 void IGameObject::onOcclusionQueryUpdate(void)
 {
+    
+#if not defined(__OCCLUSIOON_QUERY__)
+    
+    assert(false);
+    
+#endif
+    
     if(m_boundingBox != nullptr)
     {
 #if defined(__OSX__)
