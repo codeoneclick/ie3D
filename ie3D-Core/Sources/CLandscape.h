@@ -13,9 +13,6 @@
 #include "HDeclaration.h"
 #include "IEditableLandscape.h"
 
-class CLandscapeChunk;
-class CLandscapeEdges;
-
 class CLandscape : public IGameObject,
 public IEditableLandscape
 {
@@ -23,6 +20,7 @@ private:
 
     CSharedHeightmapProcessor m_heightmapProcessor;
     std::vector<CSharedLandscapeChunk> m_chunks;
+    std::vector<CSharedLandscapeSeam> m_seams;
     CSharedLandscapeEdges m_edges;
     ISharedConfiguration m_configuration;
     

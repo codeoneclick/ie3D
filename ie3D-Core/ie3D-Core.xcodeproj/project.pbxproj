@@ -270,9 +270,9 @@
 		2173349A19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */; };
 		2173349B19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */; };
 		2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */; };
-		2179740919F167CF00A98630 /* CLandscapeSeams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179740719F167CF00A98630 /* CLandscapeSeams.cpp */; };
-		2179740A19F167CF00A98630 /* CLandscapeSeams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179740719F167CF00A98630 /* CLandscapeSeams.cpp */; };
-		2179740B19F167CF00A98630 /* CLandscapeSeams.h in Headers */ = {isa = PBXBuildFile; fileRef = 2179740819F167CF00A98630 /* CLandscapeSeams.h */; };
+		2179740919F167CF00A98630 /* CLandscapeSeam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179740719F167CF00A98630 /* CLandscapeSeam.cpp */; };
+		2179740A19F167CF00A98630 /* CLandscapeSeam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179740719F167CF00A98630 /* CLandscapeSeam.cpp */; };
+		2179740B19F167CF00A98630 /* CLandscapeSeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 2179740819F167CF00A98630 /* CLandscapeSeam.h */; };
 		2179741A19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
 		2179741B19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
 		2179741C19F534FA00A98630 /* CGlobalLightSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 2179741919F534FA00A98630 /* CGlobalLightSource.h */; };
@@ -480,8 +480,8 @@
 		217334941964425B002B3F90 /* CRenderPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderPipeline.h; path = Sources/CRenderPipeline.h; sourceTree = "<group>"; };
 		2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueHandler.cpp; path = Sources/IRenderTechniqueHandler.cpp; sourceTree = "<group>"; };
 		2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueHandler.h; path = Sources/IRenderTechniqueHandler.h; sourceTree = "<group>"; };
-		2179740719F167CF00A98630 /* CLandscapeSeams.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLandscapeSeams.cpp; path = Sources/CLandscapeSeams.cpp; sourceTree = "<group>"; };
-		2179740819F167CF00A98630 /* CLandscapeSeams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLandscapeSeams.h; path = Sources/CLandscapeSeams.h; sourceTree = "<group>"; };
+		2179740719F167CF00A98630 /* CLandscapeSeam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLandscapeSeam.cpp; path = Sources/CLandscapeSeam.cpp; sourceTree = "<group>"; };
+		2179740819F167CF00A98630 /* CLandscapeSeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLandscapeSeam.h; path = Sources/CLandscapeSeam.h; sourceTree = "<group>"; };
 		2179741819F534FA00A98630 /* CGlobalLightSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGlobalLightSource.cpp; path = Sources/CGlobalLightSource.cpp; sourceTree = "<group>"; };
 		2179741919F534FA00A98630 /* CGlobalLightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGlobalLightSource.h; path = Sources/CGlobalLightSource.h; sourceTree = "<group>"; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
@@ -1253,8 +1253,8 @@
 				A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */,
 				A46B1C79183E3B3600A3EF49 /* CLandscapeEdges.h */,
 				A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */,
-				2179740819F167CF00A98630 /* CLandscapeSeams.h */,
-				2179740719F167CF00A98630 /* CLandscapeSeams.cpp */,
+				2179740819F167CF00A98630 /* CLandscapeSeam.h */,
+				2179740719F167CF00A98630 /* CLandscapeSeam.cpp */,
 				212092B31919674400FFC8D4 /* CSkyBox.h */,
 				212092B21919674400FFC8D4 /* CSkyBox.cpp */,
 				212EEDAB19D2FA9B00DA02B7 /* CAtmosphericScattering.h */,
@@ -1912,7 +1912,7 @@
 				2191CEBE196EE95100CE2813 /* zutil.h in Headers */,
 				2191CEB1196EE95100CE2813 /* inflate.h in Headers */,
 				212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */,
-				2179740B19F167CF00A98630 /* CLandscapeSeams.h in Headers */,
+				2179740B19F167CF00A98630 /* CLandscapeSeam.h in Headers */,
 				2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */,
 				2191CE54196EDBEF00CE2813 /* pnglibconf.h in Headers */,
 				2191CE4D196EDBEF00CE2813 /* pngconf.h in Headers */,
@@ -2107,7 +2107,7 @@
 				2191CEB6196EE95100CE2813 /* trees.c in Sources */,
 				21208FE21906FB5F00FFC8D4 /* CConfigurationOceanLoadingOperation.cpp in Sources */,
 				21208FE31906FB5F00FFC8D4 /* CConfigurationLandscapeLoadingOperation.cpp in Sources */,
-				2179740A19F167CF00A98630 /* CLandscapeSeams.cpp in Sources */,
+				2179740A19F167CF00A98630 /* CLandscapeSeam.cpp in Sources */,
 				21EF00401A237FF700E0AF20 /* IOcclusionQueryHandler.cpp in Sources */,
 				21208FE41906FB5F00FFC8D4 /* CConfigurationParticleEmitterLoadingOperation.cpp in Sources */,
 				21208FE51906FB5F00FFC8D4 /* CConfigurationWSRenderOperationLoadingOperation.cpp in Sources */,
@@ -2281,7 +2281,7 @@
 				2191CEB5196EE95100CE2813 /* trees.c in Sources */,
 				213266261906A4AF001C98F7 /* CConfigurationOceanLoadingOperation.cpp in Sources */,
 				213266271906A4AF001C98F7 /* CConfigurationLandscapeLoadingOperation.cpp in Sources */,
-				2179740919F167CF00A98630 /* CLandscapeSeams.cpp in Sources */,
+				2179740919F167CF00A98630 /* CLandscapeSeam.cpp in Sources */,
 				21EF003F1A237FF700E0AF20 /* IOcclusionQueryHandler.cpp in Sources */,
 				213266281906A4AF001C98F7 /* CConfigurationParticleEmitterLoadingOperation.cpp in Sources */,
 				213266291906A4AF001C98F7 /* CConfigurationWSRenderOperationLoadingOperation.cpp in Sources */,

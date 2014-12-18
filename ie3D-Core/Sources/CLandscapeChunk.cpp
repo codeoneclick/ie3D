@@ -17,6 +17,7 @@
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CQuadTree.h"
+#include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
 CLandscapeChunk::CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
@@ -229,5 +230,58 @@ CSharedIndexBuffer CLandscapeChunk::getCollisionIndexBuffer(void) const
     assert(m_mesh != nullptr);
     assert(m_mesh->getIndexBuffer() != nullptr);
     return m_mesh->getIndexBuffer();
+}
+
+std::vector<SAttributeVertex> CLandscapeChunk::getSeamVertexes(E_LANDSCAPE_SEAM seam)
+{
+    std::vector<SAttributeVertex> seamVerteces;
+    ui32 seamLength = m_mesh->getVertexBuffer()->getUsedSize() / 2;
+    SAttributeVertex *vertexData = m_mesh->getVertexBuffer()->lock();
+    switch (seam)
+    {
+        case E_LANDSCAPE_SEAM_TOP:
+        {
+            for(ui32 i = 0; i < seamLength; ++i)
+            {
+                seamVerteces.push_back(vertexData[i]);
+            }
+        }
+            break;
+            
+        case E_LANDSCAPE_SEAM_BOTTOM:
+        {
+            for(ui32 i = 0; i < seamLength; ++i)
+            {
+                seamVerteces.push_back(vertexData[i + seamLength * (seamLength -1)]);
+            }
+
+        }
+            break;
+
+            
+        case E_LANDSCAPE_SEAM_LEFT:
+        {
+            for(ui32 i = 0; i < seamLength; ++i)
+            {
+                seamVerteces.push_back(vertexData[i + i * (seamLength - 1)]);
+            }
+        }
+            break;
+
+            
+        case E_LANDSCAPE_SEAM_RIGHT:
+        {
+            for(ui32 i = 0; i < seamLength; ++i)
+            {
+                seamVerteces.push_back(vertexData[(seamLength - 1) + i * (seamLength - 1)]);
+            }
+        }
+            break;
+            
+        default:
+            assert(false);
+            break;
+    }
+    return seamVerteces;
 }
 

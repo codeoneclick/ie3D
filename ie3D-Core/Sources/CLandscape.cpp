@@ -20,6 +20,7 @@
 #include "CHeightmapProcessor.h"
 #include "CFrustum.h"
 #include "CQuadTree.h"
+#include "CLandscapeSeam.h"
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -109,7 +110,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     {
                         m_chunks[index] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
                         m_chunks[index]->setInprogressLOD(LOD);
-                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, index, LOD](CSharedMeshRef mesh) {
+                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, index, i, j, LOD](CSharedMeshRef mesh) {
                             
                             m_chunks[index]->setCamera(m_camera);
                             m_chunks[index]->setCameraFrustum(m_cameraFrustum);
@@ -207,6 +208,7 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_splattingNormalMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
     m_chunks.resize(m_heightmapProcessor->getNumChunksX() * m_heightmapProcessor->getNumChunksZ());
+    m_seams.resize((m_heightmapProcessor->getNumChunksX() - 1) * (m_heightmapProcessor->getNumChunksZ() - 1));
     
     m_edges->onConfigurationLoaded(configuration, success);
     m_edges->setEdgeTexture(m_heightmapProcessor->Get_EdgesMaskTexture());
