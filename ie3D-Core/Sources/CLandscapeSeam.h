@@ -14,7 +14,13 @@
 class CLandscapeSeam : public IGameObject
 {
 private:
+
+    friend class CLandscape;
     
+    i32 m_seamMaxLength;
+    
+    std::vector<SAttributeVertex> m_edge_01;
+    std::vector<SAttributeVertex> m_edge_02;
 
 protected:
 
@@ -33,11 +39,6 @@ protected:
     
     void onOcclusionQueryDraw(CSharedMaterialRef material);
     void onOcclusionQueryUpdate(void);
-    
-    ui32 m_seamMaxLength;
-    
-    std::vector<SAttributeVertex> m_edge_01;
-    std::vector<SAttributeVertex> m_edge_02;
     
 public:
     

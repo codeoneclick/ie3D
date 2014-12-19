@@ -34,6 +34,8 @@ private:
     CSharedTexture m_prerenderedSplattingDiffuseTexture;
     CSharedTexture m_prerenderedSplattingNormalTexture;
     
+    std::array<CSharedLandscapeSeam, E_LANDSCAPE_SEAM_MAX> m_seams;
+    
 protected:
     
     void setMesh(CSharedMeshRef mesh);
@@ -80,7 +82,12 @@ public:
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;
     
-    std::vector<SAttributeVertex> getSeamVertexes(E_LANDSCAPE_SEAM seam);
+    std::vector<SAttributeVertex> getSeamVertexes(E_LANDSCAPE_SEAM type) const;
+    
+    void setSeam(CSharedLandscapeSeamRef seam, E_LANDSCAPE_SEAM type);
+    CSharedLandscapeSeam getSeam(E_LANDSCAPE_SEAM type) const;
+    
+    bool isMeshExist(void) const;
 };
 
 #endif

@@ -41,11 +41,10 @@ void CLandscapeSeam::onConfigurationLoaded(ISharedConfigurationRef configuration
 {
     IGameObject::onConfigurationLoaded(configuration, success);
     
-    m_seamMaxLength = 32;
+    m_seamMaxLength = 65;
     
     CSharedVertexBuffer vertexBuffer =std::make_shared<CVertexBuffer>(m_seamMaxLength * 2, GL_STATIC_DRAW);
-    
-    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((m_seamMaxLength - 1) * 6, GL_STATIC_DRAW);
+    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((m_seamMaxLength - 1 + m_seamMaxLength - 1) * 3, GL_STATIC_DRAW);
     
     m_mesh = CMesh::constructCustomMesh("landscape.seam", vertexBuffer, indexBuffer,
                                         glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
@@ -63,7 +62,7 @@ i32  CLandscapeSeam::zOrder(void)
 
 bool CLandscapeSeam::checkOcclusion(void)
 {
-    return IGameObject::checkOcclusion();
+    return false;
 }
 
 ui32 CLandscapeSeam::numTriangles(void)
@@ -136,4 +135,49 @@ void CLandscapeSeam::setVertexesToSewTogether(const std::vector<SAttributeVertex
         vertexData[index] = minLODEdge.at(i);
         ++index;
     }
+    m_mesh->getVertexBuffer()->unlock();
+    
+    ui16* indexData = m_mesh->getIndexBuffer()->lock();
+    
+    i32 numTriangles = static_cast<i32>(m_edge_01.size()) - 1 + static_cast<i32>(m_edge_02.size()) - 1;
+    i32 twoLowTrianglesStep = 2 * (( static_cast<i32>(maxLODEdge.size()) - 1) /  static_cast<i32>((minLODEdge.size()) - 1)) + 2;
+    i32 twoLowTrianglesStepper = 0;
+    i32 twoLowTrianglesStepNumber = 0;
+    i32 vertexInTriangleIndex_01 = 0, vertexInTriangleIndex_02 = 0, vertexInTriangleIndex_03 = 0;
+    index = 0;
+    for(i32 i = 0; i < numTriangles; ++i)
+    {
+        if(twoLowTrianglesStepper == twoLowTrianglesStep)
+        {
+            twoLowTrianglesStepNumber++;
+            twoLowTrianglesStepper = 0;
+        }
+        
+        if(twoLowTrianglesStepper == 0)
+        {
+            vertexInTriangleIndex_02 = static_cast<i32>(maxLODEdge.size()) + 2 * twoLowTrianglesStepNumber + 1;
+            vertexInTriangleIndex_03 = static_cast<i32>(maxLODEdge.size()) + 2 * twoLowTrianglesStepNumber;
+        }
+        else if(twoLowTrianglesStepper == 1)
+        {
+            vertexInTriangleIndex_02 = vertexInTriangleIndex_01 + 1;
+            vertexInTriangleIndex_03 = static_cast<i32>(maxLODEdge.size()) + 2 * twoLowTrianglesStepNumber + 1;
+        }
+        else if(twoLowTrianglesStepper == twoLowTrianglesStep - 1)
+        {
+            vertexInTriangleIndex_02 = static_cast<i32>(maxLODEdge.size()) + 2 * twoLowTrianglesStepNumber + 2;
+        }
+        else
+        {
+            vertexInTriangleIndex_01++;
+            vertexInTriangleIndex_02++;
+        }
+        
+        indexData[index++] = vertexInTriangleIndex_01;
+        indexData[index++] = vertexInTriangleIndex_02;
+        indexData[index++] = vertexInTriangleIndex_03;
+           
+        twoLowTrianglesStepper++;
+    }
+    m_mesh->getIndexBuffer()->unlock();
 }

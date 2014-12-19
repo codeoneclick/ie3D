@@ -21,6 +21,7 @@
 #include "CFrustum.h"
 #include "CQuadTree.h"
 #include "CLandscapeSeam.h"
+#include "CVertexBuffer.h"
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -93,11 +94,11 @@ void CLandscape::onSceneUpdate(f32 deltatime)
         ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
         ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
         
-        for(ui32 i = 0; i < numChunksX; ++i)
+        for(i32 i = 0; i < numChunksX; ++i)
         {
-            for(ui32 j = 0; j < numChunksZ; ++j)
+            for(i32 j = 0; j < numChunksZ; ++j)
             {
-                ui32 index = i + j * numChunksZ;
+                i32 index = i + j * numChunksZ;
                 glm::vec3 maxBound = std::get<0>(m_heightmapProcessor->getChunkBounds(i, j));
                 glm::vec3 minBound = std::get<1>(m_heightmapProcessor->getChunkBounds(i, j));
                 
@@ -110,7 +111,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     {
                         m_chunks[index] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
                         m_chunks[index]->setInprogressLOD(LOD);
-                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, index, i, j, LOD](CSharedMeshRef mesh) {
+                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, index, i, j, numChunksX, numChunksZ, LOD](CSharedMeshRef mesh) {
                             
                             m_chunks[index]->setCamera(m_camera);
                             m_chunks[index]->setCameraFrustum(m_cameraFrustum);
@@ -140,6 +141,56 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
                             m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
                             
+                            if((j - 1) >= 0)
+                            {
+                                bool isNeighborChunkExist = false;
+                                CSharedLandscapeSeam seam = m_chunks[index]->getSeam(E_LANDSCAPE_SEAM_LEFT);
+                                if(seam == nullptr)
+                                {
+                                    i32 index = i + (j - 1) * numChunksZ;
+                                    if(m_chunks[index] != nullptr && m_chunks[index]->isMeshExist())
+                                    {
+                                        isNeighborChunkExist = true;
+                                        seam = m_chunks[index]->getSeam(E_LANDSCAPE_SEAM_RIGHT);
+                                    }
+                                }
+                                if(seam == nullptr && isNeighborChunkExist)
+                                {
+                                    seam = std::make_shared<CLandscapeSeam>(m_resourceAccessor, m_renderTechniqueAccessor);
+                                    seam->setCamera(m_camera);
+                                    seam->setCameraFrustum(m_cameraFrustum);
+                                    seam->setGlobalLightSource(m_globalLightSource);
+                                    seam->onConfigurationLoaded(m_configuration, true);
+                                    
+                                    seam->setRenderTechniqueImporter(m_renderTechniqueImporter);
+                                    seam->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
+                                    seam->setSceneUpdateMgr(m_sceneUpdateMgr);
+                                    
+                                    seam->enableRender(m_isNeedToRender);
+                                    seam->enableUpdate(m_isNeedToUpdate);
+                                    
+                                    m_chunks[index]->setSeam(seam, E_LANDSCAPE_SEAM_RIGHT);
+                                    
+                                    std::cout<<"seam right bound: ["<<m_chunks[index]->m_mesh->getMaxBound().x / 64<<","<<
+                                    m_chunks[index]->m_mesh->getMaxBound().z / 64<<"] ["<<m_chunks[index]->m_mesh->getMinBound().x / 64<<","<<
+                                    m_chunks[index]->m_mesh->getMinBound().z / 64<<"]"<<std::endl;
+                                    
+                                    
+                                    i32 index = i + (j - 1) * numChunksZ;
+                                    m_chunks[index]->setSeam(seam, E_LANDSCAPE_SEAM_LEFT);
+                                    
+                                    std::cout<<"seam left bound: ["<<m_chunks[index]->m_mesh->getMaxBound().x / 64<<","<<
+                                    m_chunks[index]->m_mesh->getMaxBound().z / 64<<"] ["<<m_chunks[index]->m_mesh->getMinBound().x / 64<<","<<
+                                    m_chunks[index]->m_mesh->getMinBound().z / 64<<"]"<<std::endl;
+                                }
+                                if(seam != nullptr)
+                                {
+                                    std::vector<SAttributeVertex> leftSeamVertexes = m_chunks[index]->getSeamVertexes(E_LANDSCAPE_SEAM_LEFT);
+                                    i32 index = i + (j - 1) * numChunksZ;
+                                    std::vector<SAttributeVertex> rightSeamVertexes = m_chunks[index]->getSeamVertexes(E_LANDSCAPE_SEAM_RIGHT);
+                                    seam->setVertexesToSewTogether(leftSeamVertexes, rightSeamVertexes);
+                                }
+                            }
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
                         });
@@ -208,7 +259,8 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_splattingNormalMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
     m_chunks.resize(m_heightmapProcessor->getNumChunksX() * m_heightmapProcessor->getNumChunksZ());
-    m_seams.resize((m_heightmapProcessor->getNumChunksX() - 1) * (m_heightmapProcessor->getNumChunksZ() - 1));
+    m_seams.resize((m_heightmapProcessor->getNumChunksX() - 1) * m_heightmapProcessor->getNumChunksZ() +
+                   (m_heightmapProcessor->getNumChunksZ() - 1) * m_heightmapProcessor->getNumChunksX());
     
     m_edges->onConfigurationLoaded(configuration, success);
     m_edges->setEdgeTexture(m_heightmapProcessor->Get_EdgesMaskTexture());

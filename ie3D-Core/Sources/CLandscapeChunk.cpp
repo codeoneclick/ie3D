@@ -38,6 +38,10 @@ m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
 CLandscapeChunk::~CLandscapeChunk(void)
 {
     m_materialBindImposer = nullptr;
+    for(ui32 i = 0; i < m_seams.size(); ++i)
+    {
+        m_seams.at(i) = nullptr;
+    }
 }
 
 void CLandscapeChunk::setMesh(CSharedMeshRef mesh)
@@ -232,12 +236,12 @@ CSharedIndexBuffer CLandscapeChunk::getCollisionIndexBuffer(void) const
     return m_mesh->getIndexBuffer();
 }
 
-std::vector<SAttributeVertex> CLandscapeChunk::getSeamVertexes(E_LANDSCAPE_SEAM seam)
+std::vector<SAttributeVertex> CLandscapeChunk::getSeamVertexes(E_LANDSCAPE_SEAM type) const
 {
     std::vector<SAttributeVertex> seamVerteces;
-    ui32 seamLength = m_mesh->getVertexBuffer()->getUsedSize() / 2;
+    ui32 seamLength = sqrt(m_mesh->getVertexBuffer()->getUsedSize());
     SAttributeVertex *vertexData = m_mesh->getVertexBuffer()->lock();
-    switch (seam)
+    switch (type)
     {
         case E_LANDSCAPE_SEAM_TOP:
         {
@@ -252,28 +256,34 @@ std::vector<SAttributeVertex> CLandscapeChunk::getSeamVertexes(E_LANDSCAPE_SEAM 
         {
             for(ui32 i = 0; i < seamLength; ++i)
             {
-                seamVerteces.push_back(vertexData[i + seamLength * (seamLength -1)]);
+                seamVerteces.push_back(vertexData[i + seamLength * (seamLength - 1)]);
             }
 
         }
             break;
-
+            
             
         case E_LANDSCAPE_SEAM_LEFT:
         {
-            for(ui32 i = 0; i < seamLength; ++i)
+            for(i32 i = 0; i < seamLength; ++i)
             {
-                seamVerteces.push_back(vertexData[i + i * (seamLength - 1)]);
+                i32 index = i + i * (seamLength - 1);
+                assert(index >= 0 || index < seamLength);
+                seamVerteces.push_back(vertexData[index]);
+                std::cout<<"left seam vertex: "<<vertexData[index].m_position.x<<","<<vertexData[index].m_position.z<<std::endl;
             }
         }
             break;
-
+            
             
         case E_LANDSCAPE_SEAM_RIGHT:
         {
-            for(ui32 i = 0; i < seamLength; ++i)
+            for(i32 i = 0; i < seamLength; ++i)
             {
-                seamVerteces.push_back(vertexData[(seamLength - 1) + i * (seamLength - 1)]);
+               i32 index = i + (i + 1) * (seamLength - 1);
+                assert(index >= 0 || index < seamLength);
+                seamVerteces.push_back(vertexData[index]);
+                std::cout<<"right seam vertex: "<<vertexData[index].m_position.x<<","<<vertexData[index].m_position.z<<std::endl;
             }
         }
             break;
@@ -283,5 +293,20 @@ std::vector<SAttributeVertex> CLandscapeChunk::getSeamVertexes(E_LANDSCAPE_SEAM 
             break;
     }
     return seamVerteces;
+}
+
+CSharedLandscapeSeam CLandscapeChunk::getSeam(E_LANDSCAPE_SEAM type) const
+{
+    return m_seams.at(type);
+}
+
+void CLandscapeChunk::setSeam(CSharedLandscapeSeamRef seam, E_LANDSCAPE_SEAM type)
+{
+    m_seams.at(type) = seam;
+}
+
+bool CLandscapeChunk::isMeshExist(void) const
+{
+    return m_mesh != nullptr;
 }
 
