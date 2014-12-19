@@ -135,7 +135,8 @@ void CLandscapeSeam::setVertexesToSewTogether(const std::vector<SAttributeVertex
         vertexData[index] = minLODEdge.at(i);
         ++index;
     }
-    m_mesh->getVertexBuffer()->unlock();
+    m_mesh->getVertexBuffer()->unlock(static_cast<i32>(m_edge_01.size()) +
+                                      static_cast<i32>(m_edge_02.size()));
     
     ui16* indexData = m_mesh->getIndexBuffer()->lock();
     
@@ -179,5 +180,5 @@ void CLandscapeSeam::setVertexesToSewTogether(const std::vector<SAttributeVertex
            
         twoLowTrianglesStepper++;
     }
-    m_mesh->getIndexBuffer()->unlock();
+    m_mesh->getIndexBuffer()->unlock(numTriangles * 3);
 }
