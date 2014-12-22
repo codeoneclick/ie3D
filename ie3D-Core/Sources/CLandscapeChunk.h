@@ -18,6 +18,8 @@ class CLandscapeChunk : public IGameObject
 private:
     
     friend class CLandscape;
+    
+    ui32 m_size;
     glm::ivec2 m_heightmapSize;
     
     E_LANDSCAPE_CHUNK_LOD m_currentLOD;
@@ -34,12 +36,13 @@ private:
     CSharedTexture m_prerenderedSplattingDiffuseTexture;
     CSharedTexture m_prerenderedSplattingNormalTexture;
     
-    std::array<CSharedLandscapeSeam, E_LANDSCAPE_SEAM_MAX> m_seams;
-    
 protected:
     
     void setMesh(CSharedMeshRef mesh);
     void setQuadTree(CSharedQuadTreeRef quadTree, E_LANDSCAPE_CHUNK_LOD LOD);
+    
+    std::function<ui32(ui32)> getEdgeVertexIncrementFunction(E_LANDSCAPE_SEAM seamType) const;
+    std::function<f32(const glm::vec3&, const glm::vec3&, const glm::vec3&)> getInterpolationIntensityFunctionToSewSeams(E_LANDSCAPE_SEAM seamType);
     
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     
@@ -82,13 +85,9 @@ public:
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;
     
-    std::vector<SAttributeVertex> getSeamVerteces(E_LANDSCAPE_SEAM type) const;
-    void setSeamVerteces(const std::vector<SAttributeVertex>& verteces, E_LANDSCAPE_SEAM type);
+    std::vector<SAttributeVertex> getSeamVerteces(E_LANDSCAPE_SEAM seamType) const;
+    void setSeamVerteces(const std::vector<SAttributeVertex>& verteces, E_LANDSCAPE_SEAM seamType);
     
-    void setSeam(CSharedLandscapeSeamRef seam, E_LANDSCAPE_SEAM type);
-    CSharedLandscapeSeam getSeam(E_LANDSCAPE_SEAM type) const;
-    
-    bool isMeshExist(void) const;
 };
 
 #endif

@@ -217,10 +217,6 @@ class CLandscapeEdges;
 typedef std::shared_ptr<CLandscapeEdges> CSharedLandscapeEdges;
 typedef const CSharedLandscapeEdges& CSharedLandscapeEdgesRef;
 
-class CLandscapeSeam;
-typedef std::shared_ptr<CLandscapeSeam> CSharedLandscapeSeam;
-typedef const CSharedLandscapeSeam& CSharedLandscapeSeamRef;
-
 class IOGLWindow;
 typedef std::shared_ptr<IOGLWindow> ISharedOGLWindow;
 typedef const ISharedOGLWindow& ISharedOGLWindowRef;

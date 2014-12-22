@@ -29,7 +29,8 @@ m_prerenderedSplattingDiffuseTexture(nullptr),
 m_prerenderedSplattingNormalTexture(nullptr),
 m_quadTree(nullptr),
 m_currentLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
-m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
+m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
+m_size(0)
 {
     m_isNeedBoundingBox = true;
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
@@ -38,15 +39,13 @@ m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
 CLandscapeChunk::~CLandscapeChunk(void)
 {
     m_materialBindImposer = nullptr;
-    for(ui32 i = 0; i < m_seams.size(); ++i)
-    {
-        m_seams.at(i) = nullptr;
-    }
 }
 
 void CLandscapeChunk::setMesh(CSharedMeshRef mesh)
 {
+    assert(mesh != nullptr);
     m_mesh = mesh;
+    m_size = sqrt(mesh->getVertexBuffer()->getUsedSize()); // chunk must be quad
 }
 
 void CLandscapeChunk::setQuadTree(CSharedQuadTreeRef quadTree, E_LANDSCAPE_CHUNK_LOD LOD)
@@ -236,153 +235,96 @@ CSharedIndexBuffer CLandscapeChunk::getCollisionIndexBuffer(void) const
     return m_mesh->getIndexBuffer();
 }
 
-std::vector<SAttributeVertex> CLandscapeChunk::getSeamVerteces(E_LANDSCAPE_SEAM type) const
+std::vector<SAttributeVertex> CLandscapeChunk::getSeamVerteces(E_LANDSCAPE_SEAM seamType) const
 {
     std::vector<SAttributeVertex> seamVerteces;
-    ui32 seamLength = sqrt(m_mesh->getVertexBuffer()->getUsedSize());
     SAttributeVertex *vertexData = m_mesh->getVertexBuffer()->lock();
-    switch (type)
+    std::function<ui32(ui32)> incrementFunction = CLandscapeChunk::getEdgeVertexIncrementFunction(seamType);
+    for(ui32 i = 0; i < m_size; ++i)
     {
-        case E_LANDSCAPE_SEAM_TOP:
-        {
-            for(ui32 i = 0; i < seamLength; ++i)
-            {
-                seamVerteces.push_back(vertexData[i]);
-            }
-        }
-            break;
-            
-        case E_LANDSCAPE_SEAM_BOTTOM:
-        {
-            for(ui32 i = 0; i < seamLength; ++i)
-            {
-                seamVerteces.push_back(vertexData[i + seamLength * (seamLength - 1)]);
-            }
-        }
-            break;
-            
-        case E_LANDSCAPE_SEAM_LEFT:
-        {
-            for(i32 i = 0; i < seamLength; ++i)
-            {
-                i32 index = i + i * (seamLength - 1);
-                assert(index >= 0 || index < seamLength);
-                seamVerteces.push_back(vertexData[index]);
-                //std::cout<<"left seam vertex: "<<vertexData[index].m_position.x<<","<<vertexData[index].m_position.z<<std::endl;
-            }
-        }
-            break;
-            
-        case E_LANDSCAPE_SEAM_RIGHT:
-        {
-            for(i32 i = 0; i < seamLength; ++i)
-            {
-                i32 index = i + (i + 1) * (seamLength - 1);
-                assert(index >= 0 || index < seamLength);
-                seamVerteces.push_back(vertexData[index]);
-                //std::cout<<"right seam vertex: "<<vertexData[index].m_position.x<<","<<vertexData[index].m_position.z<<std::endl;
-            }
-        }
-            break;
-            
-        default:
-            assert(false);
-            break;
+        ui32 index = incrementFunction(i);
+        seamVerteces.push_back(vertexData[index]);
     }
     return seamVerteces;
 }
 
-void CLandscapeChunk::setSeamVerteces(const std::vector<SAttributeVertex>& verteces, E_LANDSCAPE_SEAM type)
+void CLandscapeChunk::setSeamVerteces(const std::vector<SAttributeVertex>& verteces, E_LANDSCAPE_SEAM seamType)
 {
-    ui32 currentEdgeLength = sqrt(m_mesh->getVertexBuffer()->getUsedSize());
     ui32 neighborEdgeLength = static_cast<ui32>(verteces.size());
     
-    assert(neighborEdgeLength > 0 && currentEdgeLength > 0);
-    assert(neighborEdgeLength < currentEdgeLength);
-    assert((currentEdgeLength - 1) % (neighborEdgeLength - 1) == 0);
+    assert(neighborEdgeLength > 0 && m_size > 0);
+    assert(neighborEdgeLength <= m_size);
+    assert((m_size - 1) % (neighborEdgeLength - 1) == 0);
     
-    ui32 edgesLengthDeltaStep = (currentEdgeLength - 1) / (neighborEdgeLength - 1);
-    std::cout<<"setSeamVerteces with Type: "<<type<<std::endl;
+    ui32 edgesLengthDeltaStep = (m_size - 1) / (neighborEdgeLength - 1);
     
+    std::function<ui32(ui32)> incrementFunction = CLandscapeChunk::getEdgeVertexIncrementFunction(seamType);
+    std::function<f32(const glm::vec3&, const glm::vec3&, const glm::vec3&)> interpolationIntensityFunction = CLandscapeChunk::getInterpolationIntensityFunctionToSewSeams(seamType);
     SAttributeVertex *vertexData = m_mesh->getVertexBuffer()->lock();
     
-    switch (type)
+    i32 neighborEdgeVertexIndex = 0;
+    for(ui32 i = 0; i < m_size; ++i)
     {
-        case E_LANDSCAPE_SEAM_TOP:
+        i32 index = incrementFunction(i);
+        neighborEdgeVertexIndex = i / edgesLengthDeltaStep;
+        
+        ui32 neighborVertexIndex_01 = neighborEdgeVertexIndex;
+        ui32 neighborVertexIndex_02 = neighborEdgeVertexIndex + 1 <= neighborEdgeLength - 1 ? neighborEdgeVertexIndex + 1 : neighborEdgeVertexIndex;
+        
+        f32 interpolationIntensity = interpolationIntensityFunction(verteces.at(neighborVertexIndex_01).m_position,
+                                                                    verteces.at(neighborVertexIndex_02).m_position,
+                                                                    vertexData[index].m_position);
+        vertexData[index].m_position.y = glm::mix(verteces.at(neighborVertexIndex_01).m_position.y,
+                                                  verteces.at(neighborVertexIndex_02).m_position.y,
+                                                  interpolationIntensity);
+    }
+    m_mesh->getVertexBuffer()->unlock();
+}
+
+std::function<ui32(ui32)> CLandscapeChunk::getEdgeVertexIncrementFunction(E_LANDSCAPE_SEAM seamType) const
+{
+    std::function<ui32(ui32)> incrementFunction = nullptr;
+    switch (seamType)
+    {
+        case E_LANDSCAPE_SEAM_X_MINUS:
         {
-            for(ui32 i = 0; i < currentEdgeLength; ++i)
+            incrementFunction = [this](ui32 index)
             {
-                vertexData[i].m_position.y = 0.0;
-            }
+                return index;
+            };
         }
             break;
             
-        case E_LANDSCAPE_SEAM_BOTTOM:
+        case E_LANDSCAPE_SEAM_X_PLUS:
         {
-            ui32 neighborEdgeVertexIndex = 0;
-            ui32 edgesLengthDeltaStep = 0;
-            for(ui32 i = 0; i < currentEdgeLength; ++i)
+            incrementFunction = [this](ui32 index)
             {
-                i32 index = i + currentEdgeLength * (currentEdgeLength - 1);
-                assert(index >= 0 || index < currentEdgeLength);
-                
-                /*if(edgesLengthDeltaStep == edgesLengthDelta || edgesLengthDeltaStep == 0)
-                {
-                    vertexData[index].m_position.y = verteces.at(neighborEdgeVertexIndex).m_position.y;
-                }
-                
-                edgesLengthDeltaStep++;
-                if(edgesLengthDeltaStep == edgesLengthDelta)
-                {
-                    neighborEdgeVertexIndex++;
-                }*/
-            }
+                ui32 newIndex = index + m_size * (m_size - 1);
+                assert(newIndex >= 0 || newIndex < m_size);
+                return newIndex;
+            };
         }
             break;
             
-        case E_LANDSCAPE_SEAM_LEFT:
+        case E_LANDSCAPE_SEAM_Z_MINUS:
         {
-            ui32 neighborEdgeVertexIndex = 0;
-            ui32 edgesLengthDeltaStep = 0;
-            for(ui32 i = 0; i < currentEdgeLength; ++i)
+            incrementFunction = [this](ui32 index)
             {
-                i32 index = i + i * (currentEdgeLength - 1);
-                assert(index >= 0 || index < currentEdgeLength);
-                
-                //if(edgesLengthDeltaStep == edgesLengthDelta || edgesLengthDeltaStep == 0)
-                {
-                    vertexData[index].m_position.y = 0.0;//verteces.at(neighborEdgeVertexIndex).m_position.y;
-                }
-                
-                //edgesLengthDeltaStep++;
-                //if(edgesLengthDeltaStep == edgesLengthDelta)
-                //{
-                //    neighborEdgeVertexIndex++;
-               // }
-            }
+                ui32 newIndex = index + index * (m_size - 1);
+                assert(newIndex >= 0 || newIndex < m_size);
+                return newIndex;
+            };
         }
             break;
             
-        case E_LANDSCAPE_SEAM_RIGHT:
+        case E_LANDSCAPE_SEAM_Z_PLUS:
         {
-            i32 neighborEdgeVertexIndex = 0;
-            for(ui32 i = 0; i < currentEdgeLength; ++i)
+            incrementFunction = [this](ui32 index)
             {
-                i32 index = i + (i + 1) * (currentEdgeLength - 1);
-                assert(index >= 0 || index < currentEdgeLength);
-                
-                neighborEdgeVertexIndex = i / edgesLengthDeltaStep;
-                
-                glm::vec3 neighborVertexPosition_01 = verteces.at(neighborEdgeVertexIndex).m_position;
-                glm::vec3 neighborVertexPosition_02 = verteces.at(neighborEdgeVertexIndex + 1 < neighborEdgeLength - 1 ? neighborEdgeVertexIndex + 1 : neighborEdgeVertexIndex).m_position;
-                
-                f32 distanceBetweenNeighborVertices = neighborVertexPosition_02.x - neighborVertexPosition_01.x;
-                f32 distanceBetweenNeigborAndCurrentVertex = vertexData[index].m_position.x - neighborVertexPosition_01.x;
-                assert(distanceBetweenNeighborVertices >= 0.0f);
-                f32 interpolationIntensity = distanceBetweenNeighborVertices != 0.0f ? distanceBetweenNeigborAndCurrentVertex / distanceBetweenNeighborVertices : 0.0f;
-                assert(interpolationIntensity >= 0.0f && interpolationIntensity <= 1.0f);
-                vertexData[index].m_position.y = glm::mix(neighborVertexPosition_01.y, neighborVertexPosition_02.y, interpolationIntensity);
-            }
+                ui32 newIndex =  index + (index + 1) * (m_size - 1);
+                assert(newIndex >= 0 || newIndex < m_size);
+                return newIndex;
+            };
         }
             break;
             
@@ -390,21 +332,50 @@ void CLandscapeChunk::setSeamVerteces(const std::vector<SAttributeVertex>& verte
             assert(false);
             break;
     }
-    m_mesh->getVertexBuffer()->unlock();
+    return incrementFunction;
 }
 
-CSharedLandscapeSeam CLandscapeChunk::getSeam(E_LANDSCAPE_SEAM type) const
+std::function<f32(const glm::vec3&, const glm::vec3&, const glm::vec3&)> CLandscapeChunk::getInterpolationIntensityFunctionToSewSeams(E_LANDSCAPE_SEAM seamType)
 {
-    return m_seams.at(type);
-}
-
-void CLandscapeChunk::setSeam(CSharedLandscapeSeamRef seam, E_LANDSCAPE_SEAM type)
-{
-    m_seams.at(type) = seam;
-}
-
-bool CLandscapeChunk::isMeshExist(void) const
-{
-    return m_mesh != nullptr;
+    std::function<f32(const glm::vec3&, const glm::vec3&, const glm::vec3&)> interpolationIntensityFunction = nullptr;
+    switch (seamType)
+    {
+        case E_LANDSCAPE_SEAM_X_MINUS:
+        case E_LANDSCAPE_SEAM_X_PLUS:
+        {
+            interpolationIntensityFunction = [this](const glm::vec3& neighborVertexPosition_01, const glm::vec3& neighborVertexPosition_02, const glm::vec3& currentVertexPosition)
+            {
+                f32 distanceBetweenNeighborVertices = neighborVertexPosition_02.z - neighborVertexPosition_01.z;
+                f32 distanceBetweenNeigborAndCurrentVertex = currentVertexPosition.z - neighborVertexPosition_01.z;
+                assert(distanceBetweenNeighborVertices >= distanceBetweenNeigborAndCurrentVertex);
+                assert(distanceBetweenNeighborVertices >= 0.0f);
+                f32 interpolationIntensity = distanceBetweenNeighborVertices != 0.0f ? distanceBetweenNeigborAndCurrentVertex / distanceBetweenNeighborVertices : 0.0f;
+                assert(interpolationIntensity >= 0.0f && interpolationIntensity <= 1.0f);
+                return interpolationIntensity;
+            };
+        }
+            break;
+            
+        case E_LANDSCAPE_SEAM_Z_MINUS:
+        case E_LANDSCAPE_SEAM_Z_PLUS:
+        {
+            interpolationIntensityFunction = [this](const glm::vec3& neighborVertexPosition_01, const glm::vec3& neighborVertexPosition_02, const glm::vec3& currentVertexPosition)
+            {
+                f32 distanceBetweenNeighborVertices = neighborVertexPosition_02.x - neighborVertexPosition_01.x;
+                f32 distanceBetweenNeigborAndCurrentVertex = currentVertexPosition.x - neighborVertexPosition_01.x;
+                assert(distanceBetweenNeighborVertices >= distanceBetweenNeigborAndCurrentVertex);
+                assert(distanceBetweenNeighborVertices >= 0.0f);
+                f32 interpolationIntensity = distanceBetweenNeighborVertices != 0.0f ? distanceBetweenNeigborAndCurrentVertex / distanceBetweenNeighborVertices : 0.0f;
+                assert(interpolationIntensity >= 0.0f && interpolationIntensity <= 1.0f);
+                return interpolationIntensity;
+            };
+        }
+            break;
+            
+        default:
+            assert(false);
+            break;
+    }
+    return interpolationIntensityFunction;
 }
 

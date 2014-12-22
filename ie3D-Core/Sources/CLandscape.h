@@ -20,7 +20,6 @@ private:
 
     CSharedHeightmapProcessor m_heightmapProcessor;
     std::vector<CSharedLandscapeChunk> m_chunks;
-    std::vector<CSharedLandscapeSeam> m_seams;
     CSharedLandscapeEdges m_edges;
     ISharedConfiguration m_configuration;
     
@@ -59,6 +58,10 @@ protected:
     E_LANDSCAPE_CHUNK_LOD getLOD(const glm::vec3& point,
                                  const glm::vec3& minBound,
                                  const glm::vec3& maxBound);
+    
+    void sewSeams(i32 currentIndexX, i32 currentIndexZ);
+    void sewSeams(CSharedLandscapeChunkRef currentChunk, i32 neighborChunkIndex,
+                  E_LANDSCAPE_SEAM currentChunkSeamType, E_LANDSCAPE_SEAM neighborChunkSeamType);
     
 public:
 
