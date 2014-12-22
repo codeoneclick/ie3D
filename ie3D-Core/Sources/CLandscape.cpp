@@ -143,7 +143,24 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             
                             if((j - 1) >= 0)
                             {
-                                bool isNeighborChunkExist = false;
+                                CSharedLandscapeChunk currentChunk = m_chunks[index];
+                                i32 neighborIndex = i + (j - 1) * numChunksZ;
+                                CSharedLandscapeChunk neighborChunk = m_chunks[neighborIndex];
+                                if(neighborChunk != nullptr && neighborChunk->isMeshExist())
+                                {
+                                    std::vector<SAttributeVertex> currentChunkVerteces = currentChunk->getSeamVerteces(E_LANDSCAPE_SEAM_LEFT);
+                                    std::vector<SAttributeVertex> neighborChunkVerteces = neighborChunk->getSeamVerteces(E_LANDSCAPE_SEAM_RIGHT);
+                                    if(currentChunkVerteces.size() > neighborChunkVerteces.size())
+                                    {
+                                        currentChunk->setSeamVerteces(neighborChunkVerteces, E_LANDSCAPE_SEAM_LEFT);
+                                    }
+                                    else if(currentChunkVerteces.size() < neighborChunkVerteces.size())
+                                    {
+                                        neighborChunk->setSeamVerteces(currentChunkVerteces, E_LANDSCAPE_SEAM_RIGHT);
+                                    }
+                                }
+                                
+                                /*bool isNeighborChunkExist = false;
                                 CSharedLandscapeSeam seam = m_chunks[index]->getSeam(E_LANDSCAPE_SEAM_LEFT);
                                 if(seam == nullptr)
                                 {
@@ -189,7 +206,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                                     i32 index = i + (j - 1) * numChunksZ;
                                     std::vector<SAttributeVertex> rightSeamVertexes = m_chunks[index]->getSeamVertexes(E_LANDSCAPE_SEAM_RIGHT);
                                     seam->setVertexesToSewTogether(leftSeamVertexes, rightSeamVertexes);
-                                }
+                                }*/
                             }
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
@@ -199,11 +216,57 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[index]->getCurrentLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
                     {
                         m_chunks[index]->setInprogressLOD(LOD);
-                        m_heightmapProcessor->stopChunkLoading(i, j, [this, i, j, index, LOD](void){
-                            m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, index, LOD](CSharedMeshRef mesh) {
+                        m_heightmapProcessor->stopChunkLoading(i, j, [this, i, j, index, numChunksZ, LOD](void){
+                            m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, i, j, index, numChunksZ, LOD](CSharedMeshRef mesh) {
                                 m_chunks[index]->setQuadTree(nullptr, m_chunks[index]->getCurrentLOD());
                                 m_chunks[index]->setMesh(mesh);
                                 m_chunks[index]->onSceneUpdate(0);
+                                
+                                CSharedLandscapeChunk currentChunk = m_chunks[index];
+                                CSharedLandscapeChunk neighborChunk = nullptr;
+                                
+                                if((j - 1) >= 0)
+                                {
+                                    i32 neighborIndex = i + (j - 1) * numChunksZ;
+                                    neighborChunk = m_chunks[neighborIndex];
+                                }
+                                /*else if((j + 1) < numChunksZ)
+                                {
+                                    i32 neighborIndex = i + (j + 1) * numChunksZ;
+                                    neighborChunk = m_chunks[neighborIndex];
+                                }*/
+                                
+                                if(neighborChunk != nullptr && neighborChunk->isMeshExist())
+                                {
+                                    std::vector<SAttributeVertex> currentChunkVerteces = currentChunk->getSeamVerteces(E_LANDSCAPE_SEAM_LEFT);
+                                    std::vector<SAttributeVertex> neighborChunkVerteces = neighborChunk->getSeamVerteces(E_LANDSCAPE_SEAM_RIGHT);
+                                    if(currentChunkVerteces.size() > neighborChunkVerteces.size())
+                                    {
+                                        currentChunk->setSeamVerteces(neighborChunkVerteces, E_LANDSCAPE_SEAM_LEFT);
+                                    }
+                                    else if(currentChunkVerteces.size() < neighborChunkVerteces.size())
+                                    {
+                                        neighborChunk->setSeamVerteces(currentChunkVerteces, E_LANDSCAPE_SEAM_RIGHT);
+                                    }
+                                }
+
+                                    /*bool isNeighborChunkExist = false;
+                                    CSharedLandscapeSeam seam = m_chunks[index]->getSeam(E_LANDSCAPE_SEAM_LEFT);
+                                    
+                                    i32 index_01 = i + (j - 1) * numChunksZ;
+                                    if(m_chunks[index_01] != nullptr && m_chunks[index_01]->isMeshExist())
+                                    {
+                                        isNeighborChunkExist = true;
+                                    }
+                                    
+                                    if(seam != nullptr && isNeighborChunkExist)
+                                    {
+                                        std::vector<SAttributeVertex> leftSeamVertexes = m_chunks[index]->getSeamVertexes(E_LANDSCAPE_SEAM_LEFT);
+                                        i32 index = i + (j - 1) * numChunksZ;
+                                        std::vector<SAttributeVertex> rightSeamVertexes = m_chunks[index]->getSeamVertexes(E_LANDSCAPE_SEAM_RIGHT);
+                                        seam->setVertexesToSewTogether(leftSeamVertexes, rightSeamVertexes);
+                                    }*/
+                                //}
                             }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                                 m_chunks[index]->setQuadTree(quadTree, LOD);
                                 m_chunks[index]->onSceneUpdate(0);

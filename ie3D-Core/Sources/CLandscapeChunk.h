@@ -82,7 +82,8 @@ public:
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;
     
-    std::vector<SAttributeVertex> getSeamVertexes(E_LANDSCAPE_SEAM type) const;
+    std::vector<SAttributeVertex> getSeamVerteces(E_LANDSCAPE_SEAM type) const;
+    void setSeamVerteces(const std::vector<SAttributeVertex>& verteces, E_LANDSCAPE_SEAM type);
     
     void setSeam(CSharedLandscapeSeamRef seam, E_LANDSCAPE_SEAM type);
     CSharedLandscapeSeam getSeam(E_LANDSCAPE_SEAM type) const;

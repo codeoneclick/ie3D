@@ -236,7 +236,7 @@ CSharedIndexBuffer CLandscapeChunk::getCollisionIndexBuffer(void) const
     return m_mesh->getIndexBuffer();
 }
 
-std::vector<SAttributeVertex> CLandscapeChunk::getSeamVertexes(E_LANDSCAPE_SEAM type) const
+std::vector<SAttributeVertex> CLandscapeChunk::getSeamVerteces(E_LANDSCAPE_SEAM type) const
 {
     std::vector<SAttributeVertex> seamVerteces;
     ui32 seamLength = sqrt(m_mesh->getVertexBuffer()->getUsedSize());
@@ -258,10 +258,8 @@ std::vector<SAttributeVertex> CLandscapeChunk::getSeamVertexes(E_LANDSCAPE_SEAM 
             {
                 seamVerteces.push_back(vertexData[i + seamLength * (seamLength - 1)]);
             }
-
         }
             break;
-            
             
         case E_LANDSCAPE_SEAM_LEFT:
         {
@@ -270,20 +268,19 @@ std::vector<SAttributeVertex> CLandscapeChunk::getSeamVertexes(E_LANDSCAPE_SEAM 
                 i32 index = i + i * (seamLength - 1);
                 assert(index >= 0 || index < seamLength);
                 seamVerteces.push_back(vertexData[index]);
-                std::cout<<"left seam vertex: "<<vertexData[index].m_position.x<<","<<vertexData[index].m_position.z<<std::endl;
+                //std::cout<<"left seam vertex: "<<vertexData[index].m_position.x<<","<<vertexData[index].m_position.z<<std::endl;
             }
         }
             break;
-            
             
         case E_LANDSCAPE_SEAM_RIGHT:
         {
             for(i32 i = 0; i < seamLength; ++i)
             {
-               i32 index = i + (i + 1) * (seamLength - 1);
+                i32 index = i + (i + 1) * (seamLength - 1);
                 assert(index >= 0 || index < seamLength);
                 seamVerteces.push_back(vertexData[index]);
-                std::cout<<"right seam vertex: "<<vertexData[index].m_position.x<<","<<vertexData[index].m_position.z<<std::endl;
+                //std::cout<<"right seam vertex: "<<vertexData[index].m_position.x<<","<<vertexData[index].m_position.z<<std::endl;
             }
         }
             break;
@@ -293,6 +290,107 @@ std::vector<SAttributeVertex> CLandscapeChunk::getSeamVertexes(E_LANDSCAPE_SEAM 
             break;
     }
     return seamVerteces;
+}
+
+void CLandscapeChunk::setSeamVerteces(const std::vector<SAttributeVertex>& verteces, E_LANDSCAPE_SEAM type)
+{
+    ui32 currentEdgeLength = sqrt(m_mesh->getVertexBuffer()->getUsedSize());
+    ui32 neighborEdgeLength = static_cast<ui32>(verteces.size());
+    
+    assert(neighborEdgeLength > 0 && currentEdgeLength > 0);
+    assert(neighborEdgeLength < currentEdgeLength);
+    assert((currentEdgeLength - 1) % (neighborEdgeLength - 1) == 0);
+    
+    ui32 edgesLengthDeltaStep = (currentEdgeLength - 1) / (neighborEdgeLength - 1);
+    std::cout<<"setSeamVerteces with Type: "<<type<<std::endl;
+    
+    SAttributeVertex *vertexData = m_mesh->getVertexBuffer()->lock();
+    
+    switch (type)
+    {
+        case E_LANDSCAPE_SEAM_TOP:
+        {
+            for(ui32 i = 0; i < currentEdgeLength; ++i)
+            {
+                vertexData[i].m_position.y = 0.0;
+            }
+        }
+            break;
+            
+        case E_LANDSCAPE_SEAM_BOTTOM:
+        {
+            ui32 neighborEdgeVertexIndex = 0;
+            ui32 edgesLengthDeltaStep = 0;
+            for(ui32 i = 0; i < currentEdgeLength; ++i)
+            {
+                i32 index = i + currentEdgeLength * (currentEdgeLength - 1);
+                assert(index >= 0 || index < currentEdgeLength);
+                
+                /*if(edgesLengthDeltaStep == edgesLengthDelta || edgesLengthDeltaStep == 0)
+                {
+                    vertexData[index].m_position.y = verteces.at(neighborEdgeVertexIndex).m_position.y;
+                }
+                
+                edgesLengthDeltaStep++;
+                if(edgesLengthDeltaStep == edgesLengthDelta)
+                {
+                    neighborEdgeVertexIndex++;
+                }*/
+            }
+        }
+            break;
+            
+        case E_LANDSCAPE_SEAM_LEFT:
+        {
+            ui32 neighborEdgeVertexIndex = 0;
+            ui32 edgesLengthDeltaStep = 0;
+            for(ui32 i = 0; i < currentEdgeLength; ++i)
+            {
+                i32 index = i + i * (currentEdgeLength - 1);
+                assert(index >= 0 || index < currentEdgeLength);
+                
+                //if(edgesLengthDeltaStep == edgesLengthDelta || edgesLengthDeltaStep == 0)
+                {
+                    vertexData[index].m_position.y = 0.0;//verteces.at(neighborEdgeVertexIndex).m_position.y;
+                }
+                
+                //edgesLengthDeltaStep++;
+                //if(edgesLengthDeltaStep == edgesLengthDelta)
+                //{
+                //    neighborEdgeVertexIndex++;
+               // }
+            }
+        }
+            break;
+            
+        case E_LANDSCAPE_SEAM_RIGHT:
+        {
+            i32 neighborEdgeVertexIndex = 0;
+            for(ui32 i = 0; i < currentEdgeLength; ++i)
+            {
+                i32 index = i + (i + 1) * (currentEdgeLength - 1);
+                assert(index >= 0 || index < currentEdgeLength);
+                
+                neighborEdgeVertexIndex = i / edgesLengthDeltaStep;
+                
+                glm::vec3 neighborVertexPosition_01 = verteces.at(neighborEdgeVertexIndex).m_position;
+                glm::vec3 neighborVertexPosition_02 = verteces.at(neighborEdgeVertexIndex + 1 < neighborEdgeLength - 1 ? neighborEdgeVertexIndex + 1 : neighborEdgeVertexIndex).m_position;
+                
+                f32 distanceBetweenNeighborVertices = neighborVertexPosition_02.x - neighborVertexPosition_01.x;
+                f32 distanceBetweenNeigborAndCurrentVertex = vertexData[index].m_position.x - neighborVertexPosition_01.x;
+                assert(distanceBetweenNeighborVertices >= 0.0f);
+                f32 interpolationIntensity = distanceBetweenNeighborVertices != 0.0f ? distanceBetweenNeigborAndCurrentVertex / distanceBetweenNeighborVertices : 0.0f;
+                assert(interpolationIntensity >= 0.0f && interpolationIntensity <= 1.0f);
+                vertexData[index].m_position.y = glm::mix(neighborVertexPosition_01.y, neighborVertexPosition_02.y, interpolationIntensity);
+            }
+        }
+            break;
+            
+        default:
+            assert(false);
+            break;
+    }
+    m_mesh->getVertexBuffer()->unlock();
 }
 
 CSharedLandscapeSeam CLandscapeChunk::getSeam(E_LANDSCAPE_SEAM type) const
