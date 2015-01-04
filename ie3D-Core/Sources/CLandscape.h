@@ -31,9 +31,6 @@ private:
     CSharedMaterial m_splattingDiffuseMaterial;
     CSharedMaterial m_splattingNormalMaterial;
     
-    bool m_isSplattingDiffuseTexturePrerendered;
-    bool m_isSplattingNormalTexturePrerendered;
-    
     void prerenderSplattingDiffuseTexture(void);
     void prerenderSplattingNormalTexture(void);
     

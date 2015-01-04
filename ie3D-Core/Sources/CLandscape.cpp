@@ -29,8 +29,6 @@ m_prerenderedSplattingDiffuseTexture(nullptr),
 m_prerenderedSplattingNormalTexture(nullptr),
 m_splattingDiffuseMaterial(nullptr),
 m_splattingNormalMaterial(nullptr),
-m_isSplattingDiffuseTexturePrerendered(false),
-m_isSplattingNormalTexturePrerendered(false),
 m_configuration(nullptr),
 m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, renderTechniqueAccessor))
 {
@@ -139,7 +137,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
                             m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
                             m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
-                            CLandscape::sewSeams(i, j);
+                            //CLandscape::sewSeams(i, j);
 
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
@@ -154,7 +152,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                                 m_chunks[index]->setQuadTree(nullptr, m_chunks[index]->getCurrentLOD());
                                 m_chunks[index]->setMesh(mesh);
                                 m_chunks[index]->onSceneUpdate(0);
-                                CLandscape::sewSeams(i, j);
+                                //CLandscape::sewSeams(i, j);
 
                             }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                                 m_chunks[index]->setQuadTree(quadTree, LOD);
@@ -190,24 +188,21 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     assert(m_resourceAccessor != nullptr);
     assert(m_renderTechniqueAccessor != nullptr);
     
-    m_isSplattingDiffuseTexturePrerendered = false;
-    m_isSplattingNormalTexturePrerendered = false;
-    
     m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_renderTechniqueAccessor, landscapeConfiguration);
     IEditableLandscape::setHeightmapProcessor(m_heightmapProcessor);
     
-    m_resourceAccessor->addCustomTexture("landscape.splatting.texture" , m_heightmapProcessor->createSplattingTexture());
+    m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapProcessor->createSplattingTexture());
     m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapProcessor->createHeightmapTexture());
     m_resourceAccessor->addCustomTexture("landscape.edgesmask.texture", m_heightmapProcessor->createEdgesMaskTexture());
     
     CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingDiffuseMaterialConfiguration());
     m_splattingDiffuseMaterial = std::make_shared<CMaterial>();
-    CMaterial::setupMaterial(m_splattingDiffuseMaterial, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
+    CMaterial::initializeMaterial(m_splattingDiffuseMaterial, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
     m_splattingDiffuseMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
     materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingNormalMaterialConfiguration());
     m_splattingNormalMaterial = std::make_shared<CMaterial>();
-    CMaterial::setupMaterial(m_splattingNormalMaterial, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
+    CMaterial::initializeMaterial(m_splattingNormalMaterial, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
     m_splattingNormalMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
     
     m_chunks.resize(m_heightmapProcessor->getNumChunksX() * m_heightmapProcessor->getNumChunksZ());
@@ -224,45 +219,37 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
 
 void CLandscape::prerenderSplattingDiffuseTexture(void)
 {
-    if(m_splattingDiffuseMaterial->isCommited() && !m_isSplattingDiffuseTexturePrerendered)
+    if(m_splattingDiffuseMaterial->isCommited())
     {
-        ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
-        ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
-        
-        m_prerenderedSplattingDiffuseTexture = m_heightmapProcessor->createSplattingDiffuseTexture(m_splattingDiffuseMaterial);
-        m_isSplattingDiffuseTexturePrerendered = true;
-        for(ui32 i = 0; i < numChunksX; ++i)
-        {
-            for(ui32 j = 0; j < numChunksZ; ++j)
-            {
-                if(m_chunks[i + j * numChunksZ] != nullptr)
+        static std::once_flag onceToken;
+        std::call_once(onceToken, [this] {
+            
+            m_prerenderedSplattingDiffuseTexture = m_heightmapProcessor->createSplattingDiffuseTexture(m_splattingDiffuseMaterial);
+            std::for_each(m_chunks.begin(), m_chunks.end(), [this](CSharedLandscapeChunk& chunk) {
+                if(chunk !=  nullptr)
                 {
-                    m_chunks[i + j * numChunksZ]->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
+                    chunk->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
                 }
-            }
-        }
+            });
+        });
     }
 }
 
 void CLandscape::prerenderSplattingNormalTexture(void)
 {
-    if(m_splattingNormalMaterial->isCommited() && !m_isSplattingNormalTexturePrerendered)
+    if(m_splattingNormalMaterial->isCommited())
     {
-        ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
-        ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
-        
-        m_prerenderedSplattingNormalTexture = m_heightmapProcessor->createSplattingNormalTexture(m_splattingNormalMaterial);
-        m_isSplattingNormalTexturePrerendered = true;
-        for(ui32 i = 0; i < numChunksX; ++i)
-        {
-            for(ui32 j = 0; j < numChunksZ; ++j)
-            {
-                if(m_chunks[i + j * numChunksZ] != nullptr)
+        static std::once_flag onceToken;
+        std::call_once(onceToken, [this] {
+            
+            m_prerenderedSplattingNormalTexture = m_heightmapProcessor->createSplattingNormalTexture(m_splattingNormalMaterial);
+            std::for_each(m_chunks.begin(), m_chunks.end(), [this](CSharedLandscapeChunk& chunk) {
+                if(chunk !=  nullptr)
                 {
-                    m_chunks[i + j * numChunksZ]->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
+                    chunk->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
                 }
-            }
-        }
+            });
+        });
     }
 }
 
@@ -504,7 +491,7 @@ void CLandscape::sewSeams(CSharedLandscapeChunkRef currentChunk, i32 neighborChu
             std::vector<SAttributeVertex> currentChunkVerteces = currentChunk->getSeamVerteces(currentChunkSeamType);
             std::vector<SAttributeVertex> neighborChunkVerteces = neighborChunk->getSeamVerteces(neighborChunkSeamType);
             
-            if(currentChunkVerteces.size() > neighborChunkVerteces.size())
+            if(currentChunkVerteces.size() >= neighborChunkVerteces.size())
             {
                 currentChunk->setSeamVerteces(neighborChunkVerteces, currentChunkSeamType);
             }

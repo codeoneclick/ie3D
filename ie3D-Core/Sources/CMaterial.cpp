@@ -237,15 +237,15 @@ void CMaterial::setTexture(CSharedTextureRef texture,
     m_parameters->m_textures.at(sampler) = texture;
 }
 
-void CMaterial::setupMaterial(CSharedMaterialRef material,
-                              CSharedConfigurationMaterialRef configuration,
-                              CSharedResourceAccessor resourceAccessor,
-                              ISharedRenderTechniqueAccessor renderTechniqueAccessor,
-                              ISharedResourceLoadingHandlerRef handler)
+void CMaterial::initializeMaterial(CSharedMaterialRef material,
+                                   CSharedConfigurationMaterialRef configuration,
+                                   CSharedResourceAccessor resourceAccessor,
+                                   ISharedRenderTechniqueAccessor renderTechniqueAccessor,
+                                   ISharedResourceLoadingHandlerRef handler)
 {
     assert(configuration != nullptr);
     assert(renderTechniqueAccessor != nullptr);
-	assert(resourceAccessor != nullptr);
+    assert(resourceAccessor != nullptr);
     
     material->setCulling(configuration->isCulling());
     material->setCullingMode(configuration->getCullingMode());

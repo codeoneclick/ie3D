@@ -164,10 +164,10 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
         assert(screenSpaceRenderOperationMaterialConfiguration != nullptr);
         assert(m_resourceAccessor != nullptr);
         
-        CMaterial::setupMaterial(screenSpaceRenderOperationMaterial,
-                                 screenSpaceRenderOperationMaterialConfiguration,
-                                 m_resourceAccessor,
-                                 m_renderPipeline);
+        CMaterial::initializeMaterial(screenSpaceRenderOperationMaterial,
+                                      screenSpaceRenderOperationMaterialConfiguration,
+                                      m_resourceAccessor,
+                                      m_renderPipeline);
         
         ui32 screenWidth = MIN_VALUE(screenSpaceRenderOperationConfiguration->getScreenWidth(), m_graphicsContext->getWidth());
         ui32 screenHeight = MIN_VALUE(screenSpaceRenderOperationConfiguration->getScreenHeight(), m_graphicsContext->getHeight());
@@ -191,10 +191,10 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
         assert(outputRenderOperationMaterialConfiguration != nullptr);
         assert(m_resourceAccessor != nullptr);
         
-        CMaterial::setupMaterial(outputRenderOperationMaterial,
-                                 outputRenderOperationMaterialConfiguration,
-                                 m_resourceAccessor,
-                                 m_renderPipeline);
+        CMaterial::initializeMaterial(outputRenderOperationMaterial,
+                                      outputRenderOperationMaterialConfiguration,
+                                      m_resourceAccessor,
+                                      m_renderPipeline);
         m_renderPipeline->setMainRenderTechnique(outputRenderOperationMaterial);
     }
     

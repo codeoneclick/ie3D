@@ -152,7 +152,7 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
     {
         CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
         CSharedMaterial material = std::make_shared<CMaterial>();
-        CMaterial::setupMaterial(material, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
+        CMaterial::initializeMaterial(material, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
         m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
     }
 }
