@@ -49,7 +49,7 @@ public:
     
     void addRenderTechniqueHandler(const std::string& techniqueName, ISharedRenderTechniqueHandlerRef handler);
     void removeRenderTechniqueHandler(const std::string& techniqueName, ISharedRenderTechniqueHandlerRef handler);
-    bool isSupporingRenderTechnique(const std::string& techniqueName);
+    bool isSupportingRenderTechnique(const std::string& techniqueName);
     
     void addToOcluddingQuery(const std::string& techniqueName, ISharedOcclusionQueryHandlerRef handler);
     void removeFromOcluddingQuery(const std::string& techniqueName, ISharedOcclusionQueryHandlerRef handler);

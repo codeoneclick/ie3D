@@ -146,7 +146,7 @@ void CModel::onBatch(const std::string& techniqueName)
                                                            m_animationMixer,
                                                            material,
                                                            m_materialBindImposer,
-                                                           m_matrixWorld);
+                                                           IGameObject::getTransformation());
     }
 }
 

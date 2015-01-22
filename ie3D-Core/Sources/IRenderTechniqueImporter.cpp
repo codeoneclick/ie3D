@@ -109,7 +109,7 @@ void IRenderTechniqueImporter::removeRenderTechniqueHandler(const std::string& t
     iterator->second->removeRenderTechniqueHandler(handler);
 }
 
-bool IRenderTechniqueImporter::isSupporingRenderTechnique(const std::string& techniqueName)
+bool IRenderTechniqueImporter::isSupportingRenderTechnique(const std::string& techniqueName)
 {
     const auto& iterator = m_worldSpaceRenderTechniques.find(techniqueName);
     return iterator != m_worldSpaceRenderTechniques.end();

@@ -369,4 +369,12 @@ class COcclusionQueryManager;
 typedef std::shared_ptr<COcclusionQueryManager> CSharedOcclusionQueryManager;
 typedef const CSharedOcclusionQueryManager& CSharedOcclusionQueryManagerRef;
 
+class IComponent;
+typedef std::shared_ptr<IComponent> ISharedComponent;
+typedef const ISharedComponent& ISharedComponentRef;
+
+class CComponentTransformation;
+typedef std::shared_ptr<CComponentTransformation> CSharedComponentTransformation;
+typedef const CSharedComponentTransformation& CSharedComponentTransformationRef;
+
 #endif

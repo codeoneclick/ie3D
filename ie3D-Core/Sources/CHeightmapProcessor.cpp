@@ -727,7 +727,6 @@ void CHeightmapProcessor::updateEdgesMaskTexture(CSharedTextureRef texture)
                                                                   0.0f, (m_heightmapData->getSizeX() - 1)),
                                                         false);
         
-        
         CHeightmapProcessor::updateEdgeChunkMaskTexture(data,
                                                         i,
                                                         m_edgesMaskTextureWidth,
@@ -761,6 +760,8 @@ std::shared_ptr<CTexture> CHeightmapProcessor::createEdgesMaskTexture(void)
                                                           m_edgesMaskTextureWidth,
                                                           m_edgesMaskTextureHeight);
     m_edgesMaskTexture->setWrapMode(GL_CLAMP_TO_EDGE);
+    m_edgesMaskTexture->setMagFilter(GL_NEAREST);
+    m_edgesMaskTexture->setMinFilter(GL_NEAREST);
     CHeightmapProcessor::updateEdgesMaskTexture(m_edgesMaskTexture);
     return m_edgesMaskTexture;
 }

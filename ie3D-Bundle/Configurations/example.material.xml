@@ -1,0 +1,9 @@
+<material
+    class_name="CMaterialConfiguration"
+    base_class_name="IConfiguration">
+    <properties>
+        <property name="m_techniqueName" type="std::string" attribute_name="technique_name"/>
+        <property name="m_isDepthTest" type="bool" attribute_name="is_depth_test"/>
+        <property name="m_isDepthMask" type="bool" attribute_name="is_depth_mask"/>
+    </properties>
+</material>

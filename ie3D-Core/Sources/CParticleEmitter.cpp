@@ -36,7 +36,7 @@ CParticleEmitter::~CParticleEmitter(void)
 
 void CParticleEmitter::emittParticle(ui32 index)
 {
-    m_particles[index].m_position = m_position;
+    m_particles[index].m_position = IGameObject::getPosition();
     m_particles[index].m_velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     
     m_particles[index].m_size = m_settings->getSourceSize();

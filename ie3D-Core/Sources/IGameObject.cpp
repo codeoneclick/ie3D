@@ -22,13 +22,11 @@
 #include "CBatchingMgr.h"
 #include "CBoundingBox.h"
 #include "HShaders.h"
+#include "CComponentTransformation.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
                          ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 m_resourceAccessor(resourceAccessor),
-m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
-m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
-m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
 m_zOrder(0),
 m_mesh(nullptr),
 m_configuration(nullptr),
@@ -57,6 +55,9 @@ m_status(E_LOADING_STATUS_UNLOADED)
     {
         bindBaseShaderUniforms(material);
     };
+    
+    CSharedComponentTransformation transformationComponent = std::make_shared<CComponentTransformation>();
+    IGameObject::addComponent(transformationComponent);
     
 #if defined(__OCCLUSIOON_QUERY__)
     
@@ -91,6 +92,34 @@ IGameObject::~IGameObject(void)
 #endif
     
     m_materials.clear();
+}
+
+void IGameObject::addComponent(ISharedComponentRef component)
+{
+    assert(component != nullptr && component->getClass() != E_COMPONENT_CLASS_UNDEFINED);
+    m_components.insert(std::make_pair(component->getClass(), component));
+}
+
+void IGameObject::removeComponent(ISharedComponentRef component)
+{
+    assert(component != nullptr && component->getClass() != E_COMPONENT_CLASS_UNDEFINED);
+    auto iterator = m_components.find(component->getClass());
+    assert(iterator != m_components.end());
+    m_components.erase(iterator);
+}
+
+bool IGameObject::isComponentExist(E_COMPONENT_CLASS componentClass) const
+{
+    assert(componentClass != E_COMPONENT_CLASS_UNDEFINED);
+    auto iterator = m_components.find(componentClass);
+    return iterator != m_components.end();
+}
+
+ISharedComponent IGameObject::getComponent(E_COMPONENT_CLASS componentClass) const
+{
+    assert(componentClass != E_COMPONENT_CLASS_UNDEFINED);
+    auto iterator = m_components.find(componentClass);
+    return iterator != m_components.end() ? iterator->second : nullptr;
 }
 
 bool IGameObject::getBoundingBox(void)
@@ -133,7 +162,7 @@ bool IGameObject::getBoundingBox(void)
 
 void IGameObject::onSceneUpdate(f32 deltatime)
 {
-    m_matrixWorld = m_matrixTranslation * m_matrixRotation * m_matrixScale;
+
 }
 
 void IGameObject::onResourceLoaded(ISharedResourceRef resource,
@@ -172,8 +201,8 @@ bool IGameObject::checkOcclusion(void)
 #else
     
     assert(m_cameraFrustum != nullptr);
-    glm::vec3 maxBound = IGameObject::getMaxBound() + m_position;
-    glm::vec3 minBound = IGameObject::getMinBound() + m_position;
+    glm::vec3 maxBound = IGameObject::getMaxBound() + IGameObject::getPosition();
+    glm::vec3 minBound = IGameObject::getMinBound() + IGameObject::getPosition();
     return !m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
     
 #endif
@@ -260,7 +289,7 @@ void IGameObject::onBatch(const std::string& techniqueName)
                                                            m_mesh,
                                                            material,
                                                            m_materialBindImposer,
-                                                           m_matrixWorld);
+                                                           IGameObject::getTransformation());
     }
 }
 
@@ -272,7 +301,7 @@ void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)
     material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
     material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
     material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-    material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+    material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : IGameObject::getTransformation(), E_SHADER_UNIFORM_MATRIX_WORLD);
     
     // camera base parameters
     material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
@@ -350,52 +379,54 @@ void IGameObject::bindCustomShaderUniforms(CSharedMaterialRef material)
 
 void IGameObject::setPosition(const glm::vec3& position)
 {
-    m_position = position;
-    m_matrixTranslation = glm::translate(glm::mat4(1.0f), m_position);
+    CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
+    component->setPosition(position);
 }
 
 glm::vec3 IGameObject::getPosition(void) const
 {
-    return m_position;
+    CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
+    return component->getPosition();
 }
 
 void IGameObject::setRotation(const glm::vec3& rotation)
 {
-    m_rotation = rotation;
-    m_matrixRotation = glm::rotate(glm::mat4(1.0f), m_rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
-    m_matrixRotation = glm::rotate(m_matrixRotation, m_rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-    m_matrixRotation = glm::rotate(m_matrixRotation, m_rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+    CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
+    component->setRotation(rotation);
 }
 
 glm::vec3 IGameObject::getRotation(void) const
 {
-    return m_rotation;
+    CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
+    return component->getRotation();
 }
 
 void IGameObject::setScale(const glm::vec3& scale)
 {
-    m_scale = scale;
-    m_matrixScale = glm::scale(glm::mat4(1.0f), m_scale);
+    CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
+    component->setScale(scale);
 }
 
 glm::vec3 IGameObject::getScale(void) const
 {
-    return m_scale;
+    CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
+    return component->getScale();
 }
 
-glm::mat4x4 IGameObject::getWorldMatrix(void) const
+glm::mat4x4 IGameObject::getTransformation(void) const
 {
-    return m_matrixWorld;
+    CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
+    return component->getTransformation();
 }
 
 glm::vec3 IGameObject::getMaxBound(void) const
 {
-    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMaxBound() * m_scale : glm::vec3(0, 0, 0);
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMaxBound() * IGameObject::getScale() : glm::vec3(0.0f);
 }
 
 glm::vec3 IGameObject::getMinBound(void) const
 {
-    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMinBound() * m_scale : glm::vec3(0, 0, 0);
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMinBound() * IGameObject::getScale() : glm::vec3(0.0f);
 }
 
 void IGameObject::setCamera(CSharedCameraRef camera)
@@ -632,7 +663,7 @@ void IGameObject::enableRender(bool value)
     for(const auto& iterator : m_materials)
     {
 		if(m_renderTechniqueImporter != nullptr &&
-           m_renderTechniqueImporter->isSupporingRenderTechnique(iterator.first))
+           m_renderTechniqueImporter->isSupportingRenderTechnique(iterator.first))
 		{
 			value == true ? m_renderTechniqueImporter->addRenderTechniqueHandler(iterator.first, shared_from_this()) :
 			m_renderTechniqueImporter->removeRenderTechniqueHandler(iterator.first, shared_from_this());
@@ -673,7 +704,7 @@ void IGameObject::onOcclusionQueryDraw(CSharedMaterialRef material)
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+        material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : IGameObject::getTransformation(), E_SHADER_UNIFORM_MATRIX_WORLD);
         
         m_occlusionQueryOngoing = true;
         m_boundingBox->bind(material->getShader()->getAttributes(), false);

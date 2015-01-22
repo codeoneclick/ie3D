@@ -29,16 +29,7 @@ public IOcclusionQueryHandler
 private:
     
 protected:
-    
-    glm::mat4x4 m_matrixScale;
-    glm::mat4x4 m_matrixRotation;
-    glm::mat4x4 m_matrixTranslation;
-    glm::mat4x4 m_matrixWorld;
-    
-    glm::vec3 m_position;
-    glm::vec3 m_rotation;
-    glm::vec3 m_scale;
-    
+
     std::unordered_map<std::string, CSharedMaterial> m_materials;
     std::function<void(CSharedMaterialRef)> m_materialBindImposer;
     ISharedConfiguration m_configuration;
@@ -95,22 +86,28 @@ protected:
     
     bool getBoundingBox(void);
     
+    std::map<E_COMPONENT_CLASS, ISharedComponent> m_components;
+    
 public:
     
 	IGameObject(CSharedResourceAccessorRef resourceAccessor,
                 ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     virtual ~IGameObject(void);
     
+    void addComponent(ISharedComponentRef component);
+    void removeComponent(ISharedComponentRef component);
+    bool isComponentExist(E_COMPONENT_CLASS componentClass) const;
+    ISharedComponent getComponent(E_COMPONENT_CLASS componentClass) const;
+    
     virtual void setPosition(const glm::vec3& position);
-    glm::vec3 getPosition(void) const;
-    
     virtual void setRotation(const glm::vec3& rotation);
-    glm::vec3 getRotation(void) const;
-    
     virtual void setScale(const glm::vec3& scale);
+    
+    glm::vec3 getPosition(void) const;
+    glm::vec3 getRotation(void) const;
     glm::vec3 getScale(void) const;
     
-    glm::mat4x4 getWorldMatrix(void) const;
+    glm::mat4 getTransformation(void) const;
     
     glm::vec3 getMaxBound(void) const;
     glm::vec3 getMinBound(void) const;

@@ -362,6 +362,18 @@
 		219B5E721A10F3E600986953 /* CBoundingBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 219B5E6F1A10F3E600986953 /* CBoundingBox.h */; };
 		219B5E741A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219B5E731A10FF2C00986953 /* ShaderBoundingBox.cpp */; };
 		219B5E751A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219B5E731A10FF2C00986953 /* ShaderBoundingBox.cpp */; };
+		21ACE3881A711D280017A771 /* IComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE3861A711D280017A771 /* IComponent.cpp */; };
+		21ACE3891A711D280017A771 /* IComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE3861A711D280017A771 /* IComponent.cpp */; };
+		21ACE38A1A711D280017A771 /* IComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 21ACE3871A711D280017A771 /* IComponent.h */; };
+		21ACE38D1A711F100017A771 /* CComponentTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE38B1A711F100017A771 /* CComponentTransformation.cpp */; };
+		21ACE38E1A711F100017A771 /* CComponentTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE38B1A711F100017A771 /* CComponentTransformation.cpp */; };
+		21ACE38F1A711F100017A771 /* CComponentTransformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 21ACE38C1A711F100017A771 /* CComponentTransformation.h */; };
+		21ACE3921A7133FF0017A771 /* CComponentRendering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE3901A7133FF0017A771 /* CComponentRendering.cpp */; };
+		21ACE3931A7133FF0017A771 /* CComponentRendering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE3901A7133FF0017A771 /* CComponentRendering.cpp */; };
+		21ACE3941A7133FF0017A771 /* CComponentRendering.h in Headers */ = {isa = PBXBuildFile; fileRef = 21ACE3911A7133FF0017A771 /* CComponentRendering.h */; };
+		21ACE3971A713C5F0017A771 /* CComponentConfigurationLoading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE3951A713C5F0017A771 /* CComponentConfigurationLoading.cpp */; };
+		21ACE3981A713C5F0017A771 /* CComponentConfigurationLoading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE3951A713C5F0017A771 /* CComponentConfigurationLoading.cpp */; };
+		21ACE3991A713C5F0017A771 /* CComponentConfigurationLoading.h in Headers */ = {isa = PBXBuildFile; fileRef = 21ACE3961A713C5F0017A771 /* CComponentConfigurationLoading.h */; };
 		21C409A5197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A6197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A7197B0B4B0063D62D /* CMeshSerializer_MDL_01.h in Headers */ = {isa = PBXBuildFile; fileRef = 21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */; };
@@ -542,6 +554,14 @@
 		219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CGraphicsContext_win32.cpp; path = Sources/CGraphicsContext_win32.cpp; sourceTree = "<group>"; };
 		219DC4CC180DC465001C72D4 /* COGLWindow_win32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_win32.cpp; path = Sources/COGLWindow_win32.cpp; sourceTree = "<group>"; };
 		219DC4CE180DC4EF001C72D4 /* CCommonOS_win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCommonOS_win32.cpp; path = Sources/CCommonOS_win32.cpp; sourceTree = "<group>"; };
+		21ACE3861A711D280017A771 /* IComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IComponent.cpp; path = Sources/IComponent.cpp; sourceTree = "<group>"; };
+		21ACE3871A711D280017A771 /* IComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IComponent.h; path = Sources/IComponent.h; sourceTree = "<group>"; };
+		21ACE38B1A711F100017A771 /* CComponentTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentTransformation.cpp; path = Sources/CComponentTransformation.cpp; sourceTree = "<group>"; };
+		21ACE38C1A711F100017A771 /* CComponentTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CComponentTransformation.h; path = Sources/CComponentTransformation.h; sourceTree = "<group>"; };
+		21ACE3901A7133FF0017A771 /* CComponentRendering.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentRendering.cpp; path = Sources/CComponentRendering.cpp; sourceTree = "<group>"; };
+		21ACE3911A7133FF0017A771 /* CComponentRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CComponentRendering.h; path = Sources/CComponentRendering.h; sourceTree = "<group>"; };
+		21ACE3951A713C5F0017A771 /* CComponentConfigurationLoading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentConfigurationLoading.cpp; path = Sources/CComponentConfigurationLoading.cpp; sourceTree = "<group>"; };
+		21ACE3961A713C5F0017A771 /* CComponentConfigurationLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CComponentConfigurationLoading.h; path = Sources/CComponentConfigurationLoading.h; sourceTree = "<group>"; };
 		21ADAA0518214AD00082E8BA /* CCommonOS_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CCommonOS_osx.cpp; path = Sources/CCommonOS_osx.cpp; sourceTree = "<group>"; };
 		21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CInputContext_osx.cpp; path = Sources/CInputContext_osx.cpp; sourceTree = "<group>"; };
 		21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshSerializer_MDL_01.cpp; path = Sources/CMeshSerializer_MDL_01.cpp; sourceTree = "<group>"; };
@@ -1134,6 +1154,21 @@
 			path = "Libraries/zlib-1.2.8";
 			sourceTree = "<group>";
 		};
+		21ACE3851A711CB60017A771 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				21ACE3871A711D280017A771 /* IComponent.h */,
+				21ACE3861A711D280017A771 /* IComponent.cpp */,
+				21ACE38C1A711F100017A771 /* CComponentTransformation.h */,
+				21ACE38B1A711F100017A771 /* CComponentTransformation.cpp */,
+				21ACE3911A7133FF0017A771 /* CComponentRendering.h */,
+				21ACE3901A7133FF0017A771 /* CComponentRendering.cpp */,
+				21ACE3961A713C5F0017A771 /* CComponentConfigurationLoading.h */,
+				21ACE3951A713C5F0017A771 /* CComponentConfigurationLoading.cpp */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		A40138BC1754E9CE0056461B /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1456,6 +1491,7 @@
 		A494D36517392D4B00228936 /* SceneGraph Managment */ = {
 			isa = PBXGroup;
 			children = (
+				21ACE3851A711CB60017A771 /* Components */,
 				A40A69AD174F51EF005B475E /* GameObjects */,
 				A40A69AC174F51E4005B475E /* Support */,
 				A4F204BC17427C700063AB07 /* CSceneGraph.h */,
@@ -1887,9 +1923,12 @@
 				2191CEBA196EE95100CE2813 /* zconf.h in Headers */,
 				2191CE59196EDBEF00CE2813 /* pngpriv.h in Headers */,
 				2173347E19644107002B3F90 /* CRenderTechniqueMain.h in Headers */,
+				21ACE3941A7133FF0017A771 /* CComponentRendering.h in Headers */,
+				21ACE38A1A711D280017A771 /* IComponent.h in Headers */,
 				2191CEB7196EE95100CE2813 /* trees.h in Headers */,
 				2191CEAD196EE95100CE2813 /* inffast.h in Headers */,
 				21C409A7197B0B4B0063D62D /* CMeshSerializer_MDL_01.h in Headers */,
+				21ACE3991A713C5F0017A771 /* CComponentConfigurationLoading.h in Headers */,
 				2191CEA2196EE95100CE2813 /* gzguts.h in Headers */,
 				212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */,
 				2191CEAE196EE95100CE2813 /* inffixed.h in Headers */,
@@ -1904,6 +1943,7 @@
 				21EF003C1A237BDA00E0AF20 /* COcclusionQueryManager.h in Headers */,
 				2191CEBE196EE95100CE2813 /* zutil.h in Headers */,
 				2191CEB1196EE95100CE2813 /* inflate.h in Headers */,
+				21ACE38F1A711F100017A771 /* CComponentTransformation.h in Headers */,
 				212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */,
 				2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */,
 				2191CE54196EDBEF00CE2813 /* pnglibconf.h in Headers */,
@@ -1926,6 +1966,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21853434181EFC6200315CBB /* Build configuration list for PBXNativeTarget "ie3DCore-osx" */;
 			buildPhases = (
+				21ACE39B1A713EC70017A771 /* IGameObject_Configurations */,
 				21853411181EFC6200315CBB /* Sources */,
 				21853412181EFC6200315CBB /* Frameworks */,
 				21853413181EFC6200315CBB /* Headers */,
@@ -1943,6 +1984,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21D07147181DA5630019D264 /* Build configuration list for PBXNativeTarget "ie3DCore-ios" */;
 			buildPhases = (
+				21ACE39A1A713E8B0017A771 /* IGameObject_Configurations */,
 				21D07126181DA5620019D264 /* Sources */,
 				21D07127181DA5620019D264 /* Frameworks */,
 				21D07128181DA5620019D264 /* CopyFiles */,
@@ -1983,6 +2025,37 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		21ACE39A1A713E8B0017A771 /* IGameObject_Configurations */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = IGameObject_Configurations;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "python \"${SRCROOT}/Scripts/IGameObject_Configurations.py\"";
+		};
+		21ACE39B1A713EC70017A771 /* IGameObject_Configurations */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = IGameObject_Configurations;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "python \"${SRCROOT}/Scripts/IGameObject_Configurations.py\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		21853411181EFC6200315CBB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1993,6 +2066,7 @@
 				21FB5C3C1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp in Sources */,
 				2191CEB9196EE95100CE2813 /* uncompr.c in Sources */,
 				21208F9B1906FB5F00FFC8D4 /* CInputContext_ios.cpp in Sources */,
+				21ACE3981A713C5F0017A771 /* CComponentConfigurationLoading.cpp in Sources */,
 				21208F9C1906FB5F00FFC8D4 /* CInputContext_osx.cpp in Sources */,
 				21208F9D1906FB5F00FFC8D4 /* CInputContext_win32.cpp in Sources */,
 				21208F9E1906FB5F00FFC8D4 /* CInputContext_ndk.cpp in Sources */,
@@ -2030,6 +2104,7 @@
 				21208FB61906FB5F00FFC8D4 /* IGameTransition.cpp in Sources */,
 				21208FB71906FB5F00FFC8D4 /* CGameLoopExecutor.cpp in Sources */,
 				2179741B19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */,
+				21ACE38E1A711F100017A771 /* CComponentTransformation.cpp in Sources */,
 				21208FB81906FB5F00FFC8D4 /* CGameLoopExecutor_osx.cpp in Sources */,
 				21208FB91906FB5F00FFC8D4 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				2191CE68196EDBEF00CE2813 /* pngwio.c in Sources */,
@@ -2133,6 +2208,7 @@
 				21FEEC991A029C70001E9ACB /* CBatchingMgr.cpp in Sources */,
 				21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				21208FFC1906FB6000FFC8D4 /* CSkeletonCommiter_SK.cpp in Sources */,
+				21ACE3891A711D280017A771 /* IComponent.cpp in Sources */,
 				21208FFD1906FB6000FFC8D4 /* CSequenceCommiter_SEQ.cpp in Sources */,
 				2191CE56196EDBEF00CE2813 /* pngmem.c in Sources */,
 				21208FFE1906FB6000FFC8D4 /* IResourceSerializer.cpp in Sources */,
@@ -2149,6 +2225,7 @@
 				212090051906FB6000FFC8D4 /* CShaderLoadingOperation.cpp in Sources */,
 				212090061906FB6000FFC8D4 /* CTextureLoadingOperation.cpp in Sources */,
 				212090071906FB6000FFC8D4 /* CMeshLoadingOperation.cpp in Sources */,
+				21ACE3931A7133FF0017A771 /* CComponentRendering.cpp in Sources */,
 				2191CE77196EE0B000CE2813 /* CTextureCommiter_PNG.cpp in Sources */,
 				2191CEBD196EE95100CE2813 /* zutil.c in Sources */,
 				212090081906FB6000FFC8D4 /* CResourceLoader.cpp in Sources */,
@@ -2166,6 +2243,7 @@
 				21FB5C3B1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.cpp in Sources */,
 				2191CEB8196EE95100CE2813 /* uncompr.c in Sources */,
 				213265DF1906A4AF001C98F7 /* CInputContext_ios.cpp in Sources */,
+				21ACE3971A713C5F0017A771 /* CComponentConfigurationLoading.cpp in Sources */,
 				213265E01906A4AF001C98F7 /* CInputContext_osx.cpp in Sources */,
 				213265E11906A4AF001C98F7 /* CInputContext_win32.cpp in Sources */,
 				213265E21906A4AF001C98F7 /* CInputContext_ndk.cpp in Sources */,
@@ -2203,6 +2281,7 @@
 				213265FA1906A4AF001C98F7 /* IGameTransition.cpp in Sources */,
 				213265FB1906A4AF001C98F7 /* CGameLoopExecutor.cpp in Sources */,
 				2179741A19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */,
+				21ACE38D1A711F100017A771 /* CComponentTransformation.cpp in Sources */,
 				213265FC1906A4AF001C98F7 /* CGameLoopExecutor_osx.cpp in Sources */,
 				213265FD1906A4AF001C98F7 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				2191CE67196EDBEF00CE2813 /* pngwio.c in Sources */,
@@ -2306,6 +2385,7 @@
 				21FEECE81A08CB0B001E9ACB /* CBatchingMgr.cpp in Sources */,
 				21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				213266401906A4AF001C98F7 /* CSkeletonCommiter_SK.cpp in Sources */,
+				21ACE3881A711D280017A771 /* IComponent.cpp in Sources */,
 				213266411906A4AF001C98F7 /* CSequenceCommiter_SEQ.cpp in Sources */,
 				2191CE55196EDBEF00CE2813 /* pngmem.c in Sources */,
 				213266421906A4AF001C98F7 /* IResourceSerializer.cpp in Sources */,
@@ -2322,6 +2402,7 @@
 				213266491906A4AF001C98F7 /* CShaderLoadingOperation.cpp in Sources */,
 				2132664A1906A4AF001C98F7 /* CTextureLoadingOperation.cpp in Sources */,
 				2132664B1906A4AF001C98F7 /* CMeshLoadingOperation.cpp in Sources */,
+				21ACE3921A7133FF0017A771 /* CComponentRendering.cpp in Sources */,
 				2191CE76196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp in Sources */,
 				2191CEBC196EE95100CE2813 /* zutil.c in Sources */,
 				2132664C1906A4AF001C98F7 /* CResourceLoader.cpp in Sources */,

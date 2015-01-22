@@ -73,7 +73,7 @@ void CLandscapeEdges::onConfigurationLoaded(ISharedConfigurationRef configuratio
         m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
     }
     
-    CSharedVertexBuffer vertexBuffer =std::make_shared<CVertexBuffer>(16, GL_STATIC_DRAW);
+    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(16, GL_STATIC_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
     
     glm::vec3 minBound = glm::vec3(0.0f, m_heightBounds.x, 0.0f);
