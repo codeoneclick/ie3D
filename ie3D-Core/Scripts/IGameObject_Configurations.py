@@ -59,9 +59,15 @@ def parse_xml(filename):
 	for relationship in root.iter('relationship'):
 
 		if relationship.get("is_to_many") == '0':
+
 			source_h_file.write('std::shared_ptr<' + relationship.get("type") + '> getConfiguration' + relationship.get("name") + '(void) const;\n')
+			source_cpp_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + class_name + getConfiguration' + relationship.get("name") + '(void) const\n')
+
 		else:
+
 			source_h_file.write('std::vector<std::shared_ptr<' + relationship.get("type") + '>> getConfigurations' + relationship.get("name") + '(void) const;\n')
+
+
 
 	source_h_file.write('};\n')
 	source_h_file.close()
