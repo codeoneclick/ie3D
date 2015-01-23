@@ -3,12 +3,12 @@
     base_class_name="IConfiguration"
     is_external="1">
     <attributes>
-        <attribute name="TechniqueName" type="std::string" path="/material" attribute_name="technique_name"/>
-        <attribute name="IsDepthTest" type="bool" path="/material" attribute_name="is_depth_test"/>
-        <attribute name="IsDepthMask" type="bool" path="/material" attribute_name="is_depth_mask"/>
+        <attribute type="std::string" getter="getTechniqueName" path="/material" attribute_name="technique_name"/>
+        <attribute type="bool" getter="isDepthTest"  path="/material" attribute_name="is_depth_test"/>
+        <attribute type="bool" getter="isDepthMask"  path="/material" attribute_name="is_depth_mask"/>
     </attributes>
     <relationships>
-        <relationship type="CConfigurationShader" name="Shader" is_to_many="0" is_external="0" filename="" path="/material"/>
-        <relationship type="CConfigurationTexture" name="Textures" is_to_many="1" is_external="0" filename="" path="/material/textures"/>
+        <relationship type="CConfigurationShader" getter="getConfigurationShader" is_to_many="0" is_external="0" filename="" path="/material" relationship_name="shader"/>
+        <relationship type="CConfigurationTexture" getter="getConfigurationsTextures" is_to_many="1" is_external="0" filename="" path="/material/textures" relationship_name="texture"/>
     </relationships>
 </material>

@@ -3,8 +3,8 @@
     base_class_name="IConfiguration"
     is_external="0">
     <attributes>
-        <attribute name="VsFilename" type="std::string" path="/shader" attribute_name="vs_filename"/>
-        <attribute name="FsFilename" type="std::string" path="/shader" attribute_name="fs_filename"/>
+        <attribute type="std::string" getter="getVSFilename" path="/shader" attribute_name="vs_filename"/>
+        <attribute type="std::string" getter="getFSFilename" path="/shader" attribute_name="fs_filename"/>
     </attributes>
     <relationships>
     </relationships>

@@ -47,10 +47,10 @@ def parse_xml(filename):
 
 	for attribute in root.iter('attribute'):
 
-		source_h_file.write(attribute.get('type') + ' get' + attribute.get("name") + '(void) const;\n')
-		source_cpp_file.write(attribute.get('type') + ' ' + class_name + ' get' + attribute.get("name") + '(void) const\n')
+		source_h_file.write(attribute.get('type') + attribute.get("getter") + '(void) const;\n')
+		source_cpp_file.write(attribute.get('type') + ' ' + class_name + '::' + attribute.get("getter") + '(void) const\n')
 		source_cpp_file.write('{\n')
-		source_cpp_file.write('const auto& iterator = m_attributes.find(\"' + attribute.get("path") + attribute.get("attribute_name") + '\");\n')
+		source_cpp_file.write('const auto& iterator = m_attributes.find(\"' + attribute.get("path") + '/' + attribute.get("attribute_name") + '\");\n')
 		source_cpp_file.write('assert(iterator != m_attributes.end());\n')
 		source_cpp_file.write(attribute.get('type') + ' value; iterator->second->get(&value);\n')
 		source_cpp_file.write('return value\n')
@@ -60,12 +60,15 @@ def parse_xml(filename):
 
 		if relationship.get("is_to_many") == '0':
 
-			source_h_file.write('std::shared_ptr<' + relationship.get("type") + '> getConfiguration' + relationship.get("name") + '(void) const;\n')
-			source_cpp_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + class_name + getConfiguration' + relationship.get("name") + '(void) const\n')
+			source_h_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + relationship.get("getter") + '(void) const;\n')
+			source_cpp_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + class_name + '::' + relationship.get("getter") + '(void) const\n')
+			source_cpp_file.write('{\n')
+
+			source_cpp_file.write('}\n')
 
 		else:
 
-			source_h_file.write('std::vector<std::shared_ptr<' + relationship.get("type") + '>> getConfigurations' + relationship.get("name") + '(void) const;\n')
+			source_h_file.write('std::vector<std::shared_ptr<' + relationship.get("type") + '>> ' + relationship.get("getter") + '(void) const;\n')
 
 
 

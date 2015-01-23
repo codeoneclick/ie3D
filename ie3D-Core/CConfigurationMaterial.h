@@ -6,7 +6,9 @@ class CConfigurationMaterial : public IConfiguration
 public:
 CConfigurationMaterial(void) = default
 ~CConfigurationMaterial(void) = default
-std::string getTechniqueName(void) const;
-bool getIsDepthTest(void) const;
-bool getIsDepthMask(void) const;
-std::shared_ptr<CConfigurationShader> getConfigurationShader(void) const;std::vector<std::shared_ptr<CConfigurationTexture>> getConfigurationsTextures(void) const;};
+std::stringgetTechniqueName(void) const;
+boolisDepthTest(void) const;
+boolisDepthMask(void) const;
+std::shared_ptr<CConfigurationShader> getConfigurationShader(void) const;
+std::vector<std::shared_ptr<CConfigurationTexture>> getConfigurationsTextures(void) const;
+};
