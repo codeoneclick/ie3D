@@ -6,6 +6,6 @@ class CConfigurationShader : public IConfiguration
 public:
 CConfigurationShader(void) = default
 ~CConfigurationShader(void) = default
-std::stringgetVSFilename(void) const;
-std::stringgetFSFilename(void) const;
+std::string getVSFilename(void) const;
+std::string getFSFilename(void) const;
 };

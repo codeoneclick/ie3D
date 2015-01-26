@@ -22,4 +22,14 @@ return value
 }
 std::shared_ptr<CConfigurationShader> CConfigurationMaterial::getConfigurationShader(void) const
 {
+const auto& iterator = m_configurations.find("/material/shader");
+assert(iterator != m_configurations.end());
+assert(iterator->second.size() != 0;
+return std::static_pointer_cast<CConfigurationShader>(iterator->second.at(0));
+}
+std::vector<std::shared_ptr<CConfigurationTexture>> CConfigurationMaterial::getConfigurationsTextures(void) const
+{
+const auto& iterator = m_configurations.find("/material/textures/texture");
+assert(iterator != m_configurations.end());
+return iterator->second;
 }

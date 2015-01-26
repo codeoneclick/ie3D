@@ -47,7 +47,7 @@ def parse_xml(filename):
 
 	for attribute in root.iter('attribute'):
 
-		source_h_file.write(attribute.get('type') + attribute.get("getter") + '(void) const;\n')
+		source_h_file.write(attribute.get('type') + ' ' + attribute.get("getter") + '(void) const;\n')
 		source_cpp_file.write(attribute.get('type') + ' ' + class_name + '::' + attribute.get("getter") + '(void) const\n')
 		source_cpp_file.write('{\n')
 		source_cpp_file.write('const auto& iterator = m_attributes.find(\"' + attribute.get("path") + '/' + attribute.get("attribute_name") + '\");\n')
@@ -63,13 +63,31 @@ def parse_xml(filename):
 			source_h_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + relationship.get("getter") + '(void) const;\n')
 			source_cpp_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + class_name + '::' + relationship.get("getter") + '(void) const\n')
 			source_cpp_file.write('{\n')
+			if relationship.get("is_external") == '0':
+				source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("relationship_name") + '\");\n')
+			else:
+				source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("filename") + '/' + relationship.get("relationship_name") + '\");\n')
+
+			source_cpp_file.write('assert(iterator != m_configurations.end());\n')
+			source_cpp_file.write('assert(iterator->second.size() != 0;\n')
+			source_cpp_file.write('return std::static_pointer_cast<' + relationship.get("type") + '>(iterator->second.at(0));\n')
 
 			source_cpp_file.write('}\n')
 
 		else:
 
 			source_h_file.write('std::vector<std::shared_ptr<' + relationship.get("type") + '>> ' + relationship.get("getter") + '(void) const;\n')
+			source_cpp_file.write('std::vector<std::shared_ptr<' + relationship.get("type") + '>> ' + class_name + '::' + relationship.get("getter") + '(void) const\n')
+			source_cpp_file.write('{\n')
+			if relationship.get("is_external") == '0':
+				source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("relationship_name") + '\");\n')
+			else:
+				source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("filename") + '/' + relationship.get("relationship_name") + '\");\n')
 
+			source_cpp_file.write('assert(iterator != m_configurations.end());\n')
+			source_cpp_file.write('return iterator->second;\n')
+
+			source_cpp_file.write('}\n')
 
 
 	source_h_file.write('};\n')
