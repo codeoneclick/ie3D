@@ -27,6 +27,9 @@ ISharedConfiguration CConfigurationMaterialSerializer::serialize(const std::stri
     
     std::shared_ptr<CConfigurationMaterial> materialConfiguration = std::make_shared<CConfigurationMaterial>();
     
+    pugi::xpath_node xpathnode = document.select_single_node("/material");
+    std::string techniqueName = xpathnode.node().attribute("render_operation_name").as_string();
+
     pugi::xpath_node_set textures = document.select_nodes("/material/textures/texture");
     for (pugi::xpath_node_set::const_iterator it = textures.begin(); it != textures.end(); ++it)
     {

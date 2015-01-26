@@ -13,13 +13,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value
 }
-std::shared_ptr<CConfigurationShader> CConfigurationShader::serialize(pugi::xml_document& document)
+std::shared_ptr<CConfigurationShader> CConfigurationShader::serialize(pugi::xml_document& document, const std::string& path)
 {
 pugi::xpath_node node;
-node = document.select_single_node("/shader");
+node = document.select_single_node(path + "/shader");
 std::string vs_filename = node.node().attribute("vs_filename").as_string();
 IConfiguration::setAttribute("/shader/vs_filename", std::make_shared<CConfigurationAttribute>(vs_filename));
-node = document.select_single_node("/shader");
 std::string fs_filename = node.node().attribute("fs_filename").as_string();
 IConfiguration::setAttribute("/shader/fs_filename", std::make_shared<CConfigurationAttribute>(fs_filename));
 }
