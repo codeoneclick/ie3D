@@ -33,6 +33,9 @@ ISharedConfiguration CConfigurationGameTransitionSerializer::serialize(const std
                                                                       gameTransitionConfiguration->kGameTransitionGuidAttribute),
                                          std::make_shared<CConfigurationAttribute>(guid));
     
+    pugi::xpath_node xpathnode = document.select_single_node("/transition/output_render_operation");
+    std::string techniqueName = xpathnode.node().attribute("filename").as_string();
+    
     pugi::xml_node outputRenderOperationNode = node.child(gameTransitionConfiguration->kGameTransitionORenderOperationConfigurationNode.c_str());
     std::string outputRenderOperationFilename = outputRenderOperationNode.attribute(gameTransitionConfiguration->kGameTransitionORenderOperationConfigurationFilenameAttribute.c_str()).as_string();
     
