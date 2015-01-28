@@ -1,0 +1,18 @@
+<ws_technique
+    class_name="CConfigurationWSTechnique"
+    base_class_name="IConfiguration"
+    is_external="1">
+    <attributes>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getGUID" path="/ws_technique" attribute_name="guid"/>
+        <attribute type="bool" is_convert_to_ogl_enum="0" getter="areDrawBoundingBoxes" path="/ws_technique" attribute_name="are_draw_bounding_boxes"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getIndex" path="/ws_technique" attribute_name="index"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getScreenWidth" path="/ws_technique" attribute_name="screen_width"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getScreenHeight" path="/ws_technique" attribute_name="screen_height"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClearColorR" path="/ws_technique" attribute_name="clear_color_r"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClearColorG" path="/ws_technique" attribute_name="clear_color_g"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClearColorB" path="/ws_technique" attribute_name="clear_color_b"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClearColorA" path="/ws_technique" attribute_name="clear_color_a"/>
+    </attributes>
+    <relationships>
+    </relationships>
+</ws_technique>

@@ -6,10 +6,23 @@ class CConfigurationMaterial : public IConfiguration
 public:
 CConfigurationMaterial(void) = default
 ~CConfigurationMaterial(void) = default
-std::string getTechniqueName(void) const;
+std::string getRenderOperationName(void) const;
 bool isDepthTest(void) const;
 bool isDepthMask(void) const;
-std::shared_ptr<CConfigurationShader> getConfigurationShader(void) const;
-std::vector<std::shared_ptr<CConfigurationTexture>> getConfigurationsTextures(void) const;
+bool isCulling(void) const;
+GLenum getCullingMode(void) const;
+bool isBlending(void) const;
+GLenum getBlendingFunctionSource(void) const;
+GLenum getBlendingFunctionDestination(void) const;
+bool isClipping(void) const;
+f32 getClippingX(void) const;
+f32 getClippingY(void) const;
+f32 getClippingZ(void) const;
+f32 getClippingW(void) const;
+bool isReflecting(void) const;
+bool isShadowing(void) const;
+bool isDebugging(void) const;
+std::shared_ptr<CConfigurationShader> getShaderConfiguration(void) const;
+std::vector<std::shared_ptr<CConfigurationTexture>> getTexturesConfigurations(void) const;
 std::shared_ptr<CConfigurationMaterial> serialize(const std::string& filename);
 };

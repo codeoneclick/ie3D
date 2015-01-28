@@ -1,0 +1,15 @@
+<texture
+    class_name="CConfigurationTexture"
+    base_class_name="IConfiguration"
+    is_external="0">
+    <attributes>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilename" path="/texture" attribute_name="filename"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getRenderOperationName" path="/texture" attribute_name="render_operation_name"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSamplerIndex" path="/texture" attribute_name="sampler_index"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getWrapMode" path="/texture" attribute_name="wrap_mode"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getMagFilter" path="/texture" attribute_name="mag_filter"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getMinFilter" path="/texture" attribute_name="mag_filter"/>
+    </attributes>
+    <relationships>
+    </relationships>
+</texture>

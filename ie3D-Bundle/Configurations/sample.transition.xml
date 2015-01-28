@@ -1,0 +1,13 @@
+<transition
+    class_name="CConfigurationTransition"
+    base_class_name="IConfiguration"
+    is_external="1">
+    <attributes>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getGUID" path="/transition" attribute_name="guid"/>
+    </attributes>
+    <relationships>
+    	<relationship type="CConfigurationOutputTechnique" getter="getConfigurationOutputTechnique" is_to_many="0" is_external="1" path="/transition" relationship_name="output_technique"/>
+    	<relationship type="CConfigurationWSTechnique" getter="getConfigurationWSTechnique" is_to_many="1" is_external="1" path="/transition/ws_techniques" relationship_name="ws_technique"/>
+    	<relationship type="CConfigurationSSTechnique" getter="getConfigurationSSTechnique" is_to_many="1" is_external="1" path="/transition/ss_techniques" relationship_name="ss_technique"/>
+    </relationships>
+</transition>

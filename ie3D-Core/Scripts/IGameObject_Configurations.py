@@ -7,9 +7,14 @@ from re import sub, split, UNICODE
 from os import walk, listdir
 from os.path import isfile, join, basename
 
-kConfigurationsPath = "../ie3D-Bundle/Configurations"
-kShaderConfiguratiomSample = "../../ie3D-Bundle/Configurations/example.shader.xml"
-kMaterialConfigurationSample = "../../ie3D-Bundle/Configurations/example.material.xml"
+kConfiguratiomShader = "../../ie3D-Bundle/Configurations/sample.shader.xml"
+kConfiguratiomTexture = "../../ie3D-Bundle/Configurations/sample.texture.xml"
+kConfigurationMaterial = "../../ie3D-Bundle/Configurations/sample.material.xml"
+kConfigurationAnimation= "../../ie3D-Bundle/Configurations/sample.animation.xml"
+kConfigurationModel = "../../ie3D-Bundle/Configurations/sample.model.xml"
+kConfigurationWSTechnique = "../../ie3D-Bundle/Configurations/sample.ws_technique.xml"
+kConfigurationSSTechnique = "../../ie3D-Bundle/Configurations/sample.ss_technique.xml"
+kConfigurationOutputTechnique = "../../ie3D-Bundle/Configurations/sample.output_technique.xml"
 
 def get_filepathes(directory, extension):
     filepathes = [] 
@@ -42,7 +47,12 @@ def write_attributes_serializer(source_cpp_file, attributes):
  	for attribute in attributes:
 
 		source_cpp_file.write(attribute.get('type') + ' ' + attribute.get("attribute_name") + ' = node.node().attribute("'+ attribute.get("attribute_name") + '").' + get_attribute_type_converter(attribute.get('type')) +';\n')
-		source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("attribute_name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("attribute_name") + '));\n')
+		if attribute.get('is_convert_to_ogl_enum') == '0':
+			source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("attribute_name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("attribute_name") + '));\n')
+		else:
+
+			source_cpp_file.write('assert(g_stringToGLenum.find('+ attribute.get("attribute_name") +') != g_stringToGLenum.end());\n')
+        	source_cpp_file.write('GLenum '+ attribute.get("attribute_name")+ 'Enum' + ' = g_stringToGLenum.find('+ attribute.get("attribute_name") +')->second;\n')
 
 def write_relationships_serializer(source_cpp_file, relationships):
 	for relationship in relationships:
@@ -54,27 +64,30 @@ def write_relationships_serializer(source_cpp_file, relationships):
 			if relationship.get("is_external") == '0':
 
 				source_cpp_file.write(relationship.get('relationship_name') + '->serialize(document, "' + relationship.get('path') + '");\n')
-				source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("relationship_name") + '", ' + relationship.get('relationship_name') + ');\n')
 
 			else:
 
 				raise Exception('#TODO')
+
+			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("relationship_name") + '", ' + relationship.get('relationship_name') + ');\n')
 
 		else:
 
+			source_cpp_file.write('pugi::xpath_node_set ' + relationship.get('relationship_name') + '_nodes = document.select_nodes("' + relationship.get('path') + '/' + relationship.get('relationship_name') + '");\n')
+			source_cpp_file.write('for (pugi::xpath_node_set::const_iterator iterator = ' + relationship.get('relationship_name') + '_nodes.begin(); iterator != ' + relationship.get('relationship_name') + '_nodes.end(); ++iterator)\n')
+			source_cpp_file.write('{\n')
+			source_cpp_file.write('std::shared_ptr<' + relationship.get('type') + '> ' + relationship.get('relationship_name') + ' = std::make_shared<' + relationship.get('type') + '>();\n')
+
 			if relationship.get("is_external") == '0':
 
-				source_cpp_file.write('pugi::xpath_node_set ' + relationship.get('relationship_name') + '_nodes = document.select_nodes("' + relationship.get('path') + '/' + relationship.get('relationship_name') + '");\n')
-				source_cpp_file.write('for (pugi::xpath_node_set::const_iterator iterator = ' + relationship.get('relationship_name') + '_nodes.begin(); iterator != ' + relationship.get('relationship_name') + '_nodes.end(); ++iterator)\n')
-				source_cpp_file.write('{\n')
-				source_cpp_file.write('std::shared_ptr<' + relationship.get('type') + '> ' + relationship.get('relationship_name') + ' = std::make_shared<' + relationship.get('type') + '>();\n')
 				source_cpp_file.write(relationship.get('relationship_name') + '->serialize(document, "' + relationship.get('path') + '");\n')
-				source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("relationship_name") + '", ' + relationship.get('relationship_name') + ');\n')
-				source_cpp_file.write('}\n')
 
 			else:
 
-				raise Exception('#TODO')
+				source_cpp_file.write(relationship.get('relationship_name') + '->serialize((*iterator).node().attribute("filename").as_string());\n')
+
+			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("relationship_name") + '", ' + relationship.get('relationship_name') + ');\n')
+			source_cpp_file.write('}\n')
 			
 
 
@@ -103,12 +116,23 @@ def parse_xml(filename):
 
 	for attribute in root.iter('attribute'):
 
-		source_h_file.write(attribute.get('type') + ' ' + attribute.get("getter") + '(void) const;\n')
-		source_cpp_file.write(attribute.get('type') + ' ' + class_name + '::' + attribute.get("getter") + '(void) const\n')
+		if attribute.get('is_convert_to_ogl_enum') == '0':
+
+			source_h_file.write(attribute.get('type') + ' ' + attribute.get("getter") + '(void) const;\n')
+			source_cpp_file.write(attribute.get('type') + ' ' + class_name + '::' + attribute.get("getter") + '(void) const\n')
+
+		else:
+
+			source_h_file.write('GLenum ' + attribute.get("getter") + '(void) const;\n')
+			source_cpp_file.write('GLenum ' + class_name + '::' + attribute.get("getter") + '(void) const\n')
+
 		source_cpp_file.write('{\n')
 		source_cpp_file.write('const auto& iterator = m_attributes.find(\"' + attribute.get("path") + '/' + attribute.get("attribute_name") + '\");\n')
 		source_cpp_file.write('assert(iterator != m_attributes.end());\n')
-		source_cpp_file.write(attribute.get('type') + ' value; iterator->second->get(&value);\n')
+		if attribute.get('is_convert_to_ogl_enum') == '0':
+			source_cpp_file.write(attribute.get('type') + ' value; iterator->second->get(&value);\n')
+		else:
+			source_cpp_file.write('GLenum value; iterator->second->get(&value);\n')
 		source_cpp_file.write('return value\n')
 		source_cpp_file.write('}\n')
 
@@ -119,15 +143,10 @@ def parse_xml(filename):
 			source_h_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + relationship.get("getter") + '(void) const;\n')
 			source_cpp_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + class_name + '::' + relationship.get("getter") + '(void) const\n')
 			source_cpp_file.write('{\n')
-			if relationship.get("is_external") == '0':
-				source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("relationship_name") + '\");\n')
-			else:
-				source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("filename") + '/' + relationship.get("relationship_name") + '\");\n')
-
+			source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("relationship_name") + '\");\n')
 			source_cpp_file.write('assert(iterator != m_configurations.end());\n')
 			source_cpp_file.write('assert(iterator->second.size() != 0;\n')
 			source_cpp_file.write('return std::static_pointer_cast<' + relationship.get("type") + '>(iterator->second.at(0));\n')
-
 			source_cpp_file.write('}\n')
 
 		else:
@@ -135,14 +154,9 @@ def parse_xml(filename):
 			source_h_file.write('std::vector<std::shared_ptr<' + relationship.get("type") + '>> ' + relationship.get("getter") + '(void) const;\n')
 			source_cpp_file.write('std::vector<std::shared_ptr<' + relationship.get("type") + '>> ' + class_name + '::' + relationship.get("getter") + '(void) const\n')
 			source_cpp_file.write('{\n')
-			if relationship.get("is_external") == '0':
-				source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("relationship_name") + '\");\n')
-			else:
-				source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("filename") + '/' + relationship.get("relationship_name") + '\");\n')
-
+			source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("relationship_name") + '\");\n')
 			source_cpp_file.write('assert(iterator != m_configurations.end());\n')
 			source_cpp_file.write('return iterator->second;\n')
-
 			source_cpp_file.write('}\n')
 
 	if is_external == "0":
@@ -174,7 +188,13 @@ def parse_xml(filename):
 	source_cpp_file.close()
 
 def main():
-	parse_xml(kShaderConfiguratiomSample)
-	parse_xml(kMaterialConfigurationSample)
+	parse_xml(kConfiguratiomShader)
+	parse_xml(kConfiguratiomTexture)
+	parse_xml(kConfigurationMaterial)
+	parse_xml(kConfigurationAnimation)
+	parse_xml(kConfigurationModel)
+	parse_xml(kConfigurationWSTechnique)
+	parse_xml(kConfigurationSSTechnique)
+	parse_xml(kConfigurationOutputTechnique)
 
 main()

@@ -188,7 +188,7 @@ ISharedConfiguration CConfigurationMaterialSerializer::serialize(const std::stri
                                                                 materialConfiguration->kMaterialTexturesConfigurationsNode),
                                        textureConfiguration);
     }
-    
+
     return materialConfiguration;
 }
 

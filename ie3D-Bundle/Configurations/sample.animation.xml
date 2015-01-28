@@ -1,0 +1,11 @@
+<animation
+    class_name="CConfigurationAnimation"
+    base_class_name="IConfiguration"
+    is_external="0">
+    <attributes>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilename" path="/animation" attribute_name="filename"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getName" path="/animation" attribute_name="name"/>
+    </attributes>
+    <relationships>
+    </relationships>
+</animation>

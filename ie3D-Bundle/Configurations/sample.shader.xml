@@ -1,0 +1,11 @@
+<shader
+    class_name="CConfigurationShader"
+    base_class_name="IConfiguration"
+    is_external="0">
+    <attributes>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getVSFilename" path="/shader" attribute_name="vs_filename"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFSFilename" path="/shader" attribute_name="fs_filename"/>
+    </attributes>
+    <relationships>
+    </relationships>
+</shader>
