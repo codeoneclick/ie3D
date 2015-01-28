@@ -9,6 +9,6 @@ CConfigurationShader(void) = default;
 ~CConfigurationShader(void) = default;
 std::string getVSFilename(void) const;
 std::string getFSFilename(void) const;
-std::shared_ptr<CConfigurationShader> serialize(pugi::xml_document& document, const std::string& path);
+void serialize(pugi::xml_document& document, const std::string& path);
 };
 #endif

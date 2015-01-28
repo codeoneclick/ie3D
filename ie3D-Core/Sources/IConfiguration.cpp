@@ -109,24 +109,9 @@ E_CONFIGURATION_CLASS IConfiguration::getConfigurationClass(void) const
 }
 
 void IConfiguration::setAttribute(const std::string& attributeName,
-                                  CSharedConfigurationAttributeRef attribute,
-                                  bool isReplacing,
-                                  ui32 replacingIndex)
+                                  CSharedConfigurationAttributeRef attribute)
 {
-    const auto& iterator = m_attributes.find(attributeName);
-    if(iterator != m_attributes.end())
-    {
-        if(isReplacing && replacingIndex < iterator->second.size())
-        {
-            iterator->second[replacingIndex] = attribute;
-        } else {
-            iterator->second.push_back(attribute);
-        }
-    } else {
-        std::vector<CSharedConfigurationAttribute> attributes;
-        attributes.push_back(attribute);
-        m_attributes.insert(std::make_pair(attributeName, attributes));
-    }
+    m_attributes.insert(std::make_pair(attributeName, attribute));
 }
 
 void IConfiguration::setConfiguration(const std::string &configurationName,

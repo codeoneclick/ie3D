@@ -116,16 +116,16 @@ std::shared_ptr<CConfigurationShader> CConfigurationMaterial::getShaderConfigura
 {
 const auto& iterator = m_configurations.find("/material/shader");
 assert(iterator != m_configurations.end());
-assert(iterator->second.size() != 0;
+assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationShader>(iterator->second.at(0));
 }
-std::vector<std::shared_ptr<CConfigurationTexture>> CConfigurationMaterial::getTexturesConfigurations(void) const
+std::vector<std::shared_ptr<IConfiguration>> CConfigurationMaterial::getTexturesConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/material/textures/texture");
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
-std::shared_ptr<CConfigurationMaterial> CConfigurationMaterial::serialize(const std::string& filename)
+void CConfigurationMaterial::serialize(const std::string& filename)
 {
 pugi::xml_document document;
 pugi::xml_parse_result result = IConfiguration::openXMLDocument(document, filename);
@@ -134,52 +134,42 @@ pugi::xpath_node node;
 node = document.select_single_node("/material");
 std::string render_operation_name = node.node().attribute("render_operation_name").as_string();
 IConfiguration::setAttribute("/material/render_operation_name", std::make_shared<CConfigurationAttribute>(render_operation_name));
-GLenum render_operation_nameEnum = g_stringToGLenum.find(render_operation_name)->second;
 bool is_depth_test = node.node().attribute("is_depth_test").as_bool();
 IConfiguration::setAttribute("/material/is_depth_test", std::make_shared<CConfigurationAttribute>(is_depth_test));
-GLenum is_depth_testEnum = g_stringToGLenum.find(is_depth_test)->second;
 bool is_depth_mask = node.node().attribute("is_depth_mask").as_bool();
 IConfiguration::setAttribute("/material/is_depth_mask", std::make_shared<CConfigurationAttribute>(is_depth_mask));
-GLenum is_depth_maskEnum = g_stringToGLenum.find(is_depth_mask)->second;
 bool is_cull_face = node.node().attribute("is_cull_face").as_bool();
 IConfiguration::setAttribute("/material/is_cull_face", std::make_shared<CConfigurationAttribute>(is_cull_face));
-GLenum is_cull_faceEnum = g_stringToGLenum.find(is_cull_face)->second;
 std::string cull_face_mode = node.node().attribute("cull_face_mode").as_string();
 assert(g_stringToGLenum.find(cull_face_mode) != g_stringToGLenum.end());
 GLenum cull_face_modeEnum = g_stringToGLenum.find(cull_face_mode)->second;
+IConfiguration::setAttribute("/material/cull_face_mode", std::make_shared<CConfigurationAttribute>(cull_face_modeEnum));
 bool is_blending = node.node().attribute("is_blending").as_bool();
 IConfiguration::setAttribute("/material/is_blending", std::make_shared<CConfigurationAttribute>(is_blending));
-GLenum is_blendingEnum = g_stringToGLenum.find(is_blending)->second;
 std::string blending_function_source = node.node().attribute("blending_function_source").as_string();
 assert(g_stringToGLenum.find(blending_function_source) != g_stringToGLenum.end());
 GLenum blending_function_sourceEnum = g_stringToGLenum.find(blending_function_source)->second;
+IConfiguration::setAttribute("/material/blending_function_source", std::make_shared<CConfigurationAttribute>(blending_function_sourceEnum));
 std::string blending_function_destination = node.node().attribute("blending_function_destination").as_string();
 assert(g_stringToGLenum.find(blending_function_destination) != g_stringToGLenum.end());
 GLenum blending_function_destinationEnum = g_stringToGLenum.find(blending_function_destination)->second;
+IConfiguration::setAttribute("/material/blending_function_destination", std::make_shared<CConfigurationAttribute>(blending_function_destinationEnum));
 bool is_cliping = node.node().attribute("is_cliping").as_bool();
 IConfiguration::setAttribute("/material/is_cliping", std::make_shared<CConfigurationAttribute>(is_cliping));
-GLenum is_clipingEnum = g_stringToGLenum.find(is_cliping)->second;
 f32 clipping_x = node.node().attribute("clipping_x").as_float();
 IConfiguration::setAttribute("/material/clipping_x", std::make_shared<CConfigurationAttribute>(clipping_x));
-GLenum clipping_xEnum = g_stringToGLenum.find(clipping_x)->second;
 f32 clipping_y = node.node().attribute("clipping_y").as_float();
 IConfiguration::setAttribute("/material/clipping_y", std::make_shared<CConfigurationAttribute>(clipping_y));
-GLenum clipping_yEnum = g_stringToGLenum.find(clipping_y)->second;
 f32 clipping_z = node.node().attribute("clipping_z").as_float();
 IConfiguration::setAttribute("/material/clipping_z", std::make_shared<CConfigurationAttribute>(clipping_z));
-GLenum clipping_zEnum = g_stringToGLenum.find(clipping_z)->second;
 f32 clipping_w = node.node().attribute("clipping_w").as_float();
 IConfiguration::setAttribute("/material/clipping_w", std::make_shared<CConfigurationAttribute>(clipping_w));
-GLenum clipping_wEnum = g_stringToGLenum.find(clipping_w)->second;
 bool is_reflecting = node.node().attribute("is_reflecting").as_bool();
 IConfiguration::setAttribute("/material/is_reflecting", std::make_shared<CConfigurationAttribute>(is_reflecting));
-GLenum is_reflectingEnum = g_stringToGLenum.find(is_reflecting)->second;
 bool is_shadowing = node.node().attribute("is_shadowing").as_bool();
 IConfiguration::setAttribute("/material/is_shadowing", std::make_shared<CConfigurationAttribute>(is_shadowing));
-GLenum is_shadowingEnum = g_stringToGLenum.find(is_shadowing)->second;
 bool is_debugging = node.node().attribute("is_debugging").as_bool();
 IConfiguration::setAttribute("/material/is_debugging", std::make_shared<CConfigurationAttribute>(is_debugging));
-GLenum is_debuggingEnum = g_stringToGLenum.find(is_debugging)->second;
 std::shared_ptr<CConfigurationShader> shader = std::make_shared<CConfigurationShader>();
 shader->serialize(document, "/material");
 IConfiguration::setConfiguration("/material/shader", shader);

@@ -14,14 +14,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
-std::shared_ptr<CConfigurationAnimation> CConfigurationAnimation::serialize(pugi::xml_document& document, const std::string& path)
+void CConfigurationAnimation::serialize(pugi::xml_document& document, const std::string& path)
 {
 pugi::xpath_node node;
-node = document.select_single_node(path + "/animation");
+node = document.select_single_node((path + "/animation").c_str());
 std::string filename = node.node().attribute("filename").as_string();
 IConfiguration::setAttribute("/animation/filename", std::make_shared<CConfigurationAttribute>(filename));
-GLenum filenameEnum = g_stringToGLenum.find(filename)->second;
 std::string name = node.node().attribute("name").as_string();
 IConfiguration::setAttribute("/animation/name", std::make_shared<CConfigurationAttribute>(name));
-GLenum nameEnum = g_stringToGLenum.find(name)->second;
 }

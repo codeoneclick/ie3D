@@ -2,6 +2,7 @@
 #ifndef CConfigurationOutputTechnique_h
 #define CConfigurationOutputTechnique_h
 #include "IConfiguration.h"
+#include "CConfigurationMaterial.h"
 class CConfigurationOutputTechnique : public IConfiguration
 {
 public:
@@ -9,6 +10,6 @@ CConfigurationOutputTechnique(void) = default;
 ~CConfigurationOutputTechnique(void) = default;
 std::string getGUID(void) const;
 std::shared_ptr<CConfigurationMaterial> getConfigurationMaterial(void) const;
-std::shared_ptr<CConfigurationOutputTechnique> serialize(const std::string& filename);
+void serialize(const std::string& filename);
 };
 #endif

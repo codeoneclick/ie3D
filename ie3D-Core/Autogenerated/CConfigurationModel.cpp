@@ -14,28 +14,26 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
-std::vector<std::shared_ptr<CConfigurationMaterial>> CConfigurationModel::getMaterialsConfigurations(void) const
+std::vector<std::shared_ptr<IConfiguration>> CConfigurationModel::getMaterialsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/model/materials/material");
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
-std::vector<std::shared_ptr<CConfigurationAnimation>> CConfigurationModel::getAnimationsConfigurations(void) const
+std::vector<std::shared_ptr<IConfiguration>> CConfigurationModel::getAnimationsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/model/animations/animation");
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
-std::shared_ptr<CConfigurationModel> CConfigurationModel::serialize(pugi::xml_document& document, const std::string& path)
+void CConfigurationModel::serialize(pugi::xml_document& document, const std::string& path)
 {
 pugi::xpath_node node;
-node = document.select_single_node(path + "/model");
+node = document.select_single_node((path + "/model").c_str());
 std::string filename = node.node().attribute("filename").as_string();
 IConfiguration::setAttribute("/model/filename", std::make_shared<CConfigurationAttribute>(filename));
-GLenum filenameEnum = g_stringToGLenum.find(filename)->second;
 bool is_batching = node.node().attribute("is_batching").as_bool();
 IConfiguration::setAttribute("/model/is_batching", std::make_shared<CConfigurationAttribute>(is_batching));
-GLenum is_batchingEnum = g_stringToGLenum.find(is_batching)->second;
 pugi::xpath_node_set material_nodes = document.select_nodes("/model/materials/material");
 for (pugi::xpath_node_set::const_iterator iterator = material_nodes.begin(); iterator != material_nodes.end(); ++iterator)
 {
@@ -47,7 +45,7 @@ pugi::xpath_node_set animation_nodes = document.select_nodes("/model/animations/
 for (pugi::xpath_node_set::const_iterator iterator = animation_nodes.begin(); iterator != animation_nodes.end(); ++iterator)
 {
 std::shared_ptr<CConfigurationAnimation> animation = std::make_shared<CConfigurationAnimation>();
-animation->serialize((*iterator).node().attribute("filename").as_string());
+animation->serialize(document, "/model/animations");
 IConfiguration::setConfiguration("/model/animations/animation", animation);
 }
 }

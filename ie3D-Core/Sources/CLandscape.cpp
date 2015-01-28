@@ -350,7 +350,7 @@ void CLandscape::setTexture(CSharedTextureRef texture,
                 std::string filename = texture->getGuid();
                 textureConfiguration->setAttribute(getConfigurationAttributeKey(textureConfiguration->kTextureMainNode,
                                                                                 textureConfiguration->kTextureFilenameAttribute),
-                                                   std::make_shared<CConfigurationAttribute>(filename), true, 0);
+                                                   std::make_shared<CConfigurationAttribute>(filename));
             }
         }
     }

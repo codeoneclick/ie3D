@@ -1,0 +1,36 @@
+<particle_emitter
+    class_name="CConfigurationParticleEmitter"
+    base_class_name="IConfiguration"
+    is_external="1">
+    <attributes>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getNumParticles" path="/particle_emitter" attribute_name="num_particles"/>
+        <attribute type="ui64" is_convert_to_ogl_enum="0" getter="getDuration" path="/particle_emitter" attribute_name="duration"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getDurationRandomess" path="/particle_emitter" attribute_name="duration_randomness"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getVelocitySensitivity" path="/particle_emitter" attribute_name="velocity_sensitivity"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getMinHorizontalVelocity" path="/particle_emitter" attribute_name="min_horizontal_velocity"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getMaxHorizontalVelocity" path="/particle_emitter" attribute_name="max_horizontal_velocity"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getMinVerticalVelocity" path="/particle_emitter" attribute_name="min_vertical_velocity"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getMaxVerticalVelocity" path="/particle_emitter" attribute_name="max_vertical_velocity"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getEndVelocity" path="/particle_emitter" attribute_name="end_velocity"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getGravityX" path="/particle_emitter" attribute_name="gravity_x"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getGravityY" path="/particle_emitter" attribute_name="gravity_y"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getGravityZ" path="/particle_emitter" attribute_name="gravity_z"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getSourceColorR" path="/particle_emitter" attribute_name="source_color_r"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getSourceColorG" path="/particle_emitter" attribute_name="source_color_g"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getSourceColorB" path="/particle_emitter" attribute_name="source_color_b"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getSourceColorA" path="/particle_emitter" attribute_name="source_color_a"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getDestinationColorR" path="/particle_emitter" attribute_name="destination_color_r"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getDestinationColorG" path="/particle_emitter" attribute_name="destination_color_g"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getDestinationColorB" path="/particle_emitter" attribute_name="destination_color_b"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getDestinationColorA" path="/particle_emitter" attribute_name="destination_color_a"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getSourceSizeX" path="/particle_emitter" attribute_name="source_size_x"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getSourceSizeY" path="/particle_emitter" attribute_name="source_size_y"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getDestinationSizeX" path="/particle_emitter" attribute_name="destination_size_x"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getDestinationSizeY" path="/particle_emitter" attribute_name="destination_size_y"/>
+        <attribute type="ui64" is_convert_to_ogl_enum="0" getter="getMinEmittInterval" path="/particle_emitter" attribute_name="min_emitt_interval"/>
+        <attribute type="ui64" is_convert_to_ogl_enum="0" getter="getMaxEmittInterval" path="/particle_emitter" attribute_name="max_emitt_interval"/>
+    </attributes>
+    <relationships>
+    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/particle_emitter/materials" relationship_name="material"/>
+    </relationships>
+</particle_emitter>

@@ -8,6 +8,6 @@
     </attributes>
     <relationships>
     	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/model/materials" relationship_name="material"/>
-    	<relationship type="CConfigurationAnimation" getter="getAnimationsConfigurations" is_to_many="1" is_external="1" path="/model/animations" relationship_name="animation"/>
+    	<relationship type="CConfigurationAnimation" getter="getAnimationsConfigurations" is_to_many="1" is_external="0" path="/model/animations" relationship_name="animation"/>
     </relationships>
 </model>

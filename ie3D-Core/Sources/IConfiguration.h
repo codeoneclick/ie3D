@@ -32,6 +32,16 @@ protected:
     E_CONFIGURATION_ATTRIBUTE_SCALAR m_scalarType;
     std::tuple<bool, i8, ui8, i16, ui16, i32, ui32, f32> m_scalars;
     std::string m_string;
+    std::tuple<std::shared_ptr<bool>,
+    std::shared_ptr<i8>,
+    std::shared_ptr<ui8>,
+    std::shared_ptr<i16>,
+    std::shared_ptr<ui16>,
+    std::shared_ptr<i32>,
+    std::shared_ptr<ui32>,
+    std::shared_ptr<f32>,
+    std::shared_ptr<std::string>
+    > m_container;
     
 public:
     
@@ -39,53 +49,179 @@ public:
     {
         m_scalarType = type_name<bool>::name();
         m_scalars = std::make_tuple(value, 0, 0, 0, 0, 0, 0, 0);
+        m_container = std::make_tuple(std::make_shared<bool>(value),
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr);
     };
     
     CConfigurationAttribute(i8 value)
     {
         m_scalarType = type_name<i8>::name();
         m_scalars = std::make_tuple(false, value, 0, 0, 0, 0, 0, 0);
+        m_container = std::make_tuple(nullptr,
+                                      std::make_shared<i8>(value),
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr);
     };
     
     CConfigurationAttribute(ui8 value)
     {
         m_scalarType = type_name<ui8>::name();
         m_scalars = std::make_tuple(false, 0, value, 0, 0, 0, 0, 0);
+        m_container = std::make_tuple(nullptr,
+                                      nullptr,
+                                      std::make_shared<ui8>(value),
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr);
     };
     
     CConfigurationAttribute(i16 value)
     {
         m_scalarType = type_name<i16>::name();
         m_scalars = std::make_tuple(false, 0, 0, value, 0, 0, 0, 0);
+        m_container = std::make_tuple(nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      std::make_shared<i16>(value),
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr);
     };
     
     CConfigurationAttribute(ui16 value)
     {
         m_scalarType = type_name<ui16>::name();
         m_scalars = std::make_tuple(false, 0, 0, 0, value, 0, 0, 0);
+        m_container = std::make_tuple(nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      std::make_shared<ui16>(value),
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr);
     };
     
     CConfigurationAttribute(i32 value)
     {
         m_scalarType = type_name<i32>::name();
         m_scalars = std::make_tuple(false, 0, 0, 0, 0, value, 0, 0);
+        m_container = std::make_tuple(nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      std::make_shared<i32>(value),
+                                      nullptr,
+                                      nullptr,
+                                      nullptr);
     };
     
     CConfigurationAttribute(ui32 value)
     {
         m_scalarType = type_name<ui32>::name();
         m_scalars = std::make_tuple(false, 0, 0, 0, 0, 0, value, 0);
+        m_container = std::make_tuple(nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      std::make_shared<ui32>(value),
+                                      nullptr,
+                                      nullptr);
     };
     
     CConfigurationAttribute(f32 value)
     {
         m_scalarType = type_name<f32>::name();
         m_scalars = std::make_tuple(false, 0, 0, 0, 0, 0, 0, value);
+        m_container = std::make_tuple(nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      std::make_shared<f32>(value),
+                                      nullptr);
     };
     
-    CConfigurationAttribute(const std::string& string)
+    CConfigurationAttribute(const std::string& value)
     {
-        m_string = string;
+        m_string = value;
+        m_container = std::make_tuple(nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      nullptr,
+                                      std::make_shared<std::string>(value));
+    };
+    
+    void get(bool *value) const
+    {
+        (*value) = (*std::get<0>(m_container).get());
+    };
+    
+    void get(i8 *value) const
+    {
+        (*value) = (*std::get<1>(m_container).get());
+    };
+    
+    void get(ui8 *value) const
+    {
+        (*value) = (*std::get<2>(m_container).get());
+    };
+    
+    void get(i16 *value) const
+    {
+        (*value) = (*std::get<3>(m_container).get());
+    };
+    
+    void get(ui16 *value) const
+    {
+        (*value) = (*std::get<4>(m_container).get());
+    };
+    
+    void get(i32 *value) const
+    {
+        (*value) = (*std::get<5>(m_container).get());
+    };
+    
+    void get(ui32 *value) const
+    {
+        (*value) = (*std::get<6>(m_container).get());
+    };
+    
+    void get(f32 *value) const
+    {
+        (*value) = (*std::get<7>(m_container).get());
+    };
+    
+    void get(std::string *value) const
+    {
+        (*value) = (*std::get<8>(m_container).get());
     };
     
     template<class T_GET_VALUE>
@@ -185,26 +321,33 @@ private:
 protected:
     
     E_CONFIGURATION_CLASS m_configurationClass;
-    std::unordered_map<std::string, std::vector<CSharedConfigurationAttribute>> m_attributes;
+    std::unordered_map<std::string, CSharedConfigurationAttribute> m_attributes;
     std::unordered_map<std::string, std::vector<ISharedConfiguration>> m_configurations;
     
     IConfiguration(E_CONFIGURATION_CLASS configurationClass);
     
 public:
     
+    IConfiguration(void) = default;
+    
     ~IConfiguration(void);
     
     E_CONFIGURATION_CLASS getConfigurationClass(void) const;
     
     void setAttribute(const std::string& attributeName,
-                      CSharedConfigurationAttributeRef attribute,
-                      bool isReplacing = false,
-                      ui32 replacingIndex = 0);
+                      CSharedConfigurationAttributeRef attribute);
     
     void setConfiguration(const std::string& configurationName,
                           ISharedConfigurationRef configuration,
                           bool isReplacing = false,
                           ui32 replacingIndex = 0);
+    
+    pugi::xml_parse_result openXMLDocument(pugi::xml_document &document,
+                                           const std::string &filename)
+    {
+        pugi::xml_parse_result result;
+        return result;
+    };
 };
 
 #endif

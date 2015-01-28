@@ -2,6 +2,8 @@
 #ifndef CConfigurationModel_h
 #define CConfigurationModel_h
 #include "IConfiguration.h"
+#include "CConfigurationMaterial.h"
+#include "CConfigurationAnimation.h"
 class CConfigurationModel : public IConfiguration
 {
 public:
@@ -9,8 +11,8 @@ CConfigurationModel(void) = default;
 ~CConfigurationModel(void) = default;
 std::string getFilename(void) const;
 bool isBatching(void) const;
-std::vector<std::shared_ptr<CConfigurationMaterial>> getMaterialsConfigurations(void) const;
-std::vector<std::shared_ptr<CConfigurationAnimation>> getAnimationsConfigurations(void) const;
-std::shared_ptr<CConfigurationModel> serialize(pugi::xml_document& document, const std::string& path);
+std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
+std::vector<std::shared_ptr<IConfiguration>> getAnimationsConfigurations(void) const;
+void serialize(pugi::xml_document& document, const std::string& path);
 };
 #endif

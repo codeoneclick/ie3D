@@ -63,7 +63,7 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
-std::shared_ptr<CConfigurationWSTechnique> CConfigurationWSTechnique::serialize(const std::string& filename)
+void CConfigurationWSTechnique::serialize(const std::string& filename)
 {
 pugi::xml_document document;
 pugi::xml_parse_result result = IConfiguration::openXMLDocument(document, filename);
@@ -72,29 +72,20 @@ pugi::xpath_node node;
 node = document.select_single_node("/ws_technique");
 std::string guid = node.node().attribute("guid").as_string();
 IConfiguration::setAttribute("/ws_technique/guid", std::make_shared<CConfigurationAttribute>(guid));
-GLenum guidEnum = g_stringToGLenum.find(guid)->second;
 bool are_draw_bounding_boxes = node.node().attribute("are_draw_bounding_boxes").as_bool();
 IConfiguration::setAttribute("/ws_technique/are_draw_bounding_boxes", std::make_shared<CConfigurationAttribute>(are_draw_bounding_boxes));
-GLenum are_draw_bounding_boxesEnum = g_stringToGLenum.find(are_draw_bounding_boxes)->second;
 ui32 index = node.node().attribute("index").as_uint();
 IConfiguration::setAttribute("/ws_technique/index", std::make_shared<CConfigurationAttribute>(index));
-GLenum indexEnum = g_stringToGLenum.find(index)->second;
 ui32 screen_width = node.node().attribute("screen_width").as_uint();
 IConfiguration::setAttribute("/ws_technique/screen_width", std::make_shared<CConfigurationAttribute>(screen_width));
-GLenum screen_widthEnum = g_stringToGLenum.find(screen_width)->second;
 ui32 screen_height = node.node().attribute("screen_height").as_uint();
 IConfiguration::setAttribute("/ws_technique/screen_height", std::make_shared<CConfigurationAttribute>(screen_height));
-GLenum screen_heightEnum = g_stringToGLenum.find(screen_height)->second;
 f32 clear_color_r = node.node().attribute("clear_color_r").as_float();
 IConfiguration::setAttribute("/ws_technique/clear_color_r", std::make_shared<CConfigurationAttribute>(clear_color_r));
-GLenum clear_color_rEnum = g_stringToGLenum.find(clear_color_r)->second;
 f32 clear_color_g = node.node().attribute("clear_color_g").as_float();
 IConfiguration::setAttribute("/ws_technique/clear_color_g", std::make_shared<CConfigurationAttribute>(clear_color_g));
-GLenum clear_color_gEnum = g_stringToGLenum.find(clear_color_g)->second;
 f32 clear_color_b = node.node().attribute("clear_color_b").as_float();
 IConfiguration::setAttribute("/ws_technique/clear_color_b", std::make_shared<CConfigurationAttribute>(clear_color_b));
-GLenum clear_color_bEnum = g_stringToGLenum.find(clear_color_b)->second;
 f32 clear_color_a = node.node().attribute("clear_color_a").as_float();
 IConfiguration::setAttribute("/ws_technique/clear_color_a", std::make_shared<CConfigurationAttribute>(clear_color_a));
-GLenum clear_color_aEnum = g_stringToGLenum.find(clear_color_a)->second;
 }

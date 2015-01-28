@@ -16,6 +16,6 @@ f32 getClearColorR(void) const;
 f32 getClearColorG(void) const;
 f32 getClearColorB(void) const;
 f32 getClearColorA(void) const;
-std::shared_ptr<CConfigurationWSTechnique> serialize(const std::string& filename);
+void serialize(const std::string& filename);
 };
 #endif

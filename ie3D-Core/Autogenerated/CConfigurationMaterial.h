@@ -2,6 +2,8 @@
 #ifndef CConfigurationMaterial_h
 #define CConfigurationMaterial_h
 #include "IConfiguration.h"
+#include "CConfigurationShader.h"
+#include "CConfigurationTexture.h"
 class CConfigurationMaterial : public IConfiguration
 {
 public:
@@ -24,7 +26,7 @@ bool isReflecting(void) const;
 bool isShadowing(void) const;
 bool isDebugging(void) const;
 std::shared_ptr<CConfigurationShader> getShaderConfiguration(void) const;
-std::vector<std::shared_ptr<CConfigurationTexture>> getTexturesConfigurations(void) const;
-std::shared_ptr<CConfigurationMaterial> serialize(const std::string& filename);
+std::vector<std::shared_ptr<IConfiguration>> getTexturesConfigurations(void) const;
+void serialize(const std::string& filename);
 };
 #endif

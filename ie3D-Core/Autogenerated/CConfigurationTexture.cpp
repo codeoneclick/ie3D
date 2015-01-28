@@ -42,26 +42,26 @@ assert(iterator != m_attributes.end());
 GLenum value; iterator->second->get(&value);
 return value;
 }
-std::shared_ptr<CConfigurationTexture> CConfigurationTexture::serialize(pugi::xml_document& document, const std::string& path)
+void CConfigurationTexture::serialize(pugi::xml_document& document, const std::string& path)
 {
 pugi::xpath_node node;
-node = document.select_single_node(path + "/texture");
+node = document.select_single_node((path + "/texture").c_str());
 std::string filename = node.node().attribute("filename").as_string();
 IConfiguration::setAttribute("/texture/filename", std::make_shared<CConfigurationAttribute>(filename));
-GLenum filenameEnum = g_stringToGLenum.find(filename)->second;
 std::string render_operation_name = node.node().attribute("render_operation_name").as_string();
 IConfiguration::setAttribute("/texture/render_operation_name", std::make_shared<CConfigurationAttribute>(render_operation_name));
-GLenum render_operation_nameEnum = g_stringToGLenum.find(render_operation_name)->second;
 ui32 sampler_index = node.node().attribute("sampler_index").as_uint();
 IConfiguration::setAttribute("/texture/sampler_index", std::make_shared<CConfigurationAttribute>(sampler_index));
-GLenum sampler_indexEnum = g_stringToGLenum.find(sampler_index)->second;
 std::string wrap_mode = node.node().attribute("wrap_mode").as_string();
 assert(g_stringToGLenum.find(wrap_mode) != g_stringToGLenum.end());
 GLenum wrap_modeEnum = g_stringToGLenum.find(wrap_mode)->second;
+IConfiguration::setAttribute("/texture/wrap_mode", std::make_shared<CConfigurationAttribute>(wrap_modeEnum));
 std::string mag_filter = node.node().attribute("mag_filter").as_string();
 assert(g_stringToGLenum.find(mag_filter) != g_stringToGLenum.end());
 GLenum mag_filterEnum = g_stringToGLenum.find(mag_filter)->second;
+IConfiguration::setAttribute("/texture/mag_filter", std::make_shared<CConfigurationAttribute>(mag_filterEnum));
 std::string mag_filter = node.node().attribute("mag_filter").as_string();
 assert(g_stringToGLenum.find(mag_filter) != g_stringToGLenum.end());
 GLenum mag_filterEnum = g_stringToGLenum.find(mag_filter)->second;
+IConfiguration::setAttribute("/texture/mag_filter", std::make_shared<CConfigurationAttribute>(mag_filterEnum));
 }

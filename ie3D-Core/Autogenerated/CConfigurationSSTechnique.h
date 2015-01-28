@@ -2,6 +2,7 @@
 #ifndef CConfigurationSSTechnique_h
 #define CConfigurationSSTechnique_h
 #include "IConfiguration.h"
+#include "CConfigurationMaterial.h"
 class CConfigurationSSTechnique : public IConfiguration
 {
 public:
@@ -11,6 +12,6 @@ std::string getGUID(void) const;
 ui32 getScreenWidth(void) const;
 ui32 getScreenHeight(void) const;
 std::shared_ptr<CConfigurationMaterial> getConfigurationMaterial(void) const;
-std::shared_ptr<CConfigurationSSTechnique> serialize(const std::string& filename);
+void serialize(const std::string& filename);
 };
 #endif

@@ -31,8 +31,7 @@ std::string CConfigurationTexture::getFilename(void) const
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureFilenameAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getString();
+    return iterator->second->getString();
 }
 
 std::string CConfigurationTexture::getRenderOperationName(void) const
@@ -40,8 +39,7 @@ std::string CConfigurationTexture::getRenderOperationName(void) const
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureRenderOperationNameAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getString();
+    return iterator->second->getString();
 }
 
 ui32 CConfigurationTexture::getSamplerIndex(void) const
@@ -49,8 +47,7 @@ ui32 CConfigurationTexture::getSamplerIndex(void) const
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureSamplerIndexAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<ui32>();
+    return iterator->second->getScalar<ui32>();
 }
 
 ui32 CConfigurationTexture::getWrapMode(void) const
@@ -58,8 +55,7 @@ ui32 CConfigurationTexture::getWrapMode(void) const
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureWrapModeAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<ui32>();
+    return iterator->second->getScalar<ui32>();
 }
 
 ui32 CConfigurationTexture::getMagFilter(void) const
@@ -67,8 +63,7 @@ ui32 CConfigurationTexture::getMagFilter(void) const
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureMagFilterAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<ui32>();
+    return iterator->second->getScalar<ui32>();
 }
 
 ui32 CConfigurationTexture::getMinFilter(void) const
@@ -76,8 +71,7 @@ ui32 CConfigurationTexture::getMinFilter(void) const
     const auto& iterator = m_attributes.find(kTextureMainNode + ":" +
                                              kTextureMinFilterAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<ui32>();
+    return iterator->second->getScalar<ui32>();
 }
 
 CConfigurationShader::CConfigurationShader(void) :
@@ -99,8 +93,7 @@ std::string CConfigurationShader::getVSFilename(void) const
     const auto& iterator = m_attributes.find(kShaderMainNode + ":" +
                                              kShaderVSFilenameAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getString();
+    return iterator->second->getString();
 }
 
 std::string CConfigurationShader::getFSFilename(void) const
@@ -108,8 +101,7 @@ std::string CConfigurationShader::getFSFilename(void) const
     const auto& iterator = m_attributes.find(kShaderMainNode + ":" +
                                              kShaderFSFilenameAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getString();
+    return iterator->second->getString();
 }
 
 CConfigurationMaterial::CConfigurationMaterial(void) :
@@ -148,8 +140,7 @@ std::string CConfigurationMaterial::getRenderOperationName(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialRenderOperationNameAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getString();
+    return iterator->second->getString();
 }
 
 bool CConfigurationMaterial::isCulling(void) const
@@ -157,8 +148,7 @@ bool CConfigurationMaterial::isCulling(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsCullFaceAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<bool>();
+    return iterator->second->getScalar<bool>();
 }
 
 ui32 CConfigurationMaterial::getCullingMode(void) const
@@ -166,8 +156,7 @@ ui32 CConfigurationMaterial::getCullingMode(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialCullFaceModeAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<ui32>();
+    return iterator->second->getScalar<ui32>();
 }
 
 bool CConfigurationMaterial::isBlending(void) const
@@ -175,8 +164,7 @@ bool CConfigurationMaterial::isBlending(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsBlendingAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<bool>();
+    return iterator->second->getScalar<bool>();
 }
 
 ui32 CConfigurationMaterial::getBlendingFunctionSource(void) const
@@ -184,8 +172,7 @@ ui32 CConfigurationMaterial::getBlendingFunctionSource(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialBlendingFunctionSourceAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<ui32>();
+    return iterator->second->getScalar<ui32>();
 }
 
 ui32 CConfigurationMaterial::getBlendingFunctionDestination(void) const
@@ -193,8 +180,7 @@ ui32 CConfigurationMaterial::getBlendingFunctionDestination(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialBlendingFunctionDestinationAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<ui32>();
+    return iterator->second->getScalar<ui32>();
 }
 
 bool CConfigurationMaterial::isDepthTest(void) const
@@ -202,8 +188,7 @@ bool CConfigurationMaterial::isDepthTest(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsDepthTestAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<bool>();
+    return iterator->second->getScalar<bool>();
 }
 
 bool CConfigurationMaterial::isDepthMask(void) const
@@ -211,8 +196,7 @@ bool CConfigurationMaterial::isDepthMask(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsDepthMaskAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<bool>();
+    return iterator->second->getScalar<bool>();
 }
 
 bool CConfigurationMaterial::isClipping(void) const
@@ -220,8 +204,7 @@ bool CConfigurationMaterial::isClipping(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsClippingAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<bool>();
+    return iterator->second->getScalar<bool>();
 }
 
 glm::vec4 CConfigurationMaterial::getClippingPlane(void) const
@@ -229,26 +212,22 @@ glm::vec4 CConfigurationMaterial::getClippingPlane(void) const
     const auto& iteratorX = m_attributes.find(kMaterialMainNode + ":" +
                                               kMaterialClippingXAttribute);
     assert(iteratorX != m_attributes.end());
-    assert(iteratorX->second.size() != 0);
-    f32 x = iteratorX->second[0]->getScalar<f32>();
+    f32 x = iteratorX->second->getScalar<f32>();
     
     const auto& iteratorY = m_attributes.find(kMaterialMainNode + ":" +
                                               kMaterialClippingYAttribute);
     assert(iteratorY != m_attributes.end());
-    assert(iteratorY->second.size() != 0);
-    f32 y = iteratorY->second[0]->getScalar<f32>();
+    f32 y = iteratorY->second->getScalar<f32>();
     
     const auto& iteratorZ = m_attributes.find(kMaterialMainNode + ":" +
                                               kMaterialClippingZAttribute);
     assert(iteratorZ != m_attributes.end());
-    assert(iteratorZ->second.size() != 0);
-    f32 z = iteratorZ->second[0]->getScalar<f32>();
+    f32 z = iteratorZ->second->getScalar<f32>();
     
     const auto& iteratorW = m_attributes.find(kMaterialMainNode+ ":" +
                                               kMaterialClippingWAttribute);
     assert(iteratorW != m_attributes.end());
-    assert(iteratorW->second.size() != 0);
-    f32 w = iteratorW->second[0]->getScalar<f32>();
+    f32 w = iteratorW->second->getScalar<f32>();
     return glm::vec4(x, y, z, w);
 }
 
@@ -257,8 +236,7 @@ bool CConfigurationMaterial::isReflecting(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsReflectingAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<bool>();
+    return iterator->second->getScalar<bool>();
 }
 
 bool CConfigurationMaterial::isShadowing(void) const
@@ -266,8 +244,7 @@ bool CConfigurationMaterial::isShadowing(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsShadowingAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<bool>();
+    return iterator->second->getScalar<bool>();
 }
 
 bool CConfigurationMaterial::isDebugging(void) const
@@ -275,8 +252,7 @@ bool CConfigurationMaterial::isDebugging(void) const
     const auto& iterator = m_attributes.find(kMaterialMainNode + ":" +
                                              kMaterialIsDebuggingAttribute);
     assert(iterator != m_attributes.end());
-    assert(iterator->second.size() != 0);
-    return iterator->second[0]->getScalar<bool>();
+    return iterator->second->getScalar<bool>();
 }
 
 std::vector<ISharedConfiguration> CConfigurationMaterial::getTexturesConfigurations(void) const

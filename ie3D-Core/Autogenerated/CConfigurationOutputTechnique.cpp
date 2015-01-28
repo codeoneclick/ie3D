@@ -11,10 +11,10 @@ std::shared_ptr<CConfigurationMaterial> CConfigurationOutputTechnique::getConfig
 {
 const auto& iterator = m_configurations.find("/output_technique/material");
 assert(iterator != m_configurations.end());
-assert(iterator->second.size() != 0;
+assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationMaterial>(iterator->second.at(0));
 }
-std::shared_ptr<CConfigurationOutputTechnique> CConfigurationOutputTechnique::serialize(const std::string& filename)
+void CConfigurationOutputTechnique::serialize(const std::string& filename)
 {
 pugi::xml_document document;
 pugi::xml_parse_result result = IConfiguration::openXMLDocument(document, filename);
@@ -23,7 +23,6 @@ pugi::xpath_node node;
 node = document.select_single_node("/output_technique");
 std::string guid = node.node().attribute("guid").as_string();
 IConfiguration::setAttribute("/output_technique/guid", std::make_shared<CConfigurationAttribute>(guid));
-GLenum guidEnum = g_stringToGLenum.find(guid)->second;
 std::shared_ptr<CConfigurationMaterial> material = std::make_shared<CConfigurationMaterial>();
 pugi::xpath_node material_node = document.select_single_node("/output_techniquematerial");
 material->serialize(material_node.node().attribute("filename").as_string());

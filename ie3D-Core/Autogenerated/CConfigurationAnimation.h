@@ -9,6 +9,6 @@ CConfigurationAnimation(void) = default;
 ~CConfigurationAnimation(void) = default;
 std::string getFilename(void) const;
 std::string getName(void) const;
-std::shared_ptr<CConfigurationAnimation> serialize(pugi::xml_document& document, const std::string& path);
+void serialize(pugi::xml_document& document, const std::string& path);
 };
 #endif
