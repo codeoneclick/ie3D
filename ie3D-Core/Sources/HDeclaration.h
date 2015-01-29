@@ -181,10 +181,6 @@ class CLandscapeChunk;
 typedef std::shared_ptr<CLandscapeChunk> CSharedLandscapeChunk;
 typedef const CSharedLandscapeChunk& CSharedLandscapeChunkRef;
 
-class CLandscapeEdges;
-typedef std::shared_ptr<CLandscapeEdges> CSharedLandscapeEdges;
-typedef const CSharedLandscapeEdges& CSharedLandscapeEdgesRef;
-
 class IOGLWindow;
 typedef std::shared_ptr<IOGLWindow> ISharedOGLWindow;
 typedef const ISharedOGLWindow& ISharedOGLWindowRef;

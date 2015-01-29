@@ -44,7 +44,6 @@
 		21208FC11906FB5F00FFC8D4 /* COcean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789CF17A01CF800FE26FA /* COcean.cpp */; };
 		21208FC21906FB5F00FFC8D4 /* CLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */; };
 		21208FC31906FB5F00FFC8D4 /* CLandscapeChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */; };
-		21208FC41906FB5F00FFC8D4 /* CLandscapeEdges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */; };
 		21208FC61906FB5F00FFC8D4 /* CHeightmapProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C8E183E610900A3EF49 /* CHeightmapProcessor.cpp */; };
 		21208FC71906FB5F00FFC8D4 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
 		21208FC81906FB5F00FFC8D4 /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
@@ -132,7 +131,6 @@
 		213266051906A4AF001C98F7 /* COcean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789CF17A01CF800FE26FA /* COcean.cpp */; };
 		213266061906A4AF001C98F7 /* CLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */; };
 		213266071906A4AF001C98F7 /* CLandscapeChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */; };
-		213266081906A4AF001C98F7 /* CLandscapeEdges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C78183E3B3600A3EF49 /* CLandscapeEdges.cpp */; };
 		2132660A1906A4AF001C98F7 /* CHeightmapProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C8E183E610900A3EF49 /* CHeightmapProcessor.cpp */; };
 		2132660B1906A4AF001C98F7 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
 		2132660C1906A4AF001C98F7 /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
@@ -2062,7 +2060,6 @@
 				21208FC21906FB5F00FFC8D4 /* CLandscape.cpp in Sources */,
 				21208FC31906FB5F00FFC8D4 /* CLandscapeChunk.cpp in Sources */,
 				2191CE99196EE95100CE2813 /* compress.c in Sources */,
-				21208FC41906FB5F00FFC8D4 /* CLandscapeEdges.cpp in Sources */,
 				21208FC61906FB5F00FFC8D4 /* CHeightmapProcessor.cpp in Sources */,
 				21CB34F81A793CF000819C09 /* CConfigurationParticleEmitter.cpp in Sources */,
 				2191CEAA196EE95100CE2813 /* infback.c in Sources */,
@@ -2226,7 +2223,6 @@
 				213266061906A4AF001C98F7 /* CLandscape.cpp in Sources */,
 				213266071906A4AF001C98F7 /* CLandscapeChunk.cpp in Sources */,
 				2191CE98196EE95100CE2813 /* compress.c in Sources */,
-				213266081906A4AF001C98F7 /* CLandscapeEdges.cpp in Sources */,
 				2132660A1906A4AF001C98F7 /* CHeightmapProcessor.cpp in Sources */,
 				21CB34F71A793CF000819C09 /* CConfigurationParticleEmitter.cpp in Sources */,
 				2191CEA9196EE95100CE2813 /* infback.c in Sources */,

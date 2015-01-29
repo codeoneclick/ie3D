@@ -12,15 +12,14 @@
 #include "CTexture.h"
 #include "CCamera.h"
 #include "CResourceAccessor.h"
-#include "CConfigurationGameObjects.h"
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CLandscapeChunk.h"
-#include "CLandscapeEdges.h"
 #include "CHeightmapProcessor.h"
 #include "CFrustum.h"
 #include "CQuadTree.h"
 #include "CVertexBuffer.h"
+#include "CConfigurationAccessor.h"
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :

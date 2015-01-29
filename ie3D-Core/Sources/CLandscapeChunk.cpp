@@ -13,12 +13,12 @@
 #include "CCamera.h"
 #include "CGlobalLightSource.h"
 #include "CResourceAccessor.h"
-#include "CConfigurationGameObjects.h"
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CQuadTree.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
+#include "CConfigurationAccessor.h"
 
 CLandscapeChunk::CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
                                  ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :

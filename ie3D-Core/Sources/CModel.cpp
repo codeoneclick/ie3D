@@ -13,13 +13,13 @@
 #include "CCamera.h"
 #include "CGlobalLightSource.h"
 #include "CResourceAccessor.h"
-#include "CConfigurationGameObjects.h"
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CAnimationMixer.h"
 #include "IRenderTechniqueAccessor.h"
 #include "CBatchingMgr.h"
 #include "CAnimationSequence.h"
+#include "CConfigurationAccessor.h"
 
 CModel::CModel(CSharedResourceAccessorRef resourceAccessor,
                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -81,7 +81,7 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     IGameObject::onConfigurationLoaded(configuration, success);
     std::shared_ptr<CConfigurationModel> modelConfiguration = std::static_pointer_cast<CConfigurationModel>(configuration);
     assert(m_resourceAccessor != nullptr);
-    m_mesh = m_resourceAccessor->getMesh(modelConfiguration->getFilename());
+    m_mesh = m_resourceAccessor->getMesh(modelConfiguration->getMeshFilename());
     m_mesh->addLoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
     m_isBatching = modelConfiguration->isBatching();
