@@ -23,13 +23,7 @@
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
-IGameObject(resourceAccessor, renderTechniqueAccessor),
-m_prerenderedSplattingDiffuseTexture(nullptr),
-m_prerenderedSplattingNormalTexture(nullptr),
-m_splattingDiffuseMaterial(nullptr),
-m_splattingNormalMaterial(nullptr),
-m_configuration(nullptr),
-m_edges(std::make_shared<CLandscapeEdges>(resourceAccessor, renderTechniqueAccessor))
+IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
     m_isNeedBoundingBox = false;
     m_materialBindImposer = nullptr;
@@ -84,9 +78,6 @@ void CLandscape::onSceneUpdate(f32 deltatime)
     {
         m_heightmapProcessor->update();
         
-        CLandscape::prerenderSplattingDiffuseTexture();
-        CLandscape::prerenderSplattingNormalTexture();
-        
         ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
         ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
         
@@ -115,16 +106,6 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             
                             m_chunks[index]->setMesh(mesh);
                             m_chunks[index]->onConfigurationLoaded(m_configuration, true);
-                            
-                            if(m_prerenderedSplattingDiffuseTexture != nullptr)
-                            {
-                                m_chunks[index]->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
-                            }
-                            if(m_prerenderedSplattingNormalTexture != nullptr)
-                            {
-                                m_chunks[index]->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
-                            }
-                            m_chunks[index]->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
                             
                             m_chunks[index]->setRenderTechniqueImporter(m_renderTechniqueImporter);
                             m_chunks[index]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
@@ -190,66 +171,13 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_renderTechniqueAccessor, landscapeConfiguration);
     IEditableLandscape::setHeightmapProcessor(m_heightmapProcessor);
     
-    m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapProcessor->createSplattingTexture());
-    m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapProcessor->createHeightmapTexture());
-    m_resourceAccessor->addCustomTexture("landscape.edgesmask.texture", m_heightmapProcessor->createEdgesMaskTexture());
-    
-    CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingDiffuseMaterialConfiguration());
-    m_splattingDiffuseMaterial = std::make_shared<CMaterial>();
-    CMaterial::initializeMaterial(m_splattingDiffuseMaterial, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
-    m_splattingDiffuseMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
-    
-    materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(landscapeConfiguration->getSplattingNormalMaterialConfiguration());
-    m_splattingNormalMaterial = std::make_shared<CMaterial>();
-    CMaterial::initializeMaterial(m_splattingNormalMaterial, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
-    m_splattingNormalMaterial->setTexture(m_heightmapProcessor->Get_SplattingTexture(), E_SHADER_SAMPLER_04);
-    
     m_chunks.resize(m_heightmapProcessor->getNumChunksX() * m_heightmapProcessor->getNumChunksZ());
-    
-    m_edges->onConfigurationLoaded(configuration, success);
-    m_edges->setEdgeTexture(m_heightmapProcessor->Get_EdgesMaskTexture());
     
     m_tillingTexcoord[E_SHADER_SAMPLER_01] = 16;
     m_tillingTexcoord[E_SHADER_SAMPLER_02] = 16;
     m_tillingTexcoord[E_SHADER_SAMPLER_03] = 16;
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
-}
-
-void CLandscape::prerenderSplattingDiffuseTexture(void)
-{
-    if(m_splattingDiffuseMaterial->isCommited())
-    {
-        static std::once_flag onceToken;
-        std::call_once(onceToken, [this] {
-            
-            m_prerenderedSplattingDiffuseTexture = m_heightmapProcessor->createSplattingDiffuseTexture(m_splattingDiffuseMaterial);
-            std::for_each(m_chunks.begin(), m_chunks.end(), [this](CSharedLandscapeChunk& chunk) {
-                if(chunk !=  nullptr)
-                {
-                    chunk->setPrerenderedSplattingDiffuseTexture(m_prerenderedSplattingDiffuseTexture);
-                }
-            });
-        });
-    }
-}
-
-void CLandscape::prerenderSplattingNormalTexture(void)
-{
-    if(m_splattingNormalMaterial->isCommited())
-    {
-        static std::once_flag onceToken;
-        std::call_once(onceToken, [this] {
-            
-            m_prerenderedSplattingNormalTexture = m_heightmapProcessor->createSplattingNormalTexture(m_splattingNormalMaterial);
-            std::for_each(m_chunks.begin(), m_chunks.end(), [this](CSharedLandscapeChunk& chunk) {
-                if(chunk !=  nullptr)
-                {
-                    chunk->setPrerenderedSplattingNormalTexture(m_prerenderedSplattingNormalTexture);
-                }
-            });
-        });
-    }
 }
 
 std::vector<ISharedGameObject> CLandscape::getChunks(void) const
@@ -309,51 +237,11 @@ void CLandscape::onBatch(const std::string& mode)
     
 }
 
-void CLandscape::setCamera(CSharedCameraRef camera)
-{
-    IGameObject::setCamera(camera);
-    assert(m_edges != nullptr);
-    m_edges->setCamera(camera);
-}
-
-void CLandscape::setCameraFrustum(CSharedFrustumRef frustum)
-{
-    IGameObject::setCameraFrustum(frustum);
-    assert(m_edges != nullptr);
-    m_edges->setCameraFrustum(frustum);
-}
-
-void CLandscape::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource)
-{
-    IGameObject::setGlobalLightSource(lightSource);
-    assert(m_edges != nullptr);
-    m_edges->setGlobalLightSource(lightSource);
-}
-
 void CLandscape::setTexture(CSharedTextureRef texture,
                             E_SHADER_SAMPLER sampler,
                             const std::string& renderTechnique)
 {
     IGameObject::setTexture(texture, sampler, renderTechnique);
-    std::shared_ptr<CConfigurationLandscape> gameObjectConfiguration = std::static_pointer_cast<CConfigurationLandscape>(m_configuration);
-    assert(gameObjectConfiguration != nullptr);
-    
-    for(const auto& iterator_01 : gameObjectConfiguration->getMaterialsConfigurations())
-    {
-        CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator_01);
-        for(const auto& iterator_02 : materialConfiguration->getTexturesConfigurations())
-        {
-            CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator_02);
-            if(textureConfiguration->getSamplerIndex() == sampler)
-            {
-                std::string filename = texture->getGuid();
-                textureConfiguration->setAttribute(getConfigurationAttributeKey(textureConfiguration->kTextureMainNode,
-                                                                                textureConfiguration->kTextureFilenameAttribute),
-                                                   std::make_shared<CConfigurationAttribute>(filename));
-            }
-        }
-    }
-    
     for(const auto& iterator : m_chunks)
     {
         if(iterator != nullptr)
@@ -385,41 +273,6 @@ void CLandscape::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 f32 CLandscape::getTillingTexcoord(E_SHADER_SAMPLER sampler) const
 {
     return m_tillingTexcoord[sampler];
-}
-
-void CLandscape::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)
-{
-    assert(m_edges != nullptr);
-    IGameObject::setRenderTechniqueImporter(techniqueImporter);
-    m_edges->setRenderTechniqueImporter(techniqueImporter);
-}
-
-void CLandscape::setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor)
-{
-    assert(m_edges != nullptr);
-    IGameObject::setRenderTechniqueAccessor(techniqueAccessor);
-    m_edges->setRenderTechniqueAccessor(techniqueAccessor);
-}
-
-void CLandscape::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
-{
-    assert(m_edges != nullptr);
-    IGameObject::setSceneUpdateMgr(sceneUpdateMgr);
-    m_edges->setSceneUpdateMgr(sceneUpdateMgr);
-}
-
-void CLandscape::enableRender(bool value)
-{
-    assert(m_edges != nullptr);
-    m_isNeedToRender = value;
-    m_edges->enableRender(value);
-}
-
-void CLandscape::enableUpdate(bool value)
-{
-    assert(m_edges != nullptr);
-    IGameObject::enableUpdate(value);
-    m_edges->enableUpdate(value);
 }
 
 CSharedTexture CLandscape::getHeightmapTexture(void) const

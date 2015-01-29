@@ -173,8 +173,6 @@
 		2132664B1906A4AF001C98F7 /* CMeshLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */; };
 		2132664C1906A4AF001C98F7 /* CResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A319017466F720044643E /* CResourceLoader.cpp */; };
 		2132664D1906A4AF001C98F7 /* CResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceAccessor.cpp */; };
-		213396AD19D3198600B7C2A2 /* CAtmosphericScattering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EEDAA19D2FA9B00DA02B7 /* CAtmosphericScattering.cpp */; };
-		213396AE19D3198700B7C2A2 /* CAtmosphericScattering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EEDAA19D2FA9B00DA02B7 /* CAtmosphericScattering.cpp */; };
 		213B7F311993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F321993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F331993CC5B006F3976 /* CShaderCompiler_GLSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */; };
@@ -2073,7 +2071,6 @@
 				21208FCC1906FB5F00FFC8D4 /* CSceneGraph.cpp in Sources */,
 				21208FCD1906FB5F00FFC8D4 /* CSceneFabricator.cpp in Sources */,
 				219B5E751A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */,
-				213396AE19D3198700B7C2A2 /* CAtmosphericScattering.cpp in Sources */,
 				21208FCE1906FB5F00FFC8D4 /* CSceneUpdateMgr.cpp in Sources */,
 				21208FCF1906FB5F00FFC8D4 /* ISceneUpdateHandler.cpp in Sources */,
 				2173348219644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */,
@@ -2236,7 +2233,6 @@
 				213266101906A4AF001C98F7 /* CSceneGraph.cpp in Sources */,
 				213266111906A4AF001C98F7 /* CSceneFabricator.cpp in Sources */,
 				219B5E741A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */,
-				213396AD19D3198600B7C2A2 /* CAtmosphericScattering.cpp in Sources */,
 				213266121906A4AF001C98F7 /* CSceneUpdateMgr.cpp in Sources */,
 				213266131906A4AF001C98F7 /* ISceneUpdateHandler.cpp in Sources */,
 				2173348119644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */,

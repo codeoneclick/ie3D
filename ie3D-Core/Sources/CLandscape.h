@@ -20,19 +20,9 @@ private:
 
     CSharedHeightmapProcessor m_heightmapProcessor;
     std::vector<CSharedLandscapeChunk> m_chunks;
-    CSharedLandscapeEdges m_edges;
     ISharedConfiguration m_configuration;
     
     f32 m_tillingTexcoord[E_SHADER_SAMPLER_MAX];
-    
-    CSharedTexture m_prerenderedSplattingDiffuseTexture;
-    CSharedTexture m_prerenderedSplattingNormalTexture;
-    
-    CSharedMaterial m_splattingDiffuseMaterial;
-    CSharedMaterial m_splattingNormalMaterial;
-    
-    void prerenderSplattingDiffuseTexture(void);
-    void prerenderSplattingNormalTexture(void);
     
 protected:
 
@@ -65,17 +55,6 @@ public:
     CLandscape(CSharedResourceAccessorRef resourceAccessor,
                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CLandscape(void);
-    
-    void setCamera(CSharedCameraRef camera);
-    void setCameraFrustum(CSharedFrustumRef frustum);
-    void setGlobalLightSource(CSharedGlobalLightSourceRef lightSource);
-    
-    void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);
-    void setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor);
-    void setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr);
-    
-    void enableRender(bool value);
-    void enableUpdate(bool value);
     
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     f32 getTillingTexcoord(E_SHADER_SAMPLER sampler) const;

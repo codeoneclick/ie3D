@@ -14,9 +14,9 @@
 #include "CIndexBuffer.h"
 #include "IRenderTechniqueImporter.h"
 #include "IRenderTechniqueAccessor.h"
-#include "CConfigurationGameObjects.h"
 #include "CQuadTree.h"
 #include "CThreadOperation.h"
+#include "CConfigurationAccessor.h"
 
 #if defined(__IOS__)
 

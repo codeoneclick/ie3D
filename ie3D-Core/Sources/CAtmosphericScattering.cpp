@@ -13,7 +13,6 @@
 #include "CCamera.h"
 #include "CGlobalLightSource.h"
 #include "CResourceAccessor.h"
-#include "CConfigurationGameObjects.h"
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
