@@ -4,15 +4,15 @@
 #include "IConfiguration.h"
 #include "CConfigurationMaterial.h"
 #include "CConfigurationAnimation.h"
-class CConfigurationModel : public IConfiguration
+class CConfigurationModel : public IConfigurationGameObject
 {
 public:
 CConfigurationModel(void) = default;
 ~CConfigurationModel(void) = default;
-std::string getFilename(void) const;
+std::string getMeshFilename(void) const;
 bool isBatching(void) const;
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 std::vector<std::shared_ptr<IConfiguration>> getAnimationsConfigurations(void) const;
-void serialize(pugi::xml_document& document, const std::string& path);
+void serialize(const std::string& filename);
 };
 #endif

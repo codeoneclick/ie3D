@@ -1,0 +1,13 @@
+<landscape
+    class_name="CConfigurationLandscape"
+    base_class_name="IConfigurationGameObject"
+    is_external="1">
+    <attributes>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getHeightmapDataFilename" path="/landscape" attribute_name="heightmap_data_filename"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getSplattingDataFilename" path="/landscape" attribute_name="splatting_data_filename"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSize" path="/landscape" attribute_name="size"/>
+    </attributes>
+    <relationships>
+    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/landscape/materials" relationship_name="material"/>
+    </relationships>
+</landscape>

@@ -125,41 +125,9 @@ class IConfiguration;
 typedef std::shared_ptr<IConfiguration> ISharedConfiguration;
 typedef const ISharedConfiguration& ISharedConfigurationRef;
 
-class CConfigurationTexture;
-typedef std::shared_ptr<CConfigurationTexture> CSharedConfigurationTexture;
-typedef const CSharedConfigurationTexture& CSharedConfigurationTextureRef;
-
-class CConfigurationShader;
-typedef std::shared_ptr<CConfigurationShader> CSharedConfigurationShader;
-typedef const CSharedConfigurationShader& CSharedConfigurationShaderRef;
-
-class CConfigurationMaterial;
-typedef std::shared_ptr<CConfigurationMaterial> CSharedConfigurationMaterial;
-typedef const CSharedConfigurationMaterial& CSharedConfigurationMaterialRef;
-
-class CConfigurationGameObject;
-typedef std::shared_ptr<CConfigurationGameObject> CSharedConfigurationGameObject;
-typedef const CSharedConfigurationGameObject& CSharedConfigurationGameObjectRef;
-
-class CConfigurationWSRenderOperation;
-typedef std::shared_ptr<CConfigurationWSRenderOperation> CSharedConfigurationWSRenderOperation;
-typedef const CSharedConfigurationWSRenderOperation& CSharedConfigurationWSRenderOperationRef;
-
-class CConfigurationSSRenderOperation;
-typedef std::shared_ptr<CConfigurationSSRenderOperation> CSharedConfigurationSSRenderOperation;
-typedef const CSharedConfigurationSSRenderOperation& CSharedConfigurationSSRenderOperationRef;
-
-class CConfigurationORenderOperation;
-typedef std::shared_ptr<CConfigurationORenderOperation> CSharedConfigurationORenderOperation;
-typedef const CSharedConfigurationORenderOperation& CSharedConfigurationORenderOperationRef;
-
 class IConfigurationLoadingHandler;
 typedef std::shared_ptr<IConfigurationLoadingHandler> ISharedConfigurationLoadingHandler;
 typedef const ISharedConfigurationLoadingHandler& ISharedConfigurationLoadingHandlerRef;
-
-class CConfigurationModelLoadingOperation;
-typedef std::shared_ptr<CConfigurationModelLoadingOperation> CSharedConfigurationModelLoadingOperation;
-typedef const CSharedConfigurationModelLoadingOperation& CSharedConfigurationModelLoadingOperationRef;
 
 class CMaterial;
 typedef std::shared_ptr<CMaterial> CSharedMaterial;
@@ -260,10 +228,6 @@ typedef const ISharedCollisionHandler& ISharedCollisionHandlerRef;
 class CCubemapTexture;
 typedef std::shared_ptr<CCubemapTexture> CSharedCubemapTexture;
 typedef const CSharedCubemapTexture& CSharedCubemapTextureRef;
-
-class CConfigurationGameObject;
-typedef std::shared_ptr<CConfigurationGameObject> CSharedConfigurationGameObject;
-typedef const CSharedConfigurationGameObject& CSharedConfigurationGameObjectRef;
 
 class CHeightmapProcessingOperation;
 typedef std::shared_ptr<CHeightmapProcessingOperation> CSharedHeightmapProcessingOperation;

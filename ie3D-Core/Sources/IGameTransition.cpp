@@ -17,7 +17,6 @@
 #include "CSceneUpdateMgr.h"
 #include "CCollisionMgr.h"
 #include "CCommonOS.h"
-#include "CConfigurationGameObjects.h"
 #include "IGraphicsContext.h"
 #include "IInputContext.h"
 #include "CResourceLoader.h"
@@ -132,70 +131,69 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
     assert(m_renderPipeline != nullptr);
     assert(m_resourceAccessor != nullptr);
     
-    std::shared_ptr<CConfigurationGameTransition> gameTransitionConfiguration = std::static_pointer_cast<CConfigurationGameTransition>(configuration);
-    assert(gameTransitionConfiguration != nullptr);
+    std::shared_ptr<CConfigurationTransition> configurationTransition = std::static_pointer_cast<CConfigurationTransition>(configuration);
+    assert(configurationTransition != nullptr);
     
-    for(const auto& iterator : gameTransitionConfiguration->getWSRenderOperationsConfigurations())
+    for(const auto& iterator : configurationTransition->getConfigurationWSTechnique())
     {
-        std::shared_ptr<CConfigurationWSRenderOperation> worldSpaceRenderOperationConfiguration = std::static_pointer_cast<CConfigurationWSRenderOperation>(iterator);
+        std::shared_ptr<CConfigurationWSTechnique> configurationWSTechnique = std::static_pointer_cast<CConfigurationWSTechnique>(iterator);
         
-        ui32 screenWidth = MIN_VALUE(worldSpaceRenderOperationConfiguration->getScreenWidth(), m_graphicsContext->getWidth());
-        ui32 screenHeight = MIN_VALUE(worldSpaceRenderOperationConfiguration->getScreenHeight(), m_graphicsContext->getHeight());
+        ui32 screenWidth = MIN_VALUE(configurationWSTechnique->getScreenWidth(), m_graphicsContext->getWidth());
+        ui32 screenHeight = MIN_VALUE(configurationWSTechnique->getScreenHeight(), m_graphicsContext->getHeight());
         
-        CSharedRenderTechniqueWorldSpace worldSpaceRenderTechnique =
+        CSharedRenderTechniqueWorldSpace renderWSTechnique =
         std::make_shared<CRenderTechniqueWorldSpace>(screenWidth,
                                                      screenHeight,
-                                                     worldSpaceRenderOperationConfiguration->getGuid(),
-                                                     worldSpaceRenderOperationConfiguration->getIndex());
-        worldSpaceRenderTechnique->setClearColor(worldSpaceRenderOperationConfiguration->getClearColor());
-        worldSpaceRenderTechnique->setAreDrawBoundingBoxes(worldSpaceRenderOperationConfiguration->areDrawBoundingBoxes());
-        worldSpaceRenderTechnique->setIsOcclusionQueryEnabled(worldSpaceRenderOperationConfiguration->isOcclusionQueryEnabled());
-        m_renderPipeline->addWorldSpaceRenderTechnique(worldSpaceRenderOperationConfiguration->getGuid(), worldSpaceRenderTechnique);
+                                                     configurationWSTechnique->getGUID(),
+                                                     configurationWSTechnique->getIndex());
+        glm::vec4 color = glm::vec4(configurationWSTechnique->getClearColorR(),
+                                    configurationWSTechnique->getClearColorG(),
+                                    configurationWSTechnique->getClearColorB(),
+                                    configurationWSTechnique->getClearColorA());
+        renderWSTechnique->setClearColor(color);
+        renderWSTechnique->setAreDrawBoundingBoxes(configurationWSTechnique->areDrawBoundingBoxes());
+        m_renderPipeline->addWorldSpaceRenderTechnique(configurationWSTechnique->getGUID(), renderWSTechnique);
     }
     
-    for(const auto& iterator : gameTransitionConfiguration->getSSRenderOperationsConfigurations())
+    for(const auto& iterator : configurationTransition->getConfigurationSSTechnique())
     {
-        std::shared_ptr<CConfigurationSSRenderOperation> screenSpaceRenderOperationConfiguration = std::static_pointer_cast<CConfigurationSSRenderOperation>(iterator);
-        std::shared_ptr<CConfigurationMaterial> screenSpaceRenderOperationMaterialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(screenSpaceRenderOperationConfiguration->getMaterialConfiguration());
-        assert(screenSpaceRenderOperationMaterialConfiguration != nullptr);
+        std::shared_ptr<CConfigurationSSTechnique> configurationSSTechnique = std::static_pointer_cast<CConfigurationSSTechnique>(iterator);
+        assert(configurationSSTechnique != nullptr);
+        std::shared_ptr<CConfigurationMaterial> configurationMaterial = configurationSSTechnique->getConfigurationMaterial();
+        assert(configurationMaterial != nullptr);
         
-        std::shared_ptr<CMaterial> screenSpaceRenderOperationMaterial = std::make_shared<CMaterial>();
-        
-        assert(screenSpaceRenderOperationMaterialConfiguration != nullptr);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>();
         assert(m_resourceAccessor != nullptr);
-        
-        CMaterial::initializeMaterial(screenSpaceRenderOperationMaterial,
-                                      screenSpaceRenderOperationMaterialConfiguration,
+        CMaterial::initializeMaterial(material,
+                                      configurationMaterial,
                                       m_resourceAccessor,
                                       m_renderPipeline);
         
-        ui32 screenWidth = MIN_VALUE(screenSpaceRenderOperationConfiguration->getScreenWidth(), m_graphicsContext->getWidth());
-        ui32 screenHeight = MIN_VALUE(screenSpaceRenderOperationConfiguration->getScreenHeight(), m_graphicsContext->getHeight());
+        ui32 screenWidth = MIN_VALUE(configurationSSTechnique->getScreenWidth(), m_graphicsContext->getWidth());
+        ui32 screenHeight = MIN_VALUE(configurationSSTechnique->getScreenHeight(), m_graphicsContext->getHeight());
         
-        CSharedRenderTechniqueScreenSpace screenSpaceRenderTechnique =
+        CSharedRenderTechniqueScreenSpace renderSSTechnique =
         std::make_shared<CRenderTechniqueScreenSpace>(screenWidth,
                                                       screenHeight,
-                                                      screenSpaceRenderOperationConfiguration->getGuid(),
-                                                      screenSpaceRenderOperationMaterial);
-        m_renderPipeline->addScreenSpaceRenderTechnique(screenSpaceRenderOperationConfiguration->getGuid(), screenSpaceRenderTechnique);
+                                                      configurationSSTechnique->getGUID(),
+                                                      material);
+        m_renderPipeline->addScreenSpaceRenderTechnique(configurationSSTechnique->getGUID(), renderSSTechnique);
     }
     
     if(!m_isOffscreen)
     {
-        std::shared_ptr<CConfigurationORenderOperation> outputRenderOperationConfiguration = std::static_pointer_cast<CConfigurationORenderOperation>(gameTransitionConfiguration->getORenderOperationConfiguration());
-        std::shared_ptr<CConfigurationMaterial> outputRenderOperationMaterialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(outputRenderOperationConfiguration->getMaterialConfiguration());
-        assert(outputRenderOperationMaterialConfiguration != nullptr);
+        std::shared_ptr<CConfigurationOutputTechnique> configurationOutputTechnique = configurationTransition->getConfigurationOutputTechnique();
+        assert(configurationOutputTechnique != nullptr);
+        std::shared_ptr<CConfigurationMaterial> configurationMaterial = configurationOutputTechnique->getConfigurationMaterial();
+        assert(configurationMaterial != nullptr);
         
-        std::shared_ptr<CMaterial> outputRenderOperationMaterial = std::make_shared<CMaterial>();
-        
-        assert(outputRenderOperationMaterialConfiguration != nullptr);
+        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>();
         assert(m_resourceAccessor != nullptr);
-        
-        CMaterial::initializeMaterial(outputRenderOperationMaterial,
-                                      outputRenderOperationMaterialConfiguration,
+        CMaterial::initializeMaterial(material,
+                                      configurationMaterial,
                                       m_resourceAccessor,
                                       m_renderPipeline);
-        m_renderPipeline->setMainRenderTechnique(outputRenderOperationMaterial);
+        m_renderPipeline->setMainRenderTechnique(material);
     }
     
     _OnLoaded();

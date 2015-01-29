@@ -56,56 +56,10 @@ static std::map<std::string, GLenum> g_glenumToString(void)
 
 #endif
 
-IConfigurationLoadingHandler::IConfigurationLoadingHandler(void)
-{
-    
-}
-
-IConfigurationLoadingHandler::~IConfigurationLoadingHandler(void)
-{
-
-}
-
-void IConfigurationLoadingHandler::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
-{
-    if(success)
-    {
-        m_configurations.insert(configuration);
-        std::for_each(m_commands.begin(), m_commands.end(), [configuration](CONFIGURATION_LOADING_COMMAND command){
-            command(configuration);
-        });
-    }
-}
-
-void IConfigurationLoadingHandler::addConfigurationLoadingCommand(const CONFIGURATION_LOADING_COMMAND& command)
-{
-    std::for_each(m_configurations.begin(), m_configurations.end(), [command](ISharedConfiguration configuration){
-        command(configuration);
-    });
-    m_commands.push_back(command);
-}
-
-void IConfigurationLoadingHandler::removeConfigurationLoadingCommand(const CONFIGURATION_LOADING_COMMAND& command)
-{
-    /*const auto& iterator = std::find(m_commands.begin(), m_commands.end(), command);
-    m_commands.erase(iterator);*/
-}
-
-IConfiguration::IConfiguration(E_CONFIGURATION_CLASS configurationClass) :
-m_configurationClass(configurationClass)
-{
-    
-}
-
 IConfiguration::~IConfiguration(void)
 {
     m_attributes.clear();
     m_configurations.clear();
-}
-
-E_CONFIGURATION_CLASS IConfiguration::getConfigurationClass(void) const
-{
-    return m_configurationClass;
 }
 
 void IConfiguration::setAttribute(const std::string& attributeName,
@@ -134,4 +88,11 @@ void IConfiguration::setConfiguration(const std::string &configurationName,
         m_configurations.insert(std::make_pair(configurationName, configurations));
     }
 }
+
+pugi::xml_parse_result IConfiguration::openXMLDocument(pugi::xml_document &document,
+                                                       const std::string &filename)
+{
+    pugi::xml_parse_result result;
+    return result;
+};
 

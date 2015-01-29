@@ -1,9 +1,9 @@
 <model
     class_name="CConfigurationModel"
-    base_class_name="IConfiguration"
-    is_external="0">
+    base_class_name="IConfigurationGameObject"
+    is_external="1">
     <attributes>
-        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilename" path="/model" attribute_name="filename"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getMeshFilename" path="/model" attribute_name="mesh_filename"/>
         <attribute type="bool" is_convert_to_ogl_enum="0" getter="isBatching" path="/model" attribute_name="is_batching"/>
     </attributes>
     <relationships>

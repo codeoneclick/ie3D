@@ -17,12 +17,12 @@
 #include "IRenderTechniqueAccessor.h"
 #include "CSceneUpdateMgr.h"
 #include "CResourceAccessor.h"
-#include "CConfigurationGameObjects.h"
 #include "CGlobalLightSource.h"
 #include "CBatchingMgr.h"
 #include "CBoundingBox.h"
 #include "HShaders.h"
 #include "CComponentTransformation.h"
+#include "CConfigurationAccessor.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
                          ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -176,13 +176,13 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
 {
     IConfigurationLoadingHandler::onConfigurationLoaded(configuration, success);
     m_configuration = configuration;
-    CSharedConfigurationGameObject gameObjectConfiguration = std::static_pointer_cast<CConfigurationGameObject>(configuration);
-    for(const auto& iterator : gameObjectConfiguration->getMaterialsConfigurations())
+    std::shared_ptr<IConfigurationGameObject> configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(configuration);
+    for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
     {
-        CSharedConfigurationMaterial materialConfiguration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
+        std::shared_ptr<CConfigurationMaterial> configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
         CSharedMaterial material = std::make_shared<CMaterial>();
-        CMaterial::initializeMaterial(material, materialConfiguration, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
-        m_materials.insert(std::make_pair(materialConfiguration->getRenderOperationName(), material));
+        CMaterial::initializeMaterial(material, configurationMaterial, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
+        m_materials.insert(std::make_pair(configurationMaterial->getRenderOperationName(), material));
     }
 }
 

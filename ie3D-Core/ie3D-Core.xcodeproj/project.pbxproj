@@ -57,29 +57,7 @@
 		21208FD01906FB5F00FFC8D4 /* IScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F2E179EC782009A7AFE /* IScene.cpp */; };
 		21208FD11906FB5F00FFC8D4 /* IFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE7181C4BEA0071839E /* IFabricator.cpp */; };
 		21208FD21906FB5F00FFC8D4 /* IGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE9181C4BEA0071839E /* IGraph.cpp */; };
-		21208FD31906FB5F00FFC8D4 /* IConfigurationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138D01755FEE90056461B /* IConfigurationSerializer.cpp */; };
-		21208FD51906FB5F00FFC8D4 /* CConfigurationMaterialSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138EE175614920056461B /* CConfigurationMaterialSerializer.cpp */; };
-		21208FD61906FB5F00FFC8D4 /* CConfigurationModelSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C21754EF060056461B /* CConfigurationModelSerializer.cpp */; };
-		21208FD71906FB5F00FFC8D4 /* CConfigurationOceanSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D817A021AD00FE26FA /* CConfigurationOceanSerializer.cpp */; };
-		21208FD81906FB5F00FFC8D4 /* CConfigurationLandscapeSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A490465D18463414009734B8 /* CConfigurationLandscapeSerializer.cpp */; };
-		21208FD91906FB5F00FFC8D4 /* CConfigurationParticleEmitterSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C51754EF280056461B /* CConfigurationParticleEmitterSerializer.cpp */; };
-		21208FDA1906FB5F00FFC8D4 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748517621CED00E1DC6E /* CConfigurationWSRenderOperationSerializer.cpp */; };
-		21208FDB1906FB5F00FFC8D4 /* CConfigurationSSRenderOperationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748817621D1C00E1DC6E /* CConfigurationSSRenderOperationSerializer.cpp */; };
-		21208FDC1906FB5F00FFC8D4 /* CConfigurationORenderOperationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748B17621DDF00E1DC6E /* CConfigurationORenderOperationSerializer.cpp */; };
-		21208FDD1906FB5F00FFC8D4 /* CConfigurationGameTransitionSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748E17621E0600E1DC6E /* CConfigurationGameTransitionSerializer.cpp */; };
-		21208FDE1906FB5F00FFC8D4 /* IConfigurationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138CD1755FE790056461B /* IConfigurationLoadingOperation.cpp */; };
-		21208FE01906FB5F00FFC8D4 /* CConfigurationMaterialLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E5175613080056461B /* CConfigurationMaterialLoadingOperation.cpp */; };
-		21208FE11906FB5F00FFC8D4 /* CConfigurationModelLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E81756138F0056461B /* CConfigurationModelLoadingOperation.cpp */; };
-		21208FE21906FB5F00FFC8D4 /* CConfigurationOceanLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D517A0212200FE26FA /* CConfigurationOceanLoadingOperation.cpp */; };
-		21208FE31906FB5F00FFC8D4 /* CConfigurationLandscapeLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A490465A18463404009734B8 /* CConfigurationLandscapeLoadingOperation.cpp */; };
-		21208FE41906FB5F00FFC8D4 /* CConfigurationParticleEmitterLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138EB1756144A0056461B /* CConfigurationParticleEmitterLoadingOperation.cpp */; };
-		21208FE51906FB5F00FFC8D4 /* CConfigurationWSRenderOperationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749117621E6A00E1DC6E /* CConfigurationWSRenderOperationLoadingOperation.cpp */; };
-		21208FE61906FB5F00FFC8D4 /* CConfigurationSSRenderOperationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749417621EA600E1DC6E /* CConfigurationSSRenderOperationLoadingOperation.cpp */; };
-		21208FE71906FB5F00FFC8D4 /* CConfigurationORenderOperationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749717621FF200E1DC6E /* CConfigurationORenderOperationLoadingOperation.cpp */; };
-		21208FE81906FB5F00FFC8D4 /* CConfigurationGameTransitionLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749A176221FC00E1DC6E /* CConfigurationGameTransitionLoadingOperation.cpp */; };
 		21208FE91906FB5F00FFC8D4 /* IConfiguration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E4D58818658466006F84D6 /* IConfiguration.cpp */; };
-		21208FEA1906FB5F00FFC8D4 /* CConfigurationGameObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E4D59A1865944D006F84D6 /* CConfigurationGameObjects.cpp */; };
-		21208FEB1906FB5F00FFC8D4 /* CConfigurationAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E217560F5E0056461B /* CConfigurationAccessor.cpp */; };
 		21208FEC1906FB5F00FFC8D4 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
 		21208FEE1906FB5F00FFC8D4 /* IResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204CB17427D4C0063AB07 /* IResource.cpp */; };
 		21208FEF1906FB5F00FFC8D4 /* CQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB29D1815A48700DB8ECC /* CQuad.cpp */; };
@@ -114,12 +92,6 @@
 		212092B41919674400FFC8D4 /* CSkyBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092B21919674400FFC8D4 /* CSkyBox.cpp */; };
 		212092B51919674400FFC8D4 /* CSkyBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092B21919674400FFC8D4 /* CSkyBox.cpp */; };
 		212092B61919674400FFC8D4 /* CSkyBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 212092B31919674400FFC8D4 /* CSkyBox.h */; };
-		212092BA191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092B8191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp */; };
-		212092BB191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092B8191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp */; };
-		212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 212092B9191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h */; };
-		212092BF1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */; };
-		212092C01919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */; };
-		212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */; };
 		2127E85B1935056100D408C9 /* IEditableLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2127E8591935056100D408C9 /* IEditableLandscape.cpp */; };
 		2127E85C1935056100D408C9 /* IEditableLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2127E8591935056100D408C9 /* IEditableLandscape.cpp */; };
 		2127E85D1935056100D408C9 /* IEditableLandscape.h in Headers */ = {isa = PBXBuildFile; fileRef = 2127E85A1935056100D408C9 /* IEditableLandscape.h */; };
@@ -173,29 +145,7 @@
 		213266141906A4AF001C98F7 /* IScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DD0F2E179EC782009A7AFE /* IScene.cpp */; };
 		213266151906A4AF001C98F7 /* IFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE7181C4BEA0071839E /* IFabricator.cpp */; };
 		213266161906A4AF001C98F7 /* IGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21457FE9181C4BEA0071839E /* IGraph.cpp */; };
-		213266171906A4AF001C98F7 /* IConfigurationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138D01755FEE90056461B /* IConfigurationSerializer.cpp */; };
-		213266191906A4AF001C98F7 /* CConfigurationMaterialSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138EE175614920056461B /* CConfigurationMaterialSerializer.cpp */; };
-		2132661A1906A4AF001C98F7 /* CConfigurationModelSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C21754EF060056461B /* CConfigurationModelSerializer.cpp */; };
-		2132661B1906A4AF001C98F7 /* CConfigurationOceanSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D817A021AD00FE26FA /* CConfigurationOceanSerializer.cpp */; };
-		2132661C1906A4AF001C98F7 /* CConfigurationLandscapeSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A490465D18463414009734B8 /* CConfigurationLandscapeSerializer.cpp */; };
-		2132661D1906A4AF001C98F7 /* CConfigurationParticleEmitterSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138C51754EF280056461B /* CConfigurationParticleEmitterSerializer.cpp */; };
-		2132661E1906A4AF001C98F7 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748517621CED00E1DC6E /* CConfigurationWSRenderOperationSerializer.cpp */; };
-		2132661F1906A4AF001C98F7 /* CConfigurationSSRenderOperationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748817621D1C00E1DC6E /* CConfigurationSSRenderOperationSerializer.cpp */; };
-		213266201906A4AF001C98F7 /* CConfigurationORenderOperationSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748B17621DDF00E1DC6E /* CConfigurationORenderOperationSerializer.cpp */; };
-		213266211906A4AF001C98F7 /* CConfigurationGameTransitionSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481748E17621E0600E1DC6E /* CConfigurationGameTransitionSerializer.cpp */; };
-		213266221906A4AF001C98F7 /* IConfigurationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138CD1755FE790056461B /* IConfigurationLoadingOperation.cpp */; };
-		213266241906A4AF001C98F7 /* CConfigurationMaterialLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E5175613080056461B /* CConfigurationMaterialLoadingOperation.cpp */; };
-		213266251906A4AF001C98F7 /* CConfigurationModelLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E81756138F0056461B /* CConfigurationModelLoadingOperation.cpp */; };
-		213266261906A4AF001C98F7 /* CConfigurationOceanLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789D517A0212200FE26FA /* CConfigurationOceanLoadingOperation.cpp */; };
-		213266271906A4AF001C98F7 /* CConfigurationLandscapeLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A490465A18463404009734B8 /* CConfigurationLandscapeLoadingOperation.cpp */; };
-		213266281906A4AF001C98F7 /* CConfigurationParticleEmitterLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138EB1756144A0056461B /* CConfigurationParticleEmitterLoadingOperation.cpp */; };
-		213266291906A4AF001C98F7 /* CConfigurationWSRenderOperationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749117621E6A00E1DC6E /* CConfigurationWSRenderOperationLoadingOperation.cpp */; };
-		2132662A1906A4AF001C98F7 /* CConfigurationSSRenderOperationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749417621EA600E1DC6E /* CConfigurationSSRenderOperationLoadingOperation.cpp */; };
-		2132662B1906A4AF001C98F7 /* CConfigurationORenderOperationLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749717621FF200E1DC6E /* CConfigurationORenderOperationLoadingOperation.cpp */; };
-		2132662C1906A4AF001C98F7 /* CConfigurationGameTransitionLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A481749A176221FC00E1DC6E /* CConfigurationGameTransitionLoadingOperation.cpp */; };
 		2132662D1906A4AF001C98F7 /* IConfiguration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E4D58818658466006F84D6 /* IConfiguration.cpp */; };
-		2132662E1906A4AF001C98F7 /* CConfigurationGameObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E4D59A1865944D006F84D6 /* CConfigurationGameObjects.cpp */; };
-		2132662F1906A4AF001C98F7 /* CConfigurationAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40138E217560F5E0056461B /* CConfigurationAccessor.cpp */; };
 		213266301906A4AF001C98F7 /* CCollisionMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436483F179952D300C51AC4 /* CCollisionMgr.cpp */; };
 		213266321906A4AF001C98F7 /* IResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F204CB17427D4C0063AB07 /* IResource.cpp */; };
 		213266331906A4AF001C98F7 /* CQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB29D1815A48700DB8ECC /* CQuad.cpp */; };
@@ -225,12 +175,6 @@
 		2132664B1906A4AF001C98F7 /* CMeshLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */; };
 		2132664C1906A4AF001C98F7 /* CResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A319017466F720044643E /* CResourceLoader.cpp */; };
 		2132664D1906A4AF001C98F7 /* CResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceAccessor.cpp */; };
-		213396A519D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213396A319D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp */; };
-		213396A619D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213396A319D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp */; };
-		213396A719D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 213396A419D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h */; };
-		213396AA19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213396A819D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp */; };
-		213396AB19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213396A819D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp */; };
-		213396AC19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 213396A919D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h */; };
 		213396AD19D3198600B7C2A2 /* CAtmosphericScattering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EEDAA19D2FA9B00DA02B7 /* CAtmosphericScattering.cpp */; };
 		213396AE19D3198700B7C2A2 /* CAtmosphericScattering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EEDAA19D2FA9B00DA02B7 /* CAtmosphericScattering.cpp */; };
 		213B7F311993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
@@ -410,6 +354,15 @@
 		21CB34FA1A793CF000819C09 /* CConfigurationTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21CB34F51A793CF000819C09 /* CConfigurationTransition.cpp */; };
 		21CB34FB1A793CF000819C09 /* CConfigurationTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21CB34F51A793CF000819C09 /* CConfigurationTransition.cpp */; };
 		21CB34FC1A793CF000819C09 /* CConfigurationTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 21CB34F61A793CF000819C09 /* CConfigurationTransition.h */; };
+		21CB34FF1A7A479000819C09 /* CConfigurationAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21CB34FD1A7A479000819C09 /* CConfigurationAccessor.cpp */; };
+		21CB35001A7A479000819C09 /* CConfigurationAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21CB34FD1A7A479000819C09 /* CConfigurationAccessor.cpp */; };
+		21CB35011A7A479000819C09 /* CConfigurationAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 21CB34FE1A7A479000819C09 /* CConfigurationAccessor.h */; };
+		21CB35061A7A683D00819C09 /* CConfigurationLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21CB35021A7A683D00819C09 /* CConfigurationLandscape.cpp */; };
+		21CB35071A7A683D00819C09 /* CConfigurationLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21CB35021A7A683D00819C09 /* CConfigurationLandscape.cpp */; };
+		21CB35081A7A683D00819C09 /* CConfigurationLandscape.h in Headers */ = {isa = PBXBuildFile; fileRef = 21CB35031A7A683D00819C09 /* CConfigurationLandscape.h */; };
+		21CB35091A7A683D00819C09 /* CConfigurationOcean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21CB35041A7A683D00819C09 /* CConfigurationOcean.cpp */; };
+		21CB350A1A7A683D00819C09 /* CConfigurationOcean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21CB35041A7A683D00819C09 /* CConfigurationOcean.cpp */; };
+		21CB350B1A7A683D00819C09 /* CConfigurationOcean.h in Headers */ = {isa = PBXBuildFile; fileRef = 21CB35051A7A683D00819C09 /* CConfigurationOcean.h */; };
 		21D0712B181DA5620019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		21D07238181DA6E60019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
 		21D07239181DA6EB0019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B217423E4D0063AB07 /* OpenGLES.framework */; };
@@ -465,10 +418,6 @@
 		212092AD19195CD000FFC8D4 /* CCubemapTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCubemapTexture.h; path = Sources/CCubemapTexture.h; sourceTree = "<group>"; };
 		212092B21919674400FFC8D4 /* CSkyBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSkyBox.cpp; path = Sources/CSkyBox.cpp; sourceTree = "<group>"; };
 		212092B31919674400FFC8D4 /* CSkyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSkyBox.h; path = Sources/CSkyBox.h; sourceTree = "<group>"; };
-		212092B8191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationSkyBoxSerializer.cpp; path = Sources/CConfigurationSkyBoxSerializer.cpp; sourceTree = "<group>"; };
-		212092B9191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationSkyBoxSerializer.h; path = Sources/CConfigurationSkyBoxSerializer.h; sourceTree = "<group>"; };
-		212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationSkyBoxLoadingOperation.cpp; path = Sources/CConfigurationSkyBoxLoadingOperation.cpp; sourceTree = "<group>"; };
-		212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationSkyBoxLoadingOperation.h; path = Sources/CConfigurationSkyBoxLoadingOperation.h; sourceTree = "<group>"; };
 		2127E8591935056100D408C9 /* IEditableLandscape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IEditableLandscape.cpp; path = Sources/IEditableLandscape.cpp; sourceTree = "<group>"; };
 		2127E85A1935056100D408C9 /* IEditableLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEditableLandscape.h; path = Sources/IEditableLandscape.h; sourceTree = "<group>"; };
 		212EEDAA19D2FA9B00DA02B7 /* CAtmosphericScattering.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAtmosphericScattering.cpp; path = Sources/CAtmosphericScattering.cpp; sourceTree = "<group>"; };
@@ -482,10 +431,6 @@
 		213265D71906A407001C98F7 /* IGameLoopHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGameLoopHandler.h; path = Sources/IGameLoopHandler.h; sourceTree = SOURCE_ROOT; };
 		213265DB1906A42E001C98F7 /* HCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCommon.h; path = Sources/HCommon.h; sourceTree = SOURCE_ROOT; };
 		213265DC1906A42E001C98F7 /* HEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEnums.h; path = Sources/HEnums.h; sourceTree = SOURCE_ROOT; };
-		213396A319D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationAtmosphericScatteringSerializer.cpp; path = Sources/CConfigurationAtmosphericScatteringSerializer.cpp; sourceTree = "<group>"; };
-		213396A419D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationAtmosphericScatteringSerializer.h; path = Sources/CConfigurationAtmosphericScatteringSerializer.h; sourceTree = "<group>"; };
-		213396A819D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationAtmosphericScatteringLoadingOperation.cpp; path = Sources/CConfigurationAtmosphericScatteringLoadingOperation.cpp; sourceTree = "<group>"; };
-		213396A919D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationAtmosphericScatteringLoadingOperation.h; path = Sources/CConfigurationAtmosphericScatteringLoadingOperation.h; sourceTree = "<group>"; };
 		213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCompiler_GLSL.cpp; path = Sources/CShaderCompiler_GLSL.cpp; sourceTree = "<group>"; };
 		213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCompiler_GLSL.h; path = Sources/CShaderCompiler_GLSL.h; sourceTree = "<group>"; };
 		213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ShaderTexure2D.cpp; path = Sources/ShaderTexure2D.cpp; sourceTree = "<group>"; };
@@ -618,12 +563,16 @@
 		21CB34F41A793CF000819C09 /* CConfigurationParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationParticleEmitter.h; path = Autogenerated/CConfigurationParticleEmitter.h; sourceTree = "<group>"; };
 		21CB34F51A793CF000819C09 /* CConfigurationTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationTransition.cpp; path = Autogenerated/CConfigurationTransition.cpp; sourceTree = "<group>"; };
 		21CB34F61A793CF000819C09 /* CConfigurationTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationTransition.h; path = Autogenerated/CConfigurationTransition.h; sourceTree = "<group>"; };
+		21CB34FD1A7A479000819C09 /* CConfigurationAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationAccessor.cpp; path = Autogenerated/CConfigurationAccessor.cpp; sourceTree = "<group>"; };
+		21CB34FE1A7A479000819C09 /* CConfigurationAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationAccessor.h; path = Autogenerated/CConfigurationAccessor.h; sourceTree = "<group>"; };
+		21CB35021A7A683D00819C09 /* CConfigurationLandscape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationLandscape.cpp; path = Autogenerated/CConfigurationLandscape.cpp; sourceTree = "<group>"; };
+		21CB35031A7A683D00819C09 /* CConfigurationLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationLandscape.h; path = Autogenerated/CConfigurationLandscape.h; sourceTree = "<group>"; };
+		21CB35041A7A683D00819C09 /* CConfigurationOcean.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationOcean.cpp; path = Autogenerated/CConfigurationOcean.cpp; sourceTree = "<group>"; };
+		21CB35051A7A683D00819C09 /* CConfigurationOcean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationOcean.h; path = Autogenerated/CConfigurationOcean.h; sourceTree = "<group>"; };
 		21D0712A181DA5620019D264 /* libie3DCore-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DCore-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21DEC3E31903F07B00B41221 /* IInputContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IInputContext.cpp; path = Sources/IInputContext.cpp; sourceTree = "<group>"; };
 		21E4D58818658466006F84D6 /* IConfiguration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IConfiguration.cpp; path = Sources/IConfiguration.cpp; sourceTree = "<group>"; };
 		21E4D58918658466006F84D6 /* IConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfiguration.h; path = Sources/IConfiguration.h; sourceTree = "<group>"; };
-		21E4D59A1865944D006F84D6 /* CConfigurationGameObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationGameObjects.cpp; path = Sources/CConfigurationGameObjects.cpp; sourceTree = "<group>"; };
-		21E4D59B1865944D006F84D6 /* CConfigurationGameObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationGameObjects.h; path = Sources/CConfigurationGameObjects.h; sourceTree = "<group>"; };
 		21EF00381A237BDA00E0AF20 /* COcclusionQueryManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COcclusionQueryManager.cpp; path = Sources/COcclusionQueryManager.cpp; sourceTree = "<group>"; };
 		21EF00391A237BDA00E0AF20 /* COcclusionQueryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COcclusionQueryManager.h; path = Sources/COcclusionQueryManager.h; sourceTree = "<group>"; };
 		21EF003D1A237FF700E0AF20 /* IOcclusionQueryHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOcclusionQueryHandler.cpp; path = Sources/IOcclusionQueryHandler.cpp; sourceTree = "<group>"; };
@@ -635,24 +584,6 @@
 		21FB5C3A1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAnimationSequenceLoadingOperation.h; path = Sources/CAnimationSequenceLoadingOperation.h; sourceTree = "<group>"; };
 		21FEECEC1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueOperationTextureHandler.cpp; path = Sources/IRenderTechniqueOperationTextureHandler.cpp; sourceTree = "<group>"; };
 		21FEECED1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueOperationTextureHandler.h; path = Sources/IRenderTechniqueOperationTextureHandler.h; sourceTree = "<group>"; };
-		A40138C21754EF060056461B /* CConfigurationModelSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationModelSerializer.cpp; path = Sources/CConfigurationModelSerializer.cpp; sourceTree = "<group>"; };
-		A40138C31754EF060056461B /* CConfigurationModelSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationModelSerializer.h; path = Sources/CConfigurationModelSerializer.h; sourceTree = "<group>"; };
-		A40138C51754EF280056461B /* CConfigurationParticleEmitterSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationParticleEmitterSerializer.cpp; path = Sources/CConfigurationParticleEmitterSerializer.cpp; sourceTree = "<group>"; };
-		A40138C61754EF280056461B /* CConfigurationParticleEmitterSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationParticleEmitterSerializer.h; path = Sources/CConfigurationParticleEmitterSerializer.h; sourceTree = "<group>"; };
-		A40138CD1755FE790056461B /* IConfigurationLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IConfigurationLoadingOperation.cpp; path = Sources/IConfigurationLoadingOperation.cpp; sourceTree = "<group>"; };
-		A40138CE1755FE790056461B /* IConfigurationLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfigurationLoadingOperation.h; path = Sources/IConfigurationLoadingOperation.h; sourceTree = "<group>"; };
-		A40138D01755FEE90056461B /* IConfigurationSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IConfigurationSerializer.cpp; path = Sources/IConfigurationSerializer.cpp; sourceTree = "<group>"; };
-		A40138D11755FEEA0056461B /* IConfigurationSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfigurationSerializer.h; path = Sources/IConfigurationSerializer.h; sourceTree = "<group>"; };
-		A40138E217560F5E0056461B /* CConfigurationAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationAccessor.cpp; path = Sources/CConfigurationAccessor.cpp; sourceTree = "<group>"; };
-		A40138E317560F610056461B /* CConfigurationAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationAccessor.h; path = Sources/CConfigurationAccessor.h; sourceTree = "<group>"; };
-		A40138E5175613080056461B /* CConfigurationMaterialLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationMaterialLoadingOperation.cpp; path = Sources/CConfigurationMaterialLoadingOperation.cpp; sourceTree = "<group>"; };
-		A40138E6175613080056461B /* CConfigurationMaterialLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationMaterialLoadingOperation.h; path = Sources/CConfigurationMaterialLoadingOperation.h; sourceTree = "<group>"; };
-		A40138E81756138F0056461B /* CConfigurationModelLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationModelLoadingOperation.cpp; path = Sources/CConfigurationModelLoadingOperation.cpp; sourceTree = "<group>"; };
-		A40138E9175613900056461B /* CConfigurationModelLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationModelLoadingOperation.h; path = Sources/CConfigurationModelLoadingOperation.h; sourceTree = "<group>"; };
-		A40138EB1756144A0056461B /* CConfigurationParticleEmitterLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationParticleEmitterLoadingOperation.cpp; path = Sources/CConfigurationParticleEmitterLoadingOperation.cpp; sourceTree = "<group>"; };
-		A40138EC1756144B0056461B /* CConfigurationParticleEmitterLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationParticleEmitterLoadingOperation.h; path = Sources/CConfigurationParticleEmitterLoadingOperation.h; sourceTree = "<group>"; };
-		A40138EE175614920056461B /* CConfigurationMaterialSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationMaterialSerializer.cpp; path = Sources/CConfigurationMaterialSerializer.cpp; sourceTree = "<group>"; };
-		A40138EF175614930056461B /* CConfigurationMaterialSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationMaterialSerializer.h; path = Sources/CConfigurationMaterialSerializer.h; sourceTree = "<group>"; };
 		A40A698C174E634A005B475E /* CSceneUpdateMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneUpdateMgr.cpp; path = Sources/CSceneUpdateMgr.cpp; sourceTree = "<group>"; };
 		A40A698D174E634B005B475E /* CSceneUpdateMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSceneUpdateMgr.h; path = Sources/CSceneUpdateMgr.h; sourceTree = "<group>"; };
 		A40A698F174E69F3005B475E /* ISceneUpdateHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ISceneUpdateHandler.cpp; path = Sources/ISceneUpdateHandler.cpp; sourceTree = "<group>"; };
@@ -696,10 +627,6 @@
 		A45588F41757602600802609 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A46789CF17A01CF800FE26FA /* COcean.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COcean.cpp; path = Sources/COcean.cpp; sourceTree = "<group>"; };
 		A46789D017A01CF800FE26FA /* COcean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COcean.h; path = Sources/COcean.h; sourceTree = "<group>"; };
-		A46789D517A0212200FE26FA /* CConfigurationOceanLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationOceanLoadingOperation.cpp; path = Sources/CConfigurationOceanLoadingOperation.cpp; sourceTree = "<group>"; };
-		A46789D617A0212200FE26FA /* CConfigurationOceanLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationOceanLoadingOperation.h; path = Sources/CConfigurationOceanLoadingOperation.h; sourceTree = "<group>"; };
-		A46789D817A021AD00FE26FA /* CConfigurationOceanSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationOceanSerializer.cpp; path = Sources/CConfigurationOceanSerializer.cpp; sourceTree = "<group>"; };
-		A46789D917A021AD00FE26FA /* CConfigurationOceanSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationOceanSerializer.h; path = Sources/CConfigurationOceanSerializer.h; sourceTree = "<group>"; };
 		A46A316917462BA50044643E /* CShaderCommiter_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCommiter_GLSL.cpp; path = Sources/CShaderCommiter_GLSL.cpp; sourceTree = "<group>"; };
 		A46A316A17462BA50044643E /* CShaderCommiter_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCommiter_GLSL.h; path = Sources/CShaderCommiter_GLSL.h; sourceTree = "<group>"; };
 		A46A316C17462BBF0044643E /* CTextureCommiter_PVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextureCommiter_PVR.cpp; path = Sources/CTextureCommiter_PVR.cpp; sourceTree = "<group>"; };
@@ -741,26 +668,6 @@
 		A46B1C86183E3B7400A3EF49 /* CQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuadTree.h; path = Sources/CQuadTree.h; sourceTree = "<group>"; };
 		A46B1C8E183E610900A3EF49 /* CHeightmapProcessor.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CHeightmapProcessor.cpp; path = Sources/CHeightmapProcessor.cpp; sourceTree = "<group>"; };
 		A46B1C8F183E610900A3EF49 /* CHeightmapProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHeightmapProcessor.h; path = Sources/CHeightmapProcessor.h; sourceTree = "<group>"; };
-		A481748517621CED00E1DC6E /* CConfigurationWSRenderOperationSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationWSRenderOperationSerializer.cpp; path = Sources/CConfigurationWSRenderOperationSerializer.cpp; sourceTree = "<group>"; };
-		A481748617621CED00E1DC6E /* CConfigurationWSRenderOperationSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationWSRenderOperationSerializer.h; path = Sources/CConfigurationWSRenderOperationSerializer.h; sourceTree = "<group>"; };
-		A481748817621D1C00E1DC6E /* CConfigurationSSRenderOperationSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationSSRenderOperationSerializer.cpp; path = Sources/CConfigurationSSRenderOperationSerializer.cpp; sourceTree = "<group>"; };
-		A481748917621D1C00E1DC6E /* CConfigurationSSRenderOperationSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationSSRenderOperationSerializer.h; path = Sources/CConfigurationSSRenderOperationSerializer.h; sourceTree = "<group>"; };
-		A481748B17621DDF00E1DC6E /* CConfigurationORenderOperationSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationORenderOperationSerializer.cpp; path = Sources/CConfigurationORenderOperationSerializer.cpp; sourceTree = "<group>"; };
-		A481748C17621DE000E1DC6E /* CConfigurationORenderOperationSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationORenderOperationSerializer.h; path = Sources/CConfigurationORenderOperationSerializer.h; sourceTree = "<group>"; };
-		A481748E17621E0600E1DC6E /* CConfigurationGameTransitionSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationGameTransitionSerializer.cpp; path = Sources/CConfigurationGameTransitionSerializer.cpp; sourceTree = "<group>"; };
-		A481748F17621E0600E1DC6E /* CConfigurationGameTransitionSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationGameTransitionSerializer.h; path = Sources/CConfigurationGameTransitionSerializer.h; sourceTree = "<group>"; };
-		A481749117621E6A00E1DC6E /* CConfigurationWSRenderOperationLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationWSRenderOperationLoadingOperation.cpp; path = Sources/CConfigurationWSRenderOperationLoadingOperation.cpp; sourceTree = "<group>"; };
-		A481749217621E6B00E1DC6E /* CConfigurationWSRenderOperationLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationWSRenderOperationLoadingOperation.h; path = Sources/CConfigurationWSRenderOperationLoadingOperation.h; sourceTree = "<group>"; };
-		A481749417621EA600E1DC6E /* CConfigurationSSRenderOperationLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationSSRenderOperationLoadingOperation.cpp; path = Sources/CConfigurationSSRenderOperationLoadingOperation.cpp; sourceTree = "<group>"; };
-		A481749517621EA600E1DC6E /* CConfigurationSSRenderOperationLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationSSRenderOperationLoadingOperation.h; path = Sources/CConfigurationSSRenderOperationLoadingOperation.h; sourceTree = "<group>"; };
-		A481749717621FF200E1DC6E /* CConfigurationORenderOperationLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationORenderOperationLoadingOperation.cpp; path = Sources/CConfigurationORenderOperationLoadingOperation.cpp; sourceTree = "<group>"; };
-		A481749817621FF300E1DC6E /* CConfigurationORenderOperationLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationORenderOperationLoadingOperation.h; path = Sources/CConfigurationORenderOperationLoadingOperation.h; sourceTree = "<group>"; };
-		A481749A176221FC00E1DC6E /* CConfigurationGameTransitionLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationGameTransitionLoadingOperation.cpp; path = Sources/CConfigurationGameTransitionLoadingOperation.cpp; sourceTree = "<group>"; };
-		A481749B176221FD00E1DC6E /* CConfigurationGameTransitionLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationGameTransitionLoadingOperation.h; path = Sources/CConfigurationGameTransitionLoadingOperation.h; sourceTree = "<group>"; };
-		A490465A18463404009734B8 /* CConfigurationLandscapeLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationLandscapeLoadingOperation.cpp; path = Sources/CConfigurationLandscapeLoadingOperation.cpp; sourceTree = "<group>"; };
-		A490465B18463404009734B8 /* CConfigurationLandscapeLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationLandscapeLoadingOperation.h; path = Sources/CConfigurationLandscapeLoadingOperation.h; sourceTree = "<group>"; };
-		A490465D18463414009734B8 /* CConfigurationLandscapeSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConfigurationLandscapeSerializer.cpp; path = Sources/CConfigurationLandscapeSerializer.cpp; sourceTree = "<group>"; };
-		A490465E18463414009734B8 /* CConfigurationLandscapeSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConfigurationLandscapeSerializer.h; path = Sources/CConfigurationLandscapeSerializer.h; sourceTree = "<group>"; };
 		A49B83821754C07200AEB4DC /* CModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModel.cpp; path = Sources/CModel.cpp; sourceTree = "<group>"; };
 		A49B83831754C07200AEB4DC /* CModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModel.h; path = Sources/CModel.h; sourceTree = "<group>"; };
 		A49B838D1754C9A500AEB4DC /* CSceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneFabricator.cpp; path = Sources/CSceneFabricator.cpp; sourceTree = "<group>"; };
@@ -1207,6 +1114,12 @@
 		21A56D011A79071000C8F362 /* Autogenerated */ = {
 			isa = PBXGroup;
 			children = (
+				21CB34FE1A7A479000819C09 /* CConfigurationAccessor.h */,
+				21CB34FD1A7A479000819C09 /* CConfigurationAccessor.cpp */,
+				21CB35021A7A683D00819C09 /* CConfigurationLandscape.cpp */,
+				21CB35031A7A683D00819C09 /* CConfigurationLandscape.h */,
+				21CB35041A7A683D00819C09 /* CConfigurationOcean.cpp */,
+				21CB35051A7A683D00819C09 /* CConfigurationOcean.h */,
 				21CB34F31A793CF000819C09 /* CConfigurationParticleEmitter.cpp */,
 				21CB34F41A793CF000819C09 /* CConfigurationParticleEmitter.h */,
 				21CB34F51A793CF000819C09 /* CConfigurationTransition.cpp */,
@@ -1215,8 +1128,8 @@
 				21A56D031A79090600C8F362 /* CConfigurationAnimation.h */,
 				21A56D041A79090600C8F362 /* CConfigurationMaterial.cpp */,
 				21A56D051A79090600C8F362 /* CConfigurationMaterial.h */,
-				21A56D061A79090600C8F362 /* CConfigurationModel.cpp */,
 				21A56D071A79090600C8F362 /* CConfigurationModel.h */,
+				21A56D061A79090600C8F362 /* CConfigurationModel.cpp */,
 				21A56D081A79090600C8F362 /* CConfigurationOutputTechnique.cpp */,
 				21A56D091A79090600C8F362 /* CConfigurationOutputTechnique.h */,
 				21A56D0A1A79090600C8F362 /* CConfigurationShader.cpp */,
@@ -1251,73 +1164,8 @@
 			children = (
 				21E4D58918658466006F84D6 /* IConfiguration.h */,
 				21E4D58818658466006F84D6 /* IConfiguration.cpp */,
-				21E4D59B1865944D006F84D6 /* CConfigurationGameObjects.h */,
-				21E4D59A1865944D006F84D6 /* CConfigurationGameObjects.cpp */,
 			);
 			name = Configurations;
-			sourceTree = "<group>";
-		};
-		A40138C01754EA310056461B /* Serializers */ = {
-			isa = PBXGroup;
-			children = (
-				A40138D11755FEEA0056461B /* IConfigurationSerializer.h */,
-				A40138D01755FEE90056461B /* IConfigurationSerializer.cpp */,
-				A40138EF175614930056461B /* CConfigurationMaterialSerializer.h */,
-				A40138EE175614920056461B /* CConfigurationMaterialSerializer.cpp */,
-				A40138C31754EF060056461B /* CConfigurationModelSerializer.h */,
-				A40138C21754EF060056461B /* CConfigurationModelSerializer.cpp */,
-				A46789D917A021AD00FE26FA /* CConfigurationOceanSerializer.h */,
-				A46789D817A021AD00FE26FA /* CConfigurationOceanSerializer.cpp */,
-				212092B9191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h */,
-				212092B8191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp */,
-				213396A419D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h */,
-				213396A319D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp */,
-				A490465E18463414009734B8 /* CConfigurationLandscapeSerializer.h */,
-				A490465D18463414009734B8 /* CConfigurationLandscapeSerializer.cpp */,
-				A40138C61754EF280056461B /* CConfigurationParticleEmitterSerializer.h */,
-				A40138C51754EF280056461B /* CConfigurationParticleEmitterSerializer.cpp */,
-				A481748617621CED00E1DC6E /* CConfigurationWSRenderOperationSerializer.h */,
-				A481748517621CED00E1DC6E /* CConfigurationWSRenderOperationSerializer.cpp */,
-				A481748917621D1C00E1DC6E /* CConfigurationSSRenderOperationSerializer.h */,
-				A481748817621D1C00E1DC6E /* CConfigurationSSRenderOperationSerializer.cpp */,
-				A481748C17621DE000E1DC6E /* CConfigurationORenderOperationSerializer.h */,
-				A481748B17621DDF00E1DC6E /* CConfigurationORenderOperationSerializer.cpp */,
-				A481748F17621E0600E1DC6E /* CConfigurationGameTransitionSerializer.h */,
-				A481748E17621E0600E1DC6E /* CConfigurationGameTransitionSerializer.cpp */,
-			);
-			name = Serializers;
-			sourceTree = "<group>";
-		};
-		A40138CB1755FE300056461B /* Operations */ = {
-			isa = PBXGroup;
-			children = (
-				A40138C01754EA310056461B /* Serializers */,
-				A40138CE1755FE790056461B /* IConfigurationLoadingOperation.h */,
-				A40138CD1755FE790056461B /* IConfigurationLoadingOperation.cpp */,
-				A40138E6175613080056461B /* CConfigurationMaterialLoadingOperation.h */,
-				A40138E5175613080056461B /* CConfigurationMaterialLoadingOperation.cpp */,
-				A40138E9175613900056461B /* CConfigurationModelLoadingOperation.h */,
-				A40138E81756138F0056461B /* CConfigurationModelLoadingOperation.cpp */,
-				A46789D617A0212200FE26FA /* CConfigurationOceanLoadingOperation.h */,
-				A46789D517A0212200FE26FA /* CConfigurationOceanLoadingOperation.cpp */,
-				212092BE1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h */,
-				212092BD1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp */,
-				213396A919D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h */,
-				213396A819D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp */,
-				A490465B18463404009734B8 /* CConfigurationLandscapeLoadingOperation.h */,
-				A490465A18463404009734B8 /* CConfigurationLandscapeLoadingOperation.cpp */,
-				A40138EC1756144B0056461B /* CConfigurationParticleEmitterLoadingOperation.h */,
-				A40138EB1756144A0056461B /* CConfigurationParticleEmitterLoadingOperation.cpp */,
-				A481749217621E6B00E1DC6E /* CConfigurationWSRenderOperationLoadingOperation.h */,
-				A481749117621E6A00E1DC6E /* CConfigurationWSRenderOperationLoadingOperation.cpp */,
-				A481749517621EA600E1DC6E /* CConfigurationSSRenderOperationLoadingOperation.h */,
-				A481749417621EA600E1DC6E /* CConfigurationSSRenderOperationLoadingOperation.cpp */,
-				A481749817621FF300E1DC6E /* CConfigurationORenderOperationLoadingOperation.h */,
-				A481749717621FF200E1DC6E /* CConfigurationORenderOperationLoadingOperation.cpp */,
-				A481749B176221FD00E1DC6E /* CConfigurationGameTransitionLoadingOperation.h */,
-				A481749A176221FC00E1DC6E /* CConfigurationGameTransitionLoadingOperation.cpp */,
-			);
-			name = Operations;
 			sourceTree = "<group>";
 		};
 		A40A69AC174F51E4005B475E /* Support */ = {
@@ -1441,10 +1289,7 @@
 			isa = PBXGroup;
 			children = (
 				21A56D011A79071000C8F362 /* Autogenerated */,
-				A40138CB1755FE300056461B /* Operations */,
 				A40138BC1754E9CE0056461B /* Configurations */,
-				A40138E317560F610056461B /* CConfigurationAccessor.h */,
-				A40138E217560F5E0056461B /* CConfigurationAccessor.cpp */,
 			);
 			name = "Configurations Managment";
 			sourceTree = "<group>";
@@ -1985,7 +1830,6 @@
 				2191CE53196EDBEF00CE2813 /* pnginfo.h in Headers */,
 				2191CE4C196EDBEF00CE2813 /* png.h in Headers */,
 				2191CE9F196EE95100CE2813 /* deflate.h in Headers */,
-				213396AC19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.h in Headers */,
 				21FB5C381A14F60400222BEE /* CAnimationSequence.h in Headers */,
 				2191CE9C196EE95100CE2813 /* crc32.h in Headers */,
 				219B5E721A10F3E600986953 /* CBoundingBox.h in Headers */,
@@ -2003,6 +1847,7 @@
 				2191CE4E196EDBEF00CE2813 /* pngdebug.h in Headers */,
 				2191CEBA196EE95100CE2813 /* zconf.h in Headers */,
 				2191CE59196EDBEF00CE2813 /* pngpriv.h in Headers */,
+				21CB35081A7A683D00819C09 /* CConfigurationLandscape.h in Headers */,
 				2173347E19644107002B3F90 /* CRenderTechniqueMain.h in Headers */,
 				21ACE3941A7133FF0017A771 /* CComponentRendering.h in Headers */,
 				21ACE38A1A711D280017A771 /* IComponent.h in Headers */,
@@ -2015,7 +1860,6 @@
 				21CB34FC1A793CF000819C09 /* CConfigurationTransition.h in Headers */,
 				2191CEA2196EE95100CE2813 /* gzguts.h in Headers */,
 				21A56D1A1A79090600C8F362 /* CConfigurationModel.h in Headers */,
-				212092BC191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.h in Headers */,
 				2191CEAE196EE95100CE2813 /* inffixed.h in Headers */,
 				2173348319644123002B3F90 /* CRenderTechniqueScreenSpace.h in Headers */,
 				2162096A19A3312D00DECBBC /* CThreadOperation.h in Headers */,
@@ -2023,13 +1867,14 @@
 				21C409AC197B0BA40063D62D /* CMeshCommiter_MDL_01.h in Headers */,
 				2173348D19644157002B3F90 /* IRenderTechniqueImporter.h in Headers */,
 				2162096F19A3364200DECBBC /* CThreadOperationPool.h in Headers */,
+				21CB35011A7A479000819C09 /* CConfigurationAccessor.h in Headers */,
 				2191CEBB196EE95100CE2813 /* zlib.h in Headers */,
 				217334921964416D002B3F90 /* IRenderTechniqueAccessor.h in Headers */,
 				21EF003C1A237BDA00E0AF20 /* COcclusionQueryManager.h in Headers */,
 				2191CEBE196EE95100CE2813 /* zutil.h in Headers */,
+				21CB350B1A7A683D00819C09 /* CConfigurationOcean.h in Headers */,
 				2191CEB1196EE95100CE2813 /* inflate.h in Headers */,
 				21ACE38F1A711F100017A771 /* CComponentTransformation.h in Headers */,
-				212092C11919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.h in Headers */,
 				2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */,
 				2191CE54196EDBEF00CE2813 /* pnglibconf.h in Headers */,
 				2191CE4D196EDBEF00CE2813 /* pngconf.h in Headers */,
@@ -2040,7 +1885,6 @@
 				21EF00411A237FF700E0AF20 /* IOcclusionQueryHandler.h in Headers */,
 				2191CE64196EDBEF00CE2813 /* pngstruct.h in Headers */,
 				21A56D141A79090600C8F362 /* CConfigurationAnimation.h in Headers */,
-				213396A719D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.h in Headers */,
 				212092B61919674400FFC8D4 /* CSkyBox.h in Headers */,
 				2173348819644139002B3F90 /* CRenderTechniqueWorldSpace.h in Headers */,
 				21A56D1D1A79090600C8F362 /* CConfigurationOutputTechnique.h in Headers */,
@@ -2170,7 +2014,6 @@
 				21A56D161A79090600C8F362 /* CConfigurationMaterial.cpp in Sources */,
 				2191CE9E196EE95100CE2813 /* deflate.c in Sources */,
 				21A56D281A79090600C8F362 /* CConfigurationWSTechnique.cpp in Sources */,
-				213396A619D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp in Sources */,
 				2191CEB0196EE95100CE2813 /* inflate.c in Sources */,
 				2173347D19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				21208FA81906FB5F00FFC8D4 /* COGLWindow_ios.cpp in Sources */,
@@ -2197,12 +2040,12 @@
 				21208FB71906FB5F00FFC8D4 /* CGameLoopExecutor.cpp in Sources */,
 				2179741B19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */,
 				21ACE38E1A711F100017A771 /* CComponentTransformation.cpp in Sources */,
+				21CB35001A7A479000819C09 /* CConfigurationAccessor.cpp in Sources */,
 				21208FB81906FB5F00FFC8D4 /* CGameLoopExecutor_osx.cpp in Sources */,
 				21208FB91906FB5F00FFC8D4 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				2191CE68196EDBEF00CE2813 /* pngwio.c in Sources */,
 				21208FBA1906FB5F00FFC8D4 /* CGameLoopExecutor_ios.cpp in Sources */,
 				21FEECEF1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */,
-				212092BB191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
 				2162096919A3312D00DECBBC /* CThreadOperation.cpp in Sources */,
 				21208FBB1906FB5F00FFC8D4 /* CGameLoopExecutor_win32.cpp in Sources */,
 				21208FBC1906FB5F00FFC8D4 /* IGameController.cpp in Sources */,
@@ -2210,6 +2053,7 @@
 				21208FBE1906FB5F00FFC8D4 /* IGameObject.cpp in Sources */,
 				21FB5C371A14F60400222BEE /* CAnimationSequence.cpp in Sources */,
 				21A56D191A79090600C8F362 /* CConfigurationModel.cpp in Sources */,
+				21CB350A1A7A683D00819C09 /* CConfigurationOcean.cpp in Sources */,
 				217334961964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				21208FBF1906FB5F00FFC8D4 /* CParticleEmitter.cpp in Sources */,
 				21208FC01906FB5F00FFC8D4 /* CModel.cpp in Sources */,
@@ -2240,48 +2084,24 @@
 				21A56D221A79090600C8F362 /* CConfigurationSSTechnique.cpp in Sources */,
 				21208FD11906FB5F00FFC8D4 /* IFabricator.cpp in Sources */,
 				21208FD21906FB5F00FFC8D4 /* IGraph.cpp in Sources */,
-				21208FD31906FB5F00FFC8D4 /* IConfigurationSerializer.cpp in Sources */,
 				2191CE50196EDBEF00CE2813 /* pngerror.c in Sources */,
-				21208FD51906FB5F00FFC8D4 /* CConfigurationMaterialSerializer.cpp in Sources */,
 				2127E85C1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
 				212092B119195F4D00FFC8D4 /* CCubemapTexture.cpp in Sources */,
-				212092C01919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */,
-				21208FD61906FB5F00FFC8D4 /* CConfigurationModelSerializer.cpp in Sources */,
-				21208FD71906FB5F00FFC8D4 /* CConfigurationOceanSerializer.cpp in Sources */,
 				2191CE6E196EDBEF00CE2813 /* pngwutil.c in Sources */,
 				2191CE97196EE95100CE2813 /* adler32.c in Sources */,
 				2191CE5F196EDBEF00CE2813 /* pngrtran.c in Sources */,
-				213396AB19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp in Sources */,
-				21208FD81906FB5F00FFC8D4 /* CConfigurationLandscapeSerializer.cpp in Sources */,
-				21208FD91906FB5F00FFC8D4 /* CConfigurationParticleEmitterSerializer.cpp in Sources */,
-				21208FDA1906FB5F00FFC8D4 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */,
 				213B7F3A1994CDFC006F3976 /* CRenderTarget.cpp in Sources */,
 				2191CE58196EDBEF00CE2813 /* pngpread.c in Sources */,
-				21208FDB1906FB5F00FFC8D4 /* CConfigurationSSRenderOperationSerializer.cpp in Sources */,
-				21208FDC1906FB5F00FFC8D4 /* CConfigurationORenderOperationSerializer.cpp in Sources */,
-				21208FDD1906FB5F00FFC8D4 /* CConfigurationGameTransitionSerializer.cpp in Sources */,
-				21208FDE1906FB5F00FFC8D4 /* IConfigurationLoadingOperation.cpp in Sources */,
 				2162096E19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */,
 				2191CEA4196EE95100CE2813 /* gzlib.c in Sources */,
 				2191CEA1196EE95100CE2813 /* gzclose.c in Sources */,
-				21208FE01906FB5F00FFC8D4 /* CConfigurationMaterialLoadingOperation.cpp in Sources */,
-				21208FE11906FB5F00FFC8D4 /* CConfigurationModelLoadingOperation.cpp in Sources */,
 				2191CEB6196EE95100CE2813 /* trees.c in Sources */,
-				21208FE21906FB5F00FFC8D4 /* CConfigurationOceanLoadingOperation.cpp in Sources */,
-				21208FE31906FB5F00FFC8D4 /* CConfigurationLandscapeLoadingOperation.cpp in Sources */,
 				21EF00401A237FF700E0AF20 /* IOcclusionQueryHandler.cpp in Sources */,
-				21208FE41906FB5F00FFC8D4 /* CConfigurationParticleEmitterLoadingOperation.cpp in Sources */,
-				21208FE51906FB5F00FFC8D4 /* CConfigurationWSRenderOperationLoadingOperation.cpp in Sources */,
-				21208FE61906FB5F00FFC8D4 /* CConfigurationSSRenderOperationLoadingOperation.cpp in Sources */,
-				21208FE71906FB5F00FFC8D4 /* CConfigurationORenderOperationLoadingOperation.cpp in Sources */,
 				2191CEA8196EE95100CE2813 /* gzwrite.c in Sources */,
-				21208FE81906FB5F00FFC8D4 /* CConfigurationGameTransitionLoadingOperation.cpp in Sources */,
 				21208FE91906FB5F00FFC8D4 /* IConfiguration.cpp in Sources */,
 				2191CE61196EDBEF00CE2813 /* pngrutil.c in Sources */,
 				2191CE5B196EDBEF00CE2813 /* pngread.c in Sources */,
 				21A56D1C1A79090600C8F362 /* CConfigurationOutputTechnique.cpp in Sources */,
-				21208FEA1906FB5F00FFC8D4 /* CConfigurationGameObjects.cpp in Sources */,
-				21208FEB1906FB5F00FFC8D4 /* CConfigurationAccessor.cpp in Sources */,
 				213B7F321993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */,
 				21208FEC1906FB5F00FFC8D4 /* CCollisionMgr.cpp in Sources */,
 				21208FEE1906FB5F00FFC8D4 /* IResource.cpp in Sources */,
@@ -2292,6 +2112,7 @@
 				21208FF21906FB6000FFC8D4 /* CIndexBuffer.cpp in Sources */,
 				21208FF31906FB6000FFC8D4 /* CVertexBuffer.cpp in Sources */,
 				21208FF41906FB6000FFC8D4 /* CMesh.cpp in Sources */,
+				21CB35071A7A683D00819C09 /* CConfigurationLandscape.cpp in Sources */,
 				21208FF51906FB6000FFC8D4 /* CBone.cpp in Sources */,
 				21208FF61906FB6000FFC8D4 /* CSkeleton.cpp in Sources */,
 				21208FF71906FB6000FFC8D4 /* CMaterial.cpp in Sources */,
@@ -2357,7 +2178,6 @@
 				21A56D151A79090600C8F362 /* CConfigurationMaterial.cpp in Sources */,
 				2191CE9D196EE95100CE2813 /* deflate.c in Sources */,
 				21A56D271A79090600C8F362 /* CConfigurationWSTechnique.cpp in Sources */,
-				213396A519D312DE00B7C2A2 /* CConfigurationAtmosphericScatteringSerializer.cpp in Sources */,
 				2191CEAF196EE95100CE2813 /* inflate.c in Sources */,
 				2173347C19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				213265EC1906A4AF001C98F7 /* COGLWindow_ios.cpp in Sources */,
@@ -2384,12 +2204,12 @@
 				213265FB1906A4AF001C98F7 /* CGameLoopExecutor.cpp in Sources */,
 				2179741A19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */,
 				21ACE38D1A711F100017A771 /* CComponentTransformation.cpp in Sources */,
+				21CB34FF1A7A479000819C09 /* CConfigurationAccessor.cpp in Sources */,
 				213265FC1906A4AF001C98F7 /* CGameLoopExecutor_osx.cpp in Sources */,
 				213265FD1906A4AF001C98F7 /* CGameLoopExecutor_ndk.cpp in Sources */,
 				2191CE67196EDBEF00CE2813 /* pngwio.c in Sources */,
 				213265FE1906A4AF001C98F7 /* CGameLoopExecutor_ios.cpp in Sources */,
 				21FEECEE1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */,
-				212092BA191972E900FFC8D4 /* CConfigurationSkyBoxSerializer.cpp in Sources */,
 				2162096819A3312D00DECBBC /* CThreadOperation.cpp in Sources */,
 				213265FF1906A4AF001C98F7 /* CGameLoopExecutor_win32.cpp in Sources */,
 				213266001906A4AF001C98F7 /* IGameController.cpp in Sources */,
@@ -2397,6 +2217,7 @@
 				213266021906A4AF001C98F7 /* IGameObject.cpp in Sources */,
 				21FB5C361A14F60400222BEE /* CAnimationSequence.cpp in Sources */,
 				21A56D181A79090600C8F362 /* CConfigurationModel.cpp in Sources */,
+				21CB35091A7A683D00819C09 /* CConfigurationOcean.cpp in Sources */,
 				217334951964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				213266031906A4AF001C98F7 /* CParticleEmitter.cpp in Sources */,
 				213266041906A4AF001C98F7 /* CModel.cpp in Sources */,
@@ -2427,48 +2248,24 @@
 				21A56D211A79090600C8F362 /* CConfigurationSSTechnique.cpp in Sources */,
 				213266151906A4AF001C98F7 /* IFabricator.cpp in Sources */,
 				213266161906A4AF001C98F7 /* IGraph.cpp in Sources */,
-				213266171906A4AF001C98F7 /* IConfigurationSerializer.cpp in Sources */,
 				2191CE4F196EDBEF00CE2813 /* pngerror.c in Sources */,
-				213266191906A4AF001C98F7 /* CConfigurationMaterialSerializer.cpp in Sources */,
 				2127E85B1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
 				212092AE19195CD000FFC8D4 /* CCubemapTexture.cpp in Sources */,
-				212092BF1919754C00FFC8D4 /* CConfigurationSkyBoxLoadingOperation.cpp in Sources */,
-				2132661A1906A4AF001C98F7 /* CConfigurationModelSerializer.cpp in Sources */,
-				2132661B1906A4AF001C98F7 /* CConfigurationOceanSerializer.cpp in Sources */,
 				2191CE6D196EDBEF00CE2813 /* pngwutil.c in Sources */,
 				2191CE96196EE95100CE2813 /* adler32.c in Sources */,
 				2191CE5E196EDBEF00CE2813 /* pngrtran.c in Sources */,
-				213396AA19D3181400B7C2A2 /* CConfigurationAtmosphericScatteringLoadingOperation.cpp in Sources */,
-				2132661C1906A4AF001C98F7 /* CConfigurationLandscapeSerializer.cpp in Sources */,
-				2132661D1906A4AF001C98F7 /* CConfigurationParticleEmitterSerializer.cpp in Sources */,
-				2132661E1906A4AF001C98F7 /* CConfigurationWSRenderOperationSerializer.cpp in Sources */,
 				213B7F391994CDFC006F3976 /* CRenderTarget.cpp in Sources */,
 				2191CE57196EDBEF00CE2813 /* pngpread.c in Sources */,
-				2132661F1906A4AF001C98F7 /* CConfigurationSSRenderOperationSerializer.cpp in Sources */,
-				213266201906A4AF001C98F7 /* CConfigurationORenderOperationSerializer.cpp in Sources */,
-				213266211906A4AF001C98F7 /* CConfigurationGameTransitionSerializer.cpp in Sources */,
-				213266221906A4AF001C98F7 /* IConfigurationLoadingOperation.cpp in Sources */,
 				2162096D19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */,
 				2191CEA3196EE95100CE2813 /* gzlib.c in Sources */,
 				2191CEA0196EE95100CE2813 /* gzclose.c in Sources */,
-				213266241906A4AF001C98F7 /* CConfigurationMaterialLoadingOperation.cpp in Sources */,
-				213266251906A4AF001C98F7 /* CConfigurationModelLoadingOperation.cpp in Sources */,
 				2191CEB5196EE95100CE2813 /* trees.c in Sources */,
-				213266261906A4AF001C98F7 /* CConfigurationOceanLoadingOperation.cpp in Sources */,
-				213266271906A4AF001C98F7 /* CConfigurationLandscapeLoadingOperation.cpp in Sources */,
 				21EF003F1A237FF700E0AF20 /* IOcclusionQueryHandler.cpp in Sources */,
-				213266281906A4AF001C98F7 /* CConfigurationParticleEmitterLoadingOperation.cpp in Sources */,
-				213266291906A4AF001C98F7 /* CConfigurationWSRenderOperationLoadingOperation.cpp in Sources */,
-				2132662A1906A4AF001C98F7 /* CConfigurationSSRenderOperationLoadingOperation.cpp in Sources */,
-				2132662B1906A4AF001C98F7 /* CConfigurationORenderOperationLoadingOperation.cpp in Sources */,
 				2191CEA7196EE95100CE2813 /* gzwrite.c in Sources */,
-				2132662C1906A4AF001C98F7 /* CConfigurationGameTransitionLoadingOperation.cpp in Sources */,
 				2132662D1906A4AF001C98F7 /* IConfiguration.cpp in Sources */,
 				2191CE60196EDBEF00CE2813 /* pngrutil.c in Sources */,
 				2191CE5A196EDBEF00CE2813 /* pngread.c in Sources */,
 				21A56D1B1A79090600C8F362 /* CConfigurationOutputTechnique.cpp in Sources */,
-				2132662E1906A4AF001C98F7 /* CConfigurationGameObjects.cpp in Sources */,
-				2132662F1906A4AF001C98F7 /* CConfigurationAccessor.cpp in Sources */,
 				213B7F311993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */,
 				213266301906A4AF001C98F7 /* CCollisionMgr.cpp in Sources */,
 				213266321906A4AF001C98F7 /* IResource.cpp in Sources */,
@@ -2479,6 +2276,7 @@
 				213266361906A4AF001C98F7 /* CIndexBuffer.cpp in Sources */,
 				213266371906A4AF001C98F7 /* CVertexBuffer.cpp in Sources */,
 				213266381906A4AF001C98F7 /* CMesh.cpp in Sources */,
+				21CB35061A7A683D00819C09 /* CConfigurationLandscape.cpp in Sources */,
 				213266391906A4AF001C98F7 /* CBone.cpp in Sources */,
 				2132663A1906A4AF001C98F7 /* CSkeleton.cpp in Sources */,
 				2132663B1906A4AF001C98F7 /* CMaterial.cpp in Sources */,

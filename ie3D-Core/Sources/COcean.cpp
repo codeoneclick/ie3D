@@ -13,10 +13,10 @@
 #include "CCamera.h"
 #include "CGlobalLightSource.h"
 #include "CResourceAccessor.h"
-#include "CConfigurationGameObjects.h"
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
+#include "CConfigurationAccessor.h"
 
 COcean::COcean(CSharedResourceAccessorRef resourceAccessor,
                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -49,15 +49,14 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
 {
     IGameObject::onConfigurationLoaded(configuration, success);
     
-    std::shared_ptr<CConfigurationOcean> oceanConfiguration = std::static_pointer_cast<CConfigurationOcean>(configuration);
+    std::shared_ptr<CConfigurationOcean> configurationOcean = std::static_pointer_cast<CConfigurationOcean>(configuration);
     assert(m_resourceAccessor != nullptr);
     
-    m_width = oceanConfiguration->getSize().x;
-    m_height = oceanConfiguration->getSize().y;
-    m_altitude = oceanConfiguration->getAltitude();
+    m_size = configurationOcean->getSize();
+    m_altitude = configurationOcean->getAltitude();
     
     m_waveGeneratorTimer = 0.0f;
-    m_waveGeneratorInterval = oceanConfiguration->getWaveGenerationInterval();
+    m_waveGeneratorInterval = configurationOcean->getWaveGenerationInterval();
     
     CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(9 * 4, GL_STATIC_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
@@ -66,10 +65,10 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     {
         for(i32 j = -1; j <= 1; ++j)
         {
-            vertexData[index * 4 + 0].m_position = glm::vec3(m_width * i, m_altitude, m_height * j);
-            vertexData[index * 4 + 1].m_position = glm::vec3(m_width * i + m_width, m_altitude, m_height * j);
-            vertexData[index * 4 + 2].m_position = glm::vec3(m_width * i + m_width, m_altitude, m_height * j + m_height);
-            vertexData[index * 4 + 3].m_position = glm::vec3(m_width * i, m_altitude, m_height * j + m_height);
+            vertexData[index * 4 + 0].m_position = glm::vec3(m_size * i, m_altitude, m_size * j);
+            vertexData[index * 4 + 1].m_position = glm::vec3(m_size * i + m_size, m_altitude, m_size * j);
+            vertexData[index * 4 + 2].m_position = glm::vec3(m_size * i + m_size, m_altitude, m_size * j + m_size);
+            vertexData[index * 4 + 3].m_position = glm::vec3(m_size * i, m_altitude, m_size * j + m_size);
             
             vertexData[index * 4 + 0].m_extra = glm::u8vec4(i == 0 && j == 0 ? 1 : 0, i == 0 && j == 0 ? 1 : 2, 0, 0);
             vertexData[index * 4 + 1].m_extra = glm::u8vec4(i == 0 && j == 0 ? 1 : 0, i == 0 && j == 0 ? 1 : 2, 0, 0);

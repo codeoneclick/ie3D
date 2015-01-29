@@ -48,7 +48,7 @@ void IGameController::addTransition(ISharedGameTransitionRef transition)
     transition->setupOnce(m_graphicsContext, m_gestureRecognizerContext,
                           m_resourceAccessor, m_configurationAccessor);
     transition->initScene();
-    m_configurationAccessor->loadGameTransitionConfiguration(transition->getGuid(), transition);
+    m_configurationAccessor->getConfigurationTransition(transition->getGuid(), transition);
     m_transitions.insert(std::make_pair(transition->getGuid(), transition));
 }
 
@@ -64,7 +64,7 @@ void IGameController::addChildTransition(ISharedGameTransitionRef transition)
     transition->setupOnce(m_graphicsContext, m_gestureRecognizerContext,
                           m_resourceAccessor, m_configurationAccessor);
     transition->initScene();
-    m_configurationAccessor->loadGameTransitionConfiguration(transition->getGuid(), transition);
+    m_configurationAccessor->getConfigurationTransition(transition->getGuid(), transition);
     m_chilrenTransitions.insert(std::make_pair(transition->getGuid(), transition));
 }
 

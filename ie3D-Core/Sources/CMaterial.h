@@ -65,7 +65,7 @@ public:
     ~CMaterial(void);
     
     static void initializeMaterial(CSharedMaterialRef material,
-                                   CSharedConfigurationMaterialRef configuration,
+                                   ISharedConfigurationRef configuration,
                                    CSharedResourceAccessor resourceAccessor,
                                    ISharedRenderTechniqueAccessor renderTechniqueAccessor,
                                    ISharedResourceLoadingHandlerRef handler = nullptr);

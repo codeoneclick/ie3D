@@ -3,13 +3,13 @@
 #define CConfigurationParticleEmitter_h
 #include "IConfiguration.h"
 #include "CConfigurationMaterial.h"
-class CConfigurationParticleEmitter : public IConfiguration
+class CConfigurationParticleEmitter : public IConfigurationGameObject
 {
 public:
 CConfigurationParticleEmitter(void) = default;
 ~CConfigurationParticleEmitter(void) = default;
 ui32 getNumParticles(void) const;
-ui64 getDuration(void) const;
+ui32 getDuration(void) const;
 f32 getDurationRandomess(void) const;
 f32 getVelocitySensitivity(void) const;
 f32 getMinHorizontalVelocity(void) const;
@@ -32,8 +32,8 @@ f32 getSourceSizeX(void) const;
 f32 getSourceSizeY(void) const;
 f32 getDestinationSizeX(void) const;
 f32 getDestinationSizeY(void) const;
-ui64 getMinEmittInterval(void) const;
-ui64 getMaxEmittInterval(void) const;
+ui32 getMinEmittInterval(void) const;
+ui32 getMaxEmittInterval(void) const;
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 void serialize(const std::string& filename);
 };

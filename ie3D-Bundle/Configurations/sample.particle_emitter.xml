@@ -1,10 +1,10 @@
 <particle_emitter
     class_name="CConfigurationParticleEmitter"
-    base_class_name="IConfiguration"
+    base_class_name="IConfigurationGameObject"
     is_external="1">
     <attributes>
         <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getNumParticles" path="/particle_emitter" attribute_name="num_particles"/>
-        <attribute type="ui64" is_convert_to_ogl_enum="0" getter="getDuration" path="/particle_emitter" attribute_name="duration"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getDuration" path="/particle_emitter" attribute_name="duration"/>
         <attribute type="f32" is_convert_to_ogl_enum="0" getter="getDurationRandomess" path="/particle_emitter" attribute_name="duration_randomness"/>
         <attribute type="f32" is_convert_to_ogl_enum="0" getter="getVelocitySensitivity" path="/particle_emitter" attribute_name="velocity_sensitivity"/>
         <attribute type="f32" is_convert_to_ogl_enum="0" getter="getMinHorizontalVelocity" path="/particle_emitter" attribute_name="min_horizontal_velocity"/>
@@ -27,8 +27,8 @@
         <attribute type="f32" is_convert_to_ogl_enum="0" getter="getSourceSizeY" path="/particle_emitter" attribute_name="source_size_y"/>
         <attribute type="f32" is_convert_to_ogl_enum="0" getter="getDestinationSizeX" path="/particle_emitter" attribute_name="destination_size_x"/>
         <attribute type="f32" is_convert_to_ogl_enum="0" getter="getDestinationSizeY" path="/particle_emitter" attribute_name="destination_size_y"/>
-        <attribute type="ui64" is_convert_to_ogl_enum="0" getter="getMinEmittInterval" path="/particle_emitter" attribute_name="min_emitt_interval"/>
-        <attribute type="ui64" is_convert_to_ogl_enum="0" getter="getMaxEmittInterval" path="/particle_emitter" attribute_name="max_emitt_interval"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getMinEmittInterval" path="/particle_emitter" attribute_name="min_emitt_interval"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getMaxEmittInterval" path="/particle_emitter" attribute_name="max_emitt_interval"/>
     </attributes>
     <relationships>
     	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/particle_emitter/materials" relationship_name="material"/>

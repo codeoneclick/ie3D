@@ -15,9 +15,9 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CMesh.h"
-#include "CConfigurationGameObjects.h"
 #include "CCommonOS.h"
 #include "CTimer.h"
+#include "CConfigurationAccessor.h"
 
 CParticleEmitter::CParticleEmitter(CSharedResourceAccessorRef resourceAccessor,
                                    ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -39,8 +39,12 @@ void CParticleEmitter::emittParticle(ui32 index)
     m_particles[index].m_position = IGameObject::getPosition();
     m_particles[index].m_velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     
-    m_particles[index].m_size = m_settings->getSourceSize();
-    m_particles[index].m_color = m_settings->getSourceColor();
+    m_particles[index].m_size = glm::vec2(m_settings->getSourceSizeX(),
+                                          m_settings->getSourceSizeY());
+    m_particles[index].m_color = glm::u8vec4(m_settings->getSourceColorR(),
+                                             m_settings->getSourceColorG(),
+                                             m_settings->getSourceColorB(),
+                                             m_settings->getSourceColorA());
     
     m_particles[index].m_timestamp = CTimer::Get_TickCount();
     
@@ -88,15 +92,26 @@ void CParticleEmitter::onSceneUpdate(f32 deltatime)
             f32 endVelocity = m_settings->getEndVelocity() * startVelocity;
             f32 velocityIntegral = startVelocity * particleClampAge + (endVelocity - startVelocity) * particleClampAge * particleClampAge / 2.0f;
             m_particles[i].m_position += glm::normalize(m_particles[i].m_velocity) * velocityIntegral * static_cast<f32>(m_settings->getDuration());
-            m_particles[i].m_position += m_settings->getGravity() * static_cast<f32>(particleAge) * particleClampAge;
+            m_particles[i].m_position += glm::vec3(m_settings->getGravityX(),
+                                                   m_settings->getGravityY(),
+                                                   m_settings->getGravityZ()) * static_cast<f32>(particleAge) * particleClampAge;
             
             f32 randomValue = Get_Random(0.0f, 1.0f);
-            f32 startSize = glm::mix(m_settings->getSourceSize().x, m_settings->getSourceSize().y, randomValue);
-            f32 endSize = glm::mix(m_settings->getDestinationSize().x, m_settings->getDestinationSize().y, randomValue);
+            f32 startSize = glm::mix(m_settings->getSourceSizeX(),
+                                     m_settings->getSourceSizeY(), randomValue);
+            f32 endSize = glm::mix(m_settings->getDestinationSizeX(),
+                                   m_settings->getDestinationSizeY(), randomValue);
             m_particles[i].m_size = glm::vec2(glm::mix(startSize, endSize, particleClampAge));
             
-            m_particles[i].m_color = glm::mix(m_settings->getSourceColor(), m_settings->getDestinationColor(), particleClampAge);
-            m_particles[i].m_color.a = glm::mix(m_settings->getSourceColor().a, m_settings->getDestinationColor().a, particleClampAge);
+            m_particles[i].m_color = glm::mix(glm::u8vec4(m_settings->getSourceColorR(),
+                                                          m_settings->getSourceColorG(),
+                                                          m_settings->getSourceColorB(),
+                                                          m_settings->getSourceColorA()),
+                                              
+                                              glm::u8vec4(m_settings->getDestinationColorR(),
+                                                          m_settings->getDestinationColorG(),
+                                                          m_settings->getDestinationColorB(),
+                                                          m_settings->getDestinationColorA()), particleClampAge);
             
             glm::mat4x4 matrixSpherical = m_camera->Get_SphericalMatrixForPosition(m_particles[i].m_position);
             

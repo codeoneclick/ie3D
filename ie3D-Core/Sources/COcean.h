@@ -15,8 +15,7 @@ class COcean: public IGameObject
 {
 private:
 
-    f32 m_width;
-    f32 m_height;
+    f32 m_size;
     f32 m_altitude;
     f32 m_waveGeneratorTimer;
     f32 m_waveGeneratorInterval;
