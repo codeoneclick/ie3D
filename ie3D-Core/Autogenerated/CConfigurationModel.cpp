@@ -17,12 +17,20 @@ return value;
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationModel::getMaterialsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/model/materials/material");
+if(iterator == m_configurations.end())
+{
+return std::vector<std::shared_ptr<IConfiguration>>();
+}
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationModel::getAnimationsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/model/animations/animation");
+if(iterator == m_configurations.end())
+{
+return std::vector<std::shared_ptr<IConfiguration>>();
+}
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
@@ -48,7 +56,8 @@ pugi::xpath_node_set animation_nodes = document.select_nodes("/model/animations/
 for (pugi::xpath_node_set::const_iterator iterator = animation_nodes.begin(); iterator != animation_nodes.end(); ++iterator)
 {
 std::shared_ptr<CConfigurationAnimation> animation = std::make_shared<CConfigurationAnimation>();
-animation->serialize(document, "/model/animations");
+pugi::xpath_node node = (*iterator);
+animation->serialize(document, node);
 IConfiguration::setConfiguration("/model/animations/animation", animation);
 }
 }

@@ -115,6 +115,10 @@ return value;
 std::shared_ptr<CConfigurationShader> CConfigurationMaterial::getShaderConfiguration(void) const
 {
 const auto& iterator = m_configurations.find("/material/shader");
+if(iterator == m_configurations.end())
+{
+return nullptr;
+}
 assert(iterator != m_configurations.end());
 assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationShader>(iterator->second.at(0));
@@ -122,6 +126,10 @@ return std::static_pointer_cast<CConfigurationShader>(iterator->second.at(0));
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationMaterial::getTexturesConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/material/textures/texture");
+if(iterator == m_configurations.end())
+{
+return std::vector<std::shared_ptr<IConfiguration>>();
+}
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
@@ -177,7 +185,8 @@ pugi::xpath_node_set texture_nodes = document.select_nodes("/material/textures/t
 for (pugi::xpath_node_set::const_iterator iterator = texture_nodes.begin(); iterator != texture_nodes.end(); ++iterator)
 {
 std::shared_ptr<CConfigurationTexture> texture = std::make_shared<CConfigurationTexture>();
-texture->serialize(document, "/material/textures");
+pugi::xpath_node node = (*iterator);
+texture->serialize(document, node);
 IConfiguration::setConfiguration("/material/textures/texture", texture);
 }
 }

@@ -201,6 +201,7 @@ bool CLandscape::checkOcclusion(void)
 
 ui32 CLandscape::numTriangles(void)
 {
+    return 0;
     ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
     ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
     

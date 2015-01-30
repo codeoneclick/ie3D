@@ -11,7 +11,7 @@
 #include "CTexture.h"
 #include "IRenderTechniqueImporter.h"
 #include "IRenderTechniqueAccessor.h"
-#include "CConfigurationGameObjects.h"
+#include "CConfigurationAccessor.h"
 #include "CResourceAccessor.h"
 
 CMaterialCachedParameters::CMaterialCachedParameters(void) :
@@ -53,6 +53,73 @@ CMaterial::~CMaterial(void)
 {
     
 }
+
+CSharedMaterial CMaterial::constructCustomMaterial(CSharedConfigurationMaterialRef configuration,
+                                                   CSharedResourceAccessor resourceAccessor,
+                                                   ISharedRenderTechniqueAccessor renderTechniqueAccessor,
+                                                   ISharedResourceLoadingHandlerRef handler)
+{
+    CSharedMaterial material = std::make_shared<CMaterial>();
+    assert(configuration != nullptr);
+    assert(renderTechniqueAccessor != nullptr);
+    assert(resourceAccessor != nullptr);
+    
+    material->setCulling(configuration->isCulling());
+    material->setCullingMode(configuration->getCullingMode());
+    
+    material->setBlending(configuration->isBlending());
+    material->setBlendingFunctionSource(configuration->getBlendingFunctionSource());
+    material->setBlendingFunctionDestination(configuration->getBlendingFunctionDestination());
+    
+    material->setDepthTest(configuration->isDepthTest());
+    material->setDepthMask(configuration->isDepthMask());
+    
+    material->setClipping(configuration->isClipping());
+    material->setClippingPlane(glm::vec4(configuration->getClippingX(),
+                                         configuration->getClippingY(),
+                                         configuration->getClippingZ(),
+                                         configuration->getClippingW()));
+    
+    material->setReflecting(configuration->isReflecting());
+    material->setShadowing(configuration->isShadowing());
+    material->setDebugging(configuration->isDebugging());
+    
+    for(const auto& iterator : configuration->getTexturesConfigurations())
+    {
+        CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
+        assert(textureConfiguration != nullptr);
+        std::string filename = textureConfiguration->getFilename();
+        std::cout<<filename<<std::endl;
+        CSharedTexture texture = textureConfiguration->getFilename().length() != 0 ?
+        resourceAccessor->getTexture(textureConfiguration->getFilename()) :
+        renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderOperationName());
+        assert(texture != nullptr);
+        texture->setWrapMode(textureConfiguration->getWrapMode());
+        texture->setMagFilter(textureConfiguration->getMagFilter());
+        texture->setMinFilter(textureConfiguration->getMinFilter());
+        assert(textureConfiguration->getSamplerIndex() >= 0 &&
+               textureConfiguration->getSamplerIndex() < E_SHADER_SAMPLER_MAX);
+        material->setTexture(texture, static_cast<E_SHADER_SAMPLER>(textureConfiguration->getSamplerIndex()));
+        
+        if(handler != nullptr)
+        {
+            texture->addLoadingHandler(handler);
+        }
+    }
+    
+    CSharedConfigurationShader shaderConfiguration = std::static_pointer_cast<CConfigurationShader>(configuration->getShaderConfiguration());
+    assert(shaderConfiguration != nullptr);
+    CSharedShader shader = resourceAccessor->getShader(shaderConfiguration->getVSFilename(),
+                                                       shaderConfiguration->getFSFilename());
+    assert(shader != nullptr);
+    material->setShader(shader);
+    if(handler != nullptr)
+    {
+        shader->addLoadingHandler(handler);
+    }
+    return material;
+}
+
 
 bool CMaterial::isCulling(void) const
 {
@@ -235,67 +302,6 @@ void CMaterial::setTexture(CSharedTextureRef texture,
 {
     assert(m_parameters != nullptr);
     m_parameters->m_textures.at(sampler) = texture;
-}
-
-void CMaterial::initializeMaterial(CSharedMaterialRef material,
-                                   CSharedConfigurationMaterialRef configuration,
-                                   CSharedResourceAccessor resourceAccessor,
-                                   ISharedRenderTechniqueAccessor renderTechniqueAccessor,
-                                   ISharedResourceLoadingHandlerRef handler)
-{
-    assert(configuration != nullptr);
-    assert(renderTechniqueAccessor != nullptr);
-    assert(resourceAccessor != nullptr);
-    
-    material->setCulling(configuration->isCulling());
-    material->setCullingMode(configuration->getCullingMode());
-    
-    material->setBlending(configuration->isBlending());
-    material->setBlendingFunctionSource(configuration->getBlendingFunctionSource());
-    material->setBlendingFunctionDestination(configuration->getBlendingFunctionDestination());
-    
-    material->setDepthTest(configuration->isDepthTest());
-    material->setDepthMask(configuration->isDepthMask());
-    
-    material->setClipping(configuration->isClipping());
-    material->setClippingPlane(configuration->getClippingPlane());
-    
-    material->setReflecting(configuration->isReflecting());
-    material->setShadowing(configuration->isShadowing());
-    material->setDebugging(configuration->isDebugging());
-    
-    for(const auto& iterator : configuration->getTexturesConfigurations())
-    {
-        CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
-        assert(textureConfiguration != nullptr);
-        
-        CSharedTexture texture = textureConfiguration->getFilename().length() != 0 ?
-        resourceAccessor->getTexture(textureConfiguration->getFilename()) :
-        renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderOperationName());
-        assert(texture != nullptr);
-        texture->setWrapMode(textureConfiguration->getWrapMode());
-        texture->setMagFilter(textureConfiguration->getMagFilter());
-        texture->setMinFilter(textureConfiguration->getMinFilter());
-        assert(textureConfiguration->getSamplerIndex() >= 0 &&
-               textureConfiguration->getSamplerIndex() < E_SHADER_SAMPLER_MAX);
-        material->setTexture(texture, static_cast<E_SHADER_SAMPLER>(textureConfiguration->getSamplerIndex()));
-        
-        if(handler != nullptr)
-        {
-            texture->addLoadingHandler(handler);
-        }
-    }
-    
-    CSharedConfigurationShader shaderConfiguration = std::static_pointer_cast<CConfigurationShader>(configuration->getShaderConfiguration());
-    assert(shaderConfiguration != nullptr);
-    CSharedShader shader = resourceAccessor->getShader(shaderConfiguration->getVSFilename(),
-                                                       shaderConfiguration->getFSFilename());
-    assert(shader != nullptr);
-    material->setShader(shader);
-    if(handler != nullptr)
-    {
-        shader->addLoadingHandler(handler);
-    }
 }
 
 void CMaterial::setCustomShaderUniform(const glm::mat4x4& matrix, const std::string& uniform)

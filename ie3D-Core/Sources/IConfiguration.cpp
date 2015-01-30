@@ -7,6 +7,7 @@
 //
 
 #include "IConfiguration.h"
+#include "CCommonOS.h"
 
 #if defined(__IOS__) || defined(__OSX__) || defined(__NDK__)
 
@@ -93,6 +94,7 @@ pugi::xml_parse_result IConfiguration::openXMLDocument(pugi::xml_document &docum
                                                        const std::string &filename)
 {
     pugi::xml_parse_result result;
+    result = document.load_file(bundlepath().append(filename).c_str());
     return result;
 };
 

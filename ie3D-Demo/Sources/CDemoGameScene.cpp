@@ -72,11 +72,11 @@ void CDemoGameScene::load(void)
     m_root->setOcean(ocean);
     ocean->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
     
-    m_skyBox = m_root->createSkyBox("gameobject.skybox.xml");
-    m_root->setSkyBox(m_skyBox);
+    //m_skyBox = m_root->createSkyBox("gameobject.skybox.xml");
+    //m_root->setSkyBox(m_skyBox);
     
-    m_atmosphericScattering = m_root->createAtmosphericScattering("gameobject.atmospheric.scattering.xml");
-    m_root->setAtmosphericScattering(m_atmosphericScattering);
+    //m_atmosphericScattering = m_root->createAtmosphericScattering("gameobject.atmospheric.scattering.xml");
+    //m_root->setAtmosphericScattering(m_atmosphericScattering);
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
@@ -196,9 +196,9 @@ void CDemoGameScene::update(f32 deltatime)
     }
     m_characterController->update(deltatime);
     
-    static f32 angle = 0.0;
-    angle += 0.033;
-    m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
+    //static f32 angle = 0.0;
+    //angle += 0.033;
+    //m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
     m_globalLightSource->setLookAt(m_model->getPosition());
 }
 

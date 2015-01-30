@@ -185,6 +185,10 @@ return value;
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationParticleEmitter::getMaterialsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/particle_emitter/materials/material");
+if(iterator == m_configurations.end())
+{
+return std::vector<std::shared_ptr<IConfiguration>>();
+}
 assert(iterator != m_configurations.end());
 return iterator->second;
 }

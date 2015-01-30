@@ -1,13 +1,12 @@
-<transition guid="transition.main">
-    <output_render_operation filename="render.operation.output.xml"/>
-    <world_space_operations>
-        <operation filename="render.operation.world.base.xml"/>
-        <operation filename="render.operation.world.reflection.xml"/>
-        <operation filename="render.operation.world.refraction.xml"/>
-        <operation filename="render.operation.world.shadowmap.xml"/>
-        <!--<operation filename="render.operation.world.normal.xml"/>-->
-    </world_space_operations>
-    <screen_space_operations>
-        <!--<operation filename="render.operation.screen.ssao.xml"/>-->
-    </screen_space_operations>
+<transition
+    guid="transition.main">
+    <output_technique filename="render.operation.output.xml"/>
+    <ws_techniques>
+        <ws_technique filename="render.operation.world.base.xml"/>
+        <ws_technique filename="render.operation.world.reflection.xml"/>
+        <ws_technique filename="render.operation.world.refraction.xml"/>
+        <ws_technique filename="render.operation.world.shadowmap.xml"/>
+    </ws_techniques>
+    <ss_techniques>
+    </ss_techniques>
 </transition>

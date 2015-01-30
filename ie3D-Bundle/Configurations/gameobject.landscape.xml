@@ -1,25 +1,10 @@
 <landscape
     heightmap_data_filename="heightmap.data"
     splatting_data_filename="splatting.data"
-    size_x="512"
-    size_y="512"
-    splatting_diffuse_material_filename="material.splatting.diffuse.xml"
-    splatting_normal_material_filename="material.splatting.normal.xml"
-    is_edges_enabled="1">
+    size="512">
 	<materials>
 		<material filename="material.landscape.base.xml"/>
         <material filename="material.landscape.reflection.xml"/>
         <material filename="material.landscape.refraction.xml"/>
-        <!--<material filename="material.landscape.shadowmap.xml"/>-->
-        <!--<material filename="material.landscape.normal.xml"/>-->
 	</materials>
-    <edges
-        size_x="-64.0"
-        size_y="64.0">
-        <edges_materials>
-            <material filename="material.landscape.edges.base.xml"/>
-            <material filename="material.landscape.edges.reflection.xml"/>
-            <material filename="material.landscape.edges.refraction.xml"/>
-        </edges_materials>
-    </edges>
 </landscape>

@@ -10,6 +10,10 @@ return value;
 std::shared_ptr<CConfigurationOutputTechnique> CConfigurationTransition::getConfigurationOutputTechnique(void) const
 {
 const auto& iterator = m_configurations.find("/transition/output_technique");
+if(iterator == m_configurations.end())
+{
+return nullptr;
+}
 assert(iterator != m_configurations.end());
 assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationOutputTechnique>(iterator->second.at(0));
@@ -17,12 +21,20 @@ return std::static_pointer_cast<CConfigurationOutputTechnique>(iterator->second.
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationTransition::getConfigurationWSTechnique(void) const
 {
 const auto& iterator = m_configurations.find("/transition/ws_techniques/ws_technique");
+if(iterator == m_configurations.end())
+{
+return std::vector<std::shared_ptr<IConfiguration>>();
+}
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationTransition::getConfigurationSSTechnique(void) const
 {
 const auto& iterator = m_configurations.find("/transition/ss_techniques/ss_technique");
+if(iterator == m_configurations.end())
+{
+return std::vector<std::shared_ptr<IConfiguration>>();
+}
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
@@ -36,7 +48,7 @@ node = document.select_single_node("/transition");
 std::string guid = node.node().attribute("guid").as_string();
 IConfiguration::setAttribute("/transition/guid", std::make_shared<CConfigurationAttribute>(guid));
 std::shared_ptr<CConfigurationOutputTechnique> output_technique = std::make_shared<CConfigurationOutputTechnique>();
-pugi::xpath_node output_technique_node = document.select_single_node("/transitionoutput_technique");
+pugi::xpath_node output_technique_node = document.select_single_node("/transition/output_technique");
 output_technique->serialize(output_technique_node.node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/transition/output_technique", output_technique);
 pugi::xpath_node_set ws_technique_nodes = document.select_nodes("/transition/ws_techniques/ws_technique");

@@ -1,0 +1,39 @@
+#ifndef HConfigurationDeclarations_h
+#define HConfigurationDeclarations_h
+class CConfigurationAnimation;
+typedef std::shared_ptr<CConfigurationAnimation> CSharedConfigurationAnimation;
+typedef const CSharedConfigurationAnimation& CSharedConfigurationAnimationRef;
+class CConfigurationLandscape;
+typedef std::shared_ptr<CConfigurationLandscape> CSharedConfigurationLandscape;
+typedef const CSharedConfigurationLandscape& CSharedConfigurationLandscapeRef;
+class CConfigurationMaterial;
+typedef std::shared_ptr<CConfigurationMaterial> CSharedConfigurationMaterial;
+typedef const CSharedConfigurationMaterial& CSharedConfigurationMaterialRef;
+class CConfigurationModel;
+typedef std::shared_ptr<CConfigurationModel> CSharedConfigurationModel;
+typedef const CSharedConfigurationModel& CSharedConfigurationModelRef;
+class CConfigurationOcean;
+typedef std::shared_ptr<CConfigurationOcean> CSharedConfigurationOcean;
+typedef const CSharedConfigurationOcean& CSharedConfigurationOceanRef;
+class CConfigurationOutputTechnique;
+typedef std::shared_ptr<CConfigurationOutputTechnique> CSharedConfigurationOutputTechnique;
+typedef const CSharedConfigurationOutputTechnique& CSharedConfigurationOutputTechniqueRef;
+class CConfigurationParticleEmitter;
+typedef std::shared_ptr<CConfigurationParticleEmitter> CSharedConfigurationParticleEmitter;
+typedef const CSharedConfigurationParticleEmitter& CSharedConfigurationParticleEmitterRef;
+class CConfigurationShader;
+typedef std::shared_ptr<CConfigurationShader> CSharedConfigurationShader;
+typedef const CSharedConfigurationShader& CSharedConfigurationShaderRef;
+class CConfigurationSSTechnique;
+typedef std::shared_ptr<CConfigurationSSTechnique> CSharedConfigurationSSTechnique;
+typedef const CSharedConfigurationSSTechnique& CSharedConfigurationSSTechniqueRef;
+class CConfigurationTexture;
+typedef std::shared_ptr<CConfigurationTexture> CSharedConfigurationTexture;
+typedef const CSharedConfigurationTexture& CSharedConfigurationTextureRef;
+class CConfigurationTransition;
+typedef std::shared_ptr<CConfigurationTransition> CSharedConfigurationTransition;
+typedef const CSharedConfigurationTransition& CSharedConfigurationTransitionRef;
+class CConfigurationWSTechnique;
+typedef std::shared_ptr<CConfigurationWSTechnique> CSharedConfigurationWSTechnique;
+typedef const CSharedConfigurationWSTechnique& CSharedConfigurationWSTechniqueRef;
+#endif

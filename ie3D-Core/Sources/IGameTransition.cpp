@@ -162,12 +162,10 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
         std::shared_ptr<CConfigurationMaterial> configurationMaterial = configurationSSTechnique->getConfigurationMaterial();
         assert(configurationMaterial != nullptr);
         
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>();
         assert(m_resourceAccessor != nullptr);
-        CMaterial::initializeMaterial(material,
-                                      configurationMaterial,
-                                      m_resourceAccessor,
-                                      m_renderPipeline);
+        CSharedMaterial material =  CMaterial::constructCustomMaterial(configurationMaterial,
+                                                                       m_resourceAccessor,
+                                                                       m_renderPipeline);
         
         ui32 screenWidth = MIN_VALUE(configurationSSTechnique->getScreenWidth(), m_graphicsContext->getWidth());
         ui32 screenHeight = MIN_VALUE(configurationSSTechnique->getScreenHeight(), m_graphicsContext->getHeight());
@@ -187,12 +185,10 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
         std::shared_ptr<CConfigurationMaterial> configurationMaterial = configurationOutputTechnique->getConfigurationMaterial();
         assert(configurationMaterial != nullptr);
         
-        std::shared_ptr<CMaterial> material = std::make_shared<CMaterial>();
         assert(m_resourceAccessor != nullptr);
-        CMaterial::initializeMaterial(material,
-                                      configurationMaterial,
-                                      m_resourceAccessor,
-                                      m_renderPipeline);
+        CSharedMaterial material =  CMaterial::constructCustomMaterial(configurationMaterial,
+                                                                       m_resourceAccessor,
+                                                                       m_renderPipeline);
         m_renderPipeline->setMainRenderTechnique(material);
     }
     

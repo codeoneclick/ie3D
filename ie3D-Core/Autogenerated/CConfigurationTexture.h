@@ -14,5 +14,6 @@ GLenum getWrapMode(void) const;
 GLenum getMagFilter(void) const;
 GLenum getMinFilter(void) const;
 void serialize(pugi::xml_document& document, const std::string& path);
+void serialize(pugi::xml_document& document, pugi::xpath_node& node);
 };
 #endif

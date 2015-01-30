@@ -1,2 +1,4 @@
-<operation guid="render.operation.output" filename="material.output.xml">
-</operation>
+<output_technique
+    guid="render.operation.output">
+    <material filename="material.output.xml"/>
+</output_technique>

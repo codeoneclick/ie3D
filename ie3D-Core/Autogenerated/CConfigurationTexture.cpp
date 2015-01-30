@@ -37,7 +37,7 @@ return value;
 }
 GLenum CConfigurationTexture::getMinFilter(void) const
 {
-const auto& iterator = m_attributes.find("/texture/mag_filter");
+const auto& iterator = m_attributes.find("/texture/min_filter");
 assert(iterator != m_attributes.end());
 GLenum value; iterator->second->get(&value);
 return value;
@@ -60,8 +60,29 @@ std::string mag_filter = node.node().attribute("mag_filter").as_string();
 assert(g_stringToGLenum.find(mag_filter) != g_stringToGLenum.end());
 GLenum mag_filterEnum = g_stringToGLenum.find(mag_filter)->second;
 IConfiguration::setAttribute("/texture/mag_filter", std::make_shared<CConfigurationAttribute>(mag_filterEnum));
+std::string min_filter = node.node().attribute("min_filter").as_string();
+assert(g_stringToGLenum.find(min_filter) != g_stringToGLenum.end());
+GLenum min_filterEnum = g_stringToGLenum.find(min_filter)->second;
+IConfiguration::setAttribute("/texture/min_filter", std::make_shared<CConfigurationAttribute>(min_filterEnum));
+}
+void CConfigurationTexture::serialize(pugi::xml_document& document, pugi::xpath_node& node)
+{
+std::string filename = node.node().attribute("filename").as_string();
+IConfiguration::setAttribute("/texture/filename", std::make_shared<CConfigurationAttribute>(filename));
+std::string render_operation_name = node.node().attribute("render_operation_name").as_string();
+IConfiguration::setAttribute("/texture/render_operation_name", std::make_shared<CConfigurationAttribute>(render_operation_name));
+ui32 sampler_index = node.node().attribute("sampler_index").as_uint();
+IConfiguration::setAttribute("/texture/sampler_index", std::make_shared<CConfigurationAttribute>(sampler_index));
+std::string wrap_mode = node.node().attribute("wrap_mode").as_string();
+assert(g_stringToGLenum.find(wrap_mode) != g_stringToGLenum.end());
+GLenum wrap_modeEnum = g_stringToGLenum.find(wrap_mode)->second;
+IConfiguration::setAttribute("/texture/wrap_mode", std::make_shared<CConfigurationAttribute>(wrap_modeEnum));
 std::string mag_filter = node.node().attribute("mag_filter").as_string();
 assert(g_stringToGLenum.find(mag_filter) != g_stringToGLenum.end());
 GLenum mag_filterEnum = g_stringToGLenum.find(mag_filter)->second;
 IConfiguration::setAttribute("/texture/mag_filter", std::make_shared<CConfigurationAttribute>(mag_filterEnum));
+std::string min_filter = node.node().attribute("min_filter").as_string();
+assert(g_stringToGLenum.find(min_filter) != g_stringToGLenum.end());
+GLenum min_filterEnum = g_stringToGLenum.find(min_filter)->second;
+IConfiguration::setAttribute("/texture/min_filter", std::make_shared<CConfigurationAttribute>(min_filterEnum));
 }

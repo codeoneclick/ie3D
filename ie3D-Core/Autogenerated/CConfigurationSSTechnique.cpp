@@ -24,6 +24,10 @@ return value;
 std::shared_ptr<CConfigurationMaterial> CConfigurationSSTechnique::getConfigurationMaterial(void) const
 {
 const auto& iterator = m_configurations.find("/ss_technique/material");
+if(iterator == m_configurations.end())
+{
+return nullptr;
+}
 assert(iterator != m_configurations.end());
 assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationMaterial>(iterator->second.at(0));
@@ -42,7 +46,7 @@ IConfiguration::setAttribute("/ss_technique/screen_width", std::make_shared<CCon
 ui32 screen_height = node.node().attribute("screen_height").as_uint();
 IConfiguration::setAttribute("/ss_technique/screen_height", std::make_shared<CConfigurationAttribute>(screen_height));
 std::shared_ptr<CConfigurationMaterial> material = std::make_shared<CConfigurationMaterial>();
-pugi::xpath_node material_node = document.select_single_node("/ss_techniquematerial");
+pugi::xpath_node material_node = document.select_single_node("/ss_technique/material");
 material->serialize(material_node.node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/ss_technique/material", material);
 }

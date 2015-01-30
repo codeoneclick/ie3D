@@ -22,7 +22,7 @@
         <texture
             filename="particle_01.png"
             render_operation_name=""
-            sampler_id="0"
+            sampler_index="0"
             wrap_mode="GL_CLAMP_TO_EDGE"
             mag_filter="GL_NEAREST"
             min_filter="GL_NEAREST"/>

@@ -10,5 +10,6 @@ CConfigurationAnimation(void) = default;
 std::string getFilename(void) const;
 std::string getName(void) const;
 void serialize(pugi::xml_document& document, const std::string& path);
+void serialize(pugi::xml_document& document, pugi::xpath_node& node);
 };
 #endif

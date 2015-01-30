@@ -64,11 +64,10 @@ public:
     CMaterial(void);
     ~CMaterial(void);
     
-    static void initializeMaterial(CSharedMaterialRef material,
-                                   ISharedConfigurationRef configuration,
-                                   CSharedResourceAccessor resourceAccessor,
-                                   ISharedRenderTechniqueAccessor renderTechniqueAccessor,
-                                   ISharedResourceLoadingHandlerRef handler = nullptr);
+    static CSharedMaterial constructCustomMaterial(CSharedConfigurationMaterialRef configuration,
+                                                   CSharedResourceAccessor resourceAccessor,
+                                                   ISharedRenderTechniqueAccessor renderTechniqueAccessor,
+                                                   ISharedResourceLoadingHandlerRef handler = nullptr);
     
     bool isCulling(void) const;
     GLenum getCullingMode(void) const;

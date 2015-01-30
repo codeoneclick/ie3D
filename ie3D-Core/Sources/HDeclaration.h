@@ -1,21 +1,16 @@
 //
-//  HDeclaration.h
+//  HDeclarations.h
 //  indieEngineCore
 //
 //  Created by Sergey Sergeev on 4/7/14.
 //  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef indieEngineCore_HDeclaration_h
-#define indieEngineCore_HDeclaration_h
+#ifndef HDeclarations_h
+#define HDeclarations_h
 
 #include "HCommon.h"
-
-#if defined(__NDK__)
-
-struct ANativeWindow;
-
-#endif
+#include "HConfigurationDeclarations.h"
 
 class CTexture;
 typedef std::shared_ptr<CTexture> CSharedTexture;

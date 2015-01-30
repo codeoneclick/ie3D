@@ -174,14 +174,15 @@ void IGameObject::onResourceLoaded(ISharedResourceRef resource,
 void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
                                         bool success)
 {
-    IConfigurationLoadingHandler::onConfigurationLoaded(configuration, success);
     m_configuration = configuration;
     std::shared_ptr<IConfigurationGameObject> configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(configuration);
     for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
     {
         std::shared_ptr<CConfigurationMaterial> configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        CSharedMaterial material = std::make_shared<CMaterial>();
-        CMaterial::initializeMaterial(material, configurationMaterial, m_resourceAccessor, m_renderTechniqueAccessor, shared_from_this());
+        CSharedMaterial material =  CMaterial::constructCustomMaterial(configurationMaterial,
+                                                                       m_resourceAccessor,
+                                                                       m_renderTechniqueAccessor,
+                                                                       shared_from_this());
         m_materials.insert(std::make_pair(configurationMaterial->getRenderOperationName(), material));
     }
 }

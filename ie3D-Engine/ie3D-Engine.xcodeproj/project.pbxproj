@@ -9,20 +9,10 @@
 /* Begin PBXBuildFile section */
 		2171177C19FEB7BF00D92E14 /* CECustomModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171177A19FEB7BF00D92E14 /* CECustomModel.cpp */; };
 		2171177D19FEB7BF00D92E14 /* CECustomModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171177A19FEB7BF00D92E14 /* CECustomModel.cpp */; };
-		2171179019FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171178E19FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.cpp */; };
-		2171179119FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171178E19FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.cpp */; };
-		2171179419FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171179219FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.cpp */; };
-		2171179519FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2171179219FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.cpp */; };
 		21F114D4199224FF00F4A378 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F114D3199224FF00F4A378 /* Foundation.framework */; };
 		21F11509199225C500F4A378 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F114D3199224FF00F4A378 /* Foundation.framework */; };
 		21F115151992290900F4A378 /* CEComplexModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F115131992290900F4A378 /* CEComplexModel.cpp */; };
 		21F115161992290900F4A378 /* CEComplexModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F115131992290900F4A378 /* CEComplexModel.cpp */; };
-		21F1152019922C5100F4A378 /* CEConfigurationGameObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F1151E19922C5100F4A378 /* CEConfigurationGameObjects.cpp */; };
-		21F1152119922C5100F4A378 /* CEConfigurationGameObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F1151E19922C5100F4A378 /* CEConfigurationGameObjects.cpp */; };
-		21F1152419922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F1152219922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp */; };
-		21F1152519922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F1152219922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp */; };
-		21F1152819922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F1152619922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp */; };
-		21F1152919922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F1152619922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp */; };
 		21F1152C1992319400F4A378 /* CESceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F1152A1992319400F4A378 /* CESceneFabricator.cpp */; };
 		21F1152D1992319400F4A378 /* CESceneFabricator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F1152A1992319400F4A378 /* CESceneFabricator.cpp */; };
 		21F115321992487700F4A378 /* CEConfigurationAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F115301992487700F4A378 /* CEConfigurationAccessor.cpp */; };
@@ -86,26 +76,15 @@
 /* Begin PBXFileReference section */
 		2171177A19FEB7BF00D92E14 /* CECustomModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CECustomModel.cpp; path = Sources/CECustomModel.cpp; sourceTree = SOURCE_ROOT; };
 		2171177B19FEB7BF00D92E14 /* CECustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CECustomModel.h; path = Sources/CECustomModel.h; sourceTree = SOURCE_ROOT; };
-		2171178E19FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEConfigurationCustomModelSerializer.cpp; path = Sources/CEConfigurationCustomModelSerializer.cpp; sourceTree = SOURCE_ROOT; };
-		2171178F19FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEConfigurationCustomModelSerializer.h; path = Sources/CEConfigurationCustomModelSerializer.h; sourceTree = SOURCE_ROOT; };
-		2171179219FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEConfigurationCustomModelLoadingOperation.cpp; path = Sources/CEConfigurationCustomModelLoadingOperation.cpp; sourceTree = SOURCE_ROOT; };
-		2171179319FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEConfigurationCustomModelLoadingOperation.h; path = Sources/CEConfigurationCustomModelLoadingOperation.h; sourceTree = SOURCE_ROOT; };
 		21C016E119924BBF00CB59AB /* IEGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IEGameTransition.cpp; path = Sources/IEGameTransition.cpp; sourceTree = SOURCE_ROOT; };
 		21C016E219924BBF00CB59AB /* IEGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEGameTransition.h; path = Sources/IEGameTransition.h; sourceTree = SOURCE_ROOT; };
 		21F114D0199224FF00F4A378 /* libie3DEngine-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DEngine-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F114D3199224FF00F4A378 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		21F114E1199224FF00F4A378 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		21F114E4199224FF00F4A378 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		21F114FA1992257200F4A378 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
 		21F1150E199225C500F4A378 /* libie3DEngine-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DEngine-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F115131992290900F4A378 /* CEComplexModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEComplexModel.cpp; path = Sources/CEComplexModel.cpp; sourceTree = SOURCE_ROOT; };
 		21F115141992290900F4A378 /* CEComplexModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEComplexModel.h; path = Sources/CEComplexModel.h; sourceTree = SOURCE_ROOT; };
-		21F1151E19922C5100F4A378 /* CEConfigurationGameObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEConfigurationGameObjects.cpp; path = Sources/CEConfigurationGameObjects.cpp; sourceTree = SOURCE_ROOT; };
-		21F1151F19922C5100F4A378 /* CEConfigurationGameObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEConfigurationGameObjects.h; path = Sources/CEConfigurationGameObjects.h; sourceTree = SOURCE_ROOT; };
-		21F1152219922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEConfigurationComplexModelSerializer.cpp; path = Sources/CEConfigurationComplexModelSerializer.cpp; sourceTree = SOURCE_ROOT; };
-		21F1152319922E4F00F4A378 /* CEConfigurationComplexModelSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEConfigurationComplexModelSerializer.h; path = Sources/CEConfigurationComplexModelSerializer.h; sourceTree = SOURCE_ROOT; };
-		21F1152619922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CEConfigurationComplexModelLoadingOperation.cpp; path = Sources/CEConfigurationComplexModelLoadingOperation.cpp; sourceTree = SOURCE_ROOT; };
-		21F1152719922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEConfigurationComplexModelLoadingOperation.h; path = Sources/CEConfigurationComplexModelLoadingOperation.h; sourceTree = SOURCE_ROOT; };
 		21F1152A1992319400F4A378 /* CESceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CESceneFabricator.cpp; path = Sources/CESceneFabricator.cpp; sourceTree = SOURCE_ROOT; };
 		21F1152B1992319400F4A378 /* CESceneFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CESceneFabricator.h; path = Sources/CESceneFabricator.h; sourceTree = SOURCE_ROOT; };
 		21F1152F199247C300F4A378 /* HEDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HEDeclaration.h; path = Sources/HEDeclaration.h; sourceTree = SOURCE_ROOT; };
@@ -173,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				21F114D3199224FF00F4A378 /* Foundation.framework */,
-				21F114E1199224FF00F4A378 /* XCTest.framework */,
 				21F114E4199224FF00F4A378 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -232,44 +210,10 @@
 		21F1151A19922B9B00F4A378 /* Configurations Managment */ = {
 			isa = PBXGroup;
 			children = (
-				21F1151C19922BBA00F4A378 /* Operations */,
-				21F1151B19922BAD00F4A378 /* Configurations */,
 				21F115311992487700F4A378 /* CEConfigurationAccessor.h */,
 				21F115301992487700F4A378 /* CEConfigurationAccessor.cpp */,
 			);
 			name = "Configurations Managment";
-			sourceTree = "<group>";
-		};
-		21F1151B19922BAD00F4A378 /* Configurations */ = {
-			isa = PBXGroup;
-			children = (
-				21F1151F19922C5100F4A378 /* CEConfigurationGameObjects.h */,
-				21F1151E19922C5100F4A378 /* CEConfigurationGameObjects.cpp */,
-			);
-			name = Configurations;
-			sourceTree = "<group>";
-		};
-		21F1151C19922BBA00F4A378 /* Operations */ = {
-			isa = PBXGroup;
-			children = (
-				21F1151D19922BC300F4A378 /* Serializers */,
-				21F1152719922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.h */,
-				21F1152619922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp */,
-				2171179319FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.h */,
-				2171179219FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.cpp */,
-			);
-			name = Operations;
-			sourceTree = "<group>";
-		};
-		21F1151D19922BC300F4A378 /* Serializers */ = {
-			isa = PBXGroup;
-			children = (
-				21F1152319922E4F00F4A378 /* CEConfigurationComplexModelSerializer.h */,
-				21F1152219922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp */,
-				2171178F19FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.h */,
-				2171178E19FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.cpp */,
-			);
-			name = Serializers;
 			sourceTree = "<group>";
 		};
 		21F1152E199247A600F4A378 /* Common */ = {
@@ -375,14 +319,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2171177C19FEB7BF00D92E14 /* CECustomModel.cpp in Sources */,
-				2171179019FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.cpp in Sources */,
-				2171179419FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.cpp in Sources */,
 				21F1152C1992319400F4A378 /* CESceneFabricator.cpp in Sources */,
-				21F1152819922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp in Sources */,
 				21FCC909199FA7D900F2CA1E /* IEGameTransition.cpp in Sources */,
-				21F1152419922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp in Sources */,
 				21F115151992290900F4A378 /* CEComplexModel.cpp in Sources */,
-				21F1152019922C5100F4A378 /* CEConfigurationGameObjects.cpp in Sources */,
 				21F115321992487700F4A378 /* CEConfigurationAccessor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,14 +331,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2171177D19FEB7BF00D92E14 /* CECustomModel.cpp in Sources */,
-				2171179119FF9A1200D92E14 /* CEConfigurationCustomModelSerializer.cpp in Sources */,
-				2171179519FF9CF300D92E14 /* CEConfigurationCustomModelLoadingOperation.cpp in Sources */,
 				21F1152D1992319400F4A378 /* CESceneFabricator.cpp in Sources */,
-				21F1152919922FE300F4A378 /* CEConfigurationComplexModelLoadingOperation.cpp in Sources */,
 				21FCC908199FA7D700F2CA1E /* IEGameTransition.cpp in Sources */,
-				21F1152519922E4F00F4A378 /* CEConfigurationComplexModelSerializer.cpp in Sources */,
 				21F115161992290900F4A378 /* CEComplexModel.cpp in Sources */,
-				21F1152119922C5100F4A378 /* CEConfigurationGameObjects.cpp in Sources */,
 				21F115331992487700F4A378 /* CEConfigurationAccessor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,6 +441,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../ie3D-Core/Autogenerated\"",
 					"\"$(SRCROOT)/../ie3D-Core/Sources\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",
@@ -535,6 +470,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../ie3D-Core/Autogenerated\"",
 					"\"$(SRCROOT)/../ie3D-Core/Sources\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",
@@ -567,6 +503,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../ie3D-Core/Autogenerated\"",
 					"\"$(SRCROOT)/../ie3D-Core/Sources\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",
@@ -594,6 +531,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../ie3D-Core/Autogenerated\"",
 					"\"$(SRCROOT)/../ie3D-Core/Sources\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
 					"\"$(SRCROOT)/../ie3D-Core/Libraries/ogles2/include\"",

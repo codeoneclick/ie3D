@@ -10,6 +10,10 @@ return value;
 std::shared_ptr<CConfigurationMaterial> CConfigurationOutputTechnique::getConfigurationMaterial(void) const
 {
 const auto& iterator = m_configurations.find("/output_technique/material");
+if(iterator == m_configurations.end())
+{
+return nullptr;
+}
 assert(iterator != m_configurations.end());
 assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationMaterial>(iterator->second.at(0));
@@ -24,7 +28,7 @@ node = document.select_single_node("/output_technique");
 std::string guid = node.node().attribute("guid").as_string();
 IConfiguration::setAttribute("/output_technique/guid", std::make_shared<CConfigurationAttribute>(guid));
 std::shared_ptr<CConfigurationMaterial> material = std::make_shared<CConfigurationMaterial>();
-pugi::xpath_node material_node = document.select_single_node("/output_techniquematerial");
+pugi::xpath_node material_node = document.select_single_node("/output_technique/material");
 material->serialize(material_node.node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/output_technique/material", material);
 }

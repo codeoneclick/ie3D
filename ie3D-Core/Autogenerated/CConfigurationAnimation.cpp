@@ -23,3 +23,10 @@ IConfiguration::setAttribute("/animation/filename", std::make_shared<CConfigurat
 std::string name = node.node().attribute("name").as_string();
 IConfiguration::setAttribute("/animation/name", std::make_shared<CConfigurationAttribute>(name));
 }
+void CConfigurationAnimation::serialize(pugi::xml_document& document, pugi::xpath_node& node)
+{
+std::string filename = node.node().attribute("filename").as_string();
+IConfiguration::setAttribute("/animation/filename", std::make_shared<CConfigurationAttribute>(filename));
+std::string name = node.node().attribute("name").as_string();
+IConfiguration::setAttribute("/animation/name", std::make_shared<CConfigurationAttribute>(name));
+}

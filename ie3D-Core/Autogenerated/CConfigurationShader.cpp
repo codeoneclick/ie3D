@@ -23,3 +23,10 @@ IConfiguration::setAttribute("/shader/vs_filename", std::make_shared<CConfigurat
 std::string fs_filename = node.node().attribute("fs_filename").as_string();
 IConfiguration::setAttribute("/shader/fs_filename", std::make_shared<CConfigurationAttribute>(fs_filename));
 }
+void CConfigurationShader::serialize(pugi::xml_document& document, pugi::xpath_node& node)
+{
+std::string vs_filename = node.node().attribute("vs_filename").as_string();
+IConfiguration::setAttribute("/shader/vs_filename", std::make_shared<CConfigurationAttribute>(vs_filename));
+std::string fs_filename = node.node().attribute("fs_filename").as_string();
+IConfiguration::setAttribute("/shader/fs_filename", std::make_shared<CConfigurationAttribute>(fs_filename));
+}

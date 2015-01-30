@@ -1,10 +1,8 @@
 <ocean
-    size_x="512"
-    size_y="512"
+    size="512"
     altitude="-0.25"
     wave_generation_interval="0.005">
 	<materials>
 		<material filename="material.ocean.xml"/>
-        <!--<material filename="material.ocean.normal.xml"/>-->
 	</materials>
 </ocean>

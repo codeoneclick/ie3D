@@ -8,7 +8,7 @@
         <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSamplerIndex" path="/texture" attribute_name="sampler_index"/>
         <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getWrapMode" path="/texture" attribute_name="wrap_mode"/>
         <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getMagFilter" path="/texture" attribute_name="mag_filter"/>
-        <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getMinFilter" path="/texture" attribute_name="mag_filter"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getMinFilter" path="/texture" attribute_name="min_filter"/>
     </attributes>
     <relationships>
     </relationships>

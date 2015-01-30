@@ -24,6 +24,10 @@ return value;
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationOcean::getMaterialsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/ocean/materials/material");
+if(iterator == m_configurations.end())
+{
+return std::vector<std::shared_ptr<IConfiguration>>();
+}
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
