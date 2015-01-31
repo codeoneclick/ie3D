@@ -7,18 +7,18 @@ assert(iterator != m_attributes.end());
 ui32 value; iterator->second->get(&value);
 return value;
 }
-ui32 CConfigurationOcean::getAltitude(void) const
+f32 CConfigurationOcean::getAltitude(void) const
 {
 const auto& iterator = m_attributes.find("/ocean/altitude");
 assert(iterator != m_attributes.end());
-ui32 value; iterator->second->get(&value);
+f32 value; iterator->second->get(&value);
 return value;
 }
-ui32 CConfigurationOcean::getWaveGenerationInterval(void) const
+f32 CConfigurationOcean::getWaveGenerationInterval(void) const
 {
 const auto& iterator = m_attributes.find("/ocean/wave_generation_interval");
 assert(iterator != m_attributes.end());
-ui32 value; iterator->second->get(&value);
+f32 value; iterator->second->get(&value);
 return value;
 }
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationOcean::getMaterialsConfigurations(void) const
@@ -40,9 +40,9 @@ pugi::xpath_node node;
 node = document.select_single_node("/ocean");
 ui32 size = node.node().attribute("size").as_uint();
 IConfiguration::setAttribute("/ocean/size", std::make_shared<CConfigurationAttribute>(size));
-ui32 altitude = node.node().attribute("altitude").as_uint();
+f32 altitude = node.node().attribute("altitude").as_float();
 IConfiguration::setAttribute("/ocean/altitude", std::make_shared<CConfigurationAttribute>(altitude));
-ui32 wave_generation_interval = node.node().attribute("wave_generation_interval").as_uint();
+f32 wave_generation_interval = node.node().attribute("wave_generation_interval").as_float();
 IConfiguration::setAttribute("/ocean/wave_generation_interval", std::make_shared<CConfigurationAttribute>(wave_generation_interval));
 pugi::xpath_node_set material_nodes = document.select_nodes("/ocean/materials/material");
 for (pugi::xpath_node_set::const_iterator iterator = material_nodes.begin(); iterator != material_nodes.end(); ++iterator)

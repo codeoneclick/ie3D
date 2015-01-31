@@ -9,8 +9,8 @@ public:
 CConfigurationOcean(void) = default;
 ~CConfigurationOcean(void) = default;
 ui32 getSize(void) const;
-ui32 getAltitude(void) const;
-ui32 getWaveGenerationInterval(void) const;
+f32 getAltitude(void) const;
+f32 getWaveGenerationInterval(void) const;
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 void serialize(const std::string& filename);
 };

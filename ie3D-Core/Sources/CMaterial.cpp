@@ -88,8 +88,6 @@ CSharedMaterial CMaterial::constructCustomMaterial(CSharedConfigurationMaterialR
     {
         CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
         assert(textureConfiguration != nullptr);
-        std::string filename = textureConfiguration->getFilename();
-        std::cout<<filename<<std::endl;
         CSharedTexture texture = textureConfiguration->getFilename().length() != 0 ?
         resourceAccessor->getTexture(textureConfiguration->getFilename()) :
         renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderOperationName());

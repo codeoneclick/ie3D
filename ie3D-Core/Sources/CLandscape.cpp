@@ -106,6 +106,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             
                             m_chunks[index]->setMesh(mesh);
                             m_chunks[index]->onConfigurationLoaded(m_configuration, true);
+                            m_chunks[index]->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
                             
                             m_chunks[index]->setRenderTechniqueImporter(m_renderTechniqueImporter);
                             m_chunks[index]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
@@ -170,6 +171,9 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     
     m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_renderTechniqueAccessor, landscapeConfiguration);
     IEditableLandscape::setHeightmapProcessor(m_heightmapProcessor);
+    
+    m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapProcessor->createSplattingTexture());
+    m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapProcessor->createHeightmapTexture());
     
     m_chunks.resize(m_heightmapProcessor->getNumChunksX() * m_heightmapProcessor->getNumChunksZ());
     

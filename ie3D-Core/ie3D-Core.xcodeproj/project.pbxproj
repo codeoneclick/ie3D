@@ -1968,7 +1968,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "python \"${SRCROOT}/Scripts/IGameObject_Configurations.py\"";
+			shellScript = "#python \"${SRCROOT}/Scripts/IGameObject_Configurations.py\"";
 		};
 		21ACE39B1A713EC70017A771 /* IGameObject_Configurations */ = {
 			isa = PBXShellScriptBuildPhase;
