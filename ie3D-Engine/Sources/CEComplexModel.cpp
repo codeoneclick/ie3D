@@ -40,7 +40,7 @@ void CEComplexModel::onResourceLoaded(ISharedResourceRef resource, bool success)
 
 void CEComplexModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
-    /*std::shared_ptr<CEConfigurationComplexModel> complexModelConfiguration = std::static_pointer_cast<CEConfigurationComplexModel>(configuration);
+    std::shared_ptr<CEConfigurationComplexModel> complexModelConfiguration = std::static_pointer_cast<CEConfigurationComplexModel>(configuration);
     assert(m_resourceAccessor != nullptr);
     
     for(ui32 i = 0; i < complexModelConfiguration->getModelsConfigurationParts().size(); ++i)
@@ -71,7 +71,7 @@ void CEComplexModel::onConfigurationLoaded(ISharedConfigurationRef configuration
 	IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);
     
-    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;*/
+    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
 i32 CEComplexModel::zOrder(void)

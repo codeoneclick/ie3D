@@ -279,9 +279,9 @@ def write_classes_declarations(configurations, declaration_file):
 
 def main(argv):
 
-	accessor_class_name = "CConfigurationAccessor"
-	base_accessor_class_name = ""
-	configuration_declarations = "HConfigurationDeclarations"
+	accessor_class_name = "CEConfigurationAccessor"
+	base_accessor_class_name = "CConfigurationAccessor"
+	configuration_declarations = "HEConfigurationDeclarations"
 	for argument in sys.argv: 0
     	if "base_accessor=" in argument:
 

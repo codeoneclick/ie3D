@@ -1,0 +1,6 @@
+#ifndef HEConfigurationDeclarations_h
+#define HEConfigurationDeclarations_h
+class CConfigurationCustomModel;
+typedef std::shared_ptr<CConfigurationCustomModel> CSharedConfigurationCustomModel;
+typedef const CSharedConfigurationCustomModel& CSharedConfigurationCustomModelRef;
+#endif

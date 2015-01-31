@@ -1,0 +1,10 @@
+<custom_model
+    class_name="CConfigurationCustomModel"
+    base_class_name="IConfigurationGameObject"
+    is_external="1">
+    <attributes>
+    </attributes>
+    <relationships>
+    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/custom_model/materials" relationship_name="material"/>
+    </relationships>
+</custom_model>

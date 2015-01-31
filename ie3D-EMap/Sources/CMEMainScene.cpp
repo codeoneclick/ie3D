@@ -70,11 +70,8 @@ void CMEMainScene::load(void)
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
     
-    m_skyBox = m_root->createSkyBox("gameobject.skybox.xml");
-    m_root->setSkyBox(m_skyBox);
-    
-    m_atmosphericScattering = m_root->createAtmosphericScattering("gameobject.atmospheric.scattering.xml");
-    m_root->setAtmosphericScattering(m_atmosphericScattering);
+    m_skybox = m_root->createSkybox("gameobject.skybox.xml");
+    m_root->setSkybox(m_skybox);
     
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
@@ -124,7 +121,7 @@ void CMEMainScene::update(f32 deltatime)
     m_mapDragController->update(deltatime);
     static f32 angle = 0.0;
     angle += 0.1;
-    m_skyBox->setRotation(glm::vec3(0.0, angle, 0.0));
+    m_skybox->setRotation(glm::vec3(0.0, angle, 0.0));
 }
 
 std::vector<ISharedGameObject> CMEMainScene::colliders(void)

@@ -1,0 +1,11 @@
+<landscape_brush
+    class_name="CConfigurationLandscapeBrush"
+    base_class_name="IConfiguration"
+    is_external="1">
+    <attributes>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getSize" path="/landscape_brush" attribute_name="size"/>
+    </attributes>
+    <relationships>
+    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/landscape_brush/materials" relationship_name="material"/>
+    </relationships>
+</landscape_brush>

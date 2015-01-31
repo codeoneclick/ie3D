@@ -1906,7 +1906,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21853434181EFC6200315CBB /* Build configuration list for PBXNativeTarget "ie3DCore-osx" */;
 			buildPhases = (
-				21ACE39B1A713EC70017A771 /* IGameObject_Configurations */,
+				21ACE39B1A713EC70017A771 /* CONFIGURATION_GENERATOR */,
 				21853411181EFC6200315CBB /* Sources */,
 				21853412181EFC6200315CBB /* Frameworks */,
 				21853413181EFC6200315CBB /* Headers */,
@@ -1924,7 +1924,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21D07147181DA5630019D264 /* Build configuration list for PBXNativeTarget "ie3DCore-ios" */;
 			buildPhases = (
-				21ACE39A1A713E8B0017A771 /* IGameObject_Configurations */,
+				21ACE39A1A713E8B0017A771 /* CONFIGURATION_GENERATOR */,
 				21D07126181DA5620019D264 /* Sources */,
 				21D07127181DA5620019D264 /* Frameworks */,
 				21D07128181DA5620019D264 /* CopyFiles */,
@@ -1966,33 +1966,33 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		21ACE39A1A713E8B0017A771 /* IGameObject_Configurations */ = {
+		21ACE39A1A713E8B0017A771 /* CONFIGURATION_GENERATOR */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = IGameObject_Configurations;
+			name = CONFIGURATION_GENERATOR;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#python \"${SRCROOT}/Scripts/IGameObject_Configurations.py\"";
+			shellScript = "#python \"${SRCROOT}/Scripts/CONFIGURATION_GENERATOR.py\" current_accessor=CConfigurationAccessor";
 		};
-		21ACE39B1A713EC70017A771 /* IGameObject_Configurations */ = {
+		21ACE39B1A713EC70017A771 /* CONFIGURATION_GENERATOR */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = IGameObject_Configurations;
+			name = CONFIGURATION_GENERATOR;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#python \"${SRCROOT}/Scripts/IGameObject_Configurations.py\"";
+			shellScript = "#python \"${SRCROOT}/Scripts/CONFIGURATION_GENERATOR.py\" current_accessor=CConfigurationAccessor";
 		};
 /* End PBXShellScriptBuildPhase section */
 

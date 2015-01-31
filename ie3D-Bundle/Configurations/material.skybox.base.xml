@@ -16,8 +16,8 @@
     is_shadowing="0"
     is_debugging="0">
     <shader
-    vs_filename="shaderSkyBox.vert"
-    fs_filename="shaderSkyBox.frag"/>
+    vs_filename="shaderSkybox.vert"
+    fs_filename="shaderSkybox.frag"/>
     <textures>
         <texture
             is_cubemap="1"

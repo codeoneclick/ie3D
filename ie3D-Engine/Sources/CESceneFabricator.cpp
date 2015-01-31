@@ -27,24 +27,26 @@ CESceneFabricator::~CESceneFabricator(void)
 
 CESharedComplexModel CESceneFabricator::createComplexModel(const std::string& filename)
 {
-    assert(m_resourceAccessor != nullptr);
+    /*assert(m_resourceAccessor != nullptr);
 	assert(m_renderTechniqueAccessor != nullptr);
     CESharedComplexModel complexModel = std::make_shared<CEComplexModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     std::shared_ptr<CEConfigurationAccessor> configurationAccessor = std::static_pointer_cast<CEConfigurationAccessor>(m_configurationAccessor);
     configurationAccessor->loadComplexModelConfiguration(filename, complexModel);
     m_gameObjectsContainer.insert(complexModel);
-    return complexModel;
+    return complexModel;*/
+    return nullptr;
 }
 
 CESharedCustomModel CESceneFabricator::createCustomModel(const std::string& filename)
 {
-    assert(m_resourceAccessor != nullptr);
+    /*assert(m_resourceAccessor != nullptr);
     assert(m_renderTechniqueAccessor != nullptr);
     CESharedCustomModel customModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     std::shared_ptr<CEConfigurationAccessor> configurationAccessor = std::static_pointer_cast<CEConfigurationAccessor>(m_configurationAccessor);
     configurationAccessor->loadComplexModelConfiguration(filename, customModel);
     m_gameObjectsContainer.insert(customModel);
-    return customModel;
+    return customModel;*/
+    return nullptr;
 }

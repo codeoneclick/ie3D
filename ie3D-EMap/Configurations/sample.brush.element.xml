@@ -1,0 +1,17 @@
+<brush_element
+    class_name="CConfigurationBrushElement"
+    base_class_name="IConfiguration"
+    is_external="0">
+    <attributes>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getName" path="/brush_element" attribute_name="name"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getColorR" path="/brush_element" attribute_name="color_r"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getColorG" path="/brush_element" attribute_name="color_g"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getColorB" path="/brush_element" attribute_name="color_b"/>
+        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getColorA" path="/brush_element" attribute_name="color_a"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getWidth" path="/brush_element" attribute_name="width"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getHeight" path="/brush_element" attribute_name="height"/>
+    </attributes>
+    <relationships>
+    	<relationship type="CConfigurationCustomModel" getter="getCustomModelConfiguration" is_to_many="0" is_external="1" path="/brush_element" relationship_name="custom_model"/>
+    </relationships>
+</brush_element>
