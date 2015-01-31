@@ -1978,7 +1978,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#python \"${SRCROOT}/Scripts/CONFIGURATION_GENERATOR.py\" current_accessor=CConfigurationAccessor";
+			shellScript = "python \"${SRCROOT}/../ie3D-Scripts/CONFIGURATION_GENERATOR.py\" current_accessor_CConfigurationAccessor declaration_HConfigurationDeclarations";
 		};
 		21ACE39B1A713EC70017A771 /* CONFIGURATION_GENERATOR */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1992,7 +1992,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#python \"${SRCROOT}/Scripts/CONFIGURATION_GENERATOR.py\" current_accessor=CConfigurationAccessor";
+			shellScript = "python \"${SRCROOT}/../ie3D-Scripts/CONFIGURATION_GENERATOR.py\" current_accessor_CConfigurationAccessor declaration_HConfigurationDeclarations";
 		};
 /* End PBXShellScriptBuildPhase section */
 

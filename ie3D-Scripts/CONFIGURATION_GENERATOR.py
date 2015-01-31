@@ -279,19 +279,26 @@ def write_classes_declarations(configurations, declaration_file):
 
 def main(argv):
 
-	accessor_class_name = "CEConfigurationAccessor"
-	base_accessor_class_name = "CConfigurationAccessor"
-	configuration_declarations = "HEConfigurationDeclarations"
-	for argument in sys.argv: 0
-    	if "base_accessor=" in argument:
+	accessor_class_name = ""
+	base_accessor_class_name = ""
+	configuration_declarations = ""
 
-    		base_accessor_class_name = argument[len("base_accessor="):]
-    		print base_accessor_class_name
+	for argument in argv[:]:
 
-    	elif "current_accessor=" in argument:
+		if "base_accessor_" in argument:
 
-    		accessor_class_name = argument[len("current_accessor="):]
-    		print accessor_class_name
+			base_accessor_class_name = argument[len("base_accessor_"):]
+			print base_accessor_class_name
+
+		elif "current_accessor_" in argument:
+
+			accessor_class_name = argument[len("current_accessor_"):]
+			print accessor_class_name
+
+		elif "declaration_" in argument:
+
+			configuration_declarations = argument[len("declaration_"):]
+			print configuration_declarations
 
 	configurations = get_configuration_samples(kConfiguratiomPath, ".xml")
 

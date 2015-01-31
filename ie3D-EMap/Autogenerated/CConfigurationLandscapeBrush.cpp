@@ -9,7 +9,7 @@ return value;
 }
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationLandscapeBrush::getMaterialsConfigurations(void) const
 {
-const auto& iterator = m_configurations.find("/model/materials/material");
+const auto& iterator = m_configurations.find("/landscape_brush/materials/material");
 if(iterator == m_configurations.end())
 {
 return std::vector<std::shared_ptr<IConfiguration>>();
@@ -17,29 +17,20 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
-void CConfigurationLandscapeBrush::serialize(pugi::xml_document& document, const std::string& path)
+void CConfigurationLandscapeBrush::serialize(const std::string& filename)
 {
+pugi::xml_document document;
+pugi::xml_parse_result result = IConfiguration::openXMLDocument(document, filename);
+assert(result.status == pugi::status_ok);
 pugi::xpath_node node;
-node = document.select_single_node((path + "/landscape_brush").c_str());
+node = document.select_single_node("/landscape_brush");
 f32 size = node.node().attribute("size").as_float();
 IConfiguration::setAttribute("/landscape_brush/size", std::make_shared<CConfigurationAttribute>(size));
-pugi::xpath_node_set material_nodes = document.select_nodes("/model/materials/material");
+pugi::xpath_node_set material_nodes = document.select_nodes("/landscape_brush/materials/material");
 for (pugi::xpath_node_set::const_iterator iterator = material_nodes.begin(); iterator != material_nodes.end(); ++iterator)
 {
 std::shared_ptr<CConfigurationMaterial> material = std::make_shared<CConfigurationMaterial>();
 material->serialize((*iterator).node().attribute("filename").as_string());
-IConfiguration::setConfiguration("/model/materials/material", material);
-}
-}
-void CConfigurationLandscapeBrush::serialize(pugi::xml_document& document, pugi::xpath_node& node)
-{
-f32 size = node.node().attribute("size").as_float();
-IConfiguration::setAttribute("/landscape_brush/size", std::make_shared<CConfigurationAttribute>(size));
-pugi::xpath_node_set material_nodes = document.select_nodes("/model/materials/material");
-for (pugi::xpath_node_set::const_iterator iterator = material_nodes.begin(); iterator != material_nodes.end(); ++iterator)
-{
-std::shared_ptr<CConfigurationMaterial> material = std::make_shared<CConfigurationMaterial>();
-material->serialize((*iterator).node().attribute("filename").as_string());
-IConfiguration::setConfiguration("/model/materials/material", material);
+IConfiguration::setConfiguration("/landscape_brush/materials/material", material);
 }
 }

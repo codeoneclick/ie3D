@@ -10,7 +10,6 @@ CConfigurationLandscapeBrush(void) = default;
 ~CConfigurationLandscapeBrush(void) = default;
 f32 getSize(void) const;
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
-void serialize(pugi::xml_document& document, const std::string& path);
-void serialize(pugi::xml_document& document, pugi::xpath_node& node);
+void serialize(const std::string& filename);
 };
 #endif
