@@ -2,7 +2,6 @@
 #ifndef CMEConfigurationBrushElement_h
 #define CMEConfigurationBrushElement_h
 #include "IConfiguration.h"
-#include "CConfigurationCustomModel.h"
 class CMEConfigurationBrushElement : public IConfiguration
 {
 public:
@@ -15,7 +14,6 @@ ui8 getColorB(void) const;
 ui8 getColorA(void) const;
 f32 getWidth(void) const;
 f32 getHeight(void) const;
-std::shared_ptr<CConfigurationCustomModel> getCustomModelConfiguration(void) const;
 void serialize(pugi::xml_document& document, const std::string& path);
 void serialize(pugi::xml_document& document, pugi::xpath_node& node);
 };

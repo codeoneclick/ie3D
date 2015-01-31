@@ -1,8 +1,9 @@
-<transition guid="transition.map.editor.preview.model">
-    <output_render_operation filename="render.operation.preview.model.output.xml"/>
-    <world_space_operations>
-        <operation filename="render.operation.world.preview.model.xml"/>
-    </world_space_operations>
-    <screen_space_operations>
-    </screen_space_operations>
+<transition
+    guid="transition.map.editor.preview.model">
+    <output_technique filename="render.operation.preview.model.output.xml"/>
+    <ws_techniques>
+        <ws_technique filename="render.operation.world.preview.model.xml"/>
+    </ws_techniques>
+    <ss_techniques>
+    </ss_techniques>
 </transition>

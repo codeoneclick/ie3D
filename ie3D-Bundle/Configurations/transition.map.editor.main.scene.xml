@@ -1,13 +1,14 @@
-<transition guid="transition.map.editor.main.scene">
-    <output_render_operation filename="render.operation.map.editor.output.xml"/>
-    <world_space_operations>
-        <operation filename="render.operation.world.base.xml"/>
-        <operation filename="render.operation.world.reflection.xml"/>
-        <operation filename="render.operation.world.refraction.xml"/>
-        <operation filename="render.operation.world.shadowmap.xml"/>
-        <operation filename="render.operation.world.overlapping.xml"/>
-    </world_space_operations>
-    <screen_space_operations>
-        <operation filename="render.operation.screen.mix.overlapping.xml"/>
-    </screen_space_operations>
+<transition
+    guid="transition.map.editor.main.scene">
+    <output_technique filename="render.operation.map.editor.output.xml"/>
+    <ws_techniques>
+        <ws_technique filename="render.operation.world.base.xml"/>
+        <ws_technique filename="render.operation.world.reflection.xml"/>
+        <ws_technique filename="render.operation.world.refraction.xml"/>
+        <ws_technique filename="render.operation.world.shadowmap.xml"/>
+        <ws_technique filename="render.operation.world.overlapping.xml"/>
+    </ws_techniques>
+    <ss_techniques>
+        <ss_technique filename="render.operation.screen.mix.overlapping.xml"/>
+    </ss_techniques>
 </transition>

@@ -59,32 +59,32 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
         if(name == "arrowX")
         {
              m_arrows.at(E_MODEL_BRUSH_ARROW_X) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_X,
-                                                                                  configurationBrushElement);
+                                                                                  configuration);
         }
         else if(name == "arrowY")
         {
             m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Y,
-                                                                                 configurationBrushElement);
+                                                                                 configuration);
         }
         else if(name == "arrowZ")
         {
             m_arrows.at(E_MODEL_BRUSH_ARROW_Z) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Z,
-                                                                                 configurationBrushElement);
+                                                                                 configuration);
         }
         else if(name == "planeX")
         {
             m_planes.at(E_MODEL_BRUSH_PLANE_X) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_X,
-                                                                                 configurationBrushElement);
+                                                                                 configuration);
         }
         else if(name == "planeY")
         {
             m_planes.at(E_MODEL_BRUSH_PLANE_Y) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Y,
-                                                                                 configurationBrushElement);
+                                                                                 configuration);
         }
         else if(name == "planeZ")
         {
             m_planes.at(E_MODEL_BRUSH_PLANE_Z) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Z,
-                                                                                 configurationBrushElement);
+                                                                                 configuration);
         }
         else
         {

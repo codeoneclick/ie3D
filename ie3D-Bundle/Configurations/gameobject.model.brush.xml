@@ -7,4 +7,7 @@
         <element name="planeY" filename="gameobject.brush.element.xml" color_r="255" color_g="255" color_b="0" color_a="192" height="8" width="8"/>
         <element name="planeZ" filename="gameobject.brush.element.xml" color_r="255" color_g="255" color_b="0" color_a="192" height="8" width="8"/>
     </elements>
+    <materials>
+        <material filename="material.brush.element.base.xml"/>
+    </materials>
 </model_brush>

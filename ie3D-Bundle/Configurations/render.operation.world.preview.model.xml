@@ -1,9 +1,10 @@
-<operation
-    guid="render.operation.world.base"
-    index="0"
-    width="256"
-    height="256"
-    clear_color_r="0.25"
-    clear_color_g="0.25"
-    clear_color_b="0.25"
-    clear_color_a="1.0"/>
+<ws_technique
+guid="render.operation.world.base"
+are_draw_bounding_boxes="0"
+index="0"
+screen_width="256"
+screen_height="256"
+clear_color_r="0.25"
+clear_color_g="0.25"
+clear_color_b="0.25"
+clear_color_a="1.0"/>

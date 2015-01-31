@@ -3,12 +3,14 @@
 #define CMEConfigurationModelBrush_h
 #include "IConfiguration.h"
 #include "CMEConfigurationBrushElement.h"
-class CMEConfigurationModelBrush : public IConfiguration
+#include "CConfigurationMaterial.h"
+class CMEConfigurationModelBrush : public IConfigurationGameObject
 {
 public:
 CMEConfigurationModelBrush(void) = default;
 ~CMEConfigurationModelBrush(void) = default;
 std::vector<std::shared_ptr<IConfiguration>> getElementsConfigurations(void) const;
+std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 void serialize(const std::string& filename);
 };
 #endif

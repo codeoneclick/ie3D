@@ -3,7 +3,7 @@
 #define CMEConfigurationLandscapeBrush_h
 #include "IConfiguration.h"
 #include "CConfigurationMaterial.h"
-class CMEConfigurationLandscapeBrush : public IConfiguration
+class CMEConfigurationLandscapeBrush : public IConfigurationGameObject
 {
 public:
 CMEConfigurationLandscapeBrush(void) = default;

@@ -49,17 +49,6 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
-std::shared_ptr<CConfigurationCustomModel> CMEConfigurationBrushElement::getCustomModelConfiguration(void) const
-{
-const auto& iterator = m_configurations.find("/brush_element/custom_model");
-if(iterator == m_configurations.end())
-{
-return nullptr;
-}
-assert(iterator != m_configurations.end());
-assert(iterator->second.size() != 0);
-return std::static_pointer_cast<CConfigurationCustomModel>(iterator->second.at(0));
-}
 void CMEConfigurationBrushElement::serialize(pugi::xml_document& document, const std::string& path)
 {
 pugi::xpath_node node;
@@ -78,10 +67,6 @@ f32 width = node.node().attribute("width").as_float();
 IConfiguration::setAttribute("/brush_element/width", std::make_shared<CConfigurationAttribute>(width));
 f32 height = node.node().attribute("height").as_float();
 IConfiguration::setAttribute("/brush_element/height", std::make_shared<CConfigurationAttribute>(height));
-std::shared_ptr<CConfigurationCustomModel> custom_model = std::make_shared<CConfigurationCustomModel>();
-pugi::xpath_node custom_model_node = document.select_single_node("/brush_element/custom_model");
-custom_model->serialize(custom_model_node.node().attribute("filename").as_string());
-IConfiguration::setConfiguration("/brush_element/custom_model", custom_model);
 }
 void CMEConfigurationBrushElement::serialize(pugi::xml_document& document, pugi::xpath_node& node)
 {
@@ -99,8 +84,4 @@ f32 width = node.node().attribute("width").as_float();
 IConfiguration::setAttribute("/brush_element/width", std::make_shared<CConfigurationAttribute>(width));
 f32 height = node.node().attribute("height").as_float();
 IConfiguration::setAttribute("/brush_element/height", std::make_shared<CConfigurationAttribute>(height));
-std::shared_ptr<CConfigurationCustomModel> custom_model = std::make_shared<CConfigurationCustomModel>();
-pugi::xpath_node custom_model_node = document.select_single_node("/brush_element/custom_model");
-custom_model->serialize(custom_model_node.node().attribute("filename").as_string());
-IConfiguration::setConfiguration("/brush_element/custom_model", custom_model);
 }

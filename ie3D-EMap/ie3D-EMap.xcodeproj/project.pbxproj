@@ -776,6 +776,7 @@
 			children = (
 				2171175719FE79D600D92E14 /* gameobject.model.brush.xml */,
 				21B76CAC1A01231F00DEC5EE /* gameobject.brush.element.xml */,
+				217AF17C1945EB010045CF9D /* gameobject.landscape.brush.xml */,
 				21A38D4F19EBCDCE008CAFE7 /* gameobject.atmospheric.scattering.xml */,
 				21D9943F19810C43003D4CD1 /* gameobject.tank.heavy.xml */,
 				21D9943B19810C43003D4CD1 /* gameobject.tank.heavy.body.xml */,
@@ -793,12 +794,10 @@
 				21C409AF197C11060063D62D /* gameobject.tank.light.right.track.xml */,
 				21C409B0197C11060063D62D /* gameobject.tank.light.tower.xml */,
 				21A9D85B19615F9700A1B62C /* gameobject.model.xml */,
-				217AF17C1945EB010045CF9D /* gameobject.landscape.brush.xml */,
 				212092C21919786500FFC8D4 /* gameobject.skybox.xml */,
 				21BC347B19080A39007B99DA /* gameobject.landscape.xml */,
 				21BC347C19080A39007B99DA /* gameobject.ocean.xml */,
 				21BC347D19080A39007B99DA /* gameobject.particle.emitter.xml */,
-				216346981A06372A009950BC /* material.render.operation.screen.mix.overlapping.xml */,
 				21B76CAD1A01231F00DEC5EE /* material.brush.element.base.xml */,
 				21A38D5019EBCDCE008CAFE7 /* material.atmospheric.scattering.base.xml */,
 				21C409961979B8370063D62D /* material.texture2D.xml */,
@@ -836,16 +835,15 @@
 				21A9D85E19615F9700A1B62C /* material.model.refraction.xml */,
 				21FEECC11A07992F001E9ACB /* material.model.shadowmap.xml */,
 				21A9D86D1961AC9900A1B62C /* material.model.normal.xml */,
-				21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */,
 				21BC349019080A39007B99DA /* render.operation.world.reflection.xml */,
 				21BC349119080A39007B99DA /* render.operation.world.refraction.xml */,
 				217EF8E119F7F71A00F339A0 /* render.operation.world.shadowmap.xml */,
-				216346991A06372A009950BC /* render.operation.world.overlapping.xml */,
 				21BC348F19080A39007B99DA /* render.operation.world.base.xml */,
-				216346971A06372A009950BC /* render.operation.screen.mix.overlapping.xml */,
 				21BC348D19080A39007B99DA /* render.operation.output.xml */,
-				21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */,
 				21BC349219080A39007B99DA /* transition.main.xml */,
+				216346991A06372A009950BC /* render.operation.world.overlapping.xml */,
+				216346971A06372A009950BC /* render.operation.screen.mix.overlapping.xml */,
+				216346981A06372A009950BC /* material.render.operation.screen.mix.overlapping.xml */,
 				216FCA7D1A0B9D0C00AC9723 /* model.preview.transition */,
 				216FCA7C1A0B9CE200AC9723 /* main.scene.transition */,
 			);
@@ -873,6 +871,8 @@
 		216FCA7C1A0B9CE200AC9723 /* main.scene.transition */ = {
 			isa = PBXGroup;
 			children = (
+				21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */,
+				21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */,
 				21FEECB11A078080001E9ACB /* transition.map.editor.main.scene.xml */,
 			);
 			name = main.scene.transition;

@@ -1,2 +1,4 @@
-<operation guid="render.operation.map.editor.output" filename="material.render.operation.map.editor.output.xml">
-</operation>
+<output_technique
+    guid="render.operation.map.editor.output">
+    <material filename="material.render.operation.map.editor.output.xml"/>
+</output_technique>

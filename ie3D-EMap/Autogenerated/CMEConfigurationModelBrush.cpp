@@ -10,6 +10,16 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
+std::vector<std::shared_ptr<IConfiguration>> CMEConfigurationModelBrush::getMaterialsConfigurations(void) const
+{
+const auto& iterator = m_configurations.find("/model_brush/materials/material");
+if(iterator == m_configurations.end())
+{
+return std::vector<std::shared_ptr<IConfiguration>>();
+}
+assert(iterator != m_configurations.end());
+return iterator->second;
+}
 void CMEConfigurationModelBrush::serialize(const std::string& filename)
 {
 pugi::xml_document document;
@@ -24,5 +34,12 @@ std::shared_ptr<CMEConfigurationBrushElement> element = std::make_shared<CMEConf
 pugi::xpath_node node = (*iterator);
 element->serialize(document, node);
 IConfiguration::setConfiguration("/model_brush/elements/element", element);
+}
+pugi::xpath_node_set material_nodes = document.select_nodes("/model_brush/materials/material");
+for (pugi::xpath_node_set::const_iterator iterator = material_nodes.begin(); iterator != material_nodes.end(); ++iterator)
+{
+std::shared_ptr<CConfigurationMaterial> material = std::make_shared<CConfigurationMaterial>();
+material->serialize((*iterator).node().attribute("filename").as_string());
+IConfiguration::setConfiguration("/model_brush/materials/material", material);
 }
 }

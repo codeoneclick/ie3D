@@ -12,6 +12,5 @@
         <attribute type="f32" is_convert_to_ogl_enum="0" getter="getHeight" path="/brush_element" attribute_name="height"/>
     </attributes>
     <relationships>
-    	<relationship type="CConfigurationCustomModel" getter="getCustomModelConfiguration" is_to_many="0" is_external="1" path="/brush_element" relationship_name="custom_model"/>
     </relationships>
 </brush_element>
