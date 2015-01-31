@@ -22,7 +22,7 @@
         <texture
         filename=""
         render_operation_name=""
-        sampler_id="0"
+        sampler_index="0"
         wrap_mode="GL_REPEAT"/>
     </textures>
 </material>
