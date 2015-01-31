@@ -9,6 +9,7 @@
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CTexture.h"
+#include "CCubemapTexture.h"
 #include "IRenderTechniqueImporter.h"
 #include "IRenderTechniqueAccessor.h"
 #include "CConfigurationAccessor.h"
@@ -88,9 +89,30 @@ CSharedMaterial CMaterial::constructCustomMaterial(CSharedConfigurationMaterialR
     {
         CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
         assert(textureConfiguration != nullptr);
-        CSharedTexture texture = textureConfiguration->getFilename().length() != 0 ?
-        resourceAccessor->getTexture(textureConfiguration->getFilename()) :
-        renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderOperationName());
+        CSharedTexture texture;
+        if(textureConfiguration->isCubemap())
+        {
+            CSharedTexture xpositiveTexture = resourceAccessor->getTexture(textureConfiguration->getFilenamePositiveX());
+            CSharedTexture xnegativeTexture = resourceAccessor->getTexture(textureConfiguration->getFilenameNegativeX());
+            CSharedTexture ypositiveTexture = resourceAccessor->getTexture(textureConfiguration->getFilenamePositiveY());
+            CSharedTexture ynegativeTexture = resourceAccessor->getTexture(textureConfiguration->getFilenameNegativeY());
+            CSharedTexture zpositiveTexture = resourceAccessor->getTexture(textureConfiguration->getFilenamePositiveZ());
+            CSharedTexture znegativeTexture = resourceAccessor->getTexture(textureConfiguration->getFilenameNegativeZ());
+            
+            texture = CCubemapTexture::constructCustomCubemapTexture("skybox.cubemap.texture",
+                                                                     xpositiveTexture,
+                                                                     xnegativeTexture,
+                                                                     ypositiveTexture,
+                                                                     ynegativeTexture,
+                                                                     zpositiveTexture,
+                                                                     znegativeTexture);
+        }
+        else
+        {
+            texture = textureConfiguration->getFilename().length() != 0 ?
+            resourceAccessor->getTexture(textureConfiguration->getFilename()) :
+            renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderOperationName());
+        }
         assert(texture != nullptr);
         texture->setWrapMode(textureConfiguration->getWrapMode());
         texture->setMagFilter(textureConfiguration->getMagFilter());

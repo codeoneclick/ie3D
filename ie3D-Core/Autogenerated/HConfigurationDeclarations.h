@@ -24,6 +24,9 @@ typedef const CSharedConfigurationParticleEmitter& CSharedConfigurationParticleE
 class CConfigurationShader;
 typedef std::shared_ptr<CConfigurationShader> CSharedConfigurationShader;
 typedef const CSharedConfigurationShader& CSharedConfigurationShaderRef;
+class CConfigurationSkybox;
+typedef std::shared_ptr<CConfigurationSkybox> CSharedConfigurationSkybox;
+typedef const CSharedConfigurationSkybox& CSharedConfigurationSkyboxRef;
 class CConfigurationSSTechnique;
 typedef std::shared_ptr<CConfigurationSSTechnique> CSharedConfigurationSSTechnique;
 typedef const CSharedConfigurationSSTechnique& CSharedConfigurationSSTechniqueRef;

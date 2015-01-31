@@ -157,7 +157,7 @@ void CSceneGraph::removeOcean(CSharedOceanRef ocean)
     m_ocean = nullptr;
 }
 
-void CSceneGraph::setSkyBox(CSharedSkyBoxRef skyBox)
+void CSceneGraph::setSkybox(CSharedSkyBoxRef skyBox)
 {
     if(m_skyBox != nullptr)
     {
@@ -167,7 +167,7 @@ void CSceneGraph::setSkyBox(CSharedSkyBoxRef skyBox)
     m_skyBox = skyBox;
 }
 
-void CSceneGraph::removeSkyBox(CSharedSkyBoxRef skyBox)
+void CSceneGraph::removeSkybox(CSharedSkyBoxRef skyBox)
 {
     CSceneGraph::removeGameObject(skyBox);
     m_skyBox = nullptr;

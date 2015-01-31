@@ -183,7 +183,7 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 		source_cpp_file.write('void ' + class_name + '::serialize(pugi::xml_document& document, const std::string& path)\n')
 		source_cpp_file.write('{\n')
 		source_cpp_file.write('pugi::xpath_node node;\n')
-		source_cpp_file.write('node = document.select_single_node((path + "' + attribute.get("path") + '").c_str());\n')
+		source_cpp_file.write('node = document.select_single_node((path + "/' + root.tag + '").c_str());\n')
 
 	else:
 
@@ -194,7 +194,7 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 		source_cpp_file.write('pugi::xml_parse_result result = IConfiguration::openXMLDocument(document, filename);\n')
 		source_cpp_file.write('assert(result.status == pugi::status_ok);\n')
 		source_cpp_file.write('pugi::xpath_node node;\n')
-		source_cpp_file.write('node = document.select_single_node("' + attribute.get("path") + '");\n')
+		source_cpp_file.write('node = document.select_single_node("/' + root.tag + '");\n')
 
 	write_attributes_serializer(source_cpp_file, root.iter('attribute'))
 	write_relationships_serializer(source_cpp_file, root.iter('relationship'))

@@ -101,15 +101,15 @@ CSharedParticleEmitter CSceneFabricator::createParticleEmitter(const std::string
     return particleEmitter;
 }
 
-CSharedSkyBox CSceneFabricator::createSkyBox(const std::string& filename)
+CSharedSkyBox CSceneFabricator::createSkybox(const std::string& filename)
 {
-    /*assert(m_resourceAccessor != nullptr);
+    assert(m_resourceAccessor != nullptr);
 	assert(m_renderTechniqueAccessor != nullptr);
-    CSharedSkyBox skyBox = std::make_shared<CSkyBox>(m_resourceAccessor, m_renderTechniqueAccessor);
+    CSharedSkyBox skybox = std::make_shared<CSkyBox>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
-    m_configurationAccessor->loadSkyBoxConfiguration(filename, skyBox);
-    m_gameObjectsContainer.insert(skyBox);
-    return skyBox;*/
+    m_configurationAccessor->getConfigurationSkybox(filename, skybox);
+    m_gameObjectsContainer.insert(skybox);
+    return skybox;
     return nullptr;
 }
 

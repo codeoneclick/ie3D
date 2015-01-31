@@ -53,8 +53,8 @@ public:
     void setOcean(CSharedOceanRef ocean);
     void removeOcean(CSharedOceanRef ocean);
     
-    void setSkyBox(CSharedSkyBoxRef skybox);
-    void removeSkyBox(CSharedSkyBoxRef skybox);
+    void setSkybox(CSharedSkyBoxRef skybox);
+    void removeSkybox(CSharedSkyBoxRef skybox);
     
     void setAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering);
     void removeAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering);

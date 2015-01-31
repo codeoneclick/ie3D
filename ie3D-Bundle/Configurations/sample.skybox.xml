@@ -1,0 +1,10 @@
+<skybox
+    class_name="CConfigurationSkybox"
+    base_class_name="IConfigurationGameObject"
+    is_external="1">
+    <attributes>
+    </attributes>
+    <relationships>
+    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/skybox/materials" relationship_name="material"/>
+    </relationships>
+</skybox>

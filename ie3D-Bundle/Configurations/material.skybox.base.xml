@@ -19,5 +19,19 @@
     vs_filename="shaderSkyBox.vert"
     fs_filename="shaderSkyBox.frag"/>
     <textures>
+        <texture
+            is_cubemap="1"
+            filename_x_positive="skybox_xneg.png"
+            filename_x_negative="skybox_xpos.png"
+            filename_y_positive="skybox_yneg.png"
+            filename_y_negative="skybox_ypos.png"
+            filename_z_positive="skybox_zneg.png"
+            filename_z_negative="skybox_zpos.png"
+            filename=""
+            render_operation_name=""
+            sampler_index="0"
+            wrap_mode="GL_MIRRORED_REPEAT"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_MIPMAP"/>
     </textures>
 </material>

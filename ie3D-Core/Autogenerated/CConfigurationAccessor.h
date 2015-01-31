@@ -7,6 +7,7 @@
 #include "CConfigurationOcean.h"
 #include "CConfigurationOutputTechnique.h"
 #include "CConfigurationParticleEmitter.h"
+#include "CConfigurationSkybox.h"
 #include "CConfigurationSSTechnique.h"
 #include "CConfigurationTransition.h"
 #include "CConfigurationWSTechnique.h"
@@ -21,6 +22,7 @@ void getConfigurationModel(const std::string& filename, const std::shared_ptr<IC
 void getConfigurationOcean(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
 void getConfigurationOutputTechnique(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
 void getConfigurationParticleEmitter(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
+void getConfigurationSkybox(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
 void getConfigurationSSTechnique(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
 void getConfigurationTransition(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
 void getConfigurationWSTechnique(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;

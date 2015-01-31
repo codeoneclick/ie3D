@@ -39,7 +39,7 @@ public:
     
     CSharedModel createModel(const std::string& filename);
     CSharedOcean createOcean(const std::string& filename);
-    CSharedSkyBox createSkyBox(const std::string& filename);
+    CSharedSkyBox createSkybox(const std::string& filename);
     CSharedAtmosphericScattering createAtmosphericScattering(const std::string& filename);
     CSharedLandscape createLandscape(const std::string& filename);
     CSharedParticleEmitter createParticleEmitter(const std::string& filename);

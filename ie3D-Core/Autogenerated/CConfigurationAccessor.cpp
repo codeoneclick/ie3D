@@ -48,6 +48,14 @@ assert(configuration != nullptr);
 assert(handler != nullptr);
 handler->onConfigurationLoaded(configuration, true);
 }
+void CConfigurationAccessor::getConfigurationSkybox(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const
+{
+std::shared_ptr<CConfigurationSkybox> configuration = std::make_shared<CConfigurationSkybox>();
+configuration->serialize(filename);
+assert(configuration != nullptr);
+assert(handler != nullptr);
+handler->onConfigurationLoaded(configuration, true);
+}
 void CConfigurationAccessor::getConfigurationSSTechnique(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const
 {
 std::shared_ptr<CConfigurationSSTechnique> configuration = std::make_shared<CConfigurationSSTechnique>();

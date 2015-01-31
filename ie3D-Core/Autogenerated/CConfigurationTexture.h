@@ -7,7 +7,14 @@ class CConfigurationTexture : public IConfiguration
 public:
 CConfigurationTexture(void) = default;
 ~CConfigurationTexture(void) = default;
+bool isCubemap(void) const;
 std::string getFilename(void) const;
+std::string getFilenamePositiveX(void) const;
+std::string getFilenameNegativeX(void) const;
+std::string getFilenamePositiveY(void) const;
+std::string getFilenameNegativeY(void) const;
+std::string getFilenamePositiveZ(void) const;
+std::string getFilenameNegativeZ(void) const;
 std::string getRenderOperationName(void) const;
 ui32 getSamplerIndex(void) const;
 GLenum getWrapMode(void) const;

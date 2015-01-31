@@ -3,7 +3,14 @@
     base_class_name="IConfiguration"
     is_external="0">
     <attributes>
+        <attribute type="bool" is_convert_to_ogl_enum="0" getter="isCubemap" path="/texture" attribute_name="is_cubemap"/>
         <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilename" path="/texture" attribute_name="filename"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilenamePositiveX" path="/texture" attribute_name="filename_x_positive"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilenameNegativeX" path="/texture" attribute_name="filename_x_negative"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilenamePositiveY" path="/texture" attribute_name="filename_y_positive"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilenameNegativeY" path="/texture" attribute_name="filename_y_negative"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilenamePositiveZ" path="/texture" attribute_name="filename_z_positive"/>
+        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getFilenameNegativeZ" path="/texture" attribute_name="filename_z_negative"/>
         <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getRenderOperationName" path="/texture" attribute_name="render_operation_name"/>
         <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSamplerIndex" path="/texture" attribute_name="sampler_index"/>
         <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getWrapMode" path="/texture" attribute_name="wrap_mode"/>

@@ -260,16 +260,16 @@ void IGameTransition::removeOcean(CSharedOceanRef ocean)
     m_sceneGraph->removeOcean(ocean);
 }
 
-void IGameTransition::setSkyBox(CSharedSkyBoxRef skybox)
+void IGameTransition::setSkybox(CSharedSkyBoxRef skybox)
 {
     assert(m_sceneGraph != nullptr);
-    m_sceneGraph->setSkyBox(skybox);
+    m_sceneGraph->setSkybox(skybox);
 }
 
-void IGameTransition::removeSkyBox(CSharedSkyBoxRef skybox)
+void IGameTransition::removeSkybox(CSharedSkyBoxRef skybox)
 {
     assert(m_sceneGraph != nullptr);
-    m_sceneGraph->removeSkyBox(skybox);
+    m_sceneGraph->removeSkybox(skybox);
 }
 
 void IGameTransition::setAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering)
@@ -380,10 +380,10 @@ CSharedOcean IGameTransition::createOcean(const std::string& filename)
     return m_sceneFabricator->createOcean(filename);
 }
 
-CSharedSkyBox IGameTransition::createSkyBox(const std::string& filename)
+CSharedSkyBox IGameTransition::createSkybox(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
-    return m_sceneFabricator->createSkyBox(filename);
+    return m_sceneFabricator->createSkybox(filename);
 }
 
 CSharedAtmosphericScattering IGameTransition::createAtmosphericScattering(const std::string& filename)

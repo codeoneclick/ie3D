@@ -199,6 +199,16 @@
 		21BC5E981A0F83800086CC76 /* model_01.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E921A0F83450086CC76 /* model_01.MDL_mesh */; };
 		21BC5E991A0F83800086CC76 /* model_01.MDL_sk in Resources */ = {isa = PBXBuildFile; fileRef = 21BC5E931A0F83450086CC76 /* model_01.MDL_sk */; };
 		21CB352B1A7CD34500819C09 /* CLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21CB352A1A7CD34500819C09 /* CLaunchScreen.xib */; };
+		21CB353F1A7CF3C800819C09 /* gameobject.skybox.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21CB353C1A7CF3C800819C09 /* gameobject.skybox.xml */; };
+		21CB35401A7CF3C800819C09 /* gameobject.skybox.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21CB353C1A7CF3C800819C09 /* gameobject.skybox.xml */; };
+		21CB35411A7CF3C900819C09 /* material.skybox.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21CB353D1A7CF3C800819C09 /* material.skybox.base.xml */; };
+		21CB35421A7CF3C900819C09 /* material.skybox.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21CB353D1A7CF3C800819C09 /* material.skybox.base.xml */; };
+		21CB35431A7CF3C900819C09 /* material.skybox.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21CB353E1A7CF3C800819C09 /* material.skybox.reflection.xml */; };
+		21CB35441A7CF3C900819C09 /* material.skybox.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21CB353E1A7CF3C800819C09 /* material.skybox.reflection.xml */; };
+		21CB35471A7CF40200819C09 /* shaderSkyBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21CB35451A7CF40200819C09 /* shaderSkyBox.frag */; };
+		21CB35481A7CF40200819C09 /* shaderSkyBox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21CB35451A7CF40200819C09 /* shaderSkyBox.frag */; };
+		21CB35491A7CF40200819C09 /* shaderSkyBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21CB35461A7CF40200819C09 /* shaderSkyBox.vert */; };
+		21CB354A1A7CF40200819C09 /* shaderSkyBox.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21CB35461A7CF40200819C09 /* shaderSkyBox.vert */; };
 		21D070C5181D9D460019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C4181D9D460019D264 /* Foundation.framework */; };
 		21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C6181D9D460019D264 /* CoreGraphics.framework */; };
 		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
@@ -405,6 +415,11 @@
 		21BC5E921A0F83450086CC76 /* model_01.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_01.MDL_mesh; path = "../ie3D-Bundle/Meshes/model_01.MDL_mesh"; sourceTree = SOURCE_ROOT; };
 		21BC5E931A0F83450086CC76 /* model_01.MDL_sk */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_01.MDL_sk; path = "../ie3D-Bundle/Meshes/model_01.MDL_sk"; sourceTree = SOURCE_ROOT; };
 		21CB352A1A7CD34500819C09 /* CLaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CLaunchScreen.xib; path = Sources/CLaunchScreen.xib; sourceTree = SOURCE_ROOT; };
+		21CB353C1A7CF3C800819C09 /* gameobject.skybox.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.skybox.xml; path = "../../ie3D/ie3D-Bundle/Configurations/gameobject.skybox.xml"; sourceTree = "<group>"; };
+		21CB353D1A7CF3C800819C09 /* material.skybox.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.base.xml; path = "../../ie3D/ie3D-Bundle/Configurations/material.skybox.base.xml"; sourceTree = "<group>"; };
+		21CB353E1A7CF3C800819C09 /* material.skybox.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.reflection.xml; path = "../../ie3D/ie3D-Bundle/Configurations/material.skybox.reflection.xml"; sourceTree = "<group>"; };
+		21CB35451A7CF40200819C09 /* shaderSkyBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.frag; path = "../../ie3D/ie3D-Bundle/Shaders/shaderSkyBox.frag"; sourceTree = "<group>"; };
+		21CB35461A7CF40200819C09 /* shaderSkyBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkyBox.vert; path = "../../ie3D/ie3D-Bundle/Shaders/shaderSkyBox.vert"; sourceTree = "<group>"; };
 		21D070C1181D9D460019D264 /* ie3D-Demo-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ie3D-Demo-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -578,6 +593,7 @@
 		21BC34CD19081510007B99DA /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				21CB353C1A7CF3C800819C09 /* gameobject.skybox.xml */,
 				2173345A19642B72002B3F90 /* gameobject.model.xml */,
 				21B08E41192252FF00C5D5CC /* gameobject.landscape.xml */,
 				21B08E42192252FF00C5D5CC /* gameobject.ocean.xml */,
@@ -593,6 +609,8 @@
 				2173345C19642B72002B3F90 /* material.model.reflection.xml */,
 				2173345D19642B72002B3F90 /* material.model.refraction.xml */,
 				2179741519F4F72D00A98630 /* material.model.shadowmap.xml */,
+				21CB353D1A7CF3C800819C09 /* material.skybox.base.xml */,
+				21CB353E1A7CF3C800819C09 /* material.skybox.reflection.xml */,
 				21B08E1D1922527400C5D5CC /* render.operation.output.xml */,
 				21B08E1E1922527400C5D5CC /* render.operation.world.base.xml */,
 				21B08E1F1922527400C5D5CC /* render.operation.world.reflection.xml */,
@@ -642,6 +660,8 @@
 		21BC34E219081510007B99DA /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				21CB35451A7CF40200819C09 /* shaderSkyBox.frag */,
+				21CB35461A7CF40200819C09 /* shaderSkyBox.vert */,
 				217EF90619F9222A00F339A0 /* shaderCommon.frag */,
 				217EF90719F9222A00F339A0 /* shaderCommon.vert */,
 				2173345619642B47002B3F90 /* shaderModel.frag */,
@@ -919,6 +939,7 @@
 				212EECC119CC5D9C00DA02B7 /* transition.main.xml in Resources */,
 				217EF8BA19F7E11300F339A0 /* static_model_tank_medium.png in Resources */,
 				21F083F419F3BEBE002FF9AE /* shaderStaticGameObjectND.frag in Resources */,
+				21CB354A1A7CF40200819C09 /* shaderSkyBox.vert in Resources */,
 				217EF8A819F7E11300F339A0 /* particle_01.png in Resources */,
 				212EECC419CC5D9C00DA02B7 /* render.operation.world.reflection.xml in Resources */,
 				212EECC719CC5D9C00DA02B7 /* tank_heavy_tower.mdl_01 in Resources */,
@@ -956,7 +977,9 @@
 				21BC5E991A0F83800086CC76 /* model_01.MDL_sk in Resources */,
 				2179741219F4F69E00A98630 /* shaderAnimatedGameObjectND.frag in Resources */,
 				217EF90919F9222A00F339A0 /* shaderCommon.frag in Resources */,
+				21CB35421A7CF3C900819C09 /* material.skybox.base.xml in Resources */,
 				212EECF819CC5D9C00DA02B7 /* map_05.png in Resources */,
+				21CB35401A7CF3C800819C09 /* gameobject.skybox.xml in Resources */,
 				217EF8B019F7E11300F339A0 /* skybox_ypos.png in Resources */,
 				212EECFA19CC5D9C00DA02B7 /* shaderModel.frag in Resources */,
 				212EECFB19CC5D9C00DA02B7 /* shaderLandscape.frag in Resources */,
@@ -965,11 +988,13 @@
 				217EF8A619F7E11300F339A0 /* ocean_ripples.png in Resources */,
 				212EECFD19CC5D9C00DA02B7 /* material.landscape.refraction.xml in Resources */,
 				212EECFE19CC5D9C00DA02B7 /* gameobject.ocean.xml in Resources */,
+				21CB35441A7CF3C900819C09 /* material.skybox.reflection.xml in Resources */,
 				217EF8B819F7E11300F339A0 /* static_model_tank_light.png in Resources */,
 				217EF8BC19F7E11300F339A0 /* static_model_tank_tracks.png in Resources */,
 				212EED0419CC5D9C00DA02B7 /* map_01.png in Resources */,
 				212EED0519CC5D9C00DA02B7 /* shaderParticleEmitter.vert in Resources */,
 				2163467619FD5F96009950BC /* model_07.MDL_sk in Resources */,
+				21CB35481A7CF40200819C09 /* shaderSkyBox.frag in Resources */,
 				21BC5E981A0F83800086CC76 /* model_01.MDL_mesh in Resources */,
 				2126273A1A361CEF000E8C72 /* model_00.MDL_sk in Resources */,
 				212EED0619CC5D9C00DA02B7 /* material.landscape.reflection.xml in Resources */,
@@ -1025,10 +1050,12 @@
 				217EF8A919F7E11300F339A0 /* skybox_xneg.png in Resources */,
 				219A12EE1998B54100E674CB /* model.mdl_anim in Resources */,
 				219A12F71998B54100E674CB /* tank_light_right_track.mdl_01 in Resources */,
+				21CB35431A7CF3C900819C09 /* material.skybox.reflection.xml in Resources */,
 				21B08E2A1922527400C5D5CC /* material.particle.emitter.xml in Resources */,
 				21B08E221922527400C5D5CC /* material.landscape.base.xml in Resources */,
 				217EF8B319F7E11300F339A0 /* skybox_zpos.png in Resources */,
 				2162093519A1F04C00DECBBC /* map_02.png in Resources */,
+				21CB35411A7CF3C900819C09 /* material.skybox.base.xml in Resources */,
 				2163467819FDA063009950BC /* animated_model_07.png in Resources */,
 				212EED3619CC6A2500DA02B7 /* Images.xcassets in Resources */,
 				21F083FB19F3C0E1002FF9AE /* material.landscape.shadowmap.xml in Resources */,
@@ -1056,6 +1083,7 @@
 				217EF8AF19F7E11300F339A0 /* skybox_ypos.png in Resources */,
 				2173345819642B47002B3F90 /* shaderModel.frag in Resources */,
 				21B08E3B192252E400C5D5CC /* shaderLandscape.frag in Resources */,
+				21CB353F1A7CF3C800819C09 /* gameobject.skybox.xml in Resources */,
 				217EF8A119F7E11300F339A0 /* landscape_02.png in Resources */,
 				219A12FB1998B54100E674CB /* tank_medium_right_track.mdl_01 in Resources */,
 				217EF8A519F7E11300F339A0 /* ocean_ripples.png in Resources */,
@@ -1065,7 +1093,9 @@
 				217EF8BB19F7E11300F339A0 /* static_model_tank_tracks.png in Resources */,
 				2162093419A1F04C00DECBBC /* map_01.png in Resources */,
 				21B08DBA1920CCF600C5D5CC /* shaderParticleEmitter.vert in Resources */,
+				21CB35471A7CF40200819C09 /* shaderSkyBox.frag in Resources */,
 				2163467519FD5F96009950BC /* model_07.MDL_sk in Resources */,
+				21CB35491A7CF40200819C09 /* shaderSkyBox.vert in Resources */,
 				21BC5E951A0F83450086CC76 /* model_01.MDL_mesh in Resources */,
 				212627391A361CEF000E8C72 /* model_00.MDL_sk in Resources */,
 				21CB352B1A7CD34500819C09 /* CLaunchScreen.xib in Resources */,

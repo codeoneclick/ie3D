@@ -85,8 +85,8 @@ public:
     void setOcean(CSharedOceanRef ocean);
     void removeOcean(CSharedOceanRef ocean);
     
-    void setSkyBox(CSharedSkyBoxRef skybox);
-    void removeSkyBox(CSharedSkyBoxRef skybox);
+    void setSkybox(CSharedSkyBoxRef skybox);
+    void removeSkybox(CSharedSkyBoxRef skybox);
     
     void setAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering);
     void removeAtmosphericScattering(CSharedAtmosphericScatteringRef atmosphericScattering);
@@ -114,7 +114,7 @@ public:
     
     CSharedModel createModel(const std::string& filename);
     CSharedOcean createOcean(const std::string& filename);
-    CSharedSkyBox createSkyBox(const std::string& filename);
+    CSharedSkyBox createSkybox(const std::string& filename);
     CSharedAtmosphericScattering createAtmosphericScattering(const std::string& filename);
     CSharedLandscape createLandscape(const std::string& filename);
     CSharedParticleEmitter createParticleEmitter(const std::string& filename);

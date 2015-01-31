@@ -12,11 +12,10 @@
 #include "CTexture.h"
 #include "CCamera.h"
 #include "CResourceAccessor.h"
-#include "CConfigurationGameObjects.h"
 #include "CMesh.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
-#include "CCubemapTexture.h"
+#include "CConfigurationAccessor.h"
 
 CSkyBox::CSkyBox(CSharedResourceAccessorRef resourceAccessor,
                  ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -47,32 +46,6 @@ void CSkyBox::onResourceLoaded(ISharedResourceRef resource, bool success)
 void CSkyBox::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     IGameObject::onConfigurationLoaded(configuration, success);
-    
-    std::shared_ptr<CConfigurationSkyBox> skyBoxConfiguration = std::static_pointer_cast<CConfigurationSkyBox>(configuration);
-    assert(m_resourceAccessor != nullptr);
-    
-    CSharedTexture xpositiveTexture = m_resourceAccessor->getTexture(skyBoxConfiguration->getXPositiveTextureFilename());
-    CSharedTexture xnegativeTexture = m_resourceAccessor->getTexture(skyBoxConfiguration->getXNegativeTextureFilename());
-    CSharedTexture ypositiveTexture = m_resourceAccessor->getTexture(skyBoxConfiguration->getYPositiveTextureFilename());
-    CSharedTexture ynegativeTexture = m_resourceAccessor->getTexture(skyBoxConfiguration->getYNegativeTextureFilename());
-    CSharedTexture zpositiveTexture = m_resourceAccessor->getTexture(skyBoxConfiguration->getZPositiveTextureFilename());
-    CSharedTexture znegativeTexture = m_resourceAccessor->getTexture(skyBoxConfiguration->getZNegativeTextureFilename());
-    
-    CSharedCubemapTexture texture = CCubemapTexture::constructCustomCubemapTexture("skybox.cubemap.texture",
-                                                                                   xpositiveTexture,
-                                                                                   xnegativeTexture,
-                                                                                   ypositiveTexture,
-                                                                                   ynegativeTexture,
-                                                                                   zpositiveTexture,
-                                                                                   znegativeTexture);
-    
-    m_resourceAccessor->addCustomTexture("skybox.cubemap.texture", texture);
-    
-    for(const auto& iterator : m_materials)
-    {
-        CSharedMaterial material = iterator.second;
-        material->setTexture(texture, E_SHADER_SAMPLER_01);
-    }
     
     CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(8, GL_STATIC_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
