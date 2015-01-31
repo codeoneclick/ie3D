@@ -14,7 +14,7 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CECustomModel.h"
-#include "CMEConfigurationGameObjects.h"
+#include "CMEConfigurationAccessor.h"
 
 CMEModelBrush::CMEModelBrush(CSharedResourceAccessorRef resourceAccessor,
                              ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -50,41 +50,41 @@ void CMEModelBrush::onResourceLoaded(ISharedResourceRef, bool)
 
 void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration, bool)
 {
-    std::shared_ptr<CMEConfigurationModelBrush> modelBrushConfiguration = std::static_pointer_cast<CMEConfigurationModelBrush>(configuration);
+    CSharedMEConfigurationModelBrush configurationModelBrush = std::static_pointer_cast<CMEConfigurationModelBrush>(configuration);
     
-    for(ui32 i = 0; i < modelBrushConfiguration->getElementsNames().size(); ++i)
+    for(ui32 i = 0; i < configurationModelBrush->getElementsConfigurations().size(); ++i)
     {
-        std::string elementName = modelBrushConfiguration->getElementsNames().at(i);
-        ISharedConfiguration elementConfiguration = modelBrushConfiguration->getElementsConfigurations().at(i);
-        if(elementName == "arrowX")
+        CSharedMEConfigurationBrushElement configurationBrushElement = std::static_pointer_cast<CMEConfigurationBrushElement>(configurationModelBrush->getElementsConfigurations().at(i));
+        std::string name = configurationBrushElement->getName();
+        if(name == "arrowX")
         {
              m_arrows.at(E_MODEL_BRUSH_ARROW_X) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_X,
-                                                                                  elementConfiguration);
+                                                                                  configurationBrushElement);
         }
-        else if(elementName == "arrowY")
+        else if(name == "arrowY")
         {
             m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Y,
-                                                                                 elementConfiguration);
+                                                                                 configurationBrushElement);
         }
-        else if(elementName == "arrowZ")
+        else if(name == "arrowZ")
         {
             m_arrows.at(E_MODEL_BRUSH_ARROW_Z) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Z,
-                                                                                 elementConfiguration);
+                                                                                 configurationBrushElement);
         }
-        else if(elementName == "planeX")
+        else if(name == "planeX")
         {
             m_planes.at(E_MODEL_BRUSH_PLANE_X) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_X,
-                                                                                 elementConfiguration);
+                                                                                 configurationBrushElement);
         }
-        else if(elementName == "planeY")
+        else if(name == "planeY")
         {
             m_planes.at(E_MODEL_BRUSH_PLANE_Y) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Y,
-                                                                                 elementConfiguration);
+                                                                                 configurationBrushElement);
         }
-        else if(elementName == "planeZ")
+        else if(name == "planeZ")
         {
             m_planes.at(E_MODEL_BRUSH_PLANE_Z) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Z,
-                                                                                 elementConfiguration);
+                                                                                 configurationBrushElement);
         }
         else
         {

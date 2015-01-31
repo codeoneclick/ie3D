@@ -321,3 +321,8 @@ bool CMainWindow::event(QEvent *event)
     return QWidget::event(event);
 }
 
+void CMainWindow::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
+{
+    
+}
+

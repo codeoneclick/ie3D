@@ -1,5 +1,5 @@
 <brush_element
-    class_name="CConfigurationBrushElement"
+    class_name="CMEConfigurationBrushElement"
     base_class_name="IConfiguration"
     is_external="0">
     <attributes>

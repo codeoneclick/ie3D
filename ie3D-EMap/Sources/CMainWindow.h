@@ -49,6 +49,7 @@ protected:
     QImage m_modelsSceneImage;
     
     void onTextureRendered(const std::string& techniqueName, const ui8 *rawdata, ui32 width, ui32 height);
+    void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
     bool event(QEvent *event);
     

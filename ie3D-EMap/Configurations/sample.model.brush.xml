@@ -1,0 +1,10 @@
+<model_brush
+    class_name="CMEConfigurationModelBrush"
+    base_class_name="IConfiguration"
+    is_external="1">
+    <attributes>
+    </attributes>
+    <relationships>
+    	<relationship type="CMEConfigurationBrushElement" getter="getElementsConfigurations" is_to_many="1" is_external="0" path="/model_brush/elements" relationship_name="element"/>
+    </relationships>
+</model_brush>

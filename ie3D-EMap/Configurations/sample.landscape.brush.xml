@@ -1,5 +1,5 @@
 <landscape_brush
-    class_name="CConfigurationLandscapeBrush"
+    class_name="CMEConfigurationLandscapeBrush"
     base_class_name="IConfiguration"
     is_external="1">
     <attributes>

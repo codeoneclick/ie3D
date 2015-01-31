@@ -9,12 +9,13 @@
 #include "CMELandscapeBrush.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
-#include "CMEConfigurationGameObjects.h"
 #include "CLandscape.h"
 #include "CMesh.h"
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CCamera.h"
+#include "HMEConfigurationDeclarations.h"
+#include "CMEConfigurationAccessor.h"
 
 CMELandscapeBrush::CMELandscapeBrush(CSharedResourceAccessorRef resourceAccessor,
                                      ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -47,7 +48,7 @@ void CMELandscapeBrush::onConfigurationLoaded(ISharedConfigurationRef configurat
 {
     IGameObject::onConfigurationLoaded(configuration, success);
     
-    std::shared_ptr<CMEConfigurationLandscapeBrush> landscapeBrushConfiguration = std::static_pointer_cast<CMEConfigurationLandscapeBrush>(configuration);
+    CSharedMEConfigurationLandscapeBrush configurationLandscapeBrush = std::static_pointer_cast<CMEConfigurationLandscapeBrush>(configuration);
     assert(m_resourceAccessor != nullptr);
     
     CMELandscapeBrush::createMesh(m_size);
@@ -70,7 +71,9 @@ void CMELandscapeBrush::createMesh(f32 radius)
     {
         for(i32 j = -static_cast<i32>(sizeZ) / 2; j < static_cast<i32>(sizeZ) / 2; ++j)
         {
-            glm::vec3 position = glm::vec3(i + m_position.x, 0.0, j + m_position.z);
+            glm::vec3 position = glm::vec3(i + IGameObject::getPosition().x,
+                                           0.0,
+                                           j + IGameObject::getPosition().z);
             position.y = m_landscape != nullptr &&
             position.x > 0.0 &&
             position.z > 0.0 &&
@@ -152,11 +155,11 @@ void CMELandscapeBrush::onDraw(const std::string& mode)
         std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
         assert(material->getShader() != nullptr);
         
-        material->getShader()->setMatrix4x4(m_matrixWorld, E_SHADER_UNIFORM_MATRIX_WORLD);
+        material->getShader()->setMatrix4x4(IGameObject::getTransformation(), E_SHADER_UNIFORM_MATRIX_WORLD);
         material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
         material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
         material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        material->getShader()->setVector2Custom(glm::vec2(m_position.x, m_position.z), "IN_Center");
+        material->getShader()->setVector2Custom(glm::vec2(IGameObject::getPosition().x, IGameObject::getPosition().z), "IN_Center");
         material->getShader()->setFloatCustom(m_size * 0.75, "IN_Radius");
         
         IGameObject::onDraw(mode);
@@ -200,7 +203,9 @@ void CMELandscapeBrush::setPosition(const glm::vec3 &position)
         {
             for(i32 j = -static_cast<i32>(sizeZ) / 2; j < static_cast<i32>(sizeZ) / 2; ++j)
             {
-                glm::vec3 position = glm::vec3(i + m_position.x + 0.5, 0.0, j + m_position.z + 0.5);
+                glm::vec3 position = glm::vec3(i + IGameObject::getPosition().x + 0.5,
+                                               0.0,
+                                               j + IGameObject::getPosition().z + 0.5);
                 position.y = position.x > 0.0 &&
                 position.z > 0.0 &&
                 position.x < m_landscape->getHeightmapSizeX() &&

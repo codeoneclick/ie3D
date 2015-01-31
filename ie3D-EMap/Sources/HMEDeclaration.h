@@ -10,6 +10,7 @@
 #define HMEDecaration_h
 
 #include "HEDeclaration.h"
+#include "HMEConfigurationDeclarations.h"
 
 class CMELandscapeBrush;
 typedef std::shared_ptr<CMELandscapeBrush> CMESharedLandscapeBrush;

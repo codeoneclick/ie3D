@@ -2,12 +2,14 @@
 #ifndef CMEConfigurationAccessor_h
 #define CMEConfigurationAccessor_h
 #include "CEConfigurationAccessor.h"
-#include "CConfigurationLandscapeBrush.h"
+#include "CMEConfigurationLandscapeBrush.h"
+#include "CMEConfigurationModelBrush.h"
 class CMEConfigurationAccessor: public CEConfigurationAccessor
 {
 public:
 CMEConfigurationAccessor(void) = default;
 ~CMEConfigurationAccessor(void) = default;
-void getConfigurationLandscapeBrush(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
+void getMEConfigurationLandscapeBrush(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
+void getMEConfigurationModelBrush(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
 };
 #endif

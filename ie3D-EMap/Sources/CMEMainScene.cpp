@@ -107,7 +107,7 @@ void CMEMainScene::load(void)
     m_uiToSceneCommands->connectSetTextureSamplerCommand(std::bind(&CMEMainScene::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
     m_uiToSceneCommands->connectSetTillingTexcoordCommand(std::bind(&CMEMainScene::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
     
-    m_landscape->addConfigurationLoadingCommand(std::bind(&CMEMainScene::onConfigurationLoaded, this, std::placeholders::_1));
+    //m_landscape->addConfigurationLoadingCommand(std::bind(&CMEMainScene::onConfigurationLoaded, this, std::placeholders::_1));
     
     m_globalLightSource->setAngle(3.0);
     m_globalLightSource->setDistanceToSun(512.0);

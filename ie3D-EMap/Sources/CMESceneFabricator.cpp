@@ -32,7 +32,7 @@ CMESharedLandscapeBrush CMESceneFabricator::createLandscapeBrush(const std::stri
     CMESharedLandscapeBrush landscapeBrush = std::make_shared<CMELandscapeBrush>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     std::shared_ptr<CMEConfigurationAccessor> configurationAccessor = std::static_pointer_cast<CMEConfigurationAccessor>(m_configurationAccessor);
-    configurationAccessor->loadLandscapeBrushConfiguration(filename, landscapeBrush);
+    configurationAccessor->getMEConfigurationLandscapeBrush(filename, landscapeBrush);
     m_gameObjectsContainer.insert(landscapeBrush);
     return landscapeBrush;
 }
@@ -44,7 +44,7 @@ CMESharedModelBrush CMESceneFabricator::createModelBrush(const std::string &file
     CMESharedModelBrush modelBrush = std::make_shared<CMEModelBrush>(m_resourceAccessor, m_renderTechniqueAccessor);
     assert(m_configurationAccessor != nullptr);
     std::shared_ptr<CMEConfigurationAccessor> configurationAccessor = std::static_pointer_cast<CMEConfigurationAccessor>(m_configurationAccessor);
-    configurationAccessor->loadModelBrushConfiguration(filename, modelBrush);
+    configurationAccessor->getMEConfigurationModelBrush(filename, modelBrush);
     m_gameObjectsContainer.insert(modelBrush);
     return modelBrush;
 }
