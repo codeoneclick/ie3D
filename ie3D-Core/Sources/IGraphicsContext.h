@@ -47,6 +47,7 @@ public:
     ui32 getWidth(void) const;
     ui32 getHeight(void) const;
     
+    virtual void makeCurrent(void) const = 0;
     virtual void draw(void) const = 0;
 };
 

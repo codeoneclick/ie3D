@@ -29,9 +29,11 @@ protected:
     
 #if defined(__OSX__) || defined(__WIN32__)
     
-    std::shared_ptr<CMEGameController> m_gameController;
+    std::shared_ptr<CMEGameController> m_mainSceneController;
     std::shared_ptr<CMEMainSceneTransition> m_mainSceneTransition;
-    std::shared_ptr<CMEPreviewModelSceneTransition> m_previewModelSceneTransition;
+    std::shared_ptr<CMEGameController> m_modelPreviewController;
+    std::shared_ptr<CMEPreviewModelSceneTransition> m_modelPreviewTransition;
+    //std::shared_ptr<CMEPreviewModelSceneTransition> m_previewModelSceneTransition;
     
     CSharedMESceneToUICommands m_sceneToUICommands;
     

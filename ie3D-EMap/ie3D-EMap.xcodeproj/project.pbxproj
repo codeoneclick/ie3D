@@ -1490,7 +1490,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "python \"${SRCROOT}/../ie3D-Scripts/CONFIGURATION_GENERATOR.py\" current_accessor_CMEConfigurationAccessor base_accessor_CEConfigurationAccessor declaration_HMEConfigurationDeclarations";
+			shellScript = "#python \"${SRCROOT}/../ie3D-Scripts/CONFIGURATION_GENERATOR.py\" current_accessor_CMEConfigurationAccessor base_accessor_CEConfigurationAccessor declaration_HMEConfigurationDeclarations";
 		};
 		5E618435888B9D49F8540165 /* Qt Qmake */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -28,6 +28,7 @@ public:
     CGraphicsContext_ios(ISharedOGLWindowRef window);
     ~CGraphicsContext_ios(void);
     
+    void makeCurrent(void) const;
     void draw(void) const;
 };
 
@@ -66,6 +67,12 @@ CGraphicsContext_ios::CGraphicsContext_ios(ISharedOGLWindowRef window)
 CGraphicsContext_ios::~CGraphicsContext_ios(void)
 {
     
+}
+
+void CGraphicsContext_ios::makeCurrent(void) const
+{
+    ui8 result = [EAGLContext setCurrentContext:m_context];
+    assert(result == true);
 }
 
 void CGraphicsContext_ios::draw(void) const

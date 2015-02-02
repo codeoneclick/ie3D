@@ -53,17 +53,3 @@ void CMEPreviewModelSceneTransition::_OnGameLoopUpdate(f32 deltatime)
         m_scene->update(deltatime);
     }
 }
-
-CMESharedLandscapeBrush CMEPreviewModelSceneTransition::createLandscapeBrush(const std::string& filename)
-{
-    assert(m_sceneFabricator != nullptr);
-    std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
-    return sceneFabricator->createLandscapeBrush(filename);
-}
-
-CMESharedModelBrush CMEPreviewModelSceneTransition::createModelBrush(const std::string& filename)
-{
-    assert(m_sceneFabricator != nullptr);
-    std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
-    return sceneFabricator->createModelBrush(filename);
-}

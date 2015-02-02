@@ -19,13 +19,14 @@ private:
     
 protected:
     
-	CGLContextObj m_context;
+	NSOpenGLContext *m_context;
     
 public:
     
 	CGraphicsContext_osx(ISharedOGLWindowRef window);
     ~CGraphicsContext_osx(void);
     
+    void makeCurrent(void) const;
     void draw(void) const;
 };
 
@@ -56,18 +57,17 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
         assert(false);
     }
 	   
-    NSOpenGLContext* context = [[NSOpenGLContext alloc] initWithFormat:pixelformat shareContext:nil];
+    m_context = [[NSOpenGLContext alloc] initWithFormat:pixelformat shareContext:[NSOpenGLContext currentContext]];
     NSOpenGLView *view = (__bridge NSOpenGLView*)m_window->getHWND();
     [view setPixelFormat:pixelformat];
-    [view setOpenGLContext:context];
-    [context makeCurrentContext];
-    m_context = (CGLContextObj)[context CGLContextObj];
+    [view setOpenGLContext:m_context];
+    [m_context makeCurrentContext];
     
     GLint swap = 1;
-    [context setValues:&swap forParameter:NSOpenGLCPSwapInterval];
+    [m_context setValues:&swap forParameter:NSOpenGLCPSwapInterval];
     
 #if __OPENGL_30__
-    CGLEnable(m_context, kCGLCECrashOnRemovedFunctions);
+    CGLEnable([m_context CGLContextObj], kCGLCECrashOnRemovedFunctions);
 #endif
     
     i32 bindedFrameBuffer = 0;
@@ -81,12 +81,17 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
 
 CGraphicsContext_osx::~CGraphicsContext_osx(void)
 {
-    
+
+}
+
+void CGraphicsContext_osx::makeCurrent(void) const
+{
+    [m_context makeCurrentContext];
 }
 
 void CGraphicsContext_osx::draw(void) const
 {
-    CGLFlushDrawable(m_context);
+    CGLFlushDrawable([m_context CGLContextObj]);
 }
 
 #endif

@@ -27,9 +27,6 @@ public:
     ~CMEPreviewModelSceneTransition(void);
     
     void initScene(void);
-    
-    CMESharedLandscapeBrush createLandscapeBrush(const std::string& filename);
-    CMESharedModelBrush createModelBrush(const std::string& filename);
 };
 
 

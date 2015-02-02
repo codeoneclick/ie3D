@@ -29,9 +29,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
 QMainWindow(parent),
 #if defined(__OSX__) || defined(__WIN32__)
 
-m_gameController(nullptr),
+m_mainSceneController(nullptr),
 m_mainSceneTransition(nullptr),
-m_previewModelSceneTransition(nullptr),
 m_recentFilename(""),
 
 #endif
@@ -59,11 +58,11 @@ ui(new Ui::CMainWindow)
     stream<<"Smooth coefficient: "<<ui->m_smoothSlider->value()<<" [0:3]";
     ui->m_smoothLabel->setText(QString::fromUtf8(stream.str().c_str()));
     
-    m_modelsSceneView = new CMEModelsSceneView(ui->m_modelsOpenGLView);
-    m_modelsSceneView->setGeometry(QRect(0, 0,
-                                         ui->m_modelsOpenGLView->width(),
-                                         ui->m_modelsOpenGLView->height()));
-    m_modelsSceneView->setStyleSheet(ui->m_modelsOpenGLView->styleSheet());
+    //m_modelsSceneView = new CMEModelsSceneView(ui->m_modelsOpenGLView);
+    //m_modelsSceneView->setGeometry(QRect(0, 0,
+    //                                     ui->m_modelsOpenGLView->width(),
+    //                                     ui->m_modelsOpenGLView->height()));
+    //m_modelsSceneView->setStyleSheet(ui->m_modelsOpenGLView->styleSheet());
 }
 
 CMainWindow::~CMainWindow()
@@ -91,16 +90,29 @@ void CMainWindow::execute(void)
     [mainSceneView addSubview:mainSceneOpenGLView];
     std::shared_ptr<IOGLWindow> mainSceneWindow = std::make_shared<IOGLWindow>((__bridge void*)mainSceneOpenGLView);
     
-    m_gameController = std::make_shared<CMEGameController>(mainSceneWindow);
+    m_mainSceneController = std::make_shared<CMEGameController>(mainSceneWindow);
     m_mainSceneTransition = std::make_shared<CMEMainSceneTransition>("transition.map.editor.main.scene.xml", false);
-    m_gameController->addTransition(m_mainSceneTransition);
-    m_gameController->gotoTransition("transition.map.editor.main.scene.xml");
+    m_mainSceneController->addTransition(m_mainSceneTransition);
+    m_mainSceneController->gotoTransition("transition.map.editor.main.scene.xml");
     m_mainSceneTransition->setSceneToUICommands(m_sceneToUICommands);
     
-    m_previewModelSceneTransition = std::make_shared<CMEPreviewModelSceneTransition>("transition.map.editor.preview.model.xml", true);
-    m_gameController->addChildTransition(m_previewModelSceneTransition);
-    m_gameController->activateChildTransition("transition.map.editor.preview.model.xml");
-    m_previewModelSceneTransition->getRenderTechniqueImporter()->addRenderTechninqueOperationTextureHandler("render.operation.world.base", shared_from_this());
+    NSView *modelPreviewView =reinterpret_cast<NSView*>(ui->m_modelsOpenGLView->winId());
+    NSOpenGLView *modelPreviewOpenGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
+                                                                                          0.0,
+                                                                                          modelPreviewView.frame.size.width,
+                                                                                          modelPreviewView.frame.size.height)];
+    [modelPreviewView addSubview:modelPreviewOpenGLView];
+    std::shared_ptr<IOGLWindow> modelPreviewWindow = std::make_shared<IOGLWindow>((__bridge void*)modelPreviewOpenGLView);
+    
+    m_modelPreviewController = std::make_shared<CMEGameController>(modelPreviewWindow);
+    m_modelPreviewTransition = std::make_shared<CMEPreviewModelSceneTransition>("transition.map.editor.preview.model.xml", false);
+    m_modelPreviewController->addTransition(m_modelPreviewTransition);
+    m_modelPreviewController->gotoTransition("transition.map.editor.preview.model.xml");
+    
+    //m_previewModelSceneTransition = std::make_shared<CMEPreviewModelSceneTransition>("transition.map.editor.preview.model.xml", true);
+    //m_gameController->addChildTransition(m_previewModelSceneTransition);
+    //m_gameController->activateChildTransition("transition.map.editor.preview.model.xml");
+    //m_previewModelSceneTransition->getRenderTechniqueImporter()->addRenderTechninqueOperationTextureHandler("render.operation.world.base", shared_from_this());
     
 #endif
 }

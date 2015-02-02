@@ -35,6 +35,9 @@ void CRenderPipeline::setBatchingMgr(CSharedBatchingMgrRef batchingMgr)
 
 void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
 {
+    assert(m_graphicsContext != nullptr);
+    m_graphicsContext->makeCurrent();
+    
     m_numTriangles = 0;
     
     typedef std::pair<std::string, CSharedRenderTechniqueWorldSpace> TechniquePair;
