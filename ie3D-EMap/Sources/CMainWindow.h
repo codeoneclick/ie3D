@@ -19,8 +19,6 @@ namespace Ui {
 
 class CMainWindow :
 public QMainWindow,
-public IConfigurationLoadingHandler,
-public IRenderTechniqueOperationTextureHandler,
 public std::enable_shared_from_this<CMainWindow>
 {
     Q_OBJECT
@@ -31,9 +29,9 @@ protected:
     
     std::shared_ptr<CMEGameController> m_mainSceneController;
     std::shared_ptr<CMEMainSceneTransition> m_mainSceneTransition;
+    
     std::shared_ptr<CMEGameController> m_modelPreviewController;
     std::shared_ptr<CMEPreviewModelSceneTransition> m_modelPreviewTransition;
-    //std::shared_ptr<CMEPreviewModelSceneTransition> m_previewModelSceneTransition;
     
     CSharedMESceneToUICommands m_sceneToUICommands;
     
@@ -46,12 +44,6 @@ protected:
     
     i32 m_previousBrushSize;
     std::string m_recentFilename;
-    
-    CMEModelsSceneView *m_modelsSceneView;
-    QImage m_modelsSceneImage;
-    
-    void onTextureRendered(const std::string& techniqueName, const ui8 *rawdata, ui32 width, ui32 height);
-    void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
     bool event(QEvent *event);
     

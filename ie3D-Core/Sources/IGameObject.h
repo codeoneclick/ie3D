@@ -32,7 +32,6 @@ protected:
 
     std::unordered_map<std::string, CSharedMaterial> m_materials;
     std::function<void(CSharedMaterialRef)> m_materialBindImposer;
-    ISharedConfiguration m_configuration;
     
     CSharedMesh m_mesh;
     

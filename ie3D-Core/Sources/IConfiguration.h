@@ -208,16 +208,23 @@ class IConfigurationLoadingHandler
 {
 public:
     
+    typedef std::function<void(ISharedConfigurationRef)> CONFIGURATION_LOADED_CALLBACK;
+    
 private:
     
 protected:
     
-    IConfigurationLoadingHandler(void) = default;
+    IConfigurationLoadingHandler(void);
+    ISharedConfiguration m_configuration;
+    std::vector<CONFIGURATION_LOADED_CALLBACK> m_callbacks;
 
 public:
     
-    virtual ~IConfigurationLoadingHandler(void) = default;
-    virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success) = 0;
+    virtual ~IConfigurationLoadingHandler(void);
+    virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
+    
+    void addConfigurationLoadedCallback(const CONFIGURATION_LOADED_CALLBACK& callback);
+    void removeConfigurationLoadedCallback(const CONFIGURATION_LOADED_CALLBACK& callback);
 };
 
 class IConfiguration

@@ -243,15 +243,32 @@ void CLandscape::onBatch(const std::string& mode)
 }
 
 void CLandscape::setTexture(CSharedTextureRef texture,
-                            E_SHADER_SAMPLER sampler,
+                            E_SHADER_SAMPLER samplerIndex,
                             const std::string& renderTechnique)
 {
-    IGameObject::setTexture(texture, sampler, renderTechnique);
+    IGameObject::setTexture(texture, samplerIndex, renderTechnique);
+    
+    std::shared_ptr<CConfigurationLandscape> configurationGameObject = std::static_pointer_cast<CConfigurationLandscape>(m_configuration);
+    assert(configurationGameObject != nullptr);
+    for(const auto& iterator_01 : configurationGameObject->getMaterialsConfigurations())
+    {
+        CSharedConfigurationMaterial configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator_01);
+        for(const auto& iterator_02 : configurationMaterial->getTexturesConfigurations())
+        {
+            CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(iterator_02);
+            if(configurationTexture->getSamplerIndex() == samplerIndex)
+            {
+                std::string filename = texture->getGuid();
+                configurationTexture->setAttribute("/texture/filename", std::make_shared<CConfigurationAttribute>(filename));
+            }
+        }
+    }
+    
     for(const auto& iterator : m_chunks)
     {
         if(iterator != nullptr)
         {
-            iterator->setTexture(texture, sampler);
+            iterator->setTexture(texture, samplerIndex);
         }
     }
     texture->addLoadingHandler(shared_from_this());

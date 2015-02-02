@@ -20,7 +20,6 @@ protected:
     
     std::map<std::string, ISharedGameTransition> m_transitions;
     ISharedGameTransition m_currentTransition;
-    std::map<std::string, ISharedGameTransition> m_chilrenTransitions;
     
     std::shared_ptr<IGraphicsContext> m_graphicsContext;
     std::shared_ptr<IInputContext> m_gestureRecognizerContext;
@@ -36,12 +35,7 @@ public:
     void addTransition(ISharedGameTransitionRef transition);
     void removeTransition(ISharedGameTransitionRef transition);
     
-    void addChildTransition(ISharedGameTransitionRef transition);
-    void removeChildTransition(ISharedGameTransitionRef transition);
-    
     void gotoTransition(const std::string& guid);
-    void activateChildTransition(const std::string& guid);
-    void deactivateChildTransition(const std::string& guid);
     
     ui32 getCurrentNumTriagles(void);
     ui32 getTotalNumTriangles(void);

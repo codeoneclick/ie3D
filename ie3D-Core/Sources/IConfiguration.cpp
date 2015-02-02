@@ -57,6 +57,46 @@ static std::map<std::string, GLenum> g_glenumToString(void)
 
 #endif
 
+IConfigurationLoadingHandler::IConfigurationLoadingHandler(void) :
+m_configuration(nullptr)
+{
+    
+}
+
+IConfigurationLoadingHandler::~IConfigurationLoadingHandler(void)
+{
+    m_callbacks.clear();
+}
+
+void IConfigurationLoadingHandler::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
+{
+    if(success)
+    {
+        assert(configuration != nullptr);
+        m_configuration = configuration;
+        
+        std::for_each(m_callbacks.begin(), m_callbacks.end(), [configuration](CONFIGURATION_LOADED_CALLBACK callback){
+            callback(configuration);
+        });
+    }
+}
+void IConfigurationLoadingHandler::addConfigurationLoadedCallback(const CONFIGURATION_LOADED_CALLBACK& callback)
+{
+    if(m_configuration == nullptr)
+    {
+        m_callbacks.push_back(callback);
+    }
+    else
+    {
+        callback(m_configuration);
+    }
+}
+void IConfigurationLoadingHandler::removeConfigurationLoadedCallback(const CONFIGURATION_LOADED_CALLBACK& callback)
+{
+    /*const auto& iterator = std::find(m_callbacks.begin(), m_callbacks.end(), callback);
+    m_callbacks.erase(iterator);*/
+}
+
 IConfiguration::~IConfiguration(void)
 {
     m_attributes.clear();
@@ -66,7 +106,7 @@ IConfiguration::~IConfiguration(void)
 void IConfiguration::setAttribute(const std::string& attributeName,
                                   CSharedConfigurationAttributeRef attribute)
 {
-    m_attributes.insert(std::make_pair(attributeName, attribute));
+    m_attributes[attributeName] = attribute;
 }
 
 void IConfiguration::setConfiguration(const std::string &configurationName,
@@ -80,13 +120,17 @@ void IConfiguration::setConfiguration(const std::string &configurationName,
         if(isReplacing && replacingIndex < iterator->second.size())
         {
             iterator->second[replacingIndex] = configuration;
-        } else {
+        }
+        else
+        {
             iterator->second.push_back(configuration);
         }
-    } else {
+    }
+    else
+    {
         std::vector<ISharedConfiguration> configurations;
         configurations.push_back(configuration);
-        m_configurations.insert(std::make_pair(configurationName, configurations));
+        m_configurations[configurationName] = configurations;
     }
 }
 

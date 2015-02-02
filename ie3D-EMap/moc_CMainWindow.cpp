@@ -138,10 +138,6 @@ void *CMainWindow::qt_metacast(const char *_clname)
     if (!_clname) return 0;
     if (!strcmp(_clname, qt_meta_stringdata_CMainWindow.stringdata))
         return static_cast<void*>(const_cast< CMainWindow*>(this));
-    if (!strcmp(_clname, "IConfigurationLoadingHandler"))
-        return static_cast< IConfigurationLoadingHandler*>(const_cast< CMainWindow*>(this));
-    if (!strcmp(_clname, "IRenderTechniqueOperationTextureHandler"))
-        return static_cast< IRenderTechniqueOperationTextureHandler*>(const_cast< CMainWindow*>(this));
     if (!strcmp(_clname, "std::enable_shared_from_this<CMainWindow>"))
         return static_cast< std::enable_shared_from_this<CMainWindow>*>(const_cast< CMainWindow*>(this));
     return QMainWindow::qt_metacast(_clname);

@@ -29,7 +29,6 @@ IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
 m_resourceAccessor(resourceAccessor),
 m_zOrder(0),
 m_mesh(nullptr),
-m_configuration(nullptr),
 m_camera(nullptr),
 m_globalLightSource(nullptr),
 m_boundingBox(nullptr),
@@ -174,7 +173,7 @@ void IGameObject::onResourceLoaded(ISharedResourceRef resource,
 void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
                                         bool success)
 {
-    m_configuration = configuration;
+    IConfigurationLoadingHandler::onConfigurationLoaded(configuration, success);
     std::shared_ptr<IConfigurationGameObject> configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(configuration);
     for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
     {

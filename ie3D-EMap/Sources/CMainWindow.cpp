@@ -57,12 +57,6 @@ ui(new Ui::CMainWindow)
     stream.clear();
     stream<<"Smooth coefficient: "<<ui->m_smoothSlider->value()<<" [0:3]";
     ui->m_smoothLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    
-    //m_modelsSceneView = new CMEModelsSceneView(ui->m_modelsOpenGLView);
-    //m_modelsSceneView->setGeometry(QRect(0, 0,
-    //                                     ui->m_modelsOpenGLView->width(),
-    //                                     ui->m_modelsOpenGLView->height()));
-    //m_modelsSceneView->setStyleSheet(ui->m_modelsOpenGLView->styleSheet());
 }
 
 CMainWindow::~CMainWindow()
@@ -108,11 +102,6 @@ void CMainWindow::execute(void)
     m_modelPreviewTransition = std::make_shared<CMEPreviewModelSceneTransition>("transition.map.editor.preview.model.xml", false);
     m_modelPreviewController->addTransition(m_modelPreviewTransition);
     m_modelPreviewController->gotoTransition("transition.map.editor.preview.model.xml");
-    
-    //m_previewModelSceneTransition = std::make_shared<CMEPreviewModelSceneTransition>("transition.map.editor.preview.model.xml", true);
-    //m_gameController->addChildTransition(m_previewModelSceneTransition);
-    //m_gameController->activateChildTransition("transition.map.editor.preview.model.xml");
-    //m_previewModelSceneTransition->getRenderTechniqueImporter()->addRenderTechninqueOperationTextureHandler("render.operation.world.base", shared_from_this());
     
 #endif
 }
@@ -313,17 +302,6 @@ void CMainWindow::on_m_textureTilling03SpinBox_valueChanged(int value)
     m_mainSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_03);
 }
 
-void CMainWindow::onTextureRendered(const std::string& techniqueName, const ui8 *rawdata, ui32 width, ui32 height)
-{
-    QImage image(rawdata, width, height, QImage::Format_RGBA8888);
-    QTransform transform;
-    transform.rotate(180);
-    image = image.transformed(transform);
-    m_modelsSceneImage = image;
-    m_modelsSceneView->setImage(m_modelsSceneImage);
-    m_modelsSceneView->update();
-}
-
 bool CMainWindow::event(QEvent *event)
 {
     if (event->type() == QEvent::Polish)
@@ -332,9 +310,3 @@ bool CMainWindow::event(QEvent *event)
     }
     return QWidget::event(event);
 }
-
-void CMainWindow::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
-{
-    
-}
-

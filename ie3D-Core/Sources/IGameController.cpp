@@ -58,38 +58,6 @@ void IGameController::removeTransition(ISharedGameTransitionRef transition)
     m_transitions.erase(m_transitions.find(transition->getGuid()));
 }
 
-void IGameController::addChildTransition(ISharedGameTransitionRef transition)
-{
-    assert(m_chilrenTransitions.find(transition->getGuid()) == m_chilrenTransitions.end());
-    transition->setupOnce(m_graphicsContext, m_gestureRecognizerContext,
-                          m_resourceAccessor, m_configurationAccessor);
-    transition->initScene();
-    m_configurationAccessor->getConfigurationTransition(transition->getGuid(), transition);
-    m_chilrenTransitions.insert(std::make_pair(transition->getGuid(), transition));
-}
-
-void IGameController::removeChildTransition(ISharedGameTransitionRef transition)
-{
-    assert(m_chilrenTransitions.find(transition->getGuid()) != m_chilrenTransitions.end());
-    m_chilrenTransitions.erase(m_transitions.find(transition->getGuid()));
-}
-
-void IGameController::activateChildTransition(const std::string& guid)
-{
-    assert(m_chilrenTransitions.find(guid) != m_chilrenTransitions.end());
-    ISharedGameTransition transition = m_chilrenTransitions.find(guid)->second;
-    transition->_OnActivate();
-    ConnectToGameLoop(transition);
-}
-
-void IGameController::deactivateChildTransition(const std::string& guid)
-{
-    assert(m_chilrenTransitions.find(guid) != m_chilrenTransitions.end());
-    ISharedGameTransition transition = m_chilrenTransitions.find(guid)->second;
-    transition->_OnDeactivate();
-    DisconnectFromGameLoop(transition);
-}
-
 void IGameController::gotoTransition(const std::string &guid)
 {
     assert(m_transitions.find(guid) != m_transitions.end());
