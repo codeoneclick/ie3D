@@ -75,8 +75,9 @@ m_minHeight(FLT_MAX)
     {
         for(ui32 j = 0; j < m_sizeZ; ++j)
         {
+            f32 y = i == 0 || j == 0 || i == (m_sizeX - 1) || j == (m_sizeZ - 1) ? -1.0 : (static_cast<f32>(data[(i + j * m_sizeZ) * 4 + 1] - 64) / 255) * 32.0;
             m_uncopressedVertexes[i + j * m_sizeZ].m_position = glm::vec3(static_cast<f32>(i),
-                                                                          (static_cast<f32>(data[(i + j * m_sizeZ) * 4 + 1] - 64) / 255) * 32.0,
+                                                                          y,
                                                                           static_cast<f32>(j));
             m_uncopressedVertexes[i + j * m_sizeZ].m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<ui32>(i) /
                                                                                              static_cast<f32>(m_sizeX),

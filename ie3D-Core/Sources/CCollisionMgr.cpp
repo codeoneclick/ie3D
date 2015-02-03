@@ -218,7 +218,7 @@ bool CCollisionMgr::triangleIntersection(const glm::vec3& trianglePoint_01,
 
 bool CCollisionMgr::collisionPoint(CSharedVertexBufferRef vertexBuffer,
                                    CSharedIndexBufferRef indexBuffer,
-                                   const glm::mat4x4& worldMatrix,
+                                   const glm::mat4x4& transformation,
                                    const glm::ray& ray,
                                    glm::vec3* point)
 {
@@ -226,13 +226,30 @@ bool CCollisionMgr::collisionPoint(CSharedVertexBufferRef vertexBuffer,
     ui16* indexData = indexBuffer->lock();
     ui32 numIndices = indexBuffer->getUsedSize();
 
-    for(ui32 index = 0; index < numIndices; index += 3)
+    for(ui32 i = 0; i < numIndices; i += 3)
     {
-        glm::vec4 value = worldMatrix * glm::vec4(vertexData[indexData[index + 0]].m_position, 1.0f);
+        ui32 index = indexData[i];
+        if(index >= vertexBuffer->getUsedSize())
+        {
+            continue;
+        }
+        glm::vec4 value = transformation * glm::vec4(vertexData[index].m_position, 1.0f);
         glm::vec3 point_01 = glm::vec3(value.x, value.y, value.z);
-        value = worldMatrix * glm::vec4(vertexData[indexData[index + 1]].m_position, 1.0f);
+        
+        index = indexData[i + 1];
+        if(index >= vertexBuffer->getUsedSize())
+        {
+            continue;
+        }
+        value = transformation * glm::vec4(vertexData[index].m_position, 1.0f);
         glm::vec3 point_02 = glm::vec3(value.x, value.y, value.z);
-        value = worldMatrix * glm::vec4(vertexData[indexData[index + 2]].m_position, 1.0f);
+        
+        index = indexData[i + 2];
+        if(index >= vertexBuffer->getUsedSize())
+        {
+            continue;
+        }
+        value = transformation * glm::vec4(vertexData[index].m_position, 1.0f);
         glm::vec3 point_03 = glm::vec3(value.x, value.y, value.z);
         
         if(CCollisionMgr::triangleIntersection(point_01, point_02, point_03, ray, point))

@@ -141,7 +141,7 @@ protected:
     
     void writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
     void commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
-                             
+    
     void generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ);
     
     void updateSplattingTexture(CSharedTextureRef texture, bool isCreation = true,
