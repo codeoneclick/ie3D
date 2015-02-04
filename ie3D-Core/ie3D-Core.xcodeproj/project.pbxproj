@@ -336,6 +336,9 @@
 		21ACE3971A713C5F0017A771 /* CComponentConfigurationLoading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE3951A713C5F0017A771 /* CComponentConfigurationLoading.cpp */; };
 		21ACE3981A713C5F0017A771 /* CComponentConfigurationLoading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACE3951A713C5F0017A771 /* CComponentConfigurationLoading.cpp */; };
 		21ACE3991A713C5F0017A771 /* CComponentConfigurationLoading.h in Headers */ = {isa = PBXBuildFile; fileRef = 21ACE3961A713C5F0017A771 /* CComponentConfigurationLoading.h */; };
+		21B0BA0A1A82AA72001CE9A0 /* CPerlinNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B0BA081A82AA72001CE9A0 /* CPerlinNoise.cpp */; };
+		21B0BA0B1A82AA72001CE9A0 /* CPerlinNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B0BA081A82AA72001CE9A0 /* CPerlinNoise.cpp */; };
+		21B0BA0C1A82AA72001CE9A0 /* CPerlinNoise.h in Headers */ = {isa = PBXBuildFile; fileRef = 21B0BA091A82AA72001CE9A0 /* CPerlinNoise.h */; };
 		21C409A5197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A6197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A7197B0B4B0063D62D /* CMeshSerializer_MDL_01.h in Headers */ = {isa = PBXBuildFile; fileRef = 21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */; };
@@ -554,6 +557,8 @@
 		21ACE3951A713C5F0017A771 /* CComponentConfigurationLoading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentConfigurationLoading.cpp; path = Sources/CComponentConfigurationLoading.cpp; sourceTree = "<group>"; };
 		21ACE3961A713C5F0017A771 /* CComponentConfigurationLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CComponentConfigurationLoading.h; path = Sources/CComponentConfigurationLoading.h; sourceTree = "<group>"; };
 		21ADAA0518214AD00082E8BA /* CCommonOS_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CCommonOS_osx.cpp; path = Sources/CCommonOS_osx.cpp; sourceTree = "<group>"; };
+		21B0BA081A82AA72001CE9A0 /* CPerlinNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPerlinNoise.cpp; path = Sources/CPerlinNoise.cpp; sourceTree = "<group>"; };
+		21B0BA091A82AA72001CE9A0 /* CPerlinNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPerlinNoise.h; path = Sources/CPerlinNoise.h; sourceTree = "<group>"; };
 		21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CInputContext_osx.cpp; path = Sources/CInputContext_osx.cpp; sourceTree = "<group>"; };
 		21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshSerializer_MDL_01.cpp; path = Sources/CMeshSerializer_MDL_01.cpp; sourceTree = "<group>"; };
 		21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshSerializer_MDL_01.h; path = Sources/CMeshSerializer_MDL_01.h; sourceTree = "<group>"; };
@@ -1193,6 +1198,8 @@
 				2179741819F534FA00A98630 /* CGlobalLightSource.cpp */,
 				219B5E6F1A10F3E600986953 /* CBoundingBox.h */,
 				219B5E6E1A10F3E600986953 /* CBoundingBox.cpp */,
+				21B0BA091A82AA72001CE9A0 /* CPerlinNoise.h */,
+				21B0BA081A82AA72001CE9A0 /* CPerlinNoise.cpp */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -1848,6 +1855,7 @@
 				2179741C19F534FA00A98630 /* CGlobalLightSource.h in Headers */,
 				213B7F3B1994CDFC006F3976 /* CRenderTarget.h in Headers */,
 				213B7F331993CC5B006F3976 /* CShaderCompiler_GLSL.h in Headers */,
+				21B0BA0C1A82AA72001CE9A0 /* CPerlinNoise.h in Headers */,
 				2191CE73196EDCDE00CE2813 /* CTextureSerializer_PNG.h in Headers */,
 				21A56D291A79090600C8F362 /* CConfigurationWSTechnique.h in Headers */,
 				2191CE4E196EDBEF00CE2813 /* pngdebug.h in Headers */,
@@ -2014,6 +2022,7 @@
 				21208F9F1906FB5F00FFC8D4 /* CCommonOS_ios.cpp in Sources */,
 				21208FA01906FB5F00FFC8D4 /* CCommonOS_osx.cpp in Sources */,
 				2191CE66196EDBEF00CE2813 /* pngtrans.c in Sources */,
+				21B0BA0B1A82AA72001CE9A0 /* CPerlinNoise.cpp in Sources */,
 				21208FA11906FB5F00FFC8D4 /* CCommonOS_win32.cpp in Sources */,
 				21208FA21906FB5F00FFC8D4 /* CCommonOS_ndk.cpp in Sources */,
 				21EF00441A238D6F00E0AF20 /* ShaderOcclusionQuery.cpp in Sources */,
@@ -2177,6 +2186,7 @@
 				213265E31906A4AF001C98F7 /* CCommonOS_ios.cpp in Sources */,
 				213265E41906A4AF001C98F7 /* CCommonOS_osx.cpp in Sources */,
 				2191CE65196EDBEF00CE2813 /* pngtrans.c in Sources */,
+				21B0BA0A1A82AA72001CE9A0 /* CPerlinNoise.cpp in Sources */,
 				213265E51906A4AF001C98F7 /* CCommonOS_win32.cpp in Sources */,
 				213265E61906A4AF001C98F7 /* CCommonOS_ndk.cpp in Sources */,
 				21EF00431A238D6F00E0AF20 /* ShaderOcclusionQuery.cpp in Sources */,

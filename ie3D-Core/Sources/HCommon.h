@@ -27,6 +27,8 @@
 #include <iostream>
 #include <assert.h>
 #include <functional>
+#include <cmath>
+#include <random>
 #include <unordered_map>
 #include <unordered_set>
 

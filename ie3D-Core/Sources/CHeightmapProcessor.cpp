@@ -17,6 +17,7 @@
 #include "CQuadTree.h"
 #include "CThreadOperation.h"
 #include "CConfigurationAccessor.h"
+#include "CPerlinNoise.h"
 
 #if defined(__IOS__)
 
@@ -71,11 +72,24 @@ m_minHeight(FLT_MAX)
     m_uncopressedVertexes.resize(m_sizeX * m_sizeZ);
     m_faces.resize((m_sizeX - 1) * (m_sizeZ - 1) * 2);
     
+    f32 frequency = 8.0;
+    i32 octaves = 16;
+    ui32 seed = 12345;
+
+    const CPerlinNoise perlin(seed);
+    const f32 fx = m_sizeX / frequency;
+    const f32 fy = m_sizeZ / frequency;
+
+    
     for(ui32 i = 0; i < m_sizeX; ++i)
     {
         for(ui32 j = 0; j < m_sizeZ; ++j)
         {
-            f32 y = i == 0 || j == 0 || i == (m_sizeX - 1) || j == (m_sizeZ - 1) ? -1.0 : (static_cast<f32>(data[(i + j * m_sizeZ) * 4 + 1] - 64) / 255) * 32.0;
+            f32 n = perlin.octaveNoise(i / fx, j / fy, octaves);
+            n = glm::clamp(n * 0.5f + 0.5f, 0.0f, 1.0f);
+            const ui8 value = static_cast<ui32>(n * 255.99f);
+            
+            f32 y = i == 0 || j == 0 || i == (m_sizeX - 1) || j == (m_sizeZ - 1) ? -1.0 : (static_cast<f32>(value - 64) / 255) * 32.0;
             m_uncopressedVertexes[i + j * m_sizeZ].m_position = glm::vec3(static_cast<f32>(i),
                                                                           y,
                                                                           static_cast<f32>(j));
