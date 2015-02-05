@@ -106,6 +106,7 @@ void CMEMainScene::load(void)
     m_uiToSceneCommands->connectSetSmoothCoefficientCommand(std::bind(&CMEMainScene::setSmoothCoefficient, this, std::placeholders::_1));
     m_uiToSceneCommands->connectSetTextureSamplerCommand(std::bind(&CMEMainScene::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
     m_uiToSceneCommands->connectSetTillingTexcoordCommand(std::bind(&CMEMainScene::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
+    m_uiToSceneCommands->connectGenerateVertecesDataCommand(std::bind(&CMEMainScene::generateVertecesDataCommand, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
     
     m_landscape->addConfigurationLoadedCallback(std::bind(&CMEMainScene::onConfigurationLoaded, this, std::placeholders::_1));
     
@@ -263,6 +264,12 @@ void CMEMainScene::setTextureSampler(const std::string& filename, E_SHADER_SAMPL
 void CMEMainScene::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 {
     m_landscape->setTillingTexcoord(value, sampler);
+}
+
+void CMEMainScene::generateVertecesDataCommand(i32 size, f32 frequency, i32 octaves, ui32 seed)
+{
+    assert(m_landscape != nullptr);
+    m_landscape->generateVertecesData(size, frequency, octaves, seed);
 }
 
 void CMEMainScene::onConfigurationLoaded(ISharedConfigurationRef)

@@ -13,10 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += Sources/main.cpp\
-           Sources/CMainWindow.cpp\
-           Sources/CMEModelsSceneView.cpp
+           Sources/CMainWindow.cpp
 
-HEADERS  += Sources/CMainWindow.h\
-            Sources/CMEModelsSceneView.h
+HEADERS  += Sources/CMainWindow.h
 
 FORMS    += Forms/CMainWindow.ui

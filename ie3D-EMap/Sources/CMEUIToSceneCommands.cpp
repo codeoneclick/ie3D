@@ -12,7 +12,8 @@ CMEUIToSceneCommands::CMEUIToSceneCommands(void) :
 m_setBrushSizeCommand(nullptr),
 m_setBrushStrengthCommnand(nullptr),
 m_setFalloffCoefficientCommand(nullptr),
-m_setSmoothCoefficientCommand(nullptr)
+m_setSmoothCoefficientCommand(nullptr),
+m_generateVertecesDataCommand(nullptr)
 {
     
 }
@@ -97,5 +98,18 @@ void CMEUIToSceneCommands::executeSetTillingTexcoordCommand(f32 value, E_SHADER_
     if(m_setTillingTexcoordCommand != nullptr)
     {
         m_setTillingTexcoordCommand(value, sampler);
+    }
+}
+
+void CMEUIToSceneCommands::connectGenerateVertecesDataCommand(const __GENERATE_VERTECES_DATA_COMMAND& command)
+{
+    m_generateVertecesDataCommand = command;
+}
+
+void CMEUIToSceneCommands::executeGenerateVertecesDataCommand(i32 size, f32 frequency, i32 octaves, ui32 seed)
+{
+    if(m_generateVertecesDataCommand != nullptr)
+    {
+        m_generateVertecesDataCommand(size, frequency, octaves, seed);
     }
 }

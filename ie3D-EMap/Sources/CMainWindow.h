@@ -7,7 +7,6 @@
 #include "HEnums.h"
 #include "IConfiguration.h"
 #include "IRenderTechniqueOperationTextureHandler.h"
-#include "CMEModelsSceneView.h"
 
 class CMEGameController;
 class CMEMainSceneTransition;
@@ -78,6 +77,8 @@ private slots:
     void on_m_textureTilling02SpinBox_valueChanged(int arg1);
 
     void on_m_textureTilling03SpinBox_valueChanged(int arg1);
+
+    void on_generateButton_clicked();
 
 private:
     

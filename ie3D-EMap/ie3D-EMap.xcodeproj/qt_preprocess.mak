@@ -15,7 +15,7 @@ LEXFLAGS  =
 YACC      = yacc
 YACCFLAGS = -d
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
-INCPATH       = -I../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/macx-clang -I. -I../../../../Qt5.2.1/5.2.1/clang_64/lib/QtWidgets.framework/Versions/5/Headers -I../../../../Qt5.2.1/5.2.1/clang_64/lib/QtGui.framework/Versions/5/Headers -I../../../../Qt5.2.1/5.2.1/clang_64/lib/QtCore.framework/Versions/5/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AGL.framework/Headers/ -I. -F/Users/codeoneclick/Qt5.2.1/5.2.1/clang_64/lib
+INCPATH       = -I../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/macx-clang -I. -I../../../../Qt5.2.1/5.2.1/clang_64/lib/QtWidgets.framework/Versions/5/Headers -I../../../../Qt5.2.1/5.2.1/clang_64/lib/QtGui.framework/Versions/5/Headers -I../../../../Qt5.2.1/5.2.1/clang_64/lib/QtCore.framework/Versions/5/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -F/Users/codeoneclick/Qt5.2.1/5.2.1/clang_64/lib
 DEL_FILE  = rm -f
 MOVE      = mv -f
 
@@ -31,23 +31,19 @@ mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
 check: first
 
-compilers: ./moc_CMainWindow.cpp ./moc_CMEModelsSceneView.cpp ./ui_CMainWindow.h
+compilers: ./moc_CMainWindow.cpp ./ui_CMainWindow.h
 compiler_objective_c_make_all:
 compiler_objective_c_clean:
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_CMainWindow.cpp moc_CMEModelsSceneView.cpp
+compiler_moc_header_make_all: moc_CMainWindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_CMainWindow.cpp moc_CMEModelsSceneView.cpp
+	-$(DEL_FILE) moc_CMainWindow.cpp
 moc_CMainWindow.cpp: ../../../../Qt5.2.1/5.2.1/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMainWindow \
+		../../../../Qt5.2.1/5.2.1/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmainwindow.h \
 		Sources/HMEDeclaration.h \
 		Sources/CMainWindow.h
 	/Users/codeoneclick/Qt5.2.1/5.2.1/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 $(INCPATH) Sources/CMainWindow.h -o moc_CMainWindow.cpp
-
-moc_CMEModelsSceneView.cpp: ../../../../Qt5.2.1/5.2.1/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
-		../../../../Qt5.2.1/5.2.1/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
-		Sources/CMEModelsSceneView.h
-	/Users/codeoneclick/Qt5.2.1/5.2.1/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 $(INCPATH) Sources/CMEModelsSceneView.h -o moc_CMEModelsSceneView.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:

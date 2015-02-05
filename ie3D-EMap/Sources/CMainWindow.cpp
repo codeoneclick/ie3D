@@ -310,3 +310,11 @@ bool CMainWindow::event(QEvent *event)
     }
     return QWidget::event(event);
 }
+
+void CMainWindow::on_generateButton_clicked()
+{
+     m_mainSceneTransition->getUIToSceneCommands()->executeGenerateVertecesDataCommand(512,
+                                                                                       ui->m_frequencySpinBox->value(),
+                                                                                       ui->m_octavesSpinBox->value(),
+                                                                                       ui->m_seedSpinBox->value());
+}

@@ -22,6 +22,7 @@ private:
     typedef std::function<void(ui32)> __SET_SMOOTH_COEFFICIENT_COMMAND;
     typedef std::function<void(const std::string&, E_SHADER_SAMPLER)> __SET_TEXTURE_SAMPLER;
     typedef std::function<void(f32, E_SHADER_SAMPLER)> __SET_TILLING_TEXCOORD;
+    typedef std::function<void(i32 size, f32 frequency, i32 octaves, ui32 seed)> __GENERATE_VERTECES_DATA_COMMAND;
     
     __SET_BRUSH_SIZE_COMMAND m_setBrushSizeCommand;
     __SET_BRUSH_STRENGTH_COMMAND m_setBrushStrengthCommnand;
@@ -29,6 +30,7 @@ private:
     __SET_SMOOTH_COEFFICIENT_COMMAND m_setSmoothCoefficientCommand;
     __SET_TEXTURE_SAMPLER m_setTextureSampler;
     __SET_TILLING_TEXCOORD m_setTillingTexcoordCommand;
+    __GENERATE_VERTECES_DATA_COMMAND m_generateVertecesDataCommand;
     
 protected:
     
@@ -54,6 +56,9 @@ public:
     
     void connectSetTillingTexcoordCommand(const __SET_TILLING_TEXCOORD& command);
     void executeSetTillingTexcoordCommand(f32, E_SHADER_SAMPLER);
+    
+    void connectGenerateVertecesDataCommand(const __GENERATE_VERTECES_DATA_COMMAND& command);
+    void executeGenerateVertecesDataCommand(i32 size, f32 frequency, i32 octaves, ui32 seed);
 };
 
 #endif

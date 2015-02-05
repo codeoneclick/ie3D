@@ -53,20 +53,22 @@ private:
     
 protected:
     
-    std::vector<SUncomressedVertex> m_uncopressedVertexes;
+    std::vector<SUncomressedVertex> m_uncompressedVertexes;
     std::vector<SCompressedVertex> m_compressedVertexes;
     std::vector<SFace> m_faces;
     
-    i32 m_sizeX;
-    i32 m_sizeZ;
+    i32 m_size;
     
     f32 m_maxHeight;
     f32 m_minHeight;
     
+    void createVertexesData(ui8* data);
+    
 public:
     
-    CHeightmapData(const std::string& filename);
-    CHeightmapData(void);
+    CHeightmapData(const std::string& filename, i32 size);
+    CHeightmapData(i32 size, f32 frequency, i32 octaves, ui32 seed);
+    ~CHeightmapData(void);
     
     glm::vec3 getVertexPosition(ui32 i, ui32 j) const;
     glm::uint32 getVertexTexcoord(ui32 i, ui32 j) const;
@@ -110,15 +112,6 @@ protected:
     
     CSharedTexture m_heightmapTexture;
     CSharedTexture m_splattingTexture;
-    CSharedTexture m_diffuseTexture;
-    CSharedTexture m_normalTexture;
-    
-    CSharedTexture m_edgesMaskTexture;
-    ui32 m_edgesMaskTextureWidth;
-    ui32 m_edgesMaskTextureHeight;
-    
-    std::queue<CSharedHeightmapProcessingOperation> m_processingOperationQueue;
-    std::map<std::tuple<ui32, ui32>, CSharedHeightmapProcessingOperation> m_uniqueProcessingOperations;
     
     glm::ivec2 m_chunkSize;
     glm::ivec2 m_chunksNum;
@@ -152,13 +145,6 @@ protected:
                                 ui32 offsetX = 0, ui32 offsetY = 0,
                                 ui32 subWidth = 0, ui32 subHeight = 0);
     
-    void updateEdgeChunkMaskTexture(ui16* data, ui32 index,
-                                    ui32 edgesMaskWidth,
-                                    ui32 edgesMaskHeight,
-                                    ui32 textureEdgeSize,
-                                    const glm::vec3& point, bool isReverse);
-    void updateEdgesMaskTexture(CSharedTextureRef texture);
-    
     ui32 createTextureId(void);
     
     
@@ -175,9 +161,8 @@ public:
     
     CSharedTexture createHeightmapTexture(void);
     CSharedTexture createSplattingTexture(void);
-    CSharedTexture createEdgesMaskTexture(void);
-    CSharedTexture createSplattingDiffuseTexture(CSharedMaterialRef material);
-    CSharedTexture createSplattingNormalTexture(CSharedMaterialRef material);
+    
+    void generateVertecesData(i32 size, f32 frequency, i32 octaves, ui32 seed);
     
     static void generateTangentSpace(CSharedHeightmapDataRef heightmapData,
                                      CSharedVertexBufferRef vertexBuffer,
@@ -215,24 +200,6 @@ public:
     {
         assert(m_splattingTexture != nullptr);
         return m_splattingTexture;
-    };
-    
-    inline std::shared_ptr<CTexture> Get_DiffuseTexture(void)
-    {
-        assert(m_diffuseTexture != nullptr);
-        return m_diffuseTexture;
-    };
-    
-    inline std::shared_ptr<CTexture> Get_NormalTexture(void)
-    {
-        assert(m_normalTexture != nullptr);
-        return m_normalTexture;
-    };
-    
-    inline std::shared_ptr<CTexture> Get_EdgesMaskTexture(void)
-    {
-        assert(m_edgesMaskTexture != nullptr);
-        return m_edgesMaskTexture;
     };
 };
 

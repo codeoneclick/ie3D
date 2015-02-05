@@ -204,8 +204,6 @@
 		21FEECD11A07A5DA001E9ACB /* shaderAnimatedGameObjectND.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECCD1A07A5DA001E9ACB /* shaderAnimatedGameObjectND.vert */; };
 		21FEECD21A07A5DA001E9ACB /* shaderStaticGameObjectND.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECCE1A07A5DA001E9ACB /* shaderStaticGameObjectND.vert */; };
 		21FEECE41A07D159001E9ACB /* CMEPreviewModelSceneTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEECE31A07D159001E9ACB /* CMEPreviewModelSceneTransition.cpp */; };
-		21FEED011A093737001E9ACB /* CMEModelsSceneView.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEED001A093737001E9ACB /* CMEModelsSceneView.cpp */; };
-		21FEED041A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEED031A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp */; };
 		21FEED071A09396E001E9ACB /* material.render.operation.map.editor.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */; };
 		21FEED081A09396E001E9ACB /* render.operation.map.editor.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */; };
 		350B621B91997A1D3DB08A50 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1ACE512F3E4E1427AACF434A /* QtGui.framework */; };
@@ -495,9 +493,6 @@
 		21FEECCE1A07A5DA001E9ACB /* shaderStaticGameObjectND.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderStaticGameObjectND.vert; path = "../ie3D-Bundle/Shaders/shaderStaticGameObjectND.vert"; sourceTree = "<group>"; };
 		21FEECE21A07D159001E9ACB /* CMEPreviewModelSceneTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEPreviewModelSceneTransition.h; path = Sources/CMEPreviewModelSceneTransition.h; sourceTree = SOURCE_ROOT; };
 		21FEECE31A07D159001E9ACB /* CMEPreviewModelSceneTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEPreviewModelSceneTransition.cpp; path = Sources/CMEPreviewModelSceneTransition.cpp; sourceTree = SOURCE_ROOT; };
-		21FEECFF1A093737001E9ACB /* CMEModelsSceneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEModelsSceneView.h; path = Sources/CMEModelsSceneView.h; sourceTree = SOURCE_ROOT; };
-		21FEED001A093737001E9ACB /* CMEModelsSceneView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEModelsSceneView.cpp; path = Sources/CMEModelsSceneView.cpp; sourceTree = SOURCE_ROOT; };
-		21FEED031A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moc_CMEModelsSceneView.cpp; sourceTree = SOURCE_ROOT; };
 		21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.map.editor.output.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.map.editor.output.xml"; sourceTree = "<group>"; };
 		21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.map.editor.output.xml; path = "../ie3D-Bundle/Configurations/render.operation.map.editor.output.xml"; sourceTree = "<group>"; };
 		288C01068066B0AAD960F2E5 /* unix.conf */ = {isa = PBXFileReference; lastKnownFileType = file; name = unix.conf; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/common/unix.conf; sourceTree = "<absolute>"; };
@@ -971,7 +966,6 @@
 		25B08E2869634E9BCBA333A2 /* Generated Sources */ = {
 			isa = PBXGroup;
 			children = (
-				21FEED031A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp */,
 				2120900C1906FC5000FFC8D4 /* moc_CMainWindow.cpp */,
 				2120900D1906FC5000FFC8D4 /* ui_CMainWindow.h */,
 			);
@@ -991,8 +985,6 @@
 				21FEECB81A07878E001E9ACB /* CMEPreviewModelScene.cpp */,
 				A4024724E546B6C12F58CF61 /* CMainWindow.h */,
 				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
-				21FEECFF1A093737001E9ACB /* CMEModelsSceneView.h */,
-				21FEED001A093737001E9ACB /* CMEModelsSceneView.cpp */,
 				212092A4190859AD00FFC8D4 /* CMapDragController.h */,
 				212092A3190859AD00FFC8D4 /* CMapDragController.cpp */,
 				21CB5311196C05610066EC6D /* CMEUIToSceneCommands.h */,
@@ -1525,12 +1517,10 @@
 				215DE7331A7D643B00E6062D /* CMEConfigurationModelBrush.cpp in Compile Sources */,
 				215DE7321A7D643B00E6062D /* CMEConfigurationLandscapeBrush.cpp in Compile Sources */,
 				21CB5315196C16A10066EC6D /* CMESceneToUICommands.cpp in Compile Sources */,
-				21FEED041A0937D4001E9ACB /* moc_CMEModelsSceneView.cpp in Compile Sources */,
 				21FEECBA1A07878E001E9ACB /* CMEPreviewModelScene.cpp in Compile Sources */,
 				212092AB19106B6100FFC8D4 /* CMELandscapeBrush.cpp in Compile Sources */,
 				21CB5312196C05610066EC6D /* CMEUIToSceneCommands.cpp in Compile Sources */,
 				215DE7311A7D643B00E6062D /* CMEConfigurationBrushElement.cpp in Compile Sources */,
-				21FEED011A093737001E9ACB /* CMEModelsSceneView.cpp in Compile Sources */,
 				21208EA61906F75D00FFC8D4 /* CMEGameController.cpp in Compile Sources */,
 				212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */,
 				21208EA71906F75D00FFC8D4 /* CMEMainSceneTransition.cpp in Compile Sources */,

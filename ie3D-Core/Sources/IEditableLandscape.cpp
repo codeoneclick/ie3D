@@ -105,3 +105,9 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForc
     m_heightmapProcessor->updateHeightmap(offsetX, offsetZ,
                                           subWidth, subHeight);
 }
+
+void IEditableLandscape::generateVertecesData(i32 size, f32 frequency, i32 octaves, ui32 seed)
+{
+    assert(m_heightmapProcessor != nullptr);
+    m_heightmapProcessor->generateVertecesData(size, frequency, octaves, seed);
+}

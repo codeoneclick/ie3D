@@ -39,6 +39,8 @@ public:
     
     void pressureHeight(const glm::vec3& point, f32 pressureForce);
     
+    void generateVertecesData(i32 size, f32 frequency, i32 octaves, ui32 seed);
+    
 };
 
 #endif
