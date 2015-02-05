@@ -313,8 +313,8 @@ bool CMainWindow::event(QEvent *event)
 
 void CMainWindow::on_generateButton_clicked()
 {
-     m_mainSceneTransition->getUIToSceneCommands()->executeGenerateVertecesDataCommand(512,
-                                                                                       ui->m_frequencySpinBox->value(),
-                                                                                       ui->m_octavesSpinBox->value(),
-                                                                                       ui->m_seedSpinBox->value());
+    m_mainSceneTransition->getUIToSceneCommands()->executeGenerateVertecesDataCommand(glm::ivec2(ui->m_sizeXSpinBox->value(), ui->m_sizeYSpinBox->value()),
+                                                                                      ui->m_frequencySpinBox->value(),
+                                                                                      ui->m_octavesSpinBox->value(),
+                                                                                      ui->m_seedSpinBox->value());
 }

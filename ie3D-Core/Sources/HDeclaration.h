@@ -168,9 +168,9 @@ class CFrustum;
 typedef std::shared_ptr<CFrustum> CSharedFrustum;
 typedef const CSharedFrustum& CSharedFrustumRef;
 
-class CHeightmapProcessor;
-typedef std::shared_ptr<CHeightmapProcessor> CSharedHeightmapProcessor;
-typedef const CSharedHeightmapProcessor& CSharedHeightmapProcessorRef;
+class CHeightmapGenerator;
+typedef std::shared_ptr<CHeightmapGenerator> CSharedHeightmapGenerator;
+typedef const CSharedHeightmapGenerator& CSharedHeightmapGeneratorRef;
 
 class CLandscapeChunk;
 typedef std::shared_ptr<CLandscapeChunk> CSharedLandscapeChunk;
@@ -220,13 +220,9 @@ class CCubemapTexture;
 typedef std::shared_ptr<CCubemapTexture> CSharedCubemapTexture;
 typedef const CSharedCubemapTexture& CSharedCubemapTextureRef;
 
-class CHeightmapProcessingOperation;
-typedef std::shared_ptr<CHeightmapProcessingOperation> CSharedHeightmapProcessingOperation;
-typedef const CSharedHeightmapProcessingOperation& CSharedHeightmapProcessingOperationRef;
-
-class CHeightmapData;
-typedef std::shared_ptr<CHeightmapData> CSharedHeightmapData;
-typedef const CSharedHeightmapData& CSharedHeightmapDataRef;
+class CHeightmap;
+typedef std::shared_ptr<CHeightmap> CSharedHeightmap;
+typedef const CSharedHeightmap& CSharedHeightmapRef;
 
 class CModel;
 typedef std::shared_ptr<CModel> CSharedModel;

@@ -15,7 +15,7 @@
 #include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CLandscapeChunk.h"
-#include "CHeightmapProcessor.h"
+#include "CHeightmap.h"
 #include "CFrustum.h"
 #include "CQuadTree.h"
 #include "CVertexBuffer.h"
@@ -76,18 +76,17 @@ void CLandscape::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        m_heightmapProcessor->update();
+        m_heightmapGenerator->update();
         
-        ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
-        ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
+        glm::ivec2 numChunks = m_heightmapGenerator->getNumChunks();
         
-        for(i32 i = 0; i < numChunksX; ++i)
+        for(i32 i = 0; i < numChunks.x; ++i)
         {
-            for(i32 j = 0; j < numChunksZ; ++j)
+            for(i32 j = 0; j < numChunks.y; ++j)
             {
-                i32 index = i + j * numChunksZ;
-                glm::vec3 maxBound = std::get<0>(m_heightmapProcessor->getChunkBounds(i, j));
-                glm::vec3 minBound = std::get<1>(m_heightmapProcessor->getChunkBounds(i, j));
+                i32 index = i + j * numChunks.x;
+                glm::vec3 maxBound = std::get<0>(m_heightmapGenerator->getChunkBounds(i, j));
+                glm::vec3 minBound = std::get<1>(m_heightmapGenerator->getChunkBounds(i, j));
                 
                 i32 result = m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
                 if(result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
@@ -98,7 +97,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     {
                         m_chunks[index] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
                         m_chunks[index]->setInprogressLOD(LOD);
-                        m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, index, i, j, numChunksX, numChunksZ, LOD](CSharedMeshRef mesh) {
+                        m_heightmapGenerator->runChunkLoading(i, j, LOD, [this, index, i, j, LOD](CSharedMeshRef mesh) {
                             
                             m_chunks[index]->setCamera(m_camera);
                             m_chunks[index]->setCameraFrustum(m_cameraFrustum);
@@ -106,7 +105,10 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             
                             m_chunks[index]->setMesh(mesh);
                             m_chunks[index]->onConfigurationLoaded(m_configuration, true);
-                            m_chunks[index]->setSplattinMaskTexture(m_heightmapProcessor->Get_SplattingTexture());
+                            
+                            CSharedTexture splattingTexture = m_resourceAccessor->getTexture("landscape.splatting.texture");
+                            assert(splattingTexture != nullptr);
+                            m_chunks[index]->setSplattinMaskTexture(splattingTexture);
                             
                             m_chunks[index]->setRenderTechniqueImporter(m_renderTechniqueImporter);
                             m_chunks[index]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
@@ -128,8 +130,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[index]->getCurrentLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
                     {
                         m_chunks[index]->setInprogressLOD(LOD);
-                        m_heightmapProcessor->stopChunkLoading(i, j, [this, i, j, index, numChunksZ, LOD](void){
-                            m_heightmapProcessor->runChunkLoading(i, j, LOD, [this, i, j, index, numChunksZ, LOD](CSharedMeshRef mesh) {
+                        m_heightmapGenerator->stopChunkLoading(i, j, [this, i, j, index, LOD](void) {
+                            m_heightmapGenerator->runChunkLoading(i, j, LOD, [this, i, j, index, LOD](CSharedMeshRef mesh) {
                                 m_chunks[index]->setQuadTree(nullptr, m_chunks[index]->getCurrentLOD());
                                 m_chunks[index]->setMesh(mesh);
                                 m_chunks[index]->onSceneUpdate(0);
@@ -147,7 +149,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     m_chunks[index]->enableRender(false);
                     m_chunks[index]->enableUpdate(false);
                     m_chunks[index]->removeLoadingDependencies();
-                    m_heightmapProcessor->runChunkUnLoading(i, j);
+                    m_heightmapGenerator->runChunkUnLoading(i, j);
                     m_chunks[index] = nullptr;
                 }
             }
@@ -164,18 +166,15 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
 {
     IGameObject::onConfigurationLoaded(configuration, success);
     
-    std::shared_ptr<CConfigurationLandscape> landscapeConfiguration = std::static_pointer_cast<CConfigurationLandscape>(configuration);
-    m_configuration = configuration;
+    std::shared_ptr<CConfigurationLandscape> configurationLandscape = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     assert(m_resourceAccessor != nullptr);
     assert(m_renderTechniqueAccessor != nullptr);
     
-    m_heightmapProcessor = std::make_shared<CHeightmapProcessor>(m_renderTechniqueAccessor, landscapeConfiguration);
-    IEditableLandscape::setHeightmapProcessor(m_heightmapProcessor);
+    m_heightmapGenerator = std::make_shared<CHeightmapGenerator>(m_renderTechniqueAccessor, configurationLandscape);
+    m_chunks.resize(m_heightmapGenerator->getNumChunks().x * m_heightmapGenerator->getNumChunks().y);
     
-    m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapProcessor->createSplattingTexture());
-    m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapProcessor->createHeightmapTexture());
-    
-    m_chunks.resize(m_heightmapProcessor->getNumChunksX() * m_heightmapProcessor->getNumChunksZ());
+    m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapGenerator->createSplattingTexture());
+    m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapGenerator->createHeightmapTexture());
     
     m_tillingTexcoord[E_SHADER_SAMPLER_01] = 16;
     m_tillingTexcoord[E_SHADER_SAMPLER_02] = 16;
@@ -205,18 +204,17 @@ bool CLandscape::checkOcclusion(void)
 
 ui32 CLandscape::numTriangles(void)
 {
-    return 0;
-    ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
-    ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
-    
+    glm::ivec2 numChunks = m_heightmapGenerator->getNumChunks();
     ui32 numTriangles = 0;
-    for(ui32 i = 0; i < numChunksX; ++i)
+    for(ui32 i = 0; i < numChunks.x; ++i)
     {
-        for(ui32 j = 0; j < numChunksZ; ++j)
+        for(ui32 j = 0; j < numChunks.y; ++j)
         {
             assert(m_chunks.size() != 0);
-            assert(m_chunks[i + j * numChunksZ] != nullptr);
-            numTriangles += m_chunks[i + j * numChunksZ]->numTriangles();
+            if(m_chunks[i + j * numChunks.x] != nullptr)
+            {
+                numTriangles += m_chunks[i + j * numChunks.x]->numTriangles();
+            }
         }
     }
     return numTriangles;
@@ -277,16 +275,15 @@ void CLandscape::setTexture(CSharedTextureRef texture,
 void CLandscape::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 {
     m_tillingTexcoord[sampler] = value;
-    ui32 numChunksX = m_heightmapProcessor->getNumChunksX();
-    ui32 numChunksZ = m_heightmapProcessor->getNumChunksZ();
+    glm::ivec2 numChunks = m_heightmapGenerator->getNumChunks();
     
-    for(ui32 i = 0; i < numChunksX; ++i)
+    for(ui32 i = 0; i < numChunks.x; ++i)
     {
-        for(ui32 j = 0; j < numChunksZ; ++j)
+        for(ui32 j = 0; j < numChunks.y; ++j)
         {
-            if(m_chunks[i + j * numChunksZ] != nullptr)
+            if(m_chunks[i + j * numChunks.x] != nullptr)
             {
-                m_chunks[i + j * numChunksZ]->setTillingTexcoord(value, sampler);
+                m_chunks[i + j * numChunks.x]->setTillingTexcoord(value, sampler);
             }
         }
     }
@@ -297,42 +294,27 @@ f32 CLandscape::getTillingTexcoord(E_SHADER_SAMPLER sampler) const
     return m_tillingTexcoord[sampler];
 }
 
-CSharedTexture CLandscape::getHeightmapTexture(void) const
+glm::ivec2 CLandscape::getHeightmapSize(void) const
 {
-    assert(m_heightmapProcessor != nullptr);
-    assert(m_heightmapProcessor->Get_HeightmapTexture() != nullptr);
-    return m_heightmapProcessor->Get_HeightmapTexture();
-}
-
-ui32 CLandscape::getHeightmapSizeX(void) const
-{
-    assert(m_heightmapProcessor != nullptr);
-    assert(m_heightmapProcessor->getSizeX() != 0);
-    return m_heightmapProcessor->getSizeX();
-}
-
-ui32 CLandscape::getHeightmapSizeZ(void) const
-{
-    assert(m_heightmapProcessor != nullptr);
-    assert(m_heightmapProcessor->getSizeZ() != 0);
-    return m_heightmapProcessor->getSizeZ();
+    assert(m_heightmapGenerator != nullptr);
+    return m_heightmapGenerator->getSize();
 }
 
 f32 CLandscape::getHeight(const glm::vec3& position) const
 {
-    assert(m_heightmapProcessor != nullptr);
-    return m_heightmapProcessor->getHeight(position);
+    assert(m_heightmapGenerator != nullptr);
+    return m_heightmapGenerator->getHeight(position);
 }
 
 glm::vec2 CLandscape::getAngleOnHeightmapSurface(const glm::vec3& position) const
 {
-    assert(m_heightmapProcessor != nullptr);
-    return m_heightmapProcessor->getAngleOnHeightmapSurface(position);
+    assert(m_heightmapGenerator != nullptr);
+    return m_heightmapGenerator->getAngleOnHeightmapSurface(position);
 }
 
 void CLandscape::sewSeams(i32 currentIndexX, i32 currentIndexZ)
 {
-    ui32 chunksCountPerRow = m_heightmapProcessor->getNumChunksX();
+    ui32 chunksCountPerRow = m_heightmapGenerator->getNumChunks().x;
     i32 index = currentIndexX + currentIndexZ * chunksCountPerRow;
     if((currentIndexZ - 1) >= 0)
     {

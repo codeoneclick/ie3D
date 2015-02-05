@@ -266,7 +266,7 @@ void CMEMainScene::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
     m_landscape->setTillingTexcoord(value, sampler);
 }
 
-void CMEMainScene::generateVertecesDataCommand(i32 size, f32 frequency, i32 octaves, ui32 seed)
+void CMEMainScene::generateVertecesDataCommand(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)
 {
     assert(m_landscape != nullptr);
     m_landscape->generateVertecesData(size, frequency, octaves, seed);

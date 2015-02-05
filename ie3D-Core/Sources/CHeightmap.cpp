@@ -6,7 +6,7 @@
 //
 //
 
-#include "CHeightmapProcessor.h"
+#include "CHeightmap.h"
 #include "CTexture.h"
 #include "CMaterial.h"
 #include "CMesh.h"
@@ -29,9 +29,7 @@
 
 #endif
 
-CHeightmapData::CHeightmapData(const std::string& filename, i32 size) :
-m_maxHeight(-FLT_MAX),
-m_minHeight(FLT_MAX),
+CHeightmap::CHeightmap(const std::string& filename, const glm::ivec2& size) :
 m_size(size)
 {
     ui8* data = nullptr;
@@ -53,8 +51,7 @@ m_size(size)
     CGContextScaleCTM(context, 1.0, -1.0);
     [image drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
     UIGraphicsPopContext();
-    assert(image.size.width != image.size.height);
-    m_size = image.size.width;
+    m_size = glm::ivec2(image.size.width, image.size.height);
 
 #elif defined(__OSX__)
     
@@ -63,42 +60,43 @@ m_size(size)
     CGImageRef mask =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:mask];
     data = [bitmap bitmapData];
+    m_size = glm::ivec2(image.size.width, image.size.height);
     
-    assert(image.size.width != image.size.height);
-    m_size = image.size.width;
-    
-#endif
-    
-    CHeightmapData::createVertexesData(data);
-    delete[] data;
-}
-
-CHeightmapData::CHeightmapData(i32 size, f32 frequency, i32 octaves, ui32 seed) :
-m_maxHeight(-FLT_MAX),
-m_minHeight(FLT_MAX),
-m_size(size)
-{
-    ui8* data = new ui8[m_size * m_size];
-    
-    const CPerlinNoise perlin(seed);
-    const f32 fx = m_size / frequency;
-    const f32 fy = m_size / frequency;
-    
-    for(ui32 i = 0; i < m_size; ++i)
+    std::vector<f32> heights;
+    for(ui32 i = 0; i < m_size.x; ++i)
     {
-        for(ui32 j = 0; j < m_size; ++j)
+        for(ui32 j = 0; j < m_size.y; ++j)
         {
-            f32 n = perlin.octaveNoise(i / fx, j / fy, octaves);
-            n = glm::clamp(n * 0.5f + 0.5f, 0.0f, 1.0f);
-            data[i + j * m_size] = static_cast<ui8>(n * 255.99f);
+            heights.push_back(data[(i + j * m_size.x) * 4 + 1] / 255);
         }
     }
     
-    CHeightmapData::createVertexesData(data);
-    delete[] data;
+#endif
+    
+    CHeightmap::createVertexesData(heights);
 }
 
-CHeightmapData::~CHeightmapData(void)
+CHeightmap::CHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed) :
+m_size(size)
+{
+    const CPerlinNoise perlin(seed);
+    const f32 fx = m_size.x / frequency;
+    const f32 fy = m_size.y / frequency;
+    
+    std::vector<f32> heights;
+    for(ui32 i = 0; i < m_size.x; ++i)
+    {
+        for(ui32 j = 0; j < m_size.y; ++j)
+        {
+            f32 n = perlin.octaveNoise(i / fx, j / fy, octaves);
+            n = glm::clamp(n * 0.5f + 0.5f, 0.0f, 1.0f);
+            heights.push_back(n);
+        }
+    }
+    CHeightmap::createVertexesData(heights);
+}
+
+CHeightmap::~CHeightmap(void)
 {
     std::vector<SUncomressedVertex> uncompressedVertexesDeleter;
     m_uncompressedVertexes.swap(uncompressedVertexesDeleter);
@@ -110,41 +108,39 @@ CHeightmapData::~CHeightmapData(void)
     m_faces.swap(faces);
 }
 
-void CHeightmapData::createVertexesData(ui8* data)
+void CHeightmap::createVertexesData(const std::vector<f32>& data)
 {
-    m_uncompressedVertexes.resize(m_size * m_size);
-    m_faces.resize((m_size - 1) * (m_size - 1) * 2);
+    m_uncompressedVertexes.resize(m_size.x * m_size.y);
+    m_faces.resize((m_size.x - 1) * (m_size.y - 1) * 2);
     
-    for(ui32 i = 0; i < m_size; ++i)
+    for(ui32 i = 0; i < m_size.x; ++i)
     {
-        for(ui32 j = 0; j < m_size; ++j)
+        for(ui32 j = 0; j < m_size.y; ++j)
         {
-            f32 y = i == 0 || j == 0 || i == (m_size - 1) || j == (m_size - 1) ? -1.0 : (static_cast<f32>(data[i + j * m_size] - 64) / 255) * 32.0;
-            m_uncompressedVertexes[i + j * m_size].m_position = glm::vec3(static_cast<f32>(i),
+            f32 y = i == 0 || j == 0 || i == (m_size.x - 1) || j == (m_size.y - 1) ? -1.0 : data.at(i + j * m_size.x);
+            m_uncompressedVertexes[i + j * m_size.x].m_position = glm::vec3(static_cast<f32>(i),
                                                                           y,
                                                                           static_cast<f32>(j));
-            m_uncompressedVertexes[i + j * m_size].m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<ui32>(i) /
-                                                                                             static_cast<f32>(m_size),
+            m_uncompressedVertexes[i + j * m_size.x].m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<ui32>(i) /
+                                                                                             static_cast<f32>(m_size.x),
                                                                                              static_cast<ui32>(j) /
-                                                                                             static_cast<f32>(m_size)));
-            m_maxHeight = m_maxHeight < data[i + j * m_size] ? data[i + j * m_size] : m_maxHeight;
-            m_minHeight = m_minHeight > data[i + j * m_size] ? data[i + j * m_size] : m_minHeight;
+                                                                                             static_cast<f32>(m_size.y)));
         }
     }
     
     ui32 index = 0;
-    for(ui32 i = 0; i < (m_size - 1); ++i)
+    for(ui32 i = 0; i < (m_size.x - 1); ++i)
     {
-        for(ui32 j = 0; j < (m_size - 1); ++j)
+        for(ui32 j = 0; j < (m_size.y - 1); ++j)
         {
             SFace face;
-            face.m_indexes[0] = i + j * m_size;
+            face.m_indexes[0] = i + j * m_size.x;
             m_uncompressedVertexes[face.m_indexes[0]].m_containInFace.push_back(index);
             glm::vec3 point_01 = m_uncompressedVertexes[face.m_indexes[0]].m_position;
-            face.m_indexes[1] = i + (j + 1) * m_size;
+            face.m_indexes[1] = i + (j + 1) * m_size.x;
             m_uncompressedVertexes[face.m_indexes[1]].m_containInFace.push_back(index);
             glm::vec3 point_02 = m_uncompressedVertexes[face.m_indexes[1]].m_position;
-            face.m_indexes[2] = i + 1 + j * m_size;
+            face.m_indexes[2] = i + 1 + j * m_size.x;
             m_uncompressedVertexes[face.m_indexes[2]].m_containInFace.push_back(index);
             glm::vec3 point_03 = m_uncompressedVertexes[face.m_indexes[2]].m_position;
             
@@ -158,13 +154,13 @@ void CHeightmapData::createVertexesData(ui8* data)
             m_faces[index] = face;
             index++;
             
-            face.m_indexes[0] = i + (j + 1) * m_size;
+            face.m_indexes[0] = i + (j + 1) * m_size.x;
             m_uncompressedVertexes[face.m_indexes[0]].m_containInFace.push_back(index);
             point_01 = m_uncompressedVertexes[face.m_indexes[0]].m_position;
-            face.m_indexes[1] = i + 1 + (j + 1) * m_size;
+            face.m_indexes[1] = i + 1 + (j + 1) * m_size.x;
             m_uncompressedVertexes[face.m_indexes[1]].m_containInFace.push_back(index);
             point_02 = m_uncompressedVertexes[face.m_indexes[1]].m_position;
-            face.m_indexes[2] = i + 1 + j * m_size;
+            face.m_indexes[2] = i + 1 + j * m_size.x;
             m_uncompressedVertexes[face.m_indexes[2]].m_containInFace.push_back(index);
             point_03 = m_uncompressedVertexes[face.m_indexes[2]].m_position;
             
@@ -209,27 +205,27 @@ void CHeightmapData::createVertexesData(ui8* data)
     
 #if !defined(__EDITOR__)
     std::vector<SUncomressedVertex> uncompressedVertexesDeleter;
-    m_uncopressedVertexes.swap(uncompressedVertexesDeleter);
+    m_uncompressedVertexes.swap(uncompressedVertexesDeleter);
 #endif
     
 }
 
-glm::vec3 CHeightmapData::getVertexPosition(ui32 i, ui32 j) const
+glm::vec3 CHeightmap::getVertexPosition(ui32 i, ui32 j) const
 {
-    return m_compressedVertexes[i + j * m_size].m_position;
+    return m_compressedVertexes[i + j * m_size.x].m_position;
 }
 
-glm::uint32 CHeightmapData::getVertexTexcoord(ui32 i, ui32 j) const
+glm::uint32 CHeightmap::getVertexTexcoord(ui32 i, ui32 j) const
 {
-    return m_compressedVertexes[i + j * m_size].m_texcoord;
+    return m_compressedVertexes[i + j * m_size.x].m_texcoord;
 }
 
-glm::uint32 CHeightmapData::getVertexNormal(ui32 i, ui32 j) const
+glm::uint32 CHeightmap::getVertexNormal(ui32 i, ui32 j) const
 {
-    return m_compressedVertexes[i + j * m_size].m_normal;
+    return m_compressedVertexes[i + j * m_size.x].m_normal;
 }
 
-void CHeightmapData::updateVertexesData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertexes)
+void CHeightmap::updateVertexesData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertexes)
 {
     for(ui32 i = 0; i < modifiedVertexes.size(); ++i)
     {
@@ -239,16 +235,16 @@ void CHeightmapData::updateVertexesData(const std::vector<std::tuple<ui32, ui32,
                                        std::get<2>(modifiedVertexes.at(i)),
                                        static_cast<f32>(indexZ));
         
-        m_uncompressedVertexes[indexX + indexZ * m_size].m_position = position;
+        m_uncompressedVertexes[indexX + indexZ * m_size.x].m_position = position;
     }
     
     for(ui32 i = 0; i < modifiedVertexes.size(); ++i)
     {
         ui32 indexX = std::get<0>(modifiedVertexes.at(i));
         ui32 indexZ = std::get<1>(modifiedVertexes.at(i));
-        for(ui32 j = 0; j < m_uncompressedVertexes[indexX + indexZ * m_size].m_containInFace.size(); ++j)
+        for(ui32 j = 0; j < m_uncompressedVertexes[indexX + indexZ * m_size.x].m_containInFace.size(); ++j)
         {
-            ui32 index = m_uncompressedVertexes[indexX + indexZ * m_size].m_containInFace.at(j);
+            ui32 index = m_uncompressedVertexes[indexX + indexZ * m_size.x].m_containInFace.at(j);
             SFace face = m_faces.at(index);
             
             glm::vec3 point_01 = m_uncompressedVertexes[face.m_indexes[0]].m_position;
@@ -268,7 +264,7 @@ void CHeightmapData::updateVertexesData(const std::vector<std::tuple<ui32, ui32,
     {
         ui32 indexX = std::get<0>(modifiedVertexes.at(i));
         ui32 indexZ = std::get<1>(modifiedVertexes.at(i));
-        SUncomressedVertex vertex = m_uncompressedVertexes.at(indexX + indexZ * m_size);
+        SUncomressedVertex vertex = m_uncompressedVertexes.at(indexX + indexZ * m_size.x);
         assert(vertex.m_containInFace.size() != 0);
         glm::vec4 normal = glm::unpackSnorm4x8(m_faces.at(vertex.m_containInFace.at(0)).m_normal);
         for(ui32 j = 1; j < vertex.m_containInFace.size(); ++j)
@@ -276,24 +272,19 @@ void CHeightmapData::updateVertexesData(const std::vector<std::tuple<ui32, ui32,
             normal += glm::unpackSnorm4x8(m_faces.at(vertex.m_containInFace.at(j)).m_normal);
         }
         normal = glm::normalize(normal);
-        m_uncompressedVertexes.at(indexX + indexZ * m_size).m_normal = glm::packSnorm4x8(normal);
+        m_uncompressedVertexes.at(indexX + indexZ * m_size.x).m_normal = glm::packSnorm4x8(normal);
         
-        m_compressedVertexes.at(indexX + indexZ * m_size).m_position = m_uncompressedVertexes.at(indexX + indexZ * m_size).m_position;
-        m_compressedVertexes.at(indexX + indexZ * m_size).m_normal = m_uncompressedVertexes.at(indexX + indexZ * m_size).m_normal;
+        m_compressedVertexes.at(indexX + indexZ * m_size.x).m_position = m_uncompressedVertexes.at(indexX + indexZ * m_size.x).m_position;
+        m_compressedVertexes.at(indexX + indexZ * m_size.x).m_normal = m_uncompressedVertexes.at(indexX + indexZ * m_size.x).m_normal;
     }
 }
 
-i32 CHeightmapData::getSizeX(void) const
+glm::ivec2 CHeightmap::getSize(void) const
 {
     return m_size;
 }
 
-i32 CHeightmapData::getSizeZ(void) const
-{
-    return m_size;
-}
-
-f32 CHeightmapData::getMaxHeight(void) const
+f32 CHeightmap::getMaxHeight(void) const
 {
     decltype(m_compressedVertexes)::iterator minHeight, maxHeight;
     auto values = std::minmax_element(begin(m_compressedVertexes), end(m_compressedVertexes), [] (SCompressedVertex const& value_01, SCompressedVertex const& value_02) {
@@ -302,7 +293,7 @@ f32 CHeightmapData::getMaxHeight(void) const
     return values.second->m_position.y;
 }
 
-f32 CHeightmapData::getMinHeight(void) const
+f32 CHeightmap::getMinHeight(void) const
 {
     decltype(m_compressedVertexes)::iterator minHeight, maxHeight;
     auto values = std::minmax_element(begin(m_compressedVertexes), end(m_compressedVertexes), [] (SCompressedVertex const& value_01, SCompressedVertex const& value_02) {
@@ -311,7 +302,7 @@ f32 CHeightmapData::getMinHeight(void) const
     return values.first->m_position.y;
 }
 
-f32 CHeightmapDataAccessor::getAngleOnHeightmapSurface(const glm::vec3& point_01,
+f32 CHeightmapAccessor::getAngleOnHeightmapSurface(const glm::vec3& point_01,
                                                       const glm::vec3& point_02,
                                                       const glm::vec3& point_03)
 {
@@ -324,7 +315,7 @@ f32 CHeightmapDataAccessor::getAngleOnHeightmapSurface(const glm::vec3& point_01
     return scalar / (vectorLength_01 * vectorLength_02);
 }
 
-f32 CHeightmapDataAccessor::getHeight(CSharedHeightmapDataRef data, const glm::vec3& position)
+f32 CHeightmapAccessor::getHeight(CSharedHeightmapRef data, const glm::vec3& position)
 {
     f32 _x = position.x / 1.0;
     f32 _z = position.z / 1.0;
@@ -333,26 +324,26 @@ f32 CHeightmapDataAccessor::getHeight(CSharedHeightmapDataRef data, const glm::v
     f32 dx = _x - x;
     f32 dy = _z - z;
     
-    if((x < 0) || (z < 0) || (x > (data->getSizeX() - 1)) || (z > (data->getSizeZ() - 1)))
+    if((x < 0) || (z < 0) || (x > (data->getSize().x - 1)) || (z > (data->getSize().y - 1)))
     {
-        return -0.0;
+        return 0.0;
     }
     
     f32 height_00 = data->getVertexPosition(x, z).y;
     f32 height_01 = data->getVertexPosition(x, z).y;
-    if(z < (data->getSizeZ() - 1) && z >= 0)
+    if(z < (data->getSize().y - 1) && z >= 0)
     {
         height_01 = data->getVertexPosition(x, z + 1).y;
     }
     
     f32 height_10 = data->getVertexPosition(x, z).y;
-    if(x < (data->getSizeX() - 1) && x >= 0)
+    if(x < (data->getSize().x - 1) && x >= 0)
     {
         height_10 = data->getVertexPosition(x + 1, z).y;
     }
     
     f32 height_11 = data->getVertexPosition(x, z).y;
-    if(z < (data->getSizeZ() - 1) && z >= 0 && x < (data->getSizeX() - 1) && x >= 0)
+    if(z < (data->getSize().y - 1) && z >= 0 && x < (data->getSize().x - 1) && x >= 0)
     {
         height_11 =  data->getVertexPosition(x + 1, z + 1).y;
     }
@@ -362,24 +353,24 @@ f32 CHeightmapDataAccessor::getHeight(CSharedHeightmapDataRef data, const glm::v
     return height_0 * (1.0f - dx) + height_1 * dx;
 }
 
-glm::vec2 CHeightmapDataAccessor::getAngleOnHeightmapSurface(CSharedHeightmapDataRef data, const glm::vec3& position)
+glm::vec2 CHeightmapAccessor::getAngleOnHeightmapSurface(CSharedHeightmapRef data, const glm::vec3& position)
 {
     f32 offset = 0.25;
     glm::vec3 point_01 = position;
     glm::vec3 point_02 = glm::vec3(position.x, position.y + offset, position.z);
-    f32 height =  CHeightmapDataAccessor::getHeight(data, glm::vec3(position.x + offset, 0.0f, position.z));
+    f32 height =  CHeightmapAccessor::getHeight(data, glm::vec3(position.x + offset, 0.0f, position.z));
     glm::vec3 point_03 = glm::vec3(position.x + offset, height, position.z);
-    height = CHeightmapDataAccessor::getHeight(data, glm::vec3(position.x, 0.0f, position.z + offset));
+    height = CHeightmapAccessor::getHeight(data, glm::vec3(position.x, 0.0f, position.z + offset));
     glm::vec3 point_04 = glm::vec3(position.x, height, position.z + offset);
     
-    f32 angle_01 = CHeightmapDataAccessor::getAngleOnHeightmapSurface(point_01, point_02, point_03);
-    f32 angle_02 = CHeightmapDataAccessor::getAngleOnHeightmapSurface(point_01, point_02, point_04);
+    f32 angle_01 = CHeightmapAccessor::getAngleOnHeightmapSurface(point_01, point_02, point_03);
+    f32 angle_02 = CHeightmapAccessor::getAngleOnHeightmapSurface(point_01, point_02, point_04);
     
     return glm::vec2(glm::degrees(acos(angle_02) - M_PI_2), glm::degrees(asin(angle_01)));
 }
 
-CHeightmapProcessor::CHeightmapProcessor(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration) :
-m_heightmapData(nullptr),
+CHeightmapGenerator::CHeightmapGenerator(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration) :
+m_heightmap(nullptr),
 m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_heightmapTexture(nullptr),
 m_splattingTexture(nullptr)
@@ -387,19 +378,16 @@ m_splattingTexture(nullptr)
     assert(m_renderTechniqueAccessor != nullptr);
     assert(configuration != nullptr);
     
-    std::shared_ptr<CConfigurationLandscape> configurationLandscape = std::static_pointer_cast<CConfigurationLandscape>(configuration);
-    m_heightmapData = std::make_shared<CHeightmapData>(512, 7.0f, 16, 8);
+    m_heightmap = std::make_shared<CHeightmap>("", glm::ivec2(0));
     
-    m_chunkSize = glm::ivec2(64, 64);
+    m_chunkSize = glm::ivec2(65, 65);
     m_chunkLODsSizes.at(0) = glm::ivec2(65, 65);
     m_chunkLODsSizes.at(1) = glm::ivec2(33, 33);
     m_chunkLODsSizes.at(2) = glm::ivec2(17, 17);
     m_chunkLODsSizes.at(3) = glm::ivec2(9, 9);
     
-    m_chunksNum = glm::ivec2(m_heightmapData->getSizeX() / m_chunkSize.x,
-                             m_heightmapData->getSizeZ() / m_chunkSize.y);
-    
-    m_chunkSize = glm::ivec2(65, 65);
+    m_chunksNum = glm::ivec2(m_heightmap->getSize().x / (m_chunkSize.x - 1),
+                             m_heightmap->getSize().y / (m_chunkSize.y - 1));
     
     m_chunksUsed.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(nullptr, nullptr, nullptr, nullptr,
                                                                        E_LANDSCAPE_CHUNK_LOD_UNKNOWN));
@@ -412,9 +400,9 @@ m_splattingTexture(nullptr)
         for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
             ui32 index = i + j * m_chunksNum.x;
-            glm::vec3 maxBound = glm::vec3( -4096.0f, -4096.0f, -4096.0f );
-            glm::vec3 minBound = glm::vec3(  4096.0f,  4096.0f,  4096.0f );
-            CHeightmapProcessor::createChunkBound(m_chunkLODsSizes.at(0).x, m_chunkLODsSizes.at(0).y,
+            glm::vec3 maxBound = glm::vec3(-4096.0f, -4096.0f, -4096.0f);
+            glm::vec3 minBound = glm::vec3( 4096.0f,  4096.0f,  4096.0f);
+            CHeightmapGenerator::createChunkBound(m_chunkLODsSizes.at(0).x, m_chunkLODsSizes.at(0).y,
                                                   i, j,
                                                   &maxBound, &minBound);
             
@@ -423,120 +411,171 @@ m_splattingTexture(nullptr)
     }
 }
 
-CHeightmapProcessor::~CHeightmapProcessor(void)
+CHeightmapGenerator::~CHeightmapGenerator(void)
 {
     
 }
 
-void CHeightmapProcessor::generateVertecesData(i32 size, f32 frequency, i32 octaves, ui32 seed)
+void CHeightmapGenerator::generateVertecesData(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)
 {
-    m_heightmapData = std::make_shared<CHeightmapData>(size, frequency, octaves, seed);
-    for(ui32 i = 0; i < CHeightmapProcessor::getNumChunksX(); ++i)
+    if(m_heightmap != nullptr && (m_heightmap->getSize().x != size.x || m_heightmap->getSize().y != size.y))
     {
-        for(ui32 j = 0; j < CHeightmapProcessor::getNumChunksZ(); ++j)
+        m_heightmap = std::make_shared<CHeightmap>(size, frequency, octaves, seed);
+        
+        m_chunksNum = glm::ivec2(m_heightmap->getSize().x / (m_chunkSize.x - 1),
+                                 m_heightmap->getSize().y / (m_chunkSize.y - 1));
+        
+        for(ui32 i = 0; i < m_chunksUsed.size(); ++i)
         {
-            ui32 index = i + j * CHeightmapProcessor::getNumChunksX();
-            if(std::get<0>(m_chunksUsed.at(index)) != nullptr)
+            m_chunksUsed.at(i) = nullptr;
+        }
+        std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, E_LANDSCAPE_CHUNK_LOD>> chunksUsed;
+        m_chunksUsed.swap(chunksUsed);
+        m_chunksUsed.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(nullptr, nullptr, nullptr, nullptr,
+                                                                           E_LANDSCAPE_CHUNK_LOD_UNKNOWN));
+        
+        for(ui32 i = 0; i < m_chunksUnused.size(); ++i)
+        {
+            m_chunksUnused.at(i) = nullptr;
+        }
+        std::vector<CSharedMesh> chunksUnused;
+        m_chunksUnused.swap(chunksUnused);
+        
+        
+        for (ui32 i = 0; i < m_executedOperations.size(); ++i)
+        {
+            m_executedOperations.at(i) = nullptr;
+        }
+        std::vector<CSharedThreadOperation> executedOperations;
+        m_executedOperations.swap(executedOperations);
+        m_executedOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
+        
+        for (ui32 i = 0; i < m_canceledOperations.size(); ++i)
+        {
+            m_canceledOperations.at(i) = nullptr;
+        }
+        std::vector<CSharedThreadOperation> canceledOperations;
+        m_canceledOperations.swap(canceledOperations);
+        m_canceledOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
+
+        std::vector<std::tuple<glm::vec3, glm::vec3>> chunksBounds;
+        m_chunksBounds.swap(chunksBounds);
+        m_chunksBounds.resize(m_chunksNum.x * m_chunksNum.y);
+        
+        for(ui32 i = 0; i < m_chunksNum.x; ++i)
+        {
+            for(ui32 j = 0; j < m_chunksNum.y; ++j)
             {
-                E_LANDSCAPE_CHUNK_LOD LOD = std::get<4>(m_chunksUsed[index]);
-                CHeightmapProcessor::writeToVertexBuffer(i, j, LOD);
-                CHeightmapProcessor::commitVertexBufferToVRAM(i, j, LOD);
+                ui32 index = i + j * m_chunksNum.x;
+                glm::vec3 maxBound = glm::vec3(-4096.0f, -4096.0f, -4096.0f);
+                glm::vec3 minBound = glm::vec3( 4096.0f,  4096.0f,  4096.0f);
+                CHeightmapGenerator::createChunkBound(m_chunkLODsSizes.at(0).x, m_chunkLODsSizes.at(0).y,
+                                                      i, j,
+                                                      &maxBound, &minBound);
+                
+                m_chunksBounds[index] = std::make_tuple(maxBound, minBound);
+            }
+        }
+    }
+    else
+    {
+        m_heightmap = std::make_shared<CHeightmap>(size, frequency, octaves, seed);
+        for(ui32 i = 0; i < CHeightmapGenerator::getNumChunks().x; ++i)
+        {
+            for(ui32 j = 0; j < CHeightmapGenerator::getNumChunks().y; ++j)
+            {
+                ui32 index = i + j * CHeightmapGenerator::getNumChunks().x;
+                if(std::get<0>(m_chunksUsed.at(index)) != nullptr)
+                {
+                    E_LANDSCAPE_CHUNK_LOD LOD = std::get<4>(m_chunksUsed[index]);
+                    CHeightmapGenerator::writeToVertexBuffer(i, j, LOD);
+                    CHeightmapGenerator::commitVertexBufferToVRAM(i, j, LOD);
+                }
             }
         }
     }
     
-    CHeightmapProcessor::updateSplattingTexture(m_splattingTexture);
-    CHeightmapProcessor::updateHeightmapTexture(m_heightmapTexture);
+    CHeightmapGenerator::updateSplattingTexture(m_splattingTexture);
+    CHeightmapGenerator::updateHeightmapTexture(m_heightmapTexture);
 }
 
-ui32 CHeightmapProcessor::getSizeX(void) const
+glm::ivec2 CHeightmapGenerator::getSize(void) const
 {
-    assert(m_heightmapData != nullptr);
-    return m_heightmapData->getSizeX();
+    assert(m_heightmap != nullptr);
+    return m_heightmap->getSize();
 }
 
-ui32 CHeightmapProcessor::getSizeZ(void) const
+glm::ivec2 CHeightmapGenerator::getNumChunks(void) const
 {
-    assert(m_heightmapData != nullptr);
-    return m_heightmapData->getSizeZ();
+    return m_chunksNum;
 }
 
-ui32 CHeightmapProcessor::getNumChunksX(void) const
+f32 CHeightmapGenerator::getHeight(const glm::vec3& position) const
 {
-    return m_chunksNum.x;
-}
-
-ui32 CHeightmapProcessor::getNumChunksZ(void) const
-{
-    return m_chunksNum.y;
-}
-
-f32 CHeightmapProcessor::getHeight(const glm::vec3& position) const
-{
-    assert(m_heightmapData != nullptr);
-    assert(position.x < CHeightmapProcessor::getSizeX());
-    assert(position.z < CHeightmapProcessor::getSizeZ());
+    assert(m_heightmap != nullptr);
+    assert(position.x < CHeightmapGenerator::getSize().x);
+    assert(position.z < CHeightmapGenerator::getSize().y);
     assert(position.x >= 0.0);
     assert(position.z >= 0.0);
-    if(position.x < CHeightmapProcessor::getSizeX() &&
-       position.z < CHeightmapProcessor::getSizeZ() &&
+    if(position.x < CHeightmapGenerator::getSize().x &&
+       position.z < CHeightmapGenerator::getSize().y &&
        position.x >= 0.0 &&
        position.z >= 0.0)
     {
-        return CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(position.x , 0.0, position.z));
+        return CHeightmapAccessor::getHeight(m_heightmap, glm::vec3(position.x , 0.0, position.z));
     }
     return 0.0;
 }
 
-glm::vec2 CHeightmapProcessor::getAngleOnHeightmapSurface(const glm::vec3& position) const
+glm::vec2 CHeightmapGenerator::getAngleOnHeightmapSurface(const glm::vec3& position) const
 {
-    assert(m_heightmapData != nullptr);
-    assert(position.x < CHeightmapProcessor::getSizeX());
-    assert(position.z < CHeightmapProcessor::getSizeZ());
+    assert(m_heightmap != nullptr);
+    assert(position.x < CHeightmapGenerator::getSize().x);
+    assert(position.z < CHeightmapGenerator::getSize().y);
     assert(position.x >= 0.0);
     assert(position.z >= 0.0);
-    if(position.x < CHeightmapProcessor::getSizeX() &&
-       position.z < CHeightmapProcessor::getSizeZ() &&
+    if(position.x < CHeightmapGenerator::getSize().x &&
+       position.z < CHeightmapGenerator::getSize().y &&
        position.x >= 0.0 &&
        position.z >= 0.0)
     {
-        return CHeightmapDataAccessor::getAngleOnHeightmapSurface(m_heightmapData, position);
+        return CHeightmapAccessor::getAngleOnHeightmapSurface(m_heightmap, position);
     }
     return glm::vec2(0.0, 0.0);
 }
 
-void CHeightmapProcessor::updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights)
+void CHeightmapGenerator::updateHeightmap(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights)
 {
-    assert(m_heightmapData != nullptr);
-    m_heightmapData->updateVertexesData(modifiedHeights);
+    assert(m_heightmap != nullptr);
+    m_heightmap->updateVertexesData(modifiedHeights);
 }
 
-void CHeightmapProcessor::updateHeightmap(ui32 offsetX, ui32 offsetZ,
+void CHeightmapGenerator::updateHeightmap(ui32 offsetX, ui32 offsetZ,
                                           ui32 subWidth, ui32 subHeight)
 {
-    for(ui32 i = 0; i < CHeightmapProcessor::getNumChunksX(); ++i)
+    for(ui32 i = 0; i < CHeightmapGenerator::getNumChunks().x; ++i)
     {
-        for(ui32 j = 0; j < CHeightmapProcessor::getNumChunksZ(); ++j)
+        for(ui32 j = 0; j < CHeightmapGenerator::getNumChunks().y; ++j)
         {
-            ui32 index = i + j * CHeightmapProcessor::getNumChunksX();
+            ui32 index = i + j * CHeightmapGenerator::getNumChunks().x;
             if(std::get<0>(m_chunksUsed.at(index)) != nullptr)
             {
                 E_LANDSCAPE_CHUNK_LOD LOD = std::get<4>(m_chunksUsed[index]);
-                CHeightmapProcessor::writeToVertexBuffer(i, j, LOD);
-                CHeightmapProcessor::commitVertexBufferToVRAM(i, j, LOD);
+                CHeightmapGenerator::writeToVertexBuffer(i, j, LOD);
+                CHeightmapGenerator::commitVertexBufferToVRAM(i, j, LOD);
             }
         }
     }
-    CHeightmapProcessor::updateSplattingTexture(m_splattingTexture, false,
+    CHeightmapGenerator::updateSplattingTexture(m_splattingTexture, false,
                                                 offsetX, offsetZ,
                                                 subWidth, subHeight);
     
-    CHeightmapProcessor::updateHeightmapTexture(m_heightmapTexture, false,
+    CHeightmapGenerator::updateHeightmapTexture(m_heightmapTexture, false,
                                                 offsetX, offsetZ,
                                                 subWidth, subHeight);
 }
 
-ui32 CHeightmapProcessor::createTextureId(void)
+ui32 CHeightmapGenerator::createTextureId(void)
 {
     ui32 textureId;
     glGenTextures(1, &textureId);
@@ -548,21 +587,21 @@ ui32 CHeightmapProcessor::createTextureId(void)
     return textureId;
 }
 
-CSharedTexture CHeightmapProcessor::createHeightmapTexture(void)
+CSharedTexture CHeightmapGenerator::createHeightmapTexture(void)
 {
     assert(m_heightmapTexture == nullptr);
-    assert(m_heightmapData != nullptr);
-    ui32 textureId = CHeightmapProcessor::createTextureId();
+    assert(m_heightmap != nullptr);
+    ui32 textureId = CHeightmapGenerator::createTextureId();
     m_heightmapTexture = CTexture::constructCustomTexture("landscape.heightmap",
                                                           textureId,
-                                                          m_heightmapData->getSizeX(),
-                                                          m_heightmapData->getSizeZ());
+                                                          m_heightmap->getSize().x,
+                                                          m_heightmap->getSize().y);
     m_heightmapTexture->setWrapMode(GL_CLAMP_TO_EDGE);
-    CHeightmapProcessor::updateHeightmapTexture(m_heightmapTexture);
+    CHeightmapGenerator::updateHeightmapTexture(m_heightmapTexture);
     return m_heightmapTexture;
 }
 
-void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool isCreation,
+void CHeightmapGenerator::updateHeightmapTexture(CSharedTextureRef texture, bool isCreation,
                                                  ui32 offsetX, ui32 offsetY,
                                                  ui32 subWidth, ui32 subHeight)
 {
@@ -573,18 +612,18 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
     
     if(isCreation)
     {
-        data = new ui8[m_heightmapData->getSizeX() * m_heightmapData->getSizeZ()];
-        f32 maxDeep = abs(m_heightmapData->getMinHeight());
-        for(int i = 0; i < m_heightmapData->getSizeX(); i++)
+        data = new ui8[m_heightmap->getSize().x * m_heightmap->getSize().y];
+        f32 maxDeep = abs(m_heightmap->getMinHeight());
+        for(int i = 0; i < m_heightmap->getSize().x; i++)
         {
-            for(int j = 0; j < m_heightmapData->getSizeZ(); j++)
+            for(int j = 0; j < m_heightmap->getSize().y; j++)
             {
-                f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0f, j));
+                f32 height = CHeightmapAccessor::getHeight(m_heightmap, glm::vec3(i , 0.0f, j));
                 height = height <= 0.0f ? height : 0.0f;
                 height /= maxDeep;
                 height = std::max(0.0f, std::min((height + 1.0f) / 2.0f, 1.0f));
                 ui8 color = static_cast<ui8>(height * 255);
-                data[i + j * m_heightmapData->getSizeZ()] = color;
+                data[i + j * m_heightmap->getSize().x] = color;
             }
         }
         
@@ -594,8 +633,8 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
 #else
                      GL_ALPHA,
 #endif
-                     m_heightmapData->getSizeX(),
-                     m_heightmapData->getSizeZ(),
+                     m_heightmap->getSize().x,
+                     m_heightmap->getSize().y,
                      0,
 #if defined(__OPENG_30__)
                      GL_RED,
@@ -611,15 +650,15 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
         assert(offsetY >= 0);
         assert(offsetY + subHeight < texture->getHeight());
         
-        f32 maxDeep = abs(m_heightmapData->getMinHeight());
+        f32 maxDeep = abs(m_heightmap->getMinHeight());
         
         data = new ui8[subWidth * subHeight];
         for(int i = 0; i < subWidth; i++)
         {
             for(int j = 0; j < subHeight; j++)
             {
-                f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData,
-                                                               glm::vec3(i + offsetX , 0.0, j + offsetY));
+                f32 height = CHeightmapAccessor::getHeight(m_heightmap,
+                                                           glm::vec3(i + offsetX , 0.0, j + offsetY));
                 height = height <= 0.0f ? height : 0.0f;
                 height /= maxDeep;
                 height = std::max(0.0f, std::min((height + 1.0f) / 2.0f, 1.0f));
@@ -641,22 +680,22 @@ void CHeightmapProcessor::updateHeightmapTexture(CSharedTextureRef texture, bool
     delete[] data;
 }
 
-std::shared_ptr<CTexture> CHeightmapProcessor::createSplattingTexture(void)
+std::shared_ptr<CTexture> CHeightmapGenerator::createSplattingTexture(void)
 {
     assert(m_splattingTexture == nullptr);
-    ui32 textureId = CHeightmapProcessor::createTextureId();
+    ui32 textureId = CHeightmapGenerator::createTextureId();
     m_splattingTexture = CTexture::constructCustomTexture("landscape.splatting",
                                                           textureId,
-                                                          m_heightmapData->getSizeX(),
-                                                          m_heightmapData->getSizeZ());
+                                                          m_heightmap->getSize().x,
+                                                          m_heightmap->getSize().y);
     m_splattingTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     m_splattingTexture->setMagFilter(GL_LINEAR);
     m_splattingTexture->setMinFilter(GL_LINEAR);
-    CHeightmapProcessor::updateSplattingTexture(m_splattingTexture);
+    CHeightmapGenerator::updateSplattingTexture(m_splattingTexture);
     return m_splattingTexture;
 }
 
-void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture, bool isCreation,
+void CHeightmapGenerator::updateSplattingTexture(CSharedTextureRef texture, bool isCreation,
                                                  ui32 offsetX, ui32 offsetY,
                                                  ui32 subWidth, ui32 subHeight)
 {
@@ -667,37 +706,37 @@ void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture, bool
     
     if(isCreation)
     {
-        data = new ui16[m_heightmapData->getSizeX() * m_heightmapData->getSizeZ()];
-        for(int i = 0; i < m_heightmapData->getSizeX(); i++)
+        data = new ui16[m_heightmap->getSize().x * m_heightmap->getSize().y];
+        for(int i = 0; i < m_heightmap->getSize().x; i++)
         {
-            for(int j = 0; j < m_heightmapData->getSizeZ(); j++)
+            for(int j = 0; j < m_heightmap->getSize().y; j++)
             {
-                data[i + j * m_heightmapData->getSizeZ()] = TO_RGB565(255, 0, 0);
-                f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i , 0.0, j));
-                glm::vec4 normal = glm::unpackSnorm4x8(m_heightmapData->getVertexNormal(i, j));
+                data[i + j * m_heightmap->getSize().x] = TO_RGB565(255, 0, 0);
+                f32 height = CHeightmapAccessor::getHeight(m_heightmap, glm::vec3(i , 0.0, j));
+                glm::vec4 normal = glm::unpackSnorm4x8(m_heightmap->getVertexNormal(i, j));
                 f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), glm::vec3(normal.x, normal.y, normal.z));
                 value = glm::degrees(acosf(value));
                 assert(value >= 0.0);
                 if(height >= 0.25 && value > 45.0)
                 {
-                    data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(0, 255, 0);
+                    data[i + j * m_heightmap->getSize().x] = TO_RGB565(0, 255, 0);
                 }
                 if(height < 0.25)
                 {
-                    data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(0, 0, 255);
+                    data[i + j * m_heightmap->getSize().x] = TO_RGB565(0, 0, 255);
                 }
                 
                 if(i == 0 || j == 0 ||
-                   i == (m_heightmapData->getSizeX() - 1) ||
-                   j == (m_heightmapData->getSizeZ() - 1))
+                   i == (m_heightmap->getSize().x - 1) ||
+                   j == (m_heightmap->getSize().y - 1))
                 {
-                    data[i + j * m_heightmapData->getSizeX()] = TO_RGB565(255, 0, 0);
+                    data[i + j * m_heightmap->getSize().x] = TO_RGB565(255, 0, 0);
                 }
             }
         }
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
-                     m_heightmapData->getSizeX(),
-                     m_heightmapData->getSizeZ(),
+                     m_heightmap->getSize().x,
+                     m_heightmap->getSize().y,
                      0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
     }
     else
@@ -713,8 +752,8 @@ void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture, bool
             for(int j = 0; j < subHeight; j++)
             {
                 data[i + j * subWidth] = TO_RGB565(255, 0, 0);
-                f32 height = CHeightmapDataAccessor::getHeight(m_heightmapData, glm::vec3(i + offsetX , 0.0, j + offsetY));
-                glm::vec4 normal = glm::unpackSnorm4x8(m_heightmapData->getVertexNormal(i + offsetX, j + offsetY));
+                f32 height = CHeightmapAccessor::getHeight(m_heightmap, glm::vec3(i + offsetX , 0.0, j + offsetY));
+                glm::vec4 normal = glm::unpackSnorm4x8(m_heightmap->getVertexNormal(i + offsetX, j + offsetY));
                 f32 value = glm::dot(glm::vec3(0.0, 1.0, 0.0), glm::vec3(normal.x, normal.y, normal.z));
                 value = glm::degrees(acosf(value));
                 assert(value >= 0.0);
@@ -737,13 +776,13 @@ void CHeightmapProcessor::updateSplattingTexture(CSharedTextureRef texture, bool
     delete[] data;
 }
 
-const std::tuple<glm::vec3, glm::vec3> CHeightmapProcessor::getChunkBounds(ui32 i, ui32 j) const
+const std::tuple<glm::vec3, glm::vec3> CHeightmapGenerator::getChunkBounds(ui32 i, ui32 j) const
 {
     assert(m_chunksBounds.size() != 0);
     return m_chunksBounds[i + j * m_chunksNum.x];
 }
 
-void CHeightmapProcessor::writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD)
+void CHeightmapGenerator::writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD)
 {
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
@@ -766,22 +805,22 @@ void CHeightmapProcessor::writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffse
             glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSize.x - chunkOffsetX,
                                            j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSize.y - chunkOffsetZ);
             
-            i32 indexXOffset = static_cast<i32>(position.x) < m_heightmapData->getSizeX() ?
+            i32 indexXOffset = static_cast<i32>(position.x) < m_heightmap->getSize().x ?
             static_cast<i32>(position.x) :
-            static_cast<i32>(m_heightmapData->getSizeX() - 1);
+            static_cast<i32>(m_heightmap->getSize().x - 1);
             
-            i32 indexZOffset = static_cast<i32>(position.y) < m_heightmapData->getSizeZ() ?
+            i32 indexZOffset = static_cast<i32>(position.y) < m_heightmap->getSize().y ?
             static_cast<i32>(position.y) :
-            static_cast<i32>(m_heightmapData->getSizeZ() - 1);
+            static_cast<i32>(m_heightmap->getSize().y - 1);
             
-            vertexData[index].m_position = m_heightmapData->getVertexPosition(indexXOffset, indexZOffset);
+            vertexData[index].m_position = m_heightmap->getVertexPosition(indexXOffset, indexZOffset);
             
             vertexData[index].m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<i32>(vertexData[index].m_position.x) /
-                                                                        static_cast<f32>(m_heightmapData->getSizeX()),                                                                        
+                                                                        static_cast<f32>(m_heightmap->getSize().x),
                                                                         static_cast<i32>(vertexData[index].m_position.z) /
-                                                                        static_cast<f32>(m_heightmapData->getSizeZ())));
+                                                                        static_cast<f32>(m_heightmap->getSize().y)));
             
-            vertexData[index].m_normal = m_heightmapData->getVertexNormal(indexXOffset, indexZOffset);
+            vertexData[index].m_normal = m_heightmap->getVertexNormal(indexXOffset, indexZOffset);
             ++index;
         }
     }
@@ -792,7 +831,7 @@ void CHeightmapProcessor::writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffse
 #endif
 }
 
-void CHeightmapProcessor::commitVertexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD)
+void CHeightmapGenerator::commitVertexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD)
 {
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
@@ -810,7 +849,7 @@ void CHeightmapProcessor::commitVertexBufferToVRAM(ui32 chunkOffsetX, ui32 chunk
 #endif
 }
 
-void CHeightmapProcessor::writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD)
+void CHeightmapGenerator::writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD)
 {
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
@@ -849,7 +888,7 @@ void CHeightmapProcessor::writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffset
 #endif
 }
 
-void CHeightmapProcessor::commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD)
+void CHeightmapGenerator::commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD)
 {
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
@@ -867,7 +906,7 @@ void CHeightmapProcessor::commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkO
 #endif
 }
 
-void CHeightmapProcessor::generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
+void CHeightmapGenerator::generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
 {
     ui32 index = chunkOffsetX + chunkOffsetZ * m_chunksNum.x;
     CSharedMesh mesh = std::get<0>(m_chunksUsed[index]);
@@ -891,7 +930,7 @@ void CHeightmapProcessor::generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
 #endif
 }
 
-void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
+void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                                           const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
                                           const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback)
 {
@@ -920,7 +959,7 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
         CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>((m_chunkSize.x - 1) * (m_chunkSize.y - 1) * 6,
                                                                         GL_STREAM_DRAW);
         
-        CHeightmapProcessor::createChunkBound(m_chunkLODsSizes.at(LOD).x, m_chunkLODsSizes.at(LOD).y,
+        CHeightmapGenerator::createChunkBound(m_chunkLODsSizes.at(LOD).x, m_chunkLODsSizes.at(LOD).y,
                                               i, j,
                                               &maxBound, &minBound);
         
@@ -941,29 +980,29 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     
     CSharedThreadOperation writeToVertexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     writeToVertexBufferOperation->setExecutionBlock([this, i, j, LOD](void) {
-        CHeightmapProcessor::writeToVertexBuffer(i, j, LOD);
+        CHeightmapGenerator::writeToVertexBuffer(i, j, LOD);
     });
     
     CSharedThreadOperation commitVertexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     commitVertexBufferOperation->setExecutionBlock([this, i, j, LOD](void) {
-        CHeightmapProcessor::commitVertexBufferToVRAM(i, j, LOD);
+        CHeightmapGenerator::commitVertexBufferToVRAM(i, j, LOD);
     });
     
     CSharedThreadOperation writeToIndexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     writeToIndexBufferOperation->setExecutionBlock([this, i, j, LOD](void) {
-        CHeightmapProcessor::writeToIndexBuffer(i, j, LOD);
+        CHeightmapGenerator::writeToIndexBuffer(i, j, LOD);
     });
     
     CSharedThreadOperation commitIndexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     commitIndexBufferOperation->setExecutionBlock([this, i, j, index, LOD](void) {
-        CHeightmapProcessor::commitIndexBufferToVRAM(i, j, LOD);
+        CHeightmapGenerator::commitIndexBufferToVRAM(i, j, LOD);
         assert(std::get<2>(m_chunksUsed[index]) != nullptr);
         std::get<2>(m_chunksUsed[index])(std::get<0>(m_chunksUsed[index]));
     });
     
     CSharedThreadOperation createQuadTreeOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     createQuadTreeOperation->setExecutionBlock([this, i, j](void) {
-        CHeightmapProcessor::generateQuadTree(i, j);
+        CHeightmapGenerator::generateQuadTree(i, j);
     });
     
     CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
@@ -1000,7 +1039,7 @@ void CHeightmapProcessor::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     completionOperation->addToExecutionQueue();
 }
 
-void CHeightmapProcessor::stopChunkLoading(ui32 i, ui32 j, const std::function<void(void)>& stopLoadingCallback)
+void CHeightmapGenerator::stopChunkLoading(ui32 i, ui32 j, const std::function<void(void)>& stopLoadingCallback)
 {
     ui32 index = i + j * m_chunksNum.x;
     if(m_executedOperations[index] != nullptr)
@@ -1019,7 +1058,7 @@ void CHeightmapProcessor::stopChunkLoading(ui32 i, ui32 j, const std::function<v
     }
 }
 
-void CHeightmapProcessor::runChunkUnLoading(ui32 i, ui32 j)
+void CHeightmapGenerator::runChunkUnLoading(ui32 i, ui32 j)
 {
     ui32 index = i + j * m_chunksNum.x;
     if(m_executedOperations[index] != nullptr)
@@ -1036,7 +1075,7 @@ void CHeightmapProcessor::runChunkUnLoading(ui32 i, ui32 j)
     }
 }
 
-void CHeightmapProcessor::update(void)
+void CHeightmapGenerator::update(void)
 {
     for(ui32 index = 0; index < m_canceledOperations.size(); ++index)
     {
@@ -1056,11 +1095,11 @@ void CHeightmapProcessor::update(void)
     }
 }
 
-void CHeightmapProcessor::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
+void CHeightmapGenerator::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
                                            ui32 chunkOffsetX, ui32 chunkOffsetZ,
                                            glm::vec3* maxBound, glm::vec3* minBound)
 {
-    assert(m_heightmapData != nullptr);
+    assert(m_heightmap != nullptr);
     assert(chunkLODSizeX != 0);
     assert(chunkLODSizeZ != 0);
     
@@ -1074,15 +1113,15 @@ void CHeightmapProcessor::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSize
             glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSize.x - chunkOffsetX,
                                            j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSize.y - chunkOffsetZ);
             
-            ui32 indexXOffset = static_cast<ui32>(position.x) < m_heightmapData->getSizeX() ?
+            ui32 indexXOffset = static_cast<ui32>(position.x) < m_heightmap->getSize().x ?
             static_cast<ui32>(position.x) :
-            static_cast<ui32>(m_heightmapData->getSizeX() - 1);
+            static_cast<ui32>(m_heightmap->getSize().x - 1);
             
-            ui32 indexZOffset = static_cast<ui32>(position.y) < m_heightmapData->getSizeZ() ?
+            ui32 indexZOffset = static_cast<ui32>(position.y) < m_heightmap->getSize().y ?
             static_cast<ui32>(position.y) :
-            static_cast<ui32>(m_heightmapData->getSizeZ() - 1);
+            static_cast<ui32>(m_heightmap->getSize().y - 1);
             
-            glm::vec3 point = m_heightmapData->getVertexPosition(indexXOffset,
+            glm::vec3 point = m_heightmap->getVertexPosition(indexXOffset,
                                                                  indexZOffset);
             
             *maxBound = CMeshData::calculateMaxBound(point, *maxBound);
@@ -1091,8 +1130,7 @@ void CHeightmapProcessor::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSize
     }
 }
 
-void CHeightmapProcessor::generateTangentSpace(CSharedHeightmapDataRef heightmapData,
-                                               CSharedVertexBufferRef vertexBuffer,
+void CHeightmapGenerator::generateTangentSpace(CSharedVertexBufferRef vertexBuffer,
                                                CSharedIndexBufferRef indexBuffer)
 {
     std::vector<glm::vec3> tangents, binormals;
@@ -1116,7 +1154,7 @@ void CHeightmapProcessor::generateTangentSpace(CSharedHeightmapDataRef heightmap
         f32 t3 = glm::unpackUnorm2x16(vertexData[indexData[i + 2]].m_texcoord).y;
         
         glm::vec3 t, b;
-        CHeightmapProcessor::getTriangleBasis(v1, v2, v3, s1, t1, s2, t2, s3, t3, t, b);
+        CHeightmapGenerator::getTriangleBasis(v1, v2, v3, s1, t1, s2, t2, s3, t3, t, b);
         tangents.push_back(t);
         binormals.push_back(b);
     }
@@ -1142,12 +1180,12 @@ void CHeightmapProcessor::generateTangentSpace(CSharedHeightmapDataRef heightmap
         tangent /= static_cast<f32>(lrt.size());
         
         glm::vec4 normal = glm::unpackSnorm4x8(vertexData[i].m_normal);
-        tangent = CHeightmapProcessor::ortogonalize(glm::vec3(normal.x, normal.y, normal.z), tangent);
+        tangent = CHeightmapGenerator::ortogonalize(glm::vec3(normal.x, normal.y, normal.z), tangent);
         vertexData[i].m_tangent = glm::packSnorm4x8(glm::vec4(tangent.x, tangent.y, tangent.z, 0.0));
     }
 }
 
-void CHeightmapProcessor::getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
+void CHeightmapGenerator::getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
                                            f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,
                                            glm::vec3& tangentX, glm::vec3& tangentY)
 {
@@ -1183,7 +1221,7 @@ void CHeightmapProcessor::getTriangleBasis(const glm::vec3& E, const glm::vec3& 
     tangentY = glm::normalize(tangentY);
 }
 
-glm::vec3 CHeightmapProcessor::getClosestPointOnLine(const glm::vec3& a, const glm::vec3& b, const glm::vec3& p)
+glm::vec3 CHeightmapGenerator::getClosestPointOnLine(const glm::vec3& a, const glm::vec3& b, const glm::vec3& p)
 {
     glm::vec3 c = p - a;
     glm::vec3 V = b - a;
@@ -1199,9 +1237,9 @@ glm::vec3 CHeightmapProcessor::getClosestPointOnLine(const glm::vec3& a, const g
     return ( a + V );
 }
 
-glm::vec3 CHeightmapProcessor::ortogonalize(const glm::vec3& v1, const glm::vec3& v2)
+glm::vec3 CHeightmapGenerator::ortogonalize(const glm::vec3& v1, const glm::vec3& v2)
 {
-    glm::vec3 v2ProjV1 = CHeightmapProcessor::getClosestPointOnLine( v1, -v1, v2 );
+    glm::vec3 v2ProjV1 = CHeightmapGenerator::getClosestPointOnLine( v1, -v1, v2 );
     glm::vec3 res = v2 - v2ProjV1;
     res = glm::normalize(res);
     return res;

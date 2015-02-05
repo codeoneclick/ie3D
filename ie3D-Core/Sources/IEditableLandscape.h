@@ -16,8 +16,6 @@ class IEditableLandscape
 {
 private:
     
-    CSharedHeightmapProcessor m_heightmapProcessor;
-    
     ui32 m_editableSize;
     ui32 m_editableStrength;
     ui32 m_editableFalloffCoefficient;
@@ -25,8 +23,8 @@ private:
     
 protected:
 
-    void setHeightmapProcessor(CSharedHeightmapProcessorRef heightmapProcessor);
-    
+    CSharedHeightmapGenerator m_heightmapGenerator;
+    std::vector<CSharedLandscapeChunk> m_chunks;
     
 public:
     IEditableLandscape(void);
@@ -39,7 +37,7 @@ public:
     
     void pressureHeight(const glm::vec3& point, f32 pressureForce);
     
-    void generateVertecesData(i32 size, f32 frequency, i32 octaves, ui32 seed);
+    void generateVertecesData(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
     
 };
 

@@ -106,7 +106,7 @@ void CMEUIToSceneCommands::connectGenerateVertecesDataCommand(const __GENERATE_V
     m_generateVertecesDataCommand = command;
 }
 
-void CMEUIToSceneCommands::executeGenerateVertecesDataCommand(i32 size, f32 frequency, i32 octaves, ui32 seed)
+void CMEUIToSceneCommands::executeGenerateVertecesDataCommand(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)
 {
     if(m_generateVertecesDataCommand != nullptr)
     {

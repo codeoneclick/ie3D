@@ -18,10 +18,6 @@ public IEditableLandscape
 {
 private:
 
-    CSharedHeightmapProcessor m_heightmapProcessor;
-    std::vector<CSharedLandscapeChunk> m_chunks;
-    ISharedConfiguration m_configuration;
-    
     f32 m_tillingTexcoord[E_SHADER_SAMPLER_MAX];
     
 protected:
@@ -65,10 +61,7 @@ public:
     
     std::vector<ISharedGameObject> getChunks(void) const;
 
-    CSharedTexture getHeightmapTexture(void) const;
-    
-    ui32 getHeightmapSizeX(void) const;
-    ui32 getHeightmapSizeZ(void) const;
+    glm::ivec2 getHeightmapSize(void) const;
     
     f32 getHeight(const glm::vec3& position) const;
     glm::vec2 getAngleOnHeightmapSurface(const glm::vec3& position) const;

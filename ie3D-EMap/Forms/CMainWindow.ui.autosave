@@ -301,6 +301,9 @@ background-color: rgb(64, 64, 64);</string>
            <height>24</height>
           </rect>
          </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::UpDownArrows</enum>
+         </property>
          <property name="minimum">
           <number>64</number>
          </property>

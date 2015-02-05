@@ -13,7 +13,7 @@
 #include "HDeclaration.h"
 #include "HEnums.h"
 
-class CHeightmapData
+class CHeightmap
 {
 private:
     
@@ -57,18 +57,14 @@ protected:
     std::vector<SCompressedVertex> m_compressedVertexes;
     std::vector<SFace> m_faces;
     
-    i32 m_size;
-    
-    f32 m_maxHeight;
-    f32 m_minHeight;
-    
-    void createVertexesData(ui8* data);
+    glm::ivec2 m_size;
+    void createVertexesData(const std::vector<f32>& data);
     
 public:
     
-    CHeightmapData(const std::string& filename, i32 size);
-    CHeightmapData(i32 size, f32 frequency, i32 octaves, ui32 seed);
-    ~CHeightmapData(void);
+    CHeightmap(const std::string& filename, const glm::ivec2& size);
+    CHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
+    ~CHeightmap(void);
     
     glm::vec3 getVertexPosition(ui32 i, ui32 j) const;
     glm::uint32 getVertexTexcoord(ui32 i, ui32 j) const;
@@ -76,14 +72,13 @@ public:
     
     void updateVertexesData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertexes);
     
-    i32 getSizeX(void) const;
-    i32 getSizeZ(void) const;
+    glm::ivec2 getSize(void) const;
     
     f32 getMaxHeight(void) const;
     f32 getMinHeight(void) const;
 };
 
-class CHeightmapDataAccessor
+class CHeightmapAccessor
 {
 private:
     
@@ -95,20 +90,20 @@ protected:
     
 public:
     
-    CHeightmapDataAccessor(void) = default;
-    ~CHeightmapDataAccessor(void) = default;
+    CHeightmapAccessor(void) = default;
+    ~CHeightmapAccessor(void) = default;
     
-    static f32 getHeight(CSharedHeightmapDataRef data, const glm::vec3& position);
-    static glm::vec2 getAngleOnHeightmapSurface(CSharedHeightmapDataRef data, const glm::vec3& position);
+    static f32 getHeight(CSharedHeightmapRef data, const glm::vec3& position);
+    static glm::vec2 getAngleOnHeightmapSurface(CSharedHeightmapRef data, const glm::vec3& position);
 };
 
-class CHeightmapProcessor
+class CHeightmapGenerator
 {
 private:
     
 protected:
     
-    std::shared_ptr<CHeightmapData> m_heightmapData;
+    std::shared_ptr<CHeightmap> m_heightmap;
     
     CSharedTexture m_heightmapTexture;
     CSharedTexture m_splattingTexture;
@@ -156,20 +151,19 @@ protected:
     
 public:
     
-    CHeightmapProcessor(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration);
-    ~CHeightmapProcessor(void);
+    CHeightmapGenerator(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration);
+    ~CHeightmapGenerator(void);
     
     CSharedTexture createHeightmapTexture(void);
     CSharedTexture createSplattingTexture(void);
     
-    void generateVertecesData(i32 size, f32 frequency, i32 octaves, ui32 seed);
+    void generateVertecesData(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
     
-    static void generateTangentSpace(CSharedHeightmapDataRef heightmapData,
-                                     CSharedVertexBufferRef vertexBuffer,
-                                     CSharedIndexBufferRef indexBuffer);
+    void generateTangentSpace(CSharedVertexBufferRef vertexBuffer,
+                              CSharedIndexBufferRef indexBuffer);
     
-    ui32 getSizeX(void) const;
-    ui32 getSizeZ(void) const;
+    glm::ivec2 getSize(void) const;
+    glm::ivec2 getNumChunks(void) const;
     
     void update(void);
     
@@ -181,26 +175,11 @@ public:
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
     
-    ui32 getNumChunksX(void) const;
-    ui32 getNumChunksZ(void) const;
-    
     f32 getHeight(const glm::vec3& position) const;
     glm::vec2 getAngleOnHeightmapSurface(const glm::vec3& position) const;
-    void updateHeightmapData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights);
+    void updateHeightmap(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights);
     void updateHeightmap(ui32 offsetX, ui32 offsetZ,
                          ui32 subWidth, ui32 subHeight);
-    
-    inline std::shared_ptr<CTexture> Get_HeightmapTexture(void)
-    {
-        assert(m_heightmapTexture != nullptr);
-        return m_heightmapTexture;
-    };
-    
-    inline std::shared_ptr<CTexture> Get_SplattingTexture(void)
-    {
-        assert(m_splattingTexture != nullptr);
-        return m_splattingTexture;
-    };
 };
 
 #endif 

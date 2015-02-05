@@ -77,8 +77,8 @@ void CMELandscapeBrush::createMesh(f32 radius)
             position.y = m_landscape != nullptr &&
             position.x > 0.0 &&
             position.z > 0.0 &&
-            position.x < m_landscape->getHeightmapSizeX() &&
-            position.z < m_landscape->getHeightmapSizeZ() ?
+            position.x < m_landscape->getHeightmapSize().x &&
+            position.z < m_landscape->getHeightmapSize().y ?
             m_landscape->getHeight(position) : 0.0;
             vertexData[index].m_position = position;
             
@@ -208,8 +208,8 @@ void CMELandscapeBrush::setPosition(const glm::vec3 &position)
                                                j + IGameObject::getPosition().z + 0.5);
                 position.y = position.x > 0.0 &&
                 position.z > 0.0 &&
-                position.x < m_landscape->getHeightmapSizeX() &&
-                position.z < m_landscape->getHeightmapSizeZ() ?
+                position.x < m_landscape->getHeightmapSize().x &&
+                position.z < m_landscape->getHeightmapSize().y ?
                 m_landscape->getHeight(position) : 0.0;
                 vertexData[index].m_position = position;
                 ++index;

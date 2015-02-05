@@ -7,14 +7,15 @@
 //
 
 #include "IEditableLandscape.h"
-#include "CHeightmapProcessor.h"
+#include "CHeightmap.h"
+#include "CLandscapeChunk.h"
 
 IEditableLandscape::IEditableLandscape(void) :
 m_editableSize(4),
 m_editableStrength(1),
 m_editableFalloffCoefficient(0),
 m_editableSmoothCoefficient(0),
-m_heightmapProcessor(nullptr)
+m_heightmapGenerator(nullptr)
 {
     
 }
@@ -22,12 +23,6 @@ m_heightmapProcessor(nullptr)
 IEditableLandscape::~IEditableLandscape(void)
 {
     
-}
-
-void IEditableLandscape::setHeightmapProcessor(CSharedHeightmapProcessorRef heightmapProcessor)
-{
-    assert(heightmapProcessor != nullptr);
-    m_heightmapProcessor = heightmapProcessor;
 }
 
 void IEditableLandscape::setEditableSize(ui32 value)
@@ -62,11 +57,11 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForc
         for(i32 z = minIndZ; z < maxIndZ; z++)
         {
             if((x < 0) || (z < 0) ||
-               x >= m_heightmapProcessor->getSizeX() ||
-               z >= m_heightmapProcessor->getSizeZ())
+               x >= m_heightmapGenerator->getSize().x ||
+               z >= m_heightmapGenerator->getSize().y)
                 continue;
             
-            f32 height = m_heightmapProcessor->getHeight(glm::vec3(x, 0.0, z));
+            f32 height = m_heightmapGenerator->getHeight(glm::vec3(x, 0.0, z));
             f32 distance = glm::length(glm::vec3(x - point.x, 0.0, z - point.z));
             
             if (distance > m_editableSize)
@@ -83,9 +78,9 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForc
                 for(i32 j = z - m_editableSmoothCoefficient; j <= z + m_editableSmoothCoefficient; ++j)
                 {
                     if(i > 0 && j > 0 &&
-                       i < m_heightmapProcessor->getSizeX() && j < m_heightmapProcessor->getSizeZ())
+                       i < m_heightmapGenerator->getSize().x && j < m_heightmapGenerator->getSize().y)
                     {
-                        height += m_heightmapProcessor->getHeight(glm::vec3(i, 0.0, j));
+                        height += m_heightmapGenerator->getHeight(glm::vec3(i, 0.0, j));
                         delimiter++;
                     }
                 }
@@ -95,19 +90,49 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForc
             modifiedHeights.push_back(std::make_tuple(x, z, height));
         }
 	}
-    m_heightmapProcessor->updateHeightmapData(modifiedHeights);
+    m_heightmapGenerator->updateHeightmap(modifiedHeights);
     
     ui32 offsetX = MAX_VALUE(minIndX, 0);
     ui32 offsetZ = MAX_VALUE(minIndZ, 0);
-    ui32 subWidth = MIN_VALUE(maxIndX, m_heightmapProcessor->getSizeX() - 1) - offsetX;
-    ui32 subHeight = MIN_VALUE(maxIndZ, m_heightmapProcessor->getSizeZ() - 1) - offsetZ;
+    ui32 subWidth = MIN_VALUE(maxIndX, m_heightmapGenerator->getSize().x - 1) - offsetX;
+    ui32 subHeight = MIN_VALUE(maxIndZ, m_heightmapGenerator->getSize().y - 1) - offsetZ;
 
-    m_heightmapProcessor->updateHeightmap(offsetX, offsetZ,
+    m_heightmapGenerator->updateHeightmap(offsetX, offsetZ,
                                           subWidth, subHeight);
 }
 
-void IEditableLandscape::generateVertecesData(i32 size, f32 frequency, i32 octaves, ui32 seed)
+void IEditableLandscape::generateVertecesData(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)
 {
-    assert(m_heightmapProcessor != nullptr);
-    m_heightmapProcessor->generateVertecesData(size, frequency, octaves, seed);
+    assert(m_heightmapGenerator != nullptr);
+    glm::ivec2 previousSize = m_heightmapGenerator->getSize();
+    if(size.x != previousSize.x ||
+       size.y != previousSize.y)
+    {
+        glm::ivec2 numChunks = m_heightmapGenerator->getNumChunks();
+        for(i32 i = 0; i < numChunks.x; ++i)
+        {
+            for(i32 j = 0; j < numChunks.y; ++j)
+            {
+                i32 index = i + j * numChunks.x;
+                if(m_chunks[index] != nullptr)
+                {
+                    m_chunks[index]->enableRender(false);
+                    m_chunks[index]->enableUpdate(false);
+                    m_chunks[index]->removeLoadingDependencies();
+                    m_heightmapGenerator->runChunkUnLoading(i, j);
+                    m_chunks[index] = nullptr;
+                }
+            }
+        }
+    }
+    
+    m_heightmapGenerator->generateVertecesData(size, frequency, octaves, seed);
+    
+    if(size.x != previousSize.x ||
+       size.y != previousSize.y)
+    {
+        std::vector<CSharedLandscapeChunk> chunks;
+        m_chunks.swap(chunks);
+        m_chunks.resize(m_heightmapGenerator->getNumChunks().x * m_heightmapGenerator->getNumChunks().y);
+    }
 }

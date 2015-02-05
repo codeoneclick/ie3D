@@ -52,7 +52,7 @@ protected:
     void setSmoothCoefficient(ui32 value);
     void setTextureSampler(const std::string& filename, E_SHADER_SAMPLER sampler);
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
-    void generateVertecesDataCommand(i32 size, f32 frequency, i32 octaves, ui32 seed);
+    void generateVertecesDataCommand(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
     
     void onConfigurationLoaded(ISharedConfigurationRef configuration);
     void onResourceLoaded(ISharedResourceRef resource);
