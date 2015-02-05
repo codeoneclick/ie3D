@@ -126,11 +126,11 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[index]->setQuadTree(quadTree, LOD);
                         });
                     }
-                    else if(m_chunks[index]->getInprogressLOD() != LOD &&
-                            m_chunks[index]->getCurrentLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
+                    else if(m_chunks[index]->getInprogressLOD() == m_chunks[index]->getCurrentLOD() &&
+                            m_chunks[index]->getCurrentLOD() != LOD)
                     {
                         m_chunks[index]->setInprogressLOD(LOD);
-                        m_heightmapGenerator->stopChunkLoading(i, j, [this, i, j, index, LOD](void) {
+                        //m_heightmapGenerator->stopChunkLoading(i, j, [this, i, j, index, LOD](void) {
                             m_heightmapGenerator->runChunkLoading(i, j, LOD, [this, i, j, index, LOD](CSharedMeshRef mesh) {
                                 m_chunks[index]->setQuadTree(nullptr, m_chunks[index]->getCurrentLOD());
                                 m_chunks[index]->setMesh(mesh);
@@ -141,7 +141,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                                 m_chunks[index]->setQuadTree(quadTree, LOD);
                                 m_chunks[index]->onSceneUpdate(0);
                             });
-                        });
+                        //});
                     }
                 }
                 else if(m_chunks[index] != nullptr)

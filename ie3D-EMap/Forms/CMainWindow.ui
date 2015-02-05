@@ -74,8 +74,8 @@
       <widget class="QWidget" name="m_oglWindow" native="true">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>20</y>
+         <x>10</x>
+         <y>30</y>
          <width>931</width>
          <height>681</height>
         </rect>

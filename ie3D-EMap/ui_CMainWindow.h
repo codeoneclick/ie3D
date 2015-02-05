@@ -108,7 +108,7 @@ public:
         groupBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_oglWindow = new QWidget(groupBox);
         m_oglWindow->setObjectName(QStringLiteral("m_oglWindow"));
-        m_oglWindow->setGeometry(QRect(30, 20, 931, 681));
+        m_oglWindow->setGeometry(QRect(10, 30, 931, 681));
         m_oglWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         tabWidget = new QTabWidget(sceneTab);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));

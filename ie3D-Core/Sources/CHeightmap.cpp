@@ -67,7 +67,8 @@ m_size(size)
     {
         for(ui32 j = 0; j < m_size.y; ++j)
         {
-            heights.push_back(data[(i + j * m_size.x) * 4 + 1] / 255);
+            //heights.push_back(data[(i + j * m_size.x) * 4 + 1] / 255);
+            heights.push_back(static_cast<f32>(data[(i + j * m_size.x) * 4 + 1] - 64) / 255 * 32.0);
         }
     }
     
@@ -90,7 +91,7 @@ m_size(size)
         {
             f32 n = perlin.octaveNoise(i / fx, j / fy, octaves);
             n = glm::clamp(n * 0.5f + 0.5f, 0.0f, 1.0f);
-            heights.push_back(n);
+            heights.push_back(n * 64.0f - 32.0f);
         }
     }
     CHeightmap::createVertexesData(heights);
