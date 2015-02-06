@@ -123,6 +123,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
+                        }, [this, i, j](void) {
+                            CLandscape::resetSeams(i, j);
                         });
                     }
                     else if(m_chunks[index]->getInprogressLOD() == m_chunks[index]->getCurrentLOD() &&
@@ -133,10 +135,11 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             m_chunks[index]->setQuadTree(nullptr, m_chunks[index]->getCurrentLOD());
                             m_chunks[index]->setMesh(mesh);
                             m_chunks[index]->onSceneUpdate(0);
-                            
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
                             m_chunks[index]->onSceneUpdate(0);
+                        }, [this , i, j](void) {
+                            CLandscape::resetSeams(i, j);
                         });
                     }
                     CLandscape::sewSeams(i, j);
@@ -351,6 +354,53 @@ void CLandscape::sewSeams(CSharedLandscapeChunkRef currentChunk, i32 neighborChu
             {
                 neighborChunk->setSeamVerteces(currentChunkVerteces, neighborChunkSeamType);
             }
+        }
+    }
+}
+
+void CLandscape::resetSeams(i32 currentIndexX, i32 currentIndexZ)
+{
+    i32 index = currentIndexX + currentIndexZ * m_heightmapGenerator->getNumChunks().x;
+    CSharedLandscapeChunk currentChunk = m_chunks[index];
+    if(currentChunk != nullptr)
+    {
+        currentChunk->resetSeams();
+    }
+    
+    if((currentIndexZ - 1) >= 0)
+    {
+        ui32 neighborChunkIndex = currentIndexX + (currentIndexZ - 1) * m_heightmapGenerator->getNumChunks().x;
+        CSharedLandscapeChunk neighborChunk = m_chunks[neighborChunkIndex];
+        if(neighborChunk != nullptr)
+        {
+            neighborChunk->resetSeams();
+        }
+    }
+    if((currentIndexZ + 1) < m_heightmapGenerator->getNumChunks().y)
+    {
+        ui32 neighborChunkIndex = currentIndexX + (currentIndexZ + 1) * m_heightmapGenerator->getNumChunks().x;
+        CSharedLandscapeChunk neighborChunk = m_chunks[neighborChunkIndex];
+        if(neighborChunk != nullptr)
+        {
+            neighborChunk->resetSeams();
+        }
+    }
+    if((currentIndexX - 1) >= 0)
+    {
+        ui32 neighborChunkIndex = (currentIndexX - 1) + currentIndexZ * m_heightmapGenerator->getNumChunks().x;
+        CSharedLandscapeChunk neighborChunk = m_chunks[neighborChunkIndex];
+        if(neighborChunk != nullptr)
+        {
+            neighborChunk->resetSeams();
+        }
+    }
+    if((currentIndexX + 1) < m_heightmapGenerator->getNumChunks().x)
+    {
+        ui32 neighborChunkIndex = (currentIndexX + 1) + currentIndexZ * m_heightmapGenerator->getNumChunks().x;
+        CSharedLandscapeChunk neighborChunk = m_chunks[neighborChunkIndex];
+        if(neighborChunk != nullptr)
+        {
+            neighborChunk->resetSeams();
         }
     }
 }

@@ -1,18 +1,18 @@
 //
-//  CMEMainSceneTransition.h
+//  CMEmseTransition.h
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#ifndef CMEMainSceneTransition_h
-#define CMEMainSceneTransition_h
+#ifndef CMEmseTransition_h
+#define CMEmseTransition_h
 
 #include "IEGameTransition.h"
 #include "HMEDeclaration.h"
 
-class CMEMainSceneTransition : public IEGameTransition
+class CMEmseTransition : public IEGameTransition
 {
 private:
     
@@ -23,8 +23,8 @@ protected:
     
 public:
     
-    CMEMainSceneTransition(const std::string& filename, bool isOffscreen);
-    ~CMEMainSceneTransition(void);
+    CMEmseTransition(const std::string& filename, bool isOffscreen);
+    ~CMEmseTransition(void);
     
     void initScene(void);
     

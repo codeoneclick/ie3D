@@ -31,7 +31,8 @@ void CGameLoopCommands::_ExecuteGameLoopUpdateCommand(f32 _deltatime)
     m_gameLoopUpdateCommand(_deltatime);
 }
 
-IGameLoopHandler::IGameLoopHandler(void)
+IGameLoopHandler::IGameLoopHandler(void) :
+m_isPaused(false)
 {
     IGameLoopHandler::_ConnectCommands();
 }
@@ -44,4 +45,14 @@ IGameLoopHandler::~IGameLoopHandler(void)
 void IGameLoopHandler::_ConnectCommands(void)
 {
     m_commands._ConnectGameLoopUpdateCommand(std::bind(&IGameLoopHandler::_OnGameLoopUpdate, this, std::placeholders::_1));
+}
+
+void IGameLoopHandler::setPaused(bool value)
+{
+    m_isPaused = value;
+}
+
+bool IGameLoopHandler::isPaused(void) const
+{
+    return m_isPaused;
 }

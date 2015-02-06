@@ -377,7 +377,18 @@ m_splattingTexture(nullptr)
     assert(m_renderTechniqueAccessor != nullptr);
     assert(configuration != nullptr);
     
-    m_heightmap = std::make_shared<CHeightmap>("", glm::ivec2(0));
+    CSharedConfigurationLandscape configurationLandscape = std::static_pointer_cast<CConfigurationLandscape>(configuration);
+    if(configurationLandscape->getHeightmapDataFilename().length() != 0)
+    {
+        m_heightmap = std::make_shared<CHeightmap>(configurationLandscape->getHeightmapDataFilename(), glm::ivec2(0));
+    }
+    else
+    {
+        m_heightmap = std::make_shared<CHeightmap>(glm::ivec2(configurationLandscape->getSizeX(), configurationLandscape->getSizeY()),
+                                                   configurationLandscape->getFrequency(),
+                                                   configurationLandscape->getOctaves(),
+                                                   configurationLandscape->getSeed());
+    }
     
     m_chunkSize = glm::ivec2(65, 65);
     m_chunkLODsSizes.at(0) = glm::ivec2(65, 65);
@@ -388,7 +399,7 @@ m_splattingTexture(nullptr)
     m_chunksNum = glm::ivec2(m_heightmap->getSize().x / (m_chunkSize.x - 1),
                              m_heightmap->getSize().y / (m_chunkSize.y - 1));
     
-    m_chunksUsed.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(nullptr, nullptr, nullptr, nullptr,
+    m_chunksUsed.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(nullptr, nullptr, nullptr, nullptr, nullptr,
                                                                        E_LANDSCAPE_CHUNK_LOD_UNKNOWN));
     m_executedOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
     m_canceledOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
@@ -428,9 +439,14 @@ void CHeightmapGenerator::generateVertecesData(const glm::ivec2& size, f32 frequ
         {
             m_chunksUsed.at(i) = nullptr;
         }
-        std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, E_LANDSCAPE_CHUNK_LOD>> chunksUsed;
+        std::vector<std::tuple<CSharedMesh,
+                    CSharedQuadTree,
+                    std::function<void(CSharedMeshRef)>,
+                    std::function<void(CSharedQuadTreeRef)>,
+                    std::function<void(void)>,
+                    E_LANDSCAPE_CHUNK_LOD>> chunksUsed;
         m_chunksUsed.swap(chunksUsed);
-        m_chunksUsed.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(nullptr, nullptr, nullptr, nullptr,
+        m_chunksUsed.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(nullptr, nullptr, nullptr, nullptr, nullptr,
                                                                            E_LANDSCAPE_CHUNK_LOD_UNKNOWN));
         
         for(ui32 i = 0; i < m_chunksUnused.size(); ++i)
@@ -486,7 +502,7 @@ void CHeightmapGenerator::generateVertecesData(const glm::ivec2& size, f32 frequ
                 ui32 index = i + j * CHeightmapGenerator::getNumChunks().x;
                 if(std::get<0>(m_chunksUsed.at(index)) != nullptr)
                 {
-                    E_LANDSCAPE_CHUNK_LOD LOD = std::get<4>(m_chunksUsed[index]);
+                    E_LANDSCAPE_CHUNK_LOD LOD = std::get<5>(m_chunksUsed[index]);
                     CHeightmapGenerator::writeToVertexBuffer(i, j, LOD);
                     CHeightmapGenerator::commitVertexBufferToVRAM(i, j, LOD);
                 }
@@ -559,9 +575,11 @@ void CHeightmapGenerator::updateHeightmap(ui32 offsetX, ui32 offsetZ,
             ui32 index = i + j * CHeightmapGenerator::getNumChunks().x;
             if(std::get<0>(m_chunksUsed.at(index)) != nullptr)
             {
-                E_LANDSCAPE_CHUNK_LOD LOD = std::get<4>(m_chunksUsed[index]);
+                E_LANDSCAPE_CHUNK_LOD LOD = std::get<5>(m_chunksUsed[index]);
                 CHeightmapGenerator::writeToVertexBuffer(i, j, LOD);
                 CHeightmapGenerator::commitVertexBufferToVRAM(i, j, LOD);
+                assert(std::get<4>(m_chunksUsed[index]) != nullptr);
+                std::get<4>(m_chunksUsed[index])();
             }
         }
     }
@@ -931,7 +949,8 @@ void CHeightmapGenerator::generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ)
 
 void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                                           const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
-                                          const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback)
+                                          const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback,
+                                          const std::function<void(void)>& meshUpdatedCallback)
 {
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
@@ -969,13 +988,15 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     std::get<1>(m_chunksUsed[index]) = std::make_shared<CQuadTree>();
     std::get<2>(m_chunksUsed[index]) = meshCreatedCallback;
     std::get<3>(m_chunksUsed[index]) = quadTreeGeneratedCallback;
-    std::get<4>(m_chunksUsed[index]) = LOD;
+    std::get<4>(m_chunksUsed[index]) = meshUpdatedCallback;
+    std::get<5>(m_chunksUsed[index]) = LOD;
     
     assert(std::get<0>(m_chunksUsed[index]) != nullptr);
     assert(std::get<1>(m_chunksUsed[index]) != nullptr);
     assert(std::get<2>(m_chunksUsed[index]) != nullptr);
     assert(std::get<3>(m_chunksUsed[index]) != nullptr);
-    assert(std::get<4>(m_chunksUsed[index]) != E_LANDSCAPE_CHUNK_LOD_UNKNOWN);
+    assert(std::get<4>(m_chunksUsed[index]) != nullptr);
+    assert(std::get<5>(m_chunksUsed[index]) != E_LANDSCAPE_CHUNK_LOD_UNKNOWN);
     
     CSharedThreadOperation writeToVertexBufferOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     writeToVertexBufferOperation->setExecutionBlock([this, i, j, LOD](void) {
@@ -1070,7 +1091,8 @@ void CHeightmapGenerator::runChunkUnLoading(ui32 i, ui32 j)
         std::get<1>(m_chunksUsed[index]) = nullptr;
         std::get<2>(m_chunksUsed[index]) = nullptr;
         std::get<3>(m_chunksUsed[index]) = nullptr;
-        std::get<4>(m_chunksUsed[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
+        std::get<4>(m_chunksUsed[index]) = nullptr;
+        std::get<5>(m_chunksUsed[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
     }
 }
 
@@ -1088,7 +1110,8 @@ void CHeightmapGenerator::update(void)
             std::get<1>(m_chunksUsed[index]) = nullptr;
             std::get<2>(m_chunksUsed[index]) = nullptr;
             std::get<3>(m_chunksUsed[index]) = nullptr;
-            std::get<4>(m_chunksUsed[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
+            std::get<4>(m_chunksUsed[index]) = nullptr;
+            std::get<5>(m_chunksUsed[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
             m_canceledOperations.at(index) = nullptr;
         }
     }

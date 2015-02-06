@@ -1,9 +1,0 @@
-<transition
-    guid="transition.map.editor.preview.model">
-    <output_technique filename="render.operation.preview.model.output.xml"/>
-    <ws_techniques>
-        <ws_technique filename="render.operation.world.preview.model.xml"/>
-    </ws_techniques>
-    <ss_techniques>
-    </ss_techniques>
-</transition>

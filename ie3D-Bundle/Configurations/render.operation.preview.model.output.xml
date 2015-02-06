@@ -1,4 +1,0 @@
-<output_technique
-    guid="render.operation.preview.model.output">
-    <material filename="material.render.operation.preview.model.output.xml"/>
-</output_technique>

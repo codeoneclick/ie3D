@@ -1,29 +1,29 @@
 //
-//  CMEMainSceneTransition.cpp
+//  CMEmseTransition.cpp
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#include "CMEMainSceneTransition.h"
-#include "CMEMainScene.h"
+#include "CMEmseTransition.h"
+#include "CMEmseScene.h"
 #include "CMESceneFabricator.h"
 #include "CSceneGraph.h"
 #include "CRenderPipeline.h"
 
-CMEMainSceneTransition::CMEMainSceneTransition(const std::string& filename, bool isOffscreen) :
+CMEmseTransition::CMEmseTransition(const std::string& filename, bool isOffscreen) :
 IEGameTransition(filename, isOffscreen)
 {
     
 }
 
-CMEMainSceneTransition::~CMEMainSceneTransition(void)
+CMEmseTransition::~CMEmseTransition(void)
 {
     
 }
 
-void CMEMainSceneTransition::initScene(void)
+void CMEmseTransition::initScene(void)
 {
     assert(m_graphicsContext != nullptr);
     assert(m_inputContext != nullptr);
@@ -39,14 +39,14 @@ void CMEMainSceneTransition::initScene(void)
                                                              m_renderPipeline);
 }
 
-void CMEMainSceneTransition::_OnLoaded(void)
+void CMEmseTransition::_OnLoaded(void)
 {
-    m_scene = std::make_shared<CMEMainScene>(this);
+    m_scene = std::make_shared<CMEmseScene>(this);
     m_scene->load();
     m_isLoaded = true;
 }
 
-void CMEMainSceneTransition::_OnGameLoopUpdate(f32 deltatime)
+void CMEmseTransition::_OnGameLoopUpdate(f32 deltatime)
 {
     if(m_isLoaded && m_scene != nullptr)
     {
@@ -54,25 +54,25 @@ void CMEMainSceneTransition::_OnGameLoopUpdate(f32 deltatime)
     }
 }
 
-CSharedMEUIToSceneCommands CMEMainSceneTransition::getUIToSceneCommands(void) const
+CSharedMEUIToSceneCommands CMEmseTransition::getUIToSceneCommands(void) const
 {
-    return m_isLoaded && m_scene != nullptr ? std::static_pointer_cast<CMEMainScene>(m_scene)->getUIToSceneCommands() : nullptr;
+    return m_isLoaded && m_scene != nullptr ? std::static_pointer_cast<CMEmseScene>(m_scene)->getUIToSceneCommands() : nullptr;
 }
 
-void CMEMainSceneTransition::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
+void CMEmseTransition::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
 {
     assert(m_isLoaded && m_scene != nullptr);
-    std::static_pointer_cast<CMEMainScene>(m_scene)->setSceneToUICommands(commands);
+    std::static_pointer_cast<CMEmseScene>(m_scene)->setSceneToUICommands(commands);
 }
 
-CMESharedLandscapeBrush CMEMainSceneTransition::createLandscapeBrush(const std::string& filename)
+CMESharedLandscapeBrush CMEmseTransition::createLandscapeBrush(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
     std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);
     return sceneFabricator->createLandscapeBrush(filename);
 }
 
-CMESharedModelBrush CMEMainSceneTransition::createModelBrush(const std::string& filename)
+CMESharedModelBrush CMEmseTransition::createModelBrush(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);
     std::shared_ptr<CMESceneFabricator> sceneFabricator = std::static_pointer_cast<CMESceneFabricator>(m_sceneFabricator);

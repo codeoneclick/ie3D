@@ -1,7 +1,11 @@
 <landscape
-    heightmap_data_filename="heightmap.data"
-    splatting_data_filename="splatting.data"
-    size="512">
+    heightmap_data_filename="map_01"
+    splatting_data_filename="map_01"
+    size_x="512"
+    size_y="512"
+    frequency="5.0"
+    octaves="8"
+    seed="12345">
 	<materials>
 		<material filename="material.landscape.base.xml"/>
         <material filename="material.landscape.reflection.xml"/>

@@ -5,7 +5,11 @@
     <attributes>
         <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getHeightmapDataFilename" path="/landscape" attribute_name="heightmap_data_filename"/>
         <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getSplattingDataFilename" path="/landscape" attribute_name="splatting_data_filename"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSize" path="/landscape" attribute_name="size"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSizeX" path="/landscape" attribute_name="size_x"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSizeY" path="/landscape" attribute_name="size_y"/>
+        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getFrequency" path="/landscape" attribute_name="frequency"/>
+        <attribute type="i32" is_convert_to_ogl_enum="0" getter="getOctaves" path="/landscape" attribute_name="octaves"/>
+        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSeed" path="/landscape" attribute_name="seed"/>
     </attributes>
     <relationships>
     	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/landscape/materials" relationship_name="material"/>

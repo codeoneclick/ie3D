@@ -7,9 +7,9 @@
 #if defined(__OSX__) || defined(__WIN32__)
 
 #include "CMEGameController.h"
-#include "CMEMainSceneTransition.h"
-#include "CMEPreviewModelSceneTransition.h"
-#include "CMEMainScene.h"
+#include "CMEmseTransition.h"
+#include "CMEgopTransition.h"
+#include "CMEgoeTransition.h"
 #include "IOGLWindow.h"
 #include "CMEUIToSceneCommands.h"
 #include "CMESceneToUICommands.h"
@@ -28,9 +28,6 @@
 CMainWindow::CMainWindow(QWidget *parent) :
 QMainWindow(parent),
 #if defined(__OSX__) || defined(__WIN32__)
-
-m_mainSceneController(nullptr),
-m_mainSceneTransition(nullptr),
 m_recentFilename(""),
 
 #endif
@@ -76,32 +73,45 @@ void CMainWindow::execute(void)
     m_sceneToUICommands->connectSetTextureSamplerCommand(std::bind(&CMainWindow::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
     m_sceneToUICommands->connectSetTillingTexcoordCommand(std::bind(&CMainWindow::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
     
-    NSView *mainSceneView = reinterpret_cast<NSView*>(ui->m_oglWindow->winId());
-    NSOpenGLView *mainSceneOpenGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
-                                                                                       0.0,
-                                                                                       mainSceneView.frame.size.width,
-                                                                                       mainSceneView.frame.size.height)];
-    [mainSceneView addSubview:mainSceneOpenGLView];
-    std::shared_ptr<IOGLWindow> mainSceneWindow = std::make_shared<IOGLWindow>((__bridge void*)mainSceneOpenGLView);
+    NSView *mseView = reinterpret_cast<NSView*>(ui->m_oglWindow->winId());
+    NSOpenGLView *mseOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
+                                                                              0.0,
+                                                                              mseView.frame.size.width,
+                                                                              mseView.frame.size.height)];
+    [mseView addSubview:mseOGLView];
+    std::shared_ptr<IOGLWindow> mseWindow = std::make_shared<IOGLWindow>((__bridge void*)mseOGLView);
     
-    m_mainSceneController = std::make_shared<CMEGameController>(mainSceneWindow);
-    m_mainSceneTransition = std::make_shared<CMEMainSceneTransition>("transition.map.editor.main.scene.xml", false);
-    m_mainSceneController->addTransition(m_mainSceneTransition);
-    m_mainSceneController->gotoTransition("transition.map.editor.main.scene.xml");
-    m_mainSceneTransition->setSceneToUICommands(m_sceneToUICommands);
+    m_mseController = std::make_shared<CMEGameController>(mseWindow);
+    m_mseTransition = std::make_shared<CMEmseTransition>("transition.mse.xml", false);
+    m_mseController->addTransition(m_mseTransition);
+    m_mseController->gotoTransition("transition.mse.xml");
+    m_mseTransition->setSceneToUICommands(m_sceneToUICommands);
     
-    NSView *modelPreviewView =reinterpret_cast<NSView*>(ui->m_modelsOpenGLView->winId());
-    NSOpenGLView *modelPreviewOpenGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
-                                                                                          0.0,
-                                                                                          modelPreviewView.frame.size.width,
-                                                                                          modelPreviewView.frame.size.height)];
-    [modelPreviewView addSubview:modelPreviewOpenGLView];
-    std::shared_ptr<IOGLWindow> modelPreviewWindow = std::make_shared<IOGLWindow>((__bridge void*)modelPreviewOpenGLView);
+    NSView *gopView =reinterpret_cast<NSView*>(ui->m_modelsOpenGLView->winId());
+    NSOpenGLView *gopOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
+                                                                              0.0,
+                                                                              gopView.frame.size.width,
+                                                                              gopView.frame.size.height)];
+    [gopView addSubview:gopOGLView];
+    std::shared_ptr<IOGLWindow> gopWindow = std::make_shared<IOGLWindow>((__bridge void*)gopOGLView);
     
-    m_modelPreviewController = std::make_shared<CMEGameController>(modelPreviewWindow);
-    m_modelPreviewTransition = std::make_shared<CMEPreviewModelSceneTransition>("transition.map.editor.preview.model.xml", false);
-    m_modelPreviewController->addTransition(m_modelPreviewTransition);
-    m_modelPreviewController->gotoTransition("transition.map.editor.preview.model.xml");
+    m_gopController = std::make_shared<CMEGameController>(gopWindow);
+    m_gopTransition = std::make_shared<CMEgopTransition>("transition.gop.xml", false);
+    m_gopController->addTransition(m_gopTransition);
+    m_gopController->gotoTransition("transition.gop.xml");
+    
+    NSView *goeView =reinterpret_cast<NSView*>(ui->m_gameObjectGLWindow->winId());
+    NSOpenGLView *goeOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
+                                                                              0.0,
+                                                                              goeView.frame.size.width,
+                                                                              goeView.frame.size.height)];
+    [goeView addSubview:goeOGLView];
+    std::shared_ptr<IOGLWindow> goeOGLWindow = std::make_shared<IOGLWindow>((__bridge void*)goeOGLView);
+    
+    m_goeController = std::make_shared<CMEGameController>(goeOGLWindow);
+    m_goeTransition = std::make_shared<CMEgoeTransition>("transition.goe.xml", false);
+    m_goeController->addTransition(m_goeTransition);
+    m_goeController->gotoTransition("transition.goe.xml");
     
 #endif
 }
@@ -124,7 +134,7 @@ void CMainWindow::on_m_brushSizeSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Brush size: "<<m_previousBrushSize<<" [4:32]";
     ui->m_brushSizeLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_mainSceneTransition->getUIToSceneCommands()->executeSetBrushSizeCommand(m_previousBrushSize);
+    m_mseTransition->getUIToSceneCommands()->executeSetBrushSizeCommand(m_previousBrushSize);
 }
 
 void CMainWindow::on_m_brushStrengthSlider_valueChanged(int value)
@@ -132,7 +142,7 @@ void CMainWindow::on_m_brushStrengthSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Brush strength: "<<value<<" [1:10]";
     ui->m_brushStrengthLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_mainSceneTransition->getUIToSceneCommands()->executeSetBrushStrengthCommand(value);
+    m_mseTransition->getUIToSceneCommands()->executeSetBrushStrengthCommand(value);
 }
 
 void CMainWindow::on_m_falloffSlider_valueChanged(int value)
@@ -140,7 +150,7 @@ void CMainWindow::on_m_falloffSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Falloff coefficient: "<<value<<" [0:99]";
     ui->m_falloffLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_mainSceneTransition->getUIToSceneCommands()->executeSetFalloffCoefficientCommand(value);
+    m_mseTransition->getUIToSceneCommands()->executeSetFalloffCoefficientCommand(value);
 }
 
 void CMainWindow::on_m_smoothSlider_valueChanged(int value)
@@ -148,7 +158,7 @@ void CMainWindow::on_m_smoothSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Smooth coefficient: "<<value<<" [0:3]";
     ui->m_smoothLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_mainSceneTransition->getUIToSceneCommands()->executeSetSmoothCoefficientCommand(value);
+    m_mseTransition->getUIToSceneCommands()->executeSetSmoothCoefficientCommand(value);
 }
 
 void CMainWindow::on_m_texture01Btn_pressed()
@@ -168,7 +178,7 @@ void CMainWindow::on_m_texture01Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture01Img->setPixmap(pixmap);
-        m_mainSceneTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_01);
+        m_mseTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_01);
     }
 }
 
@@ -184,7 +194,7 @@ void CMainWindow::on_m_texture02Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture02Img->setPixmap(pixmap);
-        m_mainSceneTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_02);
+        m_mseTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_02);
     }
 }
 
@@ -200,7 +210,7 @@ void CMainWindow::on_m_texture03Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture03Img->setPixmap(pixmap);
-        m_mainSceneTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_03);
+        m_mseTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_03);
     }
 }
 
@@ -233,7 +243,7 @@ void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER 
     std::stringstream stringstream;
     stringstream<<"image_"<<sampler<<".png";
     std::string filename(stringstream.str());
-    m_mainSceneTransition->getRenderTechniqueImporter()->saveTexture(texture, filename, 256, 256);
+    m_mseTransition->getRenderTechniqueImporter()->saveTexture(texture, filename, 256, 256);
     
     switch (sampler)
     {
@@ -289,17 +299,17 @@ void CMainWindow::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 
 void CMainWindow::on_m_textureTilling01SpinBox_valueChanged(int value)
 {
-    m_mainSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_01);
+    m_mseTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_01);
 }
 
 void CMainWindow::on_m_textureTilling02SpinBox_valueChanged(int value)
 {
-    m_mainSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_02);
+    m_mseTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_02);
 }
 
 void CMainWindow::on_m_textureTilling03SpinBox_valueChanged(int value)
 {
-    m_mainSceneTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_03);
+    m_mseTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_03);
 }
 
 bool CMainWindow::event(QEvent *event)
@@ -313,8 +323,8 @@ bool CMainWindow::event(QEvent *event)
 
 void CMainWindow::on_generateButton_clicked()
 {
-    m_mainSceneTransition->getUIToSceneCommands()->executeGenerateVertecesDataCommand(glm::ivec2(ui->m_sizeXSpinBox->value(), ui->m_sizeYSpinBox->value()),
-                                                                                      ui->m_frequencySpinBox->value(),
-                                                                                      ui->m_octavesSpinBox->value(),
-                                                                                      ui->m_seedSpinBox->value());
+    m_mseTransition->getUIToSceneCommands()->executeGenerateVertecesDataCommand(glm::ivec2(ui->m_sizeXSpinBox->value(), ui->m_sizeYSpinBox->value()),
+                                                                                ui->m_frequencySpinBox->value(),
+                                                                                ui->m_octavesSpinBox->value(),
+                                                                                ui->m_seedSpinBox->value());
 }

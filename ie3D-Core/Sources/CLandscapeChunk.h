@@ -89,7 +89,7 @@ public:
     
     std::vector<SAttributeVertex> getSeamVerteces(E_LANDSCAPE_SEAM seamType) const;
     void setSeamVerteces(const std::vector<SAttributeVertex>& verteces, E_LANDSCAPE_SEAM seamType);
-    
+    void resetSeams(void);
 };
 
 #endif

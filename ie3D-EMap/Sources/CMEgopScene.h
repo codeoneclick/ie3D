@@ -1,18 +1,18 @@
 //
-//  CMEPreviewModelScene.h
+//  CMEgopScene.h
 //  ie3D-EMap
 //
 //  Created by sergey.sergeev on 11/3/14.
 //
 //
 
-#ifndef CMEPreviewModelScene_h
-#define CMEPreviewModelScene_h
+#ifndef CMEgopScene_h
+#define CMEgopScene_h
 
 #include "IScene.h"
 #include "HMEDeclaration.h"
 
-class CMEPreviewModelScene final :
+class CMEgopScene final :
 public IScene,
 public IGestureRecognizerHandler
 {
@@ -22,12 +22,6 @@ protected:
     
     CSharedGlobalLightSource m_globalLightSource;
     CSharedModel m_model;
-    
-    void onConfigurationLoaded(ISharedConfigurationRef configuration);
-    void onResourceLoaded(ISharedResourceRef resource);
-    
-    std::vector<ISharedGameObject> colliders(void);
-    void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);
     
     void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
@@ -40,8 +34,8 @@ protected:
     
 public:
     
-    CMEPreviewModelScene(IGameTransition* root);
-    ~CMEPreviewModelScene(void);
+    CMEgopScene(IGameTransition* root);
+    ~CMEgopScene(void);
     
     void load(void);
     void update(f32 deltatime);

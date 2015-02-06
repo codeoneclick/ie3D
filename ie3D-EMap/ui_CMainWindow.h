@@ -77,7 +77,9 @@ public:
     QSpinBox *m_textureTilling03SpinBox;
     QWidget *models;
     QWidget *m_modelsOpenGLView;
-    QWidget *materialsTab;
+    QWidget *gameObjectTab;
+    QGroupBox *groupBox_2;
+    QWidget *m_gameObjectGLWindow;
     QMenuBar *menuBar;
 
     void setupUi(QMainWindow *CMainWindow)
@@ -98,7 +100,9 @@ public:
         sceneTab->setObjectName(QStringLiteral("sceneTab"));
         groupBox = new QGroupBox(sceneTab);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(20, 0, 951, 721));
+        groupBox->setGeometry(QRect(20, 0, 950, 720));
+        groupBox->setMinimumSize(QSize(950, 720));
+        groupBox->setMaximumSize(QSize(950, 720));
         QFont font;
         font.setFamily(QStringLiteral("Menlo"));
         font.setPointSize(14);
@@ -108,7 +112,7 @@ public:
         groupBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_oglWindow = new QWidget(groupBox);
         m_oglWindow->setObjectName(QStringLiteral("m_oglWindow"));
-        m_oglWindow->setGeometry(QRect(10, 30, 931, 681));
+        m_oglWindow->setGeometry(QRect(10, 30, 930, 680));
         m_oglWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         tabWidget = new QTabWidget(sceneTab);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
@@ -313,9 +317,18 @@ public:
         m_modelsOpenGLView->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         tabWidget->addTab(models, QString());
         mainMenuTabs->addTab(sceneTab, QString());
-        materialsTab = new QWidget();
-        materialsTab->setObjectName(QStringLiteral("materialsTab"));
-        mainMenuTabs->addTab(materialsTab, QString());
+        gameObjectTab = new QWidget();
+        gameObjectTab->setObjectName(QStringLiteral("gameObjectTab"));
+        groupBox_2 = new QGroupBox(gameObjectTab);
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
+        groupBox_2->setGeometry(QRect(20, 0, 950, 720));
+        groupBox_2->setFont(font);
+        groupBox_2->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
+        m_gameObjectGLWindow = new QWidget(groupBox_2);
+        m_gameObjectGLWindow->setObjectName(QStringLiteral("m_gameObjectGLWindow"));
+        m_gameObjectGLWindow->setGeometry(QRect(10, 30, 930, 680));
+        m_gameObjectGLWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
+        mainMenuTabs->addTab(gameObjectTab, QString());
         CMainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CMainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -364,7 +377,8 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(landscape_textures), QApplication::translate("CMainWindow", "Textures", 0));
         tabWidget->setTabText(tabWidget->indexOf(models), QApplication::translate("CMainWindow", "Models", 0));
         mainMenuTabs->setTabText(mainMenuTabs->indexOf(sceneTab), QApplication::translate("CMainWindow", "Scene", 0));
-        mainMenuTabs->setTabText(mainMenuTabs->indexOf(materialsTab), QApplication::translate("CMainWindow", "Materials", 0));
+        groupBox_2->setTitle(QApplication::translate("CMainWindow", "Game Object", 0));
+        mainMenuTabs->setTabText(mainMenuTabs->indexOf(gameObjectTab), QApplication::translate("CMainWindow", "Game Object", 0));
     } // retranslateUi
 
 };

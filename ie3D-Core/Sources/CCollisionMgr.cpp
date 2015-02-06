@@ -13,6 +13,16 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
+std::vector<ISharedGameObject> ICollisionHandler::colliders(void)
+{
+    return std::vector<ISharedGameObject>();
+}
+
+void ICollisionHandler::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton)
+{
+    
+}
+
 CCollisionMgr::CCollisionMgr(void) :
 m_camera(nullptr)
 {

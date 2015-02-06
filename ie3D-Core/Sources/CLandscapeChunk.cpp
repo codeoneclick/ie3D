@@ -389,3 +389,10 @@ std::function<f32(const glm::vec3&, const glm::vec3&, const glm::vec3&)> CLandsc
     return interpolationIntensityFunction;
 }
 
+void CLandscapeChunk::resetSeams(void)
+{
+    for(ui32 i = 0; i < E_LANDSCAPE_SEAM_MAX; i++)
+    {
+        m_seamedLOD.at(i) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
+    }
+}

@@ -53,7 +53,10 @@ void CGameLoopExecutor::OnGameLoopUpdate(void)
     lastTime = currentTime;
     for(const auto& handler : m_handlers)
     {
-        handler->_Get_Commands()._ExecuteGameLoopUpdateCommand(deltatime);
+        if(!handler->isPaused())
+        {
+            handler->_Get_Commands()._ExecuteGameLoopUpdateCommand(deltatime);
+        }
     }
     CThreadOperationPool::sharedInstance()->update();
 }

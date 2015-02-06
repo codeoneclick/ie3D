@@ -1,12 +1,12 @@
 //
-//  CMEPreviewModelScene.cpp
+//  CMEgopScene.cpp
 //  ie3D-EMap
 //
 //  Created by sergey.sergeev on 11/3/14.
 //
 //
 
-#include "CMEPreviewModelScene.h"
+#include "CMEgopScene.h"
 #include "IGameTransition.h"
 #include "IGameObject.h"
 #include "CCamera.h"
@@ -18,18 +18,18 @@
 #include "CResourceAccessor.h"
 #include "CTexture.h"
 
-CMEPreviewModelScene::CMEPreviewModelScene(IGameTransition* root) :
+CMEgopScene::CMEgopScene(IGameTransition* root) :
 IScene(root)
 {
 
 }
 
-CMEPreviewModelScene::~CMEPreviewModelScene(void)
+CMEgopScene::~CMEgopScene(void)
 {
     
 }
 
-void CMEPreviewModelScene::load(void)
+void CMEgopScene::load(void)
 {
     assert(m_root != nullptr);
     m_camera = m_root->createCamera(45.0, 0.01, 1024.0,
@@ -58,65 +58,44 @@ void CMEPreviewModelScene::load(void)
     m_globalLightSource->setLookAt(glm::vec3(256.0, 0.0, 256.0));
 }
 
-void CMEPreviewModelScene::update(f32)
+void CMEgopScene::update(f32)
 {
     static f32 angle = 0.0;
     angle += 3.0;
     m_model->setRotation(glm::vec3(0.0, angle, 0.0));
 }
 
-std::vector<ISharedGameObject> CMEPreviewModelScene::colliders(void)
-{
-    std::vector<ISharedGameObject> colliders;
-    return colliders;
-}
-
-void CMEPreviewModelScene::onCollision(const glm::vec3&, ISharedGameObjectRef, E_INPUT_BUTTON)
+void CMEgopScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTON)
 {
     
 }
 
-void CMEPreviewModelScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTON)
+void CMEgopScene::onGestureRecognizerMoved(const glm::ivec2&)
+{
+
+}
+
+void CMEgopScene::onGestureRecognizerDragged(const glm::ivec2&, E_INPUT_BUTTON)
+{
+
+}
+
+void CMEgopScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
 {
     
 }
 
-void CMEPreviewModelScene::onGestureRecognizerMoved(const glm::ivec2&)
+void CMEgopScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION)
 {
 
 }
 
-void CMEPreviewModelScene::onGestureRecognizerDragged(const glm::ivec2&, E_INPUT_BUTTON)
-{
-
-}
-
-void CMEPreviewModelScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
+void CMEgopScene::onKeyUp(i32)
 {
     
 }
 
-void CMEPreviewModelScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION)
-{
-
-}
-
-void CMEPreviewModelScene::onKeyUp(i32)
+void CMEgopScene::onKeyDown(i32)
 {
     
-}
-
-void CMEPreviewModelScene::onKeyDown(i32)
-{
-    
-}
-
-void CMEPreviewModelScene::onConfigurationLoaded(ISharedConfigurationRef)
-{
-
-}
-
-void CMEPreviewModelScene::onResourceLoaded(ISharedResourceRef resource)
-{
-
 }

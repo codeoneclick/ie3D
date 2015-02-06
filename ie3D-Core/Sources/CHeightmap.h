@@ -112,7 +112,13 @@ protected:
     glm::ivec2 m_chunksNum;
     std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_chunkLODsSizes;
     
-    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, E_LANDSCAPE_CHUNK_LOD>> m_chunksUsed;
+    std::vector<std::tuple<CSharedMesh,
+                           CSharedQuadTree,
+                           std::function<void(CSharedMeshRef)>,
+                           std::function<void(CSharedQuadTreeRef)>,
+                           std::function<void(void)>,
+                           E_LANDSCAPE_CHUNK_LOD>> m_chunksUsed;
+    
     std::vector<CSharedMesh> m_chunksUnused;
     std::vector<CSharedThreadOperation> m_executedOperations;
     std::vector<CSharedThreadOperation> m_canceledOperations;
@@ -169,7 +175,8 @@ public:
     
     void runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                          const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
-                         const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback);
+                         const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback,
+                         const std::function<void(void)>& meshUpdatedCallback);
     void stopChunkLoading(ui32 i, ui32 j, const std::function<void(void)>& stopLoadingCallback);
     void runChunkUnLoading(ui32 i, ui32 j);
     

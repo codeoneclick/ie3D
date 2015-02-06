@@ -1,20 +1,20 @@
 //
-//  CMEMainScene.h
+//  CMEmseScene.h
 //  indieEngine-EMap
 //
 //  Created by Sergey Sergeev on 4/20/14.
 //
 //
 
-#ifndef CMEMainScene_h
-#define CMEMainScene_h
+#ifndef CMEmseScene_h
+#define CMEmseScene_h
 
 #include "IScene.h"
 #include "HMEDeclaration.h"
 
 class CMapDragController;
 
-class CMEMainScene final :
+class CMEmseScene final :
 public IScene,
 public IGestureRecognizerHandler
 {
@@ -58,7 +58,6 @@ protected:
     void onResourceLoaded(ISharedResourceRef resource);
     
     std::vector<ISharedGameObject> colliders(void);
-    void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);
     
     void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
@@ -71,8 +70,8 @@ protected:
     
 public:
     
-    CMEMainScene(IGameTransition* root);
-    ~CMEMainScene(void);
+    CMEmseScene(IGameTransition* root);
+    ~CMEmseScene(void);
     
     void load(void);
     void update(f32 deltatime);

@@ -14,9 +14,37 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
-ui32 CConfigurationLandscape::getSize(void) const
+ui32 CConfigurationLandscape::getSizeX(void) const
 {
-const auto& iterator = m_attributes.find("/landscape/size");
+const auto& iterator = m_attributes.find("/landscape/size_x");
+assert(iterator != m_attributes.end());
+ui32 value; iterator->second->get(&value);
+return value;
+}
+ui32 CConfigurationLandscape::getSizeY(void) const
+{
+const auto& iterator = m_attributes.find("/landscape/size_y");
+assert(iterator != m_attributes.end());
+ui32 value; iterator->second->get(&value);
+return value;
+}
+f32 CConfigurationLandscape::getFrequency(void) const
+{
+const auto& iterator = m_attributes.find("/landscape/frequency");
+assert(iterator != m_attributes.end());
+f32 value; iterator->second->get(&value);
+return value;
+}
+i32 CConfigurationLandscape::getOctaves(void) const
+{
+const auto& iterator = m_attributes.find("/landscape/octaves");
+assert(iterator != m_attributes.end());
+i32 value; iterator->second->get(&value);
+return value;
+}
+ui32 CConfigurationLandscape::getSeed(void) const
+{
+const auto& iterator = m_attributes.find("/landscape/seed");
 assert(iterator != m_attributes.end());
 ui32 value; iterator->second->get(&value);
 return value;
@@ -42,8 +70,16 @@ std::string heightmap_data_filename = node.node().attribute("heightmap_data_file
 IConfiguration::setAttribute("/landscape/heightmap_data_filename", std::make_shared<CConfigurationAttribute>(heightmap_data_filename));
 std::string splatting_data_filename = node.node().attribute("splatting_data_filename").as_string();
 IConfiguration::setAttribute("/landscape/splatting_data_filename", std::make_shared<CConfigurationAttribute>(splatting_data_filename));
-ui32 size = node.node().attribute("size").as_uint();
-IConfiguration::setAttribute("/landscape/size", std::make_shared<CConfigurationAttribute>(size));
+ui32 size_x = node.node().attribute("size_x").as_uint();
+IConfiguration::setAttribute("/landscape/size_x", std::make_shared<CConfigurationAttribute>(size_x));
+ui32 size_y = node.node().attribute("size_y").as_uint();
+IConfiguration::setAttribute("/landscape/size_y", std::make_shared<CConfigurationAttribute>(size_y));
+f32 frequency = node.node().attribute("frequency").as_float();
+IConfiguration::setAttribute("/landscape/frequency", std::make_shared<CConfigurationAttribute>(frequency));
+i32 octaves = node.node().attribute("octaves").as_int();
+IConfiguration::setAttribute("/landscape/octaves", std::make_shared<CConfigurationAttribute>(octaves));
+ui32 seed = node.node().attribute("seed").as_uint();
+IConfiguration::setAttribute("/landscape/seed", std::make_shared<CConfigurationAttribute>(seed));
 pugi::xpath_node_set material_nodes = document.select_nodes("/landscape/materials/material");
 for (pugi::xpath_node_set::const_iterator iterator = material_nodes.begin(); iterator != material_nodes.end(); ++iterator)
 {

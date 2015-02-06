@@ -53,9 +53,21 @@
        <rect>
         <x>20</x>
         <y>0</y>
-        <width>951</width>
-        <height>721</height>
+        <width>950</width>
+        <height>720</height>
        </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>950</width>
+        <height>720</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>950</width>
+        <height>720</height>
+       </size>
       </property>
       <property name="font">
        <font>
@@ -76,8 +88,8 @@
         <rect>
          <x>10</x>
          <y>30</y>
-         <width>931</width>
-         <height>681</height>
+         <width>930</width>
+         <height>680</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -854,10 +866,47 @@ background-color: rgb(64, 64, 64);</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="materialsTab">
+    <widget class="QWidget" name="gameObjectTab">
      <attribute name="title">
-      <string>Materials</string>
+      <string>Game Object</string>
      </attribute>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>950</width>
+        <height>720</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Menlo</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="title">
+       <string>Game Object</string>
+      </property>
+      <widget class="QWidget" name="m_gameObjectGLWindow" native="true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>930</width>
+         <height>680</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(0, 0, 0);</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
   </widget>

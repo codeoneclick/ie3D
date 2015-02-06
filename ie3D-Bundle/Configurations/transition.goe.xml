@@ -1,0 +1,9 @@
+<transition
+    guid="transition.goe">
+    <output_technique filename="render.operation.output.goe.xml"/>
+    <ws_techniques>
+        <ws_technique filename="render.operation.ws.goe.xml"/>
+    </ws_techniques>
+    <ss_techniques>
+    </ss_techniques>
+</transition>

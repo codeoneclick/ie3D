@@ -1,29 +1,29 @@
 //
-//  CMEPreviewModelSceneTransition.cpp
+//  CMEgopTransition.cpp
 //  ie3D-EMap
 //
 //  Created by sergey.sergeev on 11/3/14.
 //
 //
 
-#include "CMEPreviewModelSceneTransition.h"
-#include "CMEPreviewModelScene.h"
+#include "CMEgopTransition.h"
+#include "CMEgopScene.h"
 #include "CMESceneFabricator.h"
 #include "CSceneGraph.h"
 #include "CRenderPipeline.h"
 
-CMEPreviewModelSceneTransition::CMEPreviewModelSceneTransition(const std::string& filename, bool isOffscreen) :
+CMEgopTransition::CMEgopTransition(const std::string& filename, bool isOffscreen) :
 IEGameTransition(filename, isOffscreen)
 {
     
 }
 
-CMEPreviewModelSceneTransition::~CMEPreviewModelSceneTransition(void)
+CMEgopTransition::~CMEgopTransition(void)
 {
     
 }
 
-void CMEPreviewModelSceneTransition::initScene(void)
+void CMEgopTransition::initScene(void)
 {
     assert(m_graphicsContext != nullptr);
     assert(m_inputContext != nullptr);
@@ -39,14 +39,14 @@ void CMEPreviewModelSceneTransition::initScene(void)
                                                              m_renderPipeline);
 }
 
-void CMEPreviewModelSceneTransition::_OnLoaded(void)
+void CMEgopTransition::_OnLoaded(void)
 {
-    m_scene = std::make_shared<CMEPreviewModelScene>(this);
+    m_scene = std::make_shared<CMEgopScene>(this);
     m_scene->load();
     m_isLoaded = true;
 }
 
-void CMEPreviewModelSceneTransition::_OnGameLoopUpdate(f32 deltatime)
+void CMEgopTransition::_OnGameLoopUpdate(f32 deltatime)
 {
     if(m_isLoaded && m_scene != nullptr)
     {

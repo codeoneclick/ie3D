@@ -26,9 +26,9 @@
 		2113851F194C40820041A18A /* material.ocean.normal.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2113851C194C40820041A18A /* material.ocean.normal.xml */; };
 		21138524194C40B30041A18A /* shaderGameObjectNormal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21138522194C40B30041A18A /* shaderGameObjectNormal.frag */; };
 		21138525194C40B30041A18A /* shaderGameObjectNormal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21138523194C40B30041A18A /* shaderGameObjectNormal.vert */; };
-		21208EA51906F75D00FFC8D4 /* CMEMainScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E971906F75D00FFC8D4 /* CMEMainScene.cpp */; };
+		21208EA51906F75D00FFC8D4 /* CMEmseScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E971906F75D00FFC8D4 /* CMEmseScene.cpp */; };
 		21208EA61906F75D00FFC8D4 /* CMEGameController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E991906F75D00FFC8D4 /* CMEGameController.cpp */; };
-		21208EA71906F75D00FFC8D4 /* CMEMainSceneTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9B1906F75D00FFC8D4 /* CMEMainSceneTransition.cpp */; };
+		21208EA71906F75D00FFC8D4 /* CMEmseTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9B1906F75D00FFC8D4 /* CMEmseTransition.cpp */; };
 		2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2120900C1906FC5000FFC8D4 /* moc_CMainWindow.cpp */; };
 		212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A3190859AD00FFC8D4 /* CMapDragController.cpp */; };
 		212092AB19106B6100FFC8D4 /* CMELandscapeBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 212092A919106B6100FFC8D4 /* CMELandscapeBrush.cpp */; };
@@ -56,7 +56,13 @@
 		2163469C1A06372A009950BC /* render.operation.world.overlapping.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216346991A06372A009950BC /* render.operation.world.overlapping.xml */; };
 		216346A01A063857009950BC /* shaderScreenMixOverlapping.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2163469E1A063857009950BC /* shaderScreenMixOverlapping.frag */; };
 		216346A11A063857009950BC /* shaderScreenMixOverlapping.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2163469F1A063857009950BC /* shaderScreenMixOverlapping.vert */; };
-		216FCA7F1A0B9E6F00AC9723 /* render.operation.world.preview.model.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216FCA7E1A0B9E6F00AC9723 /* render.operation.world.preview.model.xml */; };
+		216C88C31A84FC27004FD47D /* CMEgoeTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216C88C11A84FC27004FD47D /* CMEgoeTransition.cpp */; };
+		216C88C81A84FC95004FD47D /* CMEgoeScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216C88C61A84FC95004FD47D /* CMEgoeScene.cpp */; };
+		216C88CE1A84FDF6004FD47D /* material.render.operation.output.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88CA1A84FDF6004FD47D /* material.render.operation.output.goe.xml */; };
+		216C88CF1A84FDF6004FD47D /* render.operation.output.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88CB1A84FDF6004FD47D /* render.operation.output.goe.xml */; };
+		216C88D01A84FDF6004FD47D /* render.operation.ws.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88CC1A84FDF6004FD47D /* render.operation.ws.goe.xml */; };
+		216C88D11A84FDF6004FD47D /* transition.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88CD1A84FDF6004FD47D /* transition.goe.xml */; };
+		216FCA7F1A0B9E6F00AC9723 /* render.operation.ws.gop.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216FCA7E1A0B9E6F00AC9723 /* render.operation.ws.gop.xml */; };
 		2171175519FE79A600D92E14 /* shaderModelBrush.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2171175319FE79A600D92E14 /* shaderModelBrush.frag */; };
 		2171175619FE79A600D92E14 /* shaderModelBrush.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2171175419FE79A600D92E14 /* shaderModelBrush.vert */; };
 		2171175919FE79D600D92E14 /* gameobject.model.brush.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2171175719FE79D600D92E14 /* gameobject.model.brush.xml */; };
@@ -189,11 +195,11 @@
 		21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */; };
 		21E53BFB19FA9DDA0018BDB9 /* shaderCommon.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21E53BF919FA9DDA0018BDB9 /* shaderCommon.frag */; };
 		21E53BFC19FA9DDA0018BDB9 /* shaderCommon.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21E53BFA19FA9DDA0018BDB9 /* shaderCommon.vert */; };
-		21FEECB31A078080001E9ACB /* transition.map.editor.main.scene.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECB11A078080001E9ACB /* transition.map.editor.main.scene.xml */; };
-		21FEECB41A078080001E9ACB /* transition.map.editor.preview.model.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECB21A078080001E9ACB /* transition.map.editor.preview.model.xml */; };
-		21FEECBA1A07878E001E9ACB /* CMEPreviewModelScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEECB81A07878E001E9ACB /* CMEPreviewModelScene.cpp */; };
-		21FEECBD1A078B3E001E9ACB /* material.render.operation.preview.model.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECBB1A078B3E001E9ACB /* material.render.operation.preview.model.output.xml */; };
-		21FEECBE1A078B3E001E9ACB /* render.operation.preview.model.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECBC1A078B3E001E9ACB /* render.operation.preview.model.output.xml */; };
+		21FEECB31A078080001E9ACB /* transition.mse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECB11A078080001E9ACB /* transition.mse.xml */; };
+		21FEECB41A078080001E9ACB /* transition.gop.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECB21A078080001E9ACB /* transition.gop.xml */; };
+		21FEECBA1A07878E001E9ACB /* CMEgopScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEECB81A07878E001E9ACB /* CMEgopScene.cpp */; };
+		21FEECBD1A078B3E001E9ACB /* material.render.operation.output.gop.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECBB1A078B3E001E9ACB /* material.render.operation.output.gop.xml */; };
+		21FEECBE1A078B3E001E9ACB /* render.operation.output.gop.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECBC1A078B3E001E9ACB /* render.operation.output.gop.xml */; };
 		21FEECC21A07992F001E9ACB /* material.model.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECC11A07992F001E9ACB /* material.model.shadowmap.xml */; };
 		21FEECC61A079965001E9ACB /* model_07.MDL_anim in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECC31A079965001E9ACB /* model_07.MDL_anim */; };
 		21FEECC71A079965001E9ACB /* model_07.MDL_mesh in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECC41A079965001E9ACB /* model_07.MDL_mesh */; };
@@ -203,9 +209,9 @@
 		21FEECD01A07A5DA001E9ACB /* shaderStaticGameObjectND.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECCC1A07A5DA001E9ACB /* shaderStaticGameObjectND.frag */; };
 		21FEECD11A07A5DA001E9ACB /* shaderAnimatedGameObjectND.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECCD1A07A5DA001E9ACB /* shaderAnimatedGameObjectND.vert */; };
 		21FEECD21A07A5DA001E9ACB /* shaderStaticGameObjectND.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21FEECCE1A07A5DA001E9ACB /* shaderStaticGameObjectND.vert */; };
-		21FEECE41A07D159001E9ACB /* CMEPreviewModelSceneTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEECE31A07D159001E9ACB /* CMEPreviewModelSceneTransition.cpp */; };
-		21FEED071A09396E001E9ACB /* material.render.operation.map.editor.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */; };
-		21FEED081A09396E001E9ACB /* render.operation.map.editor.output.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */; };
+		21FEECE41A07D159001E9ACB /* CMEgopTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21FEECE31A07D159001E9ACB /* CMEgopTransition.cpp */; };
+		21FEED071A09396E001E9ACB /* material.render.operation.output.mse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEED051A09396E001E9ACB /* material.render.operation.output.mse.xml */; };
+		21FEED081A09396E001E9ACB /* render.operation.output.mse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21FEED061A09396E001E9ACB /* render.operation.output.mse.xml */; };
 		350B621B91997A1D3DB08A50 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1ACE512F3E4E1427AACF434A /* QtGui.framework */; };
 		5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 09BF715167B7A0149FD2FBB8 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9D88140FBB133F956E1F6166 /* CMainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
@@ -294,12 +300,12 @@
 		2113851C194C40820041A18A /* material.ocean.normal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.ocean.normal.xml; path = "../ie3D-Bundle/Configurations/material.ocean.normal.xml"; sourceTree = SOURCE_ROOT; };
 		21138522194C40B30041A18A /* shaderGameObjectNormal.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderGameObjectNormal.frag; path = "../ie3D-Bundle/Shaders/shaderGameObjectNormal.frag"; sourceTree = SOURCE_ROOT; };
 		21138523194C40B30041A18A /* shaderGameObjectNormal.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderGameObjectNormal.vert; path = "../ie3D-Bundle/Shaders/shaderGameObjectNormal.vert"; sourceTree = SOURCE_ROOT; };
-		21208E971906F75D00FFC8D4 /* CMEMainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEMainScene.cpp; path = Sources/CMEMainScene.cpp; sourceTree = SOURCE_ROOT; };
-		21208E981906F75D00FFC8D4 /* CMEMainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEMainScene.h; path = Sources/CMEMainScene.h; sourceTree = SOURCE_ROOT; };
+		21208E971906F75D00FFC8D4 /* CMEmseScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEmseScene.cpp; path = Sources/CMEmseScene.cpp; sourceTree = SOURCE_ROOT; };
+		21208E981906F75D00FFC8D4 /* CMEmseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEmseScene.h; path = Sources/CMEmseScene.h; sourceTree = SOURCE_ROOT; };
 		21208E991906F75D00FFC8D4 /* CMEGameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEGameController.cpp; path = Sources/CMEGameController.cpp; sourceTree = SOURCE_ROOT; };
 		21208E9A1906F75D00FFC8D4 /* CMEGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEGameController.h; path = Sources/CMEGameController.h; sourceTree = SOURCE_ROOT; };
-		21208E9B1906F75D00FFC8D4 /* CMEMainSceneTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEMainSceneTransition.cpp; path = Sources/CMEMainSceneTransition.cpp; sourceTree = SOURCE_ROOT; };
-		21208E9C1906F75D00FFC8D4 /* CMEMainSceneTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEMainSceneTransition.h; path = Sources/CMEMainSceneTransition.h; sourceTree = SOURCE_ROOT; };
+		21208E9B1906F75D00FFC8D4 /* CMEmseTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEmseTransition.cpp; path = Sources/CMEmseTransition.cpp; sourceTree = SOURCE_ROOT; };
+		21208E9C1906F75D00FFC8D4 /* CMEmseTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEmseTransition.h; path = Sources/CMEmseTransition.h; sourceTree = SOURCE_ROOT; };
 		2120900A1906FBD600FFC8D4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2120900C1906FC5000FFC8D4 /* moc_CMainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moc_CMainWindow.cpp; sourceTree = SOURCE_ROOT; };
 		2120900D1906FC5000FFC8D4 /* ui_CMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ui_CMainWindow.h; sourceTree = SOURCE_ROOT; };
@@ -335,7 +341,15 @@
 		216346991A06372A009950BC /* render.operation.world.overlapping.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.world.overlapping.xml; path = "../ie3D-Bundle/Configurations/render.operation.world.overlapping.xml"; sourceTree = SOURCE_ROOT; };
 		2163469E1A063857009950BC /* shaderScreenMixOverlapping.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenMixOverlapping.frag; path = "../ie3D-Bundle/Shaders/shaderScreenMixOverlapping.frag"; sourceTree = SOURCE_ROOT; };
 		2163469F1A063857009950BC /* shaderScreenMixOverlapping.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenMixOverlapping.vert; path = "../ie3D-Bundle/Shaders/shaderScreenMixOverlapping.vert"; sourceTree = SOURCE_ROOT; };
-		216FCA7E1A0B9E6F00AC9723 /* render.operation.world.preview.model.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.world.preview.model.xml; path = "../ie3D-Bundle/Configurations/render.operation.world.preview.model.xml"; sourceTree = "<group>"; };
+		216C88C11A84FC27004FD47D /* CMEgoeTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEgoeTransition.cpp; path = Sources/CMEgoeTransition.cpp; sourceTree = SOURCE_ROOT; };
+		216C88C21A84FC27004FD47D /* CMEgoeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEgoeTransition.h; path = Sources/CMEgoeTransition.h; sourceTree = SOURCE_ROOT; };
+		216C88C61A84FC95004FD47D /* CMEgoeScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEgoeScene.cpp; path = Sources/CMEgoeScene.cpp; sourceTree = SOURCE_ROOT; };
+		216C88C71A84FC95004FD47D /* CMEgoeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEgoeScene.h; path = Sources/CMEgoeScene.h; sourceTree = SOURCE_ROOT; };
+		216C88CA1A84FDF6004FD47D /* material.render.operation.output.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.output.goe.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.output.goe.xml"; sourceTree = "<group>"; };
+		216C88CB1A84FDF6004FD47D /* render.operation.output.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.output.goe.xml; path = "../ie3D-Bundle/Configurations/render.operation.output.goe.xml"; sourceTree = "<group>"; };
+		216C88CC1A84FDF6004FD47D /* render.operation.ws.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.ws.goe.xml; path = "../ie3D-Bundle/Configurations/render.operation.ws.goe.xml"; sourceTree = "<group>"; };
+		216C88CD1A84FDF6004FD47D /* transition.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = transition.goe.xml; path = "../ie3D-Bundle/Configurations/transition.goe.xml"; sourceTree = "<group>"; };
+		216FCA7E1A0B9E6F00AC9723 /* render.operation.ws.gop.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.ws.gop.xml; path = "../ie3D-Bundle/Configurations/render.operation.ws.gop.xml"; sourceTree = "<group>"; };
 		2171175319FE79A600D92E14 /* shaderModelBrush.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelBrush.frag; path = "../ie3D-Bundle/Shaders/shaderModelBrush.frag"; sourceTree = SOURCE_ROOT; };
 		2171175419FE79A600D92E14 /* shaderModelBrush.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelBrush.vert; path = "../ie3D-Bundle/Shaders/shaderModelBrush.vert"; sourceTree = SOURCE_ROOT; };
 		2171175719FE79D600D92E14 /* gameobject.model.brush.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.model.brush.xml; path = "../ie3D-Bundle/Configurations/gameobject.model.brush.xml"; sourceTree = SOURCE_ROOT; };
@@ -476,12 +490,12 @@
 		21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.vert"; sourceTree = "<group>"; };
 		21E53BF919FA9DDA0018BDB9 /* shaderCommon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderCommon.frag; path = "../ie3D-Bundle/Shaders/shaderCommon.frag"; sourceTree = SOURCE_ROOT; };
 		21E53BFA19FA9DDA0018BDB9 /* shaderCommon.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderCommon.vert; path = "../ie3D-Bundle/Shaders/shaderCommon.vert"; sourceTree = SOURCE_ROOT; };
-		21FEECB11A078080001E9ACB /* transition.map.editor.main.scene.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = transition.map.editor.main.scene.xml; path = "../ie3D-Bundle/Configurations/transition.map.editor.main.scene.xml"; sourceTree = SOURCE_ROOT; };
-		21FEECB21A078080001E9ACB /* transition.map.editor.preview.model.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = transition.map.editor.preview.model.xml; path = "../ie3D-Bundle/Configurations/transition.map.editor.preview.model.xml"; sourceTree = SOURCE_ROOT; };
-		21FEECB81A07878E001E9ACB /* CMEPreviewModelScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEPreviewModelScene.cpp; path = Sources/CMEPreviewModelScene.cpp; sourceTree = SOURCE_ROOT; };
-		21FEECB91A07878E001E9ACB /* CMEPreviewModelScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEPreviewModelScene.h; path = Sources/CMEPreviewModelScene.h; sourceTree = SOURCE_ROOT; };
-		21FEECBB1A078B3E001E9ACB /* material.render.operation.preview.model.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.preview.model.output.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.preview.model.output.xml"; sourceTree = "<group>"; };
-		21FEECBC1A078B3E001E9ACB /* render.operation.preview.model.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.preview.model.output.xml; path = "../ie3D-Bundle/Configurations/render.operation.preview.model.output.xml"; sourceTree = "<group>"; };
+		21FEECB11A078080001E9ACB /* transition.mse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = transition.mse.xml; path = "../ie3D-Bundle/Configurations/transition.mse.xml"; sourceTree = SOURCE_ROOT; };
+		21FEECB21A078080001E9ACB /* transition.gop.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = transition.gop.xml; path = "../ie3D-Bundle/Configurations/transition.gop.xml"; sourceTree = SOURCE_ROOT; };
+		21FEECB81A07878E001E9ACB /* CMEgopScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEgopScene.cpp; path = Sources/CMEgopScene.cpp; sourceTree = SOURCE_ROOT; };
+		21FEECB91A07878E001E9ACB /* CMEgopScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEgopScene.h; path = Sources/CMEgopScene.h; sourceTree = SOURCE_ROOT; };
+		21FEECBB1A078B3E001E9ACB /* material.render.operation.output.gop.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.output.gop.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.output.gop.xml"; sourceTree = "<group>"; };
+		21FEECBC1A078B3E001E9ACB /* render.operation.output.gop.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.output.gop.xml; path = "../ie3D-Bundle/Configurations/render.operation.output.gop.xml"; sourceTree = "<group>"; };
 		21FEECC11A07992F001E9ACB /* material.model.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.shadowmap.xml; path = "../ie3D-Bundle/Configurations/material.model.shadowmap.xml"; sourceTree = "<group>"; };
 		21FEECC31A079965001E9ACB /* model_07.MDL_anim */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_07.MDL_anim; path = "../ie3D-Bundle/Meshes/model_07.MDL_anim"; sourceTree = "<group>"; };
 		21FEECC41A079965001E9ACB /* model_07.MDL_mesh */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_07.MDL_mesh; path = "../ie3D-Bundle/Meshes/model_07.MDL_mesh"; sourceTree = "<group>"; };
@@ -491,10 +505,10 @@
 		21FEECCC1A07A5DA001E9ACB /* shaderStaticGameObjectND.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderStaticGameObjectND.frag; path = "../ie3D-Bundle/Shaders/shaderStaticGameObjectND.frag"; sourceTree = "<group>"; };
 		21FEECCD1A07A5DA001E9ACB /* shaderAnimatedGameObjectND.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderAnimatedGameObjectND.vert; path = "../ie3D-Bundle/Shaders/shaderAnimatedGameObjectND.vert"; sourceTree = "<group>"; };
 		21FEECCE1A07A5DA001E9ACB /* shaderStaticGameObjectND.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderStaticGameObjectND.vert; path = "../ie3D-Bundle/Shaders/shaderStaticGameObjectND.vert"; sourceTree = "<group>"; };
-		21FEECE21A07D159001E9ACB /* CMEPreviewModelSceneTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEPreviewModelSceneTransition.h; path = Sources/CMEPreviewModelSceneTransition.h; sourceTree = SOURCE_ROOT; };
-		21FEECE31A07D159001E9ACB /* CMEPreviewModelSceneTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEPreviewModelSceneTransition.cpp; path = Sources/CMEPreviewModelSceneTransition.cpp; sourceTree = SOURCE_ROOT; };
-		21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.map.editor.output.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.map.editor.output.xml"; sourceTree = "<group>"; };
-		21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.map.editor.output.xml; path = "../ie3D-Bundle/Configurations/render.operation.map.editor.output.xml"; sourceTree = "<group>"; };
+		21FEECE21A07D159001E9ACB /* CMEgopTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEgopTransition.h; path = Sources/CMEgopTransition.h; sourceTree = SOURCE_ROOT; };
+		21FEECE31A07D159001E9ACB /* CMEgopTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEgopTransition.cpp; path = Sources/CMEgopTransition.cpp; sourceTree = SOURCE_ROOT; };
+		21FEED051A09396E001E9ACB /* material.render.operation.output.mse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.render.operation.output.mse.xml; path = "../ie3D-Bundle/Configurations/material.render.operation.output.mse.xml"; sourceTree = "<group>"; };
+		21FEED061A09396E001E9ACB /* render.operation.output.mse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.output.mse.xml; path = "../ie3D-Bundle/Configurations/render.operation.output.mse.xml"; sourceTree = "<group>"; };
 		288C01068066B0AAD960F2E5 /* unix.conf */ = {isa = PBXFileReference; lastKnownFileType = file; name = unix.conf; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/common/unix.conf; sourceTree = "<absolute>"; };
 		2AFE0E29D2D43DE9EEA679F0 /* qt_lib_help.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_help.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_help.pri; sourceTree = "<absolute>"; };
 		2ECDE1AA4A7F457B30B62E5C /* qconfig.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qconfig.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/qconfig.pri; sourceTree = "<absolute>"; };
@@ -839,8 +853,9 @@
 				216346991A06372A009950BC /* render.operation.world.overlapping.xml */,
 				216346971A06372A009950BC /* render.operation.screen.mix.overlapping.xml */,
 				216346981A06372A009950BC /* material.render.operation.screen.mix.overlapping.xml */,
-				216FCA7D1A0B9D0C00AC9723 /* model.preview.transition */,
-				216FCA7C1A0B9CE200AC9723 /* main.scene.transition */,
+				216C88C91A84FD37004FD47D /* goe.transition */,
+				216FCA7D1A0B9D0C00AC9723 /* gop.transition */,
+				216FCA7C1A0B9CE200AC9723 /* mse.transition */,
 			);
 			name = Configurations;
 			sourceTree = SOURCE_ROOT;
@@ -863,25 +878,36 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		216FCA7C1A0B9CE200AC9723 /* main.scene.transition */ = {
+		216C88C91A84FD37004FD47D /* goe.transition */ = {
 			isa = PBXGroup;
 			children = (
-				21FEED051A09396E001E9ACB /* material.render.operation.map.editor.output.xml */,
-				21FEED061A09396E001E9ACB /* render.operation.map.editor.output.xml */,
-				21FEECB11A078080001E9ACB /* transition.map.editor.main.scene.xml */,
+				216C88CA1A84FDF6004FD47D /* material.render.operation.output.goe.xml */,
+				216C88CB1A84FDF6004FD47D /* render.operation.output.goe.xml */,
+				216C88CC1A84FDF6004FD47D /* render.operation.ws.goe.xml */,
+				216C88CD1A84FDF6004FD47D /* transition.goe.xml */,
 			);
-			name = main.scene.transition;
+			name = goe.transition;
 			sourceTree = "<group>";
 		};
-		216FCA7D1A0B9D0C00AC9723 /* model.preview.transition */ = {
+		216FCA7C1A0B9CE200AC9723 /* mse.transition */ = {
 			isa = PBXGroup;
 			children = (
-				216FCA7E1A0B9E6F00AC9723 /* render.operation.world.preview.model.xml */,
-				21FEECBB1A078B3E001E9ACB /* material.render.operation.preview.model.output.xml */,
-				21FEECBC1A078B3E001E9ACB /* render.operation.preview.model.output.xml */,
-				21FEECB21A078080001E9ACB /* transition.map.editor.preview.model.xml */,
+				21FEED051A09396E001E9ACB /* material.render.operation.output.mse.xml */,
+				21FEED061A09396E001E9ACB /* render.operation.output.mse.xml */,
+				21FEECB11A078080001E9ACB /* transition.mse.xml */,
 			);
-			name = model.preview.transition;
+			name = mse.transition;
+			sourceTree = "<group>";
+		};
+		216FCA7D1A0B9D0C00AC9723 /* gop.transition */ = {
+			isa = PBXGroup;
+			children = (
+				216FCA7E1A0B9E6F00AC9723 /* render.operation.ws.gop.xml */,
+				21FEECBB1A078B3E001E9ACB /* material.render.operation.output.gop.xml */,
+				21FEECBC1A078B3E001E9ACB /* render.operation.output.gop.xml */,
+				21FEECB21A078080001E9ACB /* transition.gop.xml */,
+			);
+			name = gop.transition;
 			sourceTree = "<group>";
 		};
 		217AF1711945BAA50045CF9D /* SceneGraph Managment */ = {
@@ -927,10 +953,12 @@
 		217AF17B1945D98A0045CF9D /* Transitions */ = {
 			isa = PBXGroup;
 			children = (
-				21FEECE21A07D159001E9ACB /* CMEPreviewModelSceneTransition.h */,
-				21FEECE31A07D159001E9ACB /* CMEPreviewModelSceneTransition.cpp */,
-				21208E9C1906F75D00FFC8D4 /* CMEMainSceneTransition.h */,
-				21208E9B1906F75D00FFC8D4 /* CMEMainSceneTransition.cpp */,
+				21208E9C1906F75D00FFC8D4 /* CMEmseTransition.h */,
+				21208E9B1906F75D00FFC8D4 /* CMEmseTransition.cpp */,
+				21FEECE21A07D159001E9ACB /* CMEgopTransition.h */,
+				21FEECE31A07D159001E9ACB /* CMEgopTransition.cpp */,
+				216C88C21A84FC27004FD47D /* CMEgoeTransition.h */,
+				216C88C11A84FC27004FD47D /* CMEgoeTransition.cpp */,
 			);
 			name = Transitions;
 			sourceTree = "<group>";
@@ -979,10 +1007,12 @@
 				217AF1771945BB820045CF9D /* Common  */,
 				217AF1711945BAA50045CF9D /* SceneGraph Managment */,
 				211385061943518B0041A18A /* Configurations Managment */,
-				21208E981906F75D00FFC8D4 /* CMEMainScene.h */,
-				21208E971906F75D00FFC8D4 /* CMEMainScene.cpp */,
-				21FEECB91A07878E001E9ACB /* CMEPreviewModelScene.h */,
-				21FEECB81A07878E001E9ACB /* CMEPreviewModelScene.cpp */,
+				21208E981906F75D00FFC8D4 /* CMEmseScene.h */,
+				21208E971906F75D00FFC8D4 /* CMEmseScene.cpp */,
+				21FEECB91A07878E001E9ACB /* CMEgopScene.h */,
+				21FEECB81A07878E001E9ACB /* CMEgopScene.cpp */,
+				216C88C71A84FC95004FD47D /* CMEgoeScene.h */,
+				216C88C61A84FC95004FD47D /* CMEgoeScene.cpp */,
 				A4024724E546B6C12F58CF61 /* CMainWindow.h */,
 				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
 				212092A4190859AD00FFC8D4 /* CMapDragController.h */,
@@ -1305,9 +1335,10 @@
 				218BCFF119C339700041048E /* map_02.png in Resources */,
 				21138524194C40B30041A18A /* shaderGameObjectNormal.frag in Resources */,
 				21138525194C40B30041A18A /* shaderGameObjectNormal.vert in Resources */,
+				216C88D11A84FDF6004FD47D /* transition.goe.xml in Resources */,
 				21A9D8651961616A00A1B62C /* shaderModel.frag in Resources */,
 				21D9943519810976003D4CD1 /* gameobject.tank.medium.tower.xml in Resources */,
-				21FEECB31A078080001E9ACB /* transition.map.editor.main.scene.xml in Resources */,
+				21FEECB31A078080001E9ACB /* transition.mse.xml in Resources */,
 				21C409B2197C11060063D62D /* gameobject.tank.light.body.xml in Resources */,
 				217EF8D219F7F52700F339A0 /* landscape_01.png in Resources */,
 				21BC349F19080A39007B99DA /* material.ocean.xml in Resources */,
@@ -1318,7 +1349,7 @@
 				2171175919FE79D600D92E14 /* gameobject.model.brush.xml in Resources */,
 				21C409CD197C123D0063D62D /* tank_medium_left_track.mdl_01 in Resources */,
 				21BC349419080A39007B99DA /* gameobject.ocean.xml in Resources */,
-				216FCA7F1A0B9E6F00AC9723 /* render.operation.world.preview.model.xml in Resources */,
+				216FCA7F1A0B9E6F00AC9723 /* render.operation.ws.gop.xml in Resources */,
 				21C409C9197C123D0063D62D /* tank_light_left_track.mdl_01 in Resources */,
 				2163469B1A06372A009950BC /* material.render.operation.screen.mix.overlapping.xml in Resources */,
 				21B08E0419224FE100C5D5CC /* material.skybox.base.xml in Resources */,
@@ -1363,7 +1394,7 @@
 				212092C41919786500FFC8D4 /* gameobject.skybox.xml in Resources */,
 				217EF8DC19F7F52700F339A0 /* skybox_zpos.png in Resources */,
 				21D9944419810C43003D4CD1 /* gameobject.tank.heavy.body.xml in Resources */,
-				21FEED081A09396E001E9ACB /* render.operation.map.editor.output.xml in Resources */,
+				21FEED081A09396E001E9ACB /* render.operation.output.mse.xml in Resources */,
 				21A9D86119615F9700A1B62C /* material.model.reflection.xml in Resources */,
 				21C409971979B8370063D62D /* material.texture2D.xml in Resources */,
 				21BC5E871A0F82470086CC76 /* model_01.MDL_sk in Resources */,
@@ -1372,12 +1403,12 @@
 				214182C9193CC6C2000B66F1 /* Images.xcassets in Resources */,
 				21BC5E861A0F82470086CC76 /* model_01.MDL_mesh in Resources */,
 				21BC34A519080A39007B99DA /* render.operation.output.xml in Resources */,
-				21FEECB41A078080001E9ACB /* transition.map.editor.preview.model.xml in Resources */,
+				21FEECB41A078080001E9ACB /* transition.gop.xml in Resources */,
 				217EF8D519F7F52700F339A0 /* ocean_ripples.png in Resources */,
 				21FEECC71A079965001E9ACB /* model_07.MDL_mesh in Resources */,
 				2163469A1A06372A009950BC /* render.operation.screen.mix.overlapping.xml in Resources */,
 				217EF8DB19F7F52700F339A0 /* skybox_zneg.png in Resources */,
-				21FEECBD1A078B3E001E9ACB /* material.render.operation.preview.model.output.xml in Resources */,
+				21FEECBD1A078B3E001E9ACB /* material.render.operation.output.gop.xml in Resources */,
 				21C409C7197C123D0063D62D /* tank_heavy_tower.mdl_01 in Resources */,
 				21D9943319810976003D4CD1 /* gameobject.tank.medium.left.track.xml in Resources */,
 				218BCFF019C339700041048E /* map_01.png in Resources */,
@@ -1396,7 +1427,7 @@
 				21C409CB197C123D0063D62D /* tank_light_tower.mdl_01 in Resources */,
 				21A9D8661961616A00A1B62C /* shaderModel.vert in Resources */,
 				21D9943919810976003D4CD1 /* material.tank.medium.right.track.common.xml in Resources */,
-				21FEED071A09396E001E9ACB /* material.render.operation.map.editor.output.xml in Resources */,
+				21FEED071A09396E001E9ACB /* material.render.operation.output.mse.xml in Resources */,
 				217AF1821945EE1E0045CF9D /* shaderLandscapeBrush.frag in Resources */,
 				21C409B6197C11060063D62D /* material.tank.light.body.common.xml in Resources */,
 				21D9943819810976003D4CD1 /* material.tank.medium.left.track.common.xml in Resources */,
@@ -1415,8 +1446,10 @@
 				21A38D4D19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert in Resources */,
 				21B08E0519224FE100C5D5CC /* material.skybox.reflection.xml in Resources */,
 				212627681A3762D3000E8C72 /* model_03.MDL_sk in Resources */,
+				216C88D01A84FDF6004FD47D /* render.operation.ws.goe.xml in Resources */,
 				217EF8E219F7F71A00F339A0 /* render.operation.world.shadowmap.xml in Resources */,
 				21BC34B519080B47007B99DA /* shaderLandscape.frag in Resources */,
+				216C88CE1A84FDF6004FD47D /* material.render.operation.output.goe.xml in Resources */,
 				217AF17F1945EB010045CF9D /* material.landscape.brush.xml in Resources */,
 				212627651A3762D3000E8C72 /* model_00.MDL_sk in Resources */,
 				21BC34B919080B47007B99DA /* shaderOcean.frag in Resources */,
@@ -1429,6 +1462,7 @@
 				217AF17E1945EB010045CF9D /* gameobject.landscape.brush.xml in Resources */,
 				21FEECC81A079965001E9ACB /* model_07.MDL_sk in Resources */,
 				21A9D86019615F9700A1B62C /* material.model.common.xml in Resources */,
+				216C88CF1A84FDF6004FD47D /* render.operation.output.goe.xml in Resources */,
 				217EF8D919F7F52700F339A0 /* skybox_yneg.png in Resources */,
 				21BC34B619080B47007B99DA /* shaderLandscape.vert in Resources */,
 				21BC34B819080B47007B99DA /* shaderLandscapeSplatting.vert in Resources */,
@@ -1458,7 +1492,7 @@
 				217EF8D419F7F52700F339A0 /* landscape_03.png in Resources */,
 				217EF8E019F7F52700F339A0 /* static_model_tank_tracks.png in Resources */,
 				217EF8D619F7F52700F339A0 /* particle_01.png in Resources */,
-				21FEECBE1A078B3E001E9ACB /* render.operation.preview.model.output.xml in Resources */,
+				21FEECBE1A078B3E001E9ACB /* render.operation.output.gop.xml in Resources */,
 				212092C9191978D300FFC8D4 /* shaderSkybox.frag in Resources */,
 				21FEECCA1A079973001E9ACB /* animated_model_07.png in Resources */,
 				218BCFF219C339700041048E /* map_03.png in Resources */,
@@ -1517,20 +1551,22 @@
 				215DE7331A7D643B00E6062D /* CMEConfigurationModelBrush.cpp in Compile Sources */,
 				215DE7321A7D643B00E6062D /* CMEConfigurationLandscapeBrush.cpp in Compile Sources */,
 				21CB5315196C16A10066EC6D /* CMESceneToUICommands.cpp in Compile Sources */,
-				21FEECBA1A07878E001E9ACB /* CMEPreviewModelScene.cpp in Compile Sources */,
+				21FEECBA1A07878E001E9ACB /* CMEgopScene.cpp in Compile Sources */,
 				212092AB19106B6100FFC8D4 /* CMELandscapeBrush.cpp in Compile Sources */,
 				21CB5312196C05610066EC6D /* CMEUIToSceneCommands.cpp in Compile Sources */,
 				215DE7311A7D643B00E6062D /* CMEConfigurationBrushElement.cpp in Compile Sources */,
 				21208EA61906F75D00FFC8D4 /* CMEGameController.cpp in Compile Sources */,
 				212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */,
-				21208EA71906F75D00FFC8D4 /* CMEMainSceneTransition.cpp in Compile Sources */,
-				21208EA51906F75D00FFC8D4 /* CMEMainScene.cpp in Compile Sources */,
+				216C88C31A84FC27004FD47D /* CMEgoeTransition.cpp in Compile Sources */,
+				21208EA71906F75D00FFC8D4 /* CMEmseTransition.cpp in Compile Sources */,
+				21208EA51906F75D00FFC8D4 /* CMEmseScene.cpp in Compile Sources */,
 				217AF1751945BAD70045CF9D /* CMESceneFabricator.cpp in Compile Sources */,
 				2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */,
 				5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */,
-				21FEECE41A07D159001E9ACB /* CMEPreviewModelSceneTransition.cpp in Compile Sources */,
+				21FEECE41A07D159001E9ACB /* CMEgopTransition.cpp in Compile Sources */,
 				21C4099B1979B85E0063D62D /* shaderTexture2D.frag in Compile Sources */,
 				5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */,
+				216C88C81A84FC95004FD47D /* CMEgoeScene.cpp in Compile Sources */,
 			);
 			name = "Compile Sources";
 			runOnlyForDeploymentPostprocessing = 0;

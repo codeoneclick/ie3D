@@ -1,0 +1,9 @@
+<transition
+    guid="transition.gop">
+    <output_technique filename="render.operation.output.gop.xml"/>
+    <ws_techniques>
+        <ws_technique filename="render.operation.ws.gop.xml"/>
+    </ws_techniques>
+    <ss_techniques>
+    </ss_techniques>
+</transition>

@@ -9,8 +9,9 @@
 #include "IRenderTechniqueOperationTextureHandler.h"
 
 class CMEGameController;
-class CMEMainSceneTransition;
-class CMEPreviewModelSceneTransition;
+class CMEmseTransition;
+class CMEgopTransition;
+class CMEgoeTransition;
 
 namespace Ui {
     class CMainWindow;
@@ -26,11 +27,14 @@ protected:
     
 #if defined(__OSX__) || defined(__WIN32__)
     
-    std::shared_ptr<CMEGameController> m_mainSceneController;
-    std::shared_ptr<CMEMainSceneTransition> m_mainSceneTransition;
+    std::shared_ptr<CMEGameController> m_mseController;
+    std::shared_ptr<CMEmseTransition> m_mseTransition;
     
-    std::shared_ptr<CMEGameController> m_modelPreviewController;
-    std::shared_ptr<CMEPreviewModelSceneTransition> m_modelPreviewTransition;
+    std::shared_ptr<CMEGameController> m_gopController;
+    std::shared_ptr<CMEgopTransition> m_gopTransition;
+    
+    std::shared_ptr<CMEGameController> m_goeController;
+    std::shared_ptr<CMEgoeTransition> m_goeTransition;
     
     CSharedMESceneToUICommands m_sceneToUICommands;
     

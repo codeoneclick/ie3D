@@ -45,6 +45,7 @@ protected:
     void sewSeams(i32 currentIndexX, i32 currentIndexZ);
     void sewSeams(CSharedLandscapeChunkRef currentChunk, i32 neighborChunkIndex,
                   E_LANDSCAPE_SEAM currentChunkSeamType, E_LANDSCAPE_SEAM neighborChunkSeamType);
+    void resetSeams(i32 currentIndexX, i32 currentIndexZ);
     
 public:
 

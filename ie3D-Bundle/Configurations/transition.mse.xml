@@ -1,6 +1,6 @@
 <transition
-    guid="transition.map.editor.main.scene">
-    <output_technique filename="render.operation.map.editor.output.xml"/>
+    guid="transition.mse">
+    <output_technique filename="render.operation.output.mse.xml"/>
     <ws_techniques>
         <ws_technique filename="render.operation.world.base.xml"/>
         <ws_technique filename="render.operation.world.reflection.xml"/>

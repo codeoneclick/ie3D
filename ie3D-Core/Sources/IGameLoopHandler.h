@@ -51,6 +51,8 @@ private:
     
 protected:
     
+    bool m_isPaused;
+    
     IGameLoopHandler(void);
     
     virtual void _OnGameLoopUpdate(f32 _deltatime) = 0;
@@ -58,6 +60,9 @@ protected:
 public:
     
     virtual ~IGameLoopHandler(void);
+    
+    void setPaused(bool value);
+    bool isPaused(void) const;
 };
 
 #endif
