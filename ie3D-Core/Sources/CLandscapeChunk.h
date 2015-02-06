@@ -24,6 +24,7 @@ private:
     
     E_LANDSCAPE_CHUNK_LOD m_currentLOD;
     E_LANDSCAPE_CHUNK_LOD m_inprogressLOD;
+    std::array<E_LANDSCAPE_CHUNK_LOD, E_LANDSCAPE_SEAM_MAX> m_seamedLOD;
     
     f32 m_fogLinearStart;
     f32 m_fogLinearEnd;
@@ -80,6 +81,7 @@ public:
     
     E_LANDSCAPE_CHUNK_LOD getCurrentLOD(void) const;
     E_LANDSCAPE_CHUNK_LOD getInprogressLOD(void) const;
+    E_LANDSCAPE_CHUNK_LOD getSeamedLOD(E_LANDSCAPE_SEAM seamType) const;
     void setInprogressLOD(E_LANDSCAPE_CHUNK_LOD LOD);
     
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;

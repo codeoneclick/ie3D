@@ -354,7 +354,8 @@ static std::map<std::string, std::string> g_platforms = {
     {"iPad4,2", "5th Generation iPad (iPad Air) - Cellular" },
     {"iPad4,4", "2nd Generation iPad Mini - Wifi" },
     {"iPad4,5", "2nd Generation iPad Mini - Cellular" },
-    {"iPhone7,2", "iPhone 6"}
+    {"iPhone7,2", "iPhone 6"},
+    {"iPhone7,1", "iPhone 6+"}
 };
 
 static std::set<std::string> g_highPerformancePlatforms = {
@@ -368,6 +369,8 @@ static std::set<std::string> g_highPerformancePlatforms = {
     "iPad4,2",
     "iPad4,4",
     "iPad4,5",
+    "iPad2,5",
+    "iPhone7,1",
     "iPhone7,2"
 };
 

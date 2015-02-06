@@ -32,6 +32,10 @@ m_currentLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
 m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
 m_size(0)
 {
+    for(ui32 i = 0; i < E_LANDSCAPE_SEAM_MAX; i++)
+    {
+        m_seamedLOD.at(i) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
+    }
     m_isNeedBoundingBox = true;
     m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
 }
@@ -62,6 +66,11 @@ E_LANDSCAPE_CHUNK_LOD CLandscapeChunk::getCurrentLOD(void) const
 E_LANDSCAPE_CHUNK_LOD CLandscapeChunk::getInprogressLOD(void) const
 {
     return m_inprogressLOD;
+}
+
+E_LANDSCAPE_CHUNK_LOD CLandscapeChunk::getSeamedLOD(E_LANDSCAPE_SEAM seamType) const
+{
+    return m_seamedLOD.at(seamType);
 }
 
 void CLandscapeChunk::setInprogressLOD(E_LANDSCAPE_CHUNK_LOD LOD)
@@ -279,6 +288,7 @@ void CLandscapeChunk::setSeamVerteces(const std::vector<SAttributeVertex>& verte
                                                   interpolationIntensity);
     }
     m_mesh->getVertexBuffer()->unlock();
+    m_seamedLOD.at(seamType) = m_currentLOD;
 }
 
 std::function<ui32(ui32)> CLandscapeChunk::getEdgeVertexIncrementFunction(E_LANDSCAPE_SEAM seamType) const

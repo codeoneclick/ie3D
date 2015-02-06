@@ -62,18 +62,16 @@ m_size(size)
     data = [bitmap bitmapData];
     m_size = glm::ivec2(image.size.width, image.size.height);
     
+#endif
+    
     std::vector<f32> heights;
     for(ui32 i = 0; i < m_size.x; ++i)
     {
         for(ui32 j = 0; j < m_size.y; ++j)
         {
-            //heights.push_back(data[(i + j * m_size.x) * 4 + 1] / 255);
             heights.push_back(static_cast<f32>(data[(i + j * m_size.x) * 4 + 1] - 64) / 255 * 32.0);
         }
     }
-    
-#endif
-    
     CHeightmap::createVertexesData(heights);
 }
 
