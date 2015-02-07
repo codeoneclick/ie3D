@@ -22,6 +22,8 @@ protected:
     
     CSharedGlobalLightSource m_globalLightSource;
     CSharedModel m_model;
+    CSharedLandscape m_landscape;
+    CSharedSkyBox m_skybox;
     
     void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);

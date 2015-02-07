@@ -7,6 +7,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_is_cubemap(bool is_cubemap)
+{
+IConfiguration::setAttribute("/texture/is_cubemap", std::make_shared<CConfigurationAttribute>(is_cubemap));
+}
+#endif
 std::string CConfigurationTexture::getFilename(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename");
@@ -14,6 +20,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_filename(std::string filename)
+{
+IConfiguration::setAttribute("/texture/filename", std::make_shared<CConfigurationAttribute>(filename));
+}
+#endif
 std::string CConfigurationTexture::getFilenamePositiveX(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_x_positive");
@@ -21,6 +33,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_filename_x_positive(std::string filename_x_positive)
+{
+IConfiguration::setAttribute("/texture/filename_x_positive", std::make_shared<CConfigurationAttribute>(filename_x_positive));
+}
+#endif
 std::string CConfigurationTexture::getFilenameNegativeX(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_x_negative");
@@ -28,6 +46,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_filename_x_negative(std::string filename_x_negative)
+{
+IConfiguration::setAttribute("/texture/filename_x_negative", std::make_shared<CConfigurationAttribute>(filename_x_negative));
+}
+#endif
 std::string CConfigurationTexture::getFilenamePositiveY(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_y_positive");
@@ -35,6 +59,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_filename_y_positive(std::string filename_y_positive)
+{
+IConfiguration::setAttribute("/texture/filename_y_positive", std::make_shared<CConfigurationAttribute>(filename_y_positive));
+}
+#endif
 std::string CConfigurationTexture::getFilenameNegativeY(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_y_negative");
@@ -42,6 +72,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_filename_y_negative(std::string filename_y_negative)
+{
+IConfiguration::setAttribute("/texture/filename_y_negative", std::make_shared<CConfigurationAttribute>(filename_y_negative));
+}
+#endif
 std::string CConfigurationTexture::getFilenamePositiveZ(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_z_positive");
@@ -49,6 +85,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_filename_z_positive(std::string filename_z_positive)
+{
+IConfiguration::setAttribute("/texture/filename_z_positive", std::make_shared<CConfigurationAttribute>(filename_z_positive));
+}
+#endif
 std::string CConfigurationTexture::getFilenameNegativeZ(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_z_negative");
@@ -56,6 +98,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_filename_z_negative(std::string filename_z_negative)
+{
+IConfiguration::setAttribute("/texture/filename_z_negative", std::make_shared<CConfigurationAttribute>(filename_z_negative));
+}
+#endif
 std::string CConfigurationTexture::getRenderOperationName(void) const
 {
 const auto& iterator = m_attributes.find("/texture/render_operation_name");
@@ -63,6 +111,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_render_operation_name(std::string render_operation_name)
+{
+IConfiguration::setAttribute("/texture/render_operation_name", std::make_shared<CConfigurationAttribute>(render_operation_name));
+}
+#endif
 ui32 CConfigurationTexture::getSamplerIndex(void) const
 {
 const auto& iterator = m_attributes.find("/texture/sampler_index");
@@ -70,6 +124,12 @@ assert(iterator != m_attributes.end());
 ui32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_sampler_index(ui32 sampler_index)
+{
+IConfiguration::setAttribute("/texture/sampler_index", std::make_shared<CConfigurationAttribute>(sampler_index));
+}
+#endif
 GLenum CConfigurationTexture::getWrapMode(void) const
 {
 const auto& iterator = m_attributes.find("/texture/wrap_mode");
@@ -77,6 +137,12 @@ assert(iterator != m_attributes.end());
 GLenum value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_wrap_mode(GLenum wrap_mode)
+{
+IConfiguration::setAttribute("/texture/wrap_mode", std::make_shared<CConfigurationAttribute>(wrap_mode));
+}
+#endif
 GLenum CConfigurationTexture::getMagFilter(void) const
 {
 const auto& iterator = m_attributes.find("/texture/mag_filter");
@@ -84,6 +150,12 @@ assert(iterator != m_attributes.end());
 GLenum value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_mag_filter(GLenum mag_filter)
+{
+IConfiguration::setAttribute("/texture/mag_filter", std::make_shared<CConfigurationAttribute>(mag_filter));
+}
+#endif
 GLenum CConfigurationTexture::getMinFilter(void) const
 {
 const auto& iterator = m_attributes.find("/texture/min_filter");
@@ -91,6 +163,12 @@ assert(iterator != m_attributes.end());
 GLenum value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationTexture::set_min_filter(GLenum min_filter)
+{
+IConfiguration::setAttribute("/texture/min_filter", std::make_shared<CConfigurationAttribute>(min_filter));
+}
+#endif
 void CConfigurationTexture::serialize(pugi::xml_document& document, const std::string& path)
 {
 pugi::xpath_node node;

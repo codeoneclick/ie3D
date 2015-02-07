@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CMainWindow_t {
-    QByteArrayData data[16];
-    char stringdata[416];
+    QByteArrayData data[20];
+    char stringdata[534];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,7 +44,11 @@ QT_MOC_LITERAL(11, 258, 41),
 QT_MOC_LITERAL(12, 300, 4),
 QT_MOC_LITERAL(13, 305, 41),
 QT_MOC_LITERAL(14, 347, 41),
-QT_MOC_LITERAL(15, 389, 25)
+QT_MOC_LITERAL(15, 389, 25),
+QT_MOC_LITERAL(16, 415, 32),
+QT_MOC_LITERAL(17, 448, 5),
+QT_MOC_LITERAL(18, 454, 42),
+QT_MOC_LITERAL(19, 497, 35)
     },
     "CMainWindow\0on_m_brushSizeSlider_valueChanged\0"
     "\0value\0on_m_brushStrengthSlider_valueChanged\0"
@@ -58,6 +62,9 @@ QT_MOC_LITERAL(15, 389, 25)
     "arg1\0on_m_textureTilling02SpinBox_valueChanged\0"
     "on_m_textureTilling03SpinBox_valueChanged\0"
     "on_generateButton_clicked\0"
+    "on_m_mainMenuTabs_currentChanged\0index\0"
+    "on_m_landscapePropertiesTab_currentChanged\0"
+    "on_m_createGameObjectButton_clicked\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,7 +74,7 @@ static const uint qt_meta_data_CMainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -75,18 +82,21 @@ static const uint qt_meta_data_CMainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   74,    2, 0x08,
-       4,    1,   77,    2, 0x08,
-       5,    1,   80,    2, 0x08,
-       6,    1,   83,    2, 0x08,
-       7,    0,   86,    2, 0x08,
-       8,    0,   87,    2, 0x08,
-       9,    0,   88,    2, 0x08,
-      10,    0,   89,    2, 0x08,
-      11,    1,   90,    2, 0x08,
-      13,    1,   93,    2, 0x08,
-      14,    1,   96,    2, 0x08,
-      15,    0,   99,    2, 0x08,
+       1,    1,   89,    2, 0x08,
+       4,    1,   92,    2, 0x08,
+       5,    1,   95,    2, 0x08,
+       6,    1,   98,    2, 0x08,
+       7,    0,  101,    2, 0x08,
+       8,    0,  102,    2, 0x08,
+       9,    0,  103,    2, 0x08,
+      10,    0,  104,    2, 0x08,
+      11,    1,  105,    2, 0x08,
+      13,    1,  108,    2, 0x08,
+      14,    1,  111,    2, 0x08,
+      15,    0,  114,    2, 0x08,
+      16,    1,  115,    2, 0x08,
+      18,    1,  118,    2, 0x08,
+      19,    0,  121,    2, 0x08,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -100,6 +110,9 @@ static const uint qt_meta_data_CMainWindow[] = {
     QMetaType::Void, QMetaType::Int,   12,
     QMetaType::Void, QMetaType::Int,   12,
     QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void,
 
        0        // eod
@@ -122,6 +135,9 @@ void CMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 9: _t->on_m_textureTilling02SpinBox_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 10: _t->on_m_textureTilling03SpinBox_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 11: _t->on_generateButton_clicked(); break;
+        case 12: _t->on_m_mainMenuTabs_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: _t->on_m_landscapePropertiesTab_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->on_m_createGameObjectButton_clicked(); break;
         default: ;
         }
     }
@@ -154,13 +170,13 @@ int CMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 12;
+        _id -= 15;
     }
     return _id;
 }

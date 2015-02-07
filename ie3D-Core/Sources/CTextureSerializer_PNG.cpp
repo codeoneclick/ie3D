@@ -150,6 +150,11 @@ void CTextureSerializer_PNG::serialize(void)
             format = GL_RGBA;
         }
             break;
+        case PNG_COLOR_TYPE_GRAY:
+        {
+            format = GL_LUMINANCE;
+        }
+            break;
         default:
             assert(false);
             break;

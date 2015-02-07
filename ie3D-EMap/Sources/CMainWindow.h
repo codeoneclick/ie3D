@@ -84,6 +84,12 @@ private slots:
 
     void on_generateButton_clicked();
 
+    void on_m_mainMenuTabs_currentChanged(int index);
+
+    void on_m_landscapePropertiesTab_currentChanged(int index);
+
+    void on_m_createGameObjectButton_clicked();
+
 private:
     
     Ui::CMainWindow *ui;

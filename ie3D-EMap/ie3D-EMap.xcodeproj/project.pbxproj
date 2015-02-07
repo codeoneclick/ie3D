@@ -62,6 +62,13 @@
 		216C88CF1A84FDF6004FD47D /* render.operation.output.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88CB1A84FDF6004FD47D /* render.operation.output.goe.xml */; };
 		216C88D01A84FDF6004FD47D /* render.operation.ws.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88CC1A84FDF6004FD47D /* render.operation.ws.goe.xml */; };
 		216C88D11A84FDF6004FD47D /* transition.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88CD1A84FDF6004FD47D /* transition.goe.xml */; };
+		216C88DF1A860E47004FD47D /* gameobject.landscape.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88DB1A860E47004FD47D /* gameobject.landscape.goe.xml */; };
+		216C88E01A860E47004FD47D /* material.landscape.goe.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88DC1A860E47004FD47D /* material.landscape.goe.base.xml */; };
+		216C88E11A860E47004FD47D /* material.landscape.goe.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88DD1A860E47004FD47D /* material.landscape.goe.reflection.xml */; };
+		216C88E21A860E47004FD47D /* material.landscape.goe.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88DE1A860E47004FD47D /* material.landscape.goe.refraction.xml */; };
+		216C88E41A860ECC004FD47D /* goe.png in Resources */ = {isa = PBXBuildFile; fileRef = 216C88E31A860ECC004FD47D /* goe.png */; };
+		216C88E71A861B55004FD47D /* gameobject.ocean.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88E51A861B55004FD47D /* gameobject.ocean.goe.xml */; };
+		216C88E81A861B55004FD47D /* material.ocean.goe.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216C88E61A861B55004FD47D /* material.ocean.goe.xml */; };
 		216FCA7F1A0B9E6F00AC9723 /* render.operation.ws.gop.xml in Resources */ = {isa = PBXBuildFile; fileRef = 216FCA7E1A0B9E6F00AC9723 /* render.operation.ws.gop.xml */; };
 		2171175519FE79A600D92E14 /* shaderModelBrush.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2171175319FE79A600D92E14 /* shaderModelBrush.frag */; };
 		2171175619FE79A600D92E14 /* shaderModelBrush.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2171175419FE79A600D92E14 /* shaderModelBrush.vert */; };
@@ -349,6 +356,13 @@
 		216C88CB1A84FDF6004FD47D /* render.operation.output.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.output.goe.xml; path = "../ie3D-Bundle/Configurations/render.operation.output.goe.xml"; sourceTree = "<group>"; };
 		216C88CC1A84FDF6004FD47D /* render.operation.ws.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.ws.goe.xml; path = "../ie3D-Bundle/Configurations/render.operation.ws.goe.xml"; sourceTree = "<group>"; };
 		216C88CD1A84FDF6004FD47D /* transition.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = transition.goe.xml; path = "../ie3D-Bundle/Configurations/transition.goe.xml"; sourceTree = "<group>"; };
+		216C88DB1A860E47004FD47D /* gameobject.landscape.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.landscape.goe.xml; path = "../ie3D-Bundle/Configurations/gameobject.landscape.goe.xml"; sourceTree = "<group>"; };
+		216C88DC1A860E47004FD47D /* material.landscape.goe.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.goe.base.xml; path = "../ie3D-Bundle/Configurations/material.landscape.goe.base.xml"; sourceTree = "<group>"; };
+		216C88DD1A860E47004FD47D /* material.landscape.goe.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.goe.reflection.xml; path = "../ie3D-Bundle/Configurations/material.landscape.goe.reflection.xml"; sourceTree = "<group>"; };
+		216C88DE1A860E47004FD47D /* material.landscape.goe.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.goe.refraction.xml; path = "../ie3D-Bundle/Configurations/material.landscape.goe.refraction.xml"; sourceTree = "<group>"; };
+		216C88E31A860ECC004FD47D /* goe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goe.png; path = "../ie3D-Bundle/Textures/goe.png"; sourceTree = "<group>"; };
+		216C88E51A861B55004FD47D /* gameobject.ocean.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.ocean.goe.xml; path = "../ie3D-Bundle/Configurations/gameobject.ocean.goe.xml"; sourceTree = "<group>"; };
+		216C88E61A861B55004FD47D /* material.ocean.goe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.ocean.goe.xml; path = "../ie3D-Bundle/Configurations/material.ocean.goe.xml"; sourceTree = "<group>"; };
 		216FCA7E1A0B9E6F00AC9723 /* render.operation.ws.gop.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = render.operation.ws.gop.xml; path = "../ie3D-Bundle/Configurations/render.operation.ws.gop.xml"; sourceTree = "<group>"; };
 		2171175319FE79A600D92E14 /* shaderModelBrush.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelBrush.frag; path = "../ie3D-Bundle/Shaders/shaderModelBrush.frag"; sourceTree = SOURCE_ROOT; };
 		2171175419FE79A600D92E14 /* shaderModelBrush.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelBrush.vert; path = "../ie3D-Bundle/Shaders/shaderModelBrush.vert"; sourceTree = SOURCE_ROOT; };
@@ -714,6 +728,7 @@
 		212090EA1906FD3E00FFC8D4 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				216C88E31A860ECC004FD47D /* goe.png */,
 				21FEECC91A079973001E9ACB /* animated_model_07.png */,
 				217EF8C119F7F52700F339A0 /* animated_model_01.png */,
 				217EF8C219F7F52700F339A0 /* landscape_01.png */,
@@ -881,6 +896,12 @@
 		216C88C91A84FD37004FD47D /* goe.transition */ = {
 			isa = PBXGroup;
 			children = (
+				216C88E51A861B55004FD47D /* gameobject.ocean.goe.xml */,
+				216C88DB1A860E47004FD47D /* gameobject.landscape.goe.xml */,
+				216C88DC1A860E47004FD47D /* material.landscape.goe.base.xml */,
+				216C88DD1A860E47004FD47D /* material.landscape.goe.reflection.xml */,
+				216C88DE1A860E47004FD47D /* material.landscape.goe.refraction.xml */,
+				216C88E61A861B55004FD47D /* material.ocean.goe.xml */,
 				216C88CA1A84FDF6004FD47D /* material.render.operation.output.goe.xml */,
 				216C88CB1A84FDF6004FD47D /* render.operation.output.goe.xml */,
 				216C88CC1A84FDF6004FD47D /* render.operation.ws.goe.xml */,
@@ -1332,6 +1353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				217EF8DA19F7F52700F339A0 /* skybox_ypos.png in Resources */,
+				216C88E41A860ECC004FD47D /* goe.png in Resources */,
 				218BCFF119C339700041048E /* map_02.png in Resources */,
 				21138524194C40B30041A18A /* shaderGameObjectNormal.frag in Resources */,
 				21138525194C40B30041A18A /* shaderGameObjectNormal.vert in Resources */,
@@ -1345,6 +1367,7 @@
 				212627671A3762D3000E8C72 /* model_03.MDL_mesh in Resources */,
 				21A9D8721961ACE600A1B62C /* shaderModelNormal.vert in Resources */,
 				21D9944A19810C43003D4CD1 /* material.tank.heavy.left.track.common.xml in Resources */,
+				216C88DF1A860E47004FD47D /* gameobject.landscape.goe.xml in Resources */,
 				2113851F194C40820041A18A /* material.ocean.normal.xml in Resources */,
 				2171175919FE79D600D92E14 /* gameobject.model.brush.xml in Resources */,
 				21C409CD197C123D0063D62D /* tank_medium_left_track.mdl_01 in Resources */,
@@ -1396,12 +1419,15 @@
 				21D9944419810C43003D4CD1 /* gameobject.tank.heavy.body.xml in Resources */,
 				21FEED081A09396E001E9ACB /* render.operation.output.mse.xml in Resources */,
 				21A9D86119615F9700A1B62C /* material.model.reflection.xml in Resources */,
+				216C88E11A860E47004FD47D /* material.landscape.goe.reflection.xml in Resources */,
 				21C409971979B8370063D62D /* material.texture2D.xml in Resources */,
 				21BC5E871A0F82470086CC76 /* model_01.MDL_sk in Resources */,
 				21FEECD21A07A5DA001E9ACB /* shaderStaticGameObjectND.vert in Resources */,
+				216C88E71A861B55004FD47D /* gameobject.ocean.goe.xml in Resources */,
 				21C409B3197C11060063D62D /* gameobject.tank.light.left.track.xml in Resources */,
 				214182C9193CC6C2000B66F1 /* Images.xcassets in Resources */,
 				21BC5E861A0F82470086CC76 /* model_01.MDL_mesh in Resources */,
+				216C88E21A860E47004FD47D /* material.landscape.goe.refraction.xml in Resources */,
 				21BC34A519080A39007B99DA /* render.operation.output.xml in Resources */,
 				21FEECB41A078080001E9ACB /* transition.gop.xml in Resources */,
 				217EF8D519F7F52700F339A0 /* ocean_ripples.png in Resources */,
@@ -1446,6 +1472,7 @@
 				21A38D4D19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert in Resources */,
 				21B08E0519224FE100C5D5CC /* material.skybox.reflection.xml in Resources */,
 				212627681A3762D3000E8C72 /* model_03.MDL_sk in Resources */,
+				216C88E01A860E47004FD47D /* material.landscape.goe.base.xml in Resources */,
 				216C88D01A84FDF6004FD47D /* render.operation.ws.goe.xml in Resources */,
 				217EF8E219F7F71A00F339A0 /* render.operation.world.shadowmap.xml in Resources */,
 				21BC34B519080B47007B99DA /* shaderLandscape.frag in Resources */,
@@ -1482,6 +1509,7 @@
 				218BCFF319C339700041048E /* map_04.png in Resources */,
 				21BC34B719080B47007B99DA /* shaderLandscapeSplatting.frag in Resources */,
 				2113851E194C40820041A18A /* material.landscape.normal.xml in Resources */,
+				216C88E81A861B55004FD47D /* material.ocean.goe.xml in Resources */,
 				21BC34BD19080B47007B99DA /* shaderScreenQuad.frag in Resources */,
 				216204311949A74E00D129AD /* material.render.operation.screen.ssao.xml in Resources */,
 				21B76CAE1A01231F00DEC5EE /* gameobject.brush.element.xml in Resources */,

@@ -7,6 +7,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationAnimation::set_filename(std::string filename)
+{
+IConfiguration::setAttribute("/animation/filename", std::make_shared<CConfigurationAttribute>(filename));
+}
+#endif
 std::string CConfigurationAnimation::getName(void) const
 {
 const auto& iterator = m_attributes.find("/animation/name");
@@ -14,6 +20,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationAnimation::set_name(std::string name)
+{
+IConfiguration::setAttribute("/animation/name", std::make_shared<CConfigurationAttribute>(name));
+}
+#endif
 void CConfigurationAnimation::serialize(pugi::xml_document& document, const std::string& path)
 {
 pugi::xpath_node node;

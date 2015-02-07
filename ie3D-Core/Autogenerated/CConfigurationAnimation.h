@@ -8,7 +8,13 @@ public:
 CConfigurationAnimation(void) = default;
 ~CConfigurationAnimation(void) = default;
 std::string getFilename(void) const;
+#if defined(__EDITOR__)
+void set_filename(std::string filename);
+#endif
 std::string getName(void) const;
+#if defined(__EDITOR__)
+void set_name(std::string name);
+#endif
 void serialize(pugi::xml_document& document, const std::string& path);
 void serialize(pugi::xml_document& document, pugi::xpath_node& node);
 };

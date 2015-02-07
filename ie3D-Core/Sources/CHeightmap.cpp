@@ -116,9 +116,8 @@ void CHeightmap::createVertexesData(const std::vector<f32>& data)
     {
         for(ui32 j = 0; j < m_size.y; ++j)
         {
-            f32 y = i == 0 || j == 0 || i == (m_size.x - 1) || j == (m_size.y - 1) ? -1.0 : data.at(i + j * m_size.x);
             m_uncompressedVertexes[i + j * m_size.x].m_position = glm::vec3(static_cast<f32>(i),
-                                                                          y,
+                                                                          data.at(i + j * m_size.x),
                                                                           static_cast<f32>(j));
             m_uncompressedVertexes[i + j * m_size.x].m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<ui32>(i) /
                                                                                              static_cast<f32>(m_size.x),
@@ -390,11 +389,20 @@ m_splattingTexture(nullptr)
                                                    configurationLandscape->getSeed());
     }
     
-    m_chunkSize = glm::ivec2(65, 65);
-    m_chunkLODsSizes.at(0) = glm::ivec2(65, 65);
-    m_chunkLODsSizes.at(1) = glm::ivec2(33, 33);
-    m_chunkLODsSizes.at(2) = glm::ivec2(17, 17);
-    m_chunkLODsSizes.at(3) = glm::ivec2(9, 9);
+    m_chunkSize = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 65),
+                             MIN_VALUE(m_heightmap->getSize().y + 1, 65));
+    
+    m_chunkLODsSizes.at(0) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 65),
+                                        MIN_VALUE(m_heightmap->getSize().y + 1, 65));
+    
+    m_chunkLODsSizes.at(1) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 33),
+                                        MIN_VALUE(m_heightmap->getSize().y + 1, 33));
+    
+    m_chunkLODsSizes.at(2) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 17),
+                                        MIN_VALUE(m_heightmap->getSize().y + 1, 17));
+    
+    m_chunkLODsSizes.at(3) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 9),
+                                        MIN_VALUE(m_heightmap->getSize().y + 1, 9));
     
     m_chunksNum = glm::ivec2(m_heightmap->getSize().x / (m_chunkSize.x - 1),
                              m_heightmap->getSize().y / (m_chunkSize.y - 1));

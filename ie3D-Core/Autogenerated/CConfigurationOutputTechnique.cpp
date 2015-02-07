@@ -7,6 +7,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationOutputTechnique::set_guid(std::string guid)
+{
+IConfiguration::setAttribute("/output_technique/guid", std::make_shared<CConfigurationAttribute>(guid));
+}
+#endif
 std::shared_ptr<CConfigurationMaterial> CConfigurationOutputTechnique::getConfigurationMaterial(void) const
 {
 const auto& iterator = m_configurations.find("/output_technique/material");
@@ -18,6 +24,12 @@ assert(iterator != m_configurations.end());
 assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationMaterial>(iterator->second.at(0));
 }
+#if defined(__EDITOR__)
+void CConfigurationOutputTechnique::set_material(const std::shared_ptr<CConfigurationMaterial>& material)
+{
+IConfiguration::setConfiguration("/output_technique/material", material, 0);
+}
+#endif
 void CConfigurationOutputTechnique::serialize(const std::string& filename)
 {
 pugi::xml_document document;

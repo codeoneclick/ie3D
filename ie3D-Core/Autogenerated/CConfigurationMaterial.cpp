@@ -7,6 +7,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_render_operation_name(std::string render_operation_name)
+{
+IConfiguration::setAttribute("/material/render_operation_name", std::make_shared<CConfigurationAttribute>(render_operation_name));
+}
+#endif
 bool CConfigurationMaterial::isDepthTest(void) const
 {
 const auto& iterator = m_attributes.find("/material/is_depth_test");
@@ -14,6 +20,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_is_depth_test(bool is_depth_test)
+{
+IConfiguration::setAttribute("/material/is_depth_test", std::make_shared<CConfigurationAttribute>(is_depth_test));
+}
+#endif
 bool CConfigurationMaterial::isDepthMask(void) const
 {
 const auto& iterator = m_attributes.find("/material/is_depth_mask");
@@ -21,6 +33,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_is_depth_mask(bool is_depth_mask)
+{
+IConfiguration::setAttribute("/material/is_depth_mask", std::make_shared<CConfigurationAttribute>(is_depth_mask));
+}
+#endif
 bool CConfigurationMaterial::isCulling(void) const
 {
 const auto& iterator = m_attributes.find("/material/is_cull_face");
@@ -28,6 +46,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_is_cull_face(bool is_cull_face)
+{
+IConfiguration::setAttribute("/material/is_cull_face", std::make_shared<CConfigurationAttribute>(is_cull_face));
+}
+#endif
 GLenum CConfigurationMaterial::getCullingMode(void) const
 {
 const auto& iterator = m_attributes.find("/material/cull_face_mode");
@@ -35,6 +59,12 @@ assert(iterator != m_attributes.end());
 GLenum value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_cull_face_mode(GLenum cull_face_mode)
+{
+IConfiguration::setAttribute("/material/cull_face_mode", std::make_shared<CConfigurationAttribute>(cull_face_mode));
+}
+#endif
 bool CConfigurationMaterial::isBlending(void) const
 {
 const auto& iterator = m_attributes.find("/material/is_blending");
@@ -42,6 +72,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_is_blending(bool is_blending)
+{
+IConfiguration::setAttribute("/material/is_blending", std::make_shared<CConfigurationAttribute>(is_blending));
+}
+#endif
 GLenum CConfigurationMaterial::getBlendingFunctionSource(void) const
 {
 const auto& iterator = m_attributes.find("/material/blending_function_source");
@@ -49,6 +85,12 @@ assert(iterator != m_attributes.end());
 GLenum value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_blending_function_source(GLenum blending_function_source)
+{
+IConfiguration::setAttribute("/material/blending_function_source", std::make_shared<CConfigurationAttribute>(blending_function_source));
+}
+#endif
 GLenum CConfigurationMaterial::getBlendingFunctionDestination(void) const
 {
 const auto& iterator = m_attributes.find("/material/blending_function_destination");
@@ -56,6 +98,12 @@ assert(iterator != m_attributes.end());
 GLenum value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_blending_function_destination(GLenum blending_function_destination)
+{
+IConfiguration::setAttribute("/material/blending_function_destination", std::make_shared<CConfigurationAttribute>(blending_function_destination));
+}
+#endif
 bool CConfigurationMaterial::isClipping(void) const
 {
 const auto& iterator = m_attributes.find("/material/is_cliping");
@@ -63,6 +111,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_is_cliping(bool is_cliping)
+{
+IConfiguration::setAttribute("/material/is_cliping", std::make_shared<CConfigurationAttribute>(is_cliping));
+}
+#endif
 f32 CConfigurationMaterial::getClippingX(void) const
 {
 const auto& iterator = m_attributes.find("/material/clipping_x");
@@ -70,6 +124,12 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_clipping_x(f32 clipping_x)
+{
+IConfiguration::setAttribute("/material/clipping_x", std::make_shared<CConfigurationAttribute>(clipping_x));
+}
+#endif
 f32 CConfigurationMaterial::getClippingY(void) const
 {
 const auto& iterator = m_attributes.find("/material/clipping_y");
@@ -77,6 +137,12 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_clipping_y(f32 clipping_y)
+{
+IConfiguration::setAttribute("/material/clipping_y", std::make_shared<CConfigurationAttribute>(clipping_y));
+}
+#endif
 f32 CConfigurationMaterial::getClippingZ(void) const
 {
 const auto& iterator = m_attributes.find("/material/clipping_z");
@@ -84,6 +150,12 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_clipping_z(f32 clipping_z)
+{
+IConfiguration::setAttribute("/material/clipping_z", std::make_shared<CConfigurationAttribute>(clipping_z));
+}
+#endif
 f32 CConfigurationMaterial::getClippingW(void) const
 {
 const auto& iterator = m_attributes.find("/material/clipping_w");
@@ -91,6 +163,12 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_clipping_w(f32 clipping_w)
+{
+IConfiguration::setAttribute("/material/clipping_w", std::make_shared<CConfigurationAttribute>(clipping_w));
+}
+#endif
 bool CConfigurationMaterial::isReflecting(void) const
 {
 const auto& iterator = m_attributes.find("/material/is_reflecting");
@@ -98,6 +176,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_is_reflecting(bool is_reflecting)
+{
+IConfiguration::setAttribute("/material/is_reflecting", std::make_shared<CConfigurationAttribute>(is_reflecting));
+}
+#endif
 bool CConfigurationMaterial::isShadowing(void) const
 {
 const auto& iterator = m_attributes.find("/material/is_shadowing");
@@ -105,6 +189,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_is_shadowing(bool is_shadowing)
+{
+IConfiguration::setAttribute("/material/is_shadowing", std::make_shared<CConfigurationAttribute>(is_shadowing));
+}
+#endif
 bool CConfigurationMaterial::isDebugging(void) const
 {
 const auto& iterator = m_attributes.find("/material/is_debugging");
@@ -112,6 +202,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_is_debugging(bool is_debugging)
+{
+IConfiguration::setAttribute("/material/is_debugging", std::make_shared<CConfigurationAttribute>(is_debugging));
+}
+#endif
 std::shared_ptr<CConfigurationShader> CConfigurationMaterial::getShaderConfiguration(void) const
 {
 const auto& iterator = m_configurations.find("/material/shader");
@@ -123,6 +219,12 @@ assert(iterator != m_configurations.end());
 assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationShader>(iterator->second.at(0));
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_shader(const std::shared_ptr<CConfigurationShader>& shader)
+{
+IConfiguration::setConfiguration("/material/shader", shader, 0);
+}
+#endif
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationMaterial::getTexturesConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/material/textures/texture");
@@ -133,6 +235,18 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
+#if defined(__EDITOR__)
+void CConfigurationMaterial::add_texture(const std::shared_ptr<CConfigurationTexture>& texture)
+{
+IConfiguration::setConfiguration("/material/textures/texture", texture);
+}
+#endif
+#if defined(__EDITOR__)
+void CConfigurationMaterial::set_texture(const std::shared_ptr<CConfigurationTexture>& texture, i32 index)
+{
+IConfiguration::setConfiguration("/material/textures/texture", texture, index);
+}
+#endif
 void CConfigurationMaterial::serialize(const std::string& filename)
 {
 pugi::xml_document document;

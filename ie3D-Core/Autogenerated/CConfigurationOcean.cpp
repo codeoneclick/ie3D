@@ -7,6 +7,12 @@ assert(iterator != m_attributes.end());
 ui32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationOcean::set_size(ui32 size)
+{
+IConfiguration::setAttribute("/ocean/size", std::make_shared<CConfigurationAttribute>(size));
+}
+#endif
 f32 CConfigurationOcean::getAltitude(void) const
 {
 const auto& iterator = m_attributes.find("/ocean/altitude");
@@ -14,6 +20,12 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationOcean::set_altitude(f32 altitude)
+{
+IConfiguration::setAttribute("/ocean/altitude", std::make_shared<CConfigurationAttribute>(altitude));
+}
+#endif
 f32 CConfigurationOcean::getWaveGenerationInterval(void) const
 {
 const auto& iterator = m_attributes.find("/ocean/wave_generation_interval");
@@ -21,6 +33,12 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationOcean::set_wave_generation_interval(f32 wave_generation_interval)
+{
+IConfiguration::setAttribute("/ocean/wave_generation_interval", std::make_shared<CConfigurationAttribute>(wave_generation_interval));
+}
+#endif
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationOcean::getMaterialsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/ocean/materials/material");
@@ -31,6 +49,18 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
+#if defined(__EDITOR__)
+void CConfigurationOcean::add_material(const std::shared_ptr<CConfigurationMaterial>& material)
+{
+IConfiguration::setConfiguration("/ocean/materials/material", material);
+}
+#endif
+#if defined(__EDITOR__)
+void CConfigurationOcean::set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+{
+IConfiguration::setConfiguration("/ocean/materials/material", material, index);
+}
+#endif
 void CConfigurationOcean::serialize(const std::string& filename)
 {
 pugi::xml_document document;

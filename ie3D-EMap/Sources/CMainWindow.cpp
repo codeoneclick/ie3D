@@ -87,18 +87,10 @@ void CMainWindow::execute(void)
     m_mseController->gotoTransition("transition.mse.xml");
     m_mseTransition->setSceneToUICommands(m_sceneToUICommands);
     
-    NSView *gopView =reinterpret_cast<NSView*>(ui->m_modelsOpenGLView->winId());
-    NSOpenGLView *gopOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
-                                                                              0.0,
-                                                                              gopView.frame.size.width,
-                                                                              gopView.frame.size.height)];
-    [gopView addSubview:gopOGLView];
-    std::shared_ptr<IOGLWindow> gopWindow = std::make_shared<IOGLWindow>((__bridge void*)gopOGLView);
-    
-    m_gopController = std::make_shared<CMEGameController>(gopWindow);
-    m_gopTransition = std::make_shared<CMEgopTransition>("transition.gop.xml", false);
-    m_gopController->addTransition(m_gopTransition);
-    m_gopController->gotoTransition("transition.gop.xml");
+    if(ui->m_mainMenuTabs->currentIndex() != 0)
+    {
+        m_mseTransition->setPaused(true);
+    }
     
     NSView *goeView =reinterpret_cast<NSView*>(ui->m_gameObjectGLWindow->winId());
     NSOpenGLView *goeOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
@@ -112,6 +104,29 @@ void CMainWindow::execute(void)
     m_goeTransition = std::make_shared<CMEgoeTransition>("transition.goe.xml", false);
     m_goeController->addTransition(m_goeTransition);
     m_goeController->gotoTransition("transition.goe.xml");
+    
+    if(ui->m_mainMenuTabs->currentIndex() != 1)
+    {
+        m_goeTransition->setPaused(true);
+    }
+    
+    NSView *gopView =reinterpret_cast<NSView*>(ui->m_modelsOpenGLView->winId());
+    NSOpenGLView *gopOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
+                                                                              0.0,
+                                                                              gopView.frame.size.width,
+                                                                              gopView.frame.size.height)];
+    [gopView addSubview:gopOGLView];
+    std::shared_ptr<IOGLWindow> gopWindow = std::make_shared<IOGLWindow>((__bridge void*)gopOGLView);
+    
+    m_gopController = std::make_shared<CMEGameController>(gopWindow);
+    m_gopTransition = std::make_shared<CMEgopTransition>("transition.gop.xml", false);
+    m_gopController->addTransition(m_gopTransition);
+    m_gopController->gotoTransition("transition.gop.xml");
+    
+    if(ui->m_landscapePropertiesTab->currentIndex() != 2)
+    {
+        m_gopTransition->setPaused(true);
+    }
     
 #endif
 }
@@ -327,4 +342,48 @@ void CMainWindow::on_generateButton_clicked()
                                                                                 ui->m_frequencySpinBox->value(),
                                                                                 ui->m_octavesSpinBox->value(),
                                                                                 ui->m_seedSpinBox->value());
+}
+
+void CMainWindow::on_m_mainMenuTabs_currentChanged(int index)
+{
+    switch (index)
+    {
+        case 0:
+            m_goeTransition->setPaused(true);
+            m_mseTransition->setPaused(false);
+            if(ui->m_landscapePropertiesTab->currentIndex() == 2)
+            {
+                m_gopTransition->setPaused(false);
+            }
+            else
+            {
+                m_gopTransition->setPaused(true);
+            }
+            break;
+            
+        default:
+            m_goeTransition->setPaused(false);
+            m_mseTransition->setPaused(true);
+            m_gopTransition->setPaused(true);
+            break;
+    }
+}
+
+void CMainWindow::on_m_landscapePropertiesTab_currentChanged(int index)
+{
+    switch (index)
+    {
+        case 2:
+            m_gopTransition->setPaused(false);
+            break;
+            
+        default:
+            m_gopTransition->setPaused(true);
+            break;
+    }
+}
+
+void CMainWindow::on_m_createGameObjectButton_clicked()
+{
+
 }

@@ -10,23 +10,80 @@ public:
 CConfigurationMaterial(void) = default;
 ~CConfigurationMaterial(void) = default;
 std::string getRenderOperationName(void) const;
+#if defined(__EDITOR__)
+void set_render_operation_name(std::string render_operation_name);
+#endif
 bool isDepthTest(void) const;
+#if defined(__EDITOR__)
+void set_is_depth_test(bool is_depth_test);
+#endif
 bool isDepthMask(void) const;
+#if defined(__EDITOR__)
+void set_is_depth_mask(bool is_depth_mask);
+#endif
 bool isCulling(void) const;
+#if defined(__EDITOR__)
+void set_is_cull_face(bool is_cull_face);
+#endif
 GLenum getCullingMode(void) const;
+#if defined(__EDITOR__)
+void set_cull_face_mode(GLenum cull_face_mode);
+#endif
 bool isBlending(void) const;
+#if defined(__EDITOR__)
+void set_is_blending(bool is_blending);
+#endif
 GLenum getBlendingFunctionSource(void) const;
+#if defined(__EDITOR__)
+void set_blending_function_source(GLenum blending_function_source);
+#endif
 GLenum getBlendingFunctionDestination(void) const;
+#if defined(__EDITOR__)
+void set_blending_function_destination(GLenum blending_function_destination);
+#endif
 bool isClipping(void) const;
+#if defined(__EDITOR__)
+void set_is_cliping(bool is_cliping);
+#endif
 f32 getClippingX(void) const;
+#if defined(__EDITOR__)
+void set_clipping_x(f32 clipping_x);
+#endif
 f32 getClippingY(void) const;
+#if defined(__EDITOR__)
+void set_clipping_y(f32 clipping_y);
+#endif
 f32 getClippingZ(void) const;
+#if defined(__EDITOR__)
+void set_clipping_z(f32 clipping_z);
+#endif
 f32 getClippingW(void) const;
+#if defined(__EDITOR__)
+void set_clipping_w(f32 clipping_w);
+#endif
 bool isReflecting(void) const;
+#if defined(__EDITOR__)
+void set_is_reflecting(bool is_reflecting);
+#endif
 bool isShadowing(void) const;
+#if defined(__EDITOR__)
+void set_is_shadowing(bool is_shadowing);
+#endif
 bool isDebugging(void) const;
+#if defined(__EDITOR__)
+void set_is_debugging(bool is_debugging);
+#endif
 std::shared_ptr<CConfigurationShader> getShaderConfiguration(void) const;
+#if defined(__EDITOR__)
+void set_shader(const std::shared_ptr<CConfigurationShader>& shader);
+#endif
 std::vector<std::shared_ptr<IConfiguration>> getTexturesConfigurations(void) const;
+#if defined(__EDITOR__)
+void add_texture(const std::shared_ptr<CConfigurationTexture>& texture);
+#endif
+#if defined(__EDITOR__)
+void set_texture(const std::shared_ptr<CConfigurationTexture>& texture, i32 index);
+#endif
 void serialize(const std::string& filename);
 };
 #endif

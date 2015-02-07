@@ -10,6 +10,18 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
+#if defined(__EDITOR__)
+void CConfigurationSkybox::add_material(const std::shared_ptr<CConfigurationMaterial>& material)
+{
+IConfiguration::setConfiguration("/skybox/materials/material", material);
+}
+#endif
+#if defined(__EDITOR__)
+void CConfigurationSkybox::set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+{
+IConfiguration::setConfiguration("/skybox/materials/material", material, index);
+}
+#endif
 void CConfigurationSkybox::serialize(const std::string& filename)
 {
 pugi::xml_document document;

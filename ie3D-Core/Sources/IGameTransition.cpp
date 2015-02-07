@@ -92,6 +92,14 @@ void IGameTransition::initScene(void)
                                                            m_renderPipeline);
 }
 
+void IGameTransition::setPaused(bool value)
+{
+    assert(m_renderPipeline != nullptr);
+    assert(m_sceneUpdateMgr != nullptr);
+    m_renderPipeline->setPaused(value);
+    m_sceneUpdateMgr->setPaused(value);
+}
+
 void IGameTransition::_OnRegistered(void)
 {
     

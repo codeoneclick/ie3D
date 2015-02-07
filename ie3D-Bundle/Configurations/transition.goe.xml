@@ -3,6 +3,9 @@
     <output_technique filename="render.operation.output.goe.xml"/>
     <ws_techniques>
         <ws_technique filename="render.operation.ws.goe.xml"/>
+        <ws_technique filename="render.operation.world.reflection.xml"/>
+        <ws_technique filename="render.operation.world.refraction.xml"/>
+        <ws_technique filename="render.operation.world.shadowmap.xml"/>
     </ws_techniques>
     <ss_techniques>
     </ss_techniques>

@@ -109,17 +109,16 @@ void IConfiguration::setAttribute(const std::string& attributeName,
     m_attributes[attributeName] = attribute;
 }
 
-void IConfiguration::setConfiguration(const std::string &configurationName,
+void IConfiguration::setConfiguration(const std::string& configurationName,
                                       ISharedConfigurationRef configuration,
-                                      bool isReplacing,
-                                      ui32 replacingIndex)
+                                      i32 index)
 {
     const auto& iterator = m_configurations.find(configurationName);
     if(iterator != m_configurations.end())
     {
-        if(isReplacing && replacingIndex < iterator->second.size())
+        if(index >= 0 && index < iterator->second.size())
         {
-            iterator->second[replacingIndex] = configuration;
+            iterator->second[index] = configuration;
         }
         else
         {

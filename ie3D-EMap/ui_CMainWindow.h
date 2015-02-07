@@ -31,11 +31,11 @@ class Ui_CMainWindow
 {
 public:
     QWidget *centralWidget;
-    QTabWidget *mainMenuTabs;
+    QTabWidget *m_mainMenuTabs;
     QWidget *sceneTab;
     QGroupBox *groupBox;
     QWidget *m_oglWindow;
-    QTabWidget *tabWidget;
+    QTabWidget *m_landscapePropertiesTab;
     QWidget *landscape_heightmap;
     QGroupBox *generateGroupBox;
     QSpinBox *m_octavesSpinBox;
@@ -80,6 +80,8 @@ public:
     QWidget *gameObjectTab;
     QGroupBox *groupBox_2;
     QWidget *m_gameObjectGLWindow;
+    QGroupBox *groupBox_3;
+    QPushButton *m_createGameObjectButton;
     QMenuBar *menuBar;
 
     void setupUi(QMainWindow *CMainWindow)
@@ -93,9 +95,9 @@ public:
         centralWidget = new QWidget(CMainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         centralWidget->setStyleSheet(QStringLiteral("background-color: rgb(64, 64, 64);"));
-        mainMenuTabs = new QTabWidget(centralWidget);
-        mainMenuTabs->setObjectName(QStringLiteral("mainMenuTabs"));
-        mainMenuTabs->setGeometry(QRect(9, 9, 1261, 761));
+        m_mainMenuTabs = new QTabWidget(centralWidget);
+        m_mainMenuTabs->setObjectName(QStringLiteral("m_mainMenuTabs"));
+        m_mainMenuTabs->setGeometry(QRect(9, 9, 1261, 761));
         sceneTab = new QWidget();
         sceneTab->setObjectName(QStringLiteral("sceneTab"));
         groupBox = new QGroupBox(sceneTab);
@@ -114,19 +116,19 @@ public:
         m_oglWindow->setObjectName(QStringLiteral("m_oglWindow"));
         m_oglWindow->setGeometry(QRect(10, 30, 930, 680));
         m_oglWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
-        tabWidget = new QTabWidget(sceneTab);
-        tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(990, 23, 271, 697));
+        m_landscapePropertiesTab = new QTabWidget(sceneTab);
+        m_landscapePropertiesTab->setObjectName(QStringLiteral("m_landscapePropertiesTab"));
+        m_landscapePropertiesTab->setGeometry(QRect(990, 23, 271, 697));
         QFont font1;
         font1.setFamily(QStringLiteral("Menlo"));
         font1.setPointSize(13);
         font1.setBold(true);
         font1.setWeight(75);
-        tabWidget->setFont(font1);
-        tabWidget->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
+        m_landscapePropertiesTab->setFont(font1);
+        m_landscapePropertiesTab->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
 "background-color: rgb(64, 64, 64);"));
-        tabWidget->setTabPosition(QTabWidget::North);
-        tabWidget->setTabShape(QTabWidget::Rounded);
+        m_landscapePropertiesTab->setTabPosition(QTabWidget::North);
+        m_landscapePropertiesTab->setTabShape(QTabWidget::Rounded);
         landscape_heightmap = new QWidget();
         landscape_heightmap->setObjectName(QStringLiteral("landscape_heightmap"));
         generateGroupBox = new QGroupBox(landscape_heightmap);
@@ -248,7 +250,7 @@ public:
         m_falloffSlider->setOrientation(Qt::Horizontal);
         m_falloffSlider->setTickPosition(QSlider::TicksAbove);
         m_falloffSlider->setTickInterval(10);
-        tabWidget->addTab(landscape_heightmap, QString());
+        m_landscapePropertiesTab->addTab(landscape_heightmap, QString());
         landscape_textures = new QWidget();
         landscape_textures->setObjectName(QStringLiteral("landscape_textures"));
         m_texture01Btn = new QPushButton(landscape_textures);
@@ -308,15 +310,15 @@ public:
         m_textureTilling03SpinBox->setGeometry(QRect(150, 440, 91, 24));
         m_textureTilling03SpinBox->setMinimum(1);
         m_textureTilling03SpinBox->setMaximum(128);
-        tabWidget->addTab(landscape_textures, QString());
+        m_landscapePropertiesTab->addTab(landscape_textures, QString());
         models = new QWidget();
         models->setObjectName(QStringLiteral("models"));
         m_modelsOpenGLView = new QWidget(models);
         m_modelsOpenGLView->setObjectName(QStringLiteral("m_modelsOpenGLView"));
         m_modelsOpenGLView->setGeometry(QRect(0, 40, 256, 256));
         m_modelsOpenGLView->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
-        tabWidget->addTab(models, QString());
-        mainMenuTabs->addTab(sceneTab, QString());
+        m_landscapePropertiesTab->addTab(models, QString());
+        m_mainMenuTabs->addTab(sceneTab, QString());
         gameObjectTab = new QWidget();
         gameObjectTab->setObjectName(QStringLiteral("gameObjectTab"));
         groupBox_2 = new QGroupBox(gameObjectTab);
@@ -328,7 +330,15 @@ public:
         m_gameObjectGLWindow->setObjectName(QStringLiteral("m_gameObjectGLWindow"));
         m_gameObjectGLWindow->setGeometry(QRect(10, 30, 930, 680));
         m_gameObjectGLWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
-        mainMenuTabs->addTab(gameObjectTab, QString());
+        groupBox_3 = new QGroupBox(gameObjectTab);
+        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
+        groupBox_3->setGeometry(QRect(980, 0, 261, 721));
+        groupBox_3->setFont(font);
+        groupBox_3->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
+        m_createGameObjectButton = new QPushButton(groupBox_3);
+        m_createGameObjectButton->setObjectName(QStringLiteral("m_createGameObjectButton"));
+        m_createGameObjectButton->setGeometry(QRect(10, 40, 241, 32));
+        m_mainMenuTabs->addTab(gameObjectTab, QString());
         CMainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CMainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -337,8 +347,8 @@ public:
 
         retranslateUi(CMainWindow);
 
-        mainMenuTabs->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        m_mainMenuTabs->setCurrentIndex(1);
+        m_landscapePropertiesTab->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(CMainWindow);
@@ -361,7 +371,7 @@ public:
         m_brushSizeLabel->setText(QApplication::translate("CMainWindow", "Brush Size:", 0));
         m_smoothLabel->setText(QApplication::translate("CMainWindow", "Smooth Coefficient:", 0));
         m_brushStrengthLabel->setText(QApplication::translate("CMainWindow", "Brush Strength:", 0));
-        tabWidget->setTabText(tabWidget->indexOf(landscape_heightmap), QApplication::translate("CMainWindow", "Landscape", 0));
+        m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(landscape_heightmap), QApplication::translate("CMainWindow", "Landscape", 0));
         m_texture01Btn->setText(QApplication::translate("CMainWindow", "Open...", 0));
         m_texture01Label->setText(QApplication::translate("CMainWindow", "Texture sampler 1:", 0));
         m_texture02Label->setText(QApplication::translate("CMainWindow", "Texture sampler 2:", 0));
@@ -374,11 +384,13 @@ public:
         m_textureTilling01Label->setText(QApplication::translate("CMainWindow", "Tilling:", 0));
         m_textureTilling02Label->setText(QApplication::translate("CMainWindow", "Tilling:", 0));
         m_textureTilling03Label->setText(QApplication::translate("CMainWindow", "Tilling:", 0));
-        tabWidget->setTabText(tabWidget->indexOf(landscape_textures), QApplication::translate("CMainWindow", "Textures", 0));
-        tabWidget->setTabText(tabWidget->indexOf(models), QApplication::translate("CMainWindow", "Models", 0));
-        mainMenuTabs->setTabText(mainMenuTabs->indexOf(sceneTab), QApplication::translate("CMainWindow", "Scene", 0));
+        m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(landscape_textures), QApplication::translate("CMainWindow", "Textures", 0));
+        m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(models), QApplication::translate("CMainWindow", "Models", 0));
+        m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(sceneTab), QApplication::translate("CMainWindow", "Scene", 0));
         groupBox_2->setTitle(QApplication::translate("CMainWindow", "Game Object", 0));
-        mainMenuTabs->setTabText(mainMenuTabs->indexOf(gameObjectTab), QApplication::translate("CMainWindow", "Game Object", 0));
+        groupBox_3->setTitle(QApplication::translate("CMainWindow", "Properties", 0));
+        m_createGameObjectButton->setText(QApplication::translate("CMainWindow", "Create...", 0));
+        m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(gameObjectTab), QApplication::translate("CMainWindow", "Game Object", 0));
     } // retranslateUi
 
 };

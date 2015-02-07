@@ -32,7 +32,7 @@
    <property name="styleSheet">
     <string notr="true">background-color: rgb(64, 64, 64);</string>
    </property>
-   <widget class="QTabWidget" name="mainMenuTabs">
+   <widget class="QTabWidget" name="m_mainMenuTabs">
     <property name="geometry">
      <rect>
       <x>9</x>
@@ -42,7 +42,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="sceneTab">
      <attribute name="title">
@@ -97,7 +97,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="QTabWidget" name="m_landscapePropertiesTab">
       <property name="geometry">
        <rect>
         <x>990</x>
@@ -904,6 +904,43 @@ background-color: rgb(64, 64, 64);</string>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(0, 0, 0);</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>980</x>
+        <y>0</y>
+        <width>261</width>
+        <height>721</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Menlo</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="title">
+       <string>Properties</string>
+      </property>
+      <widget class="QPushButton" name="m_createGameObjectButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>241</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Create...</string>
        </property>
       </widget>
      </widget>

@@ -7,6 +7,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationModel::set_mesh_filename(std::string mesh_filename)
+{
+IConfiguration::setAttribute("/model/mesh_filename", std::make_shared<CConfigurationAttribute>(mesh_filename));
+}
+#endif
 bool CConfigurationModel::isBatching(void) const
 {
 const auto& iterator = m_attributes.find("/model/is_batching");
@@ -14,6 +20,12 @@ assert(iterator != m_attributes.end());
 bool value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationModel::set_is_batching(bool is_batching)
+{
+IConfiguration::setAttribute("/model/is_batching", std::make_shared<CConfigurationAttribute>(is_batching));
+}
+#endif
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationModel::getMaterialsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/model/materials/material");
@@ -24,6 +36,18 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
+#if defined(__EDITOR__)
+void CConfigurationModel::add_material(const std::shared_ptr<CConfigurationMaterial>& material)
+{
+IConfiguration::setConfiguration("/model/materials/material", material);
+}
+#endif
+#if defined(__EDITOR__)
+void CConfigurationModel::set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+{
+IConfiguration::setConfiguration("/model/materials/material", material, index);
+}
+#endif
 std::vector<std::shared_ptr<IConfiguration>> CConfigurationModel::getAnimationsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/model/animations/animation");
@@ -34,6 +58,18 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
+#if defined(__EDITOR__)
+void CConfigurationModel::add_animation(const std::shared_ptr<CConfigurationAnimation>& animation)
+{
+IConfiguration::setConfiguration("/model/animations/animation", animation);
+}
+#endif
+#if defined(__EDITOR__)
+void CConfigurationModel::set_animation(const std::shared_ptr<CConfigurationAnimation>& animation, i32 index)
+{
+IConfiguration::setConfiguration("/model/animations/animation", animation, index);
+}
+#endif
 void CConfigurationModel::serialize(const std::string& filename)
 {
 pugi::xml_document document;

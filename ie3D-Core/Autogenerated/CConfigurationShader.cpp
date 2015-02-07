@@ -7,6 +7,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationShader::set_vs_filename(std::string vs_filename)
+{
+IConfiguration::setAttribute("/shader/vs_filename", std::make_shared<CConfigurationAttribute>(vs_filename));
+}
+#endif
 std::string CConfigurationShader::getFSFilename(void) const
 {
 const auto& iterator = m_attributes.find("/shader/fs_filename");
@@ -14,6 +20,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationShader::set_fs_filename(std::string fs_filename)
+{
+IConfiguration::setAttribute("/shader/fs_filename", std::make_shared<CConfigurationAttribute>(fs_filename));
+}
+#endif
 void CConfigurationShader::serialize(pugi::xml_document& document, const std::string& path)
 {
 pugi::xpath_node node;

@@ -17,6 +17,7 @@
 #include "CModel.h"
 #include "CResourceAccessor.h"
 #include "CTexture.h"
+#include "CLandscape.h"
 
 CMEgoeScene::CMEgoeScene(IGameTransition* root) :
 IScene(root)
@@ -38,7 +39,7 @@ void CMEgoeScene::load(void)
                                                m_root->getScreenHeight()));
     
     m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
-    m_camera->Set_LookAt(glm::vec3(0.0f, 0.0f, 0.0f));
+    m_camera->Set_LookAt(glm::vec3(2.0f, 0.0f, 2.0f));
     m_camera->Set_Distance(8.0f);
     m_camera->Set_Height(4.0f);
     m_root->setCamera(m_camera);
@@ -50,12 +51,22 @@ void CMEgoeScene::load(void)
     
     m_model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(m_model);
+    m_model->setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
+    
+    m_landscape = m_root->createLandscape("gameobject.landscape.goe.xml");
+    m_root->setLandscape(m_landscape);
+
+    std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.goe.xml");
+    m_root->setOcean(ocean);
+    
+    m_skybox = m_root->createSkybox("gameobject.skybox.xml");
+    m_root->setSkybox(m_skybox);
     
     m_globalLightSource->setAngle(3.0);
     m_globalLightSource->setDistanceToSun(512.0);
-    m_globalLightSource->setDistanceToLookAt(32.0);
-    m_globalLightSource->setRotationCenter(glm::vec3(256.0, 0.0, 256.0));
-    m_globalLightSource->setLookAt(glm::vec3(256.0, 0.0, 256.0));
+    m_globalLightSource->setDistanceToLookAt(8.0);
+    m_globalLightSource->setRotationCenter(glm::vec3(2.0f, 0.0f, 2.0f));
+    m_globalLightSource->setLookAt(glm::vec3(2.0f, 0.0f, 2.0f));
 }
 
 void CMEgoeScene::update(f32)

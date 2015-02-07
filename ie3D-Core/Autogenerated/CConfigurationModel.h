@@ -10,9 +10,27 @@ public:
 CConfigurationModel(void) = default;
 ~CConfigurationModel(void) = default;
 std::string getMeshFilename(void) const;
+#if defined(__EDITOR__)
+void set_mesh_filename(std::string mesh_filename);
+#endif
 bool isBatching(void) const;
+#if defined(__EDITOR__)
+void set_is_batching(bool is_batching);
+#endif
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
+#if defined(__EDITOR__)
+void add_material(const std::shared_ptr<CConfigurationMaterial>& material);
+#endif
+#if defined(__EDITOR__)
+void set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
+#endif
 std::vector<std::shared_ptr<IConfiguration>> getAnimationsConfigurations(void) const;
+#if defined(__EDITOR__)
+void add_animation(const std::shared_ptr<CConfigurationAnimation>& animation);
+#endif
+#if defined(__EDITOR__)
+void set_animation(const std::shared_ptr<CConfigurationAnimation>& animation, i32 index);
+#endif
 void serialize(const std::string& filename);
 };
 #endif

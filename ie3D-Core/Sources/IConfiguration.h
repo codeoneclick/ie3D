@@ -247,8 +247,7 @@ public:
     
     void setConfiguration(const std::string& configurationName,
                           ISharedConfigurationRef configuration,
-                          bool isReplacing = false,
-                          ui32 replacingIndex = 0);
+                          i32 index = -1);
     
     pugi::xml_parse_result openXMLDocument(pugi::xml_document &document,
                                            const std::string &filename);

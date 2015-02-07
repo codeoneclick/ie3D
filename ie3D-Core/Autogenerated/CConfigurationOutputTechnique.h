@@ -9,7 +9,13 @@ public:
 CConfigurationOutputTechnique(void) = default;
 ~CConfigurationOutputTechnique(void) = default;
 std::string getGUID(void) const;
+#if defined(__EDITOR__)
+void set_guid(std::string guid);
+#endif
 std::shared_ptr<CConfigurationMaterial> getConfigurationMaterial(void) const;
+#if defined(__EDITOR__)
+void set_material(const std::shared_ptr<CConfigurationMaterial>& material);
+#endif
 void serialize(const std::string& filename);
 };
 #endif

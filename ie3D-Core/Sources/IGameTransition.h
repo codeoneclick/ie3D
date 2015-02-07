@@ -64,6 +64,8 @@ public:
     virtual ~IGameTransition(void);
                       
     virtual void initScene(void);
+    
+    void setPaused(bool value);
 
     std::string getGuid(void) const;
     

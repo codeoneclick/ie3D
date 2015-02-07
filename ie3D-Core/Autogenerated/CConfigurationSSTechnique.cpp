@@ -7,6 +7,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationSSTechnique::set_guid(std::string guid)
+{
+IConfiguration::setAttribute("/ss_technique/guid", std::make_shared<CConfigurationAttribute>(guid));
+}
+#endif
 ui32 CConfigurationSSTechnique::getScreenWidth(void) const
 {
 const auto& iterator = m_attributes.find("/ss_technique/screen_width");
@@ -14,6 +20,12 @@ assert(iterator != m_attributes.end());
 ui32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationSSTechnique::set_screen_width(ui32 screen_width)
+{
+IConfiguration::setAttribute("/ss_technique/screen_width", std::make_shared<CConfigurationAttribute>(screen_width));
+}
+#endif
 ui32 CConfigurationSSTechnique::getScreenHeight(void) const
 {
 const auto& iterator = m_attributes.find("/ss_technique/screen_height");
@@ -21,6 +33,12 @@ assert(iterator != m_attributes.end());
 ui32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CConfigurationSSTechnique::set_screen_height(ui32 screen_height)
+{
+IConfiguration::setAttribute("/ss_technique/screen_height", std::make_shared<CConfigurationAttribute>(screen_height));
+}
+#endif
 std::shared_ptr<CConfigurationMaterial> CConfigurationSSTechnique::getConfigurationMaterial(void) const
 {
 const auto& iterator = m_configurations.find("/ss_technique/material");
@@ -32,6 +50,12 @@ assert(iterator != m_configurations.end());
 assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationMaterial>(iterator->second.at(0));
 }
+#if defined(__EDITOR__)
+void CConfigurationSSTechnique::set_material(const std::shared_ptr<CConfigurationMaterial>& material)
+{
+IConfiguration::setConfiguration("/ss_technique/material", material, 0);
+}
+#endif
 void CConfigurationSSTechnique::serialize(const std::string& filename)
 {
 pugi::xml_document document;

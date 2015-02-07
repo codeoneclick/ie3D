@@ -8,14 +8,41 @@ public:
 CConfigurationWSTechnique(void) = default;
 ~CConfigurationWSTechnique(void) = default;
 std::string getGUID(void) const;
+#if defined(__EDITOR__)
+void set_guid(std::string guid);
+#endif
 bool areDrawBoundingBoxes(void) const;
+#if defined(__EDITOR__)
+void set_are_draw_bounding_boxes(bool are_draw_bounding_boxes);
+#endif
 ui32 getIndex(void) const;
+#if defined(__EDITOR__)
+void set_index(ui32 index);
+#endif
 ui32 getScreenWidth(void) const;
+#if defined(__EDITOR__)
+void set_screen_width(ui32 screen_width);
+#endif
 ui32 getScreenHeight(void) const;
+#if defined(__EDITOR__)
+void set_screen_height(ui32 screen_height);
+#endif
 f32 getClearColorR(void) const;
+#if defined(__EDITOR__)
+void set_clear_color_r(f32 clear_color_r);
+#endif
 f32 getClearColorG(void) const;
+#if defined(__EDITOR__)
+void set_clear_color_g(f32 clear_color_g);
+#endif
 f32 getClearColorB(void) const;
+#if defined(__EDITOR__)
+void set_clear_color_b(f32 clear_color_b);
+#endif
 f32 getClearColorA(void) const;
+#if defined(__EDITOR__)
+void set_clear_color_a(f32 clear_color_a);
+#endif
 void serialize(const std::string& filename);
 };
 #endif

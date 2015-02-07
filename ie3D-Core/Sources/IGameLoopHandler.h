@@ -61,7 +61,7 @@ public:
     
     virtual ~IGameLoopHandler(void);
     
-    void setPaused(bool value);
+    virtual void setPaused(bool value);
     bool isPaused(void) const;
 };
 
