@@ -150,6 +150,7 @@ pugi::xml_document document;
 pugi::xml_parse_result result = document.load("");
 assert(result.status == pugi::status_ok);
 pugi::xml_node node = document.append_child("ws_technique");
+pugi::xml_node parent_node = node;
 pugi::xml_attribute attribute;
 attribute = node.append_attribute("guid");
 std::string guid = CConfigurationWSTechnique::getGUID();

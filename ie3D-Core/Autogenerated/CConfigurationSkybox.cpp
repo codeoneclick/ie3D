@@ -44,7 +44,16 @@ pugi::xml_document document;
 pugi::xml_parse_result result = document.load("");
 assert(result.status == pugi::status_ok);
 pugi::xml_node node = document.append_child("skybox");
+pugi::xml_node parent_node = node;
 pugi::xml_attribute attribute;
+node = parent_node.append_child("materials");
+for(const auto& iterator : CConfigurationSkybox::getMaterialsConfigurations())
+{
+std::shared_ptr<CConfigurationMaterial> configuration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
+pugi::xml_node child_node = node.append_child("material");
+attribute = child_node.append_attribute("filename");
+attribute.set_value(configuration->getFilename().c_str());
+}
 document.save_file(filename.c_str());
 }
 #endif

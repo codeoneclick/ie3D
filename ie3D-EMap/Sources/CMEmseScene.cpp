@@ -278,6 +278,7 @@ void CMEmseScene::onConfigurationLoaded(ISharedConfigurationRef configuration)
         std::shared_ptr<CConfigurationMaterial> configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
         configurationMaterial->deserialize("ooo.xml");
     }
+    configurationLandscape->deserialize("ppp.xml");
 }
 
 void CMEmseScene::onResourceLoaded(ISharedResourceRef resource)

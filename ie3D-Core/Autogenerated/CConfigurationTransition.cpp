@@ -109,10 +109,30 @@ pugi::xml_document document;
 pugi::xml_parse_result result = document.load("");
 assert(result.status == pugi::status_ok);
 pugi::xml_node node = document.append_child("transition");
+pugi::xml_node parent_node = node;
 pugi::xml_attribute attribute;
 attribute = node.append_attribute("guid");
 std::string guid = CConfigurationTransition::getGUID();
 attribute.set_value(guid.c_str());
+node = parent_node.append_child("output_technique");
+attribute = node.append_attribute("filename");
+attribute.set_value(IConfiguration::getFilename().c_str());
+node = parent_node.append_child("ws_techniques");
+for(const auto& iterator : CConfigurationTransition::getConfigurationWSTechnique())
+{
+std::shared_ptr<CConfigurationWSTechnique> configuration = std::static_pointer_cast<CConfigurationWSTechnique>(iterator);
+pugi::xml_node child_node = node.append_child("ws_technique");
+attribute = child_node.append_attribute("filename");
+attribute.set_value(configuration->getFilename().c_str());
+}
+node = parent_node.append_child("ss_techniques");
+for(const auto& iterator : CConfigurationTransition::getConfigurationSSTechnique())
+{
+std::shared_ptr<CConfigurationSSTechnique> configuration = std::static_pointer_cast<CConfigurationSSTechnique>(iterator);
+pugi::xml_node child_node = node.append_child("ss_technique");
+attribute = child_node.append_attribute("filename");
+attribute.set_value(configuration->getFilename().c_str());
+}
 document.save_file(filename.c_str());
 }
 #endif

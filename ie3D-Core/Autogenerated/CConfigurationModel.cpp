@@ -104,6 +104,7 @@ pugi::xml_document document;
 pugi::xml_parse_result result = document.load("");
 assert(result.status == pugi::status_ok);
 pugi::xml_node node = document.append_child("model");
+pugi::xml_node parent_node = node;
 pugi::xml_attribute attribute;
 attribute = node.append_attribute("mesh_filename");
 std::string mesh_filename = CConfigurationModel::getMeshFilename();
@@ -111,6 +112,21 @@ attribute.set_value(mesh_filename.c_str());
 attribute = node.append_attribute("is_batching");
 bool is_batching = CConfigurationModel::getBatching();
 attribute.set_value(is_batching);
+node = parent_node.append_child("materials");
+for(const auto& iterator : CConfigurationModel::getMaterialsConfigurations())
+{
+std::shared_ptr<CConfigurationMaterial> configuration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
+pugi::xml_node child_node = node.append_child("material");
+attribute = child_node.append_attribute("filename");
+attribute.set_value(configuration->getFilename().c_str());
+}
+node = parent_node.append_child("animations");
+for(const auto& iterator : CConfigurationModel::getAnimationsConfigurations())
+{
+std::shared_ptr<CConfigurationAnimation> configuration = std::static_pointer_cast<CConfigurationAnimation>(iterator);
+pugi::xml_node child_node = node.append_child("animation");
+configuration->deserialize(child_node);
+}
 document.save_file(filename.c_str());
 }
 #endif

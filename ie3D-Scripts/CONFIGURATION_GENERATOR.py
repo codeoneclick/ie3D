@@ -114,6 +114,38 @@ def write_relationships_serializer(source_cpp_file, relationships):
 			source_cpp_file.write('}\n')
 			
 
+def write_relationships_deserializer(source_cpp_file, relationships, class_name):
+	for relationship in relationships:
+
+		if relationship.get("is_to_many") == '0':
+
+			source_cpp_file.write('node = parent_node.append_child("' + relationship.get('name') + '");\n')
+
+			if relationship.get("is_external") == '0':
+				source_cpp_file.write(class_name + '::' + 'get' + relationship.get('property') + '()->deserialize(node);\n')
+			else:
+
+				source_cpp_file.write('attribute = node.append_attribute("filename");\n')
+				source_cpp_file.write('attribute.set_value(IConfiguration::getFilename().c_str());\n')
+
+		else:
+
+			source_cpp_file.write('node = parent_node.append_child("' + relationship.get('path').split('/')[-1] + '");\n')
+			source_cpp_file.write('for(const auto& iterator : ' +  class_name + '::get' + relationship.get('property') + '())\n')
+			source_cpp_file.write('{\n')
+			source_cpp_file.write('std::shared_ptr<' + relationship.get('type') + '> configuration = std::static_pointer_cast<' + relationship.get('type') + '>(iterator);\n')
+			source_cpp_file.write('pugi::xml_node child_node = node.append_child("' + relationship.get('name') + '");\n')
+
+			if relationship.get("is_external") == '0':
+				source_cpp_file.write('configuration->deserialize(child_node);\n')
+			else:
+
+				source_cpp_file.write('attribute = child_node.append_attribute("filename");\n')
+				source_cpp_file.write('attribute.set_value(configuration->getFilename().c_str());\n')
+
+			source_cpp_file.write('}\n')
+
+
 
 def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_file):
 	document = ElementTree.parse(filename)
@@ -273,6 +305,7 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 		source_cpp_file.write('{\n')
 		source_cpp_file.write('pugi::xml_attribute attribute;\n');
 		write_attributes_deserializer(source_cpp_file, root.iter('attribute'), class_name)
+		write_relationships_deserializer(source_cpp_file, root.iter('relationship'), class_name)
 		source_cpp_file.write('}\n')
 		source_cpp_file.write('#endif\n')
 
@@ -301,8 +334,10 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 		source_cpp_file.write('pugi::xml_parse_result result = document.load("");\n')
 		source_cpp_file.write('assert(result.status == pugi::status_ok);\n')
 		source_cpp_file.write('pugi::xml_node node = document.append_child("' + root.tag + '");\n')
+		source_cpp_file.write('pugi::xml_node parent_node = node;\n')
 		source_cpp_file.write('pugi::xml_attribute attribute;\n')
 		write_attributes_deserializer(source_cpp_file, root.iter('attribute'), class_name)
+		write_relationships_deserializer(source_cpp_file, root.iter('relationship'), class_name)
 		source_cpp_file.write('document.save_file(filename.c_str());\n')
 		source_cpp_file.write('}\n')
 		source_cpp_file.write('#endif\n')

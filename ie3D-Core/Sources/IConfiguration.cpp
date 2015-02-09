@@ -141,6 +141,24 @@ pugi::xml_parse_result IConfiguration::openXMLDocument(pugi::xml_document &docum
 {
     pugi::xml_parse_result result;
     result = document.load_file(bundlepath().append(filename).c_str());
+    if(result.status == pugi::status_ok)
+    {
+        IConfiguration::setFilename(filename);
+    }
     return result;
 };
+
+#if defined(__EDITOR__)
+
+void IConfiguration::setFilename(const std::string& filename)
+{
+    m_filename = filename;
+}
+
+#endif
+
+std::string IConfiguration::getFilename(void) const
+{
+    return m_filename;
+}
 

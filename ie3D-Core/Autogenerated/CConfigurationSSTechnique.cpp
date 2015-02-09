@@ -81,6 +81,7 @@ pugi::xml_document document;
 pugi::xml_parse_result result = document.load("");
 assert(result.status == pugi::status_ok);
 pugi::xml_node node = document.append_child("ss_technique");
+pugi::xml_node parent_node = node;
 pugi::xml_attribute attribute;
 attribute = node.append_attribute("guid");
 std::string guid = CConfigurationSSTechnique::getGUID();
@@ -91,6 +92,9 @@ attribute.set_value(screen_width);
 attribute = node.append_attribute("screen_height");
 ui32 screen_height = CConfigurationSSTechnique::getScreenHeight();
 attribute.set_value(screen_height);
+node = parent_node.append_child("material");
+attribute = node.append_attribute("filename");
+attribute.set_value(IConfiguration::getFilename().c_str());
 document.save_file(filename.c_str());
 }
 #endif

@@ -233,6 +233,7 @@ private:
     
 protected:
     
+    std::string m_filename;
     std::unordered_map<std::string, CSharedConfigurationAttribute> m_attributes;
     std::unordered_map<std::string, std::vector<ISharedConfiguration>> m_configurations;
     
@@ -251,6 +252,11 @@ public:
     
     pugi::xml_parse_result openXMLDocument(pugi::xml_document &document,
                                            const std::string &filename);
+   
+#if defined(__EDITOR__)
+    void setFilename(const std::string& filename);
+#endif
+    std::string getFilename(void) const;
     
 };
 

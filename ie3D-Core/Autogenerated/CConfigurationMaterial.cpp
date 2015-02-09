@@ -311,6 +311,7 @@ pugi::xml_document document;
 pugi::xml_parse_result result = document.load("");
 assert(result.status == pugi::status_ok);
 pugi::xml_node node = document.append_child("material");
+pugi::xml_node parent_node = node;
 pugi::xml_attribute attribute;
 attribute = node.append_attribute("render_operation_name");
 std::string render_operation_name = CConfigurationMaterial::getRenderTechniqueName();
@@ -366,6 +367,15 @@ attribute.set_value(is_shadowing);
 attribute = node.append_attribute("is_debugging");
 bool is_debugging = CConfigurationMaterial::getDebugging();
 attribute.set_value(is_debugging);
+node = parent_node.append_child("shader");
+CConfigurationMaterial::getShaderConfiguration()->deserialize(node);
+node = parent_node.append_child("textures");
+for(const auto& iterator : CConfigurationMaterial::getTexturesConfigurations())
+{
+std::shared_ptr<CConfigurationTexture> configuration = std::static_pointer_cast<CConfigurationTexture>(iterator);
+pugi::xml_node child_node = node.append_child("texture");
+configuration->deserialize(child_node);
+}
 document.save_file(filename.c_str());
 }
 #endif
