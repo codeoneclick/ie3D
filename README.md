@@ -27,7 +27,7 @@ Features:
 - all game objects are configurable. Game Engine is based on “data driven” design. All configurations are based on “xml’s”. Serialisers and deserialisers for configurations are generated on precompile phase with “python” script. This allows to add new configuration types with minimal changes in source code.
 
 MODEL XML EXAMPLE:
-
+```sh
 <model
     mesh_filename="model_03.MDL"
     is_batching="0">
@@ -42,9 +42,9 @@ MODEL XML EXAMPLE:
         <animation name=“RUN” filename="model_01.MDL_anim"/>
     </animations>
 </model>
-
+```
 MATERIAL XML EXAMPLE:
-
+```sh
 <material
     render_operation_name="ws.base"
     is_cull_face="0"
@@ -75,9 +75,9 @@ MATERIAL XML EXAMPLE:
             min_filter="GL_MIPMAP"/>
     </textures>
 </material>
-
+```
 - all render techniques such as “shadow mapping”, “reflection”, “refraction”, “SSAO” also are presented with “xml’s” configurations. 
-
+```sh
 <ws_technique
     guid="ws.shadowmap"
     are_draw_bounding_boxes="0"
@@ -88,7 +88,7 @@ MATERIAL XML EXAMPLE:
     clear_color_g="0.0"
     clear_color_b="0.0"
     clear_color_a="0.0"/>
-
+```
 
 Screenshots:
 
