@@ -56,7 +56,7 @@ void CMEgoeScene::load(void)
     m_landscape = m_root->createLandscape("gameobject.landscape.goe.xml");
     m_root->setLandscape(m_landscape);
 
-    std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.goe.xml");
+    std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
     
     m_skybox = m_root->createSkybox("gameobject.skybox.xml");

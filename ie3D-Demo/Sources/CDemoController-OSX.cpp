@@ -22,9 +22,9 @@ CDemoControllerOSX::CDemoControllerOSX(NSView *openGLView)
 {
     std::shared_ptr<IOGLWindow> window = std::make_shared<IOGLWindow>((__bridge void*)openGLView);
     m_gameController = std::make_shared<CDemoGameController>(window);
-    m_gameTransition = std::make_shared<CDemoGameTransition>("transition.main.xml", false);
+    m_gameTransition = std::make_shared<CDemoGameTransition>("transition.demo.xml", false);
     m_gameController->addTransition(m_gameTransition);
-    m_gameController->gotoTransition("transition.main.xml");
+    m_gameController->gotoTransition("transition.demo.xml");
     
     m_keysState[key_w] = false;
     m_keysState[key_a] = false;

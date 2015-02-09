@@ -270,7 +270,7 @@ void CMEmseScene::generateVertecesDataCommand(const glm::ivec2& size, f32 freque
 
 void CMEmseScene::onConfigurationLoaded(ISharedConfigurationRef configuration)
 {
-    m_landscapeMaterial = m_landscape->getMaterial("render.operation.world.base");
+    m_landscapeMaterial = m_landscape->getMaterial("ws.base");
     m_landscape->addResourceLoadingCommand(std::bind(&CMEmseScene::onResourceLoaded, this, std::placeholders::_1));
     CSharedConfigurationLandscape configurationLandscape = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     for(const auto& iterator : configurationLandscape->getMaterialsConfigurations())

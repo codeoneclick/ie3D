@@ -1,0 +1,37 @@
+<material
+    render_operation_name="ws.base"
+    is_cull_face="1"
+    is_depth_test="0"
+    is_depth_mask="1"
+    is_blending="0"
+    cull_face_mode="GL_FRONT"
+    blending_function_source="GL_SRC_ALPHA"
+    blending_function_destination="GL_ONE_MINUS_SRC_ALPHA"
+    is_cliping="0"
+    clipping_x="0.0"
+    clipping_y="0.0"
+    clipping_z="0.0"
+    clipping_w="0.0"
+    is_reflecting="0"
+    is_shadowing="0"
+    is_debugging="0">
+    <shader
+    vs_filename="shaderSkybox.vert"
+    fs_filename="shaderSkybox.frag"/>
+    <textures>
+        <texture
+            is_cubemap="1"
+            filename_x_positive="skybox_xneg.png"
+            filename_x_negative="skybox_xpos.png"
+            filename_y_positive="skybox_yneg.png"
+            filename_y_negative="skybox_ypos.png"
+            filename_z_positive="skybox_zneg.png"
+            filename_z_negative="skybox_zpos.png"
+            filename=""
+            render_operation_name=""
+            sampler_index="0"
+            wrap_mode="GL_MIRRORED_REPEAT"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_MIPMAP"/>
+    </textures>
+</material>

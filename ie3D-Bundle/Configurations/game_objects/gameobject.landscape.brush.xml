@@ -1,0 +1,7 @@
+<landscape_brush
+    size_x="20"
+    size_y="20">
+	<materials>
+		<material filename="material.landscape.brush.base.xml"/>
+	</materials>
+</landscape_brush>

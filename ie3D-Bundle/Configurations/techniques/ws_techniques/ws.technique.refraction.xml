@@ -1,0 +1,10 @@
+<ws_technique
+    guid="ws.refraction"
+    are_draw_bounding_boxes="0"
+    index="1"
+    screen_width="512"
+    screen_height="512"
+    clear_color_r="0.16"
+    clear_color_g="0.32"
+    clear_color_b="0.32"
+    clear_color_a="1.0"/>

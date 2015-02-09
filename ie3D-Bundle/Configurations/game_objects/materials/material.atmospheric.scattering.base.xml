@@ -1,0 +1,23 @@
+<material
+    render_operation_name="ws.base"
+    is_cull_face="0"
+    is_depth_test="0"
+    is_depth_mask="1"
+    is_blending="1"
+    cull_face_mode="GL_FRONT"
+    blending_function_source="GL_SRC_ALPHA"
+    blending_function_destination="GL_ONE_MINUS_SRC_ALPHA"
+    is_cliping="0"
+    clipping_x="0.0"
+    clipping_y="0.0"
+    clipping_z="0.0"
+    clipping_w="0.0"
+    is_reflecting="0"
+    is_shadowing="0"
+    is_debugging="0">
+    <shader
+    vs_filename="shaderAtmosphericScattering.vert"
+    fs_filename="shaderAtmosphericScattering.frag"/>
+    <textures>
+    </textures>
+</material>

@@ -1,4 +1,0 @@
-<output_technique
-    guid="render.operation.output.mse">
-    <material filename="material.render.operation.output.mse.xml"/>
-</output_technique>

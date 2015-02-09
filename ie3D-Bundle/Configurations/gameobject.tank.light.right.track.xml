@@ -1,7 +1,0 @@
-<model filename="tank_light_right_track.mdl_01" is_batching="0">
-    <materials>
-		<material filename="material.tank.light.right.track.common.xml"/>
-        <material filename="material.tank.light.right.track.reflection.xml"/>
-        <material filename="material.tank.light.right.track.refraction.xml"/>
-	</materials>
-</model>

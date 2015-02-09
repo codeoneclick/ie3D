@@ -1,0 +1,6 @@
+<ss_technique
+    guid="ss.overlapping"
+    screen_width="1024"
+    screen_height="768">
+    <material filename="material.ss.technique.overlapping.xml"/>
+</ss_technique>

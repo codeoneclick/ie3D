@@ -1,8 +1,0 @@
-<complex_model>
-    <models>
-		<model part="body" filename="gameobject.tank.light.body.xml"/>
-        <model part="tower" filename="gameobject.tank.light.tower.xml"/>
-        <model part="left_track" filename="gameobject.tank.light.left.track.xml"/>
-        <model part="right_track" filename="gameobject.tank.light.right.track.xml"/>
-	</models>
-</complex_model>

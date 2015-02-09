@@ -1,6 +1,0 @@
-<model filename="tank_medium_left_track.mdl_01" is_batching="0">
-    <materials>
-		<material filename="material.tank.medium.left.track.common.xml"/>
-        <material filename="material.tank.medium.left.track.reflection.xml"/>
-	</materials>
-</model>

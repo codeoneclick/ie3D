@@ -1,0 +1,14 @@
+<landscape
+    heightmap_data_filename=""
+    splatting_data_filename=""
+    size_x="5"
+    size_y="5"
+    frequency="0.0"
+    octaves="1"
+    seed="12345">
+	<materials>
+		<material filename="material.landscape.base.goe.xml"/>
+        <material filename="material.landscape.reflection.goe.xml"/>
+        <material filename="material.landscape.refraction.goe.xml"/>
+	</materials>
+</landscape>

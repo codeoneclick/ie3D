@@ -1,0 +1,12 @@
+<transition
+    guid="transition.demo">
+    <output_technique filename="output.technique.demo.xml"/>
+    <ws_techniques>
+        <ws_technique filename="ws.technique.base.xml"/>
+        <ws_technique filename="ws.technique.reflection.xml"/>
+        <ws_technique filename="ws.technique.refraction.xml"/>
+        <ws_technique filename="ws.technique.shadowmap.xml"/>
+    </ws_techniques>
+    <ss_techniques>
+    </ss_techniques>
+</transition>

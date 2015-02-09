@@ -1,4 +1,0 @@
-<output_technique
-    guid="render.operation.output.gop">
-    <material filename="material.render.operation.output.gop.xml"/>
-</output_technique>
