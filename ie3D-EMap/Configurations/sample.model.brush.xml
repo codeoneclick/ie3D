@@ -5,7 +5,7 @@
     <attributes>
     </attributes>
     <relationships>
-    	<relationship type="CMEConfigurationBrushElement" getter="getElementsConfigurations" is_to_many="1" is_external="0" path="/model_brush/elements" relationship_name="element"/>
-    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/model_brush/materials" relationship_name="material"/>
+    	<relationship type="CMEConfigurationBrushElement" property="ElementsConfigurations" is_to_many="1" is_external="0" path="/model_brush/elements" name="element"/>
+    	<relationship type="CConfigurationMaterial" property="MaterialsConfigurations" is_to_many="1" is_external="1" path="/model_brush/materials" name="material"/>
     </relationships>
 </model_brush>

@@ -10,23 +10,26 @@ CConfigurationOcean(void) = default;
 ~CConfigurationOcean(void) = default;
 ui32 getSize(void) const;
 #if defined(__EDITOR__)
-void set_size(ui32 size);
+void setSize(ui32 size);
 #endif
 f32 getAltitude(void) const;
 #if defined(__EDITOR__)
-void set_altitude(f32 altitude);
+void setAltitude(f32 altitude);
 #endif
 f32 getWaveGenerationInterval(void) const;
 #if defined(__EDITOR__)
-void set_wave_generation_interval(f32 wave_generation_interval);
+void setWaveGenerationInterval(f32 wave_generation_interval);
 #endif
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 #if defined(__EDITOR__)
-void add_material(const std::shared_ptr<CConfigurationMaterial>& material);
+void addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material);
 #endif
 #if defined(__EDITOR__)
-void set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
+void setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
 #endif
 void serialize(const std::string& filename);
+#if defined(__EDITOR__)
+void deserialize(const std::string& filename);
+#endif
 };
 #endif

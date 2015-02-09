@@ -3,15 +3,15 @@
     base_class_name="IConfigurationGameObject"
     is_external="1">
     <attributes>
-        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getHeightmapDataFilename" path="/landscape" attribute_name="heightmap_data_filename"/>
-        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getSplattingDataFilename" path="/landscape" attribute_name="splatting_data_filename"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSizeX" path="/landscape" attribute_name="size_x"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSizeY" path="/landscape" attribute_name="size_y"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getFrequency" path="/landscape" attribute_name="frequency"/>
-        <attribute type="i32" is_convert_to_ogl_enum="0" getter="getOctaves" path="/landscape" attribute_name="octaves"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSeed" path="/landscape" attribute_name="seed"/>
+        <attribute type="std::string" property="HeightmapDataFilename" path="/landscape" name="heightmap_data_filename"/>
+        <attribute type="std::string" property="SplattingDataFilename" path="/landscape" name="splatting_data_filename"/>
+        <attribute type="ui32" property="SizeX" path="/landscape" name="size_x"/>
+        <attribute type="ui32" property="SizeY" path="/landscape" name="size_y"/>
+        <attribute type="f32" property="Frequency" path="/landscape" name="frequency"/>
+        <attribute type="i32" property="Octaves" path="/landscape" name="octaves"/>
+        <attribute type="ui32" property="Seed" path="/landscape" name="seed"/>
     </attributes>
     <relationships>
-    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/landscape/materials" relationship_name="material"/>
+    	<relationship type="CConfigurationMaterial" property="MaterialsConfigurations" is_to_many="1" is_external="1" path="/landscape/materials" name="material"/>
     </relationships>
 </landscape>

@@ -198,7 +198,7 @@ public:
 #if defined(__IOS__) || defined(__OSX__) || defined(__NDK__)
 
 extern std::map<std::string, GLenum> g_stringToGLenum;
-extern std::map<GLenum, std::string> g_glenumToString;
+extern std::map<GLenum, std::string> g_enumGLToString;
 
 #elif defined(__WIN32__)
 

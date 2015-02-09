@@ -8,7 +8,7 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationAnimation::set_filename(std::string filename)
+void CConfigurationAnimation::setFilename(std::string filename)
 {
 IConfiguration::setAttribute("/animation/filename", std::make_shared<CConfigurationAttribute>(filename));
 }
@@ -21,7 +21,7 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationAnimation::set_name(std::string name)
+void CConfigurationAnimation::setName(std::string name)
 {
 IConfiguration::setAttribute("/animation/name", std::make_shared<CConfigurationAttribute>(name));
 }
@@ -35,6 +35,18 @@ IConfiguration::setAttribute("/animation/filename", std::make_shared<CConfigurat
 std::string name = node.node().attribute("name").as_string();
 IConfiguration::setAttribute("/animation/name", std::make_shared<CConfigurationAttribute>(name));
 }
+#if defined(__EDITOR__)
+void CConfigurationAnimation::deserialize(pugi::xml_node& node)
+{
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("filename");
+std::string filename = CConfigurationAnimation::getFilename();
+attribute.set_value(filename.c_str());
+attribute = node.append_attribute("name");
+std::string name = CConfigurationAnimation::getName();
+attribute.set_value(name.c_str());
+}
+#endif
 void CConfigurationAnimation::serialize(pugi::xml_document& document, pugi::xpath_node& node)
 {
 std::string filename = node.node().attribute("filename").as_string();

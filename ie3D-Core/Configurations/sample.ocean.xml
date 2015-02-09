@@ -3,11 +3,11 @@
     base_class_name="IConfigurationGameObject"
     is_external="1">
     <attributes>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getSize" path="/ocean" attribute_name="size"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getAltitude" path="/ocean" attribute_name="altitude"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getWaveGenerationInterval" path="/ocean" attribute_name="wave_generation_interval"/>
+        <attribute type="ui32" property="Size" path="/ocean" name="size"/>
+        <attribute type="f32" property="Altitude" path="/ocean" name="altitude"/>
+        <attribute type="f32" property="WaveGenerationInterval" path="/ocean" name="wave_generation_interval"/>
     </attributes>
     <relationships>
-    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/ocean/materials" relationship_name="material"/>
+    	<relationship type="CConfigurationMaterial" property="MaterialsConfigurations" is_to_many="1" is_external="1" path="/ocean/materials" name="material"/>
     </relationships>
 </ocean>

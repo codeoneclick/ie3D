@@ -7,6 +7,12 @@ assert(iterator != m_attributes.end());
 std::string value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CMEConfigurationBrushElement::setName(std::string name)
+{
+IConfiguration::setAttribute("/brush_element/name", std::make_shared<CConfigurationAttribute>(name));
+}
+#endif
 ui8 CMEConfigurationBrushElement::getColorR(void) const
 {
 const auto& iterator = m_attributes.find("/brush_element/color_r");
@@ -14,6 +20,12 @@ assert(iterator != m_attributes.end());
 ui8 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CMEConfigurationBrushElement::setColorR(ui8 color_r)
+{
+IConfiguration::setAttribute("/brush_element/color_r", std::make_shared<CConfigurationAttribute>(color_r));
+}
+#endif
 ui8 CMEConfigurationBrushElement::getColorG(void) const
 {
 const auto& iterator = m_attributes.find("/brush_element/color_g");
@@ -21,6 +33,12 @@ assert(iterator != m_attributes.end());
 ui8 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CMEConfigurationBrushElement::setColorG(ui8 color_g)
+{
+IConfiguration::setAttribute("/brush_element/color_g", std::make_shared<CConfigurationAttribute>(color_g));
+}
+#endif
 ui8 CMEConfigurationBrushElement::getColorB(void) const
 {
 const auto& iterator = m_attributes.find("/brush_element/color_b");
@@ -28,6 +46,12 @@ assert(iterator != m_attributes.end());
 ui8 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CMEConfigurationBrushElement::setColorB(ui8 color_b)
+{
+IConfiguration::setAttribute("/brush_element/color_b", std::make_shared<CConfigurationAttribute>(color_b));
+}
+#endif
 ui8 CMEConfigurationBrushElement::getColorA(void) const
 {
 const auto& iterator = m_attributes.find("/brush_element/color_a");
@@ -35,6 +59,12 @@ assert(iterator != m_attributes.end());
 ui8 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CMEConfigurationBrushElement::setColorA(ui8 color_a)
+{
+IConfiguration::setAttribute("/brush_element/color_a", std::make_shared<CConfigurationAttribute>(color_a));
+}
+#endif
 f32 CMEConfigurationBrushElement::getWidth(void) const
 {
 const auto& iterator = m_attributes.find("/brush_element/width");
@@ -42,6 +72,12 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CMEConfigurationBrushElement::setWidth(f32 width)
+{
+IConfiguration::setAttribute("/brush_element/width", std::make_shared<CConfigurationAttribute>(width));
+}
+#endif
 f32 CMEConfigurationBrushElement::getHeight(void) const
 {
 const auto& iterator = m_attributes.find("/brush_element/height");
@@ -49,6 +85,12 @@ assert(iterator != m_attributes.end());
 f32 value; iterator->second->get(&value);
 return value;
 }
+#if defined(__EDITOR__)
+void CMEConfigurationBrushElement::setHeight(f32 height)
+{
+IConfiguration::setAttribute("/brush_element/height", std::make_shared<CConfigurationAttribute>(height));
+}
+#endif
 void CMEConfigurationBrushElement::serialize(pugi::xml_document& document, const std::string& path)
 {
 pugi::xpath_node node;

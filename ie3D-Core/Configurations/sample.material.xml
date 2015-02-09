@@ -3,25 +3,25 @@
     base_class_name="IConfiguration"
     is_external="1">
     <attributes>
-        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getRenderOperationName" path="/material" attribute_name="render_operation_name"/>
-        <attribute type="bool" is_convert_to_ogl_enum="0" getter="isDepthTest" path="/material" attribute_name="is_depth_test"/>
-        <attribute type="bool" is_convert_to_ogl_enum="0" getter="isDepthMask" path="/material" attribute_name="is_depth_mask"/>
-        <attribute type="bool" is_convert_to_ogl_enum="0" getter="isCulling" path="/material" attribute_name="is_cull_face"/>
-        <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getCullingMode"  path="/material" attribute_name="cull_face_mode"/>
-        <attribute type="bool" is_convert_to_ogl_enum="0" getter="isBlending" path="/material" attribute_name="is_blending"/>
-        <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getBlendingFunctionSource" path="/material" attribute_name="blending_function_source"/>
-        <attribute type="std::string" is_convert_to_ogl_enum="1" getter="getBlendingFunctionDestination" path="/material" attribute_name="blending_function_destination"/>
-        <attribute type="bool" is_convert_to_ogl_enum="0" getter="isClipping" path="/material" attribute_name="is_cliping"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClippingX" path="/material" attribute_name="clipping_x"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClippingY" path="/material" attribute_name="clipping_y"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClippingZ" path="/material" attribute_name="clipping_z"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClippingW" path="/material" attribute_name="clipping_w"/>
-        <attribute type="bool" is_convert_to_ogl_enum="0" getter="isReflecting" path="/material" attribute_name="is_reflecting"/>
-        <attribute type="bool" is_convert_to_ogl_enum="0" getter="isShadowing" path="/material" attribute_name="is_shadowing"/>
-        <attribute type="bool" is_convert_to_ogl_enum="0" getter="isDebugging" path="/material" attribute_name="is_debugging"/>
+        <attribute type="std::string" property="RenderTechniqueName" path="/material" name="render_operation_name"/>
+        <attribute type="bool" property="DepthTest" path="/material" name="is_depth_test"/>
+        <attribute type="bool" property="DepthMask" path="/material" name="is_depth_mask"/>
+        <attribute type="bool" property="Culling" path="/material" name="is_cull_face"/>
+        <attribute type="GLenum" property="CullingMode"  path="/material" name="cull_face_mode"/>
+        <attribute type="bool" property="Blending" path="/material" name="is_blending"/>
+        <attribute type="GLenum" property="BlendingFunctionSource" path="/material" name="blending_function_source"/>
+        <attribute type="GLenum" property="BlendingFunctionDestination" path="/material" name="blending_function_destination"/>
+        <attribute type="bool" property="Clipping" path="/material" name="is_cliping"/>
+        <attribute type="f32" property="ClippingX" path="/material" name="clipping_x"/>
+        <attribute type="f32" property="ClippingY" path="/material" name="clipping_y"/>
+        <attribute type="f32" property="ClippingZ" path="/material" name="clipping_z"/>
+        <attribute type="f32" property="ClippingW" path="/material" name="clipping_w"/>
+        <attribute type="bool" property="Reflecting" path="/material" name="is_reflecting"/>
+        <attribute type="bool" property="Shadowing" path="/material" name="is_shadowing"/>
+        <attribute type="bool" property="Debugging" path="/material" name="is_debugging"/>
     </attributes>
     <relationships>
-        <relationship type="CConfigurationShader" getter="getShaderConfiguration" is_to_many="0" is_external="0" path="/material" relationship_name="shader"/>
-        <relationship type="CConfigurationTexture" getter="getTexturesConfigurations" is_to_many="1" is_external="0" path="/material/textures" relationship_name="texture"/>
+        <relationship type="CConfigurationShader" property="ShaderConfiguration" is_to_many="0" is_external="0" path="/material" name="shader"/>
+        <relationship type="CConfigurationTexture" property="TexturesConfigurations" is_to_many="1" is_external="0" path="/material/textures" name="texture"/>
     </relationships>
 </material>

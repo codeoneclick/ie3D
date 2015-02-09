@@ -8,7 +8,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_num_particles(ui32 num_particles)
+void CConfigurationParticleEmitter::setNumParticles(ui32 num_particles)
 {
 IConfiguration::setAttribute("/particle_emitter/num_particles", std::make_shared<CConfigurationAttribute>(num_particles));
 }
@@ -21,7 +21,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_duration(ui32 duration)
+void CConfigurationParticleEmitter::setDuration(ui32 duration)
 {
 IConfiguration::setAttribute("/particle_emitter/duration", std::make_shared<CConfigurationAttribute>(duration));
 }
@@ -34,7 +34,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_duration_randomness(f32 duration_randomness)
+void CConfigurationParticleEmitter::setDurationRandomess(f32 duration_randomness)
 {
 IConfiguration::setAttribute("/particle_emitter/duration_randomness", std::make_shared<CConfigurationAttribute>(duration_randomness));
 }
@@ -47,7 +47,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_velocity_sensitivity(f32 velocity_sensitivity)
+void CConfigurationParticleEmitter::setVelocitySensitivity(f32 velocity_sensitivity)
 {
 IConfiguration::setAttribute("/particle_emitter/velocity_sensitivity", std::make_shared<CConfigurationAttribute>(velocity_sensitivity));
 }
@@ -60,7 +60,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_min_horizontal_velocity(f32 min_horizontal_velocity)
+void CConfigurationParticleEmitter::setMinHorizontalVelocity(f32 min_horizontal_velocity)
 {
 IConfiguration::setAttribute("/particle_emitter/min_horizontal_velocity", std::make_shared<CConfigurationAttribute>(min_horizontal_velocity));
 }
@@ -73,7 +73,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_max_horizontal_velocity(f32 max_horizontal_velocity)
+void CConfigurationParticleEmitter::setMaxHorizontalVelocity(f32 max_horizontal_velocity)
 {
 IConfiguration::setAttribute("/particle_emitter/max_horizontal_velocity", std::make_shared<CConfigurationAttribute>(max_horizontal_velocity));
 }
@@ -86,7 +86,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_min_vertical_velocity(f32 min_vertical_velocity)
+void CConfigurationParticleEmitter::setMinVerticalVelocity(f32 min_vertical_velocity)
 {
 IConfiguration::setAttribute("/particle_emitter/min_vertical_velocity", std::make_shared<CConfigurationAttribute>(min_vertical_velocity));
 }
@@ -99,7 +99,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_max_vertical_velocity(f32 max_vertical_velocity)
+void CConfigurationParticleEmitter::setMaxVerticalVelocity(f32 max_vertical_velocity)
 {
 IConfiguration::setAttribute("/particle_emitter/max_vertical_velocity", std::make_shared<CConfigurationAttribute>(max_vertical_velocity));
 }
@@ -112,7 +112,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_end_velocity(f32 end_velocity)
+void CConfigurationParticleEmitter::setEndVelocity(f32 end_velocity)
 {
 IConfiguration::setAttribute("/particle_emitter/end_velocity", std::make_shared<CConfigurationAttribute>(end_velocity));
 }
@@ -125,7 +125,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_gravity_x(f32 gravity_x)
+void CConfigurationParticleEmitter::setGravityX(f32 gravity_x)
 {
 IConfiguration::setAttribute("/particle_emitter/gravity_x", std::make_shared<CConfigurationAttribute>(gravity_x));
 }
@@ -138,7 +138,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_gravity_y(f32 gravity_y)
+void CConfigurationParticleEmitter::setGravityY(f32 gravity_y)
 {
 IConfiguration::setAttribute("/particle_emitter/gravity_y", std::make_shared<CConfigurationAttribute>(gravity_y));
 }
@@ -151,7 +151,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_gravity_z(f32 gravity_z)
+void CConfigurationParticleEmitter::setGravityZ(f32 gravity_z)
 {
 IConfiguration::setAttribute("/particle_emitter/gravity_z", std::make_shared<CConfigurationAttribute>(gravity_z));
 }
@@ -164,7 +164,7 @@ ui8 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_source_color_r(ui8 source_color_r)
+void CConfigurationParticleEmitter::setSourceColorR(ui8 source_color_r)
 {
 IConfiguration::setAttribute("/particle_emitter/source_color_r", std::make_shared<CConfigurationAttribute>(source_color_r));
 }
@@ -177,7 +177,7 @@ ui8 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_source_color_g(ui8 source_color_g)
+void CConfigurationParticleEmitter::setSourceColorG(ui8 source_color_g)
 {
 IConfiguration::setAttribute("/particle_emitter/source_color_g", std::make_shared<CConfigurationAttribute>(source_color_g));
 }
@@ -190,7 +190,7 @@ ui8 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_source_color_b(ui8 source_color_b)
+void CConfigurationParticleEmitter::setSourceColorB(ui8 source_color_b)
 {
 IConfiguration::setAttribute("/particle_emitter/source_color_b", std::make_shared<CConfigurationAttribute>(source_color_b));
 }
@@ -203,7 +203,7 @@ ui8 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_source_color_a(ui8 source_color_a)
+void CConfigurationParticleEmitter::setSourceColorA(ui8 source_color_a)
 {
 IConfiguration::setAttribute("/particle_emitter/source_color_a", std::make_shared<CConfigurationAttribute>(source_color_a));
 }
@@ -216,7 +216,7 @@ ui8 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_destination_color_r(ui8 destination_color_r)
+void CConfigurationParticleEmitter::setDestinationColorR(ui8 destination_color_r)
 {
 IConfiguration::setAttribute("/particle_emitter/destination_color_r", std::make_shared<CConfigurationAttribute>(destination_color_r));
 }
@@ -229,7 +229,7 @@ ui8 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_destination_color_g(ui8 destination_color_g)
+void CConfigurationParticleEmitter::setDestinationColorG(ui8 destination_color_g)
 {
 IConfiguration::setAttribute("/particle_emitter/destination_color_g", std::make_shared<CConfigurationAttribute>(destination_color_g));
 }
@@ -242,7 +242,7 @@ ui8 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_destination_color_b(ui8 destination_color_b)
+void CConfigurationParticleEmitter::setDestinationColorB(ui8 destination_color_b)
 {
 IConfiguration::setAttribute("/particle_emitter/destination_color_b", std::make_shared<CConfigurationAttribute>(destination_color_b));
 }
@@ -255,7 +255,7 @@ ui8 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_destination_color_a(ui8 destination_color_a)
+void CConfigurationParticleEmitter::setDestinationColorA(ui8 destination_color_a)
 {
 IConfiguration::setAttribute("/particle_emitter/destination_color_a", std::make_shared<CConfigurationAttribute>(destination_color_a));
 }
@@ -268,7 +268,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_source_size_x(f32 source_size_x)
+void CConfigurationParticleEmitter::setSourceSizeX(f32 source_size_x)
 {
 IConfiguration::setAttribute("/particle_emitter/source_size_x", std::make_shared<CConfigurationAttribute>(source_size_x));
 }
@@ -281,7 +281,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_source_size_y(f32 source_size_y)
+void CConfigurationParticleEmitter::setSourceSizeY(f32 source_size_y)
 {
 IConfiguration::setAttribute("/particle_emitter/source_size_y", std::make_shared<CConfigurationAttribute>(source_size_y));
 }
@@ -294,7 +294,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_destination_size_x(f32 destination_size_x)
+void CConfigurationParticleEmitter::setDestinationSizeX(f32 destination_size_x)
 {
 IConfiguration::setAttribute("/particle_emitter/destination_size_x", std::make_shared<CConfigurationAttribute>(destination_size_x));
 }
@@ -307,7 +307,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_destination_size_y(f32 destination_size_y)
+void CConfigurationParticleEmitter::setDestinationSizeY(f32 destination_size_y)
 {
 IConfiguration::setAttribute("/particle_emitter/destination_size_y", std::make_shared<CConfigurationAttribute>(destination_size_y));
 }
@@ -320,7 +320,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_min_emitt_interval(ui32 min_emitt_interval)
+void CConfigurationParticleEmitter::setMinEmittInterval(ui32 min_emitt_interval)
 {
 IConfiguration::setAttribute("/particle_emitter/min_emitt_interval", std::make_shared<CConfigurationAttribute>(min_emitt_interval));
 }
@@ -333,7 +333,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_max_emitt_interval(ui32 max_emitt_interval)
+void CConfigurationParticleEmitter::setMaxEmittInterval(ui32 max_emitt_interval)
 {
 IConfiguration::setAttribute("/particle_emitter/max_emitt_interval", std::make_shared<CConfigurationAttribute>(max_emitt_interval));
 }
@@ -349,13 +349,13 @@ assert(iterator != m_configurations.end());
 return iterator->second;
 }
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::add_material(const std::shared_ptr<CConfigurationMaterial>& material)
+void CConfigurationParticleEmitter::addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material)
 {
 IConfiguration::setConfiguration("/particle_emitter/materials/material", material);
 }
 #endif
 #if defined(__EDITOR__)
-void CConfigurationParticleEmitter::set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+void CConfigurationParticleEmitter::setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
 {
 IConfiguration::setConfiguration("/particle_emitter/materials/material", material, index);
 }
@@ -427,3 +427,92 @@ material->serialize((*iterator).node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/particle_emitter/materials/material", material);
 }
 }
+#if defined(__EDITOR__)
+void CConfigurationParticleEmitter::deserialize(const std::string& filename)
+{
+pugi::xml_document document;
+pugi::xml_parse_result result = document.load("");
+assert(result.status == pugi::status_ok);
+pugi::xml_node node = document.append_child("particle_emitter");
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("num_particles");
+ui32 num_particles = CConfigurationParticleEmitter::getNumParticles();
+attribute.set_value(num_particles);
+attribute = node.append_attribute("duration");
+ui32 duration = CConfigurationParticleEmitter::getDuration();
+attribute.set_value(duration);
+attribute = node.append_attribute("duration_randomness");
+f32 duration_randomness = CConfigurationParticleEmitter::getDurationRandomess();
+attribute.set_value(duration_randomness);
+attribute = node.append_attribute("velocity_sensitivity");
+f32 velocity_sensitivity = CConfigurationParticleEmitter::getVelocitySensitivity();
+attribute.set_value(velocity_sensitivity);
+attribute = node.append_attribute("min_horizontal_velocity");
+f32 min_horizontal_velocity = CConfigurationParticleEmitter::getMinHorizontalVelocity();
+attribute.set_value(min_horizontal_velocity);
+attribute = node.append_attribute("max_horizontal_velocity");
+f32 max_horizontal_velocity = CConfigurationParticleEmitter::getMaxHorizontalVelocity();
+attribute.set_value(max_horizontal_velocity);
+attribute = node.append_attribute("min_vertical_velocity");
+f32 min_vertical_velocity = CConfigurationParticleEmitter::getMinVerticalVelocity();
+attribute.set_value(min_vertical_velocity);
+attribute = node.append_attribute("max_vertical_velocity");
+f32 max_vertical_velocity = CConfigurationParticleEmitter::getMaxVerticalVelocity();
+attribute.set_value(max_vertical_velocity);
+attribute = node.append_attribute("end_velocity");
+f32 end_velocity = CConfigurationParticleEmitter::getEndVelocity();
+attribute.set_value(end_velocity);
+attribute = node.append_attribute("gravity_x");
+f32 gravity_x = CConfigurationParticleEmitter::getGravityX();
+attribute.set_value(gravity_x);
+attribute = node.append_attribute("gravity_y");
+f32 gravity_y = CConfigurationParticleEmitter::getGravityY();
+attribute.set_value(gravity_y);
+attribute = node.append_attribute("gravity_z");
+f32 gravity_z = CConfigurationParticleEmitter::getGravityZ();
+attribute.set_value(gravity_z);
+attribute = node.append_attribute("source_color_r");
+ui8 source_color_r = CConfigurationParticleEmitter::getSourceColorR();
+attribute.set_value(source_color_r);
+attribute = node.append_attribute("source_color_g");
+ui8 source_color_g = CConfigurationParticleEmitter::getSourceColorG();
+attribute.set_value(source_color_g);
+attribute = node.append_attribute("source_color_b");
+ui8 source_color_b = CConfigurationParticleEmitter::getSourceColorB();
+attribute.set_value(source_color_b);
+attribute = node.append_attribute("source_color_a");
+ui8 source_color_a = CConfigurationParticleEmitter::getSourceColorA();
+attribute.set_value(source_color_a);
+attribute = node.append_attribute("destination_color_r");
+ui8 destination_color_r = CConfigurationParticleEmitter::getDestinationColorR();
+attribute.set_value(destination_color_r);
+attribute = node.append_attribute("destination_color_g");
+ui8 destination_color_g = CConfigurationParticleEmitter::getDestinationColorG();
+attribute.set_value(destination_color_g);
+attribute = node.append_attribute("destination_color_b");
+ui8 destination_color_b = CConfigurationParticleEmitter::getDestinationColorB();
+attribute.set_value(destination_color_b);
+attribute = node.append_attribute("destination_color_a");
+ui8 destination_color_a = CConfigurationParticleEmitter::getDestinationColorA();
+attribute.set_value(destination_color_a);
+attribute = node.append_attribute("source_size_x");
+f32 source_size_x = CConfigurationParticleEmitter::getSourceSizeX();
+attribute.set_value(source_size_x);
+attribute = node.append_attribute("source_size_y");
+f32 source_size_y = CConfigurationParticleEmitter::getSourceSizeY();
+attribute.set_value(source_size_y);
+attribute = node.append_attribute("destination_size_x");
+f32 destination_size_x = CConfigurationParticleEmitter::getDestinationSizeX();
+attribute.set_value(destination_size_x);
+attribute = node.append_attribute("destination_size_y");
+f32 destination_size_y = CConfigurationParticleEmitter::getDestinationSizeY();
+attribute.set_value(destination_size_y);
+attribute = node.append_attribute("min_emitt_interval");
+ui32 min_emitt_interval = CConfigurationParticleEmitter::getMinEmittInterval();
+attribute.set_value(min_emitt_interval);
+attribute = node.append_attribute("max_emitt_interval");
+ui32 max_emitt_interval = CConfigurationParticleEmitter::getMaxEmittInterval();
+attribute.set_value(max_emitt_interval);
+document.save_file(filename.c_str());
+}
+#endif

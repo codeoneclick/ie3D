@@ -10,39 +10,42 @@ CConfigurationLandscape(void) = default;
 ~CConfigurationLandscape(void) = default;
 std::string getHeightmapDataFilename(void) const;
 #if defined(__EDITOR__)
-void set_heightmap_data_filename(std::string heightmap_data_filename);
+void setHeightmapDataFilename(std::string heightmap_data_filename);
 #endif
 std::string getSplattingDataFilename(void) const;
 #if defined(__EDITOR__)
-void set_splatting_data_filename(std::string splatting_data_filename);
+void setSplattingDataFilename(std::string splatting_data_filename);
 #endif
 ui32 getSizeX(void) const;
 #if defined(__EDITOR__)
-void set_size_x(ui32 size_x);
+void setSizeX(ui32 size_x);
 #endif
 ui32 getSizeY(void) const;
 #if defined(__EDITOR__)
-void set_size_y(ui32 size_y);
+void setSizeY(ui32 size_y);
 #endif
 f32 getFrequency(void) const;
 #if defined(__EDITOR__)
-void set_frequency(f32 frequency);
+void setFrequency(f32 frequency);
 #endif
 i32 getOctaves(void) const;
 #if defined(__EDITOR__)
-void set_octaves(i32 octaves);
+void setOctaves(i32 octaves);
 #endif
 ui32 getSeed(void) const;
 #if defined(__EDITOR__)
-void set_seed(ui32 seed);
+void setSeed(ui32 seed);
 #endif
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 #if defined(__EDITOR__)
-void add_material(const std::shared_ptr<CConfigurationMaterial>& material);
+void addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material);
 #endif
 #if defined(__EDITOR__)
-void set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
+void setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
 #endif
 void serialize(const std::string& filename);
+#if defined(__EDITOR__)
+void deserialize(const std::string& filename);
+#endif
 };
 #endif

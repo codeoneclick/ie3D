@@ -11,26 +11,29 @@ CConfigurationModel(void) = default;
 ~CConfigurationModel(void) = default;
 std::string getMeshFilename(void) const;
 #if defined(__EDITOR__)
-void set_mesh_filename(std::string mesh_filename);
+void setMeshFilename(std::string mesh_filename);
 #endif
-bool isBatching(void) const;
+bool getBatching(void) const;
 #if defined(__EDITOR__)
-void set_is_batching(bool is_batching);
+void setBatching(bool is_batching);
 #endif
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 #if defined(__EDITOR__)
-void add_material(const std::shared_ptr<CConfigurationMaterial>& material);
+void addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material);
 #endif
 #if defined(__EDITOR__)
-void set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
+void setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
 #endif
 std::vector<std::shared_ptr<IConfiguration>> getAnimationsConfigurations(void) const;
 #if defined(__EDITOR__)
-void add_animation(const std::shared_ptr<CConfigurationAnimation>& animation);
+void addAnimationsConfigurations(const std::shared_ptr<CConfigurationAnimation>& animation);
 #endif
 #if defined(__EDITOR__)
-void set_animation(const std::shared_ptr<CConfigurationAnimation>& animation, i32 index);
+void setAnimationsConfigurations(const std::shared_ptr<CConfigurationAnimation>& animation, i32 index);
 #endif
 void serialize(const std::string& filename);
+#if defined(__EDITOR__)
+void deserialize(const std::string& filename);
+#endif
 };
 #endif

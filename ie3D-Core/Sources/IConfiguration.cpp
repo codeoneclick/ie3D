@@ -25,7 +25,7 @@ std::map<std::string, GLenum> g_stringToGLenum = {
     {"GL_MIPMAP", GL_LINEAR_MIPMAP_NEAREST }
 };
 
-std::map<GLenum, std::string> g_glenumToString = {
+std::map<GLenum, std::string> g_enumGLToString = {
     {GL_FRONT, "GL_FRONT"},
     {GL_BACK, "GL_BACK"},
     {GL_SRC_ALPHA, "GL_SRC_ALPHA"},
@@ -33,7 +33,10 @@ std::map<GLenum, std::string> g_glenumToString = {
     {GL_ONE_MINUS_SRC_ALPHA, "GL_ONE_MINUS_SRC_ALPHA"},
     {GL_REPEAT, "GL_REPEAT"},
     {GL_CLAMP_TO_EDGE, "GL_CLAMP_TO_EDGE"},
-    {GL_MIRRORED_REPEAT, "GL_MIRRORED_REPEAT"}
+    {GL_MIRRORED_REPEAT, "GL_MIRRORED_REPEAT"},
+    {GL_NEAREST, "GL_NEAREST"},
+    {GL_LINEAR, "GL_LINEAR"},
+    {GL_LINEAR_MIPMAP_NEAREST, "GL_MIPMAP"}
 };
 
 #elif defined(__WIN32__)

@@ -127,6 +127,15 @@ void CMainWindow::execute(void)
     {
         m_gopTransition->setPaused(true);
     }
+    /*pugi::xml_document document;
+    pugi::xml_parse_result result;
+    result = document.load("");
+    assert(result.status == pugi::status_ok);
+    pugi::xml_node node = document.append_child("material");
+    pugi::xml_attribute attribute = node.append_attribute("is_blending");
+    attribute.set_value("0");
+    document.save_file("material.xml");*/
+
     
 #endif
 }

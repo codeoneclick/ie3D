@@ -84,7 +84,7 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     m_mesh = m_resourceAccessor->getMesh(modelConfiguration->getMeshFilename());
     m_mesh->addLoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
-    m_isBatching = modelConfiguration->isBatching();
+    m_isBatching = modelConfiguration->getBatching();
     
 	IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);

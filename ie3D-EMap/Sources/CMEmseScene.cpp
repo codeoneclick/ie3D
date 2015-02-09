@@ -29,6 +29,7 @@
 #include "CTexture.h"
 #include "CEComplexModel.h"
 #include "CMEModelBrush.h"
+#include "CConfigurationAccessor.h"
 
 CMEmseScene::CMEmseScene(IGameTransition* root) :
 IScene(root),
@@ -267,10 +268,16 @@ void CMEmseScene::generateVertecesDataCommand(const glm::ivec2& size, f32 freque
     m_landscape->generateVertecesData(size, frequency, octaves, seed);
 }
 
-void CMEmseScene::onConfigurationLoaded(ISharedConfigurationRef)
+void CMEmseScene::onConfigurationLoaded(ISharedConfigurationRef configuration)
 {
     m_landscapeMaterial = m_landscape->getMaterial("render.operation.world.base");
     m_landscape->addResourceLoadingCommand(std::bind(&CMEmseScene::onResourceLoaded, this, std::placeholders::_1));
+    CSharedConfigurationLandscape configurationLandscape = std::static_pointer_cast<CConfigurationLandscape>(configuration);
+    for(const auto& iterator : configurationLandscape->getMaterialsConfigurations())
+    {
+        std::shared_ptr<CConfigurationMaterial> configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
+        configurationMaterial->deserialize("ooo.xml");
+    }
 }
 
 void CMEmseScene::onResourceLoaded(ISharedResourceRef resource)

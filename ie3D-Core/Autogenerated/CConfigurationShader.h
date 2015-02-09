@@ -9,13 +9,16 @@ CConfigurationShader(void) = default;
 ~CConfigurationShader(void) = default;
 std::string getVSFilename(void) const;
 #if defined(__EDITOR__)
-void set_vs_filename(std::string vs_filename);
+void setVSFilename(std::string vs_filename);
 #endif
 std::string getFSFilename(void) const;
 #if defined(__EDITOR__)
-void set_fs_filename(std::string fs_filename);
+void setFSFilename(std::string fs_filename);
 #endif
 void serialize(pugi::xml_document& document, const std::string& path);
+#if defined(__EDITOR__)
+void deserialize(pugi::xml_node& node);
+#endif
 void serialize(pugi::xml_document& document, pugi::xpath_node& node);
 };
 #endif

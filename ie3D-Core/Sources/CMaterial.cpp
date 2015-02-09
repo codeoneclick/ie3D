@@ -65,32 +65,32 @@ CSharedMaterial CMaterial::constructCustomMaterial(CSharedConfigurationMaterialR
     assert(renderTechniqueAccessor != nullptr);
     assert(resourceAccessor != nullptr);
     
-    material->setCulling(configuration->isCulling());
+    material->setCulling(configuration->getCulling());
     material->setCullingMode(configuration->getCullingMode());
     
-    material->setBlending(configuration->isBlending());
+    material->setBlending(configuration->getBlending());
     material->setBlendingFunctionSource(configuration->getBlendingFunctionSource());
     material->setBlendingFunctionDestination(configuration->getBlendingFunctionDestination());
     
-    material->setDepthTest(configuration->isDepthTest());
-    material->setDepthMask(configuration->isDepthMask());
+    material->setDepthTest(configuration->getDepthTest());
+    material->setDepthMask(configuration->getDepthMask());
     
-    material->setClipping(configuration->isClipping());
+    material->setClipping(configuration->getClipping());
     material->setClippingPlane(glm::vec4(configuration->getClippingX(),
                                          configuration->getClippingY(),
                                          configuration->getClippingZ(),
                                          configuration->getClippingW()));
     
-    material->setReflecting(configuration->isReflecting());
-    material->setShadowing(configuration->isShadowing());
-    material->setDebugging(configuration->isDebugging());
+    material->setReflecting(configuration->getReflecting());
+    material->setShadowing(configuration->getShadowing());
+    material->setDebugging(configuration->getDebugging());
     
     for(const auto& iterator : configuration->getTexturesConfigurations())
     {
         CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
         assert(textureConfiguration != nullptr);
         CSharedTexture texture;
-        if(textureConfiguration->isCubemap())
+        if(textureConfiguration->getCubemap())
         {
             CSharedTexture xpositiveTexture = resourceAccessor->getTexture(textureConfiguration->getFilenamePositiveX());
             CSharedTexture xnegativeTexture = resourceAccessor->getTexture(textureConfiguration->getFilenameNegativeX());
@@ -111,7 +111,7 @@ CSharedMaterial CMaterial::constructCustomMaterial(CSharedConfigurationMaterialR
         {
             texture = textureConfiguration->getFilename().length() != 0 ?
             resourceAccessor->getTexture(textureConfiguration->getFilename()) :
-            renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderOperationName());
+            renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderTechniqueTextureName());
         }
         assert(texture != nullptr);
         texture->setWrapMode(textureConfiguration->getWrapMode());

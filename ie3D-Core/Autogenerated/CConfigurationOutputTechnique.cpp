@@ -8,7 +8,7 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationOutputTechnique::set_guid(std::string guid)
+void CConfigurationOutputTechnique::setGUID(std::string guid)
 {
 IConfiguration::setAttribute("/output_technique/guid", std::make_shared<CConfigurationAttribute>(guid));
 }
@@ -25,7 +25,7 @@ assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationMaterial>(iterator->second.at(0));
 }
 #if defined(__EDITOR__)
-void CConfigurationOutputTechnique::set_material(const std::shared_ptr<CConfigurationMaterial>& material)
+void CConfigurationOutputTechnique::setConfigurationMaterial(const std::shared_ptr<CConfigurationMaterial>& material)
 {
 IConfiguration::setConfiguration("/output_technique/material", material, 0);
 }
@@ -44,3 +44,17 @@ pugi::xpath_node material_node = document.select_single_node("/output_technique/
 material->serialize(material_node.node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/output_technique/material", material);
 }
+#if defined(__EDITOR__)
+void CConfigurationOutputTechnique::deserialize(const std::string& filename)
+{
+pugi::xml_document document;
+pugi::xml_parse_result result = document.load("");
+assert(result.status == pugi::status_ok);
+pugi::xml_node node = document.append_child("output_technique");
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("guid");
+std::string guid = CConfigurationOutputTechnique::getGUID();
+attribute.set_value(guid.c_str());
+document.save_file(filename.c_str());
+}
+#endif

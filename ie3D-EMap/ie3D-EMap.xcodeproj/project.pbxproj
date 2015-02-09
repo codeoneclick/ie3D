@@ -1564,7 +1564,7 @@
 			name = "Qt Preprocessors";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "make -C /Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap -f ie3D-EMap.xcodeproj/qt_preprocess.mak";
+			shellScript = "#make -C /Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap -f ie3D-EMap.xcodeproj/qt_preprocess.mak";
 		};
 /* End PBXShellScriptBuildPhase section */
 

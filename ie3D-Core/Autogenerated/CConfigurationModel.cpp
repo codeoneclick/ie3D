@@ -8,12 +8,12 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationModel::set_mesh_filename(std::string mesh_filename)
+void CConfigurationModel::setMeshFilename(std::string mesh_filename)
 {
 IConfiguration::setAttribute("/model/mesh_filename", std::make_shared<CConfigurationAttribute>(mesh_filename));
 }
 #endif
-bool CConfigurationModel::isBatching(void) const
+bool CConfigurationModel::getBatching(void) const
 {
 const auto& iterator = m_attributes.find("/model/is_batching");
 assert(iterator != m_attributes.end());
@@ -21,7 +21,7 @@ bool value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationModel::set_is_batching(bool is_batching)
+void CConfigurationModel::setBatching(bool is_batching)
 {
 IConfiguration::setAttribute("/model/is_batching", std::make_shared<CConfigurationAttribute>(is_batching));
 }
@@ -37,13 +37,13 @@ assert(iterator != m_configurations.end());
 return iterator->second;
 }
 #if defined(__EDITOR__)
-void CConfigurationModel::add_material(const std::shared_ptr<CConfigurationMaterial>& material)
+void CConfigurationModel::addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material)
 {
 IConfiguration::setConfiguration("/model/materials/material", material);
 }
 #endif
 #if defined(__EDITOR__)
-void CConfigurationModel::set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+void CConfigurationModel::setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
 {
 IConfiguration::setConfiguration("/model/materials/material", material, index);
 }
@@ -59,13 +59,13 @@ assert(iterator != m_configurations.end());
 return iterator->second;
 }
 #if defined(__EDITOR__)
-void CConfigurationModel::add_animation(const std::shared_ptr<CConfigurationAnimation>& animation)
+void CConfigurationModel::addAnimationsConfigurations(const std::shared_ptr<CConfigurationAnimation>& animation)
 {
 IConfiguration::setConfiguration("/model/animations/animation", animation);
 }
 #endif
 #if defined(__EDITOR__)
-void CConfigurationModel::set_animation(const std::shared_ptr<CConfigurationAnimation>& animation, i32 index)
+void CConfigurationModel::setAnimationsConfigurations(const std::shared_ptr<CConfigurationAnimation>& animation, i32 index)
 {
 IConfiguration::setConfiguration("/model/animations/animation", animation, index);
 }
@@ -97,3 +97,20 @@ animation->serialize(document, node);
 IConfiguration::setConfiguration("/model/animations/animation", animation);
 }
 }
+#if defined(__EDITOR__)
+void CConfigurationModel::deserialize(const std::string& filename)
+{
+pugi::xml_document document;
+pugi::xml_parse_result result = document.load("");
+assert(result.status == pugi::status_ok);
+pugi::xml_node node = document.append_child("model");
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("mesh_filename");
+std::string mesh_filename = CConfigurationModel::getMeshFilename();
+attribute.set_value(mesh_filename.c_str());
+attribute = node.append_attribute("is_batching");
+bool is_batching = CConfigurationModel::getBatching();
+attribute.set_value(is_batching);
+document.save_file(filename.c_str());
+}
+#endif

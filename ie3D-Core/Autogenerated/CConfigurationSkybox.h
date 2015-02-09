@@ -10,11 +10,14 @@ CConfigurationSkybox(void) = default;
 ~CConfigurationSkybox(void) = default;
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 #if defined(__EDITOR__)
-void add_material(const std::shared_ptr<CConfigurationMaterial>& material);
+void addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material);
 #endif
 #if defined(__EDITOR__)
-void set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
+void setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
 #endif
 void serialize(const std::string& filename);
+#if defined(__EDITOR__)
+void deserialize(const std::string& filename);
+#endif
 };
 #endif

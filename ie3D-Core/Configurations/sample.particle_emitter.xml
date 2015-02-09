@@ -3,34 +3,34 @@
     base_class_name="IConfigurationGameObject"
     is_external="1">
     <attributes>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getNumParticles" path="/particle_emitter" attribute_name="num_particles"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getDuration" path="/particle_emitter" attribute_name="duration"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getDurationRandomess" path="/particle_emitter" attribute_name="duration_randomness"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getVelocitySensitivity" path="/particle_emitter" attribute_name="velocity_sensitivity"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getMinHorizontalVelocity" path="/particle_emitter" attribute_name="min_horizontal_velocity"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getMaxHorizontalVelocity" path="/particle_emitter" attribute_name="max_horizontal_velocity"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getMinVerticalVelocity" path="/particle_emitter" attribute_name="min_vertical_velocity"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getMaxVerticalVelocity" path="/particle_emitter" attribute_name="max_vertical_velocity"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getEndVelocity" path="/particle_emitter" attribute_name="end_velocity"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getGravityX" path="/particle_emitter" attribute_name="gravity_x"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getGravityY" path="/particle_emitter" attribute_name="gravity_y"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getGravityZ" path="/particle_emitter" attribute_name="gravity_z"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getSourceColorR" path="/particle_emitter" attribute_name="source_color_r"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getSourceColorG" path="/particle_emitter" attribute_name="source_color_g"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getSourceColorB" path="/particle_emitter" attribute_name="source_color_b"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getSourceColorA" path="/particle_emitter" attribute_name="source_color_a"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getDestinationColorR" path="/particle_emitter" attribute_name="destination_color_r"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getDestinationColorG" path="/particle_emitter" attribute_name="destination_color_g"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getDestinationColorB" path="/particle_emitter" attribute_name="destination_color_b"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getDestinationColorA" path="/particle_emitter" attribute_name="destination_color_a"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getSourceSizeX" path="/particle_emitter" attribute_name="source_size_x"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getSourceSizeY" path="/particle_emitter" attribute_name="source_size_y"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getDestinationSizeX" path="/particle_emitter" attribute_name="destination_size_x"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getDestinationSizeY" path="/particle_emitter" attribute_name="destination_size_y"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getMinEmittInterval" path="/particle_emitter" attribute_name="min_emitt_interval"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getMaxEmittInterval" path="/particle_emitter" attribute_name="max_emitt_interval"/>
+        <attribute type="ui32" property="NumParticles" path="/particle_emitter" name="num_particles"/>
+        <attribute type="ui32" property="Duration" path="/particle_emitter" name="duration"/>
+        <attribute type="f32" property="DurationRandomess" path="/particle_emitter" name="duration_randomness"/>
+        <attribute type="f32" property="VelocitySensitivity" path="/particle_emitter" name="velocity_sensitivity"/>
+        <attribute type="f32" property="MinHorizontalVelocity" path="/particle_emitter" name="min_horizontal_velocity"/>
+        <attribute type="f32" property="MaxHorizontalVelocity" path="/particle_emitter" name="max_horizontal_velocity"/>
+        <attribute type="f32" property="MinVerticalVelocity" path="/particle_emitter" name="min_vertical_velocity"/>
+        <attribute type="f32" property="MaxVerticalVelocity" path="/particle_emitter" name="max_vertical_velocity"/>
+        <attribute type="f32" property="EndVelocity" path="/particle_emitter" name="end_velocity"/>
+        <attribute type="f32" property="GravityX" path="/particle_emitter" name="gravity_x"/>
+        <attribute type="f32" property="GravityY" path="/particle_emitter" name="gravity_y"/>
+        <attribute type="f32" property="GravityZ" path="/particle_emitter" name="gravity_z"/>
+        <attribute type="ui8" property="SourceColorR" path="/particle_emitter" name="source_color_r"/>
+        <attribute type="ui8" property="SourceColorG" path="/particle_emitter" name="source_color_g"/>
+        <attribute type="ui8" property="SourceColorB" path="/particle_emitter" name="source_color_b"/>
+        <attribute type="ui8" property="SourceColorA" path="/particle_emitter" name="source_color_a"/>
+        <attribute type="ui8" property="DestinationColorR" path="/particle_emitter" name="destination_color_r"/>
+        <attribute type="ui8" property="DestinationColorG" path="/particle_emitter" name="destination_color_g"/>
+        <attribute type="ui8" property="DestinationColorB" path="/particle_emitter" name="destination_color_b"/>
+        <attribute type="ui8" property="DestinationColorA" path="/particle_emitter" name="destination_color_a"/>
+        <attribute type="f32" property="SourceSizeX" path="/particle_emitter" name="source_size_x"/>
+        <attribute type="f32" property="SourceSizeY" path="/particle_emitter" name="source_size_y"/>
+        <attribute type="f32" property="DestinationSizeX" path="/particle_emitter" name="destination_size_x"/>
+        <attribute type="f32" property="DestinationSizeY" path="/particle_emitter" name="destination_size_y"/>
+        <attribute type="ui32" property="MinEmittInterval" path="/particle_emitter" name="min_emitt_interval"/>
+        <attribute type="ui32" property="MaxEmittInterval" path="/particle_emitter" name="max_emitt_interval"/>
     </attributes>
     <relationships>
-    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/particle_emitter/materials" relationship_name="material"/>
+    	<relationship type="CConfigurationMaterial" property="MaterialsConfigurations" is_to_many="1" is_external="1" path="/particle_emitter/materials" name="material"/>
     </relationships>
 </particle_emitter>

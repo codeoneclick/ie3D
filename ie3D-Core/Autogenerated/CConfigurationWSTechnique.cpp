@@ -8,12 +8,12 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationWSTechnique::set_guid(std::string guid)
+void CConfigurationWSTechnique::setGUID(std::string guid)
 {
 IConfiguration::setAttribute("/ws_technique/guid", std::make_shared<CConfigurationAttribute>(guid));
 }
 #endif
-bool CConfigurationWSTechnique::areDrawBoundingBoxes(void) const
+bool CConfigurationWSTechnique::getDrawBoundingBoxes(void) const
 {
 const auto& iterator = m_attributes.find("/ws_technique/are_draw_bounding_boxes");
 assert(iterator != m_attributes.end());
@@ -21,7 +21,7 @@ bool value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationWSTechnique::set_are_draw_bounding_boxes(bool are_draw_bounding_boxes)
+void CConfigurationWSTechnique::setDrawBoundingBoxes(bool are_draw_bounding_boxes)
 {
 IConfiguration::setAttribute("/ws_technique/are_draw_bounding_boxes", std::make_shared<CConfigurationAttribute>(are_draw_bounding_boxes));
 }
@@ -34,7 +34,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationWSTechnique::set_index(ui32 index)
+void CConfigurationWSTechnique::setIndex(ui32 index)
 {
 IConfiguration::setAttribute("/ws_technique/index", std::make_shared<CConfigurationAttribute>(index));
 }
@@ -47,7 +47,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationWSTechnique::set_screen_width(ui32 screen_width)
+void CConfigurationWSTechnique::setScreenWidth(ui32 screen_width)
 {
 IConfiguration::setAttribute("/ws_technique/screen_width", std::make_shared<CConfigurationAttribute>(screen_width));
 }
@@ -60,7 +60,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationWSTechnique::set_screen_height(ui32 screen_height)
+void CConfigurationWSTechnique::setScreenHeight(ui32 screen_height)
 {
 IConfiguration::setAttribute("/ws_technique/screen_height", std::make_shared<CConfigurationAttribute>(screen_height));
 }
@@ -73,7 +73,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationWSTechnique::set_clear_color_r(f32 clear_color_r)
+void CConfigurationWSTechnique::setClearColorR(f32 clear_color_r)
 {
 IConfiguration::setAttribute("/ws_technique/clear_color_r", std::make_shared<CConfigurationAttribute>(clear_color_r));
 }
@@ -86,7 +86,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationWSTechnique::set_clear_color_g(f32 clear_color_g)
+void CConfigurationWSTechnique::setClearColorG(f32 clear_color_g)
 {
 IConfiguration::setAttribute("/ws_technique/clear_color_g", std::make_shared<CConfigurationAttribute>(clear_color_g));
 }
@@ -99,7 +99,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationWSTechnique::set_clear_color_b(f32 clear_color_b)
+void CConfigurationWSTechnique::setClearColorB(f32 clear_color_b)
 {
 IConfiguration::setAttribute("/ws_technique/clear_color_b", std::make_shared<CConfigurationAttribute>(clear_color_b));
 }
@@ -112,7 +112,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationWSTechnique::set_clear_color_a(f32 clear_color_a)
+void CConfigurationWSTechnique::setClearColorA(f32 clear_color_a)
 {
 IConfiguration::setAttribute("/ws_technique/clear_color_a", std::make_shared<CConfigurationAttribute>(clear_color_a));
 }
@@ -143,3 +143,41 @@ IConfiguration::setAttribute("/ws_technique/clear_color_b", std::make_shared<CCo
 f32 clear_color_a = node.node().attribute("clear_color_a").as_float();
 IConfiguration::setAttribute("/ws_technique/clear_color_a", std::make_shared<CConfigurationAttribute>(clear_color_a));
 }
+#if defined(__EDITOR__)
+void CConfigurationWSTechnique::deserialize(const std::string& filename)
+{
+pugi::xml_document document;
+pugi::xml_parse_result result = document.load("");
+assert(result.status == pugi::status_ok);
+pugi::xml_node node = document.append_child("ws_technique");
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("guid");
+std::string guid = CConfigurationWSTechnique::getGUID();
+attribute.set_value(guid.c_str());
+attribute = node.append_attribute("are_draw_bounding_boxes");
+bool are_draw_bounding_boxes = CConfigurationWSTechnique::getDrawBoundingBoxes();
+attribute.set_value(are_draw_bounding_boxes);
+attribute = node.append_attribute("index");
+ui32 index = CConfigurationWSTechnique::getIndex();
+attribute.set_value(index);
+attribute = node.append_attribute("screen_width");
+ui32 screen_width = CConfigurationWSTechnique::getScreenWidth();
+attribute.set_value(screen_width);
+attribute = node.append_attribute("screen_height");
+ui32 screen_height = CConfigurationWSTechnique::getScreenHeight();
+attribute.set_value(screen_height);
+attribute = node.append_attribute("clear_color_r");
+f32 clear_color_r = CConfigurationWSTechnique::getClearColorR();
+attribute.set_value(clear_color_r);
+attribute = node.append_attribute("clear_color_g");
+f32 clear_color_g = CConfigurationWSTechnique::getClearColorG();
+attribute.set_value(clear_color_g);
+attribute = node.append_attribute("clear_color_b");
+f32 clear_color_b = CConfigurationWSTechnique::getClearColorB();
+attribute.set_value(clear_color_b);
+attribute = node.append_attribute("clear_color_a");
+f32 clear_color_a = CConfigurationWSTechnique::getClearColorA();
+attribute.set_value(clear_color_a);
+document.save_file(filename.c_str());
+}
+#endif

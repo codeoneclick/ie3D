@@ -3,9 +3,9 @@
     base_class_name="IConfiguration"
     is_external="1">
     <attributes>
-        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getGUID" path="/output_technique" attribute_name="guid"/>
+        <attribute type="std::string" property="GUID" path="/output_technique" name="guid"/>
     </attributes>
     <relationships>
-    	<relationship type="CConfigurationMaterial" getter="getConfigurationMaterial" is_to_many="0" is_external="1" path="/output_technique" relationship_name="material"/>
+    	<relationship type="CConfigurationMaterial" property="ConfigurationMaterial" is_to_many="0" is_external="1" path="/output_technique" name="material"/>
     </relationships>
 </output_technique>

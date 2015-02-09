@@ -10,7 +10,19 @@ public:
 CMEConfigurationModelBrush(void) = default;
 ~CMEConfigurationModelBrush(void) = default;
 std::vector<std::shared_ptr<IConfiguration>> getElementsConfigurations(void) const;
+#if defined(__EDITOR__)
+void addElementsConfigurations(const std::shared_ptr<CMEConfigurationBrushElement>& element);
+#endif
+#if defined(__EDITOR__)
+void setElementsConfigurations(const std::shared_ptr<CMEConfigurationBrushElement>& element, i32 index);
+#endif
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
+#if defined(__EDITOR__)
+void addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material);
+#endif
+#if defined(__EDITOR__)
+void setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
+#endif
 void serialize(const std::string& filename);
 };
 #endif

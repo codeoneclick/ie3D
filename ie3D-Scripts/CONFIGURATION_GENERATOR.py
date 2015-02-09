@@ -42,17 +42,37 @@ def get_attribute_type_converter(attribute_type):
 def write_attributes_serializer(source_cpp_file, attributes):
  	for attribute in attributes:
 
-		source_cpp_file.write(attribute.get('type') + ' ' + attribute.get("attribute_name") + ' = node.node().attribute("'+ attribute.get("attribute_name") + '").' + get_attribute_type_converter(attribute.get('type')) +';\n')
-		if attribute.get('is_convert_to_ogl_enum') == '1':
+		if attribute.get('type') == 'GLenum':
 
-			source_cpp_file.write('assert(g_stringToGLenum.find('+ attribute.get("attribute_name") +') != g_stringToGLenum.end());\n')
-			source_cpp_file.write('GLenum '+ attribute.get("attribute_name") + 'Enum' + ' = g_stringToGLenum.find('+ attribute.get("attribute_name") +')->second;\n')
-			source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("attribute_name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("attribute_name") + 'Enum));\n')
+			source_cpp_file.write('std::string ' + attribute.get("name") + ' = node.node().attribute("'+ attribute.get("name") + '").' + get_attribute_type_converter('std::string') +';\n')
+			source_cpp_file.write('assert(g_stringToGLenum.find('+ attribute.get("name") +') != g_stringToGLenum.end());\n')
+			source_cpp_file.write('GLenum '+ attribute.get("name") + 'Enum' + ' = g_stringToGLenum.find('+ attribute.get("name") +')->second;\n')
+			source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("name") + 'Enum));\n')
 
 		else:
 
-			source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("attribute_name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("attribute_name") + '));\n')
-			
+			source_cpp_file.write(attribute.get('type') + ' ' + attribute.get("name") + ' = node.node().attribute("'+ attribute.get("name") + '").' + get_attribute_type_converter(attribute.get('type')) +';\n')
+			source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("name") + '));\n')
+
+def write_attributes_deserializer(source_cpp_file, attributes, class_name):
+ 	for attribute in attributes:
+
+ 		source_cpp_file.write('attribute = node.append_attribute("' + attribute.get('name') + '");\n')
+
+		if attribute.get('type') == 'GLenum':
+
+			source_cpp_file.write('GLenum ' + attribute.get("name") + 'Enum = ' + class_name + '::get' + attribute.get('property') +'();\n')
+			source_cpp_file.write('assert(g_enumGLToString.find('+ attribute.get("name") +'Enum) != g_enumGLToString.end());\n')
+			source_cpp_file.write('std::string '+ attribute.get("name") + ' = g_enumGLToString.find('+ attribute.get("name") +'Enum)->second;\n')
+
+		else:
+
+			source_cpp_file.write(attribute.get('type') + ' ' + attribute.get("name") + ' = ' + class_name + '::get' + attribute.get('property') +'();\n')
+		
+		if attribute.get('type') == 'GLenum' or attribute.get('type') == 'std::string':
+			source_cpp_file.write('attribute.set_value(' + attribute.get("name") + '.c_str());\n')
+		else:
+			source_cpp_file.write('attribute.set_value(' + attribute.get("name") + ');\n')
 
 
 
@@ -61,36 +81,36 @@ def write_relationships_serializer(source_cpp_file, relationships):
 
 		if relationship.get("is_to_many") == '0':
 
-			source_cpp_file.write('std::shared_ptr<' + relationship.get('type') + '> ' + relationship.get('relationship_name') + ' = std::make_shared<' + relationship.get('type') + '>();\n')
+			source_cpp_file.write('std::shared_ptr<' + relationship.get('type') + '> ' + relationship.get('name') + ' = std::make_shared<' + relationship.get('type') + '>();\n')
 
 			if relationship.get("is_external") == '0':
 
-				source_cpp_file.write(relationship.get('relationship_name') + '->serialize(document, "' + relationship.get('path') + '");\n')
+				source_cpp_file.write(relationship.get('name') + '->serialize(document, "' + relationship.get('path') + '");\n')
 
 			else:
 
-				source_cpp_file.write('pugi::xpath_node ' + relationship.get('relationship_name') + '_node' + ' = document.select_single_node("' + relationship.get('path') + '/' + relationship.get('relationship_name') + '");\n')
-				source_cpp_file.write(relationship.get('relationship_name') + '->serialize(' + relationship.get('relationship_name') + '_node' + '.node().attribute("filename").as_string());\n')
+				source_cpp_file.write('pugi::xpath_node ' + relationship.get('name') + '_node' + ' = document.select_single_node("' + relationship.get('path') + '/' + relationship.get('name') + '");\n')
+				source_cpp_file.write(relationship.get('name') + '->serialize(' + relationship.get('name') + '_node' + '.node().attribute("filename").as_string());\n')
 
-			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("relationship_name") + '", ' + relationship.get('relationship_name') + ');\n')
+			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("name") + '", ' + relationship.get('name') + ');\n')
 
 		else:
 
-			source_cpp_file.write('pugi::xpath_node_set ' + relationship.get('relationship_name') + '_nodes = document.select_nodes("' + relationship.get('path') + '/' + relationship.get('relationship_name') + '");\n')
-			source_cpp_file.write('for (pugi::xpath_node_set::const_iterator iterator = ' + relationship.get('relationship_name') + '_nodes.begin(); iterator != ' + relationship.get('relationship_name') + '_nodes.end(); ++iterator)\n')
+			source_cpp_file.write('pugi::xpath_node_set ' + relationship.get('name') + '_nodes = document.select_nodes("' + relationship.get('path') + '/' + relationship.get('name') + '");\n')
+			source_cpp_file.write('for (pugi::xpath_node_set::const_iterator iterator = ' + relationship.get('name') + '_nodes.begin(); iterator != ' + relationship.get('name') + '_nodes.end(); ++iterator)\n')
 			source_cpp_file.write('{\n')
-			source_cpp_file.write('std::shared_ptr<' + relationship.get('type') + '> ' + relationship.get('relationship_name') + ' = std::make_shared<' + relationship.get('type') + '>();\n')
+			source_cpp_file.write('std::shared_ptr<' + relationship.get('type') + '> ' + relationship.get('name') + ' = std::make_shared<' + relationship.get('type') + '>();\n')
 
 			if relationship.get("is_external") == '0':
 
 				source_cpp_file.write('pugi::xpath_node node = (*iterator);\n')
-				source_cpp_file.write(relationship.get('relationship_name') + '->serialize(document, node);\n')
+				source_cpp_file.write(relationship.get('name') + '->serialize(document, node);\n')
 
 			else:
 
-				source_cpp_file.write(relationship.get('relationship_name') + '->serialize((*iterator).node().attribute("filename").as_string());\n')
+				source_cpp_file.write(relationship.get('name') + '->serialize((*iterator).node().attribute("filename").as_string());\n')
 
-			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("relationship_name") + '", ' + relationship.get('relationship_name') + ');\n')
+			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("name") + '", ' + relationship.get('name') + ');\n')
 			source_cpp_file.write('}\n')
 			
 
@@ -124,47 +144,47 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 
 	for attribute in root.iter('attribute'):
 
-		if attribute.get('is_convert_to_ogl_enum') == '0':
+		if attribute.get('type') == 'GLenum':
 
-			source_h_file.write(attribute.get('type') + ' ' + attribute.get("getter") + '(void) const;\n')
-			source_cpp_file.write(attribute.get('type') + ' ' + class_name + '::' + attribute.get("getter") + '(void) const\n')
+			source_h_file.write('GLenum get' + attribute.get("property") + '(void) const;\n')
+			source_cpp_file.write('GLenum ' + class_name + '::get' + attribute.get("property") + '(void) const\n')
 			source_cpp_file.write('{\n')
-			source_cpp_file.write('const auto& iterator = m_attributes.find(\"' + attribute.get("path") + '/' + attribute.get("attribute_name") + '\");\n')
-			source_cpp_file.write('assert(iterator != m_attributes.end());\n')
-			source_cpp_file.write(attribute.get('type') + ' value; iterator->second->get(&value);\n')
-			source_cpp_file.write('return value;\n')
-			source_cpp_file.write('}\n')
-
-			source_h_file.write('#if defined(__EDITOR__)\n')
-			source_h_file.write('void set_' + attribute.get('attribute_name') + '(' + attribute.get('type') + ' ' + attribute.get('attribute_name') + ');\n')
-			source_h_file.write('#endif\n')
-
-			source_cpp_file.write('#if defined(__EDITOR__)\n')
-			source_cpp_file.write('void ' + class_name + '::set_' + attribute.get('attribute_name') + '(' + attribute.get('type') + ' ' + attribute.get('attribute_name') + ')\n')
-			source_cpp_file.write('{\n')
-			source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("attribute_name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("attribute_name") + '));\n')
-			source_cpp_file.write('}\n')
-			source_cpp_file.write('#endif\n')
-
-		else:
-
-			source_h_file.write('GLenum ' + attribute.get("getter") + '(void) const;\n')
-			source_cpp_file.write('GLenum ' + class_name + '::' + attribute.get("getter") + '(void) const\n')
-			source_cpp_file.write('{\n')
-			source_cpp_file.write('const auto& iterator = m_attributes.find(\"' + attribute.get("path") + '/' + attribute.get("attribute_name") + '\");\n')
+			source_cpp_file.write('const auto& iterator = m_attributes.find(\"' + attribute.get("path") + '/' + attribute.get("name") + '\");\n')
 			source_cpp_file.write('assert(iterator != m_attributes.end());\n')
 			source_cpp_file.write('GLenum value; iterator->second->get(&value);\n')
 			source_cpp_file.write('return value;\n')
 			source_cpp_file.write('}\n')
 
 			source_h_file.write('#if defined(__EDITOR__)\n')
-			source_h_file.write('void set_' + attribute.get('attribute_name') + '(GLenum ' + attribute.get('attribute_name') + ');\n')
+			source_h_file.write('void set' + attribute.get('property') + '(GLenum ' + attribute.get('name') + ');\n')
 			source_h_file.write('#endif\n')
 
 			source_cpp_file.write('#if defined(__EDITOR__)\n')
-			source_cpp_file.write('void ' + class_name + '::set_' + attribute.get('attribute_name') + '(GLenum ' + attribute.get('attribute_name') + ')\n')
+			source_cpp_file.write('void ' + class_name + '::set' + attribute.get('property') + '(GLenum ' + attribute.get('name') + ')\n')
 			source_cpp_file.write('{\n')
-			source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("attribute_name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("attribute_name") + '));\n')
+			source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("name") + '));\n')
+			source_cpp_file.write('}\n')
+			source_cpp_file.write('#endif\n')
+
+		else:
+
+			source_h_file.write(attribute.get('type') + ' get' + attribute.get("property") + '(void) const;\n')
+			source_cpp_file.write(attribute.get('type') + ' ' + class_name + '::get' + attribute.get("property") + '(void) const\n')
+			source_cpp_file.write('{\n')
+			source_cpp_file.write('const auto& iterator = m_attributes.find(\"' + attribute.get("path") + '/' + attribute.get("name") + '\");\n')
+			source_cpp_file.write('assert(iterator != m_attributes.end());\n')
+			source_cpp_file.write(attribute.get('type') + ' value; iterator->second->get(&value);\n')
+			source_cpp_file.write('return value;\n')
+			source_cpp_file.write('}\n')
+
+			source_h_file.write('#if defined(__EDITOR__)\n')
+			source_h_file.write('void set' + attribute.get('property') + '(' + attribute.get('type') + ' ' + attribute.get('name') + ');\n')
+			source_h_file.write('#endif\n')
+
+			source_cpp_file.write('#if defined(__EDITOR__)\n')
+			source_cpp_file.write('void ' + class_name + '::set' + attribute.get('property') + '(' + attribute.get('type') + ' ' + attribute.get('name') + ')\n')
+			source_cpp_file.write('{\n')
+			source_cpp_file.write('IConfiguration::setAttribute("' + attribute.get("path") + '/' + attribute.get("name") + '", std::make_shared<CConfigurationAttribute>(' + attribute.get("name") + '));\n')
 			source_cpp_file.write('}\n')
 			source_cpp_file.write('#endif\n')
 		
@@ -173,10 +193,10 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 
 		if relationship.get("is_to_many") == '0':
 
-			source_h_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + relationship.get("getter") + '(void) const;\n')
-			source_cpp_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + class_name + '::' + relationship.get("getter") + '(void) const\n')
+			source_h_file.write('std::shared_ptr<' + relationship.get("type") + '> get' + relationship.get("property") + '(void) const;\n')
+			source_cpp_file.write('std::shared_ptr<' + relationship.get("type") + '> ' + class_name + '::get' + relationship.get("property") + '(void) const\n')
 			source_cpp_file.write('{\n')
-			source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("relationship_name") + '\");\n')
+			source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("name") + '\");\n')
 			source_cpp_file.write('if(iterator == m_configurations.end())\n')
 			source_cpp_file.write('{\n')
 			source_cpp_file.write('return nullptr;\n')
@@ -187,22 +207,22 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 			source_cpp_file.write('}\n')
 
 			source_h_file.write('#if defined(__EDITOR__)\n')
-			source_h_file.write('void set_' + relationship.get('relationship_name') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('relationship_name') + ');\n')
+			source_h_file.write('void set' + relationship.get('property') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('name') + ');\n')
 			source_h_file.write('#endif\n')
 
 			source_cpp_file.write('#if defined(__EDITOR__)\n')
-			source_cpp_file.write('void ' + class_name + '::set_' + relationship.get('relationship_name') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('relationship_name') + ')\n')
+			source_cpp_file.write('void ' + class_name + '::set' + relationship.get('property') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('name') + ')\n')
 			source_cpp_file.write('{\n')
-			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("relationship_name") + '", ' + relationship.get('relationship_name') + ', 0);\n')
+			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("name") + '", ' + relationship.get('name') + ', 0);\n')
 			source_cpp_file.write('}\n')
 			source_cpp_file.write('#endif\n')
 
 		else:
 
-			source_h_file.write('std::vector<std::shared_ptr<IConfiguration>> ' + relationship.get("getter") + '(void) const;\n')
-			source_cpp_file.write('std::vector<std::shared_ptr<IConfiguration>> ' + class_name + '::' + relationship.get("getter") + '(void) const\n')
+			source_h_file.write('std::vector<std::shared_ptr<IConfiguration>> get' + relationship.get("property") + '(void) const;\n')
+			source_cpp_file.write('std::vector<std::shared_ptr<IConfiguration>> ' + class_name + '::get' + relationship.get("property") + '(void) const\n')
 			source_cpp_file.write('{\n')
-			source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("relationship_name") + '\");\n')
+			source_cpp_file.write('const auto& iterator = m_configurations.find(\"' + relationship.get("path") + '/' + relationship.get("name") + '\");\n')
 			source_cpp_file.write('if(iterator == m_configurations.end())\n')
 			source_cpp_file.write('{\n')
 			source_cpp_file.write('return std::vector<std::shared_ptr<IConfiguration>>();\n')
@@ -212,24 +232,24 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 			source_cpp_file.write('}\n')
 
 			source_h_file.write('#if defined(__EDITOR__)\n')
-			source_h_file.write('void add_' + relationship.get('relationship_name') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('relationship_name') + ');\n')
+			source_h_file.write('void add' + relationship.get('property') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('name') + ');\n')
 			source_h_file.write('#endif\n')
 
 			source_cpp_file.write('#if defined(__EDITOR__)\n')
-			source_cpp_file.write('void ' + class_name + '::add_' + relationship.get('relationship_name') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('relationship_name') + ')\n')
+			source_cpp_file.write('void ' + class_name + '::add' + relationship.get('property') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('name') + ')\n')
 			source_cpp_file.write('{\n')
-			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("relationship_name") + '", ' + relationship.get('relationship_name') + ');\n')
+			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("name") + '", ' + relationship.get('name') + ');\n')
 			source_cpp_file.write('}\n')
 			source_cpp_file.write('#endif\n')
 
 			source_h_file.write('#if defined(__EDITOR__)\n')
-			source_h_file.write('void set_' + relationship.get('relationship_name') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('relationship_name') + ', i32 index);\n')
+			source_h_file.write('void set' + relationship.get('property') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('name') + ', i32 index);\n')
 			source_h_file.write('#endif\n')
 
 			source_cpp_file.write('#if defined(__EDITOR__)\n')
-			source_cpp_file.write('void ' + class_name + '::set_' + relationship.get('relationship_name') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('relationship_name') + ', i32 index)\n')
+			source_cpp_file.write('void ' + class_name + '::set' + relationship.get('property') + '(const std::shared_ptr<' + relationship.get('type') + '>& ' + relationship.get('name') + ', i32 index)\n')
 			source_cpp_file.write('{\n')
-			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("relationship_name") + '", ' + relationship.get('relationship_name') + ', index);\n')
+			source_cpp_file.write('IConfiguration::setConfiguration("' + relationship.get('path') + '/' + relationship.get("name") + '", ' + relationship.get('name') + ', index);\n')
 			source_cpp_file.write('}\n')
 			source_cpp_file.write('#endif\n')
 
@@ -240,6 +260,21 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 		source_cpp_file.write('{\n')
 		source_cpp_file.write('pugi::xpath_node node;\n')
 		source_cpp_file.write('node = document.select_single_node((path + "/' + root.tag + '").c_str());\n')
+		write_attributes_serializer(source_cpp_file, root.iter('attribute'))
+		write_relationships_serializer(source_cpp_file, root.iter('relationship'))
+		source_cpp_file.write('}\n')
+
+		source_h_file.write('#if defined(__EDITOR__)\n')
+		source_h_file.write('void deserialize(pugi::xml_node& node);\n')
+		source_h_file.write('#endif\n')
+
+		source_cpp_file.write('#if defined(__EDITOR__)\n')
+		source_cpp_file.write('void ' + class_name + '::deserialize(pugi::xml_node& node)\n')
+		source_cpp_file.write('{\n')
+		source_cpp_file.write('pugi::xml_attribute attribute;\n');
+		write_attributes_deserializer(source_cpp_file, root.iter('attribute'), class_name)
+		source_cpp_file.write('}\n')
+		source_cpp_file.write('#endif\n')
 
 	else:
 
@@ -251,11 +286,27 @@ def parse_xml(filename, accessor_class_source_h_file, accessor_class_source_cpp_
 		source_cpp_file.write('assert(result.status == pugi::status_ok);\n')
 		source_cpp_file.write('pugi::xpath_node node;\n')
 		source_cpp_file.write('node = document.select_single_node("/' + root.tag + '");\n')
+		write_attributes_serializer(source_cpp_file, root.iter('attribute'))
+		write_relationships_serializer(source_cpp_file, root.iter('relationship'))
+		source_cpp_file.write('}\n')
 
-	write_attributes_serializer(source_cpp_file, root.iter('attribute'))
-	write_relationships_serializer(source_cpp_file, root.iter('relationship'))
+		source_h_file.write('#if defined(__EDITOR__)\n')
+		source_h_file.write('void deserialize(const std::string& filename);\n')
+		source_h_file.write('#endif\n')
 
-	source_cpp_file.write('}\n')
+		source_cpp_file.write('#if defined(__EDITOR__)\n')
+		source_cpp_file.write('void ' + class_name + '::deserialize(const std::string& filename)\n')
+		source_cpp_file.write('{\n')
+		source_cpp_file.write('pugi::xml_document document;\n')
+		source_cpp_file.write('pugi::xml_parse_result result = document.load("");\n')
+		source_cpp_file.write('assert(result.status == pugi::status_ok);\n')
+		source_cpp_file.write('pugi::xml_node node = document.append_child("' + root.tag + '");\n')
+		source_cpp_file.write('pugi::xml_attribute attribute;\n')
+		write_attributes_deserializer(source_cpp_file, root.iter('attribute'), class_name)
+		source_cpp_file.write('document.save_file(filename.c_str());\n')
+		source_cpp_file.write('}\n')
+		source_cpp_file.write('#endif\n')
+	
 
 	if is_external == "0":
 

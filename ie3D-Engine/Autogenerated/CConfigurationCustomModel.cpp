@@ -10,6 +10,18 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
+#if defined(__EDITOR__)
+void CConfigurationCustomModel::addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material)
+{
+IConfiguration::setConfiguration("/custom_model/materials/material", material);
+}
+#endif
+#if defined(__EDITOR__)
+void CConfigurationCustomModel::setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+{
+IConfiguration::setConfiguration("/custom_model/materials/material", material, index);
+}
+#endif
 void CConfigurationCustomModel::serialize(const std::string& filename)
 {
 pugi::xml_document document;

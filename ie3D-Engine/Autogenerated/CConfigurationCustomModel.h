@@ -9,6 +9,12 @@ public:
 CConfigurationCustomModel(void) = default;
 ~CConfigurationCustomModel(void) = default;
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
+#if defined(__EDITOR__)
+void addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material);
+#endif
+#if defined(__EDITOR__)
+void setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
+#endif
 void serialize(const std::string& filename);
 };
 #endif

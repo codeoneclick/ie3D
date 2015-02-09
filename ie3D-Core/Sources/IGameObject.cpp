@@ -182,7 +182,7 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
                                                                        m_resourceAccessor,
                                                                        m_renderTechniqueAccessor,
                                                                        shared_from_this());
-        m_materials.insert(std::make_pair(configurationMaterial->getRenderOperationName(), material));
+        m_materials.insert(std::make_pair(configurationMaterial->getRenderTechniqueName(), material));
     }
 }
 

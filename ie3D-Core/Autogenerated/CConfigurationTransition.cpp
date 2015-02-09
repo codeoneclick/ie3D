@@ -8,7 +8,7 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationTransition::set_guid(std::string guid)
+void CConfigurationTransition::setGUID(std::string guid)
 {
 IConfiguration::setAttribute("/transition/guid", std::make_shared<CConfigurationAttribute>(guid));
 }
@@ -25,7 +25,7 @@ assert(iterator->second.size() != 0);
 return std::static_pointer_cast<CConfigurationOutputTechnique>(iterator->second.at(0));
 }
 #if defined(__EDITOR__)
-void CConfigurationTransition::set_output_technique(const std::shared_ptr<CConfigurationOutputTechnique>& output_technique)
+void CConfigurationTransition::setConfigurationOutputTechnique(const std::shared_ptr<CConfigurationOutputTechnique>& output_technique)
 {
 IConfiguration::setConfiguration("/transition/output_technique", output_technique, 0);
 }
@@ -41,13 +41,13 @@ assert(iterator != m_configurations.end());
 return iterator->second;
 }
 #if defined(__EDITOR__)
-void CConfigurationTransition::add_ws_technique(const std::shared_ptr<CConfigurationWSTechnique>& ws_technique)
+void CConfigurationTransition::addConfigurationWSTechnique(const std::shared_ptr<CConfigurationWSTechnique>& ws_technique)
 {
 IConfiguration::setConfiguration("/transition/ws_techniques/ws_technique", ws_technique);
 }
 #endif
 #if defined(__EDITOR__)
-void CConfigurationTransition::set_ws_technique(const std::shared_ptr<CConfigurationWSTechnique>& ws_technique, i32 index)
+void CConfigurationTransition::setConfigurationWSTechnique(const std::shared_ptr<CConfigurationWSTechnique>& ws_technique, i32 index)
 {
 IConfiguration::setConfiguration("/transition/ws_techniques/ws_technique", ws_technique, index);
 }
@@ -63,13 +63,13 @@ assert(iterator != m_configurations.end());
 return iterator->second;
 }
 #if defined(__EDITOR__)
-void CConfigurationTransition::add_ss_technique(const std::shared_ptr<CConfigurationSSTechnique>& ss_technique)
+void CConfigurationTransition::addConfigurationSSTechnique(const std::shared_ptr<CConfigurationSSTechnique>& ss_technique)
 {
 IConfiguration::setConfiguration("/transition/ss_techniques/ss_technique", ss_technique);
 }
 #endif
 #if defined(__EDITOR__)
-void CConfigurationTransition::set_ss_technique(const std::shared_ptr<CConfigurationSSTechnique>& ss_technique, i32 index)
+void CConfigurationTransition::setConfigurationSSTechnique(const std::shared_ptr<CConfigurationSSTechnique>& ss_technique, i32 index)
 {
 IConfiguration::setConfiguration("/transition/ss_techniques/ss_technique", ss_technique, index);
 }
@@ -102,3 +102,17 @@ ss_technique->serialize((*iterator).node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/transition/ss_techniques/ss_technique", ss_technique);
 }
 }
+#if defined(__EDITOR__)
+void CConfigurationTransition::deserialize(const std::string& filename)
+{
+pugi::xml_document document;
+pugi::xml_parse_result result = document.load("");
+assert(result.status == pugi::status_ok);
+pugi::xml_node node = document.append_child("transition");
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("guid");
+std::string guid = CConfigurationTransition::getGUID();
+attribute.set_value(guid.c_str());
+document.save_file(filename.c_str());
+}
+#endif

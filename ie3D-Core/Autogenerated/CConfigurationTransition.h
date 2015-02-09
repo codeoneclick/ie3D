@@ -12,26 +12,29 @@ CConfigurationTransition(void) = default;
 ~CConfigurationTransition(void) = default;
 std::string getGUID(void) const;
 #if defined(__EDITOR__)
-void set_guid(std::string guid);
+void setGUID(std::string guid);
 #endif
 std::shared_ptr<CConfigurationOutputTechnique> getConfigurationOutputTechnique(void) const;
 #if defined(__EDITOR__)
-void set_output_technique(const std::shared_ptr<CConfigurationOutputTechnique>& output_technique);
+void setConfigurationOutputTechnique(const std::shared_ptr<CConfigurationOutputTechnique>& output_technique);
 #endif
 std::vector<std::shared_ptr<IConfiguration>> getConfigurationWSTechnique(void) const;
 #if defined(__EDITOR__)
-void add_ws_technique(const std::shared_ptr<CConfigurationWSTechnique>& ws_technique);
+void addConfigurationWSTechnique(const std::shared_ptr<CConfigurationWSTechnique>& ws_technique);
 #endif
 #if defined(__EDITOR__)
-void set_ws_technique(const std::shared_ptr<CConfigurationWSTechnique>& ws_technique, i32 index);
+void setConfigurationWSTechnique(const std::shared_ptr<CConfigurationWSTechnique>& ws_technique, i32 index);
 #endif
 std::vector<std::shared_ptr<IConfiguration>> getConfigurationSSTechnique(void) const;
 #if defined(__EDITOR__)
-void add_ss_technique(const std::shared_ptr<CConfigurationSSTechnique>& ss_technique);
+void addConfigurationSSTechnique(const std::shared_ptr<CConfigurationSSTechnique>& ss_technique);
 #endif
 #if defined(__EDITOR__)
-void set_ss_technique(const std::shared_ptr<CConfigurationSSTechnique>& ss_technique, i32 index);
+void setConfigurationSSTechnique(const std::shared_ptr<CConfigurationSSTechnique>& ss_technique, i32 index);
 #endif
 void serialize(const std::string& filename);
+#if defined(__EDITOR__)
+void deserialize(const std::string& filename);
+#endif
 };
 #endif

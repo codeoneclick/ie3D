@@ -10,6 +10,18 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
+#if defined(__EDITOR__)
+void CMEConfigurationModelBrush::addElementsConfigurations(const std::shared_ptr<CMEConfigurationBrushElement>& element)
+{
+IConfiguration::setConfiguration("/model_brush/elements/element", element);
+}
+#endif
+#if defined(__EDITOR__)
+void CMEConfigurationModelBrush::setElementsConfigurations(const std::shared_ptr<CMEConfigurationBrushElement>& element, i32 index)
+{
+IConfiguration::setConfiguration("/model_brush/elements/element", element, index);
+}
+#endif
 std::vector<std::shared_ptr<IConfiguration>> CMEConfigurationModelBrush::getMaterialsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/model_brush/materials/material");
@@ -20,6 +32,18 @@ return std::vector<std::shared_ptr<IConfiguration>>();
 assert(iterator != m_configurations.end());
 return iterator->second;
 }
+#if defined(__EDITOR__)
+void CMEConfigurationModelBrush::addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material)
+{
+IConfiguration::setConfiguration("/model_brush/materials/material", material);
+}
+#endif
+#if defined(__EDITOR__)
+void CMEConfigurationModelBrush::setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+{
+IConfiguration::setConfiguration("/model_brush/materials/material", material, index);
+}
+#endif
 void CMEConfigurationModelBrush::serialize(const std::string& filename)
 {
 pugi::xml_document document;

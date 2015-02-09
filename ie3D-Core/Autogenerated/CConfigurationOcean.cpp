@@ -8,7 +8,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationOcean::set_size(ui32 size)
+void CConfigurationOcean::setSize(ui32 size)
 {
 IConfiguration::setAttribute("/ocean/size", std::make_shared<CConfigurationAttribute>(size));
 }
@@ -21,7 +21,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationOcean::set_altitude(f32 altitude)
+void CConfigurationOcean::setAltitude(f32 altitude)
 {
 IConfiguration::setAttribute("/ocean/altitude", std::make_shared<CConfigurationAttribute>(altitude));
 }
@@ -34,7 +34,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationOcean::set_wave_generation_interval(f32 wave_generation_interval)
+void CConfigurationOcean::setWaveGenerationInterval(f32 wave_generation_interval)
 {
 IConfiguration::setAttribute("/ocean/wave_generation_interval", std::make_shared<CConfigurationAttribute>(wave_generation_interval));
 }
@@ -50,13 +50,13 @@ assert(iterator != m_configurations.end());
 return iterator->second;
 }
 #if defined(__EDITOR__)
-void CConfigurationOcean::add_material(const std::shared_ptr<CConfigurationMaterial>& material)
+void CConfigurationOcean::addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material)
 {
 IConfiguration::setConfiguration("/ocean/materials/material", material);
 }
 #endif
 #if defined(__EDITOR__)
-void CConfigurationOcean::set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+void CConfigurationOcean::setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
 {
 IConfiguration::setConfiguration("/ocean/materials/material", material, index);
 }
@@ -82,3 +82,23 @@ material->serialize((*iterator).node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/ocean/materials/material", material);
 }
 }
+#if defined(__EDITOR__)
+void CConfigurationOcean::deserialize(const std::string& filename)
+{
+pugi::xml_document document;
+pugi::xml_parse_result result = document.load("");
+assert(result.status == pugi::status_ok);
+pugi::xml_node node = document.append_child("ocean");
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("size");
+ui32 size = CConfigurationOcean::getSize();
+attribute.set_value(size);
+attribute = node.append_attribute("altitude");
+f32 altitude = CConfigurationOcean::getAltitude();
+attribute.set_value(altitude);
+attribute = node.append_attribute("wave_generation_interval");
+f32 wave_generation_interval = CConfigurationOcean::getWaveGenerationInterval();
+attribute.set_value(wave_generation_interval);
+document.save_file(filename.c_str());
+}
+#endif

@@ -5,6 +5,6 @@
     <attributes>
     </attributes>
     <relationships>
-    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/skybox/materials" relationship_name="material"/>
+    	<relationship type="CConfigurationMaterial" property="MaterialsConfigurations" is_to_many="1" is_external="1" path="/skybox/materials" name="material"/>
     </relationships>
 </skybox>

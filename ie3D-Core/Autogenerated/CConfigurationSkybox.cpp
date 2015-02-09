@@ -11,13 +11,13 @@ assert(iterator != m_configurations.end());
 return iterator->second;
 }
 #if defined(__EDITOR__)
-void CConfigurationSkybox::add_material(const std::shared_ptr<CConfigurationMaterial>& material)
+void CConfigurationSkybox::addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material)
 {
 IConfiguration::setConfiguration("/skybox/materials/material", material);
 }
 #endif
 #if defined(__EDITOR__)
-void CConfigurationSkybox::set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+void CConfigurationSkybox::setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
 {
 IConfiguration::setConfiguration("/skybox/materials/material", material, index);
 }
@@ -37,3 +37,14 @@ material->serialize((*iterator).node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/skybox/materials/material", material);
 }
 }
+#if defined(__EDITOR__)
+void CConfigurationSkybox::deserialize(const std::string& filename)
+{
+pugi::xml_document document;
+pugi::xml_parse_result result = document.load("");
+assert(result.status == pugi::status_ok);
+pugi::xml_node node = document.append_child("skybox");
+pugi::xml_attribute attribute;
+document.save_file(filename.c_str());
+}
+#endif

@@ -10,115 +10,118 @@ CConfigurationParticleEmitter(void) = default;
 ~CConfigurationParticleEmitter(void) = default;
 ui32 getNumParticles(void) const;
 #if defined(__EDITOR__)
-void set_num_particles(ui32 num_particles);
+void setNumParticles(ui32 num_particles);
 #endif
 ui32 getDuration(void) const;
 #if defined(__EDITOR__)
-void set_duration(ui32 duration);
+void setDuration(ui32 duration);
 #endif
 f32 getDurationRandomess(void) const;
 #if defined(__EDITOR__)
-void set_duration_randomness(f32 duration_randomness);
+void setDurationRandomess(f32 duration_randomness);
 #endif
 f32 getVelocitySensitivity(void) const;
 #if defined(__EDITOR__)
-void set_velocity_sensitivity(f32 velocity_sensitivity);
+void setVelocitySensitivity(f32 velocity_sensitivity);
 #endif
 f32 getMinHorizontalVelocity(void) const;
 #if defined(__EDITOR__)
-void set_min_horizontal_velocity(f32 min_horizontal_velocity);
+void setMinHorizontalVelocity(f32 min_horizontal_velocity);
 #endif
 f32 getMaxHorizontalVelocity(void) const;
 #if defined(__EDITOR__)
-void set_max_horizontal_velocity(f32 max_horizontal_velocity);
+void setMaxHorizontalVelocity(f32 max_horizontal_velocity);
 #endif
 f32 getMinVerticalVelocity(void) const;
 #if defined(__EDITOR__)
-void set_min_vertical_velocity(f32 min_vertical_velocity);
+void setMinVerticalVelocity(f32 min_vertical_velocity);
 #endif
 f32 getMaxVerticalVelocity(void) const;
 #if defined(__EDITOR__)
-void set_max_vertical_velocity(f32 max_vertical_velocity);
+void setMaxVerticalVelocity(f32 max_vertical_velocity);
 #endif
 f32 getEndVelocity(void) const;
 #if defined(__EDITOR__)
-void set_end_velocity(f32 end_velocity);
+void setEndVelocity(f32 end_velocity);
 #endif
 f32 getGravityX(void) const;
 #if defined(__EDITOR__)
-void set_gravity_x(f32 gravity_x);
+void setGravityX(f32 gravity_x);
 #endif
 f32 getGravityY(void) const;
 #if defined(__EDITOR__)
-void set_gravity_y(f32 gravity_y);
+void setGravityY(f32 gravity_y);
 #endif
 f32 getGravityZ(void) const;
 #if defined(__EDITOR__)
-void set_gravity_z(f32 gravity_z);
+void setGravityZ(f32 gravity_z);
 #endif
 ui8 getSourceColorR(void) const;
 #if defined(__EDITOR__)
-void set_source_color_r(ui8 source_color_r);
+void setSourceColorR(ui8 source_color_r);
 #endif
 ui8 getSourceColorG(void) const;
 #if defined(__EDITOR__)
-void set_source_color_g(ui8 source_color_g);
+void setSourceColorG(ui8 source_color_g);
 #endif
 ui8 getSourceColorB(void) const;
 #if defined(__EDITOR__)
-void set_source_color_b(ui8 source_color_b);
+void setSourceColorB(ui8 source_color_b);
 #endif
 ui8 getSourceColorA(void) const;
 #if defined(__EDITOR__)
-void set_source_color_a(ui8 source_color_a);
+void setSourceColorA(ui8 source_color_a);
 #endif
 ui8 getDestinationColorR(void) const;
 #if defined(__EDITOR__)
-void set_destination_color_r(ui8 destination_color_r);
+void setDestinationColorR(ui8 destination_color_r);
 #endif
 ui8 getDestinationColorG(void) const;
 #if defined(__EDITOR__)
-void set_destination_color_g(ui8 destination_color_g);
+void setDestinationColorG(ui8 destination_color_g);
 #endif
 ui8 getDestinationColorB(void) const;
 #if defined(__EDITOR__)
-void set_destination_color_b(ui8 destination_color_b);
+void setDestinationColorB(ui8 destination_color_b);
 #endif
 ui8 getDestinationColorA(void) const;
 #if defined(__EDITOR__)
-void set_destination_color_a(ui8 destination_color_a);
+void setDestinationColorA(ui8 destination_color_a);
 #endif
 f32 getSourceSizeX(void) const;
 #if defined(__EDITOR__)
-void set_source_size_x(f32 source_size_x);
+void setSourceSizeX(f32 source_size_x);
 #endif
 f32 getSourceSizeY(void) const;
 #if defined(__EDITOR__)
-void set_source_size_y(f32 source_size_y);
+void setSourceSizeY(f32 source_size_y);
 #endif
 f32 getDestinationSizeX(void) const;
 #if defined(__EDITOR__)
-void set_destination_size_x(f32 destination_size_x);
+void setDestinationSizeX(f32 destination_size_x);
 #endif
 f32 getDestinationSizeY(void) const;
 #if defined(__EDITOR__)
-void set_destination_size_y(f32 destination_size_y);
+void setDestinationSizeY(f32 destination_size_y);
 #endif
 ui32 getMinEmittInterval(void) const;
 #if defined(__EDITOR__)
-void set_min_emitt_interval(ui32 min_emitt_interval);
+void setMinEmittInterval(ui32 min_emitt_interval);
 #endif
 ui32 getMaxEmittInterval(void) const;
 #if defined(__EDITOR__)
-void set_max_emitt_interval(ui32 max_emitt_interval);
+void setMaxEmittInterval(ui32 max_emitt_interval);
 #endif
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 #if defined(__EDITOR__)
-void add_material(const std::shared_ptr<CConfigurationMaterial>& material);
+void addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material);
 #endif
 #if defined(__EDITOR__)
-void set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
+void setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
 #endif
 void serialize(const std::string& filename);
+#if defined(__EDITOR__)
+void deserialize(const std::string& filename);
+#endif
 };
 #endif

@@ -2000,7 +2000,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "python \"${SRCROOT}/../ie3D-Scripts/CONFIGURATION_GENERATOR.py\" current_accessor_CConfigurationAccessor declaration_HConfigurationDeclarations";
+			shellScript = "#python \"${SRCROOT}/../ie3D-Scripts/CONFIGURATION_GENERATOR.py\" current_accessor_CConfigurationAccessor declaration_HConfigurationDeclarations";
 		};
 /* End PBXShellScriptBuildPhase section */
 

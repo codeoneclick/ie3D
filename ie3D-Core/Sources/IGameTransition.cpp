@@ -159,7 +159,7 @@ void IGameTransition::onConfigurationLoaded(ISharedConfigurationRef configuratio
                                     configurationWSTechnique->getClearColorB(),
                                     configurationWSTechnique->getClearColorA());
         renderWSTechnique->setClearColor(color);
-        renderWSTechnique->setAreDrawBoundingBoxes(configurationWSTechnique->areDrawBoundingBoxes());
+        renderWSTechnique->setAreDrawBoundingBoxes(configurationWSTechnique->getDrawBoundingBoxes());
         m_renderPipeline->addWorldSpaceRenderTechnique(configurationWSTechnique->getGUID(), renderWSTechnique);
     }
     

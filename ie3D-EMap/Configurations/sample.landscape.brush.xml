@@ -3,9 +3,9 @@
     base_class_name="IConfigurationGameObject"
     is_external="1">
     <attributes>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getSize" path="/landscape_brush" attribute_name="size"/>
+        <attribute type="f32" property="getSize" path="/landscape_brush" name="size"/>
     </attributes>
     <relationships>
-    	<relationship type="CConfigurationMaterial" getter="getMaterialsConfigurations" is_to_many="1" is_external="1" path="/landscape_brush/materials" relationship_name="material"/>
+    	<relationship type="CConfigurationMaterial" property="MaterialsConfigurations" is_to_many="1" is_external="1" path="/landscape_brush/materials" name="material"/>
     </relationships>
 </landscape_brush>

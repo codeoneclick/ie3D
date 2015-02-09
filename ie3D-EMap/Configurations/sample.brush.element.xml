@@ -3,13 +3,13 @@
     base_class_name="IConfiguration"
     is_external="0">
     <attributes>
-        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getName" path="/brush_element" attribute_name="name"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getColorR" path="/brush_element" attribute_name="color_r"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getColorG" path="/brush_element" attribute_name="color_g"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getColorB" path="/brush_element" attribute_name="color_b"/>
-        <attribute type="ui8" is_convert_to_ogl_enum="0" getter="getColorA" path="/brush_element" attribute_name="color_a"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getWidth" path="/brush_element" attribute_name="width"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getHeight" path="/brush_element" attribute_name="height"/>
+        <attribute type="std::string" property="Name" path="/brush_element" name="name"/>
+        <attribute type="ui8" property="ColorR" path="/brush_element" name="color_r"/>
+        <attribute type="ui8" property="ColorG" path="/brush_element" name="color_g"/>
+        <attribute type="ui8" property="ColorB" path="/brush_element" name="color_b"/>
+        <attribute type="ui8" property="ColorA" path="/brush_element" name="color_a"/>
+        <attribute type="f32" property="Width" path="/brush_element" name="width"/>
+        <attribute type="f32" property="Height" path="/brush_element" name="height"/>
     </attributes>
     <relationships>
     </relationships>

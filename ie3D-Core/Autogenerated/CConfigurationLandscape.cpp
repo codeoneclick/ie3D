@@ -8,7 +8,7 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationLandscape::set_heightmap_data_filename(std::string heightmap_data_filename)
+void CConfigurationLandscape::setHeightmapDataFilename(std::string heightmap_data_filename)
 {
 IConfiguration::setAttribute("/landscape/heightmap_data_filename", std::make_shared<CConfigurationAttribute>(heightmap_data_filename));
 }
@@ -21,7 +21,7 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationLandscape::set_splatting_data_filename(std::string splatting_data_filename)
+void CConfigurationLandscape::setSplattingDataFilename(std::string splatting_data_filename)
 {
 IConfiguration::setAttribute("/landscape/splatting_data_filename", std::make_shared<CConfigurationAttribute>(splatting_data_filename));
 }
@@ -34,7 +34,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationLandscape::set_size_x(ui32 size_x)
+void CConfigurationLandscape::setSizeX(ui32 size_x)
 {
 IConfiguration::setAttribute("/landscape/size_x", std::make_shared<CConfigurationAttribute>(size_x));
 }
@@ -47,7 +47,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationLandscape::set_size_y(ui32 size_y)
+void CConfigurationLandscape::setSizeY(ui32 size_y)
 {
 IConfiguration::setAttribute("/landscape/size_y", std::make_shared<CConfigurationAttribute>(size_y));
 }
@@ -60,7 +60,7 @@ f32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationLandscape::set_frequency(f32 frequency)
+void CConfigurationLandscape::setFrequency(f32 frequency)
 {
 IConfiguration::setAttribute("/landscape/frequency", std::make_shared<CConfigurationAttribute>(frequency));
 }
@@ -73,7 +73,7 @@ i32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationLandscape::set_octaves(i32 octaves)
+void CConfigurationLandscape::setOctaves(i32 octaves)
 {
 IConfiguration::setAttribute("/landscape/octaves", std::make_shared<CConfigurationAttribute>(octaves));
 }
@@ -86,7 +86,7 @@ ui32 value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationLandscape::set_seed(ui32 seed)
+void CConfigurationLandscape::setSeed(ui32 seed)
 {
 IConfiguration::setAttribute("/landscape/seed", std::make_shared<CConfigurationAttribute>(seed));
 }
@@ -102,13 +102,13 @@ assert(iterator != m_configurations.end());
 return iterator->second;
 }
 #if defined(__EDITOR__)
-void CConfigurationLandscape::add_material(const std::shared_ptr<CConfigurationMaterial>& material)
+void CConfigurationLandscape::addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material)
 {
 IConfiguration::setConfiguration("/landscape/materials/material", material);
 }
 #endif
 #if defined(__EDITOR__)
-void CConfigurationLandscape::set_material(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
+void CConfigurationLandscape::setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index)
 {
 IConfiguration::setConfiguration("/landscape/materials/material", material, index);
 }
@@ -142,3 +142,35 @@ material->serialize((*iterator).node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/landscape/materials/material", material);
 }
 }
+#if defined(__EDITOR__)
+void CConfigurationLandscape::deserialize(const std::string& filename)
+{
+pugi::xml_document document;
+pugi::xml_parse_result result = document.load("");
+assert(result.status == pugi::status_ok);
+pugi::xml_node node = document.append_child("landscape");
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("heightmap_data_filename");
+std::string heightmap_data_filename = CConfigurationLandscape::getHeightmapDataFilename();
+attribute.set_value(heightmap_data_filename.c_str());
+attribute = node.append_attribute("splatting_data_filename");
+std::string splatting_data_filename = CConfigurationLandscape::getSplattingDataFilename();
+attribute.set_value(splatting_data_filename.c_str());
+attribute = node.append_attribute("size_x");
+ui32 size_x = CConfigurationLandscape::getSizeX();
+attribute.set_value(size_x);
+attribute = node.append_attribute("size_y");
+ui32 size_y = CConfigurationLandscape::getSizeY();
+attribute.set_value(size_y);
+attribute = node.append_attribute("frequency");
+f32 frequency = CConfigurationLandscape::getFrequency();
+attribute.set_value(frequency);
+attribute = node.append_attribute("octaves");
+i32 octaves = CConfigurationLandscape::getOctaves();
+attribute.set_value(octaves);
+attribute = node.append_attribute("seed");
+ui32 seed = CConfigurationLandscape::getSeed();
+attribute.set_value(seed);
+document.save_file(filename.c_str());
+}
+#endif

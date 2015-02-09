@@ -3,15 +3,15 @@
     base_class_name="IConfiguration"
     is_external="1">
     <attributes>
-        <attribute type="std::string" is_convert_to_ogl_enum="0" getter="getGUID" path="/ws_technique" attribute_name="guid"/>
-        <attribute type="bool" is_convert_to_ogl_enum="0" getter="areDrawBoundingBoxes" path="/ws_technique" attribute_name="are_draw_bounding_boxes"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getIndex" path="/ws_technique" attribute_name="index"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getScreenWidth" path="/ws_technique" attribute_name="screen_width"/>
-        <attribute type="ui32" is_convert_to_ogl_enum="0" getter="getScreenHeight" path="/ws_technique" attribute_name="screen_height"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClearColorR" path="/ws_technique" attribute_name="clear_color_r"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClearColorG" path="/ws_technique" attribute_name="clear_color_g"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClearColorB" path="/ws_technique" attribute_name="clear_color_b"/>
-        <attribute type="f32" is_convert_to_ogl_enum="0" getter="getClearColorA" path="/ws_technique" attribute_name="clear_color_a"/>
+        <attribute type="std::string" property="GUID" path="/ws_technique" name="guid"/>
+        <attribute type="bool" property="DrawBoundingBoxes" path="/ws_technique" name="are_draw_bounding_boxes"/>
+        <attribute type="ui32" property="Index" path="/ws_technique" name="index"/>
+        <attribute type="ui32" property="ScreenWidth" path="/ws_technique" name="screen_width"/>
+        <attribute type="ui32" property="ScreenHeight" path="/ws_technique" name="screen_height"/>
+        <attribute type="f32" property="ClearColorR" path="/ws_technique" name="clear_color_r"/>
+        <attribute type="f32" property="ClearColorG" path="/ws_technique" name="clear_color_g"/>
+        <attribute type="f32" property="ClearColorB" path="/ws_technique" name="clear_color_b"/>
+        <attribute type="f32" property="ClearColorA" path="/ws_technique" name="clear_color_a"/>
     </attributes>
     <relationships>
     </relationships>
