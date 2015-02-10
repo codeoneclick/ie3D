@@ -41,6 +41,14 @@
       <height>761</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Menlo</family>
+      <pointsize>13</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="currentIndex">
      <number>1</number>
     </property>
@@ -100,23 +108,22 @@
      <widget class="QTabWidget" name="m_landscapePropertiesTab">
       <property name="geometry">
        <rect>
-        <x>990</x>
-        <y>23</y>
-        <width>271</width>
-        <height>697</height>
+        <x>980</x>
+        <y>12</y>
+        <width>281</width>
+        <height>708</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Menlo</family>
         <pointsize>13</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(64, 64, 64);</string>
+       <string notr="true">background-color: rgb(64, 64, 64);</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::North</enum>
@@ -134,7 +141,7 @@ background-color: rgb(64, 64, 64);</string>
        <widget class="QGroupBox" name="generateGroupBox">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>10</x>
           <y>270</y>
           <width>251</width>
           <height>321</height>
@@ -146,6 +153,9 @@ background-color: rgb(64, 64, 64);</string>
           <weight>75</weight>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="title">
          <string>Generate</string>
@@ -392,7 +402,7 @@ background-color: rgb(64, 64, 64);</string>
        <widget class="QGroupBox" name="editGroupBox">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>10</x>
           <y>0</y>
           <width>251</width>
           <height>251</height>
@@ -405,6 +415,9 @@ background-color: rgb(64, 64, 64);</string>
           <weight>75</weight>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="title">
          <string>Edit</string>
@@ -608,6 +621,9 @@ background-color: rgb(64, 64, 64);</string>
           <height>32</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string>Open...</string>
         </property>
@@ -627,6 +643,9 @@ background-color: rgb(64, 64, 64);</string>
           <weight>75</weight>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>Texture sampler 1:</string>
@@ -648,6 +667,9 @@ background-color: rgb(64, 64, 64);</string>
           <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string>Texture sampler 2:</string>
         </property>
@@ -660,6 +682,9 @@ background-color: rgb(64, 64, 64);</string>
           <width>91</width>
           <height>32</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>Open...</string>
@@ -681,6 +706,9 @@ background-color: rgb(64, 64, 64);</string>
           <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string>Texture sampler 3:</string>
         </property>
@@ -693,6 +721,9 @@ background-color: rgb(64, 64, 64);</string>
           <width>91</width>
           <height>32</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>Open...</string>
@@ -707,6 +738,9 @@ background-color: rgb(64, 64, 64);</string>
           <height>128</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -719,6 +753,9 @@ background-color: rgb(64, 64, 64);</string>
           <width>128</width>
           <height>128</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string/>
@@ -733,6 +770,9 @@ background-color: rgb(64, 64, 64);</string>
           <height>128</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -745,6 +785,9 @@ background-color: rgb(64, 64, 64);</string>
           <width>91</width>
           <height>24</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="minimum">
          <number>1</number>
@@ -769,6 +812,9 @@ background-color: rgb(64, 64, 64);</string>
           <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string>Tilling:</string>
         </property>
@@ -789,6 +835,9 @@ background-color: rgb(64, 64, 64);</string>
           <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string>Tilling:</string>
         </property>
@@ -801,6 +850,9 @@ background-color: rgb(64, 64, 64);</string>
           <width>91</width>
           <height>24</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="minimum">
          <number>1</number>
@@ -825,6 +877,9 @@ background-color: rgb(64, 64, 64);</string>
           <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string>Tilling:</string>
         </property>
@@ -837,6 +892,9 @@ background-color: rgb(64, 64, 64);</string>
           <width>91</width>
           <height>24</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="minimum">
          <number>1</number>
