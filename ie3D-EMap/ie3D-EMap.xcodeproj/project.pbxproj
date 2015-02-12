@@ -423,6 +423,7 @@
 		21C409C1197C123D0063D62D /* tank_medium_left_track.mdl_01 */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium_left_track.mdl_01; path = "../ie3D-Bundle/Meshes/tank_medium_left_track.mdl_01"; sourceTree = SOURCE_ROOT; };
 		21C409C2197C123D0063D62D /* tank_medium_right_track.mdl_01 */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium_right_track.mdl_01; path = "../ie3D-Bundle/Meshes/tank_medium_right_track.mdl_01"; sourceTree = SOURCE_ROOT; };
 		21C409C3197C123D0063D62D /* tank_medium_tower.mdl_01 */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium_tower.mdl_01; path = "../ie3D-Bundle/Meshes/tank_medium_tower.mdl_01"; sourceTree = SOURCE_ROOT; };
+		21C84A371A8D2BA3003035E0 /* HUICommands.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HUICommands.h; path = Sources/HUICommands.h; sourceTree = SOURCE_ROOT; };
 		21CB5310196C05610066EC6D /* CMEUIToSceneCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEUIToSceneCommands.cpp; path = Sources/CMEUIToSceneCommands.cpp; sourceTree = SOURCE_ROOT; };
 		21CB5311196C05610066EC6D /* CMEUIToSceneCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEUIToSceneCommands.h; path = Sources/CMEUIToSceneCommands.h; sourceTree = SOURCE_ROOT; };
 		21CB5313196C16A10066EC6D /* CMESceneToUICommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMESceneToUICommands.cpp; path = Sources/CMESceneToUICommands.cpp; sourceTree = SOURCE_ROOT; };
@@ -950,6 +951,14 @@
 			name = Scenes;
 			sourceTree = "<group>";
 		};
+		21C84A341A8D2B78003035E0 /* UICommands */ = {
+			isa = PBXGroup;
+			children = (
+				21C84A371A8D2BA3003035E0 /* HUICommands.h */,
+			);
+			name = UICommands;
+			sourceTree = "<group>";
+		};
 		21DC2B721929E88A008DA3C1 /* Temp */ = {
 			isa = PBXGroup;
 			children = (
@@ -974,6 +983,7 @@
 		2EB56BE3C2D93CDAB0C52E67 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				21C84A341A8D2B78003035E0 /* UICommands */,
 				217AF17A1945D9790045CF9D /* StateMachine Managment */,
 				217AF1771945BB820045CF9D /* Common  */,
 				217AF1711945BAA50045CF9D /* SceneGraph Managment */,

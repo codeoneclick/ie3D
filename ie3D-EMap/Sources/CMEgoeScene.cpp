@@ -22,13 +22,16 @@
 #include "CCommonOS.h"
 #include "ICommand.h"
 #include "IUICommands.h"
+#include "HUICommands.h"
 
 CMEgoeScene::CMEgoeScene(IGameTransition* root) :
 IScene(root),
 m_model(nullptr)
 {
-    ISharedCommand command = std::make_shared<CCommand<std::function<void(const std::string&)>>>(std::bind(&CMEgoeScene::setMeshFilenameCommand, this, std::placeholders::_1));
-    m_uiToSceneCommands->addCommand("setMeshFilename", command);
+    ISharedCommand command = std::make_shared<CCommand<UICommandGOECreateConfiguration::COMMAND>>(std::bind(&CMEgoeScene::setMeshFilenameCommand,
+                                                                                                            this,
+                                                                                                            std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandGOECreateConfiguration::GUID, command);
 }
 
 CMEgoeScene::~CMEgoeScene(void)
@@ -119,15 +122,16 @@ void CMEgoeScene::onKeyDown(i32)
 void CMEgoeScene::onConfigurationLoaded(ISharedConfigurationRef configuration)
 {
     CSharedConfigurationModel configurationModel = std::static_pointer_cast<CConfigurationModel>(configuration);
-    std::vector<CSharedConfigurationMaterial> configurationMaterials;
+    std::vector<CSharedConfigurationMaterial> configurationsMaterials;
     for(ui32 i = 0; i < configurationModel->getMaterialsConfigurations().size(); ++i)
     {
-        configurationMaterials.push_back(std::static_pointer_cast<CConfigurationMaterial>(configurationModel->getMaterialsConfigurations().at(i)));
+        configurationsMaterials.push_back(std::static_pointer_cast<CConfigurationMaterial>(configurationModel->getMaterialsConfigurations().at(i)));
     }
     assert(m_sceneToUICommands != nullptr);
     if (m_sceneToUICommands != nullptr)
     {
-        m_sceneToUICommands->execute<std::function<void(std::vector<CSharedConfigurationMaterial>&)>>("setMaterialsConfigurations", configurationMaterials);
+        m_sceneToUICommands->execute<UICommandGOEUpdateConfigurationsMaterials::COMMAND>(UICommandGOEUpdateConfigurationsMaterials::GUID,
+                                                                                         configurationsMaterials);
     }
 }
 

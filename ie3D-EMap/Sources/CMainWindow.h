@@ -46,7 +46,7 @@ protected:
     void setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler);
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     
-    void setMaterialsConfigurations(std::vector<CSharedConfigurationMaterial>& configurations);
+    void updateGOEConfigurationsMaterials(std::vector<CSharedConfigurationMaterial>& configurations);
     
     i32 m_previousBrushSize;
     std::string m_recentFilename;

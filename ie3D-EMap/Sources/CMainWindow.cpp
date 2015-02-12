@@ -18,6 +18,7 @@
 #include "CConfigurationAccessor.h"
 #include "CTexture.h"
 #include "IRenderTechniqueImporter.h"
+#include "HUICommands.h"
 
 #endif
 
@@ -79,10 +80,11 @@ void CMainWindow::execute(void)
     m_sceneToUICommands->connectSetTillingTexcoordCommand(std::bind(&CMainWindow::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
     
     m_goeSceneToUICommands = std::make_shared<IUICommands>();
-    m_goeSceneToUICommands->addCommand("setMaterialsConfigurations",
-                                       std::make_shared<CCommand<std::function<void(std::vector<CSharedConfigurationMaterial>&)>>>(std::bind(&CMainWindow::setMaterialsConfigurations,
-                                                                                                                                                                           this,
-                                                                                                                                                                           std::placeholders::_1)));
+    ISharedCommand command = std::make_shared<CCommand<UICommandGOEUpdateConfigurationsMaterials::COMMAND>>(std::bind(&CMainWindow::updateGOEConfigurationsMaterials,
+                                                                                                                      this,
+                                                                                                                      std::placeholders::_1));
+    m_goeSceneToUICommands->addCommand(UICommandGOEUpdateConfigurationsMaterials::GUID,
+                                       command);
     
     NSView *mseView = reinterpret_cast<NSView*>(ui->m_oglWindow->winId());
     NSOpenGLView *mseOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
@@ -406,13 +408,14 @@ void CMainWindow::on_m_createGameObjectConfiguration_clicked()
     {
 #if defined(__OSX__) || defined(__WIN32__)
         
-        m_goeTransition->getUIToSceneCommands()->execute<std::function<void(const std::string&)>>("setMeshFilename", filename.toUtf8().constData());
+        m_goeTransition->getUIToSceneCommands()->execute<UICommandGOECreateConfiguration::COMMAND>(UICommandGOECreateConfiguration::GUID,
+                                                                                                   filename.toUtf8().constData());
         
 #endif
     }
 }
 
-void CMainWindow::setMaterialsConfigurations(std::vector<CSharedConfigurationMaterial>& configurations)
+void CMainWindow::updateGOEConfigurationsMaterials(std::vector<CSharedConfigurationMaterial>& configurations)
 {
     while (ui->m_materialsComboBox->count() != 0)
     {
