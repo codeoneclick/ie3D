@@ -23,27 +23,73 @@
 #include "CMaterial.h"
 #include "CShader.h"
 #include "CModel.h"
-#include "CMEUIToSceneCommands.h"
-#include "CMESceneToUICommands.h"
 #include "CResourceAccessor.h"
 #include "CTexture.h"
 #include "CEComplexModel.h"
 #include "CMEModelBrush.h"
 #include "CConfigurationAccessor.h"
+#include "ICommand.h"
+#include "IUICommands.h"
+#include "HUICommands.h"
 
 CMEmseScene::CMEmseScene(IGameTransition* root) :
 IScene(root),
-m_landscapeBrush(nullptr),
-m_previousDraggedPoint(glm::ivec2(0, 0)),
 m_landscapeMaterial(nullptr),
-m_uiToSceneCommands(std::make_shared<CMEUIToSceneCommands>()),
-m_sceneToUICommands(nullptr)
+m_landscapeBrush(nullptr),
+m_previousDraggedPoint(glm::ivec2(0, 0))
 {
     m_editableSettings.m_brushSize = 4;
     m_editableSettings.m_brushStrength = 1;
     m_editableSettings.m_falloffCoefficient = 0;
     m_editableSettings.m_smoothCoefficient = 0;
     
+    ISharedCommand command = std::make_shared<CCommand<UICommandMSESetBrushSize::COMMAND>>(std::bind(&CMEmseScene::setBrushSize,
+                                                                                                     this,
+                                                                                                     std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandMSESetBrushSize::GUID,
+                                    command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetBrushStrength::COMMAND>>(std::bind(&CMEmseScene::setBrushStrength,
+                                                                                          this,
+                                                                                          std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandMSESetBrushStrength::GUID,
+                                    command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetFalloffCoefficient::COMMAND>>(std::bind(&CMEmseScene::setFalloffCoefficient,
+                                                                                               this,
+                                                                                               std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandMSESetFalloffCoefficient::GUID,
+                                    command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetSmoothCoefficient::COMMAND>>(std::bind(&CMEmseScene::setSmoothCoefficient,
+                                                                                              this,
+                                                                                              std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandMSESetSmoothCoefficient::GUID,
+                                    command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetTextureFilename::COMMAND>>(std::bind(&CMEmseScene::setTextureFilename,
+                                                                                            this,
+                                                                                            std::placeholders::_1,
+                                                                                            std::placeholders::_2));
+    m_uiToSceneCommands->addCommand(UICommandMSESetTextureFilename::GUID,
+                                    command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetTillingTexcoord::COMMAND>>(std::bind(&CMEmseScene::setTillingTexcoord,
+                                                                                            this,
+                                                                                            std::placeholders::_1,
+                                                                                            std::placeholders::_2));
+    m_uiToSceneCommands->addCommand(UICommandMSESetTillingTexcoord::GUID,
+                                    command);
+    
+    
+    command = std::make_shared<CCommand<UICommandMSEGenerateHeightmap::COMMAND>>(std::bind(&CMEmseScene::generateHeightmap,
+                                                                                           this,
+                                                                                           std::placeholders::_1,
+                                                                                           std::placeholders::_2,
+                                                                                           std::placeholders::_3,
+                                                                                           std::placeholders::_4));
+    m_uiToSceneCommands->addCommand(UICommandMSEGenerateHeightmap::GUID,
+                                    command);
 }
 
 CMEmseScene::~CMEmseScene(void)
@@ -94,14 +140,6 @@ void CMEmseScene::load(void)
                                                                glm::vec3(512.0, 0.0, 512.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);
     m_root->addGestureRecognizerHandler(std::dynamic_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
-    
-    m_uiToSceneCommands->connectSetBrushSizeCommand(std::bind(&CMEmseScene::setBrushSize, this, std::placeholders::_1));
-    m_uiToSceneCommands->connectSetBrushStrengthCommand(std::bind(&CMEmseScene::setBrushStrength, this, std::placeholders::_1));
-    m_uiToSceneCommands->connectSetFalloffCoefficientCommand(std::bind(&CMEmseScene::setFalloffCoefficient, this, std::placeholders::_1));
-    m_uiToSceneCommands->connectSetSmoothCoefficientCommand(std::bind(&CMEmseScene::setSmoothCoefficient, this, std::placeholders::_1));
-    m_uiToSceneCommands->connectSetTextureSamplerCommand(std::bind(&CMEmseScene::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
-    m_uiToSceneCommands->connectSetTillingTexcoordCommand(std::bind(&CMEmseScene::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
-    m_uiToSceneCommands->connectGenerateVertecesDataCommand(std::bind(&CMEmseScene::generateVertecesDataCommand, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
     
     m_landscape->addConfigurationLoadedCallback(std::bind(&CMEmseScene::onConfigurationLoaded, this, std::placeholders::_1));
     
@@ -194,7 +232,8 @@ void CMEmseScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direct
     CMEmseScene::setBrushSize(m_editableSettings.m_brushSize);
     if(m_sceneToUICommands != nullptr)
     {
-        m_sceneToUICommands->executeSetBrushSizeCommand(m_editableSettings.m_brushSize);
+        m_sceneToUICommands->execute<UICommandMSESetBrushSize::COMMAND>(UICommandMSESetBrushSize::GUID,
+                                                                        m_editableSettings.m_brushSize);
     }
 }
 
@@ -206,17 +245,6 @@ void CMEmseScene::onKeyUp(i32)
 void CMEmseScene::onKeyDown(i32)
 {
     
-}
-
-CSharedMEUIToSceneCommands CMEmseScene::getUIToSceneCommands(void) const
-{
-    assert(m_uiToSceneCommands != nullptr);
-    return m_uiToSceneCommands;
-}
-
-void CMEmseScene::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
-{
-    m_sceneToUICommands = commands;
 }
 
 void CMEmseScene::setBrushSize(ui32 value)
@@ -244,7 +272,7 @@ void CMEmseScene::setSmoothCoefficient(ui32 value)
     m_landscape->setEditableSmoothCoefficient(value);
 }
 
-void CMEmseScene::setTextureSampler(const std::string& filename, E_SHADER_SAMPLER sampler)
+void CMEmseScene::setTextureFilename(const std::string& filename, E_SHADER_SAMPLER sampler)
 {
     CSharedTexture texture = m_root->getResourceAccessor()->getTexture(filename);
     assert(texture != nullptr);
@@ -256,7 +284,7 @@ void CMEmseScene::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
     m_landscape->setTillingTexcoord(value, sampler);
 }
 
-void CMEmseScene::generateVertecesDataCommand(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)
+void CMEmseScene::generateHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)
 {
     assert(m_landscape != nullptr);
     m_landscape->generateVertecesData(size, frequency, octaves, seed);
@@ -274,19 +302,28 @@ void CMEmseScene::onResourceLoaded(ISharedResourceRef resource)
     if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_01) == resource)
     {
         CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
-        m_sceneToUICommands->executeSetTextureSampler(texture, E_SHADER_SAMPLER_01);
-        m_sceneToUICommands->executeSetTillingTexcoordCommand(m_landscape->getTillingTexcoord(E_SHADER_SAMPLER_01), E_SHADER_SAMPLER_01);
+        m_sceneToUICommands->execute<UICommandMSESetTexture::COMMAND>(UICommandMSESetTexture::GUID,
+                                                                      texture, E_SHADER_SAMPLER_01);
+        m_sceneToUICommands->execute<UICommandMSESetTillingTexcoord::COMMAND>(UICommandMSESetTillingTexcoord::GUID,
+                                                                              m_landscape->getTillingTexcoord(E_SHADER_SAMPLER_01),
+                                                                              E_SHADER_SAMPLER_01);
     }
     else if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_02) == resource)
     {
         CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
-        m_sceneToUICommands->executeSetTextureSampler(texture, E_SHADER_SAMPLER_02);
-        m_sceneToUICommands->executeSetTillingTexcoordCommand(m_landscape->getTillingTexcoord(E_SHADER_SAMPLER_02), E_SHADER_SAMPLER_02);
+        m_sceneToUICommands->execute<UICommandMSESetTexture::COMMAND>(UICommandMSESetTexture::GUID,
+                                                                      texture, E_SHADER_SAMPLER_02);
+        m_sceneToUICommands->execute<UICommandMSESetTillingTexcoord::COMMAND>(UICommandMSESetTillingTexcoord::GUID,
+                                                                              m_landscape->getTillingTexcoord(E_SHADER_SAMPLER_02),
+                                                                              E_SHADER_SAMPLER_02);
     }
     else if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_03) == resource)
     {
         CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
-        m_sceneToUICommands->executeSetTextureSampler(texture, E_SHADER_SAMPLER_03);
-        m_sceneToUICommands->executeSetTillingTexcoordCommand(m_landscape->getTillingTexcoord(E_SHADER_SAMPLER_03), E_SHADER_SAMPLER_03);
+        m_sceneToUICommands->execute<UICommandMSESetTexture::COMMAND>(UICommandMSESetTexture::GUID,
+                                                                      texture, E_SHADER_SAMPLER_03);
+        m_sceneToUICommands->execute<UICommandMSESetTillingTexcoord::COMMAND>(UICommandMSESetTillingTexcoord::GUID,
+                                                                              m_landscape->getTillingTexcoord(E_SHADER_SAMPLER_03),
+                                                                              E_SHADER_SAMPLER_03);
     }
 }

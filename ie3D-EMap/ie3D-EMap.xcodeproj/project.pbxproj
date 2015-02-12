@@ -163,8 +163,6 @@
 		21C409CD197C123D0063D62D /* tank_medium_left_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 21C409C1197C123D0063D62D /* tank_medium_left_track.mdl_01 */; };
 		21C409CE197C123D0063D62D /* tank_medium_right_track.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 21C409C2197C123D0063D62D /* tank_medium_right_track.mdl_01 */; };
 		21C409CF197C123D0063D62D /* tank_medium_tower.mdl_01 in Resources */ = {isa = PBXBuildFile; fileRef = 21C409C3197C123D0063D62D /* tank_medium_tower.mdl_01 */; };
-		21CB5312196C05610066EC6D /* CMEUIToSceneCommands.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21CB5310196C05610066EC6D /* CMEUIToSceneCommands.cpp */; };
-		21CB5315196C16A10066EC6D /* CMESceneToUICommands.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21CB5313196C16A10066EC6D /* CMESceneToUICommands.cpp */; };
 		21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */; };
 		21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */; };
 		21E53BFB19FA9DDA0018BDB9 /* shaderCommon.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21E53BF919FA9DDA0018BDB9 /* shaderCommon.frag */; };
@@ -424,10 +422,6 @@
 		21C409C2197C123D0063D62D /* tank_medium_right_track.mdl_01 */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium_right_track.mdl_01; path = "../ie3D-Bundle/Meshes/tank_medium_right_track.mdl_01"; sourceTree = SOURCE_ROOT; };
 		21C409C3197C123D0063D62D /* tank_medium_tower.mdl_01 */ = {isa = PBXFileReference; lastKnownFileType = file; name = tank_medium_tower.mdl_01; path = "../ie3D-Bundle/Meshes/tank_medium_tower.mdl_01"; sourceTree = SOURCE_ROOT; };
 		21C84A371A8D2BA3003035E0 /* HUICommands.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HUICommands.h; path = Sources/HUICommands.h; sourceTree = SOURCE_ROOT; };
-		21CB5310196C05610066EC6D /* CMEUIToSceneCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEUIToSceneCommands.cpp; path = Sources/CMEUIToSceneCommands.cpp; sourceTree = SOURCE_ROOT; };
-		21CB5311196C05610066EC6D /* CMEUIToSceneCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEUIToSceneCommands.h; path = Sources/CMEUIToSceneCommands.h; sourceTree = SOURCE_ROOT; };
-		21CB5313196C16A10066EC6D /* CMESceneToUICommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMESceneToUICommands.cpp; path = Sources/CMESceneToUICommands.cpp; sourceTree = SOURCE_ROOT; };
-		21CB5314196C16A10066EC6D /* CMESceneToUICommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMESceneToUICommands.h; path = Sources/CMESceneToUICommands.h; sourceTree = SOURCE_ROOT; };
 		21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.frag"; sourceTree = "<group>"; };
 		21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.vert"; sourceTree = "<group>"; };
 		21E53BF919FA9DDA0018BDB9 /* shaderCommon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderCommon.frag; path = "../ie3D-Bundle/Shaders/shaderCommon.frag"; sourceTree = SOURCE_ROOT; };
@@ -992,10 +986,6 @@
 				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
 				212092A4190859AD00FFC8D4 /* CMapDragController.h */,
 				212092A3190859AD00FFC8D4 /* CMapDragController.cpp */,
-				21CB5311196C05610066EC6D /* CMEUIToSceneCommands.h */,
-				21CB5310196C05610066EC6D /* CMEUIToSceneCommands.cpp */,
-				21CB5314196C16A10066EC6D /* CMESceneToUICommands.h */,
-				21CB5313196C16A10066EC6D /* CMESceneToUICommands.cpp */,
 				09BF715167B7A0149FD2FBB8 /* main.cpp */,
 			);
 			name = Sources;
@@ -1492,10 +1482,8 @@
 				21C4099C1979B85E0063D62D /* shaderTexture2D.vert in Compile Sources */,
 				215DE7331A7D643B00E6062D /* CMEConfigurationModelBrush.cpp in Compile Sources */,
 				215DE7321A7D643B00E6062D /* CMEConfigurationLandscapeBrush.cpp in Compile Sources */,
-				21CB5315196C16A10066EC6D /* CMESceneToUICommands.cpp in Compile Sources */,
 				21FEECBA1A07878E001E9ACB /* CMEgopScene.cpp in Compile Sources */,
 				212092AB19106B6100FFC8D4 /* CMELandscapeBrush.cpp in Compile Sources */,
-				21CB5312196C05610066EC6D /* CMEUIToSceneCommands.cpp in Compile Sources */,
 				215DE7311A7D643B00E6062D /* CMEConfigurationBrushElement.cpp in Compile Sources */,
 				21208EA61906F75D00FFC8D4 /* CMEGameController.cpp in Compile Sources */,
 				212092A5190859AD00FFC8D4 /* CMapDragController.cpp in Compile Sources */,

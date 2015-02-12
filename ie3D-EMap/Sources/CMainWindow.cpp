@@ -12,8 +12,6 @@
 #include "CMEgopTransition.h"
 #include "CMEgoeTransition.h"
 #include "IOGLWindow.h"
-#include "CMEUIToSceneCommands.h"
-#include "CMESceneToUICommands.h"
 #include "IUICommands.h"
 #include "CConfigurationAccessor.h"
 #include "CTexture.h"
@@ -31,7 +29,10 @@
 CMainWindow::CMainWindow(QWidget *parent) :
 QMainWindow(parent),
 #if defined(__OSX__) || defined(__WIN32__)
-m_recentFilename(""),
+
+m_mseSceneToUICommands(std::make_shared<IUICommands>()),
+m_goeSceneToUICommands(std::make_shared<IUICommands>()),
+m_recentOpenPath(""),
 
 #endif
 ui(new Ui::CMainWindow)
@@ -41,7 +42,7 @@ ui(new Ui::CMainWindow)
     std::ostringstream stream;
     stream<<"Brush size: "<<ui->m_brushSizeSlider->value()<<" [4:32]";
     ui->m_brushSizeLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_previousBrushSize = ui->m_brushSizeSlider->value();
+    m_brushSize = ui->m_brushSizeSlider->value();
     
     stream.str("");
     stream.clear();
@@ -71,16 +72,46 @@ void CMainWindow::execute(void)
 {
 #if defined(__OSX__) || defined(__WIN32__)
     
-    m_sceneToUICommands = std::make_shared<CMESceneToUICommands>();
-    m_sceneToUICommands->connectSetBrushSizeCommand(std::bind(&CMainWindow::setBrushSize, this, std::placeholders::_1));
-    m_sceneToUICommands->connectSetBrushStrengthCommand(std::bind(&CMainWindow::setBrushStrength, this, std::placeholders::_1));
-    m_sceneToUICommands->connectSetFalloffCoefficientCommand(std::bind(&CMainWindow::setFalloffCoefficient, this, std::placeholders::_1));
-    m_sceneToUICommands->connectSetSmoothCoefficientCommand(std::bind(&CMainWindow::setSmoothCoefficient, this, std::placeholders::_1));
-    m_sceneToUICommands->connectSetTextureSamplerCommand(std::bind(&CMainWindow::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
-    m_sceneToUICommands->connectSetTillingTexcoordCommand(std::bind(&CMainWindow::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
+    ISharedCommand command = std::make_shared<CCommand<UICommandMSESetBrushSize::COMMAND>>(std::bind(&CMainWindow::setMSEBrushSize,
+                                                                                                     this,
+                                                                                                     std::placeholders::_1));
+    m_mseSceneToUICommands->addCommand(UICommandMSESetBrushSize::GUID,
+                                       command);
     
-    m_goeSceneToUICommands = std::make_shared<IUICommands>();
-    ISharedCommand command = std::make_shared<CCommand<UICommandGOEUpdateConfigurationsMaterials::COMMAND>>(std::bind(&CMainWindow::updateGOEConfigurationsMaterials,
+    command = std::make_shared<CCommand<UICommandMSESetBrushStrength::COMMAND>>(std::bind(&CMainWindow::setMSEBrushStrength,
+                                                                                          this,
+                                                                                          std::placeholders::_1));
+    m_mseSceneToUICommands->addCommand(UICommandMSESetBrushStrength::GUID,
+                                       command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetFalloffCoefficient::COMMAND>>(std::bind(&CMainWindow::setMSEFalloffCoefficient,
+                                                                                               this,
+                                                                                               std::placeholders::_1));
+    m_mseSceneToUICommands->addCommand(UICommandMSESetFalloffCoefficient::GUID,
+                                       command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetSmoothCoefficient::COMMAND>>(std::bind(&CMainWindow::setMSESmoothCoefficient,
+                                                                                              this,
+                                                                                              std::placeholders::_1));
+    m_mseSceneToUICommands->addCommand(UICommandMSESetSmoothCoefficient::GUID,
+                                       command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetTexture::COMMAND>>(std::bind(&CMainWindow::setMSETexture,
+                                                                                    this,
+                                                                                    std::placeholders::_1,
+                                                                                    std::placeholders::_2));
+    m_mseSceneToUICommands->addCommand(UICommandMSESetTexture::GUID,
+                                       command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetTillingTexcoord::COMMAND>>(std::bind(&CMainWindow::setMSETillingTexcoord,
+                                                                                            this,
+                                                                                            std::placeholders::_1,
+                                                                                            std::placeholders::_2));
+    
+    m_mseSceneToUICommands->addCommand(UICommandMSESetTillingTexcoord::GUID,
+                                       command);
+    
+    command = std::make_shared<CCommand<UICommandGOEUpdateConfigurationsMaterials::COMMAND>>(std::bind(&CMainWindow::updateGOEConfigurationsMaterials,
                                                                                                                       this,
                                                                                                                       std::placeholders::_1));
     m_goeSceneToUICommands->addCommand(UICommandGOEUpdateConfigurationsMaterials::GUID,
@@ -98,7 +129,7 @@ void CMainWindow::execute(void)
     m_mseTransition = std::make_shared<CMEmseTransition>("transition.mse.xml", false);
     m_mseController->addTransition(m_mseTransition);
     m_mseController->gotoTransition("transition.mse.xml");
-    m_mseTransition->setSceneToUICommands(m_sceneToUICommands);
+    m_mseTransition->setSceneToUICommands(m_mseSceneToUICommands);
     
     if(ui->m_mainMenuTabs->currentIndex() != 0)
     {
@@ -147,23 +178,24 @@ void CMainWindow::execute(void)
 
 void CMainWindow::on_m_brushSizeSlider_valueChanged(int value)
 {
-    if(m_previousBrushSize < value)
+    if(m_brushSize < value)
     {
-        m_previousBrushSize = value;
-        m_previousBrushSize = m_previousBrushSize % 2 != 0 ? m_previousBrushSize + 1 : m_previousBrushSize;
-        ui->m_brushSizeSlider->setValue(m_previousBrushSize);
+        m_brushSize = value;
+        m_brushSize = m_brushSize % 2 != 0 ? m_brushSize + 1 : m_brushSize;
+        ui->m_brushSizeSlider->setValue(m_brushSize);
     }
-    else if(m_previousBrushSize > value)
+    else if(m_brushSize > value)
     {
-        m_previousBrushSize = value;
-        m_previousBrushSize = m_previousBrushSize % 2 != 0 ? m_previousBrushSize - 1 : m_previousBrushSize;
-        ui->m_brushSizeSlider->setValue(m_previousBrushSize);
+        m_brushSize = value;
+        m_brushSize = m_brushSize % 2 != 0 ? m_brushSize - 1 : m_brushSize;
+        ui->m_brushSizeSlider->setValue(m_brushSize);
     }
     
     std::ostringstream stream;
-    stream<<"Brush size: "<<m_previousBrushSize<<" [4:32]";
+    stream<<"Brush size: "<<m_brushSize<<" [4:32]";
     ui->m_brushSizeLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_mseTransition->getUIToSceneCommands()->executeSetBrushSizeCommand(m_previousBrushSize);
+    m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetBrushSize::COMMAND>(UICommandMSESetBrushSize::GUID,
+                                                                                        m_brushSize);
 }
 
 void CMainWindow::on_m_brushStrengthSlider_valueChanged(int value)
@@ -171,7 +203,8 @@ void CMainWindow::on_m_brushStrengthSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Brush strength: "<<value<<" [1:10]";
     ui->m_brushStrengthLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_mseTransition->getUIToSceneCommands()->executeSetBrushStrengthCommand(value);
+    m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetBrushStrength::COMMAND>(UICommandMSESetBrushStrength::GUID,
+                                                                                            value);
 }
 
 void CMainWindow::on_m_falloffSlider_valueChanged(int value)
@@ -179,7 +212,8 @@ void CMainWindow::on_m_falloffSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Falloff coefficient: "<<value<<" [0:99]";
     ui->m_falloffLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_mseTransition->getUIToSceneCommands()->executeSetFalloffCoefficientCommand(value);
+    m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetFalloffCoefficient::COMMAND>(UICommandMSESetFalloffCoefficient::GUID,
+                                                                                                 value);
 }
 
 void CMainWindow::on_m_smoothSlider_valueChanged(int value)
@@ -187,7 +221,8 @@ void CMainWindow::on_m_smoothSlider_valueChanged(int value)
     std::ostringstream stream;
     stream<<"Smooth coefficient: "<<value<<" [0:3]";
     ui->m_smoothLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    m_mseTransition->getUIToSceneCommands()->executeSetSmoothCoefficientCommand(value);
+    m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetSmoothCoefficient::COMMAND>(UICommandMSESetSmoothCoefficient::GUID,
+                                                                                                value);
 }
 
 void CMainWindow::on_m_texture01Btn_pressed()
@@ -197,8 +232,8 @@ void CMainWindow::on_m_texture01Btn_pressed()
 
 void CMainWindow::on_m_texture01Btn_clicked()
 {
-    QString recentFilename = m_recentFilename.length() != 0 ? QString(m_recentFilename.c_str()) : "";
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.*)"));
+    QString recentOpenPath = m_recentOpenPath.length() != 0 ? QString(m_recentOpenPath.c_str()) : "";
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentOpenPath, tr("Files (*.*)"));
     if (filename.isEmpty())
     {
         return;
@@ -207,14 +242,16 @@ void CMainWindow::on_m_texture01Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture01Img->setPixmap(pixmap);
-        m_mseTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_01);
+        m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetTextureFilename::COMMAND>(UICommandMSESetTextureFilename::GUID,
+                                                                                                 filename.toUtf8().constData(),
+                                                                                                 E_SHADER_SAMPLER_01);
     }
 }
 
 void CMainWindow::on_m_texture02Btn_clicked()
 {
-    QString recentFilename = m_recentFilename.length() != 0 ? QString(m_recentFilename.c_str()) : "";
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.*)"));
+    QString recentOpenPath = m_recentOpenPath.length() != 0 ? QString(m_recentOpenPath.c_str()) : "";
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentOpenPath, tr("Files (*.*)"));
     if (filename.isEmpty())
     {
         return;
@@ -223,14 +260,16 @@ void CMainWindow::on_m_texture02Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture02Img->setPixmap(pixmap);
-        m_mseTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_02);
+        m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetTextureFilename::COMMAND>(UICommandMSESetTextureFilename::GUID,
+                                                                                                  filename.toUtf8().constData(),
+                                                                                                  E_SHADER_SAMPLER_02);
     }
 }
 
 void CMainWindow::on_m_texture03Btn_clicked()
 {
-    QString recentFilename = m_recentFilename.length() != 0 ? QString(m_recentFilename.c_str()) : "";
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentFilename, tr("Files (*.*)"));
+    QString recentOpenPath = m_recentOpenPath.length() != 0 ? QString(m_recentOpenPath.c_str()) : "";
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentOpenPath, tr("Files (*.*)"));
     if (filename.isEmpty())
     {
         return;
@@ -239,35 +278,37 @@ void CMainWindow::on_m_texture03Btn_clicked()
     {
         QPixmap pixmap(filename);
         ui->m_texture03Img->setPixmap(pixmap);
-        m_mseTransition->getUIToSceneCommands()->executeSetTextureSamplerCommand(filename.toUtf8().constData(), E_SHADER_SAMPLER_03);
+        m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetTextureFilename::COMMAND>(UICommandMSESetTextureFilename::GUID,
+                                                                                                  filename.toUtf8().constData(),
+                                                                                                  E_SHADER_SAMPLER_03);
     }
 }
 
-void CMainWindow::setBrushSize(ui32 value)
+void CMainWindow::setMSEBrushSize(ui32 value)
 {
-    m_previousBrushSize = value;
+    m_brushSize = value;
     std::ostringstream stream;
-    stream<<"Brush size: "<<m_previousBrushSize<<" [4:32]";
+    stream<<"Brush size: "<<m_brushSize<<" [4:32]";
     ui->m_brushSizeLabel->setText(QString::fromUtf8(stream.str().c_str()));
-    ui->m_brushSizeSlider->setValue(m_previousBrushSize);
+    ui->m_brushSizeSlider->setValue(m_brushSize);
 }
 
-void CMainWindow::setBrushStrength(ui32)
+void CMainWindow::setMSEBrushStrength(ui32)
 {
     
 }
 
-void CMainWindow::setFalloffCoefficient(ui32)
+void CMainWindow::setMSEFalloffCoefficient(ui32)
 {
     
 }
 
-void CMainWindow::setSmoothCoefficient(ui32)
+void CMainWindow::setMSESmoothCoefficient(ui32)
 {
     
 }
 
-void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
+void CMainWindow::setMSETexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
 {
     std::stringstream stringstream;
     stringstream<<"image_"<<sampler<<".png";
@@ -301,7 +342,7 @@ void CMainWindow::setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER 
     }
 }
 
-void CMainWindow::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
+void CMainWindow::setMSETillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 {
     switch (sampler) {
         case E_SHADER_SAMPLER_01:
@@ -328,17 +369,23 @@ void CMainWindow::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 
 void CMainWindow::on_m_textureTilling01SpinBox_valueChanged(int value)
 {
-    m_mseTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_01);
+    m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetTillingTexcoord::COMMAND>(UICommandMSESetTillingTexcoord::GUID,
+                                                                                              value,
+                                                                                              E_SHADER_SAMPLER_01);
 }
 
 void CMainWindow::on_m_textureTilling02SpinBox_valueChanged(int value)
 {
-    m_mseTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_02);
+    m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetTillingTexcoord::COMMAND>(UICommandMSESetTillingTexcoord::GUID,
+                                                                                              value,
+                                                                                              E_SHADER_SAMPLER_02);
 }
 
 void CMainWindow::on_m_textureTilling03SpinBox_valueChanged(int value)
 {
-    m_mseTransition->getUIToSceneCommands()->executeSetTillingTexcoordCommand(value, E_SHADER_SAMPLER_03);
+    m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetTillingTexcoord::COMMAND>(UICommandMSESetTillingTexcoord::GUID,
+                                                                                              value,
+                                                                                              E_SHADER_SAMPLER_03);
 }
 
 bool CMainWindow::event(QEvent *event)
@@ -352,10 +399,11 @@ bool CMainWindow::event(QEvent *event)
 
 void CMainWindow::on_generateButton_clicked()
 {
-    m_mseTransition->getUIToSceneCommands()->executeGenerateVertecesDataCommand(glm::ivec2(ui->m_sizeXSpinBox->value(), ui->m_sizeYSpinBox->value()),
-                                                                                ui->m_frequencySpinBox->value(),
-                                                                                ui->m_octavesSpinBox->value(),
-                                                                                ui->m_seedSpinBox->value());
+    m_mseTransition->getUIToSceneCommands()->execute<UICommandMSEGenerateHeightmap::COMMAND>(UICommandMSEGenerateHeightmap::GUID,
+                                                                                             glm::ivec2(ui->m_sizeXSpinBox->value(), ui->m_sizeYSpinBox->value()),
+                                                                                             ui->m_frequencySpinBox->value(),
+                                                                                             ui->m_octavesSpinBox->value(),
+                                                                                             ui->m_seedSpinBox->value());
 }
 
 void CMainWindow::on_m_mainMenuTabs_currentChanged(int index)

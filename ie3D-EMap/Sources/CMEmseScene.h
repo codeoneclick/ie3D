@@ -43,16 +43,13 @@ protected:
     
     SEditableSettings m_editableSettings;
     
-    CSharedMEUIToSceneCommands m_uiToSceneCommands;
-    CSharedMESceneToUICommands m_sceneToUICommands;
-    
     void setBrushSize(ui32 value);
     void setBrushStrength(ui32 value);
     void setFalloffCoefficient(ui32 value);
     void setSmoothCoefficient(ui32 value);
-    void setTextureSampler(const std::string& filename, E_SHADER_SAMPLER sampler);
+    void setTextureFilename(const std::string& filename, E_SHADER_SAMPLER sampler);
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
-    void generateVertecesDataCommand(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
+    void generateHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
     
     void onConfigurationLoaded(ISharedConfigurationRef configuration);
     void onResourceLoaded(ISharedResourceRef resource);
@@ -75,9 +72,6 @@ public:
     
     void load(void);
     void update(f32 deltatime);
-    
-    CSharedMEUIToSceneCommands getUIToSceneCommands(void) const;
-    void setSceneToUICommands(CSharedMESceneToUICommandsRef commands);
 };
 
 #endif

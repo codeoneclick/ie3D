@@ -36,7 +36,7 @@ public:
         if(command != m_commands.end())
         {
             std::shared_ptr<CCommand<FUNCTION>> function = std::static_pointer_cast<CCommand<FUNCTION>>(command->second);
-            function->execute(std::forward<ARGS...>(args...));
+            function->execute(args...);
         }
     };
 };

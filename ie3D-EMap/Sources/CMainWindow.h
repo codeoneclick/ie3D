@@ -36,20 +36,20 @@ protected:
     std::shared_ptr<CMEGameController> m_goeController;
     std::shared_ptr<CMEgoeTransition> m_goeTransition;
     
-    CSharedMESceneToUICommands m_sceneToUICommands;
+    ISharedUICommands m_mseSceneToUICommands;
     ISharedUICommands m_goeSceneToUICommands;
     
-    void setBrushSize(ui32 value);
-    void setBrushStrength(ui32 value);
-    void setFalloffCoefficient(ui32 value);
-    void setSmoothCoefficient(ui32 value);
-    void setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler);
-    void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
+    void setMSEBrushSize(ui32 value);
+    void setMSEBrushStrength(ui32 value);
+    void setMSEFalloffCoefficient(ui32 value);
+    void setMSESmoothCoefficient(ui32 value);
+    void setMSETexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler);
+    void setMSETillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     
     void updateGOEConfigurationsMaterials(std::vector<CSharedConfigurationMaterial>& configurations);
     
-    i32 m_previousBrushSize;
-    std::string m_recentFilename;
+    i32 m_brushSize;
+    std::string m_recentOpenPath;
     
     bool event(QEvent *event);
     

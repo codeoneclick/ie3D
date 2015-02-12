@@ -54,17 +54,6 @@ void CMEmseTransition::_OnGameLoopUpdate(f32 deltatime)
     }
 }
 
-CSharedMEUIToSceneCommands CMEmseTransition::getUIToSceneCommands(void) const
-{
-    return m_isLoaded && m_scene != nullptr ? std::static_pointer_cast<CMEmseScene>(m_scene)->getUIToSceneCommands() : nullptr;
-}
-
-void CMEmseTransition::setSceneToUICommands(CSharedMESceneToUICommandsRef commands)
-{
-    assert(m_isLoaded && m_scene != nullptr);
-    std::static_pointer_cast<CMEmseScene>(m_scene)->setSceneToUICommands(commands);
-}
-
 CMESharedLandscapeBrush CMEmseTransition::createLandscapeBrush(const std::string& filename)
 {
     assert(m_sceneFabricator != nullptr);

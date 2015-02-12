@@ -30,9 +30,6 @@ public:
     
     CMESharedLandscapeBrush createLandscapeBrush(const std::string& filename);
     CMESharedModelBrush createModelBrush(const std::string& filename);
-    
-    CSharedMEUIToSceneCommands getUIToSceneCommands(void) const;
-    void setSceneToUICommands(CSharedMESceneToUICommandsRef commands);
 };
 
 #endif
