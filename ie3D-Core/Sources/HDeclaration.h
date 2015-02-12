@@ -328,4 +328,12 @@ class CComponentTransformation;
 typedef std::shared_ptr<CComponentTransformation> CSharedComponentTransformation;
 typedef const CSharedComponentTransformation& CSharedComponentTransformationRef;
 
+class ICommand;
+typedef std::shared_ptr<ICommand> ISharedCommand;
+typedef const ISharedCommand& ISharedCommandRef;
+
+class IUICommands;
+typedef std::shared_ptr<IUICommands> ISharedUICommands;
+typedef const ISharedUICommands& ISharedUICommandsRef;
+
 #endif

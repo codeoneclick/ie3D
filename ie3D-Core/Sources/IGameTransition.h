@@ -125,6 +125,9 @@ public:
     
     ui32 getFrameNumTriangles(void);
     ui32 getSceneNumTriangles(void);
+    
+    void setSceneToUICommands(ISharedUICommandsRef commands);
+    ISharedUICommands getUIToSceneCommands(void) const;
 };
 
 #endif 

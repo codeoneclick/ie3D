@@ -113,8 +113,10 @@ void CSceneGraph::addGameObject(ISharedGameObjectRef gameObject)
     gameObject->setSceneUpdateMgr(m_sceneUpdateMgr);
     gameObject->setRenderTechniqueImporter(m_renderPipeline);
     gameObject->setRenderTechniqueAccessor(m_renderPipeline);
+    
     gameObject->enableRender(true);
     gameObject->enableUpdate(true);
+    
     m_gameObjectsContainer.insert(gameObject);
 }
 
@@ -123,11 +125,13 @@ void CSceneGraph::removeGameObject(ISharedGameObjectRef gameObject)
     assert(m_sceneUpdateMgr != nullptr);
     assert(m_renderPipeline != nullptr);
     
+    gameObject->enableRender(false);
+    gameObject->enableUpdate(false);
+    
     gameObject->setSceneUpdateMgr(nullptr);
     gameObject->setRenderTechniqueImporter(nullptr);
     gameObject->setRenderTechniqueAccessor(nullptr);
-    gameObject->enableRender(false);
-    gameObject->enableUpdate(false);
+    
     m_gameObjectsContainer.erase(gameObject);
 }
 

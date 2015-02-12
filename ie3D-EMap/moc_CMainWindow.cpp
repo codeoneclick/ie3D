@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CMainWindow_t {
     QByteArrayData data[20];
-    char stringdata[534];
+    char stringdata[541];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -48,7 +48,7 @@ QT_MOC_LITERAL(15, 389, 25),
 QT_MOC_LITERAL(16, 415, 32),
 QT_MOC_LITERAL(17, 448, 5),
 QT_MOC_LITERAL(18, 454, 42),
-QT_MOC_LITERAL(19, 497, 35)
+QT_MOC_LITERAL(19, 497, 42)
     },
     "CMainWindow\0on_m_brushSizeSlider_valueChanged\0"
     "\0value\0on_m_brushStrengthSlider_valueChanged\0"
@@ -64,7 +64,7 @@ QT_MOC_LITERAL(19, 497, 35)
     "on_generateButton_clicked\0"
     "on_m_mainMenuTabs_currentChanged\0index\0"
     "on_m_landscapePropertiesTab_currentChanged\0"
-    "on_m_createGameObjectButton_clicked\0"
+    "on_m_createGameObjectConfiguration_clicked\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -137,7 +137,7 @@ void CMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 11: _t->on_generateButton_clicked(); break;
         case 12: _t->on_m_mainMenuTabs_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: _t->on_m_landscapePropertiesTab_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 14: _t->on_m_createGameObjectButton_clicked(); break;
+        case 14: _t->on_m_createGameObjectConfiguration_clicked(); break;
         default: ;
         }
     }

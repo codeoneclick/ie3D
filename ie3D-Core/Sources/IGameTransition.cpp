@@ -27,6 +27,7 @@
 #include "CRenderTechniqueMain.h"
 #include "CRenderTechniqueWorldSpace.h"
 #include "CRenderTechniqueScreenSpace.h"
+#include "IScene.h"
 
 IGameTransition::IGameTransition(const std::string& filename, bool isOffscreen) :
 m_guid(filename),
@@ -438,5 +439,16 @@ ui32 IGameTransition::getScreenWidth(void) const
 ui32 IGameTransition::getScreenHeight(void) const
 {
     return m_renderPipeline->getScreenHeight();
+}
+
+void IGameTransition::setSceneToUICommands(ISharedUICommandsRef commands)
+{
+    assert(m_isLoaded && m_scene != nullptr);
+    m_scene->setSceneToUICommands(commands);
+}
+
+ISharedUICommands IGameTransition::getUIToSceneCommands(void) const
+{
+    return m_isLoaded && m_scene != nullptr ? m_scene->getUIToSceneCommands() : nullptr;
 }
 

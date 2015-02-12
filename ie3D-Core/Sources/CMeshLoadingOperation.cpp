@@ -58,12 +58,6 @@ void CMeshLoadingOperation::serialize(void)
         m_serializer->serialize();
         
         m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS && m_status != E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
-        
-        /*std::string sequenceFilename = m_filename;
-        sequenceFilename.append("_anim");
-        m_serializer = std::make_shared<CSequenceSerializer_SEQ>(sequenceFilename,
-                                                                 m_resource);
-        m_serializer->serialize();*/
     }
     else
     {

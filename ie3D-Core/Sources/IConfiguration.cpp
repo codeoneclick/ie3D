@@ -137,10 +137,16 @@ void IConfiguration::setConfiguration(const std::string& configurationName,
 }
 
 pugi::xml_parse_result IConfiguration::openXMLDocument(pugi::xml_document &document,
-                                                       const std::string &filename)
+                                                       const std::string &inFilename)
 {
+    std::string filename = inFilename;
     pugi::xml_parse_result result;
-    result = document.load_file(bundlepath().append(filename).c_str());
+    result = document.load_file(filename.c_str());
+    if(result.status != pugi::status_ok)
+    {
+        filename = bundlepath().append(filename);
+        result = document.load_file(filename.c_str());
+    }
     if(result.status == pugi::status_ok)
     {
         IConfiguration::setFilename(filename);

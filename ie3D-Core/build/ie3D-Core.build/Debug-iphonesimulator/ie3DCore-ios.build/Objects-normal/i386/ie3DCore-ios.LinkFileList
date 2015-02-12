@@ -130,6 +130,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IRenderTechniqueBase.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CSkeletonCommiter_SK.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IComponent.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/ICommand.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CSequenceCommiter_SEQ.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/pngmem.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IResourceSerializer.o
@@ -149,6 +150,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CComponentRendering.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CConfigurationShader.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CConfigurationTexture.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IUICommands.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CTextureCommiter_PNG.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/zutil.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CResourceLoader.o

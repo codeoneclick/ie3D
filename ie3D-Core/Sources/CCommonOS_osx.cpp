@@ -23,6 +23,16 @@ std::string bundlepath(void)
     return path;
 };
 
+std::string executablepath(void)
+{
+    std::string path([[[[[[NSBundle mainBundle] resourcePath]
+                         stringByDeletingLastPathComponent]
+                        stringByDeletingLastPathComponent]
+                       stringByDeletingLastPathComponent] UTF8String]);
+    path.append("/");
+    return path;
+};
+
 void Set_BundlePath(const std::string& _path)
 {
     g_path = _path;

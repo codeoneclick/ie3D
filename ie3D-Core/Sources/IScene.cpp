@@ -7,18 +7,20 @@
 //
 
 #include "IScene.h"
+#include "IUICommands.h"
 
-IScene::IScene(IGameTransition* _root) :
-m_root(_root)
+IScene::IScene(IGameTransition* root) :
+m_root(root),
+m_uiToSceneCommands(std::make_shared<IUICommands>()),
+m_sceneToUICommands(nullptr)
 {
     
 }
 
 IScene::~IScene(void)
 {
-    m_models.clear();
-    m_lights.clear();
-    m_particles.clear();
+    //m_models.clear();
+    //m_particles.clear();
     m_colliders.clear();
 }
 
@@ -30,4 +32,14 @@ std::vector<ISharedGameObject> IScene::colliders(void)
 void IScene::onCollision(const glm::vec3 &position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton)
 {
     
+}
+
+void IScene::setSceneToUICommands(ISharedUICommandsRef commands)
+{
+    m_sceneToUICommands = commands;
+}
+
+ISharedUICommands IScene::getUIToSceneCommands(void) const
+{
+    return m_uiToSceneCommands;
 }

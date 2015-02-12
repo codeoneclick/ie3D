@@ -37,6 +37,7 @@ protected:
     std::shared_ptr<CMEgoeTransition> m_goeTransition;
     
     CSharedMESceneToUICommands m_sceneToUICommands;
+    ISharedUICommands m_goeSceneToUICommands;
     
     void setBrushSize(ui32 value);
     void setBrushStrength(ui32 value);
@@ -44,6 +45,8 @@ protected:
     void setSmoothCoefficient(ui32 value);
     void setTextureSampler(CSharedTextureRef texture, E_SHADER_SAMPLER sampler);
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
+    
+    void setMaterialsConfigurations(std::vector<CSharedConfigurationMaterial>& configurations);
     
     i32 m_previousBrushSize;
     std::string m_recentFilename;
@@ -88,7 +91,7 @@ private slots:
 
     void on_m_landscapePropertiesTab_currentChanged(int index);
 
-    void on_m_createGameObjectButton_clicked();
+    void on_m_createGameObjectConfiguration_clicked();
 
 private:
     

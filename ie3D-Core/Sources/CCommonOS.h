@@ -12,6 +12,7 @@
 #include "HCommon.h"
 
 std::string bundlepath(void);
+std::string executablepath(void);
 
 ui32 Get_ScreenWidth(void);
 ui32 Get_ScreenHeight(void);

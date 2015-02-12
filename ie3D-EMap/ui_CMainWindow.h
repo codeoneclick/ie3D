@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
@@ -20,7 +21,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
@@ -34,8 +34,6 @@ public:
     QWidget *centralWidget;
     QTabWidget *m_mainMenuTabs;
     QWidget *sceneTab;
-    QGroupBox *groupBox;
-    QWidget *m_oglWindow;
     QTabWidget *m_landscapePropertiesTab;
     QWidget *landscape_heightmap;
     QGroupBox *generateGroupBox;
@@ -78,14 +76,15 @@ public:
     QSpinBox *m_textureTilling03SpinBox;
     QWidget *models;
     QWidget *m_modelsOpenGLView;
+    QWidget *m_oglWindow;
     QWidget *gameObjectTab;
-    QGroupBox *groupBox_2;
     QWidget *m_gameObjectGLWindow;
-    QGroupBox *groupBox_3;
-    QPushButton *m_createGameObjectButton;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
-    QPushButton *pushButton;
+    QTabWidget *m_goeSettingsTab;
+    QWidget *m_goeMainSettingTab;
+    QPushButton *m_createGameObjectConfiguration;
+    QWidget *m_goeMaterialsSettingTab;
+    QComboBox *m_materialsComboBox;
+    QWidget *m_goeAnimationsSettingTab;
     QMenuBar *menuBar;
 
     void setupUi(QMainWindow *CMainWindow)
@@ -101,48 +100,61 @@ public:
         centralWidget->setStyleSheet(QStringLiteral("background-color: rgb(64, 64, 64);"));
         m_mainMenuTabs = new QTabWidget(centralWidget);
         m_mainMenuTabs->setObjectName(QStringLiteral("m_mainMenuTabs"));
-        m_mainMenuTabs->setGeometry(QRect(9, 9, 1261, 761));
+        m_mainMenuTabs->setGeometry(QRect(-1, -1, 1281, 781));
+        QPalette palette;
+        QBrush brush(QColor(255, 255, 255, 255));
+        brush.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        QBrush brush1(QColor(64, 64, 64, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        m_mainMenuTabs->setPalette(palette);
         QFont font;
         font.setFamily(QStringLiteral("Menlo"));
         font.setPointSize(13);
         font.setBold(false);
         font.setWeight(50);
         m_mainMenuTabs->setFont(font);
+        m_mainMenuTabs->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
+        m_mainMenuTabs->setDocumentMode(true);
+        m_mainMenuTabs->setMovable(true);
         sceneTab = new QWidget();
         sceneTab->setObjectName(QStringLiteral("sceneTab"));
-        groupBox = new QGroupBox(sceneTab);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(20, 0, 950, 720));
-        groupBox->setMinimumSize(QSize(950, 720));
-        groupBox->setMaximumSize(QSize(950, 720));
-        QFont font1;
-        font1.setFamily(QStringLiteral("Menlo"));
-        font1.setPointSize(14);
-        font1.setBold(true);
-        font1.setWeight(75);
-        groupBox->setFont(font1);
-        groupBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_oglWindow = new QWidget(groupBox);
-        m_oglWindow->setObjectName(QStringLiteral("m_oglWindow"));
-        m_oglWindow->setGeometry(QRect(10, 30, 930, 680));
-        m_oglWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         m_landscapePropertiesTab = new QTabWidget(sceneTab);
         m_landscapePropertiesTab->setObjectName(QStringLiteral("m_landscapePropertiesTab"));
-        m_landscapePropertiesTab->setGeometry(QRect(980, 12, 281, 708));
+        m_landscapePropertiesTab->setGeometry(QRect(930, -4, 350, 760));
         m_landscapePropertiesTab->setFont(font);
         m_landscapePropertiesTab->setStyleSheet(QStringLiteral("background-color: rgb(64, 64, 64);"));
-        m_landscapePropertiesTab->setTabPosition(QTabWidget::North);
+        m_landscapePropertiesTab->setTabPosition(QTabWidget::West);
         m_landscapePropertiesTab->setTabShape(QTabWidget::Rounded);
+        m_landscapePropertiesTab->setDocumentMode(true);
+        m_landscapePropertiesTab->setMovable(true);
         landscape_heightmap = new QWidget();
         landscape_heightmap->setObjectName(QStringLiteral("landscape_heightmap"));
         generateGroupBox = new QGroupBox(landscape_heightmap);
         generateGroupBox->setObjectName(QStringLiteral("generateGroupBox"));
-        generateGroupBox->setGeometry(QRect(10, 270, 251, 321));
-        QFont font2;
-        font2.setFamily(QStringLiteral("Menlo"));
-        font2.setBold(true);
-        font2.setWeight(75);
-        generateGroupBox->setFont(font2);
+        generateGroupBox->setGeometry(QRect(10, 270, 301, 321));
+        QFont font1;
+        font1.setFamily(QStringLiteral("Menlo"));
+        font1.setBold(true);
+        font1.setWeight(75);
+        generateGroupBox->setFont(font1);
         generateGroupBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_octavesSpinBox = new QSpinBox(generateGroupBox);
         m_octavesSpinBox->setObjectName(QStringLiteral("m_octavesSpinBox"));
@@ -152,7 +164,7 @@ public:
         label = new QLabel(generateGroupBox);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(10, 30, 191, 16));
-        label->setFont(font2);
+        label->setFont(font1);
         m_frequencySpinBox = new QDoubleSpinBox(generateGroupBox);
         m_frequencySpinBox->setObjectName(QStringLiteral("m_frequencySpinBox"));
         m_frequencySpinBox->setGeometry(QRect(160, 50, 81, 24));
@@ -163,11 +175,11 @@ public:
         label_2 = new QLabel(generateGroupBox);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(10, 80, 191, 16));
-        label_2->setFont(font2);
+        label_2->setFont(font1);
         label_3 = new QLabel(generateGroupBox);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(10, 130, 191, 16));
-        label_3->setFont(font2);
+        label_3->setFont(font1);
         m_seedSpinBox = new QSpinBox(generateGroupBox);
         m_seedSpinBox->setObjectName(QStringLiteral("m_seedSpinBox"));
         m_seedSpinBox->setGeometry(QRect(160, 150, 81, 24));
@@ -176,11 +188,11 @@ public:
         generateButton = new QPushButton(generateGroupBox);
         generateButton->setObjectName(QStringLiteral("generateButton"));
         generateButton->setGeometry(QRect(23, 280, 201, 32));
-        generateButton->setFont(font2);
+        generateButton->setFont(font1);
         label_4 = new QLabel(generateGroupBox);
         label_4->setObjectName(QStringLiteral("label_4"));
         label_4->setGeometry(QRect(10, 190, 191, 16));
-        label_4->setFont(font2);
+        label_4->setFont(font1);
         m_sizeXSpinBox = new QSpinBox(generateGroupBox);
         m_sizeXSpinBox->setObjectName(QStringLiteral("m_sizeXSpinBox"));
         m_sizeXSpinBox->setGeometry(QRect(160, 220, 81, 24));
@@ -191,11 +203,11 @@ public:
         label_5 = new QLabel(generateGroupBox);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setGeometry(QRect(120, 220, 31, 16));
-        label_5->setFont(font2);
+        label_5->setFont(font1);
         label_6 = new QLabel(generateGroupBox);
         label_6->setObjectName(QStringLiteral("label_6"));
         label_6->setGeometry(QRect(120, 250, 31, 16));
-        label_6->setFont(font2);
+        label_6->setFont(font1);
         m_sizeYSpinBox = new QSpinBox(generateGroupBox);
         m_sizeYSpinBox->setObjectName(QStringLiteral("m_sizeYSpinBox"));
         m_sizeYSpinBox->setGeometry(QRect(160, 250, 81, 24));
@@ -205,13 +217,13 @@ public:
         m_sizeYSpinBox->setValue(512);
         editGroupBox = new QGroupBox(landscape_heightmap);
         editGroupBox->setObjectName(QStringLiteral("editGroupBox"));
-        editGroupBox->setGeometry(QRect(10, 0, 251, 251));
-        QFont font3;
-        font3.setFamily(QStringLiteral("Menlo"));
-        font3.setPointSize(13);
-        font3.setBold(true);
-        font3.setWeight(75);
-        editGroupBox->setFont(font3);
+        editGroupBox->setGeometry(QRect(10, 10, 301, 251));
+        QFont font2;
+        font2.setFamily(QStringLiteral("Menlo"));
+        font2.setPointSize(13);
+        font2.setBold(true);
+        font2.setWeight(75);
+        editGroupBox->setFont(font2);
         editGroupBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_smoothSlider = new QSlider(editGroupBox);
         m_smoothSlider->setObjectName(QStringLiteral("m_smoothSlider"));
@@ -234,15 +246,15 @@ public:
         m_falloffLabel = new QLabel(editGroupBox);
         m_falloffLabel->setObjectName(QStringLiteral("m_falloffLabel"));
         m_falloffLabel->setGeometry(QRect(10, 130, 225, 20));
-        m_falloffLabel->setFont(font3);
+        m_falloffLabel->setFont(font2);
         m_brushSizeLabel = new QLabel(editGroupBox);
         m_brushSizeLabel->setObjectName(QStringLiteral("m_brushSizeLabel"));
         m_brushSizeLabel->setGeometry(QRect(10, 30, 225, 20));
-        m_brushSizeLabel->setFont(font3);
+        m_brushSizeLabel->setFont(font2);
         m_smoothLabel = new QLabel(editGroupBox);
         m_smoothLabel->setObjectName(QStringLiteral("m_smoothLabel"));
         m_smoothLabel->setGeometry(QRect(10, 180, 225, 20));
-        m_smoothLabel->setFont(font3);
+        m_smoothLabel->setFont(font2);
         m_brushStrengthSlider = new QSlider(editGroupBox);
         m_brushStrengthSlider->setObjectName(QStringLiteral("m_brushStrengthSlider"));
         m_brushStrengthSlider->setGeometry(QRect(10, 100, 225, 22));
@@ -254,7 +266,7 @@ public:
         m_brushStrengthLabel = new QLabel(editGroupBox);
         m_brushStrengthLabel->setObjectName(QStringLiteral("m_brushStrengthLabel"));
         m_brushStrengthLabel->setGeometry(QRect(10, 80, 225, 20));
-        m_brushStrengthLabel->setFont(font3);
+        m_brushStrengthLabel->setFont(font2);
         m_falloffSlider = new QSlider(editGroupBox);
         m_falloffSlider->setObjectName(QStringLiteral("m_falloffSlider"));
         m_falloffSlider->setGeometry(QRect(10, 150, 225, 22));
@@ -271,12 +283,12 @@ public:
         m_texture01Label = new QLabel(landscape_textures);
         m_texture01Label->setObjectName(QStringLiteral("m_texture01Label"));
         m_texture01Label->setGeometry(QRect(10, 10, 221, 16));
-        m_texture01Label->setFont(font2);
+        m_texture01Label->setFont(font1);
         m_texture01Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_texture02Label = new QLabel(landscape_textures);
         m_texture02Label->setObjectName(QStringLiteral("m_texture02Label"));
         m_texture02Label->setGeometry(QRect(10, 180, 221, 16));
-        m_texture02Label->setFont(font2);
+        m_texture02Label->setFont(font1);
         m_texture02Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_texture02Btn = new QPushButton(landscape_textures);
         m_texture02Btn->setObjectName(QStringLiteral("m_texture02Btn"));
@@ -285,7 +297,7 @@ public:
         m_texture03Label = new QLabel(landscape_textures);
         m_texture03Label->setObjectName(QStringLiteral("m_texture03Label"));
         m_texture03Label->setGeometry(QRect(10, 350, 221, 16));
-        m_texture03Label->setFont(font2);
+        m_texture03Label->setFont(font1);
         m_texture03Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_texture03Btn = new QPushButton(landscape_textures);
         m_texture03Btn->setObjectName(QStringLiteral("m_texture03Btn"));
@@ -312,12 +324,12 @@ public:
         m_textureTilling01Label = new QLabel(landscape_textures);
         m_textureTilling01Label->setObjectName(QStringLiteral("m_textureTilling01Label"));
         m_textureTilling01Label->setGeometry(QRect(150, 80, 91, 20));
-        m_textureTilling01Label->setFont(font2);
+        m_textureTilling01Label->setFont(font1);
         m_textureTilling01Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_textureTilling02Label = new QLabel(landscape_textures);
         m_textureTilling02Label->setObjectName(QStringLiteral("m_textureTilling02Label"));
         m_textureTilling02Label->setGeometry(QRect(150, 250, 91, 20));
-        m_textureTilling02Label->setFont(font2);
+        m_textureTilling02Label->setFont(font1);
         m_textureTilling02Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_textureTilling02SpinBox = new QSpinBox(landscape_textures);
         m_textureTilling02SpinBox->setObjectName(QStringLiteral("m_textureTilling02SpinBox"));
@@ -328,7 +340,7 @@ public:
         m_textureTilling03Label = new QLabel(landscape_textures);
         m_textureTilling03Label->setObjectName(QStringLiteral("m_textureTilling03Label"));
         m_textureTilling03Label->setGeometry(QRect(150, 420, 91, 20));
-        m_textureTilling03Label->setFont(font2);
+        m_textureTilling03Label->setFont(font1);
         m_textureTilling03Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_textureTilling03SpinBox = new QSpinBox(landscape_textures);
         m_textureTilling03SpinBox->setObjectName(QStringLiteral("m_textureTilling03SpinBox"));
@@ -341,44 +353,44 @@ public:
         models->setObjectName(QStringLiteral("models"));
         m_modelsOpenGLView = new QWidget(models);
         m_modelsOpenGLView->setObjectName(QStringLiteral("m_modelsOpenGLView"));
-        m_modelsOpenGLView->setGeometry(QRect(0, 40, 256, 256));
+        m_modelsOpenGLView->setGeometry(QRect(13, 10, 300, 300));
         m_modelsOpenGLView->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         m_landscapePropertiesTab->addTab(models, QString());
+        m_oglWindow = new QWidget(sceneTab);
+        m_oglWindow->setObjectName(QStringLiteral("m_oglWindow"));
+        m_oglWindow->setGeometry(QRect(0, 0, 930, 756));
+        m_oglWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         m_mainMenuTabs->addTab(sceneTab, QString());
         gameObjectTab = new QWidget();
         gameObjectTab->setObjectName(QStringLiteral("gameObjectTab"));
-        groupBox_2 = new QGroupBox(gameObjectTab);
-        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(20, 0, 950, 720));
-        groupBox_2->setFont(font1);
-        groupBox_2->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_gameObjectGLWindow = new QWidget(groupBox_2);
+        m_gameObjectGLWindow = new QWidget(gameObjectTab);
         m_gameObjectGLWindow->setObjectName(QStringLiteral("m_gameObjectGLWindow"));
-        m_gameObjectGLWindow->setGeometry(QRect(10, 30, 930, 680));
+        m_gameObjectGLWindow->setGeometry(QRect(0, 0, 930, 756));
         m_gameObjectGLWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
-        groupBox_3 = new QGroupBox(gameObjectTab);
-        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        groupBox_3->setGeometry(QRect(980, 0, 261, 721));
-        groupBox_3->setFont(font1);
-        groupBox_3->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_createGameObjectButton = new QPushButton(groupBox_3);
-        m_createGameObjectButton->setObjectName(QStringLiteral("m_createGameObjectButton"));
-        m_createGameObjectButton->setGeometry(QRect(10, 40, 241, 32));
-        scrollArea = new QScrollArea(groupBox_3);
-        scrollArea->setObjectName(QStringLiteral("scrollArea"));
-        scrollArea->setEnabled(true);
-        scrollArea->setGeometry(QRect(10, 80, 241, 631));
-        scrollArea->setFrameShape(QFrame::VLine);
-        scrollArea->setFrameShadow(QFrame::Plain);
-        scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 224, 629));
-        pushButton = new QPushButton(scrollAreaWidgetContents);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(50, 760, 114, 32));
-        scrollArea->setWidget(scrollAreaWidgetContents);
+        m_goeSettingsTab = new QTabWidget(gameObjectTab);
+        m_goeSettingsTab->setObjectName(QStringLiteral("m_goeSettingsTab"));
+        m_goeSettingsTab->setGeometry(QRect(930, -4, 351, 760));
+        QFont font3;
+        font3.setFamily(QStringLiteral("Menlo"));
+        m_goeSettingsTab->setFont(font3);
+        m_goeSettingsTab->setTabPosition(QTabWidget::West);
+        m_goeSettingsTab->setDocumentMode(true);
+        m_goeSettingsTab->setMovable(true);
+        m_goeMainSettingTab = new QWidget();
+        m_goeMainSettingTab->setObjectName(QStringLiteral("m_goeMainSettingTab"));
+        m_createGameObjectConfiguration = new QPushButton(m_goeMainSettingTab);
+        m_createGameObjectConfiguration->setObjectName(QStringLiteral("m_createGameObjectConfiguration"));
+        m_createGameObjectConfiguration->setGeometry(QRect(20, 20, 281, 32));
+        m_goeSettingsTab->addTab(m_goeMainSettingTab, QString());
+        m_goeMaterialsSettingTab = new QWidget();
+        m_goeMaterialsSettingTab->setObjectName(QStringLiteral("m_goeMaterialsSettingTab"));
+        m_materialsComboBox = new QComboBox(m_goeMaterialsSettingTab);
+        m_materialsComboBox->setObjectName(QStringLiteral("m_materialsComboBox"));
+        m_materialsComboBox->setGeometry(QRect(20, 20, 281, 26));
+        m_goeSettingsTab->addTab(m_goeMaterialsSettingTab, QString());
+        m_goeAnimationsSettingTab = new QWidget();
+        m_goeAnimationsSettingTab->setObjectName(QStringLiteral("m_goeAnimationsSettingTab"));
+        m_goeSettingsTab->addTab(m_goeAnimationsSettingTab, QString());
         m_mainMenuTabs->addTab(gameObjectTab, QString());
         CMainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CMainWindow);
@@ -390,6 +402,7 @@ public:
 
         m_mainMenuTabs->setCurrentIndex(1);
         m_landscapePropertiesTab->setCurrentIndex(0);
+        m_goeSettingsTab->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(CMainWindow);
@@ -397,8 +410,7 @@ public:
 
     void retranslateUi(QMainWindow *CMainWindow)
     {
-        CMainWindow->setWindowTitle(QApplication::translate("CMainWindow", "CMainWindow", 0));
-        groupBox->setTitle(QApplication::translate("CMainWindow", "Scene", 0));
+        CMainWindow->setWindowTitle(QApplication::translate("CMainWindow", "indieEngine3D MapEditor", 0));
         generateGroupBox->setTitle(QApplication::translate("CMainWindow", "Generate", 0));
         label->setText(QApplication::translate("CMainWindow", "Frequency[0.1 .. 64.0]:", 0));
         label_2->setText(QApplication::translate("CMainWindow", "Octaves[1 .. 16]:", 0));
@@ -428,10 +440,10 @@ public:
         m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(landscape_textures), QApplication::translate("CMainWindow", "Textures", 0));
         m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(models), QApplication::translate("CMainWindow", "Models", 0));
         m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(sceneTab), QApplication::translate("CMainWindow", "Scene", 0));
-        groupBox_2->setTitle(QApplication::translate("CMainWindow", "Game Object", 0));
-        groupBox_3->setTitle(QApplication::translate("CMainWindow", "Properties", 0));
-        m_createGameObjectButton->setText(QApplication::translate("CMainWindow", "Create...", 0));
-        pushButton->setText(QApplication::translate("CMainWindow", "PushButton", 0));
+        m_createGameObjectConfiguration->setText(QApplication::translate("CMainWindow", "Create configuration...", 0));
+        m_goeSettingsTab->setTabText(m_goeSettingsTab->indexOf(m_goeMainSettingTab), QApplication::translate("CMainWindow", "Configuration", 0));
+        m_goeSettingsTab->setTabText(m_goeSettingsTab->indexOf(m_goeMaterialsSettingTab), QApplication::translate("CMainWindow", "Materials", 0));
+        m_goeSettingsTab->setTabText(m_goeSettingsTab->indexOf(m_goeAnimationsSettingTab), QApplication::translate("CMainWindow", "Animations", 0));
         m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(gameObjectTab), QApplication::translate("CMainWindow", "Game Object", 0));
     } // retranslateUi
 

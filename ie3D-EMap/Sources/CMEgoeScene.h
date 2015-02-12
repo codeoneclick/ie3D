@@ -34,6 +34,15 @@ protected:
     void onKeyUp(i32 key);
     void onKeyDown(i32 key);
     
+    void onConfigurationLoaded(ISharedConfigurationRef configuration);
+    
+    void setMeshFilenameCommand(const std::string& filename);
+    
+    CSharedConfigurationShader createTempConfigurationShader(void);
+    CSharedConfigurationTexture createTempConfigurationTexture(ui32 sampleIndex);
+    CSharedConfigurationMaterial createTempConfigurationMaterial(const std::string& techniqueName);
+    CSharedConfigurationModel createTempConfigurationModel(const std::string& filename);
+    
 public:
     
     CMEgoeScene(IGameTransition* root);

@@ -339,6 +339,12 @@
 		21B0BA0A1A82AA72001CE9A0 /* CPerlinNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B0BA081A82AA72001CE9A0 /* CPerlinNoise.cpp */; };
 		21B0BA0B1A82AA72001CE9A0 /* CPerlinNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B0BA081A82AA72001CE9A0 /* CPerlinNoise.cpp */; };
 		21B0BA0C1A82AA72001CE9A0 /* CPerlinNoise.h in Headers */ = {isa = PBXBuildFile; fileRef = 21B0BA091A82AA72001CE9A0 /* CPerlinNoise.h */; };
+		21B72FAC1A8CE96B003F4C24 /* IUICommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B72FAA1A8CE96B003F4C24 /* IUICommands.cpp */; };
+		21B72FAD1A8CE96B003F4C24 /* IUICommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B72FAA1A8CE96B003F4C24 /* IUICommands.cpp */; };
+		21B72FAE1A8CE96B003F4C24 /* IUICommands.h in Headers */ = {isa = PBXBuildFile; fileRef = 21B72FAB1A8CE96B003F4C24 /* IUICommands.h */; };
+		21B72FB61A8CEDAE003F4C24 /* ICommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B72FB41A8CEDAE003F4C24 /* ICommand.cpp */; };
+		21B72FB71A8CEDAE003F4C24 /* ICommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B72FB41A8CEDAE003F4C24 /* ICommand.cpp */; };
+		21B72FB81A8CEDAE003F4C24 /* ICommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 21B72FB51A8CEDAE003F4C24 /* ICommand.h */; };
 		21C409A5197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A6197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A7197B0B4B0063D62D /* CMeshSerializer_MDL_01.h in Headers */ = {isa = PBXBuildFile; fileRef = 21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */; };
@@ -560,6 +566,10 @@
 		21B0BA081A82AA72001CE9A0 /* CPerlinNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPerlinNoise.cpp; path = Sources/CPerlinNoise.cpp; sourceTree = "<group>"; };
 		21B0BA091A82AA72001CE9A0 /* CPerlinNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPerlinNoise.h; path = Sources/CPerlinNoise.h; sourceTree = "<group>"; };
 		21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CInputContext_osx.cpp; path = Sources/CInputContext_osx.cpp; sourceTree = "<group>"; };
+		21B72FAA1A8CE96B003F4C24 /* IUICommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IUICommands.cpp; path = Sources/IUICommands.cpp; sourceTree = "<group>"; };
+		21B72FAB1A8CE96B003F4C24 /* IUICommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUICommands.h; path = Sources/IUICommands.h; sourceTree = "<group>"; };
+		21B72FB41A8CEDAE003F4C24 /* ICommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICommand.cpp; path = Sources/ICommand.cpp; sourceTree = "<group>"; };
+		21B72FB51A8CEDAE003F4C24 /* ICommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICommand.h; path = Sources/ICommand.h; sourceTree = "<group>"; };
 		21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshSerializer_MDL_01.cpp; path = Sources/CMeshSerializer_MDL_01.cpp; sourceTree = "<group>"; };
 		21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshSerializer_MDL_01.h; path = Sources/CMeshSerializer_MDL_01.h; sourceTree = "<group>"; };
 		21C409A8197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshCommiter_MDL_01.cpp; path = Sources/CMeshCommiter_MDL_01.cpp; sourceTree = "<group>"; };
@@ -1170,6 +1180,17 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
+		21B72FA91A8CE949003F4C24 /* UICommands */ = {
+			isa = PBXGroup;
+			children = (
+				21B72FB51A8CEDAE003F4C24 /* ICommand.h */,
+				21B72FB41A8CEDAE003F4C24 /* ICommand.cpp */,
+				21B72FAB1A8CE96B003F4C24 /* IUICommands.h */,
+				21B72FAA1A8CE96B003F4C24 /* IUICommands.cpp */,
+			);
+			name = UICommands;
+			sourceTree = "<group>";
+		};
 		A40138BC1754E9CE0056461B /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1451,6 +1472,7 @@
 		A494D36717392D8100228936 /* StateMachine Managment */ = {
 			isa = PBXGroup;
 			children = (
+				21B72FA91A8CE949003F4C24 /* UICommands */,
 				A46A331D174E5AC70044643E /* Transitions */,
 				213265D51906A407001C98F7 /* CGameLoopExecutor.h */,
 				217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */,
@@ -1840,6 +1862,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21B72FAE1A8CE96B003F4C24 /* IUICommands.h in Headers */,
 				2191CE53196EDBEF00CE2813 /* pnginfo.h in Headers */,
 				2191CE4C196EDBEF00CE2813 /* png.h in Headers */,
 				2191CE9F196EE95100CE2813 /* deflate.h in Headers */,
@@ -1867,6 +1890,7 @@
 				21ACE3941A7133FF0017A771 /* CComponentRendering.h in Headers */,
 				21ACE38A1A711D280017A771 /* IComponent.h in Headers */,
 				2191CEB7196EE95100CE2813 /* trees.h in Headers */,
+				21B72FB81A8CEDAE003F4C24 /* ICommand.h in Headers */,
 				21A56D201A79090600C8F362 /* CConfigurationShader.h in Headers */,
 				21A56D171A79090600C8F362 /* CConfigurationMaterial.h in Headers */,
 				2191CEAD196EE95100CE2813 /* inffast.h in Headers */,
@@ -2141,6 +2165,7 @@
 				21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				21208FFC1906FB6000FFC8D4 /* CSkeletonCommiter_SK.cpp in Sources */,
 				21ACE3891A711D280017A771 /* IComponent.cpp in Sources */,
+				21B72FB71A8CEDAE003F4C24 /* ICommand.cpp in Sources */,
 				21208FFD1906FB6000FFC8D4 /* CSequenceCommiter_SEQ.cpp in Sources */,
 				2191CE56196EDBEF00CE2813 /* pngmem.c in Sources */,
 				21208FFE1906FB6000FFC8D4 /* IResourceSerializer.cpp in Sources */,
@@ -2160,6 +2185,7 @@
 				21ACE3931A7133FF0017A771 /* CComponentRendering.cpp in Sources */,
 				21A56D1F1A79090600C8F362 /* CConfigurationShader.cpp in Sources */,
 				21A56D251A79090600C8F362 /* CConfigurationTexture.cpp in Sources */,
+				21B72FAD1A8CE96B003F4C24 /* IUICommands.cpp in Sources */,
 				2191CE77196EE0B000CE2813 /* CTextureCommiter_PNG.cpp in Sources */,
 				2191CEBD196EE95100CE2813 /* zutil.c in Sources */,
 				212090081906FB6000FFC8D4 /* CResourceLoader.cpp in Sources */,
@@ -2305,6 +2331,7 @@
 				21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				213266401906A4AF001C98F7 /* CSkeletonCommiter_SK.cpp in Sources */,
 				21ACE3881A711D280017A771 /* IComponent.cpp in Sources */,
+				21B72FB61A8CEDAE003F4C24 /* ICommand.cpp in Sources */,
 				213266411906A4AF001C98F7 /* CSequenceCommiter_SEQ.cpp in Sources */,
 				2191CE55196EDBEF00CE2813 /* pngmem.c in Sources */,
 				213266421906A4AF001C98F7 /* IResourceSerializer.cpp in Sources */,
@@ -2324,6 +2351,7 @@
 				21ACE3921A7133FF0017A771 /* CComponentRendering.cpp in Sources */,
 				21A56D1E1A79090600C8F362 /* CConfigurationShader.cpp in Sources */,
 				21A56D241A79090600C8F362 /* CConfigurationTexture.cpp in Sources */,
+				21B72FAC1A8CE96B003F4C24 /* IUICommands.cpp in Sources */,
 				2191CE76196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp in Sources */,
 				2191CEBC196EE95100CE2813 /* zutil.c in Sources */,
 				2132664C1906A4AF001C98F7 /* CResourceLoader.cpp in Sources */,

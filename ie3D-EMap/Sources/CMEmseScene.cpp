@@ -74,12 +74,6 @@ void CMEmseScene::load(void)
     m_skybox = m_root->createSkybox("gameobject.skybox.xml");
     m_root->setSkybox(m_skybox);
     
-    std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
-    particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
-    
-    m_particles.push_back(particleEmitter);
-    m_root->addParticleEmitter(particleEmitter);
-    
     m_landscape = m_root->createLandscape("gameobject.landscape.xml");
     m_root->setLandscape(m_landscape);
     
@@ -272,13 +266,6 @@ void CMEmseScene::onConfigurationLoaded(ISharedConfigurationRef configuration)
 {
     m_landscapeMaterial = m_landscape->getMaterial("ws.base");
     m_landscape->addResourceLoadingCommand(std::bind(&CMEmseScene::onResourceLoaded, this, std::placeholders::_1));
-    CSharedConfigurationLandscape configurationLandscape = std::static_pointer_cast<CConfigurationLandscape>(configuration);
-    for(const auto& iterator : configurationLandscape->getMaterialsConfigurations())
-    {
-        std::shared_ptr<CConfigurationMaterial> configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        configurationMaterial->deserialize("ooo.xml");
-    }
-    configurationLandscape->deserialize("ppp.xml");
 }
 
 void CMEmseScene::onResourceLoaded(ISharedResourceRef resource)

@@ -28,4 +28,12 @@ class CMESceneToUICommands;
 typedef std::shared_ptr<CMESceneToUICommands> CSharedMESceneToUICommands;
 typedef const CSharedMESceneToUICommands& CSharedMESceneToUICommandsRef;
 
+class CMEUIToGOESceneCommands;
+typedef std::shared_ptr<CMEUIToGOESceneCommands> CSharedMEUIToGOESceneCommands;
+typedef const CSharedMEUIToGOESceneCommands& CSharedMEUIToGOESceneCommandsRef;
+
+class CMEGOESceneToUICommands;
+typedef std::shared_ptr<CMEGOESceneToUICommands> CSharedMEGOESceneToUICommands;
+typedef const CSharedMEGOESceneToUICommands& CSharedMEGOESceneToUICommandsRef;
+
 #endif

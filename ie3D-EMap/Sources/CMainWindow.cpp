@@ -3,6 +3,7 @@
 #include "QFileDialog.h"
 #include "QMessageBox.h"
 #include "QPainter.h"
+#include "QStatusBar.h"
 
 #if defined(__OSX__) || defined(__WIN32__)
 
@@ -13,6 +14,7 @@
 #include "IOGLWindow.h"
 #include "CMEUIToSceneCommands.h"
 #include "CMESceneToUICommands.h"
+#include "IUICommands.h"
 #include "CConfigurationAccessor.h"
 #include "CTexture.h"
 #include "IRenderTechniqueImporter.h"
@@ -54,6 +56,9 @@ ui(new Ui::CMainWindow)
     stream.clear();
     stream<<"Smooth coefficient: "<<ui->m_smoothSlider->value()<<" [0:3]";
     ui->m_smoothLabel->setText(QString::fromUtf8(stream.str().c_str()));
+    
+    statusBar()->showMessage("Copyright (c) 2015 Sergey Sergeev. All rights reserved.");
+    statusBar()->setStyleSheet("background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); text-align:left");
 }
 
 CMainWindow::~CMainWindow()
@@ -72,6 +77,12 @@ void CMainWindow::execute(void)
     m_sceneToUICommands->connectSetSmoothCoefficientCommand(std::bind(&CMainWindow::setSmoothCoefficient, this, std::placeholders::_1));
     m_sceneToUICommands->connectSetTextureSamplerCommand(std::bind(&CMainWindow::setTextureSampler, this, std::placeholders::_1, std::placeholders::_2));
     m_sceneToUICommands->connectSetTillingTexcoordCommand(std::bind(&CMainWindow::setTillingTexcoord, this, std::placeholders::_1, std::placeholders::_2));
+    
+    m_goeSceneToUICommands = std::make_shared<IUICommands>();
+    m_goeSceneToUICommands->addCommand("setMaterialsConfigurations",
+                                       std::make_shared<CCommand<std::function<void(std::vector<CSharedConfigurationMaterial>&)>>>(std::bind(&CMainWindow::setMaterialsConfigurations,
+                                                                                                                                                                           this,
+                                                                                                                                                                           std::placeholders::_1)));
     
     NSView *mseView = reinterpret_cast<NSView*>(ui->m_oglWindow->winId());
     NSOpenGLView *mseOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
@@ -104,6 +115,7 @@ void CMainWindow::execute(void)
     m_goeTransition = std::make_shared<CMEgoeTransition>("transition.goe.xml", false);
     m_goeController->addTransition(m_goeTransition);
     m_goeController->gotoTransition("transition.goe.xml");
+    m_goeTransition->setSceneToUICommands(m_goeSceneToUICommands);
     
     if(ui->m_mainMenuTabs->currentIndex() != 1)
     {
@@ -127,15 +139,6 @@ void CMainWindow::execute(void)
     {
         m_gopTransition->setPaused(true);
     }
-    /*pugi::xml_document document;
-    pugi::xml_parse_result result;
-    result = document.load("");
-    assert(result.status == pugi::status_ok);
-    pugi::xml_node node = document.append_child("material");
-    pugi::xml_attribute attribute = node.append_attribute("is_blending");
-    attribute.set_value("0");
-    document.save_file("material.xml");*/
-
     
 #endif
 }
@@ -392,7 +395,31 @@ void CMainWindow::on_m_landscapePropertiesTab_currentChanged(int index)
     }
 }
 
-void CMainWindow::on_m_createGameObjectButton_clicked()
+void CMainWindow::on_m_createGameObjectConfiguration_clicked()
 {
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), "", tr("Files (*.MDL_mesh)"));
+    if (filename.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+#if defined(__OSX__) || defined(__WIN32__)
+        
+        m_goeTransition->getUIToSceneCommands()->execute<std::function<void(const std::string&)>>("setMeshFilename", filename.toUtf8().constData());
+        
+#endif
+    }
+}
 
+void CMainWindow::setMaterialsConfigurations(std::vector<CSharedConfigurationMaterial>& configurations)
+{
+    while (ui->m_materialsComboBox->count() != 0)
+    {
+        ui->m_materialsComboBox->removeItem(0);
+    }
+    for(ui32 i = 0; i < configurations.size(); ++i)
+    {
+        ui->m_materialsComboBox->addItem(QString(configurations.at(i)->getRenderTechniqueName().c_str()));
+    }
 }
