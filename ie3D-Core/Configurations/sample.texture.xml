@@ -4,13 +4,13 @@
     is_external="0">
     <attributes>
         <attribute type="bool" property="Cubemap" path="/texture" name="is_cubemap"/>
-        <attribute type="std::string" property="Filename" path="/texture" name="filename"/>
-        <attribute type="std::string" property="FilenamePositiveX" path="/texture" name="filename_x_positive"/>
-        <attribute type="std::string" property="FilenameNegativeX" path="/texture" name="filename_x_negative"/>
-        <attribute type="std::string" property="FilenamePositiveY" path="/texture" name="filename_y_positive"/>
-        <attribute type="std::string" property="FilenameNegativeY" path="/texture" name="filename_y_negative"/>
-        <attribute type="std::string" property="FilenamePositiveZ" path="/texture" name="filename_z_positive"/>
-        <attribute type="std::string" property="FilenameNegativeZ" path="/texture" name="filename_z_negative"/>
+        <attribute type="std::string" property="TextureFilename" path="/texture" name="filename"/>
+        <attribute type="std::string" property="TextureFilenamePositiveX" path="/texture" name="filename_x_positive"/>
+        <attribute type="std::string" property="TextureFilenameNegativeX" path="/texture" name="filename_x_negative"/>
+        <attribute type="std::string" property="TextureFilenamePositiveY" path="/texture" name="filename_y_positive"/>
+        <attribute type="std::string" property="TextureFilenameNegativeY" path="/texture" name="filename_y_negative"/>
+        <attribute type="std::string" property="TextureFilenamePositiveZ" path="/texture" name="filename_z_positive"/>
+        <attribute type="std::string" property="TextureFilenameNegativeZ" path="/texture" name="filename_z_negative"/>
         <attribute type="std::string" property="RenderTechniqueTextureName" path="/texture" name="render_operation_name"/>
         <attribute type="ui32" property="SamplerIndex" path="/texture" name="sampler_index"/>
         <attribute type="GLenum" property="WrapMode" path="/texture" name="wrap_mode"/>

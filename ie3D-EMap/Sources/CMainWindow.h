@@ -39,6 +39,11 @@ protected:
     ISharedUICommands m_mseSceneToUICommands;
     ISharedUICommands m_goeSceneToUICommands;
     
+    std::vector<CSharedConfigurationMaterial> m_goeConfigurationsMaterials;
+    
+    void updateGOEConfigurationMaterial(void);
+    void updateGOEUIConfigurationMaterial(CSharedConfigurationMaterialRef configuration);
+    
     void setMSEBrushSize(ui32 value);
     void setMSEBrushStrength(ui32 value);
     void setMSEFalloffCoefficient(ui32 value);
@@ -130,6 +135,16 @@ private slots:
     void on_m_texture2LoadButton_clicked();
 
     void on_m_texture3LoadButton_clicked();
+
+    void on_m_goeSettingsTab_currentChanged(int index);
+
+    void on_m_drawCurrentRadioButton_clicked();
+
+    void on_m_drawAllRadioButton_clicked();
+
+    void on_m_materialEnabledCheckBox_clicked();
+
+    void on_m_materialsComboBox_currentIndexChanged(int index);
 
 private:
     

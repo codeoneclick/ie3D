@@ -24,6 +24,12 @@ namespace UICommandGOEUpdateConfigurationsMaterials
     const std::string GUID = "command_02";
 };
 
+namespace UICommandGOEUpdateConfigurationMaterial
+{
+    typedef std::function<void(CSharedConfigurationMaterialRef)> COMMAND;
+    const std::string GUID = "command_11";
+};
+
 namespace UICommandMSESetBrushSize
 {
     typedef std::function<void(ui32)> COMMAND;

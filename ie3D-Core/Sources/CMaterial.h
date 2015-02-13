@@ -59,6 +59,12 @@ protected:
     static CSharedMaterialCachedParameters m_cachedParameters;
     static CSharedMaterialCachedParameters getCachedParameters(void);
     
+#if defined(__EDITOR__)
+    
+    bool m_isEnabled;
+    
+#endif
+    
 public:
     
     CMaterial(void);
@@ -126,6 +132,13 @@ public:
     
     void bind(void);
     void unbind(void);
+    
+#if defined(__EDITOR__)
+    
+    void setEnabled(bool value);
+    bool getEnabled(void) const;
+    
+#endif
 };
 
 #endif 

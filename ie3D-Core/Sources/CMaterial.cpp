@@ -45,6 +45,12 @@ CSharedMaterialCachedParameters CMaterial::getCachedParameters(void)
 
 
 CMaterial::CMaterial(void) :
+#if defined(__EDITOR__)
+
+m_isEnabled(true),
+
+#endif
+
 m_parameters(std::make_shared<CMaterialCachedParameters>())
 {
 
@@ -92,12 +98,12 @@ CSharedMaterial CMaterial::constructCustomMaterial(CSharedConfigurationMaterialR
         CSharedTexture texture;
         if(textureConfiguration->getCubemap())
         {
-            CSharedTexture xpositiveTexture = resourceAccessor->getTexture(textureConfiguration->getFilenamePositiveX());
-            CSharedTexture xnegativeTexture = resourceAccessor->getTexture(textureConfiguration->getFilenameNegativeX());
-            CSharedTexture ypositiveTexture = resourceAccessor->getTexture(textureConfiguration->getFilenamePositiveY());
-            CSharedTexture ynegativeTexture = resourceAccessor->getTexture(textureConfiguration->getFilenameNegativeY());
-            CSharedTexture zpositiveTexture = resourceAccessor->getTexture(textureConfiguration->getFilenamePositiveZ());
-            CSharedTexture znegativeTexture = resourceAccessor->getTexture(textureConfiguration->getFilenameNegativeZ());
+            CSharedTexture xpositiveTexture = resourceAccessor->getTexture(textureConfiguration->getTextureFilenamePositiveX());
+            CSharedTexture xnegativeTexture = resourceAccessor->getTexture(textureConfiguration->getTextureFilenameNegativeX());
+            CSharedTexture ypositiveTexture = resourceAccessor->getTexture(textureConfiguration->getTextureFilenamePositiveY());
+            CSharedTexture ynegativeTexture = resourceAccessor->getTexture(textureConfiguration->getTextureFilenameNegativeY());
+            CSharedTexture zpositiveTexture = resourceAccessor->getTexture(textureConfiguration->getTextureFilenamePositiveZ());
+            CSharedTexture znegativeTexture = resourceAccessor->getTexture(textureConfiguration->getTextureFilenameNegativeZ());
             
             texture = CCubemapTexture::constructCustomCubemapTexture("skybox.cubemap.texture",
                                                                      xpositiveTexture,
@@ -109,8 +115,8 @@ CSharedMaterial CMaterial::constructCustomMaterial(CSharedConfigurationMaterialR
         }
         else
         {
-            texture = textureConfiguration->getFilename().length() != 0 ?
-            resourceAccessor->getTexture(textureConfiguration->getFilename()) :
+            texture = textureConfiguration->getTextureFilename().length() != 0 ?
+            resourceAccessor->getTexture(textureConfiguration->getTextureFilename()) :
             renderTechniqueAccessor->getTechniqueTexture(textureConfiguration->getRenderTechniqueTextureName());
         }
         assert(texture != nullptr);
@@ -557,3 +563,17 @@ void CMaterial::unbind(void)
     assert(m_parameters->m_shader != nullptr);
     m_parameters->m_shader->unbind();
 }
+
+#if defined(__EDITOR__)
+
+void CMaterial::setEnabled(bool value)
+{
+    m_isEnabled = value;
+}
+
+bool CMaterial::getEnabled(void) const
+{
+    return m_isEnabled;
+}
+
+#endif

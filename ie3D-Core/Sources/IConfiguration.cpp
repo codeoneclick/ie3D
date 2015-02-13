@@ -100,6 +100,16 @@ void IConfigurationLoadingHandler::removeConfigurationLoadedCallback(const CONFI
     m_callbacks.erase(iterator);*/
 }
 
+IConfiguration::IConfiguration(void) :
+#if defined(__EDITOR__)
+
+m_isEnabled(true)
+
+#endif
+{
+    
+}
+
 IConfiguration::~IConfiguration(void)
 {
     m_attributes.clear();
@@ -159,6 +169,16 @@ pugi::xml_parse_result IConfiguration::openXMLDocument(pugi::xml_document &docum
 void IConfiguration::setFilename(const std::string& filename)
 {
     m_filename = filename;
+}
+
+void IConfiguration::setEnabled(bool value)
+{
+    m_isEnabled = value;
+}
+
+bool IConfiguration::getEnabled(void) const
+{
+    return m_isEnabled;
 }
 
 #endif

@@ -233,11 +233,17 @@ private:
     
 protected:
     
+#if defined(__EDITOR__)
+    
+    bool m_isEnabled;
+    
+#endif
+
     std::string m_filename;
     std::unordered_map<std::string, CSharedConfigurationAttribute> m_attributes;
     std::unordered_map<std::string, std::vector<ISharedConfiguration>> m_configurations;
     
-    IConfiguration(void) = default;
+    IConfiguration(void);
     
 public:
     
@@ -254,8 +260,13 @@ public:
                                            const std::string &filename);
    
 #if defined(__EDITOR__)
+    
     void setFilename(const std::string& filename);
+    void setEnabled(bool value);
+    bool getEnabled(void) const;
+    
 #endif
+    
     std::string getFilename(void) const;
     
 };

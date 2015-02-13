@@ -13,7 +13,7 @@ void CConfigurationTexture::setCubemap(bool is_cubemap)
 IConfiguration::setAttribute("/texture/is_cubemap", std::make_shared<CConfigurationAttribute>(is_cubemap));
 }
 #endif
-std::string CConfigurationTexture::getFilename(void) const
+std::string CConfigurationTexture::getTextureFilename(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename");
 assert(iterator != m_attributes.end());
@@ -21,12 +21,12 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationTexture::setFilename(std::string filename)
+void CConfigurationTexture::setTextureFilename(std::string filename)
 {
 IConfiguration::setAttribute("/texture/filename", std::make_shared<CConfigurationAttribute>(filename));
 }
 #endif
-std::string CConfigurationTexture::getFilenamePositiveX(void) const
+std::string CConfigurationTexture::getTextureFilenamePositiveX(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_x_positive");
 assert(iterator != m_attributes.end());
@@ -34,12 +34,12 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationTexture::setFilenamePositiveX(std::string filename_x_positive)
+void CConfigurationTexture::setTextureFilenamePositiveX(std::string filename_x_positive)
 {
 IConfiguration::setAttribute("/texture/filename_x_positive", std::make_shared<CConfigurationAttribute>(filename_x_positive));
 }
 #endif
-std::string CConfigurationTexture::getFilenameNegativeX(void) const
+std::string CConfigurationTexture::getTextureFilenameNegativeX(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_x_negative");
 assert(iterator != m_attributes.end());
@@ -47,12 +47,12 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationTexture::setFilenameNegativeX(std::string filename_x_negative)
+void CConfigurationTexture::setTextureFilenameNegativeX(std::string filename_x_negative)
 {
 IConfiguration::setAttribute("/texture/filename_x_negative", std::make_shared<CConfigurationAttribute>(filename_x_negative));
 }
 #endif
-std::string CConfigurationTexture::getFilenamePositiveY(void) const
+std::string CConfigurationTexture::getTextureFilenamePositiveY(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_y_positive");
 assert(iterator != m_attributes.end());
@@ -60,12 +60,12 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationTexture::setFilenamePositiveY(std::string filename_y_positive)
+void CConfigurationTexture::setTextureFilenamePositiveY(std::string filename_y_positive)
 {
 IConfiguration::setAttribute("/texture/filename_y_positive", std::make_shared<CConfigurationAttribute>(filename_y_positive));
 }
 #endif
-std::string CConfigurationTexture::getFilenameNegativeY(void) const
+std::string CConfigurationTexture::getTextureFilenameNegativeY(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_y_negative");
 assert(iterator != m_attributes.end());
@@ -73,12 +73,12 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationTexture::setFilenameNegativeY(std::string filename_y_negative)
+void CConfigurationTexture::setTextureFilenameNegativeY(std::string filename_y_negative)
 {
 IConfiguration::setAttribute("/texture/filename_y_negative", std::make_shared<CConfigurationAttribute>(filename_y_negative));
 }
 #endif
-std::string CConfigurationTexture::getFilenamePositiveZ(void) const
+std::string CConfigurationTexture::getTextureFilenamePositiveZ(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_z_positive");
 assert(iterator != m_attributes.end());
@@ -86,12 +86,12 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationTexture::setFilenamePositiveZ(std::string filename_z_positive)
+void CConfigurationTexture::setTextureFilenamePositiveZ(std::string filename_z_positive)
 {
 IConfiguration::setAttribute("/texture/filename_z_positive", std::make_shared<CConfigurationAttribute>(filename_z_positive));
 }
 #endif
-std::string CConfigurationTexture::getFilenameNegativeZ(void) const
+std::string CConfigurationTexture::getTextureFilenameNegativeZ(void) const
 {
 const auto& iterator = m_attributes.find("/texture/filename_z_negative");
 assert(iterator != m_attributes.end());
@@ -99,7 +99,7 @@ std::string value; iterator->second->get(&value);
 return value;
 }
 #if defined(__EDITOR__)
-void CConfigurationTexture::setFilenameNegativeZ(std::string filename_z_negative)
+void CConfigurationTexture::setTextureFilenameNegativeZ(std::string filename_z_negative)
 {
 IConfiguration::setAttribute("/texture/filename_z_negative", std::make_shared<CConfigurationAttribute>(filename_z_negative));
 }
@@ -214,25 +214,25 @@ attribute = node.append_attribute("is_cubemap");
 bool is_cubemap = CConfigurationTexture::getCubemap();
 attribute.set_value(is_cubemap);
 attribute = node.append_attribute("filename");
-std::string filename = CConfigurationTexture::getFilename();
+std::string filename = CConfigurationTexture::getTextureFilename();
 attribute.set_value(filename.c_str());
 attribute = node.append_attribute("filename_x_positive");
-std::string filename_x_positive = CConfigurationTexture::getFilenamePositiveX();
+std::string filename_x_positive = CConfigurationTexture::getTextureFilenamePositiveX();
 attribute.set_value(filename_x_positive.c_str());
 attribute = node.append_attribute("filename_x_negative");
-std::string filename_x_negative = CConfigurationTexture::getFilenameNegativeX();
+std::string filename_x_negative = CConfigurationTexture::getTextureFilenameNegativeX();
 attribute.set_value(filename_x_negative.c_str());
 attribute = node.append_attribute("filename_y_positive");
-std::string filename_y_positive = CConfigurationTexture::getFilenamePositiveY();
+std::string filename_y_positive = CConfigurationTexture::getTextureFilenamePositiveY();
 attribute.set_value(filename_y_positive.c_str());
 attribute = node.append_attribute("filename_y_negative");
-std::string filename_y_negative = CConfigurationTexture::getFilenameNegativeY();
+std::string filename_y_negative = CConfigurationTexture::getTextureFilenameNegativeY();
 attribute.set_value(filename_y_negative.c_str());
 attribute = node.append_attribute("filename_z_positive");
-std::string filename_z_positive = CConfigurationTexture::getFilenamePositiveZ();
+std::string filename_z_positive = CConfigurationTexture::getTextureFilenamePositiveZ();
 attribute.set_value(filename_z_positive.c_str());
 attribute = node.append_attribute("filename_z_negative");
-std::string filename_z_negative = CConfigurationTexture::getFilenameNegativeZ();
+std::string filename_z_negative = CConfigurationTexture::getTextureFilenameNegativeZ();
 attribute.set_value(filename_z_negative.c_str());
 attribute = node.append_attribute("render_operation_name");
 std::string render_operation_name = CConfigurationTexture::getRenderTechniqueTextureName();

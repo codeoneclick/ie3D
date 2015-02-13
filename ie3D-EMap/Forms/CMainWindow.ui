@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>CMainWindow</class>
  <widget class="QMainWindow" name="CMainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,10 +32,16 @@
    <string notr="true">background-color: rgb(128, 128, 128);</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(64, 64, 64);</string>
    </property>
    <widget class="QTabWidget" name="m_mainMenuTabs">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>-1</x>
@@ -225,7 +234,7 @@
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="documentMode">
      <bool>true</bool>
@@ -238,6 +247,9 @@
       <string>Scene</string>
      </attribute>
      <widget class="QTabWidget" name="m_landscapePropertiesTab">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>930</x>
@@ -277,6 +289,9 @@
         <string>Landscape</string>
        </attribute>
        <widget class="QGroupBox" name="generateGroupBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -299,6 +314,9 @@
          <string>Generate</string>
         </property>
         <widget class="QSpinBox" name="m_octavesSpinBox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>160</x>
@@ -315,6 +333,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="label">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -335,6 +356,9 @@
          </property>
         </widget>
         <widget class="QDoubleSpinBox" name="m_frequencySpinBox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>160</x>
@@ -357,6 +381,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="label_2">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -377,6 +404,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="label_3">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -397,6 +427,9 @@
          </property>
         </widget>
         <widget class="QSpinBox" name="m_seedSpinBox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>160</x>
@@ -413,6 +446,9 @@
          </property>
         </widget>
         <widget class="QPushButton" name="generateButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>23</x>
@@ -433,6 +469,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="label_4">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -453,6 +492,9 @@
          </property>
         </widget>
         <widget class="QSpinBox" name="m_sizeXSpinBox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>160</x>
@@ -475,6 +517,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="label_5">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>120</x>
@@ -495,6 +540,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="label_6">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>120</x>
@@ -515,6 +563,9 @@
          </property>
         </widget>
         <widget class="QSpinBox" name="m_sizeYSpinBox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>160</x>
@@ -538,6 +589,9 @@
         </widget>
        </widget>
        <widget class="QGroupBox" name="editGroupBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -561,6 +615,9 @@
          <string>Edit</string>
         </property>
         <widget class="QSlider" name="m_smoothSlider">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -589,6 +646,9 @@
          </property>
         </widget>
         <widget class="QSlider" name="m_brushSizeSlider">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -617,6 +677,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="m_falloffLabel">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -638,6 +701,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="m_brushSizeLabel">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -659,6 +725,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="m_smoothLabel">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -680,6 +749,9 @@
          </property>
         </widget>
         <widget class="QSlider" name="m_brushStrengthSlider">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -705,6 +777,9 @@
          </property>
         </widget>
         <widget class="QLabel" name="m_brushStrengthLabel">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -726,6 +801,9 @@
          </property>
         </widget>
         <widget class="QSlider" name="m_falloffSlider">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>40</x>
@@ -1062,6 +1140,9 @@
       </widget>
      </widget>
      <widget class="QWidget" name="m_oglWindow" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -1080,6 +1161,9 @@
       <string>Game Object</string>
      </attribute>
      <widget class="QWidget" name="m_gameObjectGLWindow" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -1093,6 +1177,9 @@
       </property>
      </widget>
      <widget class="QTabWidget" name="m_goeSettingsTab">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>930</x>
@@ -1123,6 +1210,9 @@
         <string>Configuration</string>
        </attribute>
        <widget class="QPushButton" name="m_createGameObjectConfiguration">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -1137,6 +1227,14 @@
        </widget>
       </widget>
       <widget class="QWidget" name="m_goeMaterialsSettingTab">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>Menlo</family>
+        </font>
+       </property>
        <attribute name="title">
         <string>Materials</string>
        </attribute>
@@ -1144,7 +1242,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>20</y>
+          <y>60</y>
           <width>280</width>
           <height>26</height>
          </rect>
@@ -1154,7 +1252,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>50</y>
+          <y>120</y>
           <width>271</width>
           <height>20</height>
          </rect>
@@ -1167,7 +1265,7 @@
         <property name="geometry">
          <rect>
           <x>118</x>
-          <y>76</y>
+          <y>146</y>
           <width>182</width>
           <height>26</height>
          </rect>
@@ -1177,7 +1275,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>110</y>
+          <y>180</y>
           <width>271</width>
           <height>20</height>
          </rect>
@@ -1190,7 +1288,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>130</y>
+          <y>200</y>
           <width>271</width>
           <height>20</height>
          </rect>
@@ -1203,7 +1301,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>150</y>
+          <y>220</y>
           <width>271</width>
           <height>20</height>
          </rect>
@@ -1216,7 +1314,7 @@
         <property name="geometry">
          <rect>
           <x>118</x>
-          <y>176</y>
+          <y>246</y>
           <width>182</width>
           <height>26</height>
          </rect>
@@ -1226,7 +1324,7 @@
         <property name="geometry">
          <rect>
           <x>118</x>
-          <y>206</y>
+          <y>276</y>
           <width>182</width>
           <height>26</height>
          </rect>
@@ -1236,7 +1334,7 @@
         <property name="geometry">
          <rect>
           <x>22</x>
-          <y>80</y>
+          <y>150</y>
           <width>62</width>
           <height>16</height>
          </rect>
@@ -1249,7 +1347,7 @@
         <property name="geometry">
          <rect>
           <x>22</x>
-          <y>180</y>
+          <y>250</y>
           <width>62</width>
           <height>16</height>
          </rect>
@@ -1262,7 +1360,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>210</y>
+          <y>280</y>
           <width>91</width>
           <height>16</height>
          </rect>
@@ -1275,7 +1373,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>240</y>
+          <y>310</y>
           <width>271</width>
           <height>20</height>
          </rect>
@@ -1288,7 +1386,7 @@
         <property name="geometry">
          <rect>
           <x>40</x>
-          <y>267</y>
+          <y>337</y>
           <width>70</width>
           <height>24</height>
          </rect>
@@ -1307,7 +1405,7 @@
         <property name="geometry">
          <rect>
           <x>136</x>
-          <y>267</y>
+          <y>337</y>
           <width>70</width>
           <height>24</height>
          </rect>
@@ -1326,7 +1424,7 @@
         <property name="geometry">
          <rect>
           <x>230</x>
-          <y>267</y>
+          <y>337</y>
           <width>70</width>
           <height>24</height>
          </rect>
@@ -1345,7 +1443,7 @@
         <property name="geometry">
          <rect>
           <x>136</x>
-          <y>297</y>
+          <y>367</y>
           <width>70</width>
           <height>24</height>
          </rect>
@@ -1364,7 +1462,7 @@
         <property name="geometry">
          <rect>
           <x>22</x>
-          <y>270</y>
+          <y>340</y>
           <width>18</width>
           <height>16</height>
          </rect>
@@ -1377,7 +1475,7 @@
         <property name="geometry">
          <rect>
           <x>120</x>
-          <y>270</y>
+          <y>340</y>
           <width>18</width>
           <height>16</height>
          </rect>
@@ -1390,7 +1488,7 @@
         <property name="geometry">
          <rect>
           <x>214</x>
-          <y>270</y>
+          <y>340</y>
           <width>18</width>
           <height>16</height>
          </rect>
@@ -1403,7 +1501,7 @@
         <property name="geometry">
          <rect>
           <x>120</x>
-          <y>300</y>
+          <y>370</y>
           <width>18</width>
           <height>16</height>
          </rect>
@@ -1416,7 +1514,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>330</y>
+          <y>400</y>
           <width>271</width>
           <height>20</height>
          </rect>
@@ -1429,7 +1527,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>350</y>
+          <y>420</y>
           <width>271</width>
           <height>20</height>
          </rect>
@@ -1442,7 +1540,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>370</y>
+          <y>440</y>
           <width>271</width>
           <height>20</height>
          </rect>
@@ -1455,7 +1553,7 @@
         <property name="geometry">
          <rect>
           <x>13</x>
-          <y>400</y>
+          <y>470</y>
           <width>291</width>
           <height>24</height>
          </rect>
@@ -1468,8 +1566,8 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>560</y>
-          <width>96</width>
+          <y>600</y>
+          <width>64</width>
           <height>24</height>
          </rect>
         </property>
@@ -1484,8 +1582,8 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>440</y>
-          <width>111</width>
+          <y>510</y>
+          <width>81</width>
           <height>16</height>
          </rect>
         </property>
@@ -1507,25 +1605,34 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>460</y>
-          <width>96</width>
-          <height>96</height>
+          <y>530</y>
+          <width>64</width>
+          <height>64</height>
          </rect>
         </property>
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);
 background-color: rgb(0, 0, 0);</string>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
        <widget class="QLabel" name="m_texture01Label_3">
         <property name="geometry">
          <rect>
-          <x>190</x>
-          <y>440</y>
-          <width>111</width>
+          <x>100</x>
+          <y>510</y>
+          <width>81</width>
           <height>16</height>
          </rect>
         </property>
@@ -1546,26 +1653,35 @@ background-color: rgb(0, 0, 0);</string>
        <widget class="QLabel" name="m_texture2Image">
         <property name="geometry">
          <rect>
-          <x>200</x>
-          <y>460</y>
-          <width>96</width>
-          <height>96</height>
+          <x>110</x>
+          <y>530</y>
+          <width>64</width>
+          <height>64</height>
          </rect>
         </property>
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);
 background-color: rgb(0, 0, 0);</string>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
        <widget class="QPushButton" name="m_texture2LoadButton">
         <property name="geometry">
          <rect>
-          <x>200</x>
-          <y>560</y>
-          <width>96</width>
+          <x>110</x>
+          <y>600</y>
+          <width>64</width>
           <height>24</height>
          </rect>
         </property>
@@ -1579,8 +1695,8 @@ background-color: rgb(0, 0, 0);</string>
        <widget class="QLabel" name="m_texture01Label_4">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>600</y>
+          <x>190</x>
+          <y>510</y>
           <width>81</width>
           <height>16</height>
          </rect>
@@ -1602,26 +1718,35 @@ background-color: rgb(0, 0, 0);</string>
        <widget class="QLabel" name="m_texture3Image">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>620</y>
-          <width>96</width>
-          <height>96</height>
+          <x>200</x>
+          <y>530</y>
+          <width>64</width>
+          <height>64</height>
          </rect>
         </property>
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);
 background-color: rgb(0, 0, 0);</string>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
        <widget class="QPushButton" name="m_texture3LoadButton">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>720</y>
-          <width>96</width>
+          <x>200</x>
+          <y>600</y>
+          <width>64</width>
           <height>24</height>
          </rect>
         </property>
@@ -1632,8 +1757,50 @@ background-color: rgb(0, 0, 0);</string>
          <string>Load...</string>
         </property>
        </widget>
+       <widget class="QCheckBox" name="m_materialEnabledCheckBox">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Enabled</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="m_drawCurrentRadioButton">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>30</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Draw Current</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="m_drawAllRadioButton">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>30</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Draw All</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="m_goeAnimationsSettingTab">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <attribute name="title">
         <string>Animations</string>
        </attribute>

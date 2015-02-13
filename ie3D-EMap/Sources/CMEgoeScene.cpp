@@ -32,6 +32,11 @@ m_model(nullptr)
                                                                                                             this,
                                                                                                             std::placeholders::_1));
     m_uiToSceneCommands->addCommand(UICommandGOECreateConfiguration::GUID, command);
+    
+    command = std::make_shared<CCommand<UICommandGOEUpdateConfigurationMaterial::COMMAND>>(std::bind(&CMEgoeScene::updateConfigurationMaterial,
+                                                                                                     this,
+                                                                                                     std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandGOEUpdateConfigurationMaterial::GUID, command);
 }
 
 CMEgoeScene::~CMEgoeScene(void)
@@ -60,7 +65,7 @@ void CMEgoeScene::load(void)
     
     m_landscape = m_root->createLandscape("gameobject.landscape.goe.xml");
     m_root->setLandscape(m_landscape);
-
+    
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
     
@@ -148,13 +153,13 @@ CSharedConfigurationTexture CMEgoeScene::createTempConfigurationTexture(ui32 sam
 {
     CSharedConfigurationTexture configurationTexture = std::make_shared<CConfigurationTexture>();
     configurationTexture->setCubemap(false);
-    configurationTexture->setFilename("gameobject.goe.temp.png");
-    configurationTexture->setFilenameNegativeX("");
-    configurationTexture->setFilenameNegativeY("");
-    configurationTexture->setFilenameNegativeZ("");
-    configurationTexture->setFilenamePositiveX("");
-    configurationTexture->setFilenamePositiveY("");
-    configurationTexture->setFilenamePositiveZ("");
+    configurationTexture->setTextureFilename("gameobject.goe.temp.png");
+    configurationTexture->setTextureFilenameNegativeX("");
+    configurationTexture->setTextureFilenameNegativeY("");
+    configurationTexture->setTextureFilenameNegativeZ("");
+    configurationTexture->setTextureFilenamePositiveX("");
+    configurationTexture->setTextureFilenamePositiveY("");
+    configurationTexture->setTextureFilenamePositiveZ("");
     configurationTexture->setRenderTechniqueTextureName("");
     configurationTexture->setSamplerIndex(sampleIndex);
     configurationTexture->setWrapMode(GL_REPEAT);
@@ -191,22 +196,28 @@ CSharedConfigurationMaterial CMEgoeScene::createTempConfigurationMaterial(const 
     
     std::string path = executablepath();
     
-    configurationMaterial->setFilename(path + "material.base.goe.temp.xml");
-    configurationMaterial->deserialize(path + "material.base.goe.temp.xml");
+    configurationMaterial->setFilename(path + "material." + techniqueName + ".goe.temp.xml");
+    configurationMaterial->deserialize(path + "material." + techniqueName + ".goe.temp.xml");
     
     return configurationMaterial;
 }
 
 CSharedConfigurationModel CMEgoeScene::createTempConfigurationModel(const std::string& filename)
 {
-    CSharedConfigurationMaterial configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.base");
-    
     CSharedConfigurationModel configurationModel = std::make_shared<CConfigurationModel>();
     std::string meshFilename = filename;
     std::string extension = "_mesh";
     meshFilename = meshFilename.erase(filename.find(extension), extension.length());
     configurationModel->setMeshFilename(meshFilename);
     configurationModel->setBatching(false);
+    
+    CSharedConfigurationMaterial configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.base");
+    configurationModel->addMaterialsConfigurations(configurationMaterial);
+    configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.reflection");
+    configurationModel->addMaterialsConfigurations(configurationMaterial);
+    configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.refraction");
+    configurationModel->addMaterialsConfigurations(configurationMaterial);
+    configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.shadowing");
     configurationModel->addMaterialsConfigurations(configurationMaterial);
     
     std::string path = executablepath();
@@ -234,5 +245,38 @@ void CMEgoeScene::setMeshFilenameCommand(const std::string& filename)
         m_root->addModel(m_model);
         m_model->setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
         m_model->addConfigurationLoadedCallback(std::bind(&CMEgoeScene::onConfigurationLoaded, this, std::placeholders::_1));
+    }
+}
+
+void CMEgoeScene::updateConfigurationMaterial(CSharedConfigurationMaterialRef configuration)
+{
+    assert(configuration != nullptr);
+    assert(m_model != nullptr);
+    
+    CSharedMaterial material = m_model->getMaterial(configuration->getRenderTechniqueName());
+    assert(material != nullptr);
+    
+    material->setCulling(configuration->getCulling());
+    material->setCullingMode(configuration->getCullingMode());
+    material->setDepthTest(configuration->getDepthTest());
+    material->setDepthMask(configuration->getDepthMask());
+    material->setBlending(configuration->getBlending());
+    material->setBlendingFunctionSource(configuration->getBlendingFunctionSource());
+    material->setBlendingFunctionDestination(configuration->getBlendingFunctionDestination());
+    material->setClipping(configuration->getClipping());
+    material->setClippingPlane(glm::vec4(configuration->getClippingX(),
+                                         configuration->getClippingY(),
+                                         configuration->getClippingZ(),
+                                         configuration->getClippingW()));
+    material->setReflecting(configuration->getReflecting());
+    material->setShadowing(configuration->getShadowing());
+    material->setDebugging(configuration->getDebugging());
+    material->setEnabled(configuration->getEnabled());
+    
+    for (ui32 i = 0; i < configuration->getTexturesConfigurations().size(); ++i)
+    {
+        CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configuration->getTexturesConfigurations().at(i));
+        CSharedTexture texture = m_root->getResourceAccessor()->getTexture(configurationTexture->getTextureFilename());
+        material->setTexture(texture, static_cast<E_SHADER_SAMPLER>(i));
     }
 }

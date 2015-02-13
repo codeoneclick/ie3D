@@ -11,33 +11,33 @@ bool getCubemap(void) const;
 #if defined(__EDITOR__)
 void setCubemap(bool is_cubemap);
 #endif
-std::string getFilename(void) const;
+std::string getTextureFilename(void) const;
 #if defined(__EDITOR__)
-void setFilename(std::string filename);
+void setTextureFilename(std::string filename);
 #endif
-std::string getFilenamePositiveX(void) const;
+std::string getTextureFilenamePositiveX(void) const;
 #if defined(__EDITOR__)
-void setFilenamePositiveX(std::string filename_x_positive);
+void setTextureFilenamePositiveX(std::string filename_x_positive);
 #endif
-std::string getFilenameNegativeX(void) const;
+std::string getTextureFilenameNegativeX(void) const;
 #if defined(__EDITOR__)
-void setFilenameNegativeX(std::string filename_x_negative);
+void setTextureFilenameNegativeX(std::string filename_x_negative);
 #endif
-std::string getFilenamePositiveY(void) const;
+std::string getTextureFilenamePositiveY(void) const;
 #if defined(__EDITOR__)
-void setFilenamePositiveY(std::string filename_y_positive);
+void setTextureFilenamePositiveY(std::string filename_y_positive);
 #endif
-std::string getFilenameNegativeY(void) const;
+std::string getTextureFilenameNegativeY(void) const;
 #if defined(__EDITOR__)
-void setFilenameNegativeY(std::string filename_y_negative);
+void setTextureFilenameNegativeY(std::string filename_y_negative);
 #endif
-std::string getFilenamePositiveZ(void) const;
+std::string getTextureFilenamePositiveZ(void) const;
 #if defined(__EDITOR__)
-void setFilenamePositiveZ(std::string filename_z_positive);
+void setTextureFilenamePositiveZ(std::string filename_z_positive);
 #endif
-std::string getFilenameNegativeZ(void) const;
+std::string getTextureFilenameNegativeZ(void) const;
 #if defined(__EDITOR__)
-void setFilenameNegativeZ(std::string filename_z_negative);
+void setTextureFilenameNegativeZ(std::string filename_z_negative);
 #endif
 std::string getRenderTechniqueTextureName(void) const;
 #if defined(__EDITOR__)

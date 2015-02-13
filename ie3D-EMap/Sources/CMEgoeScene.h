@@ -37,6 +37,7 @@ protected:
     void onConfigurationLoaded(ISharedConfigurationRef configuration);
     
     void setMeshFilenameCommand(const std::string& filename);
+    void updateConfigurationMaterial(CSharedConfigurationMaterialRef configuration);
     
     CSharedConfigurationShader createTempConfigurationShader(void);
     CSharedConfigurationTexture createTempConfigurationTexture(ui32 sampleIndex);

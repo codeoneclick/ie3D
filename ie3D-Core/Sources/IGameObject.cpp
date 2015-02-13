@@ -236,7 +236,13 @@ void IGameObject::onBind(const std::string& techniqueName)
     
     auto iterator = m_materials.find(techniqueName);
     if(!m_isBatching &&
-       iterator->second->getShader()->isLoaded())
+       iterator->second->getShader()->isLoaded()
+#if defined(__EDITOR__)
+       
+       && iterator->second->getEnabled()
+       
+#endif
+       )
     {
         iterator->second->bind();
         m_mesh->bind(iterator->second->getShader()->getAttributes());
@@ -253,7 +259,13 @@ void IGameObject::onDraw(const std::string& techniqueName)
     
     auto iterator = m_materials.find(techniqueName);
     if(!m_isBatching &&
-       iterator->second->getShader()->isLoaded())
+       iterator->second->getShader()->isLoaded()
+#if defined(__EDITOR__)
+       
+       && iterator->second->getEnabled()
+       
+#endif
+       )
     {
         m_mesh->draw();
     }
@@ -268,7 +280,13 @@ void IGameObject::onUnbind(const std::string& techniqueName)
     
     auto iterator = m_materials.find(techniqueName);
     if(!m_isBatching &&
-       iterator->second->getShader()->isLoaded())
+       iterator->second->getShader()->isLoaded()
+#if defined(__EDITOR__)
+       
+       && iterator->second->getEnabled()
+       
+#endif
+       )
     {
         iterator->second->unbind();
         m_mesh->unbind(iterator->second->getShader()->getAttributes());

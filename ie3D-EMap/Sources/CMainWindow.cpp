@@ -17,6 +17,7 @@
 #include "CTexture.h"
 #include "IRenderTechniqueImporter.h"
 #include "HUICommands.h"
+#include "CCommonOS.h"
 
 #endif
 
@@ -61,6 +62,22 @@ ui(new Ui::CMainWindow)
     
     statusBar()->showMessage("Copyright (c) 2015 Sergey Sergeev. All rights reserved.");
     statusBar()->setStyleSheet("background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); text-align:left");
+    
+    ui->m_goeSettingsTab->setCurrentWidget(ui->m_goeMainSettingTab);
+    ui->m_goeMaterialsSettingTab->setDisabled(true);
+    ui->m_goeAnimationsSettingTab->setDisabled(true);
+    
+    ui->m_drawCurrentRadioButton->setChecked(false);
+    ui->m_drawAllRadioButton->setChecked(true);
+    
+    ui->m_cullModeComboBox->addItem("GL_FRONT");
+    ui->m_cullModeComboBox->addItem("GL_BACK");
+    
+    ui->m_blendingSourceComboBox->addItem("GL_SRC_ALPHA");
+    ui->m_blendingSourceComboBox->addItem("GL_ONE_MINUS_SRC_ALPHA");
+    
+    ui->m_blendingDesinationComboBox->addItem("GL_SRC_ALPHA");
+    ui->m_blendingDesinationComboBox->addItem("GL_ONE_MINUS_SRC_ALPHA");
 }
 
 CMainWindow::~CMainWindow()
@@ -465,6 +482,8 @@ void CMainWindow::on_m_createGameObjectConfiguration_clicked()
 
 void CMainWindow::updateGOEConfigurationsMaterials(std::vector<CSharedConfigurationMaterial>& configurations)
 {
+    m_goeConfigurationsMaterials.clear();
+    
     while (ui->m_materialsComboBox->count() != 0)
     {
         ui->m_materialsComboBox->removeItem(0);
@@ -473,81 +492,181 @@ void CMainWindow::updateGOEConfigurationsMaterials(std::vector<CSharedConfigurat
     {
         ui->m_materialsComboBox->addItem(QString(configurations.at(i)->getRenderTechniqueName().c_str()));
     }
+    ui->m_materialsComboBox->setCurrentIndex(0);
+    
+    CMainWindow::updateGOEUIConfigurationMaterial(configurations.at(0));
+    
+    ui->m_goeSettingsTab->setCurrentWidget(ui->m_goeMaterialsSettingTab);
+    ui->m_goeMaterialsSettingTab->setDisabled(false);
+    ui->m_goeAnimationsSettingTab->setDisabled(false);
+    
+    m_goeConfigurationsMaterials = configurations;
 }
 
-void CMainWindow::on_m_cullFaceCheckBox_stateChanged(int arg1)
+void CMainWindow::updateGOEConfigurationMaterial(void)
 {
-
+    if(m_goeConfigurationsMaterials.size() != 0)
+    {
+        CSharedConfigurationMaterial configurationMaterial = m_goeConfigurationsMaterials.at(ui->m_materialsComboBox->currentIndex());
+        configurationMaterial->setEnabled(ui->m_materialEnabledCheckBox->isChecked());
+        configurationMaterial->setCulling(ui->m_cullFaceCheckBox->isChecked());
+        configurationMaterial->setCullingMode(g_stringToGLenum[ui->m_cullModeComboBox->currentText().toUtf8().constData()]);
+        configurationMaterial->setDepthTest(ui->m_depthTestCheckBox->isChecked());
+        configurationMaterial->setDepthMask(ui->m_depthMaskCheckBox->isChecked());
+        configurationMaterial->setBlending(ui->m_blendingCheckBox->isChecked());
+        configurationMaterial->setBlendingFunctionSource(g_stringToGLenum[ui->m_blendingSourceComboBox->currentText().toUtf8().constData()]);
+        configurationMaterial->setBlendingFunctionDestination(g_stringToGLenum[ui->m_blendingDesinationComboBox->currentText().toUtf8().constData()]);
+        configurationMaterial->setClipping(ui->m_clippingCheckBox->isChecked());
+        configurationMaterial->setClippingX(ui->m_clippingXSpinBox->value());
+        configurationMaterial->setClippingY(ui->m_clippingYSpinBox->value());
+        configurationMaterial->setClippingZ(ui->m_clippingZSpinBox->value());
+        configurationMaterial->setClippingW(ui->m_clippingWSpinBox->value());
+        configurationMaterial->setReflecting(ui->m_reflectingCheckBox->isChecked());
+        configurationMaterial->setShadowing(ui->m_shadowingCheckBox->isChecked());
+        configurationMaterial->setDebugging(ui->m_debuggingCheckBox->isChecked());
+        
+        m_goeTransition->getUIToSceneCommands()->execute<UICommandGOEUpdateConfigurationMaterial::COMMAND>(UICommandGOEUpdateConfigurationMaterial::GUID,
+                                                                                                           configurationMaterial);
+    }
 }
 
-void CMainWindow::on_m_cullModeComboBox_currentIndexChanged(const QString &arg1)
+void CMainWindow::updateGOEUIConfigurationMaterial(CSharedConfigurationMaterialRef configuration)
 {
-
+    ui->m_materialEnabledCheckBox->setCheckState(configuration->getEnabled() ? Qt::Checked : Qt::Unchecked);
+    ui->m_cullFaceCheckBox->setCheckState(configuration->getCulling() ? Qt::Checked : Qt::Unchecked);
+    ui->m_cullModeComboBox->setCurrentText(QString(g_enumGLToString[configuration->getCullingMode()].c_str()));
+    ui->m_depthTestCheckBox->setCheckState(configuration->getDepthTest() ? Qt::Checked : Qt::Unchecked);
+    ui->m_depthMaskCheckBox->setCheckState(configuration->getDepthMask() ? Qt::Checked : Qt::Unchecked);
+    ui->m_blendingCheckBox->setCheckState(configuration->getBlending() ? Qt::Checked : Qt::Unchecked);
+    ui->m_blendingSourceComboBox->setCurrentText(QString(g_enumGLToString[configuration->getBlendingFunctionSource()].c_str()));
+    ui->m_blendingDesinationComboBox->setCurrentText(QString(g_enumGLToString[configuration->getBlendingFunctionDestination()].c_str()));
+    ui->m_clippingCheckBox->setCheckState(configuration->getClipping() ? Qt::Checked : Qt::Unchecked);
+    ui->m_clippingXSpinBox->setValue(configuration->getClippingX());
+    ui->m_clippingYSpinBox->setValue(configuration->getClippingY());
+    ui->m_clippingZSpinBox->setValue(configuration->getClippingZ());
+    ui->m_clippingWSpinBox->setValue(configuration->getClippingW());
+    ui->m_reflectingCheckBox->setCheckState(configuration->getReflecting() ? Qt::Checked : Qt::Unchecked);
+    ui->m_shadowingCheckBox->setCheckState(configuration->getShadowing() ? Qt::Checked : Qt::Unchecked);
+    ui->m_debuggingCheckBox->setCheckState(configuration->getDebugging() ? Qt::Checked : Qt::Unchecked);
+    
+    if(configuration->getTexturesConfigurations().size() >= 1)
+    {
+        CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configuration->getTexturesConfigurations().at(0));
+        std::string path = configurationTexture->getTextureFilename();
+        QPixmap pixmap(QString(path.c_str()));
+        if(pixmap.data_ptr() == nullptr)
+        {
+            path = bundlepath() + configurationTexture->getTextureFilename();
+            pixmap = QPixmap(QString(path.c_str()));
+        }
+        ui->m_texture1Image->setPixmap(pixmap);
+    }
+    
+    if(configuration->getTexturesConfigurations().size() >= 2)
+    {
+        CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configuration->getTexturesConfigurations().at(1));
+        std::string path = configurationTexture->getTextureFilename();
+        QPixmap pixmap(QString(path.c_str()));
+        if(pixmap.data_ptr() == nullptr)
+        {
+            path = bundlepath() + configurationTexture->getTextureFilename();
+            pixmap = QPixmap(QString(path.c_str()));
+        }
+        ui->m_texture2Image->setPixmap(pixmap);
+    }
+    
+    if(configuration->getTexturesConfigurations().size() >= 3)
+    {
+        CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configuration->getTexturesConfigurations().at(2));
+        std::string path = configurationTexture->getTextureFilename();
+        QPixmap pixmap(QString(path.c_str()));
+        if(pixmap.data_ptr() == nullptr)
+        {
+            path = bundlepath() + configurationTexture->getTextureFilename();
+            pixmap = QPixmap(QString(path.c_str()));
+        }
+        ui->m_texture3Image->setPixmap(pixmap);
+    }
 }
 
-void CMainWindow::on_m_depthTestCheckBox_stateChanged(int arg1)
+void CMainWindow::on_m_cullFaceCheckBox_stateChanged(int)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_depthMaskCheckBox_stateChanged(int arg1)
+void CMainWindow::on_m_materialEnabledCheckBox_clicked()
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_blendingCheckBox_stateChanged(int arg1)
+void CMainWindow::on_m_cullModeComboBox_currentIndexChanged(const QString&)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_blendingSourceComboBox_currentIndexChanged(const QString &arg1)
+void CMainWindow::on_m_depthTestCheckBox_stateChanged(int)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_blendingDesinationComboBox_currentIndexChanged(const QString &arg1)
+void CMainWindow::on_m_depthMaskCheckBox_stateChanged(int)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_clippingCheckBox_stateChanged(int arg1)
+void CMainWindow::on_m_blendingCheckBox_stateChanged(int)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_clippingXSpinBox_valueChanged(double arg1)
+void CMainWindow::on_m_blendingSourceComboBox_currentIndexChanged(const QString &)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_clippingYSpinBox_valueChanged(double arg1)
+void CMainWindow::on_m_blendingDesinationComboBox_currentIndexChanged(const QString &)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_clippingZSpinBox_valueChanged(double arg1)
+void CMainWindow::on_m_clippingCheckBox_stateChanged(int)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_clippingWSpinBox_valueChanged(double arg1)
+void CMainWindow::on_m_clippingXSpinBox_valueChanged(double)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_reflectingCheckBox_stateChanged(int arg1)
+void CMainWindow::on_m_clippingYSpinBox_valueChanged(double)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_shadowingCheckBox_stateChanged(int arg1)
+void CMainWindow::on_m_clippingZSpinBox_valueChanged(double)
 {
-
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
-void CMainWindow::on_m_debuggingCheckBox_stateChanged(int arg1)
+void CMainWindow::on_m_clippingWSpinBox_valueChanged(double)
 {
+    CMainWindow::updateGOEConfigurationMaterial();
+}
 
+void CMainWindow::on_m_reflectingCheckBox_stateChanged(int)
+{
+    CMainWindow::updateGOEConfigurationMaterial();
+}
+
+void CMainWindow::on_m_shadowingCheckBox_stateChanged(int)
+{
+    CMainWindow::updateGOEConfigurationMaterial();
+}
+
+void CMainWindow::on_m_debuggingCheckBox_stateChanged(int)
+{
+    CMainWindow::updateGOEConfigurationMaterial();
 }
 
 void CMainWindow::on_m_shaderButton_clicked()
@@ -557,15 +676,114 @@ void CMainWindow::on_m_shaderButton_clicked()
 
 void CMainWindow::on_m_texture1LoadButton_clicked()
 {
-
+    QString recentOpenPath = m_recentOpenPath.length() != 0 ? QString(m_recentOpenPath.c_str()) : "";
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentOpenPath, tr("Files (*.*)"));
+    if (filename.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        QPixmap pixmap(filename);
+        ui->m_texture1Image->setPixmap(pixmap);
+        
+        if(m_goeConfigurationsMaterials.size() != 0)
+        {
+            CSharedConfigurationMaterial configurationMaterial = m_goeConfigurationsMaterials.at(ui->m_materialsComboBox->currentIndex());
+            if(configurationMaterial->getTexturesConfigurations().size() >= 1)
+            {
+                CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configurationMaterial->getTexturesConfigurations().at(0));
+                configurationTexture->setTextureFilename(filename.toUtf8().constData());
+            }
+            else
+            {
+                
+            }
+            CMainWindow::updateGOEConfigurationMaterial();
+        }
+    }
 }
 
 void CMainWindow::on_m_texture2LoadButton_clicked()
 {
-
+    QString recentOpenPath = m_recentOpenPath.length() != 0 ? QString(m_recentOpenPath.c_str()) : "";
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentOpenPath, tr("Files (*.*)"));
+    if (filename.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        QPixmap pixmap(filename);
+        ui->m_texture2Image->setPixmap(pixmap);
+        
+        if(m_goeConfigurationsMaterials.size() != 0)
+        {
+            CSharedConfigurationMaterial configurationMaterial = m_goeConfigurationsMaterials.at(ui->m_materialsComboBox->currentIndex());
+            if(configurationMaterial->getTexturesConfigurations().size() >= 2)
+            {
+                CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configurationMaterial->getTexturesConfigurations().at(1));
+                configurationTexture->setTextureFilename(filename.toUtf8().constData());
+            }
+            else
+            {
+                
+            }
+            CMainWindow::updateGOEConfigurationMaterial();
+        }
+    }
 }
 
 void CMainWindow::on_m_texture3LoadButton_clicked()
 {
+    QString recentOpenPath = m_recentOpenPath.length() != 0 ? QString(m_recentOpenPath.c_str()) : "";
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), recentOpenPath, tr("Files (*.*)"));
+    if (filename.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        QPixmap pixmap(filename);
+        ui->m_texture3Image->setPixmap(pixmap);
+        
+        if(m_goeConfigurationsMaterials.size() != 0)
+        {
+            CSharedConfigurationMaterial configurationMaterial = m_goeConfigurationsMaterials.at(ui->m_materialsComboBox->currentIndex());
+            if(configurationMaterial->getTexturesConfigurations().size() >= 3)
+            {
+                CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configurationMaterial->getTexturesConfigurations().at(2));
+                configurationTexture->setTextureFilename(filename.toUtf8().constData());
+            }
+            else
+            {
+                
+            }
+            CMainWindow::updateGOEConfigurationMaterial();
+        }
+    }
+}
 
+void CMainWindow::on_m_goeSettingsTab_currentChanged(int)
+{
+
+}
+
+void CMainWindow::on_m_drawCurrentRadioButton_clicked()
+{
+
+}
+
+void CMainWindow::on_m_drawAllRadioButton_clicked()
+{
+
+}
+
+
+void CMainWindow::on_m_materialsComboBox_currentIndexChanged(int index)
+{
+    if(m_goeConfigurationsMaterials.size() != 0)
+    {
+        CMainWindow::updateGOEUIConfigurationMaterial(m_goeConfigurationsMaterials.at(index));
+    }
 }
