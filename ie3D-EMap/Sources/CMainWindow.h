@@ -93,6 +93,44 @@ private slots:
 
     void on_m_createGameObjectConfiguration_clicked();
 
+    void on_m_cullFaceCheckBox_stateChanged(int arg1);
+
+    void on_m_cullModeComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_m_depthTestCheckBox_stateChanged(int arg1);
+
+    void on_m_depthMaskCheckBox_stateChanged(int arg1);
+
+    void on_m_blendingCheckBox_stateChanged(int arg1);
+
+    void on_m_blendingSourceComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_m_blendingDesinationComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_m_clippingCheckBox_stateChanged(int arg1);
+
+    void on_m_clippingXSpinBox_valueChanged(double arg1);
+
+    void on_m_clippingYSpinBox_valueChanged(double arg1);
+
+    void on_m_clippingZSpinBox_valueChanged(double arg1);
+
+    void on_m_clippingWSpinBox_valueChanged(double arg1);
+
+    void on_m_reflectingCheckBox_stateChanged(int arg1);
+
+    void on_m_shadowingCheckBox_stateChanged(int arg1);
+
+    void on_m_debuggingCheckBox_stateChanged(int arg1);
+
+    void on_m_shaderButton_clicked();
+
+    void on_m_texture1LoadButton_clicked();
+
+    void on_m_texture2LoadButton_clicked();
+
+    void on_m_texture3LoadButton_clicked();
+
 private:
     
     Ui::CMainWindow *ui;

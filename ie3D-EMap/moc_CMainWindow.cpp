@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CMainWindow_t {
-    QByteArrayData data[20];
-    char stringdata[541];
+    QByteArrayData data[39];
+    char stringdata[1231];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -48,7 +48,26 @@ QT_MOC_LITERAL(15, 389, 25),
 QT_MOC_LITERAL(16, 415, 32),
 QT_MOC_LITERAL(17, 448, 5),
 QT_MOC_LITERAL(18, 454, 42),
-QT_MOC_LITERAL(19, 497, 42)
+QT_MOC_LITERAL(19, 497, 42),
+QT_MOC_LITERAL(20, 540, 34),
+QT_MOC_LITERAL(21, 575, 41),
+QT_MOC_LITERAL(22, 617, 35),
+QT_MOC_LITERAL(23, 653, 35),
+QT_MOC_LITERAL(24, 689, 34),
+QT_MOC_LITERAL(25, 724, 47),
+QT_MOC_LITERAL(26, 772, 51),
+QT_MOC_LITERAL(27, 824, 34),
+QT_MOC_LITERAL(28, 859, 34),
+QT_MOC_LITERAL(29, 894, 34),
+QT_MOC_LITERAL(30, 929, 34),
+QT_MOC_LITERAL(31, 964, 34),
+QT_MOC_LITERAL(32, 999, 36),
+QT_MOC_LITERAL(33, 1036, 35),
+QT_MOC_LITERAL(34, 1072, 35),
+QT_MOC_LITERAL(35, 1108, 25),
+QT_MOC_LITERAL(36, 1134, 31),
+QT_MOC_LITERAL(37, 1166, 31),
+QT_MOC_LITERAL(38, 1198, 31)
     },
     "CMainWindow\0on_m_brushSizeSlider_valueChanged\0"
     "\0value\0on_m_brushStrengthSlider_valueChanged\0"
@@ -65,6 +84,25 @@ QT_MOC_LITERAL(19, 497, 42)
     "on_m_mainMenuTabs_currentChanged\0index\0"
     "on_m_landscapePropertiesTab_currentChanged\0"
     "on_m_createGameObjectConfiguration_clicked\0"
+    "on_m_cullFaceCheckBox_stateChanged\0"
+    "on_m_cullModeComboBox_currentIndexChanged\0"
+    "on_m_depthTestCheckBox_stateChanged\0"
+    "on_m_depthMaskCheckBox_stateChanged\0"
+    "on_m_blendingCheckBox_stateChanged\0"
+    "on_m_blendingSourceComboBox_currentIndexChanged\0"
+    "on_m_blendingDesinationComboBox_currentIndexChanged\0"
+    "on_m_clippingCheckBox_stateChanged\0"
+    "on_m_clippingXSpinBox_valueChanged\0"
+    "on_m_clippingYSpinBox_valueChanged\0"
+    "on_m_clippingZSpinBox_valueChanged\0"
+    "on_m_clippingWSpinBox_valueChanged\0"
+    "on_m_reflectingCheckBox_stateChanged\0"
+    "on_m_shadowingCheckBox_stateChanged\0"
+    "on_m_debuggingCheckBox_stateChanged\0"
+    "on_m_shaderButton_clicked\0"
+    "on_m_texture1LoadButton_clicked\0"
+    "on_m_texture2LoadButton_clicked\0"
+    "on_m_texture3LoadButton_clicked\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,7 +112,7 @@ static const uint qt_meta_data_CMainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      34,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -82,21 +120,40 @@ static const uint qt_meta_data_CMainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   89,    2, 0x08,
-       4,    1,   92,    2, 0x08,
-       5,    1,   95,    2, 0x08,
-       6,    1,   98,    2, 0x08,
-       7,    0,  101,    2, 0x08,
-       8,    0,  102,    2, 0x08,
-       9,    0,  103,    2, 0x08,
-      10,    0,  104,    2, 0x08,
-      11,    1,  105,    2, 0x08,
-      13,    1,  108,    2, 0x08,
-      14,    1,  111,    2, 0x08,
-      15,    0,  114,    2, 0x08,
-      16,    1,  115,    2, 0x08,
-      18,    1,  118,    2, 0x08,
-      19,    0,  121,    2, 0x08,
+       1,    1,  184,    2, 0x08,
+       4,    1,  187,    2, 0x08,
+       5,    1,  190,    2, 0x08,
+       6,    1,  193,    2, 0x08,
+       7,    0,  196,    2, 0x08,
+       8,    0,  197,    2, 0x08,
+       9,    0,  198,    2, 0x08,
+      10,    0,  199,    2, 0x08,
+      11,    1,  200,    2, 0x08,
+      13,    1,  203,    2, 0x08,
+      14,    1,  206,    2, 0x08,
+      15,    0,  209,    2, 0x08,
+      16,    1,  210,    2, 0x08,
+      18,    1,  213,    2, 0x08,
+      19,    0,  216,    2, 0x08,
+      20,    1,  217,    2, 0x08,
+      21,    1,  220,    2, 0x08,
+      22,    1,  223,    2, 0x08,
+      23,    1,  226,    2, 0x08,
+      24,    1,  229,    2, 0x08,
+      25,    1,  232,    2, 0x08,
+      26,    1,  235,    2, 0x08,
+      27,    1,  238,    2, 0x08,
+      28,    1,  241,    2, 0x08,
+      29,    1,  244,    2, 0x08,
+      30,    1,  247,    2, 0x08,
+      31,    1,  250,    2, 0x08,
+      32,    1,  253,    2, 0x08,
+      33,    1,  256,    2, 0x08,
+      34,    1,  259,    2, 0x08,
+      35,    0,  262,    2, 0x08,
+      36,    0,  263,    2, 0x08,
+      37,    0,  264,    2, 0x08,
+      38,    0,  265,    2, 0x08,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -113,6 +170,25 @@ static const uint qt_meta_data_CMainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, QMetaType::QString,   12,
+    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, QMetaType::QString,   12,
+    QMetaType::Void, QMetaType::QString,   12,
+    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -138,6 +214,25 @@ void CMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 12: _t->on_m_mainMenuTabs_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: _t->on_m_landscapePropertiesTab_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 14: _t->on_m_createGameObjectConfiguration_clicked(); break;
+        case 15: _t->on_m_cullFaceCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->on_m_cullModeComboBox_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 17: _t->on_m_depthTestCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->on_m_depthMaskCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 19: _t->on_m_blendingCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: _t->on_m_blendingSourceComboBox_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 21: _t->on_m_blendingDesinationComboBox_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 22: _t->on_m_clippingCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 23: _t->on_m_clippingXSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 24: _t->on_m_clippingYSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 25: _t->on_m_clippingZSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 26: _t->on_m_clippingWSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 27: _t->on_m_reflectingCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 28: _t->on_m_shadowingCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 29: _t->on_m_debuggingCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 30: _t->on_m_shaderButton_clicked(); break;
+        case 31: _t->on_m_texture1LoadButton_clicked(); break;
+        case 32: _t->on_m_texture2LoadButton_clicked(); break;
+        case 33: _t->on_m_texture3LoadButton_clicked(); break;
         default: ;
         }
     }
@@ -170,13 +265,13 @@ int CMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 34)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 34;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 34)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 15;
+        _id -= 34;
     }
     return _id;
 }
