@@ -122,6 +122,7 @@ void CMeshSerializer_ie3Dmesh::serialize(void)
     
     ui32 numBones; i32 id, parentId;
     filestream->read((char*)&numBones, sizeof(i32));
+    assert(numBones <= kMaxBones);
     std::shared_ptr<CSkeletonData> skeletonData = std::make_shared<CSkeletonData>(numBones);
     
     for (ui32 i = 0; i < numBones; ++i)
@@ -133,6 +134,7 @@ void CMeshSerializer_ie3Dmesh::serialize(void)
     IResourceSerializer::onResourceDataSerializationFinished(skeletonData);
     
     filestream->read((char*)&numBones, sizeof(i32));
+    assert(numBones <= kMaxBones);
     i32 numFrames = 0;
     filestream->read((char*)&numFrames, sizeof(i32));
     
@@ -164,7 +166,7 @@ void CMeshSerializer_ie3Dmesh::serialize(void)
                                                  positions,
                                                  scales);
     }
-    CSharedSequenceData sequenceData = std::make_shared<CSequenceData>("bindpose",
+    CSharedSequenceData sequenceData = std::make_shared<CSequenceData>(kBindposeAnimationName,
                                                                        30,
                                                                        frames);
     IResourceSerializer::onResourceDataSerializationFinished(sequenceData);

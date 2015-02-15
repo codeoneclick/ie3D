@@ -14,7 +14,7 @@ uniform mat4   MATRIX_View;
 uniform mat4   MATRIX_World;
 uniform mat4   MATRIX_GlobalLightProjection;
 uniform mat4   MATRIX_GlobalLightView;
-uniform mat4   MATRIX_Bones[64];
+uniform mat4   MATRIX_Bones[32];
 
 uniform int    INT_FLAG_01;
 uniform int    INT_FLAG_02;

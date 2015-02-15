@@ -11,6 +11,8 @@
 
 #include "IResource.h"
 
+extern const std::string kBindposeAnimationName;
+
 class CFrameData final
 {
 private:

@@ -12,6 +12,8 @@
 #include "IResource.h"
 #include "HDeclaration.h"
 
+extern const ui32 kMaxBones;
+
 class CMeshData final : public IResourceData
 {
 private:

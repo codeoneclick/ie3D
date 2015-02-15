@@ -164,6 +164,7 @@ void CModel::bindCustomShaderUniforms(CSharedMaterialRef material)
     material->getShader()->setInt(m_animationMixer != nullptr && m_animationMixer->isAnimated() ? 1 : 0, E_SHADER_UNIFORM_INT_FLAG_01);
     if(!m_isBatching && m_animationMixer != nullptr && m_animationMixer->isAnimated())
     {
+        assert(m_animationMixer->getTransformationSize() <= kMaxBones);
         material->getShader()->setMatrixArray4x4(m_animationMixer->getTransformations(),
                                                  m_animationMixer->getTransformationSize(),
                                                  E_SHADER_UNIFORM_MATRIX_BONES);

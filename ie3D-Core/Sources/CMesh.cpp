@@ -12,6 +12,8 @@
 #include "CBone.h"
 #include "CAnimationSequence.h"
 
+const ui32 kMaxBones = 32;
+
 CMeshData::CMeshData(SVertexData* vertexData,
                      ui16* indexData,
                      ui32 numVertices,

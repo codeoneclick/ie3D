@@ -8,6 +8,8 @@
 
 #include "CAnimationSequence.h"
 
+const std::string kBindposeAnimationName = "bindpose";
+
 CFrameData::CFrameData(const std::vector<glm::quat>& rotations,
                        const std::vector<glm::vec3>& positions,
                        const std::vector<glm::vec3>& scales) :

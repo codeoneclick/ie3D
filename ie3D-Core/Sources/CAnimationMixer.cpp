@@ -29,10 +29,10 @@ m_isBinded(false)
     m_skeleton = std::make_shared<CSkeleton>(skeletonData);
     m_bonesTransformations = new glm::mat4x4[skeletonData->getNumBones()];
     
-    CSharedAnimationSequence animationSequence = CAnimationSequence::constructCustomAnimationSequence("bindpose",
+    CSharedAnimationSequence animationSequence = CAnimationSequence::constructCustomAnimationSequence(kBindposeAnimationName,
                                                                                                       bindposeData);
     CAnimationMixer::addAnimationSequence(animationSequence);
-    CAnimationMixer::setAnimation("bindpose");
+    CAnimationMixer::setAnimation(kBindposeAnimationName);
 }
 
 CAnimationMixer::~CAnimationMixer(void)
