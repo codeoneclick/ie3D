@@ -3,8 +3,8 @@
     base_class_name="IConfiguration"
     is_external="0">
     <attributes>
-        <attribute type="std::string" property="Filename" path="/animation" name="filename"/>
-        <attribute type="std::string" property="Name" path="/animation" name="name"/>
+        <attribute type="std::string" property="AnimationFilename" path="/animation" name="filename"/>
+        <attribute type="std::string" property="AnimationName" path="/animation" name="name"/>
     </attributes>
     <relationships>
     </relationships>

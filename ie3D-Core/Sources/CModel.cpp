@@ -56,14 +56,15 @@ void CModel::onResourceLoaded(ISharedResourceRef resource, bool success)
         CSharedMesh mesh = std::static_pointer_cast<CMesh>(resource);
         if(mesh->getSkeletonData() != nullptr)
         {
-            m_animationMixer = std::make_shared<CAnimationMixer>(mesh->getSkeletonData());
+            m_animationMixer = std::make_shared<CAnimationMixer>(mesh->getSkeletonData(),
+                                                                 mesh->getBindposeData());
         }
         std::shared_ptr<CConfigurationModel> modelConfiguration = std::static_pointer_cast<CConfigurationModel>(m_configuration);
         assert(m_resourceAccessor != nullptr);
         for(const auto& iterator : modelConfiguration->getAnimationsConfigurations())
         {
             std::shared_ptr<CConfigurationAnimation> animationConfiguration = std::static_pointer_cast<CConfigurationAnimation>(iterator);
-            CSharedAnimationSequence animationSequence = m_resourceAccessor->getAnimationSequence(animationConfiguration->getFilename());
+            CSharedAnimationSequence animationSequence = m_resourceAccessor->getAnimationSequence(animationConfiguration->getAnimationFilename());
             animationSequence->addLoadingHandler(shared_from_this());
             assert(animationSequence != nullptr);
         }
@@ -79,12 +80,19 @@ void CModel::onResourceLoaded(ISharedResourceRef resource, bool success)
 void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     IGameObject::onConfigurationLoaded(configuration, success);
-    std::shared_ptr<CConfigurationModel> modelConfiguration = std::static_pointer_cast<CConfigurationModel>(configuration);
+    std::shared_ptr<CConfigurationModel> configurationModel = std::static_pointer_cast<CConfigurationModel>(configuration);
     assert(m_resourceAccessor != nullptr);
-    m_mesh = m_resourceAccessor->getMesh(modelConfiguration->getMeshFilename());
+    m_mesh = m_resourceAccessor->getMesh(configurationModel->getMeshFilename());
     m_mesh->addLoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
-    m_isBatching = modelConfiguration->getBatching();
+    m_isBatching = configurationModel->getBatching();
+    
+    for(ui32 i = 0; i < configurationModel->getAnimationsConfigurations().size(); ++i)
+    {
+        CSharedConfigurationAnimation configurationAnimation = std::static_pointer_cast<CConfigurationAnimation>(configurationModel->getAnimationsConfigurations().at(i));
+        m_animationNamesLinkage.insert(std::make_pair(configurationAnimation->getAnimationName(),
+                                                      configurationAnimation->getAnimationFilename()));
+    }
     
 	IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);
@@ -167,7 +175,11 @@ void CModel::setAnimation(const std::string& name)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED &&
        m_animationMixer != nullptr)
     {
-        m_animationMixer->setAnimation(name);
+        auto animationName = m_animationNamesLinkage.find(name);
+        if(animationName != m_animationNamesLinkage.end())
+        {
+            m_animationMixer->setAnimation(animationName->second);
+        }
     }
 }
 

@@ -81,8 +81,8 @@ void CDemoGameScene::load(void)
     std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
     particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
     
-    m_particles.push_back(particleEmitter);
-    m_root->addParticleEmitter(particleEmitter);
+    //m_particles.push_back(particleEmitter);
+    //m_root->addParticleEmitter(particleEmitter);
     
     m_landscape = m_root->createLandscape("gameobject.landscape.xml");
     m_root->setLandscape(m_landscape);
@@ -93,7 +93,10 @@ void CDemoGameScene::load(void)
     
     CSharedModel model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(model);
-    model->setPosition(glm::vec3(3.0, 2.0, 24.0));
+    model->setPosition(glm::vec3(7.0,
+                                 m_landscape->getHeight(glm::vec3(7.0, 0.0, 36.0)),
+                                 36.0));
+    model->setScale(glm::vec3(2.0));
     
     /*model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(model);
@@ -149,21 +152,21 @@ void CDemoGameScene::update(f32 deltatime)
         case E_CHARACTER_CONTROLLER_MOVE_STATE_NONE:
         {
             m_characterController->decreaseSpeed();
-            m_model->setAnimation("model_03.MDL_anim");
+            m_model->setAnimation("IDLE");
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_FORWARD:
         {
             m_gameObjectNavigator->moveForward();
             m_characterController->increaseSpeed();
-            m_model->setAnimation("model_01.MDL_anim");
+            m_model->setAnimation("RUN");
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_BACKWARD:
         {
             m_gameObjectNavigator->moveBackward();
             m_characterController->decreaseSpeed();
-            m_model->setAnimation("model_01.MDL_anim");
+            m_model->setAnimation("RUN");
         }
             break;
         default:

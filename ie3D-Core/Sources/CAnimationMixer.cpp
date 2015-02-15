@@ -15,7 +15,8 @@
 #define kBlendingAnimationTimeinterval 0.25f
 #define kBlendingAnimationInterpolationMultiplier 1.0f / kBlendingAnimationTimeinterval
 
-CAnimationMixer::CAnimationMixer(CSharedSkeletonDataRef skeletonData) :
+CAnimationMixer::CAnimationMixer(CSharedSkeletonDataRef skeletonData,
+                                 CSharedSequenceDataRef bindposeData) :
 m_animationTime(0.0f),
 m_blendingAnimationTimeinterval(0.0f),
 m_currentAnimationSequence(nullptr),
@@ -24,8 +25,14 @@ m_currentAnimationName(""),
 m_isBinded(false)
 {
     assert(skeletonData != nullptr);
+    assert(bindposeData != nullptr);
     m_skeleton = std::make_shared<CSkeleton>(skeletonData);
     m_bonesTransformations = new glm::mat4x4[skeletonData->getNumBones()];
+    
+    CSharedAnimationSequence animationSequence = CAnimationSequence::constructCustomAnimationSequence("bindpose",
+                                                                                                      bindposeData);
+    CAnimationMixer::addAnimationSequence(animationSequence);
+    CAnimationMixer::setAnimation("bindpose");
 }
 
 CAnimationMixer::~CAnimationMixer(void)
@@ -166,6 +173,10 @@ void CAnimationMixer::update(f32 deltatime)
                 m_currentAnimationFrame = frameIndex_02;
                 interpolation = animationDeltaTime - static_cast<f32>(floorAnimationDeltaTime);
             }
+            
+            frameIndex_01 = MIN_VALUE(frameIndex_01, isBlending ? m_previousAnimationSequence->getNumFrames() - 1 :
+                                      m_currentAnimationSequence->getNumFrames() - 1);
+            frameIndex_02 = MIN_VALUE(frameIndex_02, m_currentAnimationSequence->getNumFrames() - 1);
             
             CSharedFrameData frame_01 = isBlending ? m_previousAnimationSequence->getFrame(frameIndex_01) :
             m_currentAnimationSequence->getFrame(frameIndex_01);

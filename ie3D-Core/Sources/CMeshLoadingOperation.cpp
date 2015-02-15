@@ -11,6 +11,8 @@
 #include "CMeshCommiter_MDL.h"
 #include "CMeshSerializer_MDL_01.h"
 #include "CMeshCommiter_MDL_01.h"
+#include "CMeshSerializer_ie3Dmesh.h"
+#include "CMeshCommiter_ie3Dmesh.h"
 #include "CSkeletonSerializer_SK.h"
 #include "CSkeletonCommiter_SK.h"
 #include "CSequenceSerializer_SEQ.h"
@@ -59,6 +61,12 @@ void CMeshLoadingOperation::serialize(void)
         
         m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS && m_status != E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
     }
+    else if(m_filename.find(".IE3DMESH"))
+    {
+        m_serializer = std::make_shared<CMeshSerializer_ie3Dmesh>(m_filename,
+                                                                  m_resource);
+        m_serializer->serialize();
+    }
     else
     {
         assert(false);
@@ -86,8 +94,8 @@ void CMeshLoadingOperation::commit(void)
         m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS && m_status != E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE ? E_RESOURCE_LOADING_OPERATION_STATUS_WAITING : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
         
         /*m_commiter = std::make_shared<CSequenceCommiter_SEQ>(m_filename,
-                                                             m_resource);
-        m_commiter->commit();*/
+         m_resource);
+         m_commiter->commit();*/
     }
     else if(m_filename.find(".mdl_01") != std::string::npos)
     {
@@ -95,12 +103,17 @@ void CMeshLoadingOperation::commit(void)
                                                             m_resource);
         m_commiter->commit();
     }
+    else if(m_filename.find(".IE3DMESH"))
+    {
+        m_commiter = std::make_shared<CMeshCommiter_ie3Dmesh>(m_filename,
+                                                                m_resource);
+        m_commiter->commit();
+    }
     else
     {
         assert(false);
     }
 
-    
     m_status = m_serializer->getStatus() == E_SERIALIZER_STATUS_SUCCESS && m_status != E_RESOURCE_LOADING_OPERATION_STATUS_WAITING ? E_RESOURCE_LOADING_OPERATION_STATUS_SUCCESS : E_RESOURCE_LOADING_OPERATION_STATUS_FAILURE;
     
     IResourceLoadingOperation::onResourceLoaded();

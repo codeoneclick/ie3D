@@ -75,6 +75,10 @@ protected:
 public:
     
     CAnimationSequence(const std::string& guid);
+    
+    static CSharedAnimationSequence constructCustomAnimationSequence(const std::string& guid,
+                                                                     CSharedSequenceDataRef data);
+    
     ~CAnimationSequence(void);
     
     ui32 getNumFrames(void) const;

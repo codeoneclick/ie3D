@@ -26,7 +26,8 @@ IScene::~IScene(void)
 
 std::vector<ISharedGameObject> IScene::colliders(void)
 {
-    return m_colliders;
+    std::vector<ISharedGameObject> colliders;
+    return colliders;
 }
 
 void IScene::onCollision(const glm::vec3 &position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton)

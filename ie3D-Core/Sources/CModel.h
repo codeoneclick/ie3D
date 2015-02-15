@@ -19,6 +19,7 @@ private:
 protected:
     
     CSharedAnimationMixer m_animationMixer;
+    std::map<std::string, std::string> m_animationNamesLinkage;
     
     void onSceneUpdate(f32 deltatime);
     

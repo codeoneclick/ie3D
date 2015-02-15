@@ -40,7 +40,8 @@ protected:
     
 public:
     
-    CAnimationMixer(CSharedSkeletonDataRef skeletonData);
+    CAnimationMixer(CSharedSkeletonDataRef skeletonData,
+                    CSharedSequenceDataRef bindposeData);
     ~CAnimationMixer(void);
     
     glm::mat4x4* getTransformations(void) const;

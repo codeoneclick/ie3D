@@ -10,6 +10,7 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CBone.h"
+#include "CAnimationSequence.h"
 
 CMeshData::CMeshData(SVertexData* vertexData,
                      ui16* indexData,
@@ -208,6 +209,12 @@ void CMesh::onResourceDataSerializationFinished(ISharedResourceDataRef resourceD
         }
             break;
             
+        case E_RESOURCE_DATA_CLASS_SEQUENCE_DATA:
+        {
+            m_bindposeData = std::static_pointer_cast<CSequenceData>(resourceData);
+        }
+            break;
+            
         default:
         {
             assert(false);
@@ -299,6 +306,11 @@ void CMesh::updateBounds(void)
 const CSharedSkeletonData CMesh::getSkeletonData(void) const
 {
     return IResource::isLoaded() ? m_skeletonData : nullptr;
+}
+
+const CSharedSequenceData CMesh::getBindposeData(void) const
+{
+    return IResource::isLoaded() ? m_bindposeData : nullptr;
 }
 
 void CMesh::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const

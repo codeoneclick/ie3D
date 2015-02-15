@@ -84,6 +84,7 @@ protected:
     
     CSharedMeshData m_meshData;
     CSharedSkeletonData m_skeletonData;
+    CSharedSequenceData m_bindposeData;
     
     CSharedVertexBuffer m_vertexBuffer;
     CSharedIndexBuffer m_indexBuffer;
@@ -117,6 +118,7 @@ public:
     void updateBounds(void);
     
     const CSharedSkeletonData getSkeletonData(void) const;
+    const CSharedSequenceData getBindposeData(void) const;
 
     void bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const;
     void draw(void) const;

@@ -91,6 +91,15 @@ m_sequenceData(nullptr)
     
 }
 
+CSharedAnimationSequence CAnimationSequence::constructCustomAnimationSequence(const std::string& guid,
+                                                                                     CSharedSequenceDataRef data)
+{
+    CSharedAnimationSequence animationSequence = std::make_shared<CAnimationSequence>(guid);
+    animationSequence->onResourceDataSerializationFinished(data);
+    animationSequence->onResourceDataCommitFinished(data);
+    return animationSequence;
+}
+
 CAnimationSequence::~CAnimationSequence(void)
 {
     

@@ -7,13 +7,13 @@ class CConfigurationAnimation : public IConfiguration
 public:
 CConfigurationAnimation(void) = default;
 ~CConfigurationAnimation(void) = default;
-std::string getFilename(void) const;
+std::string getAnimationFilename(void) const;
 #if defined(__EDITOR__)
-void setFilename(std::string filename);
+void setAnimationFilename(std::string filename);
 #endif
-std::string getName(void) const;
+std::string getAnimationName(void) const;
 #if defined(__EDITOR__)
-void setName(std::string name);
+void setAnimationName(std::string name);
 #endif
 void serialize(pugi::xml_document& document, const std::string& path);
 #if defined(__EDITOR__)
