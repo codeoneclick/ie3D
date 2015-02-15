@@ -464,7 +464,7 @@ void CMainWindow::on_m_landscapePropertiesTab_currentChanged(int index)
 
 void CMainWindow::on_m_createGameObjectConfiguration_clicked()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), "", tr("Files (*.MDL_mesh)"));
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), "", tr("Files (*.ie3Dmesh)"));
     if (filename.isEmpty())
     {
         return;

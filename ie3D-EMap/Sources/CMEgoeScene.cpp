@@ -205,19 +205,19 @@ CSharedConfigurationMaterial CMEgoeScene::createTempConfigurationMaterial(const 
 CSharedConfigurationModel CMEgoeScene::createTempConfigurationModel(const std::string& filename)
 {
     CSharedConfigurationModel configurationModel = std::make_shared<CConfigurationModel>();
-    std::string meshFilename = filename;
-    std::string extension = "_mesh";
-    meshFilename = meshFilename.erase(filename.find(extension), extension.length());
-    configurationModel->setMeshFilename(meshFilename);
+    configurationModel->setMeshFilename(filename);
     configurationModel->setBatching(false);
     
     CSharedConfigurationMaterial configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.base");
     configurationModel->addMaterialsConfigurations(configurationMaterial);
     configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.reflection");
+    configurationMaterial->setEnabled(false);
     configurationModel->addMaterialsConfigurations(configurationMaterial);
     configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.refraction");
+    configurationMaterial->setEnabled(false);
     configurationModel->addMaterialsConfigurations(configurationMaterial);
     configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.shadowing");
+    configurationMaterial->setEnabled(false);
     configurationModel->addMaterialsConfigurations(configurationMaterial);
     
     std::string path = executablepath();

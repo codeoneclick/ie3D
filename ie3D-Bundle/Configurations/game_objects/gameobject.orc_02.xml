@@ -1,0 +1,14 @@
+<model
+    mesh_filename="orc_02.IE3DMESH"
+    is_batching="0">
+    <materials>
+		<material filename="material.orc_02.base.xml"/>
+        <material filename="material.orc_02.reflection.xml"/>
+        <material filename="material.orc_02.refraction.xml"/>
+        <material filename="material.orc_02.shadowmap.xml"/>
+	</materials>
+    <animations>
+        <animation name="IDLE" filename="orc_02_idle.IE3DANIMATION"/>
+        <animation name="RUN" filename="orc_02_run.IE3DANIMATION"/>
+    </animations>
+</model>

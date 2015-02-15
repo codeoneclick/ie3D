@@ -1,0 +1,30 @@
+<material
+    render_operation_name="ws.refraction"
+    is_cull_face="1"
+    is_depth_test="1"
+    is_depth_mask="1"
+    is_blending="0"
+    cull_face_mode="GL_FRONT"
+    blending_function_source="GL_SRC_ALPHA"
+    blending_function_destination="GL_ONE_MINUS_SRC_ALPHA"
+    is_cliping="1"
+    clipping_x="0.0"
+    clipping_y="-1.0"
+    clipping_z="0.0"
+    clipping_w="-0.25"
+    is_reflecting="0"
+    is_shadowing="0"
+    is_debugging="0">
+    <shader
+        vs_filename="shaderModel.vert"
+        fs_filename="shaderModel.frag"/>
+    <textures>
+        <texture
+            filename="orc_01.png"
+            render_operation_name=""
+            sampler_index="0"
+            wrap_mode="GL_REPEAT"
+            mag_filter="GL_LINEAR"
+            min_filter="GL_MIPMAP"/>
+    </textures>
+</material>

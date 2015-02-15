@@ -178,7 +178,7 @@ public:
         sceneTab->setObjectName(QStringLiteral("sceneTab"));
         m_landscapePropertiesTab = new QTabWidget(sceneTab);
         m_landscapePropertiesTab->setObjectName(QStringLiteral("m_landscapePropertiesTab"));
-        m_landscapePropertiesTab->setEnabled(false);
+        m_landscapePropertiesTab->setEnabled(true);
         m_landscapePropertiesTab->setGeometry(QRect(930, -4, 350, 760));
         m_landscapePropertiesTab->setFont(font);
         m_landscapePropertiesTab->setStyleSheet(QStringLiteral("background-color: rgb(64, 64, 64);"));
@@ -611,8 +611,8 @@ public:
 
         retranslateUi(CMainWindow);
 
-        m_mainMenuTabs->setCurrentIndex(1);
-        m_landscapePropertiesTab->setCurrentIndex(0);
+        m_mainMenuTabs->setCurrentIndex(0);
+        m_landscapePropertiesTab->setCurrentIndex(2);
         m_goeSettingsTab->setCurrentIndex(1);
 
 

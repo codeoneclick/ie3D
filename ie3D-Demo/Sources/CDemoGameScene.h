@@ -26,7 +26,8 @@ protected:
     CSharedGlobalLightSource m_globalLightSource;
     CSharedSkyBox m_skybox;
     //CSharedAtmosphericScattering m_atmosphericScattering;
-    CSharedModel m_model;
+    //CSharedModel m_model;
+    std::map<std::string, CSharedModel> m_models;
     CSharedLandscape m_landscape;
     
     E_CHARACTER_CONTROLLER_MOVE_STATE m_characterControllerMoveState;

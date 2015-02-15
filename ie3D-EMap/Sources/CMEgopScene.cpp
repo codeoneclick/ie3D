@@ -48,7 +48,7 @@ void CMEgopScene::load(void)
     
     m_root->addCollisionHandler(shared_from_this());
     
-    m_model = m_root->createModel("gameobject.model.xml");
+    m_model = m_root->createModel("gameobject.human_01.xml");
     m_root->addModel(m_model);
     
     m_globalLightSource->setAngle(3.0);

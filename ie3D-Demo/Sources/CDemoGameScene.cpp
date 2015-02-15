@@ -87,16 +87,31 @@ void CDemoGameScene::load(void)
     m_landscape = m_root->createLandscape("gameobject.landscape.xml");
     m_root->setLandscape(m_landscape);
     
-    m_model = m_root->createModel("gameobject.model.xml");
-    m_root->addModel(m_model);
-    m_model->setScale(glm::vec3(2.0));
+    m_models["model_01"] = m_root->createModel("gameobject.human_02.xml");
+    m_root->addModel(m_models["model_01"]);
+    m_models["model_01"]->setScale(glm::vec3(2.0));
     
-    CSharedModel model = m_root->createModel("gameobject.model.xml");
-    m_root->addModel(model);
-    model->setPosition(glm::vec3(7.0,
-                                 m_landscape->getHeight(glm::vec3(7.0, 0.0, 36.0)),
-                                 36.0));
-    model->setScale(glm::vec3(2.0));
+    m_models["model_02"] = m_root->createModel("gameobject.orc_01.xml");
+    m_root->addModel(m_models["model_02"]);
+    m_models["model_02"]->setPosition(glm::vec3(6.0,
+                                                m_landscape->getHeight(glm::vec3(6.0, 0.0, 36.0)),
+                                                36.0));
+    m_models["model_02"]->setScale(glm::vec3(2.0));
+    
+    m_models["model_03"] = m_root->createModel("gameobject.orc_02.xml");
+    m_root->addModel(m_models["model_03"]);
+    m_models["model_03"]->setPosition(glm::vec3(12.0,
+                                                m_landscape->getHeight(glm::vec3(12.0, 0.0, 36.0)),
+                                                36.0));
+    m_models["model_03"]->setScale(glm::vec3(2.0));
+    
+    m_models["model_04"] = m_root->createModel("gameobject.human_01.xml");
+    m_root->addModel(m_models["model_04"]);
+    m_models["model_04"]->setPosition(glm::vec3(8.0,
+                                                m_landscape->getHeight(glm::vec3(8.0, 0.0, 42.0)),
+                                                42.0));
+    m_models["model_04"]->setScale(glm::vec3(2.0));
+    m_models["model_04"]->setRotation(glm::vec3(0.0, 180.0, 0.0));
     
     /*model = m_root->createModel("gameobject.model.xml");
     m_root->addModel(model);
@@ -122,7 +137,7 @@ void CDemoGameScene::load(void)
     
     m_root->addCollisionHandler(shared_from_this());
     
-    m_characterController = std::make_shared<ICharacterController>(m_model,
+    m_characterController = std::make_shared<ICharacterController>(m_models["model_01"],
                                                                    m_camera);
     
     m_gameObjectNavigator = std::make_shared<CGameObjectNavigator>(0.5,
@@ -141,7 +156,7 @@ void CDemoGameScene::load(void)
     m_globalLightSource->setDistanceToSun(512.0);
     m_globalLightSource->setDistanceToLookAt(32.0);
     m_globalLightSource->setRotationCenter(glm::vec3(256.0, 0.0, 256.0));
-    m_globalLightSource->setLookAt(m_model->getPosition());
+    m_globalLightSource->setLookAt(m_models["model_01"]->getPosition());
 }
 
 void CDemoGameScene::update(f32 deltatime)
@@ -152,21 +167,21 @@ void CDemoGameScene::update(f32 deltatime)
         case E_CHARACTER_CONTROLLER_MOVE_STATE_NONE:
         {
             m_characterController->decreaseSpeed();
-            m_model->setAnimation("IDLE");
+            m_models["model_01"]->setAnimation("IDLE");
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_FORWARD:
         {
             m_gameObjectNavigator->moveForward();
             m_characterController->increaseSpeed();
-            m_model->setAnimation("RUN");
+            m_models["model_01"]->setAnimation("RUN");
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_BACKWARD:
         {
             m_gameObjectNavigator->moveBackward();
             m_characterController->decreaseSpeed();
-            m_model->setAnimation("RUN");
+            m_models["model_01"]->setAnimation("RUN");
         }
             break;
         default:
@@ -202,7 +217,11 @@ void CDemoGameScene::update(f32 deltatime)
     static f32 angle = 0.0;
     angle += 0.033;
     m_skybox->setRotation(glm::vec3(0.0, angle, 0.0));
-    m_globalLightSource->setLookAt(m_model->getPosition());
+    m_globalLightSource->setLookAt(m_models["model_01"]->getPosition());
+    
+    m_models["model_02"]->setAnimation("IDLE");
+    m_models["model_03"]->setAnimation("IDLE");
+    m_models["model_04"]->setAnimation("IDLE");
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

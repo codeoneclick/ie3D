@@ -1,0 +1,14 @@
+<model
+    mesh_filename="human_01.IE3DMESH"
+    is_batching="0">
+    <materials>
+		<material filename="material.human_01.base.xml"/>
+        <material filename="material.human_01.reflection.xml"/>
+        <material filename="material.human_01.refraction.xml"/>
+        <material filename="material.human_01.shadowmap.xml"/>
+	</materials>
+    <animations>
+        <animation name="IDLE" filename="human_01_idle.IE3DANIMATION"/>
+        <animation name="RUN" filename="human_01_walk.IE3DANIMATION"/>
+    </animations>
+</model>

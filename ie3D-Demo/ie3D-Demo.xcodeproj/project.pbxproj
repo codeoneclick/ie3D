@@ -67,8 +67,8 @@
 		21706CE61A89473000C56C7E /* gameobject.atmospheric.scattering.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CDF1A89473000C56C7E /* gameobject.atmospheric.scattering.xml */; };
 		21706CE71A89473000C56C7E /* gameobject.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CE01A89473000C56C7E /* gameobject.landscape.xml */; };
 		21706CE81A89473000C56C7E /* gameobject.landscape.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CE01A89473000C56C7E /* gameobject.landscape.xml */; };
-		21706CE91A89473000C56C7E /* gameobject.model.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CE11A89473000C56C7E /* gameobject.model.xml */; };
-		21706CEA1A89473000C56C7E /* gameobject.model.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CE11A89473000C56C7E /* gameobject.model.xml */; };
+		21706CE91A89473000C56C7E /* gameobject.human_01.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CE11A89473000C56C7E /* gameobject.human_01.xml */; };
+		21706CEA1A89473000C56C7E /* gameobject.human_01.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CE11A89473000C56C7E /* gameobject.human_01.xml */; };
 		21706CEB1A89473000C56C7E /* gameobject.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CE21A89473000C56C7E /* gameobject.ocean.xml */; };
 		21706CEC1A89473000C56C7E /* gameobject.ocean.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CE21A89473000C56C7E /* gameobject.ocean.xml */; };
 		21706CED1A89473000C56C7E /* gameobject.particle.emitter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CE31A89473000C56C7E /* gameobject.particle.emitter.xml */; };
@@ -85,14 +85,14 @@
 		21706D051A89475D00C56C7E /* material.landscape.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF41A89475D00C56C7E /* material.landscape.refraction.xml */; };
 		21706D061A89475D00C56C7E /* material.landscape.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF51A89475D00C56C7E /* material.landscape.shadowmap.xml */; };
 		21706D071A89475D00C56C7E /* material.landscape.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF51A89475D00C56C7E /* material.landscape.shadowmap.xml */; };
-		21706D081A89475D00C56C7E /* material.model.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF61A89475D00C56C7E /* material.model.base.xml */; };
-		21706D091A89475D00C56C7E /* material.model.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF61A89475D00C56C7E /* material.model.base.xml */; };
-		21706D0A1A89475D00C56C7E /* material.model.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF71A89475D00C56C7E /* material.model.reflection.xml */; };
-		21706D0B1A89475D00C56C7E /* material.model.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF71A89475D00C56C7E /* material.model.reflection.xml */; };
-		21706D0C1A89475D00C56C7E /* material.model.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF81A89475D00C56C7E /* material.model.refraction.xml */; };
-		21706D0D1A89475D00C56C7E /* material.model.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF81A89475D00C56C7E /* material.model.refraction.xml */; };
-		21706D0E1A89475D00C56C7E /* material.model.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF91A89475D00C56C7E /* material.model.shadowmap.xml */; };
-		21706D0F1A89475D00C56C7E /* material.model.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF91A89475D00C56C7E /* material.model.shadowmap.xml */; };
+		21706D081A89475D00C56C7E /* material.human_01.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF61A89475D00C56C7E /* material.human_01.base.xml */; };
+		21706D091A89475D00C56C7E /* material.human_01.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF61A89475D00C56C7E /* material.human_01.base.xml */; };
+		21706D0A1A89475D00C56C7E /* material.human_01.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF71A89475D00C56C7E /* material.human_01.reflection.xml */; };
+		21706D0B1A89475D00C56C7E /* material.human_01.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF71A89475D00C56C7E /* material.human_01.reflection.xml */; };
+		21706D0C1A89475D00C56C7E /* material.human_01.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF81A89475D00C56C7E /* material.human_01.refraction.xml */; };
+		21706D0D1A89475D00C56C7E /* material.human_01.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF81A89475D00C56C7E /* material.human_01.refraction.xml */; };
+		21706D0E1A89475D00C56C7E /* material.human_01.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF91A89475D00C56C7E /* material.human_01.shadowmap.xml */; };
+		21706D0F1A89475D00C56C7E /* material.human_01.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CF91A89475D00C56C7E /* material.human_01.shadowmap.xml */; };
 		21706D101A89475D00C56C7E /* material.ocean.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CFA1A89475D00C56C7E /* material.ocean.base.xml */; };
 		21706D111A89475D00C56C7E /* material.ocean.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CFA1A89475D00C56C7E /* material.ocean.base.xml */; };
 		21706D121A89475D00C56C7E /* material.particle.emitter.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21706CFB1A89475D00C56C7E /* material.particle.emitter.base.xml */; };
@@ -182,8 +182,6 @@
 		21E52B8E1A90E9D0005977F1 /* orc_02.IE3DMESH in Resources */ = {isa = PBXBuildFile; fileRef = 21E52B8C1A90E9D0005977F1 /* orc_02.IE3DMESH */; };
 		21E52B901A90E9E1005977F1 /* orc_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E52B8F1A90E9E1005977F1 /* orc_02.png */; };
 		21E52B911A90E9E1005977F1 /* orc_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E52B8F1A90E9E1005977F1 /* orc_02.png */; };
-		21E52BA21A90EF96005977F1 /* orc_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BA11A90EF96005977F1 /* orc_03.png */; };
-		21E52BA31A90EF96005977F1 /* orc_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BA11A90EF96005977F1 /* orc_03.png */; };
 		21E52BB01A90FA5F005977F1 /* human_01_idle.IE3DANIMATION in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BAD1A90FA5F005977F1 /* human_01_idle.IE3DANIMATION */; };
 		21E52BB11A90FA5F005977F1 /* human_01_idle.IE3DANIMATION in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BAD1A90FA5F005977F1 /* human_01_idle.IE3DANIMATION */; };
 		21E52BB21A90FA5F005977F1 /* human_01_walk.IE3DANIMATION in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BAE1A90FA5F005977F1 /* human_01_walk.IE3DANIMATION */; };
@@ -206,6 +204,36 @@
 		21E52BCD1A911343005977F1 /* human_02.IE3DMESH in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BC71A911343005977F1 /* human_02.IE3DMESH */; };
 		21E52BCF1A911352005977F1 /* human_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BCE1A911352005977F1 /* human_02.png */; };
 		21E52BD01A911352005977F1 /* human_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BCE1A911352005977F1 /* human_02.png */; };
+		21E52BDD1A9118AE005977F1 /* material.human_02.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD11A9118AE005977F1 /* material.human_02.base.xml */; };
+		21E52BDE1A9118AE005977F1 /* material.human_02.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD11A9118AE005977F1 /* material.human_02.base.xml */; };
+		21E52BDF1A9118AE005977F1 /* material.human_02.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD21A9118AE005977F1 /* material.human_02.reflection.xml */; };
+		21E52BE01A9118AE005977F1 /* material.human_02.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD21A9118AE005977F1 /* material.human_02.reflection.xml */; };
+		21E52BE11A9118AE005977F1 /* material.human_02.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD31A9118AE005977F1 /* material.human_02.refraction.xml */; };
+		21E52BE21A9118AE005977F1 /* material.human_02.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD31A9118AE005977F1 /* material.human_02.refraction.xml */; };
+		21E52BE31A9118AE005977F1 /* material.human_02.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD41A9118AE005977F1 /* material.human_02.shadowmap.xml */; };
+		21E52BE41A9118AE005977F1 /* material.human_02.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD41A9118AE005977F1 /* material.human_02.shadowmap.xml */; };
+		21E52BE51A9118AE005977F1 /* material.orc_01.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD51A9118AE005977F1 /* material.orc_01.base.xml */; };
+		21E52BE61A9118AE005977F1 /* material.orc_01.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD51A9118AE005977F1 /* material.orc_01.base.xml */; };
+		21E52BE71A9118AE005977F1 /* material.orc_01.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD61A9118AE005977F1 /* material.orc_01.reflection.xml */; };
+		21E52BE81A9118AE005977F1 /* material.orc_01.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD61A9118AE005977F1 /* material.orc_01.reflection.xml */; };
+		21E52BE91A9118AE005977F1 /* material.orc_01.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD71A9118AE005977F1 /* material.orc_01.refraction.xml */; };
+		21E52BEA1A9118AE005977F1 /* material.orc_01.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD71A9118AE005977F1 /* material.orc_01.refraction.xml */; };
+		21E52BEB1A9118AE005977F1 /* material.orc_01.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD81A9118AE005977F1 /* material.orc_01.shadowmap.xml */; };
+		21E52BEC1A9118AE005977F1 /* material.orc_01.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD81A9118AE005977F1 /* material.orc_01.shadowmap.xml */; };
+		21E52BED1A9118AE005977F1 /* material.orc_02.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD91A9118AE005977F1 /* material.orc_02.base.xml */; };
+		21E52BEE1A9118AE005977F1 /* material.orc_02.base.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BD91A9118AE005977F1 /* material.orc_02.base.xml */; };
+		21E52BEF1A9118AE005977F1 /* material.orc_02.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BDA1A9118AE005977F1 /* material.orc_02.reflection.xml */; };
+		21E52BF01A9118AE005977F1 /* material.orc_02.reflection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BDA1A9118AE005977F1 /* material.orc_02.reflection.xml */; };
+		21E52BF11A9118AE005977F1 /* material.orc_02.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BDB1A9118AE005977F1 /* material.orc_02.refraction.xml */; };
+		21E52BF21A9118AE005977F1 /* material.orc_02.refraction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BDB1A9118AE005977F1 /* material.orc_02.refraction.xml */; };
+		21E52BF31A9118AE005977F1 /* material.orc_02.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BDC1A9118AE005977F1 /* material.orc_02.shadowmap.xml */; };
+		21E52BF41A9118AE005977F1 /* material.orc_02.shadowmap.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BDC1A9118AE005977F1 /* material.orc_02.shadowmap.xml */; };
+		21E52BF81A9118C4005977F1 /* gameobject.human_02.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BF51A9118C4005977F1 /* gameobject.human_02.xml */; };
+		21E52BF91A9118C4005977F1 /* gameobject.human_02.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BF51A9118C4005977F1 /* gameobject.human_02.xml */; };
+		21E52BFA1A9118C4005977F1 /* gameobject.orc_01.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BF61A9118C4005977F1 /* gameobject.orc_01.xml */; };
+		21E52BFB1A9118C4005977F1 /* gameobject.orc_01.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BF61A9118C4005977F1 /* gameobject.orc_01.xml */; };
+		21E52BFC1A9118C4005977F1 /* gameobject.orc_02.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BF71A9118C4005977F1 /* gameobject.orc_02.xml */; };
+		21E52BFD1A9118C4005977F1 /* gameobject.orc_02.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52BF71A9118C4005977F1 /* gameobject.orc_02.xml */; };
 		21F083F319F3BEBE002FF9AE /* shaderStaticGameObjectND.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21F083F119F3BEBE002FF9AE /* shaderStaticGameObjectND.frag */; };
 		21F083F419F3BEBE002FF9AE /* shaderStaticGameObjectND.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21F083F119F3BEBE002FF9AE /* shaderStaticGameObjectND.frag */; };
 		21F083F519F3BEBE002FF9AE /* shaderStaticGameObjectND.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21F083F219F3BEBE002FF9AE /* shaderStaticGameObjectND.vert */; };
@@ -316,7 +344,7 @@
 		21706CDC1A89471500C56C7E /* material.output.technique.demo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.output.technique.demo.xml; path = "../../ie3D/ie3D-Bundle/Configurations/techniques/material/material.output.technique.demo.xml"; sourceTree = "<group>"; };
 		21706CDF1A89473000C56C7E /* gameobject.atmospheric.scattering.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.atmospheric.scattering.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.atmospheric.scattering.xml"; sourceTree = "<group>"; };
 		21706CE01A89473000C56C7E /* gameobject.landscape.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.landscape.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.landscape.xml"; sourceTree = "<group>"; };
-		21706CE11A89473000C56C7E /* gameobject.model.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.model.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.model.xml"; sourceTree = "<group>"; };
+		21706CE11A89473000C56C7E /* gameobject.human_01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.human_01.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.human_01.xml"; sourceTree = "<group>"; };
 		21706CE21A89473000C56C7E /* gameobject.ocean.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.ocean.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.ocean.xml"; sourceTree = "<group>"; };
 		21706CE31A89473000C56C7E /* gameobject.particle.emitter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.particle.emitter.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.particle.emitter.xml"; sourceTree = "<group>"; };
 		21706CE41A89473000C56C7E /* gameobject.skybox.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.skybox.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.skybox.xml"; sourceTree = "<group>"; };
@@ -325,10 +353,10 @@
 		21706CF31A89475D00C56C7E /* material.landscape.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.reflection.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.landscape.reflection.xml"; sourceTree = "<group>"; };
 		21706CF41A89475D00C56C7E /* material.landscape.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.refraction.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.landscape.refraction.xml"; sourceTree = "<group>"; };
 		21706CF51A89475D00C56C7E /* material.landscape.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.shadowmap.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.landscape.shadowmap.xml"; sourceTree = "<group>"; };
-		21706CF61A89475D00C56C7E /* material.model.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.base.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.model.base.xml"; sourceTree = "<group>"; };
-		21706CF71A89475D00C56C7E /* material.model.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.reflection.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.model.reflection.xml"; sourceTree = "<group>"; };
-		21706CF81A89475D00C56C7E /* material.model.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.refraction.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.model.refraction.xml"; sourceTree = "<group>"; };
-		21706CF91A89475D00C56C7E /* material.model.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.model.shadowmap.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.model.shadowmap.xml"; sourceTree = "<group>"; };
+		21706CF61A89475D00C56C7E /* material.human_01.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.human_01.base.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.human_01.base.xml"; sourceTree = "<group>"; };
+		21706CF71A89475D00C56C7E /* material.human_01.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.human_01.reflection.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.human_01.reflection.xml"; sourceTree = "<group>"; };
+		21706CF81A89475D00C56C7E /* material.human_01.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.human_01.refraction.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.human_01.refraction.xml"; sourceTree = "<group>"; };
+		21706CF91A89475D00C56C7E /* material.human_01.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.human_01.shadowmap.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.human_01.shadowmap.xml"; sourceTree = "<group>"; };
 		21706CFA1A89475D00C56C7E /* material.ocean.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.ocean.base.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.ocean.base.xml"; sourceTree = "<group>"; };
 		21706CFB1A89475D00C56C7E /* material.particle.emitter.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.particle.emitter.base.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.particle.emitter.base.xml"; sourceTree = "<group>"; };
 		21706CFC1A89475D00C56C7E /* material.skybox.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.skybox.base.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.skybox.base.xml"; sourceTree = "<group>"; };
@@ -401,7 +429,6 @@
 		21E52B891A90B77D005977F1 /* orc_01_run.IE3DANIMATION */ = {isa = PBXFileReference; lastKnownFileType = file; name = orc_01_run.IE3DANIMATION; path = "../../ie3D/ie3D-Bundle/Meshes/orc_01_run.IE3DANIMATION"; sourceTree = "<group>"; };
 		21E52B8C1A90E9D0005977F1 /* orc_02.IE3DMESH */ = {isa = PBXFileReference; lastKnownFileType = file; name = orc_02.IE3DMESH; path = "../../ie3D/ie3D-Bundle/Meshes/orc_02.IE3DMESH"; sourceTree = "<group>"; };
 		21E52B8F1A90E9E1005977F1 /* orc_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orc_02.png; path = "../../ie3D/ie3D-Bundle/Textures/orc_02.png"; sourceTree = "<group>"; };
-		21E52BA11A90EF96005977F1 /* orc_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orc_03.png; path = "../../ie3D/ie3D-Bundle/Textures/orc_03.png"; sourceTree = "<group>"; };
 		21E52BAD1A90FA5F005977F1 /* human_01_idle.IE3DANIMATION */ = {isa = PBXFileReference; lastKnownFileType = file; name = human_01_idle.IE3DANIMATION; path = "../../ie3D/ie3D-Bundle/Meshes/human_01_idle.IE3DANIMATION"; sourceTree = "<group>"; };
 		21E52BAE1A90FA5F005977F1 /* human_01_walk.IE3DANIMATION */ = {isa = PBXFileReference; lastKnownFileType = file; name = human_01_walk.IE3DANIMATION; path = "../../ie3D/ie3D-Bundle/Meshes/human_01_walk.IE3DANIMATION"; sourceTree = "<group>"; };
 		21E52BAF1A90FA5F005977F1 /* human_01.IE3DMESH */ = {isa = PBXFileReference; lastKnownFileType = file; name = human_01.IE3DMESH; path = "../../ie3D/ie3D-Bundle/Meshes/human_01.IE3DMESH"; sourceTree = "<group>"; };
@@ -413,6 +440,21 @@
 		21E52BC61A911343005977F1 /* human_02_run.IE3DANIMATION */ = {isa = PBXFileReference; lastKnownFileType = file; name = human_02_run.IE3DANIMATION; path = "../../ie3D/ie3D-Bundle/Meshes/human_02_run.IE3DANIMATION"; sourceTree = "<group>"; };
 		21E52BC71A911343005977F1 /* human_02.IE3DMESH */ = {isa = PBXFileReference; lastKnownFileType = file; name = human_02.IE3DMESH; path = "../../ie3D/ie3D-Bundle/Meshes/human_02.IE3DMESH"; sourceTree = "<group>"; };
 		21E52BCE1A911352005977F1 /* human_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = human_02.png; path = "../../ie3D/ie3D-Bundle/Textures/human_02.png"; sourceTree = "<group>"; };
+		21E52BD11A9118AE005977F1 /* material.human_02.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.human_02.base.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.human_02.base.xml"; sourceTree = "<group>"; };
+		21E52BD21A9118AE005977F1 /* material.human_02.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.human_02.reflection.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.human_02.reflection.xml"; sourceTree = "<group>"; };
+		21E52BD31A9118AE005977F1 /* material.human_02.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.human_02.refraction.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.human_02.refraction.xml"; sourceTree = "<group>"; };
+		21E52BD41A9118AE005977F1 /* material.human_02.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.human_02.shadowmap.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.human_02.shadowmap.xml"; sourceTree = "<group>"; };
+		21E52BD51A9118AE005977F1 /* material.orc_01.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.orc_01.base.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.orc_01.base.xml"; sourceTree = "<group>"; };
+		21E52BD61A9118AE005977F1 /* material.orc_01.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.orc_01.reflection.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.orc_01.reflection.xml"; sourceTree = "<group>"; };
+		21E52BD71A9118AE005977F1 /* material.orc_01.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.orc_01.refraction.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.orc_01.refraction.xml"; sourceTree = "<group>"; };
+		21E52BD81A9118AE005977F1 /* material.orc_01.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.orc_01.shadowmap.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.orc_01.shadowmap.xml"; sourceTree = "<group>"; };
+		21E52BD91A9118AE005977F1 /* material.orc_02.base.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.orc_02.base.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.orc_02.base.xml"; sourceTree = "<group>"; };
+		21E52BDA1A9118AE005977F1 /* material.orc_02.reflection.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.orc_02.reflection.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.orc_02.reflection.xml"; sourceTree = "<group>"; };
+		21E52BDB1A9118AE005977F1 /* material.orc_02.refraction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.orc_02.refraction.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.orc_02.refraction.xml"; sourceTree = "<group>"; };
+		21E52BDC1A9118AE005977F1 /* material.orc_02.shadowmap.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.orc_02.shadowmap.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.orc_02.shadowmap.xml"; sourceTree = "<group>"; };
+		21E52BF51A9118C4005977F1 /* gameobject.human_02.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.human_02.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.human_02.xml"; sourceTree = "<group>"; };
+		21E52BF61A9118C4005977F1 /* gameobject.orc_01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.orc_01.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.orc_01.xml"; sourceTree = "<group>"; };
+		21E52BF71A9118C4005977F1 /* gameobject.orc_02.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.orc_02.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/gameobject.orc_02.xml"; sourceTree = "<group>"; };
 		21F083F119F3BEBE002FF9AE /* shaderStaticGameObjectND.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderStaticGameObjectND.frag; path = "../ie3D-Bundle/Shaders/shaderStaticGameObjectND.frag"; sourceTree = SOURCE_ROOT; };
 		21F083F219F3BEBE002FF9AE /* shaderStaticGameObjectND.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderStaticGameObjectND.vert; path = "../ie3D-Bundle/Shaders/shaderStaticGameObjectND.vert"; sourceTree = SOURCE_ROOT; };
 		21FCC8FB199FA69200F2CA1E /* ie3D-Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Engine.xcodeproj"; path = "../ie3D-Engine/ie3D-Engine.xcodeproj"; sourceTree = "<group>"; };
@@ -504,7 +546,10 @@
 			children = (
 				21706CDF1A89473000C56C7E /* gameobject.atmospheric.scattering.xml */,
 				21706CE01A89473000C56C7E /* gameobject.landscape.xml */,
-				21706CE11A89473000C56C7E /* gameobject.model.xml */,
+				21706CE11A89473000C56C7E /* gameobject.human_01.xml */,
+				21E52BF51A9118C4005977F1 /* gameobject.human_02.xml */,
+				21E52BF61A9118C4005977F1 /* gameobject.orc_01.xml */,
+				21E52BF71A9118C4005977F1 /* gameobject.orc_02.xml */,
 				21706CE21A89473000C56C7E /* gameobject.ocean.xml */,
 				21706CE31A89473000C56C7E /* gameobject.particle.emitter.xml */,
 				21706CE41A89473000C56C7E /* gameobject.skybox.xml */,
@@ -569,15 +614,27 @@
 		21706CC91A89466F00C56C7E /* materials */ = {
 			isa = PBXGroup;
 			children = (
+				21E52BD11A9118AE005977F1 /* material.human_02.base.xml */,
+				21E52BD21A9118AE005977F1 /* material.human_02.reflection.xml */,
+				21E52BD31A9118AE005977F1 /* material.human_02.refraction.xml */,
+				21E52BD41A9118AE005977F1 /* material.human_02.shadowmap.xml */,
+				21E52BD51A9118AE005977F1 /* material.orc_01.base.xml */,
+				21E52BD61A9118AE005977F1 /* material.orc_01.reflection.xml */,
+				21E52BD71A9118AE005977F1 /* material.orc_01.refraction.xml */,
+				21E52BD81A9118AE005977F1 /* material.orc_01.shadowmap.xml */,
+				21E52BD91A9118AE005977F1 /* material.orc_02.base.xml */,
+				21E52BDA1A9118AE005977F1 /* material.orc_02.reflection.xml */,
+				21E52BDB1A9118AE005977F1 /* material.orc_02.refraction.xml */,
+				21E52BDC1A9118AE005977F1 /* material.orc_02.shadowmap.xml */,
 				21706CF11A89475D00C56C7E /* material.atmospheric.scattering.base.xml */,
 				21706CF21A89475D00C56C7E /* material.landscape.base.xml */,
 				21706CF31A89475D00C56C7E /* material.landscape.reflection.xml */,
 				21706CF41A89475D00C56C7E /* material.landscape.refraction.xml */,
 				21706CF51A89475D00C56C7E /* material.landscape.shadowmap.xml */,
-				21706CF61A89475D00C56C7E /* material.model.base.xml */,
-				21706CF71A89475D00C56C7E /* material.model.reflection.xml */,
-				21706CF81A89475D00C56C7E /* material.model.refraction.xml */,
-				21706CF91A89475D00C56C7E /* material.model.shadowmap.xml */,
+				21706CF61A89475D00C56C7E /* material.human_01.base.xml */,
+				21706CF71A89475D00C56C7E /* material.human_01.reflection.xml */,
+				21706CF81A89475D00C56C7E /* material.human_01.refraction.xml */,
+				21706CF91A89475D00C56C7E /* material.human_01.shadowmap.xml */,
 				21706CFA1A89475D00C56C7E /* material.ocean.base.xml */,
 				21706CFB1A89475D00C56C7E /* material.particle.emitter.base.xml */,
 				21706CFC1A89475D00C56C7E /* material.skybox.base.xml */,
@@ -591,7 +648,6 @@
 			children = (
 				21E52BCE1A911352005977F1 /* human_02.png */,
 				21E52BB61A90FA72005977F1 /* human_01.png */,
-				21E52BA11A90EF96005977F1 /* orc_03.png */,
 				21E52B8F1A90E9E1005977F1 /* orc_02.png */,
 				21E52B791A90A13A005977F1 /* orc_01.png */,
 				217EF88E19F7E11200F339A0 /* landscape_01.png */,
@@ -940,17 +996,18 @@
 				212EEC9919CC5D9C00DA02B7 /* shaderModel.vert in Resources */,
 				21E52BCB1A911343005977F1 /* human_02_run.IE3DANIMATION in Resources */,
 				21F083F619F3BEBE002FF9AE /* shaderStaticGameObjectND.vert in Resources */,
-				21706D091A89475D00C56C7E /* material.model.base.xml in Resources */,
+				21706D091A89475D00C56C7E /* material.human_01.base.xml in Resources */,
 				21E52B911A90E9E1005977F1 /* orc_02.png in Resources */,
 				217EF8A419F7E11300F339A0 /* landscape_03.png in Resources */,
 				21706D051A89475D00C56C7E /* material.landscape.refraction.xml in Resources */,
 				212EEC9F19CC5D9C00DA02B7 /* map_03.png in Resources */,
 				21706CFF1A89475D00C56C7E /* material.atmospheric.scattering.base.xml in Resources */,
-				21706D0B1A89475D00C56C7E /* material.model.reflection.xml in Resources */,
+				21706D0B1A89475D00C56C7E /* material.human_01.reflection.xml in Resources */,
 				21E52BB81A90FA72005977F1 /* human_01.png in Resources */,
 				21706CD31A8946DD00C56C7E /* ws.technique.base.xml in Resources */,
 				212EECB219CC5D9C00DA02B7 /* shaderScreenQuad.frag in Resources */,
 				212EECB419CC5D9C00DA02B7 /* shaderOcean.frag in Resources */,
+				21E52BDE1A9118AE005977F1 /* material.human_02.base.xml in Resources */,
 				21E52B781A90A123005977F1 /* orc_01.IE3DMESH in Resources */,
 				217EF8B619F7E11300F339A0 /* static_model_tank_heavy.png in Resources */,
 				212EECB919CC5D9C00DA02B7 /* shaderOcean.vert in Resources */,
@@ -958,9 +1015,13 @@
 				212EECBC19CC5D9C00DA02B7 /* shaderScreenQuad.vert in Resources */,
 				21706D031A89475D00C56C7E /* material.landscape.reflection.xml in Resources */,
 				217EF8BA19F7E11300F339A0 /* static_model_tank_medium.png in Resources */,
+				21E52BE61A9118AE005977F1 /* material.orc_01.base.xml in Resources */,
 				21F083F419F3BEBE002FF9AE /* shaderStaticGameObjectND.frag in Resources */,
+				21E52BEC1A9118AE005977F1 /* material.orc_01.shadowmap.xml in Resources */,
+				21E52BF21A9118AE005977F1 /* material.orc_02.refraction.xml in Resources */,
 				21CB354A1A7CF40200819C09 /* shaderSkybox.vert in Resources */,
 				21E52BB31A90FA5F005977F1 /* human_01_walk.IE3DANIMATION in Resources */,
+				21E52BE21A9118AE005977F1 /* material.human_02.refraction.xml in Resources */,
 				217EF8A819F7E11300F339A0 /* particle_01.png in Resources */,
 				21E52B8B1A90B77D005977F1 /* orc_01_run.IE3DANIMATION in Resources */,
 				21E52B761A90A123005977F1 /* orc_01_idle.IE3DANIMATION in Resources */,
@@ -968,8 +1029,11 @@
 				217EF8A019F7E11300F339A0 /* landscape_01.png in Resources */,
 				21706D151A89475D00C56C7E /* material.skybox.base.xml in Resources */,
 				21706CDB1A8946E500C56C7E /* output.technique.demo.xml in Resources */,
-				21706D0F1A89475D00C56C7E /* material.model.shadowmap.xml in Resources */,
+				21E52BFB1A9118C4005977F1 /* gameobject.orc_01.xml in Resources */,
+				21706D0F1A89475D00C56C7E /* material.human_01.shadowmap.xml in Resources */,
 				217EF8AA19F7E11300F339A0 /* skybox_xneg.png in Resources */,
+				21E52BE01A9118AE005977F1 /* material.human_02.reflection.xml in Resources */,
+				21E52BF01A9118AE005977F1 /* material.orc_02.reflection.xml in Resources */,
 				217EF8B419F7E11300F339A0 /* skybox_zpos.png in Resources */,
 				212EECD619CC5D9C00DA02B7 /* map_02.png in Resources */,
 				212EED3519CC6A1D00DA02B7 /* Images.xcassets in Resources */,
@@ -977,24 +1041,28 @@
 				217EF90B19F9222A00F339A0 /* shaderCommon.vert in Resources */,
 				212EED1A19CC608400DA02B7 /* ie3D-Demo-osx.plist in Resources */,
 				21706CEC1A89473000C56C7E /* gameobject.ocean.xml in Resources */,
+				21E52BEE1A9118AE005977F1 /* material.orc_02.base.xml in Resources */,
 				217EF8AC19F7E11300F339A0 /* skybox_xpos.png in Resources */,
 				21E52BBF1A910F4F005977F1 /* orc_02_idle.IE3DANIMATION in Resources */,
 				2179741419F4F69E00A98630 /* shaderAnimatedGameObjectND.vert in Resources */,
 				21E52B7B1A90A13A005977F1 /* orc_01.png in Resources */,
 				21706CE81A89473000C56C7E /* gameobject.landscape.xml in Resources */,
 				21706CEE1A89473000C56C7E /* gameobject.particle.emitter.xml in Resources */,
+				21E52BFD1A9118C4005977F1 /* gameobject.orc_02.xml in Resources */,
 				212EECE119CC5D9C00DA02B7 /* shaderLandscape.vert in Resources */,
 				21706CD91A8946DD00C56C7E /* ws.technique.shadowmap.xml in Resources */,
 				21E52BC11A910F4F005977F1 /* orc_02_run.IE3DANIMATION in Resources */,
 				21706CE61A89473000C56C7E /* gameobject.atmospheric.scattering.xml in Resources */,
+				21E52BF41A9118AE005977F1 /* material.orc_02.shadowmap.xml in Resources */,
 				21706D071A89475D00C56C7E /* material.landscape.shadowmap.xml in Resources */,
+				21E52BF91A9118C4005977F1 /* gameobject.human_02.xml in Resources */,
 				212EECED19CC5D9C00DA02B7 /* map_04.png in Resources */,
 				212EECEF19CC5D9C00DA02B7 /* UIWindowOSX.xib in Resources */,
 				21E52B8E1A90E9D0005977F1 /* orc_02.IE3DMESH in Resources */,
 				2179741219F4F69E00A98630 /* shaderAnimatedGameObjectND.frag in Resources */,
-				21E52BA31A90EF96005977F1 /* orc_03.png in Resources */,
 				217EF90919F9222A00F339A0 /* shaderCommon.frag in Resources */,
-				21706D0D1A89475D00C56C7E /* material.model.refraction.xml in Resources */,
+				21706D0D1A89475D00C56C7E /* material.human_01.refraction.xml in Resources */,
+				21E52BE41A9118AE005977F1 /* material.human_02.shadowmap.xml in Resources */,
 				21706CDA1A8946E200C56C7E /* transition.demo.xml in Resources */,
 				212EECF819CC5D9C00DA02B7 /* map_05.png in Resources */,
 				21E52BB51A90FA5F005977F1 /* human_01.IE3DMESH in Resources */,
@@ -1004,9 +1072,11 @@
 				21706CDE1A89471500C56C7E /* material.output.technique.demo.xml in Resources */,
 				217EF8A219F7E11300F339A0 /* landscape_02.png in Resources */,
 				217EF8A619F7E11300F339A0 /* ocean_ripples.png in Resources */,
+				21E52BE81A9118AE005977F1 /* material.orc_01.reflection.xml in Resources */,
 				21E52BC41A910FF8005977F1 /* orc_03.IE3DMESH in Resources */,
 				217EF8B819F7E11300F339A0 /* static_model_tank_light.png in Resources */,
-				21706CEA1A89473000C56C7E /* gameobject.model.xml in Resources */,
+				21706CEA1A89473000C56C7E /* gameobject.human_01.xml in Resources */,
+				21E52BEA1A9118AE005977F1 /* material.orc_01.refraction.xml in Resources */,
 				217EF8BC19F7E11300F339A0 /* static_model_tank_tracks.png in Resources */,
 				212EED0419CC5D9C00DA02B7 /* map_01.png in Resources */,
 				212EED0519CC5D9C00DA02B7 /* shaderParticleEmitter.vert in Resources */,
@@ -1031,6 +1101,7 @@
 				2173345919642B47002B3F90 /* shaderModel.vert in Resources */,
 				21706CE71A89473000C56C7E /* gameobject.landscape.xml in Resources */,
 				21E52BC81A911343005977F1 /* human_02_idle.IE3DANIMATION in Resources */,
+				21E52BFA1A9118C4005977F1 /* gameobject.orc_01.xml in Resources */,
 				21F083F519F3BEBE002FF9AE /* shaderStaticGameObjectND.vert in Resources */,
 				21E52BB21A90FA5F005977F1 /* human_01_walk.IE3DANIMATION in Resources */,
 				217EF8A319F7E11300F339A0 /* landscape_03.png in Resources */,
@@ -1045,11 +1116,12 @@
 				21E52BCA1A911343005977F1 /* human_02_run.IE3DANIMATION in Resources */,
 				217EF8B519F7E11300F339A0 /* static_model_tank_heavy.png in Resources */,
 				21E52BC31A910FF8005977F1 /* orc_03.IE3DMESH in Resources */,
-				21E52BA21A90EF96005977F1 /* orc_03.png in Resources */,
 				21706CFE1A89475D00C56C7E /* material.atmospheric.scattering.base.xml in Resources */,
 				21B08E40192252E400C5D5CC /* shaderOcean.vert in Resources */,
+				21E52BE11A9118AE005977F1 /* material.human_02.refraction.xml in Resources */,
 				21B08DBC1920CCF600C5D5CC /* shaderScreenQuad.vert in Resources */,
-				21706D081A89475D00C56C7E /* material.model.base.xml in Resources */,
+				21E52BED1A9118AE005977F1 /* material.orc_02.base.xml in Resources */,
+				21706D081A89475D00C56C7E /* material.human_01.base.xml in Resources */,
 				217EF8B919F7E11300F339A0 /* static_model_tank_medium.png in Resources */,
 				21706CDD1A89471500C56C7E /* material.output.technique.demo.xml in Resources */,
 				21E52BB71A90FA72005977F1 /* human_01.png in Resources */,
@@ -1057,28 +1129,35 @@
 				21706D061A89475D00C56C7E /* material.landscape.shadowmap.xml in Resources */,
 				21F083F319F3BEBE002FF9AE /* shaderStaticGameObjectND.frag in Resources */,
 				217EF8A719F7E11300F339A0 /* particle_01.png in Resources */,
-				21706CE91A89473000C56C7E /* gameobject.model.xml in Resources */,
+				21706CE91A89473000C56C7E /* gameobject.human_01.xml in Resources */,
+				21E52BF11A9118AE005977F1 /* material.orc_02.refraction.xml in Resources */,
 				21706D161A89475D00C56C7E /* material.skybox.reflection.xml in Resources */,
 				21E52B7A1A90A13A005977F1 /* orc_01.png in Resources */,
+				21E52BE91A9118AE005977F1 /* material.orc_01.refraction.xml in Resources */,
+				21E52BF31A9118AE005977F1 /* material.orc_02.shadowmap.xml in Resources */,
 				217EF8AD19F7E11300F339A0 /* skybox_yneg.png in Resources */,
 				217EF89F19F7E11300F339A0 /* landscape_01.png in Resources */,
 				217EF8A919F7E11300F339A0 /* skybox_xneg.png in Resources */,
 				217EF8B319F7E11300F339A0 /* skybox_zpos.png in Resources */,
 				2162093519A1F04C00DECBBC /* map_02.png in Resources */,
 				212EED3619CC6A2500DA02B7 /* Images.xcassets in Resources */,
+				21E52BE71A9118AE005977F1 /* material.orc_01.reflection.xml in Resources */,
+				21E52BDF1A9118AE005977F1 /* material.human_02.reflection.xml in Resources */,
 				21706D001A89475D00C56C7E /* material.landscape.base.xml in Resources */,
 				217EF90A19F9222A00F339A0 /* shaderCommon.vert in Resources */,
-				21706D0A1A89475D00C56C7E /* material.model.reflection.xml in Resources */,
+				21706D0A1A89475D00C56C7E /* material.human_01.reflection.xml in Resources */,
 				21E52B751A90A123005977F1 /* orc_01_idle.IE3DANIMATION in Resources */,
 				21E52B8A1A90B77D005977F1 /* orc_01_run.IE3DANIMATION in Resources */,
 				217EF8AB19F7E11300F339A0 /* skybox_xpos.png in Resources */,
 				2179741319F4F69E00A98630 /* shaderAnimatedGameObjectND.vert in Resources */,
 				21B08E3C192252E400C5D5CC /* shaderLandscape.vert in Resources */,
 				21E52BC01A910F4F005977F1 /* orc_02_run.IE3DANIMATION in Resources */,
+				21E52BFC1A9118C4005977F1 /* gameobject.orc_02.xml in Resources */,
 				21706CD21A8946DD00C56C7E /* ws.technique.base.xml in Resources */,
 				213267961906B51C001C98F7 /* CGameViewController.xib in Resources */,
 				21E52BB41A90FA5F005977F1 /* human_01.IE3DMESH in Resources */,
 				21706CEF1A89473000C56C7E /* gameobject.skybox.xml in Resources */,
+				21E52BE31A9118AE005977F1 /* material.human_02.shadowmap.xml in Resources */,
 				2162093719A1F04C00DECBBC /* map_04.png in Resources */,
 				21706D141A89475D00C56C7E /* material.skybox.base.xml in Resources */,
 				21706CCB1A89468C00C56C7E /* transition.demo.xml in Resources */,
@@ -1092,24 +1171,29 @@
 				21706D121A89475D00C56C7E /* material.particle.emitter.base.xml in Resources */,
 				21B08E3B192252E400C5D5CC /* shaderLandscape.frag in Resources */,
 				217EF8A119F7E11300F339A0 /* landscape_02.png in Resources */,
+				21E52BEB1A9118AE005977F1 /* material.orc_01.shadowmap.xml in Resources */,
 				217EF8A519F7E11300F339A0 /* ocean_ripples.png in Resources */,
 				217EF8B719F7E11300F339A0 /* static_model_tank_light.png in Resources */,
 				217EF8BB19F7E11300F339A0 /* static_model_tank_tracks.png in Resources */,
 				21E52BCF1A911352005977F1 /* human_02.png in Resources */,
 				2162093419A1F04C00DECBBC /* map_01.png in Resources */,
-				21706D0E1A89475D00C56C7E /* material.model.shadowmap.xml in Resources */,
+				21E52BE51A9118AE005977F1 /* material.orc_01.base.xml in Resources */,
+				21706D0E1A89475D00C56C7E /* material.human_01.shadowmap.xml in Resources */,
 				21706D041A89475D00C56C7E /* material.landscape.refraction.xml in Resources */,
 				21B08DBA1920CCF600C5D5CC /* shaderParticleEmitter.vert in Resources */,
 				21CB35471A7CF40200819C09 /* shaderSkybox.frag in Resources */,
 				21CB35491A7CF40200819C09 /* shaderSkybox.vert in Resources */,
 				21E52B8D1A90E9D0005977F1 /* orc_02.IE3DMESH in Resources */,
 				21E52BB01A90FA5F005977F1 /* human_01_idle.IE3DANIMATION in Resources */,
+				21E52BF81A9118C4005977F1 /* gameobject.human_02.xml in Resources */,
 				21706CEB1A89473000C56C7E /* gameobject.ocean.xml in Resources */,
 				21CB352B1A7CD34500819C09 /* CLaunchScreen.xib in Resources */,
 				21706CD41A8946DD00C56C7E /* ws.technique.reflection.xml in Resources */,
 				21B08DB91920CCF600C5D5CC /* shaderParticleEmitter.frag in Resources */,
+				21E52BEF1A9118AE005977F1 /* material.orc_02.reflection.xml in Resources */,
 				21706CD81A8946DD00C56C7E /* ws.technique.shadowmap.xml in Resources */,
-				21706D0C1A89475D00C56C7E /* material.model.refraction.xml in Resources */,
+				21706D0C1A89475D00C56C7E /* material.human_01.refraction.xml in Resources */,
+				21E52BDD1A9118AE005977F1 /* material.human_02.base.xml in Resources */,
 				21706CE51A89473000C56C7E /* gameobject.atmospheric.scattering.xml in Resources */,
 				21E52B901A90E9E1005977F1 /* orc_02.png in Resources */,
 				217EF8B119F7E11300F339A0 /* skybox_zneg.png in Resources */,
