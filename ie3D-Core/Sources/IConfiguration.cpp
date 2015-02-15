@@ -100,10 +100,10 @@ void IConfigurationLoadingHandler::removeConfigurationLoadedCallback(const CONFI
     m_callbacks.erase(iterator);*/
 }
 
-IConfiguration::IConfiguration(void) :
+IConfiguration::IConfiguration(void)
 #if defined(__EDITOR__)
 
-m_isEnabled(true)
+: m_isEnabled(true)
 
 #endif
 {
@@ -157,10 +157,14 @@ pugi::xml_parse_result IConfiguration::openXMLDocument(pugi::xml_document &docum
         filename = bundlepath().append(filename);
         result = document.load_file(filename.c_str());
     }
+#if defined(__EDITOR__)
+    
     if(result.status == pugi::status_ok)
     {
         IConfiguration::setFilename(filename);
     }
+    
+#endif
     return result;
 };
 

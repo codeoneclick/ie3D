@@ -203,7 +203,7 @@ void CLandscapeChunk::bindCustomShaderUniforms(CSharedMaterialRef material)
     material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
     material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
 #elif defined(__IOS__)
-    if(g_highPerformancePlatforms.count(getPlatform()) != 0)
+    if(/*g_highPerformancePlatforms.count(getPlatform()) != 0*/ true)
     {
         material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
         material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");

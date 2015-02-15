@@ -89,7 +89,7 @@ ui32 CShaderCompiler_GLSL::compile(const std::string& sourceCode, GLenum shaderT
 #elif defined(__IOS__)
     
     define.append("#define __IOS__\n");
-    if(g_highPerformancePlatforms.count(getPlatform()) != 0)
+    if(/*g_highPerformancePlatforms.count(getPlatform()) != 0*/ true)
     {
         define.append("#define __IOS_HIGH_PERFORMANCE__\n");
     }
