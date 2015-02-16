@@ -35,6 +35,8 @@ protected:
     void onUnbind(const std::string& mode);
     void onBatch(const std::string& mode);
     
+    void bindCustomShaderUniforms(CSharedMaterialRef material);
+    
     bool isPointInBoundPlane(const glm::vec3& point,
                              const glm::vec3& minBound,
                              const glm::vec3& maxBound);

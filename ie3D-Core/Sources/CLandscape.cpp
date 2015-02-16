@@ -26,7 +26,6 @@ CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
 IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
     m_isNeedBoundingBox = false;
-    m_materialBindImposer = nullptr;
 }
 
 CLandscape::~CLandscape(void)
@@ -99,27 +98,19 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         m_chunks[index]->setInprogressLOD(LOD);
                         m_heightmapGenerator->runChunkLoading(i, j, LOD, [this, index, i, j, LOD](CSharedMeshRef mesh) {
                             
-                            m_chunks[index]->setCamera(m_camera);
+                            //m_chunks[index]->setCamera(m_camera);
                             m_chunks[index]->setCameraFrustum(m_cameraFrustum);
-                            m_chunks[index]->setGlobalLightSource(m_globalLightSource);
+                            //m_chunks[index]->setGlobalLightSource(m_globalLightSource);
                             
                             m_chunks[index]->setMesh(mesh);
-                            m_chunks[index]->onConfigurationLoaded(m_configuration, true);
+                            //m_chunks[index]->onConfigurationLoaded(m_configuration, true);
                             
-                            CSharedTexture splattingTexture = m_resourceAccessor->getTexture("landscape.splatting.texture");
-                            assert(splattingTexture != nullptr);
-                            m_chunks[index]->setSplattinMaskTexture(splattingTexture);
-                            
-                            m_chunks[index]->setRenderTechniqueImporter(m_renderTechniqueImporter);
-                            m_chunks[index]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
+                            //m_chunks[index]->setRenderTechniqueImporter(m_renderTechniqueImporter);
+                            //m_chunks[index]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
                             m_chunks[index]->setSceneUpdateMgr(m_sceneUpdateMgr);
                             
-                            m_chunks[index]->enableRender(m_isNeedToRender);
+                            //m_chunks[index]->enableRender(m_isNeedToRender);
                             m_chunks[index]->enableUpdate(m_isNeedToUpdate);
-                            
-                            m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_01], E_SHADER_SAMPLER_01);
-                            m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_02], E_SHADER_SAMPLER_02);
-                            m_chunks[index]->setTillingTexcoord(m_tillingTexcoord[E_SHADER_SAMPLER_03], E_SHADER_SAMPLER_03);
                             
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
@@ -164,8 +155,6 @@ void CLandscape::onResourceLoaded(ISharedResourceRef resource, bool success)
 
 void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
-    IGameObject::onConfigurationLoaded(configuration, success);
-    
     std::shared_ptr<CConfigurationLandscape> configurationLandscape = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     assert(m_resourceAccessor != nullptr);
     assert(m_renderTechniqueAccessor != nullptr);
@@ -175,6 +164,8 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     
     m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapGenerator->createSplattingTexture());
     m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapGenerator->createHeightmapTexture());
+    
+    IGameObject::onConfigurationLoaded(configuration, success);
     
     m_tillingTexcoord[E_SHADER_SAMPLER_01] = 16;
     m_tillingTexcoord[E_SHADER_SAMPLER_02] = 16;
@@ -186,7 +177,7 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
 std::vector<ISharedGameObject> CLandscape::getChunks(void) const
 {
     std::vector<ISharedGameObject> chunks;
-    std::for_each(m_chunks.begin(), m_chunks.end(), [&chunks](CSharedLandscapeChunk chunk){
+    std::for_each(m_chunks.cbegin(), m_chunks.cend(), [&chunks](CSharedLandscapeChunk chunk) {
         chunks.push_back(chunk);
     });
     return chunks;
@@ -199,45 +190,92 @@ i32 CLandscape::zOrder(void)
 
 bool CLandscape::checkOcclusion(void)
 {
-    return IGameObject::checkOcclusion();
+    return false;
 }
 
 ui32 CLandscape::numTriangles(void)
 {
-    glm::ivec2 numChunks = m_heightmapGenerator->getNumChunks();
-    ui32 numTriangles = 0;
-    for(ui32 i = 0; i < numChunks.x; ++i)
-    {
-        for(ui32 j = 0; j < numChunks.y; ++j)
+    return std::accumulate(m_chunks.cbegin(), m_chunks.cend(), 0, [](ui32 count, CSharedLandscapeChunk chunk) {
+        if(chunk)
         {
-            assert(m_chunks.size() != 0);
-            if(m_chunks[i + j * numChunks.x] != nullptr)
-            {
-                numTriangles += m_chunks[i + j * numChunks.x]->numTriangles();
-            }
+            count += chunk->m_numPassedIndexes / 3;
         }
+        return count;
+    });
+}
+
+void CLandscape::onBind(const std::string& techniqueName)
+{
+    assert(m_camera != nullptr);
+    assert(m_globalLightSource != nullptr);
+    assert(m_materials.find(techniqueName) != m_materials.end());
+    
+    const auto& material = m_materials.find(techniqueName)->second;
+    if(material->getShader()->isLoaded())
+    {
+        material->bind();
+        m_materialBindImposer(material);
     }
-    return numTriangles;
 }
 
-void CLandscape::onBind(const std::string& mode)
+void CLandscape::onDraw(const std::string& techniqueName)
 {
+    assert(m_camera != nullptr);
+    assert(m_globalLightSource != nullptr);
+    assert(m_materials.find(techniqueName) != m_materials.end());
     
+    const auto& material = m_materials.find(techniqueName)->second;
+    if(material->getShader()->isLoaded())
+    {
+        std::for_each(m_chunks.cbegin(), m_chunks.cend(), [material, this](CSharedLandscapeChunk chunk) {
+            if(chunk && chunk->m_mesh)
+            {
+                chunk->m_mesh->bind(material->getShader()->getAttributes());
+                chunk->m_mesh->draw(chunk->m_numPassedIndexes);
+                chunk->m_mesh->unbind(material->getShader()->getAttributes());
+            }
+        });
+    }
 }
 
-void CLandscape::onDraw(const std::string& mode)
+void CLandscape::onUnbind(const std::string& techniqueName)
 {
+    assert(m_camera != nullptr);
+    assert(m_globalLightSource != nullptr);
+    assert(m_materials.find(techniqueName) != m_materials.end());
     
-}
-
-void CLandscape::onUnbind(const std::string& mode)
-{
-    
+    const auto& material = m_materials.find(techniqueName)->second;
+    if(material->getShader()->isLoaded())
+    {
+        material->unbind();
+    }
 }
 
 void CLandscape::onBatch(const std::string& mode)
 {
     
+}
+
+void CLandscape::bindCustomShaderUniforms(CSharedMaterialRef material)
+{
+    IGameObject::bindCustomShaderUniforms(material);
+#if defined(__OSX__)
+    material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
+    material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
+    material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
+#elif defined(__IOS__)
+    if(/*g_highPerformancePlatforms.count(getPlatform()) != 0*/ true)
+    {
+        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
+        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
+        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
+    }
+#else
+    material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSize.x, m_heightmapSize.y) / m_splattingTillingFactor,
+                                          "IN_SplattingTillingFactor");
+#endif
+    material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
+    material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
 }
 
 void CLandscape::setTexture(CSharedTextureRef texture,
@@ -275,18 +313,6 @@ void CLandscape::setTexture(CSharedTextureRef texture,
 void CLandscape::setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler)
 {
     m_tillingTexcoord[sampler] = value;
-    glm::ivec2 numChunks = m_heightmapGenerator->getNumChunks();
-    
-    for(ui32 i = 0; i < numChunks.x; ++i)
-    {
-        for(ui32 j = 0; j < numChunks.y; ++j)
-        {
-            if(m_chunks[i + j * numChunks.x] != nullptr)
-            {
-                m_chunks[i + j * numChunks.x]->setTillingTexcoord(value, sampler);
-            }
-        }
-    }
 }
 
 f32 CLandscape::getTillingTexcoord(E_SHADER_SAMPLER sampler) const

@@ -105,7 +105,7 @@ CSharedMaterial CMaterial::constructCustomMaterial(CSharedConfigurationMaterialR
             CSharedTexture zpositiveTexture = resourceAccessor->getTexture(textureConfiguration->getTextureFilenamePositiveZ());
             CSharedTexture znegativeTexture = resourceAccessor->getTexture(textureConfiguration->getTextureFilenameNegativeZ());
             
-            texture = CCubemapTexture::constructCustomCubemapTexture("skybox.cubemap.texture",
+            texture = CCubemapTexture::constructCustomCubemapTexture("cubemap.texture",
                                                                      xpositiveTexture,
                                                                      xnegativeTexture,
                                                                      ypositiveTexture,
@@ -495,13 +495,19 @@ void CMaterial::bind(void)
     assert(m_parameters->m_shader != nullptr);
     
     m_parameters->m_shader->bind();
-    for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
+    bool isSameTextures = std::all_of(m_parameters->m_textures.cbegin(), m_parameters->m_textures.cend(), [](CSharedTexture texture){
+        return std::find(getCachedParameters()->m_textures.cbegin(), getCachedParameters()->m_textures.cend(), texture) != getCachedParameters()->m_textures.cend();
+    });
+    
+    if(!isSameTextures)
     {
-        if(m_parameters->m_textures[i] != nullptr &&
-           getCachedParameters()->m_textures.at(i) != m_parameters->m_textures[i])
+        for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
         {
-            m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
-            getCachedParameters()->m_textures.at(i) = m_parameters->m_textures[i];
+            if(m_parameters->m_textures[i] != nullptr)
+            {
+                m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
+                getCachedParameters()->m_textures[i] = m_parameters->m_textures[i];
+            }
         }
     }
     
