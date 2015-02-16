@@ -336,4 +336,8 @@ class IUICommands;
 typedef std::shared_ptr<IUICommands> ISharedUICommands;
 typedef const ISharedUICommands& ISharedUICommandsRef;
 
+class IConfigurationGameObject;
+typedef std::shared_ptr<IConfigurationGameObject> ISharedConfigurationGameObject;
+typedef const ISharedConfigurationGameObject& ISharedConfigurationGameObjectRef;
+
 #endif

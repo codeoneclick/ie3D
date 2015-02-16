@@ -17,13 +17,23 @@ class CComponentRendering : public IComponent
 private:
     
     std::unordered_map<std::string, CSharedMaterial> m_materials;
+    i32 m_zOrder;
+    
+    typedef std::function<void(CSharedMaterialRef material)> T_DRAW_COMMAND;
+    T_DRAW_COMMAND m_drawCommand;
     
 protected:
     
 public:
     
-    CComponentRendering(void);
+    CComponentRendering(ISharedConfigurationGameObjectRef configuration);
     ~CComponentRendering(void);
+    
+    CSharedMaterial getMaterial(const std::string& techniqueName) const;
+    i32 getZOrder(void) const;
+    
+    void setDrawCommand(const T_DRAW_COMMAND& command);
+    void draw(const std::string& techniqueName);
 };
 
 #endif

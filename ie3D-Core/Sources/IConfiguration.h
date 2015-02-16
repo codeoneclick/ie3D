@@ -278,6 +278,7 @@ private:
 protected:
     
 public:
+    
     IConfigurationGameObject() = default;
     virtual ~IConfigurationGameObject(void) = default;
     virtual  std::vector<ISharedConfiguration> getMaterialsConfigurations(void) const = 0;

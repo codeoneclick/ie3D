@@ -98,18 +98,18 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         m_chunks[index]->setInprogressLOD(LOD);
                         m_heightmapGenerator->runChunkLoading(i, j, LOD, [this, index, i, j, LOD](CSharedMeshRef mesh) {
                             
-                            //m_chunks[index]->setCamera(m_camera);
+                            m_chunks[index]->setCamera(m_camera);
                             m_chunks[index]->setCameraFrustum(m_cameraFrustum);
-                            //m_chunks[index]->setGlobalLightSource(m_globalLightSource);
+                            m_chunks[index]->setGlobalLightSource(m_globalLightSource);
                             
                             m_chunks[index]->setMesh(mesh);
-                            //m_chunks[index]->onConfigurationLoaded(m_configuration, true);
+                            m_chunks[index]->onConfigurationLoaded(m_configuration, true);
                             
-                            //m_chunks[index]->setRenderTechniqueImporter(m_renderTechniqueImporter);
-                            //m_chunks[index]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
+                            m_chunks[index]->setRenderTechniqueImporter(m_renderTechniqueImporter);
+                            m_chunks[index]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
                             m_chunks[index]->setSceneUpdateMgr(m_sceneUpdateMgr);
                             
-                            //m_chunks[index]->enableRender(m_isNeedToRender);
+                            m_chunks[index]->enableRender(m_isNeedToRender);
                             m_chunks[index]->enableUpdate(m_isNeedToUpdate);
                             
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
