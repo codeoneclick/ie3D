@@ -13,11 +13,9 @@
 #include "CCamera.h"
 #include "CGlobalLightSource.h"
 #include "CResourceAccessor.h"
-#include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CAnimationMixer.h"
 #include "IRenderTechniqueAccessor.h"
-#include "CBatchingMgr.h"
 #include "CAnimationSequence.h"
 #include "CConfigurationAccessor.h"
 
@@ -26,8 +24,7 @@ CModel::CModel(CSharedResourceAccessorRef resourceAccessor,
 IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_animationMixer(nullptr)
 {
-    m_isNeedBoundingBox = true;
-    m_zOrder = E_GAME_OBJECT_Z_ORDER_MODEL;
+
 }
 
 CModel::~CModel(void)
@@ -85,7 +82,6 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     m_mesh = m_resourceAccessor->getMesh(configurationModel->getMeshFilename());
     m_mesh->addLoadingHandler(shared_from_this());
     assert(m_mesh != nullptr);
-    m_isBatching = configurationModel->getBatching();
     
     for(ui32 i = 0; i < configurationModel->getAnimationsConfigurations().size(); ++i)
     {
@@ -93,81 +89,27 @@ void CModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
         m_animationNamesLinkage.insert(std::make_pair(configurationAnimation->getAnimationName(),
                                                       configurationAnimation->getAnimationFilename()));
     }
-    
-	IGameObject::enableRender(m_isNeedToRender);
-    IGameObject::enableUpdate(m_isNeedToUpdate);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
-}
-
-i32  CModel::zOrder(void)
-{
-    return m_zOrder;
-}
-
-bool CModel::checkOcclusion(void)
-{
-    return IGameObject::checkOcclusion();
-}
-
-ui32 CModel::numTriangles(void)
-{
-    return IGameObject::numTriangles();
-}
-
-void CModel::onBind(const std::string& techniqueName)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        IGameObject::onBind(techniqueName);
-    }
-}
-
-void CModel::onDraw(const std::string& techniqueName)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        IGameObject::onDraw(techniqueName);
-    }
-}
-
-void CModel::onUnbind(const std::string& techniqueName)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        IGameObject::onUnbind(techniqueName);
-    }
-}
-
-void CModel::onBatch(const std::string& techniqueName)
-{
-    assert(m_materials.find(techniqueName) != m_materials.end());
-    CSharedMaterial material = m_materials.find(techniqueName)->second;
-    assert(material->getShader() != nullptr);
-    if(m_animationMixer != nullptr &&
-       m_mesh != nullptr &&
-       m_mesh->isLoaded() &&
-       m_isBatching)
-    {
-        m_renderTechniqueAccessor->getBatchingMgr()->batch(techniqueName,
-                                                           m_zOrder,
-                                                           m_mesh,
-                                                           m_animationMixer,
-                                                           material,
-                                                           m_materialBindImposer,
-                                                           IGameObject::getTransformation());
-    }
 }
 
 void CModel::bindCustomShaderUniforms(CSharedMaterialRef material)
 {
     IGameObject::bindCustomShaderUniforms(material);
     material->getShader()->setInt(m_animationMixer != nullptr && m_animationMixer->isAnimated() ? 1 : 0, E_SHADER_UNIFORM_INT_FLAG_01);
-    if(!m_isBatching && m_animationMixer != nullptr && m_animationMixer->isAnimated())
+    if(m_animationMixer != nullptr && m_animationMixer->isAnimated())
     {
         assert(m_animationMixer->getTransformationSize() <= kMaxBones);
         material->getShader()->setMatrixArray4x4(m_animationMixer->getTransformations(),
                                                  m_animationMixer->getTransformationSize(),
                                                  E_SHADER_UNIFORM_MATRIX_BONES);
+    }
+}
+
+void CModel::onDraw(CSharedMaterialRef material)
+{
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    {
+        IGameObject::onDraw(material);
     }
 }
 

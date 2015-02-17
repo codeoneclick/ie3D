@@ -192,3 +192,13 @@ std::string IConfiguration::getFilename(void) const
     return m_filename;
 }
 
+IConfigurationGameObject::~IConfigurationGameObject(void)
+{
+    std::cout<<"configuration deallocated"<<std::endl;
+}
+
+i32 IConfigurationGameObject::getZOrder(void) const
+{
+    return -1;
+}
+

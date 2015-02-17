@@ -16,6 +16,10 @@ std::string getSplattingDataFilename(void) const;
 #if defined(__EDITOR__)
 void setSplattingDataFilename(std::string splatting_data_filename);
 #endif
+i32 getZOrder(void) const;
+#if defined(__EDITOR__)
+void setZOrder(i32 z_order);
+#endif
 ui32 getSizeX(void) const;
 #if defined(__EDITOR__)
 void setSizeX(ui32 size_x);

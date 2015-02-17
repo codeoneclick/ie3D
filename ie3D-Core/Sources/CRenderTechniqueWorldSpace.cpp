@@ -9,6 +9,7 @@
 #include "CRenderTechniqueWorldSpace.h"
 #include "IRenderTechniqueHandler.h"
 #include "CTexture.h"
+#include "CComponentRendering.h"
 
 CRenderTechniqueWorldSpace::CRenderTechniqueWorldSpace(ui32 frameWidth, ui32 frameHeight, const std::string& name, ui32 index) :
 IRenderTechniqueBase(frameWidth, frameHeight, name, index),
@@ -107,27 +108,35 @@ ui32 CRenderTechniqueWorldSpace::getNumTriangles(void) const
 
 void CRenderTechniqueWorldSpace::addRenderTechniqueHandler(ISharedRenderTechniqueHandlerRef handler)
 {
-    assert(handler != nullptr);
-    if(m_handlers.find(handler->zOrder()) != m_handlers.end())
+    assert(handler);
+    CSharedComponentRendering componentRendering = handler->getComponentRendering();
+    assert(componentRendering);
+    
+    const auto& uniqueContainer = m_handlers.find(componentRendering->getZOrder());
+    if(uniqueContainer != m_handlers.end())
     {
-        m_handlers.find(handler->zOrder())->second.insert(handler);
+        uniqueContainer->second.insert(handler);
     }
     else
     {
-        m_handlers[handler->zOrder()].insert(handler);
+        m_handlers[componentRendering->getZOrder()].insert(handler);
     }
 }
 
 void CRenderTechniqueWorldSpace::removeRenderTechniqueHandler(ISharedRenderTechniqueHandlerRef handler)
 {
-    assert(handler != nullptr);
-    if(m_handlers.find(handler->zOrder()) != m_handlers.end())
+    assert(handler);
+    CSharedComponentRendering componentRendering = handler->getComponentRendering();
+    assert(componentRendering);
+    
+    const auto& uniqueContainer = m_handlers.find(componentRendering->getZOrder());
+    if(uniqueContainer != m_handlers.end())
     {
-        m_handlers.find(handler->zOrder())->second.erase(handler);
+        uniqueContainer->second.erase(handler);
     }
     else
     {
-        m_handlers[handler->zOrder()].erase(handler);
+        m_handlers[componentRendering->getZOrder()].erase(handler);
     }
 }
 
@@ -157,18 +166,11 @@ void CRenderTechniqueWorldSpace::draw(void)
         for(std::set<ISharedRenderTechniqueHandler>::iterator iterator_02 = (*iterator_01).second.begin(); iterator_02 !=  (*iterator_01).second.end(); ++iterator_02)
         {
             ISharedRenderTechniqueHandler handler = (*iterator_02);
-            assert(handler != nullptr);
-            if(!handler->checkOcclusion())
+            CSharedComponentRendering componentRendering = handler->getComponentRendering();
+            assert(componentRendering);
+            if(componentRendering->isInCameraFrustum())
             {
-                handler->onBind(m_name);
-                handler->onDraw(m_name);
-                handler->onUnbind(m_name);
-                
-                if(m_areDrawBoundingBoxes)
-                {
-                    handler->onDrawBoundingBox();
-                }
-                m_numTriangles += handler->numTriangles();
+                componentRendering->draw(m_name);
             }
         }
     }
@@ -176,16 +178,5 @@ void CRenderTechniqueWorldSpace::draw(void)
 
 void CRenderTechniqueWorldSpace::batch(void)
 {
-    for(std::map<ui32, std::set<ISharedRenderTechniqueHandler>>::iterator iterator_01 = m_handlers.begin(); iterator_01 != m_handlers.end(); ++iterator_01)
-    {
-        for(std::set<ISharedRenderTechniqueHandler>::iterator iterator_02 = (*iterator_01).second.begin(); iterator_02 !=  (*iterator_01).second.end(); ++iterator_02)
-        {
-            ISharedRenderTechniqueHandler handler = (*iterator_02);
-            assert(handler != nullptr);
-            if(!handler->checkOcclusion())
-            {
-                handler->onBatch(m_name);
-            }
-        }
-    }
+
 }

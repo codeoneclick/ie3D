@@ -13,7 +13,6 @@
 #include "CCamera.h"
 #include "CGlobalLightSource.h"
 #include "CResourceAccessor.h"
-#include "CBatchingMgr.h"
 #include "CMesh.h"
 #include "CQuadTree.h"
 #include "CVertexBuffer.h"
@@ -33,8 +32,6 @@ m_size(0)
     {
         m_seamedLOD.at(i) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
     }
-    m_isNeedBoundingBox = true;
-    m_zOrder = E_GAME_OBJECT_Z_ORDER_LANDSCAPE;
 }
 
 CLandscapeChunk::~CLandscapeChunk(void)
@@ -93,46 +90,9 @@ void CLandscapeChunk::onResourceLoaded(ISharedResourceRef resource, bool success
 void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     IGameObject::onConfigurationLoaded(configuration, success);
-    
-	IGameObject::enableRender(m_isNeedToRender);
-    IGameObject::enableUpdate(m_isNeedToUpdate);
-    
+    IGameObject::removeComponentRendering();
+
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
-}
-
-i32 CLandscapeChunk::zOrder(void)
-{
-    return m_zOrder;
-}
-
-bool CLandscapeChunk::checkOcclusion(void)
-{
-    return IGameObject::checkOcclusion();
-}
-
-ui32 CLandscapeChunk::numTriangles(void)
-{
-    return 0;
-}
-
-void CLandscapeChunk::onBind(const std::string& mode)
-{
-
-}
-
-void CLandscapeChunk::onDraw(const std::string& mode)
-{
-
-}
-
-void CLandscapeChunk::onUnbind(const std::string& mode)
-{
-
-}
-
-void CLandscapeChunk::onBatch(const std::string& mode)
-{
-   
 }
 
 CSharedVertexBuffer CLandscapeChunk::getCollisionVertexBuffer(void) const

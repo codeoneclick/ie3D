@@ -8,6 +8,10 @@ class CConfigurationParticleEmitter : public IConfigurationGameObject
 public:
 CConfigurationParticleEmitter(void) = default;
 ~CConfigurationParticleEmitter(void) = default;
+i32 getZOrder(void) const;
+#if defined(__EDITOR__)
+void setZOrder(i32 z_order);
+#endif
 ui32 getNumParticles(void) const;
 #if defined(__EDITOR__)
 void setNumParticles(ui32 num_particles);

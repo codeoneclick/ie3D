@@ -5,6 +5,7 @@
     <attributes>
         <attribute type="std::string" property="HeightmapDataFilename" path="/landscape" name="heightmap_data_filename"/>
         <attribute type="std::string" property="SplattingDataFilename" path="/landscape" name="splatting_data_filename"/>
+        <attribute type="i32" property="ZOrder" path="/landscape" name="z_order"/>
         <attribute type="ui32" property="SizeX" path="/landscape" name="size_x"/>
         <attribute type="ui32" property="SizeY" path="/landscape" name="size_y"/>
         <attribute type="f32" property="Frequency" path="/landscape" name="frequency"/>

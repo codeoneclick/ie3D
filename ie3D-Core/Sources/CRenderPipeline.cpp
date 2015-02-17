@@ -12,7 +12,6 @@
 #include "CRenderTechniqueScreenSpace.h"
 #include "IGraphicsContext.h"
 #include "CTexture.h"
-#include "CBatchingMgr.h"
 #include "IRenderTechniqueOperationTextureHandler.h"
 #include "COcclusionQueryManager.h"
 
@@ -52,12 +51,12 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
     {
         CSharedRenderTechniqueWorldSpace technique = iterator.second;
         
-        if(m_batchingMgr != nullptr)
+        /*if(m_batchingMgr != nullptr)
         {
             m_batchingMgr->lock(iterator.first);
             technique->batch();
             m_batchingMgr->unlock(iterator.first);
-        }
+        }*/
         
         technique->bind();
         technique->draw();

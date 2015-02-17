@@ -1,4 +1,5 @@
 <ocean
+    z_order="3"
     size="512"
     altitude="-0.25"
     wave_generation_interval="0.005">

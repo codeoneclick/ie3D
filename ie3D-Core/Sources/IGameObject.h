@@ -17,20 +17,19 @@
 #include "IRenderTechniqueHandler.h"
 #include "ISceneUpdateHandler.h"
 #include "IOcclusionQueryHandler.h"
+#include "CComponentRendering.h"
 
 class IGameObject :
 public std::enable_shared_from_this<IGameObject>,
 public IConfigurationLoadingHandler,
 public IResourceLoadingHandler,
-public IRenderTechniqueHandler,
 public ISceneUpdateHandler,
-public IOcclusionQueryHandler
+public IRenderTechniqueHandler
 {
 private:
     
 protected:
 
-    std::unordered_map<std::string, CSharedMaterial> m_materials;
     std::function<void(CSharedMaterialRef)> m_materialBindImposer;
     
     CSharedMesh m_mesh;
@@ -50,42 +49,27 @@ protected:
     
     CSharedResourceAccessor m_resourceAccessor;
     
-    ui32 m_zOrder;
-    
-    bool m_occlusionQueryOngoing;
-    bool m_occlusionQueryVisible;
-    ui32 m_occlusionQueryHandler;
-    
     ui8 m_status;
-    
-	bool m_isNeedToRender;
-    bool m_isNeedToUpdate;
-    bool m_isBatching;
-    bool m_isNeedBoundingBox;
     
     virtual void onSceneUpdate(f32 deltatime);
     
     virtual void onResourceLoaded(ISharedResourceRef resource, bool success);
     virtual void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
-    virtual i32  zOrder(void);
-    virtual bool checkOcclusion(void);
-    virtual ui32 numTriangles(void);
-    virtual void onDrawBoundingBox(void);
-    virtual void onBind(const std::string& mode);
-    virtual void onDraw(const std::string& mode);
-    virtual void onUnbind(const std::string& mode);
-    virtual void onBatch(const std::string& mode);
+    virtual bool isInCameraFrustum(CSharedFrustumRef cameraFrustum);
+    virtual void onDraw(CSharedMaterialRef material);
+    CSharedComponentRendering getComponentRendering(void) const;
     
-    virtual void onOcclusionQueryDraw(CSharedMaterialRef material);
-    virtual void onOcclusionQueryUpdate(void);
+    virtual void onBind(CSharedMaterialRef material);
+    virtual void onUnbind(CSharedMaterialRef material);
     
     virtual void bindBaseShaderUniforms(CSharedMaterialRef material);
     virtual void bindCustomShaderUniforms(CSharedMaterialRef material);
     
-    bool getBoundingBox(void);
-    
     std::map<E_COMPONENT_CLASS, ISharedComponent> m_components;
+    
+    void addComponentRendering(void);
+    void removeComponentRendering(void);
     
 public:
     
@@ -95,6 +79,7 @@ public:
     
     void addComponent(ISharedComponentRef component);
     void removeComponent(ISharedComponentRef component);
+    void removeComponents(void);
     bool isComponentExist(E_COMPONENT_CLASS componentClass) const;
     ISharedComponent getComponent(E_COMPONENT_CLASS componentClass) const;
     
@@ -112,40 +97,38 @@ public:
     glm::vec3 getMinBound(void) const;
     
     virtual void setCamera(CSharedCameraRef camera);
-    virtual void setCameraFrustum(CSharedFrustumRef frustum);
-    virtual void setGlobalLightSource(CSharedGlobalLightSourceRef lightSource);
+    virtual void setCameraFrustum(CSharedFrustumRef cameraFrustum);
+    virtual void setGlobalLightSource(CSharedGlobalLightSourceRef globalLightSource);
     
     CSharedVertexBuffer getVertexBuffer(void) const;
     CSharedIndexBuffer getIndexBuffer(void) const;
     
     CSharedMaterial getMaterial(const std::string& renderTechique) const;
     
-    virtual void setCustomShaderUniform(const glm::mat4x4& matrix, const std::string& uniform, const std::string& renderTechnique = "");
-    virtual void setCustomShaderUniform(const glm::mat3x3& matrix, const std::string& uniform, const std::string& renderTechnique = "");
-    virtual void setCustomShaderUniform(const glm::vec4& vector, const std::string& uniform, const std::string& renderTechnique = "");
-    virtual void setCustomShaderUniform(const glm::vec3& vector, const std::string& uniform, const std::string& renderTechnique = "");
-    virtual void setCustomShaderUniform(const glm::vec2& vector, const std::string& uniform, const std::string& renderTechnique = "");
-    virtual void setCustomShaderUniform(f32 value, const std::string& uniform, const std::string& renderTechnique = "");
-    virtual void setCustomShaderUniform(i32 value, const std::string& uniform, const std::string& renderTechnique = "");
+    template<typename T_VALUE>
+    void setCustomShaderUniform(T_VALUE value, const std::string& uniform, const std::string& techniqueName)
+    {
+        if (IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
+        {
+            CSharedComponentRendering componentRendering = std::static_pointer_cast<CComponentRendering>(IGameObject::getComponent(E_COMPONENT_CLASS_RENDERING));
+            componentRendering->setCustomShaderUniform(value, uniform, techniqueName);
+        }
+        else
+        {
+            assert(false);
+        }
+    };
     
     virtual CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     virtual CSharedIndexBuffer getCollisionIndexBuffer(void) const;
     
-    virtual void setTexture(CSharedTextureRef texture,
-                            E_SHADER_SAMPLER sampler,
-                            const std::string& renderTechnique = "");
-    
-    virtual void setClippingPlane(const glm::vec4& clippingPlane,
-                                  const std::string& renderTechnique);
+    void setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler, const std::string& techniqueName = "");
     
     virtual void removeLoadingDependencies(void);
     
     virtual void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);
     virtual void setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor);
     virtual void setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr);
-    
-    virtual void enableRender(bool value);
-    virtual void enableUpdate(bool value);
 };
 
 #endif 

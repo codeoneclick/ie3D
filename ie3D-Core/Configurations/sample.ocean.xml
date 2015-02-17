@@ -3,6 +3,7 @@
     base_class_name="IConfigurationGameObject"
     is_external="1">
     <attributes>
+        <attribute type="i32" property="ZOrder" path="/ocean" name="z_order"/>
         <attribute type="ui32" property="Size" path="/ocean" name="size"/>
         <attribute type="f32" property="Altitude" path="/ocean" name="altitude"/>
         <attribute type="f32" property="WaveGenerationInterval" path="/ocean" name="wave_generation_interval"/>

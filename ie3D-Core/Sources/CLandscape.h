@@ -27,13 +27,10 @@ protected:
     void onResourceLoaded(ISharedResourceRef resource, bool success);
     void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
-    i32  zOrder(void);
-    bool checkOcclusion(void);
-    ui32 numTriangles(void);
-    void onBind(const std::string& mode);
-    void onDraw(const std::string& mode);
-    void onUnbind(const std::string& mode);
-    void onBatch(const std::string& mode);
+    bool isInCameraFrustum(CSharedFrustumRef cameraFrustum);
+    void onDraw(CSharedMaterialRef material);
+    void onBind(CSharedMaterialRef material);
+    void onUnbind(CSharedMaterialRef material);
     
     void bindCustomShaderUniforms(CSharedMaterialRef material);
     
@@ -57,10 +54,6 @@ public:
     
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     f32 getTillingTexcoord(E_SHADER_SAMPLER sampler) const;
-    
-    void setTexture(CSharedTextureRef texture,
-                    E_SHADER_SAMPLER sampler,
-                    const std::string& renderTechnique = "");
     
     std::vector<ISharedGameObject> getChunks(void) const;
 

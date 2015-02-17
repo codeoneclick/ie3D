@@ -22,12 +22,12 @@
 #include "CBoundingBox.h"
 #include "HShaders.h"
 #include "CComponentTransformation.h"
+#include "CComponentRendering.h"
 #include "CConfigurationAccessor.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
                          ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 m_resourceAccessor(resourceAccessor),
-m_zOrder(0),
 m_mesh(nullptr),
 m_camera(nullptr),
 m_globalLightSource(nullptr),
@@ -37,11 +37,6 @@ m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_renderTechniqueImporter(nullptr),
 m_sceneUpdateMgr(nullptr),
 m_materialBindImposer(nullptr),
-m_isNeedToRender(false),
-m_isNeedToUpdate(false),
-m_isBatching(false),
-m_occlusionQueryOngoing(false),
-m_occlusionQueryVisible(true),
 m_status(E_LOADING_STATUS_UNLOADED)
 {
     m_materialBindImposer = [this](CSharedMaterialRef material)
@@ -55,42 +50,13 @@ m_status(E_LOADING_STATUS_UNLOADED)
         bindBaseShaderUniforms(material);
     };
     
-    CSharedComponentTransformation transformationComponent = std::make_shared<CComponentTransformation>();
-    IGameObject::addComponent(transformationComponent);
-    
-#if defined(__OCCLUSIOON_QUERY__)
-    
-#if defined(__OSX__)
-    
-    glGenQueries(1, &m_occlusionQueryHandler);
-    
-#elif defined(__IOS__)
-    
-    glGenQueriesEXT(1, &m_occlusionQueryHandler);
-    
-#endif
-    
-#endif
+    CSharedComponentTransformation componentTransformation = std::make_shared<CComponentTransformation>();
+    IGameObject::addComponent(componentTransformation);
 }
 
 IGameObject::~IGameObject(void)
 {
-    
-#if defined(__OCCLUSIOON_QUERY__)
-    
-#if defined(__OSX__)
-    
-    glDeleteQueries(1, &m_occlusionQueryHandler);
-    
-#elif defined(__IOS)
-    
-    glDeleteQueriesEXT(1, &m_occlusionQueryHandler);
-    
-#endif
-    
-#endif
-    
-    m_materials.clear();
+    IGameObject::removeComponents();
 }
 
 void IGameObject::addComponent(ISharedComponentRef component)
@@ -107,6 +73,12 @@ void IGameObject::removeComponent(ISharedComponentRef component)
     m_components.erase(iterator);
 }
 
+void IGameObject::removeComponents(void)
+{
+    std::map<E_COMPONENT_CLASS, ISharedComponent> eraser;
+    m_components.swap(eraser);
+}
+
 bool IGameObject::isComponentExist(E_COMPONENT_CLASS componentClass) const
 {
     assert(componentClass != E_COMPONENT_CLASS_UNDEFINED);
@@ -121,42 +93,48 @@ ISharedComponent IGameObject::getComponent(E_COMPONENT_CLASS componentClass) con
     return iterator != m_components.end() ? iterator->second : nullptr;
 }
 
-bool IGameObject::getBoundingBox(void)
+void IGameObject::addComponentRendering(void)
 {
-    if(m_mesh != nullptr && m_mesh->isLoaded() && m_boundingBox == nullptr && m_isNeedBoundingBox)
+    assert(m_configuration);
+    ISharedConfigurationGameObject configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(m_configuration);
+    CSharedComponentRendering componentRendering = std::make_shared<CComponentRendering>(configurationGameObject,
+                                                                                         m_resourceAccessor,
+                                                                                         m_renderTechniqueAccessor,
+                                                                                         shared_from_this(),
+                                                                                         m_cameraFrustum);
+    componentRendering->setDrawCommand(std::bind(&IGameObject::onDraw, this, std::placeholders::_1));
+    componentRendering->setCheckInCameraFrustumCommand(std::bind(&IGameObject::isInCameraFrustum, this, std::placeholders::_1));
+    IGameObject::addComponent(componentRendering);
+    for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
     {
-        m_boundingBox = std::make_shared<CBoundingBox>(m_mesh->getMinBound(),
-                                                       m_mesh->getMaxBound());
-        
-        m_boundingBoxMaterial = std::make_shared<CMaterial>();
-        CSharedShader shader = CShader::constructCustomShader("boundingBox", ShaderBoundingBox_vert, ShaderBoundingBox_frag);
-        assert(shader != nullptr);
-        m_boundingBoxMaterial->setShader(shader);
-        
-        m_boundingBoxMaterial->setCulling(false);
-        m_boundingBoxMaterial->setCullingMode(GL_BACK);
-        
-        m_boundingBoxMaterial->setBlending(false);
-        m_boundingBoxMaterial->setBlendingFunctionSource(GL_SRC_ALPHA);
-        m_boundingBoxMaterial->setBlendingFunctionDestination(GL_ONE);
-        
-        m_boundingBoxMaterial->setDepthTest(true);
-        m_boundingBoxMaterial->setDepthMask(true);
-        
-        m_boundingBoxMaterial->setClipping(false);
-        m_boundingBoxMaterial->setClippingPlane(glm::vec4(0.0, 0.0, 0.0, 0.0));
-        
-        m_boundingBoxMaterial->setReflecting(false);
-        m_boundingBoxMaterial->setShadowing(false);
-        m_boundingBoxMaterial->setDebugging(false);
+        CSharedConfigurationMaterial configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
+        if(m_renderTechniqueImporter->isSupportingRenderTechnique(configurationMaterial->getRenderTechniqueName()))
+        {
+            m_renderTechniqueImporter->addRenderTechniqueHandler(configurationMaterial->getRenderTechniqueName(), shared_from_this());
+        }
+        else
+        {
+            assert(false);
+        }
+    };
+}
 
-        return true;
-    }
-    else if(m_mesh != nullptr && m_mesh->isLoaded() && m_boundingBox != nullptr && m_isNeedBoundingBox)
+void IGameObject::removeComponentRendering(void)
+{
+    assert(m_configuration);
+    if(m_renderTechniqueImporter)
     {
-        return true;
+        ISharedConfigurationGameObject configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(m_configuration);
+        for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
+        {
+            CSharedConfigurationMaterial configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
+            m_renderTechniqueImporter->removeRenderTechniqueHandler(configurationMaterial->getRenderTechniqueName(), shared_from_this());
+        };
     }
-    return false;
+    if(IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
+    {
+        IGameObject::removeComponent(IGameObject::getComponent(E_COMPONENT_CLASS_RENDERING));
+    }
 }
 
 void IGameObject::onSceneUpdate(f32 deltatime)
@@ -174,141 +152,65 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
                                         bool success)
 {
     IConfigurationLoadingHandler::onConfigurationLoaded(configuration, success);
-    std::shared_ptr<IConfigurationGameObject> configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(configuration);
-    for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
+    
+    if(m_renderTechniqueImporter && !IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
     {
-        std::shared_ptr<CConfigurationMaterial> configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        CSharedMaterial material =  CMaterial::constructCustomMaterial(configurationMaterial,
-                                                                       m_resourceAccessor,
-                                                                       m_renderTechniqueAccessor,
-                                                                       shared_from_this());
-        m_materials.insert(std::make_pair(configurationMaterial->getRenderTechniqueName(), material));
+        IGameObject::addComponentRendering();
+    }
+    
+    if(m_sceneUpdateMgr)
+    {
+        m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this());
     }
 }
 
-i32 IGameObject::zOrder(void)
+void IGameObject::onBind(CSharedMaterialRef material)
 {
-    return 0;
+    material->bind();
+    m_mesh->bind(material->getShader()->getAttributes());
+    m_materialBindImposer(material);
 }
 
-bool IGameObject::checkOcclusion(void)
+void IGameObject::onUnbind(CSharedMaterialRef material)
 {
+    material->unbind();
+    m_mesh->unbind(material->getShader()->getAttributes());
+}
+
+void IGameObject::onDraw(CSharedMaterialRef material)
+{
+    assert(m_mesh != nullptr);
+    assert(m_camera != nullptr);
+    assert(m_globalLightSource != nullptr);
     
-#if defined(__OCCLUSIOON_QUERY__)
-    
-    return !m_occlusionQueryVisible;
-    
-#else
-    
-    assert(m_cameraFrustum != nullptr);
+    if(material->getShader()->isLoaded()
+#if defined(__EDITOR__)
+       && material->getEnabled()
+#endif
+       )
+    {
+        onBind(material);
+        m_mesh->draw();
+        onUnbind(material);
+    }
+}
+
+bool IGameObject::isInCameraFrustum(CSharedFrustumRef cameraFrustum)
+{
+    assert(cameraFrustum != nullptr);
     glm::vec3 maxBound = IGameObject::getMaxBound() + IGameObject::getPosition();
     glm::vec3 minBound = IGameObject::getMinBound() + IGameObject::getPosition();
-    return !m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
-    
-#endif
-    
+    return cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
 }
 
-ui32 IGameObject::numTriangles(void)
+CSharedComponentRendering IGameObject::getComponentRendering(void) const
 {
-    return m_mesh && m_mesh->isLoaded() ? m_mesh->getNumIndices() / 3 : 0;
-}
-
-void IGameObject::onDrawBoundingBox(void)
-{
-    if(m_isNeedBoundingBox && IGameObject::getBoundingBox())
+    CSharedComponentRendering componentRendering = nullptr;
+    if(IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
     {
-        m_boundingBoxMaterial->bind();
-        m_boundingBox->bind(m_boundingBoxMaterial->getShader()->getAttributes(), true);
-        m_boundingBoxMaterialBindImposer(m_boundingBoxMaterial);
-        m_boundingBox->draw(true);
-        m_boundingBoxMaterial->unbind();
-        m_boundingBox->unbind(m_boundingBoxMaterial->getShader()->getAttributes(), true);
+        componentRendering = std::static_pointer_cast<CComponentRendering>(IGameObject::getComponent(E_COMPONENT_CLASS_RENDERING));
     }
-}
-
-void IGameObject::onBind(const std::string& techniqueName)
-{
-    assert(m_mesh != nullptr);
-    assert(m_camera != nullptr);
-    assert(m_globalLightSource != nullptr);
-    assert(m_materials.find(techniqueName) != m_materials.end());
-    
-    auto iterator = m_materials.find(techniqueName);
-    if(!m_isBatching &&
-       iterator->second->getShader()->isLoaded()
-#if defined(__EDITOR__)
-       
-       && iterator->second->getEnabled()
-       
-#endif
-       )
-    {
-        iterator->second->bind();
-        m_mesh->bind(iterator->second->getShader()->getAttributes());
-        m_materialBindImposer(iterator->second);
-    }
-}
-
-void IGameObject::onDraw(const std::string& techniqueName)
-{
-    assert(m_mesh != nullptr);
-    assert(m_camera != nullptr);
-    assert(m_globalLightSource != nullptr);
-    assert(m_materials.find(techniqueName) != m_materials.end());
-    
-    auto iterator = m_materials.find(techniqueName);
-    if(!m_isBatching &&
-       iterator->second->getShader()->isLoaded()
-#if defined(__EDITOR__)
-       
-       && iterator->second->getEnabled()
-       
-#endif
-       )
-    {
-        m_mesh->draw();
-    }
-}
-
-void IGameObject::onUnbind(const std::string& techniqueName)
-{
-    assert(m_mesh != nullptr);
-    assert(m_camera != nullptr);
-    assert(m_globalLightSource != nullptr);
-    assert(m_materials.find(techniqueName) != m_materials.end());
-    
-    auto iterator = m_materials.find(techniqueName);
-    if(!m_isBatching &&
-       iterator->second->getShader()->isLoaded()
-#if defined(__EDITOR__)
-       
-       && iterator->second->getEnabled()
-       
-#endif
-       )
-    {
-        iterator->second->unbind();
-        m_mesh->unbind(iterator->second->getShader()->getAttributes());
-    }
-}
-
-void IGameObject::onBatch(const std::string& techniqueName)
-{
-    assert(m_materials.find(techniqueName) != m_materials.end());
-    CSharedMaterial material = m_materials.find(techniqueName)->second;
-    assert(material->getShader() != nullptr);
-    if(m_mesh != nullptr &&
-       m_mesh->isLoaded() &&
-       m_isBatching)
-    {
-        m_renderTechniqueAccessor->getBatchingMgr()->batch(techniqueName,
-                                                           m_zOrder,
-                                                           m_mesh,
-                                                           material,
-                                                           m_materialBindImposer,
-                                                           IGameObject::getTransformation());
-    }
+    return componentRendering;
 }
 
 void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)
@@ -319,7 +221,7 @@ void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)
     material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
     material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
     material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-    material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : IGameObject::getTransformation(), E_SHADER_UNIFORM_MATRIX_WORLD);
+    material->getShader()->setMatrix4x4(IGameObject::getTransformation(), E_SHADER_UNIFORM_MATRIX_WORLD);
     
     // camera base parameters
     material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
@@ -472,130 +374,15 @@ CSharedIndexBuffer IGameObject::getIndexBuffer(void) const
     return m_mesh && m_mesh->isCommited() ? m_mesh->getIndexBuffer() : nullptr;
 }
 
-CSharedMaterial IGameObject::getMaterial(const std::string& renderTechique) const
+CSharedMaterial IGameObject::getMaterial(const std::string& techniqueName) const
 {
-    const auto& material = m_materials.find(renderTechique);
-    assert(material != m_materials.end());
-    return material->second;
-}
-
-void IGameObject::setCustomShaderUniform(const glm::mat4x4& matrix, const std::string& uniform, const std::string& renderTechnique)
-{
-    if(renderTechnique.length() != 0)
+    CSharedMaterial material = nullptr;
+    if (IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
     {
-        assert(m_materials.find(renderTechnique) != m_materials.end());
-        auto iterator = m_materials.find(renderTechnique);
-        iterator->second->setCustomShaderUniform(matrix, uniform);
+        CSharedComponentRendering componentRendering = IGameObject::getComponentRendering();
+        material = componentRendering->getMaterial(techniqueName);
     }
-    else
-    {
-        for(const auto& iterator : m_materials)
-        {
-            iterator.second->setCustomShaderUniform(matrix, uniform);
-        }
-    }
-}
-
-void IGameObject::setCustomShaderUniform(const glm::mat3x3& matrix, const std::string& uniform, const std::string& renderTechnique)
-{
-    if(renderTechnique.length() != 0)
-    {
-        assert(m_materials.find(renderTechnique) != m_materials.end());
-        auto iterator = m_materials.find(renderTechnique);
-        iterator->second->setCustomShaderUniform(matrix, uniform);
-    }
-    else
-    {
-        for(const auto& iterator : m_materials)
-        {
-            iterator.second->setCustomShaderUniform(matrix, uniform);
-        }
-    }
-}
-
-void IGameObject::setCustomShaderUniform(const glm::vec4& vector, const std::string& uniform, const std::string& renderTechnique)
-{
-    if(renderTechnique.length() != 0)
-    {
-        assert(m_materials.find(renderTechnique) != m_materials.end());
-        auto iterator = m_materials.find(renderTechnique);
-        iterator->second->setCustomShaderUniform(vector, uniform);
-    }
-    else
-    {
-        for(const auto& iterator : m_materials)
-        {
-            iterator.second->setCustomShaderUniform(vector, uniform);
-        }
-    }
-}
-
-void IGameObject::setCustomShaderUniform(const glm::vec3& vector, const std::string& uniform, const std::string& renderTechnique)
-{
-    if(renderTechnique.length() != 0)
-    {
-        assert(m_materials.find(renderTechnique) != m_materials.end());
-        auto iterator = m_materials.find(renderTechnique);
-        iterator->second->setCustomShaderUniform(vector, uniform);
-    }
-    else
-    {
-        for(const auto& iterator : m_materials)
-        {
-            iterator.second->setCustomShaderUniform(vector, uniform);
-        }
-    }
-}
-
-void IGameObject::setCustomShaderUniform(const glm::vec2& vector, const std::string& uniform, const std::string& renderTechnique)
-{
-    if(renderTechnique.length() != 0)
-    {
-        assert(m_materials.find(renderTechnique) != m_materials.end());
-        auto iterator = m_materials.find(renderTechnique);
-        iterator->second->setCustomShaderUniform(vector, uniform);
-    }
-    else
-    {
-        for(const auto& iterator : m_materials)
-        {
-            iterator.second->setCustomShaderUniform(vector, uniform);
-        }
-    }
-}
-
-void IGameObject::setCustomShaderUniform(f32 value, const std::string& uniform, const std::string& renderTechnique)
-{
-    if(renderTechnique.length() != 0)
-    {
-        assert(m_materials.find(renderTechnique) != m_materials.end());
-        auto iterator = m_materials.find(renderTechnique);
-        iterator->second->setCustomShaderUniform(value, uniform);
-    }
-    else
-    {
-        for(const auto& iterator : m_materials)
-        {
-            iterator.second->setCustomShaderUniform(value, uniform);
-        }
-    }
-}
-
-void IGameObject::setCustomShaderUniform(i32 value, const std::string& uniform, const std::string& renderTechnique)
-{
-    if(renderTechnique.length() != 0)
-    {
-        assert(m_materials.find(renderTechnique) != m_materials.end());
-        auto iterator = m_materials.find(renderTechnique);
-        iterator->second->setCustomShaderUniform(value, uniform);
-    }
-    else
-    {
-        for(const auto& iterator : m_materials)
-        {
-            iterator.second->setCustomShaderUniform(value, uniform);
-        }
-    }
+    return material;
 }
 
 CSharedVertexBuffer IGameObject::getCollisionVertexBuffer(void) const
@@ -608,44 +395,21 @@ CSharedIndexBuffer IGameObject::getCollisionIndexBuffer(void) const
     return nullptr;
 }
 
-void IGameObject::setTexture(CSharedTextureRef texture,
-                             E_SHADER_SAMPLER sampler,
-                             const std::string& renderTechnique)
+void IGameObject::setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler, const std::string& techniqueName)
 {
-    if(renderTechnique.length() != 0)
+    if (IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
     {
-        assert(m_materials.find(renderTechnique) != m_materials.end());
-        auto iterator = m_materials.find(renderTechnique);
-        iterator->second->setTexture(texture, sampler);
+        CSharedComponentRendering componentRendering = IGameObject::getComponentRendering();
+        componentRendering->setTexture(texture, sampler, shared_from_this(), techniqueName);
     }
-    else
-    {
-        for(const auto& iterator : m_materials)
-        {
-            iterator.second->setTexture(texture, sampler);
-        }
-    }
-    texture->addLoadingHandler(shared_from_this());
 }
 
 void IGameObject::removeLoadingDependencies(void)
 {
-    for(const auto& iterator : m_materials)
+    if (IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
     {
-        for(ui32 i = E_SHADER_SAMPLER_01; i < E_SHADER_SAMPLER_MAX; ++i)
-        {
-            CSharedTexture texture = iterator.second->getTexture(static_cast<E_SHADER_SAMPLER>(i));
-            if(texture != nullptr)
-            {
-                texture->removeLoadingHandler(shared_from_this());
-            }
-            
-            CSharedShader shader = iterator.second->getShader();
-            if(shader != nullptr)
-            {
-                shader->removeLoadingHandler(shared_from_this());
-            }
-        }
+        CSharedComponentRendering componentRendering = IGameObject::getComponentRendering();
+        componentRendering->removeLoadingDependencies(shared_from_this());
     }
     if(m_mesh != nullptr)
     {
@@ -653,17 +417,18 @@ void IGameObject::removeLoadingDependencies(void)
     }
 }
 
-void IGameObject::setClippingPlane(const glm::vec4& clippingPlane,
-                      const std::string& renderTechnique)
-{
-    assert(m_materials.find(renderTechnique) != m_materials.end());
-    auto iterator = m_materials.find(renderTechnique);
-    iterator->second->setClippingPlane(clippingPlane);
-}
-
 void IGameObject::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)
 {
-    m_renderTechniqueImporter = techniqueImporter;
+    if(techniqueImporter && !IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING) && m_configuration)
+    {
+        m_renderTechniqueImporter = techniqueImporter;
+        IGameObject::addComponentRendering();
+    }
+    else if(!techniqueImporter && IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
+    {
+        IGameObject::removeComponentRendering();
+        m_renderTechniqueImporter = techniqueImporter;
+    }
 }
 
 void IGameObject::setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor)
@@ -673,127 +438,14 @@ void IGameObject::setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef t
 
 void IGameObject::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
 {
-    m_sceneUpdateMgr = sceneUpdateMgr;
-}
-
-void IGameObject::enableRender(bool value)
-{
-    for(const auto& iterator : m_materials)
+    if(sceneUpdateMgr)
     {
-		if(m_renderTechniqueImporter != nullptr &&
-           m_renderTechniqueImporter->isSupportingRenderTechnique(iterator.first))
-		{
-			value == true ? m_renderTechniqueImporter->addRenderTechniqueHandler(iterator.first, shared_from_this()) :
-			m_renderTechniqueImporter->removeRenderTechniqueHandler(iterator.first, shared_from_this());
-#if defined(__OCCLUSIOON_QUERY__)
-            
-            value == true ? m_renderTechniqueImporter->addToOcluddingQuery(iterator.first, shared_from_this()) :
-            m_renderTechniqueImporter->removeFromOcluddingQuery(iterator.first, shared_from_this());
-            
-#endif
-		}
+        m_sceneUpdateMgr = sceneUpdateMgr;
+        m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this());
     }
-	m_isNeedToRender = value;
-}
-
-void IGameObject::enableUpdate(bool value)
-{
-    if(m_sceneUpdateMgr != nullptr)
+    else if(!sceneUpdateMgr && m_sceneUpdateMgr)
     {
-        value == true ? m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this()) :
         m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
-    }
-    m_isNeedToUpdate = value;
-}
-
-void IGameObject::onOcclusionQueryDraw(CSharedMaterialRef material)
-{
-    
-#if not defined(__OCCLUSIOON_QUERY__)
-    
-    assert(false);
-    
-#endif
-    
-    if(m_boundingBox != nullptr && !m_occlusionQueryOngoing)
-    {
-        assert(material != nullptr);
-        
-        material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        material->getShader()->setMatrix4x4(m_isBatching ? glm::mat4x4(1.0) : IGameObject::getTransformation(), E_SHADER_UNIFORM_MATRIX_WORLD);
-        
-        m_occlusionQueryOngoing = true;
-        m_boundingBox->bind(material->getShader()->getAttributes(), false);
-#if defined(__OSX__)
-        
-        glBeginQuery(GL_SAMPLES_PASSED, m_occlusionQueryHandler);
-        
-#elif defined(__IOS__)
-        
-        glBeginQueryEXT(GL_ANY_SAMPLES_PASSED_EXT, m_occlusionQueryHandler);
-        
-#endif
-        m_boundingBox->draw(false);
-#if defined(__OSX__)
-        
-        glEndQuery(GL_SAMPLES_PASSED);
-        
-#elif defined(__IOS__)
-        
-        glEndQueryEXT(GL_ANY_SAMPLES_PASSED_EXT);
-        
-#endif
-        m_boundingBox->unbind(material->getShader()->getAttributes(), false);
-    }
-}
-
-void IGameObject::onOcclusionQueryUpdate(void)
-{
-    
-#if not defined(__OCCLUSIOON_QUERY__)
-    
-    assert(false);
-    
-#endif
-    
-    if(m_boundingBox != nullptr)
-    {
-#if defined(__OSX__)
-        
-        GLint available = GL_FALSE;
-        glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT_AVAILABLE, &available);
-        
-#elif defined(__IOS__)
-        
-        GLuint available = GL_FALSE;
-        glGetQueryObjectuivEXT(m_occlusionQueryHandler, GL_QUERY_RESULT_AVAILABLE_EXT, &available);
-        
-#endif
-        if (available == GL_TRUE)
-        {
-            m_occlusionQueryOngoing = false;
-            
-#if defined(__OSX__)
-            
-            GLint samplesPassed = 0;
-            glGetQueryObjectiv(m_occlusionQueryHandler, GL_QUERY_RESULT, &samplesPassed);
-            
-#elif defined(__IOS__)
-            
-            GLuint samplesPassed = 0;
-            glGetQueryObjectuivEXT(m_occlusionQueryHandler, GL_QUERY_RESULT_EXT, &samplesPassed);
-            
-#endif
-            if (samplesPassed > 0)
-            {
-                m_occlusionQueryVisible = true;
-            }
-            else
-            {
-                m_occlusionQueryVisible = false;
-            }
-        }
+        m_sceneUpdateMgr = sceneUpdateMgr;
     }
 }

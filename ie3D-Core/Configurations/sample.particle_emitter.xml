@@ -3,6 +3,7 @@
     base_class_name="IConfigurationGameObject"
     is_external="1">
     <attributes>
+        <attribute type="i32" property="ZOrder" path="/particle_emitter" name="z_order"/>
         <attribute type="ui32" property="NumParticles" path="/particle_emitter" name="num_particles"/>
         <attribute type="ui32" property="Duration" path="/particle_emitter" name="duration"/>
         <attribute type="f32" property="DurationRandomess" path="/particle_emitter" name="duration_randomness"/>

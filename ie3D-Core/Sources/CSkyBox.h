@@ -22,16 +22,9 @@ protected:
     void onResourceLoaded(ISharedResourceRef resource, bool success);
     void onConfigurationLoaded(ISharedConfigurationRef configuration, bool success);
     
-    i32  zOrder(void);
-    bool checkOcclusion(void);
-    ui32 numTriangles(void);
-    void onBind(const std::string& mode);
-    void onDraw(const std::string& mode);
-    void onUnbind(const std::string& mode);
-    void onBatch(const std::string& mode);
-    
-    void onOcclusionQueryDraw(CSharedMaterialRef material);
-    void onOcclusionQueryUpdate(void);
+    bool isInCameraFrustum(CSharedFrustumRef cameraFrustum);
+    void onDraw(CSharedMaterialRef material);
+    void onBind(CSharedMaterialRef material);
     
 public:
     

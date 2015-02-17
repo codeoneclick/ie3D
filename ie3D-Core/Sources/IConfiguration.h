@@ -280,8 +280,9 @@ protected:
 public:
     
     IConfigurationGameObject() = default;
-    virtual ~IConfigurationGameObject(void) = default;
-    virtual  std::vector<ISharedConfiguration> getMaterialsConfigurations(void) const = 0;
+    virtual ~IConfigurationGameObject(void);
+    virtual std::vector<ISharedConfiguration> getMaterialsConfigurations(void) const = 0;
+    virtual i32 getZOrder(void) const;
 };
 
 #endif

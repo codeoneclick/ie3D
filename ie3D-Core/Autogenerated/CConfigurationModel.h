@@ -13,6 +13,10 @@ std::string getMeshFilename(void) const;
 #if defined(__EDITOR__)
 void setMeshFilename(std::string mesh_filename);
 #endif
+i32 getZOrder(void) const;
+#if defined(__EDITOR__)
+void setZOrder(i32 z_order);
+#endif
 bool getBatching(void) const;
 #if defined(__EDITOR__)
 void setBatching(bool is_batching);

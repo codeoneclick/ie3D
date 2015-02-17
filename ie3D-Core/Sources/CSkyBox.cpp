@@ -21,8 +21,7 @@ CSkyBox::CSkyBox(CSharedResourceAccessorRef resourceAccessor,
                  ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
-    m_isNeedBoundingBox = false;
-    m_zOrder = E_GAME_OBJECT_Z_ORDER_SKYBOX;
+
 }
 
 CSkyBox::~CSkyBox(void)
@@ -113,35 +112,19 @@ void CSkyBox::onConfigurationLoaded(ISharedConfigurationRef configuration, bool 
                                         glm::vec3(4096.0), glm::vec3(-4096.0));
     assert(m_mesh != nullptr);
     
-	IGameObject::enableRender(m_isNeedToRender);
-    IGameObject::enableUpdate(m_isNeedToUpdate);
-    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32 CSkyBox::zOrder(void)
+bool CSkyBox::isInCameraFrustum(CSharedFrustumRef cameraFrustum)
 {
-    return m_zOrder;
+    return true;
 }
 
-bool CSkyBox::checkOcclusion(void)
-{
-    return false;
-}
-
-ui32 CSkyBox::numTriangles(void)
-{
-    return IGameObject::numTriangles();
-}
-
-void CSkyBox::onBind(const std::string& mode)
+void CSkyBox::onBind(CSharedMaterialRef material)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        assert(m_materials.find(mode) != m_materials.end());
-        
         IGameObject::setPosition(m_camera->Get_Position());
-        CSharedMaterial material = m_materials.find(mode)->second;
         glm::vec3 currentRotation = IGameObject::getRotation();
         bool currentReflectingState = material->isReflecting();
         if(currentReflectingState)
@@ -153,7 +136,7 @@ void CSkyBox::onBind(const std::string& mode)
         }
         
         IGameObject::onSceneUpdate(0);
-        IGameObject::onBind(mode);
+        IGameObject::onBind(material);
         
         if(currentReflectingState)
         {
@@ -164,34 +147,10 @@ void CSkyBox::onBind(const std::string& mode)
     }
 }
 
-void CSkyBox::onDraw(const std::string& mode)
+void CSkyBox::onDraw(CSharedMaterialRef material)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::onDraw(mode);
+        IGameObject::onDraw(material);
     }
-}
-
-void CSkyBox::onUnbind(const std::string& mode)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        assert(m_materials.find(mode) != m_materials.end());
-        IGameObject::onUnbind(mode);
-    }
-}
-
-void CSkyBox::onBatch(const std::string& mode)
-{
-   
-}
-
-void CSkyBox::onOcclusionQueryDraw(CSharedMaterialRef material)
-{
-    
-}
-
-void CSkyBox::onOcclusionQueryUpdate(void)
-{
-    
 }

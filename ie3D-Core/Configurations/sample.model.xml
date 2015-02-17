@@ -4,6 +4,7 @@
     is_external="1">
     <attributes>
         <attribute type="std::string" property="MeshFilename" path="/model" name="mesh_filename"/>
+        <attribute type="i32" property="ZOrder" path="/model" name="z_order"/>
         <attribute type="bool" property="Batching" path="/model" name="is_batching"/>
     </attributes>
     <relationships>

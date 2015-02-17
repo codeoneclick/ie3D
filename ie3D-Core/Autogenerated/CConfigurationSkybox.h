@@ -8,6 +8,10 @@ class CConfigurationSkybox : public IConfigurationGameObject
 public:
 CConfigurationSkybox(void) = default;
 ~CConfigurationSkybox(void) = default;
+i32 getZOrder(void) const;
+#if defined(__EDITOR__)
+void setZOrder(i32 z_order);
+#endif
 std::vector<std::shared_ptr<IConfiguration>> getMaterialsConfigurations(void) const;
 #if defined(__EDITOR__)
 void addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material);

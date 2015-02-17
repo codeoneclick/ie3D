@@ -116,9 +116,6 @@ void IEditableLandscape::generateVertecesData(const glm::ivec2& size, f32 freque
                 i32 index = i + j * numChunks.x;
                 if(m_chunks[index] != nullptr)
                 {
-                    m_chunks[index]->enableRender(false);
-                    m_chunks[index]->enableUpdate(false);
-                    m_chunks[index]->removeLoadingDependencies();
                     m_heightmapGenerator->runChunkUnLoading(i, j);
                     m_chunks[index] = nullptr;
                 }

@@ -22,8 +22,6 @@ COcean::COcean(CSharedResourceAccessorRef resourceAccessor,
                ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
-    m_isNeedBoundingBox = false;
-    m_zOrder = E_GAME_OBJECT_Z_ORDER_OCEAN;
 }
 
 COcean::~COcean(void)
@@ -113,54 +111,20 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
                                         glm::vec3(4096.0), glm::vec3(-4096.0));
     assert(m_mesh != nullptr);
     
-    IGameObject::enableRender(m_isNeedToRender);
-    IGameObject::enableUpdate(m_isNeedToUpdate);
-    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32 COcean::zOrder(void)
+bool COcean::isInCameraFrustum(CSharedFrustumRef cameraFrustum)
 {
-    return m_zOrder;
+    return true;
 }
 
-bool COcean::checkOcclusion(void)
-{
-    return false;
-}
-
-ui32 COcean::numTriangles(void)
-{
-    return IGameObject::numTriangles();
-}
-
-void COcean::onBind(const std::string& mode)
+void COcean::onDraw(CSharedMaterialRef material)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::onBind(mode);
+        IGameObject::onDraw(material);
     }
-}
-
-void COcean::onDraw(const std::string& mode)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        IGameObject::onDraw(mode);
-    }
-}
-
-void COcean::onUnbind(const std::string& mode)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        IGameObject::onUnbind(mode);
-    }
-}
-
-void COcean::onBatch(const std::string& mode)
-{
-
 }
 
 void COcean::bindCustomShaderUniforms(CSharedMaterialRef material)
@@ -178,14 +142,4 @@ void COcean::bindCustomShaderUniforms(CSharedMaterialRef material)
     }
     glm::mat4x4 matrixViewInverse = glm::inverse(m_camera->Get_ViewMatrix());
     material->getShader()->setMatrix4x4Custom(matrixViewInverse, "u_matrixViewInverse");
-}
-
-void COcean::onOcclusionQueryDraw(CSharedMaterialRef material)
-{
-    
-}
-
-void COcean::onOcclusionQueryUpdate(void)
-{
-    
 }

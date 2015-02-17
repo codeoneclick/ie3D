@@ -26,6 +26,19 @@ void CConfigurationLandscape::setSplattingDataFilename(std::string splatting_dat
 IConfiguration::setAttribute("/landscape/splatting_data_filename", std::make_shared<CConfigurationAttribute>(splatting_data_filename));
 }
 #endif
+i32 CConfigurationLandscape::getZOrder(void) const
+{
+const auto& iterator = m_attributes.find("/landscape/z_order");
+assert(iterator != m_attributes.end());
+i32 value; iterator->second->get(&value);
+return value;
+}
+#if defined(__EDITOR__)
+void CConfigurationLandscape::setZOrder(i32 z_order)
+{
+IConfiguration::setAttribute("/landscape/z_order", std::make_shared<CConfigurationAttribute>(z_order));
+}
+#endif
 ui32 CConfigurationLandscape::getSizeX(void) const
 {
 const auto& iterator = m_attributes.find("/landscape/size_x");
@@ -124,6 +137,8 @@ std::string heightmap_data_filename = node.node().attribute("heightmap_data_file
 IConfiguration::setAttribute("/landscape/heightmap_data_filename", std::make_shared<CConfigurationAttribute>(heightmap_data_filename));
 std::string splatting_data_filename = node.node().attribute("splatting_data_filename").as_string();
 IConfiguration::setAttribute("/landscape/splatting_data_filename", std::make_shared<CConfigurationAttribute>(splatting_data_filename));
+i32 z_order = node.node().attribute("z_order").as_int();
+IConfiguration::setAttribute("/landscape/z_order", std::make_shared<CConfigurationAttribute>(z_order));
 ui32 size_x = node.node().attribute("size_x").as_uint();
 IConfiguration::setAttribute("/landscape/size_x", std::make_shared<CConfigurationAttribute>(size_x));
 ui32 size_y = node.node().attribute("size_y").as_uint();
@@ -157,6 +172,9 @@ attribute.set_value(heightmap_data_filename.c_str());
 attribute = node.append_attribute("splatting_data_filename");
 std::string splatting_data_filename = CConfigurationLandscape::getSplattingDataFilename();
 attribute.set_value(splatting_data_filename.c_str());
+attribute = node.append_attribute("z_order");
+i32 z_order = CConfigurationLandscape::getZOrder();
+attribute.set_value(z_order);
 attribute = node.append_attribute("size_x");
 ui32 size_x = CConfigurationLandscape::getSizeX();
 attribute.set_value(size_x);

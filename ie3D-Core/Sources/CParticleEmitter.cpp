@@ -25,8 +25,6 @@ IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
     m_settings = nullptr;
     m_lastEmittTimestamp = 0;
-    m_isNeedBoundingBox = false;
-    m_zOrder = E_GAME_OBJECT_Z_ORDER_PARTICLE_EMITTER;
 }
 
 CParticleEmitter::~CParticleEmitter(void)
@@ -188,52 +186,13 @@ void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configurati
                                      glm::vec3(0.0), glm::vec3(0.0));
     assert(m_mesh != nullptr);
     
-	IGameObject::enableRender(m_isNeedToRender);
-    IGameObject::enableUpdate(m_isNeedToUpdate);
-    
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32 CParticleEmitter::zOrder(void)
-{
-    return m_zOrder;
-}
-
-bool CParticleEmitter::checkOcclusion(void)
-{
-    return IGameObject::checkOcclusion();
-}
-
-ui32 CParticleEmitter::numTriangles(void)
-{
-    return IGameObject::numTriangles();
-}
-
-void CParticleEmitter::onBind(const std::string& mode)
+void CParticleEmitter::onDraw(CSharedMaterialRef material)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::onBind(mode);
+        IGameObject::onDraw(material);
     }
-}
-
-void CParticleEmitter::onDraw(const std::string& mode)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        IGameObject::onDraw(mode);
-    }
-}
-
-void CParticleEmitter::onUnbind(const std::string& mode)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        IGameObject::onUnbind(mode);
-    }
-}
-
-void CParticleEmitter::onBatch(const std::string& mode)
-{
-
 }

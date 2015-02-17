@@ -1,4 +1,5 @@
 <particle_emitter
+    z_order="4"
     num_particles="64"
     duration="2000"
     duration_randomness="1"

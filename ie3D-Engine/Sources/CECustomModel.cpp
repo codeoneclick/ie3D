@@ -16,7 +16,7 @@ CECustomModel::CECustomModel(CSharedResourceAccessorRef resourceAccessor,
                              ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor)
 {
-    m_zOrder = E_GAME_OBJECT_Z_ORDER_CUSTOM;
+   
 }
 
 CECustomModel::~CECustomModel(void)
@@ -41,57 +41,16 @@ void CECustomModel::onResourceLoaded(ISharedResourceRef resource, bool success)
 void CECustomModel::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     IGameObject::onConfigurationLoaded(configuration, success);
-    
-    IGameObject::enableRender(m_isNeedToRender);
-    IGameObject::enableUpdate(m_isNeedToUpdate);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-i32 CECustomModel::zOrder(void)
-{
-    return m_zOrder;
-}
-
-bool CECustomModel::checkOcclusion(void)
-{
-    return IGameObject::checkOcclusion();
-}
-
-ui32 CECustomModel::numTriangles(void)
-{
-    return IGameObject::numTriangles();
-}
-
-void CECustomModel::onBind(const std::string& mode)
+void CECustomModel::onDraw(CSharedMaterialRef material)
 {
     if((m_status & E_LOADING_STATUS_TEMPLATE_LOADED) &&
        m_mesh != nullptr)
     {
-        IGameObject::onBind(mode);
+        IGameObject::onDraw(material);
     }
-}
-
-void CECustomModel::onDraw(const std::string& mode)
-{
-    if((m_status & E_LOADING_STATUS_TEMPLATE_LOADED) &&
-       m_mesh != nullptr)
-    {
-        IGameObject::onDraw(mode);
-    }
-}
-
-void CECustomModel::onUnbind(const std::string& mode)
-{
-    if((m_status & E_LOADING_STATUS_TEMPLATE_LOADED) &&
-       m_mesh != nullptr)
-    {
-        IGameObject::onUnbind(mode);
-    }
-}
-
-void CECustomModel::onBatch(const std::string& mode)
-{
-    IGameObject::onBatch(mode);
 }
 
 void CECustomModel::setMesh(CSharedMeshRef mesh)

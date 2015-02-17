@@ -13,6 +13,19 @@ void CConfigurationModel::setMeshFilename(std::string mesh_filename)
 IConfiguration::setAttribute("/model/mesh_filename", std::make_shared<CConfigurationAttribute>(mesh_filename));
 }
 #endif
+i32 CConfigurationModel::getZOrder(void) const
+{
+const auto& iterator = m_attributes.find("/model/z_order");
+assert(iterator != m_attributes.end());
+i32 value; iterator->second->get(&value);
+return value;
+}
+#if defined(__EDITOR__)
+void CConfigurationModel::setZOrder(i32 z_order)
+{
+IConfiguration::setAttribute("/model/z_order", std::make_shared<CConfigurationAttribute>(z_order));
+}
+#endif
 bool CConfigurationModel::getBatching(void) const
 {
 const auto& iterator = m_attributes.find("/model/is_batching");
@@ -79,6 +92,8 @@ pugi::xpath_node node;
 node = document.select_single_node("/model");
 std::string mesh_filename = node.node().attribute("mesh_filename").as_string();
 IConfiguration::setAttribute("/model/mesh_filename", std::make_shared<CConfigurationAttribute>(mesh_filename));
+i32 z_order = node.node().attribute("z_order").as_int();
+IConfiguration::setAttribute("/model/z_order", std::make_shared<CConfigurationAttribute>(z_order));
 bool is_batching = node.node().attribute("is_batching").as_bool();
 IConfiguration::setAttribute("/model/is_batching", std::make_shared<CConfigurationAttribute>(is_batching));
 pugi::xpath_node_set material_nodes = document.select_nodes("/model/materials/material");
@@ -109,6 +124,9 @@ pugi::xml_attribute attribute;
 attribute = node.append_attribute("mesh_filename");
 std::string mesh_filename = CConfigurationModel::getMeshFilename();
 attribute.set_value(mesh_filename.c_str());
+attribute = node.append_attribute("z_order");
+i32 z_order = CConfigurationModel::getZOrder();
+attribute.set_value(z_order);
 attribute = node.append_attribute("is_batching");
 bool is_batching = CConfigurationModel::getBatching();
 attribute.set_value(is_batching);

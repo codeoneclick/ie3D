@@ -8,6 +8,10 @@ class CConfigurationOcean : public IConfigurationGameObject
 public:
 CConfigurationOcean(void) = default;
 ~CConfigurationOcean(void) = default;
+i32 getZOrder(void) const;
+#if defined(__EDITOR__)
+void setZOrder(i32 z_order);
+#endif
 ui32 getSize(void) const;
 #if defined(__EDITOR__)
 void setSize(ui32 size);

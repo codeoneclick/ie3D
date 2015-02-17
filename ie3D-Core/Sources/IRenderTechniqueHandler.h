@@ -24,14 +24,9 @@ public:
 
     virtual ~IRenderTechniqueHandler(void);
     
-    virtual i32  zOrder(void) = 0;
-    virtual bool checkOcclusion(void) = 0;
-    virtual ui32 numTriangles(void) = 0;
-    virtual void onDrawBoundingBox(void) = 0;
-    virtual void onBind(const std::string& techniqueName) = 0;
-    virtual void onDraw(const std::string& techniqueName) = 0;
-    virtual void onUnbind(const std::string& techniqueName) = 0;
-    virtual void onBatch(const std::string& techniqueName) = 0;
+    virtual bool isInCameraFrustum(CSharedFrustumRef cameraFrustum) = 0;
+    virtual void onDraw(CSharedMaterialRef material) = 0;
+    virtual CSharedComponentRendering getComponentRendering(void) const = 0;
 };
 
 #endif

@@ -29,7 +29,6 @@
 		21208FAE1906FB5F00FFC8D4 /* CGraphicsContext_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAC5181FF826007FE7A8 /* CGraphicsContext_osx.cpp */; };
 		21208FAF1906FB5F00FFC8D4 /* CGraphicsContext_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */; };
 		21208FB01906FB5F00FFC8D4 /* CGraphicsContext_ndk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4D21A211848DDE100595FEA /* CGraphicsContext_ndk.cpp */; };
-		21208FB41906FB5F00FFC8D4 /* CBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E9117C633EA0058CD47 /* CBatch.cpp */; };
 		21208FB61906FB5F00FFC8D4 /* IGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418527317609D9C002FC042 /* IGameTransition.cpp */; };
 		21208FB71906FB5F00FFC8D4 /* CGameLoopExecutor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */; };
 		21208FB81906FB5F00FFC8D4 /* CGameLoopExecutor_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */; };
@@ -114,7 +113,6 @@
 		213265F21906A4AF001C98F7 /* CGraphicsContext_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAC5181FF826007FE7A8 /* CGraphicsContext_osx.cpp */; };
 		213265F31906A4AF001C98F7 /* CGraphicsContext_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219DC4CA180DC356001C72D4 /* CGraphicsContext_win32.cpp */; };
 		213265F41906A4AF001C98F7 /* CGraphicsContext_ndk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4D21A211848DDE100595FEA /* CGraphicsContext_ndk.cpp */; };
-		213265F81906A4AF001C98F7 /* CBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E9117C633EA0058CD47 /* CBatch.cpp */; };
 		213265FA1906A4AF001C98F7 /* IGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A418527317609D9C002FC042 /* IGameTransition.cpp */; };
 		213265FB1906A4AF001C98F7 /* CGameLoopExecutor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */; };
 		213265FC1906A4AF001C98F7 /* CGameLoopExecutor_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2111AAB6181F021E007FE7A8 /* CGameLoopExecutor_osx.cpp */; };
@@ -398,8 +396,6 @@
 		21FB5C3D1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 21FB5C3A1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.h */; };
 		21FCC8E0199A95D400F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
 		21FCC8E1199A95D500F2CA1E /* ShaderTexure2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */; };
-		21FEEC991A029C70001E9ACB /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
-		21FEECE81A08CB0B001E9ACB /* CBatchingMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4535E8617C633D50058CD47 /* CBatchingMgr.cpp */; };
 		21FEECEE1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21FEECEC1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp */; };
 		21FEECEF1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21FEECEC1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp */; };
 		21FEECF01A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 21FEECED1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h */; };
@@ -2092,7 +2088,6 @@
 				21A56D131A79090600C8F362 /* CConfigurationAnimation.cpp in Sources */,
 				21208FAF1906FB5F00FFC8D4 /* CGraphicsContext_win32.cpp in Sources */,
 				21208FB01906FB5F00FFC8D4 /* CGraphicsContext_ndk.cpp in Sources */,
-				21208FB41906FB5F00FFC8D4 /* CBatch.cpp in Sources */,
 				2191CE9B196EE95100CE2813 /* crc32.c in Sources */,
 				21208FB61906FB5F00FFC8D4 /* IGameTransition.cpp in Sources */,
 				21208FB71906FB5F00FFC8D4 /* CGameLoopExecutor.cpp in Sources */,
@@ -2178,7 +2173,6 @@
 				21208FF91906FB6000FFC8D4 /* CShaderCommiter_GLSL.cpp in Sources */,
 				21208FFA1906FB6000FFC8D4 /* CTextureCommiter_PVR.cpp in Sources */,
 				21208FFB1906FB6000FFC8D4 /* CMeshCommiter_MDL.cpp in Sources */,
-				21FEEC991A029C70001E9ACB /* CBatchingMgr.cpp in Sources */,
 				21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				21208FFC1906FB6000FFC8D4 /* CSkeletonCommiter_SK.cpp in Sources */,
 				21ACE3891A711D280017A771 /* IComponent.cpp in Sources */,
@@ -2260,7 +2254,6 @@
 				21A56D121A79090600C8F362 /* CConfigurationAnimation.cpp in Sources */,
 				213265F31906A4AF001C98F7 /* CGraphicsContext_win32.cpp in Sources */,
 				213265F41906A4AF001C98F7 /* CGraphicsContext_ndk.cpp in Sources */,
-				213265F81906A4AF001C98F7 /* CBatch.cpp in Sources */,
 				2191CE9A196EE95100CE2813 /* crc32.c in Sources */,
 				213265FA1906A4AF001C98F7 /* IGameTransition.cpp in Sources */,
 				213265FB1906A4AF001C98F7 /* CGameLoopExecutor.cpp in Sources */,
@@ -2346,7 +2339,6 @@
 				2132663D1906A4AF001C98F7 /* CShaderCommiter_GLSL.cpp in Sources */,
 				2132663E1906A4AF001C98F7 /* CTextureCommiter_PVR.cpp in Sources */,
 				2132663F1906A4AF001C98F7 /* CMeshCommiter_MDL.cpp in Sources */,
-				21FEECE81A08CB0B001E9ACB /* CBatchingMgr.cpp in Sources */,
 				21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */,
 				213266401906A4AF001C98F7 /* CSkeletonCommiter_SK.cpp in Sources */,
 				21ACE3881A711D280017A771 /* IComponent.cpp in Sources */,

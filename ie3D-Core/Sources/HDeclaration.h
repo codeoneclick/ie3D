@@ -328,6 +328,10 @@ class CComponentTransformation;
 typedef std::shared_ptr<CComponentTransformation> CSharedComponentTransformation;
 typedef const CSharedComponentTransformation& CSharedComponentTransformationRef;
 
+class CComponentRendering;
+typedef std::shared_ptr<CComponentRendering> CSharedComponentRendering;
+typedef const CSharedComponentRendering& CSharedComponentRenderingRef;
+
 class ICommand;
 typedef std::shared_ptr<ICommand> ISharedCommand;
 typedef const ISharedCommand& ISharedCommandRef;

@@ -23,7 +23,6 @@
 #include "CSceneGraph.h"
 #include "CSceneFabricator.h"
 #include "CRenderPipeline.h"
-#include "CBatchingMgr.h"
 #include "CRenderTechniqueMain.h"
 #include "CRenderTechniqueWorldSpace.h"
 #include "CRenderTechniqueScreenSpace.h"
@@ -63,8 +62,8 @@ void IGameTransition::setupOnce(ISharedGraphicsContextRef graphicsContext,
     m_resourceAccessor = resourceAccessor;
     m_configurationAccessor = configurationAccessor;
     m_renderPipeline = std::make_shared<CRenderPipeline>(m_graphicsContext, m_isOffscreen);
-    CSharedBatchingMgr batchingMgr = std::make_shared<CBatchingMgr>(m_renderPipeline);
-    m_renderPipeline->setBatchingMgr(batchingMgr);
+    //CSharedBatchingMgr batchingMgr = std::make_shared<CBatchingMgr>(m_renderPipeline);
+    //m_renderPipeline->setBatchingMgr(batchingMgr);
     m_sceneUpdateMgr = std::make_shared<CSceneUpdateMgr>();
     
     m_collisionMgr = std::make_shared<CCollisionMgr>();
