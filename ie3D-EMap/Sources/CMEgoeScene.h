@@ -24,6 +24,7 @@ protected:
     CSharedModel m_model;
     CSharedLandscape m_landscape;
     CSharedSkyBox m_skybox;
+    glm::ivec2 m_previousDraggedPoint;
     
     void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
@@ -39,9 +40,6 @@ protected:
     void setMeshFilenameCommand(const std::string& filename);
     void updateConfigurationMaterial(CSharedConfigurationMaterialRef configuration);
     
-    CSharedConfigurationShader createTempConfigurationShader(void);
-    CSharedConfigurationTexture createTempConfigurationTexture(ui32 sampleIndex);
-    CSharedConfigurationMaterial createTempConfigurationMaterial(const std::string& techniqueName);
     CSharedConfigurationModel createTempConfigurationModel(const std::string& filename);
     
 public:

@@ -24,9 +24,16 @@
 #include "IUICommands.h"
 #include "HUICommands.h"
 
+const std::string kConfigurationBaseMaterialTempFilename = "material.base.goe.temp.xml";
+const std::string kConfigurationReflectionMaterialTempFilename = "material.reflection.goe.temp.xml";
+const std::string kConfigurationRefractionMaterialTempFilename = "material.refraction.goe.temp.xml";
+const std::string kConfigurationShadowingMaterialTempFilename = "material.shadowing.goe.temp.xml";
+const std::string kConfigurationModelTempFilename = "gameobject.model.goe.temp.xml";
+
 CMEgoeScene::CMEgoeScene(IGameTransition* root) :
 IScene(root),
-m_model(nullptr)
+m_model(nullptr),
+m_previousDraggedPoint(0.0f)
 {
     ISharedCommand command = std::make_shared<CCommand<UICommandGOECreateConfiguration::COMMAND>>(std::bind(&CMEgoeScene::setMeshFilenameCommand,
                                                                                                             this,
@@ -77,21 +84,23 @@ void CMEgoeScene::load(void)
     m_globalLightSource->setDistanceToLookAt(8.0);
     m_globalLightSource->setRotationCenter(glm::vec3(2.0f, 0.0f, 2.0f));
     m_globalLightSource->setLookAt(glm::vec3(2.0f, 0.0f, 2.0f));
+    
+    m_root->addGestureRecognizerHandler(std::dynamic_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
 }
 
 void CMEgoeScene::update(f32)
 {
-    static f32 angle = 0.0;
-    angle += 3.0;
-    if(m_model != nullptr)
-    {
-        m_model->setRotation(glm::vec3(0.0, angle, 0.0));
-    }
+    //static f32 angle = 0.0;
+    //angle += 3.0;
+    //if(m_model != nullptr)
+   // {
+    //    m_model->setRotation(glm::vec3(0.0, angle, 0.0));
+    //}
 }
 
-void CMEgoeScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTON)
+void CMEgoeScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON)
 {
-    
+    m_previousDraggedPoint = point;
 }
 
 void CMEgoeScene::onGestureRecognizerMoved(const glm::ivec2&)
@@ -99,9 +108,50 @@ void CMEgoeScene::onGestureRecognizerMoved(const glm::ivec2&)
     
 }
 
-void CMEgoeScene::onGestureRecognizerDragged(const glm::ivec2&, E_INPUT_BUTTON)
+void CMEgoeScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
+    glm::vec2 draggingDelta = glm::vec2(fabsf(m_previousDraggedPoint.x - point.x),
+                                        fabsf(m_previousDraggedPoint.y - point.y));
     
+    if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT && m_model)
+    {
+        glm::vec3 position = m_model->getPosition();
+        
+        if(m_previousDraggedPoint.x > point.x)
+        {
+            position.z -= 0.01f * draggingDelta.x;
+        }
+        if(m_previousDraggedPoint.x < point.x)
+        {
+            position.z += 0.01f * draggingDelta.x;
+        }
+        if(m_previousDraggedPoint.y > point.y)
+        {
+            position.x += 0.01f * draggingDelta.y;
+        }
+        if(m_previousDraggedPoint.y < point.y)
+        {
+            position.x -= 0.01f * draggingDelta.y;
+        }
+        position.z = glm::clamp(position.z, -1.0f, 5.0f);
+        position.x = glm::clamp(position.x, -1.0f, 5.0f);
+        m_model->setPosition(position);
+        
+    }
+    else if(inputButton == E_INPUT_BUTTON_MOUSE_RIGHT && m_model)
+    {
+        glm::vec3 rotation = m_model->getRotation();
+        if(m_previousDraggedPoint.x > point.x)
+        {
+            rotation.y -= 0.25f * draggingDelta.x;
+        }
+        if(m_previousDraggedPoint.x < point.x)
+        {
+            rotation.y += 0.25f * draggingDelta.x;
+        }
+        m_model->setRotation(rotation);
+    }
+    m_previousDraggedPoint = point;
 }
 
 void CMEgoeScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
@@ -140,68 +190,6 @@ void CMEgoeScene::onConfigurationLoaded(ISharedConfigurationRef configuration)
     }
 }
 
-CSharedConfigurationShader CMEgoeScene::createTempConfigurationShader(void)
-{
-    CSharedConfigurationShader configurationShader = std::make_shared<CConfigurationShader>();
-    configurationShader->setVSFilename("shaderModel.vert");
-    configurationShader->setFSFilename("shaderModel.frag");
-    
-    return configurationShader;
-}
-
-CSharedConfigurationTexture CMEgoeScene::createTempConfigurationTexture(ui32 sampleIndex)
-{
-    CSharedConfigurationTexture configurationTexture = std::make_shared<CConfigurationTexture>();
-    configurationTexture->setCubemap(false);
-    configurationTexture->setTextureFilename("gameobject.goe.temp.png");
-    configurationTexture->setTextureFilenameNegativeX("");
-    configurationTexture->setTextureFilenameNegativeY("");
-    configurationTexture->setTextureFilenameNegativeZ("");
-    configurationTexture->setTextureFilenamePositiveX("");
-    configurationTexture->setTextureFilenamePositiveY("");
-    configurationTexture->setTextureFilenamePositiveZ("");
-    configurationTexture->setRenderTechniqueTextureName("");
-    configurationTexture->setSamplerIndex(sampleIndex);
-    configurationTexture->setWrapMode(GL_REPEAT);
-    configurationTexture->setMagFilter(GL_LINEAR);
-    configurationTexture->setMinFilter(GL_LINEAR);
-    
-    return configurationTexture;
-}
-
-CSharedConfigurationMaterial CMEgoeScene::createTempConfigurationMaterial(const std::string& techniqueName)
-{
-    CSharedConfigurationShader configurationShader = CMEgoeScene::createTempConfigurationShader();
-    CSharedConfigurationTexture configurationTexture = CMEgoeScene::createTempConfigurationTexture(0);
-    
-    CSharedConfigurationMaterial configurationMaterial = std::make_shared<CConfigurationMaterial>();
-    configurationMaterial->setRenderTechniqueName(techniqueName);
-    configurationMaterial->setCulling(false);
-    configurationMaterial->setCullingMode(GL_FRONT);
-    configurationMaterial->setDepthTest(true);
-    configurationMaterial->setDepthMask(true);
-    configurationMaterial->setBlending(false);
-    configurationMaterial->setBlendingFunctionSource(GL_SRC_ALPHA);
-    configurationMaterial->setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
-    configurationMaterial->setClipping(false);
-    configurationMaterial->setClippingX(0.0);
-    configurationMaterial->setClippingY(0.0);
-    configurationMaterial->setClippingZ(0.0);
-    configurationMaterial->setClippingW(0.0);
-    configurationMaterial->setReflecting(false);
-    configurationMaterial->setShadowing(false);
-    configurationMaterial->setDebugging(false);
-    configurationMaterial->setShaderConfiguration(configurationShader);
-    configurationMaterial->addTexturesConfigurations(configurationTexture);
-    
-    std::string path = executablepath();
-    
-    configurationMaterial->setFilename(path + "material." + techniqueName + ".goe.temp.xml");
-    configurationMaterial->deserialize(path + "material." + techniqueName + ".goe.temp.xml");
-    
-    return configurationMaterial;
-}
-
 CSharedConfigurationModel CMEgoeScene::createTempConfigurationModel(const std::string& filename)
 {
     CSharedConfigurationModel configurationModel = std::make_shared<CConfigurationModel>();
@@ -209,22 +197,26 @@ CSharedConfigurationModel CMEgoeScene::createTempConfigurationModel(const std::s
     configurationModel->setZOrder(2);
     configurationModel->setBatching(false);
     
-    CSharedConfigurationMaterial configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.base");
+    CSharedConfigurationMaterial configurationMaterial = std::make_shared<CConfigurationMaterial>();
+    configurationMaterial->serialize(kConfigurationBaseMaterialTempFilename);
     configurationModel->addMaterialsConfigurations(configurationMaterial);
-    configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.reflection");
-    configurationMaterial->setEnabled(false);
+    
+    configurationMaterial = std::make_shared<CConfigurationMaterial>();
+    configurationMaterial->serialize(kConfigurationReflectionMaterialTempFilename);
     configurationModel->addMaterialsConfigurations(configurationMaterial);
-    configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.refraction");
-    configurationMaterial->setEnabled(false);
+    
+    configurationMaterial = std::make_shared<CConfigurationMaterial>();
+    configurationMaterial->serialize(kConfigurationRefractionMaterialTempFilename);
     configurationModel->addMaterialsConfigurations(configurationMaterial);
-    configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.shadowing");
-    configurationMaterial->setEnabled(false);
+    
+    configurationMaterial = std::make_shared<CConfigurationMaterial>();
+    configurationMaterial->serialize(kConfigurationShadowingMaterialTempFilename);
     configurationModel->addMaterialsConfigurations(configurationMaterial);
     
     std::string path = executablepath();
     
-    configurationModel->setFilename(path + "gameobject.model.goe.temp.xml");
-    configurationModel->deserialize(path + "gameobject.model.goe.temp.xml");
+    configurationModel->setFilename(path + kConfigurationModelTempFilename);
+    configurationModel->deserialize(path + kConfigurationModelTempFilename);
     
     return configurationModel;
 }
@@ -242,7 +234,7 @@ void CMEgoeScene::setMeshFilenameCommand(const std::string& filename)
     if(configurationModel != nullptr)
     {
         std::string path = executablepath();
-        m_model = m_root->createModel(path + "gameobject.model.goe.temp.xml");
+        m_model = m_root->createModel(path + kConfigurationModelTempFilename);
         m_root->addModel(m_model);
         m_model->setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
         m_model->addConfigurationLoadedCallback(std::bind(&CMEgoeScene::onConfigurationLoaded, this, std::placeholders::_1));
