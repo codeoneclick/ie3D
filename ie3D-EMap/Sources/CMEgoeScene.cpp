@@ -206,6 +206,7 @@ CSharedConfigurationModel CMEgoeScene::createTempConfigurationModel(const std::s
 {
     CSharedConfigurationModel configurationModel = std::make_shared<CConfigurationModel>();
     configurationModel->setMeshFilename(filename);
+    configurationModel->setZOrder(2);
     configurationModel->setBatching(false);
     
     CSharedConfigurationMaterial configurationMaterial = CMEgoeScene::createTempConfigurationMaterial("ws.base");

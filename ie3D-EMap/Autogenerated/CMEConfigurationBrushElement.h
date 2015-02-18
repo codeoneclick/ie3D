@@ -36,6 +36,9 @@ f32 getHeight(void) const;
 void setHeight(f32 height);
 #endif
 void serialize(pugi::xml_document& document, const std::string& path);
+#if defined(__EDITOR__)
+void deserialize(pugi::xml_node& node);
+#endif
 void serialize(pugi::xml_document& document, pugi::xpath_node& node);
 };
 #endif

@@ -23,7 +23,7 @@ IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_size(4),
 m_landscape(nullptr)
 {
-    m_zOrder = 6;
+
 }
 
 CMELandscapeBrush::~CMELandscapeBrush(void)
@@ -52,9 +52,6 @@ void CMELandscapeBrush::onConfigurationLoaded(ISharedConfigurationRef configurat
     assert(m_resourceAccessor != nullptr);
     
     CMELandscapeBrush::createMesh(m_size);
-    
-	IGameObject::enableRender(m_isNeedToRender);
-    IGameObject::enableUpdate(m_isNeedToUpdate);
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
@@ -121,63 +118,10 @@ void CMELandscapeBrush::createMesh(f32 radius)
     assert(m_mesh != nullptr);
 }
 
-i32 CMELandscapeBrush::zOrder(void)
+void CMELandscapeBrush::bindCustomShaderUniforms(CSharedMaterialRef material)
 {
-    return m_zOrder;
-}
-
-bool CMELandscapeBrush::checkOcclusion(void)
-{
-    return false;
-}
-
-ui32 CMELandscapeBrush::numTriangles(void)
-{
-    return IGameObject::numTriangles();
-}
-
-void CMELandscapeBrush::onBind(const std::string& mode)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        assert(m_materials.find(mode) != m_materials.end());
-        IGameObject::onBind(mode);
-    }
-}
-
-void CMELandscapeBrush::onDraw(const std::string& mode)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        assert(m_camera != nullptr);
-        assert(m_materials.find(mode) != m_materials.end());
-        
-        std::shared_ptr<CMaterial> material = m_materials.find(mode)->second;
-        assert(material->getShader() != nullptr);
-        
-        material->getShader()->setMatrix4x4(IGameObject::getTransformation(), E_SHADER_UNIFORM_MATRIX_WORLD);
-        material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-        material->getShader()->setMatrix4x4(m_camera->Get_ViewMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-        material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-        material->getShader()->setVector2Custom(glm::vec2(IGameObject::getPosition().x, IGameObject::getPosition().z), "IN_Center");
-        material->getShader()->setFloatCustom(m_size * 0.75, "IN_Radius");
-        
-        IGameObject::onDraw(mode);
-    }
-}
-
-void CMELandscapeBrush::onUnbind(const std::string& mode)
-{
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        assert(m_materials.find(mode) != m_materials.end());
-        IGameObject::onUnbind(mode);
-    }
-}
-
-void CMELandscapeBrush::onBatch(const std::string& mode)
-{
-    IGameObject::onBatch(mode);
+    material->getShader()->setVector2Custom(glm::vec2(IGameObject::getPosition().x, IGameObject::getPosition().z), "IN_Center");
+    material->getShader()->setFloatCustom(m_size * 0.75, "IN_Radius");
 }
 
 void CMELandscapeBrush::setLandscape(CSharedLandscapeRef landscape)

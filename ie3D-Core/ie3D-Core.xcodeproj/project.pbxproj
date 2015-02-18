@@ -169,6 +169,9 @@
 		2132664B1906A4AF001C98F7 /* CMeshLoadingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210EFD1D1752677300DDB182 /* CMeshLoadingOperation.cpp */; };
 		2132664C1906A4AF001C98F7 /* CResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A319017466F720044643E /* CResourceLoader.cpp */; };
 		2132664D1906A4AF001C98F7 /* CResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceAccessor.cpp */; };
+		2133A7541A93AE5800188ADA /* CComponentDebugRendering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2133A7521A93AE5800188ADA /* CComponentDebugRendering.cpp */; };
+		2133A7551A93AE5800188ADA /* CComponentDebugRendering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2133A7521A93AE5800188ADA /* CComponentDebugRendering.cpp */; };
+		2133A7561A93AE5800188ADA /* CComponentDebugRendering.h in Headers */ = {isa = PBXBuildFile; fileRef = 2133A7531A93AE5800188ADA /* CComponentDebugRendering.h */; };
 		213B7F311993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F321993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F331993CC5B006F3976 /* CShaderCompiler_GLSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */; };
@@ -442,6 +445,8 @@
 		213265D71906A407001C98F7 /* IGameLoopHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGameLoopHandler.h; path = Sources/IGameLoopHandler.h; sourceTree = SOURCE_ROOT; };
 		213265DB1906A42E001C98F7 /* HCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCommon.h; path = Sources/HCommon.h; sourceTree = SOURCE_ROOT; };
 		213265DC1906A42E001C98F7 /* HEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEnums.h; path = Sources/HEnums.h; sourceTree = SOURCE_ROOT; };
+		2133A7521A93AE5800188ADA /* CComponentDebugRendering.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentDebugRendering.cpp; path = Sources/CComponentDebugRendering.cpp; sourceTree = "<group>"; };
+		2133A7531A93AE5800188ADA /* CComponentDebugRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CComponentDebugRendering.h; path = Sources/CComponentDebugRendering.h; sourceTree = "<group>"; };
 		213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCompiler_GLSL.cpp; path = Sources/CShaderCompiler_GLSL.cpp; sourceTree = "<group>"; };
 		213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCompiler_GLSL.h; path = Sources/CShaderCompiler_GLSL.h; sourceTree = "<group>"; };
 		213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ShaderTexure2D.cpp; path = Sources/ShaderTexure2D.cpp; sourceTree = "<group>"; };
@@ -1180,6 +1185,8 @@
 				21ACE38B1A711F100017A771 /* CComponentTransformation.cpp */,
 				21ACE3911A7133FF0017A771 /* CComponentRendering.h */,
 				21ACE3901A7133FF0017A771 /* CComponentRendering.cpp */,
+				2133A7531A93AE5800188ADA /* CComponentDebugRendering.h */,
+				2133A7521A93AE5800188ADA /* CComponentDebugRendering.cpp */,
 				21ACE3961A713C5F0017A771 /* CComponentConfigurationLoading.h */,
 				21ACE3951A713C5F0017A771 /* CComponentConfigurationLoading.cpp */,
 			);
@@ -1925,6 +1932,7 @@
 				21ED26811A7BEADA00C4D341 /* HConfigurationDeclarations.h in Headers */,
 				21CB350B1A7A683D00819C09 /* CConfigurationOcean.h in Headers */,
 				2191CEB1196EE95100CE2813 /* inflate.h in Headers */,
+				2133A7561A93AE5800188ADA /* CComponentDebugRendering.h in Headers */,
 				21ACE38F1A711F100017A771 /* CComponentTransformation.h in Headers */,
 				2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */,
 				21E52B881A90A617005977F1 /* CMeshCommiter_ie3Dmesh.h in Headers */,
@@ -2117,6 +2125,7 @@
 				2191CE99196EE95100CE2813 /* compress.c in Sources */,
 				21208FC61906FB5F00FFC8D4 /* CHeightmap.cpp in Sources */,
 				21CB34F81A793CF000819C09 /* CConfigurationParticleEmitter.cpp in Sources */,
+				2133A7551A93AE5800188ADA /* CComponentDebugRendering.cpp in Sources */,
 				2191CEAA196EE95100CE2813 /* infback.c in Sources */,
 				2191CEAC196EE95100CE2813 /* inffast.c in Sources */,
 				21208FC71906FB5F00FFC8D4 /* CQuadTree.cpp in Sources */,
@@ -2283,6 +2292,7 @@
 				2191CE98196EE95100CE2813 /* compress.c in Sources */,
 				2132660A1906A4AF001C98F7 /* CHeightmap.cpp in Sources */,
 				21CB34F71A793CF000819C09 /* CConfigurationParticleEmitter.cpp in Sources */,
+				2133A7541A93AE5800188ADA /* CComponentDebugRendering.cpp in Sources */,
 				2191CEA9196EE95100CE2813 /* infback.c in Sources */,
 				2191CEAB196EE95100CE2813 /* inffast.c in Sources */,
 				2132660B1906A4AF001C98F7 /* CQuadTree.cpp in Sources */,

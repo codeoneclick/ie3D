@@ -4,6 +4,7 @@
     is_external="1">
     <attributes>
         <attribute type="f32" property="getSize" path="/landscape_brush" name="size"/>
+        <attribute type="i32" property="ZOrder" path="/landscape_brush" name="z_order"/>
     </attributes>
     <relationships>
     	<relationship type="CConfigurationMaterial" property="MaterialsConfigurations" is_to_many="1" is_external="1" path="/landscape_brush/materials" name="material"/>

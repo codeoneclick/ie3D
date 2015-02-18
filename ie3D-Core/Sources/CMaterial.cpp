@@ -495,19 +495,20 @@ void CMaterial::bind(void)
     assert(m_parameters->m_shader != nullptr);
     
     m_parameters->m_shader->bind();
-    bool isSameTextures = std::all_of(m_parameters->m_textures.cbegin(), m_parameters->m_textures.cend(), [](CSharedTexture texture){
-        return std::find(getCachedParameters()->m_textures.cbegin(), getCachedParameters()->m_textures.cend(), texture) != getCachedParameters()->m_textures.cend();
-    });
     
-    if(!isSameTextures)
+    for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
     {
-        for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
+        if((m_parameters->m_textures[i] != nullptr &&
+            getCachedParameters()->m_textures[i] != nullptr &&
+            m_parameters->m_textures[i]->getTextureId() != getCachedParameters()->m_textures[i]->getTextureId())
+           
+           ||
+           
+           (m_parameters->m_textures[i] != nullptr &&
+            getCachedParameters()->m_textures[i] == nullptr))
         {
-            if(m_parameters->m_textures[i] != nullptr)
-            {
-                m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
-                getCachedParameters()->m_textures[i] = m_parameters->m_textures[i];
-            }
+            m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
+            getCachedParameters()->m_textures[i] = m_parameters->m_textures[i];
         }
     }
     

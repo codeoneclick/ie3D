@@ -1,4 +1,5 @@
 <landscape_brush
+    z_order="6"
     size_x="20"
     size_y="20">
 	<materials>

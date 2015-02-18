@@ -3,6 +3,7 @@
     base_class_name="IConfigurationGameObject"
     is_external="1">
     <attributes>
+    	<attribute type="i32" property="ZOrder" path="/model_brush" name="z_order"/>
     </attributes>
     <relationships>
     	<relationship type="CMEConfigurationBrushElement" property="ElementsConfigurations" is_to_many="1" is_external="0" path="/model_brush/elements" name="element"/>

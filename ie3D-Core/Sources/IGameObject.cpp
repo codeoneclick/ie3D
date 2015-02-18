@@ -112,10 +112,6 @@ void IGameObject::addComponentRendering(void)
         {
             m_renderTechniqueImporter->addRenderTechniqueHandler(configurationMaterial->getRenderTechniqueName(), shared_from_this());
         }
-        else
-        {
-            assert(false);
-        }
     };
 }
 

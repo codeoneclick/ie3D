@@ -10,7 +10,6 @@
 #define CComponentRendering_h
 
 #include "IComponent.h"
-#include "HDeclaration.h"
 #include "CMaterial.h"
 
 class CComponentRendering : public IComponent

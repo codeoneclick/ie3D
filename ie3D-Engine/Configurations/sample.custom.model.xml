@@ -3,6 +3,7 @@
     base_class_name="IConfigurationGameObject"
     is_external="1">
     <attributes>
+    	<attribute type="i32" property="ZOrder" path="/custom_model" name="z_order"/>
     </attributes>
     <relationships>
     	<relationship type="CConfigurationMaterial" property="MaterialsConfigurations" is_to_many="1" is_external="1" path="/custom_model/materials" name="material"/>

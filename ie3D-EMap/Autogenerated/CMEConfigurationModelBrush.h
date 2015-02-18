@@ -9,6 +9,10 @@ class CMEConfigurationModelBrush : public IConfigurationGameObject
 public:
 CMEConfigurationModelBrush(void) = default;
 ~CMEConfigurationModelBrush(void) = default;
+i32 getZOrder(void) const;
+#if defined(__EDITOR__)
+void setZOrder(i32 z_order);
+#endif
 std::vector<std::shared_ptr<IConfiguration>> getElementsConfigurations(void) const;
 #if defined(__EDITOR__)
 void addElementsConfigurations(const std::shared_ptr<CMEConfigurationBrushElement>& element);
@@ -24,5 +28,8 @@ void addMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& m
 void setMaterialsConfigurations(const std::shared_ptr<CConfigurationMaterial>& material, i32 index);
 #endif
 void serialize(const std::string& filename);
+#if defined(__EDITOR__)
+void deserialize(const std::string& filename);
+#endif
 };
 #endif

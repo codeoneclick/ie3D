@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
+#include "HDeclaration.h"
 
 class IComponent
 {

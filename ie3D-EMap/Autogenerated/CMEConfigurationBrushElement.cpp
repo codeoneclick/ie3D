@@ -110,6 +110,33 @@ IConfiguration::setAttribute("/brush_element/width", std::make_shared<CConfigura
 f32 height = node.node().attribute("height").as_float();
 IConfiguration::setAttribute("/brush_element/height", std::make_shared<CConfigurationAttribute>(height));
 }
+#if defined(__EDITOR__)
+void CMEConfigurationBrushElement::deserialize(pugi::xml_node& node)
+{
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("name");
+std::string name = CMEConfigurationBrushElement::getName();
+attribute.set_value(name.c_str());
+attribute = node.append_attribute("color_r");
+ui8 color_r = CMEConfigurationBrushElement::getColorR();
+attribute.set_value(color_r);
+attribute = node.append_attribute("color_g");
+ui8 color_g = CMEConfigurationBrushElement::getColorG();
+attribute.set_value(color_g);
+attribute = node.append_attribute("color_b");
+ui8 color_b = CMEConfigurationBrushElement::getColorB();
+attribute.set_value(color_b);
+attribute = node.append_attribute("color_a");
+ui8 color_a = CMEConfigurationBrushElement::getColorA();
+attribute.set_value(color_a);
+attribute = node.append_attribute("width");
+f32 width = CMEConfigurationBrushElement::getWidth();
+attribute.set_value(width);
+attribute = node.append_attribute("height");
+f32 height = CMEConfigurationBrushElement::getHeight();
+attribute.set_value(height);
+}
+#endif
 void CMEConfigurationBrushElement::serialize(pugi::xml_document& document, pugi::xpath_node& node)
 {
 std::string name = node.node().attribute("name").as_string();

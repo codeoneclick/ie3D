@@ -13,6 +13,19 @@ void CMEConfigurationLandscapeBrush::setgetSize(f32 size)
 IConfiguration::setAttribute("/landscape_brush/size", std::make_shared<CConfigurationAttribute>(size));
 }
 #endif
+i32 CMEConfigurationLandscapeBrush::getZOrder(void) const
+{
+const auto& iterator = m_attributes.find("/landscape_brush/z_order");
+assert(iterator != m_attributes.end());
+i32 value; iterator->second->get(&value);
+return value;
+}
+#if defined(__EDITOR__)
+void CMEConfigurationLandscapeBrush::setZOrder(i32 z_order)
+{
+IConfiguration::setAttribute("/landscape_brush/z_order", std::make_shared<CConfigurationAttribute>(z_order));
+}
+#endif
 std::vector<std::shared_ptr<IConfiguration>> CMEConfigurationLandscapeBrush::getMaterialsConfigurations(void) const
 {
 const auto& iterator = m_configurations.find("/landscape_brush/materials/material");
@@ -44,6 +57,8 @@ pugi::xpath_node node;
 node = document.select_single_node("/landscape_brush");
 f32 size = node.node().attribute("size").as_float();
 IConfiguration::setAttribute("/landscape_brush/size", std::make_shared<CConfigurationAttribute>(size));
+i32 z_order = node.node().attribute("z_order").as_int();
+IConfiguration::setAttribute("/landscape_brush/z_order", std::make_shared<CConfigurationAttribute>(z_order));
 pugi::xpath_node_set material_nodes = document.select_nodes("/landscape_brush/materials/material");
 for (pugi::xpath_node_set::const_iterator iterator = material_nodes.begin(); iterator != material_nodes.end(); ++iterator)
 {
@@ -52,3 +67,29 @@ material->serialize((*iterator).node().attribute("filename").as_string());
 IConfiguration::setConfiguration("/landscape_brush/materials/material", material);
 }
 }
+#if defined(__EDITOR__)
+void CMEConfigurationLandscapeBrush::deserialize(const std::string& filename)
+{
+pugi::xml_document document;
+pugi::xml_parse_result result = document.load("");
+assert(result.status == pugi::status_ok);
+pugi::xml_node node = document.append_child("landscape_brush");
+pugi::xml_node parent_node = node;
+pugi::xml_attribute attribute;
+attribute = node.append_attribute("size");
+f32 size = CMEConfigurationLandscapeBrush::getgetSize();
+attribute.set_value(size);
+attribute = node.append_attribute("z_order");
+i32 z_order = CMEConfigurationLandscapeBrush::getZOrder();
+attribute.set_value(z_order);
+node = parent_node.append_child("materials");
+for(const auto& iterator : CMEConfigurationLandscapeBrush::getMaterialsConfigurations())
+{
+std::shared_ptr<CConfigurationMaterial> configuration = std::static_pointer_cast<CConfigurationMaterial>(iterator);
+pugi::xml_node child_node = node.append_child("material");
+attribute = child_node.append_attribute("filename");
+attribute.set_value(configuration->getFilename().c_str());
+}
+document.save_file(filename.c_str());
+}
+#endif

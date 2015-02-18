@@ -1,6 +1,7 @@
 <landscape
     heightmap_data_filename=""
     splatting_data_filename=""
+    z_order="1"
     size_x="5"
     size_y="5"
     frequency="0.0"

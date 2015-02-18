@@ -22,8 +22,6 @@ IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_landscape(nullptr),
 m_model(nullptr)
 {
-    m_zOrder = 7;
-    
     m_arrows.at(E_MODEL_BRUSH_ARROW_X) = nullptr;
     m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = nullptr;
     m_arrows.at(E_MODEL_BRUSH_ARROW_Z) = nullptr;
@@ -91,9 +89,6 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
             assert(false);
         }
     }
-
-    IGameObject::enableRender(m_isNeedToRender);
-    IGameObject::enableUpdate(m_isNeedToUpdate);
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
@@ -215,9 +210,6 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow, I
     arrowModel->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
     arrowModel->setSceneUpdateMgr(m_sceneUpdateMgr);
     
-    arrowModel->enableRender(m_isNeedToRender);
-    arrowModel->enableUpdate(m_isNeedToUpdate);
-    
     ISharedConfigurationLoadingHandler handler = std::static_pointer_cast<IConfigurationLoadingHandler>(arrowModel);
     handler->onConfigurationLoaded(configuration, true);
     
@@ -338,48 +330,20 @@ CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane, I
     planeModel->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
     planeModel->setSceneUpdateMgr(m_sceneUpdateMgr);
     
-    planeModel->enableRender(m_isNeedToRender);
-    planeModel->enableUpdate(m_isNeedToUpdate);
-    
     ISharedConfigurationLoadingHandler handler = std::static_pointer_cast<IConfigurationLoadingHandler>(planeModel);
     handler->onConfigurationLoaded(configuration, true);
     
     return planeModel;
 }
 
-i32 CMEModelBrush::zOrder(void)
+bool CMEModelBrush::isInCameraFrustum(CSharedFrustumRef)
 {
-    return -1;
+    return true;
 }
 
-bool CMEModelBrush::checkOcclusion(void)
+void CMEModelBrush::onDraw(CSharedMaterialRef)
 {
-    return false;
-}
-
-ui32 CMEModelBrush::numTriangles(void)
-{
-    return 0;
-}
-
-void CMEModelBrush::onBind(const std::string&)
-{
-
-}
-
-void CMEModelBrush::onDraw(const std::string&)
-{
-
-}
-
-void CMEModelBrush::onUnbind(const std::string&)
-{
-
-}
-
-void CMEModelBrush::onBatch(const std::string&)
-{
-
+    
 }
 
 void CMEModelBrush::setLandscape(CSharedLandscapeRef landscape)
@@ -545,42 +509,6 @@ void CMEModelBrush::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
         {
             assert(iterator != nullptr);
             iterator->setSceneUpdateMgr(sceneUpdateMgr);
-        }
-    }
-}
-
-void CMEModelBrush::enableRender(bool value)
-{
-    IGameObject::enableRender(value);
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        for(const auto& iterator : m_arrows)
-        {
-            assert(iterator != nullptr);
-            iterator->enableRender(value);
-        }
-        for(const auto& iterator : m_planes)
-        {
-            assert(iterator != nullptr);
-            iterator->enableRender(value);
-        }
-    }
-}
-
-void CMEModelBrush::enableUpdate(bool value)
-{
-    IGameObject::enableUpdate(value);
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        for(const auto& iterator : m_arrows)
-        {
-            assert(iterator != nullptr);
-            iterator->enableUpdate(value);
-        }
-        for(const auto& iterator : m_planes)
-        {
-            assert(iterator != nullptr);
-            iterator->enableUpdate(value);
         }
     }
 }
