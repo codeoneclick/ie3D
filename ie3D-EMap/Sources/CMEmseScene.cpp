@@ -36,7 +36,8 @@ CMEmseScene::CMEmseScene(IGameTransition* root) :
 IScene(root),
 m_landscapeMaterial(nullptr),
 m_landscapeBrush(nullptr),
-m_previousDraggedPoint(glm::ivec2(0, 0))
+m_previousDraggedPoint(glm::ivec2(0, 0)),
+m_isSpaceButtonPressed(false)
 {
     m_editableSettings.m_brushSize = 4;
     m_editableSettings.m_brushStrength = 1;
@@ -135,7 +136,7 @@ void CMEmseScene::load(void)
     m_root->addCustomGameObject(m_modelBrush);
     m_modelBrush->setLandscape(m_landscape);
     
-    m_mapDragController = std::make_shared<CMapDragController>(m_camera, 0.1,
+    m_mapDragController = std::make_shared<CMapDragController>(m_camera, m_landscape, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
                                                                glm::vec3(512.0, 0.0, 512.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);
@@ -217,36 +218,58 @@ void CMEmseScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
 
 void CMEmseScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
 {
-    if(direction == E_SCROLL_WHEEL_DIRECTION_FORWARD &&
-       m_editableSettings.m_brushSize < 32.0)
+    if(!m_isSpaceButtonPressed)
     {
-        m_editableSettings.m_brushSize++;
-        m_editableSettings.m_brushSize = m_editableSettings.m_brushSize % 2 != 0 ? m_editableSettings.m_brushSize + 1 : m_editableSettings.m_brushSize;
-    }
-    else if(direction == E_SCROLL_WHEEL_DIRECTION_BACKWARD &&
-            m_editableSettings.m_brushSize > 4.0)
-    {
-        m_editableSettings.m_brushSize--;
-        m_editableSettings.m_brushSize = m_editableSettings.m_brushSize % 2 != 0 ? m_editableSettings.m_brushSize - 1 : m_editableSettings.m_brushSize;
-    }
-    CMEmseScene::setBrushSize(m_editableSettings.m_brushSize);
-    if(m_sceneToUICommands != nullptr)
-    {
-        m_sceneToUICommands->execute<UICommandMSESetBrushSize::COMMAND>(UICommandMSESetBrushSize::GUID,
-                                                                        m_editableSettings.m_brushSize);
+        if(direction == E_SCROLL_WHEEL_DIRECTION_FORWARD &&
+           m_editableSettings.m_brushSize < 32.0)
+        {
+            m_editableSettings.m_brushSize++;
+            m_editableSettings.m_brushSize = m_editableSettings.m_brushSize % 2 != 0 ? m_editableSettings.m_brushSize + 1 : m_editableSettings.m_brushSize;
+        }
+        else if(direction == E_SCROLL_WHEEL_DIRECTION_BACKWARD &&
+                m_editableSettings.m_brushSize > 4.0)
+        {
+            m_editableSettings.m_brushSize--;
+            m_editableSettings.m_brushSize = m_editableSettings.m_brushSize % 2 != 0 ? m_editableSettings.m_brushSize - 1 : m_editableSettings.m_brushSize;
+        }
+        CMEmseScene::setBrushSize(m_editableSettings.m_brushSize);
+        if(m_sceneToUICommands != nullptr)
+        {
+            m_sceneToUICommands->execute<UICommandMSESetBrushSize::COMMAND>(UICommandMSESetBrushSize::GUID,
+                                                                            m_editableSettings.m_brushSize);
+        }
     }
 }
 
-void CMEmseScene::onKeyUp(i32)
+void CMEmseScene::onKeyUp(i32 key)
 {
-    
+    switch (key)
+    {
+        case 32:
+        {
+            m_isSpaceButtonPressed = false;
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
-void CMEmseScene::onKeyDown(i32)
+void CMEmseScene::onKeyDown(i32 key)
 {
-    
+    switch (key)
+    {
+        case 32:
+        {
+            m_isSpaceButtonPressed = true;
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
-
 void CMEmseScene::setBrushSize(ui32 value)
 {
     m_editableSettings.m_brushSize = value;

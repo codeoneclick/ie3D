@@ -9,14 +9,17 @@
 #include "CMapDragController.h"
 #include "CCollisionMgr.h"
 #include "CCamera.h"
+#include "CLandscape.h"
 
 #define SPACE_BUTTON 32
 
 CMapDragController::CMapDragController(CSharedCameraRef camera,
+                                       CSharedLandscapeRef landscape,
                                        f32 dragSpeed,
                                        const glm::vec3& maxBound,
                                        const glm::vec3& minBound) :
 m_camera(camera),
+m_landscape(landscape),
 m_positionStarting(0),
 m_positionEnding(0),
 m_maxBound(maxBound),
@@ -107,6 +110,7 @@ void CMapDragController::onGestureRecognizerDragged(const glm::ivec2& point, E_I
             {
                 m_cameraPrecomputedHeight += m_cameraUpDownRotationSpeed;
             }
+            m_cameraPrecomputedHeight = glm::clamp(m_cameraPrecomputedHeight, 2.0f, 128.0f);
         }
     }
     m_mouseLastPosition = point;
@@ -122,13 +126,18 @@ void CMapDragController::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_
 
 void CMapDragController::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
 {
-    if(direction == E_SCROLL_WHEEL_DIRECTION_FORWARD)
+    if(m_isSpaceButtonPressed)
     {
-        m_cameraPrecomputedDistance += m_cameraDistanceChangeSpeed;
-    }
-    else if(direction == E_SCROLL_WHEEL_DIRECTION_BACKWARD)
-    {
-        m_cameraPrecomputedDistance -= m_cameraDistanceChangeSpeed;
+        if(direction == E_SCROLL_WHEEL_DIRECTION_FORWARD)
+        {
+            m_cameraPrecomputedDistance -= m_cameraDistanceChangeSpeed;
+        }
+        else if(direction == E_SCROLL_WHEEL_DIRECTION_BACKWARD)
+        {
+            m_cameraPrecomputedDistance += m_cameraDistanceChangeSpeed;
+        }
+        m_cameraPrecomputedDistance = glm::clamp(m_cameraPrecomputedDistance, 2.0f, 128.0f);
+        m_cameraPrecomputedHeight = m_cameraPrecomputedDistance;
     }
 }
 
@@ -164,12 +173,28 @@ void CMapDragController::onKeyDown(i32 key)
 
 void CMapDragController::update(f32)
 {
-    glm::vec3 position;
-    position = glm::mix(m_camera->Get_LookAt(), m_positionEnding, m_dragSpeed);
-    m_camera->Set_LookAt(position);
+    glm::vec3 cameraLookAt;
+    cameraLookAt = glm::mix(m_camera->Get_LookAt(), m_positionEnding, m_dragSpeed);
+    m_camera->Set_LookAt(cameraLookAt);
+    
+    glm::vec3 cameraPosition = m_camera->Get_Position();
+    if(cameraPosition.x < m_landscape->getHeightmapSize().x &&
+       cameraPosition.z < m_landscape->getHeightmapSize().y &&
+       cameraPosition.x >= 0.0 &&
+       cameraPosition.z >= 0.0)
+    {
+        f32 landscapeHeight = m_landscape->getHeight(cameraPosition);
+        if(landscapeHeight > m_camera->Get_Height() + m_camera->Get_LookAt().y)
+        {
+            m_cameraPrecomputedHeight = landscapeHeight + 2.0f;
+        }
+    }
     
     f32 currentCameraRotation = glm::mix(glm::degrees(m_camera->Get_Rotation()), m_cameraPrecomputedRotationY, 0.1);
     m_camera->Set_Rotation(glm::radians(currentCameraRotation));
+    
+    f32 currentCameraDistance = glm::mix(m_camera->Get_Distance(), m_cameraPrecomputedDistance, 0.1);
+    m_camera->Set_Distance(currentCameraDistance);
     
     f32 currentCameraHeight = glm::mix(m_camera->Get_Height(), m_cameraPrecomputedHeight, 0.1);
     m_camera->Set_Height(currentCameraHeight);

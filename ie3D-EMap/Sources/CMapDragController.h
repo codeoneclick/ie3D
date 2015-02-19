@@ -20,6 +20,7 @@ private:
 protected:
     
     CSharedCamera m_camera;
+    CSharedLandscape m_landscape;
     
     glm::vec3 m_positionStarting;
     glm::vec3 m_positionEnding;
@@ -55,6 +56,7 @@ public:
     void update(f32 deltatime);
     
     CMapDragController(CSharedCameraRef camera,
+                       CSharedLandscapeRef landscape,
                        f32 dragSpeed,
                        const glm::vec3& maxBound,
                        const glm::vec3& minBound);

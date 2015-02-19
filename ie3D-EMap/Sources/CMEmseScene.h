@@ -40,6 +40,7 @@ protected:
     CMESharedModelBrush m_modelBrush;
     
     glm::ivec2 m_previousDraggedPoint;
+    bool m_isSpaceButtonPressed;
     
     SEditableSettings m_editableSettings;
     
