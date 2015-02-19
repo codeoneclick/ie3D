@@ -45,6 +45,20 @@ public:
     CCamera(f32 fov, f32 near, f32 far, glm::ivec4 viewport);
     ~CCamera(void);
     
+    inline glm::mat4 getVMatrix(void) const;
+    inline glm::mat4 getPMatrix(void) const;
+    inline glm::mat4 getNMatrix(void) const;
+    inline glm::mat4 getIVMatrix(void) const;
+    inline glm::mat4 getVPMatrix(void) const;
+    inline glm::mat4 getIVPMatrix(void) const;
+    
+    inline void setPosition(const glm::vec3& position);
+    inline glm::vec3 getPosition(void) const;
+    
+    inline void setLookAt(const glm::vec3& lookAt);
+    inline glm::vec3 getLookAt(void) const;
+    
+    
     inline glm::mat4x4 Get_ViewMatrix(void)
     {
         return m_view;
