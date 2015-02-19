@@ -39,8 +39,7 @@ protected:
     f32 m_cameraDistanceChangeSpeed;
     
     f32 m_cameraPrecomputedRotationY;
-    f32 m_cameraPrecomputedHeight;
-    f32 m_cameraPrecomputedDistance;
+    glm::vec3 m_cameraPrecomputedDistance;
     
     void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton);
     void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton);

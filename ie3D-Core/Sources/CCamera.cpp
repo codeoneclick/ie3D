@@ -9,16 +9,15 @@
 #include "CCamera.h"
 #include "CFrustum.h"
 
-CCamera::CCamera(f32 _fov, f32 _near, f32 _far, glm::ivec4 _viewport) :
-m_fov(_fov),
-m_near(_near),
-m_far(_far),
+CCamera::CCamera(f32 fov, f32 near, f32 far, glm::ivec4 viewport) :
+m_fov(fov),
+m_near(near),
+m_far(far),
 m_rotation(0.0),
-m_viewport(_viewport)
+m_viewport(viewport)
 {
-    m_aspect = static_cast<f32>(_viewport.z) / static_cast<f32>(_viewport.w);
-    m_projection = glm::perspective(m_fov, m_aspect, m_near, m_far);
-    m_altitude = 0.0f;
+    m_aspect = static_cast<f32>(viewport.z) / static_cast<f32>(viewport.w);
+    m_matrixP = glm::perspective(m_fov, m_aspect, m_near, m_far);
     m_up = glm::vec3(0.0f, 1.0f, 0.0f);
 }
 
@@ -27,26 +26,29 @@ CCamera::~CCamera(void)
     
 }
 
-void CCamera::onSceneUpdate(f32 _deltatime)
+void CCamera::onSceneUpdate(f32 deltatime)
 {
-    m_position.y = m_look.y + m_height;
-    m_position.x = m_look.x + cosf(-m_rotation) * -m_distance;
-    m_position.z = m_look.z + sinf(-m_rotation) * -m_distance;
-    m_view = glm::lookAt(m_position, m_look, m_up);
+    m_position.y = m_lookAt.y + m_distance.y;
+    m_position.x = m_lookAt.x + cosf(-m_rotation) * -m_distance.x;
+    m_position.z = m_lookAt.z + sinf(-m_rotation) * -m_distance.z;
+    m_matrixV = glm::lookAt(m_position, m_lookAt, m_up);
     
     glm::vec3 position = m_position;
-    position.y = -position.y + m_altitude * 2.0f;
-    glm::vec3 look = m_look;
-    look.y = -look.y + m_altitude * 2.0f;
-    m_reflection = glm::lookAt(position, look, m_up * -1.0f);
+    position.y = -position.y;
+    glm::vec3 lookAt = m_lookAt;
+    lookAt.y = -lookAt.y;
+    m_matrixIV = glm::lookAt(position, lookAt, m_up * -1.0f);
     
-    m_matrixNormal = glm::inverse(m_view);
-    m_matrixNormal = glm::transpose(m_matrixNormal);
+    m_matrixN = glm::inverse(m_matrixV);
+    m_matrixN = glm::transpose(m_matrixN);
+    
+    m_matrixVP = m_matrixP * m_matrixV;
+    m_matrixIVP = m_matrixP * m_matrixIV;
 }
 
-glm::mat4x4 CCamera::Get_CylindricalMatrixForPosition(const glm::vec3 &_position)
+glm::mat4x4 CCamera::getCMatrix(const glm::vec3 &position)
 {
-    glm::vec3 direction = m_position - _position;
+    glm::vec3 direction = m_position - position;
     direction = glm::normalize(direction);
     
     glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -54,34 +56,36 @@ glm::mat4x4 CCamera::Get_CylindricalMatrixForPosition(const glm::vec3 &_position
     right = glm::normalize(right);
     direction = glm::cross(right, direction);
     
-    glm::mat4x4 cylindricalMatrix;
-    cylindricalMatrix[0][0] = right.x;
-    cylindricalMatrix[0][1] = right.y;
-    cylindricalMatrix[0][2] = right.z;
-    cylindricalMatrix[0][3] = 0.0f;
-    cylindricalMatrix[1][0] = up.x;
-    cylindricalMatrix[1][1] = up.y;
-    cylindricalMatrix[1][2] = up.z;
-    cylindricalMatrix[1][3] = 0.0f;
-    cylindricalMatrix[2][0] = direction.x;
-    cylindricalMatrix[2][1] = direction.y;
-    cylindricalMatrix[2][2] = direction.z;
-    cylindricalMatrix[2][3] = 0.0f;
+    glm::mat4x4 matrixC;
+    matrixC[0][0] = right.x;
+    matrixC[0][1] = right.y;
+    matrixC[0][2] = right.z;
+    matrixC[0][3] = 0.0f;
+    matrixC[1][0] = up.x;
+    matrixC[1][1] = up.y;
+    matrixC[1][2] = up.z;
+    matrixC[1][3] = 0.0f;
+    matrixC[2][0] = direction.x;
+    matrixC[2][1] = direction.y;
+    matrixC[2][2] = direction.z;
+    matrixC[2][3] = 0.0f;
     
-    cylindricalMatrix[3][0] = _position.x;
-    cylindricalMatrix[3][1] = _position.y;
-    cylindricalMatrix[3][2] = _position.z;
-    cylindricalMatrix[3][3] = 1.0f;
+    matrixC[3][0] = position.x;
+    matrixC[3][1] = position.y;
+    matrixC[3][2] = position.z;
+    matrixC[3][3] = 1.0f;
     
-    return cylindricalMatrix;
+    return matrixC;
 }
 
-glm::mat4x4 CCamera::Get_SphericalMatrixForPosition(const glm::vec3 &_position)
+glm::mat4x4 CCamera::getSMatrix(const glm::vec3 &position)
 {
-    glm::vec3 direction = _position - m_position;
+    glm::vec3 direction = position - m_position;
     direction = glm::normalize(direction);
     
-    glm::vec3 up = glm::vec3(m_view[1][0], m_view[1][1], m_view[1][2]);
+    glm::vec3 up = glm::vec3(m_matrixV[1][0],
+                             m_matrixV[1][1],
+                             m_matrixV[1][2]);
     up = glm::normalize(up);
     
     glm::vec3 right = glm::cross(direction, up);
@@ -90,30 +94,24 @@ glm::mat4x4 CCamera::Get_SphericalMatrixForPosition(const glm::vec3 &_position)
     up = glm::cross(direction, right);
     up = glm::normalize(up);
     
-    glm::mat4x4 sphericalMatrix;
-    sphericalMatrix[0][0] = right.x;
-    sphericalMatrix[0][1] = right.y;
-    sphericalMatrix[0][2] = right.z;
-    sphericalMatrix[0][3] = 0.0f;
-    sphericalMatrix[1][0] = up.x;
-    sphericalMatrix[1][1] = up.y;
-    sphericalMatrix[1][2] = up.z;
-    sphericalMatrix[1][3] = 0.0f;
-    sphericalMatrix[2][0] = direction.x;
-    sphericalMatrix[2][1] = direction.y;
-    sphericalMatrix[2][2] = direction.z;
-    sphericalMatrix[2][3] = 0.0f;
+    glm::mat4x4 matrixS;
+    matrixS[0][0] = right.x;
+    matrixS[0][1] = right.y;
+    matrixS[0][2] = right.z;
+    matrixS[0][3] = 0.0f;
+    matrixS[1][0] = up.x;
+    matrixS[1][1] = up.y;
+    matrixS[1][2] = up.z;
+    matrixS[1][3] = 0.0f;
+    matrixS[2][0] = direction.x;
+    matrixS[2][1] = direction.y;
+    matrixS[2][2] = direction.z;
+    matrixS[2][3] = 0.0f;
     
-    sphericalMatrix[3][0] = _position.x;
-    sphericalMatrix[3][1] = _position.y;
-    sphericalMatrix[3][2] = _position.z;
-    sphericalMatrix[3][3] = 1.0f;
+    matrixS[3][0] = position.x;
+    matrixS[3][1] = position.y;
+    matrixS[3][2] = position.z;
+    matrixS[3][3] = 1.0f;
     
-    return sphericalMatrix;
-}
-
-void CCamera::setFov(f32 value)
-{
-    m_fov = value;
-    m_projection = glm::perspective(m_fov, m_aspect, m_near, m_far);
+    return matrixS;
 }

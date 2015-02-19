@@ -136,10 +136,8 @@ void COcean::bindCustomShaderUniforms(CSharedMaterialRef material)
     material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
     
     CSharedTexture heightmapTexture = m_resourceAccessor->getTexture("landscape.heightmap.texture");
-    if(heightmapTexture)
+    if(heightmapTexture && material->getTexture(E_SHADER_SAMPLER_04) != heightmapTexture)
     {
         material->setTexture(heightmapTexture, E_SHADER_SAMPLER_04);
     }
-    glm::mat4x4 matrixViewInverse = glm::inverse(m_camera->Get_ViewMatrix());
-    material->getShader()->setMatrix4x4Custom(matrixViewInverse, "u_matrixViewInverse");
 }

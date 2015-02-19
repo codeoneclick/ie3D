@@ -111,22 +111,22 @@ void CParticleEmitter::onSceneUpdate(f32 deltatime)
                                                           m_settings->getDestinationColorB(),
                                                           m_settings->getDestinationColorA()), particleClampAge);
             
-            glm::mat4x4 matrixSpherical = m_camera->Get_SphericalMatrixForPosition(m_particles[i].m_position);
+            glm::mat4x4 matrixS = m_camera->getSMatrix(m_particles[i].m_position);
             
             glm::vec4 position = glm::vec4(-m_particles[i].m_size.x, -m_particles[i].m_size.y, 0.0f, 1.0f);
-            position = matrixSpherical * position;
+            position = matrixS * position;
             vertexData[i * 4 + 0].m_position = glm::vec3(position.x, position.y, position.z);
             
             position = glm::vec4(m_particles[i].m_size.x, -m_particles[i].m_size.y, 0.0f, 1.0f);
-            position = matrixSpherical * position;
+            position = matrixS * position;
             vertexData[i * 4 + 1].m_position = glm::vec3(position.x, position.y, position.z);
             
             position = glm::vec4(m_particles[i].m_size.x, m_particles[i].m_size.y, 0.0f, 1.0f);
-            position = matrixSpherical * position;
+            position = matrixS * position;
             vertexData[i * 4 + 2].m_position = glm::vec3(position.x, position.y, position.z);
             
             position = glm::vec4(-m_particles[i].m_size.x, m_particles[i].m_size.y, 0.0f, 1.0f);
-            position = matrixSpherical * position;
+            position = matrixS * position;
             vertexData[i * 4 + 3].m_position = glm::vec3(position.x, position.y, position.z);
             
             vertexData[i * 4 + 0].m_color = m_particles[i].m_color;

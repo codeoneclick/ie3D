@@ -106,10 +106,9 @@ void CMEmseScene::load(void)
                                                m_root->getScreenWidth(),
                                                m_root->getScreenHeight()));
     
-    m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
-    m_camera->Set_LookAt(glm::vec3(12.0f, 4.0f, 12.0f));
-    m_camera->Set_Distance(64.0f);
-    m_camera->Set_Height(16.0f);
+    m_camera->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    m_camera->setLookAt(glm::vec3(12.0f, 4.0f, 12.0f));
+    m_camera->setDistanceToLookAt(glm::vec3(64.0, 16.0, 64.0));
     m_root->setCamera(m_camera);
     
     m_globalLightSource = m_root->createGlobalLightSource(45.0, 0.01, 1024.0);

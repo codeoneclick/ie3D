@@ -124,24 +124,21 @@ void CSkyBox::onBind(CSharedMaterialRef material)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        IGameObject::setPosition(m_camera->Get_Position());
+        IGameObject::setPosition(m_camera->getPosition());
         glm::vec3 currentRotation = IGameObject::getRotation();
         bool currentReflectingState = material->isReflecting();
         if(currentReflectingState)
         {
             IGameObject::setRotation(glm::vec3(IGameObject::getRotation().x + glm::degrees(M_PI),
-                                               -glm::degrees(m_camera->Get_Rotation()) * 2.0 + IGameObject::getRotation().y,
+                                               -glm::degrees(m_camera->getRotation()) * 2.0 + IGameObject::getRotation().y,
                                                IGameObject::getRotation().z));
             material->setReflecting(false);
         }
-        
-        IGameObject::onSceneUpdate(0);
         IGameObject::onBind(material);
         
         if(currentReflectingState)
         {
             IGameObject::setRotation(currentRotation);
-            IGameObject::onSceneUpdate(0);
             material->setReflecting(true);
         }
     }

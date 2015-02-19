@@ -12,7 +12,32 @@
 CFrustum::CFrustum(CSharedCameraRef camera) :
 m_camera(camera)
 {
-
+/*  std::vector<int> v(INT16_MAX);
+    i32 i = 0;
+    std::generate(v.begin(), v.end(), [&]() { return i++; });
+    
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+    
+    i32 a = 0;
+    for(i32 i = 0; i < v.size(); ++i)
+    {
+        a = v[i];
+    }
+    
+    i32 a = 0;
+    std::for_each(v.cbegin(), v.cend(), [&](int i)
+    for(auto i : v)
+    {
+        a = i;
+    });
+    
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+    f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+    std::cout<<"at(i): "<<duration<<std::endl;
+#endif */
 }
 
 CFrustum::~CFrustum(void)
@@ -53,18 +78,18 @@ void CFrustum::onSceneUpdate(f32 deltatime)
 {
     if(m_camera != nullptr)
     {
-        f32 tan = tanf(glm::radians(m_camera->Get_Fov() * 0.5));
-        f32 nearHeight = m_camera->Get_Near() * tan;
-        f32 nearWidth = nearHeight * m_camera->Get_Aspect();
-        f32 farHeight = m_camera->Get_Far()  * tan;
-        f32 farWidth = farHeight * m_camera->Get_Aspect();
+        f32 tan = tanf(glm::radians(m_camera->getFOV() * 0.5));
+        f32 nearHeight = m_camera->getNear() * tan;
+        f32 nearWidth = nearHeight * m_camera->getAspect();
+        f32 farHeight = m_camera->getFar()  * tan;
+        f32 farWidth = farHeight * m_camera->getAspect();
         
-        glm::vec3 basis_Z = glm::normalize(m_camera->Get_Position() - m_camera->Get_LookAt());
-        glm::vec3 basis_X = glm::normalize(glm::cross(m_camera->Get_Up(), basis_Z));
+        glm::vec3 basis_Z = glm::normalize(m_camera->getPosition() - m_camera->getLookAt());
+        glm::vec3 basis_X = glm::normalize(glm::cross(m_camera->getUpVector(), basis_Z));
         glm::vec3 basis_Y = glm::cross(basis_Z, basis_X);
         
-        glm::vec3 nearOffset = m_camera->Get_Position() - basis_Z * m_camera->Get_Near();
-        glm::vec3 farOffset = m_camera->Get_Position() - basis_Z * m_camera->Get_Far();
+        glm::vec3 nearOffset = m_camera->getPosition() - basis_Z * m_camera->getNear();
+        glm::vec3 farOffset = m_camera->getPosition() - basis_Z * m_camera->getFar();
         
         glm::vec3 nearTopLeftPoint = nearOffset + basis_Y * nearHeight - basis_X * nearWidth;
         glm::vec3 nearTopRightPoint = nearOffset + basis_Y * nearHeight + basis_X * nearWidth;

@@ -89,7 +89,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 if(result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
                    result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
                 {
-                    E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->Get_LookAt(), minBound, maxBound);
+                    E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->getLookAt(), minBound, maxBound);
                     if(m_chunks[index] == nullptr)
                     {
                         m_chunks[index] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);

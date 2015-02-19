@@ -214,15 +214,15 @@ void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)
     assert(material != nullptr);
     
     // base matrices
-    material->getShader()->setMatrix4x4(m_camera->Get_ProjectionMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-    material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->Get_ViewMatrix() : m_camera->Get_ViewReflectionMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-    material->getShader()->setMatrix4x4(m_camera->Get_MatrixNormal(), E_SHADER_UNIFORM_MATRIX_NORMAL);
+    material->getShader()->setMatrix4x4(m_camera->getPMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
+    material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->getVMatrix() : m_camera->getIVMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
+    material->getShader()->setMatrix4x4(m_camera->getNMatrix(), E_SHADER_UNIFORM_MATRIX_NORMAL);
     material->getShader()->setMatrix4x4(IGameObject::getTransformation(), E_SHADER_UNIFORM_MATRIX_WORLD);
     
     // camera base parameters
-    material->getShader()->setVector3(m_camera->Get_Position(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
-    material->getShader()->setFloat(m_camera->Get_Near(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
-    material->getShader()->setFloat(m_camera->Get_Far(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
+    material->getShader()->setVector3(m_camera->getPosition(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
+    material->getShader()->setFloat(m_camera->getNear(), E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR);
+    material->getShader()->setFloat(m_camera->getFar(), E_SHADER_UNIFORM_FLOAT_CAMERA_FAR);
     material->getShader()->setVector4(material->getClippingPlane(), E_SHADER_UNIFORM_VECTOR_CLIP_PLANE);
     
     // global light parameters

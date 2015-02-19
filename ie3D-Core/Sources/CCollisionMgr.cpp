@@ -55,9 +55,9 @@ void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_
     assert(m_camera != nullptr);
     glm::ray ray;
     CCollisionMgr::unproject(point,
-                             m_camera->Get_ViewMatrix(),
-                             m_camera->Get_ProjectionMatrix(),
-                             m_camera->Get_Viewport(),
+                             m_camera->getVMatrix(),
+                             m_camera->getPMatrix(),
+                             m_camera->getViewport(),
                              &ray);
     
     for(const auto& handler : m_handlers)
@@ -144,9 +144,9 @@ bool CCollisionMgr::isTrianglesIntersected(CSharedCameraRef camera,
 {
     glm::ray ray;
     CCollisionMgr::unproject(point,
-                             camera->Get_ViewMatrix(),
-                             camera->Get_ProjectionMatrix(),
-                             camera->Get_Viewport(),
+                             camera->getVMatrix(),
+                             camera->getPMatrix(),
+                             camera->getViewport(),
                              &ray);
     for(const auto& iterator : triangles)
     {
@@ -171,9 +171,9 @@ bool CCollisionMgr::isGameObjectIntersected(CSharedCameraRef camera,
     assert(gameObject != nullptr);
     glm::ray ray;
     CCollisionMgr::unproject(point,
-                             camera->Get_ViewMatrix(),
-                             camera->Get_ProjectionMatrix(),
-                             camera->Get_Viewport(),
+                             camera->getVMatrix(),
+                             camera->getPMatrix(),
+                             camera->getViewport(),
                              &ray);
     
     if(!glm::intersect(ray,

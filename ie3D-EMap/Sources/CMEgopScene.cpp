@@ -37,10 +37,9 @@ void CMEgopScene::load(void)
                                                m_root->getScreenWidth(),
                                                m_root->getScreenHeight()));
     
-    m_camera->Set_Position(glm::vec3(0.0f, 0.0f, 0.0f));
-    m_camera->Set_LookAt(glm::vec3(0.0f, 0.0f, 0.0f));
-    m_camera->Set_Distance(8.0f);
-    m_camera->Set_Height(4.0f);
+    m_camera->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    m_camera->setLookAt(glm::vec3(0.0f, 0.0f, 0.0f));
+    m_camera->setDistanceToLookAt(glm::vec3(8.0, 4.0, 8.0));
     m_root->setCamera(m_camera);
     
     m_globalLightSource = m_root->createGlobalLightSource(45.0, 0.01, 1024.0);
