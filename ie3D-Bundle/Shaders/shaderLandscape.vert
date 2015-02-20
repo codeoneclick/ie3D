@@ -11,7 +11,6 @@ out vec3   OUT_LightDirection;
 out vec3   OUT_Normal;
 out float  OUT_Fog;
 out vec4   OUT_ShadowParameters;
-out vec4   OUT_Position;
 
 #else
 
@@ -25,18 +24,17 @@ varying vec3   OUT_LightDirection;
 varying vec3   OUT_Normal;
 varying float  OUT_Fog;
 varying vec4   OUT_ShadowParameters;
-varying vec4   OUT_Position;
 
 #endif
 
-uniform mat4   MATRIX_Projection;
-uniform mat4   MATRIX_View;
-uniform mat4   MATRIX_World;
-uniform mat4   MATRIX_GlobalLightProjection;
-uniform mat4   MATRIX_GlobalLightView;
-uniform vec4   VECTOR_ClipPlane;
-uniform vec3   VECTOR_CameraPosition;
-uniform vec3   VECTOR_GlobalLightPosition;
+uniform mat4 u_matrixVP;
+uniform mat4 u_matrixV;
+
+uniform mat4 MATRIX_GlobalLightProjection;
+uniform mat4 MATRIX_GlobalLightView;
+uniform vec4 VECTOR_ClipPlane;
+uniform vec3 VECTOR_CameraPosition;
+uniform vec3 VECTOR_GlobalLightPosition;
 
 uniform float IN_TillingTexcoordLayer_01;
 uniform float IN_TillingTexcoordLayer_02;
@@ -52,9 +50,8 @@ const mat4 mBiasMatrix = mat4(0.5, 0.0, 0.0, 0.0,
 
 void main(void)
 {
-    vec4 vPosition = MATRIX_World * vec4(IN_Position, 1.0);
-    OUT_Position = MATRIX_Projection * MATRIX_View * vPosition;
-    gl_Position = OUT_Position;
+    vec4 vPosition = vec4(IN_Position, 1.0);
+    gl_Position = u_matrixVP * vPosition;
     
     OUT_ShadowParameters = mBiasMatrix * MATRIX_GlobalLightProjection * MATRIX_GlobalLightView * vPosition;
     
@@ -67,7 +64,7 @@ void main(void)
     vec3 vLightDirection = VECTOR_GlobalLightPosition - vPosition.xyz;
     OUT_LightDirection = normalize(vLightDirection);
     
-    OUT_Fog = clamp(((MATRIX_View * vPosition).z + IN_fogLinearStart) / (IN_fogLinearStart - IN_fogLinearEnd) * -1.0, 0.0, 1.0);
+    OUT_Fog = clamp(((u_matrixV * vPosition).z + IN_fogLinearStart) / (IN_fogLinearStart - IN_fogLinearEnd) * -1.0, 0.0, 1.0);
     
 #if defined(__OSX__) || (defined(__IOS__) && defined(__IOS_HIGH_PERFORMANCE__))
     OUT_TillingTexcoordLayer_01 = vPosition / IN_TillingTexcoordLayer_01;

@@ -27,6 +27,7 @@ public:
     virtual bool isInCameraFrustum(CSharedFrustumRef cameraFrustum) = 0;
     virtual void onDraw(CSharedMaterialRef material) = 0;
     virtual CSharedComponentRendering getComponentRendering(void) const = 0;
+    virtual CSharedComponentDebugRendering getComponentDebugRendering(void) const = 0;
 };
 
 #endif

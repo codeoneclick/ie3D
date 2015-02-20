@@ -9,10 +9,6 @@ varying vec2   OUT_TexCoord;
 
 #endif
 
-uniform mat4   MATRIX_Projection;
-uniform mat4   MATRIX_View;
-uniform mat4   MATRIX_World;
-
 void main(void)
 {
     OUT_TexCoord = IN_TexCoord;

@@ -15,14 +15,14 @@ const char* ShaderBoundingBox_vert = STRING_SHADER
  
 #endif
  
-uniform mat4   MATRIX_Projection;
-uniform mat4   MATRIX_View;
-uniform mat4   MATRIX_World;
+uniform mat4 u_matrixM;
+uniform mat4 u_matrixV;
+uniform mat4 u_matrixP;
  
  void main(void)
 {
-    vec4 vPosition = MATRIX_World * vec4(IN_Position, 1.0);
-    gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
+    vec4 vPosition = u_matrixM * vec4(IN_Position, 1.0);
+    gl_Position = u_matrixP * u_matrixV * vPosition;
 }
  );
 

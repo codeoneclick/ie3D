@@ -23,6 +23,7 @@
 #include "HShaders.h"
 #include "CComponentTransformation.h"
 #include "CComponentRendering.h"
+#include "CComponentDebugRendering.h"
 #include "CConfigurationAccessor.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
@@ -31,8 +32,6 @@ m_resourceAccessor(resourceAccessor),
 m_mesh(nullptr),
 m_camera(nullptr),
 m_globalLightSource(nullptr),
-m_boundingBox(nullptr),
-m_boundingBoxMaterial(nullptr),
 m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_renderTechniqueImporter(nullptr),
 m_sceneUpdateMgr(nullptr),
@@ -43,11 +42,6 @@ m_status(E_LOADING_STATUS_UNLOADED)
     {
         bindBaseShaderUniforms(material);
         bindCustomShaderUniforms(material);
-    };
-    
-    m_boundingBoxMaterialBindImposer = [this](CSharedMaterialRef material)
-    {
-        bindBaseShaderUniforms(material);
     };
     
     CSharedComponentTransformation componentTransformation = std::make_shared<CComponentTransformation>();
@@ -96,29 +90,31 @@ ISharedComponent IGameObject::getComponent(E_COMPONENT_CLASS componentClass) con
 void IGameObject::addComponentRendering(void)
 {
     assert(m_configuration);
-    ISharedConfigurationGameObject configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(m_configuration);
-    CSharedComponentRendering componentRendering = std::make_shared<CComponentRendering>(configurationGameObject,
-                                                                                         m_resourceAccessor,
-                                                                                         m_renderTechniqueAccessor,
-                                                                                         shared_from_this(),
-                                                                                         m_cameraFrustum);
-    componentRendering->setDrawCommand(std::bind(&IGameObject::onDraw, this, std::placeholders::_1));
-    componentRendering->setCheckInCameraFrustumCommand(std::bind(&IGameObject::isInCameraFrustum, this, std::placeholders::_1));
-    IGameObject::addComponent(componentRendering);
-    for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
+    if(!IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
     {
-        CSharedConfigurationMaterial configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-        if(m_renderTechniqueImporter->isSupportingRenderTechnique(configurationMaterial->getRenderTechniqueName()))
+        ISharedConfigurationGameObject configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(m_configuration);
+        CSharedComponentRendering componentRendering = std::make_shared<CComponentRendering>(configurationGameObject,
+                                                                                             m_resourceAccessor,
+                                                                                             m_renderTechniqueAccessor,
+                                                                                             shared_from_this(),
+                                                                                             m_cameraFrustum);
+        componentRendering->setDrawCommand(std::bind(&IGameObject::onDraw, this, std::placeholders::_1));
+        componentRendering->setCheckInCameraFrustumCommand(std::bind(&IGameObject::isInCameraFrustum, this, std::placeholders::_1));
+        IGameObject::addComponent(componentRendering);
+        for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
         {
-            m_renderTechniqueImporter->addRenderTechniqueHandler(configurationMaterial->getRenderTechniqueName(), shared_from_this());
-        }
-    };
+            CSharedConfigurationMaterial configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
+            if(m_renderTechniqueImporter->isSupportingRenderTechnique(configurationMaterial->getRenderTechniqueName()))
+            {
+                m_renderTechniqueImporter->addRenderTechniqueHandler(configurationMaterial->getRenderTechniqueName(), shared_from_this());
+            }
+        };
+    }
 }
 
 void IGameObject::removeComponentRendering(void)
 {
-    assert(m_configuration);
-    if(m_renderTechniqueImporter)
+    if(m_renderTechniqueImporter && m_configuration)
     {
         ISharedConfigurationGameObject configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(m_configuration);
         for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
@@ -130,6 +126,34 @@ void IGameObject::removeComponentRendering(void)
     if(IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
     {
         IGameObject::removeComponent(IGameObject::getComponent(E_COMPONENT_CLASS_RENDERING));
+    }
+}
+
+void IGameObject::addComponentDebugRendering(void)
+{
+    if(m_renderTechniqueImporter && !IGameObject::isComponentExist(E_COMPONENT_CLASS_DEBUG_RENDERING))
+    {
+        if(IGameObject::getComponentRendering()->getMaterial("ws.base") &&
+           IGameObject::getComponentRendering()->getMaterial("ws.base")->isDebugging() &&
+           m_mesh && m_mesh->isLoaded())
+        {
+            CSharedComponentDebugRendering componentDebugRendering = std::make_shared<CComponentDebugRendering>(m_resourceAccessor,
+                                                                                                                m_renderTechniqueAccessor,
+                                                                                                                m_cameraFrustum,
+                                                                                                                m_mesh->getMinBound(),
+                                                                                                                m_mesh->getMaxBound(),
+                                                                                                                m_materialBindImposer);
+            componentDebugRendering->setCheckInCameraFrustumCommand(std::bind(&IGameObject::isInCameraFrustum, this, std::placeholders::_1));
+            IGameObject::addComponent(componentDebugRendering);
+        }
+    }
+}
+
+void IGameObject::removeComponentDebugRendering(void)
+{
+    if(IGameObject::isComponentExist(E_COMPONENT_CLASS_DEBUG_RENDERING))
+    {
+        IGameObject::removeComponent(IGameObject::getComponent(E_COMPONENT_CLASS_DEBUG_RENDERING));
     }
 }
 
@@ -149,7 +173,7 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
 {
     IConfigurationLoadingHandler::onConfigurationLoaded(configuration, success);
     
-    if(m_renderTechniqueImporter && !IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
+    if(m_renderTechniqueImporter)
     {
         IGameObject::addComponentRendering();
     }
@@ -209,15 +233,27 @@ CSharedComponentRendering IGameObject::getComponentRendering(void) const
     return componentRendering;
 }
 
+CSharedComponentDebugRendering IGameObject::getComponentDebugRendering(void) const
+{
+    CSharedComponentDebugRendering componentDebugRendering = nullptr;
+    if(IGameObject::isComponentExist(E_COMPONENT_CLASS_DEBUG_RENDERING))
+    {
+        componentDebugRendering = std::static_pointer_cast<CComponentDebugRendering>(IGameObject::getComponent(E_COMPONENT_CLASS_DEBUG_RENDERING));
+    }
+    return componentDebugRendering;
+}
+
 void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)
 {
     assert(material != nullptr);
     
     // base matrices
-    material->getShader()->setMatrix4x4(m_camera->getPMatrix(), E_SHADER_UNIFORM_MATRIX_PROJECTION);
-    material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->getVMatrix() : m_camera->getIVMatrix(), E_SHADER_UNIFORM_MATRIX_VIEW);
-    material->getShader()->setMatrix4x4(m_camera->getNMatrix(), E_SHADER_UNIFORM_MATRIX_NORMAL);
-    material->getShader()->setMatrix4x4(IGameObject::getTransformation(), E_SHADER_UNIFORM_MATRIX_WORLD);
+    material->getShader()->setMatrix4x4(IGameObject::getMMatrix(), E_SHADER_UNIFORM_MATRIX_M);
+    material->getShader()->setMatrix4x4(m_camera->getPMatrix(), E_SHADER_UNIFORM_MATRIX_P);
+    material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->getVMatrix() : m_camera->getIVMatrix(), E_SHADER_UNIFORM_MATRIX_V);
+    material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->getVPMatrix() : m_camera->getIVPMatrix(), E_SHADER_UNIFORM_MATRIX_VP);
+    material->getShader()->setMatrix4x4(!material->isReflecting() ? IGameObject::getMVPMatrix() : IGameObject::getIMVPMatrix(), E_SHADER_UNIFORM_MATRIX_MVP);
+    material->getShader()->setMatrix4x4(m_camera->getNMatrix(), E_SHADER_UNIFORM_MATRIX_N);
     
     // camera base parameters
     material->getShader()->setVector3(m_camera->getPosition(), E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION);
@@ -329,10 +365,22 @@ glm::vec3 IGameObject::getScale(void) const
     return component->getScale();
 }
 
-glm::mat4x4 IGameObject::getTransformation(void) const
+glm::mat4x4 IGameObject::getMMatrix(void) const
 {
     CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
-    return component->getTransformation();
+    return component->getMMatrix();
+}
+
+glm::mat4x4 IGameObject::getMVPMatrix(void) const
+{
+    CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
+    return component->getMVPMatrix();
+}
+
+glm::mat4  IGameObject::getIMVPMatrix(void) const
+{
+    CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
+    return component->getIMVPMatrix();
 }
 
 glm::vec3 IGameObject::getMaxBound(void) const
@@ -348,6 +396,8 @@ glm::vec3 IGameObject::getMinBound(void) const
 void IGameObject::setCamera(CSharedCameraRef camera)
 {
     m_camera = camera;
+    CSharedComponentTransformation componentTransformation = std::static_pointer_cast<CComponentTransformation>(IGameObject::getComponent(E_COMPONENT_CLASS_TRANSFORMATION));
+    componentTransformation->setCamera(camera);
 }
 
 void IGameObject::setCameraFrustum(CSharedFrustumRef frustum)
@@ -415,14 +465,16 @@ void IGameObject::removeLoadingDependencies(void)
 
 void IGameObject::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)
 {
-    if(techniqueImporter && !IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING) && m_configuration)
+    if(techniqueImporter && m_configuration)
     {
         m_renderTechniqueImporter = techniqueImporter;
         IGameObject::addComponentRendering();
+        IGameObject::addComponentDebugRendering();
     }
-    else if(!techniqueImporter && IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
+    else if(!techniqueImporter)
     {
         IGameObject::removeComponentRendering();
+        IGameObject::removeComponentDebugRendering();
         m_renderTechniqueImporter = techniqueImporter;
     }
 }

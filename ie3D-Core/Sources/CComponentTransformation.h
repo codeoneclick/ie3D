@@ -19,11 +19,15 @@ private:
     glm::vec3 m_rotation;
     glm::vec3 m_scale;
     
-    glm::mat4 m_matrixTranslation;
-    glm::mat4 m_matrixRotation;
-    glm::mat4 m_matrixScaling;
+    glm::mat4 m_matrixT;
+    glm::mat4 m_matrixR;
+    glm::mat4 m_matrixS;
     
-    glm::mat4 m_matrixTransformation;
+    glm::mat4 m_matrixM;
+    glm::mat4 m_matrixMVP;
+    glm::mat4 m_matrixIMVP;
+    
+    CSharedCamera m_camera;
     
     bool m_isComputed;
     
@@ -36,6 +40,8 @@ public:
     
     E_COMPONENT_CLASS getClass(void) const;
     
+    void setCamera(CSharedCameraRef camera);
+    
     void setPosition(const glm::vec3& position);
     void setRotation(const glm::vec3& rotation);
     void setScale(const glm::vec3& scale);
@@ -44,7 +50,9 @@ public:
     glm::vec3 getRotation(void) const;
     glm::vec3 getScale(void) const;
     
-    glm::mat4 getTransformation(void);
+    glm::mat4 getMMatrix(void);
+    glm::mat4 getMVPMatrix(void);
+    glm::mat4 getIMVPMatrix(void);
 };
 
 #endif

@@ -22,8 +22,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		21138524194C40B30041A18A /* shaderGameObjectNormal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21138522194C40B30041A18A /* shaderGameObjectNormal.frag */; };
-		21138525194C40B30041A18A /* shaderGameObjectNormal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21138523194C40B30041A18A /* shaderGameObjectNormal.vert */; };
 		21208EA51906F75D00FFC8D4 /* CMEmseScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E971906F75D00FFC8D4 /* CMEmseScene.cpp */; };
 		21208EA61906F75D00FFC8D4 /* CMEGameController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E991906F75D00FFC8D4 /* CMEGameController.cpp */; };
 		21208EA71906F75D00FFC8D4 /* CMEmseTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21208E9B1906F75D00FFC8D4 /* CMEmseTransition.cpp */; };
@@ -43,8 +41,6 @@
 		215DE7311A7D643B00E6062D /* CMEConfigurationBrushElement.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 215DE72B1A7D643B00E6062D /* CMEConfigurationBrushElement.cpp */; };
 		215DE7321A7D643B00E6062D /* CMEConfigurationLandscapeBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 215DE72D1A7D643B00E6062D /* CMEConfigurationLandscapeBrush.cpp */; };
 		215DE7331A7D643B00E6062D /* CMEConfigurationModelBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 215DE72F1A7D643B00E6062D /* CMEConfigurationModelBrush.cpp */; };
-		216204351949A88100D129AD /* shaderScreenSSAO.frag in Resources */ = {isa = PBXBuildFile; fileRef = 216204331949A88100D129AD /* shaderScreenSSAO.frag */; };
-		216204361949A88100D129AD /* shaderScreenSSAO.vert in Resources */ = {isa = PBXBuildFile; fileRef = 216204341949A88100D129AD /* shaderScreenSSAO.vert */; };
 		216346A01A063857009950BC /* shaderScreenMixOverlapping.frag in Resources */ = {isa = PBXBuildFile; fileRef = 2163469E1A063857009950BC /* shaderScreenMixOverlapping.frag */; };
 		216346A11A063857009950BC /* shaderScreenMixOverlapping.vert in Resources */ = {isa = PBXBuildFile; fileRef = 2163469F1A063857009950BC /* shaderScreenMixOverlapping.vert */; };
 		216C88C31A84FC27004FD47D /* CMEgoeTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216C88C11A84FC27004FD47D /* CMEgoeTransition.cpp */; };
@@ -120,25 +116,17 @@
 		21A38D4D19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */; };
 		21A9D8651961616A00A1B62C /* shaderModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D8631961616A00A1B62C /* shaderModel.frag */; };
 		21A9D8661961616A00A1B62C /* shaderModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D8641961616A00A1B62C /* shaderModel.vert */; };
-		21A9D8711961ACE600A1B62C /* shaderModelNormal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D86F1961ACE500A1B62C /* shaderModelNormal.frag */; };
-		21A9D8721961ACE600A1B62C /* shaderModelNormal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21A9D8701961ACE600A1B62C /* shaderModelNormal.vert */; };
 		21B4CADF1A7D345B00B0DE14 /* CMEConfigurationAccessor.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21B4CADA1A7D345B00B0DE14 /* CMEConfigurationAccessor.cpp */; };
 		21B72FA71A8CE46E003F4C24 /* gameobject.goe.temp.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B72FA51A8CE46E003F4C24 /* gameobject.goe.temp.png */; };
 		21B72FA81A8CE46E003F4C24 /* landscape.goe.temp.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B72FA61A8CE46E003F4C24 /* landscape.goe.temp.png */; };
 		21BC34B519080B47007B99DA /* shaderLandscape.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34AB19080B47007B99DA /* shaderLandscape.frag */; };
 		21BC34B619080B47007B99DA /* shaderLandscape.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34AC19080B47007B99DA /* shaderLandscape.vert */; };
-		21BC34B719080B47007B99DA /* shaderLandscapeSplatting.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34AD19080B47007B99DA /* shaderLandscapeSplatting.frag */; };
-		21BC34B819080B47007B99DA /* shaderLandscapeSplatting.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34AE19080B47007B99DA /* shaderLandscapeSplatting.vert */; };
 		21BC34B919080B47007B99DA /* shaderOcean.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34AF19080B47007B99DA /* shaderOcean.frag */; };
 		21BC34BA19080B47007B99DA /* shaderOcean.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B019080B47007B99DA /* shaderOcean.vert */; };
 		21BC34BB19080B47007B99DA /* shaderParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B119080B47007B99DA /* shaderParticleEmitter.frag */; };
 		21BC34BC19080B47007B99DA /* shaderParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B219080B47007B99DA /* shaderParticleEmitter.vert */; };
 		21BC34BD19080B47007B99DA /* shaderScreenQuad.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B319080B47007B99DA /* shaderScreenQuad.frag */; };
 		21BC34BE19080B47007B99DA /* shaderScreenQuad.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21BC34B419080B47007B99DA /* shaderScreenQuad.vert */; };
-		21C4099B1979B85E0063D62D /* shaderTexture2D.frag in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21C409991979B85E0063D62D /* shaderTexture2D.frag */; };
-		21C4099C1979B85E0063D62D /* shaderTexture2D.vert in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21C4099A1979B85E0063D62D /* shaderTexture2D.vert */; };
-		21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */; };
-		21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */; };
 		21E52C071A911C7B005977F1 /* gameobject.human_01.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52C031A911C7B005977F1 /* gameobject.human_01.xml */; };
 		21E52C081A911C7B005977F1 /* gameobject.human_02.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52C041A911C7B005977F1 /* gameobject.human_02.xml */; };
 		21E52C091A911C7B005977F1 /* gameobject.orc_01.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21E52C051A911C7B005977F1 /* gameobject.orc_01.xml */; };
@@ -268,8 +256,6 @@
 		1F379971561AECC752F4ADA1 /* qt_lib_positioning_private.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_positioning_private.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_positioning_private.pri; sourceTree = "<absolute>"; };
 		1FA4275F083C1248BFFBF88D /* qdevice.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qdevice.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/qdevice.pri; sourceTree = "<absolute>"; };
 		2058B06FF28E0FC72324895A /* qt_lib_gui.pri */ = {isa = PBXFileReference; lastKnownFileType = file; name = qt_lib_gui.pri; path = ../../../../Qt5.2.1/5.2.1/clang_64/mkspecs/modules/qt_lib_gui.pri; sourceTree = "<absolute>"; };
-		21138522194C40B30041A18A /* shaderGameObjectNormal.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderGameObjectNormal.frag; path = "../ie3D-Bundle/Shaders/shaderGameObjectNormal.frag"; sourceTree = SOURCE_ROOT; };
-		21138523194C40B30041A18A /* shaderGameObjectNormal.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderGameObjectNormal.vert; path = "../ie3D-Bundle/Shaders/shaderGameObjectNormal.vert"; sourceTree = SOURCE_ROOT; };
 		21208E971906F75D00FFC8D4 /* CMEmseScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEmseScene.cpp; path = Sources/CMEmseScene.cpp; sourceTree = SOURCE_ROOT; };
 		21208E981906F75D00FFC8D4 /* CMEmseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEmseScene.h; path = Sources/CMEmseScene.h; sourceTree = SOURCE_ROOT; };
 		21208E991906F75D00FFC8D4 /* CMEGameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEGameController.cpp; path = Sources/CMEGameController.cpp; sourceTree = SOURCE_ROOT; };
@@ -300,8 +286,6 @@
 		215DE72E1A7D643B00E6062D /* CMEConfigurationLandscapeBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationLandscapeBrush.h; path = Autogenerated/CMEConfigurationLandscapeBrush.h; sourceTree = SOURCE_ROOT; };
 		215DE72F1A7D643B00E6062D /* CMEConfigurationModelBrush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationModelBrush.cpp; path = Autogenerated/CMEConfigurationModelBrush.cpp; sourceTree = SOURCE_ROOT; };
 		215DE7301A7D643B00E6062D /* CMEConfigurationModelBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationModelBrush.h; path = Autogenerated/CMEConfigurationModelBrush.h; sourceTree = SOURCE_ROOT; };
-		216204331949A88100D129AD /* shaderScreenSSAO.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenSSAO.frag; path = "../ie3D-Bundle/Shaders/shaderScreenSSAO.frag"; sourceTree = SOURCE_ROOT; };
-		216204341949A88100D129AD /* shaderScreenSSAO.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenSSAO.vert; path = "../ie3D-Bundle/Shaders/shaderScreenSSAO.vert"; sourceTree = SOURCE_ROOT; };
 		2163469E1A063857009950BC /* shaderScreenMixOverlapping.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenMixOverlapping.frag; path = "../ie3D-Bundle/Shaders/shaderScreenMixOverlapping.frag"; sourceTree = SOURCE_ROOT; };
 		2163469F1A063857009950BC /* shaderScreenMixOverlapping.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenMixOverlapping.vert; path = "../ie3D-Bundle/Shaders/shaderScreenMixOverlapping.vert"; sourceTree = SOURCE_ROOT; };
 		216C88C11A84FC27004FD47D /* CMEgoeTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEgoeTransition.cpp; path = Sources/CMEgoeTransition.cpp; sourceTree = SOURCE_ROOT; };
@@ -383,8 +367,6 @@
 		21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderAtmosphericScattering.vert; path = "../ie3D-Bundle/Shaders/shaderAtmosphericScattering.vert"; sourceTree = SOURCE_ROOT; };
 		21A9D8631961616A00A1B62C /* shaderModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModel.frag; path = "../ie3D-Bundle/Shaders/shaderModel.frag"; sourceTree = SOURCE_ROOT; };
 		21A9D8641961616A00A1B62C /* shaderModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModel.vert; path = "../ie3D-Bundle/Shaders/shaderModel.vert"; sourceTree = SOURCE_ROOT; };
-		21A9D86F1961ACE500A1B62C /* shaderModelNormal.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelNormal.frag; path = "../ie3D-Bundle/Shaders/shaderModelNormal.frag"; sourceTree = SOURCE_ROOT; };
-		21A9D8701961ACE600A1B62C /* shaderModelNormal.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderModelNormal.vert; path = "../ie3D-Bundle/Shaders/shaderModelNormal.vert"; sourceTree = SOURCE_ROOT; };
 		21B4CADA1A7D345B00B0DE14 /* CMEConfigurationAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationAccessor.cpp; path = Autogenerated/CMEConfigurationAccessor.cpp; sourceTree = SOURCE_ROOT; };
 		21B4CADB1A7D345B00B0DE14 /* CMEConfigurationAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationAccessor.h; path = Autogenerated/CMEConfigurationAccessor.h; sourceTree = SOURCE_ROOT; };
 		21B4CADC1A7D345B00B0DE14 /* HMEConfigurationDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEConfigurationDeclarations.h; path = Autogenerated/HMEConfigurationDeclarations.h; sourceTree = SOURCE_ROOT; };
@@ -392,19 +374,13 @@
 		21B72FA61A8CE46E003F4C24 /* landscape.goe.temp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = landscape.goe.temp.png; path = "../ie3D-Bundle/Textures/landscape.goe.temp.png"; sourceTree = "<group>"; };
 		21BC34AB19080B47007B99DA /* shaderLandscape.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscape.frag; path = "../ie3D-Bundle/Shaders/shaderLandscape.frag"; sourceTree = "<group>"; };
 		21BC34AC19080B47007B99DA /* shaderLandscape.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscape.vert; path = "../ie3D-Bundle/Shaders/shaderLandscape.vert"; sourceTree = "<group>"; };
-		21BC34AD19080B47007B99DA /* shaderLandscapeSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeSplatting.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeSplatting.frag"; sourceTree = "<group>"; };
-		21BC34AE19080B47007B99DA /* shaderLandscapeSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeSplatting.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeSplatting.vert"; sourceTree = "<group>"; };
 		21BC34AF19080B47007B99DA /* shaderOcean.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderOcean.frag; path = "../ie3D-Bundle/Shaders/shaderOcean.frag"; sourceTree = "<group>"; };
 		21BC34B019080B47007B99DA /* shaderOcean.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderOcean.vert; path = "../ie3D-Bundle/Shaders/shaderOcean.vert"; sourceTree = "<group>"; };
 		21BC34B119080B47007B99DA /* shaderParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderParticleEmitter.frag; path = "../ie3D-Bundle/Shaders/shaderParticleEmitter.frag"; sourceTree = "<group>"; };
 		21BC34B219080B47007B99DA /* shaderParticleEmitter.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderParticleEmitter.vert; path = "../ie3D-Bundle/Shaders/shaderParticleEmitter.vert"; sourceTree = "<group>"; };
 		21BC34B319080B47007B99DA /* shaderScreenQuad.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenQuad.frag; path = "../ie3D-Bundle/Shaders/shaderScreenQuad.frag"; sourceTree = "<group>"; };
 		21BC34B419080B47007B99DA /* shaderScreenQuad.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderScreenQuad.vert; path = "../ie3D-Bundle/Shaders/shaderScreenQuad.vert"; sourceTree = "<group>"; };
-		21C409991979B85E0063D62D /* shaderTexture2D.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderTexture2D.frag; path = "../ie3D-Bundle/Shaders/shaderTexture2D.frag"; sourceTree = SOURCE_ROOT; };
-		21C4099A1979B85E0063D62D /* shaderTexture2D.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderTexture2D.vert; path = "../ie3D-Bundle/Shaders/shaderTexture2D.vert"; sourceTree = SOURCE_ROOT; };
 		21C84A371A8D2BA3003035E0 /* HUICommands.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HUICommands.h; path = Sources/HUICommands.h; sourceTree = SOURCE_ROOT; };
-		21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.frag"; sourceTree = "<group>"; };
-		21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapeEdges.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapeEdges.vert"; sourceTree = "<group>"; };
 		21E52C031A911C7B005977F1 /* gameobject.human_01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.human_01.xml; path = "../ie3D-Bundle/Configurations/game_objects/gameobject.human_01.xml"; sourceTree = "<group>"; };
 		21E52C041A911C7B005977F1 /* gameobject.human_02.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.human_02.xml; path = "../ie3D-Bundle/Configurations/game_objects/gameobject.human_02.xml"; sourceTree = "<group>"; };
 		21E52C051A911C7B005977F1 /* gameobject.orc_01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.orc_01.xml; path = "../ie3D-Bundle/Configurations/game_objects/gameobject.orc_01.xml"; sourceTree = "<group>"; };
@@ -683,26 +659,14 @@
 				21E53BFA19FA9DDA0018BDB9 /* shaderCommon.vert */,
 				21A38D4A19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag */,
 				21A38D4B19EBCD99008CAFE7 /* shaderAtmosphericScattering.vert */,
-				21C409991979B85E0063D62D /* shaderTexture2D.frag */,
-				21C4099A1979B85E0063D62D /* shaderTexture2D.vert */,
-				21A9D86F1961ACE500A1B62C /* shaderModelNormal.frag */,
-				21A9D8701961ACE600A1B62C /* shaderModelNormal.vert */,
 				21A9D8631961616A00A1B62C /* shaderModel.frag */,
 				21A9D8641961616A00A1B62C /* shaderModel.vert */,
-				21138522194C40B30041A18A /* shaderGameObjectNormal.frag */,
-				21138523194C40B30041A18A /* shaderGameObjectNormal.vert */,
-				216204331949A88100D129AD /* shaderScreenSSAO.frag */,
-				216204341949A88100D129AD /* shaderScreenSSAO.vert */,
 				217AF1801945EE1E0045CF9D /* shaderLandscapeBrush.frag */,
 				217AF1811945EE1E0045CF9D /* shaderLandscapeBrush.vert */,
 				212092C7191978D300FFC8D4 /* shaderSkybox.frag */,
 				212092C8191978D300FFC8D4 /* shaderSkybox.vert */,
 				21BC34AB19080B47007B99DA /* shaderLandscape.frag */,
 				21BC34AC19080B47007B99DA /* shaderLandscape.vert */,
-				21DC2B761929E9CE008DA3C1 /* shaderLandscapeEdges.frag */,
-				21DC2B771929E9CE008DA3C1 /* shaderLandscapeEdges.vert */,
-				21BC34AD19080B47007B99DA /* shaderLandscapeSplatting.frag */,
-				21BC34AE19080B47007B99DA /* shaderLandscapeSplatting.vert */,
 				21BC34AF19080B47007B99DA /* shaderOcean.frag */,
 				21BC34B019080B47007B99DA /* shaderOcean.vert */,
 				21BC34B119080B47007B99DA /* shaderParticleEmitter.frag */,
@@ -1320,21 +1284,17 @@
 				217EF8DA19F7F52700F339A0 /* skybox_ypos.png in Resources */,
 				218BCFF119C339700041048E /* map_02.png in Resources */,
 				21E52C1B1A911CA8005977F1 /* material.human_01.base.xml in Resources */,
-				21138524194C40B30041A18A /* shaderGameObjectNormal.frag in Resources */,
 				21E52C491A911CE0005977F1 /* human_01.png in Resources */,
 				21706C791A893F1400C56C7E /* ws.technique.shadowmap.xml in Resources */,
 				21706C7F1A893F3200C56C7E /* output.technique.mse.xml in Resources */,
-				21138525194C40B30041A18A /* shaderGameObjectNormal.vert in Resources */,
 				21A9D8651961616A00A1B62C /* shaderModel.frag in Resources */,
 				21E52C4B1A911CE0005977F1 /* orc_01.png in Resources */,
 				217EF8D219F7F52700F339A0 /* landscape_01.png in Resources */,
 				21E52C251A911CA8005977F1 /* material.orc_01.refraction.xml in Resources */,
-				21A9D8721961ACE600A1B62C /* shaderModelNormal.vert in Resources */,
 				21706C901A893F4B00C56C7E /* gameobject.model.brush.xml in Resources */,
 				21706CBD1A893F7200C56C7E /* transition.gop.xml in Resources */,
 				21706C611A893EB000C56C7E /* material.output.technique.mse.xml in Resources */,
 				21A38D4C19EBCD99008CAFE7 /* shaderAtmosphericScattering.frag in Resources */,
-				21DC2B791929E9CE008DA3C1 /* shaderLandscapeEdges.vert in Resources */,
 				21706C751A893F1400C56C7E /* ws.technique.base.gop.xml in Resources */,
 				21E52C3B1A911CC3005977F1 /* human_02_idle.IE3DANIMATION in Resources */,
 				21706C5B1A893E7700C56C7E /* transition.mse.xml in Resources */,
@@ -1365,11 +1325,9 @@
 				217EF8DB19F7F52700F339A0 /* skybox_zneg.png in Resources */,
 				218BCFF019C339700041048E /* map_01.png in Resources */,
 				21706C761A893F1400C56C7E /* ws.technique.overlapping.xml in Resources */,
-				216204351949A88100D129AD /* shaderScreenSSAO.frag in Resources */,
 				21E52C4C1A911CE0005977F1 /* orc_02.png in Resources */,
 				21706C6B1A893EF800C56C7E /* ss.technique.overlapping.xml in Resources */,
 				21E52C281A911CA8005977F1 /* material.orc_02.reflection.xml in Resources */,
-				216204361949A88100D129AD /* shaderScreenSSAO.vert in Resources */,
 				21706C8F1A893F4B00C56C7E /* gameobject.landscape.xml in Resources */,
 				217EF8D719F7F52700F339A0 /* skybox_xneg.png in Resources */,
 				21706C681A893EE300C56C7E /* material.output.technique.goe.xml in Resources */,
@@ -1413,11 +1371,9 @@
 				21E52C1E1A911CA8005977F1 /* material.human_01.shadowmap.xml in Resources */,
 				21706C941A893F4B00C56C7E /* gameobject.particle.emitter.xml in Resources */,
 				21BC34B619080B47007B99DA /* shaderLandscape.vert in Resources */,
-				21BC34B819080B47007B99DA /* shaderLandscapeSplatting.vert in Resources */,
 				21E52C4A1A911CE0005977F1 /* human_02.png in Resources */,
 				21BC34BC19080B47007B99DA /* shaderParticleEmitter.vert in Resources */,
 				21E52C1F1A911CA8005977F1 /* material.human_02.base.xml in Resources */,
-				21DC2B781929E9CE008DA3C1 /* shaderLandscapeEdges.frag in Resources */,
 				21E52C3C1A911CC3005977F1 /* human_02_run.IE3DANIMATION in Resources */,
 				21706C7E1A893F3200C56C7E /* output.technique.gop.xml in Resources */,
 				21FEECCF1A07A5DA001E9ACB /* shaderAnimatedGameObjectND.frag in Resources */,
@@ -1426,7 +1382,6 @@
 				2171175519FE79A600D92E14 /* shaderModelBrush.frag in Resources */,
 				21E52C091A911C7B005977F1 /* gameobject.orc_01.xml in Resources */,
 				21E52C431A911CC3005977F1 /* orc_02.IE3DMESH in Resources */,
-				21A9D8711961ACE600A1B62C /* shaderModelNormal.frag in Resources */,
 				21E52C271A911CA8005977F1 /* material.orc_02.base.xml in Resources */,
 				21BC34BE19080B47007B99DA /* shaderScreenQuad.vert in Resources */,
 				2171175619FE79A600D92E14 /* shaderModelBrush.vert in Resources */,
@@ -1436,7 +1391,6 @@
 				21706C741A893F1400C56C7E /* ws.technique.base.goe.xml in Resources */,
 				218BCFF319C339700041048E /* map_04.png in Resources */,
 				21E52C441A911CC3005977F1 /* orc_03.IE3DMESH in Resources */,
-				21BC34B719080B47007B99DA /* shaderLandscapeSplatting.frag in Resources */,
 				21BC34BD19080B47007B99DA /* shaderScreenQuad.frag in Resources */,
 				212092CA191978D300FFC8D4 /* shaderSkybox.vert in Resources */,
 				21706CAF1A893F5E00C56C7E /* material.landscape.reflection.xml in Resources */,
@@ -1507,7 +1461,6 @@
 			files = (
 				2191CE30196E872200CE2813 /* CMEModelBrush.cpp in Compile Sources */,
 				21B4CADF1A7D345B00B0DE14 /* CMEConfigurationAccessor.cpp in Compile Sources */,
-				21C4099C1979B85E0063D62D /* shaderTexture2D.vert in Compile Sources */,
 				215DE7331A7D643B00E6062D /* CMEConfigurationModelBrush.cpp in Compile Sources */,
 				215DE7321A7D643B00E6062D /* CMEConfigurationLandscapeBrush.cpp in Compile Sources */,
 				21FEECBA1A07878E001E9ACB /* CMEgopScene.cpp in Compile Sources */,
@@ -1522,7 +1475,6 @@
 				2120900E1906FC5000FFC8D4 /* moc_CMainWindow.cpp in Compile Sources */,
 				5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */,
 				21FEECE41A07D159001E9ACB /* CMEgopTransition.cpp in Compile Sources */,
-				21C4099B1979B85E0063D62D /* shaderTexture2D.frag in Compile Sources */,
 				5C697E14BC49275245E9B4A3 /* CMainWindow.cpp in Compile Sources */,
 				216C88C81A84FC95004FD47D /* CMEgoeScene.cpp in Compile Sources */,
 			);

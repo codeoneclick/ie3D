@@ -11,7 +11,6 @@ in vec3   OUT_LightDirection;
 in vec3   OUT_Normal;
 in float  OUT_Fog;
 in vec4   OUT_ShadowParameters;
-in vec4   OUT_Position;
 
 #else
 
@@ -25,7 +24,6 @@ varying vec3   OUT_LightDirection;
 varying vec3   OUT_Normal;
 varying float  OUT_Fog;
 varying vec4   OUT_ShadowParameters;
-varying vec4   OUT_Position;
 
 #endif
 

@@ -50,7 +50,7 @@ void CMapDragController::onGestureRecognizerDragged(const glm::ivec2& point, E_I
     glm::vec3 position;
     if(CCollisionMgr::isTrianglesIntersected(m_camera, m_triangles, point, &position) && m_isPressed)
     {
-        m_positionEnding = m_positionStarting - position + m_camera->Get_LookAt();
+        m_positionEnding = m_positionStarting - position + m_camera->getLookAt();
         m_positionEnding.x = glm::min(m_positionEnding.x, m_minBound.x);
         m_positionEnding.z = glm::min(m_positionEnding.z, m_minBound.z);
         m_positionEnding.x = glm::max(m_positionEnding.x, m_maxBound.x);
@@ -87,8 +87,8 @@ void CMapDragController::onKeyDown(i32 key)
 void CMapDragController::update(f32)
 {
     glm::vec3 position;
-    position = glm::mix(m_camera->Get_LookAt(), m_positionEnding, m_dragSpeed);
-    m_camera->Set_LookAt(position);
+    position = glm::mix(m_camera->getLookAt(), m_positionEnding, m_dragSpeed);
+    m_camera->setLookAt(position);
 }
 
 void CMapDragController::setMaxBound(const glm::vec3 &maxBound)

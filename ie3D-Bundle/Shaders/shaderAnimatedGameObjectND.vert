@@ -9,12 +9,10 @@ varying vec4 OUT_Position;
 
 #endif
 
-uniform mat4   MATRIX_Projection;
-uniform mat4   MATRIX_View;
-uniform mat4   MATRIX_World;
-uniform mat4   MATRIX_GlobalLightProjection;
-uniform mat4   MATRIX_GlobalLightView;
-uniform mat4   MATRIX_Bones[32];
+uniform mat4 u_matrixM;
+uniform mat4 MATRIX_GlobalLightProjection;
+uniform mat4 MATRIX_GlobalLightView;
+uniform mat4 MATRIX_Bones[32];
 
 uniform int    INT_FLAG_01;
 uniform int    INT_FLAG_02;
@@ -36,13 +34,8 @@ void main(void)
             index = int(IN_Color[i]);
             vBonePosition += MATRIX_Bones[index] * OUT_Position * vWeights[i];
         }
-        OUT_Position = MATRIX_World * vBonePosition;
+        OUT_Position = vBonePosition;
     }
-    else
-    {
-        OUT_Position = MATRIX_World * OUT_Position;
-    }
-    
-    OUT_Position = MATRIX_GlobalLightProjection * MATRIX_GlobalLightView * OUT_Position;
+    OUT_Position = MATRIX_GlobalLightProjection * MATRIX_GlobalLightView * u_matrixM * OUT_Position;
     gl_Position = OUT_Position;
 }

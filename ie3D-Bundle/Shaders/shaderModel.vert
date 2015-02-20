@@ -11,17 +11,16 @@ varying float  OUT_ClipPlane;
 
 #endif
 
-uniform mat4   MATRIX_Projection;
-uniform mat4   MATRIX_View;
-uniform mat4   MATRIX_World;
-uniform mat4   MATRIX_Bones[32];
+uniform mat4 u_matrixM;
+uniform mat4 u_matrixVP;
+uniform mat4 MATRIX_Bones[32];
 
-uniform vec4   VECTOR_ClipPlane;
+uniform vec4 VECTOR_ClipPlane;
 
-uniform int    INT_FLAG_01;
-uniform int    INT_FLAG_02;
-uniform int    INT_FLAG_03;
-uniform int    INT_FLAG_04;
+uniform int INT_FLAG_01;
+uniform int INT_FLAG_02;
+uniform int INT_FLAG_03;
+uniform int INT_FLAG_04;
 
 void main(void)
 {
@@ -38,14 +37,10 @@ void main(void)
             index = int(IN_Color[i]);
             vBonePosition += MATRIX_Bones[index] * vPosition * vWeights[i];
         }
-        vPosition = MATRIX_World * vBonePosition;
+        vPosition = vBonePosition;
     }
-    else
-    {
-        vPosition = MATRIX_World * vPosition;
-    }
-
-    gl_Position = MATRIX_Projection * MATRIX_View * vPosition;
+    vPosition = u_matrixM * vPosition;
+    gl_Position = u_matrixVP * vPosition;
     OUT_TexCoord = IN_TexCoord;
     
     OUT_ClipPlane = dot(vPosition.xyz, VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;

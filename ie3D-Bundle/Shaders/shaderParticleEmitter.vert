@@ -11,13 +11,11 @@ varying vec4 OUT_Color;
 
 #endif
 
-uniform mat4 MATRIX_Projection;
-uniform mat4 MATRIX_View;
-uniform mat4 MATRIX_World;
+uniform mat4 u_matrixVP;
 
 void main(void)
 {
-    gl_Position = MATRIX_Projection * MATRIX_View * vec4(IN_Position, 1.0);
+    gl_Position = u_matrixVP * vec4(IN_Position, 1.0);
     OUT_TexCoord = IN_TexCoord;
     OUT_Color = IN_Color;
 }

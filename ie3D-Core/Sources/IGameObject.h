@@ -34,10 +34,6 @@ protected:
     
     CSharedMesh m_mesh;
     
-    CSharedBoundingBox m_boundingBox;
-    CSharedMaterial m_boundingBoxMaterial;
-    std::function<void(CSharedMaterialRef)> m_boundingBoxMaterialBindImposer;
-    
     CSharedCamera m_camera;
     CSharedFrustum m_cameraFrustum;
     CSharedGlobalLightSource m_globalLightSource;
@@ -59,6 +55,7 @@ protected:
     virtual bool isInCameraFrustum(CSharedFrustumRef cameraFrustum);
     virtual void onDraw(CSharedMaterialRef material);
     CSharedComponentRendering getComponentRendering(void) const;
+    CSharedComponentDebugRendering getComponentDebugRendering(void) const;
     
     virtual void onBind(CSharedMaterialRef material);
     virtual void onUnbind(CSharedMaterialRef material);
@@ -70,6 +67,9 @@ protected:
     
     void addComponentRendering(void);
     void removeComponentRendering(void);
+    
+    void addComponentDebugRendering(void);
+    void removeComponentDebugRendering(void);
     
 public:
     
@@ -91,7 +91,9 @@ public:
     glm::vec3 getRotation(void) const;
     glm::vec3 getScale(void) const;
     
-    glm::mat4 getTransformation(void) const;
+    glm::mat4 getMMatrix(void) const;
+    glm::mat4 getMVPMatrix(void) const;
+    glm::mat4 getIMVPMatrix(void) const;
     
     glm::vec3 getMaxBound(void) const;
     glm::vec3 getMinBound(void) const;

@@ -25,10 +25,12 @@ extern const struct SAttributes
 
 extern const struct SUniforms
 {
-    std::string m_worldMatrix;
-    std::string m_viewMatrix;
-    std::string m_projectionMatrix;
-    std::string m_normalMatrix;
+    std::string m_matrixM;
+    std::string m_matrixV;
+    std::string m_matrixP;
+    std::string m_matrixN;
+    std::string m_matrixVP;
+    std::string m_matrixMVP;
     std::string m_bonesMatrix;
     std::string m_cameraPosition;
     std::string m_globalLightPosition;
@@ -71,10 +73,12 @@ const struct SAttributes SAttributes =
 
 const struct SUniforms SUniforms =
 {
-    "MATRIX_World",
-    "MATRIX_View",
-    "MATRIX_Projection",
-    "MATRIX_Normal",
+    "u_matrixM",
+    "u_matrixV",
+    "u_matrixP",
+    "u_matrixN",
+    "u_matrixVP",
+    "u_matrixMVP",
     "MATRIX_Bones",
     "VECTOR_CameraPosition",
     "VECTOR_GlobalLightPosition",
@@ -379,10 +383,12 @@ void CShader::onResourceDataCommitFinished(ISharedResourceDataRef resourceData)
 
 void CShader::setupUniforms(void)
 {
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_WORLD] = glGetUniformLocation(m_shaderId, SUniforms.m_worldMatrix.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_VIEW] = glGetUniformLocation(m_shaderId, SUniforms.m_viewMatrix.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_PROJECTION] = glGetUniformLocation(m_shaderId, SUniforms.m_projectionMatrix.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_NORMAL] = glGetUniformLocation(m_shaderId, SUniforms.m_normalMatrix.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_M] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixM.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_V] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixV.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_P] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixP.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_N] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixN.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_VP] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixVP.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_MVP] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixMVP.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_BONES] = glGetUniformLocation(m_shaderId, SUniforms.m_bonesMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION] = glGetUniformLocation(m_shaderId, SUniforms.m_cameraPosition.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_GLOBAL_LIGHT_POSITION] = glGetUniformLocation(m_shaderId, SUniforms.m_globalLightPosition.c_str());

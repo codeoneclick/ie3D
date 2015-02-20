@@ -33,10 +33,8 @@ varying float v_fogDistance;
 
 #endif
 
-uniform mat4   MATRIX_Projection;
-uniform mat4   MATRIX_View;
-uniform mat4   MATRIX_Normal;
-uniform mat4   MATRIX_World;
+uniform mat4 u_matrixM;
+uniform mat4 u_matrixVP;
 
 uniform vec3   VECTOR_CameraPosition;
 uniform vec3   VECTOR_GlobalLightPosition;
@@ -51,8 +49,8 @@ const  vec3 k_normal = vec3(0.0, 1.0, 0.0);
 
 void main(void)
 {
-    vec4 vertexPosWS = MATRIX_World * vec4(IN_Position, 1.0);
-    gl_Position = MATRIX_Projection * MATRIX_View * vertexPosWS;
+    vec4 vertexPosWS = u_matrixM * vec4(IN_Position, 1.0);
+    gl_Position = u_matrixVP * vertexPosWS;
     
     vec2 texCoord = IN_TexCoord;
     texCoord *= k_texCoordScale;

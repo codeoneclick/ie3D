@@ -65,6 +65,7 @@ void CModel::onResourceLoaded(ISharedResourceRef resource, bool success)
             animationSequence->addLoadingHandler(shared_from_this());
             assert(animationSequence != nullptr);
         }
+        IGameObject::addComponentDebugRendering();
     }
     else if(resource->getResourceClass() == E_RESOURCE_CLASS_SEQUENCE)
     {

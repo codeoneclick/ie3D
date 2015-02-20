@@ -10,6 +10,7 @@
 #include "IRenderTechniqueHandler.h"
 #include "CTexture.h"
 #include "CComponentRendering.h"
+#include "CComponentDebugRendering.h"
 
 CRenderTechniqueWorldSpace::CRenderTechniqueWorldSpace(ui32 frameWidth, ui32 frameHeight, const std::string& name, ui32 index) :
 IRenderTechniqueBase(frameWidth, frameHeight, name, index),
@@ -171,6 +172,12 @@ void CRenderTechniqueWorldSpace::draw(void)
             if(componentRendering->isInCameraFrustum())
             {
                 componentRendering->draw(m_name);
+            }
+            
+            CSharedComponentDebugRendering componentDebugRendering = handler->getComponentDebugRendering();
+            if(componentDebugRendering)
+            {
+                componentDebugRendering->draw(m_name);
             }
         }
     }

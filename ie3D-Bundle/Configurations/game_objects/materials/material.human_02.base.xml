@@ -14,7 +14,7 @@
     clipping_w="0.0"
     is_reflecting="0"
     is_shadowing="0"
-    is_debugging="0">
+    is_debugging="1">
     <shader
         vs_filename="shaderModel.vert"
         fs_filename="shaderModel.frag"/>

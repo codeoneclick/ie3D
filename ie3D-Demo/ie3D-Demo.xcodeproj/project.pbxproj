@@ -614,6 +614,10 @@
 		21706CC91A89466F00C56C7E /* materials */ = {
 			isa = PBXGroup;
 			children = (
+				21706CF61A89475D00C56C7E /* material.human_01.base.xml */,
+				21706CF71A89475D00C56C7E /* material.human_01.reflection.xml */,
+				21706CF81A89475D00C56C7E /* material.human_01.refraction.xml */,
+				21706CF91A89475D00C56C7E /* material.human_01.shadowmap.xml */,
 				21E52BD11A9118AE005977F1 /* material.human_02.base.xml */,
 				21E52BD21A9118AE005977F1 /* material.human_02.reflection.xml */,
 				21E52BD31A9118AE005977F1 /* material.human_02.refraction.xml */,
@@ -631,10 +635,6 @@
 				21706CF31A89475D00C56C7E /* material.landscape.reflection.xml */,
 				21706CF41A89475D00C56C7E /* material.landscape.refraction.xml */,
 				21706CF51A89475D00C56C7E /* material.landscape.shadowmap.xml */,
-				21706CF61A89475D00C56C7E /* material.human_01.base.xml */,
-				21706CF71A89475D00C56C7E /* material.human_01.reflection.xml */,
-				21706CF81A89475D00C56C7E /* material.human_01.refraction.xml */,
-				21706CF91A89475D00C56C7E /* material.human_01.shadowmap.xml */,
 				21706CFA1A89475D00C56C7E /* material.ocean.base.xml */,
 				21706CFB1A89475D00C56C7E /* material.particle.emitter.base.xml */,
 				21706CFC1A89475D00C56C7E /* material.skybox.base.xml */,
