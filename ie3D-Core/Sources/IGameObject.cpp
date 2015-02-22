@@ -89,8 +89,7 @@ ISharedComponent IGameObject::getComponent(E_COMPONENT_CLASS componentClass) con
 
 void IGameObject::addComponentRendering(void)
 {
-    assert(m_configuration);
-    if(!IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
+    if(m_renderTechniqueImporter && m_configuration && !IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
     {
         ISharedConfigurationGameObject configurationGameObject = std::static_pointer_cast<IConfigurationGameObject>(m_configuration);
         CSharedComponentRendering componentRendering = std::make_shared<CComponentRendering>(configurationGameObject,
@@ -129,12 +128,13 @@ void IGameObject::removeComponentRendering(void)
     }
 }
 
-void IGameObject::addComponentDebugRendering(void)
+void IGameObject::addComponentDebugRendering(bool force)
 {
     if(m_renderTechniqueImporter && !IGameObject::isComponentExist(E_COMPONENT_CLASS_DEBUG_RENDERING))
     {
-        if(IGameObject::getComponentRendering()->getMaterial("ws.base") &&
-           IGameObject::getComponentRendering()->getMaterial("ws.base")->isDebugging() &&
+        if(((IGameObject::getComponentRendering() &&
+             IGameObject::getComponentRendering()->getMaterial("ws.base") &&
+             IGameObject::getComponentRendering()->getMaterial("ws.base")->isDebugging()) || force) &&
            m_mesh && m_mesh->isLoaded())
         {
             CSharedComponentDebugRendering componentDebugRendering = std::make_shared<CComponentDebugRendering>(m_resourceAccessor,
@@ -172,11 +172,7 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
                                         bool success)
 {
     IConfigurationLoadingHandler::onConfigurationLoaded(configuration, success);
-    
-    if(m_renderTechniqueImporter)
-    {
-        IGameObject::addComponentRendering();
-    }
+    IGameObject::addComponentRendering();
     
     if(m_sceneUpdateMgr)
     {
@@ -465,9 +461,10 @@ void IGameObject::removeLoadingDependencies(void)
 
 void IGameObject::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)
 {
-    if(techniqueImporter && m_configuration)
+    if(techniqueImporter)
     {
         m_renderTechniqueImporter = techniqueImporter;
+        
         IGameObject::addComponentRendering();
         IGameObject::addComponentDebugRendering();
     }
@@ -475,6 +472,7 @@ void IGameObject::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef t
     {
         IGameObject::removeComponentRendering();
         IGameObject::removeComponentDebugRendering();
+        
         m_renderTechniqueImporter = techniqueImporter;
     }
 }

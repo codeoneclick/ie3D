@@ -18,6 +18,7 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CConfigurationAccessor.h"
+#include "CSceneUpdateMgr.h"
 
 CLandscapeChunk::CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
                                  ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -89,9 +90,10 @@ void CLandscapeChunk::onResourceLoaded(ISharedResourceRef resource, bool success
 
 void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
-    IGameObject::onConfigurationLoaded(configuration, success);
-    IGameObject::removeComponentRendering();
-
+    if(m_sceneUpdateMgr)
+    {
+        m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this());
+    }
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

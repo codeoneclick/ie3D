@@ -68,7 +68,7 @@ protected:
     void addComponentRendering(void);
     void removeComponentRendering(void);
     
-    void addComponentDebugRendering(void);
+    void addComponentDebugRendering(bool force = false);
     void removeComponentDebugRendering(void);
     
 public:
