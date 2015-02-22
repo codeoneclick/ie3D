@@ -12,40 +12,7 @@
 CFrustum::CFrustum(CSharedCameraRef camera) :
 m_camera(camera)
 {
-    /*std::vector<int> v(INT16_MAX);
-    i32 i = 0;
-    std::generate(v.begin(), v.end(), [&]() { return i++; });
-    
-//#if defined(__PERFORMANCE_TIMER__)
-    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
-//#endif
-    
-    long long a = 0;
-    //size_t size = v.size();
-    //for(i32 i = 0; i < size; ++i)
-    //{
-    //    a = v[i];
-    //}
-    
-    //i32 a = 0;
-    std::for_each(v.cbegin(), v.cend(), [&a](int i)
-    //for(auto i : v)
-    {
-        a += i;
-    });
-    
-   
-    
-//#if defined(__PERFORMANCE_TIMER__)
-    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
-    f32 duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endTimestamp - startTimestamp).count();
-    std::cout<<"at(i): "<<duration<<std::endl;
-//#endif
-    
-    if(a != 0)
-    {
-        std::cout<<a<<std::endl;
-    }*/
+
 }
 
 CFrustum::~CFrustum(void)

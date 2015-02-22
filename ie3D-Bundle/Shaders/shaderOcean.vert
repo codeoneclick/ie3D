@@ -74,5 +74,4 @@ void main(void)
     v_vertexPosWS = vertexPosWS.xyz;
     
     v_fogDistance = length(vec3(256.0, 0.0, 256.0) - vertexPosWS.xyz);
-    v_fogDistance = clamp((v_fogDistance - 384.0) / 448.0, 0.0, 1.0);
 }
