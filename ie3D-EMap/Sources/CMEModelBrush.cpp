@@ -128,23 +128,23 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow,
     {
         case E_MODEL_BRUSH_ARROW_X:
         {
-            maxBound = glm::vec3(12.0, 1.0, 1.0);
-            minBound = glm::vec3(1.0, 0.0, 0.0);
-            color = glm::vec4(255, 0, 0, 255);
+            maxBound = glm::vec3(12.0, 0.25, 0.25);
+            minBound = glm::vec3(0.25, 0.0, 0.0);
+            color = glm::vec4(255, 0, 0, 128);
         }
             break;
         case E_MODEL_BRUSH_ARROW_Y:
         {
-            maxBound = glm::vec3(1.0, 12.0, 1.0);
+            maxBound = glm::vec3(0.25, 12.0, 0.25);
             minBound = glm::vec3(0.0, 0.0, 0.0);
-            color = glm::vec4(0, 255, 0, 255);
+            color = glm::vec4(0, 255, 0, 128);
         }
             break;
         case E_MODEL_BRUSH_ARROW_Z:
         {
-            maxBound = glm::vec3(1.0, 1.0, 12.0);
-            minBound = glm::vec3(0.0, 0.0, 1.0);
-            color = glm::vec4(0, 0, 255, 255);
+            maxBound = glm::vec3(0.25, 0.25, 12.0);
+            minBound = glm::vec3(0.0, 0.0, 0.25);
+            color = glm::vec4(0, 0, 255, 128);
         }
             break;
             
@@ -248,25 +248,25 @@ CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane,
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
-    glm::u8vec4 color = glm::u8vec4(255, 255, 0, 192);
+    glm::u8vec4 color = glm::u8vec4(255, 255, 0, 64);
     switch (plane)
     {
         case E_MODEL_BRUSH_PLANE_X:
         {
-            maxBound = glm::vec3(8.0, 8.0, 0.75);
-            minBound = glm::vec3(1.0, 1.0, 0.25);
+            maxBound = glm::vec3(8.0, 8.0, 0.25);
+            minBound = glm::vec3(1.0, 1.0, 0.4);
         }
             break;
         case E_MODEL_BRUSH_PLANE_Y:
         {
-            maxBound = glm::vec3(0.75, 8.0, 8.0);
-            minBound = glm::vec3(0.25, 1.0, 1.0);
+            maxBound = glm::vec3(0.25, 8.0, 8.0);
+            minBound = glm::vec3(0.4, 1.0, 1.0);
         }
             break;
         case E_MODEL_BRUSH_PLANE_Z:
         {
-            maxBound = glm::vec3(8.0, 0.75, 8.0);
-            minBound = glm::vec3(1.0, 0.25, 1.0);
+            maxBound = glm::vec3(8.0, 0.25, 8.0);
+            minBound = glm::vec3(1.0, 0.4, 1.0);
         }
             break;
             

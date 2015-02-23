@@ -1,6 +1,6 @@
 <model
     mesh_filename="orc_02.IE3DMESH"
-    z_order="2"
+    z_order="8"
     is_batching="0">
     <materials>
 		<material filename="material.orc_02.base.xml"/>

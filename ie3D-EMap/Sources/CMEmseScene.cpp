@@ -207,9 +207,6 @@ void CMEmseScene::onGestureRecognizerMoved(const glm::ivec2& point)
             assert(m_landscapeBrush != nullptr);
             m_landscapeBrush->setPosition(position);
             
-            assert(m_modelBrush != nullptr);
-            m_modelBrush->setPosition(position);
-            
             break;
         }
     }
@@ -388,8 +385,7 @@ void CMEmseScene::setLandscapeEditMode(E_LANDSCAPE_EDIT_MODE mode)
         case E_LANDSCAPE_EDIT_MODE_GAMEOBJECTS:
         {
             m_landscapeBrush->setVisible(false);
-            m_modelBrush->setVisible(true);
-            m_modelBrush->setPosition(m_camera->getLookAt());
+            m_modelBrush->setVisible(false);
         }
             break;
             
@@ -406,5 +402,7 @@ void CMEmseScene::addGameObjectToScene(const std::string& configurationFilename)
     model->setPosition(glm::vec3(position.x,
                                 m_landscape->getHeight(position),
                                 position.z));
+    m_modelBrush->setVisible(true);
+    m_modelBrush->setPosition(model->getPosition());
     m_models.push_back(model);
 }
