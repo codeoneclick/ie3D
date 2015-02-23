@@ -6,9 +6,9 @@
         <ws_technique filename="ws.technique.reflection.xml"/>
         <ws_technique filename="ws.technique.refraction.xml"/>
         <ws_technique filename="ws.technique.shadowmap.xml"/>
-        <ws_technique filename="ws.technique.overlapping.xml"/>
+        <!--<ws_technique filename="ws.technique.overlapping.xml"/>-->
     </ws_techniques>
     <ss_techniques>
-        <ss_technique filename="ss.technique.overlapping.xml"/>
+        <!--<ss_technique filename="ss.technique.overlapping.xml"/>-->
     </ss_techniques>
 </transition>

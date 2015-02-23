@@ -793,12 +793,13 @@ void CMainWindow::on_m_materialsComboBox_currentIndexChanged(int index)
 
 void CMainWindow::on_m_addModelToSceneButton_clicked()
 {
-    
+    QString configurationFilename = ui->m_modelsList->currentItem()->text();
+    m_mseTransition->getUIToSceneCommands()->execute<UICommandMSEAddGameObjectToScene::COMMAND>(UICommandMSEAddGameObjectToScene::GUID, configurationFilename.toUtf8().constData());
 }
 
 void CMainWindow::on_m_modelsList_currentRowChanged(int)
 {
     QString configurationFilename = ui->m_modelsList->currentItem()->text();
-    m_gopTransition->getUIToSceneCommands()->execute<UICommandGOPSetModelConfigurationName::COMMAND>(UICommandGOPSetModelConfigurationName::GUID,
+    m_gopTransition->getUIToSceneCommands()->execute<UICommandGOPSetGameObjectConfigurationName::COMMAND>(UICommandGOPSetGameObjectConfigurationName::GUID,
                                                                                                      configurationFilename.toUtf8().constData());
 }

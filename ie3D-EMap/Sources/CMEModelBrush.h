@@ -33,8 +33,12 @@ protected:
     bool isInCameraFrustum(CSharedFrustumRef cameraFrustum);
     void onDraw(CSharedMaterialRef material);
     
-    CESharedCustomModel createArrowModel(E_MODEL_BRUSH_ARROW arrow, ISharedConfigurationRef configuration);
-    CESharedCustomModel createPlaneModel(E_MODEL_BRUSH_PLANE plane, ISharedConfigurationRef configuration);
+    CESharedCustomModel createArrowModel(E_MODEL_BRUSH_ARROW arrow,
+                                         SAttributeVertex *mainVertices, ui32 verticesOffset,
+                                         ui16 *mainIndices, ui32 indicesOffset);
+    CESharedCustomModel createPlaneModel(E_MODEL_BRUSH_PLANE plane,
+                                         SAttributeVertex *mainVertices, ui32 verticesOffset,
+                                         ui16 *mainIndices, ui32 indicesOffset);
     
 public:
     
@@ -45,8 +49,6 @@ public:
     void setPosition(const glm::vec3& position);
     void setRotation(const glm::vec3& rotation);
     void setScale(const glm::vec3& scale);
-    
-    void setVisible(bool value);
     
     void setCamera(CSharedCameraRef camera);
     void setCameraFrustum(CSharedFrustumRef frustum);

@@ -97,6 +97,12 @@ m_isSpaceButtonPressed(false)
                                                                                               std::placeholders::_1));
     m_uiToSceneCommands->addCommand(UICommandMSESetLandscapeEditMode::GUID,
                                     command);
+    
+    command = std::make_shared<CCommand<UICommandMSEAddGameObjectToScene::COMMAND>>(std::bind(&CMEmseScene::addGameObjectToScene,
+                                                                                              this,
+                                                                                              std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandMSEAddGameObjectToScene::GUID,
+                                    command);
 
 }
 
@@ -140,7 +146,7 @@ void CMEmseScene::load(void)
     m_landscapeBrush->setSize(m_editableSettings.m_brushSize);
     m_landscapeBrush->setVisible(false);
     
-    m_modelBrush = transition->createModelBrush("gameobject.model.brush.xml");
+    m_modelBrush = transition->createModelBrush("gameobject.gameobject.brush.xml");
     m_root->addCustomGameObject(m_modelBrush);
     m_modelBrush->setLandscape(m_landscape);
     m_modelBrush->setVisible(false);
@@ -394,5 +400,11 @@ void CMEmseScene::setLandscapeEditMode(E_LANDSCAPE_EDIT_MODE mode)
 
 void CMEmseScene::addGameObjectToScene(const std::string& configurationFilename)
 {
-    
+    CSharedModel model = m_root->createModel(configurationFilename);
+    m_root->addModel(model);
+    glm::vec3 position = m_camera->getLookAt();
+    model->setPosition(glm::vec3(position.x,
+                                m_landscape->getHeight(position),
+                                position.z));
+    m_models.push_back(model);
 }

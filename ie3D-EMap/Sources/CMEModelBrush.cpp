@@ -46,9 +46,18 @@ void CMEModelBrush::onResourceLoaded(ISharedResourceRef, bool)
 
 }
 
-void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration, bool)
+void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
 {
     CSharedMEConfigurationModelBrush configurationModelBrush = std::static_pointer_cast<CMEConfigurationModelBrush>(configuration);
+    
+    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(8 * 6, GL_STATIC_DRAW);
+    SAttributeVertex* vertexData = vertexBuffer->lock();
+    
+    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>(36 * 6, GL_STATIC_DRAW);
+    ui16* indexData = indexBuffer->lock();
+    
+    ui32 verticesOffset = 0;
+    ui32 indicesOffset = 0;
     
     for(ui32 i = 0; i < configurationModelBrush->getElementsConfigurations().size(); ++i)
     {
@@ -57,43 +66,60 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
         if(name == "arrowX")
         {
              m_arrows.at(E_MODEL_BRUSH_ARROW_X) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_X,
-                                                                                  configuration);
+                                                                                  vertexData, verticesOffset,
+                                                                                  indexData, indicesOffset);
         }
         else if(name == "arrowY")
         {
             m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Y,
-                                                                                 configuration);
+                                                                                 vertexData, verticesOffset,
+                                                                                 indexData, indicesOffset);
         }
         else if(name == "arrowZ")
         {
             m_arrows.at(E_MODEL_BRUSH_ARROW_Z) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Z,
-                                                                                 configuration);
+                                                                                 vertexData, verticesOffset,
+                                                                                 indexData, indicesOffset);
         }
         else if(name == "planeX")
         {
             m_planes.at(E_MODEL_BRUSH_PLANE_X) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_X,
-                                                                                 configuration);
+                                                                                 vertexData, verticesOffset,
+                                                                                 indexData, indicesOffset);
         }
         else if(name == "planeY")
         {
             m_planes.at(E_MODEL_BRUSH_PLANE_Y) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Y,
-                                                                                 configuration);
+                                                                                 vertexData, verticesOffset,
+                                                                                 indexData, indicesOffset);
         }
         else if(name == "planeZ")
         {
             m_planes.at(E_MODEL_BRUSH_PLANE_Z) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Z,
-                                                                                 configuration);
+                                                                                 vertexData, verticesOffset,
+                                                                                 indexData, indicesOffset);
         }
         else
         {
             assert(false);
         }
+        verticesOffset += 8;
+        indicesOffset += 36;
     }
     
+    vertexBuffer->unlock();
+    indexBuffer->unlock();
+    
+    m_mesh = CMesh::constructCustomMesh("gameobject.brush", vertexBuffer, indexBuffer,
+                                        glm::vec3(4096.0), glm::vec3(-4096.0));
+    
+    IGameObject::onConfigurationLoaded(configuration, success);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow, ISharedConfigurationRef configuration)
+CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow,
+                                                    SAttributeVertex *mainVertexData, ui32 verticesOffset,
+                                                    ui16 *mainIndexData, ui32 indicesOffset)
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
@@ -196,28 +222,29 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow, I
     
     indexBuffer->unlock();
     
+    for(ui32 i = 0; i < 8; ++i)
+    {
+        mainVertexData[verticesOffset + i] = vertexData[i];
+    }
+    for(ui32 i = 0; i < 36; ++i)
+    {
+        mainIndexData[indicesOffset + i] = indexData[i] + verticesOffset;
+    }
+    
     CSharedMesh arrowMesh = CMesh::constructCustomMesh("arrow", vertexBuffer, indexBuffer,
                                                        glm::vec3(4096.0), glm::vec3(-4096.0));
     assert(arrowMesh != nullptr);
     
     CESharedCustomModel arrowModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     arrowModel->setCamera(m_camera);
-    arrowModel->setCameraFrustum(m_cameraFrustum);
-    arrowModel->setGlobalLightSource(m_globalLightSource);
     arrowModel->setMesh(arrowMesh);
-    
-    if(m_renderTechniqueImporter && m_sceneUpdateMgr)
-    {
-        arrowModel->onAddedToScene(m_renderTechniqueImporter,
-                                   m_sceneUpdateMgr);
-    }
-    ISharedConfigurationLoadingHandler handler = std::static_pointer_cast<IConfigurationLoadingHandler>(arrowModel);
-    handler->onConfigurationLoaded(configuration, true);
     
     return arrowModel;
 }
 
-CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane, ISharedConfigurationRef configuration)
+CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane,
+                                                    SAttributeVertex *mainVertexData, ui32 verticesOffset,
+                                                    ui16 *mainIndexData, ui32 indicesOffset)
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
@@ -317,36 +344,37 @@ CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane, I
     
     indexBuffer->unlock();
     
+    for(ui32 i = 0; i < 8; ++i)
+    {
+        mainVertexData[verticesOffset + i] = vertexData[i];
+    }
+    for(ui32 i = 0; i < 36; ++i)
+    {
+        mainIndexData[indicesOffset + i] = indexData[i] + verticesOffset;
+    }
+    
     CSharedMesh planeMesh = CMesh::constructCustomMesh("plane", vertexBuffer, indexBuffer,
                                                        glm::vec3(4096.0), glm::vec3(-4096.0));
     assert(planeMesh != nullptr);
     
     CESharedCustomModel planeModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     planeModel->setCamera(m_camera);
-    planeModel->setCameraFrustum(m_cameraFrustum);
-    planeModel->setGlobalLightSource(m_globalLightSource);
     planeModel->setMesh(planeMesh);
-    
-    if(m_renderTechniqueImporter && m_sceneUpdateMgr)
-    {
-        planeModel->onAddedToScene(m_renderTechniqueImporter,
-                                   m_sceneUpdateMgr);
-    }
-    
-    ISharedConfigurationLoadingHandler handler = std::static_pointer_cast<IConfigurationLoadingHandler>(planeModel);
-    handler->onConfigurationLoaded(configuration, true);
-    
+
     return planeModel;
 }
 
 bool CMEModelBrush::isInCameraFrustum(CSharedFrustumRef)
 {
-    return true;
+    return m_isVisible;
 }
 
-void CMEModelBrush::onDraw(CSharedMaterialRef)
+void CMEModelBrush::onDraw(CSharedMaterialRef material)
 {
-    
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    {
+        IGameObject::onDraw(material);
+    }
 }
 
 void CMEModelBrush::setLandscape(CSharedLandscapeRef landscape)
@@ -409,24 +437,6 @@ void CMEModelBrush::setScale(const glm::vec3& scale)
     }
 }
 
-void CMEModelBrush::setVisible(bool value)
-{
-    IGameObject::setVisible(value);
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        for(const auto& iterator : m_arrows)
-        {
-            assert(iterator != nullptr);
-            iterator->setVisible(value);
-        }
-        for(const auto& iterator : m_planes)
-        {
-            assert(iterator != nullptr);
-            iterator->setVisible(value);
-        }
-    }
-}
-
 void CMEModelBrush::setCamera(CSharedCameraRef camera)
 {
     IGameObject::setCamera(camera);
@@ -448,72 +458,20 @@ void CMEModelBrush::setCamera(CSharedCameraRef camera)
 void CMEModelBrush::setCameraFrustum(CSharedFrustumRef frustum)
 {
     IGameObject::setCameraFrustum(frustum);
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        for(const auto& iterator : m_arrows)
-        {
-            assert(iterator != nullptr);
-            iterator->setCameraFrustum(frustum);
-        }
-        for(const auto& iterator : m_planes)
-        {
-            assert(iterator != nullptr);
-            iterator->setCameraFrustum(frustum);
-        }
-    }
 }
 
 void CMEModelBrush::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource)
 {
     IGameObject::setGlobalLightSource(lightSource);
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        for(const auto& iterator : m_arrows)
-        {
-            assert(iterator != nullptr);
-            iterator->setGlobalLightSource(lightSource);
-        }
-        for(const auto& iterator : m_planes)
-        {
-            assert(iterator != nullptr);
-            iterator->setGlobalLightSource(lightSource);
-        }
-    }
 }
 
 void CMEModelBrush::onAddedToScene(ISharedRenderTechniqueImporterRef techniqueImporter,
                                    CSharedSceneUpdateMgrRef sceneUpdateMgr)
 {
     IGameObject::onAddedToScene(techniqueImporter, sceneUpdateMgr);
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        for(const auto& iterator : m_arrows)
-        {
-            assert(iterator != nullptr);
-            iterator->onAddedToScene(techniqueImporter, sceneUpdateMgr);
-        }
-        for(const auto& iterator : m_planes)
-        {
-            assert(iterator != nullptr);
-            iterator->onAddedToScene(techniqueImporter, sceneUpdateMgr);
-        }
-    }
 }
 
 void CMEModelBrush::onRemovedFromScene(void)
 {
     IGameObject::onRemovedFromScene();
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        for(const auto& iterator : m_arrows)
-        {
-            assert(iterator != nullptr);
-            iterator->onRemovedFromScene();
-        }
-        for(const auto& iterator : m_planes)
-        {
-            assert(iterator != nullptr);
-            iterator->onRemovedFromScene();
-        }
-    }
 }

@@ -36,6 +36,7 @@ protected:
     CSharedSkyBox m_skybox;
     CSharedLandscape m_landscape;
     CSharedMaterial m_landscapeMaterial;
+    std::list<CSharedModel> m_models;
     
     CMESharedLandscapeBrush m_landscapeBrush;
     CMESharedModelBrush m_modelBrush;

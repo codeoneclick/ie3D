@@ -79,7 +79,7 @@ namespace UICommandGOEUpdateConfigurationMaterial
     const std::string GUID = "command_11";
 };
 
-namespace UICommandGOPSetModelConfigurationName
+namespace UICommandGOPSetGameObjectConfigurationName
 {
     typedef std::function<void(const std::string&)> COMMAND;
     const std::string GUID = "command_12";
@@ -89,6 +89,12 @@ namespace UICommandMSESetLandscapeEditMode
 {
     typedef std::function<void(E_LANDSCAPE_EDIT_MODE)> COMMAND;
     const std::string GUID = "command_13";
+};
+
+namespace UICommandMSEAddGameObjectToScene
+{
+    typedef std::function<void(const std::string&)> COMMAND;
+    const std::string GUID = "command_14";
 };
 
 #endif

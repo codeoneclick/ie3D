@@ -1,0 +1,14 @@
+<model_brush
+    z_order="6">
+    <elements>
+        <element name="arrowX" color_r="255" color_g="0" color_b="0" color_a="255" height="12" width="1"/>
+        <element name="arrowY" color_r="0" color_g="255" color_b="0" color_a="255" height="12" width="1"/>
+        <element name="arrowZ" color_r="0" color_g="0" color_b="255" color_a="255" height="12" width="1"/>
+        <element name="planeX" color_r="255" color_g="255" color_b="0" color_a="192" height="8" width="8"/>
+        <element name="planeY" color_r="255" color_g="255" color_b="0" color_a="192" height="8" width="8"/>
+        <element name="planeZ" color_r="255" color_g="255" color_b="0" color_a="192" height="8" width="8"/>
+    </elements>
+    <materials>
+        <material filename="material.gameobject.brush.base.xml"/>
+    </materials>
+</model_brush>

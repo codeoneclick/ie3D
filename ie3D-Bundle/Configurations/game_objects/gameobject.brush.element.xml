@@ -1,6 +1,0 @@
-<custom_model
-    z_order="6">
-	<materials>
-		<material filename="material.brush.element.base.xml"/>
-	</materials>
-</custom_model>

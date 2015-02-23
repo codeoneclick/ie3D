@@ -21,7 +21,7 @@
     <textures>
         <texture
         filename=""
-        render_operation_name="ss.overlapping"
+        render_operation_name="ws.base"
         sampler_index="0"
         wrap_mode="GL_CLAMP_TO_EDGE"
         mag_filter="GL_LINEAR"

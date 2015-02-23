@@ -25,10 +25,10 @@ CMEgopScene::CMEgopScene(IGameTransition* root) :
 IScene(root),
 m_model(nullptr)
 {
-    ISharedCommand command = std::make_shared<CCommand<UICommandGOPSetModelConfigurationName::COMMAND>>(std::bind(&CMEgopScene::setModelConfigurationFilenameCommand,
+    ISharedCommand command = std::make_shared<CCommand<UICommandGOPSetGameObjectConfigurationName::COMMAND>>(std::bind(&CMEgopScene::setModelConfigurationFilenameCommand,
                                                                                                             this,
                                                                                                             std::placeholders::_1));
-    m_uiToSceneCommands->addCommand(UICommandGOPSetModelConfigurationName::GUID, command);
+    m_uiToSceneCommands->addCommand(UICommandGOPSetGameObjectConfigurationName::GUID, command);
 }
 
 CMEgopScene::~CMEgopScene(void)
