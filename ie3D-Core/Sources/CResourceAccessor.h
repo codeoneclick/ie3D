@@ -49,6 +49,8 @@ public:
     CSharedMesh getMesh(const std::string& filename) const;
     
     CSharedAnimationSequence getAnimationSequence(const std::string& filename) const;
+    
+    void removeLoadingDependecies(ISharedResourceLoadingHandler handler);
 };
 
 #endif 

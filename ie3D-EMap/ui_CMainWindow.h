@@ -19,6 +19,7 @@
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -35,9 +36,9 @@ class Ui_CMainWindow
 public:
     QWidget *centralWidget;
     QTabWidget *m_mainMenuTabs;
-    QWidget *sceneTab;
+    QWidget *m_sceneTab;
     QTabWidget *m_landscapePropertiesTab;
-    QWidget *landscape_heightmap;
+    QWidget *m_landscapeHeightmapTab;
     QGroupBox *generateGroupBox;
     QSpinBox *m_octavesSpinBox;
     QLabel *label;
@@ -60,7 +61,7 @@ public:
     QSlider *m_brushStrengthSlider;
     QLabel *m_brushStrengthLabel;
     QSlider *m_falloffSlider;
-    QWidget *landscape_textures;
+    QWidget *m_landscapeTexturesTab;
     QPushButton *m_texture01Btn;
     QLabel *m_texture01Label;
     QLabel *m_texture02Label;
@@ -76,10 +77,12 @@ public:
     QSpinBox *m_textureTilling02SpinBox;
     QLabel *m_textureTilling03Label;
     QSpinBox *m_textureTilling03SpinBox;
-    QWidget *models;
+    QWidget *m_landscapeGameobjectsTab;
     QWidget *m_modelsOpenGLView;
+    QListWidget *m_modelsList;
+    QPushButton *m_addModelToSceneButton;
     QWidget *m_oglWindow;
-    QWidget *gameObjectTab;
+    QWidget *m_gameObjectTab;
     QWidget *m_gameObjectGLWindow;
     QTabWidget *m_goeSettingsTab;
     QWidget *m_goeMainSettingTab;
@@ -174,9 +177,9 @@ public:
         m_mainMenuTabs->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_mainMenuTabs->setDocumentMode(true);
         m_mainMenuTabs->setMovable(true);
-        sceneTab = new QWidget();
-        sceneTab->setObjectName(QStringLiteral("sceneTab"));
-        m_landscapePropertiesTab = new QTabWidget(sceneTab);
+        m_sceneTab = new QWidget();
+        m_sceneTab->setObjectName(QStringLiteral("m_sceneTab"));
+        m_landscapePropertiesTab = new QTabWidget(m_sceneTab);
         m_landscapePropertiesTab->setObjectName(QStringLiteral("m_landscapePropertiesTab"));
         m_landscapePropertiesTab->setEnabled(true);
         m_landscapePropertiesTab->setGeometry(QRect(930, -4, 350, 760));
@@ -186,9 +189,9 @@ public:
         m_landscapePropertiesTab->setTabShape(QTabWidget::Rounded);
         m_landscapePropertiesTab->setDocumentMode(true);
         m_landscapePropertiesTab->setMovable(true);
-        landscape_heightmap = new QWidget();
-        landscape_heightmap->setObjectName(QStringLiteral("landscape_heightmap"));
-        generateGroupBox = new QGroupBox(landscape_heightmap);
+        m_landscapeHeightmapTab = new QWidget();
+        m_landscapeHeightmapTab->setObjectName(QStringLiteral("m_landscapeHeightmapTab"));
+        generateGroupBox = new QGroupBox(m_landscapeHeightmapTab);
         generateGroupBox->setObjectName(QStringLiteral("generateGroupBox"));
         generateGroupBox->setEnabled(false);
         generateGroupBox->setGeometry(QRect(10, 270, 301, 321));
@@ -269,7 +272,7 @@ public:
         m_sizeYSpinBox->setMaximum(512);
         m_sizeYSpinBox->setSingleStep(64);
         m_sizeYSpinBox->setValue(512);
-        editGroupBox = new QGroupBox(landscape_heightmap);
+        editGroupBox = new QGroupBox(m_landscapeHeightmapTab);
         editGroupBox->setObjectName(QStringLiteral("editGroupBox"));
         editGroupBox->setEnabled(false);
         editGroupBox->setGeometry(QRect(10, 10, 301, 251));
@@ -336,103 +339,109 @@ public:
         m_falloffSlider->setOrientation(Qt::Horizontal);
         m_falloffSlider->setTickPosition(QSlider::TicksAbove);
         m_falloffSlider->setTickInterval(10);
-        m_landscapePropertiesTab->addTab(landscape_heightmap, QString());
-        landscape_textures = new QWidget();
-        landscape_textures->setObjectName(QStringLiteral("landscape_textures"));
-        m_texture01Btn = new QPushButton(landscape_textures);
+        m_landscapePropertiesTab->addTab(m_landscapeHeightmapTab, QString());
+        m_landscapeTexturesTab = new QWidget();
+        m_landscapeTexturesTab->setObjectName(QStringLiteral("m_landscapeTexturesTab"));
+        m_texture01Btn = new QPushButton(m_landscapeTexturesTab);
         m_texture01Btn->setObjectName(QStringLiteral("m_texture01Btn"));
         m_texture01Btn->setGeometry(QRect(142, 40, 91, 32));
         m_texture01Btn->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_texture01Label = new QLabel(landscape_textures);
+        m_texture01Label = new QLabel(m_landscapeTexturesTab);
         m_texture01Label->setObjectName(QStringLiteral("m_texture01Label"));
         m_texture01Label->setGeometry(QRect(10, 10, 221, 16));
         m_texture01Label->setFont(font1);
         m_texture01Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_texture02Label = new QLabel(landscape_textures);
+        m_texture02Label = new QLabel(m_landscapeTexturesTab);
         m_texture02Label->setObjectName(QStringLiteral("m_texture02Label"));
         m_texture02Label->setGeometry(QRect(10, 180, 221, 16));
         m_texture02Label->setFont(font1);
         m_texture02Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_texture02Btn = new QPushButton(landscape_textures);
+        m_texture02Btn = new QPushButton(m_landscapeTexturesTab);
         m_texture02Btn->setObjectName(QStringLiteral("m_texture02Btn"));
         m_texture02Btn->setGeometry(QRect(142, 210, 91, 32));
         m_texture02Btn->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_texture03Label = new QLabel(landscape_textures);
+        m_texture03Label = new QLabel(m_landscapeTexturesTab);
         m_texture03Label->setObjectName(QStringLiteral("m_texture03Label"));
         m_texture03Label->setGeometry(QRect(10, 350, 221, 16));
         m_texture03Label->setFont(font1);
         m_texture03Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_texture03Btn = new QPushButton(landscape_textures);
+        m_texture03Btn = new QPushButton(m_landscapeTexturesTab);
         m_texture03Btn->setObjectName(QStringLiteral("m_texture03Btn"));
         m_texture03Btn->setGeometry(QRect(142, 380, 91, 32));
         m_texture03Btn->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_texture01Img = new QLabel(landscape_textures);
+        m_texture01Img = new QLabel(m_landscapeTexturesTab);
         m_texture01Img->setObjectName(QStringLiteral("m_texture01Img"));
         m_texture01Img->setGeometry(QRect(10, 40, 128, 128));
         m_texture01Img->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_texture02Img = new QLabel(landscape_textures);
+        m_texture02Img = new QLabel(m_landscapeTexturesTab);
         m_texture02Img->setObjectName(QStringLiteral("m_texture02Img"));
         m_texture02Img->setGeometry(QRect(10, 210, 128, 128));
         m_texture02Img->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_texture03Img = new QLabel(landscape_textures);
+        m_texture03Img = new QLabel(m_landscapeTexturesTab);
         m_texture03Img->setObjectName(QStringLiteral("m_texture03Img"));
         m_texture03Img->setGeometry(QRect(10, 380, 128, 128));
         m_texture03Img->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_textureTilling01SpinBox = new QSpinBox(landscape_textures);
+        m_textureTilling01SpinBox = new QSpinBox(m_landscapeTexturesTab);
         m_textureTilling01SpinBox->setObjectName(QStringLiteral("m_textureTilling01SpinBox"));
         m_textureTilling01SpinBox->setGeometry(QRect(150, 100, 91, 24));
         m_textureTilling01SpinBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_textureTilling01SpinBox->setMinimum(1);
         m_textureTilling01SpinBox->setMaximum(128);
-        m_textureTilling01Label = new QLabel(landscape_textures);
+        m_textureTilling01Label = new QLabel(m_landscapeTexturesTab);
         m_textureTilling01Label->setObjectName(QStringLiteral("m_textureTilling01Label"));
         m_textureTilling01Label->setGeometry(QRect(150, 80, 91, 20));
         m_textureTilling01Label->setFont(font1);
         m_textureTilling01Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_textureTilling02Label = new QLabel(landscape_textures);
+        m_textureTilling02Label = new QLabel(m_landscapeTexturesTab);
         m_textureTilling02Label->setObjectName(QStringLiteral("m_textureTilling02Label"));
         m_textureTilling02Label->setGeometry(QRect(150, 250, 91, 20));
         m_textureTilling02Label->setFont(font1);
         m_textureTilling02Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_textureTilling02SpinBox = new QSpinBox(landscape_textures);
+        m_textureTilling02SpinBox = new QSpinBox(m_landscapeTexturesTab);
         m_textureTilling02SpinBox->setObjectName(QStringLiteral("m_textureTilling02SpinBox"));
         m_textureTilling02SpinBox->setGeometry(QRect(150, 270, 91, 24));
         m_textureTilling02SpinBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_textureTilling02SpinBox->setMinimum(1);
         m_textureTilling02SpinBox->setMaximum(128);
-        m_textureTilling03Label = new QLabel(landscape_textures);
+        m_textureTilling03Label = new QLabel(m_landscapeTexturesTab);
         m_textureTilling03Label->setObjectName(QStringLiteral("m_textureTilling03Label"));
         m_textureTilling03Label->setGeometry(QRect(150, 420, 91, 20));
         m_textureTilling03Label->setFont(font1);
         m_textureTilling03Label->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
-        m_textureTilling03SpinBox = new QSpinBox(landscape_textures);
+        m_textureTilling03SpinBox = new QSpinBox(m_landscapeTexturesTab);
         m_textureTilling03SpinBox->setObjectName(QStringLiteral("m_textureTilling03SpinBox"));
         m_textureTilling03SpinBox->setGeometry(QRect(150, 440, 91, 24));
         m_textureTilling03SpinBox->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         m_textureTilling03SpinBox->setMinimum(1);
         m_textureTilling03SpinBox->setMaximum(128);
-        m_landscapePropertiesTab->addTab(landscape_textures, QString());
-        models = new QWidget();
-        models->setObjectName(QStringLiteral("models"));
-        m_modelsOpenGLView = new QWidget(models);
+        m_landscapePropertiesTab->addTab(m_landscapeTexturesTab, QString());
+        m_landscapeGameobjectsTab = new QWidget();
+        m_landscapeGameobjectsTab->setObjectName(QStringLiteral("m_landscapeGameobjectsTab"));
+        m_modelsOpenGLView = new QWidget(m_landscapeGameobjectsTab);
         m_modelsOpenGLView->setObjectName(QStringLiteral("m_modelsOpenGLView"));
         m_modelsOpenGLView->setGeometry(QRect(13, 10, 300, 300));
         m_modelsOpenGLView->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
-        m_landscapePropertiesTab->addTab(models, QString());
-        m_oglWindow = new QWidget(sceneTab);
+        m_modelsList = new QListWidget(m_landscapeGameobjectsTab);
+        m_modelsList->setObjectName(QStringLiteral("m_modelsList"));
+        m_modelsList->setGeometry(QRect(10, 320, 301, 151));
+        m_addModelToSceneButton = new QPushButton(m_landscapeGameobjectsTab);
+        m_addModelToSceneButton->setObjectName(QStringLiteral("m_addModelToSceneButton"));
+        m_addModelToSceneButton->setGeometry(QRect(10, 480, 301, 32));
+        m_landscapePropertiesTab->addTab(m_landscapeGameobjectsTab, QString());
+        m_oglWindow = new QWidget(m_sceneTab);
         m_oglWindow->setObjectName(QStringLiteral("m_oglWindow"));
         m_oglWindow->setEnabled(true);
         m_oglWindow->setGeometry(QRect(0, 0, 930, 756));
         m_oglWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
-        m_mainMenuTabs->addTab(sceneTab, QString());
-        gameObjectTab = new QWidget();
-        gameObjectTab->setObjectName(QStringLiteral("gameObjectTab"));
-        m_gameObjectGLWindow = new QWidget(gameObjectTab);
+        m_mainMenuTabs->addTab(m_sceneTab, QString());
+        m_gameObjectTab = new QWidget();
+        m_gameObjectTab->setObjectName(QStringLiteral("m_gameObjectTab"));
+        m_gameObjectGLWindow = new QWidget(m_gameObjectTab);
         m_gameObjectGLWindow->setObjectName(QStringLiteral("m_gameObjectGLWindow"));
         m_gameObjectGLWindow->setEnabled(true);
         m_gameObjectGLWindow->setGeometry(QRect(0, 0, 930, 756));
         m_gameObjectGLWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
-        m_goeSettingsTab = new QTabWidget(gameObjectTab);
+        m_goeSettingsTab = new QTabWidget(m_gameObjectTab);
         m_goeSettingsTab->setObjectName(QStringLiteral("m_goeSettingsTab"));
         m_goeSettingsTab->setEnabled(true);
         m_goeSettingsTab->setGeometry(QRect(930, -4, 351, 760));
@@ -602,7 +611,7 @@ public:
         m_goeAnimationsSettingTab->setObjectName(QStringLiteral("m_goeAnimationsSettingTab"));
         m_goeAnimationsSettingTab->setEnabled(true);
         m_goeSettingsTab->addTab(m_goeAnimationsSettingTab, QString());
-        m_mainMenuTabs->addTab(gameObjectTab, QString());
+        m_mainMenuTabs->addTab(m_gameObjectTab, QString());
         CMainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CMainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -611,7 +620,7 @@ public:
 
         retranslateUi(CMainWindow);
 
-        m_mainMenuTabs->setCurrentIndex(0);
+        m_mainMenuTabs->setCurrentIndex(1);
         m_landscapePropertiesTab->setCurrentIndex(2);
         m_goeSettingsTab->setCurrentIndex(1);
 
@@ -635,7 +644,7 @@ public:
         m_brushSizeLabel->setText(QApplication::translate("CMainWindow", "Brush Size:", 0));
         m_smoothLabel->setText(QApplication::translate("CMainWindow", "Smooth Coefficient:", 0));
         m_brushStrengthLabel->setText(QApplication::translate("CMainWindow", "Brush Strength:", 0));
-        m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(landscape_heightmap), QApplication::translate("CMainWindow", "Landscape", 0));
+        m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(m_landscapeHeightmapTab), QApplication::translate("CMainWindow", "Landscape", 0));
         m_texture01Btn->setText(QApplication::translate("CMainWindow", "Open...", 0));
         m_texture01Label->setText(QApplication::translate("CMainWindow", "Texture sampler 1:", 0));
         m_texture02Label->setText(QApplication::translate("CMainWindow", "Texture sampler 2:", 0));
@@ -648,9 +657,10 @@ public:
         m_textureTilling01Label->setText(QApplication::translate("CMainWindow", "Tilling:", 0));
         m_textureTilling02Label->setText(QApplication::translate("CMainWindow", "Tilling:", 0));
         m_textureTilling03Label->setText(QApplication::translate("CMainWindow", "Tilling:", 0));
-        m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(landscape_textures), QApplication::translate("CMainWindow", "Textures", 0));
-        m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(models), QApplication::translate("CMainWindow", "Models", 0));
-        m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(sceneTab), QApplication::translate("CMainWindow", "Scene", 0));
+        m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(m_landscapeTexturesTab), QApplication::translate("CMainWindow", "Textures", 0));
+        m_addModelToSceneButton->setText(QApplication::translate("CMainWindow", "Add To Scene...", 0));
+        m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(m_landscapeGameobjectsTab), QApplication::translate("CMainWindow", "Models", 0));
+        m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(m_sceneTab), QApplication::translate("CMainWindow", "Scene", 0));
         m_createGameObjectConfiguration->setText(QApplication::translate("CMainWindow", "Create configuration...", 0));
         m_goeSettingsTab->setTabText(m_goeSettingsTab->indexOf(m_goeMainSettingTab), QApplication::translate("CMainWindow", "Configuration", 0));
         m_cullFaceCheckBox->setText(QApplication::translate("CMainWindow", "  Cull Face", 0));
@@ -683,7 +693,7 @@ public:
         m_drawAllRadioButton->setText(QApplication::translate("CMainWindow", "Draw All", 0));
         m_goeSettingsTab->setTabText(m_goeSettingsTab->indexOf(m_goeMaterialsSettingTab), QApplication::translate("CMainWindow", "Materials", 0));
         m_goeSettingsTab->setTabText(m_goeSettingsTab->indexOf(m_goeAnimationsSettingTab), QApplication::translate("CMainWindow", "Animations", 0));
-        m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(gameObjectTab), QApplication::translate("CMainWindow", "Game Object", 0));
+        m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(m_gameObjectTab), QApplication::translate("CMainWindow", "Game Object", 0));
     } // retranslateUi
 
 };

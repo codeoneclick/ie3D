@@ -20,7 +20,7 @@ private:
 protected:
     
     std::unordered_map<std::string, ISharedResourceLoadingOperation> m_operationsQueue;
-    std::unordered_map<std::string, ISharedResource> m_resourceContainer;
+    std::unordered_map<std::string, ISharedResource> m_resources;
     
     std::mutex m_mutex;
     ui8 m_isRunning;
@@ -44,6 +44,8 @@ public:
     CSharedMesh startMeshLoadingOperation(const std::string& filename);
     
     CSharedAnimationSequence startAnimationSequenceLoadingOperation(const std::string& filename);
+    
+    void removeLoadingDependecies(ISharedResourceLoadingHandler handler);
     
 	void unloadResource(ISharedResourceRef resource);
 };

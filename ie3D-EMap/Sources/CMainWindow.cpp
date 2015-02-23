@@ -148,11 +148,6 @@ void CMainWindow::execute(void)
     m_mseController->gotoTransition("transition.mse.xml");
     m_mseTransition->setSceneToUICommands(m_mseSceneToUICommands);
     
-    if(ui->m_mainMenuTabs->currentIndex() != 0)
-    {
-        m_mseTransition->setPaused(true);
-    }
-    
     NSView *goeView =reinterpret_cast<NSView*>(ui->m_gameObjectGLWindow->winId());
     NSOpenGLView *goeOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
                                                                               0.0,
@@ -167,11 +162,6 @@ void CMainWindow::execute(void)
     m_goeController->gotoTransition("transition.goe.xml");
     m_goeTransition->setSceneToUICommands(m_goeSceneToUICommands);
     
-    if(ui->m_mainMenuTabs->currentIndex() != 1)
-    {
-        m_goeTransition->setPaused(true);
-    }
-    
     NSView *gopView =reinterpret_cast<NSView*>(ui->m_modelsOpenGLView->winId());
     NSOpenGLView *gopOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
                                                                               0.0,
@@ -185,10 +175,14 @@ void CMainWindow::execute(void)
     m_gopController->addTransition(m_gopTransition);
     m_gopController->gotoTransition("transition.gop.xml");
     
-    if(ui->m_landscapePropertiesTab->currentIndex() != 2)
-    {
-        m_gopTransition->setPaused(true);
-    }
+    ui->m_modelsList->addItem("gameobject.human_01.xml");
+    ui->m_modelsList->addItem("gameobject.human_02.xml");
+    ui->m_modelsList->addItem("gameobject.orc_01.xml");
+    ui->m_modelsList->addItem("gameobject.orc_02.xml");
+    ui->m_modelsList->setCurrentRow(0);
+    
+    ui->m_mainMenuTabs->setCurrentIndex(0);
+    ui->m_landscapePropertiesTab->setCurrentIndex(0);
     
 #endif
 }
@@ -425,6 +419,7 @@ void CMainWindow::on_generateButton_clicked()
 
 void CMainWindow::on_m_mainMenuTabs_currentChanged(int index)
 {
+    
     switch (index)
     {
         case 0:
@@ -448,17 +443,25 @@ void CMainWindow::on_m_mainMenuTabs_currentChanged(int index)
     }
 }
 
-void CMainWindow::on_m_landscapePropertiesTab_currentChanged(int index)
+void CMainWindow::on_m_landscapePropertiesTab_currentChanged(int)
 {
-    switch (index)
+    if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeHeightmapTab)
     {
-        case 2:
-            m_gopTransition->setPaused(false);
-            break;
-            
-        default:
-            m_gopTransition->setPaused(true);
-            break;
+        m_gopTransition->setPaused(true);
+        m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetLandscapeEditMode::COMMAND>(UICommandMSESetLandscapeEditMode::GUID,
+                                                                                                    E_LANDSCAPE_EDIT_MODE_HEIGHTMAP);
+    }
+    else if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeTexturesTab)
+    {
+        m_gopTransition->setPaused(true);
+        m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetLandscapeEditMode::COMMAND>(UICommandMSESetLandscapeEditMode::GUID,
+                                                                                                    E_LANDSCAPE_EDIT_MODE_TEXTURES);
+    }
+    else if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeGameobjectsTab)
+    {
+        m_gopTransition->setPaused(false);
+        m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetLandscapeEditMode::COMMAND>(UICommandMSESetLandscapeEditMode::GUID,
+                                                                                                    E_LANDSCAPE_EDIT_MODE_GAMEOBJECTS);
     }
 }
 
@@ -786,4 +789,16 @@ void CMainWindow::on_m_materialsComboBox_currentIndexChanged(int index)
     {
         CMainWindow::updateGOEUIConfigurationMaterial(m_goeConfigurationsMaterials.at(index));
     }
+}
+
+void CMainWindow::on_m_addModelToSceneButton_clicked()
+{
+    
+}
+
+void CMainWindow::on_m_modelsList_currentRowChanged(int)
+{
+    QString configurationFilename = ui->m_modelsList->currentItem()->text();
+    m_gopTransition->getUIToSceneCommands()->execute<UICommandGOPSetModelConfigurationName::COMMAND>(UICommandGOPSetModelConfigurationName::GUID,
+                                                                                                     configurationFilename.toUtf8().constData());
 }

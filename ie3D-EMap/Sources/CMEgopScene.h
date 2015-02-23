@@ -32,6 +32,8 @@ protected:
     void onKeyUp(i32 key);
     void onKeyDown(i32 key);
     
+    void setModelConfigurationFilenameCommand(const std::string& filename);
+    
 public:
     
     CMEgopScene(IGameTransition* root);

@@ -96,9 +96,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         m_chunks[index]->setInprogressLOD(LOD);
                         m_heightmapGenerator->runChunkLoading(i, j, LOD, [this, index, i, j, LOD](CSharedMeshRef mesh) {
                             
-                            m_chunks[index]->setRenderTechniqueImporter(m_renderTechniqueImporter);
-                            m_chunks[index]->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
-                            m_chunks[index]->setSceneUpdateMgr(m_sceneUpdateMgr);
+                            m_chunks[index]->onAddedToScene(m_renderTechniqueImporter,
+                                                            m_sceneUpdateMgr);
                             
                             m_chunks[index]->setCameraFrustum(m_cameraFrustum);
                             m_chunks[index]->setMesh(mesh);
@@ -129,10 +128,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 }
                 else if(m_chunks[index] != nullptr)
                 {
-                    m_chunks[index]->setRenderTechniqueImporter(nullptr);
-                    m_chunks[index]->setRenderTechniqueAccessor(nullptr);
-                    m_chunks[index]->setSceneUpdateMgr(nullptr);
-                    m_chunks[index]->removeLoadingDependencies();
+                    m_chunks[index]->onRemovedFromScene();
                     m_heightmapGenerator->runChunkUnLoading(i, j);
                     m_chunks[index] = nullptr;
                 }

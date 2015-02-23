@@ -78,3 +78,9 @@ CSharedAnimationSequence CResourceAccessor::getAnimationSequence(const std::stri
     assert(animationSequence != nullptr);
     return animationSequence;
 }
+
+void CResourceAccessor::removeLoadingDependecies(ISharedResourceLoadingHandler handler)
+{
+    assert(m_resourceLoader);
+    m_resourceLoader->removeLoadingDependecies(handler);
+}

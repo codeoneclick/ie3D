@@ -42,10 +42,10 @@ protected:
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
 
     CSharedSceneUpdateMgr m_sceneUpdateMgr;
-    
     CSharedResourceAccessor m_resourceAccessor;
     
     ui8 m_status;
+    bool m_isVisible;
     
     virtual void onSceneUpdate(f32 deltatime);
     
@@ -70,6 +70,9 @@ protected:
     
     void addComponentDebugRendering(bool force = false);
     void removeComponentDebugRendering(void);
+    
+    void addComponentSceneUpdate(void);
+    void removeComponentSceneUpdate(void);
     
 public:
     
@@ -97,6 +100,9 @@ public:
     
     glm::vec3 getMaxBound(void) const;
     glm::vec3 getMinBound(void) const;
+    
+    virtual void setVisible(bool value);
+    bool isVisible(void) const;
     
     virtual void setCamera(CSharedCameraRef camera);
     virtual void setCameraFrustum(CSharedFrustumRef cameraFrustum);
@@ -126,11 +132,9 @@ public:
     
     void setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler, const std::string& techniqueName = "");
     
-    virtual void removeLoadingDependencies(void);
-    
-    virtual void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);
-    virtual void setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor);
-    virtual void setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr);
+    virtual void onAddedToScene(ISharedRenderTechniqueImporterRef techniqueImporter,
+                                CSharedSceneUpdateMgrRef sceneUpdateMgr);
+    virtual void onRemovedFromScene(void);
 };
 
 #endif 

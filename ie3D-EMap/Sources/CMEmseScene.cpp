@@ -91,6 +91,13 @@ m_isSpaceButtonPressed(false)
                                                                                            std::placeholders::_4));
     m_uiToSceneCommands->addCommand(UICommandMSEGenerateHeightmap::GUID,
                                     command);
+    
+    command = std::make_shared<CCommand<UICommandMSESetLandscapeEditMode::COMMAND>>(std::bind(&CMEmseScene::setLandscapeEditMode,
+                                                                                              this,
+                                                                                              std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandMSESetLandscapeEditMode::GUID,
+                                    command);
+
 }
 
 CMEmseScene::~CMEmseScene(void)
@@ -126,14 +133,17 @@ void CMEmseScene::load(void)
     m_root->addCollisionHandler(shared_from_this());
     
     CMEmseTransition* transition = static_cast<CMEmseTransition *>(m_root);
+    
     m_landscapeBrush = transition->createLandscapeBrush("gameobject.landscape.brush.xml");
     m_root->addCustomGameObject(m_landscapeBrush);
     m_landscapeBrush->setLandscape(m_landscape);
     m_landscapeBrush->setSize(m_editableSettings.m_brushSize);
+    m_landscapeBrush->setVisible(false);
     
     m_modelBrush = transition->createModelBrush("gameobject.model.brush.xml");
     m_root->addCustomGameObject(m_modelBrush);
     m_modelBrush->setLandscape(m_landscape);
+    m_modelBrush->setVisible(false);
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, m_landscape, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
@@ -348,4 +358,41 @@ void CMEmseScene::onResourceLoaded(ISharedResourceRef resource)
                                                                               m_landscape->getTillingTexcoord(E_SHADER_SAMPLER_03),
                                                                               E_SHADER_SAMPLER_03);
     }
+}
+
+void CMEmseScene::setLandscapeEditMode(E_LANDSCAPE_EDIT_MODE mode)
+{
+    switch (mode)
+    {
+        case E_LANDSCAPE_EDIT_MODE_HEIGHTMAP:
+        {
+            m_landscapeBrush->setVisible(true);
+            m_landscapeBrush->setPosition(m_camera->getLookAt());
+            m_modelBrush->setVisible(false);
+        }
+            break;
+            
+        case E_LANDSCAPE_EDIT_MODE_TEXTURES:
+        {
+            m_landscapeBrush->setVisible(false);
+            m_modelBrush->setVisible(false);
+        }
+            break;
+            
+        case E_LANDSCAPE_EDIT_MODE_GAMEOBJECTS:
+        {
+            m_landscapeBrush->setVisible(false);
+            m_modelBrush->setVisible(true);
+            m_modelBrush->setPosition(m_camera->getLookAt());
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+void CMEmseScene::addGameObjectToScene(const std::string& configurationFilename)
+{
+    
 }

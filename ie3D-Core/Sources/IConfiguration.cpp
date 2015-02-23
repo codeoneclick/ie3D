@@ -194,7 +194,7 @@ std::string IConfiguration::getFilename(void) const
 
 IConfigurationGameObject::~IConfigurationGameObject(void)
 {
-    std::cout<<"configuration deallocated"<<std::endl;
+  
 }
 
 i32 IConfigurationGameObject::getZOrder(void) const

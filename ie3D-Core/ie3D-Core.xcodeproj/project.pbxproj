@@ -172,6 +172,9 @@
 		2133A7541A93AE5800188ADA /* CComponentDebugRendering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2133A7521A93AE5800188ADA /* CComponentDebugRendering.cpp */; };
 		2133A7551A93AE5800188ADA /* CComponentDebugRendering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2133A7521A93AE5800188ADA /* CComponentDebugRendering.cpp */; };
 		2133A7561A93AE5800188ADA /* CComponentDebugRendering.h in Headers */ = {isa = PBXBuildFile; fileRef = 2133A7531A93AE5800188ADA /* CComponentDebugRendering.h */; };
+		2133A7A51A9B1C3300188ADA /* CComponentSceneUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2133A7A31A9B1C3300188ADA /* CComponentSceneUpdate.cpp */; };
+		2133A7A61A9B1C3300188ADA /* CComponentSceneUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2133A7A31A9B1C3300188ADA /* CComponentSceneUpdate.cpp */; };
+		2133A7A71A9B1C3300188ADA /* CComponentSceneUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2133A7A41A9B1C3300188ADA /* CComponentSceneUpdate.h */; };
 		213B7F311993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F321993CC5B006F3976 /* CShaderCompiler_GLSL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */; };
 		213B7F331993CC5B006F3976 /* CShaderCompiler_GLSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */; };
@@ -448,6 +451,8 @@
 		213265DC1906A42E001C98F7 /* HEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEnums.h; path = Sources/HEnums.h; sourceTree = SOURCE_ROOT; };
 		2133A7521A93AE5800188ADA /* CComponentDebugRendering.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentDebugRendering.cpp; path = Sources/CComponentDebugRendering.cpp; sourceTree = "<group>"; };
 		2133A7531A93AE5800188ADA /* CComponentDebugRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CComponentDebugRendering.h; path = Sources/CComponentDebugRendering.h; sourceTree = "<group>"; };
+		2133A7A31A9B1C3300188ADA /* CComponentSceneUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentSceneUpdate.cpp; path = Sources/CComponentSceneUpdate.cpp; sourceTree = "<group>"; };
+		2133A7A41A9B1C3300188ADA /* CComponentSceneUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CComponentSceneUpdate.h; path = Sources/CComponentSceneUpdate.h; sourceTree = "<group>"; };
 		213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCompiler_GLSL.cpp; path = Sources/CShaderCompiler_GLSL.cpp; sourceTree = "<group>"; };
 		213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCompiler_GLSL.h; path = Sources/CShaderCompiler_GLSL.h; sourceTree = "<group>"; };
 		213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ShaderTexure2D.cpp; path = Sources/ShaderTexure2D.cpp; sourceTree = "<group>"; };
@@ -1189,6 +1194,8 @@
 				21ACE3901A7133FF0017A771 /* CComponentRendering.cpp */,
 				2133A7531A93AE5800188ADA /* CComponentDebugRendering.h */,
 				2133A7521A93AE5800188ADA /* CComponentDebugRendering.cpp */,
+				2133A7A41A9B1C3300188ADA /* CComponentSceneUpdate.h */,
+				2133A7A31A9B1C3300188ADA /* CComponentSceneUpdate.cpp */,
 				21ACE3961A713C5F0017A771 /* CComponentConfigurationLoading.h */,
 				21ACE3951A713C5F0017A771 /* CComponentConfigurationLoading.cpp */,
 			);
@@ -1945,6 +1952,7 @@
 				21A56D261A79090600C8F362 /* CConfigurationTexture.h in Headers */,
 				217334971964425B002B3F90 /* CRenderPipeline.h in Headers */,
 				21FB5C3D1A14FA6400222BEE /* CAnimationSequenceLoadingOperation.h in Headers */,
+				2133A7A71A9B1C3300188ADA /* CComponentSceneUpdate.h in Headers */,
 				2191CE78196EE0B000CE2813 /* CTextureCommiter_PNG.h in Headers */,
 				21EF00411A237FF700E0AF20 /* IOcclusionQueryHandler.h in Headers */,
 				2191CE64196EDBEF00CE2813 /* pngstruct.h in Headers */,
@@ -2073,6 +2081,7 @@
 				2191CE66196EDBEF00CE2813 /* pngtrans.c in Sources */,
 				21B0BA0B1A82AA72001CE9A0 /* CPerlinNoise.cpp in Sources */,
 				21208FA11906FB5F00FFC8D4 /* CCommonOS_win32.cpp in Sources */,
+				2133A7A61A9B1C3300188ADA /* CComponentSceneUpdate.cpp in Sources */,
 				21208FA21906FB5F00FFC8D4 /* CCommonOS_ndk.cpp in Sources */,
 				21EF00441A238D6F00E0AF20 /* ShaderOcclusionQuery.cpp in Sources */,
 				21208FA31906FB5F00FFC8D4 /* CFPSCounter.cpp in Sources */,
@@ -2240,6 +2249,7 @@
 				2191CE65196EDBEF00CE2813 /* pngtrans.c in Sources */,
 				21B0BA0A1A82AA72001CE9A0 /* CPerlinNoise.cpp in Sources */,
 				213265E51906A4AF001C98F7 /* CCommonOS_win32.cpp in Sources */,
+				2133A7A51A9B1C3300188ADA /* CComponentSceneUpdate.cpp in Sources */,
 				213265E61906A4AF001C98F7 /* CCommonOS_ndk.cpp in Sources */,
 				21EF00431A238D6F00E0AF20 /* ShaderOcclusionQuery.cpp in Sources */,
 				213265E71906A4AF001C98F7 /* CFPSCounter.cpp in Sources */,

@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "HDeclaration.h"
+#include "HMEEnums.h"
 
 namespace UICommandGOECreateConfiguration
 {
@@ -22,12 +23,6 @@ namespace UICommandGOEUpdateConfigurationsMaterials
 {
     typedef std::function<void(std::vector<CSharedConfigurationMaterial>&)> COMMAND;
     const std::string GUID = "command_02";
-};
-
-namespace UICommandGOEUpdateConfigurationMaterial
-{
-    typedef std::function<void(CSharedConfigurationMaterialRef)> COMMAND;
-    const std::string GUID = "command_11";
 };
 
 namespace UICommandMSESetBrushSize
@@ -76,6 +71,24 @@ namespace UICommandMSEGenerateHeightmap
 {
     typedef std::function<void(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)> COMMAND;
     const std::string GUID = "command_10";
+};
+
+namespace UICommandGOEUpdateConfigurationMaterial
+{
+    typedef std::function<void(CSharedConfigurationMaterialRef)> COMMAND;
+    const std::string GUID = "command_11";
+};
+
+namespace UICommandGOPSetModelConfigurationName
+{
+    typedef std::function<void(const std::string&)> COMMAND;
+    const std::string GUID = "command_12";
+};
+
+namespace UICommandMSESetLandscapeEditMode
+{
+    typedef std::function<void(E_LANDSCAPE_EDIT_MODE)> COMMAND;
+    const std::string GUID = "command_13";
 };
 
 #endif

@@ -205,11 +205,12 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow, I
     arrowModel->setCameraFrustum(m_cameraFrustum);
     arrowModel->setGlobalLightSource(m_globalLightSource);
     arrowModel->setMesh(arrowMesh);
-
-    arrowModel->setRenderTechniqueImporter(m_renderTechniqueImporter);
-    arrowModel->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
-    arrowModel->setSceneUpdateMgr(m_sceneUpdateMgr);
     
+    if(m_renderTechniqueImporter && m_sceneUpdateMgr)
+    {
+        arrowModel->onAddedToScene(m_renderTechniqueImporter,
+                                   m_sceneUpdateMgr);
+    }
     ISharedConfigurationLoadingHandler handler = std::static_pointer_cast<IConfigurationLoadingHandler>(arrowModel);
     handler->onConfigurationLoaded(configuration, true);
     
@@ -326,9 +327,11 @@ CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane, I
     planeModel->setGlobalLightSource(m_globalLightSource);
     planeModel->setMesh(planeMesh);
     
-    planeModel->setRenderTechniqueImporter(m_renderTechniqueImporter);
-    planeModel->setRenderTechniqueAccessor(m_renderTechniqueAccessor);
-    planeModel->setSceneUpdateMgr(m_sceneUpdateMgr);
+    if(m_renderTechniqueImporter && m_sceneUpdateMgr)
+    {
+        planeModel->onAddedToScene(m_renderTechniqueImporter,
+                                   m_sceneUpdateMgr);
+    }
     
     ISharedConfigurationLoadingHandler handler = std::static_pointer_cast<IConfigurationLoadingHandler>(planeModel);
     handler->onConfigurationLoaded(configuration, true);
@@ -405,6 +408,25 @@ void CMEModelBrush::setScale(const glm::vec3& scale)
         }
     }
 }
+
+void CMEModelBrush::setVisible(bool value)
+{
+    IGameObject::setVisible(value);
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    {
+        for(const auto& iterator : m_arrows)
+        {
+            assert(iterator != nullptr);
+            iterator->setVisible(value);
+        }
+        for(const auto& iterator : m_planes)
+        {
+            assert(iterator != nullptr);
+            iterator->setVisible(value);
+        }
+    }
+}
+
 void CMEModelBrush::setCamera(CSharedCameraRef camera)
 {
     IGameObject::setCamera(camera);
@@ -459,56 +481,39 @@ void CMEModelBrush::setGlobalLightSource(CSharedGlobalLightSourceRef lightSource
     }
 }
 
-void CMEModelBrush::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)
+void CMEModelBrush::onAddedToScene(ISharedRenderTechniqueImporterRef techniqueImporter,
+                                   CSharedSceneUpdateMgrRef sceneUpdateMgr)
 {
-    IGameObject::setRenderTechniqueImporter(techniqueImporter);
+    IGameObject::onAddedToScene(techniqueImporter, sceneUpdateMgr);
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         for(const auto& iterator : m_arrows)
         {
             assert(iterator != nullptr);
-            iterator->setRenderTechniqueImporter(techniqueImporter);
+            iterator->onAddedToScene(techniqueImporter, sceneUpdateMgr);
         }
         for(const auto& iterator : m_planes)
         {
             assert(iterator != nullptr);
-            iterator->setRenderTechniqueImporter(techniqueImporter);
+            iterator->onAddedToScene(techniqueImporter, sceneUpdateMgr);
         }
     }
 }
 
-void CMEModelBrush::setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor)
+void CMEModelBrush::onRemovedFromScene(void)
 {
-    IGameObject::setRenderTechniqueAccessor(techniqueAccessor);
+    IGameObject::onRemovedFromScene();
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         for(const auto& iterator : m_arrows)
         {
             assert(iterator != nullptr);
-            iterator->setRenderTechniqueAccessor(techniqueAccessor);
+            iterator->onRemovedFromScene();
         }
         for(const auto& iterator : m_planes)
         {
             assert(iterator != nullptr);
-            iterator->setRenderTechniqueAccessor(techniqueAccessor);
-        }
-    }
-}
-
-void CMEModelBrush::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
-{
-    IGameObject::setSceneUpdateMgr(sceneUpdateMgr);
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
-    {
-        for(const auto& iterator : m_arrows)
-        {
-            assert(iterator != nullptr);
-            iterator->setSceneUpdateMgr(sceneUpdateMgr);
-        }
-        for(const auto& iterator : m_planes)
-        {
-            assert(iterator != nullptr);
-            iterator->setSceneUpdateMgr(sceneUpdateMgr);
+            iterator->onRemovedFromScene();
         }
     }
 }

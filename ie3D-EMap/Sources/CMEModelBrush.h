@@ -46,16 +46,15 @@ public:
     void setRotation(const glm::vec3& rotation);
     void setScale(const glm::vec3& scale);
     
+    void setVisible(bool value);
+    
     void setCamera(CSharedCameraRef camera);
     void setCameraFrustum(CSharedFrustumRef frustum);
     void setGlobalLightSource(CSharedGlobalLightSourceRef lightSource);
     
-    void setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter);
-    void setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor);
-    void setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr);
-    
-    void enableRender(bool value);
-    void enableUpdate(bool value);
+    void onAddedToScene(ISharedRenderTechniqueImporterRef techniqueImporter,
+                        CSharedSceneUpdateMgrRef sceneUpdateMgr);
+    void onRemovedFromScene(void);
     
     void setLandscape(CSharedLandscapeRef landscape);
 };

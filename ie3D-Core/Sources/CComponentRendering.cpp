@@ -96,23 +96,3 @@ void CComponentRendering::setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER
     }
     texture->addLoadingHandler(handler);
 }
-
-void CComponentRendering::removeLoadingDependencies(ISharedResourceLoadingHandlerRef handler)
-{
-    std::for_each(m_materials.cbegin(), m_materials.cend(), [handler](std::pair<std::string, CSharedMaterial> material) {
-        CSharedShader shader = material.second->getShader();
-        if(shader)
-        {
-            shader->removeLoadingHandler(handler);
-        }
-        
-        for(ui32 i = E_SHADER_SAMPLER_01; i < E_SHADER_SAMPLER_MAX; ++i)
-        {
-            CSharedTexture texture = material.second->getTexture(static_cast<E_SHADER_SAMPLER>(i));
-            if(texture != nullptr)
-            {
-                texture->removeLoadingHandler(handler);
-            }
-        }
-    });
-}

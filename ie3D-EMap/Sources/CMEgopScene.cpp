@@ -17,11 +17,18 @@
 #include "CModel.h"
 #include "CResourceAccessor.h"
 #include "CTexture.h"
+#include "ICommand.h"
+#include "IUICommands.h"
+#include "HUICommands.h"
 
 CMEgopScene::CMEgopScene(IGameTransition* root) :
-IScene(root)
+IScene(root),
+m_model(nullptr)
 {
-
+    ISharedCommand command = std::make_shared<CCommand<UICommandGOPSetModelConfigurationName::COMMAND>>(std::bind(&CMEgopScene::setModelConfigurationFilenameCommand,
+                                                                                                            this,
+                                                                                                            std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandGOPSetModelConfigurationName::GUID, command);
 }
 
 CMEgopScene::~CMEgopScene(void)
@@ -47,9 +54,6 @@ void CMEgopScene::load(void)
     
     m_root->addCollisionHandler(shared_from_this());
     
-    m_model = m_root->createModel("gameobject.human_01.xml");
-    m_root->addModel(m_model);
-    
     m_globalLightSource->setAngle(3.0);
     m_globalLightSource->setDistanceToSun(512.0);
     m_globalLightSource->setDistanceToLookAt(32.0);
@@ -59,9 +63,12 @@ void CMEgopScene::load(void)
 
 void CMEgopScene::update(f32)
 {
-    static f32 angle = 0.0;
-    angle += 3.0;
-    m_model->setRotation(glm::vec3(0.0, angle, 0.0));
+    if(m_model)
+    {
+        static f32 angle = 0.0;
+        angle += 3.0;
+        m_model->setRotation(glm::vec3(0.0, angle, 0.0));
+    }
 }
 
 void CMEgopScene::onGestureRecognizerPressed(const glm::ivec2&, E_INPUT_BUTTON)
@@ -97,4 +104,16 @@ void CMEgopScene::onKeyUp(i32)
 void CMEgopScene::onKeyDown(i32)
 {
     
+}
+
+void CMEgopScene::setModelConfigurationFilenameCommand(const std::string& filename)
+{
+    if(m_model)
+    {
+        m_root->removeModel(m_model);
+        m_root->deleteGameObject(m_model);
+        m_model = nullptr;
+    }
+    m_model = m_root->createModel(filename);
+    m_root->addModel(m_model);
 }

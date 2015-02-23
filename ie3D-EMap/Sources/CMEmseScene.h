@@ -11,6 +11,7 @@
 
 #include "IScene.h"
 #include "HMEDeclaration.h"
+#include "HMEEnums.h"
 
 class CMapDragController;
 
@@ -51,6 +52,8 @@ protected:
     void setTextureFilename(const std::string& filename, E_SHADER_SAMPLER sampler);
     void setTillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     void generateHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
+    void setLandscapeEditMode(E_LANDSCAPE_EDIT_MODE mode);
+    void addGameObjectToScene(const std::string& configurationFilename);
     
     void onConfigurationLoaded(ISharedConfigurationRef configuration);
     void onResourceLoaded(ISharedResourceRef resource);

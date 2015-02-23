@@ -45,5 +45,4 @@ public:
     bool isInCameraFrustum(void) const;
 };
 
-
 #endif

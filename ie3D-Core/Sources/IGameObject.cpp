@@ -24,7 +24,9 @@
 #include "CComponentTransformation.h"
 #include "CComponentRendering.h"
 #include "CComponentDebugRendering.h"
+#include "CComponentSceneUpdate.h"
 #include "CConfigurationAccessor.h"
+#include "CResourceAccessor.h"
 
 IGameObject::IGameObject(CSharedResourceAccessorRef resourceAccessor,
                          ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -36,7 +38,8 @@ m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_renderTechniqueImporter(nullptr),
 m_sceneUpdateMgr(nullptr),
 m_materialBindImposer(nullptr),
-m_status(E_LOADING_STATUS_UNLOADED)
+m_status(E_LOADING_STATUS_UNLOADED),
+m_isVisible(true)
 {
     m_materialBindImposer = [this](CSharedMaterialRef material)
     {
@@ -119,7 +122,10 @@ void IGameObject::removeComponentRendering(void)
         for(const auto& iterator : configurationGameObject->getMaterialsConfigurations())
         {
             CSharedConfigurationMaterial configurationMaterial = std::static_pointer_cast<CConfigurationMaterial>(iterator);
-            m_renderTechniqueImporter->removeRenderTechniqueHandler(configurationMaterial->getRenderTechniqueName(), shared_from_this());
+            if(m_renderTechniqueImporter->isSupportingRenderTechnique(configurationMaterial->getRenderTechniqueName()))
+            {
+                m_renderTechniqueImporter->removeRenderTechniqueHandler(configurationMaterial->getRenderTechniqueName(), shared_from_this());
+            }
         };
     }
     if(IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
@@ -154,6 +160,30 @@ void IGameObject::removeComponentDebugRendering(void)
     if(IGameObject::isComponentExist(E_COMPONENT_CLASS_DEBUG_RENDERING))
     {
         IGameObject::removeComponent(IGameObject::getComponent(E_COMPONENT_CLASS_DEBUG_RENDERING));
+    }
+}
+
+void IGameObject::addComponentSceneUpdate(void)
+{
+    if(m_sceneUpdateMgr && !IGameObject::isComponentExist(E_COMPONENT_CLASS_SCENE_UPDATE))
+    {
+        CSharedComponentSceneUpdate componentSceneUpdate = std::make_shared<CComponentSceneUpdate>();
+        componentSceneUpdate->setSceneUpdateCommand(std::bind(&IGameObject::onSceneUpdate, this, std::placeholders::_1));
+        IGameObject::addComponent(componentSceneUpdate);
+        
+        m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this());
+    }
+}
+
+void IGameObject::removeComponentSceneUpdate(void)
+{
+    if(m_sceneUpdateMgr)
+    {
+        m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
+    }
+    if(IGameObject::isComponentExist(E_COMPONENT_CLASS_SCENE_UPDATE))
+    {
+        IGameObject::removeComponent(IGameObject::getComponent(E_COMPONENT_CLASS_SCENE_UPDATE));
     }
 }
 
@@ -216,7 +246,7 @@ bool IGameObject::isInCameraFrustum(CSharedFrustumRef cameraFrustum)
     assert(cameraFrustum != nullptr);
     glm::vec3 maxBound = IGameObject::getMaxBound() + IGameObject::getPosition();
     glm::vec3 minBound = IGameObject::getMinBound() + IGameObject::getPosition();
-    return cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
+    return cameraFrustum->isBoundBoxInFrustum(maxBound, minBound) && m_isVisible;
 }
 
 CSharedComponentRendering IGameObject::getComponentRendering(void) const
@@ -389,6 +419,16 @@ glm::vec3 IGameObject::getMinBound(void) const
     return m_mesh && m_mesh->isLoaded() ? m_mesh->getMinBound() * IGameObject::getScale() : glm::vec3(0.0f);
 }
 
+void IGameObject::setVisible(bool value)
+{
+    m_isVisible = value;
+}
+
+bool IGameObject::isVisible(void) const
+{
+    return m_isVisible;
+}
+
 void IGameObject::setCamera(CSharedCameraRef camera)
 {
     m_camera = camera;
@@ -446,52 +486,29 @@ void IGameObject::setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler
     }
 }
 
-void IGameObject::removeLoadingDependencies(void)
+void IGameObject::onAddedToScene(ISharedRenderTechniqueImporterRef techniqueImporter,
+                                 CSharedSceneUpdateMgrRef sceneUpdateMgr)
 {
-    if (IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
-    {
-        CSharedComponentRendering componentRendering = IGameObject::getComponentRendering();
-        componentRendering->removeLoadingDependencies(shared_from_this());
-    }
-    if(m_mesh != nullptr)
-    {
-        m_mesh->removeLoadingHandler(shared_from_this());
-    }
+    assert(techniqueImporter);
+    assert(sceneUpdateMgr);
+    
+    m_renderTechniqueImporter = techniqueImporter;
+    m_sceneUpdateMgr = sceneUpdateMgr;
+    
+    IGameObject::addComponentRendering();
+    IGameObject::addComponentDebugRendering();
+    IGameObject::addComponentSceneUpdate();
 }
 
-void IGameObject::setRenderTechniqueImporter(ISharedRenderTechniqueImporterRef techniqueImporter)
+void IGameObject::onRemovedFromScene(void)
 {
-    if(techniqueImporter)
-    {
-        m_renderTechniqueImporter = techniqueImporter;
-        
-        IGameObject::addComponentRendering();
-        IGameObject::addComponentDebugRendering();
-    }
-    else if(!techniqueImporter)
-    {
-        IGameObject::removeComponentRendering();
-        IGameObject::removeComponentDebugRendering();
-        
-        m_renderTechniqueImporter = techniqueImporter;
-    }
-}
-
-void IGameObject::setRenderTechniqueAccessor(ISharedRenderTechniqueAccessorRef techniqueAccessor)
-{
-    m_renderTechniqueAccessor = techniqueAccessor;
-}
-
-void IGameObject::setSceneUpdateMgr(CSharedSceneUpdateMgrRef sceneUpdateMgr)
-{
-    if(sceneUpdateMgr)
-    {
-        m_sceneUpdateMgr = sceneUpdateMgr;
-        m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this());
-    }
-    else if(!sceneUpdateMgr && m_sceneUpdateMgr)
-    {
-        m_sceneUpdateMgr->UnregisterSceneUpdateHandler(shared_from_this());
-        m_sceneUpdateMgr = sceneUpdateMgr;
-    }
+    IGameObject::removeComponentRendering();
+    IGameObject::removeComponentDebugRendering();
+    IGameObject::removeComponentSceneUpdate();
+    
+    assert(m_resourceAccessor);
+    m_resourceAccessor->removeLoadingDependecies(shared_from_this());
+    
+    m_renderTechniqueImporter = nullptr;
+    m_sceneUpdateMgr = nullptr;
 }

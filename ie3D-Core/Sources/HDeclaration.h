@@ -336,7 +336,9 @@ class CComponentDebugRendering;
 typedef std::shared_ptr<CComponentDebugRendering> CSharedComponentDebugRendering;
 typedef const CSharedComponentDebugRendering& CSharedComponentDebugRenderingRef;
 
-
+class CComponentSceneUpdate;
+typedef std::shared_ptr<CComponentSceneUpdate> CSharedComponentSceneUpdate;
+typedef const CSharedComponentSceneUpdate& CSharedComponentSceneUpdateRef;
 
 class ICommand;
 typedef std::shared_ptr<ICommand> ISharedCommand;

@@ -146,6 +146,10 @@ private slots:
 
     void on_m_materialsComboBox_currentIndexChanged(int index);
 
+    void on_m_addModelToSceneButton_clicked();
+
+    void on_m_modelsList_currentRowChanged(int currentRow);
+
 private:
     
     Ui::CMainWindow *ui;

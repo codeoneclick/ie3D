@@ -67,8 +67,6 @@ public:
     
     void setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler,
                     ISharedResourceLoadingHandlerRef handler, const std::string& techniqueName = "");
-    
-    void removeLoadingDependencies(ISharedResourceLoadingHandlerRef handler);
 };
 
 #endif

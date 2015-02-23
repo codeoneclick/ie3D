@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CMainWindow_t {
-    QByteArrayData data[44];
-    char stringdata[1414];
+    QByteArrayData data[47];
+    char stringdata[1494];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -72,7 +72,10 @@ QT_MOC_LITERAL(39, 1230, 34),
 QT_MOC_LITERAL(40, 1265, 35),
 QT_MOC_LITERAL(41, 1301, 31),
 QT_MOC_LITERAL(42, 1333, 36),
-QT_MOC_LITERAL(43, 1370, 42)
+QT_MOC_LITERAL(43, 1370, 42),
+QT_MOC_LITERAL(44, 1413, 34),
+QT_MOC_LITERAL(45, 1448, 33),
+QT_MOC_LITERAL(46, 1482, 10)
     },
     "CMainWindow\0on_m_brushSizeSlider_valueChanged\0"
     "\0value\0on_m_brushStrengthSlider_valueChanged\0"
@@ -113,6 +116,9 @@ QT_MOC_LITERAL(43, 1370, 42)
     "on_m_drawAllRadioButton_clicked\0"
     "on_m_materialEnabledCheckBox_clicked\0"
     "on_m_materialsComboBox_currentIndexChanged\0"
+    "on_m_addModelToSceneButton_clicked\0"
+    "on_m_modelsList_currentRowChanged\0"
+    "currentRow\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -122,7 +128,7 @@ static const uint qt_meta_data_CMainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      39,   14, // methods
+      41,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -130,45 +136,47 @@ static const uint qt_meta_data_CMainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  209,    2, 0x08,
-       4,    1,  212,    2, 0x08,
-       5,    1,  215,    2, 0x08,
-       6,    1,  218,    2, 0x08,
-       7,    0,  221,    2, 0x08,
-       8,    0,  222,    2, 0x08,
-       9,    0,  223,    2, 0x08,
-      10,    0,  224,    2, 0x08,
-      11,    1,  225,    2, 0x08,
-      13,    1,  228,    2, 0x08,
-      14,    1,  231,    2, 0x08,
-      15,    0,  234,    2, 0x08,
-      16,    1,  235,    2, 0x08,
-      18,    1,  238,    2, 0x08,
-      19,    0,  241,    2, 0x08,
-      20,    1,  242,    2, 0x08,
-      21,    1,  245,    2, 0x08,
-      22,    1,  248,    2, 0x08,
-      23,    1,  251,    2, 0x08,
-      24,    1,  254,    2, 0x08,
-      25,    1,  257,    2, 0x08,
-      26,    1,  260,    2, 0x08,
-      27,    1,  263,    2, 0x08,
-      28,    1,  266,    2, 0x08,
-      29,    1,  269,    2, 0x08,
-      30,    1,  272,    2, 0x08,
-      31,    1,  275,    2, 0x08,
-      32,    1,  278,    2, 0x08,
-      33,    1,  281,    2, 0x08,
-      34,    1,  284,    2, 0x08,
-      35,    0,  287,    2, 0x08,
-      36,    0,  288,    2, 0x08,
-      37,    0,  289,    2, 0x08,
-      38,    0,  290,    2, 0x08,
-      39,    1,  291,    2, 0x08,
-      40,    0,  294,    2, 0x08,
-      41,    0,  295,    2, 0x08,
-      42,    0,  296,    2, 0x08,
-      43,    1,  297,    2, 0x08,
+       1,    1,  219,    2, 0x08,
+       4,    1,  222,    2, 0x08,
+       5,    1,  225,    2, 0x08,
+       6,    1,  228,    2, 0x08,
+       7,    0,  231,    2, 0x08,
+       8,    0,  232,    2, 0x08,
+       9,    0,  233,    2, 0x08,
+      10,    0,  234,    2, 0x08,
+      11,    1,  235,    2, 0x08,
+      13,    1,  238,    2, 0x08,
+      14,    1,  241,    2, 0x08,
+      15,    0,  244,    2, 0x08,
+      16,    1,  245,    2, 0x08,
+      18,    1,  248,    2, 0x08,
+      19,    0,  251,    2, 0x08,
+      20,    1,  252,    2, 0x08,
+      21,    1,  255,    2, 0x08,
+      22,    1,  258,    2, 0x08,
+      23,    1,  261,    2, 0x08,
+      24,    1,  264,    2, 0x08,
+      25,    1,  267,    2, 0x08,
+      26,    1,  270,    2, 0x08,
+      27,    1,  273,    2, 0x08,
+      28,    1,  276,    2, 0x08,
+      29,    1,  279,    2, 0x08,
+      30,    1,  282,    2, 0x08,
+      31,    1,  285,    2, 0x08,
+      32,    1,  288,    2, 0x08,
+      33,    1,  291,    2, 0x08,
+      34,    1,  294,    2, 0x08,
+      35,    0,  297,    2, 0x08,
+      36,    0,  298,    2, 0x08,
+      37,    0,  299,    2, 0x08,
+      38,    0,  300,    2, 0x08,
+      39,    1,  301,    2, 0x08,
+      40,    0,  304,    2, 0x08,
+      41,    0,  305,    2, 0x08,
+      42,    0,  306,    2, 0x08,
+      43,    1,  307,    2, 0x08,
+      44,    0,  310,    2, 0x08,
+      45,    1,  311,    2, 0x08,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -210,6 +218,8 @@ static const uint qt_meta_data_CMainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   46,
 
        0        // eod
 };
@@ -258,6 +268,8 @@ void CMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 36: _t->on_m_drawAllRadioButton_clicked(); break;
         case 37: _t->on_m_materialEnabledCheckBox_clicked(); break;
         case 38: _t->on_m_materialsComboBox_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 39: _t->on_m_addModelToSceneButton_clicked(); break;
+        case 40: _t->on_m_modelsList_currentRowChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -290,13 +302,13 @@ int CMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 39)
+        if (_id < 41)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 39;
+        _id -= 41;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 39)
+        if (_id < 41)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 39;
+        _id -= 41;
     }
     return _id;
 }
