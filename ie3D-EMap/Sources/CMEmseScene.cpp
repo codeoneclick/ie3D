@@ -31,12 +31,17 @@
 #include "ICommand.h"
 #include "IUICommands.h"
 #include "HUICommands.h"
+#include "CMEModelBrush.h"
+#include "CECustomModel.h"
 
 CMEmseScene::CMEmseScene(IGameTransition* root) :
 IScene(root),
 m_landscapeMaterial(nullptr),
+m_selectedGameObject(nullptr),
+m_selectedBrushElement(nullptr),
 m_landscapeBrush(nullptr),
-m_previousDraggedPoint(glm::ivec2(0, 0)),
+m_previousDraggedPoint2D(glm::ivec2(0, 0)),
+m_previousDraggedPoint3D(glm::vec3(0.0f)),
 m_isSpaceButtonPressed(false)
 {
     m_editableSettings.m_brushSize = 4;
@@ -146,10 +151,10 @@ void CMEmseScene::load(void)
     m_landscapeBrush->setSize(m_editableSettings.m_brushSize);
     m_landscapeBrush->setVisible(false);
     
-    m_modelBrush = transition->createModelBrush("gameobject.gameobject.brush.xml");
-    m_root->addCustomGameObject(m_modelBrush);
-    m_modelBrush->setLandscape(m_landscape);
-    m_modelBrush->setVisible(false);
+    m_gameObjectBrush = transition->createModelBrush("gameobject.gameobject.brush.xml");
+    m_root->addCustomGameObject(m_gameObjectBrush);
+    m_gameObjectBrush->setLandscape(m_landscape);
+    m_gameObjectBrush->setVisible(false);
     
     m_mapDragController = std::make_shared<CMapDragController>(m_camera, m_landscape, 0.1,
                                                                glm::vec3(0.0, 0.0, 0.0),
@@ -177,11 +182,29 @@ void CMEmseScene::update(f32 deltatime)
 std::vector<ISharedGameObject> CMEmseScene::colliders(void)
 {
     std::vector<ISharedGameObject> colliders;
-    for(ui32 i = 0; i < m_landscape->getChunks().size(); ++i)
+    for(const auto& it : m_landscape->getChunks())
     {
-        if(m_landscape->getChunks().at(i) != nullptr)
+        if(it != nullptr)
         {
-            colliders.push_back(m_landscape->getChunks().at(i));
+            colliders.push_back(it);
+        }
+    }
+    if(m_landscapeEditMode == E_LANDSCAPE_EDIT_MODE_GAMEOBJECTS)
+    {
+        for(const auto& it : m_models)
+        {
+            colliders.push_back(it);
+        }
+        if(m_gameObjectBrush->isVisible())
+        {
+            for(const auto& it : m_gameObjectBrush->getArrows())
+            {
+                colliders.push_back(it);
+            }
+            for(const auto& it : m_gameObjectBrush->getPlanes())
+            {
+                colliders.push_back(it);
+            }
         }
     }
     return colliders;
@@ -191,7 +214,72 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
 {
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
     {
-        m_previousDraggedPoint = point;
+        m_previousDraggedPoint2D = point;
+        bool isIntersectedWithGameObjectBrush = false;
+        if(m_gameObjectBrush->isVisible())
+        {
+            /*std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> triangles;
+            triangles.push_back(std::make_tuple(glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
+                                                glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
+                                                glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y,  4096.0)));
+            
+            triangles.push_back(std::make_tuple(glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y,  4096.0),
+                                                glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
+                                                glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y,  4096.0)));*/
+            
+            glm::vec3 pressedPoint3D;
+            for(const auto& it : m_gameObjectBrush->getArrows())
+            {
+                if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point))
+                {
+                    isIntersectedWithGameObjectBrush = true;
+                    glm::ray ray;
+                    CCollisionMgr::unproject(point, m_camera->getVMatrix(),
+                                             m_camera->getVMatrix(),
+                                             m_camera->getViewport(),
+                                             &ray);
+                    m_previousDraggedPoint3D = ray.getDirection() * m_camera->getFar();
+                    m_selectedBrushElement = it;
+                    break;
+                }
+            }
+            if(!isIntersectedWithGameObjectBrush)
+            {
+                for(const auto& it : m_gameObjectBrush->getPlanes())
+                {
+                    if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point))
+                    {
+                        isIntersectedWithGameObjectBrush = true;
+                        CCollisionMgr::isGameObjectIntersected(m_camera, it, point, &pressedPoint3D);
+                        m_previousDraggedPoint3D = pressedPoint3D;
+                        m_selectedBrushElement = it;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if(!isIntersectedWithGameObjectBrush)
+        {
+            m_selectedGameObject = nullptr;
+            m_selectedBrushElement = nullptr;
+            for(const auto& it : m_models)
+            {
+                if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point))
+                {
+                    m_selectedGameObject = it;
+                }
+            }
+            if(m_selectedGameObject)
+            {
+                m_gameObjectBrush->setVisible(true);
+                m_gameObjectBrush->setPosition(m_selectedGameObject->getPosition());
+            }
+            else
+            {
+                m_gameObjectBrush->setVisible(false);
+            }
+        }
     }
 }
 
@@ -214,13 +302,141 @@ void CMEmseScene::onGestureRecognizerMoved(const glm::ivec2& point)
 
 void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
-    if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT)
+    if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT &&
+       m_landscapeEditMode == E_LANDSCAPE_EDIT_MODE_HEIGHTMAP)
     {
         assert(m_landscapeBrush != nullptr);
-        m_landscape->pressureHeight(m_landscapeBrush->getPosition(), (m_previousDraggedPoint.y - point.y));
-        m_previousDraggedPoint = point;
+        m_landscape->pressureHeight(m_landscapeBrush->getPosition(), (m_previousDraggedPoint2D.y - point.y));
         m_landscapeBrush->setPosition(m_landscapeBrush->getPosition());
     }
+    else if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT &&
+            m_landscapeEditMode == E_LANDSCAPE_EDIT_MODE_GAMEOBJECTS)
+    {
+        bool isIntersectedWithGameObjectBrush = false;
+        if(m_gameObjectBrush->isVisible() && m_selectedBrushElement)
+        {
+            /*std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> triangles;
+            triangles.push_back(std::make_tuple(glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
+                                                glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
+                                                glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y,  4096.0)));
+            
+            triangles.push_back(std::make_tuple(glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y,  4096.0),
+                                                glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
+                                                glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y,  4096.0)));*/
+
+            ui32 index = 0;
+            glm::vec3 draggedPoint3D;
+            for(const auto& it : m_gameObjectBrush->getArrows())
+            {
+                if(m_selectedBrushElement == it)
+                {
+                    isIntersectedWithGameObjectBrush = true;
+                    glm::ray ray;
+                    CCollisionMgr::unproject(point, m_camera->getVMatrix(),
+                                             m_camera->getVMatrix(),
+                                             m_camera->getViewport(),
+                                             &ray);
+                    draggedPoint3D = ray.getDirection() * m_camera->getFar();
+                    //CCollisionMgr::isTrianglesIntersected(m_camera, triangles, point, &draggedPoint3D);
+                    switch (index)
+                    {
+                        case E_MODEL_BRUSH_ARROW_X:
+                        {
+                            assert(m_selectedGameObject);
+                            glm::vec3 position = m_selectedGameObject->getPosition();
+                            position.x += (m_previousDraggedPoint3D.x - draggedPoint3D.x) / 50.0;
+                            m_selectedGameObject->setPosition(position);
+                            m_gameObjectBrush->setPosition(position);
+                        }
+                            break;
+                            
+                        case E_MODEL_BRUSH_ARROW_Y:
+                        {
+                            assert(m_selectedGameObject);
+                            glm::vec3 position = m_selectedGameObject->getPosition();
+                            position.y += (m_previousDraggedPoint3D.y - draggedPoint3D.y) / 50.0;
+                            m_selectedGameObject->setPosition(position);
+                            m_gameObjectBrush->setPosition(position);
+                        }
+                            break;
+                            
+                        case E_MODEL_BRUSH_ARROW_Z:
+                        {
+                            assert(m_selectedGameObject);
+                            glm::vec3 position = m_selectedGameObject->getPosition();
+                            position.z += (m_previousDraggedPoint3D.z - draggedPoint3D.z) / 50.0;
+                            m_selectedGameObject->setPosition(position);
+                            m_gameObjectBrush->setPosition(position);
+                        }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    m_previousDraggedPoint3D = draggedPoint3D;
+                    break;
+                }
+                index++;
+            }
+            if(!isIntersectedWithGameObjectBrush)
+            {
+                index = 0;
+                for(const auto& it : m_gameObjectBrush->getPlanes())
+                {
+                    if(CCollisionMgr::isGameObjectIntersected(m_camera, it, point, &draggedPoint3D))
+                    {
+                        isIntersectedWithGameObjectBrush = true;
+                        switch (index)
+                        {
+                            case E_MODEL_BRUSH_PLANE_YZ:
+                            {
+                                assert(m_selectedGameObject);
+                                glm::vec3 position = m_selectedGameObject->getPosition();
+                                
+                                position.x += (draggedPoint3D.x - m_previousDraggedPoint3D.x);
+                                position.y += (draggedPoint3D.y - m_previousDraggedPoint3D.y);
+                                m_selectedGameObject->setPosition(position);
+                                m_gameObjectBrush->setPosition(position);
+                            }
+                                break;
+                                
+                            case E_MODEL_BRUSH_PLANE_XZ:
+                            {
+                                assert(m_selectedGameObject);
+                                glm::vec3 position = m_selectedGameObject->getPosition();
+                                
+                                position.x += (draggedPoint3D.x - m_previousDraggedPoint3D.x);
+                                position.z += (draggedPoint3D.z - m_previousDraggedPoint3D.z);
+                                
+                                m_selectedGameObject->setPosition(position);
+                                m_gameObjectBrush->setPosition(position);
+                            }
+                                break;
+                                
+                            case E_MODEL_BRUSH_PLANE_XY:
+                            {
+                                assert(m_selectedGameObject);
+                                glm::vec3 position = m_selectedGameObject->getPosition();
+                                position.y += (draggedPoint3D.y - m_previousDraggedPoint3D.y);
+                                position.z += (draggedPoint3D.z - m_previousDraggedPoint3D.z);
+                                
+                                m_selectedGameObject->setPosition(position);
+                                m_gameObjectBrush->setPosition(position);
+                            }
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                        m_previousDraggedPoint3D = draggedPoint3D;
+                        break;
+                    }
+                    index++;
+                }
+            }
+        }
+    }
+    m_previousDraggedPoint2D = point;
 }
 
 void CMEmseScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
@@ -230,7 +446,8 @@ void CMEmseScene::onGestureRecognizerReleased(const glm::ivec2&, E_INPUT_BUTTON)
 
 void CMEmseScene::onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction)
 {
-    if(!m_isSpaceButtonPressed)
+    if(!m_isSpaceButtonPressed &&
+       m_landscapeEditMode == E_LANDSCAPE_EDIT_MODE_HEIGHTMAP)
     {
         if(direction == E_SCROLL_WHEEL_DIRECTION_FORWARD &&
            m_editableSettings.m_brushSize < 32.0)
@@ -371,27 +588,28 @@ void CMEmseScene::setLandscapeEditMode(E_LANDSCAPE_EDIT_MODE mode)
         {
             m_landscapeBrush->setVisible(true);
             m_landscapeBrush->setPosition(m_camera->getLookAt());
-            m_modelBrush->setVisible(false);
+            m_gameObjectBrush->setVisible(false);
         }
             break;
             
         case E_LANDSCAPE_EDIT_MODE_TEXTURES:
         {
             m_landscapeBrush->setVisible(false);
-            m_modelBrush->setVisible(false);
+            m_gameObjectBrush->setVisible(false);
         }
             break;
             
         case E_LANDSCAPE_EDIT_MODE_GAMEOBJECTS:
         {
             m_landscapeBrush->setVisible(false);
-            m_modelBrush->setVisible(false);
+            m_gameObjectBrush->setVisible(false);
         }
             break;
             
         default:
             break;
     }
+    m_landscapeEditMode = mode;
 }
 
 void CMEmseScene::addGameObjectToScene(const std::string& configurationFilename)
@@ -402,7 +620,8 @@ void CMEmseScene::addGameObjectToScene(const std::string& configurationFilename)
     model->setPosition(glm::vec3(position.x,
                                 m_landscape->getHeight(position),
                                 position.z));
-    m_modelBrush->setVisible(true);
-    m_modelBrush->setPosition(model->getPosition());
+    m_gameObjectBrush->setVisible(true);
+    m_gameObjectBrush->setPosition(model->getPosition());
     m_models.push_back(model);
+    m_selectedGameObject = model;
 }

@@ -26,9 +26,9 @@ m_model(nullptr)
     m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = nullptr;
     m_arrows.at(E_MODEL_BRUSH_ARROW_Z) = nullptr;
     
-    m_planes.at(E_MODEL_BRUSH_PLANE_X) = nullptr;
-    m_planes.at(E_MODEL_BRUSH_PLANE_Y) = nullptr;
-    m_planes.at(E_MODEL_BRUSH_PLANE_Z) = nullptr;
+    m_planes.at(E_MODEL_BRUSH_PLANE_YZ) = nullptr;
+    m_planes.at(E_MODEL_BRUSH_PLANE_XZ) = nullptr;
+    m_planes.at(E_MODEL_BRUSH_PLANE_XY) = nullptr;
 }
 
 CMEModelBrush::~CMEModelBrush(void)
@@ -83,21 +83,21 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
         }
         else if(name == "planeX")
         {
-            m_planes.at(E_MODEL_BRUSH_PLANE_X) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_X,
-                                                                                 vertexData, verticesOffset,
-                                                                                 indexData, indicesOffset);
+            m_planes.at(E_MODEL_BRUSH_PLANE_YZ) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_YZ,
+                                                                                  vertexData, verticesOffset,
+                                                                                  indexData, indicesOffset);
         }
         else if(name == "planeY")
         {
-            m_planes.at(E_MODEL_BRUSH_PLANE_Y) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Y,
-                                                                                 vertexData, verticesOffset,
-                                                                                 indexData, indicesOffset);
+            m_planes.at(E_MODEL_BRUSH_PLANE_XZ) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_XZ,
+                                                                                  vertexData, verticesOffset,
+                                                                                  indexData, indicesOffset);
         }
         else if(name == "planeZ")
         {
-            m_planes.at(E_MODEL_BRUSH_PLANE_Z) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_Z,
-                                                                                 vertexData, verticesOffset,
-                                                                                 indexData, indicesOffset);
+            m_planes.at(E_MODEL_BRUSH_PLANE_XY) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_XY,
+                                                                                  vertexData, verticesOffset,
+                                                                                  indexData, indicesOffset);
         }
         else
         {
@@ -112,6 +112,7 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
     
     m_mesh = CMesh::constructCustomMesh("gameobject.brush", vertexBuffer, indexBuffer,
                                         glm::vec3(4096.0), glm::vec3(-4096.0));
+    m_mesh->updateBounds();
     
     IGameObject::onConfigurationLoaded(configuration, success);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
@@ -128,21 +129,21 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow,
     {
         case E_MODEL_BRUSH_ARROW_X:
         {
-            maxBound = glm::vec3(12.0, 0.25, 0.25);
+            maxBound = glm::vec3(12.0, 0.5, 0.5);
             minBound = glm::vec3(0.25, 0.0, 0.0);
             color = glm::vec4(255, 0, 0, 128);
         }
             break;
         case E_MODEL_BRUSH_ARROW_Y:
         {
-            maxBound = glm::vec3(0.25, 12.0, 0.25);
+            maxBound = glm::vec3(0.5, 12.0, 0.5);
             minBound = glm::vec3(0.0, 0.0, 0.0);
             color = glm::vec4(0, 255, 0, 128);
         }
             break;
         case E_MODEL_BRUSH_ARROW_Z:
         {
-            maxBound = glm::vec3(0.25, 0.25, 12.0);
+            maxBound = glm::vec3(0.5, 0.5, 12.0);
             minBound = glm::vec3(0.0, 0.0, 0.25);
             color = glm::vec4(0, 0, 255, 128);
         }
@@ -233,7 +234,7 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow,
     
     CSharedMesh arrowMesh = CMesh::constructCustomMesh("arrow", vertexBuffer, indexBuffer,
                                                        glm::vec3(4096.0), glm::vec3(-4096.0));
-    assert(arrowMesh != nullptr);
+    arrowMesh->updateBounds();
     
     CESharedCustomModel arrowModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     arrowModel->setCamera(m_camera);
@@ -251,22 +252,22 @@ CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane,
     glm::u8vec4 color = glm::u8vec4(255, 255, 0, 64);
     switch (plane)
     {
-        case E_MODEL_BRUSH_PLANE_X:
+        case E_MODEL_BRUSH_PLANE_YZ:
         {
             maxBound = glm::vec3(8.0, 8.0, 0.25);
             minBound = glm::vec3(1.0, 1.0, 0.4);
         }
             break;
-        case E_MODEL_BRUSH_PLANE_Y:
-        {
-            maxBound = glm::vec3(0.25, 8.0, 8.0);
-            minBound = glm::vec3(0.4, 1.0, 1.0);
-        }
-            break;
-        case E_MODEL_BRUSH_PLANE_Z:
+        case E_MODEL_BRUSH_PLANE_XZ:
         {
             maxBound = glm::vec3(8.0, 0.25, 8.0);
             minBound = glm::vec3(1.0, 0.4, 1.0);
+        }
+            break;
+        case E_MODEL_BRUSH_PLANE_XY:
+        {
+            maxBound = glm::vec3(0.25, 8.0, 8.0);
+            minBound = glm::vec3(0.4, 1.0, 1.0);
         }
             break;
             
@@ -355,7 +356,7 @@ CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane,
     
     CSharedMesh planeMesh = CMesh::constructCustomMesh("plane", vertexBuffer, indexBuffer,
                                                        glm::vec3(4096.0), glm::vec3(-4096.0));
-    assert(planeMesh != nullptr);
+    planeMesh->updateBounds();
     
     CESharedCustomModel planeModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     planeModel->setCamera(m_camera);
@@ -474,4 +475,14 @@ void CMEModelBrush::onAddedToScene(ISharedRenderTechniqueImporterRef techniqueIm
 void CMEModelBrush::onRemovedFromScene(void)
 {
     IGameObject::onRemovedFromScene();
+}
+
+const std::array<CESharedCustomModel, E_MODEL_BRUSH_ARROW_MAX>&  CMEModelBrush::getArrows(void) const
+{
+    return m_arrows;
+}
+
+const std::array<CESharedCustomModel, E_MODEL_BRUSH_PLANE_MAX>&  CMEModelBrush::getPlanes(void) const
+{
+    return m_planes;
 }

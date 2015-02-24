@@ -87,6 +87,10 @@ public:
                                         ISharedGameObjectRef gameObject,
                                         const glm::ivec2& point,
                                         glm::vec3* intersectedPoint);
+    
+    static bool isGameObjectBoundIntersected(CSharedCameraRef camera,
+                                             ISharedGameObjectRef gameObject,
+                                             const glm::ivec2& point);
 };
 
-#endif 
+#endif

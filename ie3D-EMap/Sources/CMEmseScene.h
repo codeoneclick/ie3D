@@ -37,14 +37,18 @@ protected:
     CSharedLandscape m_landscape;
     CSharedMaterial m_landscapeMaterial;
     std::list<CSharedModel> m_models;
+    CSharedModel m_selectedGameObject;
+    CESharedCustomModel m_selectedBrushElement;
     
     CMESharedLandscapeBrush m_landscapeBrush;
-    CMESharedModelBrush m_modelBrush;
+    CMESharedModelBrush m_gameObjectBrush;
     
-    glm::ivec2 m_previousDraggedPoint;
+    glm::ivec2 m_previousDraggedPoint2D;
+    glm::vec3 m_previousDraggedPoint3D;
     bool m_isSpaceButtonPressed;
     
     SEditableSettings m_editableSettings;
+    E_LANDSCAPE_EDIT_MODE m_landscapeEditMode;
     
     void setBrushSize(ui32 value);
     void setBrushStrength(ui32 value);

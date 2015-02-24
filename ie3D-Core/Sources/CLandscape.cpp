@@ -93,13 +93,13 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     if(m_chunks[index] == nullptr)
                     {
                         m_chunks[index] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
+                        m_chunks[index]->setCamera(m_camera);
+                        m_chunks[index]->setCameraFrustum(m_cameraFrustum);
                         m_chunks[index]->setInprogressLOD(LOD);
                         m_heightmapGenerator->runChunkLoading(i, j, LOD, [this, index, i, j, LOD](CSharedMeshRef mesh) {
                             
                             m_chunks[index]->onAddedToScene(m_renderTechniqueImporter,
                                                             m_sceneUpdateMgr);
-                            
-                            m_chunks[index]->setCameraFrustum(m_cameraFrustum);
                             m_chunks[index]->setMesh(mesh);
                             m_chunks[index]->onConfigurationLoaded(m_configuration, true);
                             

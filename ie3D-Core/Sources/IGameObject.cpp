@@ -469,12 +469,12 @@ CSharedMaterial IGameObject::getMaterial(const std::string& techniqueName) const
 
 CSharedVertexBuffer IGameObject::getCollisionVertexBuffer(void) const
 {
-    return nullptr;
+    return m_mesh ? m_mesh->getVertexBuffer() : nullptr;
 }
 
 CSharedIndexBuffer IGameObject::getCollisionIndexBuffer(void) const
 {
-    return nullptr;
+    return m_mesh ? m_mesh->getIndexBuffer() : nullptr;
 }
 
 void IGameObject::setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler, const std::string& techniqueName)

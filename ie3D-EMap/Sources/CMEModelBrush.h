@@ -59,6 +59,9 @@ public:
     void onRemovedFromScene(void);
     
     void setLandscape(CSharedLandscapeRef landscape);
+    
+    const std::array<CESharedCustomModel, E_MODEL_BRUSH_ARROW_MAX>& getArrows(void) const;
+    const std::array<CESharedCustomModel, E_MODEL_BRUSH_PLANE_MAX>& getPlanes(void) const;
 };
 
 

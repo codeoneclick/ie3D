@@ -67,8 +67,8 @@ void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_
         {
             glm::vec3 point;
             if(!glm::intersect(ray,
-                               collider->getMinBound(),
-                               collider->getMaxBound()))
+                               collider->getMinBound() + collider->getPosition(),
+                               collider->getMaxBound() + collider->getPosition()))
             {
                 continue;
             }
@@ -162,6 +162,29 @@ bool CCollisionMgr::isTrianglesIntersected(CSharedCameraRef camera,
     return false;
 }
 
+bool CCollisionMgr::isGameObjectBoundIntersected(CSharedCameraRef camera,
+                                                 ISharedGameObjectRef gameObject,
+                                                 const glm::ivec2& point)
+{
+    assert(camera != nullptr);
+    assert(gameObject != nullptr);
+    glm::ray ray;
+    CCollisionMgr::unproject(point,
+                             camera->getVMatrix(),
+                             camera->getPMatrix(),
+                             camera->getViewport(),
+                             &ray);
+    
+    glm::vec4 vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMinBound(), 1.0);
+    glm::vec3 minBound = glm::vec3(vector.x, vector.y, vector.z);
+    vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMaxBound(), 1.0);
+    glm::vec3 maxBound = glm::vec3(vector.x, vector.y, vector.z);
+    
+    return glm::intersect(ray,
+                          minBound,
+                          maxBound);
+}
+
 bool CCollisionMgr::isGameObjectIntersected(CSharedCameraRef camera,
                                             ISharedGameObjectRef gameObject,
                                             const glm::ivec2& point,
@@ -176,16 +199,21 @@ bool CCollisionMgr::isGameObjectIntersected(CSharedCameraRef camera,
                              camera->getViewport(),
                              &ray);
     
+    glm::vec4 vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMinBound(), 1.0);
+    glm::vec3 minBound = glm::vec3(vector.x, vector.y, vector.z);
+    vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMaxBound(), 1.0);
+    glm::vec3 maxBound = glm::vec3(vector.x, vector.y, vector.z);
+
     if(!glm::intersect(ray,
-                       gameObject->getMinBound(),
-                       gameObject->getMaxBound()))
+                       minBound,
+                       maxBound))
     {
         return false;
     }
     
     return CCollisionMgr::collisionPoint(gameObject->getCollisionVertexBuffer(),
                                          gameObject->getCollisionIndexBuffer(),
-                                         glm::mat4x4(1.0f),
+                                         gameObject->getMMatrix(),
                                          ray,
                                          intersectedPoint);
 }

@@ -12,6 +12,7 @@
 #include "CLandscape.h"
 
 #define SPACE_BUTTON 32
+#define ALT_BUTTON 33
 
 CMapDragController::CMapDragController(CSharedCameraRef camera,
                                        CSharedLandscapeRef landscape,
@@ -150,7 +151,11 @@ void CMapDragController::onKeyUp(i32 key)
             m_isSpaceButtonPressed = false;
         }
             break;
+        case ALT_BUTTON:
+        {
             
+        }
+            break;
         default:
             break;
     }
