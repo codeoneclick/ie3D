@@ -160,7 +160,7 @@ void CMEmseScene::load(void)
                                                                glm::vec3(0.0, 0.0, 0.0),
                                                                glm::vec3(512.0, 0.0, 512.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);
-    m_root->addGestureRecognizerHandler(std::dynamic_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
+    m_root->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
     
     m_landscape->addConfigurationLoadedCallback(std::bind(&CMEmseScene::onConfigurationLoaded, this, std::placeholders::_1));
     
@@ -218,15 +218,6 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
         bool isIntersectedWithGameObjectBrush = false;
         if(m_gameObjectBrush->isVisible())
         {
-            /*std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> triangles;
-            triangles.push_back(std::make_tuple(glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
-                                                glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
-                                                glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y,  4096.0)));
-            
-            triangles.push_back(std::make_tuple(glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y,  4096.0),
-                                                glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
-                                                glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y,  4096.0)));*/
-            
             glm::vec3 pressedPoint3D;
             for(const auto& it : m_gameObjectBrush->getArrows())
             {
@@ -315,15 +306,6 @@ void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
         bool isIntersectedWithGameObjectBrush = false;
         if(m_gameObjectBrush->isVisible() && m_selectedBrushElement)
         {
-            /*std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> triangles;
-            triangles.push_back(std::make_tuple(glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
-                                                glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
-                                                glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y,  4096.0)));
-            
-            triangles.push_back(std::make_tuple(glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y,  4096.0),
-                                                glm::vec3( 4096.0, m_gameObjectBrush->getPosition().y, -4096.0),
-                                                glm::vec3(-4096.0, m_gameObjectBrush->getPosition().y,  4096.0)));*/
-
             ui32 index = 0;
             glm::vec3 draggedPoint3D;
             for(const auto& it : m_gameObjectBrush->getArrows())
@@ -337,7 +319,6 @@ void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
                                              m_camera->getViewport(),
                                              &ray);
                     draggedPoint3D = ray.getDirection() * m_camera->getFar();
-                    //CCollisionMgr::isTrianglesIntersected(m_camera, triangles, point, &draggedPoint3D);
                     switch (index)
                     {
                         case E_MODEL_BRUSH_ARROW_X:

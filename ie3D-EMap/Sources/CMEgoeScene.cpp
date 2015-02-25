@@ -84,7 +84,7 @@ void CMEgoeScene::load(void)
     m_globalLightSource->setRotationCenter(glm::vec3(2.0f, 0.0f, 2.0f));
     m_globalLightSource->setLookAt(glm::vec3(2.0f, 0.0f, 2.0f));
     
-    m_root->addGestureRecognizerHandler(std::dynamic_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
+    m_root->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
 }
 
 void CMEgoeScene::update(f32)

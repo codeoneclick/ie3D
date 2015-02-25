@@ -9,7 +9,8 @@
 #include "CComponentTransformation.h"
 #include "CCamera.h"
 
-CComponentTransformation::CComponentTransformation(void)
+CComponentTransformation::CComponentTransformation(void) :
+m_isMMatrixComputed(false)
 {
     CComponentTransformation::setPosition(glm::vec3(0.0f));
     CComponentTransformation::setRotation(glm::vec3(0.0f));
@@ -21,11 +22,6 @@ CComponentTransformation::~CComponentTransformation(void)
     
 }
 
-void CComponentTransformation::setCamera(CSharedCameraRef camera)
-{
-    m_camera = camera;
-}
-
 E_COMPONENT_CLASS CComponentTransformation::getClass(void) const
 {
     return E_COMPONENT_CLASS_TRANSFORMATION;
@@ -35,7 +31,7 @@ void CComponentTransformation::setPosition(const glm::vec3& position)
 {
     m_position = position;
     m_matrixT = glm::translate(glm::mat4(1.0f), m_position);
-    m_isComputed = false;
+    m_isMMatrixComputed = false;
 }
 
 void CComponentTransformation::setRotation(const glm::vec3& rotation)
@@ -44,13 +40,13 @@ void CComponentTransformation::setRotation(const glm::vec3& rotation)
     m_matrixR = glm::rotate(glm::mat4(1.0f), m_rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
     m_matrixR = glm::rotate(m_matrixR, m_rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
     m_matrixR = glm::rotate(m_matrixR, m_rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-    m_isComputed = false;
+    m_isMMatrixComputed = false;
 }
 void CComponentTransformation::setScale(const glm::vec3& scale)
 {
     m_scale = scale;
     m_matrixS = glm::scale(glm::mat4(1.0f), m_scale);
-    m_isComputed = false;
+    m_isMMatrixComputed = false;
 }
 
 glm::vec3 CComponentTransformation::getPosition(void) const
@@ -68,38 +64,24 @@ glm::vec3 CComponentTransformation::getScale(void) const
     return m_scale;
 }
 
-glm::mat4 CComponentTransformation::getMMatrix(void)
+glm::mat4 CComponentTransformation::getMMatrix(CSharedComponentTransformationRef componentTransformation)
 {
-    if(!m_isComputed)
+    if(!componentTransformation->m_isMMatrixComputed)
     {
-        m_matrixM = m_matrixT * m_matrixR * m_matrixS;
-        m_matrixMVP = m_camera->getVPMatrix() * m_matrixM;
-        m_matrixIMVP = m_camera->getIVPMatrix() * m_matrixM;
-        m_isComputed = true;
+        componentTransformation->m_matrixM = componentTransformation->m_matrixT * componentTransformation->m_matrixR * componentTransformation->m_matrixS;
+        componentTransformation->m_isMMatrixComputed = true;
     }
-    return m_matrixM;
+    return componentTransformation->m_matrixM;
 }
 
-glm::mat4 CComponentTransformation::getMVPMatrix(void)
+glm::mat4 CComponentTransformation::getMVPMatrix(CSharedComponentTransformationRef componentTransformation, CSharedCameraRef camera)
 {
-    if(!m_isComputed)
-    {
-        m_matrixM = m_matrixT * m_matrixR * m_matrixS;
-        m_matrixMVP = m_camera->getVPMatrix() * m_matrixM;
-        m_matrixIMVP = m_camera->getIVPMatrix() * m_matrixM;
-        m_isComputed = true;
-    }
-    return m_matrixMVP;
+    glm::mat4 matrixMVP = camera->getVPMatrix() * CComponentTransformation::getMMatrix(componentTransformation);
+    return std::move(matrixMVP);
 }
 
-glm::mat4 CComponentTransformation::getIMVPMatrix(void)
+glm::mat4 CComponentTransformation::getIMVPMatrix(CSharedComponentTransformationRef componentTransformation, CSharedCameraRef camera)
 {
-    if(!m_isComputed)
-    {
-        m_matrixM = m_matrixT * m_matrixR * m_matrixS;
-        m_matrixMVP = m_camera->getVPMatrix() * m_matrixM;
-        m_matrixIMVP = m_camera->getIVPMatrix() * m_matrixM;
-        m_isComputed = true;
-    }
-    return m_matrixIMVP;
+    glm::mat4 m_matrixIMVP = camera->getIVPMatrix() * CComponentTransformation::getMMatrix(componentTransformation);
+    return std::move(m_matrixIMVP);
 }

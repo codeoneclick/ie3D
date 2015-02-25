@@ -16,8 +16,7 @@
 class CMapDragController;
 
 class CMEmseScene final :
-public IScene,
-public IGestureRecognizerHandler
+public IScene
 {
 private:
     

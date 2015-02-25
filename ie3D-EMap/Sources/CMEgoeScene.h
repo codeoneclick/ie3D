@@ -13,8 +13,7 @@
 #include "HMEDeclaration.h"
 
 class CMEgoeScene final :
-public IScene,
-public IGestureRecognizerHandler
+public IScene
 {
 private:
     

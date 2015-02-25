@@ -12,8 +12,11 @@
 #include "HCommon.h"
 #include "HDeclaration.h"
 #include "CCollisionMgr.h"
+#include "IInputContext.h"
 
-class IScene : public std::enable_shared_from_this<IScene>, public ICollisionHandler
+class IScene : public std::enable_shared_from_this<IScene>,
+public ICollisionHandler,
+public IGestureRecognizerHandler
 {
 private:
     

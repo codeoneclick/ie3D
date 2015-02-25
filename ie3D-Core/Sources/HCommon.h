@@ -139,11 +139,11 @@ namespace std
         
     public:
         
-        memstream(char* _data, size_t _size):
+        memstream(char* data, size_t size):
         std::istream(&m_buffer),
-        m_buffer(_data, _size),
-        m_data(_data),
-        m_size(_size)
+        m_data(data),
+        m_size(size),
+        m_buffer(data, size)
         {
             rdbuf(&m_buffer);
         };
@@ -163,13 +163,114 @@ namespace std
         {
         public:
 
-            membuf(char* _data, size_t _size)
+            membuf(char* data, size_t size)
             {
-                setp(_data, _data + _size);
-                setg(_data, _data, _data + _size);
+                setp(data, data + size);
+                setg(data, data, data + size);
             };
         };
         membuf m_buffer;
+    };
+    
+    template<class TValue, typename TGetter = std::function<TValue(const TValue&)>, typename TSetter = std::function<void(TValue&, const TValue&)>>
+    class property
+    {
+    private:
+        
+        TGetter m_getter;
+        TSetter m_setter;
+        
+    protected:
+        
+    public:
+        
+        property(void) :
+        m_getter(nullptr),
+        m_setter(nullptr),
+        ivar(NULL)
+        {
+            
+        };
+        
+        void init(TValue value, TGetter getter = nullptr, TSetter setter = nullptr)
+        {
+            ivar = value;
+            m_getter = getter;
+            m_setter = setter;
+        };
+        
+        inline void getter(TGetter getter)
+        {
+            m_getter = getter;
+        };
+        
+        inline void setter(TSetter setter)
+        {
+            m_setter = setter;
+        }
+        
+        inline operator TValue()
+        {
+            if(m_getter)
+            {
+                return m_getter(ivar);
+            }
+            return ivar;
+        };
+        
+        inline TValue operator= (const TValue& value)
+        {
+            if(m_setter)
+            {
+                m_setter(ivar, value);
+            }
+            else
+            {
+                ivar = value;
+            }
+            ivar = value;
+            return ivar;
+        };
+        
+        TValue ivar;
+    };
+    
+    template<class TValue, typename TGetter = std::function<TValue(void)>>
+    class property_readonly
+    {
+    private:
+        
+        TValue m_value;
+        TGetter m_getter;
+        
+    protected:
+        
+        
+    public:
+        
+        property_readonly(void) :
+        m_value(NULL),
+        m_getter(nullptr)
+        {
+            
+        };
+        
+        void init(TValue value, TGetter getter = nullptr)
+        {
+            m_value = value;
+            m_getter = getter;
+        };
+        
+        __attribute__((always_inline)) operator TValue()
+        {
+            if(m_getter)
+            {
+                return m_getter();
+            }
+            return m_value;
+        };
+        
+        __attribute__((always_inline)) TValue operator= (const TValue&) = delete;
     };
 };
 

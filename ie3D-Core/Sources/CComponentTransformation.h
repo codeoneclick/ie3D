@@ -24,12 +24,8 @@ private:
     glm::mat4 m_matrixS;
     
     glm::mat4 m_matrixM;
-    glm::mat4 m_matrixMVP;
-    glm::mat4 m_matrixIMVP;
     
-    CSharedCamera m_camera;
-    
-    bool m_isComputed;
+    bool m_isMMatrixComputed;
     
 protected:
     
@@ -40,8 +36,6 @@ public:
     
     E_COMPONENT_CLASS getClass(void) const;
     
-    void setCamera(CSharedCameraRef camera);
-    
     void setPosition(const glm::vec3& position);
     void setRotation(const glm::vec3& rotation);
     void setScale(const glm::vec3& scale);
@@ -50,9 +44,9 @@ public:
     glm::vec3 getRotation(void) const;
     glm::vec3 getScale(void) const;
     
-    glm::mat4 getMMatrix(void);
-    glm::mat4 getMVPMatrix(void);
-    glm::mat4 getIMVPMatrix(void);
+    static glm::mat4 getMMatrix(CSharedComponentTransformationRef componentTransformation);
+    static glm::mat4 getMVPMatrix(CSharedComponentTransformationRef componentTransformation, CSharedCameraRef camera);
+    static glm::mat4 getIMVPMatrix(CSharedComponentTransformationRef componentTransformation, CSharedCameraRef camera);
 };
 
 #endif

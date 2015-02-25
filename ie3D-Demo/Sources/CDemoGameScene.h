@@ -46,6 +46,12 @@ protected:
     void onCharacterMoveStateChanged(E_CHARACTER_CONTROLLER_MOVE_STATE state);
     void onCharacterSteerStateChanged(E_CHARACTER_CONTROLLER_STEER_STATE state);
     
+    void onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton) {};
+    void onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton) {};
+    void onGestureRecognizerMoved(const glm::ivec2& point) {};
+    void onGestureRecognizerReleased(const glm::ivec2& point, E_INPUT_BUTTON inputButton) {};
+    void onGestureRecognizerWheelScroll(E_SCROLL_WHEEL_DIRECTION direction) {};
+    
     void onKeyDown(i32 key);
     void onKeyUp(i32 key);
     

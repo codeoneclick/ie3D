@@ -1,3 +1,4 @@
+
 //
 //  IGameObject.cpp
 //  indie2dEngine
@@ -138,9 +139,10 @@ void IGameObject::addComponentDebugRendering(bool force)
 {
     if(m_renderTechniqueImporter && !IGameObject::isComponentExist(E_COMPONENT_CLASS_DEBUG_RENDERING))
     {
-        if(((IGameObject::getComponentRendering() &&
-             IGameObject::getComponentRendering()->getMaterial("ws.base") &&
-             IGameObject::getComponentRendering()->getMaterial("ws.base")->isDebugging()) || force) &&
+        CSharedComponentRendering componentRendering = IGameObject::getComponentRendering();
+        if(((componentRendering &&
+             componentRendering->getMaterial("ws.base") &&
+             componentRendering->getMaterial("ws.base")->isDebugging()) || force) &&
            m_mesh && m_mesh->isLoaded())
         {
             CSharedComponentDebugRendering componentDebugRendering = std::make_shared<CComponentDebugRendering>(m_resourceAccessor,
@@ -254,7 +256,7 @@ CSharedComponentRendering IGameObject::getComponentRendering(void) const
     CSharedComponentRendering componentRendering = nullptr;
     if(IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
     {
-        componentRendering = std::static_pointer_cast<CComponentRendering>(IGameObject::getComponent(E_COMPONENT_CLASS_RENDERING));
+        componentRendering = std::static_pointer_cast<CComponentRendering>(m_components.at(E_COMPONENT_CLASS_RENDERING));
     }
     return componentRendering;
 }
@@ -394,29 +396,29 @@ glm::vec3 IGameObject::getScale(void) const
 glm::mat4x4 IGameObject::getMMatrix(void) const
 {
     CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
-    return component->getMMatrix();
+    return CComponentTransformation::getMMatrix(component);
 }
 
 glm::mat4x4 IGameObject::getMVPMatrix(void) const
 {
     CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
-    return component->getMVPMatrix();
+    return CComponentTransformation::getMVPMatrix(component, m_camera);
 }
 
 glm::mat4  IGameObject::getIMVPMatrix(void) const
 {
     CSharedComponentTransformation component = std::static_pointer_cast<CComponentTransformation>(m_components.at(E_COMPONENT_CLASS_TRANSFORMATION));
-    return component->getIMVPMatrix();
+    return CComponentTransformation::getIMVPMatrix(component, m_camera);
 }
 
 glm::vec3 IGameObject::getMaxBound(void) const
 {
-    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMaxBound() * IGameObject::getScale() : glm::vec3(0.0f);
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMaxBound() : std::move(glm::vec3(0.0f));
 }
 
 glm::vec3 IGameObject::getMinBound(void) const
 {
-    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMinBound() * IGameObject::getScale() : glm::vec3(0.0f);
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMinBound() : std::move(glm::vec3(0.0f));
 }
 
 void IGameObject::setVisible(bool value)
@@ -432,8 +434,6 @@ bool IGameObject::isVisible(void) const
 void IGameObject::setCamera(CSharedCameraRef camera)
 {
     m_camera = camera;
-    CSharedComponentTransformation componentTransformation = std::static_pointer_cast<CComponentTransformation>(IGameObject::getComponent(E_COMPONENT_CLASS_TRANSFORMATION));
-    componentTransformation->setCamera(camera);
 }
 
 void IGameObject::setCameraFrustum(CSharedFrustumRef frustum)
@@ -459,9 +459,9 @@ CSharedIndexBuffer IGameObject::getIndexBuffer(void) const
 CSharedMaterial IGameObject::getMaterial(const std::string& techniqueName) const
 {
     CSharedMaterial material = nullptr;
-    if (IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
+    CSharedComponentRendering componentRendering = IGameObject::getComponentRendering();
+    if (componentRendering)
     {
-        CSharedComponentRendering componentRendering = IGameObject::getComponentRendering();
         material = componentRendering->getMaterial(techniqueName);
     }
     return material;
@@ -479,9 +479,9 @@ CSharedIndexBuffer IGameObject::getCollisionIndexBuffer(void) const
 
 void IGameObject::setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler, const std::string& techniqueName)
 {
-    if (IGameObject::isComponentExist(E_COMPONENT_CLASS_RENDERING))
+    CSharedComponentRendering componentRendering = IGameObject::getComponentRendering();
+    if (componentRendering)
     {
-        CSharedComponentRendering componentRendering = IGameObject::getComponentRendering();
         componentRendering->setTexture(texture, sampler, shared_from_this(), techniqueName);
     }
 }
