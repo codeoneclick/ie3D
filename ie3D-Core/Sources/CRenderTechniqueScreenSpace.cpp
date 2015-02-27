@@ -17,16 +17,16 @@ IRenderTechniqueBase(frameWidth, frameHeight, name, 0),
 m_material(material)
 {
     ui32 textureId;
-    glGenTextures(1, &textureId);
-    glGenFramebuffers(1, &m_frameBuffer);
-    glBindTexture(GL_TEXTURE_2D, textureId);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_frameWidth, m_frameHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureId, 0);
+    ieGenTextures(1, &textureId);
+    ieGenFramebuffers(1, &m_frameBuffer);
+    ieBindTexture(GL_TEXTURE_2D, textureId);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_frameWidth, m_frameHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    ieBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
+    ieFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureId, 0);
     
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     
@@ -58,17 +58,17 @@ CSharedMaterial CRenderTechniqueScreenSpace::getMaterial(void) const
 
 void CRenderTechniqueScreenSpace::bind(void)
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
-    glViewport(0, 0, m_frameWidth, m_frameHeight);
-    glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    ieBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
+    ieViewport(0, 0, m_frameWidth, m_frameHeight);
+    ieClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
+    ieClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     m_material->bind();
-    m_quad->bind(m_material->getShader()->getAttributes());
+    m_quad->bind(m_material->getShader()->getGUID(), m_material->getShader()->getAttributes());
 }
 
 void CRenderTechniqueScreenSpace::unbind(void)
 {
-    m_quad->unbind(m_material->getShader()->getAttributes());
+    m_quad->unbind(m_material->getShader()->getGUID(), m_material->getShader()->getAttributes());
     m_material->unbind();
 }
 

@@ -91,6 +91,8 @@ protected:
     CSharedVertexBuffer m_vertexBuffer;
     CSharedIndexBuffer m_indexBuffer;
     
+    std::unordered_map<std::string, CSharedVertexArrayBuffer> m_VAOstates;
+    
     void onResourceDataSerializationFinished(ISharedResourceDataRef resourceData);
     
     void onResourceDataCommitFinished(ISharedResourceDataRef resourceData);
@@ -122,10 +124,10 @@ public:
     const CSharedSkeletonData getSkeletonData(void) const;
     const CSharedSequenceData getBindposeData(void) const;
 
-    void bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const;
+    void bind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
     void draw(void) const;
     void draw(ui32 indices) const;
-    void unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const;
+    void unbind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
 };
 
 #endif

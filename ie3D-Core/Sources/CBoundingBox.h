@@ -23,6 +23,8 @@ protected:
     CSharedIndexBuffer m_indexBuffer;
     CSharedIndexBuffer m_wireframeIndexBuffer;
     
+    std::unordered_map<std::string, CSharedVertexArrayBuffer> m_VAOstates;
+    
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
     
@@ -31,9 +33,9 @@ public:
     CBoundingBox(const glm::vec3& minBound, const glm::vec3& maxBound);
     ~CBoundingBox(void);
     
-    void bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes, bool isWireframe);
+    void bind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes, bool isWireframe);
     void draw(bool isWireframe);
-    void unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes, bool isWireframe);
+    void unbind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes, bool isWireframe);
 };
 
 #endif

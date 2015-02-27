@@ -124,12 +124,6 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
         m_numTriangles += 2;
     }
     
-    GLenum error = glGetError();
-    if(error != GL_NO_ERROR)
-    {
-        std::cout<<"OpenGL error: "<<error<<std::endl;
-    }
-    
     if(!m_isOffscreen)
     {
         m_graphicsContext->draw();

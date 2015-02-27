@@ -60,11 +60,11 @@ void CComponentDebugRendering::draw(const std::string& techniqueName)
     if(techniqueName == "ws.base")
     {
         m_material->bind();
-        m_boundingBox->bind(m_material->getShader()->getAttributes(), true);
+        m_boundingBox->bind(m_material->getShader()->getGUID(), m_material->getShader()->getAttributes(), true);
         m_materialBindImposer(m_material);
         m_boundingBox->draw(true);
         m_material->unbind();
-        m_boundingBox->unbind(m_material->getShader()->getAttributes(), true);
+        m_boundingBox->unbind(m_material->getShader()->getGUID(), m_material->getShader()->getAttributes(), true);
     }
 }
 

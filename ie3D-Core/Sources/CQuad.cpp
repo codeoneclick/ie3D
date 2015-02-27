@@ -9,6 +9,7 @@
 #include "CQuad.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
+#include "CVertexArrayBuffer.h"
 
 CQuad::CQuad(void) :
 m_vertexBuffer(nullptr),
@@ -42,29 +43,42 @@ m_minBound(glm::vec3( 4096.0f,  4096.0f,  4096.0f))
 
 CQuad::~CQuad(void)
 {
-
+    std::unordered_map<std::string, CSharedVertexArrayBuffer> eraser;
+    m_VAOstates.swap(eraser);
 }
 
-void CQuad::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
+void CQuad::bind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
-    m_vertexBuffer->bind(attributes);
-    m_indexBuffer->bind();
+    assert(attributesGUID.length() != 0);
+    
+    CSharedVertexArrayBuffer vaoState = m_VAOstates[attributesGUID];
+    if(!vaoState)
+    {
+        vaoState = std::make_shared<CVertexArrayBuffer>(m_vertexBuffer,
+                                                        m_indexBuffer);
+        vaoState->init(attributes);
+        m_VAOstates[attributesGUID] = vaoState;
+    }
+    CVertexArrayBuffer::bind(vaoState);
 }
 
 void CQuad::draw(void)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
-    glDrawElements(GL_TRIANGLES, m_indexBuffer->getUsedSize(), GL_UNSIGNED_SHORT, NULL);
+    ieDrawElements(GL_TRIANGLES, m_indexBuffer->getUsedSize(), GL_UNSIGNED_SHORT, NULL);
 }
 
-void CQuad::unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
+void CQuad::unbind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
-    m_vertexBuffer->unbind(attributes);
-    m_indexBuffer->unbind();
+    
+    CVertexArrayBuffer::unbind();
+    
+    /*m_vertexBuffer->unbind(attributes);
+    m_indexBuffer->unbind();*/
 }
 

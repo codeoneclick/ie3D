@@ -81,7 +81,7 @@ public:
     
     virtual ~IResource(void);
     
-    const std::string& getGuid(void) const;
+    const std::string& getGUID(void) const;
     E_RESOURCE_CLASS getResourceClass(void) const;
     
     virtual bool isLoaded(void) const;

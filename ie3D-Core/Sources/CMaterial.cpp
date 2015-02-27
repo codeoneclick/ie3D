@@ -498,7 +498,7 @@ void CMaterial::bind(void)
     
     for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
     {
-        if((m_parameters->m_textures[i] != nullptr &&
+        /*if((m_parameters->m_textures[i] != nullptr &&
             getCachedParameters()->m_textures[i] != nullptr &&
             m_parameters->m_textures[i]->getTextureId() != getCachedParameters()->m_textures[i]->getTextureId())
            
@@ -506,60 +506,64 @@ void CMaterial::bind(void)
            
            (m_parameters->m_textures[i] != nullptr &&
             getCachedParameters()->m_textures[i] == nullptr))
+         {
+         m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
+         getCachedParameters()->m_textures[i] = m_parameters->m_textures[i];
+         }*/
+        if(m_parameters->m_textures[i] != nullptr)
         {
             m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
-            getCachedParameters()->m_textures[i] = m_parameters->m_textures[i];
         }
     }
     
     if(m_parameters->m_isDepthTest &&
        getCachedParameters()->m_isDepthTest != m_parameters->m_isDepthTest)
     {
-        glEnable(GL_DEPTH_TEST);
-        glDepthFunc(GL_LEQUAL);
+        ieEnable(GL_DEPTH_TEST);
+        ieDepthFunc(GL_LEQUAL);
         getCachedParameters()->m_isDepthTest = m_parameters->m_isDepthTest;
     }
     else if(getCachedParameters()->m_isDepthTest != m_parameters->m_isDepthTest)
     {
-        glDisable(GL_DEPTH_TEST);
+        ieDisable(GL_DEPTH_TEST);
         getCachedParameters()->m_isDepthTest = m_parameters->m_isDepthTest;
     }
     
     if(m_parameters->m_isDepthMask &&
        getCachedParameters()->m_isDepthMask != m_parameters->m_isDepthMask)
     {
-        glDepthMask(GL_TRUE);
+        ieDepthMask(GL_TRUE);
         getCachedParameters()->m_isDepthMask = m_parameters->m_isDepthMask;
     }
     else if(getCachedParameters()->m_isDepthMask != m_parameters->m_isDepthMask)
     {
-        glDepthMask(GL_FALSE);
+        ieDepthMask(GL_FALSE);
         getCachedParameters()->m_isDepthMask = m_parameters->m_isDepthMask;
     }
     
     if(m_parameters->m_isCulling &&
        getCachedParameters()->m_isCulling != m_parameters->m_isCulling)
     {
-        glEnable(GL_CULL_FACE);
-        glCullFace(m_parameters->m_cullingMode);
+        ieEnable(GL_CULL_FACE);
+        ieCullFace(m_parameters->m_cullingMode);
         getCachedParameters()->m_isCulling = m_parameters->m_isCulling;
     }
     else if(getCachedParameters()->m_isCulling != m_parameters->m_isCulling)
     {
-        glDisable(GL_CULL_FACE);
+        ieDisable(GL_CULL_FACE);
         getCachedParameters()->m_isCulling = m_parameters->m_isCulling;
     }
     
     if(m_parameters->m_isBlending &&
        getCachedParameters()->m_isBlending != m_parameters->m_isBlending)
     {
-        glEnable(GL_BLEND);
-        glBlendFunc(m_parameters->m_blendingFunctionSource, m_parameters->m_blendingFunctionDestination);
+        ieEnable(GL_BLEND);
+        ieBlendFunc(m_parameters->m_blendingFunctionSource, m_parameters->m_blendingFunctionDestination);
         getCachedParameters()->m_isBlending = m_parameters->m_isBlending;
     }
     else if(getCachedParameters()->m_isBlending != m_parameters->m_isBlending)
     {
-        glDisable(GL_BLEND);
+        ieDisable(GL_BLEND);
         getCachedParameters()->m_isBlending = m_parameters->m_isBlending;
     }
 }

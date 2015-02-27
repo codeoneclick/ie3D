@@ -19,36 +19,36 @@ m_areDrawBoundingBoxes(false),
 m_isOcclusionQueryEnabled(false)
 {
     ui32 colorAttachmentId;
-    glGenTextures(1, &colorAttachmentId);
-    glBindTexture(GL_TEXTURE_2D, colorAttachmentId);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_frameWidth, m_frameHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    ieGenTextures(1, &colorAttachmentId);
+    ieBindTexture(GL_TEXTURE_2D, colorAttachmentId);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_frameWidth, m_frameHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     
     ui32 depthAttachmentId;
-    glGenTextures(1, &depthAttachmentId);
-    glBindTexture(GL_TEXTURE_2D, depthAttachmentId);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    ieGenTextures(1, &depthAttachmentId);
+    ieBindTexture(GL_TEXTURE_2D, depthAttachmentId);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
 #if defined(__NDK__) || defined(__OSX__)
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
+    ieTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
 #else
 #if defined(__OPENGL_30__)
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
+    ieTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
 #else
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
+    ieTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_frameWidth, m_frameHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
 #endif
 #endif
     
-    glGenFramebuffers(1, &m_frameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttachmentId, 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthAttachmentId, 0);
+    ieGenFramebuffers(1, &m_frameBuffer);
+    ieBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
+    ieFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttachmentId, 0);
+    ieFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthAttachmentId, 0);
     
     GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     assert(status == GL_FRAMEBUFFER_COMPLETE);
@@ -143,10 +143,10 @@ void CRenderTechniqueWorldSpace::removeRenderTechniqueHandler(ISharedRenderTechn
 
 void CRenderTechniqueWorldSpace::bind(void)
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
-    glViewport(0, 0, m_frameWidth, m_frameHeight);
-    glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    ieBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
+    ieViewport(0, 0, m_frameWidth, m_frameHeight);
+    ieClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
+    ieClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     m_numTriangles = 0;
 }
 

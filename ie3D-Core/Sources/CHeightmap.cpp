@@ -603,12 +603,12 @@ void CHeightmapGenerator::updateHeightmap(ui32 offsetX, ui32 offsetZ,
 ui32 CHeightmapGenerator::createTextureId(void)
 {
     ui32 textureId;
-    glGenTextures(1, &textureId);
-    glBindTexture(GL_TEXTURE_2D, textureId);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    ieGenTextures(1, &textureId);
+    ieBindTexture(GL_TEXTURE_2D, textureId);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     return textureId;
 }
 
@@ -652,8 +652,8 @@ void CHeightmapGenerator::updateHeightmapTexture(CSharedTextureRef texture, bool
             }
         }
         
-        glTexImage2D(GL_TEXTURE_2D, 0,
-#if defined(__OPENG_30__)
+        ieTexImage2D(GL_TEXTURE_2D, 0,
+#if defined(__OPENGL_30__)
                      GL_RED,
 #else
                      GL_ALPHA,
@@ -661,7 +661,7 @@ void CHeightmapGenerator::updateHeightmapTexture(CSharedTextureRef texture, bool
                      m_heightmap->getSize().x,
                      m_heightmap->getSize().y,
                      0,
-#if defined(__OPENG_30__)
+#if defined(__OPENGL_30__)
                      GL_RED,
 #else
                      GL_ALPHA,
@@ -694,7 +694,7 @@ void CHeightmapGenerator::updateHeightmapTexture(CSharedTextureRef texture, bool
         glTexSubImage2D(GL_TEXTURE_2D, 0,
                         offsetX, offsetY,
                         subWidth, subHeight,
-#if defined(__OPENG_30__)
+#if defined(__OPENGL_30__)
                         GL_RED,
 #else
                         GL_ALPHA,
@@ -759,7 +759,7 @@ void CHeightmapGenerator::updateSplattingTexture(CSharedTextureRef texture, bool
                 }
             }
         }
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
+        ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
                      m_heightmap->getSize().x,
                      m_heightmap->getSize().y,
                      0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);

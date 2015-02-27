@@ -18,7 +18,7 @@ m_material(material)
 {
     m_frameBuffer = frameBuffer;
     assert(m_material != nullptr);
-	m_quad = std::make_shared<CQuad>();
+    m_quad = std::make_shared<CQuad>();
 }
 
 CRenderTechniqueMain::~CRenderTechniqueMain(void)
@@ -28,25 +28,37 @@ CRenderTechniqueMain::~CRenderTechniqueMain(void)
 
 void CRenderTechniqueMain::bind(void)
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, m_renderBuffer);
-    glViewport(0, 0, m_frameWidth, m_frameHeight);
-    glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    ieBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
+    ieBindRenderbuffer(GL_RENDERBUFFER, m_renderBuffer);
+    ieViewport(0, 0, m_frameWidth, m_frameHeight);
+    ieClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
+    ieClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    m_material->bind();
-    m_quad->bind(m_material->getShader()->getAttributes());
+    if(m_material->getShader()->isLoaded() &&
+       m_material->getShader()->isCommited())
+    {
+        m_material->bind();
+        m_quad->bind(m_material->getShader()->getGUID(), m_material->getShader()->getAttributes());
+    }
 }
 
 void CRenderTechniqueMain::unbind(void)
 {
-    m_quad->unbind(m_material->getShader()->getAttributes());
-    m_material->unbind();
+    if(m_material->getShader()->isLoaded() &&
+       m_material->getShader()->isCommited())
+    {
+        m_quad->unbind(m_material->getShader()->getGUID(), m_material->getShader()->getAttributes());
+        m_material->unbind();
+    }
 }
 
 void CRenderTechniqueMain::draw(void)
 {
-    m_quad->draw();
+    if(m_material->getShader()->isLoaded() &&
+       m_material->getShader()->isCommited())
+    {
+        m_quad->draw();
+    }
 }
 
 void CRenderTechniqueMain::batch(void)

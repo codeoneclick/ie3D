@@ -9,6 +9,7 @@
 #include "CBoundingBox.h"
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
+#include "CVertexArrayBuffer.h"
 
 CBoundingBox::CBoundingBox(const glm::vec3& minBound, const glm::vec3& maxBound) :
 m_vertexBuffer(nullptr),
@@ -63,31 +64,40 @@ m_minBound(minBound)
 
 CBoundingBox::~CBoundingBox(void)
 {
-    
+    std::unordered_map<std::string, CSharedVertexArrayBuffer> eraser;
+    m_VAOstates.swap(eraser);
 }
 
-void CBoundingBox::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes, bool isWireframe)
+void CBoundingBox::bind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes, bool isWireframe)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
-    m_vertexBuffer->bind(attributes);
-    isWireframe ? m_wireframeIndexBuffer->bind() : m_indexBuffer->bind();
+    assert(attributesGUID.length() != 0);
+    
+    CSharedVertexArrayBuffer vaoState = m_VAOstates[attributesGUID];
+    if(!vaoState)
+    {
+        vaoState = std::make_shared<CVertexArrayBuffer>(m_vertexBuffer,
+                                                        isWireframe ? m_wireframeIndexBuffer : m_indexBuffer);
+        vaoState->init(attributes);
+        m_VAOstates[attributesGUID] = vaoState;
+    }
+    CVertexArrayBuffer::bind(vaoState);
 }
 
 void CBoundingBox::draw(bool isWireframe)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
-    glDrawElements(isWireframe ? GL_LINES : GL_TRIANGLES,
+    ieDrawElements(isWireframe ? GL_LINES : GL_TRIANGLES,
                    isWireframe ? m_wireframeIndexBuffer->getUsedSize() : m_indexBuffer->getUsedSize(),
                    GL_UNSIGNED_SHORT, NULL);
 }
 
-void CBoundingBox::unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes, bool isWireframe)
+void CBoundingBox::unbind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes, bool isWireframe)
 {
     assert(m_vertexBuffer != nullptr);
     assert(m_indexBuffer != nullptr);
-    assert(m_wireframeIndexBuffer);
-    m_vertexBuffer->unbind(attributes);
-    isWireframe ? m_wireframeIndexBuffer->unbind() : m_indexBuffer->unbind();
+    
+    CVertexArrayBuffer::unbind();
 }

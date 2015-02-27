@@ -179,25 +179,13 @@ bool CLandscape::isInCameraFrustum(CSharedFrustumRef cameraFrustum)
 
 void CLandscape::onBind(CSharedMaterialRef material)
 {
-    assert(m_camera != nullptr);
-    assert(m_globalLightSource != nullptr);
-    
-    if(material && material->getShader()->isLoaded())
-    {
-        material->bind();
-        m_materialBindImposer(material);
-    }
+    material->bind();
+    m_materialBindImposer(material);
 }
 
 void CLandscape::onUnbind(CSharedMaterialRef material)
 {
-    assert(m_camera != nullptr);
-    assert(m_globalLightSource != nullptr);
-    
-    if(material && material->getShader()->isLoaded())
-    {
-        material->unbind();
-    }
+    material->unbind();
 }
 
 void CLandscape::onDraw(CSharedMaterialRef material)
@@ -205,14 +193,16 @@ void CLandscape::onDraw(CSharedMaterialRef material)
     assert(m_camera != nullptr);
     assert(m_globalLightSource != nullptr);
     CLandscape::onBind(material);
-    if(material && material->getShader()->isLoaded())
+    if(material &&
+       material->getShader()->isLoaded() &&
+       material->getShader()->isCommited())
     {
         std::for_each(m_chunks.cbegin(), m_chunks.cend(), [material, this](CSharedLandscapeChunk chunk) {
-            if(chunk && chunk->m_mesh)
+            if(chunk && chunk->m_mesh && chunk->m_numPassedIndexes > 0)
             {
-                chunk->m_mesh->bind(material->getShader()->getAttributes());
+                chunk->m_mesh->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
                 chunk->m_mesh->draw(chunk->m_numPassedIndexes);
-                chunk->m_mesh->unbind(material->getShader()->getAttributes());
+                chunk->m_mesh->unbind(material->getShader()->getGUID(), material->getShader()->getAttributes());
             }
         });
     }

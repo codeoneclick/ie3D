@@ -27,7 +27,7 @@ varying vec4   OUT_ShadowParameters;
 
 #endif
 
-uniform mat4 u_matrixVP;
+uniform mat4 u_matrixP;
 uniform mat4 u_matrixV;
 
 uniform mat4 MATRIX_GlobalLightProjection;
@@ -51,7 +51,7 @@ const mat4 mBiasMatrix = mat4(0.5, 0.0, 0.0, 0.0,
 void main(void)
 {
     vec4 vPosition = vec4(IN_Position, 1.0);
-    gl_Position = u_matrixVP * vPosition;
+    gl_Position = u_matrixP * u_matrixV * vPosition;
     
     OUT_ShadowParameters = mBiasMatrix * MATRIX_GlobalLightProjection * MATRIX_GlobalLightView * vPosition;
     

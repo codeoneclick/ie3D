@@ -54,9 +54,6 @@ float getCurrentDepth(in  float fZ)
 
 void main(void)
 {
-    if(OUT_ClipPlane < 0.0)
-        discard;
-    
     float diffuseFactor = max(dot(OUT_Normal, OUT_LightDirection), 0.25);
     vec4 diffuseColor = vec4(0.0, 0.0, 0.0, 1.0);
     

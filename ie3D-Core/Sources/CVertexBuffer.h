@@ -43,7 +43,6 @@ private:
     
 protected:
     
-    ui32 m_vao;
     ui32 m_handle;
     bool m_isDataUploaded;
     

@@ -11,6 +11,7 @@
 #include "CIndexBuffer.h"
 #include "CBone.h"
 #include "CAnimationSequence.h"
+#include "CVertexArrayBuffer.h"
 
 const ui32 kMaxBones = 32;
 
@@ -190,7 +191,8 @@ CSharedMesh CMesh::constructCustomMesh(const std::string& guid,
 
 CMesh::~CMesh(void)
 {
-    
+    std::unordered_map<std::string, CSharedVertexArrayBuffer> eraser;
+    m_VAOstates.swap(eraser);
 }
 
 void CMesh::onResourceDataSerializationFinished(ISharedResourceDataRef resourceData)
@@ -315,14 +317,20 @@ const CSharedSequenceData CMesh::getBindposeData(void) const
     return IResource::isLoaded() ? m_bindposeData : nullptr;
 }
 
-void CMesh::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
+void CMesh::bind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        assert(m_vertexBuffer != nullptr);
-        assert(m_indexBuffer != nullptr);
-        m_vertexBuffer->bind(attributes);
-        m_indexBuffer->bind();
+        assert(attributesGUID.length() != 0);
+        CSharedVertexArrayBuffer vaoState = m_VAOstates[attributesGUID];
+        if(!vaoState)
+        {
+            vaoState = std::make_shared<CVertexArrayBuffer>(m_vertexBuffer,
+                                                            m_indexBuffer);
+            vaoState->init(attributes);
+            m_VAOstates[attributesGUID] = vaoState;
+        }
+        CVertexArrayBuffer::bind(vaoState);
     }
 }
 
@@ -330,9 +338,7 @@ void CMesh::draw(void) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        assert(m_vertexBuffer != nullptr);
-        assert(m_indexBuffer != nullptr);
-        glDrawElements(GL_TRIANGLES, m_indexBuffer->getUsedSize(), GL_UNSIGNED_SHORT, NULL);
+        ieDrawElements(GL_TRIANGLES, m_indexBuffer->getUsedSize(), GL_UNSIGNED_SHORT, NULL);
     }
 }
 
@@ -340,19 +346,14 @@ void CMesh::draw(ui32 indices) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        assert(m_vertexBuffer != nullptr);
-        assert(m_indexBuffer != nullptr);
-        glDrawElements(GL_TRIANGLES, indices, GL_UNSIGNED_SHORT, NULL);
+        ieDrawElements(GL_TRIANGLES, indices, GL_UNSIGNED_SHORT, NULL);
     }
 }
 
-void CMesh::unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const
+void CMesh::unbind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        assert(m_vertexBuffer != nullptr);
-        assert(m_indexBuffer != nullptr);
-        m_indexBuffer->unbind();
-        m_vertexBuffer->unbind(attributes);
+        CVertexArrayBuffer::unbind();
     }
 }

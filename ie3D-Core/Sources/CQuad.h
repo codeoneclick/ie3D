@@ -22,6 +22,8 @@ protected:
     CSharedVertexBuffer m_vertexBuffer;
     CSharedIndexBuffer m_indexBuffer;
     
+    std::unordered_map<std::string, CSharedVertexArrayBuffer> m_VAOstates;
+    
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
     
@@ -30,9 +32,9 @@ public:
 	CQuad(void);
     ~CQuad(void);
     
-    void bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
+    void bind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
     void draw(void);
-    void unbind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
+    void unbind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes);
 };
 
 #endif 

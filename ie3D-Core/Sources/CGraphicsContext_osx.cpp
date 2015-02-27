@@ -66,7 +66,7 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
     GLint swap = 1;
     [m_context setValues:&swap forParameter:NSOpenGLCPSwapInterval];
     
-#if __OPENGL_30__
+#if defined(__OPENGL_30__)
     CGLEnable([m_context CGLContextObj], kCGLCECrashOnRemovedFunctions);
 #endif
     

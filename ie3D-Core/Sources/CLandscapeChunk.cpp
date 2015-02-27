@@ -85,7 +85,6 @@ void CLandscapeChunk::onSceneUpdate(f32 deltatime)
 void CLandscapeChunk::onResourceLoaded(ISharedResourceRef resource, bool success)
 {
     IGameObject::onResourceLoaded(resource, success);
-    IResourceLoadingHandler::onResourceLoaded(resource, success);
 }
 
 void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)

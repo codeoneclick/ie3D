@@ -25,12 +25,12 @@ m_ynegative(ynegative),
 m_zpositive(zpositive),
 m_znegative(znegative)
 {
-    glGenTextures(1, &m_textureId);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureId);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    ieGenTextures(1, &m_textureId);
+	ieBindTexture(GL_TEXTURE_CUBE_MAP, m_textureId);
+	ieTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	ieTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	ieTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	ieTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
     m_textureData = std::make_shared<CTextureData>(0, 0, nullptr,
                                                    0, 0, 0, false);
@@ -61,7 +61,7 @@ CSharedCubemapTexture CCubemapTexture::constructCustomCubemapTexture(const std::
 
 void CCubemapTexture::onResourceLoaded(ISharedResourceRef resource, bool success)
 {
-    glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureId);
+    ieBindTexture(GL_TEXTURE_CUBE_MAP, m_textureId);
     
     CSharedTexture texture = std::static_pointer_cast<CTexture>(resource);
     GLenum face = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
@@ -106,8 +106,8 @@ void CCubemapTexture::onResourceLoaded(ISharedResourceRef resource, bool success
         {
             GLsizei size = MAX_VALUE(32, static_cast<i32>(width) * static_cast<i32>(height) * texture->getBPP() / 8);
             texture->isCompressed() ?
-            glCompressedTexImage2D(face, mip, texture->getFormat(), width, height, 0, size, data) :
-            glTexImage2D(face, mip, texture->getFormat(), width, height, 0, texture->getFormat(), GL_UNSIGNED_BYTE, data);
+            ieCompressedTexImage2D(face, mip, texture->getFormat(), width, height, 0, size, data) :
+            ieTexImage2D(face, mip, texture->getFormat(), width, height, 0, texture->getFormat(), GL_UNSIGNED_BYTE, data);
             data += size;
             width >>= 1; height >>= 1;
         }
@@ -116,8 +116,8 @@ void CCubemapTexture::onResourceLoaded(ISharedResourceRef resource, bool success
     {
         GLsizei size = MAX_VALUE(32, static_cast<i32>(width) * static_cast<i32>(height) * texture->getBPP() / 8);
         texture->isCompressed() ?
-        glCompressedTexImage2D(face, 0, texture->getFormat(), width, height, 0, size, data) :
-        glTexImage2D(face, 0, texture->getFormat(), width, height, 0, texture->getFormat(), GL_UNSIGNED_BYTE, data);
+        ieCompressedTexImage2D(face, 0, texture->getFormat(), width, height, 0, size, data) :
+        ieTexImage2D(face, 0, texture->getFormat(), width, height, 0, texture->getFormat(), GL_UNSIGNED_BYTE, data);
     }
     
     if(m_xpositive->isCommited() && m_xpositive->isLoaded() &&
@@ -136,7 +136,7 @@ void CCubemapTexture::bind(void) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureId);
+        ieBindTexture(GL_TEXTURE_CUBE_MAP, m_textureId);
     }
 }
 
@@ -144,6 +144,6 @@ void CCubemapTexture::unbind(void) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+        ieBindTexture(GL_TEXTURE_CUBE_MAP, 0);
     }
 }

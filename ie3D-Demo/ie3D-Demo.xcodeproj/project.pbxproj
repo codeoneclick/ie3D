@@ -1284,7 +1284,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					__DEBUG__,
 					"$(inherited)",
 					__OSX__,
 				);

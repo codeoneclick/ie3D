@@ -54,13 +54,13 @@ CGraphicsContext_ios::CGraphicsContext_ios(ISharedOGLWindowRef window)
     ui8 result = [EAGLContext setCurrentContext:m_context];
     assert(result == true);
     
-    glGenRenderbuffers(1, &m_renderBuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, m_renderBuffer);
+    ieGenRenderbuffers(1, &m_renderBuffer);
+    ieBindRenderbuffer(GL_RENDERBUFFER, m_renderBuffer);
     [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:static_cast<CAEAGLLayer*>(hwnd.layer)];
     
-    glGenFramebuffers(1, &m_frameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_renderBuffer);
+    ieGenFramebuffers(1, &m_frameBuffer);
+    ieBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
+    ieFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_renderBuffer);
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 }
 

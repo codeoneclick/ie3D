@@ -17,6 +17,7 @@ class CComponentRendering : public IComponent
 private:
     
     std::unordered_map<std::string, CSharedMaterial> m_materials;
+    
     CSharedFrustum m_cameraFrustum;
     i32 m_zOrder;
     

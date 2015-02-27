@@ -73,7 +73,7 @@ void COcclusionQueryManager::update(const std::string& techniqueName)
         assert(m_material != nullptr);
         
         m_material->bind();
-        glDepthMask(GL_FALSE);
+        ieDepthMask(GL_FALSE);
         glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
         
         for(const auto& iterator_02 : iterator_01->second)
@@ -81,7 +81,7 @@ void COcclusionQueryManager::update(const std::string& techniqueName)
             iterator_02->onOcclusionQueryDraw(m_material);
         }
         
-        glDepthMask(GL_TRUE);
+        ieDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         m_material->unbind();
         

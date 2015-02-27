@@ -215,14 +215,14 @@ void IGameObject::onConfigurationLoaded(ISharedConfigurationRef configuration,
 void IGameObject::onBind(CSharedMaterialRef material)
 {
     material->bind();
-    m_mesh->bind(material->getShader()->getAttributes());
+    m_mesh->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
     m_materialBindImposer(material);
 }
 
 void IGameObject::onUnbind(CSharedMaterialRef material)
 {
     material->unbind();
-    m_mesh->unbind(material->getShader()->getAttributes());
+    m_mesh->unbind(material->getShader()->getGUID(), material->getShader()->getAttributes());
 }
 
 void IGameObject::onDraw(CSharedMaterialRef material)
@@ -231,7 +231,8 @@ void IGameObject::onDraw(CSharedMaterialRef material)
     assert(m_camera != nullptr);
     assert(m_globalLightSource != nullptr);
     
-    if(material->getShader()->isLoaded()
+    if(material->getShader()->isLoaded() &&
+       material->getShader()->isCommited()
 #if defined(__EDITOR__)
        && material->getEnabled()
 #endif
@@ -277,7 +278,8 @@ void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)
     
     // base matrices
     material->getShader()->setMatrix4x4(IGameObject::getMMatrix(), E_SHADER_UNIFORM_MATRIX_M);
-    material->getShader()->setMatrix4x4(m_camera->getPMatrix(), E_SHADER_UNIFORM_MATRIX_P);
+    material->getShader()->setMatrix4x4(!material->isClipping() ? m_camera->getPMatrix() : m_camera->getCPMatrix(material->getClippingPlane(), material->isReflecting()),
+                                        E_SHADER_UNIFORM_MATRIX_P);
     material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->getVMatrix() : m_camera->getIVMatrix(), E_SHADER_UNIFORM_MATRIX_V);
     material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->getVPMatrix() : m_camera->getIVPMatrix(), E_SHADER_UNIFORM_MATRIX_VP);
     material->getShader()->setMatrix4x4(!material->isReflecting() ? IGameObject::getMVPMatrix() : IGameObject::getIMVPMatrix(), E_SHADER_UNIFORM_MATRIX_MVP);

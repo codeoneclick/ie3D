@@ -32,12 +32,9 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#define __OPENGL_20__ 1
-
-#if defined(__DEBUG__)
+#if defined(DEBUG)
 
 #define __PERFORMANCE_TIMER__
-#define __OCCLUSIOON_QUERY__
 
 #endif
 
@@ -50,6 +47,8 @@
 
 #endif
 
+#include "HGLCommands.hpp"
+
 #include <libpng-1.6.9/png.h>
 
 #include <glm/glm.hpp>
@@ -59,61 +58,6 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
 #include <pugixml/pugixml.hpp>
-
-#if defined(__IOS__)
-
-#include <QuartzCore/QuartzCore.h>
-#include <sys/types.h>
-#include <sys/sysctl.h>
-
-#if defined(__OPENGL_20__)
-
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
-
-#elif defined(__OPENGL_30__)
-
-#include <OpenGLES/ES3/gl.h>
-#include <OpenGLES/ES3/glext.h>
-
-#endif
-
-#elif defined(__WIN32__)
-
-#include <windows.h>
-
-#elif defined(__OSX__)
-
-#include <OpenGL/OpenGL.h>
-
-#if defined(__OPENGL_20__)
-
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
-
-#elif defined(__OPENGL_30__)
-
-#include <OpenGL/gl3.h>
-#include <OpenGL/gl3ext.h>
-
-#endif
-
-#elif defined(__NDK__)
-
-#include <EGL/egl.h>
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
-
-#include <jni.h>
-#include <android/window.h>
-#include <android/sensor.h>
-#include <android/log.h>
-#include <android_native_app_glue.h>
-#include <android/asset_manager.h>
-
-#define NDK_LOG(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
-
-#endif
 
 #define STRING_SHADER(SHADER)  #SHADER
 #include "HShaders.h"

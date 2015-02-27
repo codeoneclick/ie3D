@@ -152,7 +152,11 @@ void CTextureSerializer_PNG::serialize(void)
             break;
         case PNG_COLOR_TYPE_GRAY:
         {
+#if defined(__OPENGL_30__)
+            format = GL_RED;
+#else
             format = GL_LUMINANCE;
+#endif
         }
             break;
         default:

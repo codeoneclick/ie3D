@@ -174,11 +174,11 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     material->bind();
     assert(material->getShader()->getAttributes().at(E_SHADER_ATTRIBUTE_POSITION) >= 0);
     assert(material->getShader()->getAttributes().at(E_SHADER_ATTRIBUTE_TEXCOORD) >= 0);
-    quad->bind(material->getShader()->getAttributes());
+    quad->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
     
     quad->draw();
     
-    quad->unbind(material->getShader()->getAttributes());
+    quad->unbind(material->getShader()->getGUID(), material->getShader()->getAttributes());
     material->unbind();
     
     ui32 rawdataSize = static_cast<ui32>(width) * static_cast<ui32>(height) * 4;

@@ -18,6 +18,7 @@ private:
     
     glm::mat4 m_matrixV;
     glm::mat4 m_matrixP;
+    glm::mat4 m_matrixCP;
     glm::mat4 m_matrixN;
     glm::mat4 m_matrixIV;
     glm::mat4 m_matrixVP;
@@ -51,6 +52,7 @@ public:
     inline glm::mat4 getIVMatrix(void) const;
     inline glm::mat4 getVPMatrix(void) const;
     inline glm::mat4 getIVPMatrix(void) const;
+    inline glm::mat4 getCPMatrix(const glm::vec4& clipping, bool invert);
     
     inline void setPosition(const glm::vec3& position);
     inline glm::vec3 getPosition(void) const;

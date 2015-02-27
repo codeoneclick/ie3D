@@ -352,4 +352,8 @@ class IConfigurationGameObject;
 typedef std::shared_ptr<IConfigurationGameObject> ISharedConfigurationGameObject;
 typedef const ISharedConfigurationGameObject& ISharedConfigurationGameObjectRef;
 
+class CVertexArrayBuffer;
+typedef std::shared_ptr<CVertexArrayBuffer> CSharedVertexArrayBuffer;
+typedef const CSharedVertexArrayBuffer& CSharedVertexArrayBufferRef;
+
 #endif

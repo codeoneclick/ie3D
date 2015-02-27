@@ -70,7 +70,7 @@ IResource::~IResource(void)
     m_handlers.clear();
 }
 
-const std::string& IResource::getGuid(void) const
+const std::string& IResource::getGUID(void) const
 {
     return m_guid;
 }

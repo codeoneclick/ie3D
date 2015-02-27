@@ -109,7 +109,7 @@ CSharedTexture CTexture::constructCustomTexture(const std::string& guid,
 
 CTexture::~CTexture(void)
 {
-    glDeleteTextures(1, &m_textureId);
+    ieDeleteTextures(1, &m_textureId);
 }
 
 void CTexture::onResourceDataSerializationFinished(ISharedResourceDataRef resourceData)
@@ -211,22 +211,22 @@ void CTexture::bind(void) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glBindTexture(GL_TEXTURE_2D, m_textureId);
+        ieBindTexture(GL_TEXTURE_2D, m_textureId);
         if(m_settedWrapMode == 0 || m_presettedWrapMode != m_settedWrapMode)
         {
             m_settedWrapMode = m_presettedWrapMode;
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_settedWrapMode);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_settedWrapMode);
+            ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_settedWrapMode);
+            ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_settedWrapMode);
         }
         if(m_settedMagFilter == 0 || m_presettedMagFilter != m_settedMagFilter)
         {
             m_settedMagFilter = m_presettedMagFilter;
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_settedMagFilter);
+            ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_settedMagFilter);
         }
         if(m_settedMinFilter == 0 || m_pressetedMinFilter != m_settedMinFilter)
         {
             m_settedMinFilter = m_pressetedMinFilter;
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_settedMinFilter);
+            ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_settedMinFilter);
         }
     }
 }
@@ -234,6 +234,6 @@ void CTexture::unbind(void) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glBindTexture(GL_TEXTURE_2D, NULL);
+        ieBindTexture(GL_TEXTURE_2D, NULL);
     }
 }

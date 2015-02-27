@@ -383,43 +383,43 @@ void CShader::onResourceDataCommitFinished(ISharedResourceDataRef resourceData)
 
 void CShader::setupUniforms(void)
 {
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_M] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixM.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_V] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixV.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_P] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixP.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_N] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixN.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_VP] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixVP.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_MVP] = glGetUniformLocation(m_shaderId, SUniforms.m_matrixMVP.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_BONES] = glGetUniformLocation(m_shaderId, SUniforms.m_bonesMatrix.c_str());
-    m_uniforms[E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION] = glGetUniformLocation(m_shaderId, SUniforms.m_cameraPosition.c_str());
-    m_uniforms[E_SHADER_UNIFORM_VECTOR_GLOBAL_LIGHT_POSITION] = glGetUniformLocation(m_shaderId, SUniforms.m_globalLightPosition.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_PROJECTION] = glGetUniformLocation(m_shaderId, SUniforms.m_globalLightProjectionMatrix.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_VIEW] = glGetUniformLocation(m_shaderId, SUniforms.m_globalLightViewMatrix.c_str());
-    m_uniforms[E_SHADER_UNIFORM_VECTOR_CLIP_PLANE] = glGetUniformLocation(m_shaderId, SUniforms.m_clipPlane.c_str());
-    m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR] = glGetUniformLocation(m_shaderId, SUniforms.m_cameraNear.c_str());
-    m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_FAR] = glGetUniformLocation(m_shaderId, SUniforms.m_cameraFar.c_str());
-    m_uniforms[E_SHADER_UNIFORM_FLOAT_TIMER] = glGetUniformLocation(m_shaderId, SUniforms.m_timer.c_str());
-    m_uniforms[E_SHADER_UNIFORM_INT_LIGHTS_COUNT] = glGetUniformLocation(m_shaderId, SUniforms.m_lightsCount.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_M] = ieGetUniformLocation(m_shaderId, SUniforms.m_matrixM.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_V] = ieGetUniformLocation(m_shaderId, SUniforms.m_matrixV.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_P] = ieGetUniformLocation(m_shaderId, SUniforms.m_matrixP.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_N] = ieGetUniformLocation(m_shaderId, SUniforms.m_matrixN.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_VP] = ieGetUniformLocation(m_shaderId, SUniforms.m_matrixVP.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_MVP] = ieGetUniformLocation(m_shaderId, SUniforms.m_matrixMVP.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_BONES] = ieGetUniformLocation(m_shaderId, SUniforms.m_bonesMatrix.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION] = ieGetUniformLocation(m_shaderId, SUniforms.m_cameraPosition.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_GLOBAL_LIGHT_POSITION] = ieGetUniformLocation(m_shaderId, SUniforms.m_globalLightPosition.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_PROJECTION] = ieGetUniformLocation(m_shaderId, SUniforms.m_globalLightProjectionMatrix.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MATRIX_GLOBAL_LIGHT_VIEW] = ieGetUniformLocation(m_shaderId, SUniforms.m_globalLightViewMatrix.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_CLIP_PLANE] = ieGetUniformLocation(m_shaderId, SUniforms.m_clipPlane.c_str());
+    m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_NEAR] = ieGetUniformLocation(m_shaderId, SUniforms.m_cameraNear.c_str());
+    m_uniforms[E_SHADER_UNIFORM_FLOAT_CAMERA_FAR] = ieGetUniformLocation(m_shaderId, SUniforms.m_cameraFar.c_str());
+    m_uniforms[E_SHADER_UNIFORM_FLOAT_TIMER] = ieGetUniformLocation(m_shaderId, SUniforms.m_timer.c_str());
+    m_uniforms[E_SHADER_UNIFORM_INT_LIGHTS_COUNT] = ieGetUniformLocation(m_shaderId, SUniforms.m_lightsCount.c_str());
     
-    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_01] = glGetUniformLocation(m_shaderId, SUniforms.m_flag01.c_str());
-    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_02] = glGetUniformLocation(m_shaderId, SUniforms.m_flag02.c_str());
-    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_03] = glGetUniformLocation(m_shaderId, SUniforms.m_flag03.c_str());
-    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_04] = glGetUniformLocation(m_shaderId, SUniforms.m_flag04.c_str());
+    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_01] = ieGetUniformLocation(m_shaderId, SUniforms.m_flag01.c_str());
+    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_02] = ieGetUniformLocation(m_shaderId, SUniforms.m_flag02.c_str());
+    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_03] = ieGetUniformLocation(m_shaderId, SUniforms.m_flag03.c_str());
+    m_uniforms[E_SHADER_UNIFORM_INT_FLAG_04] = ieGetUniformLocation(m_shaderId, SUniforms.m_flag04.c_str());
     
-    m_samplers[E_SHADER_SAMPLER_01] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_01.c_str());
-    m_samplers[E_SHADER_SAMPLER_02] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_02.c_str());
-    m_samplers[E_SHADER_SAMPLER_03] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_03.c_str());
-    m_samplers[E_SHADER_SAMPLER_04] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_04.c_str());
-    m_samplers[E_SHADER_SAMPLER_05] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_05.c_str());
-    m_samplers[E_SHADER_SAMPLER_06] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_06.c_str());
-    m_samplers[E_SHADER_SAMPLER_07] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_07.c_str());
-    m_samplers[E_SHADER_SAMPLER_08] = glGetUniformLocation(m_shaderId, SSamplers.m_sampler_08.c_str());
+    m_samplers[E_SHADER_SAMPLER_01] = ieGetUniformLocation(m_shaderId, SSamplers.m_sampler_01.c_str());
+    m_samplers[E_SHADER_SAMPLER_02] = ieGetUniformLocation(m_shaderId, SSamplers.m_sampler_02.c_str());
+    m_samplers[E_SHADER_SAMPLER_03] = ieGetUniformLocation(m_shaderId, SSamplers.m_sampler_03.c_str());
+    m_samplers[E_SHADER_SAMPLER_04] = ieGetUniformLocation(m_shaderId, SSamplers.m_sampler_04.c_str());
+    m_samplers[E_SHADER_SAMPLER_05] = ieGetUniformLocation(m_shaderId, SSamplers.m_sampler_05.c_str());
+    m_samplers[E_SHADER_SAMPLER_06] = ieGetUniformLocation(m_shaderId, SSamplers.m_sampler_06.c_str());
+    m_samplers[E_SHADER_SAMPLER_07] = ieGetUniformLocation(m_shaderId, SSamplers.m_sampler_07.c_str());
+    m_samplers[E_SHADER_SAMPLER_08] = ieGetUniformLocation(m_shaderId, SSamplers.m_sampler_08.c_str());
     
-    m_attributes.at(E_SHADER_ATTRIBUTE_POSITION) = glGetAttribLocation(m_shaderId, SAttributes.m_position.c_str());
-    m_attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD) = glGetAttribLocation(m_shaderId, SAttributes.m_texcoord.c_str());
-    m_attributes.at(E_SHADER_ATTRIBUTE_NORMAL) = glGetAttribLocation(m_shaderId, SAttributes.m_normal.c_str());
-    m_attributes.at(E_SHADER_ATTRIBUTE_TANGENT) = glGetAttribLocation(m_shaderId, SAttributes.m_tangent.c_str());
-    m_attributes.at(E_SHADER_ATTRIBUTE_COLOR) = glGetAttribLocation(m_shaderId, SAttributes.m_color.c_str());
-    m_attributes.at(E_SHADER_ATTRIBUTE_EXTRA) = glGetAttribLocation(m_shaderId, SAttributes.m_extra.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_POSITION) = ieGetAttribLocation(m_shaderId, SAttributes.m_position.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_TEXCOORD) = ieGetAttribLocation(m_shaderId, SAttributes.m_texcoord.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_NORMAL) = ieGetAttribLocation(m_shaderId, SAttributes.m_normal.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_TANGENT) = ieGetAttribLocation(m_shaderId, SAttributes.m_tangent.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_COLOR) = ieGetAttribLocation(m_shaderId, SAttributes.m_color.c_str());
+    m_attributes.at(E_SHADER_ATTRIBUTE_EXTRA) = ieGetAttribLocation(m_shaderId, SAttributes.m_extra.c_str());
     
     for(ui32 i = 0; i < E_SHADER_UNIFORM_MAX + E_SHADER_SAMPLER_MAX; ++i)
     {
@@ -462,7 +462,7 @@ i32 CShader::getCustomUniform(const std::string& uniform)
     }
     else
     {
-        handle = glGetUniformLocation(m_shaderId, uniform.c_str());
+        handle = ieGetUniformLocation(m_shaderId, uniform.c_str());
         m_customUniforms.insert(std::make_pair(uniform, handle));
     }
     return handle;
@@ -482,7 +482,7 @@ void CShader::setMatrix3x3(const glm::mat3x3 &matrix, E_SHADER_UNIFORM uniform)
         }
         
         i32 handle = m_uniforms[uniform];
-        glUniformMatrix3fv(handle, 1, 0, &matrix[0][0]);
+        ieUniformMatrix3fv(handle, 1, 0, &matrix[0][0]);
         m_cachedUniformValues[uniform]->setMatrix3x3(matrix);
     }
 }
@@ -491,7 +491,7 @@ void CShader::setMatrix3x3Custom(const glm::mat3x3 &matrix, const std::string &u
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniformMatrix3fv(CShader::getCustomUniform(uniform), 1, 0, &matrix[0][0]);
+        ieUniformMatrix3fv(CShader::getCustomUniform(uniform), 1, 0, &matrix[0][0]);
     }
 }
 
@@ -509,7 +509,7 @@ void CShader::setMatrix4x4(const glm::mat4x4 &matrix, E_SHADER_UNIFORM uniform)
         }
 
         i32 handle = m_uniforms[uniform];
-        glUniformMatrix4fv(handle, 1, 0, &matrix[0][0]);
+        ieUniformMatrix4fv(handle, 1, 0, &matrix[0][0]);
         m_cachedUniformValues[uniform]->setMatrix4x4(matrix);
     }
 }
@@ -518,7 +518,7 @@ void CShader::setMatrix4x4Custom(const glm::mat4x4 &matrix, const std::string &u
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniformMatrix4fv(CShader::getCustomUniform(uniform), 1, 0, &matrix[0][0]);
+        ieUniformMatrix4fv(CShader::getCustomUniform(uniform), 1, 0, &matrix[0][0]);
     }
 }
 
@@ -527,7 +527,7 @@ void CShader::setMatrixArray4x4(const glm::mat4x4* matrix, ui32 size, E_SHADER_U
     if(IResource::isLoaded() && IResource::isCommited())
     {
         i32 handle = m_uniforms[uniform];
-        glUniformMatrix4fv(handle, size, 0, &matrix[0][0][0]);
+        ieUniformMatrix4fv(handle, size, 0, &matrix[0][0][0]);
     }
 }
 
@@ -535,7 +535,7 @@ void CShader::setMatrixArray4x4Custom(const glm::mat4x4* matrix, ui32 size, cons
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniformMatrix4fv(CShader::getCustomUniform(uniform), size, 0, &matrix[0][0][0]);
+        ieUniformMatrix4fv(CShader::getCustomUniform(uniform), size, 0, &matrix[0][0][0]);
     }
 }
 
@@ -553,7 +553,7 @@ void CShader::setVector2(const glm::vec2 &vector, E_SHADER_UNIFORM uniform)
         }
         
         i32 handle = m_uniforms[uniform];
-        glUniform2fv(handle, 1, &vector[0]);
+        ieUniform2fv(handle, 1, &vector[0]);
         m_cachedUniformValues[uniform]->setVector2(vector);
     }
 }
@@ -562,7 +562,7 @@ void CShader::setVector2Custom(const glm::vec2 &vector, const std::string &unifo
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniform2fv(CShader::getCustomUniform(uniform), 1, &vector[0]);
+        ieUniform2fv(CShader::getCustomUniform(uniform), 1, &vector[0]);
     }
 }
 
@@ -570,7 +570,7 @@ void CShader::setVector2ArrayCustom(const glm::vec2* vectors, ui32 size, const s
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniform2fv(CShader::getCustomUniform(uniform), size, &vectors[0][0]);
+        ieUniform2fv(CShader::getCustomUniform(uniform), size, &vectors[0][0]);
     }
 }
 
@@ -588,7 +588,7 @@ void CShader::setVector3(const glm::vec3 &vector, E_SHADER_UNIFORM uniform)
         }
         
         i32 handle = m_uniforms[uniform];
-        glUniform3fv(handle, 1, &vector[0]);
+        ieUniform3fv(handle, 1, &vector[0]);
         m_cachedUniformValues[uniform]->setVector3(vector);
     }
 }
@@ -597,7 +597,7 @@ void CShader::setVector3Custom(const glm::vec3 &vector, const std::string &unifo
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniform3fv(CShader::getCustomUniform(uniform), 1, &vector[0]);
+        ieUniform3fv(CShader::getCustomUniform(uniform), 1, &vector[0]);
     }
 }
 
@@ -605,7 +605,7 @@ void CShader::setVector3ArrayCustom(const glm::vec3* vectors, ui32 size, const s
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniform3fv(CShader::getCustomUniform(uniform), size, &vectors[0][0]);
+        ieUniform3fv(CShader::getCustomUniform(uniform), size, &vectors[0][0]);
     }
 }
 
@@ -623,7 +623,7 @@ void CShader::setVector4(const glm::vec4 &vector, E_SHADER_UNIFORM uniform)
         }
 
         i32 handle = m_uniforms[uniform];
-        glUniform4fv(handle, 1, &vector[0]);
+        ieUniform4fv(handle, 1, &vector[0]);
         m_cachedUniformValues[uniform]->setVector4(vector);
     }
 }
@@ -632,7 +632,7 @@ void CShader::setVector4Custom(const glm::vec4 &vector, const std::string &unifo
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniform4fv(CShader::getCustomUniform(uniform), 1, &vector[0]);
+        ieUniform4fv(CShader::getCustomUniform(uniform), 1, &vector[0]);
     }
 }
 
@@ -650,7 +650,7 @@ void CShader::setFloat(f32 value, E_SHADER_UNIFORM uniform)
         }
 
         i32 handle = m_uniforms[uniform];
-        glUniform1f(handle, value);
+        ieUniform1f(handle, value);
         m_cachedUniformValues[uniform]->setFloat(value);
     }
 }
@@ -659,7 +659,7 @@ void CShader::setFloatCustom(f32 value, const std::string &uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniform1f(CShader::getCustomUniform(uniform), value);
+        ieUniform1f(CShader::getCustomUniform(uniform), value);
     }
 }
 
@@ -677,7 +677,7 @@ void CShader::setInt(i32 value, E_SHADER_UNIFORM uniform)
         }
         
         i32 handle = m_uniforms[uniform];
-        glUniform1i(handle, value);
+        ieUniform1i(handle, value);
         m_cachedUniformValues[uniform]->setInt(value);
     }
 }
@@ -686,7 +686,7 @@ void CShader::setIntCustom(i32 value, const std::string &uniform)
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        glUniform1i(CShader::getCustomUniform(uniform), value);
+        ieUniform1i(CShader::getCustomUniform(uniform), value);
     }
 }
 
@@ -695,9 +695,9 @@ void CShader::setTexture(CSharedTextureRef texture, E_SHADER_SAMPLER sampler)
     if(IResource::isLoaded() && IResource::isCommited())
     {
         assert(sampler < E_SHADER_SAMPLER_MAX);
-        glActiveTexture(GL_TEXTURE0 + sampler);
+        ieActiveTexture(GL_TEXTURE0 + sampler);
         texture->bind();
-        glUniform1i(m_samplers[sampler], sampler);
+        ieUniform1i(m_samplers[sampler], sampler);
     }
 }
 
@@ -706,7 +706,7 @@ void CShader::bind(void) const
     if(IResource::isLoaded() && IResource::isCommited() && g_shaderId != m_shaderId)
     {
         g_shaderId = m_shaderId;
-        glUseProgram(m_shaderId);
+        ieUseProgram(m_shaderId);
     }
 }
 
