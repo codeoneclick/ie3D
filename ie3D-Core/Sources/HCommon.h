@@ -34,8 +34,6 @@
 
 #if defined(DEBUG)
 
-#define __PERFORMANCE_TIMER__
-
 #endif
 
 #if defined(__IOS__) || defined(__OSX__)

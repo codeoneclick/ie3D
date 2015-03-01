@@ -1,5 +1,7 @@
 #if defined(__IOS__)
 
+#define GL_APPLE_clip_distance 1
+#extension GL_APPLE_clip_distance : enable
 precision highp float;
 
 #endif

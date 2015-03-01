@@ -77,10 +77,8 @@ void CDemoGameScene::load(void)
     //m_atmosphericScattering = m_root->createAtmosphericScattering("gameobject.atmospheric.scattering.xml");
     //m_root->setAtmosphericScattering(m_atmosphericScattering);
     
-    std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
-    particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
-    
-    //m_particles.push_back(particleEmitter);
+    //std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
+    //particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
     //m_root->addParticleEmitter(particleEmitter);
     
     m_landscape = m_root->createLandscape("gameobject.landscape.xml");

@@ -278,8 +278,7 @@ void IGameObject::bindBaseShaderUniforms(CSharedMaterialRef material)
     
     // base matrices
     material->getShader()->setMatrix4x4(IGameObject::getMMatrix(), E_SHADER_UNIFORM_MATRIX_M);
-    material->getShader()->setMatrix4x4(!material->isClipping() ? m_camera->getPMatrix() : m_camera->getCPMatrix(material->getClippingPlane(), material->isReflecting()),
-                                        E_SHADER_UNIFORM_MATRIX_P);
+    material->getShader()->setMatrix4x4(m_camera->getPMatrix(), E_SHADER_UNIFORM_MATRIX_P);
     material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->getVMatrix() : m_camera->getIVMatrix(), E_SHADER_UNIFORM_MATRIX_V);
     material->getShader()->setMatrix4x4(!material->isReflecting() ? m_camera->getVPMatrix() : m_camera->getIVPMatrix(), E_SHADER_UNIFORM_MATRIX_VP);
     material->getShader()->setMatrix4x4(!material->isReflecting() ? IGameObject::getMVPMatrix() : IGameObject::getIMVPMatrix(), E_SHADER_UNIFORM_MATRIX_MVP);

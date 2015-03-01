@@ -566,6 +566,26 @@ void CMaterial::bind(void)
         ieDisable(GL_BLEND);
         getCachedParameters()->m_isBlending = m_parameters->m_isBlending;
     }
+    
+    if(m_parameters->m_isClipping &&
+       getCachedParameters()->m_isClipping != m_parameters->m_isClipping)
+    {
+#if defined(__IOS__)
+        ieEnable(GL_CLIP_DISTANCE0_APPLE);
+#else
+        ieEnable(GL_CLIP_DISTANCE0);
+#endif
+        getCachedParameters()->m_isClipping = m_parameters->m_isClipping;
+    }
+    else if(getCachedParameters()->m_isClipping != m_parameters->m_isClipping)
+    {
+#if defined(__IOS__)
+        ieDisable(GL_CLIP_DISTANCE0_APPLE);
+#else
+        ieDisable(GL_CLIP_DISTANCE0);
+#endif
+        getCachedParameters()->m_isClipping = m_parameters->m_isClipping;
+    }
 }
 
 void CMaterial::unbind(void)

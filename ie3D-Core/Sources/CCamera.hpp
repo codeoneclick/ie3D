@@ -36,27 +36,6 @@ inline glm::mat4 CCamera::getIVPMatrix(void) const
     return m_matrixIVP;
 }
 
-inline GLfloat sgn(GLfloat a)
-{
-    if(a > 0.0f) return(1.0f);
-    if(a < 0.0f) return(-1.0f);
-    return 0.0f;
-}
-
-inline glm::mat4 CCamera::getCPMatrix(const glm::vec4& clipping, bool invert)
-{
-    m_matrixCP = m_matrixP;
-    glm::vec4 clippingView = glm::vec4(clipping.x, clipping.y, clipping.z, clipping.w) * glm::inverse(!invert ? m_matrixV : m_matrixIV);
-    glm::vec4 clippingCorner = glm::vec4(sgn(clippingView.x), sgn(clippingView.y), 1.0f, 1.0f);
-    clippingCorner = clippingCorner * glm::inverse(m_matrixP);
-    glm::vec4 scaledPlane = clippingView * (2.0f / glm::dot(clippingCorner, clippingView));
-    m_matrixCP[0][2] = scaledPlane.x;
-    m_matrixCP[1][2] = scaledPlane.y;
-    m_matrixCP[2][2] = scaledPlane.z + 1.0f;
-    m_matrixCP[3][2] = scaledPlane.w;
-    return m_matrixCP;
-}
-
 inline void CCamera::setPosition(const glm::vec3& position)
 {
     m_position = position;

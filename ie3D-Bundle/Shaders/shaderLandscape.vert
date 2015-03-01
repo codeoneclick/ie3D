@@ -52,6 +52,7 @@ void main(void)
 {
     vec4 vPosition = vec4(IN_Position, 1.0);
     gl_Position = u_matrixP * u_matrixV * vPosition;
+    gl_ClipDistance[0] = dot(vPosition.xyz, VECTOR_ClipPlane.xyz);
     
     OUT_ShadowParameters = mBiasMatrix * MATRIX_GlobalLightProjection * MATRIX_GlobalLightView * vPosition;
     
