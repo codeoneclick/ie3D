@@ -5,7 +5,6 @@ out vec2   OUT_TexCoord;
 out vec4   OUT_TillingTexcoordLayer_01;
 out vec4   OUT_TillingTexcoordLayer_02;
 out vec4   OUT_TillingTexcoordLayer_03;
-out float  OUT_ClipPlane;
 out vec3   OUT_CameraPosition;
 out vec3   OUT_LightDirection;
 out vec3   OUT_Normal;
@@ -18,7 +17,6 @@ varying vec2   OUT_TexCoord;
 varying vec4   OUT_TillingTexcoordLayer_01;
 varying vec4   OUT_TillingTexcoordLayer_02;
 varying vec4   OUT_TillingTexcoordLayer_03;
-varying float  OUT_ClipPlane;
 varying vec3   OUT_CameraPosition;
 varying vec3   OUT_LightDirection;
 varying vec3   OUT_Normal;
@@ -57,7 +55,6 @@ void main(void)
     OUT_ShadowParameters = mBiasMatrix * MATRIX_GlobalLightProjection * MATRIX_GlobalLightView * vPosition;
     
     OUT_TexCoord = IN_TexCoord;
-    OUT_ClipPlane = dot(vPosition.xyz, VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
     OUT_CameraPosition = VECTOR_CameraPosition;
     
     OUT_Normal = IN_Normal.xyz;

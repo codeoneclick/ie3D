@@ -2,12 +2,10 @@
 #if defined(__OPENGL_30__)
 
 out vec2   OUT_TexCoord;
-out float  OUT_ClipPlane;
 
 #else
 
 varying vec2   OUT_TexCoord;
-varying float  OUT_ClipPlane;
 
 #endif
 
@@ -41,7 +39,6 @@ void main(void)
     }
     vPosition = u_matrixM * vPosition;
     gl_Position = u_matrixVP * vPosition;
+    gl_ClipDistance[0] = dot(vPosition.xyz, VECTOR_ClipPlane.xyz);
     OUT_TexCoord = IN_TexCoord;
-    
-    OUT_ClipPlane = dot(vPosition.xyz, VECTOR_ClipPlane.xyz) + VECTOR_ClipPlane.w;
 }
