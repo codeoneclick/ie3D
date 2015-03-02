@@ -7,13 +7,22 @@
 //
 
 #include "CTileset.h"
+#include "CTexture.h"
 
-CTileset::CTileset(void)
+CTileset::CTileset(CSharedTextureRef texture) :
+m_texture(texture)
 {
+    assert(texture->getWidth() > 16);
+    assert(texture->getWidth() % 16 == 0);
+    
+    ui32 texcoordStep = texture->getWidth() / 16;
     for(ui32 i = 0; i < k_MAX_TILES_IN_SET; ++i)
     {
         m_bitsets[i] = i;
-        std::cout<<m_bitsets[i][0]<<m_bitsets[i][1]<<m_bitsets[i][2]<<m_bitsets[i][3]<<std::endl;
+        ui32 u1 = static_cast<ui32>((i * texcoordStep) / texture->getWidth());
+        ui32 u2 = static_cast<ui32>(((i + 1) * texcoordStep) / texture->getWidth());
+        m_texcoords[i] = glm::vec4(u1, 0,
+                                   u2, 1);
     }
 }
 

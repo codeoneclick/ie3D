@@ -22,11 +22,13 @@ private:
     
 protected:
     
+    CSharedTexture m_texture;
     std::array<std::bitset<k_MAX_BIT_IN_TILE> ,k_MAX_TILES_IN_SET> m_bitsets;
+    std::array<glm::vec4, k_MAX_TILES_IN_SET> m_texcoords;
     
 public:
     
-    CTileset(void);
+    CTileset(CSharedTextureRef texture);
     ~CTileset(void);
 };
 
