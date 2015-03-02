@@ -25,6 +25,7 @@
 #include "CDEUIToSceneCommands.h"
 #include "CGameObjectNavigator.h"
 #include "ICharacterController.h"
+#include "CTileset.h"
 
 #define key_z 122
 #define key_x 120
