@@ -22,13 +22,19 @@ private:
     
 protected:
     
+    std::vector<std::array<std::bitset<k_MAX_BIT_IN_TILE>, k_MAX_TILES_IN_SET>> m_bitsets;
+    std::vector<std::array<glm::vec4, k_MAX_TILES_IN_SET>> m_texcoords;
+    
+    ui32 m_textureSetsCount;
     CSharedTexture m_texture;
-    std::array<std::bitset<k_MAX_BIT_IN_TILE> ,k_MAX_TILES_IN_SET> m_bitsets;
-    std::array<glm::vec4, k_MAX_TILES_IN_SET> m_texcoords;
+    
+    glm::ivec2 m_mapSize;
+    std::vector<std::tuple<ui32, std::bitset<k_MAX_BIT_IN_TILE>, glm::vec4>> m_map;
     
 public:
     
-    CTileset(CSharedTextureRef texture);
+    CTileset(CSharedTextureRef texture, ui32 textureSetsCount,
+             const glm::ivec2& mapSize);
     ~CTileset(void);
 };
 

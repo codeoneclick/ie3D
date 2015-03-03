@@ -11,6 +11,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CInputContext_ndk.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CCommonOS_ios.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CCommonOS_osx.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CVertexArrayBuffer.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/pngtrans.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CPerlinNoise.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CCommonOS_win32.o
@@ -43,6 +44,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CGraphicsContext_win32.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CGraphicsContext_ndk.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/crc32.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CTileset.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IGameTransition.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CGameLoopExecutor.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CGlobalLightSource.o
