@@ -20,6 +20,7 @@
 #include "CVertexBuffer.h"
 #include "CConfigurationAccessor.h"
 #include "CTileset3D.h"
+#include "CPerlinNoise.h"
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -143,12 +144,21 @@ void CLandscape::onResourceLoaded(ISharedResourceRef resource, bool success)
     IGameObject::onResourceLoaded(resource, success);
     if(resource->getResourceClass() == E_RESOURCE_CLASS_TEXTURE)
     {
+        const CPerlinNoise perlin(2);
+        const f32 fx = 32 / 0.1f;
+        const f32 fy = 32 / 0.1f;
+        
         std::vector<f32> heights;
-        for(ui32 i = 0; i < 16 * 16; ++i)
+        for(ui32 i = 0; i < 32; ++i)
         {
-            heights.push_back(2.0f);
+            for(ui32 j = 0; j < 32; ++j)
+            {
+                f32 n = perlin.octaveNoise(i / fx, j / fy, 15);
+                n = glm::clamp(n * 0.5f + 0.5f, 0.0f, 1.0f);
+                heights.push_back(n * 64.0f - 32.0f);
+            }
         }
-        std::shared_ptr<CTileset3D> tileset = std::make_shared<CTileset3D>(std::static_pointer_cast<CTexture>(resource), glm::ivec2(16), heights);
+        std::shared_ptr<CTileset3D> tileset = std::make_shared<CTileset3D>(std::static_pointer_cast<CTexture>(resource), glm::ivec2(32), heights);
         m_mesh = tileset->m_mesh;
     }
 }
