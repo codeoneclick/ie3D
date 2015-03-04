@@ -184,9 +184,12 @@
 		213B7F391994CDFC006F3976 /* CRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F371994CDFC006F3976 /* CRenderTarget.cpp */; };
 		213B7F3A1994CDFC006F3976 /* CRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213B7F371994CDFC006F3976 /* CRenderTarget.cpp */; };
 		213B7F3B1994CDFC006F3976 /* CRenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 213B7F381994CDFC006F3976 /* CRenderTarget.h */; };
-		21548F261AA49D27000AAA1A /* CTileset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F241AA49D27000AAA1A /* CTileset.cpp */; };
-		21548F271AA49D27000AAA1A /* CTileset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F241AA49D27000AAA1A /* CTileset.cpp */; };
-		21548F281AA49D27000AAA1A /* CTileset.h in Headers */ = {isa = PBXBuildFile; fileRef = 21548F251AA49D27000AAA1A /* CTileset.h */; };
+		21548F261AA49D27000AAA1A /* CTileset2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F241AA49D27000AAA1A /* CTileset2D.cpp */; };
+		21548F271AA49D27000AAA1A /* CTileset2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F241AA49D27000AAA1A /* CTileset2D.cpp */; };
+		21548F281AA49D27000AAA1A /* CTileset2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 21548F251AA49D27000AAA1A /* CTileset2D.h */; };
+		21548F461AA6F761000AAA1A /* CTileset3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F441AA6F761000AAA1A /* CTileset3D.cpp */; };
+		21548F471AA6F761000AAA1A /* CTileset3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F441AA6F761000AAA1A /* CTileset3D.cpp */; };
+		21548F481AA6F761000AAA1A /* CTileset3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 21548F451AA6F761000AAA1A /* CTileset3D.h */; };
 		2162096819A3312D00DECBBC /* CThreadOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096619A3312D00DECBBC /* CThreadOperation.cpp */; };
 		2162096919A3312D00DECBBC /* CThreadOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096619A3312D00DECBBC /* CThreadOperation.cpp */; };
 		2162096A19A3312D00DECBBC /* CThreadOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2162096719A3312D00DECBBC /* CThreadOperation.h */; };
@@ -471,8 +474,10 @@
 		21457FE8181C4BEA0071839E /* IFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IFabricator.h; path = Sources/IFabricator.h; sourceTree = "<group>"; };
 		21457FE9181C4BEA0071839E /* IGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IGraph.cpp; path = Sources/IGraph.cpp; sourceTree = "<group>"; };
 		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
-		21548F241AA49D27000AAA1A /* CTileset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTileset.cpp; path = Sources/CTileset.cpp; sourceTree = "<group>"; };
-		21548F251AA49D27000AAA1A /* CTileset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTileset.h; path = Sources/CTileset.h; sourceTree = "<group>"; };
+		21548F241AA49D27000AAA1A /* CTileset2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTileset2D.cpp; path = Sources/CTileset2D.cpp; sourceTree = "<group>"; };
+		21548F251AA49D27000AAA1A /* CTileset2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTileset2D.h; path = Sources/CTileset2D.h; sourceTree = "<group>"; };
+		21548F441AA6F761000AAA1A /* CTileset3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTileset3D.cpp; path = Sources/CTileset3D.cpp; sourceTree = "<group>"; };
+		21548F451AA6F761000AAA1A /* CTileset3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTileset3D.h; path = Sources/CTileset3D.h; sourceTree = "<group>"; };
 		2162096619A3312D00DECBBC /* CThreadOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CThreadOperation.cpp; path = Sources/CThreadOperation.cpp; sourceTree = "<group>"; };
 		2162096719A3312D00DECBBC /* CThreadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CThreadOperation.h; path = Sources/CThreadOperation.h; sourceTree = "<group>"; };
 		2162096B19A3364200DECBBC /* CThreadOperationPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CThreadOperationPool.cpp; path = Sources/CThreadOperationPool.cpp; sourceTree = "<group>"; };
@@ -1256,8 +1261,10 @@
 				219B5E6E1A10F3E600986953 /* CBoundingBox.cpp */,
 				21B0BA091A82AA72001CE9A0 /* CPerlinNoise.h */,
 				21B0BA081A82AA72001CE9A0 /* CPerlinNoise.cpp */,
-				21548F251AA49D27000AAA1A /* CTileset.h */,
-				21548F241AA49D27000AAA1A /* CTileset.cpp */,
+				21548F251AA49D27000AAA1A /* CTileset2D.h */,
+				21548F241AA49D27000AAA1A /* CTileset2D.cpp */,
+				21548F451AA6F761000AAA1A /* CTileset3D.h */,
+				21548F441AA6F761000AAA1A /* CTileset3D.cpp */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -1913,7 +1920,7 @@
 				2191CE9F196EE95100CE2813 /* deflate.h in Headers */,
 				21FB5C381A14F60400222BEE /* CAnimationSequence.h in Headers */,
 				2191CE9C196EE95100CE2813 /* crc32.h in Headers */,
-				21548F281AA49D27000AAA1A /* CTileset.h in Headers */,
+				21548F281AA49D27000AAA1A /* CTileset2D.h in Headers */,
 				219B5E721A10F3E600986953 /* CBoundingBox.h in Headers */,
 				2191CEB4196EE95100CE2813 /* inftrees.h in Headers */,
 				21FEECF01A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.h in Headers */,
@@ -1954,6 +1961,7 @@
 				21C409AC197B0BA40063D62D /* CMeshCommiter_MDL_01.h in Headers */,
 				2133A7EC1A9F2F7D00188ADA /* CVertexArrayBuffer.h in Headers */,
 				2173348D19644157002B3F90 /* IRenderTechniqueImporter.h in Headers */,
+				21548F481AA6F761000AAA1A /* CTileset3D.h in Headers */,
 				2162096F19A3364200DECBBC /* CThreadOperationPool.h in Headers */,
 				21CB35011A7A479000819C09 /* CConfigurationAccessor.h in Headers */,
 				2191CEBB196EE95100CE2813 /* zlib.h in Headers */,
@@ -2131,7 +2139,7 @@
 				21208FAF1906FB5F00FFC8D4 /* CGraphicsContext_win32.cpp in Sources */,
 				21208FB01906FB5F00FFC8D4 /* CGraphicsContext_ndk.cpp in Sources */,
 				2191CE9B196EE95100CE2813 /* crc32.c in Sources */,
-				21548F271AA49D27000AAA1A /* CTileset.cpp in Sources */,
+				21548F271AA49D27000AAA1A /* CTileset2D.cpp in Sources */,
 				21208FB61906FB5F00FFC8D4 /* IGameTransition.cpp in Sources */,
 				21208FB71906FB5F00FFC8D4 /* CGameLoopExecutor.cpp in Sources */,
 				2179741B19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */,
@@ -2152,6 +2160,7 @@
 				21CB350A1A7A683D00819C09 /* CConfigurationOcean.cpp in Sources */,
 				217334961964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				21208FBF1906FB5F00FFC8D4 /* CParticleEmitter.cpp in Sources */,
+				21548F471AA6F761000AAA1A /* CTileset3D.cpp in Sources */,
 				21208FC01906FB5F00FFC8D4 /* CModel.cpp in Sources */,
 				21208FC11906FB5F00FFC8D4 /* COcean.cpp in Sources */,
 				2191CE63196EDBEF00CE2813 /* pngset.c in Sources */,
@@ -2301,7 +2310,7 @@
 				213265F31906A4AF001C98F7 /* CGraphicsContext_win32.cpp in Sources */,
 				213265F41906A4AF001C98F7 /* CGraphicsContext_ndk.cpp in Sources */,
 				2191CE9A196EE95100CE2813 /* crc32.c in Sources */,
-				21548F261AA49D27000AAA1A /* CTileset.cpp in Sources */,
+				21548F261AA49D27000AAA1A /* CTileset2D.cpp in Sources */,
 				213265FA1906A4AF001C98F7 /* IGameTransition.cpp in Sources */,
 				213265FB1906A4AF001C98F7 /* CGameLoopExecutor.cpp in Sources */,
 				2179741A19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */,
@@ -2322,6 +2331,7 @@
 				21CB35091A7A683D00819C09 /* CConfigurationOcean.cpp in Sources */,
 				217334951964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				213266031906A4AF001C98F7 /* CParticleEmitter.cpp in Sources */,
+				21548F461AA6F761000AAA1A /* CTileset3D.cpp in Sources */,
 				213266041906A4AF001C98F7 /* CModel.cpp in Sources */,
 				213266051906A4AF001C98F7 /* COcean.cpp in Sources */,
 				2191CE62196EDBEF00CE2813 /* pngset.c in Sources */,

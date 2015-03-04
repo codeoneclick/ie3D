@@ -227,11 +227,12 @@ void IGameObject::onUnbind(CSharedMaterialRef material)
 
 void IGameObject::onDraw(CSharedMaterialRef material)
 {
-    assert(m_mesh != nullptr);
-    assert(m_camera != nullptr);
-    assert(m_globalLightSource != nullptr);
+    //assert(m_mesh != nullptr);
+    //assert(m_camera != nullptr);
+    //assert(m_globalLightSource != nullptr);
     
-    if(material->getShader()->isLoaded() &&
+    if(m_mesh != nullptr &&
+       material->getShader()->isLoaded() &&
        material->getShader()->isCommited()
 #if defined(__EDITOR__)
        && material->getEnabled()

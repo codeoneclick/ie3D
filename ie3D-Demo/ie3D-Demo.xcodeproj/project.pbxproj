@@ -43,6 +43,8 @@
 		212EED3619CC6A2500DA02B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211384EC194300DE0041A18A /* Images.xcassets */; };
 		212EED4A19CC7A4D00DA02B7 /* CDemoController-OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212EED4519CC715000DA02B7 /* CDemoController-OSX.cpp */; };
 		213267961906B51C001C98F7 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0725C181DB1910019D264 /* CGameViewController.xib */; };
+		21548F4A1AA737C6000AAA1A /* tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 21548F491AA737C6000AAA1A /* tileset.png */; };
+		21548F4B1AA737C6000AAA1A /* tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 21548F491AA737C6000AAA1A /* tileset.png */; };
 		2162093419A1F04C00DECBBC /* map_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 2162092F19A1F04C00DECBBC /* map_01.png */; };
 		2162093519A1F04C00DECBBC /* map_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 2162093019A1F04C00DECBBC /* map_02.png */; };
 		2162093619A1F04C00DECBBC /* map_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 2162093119A1F04C00DECBBC /* map_03.png */; };
@@ -328,6 +330,7 @@
 		212EED4519CC715000DA02B7 /* CDemoController-OSX.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "CDemoController-OSX.cpp"; path = "Sources/CDemoController-OSX.cpp"; sourceTree = SOURCE_ROOT; };
 		212EED4619CC715000DA02B7 /* CDemoController-OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDemoController-OSX.h"; path = "Sources/CDemoController-OSX.h"; sourceTree = SOURCE_ROOT; };
 		213267881906AA25001C98F7 /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
+		21548F491AA737C6000AAA1A /* tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tileset.png; path = "../../ie3D/ie3D-Bundle/Textures/tileset.png"; sourceTree = "<group>"; };
 		2162092F19A1F04C00DECBBC /* map_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_01.png; path = "../ie3D-Bundle/Temp/map_01.png"; sourceTree = SOURCE_ROOT; };
 		2162093019A1F04C00DECBBC /* map_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_02.png; path = "../ie3D-Bundle/Temp/map_02.png"; sourceTree = SOURCE_ROOT; };
 		2162093119A1F04C00DECBBC /* map_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_03.png; path = "../ie3D-Bundle/Temp/map_03.png"; sourceTree = SOURCE_ROOT; };
@@ -646,6 +649,7 @@
 		217EF88C19F7E11200F339A0 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				21548F491AA737C6000AAA1A /* tileset.png */,
 				21E52BCE1A911352005977F1 /* human_02.png */,
 				21E52BB61A90FA72005977F1 /* human_01.png */,
 				21E52B8F1A90E9E1005977F1 /* orc_02.png */,
@@ -1080,6 +1084,7 @@
 				217EF8BC19F7E11300F339A0 /* static_model_tank_tracks.png in Resources */,
 				212EED0419CC5D9C00DA02B7 /* map_01.png in Resources */,
 				212EED0519CC5D9C00DA02B7 /* shaderParticleEmitter.vert in Resources */,
+				21548F4B1AA737C6000AAA1A /* tileset.png in Resources */,
 				21706D171A89475D00C56C7E /* material.skybox.reflection.xml in Resources */,
 				21706CD71A8946DD00C56C7E /* ws.technique.refraction.xml in Resources */,
 				21E52BB11A90FA5F005977F1 /* human_01_idle.IE3DANIMATION in Resources */,
@@ -1161,6 +1166,7 @@
 				2162093719A1F04C00DECBBC /* map_04.png in Resources */,
 				21706D141A89475D00C56C7E /* material.skybox.base.xml in Resources */,
 				21706CCB1A89468C00C56C7E /* transition.demo.xml in Resources */,
+				21548F4A1AA737C6000AAA1A /* tileset.png in Resources */,
 				2179741119F4F69E00A98630 /* shaderAnimatedGameObjectND.frag in Resources */,
 				21706D101A89475D00C56C7E /* material.ocean.base.xml in Resources */,
 				217EF90819F9222A00F339A0 /* shaderCommon.frag in Resources */,

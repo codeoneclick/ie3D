@@ -19,6 +19,7 @@
 #include "CQuadTree.h"
 #include "CVertexBuffer.h"
 #include "CConfigurationAccessor.h"
+#include "CTileset3D.h"
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -71,7 +72,7 @@ E_LANDSCAPE_CHUNK_LOD CLandscape::getLOD(const glm::vec3& point,
 
 void CLandscape::onSceneUpdate(f32 deltatime)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    /*if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         m_heightmapGenerator->update();
         
@@ -134,12 +135,22 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 }
             }
         }
-    }
+    }*/
 }
 
 void CLandscape::onResourceLoaded(ISharedResourceRef resource, bool success)
 {
     IGameObject::onResourceLoaded(resource, success);
+    if(resource->getResourceClass() == E_RESOURCE_CLASS_TEXTURE)
+    {
+        std::vector<f32> heights;
+        for(ui32 i = 0; i < 16 * 16; ++i)
+        {
+            heights.push_back(2.0f);
+        }
+        std::shared_ptr<CTileset3D> tileset = std::make_shared<CTileset3D>(std::static_pointer_cast<CTexture>(resource), glm::ivec2(16), heights);
+        m_mesh = tileset->m_mesh;
+    }
 }
 
 void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bool success)
@@ -179,18 +190,20 @@ bool CLandscape::isInCameraFrustum(CSharedFrustumRef cameraFrustum)
 
 void CLandscape::onBind(CSharedMaterialRef material)
 {
-    material->bind();
-    m_materialBindImposer(material);
+    //material->bind();
+    //m_materialBindImposer(material);
+    IGameObject::onBind(material);
 }
 
 void CLandscape::onUnbind(CSharedMaterialRef material)
 {
-    material->unbind();
+    //material->unbind();
+    IGameObject::onUnbind(material);
 }
 
 void CLandscape::onDraw(CSharedMaterialRef material)
 {
-    assert(m_camera != nullptr);
+    /*assert(m_camera != nullptr);
     assert(m_globalLightSource != nullptr);
     CLandscape::onBind(material);
     if(material &&
@@ -206,7 +219,8 @@ void CLandscape::onDraw(CSharedMaterialRef material)
             }
         });
     }
-    CLandscape::onUnbind(material);
+    CLandscape::onUnbind(material);*/
+    IGameObject::onDraw(material);
 }
 
 void CLandscape::bindCustomShaderUniforms(CSharedMaterialRef material)

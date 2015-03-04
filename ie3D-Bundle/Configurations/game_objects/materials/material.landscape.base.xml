@@ -20,13 +20,13 @@
         fs_filename="shaderLandscape.frag"/>
     <textures>
         <texture
-            filename="landscape_01.png"
+            filename="tileset.png"
             render_operation_name=""
             sampler_index="0"
-            wrap_mode="GL_REPEAT"
-            mag_filter="GL_LINEAR"
-            min_filter="GL_MIPMAP"/>
-            <texture
+            wrap_mode="GL_CLAMP_TO_EDGE"
+            mag_filter="GL_NEAREST"
+            min_filter="GL_NEAREST"/>
+            <!--<texture
             filename="landscape_02.png"
             render_operation_name=""
             sampler_index="1"
@@ -53,6 +53,6 @@
             sampler_index="4"
             wrap_mode="GL_CLAMP_TO_EDGE"
             mag_filter="GL_LINEAR"
-            min_filter="GL_LINEAR"/>
+            min_filter="GL_LINEAR"/>-->
     </textures>
 </material>
