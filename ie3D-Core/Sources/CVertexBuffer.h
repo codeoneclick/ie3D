@@ -27,7 +27,12 @@ struct SVertexData
     std::vector<SBoneData> m_bones;
 };
 
-struct SAttributeVertex
+struct A
+{
+    
+};
+
+struct SAttributeVertex : public A
 {
     glm::vec3 m_position;
     glm::uint32 m_texcoord;

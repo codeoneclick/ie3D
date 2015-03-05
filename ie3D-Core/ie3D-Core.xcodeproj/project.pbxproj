@@ -187,6 +187,18 @@
 		21548F261AA49D27000AAA1A /* CTileset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F241AA49D27000AAA1A /* CTileset.cpp */; };
 		21548F271AA49D27000AAA1A /* CTileset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F241AA49D27000AAA1A /* CTileset.cpp */; };
 		21548F281AA49D27000AAA1A /* CTileset.h in Headers */ = {isa = PBXBuildFile; fileRef = 21548F251AA49D27000AAA1A /* CTileset.h */; };
+		21548F5A1AA849F0000AAA1A /* CGeomapmaping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F581AA849F0000AAA1A /* CGeomapmaping.cpp */; };
+		21548F5B1AA849F0000AAA1A /* CGeomapmaping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F581AA849F0000AAA1A /* CGeomapmaping.cpp */; };
+		21548F5C1AA849F0000AAA1A /* CGeomapmaping.h in Headers */ = {isa = PBXBuildFile; fileRef = 21548F591AA849F0000AAA1A /* CGeomapmaping.h */; };
+		21548F5F1AA84C42000AAA1A /* CVBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F5D1AA84C42000AAA1A /* CVBO.cpp */; };
+		21548F601AA84C42000AAA1A /* CVBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F5D1AA84C42000AAA1A /* CVBO.cpp */; };
+		21548F611AA84C42000AAA1A /* CVBO.h in Headers */ = {isa = PBXBuildFile; fileRef = 21548F5E1AA84C42000AAA1A /* CVBO.h */; };
+		21548F641AA84C5A000AAA1A /* CIBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F621AA84C5A000AAA1A /* CIBO.cpp */; };
+		21548F651AA84C5A000AAA1A /* CIBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F621AA84C5A000AAA1A /* CIBO.cpp */; };
+		21548F661AA84C5A000AAA1A /* CIBO.h in Headers */ = {isa = PBXBuildFile; fileRef = 21548F631AA84C5A000AAA1A /* CIBO.h */; };
+		21548F691AA84C71000AAA1A /* CVAO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F671AA84C71000AAA1A /* CVAO.cpp */; };
+		21548F6A1AA84C71000AAA1A /* CVAO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21548F671AA84C71000AAA1A /* CVAO.cpp */; };
+		21548F6B1AA84C71000AAA1A /* CVAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 21548F681AA84C71000AAA1A /* CVAO.h */; };
 		2162096819A3312D00DECBBC /* CThreadOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096619A3312D00DECBBC /* CThreadOperation.cpp */; };
 		2162096919A3312D00DECBBC /* CThreadOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096619A3312D00DECBBC /* CThreadOperation.cpp */; };
 		2162096A19A3312D00DECBBC /* CThreadOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2162096719A3312D00DECBBC /* CThreadOperation.h */; };
@@ -473,6 +485,14 @@
 		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
 		21548F241AA49D27000AAA1A /* CTileset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTileset.cpp; path = Sources/CTileset.cpp; sourceTree = "<group>"; };
 		21548F251AA49D27000AAA1A /* CTileset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTileset.h; path = Sources/CTileset.h; sourceTree = "<group>"; };
+		21548F581AA849F0000AAA1A /* CGeomapmaping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGeomapmaping.cpp; path = Sources/CGeomapmaping.cpp; sourceTree = "<group>"; };
+		21548F591AA849F0000AAA1A /* CGeomapmaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGeomapmaping.h; path = Sources/CGeomapmaping.h; sourceTree = "<group>"; };
+		21548F5D1AA84C42000AAA1A /* CVBO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CVBO.cpp; path = Sources/CVBO.cpp; sourceTree = "<group>"; };
+		21548F5E1AA84C42000AAA1A /* CVBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVBO.h; path = Sources/CVBO.h; sourceTree = "<group>"; };
+		21548F621AA84C5A000AAA1A /* CIBO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIBO.cpp; path = Sources/CIBO.cpp; sourceTree = "<group>"; };
+		21548F631AA84C5A000AAA1A /* CIBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIBO.h; path = Sources/CIBO.h; sourceTree = "<group>"; };
+		21548F671AA84C71000AAA1A /* CVAO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CVAO.cpp; path = Sources/CVAO.cpp; sourceTree = "<group>"; };
+		21548F681AA84C71000AAA1A /* CVAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVAO.h; path = Sources/CVAO.h; sourceTree = "<group>"; };
 		2162096619A3312D00DECBBC /* CThreadOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CThreadOperation.cpp; path = Sources/CThreadOperation.cpp; sourceTree = "<group>"; };
 		2162096719A3312D00DECBBC /* CThreadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CThreadOperation.h; path = Sources/CThreadOperation.h; sourceTree = "<group>"; };
 		2162096B19A3364200DECBBC /* CThreadOperationPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CThreadOperationPool.cpp; path = Sources/CThreadOperationPool.cpp; sourceTree = "<group>"; };
@@ -1239,6 +1259,8 @@
 			children = (
 				A46B1C8F183E610900A3EF49 /* CHeightmap.h */,
 				A46B1C8E183E610900A3EF49 /* CHeightmap.cpp */,
+				21548F591AA849F0000AAA1A /* CGeomapmaping.h */,
+				21548F581AA849F0000AAA1A /* CGeomapmaping.cpp */,
 				A46B1C86183E3B7400A3EF49 /* CQuadTree.h */,
 				A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */,
 				A40A69AF174F5203005B475E /* CCamera.h */,
@@ -1572,6 +1594,12 @@
 				212092AC19195CD000FFC8D4 /* CCubemapTexture.cpp */,
 				21FB5C351A14F60400222BEE /* CAnimationSequence.h */,
 				21FB5C341A14F60400222BEE /* CAnimationSequence.cpp */,
+				21548F5E1AA84C42000AAA1A /* CVBO.h */,
+				21548F5D1AA84C42000AAA1A /* CVBO.cpp */,
+				21548F631AA84C5A000AAA1A /* CIBO.h */,
+				21548F621AA84C5A000AAA1A /* CIBO.cpp */,
+				21548F681AA84C71000AAA1A /* CVAO.h */,
+				21548F671AA84C71000AAA1A /* CVAO.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1928,6 +1956,7 @@
 				21B0BA0C1A82AA72001CE9A0 /* CPerlinNoise.h in Headers */,
 				2191CE73196EDCDE00CE2813 /* CTextureSerializer_PNG.h in Headers */,
 				21A56D291A79090600C8F362 /* CConfigurationWSTechnique.h in Headers */,
+				21548F611AA84C42000AAA1A /* CVBO.h in Headers */,
 				2191CE4E196EDBEF00CE2813 /* pngdebug.h in Headers */,
 				2191CEBA196EE95100CE2813 /* zconf.h in Headers */,
 				21CB35391A7CE8F700819C09 /* CConfigurationSkybox.h in Headers */,
@@ -1956,6 +1985,7 @@
 				2173348D19644157002B3F90 /* IRenderTechniqueImporter.h in Headers */,
 				2162096F19A3364200DECBBC /* CThreadOperationPool.h in Headers */,
 				21CB35011A7A479000819C09 /* CConfigurationAccessor.h in Headers */,
+				21548F661AA84C5A000AAA1A /* CIBO.h in Headers */,
 				2191CEBB196EE95100CE2813 /* zlib.h in Headers */,
 				217334921964416D002B3F90 /* IRenderTechniqueAccessor.h in Headers */,
 				21EF003C1A237BDA00E0AF20 /* COcclusionQueryManager.h in Headers */,
@@ -1967,7 +1997,9 @@
 				21ACE38F1A711F100017A771 /* CComponentTransformation.h in Headers */,
 				2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */,
 				21E52B881A90A617005977F1 /* CMeshCommiter_ie3Dmesh.h in Headers */,
+				21548F5C1AA849F0000AAA1A /* CGeomapmaping.h in Headers */,
 				2191CE54196EDBEF00CE2813 /* pnglibconf.h in Headers */,
+				21548F6B1AA84C71000AAA1A /* CVAO.h in Headers */,
 				2191CE4D196EDBEF00CE2813 /* pngconf.h in Headers */,
 				21A56D261A79090600C8F362 /* CConfigurationTexture.h in Headers */,
 				217334971964425B002B3F90 /* CRenderPipeline.h in Headers */,
@@ -2123,6 +2155,7 @@
 				21FCC8E1199A95D500F2CA1E /* ShaderTexure2D.cpp in Sources */,
 				2191CE5D196EDBEF00CE2813 /* pngrio.c in Sources */,
 				21EF003B1A237BDA00E0AF20 /* COcclusionQueryManager.cpp in Sources */,
+				21548F5B1AA849F0000AAA1A /* CGeomapmaping.cpp in Sources */,
 				21208FAC1906FB5F00FFC8D4 /* IGraphicsContext.cpp in Sources */,
 				2191CE6C196EDBEF00CE2813 /* pngwtran.c in Sources */,
 				21208FAD1906FB5F00FFC8D4 /* CGraphicsContext_ios.cpp in Sources */,
@@ -2143,6 +2176,7 @@
 				21208FBA1906FB5F00FFC8D4 /* CGameLoopExecutor_ios.cpp in Sources */,
 				21FEECEF1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */,
 				2162096919A3312D00DECBBC /* CThreadOperation.cpp in Sources */,
+				21548F6A1AA84C71000AAA1A /* CVAO.cpp in Sources */,
 				21208FBB1906FB5F00FFC8D4 /* CGameLoopExecutor_win32.cpp in Sources */,
 				21208FBC1906FB5F00FFC8D4 /* IGameController.cpp in Sources */,
 				21208FBD1906FB5F00FFC8D4 /* IGameLoopHandler.cpp in Sources */,
@@ -2153,6 +2187,7 @@
 				217334961964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				21208FBF1906FB5F00FFC8D4 /* CParticleEmitter.cpp in Sources */,
 				21208FC01906FB5F00FFC8D4 /* CModel.cpp in Sources */,
+				21548F601AA84C42000AAA1A /* CVBO.cpp in Sources */,
 				21208FC11906FB5F00FFC8D4 /* COcean.cpp in Sources */,
 				2191CE63196EDBEF00CE2813 /* pngset.c in Sources */,
 				21208FC21906FB5F00FFC8D4 /* CLandscape.cpp in Sources */,
@@ -2173,6 +2208,7 @@
 				21208FCD1906FB5F00FFC8D4 /* CSceneFabricator.cpp in Sources */,
 				219B5E751A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */,
 				21208FCE1906FB5F00FFC8D4 /* CSceneUpdateMgr.cpp in Sources */,
+				21548F651AA84C5A000AAA1A /* CIBO.cpp in Sources */,
 				21CB353B1A7CF23700819C09 /* CSkyBox.cpp in Sources */,
 				21208FCF1906FB5F00FFC8D4 /* ISceneUpdateHandler.cpp in Sources */,
 				2173348219644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */,
@@ -2293,6 +2329,7 @@
 				21FCC8E0199A95D400F2CA1E /* ShaderTexure2D.cpp in Sources */,
 				2191CE5C196EDBEF00CE2813 /* pngrio.c in Sources */,
 				21EF003A1A237BDA00E0AF20 /* COcclusionQueryManager.cpp in Sources */,
+				21548F5A1AA849F0000AAA1A /* CGeomapmaping.cpp in Sources */,
 				213265F01906A4AF001C98F7 /* IGraphicsContext.cpp in Sources */,
 				2191CE6B196EDBEF00CE2813 /* pngwtran.c in Sources */,
 				213265F11906A4AF001C98F7 /* CGraphicsContext_ios.cpp in Sources */,
@@ -2313,6 +2350,7 @@
 				213265FE1906A4AF001C98F7 /* CGameLoopExecutor_ios.cpp in Sources */,
 				21FEECEE1A08E8C7001E9ACB /* IRenderTechniqueOperationTextureHandler.cpp in Sources */,
 				2162096819A3312D00DECBBC /* CThreadOperation.cpp in Sources */,
+				21548F691AA84C71000AAA1A /* CVAO.cpp in Sources */,
 				213265FF1906A4AF001C98F7 /* CGameLoopExecutor_win32.cpp in Sources */,
 				213266001906A4AF001C98F7 /* IGameController.cpp in Sources */,
 				213266011906A4AF001C98F7 /* IGameLoopHandler.cpp in Sources */,
@@ -2323,6 +2361,7 @@
 				217334951964425B002B3F90 /* CRenderPipeline.cpp in Sources */,
 				213266031906A4AF001C98F7 /* CParticleEmitter.cpp in Sources */,
 				213266041906A4AF001C98F7 /* CModel.cpp in Sources */,
+				21548F5F1AA84C42000AAA1A /* CVBO.cpp in Sources */,
 				213266051906A4AF001C98F7 /* COcean.cpp in Sources */,
 				2191CE62196EDBEF00CE2813 /* pngset.c in Sources */,
 				213266061906A4AF001C98F7 /* CLandscape.cpp in Sources */,
@@ -2343,6 +2382,7 @@
 				213266111906A4AF001C98F7 /* CSceneFabricator.cpp in Sources */,
 				219B5E741A10FF2C00986953 /* ShaderBoundingBox.cpp in Sources */,
 				213266121906A4AF001C98F7 /* CSceneUpdateMgr.cpp in Sources */,
+				21548F641AA84C5A000AAA1A /* CIBO.cpp in Sources */,
 				21CB353A1A7CF23700819C09 /* CSkyBox.cpp in Sources */,
 				213266131906A4AF001C98F7 /* ISceneUpdateHandler.cpp in Sources */,
 				2173348119644123002B3F90 /* CRenderTechniqueScreenSpace.cpp in Sources */,

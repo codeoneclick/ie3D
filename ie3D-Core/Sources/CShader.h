@@ -94,6 +94,21 @@ public:
 
 class CShader : public IResource
 {
+public:
+    
+    enum E_ATTRIBUTE
+    {
+        E_ATTRIBUTE_POSITION_3F = 0,
+        E_ATTRIBUTE_POSITION_2I16,
+        E_ATTRIBUTE_HEIGHT_F32,
+        E_ATTRIBUTE_TEXCOORD_UI32,
+        E_ATTRIBUTE_NORMAL_UI32,
+        E_ATTRIBUTE_TANGENT_UI32,
+        E_ATTRIBUTE_COLOR_4UI8,
+        E_ATTRIBUTE_EXTRA_4UI8,
+        E_ATTRIBUTE_MAX
+    };
+
 private:
 
 protected:

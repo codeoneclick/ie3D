@@ -17,7 +17,10 @@ m_isDataUploaded(false)
 {
     assert(m_allocatedSize != 0);
     m_data = new SAttributeVertex[m_allocatedSize];
+    memset(m_data, 0x0, sizeof(SAttributeVertex) * m_allocatedSize);
     ieGenBuffers(1, &m_handle);
+    ieBindBuffer(GL_ARRAY_BUFFER, m_handle);
+    ieBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_allocatedSize, m_data, m_mode);
 }
 
 CVertexBuffer::~CVertexBuffer(void)
@@ -49,12 +52,12 @@ void CVertexBuffer::unlock(ui32 sizeToUse)
     m_usedSize = sizeToUse > 0 && sizeToUse < m_allocatedSize ? sizeToUse : m_allocatedSize;
     ieBindBuffer(GL_ARRAY_BUFFER, m_handle);
     
-    if(!m_isDataUploaded)
-    {
-        ieBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
+    //if(!m_isDataUploaded)
+    //{
+    //    ieBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
         //m_isDataUploaded = true;
-    }
-    else
+    //}
+    //else
     {
         ieBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(SAttributeVertex) * m_usedSize, m_data);
     }

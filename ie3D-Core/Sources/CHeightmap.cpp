@@ -117,12 +117,12 @@ void CHeightmap::createVertexesData(const std::vector<f32>& data)
         for(ui32 j = 0; j < m_size.y; ++j)
         {
             m_uncompressedVertexes[i + j * m_size.x].m_position = glm::vec3(static_cast<f32>(i),
-                                                                          data.at(i + j * m_size.x),
-                                                                          static_cast<f32>(j));
+                                                                            data.at(i + j * m_size.x),
+                                                                            static_cast<f32>(j));
             m_uncompressedVertexes[i + j * m_size.x].m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<ui32>(i) /
-                                                                                             static_cast<f32>(m_size.x),
-                                                                                             static_cast<ui32>(j) /
-                                                                                             static_cast<f32>(m_size.y)));
+                                                                                               static_cast<f32>(m_size.x),
+                                                                                               static_cast<ui32>(j) /
+                                                                                               static_cast<f32>(m_size.y)));
         }
     }
     
