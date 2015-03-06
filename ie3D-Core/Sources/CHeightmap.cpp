@@ -427,6 +427,9 @@ m_splattingTexture(nullptr)
             m_chunksBounds[index] = std::make_tuple(maxBound, minBound);
         }
     }
+    
+    CHeightmapGenerator::createVBO();
+    CHeightmapGenerator::createIBOs();
 }
 
 CHeightmapGenerator::~CHeightmapGenerator(void)
@@ -520,6 +523,102 @@ void CHeightmapGenerator::generateVertecesData(const glm::ivec2& size, f32 frequ
     
     CHeightmapGenerator::updateSplattingTexture(m_splattingTexture);
     CHeightmapGenerator::updateHeightmapTexture(m_heightmapTexture);
+}
+
+void CHeightmapGenerator::createVBO(void)
+{
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+#endif
+    
+    m_vbo = std::make_shared<CVertexBuffer>(m_heightmap->getSize().x * m_heightmap->getSize().y,
+                                            GL_STATIC_DRAW);
+    
+    SAttributeVertex* vertices = m_vbo->lock();
+    ui32 index = 0;
+    
+    ui32 verticesOffsetX = 0;
+    for(ui32 i = 0; i < m_chunksNum.x; ++i)
+    {
+        ui32 verticesOffsetZ = 0;
+        for(ui32 j = 0; j < m_chunksNum.y; ++j)
+        {
+            for(ui32 x = 0; x < (m_chunkSize.x - 1); ++x)
+            {
+                for(ui32 y = 0; y < (m_chunkSize.y - 1); ++y)
+                {
+                    vertices[index].m_position = m_heightmap->getVertexPosition(x + verticesOffsetX, y + verticesOffsetZ);
+                    vertices[index].m_texcoord = m_heightmap->getVertexTexcoord(x + verticesOffsetX, y + verticesOffsetZ);
+                    vertices[index].m_normal = m_heightmap->getVertexNormal(x + verticesOffsetX, y + verticesOffsetZ);
+                    index++;
+                }
+            }
+            verticesOffsetZ += m_chunkSize.y - 2;
+        }
+        verticesOffsetX += m_chunkSize.x - 2;
+    }
+    m_vbo->unlock();
+    
+#if defined(__PERFORMANCE_TIMER__)
+    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+    f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+    std::cout<<"createVBO: "<<duration<<std::endl;
+#endif
+}
+
+void CHeightmapGenerator::createIBOs(void)
+{
+    m_ibos.resize(m_chunksNum.x * m_chunksNum.y);
+    ui32 verticesOffset = 0;
+    SAttributeVertex* vertices = m_vbo->lock();
+    for(ui32 i = 0; i < m_chunksNum.x; ++i)
+    {
+        for(ui32 j = 0; j < m_chunksNum.y; ++j)
+        {
+            ui32 k = 0;
+            //for(ui32 k = 0; k < m_chunkLODsSizes.size(); ++k)
+            {
+                std::shared_ptr<CIndexBuffer> ibo = std::make_shared<CIndexBuffer>((m_chunkSize.x - 2) *
+                                                                                   (m_chunkSize.y - 2) * 6,
+                                                                                   GL_DYNAMIC_DRAW);
+                ui16* indices = ibo->lock();
+                
+                ui32 index = 0;
+                for(ui32 x = 0; x < m_chunkSize.x - 1; ++x)
+                {
+                    for(ui32 y = 0; y < m_chunkSize.y - 1; ++y)
+                    {
+                        indices[index] = x + y * m_chunkSize.x + verticesOffset;
+                        std::cout<<"(["<<vertices[indices[index]].m_position.x<<", "<<vertices[indices[index]].m_position.z<<"], ";
+                        index++;
+                        indices[index] = x + (y + 1) * m_chunkSize.x + verticesOffset;
+                        std::cout<<"["<<vertices[indices[index]].m_position.x<<", "<<vertices[indices[index]].m_position.z<<"], ";
+                        index++;
+                        indices[index] = x + 1 + y * m_chunkSize.x + verticesOffset;
+                        std::cout<<"["<<vertices[indices[index]].m_position.x<<", "<<vertices[indices[index]].m_position.z<<"])";
+                        index++;
+                        
+                        indices[index] = x + (y + 1) * m_chunkSize.x + verticesOffset;
+                        std::cout<<", (["<<vertices[indices[index]].m_position.x<<", "<<vertices[indices[index]].m_position.z<<"], ";
+                        index++;
+                        indices[index] = x + 1 + (y + 1) * m_chunkSize.x + verticesOffset;
+                        std::cout<<"["<<vertices[indices[index]].m_position.x<<", "<<vertices[indices[index]].m_position.z<<"], ";
+                        index++;
+                        indices[index] = x + 1 + y * m_chunkSize.x + verticesOffset;
+                        std::cout<<"["<<vertices[indices[index]].m_position.x<<", "<<vertices[indices[index]].m_position.z<<"])";
+                        index++;
+                        
+                        std::cout<<std::endl;
+                    }
+                }
+                ibo->unlock();
+                m_ibos[i + j * m_chunksNum.x][k] = ibo;
+                verticesOffset += (m_chunkSize.x - 1) * (m_chunkSize.y -1);
+            }
+        }
+    }
+    std::cout<<verticesOffset<<std::endl;
+    std::cout<<m_vbo->getAllocatedSize()<<std::endl;
 }
 
 glm::ivec2 CHeightmapGenerator::getSize(void) const
@@ -960,6 +1059,20 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
                                           const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback,
                                           const std::function<void(void)>& meshUpdatedCallback)
 {
+    ui32 index = i + j * m_chunksNum.x;
+    
+    glm::vec3 maxBound = glm::vec3(-4096.0, -4096.0, -4096.0);
+    glm::vec3 minBound = glm::vec3(4096.0, 4096.0, 4096.0);
+    
+    CHeightmapGenerator::createChunkBound(m_chunkLODsSizes[0].x, m_chunkLODsSizes[0].y,
+                                          i, j,
+                                          &maxBound, &minBound);
+    
+    std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh("landscape.chunk", m_vbo, m_ibos[index][0],
+                                                             maxBound, minBound);
+    
+    meshCreatedCallback(mesh);
+/*
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
 #endif
@@ -1065,6 +1178,7 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
         m_executedOperations[index] = nullptr;
     });
     completionOperation->addToExecutionQueue();
+ */
 }
 
 void CHeightmapGenerator::stopChunkLoading(ui32 i, ui32 j, const std::function<void(void)>& stopLoadingCallback)
