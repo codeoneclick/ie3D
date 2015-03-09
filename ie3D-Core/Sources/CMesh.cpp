@@ -104,14 +104,16 @@ const glm::vec3& CMeshData::getMinBound(void) const
     return m_minBound;
 }
 
-void CMeshData::updateBounds(SAttributeVertex *data, ui32 numVertices)
+void CMeshData::updateBounds(SAttributeVertex *vertices, ui16 *indices, ui32 indicesCount)
 {
+    assert(vertices != nullptr);
+    assert(indices != nullptr);
     m_maxBound = glm::vec3( -4096.0f, -4096.0f, -4096.0f );
     m_minBound = glm::vec3( 4096.0f, 4096.0f, 4096.0f );
-    assert(data != nullptr);
-    for(ui32 i = 0; i < numVertices; ++i)
+    
+    for(ui32 i = 0; i < indicesCount; ++i)
     {
-        glm::vec3 point = data[i].m_position;
+        glm::vec3 point = vertices[indices[i]].m_position;
         m_maxBound = CMeshData::calculateMaxBound(point, m_maxBound);
         m_minBound = CMeshData::calculateMinBound(point, m_minBound);
     }
@@ -303,7 +305,11 @@ void CMesh::updateBounds(void)
     {
         assert(m_meshData != nullptr);
         assert(m_vertexBuffer != nullptr);
-        m_meshData->updateBounds(m_vertexBuffer->lock(), m_vertexBuffer->getUsedSize());
+        assert(m_indexBuffer != nullptr);
+        
+        m_meshData->updateBounds(m_vertexBuffer->lock(),
+                                 m_indexBuffer->lock(),
+                                 m_indexBuffer->getUsedSize());
     }
 }
 

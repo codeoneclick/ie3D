@@ -51,7 +51,7 @@ public:
     
     const glm::vec3& getMaxBound(void) const;
     const glm::vec3& getMinBound(void) const;
-    void updateBounds(SAttributeVertex *data, ui32 numVertices);
+    void updateBounds(SAttributeVertex *vertices, ui16 *indices, ui32 indicesCount);
     
     void removeData(void);
 };
