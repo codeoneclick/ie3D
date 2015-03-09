@@ -36,6 +36,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/ShaderTexure2D.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/pngrio.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/COcclusionQueryManager.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CGeomapmaping.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IGraphicsContext.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/pngwtran.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CGraphicsContext_ios.o
@@ -56,6 +57,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CGameLoopExecutor_ios.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IRenderTechniqueOperationTextureHandler.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CThreadOperation.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CVAO.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CGameLoopExecutor_win32.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IGameController.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IGameLoopHandler.o
@@ -66,6 +68,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CRenderPipeline.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CParticleEmitter.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CModel.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CVBO.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/COcean.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/pngset.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CLandscape.o
@@ -86,6 +89,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CSceneFabricator.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/ShaderBoundingBox.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CSceneUpdateMgr.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CIBO.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CSkyBox.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/ISceneUpdateHandler.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CRenderTechniqueScreenSpace.o

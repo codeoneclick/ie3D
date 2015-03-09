@@ -105,8 +105,8 @@ protected:
     
     std::shared_ptr<CHeightmap> m_heightmap;
     
-    std::shared_ptr<CVertexBuffer> m_vbo;
-    std::vector<std::array<std::shared_ptr<CIndexBuffer>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibos;
+    std::vector<std::shared_ptr<CVertexBuffer>> m_vbos;
+    std::vector<std::tuple<std::array<std::shared_ptr<CIndexBuffer>, E_LANDSCAPE_CHUNK_LOD_MAX>, ui32>> m_ibos;
     
     void createVBO(void);
     void createIBOs(void);
