@@ -392,17 +392,17 @@ m_splattingTexture(nullptr)
     m_chunkSize = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 65),
                              MIN_VALUE(m_heightmap->getSize().y + 1, 65));
     
-    m_chunkLODsSizes.at(0) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 65),
-                                        MIN_VALUE(m_heightmap->getSize().y + 1, 65));
+    m_chunkLODsSizes.at(0) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, m_chunkSize.x),
+                                        MIN_VALUE(m_heightmap->getSize().y + 1, m_chunkSize.y));
     
-    m_chunkLODsSizes.at(1) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 33),
-                                        MIN_VALUE(m_heightmap->getSize().y + 1, 33));
+    m_chunkLODsSizes.at(1) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, floor(static_cast<f32>(m_chunkSize.x) / 2.0f)),
+                                        MIN_VALUE(m_heightmap->getSize().y + 1, floor(static_cast<f32>(m_chunkSize.y) / 2.0f)));
     
-    m_chunkLODsSizes.at(2) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 17),
-                                        MIN_VALUE(m_heightmap->getSize().y + 1, 17));
+    m_chunkLODsSizes.at(2) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, ceil(static_cast<f32>(m_chunkSize.x) / 4.0f)),
+                                        MIN_VALUE(m_heightmap->getSize().y + 1, ceil(static_cast<f32>(m_chunkSize.y) / 4.0f)));
     
-    m_chunkLODsSizes.at(3) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, 9),
-                                        MIN_VALUE(m_heightmap->getSize().y + 1, 9));
+    m_chunkLODsSizes.at(3) = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x + 1, floor(static_cast<f32>(m_chunkSize.x) / 8.0f)),
+                                        MIN_VALUE(m_heightmap->getSize().y + 1, floor(static_cast<f32>(m_chunkSize.y) / 8.0f)));
     
     m_chunksNum = glm::ivec2(m_heightmap->getSize().x / (m_chunkSize.x - 1),
                              m_heightmap->getSize().y / (m_chunkSize.y - 1));
@@ -531,7 +531,8 @@ void CHeightmapGenerator::createVBO(void)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
 #endif
     
-    const ui32 maxVerticesInVbo = UINT16_MAX + 1;
+    const ui32 maxVerticesInVbo = m_chunkSize.x * m_chunkSize.y * floor(static_cast<f32>(UINT16_MAX) / (m_chunkSize.x * m_chunkSize.y));
+    assert(maxVerticesInVbo < UINT16_MAX);
     i32 maxVerticesCount = m_heightmap->getSize().x * m_heightmap->getSize().y;
     std::cout<<"[landscape vertices count: "<<maxVerticesCount<<std::endl;
     
@@ -540,7 +541,7 @@ void CHeightmapGenerator::createVBO(void)
     std::shared_ptr<CVertexBuffer> vbo = std::make_shared<CVertexBuffer>(currentMaxVerticesInVbo,
                                                                          GL_STATIC_DRAW);
     m_vbos.push_back(vbo);
-    std::cout<<"[landscape create vbo: "<<m_vbos.size()<<", verices count in vbo: "<<currentMaxVerticesInVbo<<std::endl;
+    std::cout<<"[landscape create vbo: "<<m_vbos.size()<<", vertices count in vbo: "<<currentMaxVerticesInVbo<<std::endl;
     
     ui32 currentVertexIndex = 0;
     SAttributeVertex* vertices = vbo->lock();
@@ -551,13 +552,35 @@ void CHeightmapGenerator::createVBO(void)
         verticesOffset.y = 0;
         for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
-            for(ui32 x = 0; x < (m_chunkSize.x - 1); ++x)
+            glm::ivec2 maxBound = glm::ivec2(-4096);
+            glm::ivec2 minBound = glm::ivec2(4096);
+            for(ui32 x = 0; x < m_chunkSize.x; ++x)
             {
-                for(ui32 y = 0; y < (m_chunkSize.y - 1); ++y)
+                for(ui32 y = 0; y < m_chunkSize.y; ++y)
                 {
                     vertices[currentVertexIndex].m_position = m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y);
                     vertices[currentVertexIndex].m_texcoord = m_heightmap->getVertexTexcoord(x + verticesOffset.x, y + verticesOffset.y);
                     vertices[currentVertexIndex].m_normal = m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y);
+                    
+                    if(vertices[currentVertexIndex].m_position.x > maxBound.x)
+                    {
+                        maxBound.x = vertices[currentVertexIndex].m_position.x;
+                    }
+                    
+                    if(vertices[currentVertexIndex].m_position.z > maxBound.y)
+                    {
+                        maxBound.y = vertices[currentVertexIndex].m_position.z;
+                    }
+                    
+                    if(vertices[currentVertexIndex].m_position.x < minBound.x)
+                    {
+                        minBound.x = vertices[currentVertexIndex].m_position.x;
+                    }
+                    
+                    if(vertices[currentVertexIndex].m_position.z < minBound.y)
+                    {
+                        minBound.y = vertices[currentVertexIndex].m_position.z;
+                    }
                     
                     assert(currentVertexIndex < maxVerticesInVbo);
                     
@@ -565,9 +588,14 @@ void CHeightmapGenerator::createVBO(void)
                     maxVerticesCount--;
                 }
             }
-            verticesOffset.y += m_chunkSize.y - 2;
             
-            if(currentVertexIndex + (m_chunkSize.x - 1) * (m_chunkSize.y - 1) > maxVerticesInVbo &&
+            std::cout<<"[vbo maxBound: "<<maxBound.x<<", "<<maxBound.y<<"]"<<std::endl;
+            std::cout<<"[vbo minBound: "<<minBound.x<<", "<<minBound.y<<"]"<<std::endl;
+            std::cout<<std::endl;
+            std::cout<<std::endl;
+            verticesOffset.y += m_chunkSize.y - 1;
+            
+            if(currentVertexIndex + m_chunkSize.x * m_chunkSize.y > maxVerticesInVbo &&
                maxVerticesCount > 0)
             {
                 currentMaxVerticesInVbo = maxVerticesCount < maxVerticesInVbo ? maxVerticesCount : maxVerticesInVbo;
@@ -581,7 +609,7 @@ void CHeightmapGenerator::createVBO(void)
                 std::cout<<"[landscape create vbo: "<<m_vbos.size()<<", verices count in vbo: "<<currentMaxVerticesInVbo<<std::endl;
             }
         }
-        verticesOffset.x += m_chunkSize.x - 2;
+        verticesOffset.x += m_chunkSize.x - 1;
     }
     vbo->unlock();
     
@@ -594,7 +622,9 @@ void CHeightmapGenerator::createVBO(void)
 
 void CHeightmapGenerator::createIBOs(void)
 {
-    const ui32 maxVerticesInVbo = UINT16_MAX + 1;
+    const ui32 maxVerticesInVbo = m_chunkSize.x * m_chunkSize.y * floor(static_cast<f32>(UINT16_MAX) / (m_chunkSize.x * m_chunkSize.y));
+    assert(maxVerticesInVbo < UINT16_MAX);
+    
     m_ibos.resize(m_chunksNum.x * m_chunksNum.y);
     ui32 verticesOffset = 0;
     ui32 currentVboIndex = 0;
@@ -604,20 +634,25 @@ void CHeightmapGenerator::createIBOs(void)
         {
             for(ui32 k = 0; k < E_LANDSCAPE_CHUNK_LOD_MAX; ++k)
             {
-                std::shared_ptr<CIndexBuffer> ibo = std::make_shared<CIndexBuffer>((m_chunkLODsSizes[k].x - 3) *
-                                                                                   (m_chunkLODsSizes[k].y - 3) * 6,
+                glm::ivec2 currentChunkSize = glm::ivec2(m_chunkLODsSizes[k].x % 2 == 0 ? m_chunkLODsSizes[k].x : m_chunkLODsSizes[k].x - 1,
+                                                         m_chunkLODsSizes[k].y % 2 == 0 ? m_chunkLODsSizes[k].y : m_chunkLODsSizes[k].y - 1);
+                
+                
+                ui32 indicesCount = currentChunkSize.x * currentChunkSize.y * 6;
+                std::shared_ptr<CIndexBuffer> ibo = std::make_shared<CIndexBuffer>(indicesCount,
                                                                                    GL_DYNAMIC_DRAW);
                 
                 SAttributeVertex* vertices = m_vbos[currentVboIndex]->lock();
                 ui16* indices = ibo->lock();
-            
+                
                 ui32 index = 0;
-                glm::ivec2 verticesLODOffset = glm::ivec2((m_chunkSize.x - 1) / (m_chunkLODsSizes[k].x - 1),
-                                                          (m_chunkSize.y - 1) / (m_chunkLODsSizes[k].y - 1));
-                i32 verticesLineOffset = (m_chunkSize.x - 1);
-                for(ui32 x = 1; x < m_chunkLODsSizes[k].x - 2; ++x)
+                glm::ivec2 verticesLODOffset = glm::ivec2((m_chunkSize.x - 1.0f) / (m_chunkLODsSizes[k].x % 2 == 0 ? m_chunkLODsSizes[k].x : m_chunkLODsSizes[k].x - 1),
+                                                          (m_chunkSize.y - 1.0f) / (m_chunkLODsSizes[k].y % 2 == 0 ? m_chunkLODsSizes[k].y : m_chunkLODsSizes[k].y - 1));
+                
+                i32 verticesLineOffset = m_chunkSize.x;
+                for(ui32 x = 0; x < currentChunkSize.x; ++x)
                 {
-                    for(ui32 y = 1; y < m_chunkLODsSizes[k].y - 2; ++y)
+                    for(ui32 y = 0; y < currentChunkSize.y; ++y)
                     {
                         indices[index] = x * verticesLODOffset.x + y * verticesLODOffset.y * verticesLineOffset + verticesOffset;
                         //std::cout<<"(["<<vertices[indices[index]].m_position.x<<", "<<vertices[indices[index]].m_position.z<<"], ";
@@ -643,13 +678,65 @@ void CHeightmapGenerator::createIBOs(void)
                     }
                 }
                 
+                glm::ivec2 maxBound = glm::ivec2(-4096);
+                glm::ivec2 minBound = glm::ivec2(4096);
+                
+                for(ui32 x = 0; x < ibo->getAllocatedSize(); ++x)
+                {
+                    
+                    if(vertices[indices[x]].m_position.x > maxBound.x)
+                    {
+                        maxBound.x = vertices[indices[x]].m_position.x;
+                    }
+                    
+                    if(vertices[indices[x]].m_position.z > maxBound.y)
+                    {
+                        maxBound.y = vertices[indices[x]].m_position.z;
+                    }
+                    
+                    if(vertices[indices[x]].m_position.x < minBound.x)
+                    {
+                        minBound.x = vertices[indices[x]].m_position.x;
+                    }
+                    
+                    if(vertices[indices[x]].m_position.z < minBound.y)
+                    {
+                        minBound.y = vertices[indices[x]].m_position.z;
+                    }
+                }
+                
+                if(k == 3)
+                {
+                    std::cout<<"[ibo maxBound: "<<maxBound.x<<", "<<maxBound.y<<"]"<<std::endl;
+                    std::cout<<"[ibo minBound: "<<minBound.x<<", "<<minBound.y<<"]"<<std::endl;
+                    std::cout<<std::endl;
+                    std::cout<<std::endl;
+                }
+
+                for(ui32 x = 0; x < m_chunkSize.x - 1; ++x)
+                {
+                    //ui32 index = x + verticesOffset;
+                    //std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
+                }
+                //std::cout<<std::endl;
+                //std::cout<<std::endl;
+                
+                for(ui32 x = 0; x < m_chunkSize.x - 1; ++x)
+                {
+                    //ui32 index = x + verticesOffset + (m_chunkSize.y - 2) * verticesLineOffset;
+                    //std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
+                }
+                
+                //std::cout<<std::endl;
+                //std::cout<<std::endl;
+                
                 ibo->unlock();
                 std::get<0>(m_ibos[i + j * m_chunksNum.x])[k] = ibo;
                 std::get<1>(m_ibos[i + j * m_chunksNum.x]) = currentVboIndex;
                 std::cout<<"[landscape create ibo linked to vbo: "<<currentVboIndex<<"]"<<std::endl;
             }
             
-            verticesOffset += (m_chunkSize.x - 1) * (m_chunkSize.y - 1);
+            verticesOffset += m_chunkSize.x * m_chunkSize.y;
             if(verticesOffset >= maxVerticesInVbo)
             {
                 verticesOffset = 0;
@@ -1102,11 +1189,11 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     glm::vec3 maxBound = glm::vec3(-4096.0, -4096.0, -4096.0);
     glm::vec3 minBound = glm::vec3(4096.0, 4096.0, 4096.0);
     
-    CHeightmapGenerator::createChunkBound(m_chunkLODsSizes[1].x, m_chunkLODsSizes[1].y,
-                                          i, j,
-                                          &maxBound, &minBound);
+    //CHeightmapGenerator::createChunkBound(m_chunkLODsSizes[1].x, m_chunkLODsSizes[1].y,
+    //                                      i, j,
+    //                                      &maxBound, &minBound);
     
-    std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh("landscape.chunk", m_vbos[std::get<1>(m_ibos[index])], std::get<0>(m_ibos[index])[0],
+    std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh("landscape.chunk", m_vbos[std::get<1>(m_ibos[index])], std::get<0>(m_ibos[index])[LOD],
                                                              maxBound, minBound);
     mesh->updateBounds();
     
