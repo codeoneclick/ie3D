@@ -637,22 +637,263 @@ void CHeightmapGenerator::createIBOs(void)
                 glm::ivec2 currentChunkSize = glm::ivec2(m_chunkLODsSizes[k].x % 2 == 0 ? m_chunkLODsSizes[k].x : m_chunkLODsSizes[k].x - 1,
                                                          m_chunkLODsSizes[k].y % 2 == 0 ? m_chunkLODsSizes[k].y : m_chunkLODsSizes[k].y - 1);
                 
+                glm::ivec2 verticesLODOffset = glm::ivec2((m_chunkSize.x - 1.0f) / currentChunkSize.x,
+                                                          (m_chunkSize.y - 1.0f) / currentChunkSize.y);
                 
-                ui32 indicesCount = currentChunkSize.x * currentChunkSize.y * 6;
+                
+                i32 verticesLineOffset = m_chunkSize.x;
+                glm::ivec2 currentChunkLODStartIndex = glm::ivec2(0);
+                currentChunkLODStartIndex.x += k != E_LANDSCAPE_CHUNK_LOD_01 ? 1 : 0;
+                currentChunkLODStartIndex.y += k != E_LANDSCAPE_CHUNK_LOD_01 ? 1 : 0;
+                
+                SAttributeVertex* vertices = m_vbos[currentVboIndex]->lock();
+                
+                std::vector<ui16> additionIndices;
+                if(k != E_LANDSCAPE_CHUNK_LOD_01)
+                {
+                    std::vector<ui16> currentLODLEdgeIndices;
+                    for(ui32 x = 0; x <= currentChunkSize.x; ++x)
+                    {
+                        ui32 index = x * verticesLODOffset.x + verticesOffset + verticesLineOffset * verticesLODOffset.y;
+                        std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
+                        currentLODLEdgeIndices.push_back(index);
+                    }
+                    std::cout<<std::endl;
+                    std::cout<<std::endl;
+                    
+                    ui32 currentLODIndex = 0;
+                    for(ui32 x = 0; x < m_chunkSize.x; ++x)
+                    {
+                        ui32 mainLODIndex = x + verticesOffset;
+                        //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
+                        if(currentLODLEdgeIndices.size() > currentLODIndex + 1)
+                        {
+                            if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                                                       vertices[mainLODIndex].m_position.z),
+                                             glm::vec2(vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.x,
+                                                       vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.z)) >
+                               glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                                                       vertices[mainLODIndex].m_position.z),
+                                             glm::vec2(vertices[currentLODLEdgeIndices[currentLODIndex + 1]].m_position.x,
+                                                       vertices[currentLODLEdgeIndices[currentLODIndex + 1]].m_position.z)))
+                            {
+                                additionIndices.push_back(currentLODLEdgeIndices[currentLODIndex]);
+                                additionIndices.push_back(currentLODLEdgeIndices[currentLODIndex + 1]);
+                                additionIndices.push_back(mainLODIndex);
+                                
+                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODIndex + 1]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODIndex + 1]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
+                                std::cout<<std::endl;
+                                
+                                currentLODIndex++;
+                            }
+                            
+                            if(currentLODLEdgeIndices.size() - 1 == currentLODIndex)
+                            {
+                                
+                                additionIndices.push_back(currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 1]);
+                                additionIndices.push_back(verticesOffset + m_chunkSize.x - 1 - verticesLODOffset.x);
+                                additionIndices.push_back(verticesOffset + m_chunkSize.x - 1);
+                                
+                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 1]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 1]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 1 - verticesLODOffset.x].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 1 - verticesLODOffset.x].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.z<<"]";
+                                std::cout<<std::endl;
+                                
+                                /*additionIndices.push_back(currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 2]);
+                                additionIndices.push_back(verticesOffset + m_chunkSize.x - 2);
+                                additionIndices.push_back(verticesOffset + m_chunkSize.x - 1);
+                                
+                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 2]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 2]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 2].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 2].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.z<<"]";
+                                std::cout<<std::endl;*/
+
+                            }
+                            else
+                            {
+                                additionIndices.push_back(mainLODIndex);
+                                additionIndices.push_back(currentLODLEdgeIndices[currentLODIndex]);
+                                additionIndices.push_back(mainLODIndex + 1);
+                                
+                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[mainLODIndex + 1].m_position.x<<", "<<vertices[mainLODIndex + 1].m_position.z<<"]";
+                                std::cout<<std::endl;
+
+                            }
+                        }
+                    }
+                    std::cout<<std::endl;
+                    /*std::vector<ui16> currentLODREdgeIndices;
+                    for(ui32 x = 0; x <= currentChunkSize.x; ++x)
+                    {
+                        ui32 index = x * verticesLODOffset.x + verticesOffset + verticesLineOffset * verticesLODOffset.y * (currentChunkSize.y - 1);
+                        std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
+                        currentLODREdgeIndices.push_back(index);
+                    }
+                    std::cout<<std::endl;
+                    std::cout<<std::endl;
+                    
+                    currentLODIndex = 0;
+                    for(ui32 x = 0; x < m_chunkSize.x - 1; ++x)
+                    {
+                        ui32 mainLODIndex = x + verticesOffset + verticesLineOffset * (m_chunkSize.x - 1);
+                        std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
+                        if(currentLODREdgeIndices.size() > currentLODIndex + 1)
+                        {
+                            if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                                                       vertices[mainLODIndex].m_position.z),
+                                             glm::vec2(vertices[currentLODREdgeIndices[currentLODIndex]].m_position.x,
+                                                       vertices[currentLODREdgeIndices[currentLODIndex]].m_position.z)) >
+                               glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                                                       vertices[mainLODIndex].m_position.z),
+                                             glm::vec2(vertices[currentLODREdgeIndices[currentLODIndex + 1]].m_position.x,
+                                                       vertices[currentLODREdgeIndices[currentLODIndex + 1]].m_position.z)))
+                            {
+                                
+                                additionIndices.push_back(currentLODREdgeIndices[currentLODIndex]);
+                                additionIndices.push_back(mainLODIndex);
+                                additionIndices.push_back(currentLODREdgeIndices[currentLODIndex + 1]);
+                                
+                                currentLODIndex++;
+                            }
+                            additionIndices.push_back(currentLODREdgeIndices[currentLODIndex]);
+                            additionIndices.push_back(mainLODIndex);
+                            additionIndices.push_back(mainLODIndex + 1);
+                            
+                            
+                            //std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.z<<"] ";
+                            //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"] ";
+                            //std::cout<<"["<<vertices[mainLODIndex + 1].m_position.x<<", "<<vertices[mainLODIndex + 1].m_position.z<<"]";
+                            //std::cout<<std::endl;
+                        }
+                    }
+                    
+                    std::cout<<std::endl;
+                    std::cout<<std::endl;
+                    
+                    std::vector<ui16> currentLODTEdgeIndices;
+                    for(ui32 y = 0; y <= currentChunkSize.y; ++y)
+                    {
+                        ui32 index = verticesLODOffset.x + verticesOffset + y * verticesLineOffset * verticesLODOffset.y;
+                        std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
+                        currentLODTEdgeIndices.push_back(index);
+                    }
+                    std::cout<<std::endl;
+                    std::cout<<std::endl;
+                    
+                    currentLODIndex = 0;
+                    for(ui32 y = 0; y < m_chunkSize.y - 1; ++y)
+                    {
+                        ui32 mainLODIndex = verticesOffset + y * m_chunkSize.y;
+                        //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
+                        if(currentLODTEdgeIndices.size() > currentLODIndex + 1)
+                        {
+                            if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                                                       vertices[mainLODIndex].m_position.z),
+                                             glm::vec2(vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.x,
+                                                       vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.z)) >
+                               glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                                                       vertices[mainLODIndex].m_position.z),
+                                             glm::vec2(vertices[currentLODTEdgeIndices[currentLODIndex + 1]].m_position.x,
+                                                       vertices[currentLODTEdgeIndices[currentLODIndex + 1]].m_position.z)))
+                            {
+                                
+                                additionIndices.push_back(currentLODTEdgeIndices[currentLODIndex]);
+                                additionIndices.push_back(mainLODIndex);
+                                additionIndices.push_back(currentLODTEdgeIndices[currentLODIndex + 1]);
+                                
+                                currentLODIndex++;
+                            }
+                            additionIndices.push_back(currentLODTEdgeIndices[currentLODIndex]);
+                            additionIndices.push_back(mainLODIndex);
+                            additionIndices.push_back(mainLODIndex + m_chunkSize.y);
+                            
+                            //std::cout<<"["<<vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.z<<"] ";
+                            //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"] ";
+                            //std::cout<<"["<<vertices[mainLODIndex + m_chunkSize.y].m_position.x<<", "<<vertices[mainLODIndex + m_chunkSize.y].m_position.z<<"]";
+                            //std::cout<<std::endl;
+                        }
+                    }
+                    
+                    std::cout<<std::endl;
+                    std::cout<<std::endl;
+                    
+                    std::vector<ui16> currentLODDEdgeIndices;
+                    for(ui32 y = 0; y <= currentChunkSize.y; ++y)
+                    {
+                        ui32 index = verticesLODOffset.x * (currentChunkSize.x - 1) + verticesOffset + y * verticesLineOffset * verticesLODOffset.y;
+                        std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
+                        currentLODDEdgeIndices.push_back(index);
+                    }
+                    std::cout<<std::endl;
+                    std::cout<<std::endl;
+                    
+                    currentLODIndex = 0;
+                    for(ui32 y = 0; y < m_chunkSize.y - 1; ++y)
+                    {
+                        ui32 mainLODIndex = (m_chunkSize.x - 1) + verticesOffset + y * m_chunkSize.y;
+                        std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
+                        if(currentLODDEdgeIndices.size() > currentLODIndex + 1)
+                        {
+                            if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                                                       vertices[mainLODIndex].m_position.z),
+                                             glm::vec2(vertices[currentLODDEdgeIndices[currentLODIndex]].m_position.x,
+                                                       vertices[currentLODDEdgeIndices[currentLODIndex]].m_position.z)) >
+                               glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                                                       vertices[mainLODIndex].m_position.z),
+                                             glm::vec2(vertices[currentLODDEdgeIndices[currentLODIndex + 1]].m_position.x,
+                                                       vertices[currentLODDEdgeIndices[currentLODIndex + 1]].m_position.z)))
+                            {
+                                
+                                additionIndices.push_back(currentLODDEdgeIndices[currentLODIndex]);
+                                additionIndices.push_back(currentLODDEdgeIndices[currentLODIndex + 1]);
+                                additionIndices.push_back(mainLODIndex);
+                                
+                                currentLODIndex++;
+                            }
+                           
+                            additionIndices.push_back(mainLODIndex);
+                            additionIndices.push_back(currentLODDEdgeIndices[currentLODIndex]);
+                            additionIndices.push_back(mainLODIndex + m_chunkSize.y);
+                            
+                            //std::cout<<"["<<vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.z<<"] ";
+                            //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"] ";
+                            //std::cout<<"["<<vertices[mainLODIndex + m_chunkSize.y].m_position.x<<", "<<vertices[mainLODIndex + m_chunkSize.y].m_position.z<<"]";
+                            //std::cout<<std::endl;
+                        }
+                    }
+                    
+                    std::cout<<std::endl;
+                    std::cout<<std::endl;*/
+                }
+                
+                currentChunkSize.x -= k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0;
+                currentChunkSize.y -= k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0;
+                
+                ui32 indicesCount = currentChunkSize.x * currentChunkSize.y * 6 + static_cast<ui32>(additionIndices.size());
                 std::shared_ptr<CIndexBuffer> ibo = std::make_shared<CIndexBuffer>(indicesCount,
                                                                                    GL_DYNAMIC_DRAW);
                 
-                SAttributeVertex* vertices = m_vbos[currentVboIndex]->lock();
+                currentChunkSize.x += k != E_LANDSCAPE_CHUNK_LOD_01 ? 1 : 0;
+                currentChunkSize.y += k != E_LANDSCAPE_CHUNK_LOD_01 ? 1 : 0;
+                
+                
                 ui16* indices = ibo->lock();
                 
                 ui32 index = 0;
-                glm::ivec2 verticesLODOffset = glm::ivec2((m_chunkSize.x - 1.0f) / (m_chunkLODsSizes[k].x % 2 == 0 ? m_chunkLODsSizes[k].x : m_chunkLODsSizes[k].x - 1),
-                                                          (m_chunkSize.y - 1.0f) / (m_chunkLODsSizes[k].y % 2 == 0 ? m_chunkLODsSizes[k].y : m_chunkLODsSizes[k].y - 1));
                 
-                i32 verticesLineOffset = m_chunkSize.x;
-                for(ui32 x = 0; x < currentChunkSize.x; ++x)
+                for(ui32 x = 0; x < additionIndices.size(); ++x)
                 {
-                    for(ui32 y = 0; y < currentChunkSize.y; ++y)
+                    indices[index] = additionIndices[x];
+                    index++;
+                }
+ 
+                for(ui32 x = currentChunkLODStartIndex.x; x < currentChunkSize.x; ++x)
+                {
+                    for(ui32 y = currentChunkLODStartIndex.y; y < currentChunkSize.y; ++y)
                     {
                         indices[index] = x * verticesLODOffset.x + y * verticesLODOffset.y * verticesLineOffset + verticesOffset;
                         //std::cout<<"(["<<vertices[indices[index]].m_position.x<<", "<<vertices[indices[index]].m_position.z<<"], ";
@@ -705,30 +946,20 @@ void CHeightmapGenerator::createIBOs(void)
                     }
                 }
                 
-                if(k == 3)
-                {
-                    std::cout<<"[ibo maxBound: "<<maxBound.x<<", "<<maxBound.y<<"]"<<std::endl;
-                    std::cout<<"[ibo minBound: "<<minBound.x<<", "<<minBound.y<<"]"<<std::endl;
-                    std::cout<<std::endl;
-                    std::cout<<std::endl;
-                }
-
-                for(ui32 x = 0; x < m_chunkSize.x - 1; ++x)
-                {
-                    //ui32 index = x + verticesOffset;
-                    //std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
-                }
-                //std::cout<<std::endl;
-                //std::cout<<std::endl;
+                std::cout<<"[ibo maxBound: "<<maxBound.x<<", "<<maxBound.y<<"]"<<std::endl;
+                std::cout<<"[ibo minBound: "<<minBound.x<<", "<<minBound.y<<"]"<<std::endl;
+                std::cout<<std::endl;
+                std::cout<<std::endl;
                 
-                for(ui32 x = 0; x < m_chunkSize.x - 1; ++x)
-                {
-                    //ui32 index = x + verticesOffset + (m_chunkSize.y - 2) * verticesLineOffset;
-                    //std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
-                }
-                
-                //std::cout<<std::endl;
-                //std::cout<<std::endl;
+                    /*for(ui32 x = 0; x < m_chunkSize.x; ++x)
+                    {
+                        ui32 index = x + verticesOffset + (m_chunkSize.y - 1) * verticesLineOffset;
+                        std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
+                        
+                    }
+                    
+                    std::cout<<std::endl;
+                    std::cout<<std::endl;*/
                 
                 ibo->unlock();
                 std::get<0>(m_ibos[i + j * m_chunksNum.x])[k] = ibo;
@@ -1193,7 +1424,7 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     //                                      i, j,
     //                                      &maxBound, &minBound);
     
-    std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh("landscape.chunk", m_vbos[std::get<1>(m_ibos[index])], std::get<0>(m_ibos[index])[LOD],
+    std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh("landscape.chunk", m_vbos[std::get<1>(m_ibos[index])], std::get<0>(m_ibos[index])[3],
                                                              maxBound, minBound);
     mesh->updateBounds();
     
