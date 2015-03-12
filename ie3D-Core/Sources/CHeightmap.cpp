@@ -668,22 +668,23 @@ void CHeightmapGenerator::createIBOs(void)
                         //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
                         if(currentLODLEdgeIndices.size() > currentLODIndex + 1)
                         {
-                            if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                            /*if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
                                                        vertices[mainLODIndex].m_position.z),
                                              glm::vec2(vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.x,
                                                        vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.z)) >
                                glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
                                                        vertices[mainLODIndex].m_position.z),
                                              glm::vec2(vertices[currentLODLEdgeIndices[currentLODIndex + 1]].m_position.x,
-                                                       vertices[currentLODLEdgeIndices[currentLODIndex + 1]].m_position.z)))
+                                                       vertices[currentLODLEdgeIndices[currentLODIndex + 1]].m_position.z)))*/
+                            if(x != 0 && x % verticesLODOffset.x == 0)
                             {
                                 additionIndices.push_back(currentLODLEdgeIndices[currentLODIndex]);
                                 additionIndices.push_back(currentLODLEdgeIndices[currentLODIndex + 1]);
                                 additionIndices.push_back(mainLODIndex);
                                 
-                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.z<<"] ";
-                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODIndex + 1]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODIndex + 1]].m_position.z<<"] ";
-                                std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 3]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 3]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 2]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 2]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 1]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 1]].m_position.z<<"]";
                                 std::cout<<std::endl;
                                 
                                 currentLODIndex++;
@@ -691,25 +692,24 @@ void CHeightmapGenerator::createIBOs(void)
                             
                             if(currentLODLEdgeIndices.size() - 1 == currentLODIndex)
                             {
+                                //additionIndices.push_back(currentLODLEdgeIndices[currentLODIndex]);
+                                //additionIndices.push_back(currentLODLEdgeIndices[currentLODIndex + 1]);
+                                //additionIndices.push_back(mainLODIndex);
                                 
-                                additionIndices.push_back(currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 1]);
-                                additionIndices.push_back(verticesOffset + m_chunkSize.x - 1 - verticesLODOffset.x);
-                                additionIndices.push_back(verticesOffset + m_chunkSize.x - 1);
-                                
-                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 1]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 1]].m_position.z<<"] ";
-                                std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 1 - verticesLODOffset.x].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 1 - verticesLODOffset.x].m_position.z<<"] ";
-                                std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.z<<"]";
-                                std::cout<<std::endl;
-                                
-                                /*additionIndices.push_back(currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 2]);
-                                additionIndices.push_back(verticesOffset + m_chunkSize.x - 2);
-                                additionIndices.push_back(verticesOffset + m_chunkSize.x - 1);
-                                
-                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 2]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 2]].m_position.z<<"] ";
-                                std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 2].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 2].m_position.z<<"] ";
-                                std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.z<<"]";
-                                std::cout<<std::endl;*/
+                                //std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 3]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 3]].m_position.z<<"] ";
+                                //std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 2]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 2]].m_position.z<<"] ";
+                                //std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 1]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 1]].m_position.z<<"]";
+                                //std::cout<<std::endl;
 
+                                //additionIndices.push_back(verticesOffset + m_chunkSize.x - 1 - verticesLODOffset.x);
+                                //additionIndices.push_back(currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 1]);
+                                //additionIndices.push_back(verticesOffset + m_chunkSize.x - 1);
+                                
+                                //std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 1]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODLEdgeIndices.size() - 1]].m_position.z<<"] ";
+                                //std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 1 - verticesLODOffset.x].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 1 - verticesLODOffset.x].m_position.z<<"] ";
+                                //std::cout<<"["<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.x<<", "<<vertices[verticesOffset + m_chunkSize.x - 1].m_position.z<<"]";
+                                std::cout<<std::endl;
+                                break;
                             }
                             else
                             {
@@ -717,51 +717,71 @@ void CHeightmapGenerator::createIBOs(void)
                                 additionIndices.push_back(currentLODLEdgeIndices[currentLODIndex]);
                                 additionIndices.push_back(mainLODIndex + 1);
                                 
-                                std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.z<<"] ";
-                                std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"] ";
-                                std::cout<<"["<<vertices[mainLODIndex + 1].m_position.x<<", "<<vertices[mainLODIndex + 1].m_position.z<<"]";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 3]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 3]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 2]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 2]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 1]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 1]].m_position.z<<"]";
                                 std::cout<<std::endl;
 
                             }
                         }
                     }
                     std::cout<<std::endl;
-                    /*std::vector<ui16> currentLODREdgeIndices;
+                    std::vector<ui16> currentLODREdgeIndices;
                     for(ui32 x = 0; x <= currentChunkSize.x; ++x)
                     {
                         ui32 index = x * verticesLODOffset.x + verticesOffset + verticesLineOffset * verticesLODOffset.y * (currentChunkSize.y - 1);
-                        std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
+                        //std::cout<<"["<<vertices[index].m_position.x<<", "<<vertices[index].m_position.z<<"]";
                         currentLODREdgeIndices.push_back(index);
                     }
                     std::cout<<std::endl;
                     std::cout<<std::endl;
                     
                     currentLODIndex = 0;
-                    for(ui32 x = 0; x < m_chunkSize.x - 1; ++x)
+                    for(ui32 x = 0; x < m_chunkSize.x; ++x)
                     {
                         ui32 mainLODIndex = x + verticesOffset + verticesLineOffset * (m_chunkSize.x - 1);
-                        std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
+                        //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
                         if(currentLODREdgeIndices.size() > currentLODIndex + 1)
                         {
-                            if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                            /*if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
                                                        vertices[mainLODIndex].m_position.z),
                                              glm::vec2(vertices[currentLODREdgeIndices[currentLODIndex]].m_position.x,
                                                        vertices[currentLODREdgeIndices[currentLODIndex]].m_position.z)) >
                                glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
                                                        vertices[mainLODIndex].m_position.z),
                                              glm::vec2(vertices[currentLODREdgeIndices[currentLODIndex + 1]].m_position.x,
-                                                       vertices[currentLODREdgeIndices[currentLODIndex + 1]].m_position.z)))
+                                                       vertices[currentLODREdgeIndices[currentLODIndex + 1]].m_position.z)))*/
+                            if(x != 0 && x % verticesLODOffset.x == 0)
                             {
                                 
                                 additionIndices.push_back(currentLODREdgeIndices[currentLODIndex]);
                                 additionIndices.push_back(mainLODIndex);
                                 additionIndices.push_back(currentLODREdgeIndices[currentLODIndex + 1]);
                                 
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 3]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 3]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 2]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 2]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 1]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 1]].m_position.z<<"]";
+                                std::cout<<std::endl;
+                                
                                 currentLODIndex++;
                             }
-                            additionIndices.push_back(currentLODREdgeIndices[currentLODIndex]);
-                            additionIndices.push_back(mainLODIndex);
-                            additionIndices.push_back(mainLODIndex + 1);
+                            
+                            
+                            if(currentLODREdgeIndices.size() - 1 == currentLODIndex)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                additionIndices.push_back(currentLODREdgeIndices[currentLODIndex]);
+                                additionIndices.push_back(mainLODIndex);
+                                additionIndices.push_back(mainLODIndex + 1);
+                                
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 3]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 3]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 2]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 2]].m_position.z<<"] ";
+                                std::cout<<"["<<vertices[additionIndices[additionIndices.size() - 1]].m_position.x<<", "<<vertices[additionIndices[additionIndices.size() - 1]].m_position.z<<"]";
+                                std::cout<<std::endl;
+                            }
                             
                             
                             //std::cout<<"["<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODLEdgeIndices[currentLODIndex]].m_position.z<<"] ";
@@ -785,20 +805,21 @@ void CHeightmapGenerator::createIBOs(void)
                     std::cout<<std::endl;
                     
                     currentLODIndex = 0;
-                    for(ui32 y = 0; y < m_chunkSize.y - 1; ++y)
+                    for(ui32 y = 0; y < m_chunkSize.y; ++y)
                     {
                         ui32 mainLODIndex = verticesOffset + y * m_chunkSize.y;
                         //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
                         if(currentLODTEdgeIndices.size() > currentLODIndex + 1)
                         {
-                            if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                            /*if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
                                                        vertices[mainLODIndex].m_position.z),
                                              glm::vec2(vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.x,
                                                        vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.z)) >
                                glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
                                                        vertices[mainLODIndex].m_position.z),
                                              glm::vec2(vertices[currentLODTEdgeIndices[currentLODIndex + 1]].m_position.x,
-                                                       vertices[currentLODTEdgeIndices[currentLODIndex + 1]].m_position.z)))
+                                                       vertices[currentLODTEdgeIndices[currentLODIndex + 1]].m_position.z)))*/
+                            if(y != 0 && y % verticesLODOffset.y == 0)
                             {
                                 
                                 additionIndices.push_back(currentLODTEdgeIndices[currentLODIndex]);
@@ -807,9 +828,17 @@ void CHeightmapGenerator::createIBOs(void)
                                 
                                 currentLODIndex++;
                             }
-                            additionIndices.push_back(currentLODTEdgeIndices[currentLODIndex]);
-                            additionIndices.push_back(mainLODIndex);
-                            additionIndices.push_back(mainLODIndex + m_chunkSize.y);
+                            
+                            if(currentLODTEdgeIndices.size() - 1 == currentLODIndex)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                additionIndices.push_back(currentLODTEdgeIndices[currentLODIndex]);
+                                additionIndices.push_back(mainLODIndex);
+                                additionIndices.push_back(mainLODIndex + m_chunkSize.y);
+                            }
                             
                             //std::cout<<"["<<vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.z<<"] ";
                             //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"] ";
@@ -832,20 +861,21 @@ void CHeightmapGenerator::createIBOs(void)
                     std::cout<<std::endl;
                     
                     currentLODIndex = 0;
-                    for(ui32 y = 0; y < m_chunkSize.y - 1; ++y)
+                    for(ui32 y = 0; y < m_chunkSize.y; ++y)
                     {
                         ui32 mainLODIndex = (m_chunkSize.x - 1) + verticesOffset + y * m_chunkSize.y;
                         std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"]";
                         if(currentLODDEdgeIndices.size() > currentLODIndex + 1)
                         {
-                            if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
+                            /*if(glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
                                                        vertices[mainLODIndex].m_position.z),
                                              glm::vec2(vertices[currentLODDEdgeIndices[currentLODIndex]].m_position.x,
                                                        vertices[currentLODDEdgeIndices[currentLODIndex]].m_position.z)) >
                                glm::distance(glm::vec2(vertices[mainLODIndex].m_position.x,
                                                        vertices[mainLODIndex].m_position.z),
                                              glm::vec2(vertices[currentLODDEdgeIndices[currentLODIndex + 1]].m_position.x,
-                                                       vertices[currentLODDEdgeIndices[currentLODIndex + 1]].m_position.z)))
+                                                       vertices[currentLODDEdgeIndices[currentLODIndex + 1]].m_position.z)))*/
+                            if(y != 0 && y % verticesLODOffset.y == 0)
                             {
                                 
                                 additionIndices.push_back(currentLODDEdgeIndices[currentLODIndex]);
@@ -854,10 +884,17 @@ void CHeightmapGenerator::createIBOs(void)
                                 
                                 currentLODIndex++;
                             }
-                           
-                            additionIndices.push_back(mainLODIndex);
-                            additionIndices.push_back(currentLODDEdgeIndices[currentLODIndex]);
-                            additionIndices.push_back(mainLODIndex + m_chunkSize.y);
+                            
+                            if(currentLODTEdgeIndices.size() - 1 == currentLODIndex)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                additionIndices.push_back(mainLODIndex);
+                                additionIndices.push_back(currentLODDEdgeIndices[currentLODIndex]);
+                                additionIndices.push_back(mainLODIndex + m_chunkSize.y);
+                            }
                             
                             //std::cout<<"["<<vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.x<<", "<<vertices[currentLODTEdgeIndices[currentLODIndex]].m_position.z<<"] ";
                             //std::cout<<"["<<vertices[mainLODIndex].m_position.x<<", "<<vertices[mainLODIndex].m_position.z<<"] ";
@@ -867,7 +904,7 @@ void CHeightmapGenerator::createIBOs(void)
                     }
                     
                     std::cout<<std::endl;
-                    std::cout<<std::endl;*/
+                    std::cout<<std::endl;
                 }
                 
                 currentChunkSize.x -= k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0;
@@ -1424,7 +1461,7 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     //                                      i, j,
     //                                      &maxBound, &minBound);
     
-    std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh("landscape.chunk", m_vbos[std::get<1>(m_ibos[index])], std::get<0>(m_ibos[index])[3],
+    std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh("landscape.chunk", m_vbos[std::get<1>(m_ibos[index])], std::get<0>(m_ibos[index])[LOD],
                                                              maxBound, minBound);
     mesh->updateBounds();
     
