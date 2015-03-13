@@ -20,6 +20,15 @@ std::string bundlepath(void)
     return path;
 };
 
+std::string documentspath(void)
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    std::string path([documentsPath UTF8String]);
+    path.append("/");
+    return path;
+}
+
 ui32 Get_ScreenWidth(void)
 {
     return [UIScreen mainScreen].bounds.size.height;

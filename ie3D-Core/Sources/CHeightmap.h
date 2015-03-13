@@ -20,16 +20,17 @@ private:
     struct SUncomressedVertex
     {
         glm::vec3 m_position;
-        glm::uint32 m_normal;
-        glm::uint32 m_texcoord;
-        glm::uint32 m_tangent;
+        glm::vec3 m_normal;
+        glm::vec2 m_texcoord;
         std::vector<ui32> m_containInFace;
         
         SUncomressedVertex(void) = default;
-        ~SUncomressedVertex(void)
-        {
-            m_containInFace.clear();
-        };
+        ~SUncomressedVertex(void) = default;
+        
+        SUncomressedVertex(const SUncomressedVertex& copy) = delete;
+        SUncomressedVertex(SUncomressedVertex&& copy) = delete;
+        SUncomressedVertex& operator = (const SUncomressedVertex& copy) = delete;
+        SUncomressedVertex& operator = (SUncomressedVertex&& copy) = delete;
     };
     
     struct SCompressedVertex
@@ -44,21 +45,25 @@ private:
     
     struct SFace
     {
-        glm::uint32 m_normal;
-        std::array<ui32, 3> m_indexes;
+        glm::vec3 m_normal;
+        ui32 m_indexes[3];
         
         SFace(void) = default;
         ~SFace(void) = default;
+        
+        SFace(const SFace& copy) = delete;
+        SFace(SFace&& copy) = delete;
+        SFace& operator = (const SFace& copy) = delete;
+        SFace& operator = (SFace&& copy) = delete;
+
     };
     
 protected:
     
-    std::vector<SUncomressedVertex> m_uncompressedVertexes;
-    std::vector<SCompressedVertex> m_compressedVertexes;
-    std::vector<SFace> m_faces;
+    SCompressedVertex* m_compressedVertexes;
     
     glm::ivec2 m_size;
-    void createVertexesData(const std::vector<f32>& data);
+    void mapVertices(f32* data);
     
 public:
     

@@ -31,6 +31,9 @@
 #include <random>
 #include <unordered_map>
 #include <unordered_set>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/mman.h>
 
 #if defined(DEBUG)
 

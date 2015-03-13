@@ -29,7 +29,8 @@ namespace ie
             uncopressedVertex(void) = default;
             ~uncopressedVertex(void)
             {
-                m_containInFace.clear();
+                std::vector<ui32> eraser;
+                m_containInFace.swap(eraser);
             };
         };
         
