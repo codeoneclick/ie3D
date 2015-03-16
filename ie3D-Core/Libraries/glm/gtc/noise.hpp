@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /// OpenGL Mathematics (glm.g-truc.net)
 ///
-/// Copyright (c) 2005 - 2015 G-Truc Creation (www.g-truc.net)
+/// Copyright (c) 2005 - 2012 G-Truc Creation (www.g-truc.net)
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -11,10 +11,6 @@
 /// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
 /// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -31,7 +27,7 @@
 ///
 /// @see core (dependence)
 ///
-/// @defgroup gtc_noise GLM_GTC_noise
+/// @defgroup gtc_noise GLM_GTC_noise: Procedural noise functions
 /// @ingroup gtc
 /// 
 /// Defines 2D, 3D and 4D procedural noise functions 
@@ -42,20 +38,13 @@
 /// <glm/gtc/noise.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#ifndef GLM_GTC_noise
+#define GLM_GTC_noise GLM_VERSION
 
-// Dependencies
-#include "../detail/setup.hpp"
-#include "../detail/precision.hpp"
-#include "../detail/_noise.hpp"
-#include "../geometric.hpp"
-#include "../common.hpp"
-#include "../vector_relational.hpp"
-#include "../vec2.hpp"
-#include "../vec3.hpp"
-#include "../vec4.hpp"
+// Dependency:
+#include "../glm.hpp"
 
-#if(defined(GLM_MESSAGES) && !defined(GLM_EXT_INCLUDED))
+#if(defined(GLM_MESSAGES) && !defined(glm_ext))
 #	pragma message("GLM: GLM_GTC_noise extension included")
 #endif
 
@@ -65,25 +54,27 @@ namespace glm
 	/// @{
 
 	/// Classic perlin noise.
-	/// @see gtc_noise
-	template <typename T, precision P, template<typename, precision> class vecType>
-	GLM_FUNC_DECL T perlin(
-		vecType<T, P> const & p);
+    /// @see gtc_noise
+	template <typename T, template<typename> class vecType> 
+    T perlin(
+		vecType<T> const & p);
 		
 	/// Periodic perlin noise.
 	/// @see gtc_noise
-	template <typename T, precision P, template<typename, precision> class vecType>
-	GLM_FUNC_DECL T perlin(
-		vecType<T, P> const & p,
-		vecType<T, P> const & rep);
+	template <typename T, template<typename> class vecType> 
+    T perlin(
+		vecType<T> const & p, 
+		vecType<T> const & rep);
 
 	/// Simplex noise.
 	/// @see gtc_noise
-	template <typename T, precision P, template<typename, precision> class vecType>
-	GLM_FUNC_DECL T simplex(
-		vecType<T, P> const & p);
+	template <typename T, template<typename> class vecType> 
+    T simplex(
+		vecType<T> const & p);
 
 	/// @}
 }//namespace glm
 
 #include "noise.inl"
+
+#endif//GLM_GTC_noise

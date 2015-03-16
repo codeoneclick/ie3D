@@ -1,60 +1,90 @@
-///////////////////////////////////////////////////////////////////////////////////
-/// OpenGL Mathematics (glm.g-truc.net)
-///
-/// Copyright (c) 2005 - 2015 G-Truc Creation (www.g-truc.net)
-/// Permission is hereby granted, free of charge, to any person obtaining a copy
-/// of this software and associated documentation files (the "Software"), to deal
-/// in the Software without restriction, including without limitation the rights
-/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-/// copies of the Software, and to permit persons to whom the Software is
-/// furnished to do so, subject to the following conditions:
-/// 
-/// The above copyright notice and this permission notice shall be included in
-/// all copies or substantial portions of the Software.
-/// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
-/// 
-/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-/// THE SOFTWARE.
-///
-/// @ref gtx_transform
-/// @file glm/gtx/transform.inl
-/// @date 2005-12-21 / 2011-06-07
-/// @author Christophe Riccio
-///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// OpenGL Mathematics Copyright (c) 2005 - 2012 G-Truc Creation (www.g-truc.net)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Created : 2005-12-21
+// Updated : 2009-04-29
+// Licence : This source is under MIT License
+// File    : glm/gtx/transform.inl
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace glm
 {
-	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER tmat4x4<T, P> translate(
-		tvec3<T, P> const & v)
-	{
+    template <typename T> 
+    GLM_FUNC_QUALIFIER detail::tmat4x4<T> translate(
+		T x, T y, T z)
+    {
 		return translate(
-			tmat4x4<T, P>(1.0f), v);
-	}
+			detail::tmat4x4<T>(1.0f), 
+			detail::tvec3<T>(x, y , z));
+    }
 
-	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER tmat4x4<T, P> rotate(
+    template <typename T> 
+    GLM_FUNC_QUALIFIER detail::tmat4x4<T> translate(
+		detail::tmat4x4<T> const & m, 
+		T x, T y, T z)
+    {
+        return translate(
+			m, detail::tvec3<T>(x, y , z));
+    }
+
+    template <typename T> 
+    GLM_FUNC_QUALIFIER detail::tmat4x4<T> translate(
+		detail::tvec3<T> const & v)
+    {
+		return translate(
+			detail::tmat4x4<T>(1.0f), v);
+    }
+
+    template <typename T> 
+    GLM_FUNC_QUALIFIER detail::tmat4x4<T> rotate(
 		T angle, 
-		tvec3<T, P> const & v)
-	{
+		T x, T y, T z)
+    {
 		return rotate(
-			tmat4x4<T, P>(1), angle, v);
-	}
+			detail::tmat4x4<T>(1), angle, detail::tvec3<T>(x, y, z));
+    }
 
-	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER tmat4x4<T, P> scale(
-		tvec3<T, P> const & v)
-	{
+    template <typename T> 
+    GLM_FUNC_QUALIFIER detail::tmat4x4<T> rotate(
+		T angle, 
+		detail::tvec3<T> const & v)
+    {
+		return rotate(
+			detail::tmat4x4<T>(1), angle, v);
+    }
+
+    template <typename T> 
+    GLM_FUNC_QUALIFIER detail::tmat4x4<T> rotate(
+		detail::tmat4x4<T> const & m, 
+		T angle, 
+		T x, T y, T z)
+    {
+		return rotate(
+			m, angle, detail::tvec3<T>(x, y, z));
+    }
+
+    template <typename T> 
+    GLM_FUNC_QUALIFIER detail::tmat4x4<T> scale(T x, T y, T z)
+    {
 		return scale(
-			tmat4x4<T, P>(1.0f), v);
-	}
+			detail::tmat4x4<T>(1), detail::tvec3<T>(x, y, z));
+    }
+
+    template <typename T> 
+    GLM_FUNC_QUALIFIER detail::tmat4x4<T> scale(
+		detail::tmat4x4<T> const & m, 
+		T x, T y, T z)
+    {
+        return scale(
+			m, detail::tvec3<T>(x, y, z));
+    }
+
+    template <typename T> 
+    GLM_FUNC_QUALIFIER detail::tmat4x4<T> scale(
+		detail::tvec3<T> const & v)
+    {
+        return scale(
+			detail::tmat4x4<T>(1.0f), v);
+    }
 
 }//namespace glm

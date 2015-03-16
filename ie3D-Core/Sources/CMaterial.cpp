@@ -570,7 +570,7 @@ void CMaterial::bind(void)
     if(m_parameters->m_isClipping &&
        getCachedParameters()->m_isClipping != m_parameters->m_isClipping)
     {
-#if defined(__IOS__)
+#if defined(__IOS__) && defined(GL_APPLE_clip_distance)
         ieEnable(GL_CLIP_DISTANCE0_APPLE);
 #else
         ieEnable(GL_CLIP_DISTANCE0);
@@ -579,7 +579,7 @@ void CMaterial::bind(void)
     }
     else if(getCachedParameters()->m_isClipping != m_parameters->m_isClipping)
     {
-#if defined(__IOS__)
+#if defined(__IOS__) && defined(GL_APPLE_clip_distance)
         ieDisable(GL_CLIP_DISTANCE0_APPLE);
 #else
         ieDisable(GL_CLIP_DISTANCE0);

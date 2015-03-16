@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /// OpenGL Mathematics (glm.g-truc.net)
 ///
-/// Copyright (c) 2005 - 2015 G-Truc Creation (www.g-truc.net)
+/// Copyright (c) 2005 - 2012 G-Truc Creation (www.g-truc.net)
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -11,10 +11,6 @@
 /// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
 /// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -32,7 +28,7 @@
 /// @see core (dependence)
 /// @see gtx_extented_min_max (dependence)
 ///
-/// @defgroup gtx_multiple GLM_GTX_multiple
+/// @defgroup gtx_multiple GLM_GTX_multiple: Multiples 
 /// @ingroup gtx
 /// 
 /// @brief Find the closest number of a number multiple of other number.
@@ -40,67 +36,38 @@
 /// <glm/gtx/multiple.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#ifndef GLM_GTX_multiple
+#define GLM_GTX_multiple GLM_VERSION
 
 // Dependency:
-#include "../gtc/round.hpp"
+#include "../glm.hpp"
 
-#pragma message("GLM: GLM_GTX_multiple extension is deprecated, use GLM_GTC_round instead.")
+#if(defined(GLM_MESSAGES) && !defined(glm_ext))
+#	pragma message("GLM: GLM_GTX_multiple extension included")
+#endif
 
 namespace glm
 {
 	/// @addtogroup gtx_multiple
 	/// @{
 
-	/// Higher multiple number of Source.
-	///
-	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
-	/// @param Multiple Must be a null or positive value
-	///
-	/// @see gtx_multiple
-	template <typename genType>
-	GLM_DEPRECATED GLM_FUNC_DECL genType higherMultiple(
-		genType Source,
-		genType Multiple);
+	//! Higher Multiple number of Source.
+	//! From GLM_GTX_multiple extension.
+	template <typename genType> 
+	genType higherMultiple(
+		genType const & Source, 
+		genType const & Multiple);
 
-	/// Higher multiple number of Source.
-	///
-	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
-	/// @param Multiple Must be a null or positive value
-	///
-	/// @see gtx_multiple
-	template <typename T, precision P, template <typename, precision> class vecType>
-	GLM_DEPRECATED GLM_FUNC_DECL vecType<T, P> higherMultiple(
-		vecType<T, P> const & Source,
-		vecType<T, P> const & Multiple);
-
-	/// Lower multiple number of Source.
-	///
-	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
-	/// @param Multiple Must be a null or positive value
-	///
-	/// @see gtx_multiple
-	template <typename genType>
-	GLM_DEPRECATED GLM_FUNC_DECL genType lowerMultiple(
-		genType Source,
-		genType Multiple);
-
-	/// Lower multiple number of Source.
-	///
-	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
-	/// @param Multiple Must be a null or positive value
-	///
-	/// @see gtx_multiple
-	template <typename T, precision P, template <typename, precision> class vecType>
-	GLM_DEPRECATED GLM_FUNC_DECL vecType<T, P> lowerMultiple(
-		vecType<T, P> const & Source,
-		vecType<T, P> const & Multiple);
+	//! Lower Multiple number of Source.
+	//! From GLM_GTX_multiple extension.
+	template <typename genType> 
+	genType lowerMultiple(
+		genType const & Source, 
+		genType const & Multiple);
 
 	/// @}
 }//namespace glm
 
 #include "multiple.inl"
+
+#endif//GLM_GTX_multiple

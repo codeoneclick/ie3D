@@ -19,7 +19,7 @@ private:
 protected:
     
     ui32 m_handle;
-    bool m_isDataUploaded;
+    bool m_isMMAP;
     
 	ui16* m_data;
     ui32 m_allocatedSize;
@@ -29,7 +29,7 @@ protected:
     
 public:
     
-    CIndexBuffer(ui32 sizeToAllocate, GLenum mode);
+    CIndexBuffer(ui32 sizeToAllocate, GLenum mode, ui16* mmap = nullptr);
     ~CIndexBuffer(void);
     
     ui32 getAllocatedSize(void) const;

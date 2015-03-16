@@ -102,6 +102,29 @@ public:
     static glm::vec2 getAngleOnHeightmapSurface(CSharedHeightmapRef data, const glm::vec3& position);
 };
 
+class CHeightmapIBOMMAP
+{
+private:
+
+    ui16* m_pointer;
+    ui16 m_size;
+    i32 m_filedescriptor;
+    
+protected:
+    
+public:
+    
+    CHeightmapIBOMMAP(void);
+    ~CHeightmapIBOMMAP(void);
+    
+    void open(const std::string& filename);
+    void close(void);
+    
+    inline ui16* getPointer(void) const { return m_pointer; };
+    inline void setSize(ui16 size) { m_size = size; };
+    inline ui16 getSize(void) const { return m_size; };
+};
+
 class CHeightmapGenerator
 {
 private:
@@ -111,9 +134,12 @@ protected:
     std::shared_ptr<CHeightmap> m_heightmap;
     
     std::vector<std::shared_ptr<CVertexBuffer>> m_vbos;
-    std::vector<std::tuple<std::array<std::shared_ptr<CIndexBuffer>, E_LANDSCAPE_CHUNK_LOD_MAX>, ui32>> m_ibos;
+    std::vector<std::tuple<std::array<CHeightmapIBOMMAP, E_LANDSCAPE_CHUNK_LOD_MAX>, ui32>> m_ibosMMAP;
+    std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_callbacks;
+    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, E_LANDSCAPE_CHUNK_LOD>> m_loadedChunksMetadata;
+    std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
-    void createVBO(void);
+    void createVBOs(void);
     void createIBOs(void);
     
     CSharedTexture m_heightmapTexture;
@@ -123,23 +149,14 @@ protected:
     glm::ivec2 m_chunksNum;
     std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_chunkLODsSizes;
     
-    std::vector<std::tuple<CSharedMesh,
-                           CSharedQuadTree,
-                           std::function<void(CSharedMeshRef)>,
-                           std::function<void(CSharedQuadTreeRef)>,
-                           std::function<void(void)>,
-                           E_LANDSCAPE_CHUNK_LOD>> m_chunksUsed;
-    
-    std::vector<CSharedMesh> m_chunksUnused;
     std::vector<CSharedThreadOperation> m_executedOperations;
     std::vector<CSharedThreadOperation> m_canceledOperations;
-    std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
     
     void createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
                           ui32 chunkOffsetX, ui32 chunkOffsetZ,
-                          glm::vec3* maxBound, glm::vec3* minBound);
+                          glm::vec3* minBound, glm::vec3* maxBound);
     
     void writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
     void commitVertexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
@@ -186,8 +203,8 @@ public:
     
     void runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                          const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
-                         const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback,
-                         const std::function<void(void)>& meshUpdatedCallback);
+                         const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback);
+    
     void stopChunkLoading(ui32 i, ui32 j, const std::function<void(void)>& stopLoadingCallback);
     void runChunkUnLoading(ui32 i, ui32 j);
     

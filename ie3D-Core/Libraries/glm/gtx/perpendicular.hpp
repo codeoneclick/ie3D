@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /// OpenGL Mathematics (glm.g-truc.net)
 ///
-/// Copyright (c) 2005 - 2015 G-Truc Creation (www.g-truc.net)
+/// Copyright (c) 2005 - 2012 G-Truc Creation (www.g-truc.net)
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -11,10 +11,6 @@
 /// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
 /// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -32,7 +28,7 @@
 /// @see core (dependence)
 /// @see gtx_projection (dependence)
 ///
-/// @defgroup gtx_perpendicular GLM_GTX_perpendicular
+/// @defgroup gtx_perpendicular GLM_GTX_perpendicular: Perpendicular
 /// @ingroup gtx
 /// 
 /// @brief Perpendicular of a vector from other one
@@ -40,13 +36,14 @@
 /// <glm/gtx/perpendicular.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#ifndef GLM_GTX_perpendicular
+#define GLM_GTX_perpendicular GLM_VERSION
 
 // Dependency:
 #include "../glm.hpp"
 #include "../gtx/projection.hpp"
 
-#if(defined(GLM_MESSAGES) && !defined(GLM_EXT_INCLUDED))
+#if(defined(GLM_MESSAGES) && !defined(glm_ext))
 #	pragma message("GLM: GLM_GTX_perpendicular extension included")
 #endif
 
@@ -58,7 +55,7 @@ namespace glm
 	//! Projects x a perpendicular axis of Normal.
 	//! From GLM_GTX_perpendicular extension.
 	template <typename vecType> 
-	GLM_FUNC_DECL vecType perp(
+	vecType perp(
 		vecType const & x, 
 		vecType const & Normal);
 
@@ -66,3 +63,5 @@ namespace glm
 }//namespace glm
 
 #include "perpendicular.inl"
+
+#endif//GLM_GTX_perpendicular

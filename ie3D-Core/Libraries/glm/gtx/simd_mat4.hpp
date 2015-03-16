@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /// OpenGL Mathematics (glm.g-truc.net)
 ///
-/// Copyright (c) 2005 - 2015 G-Truc Creation (www.g-truc.net)
+/// Copyright (c) 2005 - 2012 G-Truc Creation (www.g-truc.net)
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -12,10 +12,6 @@
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
 /// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
-/// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,14 +20,14 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 ///
-/// @ref gtx_simd_mat4
-/// @file glm/gtx/simd_mat4.hpp
+/// @ref gtx_simd_vec4
+/// @file glm/gtx/simd_vec4.hpp
 /// @date 2009-05-07 / 2011-06-07
 /// @author Christophe Riccio
 ///
 /// @see core (dependence)
 ///
-/// @defgroup gtx_simd_mat4 GLM_GTX_simd_mat4
+/// @defgroup gtx_simd_mat4 GLM_GTX_simd_mat4: SIMD mat4 type and functions
 /// @ingroup gtx
 /// 
 /// @brief SIMD implementation of mat4 type.
@@ -39,21 +35,22 @@
 /// <glm/gtx/simd_mat4.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#ifndef GLM_GTX_simd_mat4
+#define GLM_GTX_simd_mat4 GLM_VERSION
 
-// Dependencies
-#include "../detail/setup.hpp"
+// Dependency:
+#include "../glm.hpp"
 
 #if(GLM_ARCH != GLM_ARCH_PURE)
 
 #if(GLM_ARCH & GLM_ARCH_SSE2)
-#	include "../detail/intrinsic_matrix.hpp"
+#	include "../core/intrinsic_matrix.hpp"
 #	include "../gtx/simd_vec4.hpp"
 #else
 #	error "GLM: GLM_GTX_simd_mat4 requires compiler support of SSE2 through intrinsics"
 #endif
 
-#if(defined(GLM_MESSAGES) && !defined(GLM_EXT_INCLUDED))
+#if(defined(GLM_MESSAGES) && !defined(glm_ext))
 #	pragma message("GLM: GLM_GTX_simd_mat4 extension included")
 #endif
 
@@ -64,14 +61,16 @@ namespace detail
 	/// \ingroup gtx_simd_mat4
 	GLM_ALIGNED_STRUCT(16) fmat4x4SIMD
 	{
+		enum ctor{null};
+
 		typedef float value_type;
 		typedef fvec4SIMD col_type;
 		typedef fvec4SIMD row_type;
 		typedef std::size_t size_type;
-		typedef fmat4x4SIMD type;
-		typedef fmat4x4SIMD transpose_type;
-
-		GLM_FUNC_DECL length_t length() const;
+		static size_type value_size();
+		static size_type col_size();
+		static size_type row_size();
+		static bool is_matrix();
 
 		fvec4SIMD Data[4];
 
@@ -91,9 +90,7 @@ namespace detail
 			fvec4SIMD const & v2,
 			fvec4SIMD const & v3);
 		explicit fmat4x4SIMD(
-			mat4x4 const & m);
-		explicit fmat4x4SIMD(
-			__m128 const in[4]);
+			tmat4x4<float> const & m);
 
 		// Conversions
 		//template <typename U> 
@@ -109,8 +106,8 @@ namespace detail
 		//explicit tmat4x4(tmat4x3<T> const & x);
 
 		// Accesses
-		fvec4SIMD & operator[](length_t i);
-		fvec4SIMD const & operator[](length_t i) const;
+		fvec4SIMD & operator[](size_type i);
+		fvec4SIMD const & operator[](size_type i) const;
 
 		// Unary updatable operators
 		fmat4x4SIMD & operator= (fmat4x4SIMD const & m);
@@ -130,7 +127,7 @@ namespace detail
 	fmat4x4SIMD operator+ (fmat4x4SIMD const & m, float const & s);
 	fmat4x4SIMD operator+ (float const & s, fmat4x4SIMD const & m);
 	fmat4x4SIMD operator+ (fmat4x4SIMD const & m1, fmat4x4SIMD const & m2);
-
+	    
 	fmat4x4SIMD operator- (fmat4x4SIMD const & m, float const & s);
 	fmat4x4SIMD operator- (float const & s, fmat4x4SIMD const & m);
 	fmat4x4SIMD operator- (fmat4x4SIMD const & m1, fmat4x4SIMD const & m2);
@@ -164,7 +161,7 @@ namespace detail
 
 	//! Convert a simdMat4 to a mat4.
 	//! (From GLM_GTX_simd_mat4 extension)
-	mat4 mat4_cast(
+	detail::tmat4x4<float> mat4_cast(
 		detail::fmat4x4SIMD const & x);
 
 	//! Multiply matrix x by matrix y component-wise, i.e.,
@@ -203,3 +200,5 @@ namespace detail
 #include "simd_mat4.inl"
 
 #endif//(GLM_ARCH != GLM_ARCH_PURE)
+
+#endif//GLM_GTX_simd_mat4

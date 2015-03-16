@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /// OpenGL Mathematics (glm.g-truc.net)
 ///
-/// Copyright (c) 2005 - 2015 G-Truc Creation (www.g-truc.net)
+/// Copyright (c) 2005 - 2012 G-Truc Creation (www.g-truc.net)
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -11,10 +11,6 @@
 /// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
 /// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -31,7 +27,7 @@
 ///
 /// @see core (dependence)
 ///
-/// @defgroup gtx_mixed_product GLM_GTX_mixed_producte
+/// @defgroup gtx_mixed_product GLM_GTX_mixed_producte: Mixed product
 /// @ingroup gtx
 /// 
 /// @brief Mixed product of 3 vectors.
@@ -39,12 +35,13 @@
 /// <glm/gtx/mixed_product.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#ifndef GLM_GTX_mixed_product
+#define GLM_GTX_mixed_product GLM_VERSION
 
 // Dependency:
 #include "../glm.hpp"
 
-#if(defined(GLM_MESSAGES) && !defined(GLM_EXT_INCLUDED))
+#if(defined(GLM_MESSAGES) && !defined(glm_ext))
 #	pragma message("GLM: GLM_GTX_mixed_product extension included")
 #endif
 
@@ -54,13 +51,15 @@ namespace glm
 	/// @{
 
 	/// @brief Mixed product of 3 vectors (from GLM_GTX_mixed_product extension)
-	template <typename T, precision P> 
-	GLM_FUNC_DECL T mixedProduct(
-		tvec3<T, P> const & v1, 
-		tvec3<T, P> const & v2, 
-		tvec3<T, P> const & v3);
+	template <typename valType> 
+	valType mixedProduct(
+		detail::tvec3<valType> const & v1, 
+		detail::tvec3<valType> const & v2, 
+		detail::tvec3<valType> const & v3);
 
 	/// @}
 }// namespace glm
 
 #include "mixed_product.inl"
+
+#endif//GLM_GTX_mixed_product
