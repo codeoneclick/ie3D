@@ -60,7 +60,9 @@ private:
     
 protected:
     
-    SCompressedVertex* m_compressedVertexes;
+    SUncomressedVertex* m_uncompressedVertices;
+    SFace* m_faces;
+    SCompressedVertex* m_compressedVertices;
     
     glm::ivec2 m_size;
     void mapVertices(f32* data);
@@ -129,6 +131,8 @@ class CHeightmapGenerator
 {
 private:
     
+    ui32 m_heightmapGUID;
+    
 protected:
     
     std::shared_ptr<CHeightmap> m_heightmap;
@@ -136,7 +140,7 @@ protected:
     std::vector<std::shared_ptr<CVertexBuffer>> m_vbos;
     std::vector<std::tuple<std::array<CHeightmapIBOMMAP, E_LANDSCAPE_CHUNK_LOD_MAX>, ui32>> m_ibosMMAP;
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_callbacks;
-    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, E_LANDSCAPE_CHUNK_LOD>> m_loadedChunksMetadata;
+    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
     void createVBOs(void);
@@ -153,6 +157,10 @@ protected:
     std::vector<CSharedThreadOperation> m_canceledOperations;
     
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
+    
+    void readMMAPIBO(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
+    void createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
+    void generateQuadTree(ui32 index);
     
     void createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
                           ui32 chunkOffsetX, ui32 chunkOffsetZ,

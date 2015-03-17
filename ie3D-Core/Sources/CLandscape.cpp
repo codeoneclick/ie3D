@@ -105,8 +105,6 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
-                        }, [this, i, j](void) {
-                            CLandscape::resetSeams(i, j);
                         });
                     }
                     else if(m_chunks[index]->getInprogressLOD() == m_chunks[index]->getCurrentLOD() &&
@@ -120,11 +118,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
                             m_chunks[index]->onSceneUpdate(0);
-                        }, [this , i, j](void) {
-                            CLandscape::resetSeams(i, j);
                         });
                     }
-                    CLandscape::sewSeams(i, j);
                 }
                 else if(m_chunks[index] != nullptr)
                 {

@@ -543,9 +543,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"__OSX__=1",
-					"DEBUG=1",
+					__OSX__,
 					"$(inherited)",
+					__EDITOR__,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -574,7 +574,10 @@
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				GCC_PREPROCESSOR_DEFINITIONS = "__OSX__=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__OSX__,
+					__EDITOR__,
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
