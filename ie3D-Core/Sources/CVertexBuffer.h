@@ -27,12 +27,7 @@ struct SVertexData
     std::vector<SBoneData> m_bones;
 };
 
-struct A
-{
-    
-};
-
-struct SAttributeVertex : public A
+struct SAttributeVertex
 {
     glm::vec3 m_position;
     glm::uint32 m_texcoord;
@@ -49,7 +44,7 @@ private:
 protected:
     
     ui32 m_handle;
-    bool m_isDataUploaded;
+    bool m_isMMAP;
     
     SAttributeVertex* m_data;
     ui32 m_allocatedSize;
@@ -59,7 +54,7 @@ protected:
     
 public:
     
-    CVertexBuffer(ui32 sizeToAllocate, GLenum mode);
+    CVertexBuffer(ui32 sizeToAllocate, GLenum mode, ui16* mmap = nullptr);
     ~CVertexBuffer(void);
     
     ui32 getAllocatedSize(void) const;

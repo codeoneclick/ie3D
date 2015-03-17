@@ -9,11 +9,11 @@
 #include "CVertexBuffer.h"
 #include "HEnums.h"
 
-CVertexBuffer::CVertexBuffer(ui32 sizeToAllocate, GLenum mode) : IResourceData(E_RESOURCE_DATA_CLASS_VERTEX_BUFFER_DATA),
+CVertexBuffer::CVertexBuffer(ui32 sizeToAllocate, GLenum mode, ui16* mmap) : IResourceData(E_RESOURCE_DATA_CLASS_VERTEX_BUFFER_DATA),
 m_allocatedSize(sizeToAllocate),
 m_usedSize(0),
 m_mode(mode),
-m_isDataUploaded(false)
+m_isMMAP(false)
 {
     assert(m_allocatedSize != 0);
     m_data = new SAttributeVertex[m_allocatedSize];
