@@ -518,9 +518,7 @@ m_splattingTexture(nullptr)
         for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
             ui32 index = i + j * m_chunksNum.x;
-            CHeightmapGenerator::createChunkBound(m_chunkSize.x, m_chunkSize.y, i, j,
-                                                  &std::get<0>(m_chunksBounds[index]), &std::get<1>(m_chunksBounds[index]));
-            
+            CHeightmapGenerator::createChunkBound(glm::ivec2(i, j), &std::get<0>(m_chunksBounds[index]), &std::get<1>(m_chunksBounds[index]));
             m_chunksBounds[index] = std::make_tuple(std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index]));
         }
     }
@@ -1028,9 +1026,12 @@ void CHeightmapGenerator::updateHeightmap(ui32 offsetX, ui32 offsetZ,
         for(ui32 j = 0; j < CHeightmapGenerator::getNumChunks().y; ++j)
         {
             ui32 index = i + j * m_chunksNum.x;
-            if(std::get<0>(m_chunksMetadata[index]) != nullptr)
+            if(std::get<0>(m_chunksBounds[index]).x < offsetX &&
+               std::get<1>(m_chunksBounds[index]).x > offsetX + subWidth &&
+               std::get<0>(m_chunksBounds[index]).z < offsetZ &&
+               std::get<1>(m_chunksBounds[index]).z > offsetZ + subHeight)
             {
-                std::get<0>(m_chunksMetadata[index])->getVertexBuffer()->unlock();
+                CHeightmapGenerator::createChunkBound(glm::ivec2(i, j), &std::get<0>(m_chunksBounds[index]), &std::get<1>(m_chunksBounds[index]));
             }
         }
     }
@@ -1571,35 +1572,22 @@ void CHeightmapGenerator::update(void)
     }
 }
 
-void CHeightmapGenerator::createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
-                                           ui32 chunkOffsetX, ui32 chunkOffsetZ,
+void CHeightmapGenerator::createChunkBound(const glm::ivec2& index,
                                            glm::vec3* minBound, glm::vec3* maxBound)
 {
     assert(m_heightmap != nullptr);
-    assert(chunkLODSizeX != 0);
-    assert(chunkLODSizeZ != 0);
     
-    ui32 chunkLODOffsetX = (m_chunkSize.x - 1) / (chunkLODSizeX - 1);
-    ui32 chunkLODOffsetZ = (m_chunkSize.y - 1) / (chunkLODSizeZ - 1);
-    
-    for(ui32 i = 0; i < chunkLODSizeX; ++i)
+    for(ui32 x = 0; x < m_chunkSize.x; ++x)
     {
-        for(ui32 j = 0; j < chunkLODSizeZ; ++j)
+        for(ui32 y = 0; y < m_chunkSize.y; ++y)
         {
-            glm::vec2 position = glm::vec2(i * chunkLODOffsetX + chunkOffsetX * m_chunkSize.x - chunkOffsetX,
-                                           j * chunkLODOffsetZ + chunkOffsetZ * m_chunkSize.y - chunkOffsetZ);
+            glm::ivec2 position = glm::ivec2(x + index.x * m_chunkSize.x - index.x,
+                                             y + index.y * m_chunkSize.y - index.y);
             
-            ui32 indexXOffset = static_cast<ui32>(position.x) < m_heightmap->getSize().x ?
-            static_cast<ui32>(position.x) :
-            static_cast<ui32>(m_heightmap->getSize().x - 1);
+            position.x = position.x < m_heightmap->getSize().x ? position.x : m_heightmap->getSize().x - 1;
+            position.y = position.y < m_heightmap->getSize().y ? position.y : m_heightmap->getSize().y - 1;
             
-            ui32 indexZOffset = static_cast<ui32>(position.y) < m_heightmap->getSize().y ?
-            static_cast<ui32>(position.y) :
-            static_cast<ui32>(m_heightmap->getSize().y - 1);
-            
-            glm::vec3 point = m_heightmap->getVertexPosition(indexXOffset,
-                                                             indexZOffset);
-            
+            glm::vec3 point = m_heightmap->getVertexPosition(position.x, position.y);
             *maxBound = CMeshData::calculateMaxBound(point, *maxBound);
             *minBound = CMeshData::calculateMinBound(point, *minBound);
         }

@@ -167,8 +167,7 @@ protected:
     void createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(ui32 index);
     
-    void createChunkBound(ui32 chunkLODSizeX, ui32 chunkLODSizeZ,
-                          ui32 chunkOffsetX, ui32 chunkOffsetZ,
+    void createChunkBound(const glm::ivec2& index,
                           glm::vec3* minBound, glm::vec3* maxBound);
     
     void writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
