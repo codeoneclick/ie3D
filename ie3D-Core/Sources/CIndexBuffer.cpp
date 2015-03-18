@@ -12,19 +12,19 @@ CIndexBuffer::CIndexBuffer(ui32 sizeToAllocate, GLenum mode, ui16* mmap) : IReso
 m_allocatedSize(sizeToAllocate),
 m_usedSize(0),
 m_mode(mode),
-m_isMMAP(false)
+m_isMMAP(mmap != nullptr)
 {
-	assert(m_allocatedSize != 0);
+    assert(m_allocatedSize != 0);
     ieGenBuffers(1, &m_handle);
     
     if(mmap == nullptr)
     {
         m_data = new ui16[m_allocatedSize];
+        memset(m_data, 0x0, sizeof(ui16) * m_allocatedSize);
     }
     else
     {
         m_data = mmap;
-        m_isMMAP = true;
     }
 }
 

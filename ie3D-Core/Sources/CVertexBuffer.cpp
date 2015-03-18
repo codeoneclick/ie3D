@@ -9,24 +9,34 @@
 #include "CVertexBuffer.h"
 #include "HEnums.h"
 
-CVertexBuffer::CVertexBuffer(ui32 sizeToAllocate, GLenum mode, ui16* mmap) : IResourceData(E_RESOURCE_DATA_CLASS_VERTEX_BUFFER_DATA),
+CVertexBuffer::CVertexBuffer(ui32 sizeToAllocate, GLenum mode, SAttributeVertex* mmap) : IResourceData(E_RESOURCE_DATA_CLASS_VERTEX_BUFFER_DATA),
 m_allocatedSize(sizeToAllocate),
 m_usedSize(0),
 m_mode(mode),
-m_isMMAP(false)
+m_isMMAP(mmap != nullptr)
 {
     assert(m_allocatedSize != 0);
-    m_data = new SAttributeVertex[m_allocatedSize];
-    memset(m_data, 0x0, sizeof(SAttributeVertex) * m_allocatedSize);
     ieGenBuffers(1, &m_handle);
-    ieBindBuffer(GL_ARRAY_BUFFER, m_handle);
-    ieBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_allocatedSize, m_data, m_mode);
+    
+    if(mmap == nullptr)
+    {
+        m_data = new SAttributeVertex[m_allocatedSize];
+        memset(m_data, 0x0, sizeof(SAttributeVertex) * m_allocatedSize);
+    }
+    else
+    {
+        m_data = mmap;
+    }
 }
 
 CVertexBuffer::~CVertexBuffer(void)
 {
     ieDeleteBuffers(1, &m_handle);
-    delete[] m_data;
+    
+    if(!m_isMMAP)
+    {
+        delete[] m_data;
+    }
 }
 
 ui32 CVertexBuffer::getAllocatedSize(void) const
@@ -51,16 +61,7 @@ void CVertexBuffer::unlock(ui32 sizeToUse)
     assert(m_allocatedSize != 0);
     m_usedSize = sizeToUse > 0 && sizeToUse < m_allocatedSize ? sizeToUse : m_allocatedSize;
     ieBindBuffer(GL_ARRAY_BUFFER, m_handle);
-    
-    //if(!m_isDataUploaded)
-    //{
-    //    ieBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
-        //m_isDataUploaded = true;
-    //}
-    //else
-    {
-        ieBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(SAttributeVertex) * m_usedSize, m_data);
-    }
+    ieBufferData(GL_ARRAY_BUFFER, sizeof(SAttributeVertex) * m_usedSize, m_data, m_mode);
 }
 
 void CVertexBuffer::bind(const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes) const

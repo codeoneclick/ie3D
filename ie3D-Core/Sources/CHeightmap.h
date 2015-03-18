@@ -22,7 +22,8 @@ private:
         glm::vec3 m_position;
         glm::vec3 m_normal;
         glm::vec2 m_texcoord;
-        std::vector<ui32> m_containInFace;
+        std::vector<ui32> m_containsInFace;
+        std::vector<std::tuple<ui32, ui32>> m_containsInVBO;
         
         SUncomressedVertex(void) = default;
         ~SUncomressedVertex(void) = default;
@@ -73,11 +74,15 @@ public:
     CHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
     ~CHeightmap(void);
     
+    void updateVertices(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertices,
+                        const std::vector<std::shared_ptr<CVertexBuffer>>& vbos);
+    void attachUncompressedVertexToVBO(ui32 x, ui32 y, ui32 vboIndex, ui32 vboVertexIndex);
+    
     glm::vec3 getVertexPosition(ui32 i, ui32 j) const;
     glm::uint32 getVertexTexcoord(ui32 i, ui32 j) const;
     glm::uint32 getVertexNormal(ui32 i, ui32 j) const;
     
-    void updateVertexesData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertexes);
+    
     
     glm::ivec2 getSize(void) const;
     

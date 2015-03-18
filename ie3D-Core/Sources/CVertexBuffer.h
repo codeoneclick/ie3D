@@ -54,7 +54,7 @@ protected:
     
 public:
     
-    CVertexBuffer(ui32 sizeToAllocate, GLenum mode, ui16* mmap = nullptr);
+    CVertexBuffer(ui32 sizeToAllocate, GLenum mode, SAttributeVertex* mmap = nullptr);
     ~CVertexBuffer(void);
     
     ui32 getAllocatedSize(void) const;

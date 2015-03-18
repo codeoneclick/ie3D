@@ -140,13 +140,13 @@ void CHeightmap::mapVertices(f32* data)
         for(ui32 j = 0; j < (m_size.y - 1); ++j)
         {
             m_faces[index].m_indexes[0] = i + j * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containsInFace.push_back(index);
             glm::vec3 point_01 = m_uncompressedVertices[m_faces[index].m_indexes[0]].m_position;
             m_faces[index].m_indexes[1] = i + (j + 1) * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containsInFace.push_back(index);
             glm::vec3 point_02 = m_uncompressedVertices[m_faces[index].m_indexes[1]].m_position;
             m_faces[index].m_indexes[2] = i + 1 + j * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containsInFace.push_back(index);
             glm::vec3 point_03 = m_uncompressedVertices[m_faces[index].m_indexes[2]].m_position;
             
             glm::vec3 edge_01 = point_02 - point_01;
@@ -157,13 +157,13 @@ void CHeightmap::mapVertices(f32* data)
             index++;
             
             m_faces[index].m_indexes[0] = i + (j + 1) * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containsInFace.push_back(index);
             point_01 = m_uncompressedVertices[m_faces[index].m_indexes[0]].m_position;
             m_faces[index].m_indexes[1] = i + 1 + (j + 1) * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containsInFace.push_back(index);
             point_02 = m_uncompressedVertices[m_faces[index].m_indexes[1]].m_position;
             m_faces[index].m_indexes[2] = i + 1 + j * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containsInFace.push_back(index);
             point_03 = m_uncompressedVertices[m_faces[index].m_indexes[2]].m_position;
             
             edge_01 = point_02 - point_01;
@@ -177,11 +177,11 @@ void CHeightmap::mapVertices(f32* data)
     
     for(ui32 i = 0; i < m_size.x * m_size.y; ++i)
     {
-        assert(m_uncompressedVertices[i].m_containInFace.size() != 0);
-        glm::vec3 normal = m_faces[m_uncompressedVertices[i].m_containInFace[0]].m_normal;
-        for(ui32 j = 1; j < m_uncompressedVertices[i].m_containInFace.size(); ++j)
+        assert(m_uncompressedVertices[i].m_containsInFace.size() != 0);
+        glm::vec3 normal = m_faces[m_uncompressedVertices[i].m_containsInFace[0]].m_normal;
+        for(ui32 j = 1; j < m_uncompressedVertices[i].m_containsInFace.size(); ++j)
         {
-            normal += m_faces[m_uncompressedVertices[i].m_containInFace[j]].m_normal;
+            normal += m_faces[m_uncompressedVertices[i].m_containsInFace[j]].m_normal;
         }
         normal = glm::normalize(normal);
         m_uncompressedVertices[i].m_normal = normal;
@@ -263,26 +263,27 @@ glm::uint32 CHeightmap::getVertexNormal(ui32 i, ui32 j) const
     return m_compressedVertices[i + j * m_size.x].m_normal;
 }
 
-void CHeightmap::updateVertexesData(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertexes)
+void CHeightmap::updateVertices(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertices,
+                                const std::vector<std::shared_ptr<CVertexBuffer>>& vbos)
 {
-    for(ui32 i = 0; i < modifiedVertexes.size(); ++i)
+    for(ui32 i = 0; i < modifiedVertices.size(); ++i)
     {
-        ui32 indexX = std::get<0>(modifiedVertexes.at(i));
-        ui32 indexZ = std::get<1>(modifiedVertexes.at(i));
+        ui32 indexX = std::get<0>(modifiedVertices.at(i));
+        ui32 indexZ = std::get<1>(modifiedVertices.at(i));
         glm::vec3 position = glm::vec3(static_cast<f32>(indexX),
-                                       std::get<2>(modifiedVertexes.at(i)),
+                                       std::get<2>(modifiedVertices.at(i)),
                                        static_cast<f32>(indexZ));
         
         m_uncompressedVertices[indexX + indexZ * m_size.x].m_position = position;
     }
     
-    for(ui32 i = 0; i < modifiedVertexes.size(); ++i)
+    for(ui32 i = 0; i < modifiedVertices.size(); ++i)
     {
-        ui32 indexX = std::get<0>(modifiedVertexes.at(i));
-        ui32 indexZ = std::get<1>(modifiedVertexes.at(i));
-        for(ui32 j = 0; j < m_uncompressedVertices[indexX + indexZ * m_size.x].m_containInFace.size(); ++j)
+        ui32 indexX = std::get<0>(modifiedVertices.at(i));
+        ui32 indexZ = std::get<1>(modifiedVertices.at(i));
+        for(ui32 j = 0; j < m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.size(); ++j)
         {
-            ui32 index = m_uncompressedVertices[indexX + indexZ * m_size.x].m_containInFace.at(j);
+            ui32 index = m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.at(j);
             
             glm::vec3 point_01 = m_uncompressedVertices[m_faces[index].m_indexes[0]].m_position;
             glm::vec3 point_02 = m_uncompressedVertices[m_faces[index].m_indexes[1]].m_position;
@@ -296,20 +297,36 @@ void CHeightmap::updateVertexesData(const std::vector<std::tuple<ui32, ui32, f32
         }
     }
     
-    for(ui32 i = 0; i < modifiedVertexes.size(); ++i)
+    for(ui32 i = 0; i < modifiedVertices.size(); ++i)
     {
-        ui32 indexX = std::get<0>(modifiedVertexes.at(i));
-        ui32 indexZ = std::get<1>(modifiedVertexes.at(i));
-        assert(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containInFace.size() != 0);
-        glm::vec3 normal = m_faces[m_uncompressedVertices[indexX + indexZ * m_size.x].m_containInFace.at(0)].m_normal;
-        for(ui32 j = 1; j < m_uncompressedVertices[indexX + indexZ * m_size.x].m_containInFace.size(); ++j)
+        ui32 indexX = std::get<0>(modifiedVertices.at(i));
+        ui32 indexZ = std::get<1>(modifiedVertices.at(i));
+        assert(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.size() != 0);
+        glm::vec3 normal = m_faces[m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.at(0)].m_normal;
+        for(ui32 j = 1; j < m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.size(); ++j)
         {
-            normal += m_faces[m_uncompressedVertices[indexX + indexZ * m_size.x].m_containInFace.at(j)].m_normal;
+            normal += m_faces[m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.at(j)].m_normal;
         }
         m_uncompressedVertices[indexX + indexZ * m_size.x].m_normal = glm::normalize(normal);
         m_compressedVertices[indexX + indexZ * m_size.x].m_position = m_uncompressedVertices[indexX + indexZ * m_size.x].m_position;
         m_compressedVertices[indexX + indexZ * m_size.x].m_normal = glm::packSnorm4x8(glm::vec4(m_uncompressedVertices[indexX + indexZ * m_size.x].m_normal, 0.0));
+        for(ui32 j = 0; j < m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO.size(); ++j)
+        {
+            vbos[std::get<0>(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO[j])]->lock()[std::get<1>(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO[j])].m_position =  m_compressedVertices[indexX + indexZ * m_size.x].m_position;
+            
+            vbos[std::get<0>(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO[j])]->lock()[std::get<1>(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO[j])].m_normal =  m_compressedVertices[indexX + indexZ * m_size.x].m_normal;
+            
+        }
     }
+    for(ui32 i = 0; i < vbos.size(); ++i)
+    {
+        vbos[i]->unlock();
+    }
+}
+
+void CHeightmap::attachUncompressedVertexToVBO(ui32 x, ui32 y, ui32 vboIndex, ui32 vboVertexIndex)
+{
+    m_uncompressedVertices[x + y * m_size.x].m_containsInVBO.push_back(std::make_tuple(vboIndex, vboVertexIndex));
 }
 
 glm::ivec2 CHeightmap::getSize(void) const
@@ -643,6 +660,9 @@ void CHeightmapGenerator::createVBOs(void)
                     vertices[currentVertexIndex].m_position = m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y);
                     vertices[currentVertexIndex].m_texcoord = m_heightmap->getVertexTexcoord(x + verticesOffset.x, y + verticesOffset.y);
                     vertices[currentVertexIndex].m_normal = m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y);
+                    
+                    m_heightmap->attachUncompressedVertexToVBO(x + verticesOffset.x, y + verticesOffset.y,
+                                                               static_cast<ui32>(m_vbos.size() - 1), currentVertexIndex);
                     
                     if(vertices[currentVertexIndex].m_position.x > maxBound.x)
                     {
@@ -997,7 +1017,7 @@ glm::vec2 CHeightmapGenerator::getAngleOnHeightmapSurface(const glm::vec3& posit
 void CHeightmapGenerator::updateHeightmap(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights)
 {
     assert(m_heightmap != nullptr);
-    m_heightmap->updateVertexesData(modifiedHeights);
+    m_heightmap->updateVertices(modifiedHeights, m_vbos);
 }
 
 void CHeightmapGenerator::updateHeightmap(ui32 offsetX, ui32 offsetZ,
