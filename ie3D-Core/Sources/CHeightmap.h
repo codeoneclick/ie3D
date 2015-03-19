@@ -74,7 +74,7 @@ public:
     CHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
     ~CHeightmap(void);
     
-    void updateVertices(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertices,
+    void updateVertices(const std::vector<glm::vec3>& vertices,
                         const std::vector<std::shared_ptr<CVertexBuffer>>& vbos);
     void attachUncompressedVertexToVBO(ui32 x, ui32 y, ui32 vboIndex, ui32 vboVertexIndex);
     
@@ -224,9 +224,9 @@ public:
     
     f32 getHeight(const glm::vec3& position) const;
     glm::vec2 getAngleOnHeightmapSurface(const glm::vec3& position) const;
-    void updateHeightmap(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights);
-    void updateHeightmap(ui32 offsetX, ui32 offsetZ,
-                         ui32 subWidth, ui32 subHeight);
+    
+    void updateHeightmap(const glm::ivec2& minBound, const glm::ivec2& maxBound,
+                         const std::vector<glm::vec3>& vertices);
 };
 
 #endif 

@@ -51,7 +51,7 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForc
 	i32 minIndZ = static_cast<i32>(floor(point.z - m_editableSize));
 	i32 maxIndX = static_cast<i32>(floor(point.x + m_editableSize));
 	i32 maxIndZ = static_cast<i32>(floor(point.z + m_editableSize));
-    std::vector<std::tuple<ui32, ui32, f32>> modifiedHeights;
+    std::vector<glm::vec3> vertices;
 	for(i32 x = minIndX; x < maxIndX; x++)
 	{
         for(i32 z = minIndZ; z < maxIndZ; z++)
@@ -87,18 +87,17 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForc
             }
             height /= static_cast<f32>(delimiter);
 
-            modifiedHeights.push_back(std::make_tuple(x, z, height));
+            vertices.push_back(glm::vec3(x, height, z));
         }
-	}
-    m_heightmapGenerator->updateHeightmap(modifiedHeights);
+    }
     
-    ui32 offsetX = MAX_VALUE(minIndX, 0);
-    ui32 offsetZ = MAX_VALUE(minIndZ, 0);
-    ui32 subWidth = MIN_VALUE(maxIndX, m_heightmapGenerator->getSize().x - 1) - offsetX;
-    ui32 subHeight = MIN_VALUE(maxIndZ, m_heightmapGenerator->getSize().y - 1) - offsetZ;
-
-    m_heightmapGenerator->updateHeightmap(offsetX, offsetZ,
-                                          subWidth, subHeight);
+    glm::ivec2 minBound = glm::ivec2(MAX_VALUE(minIndX, 0),
+                                     MAX_VALUE(minIndZ, 0));
+    
+    glm::ivec2 maxBound = glm::ivec2(MIN_VALUE(maxIndX, m_heightmapGenerator->getSize().x - 1),
+                                     MIN_VALUE(maxIndZ, m_heightmapGenerator->getSize().y - 1));
+    
+    m_heightmapGenerator->updateHeightmap(minBound, maxBound, vertices);
 }
 
 void IEditableLandscape::generateVertecesData(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)

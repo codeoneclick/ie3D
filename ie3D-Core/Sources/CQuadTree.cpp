@@ -10,6 +10,7 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 #include "CFrustum.h"
+#include "CBoundingBox.h"
 
 CQuadTree::CQuadTree(void) :
 m_indexBuffer(nullptr), 
@@ -107,21 +108,21 @@ void CQuadTree::createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node)
     
     for(ui32 i = 0; i < parentNumIndexes; i += 3)
     {
-        if(CQuadTree::isPointInBoundBox(glm::vec3(m_vertexes[parent->m_indexes[i + 0]].m_position.x,
-                                                  m_vertexes[parent->m_indexes[i + 0]].m_position.y,
-                                                  m_vertexes[parent->m_indexes[i + 0]].m_position.z) ,
-                                        node->m_minBound,
-                                        node->m_maxBound) ||
-           CQuadTree::isPointInBoundBox(glm::vec3(m_vertexes[parent->m_indexes[i + 1]].m_position.x,
-                                                  m_vertexes[parent->m_indexes[i + 1]].m_position.y,
-                                                  m_vertexes[parent->m_indexes[i + 1]].m_position.z),
-                                        node->m_minBound,
-                                        node->m_maxBound) ||
-           CQuadTree::isPointInBoundBox(glm::vec3(m_vertexes[parent->m_indexes[i + 2]].m_position.x,
-                                                  m_vertexes[parent->m_indexes[i + 2]].m_position.y,
-                                                  m_vertexes[parent->m_indexes[i + 2]].m_position.z),
-                                        node->m_minBound,
-                                        node->m_maxBound))
+        if(CBoundingBox::isPointInBoundBox(glm::vec3(m_vertexes[parent->m_indexes[i + 0]].m_position.x,
+                                                     m_vertexes[parent->m_indexes[i + 0]].m_position.y,
+                                                     m_vertexes[parent->m_indexes[i + 0]].m_position.z) ,
+                                           node->m_minBound,
+                                           node->m_maxBound) ||
+           CBoundingBox::isPointInBoundBox(glm::vec3(m_vertexes[parent->m_indexes[i + 1]].m_position.x,
+                                                     m_vertexes[parent->m_indexes[i + 1]].m_position.y,
+                                                     m_vertexes[parent->m_indexes[i + 1]].m_position.z),
+                                           node->m_minBound,
+                                           node->m_maxBound) ||
+           CBoundingBox::isPointInBoundBox(glm::vec3(m_vertexes[parent->m_indexes[i + 2]].m_position.x,
+                                                     m_vertexes[parent->m_indexes[i + 2]].m_position.y,
+                                                     m_vertexes[parent->m_indexes[i + 2]].m_position.z),
+                                           node->m_minBound,
+                                           node->m_maxBound))
         {
             if(parent->m_indexesIds[i + 0] == quadTreeNodeId ||
                parent->m_indexesIds[i + 1] == quadTreeNodeId ||
@@ -175,22 +176,6 @@ void CQuadTree::createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node)
     node->m_indexesIds.resize(node->m_numIndexes);
     node->m_maxBound.y = maxY;
     node->m_minBound.y = minY;
-}
-
-bool CQuadTree::isPointInBoundBox(const glm::vec3& point,
-                       const glm::vec3& minBound,
-                       const glm::vec3& maxBound)
-{
-    if(point.x >= minBound.x &&
-       point.x <= maxBound.x &&
-       point.y >= minBound.y &&
-       point.y <= maxBound.y &&
-       point.z >= minBound.z &&
-       point.z <= maxBound.z)
-    {
-        return true;
-    }
-    return false;
 }
 
 void CQuadTree::generateQuadTreeNode(CSharedFrustumRef frustum,

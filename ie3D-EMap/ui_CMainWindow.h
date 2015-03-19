@@ -620,9 +620,9 @@ public:
 
         retranslateUi(CMainWindow);
 
-        m_mainMenuTabs->setCurrentIndex(1);
+        m_mainMenuTabs->setCurrentIndex(0);
         m_landscapePropertiesTab->setCurrentIndex(2);
-        m_goeSettingsTab->setCurrentIndex(1);
+        m_goeSettingsTab->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(CMainWindow);

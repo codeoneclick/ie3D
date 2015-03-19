@@ -19,6 +19,7 @@
 #include "CConfigurationAccessor.h"
 #include "CPerlinNoise.h"
 #include "CCommonOS.h"
+#include "CBoundingBox.h"
 
 #if defined(__IOS__)
 
@@ -263,64 +264,67 @@ glm::uint32 CHeightmap::getVertexNormal(ui32 i, ui32 j) const
     return m_compressedVertices[i + j * m_size.x].m_normal;
 }
 
-void CHeightmap::updateVertices(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedVertices,
+void CHeightmap::updateVertices(const std::vector<glm::vec3>& vertices,
                                 const std::vector<std::shared_ptr<CVertexBuffer>>& vbos)
 {
-    for(ui32 i = 0; i < modifiedVertices.size(); ++i)
+    for(ui32 i = 0; i < vertices.size(); ++i)
     {
-        ui32 indexX = std::get<0>(modifiedVertices.at(i));
-        ui32 indexZ = std::get<1>(modifiedVertices.at(i));
-        glm::vec3 position = glm::vec3(static_cast<f32>(indexX),
-                                       std::get<2>(modifiedVertices.at(i)),
-                                       static_cast<f32>(indexZ));
-        
-        m_uncompressedVertices[indexX + indexZ * m_size.x].m_position = position;
+        i32 x = static_cast<i32>(vertices.at(i).x);
+        i32 z = static_cast<i32>(vertices.at(i).z);
+        i32 index = x + z * m_size.x;
+        m_uncompressedVertices[index].m_position = vertices.at(i);
     }
     
-    for(ui32 i = 0; i < modifiedVertices.size(); ++i)
+    for(ui32 i = 0; i < vertices.size(); ++i)
     {
-        ui32 indexX = std::get<0>(modifiedVertices.at(i));
-        ui32 indexZ = std::get<1>(modifiedVertices.at(i));
-        for(ui32 j = 0; j < m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.size(); ++j)
+        i32 x = static_cast<i32>(vertices.at(i).x);
+        i32 z = static_cast<i32>(vertices.at(i).z);
+        i32 index = x + z * m_size.x;
+        for(ui32 j = 0; j < m_uncompressedVertices[index].m_containsInFace.size(); ++j)
         {
-            ui32 index = m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.at(j);
+            ui32 face = m_uncompressedVertices[index].m_containsInFace.at(j);
             
-            glm::vec3 point_01 = m_uncompressedVertices[m_faces[index].m_indexes[0]].m_position;
-            glm::vec3 point_02 = m_uncompressedVertices[m_faces[index].m_indexes[1]].m_position;
-            glm::vec3 point_03 = m_uncompressedVertices[m_faces[index].m_indexes[2]].m_position;
+            glm::vec3 point_01 = m_uncompressedVertices[m_faces[face].m_indexes[0]].m_position;
+            glm::vec3 point_02 = m_uncompressedVertices[m_faces[face].m_indexes[1]].m_position;
+            glm::vec3 point_03 = m_uncompressedVertices[m_faces[face].m_indexes[2]].m_position;
             
             glm::vec3 edge_01 = point_02 - point_01;
             glm::vec3 edge_02 = point_03 - point_01;
             glm::vec3 normal = glm::cross(edge_01, edge_02);
             f32 sin = glm::length(normal) / (glm::length(edge_01) * glm::length(edge_02));
-            m_faces[index].m_normal = glm::normalize(normal) * asinf(sin);
+            m_faces[face].m_normal = glm::normalize(normal) * asinf(sin);
         }
     }
     
-    for(ui32 i = 0; i < modifiedVertices.size(); ++i)
+    std::set<std::shared_ptr<CVertexBuffer>> changedVBOs;
+    for(ui32 i = 0; i < vertices.size(); ++i)
     {
-        ui32 indexX = std::get<0>(modifiedVertices.at(i));
-        ui32 indexZ = std::get<1>(modifiedVertices.at(i));
-        assert(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.size() != 0);
-        glm::vec3 normal = m_faces[m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.at(0)].m_normal;
-        for(ui32 j = 1; j < m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.size(); ++j)
+        i32 x = static_cast<i32>(vertices.at(i).x);
+        i32 z = static_cast<i32>(vertices.at(i).z);
+        i32 index = x + z * m_size.x;
+        assert(m_uncompressedVertices[index].m_containsInFace.size() != 0);
+        glm::vec3 normal = m_faces[m_uncompressedVertices[index].m_containsInFace.at(0)].m_normal;
+        for(ui32 j = 1; j < m_uncompressedVertices[index].m_containsInFace.size(); ++j)
         {
-            normal += m_faces[m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInFace.at(j)].m_normal;
+            normal += m_faces[m_uncompressedVertices[index].m_containsInFace.at(j)].m_normal;
         }
-        m_uncompressedVertices[indexX + indexZ * m_size.x].m_normal = glm::normalize(normal);
-        m_compressedVertices[indexX + indexZ * m_size.x].m_position = m_uncompressedVertices[indexX + indexZ * m_size.x].m_position;
-        m_compressedVertices[indexX + indexZ * m_size.x].m_normal = glm::packSnorm4x8(glm::vec4(m_uncompressedVertices[indexX + indexZ * m_size.x].m_normal, 0.0));
-        for(ui32 j = 0; j < m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO.size(); ++j)
+        m_uncompressedVertices[index].m_normal = glm::normalize(normal);
+        m_compressedVertices[index].m_position = m_uncompressedVertices[index].m_position;
+        m_compressedVertices[index].m_normal = glm::packSnorm4x8(glm::vec4(m_uncompressedVertices[index].m_normal, 0.0));
+        for(ui32 j = 0; j < m_uncompressedVertices[index].m_containsInVBO.size(); ++j)
         {
-            vbos[std::get<0>(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO[j])]->lock()[std::get<1>(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO[j])].m_position =  m_compressedVertices[indexX + indexZ * m_size.x].m_position;
+            vbos[std::get<0>(m_uncompressedVertices[index].m_containsInVBO[j])]->lock()[std::get<1>(m_uncompressedVertices[index].m_containsInVBO[j])].m_position =
+            m_compressedVertices[index].m_position;
             
-            vbos[std::get<0>(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO[j])]->lock()[std::get<1>(m_uncompressedVertices[indexX + indexZ * m_size.x].m_containsInVBO[j])].m_normal =  m_compressedVertices[indexX + indexZ * m_size.x].m_normal;
+            vbos[std::get<0>(m_uncompressedVertices[index].m_containsInVBO[j])]->lock()[std::get<1>(m_uncompressedVertices[index].m_containsInVBO[j])].m_normal =
+            m_compressedVertices[index].m_normal;
             
+            changedVBOs.insert(vbos[std::get<0>(m_uncompressedVertices[index].m_containsInVBO[j])]);
         }
     }
-    for(ui32 i = 0; i < vbos.size(); ++i)
+    for(const auto& it : changedVBOs)
     {
-        vbos[i]->unlock();
+        it->unlock();
     }
 }
 
@@ -1012,36 +1016,33 @@ glm::vec2 CHeightmapGenerator::getAngleOnHeightmapSurface(const glm::vec3& posit
     return glm::vec2(0.0, 0.0);
 }
 
-void CHeightmapGenerator::updateHeightmap(const std::vector<std::tuple<ui32, ui32, f32>>& modifiedHeights)
+void CHeightmapGenerator::updateHeightmap(const glm::ivec2& minBound, const glm::ivec2& maxBound,
+                                          const std::vector<glm::vec3>& vertices)
 {
     assert(m_heightmap != nullptr);
-    m_heightmap->updateVertices(modifiedHeights, m_vbos);
-}
-
-void CHeightmapGenerator::updateHeightmap(ui32 offsetX, ui32 offsetZ,
-                                          ui32 subWidth, ui32 subHeight)
-{
-    for(ui32 i = 0; i < CHeightmapGenerator::getNumChunks().x; ++i)
+    m_heightmap->updateVertices(vertices, m_vbos);
+    
+    for(ui32 i = 0; i < m_chunksNum.x; ++i)
     {
-        for(ui32 j = 0; j < CHeightmapGenerator::getNumChunks().y; ++j)
+        for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
             ui32 index = i + j * m_chunksNum.x;
-            if(std::get<0>(m_chunksBounds[index]).x < offsetX &&
-               std::get<1>(m_chunksBounds[index]).x > offsetX + subWidth &&
-               std::get<0>(m_chunksBounds[index]).z < offsetZ &&
-               std::get<1>(m_chunksBounds[index]).z > offsetZ + subHeight)
+            if(CBoundingBox::isPointInXZ(glm::vec2(minBound.x, minBound.y), std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index])) ||
+               CBoundingBox::isPointInXZ(glm::vec2(maxBound.x, minBound.y), std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index])) ||
+               CBoundingBox::isPointInXZ(glm::vec2(minBound.x, maxBound.y), std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index])) ||
+               CBoundingBox::isPointInXZ(glm::vec2(maxBound.x, maxBound.y), std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index])))
             {
                 CHeightmapGenerator::createChunkBound(glm::ivec2(i, j), &std::get<0>(m_chunksBounds[index]), &std::get<1>(m_chunksBounds[index]));
             }
         }
     }
     CHeightmapGenerator::updateSplattingTexture(m_splattingTexture, false,
-                                                offsetX, offsetZ,
-                                                subWidth, subHeight);
+                                                minBound.x, minBound.y,
+                                                maxBound.x - minBound.x, maxBound.y - minBound.y);
     
     CHeightmapGenerator::updateHeightmapTexture(m_heightmapTexture, false,
-                                                offsetX, offsetZ,
-                                                subWidth, subHeight);
+                                                minBound.x, minBound.y,
+                                                maxBound.x - minBound.x, maxBound.y - minBound.y);
 }
 
 ui32 CHeightmapGenerator::createTextureId(void)

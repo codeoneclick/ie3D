@@ -78,7 +78,7 @@ inline bool ieGLError(void)
 {
     GLenum error = glGetError();
     assert(error == GL_NO_ERROR);
-    return error != GL_NO_ERROR;
+    return error != GL_NO_ERROR;Ent
 };
 
 #define CASE_STRING_VALUE(VALUE) case VALUE: return #VALUE;

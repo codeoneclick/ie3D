@@ -68,6 +68,36 @@ CBoundingBox::~CBoundingBox(void)
     m_VAOstates.swap(eraser);
 }
 
+bool CBoundingBox::isPointInBoundBox(const glm::vec3& point,
+                                     const glm::vec3& minBound,
+                                     const glm::vec3& maxBound)
+{
+    if(point.x >= minBound.x &&
+       point.x <= maxBound.x &&
+       point.y >= minBound.y &&
+       point.y <= maxBound.y &&
+       point.z >= minBound.z &&
+       point.z <= maxBound.z)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool CBoundingBox::isPointInXZ(const glm::vec2& point,
+                               const glm::vec3& minBound,
+                               const glm::vec3& maxBound)
+{
+    if(point.x >= minBound.x &&
+       point.x <= maxBound.x &&
+       point.y >= minBound.z &&
+       point.y <= maxBound.z)
+    {
+        return true;
+    }
+    return false;
+}
+
 void CBoundingBox::bind(const std::string& attributesGUID, const std::array<i32, E_SHADER_ATTRIBUTE_MAX>& attributes, bool isWireframe)
 {
     assert(m_vertexBuffer != nullptr);

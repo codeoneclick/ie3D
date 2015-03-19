@@ -40,9 +40,7 @@ protected:
     
     void createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node);
     
-    bool isPointInBoundBox(const glm::vec3& point,
-                           const glm::vec3& minBound,
-                           const glm::vec3& maxBound);
+   
     
     void generateQuadTreeNode(CSharedFrustumRef frustum,
                               CSharedQuadTreeRef root,
