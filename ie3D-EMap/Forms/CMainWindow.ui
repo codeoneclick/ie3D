@@ -290,7 +290,7 @@
        </attribute>
        <widget class="QGroupBox" name="generateGroupBox">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="geometry">
          <rect>
@@ -315,7 +315,7 @@
         </property>
         <widget class="QSpinBox" name="m_octavesSpinBox">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -334,7 +334,7 @@
         </widget>
         <widget class="QLabel" name="label">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -357,7 +357,7 @@
         </widget>
         <widget class="QDoubleSpinBox" name="m_frequencySpinBox">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -382,7 +382,7 @@
         </widget>
         <widget class="QLabel" name="label_2">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -405,7 +405,7 @@
         </widget>
         <widget class="QLabel" name="label_3">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -428,7 +428,7 @@
         </widget>
         <widget class="QSpinBox" name="m_seedSpinBox">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -447,7 +447,7 @@
         </widget>
         <widget class="QPushButton" name="generateButton">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -470,7 +470,7 @@
         </widget>
         <widget class="QLabel" name="label_4">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -493,7 +493,7 @@
         </widget>
         <widget class="QSpinBox" name="m_sizeXSpinBox">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -518,7 +518,7 @@
         </widget>
         <widget class="QLabel" name="label_5">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -541,7 +541,7 @@
         </widget>
         <widget class="QLabel" name="label_6">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -564,7 +564,7 @@
         </widget>
         <widget class="QSpinBox" name="m_sizeYSpinBox">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -590,7 +590,7 @@
        </widget>
        <widget class="QGroupBox" name="editGroupBox">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="geometry">
          <rect>
@@ -616,7 +616,7 @@
         </property>
         <widget class="QSlider" name="m_smoothSlider">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -647,7 +647,7 @@
         </widget>
         <widget class="QSlider" name="m_brushSizeSlider">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -678,7 +678,7 @@
         </widget>
         <widget class="QLabel" name="m_falloffLabel">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -702,7 +702,7 @@
         </widget>
         <widget class="QLabel" name="m_brushSizeLabel">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -726,7 +726,7 @@
         </widget>
         <widget class="QLabel" name="m_smoothLabel">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -750,7 +750,7 @@
         </widget>
         <widget class="QSlider" name="m_brushStrengthSlider">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -778,7 +778,7 @@
         </widget>
         <widget class="QLabel" name="m_brushStrengthLabel">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -802,7 +802,7 @@
         </widget>
         <widget class="QSlider" name="m_falloffSlider">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
@@ -1220,7 +1220,7 @@
        <enum>QTabWidget::West</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>

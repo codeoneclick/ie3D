@@ -37,6 +37,9 @@ CHeightmap::CHeightmap(const std::string& filename, const glm::ivec2& size) :
 m_uncompressedVertices(nullptr),
 m_faces(nullptr),
 m_compressedVertices(nullptr),
+m_uncompressedVerticesFiledescriptor(-1),
+m_facesFiledescriptor(-1),
+m_compressedVerticesFiledescriptor(-1),
 m_size(size)
 {
     ui8* data = nullptr;
@@ -91,6 +94,9 @@ CHeightmap::CHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 
 m_uncompressedVertices(nullptr),
 m_faces(nullptr),
 m_compressedVertices(nullptr),
+m_uncompressedVerticesFiledescriptor(-1),
+m_facesFiledescriptor(-1),
+m_compressedVerticesFiledescriptor(-1),
 m_size(size)
 {
     const CPerlinNoise perlin(seed);
@@ -141,13 +147,13 @@ void CHeightmap::mapVertices(f32* data)
         for(ui32 j = 0; j < (m_size.y - 1); ++j)
         {
             m_faces[index].m_indexes[0] = i + j * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containsInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containsInFace[m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containsInFaceSize++] = index;
             glm::vec3 point_01 = m_uncompressedVertices[m_faces[index].m_indexes[0]].m_position;
             m_faces[index].m_indexes[1] = i + (j + 1) * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containsInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containsInFace[m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containsInFaceSize++] = index;
             glm::vec3 point_02 = m_uncompressedVertices[m_faces[index].m_indexes[1]].m_position;
             m_faces[index].m_indexes[2] = i + 1 + j * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containsInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containsInFace[m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containsInFaceSize++] = index;
             glm::vec3 point_03 = m_uncompressedVertices[m_faces[index].m_indexes[2]].m_position;
             
             glm::vec3 edge_01 = point_02 - point_01;
@@ -158,13 +164,13 @@ void CHeightmap::mapVertices(f32* data)
             index++;
             
             m_faces[index].m_indexes[0] = i + (j + 1) * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containsInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containsInFace[ m_uncompressedVertices[m_faces[index].m_indexes[0]].m_containsInFaceSize++] = index;
             point_01 = m_uncompressedVertices[m_faces[index].m_indexes[0]].m_position;
             m_faces[index].m_indexes[1] = i + 1 + (j + 1) * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containsInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containsInFace[m_uncompressedVertices[m_faces[index].m_indexes[1]].m_containsInFaceSize++] = index;
             point_02 = m_uncompressedVertices[m_faces[index].m_indexes[1]].m_position;
             m_faces[index].m_indexes[2] = i + 1 + j * m_size.x;
-            m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containsInFace.push_back(index);
+            m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containsInFace[m_uncompressedVertices[m_faces[index].m_indexes[2]].m_containsInFaceSize++] = index;
             point_03 = m_uncompressedVertices[m_faces[index].m_indexes[2]].m_position;
             
             edge_01 = point_02 - point_01;
@@ -178,9 +184,9 @@ void CHeightmap::mapVertices(f32* data)
     
     for(ui32 i = 0; i < m_size.x * m_size.y; ++i)
     {
-        assert(m_uncompressedVertices[i].m_containsInFace.size() != 0);
+        assert(m_uncompressedVertices[i].m_containsInFaceSize != 0 && m_uncompressedVertices[i].m_containsInFaceSize <= kMaxContainsInFace);
         glm::vec3 normal = m_faces[m_uncompressedVertices[i].m_containsInFace[0]].m_normal;
-        for(ui32 j = 1; j < m_uncompressedVertices[i].m_containsInFace.size(); ++j)
+        for(ui32 j = 1; j < m_uncompressedVertices[i].m_containsInFaceSize; ++j)
         {
             normal += m_faces[m_uncompressedVertices[i].m_containsInFace[j]].m_normal;
         }
@@ -188,14 +194,9 @@ void CHeightmap::mapVertices(f32* data)
         m_uncompressedVertices[i].m_normal = normal;
     }
     
-#if !defined(__EDITOR__)
-
-    delete [] m_faces;
-    m_faces = nullptr;
-
-#endif
-    
-    std::string filename = "data.map";
+    std::ostringstream stringstream;
+    stringstream<<"compressed.vertices.data"<<"_"<<g_heightmapGUID<<std::endl;
+    std::string filename = stringstream.str();
     
 #if defined(__IOS__)
     
@@ -210,6 +211,9 @@ void CHeightmap::mapVertices(f32* data)
         assert(false);
     }
     
+    ui32 filelength;
+    struct stat status;
+    
     for(ui32 i = 0; i < m_size.x * m_size.y; ++i)
     {
         SCompressedVertex vertex;
@@ -220,33 +224,125 @@ void CHeightmap::mapVertices(f32* data)
     }
     stream.close();
     
-    ui32 filelength;
-    struct stat status;
-    
-    i32 filedescriptor = open(filename.c_str(), O_RDWR);
-    if (filedescriptor < 0)
+    m_compressedVerticesFiledescriptor = open(filename.c_str(), O_RDWR);
+    if (m_compressedVerticesFiledescriptor < 0)
     {
         assert(false);
     }
     
-    if (fstat(filedescriptor, &status) < 0)
+    if (fstat(m_compressedVerticesFiledescriptor, &status) < 0)
     {
-         assert(false);
+        assert(false);
     }
     
     filelength = (ui32)status.st_size;
-    m_compressedVertices = (SCompressedVertex* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, filedescriptor, 0);
+    m_compressedVertices = (SCompressedVertex* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_compressedVerticesFiledescriptor, 0);
     if (!m_compressedVertices)
     {
         assert(false);
     }
     
-#if !defined(__EDITOR__)
+#if !defined(__IOS__)
+    {
+        std::ostringstream stringstream;
+        stringstream<<"faces.data"<<"_"<<g_heightmapGUID<<std::endl;
+        std::string filename = stringstream.str();
+        
+        std::ofstream stream;
+        stream.open(filename, std::ios::binary | std::ios::out | std::ios::trunc);
+        if(!stream.is_open())
+        {
+            assert(false);
+        }
+        
+        for(ui32 i = 0; i < (m_size.x - 1) * (m_size.y - 1) * 2; ++i)
+        {
+            stream.write((char*)&m_faces[i], sizeof(SFace));
+        }
+        stream.close();
+        
+        delete [] m_faces;
+        m_faces = nullptr;
+        
+        ui32 filelength;
+        struct stat status;
+        
+        m_facesFiledescriptor = open(filename.c_str(), O_RDWR);
+        if (m_facesFiledescriptor < 0)
+        {
+            assert(false);
+        }
+        
+        if (fstat(m_facesFiledescriptor, &status) < 0)
+        {
+            assert(false);
+        }
+        
+        filelength = (ui32)status.st_size;
+        m_faces = (SFace* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_facesFiledescriptor, 0);
+        if (!m_faces)
+        {
+            assert(false);
+        }
+    }
+#else
+        
+        delete [] m_faces;
+        m_faces = nullptr;
+        
+#endif
+    
+#if !defined(__IOS__)
+    
+    {
+        std::ostringstream stringstream;
+        stringstream<<"uncompressed.vertices.data"<<"_"<<g_heightmapGUID<<std::endl;
+        std::string filename = stringstream.str();
+        
+        std::ofstream stream;
+        stream.open(filename, std::ios::binary | std::ios::out | std::ios::trunc);
+        if(!stream.is_open())
+        {
+            assert(false);
+        }
+        
+        for(ui32 i = 0; i < m_size.x * m_size.y; ++i)
+        {
+            stream.write((char*)&m_uncompressedVertices[i], sizeof(SUncomressedVertex));
+        }
+        stream.close();
+        
+        delete [] m_uncompressedVertices;
+        m_uncompressedVertices = nullptr;
+        
+        ui32 filelength;
+        struct stat status;
+        
+        m_uncompressedVerticesFiledescriptor = open(filename.c_str(), O_RDWR);
+        if (m_uncompressedVerticesFiledescriptor < 0)
+        {
+            assert(false);
+        }
+        
+        if (fstat(m_uncompressedVerticesFiledescriptor, &status) < 0)
+        {
+            assert(false);
+        }
+        
+        filelength = (ui32)status.st_size;
+        m_uncompressedVertices = (SUncomressedVertex* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_uncompressedVerticesFiledescriptor, 0);
+        if (!m_uncompressedVertices)
+        {
+            assert(false);
+        }
+    }
+#else
     
     delete [] m_uncompressedVertices;
     m_uncompressedVertices = nullptr;
     
 #endif
+    
 }
 
 glm::vec3 CHeightmap::getVertexPosition(ui32 i, ui32 j) const
@@ -280,9 +376,9 @@ void CHeightmap::updateVertices(const std::vector<glm::vec3>& vertices,
         i32 x = static_cast<i32>(vertices.at(i).x);
         i32 z = static_cast<i32>(vertices.at(i).z);
         i32 index = x + z * m_size.x;
-        for(ui32 j = 0; j < m_uncompressedVertices[index].m_containsInFace.size(); ++j)
+        for(ui32 j = 0; j < m_uncompressedVertices[index].m_containsInFaceSize; ++j)
         {
-            ui32 face = m_uncompressedVertices[index].m_containsInFace.at(j);
+            ui32 face = m_uncompressedVertices[index].m_containsInFace[j];
             
             glm::vec3 point_01 = m_uncompressedVertices[m_faces[face].m_indexes[0]].m_position;
             glm::vec3 point_02 = m_uncompressedVertices[m_faces[face].m_indexes[1]].m_position;
@@ -302,24 +398,25 @@ void CHeightmap::updateVertices(const std::vector<glm::vec3>& vertices,
         i32 x = static_cast<i32>(vertices.at(i).x);
         i32 z = static_cast<i32>(vertices.at(i).z);
         i32 index = x + z * m_size.x;
-        assert(m_uncompressedVertices[index].m_containsInFace.size() != 0);
-        glm::vec3 normal = m_faces[m_uncompressedVertices[index].m_containsInFace.at(0)].m_normal;
-        for(ui32 j = 1; j < m_uncompressedVertices[index].m_containsInFace.size(); ++j)
+        assert(m_uncompressedVertices[index].m_containsInFaceSize != 0 && m_uncompressedVertices[index].m_containsInFaceSize <= kMaxContainsInFace);
+        glm::vec3 normal = m_faces[m_uncompressedVertices[index].m_containsInFace[0]].m_normal;
+        for(ui32 j = 1; j < m_uncompressedVertices[index].m_containsInFaceSize; ++j)
         {
-            normal += m_faces[m_uncompressedVertices[index].m_containsInFace.at(j)].m_normal;
+            normal += m_faces[m_uncompressedVertices[index].m_containsInFace[j]].m_normal;
         }
         m_uncompressedVertices[index].m_normal = glm::normalize(normal);
         m_compressedVertices[index].m_position = m_uncompressedVertices[index].m_position;
         m_compressedVertices[index].m_normal = glm::packSnorm4x8(glm::vec4(m_uncompressedVertices[index].m_normal, 0.0));
-        for(ui32 j = 0; j < m_uncompressedVertices[index].m_containsInVBO.size(); ++j)
+        assert(m_uncompressedVertices[index].m_containsInVBOSize != 0 && m_uncompressedVertices[index].m_containsInVBOSize <= kMaxContainsInVBO);
+        for(ui32 j = 0; j < m_uncompressedVertices[index].m_containsInVBOSize; ++j)
         {
-            vbos[std::get<0>(m_uncompressedVertices[index].m_containsInVBO[j])]->lock()[std::get<1>(m_uncompressedVertices[index].m_containsInVBO[j])].m_position =
+            vbos[m_uncompressedVertices[index].m_containsInVBO[j].x]->lock()[m_uncompressedVertices[index].m_containsInVBO[j].y].m_position =
             m_compressedVertices[index].m_position;
             
-            vbos[std::get<0>(m_uncompressedVertices[index].m_containsInVBO[j])]->lock()[std::get<1>(m_uncompressedVertices[index].m_containsInVBO[j])].m_normal =
+            vbos[m_uncompressedVertices[index].m_containsInVBO[j].x]->lock()[m_uncompressedVertices[index].m_containsInVBO[j].y].m_normal =
             m_compressedVertices[index].m_normal;
             
-            changedVBOs.insert(vbos[std::get<0>(m_uncompressedVertices[index].m_containsInVBO[j])]);
+            changedVBOs.insert(vbos[m_uncompressedVertices[index].m_containsInVBO[j].x]);
         }
     }
     for(const auto& it : changedVBOs)
@@ -330,7 +427,8 @@ void CHeightmap::updateVertices(const std::vector<glm::vec3>& vertices,
 
 void CHeightmap::attachUncompressedVertexToVBO(ui32 x, ui32 y, ui32 vboIndex, ui32 vboVertexIndex)
 {
-    m_uncompressedVertices[x + y * m_size.x].m_containsInVBO.push_back(std::make_tuple(vboIndex, vboVertexIndex));
+    m_uncompressedVertices[x + y * m_size.x].m_containsInVBO[m_uncompressedVertices[x + y * m_size.x].m_containsInVBOSize++] = glm::ivec2(vboIndex, vboVertexIndex);
+    assert(m_uncompressedVertices[x + y * m_size.x].m_containsInVBOSize <= kMaxContainsInVBO);
 }
 
 glm::ivec2 CHeightmap::getSize(void) const
@@ -663,8 +761,11 @@ void CHeightmapGenerator::createVBOs(void)
                     vertices[currentVertexIndex].m_texcoord = m_heightmap->getVertexTexcoord(x + verticesOffset.x, y + verticesOffset.y);
                     vertices[currentVertexIndex].m_normal = m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y);
                     
+#if !defined(__IOS__)
                     m_heightmap->attachUncompressedVertexToVBO(x + verticesOffset.x, y + verticesOffset.y,
                                                                static_cast<ui32>(m_vbos.size() - 1), currentVertexIndex);
+                    
+#endif
                     
                     if(vertices[currentVertexIndex].m_position.x > maxBound.x)
                     {

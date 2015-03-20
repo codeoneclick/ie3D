@@ -17,15 +17,30 @@ class CHeightmap
 {
 private:
     
+    static const ui8 kMaxContainsInFace = 32;
+    static const ui8 kMaxContainsInVBO = 4;
+    
     struct SUncomressedVertex
     {
         glm::vec3 m_position;
         glm::vec3 m_normal;
         glm::vec2 m_texcoord;
-        std::vector<ui32> m_containsInFace;
-        std::vector<std::tuple<ui32, ui32>> m_containsInVBO;
         
-        SUncomressedVertex(void) = default;
+        std::vector<ui32> containsInFace;
+        
+        ui32 m_containsInFace[kMaxContainsInFace];
+        ui8 m_containsInFaceSize;
+        
+        glm::ivec2 m_containsInVBO[kMaxContainsInVBO];
+        ui8 m_containsInVBOSize;
+        
+        SUncomressedVertex(void) :
+        m_containsInFaceSize(0),
+        m_containsInVBOSize(0)
+        {
+            memset(m_containsInFace, 0x0, sizeof(m_containsInFace));
+            memset(m_containsInVBO, 0x0, sizeof(m_containsInVBO));
+        };
         ~SUncomressedVertex(void) = default;
         
         SUncomressedVertex(const SUncomressedVertex& copy) = delete;
@@ -64,6 +79,10 @@ protected:
     SUncomressedVertex* m_uncompressedVertices;
     SFace* m_faces;
     SCompressedVertex* m_compressedVertices;
+    
+    i32 m_uncompressedVerticesFiledescriptor;
+    i32 m_facesFiledescriptor;
+    i32 m_compressedVerticesFiledescriptor;
     
     glm::ivec2 m_size;
     void mapVertices(f32* data);

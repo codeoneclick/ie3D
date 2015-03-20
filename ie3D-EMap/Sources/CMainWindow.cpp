@@ -182,7 +182,9 @@ void CMainWindow::execute(void)
     ui->m_modelsList->setCurrentRow(0);
     
     ui->m_mainMenuTabs->setCurrentIndex(0);
+    CMainWindow::on_m_mainMenuTabs_currentChanged(0);
     ui->m_landscapePropertiesTab->setCurrentIndex(0);
+    CMainWindow::on_m_landscapePropertiesTab_currentChanged(0);
     
 #endif
 }
@@ -419,7 +421,6 @@ void CMainWindow::on_generateButton_clicked()
 
 void CMainWindow::on_m_mainMenuTabs_currentChanged(int index)
 {
-    
     switch (index)
     {
         case 0:
