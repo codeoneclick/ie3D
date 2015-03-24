@@ -424,8 +424,9 @@ void CMainWindow::on_m_mainMenuTabs_currentChanged(int index)
     switch (index)
     {
         case 0:
-            m_goeTransition->setPaused(true);
+            
             m_mseTransition->setPaused(false);
+            m_goeTransition->setPaused(true);
             if(ui->m_landscapePropertiesTab->currentIndex() == 2)
             {
                 m_gopTransition->setPaused(false);
@@ -437,9 +438,11 @@ void CMainWindow::on_m_mainMenuTabs_currentChanged(int index)
             break;
             
         default:
-            m_goeTransition->setPaused(false);
+        {
             m_mseTransition->setPaused(true);
             m_gopTransition->setPaused(true);
+            m_goeTransition->setPaused(false);
+        }
             break;
     }
 }

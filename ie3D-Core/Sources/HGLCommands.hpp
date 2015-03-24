@@ -74,26 +74,31 @@
 
 #endif
 
+//#define GL_ERROR_ASSERT 1
+
 inline bool ieGLError(void)
 {
     GLenum error = glGetError();
+#if defined(GL_ERROR_ASSERT)
     assert(error == GL_NO_ERROR);
+#endif
     return error != GL_NO_ERROR;
 };
 
-#define CASE_STRING_VALUE(VALUE) case VALUE: return #VALUE;
+#define CASE_STRING_VALUE(GL_ERROR, STRING_ERROR) case GL_ERROR: STRING_ERROR = #GL_ERROR; break;
 
 inline std::string ieGLErrorString(void)
 {
     GLenum error = glGetError();
+    std::string stringError = "";
     switch (error)
     {
-        CASE_STRING_VALUE(GL_NO_ERROR)
-        CASE_STRING_VALUE(GL_INVALID_ENUM)
-        CASE_STRING_VALUE(GL_INVALID_VALUE)
-        CASE_STRING_VALUE(GL_INVALID_OPERATION)
-        CASE_STRING_VALUE(GL_OUT_OF_MEMORY)
-        CASE_STRING_VALUE(GL_INVALID_FRAMEBUFFER_OPERATION)
+        CASE_STRING_VALUE(GL_NO_ERROR, stringError)
+        CASE_STRING_VALUE(GL_INVALID_ENUM, stringError)
+        CASE_STRING_VALUE(GL_INVALID_VALUE, stringError)
+        CASE_STRING_VALUE(GL_INVALID_OPERATION, stringError)
+        CASE_STRING_VALUE(GL_OUT_OF_MEMORY, stringError)
+        CASE_STRING_VALUE(GL_INVALID_FRAMEBUFFER_OPERATION, stringError)
             
         default:
         {
@@ -102,6 +107,11 @@ inline std::string ieGLErrorString(void)
             return "UNKNOWN OpenGL ERROR" + std::string(buffer);
         }
     }
+    if(stringError != "GL_NO_ERROR")
+    {
+        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
+    }
+    return stringError;
 }
 
 inline void ieEnable(GLenum cap)
@@ -109,10 +119,8 @@ inline void ieEnable(GLenum cap)
     glEnable(cap);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -121,10 +129,8 @@ inline void ieDisable(GLenum cap)
     glDisable(cap);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -133,10 +139,8 @@ inline void ieDepthFunc(GLenum func)
     glDepthFunc(func);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -145,10 +149,8 @@ inline void ieDepthMask(GLboolean flag)
     glDepthMask(flag);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -157,10 +159,8 @@ inline void ieCullFace(GLenum mode)
     glCullFace(mode);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -169,10 +169,8 @@ inline void ieBlendFunc(GLenum sfactor, GLenum dfactor)
     glBlendFunc(sfactor, dfactor);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -181,10 +179,8 @@ inline void ieClear(GLbitfield mask)
     glClear(mask);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -193,10 +189,8 @@ inline void ieClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha
     glClearColor(red, green, blue, alpha);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -205,10 +199,8 @@ inline void ieViewport(int x, int y, GLsizei width, GLsizei height)
     glViewport(x, y, width, height);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -217,10 +209,8 @@ inline void ieDeleteRenderbuffers(GLsizei n, const GLuint *renderbuffers)
     glDeleteRenderbuffers(n, renderbuffers);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -229,10 +219,8 @@ inline void ieGenRenderbuffers(GLsizei n, GLuint *renderbuffers)
     glGenRenderbuffers(n, renderbuffers);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -241,10 +229,8 @@ inline void ieRenderbufferStorage(GLenum target, GLenum internalformat, GLsizei 
     glRenderbufferStorage(target, internalformat, width, height);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -253,10 +239,8 @@ inline void ieBindFramebuffer(GLenum target, GLuint framebuffer)
     glBindFramebuffer(target, framebuffer);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -265,10 +249,8 @@ inline void ieBindRenderbuffer(GLenum target, GLuint renderbuffer)
     glBindRenderbuffer(target, renderbuffer);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -277,10 +259,8 @@ inline void ieDeleteFramebuffers(GLsizei n, const GLuint *framebuffers)
     glDeleteFramebuffers(n, framebuffers);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -289,10 +269,8 @@ inline void ieGenFramebuffers(GLsizei n, GLuint *framebuffers)
     glGenFramebuffers(n, framebuffers);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -301,10 +279,8 @@ inline void ieFramebufferTexture2D(GLenum target, GLenum attachment, GLenum text
     glFramebufferTexture2D(target, attachment, textarget, texture, level);
 
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -313,10 +289,8 @@ inline void ieFramebufferRenderbuffer(GLenum target, GLenum attachment, GLenum r
     glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -325,10 +299,8 @@ inline void ieGenTextures(GLsizei n, GLuint *textures)
     glGenTextures(n, textures);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -337,10 +309,8 @@ inline void ieDeleteTextures(GLsizei n, const GLuint *textures)
     glDeleteTextures(n, textures);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -349,10 +319,8 @@ inline void ieBindTexture(uint32_t target, uint32_t texture)
     glBindTexture(target, texture);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -361,10 +329,8 @@ inline void ieTexParameteri(GLenum target, GLenum pname, GLint param)
     glTexParameteri(target, pname, param);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -373,10 +339,8 @@ inline void ieTexImage2D(GLenum target, GLint level, GLint internalformat, GLsiz
     glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -385,10 +349,8 @@ inline void ieCompressedTexImage2D(GLenum target, GLint level, GLenum internalfo
     glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 }
 
@@ -397,10 +359,8 @@ inline void ieGenerateMipmap(GLenum target)
     glGenerateMipmap(target);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -409,10 +369,8 @@ inline void ieGenBuffers(GLsizei n, GLuint *buffers)
     glGenBuffers(n, buffers);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -421,10 +379,8 @@ inline void ieDeleteBuffers(GLsizei n, const GLuint *buffers)
     glDeleteBuffers(n, buffers);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -433,10 +389,8 @@ inline void ieBindBuffer(uint32_t target, uint32_t buffer)
     glBindBuffer(target, buffer);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -445,10 +399,8 @@ inline void ieBufferData(GLenum target, GLsizeiptr size, const GLvoid *data, GLe
     glBufferData(target, size, data, usage);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -457,10 +409,8 @@ inline void ieBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, con
     glBufferSubData(target, offset, size, data);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -469,10 +419,8 @@ inline void ieEnableVertexAttribArray(GLuint index)
     glEnableVertexAttribArray(index);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -481,10 +429,8 @@ inline void ieDisableVertexAttribArray(GLuint index)
     glDisableVertexAttribArray(index);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -493,10 +439,8 @@ inline void ieVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboole
     glVertexAttribPointer(index, size, type, normalized, stride, pointer);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -509,10 +453,8 @@ inline void ieBindVertexArray(GLuint array)
 #endif
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -525,10 +467,8 @@ inline void ieDeleteVertexArrays(GLsizei n, const GLuint *arrays)
 #endif
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -541,10 +481,8 @@ inline void ieGenVertexArrays(GLsizei n, GLuint *arrays)
 #endif
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -553,10 +491,8 @@ inline void ieDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid
     glDrawElements(mode, count, type, indices);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -575,10 +511,8 @@ inline void ieUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpos
     glUniformMatrix3fv(location, count, transpose, value);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -587,10 +521,8 @@ inline void ieUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpos
     glUniformMatrix4fv(location, count, transpose, value);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -599,10 +531,8 @@ inline void ieUniform2fv(GLint location, GLsizei count, const GLfloat *value)
     glUniform2fv(location, count, value);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -611,10 +541,8 @@ inline void ieUniform3fv(GLint location, GLsizei count, const GLfloat *value)
     glUniform3fv(location, count, value);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -623,10 +551,8 @@ inline void ieUniform4fv(GLint location, GLsizei count, const GLfloat *value)
     glUniform4fv(location, count, value);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -635,10 +561,8 @@ inline void ieUniform1f(GLint location, GLfloat v0)
     glUniform1f(location, v0);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -647,10 +571,8 @@ inline void ieUniform1i(GLint location, GLint v0)
     glUniform1i(location, v0);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -659,10 +581,8 @@ inline void ieActiveTexture(GLenum texture)
     glActiveTexture(texture);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
@@ -671,10 +591,8 @@ inline void ieUseProgram(GLuint program)
     glUseProgram(program);
     
 #if defined(DEBUG)
-    if(ieGLError())
-    {
-        std::cout<<"OpenGL error: "<<ieGLErrorString()<<std::endl;
-    }
+    ieGLError();
+    ieGLErrorString();
 #endif
 };
 
