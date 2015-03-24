@@ -156,7 +156,7 @@ void CMEmseScene::load(void)
     m_gameObjectBrush->setLandscape(m_landscape);
     m_gameObjectBrush->setVisible(false);
     
-    m_mapDragController = std::make_shared<CMapDragController>(m_camera, m_landscape, 0.1,
+    m_mapDragController = std::make_shared<CMapDragController>(m_camera, m_landscape, 2.0,
                                                                glm::vec3(0.0, 0.0, 0.0),
                                                                glm::vec3(512.0, 0.0, 512.0));
     m_root->addGestureRecognizerHandler(m_mapDragController);

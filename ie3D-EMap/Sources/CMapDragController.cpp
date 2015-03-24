@@ -14,6 +14,9 @@
 #define SPACE_BUTTON 32
 #define ALT_BUTTON 33
 
+std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> g_triangles;
+std::once_flag g_createTrianglesOnce;
+
 CMapDragController::CMapDragController(CSharedCameraRef camera,
                                        CSharedLandscapeRef landscape,
                                        f32 dragSpeed,
@@ -34,6 +37,16 @@ m_cameraDistanceChangeSpeed(2.0)
 {
     m_cameraPrecomputedRotationY = glm::degrees(m_camera->getRotation());
     m_cameraPrecomputedDistance = m_camera->getDistanceToLookAt();
+    
+    std::call_once(g_createTrianglesOnce, []() {
+        g_triangles.push_back(std::make_tuple(glm::vec3(-4096.0, 0.0, -4096.0),
+                                              glm::vec3( 4096.0, 0.0, -4096.0),
+                                              glm::vec3(-4096.0, 0.0,  4096.0)));
+        
+        g_triangles.push_back(std::make_tuple(glm::vec3( 4096.0, 0.0,  4096.0),
+                                              glm::vec3( 4096.0, 0.0, -4096.0),
+                                              glm::vec3(-4096.0, 0.0,  4096.0)));
+    });
 }
 
 CMapDragController::~CMapDragController(void)
@@ -46,16 +59,7 @@ void CMapDragController::onGestureRecognizerPressed(const glm::ivec2& point, E_I
     if(inputButton == E_INPUT_BUTTON_MOUSE_RIGHT)
     {
         m_isMouseRightButtonPressed = true;
-        std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> triangles;
-        triangles.push_back(std::make_tuple(glm::vec3(-4096.0, 0.0, -4096.0),
-                                            glm::vec3( 4096.0, 0.0, -4096.0),
-                                            glm::vec3(-4096.0, 0.0,  4096.0)));
-        
-        triangles.push_back(std::make_tuple(glm::vec3( 4096.0, 0.0,  4096.0),
-                                            glm::vec3( 4096.0, 0.0, -4096.0),
-                                            glm::vec3(-4096.0, 0.0,  4096.0)));
-        
-        CCollisionMgr::isTrianglesIntersected(m_camera, triangles, point, &m_positionStarting);
+        CCollisionMgr::isTrianglesIntersected(m_camera, g_triangles, point, &m_positionStarting);
     }
     m_mouseLastPosition = point;
 }
@@ -67,17 +71,8 @@ void CMapDragController::onGestureRecognizerMoved(const glm::ivec2&)
 
 void CMapDragController::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON)
 {
-    std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> triangles;
-    triangles.push_back(std::make_tuple(glm::vec3(-4096.0, 0.0, -4096.0),
-                                        glm::vec3( 4096.0, 0.0, -4096.0),
-                                        glm::vec3(-4096.0, 0.0,  4096.0)));
-    
-    triangles.push_back(std::make_tuple(glm::vec3( 4096.0, 0.0,  4096.0),
-                                        glm::vec3( 4096.0, 0.0, -4096.0),
-                                        glm::vec3(-4096.0, 0.0,  4096.0)));
-    
     glm::vec3 position;
-    if(CCollisionMgr::isTrianglesIntersected(m_camera, triangles, point, &position) && m_isMouseRightButtonPressed && !m_isSpaceButtonPressed)
+    if(CCollisionMgr::isTrianglesIntersected(m_camera, g_triangles, point, &position) && m_isMouseRightButtonPressed && !m_isSpaceButtonPressed)
     {
         m_positionEnding = m_positionStarting - position + m_camera->getLookAt();
         m_positionEnding.x = glm::min(m_positionEnding.x, m_minBound.x);
@@ -176,10 +171,10 @@ void CMapDragController::onKeyDown(i32 key)
     }
 }
 
-void CMapDragController::update(f32)
+void CMapDragController::update(f32 deltatime)
 {
-    glm::vec3 cameraLookAt;
-    cameraLookAt = glm::mix(m_camera->getLookAt(), m_positionEnding, m_dragSpeed);
+    glm::vec3 cameraLookAt = glm::mix(m_camera->getLookAt(), m_positionEnding,
+                                      m_dragSpeed * deltatime);
     m_camera->setLookAt(cameraLookAt);
     
     glm::vec3 cameraPosition = m_camera->getPosition();
@@ -195,10 +190,12 @@ void CMapDragController::update(f32)
         }
     }
     
-    f32 currentCameraRotation = glm::mix(glm::degrees(m_camera->getRotation()), m_cameraPrecomputedRotationY, 0.1);
+    f32 currentCameraRotation = glm::mix(glm::degrees(m_camera->getRotation()), m_cameraPrecomputedRotationY,
+                                         m_dragSpeed * deltatime);
     m_camera->setRotation(glm::radians(currentCameraRotation));
     
-    glm::vec3 currentCameraDistanceToLookAt = glm::mix(m_camera->getDistanceToLookAt(), m_cameraPrecomputedDistance, 0.1);
+    glm::vec3 currentCameraDistanceToLookAt = glm::mix(m_camera->getDistanceToLookAt(), m_cameraPrecomputedDistance,
+                                                       m_dragSpeed * deltatime);
     m_camera->setDistanceToLookAt(currentCameraDistanceToLookAt);
 }
 

@@ -1,6 +1,7 @@
 
 #if defined(__OPENGL_30__)
 
+in vec2 v_texCoord;
 in vec4 v_texCoordProj;
 in vec2 v_texCoordDisplace_01;
 in vec2 v_texCoordDisplace_02;
@@ -17,6 +18,7 @@ in float v_fogDistance;
 
 #else
 
+varying vec2 v_texCoord;
 varying vec4 v_texCoordProj;
 varying vec2 v_texCoordDisplace_01;
 varying vec2 v_texCoordDisplace_02;
@@ -76,7 +78,8 @@ void main(void)
     vec2 texCoordProj = v_texCoordProj.xy;
     texCoordProj = k_05 + k_05 * texCoordProj / v_texCoordProj.w * vec2(-k_1, k_1);
     
-    vec2 perturbationIntensity = k_perturbationFactor * normalColor.xy;
+    float deep = pow(clamp(1.0 - texture2D(SAMPLER_04, v_texCoord).r, 0.0, 1.0), 2);
+    vec2 perturbationIntensity = k_perturbationFactor * normalColor.xy * deep;
     vec2 perturbatedTexCoord = texCoordProj + perturbationIntensity;
     
     vec4 reflectionColor = texture2D(SAMPLER_01, perturbatedTexCoord);

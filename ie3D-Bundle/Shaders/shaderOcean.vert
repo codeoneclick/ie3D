@@ -1,6 +1,7 @@
 
 #if defined(__OPENGL_30__)
 
+out vec2 v_texCoord;
 out vec4 v_texCoordProj;
 out vec2 v_texCoordDisplace_01;
 out vec2 v_texCoordDisplace_02;
@@ -17,6 +18,7 @@ out float v_fogDistance;
 
 #else
 
+varying vec2 v_texCoord;
 varying vec4 v_texCoordProj;
 varying vec2 v_texCoordDisplace_01;
 varying vec2 v_texCoordDisplace_02;
@@ -52,6 +54,7 @@ void main(void)
     vec4 vertexPosWS = u_matrixM * vec4(IN_Position, 1.0);
     gl_Position = u_matrixVP * vertexPosWS;
     
+    v_texCoord = IN_TexCoord;
     vec2 texCoord = IN_TexCoord;
     texCoord *= k_texCoordScale;
     v_texCoordDisplace_01 = vec2(texCoord.x + sin(FLOAT_Timer) * 0.25,
