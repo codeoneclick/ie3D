@@ -226,7 +226,7 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
                     isIntersectedWithGameObjectBrush = true;
                     glm::ray ray;
                     CCollisionMgr::unproject(point, m_camera->getVMatrix(),
-                                             m_camera->getVMatrix(),
+                                             m_camera->getPMatrix(),
                                              m_camera->getViewport(),
                                              &ray);
                     m_previousDraggedPoint3D = ray.getDirection() * m_camera->getFar();
@@ -315,7 +315,7 @@ void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
                     isIntersectedWithGameObjectBrush = true;
                     glm::ray ray;
                     CCollisionMgr::unproject(point, m_camera->getVMatrix(),
-                                             m_camera->getVMatrix(),
+                                             m_camera->getPMatrix(),
                                              m_camera->getViewport(),
                                              &ray);
                     draggedPoint3D = ray.getDirection() * m_camera->getFar();
