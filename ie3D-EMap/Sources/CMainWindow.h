@@ -41,8 +41,10 @@ protected:
     
     std::vector<CSharedConfigurationMaterial> m_goeConfigurationsMaterials;
     
-    void updateGOEConfigurationMaterial(void);
     void updateGOEUIConfigurationMaterial(CSharedConfigurationMaterialRef configuration);
+    
+    CSharedConfigurationMaterial getCurrentConfigurationMaterial(void);
+    void commitCurrentConfigurationMaterial(void);
     
     void setMSEBrushSize(ui32 value);
     void setMSEBrushStrength(ui32 value);

@@ -129,8 +129,8 @@ void CMainWindow::execute(void)
                                        command);
     
     command = std::make_shared<CCommand<UICommandGOEUpdateConfigurationsMaterials::COMMAND>>(std::bind(&CMainWindow::updateGOEConfigurationsMaterials,
-                                                                                                                      this,
-                                                                                                                      std::placeholders::_1));
+                                                                                                       this,
+                                                                                                       std::placeholders::_1));
     m_goeSceneToUICommands->addCommand(UICommandGOEUpdateConfigurationsMaterials::GUID,
                                        command);
     
@@ -240,7 +240,7 @@ void CMainWindow::on_m_smoothSlider_valueChanged(int value)
 
 void CMainWindow::on_m_texture01Btn_pressed()
 {
-
+    
 }
 
 void CMainWindow::on_m_texture01Btn_clicked()
@@ -256,8 +256,8 @@ void CMainWindow::on_m_texture01Btn_clicked()
         QPixmap pixmap(filename);
         ui->m_texture01Img->setPixmap(pixmap);
         m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetTextureFilename::COMMAND>(UICommandMSESetTextureFilename::GUID,
-                                                                                                 filename.toUtf8().constData(),
-                                                                                                 E_SHADER_SAMPLER_01);
+                                                                                                  filename.toUtf8().constData(),
+                                                                                                  E_SHADER_SAMPLER_01);
     }
 }
 
@@ -510,33 +510,6 @@ void CMainWindow::updateGOEConfigurationsMaterials(std::vector<CSharedConfigurat
     m_goeConfigurationsMaterials = configurations;
 }
 
-void CMainWindow::updateGOEConfigurationMaterial(void)
-{
-    if(m_goeConfigurationsMaterials.size() != 0)
-    {
-        CSharedConfigurationMaterial configurationMaterial = m_goeConfigurationsMaterials.at(ui->m_materialsComboBox->currentIndex());
-        configurationMaterial->setEnabled(ui->m_materialEnabledCheckBox->isChecked());
-        configurationMaterial->setCulling(ui->m_cullFaceCheckBox->isChecked());
-        configurationMaterial->setCullingMode(g_stringToGLenum[ui->m_cullModeComboBox->currentText().toUtf8().constData()]);
-        configurationMaterial->setDepthTest(ui->m_depthTestCheckBox->isChecked());
-        configurationMaterial->setDepthMask(ui->m_depthMaskCheckBox->isChecked());
-        configurationMaterial->setBlending(ui->m_blendingCheckBox->isChecked());
-        configurationMaterial->setBlendingFunctionSource(g_stringToGLenum[ui->m_blendingSourceComboBox->currentText().toUtf8().constData()]);
-        configurationMaterial->setBlendingFunctionDestination(g_stringToGLenum[ui->m_blendingDesinationComboBox->currentText().toUtf8().constData()]);
-        configurationMaterial->setClipping(ui->m_clippingCheckBox->isChecked());
-        configurationMaterial->setClippingX(ui->m_clippingXSpinBox->value());
-        configurationMaterial->setClippingY(ui->m_clippingYSpinBox->value());
-        configurationMaterial->setClippingZ(ui->m_clippingZSpinBox->value());
-        configurationMaterial->setClippingW(ui->m_clippingWSpinBox->value());
-        configurationMaterial->setReflecting(ui->m_reflectingCheckBox->isChecked());
-        configurationMaterial->setShadowing(ui->m_shadowingCheckBox->isChecked());
-        configurationMaterial->setDebugging(ui->m_debuggingCheckBox->isChecked());
-        
-        m_goeTransition->getUIToSceneCommands()->execute<UICommandGOEUpdateConfigurationMaterial::COMMAND>(UICommandGOEUpdateConfigurationMaterial::GUID,
-                                                                                                           configurationMaterial);
-    }
-}
-
 void CMainWindow::updateGOEUIConfigurationMaterial(CSharedConfigurationMaterialRef configuration)
 {
     ui->m_materialEnabledCheckBox->setCheckState(configuration->getEnabled() ? Qt::Checked : Qt::Unchecked);
@@ -548,6 +521,7 @@ void CMainWindow::updateGOEUIConfigurationMaterial(CSharedConfigurationMaterialR
     ui->m_blendingSourceComboBox->setCurrentText(QString(g_enumGLToString[configuration->getBlendingFunctionSource()].c_str()));
     ui->m_blendingDesinationComboBox->setCurrentText(QString(g_enumGLToString[configuration->getBlendingFunctionDestination()].c_str()));
     ui->m_clippingCheckBox->setCheckState(configuration->getClipping() ? Qt::Checked : Qt::Unchecked);
+    
     ui->m_clippingXSpinBox->setValue(configuration->getClippingX());
     ui->m_clippingYSpinBox->setValue(configuration->getClippingY());
     ui->m_clippingZSpinBox->setValue(configuration->getClippingZ());
@@ -598,87 +572,167 @@ void CMainWindow::updateGOEUIConfigurationMaterial(CSharedConfigurationMaterialR
 
 void CMainWindow::on_m_cullFaceCheckBox_stateChanged(int)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setCulling(ui->m_cullFaceCheckBox->isChecked());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_materialEnabledCheckBox_clicked()
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setEnabled(ui->m_materialEnabledCheckBox->isChecked());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_cullModeComboBox_currentIndexChanged(const QString&)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setCullingMode(g_stringToGLenum[ui->m_cullModeComboBox->currentText().toUtf8().constData()]);
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_depthTestCheckBox_stateChanged(int)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setDepthTest(ui->m_depthTestCheckBox->isChecked());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_depthMaskCheckBox_stateChanged(int)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setDepthMask(ui->m_depthMaskCheckBox->isChecked());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_blendingCheckBox_stateChanged(int)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setBlending(ui->m_blendingCheckBox->isChecked());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_blendingSourceComboBox_currentIndexChanged(const QString &)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setBlendingFunctionSource(g_stringToGLenum[ui->m_blendingSourceComboBox->currentText().toUtf8().constData()]);
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_blendingDesinationComboBox_currentIndexChanged(const QString &)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setBlendingFunctionDestination(g_stringToGLenum[ui->m_blendingDesinationComboBox->currentText().toUtf8().constData()]);
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_clippingCheckBox_stateChanged(int)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setClipping(ui->m_clippingCheckBox->isChecked());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_clippingXSpinBox_valueChanged(double)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setClippingX(ui->m_clippingXSpinBox->value());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_clippingYSpinBox_valueChanged(double)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setClippingY(ui->m_clippingYSpinBox->value());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_clippingZSpinBox_valueChanged(double)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setClippingZ(ui->m_clippingZSpinBox->value());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_clippingWSpinBox_valueChanged(double)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setClippingW(ui->m_clippingWSpinBox->value());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_reflectingCheckBox_stateChanged(int)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setReflecting(ui->m_reflectingCheckBox->isChecked());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_shadowingCheckBox_stateChanged(int)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setShadowing(ui->m_shadowingCheckBox->isChecked());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_debuggingCheckBox_stateChanged(int)
 {
-    CMainWindow::updateGOEConfigurationMaterial();
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        configuration->setDebugging(ui->m_debuggingCheckBox->isChecked());
+        CMainWindow::commitCurrentConfigurationMaterial();
+    }
 }
 
 void CMainWindow::on_m_shaderButton_clicked()
 {
-
+    
 }
 
 void CMainWindow::on_m_texture1LoadButton_clicked()
@@ -702,11 +756,7 @@ void CMainWindow::on_m_texture1LoadButton_clicked()
                 CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configurationMaterial->getTexturesConfigurations().at(0));
                 configurationTexture->setTextureFilename(filename.toUtf8().constData());
             }
-            else
-            {
-                
-            }
-            CMainWindow::updateGOEConfigurationMaterial();
+            CMainWindow::commitCurrentConfigurationMaterial();
         }
     }
 }
@@ -732,11 +782,7 @@ void CMainWindow::on_m_texture2LoadButton_clicked()
                 CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configurationMaterial->getTexturesConfigurations().at(1));
                 configurationTexture->setTextureFilename(filename.toUtf8().constData());
             }
-            else
-            {
-                
-            }
-            CMainWindow::updateGOEConfigurationMaterial();
+            CMainWindow::commitCurrentConfigurationMaterial();
         }
     }
 }
@@ -762,30 +808,25 @@ void CMainWindow::on_m_texture3LoadButton_clicked()
                 CSharedConfigurationTexture configurationTexture = std::static_pointer_cast<CConfigurationTexture>(configurationMaterial->getTexturesConfigurations().at(2));
                 configurationTexture->setTextureFilename(filename.toUtf8().constData());
             }
-            else
-            {
-                
-            }
-            CMainWindow::updateGOEConfigurationMaterial();
+            CMainWindow::commitCurrentConfigurationMaterial();
         }
     }
 }
 
 void CMainWindow::on_m_goeSettingsTab_currentChanged(int)
 {
-
+    
 }
 
 void CMainWindow::on_m_drawCurrentRadioButton_clicked()
 {
-
+    
 }
 
 void CMainWindow::on_m_drawAllRadioButton_clicked()
 {
-
+    
 }
-
 
 void CMainWindow::on_m_materialsComboBox_currentIndexChanged(int index)
 {
@@ -805,5 +846,26 @@ void CMainWindow::on_m_modelsList_currentRowChanged(int)
 {
     QString configurationFilename = ui->m_modelsList->currentItem()->text();
     m_gopTransition->getUIToSceneCommands()->execute<UICommandGOPSetGameObjectConfigurationName::COMMAND>(UICommandGOPSetGameObjectConfigurationName::GUID,
-                                                                                                     configurationFilename.toUtf8().constData());
+                                                                                                          configurationFilename.toUtf8().constData());
+}
+
+CSharedConfigurationMaterial CMainWindow::getCurrentConfigurationMaterial(void)
+{
+    CSharedConfigurationMaterial configuration = nullptr;
+    if(static_cast<i32>(m_goeConfigurationsMaterials.size()) > ui->m_materialsComboBox->currentIndex() &&
+       ui->m_materialsComboBox->currentIndex() >= 0)
+    {
+        configuration = m_goeConfigurationsMaterials.at(ui->m_materialsComboBox->currentIndex());
+    }
+    return configuration;
+}
+
+void CMainWindow::commitCurrentConfigurationMaterial(void)
+{
+    CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
+    if(configuration)
+    {
+        m_goeTransition->getUIToSceneCommands()->execute<UICommandGOEUpdateConfigurationMaterial::COMMAND>(UICommandGOEUpdateConfigurationMaterial::GUID,
+                                                                                                           configuration);
+    }
 }

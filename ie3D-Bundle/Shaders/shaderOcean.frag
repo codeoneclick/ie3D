@@ -78,7 +78,7 @@ void main(void)
     vec2 texCoordProj = v_texCoordProj.xy;
     texCoordProj = k_05 + k_05 * texCoordProj / v_texCoordProj.w * vec2(-k_1, k_1);
     
-    float deep = pow(clamp(1.0 - texture2D(SAMPLER_04, v_texCoord).r, 0.0, 1.0), 2);
+    float deep = pow(clamp(1.0 - texture2D(SAMPLER_04, v_texCoord).r, 0.0, 1.0), 2.0);
     vec2 perturbationIntensity = k_perturbationFactor * normalColor.xy * deep;
     vec2 perturbatedTexCoord = texCoordProj + perturbationIntensity;
     
