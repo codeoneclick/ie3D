@@ -182,9 +182,8 @@ void CMainWindow::execute(void)
     ui->m_modelsList->setCurrentRow(0);
     
     ui->m_mainMenuTabs->setCurrentIndex(0);
-    CMainWindow::on_m_mainMenuTabs_currentChanged(0);
     ui->m_landscapePropertiesTab->setCurrentIndex(0);
-    CMainWindow::on_m_landscapePropertiesTab_currentChanged(0);
+    CMainWindow::resumeWidgets();
     
 #endif
 }
@@ -407,6 +406,14 @@ bool CMainWindow::event(QEvent *event)
     {
         CMainWindow::execute();
     }
+    if (event->type() == QEvent::WindowActivate)
+    {
+        CMainWindow::resumeWidgets();
+    }
+    if(event->type() == QEvent::WindowDeactivate)
+    {
+        CMainWindow::pauseWidgets();
+    }
     return QWidget::event(event);
 }
 
@@ -419,54 +426,59 @@ void CMainWindow::on_generateButton_clicked()
                                                                                              ui->m_seedSpinBox->value());
 }
 
-void CMainWindow::on_m_mainMenuTabs_currentChanged(int index)
+void CMainWindow::resumeWidgets(void)
 {
-    switch (index)
+    if(ui->m_mainMenuTabs->currentWidget() == ui->m_sceneTab)
     {
-        case 0:
-            
-            m_mseTransition->setPaused(false);
-            m_goeTransition->setPaused(true);
-            if(ui->m_landscapePropertiesTab->currentIndex() == 2)
-            {
-                m_gopTransition->setPaused(false);
-            }
-            else
-            {
-                m_gopTransition->setPaused(true);
-            }
-            break;
-            
-        default:
+        m_mseTransition->setPaused(false);
+        m_goeTransition->setPaused(true);
+        
+        if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeHeightmapTab)
         {
-            m_mseTransition->setPaused(true);
             m_gopTransition->setPaused(true);
-            m_goeTransition->setPaused(false);
+            m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetLandscapeEditMode::COMMAND>(UICommandMSESetLandscapeEditMode::GUID,
+                                                                                                        E_LANDSCAPE_EDIT_MODE_HEIGHTMAP);
         }
-            break;
+        else if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeTexturesTab)
+        {
+            m_gopTransition->setPaused(true);
+            m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetLandscapeEditMode::COMMAND>(UICommandMSESetLandscapeEditMode::GUID,
+                                                                                                        E_LANDSCAPE_EDIT_MODE_TEXTURES);
+        }
+        else if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeGameobjectsTab)
+        {
+            m_gopTransition->setPaused(false);
+            m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetLandscapeEditMode::COMMAND>(UICommandMSESetLandscapeEditMode::GUID,
+                                                                                                        E_LANDSCAPE_EDIT_MODE_GAMEOBJECTS);
+        }
     }
+    else if(ui->m_mainMenuTabs->currentWidget() == ui->m_gameObjectTab)
+    {
+        m_goeTransition->setPaused(false);
+        m_mseTransition->setPaused(true);
+        m_gopTransition->setPaused(true);
+    }
+    else
+    {
+        assert(false);
+    }
+}
+
+void CMainWindow::pauseWidgets(void)
+{
+    m_mseTransition->setPaused(true);
+    m_goeTransition->setPaused(true);
+    m_gopTransition->setPaused(true);
+}
+
+void CMainWindow::on_m_mainMenuTabs_currentChanged(int)
+{
+    CMainWindow::resumeWidgets();
 }
 
 void CMainWindow::on_m_landscapePropertiesTab_currentChanged(int)
 {
-    if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeHeightmapTab)
-    {
-        m_gopTransition->setPaused(true);
-        m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetLandscapeEditMode::COMMAND>(UICommandMSESetLandscapeEditMode::GUID,
-                                                                                                    E_LANDSCAPE_EDIT_MODE_HEIGHTMAP);
-    }
-    else if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeTexturesTab)
-    {
-        m_gopTransition->setPaused(true);
-        m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetLandscapeEditMode::COMMAND>(UICommandMSESetLandscapeEditMode::GUID,
-                                                                                                    E_LANDSCAPE_EDIT_MODE_TEXTURES);
-    }
-    else if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeGameobjectsTab)
-    {
-        m_gopTransition->setPaused(false);
-        m_mseTransition->getUIToSceneCommands()->execute<UICommandMSESetLandscapeEditMode::COMMAND>(UICommandMSESetLandscapeEditMode::GUID,
-                                                                                                    E_LANDSCAPE_EDIT_MODE_GAMEOBJECTS);
-    }
+    CMainWindow::resumeWidgets();
 }
 
 void CMainWindow::on_m_createGameObjectConfiguration_clicked()

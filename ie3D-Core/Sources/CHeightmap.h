@@ -93,15 +93,13 @@ public:
     CHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
     ~CHeightmap(void);
     
-    void updateVertices(const std::vector<glm::vec3>& vertices,
-                        const std::vector<std::shared_ptr<CVertexBuffer>>& vbos);
+    void updateVertices(const std::vector<glm::vec3>& vertices);
     void attachUncompressedVertexToVBO(ui32 x, ui32 y, ui32 vboIndex, ui32 vboVertexIndex);
+    glm::ivec2* isVertexAttachedToVBO(ui32 x, ui32 y, ui8* containsInCount);
     
     glm::vec3 getVertexPosition(ui32 i, ui32 j) const;
     glm::uint32 getVertexTexcoord(ui32 i, ui32 j) const;
     glm::uint32 getVertexNormal(ui32 i, ui32 j) const;
-    
-    
     
     glm::ivec2 getSize(void) const;
     
@@ -128,25 +126,55 @@ public:
     static glm::vec2 getAngleOnHeightmapSurface(CSharedHeightmapRef data, const glm::vec3& position);
 };
 
-class CHeightmapIBOMMAP
+class CHeightmapMMAP
+{
+private:
+    
+    i32 m_filedescriptor;
+    
+protected:
+    
+    void* m_pointer;
+    ui16 m_size;
+    
+public:
+    
+    CHeightmapMMAP(void);
+    virtual ~CHeightmapMMAP(void);
+    
+    void open(const std::string& filename);
+    void close(void);
+};
+
+class CHeightmapIBOMMAP : public CHeightmapMMAP
 {
 private:
 
-    ui16* m_pointer;
-    ui16 m_size;
-    i32 m_filedescriptor;
     
 protected:
     
 public:
     
-    CHeightmapIBOMMAP(void);
-    ~CHeightmapIBOMMAP(void);
+    CHeightmapIBOMMAP(void) = default;
+    ~CHeightmapIBOMMAP(void) = default;
     
-    void open(const std::string& filename);
-    void close(void);
+    inline ui16* getPointer(void) const { return (ui16*)m_pointer; };
+    inline void setSize(ui16 size) { m_size = size; };
+    inline ui16 getSize(void) const { return m_size; };
+};
+
+class CHeightmapVBOMMAP : public CHeightmapMMAP
+{
+private:
     
-    inline ui16* getPointer(void) const { return m_pointer; };
+protected:
+    
+public:
+    
+    CHeightmapVBOMMAP(void) = default;
+    ~CHeightmapVBOMMAP(void) = default;
+    
+    inline SAttributeVertex* getPointer(void) const { return (SAttributeVertex*)m_pointer; };
     inline void setSize(ui16 size) { m_size = size; };
     inline ui16 getSize(void) const { return m_size; };
 };
@@ -155,14 +183,15 @@ class CHeightmapGenerator
 {
 private:
     
+    static const ui8 kMaxChunkSize = 65;
     ui32 m_heightmapGUID;
     
 protected:
     
     std::shared_ptr<CHeightmap> m_heightmap;
     
-    std::vector<std::shared_ptr<CVertexBuffer>> m_vbos;
-    std::vector<std::tuple<std::array<CHeightmapIBOMMAP, E_LANDSCAPE_CHUNK_LOD_MAX>, ui32>> m_ibosMMAP;
+    std::vector<CHeightmapVBOMMAP> m_vbosMMAP;
+    std::vector<std::array<CHeightmapIBOMMAP, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_callbacks;
     std::vector<std::tuple<CSharedMesh, CSharedQuadTree, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
@@ -182,20 +211,13 @@ protected:
     
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
     
-    void readMMAPIBO(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
+    void initContainers(const std::shared_ptr<CHeightmap>& heightmap);
+    void readMMAP(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(ui32 index);
     
     void createChunkBound(const glm::ivec2& index,
                           glm::vec3* minBound, glm::vec3* maxBound);
-    
-    void writeToVertexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
-    void commitVertexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
-    
-    void writeToIndexBuffer(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
-    void commitIndexBufferToVRAM(ui32 chunkOffsetX, ui32 chunkOffsetZ, E_LANDSCAPE_CHUNK_LOD LOD);
-    
-    void generateQuadTree(ui32 chunkOffsetX, ui32 chunkOffsetZ);
     
     void updateSplattingTexture(CSharedTextureRef texture, bool isCreation = true,
                                 ui32 offsetX = 0, ui32 offsetY = 0,
@@ -222,7 +244,7 @@ public:
     CSharedTexture createHeightmapTexture(void);
     CSharedTexture createSplattingTexture(void);
     
-    void generateVertecesData(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
+    void generateVertices(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
     
     void generateTangentSpace(CSharedVertexBufferRef vertexBuffer,
                               CSharedIndexBufferRef indexBuffer);

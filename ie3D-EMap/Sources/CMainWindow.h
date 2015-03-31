@@ -42,6 +42,8 @@ protected:
     std::vector<CSharedConfigurationMaterial> m_goeConfigurationsMaterials;
     
     void updateGOEUIConfigurationMaterial(CSharedConfigurationMaterialRef configuration);
+    void resumeWidgets(void);
+    void pauseWidgets(void);
     
     CSharedConfigurationMaterial getCurrentConfigurationMaterial(void);
     void commitCurrentConfigurationMaterial(void);

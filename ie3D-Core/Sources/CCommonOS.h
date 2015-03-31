@@ -14,6 +14,7 @@
 std::string bundlepath(void);
 std::string executablepath(void);
 std::string documentspath(void);
+void memory_usage(void);
 
 ui32 Get_ScreenWidth(void);
 ui32 Get_ScreenHeight(void);

@@ -119,7 +119,7 @@ CMEmseScene::~CMEmseScene(void)
 void CMEmseScene::load(void)
 {
     assert(m_root != nullptr);
-    m_camera = m_root->createCamera(45.0, 0.01, 1024.0,
+    m_camera = m_root->createCamera(45.0, 0.01, 768.0,
                                     glm::ivec4(0, 0,
                                                m_root->getScreenWidth(),
                                                m_root->getScreenHeight()));
@@ -129,7 +129,7 @@ void CMEmseScene::load(void)
     m_camera->setDistanceToLookAt(glm::vec3(64.0, 16.0, 64.0));
     m_root->setCamera(m_camera);
     
-    m_globalLightSource = m_root->createGlobalLightSource(45.0, 0.01, 1024.0);
+    m_globalLightSource = m_root->createGlobalLightSource(45.0, 0.01, 768.0);
     m_root->setGlobalLightSource(m_globalLightSource);
    
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
