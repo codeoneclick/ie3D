@@ -685,24 +685,22 @@ void CHeightmapGenerator::createVBOs(void)
         verticesOffset.y = 0;
         for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
-            ui32 currentVertexIndex = 0;
             SAttributeVertex* vertices = new SAttributeVertex[m_chunkSize.x * m_chunkSize.y];
             
             for(ui32 x = 0; x < m_chunkSize.x; ++x)
             {
                 for(ui32 y = 0; y < m_chunkSize.y; ++y)
                 {
-                    vertices[currentVertexIndex].m_position = m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y);
-                    vertices[currentVertexIndex].m_texcoord = m_heightmap->getVertexTexcoord(x + verticesOffset.x, y + verticesOffset.y);
-                    vertices[currentVertexIndex].m_normal = m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y);
+                    ui32 index = y + x * m_chunkSize.y;
+                    vertices[index].m_position = m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y);
+                    vertices[index].m_texcoord = m_heightmap->getVertexTexcoord(x + verticesOffset.x, y + verticesOffset.y);
+                    vertices[index].m_normal = m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y);
                     
 #if !defined(__IOS__)
                     m_heightmap->attachUncompressedVertexToVBO(x + verticesOffset.x, y + verticesOffset.y,
-                                                               i + j * m_chunksNum.x, currentVertexIndex);
+                                                               i + j * m_chunksNum.x, index);
                     
 #endif
-                    
-                    currentVertexIndex++;
                 }
             }
             verticesOffset.y += m_chunkSize.y - 1;
@@ -727,14 +725,16 @@ void CHeightmapGenerator::createVBOs(void)
             
             for(ui32 index = 0; index < m_chunkSize.x * m_chunkSize.y; ++index)
             {
-                stream.write((char*)&vertices[index], sizeof(SAttributeVertex));
+                SAttributeVertex vertex = vertices[index];
+                stream.write((char*)&vertex, sizeof(SAttributeVertex));
             }
             
             stream.close();
-            delete [] vertices;
+            
+            delete[] vertices;
+            vertices = nullptr;
             
             m_vbosMMAP[i + j * m_chunksNum.x].setSize(m_chunkSize.x * m_chunkSize.y);
-            currentVertexIndex = 0;
         }
         verticesOffset.x += m_chunkSize.x - 1;
     }

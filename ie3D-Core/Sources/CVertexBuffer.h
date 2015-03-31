@@ -35,6 +35,9 @@ struct SAttributeVertex
     glm::uint32 m_tangent;
     glm::u8vec4 m_color;
     glm::u8vec4 m_extra;
+    
+    SAttributeVertex(void) = default;
+    ~SAttributeVertex(void) = default;
 };
 
 class CVertexBuffer final : public IResourceData

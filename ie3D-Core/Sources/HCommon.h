@@ -355,7 +355,9 @@ namespace glm
         tymin = (parameters[ray.getSign(1)].y - ray.getOrigin().y) * ray.getInvertedDirection().y;
         tymax = (parameters[1 - ray.getSign(1)].y - ray.getOrigin().y) * ray.getInvertedDirection().y;
         if ( (tmin > tymax) || (tymin > tmax) )
+        {
             return false;
+        }
         if (tymin > tmin)
             tmin = tymin;
         if (tymax < tmax)
@@ -363,11 +365,9 @@ namespace glm
         tzmin = (parameters[ray.getSign(2)].z - ray.getOrigin().z) * ray.getInvertedDirection().z;
         tzmax = (parameters[1 - ray.getSign(2)].z - ray.getOrigin().z) * ray.getInvertedDirection().z;
         if ( (tmin > tzmax) || (tzmin > tmax) )
+        {
             return false;
-        if (tzmin > tmin)
-            tmin = tzmin;
-        if (tzmax < tmax)
-            tmax = tzmax;
+        }
         return true;
     };
 };
