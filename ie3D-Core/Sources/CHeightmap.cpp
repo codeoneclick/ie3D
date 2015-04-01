@@ -530,50 +530,86 @@ glm::vec2 CHeightmapAccessor::getAngleOnHeightmapSurface(CSharedHeightmapRef dat
     return glm::vec2(glm::degrees(acos(angle_02) - M_PI_2), glm::degrees(asin(angle_01)));
 }
 
-CHeightmapMMAP::CHeightmapMMAP(void) :
-m_pointer(nullptr),
+namespace ie
+{
+    i32 mmap_memory::g_filedescriptors = 0;
+    mmap_memory::mmap_memory(void) :
+    m_filedescriptor(-1),
+    m_pointer(nullptr)
+    {
+        
+    }
+    
+    mmap_memory::~mmap_memory(void)
+    {
+        mmap_memory::deallocate();
+    }
+        
+    void* mmap_memory::allocate(const std::string& filename)
+    {
+        if(m_filedescriptor != -1)
+        {
+            assert(m_pointer != nullptr);
+            return m_pointer;
+        }
+        
+        ui32 filelength;
+        struct stat status;
+        
+        m_filedescriptor = ::open(filename.c_str(), O_RDWR);
+        if (m_filedescriptor < 0)
+        {
+            std::cout<<"can't open filedescriptor for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;
+            assert(false);
+        }
+        g_filedescriptors++;
+        
+        if (fstat(m_filedescriptor, &status) < 0)
+        {
+            std::cout<<"can't retrive filedescriptor status for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;
+            mmap_memory::deallocate();
+            assert(false);
+        }
+        
+        filelength = (ui32)status.st_size;
+        m_pointer = (void* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_filedescriptor, 0);
+        if (m_pointer == nullptr)
+        {
+            std::cout<<"can't mmap filedescriptor for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;
+            mmap_memory::deallocate();
+            assert(false);
+        }
+        f32 size = static_cast<f32>(filelength) / (1024.0 * 1024);
+        std::cout<<"filedescriptor was allocated. filedescriptors count: "<<g_filedescriptors<<" size: "<<size<<"mb"<<std::endl;
+        m_filename = filename;
+        return m_pointer;
+    }
+    
+    void mmap_memory::deallocate(void)
+    {
+        if(m_filedescriptor >= 0)
+        {
+            ::close(m_filedescriptor);
+            g_filedescriptors--;
+            std::cout<<"filedescriptor was deallocated. filedescriptors count: "<<g_filedescriptors<<std::endl;
+        }
+        m_filedescriptor = -1;
+        m_pointer = nullptr;
+    }
+    
+    void mmap_memory::reallocate(void)
+    {
+        mmap_memory::deallocate();
+        mmap_memory::allocate(m_filename);
+    }
+};
+
+CHeightmapMMAP::CHeightmapMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor) :
+m_descriptor(descriptor),
 m_size(0),
-m_filedescriptor(-1)
+m_offset(0)
 {
     
-}
-
-CHeightmapMMAP::~CHeightmapMMAP(void)
-{
-    CHeightmapMMAP::close();
-}
-
-void CHeightmapMMAP::open(const std::string& filename)
-{
-    ui32 filelength;
-    struct stat status;
-    
-    m_filedescriptor = ::open(filename.c_str(), O_RDWR);
-    if (m_filedescriptor < 0)
-    {
-        assert(false);
-    }
-    
-    if (fstat(m_filedescriptor, &status) < 0)
-    {
-        assert(false);
-    }
-    
-    filelength = (ui32)status.st_size;
-    m_pointer = (void* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_filedescriptor, 0);
-    if (m_pointer == nullptr)
-    {
-        assert(false);
-    }
-}
-
-void CHeightmapMMAP::close(void)
-{
-    if(m_filedescriptor > 0)
-    {
-        ::close(m_filedescriptor);
-    }
-    m_pointer = nullptr;
 }
 
 CHeightmapGenerator::CHeightmapGenerator(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration) :
@@ -581,7 +617,9 @@ m_heightmapGUID(g_heightmapGUID++),
 m_heightmap(nullptr),
 m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_heightmapTexture(nullptr),
-m_splattingTexture(nullptr)
+m_splattingTexture(nullptr),
+m_vbosMMAPDescriptor(nullptr),
+m_ibosMMAPDescriptor(nullptr)
 {
     assert(m_renderTechniqueAccessor != nullptr);
     assert(configuration != nullptr);
@@ -647,11 +685,23 @@ void CHeightmapGenerator::initContainers(const std::shared_ptr<CHeightmap>& heig
         }
     }
     
+    if(m_vbosMMAPDescriptor)
+    {
+        m_vbosMMAPDescriptor->deallocate();
+        m_vbosMMAPDescriptor = nullptr;
+    }
+    m_vbosMMAPDescriptor = std::make_shared<ie::mmap_memory>();
     m_vbosMMAP.clear();
-    CHeightmapGenerator::createVBOs();
+    m_vbosMMAPDescriptor->allocate(CHeightmapGenerator::createVBOs());
     
+    if(m_ibosMMAPDescriptor)
+    {
+        m_ibosMMAPDescriptor->deallocate();
+        m_ibosMMAPDescriptor = nullptr;
+    }
+    m_ibosMMAPDescriptor = std::make_shared<ie::mmap_memory>();
     m_ibosMMAP.clear();
-    CHeightmapGenerator::createIBOs();
+    m_ibosMMAPDescriptor->allocate(CHeightmapGenerator::createIBOs());
 }
 
 CHeightmapGenerator::~CHeightmapGenerator(void)
@@ -671,7 +721,7 @@ void CHeightmapGenerator::generateVertices(const glm::ivec2& size, f32 frequency
     CHeightmapGenerator::updateHeightmapTexture(m_heightmapTexture);
 }
 
-void CHeightmapGenerator::createVBOs(void)
+std::string CHeightmapGenerator::createVBOs(void)
 {
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
@@ -679,14 +729,34 @@ void CHeightmapGenerator::createVBOs(void)
     
     m_vbosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
     
+    std::string filename;
+    std::ostringstream stringstream;
+    stringstream<<"vbo_"<<m_heightmapGUID<<std::endl;
+    filename = stringstream.str();
+    
+#if defined(__IOS__)
+    
+    filename = documentspath() + filename;
+    
+#endif
+    
+    std::ofstream stream;
+    stream.open(filename.c_str(), std::ios::binary | std::ios::out | std::ios::trunc);
+    if(!stream.is_open())
+    {
+        assert(false);
+    }
+    
     glm::ivec2 verticesOffset(0);
+    ui32 verticesWroteToMMAP = 0;
+    
+    SAttributeVertex* vertices = new SAttributeVertex[m_chunkSize.x * m_chunkSize.y];
+
     for(ui32 i = 0; i < m_chunksNum.x; ++i)
     {
         verticesOffset.y = 0;
         for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
-            SAttributeVertex* vertices = new SAttributeVertex[m_chunkSize.x * m_chunkSize.y];
-            
             for(ui32 x = 0; x < m_chunkSize.x; ++x)
             {
                 for(ui32 y = 0; y < m_chunkSize.y; ++y)
@@ -705,50 +775,56 @@ void CHeightmapGenerator::createVBOs(void)
             }
             verticesOffset.y += m_chunkSize.y - 1;
             
-            std::string filename;
-            std::ostringstream stringstream;
-            stringstream<<"vbo_"<<i + j * m_chunksNum.x<<"_"<<m_heightmapGUID<<std::endl;
-            filename = stringstream.str();
-            
-#if defined(__IOS__)
-            
-            filename = documentspath() + filename;
-            
-#endif
-            
-            std::ofstream stream;
-            stream.open(filename.c_str(), std::ios::binary | std::ios::out | std::ios::trunc);
-            if(!stream.is_open())
-            {
-                assert(false);
-            }
-            
             for(ui32 index = 0; index < m_chunkSize.x * m_chunkSize.y; ++index)
             {
-                SAttributeVertex vertex = vertices[index];
-                stream.write((char*)&vertex, sizeof(SAttributeVertex));
+                stream.write((char*)&vertices[index], sizeof(SAttributeVertex));
             }
             
-            stream.close();
-            
-            delete[] vertices;
-            vertices = nullptr;
-            
-            m_vbosMMAP[i + j * m_chunksNum.x].setSize(m_chunkSize.x * m_chunkSize.y);
+            m_vbosMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapVBOMMAP>(m_vbosMMAPDescriptor);
+            m_vbosMMAP[i + j * m_chunksNum.x]->setSize(m_chunkSize.x * m_chunkSize.y);
+            m_vbosMMAP[i + j * m_chunksNum.x]->setOffset(verticesWroteToMMAP);
+            verticesWroteToMMAP += m_chunkSize.x * m_chunkSize.y;
         }
         verticesOffset.x += m_chunkSize.x - 1;
     }
+    
+    stream.close();
+    
+    delete[] vertices;
+    vertices = nullptr;
     
 #if defined(__PERFORMANCE_TIMER__)
     std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
     f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
     std::cout<<"createVBO: "<<duration<<std::endl;
 #endif
+    
+    return filename;
 }
 
-void CHeightmapGenerator::createIBOs(void)
+std::string CHeightmapGenerator::createIBOs(void)
 {
     m_ibosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
+    
+    std::string filename;
+    std::ostringstream stringstream;
+    stringstream<<"ibo_"<<m_heightmapGUID<<std::endl;
+    filename = stringstream.str();
+    
+#if defined(__IOS__)
+    
+    filename = documentspath() + filename;
+    
+#endif
+    
+    std::ofstream stream;
+    stream.open(filename.c_str(), std::ios::binary | std::ios::out | std::ios::trunc);
+    if(!stream.is_open())
+    {
+        assert(false);
+    }
+    
+    ui32 indicesWroteToMMAP = 0;
     
     for(ui32 i = 0; i < m_chunksNum.x; ++i)
     {
@@ -948,36 +1024,23 @@ void CHeightmapGenerator::createIBOs(void)
                     }
                 }
                 
-                std::string filename;
-                std::ostringstream stringstream;
-                stringstream<<"ibo_"<<i + j * m_chunksNum.x<<"_"<<k<<"_"<<m_heightmapGUID<<std::endl;
-                filename = stringstream.str();
-                
-#if defined(__IOS__)
-                
-                filename = documentspath() + filename;
-                
-#endif
-                
-                std::ofstream stream;
-                stream.open(filename.c_str(), std::ios::binary | std::ios::out | std::ios::trunc);
-                if(!stream.is_open())
-                {
-                    assert(false);
-                }
-                
                 for(ui32 index = 0; index < indicesCount; ++index)
                 {
                     stream.write((char*)&indices[index], sizeof(ui16));
                 }
-                
-                stream.close();
+
                 delete [] indices;
                 
-                m_ibosMMAP[i + j * m_chunksNum.x][k].setSize(indicesCount);
+                m_ibosMMAP[i + j * m_chunksNum.x][k] = std::make_shared<CHeightmapIBOMMAP>(m_ibosMMAPDescriptor);
+                m_ibosMMAP[i + j * m_chunksNum.x][k]->setSize(indicesCount);
+                m_ibosMMAP[i + j * m_chunksNum.x][k]->setOffset(indicesWroteToMMAP);
+                indicesWroteToMMAP += indicesCount;
             }
         }
     }
+    stream.close();
+    
+    return filename;
 }
 
 glm::ivec2 CHeightmapGenerator::getSize(void) const
@@ -1286,46 +1349,19 @@ const std::tuple<glm::vec3, glm::vec3> CHeightmapGenerator::getChunkBounds(ui32 
     return m_chunksBounds[i + j * m_chunksNum.x];
 }
 
-void CHeightmapGenerator::readMMAP(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD)
-{
-    {
-        std::string filename;
-        std::ostringstream stringstream;
-        stringstream<<"ibo_"<<index<<"_"<<LOD<<"_"<<m_heightmapGUID<<std::endl;
-        filename = stringstream.str();
-#if defined(__IOS__)
-        
-        filename = documentspath() + filename;
-        
-#endif
-        m_ibosMMAP[index][LOD].open(filename);
-    }
-    
-    {
-        std::string filename;
-        std::ostringstream stringstream;
-        stringstream<<"vbo_"<<index<<"_"<<m_heightmapGUID<<std::endl;
-        filename = stringstream.str();
-        
-#if defined(__IOS__)
-        
-        filename = documentspath() + filename;
-        
-#endif
-        m_vbosMMAP[index].open(filename);
-    }
-}
 
 void CHeightmapGenerator::createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD)
 {
-    std::shared_ptr<CIndexBuffer> ibo = std::make_shared<CIndexBuffer>(m_ibosMMAP[index][LOD].getSize(),
+    m_ibosMMAPDescriptor->reallocate();
+    
+    std::shared_ptr<CIndexBuffer> ibo = std::make_shared<CIndexBuffer>(m_ibosMMAP[index][LOD]->getSize(),
                                                                        GL_DYNAMIC_DRAW,
-                                                                       m_ibosMMAP[index][LOD].getPointer());
+                                                                       m_ibosMMAP[index][LOD]->getPointer());
     ibo->unlock();
     
-    std::shared_ptr<CVertexBuffer> vbo = std::make_shared<CVertexBuffer>(m_vbosMMAP[index].getSize(),
-                                                                        GL_STATIC_DRAW,
-                                                                        m_vbosMMAP[index].getPointer());
+    std::shared_ptr<CVertexBuffer> vbo = std::make_shared<CVertexBuffer>(m_vbosMMAP[index]->getSize(),
+                                                                         GL_STATIC_DRAW,
+                                                                         m_vbosMMAP[index]->getPointer());
     vbo->unlock();
     
     std::ostringstream stringstream;
@@ -1338,6 +1374,7 @@ void CHeightmapGenerator::createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD)
 void CHeightmapGenerator::generateQuadTree(ui32 index)
 {
     assert(std::get<0>(m_chunksMetadata[index]) != nullptr);
+    
     CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
     
     quadTree->generate(std::get<0>(m_chunksMetadata[index])->getVertexBuffer(),
@@ -1379,11 +1416,6 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     assert(std::get<1>(m_chunksMetadata[index]) == nullptr);
     assert(std::get<2>(m_chunksMetadata[index]) != E_LANDSCAPE_CHUNK_LOD_UNKNOWN);
     
-    CSharedThreadOperation readMMAPOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    readMMAPOperation->setExecutionBlock([this, index, LOD](void) {
-        CHeightmapGenerator::readMMAP(index, LOD);
-    });
-    
     CSharedThreadOperation createMeshOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     createMeshOperation->setExecutionBlock([this, index, LOD](void) {
         CHeightmapGenerator::createMesh(index, LOD);
@@ -1403,7 +1435,6 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
         m_executedOperations[index] = nullptr;
     });
     
-    completionOperation->addDependency(readMMAPOperation);
     completionOperation->addDependency(createMeshOperation);
     completionOperation->addDependency(generateQuadTreeOperation);
     
@@ -1447,10 +1478,6 @@ void CHeightmapGenerator::runChunkUnLoading(ui32 i, ui32 j)
     }
     else
     {
-        m_vbosMMAP[index].close();
-        m_ibosMMAP[index][std::get<2>(m_chunksMetadata[index])].close();
-        
-        
         std::get<0>(m_chunksMetadata[index]) = nullptr;
         std::get<1>(m_chunksMetadata[index]) = nullptr;
         std::get<2>(m_chunksMetadata[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
@@ -1468,9 +1495,6 @@ void CHeightmapGenerator::update(void)
            (m_canceledOperations.at(index)->isCompleted() ||
             m_canceledOperations.at(index)->isCanceled()))
         {
-            m_vbosMMAP[index].close();
-            m_ibosMMAP[index][std::get<2>(m_chunksMetadata[index])].close();
-            
             std::get<0>(m_chunksMetadata[index]) = nullptr;
             std::get<1>(m_chunksMetadata[index]) = nullptr;
             std::get<2>(m_chunksMetadata[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;

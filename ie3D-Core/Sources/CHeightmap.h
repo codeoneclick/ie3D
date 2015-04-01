@@ -12,6 +12,7 @@
 #include "HCommon.h"
 #include "HDeclaration.h"
 #include "HEnums.h"
+#include "CVertexBuffer.h"
 
 class CHeightmap
 {
@@ -126,24 +127,51 @@ public:
     static glm::vec2 getAngleOnHeightmapSurface(CSharedHeightmapRef data, const glm::vec3& position);
 };
 
+namespace ie
+{
+    class mmap_memory
+    {
+    private:
+        
+        static i32 g_filedescriptors;
+        i32 m_filedescriptor;
+        std::string m_filename;
+        void* m_pointer;
+        
+    protected:
+        
+    public:
+        
+        mmap_memory(void);
+        ~mmap_memory(void);
+        
+        void* allocate(const std::string& filename);
+        void deallocate(void);
+        void reallocate(void);
+        
+        inline void* pointer(void) const { return m_pointer; };
+    };
+};
+
 class CHeightmapMMAP
 {
 private:
     
-    i32 m_filedescriptor;
-    
 protected:
     
-    void* m_pointer;
-    ui16 m_size;
+    std::shared_ptr<ie::mmap_memory> m_descriptor;
+    
+    ui32 m_size;
+    ui32 m_offset;
     
 public:
     
-    CHeightmapMMAP(void);
-    virtual ~CHeightmapMMAP(void);
+    CHeightmapMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor);
+    virtual ~CHeightmapMMAP(void) = default;
     
-    void open(const std::string& filename);
-    void close(void);
+    inline void setSize(ui32 size) { m_size = size; };
+    inline void setOffset(ui32 offset) { m_offset = offset; }
+    inline ui32 getSize(void) const { return m_size; };
 };
 
 class CHeightmapIBOMMAP : public CHeightmapMMAP
@@ -155,12 +183,16 @@ protected:
     
 public:
     
-    CHeightmapIBOMMAP(void) = default;
+    CHeightmapIBOMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor) : CHeightmapMMAP(descriptor) { };
     ~CHeightmapIBOMMAP(void) = default;
     
-    inline ui16* getPointer(void) const { return (ui16*)m_pointer; };
-    inline void setSize(ui16 size) { m_size = size; };
-    inline ui16 getSize(void) const { return m_size; };
+    inline ui16* getPointer(void) const
+    {
+        ui16* pointer = (ui16* )m_descriptor->pointer();
+        assert(pointer != nullptr);
+        
+        return pointer + m_offset;
+    };
 };
 
 class CHeightmapVBOMMAP : public CHeightmapMMAP
@@ -171,12 +203,16 @@ protected:
     
 public:
     
-    CHeightmapVBOMMAP(void) = default;
+    CHeightmapVBOMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor) : CHeightmapMMAP(descriptor) { };
     ~CHeightmapVBOMMAP(void) = default;
     
-    inline SAttributeVertex* getPointer(void) const { return (SAttributeVertex*)m_pointer; };
-    inline void setSize(ui16 size) { m_size = size; };
-    inline ui16 getSize(void) const { return m_size; };
+    inline SAttributeVertex* getPointer(void) const
+    {
+        SAttributeVertex* pointer = (SAttributeVertex* )m_descriptor->pointer();
+        assert(pointer != nullptr);
+
+        return pointer + m_offset;
+    };
 };
 
 class CHeightmapGenerator
@@ -190,14 +226,18 @@ protected:
     
     std::shared_ptr<CHeightmap> m_heightmap;
     
-    std::vector<CHeightmapVBOMMAP> m_vbosMMAP;
-    std::vector<std::array<CHeightmapIBOMMAP, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
+    std::shared_ptr<ie::mmap_memory> m_vbosMMAPDescriptor;
+    std::shared_ptr<ie::mmap_memory> m_ibosMMAPDescriptor;
+    
+    std::vector<std::shared_ptr<CHeightmapVBOMMAP>> m_vbosMMAP;
+    std::vector<std::array<std::shared_ptr<CHeightmapIBOMMAP>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
+    
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_callbacks;
     std::vector<std::tuple<CSharedMesh, CSharedQuadTree, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
-    void createVBOs(void);
-    void createIBOs(void);
+    std::string createVBOs(void);
+    std::string createIBOs(void);
     
     CSharedTexture m_heightmapTexture;
     CSharedTexture m_splattingTexture;
@@ -212,7 +252,6 @@ protected:
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
     
     void initContainers(const std::shared_ptr<CHeightmap>& heightmap);
-    void readMMAP(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(ui32 index);
     
