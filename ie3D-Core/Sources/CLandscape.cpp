@@ -69,6 +69,33 @@ E_LANDSCAPE_CHUNK_LOD CLandscape::getLOD(const glm::vec3& point,
     return LOD;
 }
 
+template <class T>
+struct custom_allocator : public std::allocator<T>
+{
+    typedef T value_type;
+    custom_allocator() noexcept {}
+    template <class U> custom_allocator (const custom_allocator<U>&) noexcept {};
+    
+    inline T* allocate(std::size_t size, std::allocator<void>::const_pointer = 0)
+    {
+        std::cout<<"allocate"<<std::endl;
+        return static_cast<T*>(::operator new(size * sizeof(T)));
+    };
+    //inline void deallocate(pointer __p, size_type) _NOEXCEPT
+    //{::operator delete((void*)__p);}
+
+    //T* allocate(std::size_t size) { std::cout<<"allocate"<<std::endl; return static_cast<T*>(::operator new(size * sizeof(T))); }
+    //void deallocate (T* p, std::size_t n) { std::cout<<"deallocate"<<std::endl; ::delete(p); }
+};
+
+template <class T, class U>
+constexpr bool operator== (const custom_allocator<T>&, const custom_allocator<U>&) noexcept
+{return true;}
+
+template <class T, class U>
+constexpr bool operator!= (const custom_allocator<T>&, const custom_allocator<U>&) noexcept
+{return false;}
+
 void CLandscape::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
@@ -92,7 +119,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->getLookAt(), minBound, maxBound);
                     if(m_chunks[index] == nullptr)
                     {
-                        m_chunks[index] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
+                        custom_allocator<CLandscapeChunk> allocator;
+                        m_chunks[index] = std::allocate_shared<CLandscapeChunk, custom_allocator<CLandscapeChunk>>(allocator, m_resourceAccessor, m_renderTechniqueAccessor);
                         m_chunks[index]->setCamera(m_camera);
                         m_chunks[index]->setCameraFrustum(m_cameraFrustum);
                         m_chunks[index]->setInprogressLOD(LOD);

@@ -186,13 +186,28 @@ public:
     CHeightmapIBOMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor) : CHeightmapMMAP(descriptor) { };
     ~CHeightmapIBOMMAP(void) = default;
     
-    inline ui16* getPointer(void) const
+    inline ui16* getSourcePointer(void) const
     {
         ui16* pointer = (ui16* )m_descriptor->pointer();
         assert(pointer != nullptr);
         
         return pointer + m_offset;
     };
+    
+    inline ui16* getOriginPointer(void) const
+    {
+        ui16* pointer = (ui16* )m_descriptor->pointer();
+        assert(pointer != nullptr);
+        
+        return pointer + m_offset + m_size;
+    };
+    
+    inline void updateSourcePointer(void)
+    {
+        ui16* sourcePointer = CHeightmapIBOMMAP::getSourcePointer();
+        ui16* originPointer = CHeightmapIBOMMAP::getOriginPointer();
+        memcpy(sourcePointer, originPointer, m_size * sizeof(ui16));
+    }
 };
 
 class CHeightmapVBOMMAP : public CHeightmapMMAP

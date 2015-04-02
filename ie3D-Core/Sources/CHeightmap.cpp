@@ -1024,9 +1024,12 @@ std::string CHeightmapGenerator::createIBOs(void)
                     }
                 }
                 
-                for(ui32 index = 0; index < indicesCount; ++index)
+                for(ui32 index_01 = 0; index_01 < 2; ++index_01)
                 {
-                    stream.write((char*)&indices[index], sizeof(ui16));
+                    for(ui32 index_02 = 0; index_02 < indicesCount; ++index_02)
+                    {
+                        stream.write((char*)&indices[index_02], sizeof(ui16));
+                    }
                 }
 
                 delete [] indices;
@@ -1034,7 +1037,7 @@ std::string CHeightmapGenerator::createIBOs(void)
                 m_ibosMMAP[i + j * m_chunksNum.x][k] = std::make_shared<CHeightmapIBOMMAP>(m_ibosMMAPDescriptor);
                 m_ibosMMAP[i + j * m_chunksNum.x][k]->setSize(indicesCount);
                 m_ibosMMAP[i + j * m_chunksNum.x][k]->setOffset(indicesWroteToMMAP);
-                indicesWroteToMMAP += indicesCount;
+                indicesWroteToMMAP += indicesCount * 2;
             }
         }
     }
@@ -1352,11 +1355,11 @@ const std::tuple<glm::vec3, glm::vec3> CHeightmapGenerator::getChunkBounds(ui32 
 
 void CHeightmapGenerator::createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD)
 {
-    m_ibosMMAPDescriptor->reallocate();
+    m_ibosMMAP[index][LOD]->updateSourcePointer();
     
     std::shared_ptr<CIndexBuffer> ibo = std::make_shared<CIndexBuffer>(m_ibosMMAP[index][LOD]->getSize(),
                                                                        GL_DYNAMIC_DRAW,
-                                                                       m_ibosMMAP[index][LOD]->getPointer());
+                                                                       m_ibosMMAP[index][LOD]->getSourcePointer());
     ibo->unlock();
     
     std::shared_ptr<CVertexBuffer> vbo = std::make_shared<CVertexBuffer>(m_vbosMMAP[index]->getSize(),
