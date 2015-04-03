@@ -668,9 +668,6 @@ void CHeightmapGenerator::initContainers(const std::shared_ptr<CHeightmap>& heig
     m_executedOperations.clear();
     m_executedOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
     
-    m_canceledOperations.clear();
-    m_canceledOperations.resize(m_chunksNum.x * m_chunksNum.y, nullptr);
-    
     m_chunksBounds.clear();
     m_chunksBounds.resize(m_chunksNum.x * m_chunksNum.y, std::make_tuple(glm::vec3( 4096.0f,  4096.0f,  4096.0f),
                                                                          glm::vec3(-4096.0f, -4096.0f, -4096.0f)));
@@ -1444,31 +1441,25 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     assert(m_executedOperations[index] == nullptr);
     m_executedOperations[index] = completionOperation;
     
-    completionOperation->setCancelBlock([this, index](void) {
+    std::thread::id main_thread_id = std::this_thread::get_id();
+    
+    completionOperation->setCancelBlock([this, index, main_thread_id](void) {
         assert(m_executedOperations[index] != nullptr);
-        m_canceledOperations[index] = m_executedOperations[index];
-        m_executedOperations[index] = nullptr;
+        
+        if(main_thread_id == std::this_thread::get_id())
+        {
+            CHeightmapGenerator::eraseChunkMetadata(index);
+        }
+        else
+        {
+            CSharedThreadOperation eraseOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+            eraseOperation->setExecutionBlock([this, index](void) {
+                CHeightmapGenerator::eraseChunkMetadata(index);
+            });
+            eraseOperation->addToExecutionQueue();
+        }
     });
     completionOperation->addToExecutionQueue();
-}
-
-void CHeightmapGenerator::stopChunkLoading(ui32 i, ui32 j, const std::function<void(void)>& stopLoadingCallback)
-{
-    ui32 index = i + j * m_chunksNum.x;
-    if(m_executedOperations[index] != nullptr)
-    {
-        m_executedOperations[index]->setCancelBlock([this, stopLoadingCallback, index](void) {
-            stopLoadingCallback();
-            assert(m_executedOperations[index] != nullptr);
-            m_canceledOperations[index] = m_executedOperations[index];
-            m_executedOperations[index] = nullptr;
-        });
-        m_executedOperations[index]->cancel();
-    }
-    else
-    {
-        stopLoadingCallback();
-    }
 }
 
 void CHeightmapGenerator::runChunkUnLoading(ui32 i, ui32 j)
@@ -1481,33 +1472,25 @@ void CHeightmapGenerator::runChunkUnLoading(ui32 i, ui32 j)
     }
     else
     {
-        std::get<0>(m_chunksMetadata[index]) = nullptr;
-        std::get<1>(m_chunksMetadata[index]) = nullptr;
-        std::get<2>(m_chunksMetadata[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
-        
-        std::get<0>(m_callbacks[index]) = nullptr;
-        std::get<1>(m_callbacks[index]) = nullptr;
+        CHeightmapGenerator::eraseChunkMetadata(index);
     }
+}
+
+void CHeightmapGenerator::eraseChunkMetadata(ui32 index)
+{
+    std::get<0>(m_chunksMetadata[index]) = nullptr;
+    std::get<1>(m_chunksMetadata[index]) = nullptr;
+    std::get<2>(m_chunksMetadata[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
+    
+    std::get<0>(m_callbacks[index]) = nullptr;
+    std::get<1>(m_callbacks[index]) = nullptr;
+    
+    m_executedOperations[index] = nullptr;
 }
 
 void CHeightmapGenerator::update(void)
 {
-    for(ui32 index = 0; index < m_canceledOperations.size(); ++index)
-    {
-        if(m_canceledOperations.at(index) != nullptr &&
-           (m_canceledOperations.at(index)->isCompleted() ||
-            m_canceledOperations.at(index)->isCanceled()))
-        {
-            std::get<0>(m_chunksMetadata[index]) = nullptr;
-            std::get<1>(m_chunksMetadata[index]) = nullptr;
-            std::get<2>(m_chunksMetadata[index]) = E_LANDSCAPE_CHUNK_LOD_UNKNOWN;
-            
-            std::get<0>(m_callbacks[index]) = nullptr;
-            std::get<1>(m_callbacks[index]) = nullptr;
-            
-            m_canceledOperations.at(index) = nullptr;
-        }
-    }
+
 }
 
 void CHeightmapGenerator::createChunkBound(const glm::ivec2& index,

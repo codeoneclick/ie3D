@@ -21,14 +21,13 @@ private:
     
 protected:
     
-    static CThreadOperationPool* m_sharedInstance;
+    static std::shared_ptr<CThreadOperationPool> m_sharedInstance;
     
     std::array<std::array<std::queue<CSharedThreadOperation>, E_THREAD_OPERATION_QUEUE_MAX>, MAX_THREADS_PER_QUEUE> m_operations;
     
     ui8 m_isRunning;
     std::array<std::thread, MAX_THREADS_PER_QUEUE> m_threads;
     std::mutex m_mutex;
-    std::set<CSharedThreadOperation> m_uniqueOperations;
     
     CSharedThreadOperation nextOperation(ui32 threadId, E_THREAD_OPERATION_QUEUE operationQueue);
     void popOperation(ui32 threadId, E_THREAD_OPERATION_QUEUE operationQueue);
@@ -41,7 +40,7 @@ public:
     CThreadOperationPool(void);
     ~CThreadOperationPool(void);
     
-    static CThreadOperationPool* sharedInstance(void);
+    static std::shared_ptr<CThreadOperationPool> sharedInstance(void);
     
     void addOperation(CSharedThreadOperationRef operation, E_THREAD_OPERATION_QUEUE operationQueue);
     

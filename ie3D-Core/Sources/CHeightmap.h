@@ -262,7 +262,6 @@ protected:
     std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_chunkLODsSizes;
     
     std::vector<CSharedThreadOperation> m_executedOperations;
-    std::vector<CSharedThreadOperation> m_canceledOperations;
     
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
     
@@ -290,6 +289,8 @@ protected:
     static glm::vec3 getClosestPointOnLine(const glm::vec3& a, const glm::vec3& b, const glm::vec3& p);
     static glm::vec3 ortogonalize(const glm::vec3& v1, const glm::vec3& v2);
     
+    void eraseChunkMetadata(ui32 index);
+    
 public:
     
     CHeightmapGenerator(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration);
@@ -311,8 +312,6 @@ public:
     void runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                          const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
                          const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback);
-    
-    void stopChunkLoading(ui32 i, ui32 j, const std::function<void(void)>& stopLoadingCallback);
     void runChunkUnLoading(ui32 i, ui32 j);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;

@@ -8,8 +8,9 @@
 
 #if defined(__IOS__)
 
-#import <UIKit/UIKit.h>
-#import "AppDelegate-iOS.h"
+#include <UIKit/UIKit.h>
+#include "AppDelegate-iOS.h"
+#include "HCommon.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,7 +22,8 @@ int main(int argc, char *argv[])
 
 #elif defined(__OSX__)
 
-#import <Cocoa/Cocoa.h>
+#include <Cocoa/Cocoa.h>
+#include "HCommon.h"
 
 int main(int argc, const char * argv[])
 {

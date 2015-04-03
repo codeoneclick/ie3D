@@ -29,7 +29,7 @@ CGameLoopExecutor::CGameLoopExecutor(void) :
 m_fpsCounter(std::make_shared<CFPSCounter>())
 {
 #if defined(__WIN32__) || defined(__NDK__)
-    
+
 	m_instance = this;
     
 #endif

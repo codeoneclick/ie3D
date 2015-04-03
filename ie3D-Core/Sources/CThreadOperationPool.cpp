@@ -9,13 +9,13 @@
 #include "CThreadOperationPool.h"
 #include "CThreadOperation.h"
 
-CThreadOperationPool* CThreadOperationPool::m_sharedInstance = nullptr;
+std::shared_ptr<CThreadOperationPool> CThreadOperationPool::m_sharedInstance = nullptr;
 
-CThreadOperationPool* CThreadOperationPool::sharedInstance(void)
+std::shared_ptr<CThreadOperationPool> CThreadOperationPool::sharedInstance(void)
 {
     if(m_sharedInstance == nullptr)
     {
-        m_sharedInstance = new CThreadOperationPool();
+        m_sharedInstance = std::make_shared<CThreadOperationPool>();
     }
     return m_sharedInstance;
 }
