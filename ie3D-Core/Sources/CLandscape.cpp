@@ -69,33 +69,6 @@ E_LANDSCAPE_CHUNK_LOD CLandscape::getLOD(const glm::vec3& point,
     return LOD;
 }
 
-template <class T>
-struct custom_allocator : public std::allocator<T>
-{
-    typedef T value_type;
-    custom_allocator() noexcept {}
-    template <class U> custom_allocator (const custom_allocator<U>&) noexcept {};
-    
-    inline T* allocate(std::size_t size, std::allocator<void>::const_pointer = 0)
-    {
-        std::cout<<"allocate"<<std::endl;
-        return static_cast<T*>(::operator new(size * sizeof(T)));
-    };
-    //inline void deallocate(pointer __p, size_type) _NOEXCEPT
-    //{::operator delete((void*)__p);}
-
-    //T* allocate(std::size_t size) { std::cout<<"allocate"<<std::endl; return static_cast<T*>(::operator new(size * sizeof(T))); }
-    //void deallocate (T* p, std::size_t n) { std::cout<<"deallocate"<<std::endl; ::delete(p); }
-};
-
-template <class T, class U>
-constexpr bool operator== (const custom_allocator<T>&, const custom_allocator<U>&) noexcept
-{return true;}
-
-template <class T, class U>
-constexpr bool operator!= (const custom_allocator<T>&, const custom_allocator<U>&) noexcept
-{return false;}
-
 void CLandscape::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
@@ -119,8 +92,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->getLookAt(), minBound, maxBound);
                     if(m_chunks[index] == nullptr)
                     {
-                        custom_allocator<CLandscapeChunk> allocator;
-                        m_chunks[index] = std::allocate_shared<CLandscapeChunk, custom_allocator<CLandscapeChunk>>(allocator, m_resourceAccessor, m_renderTechniqueAccessor);
+                        m_chunks[index] = std::allocate_shared<CLandscapeChunk, CMemoryAllocator<CLandscapeChunk>>(m_allocator, m_resourceAccessor, m_renderTechniqueAccessor);
                         m_chunks[index]->setCamera(m_camera);
                         m_chunks[index]->setCameraFrustum(m_cameraFrustum);
                         m_chunks[index]->setInprogressLOD(LOD);
@@ -280,97 +252,4 @@ glm::vec2 CLandscape::getAngleOnHeightmapSurface(const glm::vec3& position) cons
 {
     assert(m_heightmapGenerator != nullptr);
     return m_heightmapGenerator->getAngleOnHeightmapSurface(position);
-}
-
-void CLandscape::sewSeams(i32 currentIndexX, i32 currentIndexZ)
-{
-    i32 index = currentIndexX + currentIndexZ * m_heightmapGenerator->getNumChunks().x;
-    if((currentIndexZ - 1) >= 0)
-    {
-        CLandscape::sewSeams(m_chunks[index], currentIndexX + (currentIndexZ - 1) * m_heightmapGenerator->getNumChunks().x, E_LANDSCAPE_SEAM_Z_MINUS, E_LANDSCAPE_SEAM_Z_PLUS);
-    }
-    if((currentIndexZ + 1) < m_heightmapGenerator->getNumChunks().y)
-    {
-        CLandscape::sewSeams(m_chunks[index], currentIndexX + (currentIndexZ + 1) * m_heightmapGenerator->getNumChunks().x, E_LANDSCAPE_SEAM_Z_PLUS, E_LANDSCAPE_SEAM_Z_MINUS);
-    }
-    if((currentIndexX - 1) >= 0)
-    {
-        CLandscape::sewSeams(m_chunks[index], (currentIndexX - 1) + currentIndexZ * m_heightmapGenerator->getNumChunks().x, E_LANDSCAPE_SEAM_X_MINUS, E_LANDSCAPE_SEAM_X_PLUS);
-    }
-    if((currentIndexX + 1) < m_heightmapGenerator->getNumChunks().x)
-    {
-        CLandscape::sewSeams(m_chunks[index], (currentIndexX + 1) + currentIndexZ * m_heightmapGenerator->getNumChunks().x, E_LANDSCAPE_SEAM_X_PLUS, E_LANDSCAPE_SEAM_X_MINUS);
-    }
-}
-
-void CLandscape::sewSeams(CSharedLandscapeChunkRef currentChunk, i32 neighborChunkIndex,
-                          E_LANDSCAPE_SEAM currentChunkSeamType, E_LANDSCAPE_SEAM neighborChunkSeamType)
-{
-    if(currentChunk != nullptr &&
-       currentChunk->getCurrentLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
-    {
-        CSharedLandscapeChunk neighborChunk = m_chunks[neighborChunkIndex];
-        if(neighborChunk != nullptr &&
-           neighborChunk->getCurrentLOD() != E_LANDSCAPE_CHUNK_LOD_UNKNOWN)
-        {
-            std::vector<SAttributeVertex> currentChunkVerteces = currentChunk->getSeamVerteces(currentChunkSeamType);
-            std::vector<SAttributeVertex> neighborChunkVerteces = neighborChunk->getSeamVerteces(neighborChunkSeamType);
-            
-            if(currentChunkVerteces.size() > neighborChunkVerteces.size() && currentChunk->getCurrentLOD() != currentChunk->getSeamedLOD(currentChunkSeamType))
-            {
-                currentChunk->setSeamVerteces(neighborChunkVerteces, currentChunkSeamType);
-            }
-            else if(neighborChunkVerteces.size() >= currentChunkVerteces.size() && neighborChunk->getCurrentLOD() != neighborChunk->getSeamedLOD(neighborChunkSeamType))
-            {
-                neighborChunk->setSeamVerteces(currentChunkVerteces, neighborChunkSeamType);
-            }
-        }
-    }
-}
-
-void CLandscape::resetSeams(i32 currentIndexX, i32 currentIndexZ)
-{
-    i32 index = currentIndexX + currentIndexZ * m_heightmapGenerator->getNumChunks().x;
-    CSharedLandscapeChunk currentChunk = m_chunks[index];
-    if(currentChunk != nullptr)
-    {
-        currentChunk->resetSeams();
-    }
-    
-    if((currentIndexZ - 1) >= 0)
-    {
-        ui32 neighborChunkIndex = currentIndexX + (currentIndexZ - 1) * m_heightmapGenerator->getNumChunks().x;
-        CSharedLandscapeChunk neighborChunk = m_chunks[neighborChunkIndex];
-        if(neighborChunk != nullptr)
-        {
-            neighborChunk->resetSeams();
-        }
-    }
-    if((currentIndexZ + 1) < m_heightmapGenerator->getNumChunks().y)
-    {
-        ui32 neighborChunkIndex = currentIndexX + (currentIndexZ + 1) * m_heightmapGenerator->getNumChunks().x;
-        CSharedLandscapeChunk neighborChunk = m_chunks[neighborChunkIndex];
-        if(neighborChunk != nullptr)
-        {
-            neighborChunk->resetSeams();
-        }
-    }
-    if((currentIndexX - 1) >= 0)
-    {
-        ui32 neighborChunkIndex = (currentIndexX - 1) + currentIndexZ * m_heightmapGenerator->getNumChunks().x;
-        CSharedLandscapeChunk neighborChunk = m_chunks[neighborChunkIndex];
-        if(neighborChunk != nullptr)
-        {
-            neighborChunk->resetSeams();
-        }
-    }
-    if((currentIndexX + 1) < m_heightmapGenerator->getNumChunks().x)
-    {
-        ui32 neighborChunkIndex = (currentIndexX + 1) + currentIndexZ * m_heightmapGenerator->getNumChunks().x;
-        CSharedLandscapeChunk neighborChunk = m_chunks[neighborChunkIndex];
-        if(neighborChunk != nullptr)
-        {
-            neighborChunk->resetSeams();
-        }
-    }
 }

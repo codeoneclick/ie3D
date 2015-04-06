@@ -12,6 +12,7 @@
 #include "IGameObject.h"
 #include "HDeclaration.h"
 #include "IEditableLandscape.h"
+#include "CMemoryAllocator.h"
 
 class CLandscape : public IGameObject,
 public IEditableLandscape
@@ -19,6 +20,7 @@ public IEditableLandscape
 private:
 
     f32 m_tillingTexcoord[E_SHADER_SAMPLER_MAX];
+    CMemoryAllocator<CLandscapeChunk> m_allocator;
     
 protected:
 
@@ -40,11 +42,6 @@ protected:
     E_LANDSCAPE_CHUNK_LOD getLOD(const glm::vec3& point,
                                  const glm::vec3& minBound,
                                  const glm::vec3& maxBound);
-    
-    void sewSeams(i32 currentIndexX, i32 currentIndexZ);
-    void sewSeams(CSharedLandscapeChunkRef currentChunk, i32 neighborChunkIndex,
-                  E_LANDSCAPE_SEAM currentChunkSeamType, E_LANDSCAPE_SEAM neighborChunkSeamType);
-    void resetSeams(i32 currentIndexX, i32 currentIndexZ);
     
 public:
 

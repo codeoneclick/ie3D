@@ -22,7 +22,6 @@ private:
     ui32 m_size;
     E_LANDSCAPE_CHUNK_LOD m_currentLOD;
     E_LANDSCAPE_CHUNK_LOD m_inprogressLOD;
-    std::array<E_LANDSCAPE_CHUNK_LOD, E_LANDSCAPE_SEAM_MAX> m_seamedLOD;
     
     ui32 m_numPassedIndexes;
     CSharedQuadTree m_quadTree;
@@ -48,15 +47,10 @@ public:
     
     E_LANDSCAPE_CHUNK_LOD getCurrentLOD(void) const;
     E_LANDSCAPE_CHUNK_LOD getInprogressLOD(void) const;
-    E_LANDSCAPE_CHUNK_LOD getSeamedLOD(E_LANDSCAPE_SEAM seamType) const;
     void setInprogressLOD(E_LANDSCAPE_CHUNK_LOD LOD);
     
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;
-    
-    std::vector<SAttributeVertex> getSeamVerteces(E_LANDSCAPE_SEAM seamType) const;
-    void setSeamVerteces(const std::vector<SAttributeVertex>& verteces, E_LANDSCAPE_SEAM seamType);
-    void resetSeams(void);
 };
 
 #endif

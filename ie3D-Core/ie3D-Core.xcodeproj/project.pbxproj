@@ -230,6 +230,12 @@
 		2173349A19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */; };
 		2173349B19645E2A002B3F90 /* IRenderTechniqueHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */; };
 		2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */; };
+		217448151AD273B10071F4F1 /* CMemoryPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217448131AD273B10071F4F1 /* CMemoryPool.cpp */; };
+		217448161AD273B20071F4F1 /* CMemoryPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217448131AD273B10071F4F1 /* CMemoryPool.cpp */; };
+		217448171AD273B20071F4F1 /* CMemoryPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 217448141AD273B10071F4F1 /* CMemoryPool.h */; };
+		2174481A1AD273CC0071F4F1 /* CMemoryAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217448181AD273CC0071F4F1 /* CMemoryAllocator.cpp */; };
+		2174481B1AD273CC0071F4F1 /* CMemoryAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217448181AD273CC0071F4F1 /* CMemoryAllocator.cpp */; };
+		2174481C1AD273CC0071F4F1 /* CMemoryAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 217448191AD273CC0071F4F1 /* CMemoryAllocator.h */; };
 		2179741A19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
 		2179741B19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
 		2179741C19F534FA00A98630 /* CGlobalLightSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 2179741919F534FA00A98630 /* CGlobalLightSource.h */; };
@@ -635,6 +641,10 @@
 		217334941964425B002B3F90 /* CRenderPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderPipeline.h; path = Sources/CRenderPipeline.h; sourceTree = "<group>"; };
 		2173349819645E2A002B3F90 /* IRenderTechniqueHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderTechniqueHandler.cpp; path = Sources/IRenderTechniqueHandler.cpp; sourceTree = "<group>"; };
 		2173349919645E2A002B3F90 /* IRenderTechniqueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRenderTechniqueHandler.h; path = Sources/IRenderTechniqueHandler.h; sourceTree = "<group>"; };
+		217448131AD273B10071F4F1 /* CMemoryPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMemoryPool.cpp; path = Sources/CMemoryPool.cpp; sourceTree = "<group>"; };
+		217448141AD273B10071F4F1 /* CMemoryPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMemoryPool.h; path = Sources/CMemoryPool.h; sourceTree = "<group>"; };
+		217448181AD273CC0071F4F1 /* CMemoryAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMemoryAllocator.cpp; path = Sources/CMemoryAllocator.cpp; sourceTree = "<group>"; };
+		217448191AD273CC0071F4F1 /* CMemoryAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMemoryAllocator.h; path = Sources/CMemoryAllocator.h; sourceTree = "<group>"; };
 		2179741819F534FA00A98630 /* CGlobalLightSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGlobalLightSource.cpp; path = Sources/CGlobalLightSource.cpp; sourceTree = "<group>"; };
 		2179741919F534FA00A98630 /* CGlobalLightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGlobalLightSource.h; path = Sources/CGlobalLightSource.h; sourceTree = "<group>"; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
@@ -1233,6 +1243,17 @@
 			name = Window;
 			sourceTree = "<group>";
 		};
+		217448121AD273800071F4F1 /* Memory Managment */ = {
+			isa = PBXGroup;
+			children = (
+				217448141AD273B10071F4F1 /* CMemoryPool.h */,
+				217448131AD273B10071F4F1 /* CMemoryPool.cpp */,
+				217448191AD273CC0071F4F1 /* CMemoryAllocator.h */,
+				217448181AD273CC0071F4F1 /* CMemoryAllocator.cpp */,
+			);
+			name = "Memory Managment";
+			sourceTree = "<group>";
+		};
 		2191CE33196EDBEF00CE2813 /* libpng-1.6.9 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1729,6 +1750,7 @@
 		A420817C1733AA6F0004729E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				217448121AD273800071F4F1 /* Memory Managment */,
 				2162094419A20B1A00DECBBC /* ThreadPool Managment */,
 				213B7F351994B39D006F3976 /* Built-in Shaders */,
 				2127E8581935042300D408C9 /* Editable Managment */,
@@ -2151,6 +2173,7 @@
 				21F4F5641AB6E0E90095477F /* type.hpp in Headers */,
 				2173348319644123002B3F90 /* CRenderTechniqueScreenSpace.h in Headers */,
 				21F4F56B1AB6E0E90095477F /* type_mat2x3.hpp in Headers */,
+				2174481C1AD273CC0071F4F1 /* CMemoryAllocator.h in Headers */,
 				21F4F5B91AB6E0E90095477F /* transform.hpp in Headers */,
 				21F4F5BA1AB6E0E90095477F /* transform2.hpp in Headers */,
 				21F4F5591AB6E0E90095477F /* func_packing.hpp in Headers */,
@@ -2202,6 +2225,7 @@
 				21ACE38F1A711F100017A771 /* CComponentTransformation.h in Headers */,
 				21F4F5671AB6E0E90095477F /* type_half.hpp in Headers */,
 				2173349C19645E2A002B3F90 /* IRenderTechniqueHandler.h in Headers */,
+				217448171AD273B20071F4F1 /* CMemoryPool.h in Headers */,
 				21E52B881A90A617005977F1 /* CMeshCommiter_ie3Dmesh.h in Headers */,
 				21F4F5681AB6E0E90095477F /* type_int.hpp in Headers */,
 				21548F5C1AA849F0000AAA1A /* CGeomapmaping.h in Headers */,
@@ -2479,6 +2503,7 @@
 				21C409A6197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */,
 				21208FF21906FB6000FFC8D4 /* CIndexBuffer.cpp in Sources */,
 				21208FF31906FB6000FFC8D4 /* CVertexBuffer.cpp in Sources */,
+				217448161AD273B20071F4F1 /* CMemoryPool.cpp in Sources */,
 				21208FF41906FB6000FFC8D4 /* CMesh.cpp in Sources */,
 				21CB35071A7A683D00819C09 /* CConfigurationLandscape.cpp in Sources */,
 				21208FF51906FB6000FFC8D4 /* CBone.cpp in Sources */,
@@ -2500,6 +2525,7 @@
 				217334911964416D002B3F90 /* IRenderTechniqueAccessor.cpp in Sources */,
 				212090001906FB6000FFC8D4 /* CTextureSerializer_PVR.cpp in Sources */,
 				212090011906FB6000FFC8D4 /* CMeshSerializer_MDL.cpp in Sources */,
+				2174481B1AD273CC0071F4F1 /* CMemoryAllocator.cpp in Sources */,
 				212090021906FB6000FFC8D4 /* CSkeletonSerializer_SK.cpp in Sources */,
 				21E52B871A90A617005977F1 /* CMeshCommiter_ie3Dmesh.cpp in Sources */,
 				2191CE72196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */,
@@ -2653,6 +2679,7 @@
 				21C409A5197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */,
 				213266361906A4AF001C98F7 /* CIndexBuffer.cpp in Sources */,
 				213266371906A4AF001C98F7 /* CVertexBuffer.cpp in Sources */,
+				217448151AD273B10071F4F1 /* CMemoryPool.cpp in Sources */,
 				213266381906A4AF001C98F7 /* CMesh.cpp in Sources */,
 				21CB35061A7A683D00819C09 /* CConfigurationLandscape.cpp in Sources */,
 				213266391906A4AF001C98F7 /* CBone.cpp in Sources */,
@@ -2674,6 +2701,7 @@
 				217334901964416D002B3F90 /* IRenderTechniqueAccessor.cpp in Sources */,
 				213266441906A4AF001C98F7 /* CTextureSerializer_PVR.cpp in Sources */,
 				213266451906A4AF001C98F7 /* CMeshSerializer_MDL.cpp in Sources */,
+				2174481A1AD273CC0071F4F1 /* CMemoryAllocator.cpp in Sources */,
 				213266461906A4AF001C98F7 /* CSkeletonSerializer_SK.cpp in Sources */,
 				21E52B861A90A617005977F1 /* CMeshCommiter_ie3Dmesh.cpp in Sources */,
 				2191CE71196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */,
