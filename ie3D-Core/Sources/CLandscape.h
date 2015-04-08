@@ -20,7 +20,7 @@ public IEditableLandscape
 private:
 
     f32 m_tillingTexcoord[E_SHADER_SAMPLER_MAX];
-    CMemoryAllocator<CLandscapeChunk> m_allocator;
+    static ie::mem_allocator<CLandscapeChunk> m_allocator;
     
 protected:
 
