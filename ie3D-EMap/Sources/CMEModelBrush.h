@@ -22,6 +22,7 @@ private:
     
     std::array<CESharedCustomModel, E_MODEL_BRUSH_ARROW_MAX> m_arrows;
     std::array<CESharedCustomModel, E_MODEL_BRUSH_PLANE_MAX> m_planes;
+    CESharedCustomModel m_sphere;
     
 protected:
     
@@ -33,12 +34,15 @@ protected:
     bool isInCameraFrustum(CSharedFrustumRef cameraFrustum);
     void onDraw(CSharedMaterialRef material);
     
-    CESharedCustomModel createArrowModel(E_MODEL_BRUSH_ARROW arrow,
-                                         SAttributeVertex *mainVertices, ui32 verticesOffset,
-                                         ui16 *mainIndices, ui32 indicesOffset);
-    CESharedCustomModel createPlaneModel(E_MODEL_BRUSH_PLANE plane,
-                                         SAttributeVertex *mainVertices, ui32 verticesOffset,
-                                         ui16 *mainIndices, ui32 indicesOffset);
+    CESharedCustomModel createArrow(E_MODEL_BRUSH_ARROW arrow, const glm::vec2& size, const glm::u8vec4& color,
+                                    SAttributeVertex *vertices, ui32 verticesOffset,
+                                    ui16 *indices, ui32 indicesOffset);
+    CESharedCustomModel createPlane(E_MODEL_BRUSH_PLANE plane, const glm::vec2& size, const glm::u8vec4& color,
+                                    SAttributeVertex *mainVertices, ui32 verticesOffset,
+                                    ui16 *mainIndices, ui32 indicesOffset);
+    
+    CESharedCustomModel createSphere(f32 radius, i32 rings, i32 sectors, SAttributeVertex *mainVertices, ui32 verticesOffset,
+                                     ui16 *mainIndices, ui32 indicesOffset);
     
 public:
     
@@ -62,6 +66,7 @@ public:
     
     const std::array<CESharedCustomModel, E_MODEL_BRUSH_ARROW_MAX>& getArrows(void) const;
     const std::array<CESharedCustomModel, E_MODEL_BRUSH_PLANE_MAX>& getPlanes(void) const;
+    const CESharedCustomModel getSphere(void) const;
 };
 
 

@@ -20,8 +20,6 @@
 #include "CVertexBuffer.h"
 #include "CConfigurationAccessor.h"
 
-ie::mem_allocator<CLandscapeChunk> CLandscape::m_allocator;
-
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor)
@@ -94,7 +92,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->getLookAt(), minBound, maxBound);
                     if(m_chunks[index] == nullptr)
                     {
-                        m_chunks[index] = std::allocate_shared<CLandscapeChunk, ie::mem_allocator<CLandscapeChunk>>(m_allocator, m_resourceAccessor, m_renderTechniqueAccessor);
+                        m_chunks[index] = std::allocate_shared<CLandscapeChunk, ie::mem_allocator<CLandscapeChunk>>(CLandscapeChunk::g_allocator, m_resourceAccessor, m_renderTechniqueAccessor);
                         m_chunks[index]->setCamera(m_camera);
                         m_chunks[index]->setCameraFrustum(m_cameraFrustum);
                         m_chunks[index]->setInprogressLOD(LOD);

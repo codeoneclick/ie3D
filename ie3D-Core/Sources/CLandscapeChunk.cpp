@@ -20,6 +20,8 @@
 #include "CConfigurationAccessor.h"
 #include "CSceneUpdateMgr.h"
 
+const ie::mem_allocator<CLandscapeChunk> CLandscapeChunk::g_allocator = ie::mem_allocator<CLandscapeChunk>();
+
 CLandscapeChunk::CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
                                  ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor),

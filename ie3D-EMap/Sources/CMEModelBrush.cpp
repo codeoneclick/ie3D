@@ -20,7 +20,8 @@ CMEModelBrush::CMEModelBrush(CSharedResourceAccessorRef resourceAccessor,
                              ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_landscape(nullptr),
-m_model(nullptr)
+m_model(nullptr),
+m_sphere(nullptr)
 {
     m_arrows.at(E_MODEL_BRUSH_ARROW_X) = nullptr;
     m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = nullptr;
@@ -50,11 +51,15 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
 {
     CSharedMEConfigurationModelBrush configurationModelBrush = std::static_pointer_cast<CMEConfigurationModelBrush>(configuration);
     
-    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(8 * 6, GL_STATIC_DRAW);
-    SAttributeVertex* vertexData = vertexBuffer->lock();
+    f32 radius = 8.0;
+    i32 rings = 12;
+    i32 sectors = 24;
     
-    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>(36 * 6, GL_STATIC_DRAW);
-    ui16* indexData = indexBuffer->lock();
+    CSharedVertexBuffer vbo = std::make_shared<CVertexBuffer>(8 * 6 + rings * sectors * 3, GL_STATIC_DRAW);
+    SAttributeVertex* vertices = vbo->lock();
+    
+    CSharedIndexBuffer ibo = std::make_shared<CIndexBuffer>(36 * 6 + (rings - 1) * (sectors - 1) * 6, GL_STATIC_DRAW);
+    ui16* indices = ibo->lock();
     
     ui32 verticesOffset = 0;
     ui32 indicesOffset = 0;
@@ -63,41 +68,49 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
     {
         CSharedMEConfigurationBrushElement configurationBrushElement = std::static_pointer_cast<CMEConfigurationBrushElement>(configurationModelBrush->getElementsConfigurations().at(i));
         std::string name = configurationBrushElement->getName();
+        glm::vec2 size = glm::vec2(configurationBrushElement->getWidth(),
+                                   configurationBrushElement->getHeight());
+        glm::u8vec4 color = glm::u8vec4(configurationBrushElement->getColorR(),
+                                        configurationBrushElement->getColorG(),
+                                        configurationBrushElement->getColorB(),
+                                        configurationBrushElement->getColorA());
+        
         if(name == "arrowX")
         {
-             m_arrows.at(E_MODEL_BRUSH_ARROW_X) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_X,
-                                                                                  vertexData, verticesOffset,
-                                                                                  indexData, indicesOffset);
+            
+            m_arrows.at(E_MODEL_BRUSH_ARROW_X) = CMEModelBrush::createArrow(E_MODEL_BRUSH_ARROW_X, size, color,
+                                                                            vertices, verticesOffset,
+                                                                            indices, indicesOffset);
         }
         else if(name == "arrowY")
         {
-            m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Y,
-                                                                                 vertexData, verticesOffset,
-                                                                                 indexData, indicesOffset);
+            m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = CMEModelBrush::createArrow(E_MODEL_BRUSH_ARROW_Y, size, color,
+                                                                            vertices, verticesOffset,
+                                                                            indices, indicesOffset);
         }
         else if(name == "arrowZ")
         {
-            m_arrows.at(E_MODEL_BRUSH_ARROW_Z) = CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW_Z,
-                                                                                 vertexData, verticesOffset,
-                                                                                 indexData, indicesOffset);
+            m_arrows.at(E_MODEL_BRUSH_ARROW_Z) = CMEModelBrush::createArrow(E_MODEL_BRUSH_ARROW_Z, size, color,
+                                                                            vertices, verticesOffset,
+                                                                            indices, indicesOffset);
         }
         else if(name == "planeX")
         {
-            m_planes.at(E_MODEL_BRUSH_PLANE_YZ) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_YZ,
-                                                                                  vertexData, verticesOffset,
-                                                                                  indexData, indicesOffset);
+            m_planes.at(E_MODEL_BRUSH_PLANE_YZ) = CMEModelBrush::createPlane(E_MODEL_BRUSH_PLANE_YZ, size, color,
+                                                                             vertices, verticesOffset,
+                                                                             indices, indicesOffset);
         }
         else if(name == "planeY")
         {
-            m_planes.at(E_MODEL_BRUSH_PLANE_XZ) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_XZ,
-                                                                                  vertexData, verticesOffset,
-                                                                                  indexData, indicesOffset);
+            m_planes.at(E_MODEL_BRUSH_PLANE_XZ) = CMEModelBrush::createPlane(E_MODEL_BRUSH_PLANE_XZ, size, color,
+                                                                             vertices, verticesOffset,
+                                                                             indices, indicesOffset);
         }
         else if(name == "planeZ")
         {
-            m_planes.at(E_MODEL_BRUSH_PLANE_XY) = CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE_XY,
-                                                                                  vertexData, verticesOffset,
-                                                                                  indexData, indicesOffset);
+            m_planes.at(E_MODEL_BRUSH_PLANE_XY) = CMEModelBrush::createPlane(E_MODEL_BRUSH_PLANE_XY, size, color,
+                                                                             vertices, verticesOffset,
+                                                                             indices, indicesOffset);
         }
         else
         {
@@ -107,10 +120,12 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
         indicesOffset += 36;
     }
     
-    vertexBuffer->unlock();
-    indexBuffer->unlock();
+    m_sphere = CMEModelBrush::createSphere(radius, rings, sectors, vertices, verticesOffset, indices, indicesOffset);
     
-    m_mesh = CMesh::constructCustomMesh("gameobject.brush", vertexBuffer, indexBuffer,
+    vbo->unlock();
+    ibo->unlock();
+    
+    m_mesh = CMesh::constructCustomMesh("gameobject.brush", vbo, ibo,
                                         glm::vec3(4096.0), glm::vec3(-4096.0));
     m_mesh->updateBounds();
     
@@ -118,34 +133,30 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow,
-                                                    SAttributeVertex *mainVertexData, ui32 verticesOffset,
-                                                    ui16 *mainIndexData, ui32 indicesOffset)
+CESharedCustomModel CMEModelBrush::createArrow(E_MODEL_BRUSH_ARROW arrow, const glm::vec2& size, const glm::u8vec4& color,
+                                               SAttributeVertex *mainVertexData, ui32 verticesOffset,
+                                               ui16 *mainIndexData, ui32 indicesOffset)
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
-    glm::u8vec4 color = glm::u8vec4(255);
     switch (arrow)
     {
         case E_MODEL_BRUSH_ARROW_X:
         {
-            maxBound = glm::vec3(12.0, 0.5, 0.5);
-            minBound = glm::vec3(0.25, 0.0, 0.0);
-            color = glm::vec4(255, 0, 0, 128);
+            maxBound = glm::vec3(size.y, size.x, size.x);
+            minBound = glm::vec3(size.x, 0.0, 0.0);
         }
             break;
         case E_MODEL_BRUSH_ARROW_Y:
         {
-            maxBound = glm::vec3(0.5, 12.0, 0.5);
+            maxBound = glm::vec3(size.x, size.y, size.x);
             minBound = glm::vec3(0.0, 0.0, 0.0);
-            color = glm::vec4(0, 255, 0, 128);
         }
             break;
         case E_MODEL_BRUSH_ARROW_Z:
         {
-            maxBound = glm::vec3(0.5, 0.5, 12.0);
-            minBound = glm::vec3(0.0, 0.0, 0.25);
-            color = glm::vec4(0, 0, 255, 128);
+            maxBound = glm::vec3(size.x, size.x, size.y);
+            minBound = glm::vec3(0.0, 0.0, size.x);
         }
             break;
             
@@ -243,31 +254,30 @@ CESharedCustomModel CMEModelBrush::createArrowModel(E_MODEL_BRUSH_ARROW arrow,
     return arrowModel;
 }
 
-CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane,
-                                                    SAttributeVertex *mainVertexData, ui32 verticesOffset,
-                                                    ui16 *mainIndexData, ui32 indicesOffset)
+CESharedCustomModel CMEModelBrush::createPlane(E_MODEL_BRUSH_PLANE plane, const glm::vec2& size, const glm::u8vec4& color,
+                                               SAttributeVertex *mainVertexData, ui32 verticesOffset,
+                                               ui16 *mainIndexData, ui32 indicesOffset)
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
-    glm::u8vec4 color = glm::u8vec4(255, 255, 0, 64);
     switch (plane)
     {
         case E_MODEL_BRUSH_PLANE_YZ:
         {
-            maxBound = glm::vec3(8.0, 8.0, 0.25);
-            minBound = glm::vec3(1.0, 1.0, 0.4);
+            maxBound = glm::vec3(size.x, size.y, 0.0);
+            minBound = glm::vec3(1.0, 1.0, 0.0);
         }
             break;
         case E_MODEL_BRUSH_PLANE_XZ:
         {
-            maxBound = glm::vec3(8.0, 0.25, 8.0);
-            minBound = glm::vec3(1.0, 0.4, 1.0);
+            maxBound = glm::vec3(size.x, 0.0, size.y);
+            minBound = glm::vec3(1.0, 0.0, 1.0);
         }
             break;
         case E_MODEL_BRUSH_PLANE_XY:
         {
-            maxBound = glm::vec3(0.25, 8.0, 8.0);
-            minBound = glm::vec3(0.4, 1.0, 1.0);
+            maxBound = glm::vec3(0.0, size.x, size.y);
+            minBound = glm::vec3(0.0, 1.0, 1.0);
         }
             break;
             
@@ -361,8 +371,83 @@ CESharedCustomModel CMEModelBrush::createPlaneModel(E_MODEL_BRUSH_PLANE plane,
     CESharedCustomModel planeModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     planeModel->setCamera(m_camera);
     planeModel->setMesh(planeMesh);
-
+    
     return planeModel;
+}
+
+CESharedCustomModel CMEModelBrush::createSphere(f32 radius, i32 rings, i32 sectors, SAttributeVertex *mainVertices, ui32 verticesOffset,
+                                                ui16 *mainIndices, ui32 indicesOffset)
+{
+    const f32 frings = 1.0 / (rings - 1);
+    const f32 fsectors = 1.0 / (sectors - 1);
+    i32 irings, isectors;
+    
+    CSharedVertexBuffer vbo = std::make_shared<CVertexBuffer>(rings * sectors * 3, GL_STATIC_DRAW);
+    SAttributeVertex* vertices = vbo->lock();
+    
+    ui32 index = 0;
+    for(irings = 0; irings < rings; irings++)
+    {
+        for(isectors = 0; isectors < sectors; isectors++)
+        {
+            glm::vec3 position;
+            position.y = sin( -M_PI_2 + M_PI * irings * frings);
+            position.x = cos(2 * M_PI * isectors * fsectors) * sin( M_PI * irings * frings);
+            position.z = sin(2 * M_PI * isectors * fsectors) * sin( M_PI * irings * frings);
+            
+            glm::vec4 normal = glm::vec4(position, 0.0);
+            
+            position *= radius;
+            
+            glm::vec2 texcoord;
+            texcoord.x = isectors * fsectors;
+            texcoord.y = irings * frings;
+            
+            vertices[index].m_position = position;
+            vertices[index].m_texcoord = glm::packUnorm2x16(texcoord);
+            vertices[index].m_normal = glm::packSnorm4x8(normal);
+            vertices[index].m_color = glm::u8vec4(128, 128, 128, 128);
+            
+            index++;
+        }
+    }
+    vbo->unlock();
+    
+    CSharedIndexBuffer ibo = std::make_shared<CIndexBuffer>((rings - 1) * (sectors - 1) * 6, GL_STATIC_DRAW);
+    ui16* indices = ibo->lock();
+    index = 0;
+    for(irings = 0; irings < rings - 1; irings++)
+    {
+        for(isectors = 0; isectors < sectors - 1; isectors++)
+        {
+            indices[index++] = irings * sectors + isectors;
+            indices[index++] = (irings + 1) * sectors + isectors;
+            indices[index++] = (irings + 1) * sectors + (isectors + 1);
+            
+            indices[index++] = irings * sectors + isectors;
+            indices[index++] = (irings + 1) * sectors + (isectors + 1);
+            indices[index++] = irings * sectors + (isectors + 1);
+        }
+    }
+    ibo->unlock();
+    
+    for(i32 i = 0; i < rings * sectors * 3; ++i)
+    {
+        mainVertices[verticesOffset + i] = vertices[i];
+    }
+    for(i32 i = 0; i < (rings - 1) * (sectors - 1) * 6; ++i)
+    {
+        mainIndices[indicesOffset + i] = indices[i] + verticesOffset;
+    }
+    
+    CSharedMesh mesh = CMesh::constructCustomMesh("sphere", vbo, ibo,
+                                                  glm::vec3(4096.0), glm::vec3(-4096.0));
+    mesh->updateBounds();
+    
+    CESharedCustomModel sphere = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
+    sphere->setCamera(m_camera);
+    sphere->setMesh(mesh);
+    return sphere;
 }
 
 bool CMEModelBrush::isInCameraFrustum(CSharedFrustumRef)
@@ -399,6 +484,7 @@ void CMEModelBrush::setPosition(const glm::vec3 &position)
             assert(iterator != nullptr);
             iterator->setPosition(position);
         }
+        m_sphere->setPosition(position);
     }
 }
 
@@ -417,6 +503,7 @@ void CMEModelBrush::setRotation(const glm::vec3 &rotation)
             assert(iterator != nullptr);
             iterator->setRotation(rotation);
         }
+        m_sphere->setRotation(rotation);
     }
 }
 
@@ -435,6 +522,7 @@ void CMEModelBrush::setScale(const glm::vec3& scale)
             assert(iterator != nullptr);
             iterator->setScale(scale);
         }
+        m_sphere->setScale(scale);
     }
 }
 
@@ -453,6 +541,7 @@ void CMEModelBrush::setCamera(CSharedCameraRef camera)
             assert(iterator != nullptr);
             iterator->setCamera(camera);
         }
+        m_sphere->setCamera(camera);
     }
 }
 
@@ -485,4 +574,9 @@ const std::array<CESharedCustomModel, E_MODEL_BRUSH_ARROW_MAX>&  CMEModelBrush::
 const std::array<CESharedCustomModel, E_MODEL_BRUSH_PLANE_MAX>&  CMEModelBrush::getPlanes(void) const
 {
     return m_planes;
+}
+
+const CESharedCustomModel CMEModelBrush::getSphere(void) const
+{
+    return m_sphere;
 }

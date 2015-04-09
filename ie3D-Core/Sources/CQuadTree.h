@@ -13,6 +13,7 @@
 
 #include "HCommon.h"
 #include "HDeclaration.h"
+#include "CMemoryAllocator.h"
 
 class CQuadTree : public std::enable_shared_from_this<CQuadTree>
 {
@@ -40,18 +41,20 @@ protected:
     
     void createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node);
     
-   
+    
     
     void generateQuadTreeNode(CSharedFrustumRef frustum,
                               CSharedQuadTreeRef root,
                               ui16* indexes,
                               ui32& numIndexes);
-
+    
 public:
     
     CQuadTree(void);
     ~CQuadTree(void);
-
+    
+    static const ie::mem_allocator<CQuadTree> g_allocator;
+    
     void generate(CSharedVertexBufferRef vertexBuffer,
                   CSharedIndexBufferRef indexBuffer,
                   const glm::vec3& maxBound,

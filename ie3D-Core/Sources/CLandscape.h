@@ -12,7 +12,6 @@
 #include "IGameObject.h"
 #include "HDeclaration.h"
 #include "IEditableLandscape.h"
-#include "CMemoryAllocator.h"
 
 class CLandscape : public IGameObject,
 public IEditableLandscape
@@ -20,7 +19,7 @@ public IEditableLandscape
 private:
 
     f32 m_tillingTexcoord[E_SHADER_SAMPLER_MAX];
-    static ie::mem_allocator<CLandscapeChunk> m_allocator;
+    
     
 protected:
 

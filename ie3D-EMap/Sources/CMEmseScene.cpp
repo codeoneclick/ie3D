@@ -206,6 +206,7 @@ std::vector<ISharedGameObject> CMEmseScene::colliders(void)
                 colliders.push_back(it);
             }
         }
+        colliders.push_back(m_gameObjectBrush->getSphere());
     }
     return colliders;
 }
@@ -219,19 +220,29 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
         if(m_gameObjectBrush->isVisible())
         {
             glm::vec3 pressedPoint3D;
-            for(const auto& it : m_gameObjectBrush->getArrows())
+            if(CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &pressedPoint3D))
             {
-                if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point))
+                isIntersectedWithGameObjectBrush = true;
+                m_previousDraggedPoint3D = pressedPoint3D;
+                m_selectedBrushElement =  m_gameObjectBrush->getSphere();
+            }
+            
+            if(!isIntersectedWithGameObjectBrush)
+            {
+                for(const auto& it : m_gameObjectBrush->getArrows())
                 {
-                    isIntersectedWithGameObjectBrush = true;
-                    glm::ray ray;
-                    CCollisionMgr::unproject(point, m_camera->getVMatrix(),
-                                             m_camera->getPMatrix(),
-                                             m_camera->getViewport(),
-                                             &ray);
-                    m_previousDraggedPoint3D = ray.getDirection() * m_camera->getFar();
-                    m_selectedBrushElement = it;
-                    break;
+                    if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point))
+                    {
+                        isIntersectedWithGameObjectBrush = true;
+                        glm::ray ray;
+                        CCollisionMgr::unproject(point, m_camera->getVMatrix(),
+                                                 m_camera->getPMatrix(),
+                                                 m_camera->getViewport(),
+                                                 &ray);
+                        m_previousDraggedPoint3D = ray.getDirection() * m_camera->getFar();
+                        m_selectedBrushElement = it;
+                        break;
+                    }
                 }
             }
             if(!isIntersectedWithGameObjectBrush)
@@ -308,56 +319,70 @@ void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
         {
             ui32 index = 0;
             glm::vec3 draggedPoint3D;
-            for(const auto& it : m_gameObjectBrush->getArrows())
+            
+            if(CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &draggedPoint3D))
             {
-                if(m_selectedBrushElement == it)
+                isIntersectedWithGameObjectBrush = true;
+                glm::vec3 rotation = m_selectedGameObject->getRotation();
+                rotation.y += (point.x - m_previousDraggedPoint2D.x);
+                //rotation.x += (point.y - m_previousDraggedPoint2D.y) * fabsf(m_previousDraggedPoint3D.z - draggedPoint3D.z);
+                //rotation.z += (point.y - m_previousDraggedPoint2D.y) * fabsf(m_previousDraggedPoint3D.x - draggedPoint3D.x);
+                m_selectedGameObject->setRotation(rotation);
+                m_previousDraggedPoint3D = draggedPoint3D;
+            }
+            if(!isIntersectedWithGameObjectBrush)
+            {
+                for(const auto& it : m_gameObjectBrush->getArrows())
                 {
-                    isIntersectedWithGameObjectBrush = true;
-                    glm::ray ray;
-                    CCollisionMgr::unproject(point, m_camera->getVMatrix(),
-                                             m_camera->getPMatrix(),
-                                             m_camera->getViewport(),
-                                             &ray);
-                    draggedPoint3D = ray.getDirection() * m_camera->getFar();
-                    switch (index)
+                    if(m_selectedBrushElement == it)
                     {
-                        case E_MODEL_BRUSH_ARROW_X:
+                        isIntersectedWithGameObjectBrush = true;
+                        glm::ray ray;
+                        CCollisionMgr::unproject(point, m_camera->getVMatrix(),
+                                                 m_camera->getPMatrix(),
+                                                 m_camera->getViewport(),
+                                                 &ray);
+                        draggedPoint3D = ray.getDirection() * m_camera->getFar();
+                        switch (index)
                         {
-                            assert(m_selectedGameObject);
-                            glm::vec3 position = m_selectedGameObject->getPosition();
-                            position.x += (m_previousDraggedPoint3D.x - draggedPoint3D.x) / 50.0;
-                            m_selectedGameObject->setPosition(position);
-                            m_gameObjectBrush->setPosition(position);
+                            case E_MODEL_BRUSH_ARROW_X:
+                            {
+                                assert(m_selectedGameObject);
+                                glm::vec3 position = m_selectedGameObject->getPosition();
+                                position.x += (m_previousDraggedPoint3D.x - draggedPoint3D.x) / 50.0;
+                                m_selectedGameObject->setPosition(position);
+                                m_gameObjectBrush->setPosition(position);
+                            }
+                                break;
+                                
+                            case E_MODEL_BRUSH_ARROW_Y:
+                            {
+                                assert(m_selectedGameObject);
+                                glm::vec3 position = m_selectedGameObject->getPosition();
+                                position.y += (m_previousDraggedPoint3D.y - draggedPoint3D.y) / 50.0;
+                                m_selectedGameObject->setPosition(position);
+                                m_gameObjectBrush->setPosition(position);
+                            }
+                                break;
+                                
+                            case E_MODEL_BRUSH_ARROW_Z:
+                            {
+                                assert(m_selectedGameObject);
+                                glm::vec3 position = m_selectedGameObject->getPosition();
+                                position.z += (m_previousDraggedPoint3D.z - draggedPoint3D.z) / 50.0;
+                                m_selectedGameObject->setPosition(position);
+                                m_gameObjectBrush->setPosition(position);
+                            }
+                                break;
+                                
+                            default:
+                                break;
                         }
-                            break;
-                            
-                        case E_MODEL_BRUSH_ARROW_Y:
-                        {
-                            assert(m_selectedGameObject);
-                            glm::vec3 position = m_selectedGameObject->getPosition();
-                            position.y += (m_previousDraggedPoint3D.y - draggedPoint3D.y) / 50.0;
-                            m_selectedGameObject->setPosition(position);
-                            m_gameObjectBrush->setPosition(position);
-                        }
-                            break;
-                            
-                        case E_MODEL_BRUSH_ARROW_Z:
-                        {
-                            assert(m_selectedGameObject);
-                            glm::vec3 position = m_selectedGameObject->getPosition();
-                            position.z += (m_previousDraggedPoint3D.z - draggedPoint3D.z) / 50.0;
-                            m_selectedGameObject->setPosition(position);
-                            m_gameObjectBrush->setPosition(position);
-                        }
-                            break;
-                            
-                        default:
-                            break;
+                        m_previousDraggedPoint3D = draggedPoint3D;
+                        break;
                     }
-                    m_previousDraggedPoint3D = draggedPoint3D;
-                    break;
+                    index++;
                 }
-                index++;
             }
             if(!isIntersectedWithGameObjectBrush)
             {

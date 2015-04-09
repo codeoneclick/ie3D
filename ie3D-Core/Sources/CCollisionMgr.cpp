@@ -175,9 +175,9 @@ bool CCollisionMgr::isGameObjectBoundIntersected(CSharedCameraRef camera,
                              camera->getViewport(),
                              &ray);
     
-    glm::vec4 vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMinBound(), 1.0);
+    glm::vec4 vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMinBound(), 0.0);
     glm::vec3 minBound = glm::vec3(vector.x, vector.y, vector.z);
-    vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMaxBound(), 1.0);
+    vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMaxBound(), 0.0);
     glm::vec3 maxBound = glm::vec3(vector.x, vector.y, vector.z);
     
     return glm::intersect(ray,

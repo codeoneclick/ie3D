@@ -76,7 +76,7 @@ namespace ie
             m_blocks->m_next = nullptr;
             m_blocks->m_free = 1;
             m_blocks->m_size = m_size - sizeof(mem_block);
-            std::cout<<"[mem pool] -> grow. blocks count: "<<m_memory.size()<<", block size: "<<static_cast<f32>(m_size) / 1024.0<<"kb"<<"[ "<<static_cast<f32>(m_size) / (1024.0 * 1024.0)<<"mb ]"<<std::endl;
+            std::cout<<"[mem pool] -> init. blocks count: "<<m_memory.size()<<", block size: "<<static_cast<f32>(m_size) / 1024.0<<"kb"<<"[ "<<static_cast<f32>(m_size) / (1024.0 * 1024.0)<<"mb ]"<<std::endl;
         };
         
         ~mem_pool(void)

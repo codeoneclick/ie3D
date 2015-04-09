@@ -12,6 +12,7 @@
 #include "IGameObject.h"
 #include "HDeclaration.h"
 #include "HEnums.h"
+#include "CMemoryAllocator.h"
 
 class CLandscapeChunk : public IGameObject
 {
@@ -44,6 +45,8 @@ public:
     CLandscapeChunk(CSharedResourceAccessorRef resourceAccessor,
                     ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CLandscapeChunk(void);
+    
+    static const ie::mem_allocator<CLandscapeChunk> g_allocator;
     
     E_LANDSCAPE_CHUNK_LOD getCurrentLOD(void) const;
     E_LANDSCAPE_CHUNK_LOD getInprogressLOD(void) const;
