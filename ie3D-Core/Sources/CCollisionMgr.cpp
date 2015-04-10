@@ -164,7 +164,9 @@ bool CCollisionMgr::isTrianglesIntersected(CSharedCameraRef camera,
 
 bool CCollisionMgr::isGameObjectBoundIntersected(CSharedCameraRef camera,
                                                  ISharedGameObjectRef gameObject,
-                                                 const glm::ivec2& point)
+                                                 const glm::ivec2& point,
+                                                 bool isIncludeTransformation,
+                                                 bool isUpdateTransformation)
 {
     assert(camera != nullptr);
     assert(gameObject != nullptr);
@@ -175,10 +177,30 @@ bool CCollisionMgr::isGameObjectBoundIntersected(CSharedCameraRef camera,
                              camera->getViewport(),
                              &ray);
     
-    glm::vec4 vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMinBound(), 0.0);
-    glm::vec3 minBound = glm::vec3(vector.x, vector.y, vector.z);
-    vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMaxBound(), 0.0);
-    glm::vec3 maxBound = glm::vec3(vector.x, vector.y, vector.z);
+    glm::vec3 minBound;
+    glm::vec3 maxBound;
+    
+    if(isIncludeTransformation)
+    {
+        if(isUpdateTransformation)
+        {
+            std::tuple<glm::vec3, glm::vec3> bounds = gameObject->getBounds(gameObject->getMMatrix());
+            minBound = std::get<0>(bounds);
+            maxBound = std::get<1>(bounds);
+        }
+        else
+        {
+            glm::vec4 vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMinBound(), 1.0);
+            minBound = glm::vec3(vector.x, vector.y, vector.z);
+            vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMaxBound(), 1.0);
+            maxBound = glm::vec3(vector.x, vector.y, vector.z);
+        }
+    }
+    else
+    {
+        minBound = gameObject->getMinBound();
+        maxBound = gameObject->getMaxBound();
+    }
     
     return glm::intersect(ray,
                           minBound,
@@ -188,7 +210,9 @@ bool CCollisionMgr::isGameObjectBoundIntersected(CSharedCameraRef camera,
 bool CCollisionMgr::isGameObjectIntersected(CSharedCameraRef camera,
                                             ISharedGameObjectRef gameObject,
                                             const glm::ivec2& point,
-                                            glm::vec3* intersectedPoint)
+                                            glm::vec3* intersectedPoint,
+                                            bool isIncludeTransformation,
+                                            bool isUpdateTransformation)
 {
     assert(camera != nullptr);
     assert(gameObject != nullptr);
@@ -199,11 +223,31 @@ bool CCollisionMgr::isGameObjectIntersected(CSharedCameraRef camera,
                              camera->getViewport(),
                              &ray);
     
-    glm::vec4 vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMinBound(), 1.0);
-    glm::vec3 minBound = glm::vec3(vector.x, vector.y, vector.z);
-    vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMaxBound(), 1.0);
-    glm::vec3 maxBound = glm::vec3(vector.x, vector.y, vector.z);
-
+    glm::vec3 minBound;
+    glm::vec3 maxBound;
+    
+    if(isIncludeTransformation)
+    {
+        if(isUpdateTransformation)
+        {
+            std::tuple<glm::vec3, glm::vec3> bounds = gameObject->getBounds(gameObject->getMMatrix());
+            minBound = std::get<0>(bounds);
+            maxBound = std::get<1>(bounds);
+        }
+        else
+        {
+            glm::vec4 vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMinBound(), 1.0);
+            minBound = glm::vec3(vector.x, vector.y, vector.z);
+            vector = gameObject->getMMatrix() * glm::vec4(gameObject->getMaxBound(), 1.0);
+            maxBound = glm::vec3(vector.x, vector.y, vector.z);
+        }
+    }
+    else
+    {
+        minBound = gameObject->getMinBound();
+        maxBound = gameObject->getMaxBound();
+    }
+    
     if(!glm::intersect(ray,
                        minBound,
                        maxBound))

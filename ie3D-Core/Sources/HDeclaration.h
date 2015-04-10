@@ -36,9 +36,9 @@ class CResourceLoader;
 typedef std::shared_ptr<CResourceLoader> CSharedResourceLoader;
 typedef const CSharedResourceLoader& CSharedResourceLoaderRef;
 
-class CMeshData;
-typedef std::shared_ptr<CMeshData> CSharedMeshData;
-typedef const CSharedMeshData& CSharedMeshDataRef;
+class CMeshMetadata;
+typedef std::shared_ptr<CMeshMetadata> CSharedMeshMetadata;
+typedef const CSharedMeshMetadata& CSharedMeshMetadataRef;
 
 class CFrameData;
 typedef std::shared_ptr<CFrameData> CSharedFrameData;

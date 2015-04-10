@@ -239,6 +239,9 @@
 		2179741A19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
 		2179741B19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
 		2179741C19F534FA00A98630 /* CGlobalLightSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 2179741919F534FA00A98630 /* CGlobalLightSource.h */; };
+		217E55DB1AD7EB7B00F1DCBD /* CMeshExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */; };
+		217E55DC1AD7EB7B00F1DCBD /* CMeshExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */; };
+		217E55DD1AD7EB7B00F1DCBD /* CMeshExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 217E55DA1AD7EB7B00F1DCBD /* CMeshExtension.h */; };
 		2191CE4A196EDBEF00CE2813 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE34196EDBEF00CE2813 /* png.c */; };
 		2191CE4B196EDBEF00CE2813 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE34196EDBEF00CE2813 /* png.c */; };
 		2191CE4C196EDBEF00CE2813 /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE35196EDBEF00CE2813 /* png.h */; };
@@ -650,6 +653,8 @@
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
 		217BB29E1815A48700DB8ECC /* CQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuad.h; path = Sources/CQuad.h; sourceTree = "<group>"; };
 		217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameLoopExecutor.cpp; path = Sources/CGameLoopExecutor.cpp; sourceTree = "<group>"; };
+		217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshExtension.cpp; path = Sources/CMeshExtension.cpp; sourceTree = "<group>"; };
+		217E55DA1AD7EB7B00F1DCBD /* CMeshExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshExtension.h; path = Sources/CMeshExtension.h; sourceTree = "<group>"; };
 		21853415181EFC6200315CBB /* libie3DCore-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DCore-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2191CE34196EDBEF00CE2813 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
 		2191CE35196EDBEF00CE2813 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
@@ -1987,6 +1992,8 @@
 				2133A7E81A9F2F7D00188ADA /* CVertexArrayBuffer.cpp */,
 				210EFD0D175266EC00DDB182 /* CMesh.h */,
 				210EFD0C175266EC00DDB182 /* CMesh.cpp */,
+				217E55DA1AD7EB7B00F1DCBD /* CMeshExtension.h */,
+				217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */,
 				A42FF50F17A1508200C0B419 /* CBone.h */,
 				A42FF50E17A1508200C0B419 /* CBone.cpp */,
 				A46A3182174640BD0044643E /* CMaterial.h */,
@@ -2121,6 +2128,7 @@
 				21E52B831A90A42B005977F1 /* CMeshSerializer_ie3Dmesh.h in Headers */,
 				21B0BA0C1A82AA72001CE9A0 /* CPerlinNoise.h in Headers */,
 				2191CE73196EDCDE00CE2813 /* CTextureSerializer_PNG.h in Headers */,
+				217E55DD1AD7EB7B00F1DCBD /* CMeshExtension.h in Headers */,
 				21A56D291A79090600C8F362 /* CConfigurationWSTechnique.h in Headers */,
 				21548F611AA84C42000AAA1A /* CVBO.h in Headers */,
 				2191CE4E196EDBEF00CE2813 /* pngdebug.h in Headers */,
@@ -2405,6 +2413,7 @@
 				2191CEB0196EE95100CE2813 /* inflate.c in Sources */,
 				2173347D19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				21208FA81906FB5F00FFC8D4 /* COGLWindow_ios.cpp in Sources */,
+				217E55DC1AD7EB7B00F1DCBD /* CMeshExtension.cpp in Sources */,
 				2191CEB3196EE95100CE2813 /* inftrees.c in Sources */,
 				2191CE52196EDBEF00CE2813 /* pngget.c in Sources */,
 				2173348C19644157002B3F90 /* IRenderTechniqueImporter.cpp in Sources */,
@@ -2581,6 +2590,7 @@
 				2191CEAF196EE95100CE2813 /* inflate.c in Sources */,
 				2173347C19644107002B3F90 /* CRenderTechniqueMain.cpp in Sources */,
 				213265EC1906A4AF001C98F7 /* COGLWindow_ios.cpp in Sources */,
+				217E55DB1AD7EB7B00F1DCBD /* CMeshExtension.cpp in Sources */,
 				2191CEB2196EE95100CE2813 /* inftrees.c in Sources */,
 				2191CE51196EDBEF00CE2813 /* pngget.c in Sources */,
 				2173348B19644157002B3F90 /* IRenderTechniqueImporter.cpp in Sources */,

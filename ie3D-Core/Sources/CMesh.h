@@ -14,46 +14,37 @@
 
 extern const ui32 kMaxBones;
 
-class CMeshData final : public IResourceData
+class CMeshMetadata final : public IResourceData
 {
 private:
     
 protected:
     
-    SVertexData* m_vertexData;
-    ui16* m_indexData;
+    SVertexData* m_vertices;
+    ui16* m_indices;
     
     ui32 m_numVertices;
     ui32 m_numIndices;
     
-    glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
+    glm::vec3 m_maxBound;
     
 public:
     
-    CMeshData(SVertexData* vertexData,
-              ui16* indexData,
-              ui32 numVertices,
-              ui32 numIndices,
-              const glm::vec3& maxBound,
-              const glm::vec3& minBound);
+    CMeshMetadata(SVertexData* vertices, ui16* indices,
+                  ui32 numVertices, ui32 numIndices,
+                  const glm::vec3& minBound, const glm::vec3& maxBound);
     
-    ~CMeshData(void);
+    ~CMeshMetadata(void);
     
-    const SVertexData* getVertexData(void) const;
-    const ui16* getIndexData(void) const;
+    const SVertexData* getVertices(void) const;
+    const ui16* getIndices(void) const;
     
     ui32 getNumVertices(void) const;
     ui32 getNumIndices(void) const;
     
-    static glm::vec3 calculateMaxBound(const glm::vec3& point_01, const glm::vec3& point_02);
-    static glm::vec3 calculateMinBound(const glm::vec3& point_01, const glm::vec3& point_02);
-    
-    const glm::vec3& getMaxBound(void) const;
-    const glm::vec3& getMinBound(void) const;
-    void updateBounds(SAttributeVertex *vertices, ui16 *indices, ui32 indicesCount);
-    
-    void removeData(void);
+    const glm::vec3 getMinBound(void) const;
+    const glm::vec3 getMaxBound(void) const;
 };
 
 class CSkeletonData final : public IResourceData
@@ -84,14 +75,17 @@ private:
     
 protected:
     
-    CSharedMeshData m_meshData;
+    CSharedMeshMetadata m_meshMetadata;
     CSharedSkeletonData m_skeletonData;
     CSharedSequenceData m_bindposeData;
     
-    CSharedVertexBuffer m_vertexBuffer;
-    CSharedIndexBuffer m_indexBuffer;
+    CSharedVertexBuffer m_vbo;
+    CSharedIndexBuffer m_ibo;
     
     std::unordered_map<std::string, CSharedVertexArrayBuffer> m_VAOstates;
+    
+    glm::vec3 m_maxBound;
+    glm::vec3 m_minBound;
     
     void onResourceDataSerializationFinished(ISharedResourceDataRef resourceData);
     
@@ -101,25 +95,33 @@ public:
     
     CMesh(const std::string& guid);
     
-    static CSharedMesh constructCustomMesh(const std::string& guid,
-                                           CSharedVertexBufferRef vertexBuffer,
-                                           CSharedIndexBufferRef indexBuffer,
-                                           const glm::vec3& maxBound,
-                                           const glm::vec3& minBound);
+    static CSharedMesh construct(const std::string& guid,
+                                 CSharedVertexBufferRef vbo,
+                                 CSharedIndexBufferRef ibo,
+                                 const glm::vec3& maxBound,
+                                 const glm::vec3& minBound);
+    
+    static CSharedMesh construct(const std::string& guid,
+                                 CSharedVertexBufferRef vbo,
+                                 CSharedIndexBufferRef ibo);
     ~CMesh(void);
     
     CSharedVertexBuffer getVertexBuffer(void) const;
     CSharedIndexBuffer getIndexBuffer(void) const;
     
-    const SVertexData* getVertexData(void) const;
-    const ui16* getIndexData(void) const;
+    const SVertexData* getRawVertices(void) const;
+    const ui16* getRawIndices(void) const;
     
-    ui32 getNumVertices(void) const;
-    ui32 getNumIndices(void) const;
+    ui32 getNumRawVertices(void) const;
+    ui32 getNumRawIndices(void) const;
     
-    const glm::vec3 getMaxBound(void) const;
     const glm::vec3 getMinBound(void) const;
-    void updateBounds(void);
+    const glm::vec3 getMaxBound(void) const;
+    const std::tuple<glm::vec3, glm::vec3> getBounds(void) const;
+    
+    const glm::vec3 getMinBound(const glm::mat4& matrix) const;
+    const glm::vec3 getMaxBound(const glm::mat4& matrix) const;
+    const std::tuple<glm::vec3, glm::vec3> getBounds(const glm::mat4& matrix) const;
     
     const CSharedSkeletonData getSkeletonData(void) const;
     const CSharedSequenceData getBindposeData(void) const;

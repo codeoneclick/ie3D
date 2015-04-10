@@ -220,7 +220,7 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
         if(m_gameObjectBrush->isVisible())
         {
             glm::vec3 pressedPoint3D;
-            if(CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &pressedPoint3D))
+            if(CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &pressedPoint3D, true, true))
             {
                 isIntersectedWithGameObjectBrush = true;
                 m_previousDraggedPoint3D = pressedPoint3D;
@@ -231,7 +231,7 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
             {
                 for(const auto& it : m_gameObjectBrush->getArrows())
                 {
-                    if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point))
+                    if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point, true, true))
                     {
                         isIntersectedWithGameObjectBrush = true;
                         glm::ray ray;
@@ -249,10 +249,10 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
             {
                 for(const auto& it : m_gameObjectBrush->getPlanes())
                 {
-                    if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point))
+                    if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point, true, true))
                     {
                         isIntersectedWithGameObjectBrush = true;
-                        CCollisionMgr::isGameObjectIntersected(m_camera, it, point, &pressedPoint3D);
+                        CCollisionMgr::isGameObjectIntersected(m_camera, it, point, &pressedPoint3D, true, true);
                         m_previousDraggedPoint3D = pressedPoint3D;
                         m_selectedBrushElement = it;
                         break;
@@ -267,7 +267,7 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
             m_selectedBrushElement = nullptr;
             for(const auto& it : m_models)
             {
-                if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point))
+                if(CCollisionMgr::isGameObjectBoundIntersected(m_camera, it, point, true, true))
                 {
                     m_selectedGameObject = it;
                 }
@@ -292,7 +292,7 @@ void CMEmseScene::onGestureRecognizerMoved(const glm::ivec2& point)
     index = 0;
     for(const auto& iterator : m_landscape->getChunks())
     {
-        if(iterator != nullptr && CCollisionMgr::isGameObjectIntersected(m_camera, iterator, point, &position))
+        if(iterator != nullptr && CCollisionMgr::isGameObjectIntersected(m_camera, iterator, point, &position, false))
         {
             assert(m_landscapeBrush != nullptr);
             m_landscapeBrush->setPosition(position);
@@ -320,13 +320,14 @@ void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
             ui32 index = 0;
             glm::vec3 draggedPoint3D;
             
-            if(CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &draggedPoint3D))
+            if(CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &draggedPoint3D, true, true))
             {
                 isIntersectedWithGameObjectBrush = true;
                 glm::vec3 rotation = m_selectedGameObject->getRotation();
                 rotation.y += (point.x - m_previousDraggedPoint2D.x);
-                //rotation.x += (point.y - m_previousDraggedPoint2D.y) * fabsf(m_previousDraggedPoint3D.z - draggedPoint3D.z);
-                //rotation.z += (point.y - m_previousDraggedPoint2D.y) * fabsf(m_previousDraggedPoint3D.x - draggedPoint3D.x);
+                glm::vec3 direction = glm::normalize(m_selectedGameObject->getPosition() - m_camera->getPosition());
+                rotation.x += (point.y - m_previousDraggedPoint2D.y) * -direction.z;
+                rotation.z += (point.y - m_previousDraggedPoint2D.y) * direction.x;
                 m_selectedGameObject->setRotation(rotation);
                 m_previousDraggedPoint3D = draggedPoint3D;
             }
@@ -389,7 +390,7 @@ void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
                 index = 0;
                 for(const auto& it : m_gameObjectBrush->getPlanes())
                 {
-                    if(CCollisionMgr::isGameObjectIntersected(m_camera, it, point, &draggedPoint3D))
+                    if(CCollisionMgr::isGameObjectIntersected(m_camera, it, point, &draggedPoint3D, true, true))
                     {
                         isIntersectedWithGameObjectBrush = true;
                         switch (index)

@@ -15,6 +15,7 @@
 #include "CIndexBuffer.h"
 #include "CECustomModel.h"
 #include "CMEConfigurationAccessor.h"
+#include "CMeshExtension.h"
 
 CMEModelBrush::CMEModelBrush(CSharedResourceAccessorRef resourceAccessor,
                              ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
@@ -77,7 +78,6 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
         
         if(name == "arrowX")
         {
-            
             m_arrows.at(E_MODEL_BRUSH_ARROW_X) = CMEModelBrush::createArrow(E_MODEL_BRUSH_ARROW_X, size, color,
                                                                             vertices, verticesOffset,
                                                                             indices, indicesOffset);
@@ -125,17 +125,15 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
     vbo->unlock();
     ibo->unlock();
     
-    m_mesh = CMesh::constructCustomMesh("gameobject.brush", vbo, ibo,
-                                        glm::vec3(4096.0), glm::vec3(-4096.0));
-    m_mesh->updateBounds();
+    m_mesh = CMesh::construct("gameobject.brush", vbo, ibo);
     
     IGameObject::onConfigurationLoaded(configuration, success);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
 CESharedCustomModel CMEModelBrush::createArrow(E_MODEL_BRUSH_ARROW arrow, const glm::vec2& size, const glm::u8vec4& color,
-                                               SAttributeVertex *mainVertexData, ui32 verticesOffset,
-                                               ui16 *mainIndexData, ui32 indicesOffset)
+                                               SAttributeVertex *mainVertices, ui32 verticesOffset,
+                                               ui16 *mainIndices, ui32 indicesOffset)
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
@@ -167,96 +165,28 @@ CESharedCustomModel CMEModelBrush::createArrow(E_MODEL_BRUSH_ARROW arrow, const 
             break;
     }
     
-    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(8, GL_STATIC_DRAW);
-    SAttributeVertex* vertexData = vertexBuffer->lock();
-    
-    vertexData[0].m_position = glm::vec3(minBound.x, minBound.y, maxBound.z);
-    vertexData[1].m_position = glm::vec3(maxBound.x, minBound.y, maxBound.z);
-    vertexData[2].m_position = glm::vec3(maxBound.x, maxBound.y, maxBound.z);
-    vertexData[3].m_position = glm::vec3(minBound.x, maxBound.y, maxBound.z);
-    
-    vertexData[4].m_position = glm::vec3(minBound.x, minBound.y, minBound.z);
-    vertexData[5].m_position = glm::vec3(maxBound.x, minBound.y, minBound.z);
-    vertexData[6].m_position = glm::vec3(maxBound.x, maxBound.y, minBound.z);
-    vertexData[7].m_position = glm::vec3(minBound.x, maxBound.y, minBound.z);
+    CSharedMesh mesh = CMeshExtension::createBox(minBound, maxBound, color);
+    SAttributeVertex *vertices = mesh->getVertexBuffer()->lock();
+    ui16 *indices = mesh->getIndexBuffer()->lock();
     
     for(ui32 i = 0; i < 8; ++i)
     {
-        vertexData[i].m_color = color;
-    }
-    
-    vertexBuffer->unlock();
-    
-    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>(36, GL_STATIC_DRAW);
-    ui16* indexData = indexBuffer->lock();
-    
-    indexData[0] = 0;
-    indexData[1] = 1;
-    indexData[2] = 2;
-    indexData[3] = 2;
-    indexData[4] = 3;
-    indexData[5] = 0;
-    
-    indexData[6] = 3;
-    indexData[7] = 2;
-    indexData[8] = 6;
-    indexData[9] = 6;
-    indexData[10] = 7;
-    indexData[11] = 3;
-    
-    indexData[12] = 7;
-    indexData[13] = 6;
-    indexData[14] = 5;
-    indexData[15] = 5;
-    indexData[16] = 4;
-    indexData[17] = 7;
-    
-    indexData[18] = 4;
-    indexData[19] = 5;
-    indexData[20] = 1;
-    indexData[21] = 1;
-    indexData[22] = 0;
-    indexData[23] = 4;
-    
-    indexData[24] = 4;
-    indexData[25] = 0;
-    indexData[26] = 3;
-    indexData[27] = 3;
-    indexData[28] = 7;
-    indexData[29] = 4;
-    
-    indexData[30] = 1;
-    indexData[31] = 5;
-    indexData[32] = 6;
-    indexData[33] = 6;
-    indexData[34] = 2;
-    indexData[35] = 1;
-    
-    indexBuffer->unlock();
-    
-    for(ui32 i = 0; i < 8; ++i)
-    {
-        mainVertexData[verticesOffset + i] = vertexData[i];
+        mainVertices[verticesOffset + i] = vertices[i];
     }
     for(ui32 i = 0; i < 36; ++i)
     {
-        mainIndexData[indicesOffset + i] = indexData[i] + verticesOffset;
+        mainIndices[indicesOffset + i] = indices[i] + verticesOffset;
     }
     
-    CSharedMesh arrowMesh = CMesh::constructCustomMesh("arrow", vertexBuffer, indexBuffer,
-                                                       glm::vec3(4096.0), glm::vec3(-4096.0));
-    arrowMesh->updateBounds();
-    
-    CESharedCustomModel arrowModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
-    arrowModel->setCamera(m_camera);
-    arrowModel->setMesh(arrowMesh);
-    
-    return arrowModel;
+    CESharedCustomModel arrowM = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
+    arrowM->setCamera(m_camera);
+    arrowM->setMesh(mesh);
+    return arrowM;
 }
 
 CESharedCustomModel CMEModelBrush::createPlane(E_MODEL_BRUSH_PLANE plane, const glm::vec2& size, const glm::u8vec4& color,
-                                               SAttributeVertex *mainVertexData, ui32 verticesOffset,
-                                               ui16 *mainIndexData, ui32 indicesOffset)
+                                               SAttributeVertex *mainVertices, ui32 verticesOffset,
+                                               ui16 *mainIndices, ui32 indicesOffset)
 {
     glm::vec3 maxBound = glm::vec3(0.0);
     glm::vec3 minBound = glm::vec3(0.0);
@@ -288,148 +218,33 @@ CESharedCustomModel CMEModelBrush::createPlane(E_MODEL_BRUSH_PLANE plane, const 
             break;
     }
     
-    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(8, GL_STATIC_DRAW);
-    SAttributeVertex* vertexData = vertexBuffer->lock();
-    
-    vertexData[0].m_position = glm::vec3(minBound.x, minBound.y, maxBound.z);
-    vertexData[1].m_position = glm::vec3(maxBound.x, minBound.y, maxBound.z);
-    vertexData[2].m_position = glm::vec3(maxBound.x, maxBound.y, maxBound.z);
-    vertexData[3].m_position = glm::vec3(minBound.x, maxBound.y, maxBound.z);
-    
-    vertexData[4].m_position = glm::vec3(minBound.x, minBound.y, minBound.z);
-    vertexData[5].m_position = glm::vec3(maxBound.x, minBound.y, minBound.z);
-    vertexData[6].m_position = glm::vec3(maxBound.x, maxBound.y, minBound.z);
-    vertexData[7].m_position = glm::vec3(minBound.x, maxBound.y, minBound.z);
+    CSharedMesh mesh = CMeshExtension::createBox(minBound, maxBound, color);
+    SAttributeVertex *vertices = mesh->getVertexBuffer()->lock();
+    ui16 *indices = mesh->getIndexBuffer()->lock();
     
     for(ui32 i = 0; i < 8; ++i)
     {
-        vertexData[i].m_color = color;
-    }
-    
-    vertexBuffer->unlock();
-    
-    CSharedIndexBuffer indexBuffer = std::make_shared<CIndexBuffer>(36, GL_STATIC_DRAW);
-    ui16* indexData = indexBuffer->lock();
-    
-    indexData[0] = 0;
-    indexData[1] = 1;
-    indexData[2] = 2;
-    indexData[3] = 2;
-    indexData[4] = 3;
-    indexData[5] = 0;
-    
-    indexData[6] = 3;
-    indexData[7] = 2;
-    indexData[8] = 6;
-    indexData[9] = 6;
-    indexData[10] = 7;
-    indexData[11] = 3;
-    
-    indexData[12] = 7;
-    indexData[13] = 6;
-    indexData[14] = 5;
-    indexData[15] = 5;
-    indexData[16] = 4;
-    indexData[17] = 7;
-    
-    indexData[18] = 4;
-    indexData[19] = 5;
-    indexData[20] = 1;
-    indexData[21] = 1;
-    indexData[22] = 0;
-    indexData[23] = 4;
-    
-    indexData[24] = 4;
-    indexData[25] = 0;
-    indexData[26] = 3;
-    indexData[27] = 3;
-    indexData[28] = 7;
-    indexData[29] = 4;
-    
-    indexData[30] = 1;
-    indexData[31] = 5;
-    indexData[32] = 6;
-    indexData[33] = 6;
-    indexData[34] = 2;
-    indexData[35] = 1;
-    
-    indexBuffer->unlock();
-    
-    for(ui32 i = 0; i < 8; ++i)
-    {
-        mainVertexData[verticesOffset + i] = vertexData[i];
+        mainVertices[verticesOffset + i] = vertices[i];
     }
     for(ui32 i = 0; i < 36; ++i)
     {
-        mainIndexData[indicesOffset + i] = indexData[i] + verticesOffset;
+        mainIndices[indicesOffset + i] = indices[i] + verticesOffset;
     }
     
-    CSharedMesh planeMesh = CMesh::constructCustomMesh("plane", vertexBuffer, indexBuffer,
-                                                       glm::vec3(4096.0), glm::vec3(-4096.0));
-    planeMesh->updateBounds();
-    
-    CESharedCustomModel planeModel = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
-    planeModel->setCamera(m_camera);
-    planeModel->setMesh(planeMesh);
-    
-    return planeModel;
+    CESharedCustomModel planeM = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
+    planeM->setCamera(m_camera);
+    planeM->setMesh(mesh);
+
+    return planeM;
 }
 
-CESharedCustomModel CMEModelBrush::createSphere(f32 radius, i32 rings, i32 sectors, SAttributeVertex *mainVertices, ui32 verticesOffset,
+CESharedCustomModel CMEModelBrush::createSphere(f32 radius, i32 rings, i32 sectors,
+                                                SAttributeVertex *mainVertices, ui32 verticesOffset,
                                                 ui16 *mainIndices, ui32 indicesOffset)
 {
-    const f32 frings = 1.0 / (rings - 1);
-    const f32 fsectors = 1.0 / (sectors - 1);
-    i32 irings, isectors;
-    
-    CSharedVertexBuffer vbo = std::make_shared<CVertexBuffer>(rings * sectors * 3, GL_STATIC_DRAW);
-    SAttributeVertex* vertices = vbo->lock();
-    
-    ui32 index = 0;
-    for(irings = 0; irings < rings; irings++)
-    {
-        for(isectors = 0; isectors < sectors; isectors++)
-        {
-            glm::vec3 position;
-            position.y = sin( -M_PI_2 + M_PI * irings * frings);
-            position.x = cos(2 * M_PI * isectors * fsectors) * sin( M_PI * irings * frings);
-            position.z = sin(2 * M_PI * isectors * fsectors) * sin( M_PI * irings * frings);
-            
-            glm::vec4 normal = glm::vec4(position, 0.0);
-            
-            position *= radius;
-            
-            glm::vec2 texcoord;
-            texcoord.x = isectors * fsectors;
-            texcoord.y = irings * frings;
-            
-            vertices[index].m_position = position;
-            vertices[index].m_texcoord = glm::packUnorm2x16(texcoord);
-            vertices[index].m_normal = glm::packSnorm4x8(normal);
-            vertices[index].m_color = glm::u8vec4(128, 128, 128, 128);
-            
-            index++;
-        }
-    }
-    vbo->unlock();
-    
-    CSharedIndexBuffer ibo = std::make_shared<CIndexBuffer>((rings - 1) * (sectors - 1) * 6, GL_STATIC_DRAW);
-    ui16* indices = ibo->lock();
-    index = 0;
-    for(irings = 0; irings < rings - 1; irings++)
-    {
-        for(isectors = 0; isectors < sectors - 1; isectors++)
-        {
-            indices[index++] = irings * sectors + isectors;
-            indices[index++] = (irings + 1) * sectors + isectors;
-            indices[index++] = (irings + 1) * sectors + (isectors + 1);
-            
-            indices[index++] = irings * sectors + isectors;
-            indices[index++] = (irings + 1) * sectors + (isectors + 1);
-            indices[index++] = irings * sectors + (isectors + 1);
-        }
-    }
-    ibo->unlock();
+    CSharedMesh mesh = CMeshExtension::createSphere(radius, rings, sectors, glm::u8vec4(0, 128, 0, 128));
+    SAttributeVertex *vertices = mesh->getVertexBuffer()->lock();
+    ui16 *indices = mesh->getIndexBuffer()->lock();
     
     for(i32 i = 0; i < rings * sectors * 3; ++i)
     {
@@ -439,10 +254,6 @@ CESharedCustomModel CMEModelBrush::createSphere(f32 radius, i32 rings, i32 secto
     {
         mainIndices[indicesOffset + i] = indices[i] + verticesOffset;
     }
-    
-    CSharedMesh mesh = CMesh::constructCustomMesh("sphere", vbo, ibo,
-                                                  glm::vec3(4096.0), glm::vec3(-4096.0));
-    mesh->updateBounds();
     
     CESharedCustomModel sphere = std::make_shared<CECustomModel>(m_resourceAccessor, m_renderTechniqueAccessor);
     sphere->setCamera(m_camera);

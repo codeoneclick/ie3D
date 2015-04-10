@@ -98,8 +98,13 @@ public:
     glm::mat4 getMVPMatrix(void) const;
     glm::mat4 getIMVPMatrix(void) const;
     
-    glm::vec3 getMaxBound(void) const;
-    glm::vec3 getMinBound(void) const;
+    const glm::vec3 getMinBound(void) const;
+    const glm::vec3 getMaxBound(void) const;
+    const std::tuple<glm::vec3, glm::vec3> getBounds(void) const;
+    
+    const glm::vec3 getMinBound(const glm::mat4& matrix) const;
+    const glm::vec3 getMaxBound(const glm::mat4& matrix) const;
+    const std::tuple<glm::vec3, glm::vec3> getBounds(const glm::mat4& matrix) const;
     
     virtual void setVisible(bool value);
     bool isVisible(void) const;

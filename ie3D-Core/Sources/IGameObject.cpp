@@ -412,14 +412,34 @@ glm::mat4  IGameObject::getIMVPMatrix(void) const
     return CComponentTransformation::getIMVPMatrix(component, m_camera);
 }
 
-glm::vec3 IGameObject::getMaxBound(void) const
+const glm::vec3 IGameObject::getMinBound(void) const
+{
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMinBound() : std::move(glm::vec3(0.0f));
+}
+
+const glm::vec3 IGameObject::getMaxBound(void) const
 {
     return m_mesh && m_mesh->isLoaded() ? m_mesh->getMaxBound() : std::move(glm::vec3(0.0f));
 }
 
-glm::vec3 IGameObject::getMinBound(void) const
+const std::tuple<glm::vec3, glm::vec3> IGameObject::getBounds(void) const
 {
-    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMinBound() : std::move(glm::vec3(0.0f));
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getBounds() : std::make_tuple(glm::vec3(0.0f), glm::vec3(0.0f));
+}
+
+const glm::vec3 IGameObject::getMinBound(const glm::mat4& matrix) const
+{
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMinBound(matrix) : std::move(glm::vec3(0.0f));
+}
+
+const glm::vec3 IGameObject::getMaxBound(const glm::mat4& matrix) const
+{
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getMaxBound(matrix) : std::move(glm::vec3(0.0f));
+}
+
+const std::tuple<glm::vec3, glm::vec3> IGameObject::getBounds(const glm::mat4& matrix) const
+{
+    return m_mesh && m_mesh->isLoaded() ? m_mesh->getBounds(matrix) : std::make_tuple(glm::vec3(0.0f), glm::vec3(0.0f));
 }
 
 void IGameObject::setVisible(bool value)

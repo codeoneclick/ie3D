@@ -153,10 +153,10 @@ void CLandscapeEdges::onConfigurationLoaded(ISharedConfigurationRef configuratio
     
     indexBuffer->unlock();
     
-    m_mesh = CMesh::constructCustomMesh("landscape.edges", vertexBuffer, indexBuffer,
-                                     maxBound, minBound);
+    m_mesh = CMesh::construct("landscape.edges", vertexBuffer, indexBuffer,
+                              maxBound, minBound);
     
-	IGameObject::enableRender(m_isNeedToRender);
+    IGameObject::enableRender(m_isNeedToRender);
     IGameObject::enableUpdate(m_isNeedToUpdate);
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;

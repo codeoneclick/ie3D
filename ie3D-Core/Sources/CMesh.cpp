@@ -15,120 +15,54 @@
 
 const ui32 kMaxBones = 32;
 
-CMeshData::CMeshData(SVertexData* vertexData,
-                     ui16* indexData,
-                     ui32 numVertices,
-                     ui32 numIndices,
-                     const glm::vec3& maxBound,
-                     const glm::vec3& minBound) :
+CMeshMetadata::CMeshMetadata(SVertexData* vertices, ui16* indices,
+                             ui32 numVertices, ui32 numIndices,
+                             const glm::vec3& minBound, const glm::vec3& maxBound) :
 IResourceData(E_RESOURCE_DATA_CLASS_MESH_DATA),
-m_vertexData(vertexData),
-m_indexData(indexData),
+m_vertices(vertices),
+m_indices(indices),
 m_numVertices(numVertices),
 m_numIndices(numIndices),
-m_maxBound(maxBound),
-m_minBound(minBound)
+m_minBound(minBound),
+m_maxBound(maxBound)
 {
     
 }
 
-CMeshData::~CMeshData(void)
+CMeshMetadata::~CMeshMetadata(void)
 {
-    delete[] m_vertexData;
-    delete[] m_indexData;
+    delete[] m_vertices;
+    delete[] m_indices;
 }
 
-const SVertexData* CMeshData::getVertexData(void) const
+const SVertexData* CMeshMetadata::getVertices(void) const
 {
-    return m_vertexData;
+    return m_vertices;
 }
 
-const ui16* CMeshData::getIndexData(void) const
+const ui16* CMeshMetadata::getIndices(void) const
 {
-    return m_indexData;
+    return m_indices;
 }
 
-ui32 CMeshData::getNumVertices(void) const
+ui32 CMeshMetadata::getNumVertices(void) const
 {
     return m_numVertices;
 }
 
-ui32 CMeshData::getNumIndices(void) const
+ui32 CMeshMetadata::getNumIndices(void) const
 {
     return m_numIndices;
 }
 
-glm::vec3 CMeshData::calculateMaxBound(const glm::vec3& point_01, const glm::vec3& point_02)
-{
-    glm::vec3 result = point_02;
-    if(point_01.x > point_02.x)
-    {
-        result.x = point_01.x;
-    }
-    if(point_01.y > point_02.y)
-    {
-        result.y = point_01.y;
-    }
-    if(point_01.z > point_02.z)
-    {
-        result.z = point_01.z;
-    }
-    return result;
-}
-
-glm::vec3 CMeshData::calculateMinBound(const glm::vec3& point_01, const glm::vec3& point_02)
-{
-    glm::vec3 result = point_02;
-    if(point_01.x < point_02.x)
-    {
-        result.x = point_01.x;
-    }
-    if(point_01.y < point_02.y)
-    {
-        result.y = point_01.y;
-    }
-    if(point_01.z < point_02.z)
-    {
-        result.z = point_01.z;
-    }
-    return result;
-}
-
-const glm::vec3& CMeshData::getMaxBound(void) const
-{
-    return m_maxBound;
-}
-
-const glm::vec3& CMeshData::getMinBound(void) const
+const glm::vec3 CMeshMetadata::getMinBound(void) const
 {
     return m_minBound;
 }
 
-void CMeshData::updateBounds(SAttributeVertex *vertices, ui16 *indices, ui32 indicesCount)
+const glm::vec3 CMeshMetadata::getMaxBound(void) const
 {
-    assert(vertices != nullptr);
-    assert(indices != nullptr);
-    m_maxBound = glm::vec3( -4096.0f, -4096.0f, -4096.0f );
-    m_minBound = glm::vec3( 4096.0f, 4096.0f, 4096.0f );
-    
-    for(ui32 i = 0; i < indicesCount; ++i)
-    {
-        glm::vec3 point = vertices[indices[i]].m_position;
-        m_maxBound = CMeshData::calculateMaxBound(point, m_maxBound);
-        m_minBound = CMeshData::calculateMinBound(point, m_minBound);
-    }
-}
-
-void CMeshData::removeData(void)
-{
-    delete[] m_vertexData;
-    delete[] m_indexData;
-    
-    m_vertexData = nullptr;
-    m_indexData = nullptr;
-    
-    m_numVertices = 0;
-    m_numIndices = 0;
+    return m_maxBound;
 }
 
 CSkeletonData::CSkeletonData(ui32 numBones) :
@@ -159,33 +93,52 @@ const std::vector<CSharedBoneData> CSkeletonData::getBonesRawData(void) const
 }
 
 CMesh::CMesh(const std::string& guid) : IResource(E_RESOURCE_CLASS_MESH, guid),
-m_vertexBuffer(nullptr),
-m_indexBuffer(nullptr),
-m_meshData(nullptr),
+m_vbo(nullptr),
+m_ibo(nullptr),
+m_meshMetadata(nullptr),
 m_skeletonData(nullptr)
 {
 
 }
 
-CSharedMesh CMesh::constructCustomMesh(const std::string& guid,
-                                    CSharedVertexBufferRef vertexBuffer,
-                                    CSharedIndexBufferRef indexBuffer,
-                                    const glm::vec3& maxBound,
-                                    const glm::vec3& minBound)
+CSharedMesh CMesh::construct(const std::string& guid, CSharedVertexBufferRef vbo, CSharedIndexBufferRef ibo,
+                             const glm::vec3& minBound,
+                             const glm::vec3& maxBound)
 {
-    assert(vertexBuffer != nullptr);
-    assert(indexBuffer != nullptr);
+    assert(vbo != nullptr);
+    assert(ibo != nullptr);
+    
+    CSharedMesh mesh = CMesh::construct(guid, vbo, ibo);
+    mesh->m_minBound = minBound;
+    mesh->m_maxBound = maxBound;
+    return mesh;
+}
+
+CSharedMesh CMesh::construct(const std::string &guid, CSharedVertexBufferRef vbo, CSharedIndexBufferRef ibo)
+{
+    assert(vbo != nullptr);
+    assert(ibo != nullptr);
     
     CSharedMesh mesh = std::make_shared<CMesh>(guid);
-    mesh->m_vertexBuffer = vertexBuffer;
-    mesh->m_indexBuffer = indexBuffer;
+    mesh->m_vbo = vbo;
+    mesh->m_ibo = ibo;
     
-    mesh->m_meshData = std::make_shared<CMeshData>(nullptr,
-                                                   nullptr,
-                                                   vertexBuffer->getUsedSize(),
-                                                   indexBuffer->getUsedSize(),
-                                                   maxBound,
-                                                   minBound);
+    SAttributeVertex *vertices = vbo->lock();
+    ui16* indices = ibo->lock();
+    ui32 indicesCount = ibo->getUsedSize();
+    
+    glm::vec3 maxBound = glm::vec3(INT16_MIN);
+    glm::vec3 minBound = glm::vec3(INT16_MAX);
+    
+    for(ui32 i = 0; i < indicesCount; ++i)
+    {
+        glm::vec3 point = vertices[indices[i]].m_position;
+        maxBound = glm::max(point, maxBound);
+        minBound = glm::min(point, minBound);
+    }
+    mesh->m_minBound = std::move(minBound);
+    mesh->m_maxBound = std::move(maxBound);
+
     mesh->m_status |= E_RESOURCE_STATUS_LOADED;
     mesh->m_status |= E_RESOURCE_STATUS_COMMITED;
     return mesh;
@@ -193,8 +146,7 @@ CSharedMesh CMesh::constructCustomMesh(const std::string& guid,
 
 CMesh::~CMesh(void)
 {
-    std::unordered_map<std::string, CSharedVertexArrayBuffer> eraser;
-    m_VAOstates.swap(eraser);
+
 }
 
 void CMesh::onResourceDataSerializationFinished(ISharedResourceDataRef resourceData)
@@ -204,7 +156,10 @@ void CMesh::onResourceDataSerializationFinished(ISharedResourceDataRef resourceD
     {
         case E_RESOURCE_DATA_CLASS_MESH_DATA:
         {
-            m_meshData = std::static_pointer_cast<CMeshData>(resourceData);
+            m_meshMetadata = std::static_pointer_cast<CMeshMetadata>(resourceData);
+            m_minBound = m_meshMetadata->getMinBound();
+            m_maxBound = m_meshMetadata->getMaxBound();
+            
             m_status |= E_RESOURCE_STATUS_LOADED;
         }
             break;
@@ -236,13 +191,13 @@ void CMesh::onResourceDataCommitFinished(ISharedResourceDataRef resourceData)
     {
         case E_RESOURCE_DATA_CLASS_VERTEX_BUFFER_DATA:
         {
-            m_vertexBuffer = std::static_pointer_cast<CVertexBuffer>(resourceData);
+            m_vbo = std::static_pointer_cast<CVertexBuffer>(resourceData);
         }
             break;
             
         case E_RESOURCE_DATA_CLASS_INDEX_BUFFER_DATA:
         {
-            m_indexBuffer = std::static_pointer_cast<CIndexBuffer>(resourceData);
+            m_ibo = std::static_pointer_cast<CIndexBuffer>(resourceData);
         }
             break;
             
@@ -252,65 +207,104 @@ void CMesh::onResourceDataCommitFinished(ISharedResourceDataRef resourceData)
         }
             break;
     }
-    if(m_vertexBuffer != nullptr &&
-       m_indexBuffer != nullptr)
+    if(m_vbo != nullptr &&
+       m_ibo != nullptr)
     {
+        m_meshMetadata = nullptr;
         m_status |= E_RESOURCE_STATUS_COMMITED;
     }
 }
 
 CSharedVertexBuffer CMesh::getVertexBuffer(void) const
 {
-    return IResource::isCommited() ? m_vertexBuffer : nullptr;
+    return IResource::isCommited() ? m_vbo : nullptr;
 }
 
 CSharedIndexBuffer CMesh::getIndexBuffer(void) const
 {
-    return IResource::isCommited() ? m_indexBuffer : nullptr;
+    return IResource::isCommited() ? m_ibo : nullptr;
 }
 
-const SVertexData* CMesh::getVertexData(void) const
+const SVertexData* CMesh::getRawVertices(void) const
 {
-    return IResource::isLoaded() ? m_meshData->getVertexData() : nullptr;
+    return IResource::isLoaded() ? m_meshMetadata->getVertices() : nullptr;
 }
 
-const ui16* CMesh::getIndexData(void) const
+const ui16* CMesh::getRawIndices(void) const
 {
-    return IResource::isLoaded() ? m_meshData->getIndexData() : nullptr;
+    return IResource::isLoaded() ? m_meshMetadata->getIndices() : nullptr;
 }
 
-ui32 CMesh::getNumVertices(void) const
+ui32 CMesh::getNumRawVertices(void) const
 {
-    return IResource::isLoaded() ? m_meshData->getNumVertices() : 0;
+    return IResource::isLoaded() ? m_meshMetadata->getNumVertices() : 0;
 }
 
-ui32 CMesh::getNumIndices(void) const
+ui32 CMesh::getNumRawIndices(void) const
 {
-    return IResource::isLoaded() ? m_meshData->getNumIndices() : 0;
-}
-
-const glm::vec3 CMesh::getMaxBound(void) const
-{
-    return IResource::isLoaded() ? m_meshData->getMaxBound() : glm::vec3(0.0, 0.0, 0.0);
+    return IResource::isLoaded() ? m_meshMetadata->getNumIndices() : 0;
 }
 
 const glm::vec3 CMesh::getMinBound(void) const
 {
-    return IResource::isLoaded() ? m_meshData->getMinBound() : glm::vec3(0.0, 0.0, 0.0);
+    return IResource::isLoaded() ? m_minBound : std::move(glm::vec3(0.0f));
 }
 
-void CMesh::updateBounds(void)
+const glm::vec3 CMesh::getMaxBound(void) const
 {
-    if(IResource::isLoaded())
+    return IResource::isLoaded() ? m_maxBound : std::move(glm::vec3(0.0f));
+}
+
+const std::tuple<glm::vec3, glm::vec3> CMesh::getBounds(void) const
+{
+    if(!IResource::isLoaded())
     {
-        assert(m_meshData != nullptr);
-        assert(m_vertexBuffer != nullptr);
-        assert(m_indexBuffer != nullptr);
-        
-        m_meshData->updateBounds(m_vertexBuffer->lock(),
-                                 m_indexBuffer->lock(),
-                                 m_indexBuffer->getUsedSize());
+        return std::make_tuple(glm::vec3(0.0), glm::vec3(0.0));
     }
+    return std::make_tuple(m_minBound, m_maxBound);
+}
+
+const glm::vec3 CMesh::getMinBound(const glm::mat4& matrix) const
+{
+    if(!IResource::isLoaded())
+    {
+        return glm::vec3(0.0f);
+    }
+    return std::get<0>(CMesh::getBounds(matrix));
+}
+
+const glm::vec3 CMesh::getMaxBound(const glm::mat4& matrix) const
+{
+    if(!IResource::isLoaded())
+    {
+        return glm::vec3(0.0f);
+    }
+    return std::get<0>(CMesh::getBounds(matrix));
+}
+
+const std::tuple<glm::vec3, glm::vec3> CMesh::getBounds(const glm::mat4& matrix) const
+{
+    if(!IResource::isLoaded())
+    {
+        return std::make_tuple(glm::vec3(0.0), glm::vec3(0.0));
+    }
+    
+    SAttributeVertex *vertices = m_vbo->lock();
+    ui16* indices = m_ibo->lock();
+    ui32 indicesCount = m_ibo->getUsedSize();
+    
+    glm::vec3 maxBound = glm::vec3(INT16_MIN);
+    glm::vec3 minBound = glm::vec3(INT16_MAX);
+    
+    for(ui32 i = 0; i < indicesCount; ++i)
+    {
+        glm::vec3 point = vertices[indices[i]].m_position;
+        glm::vec4 tranformedVertex = matrix * glm::vec4(point, 1.0f);
+        
+        maxBound = glm::max(glm::vec3(tranformedVertex.x, tranformedVertex.y, tranformedVertex.z), maxBound);
+        minBound = glm::min(glm::vec3(tranformedVertex.x, tranformedVertex.y, tranformedVertex.z), minBound);
+    }
+    return std::make_tuple(minBound, maxBound);
 }
 
 const CSharedSkeletonData CMesh::getSkeletonData(void) const
@@ -331,8 +325,8 @@ void CMesh::bind(const std::string& attributesGUID, const std::array<i32, E_SHAD
         CSharedVertexArrayBuffer vaoState = m_VAOstates[attributesGUID];
         if(!vaoState)
         {
-            vaoState = std::make_shared<CVertexArrayBuffer>(m_vertexBuffer,
-                                                            m_indexBuffer);
+            vaoState = std::make_shared<CVertexArrayBuffer>(m_vbo,
+                                                            m_ibo);
             vaoState->init(attributes);
             m_VAOstates[attributesGUID] = vaoState;
         }
@@ -344,7 +338,7 @@ void CMesh::draw(void) const
 {
     if(IResource::isLoaded() && IResource::isCommited())
     {
-        ieDrawElements(GL_TRIANGLES, m_indexBuffer->getUsedSize(), GL_UNSIGNED_SHORT, NULL);
+        ieDrawElements(GL_TRIANGLES, m_ibo->getUsedSize(), GL_UNSIGNED_SHORT, NULL);
     }
 }
 

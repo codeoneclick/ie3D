@@ -43,7 +43,7 @@ void CMeshSerializer_ie3Dmesh::serialize(void)
     filestream->read((char*)&numVertices, sizeof(ui32));
     filestream->read((char*)&numIndices, sizeof(ui32));
     
-    SVertexData* vertexData = new SVertexData[numVertices];
+    SVertexData* vertices = new SVertexData[numVertices];
     
     for(ui32 i = 0; i < numVertices; ++i)
     {
@@ -64,61 +64,58 @@ void CMeshSerializer_ie3Dmesh::serialize(void)
             SBoneData bone;
             filestream->read((char*)&bone.m_id, sizeof(i32));
             filestream->read((char*)&bone.m_weigth, sizeof(f32));
-            vertexData[i].m_bones.push_back(bone);
+            vertices[i].m_bones.push_back(bone);
         }
         
-        vertexData[i].m_position = position;
-        vertexData[i].m_texcoord = texcoord;
-        vertexData[i].m_normal = normal;
-        vertexData[i].m_tangent = tangent;
+        vertices[i].m_position = position;
+        vertices[i].m_texcoord = texcoord;
+        vertices[i].m_normal = normal;
+        vertices[i].m_tangent = tangent;
         
-        if(vertexData[i].m_position.x > maxBound.x)
+        if(vertices[i].m_position.x > maxBound.x)
         {
-            maxBound.x = vertexData[i].m_position.x;
+            maxBound.x = vertices[i].m_position.x;
         }
-        if(vertexData[i].m_position.y > maxBound.y)
+        if(vertices[i].m_position.y > maxBound.y)
         {
-            maxBound.y = vertexData[i].m_position.y;
+            maxBound.y = vertices[i].m_position.y;
         }
-        if(vertexData[i].m_position.z > maxBound.z)
+        if(vertices[i].m_position.z > maxBound.z)
         {
-            maxBound.z = vertexData[i].m_position.z;
+            maxBound.z = vertices[i].m_position.z;
         }
-        if(vertexData[i].m_position.x < minBound.x)
+        if(vertices[i].m_position.x < minBound.x)
         {
-            minBound.x = vertexData[i].m_position.x;
+            minBound.x = vertices[i].m_position.x;
         }
-        if(vertexData[i].m_position.y < minBound.y)
+        if(vertices[i].m_position.y < minBound.y)
         {
-            minBound.y = vertexData[i].m_position.y;
+            minBound.y = vertices[i].m_position.y;
         }
-        if(vertexData[i].m_position.z < minBound.z)
+        if(vertices[i].m_position.z < minBound.z)
         {
-            minBound.z = vertexData[i].m_position.z;
+            minBound.z = vertices[i].m_position.z;
         }
     }
     
-    ui16* indexData = new ui16[numIndices];
+    ui16* indices = new ui16[numIndices];
     
     for(ui32 i = 0; i < numIndices; ++i)
     {
-        filestream->read((char*)&indexData[i], sizeof(ui16));
+        filestream->read((char*)&indices[i], sizeof(ui16));
     }
     
     for(ui32 i = 0; i < numIndices; i += 3)
     {
-        ui16 index = indexData[i + 1];
-        indexData[i + 1] = indexData[i + 2];
-        indexData[i + 2] = index;
+        ui16 index = indices[i + 1];
+        indices[i + 1] = indices[i + 2];
+        indices[i + 2] = index;
     }
     
-    CSharedMeshData meshData = std::make_shared<CMeshData>(vertexData,
-                                                           indexData,
-                                                           numVertices,
-                                                           numIndices,
-                                                           maxBound,
-                                                           minBound);
-    IResourceSerializer::onResourceDataSerializationFinished(meshData);
+    CSharedMeshMetadata meshMetadata = std::make_shared<CMeshMetadata>(vertices, indices,
+                                                                       numVertices, numIndices,
+                                                                       minBound, maxBound);
+    IResourceSerializer::onResourceDataSerializationFinished(meshMetadata);
     
     ui32 numBones; i32 id, parentId;
     filestream->read((char*)&numBones, sizeof(i32));

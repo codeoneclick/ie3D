@@ -107,8 +107,8 @@ void COcean::onConfigurationLoaded(ISharedConfigurationRef configuration, bool s
     }
     indexBuffer->unlock();
     
-    m_mesh = CMesh::constructCustomMesh("ocean", vertexBuffer, indexBuffer,
-                                        glm::vec3(4096.0), glm::vec3(-4096.0));
+    m_mesh = CMesh::construct("ocean", vertexBuffer, indexBuffer,
+                              glm::vec3(INT16_MIN), glm::vec3(INT16_MAX));
     assert(m_mesh != nullptr);
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;

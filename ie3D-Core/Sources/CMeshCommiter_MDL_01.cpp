@@ -29,32 +29,32 @@ void CMeshCommiter_MDL_01::commit(void)
     
     CSharedMesh mesh = std::static_pointer_cast<CMesh>(m_resource);
     
-    CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(mesh->getNumVertices(),
-                                                                       GL_STATIC_DRAW);
-    SAttributeVertex* vertexData = vertexBuffer->lock();
+    CSharedVertexBuffer vbo = std::make_shared<CVertexBuffer>(mesh->getNumRawVertices(),
+                                                              GL_STATIC_DRAW);
+    SAttributeVertex* vertices = vbo->lock();
     
-    for(ui32 i = 0; i < mesh->getNumVertices(); ++i)
+    for(ui32 i = 0; i < mesh->getNumRawVertices(); ++i)
     {
-        vertexData[i].m_position = mesh->getVertexData()[i].m_position;
-        glm::vec2 texcoord = mesh->getVertexData()[i].m_texcoord;
-        vertexData[i].m_texcoord = glm::packUnorm2x16(texcoord);
-        glm::vec3 normal = mesh->getVertexData()[i].m_normal;
-        vertexData[i].m_normal = glm::packSnorm4x8(glm::vec4(normal.x, normal.y, normal.z, 0.0));
-        glm::vec3 tangent = mesh->getVertexData()[i].m_tangent;
-        vertexData[i].m_tangent = glm::packSnorm4x8(glm::vec4(tangent.x, tangent.y, tangent.z, 0.0));
+        vertices[i].m_position = mesh->getRawVertices()[i].m_position;
+        glm::vec2 texcoord = mesh->getRawVertices()[i].m_texcoord;
+        vertices[i].m_texcoord = glm::packUnorm2x16(texcoord);
+        glm::vec3 normal = mesh->getRawVertices()[i].m_normal;
+        vertices[i].m_normal = glm::packSnorm4x8(glm::vec4(normal.x, normal.y, normal.z, 0.0));
+        glm::vec3 tangent = mesh->getRawVertices()[i].m_tangent;
+        vertices[i].m_tangent = glm::packSnorm4x8(glm::vec4(tangent.x, tangent.y, tangent.z, 0.0));
     }
-    vertexBuffer->unlock();
+    vbo->unlock();
     
-    std::shared_ptr<CIndexBuffer> indexBuffer = std::make_shared<CIndexBuffer>(mesh->getNumIndices(), GL_STATIC_DRAW);
-    ui16* indexData = indexBuffer->lock();
-	memcpy(indexData, &mesh->getIndexData()[0], sizeof(ui16) * mesh->getNumIndices());
-    indexBuffer->unlock();
+    std::shared_ptr<CIndexBuffer> ibo = std::make_shared<CIndexBuffer>(mesh->getNumRawIndices(), GL_STATIC_DRAW);
+    ui16* indices = ibo->lock();
+    memcpy(indices, &mesh->getRawIndices()[0], sizeof(ui16) * mesh->getNumRawIndices());
+    ibo->unlock();
     
     GLenum error = glGetError();
     assert(error == GL_NO_ERROR);
     
     m_status = E_COMMITER_STATUS_SUCCESS;
     
-    IResourceCommiter::onResourceDataCommitFinished(vertexBuffer);
-    IResourceCommiter::onResourceDataCommitFinished(indexBuffer);
+    IResourceCommiter::onResourceDataCommitFinished(vbo);
+    IResourceCommiter::onResourceDataCommitFinished(ibo);
 }

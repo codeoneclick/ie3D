@@ -182,8 +182,8 @@ void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configurati
     }
     indexBuffer->unlock();
     
-    m_mesh = CMesh::constructCustomMesh("particle.emitter", vertexBuffer, indexBuffer,
-                                     glm::vec3(0.0), glm::vec3(0.0));
+    m_mesh = CMesh::construct("particle.emitter", vertexBuffer, indexBuffer,
+                              glm::vec3(0.0), glm::vec3(0.0));
     assert(m_mesh != nullptr);
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;

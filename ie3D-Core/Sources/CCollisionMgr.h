@@ -86,11 +86,15 @@ public:
     static bool isGameObjectIntersected(CSharedCameraRef camera,
                                         ISharedGameObjectRef gameObject,
                                         const glm::ivec2& point,
-                                        glm::vec3* intersectedPoint);
+                                        glm::vec3* intersectedPoint,
+                                        bool isIncludeTransformation,
+                                        bool isUpdateTransformation = false);
     
     static bool isGameObjectBoundIntersected(CSharedCameraRef camera,
                                              ISharedGameObjectRef gameObject,
-                                             const glm::ivec2& point);
+                                             const glm::ivec2& point,
+                                             bool isIncludeTransformation,
+                                             bool isUpdateTransformation = false);
 };
 
 #endif

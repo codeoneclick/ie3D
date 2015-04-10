@@ -105,11 +105,11 @@ void CSkyBox::onConfigurationLoaded(ISharedConfigurationRef configuration, bool 
     indexData[33] = 6;
     indexData[34] = 2;
     indexData[35] = 1;
-
+    
     indexBuffer->unlock();
     
-    m_mesh = CMesh::constructCustomMesh("skyBox", vertexBuffer, indexBuffer,
-                                        glm::vec3(4096.0), glm::vec3(-4096.0));
+    m_mesh = CMesh::construct("skyBox", vertexBuffer, indexBuffer,
+                              glm::vec3(INT16_MIN), glm::vec3(INT16_MAX));
     assert(m_mesh != nullptr);
     
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;

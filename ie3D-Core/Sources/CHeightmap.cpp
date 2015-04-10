@@ -1366,8 +1366,8 @@ void CHeightmapGenerator::createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD)
     
     std::ostringstream stringstream;
     stringstream<<"chunk_"<<index<<"_"<<LOD<<"_"<<m_heightmapGUID<<std::endl;
-    std::shared_ptr<CMesh> mesh = CMesh::constructCustomMesh(stringstream.str(), vbo, ibo,
-                                                             std::get<1>(m_chunksBounds[index]), std::get<0>(m_chunksBounds[index]));
+    std::shared_ptr<CMesh> mesh = CMesh::construct(stringstream.str(), vbo, ibo,
+                                                   std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index]));
     std::get<0>(m_chunksMetadata[index]) = mesh;
 }
 
@@ -1509,8 +1509,8 @@ void CHeightmapGenerator::createChunkBound(const glm::ivec2& index,
             position.y = position.y < m_heightmap->getSize().y ? position.y : m_heightmap->getSize().y - 1;
             
             glm::vec3 point = m_heightmap->getVertexPosition(position.x, position.y);
-            *maxBound = CMeshData::calculateMaxBound(point, *maxBound);
-            *minBound = CMeshData::calculateMinBound(point, *minBound);
+            *minBound = glm::min(point, *minBound);
+            *maxBound = glm::max(point, *maxBound);
         }
     }
 }
