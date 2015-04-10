@@ -22,7 +22,8 @@ CMEModelBrush::CMEModelBrush(CSharedResourceAccessorRef resourceAccessor,
 IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_landscape(nullptr),
 m_model(nullptr),
-m_sphere(nullptr)
+m_sphere(nullptr),
+m_currentMode(E_GAMEOBJECT_BRUSH_MODE_TRANSLATE)
 {
     m_arrows.at(E_MODEL_BRUSH_ARROW_X) = nullptr;
     m_arrows.at(E_MODEL_BRUSH_ARROW_Y) = nullptr;
@@ -56,10 +57,10 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
     i32 rings = 12;
     i32 sectors = 24;
     
-    CSharedVertexBuffer vbo = std::make_shared<CVertexBuffer>(8 * 6 + rings * sectors * 3, GL_STATIC_DRAW);
+    CSharedVertexBuffer vbo = std::make_shared<CVertexBuffer>(8 * 6, GL_STATIC_DRAW);
     SAttributeVertex* vertices = vbo->lock();
     
-    CSharedIndexBuffer ibo = std::make_shared<CIndexBuffer>(36 * 6 + (rings - 1) * (sectors - 1) * 6, GL_STATIC_DRAW);
+    CSharedIndexBuffer ibo = std::make_shared<CIndexBuffer>(36 * 6, GL_STATIC_DRAW);
     ui16* indices = ibo->lock();
     
     ui32 verticesOffset = 0;
@@ -119,13 +120,27 @@ void CMEModelBrush::onConfigurationLoaded(ISharedConfigurationRef configuration,
         verticesOffset += 8;
         indicesOffset += 36;
     }
-    
-    m_sphere = CMEModelBrush::createSphere(radius, rings, sectors, vertices, verticesOffset, indices, indicesOffset);
-    
     vbo->unlock();
     ibo->unlock();
     
-    m_mesh = CMesh::construct("gameobject.brush", vbo, ibo);
+    m_meshes[E_GAMEOBJECT_BRUSH_MODE_TRANSLATE] = CMesh::construct("gameobject.brush.translate", vbo, ibo);
+
+    vbo = std::make_shared<CVertexBuffer>(rings * sectors * 3, GL_STATIC_DRAW);
+    vertices = vbo->lock();
+    
+    ibo = std::make_shared<CIndexBuffer>((rings - 1) * (sectors - 1) * 6, GL_STATIC_DRAW);
+    indices = ibo->lock();
+    
+    verticesOffset = 0;
+    indicesOffset = 0;
+
+    m_sphere = CMEModelBrush::createSphere(radius, rings, sectors, vertices, verticesOffset, indices, indicesOffset);
+    vbo->unlock();
+    ibo->unlock();
+    
+    m_meshes[E_GAMEOBJECT_BRUSH_MODE_ROTATE] = CMesh::construct("gameobject.brush.rotate", vbo, ibo);
+    
+    m_mesh = m_meshes[m_currentMode];
     
     IGameObject::onConfigurationLoaded(configuration, success);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
@@ -390,4 +405,15 @@ const std::array<CESharedCustomModel, E_MODEL_BRUSH_PLANE_MAX>&  CMEModelBrush::
 const CESharedCustomModel CMEModelBrush::getSphere(void) const
 {
     return m_sphere;
+}
+
+void CMEModelBrush::setMode(E_GAMEOBJECT_BRUSH_MODE mode)
+{
+    m_currentMode = mode;
+    m_mesh = m_meshes[m_currentMode];
+}
+
+E_GAMEOBJECT_BRUSH_MODE CMEModelBrush::getMode(void) const
+{
+    return m_currentMode;
 }

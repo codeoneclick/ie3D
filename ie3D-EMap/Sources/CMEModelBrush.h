@@ -24,6 +24,9 @@ private:
     std::array<CESharedCustomModel, E_MODEL_BRUSH_PLANE_MAX> m_planes;
     CESharedCustomModel m_sphere;
     
+    std::array<CSharedMesh, E_GAMEOBJECT_BRUSH_MODE_MAX> m_meshes;
+    E_GAMEOBJECT_BRUSH_MODE m_currentMode;
+    
 protected:
     
     void onSceneUpdate(f32 deltatime);
@@ -67,6 +70,9 @@ public:
     const std::array<CESharedCustomModel, E_MODEL_BRUSH_ARROW_MAX>& getArrows(void) const;
     const std::array<CESharedCustomModel, E_MODEL_BRUSH_PLANE_MAX>& getPlanes(void) const;
     const CESharedCustomModel getSphere(void) const;
+    
+    void setMode(E_GAMEOBJECT_BRUSH_MODE mode);
+    E_GAMEOBJECT_BRUSH_MODE getMode(void) const;
 };
 
 

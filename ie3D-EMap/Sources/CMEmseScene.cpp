@@ -220,14 +220,16 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
         if(m_gameObjectBrush->isVisible())
         {
             glm::vec3 pressedPoint3D;
-            if(CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &pressedPoint3D, true, true))
+            if(m_gameObjectBrush->getMode() == E_GAMEOBJECT_BRUSH_MODE_ROTATE &&
+               CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &pressedPoint3D, true, true))
             {
                 isIntersectedWithGameObjectBrush = true;
                 m_previousDraggedPoint3D = pressedPoint3D;
                 m_selectedBrushElement =  m_gameObjectBrush->getSphere();
             }
             
-            if(!isIntersectedWithGameObjectBrush)
+            if(m_gameObjectBrush->getMode() == E_GAMEOBJECT_BRUSH_MODE_TRANSLATE &&
+               !isIntersectedWithGameObjectBrush)
             {
                 for(const auto& it : m_gameObjectBrush->getArrows())
                 {
@@ -245,7 +247,8 @@ void CMEmseScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BU
                     }
                 }
             }
-            if(!isIntersectedWithGameObjectBrush)
+            if(m_gameObjectBrush->getMode() == E_GAMEOBJECT_BRUSH_MODE_TRANSLATE &&
+               !isIntersectedWithGameObjectBrush)
             {
                 for(const auto& it : m_gameObjectBrush->getPlanes())
                 {
@@ -320,7 +323,8 @@ void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
             ui32 index = 0;
             glm::vec3 draggedPoint3D;
             
-            if(CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &draggedPoint3D, true, true))
+            if(m_gameObjectBrush->getMode() == E_GAMEOBJECT_BRUSH_MODE_ROTATE &&
+               CCollisionMgr::isGameObjectIntersected(m_camera, m_gameObjectBrush->getSphere(), point, &draggedPoint3D, true, true))
             {
                 isIntersectedWithGameObjectBrush = true;
                 glm::vec3 rotation = m_selectedGameObject->getRotation();
@@ -331,7 +335,8 @@ void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
                 m_selectedGameObject->setRotation(rotation);
                 m_previousDraggedPoint3D = draggedPoint3D;
             }
-            if(!isIntersectedWithGameObjectBrush)
+            if(m_gameObjectBrush->getMode() == E_GAMEOBJECT_BRUSH_MODE_TRANSLATE &&
+               !isIntersectedWithGameObjectBrush)
             {
                 for(const auto& it : m_gameObjectBrush->getArrows())
                 {
@@ -385,7 +390,8 @@ void CMEmseScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
                     index++;
                 }
             }
-            if(!isIntersectedWithGameObjectBrush)
+            if(m_gameObjectBrush->getMode() == E_GAMEOBJECT_BRUSH_MODE_TRANSLATE &&
+               !isIntersectedWithGameObjectBrush)
             {
                 index = 0;
                 for(const auto& it : m_gameObjectBrush->getPlanes())
