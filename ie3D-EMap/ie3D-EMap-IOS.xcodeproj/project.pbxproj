@@ -1,0 +1,1038 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		06576B03724E1F7DB905AD6E /* Qt Preprocess */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "ie3D-EMap" */;
+			buildPhases = (
+				5E618435888B9D49F8540165 /* Qt Qmake */,
+				7EF0942E79C014DCEC8976BC /* Qt Preprocessors */,
+			);
+			dependencies = (
+			);
+			name = "Qt Preprocess";
+			productName = "Qt Preprocess";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		04BD57ABF55AB5ED963C852B /* qmng in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7719DF2A8CF7849E2B3F57EF /* qmng */; };
+		0CE02722F00CAD43741297B5 /* CoreGraphics.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 6AE3EC31EE5BB1FCEE84137C /* CoreGraphics.framework */; };
+		1D6AC5DD690CF04A8A5C7AB7 /* qico in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 3EFA2546AD4C6D13DE71910C /* qico */; };
+		2050D22536B628883030044B /* qtga in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = F96DD940456A71EA68F13CE0 /* qtga */; };
+		20AA3F021DA5A27B40E376F3 /* moc_CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = DCB612036D136E89ACC8CAC3 /* moc_CMainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
+		216A874E1ADEBABC0010F89A /* libie3DCore-ios.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 216A87451ADEBA8F0010F89A /* libie3DCore-ios.a */; };
+		216A874F1ADEBABC0010F89A /* libie3DEngine-ios.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 216A873B1ADE9CE30010F89A /* libie3DEngine-ios.a */; };
+		216A87691ADEBAD70010F89A /* CMapDragController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87501ADEBAD70010F89A /* CMapDragController.cpp */; };
+		216A876A1ADEBAD70010F89A /* CMEGameController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87521ADEBAD70010F89A /* CMEGameController.cpp */; };
+		216A876B1ADEBAD70010F89A /* CMEgoeScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87541ADEBAD70010F89A /* CMEgoeScene.cpp */; };
+		216A876C1ADEBAD70010F89A /* CMEgoeTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87561ADEBAD70010F89A /* CMEgoeTransition.cpp */; };
+		216A876D1ADEBAD70010F89A /* CMEgopScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87581ADEBAD70010F89A /* CMEgopScene.cpp */; };
+		216A876E1ADEBAD70010F89A /* CMEgopTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A875A1ADEBAD70010F89A /* CMEgopTransition.cpp */; };
+		216A876F1ADEBAD70010F89A /* CMELandscapeBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A875C1ADEBAD70010F89A /* CMELandscapeBrush.cpp */; };
+		216A87701ADEBAD70010F89A /* CMEModelBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A875E1ADEBAD70010F89A /* CMEModelBrush.cpp */; };
+		216A87711ADEBAD70010F89A /* CMEmseScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87601ADEBAD70010F89A /* CMEmseScene.cpp */; };
+		216A87721ADEBAD70010F89A /* CMEmseTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87621ADEBAD70010F89A /* CMEmseTransition.cpp */; };
+		216A87731ADEBAD70010F89A /* CMESceneFabricator.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87641ADEBAD70010F89A /* CMESceneFabricator.cpp */; };
+		216A877E1ADEBC170010F89A /* CMEConfigurationAccessor.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87751ADEBC170010F89A /* CMEConfigurationAccessor.cpp */; };
+		216A877F1ADEBC170010F89A /* CMEConfigurationBrushElement.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87771ADEBC170010F89A /* CMEConfigurationBrushElement.cpp */; };
+		216A87801ADEBC170010F89A /* CMEConfigurationLandscapeBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A87791ADEBC170010F89A /* CMEConfigurationLandscapeBrush.cpp */; };
+		216A87811ADEBC170010F89A /* CMEConfigurationModelBrush.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 216A877B1ADEBC170010F89A /* CMEConfigurationModelBrush.cpp */; };
+		24C8A0F2FB4BA1AADE95EA43 /* Qt5Core in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 740FF8011EEF951817BCBE1F /* Qt5Core */; };
+		2B02D9DC58A01E45248DDBCE /* CoreText.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7D7B02101166B76FD2D4F8B4 /* CoreText.framework */; };
+		3029F449C8E9E263413825D3 /* Qt5Widgets in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 195E9BE9B8F1CB41E59DBD61 /* Qt5Widgets */; };
+		3E4EB339F641A23BB8265502 /* qwbmp in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = E484E969D5B5EB4E97D7A149 /* qwbmp */; };
+		4B52C40DDB344948E8121D74 /* qdds in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = CBB5F8D86D23E065B86D6290 /* qdds */; };
+		54A8DAA91E5B8EDA6F20C3E7 /* qios in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7D5534E082E0EBC1D780EBEE /* qios */; };
+		9ABA8BF46FFA04417216D468 /* Default-568h@2x.png in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 4FBE027F03B614ECE31A5563 /* Default-568h@2x.png */; };
+		A79B4BE470E879053077AEBE /* qtharfbuzzng in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 6A270E935769A0EA4E8CD5C1 /* qtharfbuzzng */; };
+		AE99900DBB1A46D5EE670A0F /* ie3d-emap_plugin_import.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A4B9017482E809B6FF78059D /* ie3d-emap_plugin_import.cpp */; settings = {ATTRIBUTES = (); }; };
+		B460F624007324313696BE86 /* QuartzCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */; };
+		CBA32151DD4C5A39E1171FB8 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 09BF715167B7A0149FD2FBB8 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		CD222379D3372303A301905F /* CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9D88140FBB133F956E1F6166 /* CMainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
+		CECC7CD59BF3A3ED2767BDF9 /* qicns in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 61DE164E8DF664F881961A9F /* qicns */; };
+		E794E9CF8A47AEEA39A16804 /* qjp2 in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = C9C1D77131053F962D6E8840 /* qjp2 */; };
+		E9F15BB3E41C9A2C7909F53C /* Qt5Gui in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 464141EE1D2C953F3C018FD7 /* Qt5Gui */; };
+		EDBC322BBD20DB84C77A564D /* Qt5PlatformSupport in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A7E6BDF0B0C97C7F7E5BD8D1 /* Qt5PlatformSupport */; };
+		F26454630C80841CBDCFE1CA /* Foundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = FCC237CA5AD60B9BA4447615 /* Foundation.framework */; };
+		F2F6B0284CDB38861D5A605C /* qtiff in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = E5568A1E3937146B9246320B /* qtiff */; };
+		F8B465CE34D8DF87AAE95913 /* CoreFoundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		216A872C1ADE9C950010F89A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DB9C3763D02B1415CD9D565 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 06576B03724E1F7DB905AD6E;
+			remoteInfo = "Qt Preprocess";
+		};
+		216A873A1ADE9CE30010F89A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 216A87311ADE9CC00010F89A /* ie3D-Engine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21F114D0199224FF00F4A378;
+			remoteInfo = "ie3DEngine-ios";
+		};
+		216A873C1ADE9CE30010F89A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 216A87311ADE9CC00010F89A /* ie3D-Engine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21F1150E199225C500F4A378;
+			remoteInfo = "ie3DEngine-osx";
+		};
+		216A87441ADEBA8F0010F89A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 216A872E1ADE9CAF0010F89A /* ie3D-Core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21D0712A181DA5620019D264;
+			remoteInfo = "ie3DCore-ios";
+		};
+		216A87461ADEBA8F0010F89A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 216A872E1ADE9CAF0010F89A /* ie3D-Core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21853415181EFC6200315CBB;
+			remoteInfo = "ie3DCore-osx";
+		};
+		216A874A1ADEBAA10010F89A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 216A87311ADE9CC00010F89A /* ie3D-Engine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 21F114CF199224FF00F4A378;
+			remoteInfo = "ie3DEngine-ios";
+		};
+		216A874C1ADEBAA10010F89A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 216A872E1ADE9CAF0010F89A /* ie3D-Core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 21D07129181DA5620019D264;
+			remoteInfo = "ie3DCore-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		09BF715167B7A0149FD2FBB8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/Sources/main.cpp"; sourceTree = "<absolute>"; };
+		195E9BE9B8F1CB41E59DBD61 /* Qt5Widgets */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5Widgets; path = "/Volumes/media/Applications/QT/5.4/ios/lib/libQt5Widgets$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		216A872E1ADE9CAF0010F89A /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		216A87311ADE9CC00010F89A /* ie3D-Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Engine.xcodeproj"; path = "../ie3D-Engine/ie3D-Engine.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		216A87501ADEBAD70010F89A /* CMapDragController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapDragController.cpp; path = Sources/CMapDragController.cpp; sourceTree = SOURCE_ROOT; };
+		216A87511ADEBAD70010F89A /* CMapDragController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMapDragController.h; path = Sources/CMapDragController.h; sourceTree = SOURCE_ROOT; };
+		216A87521ADEBAD70010F89A /* CMEGameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEGameController.cpp; path = Sources/CMEGameController.cpp; sourceTree = SOURCE_ROOT; };
+		216A87531ADEBAD70010F89A /* CMEGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEGameController.h; path = Sources/CMEGameController.h; sourceTree = SOURCE_ROOT; };
+		216A87541ADEBAD70010F89A /* CMEgoeScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEgoeScene.cpp; path = Sources/CMEgoeScene.cpp; sourceTree = SOURCE_ROOT; };
+		216A87551ADEBAD70010F89A /* CMEgoeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEgoeScene.h; path = Sources/CMEgoeScene.h; sourceTree = SOURCE_ROOT; };
+		216A87561ADEBAD70010F89A /* CMEgoeTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEgoeTransition.cpp; path = Sources/CMEgoeTransition.cpp; sourceTree = SOURCE_ROOT; };
+		216A87571ADEBAD70010F89A /* CMEgoeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEgoeTransition.h; path = Sources/CMEgoeTransition.h; sourceTree = SOURCE_ROOT; };
+		216A87581ADEBAD70010F89A /* CMEgopScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEgopScene.cpp; path = Sources/CMEgopScene.cpp; sourceTree = SOURCE_ROOT; };
+		216A87591ADEBAD70010F89A /* CMEgopScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEgopScene.h; path = Sources/CMEgopScene.h; sourceTree = SOURCE_ROOT; };
+		216A875A1ADEBAD70010F89A /* CMEgopTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEgopTransition.cpp; path = Sources/CMEgopTransition.cpp; sourceTree = SOURCE_ROOT; };
+		216A875B1ADEBAD70010F89A /* CMEgopTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEgopTransition.h; path = Sources/CMEgopTransition.h; sourceTree = SOURCE_ROOT; };
+		216A875C1ADEBAD70010F89A /* CMELandscapeBrush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMELandscapeBrush.cpp; path = Sources/CMELandscapeBrush.cpp; sourceTree = SOURCE_ROOT; };
+		216A875D1ADEBAD70010F89A /* CMELandscapeBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMELandscapeBrush.h; path = Sources/CMELandscapeBrush.h; sourceTree = SOURCE_ROOT; };
+		216A875E1ADEBAD70010F89A /* CMEModelBrush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEModelBrush.cpp; path = Sources/CMEModelBrush.cpp; sourceTree = SOURCE_ROOT; };
+		216A875F1ADEBAD70010F89A /* CMEModelBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEModelBrush.h; path = Sources/CMEModelBrush.h; sourceTree = SOURCE_ROOT; };
+		216A87601ADEBAD70010F89A /* CMEmseScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEmseScene.cpp; path = Sources/CMEmseScene.cpp; sourceTree = SOURCE_ROOT; };
+		216A87611ADEBAD70010F89A /* CMEmseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEmseScene.h; path = Sources/CMEmseScene.h; sourceTree = SOURCE_ROOT; };
+		216A87621ADEBAD70010F89A /* CMEmseTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEmseTransition.cpp; path = Sources/CMEmseTransition.cpp; sourceTree = SOURCE_ROOT; };
+		216A87631ADEBAD70010F89A /* CMEmseTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEmseTransition.h; path = Sources/CMEmseTransition.h; sourceTree = SOURCE_ROOT; };
+		216A87641ADEBAD70010F89A /* CMESceneFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMESceneFabricator.cpp; path = Sources/CMESceneFabricator.cpp; sourceTree = SOURCE_ROOT; };
+		216A87651ADEBAD70010F89A /* CMESceneFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMESceneFabricator.h; path = Sources/CMESceneFabricator.h; sourceTree = SOURCE_ROOT; };
+		216A87661ADEBAD70010F89A /* HMEDeclaration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEDeclaration.h; path = Sources/HMEDeclaration.h; sourceTree = SOURCE_ROOT; };
+		216A87671ADEBAD70010F89A /* HMEEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEEnums.h; path = Sources/HMEEnums.h; sourceTree = SOURCE_ROOT; };
+		216A87681ADEBAD70010F89A /* HUICommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HUICommands.h; path = Sources/HUICommands.h; sourceTree = SOURCE_ROOT; };
+		216A87751ADEBC170010F89A /* CMEConfigurationAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationAccessor.cpp; path = Autogenerated/CMEConfigurationAccessor.cpp; sourceTree = SOURCE_ROOT; };
+		216A87761ADEBC170010F89A /* CMEConfigurationAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationAccessor.h; path = Autogenerated/CMEConfigurationAccessor.h; sourceTree = SOURCE_ROOT; };
+		216A87771ADEBC170010F89A /* CMEConfigurationBrushElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationBrushElement.cpp; path = Autogenerated/CMEConfigurationBrushElement.cpp; sourceTree = SOURCE_ROOT; };
+		216A87781ADEBC170010F89A /* CMEConfigurationBrushElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationBrushElement.h; path = Autogenerated/CMEConfigurationBrushElement.h; sourceTree = SOURCE_ROOT; };
+		216A87791ADEBC170010F89A /* CMEConfigurationLandscapeBrush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationLandscapeBrush.cpp; path = Autogenerated/CMEConfigurationLandscapeBrush.cpp; sourceTree = SOURCE_ROOT; };
+		216A877A1ADEBC170010F89A /* CMEConfigurationLandscapeBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationLandscapeBrush.h; path = Autogenerated/CMEConfigurationLandscapeBrush.h; sourceTree = SOURCE_ROOT; };
+		216A877B1ADEBC170010F89A /* CMEConfigurationModelBrush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEConfigurationModelBrush.cpp; path = Autogenerated/CMEConfigurationModelBrush.cpp; sourceTree = SOURCE_ROOT; };
+		216A877C1ADEBC170010F89A /* CMEConfigurationModelBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEConfigurationModelBrush.h; path = Autogenerated/CMEConfigurationModelBrush.h; sourceTree = SOURCE_ROOT; };
+		216A877D1ADEBC170010F89A /* HMEConfigurationDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEConfigurationDeclarations.h; path = Autogenerated/HMEConfigurationDeclarations.h; sourceTree = SOURCE_ROOT; };
+		3EFA2546AD4C6D13DE71910C /* qico */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qico; path = "/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats/libqico$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		464141EE1D2C953F3C018FD7 /* Qt5Gui */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5Gui; path = "/Volumes/media/Applications/QT/5.4/ios/lib/libQt5Gui$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		4FBE027F03B614ECE31A5563 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/ie3D-EMap.xcodeproj/Default-568h@2x.png"; sourceTree = "<absolute>"; };
+		61DE164E8DF664F881961A9F /* qicns */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qicns; path = "/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats/libqicns$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		6A270E935769A0EA4E8CD5C1 /* qtharfbuzzng */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtharfbuzzng; path = "/Volumes/media/Applications/QT/5.4/ios/lib/libqtharfbuzzng$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		6AE3EC31EE5BB1FCEE84137C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = /System/Library/Frameworks/CoreGraphics.framework; sourceTree = "<absolute>"; };
+		740FF8011EEF951817BCBE1F /* Qt5Core */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5Core; path = "/Volumes/media/Applications/QT/5.4/ios/lib/libQt5Core$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		7719DF2A8CF7849E2B3F57EF /* qmng */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qmng; path = "/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats/libqmng$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		7D5534E082E0EBC1D780EBEE /* qios */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qios; path = "/Volumes/media/Applications/QT/5.4/ios/plugins/platforms/libqios$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		7D7B02101166B76FD2D4F8B4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = /System/Library/Frameworks/CoreText.framework; sourceTree = "<absolute>"; };
+		7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		9D88140FBB133F956E1F6166 /* CMainWindow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = CMainWindow.cpp; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/Sources/CMainWindow.cpp"; sourceTree = "<absolute>"; };
+		A4024724E546B6C12F58CF61 /* CMainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CMainWindow.h; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/Sources/CMainWindow.h"; sourceTree = "<absolute>"; };
+		A4B9017482E809B6FF78059D /* ie3d-emap_plugin_import.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "ie3d-emap_plugin_import.cpp"; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/ie3d-emap_plugin_import.cpp"; sourceTree = "<absolute>"; };
+		A7E6BDF0B0C97C7F7E5BD8D1 /* Qt5PlatformSupport */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5PlatformSupport; path = "/Volumes/media/Applications/QT/5.4/ios/lib/libQt5PlatformSupport$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		AB745978DF0F41D1801ABDA6 /* .qmake.stash */ = {isa = PBXFileReference; lastKnownFileType = text; name = .qmake.stash; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/.qmake.stash"; sourceTree = "<absolute>"; };
+		B02F3DF812ED47BE0BDCE8E2 /* ie3D-EMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ie3D-EMap.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE0F8AFC69792CC916E104E5 /* CMainWindow.ui */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CMainWindow.ui; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/Forms/CMainWindow.ui"; sourceTree = "<absolute>"; };
+		C9C1D77131053F962D6E8840 /* qjp2 */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qjp2; path = "/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats/libqjp2$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		CBB5F8D86D23E065B86D6290 /* qdds */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qdds; path = "/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats/libqdds$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		DCB612036D136E89ACC8CAC3 /* moc_CMainWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CMainWindow.cpp; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/moc_CMainWindow.cpp"; sourceTree = "<absolute>"; };
+		E0D0B78F9906B539A5AF66C0 /* ui_CMainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ui_CMainWindow.h; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/ui_CMainWindow.h"; sourceTree = "<absolute>"; };
+		E484E969D5B5EB4E97D7A149 /* qwbmp */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qwbmp; path = "/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats/libqwbmp$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		E5568A1E3937146B9246320B /* qtiff */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtiff; path = "/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats/libqtiff$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		E7AEF416A070894254B20CFF /* ie3D-EMap.pro */ = {isa = PBXFileReference; lastKnownFileType = text; name = "ie3D-EMap.pro"; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/ie3D-EMap.pro"; sourceTree = "<absolute>"; };
+		F96DD940456A71EA68F13CE0 /* qtga */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtga; path = "/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats/libqtga$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		FCC237CA5AD60B9BA4447615 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D1C883685E82D5676953459A /* Link Binary With Libraries */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				216A874E1ADEBABC0010F89A /* libie3DCore-ios.a in Link Binary With Libraries */,
+				216A874F1ADEBABC0010F89A /* libie3DEngine-ios.a in Link Binary With Libraries */,
+				54A8DAA91E5B8EDA6F20C3E7 /* qios in Link Binary With Libraries */,
+				F26454630C80841CBDCFE1CA /* Foundation.framework in Link Binary With Libraries */,
+				B460F624007324313696BE86 /* QuartzCore.framework in Link Binary With Libraries */,
+				F8B465CE34D8DF87AAE95913 /* CoreFoundation.framework in Link Binary With Libraries */,
+				2B02D9DC58A01E45248DDBCE /* CoreText.framework in Link Binary With Libraries */,
+				0CE02722F00CAD43741297B5 /* CoreGraphics.framework in Link Binary With Libraries */,
+				EDBC322BBD20DB84C77A564D /* Qt5PlatformSupport in Link Binary With Libraries */,
+				3029F449C8E9E263413825D3 /* Qt5Widgets in Link Binary With Libraries */,
+				4B52C40DDB344948E8121D74 /* qdds in Link Binary With Libraries */,
+				CECC7CD59BF3A3ED2767BDF9 /* qicns in Link Binary With Libraries */,
+				1D6AC5DD690CF04A8A5C7AB7 /* qico in Link Binary With Libraries */,
+				E794E9CF8A47AEEA39A16804 /* qjp2 in Link Binary With Libraries */,
+				04BD57ABF55AB5ED963C852B /* qmng in Link Binary With Libraries */,
+				2050D22536B628883030044B /* qtga in Link Binary With Libraries */,
+				F2F6B0284CDB38861D5A605C /* qtiff in Link Binary With Libraries */,
+				3E4EB339F641A23BB8265502 /* qwbmp in Link Binary With Libraries */,
+				E9F15BB3E41C9A2C7909F53C /* Qt5Gui in Link Binary With Libraries */,
+				A79B4BE470E879053077AEBE /* qtharfbuzzng in Link Binary With Libraries */,
+				24C8A0F2FB4BA1AADE95EA43 /* Qt5Core in Link Binary With Libraries */,
+			);
+			name = "Link Binary With Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E703739B3546C55491E339E /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				BE0F8AFC69792CC916E104E5 /* CMainWindow.ui */,
+			);
+			name = Forms;
+			sourceTree = "<Group>";
+		};
+		12E908B8A1C3C07C115504F5 /* Sources [uic] */ = {
+			isa = PBXGroup;
+			children = (
+				0E703739B3546C55491E339E /* Forms */,
+			);
+			name = "Sources [uic]";
+			sourceTree = "<Group>";
+		};
+		216A872D1ADE9C9D0010F89A /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				216A87311ADE9CC00010F89A /* ie3D-Engine.xcodeproj */,
+				216A872E1ADE9CAF0010F89A /* ie3D-Core.xcodeproj */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		216A87361ADE9CE30010F89A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				216A873B1ADE9CE30010F89A /* libie3DEngine-ios.a */,
+				216A873D1ADE9CE30010F89A /* libie3DEngine-osx.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		216A87401ADEBA8F0010F89A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				216A87451ADEBA8F0010F89A /* libie3DCore-ios.a */,
+				216A87471ADEBA8F0010F89A /* libie3DCore-osx.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		216A87741ADEBC090010F89A /* Autogenerated */ = {
+			isa = PBXGroup;
+			children = (
+				216A87751ADEBC170010F89A /* CMEConfigurationAccessor.cpp */,
+				216A87761ADEBC170010F89A /* CMEConfigurationAccessor.h */,
+				216A87771ADEBC170010F89A /* CMEConfigurationBrushElement.cpp */,
+				216A87781ADEBC170010F89A /* CMEConfigurationBrushElement.h */,
+				216A87791ADEBC170010F89A /* CMEConfigurationLandscapeBrush.cpp */,
+				216A877A1ADEBC170010F89A /* CMEConfigurationLandscapeBrush.h */,
+				216A877B1ADEBC170010F89A /* CMEConfigurationModelBrush.cpp */,
+				216A877C1ADEBC170010F89A /* CMEConfigurationModelBrush.h */,
+				216A877D1ADEBC170010F89A /* HMEConfigurationDeclarations.h */,
+			);
+			name = Autogenerated;
+			sourceTree = "<group>";
+		};
+		25B08E2869634E9BCBA333A2 /* Generated Sources */ = {
+			isa = PBXGroup;
+			children = (
+				DCB612036D136E89ACC8CAC3 /* moc_CMainWindow.cpp */,
+				E0D0B78F9906B539A5AF66C0 /* ui_CMainWindow.h */,
+			);
+			name = "Generated Sources";
+			sourceTree = "<Group>";
+		};
+		2EB56BE3C2D93CDAB0C52E67 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				216A87501ADEBAD70010F89A /* CMapDragController.cpp */,
+				216A87511ADEBAD70010F89A /* CMapDragController.h */,
+				216A87521ADEBAD70010F89A /* CMEGameController.cpp */,
+				216A87531ADEBAD70010F89A /* CMEGameController.h */,
+				216A87541ADEBAD70010F89A /* CMEgoeScene.cpp */,
+				216A87551ADEBAD70010F89A /* CMEgoeScene.h */,
+				216A87561ADEBAD70010F89A /* CMEgoeTransition.cpp */,
+				216A87571ADEBAD70010F89A /* CMEgoeTransition.h */,
+				216A87581ADEBAD70010F89A /* CMEgopScene.cpp */,
+				216A87591ADEBAD70010F89A /* CMEgopScene.h */,
+				216A875A1ADEBAD70010F89A /* CMEgopTransition.cpp */,
+				216A875B1ADEBAD70010F89A /* CMEgopTransition.h */,
+				216A875C1ADEBAD70010F89A /* CMELandscapeBrush.cpp */,
+				216A875D1ADEBAD70010F89A /* CMELandscapeBrush.h */,
+				216A875E1ADEBAD70010F89A /* CMEModelBrush.cpp */,
+				216A875F1ADEBAD70010F89A /* CMEModelBrush.h */,
+				216A87601ADEBAD70010F89A /* CMEmseScene.cpp */,
+				216A87611ADEBAD70010F89A /* CMEmseScene.h */,
+				216A87621ADEBAD70010F89A /* CMEmseTransition.cpp */,
+				216A87631ADEBAD70010F89A /* CMEmseTransition.h */,
+				216A87641ADEBAD70010F89A /* CMESceneFabricator.cpp */,
+				216A87651ADEBAD70010F89A /* CMESceneFabricator.h */,
+				216A87661ADEBAD70010F89A /* HMEDeclaration.h */,
+				216A87671ADEBAD70010F89A /* HMEEnums.h */,
+				216A87681ADEBAD70010F89A /* HUICommands.h */,
+				09BF715167B7A0149FD2FBB8 /* main.cpp */,
+				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
+				A4024724E546B6C12F58CF61 /* CMainWindow.h */,
+				A4B9017482E809B6FF78059D /* ie3d-emap_plugin_import.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<Group>";
+		};
+		74B182DB50CB5611B5C1C297 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E7AEF416A070894254B20CFF /* ie3D-EMap.pro */,
+				AB745978DF0F41D1801ABDA6 /* .qmake.stash */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<Group>";
+		};
+		858FCAB0EB1F29CF8B07677C /* Bundle Data */ = {
+			isa = PBXGroup;
+			children = (
+				4FBE027F03B614ECE31A5563 /* Default-568h@2x.png */,
+			);
+			name = "Bundle Data";
+			sourceTree = "<Group>";
+		};
+		AF39DD055C3EF8226FBE929D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7D5534E082E0EBC1D780EBEE /* qios */,
+				FCC237CA5AD60B9BA4447615 /* Foundation.framework */,
+				7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */,
+				4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */,
+				7D7B02101166B76FD2D4F8B4 /* CoreText.framework */,
+				6AE3EC31EE5BB1FCEE84137C /* CoreGraphics.framework */,
+				A7E6BDF0B0C97C7F7E5BD8D1 /* Qt5PlatformSupport */,
+				195E9BE9B8F1CB41E59DBD61 /* Qt5Widgets */,
+				CBB5F8D86D23E065B86D6290 /* qdds */,
+				61DE164E8DF664F881961A9F /* qicns */,
+				3EFA2546AD4C6D13DE71910C /* qico */,
+				C9C1D77131053F962D6E8840 /* qjp2 */,
+				7719DF2A8CF7849E2B3F57EF /* qmng */,
+				F96DD940456A71EA68F13CE0 /* qtga */,
+				E5568A1E3937146B9246320B /* qtiff */,
+				E484E969D5B5EB4E97D7A149 /* qwbmp */,
+				464141EE1D2C953F3C018FD7 /* Qt5Gui */,
+				6A270E935769A0EA4E8CD5C1 /* qtharfbuzzng */,
+				740FF8011EEF951817BCBE1F /* Qt5Core */,
+			);
+			name = Frameworks;
+			sourceTree = "<Group>";
+		};
+		E8C543AB96796ECAA2E65C57 /* ie3D-EMap */ = {
+			isa = PBXGroup;
+			children = (
+				216A872D1ADE9C9D0010F89A /* Libraries */,
+				216A87741ADEBC090010F89A /* Autogenerated */,
+				2EB56BE3C2D93CDAB0C52E67 /* Sources */,
+				25B08E2869634E9BCBA333A2 /* Generated Sources */,
+				74B182DB50CB5611B5C1C297 /* Supporting Files */,
+				12E908B8A1C3C07C115504F5 /* Sources [uic] */,
+				AF39DD055C3EF8226FBE929D /* Frameworks */,
+				858FCAB0EB1F29CF8B07677C /* Bundle Data */,
+				FE0A091FDBFB3E9C31B7A1BD /* Products */,
+			);
+			name = "ie3D-EMap";
+			sourceTree = "<Group>";
+		};
+		FE0A091FDBFB3E9C31B7A1BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B02F3DF812ED47BE0BDCE8E2 /* ie3D-EMap.app */,
+			);
+			name = Products;
+			sourceTree = "<Group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		644F4392EF2632EBA38F9D46 /* ie3D-EMap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "ie3D-EMap" */;
+			buildPhases = (
+				F7E50F631C51CD5B5DC0BC43 /* Compile Sources */,
+				3DA90DAE39A0C9D07C6F6B0F /* Qt Prelink */,
+				D1C883685E82D5676953459A /* Link Binary With Libraries */,
+				30414803F31797EB689AE508 /* Copy Bundle Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				216A874B1ADEBAA10010F89A /* PBXTargetDependency */,
+				216A874D1ADEBAA10010F89A /* PBXTargetDependency */,
+				CDBEA1354C6F5F4BE3B8E908 /* PBXTargetDependency */,
+			);
+			name = "ie3D-EMap";
+			productName = "ie3D-EMap";
+			productReference = B02F3DF812ED47BE0BDCE8E2 /* ie3D-EMap.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DB9C3763D02B1415CD9D565 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = DAC4C1AA5EDEA1C85E9CA5E6 /* Build configuration list for PBXProject "ie3D-EMap-IOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E8C543AB96796ECAA2E65C57 /* ie3D-EMap */;
+			productRefGroup = FE0A091FDBFB3E9C31B7A1BD /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 216A87401ADEBA8F0010F89A /* Products */;
+					ProjectRef = 216A872E1ADE9CAF0010F89A /* ie3D-Core.xcodeproj */;
+				},
+				{
+					ProductGroup = 216A87361ADE9CE30010F89A /* Products */;
+					ProjectRef = 216A87311ADE9CC00010F89A /* ie3D-Engine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				644F4392EF2632EBA38F9D46 /* ie3D-EMap */,
+				06576B03724E1F7DB905AD6E /* Qt Preprocess */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		216A873B1ADE9CE30010F89A /* libie3DEngine-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libie3DEngine-ios.a";
+			remoteRef = 216A873A1ADE9CE30010F89A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		216A873D1ADE9CE30010F89A /* libie3DEngine-osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libie3DEngine-osx.a";
+			remoteRef = 216A873C1ADE9CE30010F89A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		216A87451ADEBA8F0010F89A /* libie3DCore-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libie3DCore-ios.a";
+			remoteRef = 216A87441ADEBA8F0010F89A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		216A87471ADEBA8F0010F89A /* libie3DCore-osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libie3DCore-osx.a";
+			remoteRef = 216A87461ADEBA8F0010F89A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30414803F31797EB689AE508 /* Copy Bundle Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9ABA8BF46FFA04417216D468 /* Default-568h@2x.png in Copy Bundle Resources */,
+			);
+			name = "Copy Bundle Resources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3DA90DAE39A0C9D07C6F6B0F /* Qt Prelink */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/armv7/",
+				"$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/arm64/",
+				"$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/i386/",
+				"$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/x86_64/",
+			);
+			name = "Qt Prelink";
+			outputPaths = (
+				"$(LINK_FILE_LIST_$(CURRENT_VARIANT)_armv7)",
+				"$(LINK_FILE_LIST_$(CURRENT_VARIANT)_arm64)",
+				"$(LINK_FILE_LIST_$(CURRENT_VARIANT)_i386)",
+				"$(LINK_FILE_LIST_$(CURRENT_VARIANT)_x86_64)",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Volumes/media/Applications/QT/5.4/ios/mkspecs/macx-ios-clang/rename_main.sh ${OBJECT_FILE_DIR}-${CURRENT_VARIANT} \"${ARCHS}\"";
+		};
+		5E618435888B9D49F8540165 /* Qt Qmake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Qmake";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap -f ie3D-EMap-IOS.xcodeproj/qt_makeqmake.mak";
+		};
+		7EF0942E79C014DCEC8976BC /* Qt Preprocessors */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Preprocessors";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap -f ie3D-EMap-IOS.xcodeproj/qt_preprocess.mak";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F7E50F631C51CD5B5DC0BC43 /* Compile Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				216A87701ADEBAD70010F89A /* CMEModelBrush.cpp in Compile Sources */,
+				216A876C1ADEBAD70010F89A /* CMEgoeTransition.cpp in Compile Sources */,
+				216A87721ADEBAD70010F89A /* CMEmseTransition.cpp in Compile Sources */,
+				216A877F1ADEBC170010F89A /* CMEConfigurationBrushElement.cpp in Compile Sources */,
+				CBA32151DD4C5A39E1171FB8 /* main.cpp in Compile Sources */,
+				CD222379D3372303A301905F /* CMainWindow.cpp in Compile Sources */,
+				216A876E1ADEBAD70010F89A /* CMEgopTransition.cpp in Compile Sources */,
+				216A87691ADEBAD70010F89A /* CMapDragController.cpp in Compile Sources */,
+				216A876F1ADEBAD70010F89A /* CMELandscapeBrush.cpp in Compile Sources */,
+				AE99900DBB1A46D5EE670A0F /* ie3d-emap_plugin_import.cpp in Compile Sources */,
+				216A87811ADEBC170010F89A /* CMEConfigurationModelBrush.cpp in Compile Sources */,
+				20AA3F021DA5A27B40E376F3 /* moc_CMainWindow.cpp in Compile Sources */,
+				216A876D1ADEBAD70010F89A /* CMEgopScene.cpp in Compile Sources */,
+				216A876A1ADEBAD70010F89A /* CMEGameController.cpp in Compile Sources */,
+				216A876B1ADEBAD70010F89A /* CMEgoeScene.cpp in Compile Sources */,
+				216A877E1ADEBC170010F89A /* CMEConfigurationAccessor.cpp in Compile Sources */,
+				216A87801ADEBC170010F89A /* CMEConfigurationLandscapeBrush.cpp in Compile Sources */,
+				216A87711ADEBAD70010F89A /* CMEmseScene.cpp in Compile Sources */,
+				216A87731ADEBAD70010F89A /* CMESceneFabricator.cpp in Compile Sources */,
+			);
+			name = "Compile Sources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		216A874B1ADEBAA10010F89A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ie3DEngine-ios";
+			targetProxy = 216A874A1ADEBAA10010F89A /* PBXContainerItemProxy */;
+		};
+		216A874D1ADEBAA10010F89A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ie3DCore-ios";
+			targetProxy = 216A874C1ADEBAA10010F89A /* PBXContainerItemProxy */;
+		};
+		CDBEA1354C6F5F4BE3B8E908 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 06576B03724E1F7DB905AD6E /* Qt Preprocess */;
+			targetProxy = 216A872C1ADE9C950010F89A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		339EE1B2CC4FC24589A0EA95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					armv7,
+					arm64,
+					i386,
+					x86_64,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					arm64,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = (
+					i386,
+					x86_64,
+				);
+				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1.0;
+				DYLIB_CURRENT_VERSION = 1.0.0;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					.,
+					"/Volumes/media/Applications/QT/5.4/ios/mkspecs/macx-ios-clang/ios",
+					/Volumes/media/Applications/QT/5.4/ios/include,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtWidgets,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtGui,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtCore,
+					.,
+					.,
+					"/Volumes/media/Applications/QT/5.4/ios/mkspecs/macx-ios-clang",
+				);
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				LIBRARY_SEARCH_PATHS = (
+					/Volumes/media/Applications/QT/5.4/ios/plugins/platforms,
+					/System/Library/Frameworks/,
+					/Volumes/media/Applications/QT/5.4/ios/lib,
+					/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats,
+				);
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-fvisibility=hidden",
+					"-fpascal-strings",
+					"-fmessage-length=0",
+					"-Wno-trigraphs",
+					"-Wreturn-type",
+					"-Wparentheses",
+					"-Wswitch",
+					"-Wno-unused-parameter",
+					"-Wunused-variable",
+					"-Wunused-value",
+					"-Wno-shorten-64-to-32",
+					"-Wno-sign-conversion",
+					"-fexceptions",
+					"-fasm-blocks",
+					"-Wno-missing-field-initializers",
+					"-Wno-missing-prototypes",
+					"-Wno-implicit-atomic-properties",
+					"-Wformat",
+					"-Wno-missing-braces",
+					"-Wno-unused-function",
+					"-Wno-unused-label",
+					"-Wuninitialized",
+					"-Wno-unknown-pragmas",
+					"-Wno-shadow",
+					"-Wno-four-char-constants",
+					"-Wno-sign-compare",
+					"-Wpointer-sign",
+					"-Wno-newline-eof",
+					"-Wdeprecated-declarations",
+					"-Winvalid-offsetof",
+					"-Wno-conversion",
+					"-g",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DDARWIN_NO_CARBON",
+					"-DQT_NO_PRINTER",
+					"-DQT_NO_PRINTDIALOG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-fvisibility=hidden",
+					"-fpascal-strings",
+					"-fmessage-length=0",
+					"-Wno-trigraphs",
+					"-Wreturn-type",
+					"-Wparentheses",
+					"-Wswitch",
+					"-Wno-unused-parameter",
+					"-Wunused-variable",
+					"-Wunused-value",
+					"-Wno-shorten-64-to-32",
+					"-Wno-sign-conversion",
+					"-fexceptions",
+					"-fasm-blocks",
+					"-Wno-missing-field-initializers",
+					"-Wno-missing-prototypes",
+					"-Wno-implicit-atomic-properties",
+					"-Wformat",
+					"-Wno-missing-braces",
+					"-Wno-unused-function",
+					"-Wno-unused-label",
+					"-Wuninitialized",
+					"-Wno-unknown-pragmas",
+					"-Wno-shadow",
+					"-Wno-four-char-constants",
+					"-Wno-sign-compare",
+					"-Wpointer-sign",
+					"-Wno-newline-eof",
+					"-Wdeprecated-declarations",
+					"-Winvalid-offsetof",
+					"-Wno-conversion",
+					"-fvisibility-inlines-hidden",
+					"-Wno-non-virtual-dtor",
+					"-Wno-overloaded-virtual",
+					"-Wno-exit-time-destructors",
+					"-g",
+					"-std=c++11",
+					"-stdlib=libc++",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DDARWIN_NO_CARBON",
+					"-DQT_NO_PRINTER",
+					"-DQT_NO_PRINTDIALOG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-headerpad_max_install_names",
+					"-stdlib=libc++",
+					"-u",
+					_qt_registerPlatformPlugin,
+					"-L/Volumes/media/Applications/QT/5.4/ios/plugins/platforms",
+					"-framework",
+					UIKit,
+					"-L/Volumes/media/Applications/QT/5.4/ios/lib",
+					"-framework",
+					OpenGLES,
+					"-L/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats",
+					"-lz",
+					"-lm",
+				);
+				PRODUCT_NAME = "ie3D-EMap";
+				QT_LIBRARY_SUFFIX = "";
+				"QT_LIBRARY_SUFFIX[sdk=iphonesimulator*]" = "_iphonesimulator$(QT_LIBRARY_SUFFIX)";
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3AA6C32AC930069E80220CF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					armv7,
+					arm64,
+					i386,
+					x86_64,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					arm64,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = (
+					i386,
+					x86_64,
+				);
+				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_COMPATIBILITY_VERSION = 1.0;
+				DYLIB_CURRENT_VERSION = 1.0.0;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					.,
+					"/Volumes/media/Applications/QT/5.4/ios/mkspecs/macx-ios-clang/ios",
+					/Volumes/media/Applications/QT/5.4/ios/include,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtWidgets,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtGui,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtCore,
+					.,
+					.,
+					"/Volumes/media/Applications/QT/5.4/ios/mkspecs/macx-ios-clang",
+				);
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				LIBRARY_SEARCH_PATHS = (
+					/Volumes/media/Applications/QT/5.4/ios/plugins/platforms,
+					/System/Library/Frameworks/,
+					/Volumes/media/Applications/QT/5.4/ios/lib,
+					/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-fvisibility=hidden",
+					"-fpascal-strings",
+					"-fmessage-length=0",
+					"-Wno-trigraphs",
+					"-Wreturn-type",
+					"-Wparentheses",
+					"-Wswitch",
+					"-Wno-unused-parameter",
+					"-Wunused-variable",
+					"-Wunused-value",
+					"-Wno-shorten-64-to-32",
+					"-Wno-sign-conversion",
+					"-fexceptions",
+					"-fasm-blocks",
+					"-Wno-missing-field-initializers",
+					"-Wno-missing-prototypes",
+					"-Wno-implicit-atomic-properties",
+					"-Wformat",
+					"-Wno-missing-braces",
+					"-Wno-unused-function",
+					"-Wno-unused-label",
+					"-Wuninitialized",
+					"-Wno-unknown-pragmas",
+					"-Wno-shadow",
+					"-Wno-four-char-constants",
+					"-Wno-sign-compare",
+					"-Wpointer-sign",
+					"-Wno-newline-eof",
+					"-Wdeprecated-declarations",
+					"-Winvalid-offsetof",
+					"-Wno-conversion",
+					"-g",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DDARWIN_NO_CARBON",
+					"-DQT_NO_PRINTER",
+					"-DQT_NO_PRINTDIALOG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-fvisibility=hidden",
+					"-fpascal-strings",
+					"-fmessage-length=0",
+					"-Wno-trigraphs",
+					"-Wreturn-type",
+					"-Wparentheses",
+					"-Wswitch",
+					"-Wno-unused-parameter",
+					"-Wunused-variable",
+					"-Wunused-value",
+					"-Wno-shorten-64-to-32",
+					"-Wno-sign-conversion",
+					"-fexceptions",
+					"-fasm-blocks",
+					"-Wno-missing-field-initializers",
+					"-Wno-missing-prototypes",
+					"-Wno-implicit-atomic-properties",
+					"-Wformat",
+					"-Wno-missing-braces",
+					"-Wno-unused-function",
+					"-Wno-unused-label",
+					"-Wuninitialized",
+					"-Wno-unknown-pragmas",
+					"-Wno-shadow",
+					"-Wno-four-char-constants",
+					"-Wno-sign-compare",
+					"-Wpointer-sign",
+					"-Wno-newline-eof",
+					"-Wdeprecated-declarations",
+					"-Winvalid-offsetof",
+					"-Wno-conversion",
+					"-fvisibility-inlines-hidden",
+					"-Wno-non-virtual-dtor",
+					"-Wno-overloaded-virtual",
+					"-Wno-exit-time-destructors",
+					"-g",
+					"-std=c++11",
+					"-stdlib=libc++",
+					"-Wall",
+					"-W",
+					"-fPIE",
+					"-DDARWIN_NO_CARBON",
+					"-DQT_NO_PRINTER",
+					"-DQT_NO_PRINTDIALOG",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-headerpad_max_install_names",
+					"-stdlib=libc++",
+					"-u",
+					_qt_registerPlatformPlugin,
+					"-L/Volumes/media/Applications/QT/5.4/ios/plugins/platforms",
+					"-framework",
+					UIKit,
+					"-L/Volumes/media/Applications/QT/5.4/ios/lib",
+					"-framework",
+					OpenGLES,
+					"-L/Volumes/media/Applications/QT/5.4/ios/plugins/imageformats",
+					"-lz",
+					"-lm",
+				);
+				PRODUCT_NAME = "ie3D-EMap";
+				QT_LIBRARY_SUFFIX = _debug;
+				"QT_LIBRARY_SUFFIX[sdk=iphonesimulator*]" = "_iphonesimulator$(QT_LIBRARY_SUFFIX)";
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6666AA5E688052234F6758D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					arm64,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = (
+					i386,
+					x86_64,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__EDITOR__=1",
+					"__IOS__=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					.,
+					"/Volumes/media/Applications/QT/5.4/ios/mkspecs/macx-ios-clang/ios",
+					/Volumes/media/Applications/QT/5.4/ios/include,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtWidgets,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtGui,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtCore,
+					.,
+					.,
+					"/Volumes/media/Applications/QT/5.4/ios/mkspecs/macx-ios-clang",
+					"\"$(SRCROOT)/../ie3D-Core/Sources\"",
+					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
+					"\"$(SRCROOT)/../ie3D-Core/Autogenerated\"",
+					"\"$(SRCROOT)/../ie3D-Engine/Sources\"",
+					"\"$(SRCROOT)/../ie3D-Engine/Autogenerated\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "ie3D-EMap";
+				QT_LIBRARY_SUFFIX = "";
+				"QT_LIBRARY_SUFFIX[sdk=iphonesimulator*]" = "_iphonesimulator$(QT_LIBRARY_SUFFIX)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		77418F46922677BB04ED38DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					arm64,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = (
+					i386,
+					x86_64,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__EDITOR__=1",
+					"__IOS__=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					.,
+					"/Volumes/media/Applications/QT/5.4/ios/mkspecs/macx-ios-clang/ios",
+					/Volumes/media/Applications/QT/5.4/ios/include,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtWidgets,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtGui,
+					/Volumes/media/Applications/QT/5.4/ios/include/QtCore,
+					.,
+					.,
+					"/Volumes/media/Applications/QT/5.4/ios/mkspecs/macx-ios-clang",
+					"\"$(SRCROOT)/../ie3D-Core/Sources\"",
+					"\"$(SRCROOT)/../ie3D-Core/Libraries\"",
+					"\"$(SRCROOT)/../ie3D-Core/Autogenerated\"",
+					"\"$(SRCROOT)/../ie3D-Engine/Sources\"",
+					"\"$(SRCROOT)/../ie3D-Engine/Autogenerated\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "ie3D-EMap";
+				QT_LIBRARY_SUFFIX = _debug;
+				"QT_LIBRARY_SUFFIX[sdk=iphonesimulator*]" = "_iphonesimulator$(QT_LIBRARY_SUFFIX)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "ie3D-EMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77418F46922677BB04ED38DD /* Debug */,
+				6666AA5E688052234F6758D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DAC4C1AA5EDEA1C85E9CA5E6 /* Build configuration list for PBXProject "ie3D-EMap-IOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AA6C32AC930069E80220CF1 /* Debug */,
+				339EE1B2CC4FC24589A0EA95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6DB9C3763D02B1415CD9D565 /* Project object */;
+}
