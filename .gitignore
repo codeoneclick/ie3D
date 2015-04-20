@@ -17,6 +17,8 @@
 *.suo
 *.sdf
 *.d
+*.hmap
+*.dia
 
 # Compiled Static libraries
 *.lai
@@ -42,3 +44,4 @@
 Debug/
 Release/
 bin/
+build/
