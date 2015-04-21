@@ -72,7 +72,6 @@ private:
         SFace(SFace&& copy) = delete;
         SFace& operator = (const SFace& copy) = delete;
         SFace& operator = (SFace&& copy) = delete;
-
     };
     
 protected:
@@ -230,6 +229,26 @@ public:
     };
 };
 
+class CHeightmapTextureMMAP : public CHeightmapMMAP
+{
+private:
+    
+protected:
+    
+public:
+    
+    CHeightmapTextureMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor) : CHeightmapMMAP(descriptor) { };
+    ~CHeightmapTextureMMAP(void) = default;
+    
+    inline ui16* getPointer(void) const
+    {
+        ui16* pointer = (ui16* )m_descriptor->pointer();
+        assert(pointer != nullptr);
+        
+        return pointer + m_offset;
+    };
+};
+
 class CHeightmapGenerator
 {
 private:
@@ -243,9 +262,11 @@ protected:
     
     std::shared_ptr<ie::mmap_memory> m_vbosMMAPDescriptor;
     std::shared_ptr<ie::mmap_memory> m_ibosMMAPDescriptor;
+    std::shared_ptr<ie::mmap_memory> m_texturesMMAPDescriptor;
     
     std::vector<std::shared_ptr<CHeightmapVBOMMAP>> m_vbosMMAP;
     std::vector<std::array<std::shared_ptr<CHeightmapIBOMMAP>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
+    std::vector<std::shared_ptr<CHeightmapTextureMMAP>> m_texturesMMAP;
     
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_callbacks;
     std::vector<std::tuple<CSharedMesh, CSharedQuadTree, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
@@ -253,6 +274,7 @@ protected:
     
     std::string createVBOs(void);
     std::string createIBOs(void);
+    std::string createTextures(void);
     
     CSharedTexture m_heightmapTexture;
     CSharedTexture m_splattingTexture;
@@ -268,6 +290,7 @@ protected:
     void initContainers(const std::shared_ptr<CHeightmap>& heightmap);
     void createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(ui32 index);
+    CSharedTexture generateDiffuseTexture(ui32 index, CSharedMaterialRef material);
     
     void createChunkBound(const glm::ivec2& index,
                           glm::vec3* minBound, glm::vec3* maxBound);
@@ -310,8 +333,10 @@ public:
     void update(void);
     
     void runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
+                         CSharedMaterialRef preprocessSplattingTextureMaterial,
                          const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
-                         const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback);
+                         const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback,
+                         const std::function<void(CSharedTextureRef)>& textureGeneratedCallback);
     void runChunkUnLoading(ui32 i, ui32 j);
     
     const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;

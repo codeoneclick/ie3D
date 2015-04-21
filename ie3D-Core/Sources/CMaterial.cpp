@@ -498,18 +498,6 @@ void CMaterial::bind(void)
     
     for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
     {
-        /*if((m_parameters->m_textures[i] != nullptr &&
-            getCachedParameters()->m_textures[i] != nullptr &&
-            m_parameters->m_textures[i]->getTextureId() != getCachedParameters()->m_textures[i]->getTextureId())
-           
-           ||
-           
-           (m_parameters->m_textures[i] != nullptr &&
-            getCachedParameters()->m_textures[i] == nullptr))
-         {
-         m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
-         getCachedParameters()->m_textures[i] = m_parameters->m_textures[i];
-         }*/
         if(m_parameters->m_textures[i] != nullptr)
         {
             m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));

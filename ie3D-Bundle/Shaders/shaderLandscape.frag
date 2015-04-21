@@ -54,7 +54,8 @@ float getCurrentDepth(in  float fZ)
 
 void main(void)
 {
-    float diffuseFactor = max(dot(OUT_Normal, OUT_LightDirection), 0.25);
+    gl_FragColor = texture2D(SAMPLER_01, OUT_TexCoord);
+   /*float diffuseFactor = max(dot(OUT_Normal, OUT_LightDirection), 0.25);
     vec4 diffuseColor = vec4(0.0, 0.0, 0.0, 1.0);
     
 #if defined(__OSX__) || (defined(__IOS__) && defined(__IOS_HIGH_PERFORMANCE__))
@@ -123,5 +124,5 @@ void main(void)
     diffuseColor = vec4(diffuseColor.rgb * min(diffuseFactor, 1.0), 1.0);
     diffuseColor = mix(vec4(vec3(0.16, 0.32, 0.32) * diffuseFactor, 1.0), diffuseColor, OUT_Fog);
     diffuseColor.rgb *= fShadow;
-    gl_FragColor = diffuseColor;
+    gl_FragColor = diffuseColor;*/
 }

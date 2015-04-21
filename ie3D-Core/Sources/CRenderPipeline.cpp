@@ -130,10 +130,23 @@ void CRenderPipeline::_OnGameLoopUpdate(f32 deltatime)
     }
 }
 
-CSharedTexture CRenderPipeline::preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height)
+CSharedTexture CRenderPipeline::preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height, bool force)
 {
     CSharedRenderTechniqueScreenSpace technique = std::make_shared<CRenderTechniqueScreenSpace>(width, height, "render.technique.custom", material);
-    m_customScreenSpaceRenderTechniquesQueue.push(technique);
+    //if(!force)
+    {
+        m_customScreenSpaceRenderTechniquesQueue.push(technique);
+    }
+    //else
+    //{
+    //    m_graphicsContext->makeCurrent();
+        
+    //    technique->bind();
+    //    technique->draw();
+    //    technique->unbind();
+        
+    //    IRenderTechniqueImporter::saveTexture(technique->getOperatingTexture(), "new.png", 1024, 1024);
+    ///}
     return technique->getOperatingTexture();
 }
 

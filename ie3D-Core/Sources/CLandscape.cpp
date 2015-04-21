@@ -22,7 +22,8 @@
 
 CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
                        ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
-IGameObject(resourceAccessor, renderTechniqueAccessor)
+IGameObject(resourceAccessor, renderTechniqueAccessor),
+m_preprocessSplattingTextureMaterial(nullptr)
 {
 }
 
@@ -94,7 +95,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         m_chunks[index]->setCamera(m_camera);
                         m_chunks[index]->setCameraFrustum(m_cameraFrustum);
                         m_chunks[index]->setInprogressLOD(LOD);
-                        m_heightmapGenerator->runChunkLoading(i, j, LOD, [this, index, i, j, LOD](CSharedMeshRef mesh) {
+                        m_heightmapGenerator->runChunkLoading(i, j, LOD, m_preprocessSplattingTextureMaterial, [this, index, i, j, LOD](CSharedMeshRef mesh) {
                             
                             m_chunks[index]->onAddedToScene(m_renderTechniqueImporter,
                                                             m_sceneUpdateMgr);
@@ -103,20 +104,22 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
+                        }, [this, index](CSharedTextureRef texture) {
+                            m_chunks[index]->setPreprocessedSplattingTexture(texture);
                         });
                     }
                     else if(m_chunks[index]->getInprogressLOD() == m_chunks[index]->getCurrentLOD() &&
                             m_chunks[index]->getCurrentLOD() != LOD)
                     {
                         m_chunks[index]->setInprogressLOD(LOD);
-                        m_heightmapGenerator->runChunkLoading(i, j, LOD, [this, i, j, index, LOD](CSharedMeshRef mesh) {
+                        m_heightmapGenerator->runChunkLoading(i, j, LOD, nullptr, [this, i, j, index, LOD](CSharedMeshRef mesh) {
                             m_chunks[index]->setQuadTree(nullptr, m_chunks[index]->getCurrentLOD());
                             m_chunks[index]->setMesh(mesh);
                             m_chunks[index]->onSceneUpdate(0);
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
                             m_chunks[index]->onSceneUpdate(0);
-                        });
+                        }, nullptr);
                     }
                 }
                 else if(m_chunks[index] != nullptr)
@@ -146,6 +149,15 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     
     m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapGenerator->createSplattingTexture());
     m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapGenerator->createHeightmapTexture());
+    
+    if(configurationLandscape->getPreprocessSplattingMaterialFilename().length() != 0)
+    {
+        CSharedConfigurationMaterial configurationPreprocessSplatting = std::make_shared<CConfigurationMaterial>();
+        configurationPreprocessSplatting->serialize(configurationLandscape->getPreprocessSplattingMaterialFilename());
+        m_preprocessSplattingTextureMaterial = CMaterial::constructCustomMaterial(configurationPreprocessSplatting,
+                                                                                  m_resourceAccessor,
+                                                                                  m_renderTechniqueAccessor);
+    }
     
     IGameObject::onConfigurationLoaded(configuration, success);
     
@@ -193,6 +205,7 @@ void CLandscape::onDraw(CSharedMaterialRef material)
         std::for_each(m_chunks.cbegin(), m_chunks.cend(), [material, this](CSharedLandscapeChunk chunk) {
             if(chunk && chunk->m_mesh && chunk->m_numPassedIndexes > 0)
             {
+                material->getShader()->setTexture(chunk->getPreprocessedSplattingTexture(), E_SHADER_SAMPLER_01);
                 chunk->m_mesh->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
                 chunk->m_mesh->draw(chunk->m_numPassedIndexes);
                 chunk->m_mesh->unbind(material->getShader()->getGUID(), material->getShader()->getAttributes());

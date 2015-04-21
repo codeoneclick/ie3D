@@ -29,7 +29,8 @@ m_numPassedIndexes(0),
 m_quadTree(nullptr),
 m_currentLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
 m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
-m_size(0)
+m_size(0),
+m_preprocessedSplattingTexture(nullptr)
 {
 
 }
@@ -88,6 +89,16 @@ void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuratio
         m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this());
     }
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+}
+
+void CLandscapeChunk::setPreprocessedSplattingTexture(CSharedTextureRef texture)
+{
+    m_preprocessedSplattingTexture = texture;
+}
+
+const CSharedTexture CLandscapeChunk::getPreprocessedSplattingTexture(void) const
+{
+    return m_preprocessedSplattingTexture;
 }
 
 CSharedVertexBuffer CLandscapeChunk::getCollisionVertexBuffer(void) const

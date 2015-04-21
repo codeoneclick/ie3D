@@ -26,7 +26,7 @@ public:
     IRenderTechniqueAccessor(void);
     virtual ~IRenderTechniqueAccessor(void);
     
-    virtual CSharedTexture preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height) = 0;
+    virtual CSharedTexture preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height, bool force = false) = 0;
     virtual CSharedTexture getTechniqueTexture(const std::string& techniqueName) = 0;
     virtual CSharedMaterial getTechniqueMaterial(const std::string& techniqueName) = 0;
     

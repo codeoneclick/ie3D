@@ -1,6 +1,7 @@
 <landscape
     heightmap_data_filename="map_01"
     splatting_data_filename="map_01"
+    preprocess_splatting_material_filename="material.landscape.preprocess.splatting.xml"
     z_order="1"
     size_x="512"
     size_y="512"

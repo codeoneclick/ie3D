@@ -26,6 +26,7 @@ private:
     
     ui32 m_numPassedIndexes;
     CSharedQuadTree m_quadTree;
+    CSharedTexture m_preprocessedSplattingTexture;
     
 protected:
     
@@ -51,6 +52,9 @@ public:
     E_LANDSCAPE_CHUNK_LOD getCurrentLOD(void) const;
     E_LANDSCAPE_CHUNK_LOD getInprogressLOD(void) const;
     void setInprogressLOD(E_LANDSCAPE_CHUNK_LOD LOD);
+    
+    const CSharedTexture getPreprocessedSplattingTexture(void) const;
+    void setPreprocessedSplattingTexture(CSharedTextureRef texture);
     
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;

@@ -19,7 +19,7 @@ public IEditableLandscape
 private:
 
     f32 m_tillingTexcoord[E_SHADER_SAMPLER_MAX];
-    
+    CSharedMaterial m_preprocessSplattingTextureMaterial;
     
 protected:
 

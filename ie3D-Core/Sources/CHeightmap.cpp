@@ -31,6 +31,8 @@
 
 #endif
 
+#define __PERFORMANCE_TIMER__ 1
+
 static ui32 g_heightmapGUID = 0;
 
 CHeightmap::CHeightmap(const std::string& filename, const glm::ivec2& size) :
@@ -619,7 +621,8 @@ m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_heightmapTexture(nullptr),
 m_splattingTexture(nullptr),
 m_vbosMMAPDescriptor(nullptr),
-m_ibosMMAPDescriptor(nullptr)
+m_ibosMMAPDescriptor(nullptr),
+m_texturesMMAPDescriptor(nullptr)
 {
     assert(m_renderTechniqueAccessor != nullptr);
     assert(configuration != nullptr);
@@ -699,6 +702,15 @@ void CHeightmapGenerator::initContainers(const std::shared_ptr<CHeightmap>& heig
     m_ibosMMAPDescriptor = std::make_shared<ie::mmap_memory>();
     m_ibosMMAP.clear();
     m_ibosMMAPDescriptor->allocate(CHeightmapGenerator::createIBOs());
+    
+    if(m_texturesMMAPDescriptor)
+    {
+        m_texturesMMAPDescriptor->deallocate();
+        m_texturesMMAPDescriptor = nullptr;
+    }
+    m_texturesMMAPDescriptor = std::make_shared<ie::mmap_memory>();
+    m_texturesMMAP.clear();
+    m_texturesMMAPDescriptor->allocate(CHeightmapGenerator::createTextures());
 }
 
 CHeightmapGenerator::~CHeightmapGenerator(void)
@@ -720,8 +732,11 @@ void CHeightmapGenerator::generateVertices(const glm::ivec2& size, f32 frequency
 
 std::string CHeightmapGenerator::createVBOs(void)
 {
+    
 #if defined(__PERFORMANCE_TIMER__)
+    
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+    
 #endif
     
     m_vbosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
@@ -747,8 +762,7 @@ std::string CHeightmapGenerator::createVBOs(void)
     glm::ivec2 verticesOffset(0);
     ui32 verticesWroteToMMAP = 0;
     
-    SAttributeVertex* vertices = new SAttributeVertex[m_chunkSize.x * m_chunkSize.y];
-
+    SAttributeVertex vertex;
     for(ui32 i = 0; i < m_chunksNum.x; ++i)
     {
         verticesOffset.y = 0;
@@ -758,12 +772,17 @@ std::string CHeightmapGenerator::createVBOs(void)
             {
                 for(ui32 y = 0; y < m_chunkSize.y; ++y)
                 {
-                    ui32 index = y + x * m_chunkSize.y;
-                    vertices[index].m_position = m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y);
-                    vertices[index].m_texcoord = m_heightmap->getVertexTexcoord(x + verticesOffset.x, y + verticesOffset.y);
-                    vertices[index].m_normal = m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y);
+                    vertex.m_position = m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y);
+                    //vertex.m_texcoord = m_heightmap->getVertexTexcoord(x + verticesOffset.x, y + verticesOffset.y);
+                    vertex.m_normal = m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y);
+                    vertex.m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<f32>(x) / static_cast<f32>(m_chunkSize.x),
+                                                                     static_cast<f32>(y) / static_cast<f32>(m_chunkSize.y)));
+                    
+                    stream.write((char*)&vertex, sizeof(SAttributeVertex));
                     
 #if !defined(__IOS__)
+                    
+                    ui32 index = y + x * m_chunkSize.y;
                     m_heightmap->attachUncompressedVertexToVBO(x + verticesOffset.x, y + verticesOffset.y,
                                                                i + j * m_chunksNum.x, index);
                     
@@ -771,11 +790,6 @@ std::string CHeightmapGenerator::createVBOs(void)
                 }
             }
             verticesOffset.y += m_chunkSize.y - 1;
-            
-            for(ui32 index = 0; index < m_chunkSize.x * m_chunkSize.y; ++index)
-            {
-                stream.write((char*)&vertices[index], sizeof(SAttributeVertex));
-            }
             
             m_vbosMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapVBOMMAP>(m_vbosMMAPDescriptor);
             m_vbosMMAP[i + j * m_chunksNum.x]->setSize(m_chunkSize.x * m_chunkSize.y);
@@ -787,13 +801,12 @@ std::string CHeightmapGenerator::createVBOs(void)
     
     stream.close();
     
-    delete[] vertices;
-    vertices = nullptr;
-    
 #if defined(__PERFORMANCE_TIMER__)
+    
     std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
     f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
-    std::cout<<"createVBO: "<<duration<<std::endl;
+    std::cout<<"createVBOs: "<<duration<<" microseconds"<<std::endl;
+    
 #endif
     
     return filename;
@@ -801,6 +814,13 @@ std::string CHeightmapGenerator::createVBOs(void)
 
 std::string CHeightmapGenerator::createIBOs(void)
 {
+    
+#if defined(__PERFORMANCE_TIMER__)
+    
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+    
+#endif
+    
     m_ibosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
     
     std::string filename;
@@ -1040,6 +1060,132 @@ std::string CHeightmapGenerator::createIBOs(void)
     }
     stream.close();
     
+#if defined(__PERFORMANCE_TIMER__)
+    
+    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+    f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+    std::cout<<"createIBOs: "<<duration<<" microseconds"<<std::endl;
+    
+#endif
+    
+    return filename;
+}
+
+std::string CHeightmapGenerator::createTextures(void)
+{
+    
+#if defined(__PERFORMANCE_TIMER__)
+    
+    std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
+    
+#endif
+    m_texturesMMAP.resize(m_chunksNum.x * m_chunksNum.y);
+    
+    std::string filename;
+    std::ostringstream stringstream;
+    stringstream<<"textures_"<<m_heightmapGUID<<std::endl;
+    filename = stringstream.str();
+    
+#if defined(__IOS__)
+    
+    filename = documentspath() + filename;
+    
+#endif
+    
+    std::ofstream stream;
+    stream.open(filename.c_str(), std::ios::binary | std::ios::out | std::ios::trunc);
+    if(!stream.is_open())
+    {
+        assert(false);
+    }
+    
+    glm::ivec2 verticesOffset(0);
+    ui32 pixelsWroteToMMAP = 0;
+    
+    ui16* pixels = new ui16[m_chunkSize.x * m_chunkSize.y];
+    
+    for(ui32 i = 0; i < m_chunksNum.x; ++i)
+    {
+        verticesOffset.y = 0;
+        for(ui32 j = 0; j < m_chunksNum.y; ++j)
+        {
+            for(ui32 x = 0; x < m_chunkSize.x; ++x)
+            {
+                for(ui32 y = 0; y < m_chunkSize.y; ++y)
+                {
+                    ui32 index = x + y * m_chunkSize.x;
+                    ui16 pixel;
+                    /*if(index > m_chunkSize.x * m_chunkSize.x / 2)
+                    {
+                        pixel = TO_RGB565(255, 0, 0);
+                    }
+                     else
+                     {
+                     pixel = TO_RGB565(0, 255, 0);
+                     }*/
+                    
+                    //f32 height = m_vbosMMAP[i + j *  m_chunksNum.x]->getPointer()[index].m_position.y; //m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y).y;
+                    if(y > m_chunkSize.y / 2)
+                    {
+                        pixel = TO_RGB565(255, 0, 0);
+                    }
+                    else
+                    {
+                        pixel = TO_RGB565(0, 255, 0);
+                    }
+                     
+                    stream.write((char*)&pixel, sizeof(ui16));
+                    
+                    /*f32 height = m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y).y;
+                    glm::vec4 normal = glm::unpackSnorm4x8(m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y));
+                    
+                    f32 angle = glm::dot(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(normal.x, normal.y, normal.z));
+                    angle = glm::degrees(acosf(angle));
+                    assert(angle >= 0.0);
+                    
+                    if(height >= 0.25 && angle > 45.0)
+                    {
+                        pixels[index] = TO_RGB565(0, 255, 0);
+                    }
+                    
+                    if(height < 0.25)
+                    {
+                        pixels[index] = TO_RGB565(0, 0, 255);
+                    }*/
+                }
+            }
+            verticesOffset.y += m_chunkSize.y - 1;
+            
+            /*for(ui32 y = 0; y < m_chunkSize.y; ++y)
+            {
+                for(ui32 x = 0; x < m_chunkSize.x; ++x)
+                {
+                    ui32 index = x + y * m_chunkSize.x;
+                    stream.write((char*)&pixels[index], sizeof(ui16));
+                }
+            }*/
+            
+            m_texturesMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapTextureMMAP>(m_texturesMMAPDescriptor);
+            m_texturesMMAP[i + j * m_chunksNum.x]->setSize(m_chunkSize.x * m_chunkSize.y);
+            m_texturesMMAP[i + j * m_chunksNum.x]->setOffset(pixelsWroteToMMAP);
+            pixelsWroteToMMAP += m_chunkSize.x * m_chunkSize.y;
+        }
+        verticesOffset.x += m_chunkSize.x - 1;
+    }
+    
+    stream.close();
+    
+    delete[] pixels;
+    pixels = nullptr;
+    
+#if defined(__PERFORMANCE_TIMER__)
+    
+    std::chrono::steady_clock::time_point endTimestamp = std::chrono::steady_clock::now();
+    f32 duration = std::chrono::duration_cast<std::chrono::microseconds>(endTimestamp - startTimestamp).count();
+    std::cout<<"createTextures: "<<duration<<" microseconds"<<std::endl;
+    
+#endif
+    
     return filename;
 }
 
@@ -1180,7 +1326,7 @@ void CHeightmapGenerator::updateHeightmapTexture(CSharedTextureRef texture, bool
     if(isCreation)
     {
         data = new ui8[m_heightmap->getSize().x * m_heightmap->getSize().y];
-        f32 maxDeep = abs(m_heightmap->getMinHeight());
+        f32 maxDeep = fabsf(m_heightmap->getMinHeight());
         for(int i = 0; i < m_heightmap->getSize().x; i++)
         {
             for(int j = 0; j < m_heightmap->getSize().y; j++)
@@ -1217,7 +1363,7 @@ void CHeightmapGenerator::updateHeightmapTexture(CSharedTextureRef texture, bool
         assert(offsetY >= 0);
         assert(offsetY + subHeight < texture->getHeight());
         
-        f32 maxDeep = abs(m_heightmap->getMinHeight());
+        f32 maxDeep = fabsf(m_heightmap->getMinHeight());
         
         data = new ui8[subWidth * subHeight];
         for(int i = 0; i < subWidth; i++)
@@ -1386,9 +1532,37 @@ void CHeightmapGenerator::generateQuadTree(ui32 index)
     std::get<1>(m_chunksMetadata[index]) = quadTree;
 }
 
+CSharedTexture CHeightmapGenerator::generateDiffuseTexture(ui32 index, CSharedMaterialRef material)
+{
+    assert(m_texturesMMAP[index]->getPointer() != nullptr);
+    
+    std::ostringstream stringstream;
+    stringstream<<"texture_"<<index<<"_"<<m_heightmapGUID<<std::endl;
+    
+    ui32 textureId = CHeightmapGenerator::createTextureId();
+    glm::ivec2 size = glm::ivec2(sqrt(m_texturesMMAP[index]->getSize()));
+    CSharedTexture texture = CTexture::constructCustomTexture(stringstream.str(), textureId,
+                                                              size.x, size.y);
+    texture->setWrapMode(GL_CLAMP_TO_EDGE);
+    texture->setMagFilter(GL_LINEAR);
+    texture->setMinFilter(GL_LINEAR);
+    
+    texture->bind();
+    
+    ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
+                 size.x, size.y,
+                 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, m_texturesMMAP[index]->getPointer());
+    
+    material->setTexture(texture, E_SHADER_SAMPLER_04);
+    
+    return texture;//m_renderTechniqueAccessor->preprocessTexture(material, 1024, 1024, true);;
+}
+
 void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
+                                          CSharedMaterialRef preprocessSplattingTextureMaterial,
                                           const std::function<void(CSharedMeshRef)>& meshCreatedCallback,
-                                          const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback)
+                                          const std::function<void(CSharedQuadTreeRef)>& quadTreeGeneratedCallback,
+                                          const std::function<void(CSharedTextureRef)>& textureGeneratedCallback)
 {
     ui32 index = i + j * m_chunksNum.x;
     if(m_executedOperations[index] != nullptr)
@@ -1416,18 +1590,6 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     assert(std::get<1>(m_chunksMetadata[index]) == nullptr);
     assert(std::get<2>(m_chunksMetadata[index]) != E_LANDSCAPE_CHUNK_LOD_UNKNOWN);
     
-    CSharedThreadOperation createMeshOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
-    createMeshOperation->setExecutionBlock([this, index, LOD](void) {
-        CHeightmapGenerator::createMesh(index, LOD);
-        assert(std::get<0>(m_callbacks[index]) != nullptr);
-        std::get<0>(m_callbacks[index])(std::get<0>(m_chunksMetadata[index]));
-    });
-    
-    CSharedThreadOperation generateQuadTreeOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    generateQuadTreeOperation->setExecutionBlock([this, index, LOD](void) {
-        CHeightmapGenerator::generateQuadTree(index);
-    });
-    
     CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     completionOperation->setExecutionBlock([this, index](void) {
         assert(std::get<1>(m_callbacks[index]) != nullptr);
@@ -1435,7 +1597,28 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
         m_executedOperations[index] = nullptr;
     });
     
+    if(preprocessSplattingTextureMaterial)
+    {
+        CSharedThreadOperation createDiffuseTexture = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+        createDiffuseTexture->setExecutionBlock([this, index, preprocessSplattingTextureMaterial, textureGeneratedCallback](void) {
+            CSharedTexture texture = CHeightmapGenerator::generateDiffuseTexture(index, preprocessSplattingTextureMaterial);
+            textureGeneratedCallback(texture);
+        });
+        completionOperation->addDependency(createDiffuseTexture);
+    }
+    
+    CSharedThreadOperation createMeshOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+    createMeshOperation->setExecutionBlock([this, index, LOD](void) {
+        CHeightmapGenerator::createMesh(index, LOD);
+        assert(std::get<0>(m_callbacks[index]) != nullptr);
+        std::get<0>(m_callbacks[index])(std::get<0>(m_chunksMetadata[index]));
+    });
     completionOperation->addDependency(createMeshOperation);
+    
+    CSharedThreadOperation generateQuadTreeOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+    generateQuadTreeOperation->setExecutionBlock([this, index, LOD](void) {
+        CHeightmapGenerator::generateQuadTree(index);
+    });
     completionOperation->addDependency(generateQuadTreeOperation);
     
     assert(m_executedOperations[index] == nullptr);

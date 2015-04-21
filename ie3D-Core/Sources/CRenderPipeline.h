@@ -31,7 +31,7 @@ public:
     
     void setBatchingMgr(CSharedBatchingMgrRef batchingMgr);
     
-    CSharedTexture preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height);
+    CSharedTexture preprocessTexture(CSharedMaterialRef material, ui32 width, ui32 height, bool force = false);
     CSharedTexture getTechniqueTexture(const std::string& techniqueName);
     CSharedMaterial getTechniqueMaterial(const std::string& techniqueName);
     
