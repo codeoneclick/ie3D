@@ -73,8 +73,6 @@ void CLandscape::onSceneUpdate(f32 deltatime)
 {
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
-        m_heightmapGenerator->update();
-        
         glm::ivec2 numChunks = m_heightmapGenerator->getNumChunks();
         
         for(i32 i = 0; i < numChunks.x; ++i)

@@ -33,7 +33,11 @@ CThreadOperationPool::CThreadOperationPool(void)
 
 CThreadOperationPool::~CThreadOperationPool(void)
 {
-    
+    m_isRunning = 0;
+    for(ui32 index = 0; index < MAX_THREADS_PER_QUEUE; ++index)
+    {
+        m_threads.at(index).join();
+    }
 }
 
 void CThreadOperationPool::addOperation(CSharedThreadOperationRef operation, E_THREAD_OPERATION_QUEUE operationQueue)

@@ -53,7 +53,7 @@ void CFrustum::onSceneUpdate(f32 deltatime)
 {
     if(m_camera != nullptr)
     {
-        f32 tan = tanf(glm::radians(m_camera->getFOV()));
+        f32 tan = tanf(glm::radians(m_camera->getFOV() * 0.6f));
         f32 nearHeight = m_camera->getNear() * tan;
         f32 nearWidth = nearHeight * m_camera->getAspect();
         f32 farHeight = m_camera->getFar()  * tan;
