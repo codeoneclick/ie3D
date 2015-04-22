@@ -124,6 +124,7 @@ public:
     
     static f32 getHeight(CSharedHeightmapRef data, const glm::vec3& position);
     static glm::vec2 getAngleOnHeightmapSurface(CSharedHeightmapRef data, const glm::vec3& position);
+    static glm::vec3 getNormal(CSharedHeightmapRef data, const glm::vec3& position);
 };
 
 namespace ie

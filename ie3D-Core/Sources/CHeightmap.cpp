@@ -516,6 +516,42 @@ f32 CHeightmapAccessor::getHeight(CSharedHeightmapRef data, const glm::vec3& pos
     return height_0 * (1.0f - dx) + height_1 * dx;
 }
 
+glm::vec3 CHeightmapAccessor::getNormal(CSharedHeightmapRef data, const glm::vec3& position)
+{
+    f32 _x = position.x / 1.0;
+    f32 _z = position.z / 1.0;
+    i32 x = static_cast<i32>(floor(_x));
+    i32 z = static_cast<i32>(floor(_z));
+    
+    if((x < 0) || (z < 0) || (x > (data->getSize().x - 1)) || (z > (data->getSize().y - 1)))
+    {
+        return glm::vec3(0.0f, 1.0f, 0.0f);
+    }
+    
+    glm::vec4 normal_00 = glm::unpackSnorm4x8(data->getVertexNormal(x, z));
+    
+    glm::vec4 normal_01 = glm::unpackSnorm4x8(data->getVertexNormal(x, z));
+    if(z < (data->getSize().y - 1) && z >= 0)
+    {
+        normal_01 = glm::unpackSnorm4x8(data->getVertexNormal(x, z + 1));
+    }
+    
+    glm::vec4 normal_10 = glm::unpackSnorm4x8(data->getVertexNormal(x, z));
+    if(x < (data->getSize().x - 1) && x >= 0)
+    {
+        normal_10 = glm::unpackSnorm4x8(data->getVertexNormal(x + 1, z));
+    }
+    
+    glm::vec4 normal_11 = glm::unpackSnorm4x8(data->getVertexNormal(x, z));
+    if(z < (data->getSize().y - 1) && z >= 0 && x < (data->getSize().x - 1) && x >= 0)
+    {
+        normal_11 =  glm::unpackSnorm4x8(data->getVertexNormal(x + 1, z + 1));
+    }
+    
+    glm::vec4 normal = (normal_00 + normal_01 + normal_10 + normal_11) / 4.0f;
+    return glm::normalize(glm::vec3(normal.x, normal.y, normal.z));
+}
+
 glm::vec2 CHeightmapAccessor::getAngleOnHeightmapSurface(CSharedHeightmapRef data, const glm::vec3& position)
 {
     f32 offset = 0.25;
@@ -1102,73 +1138,70 @@ std::string CHeightmapGenerator::createTextures(void)
     glm::ivec2 verticesOffset(0);
     ui32 pixelsWroteToMMAP = 0;
     
-    ui16* pixels = new ui16[m_chunkSize.x * m_chunkSize.y];
+    glm::ivec2 size = glm::ivec2(256, 256);
+    glm::vec2 step = glm::vec2(static_cast<f32>(m_chunkSize.x) / static_cast<f32>(size.x) ,
+                               static_cast<f32>(m_chunkSize.y) / static_cast<f32>(size.y));
+
+    glm::vec3 offset = glm::vec3(0.0f);
+    
+    ui16* pixels = new ui16[size.x * size.y];
     
     for(ui32 i = 0; i < m_chunksNum.x; ++i)
     {
         verticesOffset.y = 0;
         for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
-            for(ui32 x = 0; x < m_chunkSize.x; ++x)
+            offset = glm::vec3(0.0f);
+            for(ui32 x = 0; x < size.x; ++x)
             {
-                for(ui32 y = 0; y < m_chunkSize.y; ++y)
+                offset.z = 0.0f;
+                for(ui32 y = 0; y < size.y; ++y)
                 {
-                    ui32 index = x + y * m_chunkSize.x;
-                    ui16 pixel;
-                    /*if(index > m_chunkSize.x * m_chunkSize.x / 2)
-                    {
-                        pixel = TO_RGB565(255, 0, 0);
-                    }
-                     else
-                     {
-                     pixel = TO_RGB565(0, 255, 0);
-                     }*/
+                    ui32 index = x + y * size.x;
                     
-                    //f32 height = m_vbosMMAP[i + j *  m_chunksNum.x]->getPointer()[index].m_position.y; //m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y).y;
-                    if(y > m_chunkSize.y / 2)
-                    {
-                        pixel = TO_RGB565(255, 0, 0);
-                    }
-                    else
-                    {
-                        pixel = TO_RGB565(0, 255, 0);
-                    }
-                     
-                    stream.write((char*)&pixel, sizeof(ui16));
+                    pixels[index] = TO_RGB565(255, 0, 0);
+                    f32 height = CHeightmapAccessor::getHeight(m_heightmap, glm::vec3(offset.x + verticesOffset.x, 0.0f, offset.z + verticesOffset.y));
+                    glm::vec3 normal = CHeightmapAccessor::getNormal(m_heightmap, glm::vec3(offset.x + verticesOffset.x, 0.0f, offset.z + verticesOffset.y));
                     
-                    /*f32 height = m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y).y;
-                    glm::vec4 normal = glm::unpackSnorm4x8(m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y));
-                    
-                    f32 angle = glm::dot(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(normal.x, normal.y, normal.z));
+                    f32 angle = glm::dot(glm::vec3(0.0f, 1.0f, 0.0f), normal);
                     angle = glm::degrees(acosf(angle));
                     assert(angle >= 0.0);
-                    
-                    if(height >= 0.25 && angle > 45.0)
+
+                    if(height > 1.0)
                     {
-                        pixels[index] = TO_RGB565(0, 255, 0);
+                        pixels[index] = TO_RGB565(glm::mix(0, 255, 1.0f - MIN(angle / 45.0f, 1.0f)), glm::mix(0, 255, MIN(angle / 45.0f, 1.0f)), 0);
                     }
                     
-                    if(height < 0.25)
+                    if(height <= 1.0f && height > 0.0f)
+                    {
+                        pixels[index] = TO_RGB565(glm::mix(0, 255, height), 0, glm::mix(0, 255, 1.0f - height));
+                    }
+                    
+                    if(height <= 0.0f)
                     {
                         pixels[index] = TO_RGB565(0, 0, 255);
-                    }*/
+                    }
+                    
+                    offset.z += step.y;
                 }
+                offset.x += step.x;
             }
             verticesOffset.y += m_chunkSize.y - 1;
             
-            /*for(ui32 y = 0; y < m_chunkSize.y; ++y)
+            i32 index = 0;
+            for(ui32 x = 0; x < size.x; ++x)
             {
-                for(ui32 x = 0; x < m_chunkSize.x; ++x)
+                for(ui32 y = 0; y < size.y; ++y)
                 {
-                    ui32 index = x + y * m_chunkSize.x;
                     stream.write((char*)&pixels[index], sizeof(ui16));
+                    index++;
                 }
-            }*/
+            }
             
             m_texturesMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapTextureMMAP>(m_texturesMMAPDescriptor);
-            m_texturesMMAP[i + j * m_chunksNum.x]->setSize(m_chunkSize.x * m_chunkSize.y);
+            m_texturesMMAP[i + j * m_chunksNum.x]->setSize(size.x * size.y);
             m_texturesMMAP[i + j * m_chunksNum.x]->setOffset(pixelsWroteToMMAP);
-            pixelsWroteToMMAP += m_chunkSize.x * m_chunkSize.y;
+            pixelsWroteToMMAP += size.x * size.y;
         }
         verticesOffset.x += m_chunkSize.x - 1;
     }
@@ -1555,7 +1588,14 @@ CSharedTexture CHeightmapGenerator::generateDiffuseTexture(ui32 index, CSharedMa
     
     material->setTexture(texture, E_SHADER_SAMPLER_04);
     
-    return texture;//m_renderTechniqueAccessor->preprocessTexture(material, 1024, 1024, true);;
+    texture = m_renderTechniqueAccessor->preprocessTexture(material, 1024, 1024, true);
+    material->setTexture(nullptr, E_SHADER_SAMPLER_04);
+    
+    texture->setWrapMode(GL_CLAMP_TO_EDGE);
+    texture->setMagFilter(GL_LINEAR);
+    texture->setMinFilter(GL_LINEAR);
+    
+    return texture;
 }
 
 void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,

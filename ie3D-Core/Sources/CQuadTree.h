@@ -13,7 +13,6 @@
 
 #include "HCommon.h"
 #include "HDeclaration.h"
-#include "CMemoryAllocator.h"
 
 class CQuadTree : public std::enable_shared_from_this<CQuadTree>
 {
@@ -53,10 +52,8 @@ public:
     CQuadTree(void);
     ~CQuadTree(void);
     
-    static const ie::mem_allocator<CQuadTree> g_allocator;
-    
-    void generate(CSharedVertexBufferRef vertexBuffer,
-                  CSharedIndexBufferRef indexBuffer,
+    void generate(CSharedVertexBuffer vertexBuffer,
+                  CSharedIndexBuffer indexBuffer,
                   const glm::vec3& maxBound,
                   const glm::vec3& minBound,
                   f32 depth,

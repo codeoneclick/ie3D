@@ -54,11 +54,10 @@ float getCurrentDepth(in  float fZ)
 
 void main(void)
 {
-    gl_FragColor = texture2D(SAMPLER_01, OUT_TexCoord);
-   /*float diffuseFactor = max(dot(OUT_Normal, OUT_LightDirection), 0.25);
+    float diffuseFactor = max(dot(OUT_Normal, OUT_LightDirection), 0.25);
     vec4 diffuseColor = vec4(0.0, 0.0, 0.0, 1.0);
     
-#if defined(__OSX__) || (defined(__IOS__) && defined(__IOS_HIGH_PERFORMANCE__))
+/*#if defined(__OSX__) || (defined(__IOS__) && defined(__IOS_HIGH_PERFORMANCE__))
     
     vec4 splattingMask = texture2D(SAMPLER_04, OUT_TexCoord);
     
@@ -93,9 +92,9 @@ void main(void)
         zAxisColor = texture2D(SAMPLER_03, OUT_TillingTexcoordLayer_03.xy);
         diffuseColor = diffuseColor + (xAxisColor * blending.x + yAxisColor * blending.y + zAxisColor * blending.z) * splattingMask.z;
     }
-#elif defined(__IOS__)
+#elif defined(__IOS__)*/
     diffuseColor = texture2D(SAMPLER_01, OUT_TexCoord);
-#else
+/*#else
     vec4 splattingMask = texture2D(SAMPLER_04, OUT_TexCoord);
     
     if(splattingMask.x > 0.0)
@@ -110,7 +109,7 @@ void main(void)
     {
         diffuseColor = diffuseColor + texture2D(SAMPLER_03, OUT_TillingTexcoordLayer_03.xy) * splattingMask.z;
     }
-#endif
+#endif*/
     
     vec2 vTexCoord = OUT_ShadowParameters.st / OUT_ShadowParameters.w;
     float fZ = OUT_ShadowParameters.z / OUT_ShadowParameters.w;
@@ -124,5 +123,5 @@ void main(void)
     diffuseColor = vec4(diffuseColor.rgb * min(diffuseFactor, 1.0), 1.0);
     diffuseColor = mix(vec4(vec3(0.16, 0.32, 0.32) * diffuseFactor, 1.0), diffuseColor, OUT_Fog);
     diffuseColor.rgb *= fShadow;
-    gl_FragColor = diffuseColor;*/
+    gl_FragColor = diffuseColor;
 }
