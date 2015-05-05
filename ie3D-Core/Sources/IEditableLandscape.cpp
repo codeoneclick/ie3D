@@ -123,7 +123,7 @@ void IEditableLandscape::generateVertecesData(const glm::ivec2& size, f32 freque
         }
     }
     
-    m_heightmapGenerator->generateVertices(size, frequency, octaves, seed);
+    m_heightmapGenerator->generate(size, frequency, octaves, seed, nullptr);
     
     if(size.x != previousSize.x ||
        size.y != previousSize.y)

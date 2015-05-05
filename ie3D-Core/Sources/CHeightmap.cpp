@@ -35,89 +35,20 @@
 
 static ui32 g_heightmapGUID = 0;
 
-CHeightmap::CHeightmap(const std::string& filename, const glm::ivec2& size) :
-m_uncompressedVertices(nullptr),
-m_faces(nullptr),
-m_compressedVertices(nullptr),
-m_uncompressedVerticesFiledescriptor(-1),
-m_facesFiledescriptor(-1),
-m_compressedVerticesFiledescriptor(-1),
-m_size(size)
-{
-    ui8* data = nullptr;
-#if defined(__IOS__)
-    
-    UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"map_01" encoding:NSUTF8StringEncoding]];
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    size_t bytesPerRow = image.size.width * 4;
-    data = (ui8 *)malloc(image.size.height * bytesPerRow);
-    CGContextRef context = CGBitmapContextCreate(data,
-                                                 image.size.width,
-                                                 image.size.height,
-                                                 8,
-                                                 bytesPerRow,
-                                                 colorSpace,
-                                                 kCGImageAlphaNoneSkipFirst);
-    UIGraphicsPushContext(context);
-    CGContextTranslateCTM(context, 0.0, image.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    [image drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
-    UIGraphicsPopContext();
-    m_size = glm::ivec2(image.size.width, image.size.height);
-    
-#elif defined(__OSX__)
-    
-    NSImage* image = [NSImage imageNamed:[NSString stringWithCString:"map_01" encoding:NSUTF8StringEncoding]];
-    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)[image TIFFRepresentation], NULL);
-    CGImageRef mask =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
-    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:mask];
-    data = [bitmap bitmapData];
-    m_size = glm::ivec2(image.size.width, image.size.height);
-    
-    CFRelease(source);
-    CFRelease(mask);
-    
-#endif
-    
-    f32* heights = new f32[m_size.x * m_size.y];
-    ui32 index = 0;
-    for(ui32 i = 0; i < m_size.x; ++i)
-    {
-        for(ui32 j = 0; j < m_size.y; ++j)
-        {
-            heights[index++] = static_cast<f32>(data[(i + j * m_size.x) * 4 + 1] - 64) / 255 * 32.0f;
-        }
-    }
-    CHeightmap::mapVertices(heights);
-    delete [] heights;
-}
+static const std::string kUncompressedVerticesMetadataFilename = "uncompressed.vertices.data_";
+static const std::string kCompressedVerticesMetadataFilename = "compressed.vertices.data_";
+static const std::string kFacesMetadataFilename = "faces.data_";
 
-CHeightmap::CHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed) :
+CHeightmap::CHeightmap(void) :
 m_uncompressedVertices(nullptr),
 m_faces(nullptr),
 m_compressedVertices(nullptr),
 m_uncompressedVerticesFiledescriptor(-1),
 m_facesFiledescriptor(-1),
 m_compressedVerticesFiledescriptor(-1),
-m_size(size)
+m_size(0)
 {
-    const CPerlinNoise perlin(seed);
-    const f32 fx = m_size.x / frequency;
-    const f32 fy = m_size.y / frequency;
-    
-    f32* heights = new f32[m_size.x * m_size.y];
-    ui32 index = 0;
-    for(ui32 i = 0; i < m_size.x; ++i)
-    {
-        for(ui32 j = 0; j < m_size.y; ++j)
-        {
-            f32 n = perlin.octaveNoise(i / fx, j / fy, octaves);
-            n = glm::clamp(n * 0.5f + 0.5f, 0.0f, 1.0f);
-            heights[index++] = n * 64.0f - 32.0f;
-        }
-    }
-    CHeightmap::mapVertices(heights);
-    delete [] heights;
+
 }
 
 CHeightmap::~CHeightmap(void)
@@ -141,7 +72,54 @@ CHeightmap::~CHeightmap(void)
     m_compressedVertices = nullptr;
 }
 
-void CHeightmap::mapVertices(f32* data)
+void CHeightmap::readHeightmapMetadata(const std::string& filename)
+{
+    std::ifstream stream(bundlepath().append(filename).c_str());
+    if(!stream.is_open())
+    {
+        assert(false);
+    }
+    else
+    {
+        stream.read((char*)&m_size, sizeof(glm::ivec2));
+        m_heights = new f32[m_size.x * m_size.y];
+        
+        ui32 index = 0;
+        for(ui32 i = 0; i < m_size.x; ++i)
+        {
+            for(ui32 j = 0; j < m_size.y; ++j)
+            {
+                f32 height = 0.0f;
+                stream.read((char*)&height, sizeof(f32));
+                m_heights[index++] = height;
+            }
+        }
+        stream.close();
+    }
+}
+
+void CHeightmap::generateHeightmapMetadata(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)
+{
+    m_size = size;
+    m_heights = new f32[m_size.x * m_size.y];
+    
+    const CPerlinNoise perlin(seed);
+    const f32 fx = m_size.x / frequency;
+    const f32 fy = m_size.y / frequency;
+    
+    ui32 index = 0;
+    for(ui32 i = 0; i < m_size.x; ++i)
+    {
+        for(ui32 j = 0; j < m_size.y; ++j)
+        {
+            f32 n = perlin.octaveNoise(i / fx, j / fy, octaves);
+            n = glm::clamp(n * 0.5f + 0.5f, 0.0f, 1.0f);
+            m_heights[index++] = n * 64.0f - 32.0f;
+        }
+    }
+}
+
+void CHeightmap::createVertices(void)
 {
     m_uncompressedVertices = new SUncomressedVertex[m_size.x * m_size.y];
     m_faces = new SFace[(m_size.x - 1) * (m_size.y - 1) * 2];
@@ -150,9 +128,7 @@ void CHeightmap::mapVertices(f32* data)
     {
         for(ui32 j = 0; j < m_size.y; ++j)
         {
-            m_uncompressedVertices[i + j * m_size.x].m_position = glm::vec3(static_cast<f32>(i),
-                                                                            data[i + j * m_size.x],
-                                                                            static_cast<f32>(j));
+            m_uncompressedVertices[i + j * m_size.x].m_position = glm::vec3(i, m_heights[i + j * m_size.x], j);
             
             m_uncompressedVertices[i + j * m_size.x].m_texcoord = glm::vec2(static_cast<f32>(i) / static_cast<f32>(m_size.x),
                                                                             static_cast<f32>(j) / static_cast<f32>(m_size.y));
@@ -212,59 +188,21 @@ void CHeightmap::mapVertices(f32* data)
         m_uncompressedVertices[i].m_normal = normal;
     }
     
-    std::ostringstream stringstream;
-    stringstream<<"compressed.vertices.data"<<"_"<<g_heightmapGUID<<std::endl;
-    std::string filename = stringstream.str();
-    
-#if defined(__IOS__)
-    
-    filename = documentspath() + filename;
-    
-#endif
-    
-    std::ofstream stream;
-    stream.open(filename, std::ios::binary | std::ios::out | std::ios::trunc);
-    if(!stream.is_open())
-    {
-        assert(false);
-    }
-    
-    ui32 filelength;
-    struct stat status;
-    
-    for(ui32 i = 0; i < m_size.x * m_size.y; ++i)
-    {
-        SCompressedVertex vertex;
-        vertex.m_position = m_uncompressedVertices[i].m_position;
-        vertex.m_normal = glm::packSnorm4x8(glm::vec4(m_uncompressedVertices[i].m_normal, 0.0f));
-        vertex.m_texcoord = glm::packUnorm2x16(m_uncompressedVertices[i].m_texcoord);
-        stream.write((char*)&vertex, sizeof(SCompressedVertex));
-    }
-    stream.close();
-    
-    m_compressedVerticesFiledescriptor = open(filename.c_str(), O_RDWR);
-    if (m_compressedVerticesFiledescriptor < 0)
-    {
-        assert(false);
-    }
-    
-    if (fstat(m_compressedVerticesFiledescriptor, &status) < 0)
-    {
-        assert(false);
-    }
-    
-    filelength = (ui32)status.st_size;
-    m_compressedVertices = (SCompressedVertex* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_compressedVerticesFiledescriptor, 0);
-    if (!m_compressedVertices)
-    {
-        assert(false);
-    }
-    
-#if !defined(__IOS__)
-    {
+    delete [] m_heights;
+}
+
+void CHeightmap::writeVerticesMetadata(void)
+{
+    { // writing compressed vertices metadata
         std::ostringstream stringstream;
-        stringstream<<"faces.data"<<"_"<<g_heightmapGUID<<std::endl;
+        stringstream<<kCompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
         std::string filename = stringstream.str();
+        
+#if defined(__IOS__)
+        
+        filename = documentspath() + filename;
+        
+#endif
         
         std::ofstream stream;
         stream.open(filename, std::ios::binary | std::ios::out | std::ios::trunc);
@@ -273,48 +211,22 @@ void CHeightmap::mapVertices(f32* data)
             assert(false);
         }
         
-        for(ui32 i = 0; i < (m_size.x - 1) * (m_size.y - 1) * 2; ++i)
+        for(ui32 i = 0; i < m_size.x * m_size.y; ++i)
         {
-            stream.write((char*)&m_faces[i], sizeof(SFace));
+            SCompressedVertex vertex;
+            vertex.m_position = m_uncompressedVertices[i].m_position;
+            vertex.m_normal = glm::packSnorm4x8(glm::vec4(m_uncompressedVertices[i].m_normal, 0.0f));
+            vertex.m_texcoord = glm::packUnorm2x16(m_uncompressedVertices[i].m_texcoord);
+            stream.write((char*)&vertex, sizeof(SCompressedVertex));
         }
         stream.close();
-        
-        delete [] m_faces;
-        m_faces = nullptr;
-        
-        ui32 filelength;
-        struct stat status;
-        
-        m_facesFiledescriptor = open(filename.c_str(), O_RDWR);
-        if (m_facesFiledescriptor < 0)
-        {
-            assert(false);
-        }
-        
-        if (fstat(m_facesFiledescriptor, &status) < 0)
-        {
-            assert(false);
-        }
-        
-        filelength = (ui32)status.st_size;
-        m_faces = (SFace* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_facesFiledescriptor, 0);
-        if (!m_faces)
-        {
-            assert(false);
-        }
     }
-#else
-        
-        delete [] m_faces;
-        m_faces = nullptr;
-        
-#endif
     
 #if !defined(__IOS__)
     
-    {
+    { // writing uncompressed vertices metadata
         std::ostringstream stringstream;
-        stringstream<<"uncompressed.vertices.data"<<"_"<<g_heightmapGUID<<std::endl;
+        stringstream<<kUncompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
         std::string filename = stringstream.str();
         
         std::ofstream stream;
@@ -332,9 +244,89 @@ void CHeightmap::mapVertices(f32* data)
         
         delete [] m_uncompressedVertices;
         m_uncompressedVertices = nullptr;
+    }
+    
+#else
+    
+    delete [] m_uncompressedVertices;
+    m_uncompressedVertices = nullptr;
+    
+#endif
+    
+#if !defined(__IOS__)
+    
+    { // writing faces metadata
+        std::ostringstream stringstream;
+        stringstream<<kFacesMetadataFilename<<g_heightmapGUID<<std::endl;
+        std::string filename = stringstream.str();
         
-        ui32 filelength;
-        struct stat status;
+        std::ofstream stream;
+        stream.open(filename, std::ios::binary | std::ios::out | std::ios::trunc);
+        if(!stream.is_open())
+        {
+            assert(false);
+        }
+        
+        for(ui32 i = 0; i < (m_size.x - 1) * (m_size.y - 1) * 2; ++i)
+        {
+            stream.write((char*)&m_faces[i], sizeof(SFace));
+        }
+        stream.close();
+        
+        delete [] m_faces;
+        m_faces = nullptr;
+    }
+    
+#else
+    
+    delete [] m_faces;
+    m_faces = nullptr;
+    
+#endif
+    
+}
+
+void CHeightmap::mmapVerticesMetadata(void)
+{
+    ui32 filelength;
+    struct stat status;
+    
+    { // reading compressed vertices metadata
+        std::ostringstream stringstream;
+        stringstream<<kCompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
+        std::string filename = stringstream.str();
+        
+#if defined(__IOS__)
+        
+        filename = documentspath() + filename;
+        
+#endif
+        
+        m_compressedVerticesFiledescriptor = open(filename.c_str(), O_RDWR);
+        if (m_compressedVerticesFiledescriptor < 0)
+        {
+            assert(false);
+        }
+        
+        if (fstat(m_compressedVerticesFiledescriptor, &status) < 0)
+        {
+            assert(false);
+        }
+        
+        filelength = (ui32)status.st_size;
+        m_compressedVertices = (SCompressedVertex* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_compressedVerticesFiledescriptor, 0);
+        if (!m_compressedVertices)
+        {
+            assert(false);
+        }
+    }
+    
+#if !defined(__IOS__)
+    
+    { // reading uncompressed vertices metadata
+        std::ostringstream stringstream;
+        stringstream<<kUncompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
+        std::string filename = stringstream.str();
         
         m_uncompressedVerticesFiledescriptor = open(filename.c_str(), O_RDWR);
         if (m_uncompressedVerticesFiledescriptor < 0)
@@ -354,13 +346,74 @@ void CHeightmap::mapVertices(f32* data)
             assert(false);
         }
     }
-#else
     
-    delete [] m_uncompressedVertices;
-    m_uncompressedVertices = nullptr;
+    { // reading faces metadata
+        std::ostringstream stringstream;
+        stringstream<<kFacesMetadataFilename<<g_heightmapGUID<<std::endl;
+        std::string filename = stringstream.str();
+        
+        m_facesFiledescriptor = open(filename.c_str(), O_RDWR);
+        if (m_facesFiledescriptor < 0)
+        {
+            assert(false);
+        }
+        
+        if (fstat(m_facesFiledescriptor, &status) < 0)
+        {
+            assert(false);
+        }
+        
+        filelength = (ui32)status.st_size;
+        m_faces = (SFace* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_facesFiledescriptor, 0);
+        if (!m_faces)
+        {
+            assert(false);
+        }
+    }
     
 #endif
+}
+
+void CHeightmap::create(const std::string& filename, const std::function<void(void)>& callback)
+{
+    CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+    completionOperation->setExecutionBlock([callback](void) {
+        callback();
+    });
     
+    CSharedThreadOperation readHeightmapMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+    readHeightmapMetadataOperation->setExecutionBlock([this, filename](void) {
+       CHeightmap::readHeightmapMetadata(filename);
+    });
+    completionOperation->addDependency(readHeightmapMetadataOperation);
+
+    CSharedThreadOperation createVerticesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+    createVerticesOperation->setExecutionBlock([this](void) {
+        CHeightmap::createVertices();
+    });
+    completionOperation->addDependency(createVerticesOperation);
+    
+    CSharedThreadOperation writeVerticesMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+    writeVerticesMetadataOperation->setExecutionBlock([this](void) {
+        CHeightmap::writeVerticesMetadata();
+    });
+    completionOperation->addDependency(writeVerticesMetadataOperation);
+    
+    CSharedThreadOperation mmapVerticesMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+    mmapVerticesMetadataOperation->setExecutionBlock([this](void) {
+        CHeightmap::mmapVerticesMetadata();
+    });
+    completionOperation->addDependency(mmapVerticesMetadataOperation);
+    
+    completionOperation->addToExecutionQueue();
+}
+
+void CHeightmap::create(const glm::ivec2 &size, f32 frequency, i32 octaves, ui32 seed, const std::function<void ()> &callback)
+{
+    CHeightmap::generateHeightmapMetadata(size, frequency, octaves, seed);
+    CHeightmap::createVertices();
+    CHeightmap::writeVerticesMetadata();
+    CHeightmap::mmapVerticesMetadata();
 }
 
 glm::vec3 CHeightmap::getVertexPosition(ui32 i, ui32 j) const
@@ -650,9 +703,10 @@ m_offset(0)
     
 }
 
-CHeightmapGenerator::CHeightmapGenerator(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration) :
+CHeightmapGenerator::CHeightmapGenerator(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
 m_heightmapGUID(g_heightmapGUID++),
-m_heightmap(nullptr),
+m_isGenerated(false),
+m_heightmap(std::make_shared<CHeightmap>()),
 m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_heightmapTexture(nullptr),
 m_splattingTexture(nullptr),
@@ -661,24 +715,14 @@ m_ibosMMAPDescriptor(nullptr),
 m_texturesMMAPDescriptor(nullptr)
 {
     assert(m_renderTechniqueAccessor != nullptr);
-    assert(configuration != nullptr);
-    
-    CSharedConfigurationLandscape configurationLandscape = std::static_pointer_cast<CConfigurationLandscape>(configuration);
-    if(configurationLandscape->getHeightmapDataFilename().length() != 0)
-    {
-        m_heightmap = std::make_shared<CHeightmap>(configurationLandscape->getHeightmapDataFilename(), glm::ivec2(0));
-    }
-    else
-    {
-        m_heightmap = std::make_shared<CHeightmap>(glm::ivec2(configurationLandscape->getSizeX(), configurationLandscape->getSizeY()),
-                                                   configurationLandscape->getFrequency(),
-                                                   configurationLandscape->getOctaves(),
-                                                   configurationLandscape->getSeed());
-    }
-    CHeightmapGenerator::initContainers(m_heightmap);
 }
 
-void CHeightmapGenerator::initContainers(const std::shared_ptr<CHeightmap>& heightmap)
+CHeightmapGenerator::~CHeightmapGenerator(void)
+{
+    
+}
+
+void CHeightmapGenerator::createContainers(const std::shared_ptr<CHeightmap>& heightmap)
 {
     m_chunkSize = glm::ivec2(MIN_VALUE(m_heightmap->getSize().x, kMaxChunkSize),
                              MIN_VALUE(m_heightmap->getSize().y, kMaxChunkSize));
@@ -720,50 +764,82 @@ void CHeightmapGenerator::initContainers(const std::shared_ptr<CHeightmap>& heig
             m_chunksBounds[index] = std::make_tuple(std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index]));
         }
     }
-    
-    if(m_vbosMMAPDescriptor)
-    {
-        m_vbosMMAPDescriptor->deallocate();
-        m_vbosMMAPDescriptor = nullptr;
-    }
-    m_vbosMMAPDescriptor = std::make_shared<ie::mmap_memory>();
-    m_vbosMMAP.clear();
-    m_vbosMMAPDescriptor->allocate(CHeightmapGenerator::createVBOs());
-    
-    if(m_ibosMMAPDescriptor)
-    {
-        m_ibosMMAPDescriptor->deallocate();
-        m_ibosMMAPDescriptor = nullptr;
-    }
-    m_ibosMMAPDescriptor = std::make_shared<ie::mmap_memory>();
-    m_ibosMMAP.clear();
-    m_ibosMMAPDescriptor->allocate(CHeightmapGenerator::createIBOs());
-    
-    if(m_texturesMMAPDescriptor)
-    {
-        m_texturesMMAPDescriptor->deallocate();
-        m_texturesMMAPDescriptor = nullptr;
-    }
-    m_texturesMMAPDescriptor = std::make_shared<ie::mmap_memory>();
-    m_texturesMMAP.clear();
-    m_texturesMMAPDescriptor->allocate(CHeightmapGenerator::createTextures());
 }
 
-CHeightmapGenerator::~CHeightmapGenerator(void)
+void CHeightmapGenerator::generate(const std::string& filename, const std::function<void(void)>& callback)
 {
-    
+    m_isGenerated = false;
+    m_heightmap = std::make_shared<CHeightmap>();
+    m_heightmap->create(filename, [this, callback]() {
+        CHeightmapGenerator::createContainers(m_heightmap);
+        
+        CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+        completionOperation->setExecutionBlock([this, callback](void) {
+            m_isGenerated = true;
+            callback();
+        });
+        
+        CSharedThreadOperation createVBOsOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+        createVBOsOperation->setExecutionBlock([this](void) {
+            if(m_vbosMMAPDescriptor)
+            {
+                m_vbosMMAPDescriptor->deallocate();
+                m_vbosMMAPDescriptor = nullptr;
+            }
+            m_vbosMMAPDescriptor = std::make_shared<ie::mmap_memory>();
+            m_vbosMMAP.clear();
+            m_vbosMMAPDescriptor->allocate(CHeightmapGenerator::createVBOs());
+        });
+        completionOperation->addDependency(createVBOsOperation);
+        
+        CSharedThreadOperation createIBOsOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+        createIBOsOperation->setExecutionBlock([this](void) {
+            if(m_ibosMMAPDescriptor)
+            {
+                m_ibosMMAPDescriptor->deallocate();
+                m_ibosMMAPDescriptor = nullptr;
+            }
+            m_ibosMMAPDescriptor = std::make_shared<ie::mmap_memory>();
+            m_ibosMMAP.clear();
+            m_ibosMMAPDescriptor->allocate(CHeightmapGenerator::createIBOs());
+        });
+        completionOperation->addDependency(createIBOsOperation);
+        
+        CSharedThreadOperation createTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+        createTexturesOperation->setExecutionBlock([this](void) {
+            if(m_texturesMMAPDescriptor)
+            {
+                m_texturesMMAPDescriptor->deallocate();
+                m_texturesMMAPDescriptor = nullptr;
+            }
+            m_texturesMMAPDescriptor = std::make_shared<ie::mmap_memory>();
+            m_texturesMMAP.clear();
+            m_texturesMMAPDescriptor->allocate(CHeightmapGenerator::createTextures());
+        });
+        completionOperation->addDependency(createTexturesOperation);
+        
+        completionOperation->addToExecutionQueue();
+    });
 }
 
-void CHeightmapGenerator::generateVertices(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)
+void CHeightmapGenerator::generate(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed, const std::function<void(void)>& callback)
 {
     glm::ivec2 sizeOffset = glm::ivec2(ceil(static_cast<f32>(size.x) / static_cast<f32>(kMaxChunkSize)),
                                        ceil(static_cast<f32>(size.y) / static_cast<f32>(kMaxChunkSize)));
-    m_heightmap = std::make_shared<CHeightmap>(glm::ivec2(size.x + sizeOffset.x, size.y + sizeOffset.y),
-                                               frequency, octaves, seed);
-    CHeightmapGenerator::initContainers(m_heightmap);
+    m_heightmap = std::make_shared<CHeightmap>();
+    m_heightmap->create(glm::ivec2(size.x + sizeOffset.x, size.y + sizeOffset.y),
+                        frequency, octaves,
+                        seed, nullptr);
+    
+    CHeightmapGenerator::createContainers(m_heightmap);
     
     CHeightmapGenerator::updateSplattingTexture(m_splattingTexture);
     CHeightmapGenerator::updateHeightmapTexture(m_heightmapTexture);
+}
+
+bool CHeightmapGenerator::isGenerated(void)
+{
+    return m_isGenerated;
 }
 
 std::string CHeightmapGenerator::createVBOs(void)
@@ -1138,7 +1214,7 @@ std::string CHeightmapGenerator::createTextures(void)
     glm::ivec2 verticesOffset(0);
     ui32 pixelsWroteToMMAP = 0;
     
-    glm::ivec2 size = glm::ivec2(256, 256);
+    glm::ivec2 size = glm::ivec2(32, 32);
     glm::vec2 step = glm::vec2(static_cast<f32>(m_chunkSize.x) / static_cast<f32>(size.x) ,
                                static_cast<f32>(m_chunkSize.y) / static_cast<f32>(size.y));
 
@@ -1343,7 +1419,6 @@ CSharedTexture CHeightmapGenerator::createHeightmapTexture(void)
                                                           m_heightmap->getSize().x,
                                                           m_heightmap->getSize().y);
     m_heightmapTexture->setWrapMode(GL_CLAMP_TO_EDGE);
-    CHeightmapGenerator::updateHeightmapTexture(m_heightmapTexture);
     return m_heightmapTexture;
 }
 
@@ -1437,7 +1512,6 @@ std::shared_ptr<CTexture> CHeightmapGenerator::createSplattingTexture(void)
     m_splattingTexture->setWrapMode(GL_CLAMP_TO_EDGE);
     m_splattingTexture->setMagFilter(GL_LINEAR);
     m_splattingTexture->setMinFilter(GL_LINEAR);
-    CHeightmapGenerator::updateSplattingTexture(m_splattingTexture);
     return m_splattingTexture;
 }
 
@@ -1709,11 +1783,6 @@ void CHeightmapGenerator::eraseChunkMetadata(ui32 index)
     std::get<1>(m_callbacks[index]) = nullptr;
     
     m_executedOperations[index] = nullptr;
-}
-
-void CHeightmapGenerator::update(void)
-{
-
 }
 
 void CHeightmapGenerator::createChunkBound(const glm::ivec2& index,

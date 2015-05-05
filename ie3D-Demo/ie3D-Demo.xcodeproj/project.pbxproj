@@ -151,6 +151,8 @@
 		219A1377199A0A5600E674CB /* CGameObjectNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A1375199A0A5600E674CB /* CGameObjectNavigator.cpp */; };
 		219A13A1199A613D00E674CB /* CDEUIToSceneCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A139F199A613D00E674CB /* CDEUIToSceneCommands.cpp */; };
 		219A13A4199A616200E674CB /* CDESceneToUICommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A13A2199A616200E674CB /* CDESceneToUICommands.cpp */; };
+		21A38DCF1AF8D60A00E7DFE7 /* heightmap.data in Resources */ = {isa = PBXBuildFile; fileRef = 21A38DCE1AF8D60A00E7DFE7 /* heightmap.data */; };
+		21A38DD01AF8D62200E7DFE7 /* heightmap.data in Resources */ = {isa = PBXBuildFile; fileRef = 21A38DCE1AF8D60A00E7DFE7 /* heightmap.data */; };
 		21B08D7C1920CA2000C5D5CC /* CMapDragController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B08D7A1920CA2000C5D5CC /* CMapDragController.cpp */; };
 		21B08DB91920CCF600C5D5CC /* shaderParticleEmitter.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAD1920CCF600C5D5CC /* shaderParticleEmitter.frag */; };
 		21B08DBA1920CCF600C5D5CC /* shaderParticleEmitter.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08DAE1920CCF600C5D5CC /* shaderParticleEmitter.vert */; };
@@ -401,6 +403,7 @@
 		219A13A2199A616200E674CB /* CDESceneToUICommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDESceneToUICommands.cpp; path = Sources/CDESceneToUICommands.cpp; sourceTree = SOURCE_ROOT; };
 		219A13A3199A616200E674CB /* CDESceneToUICommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDESceneToUICommands.h; path = Sources/CDESceneToUICommands.h; sourceTree = SOURCE_ROOT; };
 		219A13A5199A619A00E674CB /* HDEEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HDEEnums.h; path = Sources/HDEEnums.h; sourceTree = SOURCE_ROOT; };
+		21A38DCE1AF8D60A00E7DFE7 /* heightmap.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = heightmap.data; path = "../ie3D-Bundle/Data/heightmap.data"; sourceTree = SOURCE_ROOT; };
 		21B08D7A1920CA2000C5D5CC /* CMapDragController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapDragController.cpp; path = Sources/CMapDragController.cpp; sourceTree = SOURCE_ROOT; };
 		21B08D7B1920CA2000C5D5CC /* CMapDragController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMapDragController.h; path = Sources/CMapDragController.h; sourceTree = SOURCE_ROOT; };
 		21B08DAD1920CCF600C5D5CC /* shaderParticleEmitter.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderParticleEmitter.frag; path = "../ie3D-Bundle/Shaders/shaderParticleEmitter.frag"; sourceTree = SOURCE_ROOT; };
@@ -719,6 +722,14 @@
 			name = UICommands;
 			sourceTree = "<group>";
 		};
+		21A38DCD1AF8D5FC00E7DFE7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				21A38DCE1AF8D60A00E7DFE7 /* heightmap.data */,
+			);
+			name = Data;
+			sourceTree = SOURCE_ROOT;
+		};
 		21BC34CD19081510007B99DA /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -853,6 +864,7 @@
 			isa = PBXGroup;
 			children = (
 				211384EC194300DE0041A18A /* Images.xcassets */,
+				21A38DCD1AF8D5FC00E7DFE7 /* Data */,
 				21DC2B3B1924DC78008DA3C1 /* Temp */,
 				21BC34CD19081510007B99DA /* Configurations */,
 				21BC34E119081510007B99DA /* Meshes */,
@@ -1088,6 +1100,7 @@
 				217EF8A619F7E11300F339A0 /* ocean_ripples.png in Resources */,
 				21E52BE81A9118AE005977F1 /* material.orc_01.reflection.xml in Resources */,
 				21E52BC41A910FF8005977F1 /* orc_03.IE3DMESH in Resources */,
+				21A38DD01AF8D62200E7DFE7 /* heightmap.data in Resources */,
 				217EF8B819F7E11300F339A0 /* static_model_tank_light.png in Resources */,
 				21706CEA1A89473000C56C7E /* gameobject.human_01.xml in Resources */,
 				21E52BEA1A9118AE005977F1 /* material.orc_01.refraction.xml in Resources */,
@@ -1174,6 +1187,7 @@
 				21E52BB41A90FA5F005977F1 /* human_01.IE3DMESH in Resources */,
 				21706CEF1A89473000C56C7E /* gameobject.skybox.xml in Resources */,
 				21E52BE31A9118AE005977F1 /* material.human_02.shadowmap.xml in Resources */,
+				21A38DCF1AF8D60A00E7DFE7 /* heightmap.data in Resources */,
 				2162093719A1F04C00DECBBC /* map_04.png in Resources */,
 				21706D141A89475D00C56C7E /* material.skybox.base.xml in Resources */,
 				21706CCB1A89468C00C56C7E /* transition.demo.xml in Resources */,

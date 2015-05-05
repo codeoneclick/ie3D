@@ -72,7 +72,8 @@ E_LANDSCAPE_CHUNK_LOD CLandscape::getLOD(const glm::vec3& point,
 
 void CLandscape::onSceneUpdate(f32 deltatime)
 {
-    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
+    if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED &&
+       m_heightmapGenerator && m_heightmapGenerator->isGenerated())
     {
         glm::ivec2 numChunks = m_heightmapGenerator->getNumChunks();
         
@@ -144,28 +145,39 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     assert(m_resourceAccessor != nullptr);
     assert(m_renderTechniqueAccessor != nullptr);
     
-    m_heightmapGenerator = std::make_shared<CHeightmapGenerator>(m_renderTechniqueAccessor, configurationLandscape);
-    m_chunks.resize(m_heightmapGenerator->getNumChunks().x * m_heightmapGenerator->getNumChunks().y);
-    
+    m_heightmapGenerator = std::make_shared<CHeightmapGenerator>(m_renderTechniqueAccessor);
     m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapGenerator->createSplattingTexture());
     m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapGenerator->createHeightmapTexture());
     
-    if(configurationLandscape->getPreprocessSplattingMaterialFilename().length() != 0)
+    if(configurationLandscape->getHeightmapDataFilename().length() != 0)
     {
-        CSharedConfigurationMaterial configurationPreprocessSplatting = std::make_shared<CConfigurationMaterial>();
-        configurationPreprocessSplatting->serialize(configurationLandscape->getPreprocessSplattingMaterialFilename());
-        m_preprocessSplattingTextureMaterial = CMaterial::constructCustomMaterial(configurationPreprocessSplatting,
-                                                                                  m_resourceAccessor,
-                                                                                  m_renderTechniqueAccessor);
+        m_heightmapGenerator->generate(configurationLandscape->getHeightmapDataFilename(), [this, configurationLandscape, success]() {
+            
+            if(configurationLandscape->getPreprocessSplattingMaterialFilename().length() != 0)
+            {
+                CSharedConfigurationMaterial configurationPreprocessSplatting = std::make_shared<CConfigurationMaterial>();
+                configurationPreprocessSplatting->serialize(configurationLandscape->getPreprocessSplattingMaterialFilename());
+                m_preprocessSplattingTextureMaterial = CMaterial::constructCustomMaterial(configurationPreprocessSplatting,
+                                                                                          m_resourceAccessor,
+                                                                                          m_renderTechniqueAccessor);
+            }
+            m_chunks.resize(m_heightmapGenerator->getNumChunks().x * m_heightmapGenerator->getNumChunks().y);
+            
+            IGameObject::onConfigurationLoaded(configurationLandscape, success);
+            
+            m_tillingTexcoord[E_SHADER_SAMPLER_01] = 16;
+            m_tillingTexcoord[E_SHADER_SAMPLER_02] = 16;
+            m_tillingTexcoord[E_SHADER_SAMPLER_03] = 16;
+            
+            m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+        });
     }
-    
-    IGameObject::onConfigurationLoaded(configuration, success);
-    
-    m_tillingTexcoord[E_SHADER_SAMPLER_01] = 16;
-    m_tillingTexcoord[E_SHADER_SAMPLER_02] = 16;
-    m_tillingTexcoord[E_SHADER_SAMPLER_03] = 16;
-    
-    m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+    else
+    {
+        m_heightmapGenerator->generate(glm::ivec2(configurationLandscape->getSizeX(), configurationLandscape->getSizeY()),
+                                       configurationLandscape->getFrequency(), configurationLandscape->getOctaves(),
+                                       configurationLandscape->getSeed(), nullptr);
+    }
 }
 
 std::vector<ISharedGameObject> CLandscape::getChunks(void) const
@@ -256,7 +268,7 @@ glm::ivec2 CLandscape::getHeightmapSize(void) const
 f32 CLandscape::getHeight(const glm::vec3& position) const
 {
     assert(m_heightmapGenerator != nullptr);
-    return m_heightmapGenerator->getHeight(position);
+    return m_heightmapGenerator->isGenerated() ? m_heightmapGenerator->getHeight(position) : 0.0f;
 }
 
 glm::vec2 CLandscape::getAngleOnHeightmapSurface(const glm::vec3& position) const

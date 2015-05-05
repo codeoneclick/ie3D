@@ -76,6 +76,7 @@ private:
     
 protected:
     
+    f32* m_heights;
     SUncomressedVertex* m_uncompressedVertices;
     SFace* m_faces;
     SCompressedVertex* m_compressedVertices;
@@ -85,13 +86,20 @@ protected:
     i32 m_compressedVerticesFiledescriptor;
     
     glm::ivec2 m_size;
-    void mapVertices(f32* data);
+    
+    void readHeightmapMetadata(const std::string& filename);
+    void generateHeightmapMetadata(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
+    void createVertices(void);
+    void writeVerticesMetadata(void);
+    void mmapVerticesMetadata(void);
     
 public:
     
-    CHeightmap(const std::string& filename, const glm::ivec2& size);
-    CHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
+    CHeightmap(void);
     ~CHeightmap(void);
+    
+    void create(const std::string& filename, const std::function<void(void)>& callback);
+    void create(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed, const std::function<void(void)>& callback);
     
     void updateVertices(const std::vector<glm::vec3>& vertices);
     void attachUncompressedVertexToVBO(ui32 x, ui32 y, ui32 vboIndex, ui32 vboVertexIndex);
@@ -256,6 +264,7 @@ private:
     
     static const ui8 kMaxChunkSize = 65;
     ui32 m_heightmapGUID;
+    bool m_isGenerated;
     
 protected:
     
@@ -288,7 +297,7 @@ protected:
     
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
     
-    void initContainers(const std::shared_ptr<CHeightmap>& heightmap);
+    void createContainers(const std::shared_ptr<CHeightmap>& heightmap);
     void createMesh(ui32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(ui32 index);
     CSharedTexture generateDiffuseTexture(ui32 index, CSharedMaterialRef material);
@@ -317,21 +326,21 @@ protected:
     
 public:
     
-    CHeightmapGenerator(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor, ISharedConfigurationRef configuration);
+    CHeightmapGenerator(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor);
     ~CHeightmapGenerator(void);
     
     CSharedTexture createHeightmapTexture(void);
     CSharedTexture createSplattingTexture(void);
     
-    void generateVertices(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
+    void generate(const std::string& filename, const std::function<void(void)>& callback);
+    void generate(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed, const std::function<void(void)>& callback);
+    bool isGenerated(void);
     
     void generateTangentSpace(CSharedVertexBufferRef vertexBuffer,
                               CSharedIndexBufferRef indexBuffer);
     
     glm::ivec2 getSize(void) const;
     glm::ivec2 getNumChunks(void) const;
-    
-    void update(void);
     
     void runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                          CSharedMaterialRef preprocessSplattingTextureMaterial,

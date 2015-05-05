@@ -26,6 +26,7 @@
 		211EF8631AE6601200AF951E /* material.landscape.preprocess.splatting.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 211EF8621AE6601200AF951E /* material.landscape.preprocess.splatting.xml */; };
 		211EF8681AE6602800AF951E /* shaderLandscapePreprocessSplatting.frag in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 211EF8661AE6602800AF951E /* shaderLandscapePreprocessSplatting.frag */; };
 		211EF8691AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 211EF8671AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert */; };
+		21A38DE41AF8DD3D00E7DFE7 /* heightmap.data in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21A38DE31AF8DD3D00E7DFE7 /* heightmap.data */; };
 		21F5E1101ADE8ACA002E08FA /* CMapDragController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21F5E0F71ADE8ACA002E08FA /* CMapDragController.cpp */; };
 		21F5E1111ADE8ACA002E08FA /* CMEGameController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21F5E0F91ADE8ACA002E08FA /* CMEGameController.cpp */; };
 		21F5E1121ADE8ACA002E08FA /* CMEgoeScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21F5E0FB1ADE8ACA002E08FA /* CMEgoeScene.cpp */; };
@@ -244,6 +245,7 @@
 		211EF8621AE6601200AF951E /* material.landscape.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.preprocess.splatting.xml; sourceTree = "<group>"; };
 		211EF8661AE6602800AF951E /* shaderLandscapePreprocessSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapePreprocessSplatting.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapePreprocessSplatting.frag"; sourceTree = "<group>"; };
 		211EF8671AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapePreprocessSplatting.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapePreprocessSplatting.vert"; sourceTree = "<group>"; };
+		21A38DE31AF8DD3D00E7DFE7 /* heightmap.data */ = {isa = PBXFileReference; lastKnownFileType = file; name = heightmap.data; path = "../ie3D-Bundle/Data/heightmap.data"; sourceTree = "<group>"; };
 		21F5E0E01ADE8A72002E08FA /* ie3D-Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Engine.xcodeproj"; path = "../ie3D-Engine/ie3D-Engine.xcodeproj"; sourceTree = "<group>"; };
 		21F5E0EA1ADE8A8A002E08FA /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
 		21F5E0F71ADE8ACA002E08FA /* CMapDragController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapDragController.cpp; path = Sources/CMapDragController.cpp; sourceTree = SOURCE_ROOT; };
@@ -466,6 +468,14 @@
 			name = "Sources [uic]";
 			sourceTree = "<Group>";
 		};
+		21A38DE01AF8DD2100E7DFE7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				21A38DE31AF8DD3D00E7DFE7 /* heightmap.data */,
+			);
+			name = Data;
+			sourceTree = SOURCE_ROOT;
+		};
 		21F5E0D41ADE8A2F002E08FA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,6 +522,7 @@
 		21F5E12F1ADE8CD8002E08FA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				21A38DE01AF8DD2100E7DFE7 /* Data */,
 				21F5E1341ADE8D1A002E08FA /* Meshes */,
 				21F5E1331ADE8D13002E08FA /* Textures */,
 				21F5E1321ADE8D0C002E08FA /* Shaders */,
@@ -1019,6 +1030,7 @@
 				21F5E19E1ADE8D94002E08FA /* material.shadowing.goe.temp.xml in Copy Bundle Resources */,
 				21F5E1F71ADE8E0C002E08FA /* shaderParticleEmitter.frag in Copy Bundle Resources */,
 				21F5E1EB1ADE8E0C002E08FA /* shaderCommon.frag in Copy Bundle Resources */,
+				21A38DE41AF8DD3D00E7DFE7 /* heightmap.data in Copy Bundle Resources */,
 				21F5E13B1ADE8D2D002E08FA /* map_02.png in Copy Bundle Resources */,
 				21F5E1CA1ADE8DE5002E08FA /* transition.gop.xml in Copy Bundle Resources */,
 				21F5E2431ADE8E28002E08FA /* orc_02.IE3DMESH in Copy Bundle Resources */,
