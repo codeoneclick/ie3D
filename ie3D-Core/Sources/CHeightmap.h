@@ -74,6 +74,10 @@ private:
         SFace& operator = (SFace&& copy) = delete;
     };
     
+    std::string getUncompressedVerticesMMAPFilename(const std::string& filename) const;
+    std::string getCompressedVerticesMMAPFilename(const std::string& filename) const;
+    std::string getFacesMMAPFilename(const std::string& filename) const;
+    
 protected:
     
     f32* m_heights;
@@ -89,9 +93,10 @@ protected:
     
     void readHeightmapMetadata(const std::string& filename);
     void generateHeightmapMetadata(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
-    void createVertices(void);
-    void writeVerticesMetadata(void);
-    void mmapVerticesMetadata(void);
+    
+    void createVerticesMetadata(void);
+    void writeVerticesMetadata(const std::string& filename);
+    void mmapVerticesMetadata(const std::string& filename);
     
 public:
     
@@ -281,6 +286,8 @@ protected:
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_callbacks;
     std::vector<std::tuple<CSharedMesh, CSharedQuadTree, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
+    
+    std::string generateVBOs(void);
     
     std::string createVBOs(void);
     std::string createIBOs(void);

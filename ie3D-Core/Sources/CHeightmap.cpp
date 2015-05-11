@@ -72,6 +72,48 @@ CHeightmap::~CHeightmap(void)
     m_compressedVertices = nullptr;
 }
 
+std::string CHeightmap::getUncompressedVerticesMMAPFilename(const std::string& filename) const
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kUncompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
+std::string CHeightmap::getCompressedVerticesMMAPFilename(const std::string& filename) const
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kCompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
+std::string CHeightmap::getFacesMMAPFilename(const std::string& filename) const
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kFacesMetadataFilename<<g_heightmapGUID<<std::endl;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
 void CHeightmap::readHeightmapMetadata(const std::string& filename)
 {
     std::ifstream stream(bundlepath().append(filename).c_str());
@@ -119,7 +161,7 @@ void CHeightmap::generateHeightmapMetadata(const glm::ivec2& size, f32 frequency
     }
 }
 
-void CHeightmap::createVertices(void)
+void CHeightmap::createVerticesMetadata(void)
 {
     m_uncompressedVertices = new SUncomressedVertex[m_size.x * m_size.y];
     m_faces = new SFace[(m_size.x - 1) * (m_size.y - 1) * 2];
@@ -187,25 +229,13 @@ void CHeightmap::createVertices(void)
         normal = glm::normalize(normal);
         m_uncompressedVertices[i].m_normal = normal;
     }
-    
-    delete [] m_heights;
 }
 
-void CHeightmap::writeVerticesMetadata(void)
+void CHeightmap::writeVerticesMetadata(const std::string& filename)
 {
     { // writing compressed vertices metadata
-        std::ostringstream stringstream;
-        stringstream<<kCompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
-        std::string filename = stringstream.str();
-        
-#if defined(__IOS__)
-        
-        filename = documentspath() + filename;
-        
-#endif
-        
         std::ofstream stream;
-        stream.open(filename, std::ios::binary | std::ios::out | std::ios::trunc);
+        stream.open(CHeightmap::getCompressedVerticesMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
         if(!stream.is_open())
         {
             assert(false);
@@ -225,12 +255,8 @@ void CHeightmap::writeVerticesMetadata(void)
 #if !defined(__IOS__)
     
     { // writing uncompressed vertices metadata
-        std::ostringstream stringstream;
-        stringstream<<kUncompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
-        std::string filename = stringstream.str();
-        
         std::ofstream stream;
-        stream.open(filename, std::ios::binary | std::ios::out | std::ios::trunc);
+        stream.open(CHeightmap::getUncompressedVerticesMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
         if(!stream.is_open())
         {
             assert(false);
@@ -256,12 +282,8 @@ void CHeightmap::writeVerticesMetadata(void)
 #if !defined(__IOS__)
     
     { // writing faces metadata
-        std::ostringstream stringstream;
-        stringstream<<kFacesMetadataFilename<<g_heightmapGUID<<std::endl;
-        std::string filename = stringstream.str();
-        
         std::ofstream stream;
-        stream.open(filename, std::ios::binary | std::ios::out | std::ios::trunc);
+        stream.open(CHeightmap::getFacesMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
         if(!stream.is_open())
         {
             assert(false);
@@ -286,23 +308,13 @@ void CHeightmap::writeVerticesMetadata(void)
     
 }
 
-void CHeightmap::mmapVerticesMetadata(void)
+void CHeightmap::mmapVerticesMetadata(const std::string& filename)
 {
     ui32 filelength;
     struct stat status;
     
     { // reading compressed vertices metadata
-        std::ostringstream stringstream;
-        stringstream<<kCompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
-        std::string filename = stringstream.str();
-        
-#if defined(__IOS__)
-        
-        filename = documentspath() + filename;
-        
-#endif
-        
-        m_compressedVerticesFiledescriptor = open(filename.c_str(), O_RDWR);
+        m_compressedVerticesFiledescriptor = open(CHeightmap::getCompressedVerticesMMAPFilename(filename).c_str(), O_RDWR);
         if (m_compressedVerticesFiledescriptor < 0)
         {
             assert(false);
@@ -324,11 +336,7 @@ void CHeightmap::mmapVerticesMetadata(void)
 #if !defined(__IOS__)
     
     { // reading uncompressed vertices metadata
-        std::ostringstream stringstream;
-        stringstream<<kUncompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
-        std::string filename = stringstream.str();
-        
-        m_uncompressedVerticesFiledescriptor = open(filename.c_str(), O_RDWR);
+        m_uncompressedVerticesFiledescriptor = open(CHeightmap::getUncompressedVerticesMMAPFilename(filename).c_str(), O_RDWR);
         if (m_uncompressedVerticesFiledescriptor < 0)
         {
             assert(false);
@@ -348,11 +356,7 @@ void CHeightmap::mmapVerticesMetadata(void)
     }
     
     { // reading faces metadata
-        std::ostringstream stringstream;
-        stringstream<<kFacesMetadataFilename<<g_heightmapGUID<<std::endl;
-        std::string filename = stringstream.str();
-        
-        m_facesFiledescriptor = open(filename.c_str(), O_RDWR);
+        m_facesFiledescriptor = open(CHeightmap::getFacesMMAPFilename(filename).c_str(), O_RDWR);
         if (m_facesFiledescriptor < 0)
         {
             assert(false);
@@ -377,7 +381,8 @@ void CHeightmap::mmapVerticesMetadata(void)
 void CHeightmap::create(const std::string& filename, const std::function<void(void)>& callback)
 {
     CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
-    completionOperation->setExecutionBlock([callback](void) {
+    completionOperation->setExecutionBlock([this, callback](void) {
+        delete [] m_heights;
         callback();
     });
     
@@ -387,21 +392,38 @@ void CHeightmap::create(const std::string& filename, const std::function<void(vo
     });
     completionOperation->addDependency(readHeightmapMetadataOperation);
 
-    CSharedThreadOperation createVerticesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    createVerticesOperation->setExecutionBlock([this](void) {
-        CHeightmap::createVertices();
-    });
-    completionOperation->addDependency(createVerticesOperation);
+    bool isCompressedVerticesMetadataExist = false;
     
-    CSharedThreadOperation writeVerticesMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    writeVerticesMetadataOperation->setExecutionBlock([this](void) {
-        CHeightmap::writeVerticesMetadata();
-    });
-    completionOperation->addDependency(writeVerticesMetadataOperation);
+#if defined(__IOS__)
     
+    std::ifstream stream;
+    stream.open(CHeightmap::getCompressedVerticesMMAPFilename(filename), std::ios::binary | std::ios::in);
+    if(stream.is_open())
+    {
+        isCompressedVerticesMetadataExist = true;
+    }
+    stream.close();
+    
+#endif
+    
+    if(!isCompressedVerticesMetadataExist)
+    {
+        CSharedThreadOperation createVerticesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+        createVerticesOperation->setExecutionBlock([this](void) {
+            CHeightmap::createVerticesMetadata();
+        });
+        completionOperation->addDependency(createVerticesOperation);
+        
+        CSharedThreadOperation writeVerticesMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+        writeVerticesMetadataOperation->setExecutionBlock([this, filename](void) {
+            CHeightmap::writeVerticesMetadata(filename);
+        });
+        completionOperation->addDependency(writeVerticesMetadataOperation);
+    }
+
     CSharedThreadOperation mmapVerticesMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    mmapVerticesMetadataOperation->setExecutionBlock([this](void) {
-        CHeightmap::mmapVerticesMetadata();
+    mmapVerticesMetadataOperation->setExecutionBlock([this, filename](void) {
+        CHeightmap::mmapVerticesMetadata(filename);
     });
     completionOperation->addDependency(mmapVerticesMetadataOperation);
     
@@ -411,9 +433,9 @@ void CHeightmap::create(const std::string& filename, const std::function<void(vo
 void CHeightmap::create(const glm::ivec2 &size, f32 frequency, i32 octaves, ui32 seed, const std::function<void ()> &callback)
 {
     CHeightmap::generateHeightmapMetadata(size, frequency, octaves, seed);
-    CHeightmap::createVertices();
-    CHeightmap::writeVerticesMetadata();
-    CHeightmap::mmapVerticesMetadata();
+    CHeightmap::createVerticesMetadata();
+    CHeightmap::writeVerticesMetadata("");
+    CHeightmap::mmapVerticesMetadata("");
 }
 
 glm::vec3 CHeightmap::getVertexPosition(ui32 i, ui32 j) const
@@ -885,7 +907,6 @@ std::string CHeightmapGenerator::createVBOs(void)
                 for(ui32 y = 0; y < m_chunkSize.y; ++y)
                 {
                     vertex.m_position = m_heightmap->getVertexPosition(x + verticesOffset.x, y + verticesOffset.y);
-                    //vertex.m_texcoord = m_heightmap->getVertexTexcoord(x + verticesOffset.x, y + verticesOffset.y);
                     vertex.m_normal = m_heightmap->getVertexNormal(x + verticesOffset.x, y + verticesOffset.y);
                     vertex.m_texcoord = glm::packUnorm2x16(glm::vec2(static_cast<f32>(x) / static_cast<f32>(m_chunkSize.x),
                                                                      static_cast<f32>(y) / static_cast<f32>(m_chunkSize.y)));
@@ -1118,6 +1139,7 @@ std::string CHeightmapGenerator::createIBOs(void)
                 currentChunkSize.x -= k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0;
                 currentChunkSize.y -= k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0;
                 
+                std::cout<<"addition indices: "<<additionIndices.size()<<std::endl;
                 ui32 indicesCount = currentChunkSize.x * currentChunkSize.y * 6 + static_cast<ui32>(additionIndices.size());
                 
                 currentChunkSize.x += k != E_LANDSCAPE_CHUNK_LOD_01 ? 1 : 0;
@@ -1662,7 +1684,7 @@ CSharedTexture CHeightmapGenerator::generateDiffuseTexture(ui32 index, CSharedMa
     
     material->setTexture(texture, E_SHADER_SAMPLER_04);
     
-    texture = m_renderTechniqueAccessor->preprocessTexture(material, 1024, 1024, true);
+    texture = m_renderTechniqueAccessor->preprocessTexture(material, 256, 256, true);
     material->setTexture(nullptr, E_SHADER_SAMPLER_04);
     
     texture->setWrapMode(GL_CLAMP_TO_EDGE);
