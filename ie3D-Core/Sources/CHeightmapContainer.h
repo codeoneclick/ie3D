@@ -10,6 +10,7 @@
 #define CHeightmapContainer_h
 
 #include "HCommon.h"
+#include "HEnums.h"
 
 class CHeightmapContainer
 {
@@ -17,6 +18,7 @@ public:
     
     static const ui8 kMaxContainsInFace = 32;
     static const ui8 kMaxContainsInVBO = 4;
+    static const ui8 kMaxChunkSize = 65;
     
     struct SUncomressedVertex
     {
@@ -72,6 +74,10 @@ private:
     
     glm::ivec2 m_size;
     
+    glm::ivec2 m_chunksNum;
+    glm::ivec2 m_chunkSize;
+    std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_chunkLODsSizes;
+    
     void erase(void);
     
 protected:
@@ -85,6 +91,10 @@ public:
     void mmap(const std::string& filename);
     
     inline glm::ivec2 getSize(void) const;
+    inline glm::ivec2 getChunksNum(void) const;
+    inline glm::ivec2 getChunkSize(void) const;
+    inline glm::ivec2 getChunkLODSize(E_LANDSCAPE_CHUNK_LOD LOD) const;
+    
     inline SUncomressedVertex* getUncopressedVertices(void) const;
     inline SCompressedVertex* getCompressedVertices(void) const;
     inline SFace* getFaces(void) const;

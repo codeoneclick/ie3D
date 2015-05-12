@@ -11,6 +11,22 @@ inline glm::ivec2 CHeightmapContainer::getSize(void) const
     return m_size;
 };
 
+inline glm::ivec2 CHeightmapContainer::getChunksNum(void) const
+{
+    return m_chunksNum;
+};
+
+inline glm::ivec2 CHeightmapContainer::getChunkSize(void) const
+{
+    return m_chunkSize;
+};
+
+inline glm::ivec2 CHeightmapContainer::getChunkLODSize(E_LANDSCAPE_CHUNK_LOD LOD) const
+{
+    assert(LOD >= 0 && LOD < E_LANDSCAPE_CHUNK_LOD_MAX);
+    return m_chunkLODsSizes[LOD];
+}
+
 inline CHeightmapContainer::SUncomressedVertex* CHeightmapContainer::getUncopressedVertices(void) const
 {
     assert(m_uncompressedVertices != nullptr);

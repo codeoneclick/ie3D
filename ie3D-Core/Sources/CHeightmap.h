@@ -322,7 +322,6 @@ protected:
     
     ui32 createTextureId(void);
     
-    
     static void getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
                                  f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,
                                  glm::vec3& tangentX, glm::vec3& tangentY);

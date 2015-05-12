@@ -21,6 +21,8 @@
 #include "CCommonOS.h"
 #include "CBoundingBox.h"
 
+#include "CHeightmapLoader.h"
+
 #if defined(__IOS__)
 
 #import <UIKit/UIKit.h>
@@ -33,7 +35,7 @@
 
 #define __PERFORMANCE_TIMER__ 1
 
-static ui32 g_heightmapGUID = 0;
+extern ui32 g_heightmapGUID = 0;
 
 static const std::string kUncompressedVerticesMetadataFilename = "uncompressed.vertices.data_";
 static const std::string kCompressedVerticesMetadataFilename = "compressed.vertices.data_";

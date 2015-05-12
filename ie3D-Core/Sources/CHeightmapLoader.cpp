@@ -14,6 +14,8 @@ extern ui32 g_heightmapGUID;
 static const std::string kUncompressedVerticesMetadataFilename = "uncompressed.vertices.data_";
 static const std::string kCompressedVerticesMetadataFilename = "compressed.vertices.data_";
 static const std::string kFacesMetadataFilename = "faces.data_";
+static const std::string kVBOsMetadataFilename = "vbos.data_";
+static const std::string kIBOsMetadataFilename = "ibos.data_";
 
 CHeightmapLoader::CHeightmapLoader(void)
 {
@@ -23,6 +25,29 @@ CHeightmapLoader::CHeightmapLoader(void)
 CHeightmapLoader::~CHeightmapLoader(void)
 {
     
+}
+
+std::tuple<glm::ivec2, std::vector<f32>> CHeightmapLoader::getHeights(const std::string& filename)
+{
+    std::vector<f32> heights;
+    glm::ivec2 size;
+    std::ifstream stream(bundlepath().append(filename).c_str());
+    if(!stream.is_open())
+    {
+        assert(false);
+    }
+    else
+    {
+        stream.read((char*)&size, sizeof(glm::ivec2));
+        heights.resize(size.x * size.y);
+        
+        for(ui32 i = 0; i < heights.size(); ++i)
+        {
+            stream.read((char*)&heights[i], sizeof(f32));
+        }
+        stream.close();
+    }
+    return std::make_tuple(size, heights);
 }
 
 std::string CHeightmapLoader::getUncompressedVerticesMMAPFilename(const std::string &filename)
@@ -67,6 +92,34 @@ std::string CHeightmapLoader::getFacesMMAPFilename(const std::string& filename)
     return stringstream.str();
 }
 
+std::string CHeightmapLoader::getVBOsMMAPFilename(const std::string &filename)
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kVBOsMetadataFilename<<g_heightmapGUID<<std::endl;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
+std::string CHeightmapLoader::getIBOsMMAPFilename(const std::string &filename)
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kIBOsMetadataFilename<<g_heightmapGUID<<std::endl;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
 bool CHeightmapLoader::isUncompressedVerticesMMAPExist(const std::string& filename)
 {
     std::ofstream stream;
@@ -89,6 +142,24 @@ bool CHeightmapLoader::isFacesMMAPExist(const std::string& filename)
 {
     std::ofstream stream;
     stream.open(CHeightmapLoader::getFacesMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    bool isExist = stream.is_open();
+    stream.close();
+    return isExist;
+}
+
+bool CHeightmapLoader::isVBOsMMAPExist(const std::string& filename)
+{
+    std::ofstream stream;
+    stream.open(CHeightmapLoader::getVBOsMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    bool isExist = stream.is_open();
+    stream.close();
+    return isExist;
+}
+
+bool CHeightmapLoader::isIBOsMMAPExist(const std::string& filename)
+{
+    std::ofstream stream;
+    stream.open(CHeightmapLoader::getIBOsMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
     bool isExist = stream.is_open();
     stream.close();
     return isExist;

@@ -22,13 +22,21 @@ public:
     CHeightmapLoader(void);
     ~CHeightmapLoader(void);
     
+    static std::tuple<glm::ivec2, std::vector<f32>> getHeights(const std::string& filename);
+    
     static std::string getUncompressedVerticesMMAPFilename(const std::string& filename);
     static std::string getCompressedVerticesMMAPFilename(const std::string& filename);
     static std::string getFacesMMAPFilename(const std::string& filename);
     
+    static std::string getVBOsMMAPFilename(const std::string& filename);
+    static std::string getIBOsMMAPFilename(const std::string& filename);
+    
     static bool isUncompressedVerticesMMAPExist(const std::string& filename);
     static bool isCompressedVerticesMMAPExist(const std::string& filename);
     static bool isFacesMMAPExist(const std::string& filename);
+    
+    static bool isVBOsMMAPExist(const std::string& filename);
+    static bool isIBOsMMAPExist(const std::string& filename);
 };
 
 #endif

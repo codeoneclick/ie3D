@@ -8,8 +8,8 @@
 
 #include "CHeightmapAccessor.h"
 #include "CHeightmapContainer.h"
-
-static ui32 g_heightmapGUID = 0;
+#include "CHeightmapLoader.h"
+#include "CHeightmapGeometryGenerator.h"
 
 CHeightmapAccessor::CHeightmapAccessor(void) :
 m_container(std::make_shared<CHeightmapContainer>())
@@ -24,5 +24,7 @@ CHeightmapAccessor::~CHeightmapAccessor(void)
 
 void CHeightmapAccessor::create(const std::string& filename, const std::function<void(void)>& callback)
 {
-    
+    std::tuple<glm::ivec2, std::vector<f32>> heights = CHeightmapLoader::getHeights(filename);
+    CHeightmapGeometryGenerator::generate(m_container, filename, std::get<0>(heights), std::get<1>(heights),
+                                          callback);
 }

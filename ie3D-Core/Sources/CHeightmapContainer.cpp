@@ -9,6 +9,16 @@
 #include "CHeightmapContainer.h"
 #include "CHeightmapLoader.h"
 
+#if defined(__IOS__)
+
+#import <UIKit/UIKit.h>
+
+#elif defined(__OSX__)
+
+#include <Cocoa/Cocoa.h>
+
+#endif
+
 CHeightmapContainer::CHeightmapContainer(void) :
 m_uncompressedVertices(nullptr),
 m_compressedVertices(nullptr),
@@ -29,6 +39,25 @@ CHeightmapContainer::~CHeightmapContainer(void)
 void CHeightmapContainer::create(const glm::ivec2& size)
 {
     m_size = size;
+    
+    m_chunkSize = glm::ivec2(MIN_VALUE(size.x, kMaxChunkSize),
+                             MIN_VALUE(size.y, kMaxChunkSize));
+    
+    m_chunkLODsSizes.at(E_LANDSCAPE_CHUNK_LOD_01) = glm::ivec2(MIN_VALUE(size.x, m_chunkSize.x),
+                                                               MIN_VALUE(size.y, m_chunkSize.y));
+    
+    m_chunkLODsSizes.at(E_LANDSCAPE_CHUNK_LOD_02) = glm::ivec2(MIN_VALUE(size.x, floor(static_cast<f32>(kMaxChunkSize) / 2.0f)),
+                                                               MIN_VALUE(size.y, floor(static_cast<f32>(kMaxChunkSize) / 2.0f)));
+    
+    m_chunkLODsSizes.at(E_LANDSCAPE_CHUNK_LOD_03) = glm::ivec2(MIN_VALUE(size.x, ceil(static_cast<f32>(kMaxChunkSize) / 4.0f)),
+                                                               MIN_VALUE(size.y, ceil(static_cast<f32>(kMaxChunkSize) / 4.0f)));
+    
+    m_chunkLODsSizes.at(E_LANDSCAPE_CHUNK_LOD_04) = glm::ivec2(MIN_VALUE(size.x, floor(static_cast<f32>(kMaxChunkSize) / 8.0f)),
+                                                               MIN_VALUE(size.y, floor(static_cast<f32>(kMaxChunkSize) / 8.0f)));
+    
+    m_chunksNum = glm::ivec2(size.x / (m_chunkSize.x - 1),
+                             size.y / (m_chunkSize.y - 1));
+    
     m_uncompressedVertices = new SUncomressedVertex[m_size.x * m_size.y];
     m_compressedVertices = new SCompressedVertex[m_size.x * m_size.y];
     m_faces = new SFace[(m_size.x - 1) * (m_size.y - 1) * 2];

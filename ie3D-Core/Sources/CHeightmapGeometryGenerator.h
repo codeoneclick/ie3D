@@ -16,8 +16,11 @@ class CHeightmapGeometryGenerator
 {
 private:
     
-    void createVerticesMetadata(const std::shared_ptr<CHeightmapContainer>& container, const glm::ivec2& size, const std::vector<f32>& heights);
-    void writeVerticesMetadata(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void createVerticesMetadata(const std::shared_ptr<CHeightmapContainer>& container, const glm::ivec2& size, const std::vector<f32>& heights,
+                                       const std::string& filename);
+    
+    static void createVBOsMetadata(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void createIBOsMetadata(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     
 protected:
     
@@ -26,8 +29,8 @@ public:
     CHeightmapGeometryGenerator(void);
     ~CHeightmapGeometryGenerator(void);
     
-    void generate(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                  const glm::ivec2& size, const std::vector<f32>& heights, const std::function<void(void)>& callback);
+    static void generate(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                         const glm::ivec2& size, const std::vector<f32>& heights, const std::function<void(void)>& callback);
 };
 
 #endif
