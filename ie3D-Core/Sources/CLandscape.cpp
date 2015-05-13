@@ -217,7 +217,7 @@ void CLandscape::onDraw(CSharedMaterialRef material)
         std::for_each(m_chunks.cbegin(), m_chunks.cend(), [material, this](CSharedLandscapeChunk chunk) {
             if(chunk && chunk->m_mesh && chunk->m_numPassedIndexes > 0)
             {
-                material->getShader()->setTexture(chunk->getPreprocessedSplattingTexture(), E_SHADER_SAMPLER_01);
+                //material->getShader()->setTexture(chunk->getPreprocessedSplattingTexture(), E_SHADER_SAMPLER_01);
                 chunk->m_mesh->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
                 chunk->m_mesh->draw(chunk->m_numPassedIndexes);
                 chunk->m_mesh->unbind(material->getShader()->getGUID(), material->getShader()->getAttributes());

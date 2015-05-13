@@ -30,7 +30,7 @@ public:
     ~CHeightmapGeometryGenerator(void);
     
     static void generate(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                         const glm::ivec2& size, const std::vector<f32>& heights, const std::function<void(void)>& callback);
+                         const glm::ivec2& size, const std::vector<f32>& heights);
 };
 
 #endif

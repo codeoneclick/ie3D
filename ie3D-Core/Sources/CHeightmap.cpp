@@ -92,7 +92,7 @@ std::string CHeightmap::getCompressedVerticesMMAPFilename(const std::string& fil
 {
     std::ostringstream stringstream;
     stringstream<<filename<<kCompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
-    
+
 #if defined(__IOS__)
     
     return documentspath() + stringstream.str();
@@ -645,81 +645,7 @@ glm::vec2 CHeightmapAccessor::getAngleOnHeightmapSurface(CSharedHeightmapRef dat
     return glm::vec2(glm::degrees(acos(angle_02) - M_PI_2), glm::degrees(asin(angle_01)));
 }
 
-namespace ie
-{
-    i32 mmap_memory::g_filedescriptors = 0;
-    mmap_memory::mmap_memory(void) :
-    m_filedescriptor(-1),
-    m_pointer(nullptr)
-    {
-        
-    }
-    
-    mmap_memory::~mmap_memory(void)
-    {
-        mmap_memory::deallocate();
-    }
-        
-    void* mmap_memory::allocate(const std::string& filename)
-    {
-        if(m_filedescriptor != -1)
-        {
-            assert(m_pointer != nullptr);
-            return m_pointer;
-        }
-        
-        ui32 filelength;
-        struct stat status;
-        
-        m_filedescriptor = ::open(filename.c_str(), O_RDWR);
-        if (m_filedescriptor < 0)
-        {
-            std::cout<<"can't open filedescriptor for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;
-            assert(false);
-        }
-        g_filedescriptors++;
-        
-        if (fstat(m_filedescriptor, &status) < 0)
-        {
-            std::cout<<"can't retrive filedescriptor status for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;
-            mmap_memory::deallocate();
-            assert(false);
-        }
-        
-        filelength = (ui32)status.st_size;
-        m_pointer = (void* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_filedescriptor, 0);
-        if (m_pointer == nullptr)
-        {
-            std::cout<<"can't mmap filedescriptor for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;
-            mmap_memory::deallocate();
-            assert(false);
-        }
-        f32 size = static_cast<f32>(filelength) / (1024.0 * 1024);
-        std::cout<<"filedescriptor was allocated. filedescriptors count: "<<g_filedescriptors<<" size: "<<size<<"mb"<<std::endl;
-        m_filename = filename;
-        return m_pointer;
-    }
-    
-    void mmap_memory::deallocate(void)
-    {
-        if(m_filedescriptor >= 0)
-        {
-            ::close(m_filedescriptor);
-            g_filedescriptors--;
-            std::cout<<"filedescriptor was deallocated. filedescriptors count: "<<g_filedescriptors<<std::endl;
-        }
-        m_filedescriptor = -1;
-        m_pointer = nullptr;
-    }
-    
-    void mmap_memory::reallocate(void)
-    {
-        mmap_memory::deallocate();
-        mmap_memory::allocate(m_filename);
-    }
-};
-
-CHeightmapMMAP::CHeightmapMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor) :
+CHeightmapMMAP::CHeightmapMMAP(const std::shared_ptr<CMmap>& descriptor) :
 m_descriptor(descriptor),
 m_size(0),
 m_offset(0)
@@ -735,8 +661,8 @@ m_renderTechniqueAccessor(renderTechniqueAccessor),
 m_heightmapTexture(nullptr),
 m_splattingTexture(nullptr),
 m_vbosMMAPDescriptor(nullptr),
-m_ibosMMAPDescriptor(nullptr),
-m_texturesMMAPDescriptor(nullptr)
+m_ibosMMAPDescriptor(nullptr)
+//m_texturesMMAPDescriptor(nullptr)
 {
     assert(m_renderTechniqueAccessor != nullptr);
 }
@@ -810,7 +736,7 @@ void CHeightmapGenerator::generate(const std::string& filename, const std::funct
                 m_vbosMMAPDescriptor->deallocate();
                 m_vbosMMAPDescriptor = nullptr;
             }
-            m_vbosMMAPDescriptor = std::make_shared<ie::mmap_memory>();
+            m_vbosMMAPDescriptor = std::make_shared<CMmap>();
             m_vbosMMAP.clear();
             m_vbosMMAPDescriptor->allocate(CHeightmapGenerator::createVBOs());
         });
@@ -823,24 +749,24 @@ void CHeightmapGenerator::generate(const std::string& filename, const std::funct
                 m_ibosMMAPDescriptor->deallocate();
                 m_ibosMMAPDescriptor = nullptr;
             }
-            m_ibosMMAPDescriptor = std::make_shared<ie::mmap_memory>();
+            m_ibosMMAPDescriptor = std::make_shared<CMmap>();
             m_ibosMMAP.clear();
             m_ibosMMAPDescriptor->allocate(CHeightmapGenerator::createIBOs());
         });
         completionOperation->addDependency(createIBOsOperation);
         
-        CSharedThreadOperation createTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+        /*CSharedThreadOperation createTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
         createTexturesOperation->setExecutionBlock([this](void) {
             if(m_texturesMMAPDescriptor)
             {
                 m_texturesMMAPDescriptor->deallocate();
                 m_texturesMMAPDescriptor = nullptr;
             }
-            m_texturesMMAPDescriptor = std::make_shared<ie::mmap_memory>();
+            m_texturesMMAPDescriptor = std::make_shared<CMmap>();
             m_texturesMMAP.clear();
             m_texturesMMAPDescriptor->allocate(CHeightmapGenerator::createTextures());
         });
-        completionOperation->addDependency(createTexturesOperation);
+        completionOperation->addDependency(createTexturesOperation);*/
         
         completionOperation->addToExecutionQueue();
     });
@@ -1215,7 +1141,7 @@ std::string CHeightmapGenerator::createTextures(void)
     std::chrono::steady_clock::time_point startTimestamp = std::chrono::steady_clock::now();
     
 #endif
-    m_texturesMMAP.resize(m_chunksNum.x * m_chunksNum.y);
+    //m_texturesMMAP.resize(m_chunksNum.x * m_chunksNum.y);
     
     std::string filename;
     std::ostringstream stringstream;
@@ -1298,9 +1224,9 @@ std::string CHeightmapGenerator::createTextures(void)
                 }
             }
             
-            m_texturesMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapTextureMMAP>(m_texturesMMAPDescriptor);
-            m_texturesMMAP[i + j * m_chunksNum.x]->setSize(size.x * size.y);
-            m_texturesMMAP[i + j * m_chunksNum.x]->setOffset(pixelsWroteToMMAP);
+            //m_texturesMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapTextureMMAP>(m_texturesMMAPDescriptor);
+            //m_texturesMMAP[i + j * m_chunksNum.x]->setSize(size.x * size.y);
+            //m_texturesMMAP[i + j * m_chunksNum.x]->setOffset(pixelsWroteToMMAP);
             pixelsWroteToMMAP += size.x * size.y;
         }
         verticesOffset.x += m_chunkSize.x - 1;
@@ -1663,7 +1589,7 @@ void CHeightmapGenerator::generateQuadTree(ui32 index)
     std::get<1>(m_chunksMetadata[index]) = quadTree;
 }
 
-CSharedTexture CHeightmapGenerator::generateDiffuseTexture(ui32 index, CSharedMaterialRef material)
+/*CSharedTexture CHeightmapGenerator::generateDiffuseTexture(ui32 index, CSharedMaterialRef material)
 {
     assert(m_texturesMMAP[index]->getPointer() != nullptr);
     
@@ -1694,7 +1620,7 @@ CSharedTexture CHeightmapGenerator::generateDiffuseTexture(ui32 index, CSharedMa
     texture->setMinFilter(GL_LINEAR);
     
     return texture;
-}
+}*/
 
 void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                                           CSharedMaterialRef preprocessSplattingTextureMaterial,
@@ -1739,8 +1665,8 @@ void CHeightmapGenerator::runChunkLoading(ui32 i, ui32 j, E_LANDSCAPE_CHUNK_LOD 
     {
         CSharedThreadOperation createDiffuseTexture = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
         createDiffuseTexture->setExecutionBlock([this, index, preprocessSplattingTextureMaterial, textureGeneratedCallback](void) {
-            CSharedTexture texture = CHeightmapGenerator::generateDiffuseTexture(index, preprocessSplattingTextureMaterial);
-            textureGeneratedCallback(texture);
+            //CSharedTexture texture = CHeightmapGenerator::generateDiffuseTexture(index, preprocessSplattingTextureMaterial);
+            textureGeneratedCallback(nullptr);
         });
         completionOperation->addDependency(createDiffuseTexture);
     }

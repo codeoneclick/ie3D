@@ -25,69 +25,30 @@ CHeightmapGeometryGenerator::~CHeightmapGeometryGenerator(void)
 }
 
 void CHeightmapGeometryGenerator::generate(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                                           const glm::ivec2& size, const std::vector<f32>& heights, const std::function<void(void)>& callback)
+                                           const glm::ivec2& size, const std::vector<f32>& heights)
 {
-    CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
-    completionOperation->setExecutionBlock([callback](void) {
-        callback();
-    });
-    
-    CSharedThreadOperation createContainerOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    createContainerOperation->setExecutionBlock([container, size](void) {
-        container->create(size);
-    });
-    completionOperation->addDependency(createContainerOperation);
+    container->create(size);
     
     if(!CHeightmapLoader::isUncompressedVerticesMMAPExist(filename) ||
        !CHeightmapLoader::isCompressedVerticesMMAPExist(filename) ||
        !CHeightmapLoader::isFacesMMAPExist(filename))
     {
-        CSharedThreadOperation createVerticesMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-        createVerticesMetadataOperation->setExecutionBlock([container, size, heights, filename](void) {
-            CHeightmapGeometryGenerator::createVerticesMetadata(container, size, heights, filename);
-        });
-        completionOperation->addDependency(createVerticesMetadataOperation);
-        
-        CSharedThreadOperation createVBOsMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-        createVBOsMetadataOperation->setExecutionBlock([container, filename](void) {
-            CHeightmapGeometryGenerator::createVBOsMetadata(container, filename);
-        });
-        completionOperation->addDependency(createVBOsMetadataOperation);
-        
-        CSharedThreadOperation createIBOsMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-        createIBOsMetadataOperation->setExecutionBlock([container, filename](void) {
-            CHeightmapGeometryGenerator::createIBOsMetadata(container, filename);
-        });
-        completionOperation->addDependency(createIBOsMetadataOperation);
+        CHeightmapGeometryGenerator::createVerticesMetadata(container, size, heights, filename);
+        CHeightmapGeometryGenerator::createVBOsMetadata(container, filename);
+        CHeightmapGeometryGenerator::createIBOsMetadata(container, filename);
     }
     else
     {
         if(!CHeightmapLoader::isVBOsMMAPExist(filename))
         {
-            CSharedThreadOperation createVBOsMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-            createVBOsMetadataOperation->setExecutionBlock([container, filename](void) {
-                CHeightmapGeometryGenerator::createVBOsMetadata(container, filename);
-            });
-            completionOperation->addDependency(createVBOsMetadataOperation);
+            CHeightmapGeometryGenerator::createVBOsMetadata(container, filename);
         }
         
         if(!CHeightmapLoader::isIBOsMMAPExist(filename))
         {
-            CSharedThreadOperation createIBOsMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-            createIBOsMetadataOperation->setExecutionBlock([container, filename](void) {
-                CHeightmapGeometryGenerator::createIBOsMetadata(container, filename);
-            });
-            completionOperation->addDependency(createIBOsMetadataOperation);
+            CHeightmapGeometryGenerator::createIBOsMetadata(container, filename);
         }
     }
-    
-    CSharedThreadOperation mmapVerticesMetadataOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    mmapVerticesMetadataOperation->setExecutionBlock([container, filename](void) {
-        container->mmap(filename);
-    });
-    completionOperation->addDependency(mmapVerticesMetadataOperation);
-    
-    completionOperation->addToExecutionQueue();
 }
 
 void CHeightmapGeometryGenerator::createVerticesMetadata(const std::shared_ptr<CHeightmapContainer>& container, const glm::ivec2& size, const std::vector<f32>& heights,

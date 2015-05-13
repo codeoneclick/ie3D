@@ -11,6 +11,9 @@
 
 #include "HCommon.h"
 #include "HEnums.h"
+#include "CMmap.h"
+#include "CVertexBuffer.h"
+#include "CIndexBuffer.h"
 
 class CHeightmapContainer
 {
@@ -62,15 +65,98 @@ public:
         SFace& operator = (SFace&& copy) = delete;
     };
     
+    class CHeightmapMMAP
+    {
+    private:
+        
+    protected:
+        
+        std::shared_ptr<CMmap> m_descriptor;
+        
+        ui32 m_size;
+        ui32 m_offset;
+        
+    public:
+        
+        CHeightmapMMAP(const std::shared_ptr<CMmap>& descriptor);
+        virtual ~CHeightmapMMAP(void) = default;
+        
+        inline void setSize(ui32 size) { m_size = size; };
+        inline void setOffset(ui32 offset) { m_offset = offset; }
+        inline ui32 getSize(void) const { return m_size; };
+    };
+    
+    class CHeightmapVBOMMAP : public CHeightmapMMAP
+    {
+    private:
+        
+    protected:
+        
+    public:
+        
+        CHeightmapVBOMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor) { };
+        ~CHeightmapVBOMMAP(void) = default;
+        
+        inline SAttributeVertex* getPointer(void) const
+        {
+            SAttributeVertex* pointer = (SAttributeVertex* )m_descriptor->pointer();
+            assert(pointer != nullptr);
+            
+            return pointer + m_offset;
+        };
+    };
+    
+    class CHeightmapIBOMMAP : public CHeightmapMMAP
+    {
+    private:
+        
+        
+    protected:
+        
+    public:
+        
+        CHeightmapIBOMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor) { };
+        ~CHeightmapIBOMMAP(void) = default;
+        
+        inline ui16* getSourcePointer(void) const
+        {
+            ui16* pointer = (ui16* )m_descriptor->pointer();
+            assert(pointer != nullptr);
+            
+            return pointer + m_offset;
+        };
+        
+        inline ui16* getOriginPointer(void) const
+        {
+            ui16* pointer = (ui16* )m_descriptor->pointer();
+            assert(pointer != nullptr);
+            
+            return pointer + m_offset + m_size;
+        };
+        
+        inline void updateSourcePointer(void)
+        {
+            ui16* sourcePointer = CHeightmapIBOMMAP::getSourcePointer();
+            ui16* originPointer = CHeightmapIBOMMAP::getOriginPointer();
+            memcpy(sourcePointer, originPointer, m_size * sizeof(ui16));
+        }
+    };
+    
 private:
     
     SUncomressedVertex* m_uncompressedVertices;
     SFace* m_faces;
     SCompressedVertex* m_compressedVertices;
     
-    i32 m_uncompressedVerticesFiledescriptor;
-    i32 m_facesFiledescriptor;
-    i32 m_compressedVerticesFiledescriptor;
+    std::shared_ptr<CMmap> m_uncompressedVerticesMMAPDescriptor;
+    std::shared_ptr<CMmap> m_facesMMAPDescriptor;
+    std::shared_ptr<CMmap> m_compressedVerticesMMAPDescriptor;
+    
+    std::shared_ptr<CMmap> m_vbosMMAPDescriptor;
+    std::shared_ptr<CMmap> m_ibosMMAPDescriptor;
+    
+    std::vector<std::shared_ptr<CHeightmapVBOMMAP>> m_vbosMMAP;
+    std::vector<std::array<std::shared_ptr<CHeightmapIBOMMAP>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
     
     glm::ivec2 m_size;
     
@@ -107,6 +193,9 @@ public:
     inline glm::vec2 getUncompressedVertexTexcoord(ui32 i, ui32 j) const;
     inline glm::uint32 getCompressedVertexNormal(ui32 i, ui32 j) const;
     inline glm::vec3 getUncompressedVertexNormal(ui32 i, ui32 j) const;
+    
+    inline std::shared_ptr<CHeightmapVBOMMAP> getVBOMmap(i32 index) const;
+    inline std::shared_ptr<CHeightmapIBOMMAP> getIBOMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
 };
 
 #include "CHeightmapContainer.hpp"

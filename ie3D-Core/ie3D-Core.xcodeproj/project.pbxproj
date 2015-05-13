@@ -378,6 +378,9 @@
 		21B72FB61A8CEDAE003F4C24 /* ICommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B72FB41A8CEDAE003F4C24 /* ICommand.cpp */; };
 		21B72FB71A8CEDAE003F4C24 /* ICommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B72FB41A8CEDAE003F4C24 /* ICommand.cpp */; };
 		21B72FB81A8CEDAE003F4C24 /* ICommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 21B72FB51A8CEDAE003F4C24 /* ICommand.h */; };
+		21BDBAA41B033D7E0071AE1D /* CMmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21BDBAA21B033D7E0071AE1D /* CMmap.cpp */; };
+		21BDBAA51B033D7F0071AE1D /* CMmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21BDBAA21B033D7E0071AE1D /* CMmap.cpp */; };
+		21BDBAA61B033D7F0071AE1D /* CMmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 21BDBAA31B033D7E0071AE1D /* CMmap.h */; };
 		21C409A5197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A6197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */; };
 		21C409A7197B0B4B0063D62D /* CMeshSerializer_MDL_01.h in Headers */ = {isa = PBXBuildFile; fileRef = 21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */; };
@@ -764,6 +767,8 @@
 		21B72FAB1A8CE96B003F4C24 /* IUICommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUICommands.h; path = Sources/IUICommands.h; sourceTree = "<group>"; };
 		21B72FB41A8CEDAE003F4C24 /* ICommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICommand.cpp; path = Sources/ICommand.cpp; sourceTree = "<group>"; };
 		21B72FB51A8CEDAE003F4C24 /* ICommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICommand.h; path = Sources/ICommand.h; sourceTree = "<group>"; };
+		21BDBAA21B033D7E0071AE1D /* CMmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMmap.cpp; path = Sources/CMmap.cpp; sourceTree = "<group>"; };
+		21BDBAA31B033D7E0071AE1D /* CMmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMmap.h; path = Sources/CMmap.h; sourceTree = "<group>"; };
 		21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshSerializer_MDL_01.cpp; path = Sources/CMeshSerializer_MDL_01.cpp; sourceTree = "<group>"; };
 		21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshSerializer_MDL_01.h; path = Sources/CMeshSerializer_MDL_01.h; sourceTree = "<group>"; };
 		21C409A8197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshCommiter_MDL_01.cpp; path = Sources/CMeshCommiter_MDL_01.cpp; sourceTree = "<group>"; };
@@ -785,7 +790,7 @@
 		21DE58DA1B008B4400D60DC5 /* CHeightmapGeometryGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHeightmapGeometryGenerator.h; path = Sources/CHeightmapGeometryGenerator.h; sourceTree = "<group>"; };
 		21DE58DE1B008B8500D60DC5 /* CHeightmapTextureGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CHeightmapTextureGenerator.cpp; path = Sources/CHeightmapTextureGenerator.cpp; sourceTree = "<group>"; };
 		21DE58DF1B008B8500D60DC5 /* CHeightmapTextureGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHeightmapTextureGenerator.h; path = Sources/CHeightmapTextureGenerator.h; sourceTree = "<group>"; };
-		21DE58E31B008BCA00D60DC5 /* CHeightmapContainer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CHeightmapContainer.cpp; path = Sources/CHeightmapContainer.cpp; sourceTree = "<group>"; };
+		21DE58E31B008BCA00D60DC5 /* CHeightmapContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CHeightmapContainer.cpp; path = Sources/CHeightmapContainer.cpp; sourceTree = "<group>"; };
 		21DE58E41B008BCA00D60DC5 /* CHeightmapContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHeightmapContainer.h; path = Sources/CHeightmapContainer.h; sourceTree = "<group>"; };
 		21DE58E81B008BE500D60DC5 /* CHeightmapLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CHeightmapLoader.cpp; path = Sources/CHeightmapLoader.cpp; sourceTree = "<group>"; };
 		21DE58E91B008BE500D60DC5 /* CHeightmapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHeightmapLoader.h; path = Sources/CHeightmapLoader.h; sourceTree = "<group>"; };
@@ -1846,6 +1851,8 @@
 				A4AB15BC177C73D400FFC12E /* CTimer.h */,
 				A4AB15BB177C73D400FFC12E /* CTimer.cpp */,
 				2172A02C18F337D300D4D317 /* HDeclaration.h */,
+				21BDBAA31B033D7E0071AE1D /* CMmap.h */,
+				21BDBAA21B033D7E0071AE1D /* CMmap.cpp */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -2162,6 +2169,7 @@
 				213B7F331993CC5B006F3976 /* CShaderCompiler_GLSL.h in Headers */,
 				21F4F5AB1AB6E0E90095477F /* orthonormalize.hpp in Headers */,
 				21F4F57C1AB6E0E90095477F /* matrix_access.hpp in Headers */,
+				21BDBAA61B033D7F0071AE1D /* CMmap.h in Headers */,
 				21F4F56C1AB6E0E90095477F /* type_mat2x4.hpp in Headers */,
 				21E52B831A90A42B005977F1 /* CMeshSerializer_ie3Dmesh.h in Headers */,
 				21B0BA0C1A82AA72001CE9A0 /* CPerlinNoise.h in Headers */,
@@ -2595,6 +2603,7 @@
 				21ACE3931A7133FF0017A771 /* CComponentRendering.cpp in Sources */,
 				21A56D1F1A79090600C8F362 /* CConfigurationShader.cpp in Sources */,
 				21A56D251A79090600C8F362 /* CConfigurationTexture.cpp in Sources */,
+				21BDBAA51B033D7F0071AE1D /* CMmap.cpp in Sources */,
 				21B72FAD1A8CE96B003F4C24 /* IUICommands.cpp in Sources */,
 				2191CE77196EE0B000CE2813 /* CTextureCommiter_PNG.cpp in Sources */,
 				2191CEBD196EE95100CE2813 /* zutil.c in Sources */,
@@ -2777,6 +2786,7 @@
 				21ACE3921A7133FF0017A771 /* CComponentRendering.cpp in Sources */,
 				21A56D1E1A79090600C8F362 /* CConfigurationShader.cpp in Sources */,
 				21A56D241A79090600C8F362 /* CConfigurationTexture.cpp in Sources */,
+				21BDBAA41B033D7E0071AE1D /* CMmap.cpp in Sources */,
 				21B72FAC1A8CE96B003F4C24 /* IUICommands.cpp in Sources */,
 				2191CE76196EE0AF00CE2813 /* CTextureCommiter_PNG.cpp in Sources */,
 				2191CEBC196EE95100CE2813 /* zutil.c in Sources */,

@@ -85,3 +85,16 @@ inline glm::vec3 CHeightmapContainer::getUncompressedVertexNormal(ui32 i, ui32 j
     return glm::vec3(normal.x, normal.y, normal.z);
 };
 
+inline std::shared_ptr<CHeightmapContainer::CHeightmapVBOMMAP> CHeightmapContainer::getVBOMmap(i32 index) const
+{
+    assert(index >=0 && index < m_vbosMMAP.size());
+    return m_vbosMMAP[index];
+}
+
+inline std::shared_ptr<CHeightmapContainer::CHeightmapIBOMMAP> CHeightmapContainer::getIBOMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const
+{
+    assert(LOD >= 0 && LOD < E_LANDSCAPE_CHUNK_LOD_MAX);
+    assert(index >=0 && index < m_ibosMMAP[LOD].size());
+    return m_ibosMMAP[LOD][index];
+}
+

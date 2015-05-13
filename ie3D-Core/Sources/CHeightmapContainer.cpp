@@ -9,23 +9,15 @@
 #include "CHeightmapContainer.h"
 #include "CHeightmapLoader.h"
 
-#if defined(__IOS__)
-
-#import <UIKit/UIKit.h>
-
-#elif defined(__OSX__)
-
-#include <Cocoa/Cocoa.h>
-
-#endif
-
 CHeightmapContainer::CHeightmapContainer(void) :
 m_uncompressedVertices(nullptr),
 m_compressedVertices(nullptr),
 m_faces(nullptr),
-m_uncompressedVerticesFiledescriptor(-1),
-m_compressedVerticesFiledescriptor(-1),
-m_facesFiledescriptor(-1),
+m_uncompressedVerticesMMAPDescriptor(nullptr),
+m_compressedVerticesMMAPDescriptor(nullptr),
+m_facesMMAPDescriptor(nullptr),
+m_vbosMMAPDescriptor(nullptr),
+m_ibosMMAPDescriptor(nullptr),
 m_size(0)
 {
     
@@ -61,14 +53,17 @@ void CHeightmapContainer::create(const glm::ivec2& size)
     m_uncompressedVertices = new SUncomressedVertex[m_size.x * m_size.y];
     m_compressedVertices = new SCompressedVertex[m_size.x * m_size.y];
     m_faces = new SFace[(m_size.x - 1) * (m_size.y - 1) * 2];
+    
+    m_vbosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
+    m_ibosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
 }
 
 void CHeightmapContainer::erase(void)
 {
-    if(m_uncompressedVerticesFiledescriptor > 0)
+    if(m_uncompressedVerticesMMAPDescriptor != 0)
     {
-        ::close(m_uncompressedVerticesFiledescriptor);
-        m_uncompressedVerticesFiledescriptor = -1;
+        m_uncompressedVerticesMMAPDescriptor->deallocate();
+        m_uncompressedVerticesMMAPDescriptor = nullptr;
     }
     else
     {
@@ -76,10 +71,10 @@ void CHeightmapContainer::erase(void)
     }
     m_uncompressedVertices = nullptr;
     
-    if(m_compressedVerticesFiledescriptor > 0)
+    if(m_compressedVerticesMMAPDescriptor != nullptr)
     {
-        ::close(m_compressedVerticesFiledescriptor);
-        m_compressedVerticesFiledescriptor = -1;
+        m_compressedVerticesMMAPDescriptor->deallocate();
+        m_compressedVerticesMMAPDescriptor = nullptr;
     }
     else
     {
@@ -87,82 +82,95 @@ void CHeightmapContainer::erase(void)
     }
     m_compressedVertices = nullptr;
     
-    if(m_facesFiledescriptor > 0)
+    if(m_facesMMAPDescriptor != nullptr)
     {
-        ::close(m_facesFiledescriptor);
-        m_facesFiledescriptor = -1;
+        m_facesMMAPDescriptor->deallocate();
+        m_facesMMAPDescriptor = nullptr;
     }
     else
     {
         delete [] m_faces;
     }
     m_faces = nullptr;
+    
+    if(m_vbosMMAPDescriptor != nullptr)
+    {
+        m_vbosMMAPDescriptor->deallocate();
+        m_vbosMMAPDescriptor = nullptr;
+    }
+    m_vbosMMAP.clear();
+    
+    if(m_ibosMMAPDescriptor != nullptr)
+    {
+        m_ibosMMAPDescriptor->deallocate();
+        m_ibosMMAPDescriptor = nullptr;
+    }
+    m_ibosMMAP.clear();
 }
 
 void CHeightmapContainer::mmap(const std::string& filename)
 {
     CHeightmapContainer::erase();
     
-    ui32 filelength;
-    struct stat status;
+    m_compressedVerticesMMAPDescriptor = std::make_shared<CMmap>();
+    m_compressedVertices = static_cast<SCompressedVertex*>(m_compressedVerticesMMAPDescriptor->allocate(CHeightmapLoader::getCompressedVerticesMMAPFilename(filename)));
+    if (!m_compressedVertices)
+    {
+        assert(false);
+    }
     
-    { // reading compressed vertices metadata
-        m_compressedVerticesFiledescriptor = open(CHeightmapLoader::getCompressedVerticesMMAPFilename(filename).c_str(), O_RDWR);
-        if (m_compressedVerticesFiledescriptor < 0)
+    m_uncompressedVerticesMMAPDescriptor = std::make_shared<CMmap>();
+    m_uncompressedVertices = static_cast<SUncomressedVertex*>(m_uncompressedVerticesMMAPDescriptor->allocate(CHeightmapLoader::getUncompressedVerticesMMAPFilename(filename)));
+    if (!m_uncompressedVertices)
+    {
+        assert(false);
+    }
+    
+    m_facesMMAPDescriptor = std::make_shared<CMmap>();
+    m_faces = static_cast<SFace*>(m_facesMMAPDescriptor->allocate(CHeightmapLoader::getFacesMMAPFilename(filename)));
+    if (!m_faces)
+    {
+        assert(false);
+    }
+    
+    m_vbosMMAPDescriptor = std::make_shared<CMmap>();
+    m_vbosMMAPDescriptor->allocate(CHeightmapLoader::getVBOsMMAPFilename(filename));
+    
+    ui32 offset = 0;
+    for(ui32 i = 0; i < m_chunksNum.x; ++i)
+    {
+        for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
-            assert(false);
-        }
-        
-        if (fstat(m_compressedVerticesFiledescriptor, &status) < 0)
-        {
-            assert(false);
-        }
-        
-        filelength = (ui32)status.st_size;
-        m_compressedVertices = (SCompressedVertex* )::mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_compressedVerticesFiledescriptor, 0);
-        if (!m_compressedVertices)
-        {
-            assert(false);
+            m_vbosMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapVBOMMAP>(m_vbosMMAPDescriptor);
+            m_vbosMMAP[i + j * m_chunksNum.x]->setSize(m_chunkSize.x * m_chunkSize.y);
+            m_vbosMMAP[i + j * m_chunksNum.x]->setOffset(offset);
+            offset += m_chunkSize.x * m_chunkSize.y;
         }
     }
     
-    { // reading uncompressed vertices metadata
-        m_uncompressedVerticesFiledescriptor = open(CHeightmapLoader::getUncompressedVerticesMMAPFilename(filename).c_str(), O_RDWR);
-        if (m_uncompressedVerticesFiledescriptor < 0)
-        {
-            assert(false);
-        }
-        
-        if (fstat(m_uncompressedVerticesFiledescriptor, &status) < 0)
-        {
-            assert(false);
-        }
-        
-        filelength = (ui32)status.st_size;
-        m_uncompressedVertices = (SUncomressedVertex* )::mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_uncompressedVerticesFiledescriptor, 0);
-        if (!m_uncompressedVertices)
-        {
-            assert(false);
-        }
-    }
+    m_ibosMMAPDescriptor = std::make_shared<CMmap>();
+    m_ibosMMAPDescriptor->allocate(CHeightmapLoader::getIBOsMMAPFilename(filename));
     
-    { // reading faces metadata
-        m_facesFiledescriptor = open(CHeightmapLoader::getFacesMMAPFilename(filename).c_str(), O_RDWR);
-        if (m_facesFiledescriptor < 0)
+    offset = 0;
+    for(ui32 i = 0; i < m_chunksNum.x; ++i)
+    {
+        for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
-            assert(false);
-        }
-        
-        if (fstat(m_facesFiledescriptor, &status) < 0)
-        {
-            assert(false);
-        }
-        
-        filelength = (ui32)status.st_size;
-        m_faces = (SFace* )::mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_facesFiledescriptor, 0);
-        if (!m_faces)
-        {
-            assert(false);
+            for(ui32 k = 0; k < E_LANDSCAPE_CHUNK_LOD_MAX; ++k)
+            {
+                glm::ivec2 currentChunkSize = glm::ivec2(m_chunkLODsSizes[k].x % 2 == 0 ? m_chunkLODsSizes[k].x : m_chunkLODsSizes[k].x - 1,
+                                                         m_chunkLODsSizes[k].y % 2 == 0 ? m_chunkLODsSizes[k].y : m_chunkLODsSizes[k].y - 1);
+                
+                glm::ivec2 extendedChunkSize = glm::ivec2(currentChunkSize.x - k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0,
+                                                          currentChunkSize.y - k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0);
+                
+                ui32 indicesCount = extendedChunkSize.x * extendedChunkSize.y * 6 + k != E_LANDSCAPE_CHUNK_LOD_01 ? 12 * (m_chunkSize.x - 1 + currentChunkSize.x) : 0;
+                
+                m_ibosMMAP[i + j * m_chunksNum.x][k] = std::make_shared<CHeightmapIBOMMAP>(m_ibosMMAPDescriptor);
+                m_ibosMMAP[i + j * m_chunksNum.x][k]->setSize(indicesCount);
+                m_ibosMMAP[i + j * m_chunksNum.x][k]->setOffset(offset);
+                offset += indicesCount * 2;
+            }
         }
     }
 }

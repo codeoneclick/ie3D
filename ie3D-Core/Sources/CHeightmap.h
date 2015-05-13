@@ -13,6 +13,7 @@
 #include "HDeclaration.h"
 #include "HEnums.h"
 #include "CVertexBuffer.h"
+#include "CMmap.h"
 
 class CHeightmap
 {
@@ -140,46 +141,20 @@ public:
     static glm::vec3 getNormal(CSharedHeightmapRef data, const glm::vec3& position);
 };
 
-namespace ie
-{
-    class mmap_memory
-    {
-    private:
-        
-        static i32 g_filedescriptors;
-        i32 m_filedescriptor;
-        std::string m_filename;
-        void* m_pointer;
-        
-    protected:
-        
-    public:
-        
-        mmap_memory(void);
-        ~mmap_memory(void);
-        
-        void* allocate(const std::string& filename);
-        void deallocate(void);
-        void reallocate(void);
-        
-        inline void* pointer(void) const { return m_pointer; };
-    };
-};
-
 class CHeightmapMMAP
 {
 private:
     
 protected:
     
-    std::shared_ptr<ie::mmap_memory> m_descriptor;
+    std::shared_ptr<CMmap> m_descriptor;
     
     ui32 m_size;
     ui32 m_offset;
     
 public:
     
-    CHeightmapMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor);
+    CHeightmapMMAP(const std::shared_ptr<CMmap>& descriptor);
     virtual ~CHeightmapMMAP(void) = default;
     
     inline void setSize(ui32 size) { m_size = size; };
@@ -196,7 +171,7 @@ protected:
     
 public:
     
-    CHeightmapIBOMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor) : CHeightmapMMAP(descriptor) { };
+    CHeightmapIBOMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor) { };
     ~CHeightmapIBOMMAP(void) = default;
     
     inline ui16* getSourcePointer(void) const
@@ -231,7 +206,7 @@ protected:
     
 public:
     
-    CHeightmapVBOMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor) : CHeightmapMMAP(descriptor) { };
+    CHeightmapVBOMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor) { };
     ~CHeightmapVBOMMAP(void) = default;
     
     inline SAttributeVertex* getPointer(void) const
@@ -251,7 +226,7 @@ protected:
     
 public:
     
-    CHeightmapTextureMMAP(const std::shared_ptr<ie::mmap_memory>& descriptor) : CHeightmapMMAP(descriptor) { };
+    CHeightmapTextureMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor) { };
     ~CHeightmapTextureMMAP(void) = default;
     
     inline ui16* getPointer(void) const
@@ -275,13 +250,13 @@ protected:
     
     std::shared_ptr<CHeightmap> m_heightmap;
     
-    std::shared_ptr<ie::mmap_memory> m_vbosMMAPDescriptor;
-    std::shared_ptr<ie::mmap_memory> m_ibosMMAPDescriptor;
-    std::shared_ptr<ie::mmap_memory> m_texturesMMAPDescriptor;
+    std::shared_ptr<CMmap> m_vbosMMAPDescriptor;
+    std::shared_ptr<CMmap> m_ibosMMAPDescriptor;
+    //std::shared_ptr<CMmap> m_texturesMMAPDescriptor;
     
     std::vector<std::shared_ptr<CHeightmapVBOMMAP>> m_vbosMMAP;
     std::vector<std::array<std::shared_ptr<CHeightmapIBOMMAP>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
-    std::vector<std::shared_ptr<CHeightmapTextureMMAP>> m_texturesMMAP;
+    //std::vector<std::shared_ptr<CHeightmapTextureMMAP>> m_texturesMMAP;
     
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_callbacks;
     std::vector<std::tuple<CSharedMesh, CSharedQuadTree, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
