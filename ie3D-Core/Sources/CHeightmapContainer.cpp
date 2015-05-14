@@ -18,7 +18,7 @@ m_compressedVerticesMMAPDescriptor(nullptr),
 m_facesMMAPDescriptor(nullptr),
 m_vbosMMAPDescriptor(nullptr),
 m_ibosMMAPDescriptor(nullptr),
-m_size(0)
+m_mainSize(0)
 {
     
 }
@@ -30,7 +30,7 @@ CHeightmapContainer::~CHeightmapContainer(void)
 
 void CHeightmapContainer::create(const glm::ivec2& size)
 {
-    m_size = size;
+    m_mainSize = size;
     
     m_chunkSize = glm::ivec2(MIN_VALUE(size.x, kMaxChunkSize),
                              MIN_VALUE(size.y, kMaxChunkSize));
@@ -50,9 +50,9 @@ void CHeightmapContainer::create(const glm::ivec2& size)
     m_chunksNum = glm::ivec2(size.x / (m_chunkSize.x - 1),
                              size.y / (m_chunkSize.y - 1));
     
-    m_uncompressedVertices = new SUncomressedVertex[m_size.x * m_size.y];
-    m_compressedVertices = new SCompressedVertex[m_size.x * m_size.y];
-    m_faces = new SFace[(m_size.x - 1) * (m_size.y - 1) * 2];
+    m_uncompressedVertices = new SUncomressedVertex[m_mainSize.x * m_mainSize.y];
+    m_compressedVertices = new SCompressedVertex[m_mainSize.x * m_mainSize.y];
+    m_faces = new SFace[(m_mainSize.x - 1) * (m_mainSize.y - 1) * 2];
     
     m_vbosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
     m_ibosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
@@ -98,14 +98,12 @@ void CHeightmapContainer::erase(void)
         m_vbosMMAPDescriptor->deallocate();
         m_vbosMMAPDescriptor = nullptr;
     }
-    m_vbosMMAP.clear();
     
     if(m_ibosMMAPDescriptor != nullptr)
     {
         m_ibosMMAPDescriptor->deallocate();
         m_ibosMMAPDescriptor = nullptr;
     }
-    m_ibosMMAP.clear();
 }
 
 void CHeightmapContainer::mmap(const std::string& filename)
@@ -161,10 +159,12 @@ void CHeightmapContainer::mmap(const std::string& filename)
                 glm::ivec2 currentChunkSize = glm::ivec2(m_chunkLODsSizes[k].x % 2 == 0 ? m_chunkLODsSizes[k].x : m_chunkLODsSizes[k].x - 1,
                                                          m_chunkLODsSizes[k].y % 2 == 0 ? m_chunkLODsSizes[k].y : m_chunkLODsSizes[k].y - 1);
                 
-                glm::ivec2 extendedChunkSize = glm::ivec2(currentChunkSize.x - k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0,
-                                                          currentChunkSize.y - k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0);
+                glm::ivec2 extendedChunkSize = currentChunkSize;
+                extendedChunkSize -= glm::ivec2(currentChunkSize.x - k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0,
+                                                currentChunkSize.y - k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0);
                 
-                ui32 indicesCount = extendedChunkSize.x * extendedChunkSize.y * 6 + k != E_LANDSCAPE_CHUNK_LOD_01 ? 12 * (m_chunkSize.x - 1 + currentChunkSize.x) : 0;
+                ui32 additionalIndicesCount = k != E_LANDSCAPE_CHUNK_LOD_01 ? 12 * (m_chunkSize.x - 1 + currentChunkSize.x) : 0;
+                ui32 indicesCount = extendedChunkSize.x * extendedChunkSize.y * 6 + additionalIndicesCount;
                 
                 m_ibosMMAP[i + j * m_chunksNum.x][k] = std::make_shared<CHeightmapIBOMMAP>(m_ibosMMAPDescriptor);
                 m_ibosMMAP[i + j * m_chunksNum.x][k]->setSize(indicesCount);

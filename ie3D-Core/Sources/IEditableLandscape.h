@@ -12,6 +12,8 @@
 #include "HCommon.h"
 #include "HDeclaration.h"
 
+class CHeightmapAccessor;
+
 class IEditableLandscape
 {
 private:
@@ -23,7 +25,7 @@ private:
     
 protected:
 
-    CSharedHeightmapGenerator m_heightmapGenerator;
+    std::shared_ptr<CHeightmapAccessor> m_heightmapAccessor;
     std::vector<CSharedLandscapeChunk> m_chunks;
     
 public:

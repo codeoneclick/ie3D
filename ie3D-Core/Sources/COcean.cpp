@@ -135,7 +135,7 @@ void COcean::bindCustomShaderUniforms(CSharedMaterialRef material)
     material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
     material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
     
-    CSharedTexture heightmapTexture = m_resourceAccessor->getTexture("landscape.heightmap.texture");
+    CSharedTexture heightmapTexture = nullptr;//m_resourceAccessor->getTexture("landscape.heightmap.texture");
     if(heightmapTexture && material->getTexture(E_SHADER_SAMPLER_04) != heightmapTexture)
     {
         material->setTexture(heightmapTexture, E_SHADER_SAMPLER_04);

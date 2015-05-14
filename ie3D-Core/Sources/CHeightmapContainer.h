@@ -78,7 +78,13 @@ public:
         
     public:
         
-        CHeightmapMMAP(const std::shared_ptr<CMmap>& descriptor);
+        CHeightmapMMAP(const std::shared_ptr<CMmap>& descriptor) :
+        m_descriptor(descriptor),
+        m_size(0),
+        m_offset(0)
+        {
+            
+        }
         virtual ~CHeightmapMMAP(void) = default;
         
         inline void setSize(ui32 size) { m_size = size; };
@@ -94,7 +100,10 @@ public:
         
     public:
         
-        CHeightmapVBOMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor) { };
+        CHeightmapVBOMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor)
+        {
+            
+        };
         ~CHeightmapVBOMMAP(void) = default;
         
         inline SAttributeVertex* getPointer(void) const
@@ -115,7 +124,10 @@ public:
         
     public:
         
-        CHeightmapIBOMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor) { };
+        CHeightmapIBOMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor)
+        {
+            
+        };
         ~CHeightmapIBOMMAP(void) = default;
         
         inline ui16* getSourcePointer(void) const
@@ -158,8 +170,7 @@ private:
     std::vector<std::shared_ptr<CHeightmapVBOMMAP>> m_vbosMMAP;
     std::vector<std::array<std::shared_ptr<CHeightmapIBOMMAP>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
     
-    glm::ivec2 m_size;
-    
+    glm::ivec2 m_mainSize;
     glm::ivec2 m_chunksNum;
     glm::ivec2 m_chunkSize;
     std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_chunkLODsSizes;
@@ -176,7 +187,7 @@ public:
     void create(const glm::ivec2& size);
     void mmap(const std::string& filename);
     
-    inline glm::ivec2 getSize(void) const;
+    inline glm::ivec2 getMainSize(void) const;
     inline glm::ivec2 getChunksNum(void) const;
     inline glm::ivec2 getChunkSize(void) const;
     inline glm::ivec2 getChunkLODSize(E_LANDSCAPE_CHUNK_LOD LOD) const;

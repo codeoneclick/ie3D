@@ -15,7 +15,7 @@ m_editableSize(4),
 m_editableStrength(1),
 m_editableFalloffCoefficient(0),
 m_editableSmoothCoefficient(0),
-m_heightmapGenerator(nullptr)
+m_heightmapAccessor(nullptr)
 {
     
 }
@@ -47,7 +47,7 @@ void IEditableLandscape::setEditableSmoothCoefficient(ui32 value)
 
 void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForce)
 {
-	i32 minIndX = static_cast<i32>(floor(point.x - m_editableSize));
+	/*i32 minIndX = static_cast<i32>(floor(point.x - m_editableSize));
 	i32 minIndZ = static_cast<i32>(floor(point.z - m_editableSize));
 	i32 maxIndX = static_cast<i32>(floor(point.x + m_editableSize));
 	i32 maxIndZ = static_cast<i32>(floor(point.z + m_editableSize));
@@ -97,12 +97,12 @@ void IEditableLandscape::pressureHeight(const glm::vec3& point, f32 pressureForc
     glm::ivec2 maxBound = glm::ivec2(MIN_VALUE(maxIndX, m_heightmapGenerator->getSize().x - 1),
                                      MIN_VALUE(maxIndZ, m_heightmapGenerator->getSize().y - 1));
     
-    m_heightmapGenerator->updateHeightmap(minBound, maxBound, vertices);
+    m_heightmapGenerator->updateHeightmap(minBound, maxBound, vertices);*/
 }
 
 void IEditableLandscape::generateVertecesData(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed)
 {
-    assert(m_heightmapGenerator != nullptr);
+    /*assert(m_heightmapGenerator != nullptr);
     glm::ivec2 previousSize = m_heightmapGenerator->getSize();
     if(size.x != previousSize.x ||
        size.y != previousSize.y)
@@ -131,5 +131,5 @@ void IEditableLandscape::generateVertecesData(const glm::ivec2& size, f32 freque
         std::vector<CSharedLandscapeChunk> chunks;
         m_chunks.swap(chunks);
         m_chunks.resize(m_heightmapGenerator->getNumChunks().x * m_heightmapGenerator->getNumChunks().y);
-    }
+    }*/
 }

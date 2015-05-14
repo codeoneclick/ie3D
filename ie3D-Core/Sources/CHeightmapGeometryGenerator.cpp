@@ -16,7 +16,7 @@
 
 CHeightmapGeometryGenerator::CHeightmapGeometryGenerator(void)
 {
-    
+   
 }
 
 CHeightmapGeometryGenerator::~CHeightmapGeometryGenerator(void)
@@ -29,15 +29,15 @@ void CHeightmapGeometryGenerator::generate(const std::shared_ptr<CHeightmapConta
 {
     container->create(size);
     
-    if(!CHeightmapLoader::isUncompressedVerticesMMAPExist(filename) ||
+    /*if(!CHeightmapLoader::isUncompressedVerticesMMAPExist(filename) ||
        !CHeightmapLoader::isCompressedVerticesMMAPExist(filename) ||
-       !CHeightmapLoader::isFacesMMAPExist(filename))
+       !CHeightmapLoader::isFacesMMAPExist(filename))*/
     {
         CHeightmapGeometryGenerator::createVerticesMetadata(container, size, heights, filename);
         CHeightmapGeometryGenerator::createVBOsMetadata(container, filename);
         CHeightmapGeometryGenerator::createIBOsMetadata(container, filename);
     }
-    else
+    /*else
     {
         if(!CHeightmapLoader::isVBOsMMAPExist(filename))
         {
@@ -48,7 +48,7 @@ void CHeightmapGeometryGenerator::generate(const std::shared_ptr<CHeightmapConta
         {
             CHeightmapGeometryGenerator::createIBOsMetadata(container, filename);
         }
-    }
+    }*/
 }
 
 void CHeightmapGeometryGenerator::createVerticesMetadata(const std::shared_ptr<CHeightmapContainer>& container, const glm::ivec2& size, const std::vector<f32>& heights,
@@ -204,14 +204,12 @@ void CHeightmapGeometryGenerator::createVBOsMetadata(const std::shared_ptr<CHeig
                                                              i + j * container->getChunksNum().x, index);
                     
                     stream.write((char*)&vertex, sizeof(SAttributeVertex));
-                    
                 }
             }
             verticesOffset.y += container->getChunkSize().y - 1;
         }
         verticesOffset.x += container->getChunkSize().x - 1;
     }
-    
     stream.close();
 }
 
@@ -314,7 +312,6 @@ void CHeightmapGeometryGenerator::createIBOsMetadata(const std::shared_ptr<CHeig
                                 additionIndices.push_back(currentLODEdgeIndices[currentLODIndex]);
                                 additionIndices.push_back(mainLODIndex);
                                 additionIndices.push_back(mainLODIndex + 1);
-                                
                             }
                         }
                     }
@@ -412,17 +409,23 @@ void CHeightmapGeometryGenerator::createIBOsMetadata(const std::shared_ptr<CHeig
                     for(ui32 y = currentChunkLODStartIndex.y; y < currentChunkSize.y; ++y)
                     {
                         indices[index] = x * verticesLODOffset.x + y * verticesLODOffset.y * verticesLineOffset;
+                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         indices[index] = x * verticesLODOffset.x + (y * verticesLODOffset.y + verticesLODOffset.y) * verticesLineOffset;
+                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         indices[index] = x * verticesLODOffset.x + verticesLODOffset.x + y * verticesLODOffset.y * verticesLineOffset;
+                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         
                         indices[index] = x * verticesLODOffset.x + (y * verticesLODOffset.y + verticesLODOffset.y) * verticesLineOffset;
+                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         indices[index] = x * verticesLODOffset.x + verticesLODOffset.x + (y * verticesLODOffset.y + verticesLODOffset.y) * verticesLineOffset;
+                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         indices[index] = x * verticesLODOffset.x + verticesLODOffset.x + y * verticesLODOffset.y * verticesLineOffset;
+                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                     }
                 }

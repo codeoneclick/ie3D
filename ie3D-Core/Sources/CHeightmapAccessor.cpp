@@ -66,8 +66,8 @@ void CHeightmapAccessor::createBoundingBoxes(void)
                     glm::ivec2 position = glm::ivec2(x + i * m_container->getChunkSize().x - i,
                                                      y + j * m_container->getChunkSize().y - j);
                     
-                    position.x = position.x < m_container->getSize().x ? position.x : m_container->getSize().x - 1;
-                    position.y = position.y < m_container->getSize().y ? position.y : m_container->getSize().y - 1;
+                    position.x = position.x < m_container->getMainSize().x ? position.x : m_container->getMainSize().x - 1;
+                    position.y = position.y < m_container->getMainSize().y ? position.y : m_container->getMainSize().y - 1;
                     
                     glm::vec3 point = m_container->getVertexPosition(position.x, position.y);
                     minBound = glm::min(point, minBound);
@@ -151,11 +151,12 @@ void CHeightmapAccessor::generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD)
                                                                        GL_DYNAMIC_DRAW,
                                                                        m_container->getIBOMmap(index, LOD)->getSourcePointer());
     ibo->unlock();
-    
+
     std::ostringstream stringstream;
     stringstream<<"chunk_"<<index<<"_"<<LOD<<"_"<<g_heightmapGUID<<std::endl;
     std::shared_ptr<CMesh> mesh = CMesh::construct(stringstream.str(), vbo, ibo,
                                                    std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index]));
+    std::cout<<"used indices: "<<ibo->getUsedSize()<<std::endl;
     std::get<0>(m_chunksMetadata[index]) = mesh;
 }
 
@@ -251,5 +252,14 @@ void CHeightmapAccessor::runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
 
 void CHeightmapAccessor::runUnLoading(i32 i, i32 j)
 {
+    ui32 index = i + j * m_container->getChunksNum().x;
     
+    if(m_executedOperations[index] != nullptr)
+    {
+        m_executedOperations[index]->cancel();
+    }
+    else
+    {
+        CHeightmapAccessor::eraseChunkMetadata(index);
+    }
 }

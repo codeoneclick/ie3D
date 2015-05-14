@@ -9,7 +9,7 @@
 #include "CHeightmapLoader.h"
 #include "CCommonOS.h"
 
-extern ui32 g_heightmapGUID;
+extern ui32 g_heightmapGUID = 0;
 
 static const std::string kUncompressedVerticesMetadataFilename = "uncompressed.vertices.data_";
 static const std::string kCompressedVerticesMetadataFilename = "compressed.vertices.data_";
@@ -122,45 +122,40 @@ std::string CHeightmapLoader::getIBOsMMAPFilename(const std::string &filename)
 
 bool CHeightmapLoader::isUncompressedVerticesMMAPExist(const std::string& filename)
 {
-    std::ofstream stream;
-    stream.open(CHeightmapLoader::getUncompressedVerticesMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
-    bool isExist = stream.is_open();
+    std::ifstream stream(CHeightmapLoader::getUncompressedVerticesMMAPFilename(filename));
+    bool isExist = stream.good();
     stream.close();
     return isExist;
 }
 
 bool CHeightmapLoader::isCompressedVerticesMMAPExist(const std::string& filename)
 {
-    std::ofstream stream;
-    stream.open(CHeightmapLoader::getCompressedVerticesMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
-    bool isExist = stream.is_open();
+    std::ofstream stream(CHeightmapLoader::getCompressedVerticesMMAPFilename(filename));
+    bool isExist = stream.good();
     stream.close();
     return isExist;
 }
 
 bool CHeightmapLoader::isFacesMMAPExist(const std::string& filename)
 {
-    std::ofstream stream;
-    stream.open(CHeightmapLoader::getFacesMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
-    bool isExist = stream.is_open();
+    std::ofstream stream(CHeightmapLoader::getFacesMMAPFilename(filename));
+    bool isExist = stream.good();
     stream.close();
     return isExist;
 }
 
 bool CHeightmapLoader::isVBOsMMAPExist(const std::string& filename)
 {
-    std::ofstream stream;
-    stream.open(CHeightmapLoader::getVBOsMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
-    bool isExist = stream.is_open();
+    std::ofstream stream(CHeightmapLoader::getVBOsMMAPFilename(filename));
+    bool isExist = stream.good();
     stream.close();
     return isExist;
 }
 
 bool CHeightmapLoader::isIBOsMMAPExist(const std::string& filename)
 {
-    std::ofstream stream;
-    stream.open(CHeightmapLoader::getIBOsMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
-    bool isExist = stream.is_open();
+    std::ofstream stream(CHeightmapLoader::getIBOsMMAPFilename(filename));
+    bool isExist = stream.good();
     stream.close();
     return isExist;
 }

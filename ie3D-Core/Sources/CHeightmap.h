@@ -6,7 +6,7 @@
 //
 //
 
-#ifndef CHeightmapProcessor_h
+/*#ifndef CHeightmapProcessor_h
 #define CHeightmapProcessor_h
 
 #include "HCommon.h"
@@ -339,4 +339,4 @@ public:
                          const std::vector<glm::vec3>& vertices);
 };
 
-#endif 
+#endif */

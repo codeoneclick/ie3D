@@ -43,7 +43,6 @@
 		21208FC11906FB5F00FFC8D4 /* COcean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789CF17A01CF800FE26FA /* COcean.cpp */; };
 		21208FC21906FB5F00FFC8D4 /* CLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */; };
 		21208FC31906FB5F00FFC8D4 /* CLandscapeChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */; };
-		21208FC61906FB5F00FFC8D4 /* CHeightmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C8E183E610900A3EF49 /* CHeightmap.cpp */; };
 		21208FC71906FB5F00FFC8D4 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
 		21208FC81906FB5F00FFC8D4 /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
 		21208FC91906FB5F00FFC8D4 /* CFrustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B1174F5215005B475E /* CFrustum.cpp */; };
@@ -127,7 +126,6 @@
 		213266051906A4AF001C98F7 /* COcean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46789CF17A01CF800FE26FA /* COcean.cpp */; };
 		213266061906A4AF001C98F7 /* CLandscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C74183E3B3600A3EF49 /* CLandscape.cpp */; };
 		213266071906A4AF001C98F7 /* CLandscapeChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C76183E3B3600A3EF49 /* CLandscapeChunk.cpp */; };
-		2132660A1906A4AF001C98F7 /* CHeightmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C8E183E610900A3EF49 /* CHeightmap.cpp */; };
 		2132660B1906A4AF001C98F7 /* CQuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46B1C85183E3B7400A3EF49 /* CQuadTree.cpp */; };
 		2132660C1906A4AF001C98F7 /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69AE174F5203005B475E /* CCamera.cpp */; };
 		2132660D1906A4AF001C98F7 /* CFrustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A40A69B1174F5215005B475E /* CFrustum.cpp */; };
@@ -769,6 +767,7 @@
 		21B72FB51A8CEDAE003F4C24 /* ICommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICommand.h; path = Sources/ICommand.h; sourceTree = "<group>"; };
 		21BDBAA21B033D7E0071AE1D /* CMmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMmap.cpp; path = Sources/CMmap.cpp; sourceTree = "<group>"; };
 		21BDBAA31B033D7E0071AE1D /* CMmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMmap.h; path = Sources/CMmap.h; sourceTree = "<group>"; };
+		21BDBAB61B04C5CA0071AE1D /* CHeightmapAccessor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = CHeightmapAccessor.hpp; path = Sources/CHeightmapAccessor.hpp; sourceTree = "<group>"; };
 		21C409A3197B0B4B0063D62D /* CMeshSerializer_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshSerializer_MDL_01.cpp; path = Sources/CMeshSerializer_MDL_01.cpp; sourceTree = "<group>"; };
 		21C409A4197B0B4B0063D62D /* CMeshSerializer_MDL_01.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshSerializer_MDL_01.h; path = Sources/CMeshSerializer_MDL_01.h; sourceTree = "<group>"; };
 		21C409A8197B0BA40063D62D /* CMeshCommiter_MDL_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshCommiter_MDL_01.cpp; path = Sources/CMeshCommiter_MDL_01.cpp; sourceTree = "<group>"; };
@@ -1727,6 +1726,7 @@
 				21DE58E81B008BE500D60DC5 /* CHeightmapLoader.cpp */,
 				21DE58EE1B008C0700D60DC5 /* CHeightmapAccessor.h */,
 				21DE58ED1B008C0700D60DC5 /* CHeightmapAccessor.cpp */,
+				21BDBAB61B04C5CA0071AE1D /* CHeightmapAccessor.hpp */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -2513,7 +2513,6 @@
 				21208FC21906FB5F00FFC8D4 /* CLandscape.cpp in Sources */,
 				21208FC31906FB5F00FFC8D4 /* CLandscapeChunk.cpp in Sources */,
 				2191CE99196EE95100CE2813 /* compress.c in Sources */,
-				21208FC61906FB5F00FFC8D4 /* CHeightmap.cpp in Sources */,
 				21CB34F81A793CF000819C09 /* CConfigurationParticleEmitter.cpp in Sources */,
 				2133A7551A93AE5800188ADA /* CComponentDebugRendering.cpp in Sources */,
 				2191CEAA196EE95100CE2813 /* infback.c in Sources */,
@@ -2696,7 +2695,6 @@
 				213266061906A4AF001C98F7 /* CLandscape.cpp in Sources */,
 				213266071906A4AF001C98F7 /* CLandscapeChunk.cpp in Sources */,
 				2191CE98196EE95100CE2813 /* compress.c in Sources */,
-				2132660A1906A4AF001C98F7 /* CHeightmap.cpp in Sources */,
 				21CB34F71A793CF000819C09 /* CConfigurationParticleEmitter.cpp in Sources */,
 				2133A7541A93AE5800188ADA /* CComponentDebugRendering.cpp in Sources */,
 				2191CEA9196EE95100CE2813 /* infback.c in Sources */,

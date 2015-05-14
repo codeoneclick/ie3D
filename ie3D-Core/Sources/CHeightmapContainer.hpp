@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Sergey Sergeev. All rights reserved.
 //
 
-inline glm::ivec2 CHeightmapContainer::getSize(void) const
+inline glm::ivec2 CHeightmapContainer::getMainSize(void) const
 {
-    return m_size;
+    return m_mainSize;
 };
 
 inline glm::ivec2 CHeightmapContainer::getChunksNum(void) const
@@ -47,41 +47,41 @@ inline CHeightmapContainer::SFace* CHeightmapContainer::getFaces(void) const
 
 inline void CHeightmapContainer::attachUncompressedVertexToVBO(i32 i, i32 j, ui32 vboIndex, ui32 vboVertexIndex)
 {
-    i32 index = i + j * m_size.x;
+    i32 index = i + j * m_mainSize.x;
     assert(m_uncompressedVertices[index].m_containsInVBO.size() <= kMaxContainsInVBO);
     m_uncompressedVertices[index].m_containsInVBO.push_back(glm::ivec2(vboIndex, vboVertexIndex));
 };
 
 inline std::vector<glm::ivec2> CHeightmapContainer::attachedVerticesToVBO(i32 i, i32 j)
 {
-    i32 index = i + j * m_size.x;
+    i32 index = i + j * m_mainSize.x;
     assert(m_uncompressedVertices[index].m_containsInVBO.size() != 0 && m_uncompressedVertices[index].m_containsInVBO.size() <= kMaxContainsInVBO);
     return m_uncompressedVertices[index].m_containsInVBO;
 };
 
 inline glm::vec3 CHeightmapContainer::getVertexPosition(ui32 i, ui32 j) const
 {
-    return m_compressedVertices[i + j * m_size.x].m_position;
+    return m_compressedVertices[i + j * m_mainSize.x].m_position;
 };
 
 inline glm::uint32 CHeightmapContainer::getCompressedVertexTexcoord(ui32 i, ui32 j) const
 {
-    return m_compressedVertices[i + j * m_size.x].m_texcoord;
+    return m_compressedVertices[i + j * m_mainSize.x].m_texcoord;
 };
 
 inline glm::vec2 CHeightmapContainer::getUncompressedVertexTexcoord(ui32 i, ui32 j) const
 {
-    return glm::unpackUnorm2x16(m_compressedVertices[i + j * m_size.x].m_texcoord);
+    return glm::unpackUnorm2x16(m_compressedVertices[i + j * m_mainSize.x].m_texcoord);
 };
 
 inline glm::uint32 CHeightmapContainer::getCompressedVertexNormal(ui32 i, ui32 j) const
 {
-    return m_compressedVertices[i + j * m_size.x].m_normal;
+    return m_compressedVertices[i + j * m_mainSize.x].m_normal;
 };
 
 inline glm::vec3 CHeightmapContainer::getUncompressedVertexNormal(ui32 i, ui32 j) const
 {
-    glm::vec4 normal = glm::unpackSnorm4x8(m_compressedVertices[i + j * m_size.x].m_normal);
+    glm::vec4 normal = glm::unpackSnorm4x8(m_compressedVertices[i + j * m_mainSize.x].m_normal);
     return glm::vec3(normal.x, normal.y, normal.z);
 };
 
@@ -94,7 +94,7 @@ inline std::shared_ptr<CHeightmapContainer::CHeightmapVBOMMAP> CHeightmapContain
 inline std::shared_ptr<CHeightmapContainer::CHeightmapIBOMMAP> CHeightmapContainer::getIBOMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const
 {
     assert(LOD >= 0 && LOD < E_LANDSCAPE_CHUNK_LOD_MAX);
-    assert(index >=0 && index < m_ibosMMAP[LOD].size());
-    return m_ibosMMAP[LOD][index];
+    assert(index >=0 && index < m_ibosMMAP.size());
+    return m_ibosMMAP[index][LOD];
 }
 

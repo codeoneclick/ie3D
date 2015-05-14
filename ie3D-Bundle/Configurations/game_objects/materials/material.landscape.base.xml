@@ -40,13 +40,13 @@
             wrap_mode="GL_REPEAT"
             mag_filter="GL_LINEAR"
             min_filter="GL_MIPMAP"/>
-            <texture
+            <!--<texture
             filename="landscape.splatting.texture"
             render_operation_name=""
             sampler_index="3"
             wrap_mode="GL_CLAMP_TO_EDGE"
             mag_filter="GL_LINEAR"
-            min_filter="GL_LINEAR"/>
+            min_filter="GL_LINEAR"/>-->
             <texture
             filename=""
             render_operation_name="ws.shadowmap.depth"

@@ -48,6 +48,11 @@ public:
     CHeightmapAccessor(void);
     ~CHeightmapAccessor(void);
     
+    inline glm::ivec2 getMainSize(void) const;
+    inline glm::ivec2 getChunksNum(void) const;
+    inline glm::ivec2 getChunkSize(void) const;
+    inline const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
+    
     void generate(const std::string& filename, const std::function<void(void)>& callback);
     
     void runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
@@ -55,5 +60,7 @@ public:
                     const std::function<void(CSharedQuadTreeRef)>& quadTreeLoadedCallback);
     void runUnLoading(i32 i, i32 j);
 };
+
+#include "CHeightmapAccessor.hpp"
 
 #endif
