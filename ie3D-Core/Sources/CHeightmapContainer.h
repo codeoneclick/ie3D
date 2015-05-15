@@ -154,6 +154,26 @@ public:
         }
     };
     
+    class CHeightmapTextureMMAP : public CHeightmapMMAP
+    {
+    private:
+        
+    protected:
+        
+    public:
+        
+        CHeightmapTextureMMAP(const std::shared_ptr<CMmap>& descriptor) : CHeightmapMMAP(descriptor) { };
+        ~CHeightmapTextureMMAP(void) = default;
+        
+        inline ui16* getPointer(void) const
+        {
+            ui16* pointer = (ui16* )m_descriptor->pointer();
+            assert(pointer != nullptr);
+            
+            return pointer + m_offset;
+        };
+    };
+    
 private:
     
     SUncomressedVertex* m_uncompressedVertices;
@@ -167,15 +187,19 @@ private:
     std::shared_ptr<CMmap> m_vbosMMAPDescriptor;
     std::shared_ptr<CMmap> m_ibosMMAPDescriptor;
     
+    std::shared_ptr<CMmap> m_splattingTextureMasksMMAPDescriptor;
+    
     std::vector<std::shared_ptr<CHeightmapVBOMMAP>> m_vbosMMAP;
     std::vector<std::array<std::shared_ptr<CHeightmapIBOMMAP>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
+    std::vector<std::shared_ptr<CHeightmapTextureMMAP>> m_splattingTextureMasksMMAP;
     
     glm::ivec2 m_mainSize;
     glm::ivec2 m_chunksNum;
     glm::ivec2 m_chunkSize;
     std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_chunkLODsSizes;
     
-    void erase(void);
+    void eraseGeometry(void);
+    void eraseTextures(void);
     
 protected:
     
@@ -184,8 +208,9 @@ public:
     CHeightmapContainer(void);
     ~CHeightmapContainer(void);
     
-    void create(const glm::ivec2& size);
-    void mmap(const std::string& filename);
+    void init(const glm::ivec2& size);
+    void mmapGeometry(const std::string& filename);
+    void mmapTextures(const std::string& filename);
     
     inline glm::ivec2 getMainSize(void) const;
     inline glm::ivec2 getChunksNum(void) const;
@@ -207,6 +232,7 @@ public:
     
     inline std::shared_ptr<CHeightmapVBOMMAP> getVBOMmap(i32 index) const;
     inline std::shared_ptr<CHeightmapIBOMMAP> getIBOMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
+    inline std::shared_ptr<CHeightmapTextureMMAP> getSplattingTextureMaskMmap(i32 index) const;
 };
 
 #include "CHeightmapContainer.hpp"

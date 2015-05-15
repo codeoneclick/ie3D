@@ -57,15 +57,15 @@ E_LANDSCAPE_CHUNK_LOD CLandscape::getLOD(const glm::vec3& point,
     E_LANDSCAPE_CHUNK_LOD LOD = E_LANDSCAPE_CHUNK_LOD_04;
     if(CLandscape::isPointInBoundPlane(point, minBound, maxBound))
     {
-        LOD = E_LANDSCAPE_CHUNK_LOD_04;
+        LOD = E_LANDSCAPE_CHUNK_LOD_01;
     }
     else if(distance < 128.0)
     {
-        LOD = E_LANDSCAPE_CHUNK_LOD_04;
+        LOD = E_LANDSCAPE_CHUNK_LOD_02;
     }
     else if(distance < 192.0)
     {
-        LOD = E_LANDSCAPE_CHUNK_LOD_04;
+        LOD = E_LANDSCAPE_CHUNK_LOD_03;
     }
     
     return LOD;
@@ -87,8 +87,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 
                 i32 result = m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
                 if((result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
-                    result == E_FRUSTUM_BOUND_RESULT_INTERSECT) &&
-                   i == 0 && j == 0)
+                    result == E_FRUSTUM_BOUND_RESULT_INTERSECT))
                 {
                     E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->getLookAt(), minBound, maxBound);
                     if(m_chunks[index] == nullptr)
@@ -107,6 +106,8 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
+                        }, [this, index](CSharedTextureRef texture) {
+                            m_chunks[index]->setPreprocessedSplattingTexture(texture);
                         });
                     }
                     else if(m_chunks[index]->getInprogressLOD() == m_chunks[index]->getCurrentLOD() &&
@@ -120,7 +121,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
                             m_chunks[index]->onSceneUpdate(0);
-                        });
+                        }, [this, index](CSharedTextureRef texture) { });
                     }
                 }
                 else if(m_chunks[index] != nullptr)
@@ -217,7 +218,10 @@ void CLandscape::onDraw(CSharedMaterialRef material)
         std::for_each(m_chunks.cbegin(), m_chunks.cend(), [material, this](CSharedLandscapeChunk chunk) {
             if(chunk && chunk->m_mesh && chunk->m_numPassedIndexes > 0)
             {
-                //material->getShader()->setTexture(chunk->getPreprocessedSplattingTexture(), E_SHADER_SAMPLER_01);
+                if(chunk->getPreprocessedSplattingTexture())
+                {
+                    material->getShader()->setTexture(chunk->getPreprocessedSplattingTexture(), E_SHADER_SAMPLER_01);
+                }
                 chunk->m_mesh->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
                 chunk->m_mesh->draw(chunk->m_numPassedIndexes);
                 chunk->m_mesh->unbind(material->getShader()->getGUID(), material->getShader()->getAttributes());
@@ -261,18 +265,15 @@ f32 CLandscape::getTillingTexcoord(E_SHADER_SAMPLER sampler) const
 
 glm::ivec2 CLandscape::getHeightmapSize(void) const
 {
-    //assert(m_heightmapGenerator != nullptr);
-    return glm::ivec2(512.0);//m_heightmapGenerator->getSize();
+    return m_status & E_LOADING_STATUS_TEMPLATE_LOADED ? m_heightmapAccessor->getMainSize() : glm::ivec2(0);
 }
 
 f32 CLandscape::getHeight(const glm::vec3& position) const
 {
-    //assert(m_heightmapGenerator != nullptr);
-    return 5.0f;//m_heightmapGenerator->isGenerated() ? m_heightmapGenerator->getHeight(position) : 0.0f;
+    return m_status & E_LOADING_STATUS_TEMPLATE_LOADED ? m_heightmapAccessor->getHeight(position) : 0;
 }
 
-glm::vec2 CLandscape::getAngleOnHeightmapSurface(const glm::vec3& position) const
+glm::vec2 CLandscape::getAngles(const glm::vec3& position) const
 {
-    //assert(m_heightmapGenerator != nullptr);
-    return glm::vec2(0.0f);//m_heightmapGenerator->getAngleOnHeightmapSurface(position);
+    return m_status & E_LOADING_STATUS_TEMPLATE_LOADED ? m_heightmapAccessor->getAngles(position) : glm::vec2(0.0f);
 }

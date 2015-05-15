@@ -8,6 +8,7 @@
 
 #include "CHeightmapContainer.h"
 #include "CHeightmapLoader.h"
+#include "CHeightmapTextureGenerator.h"
 
 CHeightmapContainer::CHeightmapContainer(void) :
 m_uncompressedVertices(nullptr),
@@ -18,6 +19,7 @@ m_compressedVerticesMMAPDescriptor(nullptr),
 m_facesMMAPDescriptor(nullptr),
 m_vbosMMAPDescriptor(nullptr),
 m_ibosMMAPDescriptor(nullptr),
+m_splattingTextureMasksMMAPDescriptor(nullptr),
 m_mainSize(0)
 {
     
@@ -25,10 +27,11 @@ m_mainSize(0)
 
 CHeightmapContainer::~CHeightmapContainer(void)
 {
-    CHeightmapContainer::erase();
+    CHeightmapContainer::eraseGeometry();
+    CHeightmapContainer::eraseTextures();
 }
 
-void CHeightmapContainer::create(const glm::ivec2& size)
+void CHeightmapContainer::init(const glm::ivec2& size)
 {
     m_mainSize = size;
     
@@ -56,9 +59,11 @@ void CHeightmapContainer::create(const glm::ivec2& size)
     
     m_vbosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
     m_ibosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
+    
+    m_splattingTextureMasksMMAP.resize(m_chunksNum.x * m_chunksNum.y);
 }
 
-void CHeightmapContainer::erase(void)
+void CHeightmapContainer::eraseGeometry(void)
 {
     if(m_uncompressedVerticesMMAPDescriptor != 0)
     {
@@ -106,9 +111,18 @@ void CHeightmapContainer::erase(void)
     }
 }
 
-void CHeightmapContainer::mmap(const std::string& filename)
+void CHeightmapContainer::eraseTextures(void)
 {
-    CHeightmapContainer::erase();
+    if(m_splattingTextureMasksMMAPDescriptor != nullptr)
+    {
+        m_splattingTextureMasksMMAPDescriptor->deallocate();
+        m_splattingTextureMasksMMAPDescriptor = nullptr;
+    }
+}
+
+void CHeightmapContainer::mmapGeometry(const std::string& filename)
+{
+    CHeightmapContainer::eraseGeometry();
     
     m_compressedVerticesMMAPDescriptor = std::make_shared<CMmap>();
     m_compressedVertices = static_cast<SCompressedVertex*>(m_compressedVerticesMMAPDescriptor->allocate(CHeightmapLoader::getCompressedVerticesMMAPFilename(filename)));
@@ -160,8 +174,8 @@ void CHeightmapContainer::mmap(const std::string& filename)
                                                          m_chunkLODsSizes[k].y % 2 == 0 ? m_chunkLODsSizes[k].y : m_chunkLODsSizes[k].y - 1);
                 
                 glm::ivec2 extendedChunkSize = currentChunkSize;
-                extendedChunkSize -= glm::ivec2(currentChunkSize.x - k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0,
-                                                currentChunkSize.y - k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0);
+                extendedChunkSize -= glm::ivec2(k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0,
+                                                k != E_LANDSCAPE_CHUNK_LOD_01 ? 2 : 0);
                 
                 ui32 additionalIndicesCount = k != E_LANDSCAPE_CHUNK_LOD_01 ? 12 * (m_chunkSize.x - 1 + currentChunkSize.x) : 0;
                 ui32 indicesCount = extendedChunkSize.x * extendedChunkSize.y * 6 + additionalIndicesCount;
@@ -173,4 +187,27 @@ void CHeightmapContainer::mmap(const std::string& filename)
             }
         }
     }
+}
+
+void CHeightmapContainer::mmapTextures(const std::string& filename)
+{
+    CHeightmapContainer::eraseTextures();
+    
+    m_splattingTextureMasksMMAPDescriptor = std::make_shared<CMmap>();
+    m_splattingTextureMasksMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTextureMasksMMAPFilename(filename));
+    
+    ui32 offset = 0;
+    for(ui32 i = 0; i < m_chunksNum.x; ++i)
+    {
+        for(ui32 j = 0; j < m_chunksNum.y; ++j)
+        {
+            m_splattingTextureMasksMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapTextureMMAP>(m_splattingTextureMasksMMAPDescriptor);
+            m_splattingTextureMasksMMAP[i + j * m_chunksNum.x]->setSize(CHeightmapTextureGenerator::kSplattingTextureMaskSize.x * CHeightmapTextureGenerator::kSplattingTextureMaskSize.y);
+            m_splattingTextureMasksMMAP[i + j * m_chunksNum.x]->setOffset(offset);
+            offset += CHeightmapTextureGenerator::kSplattingTextureMaskSize.x * CHeightmapTextureGenerator::kSplattingTextureMaskSize.y;
+        }
+    }
+
+
+
 }

@@ -36,6 +36,7 @@ void* CMmap::allocate(const std::string& filename)
     {
         std::cout<<"can't open filedescriptor for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;
         assert(false);
+        return m_pointer;
     }
     g_filedescriptors++;
     
@@ -44,6 +45,7 @@ void* CMmap::allocate(const std::string& filename)
         std::cout<<"can't retrive filedescriptor status for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;
         CMmap::deallocate();
         assert(false);
+        return m_pointer;
     }
     
     filelength = (ui32)status.st_size;
@@ -53,9 +55,10 @@ void* CMmap::allocate(const std::string& filename)
         std::cout<<"can't mmap filedescriptor for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;
         CMmap::deallocate();
         assert(false);
+        return m_pointer;
     }
     f32 size = static_cast<f32>(filelength) / (1024.0 * 1024);
-    std::cout<<"filedescriptor was allocated. filedescriptors count: "<<g_filedescriptors<<" size: "<<size<<"mb"<<std::endl;
+    std::cout<<"filedescriptor was allocated: "<<filename<<"; filedescriptors count: "<<g_filedescriptors<<" size: "<<size<<"mb"<<std::endl;
     m_filename = filename;
     return m_pointer;
 };
@@ -66,7 +69,7 @@ void CMmap::deallocate(void)
     {
         ::close(m_filedescriptor);
         g_filedescriptors--;
-        std::cout<<"filedescriptor was deallocated. filedescriptors count: "<<g_filedescriptors<<std::endl;
+        std::cout<<"filedescriptor was deallocated: "<<m_filename.c_str()<<"; filedescriptors count: "<<g_filedescriptors<<std::endl;
     }
     m_filedescriptor = -1;
     m_pointer = nullptr;

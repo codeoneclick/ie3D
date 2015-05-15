@@ -169,7 +169,7 @@ void CGameObjectNavigator::notifyHandlersAboutRotationChanged(void)
 
 void CGameObjectNavigator::updateRotationOnHeightmapSurface(const glm::vec3& position)
 {
-    glm::vec2 precomputedRotation = m_landscape != nullptr ? m_landscape->getAngleOnHeightmapSurface(position) : glm::vec2(0.0, 0.0);
+    glm::vec2 precomputedRotation = m_landscape != nullptr ? m_landscape->getAngles(position) : glm::vec2(0.0, 0.0);
     m_currentRotation.x = precomputedRotation.x;
     m_currentRotation.z = precomputedRotation.y;
     CGameObjectNavigator::notifyHandlersAboutRotationChanged();

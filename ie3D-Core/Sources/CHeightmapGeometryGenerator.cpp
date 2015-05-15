@@ -27,17 +27,15 @@ CHeightmapGeometryGenerator::~CHeightmapGeometryGenerator(void)
 void CHeightmapGeometryGenerator::generate(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
                                            const glm::ivec2& size, const std::vector<f32>& heights)
 {
-    container->create(size);
-    
-    /*if(!CHeightmapLoader::isUncompressedVerticesMMAPExist(filename) ||
+    if(!CHeightmapLoader::isUncompressedVerticesMMAPExist(filename) ||
        !CHeightmapLoader::isCompressedVerticesMMAPExist(filename) ||
-       !CHeightmapLoader::isFacesMMAPExist(filename))*/
+       !CHeightmapLoader::isFacesMMAPExist(filename))
     {
         CHeightmapGeometryGenerator::createVerticesMetadata(container, size, heights, filename);
         CHeightmapGeometryGenerator::createVBOsMetadata(container, filename);
         CHeightmapGeometryGenerator::createIBOsMetadata(container, filename);
     }
-    /*else
+    else
     {
         if(!CHeightmapLoader::isVBOsMMAPExist(filename))
         {
@@ -48,7 +46,7 @@ void CHeightmapGeometryGenerator::generate(const std::shared_ptr<CHeightmapConta
         {
             CHeightmapGeometryGenerator::createIBOsMetadata(container, filename);
         }
-    }*/
+    }
 }
 
 void CHeightmapGeometryGenerator::createVerticesMetadata(const std::shared_ptr<CHeightmapContainer>& container, const glm::ivec2& size, const std::vector<f32>& heights,

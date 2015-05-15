@@ -9,13 +9,14 @@
 #include "CHeightmapLoader.h"
 #include "CCommonOS.h"
 
-extern ui32 g_heightmapGUID = 0;
+static const std::string kUncompressedVerticesMetadataFilename = "-uncompressed.vertices.data_";
+static const std::string kCompressedVerticesMetadataFilename = "-compressed.vertices.data_";
+static const std::string kFacesMetadataFilename = "-faces.data_";
+static const std::string kVBOsMetadataFilename = "-vbos.data_";
+static const std::string kIBOsMetadataFilename = "-ibos.data_";
+static const std::string kSplattingTextureMasksMetadataFilename = "-splatting.texture.masks.data_";
 
-static const std::string kUncompressedVerticesMetadataFilename = "uncompressed.vertices.data_";
-static const std::string kCompressedVerticesMetadataFilename = "compressed.vertices.data_";
-static const std::string kFacesMetadataFilename = "faces.data_";
-static const std::string kVBOsMetadataFilename = "vbos.data_";
-static const std::string kIBOsMetadataFilename = "ibos.data_";
+ui32 CHeightmapLoader::g_heightmapGUID = 0;
 
 CHeightmapLoader::CHeightmapLoader(void)
 {
@@ -53,7 +54,7 @@ std::tuple<glm::ivec2, std::vector<f32>> CHeightmapLoader::getHeights(const std:
 std::string CHeightmapLoader::getUncompressedVerticesMMAPFilename(const std::string &filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kUncompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
+    stringstream<<filename<<kUncompressedVerticesMetadataFilename<<g_heightmapGUID;
     
 #if defined(__IOS__)
     
@@ -67,7 +68,7 @@ std::string CHeightmapLoader::getUncompressedVerticesMMAPFilename(const std::str
 std::string CHeightmapLoader::getCompressedVerticesMMAPFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kCompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
+    stringstream<<filename<<kCompressedVerticesMetadataFilename<<g_heightmapGUID;
     
 #if defined(__IOS__)
     
@@ -81,7 +82,7 @@ std::string CHeightmapLoader::getCompressedVerticesMMAPFilename(const std::strin
 std::string CHeightmapLoader::getFacesMMAPFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kFacesMetadataFilename<<g_heightmapGUID<<std::endl;
+    stringstream<<filename<<kFacesMetadataFilename<<g_heightmapGUID;
     
 #if defined(__IOS__)
     
@@ -95,7 +96,7 @@ std::string CHeightmapLoader::getFacesMMAPFilename(const std::string& filename)
 std::string CHeightmapLoader::getVBOsMMAPFilename(const std::string &filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kVBOsMetadataFilename<<g_heightmapGUID<<std::endl;
+    stringstream<<filename<<kVBOsMetadataFilename<<g_heightmapGUID;
     
 #if defined(__IOS__)
     
@@ -109,7 +110,21 @@ std::string CHeightmapLoader::getVBOsMMAPFilename(const std::string &filename)
 std::string CHeightmapLoader::getIBOsMMAPFilename(const std::string &filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kIBOsMetadataFilename<<g_heightmapGUID<<std::endl;
+    stringstream<<filename<<kIBOsMetadataFilename<<g_heightmapGUID;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
+std::string CHeightmapLoader::getSplattingTextureMasksMMAPFilename(const std::string &filename)
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kSplattingTextureMasksMetadataFilename<<g_heightmapGUID;
     
 #if defined(__IOS__)
     
@@ -130,7 +145,7 @@ bool CHeightmapLoader::isUncompressedVerticesMMAPExist(const std::string& filena
 
 bool CHeightmapLoader::isCompressedVerticesMMAPExist(const std::string& filename)
 {
-    std::ofstream stream(CHeightmapLoader::getCompressedVerticesMMAPFilename(filename));
+    std::ifstream stream(CHeightmapLoader::getCompressedVerticesMMAPFilename(filename));
     bool isExist = stream.good();
     stream.close();
     return isExist;
@@ -138,7 +153,7 @@ bool CHeightmapLoader::isCompressedVerticesMMAPExist(const std::string& filename
 
 bool CHeightmapLoader::isFacesMMAPExist(const std::string& filename)
 {
-    std::ofstream stream(CHeightmapLoader::getFacesMMAPFilename(filename));
+    std::ifstream stream(CHeightmapLoader::getFacesMMAPFilename(filename));
     bool isExist = stream.good();
     stream.close();
     return isExist;
@@ -146,7 +161,7 @@ bool CHeightmapLoader::isFacesMMAPExist(const std::string& filename)
 
 bool CHeightmapLoader::isVBOsMMAPExist(const std::string& filename)
 {
-    std::ofstream stream(CHeightmapLoader::getVBOsMMAPFilename(filename));
+    std::ifstream stream(CHeightmapLoader::getVBOsMMAPFilename(filename));
     bool isExist = stream.good();
     stream.close();
     return isExist;
@@ -154,7 +169,15 @@ bool CHeightmapLoader::isVBOsMMAPExist(const std::string& filename)
 
 bool CHeightmapLoader::isIBOsMMAPExist(const std::string& filename)
 {
-    std::ofstream stream(CHeightmapLoader::getIBOsMMAPFilename(filename));
+    std::ifstream stream(CHeightmapLoader::getIBOsMMAPFilename(filename));
+    bool isExist = stream.good();
+    stream.close();
+    return isExist;
+}
+
+bool CHeightmapLoader::isSplattingTextureMasksMMAPExist(const std::string &filename)
+{
+    std::ifstream stream(CHeightmapLoader::getSplattingTextureMasksMMAPFilename(filename));
     bool isExist = stream.good();
     stream.close();
     return isExist;

@@ -56,7 +56,7 @@ public:
     glm::ivec2 getHeightmapSize(void) const;
     
     f32 getHeight(const glm::vec3& position) const;
-    glm::vec2 getAngleOnHeightmapSurface(const glm::vec3& position) const;
+    glm::vec2 getAngles(const glm::vec3& position) const;
 };
 
 #endif

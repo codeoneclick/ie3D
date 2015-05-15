@@ -23,8 +23,8 @@ private:
     bool m_isGenerated;
     
     std::vector<CSharedThreadOperation> m_executedOperations;
-    std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>>> m_callbacks;
-    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
+    std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, std::function<void(CSharedTextureRef)>>> m_callbacks;
+    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, CSharedTexture, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     
     void createLoadingOperations(void);
@@ -40,6 +40,12 @@ private:
     
     void generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(i32 index);
+    void generateSplattingTextureMask(i32 index);
+    
+    
+    static f32 getAngle(const glm::vec3& point_01,
+                        const glm::vec3& point_02,
+                        const glm::vec3& point_03);
     
 protected:
     
@@ -53,11 +59,20 @@ public:
     inline glm::ivec2 getChunkSize(void) const;
     inline const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
     
+    f32 getHeight(const glm::vec3& position) const;
+    glm::vec3 getNormal(const glm::vec3& position) const;
+    glm::vec2 getAngles(const glm::vec3& position) const;
+    
+    static f32 getHeight(std::shared_ptr<CHeightmapContainer> container, const glm::vec3& position);
+    static glm::vec3 getNormal(std::shared_ptr<CHeightmapContainer> container, const glm::vec3& position);
+    static glm::vec2 getAngles(std::shared_ptr<CHeightmapContainer> container, const glm::vec3& position);
+    
     void generate(const std::string& filename, const std::function<void(void)>& callback);
     
     void runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                     const std::function<void(CSharedMeshRef)>& meshLoadedCallback,
-                    const std::function<void(CSharedQuadTreeRef)>& quadTreeLoadedCallback);
+                    const std::function<void(CSharedQuadTreeRef)>& quadTreeLoadedCallback,
+                    const std::function<void(CSharedTextureRef)>& textureLoadingCallback);
     void runUnLoading(i32 i, i32 j);
 };
 

@@ -19,6 +19,8 @@ protected:
     
 public:
     
+    static ui32 g_heightmapGUID;
+    
     CHeightmapLoader(void);
     ~CHeightmapLoader(void);
     
@@ -31,12 +33,16 @@ public:
     static std::string getVBOsMMAPFilename(const std::string& filename);
     static std::string getIBOsMMAPFilename(const std::string& filename);
     
+    static std::string getSplattingTextureMasksMMAPFilename(const std::string& filename);
+    
     static bool isUncompressedVerticesMMAPExist(const std::string& filename);
     static bool isCompressedVerticesMMAPExist(const std::string& filename);
     static bool isFacesMMAPExist(const std::string& filename);
     
     static bool isVBOsMMAPExist(const std::string& filename);
     static bool isIBOsMMAPExist(const std::string& filename);
+    
+    static bool isSplattingTextureMasksMMAPExist(const std::string& filename);
 };
 
 #endif
