@@ -57,15 +57,15 @@ E_LANDSCAPE_CHUNK_LOD CLandscape::getLOD(const glm::vec3& point,
     E_LANDSCAPE_CHUNK_LOD LOD = E_LANDSCAPE_CHUNK_LOD_04;
     if(CLandscape::isPointInBoundPlane(point, minBound, maxBound))
     {
-        LOD = E_LANDSCAPE_CHUNK_LOD_01;
+        LOD = E_LANDSCAPE_CHUNK_LOD_04;
     }
     else if(distance < 128.0)
     {
-        LOD = E_LANDSCAPE_CHUNK_LOD_02;
+        LOD = E_LANDSCAPE_CHUNK_LOD_04;
     }
     else if(distance < 192.0)
     {
-        LOD = E_LANDSCAPE_CHUNK_LOD_03;
+        LOD = E_LANDSCAPE_CHUNK_LOD_04;
     }
     
     return LOD;
@@ -86,8 +86,9 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 glm::vec3 maxBound = std::get<1>(m_heightmapAccessor->getChunkBounds(i, j));
                 
                 i32 result = m_cameraFrustum->isBoundBoxInFrustum(maxBound, minBound);
-                if(result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
-                   result == E_FRUSTUM_BOUND_RESULT_INTERSECT)
+                if((result == E_FRUSTUM_BOUND_RESULT_INSIDE ||
+                    result == E_FRUSTUM_BOUND_RESULT_INTERSECT) &&
+                   i == 0 && j == 0)
                 {
                     E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->getLookAt(), minBound, maxBound);
                     if(m_chunks[index] == nullptr)

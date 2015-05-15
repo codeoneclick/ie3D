@@ -150,8 +150,17 @@ void CHeightmapAccessor::generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD)
     std::shared_ptr<CIndexBuffer> ibo = std::make_shared<CIndexBuffer>(m_container->getIBOMmap(index, LOD)->getSize(),
                                                                        GL_DYNAMIC_DRAW,
                                                                        m_container->getIBOMmap(index, LOD)->getSourcePointer());
+    
+    /*if(index == 0 && LOD == E_LANDSCAPE_CHUNK_LOD_04)
+    {
+        for(ui32 i = 0; i < ibo->getAllocatedSize(); ++i)
+        {
+            std::cout<<"reading index: "<<ibo->lock()[i]<<std::endl;
+        }
+    }*/
+    
     ibo->unlock();
-
+    
     std::ostringstream stringstream;
     stringstream<<"chunk_"<<index<<"_"<<LOD<<"_"<<g_heightmapGUID<<std::endl;
     std::shared_ptr<CMesh> mesh = CMesh::construct(stringstream.str(), vbo, ibo,

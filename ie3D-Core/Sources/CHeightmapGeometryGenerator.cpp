@@ -409,23 +409,17 @@ void CHeightmapGeometryGenerator::createIBOsMetadata(const std::shared_ptr<CHeig
                     for(ui32 y = currentChunkLODStartIndex.y; y < currentChunkSize.y; ++y)
                     {
                         indices[index] = x * verticesLODOffset.x + y * verticesLODOffset.y * verticesLineOffset;
-                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         indices[index] = x * verticesLODOffset.x + (y * verticesLODOffset.y + verticesLODOffset.y) * verticesLineOffset;
-                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         indices[index] = x * verticesLODOffset.x + verticesLODOffset.x + y * verticesLODOffset.y * verticesLineOffset;
-                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         
                         indices[index] = x * verticesLODOffset.x + (y * verticesLODOffset.y + verticesLODOffset.y) * verticesLineOffset;
-                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         indices[index] = x * verticesLODOffset.x + verticesLODOffset.x + (y * verticesLODOffset.y + verticesLODOffset.y) * verticesLineOffset;
-                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                         indices[index] = x * verticesLODOffset.x + verticesLODOffset.x + y * verticesLODOffset.y * verticesLineOffset;
-                        std::cout<<"index :"<<indices[index]<<std::endl;
                         index++;
                     }
                 }
