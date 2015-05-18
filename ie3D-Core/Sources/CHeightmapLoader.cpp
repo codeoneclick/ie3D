@@ -8,6 +8,17 @@
 
 #include "CHeightmapLoader.h"
 #include "CCommonOS.h"
+#include "CHeightmapContainer.h"
+
+#if defined(__IOS__)
+
+#import <UIKit/UIKit.h>
+
+#elif defined(__OSX__)
+
+#include <Cocoa/Cocoa.h>
+
+#endif
 
 static const std::string kUncompressedVerticesMetadataFilename = "-uncompressed.vertices.data_";
 static const std::string kCompressedVerticesMetadataFilename = "-compressed.vertices.data_";
@@ -30,6 +41,56 @@ CHeightmapLoader::~CHeightmapLoader(void)
 
 std::tuple<glm::ivec2, std::vector<f32>> CHeightmapLoader::getHeights(const std::string& filename)
 {
+    ui8* data = nullptr;
+    
+#if defined(__IOS__)
+    
+    UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"map_01" encoding:NSUTF8StringEncoding]];
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    size_t bytesPerRow = image.size.width * 4;
+    data = (ui8 *)malloc(image.size.height * bytesPerRow);
+    CGContextRef context = CGBitmapContextCreate(data,
+                                                 image.size.width,
+                                                 image.size.height,
+                                                 8,
+                                                 bytesPerRow,
+                                                 colorSpace,
+                                                 kCGImageAlphaNoneSkipFirst);
+    UIGraphicsPushContext(context);
+    CGContextTranslateCTM(context, 0.0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    [image drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+    UIGraphicsPopContext();
+    m_size = glm::ivec2(image.size.width, image.size.height);
+    
+#elif defined(__OSX__)
+    
+    std::vector<f32> heights;
+    glm::ivec2 size;
+    
+    NSImage* image = [NSImage imageNamed:[NSString stringWithCString:"map_01" encoding:NSUTF8StringEncoding]];
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)[image TIFFRepresentation], NULL);
+    CGImageRef mask =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
+    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:mask];
+    data = [bitmap bitmapData];
+    size = glm::ivec2(image.size.width, image.size.height);
+    
+    CFRelease(source);
+    CFRelease(mask);
+    
+    heights.resize(size.x * size.y);
+    
+    ui32 index = 0;
+    for(ui32 i = 0; i < size.x; ++i)
+    {
+        for(ui32 j = 0; j < size.y; ++j)
+        {
+            heights[index++] = static_cast<f32>(data[(i + j * size.x) * 4 + 1]) / 255.f * CHeightmapContainer::kRaise - CHeightmapContainer::kDeep;
+        }
+    }
+    
+#else
+    
     std::vector<f32> heights;
     glm::ivec2 size;
     std::ifstream stream(bundlepath().append(filename).c_str());
@@ -48,6 +109,8 @@ std::tuple<glm::ivec2, std::vector<f32>> CHeightmapLoader::getHeights(const std:
         }
         stream.close();
     }
+#endif
+    
     return std::make_tuple(size, heights);
 }
 

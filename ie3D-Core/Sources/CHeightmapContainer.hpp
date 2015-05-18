@@ -27,6 +27,24 @@ inline glm::ivec2 CHeightmapContainer::getChunkLODSize(E_LANDSCAPE_CHUNK_LOD LOD
     return m_chunkLODsSizes[LOD];
 }
 
+inline f32 CHeightmapContainer::getMaxHeight(void) const
+{
+    auto max = std::max_element(m_compressedVertices, m_compressedVertices + m_mainSize.x * m_mainSize.y, [](SCompressedVertex const& value_01,
+                                                                                                             SCompressedVertex const& value_02) {
+        return value_01.m_position.y > value_02.m_position.y;
+    });
+    return max->m_position.y;
+}
+
+inline f32 CHeightmapContainer::getMinHeight(void) const
+{
+    auto min = std::max_element(m_compressedVertices, m_compressedVertices + m_mainSize.x * m_mainSize.y, [] (SCompressedVertex const& value_01,
+                                                                                                              SCompressedVertex const& value_02) {
+        return value_01.m_position.y < value_02.m_position.y;
+    });
+    return min->m_position.y;
+}
+
 inline CHeightmapContainer::SUncomressedVertex* CHeightmapContainer::getUncopressedVertices(void) const
 {
     assert(m_uncompressedVertices != nullptr);

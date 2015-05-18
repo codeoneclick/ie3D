@@ -208,6 +208,13 @@ public:
     CHeightmapContainer(void);
     ~CHeightmapContainer(void);
     
+    static const f32 kRaise;
+    static const f32 kDeep;
+    
+    static const f32 kLayerSection01;
+    static const f32 kLayerSection02;
+    static const f32 kLayerSectionOffset;
+    
     void init(const glm::ivec2& size);
     void mmapGeometry(const std::string& filename);
     void mmapTextures(const std::string& filename);
@@ -216,6 +223,9 @@ public:
     inline glm::ivec2 getChunksNum(void) const;
     inline glm::ivec2 getChunkSize(void) const;
     inline glm::ivec2 getChunkLODSize(E_LANDSCAPE_CHUNK_LOD LOD) const;
+    
+    inline f32 getMaxHeight(void) const;
+    inline f32 getMinHeight(void) const;
     
     inline SUncomressedVertex* getUncopressedVertices(void) const;
     inline SCompressedVertex* getCompressedVertices(void) const;

@@ -10,6 +10,13 @@
 #include "CHeightmapLoader.h"
 #include "CHeightmapTextureGenerator.h"
 
+const f32 CHeightmapContainer::kRaise = 32.0f;
+const f32 CHeightmapContainer::kDeep = CHeightmapContainer::kRaise * 0.33;
+
+const f32 CHeightmapContainer::kLayerSection01 = 0.33;
+const f32 CHeightmapContainer::kLayerSection02 = 0.66;
+const f32 CHeightmapContainer::kLayerSectionOffset = 0.11;
+
 CHeightmapContainer::CHeightmapContainer(void) :
 m_uncompressedVertices(nullptr),
 m_compressedVertices(nullptr),
