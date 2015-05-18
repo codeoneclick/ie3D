@@ -10,6 +10,7 @@
 #define CHeightmapTextureGenerator_h
 
 #include "HCommon.h"
+#include "HDeclaration.h"
 
 class CHeightmapContainer;
 
@@ -29,7 +30,9 @@ public:
     CHeightmapTextureGenerator(void);
     ~CHeightmapTextureGenerator(void);
     
-    static void generate(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void generateSplattingMasks(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void generateSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                          const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
 
 };
 

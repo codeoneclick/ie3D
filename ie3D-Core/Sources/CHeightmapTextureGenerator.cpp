@@ -10,6 +10,7 @@
 #include "CHeightmapContainer.h"
 #include "CHeightmapLoader.h"
 #include "CHeightmapAccessor.h"
+#include "IRenderTechniqueAccessor.h"
 
 glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureMaskSize = glm::ivec2(64);
 
@@ -23,9 +24,9 @@ CHeightmapTextureGenerator::~CHeightmapTextureGenerator(void)
     
 }
 
-void CHeightmapTextureGenerator::generate(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
+void CHeightmapTextureGenerator::generateSplattingMasks(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
 {
-    //if(!CHeightmapLoader::isSplattingTextureMasksMMAPExist(filename))
+    if(!CHeightmapLoader::isSplattingTextureMasksMMAPExist(filename))
     {
         CHeightmapTextureGenerator::createSplattingTextureMasks(container, filename);
     }
@@ -72,7 +73,7 @@ void CHeightmapTextureGenerator::createSplattingTextureMasks(const std::shared_p
                     if(normalizedHeight > CHeightmapContainer::kLayerSection01 &&
                        normalizedHeight <= CHeightmapContainer::kLayerSection01 + CHeightmapContainer::kLayerSectionOffset)
                     {
-                        f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection01) / 0.11;
+                        f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection01) / CHeightmapContainer::kLayerSectionOffset;
                         redColor = glm::mix(255, 0, interpolation);
                     }
                     
@@ -80,13 +81,13 @@ void CHeightmapTextureGenerator::createSplattingTextureMasks(const std::shared_p
                     if(normalizedHeight < CHeightmapContainer::kLayerSection01 &&
                        normalizedHeight >= CHeightmapContainer::kLayerSection01 - CHeightmapContainer::kLayerSectionOffset)
                     {
-                        f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection01 - CHeightmapContainer::kLayerSectionOffset)) / 0.11;
+                        f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection01 - CHeightmapContainer::kLayerSectionOffset)) / CHeightmapContainer::kLayerSectionOffset;
                         greenColor = glm::mix(0, 255, interpolation);
                     }
                     else if(normalizedHeight > CHeightmapContainer::kLayerSection02 &&
                             normalizedHeight <= CHeightmapContainer::kLayerSection02 + CHeightmapContainer::kLayerSectionOffset)
                     {
-                        f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection02) / 0.11;
+                        f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection02) / CHeightmapContainer::kLayerSectionOffset;
                         greenColor = glm::mix(255, 0, interpolation);
                     }
                     
@@ -94,7 +95,7 @@ void CHeightmapTextureGenerator::createSplattingTextureMasks(const std::shared_p
                     if(normalizedHeight < CHeightmapContainer::kLayerSection02 &&
                        normalizedHeight >= CHeightmapContainer::kLayerSection02 - CHeightmapContainer::kLayerSectionOffset)
                     {
-                        f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection02 - CHeightmapContainer::kLayerSectionOffset)) / 0.11;
+                        f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection02 - CHeightmapContainer::kLayerSectionOffset)) / CHeightmapContainer::kLayerSectionOffset;
                         blueColor = glm::mix(0, 255, interpolation);
                     }
                     
@@ -128,4 +129,10 @@ void CHeightmapTextureGenerator::createSplattingTextureMasks(const std::shared_p
     
     delete[] pixels;
     pixels = nullptr;
+}
+
+void CHeightmapTextureGenerator::generateSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                                           const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
+{
+    
 }

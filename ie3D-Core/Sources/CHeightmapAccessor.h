@@ -42,7 +42,6 @@ private:
     void generateQuadTree(i32 index);
     void generateSplattingTextureMask(i32 index);
     
-    
     static f32 getAngle(const glm::vec3& point_01,
                         const glm::vec3& point_02,
                         const glm::vec3& point_03);
