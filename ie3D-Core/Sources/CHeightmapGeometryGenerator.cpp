@@ -436,3 +436,144 @@ void CHeightmapGeometryGenerator::createIBOsMetadata(const std::shared_ptr<CHeig
     stream.close();
 }
 
+void CHeightmapGeometryGenerator::generateTangentSpace(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
+{
+    if(!CHeightmapLoader::isTangentSpaceMMAPExist(filename))
+    {
+        CHeightmapGeometryGenerator::createTangentSpace(container, filename);
+    }
+}
+
+void CHeightmapGeometryGenerator::createTangentSpace(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
+{
+    for(ui32 i = 0; i < container->getChunksNum().x; ++i)
+    {
+        for(ui32 j = 0; j < container->getChunksNum().y; ++j)
+        {
+            ui32 index = i + j * container->getChunksNum().x;
+            std::vector<glm::vec3> tangents, binormals;
+            
+            SAttributeVertex* vertices = container->getVBOMmap(index)->getPointer();
+            ui32 numVertices = container->getVBOMmap(index)->getSize();
+            
+            ui16* indices = container->getIBOMmap(index, E_LANDSCAPE_CHUNK_LOD_01)->getSourcePointer();
+            ui32 numIndices = container->getIBOMmap(index, E_LANDSCAPE_CHUNK_LOD_01)->getSize();
+            
+            for (ui32 i = 0; i < numIndices; i += 3 )
+            {
+                glm::vec3 v1 = vertices[indices[i + 0]].m_position;
+                glm::vec3 v2 = vertices[indices[i + 1]].m_position;
+                glm::vec3 v3 = vertices[indices[i + 2]].m_position;
+                f32 s1 = glm::unpackUnorm2x16(vertices[indices[i + 0]].m_texcoord).x;
+                f32 t1 = glm::unpackUnorm2x16(vertices[indices[i + 0]].m_texcoord).y;
+                f32 s2 = glm::unpackUnorm2x16(vertices[indices[i + 1]].m_texcoord).x;
+                f32 t2 = glm::unpackUnorm2x16(vertices[indices[i + 1]].m_texcoord).y;
+                f32 s3 = glm::unpackUnorm2x16(vertices[indices[i + 2]].m_texcoord).x;
+                f32 t3 = glm::unpackUnorm2x16(vertices[indices[i + 2]].m_texcoord).y;
+                
+                glm::vec3 t, b;
+                CHeightmapGeometryGenerator::getTriangleBasis(v1, v2, v3, s1, t1, s2, t2, s3, t3, t, b);
+                tangents.push_back(t);
+                binormals.push_back(b);
+            }
+            
+            for (ui32 i = 0; i < numVertices; i++)
+            {
+                std::vector<glm::vec3> lrt, lrb;
+                for (ui32 j = 0; j < numIndices; j += 3)
+                {
+                    if ((indices[j + 0]) == i || (indices[j + 1]) == i || (indices[j + 2]) == i)
+                    {
+                        lrt.push_back(tangents[i]);
+                        lrb.push_back(binormals[i]);
+                    }
+                }
+                
+                glm::vec3 tangent(0.0f);
+                glm::vec3 binormal(0.0f);
+                for (ui32 j = 0; j < lrt.size(); j++)
+                {
+                    tangent += lrt[j];
+                }
+                tangent /= static_cast<f32>(lrt.size());
+                
+                glm::vec4 normal = glm::unpackSnorm4x8(vertices[i].m_normal);
+                tangent = CHeightmapGeometryGenerator::ortogonalize(glm::vec3(normal.x, normal.y, normal.z), tangent);
+                vertices[i].m_tangent = glm::packSnorm4x8(glm::vec4(tangent.x, tangent.y, tangent.z, 0.0));
+            }
+            std::this_thread::yield();
+        }
+    }
+    
+    std::ofstream stream;
+    stream.open(CHeightmapLoader::getTangentSpaceMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    if(!stream.is_open())
+    {
+        assert(false);
+    }
+    
+    ui8 value = 1;
+    stream.write((char *)&value, sizeof(ui8));
+    stream.close();
+}
+
+void CHeightmapGeometryGenerator::getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
+                                                   f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,
+                                                   glm::vec3& tangentX, glm::vec3& tangentY)
+{
+    glm::vec3 P = F - E;
+    glm::vec3 Q = G - E;
+    f32 s1 = sF - sE;
+    f32 t1 = tF - tE;
+    f32 s2 = sG - sE;
+    f32 t2 = tG - tE;
+    f32 pqMatrix[2][3];
+    pqMatrix[0][0] = P[0];
+    pqMatrix[0][1] = P[1];
+    pqMatrix[0][2] = P[2];
+    pqMatrix[1][0] = Q[0];
+    pqMatrix[1][1] = Q[1];
+    pqMatrix[1][2] = Q[2];
+    f32 temp = 1.0f / ( s1 * t2 - s2 * t1);
+    f32 stMatrix[2][2];
+    stMatrix[0][0] = t2 * temp;
+    stMatrix[0][1] = -t1 * temp;
+    stMatrix[1][0] = -s2 * temp;
+    stMatrix[1][1] = s1 * temp;
+    f32 tbMatrix[2][3];
+    tbMatrix[0][0] = stMatrix[0][0] * pqMatrix[0][0] + stMatrix[0][1] * pqMatrix[1][0];
+    tbMatrix[0][1] = stMatrix[0][0] * pqMatrix[0][1] + stMatrix[0][1] * pqMatrix[1][1];
+    tbMatrix[0][2] = stMatrix[0][0] * pqMatrix[0][2] + stMatrix[0][1] * pqMatrix[1][2];
+    tbMatrix[1][0] = stMatrix[1][0] * pqMatrix[0][0] + stMatrix[1][1] * pqMatrix[1][0];
+    tbMatrix[1][1] = stMatrix[1][0] * pqMatrix[0][1] + stMatrix[1][1] * pqMatrix[1][1];
+    tbMatrix[1][2] = stMatrix[1][0] * pqMatrix[0][2] + stMatrix[1][1] * pqMatrix[1][2];
+    tangentX = glm::vec3( tbMatrix[0][0], tbMatrix[0][1], tbMatrix[0][2] );
+    tangentY = glm::vec3( tbMatrix[1][0], tbMatrix[1][1], tbMatrix[1][2] );
+    tangentX = glm::normalize(tangentX);
+    tangentY = glm::normalize(tangentY);
+}
+
+glm::vec3 CHeightmapGeometryGenerator::getClosestPointOnLine(const glm::vec3& a, const glm::vec3& b, const glm::vec3& p)
+{
+    glm::vec3 c = p - a;
+    glm::vec3 v = b - a;
+    f32 d = v.length();
+    v = glm::normalize(v);
+    f32 t = glm::dot( v, c );
+    
+    if ( t < 0.0f )
+        return a;
+    if ( t > d )
+        return b;
+    v *= t;
+    return ( a + v );
+}
+
+glm::vec3 CHeightmapGeometryGenerator::ortogonalize(const glm::vec3& v1, const glm::vec3& v2)
+{
+    glm::vec3 v2ProjV1 = CHeightmapGeometryGenerator::getClosestPointOnLine( v1, -v1, v2 );
+    glm::vec3 res = v2 - v2ProjV1;
+    res = glm::normalize(res);
+    return res;
+}
+

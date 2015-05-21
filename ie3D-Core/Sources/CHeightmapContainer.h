@@ -213,12 +213,13 @@ private:
     std::vector<std::shared_ptr<CHeightmapVBOMMAP>> m_vbosMMAP;
     std::vector<std::array<std::shared_ptr<CHeightmapIBOMMAP>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
     std::vector<std::shared_ptr<CHeightmapTextureMMAP_RGB565>> m_splattingTextureMasksMMAP;
-    std::vector<std::shared_ptr<CHeightmapTextureMMAP_RGBA8>> m_splattingTexturesMMAP;
+    std::vector<std::array<std::shared_ptr<CHeightmapTextureMMAP_RGBA8>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_splattingTexturesMMAP;
     
     glm::ivec2 m_mainSize;
     glm::ivec2 m_chunksNum;
     glm::ivec2 m_chunkSize;
     std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_chunkLODsSizes;
+    std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_texturesLODsSizes;
     
     void eraseGeometry(void);
     void eraseMasks(void);
@@ -247,6 +248,7 @@ public:
     inline glm::ivec2 getChunksNum(void) const;
     inline glm::ivec2 getChunkSize(void) const;
     inline glm::ivec2 getChunkLODSize(E_LANDSCAPE_CHUNK_LOD LOD) const;
+    inline glm::ivec2 getTexturesLODSize(E_LANDSCAPE_CHUNK_LOD LOD) const;
     
     inline f32 getMaxHeight(void) const;
     inline f32 getMinHeight(void) const;
@@ -267,7 +269,7 @@ public:
     inline std::shared_ptr<CHeightmapVBOMMAP> getVBOMmap(i32 index) const;
     inline std::shared_ptr<CHeightmapIBOMMAP> getIBOMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
     inline std::shared_ptr<CHeightmapTextureMMAP_RGB565> getSplattingTextureMaskMmap(i32 index) const;
-    inline std::shared_ptr<CHeightmapTextureMMAP_RGBA8> getSplattingTexturesMmap(i32 index) const;
+    inline std::shared_ptr<CHeightmapTextureMMAP_RGBA8> getSplattingTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
 };
 
 #include "CHeightmapContainer.hpp"

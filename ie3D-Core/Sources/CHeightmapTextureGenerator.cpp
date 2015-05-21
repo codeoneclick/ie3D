@@ -17,8 +17,11 @@
 #include "CRenderTarget.h"
 #include "CQuad.h"
 
-glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureMaskSize = glm::ivec2(64);
-glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureSize = glm::ivec2(512);
+const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureMaskSize = glm::ivec2(64);
+const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureSize_LOD1 = glm::ivec2(1024);
+const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureSize_LOD2 = glm::ivec2(512);
+const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureSize_LOD3 = glm::ivec2(128);
+const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureSize_LOD4 = glm::ivec2(64);
 
 CHeightmapTextureGenerator::CHeightmapTextureGenerator(void)
 {
@@ -187,60 +190,65 @@ void CHeightmapTextureGenerator::createSplattingTextures(ISharedRenderTechniqueA
         assert(false);
     }
     
-    ui32 rawdataSize = static_cast<ui32>(kSplattingTextureSize.x) * static_cast<ui32>(kSplattingTextureSize.y) * 4;
-    ui8 *rawdata = new ui8[rawdataSize];
-    
     for(ui32 i = 0; i < container->getChunksNum().x; ++i)
     {
         for(ui32 j = 0; j < container->getChunksNum().y; ++j)
         {
-            std::ostringstream stringstream;
-            stringstream<<"texture_"<<i<<"_"<<j<<"_"<<CHeightmapLoader::g_heightmapGUID<<std::endl;
-            
-            ui32 textureId;
-            ieGenTextures(1, &textureId);
-            
-            ui32 index = i + j * container->getChunksNum().x;
-            
-            glm::ivec2 size = glm::ivec2(sqrt(container->getSplattingTextureMaskMmap(index)->getSize()));
-            CSharedTexture texture = CTexture::constructCustomTexture(stringstream.str(), textureId,
-                                                                      size.x, size.y);
-            texture->setWrapMode(GL_CLAMP_TO_EDGE);
-            texture->setMagFilter(GL_LINEAR);
-            texture->setMinFilter(GL_LINEAR);
-            
-            texture->bind();
-            
-            ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
-                         size.x, size.y,
-                         0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, container->getSplattingTextureMaskMmap(index)->getPointer());
-            
-            material->setTexture(texture, E_SHADER_SAMPLER_04);
-            
-            CSharedRenderTarget renderTarget = std::make_shared<CRenderTarget>(renderTechniqueAccessor->getGraphicsContext(),
-                                                                               kSplattingTextureSize.x, kSplattingTextureSize.y);
-            
-            renderTarget->begin();
-            renderTarget->clear();
-            
-            material->bind();
-            assert(material->getShader()->getAttributes().at(E_SHADER_ATTRIBUTE_POSITION) >= 0);
-            assert(material->getShader()->getAttributes().at(E_SHADER_ATTRIBUTE_TEXCOORD) >= 0);
-            quad->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
-            
-            quad->draw();
-            
-            quad->unbind(material->getShader()->getGUID(), material->getShader()->getAttributes());
-            material->unbind();
-            
-            glReadPixels(0, 0, kSplattingTextureSize.x, kSplattingTextureSize.y,
-                         GL_RGBA, GL_UNSIGNED_BYTE, rawdata);
-            stream.write((char *)rawdata, rawdataSize * sizeof(ui8));
-            
-            renderTarget->end();
+            for(ui32 k = 0; k < E_LANDSCAPE_CHUNK_LOD_MAX; ++k)
+            {
+                glm::ivec2 sizeTexture = container->getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k));
+                ui32 rawdataSize = static_cast<ui32>(sizeTexture.x) * static_cast<ui32>(sizeTexture.y) * 4;
+                ui8 *rawdata = new ui8[rawdataSize];
+                
+                std::ostringstream stringstream;
+                stringstream<<"texture_"<<i<<"_"<<j<<"_"<<k<<"_"<<CHeightmapLoader::g_heightmapGUID<<std::endl;
+                
+                ui32 textureId;
+                ieGenTextures(1, &textureId);
+                
+                ui32 index = i + j * container->getChunksNum().x;
+                
+                glm::ivec2 size = glm::ivec2(sqrt(container->getSplattingTextureMaskMmap(index)->getSize()));
+                CSharedTexture texture = CTexture::constructCustomTexture(stringstream.str(), textureId,
+                                                                          size.x, size.y);
+                texture->setWrapMode(GL_CLAMP_TO_EDGE);
+                texture->setMagFilter(GL_LINEAR);
+                texture->setMinFilter(GL_LINEAR);
+                
+                texture->bind();
+                
+                ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
+                             size.x, size.y,
+                             0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, container->getSplattingTextureMaskMmap(index)->getPointer());
+                
+                material->setTexture(texture, E_SHADER_SAMPLER_04);
+                
+                CSharedRenderTarget renderTarget = std::make_shared<CRenderTarget>(renderTechniqueAccessor->getGraphicsContext(),
+                                                                                   sizeTexture.x, sizeTexture.y);
+                
+                renderTarget->begin();
+                renderTarget->clear();
+                
+                material->bind();
+                assert(material->getShader()->getAttributes().at(E_SHADER_ATTRIBUTE_POSITION) >= 0);
+                assert(material->getShader()->getAttributes().at(E_SHADER_ATTRIBUTE_TEXCOORD) >= 0);
+                quad->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
+                
+                quad->draw();
+                
+                quad->unbind(material->getShader()->getGUID(), material->getShader()->getAttributes());
+                material->unbind();
+                
+                glReadPixels(0, 0, sizeTexture.x, sizeTexture.y,
+                             GL_RGBA, GL_UNSIGNED_BYTE, rawdata);
+                stream.write((char *)rawdata, rawdataSize * sizeof(ui8));
+                
+                renderTarget->end();
+                
+                delete [] rawdata;
+                std::this_thread::yield();
+            }
         }
     }
     stream.close();
-    
-    delete [] rawdata;
 }

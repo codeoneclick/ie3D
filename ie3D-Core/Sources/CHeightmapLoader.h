@@ -36,6 +36,8 @@ public:
     static std::string getSplattingTextureMasksMMAPFilename(const std::string& filename);
     static std::string getSplattingTexturesMMAPFilename(const std::string& filename);
     
+    static std::string getTangentSpaceMMAPFilename(const std::string& filename);
+    
     static bool isUncompressedVerticesMMAPExist(const std::string& filename);
     static bool isCompressedVerticesMMAPExist(const std::string& filename);
     static bool isFacesMMAPExist(const std::string& filename);
@@ -45,6 +47,8 @@ public:
     
     static bool isSplattingTextureMasksMMAPExist(const std::string& filename);
     static bool isSplattingTexturesMMAPExist(const std::string& filename);
+    
+    static bool isTangentSpaceMMAPExist(const std::string& filename);
 };
 
 #endif

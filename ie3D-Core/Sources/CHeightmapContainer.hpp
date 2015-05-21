@@ -27,6 +27,12 @@ inline glm::ivec2 CHeightmapContainer::getChunkLODSize(E_LANDSCAPE_CHUNK_LOD LOD
     return m_chunkLODsSizes[LOD];
 }
 
+inline glm::ivec2 CHeightmapContainer::getTexturesLODSize(E_LANDSCAPE_CHUNK_LOD LOD) const
+{
+    assert(LOD >= 0 && LOD < E_LANDSCAPE_CHUNK_LOD_MAX);
+    return m_texturesLODsSizes[LOD];
+}
+
 inline f32 CHeightmapContainer::getMaxHeight(void) const
 {
     auto max = std::max_element(m_compressedVertices, m_compressedVertices + m_mainSize.x * m_mainSize.y, [](SCompressedVertex const& value_01,
@@ -107,24 +113,25 @@ inline std::shared_ptr<CHeightmapContainer::CHeightmapVBOMMAP> CHeightmapContain
 {
     assert(index >=0 && index < m_vbosMMAP.size());
     return m_vbosMMAP[index];
-}
+};
 
 inline std::shared_ptr<CHeightmapContainer::CHeightmapIBOMMAP> CHeightmapContainer::getIBOMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const
 {
     assert(LOD >= 0 && LOD < E_LANDSCAPE_CHUNK_LOD_MAX);
     assert(index >=0 && index < m_ibosMMAP.size());
     return m_ibosMMAP[index][LOD];
-}
+};
 
 inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGB565>CHeightmapContainer:: getSplattingTextureMaskMmap(i32 index) const
 {
     assert(index >=0 && index < m_splattingTextureMasksMMAP.size());
     return m_splattingTextureMasksMMAP[index];
-}
+};
 
-inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGBA8> CHeightmapContainer::getSplattingTexturesMmap(i32 index) const
+inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGBA8> CHeightmapContainer::getSplattingTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const
 {
+    assert(LOD >= 0 && LOD < E_LANDSCAPE_CHUNK_LOD_MAX);
     assert(index >=0 && index < m_splattingTexturesMMAP.size());
-    return m_splattingTexturesMMAP[index];
-}
+    return m_splattingTexturesMMAP[index][LOD];
+};
 

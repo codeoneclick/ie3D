@@ -22,13 +22,19 @@ private:
     static void createSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
                                         const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
                                         const std::array<CSharedTexture, 3>& splattingTextures);
+    static void createSplattingNormalTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                              const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                              const std::array<CSharedTexture, 3>& splattingTextures);
     
 protected:
     
 public:
     
-    static glm::ivec2 kSplattingTextureMaskSize;
-    static glm::ivec2 kSplattingTextureSize;
+    static const glm::ivec2 kSplattingTextureMaskSize;
+    static const glm::ivec2 kSplattingTextureSize_LOD1;
+    static const glm::ivec2 kSplattingTextureSize_LOD2;
+    static const glm::ivec2 kSplattingTextureSize_LOD3;
+    static const glm::ivec2 kSplattingTextureSize_LOD4;
     
     CHeightmapTextureGenerator(void);
     ~CHeightmapTextureGenerator(void);
@@ -37,7 +43,10 @@ public:
     static void generateSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
                                           const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
                                           const std::array<CSharedTexture, 3>& splattingTextures);
-
+    static void generateSplattingNormalTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                                const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                                const std::array<CSharedTexture, 3>& splattingNormalTextures);
+    
 };
 
 #endif

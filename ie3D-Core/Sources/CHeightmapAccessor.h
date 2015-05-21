@@ -40,7 +40,7 @@ private:
     
     void generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(i32 index);
-    void generateSplattingTexture(i32 index);
+    void generateSplattingTexture(i32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     
     static f32 getAngle(const glm::vec3& point_01,
                         const glm::vec3& point_02,

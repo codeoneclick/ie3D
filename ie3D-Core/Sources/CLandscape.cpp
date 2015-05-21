@@ -121,7 +121,9 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
                             m_chunks[index]->onSceneUpdate(0);
-                        }, [this, index](CSharedTextureRef texture) { });
+                        }, [this, index](CSharedTextureRef texture) {
+                            m_chunks[index]->setPreprocessedSplattingTexture(texture);
+                        });
                     }
                 }
                 else if(m_chunks[index] != nullptr)

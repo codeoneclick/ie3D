@@ -137,7 +137,7 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
     mmapGeometryOperation->setExecutionBlock([this, filename](void) {
        
         m_container->mmapGeometry(filename);
-        
+        CHeightmapGeometryGenerator::generateTangentSpace(m_container, filename);
         CHeightmapAccessor::createBoundingBoxes();
         
     });
@@ -210,7 +210,7 @@ void CHeightmapAccessor::generateQuadTree(i32 index)
     std::get<1>(m_chunksMetadata[index]) = quadTree;
 }
 
-void CHeightmapAccessor::generateSplattingTexture(i32 index)
+void CHeightmapAccessor::generateSplattingTexture(i32 index, E_LANDSCAPE_CHUNK_LOD LOD)
 {
     std::ostringstream stringstream;
     stringstream<<"texture_"<<index<<"_"<<CHeightmapLoader::g_heightmapGUID<<std::endl;
@@ -219,16 +219,18 @@ void CHeightmapAccessor::generateSplattingTexture(i32 index)
     ieGenTextures(1, &textureId);
     
     CSharedTexture texture = CTexture::constructCustomTexture(stringstream.str(), textureId,
-                                                              CHeightmapTextureGenerator::kSplattingTextureSize.x, CHeightmapTextureGenerator::kSplattingTextureSize.y);
+                                                              m_container->getTexturesLODSize(LOD).x,
+                                                              m_container->getTexturesLODSize(LOD).y);
     texture->setWrapMode(GL_CLAMP_TO_EDGE);
     texture->setMagFilter(GL_LINEAR);
-    texture->setMinFilter(GL_LINEAR);
+    texture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
     
     texture->bind();
     
     ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-                 CHeightmapTextureGenerator::kSplattingTextureSize.x, CHeightmapTextureGenerator::kSplattingTextureSize.y,
-                 0, GL_RGBA, GL_UNSIGNED_BYTE, m_container->getSplattingTexturesMmap(index)->getPointer());
+                 m_container->getTexturesLODSize(LOD).x, m_container->getTexturesLODSize(LOD).y,
+                 0, GL_RGBA, GL_UNSIGNED_BYTE, m_container->getSplattingTexturesMmap(index, LOD)->getPointer());
+    ieGenerateMipmap(GL_TEXTURE_2D);
     
     std::get<2>(m_chunksMetadata[index]) = texture;
 }
@@ -287,8 +289,8 @@ void CHeightmapAccessor::runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
     completionOperation->addDependency(createMeshOperation);
     
     CSharedThreadOperation generateSplattingTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
-    generateSplattingTextureOperation->setExecutionBlock([this, index](void) {
-        CHeightmapAccessor::generateSplattingTexture(index);
+    generateSplattingTextureOperation->setExecutionBlock([this, index, LOD](void) {
+        CHeightmapAccessor::generateSplattingTexture(index, LOD);
     });
     completionOperation->addDependency(generateSplattingTextureOperation);
     

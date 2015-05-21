@@ -27,6 +27,7 @@ static const std::string kVBOsMetadataFilename = "-vbos.data_";
 static const std::string kIBOsMetadataFilename = "-ibos.data_";
 static const std::string kSplattingTextureMasksMetadataFilename = "-splatting.texture.masks.data_";
 static const std::string kSplattingTexturesMetadataFilename = "-splatting.textures.data_";
+static const std::string kTangentSpaceMetadataFilename = "-tangent.space.data_";
 
 ui32 CHeightmapLoader::g_heightmapGUID = 0;
 
@@ -228,6 +229,20 @@ std::string CHeightmapLoader::getSplattingTexturesMMAPFilename(const std::string
     return stringstream.str();
 }
 
+std::string CHeightmapLoader::getTangentSpaceMMAPFilename(const std::string& filename)
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kTangentSpaceMetadataFilename<<g_heightmapGUID;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
 bool CHeightmapLoader::isUncompressedVerticesMMAPExist(const std::string& filename)
 {
     std::ifstream stream(CHeightmapLoader::getUncompressedVerticesMMAPFilename(filename));
@@ -279,6 +294,14 @@ bool CHeightmapLoader::isSplattingTextureMasksMMAPExist(const std::string &filen
 bool CHeightmapLoader::isSplattingTexturesMMAPExist(const std::string& filename)
 {
     std::ifstream stream(CHeightmapLoader::getSplattingTexturesMMAPFilename(filename));
+    bool isExist = stream.good();
+    stream.close();
+    return isExist;
+}
+
+bool CHeightmapLoader::isTangentSpaceMMAPExist(const std::string &filename)
+{
+    std::ifstream stream(CHeightmapLoader::getTangentSpaceMMAPFilename(filename));
     bool isExist = stream.good();
     stream.close();
     return isExist;
