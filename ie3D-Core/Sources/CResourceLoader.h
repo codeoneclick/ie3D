@@ -36,7 +36,7 @@ public:
     CResourceLoader(void);
     ~CResourceLoader(void);
     
-    CSharedTexture startTextureLoadingOperation(const std::string& filename);
+    CSharedTexture startTextureLoadingOperation(const std::string& filename, bool sync = false);
     
     CSharedShader startShaderLoadingOperation(const std::string& vsFilename,
                                               const std::string& fsFilename);

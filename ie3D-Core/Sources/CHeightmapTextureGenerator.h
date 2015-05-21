@@ -19,20 +19,24 @@ class CHeightmapTextureGenerator
 private:
     
     static void createSplattingTextureMasks(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
-    static void createSplattingTextures(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void createSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                        const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                        const std::array<CSharedTexture, 3>& splattingTextures);
     
 protected:
     
 public:
     
     static glm::ivec2 kSplattingTextureMaskSize;
+    static glm::ivec2 kSplattingTextureSize;
     
     CHeightmapTextureGenerator(void);
     ~CHeightmapTextureGenerator(void);
     
     static void generateSplattingMasks(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     static void generateSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                          const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+                                          const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                          const std::array<CSharedTexture, 3>& splattingTextures);
 
 };
 

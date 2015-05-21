@@ -34,6 +34,7 @@ public:
     static std::string getIBOsMMAPFilename(const std::string& filename);
     
     static std::string getSplattingTextureMasksMMAPFilename(const std::string& filename);
+    static std::string getSplattingTexturesMMAPFilename(const std::string& filename);
     
     static bool isUncompressedVerticesMMAPExist(const std::string& filename);
     static bool isCompressedVerticesMMAPExist(const std::string& filename);
@@ -43,6 +44,7 @@ public:
     static bool isIBOsMMAPExist(const std::string& filename);
     
     static bool isSplattingTextureMasksMMAPExist(const std::string& filename);
+    static bool isSplattingTexturesMMAPExist(const std::string& filename);
 };
 
 #endif

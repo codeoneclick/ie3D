@@ -40,7 +40,7 @@ private:
     
     void generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(i32 index);
-    void generateSplattingTextureMask(i32 index);
+    void generateSplattingTexture(i32 index);
     
     static f32 getAngle(const glm::vec3& point_01,
                         const glm::vec3& point_02,
@@ -66,7 +66,8 @@ public:
     static glm::vec3 getNormal(std::shared_ptr<CHeightmapContainer> container, const glm::vec3& position);
     static glm::vec2 getAngles(std::shared_ptr<CHeightmapContainer> container, const glm::vec3& position);
     
-    void generate(const std::string& filename, const std::function<void(void)>& callback);
+    void generate(const std::string& filename, ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                  const std::array<CSharedTexture, 3>& splattingTextures, const std::function<void(void)>& callback);
     
     void runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                     const std::function<void(CSharedMeshRef)>& meshLoadedCallback,

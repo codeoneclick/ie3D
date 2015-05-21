@@ -42,7 +42,7 @@ void CResourceAccessor::addCustomTexture(const std::string& textureName, CShared
     }
 }
 
-CSharedTexture CResourceAccessor::getTexture(const std::string &filename) const
+CSharedTexture CResourceAccessor::getTexture(const std::string &filename, bool sync) const
 {
     const auto& iterator = m_customTextures.find(filename);
     if(iterator != m_customTextures.end())
@@ -50,7 +50,7 @@ CSharedTexture CResourceAccessor::getTexture(const std::string &filename) const
         return iterator->second;
     }
     assert(m_resourceLoader != nullptr);
-    CSharedTexture texture = m_resourceLoader->startTextureLoadingOperation(filename);
+    CSharedTexture texture = m_resourceLoader->startTextureLoadingOperation(filename, sync);
     assert(texture != nullptr);
     return texture;
 }

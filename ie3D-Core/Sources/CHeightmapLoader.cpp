@@ -26,6 +26,7 @@ static const std::string kFacesMetadataFilename = "-faces.data_";
 static const std::string kVBOsMetadataFilename = "-vbos.data_";
 static const std::string kIBOsMetadataFilename = "-ibos.data_";
 static const std::string kSplattingTextureMasksMetadataFilename = "-splatting.texture.masks.data_";
+static const std::string kSplattingTexturesMetadataFilename = "-splatting.textures.data_";
 
 ui32 CHeightmapLoader::g_heightmapGUID = 0;
 
@@ -45,6 +46,9 @@ std::tuple<glm::ivec2, std::vector<f32>> CHeightmapLoader::getHeights(const std:
     
 #if defined(__IOS__)
     
+    std::vector<f32> heights;
+    glm::ivec2 size;
+    
     UIImage* image = [UIImage imageNamed:[NSString stringWithCString:"map_01" encoding:NSUTF8StringEncoding]];
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     size_t bytesPerRow = image.size.width * 4;
@@ -61,7 +65,19 @@ std::tuple<glm::ivec2, std::vector<f32>> CHeightmapLoader::getHeights(const std:
     CGContextScaleCTM(context, 1.0, -1.0);
     [image drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
     UIGraphicsPopContext();
-    m_size = glm::ivec2(image.size.width, image.size.height);
+    
+    size = glm::ivec2(image.size.width, image.size.height);
+    
+    heights.resize(size.x * size.y);
+    
+    ui32 index = 0;
+    for(ui32 i = 0; i < size.x; ++i)
+    {
+        for(ui32 j = 0; j < size.y; ++j)
+        {
+            heights[index++] = static_cast<f32>(data[(i + j * size.x) * 4 + 1]) / 255.f * CHeightmapContainer::kRaise - CHeightmapContainer::kDeep;
+        }
+    }
     
 #elif defined(__OSX__)
     
@@ -198,6 +214,20 @@ std::string CHeightmapLoader::getSplattingTextureMasksMMAPFilename(const std::st
     return stringstream.str();
 }
 
+std::string CHeightmapLoader::getSplattingTexturesMMAPFilename(const std::string& filename)
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kSplattingTexturesMetadataFilename<<g_heightmapGUID;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
 bool CHeightmapLoader::isUncompressedVerticesMMAPExist(const std::string& filename)
 {
     std::ifstream stream(CHeightmapLoader::getUncompressedVerticesMMAPFilename(filename));
@@ -241,6 +271,14 @@ bool CHeightmapLoader::isIBOsMMAPExist(const std::string& filename)
 bool CHeightmapLoader::isSplattingTextureMasksMMAPExist(const std::string &filename)
 {
     std::ifstream stream(CHeightmapLoader::getSplattingTextureMasksMMAPFilename(filename));
+    bool isExist = stream.good();
+    stream.close();
+    return isExist;
+}
+
+bool CHeightmapLoader::isSplattingTexturesMMAPExist(const std::string& filename)
+{
+    std::ifstream stream(CHeightmapLoader::getSplattingTexturesMMAPFilename(filename));
     bool isExist = stream.good();
     stream.close();
     return isExist;

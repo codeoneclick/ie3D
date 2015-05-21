@@ -18,4 +18,7 @@ extern const char* ShaderBoundingBox_frag;
 extern const char* ShaderOcclusionQuery_vert;
 extern const char* ShaderOcclusionQuery_frag;
 
+extern const char* ShaderSplattingTexture_vert;
+extern const char* ShaderSplattingTexture_frag;
+
 #endif

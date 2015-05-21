@@ -184,3 +184,8 @@ ui32 CRenderPipeline::getFrameNumTriagles(void)
 {
     return m_numTriangles;
 }
+
+ISharedGraphicsContext CRenderPipeline::getGraphicsContext(void) const
+{
+    return m_graphicsContext;
+}

@@ -31,6 +31,7 @@ public:
     virtual CSharedMaterial getTechniqueMaterial(const std::string& techniqueName) = 0;
     
     CSharedBatchingMgr getBatchingMgr(void) const;
+    virtual ISharedGraphicsContext getGraphicsContext(void) const = 0;
     
     virtual ui32 getScreenWidth(void) = 0;
     virtual ui32 getScreenHeight(void) = 0;

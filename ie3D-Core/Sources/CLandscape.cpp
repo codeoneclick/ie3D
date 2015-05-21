@@ -152,16 +152,25 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     
     if(configurationLandscape->getHeightmapDataFilename().length() != 0)
     {
-        m_heightmapAccessor->generate(configurationLandscape->getHeightmapDataFilename(), [this, configurationLandscape, success]() {
+        CSharedConfigurationMaterial configurationSplatting = std::make_shared<CConfigurationMaterial>();
+        configurationSplatting->serialize(configurationLandscape->getPreprocessSplattingMaterialFilename());
+        
+        std::array<CSharedTexture, 3> splattingTextures;
+        assert(configurationSplatting->getTexturesConfigurations().size() == 3);
+        ui32 index = 0;
+        for(const auto& iterator : configurationSplatting->getTexturesConfigurations())
+        {
+            CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
+            assert(textureConfiguration != nullptr);
+            assert(!textureConfiguration->getCubemap());
+            assert(textureConfiguration->getTextureFilename().length() != 0);
+            CSharedTexture texture = m_resourceAccessor->getTexture(textureConfiguration->getTextureFilename(), true);
+            splattingTextures[index] = texture;
+            index++;
+        }
+        
+        m_heightmapAccessor->generate(configurationLandscape->getHeightmapDataFilename(), m_renderTechniqueAccessor, splattingTextures, [this, configurationLandscape, success]() {
             
-            if(configurationLandscape->getPreprocessSplattingMaterialFilename().length() != 0)
-            {
-                CSharedConfigurationMaterial configurationPreprocessSplatting = std::make_shared<CConfigurationMaterial>();
-                configurationPreprocessSplatting->serialize(configurationLandscape->getPreprocessSplattingMaterialFilename());
-                m_preprocessSplattingTextureMaterial = CMaterial::constructCustomMaterial(configurationPreprocessSplatting,
-                                                                                          m_resourceAccessor,
-                                                                                          m_renderTechniqueAccessor);
-            }
             m_chunks.resize(m_heightmapAccessor->getChunksNum().x * m_heightmapAccessor->getChunksNum().y);
             
             IGameObject::onConfigurationLoaded(configurationLandscape, success);

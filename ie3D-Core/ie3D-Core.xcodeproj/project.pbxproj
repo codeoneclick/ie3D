@@ -240,6 +240,8 @@
 		217E55DB1AD7EB7B00F1DCBD /* CMeshExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */; };
 		217E55DC1AD7EB7B00F1DCBD /* CMeshExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */; };
 		217E55DD1AD7EB7B00F1DCBD /* CMeshExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 217E55DA1AD7EB7B00F1DCBD /* CMeshExtension.h */; };
+		218F2F081B0DC5A300A9EBBD /* ShaderSplattingTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218F2F071B0DC5A300A9EBBD /* ShaderSplattingTexture.cpp */; };
+		218F2F091B0DC5A300A9EBBD /* ShaderSplattingTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218F2F071B0DC5A300A9EBBD /* ShaderSplattingTexture.cpp */; };
 		2191CE4A196EDBEF00CE2813 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE34196EDBEF00CE2813 /* png.c */; };
 		2191CE4B196EDBEF00CE2813 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2191CE34196EDBEF00CE2813 /* png.c */; };
 		2191CE4C196EDBEF00CE2813 /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 2191CE35196EDBEF00CE2813 /* png.h */; };
@@ -672,6 +674,7 @@
 		217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshExtension.cpp; path = Sources/CMeshExtension.cpp; sourceTree = "<group>"; };
 		217E55DA1AD7EB7B00F1DCBD /* CMeshExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshExtension.h; path = Sources/CMeshExtension.h; sourceTree = "<group>"; };
 		21853415181EFC6200315CBB /* libie3DCore-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DCore-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		218F2F071B0DC5A300A9EBBD /* ShaderSplattingTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShaderSplattingTexture.cpp; path = Sources/ShaderSplattingTexture.cpp; sourceTree = "<group>"; };
 		2191CE34196EDBEF00CE2813 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
 		2191CE35196EDBEF00CE2813 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
 		2191CE36196EDBEF00CE2813 /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
@@ -1219,6 +1222,7 @@
 				213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */,
 				219B5E731A10FF2C00986953 /* ShaderBoundingBox.cpp */,
 				21EF00421A238D6F00E0AF20 /* ShaderOcclusionQuery.cpp */,
+				218F2F071B0DC5A300A9EBBD /* ShaderSplattingTexture.cpp */,
 			);
 			name = "Built-in Shaders";
 			sourceTree = "<group>";
@@ -2588,6 +2592,7 @@
 				212090001906FB6000FFC8D4 /* CTextureSerializer_PVR.cpp in Sources */,
 				212090011906FB6000FFC8D4 /* CMeshSerializer_MDL.cpp in Sources */,
 				2174481B1AD273CC0071F4F1 /* CMemoryAllocator.cpp in Sources */,
+				218F2F091B0DC5A300A9EBBD /* ShaderSplattingTexture.cpp in Sources */,
 				212090021906FB6000FFC8D4 /* CSkeletonSerializer_SK.cpp in Sources */,
 				21E52B871A90A617005977F1 /* CMeshCommiter_ie3Dmesh.cpp in Sources */,
 				2191CE72196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */,
@@ -2770,6 +2775,7 @@
 				213266441906A4AF001C98F7 /* CTextureSerializer_PVR.cpp in Sources */,
 				213266451906A4AF001C98F7 /* CMeshSerializer_MDL.cpp in Sources */,
 				2174481A1AD273CC0071F4F1 /* CMemoryAllocator.cpp in Sources */,
+				218F2F081B0DC5A300A9EBBD /* ShaderSplattingTexture.cpp in Sources */,
 				213266461906A4AF001C98F7 /* CSkeletonSerializer_SK.cpp in Sources */,
 				21E52B861A90A617005977F1 /* CMeshCommiter_ie3Dmesh.cpp in Sources */,
 				2191CE71196EDCDE00CE2813 /* CTextureSerializer_PNG.cpp in Sources */,

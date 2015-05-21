@@ -75,7 +75,7 @@ void CResourceLoader::_OnGameLoopUpdate(f32 deltatime)
     }
 }
 
-CSharedTexture CResourceLoader::startTextureLoadingOperation(const std::string& filename)
+CSharedTexture CResourceLoader::startTextureLoadingOperation(const std::string& filename, bool sync)
 {
     std::string guid = filename;
     CSharedTexture resource = nullptr;
@@ -89,7 +89,15 @@ CSharedTexture CResourceLoader::startTextureLoadingOperation(const std::string& 
         ISharedResourceLoadingOperation operation = std::make_shared<CTextureLoadingOperation>(filename,
                                                                                                resource);
         m_resources.insert(std::make_pair(guid, resource));
-        m_operationsQueue.insert(std::make_pair(guid, operation));
+        if(!sync)
+        {
+            m_operationsQueue.insert(std::make_pair(guid, operation));
+        }
+        else
+        {
+            operation->serialize();
+            operation->commit();
+        }
     }
     return resource;
 }

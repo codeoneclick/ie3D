@@ -39,6 +39,8 @@ public:
     ui32 getScreenHeight(void);
     
     ui32 getFrameNumTriagles(void);
+    
+    ISharedGraphicsContext getGraphicsContext(void) const;
 };
 
 #endif 

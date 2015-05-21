@@ -11,8 +11,14 @@
 #include "CHeightmapLoader.h"
 #include "CHeightmapAccessor.h"
 #include "IRenderTechniqueAccessor.h"
+#include "CTexture.h"
+#include "CMaterial.h"
+#include "CShader.h"
+#include "CRenderTarget.h"
+#include "CQuad.h"
 
 glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureMaskSize = glm::ivec2(64);
+glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureSize = glm::ivec2(512);
 
 CHeightmapTextureGenerator::CHeightmapTextureGenerator(void)
 {
@@ -132,7 +138,109 @@ void CHeightmapTextureGenerator::createSplattingTextureMasks(const std::shared_p
 }
 
 void CHeightmapTextureGenerator::generateSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                                           const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
+                                                           const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                                           const std::array<CSharedTexture, 3>& splattingTextures)
 {
+    if(!CHeightmapLoader::isSplattingTexturesMMAPExist(filename))
+    {
+        CHeightmapTextureGenerator::createSplattingTextures(renderTechniqueAccessor, container, filename, splattingTextures);
+    }
+}
+
+void CHeightmapTextureGenerator::createSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                                         const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                                         const std::array<CSharedTexture, 3>& splattingTextures)
+{
+    CSharedMaterial material = std::make_shared<CMaterial>();
+    CSharedShader shader = CShader::constructCustomShader("splattingTexture", ShaderSplattingTexture_vert, ShaderSplattingTexture_frag);
+    assert(shader != nullptr);
+    CSharedQuad quad = std::make_shared<CQuad>();
+    material->setShader(shader);
+    assert(splattingTextures[0]->isLoaded() && splattingTextures[0]->isCommited());
+    material->setTexture(splattingTextures[0], E_SHADER_SAMPLER_01);
+    assert(splattingTextures[1]->isLoaded() && splattingTextures[1]->isCommited());
+    material->setTexture(splattingTextures[1], E_SHADER_SAMPLER_02);
+    assert(splattingTextures[2]->isLoaded() && splattingTextures[2]->isCommited());
+    material->setTexture(splattingTextures[2], E_SHADER_SAMPLER_03);
     
+    material->setCulling(false);
+    material->setCullingMode(GL_BACK);
+    
+    material->setBlending(false);
+    material->setBlendingFunctionSource(GL_SRC_ALPHA);
+    material->setBlendingFunctionDestination(GL_ONE);
+    
+    material->setDepthTest(false);
+    material->setDepthMask(true);
+    
+    material->setClipping(false);
+    material->setClippingPlane(glm::vec4(0.0, 0.0, 0.0, 0.0));
+    
+    material->setReflecting(false);
+    material->setShadowing(false);
+    material->setDebugging(false);
+    
+    std::ofstream stream;
+    stream.open(CHeightmapLoader::getSplattingTexturesMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    if(!stream.is_open())
+    {
+        assert(false);
+    }
+    
+    ui32 rawdataSize = static_cast<ui32>(kSplattingTextureSize.x) * static_cast<ui32>(kSplattingTextureSize.y) * 4;
+    ui8 *rawdata = new ui8[rawdataSize];
+    
+    for(ui32 i = 0; i < container->getChunksNum().x; ++i)
+    {
+        for(ui32 j = 0; j < container->getChunksNum().y; ++j)
+        {
+            std::ostringstream stringstream;
+            stringstream<<"texture_"<<i<<"_"<<j<<"_"<<CHeightmapLoader::g_heightmapGUID<<std::endl;
+            
+            ui32 textureId;
+            ieGenTextures(1, &textureId);
+            
+            ui32 index = i + j * container->getChunksNum().x;
+            
+            glm::ivec2 size = glm::ivec2(sqrt(container->getSplattingTextureMaskMmap(index)->getSize()));
+            CSharedTexture texture = CTexture::constructCustomTexture(stringstream.str(), textureId,
+                                                                      size.x, size.y);
+            texture->setWrapMode(GL_CLAMP_TO_EDGE);
+            texture->setMagFilter(GL_LINEAR);
+            texture->setMinFilter(GL_LINEAR);
+            
+            texture->bind();
+            
+            ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
+                         size.x, size.y,
+                         0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, container->getSplattingTextureMaskMmap(index)->getPointer());
+            
+            material->setTexture(texture, E_SHADER_SAMPLER_04);
+            
+            CSharedRenderTarget renderTarget = std::make_shared<CRenderTarget>(renderTechniqueAccessor->getGraphicsContext(),
+                                                                               kSplattingTextureSize.x, kSplattingTextureSize.y);
+            
+            renderTarget->begin();
+            renderTarget->clear();
+            
+            material->bind();
+            assert(material->getShader()->getAttributes().at(E_SHADER_ATTRIBUTE_POSITION) >= 0);
+            assert(material->getShader()->getAttributes().at(E_SHADER_ATTRIBUTE_TEXCOORD) >= 0);
+            quad->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
+            
+            quad->draw();
+            
+            quad->unbind(material->getShader()->getGUID(), material->getShader()->getAttributes());
+            material->unbind();
+            
+            glReadPixels(0, 0, kSplattingTextureSize.x, kSplattingTextureSize.y,
+                         GL_RGBA, GL_UNSIGNED_BYTE, rawdata);
+            stream.write((char *)rawdata, rawdataSize * sizeof(ui8));
+            
+            renderTarget->end();
+        }
+    }
+    stream.close();
+    
+    delete [] rawdata;
 }

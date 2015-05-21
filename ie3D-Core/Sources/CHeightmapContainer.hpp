@@ -116,9 +116,15 @@ inline std::shared_ptr<CHeightmapContainer::CHeightmapIBOMMAP> CHeightmapContain
     return m_ibosMMAP[index][LOD];
 }
 
-inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP>CHeightmapContainer:: getSplattingTextureMaskMmap(i32 index) const
+inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGB565>CHeightmapContainer:: getSplattingTextureMaskMmap(i32 index) const
 {
     assert(index >=0 && index < m_splattingTextureMasksMMAP.size());
     return m_splattingTextureMasksMMAP[index];
+}
+
+inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGBA8> CHeightmapContainer::getSplattingTexturesMmap(i32 index) const
+{
+    assert(index >=0 && index < m_splattingTexturesMMAP.size());
+    return m_splattingTexturesMMAP[index];
 }
 
