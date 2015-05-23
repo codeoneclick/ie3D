@@ -232,6 +232,8 @@ void CLandscape::onDraw(CSharedMaterialRef material)
                 if(chunk->getPreprocessedSplattingTexture())
                 {
                     material->getShader()->setTexture(chunk->getPreprocessedSplattingTexture(), E_SHADER_SAMPLER_01);
+                    material->getShader()->setTexture(chunk->getPreprocessedSplattingNormalTexture(), E_SHADER_SAMPLER_02);
+                    material->getShader()->setTexture(chunk->getPreprocessedSplattingDisplaceTexture(), E_SHADER_SAMPLER_03);
                 }
                 chunk->m_mesh->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
                 chunk->m_mesh->draw(chunk->m_numPassedIndexes);

@@ -166,7 +166,7 @@ void IRenderTechniqueImporter::saveTexture(CSharedTextureRef texture, const std:
     material->setShadowing(false);
     material->setDebugging(false);
     
-    CSharedRenderTarget renderTarget = std::make_shared<CRenderTarget>(m_graphicsContext, width, height);
+    CSharedRenderTarget renderTarget = std::make_shared<CRenderTarget>(m_graphicsContext, GL_RGBA, width, height);
     
     renderTarget->begin();
     renderTarget->clear();

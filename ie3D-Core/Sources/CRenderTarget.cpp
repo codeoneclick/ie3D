@@ -9,7 +9,7 @@
 #include "CRenderTarget.h"
 #include "IGraphicsContext.h"
 
-CRenderTarget::CRenderTarget(ISharedGraphicsContextRef graphicsContext, ui32 width, ui32 height) :
+CRenderTarget::CRenderTarget(ISharedGraphicsContextRef graphicsContext, GLint format, ui32 width, ui32 height) :
 m_graphicsContext(graphicsContext),
 m_size(glm::ivec2(width, height))
 {
@@ -19,10 +19,10 @@ m_size(glm::ivec2(width, height))
     ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     ieTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+    ieTexImage2D(GL_TEXTURE_2D, 0, format,
                  m_size.x,
                  m_size.y,
-                 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+                 0, format, GL_UNSIGNED_BYTE, NULL);
     
     ieGenRenderbuffers(1, &m_depthAttachment);
     ieBindRenderbuffer(GL_RENDERBUFFER, m_depthAttachment);

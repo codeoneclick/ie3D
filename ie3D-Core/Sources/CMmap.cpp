@@ -49,7 +49,7 @@ void* CMmap::allocate(const std::string& filename)
     }
     
     filelength = (ui32)status.st_size;
-    m_pointer = (void* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, m_filedescriptor, 0);
+    m_pointer = (void* )mmap(0, filelength, PROT_READ | PROT_WRITE, MAP_FILE | MAP_SHARED, m_filedescriptor, 0);
     if (m_pointer == nullptr)
     {
         std::cout<<"can't mmap filedescriptor for filename: "<<filename<<"filedescriptors count: "<<g_filedescriptors<<std::endl;

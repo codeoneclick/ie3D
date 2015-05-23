@@ -28,7 +28,7 @@ protected:
     
 public:
     
-    CRenderTarget(ISharedGraphicsContextRef graphicsContext, ui32 width, ui32 height);
+    CRenderTarget(ISharedGraphicsContextRef graphicsContext, GLint format, ui32 width, ui32 height);
     ~CRenderTarget(void);
     
     void clear(void);

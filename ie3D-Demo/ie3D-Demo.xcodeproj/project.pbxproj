@@ -147,6 +147,10 @@
 		217EF90919F9222A00F339A0 /* shaderCommon.frag in Resources */ = {isa = PBXBuildFile; fileRef = 217EF90619F9222A00F339A0 /* shaderCommon.frag */; };
 		217EF90A19F9222A00F339A0 /* shaderCommon.vert in Resources */ = {isa = PBXBuildFile; fileRef = 217EF90719F9222A00F339A0 /* shaderCommon.vert */; };
 		217EF90B19F9222A00F339A0 /* shaderCommon.vert in Resources */ = {isa = PBXBuildFile; fileRef = 217EF90719F9222A00F339A0 /* shaderCommon.vert */; };
+		218E41E41B0F50C500FBDAD3 /* base_DISP.png in Resources */ = {isa = PBXBuildFile; fileRef = 218E41E21B0F50C500FBDAD3 /* base_DISP.png */; };
+		218E41E51B0F50C500FBDAD3 /* base_DISP.png in Resources */ = {isa = PBXBuildFile; fileRef = 218E41E21B0F50C500FBDAD3 /* base_DISP.png */; };
+		218E41E61B0F50C500FBDAD3 /* base_NRM.png in Resources */ = {isa = PBXBuildFile; fileRef = 218E41E31B0F50C500FBDAD3 /* base_NRM.png */; };
+		218E41E71B0F50C500FBDAD3 /* base_NRM.png in Resources */ = {isa = PBXBuildFile; fileRef = 218E41E31B0F50C500FBDAD3 /* base_NRM.png */; };
 		219A1374199A0A2600E674CB /* ICharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A1372199A0A2600E674CB /* ICharacterController.cpp */; };
 		219A1377199A0A5600E674CB /* CGameObjectNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A1375199A0A5600E674CB /* CGameObjectNavigator.cpp */; };
 		219A13A1199A613D00E674CB /* CDEUIToSceneCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A139F199A613D00E674CB /* CDEUIToSceneCommands.cpp */; };
@@ -393,6 +397,8 @@
 		217EF89C19F7E11200F339A0 /* static_model_tank_tracks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = static_model_tank_tracks.png; path = "../ie3D-Bundle/Textures/static_model_tank_tracks.png"; sourceTree = SOURCE_ROOT; };
 		217EF90619F9222A00F339A0 /* shaderCommon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderCommon.frag; path = "../ie3D-Bundle/Shaders/shaderCommon.frag"; sourceTree = SOURCE_ROOT; };
 		217EF90719F9222A00F339A0 /* shaderCommon.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderCommon.vert; path = "../ie3D-Bundle/Shaders/shaderCommon.vert"; sourceTree = SOURCE_ROOT; };
+		218E41E21B0F50C500FBDAD3 /* base_DISP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = base_DISP.png; path = "../../ie3D/ie3D-Bundle/Textures/base_DISP.png"; sourceTree = "<group>"; };
+		218E41E31B0F50C500FBDAD3 /* base_NRM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = base_NRM.png; path = "../../ie3D/ie3D-Bundle/Textures/base_NRM.png"; sourceTree = "<group>"; };
 		219A1372199A0A2600E674CB /* ICharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICharacterController.cpp; path = Sources/ICharacterController.cpp; sourceTree = SOURCE_ROOT; };
 		219A1373199A0A2600E674CB /* ICharacterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICharacterController.h; path = Sources/ICharacterController.h; sourceTree = SOURCE_ROOT; };
 		219A1375199A0A5600E674CB /* CGameObjectNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameObjectNavigator.cpp; path = Sources/CGameObjectNavigator.cpp; sourceTree = SOURCE_ROOT; };
@@ -659,6 +665,8 @@
 		217EF88C19F7E11200F339A0 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				218E41E21B0F50C500FBDAD3 /* base_DISP.png */,
+				218E41E31B0F50C500FBDAD3 /* base_NRM.png */,
 				21E52BCE1A911352005977F1 /* human_02.png */,
 				21E52BB61A90FA72005977F1 /* human_01.png */,
 				21E52B8F1A90E9E1005977F1 /* orc_02.png */,
@@ -1098,6 +1106,8 @@
 				21706CDE1A89471500C56C7E /* material.output.technique.demo.xml in Resources */,
 				217EF8A219F7E11300F339A0 /* landscape_02.png in Resources */,
 				217EF8A619F7E11300F339A0 /* ocean_ripples.png in Resources */,
+				218E41E71B0F50C500FBDAD3 /* base_NRM.png in Resources */,
+				218E41E51B0F50C500FBDAD3 /* base_DISP.png in Resources */,
 				21E52BE81A9118AE005977F1 /* material.orc_01.reflection.xml in Resources */,
 				21E52BC41A910FF8005977F1 /* orc_03.IE3DMESH in Resources */,
 				21A38DD01AF8D62200E7DFE7 /* heightmap.data in Resources */,
@@ -1155,6 +1165,7 @@
 				21E52BB71A90FA72005977F1 /* human_01.png in Resources */,
 				21706CCD1A8946BC00C56C7E /* output.technique.demo.xml in Resources */,
 				21706D061A89475D00C56C7E /* material.landscape.shadowmap.xml in Resources */,
+				218E41E41B0F50C500FBDAD3 /* base_DISP.png in Resources */,
 				21F083F319F3BEBE002FF9AE /* shaderStaticGameObjectND.frag in Resources */,
 				217EF8A719F7E11300F339A0 /* particle_01.png in Resources */,
 				21706CE91A89473000C56C7E /* gameobject.human_01.xml in Resources */,
@@ -1185,6 +1196,7 @@
 				21706CD21A8946DD00C56C7E /* ws.technique.base.xml in Resources */,
 				213267961906B51C001C98F7 /* CGameViewController.xib in Resources */,
 				21E52BB41A90FA5F005977F1 /* human_01.IE3DMESH in Resources */,
+				218E41E61B0F50C500FBDAD3 /* base_NRM.png in Resources */,
 				21706CEF1A89473000C56C7E /* gameobject.skybox.xml in Resources */,
 				21E52BE31A9118AE005977F1 /* material.human_02.shadowmap.xml in Resources */,
 				21A38DCF1AF8D60A00E7DFE7 /* heightmap.data in Resources */,

@@ -223,7 +223,7 @@ void CHeightmapTextureGenerator::createSplattingTextures(ISharedRenderTechniqueA
                 
                 material->setTexture(texture, E_SHADER_SAMPLER_04);
                 
-                CSharedRenderTarget renderTarget = std::make_shared<CRenderTarget>(renderTechniqueAccessor->getGraphicsContext(),
+                CSharedRenderTarget renderTarget = std::make_shared<CRenderTarget>(renderTechniqueAccessor->getGraphicsContext(), GL_RGBA,
                                                                                    sizeTexture.x, sizeTexture.y);
                 
                 renderTarget->begin();

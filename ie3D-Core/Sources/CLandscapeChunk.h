@@ -26,6 +26,8 @@ private:
     ui32 m_numPassedIndexes;
     CSharedQuadTree m_quadTree;
     CSharedTexture m_preprocessedSplattingTexture;
+    CSharedTexture m_preprocessedSplattingNormalTexture;
+    CSharedTexture m_preprocessedSplattingDisplaceTexture;
     
 protected:
     
@@ -52,6 +54,12 @@ public:
     
     const CSharedTexture getPreprocessedSplattingTexture(void) const;
     void setPreprocessedSplattingTexture(CSharedTextureRef texture);
+    
+    const CSharedTexture getPreprocessedSplattingNormalTexture(void) const;
+    void setPreprocessedSplattingNormalTexture(CSharedTextureRef texture);
+    
+    const CSharedTexture getPreprocessedSplattingDisplaceTexture(void) const;
+    void setPreprocessedSplattingDisplaceTexture(CSharedTextureRef texture);
     
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;
