@@ -22,9 +22,9 @@ private:
     static void createSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
                                         const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
                                         const std::array<CSharedTexture, 3>& splattingTextures);
-    static void createSplattingNormalTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                              const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                                              const std::array<CSharedTexture, 3>& splattingTextures);
+    static void createSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                         const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                         const std::array<CSharedTexture, 3>& splattingTextures);
     
 protected:
     
@@ -43,9 +43,9 @@ public:
     static void generateSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
                                           const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
                                           const std::array<CSharedTexture, 3>& splattingTextures);
-    static void generateSplattingNormalTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                                const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                                                const std::array<CSharedTexture, 3>& splattingNormalTextures);
+    static void generateSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                           const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                           const std::array<CSharedTexture, 3>& splattingNormalTextures);
     
 };
 

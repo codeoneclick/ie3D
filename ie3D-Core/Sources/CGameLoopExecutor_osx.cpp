@@ -44,7 +44,7 @@
     if(self)
     {
         self.m_gameLoopExecutor = new CGameLoopExecutor();
-        _m_looper = [NSTimer scheduledTimerWithTimeInterval:(1.0 / 60.0f) target:self selector:@selector(onUpdate) userInfo:nil repeats:YES];
+        _m_looper = [NSTimer scheduledTimerWithTimeInterval:0.016 target:self selector:@selector(onUpdate) userInfo:nil repeats:YES];
     }
     return self;
 }
@@ -70,6 +70,7 @@
 {
     assert(self.m_gameLoopExecutor != nullptr);
     assert(self.m_gameLoopExecutor->Get_FPSCounter() != nullptr);
+    
     self.m_gameLoopExecutor->Get_FPSCounter()->Reset();
     self.m_gameLoopExecutor->OnGameLoopUpdate();
     self.m_gameLoopExecutor->Get_FPSCounter()->Submit();

@@ -23,9 +23,9 @@ private:
     static void createIBOsMetadata(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     static void createTangentSpace(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     
-    static void getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
-                                 f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,
-                                 glm::vec3& tangentX, glm::vec3& tangentY);
+    static glm::vec3 generateTangent(const glm::vec3& point_01, const glm::vec3& point_02, const glm::vec3& point_03,
+                                     const glm::vec2& texcoord_01, const glm::vec2& texcoord_02, const glm::vec2& texcoord_03);
+    
     static glm::vec3 getClosestPointOnLine(const glm::vec3& a, const glm::vec3& b, const glm::vec3& p);
     static glm::vec3 ortogonalize(const glm::vec3& v1, const glm::vec3& v2);
     

@@ -454,54 +454,56 @@ void CHeightmapGeometryGenerator::createTangentSpace(const std::shared_ptr<CHeig
             std::vector<glm::vec3> tangents, binormals;
             
             SAttributeVertex* vertices = container->getVBOMmap(index)->getPointer();
-            ui32 numVertices = container->getVBOMmap(index)->getSize();
             
             ui16* indices = container->getIBOMmap(index, E_LANDSCAPE_CHUNK_LOD_01)->getSourcePointer();
             ui32 numIndices = container->getIBOMmap(index, E_LANDSCAPE_CHUNK_LOD_01)->getSize();
             
+            std::pair<i32, i32> minmax = std::make_pair(INT16_MAX, INT16_MIN);
             for (ui32 i = 0; i < numIndices; i += 3 )
             {
-                glm::vec3 v1 = vertices[indices[i + 0]].m_position;
-                glm::vec3 v2 = vertices[indices[i + 1]].m_position;
-                glm::vec3 v3 = vertices[indices[i + 2]].m_position;
-                f32 s1 = glm::unpackUnorm2x16(vertices[indices[i + 0]].m_texcoord).x;
-                f32 t1 = glm::unpackUnorm2x16(vertices[indices[i + 0]].m_texcoord).y;
-                f32 s2 = glm::unpackUnorm2x16(vertices[indices[i + 1]].m_texcoord).x;
-                f32 t2 = glm::unpackUnorm2x16(vertices[indices[i + 1]].m_texcoord).y;
-                f32 s3 = glm::unpackUnorm2x16(vertices[indices[i + 2]].m_texcoord).x;
-                f32 t3 = glm::unpackUnorm2x16(vertices[indices[i + 2]].m_texcoord).y;
+                glm::vec3 point_01 = vertices[indices[i + 0]].m_position;
+                glm::vec3 point_02 = vertices[indices[i + 1]].m_position;
+                glm::vec3 point_03 = vertices[indices[i + 2]].m_position;
                 
-                glm::vec3 t, b;
-                CHeightmapGeometryGenerator::getTriangleBasis(v1, v2, v3, s1, t1, s2, t2, s3, t3, t, b);
-                tangents.push_back(t);
-                binormals.push_back(b);
+                glm::vec2 texcoord_01 = glm::unpackUnorm2x16(vertices[indices[i + 0]].m_texcoord);
+                glm::vec2 texcoord_02 = glm::unpackUnorm2x16(vertices[indices[i + 1]].m_texcoord);
+                glm::vec2 texcoord_03 = glm::unpackUnorm2x16(vertices[indices[i + 2]].m_texcoord);
+                
+                tangents.push_back(CHeightmapGeometryGenerator::generateTangent(point_01, point_02, point_03,
+                                                                                texcoord_01, texcoord_02, texcoord_03));
+                
+                minmax.first = minmax.first < indices[i + 0] ? minmax.first : indices[i + 0];
+                minmax.second = minmax.second > indices[i + 0] ? minmax.second : indices[i + 0];
+                
+                minmax.first = minmax.first < indices[i + 1] ? minmax.first : indices[i + 1];
+                minmax.second = minmax.second > indices[i + 1] ? minmax.second : indices[i + 1];
+                
+                minmax.first = minmax.first < indices[i + 2] ? minmax.first : indices[i + 2];
+                minmax.second = minmax.second > indices[i + 2] ? minmax.second : indices[i + 2];
             }
-            
-            for (ui32 i = 0; i < numVertices; i++)
+        
+            for(i32 i = minmax.first; i <= minmax.second; i++)
             {
-                std::vector<glm::vec3> lrt, lrb;
-                for (ui32 j = 0; j < numIndices; j += 3)
+                std::vector<glm::vec3> summTangents;
+                for(ui32 j = 0; j < numIndices; j += 3)
                 {
                     if ((indices[j + 0]) == i || (indices[j + 1]) == i || (indices[j + 2]) == i)
                     {
-                        lrt.push_back(tangents[i]);
-                        lrb.push_back(binormals[i]);
+                        summTangents.push_back(tangents[i]);
                     }
                 }
                 
                 glm::vec3 tangent(0.0f);
-                glm::vec3 binormal(0.0f);
-                for (ui32 j = 0; j < lrt.size(); j++)
+                for (ui32 j = 0; j < summTangents.size(); j++)
                 {
-                    tangent += lrt[j];
+                    tangent += summTangents[j];
                 }
-                tangent /= static_cast<f32>(lrt.size());
+                tangent /= static_cast<f32>(summTangents.size());
                 
                 glm::vec4 normal = glm::unpackSnorm4x8(vertices[i].m_normal);
                 tangent = CHeightmapGeometryGenerator::ortogonalize(glm::vec3(normal.x, normal.y, normal.z), tangent);
                 vertices[i].m_tangent = glm::packSnorm4x8(glm::vec4(tangent.x, tangent.y, tangent.z, 0.0));
             }
-            std::this_thread::yield();
         }
     }
     
@@ -517,16 +519,15 @@ void CHeightmapGeometryGenerator::createTangentSpace(const std::shared_ptr<CHeig
     stream.close();
 }
 
-void CHeightmapGeometryGenerator::getTriangleBasis(const glm::vec3& E, const glm::vec3& F, const glm::vec3& G,
-                                                   f32 sE, f32 tE, f32 sF, f32 tF, f32 sG, f32 tG,
-                                                   glm::vec3& tangentX, glm::vec3& tangentY)
+glm::vec3 CHeightmapGeometryGenerator::generateTangent(const glm::vec3& point_01, const glm::vec3& point_02, const glm::vec3& point_03,
+                                                       const glm::vec2& texcoord_01, const glm::vec2& texcoord_02, const glm::vec2& texcoord_03)
 {
-    glm::vec3 P = F - E;
-    glm::vec3 Q = G - E;
-    f32 s1 = sF - sE;
-    f32 t1 = tF - tE;
-    f32 s2 = sG - sE;
-    f32 t2 = tG - tE;
+    glm::vec3 P = point_02 - point_01;
+    glm::vec3 Q = point_03 - point_01;
+    f32 s1 = texcoord_02.x - texcoord_01.x;
+    f32 t1 = texcoord_02.y - texcoord_01.y;
+    f32 s2 = texcoord_03.x - texcoord_01.x;
+    f32 t2 = texcoord_03.y - texcoord_01.y;
     f32 pqMatrix[2][3];
     pqMatrix[0][0] = P[0];
     pqMatrix[0][1] = P[1];
@@ -547,10 +548,7 @@ void CHeightmapGeometryGenerator::getTriangleBasis(const glm::vec3& E, const glm
     tbMatrix[1][0] = stMatrix[1][0] * pqMatrix[0][0] + stMatrix[1][1] * pqMatrix[1][0];
     tbMatrix[1][1] = stMatrix[1][0] * pqMatrix[0][1] + stMatrix[1][1] * pqMatrix[1][1];
     tbMatrix[1][2] = stMatrix[1][0] * pqMatrix[0][2] + stMatrix[1][1] * pqMatrix[1][2];
-    tangentX = glm::vec3( tbMatrix[0][0], tbMatrix[0][1], tbMatrix[0][2] );
-    tangentY = glm::vec3( tbMatrix[1][0], tbMatrix[1][1], tbMatrix[1][2] );
-    tangentX = glm::normalize(tangentX);
-    tangentY = glm::normalize(tangentY);
+    return glm::normalize(glm::vec3(tbMatrix[0][0], tbMatrix[0][1], tbMatrix[0][2]));
 }
 
 glm::vec3 CHeightmapGeometryGenerator::getClosestPointOnLine(const glm::vec3& a, const glm::vec3& b, const glm::vec3& p)

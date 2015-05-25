@@ -89,7 +89,11 @@ void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuratio
         m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this());
     }
     m_preprocessedSplattingNormalTexture = m_resourceAccessor->getTexture("base_NRM.png", true);
+    m_preprocessedSplattingNormalTexture->setMagFilter(GL_LINEAR);
+    m_preprocessedSplattingNormalTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
     m_preprocessedSplattingDisplaceTexture = m_resourceAccessor->getTexture("base_DISP.png", true);
+    m_preprocessedSplattingDisplaceTexture->setMagFilter(GL_LINEAR);
+    m_preprocessedSplattingDisplaceTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 

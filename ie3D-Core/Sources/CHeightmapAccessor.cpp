@@ -157,14 +157,14 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
     });
     completionOperation->addDependency(mmapMasksOperation);
     
-    CSharedThreadOperation generateSplattingTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+    CSharedThreadOperation generateSplattingTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     generateSplattingTexturesOperation->setExecutionBlock([this, filename, renderTechniqueAccessor, splattingTextures](void) {
         
         CHeightmapTextureGenerator::generateSplattingTextures(renderTechniqueAccessor, m_container, filename, splattingTextures);
     });
     completionOperation->addDependency(generateSplattingTexturesOperation);
     
-    CSharedThreadOperation mmapTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+    CSharedThreadOperation mmapTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     mmapTexturesOperation->setExecutionBlock([this, filename](void) {
         
         m_container->mmapTextures(filename);

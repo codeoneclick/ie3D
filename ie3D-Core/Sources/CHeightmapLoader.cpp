@@ -25,8 +25,10 @@ static const std::string kCompressedVerticesMetadataFilename = "-compressed.vert
 static const std::string kFacesMetadataFilename = "-faces.data_";
 static const std::string kVBOsMetadataFilename = "-vbos.data_";
 static const std::string kIBOsMetadataFilename = "-ibos.data_";
-static const std::string kSplattingTextureMasksMetadataFilename = "-splatting.texture.masks.data_";
-static const std::string kSplattingTexturesMetadataFilename = "-splatting.textures.data_";
+static const std::string kSplattingTextureM_MetadataFilename = "-splatting.textures.m.data_";
+static const std::string kSplattingTextureN_MetadataFilename = "-splatting.textures.n.data_";
+static const std::string kSplattingTextureH_MetadataFilename = "-splatting.textures.h.data_";
+static const std::string kSplattingTextures_MetadataFilename = "-splatting.textures.data_";
 static const std::string kTangentSpaceMetadataFilename = "-tangent.space.data_";
 
 ui32 CHeightmapLoader::g_heightmapGUID = 0;
@@ -201,10 +203,10 @@ std::string CHeightmapLoader::getIBOsMMAPFilename(const std::string &filename)
     return stringstream.str();
 }
 
-std::string CHeightmapLoader::getSplattingTextureMasksMMAPFilename(const std::string &filename)
+std::string CHeightmapLoader::getSplattingTextureM_MMapFilename(const std::string &filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kSplattingTextureMasksMetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kSplattingTextureM_MetadataFilename<<g_heightmapGUID;
     
 #if defined(__IOS__)
     
@@ -215,10 +217,38 @@ std::string CHeightmapLoader::getSplattingTextureMasksMMAPFilename(const std::st
     return stringstream.str();
 }
 
-std::string CHeightmapLoader::getSplattingTexturesMMAPFilename(const std::string& filename)
+std::string CHeightmapLoader::getSplattingTextureN_MMapFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kSplattingTexturesMetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kSplattingTextureN_MetadataFilename<<g_heightmapGUID;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
+std::string CHeightmapLoader::getSplattingTextureH_MMapFilename(const std::string& filename)
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kSplattingTextureH_MetadataFilename<<g_heightmapGUID;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
+std::string CHeightmapLoader::getSplattingTextures_MMapFilename(const std::string& filename)
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kSplattingTextures_MetadataFilename<<g_heightmapGUID;
     
 #if defined(__IOS__)
     
@@ -283,17 +313,33 @@ bool CHeightmapLoader::isIBOsMMAPExist(const std::string& filename)
     return isExist;
 }
 
-bool CHeightmapLoader::isSplattingTextureMasksMMAPExist(const std::string &filename)
+bool CHeightmapLoader::isSplattingTextureM_MMapExist(const std::string &filename)
 {
-    std::ifstream stream(CHeightmapLoader::getSplattingTextureMasksMMAPFilename(filename));
+    std::ifstream stream(CHeightmapLoader::getSplattingTextureM_MMapFilename(filename));
     bool isExist = stream.good();
     stream.close();
     return isExist;
 }
 
-bool CHeightmapLoader::isSplattingTexturesMMAPExist(const std::string& filename)
+bool CHeightmapLoader::isSplattingTextureN_MMapExist(const std::string& filename)
 {
-    std::ifstream stream(CHeightmapLoader::getSplattingTexturesMMAPFilename(filename));
+    std::ifstream stream(CHeightmapLoader::getSplattingTextureN_MMapFilename(filename));
+    bool isExist = stream.good();
+    stream.close();
+    return isExist;
+}
+
+bool CHeightmapLoader::isSplattingTextureH_MMapExist(const std::string& filename)
+{
+    std::ifstream stream(CHeightmapLoader::getSplattingTextureH_MMapFilename(filename));
+    bool isExist = stream.good();
+    stream.close();
+    return isExist;
+}
+
+bool CHeightmapLoader::isSplattingTextures_MMapExist(const std::string& filename)
+{
+    std::ifstream stream(CHeightmapLoader::getSplattingTextures_MMapFilename(filename));
     bool isExist = stream.good();
     stream.close();
     return isExist;

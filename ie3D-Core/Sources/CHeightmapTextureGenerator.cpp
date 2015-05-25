@@ -16,6 +16,7 @@
 #include "CShader.h"
 #include "CRenderTarget.h"
 #include "CQuad.h"
+#include "IGraphicsContext.h"
 
 const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureMaskSize = glm::ivec2(64);
 const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureSize_LOD1 = glm::ivec2(1024);
@@ -35,7 +36,7 @@ CHeightmapTextureGenerator::~CHeightmapTextureGenerator(void)
 
 void CHeightmapTextureGenerator::generateSplattingMasks(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
 {
-    if(!CHeightmapLoader::isSplattingTextureMasksMMAPExist(filename))
+    if(!CHeightmapLoader::isSplattingTextureM_MMapExist(filename))
     {
         CHeightmapTextureGenerator::createSplattingTextureMasks(container, filename);
     }
@@ -44,7 +45,7 @@ void CHeightmapTextureGenerator::generateSplattingMasks(const std::shared_ptr<CH
 void CHeightmapTextureGenerator::createSplattingTextureMasks(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
 {
     std::ofstream stream;
-    stream.open(CHeightmapLoader::getSplattingTextureMasksMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    stream.open(CHeightmapLoader::getSplattingTextureM_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
     if(!stream.is_open())
     {
         assert(false);
@@ -144,7 +145,7 @@ void CHeightmapTextureGenerator::generateSplattingTextures(ISharedRenderTechniqu
                                                            const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
                                                            const std::array<CSharedTexture, 3>& splattingTextures)
 {
-    if(!CHeightmapLoader::isSplattingTexturesMMAPExist(filename))
+    if(!CHeightmapLoader::isSplattingTextures_MMapExist(filename))
     {
         CHeightmapTextureGenerator::createSplattingTextures(renderTechniqueAccessor, container, filename, splattingTextures);
     }
@@ -154,6 +155,8 @@ void CHeightmapTextureGenerator::createSplattingTextures(ISharedRenderTechniqueA
                                                          const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
                                                          const std::array<CSharedTexture, 3>& splattingTextures)
 {
+    renderTechniqueAccessor->getGraphicsContext()->beginBackgroundContext();
+    
     CSharedMaterial material = std::make_shared<CMaterial>();
     CSharedShader shader = CShader::constructCustomShader("splattingTexture", ShaderSplattingTexture_vert, ShaderSplattingTexture_frag);
     assert(shader != nullptr);
@@ -184,7 +187,7 @@ void CHeightmapTextureGenerator::createSplattingTextures(ISharedRenderTechniqueA
     material->setDebugging(false);
     
     std::ofstream stream;
-    stream.open(CHeightmapLoader::getSplattingTexturesMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    stream.open(CHeightmapLoader::getSplattingTextures_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
     if(!stream.is_open())
     {
         assert(false);
@@ -246,9 +249,24 @@ void CHeightmapTextureGenerator::createSplattingTextures(ISharedRenderTechniqueA
                 renderTarget->end();
                 
                 delete [] rawdata;
-                std::this_thread::yield();
             }
         }
     }
+    
+    renderTechniqueAccessor->getGraphicsContext()->endBackgroundContext();
     stream.close();
+}
+
+void CHeightmapTextureGenerator::createSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                                          const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                                          const std::array<CSharedTexture, 3>& splattingTextures)
+{
+    
+}
+
+void CHeightmapTextureGenerator::generateSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                                            const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                                            const std::array<CSharedTexture, 3>& splattingNormalTextures)
+{
+    
 }

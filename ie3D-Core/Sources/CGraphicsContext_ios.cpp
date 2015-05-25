@@ -22,6 +22,7 @@ private:
 protected:
     
     EAGLContext* m_context;
+    EAGLContext* m_backgroundContext;
     
 public:
     
@@ -30,6 +31,9 @@ public:
     
     void makeCurrent(void) const;
     void draw(void) const;
+    
+    void beginBackgroundContext(void);
+    void endBackgroundContext(void);
 };
 
 std::shared_ptr<IGraphicsContext> createGraphicsContext_ios(ISharedOGLWindowRef window)
@@ -79,6 +83,30 @@ void CGraphicsContext_ios::draw(void) const
 {
     assert(m_context != nullptr);
     [m_context presentRenderbuffer:GL_RENDERBUFFER];
+}
+
+void CGraphicsContext_ios::beginBackgroundContext(void)
+{
+#if defined(__OPENGL_30__)
+    
+    m_backgroundContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3 sharegroup:m_context.sharegroup];
+#else
+    
+    m_backgroundContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2 sharegroup:m_context.sharegroup];
+    
+#endif
+    
+    assert(m_backgroundContext != nullptr);
+    
+    ui8 result = [EAGLContext setCurrentContext:m_backgroundContext];
+    assert(result == true);
+}
+
+void CGraphicsContext_ios::endBackgroundContext(void)
+{
+    ui8 result = [EAGLContext setCurrentContext:m_context];
+    assert(result == true);
+
 }
 
 #endif

@@ -49,6 +49,9 @@ public:
     
     virtual void makeCurrent(void) const = 0;
     virtual void draw(void) const = 0;
+    
+    virtual void beginBackgroundContext(void) = 0;
+    virtual void endBackgroundContext(void) = 0;
 };
 
 #endif

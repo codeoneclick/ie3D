@@ -217,7 +217,7 @@ void CHeightmapContainer::mmapMasks(const std::string& filename)
     CHeightmapContainer::eraseMasks();
     
     m_splattingTextureMasksMMAPDescriptor = std::make_shared<CMmap>();
-    m_splattingTextureMasksMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTextureMasksMMAPFilename(filename));
+    m_splattingTextureMasksMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTextureM_MMapFilename(filename));
     
     ui32 offset = 0;
     for(ui32 i = 0; i < m_chunksNum.x; ++i)
@@ -237,7 +237,7 @@ void CHeightmapContainer::mmapTextures(const std::string& filename)
     CHeightmapContainer::eraseTextures();
     
     m_splattingTexturesMMAPDescriptor = std::make_shared<CMmap>();
-    m_splattingTexturesMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTexturesMMAPFilename(filename));
+    m_splattingTexturesMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTextures_MMapFilename(filename));
     
     ui32 offset = 0;
     for(ui32 i = 0; i < m_chunksNum.x; ++i)

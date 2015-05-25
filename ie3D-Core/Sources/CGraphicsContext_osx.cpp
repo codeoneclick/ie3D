@@ -13,6 +13,17 @@
 
 #include <Cocoa/Cocoa.h>
 
+static NSOpenGLPixelFormatAttribute g_attributes[] =
+{
+    NSOpenGLPFADoubleBuffer,
+    NSOpenGLPFADepthSize, 24,
+#if defined(__OPENGL_30__)
+    NSOpenGLPFAOpenGLProfile,
+    NSOpenGLProfileVersion3_2Core,
+#endif
+    0
+};
+
 class CGraphicsContext_osx : public IGraphicsContext
 {
 private:
@@ -20,6 +31,7 @@ private:
 protected:
     
 	NSOpenGLContext *m_context;
+    NSOpenGLContext *m_backgroundContext;
     
 public:
     
@@ -28,6 +40,9 @@ public:
     
     void makeCurrent(void) const;
     void draw(void) const;
+    
+    void beginBackgroundContext(void);
+    void endBackgroundContext(void);
 };
 
 std::shared_ptr<IGraphicsContext> createGraphicsContext_osx(ISharedOGLWindowRef window)
@@ -40,18 +55,7 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
 {
     m_window = window;
     
-    NSOpenGLPixelFormatAttribute attributes[] =
-    {
-        NSOpenGLPFADoubleBuffer,
-        NSOpenGLPFADepthSize, 24,
-#if defined(__OPENGL_30__)
-        NSOpenGLPFAOpenGLProfile,
-        NSOpenGLProfileVersion3_2Core,
-#endif
-        0
-    };
-    
-    NSOpenGLPixelFormat *pixelformat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
+    NSOpenGLPixelFormat *pixelformat = [[NSOpenGLPixelFormat alloc] initWithAttributes:g_attributes];
     if (!pixelformat)
     {
         assert(false);
@@ -92,6 +96,22 @@ void CGraphicsContext_osx::makeCurrent(void) const
 void CGraphicsContext_osx::draw(void) const
 {
     CGLFlushDrawable([m_context CGLContextObj]);
+}
+
+void CGraphicsContext_osx::beginBackgroundContext(void)
+{
+    NSOpenGLPixelFormat *pixelformat = [[NSOpenGLPixelFormat alloc] initWithAttributes:g_attributes];
+    if (!pixelformat)
+    {
+        assert(false);
+    }
+    m_backgroundContext = [[NSOpenGLContext alloc] initWithFormat:pixelformat shareContext:m_context];
+    [m_backgroundContext makeCurrentContext];
+}
+
+void CGraphicsContext_osx::endBackgroundContext(void)
+{
+    [m_context makeCurrentContext];
 }
 
 #endif
