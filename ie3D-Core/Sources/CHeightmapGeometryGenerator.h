@@ -22,6 +22,7 @@ private:
     static void createVBOsMetadata(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     static void createIBOsMetadata(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     static void createTangentSpace(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void createSmoothTexcoord(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     
     static glm::vec3 generateTangent(const glm::vec3& point_01, const glm::vec3& point_02, const glm::vec3& point_03,
                                      const glm::vec2& texcoord_01, const glm::vec2& texcoord_02, const glm::vec2& texcoord_03);
@@ -39,6 +40,7 @@ public:
     static void generate(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
                          const glm::ivec2& size, const std::vector<f32>& heights);
     
+    static void generateSmoothTexcoord(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     static void generateTangentSpace(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
 };
 

@@ -137,6 +137,7 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
     mmapGeometryOperation->setExecutionBlock([this, filename](void) {
        
         m_container->mmapGeometry(filename);
+        CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, filename);
         CHeightmapGeometryGenerator::generateTangentSpace(m_container, filename);
         CHeightmapAccessor::createBoundingBoxes();
         

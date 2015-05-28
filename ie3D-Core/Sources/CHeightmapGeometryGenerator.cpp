@@ -451,7 +451,7 @@ void CHeightmapGeometryGenerator::createTangentSpace(const std::shared_ptr<CHeig
         for(ui32 j = 0; j < container->getChunksNum().y; ++j)
         {
             ui32 index = i + j * container->getChunksNum().x;
-            std::vector<glm::vec3> tangents, binormals;
+            std::vector<glm::vec3> tangents;
             
             SAttributeVertex* vertices = container->getVBOMmap(index)->getPointer();
             
@@ -573,5 +573,102 @@ glm::vec3 CHeightmapGeometryGenerator::ortogonalize(const glm::vec3& v1, const g
     glm::vec3 res = v2 - v2ProjV1;
     res = glm::normalize(res);
     return res;
+}
+
+void CHeightmapGeometryGenerator::generateSmoothTexcoord(const std::shared_ptr<CHeightmapContainer> &container, const std::string &filename)
+{
+    CHeightmapGeometryGenerator::createSmoothTexcoord(container, filename);
+}
+
+void CHeightmapGeometryGenerator::createSmoothTexcoord(const std::shared_ptr<CHeightmapContainer> &container, const std::string &filename)
+{
+    for(ui32 i = 0; i < container->getChunksNum().x; ++i)
+    {
+        for(ui32 j = 0; j < container->getChunksNum().y; ++j)
+        {
+            ui32 index = i + j * container->getChunksNum().x;
+            
+            SAttributeVertex* vertices = container->getVBOMmap(index)->getPointer();
+            ui32 numVertices = container->getVBOMmap(index)->getSize();
+            
+            const glm::ivec2 size = glm::ivec2(sqrt(numVertices));
+            
+            std::vector<f32> widths_x;
+            std::vector<f32> widths_y;
+            
+            for(i32 x = 0; x < size.x; ++x)
+            {
+                f32 width_x = 0;
+                f32 width_y = 0;
+                for(i32 y = 0; y < size.y; ++y)
+                {
+                    if(y + 1 < size.y)
+                    {
+                        width_x += glm::distance(vertices[x + y * size.y].m_position,
+                                                 vertices[x + (y + 1) * size.y].m_position);
+                        
+                        width_y += glm::distance(vertices[y + x * size.x].m_position,
+                                                 vertices[y + 1 + x * size.x].m_position);
+                    }
+                }
+                widths_y.push_back(width_y);
+                widths_x.push_back(width_x);
+            }
+
+            for(i32 x = 0; x < size.x; ++x)
+            {
+                f32 width_x = widths_x[x];
+                f32 distance_summ_x = 0.0f;
+                
+                for(i32 y = 0; y < size.y; ++y)
+                {
+                    if(y + 1 < size.y)
+                    {
+                        f32 distance_x = glm::distance(vertices[x + y * size.y].m_position,
+                                                       vertices[x + (y + 1) * size.y].m_position);
+                        glm::vec2 texcoord = glm::unpackUnorm2x16(vertices[x + (y + 1) * size.y].m_texcoord);
+                        texcoord.x = (distance_summ_x + distance_x) / width_x;
+                        distance_summ_x += distance_x;
+                        texcoord = glm::clamp(texcoord, 0.0f, 1.0f);
+                        vertices[x + (y + 1) * size.y].m_texcoord = glm::packUnorm2x16(texcoord);
+                    }
+                    else
+                    {
+                        glm::vec2 texcoord = glm::unpackUnorm2x16(vertices[x + y * size.y].m_texcoord);
+                        texcoord.x = 1.0f;
+                        texcoord = glm::clamp(texcoord, 0.0f, 1.0f);
+                        vertices[x + y * size.y].m_texcoord = glm::packUnorm2x16(texcoord);
+                    }
+                }
+            }
+            
+            for(i32 y = 0; y < size.y; ++y)
+            {
+                f32 width_y = widths_y[y];
+                f32 distance_summ_y = 0.0f;
+                
+                for(i32 x = 0; x < size.x; ++x)
+                {
+                    if(x + 1 < size.x)
+                    {
+                        f32 distance_y = glm::distance(vertices[x + y * size.y].m_position,
+                                                       vertices[x + 1 + y * size.y].m_position);
+                        glm::vec2 texcoord = glm::unpackUnorm2x16(vertices[x + 1 + y * size.y].m_texcoord);
+                        texcoord.y = (distance_summ_y + distance_y) / width_y;
+                        distance_summ_y += distance_y;
+                        texcoord = glm::clamp(texcoord, 0.0f, 1.0f);
+                        vertices[x + 1 + y * size.y].m_texcoord = glm::packUnorm2x16(texcoord);
+                    }
+                    else
+                    {
+                        glm::vec2 texcoord = glm::unpackUnorm2x16(vertices[x + y * size.y].m_texcoord);
+                        texcoord.y = 1.0f;
+                        texcoord = glm::clamp(texcoord, 0.0f, 1.0f);
+                        vertices[x + y * size.y].m_texcoord = glm::packUnorm2x16(texcoord);
+                    }
+                }
+            }
+        }
+    }
 }
 

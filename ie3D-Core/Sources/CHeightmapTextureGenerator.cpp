@@ -79,43 +79,43 @@ void CHeightmapTextureGenerator::createSplattingTextureMasks(const std::shared_p
                     glm::vec3 normal = CHeightmapAccessor::getNormal(container, glm::vec3(offset.x + verticesOffset.x, 0.0f, offset.z + verticesOffset.y));
                     
                     f32 normalizedHeight = height / maxHeight;
-                    ui8 redColor = normalizedHeight <= CHeightmapContainer::kLayerSection01 ? 255 : 0;
+                    ui8 red = normalizedHeight <= CHeightmapContainer::kLayerSection01 ? 255 : 0;
                     if(normalizedHeight > CHeightmapContainer::kLayerSection01 &&
                        normalizedHeight <= CHeightmapContainer::kLayerSection01 + CHeightmapContainer::kLayerSectionOffset)
                     {
                         f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection01) / CHeightmapContainer::kLayerSectionOffset;
-                        redColor = glm::mix(255, 0, interpolation);
+                        red = glm::mix(255, 0, interpolation);
                     }
                     
-                    ui8 greenColor = normalizedHeight > CHeightmapContainer::kLayerSection01 && normalizedHeight <= CHeightmapContainer::kLayerSection02 ? 255 : 0;
+                    ui8 green = normalizedHeight > CHeightmapContainer::kLayerSection01 && normalizedHeight <= CHeightmapContainer::kLayerSection02 ? 255 : 0;
                     if(normalizedHeight < CHeightmapContainer::kLayerSection01 &&
                        normalizedHeight >= CHeightmapContainer::kLayerSection01 - CHeightmapContainer::kLayerSectionOffset)
                     {
                         f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection01 - CHeightmapContainer::kLayerSectionOffset)) / CHeightmapContainer::kLayerSectionOffset;
-                        greenColor = glm::mix(0, 255, interpolation);
+                        green = glm::mix(0, 255, interpolation);
                     }
                     else if(normalizedHeight > CHeightmapContainer::kLayerSection02 &&
                             normalizedHeight <= CHeightmapContainer::kLayerSection02 + CHeightmapContainer::kLayerSectionOffset)
                     {
                         f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection02) / CHeightmapContainer::kLayerSectionOffset;
-                        greenColor = glm::mix(255, 0, interpolation);
+                        green = glm::mix(255, 0, interpolation);
                     }
                     
-                    ui8 blueColor = normalizedHeight > CHeightmapContainer::kLayerSection02 ? 255 : 0;
+                    ui8 blue = normalizedHeight > CHeightmapContainer::kLayerSection02 ? 255 : 0;
                     if(normalizedHeight < CHeightmapContainer::kLayerSection02 &&
                        normalizedHeight >= CHeightmapContainer::kLayerSection02 - CHeightmapContainer::kLayerSectionOffset)
                     {
                         f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection02 - CHeightmapContainer::kLayerSectionOffset)) / CHeightmapContainer::kLayerSectionOffset;
-                        blueColor = glm::mix(0, 255, interpolation);
+                        blue = glm::mix(0, 255, interpolation);
                     }
                     
                     f32 angle = glm::dot(glm::vec3(0.0f, 1.0f, 0.0f), normal);
                     angle = glm::degrees(acosf(angle));
                     assert(angle >= 0.0);
                     angle = MIN_VALUE(angle / 45.0f, 1.0f);
-                    blueColor = MAX_VALUE(glm::mix(0, 255, angle), blueColor);
+                    blue = MAX_VALUE(glm::mix(0, 255, angle), blue);
                     
-                    pixels[index] = TO_RGB565(redColor, greenColor, blueColor);
+                    pixels[index] = TO_RGB565(red, green, blue);
                     
                     offset.z += step.y;
                 }

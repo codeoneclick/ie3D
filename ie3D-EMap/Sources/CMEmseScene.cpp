@@ -563,6 +563,7 @@ void CMEmseScene::onConfigurationLoaded(ISharedConfigurationRef configuration)
 
 void CMEmseScene::onResourceLoaded(ISharedResourceRef resource)
 {
+    return;
     assert(m_landscapeMaterial != nullptr);
     if(m_landscapeMaterial->getTexture(E_SHADER_SAMPLER_01) == resource)
     {

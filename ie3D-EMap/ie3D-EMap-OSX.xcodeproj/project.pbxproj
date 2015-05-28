@@ -23,6 +23,8 @@
 
 /* Begin PBXBuildFile section */
 		20AA3F021DA5A27B40E376F3 /* moc_CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = DCB612036D136E89ACC8CAC3 /* moc_CMainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
+		210400761B17531200FB28DF /* base_DISP.png in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 210400741B17531200FB28DF /* base_DISP.png */; };
+		210400771B17531200FB28DF /* base_NRM.png in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 210400751B17531200FB28DF /* base_NRM.png */; };
 		211EF8631AE6601200AF951E /* material.landscape.preprocess.splatting.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 211EF8621AE6601200AF951E /* material.landscape.preprocess.splatting.xml */; };
 		211EF8681AE6602800AF951E /* shaderLandscapePreprocessSplatting.frag in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 211EF8661AE6602800AF951E /* shaderLandscapePreprocessSplatting.frag */; };
 		211EF8691AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 211EF8671AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert */; };
@@ -242,6 +244,8 @@
 /* Begin PBXFileReference section */
 		09BF715167B7A0149FD2FBB8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "/Users/codeoneclick/Documents/hobby/ie3D/ie3D-EMap/Sources/main.cpp"; sourceTree = "<absolute>"; };
 		0BBBA58972447160190EBE86 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Volumes/media/Applications/QT/5.4/clang_64/lib/QtGui.framework; sourceTree = "<absolute>"; };
+		210400741B17531200FB28DF /* base_DISP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = base_DISP.png; path = "../ie3D-Bundle/Textures/base_DISP.png"; sourceTree = "<group>"; };
+		210400751B17531200FB28DF /* base_NRM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = base_NRM.png; path = "../ie3D-Bundle/Textures/base_NRM.png"; sourceTree = "<group>"; };
 		211EF8621AE6601200AF951E /* material.landscape.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.preprocess.splatting.xml; sourceTree = "<group>"; };
 		211EF8661AE6602800AF951E /* shaderLandscapePreprocessSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapePreprocessSplatting.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapePreprocessSplatting.frag"; sourceTree = "<group>"; };
 		211EF8671AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapePreprocessSplatting.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapePreprocessSplatting.vert"; sourceTree = "<group>"; };
@@ -594,6 +598,8 @@
 		21F5E1331ADE8D13002E08FA /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				210400741B17531200FB28DF /* base_DISP.png */,
+				210400751B17531200FB28DF /* base_NRM.png */,
 				21F5E2011ADE8E1C002E08FA /* gameobject.goe.temp.png */,
 				21F5E2021ADE8E1C002E08FA /* human_01.png */,
 				21F5E2031ADE8E1C002E08FA /* human_02.png */,
@@ -1046,6 +1052,7 @@
 				21F5E1F21ADE8E0C002E08FA /* shaderModel.vert in Copy Bundle Resources */,
 				21F5E18D1ADE8D94002E08FA /* material.landscape.reflection.goe.xml in Copy Bundle Resources */,
 				21F5E2261ADE8E1C002E08FA /* skybox_zpos.png in Copy Bundle Resources */,
+				210400761B17531200FB28DF /* base_DISP.png in Copy Bundle Resources */,
 				21F5E17E1ADE8D94002E08FA /* gameobject.skybox.xml in Copy Bundle Resources */,
 				21F5E18B1ADE8D94002E08FA /* material.landscape.base.xml in Copy Bundle Resources */,
 				21F5E17D1ADE8D94002E08FA /* gameobject.particle.emitter.xml in Copy Bundle Resources */,
@@ -1074,6 +1081,7 @@
 				21F5E23E1ADE8E28002E08FA /* orc_01_idle.IE3DANIMATION in Copy Bundle Resources */,
 				21F5E19A1ADE8D94002E08FA /* material.orc_02.shadowmap.xml in Copy Bundle Resources */,
 				21F5E1831ADE8D94002E08FA /* material.human_01.reflection.xml in Copy Bundle Resources */,
+				210400771B17531200FB28DF /* base_NRM.png in Copy Bundle Resources */,
 				21F5E2251ADE8E1C002E08FA /* skybox_zneg.png in Copy Bundle Resources */,
 				21F5E1FF1ADE8E0C002E08FA /* shaderStaticGameObjectND.frag in Copy Bundle Resources */,
 				21F5E1C51ADE8DB8002E08FA /* ws.technique.refraction.xml in Copy Bundle Resources */,

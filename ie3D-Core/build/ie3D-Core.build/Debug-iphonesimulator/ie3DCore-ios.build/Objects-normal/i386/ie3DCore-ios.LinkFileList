@@ -14,6 +14,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CVertexArrayBuffer.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/pngtrans.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CPerlinNoise.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CHeightmapContainer.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CCommonOS_win32.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CComponentSceneUpdate.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CCommonOS_ndk.o
@@ -75,7 +76,6 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CLandscape.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CLandscapeChunk.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/compress.o
-/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CHeightmap.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CConfigurationParticleEmitter.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CComponentDebugRendering.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/infback.o
@@ -95,8 +95,10 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/ISceneUpdateHandler.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CRenderTechniqueScreenSpace.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IScene.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CHeightmapAccessor.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CConfigurationSSTechnique.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IFabricator.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CHeightmapGeometryGenerator.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IGraph.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/pngerror.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IEditableLandscape.o
@@ -110,6 +112,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/gzlib.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/gzclose.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/trees.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CHeightmapTextureGenerator.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IOcclusionQueryHandler.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/gzwrite.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IConfiguration.o
@@ -148,11 +151,13 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CTextureSerializer_PVR.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CMeshSerializer_MDL.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CMemoryAllocator.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/ShaderSplattingTexture.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CSkeletonSerializer_SK.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CMeshCommiter_ie3Dmesh.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CTextureSerializer_PNG.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CSequenceSerializer_SEQ.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/png.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CHeightmapLoader.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CMeshCommiter_MDL_01.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IResourceLoadingOperation.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CShaderLoadingOperation.o
@@ -161,6 +166,7 @@
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CComponentRendering.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CConfigurationShader.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CConfigurationTexture.o
+/Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CMmap.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/IUICommands.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/CTextureCommiter_PNG.o
 /Users/codeoneclick/Documents/hobby/ie3D/ie3D-Core/build/ie3D-Core.build/Debug-iphonesimulator/ie3DCore-ios.build/Objects-normal/i386/zutil.o
