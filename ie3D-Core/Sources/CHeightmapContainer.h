@@ -29,10 +29,18 @@ public:
         glm::vec3 m_normal;
         glm::vec2 m_texcoord;
         
-        std::vector<ui32> m_containsInFace;
-        std::vector<glm::ivec2> m_containsInVBO;
+        ui32 m_containsInFace[kMaxContainsInFace];
+        ui8 m_containsInFaceSize;
         
-        SUncomressedVertex(void) = default;
+        glm::ivec2 m_containsInVBO[kMaxContainsInVBO];
+        ui8 m_containsInVBOSize;
+        
+        SUncomressedVertex(void)
+        {
+            memset(m_containsInFace, 0x0, sizeof(ui32) * kMaxContainsInFace);
+            memset(m_containsInVBO, 0x0, sizeof(glm::ivec2) * kMaxContainsInVBO);
+        };
+        
         ~SUncomressedVertex(void) = default;
         
         SUncomressedVertex(const SUncomressedVertex& copy) = delete;
@@ -258,7 +266,10 @@ public:
     inline SFace* getFaces(void) const;
     
     inline void attachUncompressedVertexToVBO(i32 i, i32 j, ui32 vboIndex, ui32 vboVertexIndex);
-    inline std::vector<glm::ivec2> attachedVerticesToVBO(i32 i, i32 j);
+    inline glm::ivec2* attachedVerticesToVBO(i32 i, i32 j, ui8 *size) const;
+    
+    inline void attachUncompressedVertexToFace(i32 i, i32 j, ui32 faceIndex);
+    inline ui32* attachedVerticesToFace(i32 i, i32 j, ui8 *size) const;
     
     inline glm::vec3 getVertexPosition(ui32 i, ui32 j) const;
     inline glm::uint32 getCompressedVertexTexcoord(ui32 i, ui32 j) const;

@@ -72,16 +72,37 @@ inline CHeightmapContainer::SFace* CHeightmapContainer::getFaces(void) const
 inline void CHeightmapContainer::attachUncompressedVertexToVBO(i32 i, i32 j, ui32 vboIndex, ui32 vboVertexIndex)
 {
     i32 index = i + j * m_mainSize.x;
-    assert(m_uncompressedVertices[index].m_containsInVBO.size() <= kMaxContainsInVBO);
-    m_uncompressedVertices[index].m_containsInVBO.push_back(glm::ivec2(vboIndex, vboVertexIndex));
-};
+    assert(m_uncompressedVertices[index].m_containsInVBOSize <= kMaxContainsInVBO);
+    m_uncompressedVertices[index].m_containsInVBO[m_uncompressedVertices[index].m_containsInVBOSize++] = glm::ivec2(vboIndex, vboVertexIndex);
+}
 
-inline std::vector<glm::ivec2> CHeightmapContainer::attachedVerticesToVBO(i32 i, i32 j)
+inline glm::ivec2* CHeightmapContainer::attachedVerticesToVBO(i32 i, i32 j, ui8 *size) const
 {
     i32 index = i + j * m_mainSize.x;
-    assert(m_uncompressedVertices[index].m_containsInVBO.size() != 0 && m_uncompressedVertices[index].m_containsInVBO.size() <= kMaxContainsInVBO);
+    if(m_uncompressedVertices[index].m_containsInVBOSize == 0 || m_uncompressedVertices[index].m_containsInVBOSize > kMaxContainsInVBO)
+    {
+        assert(m_uncompressedVertices[index].m_containsInVBOSize != 0 && m_uncompressedVertices[index].m_containsInVBOSize <= kMaxContainsInVBO);
+        *size = 0;
+        return nullptr;
+    }
+    *size = m_uncompressedVertices[index].m_containsInVBOSize;
     return m_uncompressedVertices[index].m_containsInVBO;
-};
+}
+
+inline void CHeightmapContainer::attachUncompressedVertexToFace(i32 i, i32 j, ui32 faceIndex)
+{
+    i32 index = i + j * m_mainSize.x;
+    assert(m_uncompressedVertices[index].m_containsInFaceSize <= kMaxContainsInFace);
+    m_uncompressedVertices[index].m_containsInFace[m_uncompressedVertices[index].m_containsInFaceSize++] = faceIndex;
+}
+
+inline ui32* CHeightmapContainer::attachedVerticesToFace(i32 i, i32 j, ui8 *size) const
+{
+    i32 index = i + j * m_mainSize.x;
+    assert(m_uncompressedVertices[index].m_containsInFaceSize != 0 && m_uncompressedVertices[index].m_containsInFaceSize <= kMaxContainsInFace);
+    *size = m_uncompressedVertices[index].m_containsInFaceSize;
+    return m_uncompressedVertices[index].m_containsInFace;
+}
 
 inline glm::vec3 CHeightmapContainer::getVertexPosition(ui32 i, ui32 j) const
 {

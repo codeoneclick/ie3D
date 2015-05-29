@@ -23,6 +23,7 @@ private:
     static void createIBOsMetadata(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     static void createTangentSpace(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     static void createSmoothTexcoord(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void createAttachesToVBO(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
     
     static glm::vec3 generateTangent(const glm::vec3& point_01, const glm::vec3& point_02, const glm::vec3& point_03,
                                      const glm::vec2& texcoord_01, const glm::vec2& texcoord_02, const glm::vec2& texcoord_03);
@@ -41,7 +42,14 @@ public:
                          const glm::ivec2& size, const std::vector<f32>& heights);
     
     static void generateSmoothTexcoord(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void generateSmoothTexcoord(const std::shared_ptr<CHeightmapContainer>& container, ui32 index);
+    
     static void generateTangentSpace(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void generateTangentSpace(const std::shared_ptr<CHeightmapContainer>& container, ui32 index);
+    
+    static void generateAttachesToVBO(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    
+    static void updateVertices(const std::shared_ptr<CHeightmapContainer>& container, const std::vector<glm::vec3>& vertices);
 };
 
 #endif

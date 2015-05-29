@@ -31,6 +31,7 @@ private:
     void eraseLoadingOperations(void);
     
     void createBoundingBoxes(void);
+    void createBoundingBox(ui32 i, ui32 j);
     void eraseBoundingBoxes(void);
     
     void createMetadataContainers(void);
@@ -74,6 +75,10 @@ public:
                     const std::function<void(CSharedQuadTreeRef)>& quadTreeLoadedCallback,
                     const std::function<void(CSharedTextureRef)>& textureLoadingCallback);
     void runUnLoading(i32 i, i32 j);
+    
+    
+    void updateVertices(const std::vector<glm::vec3>& vertices,
+                        const glm::ivec2& minBound, const glm::ivec2& maxBound);
 };
 
 #include "CHeightmapAccessor.hpp"

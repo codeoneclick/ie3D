@@ -15,6 +15,7 @@
 #include "CMesh.h"
 #include "CQuadTree.h"
 #include "CTexture.h"
+#include "CBoundingBox.h"
 
 CHeightmapAccessor::CHeightmapAccessor(void) :
 m_container(std::make_shared<CHeightmapContainer>()),
@@ -55,28 +56,33 @@ void CHeightmapAccessor::createBoundingBoxes(void)
     {
         for(ui32 j = 0; j < m_container->getChunksNum().y; ++j)
         {
-            ui32 index = i + j * m_container->getChunksNum().x;
-            glm::vec3 minBound = glm::vec3(INT16_MAX);
-            glm::vec3 maxBound = glm::vec3(INT16_MIN);
-            
-            for(ui32 x = 0; x < m_container->getChunkSize().x; ++x)
-            {
-                for(ui32 y = 0; y < m_container->getChunkSize().y; ++y)
-                {
-                    glm::ivec2 position = glm::ivec2(x + i * m_container->getChunkSize().x - i,
-                                                     y + j * m_container->getChunkSize().y - j);
-                    
-                    position.x = position.x < m_container->getMainSize().x ? position.x : m_container->getMainSize().x - 1;
-                    position.y = position.y < m_container->getMainSize().y ? position.y : m_container->getMainSize().y - 1;
-                    
-                    glm::vec3 point = m_container->getVertexPosition(position.x, position.y);
-                    minBound = glm::min(point, minBound);
-                    maxBound = glm::max(point, maxBound);
-                }
-            }
-            m_chunksBounds[index] = std::make_tuple(minBound, maxBound);
+            CHeightmapAccessor::createBoundingBox(i, j);
         }
     }
+}
+
+void CHeightmapAccessor::createBoundingBox(ui32 i, ui32 j)
+{
+    ui32 index = i + j * m_container->getChunksNum().x;
+    glm::vec3 minBound = glm::vec3(INT16_MAX);
+    glm::vec3 maxBound = glm::vec3(INT16_MIN);
+    
+    for(ui32 x = 0; x < m_container->getChunkSize().x; ++x)
+    {
+        for(ui32 y = 0; y < m_container->getChunkSize().y; ++y)
+        {
+            glm::ivec2 position = glm::ivec2(x + i * m_container->getChunkSize().x - i,
+                                             y + j * m_container->getChunkSize().y - j);
+            
+            position.x = position.x < m_container->getMainSize().x ? position.x : m_container->getMainSize().x - 1;
+            position.y = position.y < m_container->getMainSize().y ? position.y : m_container->getMainSize().y - 1;
+            
+            glm::vec3 point = m_container->getVertexPosition(position.x, position.y);
+            minBound = glm::min(point, minBound);
+            maxBound = glm::max(point, maxBound);
+        }
+    }
+    m_chunksBounds[index] = std::make_tuple(minBound, maxBound);
 }
 
 void CHeightmapAccessor::eraseBoundingBoxes(void)
@@ -139,6 +145,7 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
         m_container->mmapGeometry(filename);
         CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, filename);
         CHeightmapGeometryGenerator::generateTangentSpace(m_container, filename);
+        CHeightmapGeometryGenerator::generateAttachesToVBO(m_container, filename);
         CHeightmapAccessor::createBoundingBoxes();
         
     });
@@ -457,3 +464,57 @@ glm::vec2 CHeightmapAccessor::getAngles(std::shared_ptr<CHeightmapContainer> con
     
     return glm::vec2(glm::degrees(acos(angle_02) - M_PI_2), glm::degrees(asin(angle_01)));
 }
+
+void CHeightmapAccessor::updateVertices(const std::vector<glm::vec3>& vertices,
+                                        const glm::ivec2& minBound, const glm::ivec2& maxBound)
+{
+    CHeightmapGeometryGenerator::updateVertices(m_container, vertices);
+    
+    
+    std::set<std::shared_ptr<CVertexBuffer>> updatedVBOs;
+    for(ui32 i = 0; i < vertices.size(); ++i)
+    {
+        i32 x = static_cast<i32>(vertices.at(i).x);
+        i32 z = static_cast<i32>(vertices.at(i).z);
+        
+        ui8 containsInVBOSize = 0;
+        glm::ivec2 *containsInVBO = m_container->attachedVerticesToVBO(x, z, &containsInVBOSize);
+        assert(containsInVBO != nullptr);
+        
+        for(ui32 j = 0; j < containsInVBOSize; ++j)
+        {
+            if(std::get<0>(m_chunksMetadata[containsInVBO[j].x]) != nullptr)
+            {
+                std::get<0>(m_chunksMetadata[containsInVBO[j].x])->getVertexBuffer()->lock()[containsInVBO[j].y].m_position =
+                m_container->getVertexPosition(x, z);
+                std::get<0>(m_chunksMetadata[containsInVBO[j].x])->getVertexBuffer()->lock()[containsInVBO[j].y].m_normal =
+                m_container->getCompressedVertexNormal(x, z);
+                
+                updatedVBOs.insert(std::get<0>(m_chunksMetadata[containsInVBO[j].x])->getVertexBuffer());
+            }
+        }
+    }
+    
+    for(auto vbo : updatedVBOs)
+    {
+        vbo->unlock();
+    }
+    
+    for(ui32 i = 0; i < m_container->getChunksNum().x; ++i)
+    {
+        for(ui32 j = 0; j < m_container->getChunksNum().y; ++j)
+        {
+            ui32 index = i + j * m_container->getChunksNum().x;
+            if(CBoundingBox::isPointInXZ(glm::vec2(minBound.x, minBound.y), std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index])) ||
+               CBoundingBox::isPointInXZ(glm::vec2(maxBound.x, minBound.y), std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index])) ||
+               CBoundingBox::isPointInXZ(glm::vec2(minBound.x, maxBound.y), std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index])) ||
+               CBoundingBox::isPointInXZ(glm::vec2(maxBound.x, maxBound.y), std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index])))
+            {
+                CHeightmapAccessor::createBoundingBox(i, j);
+                CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, index);
+                CHeightmapGeometryGenerator::generateTangentSpace(m_container, index);
+            }
+        }
+    }
+}
+
