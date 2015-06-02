@@ -38,8 +38,8 @@ public:
     static std::string getSplattingTextureH_MMapFilename(const std::string& filename);
     static std::string getSplattingTextures_MMapFilename(const std::string& filename);
     
-    
-    static std::string getTangentSpaceMMAPFilename(const std::string& filename);
+    static std::string getTangentSpace_MMapFilename(const std::string& filename);
+    static std::string getAttachesToVBO_MMapFilename(const std::string& filename);
     
     static bool isUncompressedVerticesMMAPExist(const std::string& filename);
     static bool isCompressedVerticesMMAPExist(const std::string& filename);
@@ -53,7 +53,8 @@ public:
     static bool isSplattingTextureH_MMapExist(const std::string& filename);
     static bool isSplattingTextures_MMapExist(const std::string& filename);
     
-    static bool isTangentSpaceMMAPExist(const std::string& filename);
+    static bool isTangentSpace_MMapExist(const std::string& filename);
+    static bool isAttachesToVBO_MMapExist(const std::string& filename);
 };
 
 #endif

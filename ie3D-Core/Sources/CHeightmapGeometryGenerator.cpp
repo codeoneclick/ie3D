@@ -433,7 +433,7 @@ void CHeightmapGeometryGenerator::createIBOsMetadata(const std::shared_ptr<CHeig
 
 void CHeightmapGeometryGenerator::generateTangentSpace(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
 {
-    if(!CHeightmapLoader::isTangentSpaceMMAPExist(filename))
+    if(!CHeightmapLoader::isTangentSpace_MMapExist(filename))
     {
         CHeightmapGeometryGenerator::createTangentSpace(container, filename);
     }
@@ -451,7 +451,7 @@ void CHeightmapGeometryGenerator::createTangentSpace(const std::shared_ptr<CHeig
     }
     
     std::ofstream stream;
-    stream.open(CHeightmapLoader::getTangentSpaceMMAPFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    stream.open(CHeightmapLoader::getTangentSpace_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
     if(!stream.is_open())
     {
         assert(false);
@@ -678,7 +678,10 @@ void CHeightmapGeometryGenerator::generateSmoothTexcoord(const std::shared_ptr<C
 
 void CHeightmapGeometryGenerator::generateAttachesToVBO(const std::shared_ptr<CHeightmapContainer> &container, const std::string &filename)
 {
-    CHeightmapGeometryGenerator::createAttachesToVBO(container, filename);
+    if(!CHeightmapLoader::isAttachesToVBO_MMapExist(filename))
+    {
+        CHeightmapGeometryGenerator::createAttachesToVBO(container, filename);
+    }
 }
 
 void CHeightmapGeometryGenerator::createAttachesToVBO(const std::shared_ptr<CHeightmapContainer> &container, const std::string &filename)
@@ -703,6 +706,17 @@ void CHeightmapGeometryGenerator::createAttachesToVBO(const std::shared_ptr<CHei
         }
         verticesOffset.x += container->getChunkSize().x - 1;
     }
+    
+    std::ofstream stream;
+    stream.open(CHeightmapLoader::getAttachesToVBO_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    if(!stream.is_open())
+    {
+        assert(false);
+    }
+    
+    ui8 value = 1;
+    stream.write((char *)&value, sizeof(ui8));
+    stream.close();
 }
 
 void CHeightmapGeometryGenerator::updateVertices(const std::shared_ptr<CHeightmapContainer>& container, const std::vector<glm::vec3>& vertices)

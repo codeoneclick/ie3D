@@ -44,14 +44,26 @@ void CHeightmapTextureGenerator::generateSplattingMasks(const std::shared_ptr<CH
 
 void CHeightmapTextureGenerator::createSplattingTextureMasks(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
 {
-    std::ofstream stream;
-    stream.open(CHeightmapLoader::getSplattingTextureM_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
-    if(!stream.is_open())
+    std::shared_ptr<std::ofstream> stream = std::make_shared<std::ofstream>();
+    stream->open(CHeightmapLoader::getSplattingTextureM_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    if(!stream->is_open())
     {
         assert(false);
     }
     
-    glm::ivec2 verticesOffset(0);
+    for(ui32 i = 0; i < container->getChunksNum().x; ++i)
+    {
+        for(ui32 j = 0; j < container->getChunksNum().y; ++j)
+        {
+            CHeightmapTextureGenerator::generateSplattingMasks(container, i, j, stream);
+        }
+    }
+    stream->close();
+}
+
+void CHeightmapTextureGenerator::generateSplattingMasks(const std::shared_ptr<CHeightmapContainer> &container, ui32 i, ui32 j, const std::shared_ptr<std::ofstream> stream)
+{
+    glm::ivec2 verticesOffset( i * (container->getChunkSize().x - 1), j * (container->getChunkSize().y - 1));
     glm::vec2 step = glm::vec2(static_cast<f32>(container->getChunkSize().x) / static_cast<f32>(kSplattingTextureMaskSize.x) ,
                                static_cast<f32>(container->getChunkSize().y) / static_cast<f32>(kSplattingTextureMaskSize.y));
     
@@ -61,81 +73,71 @@ void CHeightmapTextureGenerator::createSplattingTextureMasks(const std::shared_p
     
     ui16* pixels = new ui16[kSplattingTextureMaskSize.x * kSplattingTextureMaskSize.y];
     
-    for(ui32 i = 0; i < container->getChunksNum().x; ++i)
+    for(ui32 x = 0; x < kSplattingTextureMaskSize.x; ++x)
     {
-        verticesOffset.y = 0;
-        for(ui32 j = 0; j < container->getChunksNum().y; ++j)
+        offset.z = 0.0f;
+        for(ui32 y = 0; y < kSplattingTextureMaskSize.y; ++y)
         {
-            offset = glm::vec3(0.0f);
-            for(ui32 x = 0; x < kSplattingTextureMaskSize.x; ++x)
-            {
-                offset.z = 0.0f;
-                for(ui32 y = 0; y < kSplattingTextureMaskSize.y; ++y)
-                {
-                    ui32 index = x + y * kSplattingTextureMaskSize.x;
-                    
-                    pixels[index] = TO_RGB565(255, 0, 0);
-                    f32 height = CHeightmapAccessor::getHeight(container, glm::vec3(offset.x + verticesOffset.x, 0.0f, offset.z + verticesOffset.y)) + CHeightmapContainer::kDeep;
-                    glm::vec3 normal = CHeightmapAccessor::getNormal(container, glm::vec3(offset.x + verticesOffset.x, 0.0f, offset.z + verticesOffset.y));
-                    
-                    f32 normalizedHeight = height / maxHeight;
-                    ui8 red = normalizedHeight <= CHeightmapContainer::kLayerSection01 ? 255 : 0;
-                    if(normalizedHeight > CHeightmapContainer::kLayerSection01 &&
-                       normalizedHeight <= CHeightmapContainer::kLayerSection01 + CHeightmapContainer::kLayerSectionOffset)
-                    {
-                        f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection01) / CHeightmapContainer::kLayerSectionOffset;
-                        red = glm::mix(255, 0, interpolation);
-                    }
-                    
-                    ui8 green = normalizedHeight > CHeightmapContainer::kLayerSection01 && normalizedHeight <= CHeightmapContainer::kLayerSection02 ? 255 : 0;
-                    if(normalizedHeight < CHeightmapContainer::kLayerSection01 &&
-                       normalizedHeight >= CHeightmapContainer::kLayerSection01 - CHeightmapContainer::kLayerSectionOffset)
-                    {
-                        f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection01 - CHeightmapContainer::kLayerSectionOffset)) / CHeightmapContainer::kLayerSectionOffset;
-                        green = glm::mix(0, 255, interpolation);
-                    }
-                    else if(normalizedHeight > CHeightmapContainer::kLayerSection02 &&
-                            normalizedHeight <= CHeightmapContainer::kLayerSection02 + CHeightmapContainer::kLayerSectionOffset)
-                    {
-                        f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection02) / CHeightmapContainer::kLayerSectionOffset;
-                        green = glm::mix(255, 0, interpolation);
-                    }
-                    
-                    ui8 blue = normalizedHeight > CHeightmapContainer::kLayerSection02 ? 255 : 0;
-                    if(normalizedHeight < CHeightmapContainer::kLayerSection02 &&
-                       normalizedHeight >= CHeightmapContainer::kLayerSection02 - CHeightmapContainer::kLayerSectionOffset)
-                    {
-                        f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection02 - CHeightmapContainer::kLayerSectionOffset)) / CHeightmapContainer::kLayerSectionOffset;
-                        blue = glm::mix(0, 255, interpolation);
-                    }
-                    
-                    f32 angle = glm::dot(glm::vec3(0.0f, 1.0f, 0.0f), normal);
-                    angle = glm::degrees(acosf(angle));
-                    assert(angle >= 0.0);
-                    angle = MIN_VALUE(angle / 45.0f, 1.0f);
-                    blue = MAX_VALUE(glm::mix(0, 255, angle), blue);
-                    
-                    pixels[index] = TO_RGB565(red, green, blue);
-                    
-                    offset.z += step.y;
-                }
-                offset.x += step.x;
-            }
-            verticesOffset.y += container->getChunkSize().y - 1;
+            ui32 index = x + y * kSplattingTextureMaskSize.x;
             
-            i32 index = 0;
-            for(ui32 x = 0; x < kSplattingTextureMaskSize.x; ++x)
+            pixels[index] = TO_RGB565(255, 0, 0);
+            f32 height = CHeightmapAccessor::getHeight(container, glm::vec3(offset.x + verticesOffset.x, 0.0f, offset.z + verticesOffset.y)) + CHeightmapContainer::kDeep;
+            glm::vec3 normal = CHeightmapAccessor::getNormal(container, glm::vec3(offset.x + verticesOffset.x, 0.0f, offset.z + verticesOffset.y));
+            
+            f32 normalizedHeight = height / maxHeight;
+            ui8 red = normalizedHeight <= CHeightmapContainer::kLayerSection01 ? 255 : 0;
+            if(normalizedHeight > CHeightmapContainer::kLayerSection01 &&
+               normalizedHeight <= CHeightmapContainer::kLayerSection01 + CHeightmapContainer::kLayerSectionOffset)
             {
-                for(ui32 y = 0; y < kSplattingTextureMaskSize.y; ++y)
-                {
-                    stream.write((char*)&pixels[index], sizeof(ui16));
-                    index++;
-                }
+                f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection01) / CHeightmapContainer::kLayerSectionOffset;
+                red = glm::mix(255, 0, interpolation);
             }
+            
+            ui8 green = normalizedHeight > CHeightmapContainer::kLayerSection01 && normalizedHeight <= CHeightmapContainer::kLayerSection02 ? 255 : 0;
+            if(normalizedHeight < CHeightmapContainer::kLayerSection01 &&
+               normalizedHeight >= CHeightmapContainer::kLayerSection01 - CHeightmapContainer::kLayerSectionOffset)
+            {
+                f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection01 - CHeightmapContainer::kLayerSectionOffset)) / CHeightmapContainer::kLayerSectionOffset;
+                green = glm::mix(0, 255, interpolation);
+            }
+            else if(normalizedHeight > CHeightmapContainer::kLayerSection02 &&
+                    normalizedHeight <= CHeightmapContainer::kLayerSection02 + CHeightmapContainer::kLayerSectionOffset)
+            {
+                f32 interpolation = (normalizedHeight - CHeightmapContainer::kLayerSection02) / CHeightmapContainer::kLayerSectionOffset;
+                green = glm::mix(255, 0, interpolation);
+            }
+            
+            ui8 blue = normalizedHeight > CHeightmapContainer::kLayerSection02 ? 255 : 0;
+            if(normalizedHeight < CHeightmapContainer::kLayerSection02 &&
+               normalizedHeight >= CHeightmapContainer::kLayerSection02 - CHeightmapContainer::kLayerSectionOffset)
+            {
+                f32 interpolation = (normalizedHeight - (CHeightmapContainer::kLayerSection02 - CHeightmapContainer::kLayerSectionOffset)) / CHeightmapContainer::kLayerSectionOffset;
+                blue = glm::mix(0, 255, interpolation);
+            }
+            
+            f32 angle = glm::dot(glm::vec3(0.0f, 1.0f, 0.0f), normal);
+            angle = glm::degrees(acosf(angle));
+            assert(angle >= 0.0);
+            angle = MIN_VALUE(angle / 45.0f, 1.0f);
+            blue = MAX_VALUE(glm::mix(0, 255, angle), blue);
+            
+            pixels[index] = TO_RGB565(red, green, blue);
+            
+            offset.z += step.y;
         }
-        verticesOffset.x += container->getChunkSize().x - 1;
+        offset.x += step.x;
     }
-    stream.close();
+    
+    if(stream && stream->is_open())
+    {
+        stream->write((char*)&pixels[0], sizeof(ui16) * kSplattingTextureMaskSize.x * kSplattingTextureMaskSize.y);
+    }
+    else
+    {
+        ui32 index = i + j * container->getChunksNum().x;
+        assert(container->getSplattingTextureMaskMmap(index)->getPointer());
+        memcpy(container->getSplattingTextureMaskMmap(index)->getPointer(), pixels, sizeof(ui16) * kSplattingTextureMaskSize.x * kSplattingTextureMaskSize.y);
+    }
     
     delete[] pixels;
     pixels = nullptr;

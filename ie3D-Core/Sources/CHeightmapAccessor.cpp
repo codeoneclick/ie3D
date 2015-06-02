@@ -513,6 +513,7 @@ void CHeightmapAccessor::updateVertices(const std::vector<glm::vec3>& vertices,
                 CHeightmapAccessor::createBoundingBox(i, j);
                 CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, index);
                 CHeightmapGeometryGenerator::generateTangentSpace(m_container, index);
+                CHeightmapTextureGenerator::generateSplattingMasks(m_container, i, j);
             }
         }
     }

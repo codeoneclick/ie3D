@@ -29,7 +29,8 @@ static const std::string kSplattingTextureM_MetadataFilename = "-splatting.textu
 static const std::string kSplattingTextureN_MetadataFilename = "-splatting.textures.n.data_";
 static const std::string kSplattingTextureH_MetadataFilename = "-splatting.textures.h.data_";
 static const std::string kSplattingTextures_MetadataFilename = "-splatting.textures.data_";
-static const std::string kTangentSpaceMetadataFilename = "-tangent.space.data_";
+static const std::string kTangentSpace_MetadataFilename = "-tangent.space.data_";
+static const std::string kAttachesToVBO_MetadataFilename = "-attaches.vbo.data_";
 
 ui32 CHeightmapLoader::g_heightmapGUID = 0;
 
@@ -259,10 +260,24 @@ std::string CHeightmapLoader::getSplattingTextures_MMapFilename(const std::strin
     return stringstream.str();
 }
 
-std::string CHeightmapLoader::getTangentSpaceMMAPFilename(const std::string& filename)
+std::string CHeightmapLoader::getTangentSpace_MMapFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kTangentSpaceMetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kTangentSpace_MetadataFilename<<g_heightmapGUID;
+    
+#if defined(__IOS__)
+    
+    return documentspath() + stringstream.str();
+    
+#endif
+    
+    return stringstream.str();
+}
+
+std::string CHeightmapLoader::getAttachesToVBO_MMapFilename(const std::string &filename)
+{
+    std::ostringstream stringstream;
+    stringstream<<filename<<kAttachesToVBO_MetadataFilename<<g_heightmapGUID;
     
 #if defined(__IOS__)
     
@@ -345,10 +360,19 @@ bool CHeightmapLoader::isSplattingTextures_MMapExist(const std::string& filename
     return isExist;
 }
 
-bool CHeightmapLoader::isTangentSpaceMMAPExist(const std::string &filename)
+bool CHeightmapLoader::isTangentSpace_MMapExist(const std::string &filename)
 {
-    std::ifstream stream(CHeightmapLoader::getTangentSpaceMMAPFilename(filename));
+    std::ifstream stream(CHeightmapLoader::getTangentSpace_MMapFilename(filename));
     bool isExist = stream.good();
     stream.close();
     return isExist;
 }
+
+bool CHeightmapLoader::isAttachesToVBO_MMapExist(const std::string &filename)
+{
+    std::ifstream stream(CHeightmapLoader::getAttachesToVBO_MMapFilename(filename));
+    bool isExist = stream.good();
+    stream.close();
+    return isExist;
+}
+
