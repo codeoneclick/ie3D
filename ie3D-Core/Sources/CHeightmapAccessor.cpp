@@ -19,14 +19,22 @@
 
 CHeightmapAccessor::CHeightmapAccessor(void) :
 m_container(std::make_shared<CHeightmapContainer>()),
-m_isGenerated(false)
+m_isGenerated(false),
+m_renderTechniqueAccessor(nullptr)
 {
     CHeightmapLoader::g_heightmapGUID++;
+    for(ui32 i = 0; i < E_SPLATTING_TEXTURE_MAX; ++i)
+    {
+        m_splattingTextures[i] = nullptr;
+    }
 }
 
 CHeightmapAccessor::~CHeightmapAccessor(void)
 {
-    
+    for(ui32 i = 0; i < E_SPLATTING_TEXTURE_MAX; ++i)
+    {
+        m_splattingTextures[i] = nullptr;
+    }
 }
 
 void CHeightmapAccessor::createLoadingOperations(void)
@@ -116,9 +124,15 @@ void CHeightmapAccessor::eraseChunkMetadata(i32 index)
 }
 
 void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                  const std::array<CSharedTexture, 3>& splattingTextures, const std::function<void(void)>& callback)
+                                  const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures, const std::function<void(void)>& callback)
 {
     m_isGenerated = false;
+    
+    for(ui32 i = 0; i < E_SPLATTING_TEXTURE_MAX; ++i)
+    {
+        m_splattingTextures[i] = splattingTextures[i];
+    }
+    m_renderTechniqueAccessor = renderTechniqueAccessor;
     
     CSharedThreadOperation completionOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     completionOperation->setExecutionBlock([this, callback](void) {
@@ -241,6 +255,20 @@ void CHeightmapAccessor::generateSplattingTexture(i32 index, E_LANDSCAPE_CHUNK_L
     ieGenerateMipmap(GL_TEXTURE_2D);
     
     std::get<2>(m_chunksMetadata[index]) = texture;
+}
+
+void CHeightmapAccessor::updateSplattingTexture(i32 index)
+{
+    CSharedTexture texture = std::get<2>(m_chunksMetadata[index]);
+    if(texture)
+    {
+        E_LANDSCAPE_CHUNK_LOD LOD = std::get<3>(m_chunksMetadata[index]);
+        texture->bind();
+        ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+                     m_container->getTexturesLODSize(LOD).x, m_container->getTexturesLODSize(LOD).y,
+                     0, GL_RGBA, GL_UNSIGNED_BYTE, m_container->getSplattingTexturesMmap(index, LOD)->getPointer());
+        ieGenerateMipmap(GL_TEXTURE_2D);
+    }
 }
 
 void CHeightmapAccessor::runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
@@ -465,11 +493,26 @@ glm::vec2 CHeightmapAccessor::getAngles(std::shared_ptr<CHeightmapContainer> con
     return glm::vec2(glm::degrees(acos(angle_02) - M_PI_2), glm::degrees(asin(angle_01)));
 }
 
+void CHeightmapAccessor::update(void)
+{
+    if(!m_updateHeightmapOperations.empty())
+    {
+        CSharedThreadOperation operation = m_updateHeightmapOperations.front();
+        if(!operation->isExecuted() && !operation->isCompleted() && !operation->isCanceled())
+        {
+            operation->addToExecutionQueue();
+        }
+        else if(operation->isCompleted() || operation->isCanceled())
+        {
+            m_updateHeightmapOperations.pop();
+        }
+    }
+}
+
 void CHeightmapAccessor::updateVertices(const std::vector<glm::vec3>& vertices,
                                         const glm::ivec2& minBound, const glm::ivec2& maxBound)
 {
     CHeightmapGeometryGenerator::updateVertices(m_container, vertices);
-    
     
     std::set<std::shared_ptr<CVertexBuffer>> updatedVBOs;
     for(ui32 i = 0; i < vertices.size(); ++i)
@@ -500,6 +543,20 @@ void CHeightmapAccessor::updateVertices(const std::vector<glm::vec3>& vertices,
         vbo->unlock();
     }
     
+    CSharedThreadOperation executedOperation = nullptr;
+    if(!m_updateHeightmapOperations.empty() && m_updateHeightmapOperations.front()->isExecuted())
+    {
+        executedOperation = m_updateHeightmapOperations.front();
+    }
+    while (!m_updateHeightmapOperations.empty())
+    {
+        m_updateHeightmapOperations.pop();
+    }
+    if(executedOperation)
+    {
+        m_updateHeightmapOperations.push(executedOperation);
+    }
+    
     for(ui32 i = 0; i < m_container->getChunksNum().x; ++i)
     {
         for(ui32 j = 0; j < m_container->getChunksNum().y; ++j)
@@ -511,9 +568,32 @@ void CHeightmapAccessor::updateVertices(const std::vector<glm::vec3>& vertices,
                CBoundingBox::isPointInXZ(glm::vec2(maxBound.x, maxBound.y), std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index])))
             {
                 CHeightmapAccessor::createBoundingBox(i, j);
-                CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, index);
-                CHeightmapGeometryGenerator::generateTangentSpace(m_container, index);
-                CHeightmapTextureGenerator::generateSplattingMasks(m_container, i, j);
+                
+                CSharedThreadOperation updateGeometryOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+                updateGeometryOperation->setExecutionBlock([this, i , j, index](void) {
+                    CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, index);
+                    CHeightmapGeometryGenerator::generateTangentSpace(m_container, index);
+                });
+                m_updateHeightmapOperations.push(updateGeometryOperation);
+                
+                CSharedThreadOperation updateSplattingMaskOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+                updateSplattingMaskOperation->setExecutionBlock([this, i , j](void) {
+
+                    CHeightmapTextureGenerator::generateSplattingMask(m_container, i, j);
+                });
+                m_updateHeightmapOperations.push(updateSplattingMaskOperation);
+                
+                CSharedThreadOperation updateSplattingTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+                updateSplattingTextureOperation->setExecutionBlock([this, i , j](void) {
+                    CHeightmapTextureGenerator::generateSplattingTexture(m_renderTechniqueAccessor, m_container, m_splattingTextures, i, j);
+                });
+                m_updateHeightmapOperations.push(updateSplattingTextureOperation);
+                
+                CSharedThreadOperation updateTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+                updateTexturesOperation->setExecutionBlock([this, index](void) {
+                    CHeightmapAccessor::updateSplattingTexture(index);
+                });
+                m_updateHeightmapOperations.push(updateTexturesOperation);
             }
         }
     }

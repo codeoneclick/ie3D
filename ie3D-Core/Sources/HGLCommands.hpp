@@ -448,6 +448,8 @@ inline void ieBindVertexArray(GLuint array)
 {
 #if defined(__OSX__)
     glBindVertexArray(array);
+#elif defined(__IOS__) && defined(__OPENGL_30__)
+    glBindVertexArray(array);
 #else
     glBindVertexArrayOES(array);
 #endif
@@ -461,6 +463,8 @@ inline void ieBindVertexArray(GLuint array)
 inline void ieDeleteVertexArrays(GLsizei n, const GLuint *arrays)
 {
 #if defined(__OSX__)
+    glDeleteVertexArrays(n, arrays);
+#elif defined(__IOS__) && defined(__OPENGL_30__)
     glDeleteVertexArrays(n, arrays);
 #else
     glDeleteVertexArraysOES(n, arrays);
@@ -476,6 +480,8 @@ inline void ieGenVertexArrays(GLsizei n, GLuint *arrays)
 {
 #if defined(__OSX__)
     glGenVertexArrays(n, arrays);
+#elif defined(__IOS__) && defined(__OPENGL_30__)
+     glGenVertexArrays(n, arrays);
 #else
     glGenVertexArraysOES(n, arrays);
 #endif

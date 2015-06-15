@@ -134,6 +134,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                 }
             }
         }
+        m_heightmapAccessor->update();
     }
 }
 

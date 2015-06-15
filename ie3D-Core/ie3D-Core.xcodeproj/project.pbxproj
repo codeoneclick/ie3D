@@ -237,6 +237,7 @@
 		2179741A19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
 		2179741B19F534FA00A98630 /* CGlobalLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2179741819F534FA00A98630 /* CGlobalLightSource.cpp */; };
 		2179741C19F534FA00A98630 /* CGlobalLightSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 2179741919F534FA00A98630 /* CGlobalLightSource.h */; };
+		217CEEF51B2987CA00778B7F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217CEEF41B2987CA00778B7F /* CoreVideo.framework */; };
 		217E55DB1AD7EB7B00F1DCBD /* CMeshExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */; };
 		217E55DC1AD7EB7B00F1DCBD /* CMeshExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */; };
 		217E55DD1AD7EB7B00F1DCBD /* CMeshExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 217E55DA1AD7EB7B00F1DCBD /* CMeshExtension.h */; };
@@ -622,7 +623,7 @@
 		213B7F2F1993CC5B006F3976 /* CShaderCompiler_GLSL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderCompiler_GLSL.cpp; path = Sources/CShaderCompiler_GLSL.cpp; sourceTree = "<group>"; };
 		213B7F301993CC5B006F3976 /* CShaderCompiler_GLSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderCompiler_GLSL.h; path = Sources/CShaderCompiler_GLSL.h; sourceTree = "<group>"; };
 		213B7F361994B78C006F3976 /* ShaderTexure2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ShaderTexure2D.cpp; path = Sources/ShaderTexure2D.cpp; sourceTree = "<group>"; };
-		213B7F371994CDFC006F3976 /* CRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRenderTarget.cpp; path = Sources/CRenderTarget.cpp; sourceTree = "<group>"; };
+		213B7F371994CDFC006F3976 /* CRenderTarget.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CRenderTarget.cpp; path = Sources/CRenderTarget.cpp; sourceTree = "<group>"; };
 		213B7F381994CDFC006F3976 /* CRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRenderTarget.h; path = Sources/CRenderTarget.h; sourceTree = "<group>"; };
 		21457FE7181C4BEA0071839E /* IFabricator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IFabricator.cpp; path = Sources/IFabricator.cpp; sourceTree = "<group>"; };
 		21457FE8181C4BEA0071839E /* IFabricator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IFabricator.h; path = Sources/IFabricator.h; sourceTree = "<group>"; };
@@ -671,6 +672,7 @@
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
 		217BB29E1815A48700DB8ECC /* CQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CQuad.h; path = Sources/CQuad.h; sourceTree = "<group>"; };
 		217BB2B21815BDFD00DB8ECC /* CGameLoopExecutor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGameLoopExecutor.cpp; path = Sources/CGameLoopExecutor.cpp; sourceTree = "<group>"; };
+		217CEEF41B2987CA00778B7F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		217E55D91AD7EB7B00F1DCBD /* CMeshExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshExtension.cpp; path = Sources/CMeshExtension.cpp; sourceTree = "<group>"; };
 		217E55DA1AD7EB7B00F1DCBD /* CMeshExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshExtension.h; path = Sources/CMeshExtension.h; sourceTree = "<group>"; };
 		21853415181EFC6200315CBB /* libie3DCore-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libie3DCore-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1190,6 +1192,7 @@
 				21D0723A181DA6F10019D264 /* UIKit.framework in Frameworks */,
 				21D07239181DA6EB0019D264 /* OpenGLES.framework in Frameworks */,
 				21D07238181DA6E60019D264 /* QuartzCore.framework in Frameworks */,
+				217CEEF51B2987CA00778B7F /* CoreVideo.framework in Frameworks */,
 				21D0712B181DA5620019D264 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1782,6 +1785,7 @@
 		A420815D1733A9370004729E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				217CEEF41B2987CA00778B7F /* CoreVideo.framework */,
 				217317491821AE6700FF3D1E /* OpenGL.framework */,
 				2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */,
 				A4C7034818030DCF00B3DEEC /* CoreAudio.framework */,

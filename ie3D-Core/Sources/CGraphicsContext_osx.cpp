@@ -38,6 +38,8 @@ public:
 	CGraphicsContext_osx(ISharedOGLWindowRef window);
     ~CGraphicsContext_osx(void);
     
+    void* getAPIContext(void) const;
+    
     void makeCurrent(void) const;
     void draw(void) const;
     
@@ -86,6 +88,11 @@ CGraphicsContext_osx::CGraphicsContext_osx(ISharedOGLWindowRef window)
 CGraphicsContext_osx::~CGraphicsContext_osx(void)
 {
 
+}
+
+void* CGraphicsContext_osx::getAPIContext(void) const
+{
+    return (__bridge void *)m_context;
 }
 
 void CGraphicsContext_osx::makeCurrent(void) const

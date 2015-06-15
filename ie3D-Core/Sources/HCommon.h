@@ -37,19 +37,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#if defined(DEBUG)
-
-#endif
-
-#if defined(__IOS__) || defined(__OSX__)
-
-#elif defined(__WIN32__)
-
-#define M_PI 3.14f
-#define M_PI_2 1.57f
-
-#endif
-
 #include "HGLCommands.hpp"
 
 #include <libpng-1.6.9/png.h>

@@ -11,7 +11,8 @@
 
 CRenderTarget::CRenderTarget(ISharedGraphicsContextRef graphicsContext, GLint format, ui32 width, ui32 height) :
 m_graphicsContext(graphicsContext),
-m_size(glm::ivec2(width, height))
+m_size(glm::ivec2(width, height)),
+m_format(format)
 {
     ieGenTextures(1, &m_colorAttachment);
     ieBindTexture(GL_TEXTURE_2D, m_colorAttachment);
@@ -64,8 +65,12 @@ void CRenderTarget::begin(void)
     ieViewport(0, 0, m_size.x, m_size.y);
 }
 
-void CRenderTarget::end(void)
+void CRenderTarget::end(ui8* data)
 {
+    if(data)
+    {
+        glReadPixels(0, 0, m_size.x, m_size.y, m_format, GL_UNSIGNED_BYTE, data);
+    }
     assert(m_graphicsContext != nullptr);
     ieBindFramebuffer(GL_FRAMEBUFFER, m_graphicsContext->getFrameBuffer());
     ieViewport(0, 0, m_graphicsContext->getWidth(), m_graphicsContext->getHeight());

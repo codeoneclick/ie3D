@@ -21,11 +21,14 @@ private:
     
     std::shared_ptr<CHeightmapContainer> m_container;
     bool m_isGenerated;
+    ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
     
     std::vector<CSharedThreadOperation> m_executedOperations;
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, std::function<void(CSharedTextureRef)>>> m_callbacks;
     std::vector<std::tuple<CSharedMesh, CSharedQuadTree, CSharedTexture, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
+    std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX> m_splattingTextures;
+    std::queue<CSharedThreadOperation> m_updateHeightmapOperations;
     
     void createLoadingOperations(void);
     void eraseLoadingOperations(void);
@@ -42,6 +45,7 @@ private:
     void generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(i32 index);
     void generateSplattingTexture(i32 index, E_LANDSCAPE_CHUNK_LOD LOD);
+    void updateSplattingTexture(i32 index);
     
     static f32 getAngle(const glm::vec3& point_01,
                         const glm::vec3& point_02,
@@ -76,7 +80,7 @@ public:
                     const std::function<void(CSharedTextureRef)>& textureLoadingCallback);
     void runUnLoading(i32 i, i32 j);
     
-    
+    void update(void);
     void updateVertices(const std::vector<glm::vec3>& vertices,
                         const glm::ivec2& minBound, const glm::ivec2& maxBound);
 };

@@ -23,6 +23,7 @@ protected:
     ui32 m_depthAttachment;
     
     glm::ivec2 m_size;
+    GLint m_format;
     
     ISharedGraphicsContext m_graphicsContext;
     
@@ -33,7 +34,7 @@ public:
     
     void clear(void);
     void begin(void);
-    void end(void);
+    void end(ui8* data = nullptr);
 };
 
 #endif
