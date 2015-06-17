@@ -12,6 +12,7 @@
 #include "IGameObject.h"
 #include "HDeclaration.h"
 #include "IEditableLandscape.h"
+#include "CHeightmapGeneratorStatistic.h"
 
 class CLandscape : public IGameObject,
 public IEditableLandscape
@@ -57,6 +58,8 @@ public:
     
     f32 getHeight(const glm::vec3& position) const;
     glm::vec2 getAngles(const glm::vec3& position) const;
+    
+    void setGeneratorStatisticCallback(CHeightmapGeneratorStatistic::T_STATISTIC_CALLBACK callback);
 };
 
 #endif

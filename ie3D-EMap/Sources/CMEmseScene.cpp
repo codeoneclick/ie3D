@@ -163,6 +163,8 @@ void CMEmseScene::load(void)
     m_root->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
     
     m_landscape->addConfigurationLoadedCallback(std::bind(&CMEmseScene::onConfigurationLoaded, this, std::placeholders::_1));
+    m_landscape->setGeneratorStatisticCallback(std::bind(&CMEmseScene::generatorStatisticsUpdate, this,
+                                                         std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
     
     m_globalLightSource->setAngle(3.0);
     m_globalLightSource->setDistanceToSun(512.0);
@@ -638,4 +640,12 @@ void CMEmseScene::addGameObjectToScene(const std::string& configurationFilename)
     m_gameObjectBrush->setPosition(model->getPosition());
     m_models.push_back(model);
     m_selectedGameObject = model;
+}
+
+void CMEmseScene::generatorStatisticsUpdate(const std::string& operationName, E_HEIGHTMAP_GENERATION_STATUS status, const std::string& message)
+{
+    m_sceneToUICommands->execute<UICommandMSEUpdateHeightmapGenerationStatistic::COMMAND>(UICommandMSEUpdateHeightmapGenerationStatistic::GUID,
+                                                                                          operationName,
+                                                                                          status,
+                                                                                          message);
 }

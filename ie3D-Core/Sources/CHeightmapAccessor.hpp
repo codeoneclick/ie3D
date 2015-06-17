@@ -32,3 +32,8 @@ inline const std::tuple<glm::vec3, glm::vec3> CHeightmapAccessor::getChunkBounds
     assert(index >= 0 && index < m_chunksBounds.size());
     return m_chunksBounds[index];
 }
+
+inline CSharedHeightmapGeneratorStatistic CHeightmapAccessor::getGeneratorStatistic(void) const
+{
+    return m_generatorStatistic;
+}

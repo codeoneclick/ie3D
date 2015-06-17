@@ -22,16 +22,19 @@ protected:
     void onRotationChanged(const glm::vec3& rotation);
     
     ISharedGameObject m_gameObject;
+    CSharedLandscape m_landscape;
     CSharedCamera m_camera;
     
     glm::vec3 m_position;
     glm::vec3 m_rotation;
+    glm::vec3 m_cameraPrecomputedDistance;
     
     f32 m_speed;
     
 public:
     
     ICharacterController(ISharedGameObjectRef gameObject,
+                         CSharedLandscapeRef landscape,
                          CSharedCameraRef camera);
     ~ICharacterController(void);
     

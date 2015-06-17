@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'CMainWindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.4.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -82,6 +82,7 @@ public:
     QListWidget *m_modelsList;
     QPushButton *m_addModelToSceneButton;
     QWidget *m_oglWindow;
+    QLabel *m_heightmapGenerationStatisticLabel;
     QWidget *m_gameObjectTab;
     QWidget *m_gameObjectGLWindow;
     QTabWidget *m_goeSettingsTab;
@@ -431,8 +432,16 @@ public:
         m_oglWindow = new QWidget(m_sceneTab);
         m_oglWindow->setObjectName(QStringLiteral("m_oglWindow"));
         m_oglWindow->setEnabled(true);
-        m_oglWindow->setGeometry(QRect(0, 0, 930, 756));
+        m_oglWindow->setGeometry(QRect(0, 0, 930, 761));
         m_oglWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
+        m_heightmapGenerationStatisticLabel = new QLabel(m_sceneTab);
+        m_heightmapGenerationStatisticLabel->setObjectName(QStringLiteral("m_heightmapGenerationStatisticLabel"));
+        m_heightmapGenerationStatisticLabel->setGeometry(QRect(130, 350, 671, 71));
+        QFont font3;
+        font3.setFamily(QStringLiteral("Menlo"));
+        font3.setPointSize(18);
+        m_heightmapGenerationStatisticLabel->setFont(font3);
+        m_heightmapGenerationStatisticLabel->setAlignment(Qt::AlignCenter);
         m_mainMenuTabs->addTab(m_sceneTab, QString());
         m_gameObjectTab = new QWidget();
         m_gameObjectTab->setObjectName(QStringLiteral("m_gameObjectTab"));
@@ -445,9 +454,9 @@ public:
         m_goeSettingsTab->setObjectName(QStringLiteral("m_goeSettingsTab"));
         m_goeSettingsTab->setEnabled(true);
         m_goeSettingsTab->setGeometry(QRect(930, -4, 351, 760));
-        QFont font3;
-        font3.setFamily(QStringLiteral("Menlo"));
-        m_goeSettingsTab->setFont(font3);
+        QFont font4;
+        font4.setFamily(QStringLiteral("Menlo"));
+        m_goeSettingsTab->setFont(font4);
         m_goeSettingsTab->setTabPosition(QTabWidget::West);
         m_goeSettingsTab->setDocumentMode(true);
         m_goeSettingsTab->setMovable(true);
@@ -461,7 +470,7 @@ public:
         m_goeMaterialsSettingTab = new QWidget();
         m_goeMaterialsSettingTab->setObjectName(QStringLiteral("m_goeMaterialsSettingTab"));
         m_goeMaterialsSettingTab->setEnabled(true);
-        m_goeMaterialsSettingTab->setFont(font3);
+        m_goeMaterialsSettingTab->setFont(font4);
         m_materialsComboBox = new QComboBox(m_goeMaterialsSettingTab);
         m_materialsComboBox->setObjectName(QStringLiteral("m_materialsComboBox"));
         m_materialsComboBox->setGeometry(QRect(20, 60, 280, 26));
@@ -621,7 +630,7 @@ public:
         retranslateUi(CMainWindow);
 
         m_mainMenuTabs->setCurrentIndex(0);
-        m_landscapePropertiesTab->setCurrentIndex(0);
+        m_landscapePropertiesTab->setCurrentIndex(2);
         m_goeSettingsTab->setCurrentIndex(1);
 
 
@@ -660,6 +669,7 @@ public:
         m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(m_landscapeTexturesTab), QApplication::translate("CMainWindow", "Textures", 0));
         m_addModelToSceneButton->setText(QApplication::translate("CMainWindow", "Add To Scene...", 0));
         m_landscapePropertiesTab->setTabText(m_landscapePropertiesTab->indexOf(m_landscapeGameobjectsTab), QApplication::translate("CMainWindow", "Models", 0));
+        m_heightmapGenerationStatisticLabel->setText(QApplication::translate("CMainWindow", "Generation Statistics", 0));
         m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(m_sceneTab), QApplication::translate("CMainWindow", "Scene", 0));
         m_createGameObjectConfiguration->setText(QApplication::translate("CMainWindow", "Create configuration...", 0));
         m_goeSettingsTab->setTabText(m_goeSettingsTab->indexOf(m_goeMainSettingTab), QApplication::translate("CMainWindow", "Configuration", 0));

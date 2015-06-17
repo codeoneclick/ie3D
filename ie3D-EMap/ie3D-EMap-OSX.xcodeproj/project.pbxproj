@@ -820,8 +820,8 @@
 				21F5E1041ADE8ACA002E08FA /* CMELandscapeBrush.h */,
 				21F5E1051ADE8ACA002E08FA /* CMEModelBrush.cpp */,
 				21F5E1061ADE8ACA002E08FA /* CMEModelBrush.h */,
-				21F5E1071ADE8ACA002E08FA /* CMEmseScene.cpp */,
 				21F5E1081ADE8ACA002E08FA /* CMEmseScene.h */,
+				21F5E1071ADE8ACA002E08FA /* CMEmseScene.cpp */,
 				21F5E1091ADE8ACA002E08FA /* CMEmseTransition.cpp */,
 				21F5E10A1ADE8ACA002E08FA /* CMEmseTransition.h */,
 				21F5E10B1ADE8ACA002E08FA /* CMESceneFabricator.cpp */,
@@ -830,8 +830,8 @@
 				21F5E10E1ADE8ACA002E08FA /* HMEEnums.h */,
 				21F5E10F1ADE8ACA002E08FA /* HUICommands.h */,
 				09BF715167B7A0149FD2FBB8 /* main.cpp */,
-				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
 				A4024724E546B6C12F58CF61 /* CMainWindow.h */,
+				9D88140FBB133F956E1F6166 /* CMainWindow.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<Group>";

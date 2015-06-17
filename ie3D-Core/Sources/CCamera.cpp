@@ -28,7 +28,7 @@ CCamera::~CCamera(void)
 
 void CCamera::onSceneUpdate(f32 deltatime)
 {
-    m_position.y = m_lookAt.y + m_distance.y;
+    m_position.y = m_distance.y;
     m_position.x = m_lookAt.x + cosf(-m_rotation) * -m_distance.x;
     m_position.z = m_lookAt.z + sinf(-m_rotation) * -m_distance.z;
     m_matrixV = glm::lookAt(m_position, m_lookAt, m_up);

@@ -203,6 +203,9 @@
 		2162096D19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096B19A3364200DECBBC /* CThreadOperationPool.cpp */; };
 		2162096E19A3364200DECBBC /* CThreadOperationPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2162096B19A3364200DECBBC /* CThreadOperationPool.cpp */; };
 		2162096F19A3364200DECBBC /* CThreadOperationPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 2162096C19A3364200DECBBC /* CThreadOperationPool.h */; };
+		2172274F1B317399003F1119 /* CHeightmapGeneratorStatistic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2172274D1B317399003F1119 /* CHeightmapGeneratorStatistic.cpp */; };
+		217227501B317399003F1119 /* CHeightmapGeneratorStatistic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2172274D1B317399003F1119 /* CHeightmapGeneratorStatistic.cpp */; };
+		217227511B317399003F1119 /* CHeightmapGeneratorStatistic.h in Headers */ = {isa = PBXBuildFile; fileRef = 2172274E1B317399003F1119 /* CHeightmapGeneratorStatistic.h */; };
 		2173174A1821AE6700FF3D1E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217317491821AE6700FF3D1E /* OpenGL.framework */; };
 		21733477196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */; };
 		21733478196440EB002B3F90 /* IRenderTechniqueBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21733475196440EB002B3F90 /* IRenderTechniqueBase.cpp */; };
@@ -644,6 +647,8 @@
 		2162096B19A3364200DECBBC /* CThreadOperationPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CThreadOperationPool.cpp; path = Sources/CThreadOperationPool.cpp; sourceTree = "<group>"; };
 		2162096C19A3364200DECBBC /* CThreadOperationPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CThreadOperationPool.h; path = Sources/CThreadOperationPool.h; sourceTree = "<group>"; };
 		216E479D199A905A00632243 /* HShaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HShaders.h; path = Sources/HShaders.h; sourceTree = "<group>"; };
+		2172274D1B317399003F1119 /* CHeightmapGeneratorStatistic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CHeightmapGeneratorStatistic.cpp; path = Sources/CHeightmapGeneratorStatistic.cpp; sourceTree = "<group>"; };
+		2172274E1B317399003F1119 /* CHeightmapGeneratorStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHeightmapGeneratorStatistic.h; path = Sources/CHeightmapGeneratorStatistic.h; sourceTree = "<group>"; };
 		2172A02C18F337D300D4D317 /* HDeclaration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HDeclaration.h; path = Sources/HDeclaration.h; sourceTree = "<group>"; };
 		2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_osx.cpp; path = Sources/COGLWindow_osx.cpp; sourceTree = "<group>"; };
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
@@ -1734,6 +1739,8 @@
 				21DE58EE1B008C0700D60DC5 /* CHeightmapAccessor.h */,
 				21DE58ED1B008C0700D60DC5 /* CHeightmapAccessor.cpp */,
 				21BDBAB61B04C5CA0071AE1D /* CHeightmapAccessor.hpp */,
+				2172274E1B317399003F1119 /* CHeightmapGeneratorStatistic.h */,
+				2172274D1B317399003F1119 /* CHeightmapGeneratorStatistic.cpp */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -2326,6 +2333,7 @@
 				21F4F5BE1AB6E0E90095477F /* vector_access.hpp in Headers */,
 				21F4F5B21AB6E0E90095477F /* reciprocal.hpp in Headers */,
 				2173348819644139002B3F90 /* CRenderTechniqueWorldSpace.h in Headers */,
+				217227511B317399003F1119 /* CHeightmapGeneratorStatistic.h in Headers */,
 				21F4F54F1AB6E0E90095477F /* _fixes.hpp in Headers */,
 				21F4F5891AB6E0E90095477F /* color_cast.hpp in Headers */,
 				21F4F5941AB6E0E90095477F /* fast_square_root.hpp in Headers */,
@@ -2546,6 +2554,7 @@
 				21DE58DC1B008B4400D60DC5 /* CHeightmapGeometryGenerator.cpp in Sources */,
 				21208FD21906FB5F00FFC8D4 /* IGraph.cpp in Sources */,
 				2191CE50196EDBEF00CE2813 /* pngerror.c in Sources */,
+				217227501B317399003F1119 /* CHeightmapGeneratorStatistic.cpp in Sources */,
 				2127E85C1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
 				212092B119195F4D00FFC8D4 /* CCubemapTexture.cpp in Sources */,
 				2191CE6E196EDBEF00CE2813 /* pngwutil.c in Sources */,
@@ -2729,6 +2738,7 @@
 				21DE58DB1B008B4400D60DC5 /* CHeightmapGeometryGenerator.cpp in Sources */,
 				213266161906A4AF001C98F7 /* IGraph.cpp in Sources */,
 				2191CE4F196EDBEF00CE2813 /* pngerror.c in Sources */,
+				2172274F1B317399003F1119 /* CHeightmapGeneratorStatistic.cpp in Sources */,
 				2127E85B1935056100D408C9 /* IEditableLandscape.cpp in Sources */,
 				212092AE19195CD000FFC8D4 /* CCubemapTexture.cpp in Sources */,
 				2191CE6D196EDBEF00CE2813 /* pngwutil.c in Sources */,

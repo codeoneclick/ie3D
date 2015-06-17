@@ -16,11 +16,14 @@
 #include "CQuadTree.h"
 #include "CTexture.h"
 #include "CBoundingBox.h"
+#include "CHeightmapGeneratorStatistic.h"
+#include "HEnums.h"
 
 CHeightmapAccessor::CHeightmapAccessor(void) :
 m_container(std::make_shared<CHeightmapContainer>()),
 m_isGenerated(false),
-m_renderTechniqueAccessor(nullptr)
+m_renderTechniqueAccessor(nullptr),
+m_generatorStatistic(std::make_shared<CHeightmapGeneratorStatistic>())
 {
     CHeightmapLoader::g_heightmapGUID++;
     for(ui32 i = 0; i < E_SPLATTING_TEXTURE_MAX; ++i)
@@ -127,6 +130,7 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
                                   const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures, const std::function<void(void)>& callback)
 {
     m_isGenerated = false;
+    m_generatorStatistic->update("Heightmap Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
     
     for(ui32 i = 0; i < E_SPLATTING_TEXTURE_MAX; ++i)
     {
@@ -138,6 +142,7 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
     completionOperation->setExecutionBlock([this, callback](void) {
         m_isGenerated = true;
         callback();
+        m_generatorStatistic->update("Heightmap Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
     });
     
     CSharedThreadOperation generateGeometryOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
@@ -147,7 +152,9 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
         
         m_container->init(std::get<0>(heights));
         
+        m_generatorStatistic->update("Geometry Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         CHeightmapGeometryGenerator::generate(m_container, filename, std::get<0>(heights), std::get<1>(heights));
+        m_generatorStatistic->update("Geometry Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
         CHeightmapAccessor::createLoadingOperations();
         CHeightmapAccessor::createMetadataContainers();
     });
@@ -156,11 +163,25 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
     CSharedThreadOperation mmapGeometryOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     mmapGeometryOperation->setExecutionBlock([this, filename](void) {
        
+        m_generatorStatistic->update("MMAP Geometry...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         m_container->mmapGeometry(filename);
+        m_generatorStatistic->update("MMAP Geometry...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
+        
+        m_generatorStatistic->update("Smooth Textcoord Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, filename);
+        m_generatorStatistic->update("Smooth Textcoord Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
+        
+        m_generatorStatistic->update("Tangent Space Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         CHeightmapGeometryGenerator::generateTangentSpace(m_container, filename);
+        m_generatorStatistic->update("Tangent Space Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
+        
+        m_generatorStatistic->update("VBO Attaches Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         CHeightmapGeometryGenerator::generateAttachesToVBO(m_container, filename);
+        m_generatorStatistic->update("VBO Attaches Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
+        
+        m_generatorStatistic->update("Bounding Boxes Creation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         CHeightmapAccessor::createBoundingBoxes();
+        m_generatorStatistic->update("Bounding Boxes Creation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
         
     });
     completionOperation->addDependency(mmapGeometryOperation);
@@ -168,28 +189,36 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
     CSharedThreadOperation generateSplattingMasksOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     generateSplattingMasksOperation->setExecutionBlock([this, filename](void) {
         
+        m_generatorStatistic->update("Splatting Masks Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         CHeightmapTextureGenerator::generateSplattingMasks(m_container, filename);
+        m_generatorStatistic->update("Splatting Masks Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
     });
     completionOperation->addDependency(generateSplattingMasksOperation);
     
     CSharedThreadOperation mmapMasksOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     mmapMasksOperation->setExecutionBlock([this, filename](void) {
         
+        m_generatorStatistic->update("MMAP Splatting Masks...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         m_container->mmapMasks(filename);
+        m_generatorStatistic->update("MMAP Splatting Masks...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
     });
     completionOperation->addDependency(mmapMasksOperation);
     
     CSharedThreadOperation generateSplattingTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     generateSplattingTexturesOperation->setExecutionBlock([this, filename, renderTechniqueAccessor, splattingTextures](void) {
         
+        m_generatorStatistic->update("Splatting Textures Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         CHeightmapTextureGenerator::generateSplattingTextures(renderTechniqueAccessor, m_container, filename, splattingTextures);
+        m_generatorStatistic->update("Splatting Textures Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
     });
     completionOperation->addDependency(generateSplattingTexturesOperation);
     
     CSharedThreadOperation mmapTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     mmapTexturesOperation->setExecutionBlock([this, filename](void) {
         
+        m_generatorStatistic->update("MMAP Splatting Textures...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         m_container->mmapTextures(filename);
+        m_generatorStatistic->update("MMAP Splatting Textures...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
     });
     completionOperation->addDependency(mmapTexturesOperation);
     

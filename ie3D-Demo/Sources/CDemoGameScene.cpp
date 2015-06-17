@@ -135,6 +135,7 @@ void CDemoGameScene::load(void)
     m_root->addCollisionHandler(shared_from_this());
     
     m_characterController = std::make_shared<ICharacterController>(m_models["model_01"],
+                                                                   m_landscape,
                                                                    m_camera);
     
     m_gameObjectNavigator = std::make_shared<CGameObjectNavigator>(0.5,

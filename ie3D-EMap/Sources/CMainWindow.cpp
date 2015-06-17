@@ -128,6 +128,14 @@ void CMainWindow::execute(void)
     m_mseSceneToUICommands->addCommand(UICommandMSESetTillingTexcoord::GUID,
                                        command);
     
+    command = std::make_shared<CCommand<UICommandMSEUpdateHeightmapGenerationStatistic::COMMAND>>(std::bind(&CMainWindow::generatorStatisticsUpdate, this,
+                                                                                                            std::placeholders::_1,
+                                                                                                            std::placeholders::_2,
+                                                                                                            std::placeholders::_3));
+    
+    m_mseSceneToUICommands->addCommand(UICommandMSEUpdateHeightmapGenerationStatistic::GUID,
+                                       command);
+    
     command = std::make_shared<CCommand<UICommandGOEUpdateConfigurationsMaterials::COMMAND>>(std::bind(&CMainWindow::updateGOEConfigurationsMaterials,
                                                                                                        this,
                                                                                                        std::placeholders::_1));
@@ -147,6 +155,7 @@ void CMainWindow::execute(void)
     m_mseController->addTransition(m_mseTransition);
     m_mseController->gotoTransition("transition.mse.xml");
     m_mseTransition->setSceneToUICommands(m_mseSceneToUICommands);
+    ui->m_oglWindow->setVisible(false);
     
     NSView *goeView =reinterpret_cast<NSView*>(ui->m_gameObjectGLWindow->winId());
     NSOpenGLView *goeOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
@@ -880,4 +889,14 @@ void CMainWindow::commitCurrentConfigurationMaterial(void)
         m_goeTransition->getUIToSceneCommands()->execute<UICommandGOEUpdateConfigurationMaterial::COMMAND>(UICommandGOEUpdateConfigurationMaterial::GUID,
                                                                                                            configuration);
     }
+}
+
+void CMainWindow::generatorStatisticsUpdate(const std::string& operationName, E_HEIGHTMAP_GENERATION_STATUS status, const std::string&)
+{
+    if(operationName == "Heightmap Generation..." && status == E_HEIGHTMAP_GENERATION_STATUS_ENDED)
+    {
+        ui->m_oglWindow->setVisible(true);
+        ui->m_heightmapGenerationStatisticLabel->setVisible(false);
+    }
+    ui->m_heightmapGenerationStatisticLabel->setText(QString::fromUtf8(operationName.c_str()));
 }

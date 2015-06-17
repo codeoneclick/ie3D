@@ -356,4 +356,8 @@ class CVertexArrayBuffer;
 typedef std::shared_ptr<CVertexArrayBuffer> CSharedVertexArrayBuffer;
 typedef const CSharedVertexArrayBuffer& CSharedVertexArrayBufferRef;
 
+class CHeightmapGeneratorStatistic;
+typedef std::shared_ptr<CHeightmapGeneratorStatistic> CSharedHeightmapGeneratorStatistic;
+typedef const CSharedHeightmapGeneratorStatistic& CSharedHeightmapGeneratorStatisticRef;
+
 #endif

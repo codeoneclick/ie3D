@@ -26,6 +26,7 @@ CLandscape::CLandscape(CSharedResourceAccessorRef resourceAccessor,
 IGameObject(resourceAccessor, renderTechniqueAccessor),
 m_preprocessSplattingTextureMaterial(nullptr)
 {
+    m_heightmapAccessor = std::make_shared<CHeightmapAccessor>();
 }
 
 CLandscape::~CLandscape(void)
@@ -55,15 +56,15 @@ E_LANDSCAPE_CHUNK_LOD CLandscape::getLOD(const glm::vec3& point,
                                  (maxBound.z - minBound.z) / 2.0 + minBound.z);
     f32 distance = glm::distance(glm::vec2(point.x, point.z), center);
     E_LANDSCAPE_CHUNK_LOD LOD = E_LANDSCAPE_CHUNK_LOD_04;
-    if(CLandscape::isPointInBoundPlane(point, minBound, maxBound))
+    if(distance < 128.0)
     {
         LOD = E_LANDSCAPE_CHUNK_LOD_01;
     }
-    else if(distance < 128.0)
+    else if(distance < 192.0)
     {
         LOD = E_LANDSCAPE_CHUNK_LOD_02;
     }
-    else if(distance < 192.0)
+    else if(distance < 256.0)
     {
         LOD = E_LANDSCAPE_CHUNK_LOD_03;
     }
@@ -149,7 +150,7 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     assert(m_resourceAccessor != nullptr);
     assert(m_renderTechniqueAccessor != nullptr);
     
-    m_heightmapAccessor = std::make_shared<CHeightmapAccessor>();
+    
     //m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapGenerator->createSplattingTexture());
     //m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapGenerator->createHeightmapTexture());
     
@@ -290,4 +291,10 @@ f32 CLandscape::getHeight(const glm::vec3& position) const
 glm::vec2 CLandscape::getAngles(const glm::vec3& position) const
 {
     return m_status & E_LOADING_STATUS_TEMPLATE_LOADED ? m_heightmapAccessor->getAngles(position) : glm::vec2(0.0f);
+}
+
+void CLandscape::setGeneratorStatisticCallback(CHeightmapGeneratorStatistic::T_STATISTIC_CALLBACK callback)
+{
+    assert(m_heightmapAccessor);
+    m_heightmapAccessor->getGeneratorStatistic()->setCallback(callback);
 }

@@ -18,6 +18,7 @@
 #include "CQuad.h"
 #include "IGraphicsContext.h"
 
+const f32 CHeightmapTextureGenerator::kMaxSplattingTextureHeight = 32.0f;
 const ui8 CHeightmapTextureGenerator::kSplattingTextureChannels = 4;
 const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureMaskSize = glm::ivec2(64);
 const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureSize_LOD1 = glm::ivec2(1024);
@@ -102,8 +103,7 @@ void CHeightmapTextureGenerator::generateSplattingMask(const std::shared_ptr<CHe
                                static_cast<f32>(container->getChunkSize().y) / static_cast<f32>(kSplattingTextureMaskSize.y));
     
     glm::vec3 offset = glm::vec3(0.0f);
-    
-    f32 maxHeight = fabsf(container->getMaxHeight()) + fabsf(container->getMinHeight());
+    f32 maxHeight = kMaxSplattingTextureHeight;
     
     ui16* pixels = new ui16[kSplattingTextureMaskSize.x * kSplattingTextureMaskSize.y];
     

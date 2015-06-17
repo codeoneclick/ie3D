@@ -276,7 +276,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -1171,11 +1171,33 @@
         <x>0</x>
         <y>0</y>
         <width>930</width>
-        <height>756</height>
+        <height>761</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="m_heightmapGenerationStatisticLabel">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>350</y>
+        <width>671</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Menlo</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Generation Statistics</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </widget>

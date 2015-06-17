@@ -33,6 +33,7 @@ protected:
     
 public:
     
+    static const f32 kMaxSplattingTextureHeight;
     static const ui8 kSplattingTextureChannels;
     static const glm::ivec2 kSplattingTextureMaskSize;
     static const glm::ivec2 kSplattingTextureSize_LOD1;

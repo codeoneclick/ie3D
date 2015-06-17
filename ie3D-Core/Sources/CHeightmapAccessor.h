@@ -22,6 +22,7 @@ private:
     std::shared_ptr<CHeightmapContainer> m_container;
     bool m_isGenerated;
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
+    CSharedHeightmapGeneratorStatistic m_generatorStatistic;
     
     std::vector<CSharedThreadOperation> m_executedOperations;
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, std::function<void(CSharedTextureRef)>>> m_callbacks;
@@ -62,6 +63,7 @@ public:
     inline glm::ivec2 getChunksNum(void) const;
     inline glm::ivec2 getChunkSize(void) const;
     inline const std::tuple<glm::vec3, glm::vec3> getChunkBounds(ui32 i, ui32 j) const;
+    inline CSharedHeightmapGeneratorStatistic getGeneratorStatistic(void) const;
     
     f32 getHeight(const glm::vec3& position) const;
     glm::vec3 getNormal(const glm::vec3& position) const;

@@ -14,6 +14,10 @@
 #define SPACE_BUTTON 32
 #define ALT_BUTTON 33
 
+
+const f32 kMinCameraHeight = 0.0f;
+const f32 kMaxCameraHeight = 25.0f;
+
 std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>> g_triangles;
 std::once_flag g_createTrianglesOnce;
 
@@ -186,7 +190,7 @@ void CMapDragController::update(f32 deltatime)
         f32 landscapeHeight = m_landscape->getHeight(cameraPosition);
         if(landscapeHeight > m_camera->getDistanceToLookAt().y + m_camera->getLookAt().y)
         {
-            m_cameraPrecomputedDistance.y = landscapeHeight + 2.0f;
+            m_cameraPrecomputedDistance.y = m_landscape->getHeight(cameraPosition) + kMaxCameraHeight;
         }
     }
     
@@ -196,6 +200,8 @@ void CMapDragController::update(f32 deltatime)
     
     glm::vec3 currentCameraDistanceToLookAt = glm::mix(m_camera->getDistanceToLookAt(), m_cameraPrecomputedDistance,
                                                        m_dragSpeed * deltatime);
+    currentCameraDistanceToLookAt.y = glm::clamp(currentCameraDistanceToLookAt.y, kMinCameraHeight, m_cameraPrecomputedDistance.y);
+    
     m_camera->setDistanceToLookAt(currentCameraDistanceToLookAt);
 }
 

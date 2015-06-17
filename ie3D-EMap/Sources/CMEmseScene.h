@@ -58,6 +58,7 @@ protected:
     void generateHeightmap(const glm::ivec2& size, f32 frequency, i32 octaves, ui32 seed);
     void setLandscapeEditMode(E_LANDSCAPE_EDIT_MODE mode);
     void addGameObjectToScene(const std::string& configurationFilename);
+    void generatorStatisticsUpdate(const std::string& operationName, E_HEIGHTMAP_GENERATION_STATUS status, const std::string& message = "");
     
     void onConfigurationLoaded(ISharedConfigurationRef configuration);
     void onResourceLoaded(ISharedResourceRef resource);

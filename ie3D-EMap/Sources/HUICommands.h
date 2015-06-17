@@ -97,4 +97,10 @@ namespace UICommandMSEAddGameObjectToScene
     const std::string GUID = "command_14";
 };
 
+namespace UICommandMSEUpdateHeightmapGenerationStatistic
+{
+    typedef std::function<void(const std::string&, E_HEIGHTMAP_GENERATION_STATUS, const std::string&)> COMMAND;
+    const std::string GUID = "command_15";
+};
+
 #endif

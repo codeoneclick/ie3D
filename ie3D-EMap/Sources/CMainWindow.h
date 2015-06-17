@@ -56,6 +56,7 @@ protected:
     void setMSETillingTexcoord(f32 value, E_SHADER_SAMPLER sampler);
     
     void updateGOEConfigurationsMaterials(std::vector<CSharedConfigurationMaterial>& configurations);
+    void generatorStatisticsUpdate(const std::string& operationName, E_HEIGHTMAP_GENERATION_STATUS status, const std::string& message = "");
     
     i32 m_brushSize;
     std::string m_recentOpenPath;
