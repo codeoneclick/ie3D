@@ -73,7 +73,7 @@ void CLandscapeChunk::onSceneUpdate(f32 deltatime)
     if(m_status & E_LOADING_STATUS_TEMPLATE_LOADED)
     {
         IGameObject::onSceneUpdate(deltatime);
-        m_numPassedIndexes = m_quadTree != nullptr ? m_quadTree->update(m_cameraFrustum) : m_mesh->getIndexBuffer()->getUsedSize();
+        m_numPassedIndexes = m_quadTree != nullptr ? m_quadTree->update(m_cameraFrustum, IGameObject::getMMatrix()) : m_mesh->getIndexBuffer()->getUsedSize();
     }
 }
 

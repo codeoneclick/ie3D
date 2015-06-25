@@ -98,6 +98,10 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         m_chunks[index]->setCameraFrustum(m_cameraFrustum);
                         m_chunks[index]->setInprogressLOD(LOD);
                         
+                        m_chunks[index]->setPosition(IGameObject::getPosition());
+                        m_chunks[index]->setRotation(IGameObject::getRotation());
+                        m_chunks[index]->setScale(IGameObject::getScale());
+                        
                         m_heightmapAccessor->runLoading(i, j, LOD, [this, index, LOD](CSharedMeshRef mesh) {
                             
                             m_chunks[index]->onAddedToScene(m_renderTechniqueImporter,
@@ -150,48 +154,49 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     assert(m_resourceAccessor != nullptr);
     assert(m_renderTechniqueAccessor != nullptr);
     
-    
     //m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapGenerator->createSplattingTexture());
     //m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapGenerator->createHeightmapTexture());
     
-    if(configurationLandscape->getHeightmapDataFilename().length() != 0)
+    CSharedConfigurationMaterial configurationSplatting = std::make_shared<CConfigurationMaterial>();
+    configurationSplatting->serialize(configurationLandscape->getPreprocessSplattingMaterialFilename());
+    
+    std::array<CSharedTexture, 3> splattingTextures;
+    assert(configurationSplatting->getTexturesConfigurations().size() == 3);
+    ui32 index = 0;
+    for(const auto& iterator : configurationSplatting->getTexturesConfigurations())
     {
-        CSharedConfigurationMaterial configurationSplatting = std::make_shared<CConfigurationMaterial>();
-        configurationSplatting->serialize(configurationLandscape->getPreprocessSplattingMaterialFilename());
-        
-        std::array<CSharedTexture, 3> splattingTextures;
-        assert(configurationSplatting->getTexturesConfigurations().size() == 3);
-        ui32 index = 0;
-        for(const auto& iterator : configurationSplatting->getTexturesConfigurations())
-        {
-            CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
-            assert(textureConfiguration != nullptr);
-            assert(!textureConfiguration->getCubemap());
-            assert(textureConfiguration->getTextureFilename().length() != 0);
-            CSharedTexture texture = m_resourceAccessor->getTexture(textureConfiguration->getTextureFilename(), true);
-            splattingTextures[index] = texture;
-            index++;
-        }
-        
-        m_heightmapAccessor->generate(configurationLandscape->getHeightmapDataFilename(), m_renderTechniqueAccessor, splattingTextures, [this, configurationLandscape, success]() {
-            
-            m_chunks.resize(m_heightmapAccessor->getChunksNum().x * m_heightmapAccessor->getChunksNum().y);
-            
-            IGameObject::onConfigurationLoaded(configurationLandscape, success);
-            
-            m_tillingTexcoord[E_SHADER_SAMPLER_01] = 16;
-            m_tillingTexcoord[E_SHADER_SAMPLER_02] = 16;
-            m_tillingTexcoord[E_SHADER_SAMPLER_03] = 16;
-            
-            m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
-        });
+        CSharedConfigurationTexture textureConfiguration = std::static_pointer_cast<CConfigurationTexture>(iterator);
+        assert(textureConfiguration != nullptr);
+        assert(!textureConfiguration->getCubemap());
+        assert(textureConfiguration->getTextureFilename().length() != 0);
+        CSharedTexture texture = m_resourceAccessor->getTexture(textureConfiguration->getTextureFilename(), true);
+        splattingTextures[index] = texture;
+        index++;
     }
-    else
+    assert(configurationLandscape->getHeightmapDataFilename().length() != 0);
+    
+    std::shared_ptr<CHeightmapAccessor::SHeightmapCustomParameters> customParameters;
+    if(configurationLandscape->getPerlin())
     {
-        /*m_heightmapGenerator->generate(glm::ivec2(configurationLandscape->getSizeX(), configurationLandscape->getSizeY()),
-                                       configurationLandscape->getFrequency(), configurationLandscape->getOctaves(),
-                                       configurationLandscape->getSeed(), nullptr);*/
+        customParameters = std::make_shared<CHeightmapAccessor::SHeightmapCustomParameters>();
+        customParameters->m_size = glm::ivec2(configurationLandscape->getSizeX(), configurationLandscape->getSizeY());
+        customParameters->m_frequency = configurationLandscape->getFrequency();
+        customParameters->m_octaves = configurationLandscape->getOctaves();
+        customParameters->m_seed = configurationLandscape->getSeed();
     }
+    
+    m_heightmapAccessor->generate(configurationLandscape->getHeightmapDataFilename(), m_renderTechniqueAccessor, splattingTextures, [this, configurationLandscape, success]() {
+        
+        m_chunks.resize(m_heightmapAccessor->getChunksNum().x * m_heightmapAccessor->getChunksNum().y);
+        
+        IGameObject::onConfigurationLoaded(configurationLandscape, success);
+        
+        m_tillingTexcoord[E_SHADER_SAMPLER_01] = 16;
+        m_tillingTexcoord[E_SHADER_SAMPLER_02] = 16;
+        m_tillingTexcoord[E_SHADER_SAMPLER_03] = 16;
+        
+        m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+    }, customParameters);
 }
 
 std::vector<ISharedGameObject> CLandscape::getChunks(void) const

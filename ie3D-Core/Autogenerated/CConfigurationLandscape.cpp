@@ -78,6 +78,19 @@ void CConfigurationLandscape::setSizeY(ui32 size_y)
 IConfiguration::setAttribute("/landscape/size_y", std::make_shared<CConfigurationAttribute>(size_y));
 }
 #endif
+bool CConfigurationLandscape::getPerlin(void) const
+{
+const auto& iterator = m_attributes.find("/landscape/is_perlin");
+assert(iterator != m_attributes.end());
+bool value; iterator->second->get(&value);
+return value;
+}
+#if defined(__EDITOR__)
+void CConfigurationLandscape::setPerlin(bool is_perlin)
+{
+IConfiguration::setAttribute("/landscape/is_perlin", std::make_shared<CConfigurationAttribute>(is_perlin));
+}
+#endif
 f32 CConfigurationLandscape::getFrequency(void) const
 {
 const auto& iterator = m_attributes.find("/landscape/frequency");
@@ -158,6 +171,8 @@ ui32 size_x = node.node().attribute("size_x").as_uint();
 IConfiguration::setAttribute("/landscape/size_x", std::make_shared<CConfigurationAttribute>(size_x));
 ui32 size_y = node.node().attribute("size_y").as_uint();
 IConfiguration::setAttribute("/landscape/size_y", std::make_shared<CConfigurationAttribute>(size_y));
+bool is_perlin = node.node().attribute("is_perlin").as_bool();
+IConfiguration::setAttribute("/landscape/is_perlin", std::make_shared<CConfigurationAttribute>(is_perlin));
 f32 frequency = node.node().attribute("frequency").as_float();
 IConfiguration::setAttribute("/landscape/frequency", std::make_shared<CConfigurationAttribute>(frequency));
 i32 octaves = node.node().attribute("octaves").as_int();
@@ -199,6 +214,9 @@ attribute.set_value(size_x);
 attribute = node.append_attribute("size_y");
 ui32 size_y = CConfigurationLandscape::getSizeY();
 attribute.set_value(size_y);
+attribute = node.append_attribute("is_perlin");
+bool is_perlin = CConfigurationLandscape::getPerlin();
+attribute.set_value(is_perlin);
 attribute = node.append_attribute("frequency");
 f32 frequency = CConfigurationLandscape::getFrequency();
 attribute.set_value(frequency);

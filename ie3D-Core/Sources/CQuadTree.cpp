@@ -174,6 +174,7 @@ void CQuadTree::createIndexBufferForQuadTreeNode(CSharedQuadTreeRef node)
 }
 
 void CQuadTree::generateQuadTreeNode(CSharedFrustumRef frustum,
+                                     const glm::mat4& matrixM,
                                      CSharedQuadTreeRef root,
                                      ui16* indexes,
                                      ui32& numIndexes)
@@ -186,7 +187,8 @@ void CQuadTree::generateQuadTreeNode(CSharedFrustumRef frustum,
     for(ui32 i = 0; i < k_MAX_QUAD_TREE_CHILDS; i++)
     {
         i32 result = frustum->isBoundBoxInFrustum(root->m_childs.at(i)->m_maxBound,
-                                                  root->m_childs.at(i)->m_minBound);
+                                                  root->m_childs.at(i)->m_minBound,
+                                                  matrixM);
         if(result == E_FRUSTUM_BOUND_RESULT_INSIDE)
         {
             std::memcpy(&indexes[numIndexes], &root->m_childs[i]->m_indexes[0], sizeof(ui16) * root->m_childs[i]->m_numIndexes);
@@ -201,7 +203,7 @@ void CQuadTree::generateQuadTreeNode(CSharedFrustumRef frustum,
             }
             else
             {
-                CQuadTree::generateQuadTreeNode(frustum, root->m_childs[i], indexes, numIndexes);
+                CQuadTree::generateQuadTreeNode(frustum, matrixM, root->m_childs[i], indexes, numIndexes);
             }
         }
     }
@@ -237,14 +239,14 @@ void CQuadTree::generate(CSharedVertexBuffer vertexBuffer,
     m_isGenerated = true;
 }
 
-ui32 CQuadTree::update(CSharedFrustumRef frustum)
+ui32 CQuadTree::update(CSharedFrustumRef frustum, const glm::mat4& matrixM)
 {
     ui32 numIndexes = 0;
     if(m_isGenerated)
     {
         ui16* indexes = m_indexBuffer->lock();
         CSharedQuadTree root = shared_from_this();
-        CQuadTree::generateQuadTreeNode(frustum, root, indexes, numIndexes);
+        CQuadTree::generateQuadTreeNode(frustum, matrixM, root, indexes, numIndexes);
         m_indexBuffer->unlock(numIndexes);
     }
     return numIndexes;

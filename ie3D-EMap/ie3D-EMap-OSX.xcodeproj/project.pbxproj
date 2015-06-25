@@ -25,10 +25,11 @@
 		20AA3F021DA5A27B40E376F3 /* moc_CMainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = DCB612036D136E89ACC8CAC3 /* moc_CMainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
 		210400761B17531200FB28DF /* base_DISP.png in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 210400741B17531200FB28DF /* base_DISP.png */; };
 		210400771B17531200FB28DF /* base_NRM.png in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 210400751B17531200FB28DF /* base_NRM.png */; };
-		211EF8631AE6601200AF951E /* material.landscape.preprocess.splatting.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 211EF8621AE6601200AF951E /* material.landscape.preprocess.splatting.xml */; };
 		211EF8681AE6602800AF951E /* shaderLandscapePreprocessSplatting.frag in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 211EF8661AE6602800AF951E /* shaderLandscapePreprocessSplatting.frag */; };
 		211EF8691AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 211EF8671AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert */; };
 		21A38DE41AF8DD3D00E7DFE7 /* heightmap.data in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21A38DE31AF8DD3D00E7DFE7 /* heightmap.data */; };
+		21D6D9DF1B3C363B00D030F3 /* material.landscape.goe.preprocess.splatting.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21D6D9DD1B3C363B00D030F3 /* material.landscape.goe.preprocess.splatting.xml */; };
+		21D6D9E01B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21D6D9DE1B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml */; };
 		21F5E1101ADE8ACA002E08FA /* CMapDragController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21F5E0F71ADE8ACA002E08FA /* CMapDragController.cpp */; };
 		21F5E1111ADE8ACA002E08FA /* CMEGameController.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21F5E0F91ADE8ACA002E08FA /* CMEGameController.cpp */; };
 		21F5E1121ADE8ACA002E08FA /* CMEgoeScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 21F5E0FB1ADE8ACA002E08FA /* CMEgoeScene.cpp */; };
@@ -246,10 +247,11 @@
 		0BBBA58972447160190EBE86 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Volumes/media/Applications/QT/5.4/clang_64/lib/QtGui.framework; sourceTree = "<absolute>"; };
 		210400741B17531200FB28DF /* base_DISP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = base_DISP.png; path = "../ie3D-Bundle/Textures/base_DISP.png"; sourceTree = "<group>"; };
 		210400751B17531200FB28DF /* base_NRM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = base_NRM.png; path = "../ie3D-Bundle/Textures/base_NRM.png"; sourceTree = "<group>"; };
-		211EF8621AE6601200AF951E /* material.landscape.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.preprocess.splatting.xml; sourceTree = "<group>"; };
 		211EF8661AE6602800AF951E /* shaderLandscapePreprocessSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapePreprocessSplatting.frag; path = "../ie3D-Bundle/Shaders/shaderLandscapePreprocessSplatting.frag"; sourceTree = "<group>"; };
 		211EF8671AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapePreprocessSplatting.vert; path = "../ie3D-Bundle/Shaders/shaderLandscapePreprocessSplatting.vert"; sourceTree = "<group>"; };
 		21A38DE31AF8DD3D00E7DFE7 /* heightmap.data */ = {isa = PBXFileReference; lastKnownFileType = file; name = heightmap.data; path = "../ie3D-Bundle/Data/heightmap.data"; sourceTree = "<group>"; };
+		21D6D9DD1B3C363B00D030F3 /* material.landscape.goe.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.goe.preprocess.splatting.xml; sourceTree = "<group>"; };
+		21D6D9DE1B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.mse.preprocess.splatting.xml; sourceTree = "<group>"; };
 		21F5E0E01ADE8A72002E08FA /* ie3D-Engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Engine.xcodeproj"; path = "../ie3D-Engine/ie3D-Engine.xcodeproj"; sourceTree = "<group>"; };
 		21F5E0EA1ADE8A8A002E08FA /* ie3D-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ie3D-Core.xcodeproj"; path = "../ie3D-Core/ie3D-Core.xcodeproj"; sourceTree = "<group>"; };
 		21F5E0F71ADE8ACA002E08FA /* CMapDragController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMapDragController.cpp; path = Sources/CMapDragController.cpp; sourceTree = SOURCE_ROOT; };
@@ -703,7 +705,8 @@
 		21F5E1501ADE8D94002E08FA /* materials */ = {
 			isa = PBXGroup;
 			children = (
-				211EF8621AE6601200AF951E /* material.landscape.preprocess.splatting.xml */,
+				21D6D9DD1B3C363B00D030F3 /* material.landscape.goe.preprocess.splatting.xml */,
+				21D6D9DE1B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml */,
 				21F5E1511ADE8D94002E08FA /* material.atmospheric.scattering.base.xml */,
 				21F5E1521ADE8D94002E08FA /* material.base.goe.temp.xml */,
 				21F5E1531ADE8D94002E08FA /* material.gameobject.brush.base.xml */,
@@ -715,8 +718,8 @@
 				21F5E1591ADE8D94002E08FA /* material.human_02.reflection.xml */,
 				21F5E15A1ADE8D94002E08FA /* material.human_02.refraction.xml */,
 				21F5E15B1ADE8D94002E08FA /* material.human_02.shadowmap.xml */,
-				21F5E15C1ADE8D94002E08FA /* material.landscape.base.goe.xml */,
 				21F5E15D1ADE8D94002E08FA /* material.landscape.base.xml */,
+				21F5E15C1ADE8D94002E08FA /* material.landscape.base.goe.xml */,
 				21F5E15E1ADE8D94002E08FA /* material.landscape.brush.base.xml */,
 				21F5E15F1ADE8D94002E08FA /* material.landscape.reflection.goe.xml */,
 				21F5E1601ADE8D94002E08FA /* material.landscape.reflection.xml */,
@@ -1013,7 +1016,6 @@
 				21F5E1FC1ADE8E0C002E08FA /* shaderScreenQuad.vert in Copy Bundle Resources */,
 				21F5E1771ADE8D94002E08FA /* gameobject.landscape.brush.xml in Copy Bundle Resources */,
 				211EF8691AE6602800AF951E /* shaderLandscapePreprocessSplatting.vert in Copy Bundle Resources */,
-				211EF8631AE6601200AF951E /* material.landscape.preprocess.splatting.xml in Copy Bundle Resources */,
 				21F5E13E1ADE8D2D002E08FA /* map_05.png in Copy Bundle Resources */,
 				21F5E1E81ADE8E0C002E08FA /* shaderAnimatedGameObjectND.vert in Copy Bundle Resources */,
 				21F5E1FB1ADE8E0C002E08FA /* shaderScreenQuad.frag in Copy Bundle Resources */,
@@ -1028,6 +1030,7 @@
 				21F5E2421ADE8E28002E08FA /* orc_02_run.IE3DANIMATION in Copy Bundle Resources */,
 				21F5E2391ADE8E28002E08FA /* human_01_walk.IE3DANIMATION in Copy Bundle Resources */,
 				21F5E1FE1ADE8E0C002E08FA /* shaderSkybox.vert in Copy Bundle Resources */,
+				21D6D9E01B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml in Copy Bundle Resources */,
 				21F5E2241ADE8E1C002E08FA /* skybox_ypos.png in Copy Bundle Resources */,
 				21F5E1F01ADE8E0C002E08FA /* shaderLandscapeBrush.vert in Copy Bundle Resources */,
 				21F5E2161ADE8E1C002E08FA /* gameobject.goe.temp.png in Copy Bundle Resources */,
@@ -1075,6 +1078,7 @@
 				21F5E19C1ADE8D94002E08FA /* material.reflection.goe.temp.xml in Copy Bundle Resources */,
 				21F5E1EF1ADE8E0C002E08FA /* shaderLandscapeBrush.frag in Copy Bundle Resources */,
 				21F5E1991ADE8D94002E08FA /* material.orc_02.refraction.xml in Copy Bundle Resources */,
+				21D6D9DF1B3C363B00D030F3 /* material.landscape.goe.preprocess.splatting.xml in Copy Bundle Resources */,
 				21F5E2281ADE8E1C002E08FA /* static_model_tank_light.png in Copy Bundle Resources */,
 				21F5E2001ADE8E0C002E08FA /* shaderStaticGameObjectND.vert in Copy Bundle Resources */,
 				21F5E1901ADE8D94002E08FA /* material.landscape.refraction.xml in Copy Bundle Resources */,

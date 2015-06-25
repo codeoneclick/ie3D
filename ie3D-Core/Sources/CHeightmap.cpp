@@ -77,7 +77,7 @@ CHeightmap::~CHeightmap(void)
 std::string CHeightmap::getUncompressedVerticesMMAPFilename(const std::string& filename) const
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kUncompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
+    stringstream<<filename<<kUncompressedVerticesMetadataFilename<<std::endl;
     
 #if defined(__IOS__)
     
@@ -91,7 +91,7 @@ std::string CHeightmap::getUncompressedVerticesMMAPFilename(const std::string& f
 std::string CHeightmap::getCompressedVerticesMMAPFilename(const std::string& filename) const
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kCompressedVerticesMetadataFilename<<g_heightmapGUID<<std::endl;
+    stringstream<<filename<<kCompressedVerticesMetadataFilename<<std::endl;
 
 #if defined(__IOS__)
     
@@ -105,7 +105,7 @@ std::string CHeightmap::getCompressedVerticesMMAPFilename(const std::string& fil
 std::string CHeightmap::getFacesMMAPFilename(const std::string& filename) const
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kFacesMetadataFilename<<g_heightmapGUID<<std::endl;
+    stringstream<<filename<<kFacesMetadataFilename<<std::endl;
     
 #if defined(__IOS__)
     
@@ -654,7 +654,6 @@ m_offset(0)
 }
 
 CHeightmapGenerator::CHeightmapGenerator(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
-m_heightmapGUID(g_heightmapGUID++),
 m_isGenerated(false),
 m_heightmap(std::make_shared<CHeightmap>()),
 m_renderTechniqueAccessor(renderTechniqueAccessor),
@@ -662,7 +661,6 @@ m_heightmapTexture(nullptr),
 m_splattingTexture(nullptr),
 m_vbosMMAPDescriptor(nullptr),
 m_ibosMMAPDescriptor(nullptr)
-//m_texturesMMAPDescriptor(nullptr)
 {
     assert(m_renderTechniqueAccessor != nullptr);
 }

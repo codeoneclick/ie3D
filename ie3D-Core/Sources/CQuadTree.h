@@ -43,6 +43,7 @@ protected:
     
     
     void generateQuadTreeNode(CSharedFrustumRef frustum,
+                              const glm::mat4& matrixM,
                               CSharedQuadTreeRef root,
                               ui16* indexes,
                               ui32& numIndexes);
@@ -59,7 +60,7 @@ public:
                   f32 depth,
                   ui32 size);
     
-    ui32 update(CSharedFrustumRef frustum);
+    ui32 update(CSharedFrustumRef frustum, const glm::mat4& matrixM);
     bool getIsGenerated(void) const;
 };
 

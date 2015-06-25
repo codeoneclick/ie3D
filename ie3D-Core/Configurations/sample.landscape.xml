@@ -9,6 +9,7 @@
         <attribute type="i32" property="ZOrder" path="/landscape" name="z_order"/>
         <attribute type="ui32" property="SizeX" path="/landscape" name="size_x"/>
         <attribute type="ui32" property="SizeY" path="/landscape" name="size_y"/>
+        <attribute type="bool" property="Perlin" path="/landscape" name="is_perlin"/>
         <attribute type="f32" property="Frequency" path="/landscape" name="frequency"/>
         <attribute type="i32" property="Octaves" path="/landscape" name="octaves"/>
         <attribute type="ui32" property="Seed" path="/landscape" name="seed"/>

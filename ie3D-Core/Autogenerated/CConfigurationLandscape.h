@@ -32,6 +32,10 @@ ui32 getSizeY(void) const;
 #if defined(__EDITOR__)
 void setSizeY(ui32 size_y);
 #endif
+bool getPerlin(void) const;
+#if defined(__EDITOR__)
+void setPerlin(bool is_perlin);
+#endif
 f32 getFrequency(void) const;
 #if defined(__EDITOR__)
 void setFrequency(f32 frequency);

@@ -36,9 +36,9 @@ public:
     CFrustum(CSharedCameraRef camera);
     ~CFrustum(void);
     
-    E_FRUSTUM_BOUND_RESULT isPointInFrustum(const glm::vec3& point);
-    E_FRUSTUM_BOUND_RESULT isSphereInFrumstum(const glm::vec3& center, f32 radius);
-    E_FRUSTUM_BOUND_RESULT isBoundBoxInFrustum(const glm::vec3& maxBound, const glm::vec3& minBound);
+    E_FRUSTUM_BOUND_RESULT isPointInFrustum(const glm::vec3& point, const glm::mat4& matrixM = glm::mat4(1.0f));
+    E_FRUSTUM_BOUND_RESULT isSphereInFrumstum(const glm::vec3& center, f32 radius, const glm::mat4& matrixM = glm::mat4(1.0f));
+    E_FRUSTUM_BOUND_RESULT isBoundBoxInFrustum(const glm::vec3& maxBound, const glm::vec3& minBound, const glm::mat4& matrixM = glm::mat4(1.0f));
 };
 
 #endif

@@ -36,6 +36,7 @@ varying vec3 v_lightDirTS;
 
 uniform mat4 u_matrixP;
 uniform mat4 u_matrixV;
+uniform mat4 u_matrixM;
 
 uniform mat4 MATRIX_GlobalLightProjection;
 uniform mat4 MATRIX_GlobalLightView;
@@ -62,7 +63,7 @@ const mat4 mBiasMatrix = mat4(0.5, 0.0, 0.0, 0.0,
 
 void main(void)
 {
-    vec4 vertexPosWS = vec4(IN_Position, 1.0);
+    vec4 vertexPosWS = u_matrixM * vec4(IN_Position, 1.0);
     gl_Position = u_matrixP * u_matrixV * vertexPosWS;
     gl_ClipDistance[0] = dot(vertexPosWS.xyz, VECTOR_ClipPlane.xyz);
     

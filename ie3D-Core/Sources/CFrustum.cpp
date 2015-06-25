@@ -85,11 +85,12 @@ void CFrustum::onSceneUpdate(f32 deltatime)
     }
 }
 
-E_FRUSTUM_BOUND_RESULT CFrustum::isPointInFrustum(const glm::vec3& _point)
+E_FRUSTUM_BOUND_RESULT CFrustum::isPointInFrustum(const glm::vec3& point,
+                                                  const glm::mat4& matrixM)
 {
     for(ui32 i = 0; i < E_FRUSTUM_PLANE_MAX; ++i)
     {
-        if(CFrustum::getDistanceToPlane(m_planes[i], _point) < 0.0f)
+        if(CFrustum::getDistanceToPlane(m_planes[i], point) < 0.0f)
         {
             return E_FRUSTUM_BOUND_RESULT_OUTSIDE;
         }
@@ -97,17 +98,18 @@ E_FRUSTUM_BOUND_RESULT CFrustum::isPointInFrustum(const glm::vec3& _point)
     return E_FRUSTUM_BOUND_RESULT_INSIDE;
 }
 
-E_FRUSTUM_BOUND_RESULT CFrustum::isSphereInFrumstum(const glm::vec3& _center, f32 _radius)
+E_FRUSTUM_BOUND_RESULT CFrustum::isSphereInFrumstum(const glm::vec3& center, f32 radius,
+                                                    const glm::mat4& matrixM)
 {
     E_FRUSTUM_BOUND_RESULT result = E_FRUSTUM_BOUND_RESULT_INSIDE;
     for(ui32 i = 0; i < E_FRUSTUM_PLANE_MAX; ++i)
     {
-        f32 distance = CFrustum::getDistanceToPlane(m_planes[i], _center);
-        if (distance < -_radius)
+        f32 distance = CFrustum::getDistanceToPlane(m_planes[i], center);
+        if (distance < -radius)
         {
             return E_FRUSTUM_BOUND_RESULT_OUTSIDE;
         }
-        else if (distance < _radius)
+        else if (distance < radius)
         {
             result =  E_FRUSTUM_BOUND_RESULT_INTERSECT;
         }
@@ -118,18 +120,22 @@ E_FRUSTUM_BOUND_RESULT CFrustum::isSphereInFrumstum(const glm::vec3& _center, f3
 #define kMaxPointsInBoundingBox 8
 
 E_FRUSTUM_BOUND_RESULT CFrustum::isBoundBoxInFrustum(const glm::vec3& maxBound,
-                                                     const glm::vec3& minBound)
+                                                     const glm::vec3& minBound,
+                                                     const glm::mat4& matrixM)
 {
     glm::vec3 points[kMaxPointsInBoundingBox];
+    glm::vec3 minBound_M = glm::transform(minBound, matrixM);
+    glm::vec3 maxBound_M = glm::transform(maxBound, matrixM);
+    
     points[0] = minBound;
-    points[1] = glm::vec3(minBound.x, minBound.y, maxBound.z);
-    points[2] = glm::vec3(maxBound.x, minBound.y, minBound.z);
-    points[3] = glm::vec3(maxBound.x, minBound.y, maxBound.z);
+    points[1] = glm::vec3(minBound_M.x, minBound_M.y, maxBound_M.z);
+    points[2] = glm::vec3(maxBound_M.x, minBound_M.y, minBound_M.z);
+    points[3] = glm::vec3(maxBound_M.x, minBound_M.y, maxBound_M.z);
     
     points[4] = maxBound;
-    points[5] = glm::vec3(maxBound.x, maxBound.y, minBound.z);
-    points[6] = glm::vec3(minBound.x, maxBound.y, maxBound.z);
-    points[7] = glm::vec3(minBound.x, maxBound.y, minBound.z);
+    points[5] = glm::vec3(maxBound_M.x, maxBound_M.y, minBound_M.z);
+    points[6] = glm::vec3(minBound_M.x, maxBound_M.y, maxBound_M.z);
+    points[7] = glm::vec3(minBound_M.x, maxBound_M.y, minBound_M.z);
     
     E_FRUSTUM_BOUND_RESULT result = E_FRUSTUM_BOUND_RESULT_INSIDE;
     ui32 pointsIn, pointsOut;

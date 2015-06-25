@@ -1,10 +1,11 @@
 <landscape
-    heightmap_data_filename=""
-    splatting_data_filename=""
-    preprocess_splatting_material_filename=""
+    heightmap_data_filename="goe.heightmap.data"
+    splatting_data_filename="goe.splatting.data"
+    preprocess_splatting_material_filename="material.landscape.goe.preprocess.splatting.xml"
     z_order="1"
-    size_x="5"
-    size_y="5"
+    size_x="65"
+    size_y="65"
+    is_perlin="1"
     frequency="0.0"
     octaves="1"
     seed="12345">

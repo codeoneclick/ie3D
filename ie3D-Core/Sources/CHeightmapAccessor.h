@@ -17,6 +17,16 @@ class CHeightmapContainer;
 
 class CHeightmapAccessor
 {
+public:
+    
+    struct SHeightmapCustomParameters
+    {
+        glm::ivec2 m_size;
+        f32 m_frequency;
+        i32 m_octaves;
+        ui32 m_seed;
+    };
+    
 private:
     
     std::shared_ptr<CHeightmapContainer> m_container;
@@ -74,7 +84,8 @@ public:
     static glm::vec2 getAngles(std::shared_ptr<CHeightmapContainer> container, const glm::vec3& position);
     
     void generate(const std::string& filename, ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                  const std::array<CSharedTexture, 3>& splattingTextures, const std::function<void(void)>& callback);
+                  const std::array<CSharedTexture, 3>& splattingTextures, const std::function<void(void)>& callback,
+                  const std::shared_ptr<SHeightmapCustomParameters>& customParameters = nullptr);
     
     void runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
                     const std::function<void(CSharedMeshRef)>& meshLoadedCallback,

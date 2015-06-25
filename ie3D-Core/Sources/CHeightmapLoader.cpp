@@ -20,19 +20,17 @@
 
 #endif
 
-static const std::string kUncompressedVerticesMetadataFilename = "-uncompressed.vertices.data_";
-static const std::string kCompressedVerticesMetadataFilename = "-compressed.vertices.data_";
-static const std::string kFacesMetadataFilename = "-faces.data_";
-static const std::string kVBOsMetadataFilename = "-vbos.data_";
-static const std::string kIBOsMetadataFilename = "-ibos.data_";
-static const std::string kSplattingTextureM_MetadataFilename = "-splatting.textures.m.data_";
-static const std::string kSplattingTextureN_MetadataFilename = "-splatting.textures.n.data_";
-static const std::string kSplattingTextureH_MetadataFilename = "-splatting.textures.h.data_";
-static const std::string kSplattingTextures_MetadataFilename = "-splatting.textures.data_";
-static const std::string kTangentSpace_MetadataFilename = "-tangent.space.data_";
-static const std::string kAttachesToVBO_MetadataFilename = "-attaches.vbo.data_";
-
-ui32 CHeightmapLoader::g_heightmapGUID = 0;
+static const std::string kUncompressedVerticesMetadataFilename = "-uncompressed.vertices.data";
+static const std::string kCompressedVerticesMetadataFilename = "-compressed.vertices.data";
+static const std::string kFacesMetadataFilename = "-faces.data";
+static const std::string kVBOsMetadataFilename = "-vbos.data";
+static const std::string kIBOsMetadataFilename = "-ibos.data";
+static const std::string kSplattingTextureM_MetadataFilename = "-splatting.textures.m.data";
+static const std::string kSplattingTextureN_MetadataFilename = "-splatting.textures.n.data";
+static const std::string kSplattingTextureH_MetadataFilename = "-splatting.textures.h.data";
+static const std::string kSplattingTextures_MetadataFilename = "-splatting.textures.data";
+static const std::string kTangentSpace_MetadataFilename = "-tangent.space.data";
+static const std::string kAttachesToVBO_MetadataFilename = "-attaches.vbo.data";
 
 CHeightmapLoader::CHeightmapLoader(void)
 {
@@ -137,7 +135,7 @@ std::tuple<glm::ivec2, std::vector<f32>> CHeightmapLoader::getHeights(const std:
 std::string CHeightmapLoader::getUncompressedVerticesMMAPFilename(const std::string &filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kUncompressedVerticesMetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kUncompressedVerticesMetadataFilename;
     
 #if defined(__IOS__)
     
@@ -151,7 +149,7 @@ std::string CHeightmapLoader::getUncompressedVerticesMMAPFilename(const std::str
 std::string CHeightmapLoader::getCompressedVerticesMMAPFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kCompressedVerticesMetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kCompressedVerticesMetadataFilename;
     
 #if defined(__IOS__)
     
@@ -165,7 +163,7 @@ std::string CHeightmapLoader::getCompressedVerticesMMAPFilename(const std::strin
 std::string CHeightmapLoader::getFacesMMAPFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kFacesMetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kFacesMetadataFilename;
     
 #if defined(__IOS__)
     
@@ -179,7 +177,7 @@ std::string CHeightmapLoader::getFacesMMAPFilename(const std::string& filename)
 std::string CHeightmapLoader::getVBOsMMAPFilename(const std::string &filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kVBOsMetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kVBOsMetadataFilename;
     
 #if defined(__IOS__)
     
@@ -193,7 +191,7 @@ std::string CHeightmapLoader::getVBOsMMAPFilename(const std::string &filename)
 std::string CHeightmapLoader::getIBOsMMAPFilename(const std::string &filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kIBOsMetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kIBOsMetadataFilename;
     
 #if defined(__IOS__)
     
@@ -207,7 +205,7 @@ std::string CHeightmapLoader::getIBOsMMAPFilename(const std::string &filename)
 std::string CHeightmapLoader::getSplattingTextureM_MMapFilename(const std::string &filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kSplattingTextureM_MetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kSplattingTextureM_MetadataFilename;
     
 #if defined(__IOS__)
     
@@ -221,7 +219,7 @@ std::string CHeightmapLoader::getSplattingTextureM_MMapFilename(const std::strin
 std::string CHeightmapLoader::getSplattingTextureN_MMapFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kSplattingTextureN_MetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kSplattingTextureN_MetadataFilename;
     
 #if defined(__IOS__)
     
@@ -235,7 +233,7 @@ std::string CHeightmapLoader::getSplattingTextureN_MMapFilename(const std::strin
 std::string CHeightmapLoader::getSplattingTextureH_MMapFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kSplattingTextureH_MetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kSplattingTextureH_MetadataFilename;
     
 #if defined(__IOS__)
     
@@ -249,7 +247,7 @@ std::string CHeightmapLoader::getSplattingTextureH_MMapFilename(const std::strin
 std::string CHeightmapLoader::getSplattingTextures_MMapFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kSplattingTextures_MetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kSplattingTextures_MetadataFilename;
     
 #if defined(__IOS__)
     
@@ -263,7 +261,7 @@ std::string CHeightmapLoader::getSplattingTextures_MMapFilename(const std::strin
 std::string CHeightmapLoader::getTangentSpace_MMapFilename(const std::string& filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kTangentSpace_MetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kTangentSpace_MetadataFilename;
     
 #if defined(__IOS__)
     
@@ -277,7 +275,7 @@ std::string CHeightmapLoader::getTangentSpace_MMapFilename(const std::string& fi
 std::string CHeightmapLoader::getAttachesToVBO_MMapFilename(const std::string &filename)
 {
     std::ostringstream stringstream;
-    stringstream<<filename<<kAttachesToVBO_MetadataFilename<<g_heightmapGUID;
+    stringstream<<filename<<kAttachesToVBO_MetadataFilename;
     
 #if defined(__IOS__)
     

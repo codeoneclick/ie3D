@@ -71,6 +71,8 @@ void CMEgoeScene::load(void)
     
     m_landscape = m_root->createLandscape("gameobject.landscape.goe.xml");
     m_root->setLandscape(m_landscape);
+    m_landscape->setPosition(glm::vec3(-1.2f, 0.0f, -1.15f));
+    m_landscape->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
     
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);

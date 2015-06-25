@@ -19,8 +19,6 @@ protected:
     
 public:
     
-    static ui32 g_heightmapGUID;
-    
     CHeightmapLoader(void);
     ~CHeightmapLoader(void);
     

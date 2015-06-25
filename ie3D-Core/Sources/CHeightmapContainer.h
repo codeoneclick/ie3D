@@ -37,6 +37,9 @@ public:
         
         SUncomressedVertex(void)
         {
+            m_containsInFaceSize = 0;
+            m_containsInVBOSize = 0;
+            
             memset(m_containsInFace, 0x0, sizeof(ui32) * kMaxContainsInFace);
             memset(m_containsInVBO, 0x0, sizeof(glm::ivec2) * kMaxContainsInVBO);
         };
@@ -64,7 +67,10 @@ public:
         glm::vec3 m_normal;
         ui32 m_indexes[3];
         
-        SFace(void) = default;
+        SFace(void)
+        {
+            memset(m_indexes, 0x0, sizeof(ui32) * 3);
+        }
         ~SFace(void) = default;
         
         SFace(const SFace& copy) = delete;

@@ -18,6 +18,7 @@
 #include "CBoundingBox.h"
 #include "CHeightmapGeneratorStatistic.h"
 #include "HEnums.h"
+#include "CPerlinNoise.h"
 
 CHeightmapAccessor::CHeightmapAccessor(void) :
 m_container(std::make_shared<CHeightmapContainer>()),
@@ -25,7 +26,6 @@ m_isGenerated(false),
 m_renderTechniqueAccessor(nullptr),
 m_generatorStatistic(std::make_shared<CHeightmapGeneratorStatistic>())
 {
-    CHeightmapLoader::g_heightmapGUID++;
     for(ui32 i = 0; i < E_SPLATTING_TEXTURE_MAX; ++i)
     {
         m_splattingTextures[i] = nullptr;
@@ -127,7 +127,8 @@ void CHeightmapAccessor::eraseChunkMetadata(i32 index)
 }
 
 void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                  const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures, const std::function<void(void)>& callback)
+                                  const std::array<CSharedTexture, 3>& splattingTextures, const std::function<void(void)>& callback,
+                                  const std::shared_ptr<SHeightmapCustomParameters>& customParameters)
 {
     m_isGenerated = false;
     m_generatorStatistic->update("Heightmap Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
@@ -146,14 +147,36 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
     });
     
     CSharedThreadOperation generateGeometryOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-    generateGeometryOperation->setExecutionBlock([this, filename](void) {
+    generateGeometryOperation->setExecutionBlock([this, filename, customParameters](void) {
         
-        std::tuple<glm::ivec2, std::vector<f32>> heights = CHeightmapLoader::getHeights(filename);
-        
-        m_container->init(std::get<0>(heights));
+        std::tuple<glm::ivec2, std::vector<f32>> metadata;
+        if(customParameters)
+        {
+            const CPerlinNoise perlin(customParameters->m_seed);
+            const f32 fx = customParameters->m_size.x / customParameters->m_frequency;
+            const f32 fy = customParameters->m_size.y / customParameters->m_frequency;
+            
+            std::vector<f32> heights;
+            for(ui32 i = 0; i < customParameters->m_size.x; ++i)
+            {
+                for(ui32 j = 0; j < customParameters->m_size.y; ++j)
+                {
+                    f32 n = perlin.octaveNoise(i / fx, j / fy, customParameters->m_octaves);
+                    n = glm::clamp(n * 0.5f + 0.5f, 0.0f, 1.0f);
+                    heights.push_back(n * 64.0f - 32.0f);
+                }
+            }
+            metadata = std::make_tuple(customParameters->m_size, heights);
+        }
+        else
+        {
+            metadata = CHeightmapLoader::getHeights(filename);
+        }
+
+        m_container->init(std::get<0>(metadata));
         
         m_generatorStatistic->update("Geometry Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
-        CHeightmapGeometryGenerator::generate(m_container, filename, std::get<0>(heights), std::get<1>(heights));
+        CHeightmapGeometryGenerator::generate(m_container, filename, std::get<0>(metadata), std::get<1>(metadata));
         m_generatorStatistic->update("Geometry Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
         CHeightmapAccessor::createLoadingOperations();
         CHeightmapAccessor::createMetadataContainers();
@@ -240,7 +263,7 @@ void CHeightmapAccessor::generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD)
     ibo->unlock();
     
     std::ostringstream stringstream;
-    stringstream<<"chunk_"<<index<<"_"<<LOD<<"_"<<CHeightmapLoader::g_heightmapGUID<<std::endl;
+    stringstream<<"chunk_"<<index<<"_"<<LOD<<std::endl;
     std::shared_ptr<CMesh> mesh = CMesh::construct(stringstream.str(), vbo, ibo,
                                                    std::get<0>(m_chunksBounds[index]), std::get<1>(m_chunksBounds[index]));
     std::get<0>(m_chunksMetadata[index]) = mesh;
@@ -264,7 +287,7 @@ void CHeightmapAccessor::generateQuadTree(i32 index)
 void CHeightmapAccessor::generateSplattingTexture(i32 index, E_LANDSCAPE_CHUNK_LOD LOD)
 {
     std::ostringstream stringstream;
-    stringstream<<"texture_"<<index<<"_"<<CHeightmapLoader::g_heightmapGUID<<std::endl;
+    stringstream<<"texture_"<<index<<std::endl;
     
     ui32 textureId;
     ieGenTextures(1, &textureId);
