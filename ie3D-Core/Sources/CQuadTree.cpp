@@ -210,11 +210,11 @@ void CQuadTree::generateQuadTreeNode(CSharedFrustumRef frustum,
 }
 
 void CQuadTree::generate(CSharedVertexBuffer vertexBuffer,
-              CSharedIndexBuffer indexBuffer,
-              const glm::vec3& maxBound,
-              const glm::vec3& minBound,
-              f32 depth,
-              ui32 size)
+                         CSharedIndexBuffer indexBuffer,
+                         const glm::vec3& maxBound,
+                         const glm::vec3& minBound,
+                         f32 depth,
+                         ui32 size)
 {
     assert(m_indexBuffer == nullptr);
     assert(m_vertexes == nullptr);

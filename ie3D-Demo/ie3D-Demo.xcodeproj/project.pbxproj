@@ -11,8 +11,6 @@
 		211EF8701AE674D300AF951E /* shaderLandscapePreprocessSplatting.vert in Resources */ = {isa = PBXBuildFile; fileRef = 211EF86E1AE674D300AF951E /* shaderLandscapePreprocessSplatting.vert */; };
 		211EF8711AE674D600AF951E /* shaderLandscapePreprocessSplatting.frag in Resources */ = {isa = PBXBuildFile; fileRef = 211EF86D1AE674D300AF951E /* shaderLandscapePreprocessSplatting.frag */; };
 		211EF8721AE674D600AF951E /* shaderLandscapePreprocessSplatting.vert in Resources */ = {isa = PBXBuildFile; fileRef = 211EF86E1AE674D300AF951E /* shaderLandscapePreprocessSplatting.vert */; };
-		211EF8741AE6751800AF951E /* material.landscape.preprocess.splatting.xml in Resources */ = {isa = PBXBuildFile; fileRef = 211EF8731AE6751800AF951E /* material.landscape.preprocess.splatting.xml */; };
-		211EF8751AE6811D00AF951E /* material.landscape.preprocess.splatting.xml in Resources */ = {isa = PBXBuildFile; fileRef = 211EF8731AE6751800AF951E /* material.landscape.preprocess.splatting.xml */; };
 		212EEC8119CC5D9C00DA02B7 /* ICharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A1372199A0A2600E674CB /* ICharacterController.cpp */; };
 		212EEC8219CC5D9C00DA02B7 /* CGameObjectNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 219A1375199A0A5600E674CB /* CGameObjectNavigator.cpp */; };
 		212EEC8319CC5D9C00DA02B7 /* CDemoGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D07261181DB1910019D264 /* CDemoGameController.cpp */; };
@@ -166,6 +164,8 @@
 		21B08E3C192252E400C5D5CC /* shaderLandscape.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E36192252E400C5D5CC /* shaderLandscape.vert */; };
 		21B08E3F192252E400C5D5CC /* shaderOcean.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E39192252E400C5D5CC /* shaderOcean.frag */; };
 		21B08E40192252E400C5D5CC /* shaderOcean.vert in Resources */ = {isa = PBXBuildFile; fileRef = 21B08E3A192252E400C5D5CC /* shaderOcean.vert */; };
+		21B869F71B578EF200288612 /* material.landscape.mse.preprocess.splatting.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B869F61B578EF200288612 /* material.landscape.mse.preprocess.splatting.xml */; };
+		21B869F81B578EF200288612 /* material.landscape.mse.preprocess.splatting.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21B869F61B578EF200288612 /* material.landscape.mse.preprocess.splatting.xml */; };
 		21CB352B1A7CD34500819C09 /* CLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21CB352A1A7CD34500819C09 /* CLaunchScreen.xib */; };
 		21CB35471A7CF40200819C09 /* shaderSkybox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21CB35451A7CF40200819C09 /* shaderSkybox.frag */; };
 		21CB35481A7CF40200819C09 /* shaderSkybox.frag in Resources */ = {isa = PBXBuildFile; fileRef = 21CB35451A7CF40200819C09 /* shaderSkybox.frag */; };
@@ -329,7 +329,6 @@
 		211384EC194300DE0041A18A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ie3D-Demo/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		211EF86D1AE674D300AF951E /* shaderLandscapePreprocessSplatting.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapePreprocessSplatting.frag; path = "../../ie3D/ie3D-Bundle/Shaders/shaderLandscapePreprocessSplatting.frag"; sourceTree = "<group>"; };
 		211EF86E1AE674D300AF951E /* shaderLandscapePreprocessSplatting.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscapePreprocessSplatting.vert; path = "../../ie3D/ie3D-Bundle/Shaders/shaderLandscapePreprocessSplatting.vert"; sourceTree = "<group>"; };
-		211EF8731AE6751800AF951E /* material.landscape.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.preprocess.splatting.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.landscape.preprocess.splatting.xml"; sourceTree = "<group>"; };
 		212EEC7419CC5CFD00DA02B7 /* UIWindowOSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UIWindowOSX.xib; path = Sources/UIWindowOSX.xib; sourceTree = SOURCE_ROOT; };
 		212EEC7819CC5D5C00DA02B7 /* AppDelegate-OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AppDelegate-OSX.h"; path = "Sources/AppDelegate-OSX.h"; sourceTree = SOURCE_ROOT; };
 		212EEC7919CC5D5C00DA02B7 /* AppDelegate-OSX.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "AppDelegate-OSX.mm"; path = "Sources/AppDelegate-OSX.mm"; sourceTree = SOURCE_ROOT; };
@@ -420,6 +419,7 @@
 		21B08E36192252E400C5D5CC /* shaderLandscape.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderLandscape.vert; path = "../ie3D-Bundle/Shaders/shaderLandscape.vert"; sourceTree = SOURCE_ROOT; };
 		21B08E39192252E400C5D5CC /* shaderOcean.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderOcean.frag; path = "../ie3D-Bundle/Shaders/shaderOcean.frag"; sourceTree = SOURCE_ROOT; };
 		21B08E3A192252E400C5D5CC /* shaderOcean.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderOcean.vert; path = "../ie3D-Bundle/Shaders/shaderOcean.vert"; sourceTree = SOURCE_ROOT; };
+		21B869F61B578EF200288612 /* material.landscape.mse.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = material.landscape.mse.preprocess.splatting.xml; path = "../../ie3D/ie3D-Bundle/Configurations/game_objects/materials/material.landscape.mse.preprocess.splatting.xml"; sourceTree = "<group>"; };
 		21CB352A1A7CD34500819C09 /* CLaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CLaunchScreen.xib; path = Sources/CLaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		21CB35451A7CF40200819C09 /* shaderSkybox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkybox.frag; path = "../../ie3D/ie3D-Bundle/Shaders/shaderSkybox.frag"; sourceTree = "<group>"; };
 		21CB35461A7CF40200819C09 /* shaderSkybox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderSkybox.vert; path = "../../ie3D/ie3D-Bundle/Shaders/shaderSkybox.vert"; sourceTree = "<group>"; };
@@ -632,7 +632,7 @@
 		21706CC91A89466F00C56C7E /* materials */ = {
 			isa = PBXGroup;
 			children = (
-				211EF8731AE6751800AF951E /* material.landscape.preprocess.splatting.xml */,
+				21B869F61B578EF200288612 /* material.landscape.mse.preprocess.splatting.xml */,
 				21706CF61A89475D00C56C7E /* material.human_01.base.xml */,
 				21706CF71A89475D00C56C7E /* material.human_01.reflection.xml */,
 				21706CF81A89475D00C56C7E /* material.human_01.refraction.xml */,
@@ -1070,7 +1070,6 @@
 				217EF8B419F7E11300F339A0 /* skybox_zpos.png in Resources */,
 				212EECD619CC5D9C00DA02B7 /* map_02.png in Resources */,
 				212EED3519CC6A1D00DA02B7 /* Images.xcassets in Resources */,
-				211EF8751AE6811D00AF951E /* material.landscape.preprocess.splatting.xml in Resources */,
 				21E52BD01A911352005977F1 /* human_02.png in Resources */,
 				217EF90B19F9222A00F339A0 /* shaderCommon.vert in Resources */,
 				212EED1A19CC608400DA02B7 /* ie3D-Demo-osx.plist in Resources */,
@@ -1116,6 +1115,7 @@
 				21E52BEA1A9118AE005977F1 /* material.orc_01.refraction.xml in Resources */,
 				217EF8BC19F7E11300F339A0 /* static_model_tank_tracks.png in Resources */,
 				212EED0419CC5D9C00DA02B7 /* map_01.png in Resources */,
+				21B869F81B578EF200288612 /* material.landscape.mse.preprocess.splatting.xml in Resources */,
 				212EED0519CC5D9C00DA02B7 /* shaderParticleEmitter.vert in Resources */,
 				21706D171A89475D00C56C7E /* material.skybox.reflection.xml in Resources */,
 				21706CD71A8946DD00C56C7E /* ws.technique.refraction.xml in Resources */,
@@ -1143,6 +1143,7 @@
 				21F083F519F3BEBE002FF9AE /* shaderStaticGameObjectND.vert in Resources */,
 				21E52BB21A90FA5F005977F1 /* human_01_walk.IE3DANIMATION in Resources */,
 				217EF8A319F7E11300F339A0 /* landscape_03.png in Resources */,
+				21B869F71B578EF200288612 /* material.landscape.mse.preprocess.splatting.xml in Resources */,
 				21706D021A89475D00C56C7E /* material.landscape.reflection.xml in Resources */,
 				21E52BCC1A911343005977F1 /* human_02.IE3DMESH in Resources */,
 				2162093619A1F04C00DECBBC /* map_03.png in Resources */,
@@ -1185,7 +1186,6 @@
 				21706D001A89475D00C56C7E /* material.landscape.base.xml in Resources */,
 				217EF90A19F9222A00F339A0 /* shaderCommon.vert in Resources */,
 				21706D0A1A89475D00C56C7E /* material.human_01.reflection.xml in Resources */,
-				211EF8741AE6751800AF951E /* material.landscape.preprocess.splatting.xml in Resources */,
 				21E52B751A90A123005977F1 /* orc_01_idle.IE3DANIMATION in Resources */,
 				21E52B8A1A90B77D005977F1 /* orc_01_run.IE3DANIMATION in Resources */,
 				217EF8AB19F7E11300F339A0 /* skybox_xpos.png in Resources */,

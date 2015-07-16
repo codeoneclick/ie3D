@@ -19,13 +19,23 @@ class CHeightmapTextureGenerator
 {
 private:
     
-    static void createSplattingTextureMasks(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
-    static void createSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                        const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                                        const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures);
+    // create mask splatting textures.
+    static void createSplattingMTextures(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    
+    // create diffuse splatting textures.
+    static void createSplattingDTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                         const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                         const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingDTextures);
+    
+    // create normal splatting textures.
     static void createSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
                                          const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                                         const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures);
+                                         const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingNTextures);
+    
+    static void generateSplattingTexture(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                         const std::shared_ptr<CHeightmapContainer>& container,
+                                         const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingDTextures,
+                                         ui32 i, ui32 j, const std::function<void(ui8 *, ui32, E_LANDSCAPE_CHUNK_LOD LOD)>& callback);
     
     static CSharedMaterial getSplattingTexturesMaterial(const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures);
     
@@ -44,20 +54,23 @@ public:
     CHeightmapTextureGenerator(void);
     ~CHeightmapTextureGenerator(void);
     
-    static void generateSplattingMasks(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
-    static void generateSplattingMask(const std::shared_ptr<CHeightmapContainer>& container, ui32 i, ui32 j, const std::shared_ptr<std::ofstream> stream = nullptr);
+    // generate mask splatting textures.
+    static void generateSplattingMTextures(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename);
+    static void generateSplattingMTexture(const std::shared_ptr<CHeightmapContainer>& container,
+                                          ui32 i, ui32 j, const std::shared_ptr<std::ofstream> stream = nullptr);
     
-    static void generateSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                          const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                                          const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures);
-    static void generateSplattingTexture(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                         const std::shared_ptr<CHeightmapContainer>& container,
-                                         const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures,
-                                         ui32 i, ui32 j, const std::shared_ptr<std::ofstream> stream = nullptr);
+    // generate diffuse splatting textures.
+    static void generateSplattingDTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                           const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                           const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingDTextures);
+    static void generateSplattingDTexture(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                          const std::shared_ptr<CHeightmapContainer>& container,
+                                          const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingDTextures,
+                                          ui32 i, ui32 j, const std::shared_ptr<std::ofstream> stream = nullptr);
     
-    static void generateSplattingTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                          const std::shared_ptr<CHeightmapContainer>& container, ui32 index,
-                                          const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures);
+    static void generateSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                           const std::shared_ptr<CHeightmapContainer>& container, ui32 index,
+                                           const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures);
     
     static void generateSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
                                            const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
