@@ -111,8 +111,9 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                             
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
-                        }, [this, index](CSharedTextureRef texture) {
-                            m_chunks[index]->setPreprocessedSplattingTexture(texture);
+                        }, [this, index](CSharedTextureRef DTexture, CSharedTextureRef NTexture) {
+                            m_chunks[index]->setPreprocessedSplattingDTexture(DTexture);
+                            m_chunks[index]->setPreprocessedSplattingNTexture(NTexture);
                         });
                     }
                     else if(m_chunks[index]->getInprogressLOD() == m_chunks[index]->getCurrentLOD() &&
@@ -126,8 +127,9 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         }, [this, index, LOD](CSharedQuadTreeRef quadTree) {
                             m_chunks[index]->setQuadTree(quadTree, LOD);
                             m_chunks[index]->onSceneUpdate(0);
-                        }, [this, index](CSharedTextureRef texture) {
-                            m_chunks[index]->setPreprocessedSplattingTexture(texture);
+                        }, [this, index](CSharedTextureRef DTexture, CSharedTextureRef NTexture) {
+                            m_chunks[index]->setPreprocessedSplattingDTexture(DTexture);
+                            m_chunks[index]->setPreprocessedSplattingNTexture(NTexture);
                         });
                     }
                 }
@@ -160,8 +162,9 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     CSharedConfigurationMaterial configurationSplatting = std::make_shared<CConfigurationMaterial>();
     configurationSplatting->serialize(configurationLandscape->getPreprocessSplattingMaterialFilename());
     
-    std::array<CSharedTexture, 3> splattingTextures;
-    assert(configurationSplatting->getTexturesConfigurations().size() == 3);
+    std::array<CSharedTexture, 3> splattingDTextures;
+    std::array<CSharedTexture, 3> splattingNTextures;
+    assert(configurationSplatting->getTexturesConfigurations().size() == 6);
     ui32 index = 0;
     for(const auto& iterator : configurationSplatting->getTexturesConfigurations())
     {
@@ -170,7 +173,14 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
         assert(!textureConfiguration->getCubemap());
         assert(textureConfiguration->getTextureFilename().length() != 0);
         CSharedTexture texture = m_resourceAccessor->getTexture(textureConfiguration->getTextureFilename(), true);
-        splattingTextures[index] = texture;
+        if(index >= 3)
+        {
+            splattingNTextures[index - 3] = texture;
+        }
+        else
+        {
+            splattingDTextures[index] = texture;
+        }
         index++;
     }
     assert(configurationLandscape->getHeightmapDataFilename().length() != 0);
@@ -185,7 +195,7 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
         customParameters->m_seed = configurationLandscape->getSeed();
     }
     
-    m_heightmapAccessor->generate(configurationLandscape->getHeightmapDataFilename(), m_renderTechniqueAccessor, splattingTextures, [this, configurationLandscape, success]() {
+    m_heightmapAccessor->generate(configurationLandscape->getHeightmapDataFilename(), m_renderTechniqueAccessor, splattingDTextures, splattingNTextures, [this, configurationLandscape, success]() {
         
         m_chunks.resize(m_heightmapAccessor->getChunksNum().x * m_heightmapAccessor->getChunksNum().y);
         
@@ -236,11 +246,11 @@ void CLandscape::onDraw(CSharedMaterialRef material)
         std::for_each(m_chunks.cbegin(), m_chunks.cend(), [material, this](CSharedLandscapeChunk chunk) {
             if(chunk && chunk->m_mesh && chunk->m_numPassedIndexes > 0)
             {
-                if(chunk->getPreprocessedSplattingTexture())
+                if(chunk->getPreprocessedSplattingDTexture() && chunk->getPreprocessedSplattingNTexture())
                 {
-                    material->getShader()->setTexture(chunk->getPreprocessedSplattingTexture(), E_SHADER_SAMPLER_01);
-                    material->getShader()->setTexture(chunk->getPreprocessedSplattingNormalTexture(), E_SHADER_SAMPLER_02);
-                    material->getShader()->setTexture(chunk->getPreprocessedSplattingDisplaceTexture(), E_SHADER_SAMPLER_03);
+                    material->getShader()->setTexture(chunk->getPreprocessedSplattingDTexture(), E_SHADER_SAMPLER_01);
+                    material->getShader()->setTexture(chunk->getPreprocessedSplattingNTexture(), E_SHADER_SAMPLER_02);
+                    material->getShader()->setTexture(chunk->getPreprocessedSplattingHTexture(), E_SHADER_SAMPLER_03);
                 }
                 chunk->m_mesh->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
                 chunk->m_mesh->draw(chunk->m_numPassedIndexes);

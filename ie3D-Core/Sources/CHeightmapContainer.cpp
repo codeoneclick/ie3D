@@ -26,8 +26,9 @@ m_compressedVerticesMMAPDescriptor(nullptr),
 m_facesMMAPDescriptor(nullptr),
 m_vbosMMAPDescriptor(nullptr),
 m_ibosMMAPDescriptor(nullptr),
-m_splattingTextureMasksMMAPDescriptor(nullptr),
-m_splattingTexturesMMAPDescriptor(nullptr),
+m_splattingMTexturesMMAPDescriptor(nullptr),
+m_splattingDTexturesMMAPDescriptor(nullptr),
+m_splattingNTexturesMMAPDescriptor(nullptr),
 m_mainSize(0)
 {
     
@@ -36,7 +37,9 @@ m_mainSize(0)
 CHeightmapContainer::~CHeightmapContainer(void)
 {
     CHeightmapContainer::eraseGeometry();
-    CHeightmapContainer::eraseTextures();
+    CHeightmapContainer::eraseMTextures();
+    CHeightmapContainer::eraseDTextures();
+    CHeightmapContainer::eraseNTextures();
 }
 
 void CHeightmapContainer::init(const glm::ivec2& size)
@@ -73,8 +76,9 @@ void CHeightmapContainer::init(const glm::ivec2& size)
     m_vbosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
     m_ibosMMAP.resize(m_chunksNum.x * m_chunksNum.y);
     
-    m_splattingTextureMasksMMAP.resize(m_chunksNum.x * m_chunksNum.y);
-    m_splattingTexturesMMAP.resize(m_chunksNum.x * m_chunksNum.y);
+    m_splattingMTexturesMMAP.resize(m_chunksNum.x * m_chunksNum.y);
+    m_splattingDTexturesMMAP.resize(m_chunksNum.x * m_chunksNum.y);
+    m_splattingNTexturesMMAP.resize(m_chunksNum.x * m_chunksNum.y);
 }
 
 void CHeightmapContainer::eraseGeometry(void)
@@ -125,21 +129,30 @@ void CHeightmapContainer::eraseGeometry(void)
     }
 }
 
-void CHeightmapContainer::eraseMasks(void)
+void CHeightmapContainer::eraseMTextures(void)
 {
-    if(m_splattingTextureMasksMMAPDescriptor)
+    if(m_splattingMTexturesMMAPDescriptor)
     {
-        m_splattingTextureMasksMMAPDescriptor->deallocate();
-        m_splattingTextureMasksMMAPDescriptor = nullptr;
+        m_splattingMTexturesMMAPDescriptor->deallocate();
+        m_splattingMTexturesMMAPDescriptor = nullptr;
     }
 }
 
-void CHeightmapContainer::eraseTextures(void)
+void CHeightmapContainer::eraseDTextures(void)
 {
-    if(m_splattingTexturesMMAPDescriptor)
+    if(m_splattingDTexturesMMAPDescriptor)
     {
-        m_splattingTexturesMMAPDescriptor->deallocate();
-        m_splattingTexturesMMAPDescriptor = nullptr;
+        m_splattingDTexturesMMAPDescriptor->deallocate();
+        m_splattingDTexturesMMAPDescriptor = nullptr;
+    }
+}
+
+void CHeightmapContainer::eraseNTextures(void)
+{
+    if(m_splattingNTexturesMMAPDescriptor)
+    {
+        m_splattingNTexturesMMAPDescriptor->deallocate();
+        m_splattingNTexturesMMAPDescriptor = nullptr;
     }
 }
 
@@ -212,32 +225,32 @@ void CHeightmapContainer::mmapGeometry(const std::string& filename)
     }
 }
 
-void CHeightmapContainer::mmapMasks(const std::string& filename)
+void CHeightmapContainer::mmapMTextures(const std::string& filename)
 {
-    CHeightmapContainer::eraseMasks();
+    CHeightmapContainer::eraseMTextures();
     
-    m_splattingTextureMasksMMAPDescriptor = std::make_shared<CMmap>();
-    m_splattingTextureMasksMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTextureM_MMapFilename(filename));
+    m_splattingMTexturesMMAPDescriptor = std::make_shared<CMmap>();
+    m_splattingMTexturesMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTexturesM_MMapFilename(filename));
     
     ui32 offset = 0;
     for(ui32 i = 0; i < m_chunksNum.x; ++i)
     {
         for(ui32 j = 0; j < m_chunksNum.y; ++j)
         {
-            m_splattingTextureMasksMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapTextureMMAP_RGB565>(m_splattingTextureMasksMMAPDescriptor);
-            m_splattingTextureMasksMMAP[i + j * m_chunksNum.x]->setSize(CHeightmapTextureGenerator::kSplattingTextureMaskSize.x * CHeightmapTextureGenerator::kSplattingTextureMaskSize.y);
-            m_splattingTextureMasksMMAP[i + j * m_chunksNum.x]->setOffset(offset);
+            m_splattingMTexturesMMAP[i + j * m_chunksNum.x] = std::make_shared<CHeightmapTextureMMAP_RGB565>(m_splattingMTexturesMMAPDescriptor);
+            m_splattingMTexturesMMAP[i + j * m_chunksNum.x]->setSize(CHeightmapTextureGenerator::kSplattingTextureMaskSize.x * CHeightmapTextureGenerator::kSplattingTextureMaskSize.y);
+            m_splattingMTexturesMMAP[i + j * m_chunksNum.x]->setOffset(offset);
             offset += CHeightmapTextureGenerator::kSplattingTextureMaskSize.x * CHeightmapTextureGenerator::kSplattingTextureMaskSize.y;
         }
     }
 }
 
-void CHeightmapContainer::mmapTextures(const std::string& filename)
+void CHeightmapContainer::mmapDTextures(const std::string& filename)
 {
-    CHeightmapContainer::eraseTextures();
+    CHeightmapContainer::eraseDTextures();
     
-    m_splattingTexturesMMAPDescriptor = std::make_shared<CMmap>();
-    m_splattingTexturesMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTextures_MMapFilename(filename));
+    m_splattingDTexturesMMAPDescriptor = std::make_shared<CMmap>();
+    m_splattingDTexturesMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTexturesD_MMapFilename(filename));
     
     ui32 offset = 0;
     for(ui32 i = 0; i < m_chunksNum.x; ++i)
@@ -246,11 +259,37 @@ void CHeightmapContainer::mmapTextures(const std::string& filename)
         {
             for(ui32 k = 0; k < E_LANDSCAPE_CHUNK_LOD_MAX; ++k)
             {
-                m_splattingTexturesMMAP[i + j * m_chunksNum.x][k] = std::make_shared<CHeightmapTextureMMAP_RGBA8>(m_splattingTexturesMMAPDescriptor);
-                m_splattingTexturesMMAP[i + j * m_chunksNum.x][k]->setSize(CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).x *
+                m_splattingDTexturesMMAP[i + j * m_chunksNum.x][k] = std::make_shared<CHeightmapTextureMMAP_RGBA8>(m_splattingDTexturesMMAPDescriptor);
+                m_splattingDTexturesMMAP[i + j * m_chunksNum.x][k]->setSize(CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).x *
                                                                            CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).y *
                                                                            CHeightmapTextureGenerator::kSplattingTextureChannels);
-                m_splattingTexturesMMAP[i + j * m_chunksNum.x][k]->setOffset(offset);
+                m_splattingDTexturesMMAP[i + j * m_chunksNum.x][k]->setOffset(offset);
+                offset += CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).x *
+                CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).y * CHeightmapTextureGenerator::kSplattingTextureChannels;
+            }
+        }
+    }
+}
+
+void CHeightmapContainer::mmapNTextures(const std::string& filename)
+{
+    CHeightmapContainer::eraseNTextures();
+    
+    m_splattingNTexturesMMAPDescriptor = std::make_shared<CMmap>();
+    m_splattingNTexturesMMAPDescriptor->allocate(CHeightmapLoader::getSplattingTexturesN_MMapFilename(filename));
+    
+    ui32 offset = 0;
+    for(ui32 i = 0; i < m_chunksNum.x; ++i)
+    {
+        for(ui32 j = 0; j < m_chunksNum.y; ++j)
+        {
+            for(ui32 k = 0; k < E_LANDSCAPE_CHUNK_LOD_MAX; ++k)
+            {
+                m_splattingNTexturesMMAP[i + j * m_chunksNum.x][k] = std::make_shared<CHeightmapTextureMMAP_RGBA8>(m_splattingNTexturesMMAPDescriptor);
+                m_splattingNTexturesMMAP[i + j * m_chunksNum.x][k]->setSize(CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).x *
+                                                                            CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).y *
+                                                                            CHeightmapTextureGenerator::kSplattingTextureChannels);
+                m_splattingNTexturesMMAP[i + j * m_chunksNum.x][k]->setOffset(offset);
                 offset += CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).x *
                 CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).y * CHeightmapTextureGenerator::kSplattingTextureChannels;
             }

@@ -143,16 +143,23 @@ inline std::shared_ptr<CHeightmapContainer::CHeightmapIBOMMAP> CHeightmapContain
     return m_ibosMMAP[index][LOD];
 };
 
-inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGB565>CHeightmapContainer:: getSplattingTextureMaskMmap(i32 index) const
+inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGB565>CHeightmapContainer:: getSplattingMTexturesMmap(i32 index) const
 {
-    assert(index >=0 && index < m_splattingTextureMasksMMAP.size());
-    return m_splattingTextureMasksMMAP[index];
+    assert(index >=0 && index < m_splattingMTexturesMMAP.size());
+    return m_splattingMTexturesMMAP[index];
 };
 
-inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGBA8> CHeightmapContainer::getSplattingTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const
+inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGBA8> CHeightmapContainer::getSplattingDTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const
 {
     assert(LOD >= 0 && LOD < E_LANDSCAPE_CHUNK_LOD_MAX);
-    assert(index >=0 && index < m_splattingTexturesMMAP.size());
-    return m_splattingTexturesMMAP[index][LOD];
+    assert(index >=0 && index < m_splattingDTexturesMMAP.size());
+    return m_splattingDTexturesMMAP[index][LOD];
+};
+
+inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGBA8> CHeightmapContainer::getSplattingNTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const
+{
+    assert(LOD >= 0 && LOD < E_LANDSCAPE_CHUNK_LOD_MAX);
+    assert(index >=0 && index < m_splattingNTexturesMMAP.size());
+    return m_splattingNTexturesMMAP[index][LOD];
 };
 

@@ -31,10 +31,10 @@ public:
     static std::string getVBOsMMAPFilename(const std::string& filename);
     static std::string getIBOsMMAPFilename(const std::string& filename);
     
-    static std::string getSplattingTextureM_MMapFilename(const std::string& filename);
-    static std::string getSplattingTextureN_MMapFilename(const std::string& filename);
-    static std::string getSplattingTextureH_MMapFilename(const std::string& filename);
-    static std::string getSplattingTextures_MMapFilename(const std::string& filename);
+    static std::string getSplattingTexturesM_MMapFilename(const std::string& filename);
+    static std::string getSplattingTexturesN_MMapFilename(const std::string& filename);
+    static std::string getSplattingTexturesH_MMapFilename(const std::string& filename);
+    static std::string getSplattingTexturesD_MMapFilename(const std::string& filename);
     
     static std::string getTangentSpace_MMapFilename(const std::string& filename);
     static std::string getAttachesToVBO_MMapFilename(const std::string& filename);
@@ -46,10 +46,10 @@ public:
     static bool isVBOsMMAPExist(const std::string& filename);
     static bool isIBOsMMAPExist(const std::string& filename);
     
-    static bool isSplattingTextureM_MMapExist(const std::string& filename);
-    static bool isSplattingTextureN_MMapExist(const std::string& filename);
-    static bool isSplattingTextureH_MMapExist(const std::string& filename);
-    static bool isSplattingTextures_MMapExist(const std::string& filename);
+    static bool isSplattingTexturesM_MMapExist(const std::string& filename);
+    static bool isSplattingTexturesD_MMapExist(const std::string& filename);
+    static bool isSplattingTexturesN_MMapExist(const std::string& filename);
+    static bool isSplattingTexturesH_MMapExist(const std::string& filename);
     
     static bool isTangentSpace_MMapExist(const std::string& filename);
     static bool isAttachesToVBO_MMapExist(const std::string& filename);

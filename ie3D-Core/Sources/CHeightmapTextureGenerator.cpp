@@ -95,7 +95,7 @@ void CHeightmapTextureGenerator::generateSplattingTexture(ISharedRenderTechnique
         }
     });
     
-    glm::ivec2 sizeMTexture = glm::ivec2(sqrt(container->getSplattingTextureMaskMmap(0)->getSize()));
+    glm::ivec2 sizeMTexture = glm::ivec2(sqrt(container->getSplattingMTexturesMmap(0)->getSize()));
     static CSharedTexture splattingMTexture = nullptr;
     std::call_once(g_createSplattingMTexture, [container, material, sizeMTexture]() {
         
@@ -123,7 +123,7 @@ void CHeightmapTextureGenerator::generateSplattingTexture(ISharedRenderTechnique
         ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
                      sizeMTexture.x, sizeMTexture.y,
                      0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5,
-                     container->getSplattingTextureMaskMmap(index)->getPointer());
+                     container->getSplattingMTexturesMmap(index)->getPointer());
         
         renderTargets[LOD]->begin();
         renderTargets[LOD]->clear();
@@ -148,7 +148,7 @@ void CHeightmapTextureGenerator::generateSplattingTexture(ISharedRenderTechnique
 
 void CHeightmapTextureGenerator::generateSplattingMTextures(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
 {
-    if(!CHeightmapLoader::isSplattingTextureM_MMapExist(filename))
+    if(!CHeightmapLoader::isSplattingTexturesM_MMapExist(filename))
     {
         CHeightmapTextureGenerator::createSplattingMTextures(container, filename);
     }
@@ -157,7 +157,7 @@ void CHeightmapTextureGenerator::generateSplattingMTextures(const std::shared_pt
 void CHeightmapTextureGenerator::createSplattingMTextures(const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename)
 {
     std::shared_ptr<std::ofstream> stream = std::make_shared<std::ofstream>();
-    stream->open(CHeightmapLoader::getSplattingTextureM_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    stream->open(CHeightmapLoader::getSplattingTexturesM_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
     if(!stream->is_open())
     {
         assert(false);
@@ -249,8 +249,8 @@ void CHeightmapTextureGenerator::generateSplattingMTexture(const std::shared_ptr
     else
     {
         ui32 index = i + j * container->getChunksNum().x;
-        assert(container->getSplattingTextureMaskMmap(index)->getPointer());
-        memcpy(container->getSplattingTextureMaskMmap(index)->getPointer(), pixels, sizeof(ui16) * kSplattingTextureMaskSize.x * kSplattingTextureMaskSize.y);
+        assert(container->getSplattingMTexturesMmap(index)->getPointer());
+        memcpy(container->getSplattingMTexturesMmap(index)->getPointer(), pixels, sizeof(ui16) * kSplattingTextureMaskSize.x * kSplattingTextureMaskSize.y);
     }
     
     delete[] pixels;
@@ -261,7 +261,7 @@ void CHeightmapTextureGenerator::generateSplattingDTextures(ISharedRenderTechniq
                                                             const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
                                                             const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingDTextures)
 {
-    if(!CHeightmapLoader::isSplattingTextures_MMapExist(filename))
+    if(!CHeightmapLoader::isSplattingTexturesD_MMapExist(filename))
     {
         CHeightmapTextureGenerator::createSplattingDTextures(renderTechniqueAccessor, container, filename, splattingDTextures);
     }
@@ -277,7 +277,7 @@ void CHeightmapTextureGenerator::createSplattingDTextures(ISharedRenderTechnique
     CSharedQuad quad = std::make_shared<CQuad>();
     
     std::shared_ptr<std::ofstream> stream = std::make_shared<std::ofstream>();
-    stream->open(CHeightmapLoader::getSplattingTextures_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    stream->open(CHeightmapLoader::getSplattingTexturesD_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
     if(!stream->is_open())
     {
         assert(false);
@@ -308,22 +308,66 @@ void CHeightmapTextureGenerator::generateSplattingDTexture(ISharedRenderTechniqu
         }
         else
         {
-            assert(container->getSplattingTexturesMmap(index, LOD)->getPointer());
-            memcpy(container->getSplattingTexturesMmap(index, LOD)->getPointer(), data, size * sizeof(ui8));
+            assert(container->getSplattingDTexturesMmap(index, LOD)->getPointer());
+            memcpy(container->getSplattingDTexturesMmap(index, LOD)->getPointer(), data, size * sizeof(ui8));
         }
     });
 }
 
-void CHeightmapTextureGenerator::createSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                                          const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                                                          const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures)
-{
-    
-}
-
 void CHeightmapTextureGenerator::generateSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
                                                             const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                                                            const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingNormalTextures)
+                                                            const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingNTextures)
 {
-    
+    if(!CHeightmapLoader::isSplattingTexturesN_MMapExist(filename))
+    {
+        CHeightmapTextureGenerator::createSplattingNTextures(renderTechniqueAccessor, container, filename, splattingNTextures);
+    }
 }
+
+void CHeightmapTextureGenerator::createSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                                          const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
+                                                          const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingNTextures)
+{
+    renderTechniqueAccessor->getGraphicsContext()->beginBackgroundContext();
+    
+    CSharedMaterial material = CHeightmapTextureGenerator::getSplattingTexturesMaterial(splattingNTextures);
+    CSharedQuad quad = std::make_shared<CQuad>();
+    
+    std::shared_ptr<std::ofstream> stream = std::make_shared<std::ofstream>();
+    stream->open(CHeightmapLoader::getSplattingTexturesN_MMapFilename(filename), std::ios::binary | std::ios::out | std::ios::trunc);
+    if(!stream->is_open())
+    {
+        assert(false);
+    }
+    
+    for(ui32 i = 0; i < container->getChunksNum().x; ++i)
+    {
+        for(ui32 j = 0; j < container->getChunksNum().y; ++j)
+        {
+            CHeightmapTextureGenerator::generateSplattingNTexture(renderTechniqueAccessor, container, splattingNTextures, i, j, stream);
+        }
+    }
+    
+    renderTechniqueAccessor->getGraphicsContext()->endBackgroundContext();
+    stream->close();
+}
+
+void CHeightmapTextureGenerator::generateSplattingNTexture(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                                           const std::shared_ptr<CHeightmapContainer>& container,
+                                                           const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingNTextures,
+                                                           ui32 i, ui32 j, const std::shared_ptr<std::ofstream> stream)
+{
+    ui32 index = i + j * container->getChunksNum().x;
+    CHeightmapTextureGenerator::generateSplattingTexture(renderTechniqueAccessor, container, splattingNTextures, i, j, [stream, container, index](ui8 *data, ui32 size, E_LANDSCAPE_CHUNK_LOD LOD) {
+        if(stream)
+        {
+            stream->write((char *)data, size * sizeof(ui8));
+        }
+        else
+        {
+            assert(container->getSplattingNTexturesMmap(index, LOD)->getPointer());
+            memcpy(container->getSplattingNTexturesMmap(index, LOD)->getPointer(), data, size * sizeof(ui8));
+        }
+    });
+}
+

@@ -36,10 +36,11 @@ private:
     
     std::vector<CSharedThreadOperation> m_executedOperations;
     std::vector<bool> m_canceledOperationsStatus;
-    std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, std::function<void(CSharedTextureRef)>>> m_callbacks;
-    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, CSharedTexture, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
+    std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, std::function<void(CSharedTextureRef, CSharedTextureRef)>>> m_callbacks;
+    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, CSharedTexture, CSharedTexture, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
-    std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX> m_splattingTextures;
+    std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX> m_splattingDTextures;
+    std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX> m_splattingNTextures;
     std::queue<CSharedThreadOperation> m_updateHeightmapOperations;
     
     void createLoadingOperations(void);
@@ -56,8 +57,8 @@ private:
     
     void generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD);
     void generateQuadTree(i32 index);
-    void generateSplattingTexture(i32 index, E_LANDSCAPE_CHUNK_LOD LOD);
-    void updateSplattingTexture(i32 index);
+    void generateSplattingTextures(i32 index, E_LANDSCAPE_CHUNK_LOD LOD);
+    void updateSplattingTextures(i32 index);
     
     static f32 getAngle(const glm::vec3& point_01,
                         const glm::vec3& point_02,
@@ -85,13 +86,15 @@ public:
     static glm::vec2 getAngles(std::shared_ptr<CHeightmapContainer> container, const glm::vec3& position);
     
     void generate(const std::string& filename, ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                  const std::array<CSharedTexture, 3>& splattingTextures, const std::function<void(void)>& callback,
+                  const std::array<CSharedTexture, 3>& splattingDTextures,
+                  const std::array<CSharedTexture, 3>& splattingNTextures,
+                  const std::function<void(void)>& callback,
                   const std::shared_ptr<SHeightmapCustomParameters>& customParameters = nullptr);
     
     void runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
-                    const std::function<void(CSharedMeshRef)>& meshLoadedCallback,
-                    const std::function<void(CSharedQuadTreeRef)>& quadTreeLoadedCallback,
-                    const std::function<void(CSharedTextureRef)>& textureLoadingCallback);
+                    const std::function<void(CSharedMeshRef)>& callbackMeshLoaded,
+                    const std::function<void(CSharedQuadTreeRef)>& callbackQuadTreeLoaded,
+                    const std::function<void(CSharedTextureRef, CSharedTextureRef)>& callbackTexturesLoaded);
     void runUnLoading(i32 i, i32 j);
     
     void update(void);

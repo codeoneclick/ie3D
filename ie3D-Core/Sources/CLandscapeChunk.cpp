@@ -28,9 +28,9 @@ m_quadTree(nullptr),
 m_currentLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
 m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
 m_size(0),
-m_preprocessedSplattingTexture(nullptr),
-m_preprocessedSplattingNormalTexture(nullptr),
-m_preprocessedSplattingDisplaceTexture(nullptr)
+m_preprocessedSplattingDTexture(nullptr),
+m_preprocessedSplattingNTexture(nullptr),
+m_preprocessedSplattingHTexture(nullptr)
 {
 
 }
@@ -88,43 +88,40 @@ void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuratio
     {
         m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this());
     }
-    m_preprocessedSplattingNormalTexture = m_resourceAccessor->getTexture("base_NRM.png", true);
-    m_preprocessedSplattingNormalTexture->setMagFilter(GL_LINEAR);
-    m_preprocessedSplattingNormalTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
-    m_preprocessedSplattingDisplaceTexture = m_resourceAccessor->getTexture("base_DISP.png", true);
-    m_preprocessedSplattingDisplaceTexture->setMagFilter(GL_LINEAR);
-    m_preprocessedSplattingDisplaceTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
+    m_preprocessedSplattingHTexture = m_resourceAccessor->getTexture("base_DISP.png", true);
+    m_preprocessedSplattingHTexture->setMagFilter(GL_LINEAR);
+    m_preprocessedSplattingHTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
-void CLandscapeChunk::setPreprocessedSplattingTexture(CSharedTextureRef texture)
+void CLandscapeChunk::setPreprocessedSplattingDTexture(CSharedTextureRef texture)
 {
-    m_preprocessedSplattingTexture = texture;
+    m_preprocessedSplattingDTexture = texture;
 }
 
-const CSharedTexture CLandscapeChunk::getPreprocessedSplattingTexture(void) const
+const CSharedTexture CLandscapeChunk::getPreprocessedSplattingDTexture(void) const
 {
-    return m_preprocessedSplattingTexture;
+    return m_preprocessedSplattingDTexture;
 }
 
-const CSharedTexture  CLandscapeChunk::getPreprocessedSplattingNormalTexture(void) const
+const CSharedTexture  CLandscapeChunk::getPreprocessedSplattingNTexture(void) const
 {
-    return m_preprocessedSplattingNormalTexture;
+    return m_preprocessedSplattingNTexture;
 }
 
-void CLandscapeChunk::setPreprocessedSplattingNormalTexture(CSharedTextureRef texture)
+void CLandscapeChunk::setPreprocessedSplattingNTexture(CSharedTextureRef texture)
 {
-    m_preprocessedSplattingNormalTexture = texture;
+    m_preprocessedSplattingNTexture = texture;
 }
 
-const CSharedTexture CLandscapeChunk::getPreprocessedSplattingDisplaceTexture(void) const
+const CSharedTexture CLandscapeChunk::getPreprocessedSplattingHTexture(void) const
 {
-    return m_preprocessedSplattingDisplaceTexture;
+    return m_preprocessedSplattingHTexture;
 }
 
-void CLandscapeChunk::setPreprocessedSplattingDisplaceTexture(CSharedTextureRef texture)
+void CLandscapeChunk::setPreprocessedSplattingHTexture(CSharedTextureRef texture)
 {
-    m_preprocessedSplattingDisplaceTexture = texture;
+    m_preprocessedSplattingHTexture = texture;
 }
 
 CSharedVertexBuffer CLandscapeChunk::getCollisionVertexBuffer(void) const

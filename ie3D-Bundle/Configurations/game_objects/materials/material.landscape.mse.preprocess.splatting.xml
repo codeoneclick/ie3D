@@ -20,23 +20,44 @@
     fs_filename=""/>
     <textures>
         <texture
-        filename="landscape_01.png"
+        filename="landscapeD_01.png"
         render_operation_name=""
         sampler_index="0"
         wrap_mode="GL_REPEAT"
         mag_filter="GL_LINEAR"
         min_filter="GL_MIPMAP"/>
         <texture
-        filename="landscape_02.png"
+        filename="landscapeD_02.png"
         render_operation_name=""
         sampler_index="1"
         wrap_mode="GL_REPEAT"
         mag_filter="GL_LINEAR"
         min_filter="GL_MIPMAP"/>
         <texture
-        filename="landscape_03.png"
+        filename="landscapeD_03.png"
         render_operation_name=""
         sampler_index="2"
+        wrap_mode="GL_REPEAT"
+        mag_filter="GL_LINEAR"
+        min_filter="GL_MIPMAP"/>
+        <texture
+        filename="landscapeN_01.png"
+        render_operation_name=""
+        sampler_index="3"
+        wrap_mode="GL_REPEAT"
+        mag_filter="GL_LINEAR"
+        min_filter="GL_MIPMAP"/>
+        <texture
+        filename="landscapeN_02.png"
+        render_operation_name=""
+        sampler_index="4"
+        wrap_mode="GL_REPEAT"
+        mag_filter="GL_LINEAR"
+        min_filter="GL_MIPMAP"/>
+        <texture
+        filename="landscapeN_03.png"
+        render_operation_name=""
+        sampler_index="5"
         wrap_mode="GL_REPEAT"
         mag_filter="GL_LINEAR"
         min_filter="GL_MIPMAP"/>

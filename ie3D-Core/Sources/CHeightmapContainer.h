@@ -221,13 +221,16 @@ private:
     std::shared_ptr<CMmap> m_vbosMMAPDescriptor;
     std::shared_ptr<CMmap> m_ibosMMAPDescriptor;
     
-    std::shared_ptr<CMmap> m_splattingTextureMasksMMAPDescriptor;
-    std::shared_ptr<CMmap> m_splattingTexturesMMAPDescriptor;
+    std::shared_ptr<CMmap> m_splattingMTexturesMMAPDescriptor;
+    std::shared_ptr<CMmap> m_splattingDTexturesMMAPDescriptor;
+    std::shared_ptr<CMmap> m_splattingNTexturesMMAPDescriptor;
     
     std::vector<std::shared_ptr<CHeightmapVBOMMAP>> m_vbosMMAP;
     std::vector<std::array<std::shared_ptr<CHeightmapIBOMMAP>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
-    std::vector<std::shared_ptr<CHeightmapTextureMMAP_RGB565>> m_splattingTextureMasksMMAP;
-    std::vector<std::array<std::shared_ptr<CHeightmapTextureMMAP_RGBA8>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_splattingTexturesMMAP;
+    
+    std::vector<std::shared_ptr<CHeightmapTextureMMAP_RGB565>> m_splattingMTexturesMMAP;
+    std::vector<std::array<std::shared_ptr<CHeightmapTextureMMAP_RGBA8>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_splattingDTexturesMMAP;
+    std::vector<std::array<std::shared_ptr<CHeightmapTextureMMAP_RGBA8>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_splattingNTexturesMMAP;
     
     glm::ivec2 m_mainSize;
     glm::ivec2 m_chunksNum;
@@ -236,8 +239,9 @@ private:
     std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_texturesLODsSizes;
     
     void eraseGeometry(void);
-    void eraseMasks(void);
-    void eraseTextures(void);
+    void eraseMTextures(void);
+    void eraseDTextures(void);
+    void eraseNTextures(void);
     
 protected:
     
@@ -255,8 +259,9 @@ public:
     
     void init(const glm::ivec2& size);
     void mmapGeometry(const std::string& filename);
-    void mmapMasks(const std::string& filename);
-    void mmapTextures(const std::string& filename);
+    void mmapMTextures(const std::string& filename);
+    void mmapDTextures(const std::string& filename);
+    void mmapNTextures(const std::string& filename);
     
     inline glm::ivec2 getMainSize(void) const;
     inline glm::ivec2 getChunksNum(void) const;
@@ -285,8 +290,9 @@ public:
     
     inline std::shared_ptr<CHeightmapVBOMMAP> getVBOMmap(i32 index) const;
     inline std::shared_ptr<CHeightmapIBOMMAP> getIBOMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
-    inline std::shared_ptr<CHeightmapTextureMMAP_RGB565> getSplattingTextureMaskMmap(i32 index) const;
-    inline std::shared_ptr<CHeightmapTextureMMAP_RGBA8> getSplattingTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
+    inline std::shared_ptr<CHeightmapTextureMMAP_RGB565> getSplattingMTexturesMmap(i32 index) const;
+    inline std::shared_ptr<CHeightmapTextureMMAP_RGBA8> getSplattingDTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
+    inline std::shared_ptr<CHeightmapTextureMMAP_RGBA8> getSplattingNTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
 };
 
 #include "CHeightmapContainer.hpp"

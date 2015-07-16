@@ -69,12 +69,13 @@ public:
                                           ui32 i, ui32 j, const std::shared_ptr<std::ofstream> stream = nullptr);
     
     static void generateSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
-                                           const std::shared_ptr<CHeightmapContainer>& container, ui32 index,
-                                           const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingTextures);
-    
-    static void generateSplattingNTextures(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
                                            const std::shared_ptr<CHeightmapContainer>& container, const std::string& filename,
-                                           const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingNormalTextures);
+                                           const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingNTextures);
+    
+    static void generateSplattingNTexture(ISharedRenderTechniqueAccessorRef renderTechniqueAccessor,
+                                          const std::shared_ptr<CHeightmapContainer>& container,
+                                          const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingNTextures,
+                                          ui32 i, ui32 j, const std::shared_ptr<std::ofstream> stream = nullptr);
     
 };
 

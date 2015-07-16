@@ -25,9 +25,9 @@ private:
     
     ui32 m_numPassedIndexes;
     CSharedQuadTree m_quadTree;
-    CSharedTexture m_preprocessedSplattingTexture;
-    CSharedTexture m_preprocessedSplattingNormalTexture;
-    CSharedTexture m_preprocessedSplattingDisplaceTexture;
+    CSharedTexture m_preprocessedSplattingDTexture;
+    CSharedTexture m_preprocessedSplattingNTexture;
+    CSharedTexture m_preprocessedSplattingHTexture;
     
 protected:
     
@@ -52,14 +52,14 @@ public:
     E_LANDSCAPE_CHUNK_LOD getInprogressLOD(void) const;
     void setInprogressLOD(E_LANDSCAPE_CHUNK_LOD LOD);
     
-    const CSharedTexture getPreprocessedSplattingTexture(void) const;
-    void setPreprocessedSplattingTexture(CSharedTextureRef texture);
+    const CSharedTexture getPreprocessedSplattingDTexture(void) const;
+    void setPreprocessedSplattingDTexture(CSharedTextureRef texture);
     
-    const CSharedTexture getPreprocessedSplattingNormalTexture(void) const;
-    void setPreprocessedSplattingNormalTexture(CSharedTextureRef texture);
+    const CSharedTexture getPreprocessedSplattingNTexture(void) const;
+    void setPreprocessedSplattingNTexture(CSharedTextureRef texture);
     
-    const CSharedTexture getPreprocessedSplattingDisplaceTexture(void) const;
-    void setPreprocessedSplattingDisplaceTexture(CSharedTextureRef texture);
+    const CSharedTexture getPreprocessedSplattingHTexture(void) const;
+    void setPreprocessedSplattingHTexture(CSharedTextureRef texture);
     
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;
