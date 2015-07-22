@@ -704,18 +704,24 @@ void CHeightmapAccessor::updateVertices(const std::vector<glm::vec3>& vertices,
                 });
                 m_updateHeightmapOperations.push(updateGeometryOperation);
                 
-                CSharedThreadOperation updateSplattingMaskOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
-                updateSplattingMaskOperation->setExecutionBlock([this, i , j](void) {
+                CSharedThreadOperation updateSplattingMTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
+                updateSplattingMTextureOperation->setExecutionBlock([this, i , j](void) {
 
                     CHeightmapTextureGenerator::generateSplattingMTexture(m_container, i, j);
                 });
-                m_updateHeightmapOperations.push(updateSplattingMaskOperation);
+                m_updateHeightmapOperations.push(updateSplattingMTextureOperation);
                 
-                CSharedThreadOperation updateSplattingTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
-                updateSplattingTextureOperation->setExecutionBlock([this, i , j](void) {
+                CSharedThreadOperation updateSplattingDTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+                updateSplattingDTextureOperation->setExecutionBlock([this, i , j](void) {
                     CHeightmapTextureGenerator::generateSplattingDTexture(m_renderTechniqueAccessor, m_container, m_splattingDTextures, i, j);
                 });
-                m_updateHeightmapOperations.push(updateSplattingTextureOperation);
+                m_updateHeightmapOperations.push(updateSplattingDTextureOperation);
+                
+                CSharedThreadOperation updateSplattingNTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+                updateSplattingNTextureOperation->setExecutionBlock([this, i , j](void) {
+                    CHeightmapTextureGenerator::generateSplattingNTexture(m_renderTechniqueAccessor, m_container, m_splattingNTextures, i, j);
+                });
+                m_updateHeightmapOperations.push(updateSplattingNTextureOperation);
                 
                 CSharedThreadOperation updateTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
                 updateTexturesOperation->setExecutionBlock([this, index](void) {

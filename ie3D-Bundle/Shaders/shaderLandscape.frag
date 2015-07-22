@@ -84,11 +84,11 @@ void main(void)
     
 #endif
     
-    float scale = 0.01;
-    float bias = 0.005;
+    //float scale = 0.01;
+    //float bias = 0.005;
     
-    float fDepth = texture2D(SAMPLER_03, OUT_TexCoord * k_fTexCoordScale).x * scale - bias;
-    vec2 vTexCoord = OUT_TexCoord * k_fTexCoordScale + (fDepth * eyeDirTS.xy) / eyeDirTS.z;
+    //float fDepth = texture2D(SAMPLER_03, OUT_TexCoord * k_fTexCoordScale).x * scale - bias;
+    vec2 vTexCoord = OUT_TexCoord;// * k_fTexCoordScale + (fDepth * eyeDirTS.xy) / eyeDirTS.z;
     
     vec3 normalColor = texture2D(SAMPLER_02, vTexCoord).rgb * 2.0 - 1.0;
     
@@ -99,7 +99,7 @@ void main(void)
     float fBias = 0.0005 * tan(acos(dot(normalColor, lightDirTS)));
     float fShadow = max(step(getCurrentDepth(fZ), getShadowMapPassDepth(vTexCoord)), 0.5);
     
-    vec4 color = diffuseIntensity * texture2D(SAMPLER_01, OUT_TexCoord + (fDepth * eyeDirTS.xy));
+    vec4 color = diffuseIntensity * texture2D(SAMPLER_01, OUT_TexCoord /*+ (fDepth * eyeDirTS.xy)*/);
     color.rgb *= fShadow;
     color.a = 1.0;
     gl_FragColor = color;

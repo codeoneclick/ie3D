@@ -34,5 +34,5 @@ void main(void)
         vDiffuseColor = vDiffuseColor + texture2D(SAMPLER_03, OUT_TexCoordScaled) * vSplattingColor.z;
     }
     
-    gl_FragColor = vDiffuseColor;
+    gl_FragColor = clamp(vDiffuseColor, vec4(vec3(0.0), 1.0), vec4(1.0));
 }
