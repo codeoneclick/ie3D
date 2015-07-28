@@ -234,7 +234,7 @@
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <property name="documentMode">
      <bool>true</bool>
@@ -1851,6 +1851,11 @@ background-color: rgb(0, 0, 0);</string>
        </attribute>
       </widget>
      </widget>
+    </widget>
+    <widget class="QWidget" name="m_particlesTab">
+     <attribute name="title">
+      <string>Particles</string>
+     </attribute>
     </widget>
    </widget>
   </widget>

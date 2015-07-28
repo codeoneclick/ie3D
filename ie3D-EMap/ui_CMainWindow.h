@@ -126,6 +126,7 @@ public:
     QRadioButton *m_drawCurrentRadioButton;
     QRadioButton *m_drawAllRadioButton;
     QWidget *m_goeAnimationsSettingTab;
+    QWidget *m_particlesTab;
     QMenuBar *menuBar;
 
     void setupUi(QMainWindow *CMainWindow)
@@ -621,6 +622,9 @@ public:
         m_goeAnimationsSettingTab->setEnabled(true);
         m_goeSettingsTab->addTab(m_goeAnimationsSettingTab, QString());
         m_mainMenuTabs->addTab(m_gameObjectTab, QString());
+        m_particlesTab = new QWidget();
+        m_particlesTab->setObjectName(QStringLiteral("m_particlesTab"));
+        m_mainMenuTabs->addTab(m_particlesTab, QString());
         CMainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CMainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -629,7 +633,7 @@ public:
 
         retranslateUi(CMainWindow);
 
-        m_mainMenuTabs->setCurrentIndex(0);
+        m_mainMenuTabs->setCurrentIndex(2);
         m_landscapePropertiesTab->setCurrentIndex(2);
         m_goeSettingsTab->setCurrentIndex(1);
 
@@ -704,6 +708,7 @@ public:
         m_goeSettingsTab->setTabText(m_goeSettingsTab->indexOf(m_goeMaterialsSettingTab), QApplication::translate("CMainWindow", "Materials", 0));
         m_goeSettingsTab->setTabText(m_goeSettingsTab->indexOf(m_goeAnimationsSettingTab), QApplication::translate("CMainWindow", "Animations", 0));
         m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(m_gameObjectTab), QApplication::translate("CMainWindow", "Game Object", 0));
+        m_mainMenuTabs->setTabText(m_mainMenuTabs->indexOf(m_particlesTab), QApplication::translate("CMainWindow", "Particles", 0));
     } // retranslateUi
 
 };

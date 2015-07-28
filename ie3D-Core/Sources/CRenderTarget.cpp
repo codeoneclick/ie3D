@@ -9,6 +9,12 @@
 #include "CRenderTarget.h"
 #include "IGraphicsContext.h"
 
+#if defined(__OSX__)
+
+#define __PBO__ 1
+
+#endif
+
 CRenderTarget::CRenderTarget(ISharedGraphicsContextRef graphicsContext, GLint format, ui32 width, ui32 height) :
 m_graphicsContext(graphicsContext),
 m_size(glm::ivec2(width, height)),
@@ -36,6 +42,25 @@ m_format(format)
     ieFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_colorAttachment, 0);
     ieFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthAttachment);
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+    
+#if defined(__PBO__)
+    
+    ui32 size = m_size.x * m_size.y;
+    if(m_format == GL_RGBA)
+    {
+        size *= 4;
+    }
+    else if(m_format == GL_RGB)
+    {
+        size *= 3;
+    }
+        
+    ieGenBuffers(1, &m_pixelBuffer);
+    ieBindBuffer(GL_PIXEL_PACK_BUFFER, m_pixelBuffer);
+    ieBufferData(GL_PIXEL_PACK_BUFFER, size, NULL, GL_STREAM_READ);
+    ieBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
+    
+#endif
 }
 
 CRenderTarget::~CRenderTarget(void)
@@ -52,6 +77,15 @@ CRenderTarget::~CRenderTarget(void)
     {
         ieDeleteRenderbuffers(1, &m_depthAttachment);
     }
+    
+#if defined(__PBO__)
+    
+    if(m_pixelBuffer != 0)
+    {
+        ieDeleteBuffers(1, &m_pixelBuffer);
+    }
+    
+#endif
 }
 
 void CRenderTarget::clear(void)
@@ -69,7 +103,32 @@ void CRenderTarget::end(ui8* data)
 {
     if(data)
     {
+#if defined(__PBO__)
+        
+        glReadBuffer(GL_COLOR_ATTACHMENT0);
+        ieBindBuffer(GL_PIXEL_PACK_BUFFER, m_pixelBuffer);
+        glReadPixels(0, 0, m_size.x, m_size.y, m_format, GL_UNSIGNED_BYTE, NULL);
+        
+        ui8* pointer = static_cast<ui8*>(glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY));
+        if (pointer)
+        {
+            ui32 size = m_size.x * m_size.y;
+            if(m_format == GL_RGBA)
+            {
+                size *= 4;
+            }
+            else if(m_format == GL_RGB)
+            {
+                size *= 3;
+            }
+            
+            memcpy(data, pointer, size);
+            glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+        }
+#else
         glReadPixels(0, 0, m_size.x, m_size.y, m_format, GL_UNSIGNED_BYTE, data);
+        
+#endif
     }
     assert(m_graphicsContext != nullptr);
     ieBindFramebuffer(GL_FRAMEBUFFER, m_graphicsContext->getFrameBuffer());

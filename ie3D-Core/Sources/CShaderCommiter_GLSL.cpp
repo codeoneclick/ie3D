@@ -133,10 +133,10 @@ void CShaderCommiter_GLSL::commit(void)
     
     GLenum error = glGetError();
     if(error)
+        
     {
         std::cout<<m_message<<std::endl;
     }
-    assert(error == 0);
     
     m_status = m_status == E_COMMITER_STATUS_INPROGRESS ? E_COMMITER_STATUS_SUCCESS : E_COMMITER_STATUS_FAILURE;
     IResourceCommiter::onResourceDataCommitFinished(std::make_shared<CShaderData>(shaderId));

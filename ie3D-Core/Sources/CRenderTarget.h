@@ -19,6 +19,7 @@ private:
 protected:
     
     ui32 m_frameBuffer;
+    ui32 m_pixelBuffer;
     ui32 m_colorAttachment;
     ui32 m_depthAttachment;
     

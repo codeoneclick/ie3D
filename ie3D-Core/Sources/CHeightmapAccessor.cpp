@@ -706,7 +706,6 @@ void CHeightmapAccessor::updateVertices(const std::vector<glm::vec3>& vertices,
                 
                 CSharedThreadOperation updateSplattingMTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
                 updateSplattingMTextureOperation->setExecutionBlock([this, i , j](void) {
-
                     CHeightmapTextureGenerator::generateSplattingMTexture(m_container, i, j);
                 });
                 m_updateHeightmapOperations.push(updateSplattingMTextureOperation);

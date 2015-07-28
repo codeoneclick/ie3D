@@ -290,7 +290,7 @@ void CHeightmapTextureGenerator::createSplattingDTextures(ISharedRenderTechnique
             CHeightmapTextureGenerator::generateSplattingDTexture(renderTechniqueAccessor, container, splattingDTextures, i, j, stream);
         }
     }
-    
+
     renderTechniqueAccessor->getGraphicsContext()->endBackgroundContext();
     stream->close();
 }

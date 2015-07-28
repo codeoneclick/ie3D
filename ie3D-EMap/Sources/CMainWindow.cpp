@@ -467,6 +467,12 @@ void CMainWindow::resumeWidgets(void)
         m_mseTransition->setPaused(true);
         m_gopTransition->setPaused(true);
     }
+    else if(ui->m_mainMenuTabs->currentWidget() == ui->m_particlesTab)
+    {
+        m_goeTransition->setPaused(true);
+        m_mseTransition->setPaused(true);
+        m_gopTransition->setPaused(true);
+    }
     else
     {
         assert(false);
