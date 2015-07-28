@@ -1242,7 +1242,7 @@
        <enum>QTabWidget::West</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -1871,6 +1871,787 @@ background-color: rgb(0, 0, 0);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(0, 0, 0);</string>
       </property>
+     </widget>
+     <widget class="QTabWidget" name="m_poeSettingsTab">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>-4</y>
+        <width>351</width>
+        <height>760</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Menlo</family>
+       </font>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="documentMode">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="m_poeMainSettingTab">
+       <attribute name="title">
+        <string>Configuration</string>
+       </attribute>
+       <widget class="QLabel" name="label_21">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>23</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Num Particles:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_numParticlesSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>20</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>8.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>1024.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_22">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>53</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Duration:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_durationSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>50</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_23">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>83</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Duration Randomness:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_durationRanomnessSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>80</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_24">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>113</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Velocity Sensitivity:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_velocitySensitivitySpinBox">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>110</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_minHorizontalVelocitySpinBox">
+        <property name="geometry">
+         <rect>
+          <x>198</x>
+          <y>147</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_25">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>150</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Min Horizontal Velocity:</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="m_poeMaterialsSettingTab">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>Menlo</family>
+        </font>
+       </property>
+       <attribute name="title">
+        <string>Materials</string>
+       </attribute>
+       <widget class="QComboBox" name="m_materialsComboBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>60</y>
+          <width>280</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="m_cullFaceCheckBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Cull Face</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="m_cullModeComboBox_2">
+        <property name="geometry">
+         <rect>
+          <x>118</x>
+          <y>146</y>
+          <width>182</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="m_depthTestCheckBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>180</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Depth Test</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="m_depthMaskCheckBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>200</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Depth Mask</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="m_blendingCheckBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>220</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Blending</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="m_blendingSourceComboBox_2">
+        <property name="geometry">
+         <rect>
+          <x>118</x>
+          <y>246</y>
+          <width>182</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="m_blendingDesinationComboBox_2">
+        <property name="geometry">
+         <rect>
+          <x>118</x>
+          <y>276</y>
+          <width>182</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>150</y>
+          <width>62</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Mode:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_15">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>250</y>
+          <width>62</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Source:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_16">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>280</y>
+          <width>91</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Destination:</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="m_clippingCheckBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>310</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Clipping</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_clippingXSpinBox_2">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>337</y>
+          <width>70</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="minimum">
+         <double>-1.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_clippingYSpinBox_2">
+        <property name="geometry">
+         <rect>
+          <x>136</x>
+          <y>337</y>
+          <width>70</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="minimum">
+         <double>-1.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_clippingZSpinBox_2">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>337</y>
+          <width>70</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="minimum">
+         <double>-1.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_clippingWSpinBox_2">
+        <property name="geometry">
+         <rect>
+          <x>136</x>
+          <y>367</y>
+          <width>70</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="minimum">
+         <double>-1024.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>1024.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_17">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>340</y>
+          <width>18</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>x:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_18">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>340</y>
+          <width>18</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>y:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_19">
+        <property name="geometry">
+         <rect>
+          <x>214</x>
+          <y>340</y>
+          <width>18</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>z:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_20">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>370</y>
+          <width>18</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>w:</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="m_reflectingCheckBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>400</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Reflecting</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="m_shadowingCheckBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>420</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Shadowing</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="m_debuggingCheckBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>440</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Debugging</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="m_shaderButton_2">
+        <property name="geometry">
+         <rect>
+          <x>13</x>
+          <y>470</y>
+          <width>291</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Shader...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="m_texture1LoadButton_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>600</y>
+          <width>64</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Load...</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="m_texture01Label_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>510</y>
+          <width>81</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Menlo</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Texture 1:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="m_texture1Image_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>530</y>
+          <width>64</width>
+          <height>64</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="m_texture01Label_6">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>510</y>
+          <width>81</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Menlo</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Texture 2:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="m_texture2Image_2">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>530</y>
+          <width>64</width>
+          <height>64</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="m_texture2LoadButton_2">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>600</y>
+          <width>64</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Load...</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="m_texture01Label_7">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>510</y>
+          <width>81</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Menlo</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Texture 3:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="m_texture3Image_2">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>530</y>
+          <width>64</width>
+          <height>64</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="m_texture3LoadButton_2">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>600</y>
+          <width>64</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Load...</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="m_materialEnabledCheckBox_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>271</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Enabled</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="m_drawCurrentRadioButton_2">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>30</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Draw Current</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="m_drawAllRadioButton_2">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>30</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Draw All</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
    </widget>
