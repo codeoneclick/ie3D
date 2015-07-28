@@ -12,6 +12,7 @@ class CMEGameController;
 class CMEmseTransition;
 class CMEgopTransition;
 class CMEgoeTransition;
+class CMEpoeTransition;
 
 namespace Ui {
     class CMainWindow;
@@ -35,6 +36,9 @@ protected:
     
     std::shared_ptr<CMEGameController> m_goeController;
     std::shared_ptr<CMEgoeTransition> m_goeTransition;
+    
+    std::shared_ptr<CMEGameController> m_poeController;
+    std::shared_ptr<CMEpoeTransition> m_poeTransition;
     
     ISharedUICommands m_mseSceneToUICommands;
     ISharedUICommands m_goeSceneToUICommands;

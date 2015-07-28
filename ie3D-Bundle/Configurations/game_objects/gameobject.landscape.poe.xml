@@ -1,0 +1,17 @@
+<landscape
+    heightmap_data_filename="poe.heightmap.data"
+    splatting_data_filename="poe.splatting.data"
+    preprocess_splatting_material_filename="material.landscape.poe.preprocess.splatting.xml"
+    z_order="1"
+    size_x="65"
+    size_y="65"
+    is_perlin="1"
+    frequency="0.0"
+    octaves="1"
+    seed="12345">
+	<materials>
+		<material filename="material.landscape.base.poe.xml"/>
+        <material filename="material.landscape.reflection.poe.xml"/>
+        <material filename="material.landscape.refraction.poe.xml"/>
+	</materials>
+</landscape>

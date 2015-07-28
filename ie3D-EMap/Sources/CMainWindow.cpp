@@ -11,6 +11,7 @@
 #include "CMEmseTransition.h"
 #include "CMEgopTransition.h"
 #include "CMEgoeTransition.h"
+#include "CMEpoeTransition.h"
 #include "IOGLWindow.h"
 #include "IUICommands.h"
 #include "CConfigurationAccessor.h"
@@ -183,6 +184,19 @@ void CMainWindow::execute(void)
     m_gopTransition = std::make_shared<CMEgopTransition>("transition.gop.xml", false);
     m_gopController->addTransition(m_gopTransition);
     m_gopController->gotoTransition("transition.gop.xml");
+    
+    NSView *poeView =reinterpret_cast<NSView*>(ui->m_particlesGLWindow->winId());
+    NSOpenGLView *poeOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
+                                                                              0.0,
+                                                                              poeView.frame.size.width,
+                                                                              poeView.frame.size.height)];
+    [poeView addSubview:poeOGLView];
+    std::shared_ptr<IOGLWindow> poeOGLWindow = std::make_shared<IOGLWindow>((__bridge void*)poeOGLView);
+    
+    m_poeController = std::make_shared<CMEGameController>(poeOGLWindow);
+    m_poeTransition = std::make_shared<CMEpoeTransition>("transition.poe.xml", false);
+    m_poeController->addTransition(m_poeTransition);
+    m_poeController->gotoTransition("transition.poe.xml");
     
     ui->m_modelsList->addItem("gameobject.human_01.xml");
     ui->m_modelsList->addItem("gameobject.human_02.xml");
@@ -441,6 +455,7 @@ void CMainWindow::resumeWidgets(void)
     {
         m_mseTransition->setPaused(false);
         m_goeTransition->setPaused(true);
+        m_poeTransition->setPaused(true);
         
         if(ui->m_landscapePropertiesTab->currentWidget() == ui->m_landscapeHeightmapTab)
         {
@@ -466,12 +481,14 @@ void CMainWindow::resumeWidgets(void)
         m_goeTransition->setPaused(false);
         m_mseTransition->setPaused(true);
         m_gopTransition->setPaused(true);
+        m_poeTransition->setPaused(true);
     }
     else if(ui->m_mainMenuTabs->currentWidget() == ui->m_particlesTab)
     {
         m_goeTransition->setPaused(true);
         m_mseTransition->setPaused(true);
         m_gopTransition->setPaused(true);
+        m_poeTransition->setPaused(false);
     }
     else
     {
@@ -484,6 +501,7 @@ void CMainWindow::pauseWidgets(void)
     m_mseTransition->setPaused(true);
     m_goeTransition->setPaused(true);
     m_gopTransition->setPaused(true);
+    m_poeTransition->setPaused(true);
 }
 
 void CMainWindow::on_m_mainMenuTabs_currentChanged(int)

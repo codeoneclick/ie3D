@@ -1,18 +1,18 @@
 //
-//  CMEgoeScene.h
-//  ie3D-EMap
+//  CMEpoeScene.h
+//  ie3D-EMap-OSX
 //
-//  Created by sergey.sergeev on 2/6/15.
+//  Created by sergey.sergeev on 7/28/15.
 //
 //
 
-#ifndef CMEgoeScene_h
-#define CMEgoeScene_h
+#ifndef CMEpoeScene_h
+#define CMEpoeScene_h
 
 #include "IScene.h"
 #include "HMEDeclaration.h"
 
-class CMEgoeScene final :
+class CMEpoeScene final :
 public IScene
 {
 private:
@@ -20,7 +20,7 @@ private:
 protected:
     
     CSharedGlobalLightSource m_globalLightSource;
-    CSharedModel m_model;
+    CSharedParticleEmitter m_particle;
     CSharedLandscape m_landscape;
     CSharedSkyBox m_skybox;
     glm::ivec2 m_previousDraggedPoint;
@@ -34,17 +34,10 @@ protected:
     void onKeyUp(i32 key);
     void onKeyDown(i32 key);
     
-    void onConfigurationLoaded(ISharedConfigurationRef configuration);
-    
-    void setMeshFilenameCommand(const std::string& filename);
-    void updateConfigurationMaterial(CSharedConfigurationMaterialRef configuration);
-    
-    CSharedConfigurationModel createTempConfigurationModel(const std::string& filename);
-    
 public:
     
-    CMEgoeScene(IGameTransition* root);
-    ~CMEgoeScene(void);
+    CMEpoeScene(IGameTransition* root);
+    ~CMEpoeScene(void);
     
     void load(void);
     void update(f32 deltatime);

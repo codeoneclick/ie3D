@@ -127,6 +127,7 @@ public:
     QRadioButton *m_drawAllRadioButton;
     QWidget *m_goeAnimationsSettingTab;
     QWidget *m_particlesTab;
+    QWidget *m_particlesGLWindow;
     QMenuBar *menuBar;
 
     void setupUi(QMainWindow *CMainWindow)
@@ -624,6 +625,11 @@ public:
         m_mainMenuTabs->addTab(m_gameObjectTab, QString());
         m_particlesTab = new QWidget();
         m_particlesTab->setObjectName(QStringLiteral("m_particlesTab"));
+        m_particlesGLWindow = new QWidget(m_particlesTab);
+        m_particlesGLWindow->setObjectName(QStringLiteral("m_particlesGLWindow"));
+        m_particlesGLWindow->setEnabled(true);
+        m_particlesGLWindow->setGeometry(QRect(0, 0, 930, 756));
+        m_particlesGLWindow->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         m_mainMenuTabs->addTab(m_particlesTab, QString());
         CMainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CMainWindow);

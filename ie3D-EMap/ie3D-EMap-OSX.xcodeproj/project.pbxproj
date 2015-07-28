@@ -38,6 +38,17 @@
 		219FC7811B5FB84A00F7E45E /* imageN_01.png in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC77B1B5FB84A00F7E45E /* imageN_01.png */; };
 		219FC7821B5FB84A00F7E45E /* imageN_02.png in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC77C1B5FB84A00F7E45E /* imageN_02.png */; };
 		219FC7831B5FB84A00F7E45E /* imageN_03.png in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC77D1B5FB84A00F7E45E /* imageN_03.png */; };
+		219FC7AF1B67BBCA00F7E45E /* CMEpoeScene.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 219FC7AD1B67BBCA00F7E45E /* CMEpoeScene.cpp */; };
+		219FC7B41B67BBDD00F7E45E /* CMEpoeTransition.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 219FC7B21B67BBDD00F7E45E /* CMEpoeTransition.cpp */; };
+		219FC7B71B67C96100F7E45E /* transition.poe.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC7B61B67C96100F7E45E /* transition.poe.xml */; };
+		219FC7B91B67C97200F7E45E /* material.output.technique.poe.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC7B81B67C97200F7E45E /* material.output.technique.poe.xml */; };
+		219FC7BB1B67C97F00F7E45E /* output.technique.poe.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC7BA1B67C97F00F7E45E /* output.technique.poe.xml */; };
+		219FC7BD1B67C98900F7E45E /* ws.technique.base.poe.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC7BC1B67C98900F7E45E /* ws.technique.base.poe.xml */; };
+		219FC7C21B67CAE000F7E45E /* material.landscape.base.poe.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC7BE1B67CAE000F7E45E /* material.landscape.base.poe.xml */; };
+		219FC7C31B67CAE000F7E45E /* material.landscape.poe.preprocess.splatting.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC7BF1B67CAE000F7E45E /* material.landscape.poe.preprocess.splatting.xml */; };
+		219FC7C41B67CAE000F7E45E /* material.landscape.reflection.poe.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC7C01B67CAE000F7E45E /* material.landscape.reflection.poe.xml */; };
+		219FC7C51B67CAE000F7E45E /* material.landscape.refraction.poe.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC7C11B67CAE000F7E45E /* material.landscape.refraction.poe.xml */; };
+		219FC7C71B67CAF100F7E45E /* gameobject.landscape.poe.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 219FC7C61B67CAF100F7E45E /* gameobject.landscape.poe.xml */; };
 		21A38DE41AF8DD3D00E7DFE7 /* heightmap.data in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21A38DE31AF8DD3D00E7DFE7 /* heightmap.data */; };
 		21D6D9DF1B3C363B00D030F3 /* material.landscape.goe.preprocess.splatting.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21D6D9DD1B3C363B00D030F3 /* material.landscape.goe.preprocess.splatting.xml */; };
 		21D6D9E01B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 21D6D9DE1B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml */; };
@@ -268,6 +279,19 @@
 		219FC77B1B5FB84A00F7E45E /* imageN_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageN_01.png; path = "../ie3D-Bundle/Textures/imageN_01.png"; sourceTree = "<group>"; };
 		219FC77C1B5FB84A00F7E45E /* imageN_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageN_02.png; path = "../ie3D-Bundle/Textures/imageN_02.png"; sourceTree = "<group>"; };
 		219FC77D1B5FB84A00F7E45E /* imageN_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageN_03.png; path = "../ie3D-Bundle/Textures/imageN_03.png"; sourceTree = "<group>"; };
+		219FC7AD1B67BBCA00F7E45E /* CMEpoeScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMEpoeScene.cpp; path = Sources/CMEpoeScene.cpp; sourceTree = SOURCE_ROOT; };
+		219FC7AE1B67BBCA00F7E45E /* CMEpoeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEpoeScene.h; path = Sources/CMEpoeScene.h; sourceTree = SOURCE_ROOT; };
+		219FC7B21B67BBDD00F7E45E /* CMEpoeTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMEpoeTransition.cpp; sourceTree = SOURCE_ROOT; };
+		219FC7B31B67BBDD00F7E45E /* CMEpoeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMEpoeTransition.h; sourceTree = SOURCE_ROOT; };
+		219FC7B61B67C96100F7E45E /* transition.poe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = transition.poe.xml; path = "../ie3D-Bundle/Configurations/transitions/transition.poe.xml"; sourceTree = "<group>"; };
+		219FC7B81B67C97200F7E45E /* material.output.technique.poe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.output.technique.poe.xml; sourceTree = "<group>"; };
+		219FC7BA1B67C97F00F7E45E /* output.technique.poe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = output.technique.poe.xml; sourceTree = "<group>"; };
+		219FC7BC1B67C98900F7E45E /* ws.technique.base.poe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ws.technique.base.poe.xml; sourceTree = "<group>"; };
+		219FC7BE1B67CAE000F7E45E /* material.landscape.base.poe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.base.poe.xml; sourceTree = "<group>"; };
+		219FC7BF1B67CAE000F7E45E /* material.landscape.poe.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.poe.preprocess.splatting.xml; sourceTree = "<group>"; };
+		219FC7C01B67CAE000F7E45E /* material.landscape.reflection.poe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.reflection.poe.xml; sourceTree = "<group>"; };
+		219FC7C11B67CAE000F7E45E /* material.landscape.refraction.poe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.refraction.poe.xml; sourceTree = "<group>"; };
+		219FC7C61B67CAF100F7E45E /* gameobject.landscape.poe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gameobject.landscape.poe.xml; path = "../ie3D-Bundle/Configurations/game_objects/gameobject.landscape.poe.xml"; sourceTree = "<group>"; };
 		21A38DE31AF8DD3D00E7DFE7 /* heightmap.data */ = {isa = PBXFileReference; lastKnownFileType = file; name = heightmap.data; path = "../ie3D-Bundle/Data/heightmap.data"; sourceTree = "<group>"; };
 		21D6D9DD1B3C363B00D030F3 /* material.landscape.goe.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.goe.preprocess.splatting.xml; sourceTree = "<group>"; };
 		21D6D9DE1B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material.landscape.mse.preprocess.splatting.xml; sourceTree = "<group>"; };
@@ -490,6 +514,14 @@
 			name = "Sources [uic]";
 			sourceTree = "<Group>";
 		};
+		219FC7B51B67C90000F7E45E /* poe.transition */ = {
+			isa = PBXGroup;
+			children = (
+				219FC7B61B67C96100F7E45E /* transition.poe.xml */,
+			);
+			name = poe.transition;
+			sourceTree = "<group>";
+		};
 		21A38DE01AF8DD2100E7DFE7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,6 +601,7 @@
 		21F5E1311ADE8D02002E08FA /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				219FC7B51B67C90000F7E45E /* poe.transition */,
 				21F5E1431ADE8D63002E08FA /* mse.transition */,
 				21F5E1421ADE8D58002E08FA /* gop.transition */,
 				21F5E1411ADE8D4B002E08FA /* goe.transition */,
@@ -679,8 +712,9 @@
 				21F5E1461ADE8D94002E08FA /* gameobject.human_01.xml */,
 				21F5E1471ADE8D94002E08FA /* gameobject.human_02.xml */,
 				21F5E1481ADE8D94002E08FA /* gameobject.landscape.brush.xml */,
-				21F5E1491ADE8D94002E08FA /* gameobject.landscape.goe.xml */,
 				21F5E14A1ADE8D94002E08FA /* gameobject.landscape.xml */,
+				21F5E1491ADE8D94002E08FA /* gameobject.landscape.goe.xml */,
+				219FC7C61B67CAF100F7E45E /* gameobject.landscape.poe.xml */,
 				21F5E14B1ADE8D94002E08FA /* gameobject.ocean.xml */,
 				21F5E14C1ADE8D94002E08FA /* gameobject.orc_01.xml */,
 				21F5E14D1ADE8D94002E08FA /* gameobject.orc_02.xml */,
@@ -729,6 +763,10 @@
 		21F5E1501ADE8D94002E08FA /* materials */ = {
 			isa = PBXGroup;
 			children = (
+				219FC7BE1B67CAE000F7E45E /* material.landscape.base.poe.xml */,
+				219FC7BF1B67CAE000F7E45E /* material.landscape.poe.preprocess.splatting.xml */,
+				219FC7C01B67CAE000F7E45E /* material.landscape.reflection.poe.xml */,
+				219FC7C11B67CAE000F7E45E /* material.landscape.refraction.poe.xml */,
 				21D6D9DD1B3C363B00D030F3 /* material.landscape.goe.preprocess.splatting.xml */,
 				21D6D9DE1B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml */,
 				21F5E1511ADE8D94002E08FA /* material.atmospheric.scattering.base.xml */,
@@ -773,6 +811,7 @@
 		21F5E1A11ADE8DB8002E08FA /* material */ = {
 			isa = PBXGroup;
 			children = (
+				219FC7B81B67C97200F7E45E /* material.output.technique.poe.xml */,
 				21F5E1A21ADE8DB8002E08FA /* material.output.technique.demo.xml */,
 				21F5E1A31ADE8DB8002E08FA /* material.output.technique.goe.xml */,
 				21F5E1A41ADE8DB8002E08FA /* material.output.technique.gop.xml */,
@@ -786,6 +825,7 @@
 		21F5E1A71ADE8DB8002E08FA /* output_techniques */ = {
 			isa = PBXGroup;
 			children = (
+				219FC7BA1B67C97F00F7E45E /* output.technique.poe.xml */,
 				21F5E1A81ADE8DB8002E08FA /* output.technique.demo.xml */,
 				21F5E1A91ADE8DB8002E08FA /* output.technique.goe.xml */,
 				21F5E1AA1ADE8DB8002E08FA /* output.technique.gop.xml */,
@@ -807,6 +847,7 @@
 		21F5E1AE1ADE8DB8002E08FA /* ws_techniques */ = {
 			isa = PBXGroup;
 			children = (
+				219FC7BC1B67C98900F7E45E /* ws.technique.base.poe.xml */,
 				21F5E1AF1ADE8DB8002E08FA /* ws.technique.base.goe.xml */,
 				21F5E1B01ADE8DB8002E08FA /* ws.technique.base.gop.xml */,
 				21F5E1B11ADE8DB8002E08FA /* ws.technique.base.xml */,
@@ -843,6 +884,10 @@
 				21F5E1001ADE8ACA002E08FA /* CMEgopScene.h */,
 				21F5E1011ADE8ACA002E08FA /* CMEgopTransition.cpp */,
 				21F5E1021ADE8ACA002E08FA /* CMEgopTransition.h */,
+				219FC7AD1B67BBCA00F7E45E /* CMEpoeScene.cpp */,
+				219FC7AE1B67BBCA00F7E45E /* CMEpoeScene.h */,
+				219FC7B21B67BBDD00F7E45E /* CMEpoeTransition.cpp */,
+				219FC7B31B67BBDD00F7E45E /* CMEpoeTransition.h */,
 				21F5E1031ADE8ACA002E08FA /* CMELandscapeBrush.cpp */,
 				21F5E1041ADE8ACA002E08FA /* CMELandscapeBrush.h */,
 				21F5E1051ADE8ACA002E08FA /* CMEModelBrush.cpp */,
@@ -1006,6 +1051,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21F5E13C1ADE8D2D002E08FA /* map_03.png in Copy Bundle Resources */,
+				219FC7C51B67CAE000F7E45E /* material.landscape.refraction.poe.xml in Copy Bundle Resources */,
 				21F5E22A1ADE8E1C002E08FA /* static_model_tank_tracks.png in Copy Bundle Resources */,
 				21F5E1951ADE8D94002E08FA /* material.orc_01.refraction.xml in Copy Bundle Resources */,
 				21F5E2171ADE8E1C002E08FA /* human_01.png in Copy Bundle Resources */,
@@ -1028,6 +1074,7 @@
 				219FC7821B5FB84A00F7E45E /* imageN_02.png in Copy Bundle Resources */,
 				21F5E1921ADE8D94002E08FA /* material.ocean.base.xml in Copy Bundle Resources */,
 				21F5E17A1ADE8D94002E08FA /* gameobject.ocean.xml in Copy Bundle Resources */,
+				219FC7C21B67CAE000F7E45E /* material.landscape.base.poe.xml in Copy Bundle Resources */,
 				21F5E17B1ADE8D94002E08FA /* gameobject.orc_01.xml in Copy Bundle Resources */,
 				21F5E1BF1ADE8DB8002E08FA /* ss.technique.overlapping.xml in Copy Bundle Resources */,
 				21F5E1C81ADE8DD7002E08FA /* transition.goe.xml in Copy Bundle Resources */,
@@ -1045,6 +1092,7 @@
 				21F5E13E1ADE8D2D002E08FA /* map_05.png in Copy Bundle Resources */,
 				21F5E1E81ADE8E0C002E08FA /* shaderAnimatedGameObjectND.vert in Copy Bundle Resources */,
 				21F5E1FB1ADE8E0C002E08FA /* shaderScreenQuad.frag in Copy Bundle Resources */,
+				219FC7B91B67C97200F7E45E /* material.output.technique.poe.xml in Copy Bundle Resources */,
 				21F5E18A1ADE8D94002E08FA /* material.landscape.base.goe.xml in Copy Bundle Resources */,
 				21F5E1821ADE8D94002E08FA /* material.human_01.base.xml in Copy Bundle Resources */,
 				21F5E1B91ADE8DB8002E08FA /* material.output.technique.mse.xml in Copy Bundle Resources */,
@@ -1055,9 +1103,11 @@
 				21F5E2181ADE8E1C002E08FA /* human_02.png in Copy Bundle Resources */,
 				219FC7731B5F94C500F7E45E /* landscapeD_02.png in Copy Bundle Resources */,
 				21F5E2421ADE8E28002E08FA /* orc_02_run.IE3DANIMATION in Copy Bundle Resources */,
+				219FC7B71B67C96100F7E45E /* transition.poe.xml in Copy Bundle Resources */,
 				21F5E2391ADE8E28002E08FA /* human_01_walk.IE3DANIMATION in Copy Bundle Resources */,
 				219FC7771B5F94C500F7E45E /* landscapeN_03.png in Copy Bundle Resources */,
 				21F5E1FE1ADE8E0C002E08FA /* shaderSkybox.vert in Copy Bundle Resources */,
+				219FC7C71B67CAF100F7E45E /* gameobject.landscape.poe.xml in Copy Bundle Resources */,
 				21D6D9E01B3C363B00D030F3 /* material.landscape.mse.preprocess.splatting.xml in Copy Bundle Resources */,
 				21F5E2241ADE8E1C002E08FA /* skybox_ypos.png in Copy Bundle Resources */,
 				21F5E1F01ADE8E0C002E08FA /* shaderLandscapeBrush.vert in Copy Bundle Resources */,
@@ -1094,6 +1144,7 @@
 				219FC7751B5F94C500F7E45E /* landscapeN_01.png in Copy Bundle Resources */,
 				21F5E19D1ADE8D94002E08FA /* material.refraction.goe.temp.xml in Copy Bundle Resources */,
 				21F5E17F1ADE8D94002E08FA /* material.atmospheric.scattering.base.xml in Copy Bundle Resources */,
+				219FC7BD1B67C98900F7E45E /* ws.technique.base.poe.xml in Copy Bundle Resources */,
 				21F5E18C1ADE8D94002E08FA /* material.landscape.brush.base.xml in Copy Bundle Resources */,
 				21F5E1ED1ADE8E0C002E08FA /* shaderLandscape.frag in Copy Bundle Resources */,
 				21F5E1761ADE8D94002E08FA /* gameobject.human_02.xml in Copy Bundle Resources */,
@@ -1103,7 +1154,9 @@
 				21F5E1811ADE8D94002E08FA /* material.gameobject.brush.base.xml in Copy Bundle Resources */,
 				21F5E1FA1ADE8E0C002E08FA /* shaderScreenMixOverlapping.vert in Copy Bundle Resources */,
 				21F5E1871ADE8D94002E08FA /* material.human_02.reflection.xml in Copy Bundle Resources */,
+				219FC7BB1B67C97F00F7E45E /* output.technique.poe.xml in Copy Bundle Resources */,
 				21F5E1BA1ADE8DB8002E08FA /* material.ss.technique.overlapping.xml in Copy Bundle Resources */,
+				219FC7C31B67CAE000F7E45E /* material.landscape.poe.preprocess.splatting.xml in Copy Bundle Resources */,
 				219FC77E1B5FB84A00F7E45E /* imageD_01.png in Copy Bundle Resources */,
 				21F5E1861ADE8D94002E08FA /* material.human_02.base.xml in Copy Bundle Resources */,
 				21F5E19C1ADE8D94002E08FA /* material.reflection.goe.temp.xml in Copy Bundle Resources */,
@@ -1143,6 +1196,7 @@
 				21F5E1B71ADE8DB8002E08FA /* material.output.technique.goe.xml in Copy Bundle Resources */,
 				21F5E1C61ADE8DB8002E08FA /* ws.technique.shadowmap.xml in Copy Bundle Resources */,
 				21F5E21E1ADE8E1C002E08FA /* orc_01.png in Copy Bundle Resources */,
+				219FC7C41B67CAE000F7E45E /* material.landscape.reflection.poe.xml in Copy Bundle Resources */,
 				21F5E1881ADE8D94002E08FA /* material.human_02.refraction.xml in Copy Bundle Resources */,
 				21F5E2271ADE8E1C002E08FA /* static_model_tank_heavy.png in Copy Bundle Resources */,
 				21F5E2381ADE8E28002E08FA /* human_01_idle.IE3DANIMATION in Copy Bundle Resources */,
@@ -1193,10 +1247,12 @@
 				21F5E1291ADE8B4A002E08FA /* CMEConfigurationAccessor.cpp in Compile Sources */,
 				CBA32151DD4C5A39E1171FB8 /* main.cpp in Compile Sources */,
 				21F5E12B1ADE8B4A002E08FA /* CMEConfigurationLandscapeBrush.cpp in Compile Sources */,
+				219FC7AF1B67BBCA00F7E45E /* CMEpoeScene.cpp in Compile Sources */,
 				21F5E1171ADE8ACA002E08FA /* CMEModelBrush.cpp in Compile Sources */,
 				21F5E1121ADE8ACA002E08FA /* CMEgoeScene.cpp in Compile Sources */,
 				21F5E12A1ADE8B4A002E08FA /* CMEConfigurationBrushElement.cpp in Compile Sources */,
 				21F5E1151ADE8ACA002E08FA /* CMEgopTransition.cpp in Compile Sources */,
+				219FC7B41B67BBDD00F7E45E /* CMEpoeTransition.cpp in Compile Sources */,
 				21F5E1161ADE8ACA002E08FA /* CMELandscapeBrush.cpp in Compile Sources */,
 				21F5E11A1ADE8ACA002E08FA /* CMESceneFabricator.cpp in Compile Sources */,
 				CD222379D3372303A301905F /* CMainWindow.cpp in Compile Sources */,

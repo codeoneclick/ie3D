@@ -91,12 +91,7 @@ void CMEgoeScene::load(void)
 
 void CMEgoeScene::update(f32)
 {
-    //static f32 angle = 0.0;
-    //angle += 3.0;
-    //if(m_model != nullptr)
-   // {
-    //    m_model->setRotation(glm::vec3(0.0, angle, 0.0));
-    //}
+
 }
 
 void CMEgoeScene::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON)
@@ -111,8 +106,8 @@ void CMEgoeScene::onGestureRecognizerMoved(const glm::ivec2&)
 
 void CMEgoeScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
-    glm::vec2 draggingDelta = glm::vec2(fabsf(m_previousDraggedPoint.x - point.x),
-                                        fabsf(m_previousDraggedPoint.y - point.y));
+    glm::vec2 draggingDelta = glm::vec2(std::abs(m_previousDraggedPoint.x - point.x),
+                                        std::abs(m_previousDraggedPoint.y - point.y));
     
     if(inputButton == E_INPUT_BUTTON_MOUSE_LEFT && m_model)
     {
