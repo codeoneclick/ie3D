@@ -42,15 +42,19 @@ protected:
     
     ISharedUICommands m_mseSceneToUICommands;
     ISharedUICommands m_goeSceneToUICommands;
+    ISharedUICommands m_poeSceneToUICommands;
     
     std::vector<CSharedConfigurationMaterial> m_goeConfigurationsMaterials;
+    CSharedConfigurationParticleEmitter m_poeConfiguration;
     
     void updateGOEUIConfigurationMaterial(CSharedConfigurationMaterialRef configuration);
+    void updatePOEUIConfigurationParticleEmitter(CSharedConfigurationParticleEmitterRef configuration);
     void resumeWidgets(void);
     void pauseWidgets(void);
     
     CSharedConfigurationMaterial getCurrentConfigurationMaterial(void);
     void commitCurrentConfigurationMaterial(void);
+    void commitConfigurationParticleEmitter(void);
     
     void setMSEBrushSize(ui32 value);
     void setMSEBrushStrength(ui32 value);
@@ -158,6 +162,58 @@ private slots:
     void on_m_addModelToSceneButton_clicked();
 
     void on_m_modelsList_currentRowChanged(int currentRow);
+
+    void on_m_numParticlesSpinBox_valueChanged(double arg1);
+
+    void on_m_durationSpinBox_valueChanged(double arg1);
+
+    void on_m_durationRanomnessSpinBox_valueChanged(double arg1);
+
+    void on_m_velocitySensitivitySpinBox_valueChanged(double arg1);
+
+    void on_m_minHorizontalVelocitySpinBox_valueChanged(double arg1);
+
+    void on_m_maxHorizontalVelocitySpinBox_valueChanged(double arg1);
+
+    void on_m_minVerticalVelocitySpinBox_valueChanged(double arg1);
+
+    void on_m_maxVerticalVelocitySpinBox_valueChanged(double arg1);
+
+    void on_m_endVelocitySpinBox_valueChanged(double arg1);
+
+    void on_m_gravityXSpinBox_valueChanged(double arg1);
+
+    void on_m_gravityYSpinBox_valueChanged(double arg1);
+
+    void on_m_gravityZSpinBox_valueChanged(double arg1);
+
+    void on_m_sourceColorRSpinBox_valueChanged(double arg1);
+
+    void on_m_sourceColorGSpinBox_valueChanged(double arg1);
+
+    void on_m_sourceColorBSpinBox_valueChanged(double arg1);
+
+    void on_m_sourceColorASpinBox_valueChanged(double arg1);
+
+    void on_m_destinationColorRSpinBox_valueChanged(double arg1);
+
+    void on_m_destinationColorGSpinBox_valueChanged(double arg1);
+
+    void on_m_destinationColorBSpinBox_valueChanged(double arg1);
+
+    void on_m_destinationColorASpinBox_valueChanged(double arg1);
+
+    void on_m_sourceSizeXSpinBox_valueChanged(double arg1);
+
+    void on_m_sourceSizeYSpinBox_valueChanged(double arg1);
+
+    void on_m_destinationSizeXSpinBox_valueChanged(double arg1);
+
+    void on_m_destinationSizeYSpinBox_valueChanged(double arg1);
+
+    void on_m_minEmittIntervalSpinBox_valueChanged(double arg1);
+
+    void on_m_maxEmittIntervalSpinBox_valueChanged(double arg1);
 
 private:
     

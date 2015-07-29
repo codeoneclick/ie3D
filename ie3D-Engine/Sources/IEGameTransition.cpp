@@ -40,7 +40,7 @@ void IEGameTransition::initScene(void)
 
 void IEGameTransition::_OnLoaded(void)
 {
-    assert(false);
+    IGameTransition::_OnLoaded();
 }
 
 void IEGameTransition::_OnGameLoopUpdate(f32 deltatime)

@@ -103,4 +103,10 @@ namespace UICommandMSEUpdateHeightmapGenerationStatistic
     const std::string GUID = "command_15";
 };
 
+namespace UICommandPOEUpdateConfigurationParticleEmitter
+{
+    typedef std::function<void(CSharedConfigurationParticleEmitterRef)> COMMAND;
+    const std::string GUID = "command_16";
+};
+
 #endif

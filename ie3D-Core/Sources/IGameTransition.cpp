@@ -36,7 +36,8 @@ m_graphicsContext(nullptr),
 m_inputContext(nullptr),
 m_resourceAccessor(nullptr),
 m_configurationAccessor(nullptr),
-m_isOffscreen(isOffscreen)
+m_isOffscreen(isOffscreen),
+m_sceneToUICommands(nullptr)
 {
 
 }
@@ -126,7 +127,11 @@ void IGameTransition::_OnDeactivate(void)
 
 void IGameTransition::_OnLoaded(void)
 {
-    assert(false);
+    if(m_sceneToUICommands)
+    {
+        assert(m_scene);
+        m_scene->setSceneToUICommands(m_sceneToUICommands);
+    }
 }
 
 void IGameTransition::_OnGameLoopUpdate(f32 deltatime)
@@ -442,8 +447,11 @@ ui32 IGameTransition::getScreenHeight(void) const
 
 void IGameTransition::setSceneToUICommands(ISharedUICommandsRef commands)
 {
-    assert(m_isLoaded && m_scene != nullptr);
-    m_scene->setSceneToUICommands(commands);
+    if(m_scene)
+    {
+        m_scene->setSceneToUICommands(commands);
+    }
+    m_sceneToUICommands = commands;
 }
 
 ISharedUICommands IGameTransition::getUIToSceneCommands(void) const

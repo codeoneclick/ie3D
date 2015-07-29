@@ -41,6 +41,8 @@ protected:
     std::string m_guid;
     bool m_isLoaded;
     
+    ISharedUICommands m_sceneToUICommands;
+    
     void setupOnce(ISharedGraphicsContextRef graphicsContext,
                    ISharedInputContextRef inputContext,
                    CSharedResourceAccessorRef resourceAccessor,

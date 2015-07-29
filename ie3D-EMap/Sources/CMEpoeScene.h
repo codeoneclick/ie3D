@@ -34,6 +34,8 @@ protected:
     void onKeyUp(i32 key);
     void onKeyDown(i32 key);
     
+    void onConfigurationLoaded(ISharedConfigurationRef configuration);
+    
 public:
     
     CMEpoeScene(IGameTransition* root);

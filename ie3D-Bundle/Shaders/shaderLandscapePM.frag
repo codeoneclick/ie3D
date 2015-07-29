@@ -71,11 +71,51 @@ float getCurrentDepth(in  float fZ)
 
 void main(void)
 {
-    vec2 vTexCoord = OUT_ShadowParameters.st / OUT_ShadowParameters.w;
+    
+#if defined PP_PARALLAX_MAPPING
+    
+    vec3 eyeDirTS = normalize((VECTOR_CameraPosition - v_positionWS.xyz) * v_tangentMatrix);
+    vec3 lightDirTS = normalize((VECTOR_GlobalLightPosition - v_positionWS.xyz) * v_tangentMatrix);
+    
+#else
+    
+    vec3 eyeDirTS = v_eyeDirTS;
+    vec3 lightDirTS = v_lightDirTS;
+    
+#endif
+    
+    vec2 vTexCoord = OUT_TexCoord;
+    
+#if defined PARALLAX_MAPPING
+    
+    float scale = 0.01;
+    float bias = 0.005;
+    
+    float fDepth = texture2D(SAMPLER_03, OUT_TexCoord * k_fTexCoordScale).x * scale - bias;
+    vec2 offset = (fDepth * eyeDirTS.xy) / eyeDirTS.z;
+    vTexCoord += offset;
+    
+#endif
+    
+    vec3 normalColor = texture2D(SAMPLER_02, vTexCoord).rgb * 2.0 - 1.0;
+    
+    float diffuseIntensity = clamp(dot(normalColor, lightDirTS), 0.0, 1.0);
+    
+    vTexCoord = OUT_ShadowParameters.st / OUT_ShadowParameters.w;
     float fZ = OUT_ShadowParameters.z / OUT_ShadowParameters.w;
+    float fBias = 0.0005 * tan(acos(dot(normalColor, lightDirTS)));
     float fShadow = max(step(getCurrentDepth(fZ), getShadowMapPassDepth(vTexCoord)), 0.5);
     
-    vec4 color = texture2D(SAMPLER_01, OUT_TexCoord);
+#if defined PARALLAX_MAPPING
+    
+    vec4 color = diffuseIntensity * texture2D(SAMPLER_01, OUT_TexCoord + offset);
+    
+#else
+    
+    vec4 color = diffuseIntensity * texture2D(SAMPLER_01, OUT_TexCoord);
+    
+#endif
+    
     color.rgb *= fShadow;
     color.a = 1.0;
     gl_FragColor = color;

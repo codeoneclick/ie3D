@@ -56,7 +56,7 @@ E_LANDSCAPE_CHUNK_LOD CLandscape::getLOD(const glm::vec3& point,
                                  (maxBound.z - minBound.z) / 2.0 + minBound.z);
     f32 distance = glm::distance(glm::vec2(point.x, point.z), center);
     E_LANDSCAPE_CHUNK_LOD LOD = E_LANDSCAPE_CHUNK_LOD_04;
-    if(distance < 128.0)
+    if(distance < 8.0)
     {
         LOD = E_LANDSCAPE_CHUNK_LOD_01;
     }

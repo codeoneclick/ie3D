@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CMainWindow_t {
-    QByteArrayData data[47];
-    char stringdata[1493];
+    QByteArrayData data[73];
+    char stringdata[2542];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -75,7 +75,33 @@ QT_MOC_LITERAL(42, 1333, 36), // "on_m_materialEnabledCheckBox_..."
 QT_MOC_LITERAL(43, 1370, 42), // "on_m_materialsComboBox_curren..."
 QT_MOC_LITERAL(44, 1413, 34), // "on_m_addModelToSceneButton_cl..."
 QT_MOC_LITERAL(45, 1448, 33), // "on_m_modelsList_currentRowCha..."
-QT_MOC_LITERAL(46, 1482, 10) // "currentRow"
+QT_MOC_LITERAL(46, 1482, 10), // "currentRow"
+QT_MOC_LITERAL(47, 1493, 37), // "on_m_numParticlesSpinBox_valu..."
+QT_MOC_LITERAL(48, 1531, 33), // "on_m_durationSpinBox_valueCha..."
+QT_MOC_LITERAL(49, 1565, 42), // "on_m_durationRanomnessSpinBox..."
+QT_MOC_LITERAL(50, 1608, 44), // "on_m_velocitySensitivitySpinB..."
+QT_MOC_LITERAL(51, 1653, 46), // "on_m_minHorizontalVelocitySpi..."
+QT_MOC_LITERAL(52, 1700, 46), // "on_m_maxHorizontalVelocitySpi..."
+QT_MOC_LITERAL(53, 1747, 44), // "on_m_minVerticalVelocitySpinB..."
+QT_MOC_LITERAL(54, 1792, 44), // "on_m_maxVerticalVelocitySpinB..."
+QT_MOC_LITERAL(55, 1837, 36), // "on_m_endVelocitySpinBox_value..."
+QT_MOC_LITERAL(56, 1874, 33), // "on_m_gravityXSpinBox_valueCha..."
+QT_MOC_LITERAL(57, 1908, 33), // "on_m_gravityYSpinBox_valueCha..."
+QT_MOC_LITERAL(58, 1942, 33), // "on_m_gravityZSpinBox_valueCha..."
+QT_MOC_LITERAL(59, 1976, 37), // "on_m_sourceColorRSpinBox_valu..."
+QT_MOC_LITERAL(60, 2014, 37), // "on_m_sourceColorGSpinBox_valu..."
+QT_MOC_LITERAL(61, 2052, 37), // "on_m_sourceColorBSpinBox_valu..."
+QT_MOC_LITERAL(62, 2090, 37), // "on_m_sourceColorASpinBox_valu..."
+QT_MOC_LITERAL(63, 2128, 42), // "on_m_destinationColorRSpinBox..."
+QT_MOC_LITERAL(64, 2171, 42), // "on_m_destinationColorGSpinBox..."
+QT_MOC_LITERAL(65, 2214, 42), // "on_m_destinationColorBSpinBox..."
+QT_MOC_LITERAL(66, 2257, 42), // "on_m_destinationColorASpinBox..."
+QT_MOC_LITERAL(67, 2300, 36), // "on_m_sourceSizeXSpinBox_value..."
+QT_MOC_LITERAL(68, 2337, 36), // "on_m_sourceSizeYSpinBox_value..."
+QT_MOC_LITERAL(69, 2374, 41), // "on_m_destinationSizeXSpinBox_..."
+QT_MOC_LITERAL(70, 2416, 41), // "on_m_destinationSizeYSpinBox_..."
+QT_MOC_LITERAL(71, 2458, 41), // "on_m_minEmittIntervalSpinBox_..."
+QT_MOC_LITERAL(72, 2500, 41) // "on_m_maxEmittIntervalSpinBox_..."
 
     },
     "CMainWindow\0on_m_brushSizeSlider_valueChanged\0"
@@ -119,7 +145,32 @@ QT_MOC_LITERAL(46, 1482, 10) // "currentRow"
     "on_m_materialsComboBox_currentIndexChanged\0"
     "on_m_addModelToSceneButton_clicked\0"
     "on_m_modelsList_currentRowChanged\0"
-    "currentRow"
+    "currentRow\0on_m_numParticlesSpinBox_valueChanged\0"
+    "on_m_durationSpinBox_valueChanged\0"
+    "on_m_durationRanomnessSpinBox_valueChanged\0"
+    "on_m_velocitySensitivitySpinBox_valueChanged\0"
+    "on_m_minHorizontalVelocitySpinBox_valueChanged\0"
+    "on_m_maxHorizontalVelocitySpinBox_valueChanged\0"
+    "on_m_minVerticalVelocitySpinBox_valueChanged\0"
+    "on_m_maxVerticalVelocitySpinBox_valueChanged\0"
+    "on_m_endVelocitySpinBox_valueChanged\0"
+    "on_m_gravityXSpinBox_valueChanged\0"
+    "on_m_gravityYSpinBox_valueChanged\0"
+    "on_m_gravityZSpinBox_valueChanged\0"
+    "on_m_sourceColorRSpinBox_valueChanged\0"
+    "on_m_sourceColorGSpinBox_valueChanged\0"
+    "on_m_sourceColorBSpinBox_valueChanged\0"
+    "on_m_sourceColorASpinBox_valueChanged\0"
+    "on_m_destinationColorRSpinBox_valueChanged\0"
+    "on_m_destinationColorGSpinBox_valueChanged\0"
+    "on_m_destinationColorBSpinBox_valueChanged\0"
+    "on_m_destinationColorASpinBox_valueChanged\0"
+    "on_m_sourceSizeXSpinBox_valueChanged\0"
+    "on_m_sourceSizeYSpinBox_valueChanged\0"
+    "on_m_destinationSizeXSpinBox_valueChanged\0"
+    "on_m_destinationSizeYSpinBox_valueChanged\0"
+    "on_m_minEmittIntervalSpinBox_valueChanged\0"
+    "on_m_maxEmittIntervalSpinBox_valueChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -129,7 +180,7 @@ static const uint qt_meta_data_CMainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      41,   14, // methods
+      67,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -137,47 +188,73 @@ static const uint qt_meta_data_CMainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  219,    2, 0x08 /* Private */,
-       4,    1,  222,    2, 0x08 /* Private */,
-       5,    1,  225,    2, 0x08 /* Private */,
-       6,    1,  228,    2, 0x08 /* Private */,
-       7,    0,  231,    2, 0x08 /* Private */,
-       8,    0,  232,    2, 0x08 /* Private */,
-       9,    0,  233,    2, 0x08 /* Private */,
-      10,    0,  234,    2, 0x08 /* Private */,
-      11,    1,  235,    2, 0x08 /* Private */,
-      13,    1,  238,    2, 0x08 /* Private */,
-      14,    1,  241,    2, 0x08 /* Private */,
-      15,    0,  244,    2, 0x08 /* Private */,
-      16,    1,  245,    2, 0x08 /* Private */,
-      18,    1,  248,    2, 0x08 /* Private */,
-      19,    0,  251,    2, 0x08 /* Private */,
-      20,    1,  252,    2, 0x08 /* Private */,
-      21,    1,  255,    2, 0x08 /* Private */,
-      22,    1,  258,    2, 0x08 /* Private */,
-      23,    1,  261,    2, 0x08 /* Private */,
-      24,    1,  264,    2, 0x08 /* Private */,
-      25,    1,  267,    2, 0x08 /* Private */,
-      26,    1,  270,    2, 0x08 /* Private */,
-      27,    1,  273,    2, 0x08 /* Private */,
-      28,    1,  276,    2, 0x08 /* Private */,
-      29,    1,  279,    2, 0x08 /* Private */,
-      30,    1,  282,    2, 0x08 /* Private */,
-      31,    1,  285,    2, 0x08 /* Private */,
-      32,    1,  288,    2, 0x08 /* Private */,
-      33,    1,  291,    2, 0x08 /* Private */,
-      34,    1,  294,    2, 0x08 /* Private */,
-      35,    0,  297,    2, 0x08 /* Private */,
-      36,    0,  298,    2, 0x08 /* Private */,
-      37,    0,  299,    2, 0x08 /* Private */,
-      38,    0,  300,    2, 0x08 /* Private */,
-      39,    1,  301,    2, 0x08 /* Private */,
-      40,    0,  304,    2, 0x08 /* Private */,
-      41,    0,  305,    2, 0x08 /* Private */,
-      42,    0,  306,    2, 0x08 /* Private */,
-      43,    1,  307,    2, 0x08 /* Private */,
-      44,    0,  310,    2, 0x08 /* Private */,
-      45,    1,  311,    2, 0x08 /* Private */,
+       1,    1,  349,    2, 0x08 /* Private */,
+       4,    1,  352,    2, 0x08 /* Private */,
+       5,    1,  355,    2, 0x08 /* Private */,
+       6,    1,  358,    2, 0x08 /* Private */,
+       7,    0,  361,    2, 0x08 /* Private */,
+       8,    0,  362,    2, 0x08 /* Private */,
+       9,    0,  363,    2, 0x08 /* Private */,
+      10,    0,  364,    2, 0x08 /* Private */,
+      11,    1,  365,    2, 0x08 /* Private */,
+      13,    1,  368,    2, 0x08 /* Private */,
+      14,    1,  371,    2, 0x08 /* Private */,
+      15,    0,  374,    2, 0x08 /* Private */,
+      16,    1,  375,    2, 0x08 /* Private */,
+      18,    1,  378,    2, 0x08 /* Private */,
+      19,    0,  381,    2, 0x08 /* Private */,
+      20,    1,  382,    2, 0x08 /* Private */,
+      21,    1,  385,    2, 0x08 /* Private */,
+      22,    1,  388,    2, 0x08 /* Private */,
+      23,    1,  391,    2, 0x08 /* Private */,
+      24,    1,  394,    2, 0x08 /* Private */,
+      25,    1,  397,    2, 0x08 /* Private */,
+      26,    1,  400,    2, 0x08 /* Private */,
+      27,    1,  403,    2, 0x08 /* Private */,
+      28,    1,  406,    2, 0x08 /* Private */,
+      29,    1,  409,    2, 0x08 /* Private */,
+      30,    1,  412,    2, 0x08 /* Private */,
+      31,    1,  415,    2, 0x08 /* Private */,
+      32,    1,  418,    2, 0x08 /* Private */,
+      33,    1,  421,    2, 0x08 /* Private */,
+      34,    1,  424,    2, 0x08 /* Private */,
+      35,    0,  427,    2, 0x08 /* Private */,
+      36,    0,  428,    2, 0x08 /* Private */,
+      37,    0,  429,    2, 0x08 /* Private */,
+      38,    0,  430,    2, 0x08 /* Private */,
+      39,    1,  431,    2, 0x08 /* Private */,
+      40,    0,  434,    2, 0x08 /* Private */,
+      41,    0,  435,    2, 0x08 /* Private */,
+      42,    0,  436,    2, 0x08 /* Private */,
+      43,    1,  437,    2, 0x08 /* Private */,
+      44,    0,  440,    2, 0x08 /* Private */,
+      45,    1,  441,    2, 0x08 /* Private */,
+      47,    1,  444,    2, 0x08 /* Private */,
+      48,    1,  447,    2, 0x08 /* Private */,
+      49,    1,  450,    2, 0x08 /* Private */,
+      50,    1,  453,    2, 0x08 /* Private */,
+      51,    1,  456,    2, 0x08 /* Private */,
+      52,    1,  459,    2, 0x08 /* Private */,
+      53,    1,  462,    2, 0x08 /* Private */,
+      54,    1,  465,    2, 0x08 /* Private */,
+      55,    1,  468,    2, 0x08 /* Private */,
+      56,    1,  471,    2, 0x08 /* Private */,
+      57,    1,  474,    2, 0x08 /* Private */,
+      58,    1,  477,    2, 0x08 /* Private */,
+      59,    1,  480,    2, 0x08 /* Private */,
+      60,    1,  483,    2, 0x08 /* Private */,
+      61,    1,  486,    2, 0x08 /* Private */,
+      62,    1,  489,    2, 0x08 /* Private */,
+      63,    1,  492,    2, 0x08 /* Private */,
+      64,    1,  495,    2, 0x08 /* Private */,
+      65,    1,  498,    2, 0x08 /* Private */,
+      66,    1,  501,    2, 0x08 /* Private */,
+      67,    1,  504,    2, 0x08 /* Private */,
+      68,    1,  507,    2, 0x08 /* Private */,
+      69,    1,  510,    2, 0x08 /* Private */,
+      70,    1,  513,    2, 0x08 /* Private */,
+      71,    1,  516,    2, 0x08 /* Private */,
+      72,    1,  519,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -221,6 +298,32 @@ static const uint qt_meta_data_CMainWindow[] = {
     QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   46,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
+    QMetaType::Void, QMetaType::Double,   12,
 
        0        // eod
 };
@@ -271,6 +374,32 @@ void CMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 38: _t->on_m_materialsComboBox_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 39: _t->on_m_addModelToSceneButton_clicked(); break;
         case 40: _t->on_m_modelsList_currentRowChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 41: _t->on_m_numParticlesSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 42: _t->on_m_durationSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 43: _t->on_m_durationRanomnessSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 44: _t->on_m_velocitySensitivitySpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 45: _t->on_m_minHorizontalVelocitySpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 46: _t->on_m_maxHorizontalVelocitySpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 47: _t->on_m_minVerticalVelocitySpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 48: _t->on_m_maxVerticalVelocitySpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 49: _t->on_m_endVelocitySpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 50: _t->on_m_gravityXSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 51: _t->on_m_gravityYSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 52: _t->on_m_gravityZSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 53: _t->on_m_sourceColorRSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 54: _t->on_m_sourceColorGSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 55: _t->on_m_sourceColorBSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 56: _t->on_m_sourceColorASpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 57: _t->on_m_destinationColorRSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 58: _t->on_m_destinationColorGSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 59: _t->on_m_destinationColorBSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 60: _t->on_m_destinationColorASpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 61: _t->on_m_sourceSizeXSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 62: _t->on_m_sourceSizeYSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 63: _t->on_m_destinationSizeXSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 64: _t->on_m_destinationSizeYSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 65: _t->on_m_minEmittIntervalSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 66: _t->on_m_maxEmittIntervalSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -303,13 +432,13 @@ int CMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 41)
+        if (_id < 67)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 41;
+        _id -= 67;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 41)
+        if (_id < 67)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 41;
+        _id -= 67;
     }
     return _id;
 }

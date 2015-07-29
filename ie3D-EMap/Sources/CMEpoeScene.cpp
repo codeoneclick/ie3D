@@ -69,6 +69,7 @@ void CMEpoeScene::load(void)
     m_particle = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
     m_particle->setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
     m_root->addParticleEmitter(m_particle);
+    m_particle->addConfigurationLoadedCallback(std::bind(&CMEpoeScene::onConfigurationLoaded, this, std::placeholders::_1));
     
     m_globalLightSource->setAngle(3.0);
     m_globalLightSource->setDistanceToSun(512.0);
@@ -158,4 +159,15 @@ void CMEpoeScene::onKeyUp(i32)
 void CMEpoeScene::onKeyDown(i32)
 {
     
+}
+
+void CMEpoeScene::onConfigurationLoaded(ISharedConfigurationRef configuration)
+{
+    CSharedConfigurationParticleEmitter configurationParticleEmitter = std::static_pointer_cast<CConfigurationParticleEmitter>(configuration);
+    assert(m_sceneToUICommands != nullptr);
+    if (m_sceneToUICommands != nullptr)
+    {
+        m_sceneToUICommands->execute<UICommandPOEUpdateConfigurationParticleEmitter::COMMAND>(UICommandPOEUpdateConfigurationParticleEmitter::GUID,
+                                                                                              configurationParticleEmitter);
+    }
 }

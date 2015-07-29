@@ -42,6 +42,7 @@ void CMEpoeTransition::initScene(void)
 void CMEpoeTransition::_OnLoaded(void)
 {
     m_scene = std::make_shared<CMEpoeScene>(this);
+    IGameTransition::_OnLoaded();
     m_scene->load();
     m_isLoaded = true;
 }

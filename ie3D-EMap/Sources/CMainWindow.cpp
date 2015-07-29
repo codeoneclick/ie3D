@@ -34,6 +34,7 @@ QMainWindow(parent),
 
 m_mseSceneToUICommands(std::make_shared<IUICommands>()),
 m_goeSceneToUICommands(std::make_shared<IUICommands>()),
+m_poeSceneToUICommands(std::make_shared<IUICommands>()),
 m_recentOpenPath(""),
 
 #endif
@@ -143,6 +144,12 @@ void CMainWindow::execute(void)
     m_goeSceneToUICommands->addCommand(UICommandGOEUpdateConfigurationsMaterials::GUID,
                                        command);
     
+    command = std::make_shared<CCommand<UICommandPOEUpdateConfigurationParticleEmitter::COMMAND>>(std::bind(&CMainWindow::updatePOEUIConfigurationParticleEmitter,
+                                                                                                       this,
+                                                                                                       std::placeholders::_1));
+    m_poeSceneToUICommands->addCommand(UICommandPOEUpdateConfigurationParticleEmitter::GUID,
+                                       command);
+    
     NSView *mseView = reinterpret_cast<NSView*>(ui->m_oglWindow->winId());
     NSOpenGLView *mseOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
                                                                               0.0,
@@ -153,9 +160,10 @@ void CMainWindow::execute(void)
     
     m_mseController = std::make_shared<CMEGameController>(mseWindow);
     m_mseTransition = std::make_shared<CMEmseTransition>("transition.mse.xml", false);
+    m_mseTransition->setSceneToUICommands(m_mseSceneToUICommands);
     m_mseController->addTransition(m_mseTransition);
     m_mseController->gotoTransition("transition.mse.xml");
-    m_mseTransition->setSceneToUICommands(m_mseSceneToUICommands);
+    
     ui->m_oglWindow->setVisible(false);
     
     NSView *goeView =reinterpret_cast<NSView*>(ui->m_gameObjectGLWindow->winId());
@@ -168,9 +176,9 @@ void CMainWindow::execute(void)
     
     m_goeController = std::make_shared<CMEGameController>(goeOGLWindow);
     m_goeTransition = std::make_shared<CMEgoeTransition>("transition.goe.xml", false);
+    m_goeTransition->setSceneToUICommands(m_goeSceneToUICommands);
     m_goeController->addTransition(m_goeTransition);
     m_goeController->gotoTransition("transition.goe.xml");
-    m_goeTransition->setSceneToUICommands(m_goeSceneToUICommands);
     
     NSView *gopView =reinterpret_cast<NSView*>(ui->m_modelsOpenGLView->winId());
     NSOpenGLView *gopOGLView = [[NSOpenGLView alloc] initWithFrame:CGRectMake(0.0,
@@ -195,6 +203,7 @@ void CMainWindow::execute(void)
     
     m_poeController = std::make_shared<CMEGameController>(poeOGLWindow);
     m_poeTransition = std::make_shared<CMEpoeTransition>("transition.poe.xml", false);
+    m_poeTransition->setSceneToUICommands(m_poeSceneToUICommands);
     m_poeController->addTransition(m_poeTransition);
     m_poeController->gotoTransition("transition.poe.xml");
     
@@ -615,6 +624,36 @@ void CMainWindow::updateGOEUIConfigurationMaterial(CSharedConfigurationMaterialR
     }
 }
 
+void CMainWindow::updatePOEUIConfigurationParticleEmitter(CSharedConfigurationParticleEmitterRef configuration)
+{
+    ui->m_numParticlesSpinBox->setValue(configuration->getNumParticles());
+    ui->m_durationSpinBox->setValue(configuration->getDuration());
+    ui->m_durationRanomnessSpinBox->setValue(configuration->getDurationRandomess());
+    ui->m_velocitySensitivitySpinBox->setValue(configuration->getVelocitySensitivity());
+    ui->m_minHorizontalVelocitySpinBox->setValue(configuration->getMinHorizontalVelocity());
+    ui->m_maxHorizontalVelocitySpinBox->setValue(configuration->getMaxHorizontalVelocity());
+    ui->m_minVerticalVelocitySpinBox->setValue(configuration->getMinVerticalVelocity());
+    ui->m_maxVerticalVelocitySpinBox->setValue(configuration->getMaxVerticalVelocity());
+    ui->m_endVelocitySpinBox->setValue(configuration->getEndVelocity());
+    ui->m_gravityXSpinBox->setValue(configuration->getGravityX());
+    ui->m_gravityYSpinBox->setValue(configuration->getGravityY());
+    ui->m_gravityZSpinBox->setValue(configuration->getGravityZ());
+    ui->m_sourceColorRSpinBox->setValue(configuration->getSourceColorR());
+    ui->m_sourceColorGSpinBox->setValue(configuration->getSourceColorG());
+    ui->m_sourceColorBSpinBox->setValue(configuration->getSourceColorB());
+    ui->m_sourceColorASpinBox->setValue(configuration->getSourceColorA());
+    ui->m_destinationColorRSpinBox->setValue(configuration->getDestinationColorR());
+    ui->m_destinationColorGSpinBox->setValue(configuration->getDestinationColorG());
+    ui->m_destinationColorBSpinBox->setValue(configuration->getDestinationColorB());
+    ui->m_destinationColorASpinBox->setValue(configuration->getDestinationColorA());
+    ui->m_sourceSizeXSpinBox->setValue(configuration->getSourceSizeX());
+    ui->m_sourceSizeYSpinBox->setValue(configuration->getSourceSizeY());
+    ui->m_destinationSizeXSpinBox->setValue(configuration->getDestinationSizeX());
+    ui->m_destinationSizeYSpinBox->setValue(configuration->getDestinationSizeY());
+    ui->m_minVerticalVelocitySpinBox->setValue(configuration->getMinEmittInterval());
+    ui->m_maxVerticalVelocitySpinBox->setValue(configuration->getMaxEmittInterval());
+}
+
 void CMainWindow::on_m_cullFaceCheckBox_stateChanged(int)
 {
     CSharedConfigurationMaterial configuration = CMainWindow::getCurrentConfigurationMaterial();
@@ -923,4 +962,212 @@ void CMainWindow::generatorStatisticsUpdate(const std::string& operationName, E_
         ui->m_heightmapGenerationStatisticLabel->setVisible(false);
     }
     ui->m_heightmapGenerationStatisticLabel->setText(QString::fromUtf8(operationName.c_str()));
+}
+
+void CMainWindow::on_m_numParticlesSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setNumParticles(ui->m_numParticlesSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_durationSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setDuration(ui->m_durationSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_durationRanomnessSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setDurationRandomess(ui->m_durationRanomnessSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_velocitySensitivitySpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setVelocitySensitivity(ui->m_velocitySensitivitySpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_minHorizontalVelocitySpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setMinHorizontalVelocity(ui->m_minHorizontalVelocitySpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_maxHorizontalVelocitySpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setMaxHorizontalVelocity(ui->m_maxHorizontalVelocitySpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_minVerticalVelocitySpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setMinVerticalVelocity(ui->m_minVerticalVelocitySpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_maxVerticalVelocitySpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setMaxVerticalVelocity(ui->m_maxVerticalVelocitySpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_endVelocitySpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setEndVelocity(ui->m_endVelocitySpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_gravityXSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setGravityX(ui->m_gravityXSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_gravityYSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setGravityY(ui->m_gravityYSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_gravityZSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setGravityZ(ui->m_gravityZSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_sourceColorRSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setSourceColorR(ui->m_sourceColorRSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_sourceColorGSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setSourceColorG(ui->m_sourceColorGSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_sourceColorBSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setSourceColorB(ui->m_sourceColorBSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_sourceColorASpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setSourceColorA(ui->m_sourceColorASpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_destinationColorRSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setDestinationColorR(ui->m_destinationColorRSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_destinationColorGSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setDestinationColorG(ui->m_destinationColorGSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_destinationColorBSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setDestinationColorB(ui->m_destinationColorBSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_destinationColorASpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setDestinationColorA(ui->m_destinationColorASpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_sourceSizeXSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setSourceSizeX(ui->m_sourceSizeXSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_sourceSizeYSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setSourceSizeY(ui->m_sourceSizeYSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_destinationSizeXSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setDestinationSizeX(ui->m_destinationSizeXSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_destinationSizeYSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setDestinationSizeY(ui->m_destinationSizeYSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_minEmittIntervalSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setMinEmittInterval(ui->m_minEmittIntervalSpinBox->value());
+    }
+}
+
+void CMainWindow::on_m_maxEmittIntervalSpinBox_valueChanged(double)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeConfiguration->setMaxEmittInterval(ui->m_maxEmittIntervalSpinBox->value());
+    }
 }
