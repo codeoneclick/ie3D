@@ -2080,6 +2080,806 @@ background-color: rgb(0, 0, 0);</string>
          <string>Min Horizontal Velocity:</string>
         </property>
        </widget>
+       <widget class="QDoubleSpinBox" name="m_maxHorizontalVelocitySpinBox">
+        <property name="geometry">
+         <rect>
+          <x>198</x>
+          <y>177</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_26">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>180</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Max Horizontal Velocity:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_minVerticalVelocitySpinBox">
+        <property name="geometry">
+         <rect>
+          <x>198</x>
+          <y>207</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_27">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>210</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Min Vertical Velocity:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_28">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>243</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Max Vertical Velocity:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_maxVerticalVelocitySpinBox">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>240</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_endVelocitySpinBox">
+        <property name="geometry">
+         <rect>
+          <x>198</x>
+          <y>267</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_29">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>270</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>End Velocity:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_gravityXSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>320</y>
+          <width>71</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_30">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>300</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Gravity:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_31">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>320</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>y:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_gravityYSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>320</y>
+          <width>71</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_gravityZSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>320</y>
+          <width>71</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_32">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>320</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>z:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_33">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>320</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>x:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_34">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>360</y>
+          <width>191</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Source Color:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_sourceColorRSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>390</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_sourceColorGSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>390</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_sourceColorBSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>390</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_sourceColorASpinBox">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>390</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_35">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>390</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>r:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_36">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>390</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>g:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_37">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>390</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>b:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_38">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>390</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>a:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_39">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>460</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>r:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_40">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>460</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>g:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_destinationColorASpinBox">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>460</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_41">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>460</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>a:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_destinationColorBSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>460</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_42">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>460</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>b:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_destinationColorGSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>460</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_destinationColorRSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>460</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_43">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>430</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Destination Color:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_44">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>500</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Source Size:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_sourceSizeYSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>520</y>
+          <width>71</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_45">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>520</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>y:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_46">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>520</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>x:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_sourceSizeXSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>520</y>
+          <width>71</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_destinationSizeXSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>580</y>
+          <width>71</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_47">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>560</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Destination Size:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_48">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>580</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>y:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_49">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>580</y>
+          <width>21</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>x:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_destinationSizeYSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>580</y>
+          <width>71</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_minEmittIntervalSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>198</x>
+          <y>627</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_50">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>630</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Min Emitt Interval:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_51">
+        <property name="geometry">
+         <rect>
+          <x>22</x>
+          <y>673</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Max Emitt Interval:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="m_maxEmittIntervalSpinBox">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>670</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>65535.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="m_poeMaterialsSettingTab">
        <property name="enabled">
