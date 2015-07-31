@@ -650,8 +650,8 @@ void CMainWindow::updatePOEUIConfigurationParticleEmitter(CSharedConfigurationPa
     ui->m_sourceSizeYSpinBox->setValue(configuration->getSourceSizeY());
     ui->m_destinationSizeXSpinBox->setValue(configuration->getDestinationSizeX());
     ui->m_destinationSizeYSpinBox->setValue(configuration->getDestinationSizeY());
-    ui->m_minVerticalVelocitySpinBox->setValue(configuration->getMinEmittInterval());
-    ui->m_maxVerticalVelocitySpinBox->setValue(configuration->getMaxEmittInterval());
+    ui->m_minEmittIntervalSpinBox->setValue(configuration->getMinEmittInterval());
+    ui->m_maxEmittIntervalSpinBox->setValue(configuration->getMaxEmittInterval());
 }
 
 void CMainWindow::on_m_cullFaceCheckBox_stateChanged(int)
@@ -951,6 +951,15 @@ void CMainWindow::commitCurrentConfigurationMaterial(void)
     {
         m_goeTransition->getUIToSceneCommands()->execute<UICommandGOEUpdateConfigurationMaterial::COMMAND>(UICommandGOEUpdateConfigurationMaterial::GUID,
                                                                                                            configuration);
+    }
+}
+
+void CMainWindow::commitConfigurationParticleEmitter(void)
+{
+    if(m_poeConfiguration)
+    {
+        m_poeTransition->getUIToSceneCommands()->execute<UICommandPOEUpdateConfigurationParticleEmitter::COMMAND>(UICommandPOEUpdateConfigurationParticleEmitter::GUID,
+                                                                                                                  m_poeConfiguration);
     }
 }
 

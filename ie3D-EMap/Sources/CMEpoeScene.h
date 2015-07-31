@@ -35,6 +35,7 @@ protected:
     void onKeyDown(i32 key);
     
     void onConfigurationLoaded(ISharedConfigurationRef configuration);
+    void onConfigurationUpdated(CSharedConfigurationParticleEmitterRef configuration);
     
 public:
     

@@ -18,8 +18,10 @@ static NSOpenGLPixelFormatAttribute g_attributes[] =
     NSOpenGLPFADoubleBuffer,
     NSOpenGLPFADepthSize, 24,
 #if defined(__OPENGL_30__)
+    
     NSOpenGLPFAOpenGLProfile,
     NSOpenGLProfileVersion3_2Core,
+    
 #endif
     0
 };

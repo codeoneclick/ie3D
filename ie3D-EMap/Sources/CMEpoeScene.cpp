@@ -29,7 +29,10 @@ IScene(root),
 m_particle(nullptr),
 m_previousDraggedPoint(0.0f)
 {
-
+    ISharedCommand command = std::make_shared<CCommand<UICommandGOECreateConfiguration::COMMAND>>(std::bind(&CMEpoeScene::onConfigurationUpdated,
+                                                                                                            this,
+                                                                                                            std::placeholders::_1));
+    m_uiToSceneCommands->addCommand(UICommandGOECreateConfiguration::GUID, command);
 }
 
 CMEpoeScene::~CMEpoeScene(void)
