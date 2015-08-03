@@ -20,8 +20,8 @@ private:
 protected:
     
     CSharedGlobalLightSource m_globalLightSource;
+    CMESharedSceneStage m_stage;
     CSharedParticleEmitter m_particle;
-    CSharedLandscape m_landscape;
     CSharedSkyBox m_skybox;
     glm::ivec2 m_previousDraggedPoint;
     

@@ -11,6 +11,7 @@
 #include "CResourceAccessor.h"
 #include "CMELandscapeBrush.h"
 #include "CMEModelBrush.h"
+#include "CMESceneStage.h"
 
 CMESceneFabricator::CMESceneFabricator(CSharedConfigurationAccessorRef configurationAccessor,
                                        CSharedResourceAccessorRef resourceAccessor,
@@ -22,7 +23,7 @@ CESceneFabricator(configurationAccessor, resourceAccessor, renderTechniqueAccess
 
 CMESceneFabricator::~CMESceneFabricator(void)
 {
-
+    
 }
 
 CMESharedLandscapeBrush CMESceneFabricator::createLandscapeBrush(const std::string &filename)
@@ -47,4 +48,16 @@ CMESharedModelBrush CMESceneFabricator::createModelBrush(const std::string &file
     configurationAccessor->getMEConfigurationModelBrush(filename, modelBrush);
     m_gameObjectsContainer.insert(modelBrush);
     return modelBrush;
+}
+
+CMESharedSceneStage CMESceneFabricator::createSceneStage(const std::string& filename)
+{
+    assert(m_resourceAccessor != nullptr);
+    assert(m_renderTechniqueAccessor != nullptr);
+    CMESharedSceneStage sceneStage = std::make_shared<CMESceneStage>(m_resourceAccessor, m_renderTechniqueAccessor);
+    assert(m_configurationAccessor != nullptr);
+    std::shared_ptr<CMEConfigurationAccessor> configurationAccessor = std::static_pointer_cast<CMEConfigurationAccessor>(m_configurationAccessor);
+    configurationAccessor->getMEConfigurationSceneStage(filename, sceneStage);
+    m_gameObjectsContainer.insert(sceneStage);
+    return sceneStage;
 }

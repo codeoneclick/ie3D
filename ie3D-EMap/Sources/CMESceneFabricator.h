@@ -28,6 +28,7 @@ public:
     
     CMESharedLandscapeBrush createLandscapeBrush(const std::string& filename);
     CMESharedModelBrush createModelBrush(const std::string& filename);
+    CMESharedSceneStage createSceneStage(const std::string& filename);
 };
 
 

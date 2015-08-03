@@ -16,3 +16,11 @@ assert(configuration != nullptr);
 assert(handler != nullptr);
 handler->onConfigurationLoaded(configuration, true);
 }
+void CMEConfigurationAccessor::getMEConfigurationSceneStage(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const
+{
+std::shared_ptr<CMEConfigurationSceneStage> configuration = std::make_shared<CMEConfigurationSceneStage>();
+configuration->serialize(filename);
+assert(configuration != nullptr);
+assert(handler != nullptr);
+handler->onConfigurationLoaded(configuration, true);
+}

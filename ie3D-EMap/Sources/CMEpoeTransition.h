@@ -27,6 +27,8 @@ public:
     ~CMEpoeTransition(void);
     
     void initScene(void);
+    
+    CMESharedSceneStage createSceneStage(const std::string& filename);
 };
 
 #endif

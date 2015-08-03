@@ -35,6 +35,7 @@ QMainWindow(parent),
 m_mseSceneToUICommands(std::make_shared<IUICommands>()),
 m_goeSceneToUICommands(std::make_shared<IUICommands>()),
 m_poeSceneToUICommands(std::make_shared<IUICommands>()),
+m_poeConfiguration(nullptr),
 m_recentOpenPath(""),
 
 #endif
@@ -652,6 +653,8 @@ void CMainWindow::updatePOEUIConfigurationParticleEmitter(CSharedConfigurationPa
     ui->m_destinationSizeYSpinBox->setValue(configuration->getDestinationSizeY());
     ui->m_minEmittIntervalSpinBox->setValue(configuration->getMinEmittInterval());
     ui->m_maxEmittIntervalSpinBox->setValue(configuration->getMaxEmittInterval());
+    
+    m_poeConfiguration = configuration;
 }
 
 void CMainWindow::on_m_cullFaceCheckBox_stateChanged(int)
@@ -979,6 +982,7 @@ void CMainWindow::on_m_numParticlesSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setNumParticles(ui->m_numParticlesSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_durationSpinBox_valueChanged(double)
@@ -987,6 +991,7 @@ void CMainWindow::on_m_durationSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setDuration(ui->m_durationSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_durationRanomnessSpinBox_valueChanged(double)
@@ -995,6 +1000,7 @@ void CMainWindow::on_m_durationRanomnessSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setDurationRandomess(ui->m_durationRanomnessSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_velocitySensitivitySpinBox_valueChanged(double)
@@ -1003,6 +1009,7 @@ void CMainWindow::on_m_velocitySensitivitySpinBox_valueChanged(double)
     {
         m_poeConfiguration->setVelocitySensitivity(ui->m_velocitySensitivitySpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_minHorizontalVelocitySpinBox_valueChanged(double)
@@ -1011,6 +1018,7 @@ void CMainWindow::on_m_minHorizontalVelocitySpinBox_valueChanged(double)
     {
         m_poeConfiguration->setMinHorizontalVelocity(ui->m_minHorizontalVelocitySpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_maxHorizontalVelocitySpinBox_valueChanged(double)
@@ -1019,6 +1027,7 @@ void CMainWindow::on_m_maxHorizontalVelocitySpinBox_valueChanged(double)
     {
         m_poeConfiguration->setMaxHorizontalVelocity(ui->m_maxHorizontalVelocitySpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_minVerticalVelocitySpinBox_valueChanged(double)
@@ -1027,6 +1036,7 @@ void CMainWindow::on_m_minVerticalVelocitySpinBox_valueChanged(double)
     {
         m_poeConfiguration->setMinVerticalVelocity(ui->m_minVerticalVelocitySpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_maxVerticalVelocitySpinBox_valueChanged(double)
@@ -1035,6 +1045,7 @@ void CMainWindow::on_m_maxVerticalVelocitySpinBox_valueChanged(double)
     {
         m_poeConfiguration->setMaxVerticalVelocity(ui->m_maxVerticalVelocitySpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_endVelocitySpinBox_valueChanged(double)
@@ -1043,6 +1054,7 @@ void CMainWindow::on_m_endVelocitySpinBox_valueChanged(double)
     {
         m_poeConfiguration->setEndVelocity(ui->m_endVelocitySpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_gravityXSpinBox_valueChanged(double)
@@ -1051,6 +1063,7 @@ void CMainWindow::on_m_gravityXSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setGravityX(ui->m_gravityXSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_gravityYSpinBox_valueChanged(double)
@@ -1059,6 +1072,7 @@ void CMainWindow::on_m_gravityYSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setGravityY(ui->m_gravityYSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_gravityZSpinBox_valueChanged(double)
@@ -1067,6 +1081,7 @@ void CMainWindow::on_m_gravityZSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setGravityZ(ui->m_gravityZSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_sourceColorRSpinBox_valueChanged(double)
@@ -1075,6 +1090,7 @@ void CMainWindow::on_m_sourceColorRSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setSourceColorR(ui->m_sourceColorRSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_sourceColorGSpinBox_valueChanged(double)
@@ -1083,6 +1099,7 @@ void CMainWindow::on_m_sourceColorGSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setSourceColorG(ui->m_sourceColorGSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_sourceColorBSpinBox_valueChanged(double)
@@ -1091,6 +1108,7 @@ void CMainWindow::on_m_sourceColorBSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setSourceColorB(ui->m_sourceColorBSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_sourceColorASpinBox_valueChanged(double)
@@ -1099,6 +1117,7 @@ void CMainWindow::on_m_sourceColorASpinBox_valueChanged(double)
     {
         m_poeConfiguration->setSourceColorA(ui->m_sourceColorASpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_destinationColorRSpinBox_valueChanged(double)
@@ -1107,6 +1126,7 @@ void CMainWindow::on_m_destinationColorRSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setDestinationColorR(ui->m_destinationColorRSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_destinationColorGSpinBox_valueChanged(double)
@@ -1115,6 +1135,7 @@ void CMainWindow::on_m_destinationColorGSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setDestinationColorG(ui->m_destinationColorGSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_destinationColorBSpinBox_valueChanged(double)
@@ -1123,6 +1144,7 @@ void CMainWindow::on_m_destinationColorBSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setDestinationColorB(ui->m_destinationColorBSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_destinationColorASpinBox_valueChanged(double)
@@ -1131,6 +1153,7 @@ void CMainWindow::on_m_destinationColorASpinBox_valueChanged(double)
     {
         m_poeConfiguration->setDestinationColorA(ui->m_destinationColorASpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_sourceSizeXSpinBox_valueChanged(double)
@@ -1139,6 +1162,7 @@ void CMainWindow::on_m_sourceSizeXSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setSourceSizeX(ui->m_sourceSizeXSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_sourceSizeYSpinBox_valueChanged(double)
@@ -1147,6 +1171,7 @@ void CMainWindow::on_m_sourceSizeYSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setSourceSizeY(ui->m_sourceSizeYSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_destinationSizeXSpinBox_valueChanged(double)
@@ -1155,6 +1180,7 @@ void CMainWindow::on_m_destinationSizeXSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setDestinationSizeX(ui->m_destinationSizeXSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_destinationSizeYSpinBox_valueChanged(double)
@@ -1163,6 +1189,7 @@ void CMainWindow::on_m_destinationSizeYSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setDestinationSizeY(ui->m_destinationSizeYSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_minEmittIntervalSpinBox_valueChanged(double)
@@ -1171,6 +1198,7 @@ void CMainWindow::on_m_minEmittIntervalSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setMinEmittInterval(ui->m_minEmittIntervalSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }
 
 void CMainWindow::on_m_maxEmittIntervalSpinBox_valueChanged(double)
@@ -1179,4 +1207,5 @@ void CMainWindow::on_m_maxEmittIntervalSpinBox_valueChanged(double)
     {
         m_poeConfiguration->setMaxEmittInterval(ui->m_maxEmittIntervalSpinBox->value());
     }
+    CMainWindow::commitConfigurationParticleEmitter();
 }

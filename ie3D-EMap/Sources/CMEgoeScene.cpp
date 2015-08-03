@@ -23,6 +23,8 @@
 #include "ICommand.h"
 #include "IUICommands.h"
 #include "HUICommands.h"
+#include "CMEgoeTransition.h"
+#include "CMESceneStage.h"
 
 const std::string kConfigurationBaseMaterialTempFilename = "material.base.goe.temp.xml";
 const std::string kConfigurationReflectionMaterialTempFilename = "material.reflection.goe.temp.xml";
@@ -60,7 +62,7 @@ void CMEgoeScene::load(void)
                                                m_root->getScreenHeight()));
     
     m_camera->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-    m_camera->setLookAt(glm::vec3(2.0f, 0.0f, 2.0f));
+    m_camera->setLookAt(glm::vec3(2.5f, 0.0f, 2.5f));
     m_camera->setDistanceToLookAt(glm::vec3(8.0, 4.0, 8.0));
     m_root->setCamera(m_camera);
     
@@ -68,11 +70,6 @@ void CMEgoeScene::load(void)
     m_root->setGlobalLightSource(m_globalLightSource);
     
     m_root->addCollisionHandler(shared_from_this());
-    
-    m_landscape = m_root->createLandscape("gameobject.landscape.goe.xml");
-    m_root->setLandscape(m_landscape);
-    m_landscape->setPosition(glm::vec3(-1.2f, 0.0f, -1.15f));
-    m_landscape->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
     
     std::shared_ptr<COcean> ocean = m_root->createOcean("gameobject.ocean.xml");
     m_root->setOcean(ocean);
@@ -83,8 +80,13 @@ void CMEgoeScene::load(void)
     m_globalLightSource->setAngle(3.0);
     m_globalLightSource->setDistanceToSun(512.0);
     m_globalLightSource->setDistanceToLookAt(8.0);
-    m_globalLightSource->setRotationCenter(glm::vec3(2.0f, 0.0f, 2.0f));
-    m_globalLightSource->setLookAt(glm::vec3(2.0f, 0.0f, 2.0f));
+    m_globalLightSource->setRotationCenter(glm::vec3(2.5f, 0.0f, 2.5f));
+    m_globalLightSource->setLookAt(glm::vec3(2.5f, 0.0f, 2.5f));
+    
+    CMEgoeTransition* root = static_cast<CMEgoeTransition *>(m_root);
+    m_stage = root->createSceneStage("gameobject.scene.stage.xml");
+    root->addCustomGameObject(m_stage);
+    m_stage->setPosition(glm::vec3(2.5f, -0.5f, 2.5f));
     
     m_root->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
 }
@@ -129,8 +131,8 @@ void CMEgoeScene::onGestureRecognizerDragged(const glm::ivec2& point, E_INPUT_BU
         {
             position.x -= 0.01f * draggingDelta.y;
         }
-        position.z = glm::clamp(position.z, -1.0f, 5.0f);
-        position.x = glm::clamp(position.x, -1.0f, 5.0f);
+        position.z = glm::clamp(position.z, 0.0f, 5.0f);
+        position.x = glm::clamp(position.x, 0.0f, 5.0f);
         m_model->setPosition(position);
         
     }
@@ -232,7 +234,7 @@ void CMEgoeScene::setMeshFilenameCommand(const std::string& filename)
         std::string path = executablepath();
         m_model = m_root->createModel(path + kConfigurationModelTempFilename);
         m_root->addModel(m_model);
-        m_model->setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
+        m_model->setPosition(glm::vec3(2.5f, 0.0f, 2.5f));
         m_model->addConfigurationLoadedCallback(std::bind(&CMEgoeScene::onConfigurationLoaded, this, std::placeholders::_1));
     }
 }

@@ -9,4 +9,7 @@ typedef const CSharedMEConfigurationLandscapeBrush& CSharedMEConfigurationLandsc
 class CMEConfigurationModelBrush;
 typedef std::shared_ptr<CMEConfigurationModelBrush> CSharedMEConfigurationModelBrush;
 typedef const CSharedMEConfigurationModelBrush& CSharedMEConfigurationModelBrushRef;
+class CMEConfigurationSceneStage;
+typedef std::shared_ptr<CMEConfigurationSceneStage> CSharedMEConfigurationSceneStage;
+typedef const CSharedMEConfigurationSceneStage& CSharedMEConfigurationSceneStageRef;
 #endif

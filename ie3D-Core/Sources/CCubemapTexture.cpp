@@ -104,7 +104,7 @@ void CCubemapTexture::onResourceLoaded(ISharedResourceRef resource, bool success
     {
         for (ui32 mip = 0; mip < texture->getNumMips() && width > 0 && height > 0; ++mip)
         {
-            GLsizei size = MAX_VALUE(32, static_cast<i32>(width) * static_cast<i32>(height) * texture->getBPP() / 8);
+            GLsizei size = MAX_VALUE(32, static_cast<i32>(width) * static_cast<i32>(height) * texture->getFormat() == GL_RGBA ? 4 : 3);
             texture->isCompressed() ?
             ieCompressedTexImage2D(face, mip, texture->getFormat(), width, height, 0, size, data) :
             ieTexImage2D(face, mip, texture->getFormat(), width, height, 0, texture->getFormat(), GL_UNSIGNED_BYTE, data);
@@ -114,7 +114,7 @@ void CCubemapTexture::onResourceLoaded(ISharedResourceRef resource, bool success
     }
     else
     {
-        GLsizei size = MAX_VALUE(32, static_cast<i32>(width) * static_cast<i32>(height) * texture->getBPP() / 8);
+        GLsizei size = MAX_VALUE(32, static_cast<i32>(width) * static_cast<i32>(height) * texture->getFormat() == GL_RGBA ? 4 : 3);
         texture->isCompressed() ?
         ieCompressedTexImage2D(face, 0, texture->getFormat(), width, height, 0, size, data) :
         ieTexImage2D(face, 0, texture->getFormat(), width, height, 0, texture->getFormat(), GL_UNSIGNED_BYTE, data);

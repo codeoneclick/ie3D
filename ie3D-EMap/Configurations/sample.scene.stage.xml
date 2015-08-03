@@ -1,0 +1,14 @@
+<scene_stage
+    class_name="CMEConfigurationSceneStage"
+    base_class_name="IConfigurationGameObject"
+    is_external="1">
+    <attributes>
+        <attribute type="f32" property="SizeX" path="/scene_stage" name="size_x"/>
+        <attribute type="f32" property="SizeY" path="/scene_stage" name="size_y"/>
+        <attribute type="f32" property="SizeZ" path="/scene_stage" name="size_z"/>
+        <attribute type="i32" property="ZOrder" path="/scene_stage" name="z_order"/>
+    </attributes>
+    <relationships>
+    	<relationship type="CConfigurationMaterial" property="MaterialsConfigurations" is_to_many="1" is_external="1" path="/scene_stage/materials" name="material"/>
+    </relationships>
+</scene_stage>

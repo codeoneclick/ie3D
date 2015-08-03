@@ -762,10 +762,11 @@ public:
         m_durationRanomnessSpinBox = new QDoubleSpinBox(m_poeMainSettingTab);
         m_durationRanomnessSpinBox->setObjectName(QStringLiteral("m_durationRanomnessSpinBox"));
         m_durationRanomnessSpinBox->setGeometry(QRect(200, 80, 91, 24));
-        m_durationRanomnessSpinBox->setDecimals(0);
+        m_durationRanomnessSpinBox->setDecimals(4);
         m_durationRanomnessSpinBox->setMinimum(0);
-        m_durationRanomnessSpinBox->setMaximum(65535);
-        m_durationRanomnessSpinBox->setSingleStep(1);
+        m_durationRanomnessSpinBox->setMaximum(1);
+        m_durationRanomnessSpinBox->setSingleStep(0.0001);
+        m_durationRanomnessSpinBox->setValue(0);
         label_24 = new QLabel(m_poeMainSettingTab);
         label_24->setObjectName(QStringLiteral("label_24"));
         label_24->setGeometry(QRect(22, 113, 161, 16));

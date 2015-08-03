@@ -4,6 +4,7 @@
 #include "CEConfigurationAccessor.h"
 #include "CMEConfigurationLandscapeBrush.h"
 #include "CMEConfigurationModelBrush.h"
+#include "CMEConfigurationSceneStage.h"
 class CMEConfigurationAccessor: public CEConfigurationAccessor
 {
 public:
@@ -11,5 +12,6 @@ CMEConfigurationAccessor(void) = default;
 ~CMEConfigurationAccessor(void) = default;
 void getMEConfigurationLandscapeBrush(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
 void getMEConfigurationModelBrush(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
+void getMEConfigurationSceneStage(const std::string& filename, const std::shared_ptr<IConfigurationLoadingHandler>& handler) const;
 };
 #endif

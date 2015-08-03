@@ -21,7 +21,7 @@ protected:
     
     CSharedGlobalLightSource m_globalLightSource;
     CSharedModel m_model;
-    CSharedLandscape m_landscape;
+    CMESharedSceneStage m_stage;
     CSharedSkyBox m_skybox;
     glm::ivec2 m_previousDraggedPoint;
     

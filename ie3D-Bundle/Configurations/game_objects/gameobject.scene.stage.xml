@@ -1,0 +1,9 @@
+<scene_stage
+    z_order="1"
+    size_x="1"
+    size_y="1"
+    size_z="1">
+	<materials>
+		<material filename="material.scene.stage.base.xml"/>
+	</materials>
+</scene_stage>

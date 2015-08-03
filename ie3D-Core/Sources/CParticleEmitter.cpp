@@ -21,7 +21,9 @@
 
 CParticleEmitter::CParticleEmitter(CSharedResourceAccessorRef resourceAccessor,
                                    ISharedRenderTechniqueAccessorRef renderTechniqueAccessor) :
-IGameObject(resourceAccessor, renderTechniqueAccessor)
+IGameObject(resourceAccessor, renderTechniqueAccessor),
+m_particles(nullptr),
+m_numParticles(0)
 {
     m_settings = nullptr;
     m_lastEmittTimestamp = 0;
@@ -145,14 +147,11 @@ void CParticleEmitter::onResourceLoaded(ISharedResourceRef resource,
     IGameObject::onResourceLoaded(resource, success);
 }
 
-void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configuration,
-                                             bool success)
+void CParticleEmitter::createParticlesMesh(void)
 {
-    IGameObject::onConfigurationLoaded(configuration, success);
-    m_settings = std::static_pointer_cast<CConfigurationParticleEmitter>(configuration);
-    assert(m_resourceAccessor != nullptr);
-    
+    delete [] m_particles;
     m_particles = new SParticle[m_settings->getNumParticles()];
+    m_numParticles = m_settings->getNumParticles();
     
     CSharedVertexBuffer vertexBuffer = std::make_shared<CVertexBuffer>(m_settings->getNumParticles() * 4, GL_STREAM_DRAW);
     SAttributeVertex* vertexData = vertexBuffer->lock();
@@ -185,8 +184,31 @@ void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configurati
     m_mesh = CMesh::construct("particle.emitter", vertexBuffer, indexBuffer,
                               glm::vec3(0.0), glm::vec3(0.0));
     assert(m_mesh != nullptr);
-    
+}
+
+void CParticleEmitter::onConfigurationLoaded(ISharedConfigurationRef configuration,
+                                             bool success)
+{
+    IGameObject::onConfigurationLoaded(configuration, success);
+    m_settings = std::static_pointer_cast<CConfigurationParticleEmitter>(configuration);
+    CParticleEmitter::createParticlesMesh();
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
+}
+
+void CParticleEmitter::onConfigurationUpdated(CSharedConfigurationParticleEmitterRef configuration)
+{
+    if(m_numParticles != configuration->getNumParticles())
+    {
+        if(m_settings != configuration)
+        {
+            m_settings = configuration;
+        }
+        CParticleEmitter::createParticlesMesh();
+    }
+    else if(m_settings != configuration)
+    {
+        m_settings = configuration;
+    }
 }
 
 void CParticleEmitter::onDraw(CSharedMaterialRef material)

@@ -20,6 +20,10 @@ class CMEModelBrush;
 typedef std::shared_ptr<CMEModelBrush> CMESharedModelBrush;
 typedef const CMESharedModelBrush& CMESharedModelBrushRef;
 
+class CMESceneStage;
+typedef std::shared_ptr<CMESceneStage> CMESharedSceneStage;
+typedef const CMESharedSceneStage& CMESharedSceneStageRef;
+
 class CMEUIToSceneCommands;
 typedef std::shared_ptr<CMEUIToSceneCommands> CSharedMEUIToSceneCommands;
 typedef const CSharedMEUIToSceneCommands& CSharedMEUIToSceneCommandsRef;
