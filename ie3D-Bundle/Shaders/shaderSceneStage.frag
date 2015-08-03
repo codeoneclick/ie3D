@@ -38,6 +38,6 @@ void main(void)
     float fZ = OUT_ShadowParameters.z / OUT_ShadowParameters.w;
     float fShadow = max(step(getCurrentDepth(fZ), getShadowMapPassDepth(vTexCoord)), 0.5);
     vec4 color = textureCube(SAMPLER_01, OUT_TexCoord);
-    //color.rgb *= fShadow;
+    color.rgb *= fShadow;
     gl_FragColor = color;
 }

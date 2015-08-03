@@ -87,6 +87,7 @@ void CMEgoeScene::load(void)
     m_stage = root->createSceneStage("gameobject.scene.stage.xml");
     root->addCustomGameObject(m_stage);
     m_stage->setPosition(glm::vec3(2.5f, -0.5f, 2.5f));
+    m_stage->setScale(glm::vec3(5.0, 1.0, 5.0));
     
     m_root->addGestureRecognizerHandler(std::static_pointer_cast<IGestureRecognizerHandler>(shared_from_this()));
 }
