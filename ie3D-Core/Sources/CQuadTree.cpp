@@ -225,8 +225,8 @@ void CQuadTree::generate(CSharedVertexBuffer vertexBuffer,
     m_numIndexes = m_indexBuffer->getUsedSize();
     m_indexes.resize(m_numIndexes);
     m_indexesIds.resize(m_numIndexes);
-    ui16* indexData = indexBuffer->lock();
-    std::copy(indexData, indexData + m_numIndexes, m_indexes.begin());
+    ui16* indices = indexBuffer->lock();
+    std::copy(indices, indices + m_numIndexes, m_indexes.begin());
     m_vertexes = vertexBuffer->lock();
     CSharedQuadTree root = shared_from_this();
     CQuadTree::createQuadTreeNode(size, depth, root);
@@ -244,9 +244,9 @@ ui32 CQuadTree::update(CSharedFrustumRef frustum, const glm::mat4& matrixM)
     ui32 numIndexes = 0;
     if(m_isGenerated)
     {
-        ui16* indexes = m_indexBuffer->lock();
+        ui16* indices = m_indexBuffer->lock();
         CSharedQuadTree root = shared_from_this();
-        CQuadTree::generateQuadTreeNode(frustum, matrixM, root, indexes, numIndexes);
+        CQuadTree::generateQuadTreeNode(frustum, matrixM, root, indices, numIndexes);
         m_indexBuffer->unlock(numIndexes);
     }
     return numIndexes;

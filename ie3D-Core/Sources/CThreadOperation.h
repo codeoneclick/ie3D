@@ -26,7 +26,7 @@ protected:
     std::function<void(void)> m_executionBlock;
     std::function<void(void)> m_cancelBlock;
     
-    std::mutex m_mutex;
+    std::recursive_mutex m_mutex;
     ui8 m_status;
     
 public:

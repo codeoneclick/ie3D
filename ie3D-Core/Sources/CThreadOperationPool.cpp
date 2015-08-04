@@ -150,7 +150,7 @@ void CThreadOperationPool::update(void)
 
 CSharedThreadOperation CThreadOperationPool::nextOperation(ui32 threadId, E_THREAD_OPERATION_QUEUE operationQueue)
 {
-    std::lock_guard<std::mutex> lockGuard(m_mutex);
+    std::lock_guard<std::mutex> guard(m_mutex);
     CSharedThreadOperation operation = m_operations.at(threadId).at(operationQueue).empty() ? nullptr : m_operations.at(threadId).at(operationQueue).front();
     return operation;
 }

@@ -91,7 +91,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                     result == E_FRUSTUM_BOUND_RESULT_INTERSECT))
                 {
                     E_LANDSCAPE_CHUNK_LOD LOD = CLandscape::getLOD(m_camera->getLookAt(), minBound, maxBound);
-                    if(m_chunks[index] == nullptr)
+                    if(!m_chunks[index])
                     {
                         m_chunks[index] = std::make_shared<CLandscapeChunk>(m_resourceAccessor, m_renderTechniqueAccessor);
                         m_chunks[index]->setCamera(m_camera);
@@ -133,7 +133,7 @@ void CLandscape::onSceneUpdate(f32 deltatime)
                         });
                     }
                 }
-                else if(m_chunks[index] != nullptr)
+                else if(m_chunks[index])
                 {
                     m_chunks[index]->onRemovedFromScene();
                     m_heightmapAccessor->runUnLoading(i, j);

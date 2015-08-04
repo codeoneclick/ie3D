@@ -50,9 +50,6 @@ void CHeightmapAccessor::createLoadingOperations(void)
     
     m_executedOperations.clear();
     m_executedOperations.resize(m_container->getChunksNum().x * m_container->getChunksNum().y, nullptr);
-    
-    m_canceledOperationsStatus.clear();
-    m_canceledOperationsStatus.resize(m_container->getChunksNum().x * m_container->getChunksNum().y, false);
 }
 
 void CHeightmapAccessor::eraseLoadingOperations(void)
@@ -120,6 +117,8 @@ void CHeightmapAccessor::eraseMetadataContainers(void)
 
 void CHeightmapAccessor::eraseChunkMetadata(i32 index)
 {
+    std::lock_guard<std::mutex> guard(m_mutex);
+    
     std::get<0>(m_chunksMetadata[index]) = nullptr;
     std::get<1>(m_chunksMetadata[index]) = nullptr;
     std::get<2>(m_chunksMetadata[index]) = nullptr;
@@ -128,6 +127,7 @@ void CHeightmapAccessor::eraseChunkMetadata(i32 index)
     
     std::get<0>(m_callbacks[index]) = nullptr;
     std::get<1>(m_callbacks[index]) = nullptr;
+    std::get<2>(m_callbacks[index]) = nullptr;
     
     m_executedOperations[index] = nullptr;
 }
@@ -199,9 +199,9 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
         m_container->mmapGeometry(filename);
         m_generatorStatistic->update("MMAP Geometry...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
         
-        m_generatorStatistic->update("Smooth Textcoord Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
+        /*m_generatorStatistic->update("Smooth Textcoord Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, filename);
-        m_generatorStatistic->update("Smooth Textcoord Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
+        m_generatorStatistic->update("Smooth Textcoord Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);*/
         
         m_generatorStatistic->update("Tangent Space Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
         CHeightmapGeometryGenerator::generateTangentSpace(m_container, filename);
@@ -299,18 +299,17 @@ void CHeightmapAccessor::generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD)
 
 void CHeightmapAccessor::generateQuadTree(i32 index)
 {
+    std::lock_guard<std::mutex> guard(m_mutex);
+    
     assert(std::get<0>(m_chunksMetadata[index]) != nullptr);
-    if(!m_canceledOperationsStatus[index])
-    {
-        CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
-        quadTree->generate(std::get<0>(m_chunksMetadata[index])->getVertexBuffer(),
-                           std::get<0>(m_chunksMetadata[index])->getIndexBuffer(),
-                           std::get<0>(m_chunksMetadata[index])->getMaxBound(),
-                           std::get<0>(m_chunksMetadata[index])->getMinBound(),
-                           4, m_container->getChunkLODSize(E_LANDSCAPE_CHUNK_LOD_01).x);
-        
-        std::get<1>(m_chunksMetadata[index]) = quadTree;
-    }
+    CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
+    quadTree->generate(std::get<0>(m_chunksMetadata[index])->getVertexBuffer(),
+                       std::get<0>(m_chunksMetadata[index])->getIndexBuffer(),
+                       std::get<0>(m_chunksMetadata[index])->getMaxBound(),
+                       std::get<0>(m_chunksMetadata[index])->getMinBound(),
+                       4, m_container->getChunkLODSize(E_LANDSCAPE_CHUNK_LOD_01).x);
+    
+    std::get<1>(m_chunksMetadata[index]) = quadTree;
 }
 
 void CHeightmapAccessor::generateSplattingTextures(i32 index, E_LANDSCAPE_CHUNK_LOD LOD)
@@ -437,14 +436,13 @@ void CHeightmapAccessor::runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
     completionOperation->setExecutionBlock([this, index](void) {
         assert(std::get<1>(m_callbacks[index]) != nullptr);
         std::get<1>(m_callbacks[index])(std::get<1>(m_chunksMetadata[index]));
-        std::get<2>(m_callbacks[index])(std::get<2>(m_chunksMetadata[index]), std::get<3>(m_chunksMetadata[index]));
         m_executedOperations[index] = nullptr;
     });
     
     CSharedThreadOperation createMeshOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     createMeshOperation->setExecutionBlock([this, index, LOD](void) {
         CHeightmapAccessor::generateMesh(index, LOD);
-        assert(std::get<0>(m_callbacks[index]) != nullptr);
+        assert(std::get<0>(m_callbacks[index]));
         std::get<0>(m_callbacks[index])(std::get<0>(m_chunksMetadata[index]));
     });
     completionOperation->addDependency(createMeshOperation);
@@ -452,6 +450,8 @@ void CHeightmapAccessor::runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
     CSharedThreadOperation generateSplattingTexturesOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
     generateSplattingTexturesOperation->setExecutionBlock([this, index, LOD](void) {
         CHeightmapAccessor::generateSplattingTextures(index, LOD);
+        assert(std::get<2>(m_callbacks[index]));
+        std::get<2>(m_callbacks[index])(std::get<2>(m_chunksMetadata[index]), std::get<3>(m_chunksMetadata[index]));
     });
     completionOperation->addDependency(generateSplattingTexturesOperation);
     
@@ -464,35 +464,18 @@ void CHeightmapAccessor::runLoading(i32 i, i32 j, E_LANDSCAPE_CHUNK_LOD LOD,
     assert(m_executedOperations[index] == nullptr);
     m_executedOperations[index] = completionOperation;
     
-    std::thread::id runningThreadId = std::this_thread::get_id();
-    
-    completionOperation->setCancelBlock([this, index, runningThreadId](void) {
+    completionOperation->setCancelBlock([this, index](void) {
         assert(m_executedOperations[index] != nullptr);
-        
-        if(runningThreadId == std::this_thread::get_id())
-        {
-            CHeightmapAccessor::eraseChunkMetadata(index);
-        }
-        else
-        {
-            CSharedThreadOperation eraseOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
-            eraseOperation->setExecutionBlock([this, index](void) {
-                CHeightmapAccessor::eraseChunkMetadata(index);
-            });
-            eraseOperation->addToExecutionQueue();
-        }
+        CHeightmapAccessor::eraseChunkMetadata(index);
     });
-    
-    m_canceledOperationsStatus[index] = false;
     completionOperation->addToExecutionQueue();
 }
 
 void CHeightmapAccessor::runUnLoading(i32 i, i32 j)
 {
     ui32 index = i + j * m_container->getChunksNum().x;
-    m_canceledOperationsStatus[index] = true;
     
-    if(m_executedOperations[index] != nullptr)
+    if(m_executedOperations[index])
     {
         m_executedOperations[index]->cancel();
     }
@@ -699,7 +682,7 @@ void CHeightmapAccessor::updateVertices(const std::vector<glm::vec3>& vertices,
                 
                 CSharedThreadOperation updateGeometryOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
                 updateGeometryOperation->setExecutionBlock([this, i , j, index](void) {
-                    CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, index);
+                    /*CHeightmapGeometryGenerator::generateSmoothTexcoord(m_container, index);*/
                     CHeightmapGeometryGenerator::generateTangentSpace(m_container, index);
                 });
                 m_updateHeightmapOperations.push(updateGeometryOperation);
