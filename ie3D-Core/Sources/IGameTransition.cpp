@@ -115,6 +115,7 @@ void IGameTransition::_OnActivate(void)
 {
     ConnectToGameLoop(m_renderPipeline);
     ConnectToGameLoop(m_sceneUpdateMgr);
+    ConnectToGameLoop(m_collisionMgr);
     ConnectToGameLoop(m_resourceAccessor->getResourceLoader());
 }
 
@@ -122,6 +123,7 @@ void IGameTransition::_OnDeactivate(void)
 {
     DisconnectFromGameLoop(m_renderPipeline);
     DisconnectFromGameLoop(m_sceneUpdateMgr);
+    DisconnectFromGameLoop(m_collisionMgr);
     DisconnectFromGameLoop(m_resourceAccessor->getResourceLoader());
 }
 
@@ -345,16 +347,34 @@ void IGameTransition::removeGestureRecognizerHandler(ISharedGestureRecognizerHan
     m_sceneGraph->removeGestureRecognizerHandler(handler);
 }
 
-void IGameTransition::addCollisionHandler(ISharedCollisionHandlerRef handler)
+void IGameTransition::addTouchCollider(ISharedTouchColliderRef collider)
 {
     assert(m_sceneGraph != nullptr);
-    m_sceneGraph->addCollisionHandler(handler);
+    m_sceneGraph->addTouchCollider(collider);
 }
 
-void IGameTransition::removeCollisionHandler(ISharedCollisionHandlerRef handler)
+void IGameTransition::removeTouchCollider(ISharedTouchColliderRef collider)
 {
     assert(m_sceneGraph != nullptr);
-    m_sceneGraph->removeCollisionHandler(handler);
+    m_sceneGraph->removeTouchCollider(collider);
+}
+
+void IGameTransition::setBox2dScene(const glm::vec2 &minBound, const glm::vec2 &maxBound)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->setBox2dScene(minBound, maxBound);
+}
+
+void IGameTransition::addBox2dCollider(ISharedBox2dColliderRef collider, bool isStatic)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->addBox2dCollider(collider, isStatic);
+}
+
+void IGameTransition::removeBox2dCollider(ISharedBox2dColliderRef collider)
+{
+    assert(m_sceneGraph != nullptr);
+    m_sceneGraph->removeBox2dCollider(collider);
 }
 
 CSharedCamera IGameTransition::createCamera(f32 fov, f32 near, f32 far,const glm::ivec4& viewport)
@@ -428,7 +448,6 @@ ui32 IGameTransition::getFrameNumTriangles(void)
     assert(m_renderPipeline != nullptr);
     return m_renderPipeline->getFrameNumTriagles();
 }
-
 
 ui32 IGameTransition::getSceneNumTriangles(void)
 {

@@ -107,7 +107,7 @@ void CHeightmapAccessor::createMetadataContainers(void)
 {
     m_chunksMetadata.clear();
     m_chunksMetadata.resize(m_container->getChunksNum().x * m_container->getChunksNum().y,
-                            std::make_tuple(nullptr, nullptr, nullptr, nullptr, E_LANDSCAPE_CHUNK_LOD_UNKNOWN));
+                            std::make_tuple(nullptr, nullptr, nullptr, nullptr, E_LANDSCAPE_CHUNK_LOD_UNKNOWN, std::make_shared<std::mutex>()));
 }
 
 void CHeightmapAccessor::eraseMetadataContainers(void)
@@ -117,7 +117,8 @@ void CHeightmapAccessor::eraseMetadataContainers(void)
 
 void CHeightmapAccessor::eraseChunkMetadata(i32 index)
 {
-    std::lock_guard<std::mutex> guard(m_mutex);
+    assert(std::get<5>(m_chunksMetadata[index]));
+    std::lock_guard<std::mutex> guard(*std::get<5>(m_chunksMetadata[index]).get());
     
     std::get<0>(m_chunksMetadata[index]) = nullptr;
     std::get<1>(m_chunksMetadata[index]) = nullptr;
@@ -309,7 +310,8 @@ void CHeightmapAccessor::generateMesh(i32 index, E_LANDSCAPE_CHUNK_LOD LOD)
 
 void CHeightmapAccessor::generateQuadTree(i32 index)
 {
-    std::lock_guard<std::mutex> guard(m_mutex);
+    assert(std::get<5>(m_chunksMetadata[index]));
+    std::lock_guard<std::mutex> guard(*std::get<5>(m_chunksMetadata[index]).get());
     
     assert(std::get<0>(m_chunksMetadata[index]) != nullptr);
     CSharedQuadTree quadTree = std::make_shared<CQuadTree>();
@@ -696,6 +698,13 @@ void CHeightmapAccessor::updateVertices(const std::vector<glm::vec3>& vertices,
                     CHeightmapGeometryGenerator::generateTangentSpace(m_container, index);
                 });
                 m_updateHeightmapOperations.push(updateGeometryOperation);
+                
+                CSharedThreadOperation generateHeightmapTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+                generateHeightmapTextureOperation->setExecutionBlock([this, minBound, maxBound](void) {
+                    CHeightmapTextureGenerator::generateDeepTexture(m_container, false, minBound.x, minBound.y,
+                                                                    maxBound.x - minBound.x, maxBound.y - minBound.y);
+                });
+                m_updateHeightmapOperations.push(generateHeightmapTextureOperation);
                 
                 CSharedThreadOperation updateSplattingMTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
                 updateSplattingMTextureOperation->setExecutionBlock([this, i , j](void) {

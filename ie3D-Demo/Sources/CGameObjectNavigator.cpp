@@ -174,3 +174,34 @@ void CGameObjectNavigator::updateRotationOnHeightmapSurface(const glm::vec3& pos
     m_currentRotation.z = precomputedRotation.y;
     CGameObjectNavigator::notifyHandlersAboutRotationChanged();
 }
+
+void CGameObjectNavigator::onBox2dCollision(void)
+{
+    
+}
+
+void CGameObjectNavigator::onBox2dPositionChanged(const glm::vec3& position)
+{
+    
+}
+
+void CGameObjectNavigator::onBox2dRotationYChanged(f32 angle)
+{
+    
+}
+
+glm::vec2 CGameObjectNavigator::getBox2dCenter(void) const
+{
+    return glm::vec2(m_currentPosition.x,
+                     m_currentPosition.z);
+}
+
+glm::vec2 CGameObjectNavigator::getBox2dMaxBound(void) const
+{
+    return glm::vec2(2.0f);
+}
+
+glm::vec2 CGameObjectNavigator::getBox2dMinBound(void) const
+{
+    return glm::vec2(0.0f);
+}

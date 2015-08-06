@@ -13,18 +13,70 @@
 #include "CVertexBuffer.h"
 #include "CIndexBuffer.h"
 
-std::vector<ISharedGameObject> ICollisionHandler::colliders(void)
+std::vector<ISharedGameObject> ITouchCollider::getColliders(void) const
 {
     return std::vector<ISharedGameObject>();
 }
 
-void ICollisionHandler::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton)
+void ITouchCollider::onTouchCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton)
 {
     
 }
 
+IBox2dCollider::IBox2dCollider(void) :
+m_box2dBody(nullptr)
+{
+    
+}
+
+void IBox2dCollider::init(std::shared_ptr<b2World> box2dScene)
+{
+    m_box2dBody = box2dScene->CreateBody(&m_box2dBodyDefinition);
+}
+
+b2Body* IBox2dCollider::getBox2dBody(void) const
+{
+    return m_box2dBody;
+}
+
+b2BodyDef* IBox2dCollider::getBox2dBodyDefinition(void)
+{
+    return &m_box2dBodyDefinition;
+}
+
+void IBox2dCollider::onBox2dCollision(void)
+{
+    
+}
+
+void IBox2dCollider::onBox2dPositionChanged(const glm::vec3& position)
+{
+    
+}
+
+void IBox2dCollider::onBox2dRotationYChanged(f32 angle)
+{
+    
+}
+
+glm::vec2 IBox2dCollider::getBox2dCenter(void) const
+{
+    return glm::vec2(0.0f);
+}
+
+glm::vec2 IBox2dCollider::getBox2dMaxBound(void) const
+{
+    return glm::vec2(0.0f);
+}
+
+glm::vec2 IBox2dCollider::getBox2dMinBound(void) const
+{
+    return glm::vec2(0.0f);
+}
+
 CCollisionMgr::CCollisionMgr(void) :
-m_camera(nullptr)
+m_camera(nullptr),
+m_box2dScene(nullptr)
 {
     
 }
@@ -40,45 +92,130 @@ void CCollisionMgr::setCamera(CSharedCameraRef camera)
     m_camera = camera;
 }
 
-void CCollisionMgr::addCollisionHandler(ISharedCollisionHandlerRef handler)
+void CCollisionMgr::CCollisionMgr::addTouchCollider(const std::shared_ptr<ITouchCollider>& collider)
 {
-    m_handlers.insert(handler);
+    assert(collider);
+    m_touchColliders.insert(collider);
 }
 
-void CCollisionMgr::removeCollisionHandler(ISharedCollisionHandlerRef handler)
+void CCollisionMgr::removeTouchCollider(const std::shared_ptr<ITouchCollider>& collider)
 {
-    m_handlers.erase(handler);
+    assert(collider);
+    m_touchColliders.erase(collider);
 }
+
+void CCollisionMgr::setBox2dScene(const glm::vec2 &minBound, const glm::vec2 &maxBound)
+{
+    b2Vec2 gravity = b2Vec2(0.0f, 0.0f);
+    m_box2dScene = std::make_shared<b2World>(gravity);
+    m_box2dScene->SetContinuousPhysics(true);
+    m_box2dScene->SetContactListener(this);
+    
+    b2BodyDef boundBodyDefinition;
+    boundBodyDefinition.position.Set(0, 0);
+    b2Body* boundBody = m_box2dScene->CreateBody(&boundBodyDefinition);
+    
+    b2EdgeShape boundingBox;
+    boundingBox.Set(b2Vec2(minBound.x, minBound.y), b2Vec2(maxBound.x, minBound.y));
+    boundBody->CreateFixture(&boundingBox, 0);
+    boundingBox.Set(b2Vec2(minBound.x, maxBound.y), b2Vec2(maxBound.x, maxBound.y));
+    boundBody->CreateFixture(&boundingBox, 0);
+    boundingBox.Set(b2Vec2(minBound.x, maxBound.y), b2Vec2(minBound.x, minBound.y));
+    boundBody->CreateFixture(&boundingBox, 0);
+    boundingBox.Set(b2Vec2(maxBound.x, maxBound.y), b2Vec2(maxBound.x, minBound.y));
+    boundBody->CreateFixture(&boundingBox, 0);
+}
+
+void CCollisionMgr::addBox2dCollider(ISharedBox2dColliderRef collider, bool isStatic)
+{
+    assert(collider);
+    assert(m_box2dScene);
+    
+    m_box2dColliders.insert(collider);
+    
+    collider->getBox2dBodyDefinition()->type = isStatic == true ? b2_staticBody : b2_dynamicBody;
+    collider->getBox2dBodyDefinition()->position.Set(collider->getBox2dCenter().x, collider->getBox2dCenter().y);
+    collider->getBox2dBodyDefinition()->userData = collider.get();
+    collider->init(m_box2dScene);
+    b2PolygonShape box2dShape;
+    
+    glm::vec2 minBound = collider->getBox2dMinBound();
+    glm::vec2 maxBound = collider->getBox2dMaxBound();
+    
+    box2dShape.SetAsBox((maxBound.x - minBound.x) / 2.0f,
+                        (maxBound.y - minBound.y) / 2.0f);
+    collider->getBox2dBody()->CreateFixture(&box2dShape, 1);
+}
+
+void CCollisionMgr::removeBox2dCollider(ISharedBox2dColliderRef collider)
+{
+    assert(collider);
+    assert(m_box2dScene);
+    
+    m_box2dColliders.erase(collider);
+    m_box2dScene->DestroyBody(collider->getBox2dBody());
+}
+
+void CCollisionMgr::_OnGameLoopUpdate(f32 deltatime)
+{
+    if(m_box2dScene)
+    {
+        m_box2dScene->Step(deltatime, 1, 1);
+        
+        for(const auto& collider : m_box2dColliders)
+        {
+            collider->onBox2dPositionChanged(glm::vec3(collider->getBox2dBody()->GetPosition().x,
+                                                       0.0f,
+                                                       collider->getBox2dBody()->GetPosition().y));
+            collider->onBox2dRotationYChanged(collider->getBox2dBody()->GetAngle());
+            
+        }
+    }
+}
+
+void CCollisionMgr::BeginContact(b2Contact* contact)
+{
+    IBox2dCollider* bodyUserData_01 = static_cast<IBox2dCollider*>(contact->GetFixtureA()->GetBody()->GetUserData());
+    IBox2dCollider* bodyUserData_02 = static_cast<IBox2dCollider*>(contact->GetFixtureB()->GetBody()->GetUserData());
+    
+    if(bodyUserData_01 && bodyUserData_02)
+    {
+        bodyUserData_01->onBox2dCollision();
+        bodyUserData_02->onBox2dCollision();
+    }
+}
+
+void CCollisionMgr::EndContact(b2Contact* contact)
+{
+    
+}
+
 
 void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {
     assert(m_camera != nullptr);
     glm::ray ray;
-    CCollisionMgr::unproject(point,
-                             m_camera->getVMatrix(),
-                             m_camera->getPMatrix(),
-                             m_camera->getViewport(),
-                             &ray);
+    CCollisionMgr::unproject(point, m_camera->getVMatrix(), m_camera->getPMatrix(), m_camera->getViewport(), &ray);
     
-    for(const auto& handler : m_handlers)
+    for(const auto& collider : m_touchColliders)
     {
-        std::vector<ISharedGameObject> colliders = handler->colliders();
-        for(const ISharedGameObject& collider : colliders)
+        std::vector<ISharedGameObject> colliders = collider->getColliders();
+        for(const ISharedGameObject& gameObject : colliders)
         {
             glm::vec3 point;
             if(!glm::intersect(ray,
-                               collider->getMinBound() + collider->getPosition(),
-                               collider->getMaxBound() + collider->getPosition()))
+                               gameObject->getMinBound() + gameObject->getPosition(),
+                               gameObject->getMaxBound() + gameObject->getPosition()))
             {
                 continue;
             }
-            if(CCollisionMgr::collisionPoint(collider->getCollisionVertexBuffer(),
-                                             collider->getCollisionIndexBuffer(),
+            if(CCollisionMgr::collisionPoint(gameObject->getCollisionVertexBuffer(),
+                                             gameObject->getCollisionIndexBuffer(),
                                              glm::mat4x4(1.0f),
                                              ray,
                                              &point))
             {
-                handler->onCollision(point, collider, inputButton);
+                collider->onTouchCollision(point, gameObject, inputButton);
             }
         }
     }

@@ -35,10 +35,9 @@ private:
     CSharedHeightmapGeneratorStatistic m_generatorStatistic;
     
     std::vector<CSharedThreadOperation> m_executedOperations;
-    std::mutex m_mutex;
     
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, std::function<void(CSharedTextureRef, CSharedTextureRef)>>> m_callbacks;
-    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, CSharedTexture, CSharedTexture, E_LANDSCAPE_CHUNK_LOD>> m_chunksMetadata;
+    std::vector<std::tuple<CSharedMesh, CSharedQuadTree, CSharedTexture, CSharedTexture, E_LANDSCAPE_CHUNK_LOD, std::shared_ptr<std::mutex>>> m_chunksMetadata;
     std::vector<std::tuple<glm::vec3, glm::vec3>> m_chunksBounds;
     std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX> m_splattingDTextures;
     std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX> m_splattingNTextures;

@@ -19,8 +19,6 @@ m_sceneToUICommands(nullptr)
 
 IScene::~IScene(void)
 {
-    //m_models.clear();
-    //m_particles.clear();
     m_colliders.clear();
 }
 

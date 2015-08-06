@@ -131,7 +131,7 @@ void CDemoGameScene::load(void)
     m_heavyTank->setScale(glm::vec3(2.0, 2.0, 2.0));
     m_heavyTank->setPosition(glm::vec3(24.0, 0.0, 32.0));*/
     
-    m_root->addCollisionHandler(shared_from_this());
+    //m_root->addCollisionHandler(shared_from_this());
     
     m_characterController = std::make_shared<ICharacterController>(m_models["model_01"],
                                                                    m_landscape,
@@ -154,6 +154,9 @@ void CDemoGameScene::load(void)
     m_globalLightSource->setDistanceToLookAt(64.0);
     m_globalLightSource->setRotationCenter(glm::vec3(256.0, 0.0, 256.0));
     m_globalLightSource->setLookAt(m_models["model_01"]->getPosition());
+    
+    m_root->setBox2dScene(glm::vec2(0.0f), glm::vec2(512.0f));
+    m_root->addBox2dCollider(std::static_pointer_cast<IBox2dCollider>(m_gameObjectNavigator), false);
 }
 
 void CDemoGameScene::update(f32 deltatime)

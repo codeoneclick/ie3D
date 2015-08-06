@@ -71,8 +71,12 @@ public:
     void addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
     void removeGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler);
     
-    void addCollisionHandler(ISharedCollisionHandlerRef handler);
-    void removeCollisionHandler(ISharedCollisionHandlerRef handler);
+    void addTouchCollider(ISharedTouchColliderRef collider);
+    void removeTouchCollider(ISharedTouchColliderRef collider);
+    
+    void setBox2dScene(const glm::vec2 &minBound, const glm::vec2 &maxBound);
+    void addBox2dCollider(ISharedBox2dColliderRef collider, bool isStatic);
+    void removeBox2dCollider(ISharedBox2dColliderRef collider);
 };
 
 #endif 

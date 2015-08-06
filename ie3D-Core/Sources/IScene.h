@@ -15,7 +15,7 @@
 #include "IInputContext.h"
 
 class IScene : public std::enable_shared_from_this<IScene>,
-public ICollisionHandler,
+public ITouchCollider,
 public IGestureRecognizerHandler
 {
 private:
@@ -23,15 +23,7 @@ private:
 protected:
     
     IGameTransition* m_root;
-    
     CSharedCamera m_camera;
-    //CSharedGlobalLightSource m_globalLightSource;
-    
-    //CSharedLandscape m_landscape;
-    //CSharedOcean m_ocean;
-    //CSharedSkyBox m_skybox;
-    //std::unordered_map<std::string, CSharedModel> m_models;
-    //std::unordered_map<std::string, CSharedParticleEmitter> m_particles;
     
     std::vector<ISharedGameObject> m_colliders;
     

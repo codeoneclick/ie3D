@@ -49,6 +49,8 @@
 #include <glm/gtx/euler_angles.hpp>
 #include <pugixml/pugixml.hpp>
 
+#include <box2d/Box2D.h>
+
 #define STRING_SHADER(SHADER)  #SHADER
 #include "HShaders.h"
 

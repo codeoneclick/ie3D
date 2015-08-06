@@ -12,33 +12,64 @@
 #include "HCommon.h"
 #include "IInputContext.h"
 #include "HDeclaration.h"
+#include "IGameLoopHandler.h"
 
-class ICollisionHandler
+class ITouchCollider
 {
 private:
     
-    friend class CCollisionMgr;
-    
 protected:
-    
-    ICollisionHandler(void) = default;
-    
-    virtual std::vector<ISharedGameObject> colliders(void);
-    virtual void onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);
     
 public:
     
-    virtual ~ICollisionHandler(void) = default;
+    ITouchCollider(void) = default;
+    virtual ~ITouchCollider(void) = default;
+    
+    virtual std::vector<ISharedGameObject> getColliders(void) const;
+    virtual void onTouchCollision(const glm::vec3& point, ISharedGameObjectRef gameObject, E_INPUT_BUTTON inputButton);
 };
 
-class CCollisionMgr final : public IGestureRecognizerHandler
+class IBox2dCollider
 {
 private:
     
 protected:
     
+    b2Body* m_box2dBody;
+    b2BodyDef m_box2dBodyDefinition;
+    
+public:
+    
+    IBox2dCollider(void);
+    virtual ~IBox2dCollider(void) = default;
+    
+    void init(std::shared_ptr<b2World> box2dScene);
+    
+    b2Body* getBox2dBody(void) const;
+    b2BodyDef* getBox2dBodyDefinition(void);
+    
+    virtual void onBox2dCollision(void);
+    virtual void onBox2dPositionChanged(const glm::vec3& position);
+    virtual void onBox2dRotationYChanged(f32 angle);
+    
+    virtual glm::vec2 getBox2dCenter(void) const;
+    virtual glm::vec2 getBox2dMaxBound(void) const;
+    virtual glm::vec2 getBox2dMinBound(void) const;
+};
+
+class CCollisionMgr final : public IGestureRecognizerHandler, public b2ContactListener, public IGameLoopHandler
+{
+private:
+    
     CSharedCamera m_camera;
-    std::set<ISharedCollisionHandler> m_handlers;
+    std::shared_ptr<b2World> m_box2dScene;
+    
+    std::set<ISharedTouchCollider> m_touchColliders;
+    std::set<ISharedBox2dCollider> m_box2dColliders;
+ 
+protected:
+    
+    
     
     static bool collisionPoint(CSharedVertexBufferRef vertexBuffer,
                                CSharedIndexBufferRef indexBuffer,
@@ -61,13 +92,18 @@ protected:
     void onKeyUp(i32 key);
     void onKeyDown(i32 key);
     
+    void _OnGameLoopUpdate(f32 _deltatime);
+    
+    void BeginContact(b2Contact* contact);
+    void EndContact(b2Contact* contact);
+    
 public:
     
     CCollisionMgr(void);
     ~CCollisionMgr(void);
     
     void setCamera(CSharedCameraRef camera);
-
+    
     
     static void unproject(const glm::ivec2& point,
                           const glm::mat4x4& viewMatrix,
@@ -75,8 +111,12 @@ public:
                           const glm::ivec4& viewport,
                           glm::ray *ray);
     
-    void addCollisionHandler(ISharedCollisionHandlerRef handler);
-    void removeCollisionHandler(ISharedCollisionHandlerRef handler);
+    void addTouchCollider(ISharedTouchColliderRef collider);
+    void removeTouchCollider(ISharedTouchColliderRef collider);
+    
+    void setBox2dScene(const glm::vec2 &minBound, const glm::vec2 &maxBound);
+    void addBox2dCollider(ISharedBox2dColliderRef collider, bool isStatic);
+    void removeBox2dCollider(ISharedBox2dColliderRef collider);
     
     static bool isTrianglesIntersected(CSharedCameraRef camera,
                                        const std::vector<std::tuple<glm::vec3, glm::vec3, glm::vec3>>& triangles,

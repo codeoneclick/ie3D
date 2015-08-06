@@ -11,6 +11,7 @@
 
 #include "HCommon.h"
 #include "HDEDeclaration.h"
+#include "CCollisionMgr.h"
 
 class IGameObjectNavigatorHandler
 {
@@ -29,7 +30,7 @@ public:
     ~IGameObjectNavigatorHandler(void) = default;
 };
 
-class CGameObjectNavigator
+class CGameObjectNavigator : public IBox2dCollider
 {
 private:
     
@@ -54,6 +55,14 @@ protected:
     
     void notifyHandlersAboutPositionChanged(void);
     void notifyHandlersAboutRotationChanged(void);
+    
+    void onBox2dCollision(void);
+    void onBox2dPositionChanged(const glm::vec3& position);
+    void onBox2dRotationYChanged(f32 angle);
+    
+    glm::vec2 getBox2dCenter(void) const;
+    glm::vec2 getBox2dMaxBound(void) const;
+    glm::vec2 getBox2dMinBound(void) const;
     
 public:
     

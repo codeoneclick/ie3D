@@ -212,10 +212,6 @@ class CAtmosphericScattering;
 typedef std::shared_ptr<CAtmosphericScattering> CSharedAtmosphericScattering;
 typedef const CSharedAtmosphericScattering& CSharedAtmosphericScatteringRef;
 
-class ICollisionHandler;
-typedef std::shared_ptr<ICollisionHandler> ISharedCollisionHandler;
-typedef const ISharedCollisionHandler& ISharedCollisionHandlerRef;
-
 class CCubemapTexture;
 typedef std::shared_ptr<CCubemapTexture> CSharedCubemapTexture;
 typedef const CSharedCubemapTexture& CSharedCubemapTextureRef;
@@ -359,5 +355,13 @@ typedef const CSharedVertexArrayBuffer& CSharedVertexArrayBufferRef;
 class CHeightmapGeneratorStatistic;
 typedef std::shared_ptr<CHeightmapGeneratorStatistic> CSharedHeightmapGeneratorStatistic;
 typedef const CSharedHeightmapGeneratorStatistic& CSharedHeightmapGeneratorStatisticRef;
+
+class ITouchCollider;
+typedef std::shared_ptr<ITouchCollider> ISharedTouchCollider;
+typedef const ISharedTouchCollider& ISharedTouchColliderRef;
+
+class IBox2dCollider;
+typedef std::shared_ptr<IBox2dCollider> ISharedBox2dCollider;
+typedef const ISharedBox2dCollider& ISharedBox2dColliderRef;
 
 #endif

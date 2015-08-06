@@ -219,18 +219,6 @@ void CSceneGraph::removeCustomGameObject(ISharedGameObjectRef gameObject)
     CSceneGraph::removeGameObject(gameObject);
 }
 
-void CSceneGraph::addCollisionHandler(ISharedCollisionHandlerRef handler)
-{
-    assert(m_collisionMgr != nullptr);
-    m_collisionMgr->addCollisionHandler(handler);
-}
-
-void CSceneGraph::removeCollisionHandler(ISharedCollisionHandlerRef handler)
-{
-    assert(m_collisionMgr != nullptr);
-    m_collisionMgr->removeCollisionHandler(handler);
-}
-
 void CSceneGraph::addGestureRecognizerHandler(ISharedGestureRecognizerHandlerRef handler)
 {
     assert(m_inputContext != nullptr);
@@ -241,5 +229,35 @@ void CSceneGraph::removeGestureRecognizerHandler(ISharedGestureRecognizerHandler
 {
     assert(m_inputContext != nullptr);
     m_inputContext->removeGestureRecognizerHandler(handler);
+}
+
+void CSceneGraph::addTouchCollider(ISharedTouchColliderRef collider)
+{
+    assert(m_collisionMgr != nullptr);
+    m_collisionMgr->addTouchCollider(collider);
+}
+
+void CSceneGraph::removeTouchCollider(ISharedTouchColliderRef collider)
+{
+    assert(m_collisionMgr != nullptr);
+    m_collisionMgr->removeTouchCollider(collider);
+}
+
+void CSceneGraph::setBox2dScene(const glm::vec2 &minBound, const glm::vec2 &maxBound)
+{
+    assert(m_collisionMgr != nullptr);
+    m_collisionMgr->setBox2dScene(minBound, maxBound);
+}
+
+void CSceneGraph::addBox2dCollider(ISharedBox2dColliderRef collider, bool isStatic)
+{
+    assert(m_collisionMgr != nullptr);
+    m_collisionMgr->addBox2dCollider(collider, isStatic);
+}
+
+void CSceneGraph::removeBox2dCollider(ISharedBox2dColliderRef collider)
+{
+    assert(m_collisionMgr != nullptr);
+    m_collisionMgr->removeBox2dCollider(collider);
 }
 
