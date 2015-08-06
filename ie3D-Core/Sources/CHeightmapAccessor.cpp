@@ -218,6 +218,16 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
     });
     completionOperation->addDependency(mmapGeometryOperation);
     
+    CSharedThreadOperation generateHeightmapTextureOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_MAIN);
+    generateHeightmapTextureOperation->setExecutionBlock([this, filename](void) {
+        
+        m_generatorStatistic->update("Deep Texture Generation...", E_HEIGHTMAP_GENERATION_STATUS_STARTED);
+        m_container->createDeepTexture();
+        CHeightmapTextureGenerator::generateDeepTexture(m_container, true, 0, 0, 0, 0);
+        m_generatorStatistic->update("Deep Texture Generation...", E_HEIGHTMAP_GENERATION_STATUS_ENDED);
+    });
+    completionOperation->addDependency(generateHeightmapTextureOperation);
+    
     CSharedThreadOperation generateSplattingMasksOperation = std::make_shared<CThreadOperation>(E_THREAD_OPERATION_QUEUE_BACKGROUND);
     generateSplattingMasksOperation->setExecutionBlock([this, filename](void) {
         

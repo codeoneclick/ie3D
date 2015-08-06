@@ -101,6 +101,8 @@ public:
     void update(void);
     void updateVertices(const std::vector<glm::vec3>& vertices,
                         const glm::ivec2& minBound, const glm::ivec2& maxBound);
+    
+    inline CSharedTexture getDeepTexture(void) const;
 };
 
 #include "CHeightmapAccessor.hpp"

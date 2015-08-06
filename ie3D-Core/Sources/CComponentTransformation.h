@@ -44,6 +44,10 @@ public:
     glm::vec3 getRotation(void) const;
     glm::vec3 getScale(void) const;
     
+    glm::vec3 getForward(void) const;
+    glm::vec3 getUp(void) const;
+    glm::vec3 getRight(void) const;
+    
     static glm::mat4 getMMatrix(CSharedComponentTransformationRef componentTransformation);
     static glm::mat4 getMVPMatrix(CSharedComponentTransformationRef componentTransformation, CSharedCameraRef camera);
     static glm::mat4 getIMVPMatrix(CSharedComponentTransformationRef componentTransformation, CSharedCameraRef camera);

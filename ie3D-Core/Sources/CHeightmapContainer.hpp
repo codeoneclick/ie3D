@@ -163,3 +163,8 @@ inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGBA8> CHeight
     return m_splattingNTexturesMMAP[index][LOD];
 };
 
+inline CSharedTexture CHeightmapContainer::getDeepTexture(void) const
+{
+    assert(m_deepTexture != nullptr);
+    return m_deepTexture;
+};

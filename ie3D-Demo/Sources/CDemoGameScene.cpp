@@ -151,7 +151,7 @@ void CDemoGameScene::load(void)
     
     m_globalLightSource->setAngle(3.0);
     m_globalLightSource->setDistanceToSun(512.0);
-    m_globalLightSource->setDistanceToLookAt(32.0);
+    m_globalLightSource->setDistanceToLookAt(64.0);
     m_globalLightSource->setRotationCenter(glm::vec3(256.0, 0.0, 256.0));
     m_globalLightSource->setLookAt(m_models["model_01"]->getPosition());
 }
@@ -216,9 +216,20 @@ void CDemoGameScene::update(f32 deltatime)
     m_skybox->setRotation(glm::vec3(0.0, angle, 0.0));
     m_globalLightSource->setLookAt(m_models["model_01"]->getPosition());
     
-    m_models["model_02"]->setAnimation("IDLE");
+    m_models["model_02"]->setAnimation("RUN");
     m_models["model_03"]->setAnimation("IDLE");
     m_models["model_04"]->setAnimation("IDLE");
+    
+    /*glm::mat4x4 matrix = m_models["model_01"]->getMMatrix();
+    glm::vec4 forward = matrix[2];
+    forward = glm::normalize(forward);
+    std::cout<<"FORWARD: "<<"X: "<<forward.x<<", Y: "<<forward.y<<", Z: "<<forward.z<<std::endl;
+    glm::vec4 up = matrix[1];
+    up = glm::normalize(up);
+    std::cout<<"UP: "<<"X: "<<up.x<<", Y: "<<up.y<<", Z: "<<up.z<<std::endl;
+    
+    m_models["model_02"]->setPosition(m_models["model_01"]->getPosition() + glm::vec3(forward.x, forward.y, forward.z) * 10.0f);
+    m_models["model_02"]->setRotation(m_models["model_01"]->getRotation());*/
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

@@ -9,6 +9,7 @@
 #include "CHeightmapContainer.h"
 #include "CHeightmapLoader.h"
 #include "CHeightmapTextureGenerator.h"
+#include "CTexture.h"
 
 const f32 CHeightmapContainer::kRaise = 32.0f;
 const f32 CHeightmapContainer::kDeep = CHeightmapContainer::kRaise * 0.25;
@@ -16,6 +17,8 @@ const f32 CHeightmapContainer::kDeep = CHeightmapContainer::kRaise * 0.25;
 const f32 CHeightmapContainer::kLayerSection01 = 0.33;
 const f32 CHeightmapContainer::kLayerSection02 = 0.66;
 const f32 CHeightmapContainer::kLayerSectionOffset = 0.11;
+
+static const std::string kDeepTextureName = "deep.texture";
 
 CHeightmapContainer::CHeightmapContainer(void) :
 m_uncompressedVertices(nullptr),
@@ -29,7 +32,8 @@ m_ibosMMAPDescriptor(nullptr),
 m_splattingMTexturesMMAPDescriptor(nullptr),
 m_splattingDTexturesMMAPDescriptor(nullptr),
 m_splattingNTexturesMMAPDescriptor(nullptr),
-m_mainSize(0)
+m_mainSize(0),
+m_deepTexture(nullptr)
 {
     
 }
@@ -295,4 +299,16 @@ void CHeightmapContainer::mmapNTextures(const std::string& filename)
             }
         }
     }
+}
+
+void CHeightmapContainer::createDeepTexture(void)
+{
+    ui32 textureId;
+    ieGenTextures(1, &textureId);
+    m_deepTexture = CTexture::constructCustomTexture(kDeepTextureName, textureId,
+                                                     m_mainSize.x, m_mainSize.y);
+    
+    m_deepTexture->setWrapMode(GL_CLAMP_TO_EDGE);
+    m_deepTexture->setMagFilter(GL_LINEAR);
+    m_deepTexture->setMinFilter(GL_LINEAR);
 }

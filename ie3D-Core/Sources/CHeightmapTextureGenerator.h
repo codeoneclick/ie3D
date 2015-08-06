@@ -43,6 +43,7 @@ protected:
     
 public:
     
+    static const f32 kMinSplattingTextureHeight;
     static const f32 kMaxSplattingTextureHeight;
     static const ui8 kSplattingTextureChannels;
     static const glm::ivec2 kSplattingTextureMaskSize;
@@ -76,6 +77,10 @@ public:
                                           const std::shared_ptr<CHeightmapContainer>& container,
                                           const std::array<CSharedTexture, E_SPLATTING_TEXTURE_MAX>& splattingNTextures,
                                           ui32 i, ui32 j, const std::shared_ptr<std::ofstream> stream = nullptr);
+    
+    static void generateDeepTexture(const std::shared_ptr<CHeightmapContainer>& container, bool create,
+                                    ui32 offsetX, ui32 offsetY,
+                                    ui32 subWidth, ui32 subHeight);
     
 };
 

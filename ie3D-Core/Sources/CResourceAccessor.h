@@ -40,7 +40,8 @@ public:
     
     CSharedResourceLoader getResourceLoader(void) const;
     
-    void addCustomTexture(const std::string& textureName, CSharedTextureRef texture);
+    void addCustomTexture(const std::string& guid, CSharedTextureRef texture);
+    CSharedTexture getCustomTexture(const std::string& guid, bool sync = false) const;
     CSharedTexture getTexture(const std::string& filename, bool sync = false) const;
     
     CSharedShader getShader(const std::string& vsFilename,

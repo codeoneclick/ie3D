@@ -42,6 +42,16 @@ void CResourceAccessor::addCustomTexture(const std::string& textureName, CShared
     }
 }
 
+CSharedTexture CResourceAccessor::getCustomTexture(const std::string& guid, bool sync) const
+{
+    const auto& iterator = m_customTextures.find(guid);
+    if(iterator != m_customTextures.end())
+    {
+        return iterator->second;
+    }
+    return nullptr;
+}
+
 CSharedTexture CResourceAccessor::getTexture(const std::string &filename, bool sync) const
 {
     const auto& iterator = m_customTextures.find(filename);

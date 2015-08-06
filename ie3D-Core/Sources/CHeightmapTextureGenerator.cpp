@@ -18,6 +18,7 @@
 #include "CQuad.h"
 #include "IGraphicsContext.h"
 
+const f32 CHeightmapTextureGenerator::kMinSplattingTextureHeight = 32.0f;
 const f32 CHeightmapTextureGenerator::kMaxSplattingTextureHeight = 32.0f;
 const ui8 CHeightmapTextureGenerator::kSplattingTextureChannels = 4;
 const glm::ivec2 CHeightmapTextureGenerator::kSplattingTextureMaskSize = glm::ivec2(64);
@@ -369,5 +370,81 @@ void CHeightmapTextureGenerator::generateSplattingNTexture(ISharedRenderTechniqu
             memcpy(container->getSplattingNTexturesMmap(index, LOD)->getPointer(), data, size * sizeof(ui8));
         }
     });
+}
+
+void CHeightmapTextureGenerator::generateDeepTexture(const std::shared_ptr<CHeightmapContainer>& container, bool create,
+                                                     ui32 offsetX, ui32 offsetY,
+                                                     ui32 subWidth, ui32 subHeight)
+{
+    assert(container->getDeepTexture());
+    container->getDeepTexture()->bind();
+    
+    ui8* data = nullptr;
+    if(create)
+    {
+        data = new ui8[container->getMainSize().x * container->getMainSize().y];
+        f32 maxDeep = kMaxSplattingTextureHeight;
+        for(int i = 0; i < container->getMainSize().x; i++)
+        {
+            for(int j = 0; j < container->getMainSize().y; j++)
+            {
+                f32 height = CHeightmapAccessor::getHeight(container, glm::vec3(i, 0.0f, j));
+                height = height <= 0.0f ? height : 0.0f;
+                height /= maxDeep;
+                height = std::max(0.0f, std::min((height + 1.0f) / 2.0f, 1.0f));
+                ui8 color = static_cast<ui8>(height * 255);
+                data[i + j * container->getMainSize().x] = color;
+            }
+        }
+        
+        ieTexImage2D(GL_TEXTURE_2D, 0,
+#if defined(__OPENGL_30__)
+                     GL_RED,
+#else
+                     GL_ALPHA,
+#endif
+                     container->getMainSize().x,
+                     container->getMainSize().y,
+                     0,
+#if defined(__OPENGL_30__)
+                     GL_RED,
+#else
+                     GL_ALPHA,
+#endif
+                     GL_UNSIGNED_BYTE, data);
+    }
+    else
+    {
+        assert(offsetX >= 0);
+        assert(offsetX + subWidth < container->getDeepTexture()->getWidth());
+        assert(offsetY >= 0);
+        assert(offsetY + subHeight < container->getDeepTexture()->getHeight());
+        
+        f32 maxDeep = kMaxSplattingTextureHeight;
+        
+        data = new ui8[subWidth * subHeight];
+        for(int i = 0; i < subWidth; i++)
+        {
+            for(int j = 0; j < subHeight; j++)
+            {
+                f32 height = CHeightmapAccessor::getHeight(container, glm::vec3(i + offsetX , 0.0, j + offsetY));
+                height = height <= 0.0f ? height : 0.0f;
+                height /= maxDeep;
+                height = std::max(0.0f, std::min((height + 1.0f) / 2.0f, 1.0f));
+                ui8 color = static_cast<ui8>(height * 255);
+                data[i + j * subWidth] = color;
+            }
+        }
+        glTexSubImage2D(GL_TEXTURE_2D, 0,
+                        offsetX, offsetY,
+                        subWidth, subHeight,
+#if defined(__OPENGL_30__)
+                        GL_RED,
+#else
+                        GL_ALPHA,
+#endif
+                        GL_UNSIGNED_BYTE, data);
+    }
+    delete[] data;
 }
 

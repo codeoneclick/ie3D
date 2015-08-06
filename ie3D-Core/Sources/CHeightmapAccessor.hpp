@@ -37,3 +37,9 @@ inline CSharedHeightmapGeneratorStatistic CHeightmapAccessor::getGeneratorStatis
 {
     return m_generatorStatistic;
 }
+
+inline CSharedTexture CHeightmapAccessor::getDeepTexture(void) const
+{
+    assert(m_container != nullptr);
+    return m_container ? m_container->getDeepTexture() : nullptr;
+}

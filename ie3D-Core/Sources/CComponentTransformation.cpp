@@ -85,3 +85,24 @@ glm::mat4 CComponentTransformation::getIMVPMatrix(CSharedComponentTransformation
     glm::mat4 m_matrixIMVP = camera->getIVPMatrix() * CComponentTransformation::getMMatrix(componentTransformation);
     return std::move(m_matrixIMVP);
 }
+
+glm::vec3 CComponentTransformation::getForward(void) const
+{
+    glm::vec4 vector = m_matrixM[2];
+    vector = glm::normalize(vector);
+    return glm::vec3(vector.x, vector.y, vector.z);
+}
+
+glm::vec3 CComponentTransformation::getUp(void) const
+{
+    glm::vec4 vector = m_matrixM[1];
+    vector = glm::normalize(vector);
+    return glm::vec3(vector.x, vector.y, vector.z);
+}
+
+glm::vec3 CComponentTransformation::getRight(void) const
+{
+    glm::vec4 vector = m_matrixM[0];
+    vector = glm::normalize(vector);
+    return glm::vec3(vector.x, vector.y, vector.z);
+}

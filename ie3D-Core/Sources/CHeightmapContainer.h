@@ -238,6 +238,8 @@ private:
     std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_chunkLODsSizes;
     std::array<glm::ivec2, E_LANDSCAPE_CHUNK_LOD_MAX> m_texturesLODsSizes;
     
+    CSharedTexture m_deepTexture;
+    
     void eraseGeometry(void);
     void eraseMTextures(void);
     void eraseDTextures(void);
@@ -293,6 +295,9 @@ public:
     inline std::shared_ptr<CHeightmapTextureMMAP_RGB565> getSplattingMTexturesMmap(i32 index) const;
     inline std::shared_ptr<CHeightmapTextureMMAP_RGBA8> getSplattingDTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
     inline std::shared_ptr<CHeightmapTextureMMAP_RGBA8> getSplattingNTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
+    
+    void createDeepTexture(void);
+    inline CSharedTexture getDeepTexture(void) const;
 };
 
 #include "CHeightmapContainer.hpp"

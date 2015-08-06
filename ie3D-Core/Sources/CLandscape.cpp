@@ -200,10 +200,7 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
         m_chunks.resize(m_heightmapAccessor->getChunksNum().x * m_heightmapAccessor->getChunksNum().y);
         
         IGameObject::onConfigurationLoaded(configurationLandscape, success);
-        
-        m_tillingTexcoord[E_SHADER_SAMPLER_01] = 16;
-        m_tillingTexcoord[E_SHADER_SAMPLER_02] = 16;
-        m_tillingTexcoord[E_SHADER_SAMPLER_03] = 16;
+        m_resourceAccessor->addCustomTexture("deep.texture", m_heightmapAccessor->getDeepTexture());
         
         m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
     }, customParameters);
