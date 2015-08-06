@@ -283,7 +283,6 @@ void CHeightmapAccessor::generate(const std::string& filename, ISharedRenderTech
     });
     completionOperation->addDependency(mmapNTexturesOperation);
 
-    
     completionOperation->addToExecutionQueue();
 }
 

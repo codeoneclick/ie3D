@@ -43,23 +43,12 @@ void CGameObjectNavigator::setRotation(const glm::vec3& rotation)
 
 bool CGameObjectNavigator::moveForward(void)
 {
-    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x + sinf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed,
-                                              0.0,
-                                              m_currentPosition.z + cosf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed);
-    
-    if(precomputedPosition.x < m_minBound.x ||
-       precomputedPosition.z < m_minBound.z ||
-       precomputedPosition.x > m_maxBound.x ||
-       precomputedPosition.z > m_maxBound.z)
-    {
-        return false;
-    }
-
-    precomputedPosition.y = m_landscape != nullptr ? m_landscape->getHeight(precomputedPosition) : 0.0;
-    m_currentPosition = precomputedPosition;
-    
-    CGameObjectNavigator::notifyHandlersAboutPositionChanged();
-    CGameObjectNavigator::updateRotationOnHeightmapSurface(precomputedPosition);
+    b2Vec2 velocity = b2Vec2(0.0f, 0.0f);
+    velocity.x += sinf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed * 50.0f;
+    velocity.y += cosf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed * 50.0f;
+    assert(m_box2dBody != nullptr);
+    m_box2dBody->SetAwake(true);
+    m_box2dBody->SetLinearVelocity(velocity);
     return true;
 }
 
@@ -182,7 +171,22 @@ void CGameObjectNavigator::onBox2dCollision(void)
 
 void CGameObjectNavigator::onBox2dPositionChanged(const glm::vec3& position)
 {
+    glm::vec3 precomputedPosition = position;
     
+    if(precomputedPosition.x < m_minBound.x ||
+       precomputedPosition.z < m_minBound.z ||
+       precomputedPosition.x > m_maxBound.x ||
+       precomputedPosition.z > m_maxBound.z)
+    {
+        return;
+    }
+    
+    precomputedPosition.y = m_landscape != nullptr ? m_landscape->getHeight(precomputedPosition) : 0.0;
+    m_currentPosition = precomputedPosition;
+    
+    m_box2dBody->SetTransform(b2Vec2(precomputedPosition.x, precomputedPosition.z), m_box2dBody->GetAngle());
+    CGameObjectNavigator::notifyHandlersAboutPositionChanged();
+    CGameObjectNavigator::updateRotationOnHeightmapSurface(precomputedPosition);
 }
 
 void CGameObjectNavigator::onBox2dRotationYChanged(f32 angle)
