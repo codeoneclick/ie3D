@@ -34,6 +34,9 @@ private:
     ISharedRenderTechniqueAccessor m_renderTechniqueAccessor;
     CSharedHeightmapGeneratorStatistic m_generatorStatistic;
     
+    std::array<std::queue<CSharedTexture>, E_LANDSCAPE_CHUNK_LOD_MAX> m_splattingDTexturesCache;
+    std::array<std::queue<CSharedTexture>, E_LANDSCAPE_CHUNK_LOD_MAX> m_splattingNTexturesCache;
+    
     std::vector<CSharedThreadOperation> m_executedOperations;
     
     std::vector<std::tuple<std::function<void(CSharedMeshRef)>, std::function<void(CSharedQuadTreeRef)>, std::function<void(CSharedTextureRef, CSharedTextureRef)>>> m_callbacks;

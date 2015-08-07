@@ -12,6 +12,7 @@
 #include "HCommon.h"
 #include "HDEDeclaration.h"
 #include "CCollisionMgr.h"
+#include "HDEEnums.h"
 
 class IGameObjectNavigatorHandler
 {
@@ -49,6 +50,9 @@ protected:
     glm::vec3 m_maxBound;
     glm::vec3 m_minBound;
     
+    E_NAVIGATION_MOVE m_moveState;
+    E_NAVIGATION_STEER m_steerState;
+    
     std::set<ISharedGameObjectNavigatorHandler> m_handlers;
     
     void updateRotationOnHeightmapSurface(const glm::vec3& position);
@@ -74,13 +78,15 @@ public:
                          const glm::vec3& maxBound,
                          const glm::vec3& minBound);
     
+    void update(f32 deltatime);
+    
     void setPosition(const glm::vec3& position);
     void setRotation(const glm::vec3& rotation);
     
-    bool moveForward(void);
-    bool moveBackward(void);
-    bool moveLeft(void);
-    bool moveRight(void);
+    void moveForward(void);
+    void moveBackward(void);
+    void moveLeft(void);
+    void moveRight(void);
     
     void steerLeft(void);
     void steerRight(void);

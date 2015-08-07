@@ -160,7 +160,7 @@ void CCollisionMgr::_OnGameLoopUpdate(f32 deltatime)
 {
     if(m_box2dScene)
     {
-        m_box2dScene->Step(1.0f / 30.0f, 1, 1);
+        m_box2dScene->Step(1.0f / 60.0f, 1, 1);
         
         for(const auto& collider : m_box2dColliders)
         {
@@ -168,7 +168,6 @@ void CCollisionMgr::_OnGameLoopUpdate(f32 deltatime)
                                                        0.0f,
                                                        collider->getBox2dBody()->GetPosition().y));
             collider->onBox2dRotationYChanged(collider->getBox2dBody()->GetAngle());
-            std::cout<<"box2d velocity: "<<collider->getBox2dBody()->GetLinearVelocity().x<<", "<<collider->getBox2dBody()->GetLinearVelocity().y<<std::endl;
         }
     }
 }
@@ -189,7 +188,6 @@ void CCollisionMgr::EndContact(b2Contact* contact)
 {
     
 }
-
 
 void CCollisionMgr::onGestureRecognizerPressed(const glm::ivec2& point, E_INPUT_BUTTON inputButton)
 {

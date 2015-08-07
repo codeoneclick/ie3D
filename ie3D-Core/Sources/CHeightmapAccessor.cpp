@@ -20,6 +20,8 @@
 #include "HEnums.h"
 #include "CPerlinNoise.h"
 
+#define kSplattingTexturesCacheSize 4
+
 CHeightmapAccessor::CHeightmapAccessor(void) :
 m_container(std::make_shared<CHeightmapContainer>()),
 m_isGenerated(false),
@@ -108,6 +110,19 @@ void CHeightmapAccessor::createMetadataContainers(void)
     m_chunksMetadata.clear();
     m_chunksMetadata.resize(m_container->getChunksNum().x * m_container->getChunksNum().y,
                             std::make_tuple(nullptr, nullptr, nullptr, nullptr, E_LANDSCAPE_CHUNK_LOD_UNKNOWN, std::make_shared<std::mutex>()));
+    
+    for(ui32 i = 0; i < E_LANDSCAPE_CHUNK_LOD_MAX; ++i)
+    {
+        while(!m_splattingDTexturesCache[i].empty())
+        {
+            m_splattingDTexturesCache[i].pop();
+        }
+        
+        while(!m_splattingNTexturesCache[i].empty())
+        {
+            m_splattingNTexturesCache[i].pop();
+        }
+    }
 }
 
 void CHeightmapAccessor::eraseMetadataContainers(void)
@@ -119,6 +134,18 @@ void CHeightmapAccessor::eraseChunkMetadata(i32 index)
 {
     assert(std::get<5>(m_chunksMetadata[index]));
     std::lock_guard<std::mutex> guard(*std::get<5>(m_chunksMetadata[index]).get());
+    
+    if(m_splattingDTexturesCache[std::get<4>(m_chunksMetadata[index])].size() < kSplattingTexturesCacheSize &&
+       std::get<2>(m_chunksMetadata[index]))
+    {
+        m_splattingDTexturesCache[std::get<4>(m_chunksMetadata[index])].push(std::get<2>(m_chunksMetadata[index]));
+    }
+    
+    if(m_splattingNTexturesCache[std::get<4>(m_chunksMetadata[index])].size() < kSplattingTexturesCacheSize &&
+       std::get<3>(m_chunksMetadata[index]))
+    {
+        m_splattingNTexturesCache[std::get<4>(m_chunksMetadata[index])].push(std::get<3>(m_chunksMetadata[index]));
+    }
     
     std::get<0>(m_chunksMetadata[index]) = nullptr;
     std::get<1>(m_chunksMetadata[index]) = nullptr;
@@ -326,18 +353,29 @@ void CHeightmapAccessor::generateQuadTree(i32 index)
 void CHeightmapAccessor::generateSplattingTextures(i32 index, E_LANDSCAPE_CHUNK_LOD LOD)
 {
     {
-        std::ostringstream stringstream;
-        stringstream<<"DTexture_"<<index<<std::endl;
-        
-        ui32 DTextureId;
-        ieGenTextures(1, &DTextureId);
-        
-        CSharedTexture DTexture = CTexture::constructCustomTexture(stringstream.str(), DTextureId,
-                                                                   m_container->getTexturesLODSize(LOD).x,
-                                                                   m_container->getTexturesLODSize(LOD).y);
-        DTexture->setWrapMode(GL_CLAMP_TO_EDGE);
-        DTexture->setMagFilter(GL_LINEAR);
-        DTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
+        CSharedTexture DTexture = nullptr;
+        if(!m_splattingDTexturesCache[LOD].empty())
+        {
+            DTexture = m_splattingDTexturesCache[LOD].front();
+            assert(DTexture);
+            m_splattingDTexturesCache[LOD].pop();
+        }
+        else
+        {
+            std::ostringstream stringstream;
+            stringstream<<"DTexture_"<<index<<std::endl;
+            
+            ui32 DTextureId;
+            ieGenTextures(1, &DTextureId);
+            
+            DTexture = CTexture::constructCustomTexture(stringstream.str(), DTextureId,
+                                                        m_container->getTexturesLODSize(LOD).x,
+                                                        m_container->getTexturesLODSize(LOD).y);
+            
+            DTexture->setWrapMode(GL_CLAMP_TO_EDGE);
+            DTexture->setMagFilter(GL_LINEAR);
+            DTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
+        }
         
         DTexture->bind();
         
@@ -349,19 +387,29 @@ void CHeightmapAccessor::generateSplattingTextures(i32 index, E_LANDSCAPE_CHUNK_
         std::get<2>(m_chunksMetadata[index]) = DTexture;
     }
     {
-        std::ostringstream stringstream;
-        stringstream<<"NTexture_"<<index<<std::endl;
-        
-        ui32 NTextureId;
-        ieGenTextures(1, &NTextureId);
-        
-        CSharedTexture NTexture = CTexture::constructCustomTexture(stringstream.str(), NTextureId,
-                                                                   m_container->getTexturesLODSize(LOD).x,
-                                                                   m_container->getTexturesLODSize(LOD).y);
-        NTexture->setWrapMode(GL_CLAMP_TO_EDGE);
-        NTexture->setMagFilter(GL_LINEAR);
-        NTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
-        
+        CSharedTexture NTexture = nullptr;
+        if(!m_splattingNTexturesCache[LOD].empty())
+        {
+            NTexture = m_splattingNTexturesCache[LOD].front();
+            assert(NTexture);
+            m_splattingNTexturesCache[LOD].pop();
+        }
+        else
+        {
+            std::ostringstream stringstream;
+            stringstream<<"NTexture_"<<index<<std::endl;
+            
+            ui32 NTextureId;
+            ieGenTextures(1, &NTextureId);
+            
+            NTexture = CTexture::constructCustomTexture(stringstream.str(), NTextureId,
+                                                        m_container->getTexturesLODSize(LOD).x,
+                                                        m_container->getTexturesLODSize(LOD).y);
+            NTexture->setWrapMode(GL_CLAMP_TO_EDGE);
+            NTexture->setMagFilter(GL_LINEAR);
+            NTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
+        }
+
         NTexture->bind();
         
         ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,

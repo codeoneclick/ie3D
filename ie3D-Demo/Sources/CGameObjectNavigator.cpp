@@ -24,9 +24,63 @@ m_landscape(landscape),
 m_maxBound(maxBound),
 m_minBound(minBound),
 m_currentPosition(glm::vec3(0.0)),
-m_currentRotation(glm::vec3(0.0))
+m_currentRotation(glm::vec3(0.0)),
+m_moveState(E_NAVIGATION_MOVE_NONE),
+m_steerState(E_NAVIGATION_STEER_NONE)
 {
     
+}
+
+void CGameObjectNavigator::update(f32 deltatime)
+{
+    b2Vec2 velocity = b2Vec2(0.0f, 0.0f);
+    switch (m_moveState)
+    {
+        case E_NAVIGATION_MOVE_FORWARD:
+        {
+            velocity.x += sinf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed;
+            velocity.y += cosf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed;
+        }
+            break;
+            
+        case E_NAVIGATION_MOVE_BACKWARD:
+        {
+            velocity.x -= sinf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed;
+            velocity.y -= cosf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed;
+        }
+            break;
+            
+        case E_NAVIGATION_MOVE_LEFT:
+        {
+            velocity.x -= sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
+            velocity.y -= cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
+        }
+            break;
+            
+        case E_NAVIGATION_MOVE_RIGHT:
+        {
+            velocity.x += sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
+            velocity.y += cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
+        }
+            break;
+            
+        case E_NAVIGATION_MOVE_NONE:
+        {
+            
+        }
+            break;
+            
+        default:
+        {
+            assert(false);
+        }
+            break;
+    }
+    assert(m_box2dBody);
+    
+    m_box2dBody->SetAwake(true);
+    m_box2dBody->SetLinearVelocity(velocity);
+    m_moveState = E_NAVIGATION_MOVE_NONE;
 }
 
 void CGameObjectNavigator::setPosition(const glm::vec3& position)
@@ -41,81 +95,24 @@ void CGameObjectNavigator::setRotation(const glm::vec3& rotation)
     CGameObjectNavigator::notifyHandlersAboutRotationChanged();
 }
 
-bool CGameObjectNavigator::moveForward(void)
+void CGameObjectNavigator::moveForward(void)
 {
-    b2Vec2 velocity = b2Vec2(0.0f, 0.0f);
-    velocity.x += sinf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed * 50.0f;
-    velocity.y += cosf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed * 50.0f;
-    assert(m_box2dBody != nullptr);
-    m_box2dBody->SetAwake(true);
-    m_box2dBody->SetLinearVelocity(velocity);
-    return true;
+    m_moveState = E_NAVIGATION_MOVE_FORWARD;
 }
 
-bool CGameObjectNavigator::moveBackward(void)
+void CGameObjectNavigator::moveBackward(void)
 {
-    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x - sinf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed,
-                                              0.0f,
-                                              m_currentPosition.z - cosf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed);
-    
-    if(precomputedPosition.x < m_minBound.x ||
-       precomputedPosition.z < m_minBound.z ||
-       precomputedPosition.x > m_maxBound.x ||
-       precomputedPosition.z > m_maxBound.z)
-    {
-        return false;
-    }
-    
-    precomputedPosition.y = m_landscape != nullptr ? m_landscape->getHeight(precomputedPosition) : 0.0;
-    m_currentPosition = precomputedPosition;
-    
-    CGameObjectNavigator::notifyHandlersAboutPositionChanged();
-    CGameObjectNavigator::updateRotationOnHeightmapSurface(precomputedPosition);
-    return true;
+    m_moveState = E_NAVIGATION_MOVE_BACKWARD;
 }
 
-bool CGameObjectNavigator::moveLeft(void)
+void CGameObjectNavigator::moveLeft(void)
 {
-    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x - sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed,
-                                              0.0f,
-                                              m_currentPosition.z - cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed);
-    
-    if(precomputedPosition.x < m_minBound.x ||
-       precomputedPosition.z < m_minBound.z ||
-       precomputedPosition.x > m_maxBound.x ||
-       precomputedPosition.z > m_maxBound.z)
-    {
-        return false;
-    }
-    
-    precomputedPosition.y = m_landscape != nullptr ? m_landscape->getHeight(precomputedPosition) : 0.0;
-    m_currentPosition = precomputedPosition;
-    
-    CGameObjectNavigator::notifyHandlersAboutPositionChanged();
-    CGameObjectNavigator::updateRotationOnHeightmapSurface(precomputedPosition);
-    return true;
+    m_moveState = E_NAVIGATION_MOVE_LEFT;
 }
 
-bool CGameObjectNavigator::moveRight(void)
+void CGameObjectNavigator::moveRight(void)
 {
-    glm::vec3 precomputedPosition = glm::vec3(m_currentPosition.x + sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed,
-                                              0.0f,
-                                              m_currentPosition.z + cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed);
-    
-    if(precomputedPosition.x < m_minBound.x ||
-       precomputedPosition.z < m_minBound.z ||
-       precomputedPosition.x > m_maxBound.x ||
-       precomputedPosition.z > m_maxBound.z)
-    {
-        return false;
-    }
-    
-    precomputedPosition.y = m_landscape != nullptr ? m_landscape->getHeight(precomputedPosition) : 0.0;
-    m_currentPosition = precomputedPosition;
-    
-    CGameObjectNavigator::notifyHandlersAboutPositionChanged();
-    CGameObjectNavigator::updateRotationOnHeightmapSurface(precomputedPosition);
-    return true;
+   m_moveState = E_NAVIGATION_MOVE_RIGHT;
 }
 
 void CGameObjectNavigator::steerLeft(void)

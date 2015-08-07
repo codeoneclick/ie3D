@@ -61,29 +61,39 @@ void ICharacterController::update(f32 deltatime)
 {
     assert(m_gameObject != nullptr);
     
-    f32 fov = glm::mix(45.0, 55.0, m_speed);
-    m_camera->setFOV(fov);
-    
-    m_gameObject->setPosition(m_position);
-    m_camera->setLookAt(glm::vec3(m_position.x, m_position.y + glm::mix(16.0, 8.0, m_speed), m_position.z));
-    
-    f32 currentCameraRotation = glm::mix(glm::degrees(m_camera->getRotation()) - 90.0f, m_gameObject->getRotation().y, 0.1);
-    glm::vec3 currentGameObjectRotation = glm::mix(glm::vec3(m_gameObject->getRotation().x, m_rotation.y, m_gameObject->getRotation().z),
-                                                   m_rotation, 0.25);
-    m_gameObject->setRotation(currentGameObjectRotation);
-    m_camera->setRotation(glm::radians(currentCameraRotation));
-    
-    glm::vec3 cameraPosition = m_camera->getPosition();
-    if(cameraPosition.x < m_landscape->getHeightmapSize().x &&
-       cameraPosition.z < m_landscape->getHeightmapSize().y &&
-       cameraPosition.x >= 0.0 &&
-       cameraPosition.z >= 0.0)
+    if(m_camera)
     {
-        m_cameraPrecomputedDistance.y = m_landscape->getHeight(cameraPosition) + 48.0f;
+        f32 fov = glm::mix(45.0, 55.0, m_speed);
+        m_camera->setFOV(fov);
+        
+        m_gameObject->setPosition(m_position);
+        m_camera->setLookAt(glm::vec3(m_position.x, m_position.y + glm::mix(16.0, 8.0, m_speed), m_position.z));
+        
+        f32 currentCameraRotation = glm::mix(glm::degrees(m_camera->getRotation()) - 90.0f, m_gameObject->getRotation().y, 0.1);
+        glm::vec3 currentGameObjectRotation = glm::mix(glm::vec3(m_gameObject->getRotation().x, m_rotation.y, m_gameObject->getRotation().z),
+                                                       m_rotation, 0.25);
+        m_gameObject->setRotation(currentGameObjectRotation);
+        m_camera->setRotation(glm::radians(currentCameraRotation));
+        
+        glm::vec3 cameraPosition = m_camera->getPosition();
+        if(cameraPosition.x < m_landscape->getHeightmapSize().x &&
+           cameraPosition.z < m_landscape->getHeightmapSize().y &&
+           cameraPosition.x >= 0.0 &&
+           cameraPosition.z >= 0.0)
+        {
+            m_cameraPrecomputedDistance.y = m_landscape->getHeight(cameraPosition) + 48.0f;
+        }
+        
+        glm::vec3 currentCameraDistanceToLookAt = glm::mix(m_camera->getDistanceToLookAt(), m_cameraPrecomputedDistance,
+                                                           5.0f * deltatime);
+        currentCameraDistanceToLookAt.y = glm::clamp(currentCameraDistanceToLookAt.y, 0.0f, m_cameraPrecomputedDistance.y);
+        m_camera->setDistanceToLookAt(currentCameraDistanceToLookAt);
     }
-    
-    glm::vec3 currentCameraDistanceToLookAt = glm::mix(m_camera->getDistanceToLookAt(), m_cameraPrecomputedDistance,
-                                                       5.0f * deltatime);
-    currentCameraDistanceToLookAt.y = glm::clamp(currentCameraDistanceToLookAt.y, 0.0f, m_cameraPrecomputedDistance.y);
-    m_camera->setDistanceToLookAt(currentCameraDistanceToLookAt);
+    else
+    {
+        m_gameObject->setPosition(m_position);
+        glm::vec3 currentGameObjectRotation = glm::mix(glm::vec3(m_gameObject->getRotation().x, m_rotation.y, m_gameObject->getRotation().z),
+                                                       m_rotation, 0.25);
+        m_gameObject->setRotation(currentGameObjectRotation);
+    }
 }

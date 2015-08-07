@@ -137,8 +137,8 @@ void CDemoGameScene::load(void)
                                                                    m_landscape,
                                                                    m_camera);
     
-    m_gameObjectNavigator = std::make_shared<CGameObjectNavigator>(0.5,
-                                                                   0.25,
+    m_gameObjectNavigator = std::make_shared<CGameObjectNavigator>(20.0f,
+                                                                   10.0f,
                                                                    0.0,
                                                                    2.5,
                                                                    m_landscape,
@@ -212,6 +212,8 @@ void CDemoGameScene::update(f32 deltatime)
         }
             break;
     }
+    
+    m_gameObjectNavigator->update(deltatime);
     m_characterController->update(deltatime);
     
     static f32 angle = 0.0;
