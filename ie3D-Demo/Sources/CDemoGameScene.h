@@ -25,16 +25,14 @@ protected:
     std::shared_ptr<CMapDragController> m_mapDragController;
     CSharedGlobalLightSource m_globalLightSource;
     CSharedSkyBox m_skybox;
-    //CSharedAtmosphericScattering m_atmosphericScattering;
-    //CSharedModel m_model;
     std::map<std::string, CSharedModel> m_models;
     CSharedLandscape m_landscape;
     
     E_CHARACTER_CONTROLLER_MOVE_STATE m_characterControllerMoveState;
     E_CHARACTER_CONTROLLER_STEER_STATE m_characterControllerSteerState;
     
-    CSharedGameObjectNavigator m_gameObjectNavigator;
-    ISharedCharacterController m_characterController;
+    std::map<std::string, CSharedGameObjectNavigator> m_navigators;
+    std::map<std::string, ISharedCharacterController> m_characterControllers;
     
     CESharedComplexModel m_lightTank;
     CESharedComplexModel m_mediumTank;

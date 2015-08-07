@@ -33,54 +33,56 @@ m_steerState(E_NAVIGATION_STEER_NONE)
 
 void CGameObjectNavigator::update(f32 deltatime)
 {
-    b2Vec2 velocity = b2Vec2(0.0f, 0.0f);
-    switch (m_moveState)
+    if(m_box2dBody)
     {
-        case E_NAVIGATION_MOVE_FORWARD:
+        b2Vec2 velocity = b2Vec2(0.0f, 0.0f);
+        switch (m_moveState)
         {
-            velocity.x += sinf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed;
-            velocity.y += cosf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed;
+            case E_NAVIGATION_MOVE_FORWARD:
+            {
+                velocity.x += sinf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed;
+                velocity.y += cosf(glm::radians(m_currentRotation.y)) * m_moveForwardSpeed;
+            }
+                break;
+                
+            case E_NAVIGATION_MOVE_BACKWARD:
+            {
+                velocity.x -= sinf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed;
+                velocity.y -= cosf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed;
+            }
+                break;
+                
+            case E_NAVIGATION_MOVE_LEFT:
+            {
+                velocity.x -= sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
+                velocity.y -= cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
+            }
+                break;
+                
+            case E_NAVIGATION_MOVE_RIGHT:
+            {
+                velocity.x += sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
+                velocity.y += cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
+            }
+                break;
+                
+            case E_NAVIGATION_MOVE_NONE:
+            {
+                
+            }
+                break;
+                
+            default:
+            {
+                assert(false);
+            }
+                break;
         }
-            break;
-            
-        case E_NAVIGATION_MOVE_BACKWARD:
-        {
-            velocity.x -= sinf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed;
-            velocity.y -= cosf(glm::radians(m_currentRotation.y)) * m_moveBackwardSpeed;
-        }
-            break;
-            
-        case E_NAVIGATION_MOVE_LEFT:
-        {
-            velocity.x -= sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
-            velocity.y -= cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
-        }
-            break;
-            
-        case E_NAVIGATION_MOVE_RIGHT:
-        {
-            velocity.x += sinf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
-            velocity.y += cosf(glm::radians(-m_currentRotation.y)) * m_strafeSpeed;
-        }
-            break;
-            
-        case E_NAVIGATION_MOVE_NONE:
-        {
-            
-        }
-            break;
-            
-        default:
-        {
-            assert(false);
-        }
-            break;
+        
+        m_box2dBody->SetAwake(true);
+        m_box2dBody->SetLinearVelocity(velocity);
+        m_moveState = E_NAVIGATION_MOVE_NONE;
     }
-    assert(m_box2dBody);
-    
-    m_box2dBody->SetAwake(true);
-    m_box2dBody->SetLinearVelocity(velocity);
-    m_moveState = E_NAVIGATION_MOVE_NONE;
 }
 
 void CGameObjectNavigator::setPosition(const glm::vec3& position)
@@ -197,12 +199,12 @@ glm::vec2 CGameObjectNavigator::getBox2dCenter(void) const
                      m_currentPosition.z);
 }
 
-glm::vec2 CGameObjectNavigator::getBox2dMaxBound(void) const
+std::tuple<glm::vec2, glm::vec2> CGameObjectNavigator::getBox2dBoundingBox(void) const
 {
-    return glm::vec2(2.0f);
-}
-
-glm::vec2 CGameObjectNavigator::getBox2dMinBound(void) const
-{
-    return glm::vec2(0.0f);
+    std::tuple<glm::vec2, glm::vec2> boundingBox;
+    for(const auto& iterator : m_handlers)
+    {
+        boundingBox = iterator->getBox2dBouningBox();
+    }
+    return boundingBox;
 }

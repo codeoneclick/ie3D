@@ -18,6 +18,7 @@ private:
     
 protected:
     
+    std::tuple<glm::vec2, glm::vec2> getBox2dBouningBox(void);
     void onPositionChanged(const glm::vec3& position);
     void onRotationChanged(const glm::vec3& rotation);
     
@@ -35,7 +36,7 @@ public:
     
     ICharacterController(ISharedGameObjectRef gameObject,
                          CSharedLandscapeRef landscape,
-                         CSharedCameraRef camera);
+                         CSharedCameraRef camera = nullptr);
     ~ICharacterController(void);
     
     void increaseSpeed(void);

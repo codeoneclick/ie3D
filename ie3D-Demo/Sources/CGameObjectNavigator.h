@@ -22,6 +22,7 @@ private:
     
 protected:
     
+    virtual std::tuple<glm::vec2, glm::vec2> getBox2dBouningBox(void) = 0;
     virtual void onPositionChanged(const glm::vec3& position) = 0;
     virtual void onRotationChanged(const glm::vec3& rotation) = 0;
     
@@ -65,8 +66,7 @@ protected:
     void onBox2dRotationYChanged(f32 angle);
     
     glm::vec2 getBox2dCenter(void) const;
-    glm::vec2 getBox2dMaxBound(void) const;
-    glm::vec2 getBox2dMinBound(void) const;
+    std::tuple<glm::vec2, glm::vec2> getBox2dBoundingBox(void) const;
     
 public:
     

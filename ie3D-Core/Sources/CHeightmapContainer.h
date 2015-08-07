@@ -229,7 +229,7 @@ private:
     std::vector<std::array<std::shared_ptr<CHeightmapIBOMMAP>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_ibosMMAP;
     
     std::vector<std::shared_ptr<CHeightmapTextureMMAP_RGB565>> m_splattingMTexturesMMAP;
-    std::vector<std::array<std::shared_ptr<CHeightmapTextureMMAP_RGBA8>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_splattingDTexturesMMAP;
+    std::vector<std::array<std::shared_ptr<CHeightmapTextureMMAP_RGB565>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_splattingDTexturesMMAP;
     std::vector<std::array<std::shared_ptr<CHeightmapTextureMMAP_RGBA8>, E_LANDSCAPE_CHUNK_LOD_MAX>> m_splattingNTexturesMMAP;
     
     glm::ivec2 m_mainSize;
@@ -293,7 +293,7 @@ public:
     inline std::shared_ptr<CHeightmapVBOMMAP> getVBOMmap(i32 index) const;
     inline std::shared_ptr<CHeightmapIBOMMAP> getIBOMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
     inline std::shared_ptr<CHeightmapTextureMMAP_RGB565> getSplattingMTexturesMmap(i32 index) const;
-    inline std::shared_ptr<CHeightmapTextureMMAP_RGBA8> getSplattingDTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
+    inline std::shared_ptr<CHeightmapTextureMMAP_RGB565> getSplattingDTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
     inline std::shared_ptr<CHeightmapTextureMMAP_RGBA8> getSplattingNTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const;
     
     void createDeepTexture(void);

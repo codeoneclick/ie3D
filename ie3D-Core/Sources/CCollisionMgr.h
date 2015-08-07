@@ -53,8 +53,7 @@ public:
     virtual void onBox2dRotationYChanged(f32 angle);
     
     virtual glm::vec2 getBox2dCenter(void) const;
-    virtual glm::vec2 getBox2dMaxBound(void) const;
-    virtual glm::vec2 getBox2dMinBound(void) const;
+    virtual std::tuple<glm::vec2, glm::vec2> getBox2dBoundingBox(void) const;
 };
 
 class CCollisionMgr final : public IGestureRecognizerHandler, public b2ContactListener, public IGameLoopHandler

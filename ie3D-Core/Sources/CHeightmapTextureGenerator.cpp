@@ -303,15 +303,26 @@ void CHeightmapTextureGenerator::generateSplattingDTexture(ISharedRenderTechniqu
 {
     ui32 index = i + j * container->getChunksNum().x;
     CHeightmapTextureGenerator::generateSplattingTexture(renderTechniqueAccessor, container, splattingDTextures, i, j, [stream, container, index](ui8 *data, ui32 size, E_LANDSCAPE_CHUNK_LOD LOD) {
+        
+        ui32 size_565 = size / 4;
+        ui16* data_565 = new ui16[size_565];
+        ui32 index = 0;
+        for(ui32 i = 0; i < size; i += 4)
+        {
+            data_565[index] = TO_RGB565(data[i + 0], data[i + 1], data[i + 2]);
+            index++;
+        }
+        
         if(stream)
         {
-            stream->write((char *)data, size * sizeof(ui8));
+            stream->write((char *)data_565, size_565 * sizeof(ui16));
         }
         else
         {
             assert(container->getSplattingDTexturesMmap(index, LOD)->getPointer());
-            memcpy(container->getSplattingDTexturesMmap(index, LOD)->getPointer(), data, size * sizeof(ui8));
+            memcpy(container->getSplattingDTexturesMmap(index, LOD)->getPointer(), data_565, size_565 * sizeof(ui16));
         }
+        delete[] data_565;
     });
 }
 

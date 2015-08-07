@@ -42,10 +42,6 @@ uniform mat4 MATRIX_GlobalLightProjection;
 uniform mat4 MATRIX_GlobalLightView;
 uniform vec4 VECTOR_ClipPlane;
 
-uniform float IN_TillingTexcoordLayer_01;
-uniform float IN_TillingTexcoordLayer_02;
-uniform float IN_TillingTexcoordLayer_03;
-
 uniform float IN_fogLinearStart;
 uniform float IN_fogLinearEnd;
 

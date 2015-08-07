@@ -27,7 +27,6 @@ private:
     CSharedQuadTree m_quadTree;
     CSharedTexture m_preprocessedSplattingDTexture;
     CSharedTexture m_preprocessedSplattingNTexture;
-    CSharedTexture m_preprocessedSplattingHTexture;
     
 protected:
     
@@ -57,9 +56,6 @@ public:
     
     const CSharedTexture getPreprocessedSplattingNTexture(void) const;
     void setPreprocessedSplattingNTexture(CSharedTextureRef texture);
-    
-    const CSharedTexture getPreprocessedSplattingHTexture(void) const;
-    void setPreprocessedSplattingHTexture(CSharedTextureRef texture);
     
     CSharedVertexBuffer getCollisionVertexBuffer(void) const;
     CSharedIndexBuffer getCollisionIndexBuffer(void) const;

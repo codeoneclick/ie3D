@@ -130,10 +130,7 @@ void COcean::onDraw(CSharedMaterialRef material)
 void COcean::bindCustomShaderUniforms(CSharedMaterialRef material)
 {
     IGameObject::bindCustomShaderUniforms(material);
-    
     material->getShader()->setFloat(m_waveGeneratorTimer, E_SHADER_UNIFORM_FLOAT_TIMER);
-    material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
-    material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
     
     CSharedTexture deepTexture = m_resourceAccessor->getCustomTexture("deep.texture");
     if(deepTexture && material->getTexture(E_SHADER_SAMPLER_04) != deepTexture)

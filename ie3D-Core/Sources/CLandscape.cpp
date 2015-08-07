@@ -155,10 +155,7 @@ void CLandscape::onConfigurationLoaded(ISharedConfigurationRef configuration, bo
     std::shared_ptr<CConfigurationLandscape> configurationLandscape = std::static_pointer_cast<CConfigurationLandscape>(configuration);
     assert(m_resourceAccessor != nullptr);
     assert(m_renderTechniqueAccessor != nullptr);
-    
-    //m_resourceAccessor->addCustomTexture("landscape.splatting.texture", m_heightmapGenerator->createSplattingTexture());
-    //m_resourceAccessor->addCustomTexture("landscape.heightmap.texture", m_heightmapGenerator->createHeightmapTexture());
-    
+
     CSharedConfigurationMaterial configurationSplatting = std::make_shared<CConfigurationMaterial>();
     configurationSplatting->serialize(configurationLandscape->getPreprocessSplattingMaterialFilename());
     
@@ -247,7 +244,7 @@ void CLandscape::onDraw(CSharedMaterialRef material)
                 {
                     material->getShader()->setTexture(chunk->getPreprocessedSplattingDTexture(), E_SHADER_SAMPLER_01);
                     material->getShader()->setTexture(chunk->getPreprocessedSplattingNTexture(), E_SHADER_SAMPLER_02);
-                    material->getShader()->setTexture(chunk->getPreprocessedSplattingHTexture(), E_SHADER_SAMPLER_03);
+                    //material->getShader()->setTexture(chunk->getPreprocessedSplattingHTexture(), E_SHADER_SAMPLER_03);
                 }
                 chunk->m_mesh->bind(material->getShader()->getGUID(), material->getShader()->getAttributes());
                 chunk->m_mesh->draw(chunk->m_numPassedIndexes);
@@ -261,21 +258,7 @@ void CLandscape::onDraw(CSharedMaterialRef material)
 void CLandscape::bindCustomShaderUniforms(CSharedMaterialRef material)
 {
     IGameObject::bindCustomShaderUniforms(material);
-#if defined(__OSX__)
-    material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
-    material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
-    material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
-#elif defined(__IOS__)
-    if(/*g_highPerformancePlatforms.count(getPlatform()) != 0*/ true)
-    {
-        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_01], "IN_TillingTexcoordLayer_01");
-        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_02], "IN_TillingTexcoordLayer_02");
-        material->getShader()->setFloatCustom(m_tillingTexcoord[E_SHADER_SAMPLER_03], "IN_TillingTexcoordLayer_03");
-    }
-#else
-    material->getShader()->setFloatCustom(MAX_VALUE(m_heightmapSize.x, m_heightmapSize.y) / m_splattingTillingFactor,
-                                          "IN_SplattingTillingFactor");
-#endif
+
     material->getShader()->setFloatCustom(256.0, "IN_fogLinearStart");
     material->getShader()->setFloatCustom(512.0, "IN_fogLinearEnd");
 }

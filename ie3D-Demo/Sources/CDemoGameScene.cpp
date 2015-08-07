@@ -33,8 +33,6 @@ CDemoGameScene::CDemoGameScene(IGameTransition* root) :
 IScene(root),
 m_uiToSceneCommands(std::make_shared<CDEUIToSceneCommands>()),
 m_sceneToUICommands(nullptr),
-m_gameObjectNavigator(nullptr),
-m_characterController(nullptr),
 m_characterControllerMoveState(E_CHARACTER_CONTROLLER_MOVE_STATE_NONE),
 m_characterControllerSteerState(E_CHARACTER_CONTROLLER_STEER_STATE_NONE)
 {
@@ -73,9 +71,6 @@ void CDemoGameScene::load(void)
     m_skybox = m_root->createSkybox("gameobject.skybox.xml");
     m_root->setSkybox(m_skybox);
     
-    //m_atmosphericScattering = m_root->createAtmosphericScattering("gameobject.atmospheric.scattering.xml");
-    //m_root->setAtmosphericScattering(m_atmosphericScattering);
-    
     //std::shared_ptr<CParticleEmitter> particleEmitter = m_root->createParticleEmitter("gameobject.particle.emitter.xml");
     //particleEmitter->setPosition(glm::vec3(12.0f, 2.0f, 12.0f));
     //m_root->addParticleEmitter(particleEmitter);
@@ -109,45 +104,36 @@ void CDemoGameScene::load(void)
     m_models["model_04"]->setScale(glm::vec3(2.0));
     m_models["model_04"]->setRotation(glm::vec3(0.0, 180.0, 0.0));
     
-    /*model = m_root->createModel("gameobject.model.xml");
-    m_root->addModel(model);
-    model->setPosition(glm::vec3(3.0, 2.0, 32.0));
-    model->setCustomShaderUniform(value, "IN_dissolve");*/
-    //m_model->setScale(glm::vec3(4.0, 4.0, 4.0));
+    m_characterControllers["model_01"] = std::make_shared<ICharacterController>(m_models["model_01"],
+                                                                                m_landscape,
+                                                                                m_camera);
     
-    /*IEGameTransition* transition = static_cast<IEGameTransition*>(m_root);
+    m_navigators["model_01"] = std::make_shared<CGameObjectNavigator>(20.0f,
+                                                                      10.0f,
+                                                                      0.0,
+                                                                      2.5,
+                                                                      m_landscape,
+                                                                      glm::vec3(512.0, 0.0, 512.0),
+                                                                      glm::vec3(0.0, 0.0, 0.0));
+    m_navigators["model_01"]->addNavigatorHandler(m_characterControllers["model_01"]);
     
-    m_lightTank = transition->createComplexModel("gameobject.tank.light.xml");
-    m_root->addCustomGameObject(m_lightTank);
-    m_lightTank->setScale(glm::vec3(1.0, 1.0, 1.0));
+    m_navigators["model_01"]->setPosition(glm::vec3(2.0, 0.0, 2.0));
+    m_navigators["model_01"]->setRotation(glm::vec3(0.0, 0.0, 0.0));
     
-    m_mediumTank = transition->createComplexModel("gameobject.tank.medium.xml");
-    m_root->addCustomGameObject(m_mediumTank);
-    m_mediumTank->setScale(glm::vec3(2.0, 2.0, 2.0));
-    m_mediumTank->setPosition(glm::vec3(16.0, 0.0, 16.0));
+    m_characterControllers["model_02"] = std::make_shared<ICharacterController>(m_models["model_02"],
+                                                                                m_landscape);
     
-    m_heavyTank = transition->createComplexModel("gameobject.tank.heavy.xml");
-    m_root->addCustomGameObject(m_heavyTank);
-    m_heavyTank->setScale(glm::vec3(2.0, 2.0, 2.0));
-    m_heavyTank->setPosition(glm::vec3(24.0, 0.0, 32.0));*/
+    m_navigators["model_02"] = std::make_shared<CGameObjectNavigator>(20.0f,
+                                                                      10.0f,
+                                                                      0.0,
+                                                                      2.5,
+                                                                      m_landscape,
+                                                                      glm::vec3(512.0, 0.0, 512.0),
+                                                                      glm::vec3(0.0, 0.0, 0.0));
+    m_navigators["model_02"]->addNavigatorHandler(m_characterControllers["model_02"]);
     
-    //m_root->addCollisionHandler(shared_from_this());
-    
-    m_characterController = std::make_shared<ICharacterController>(m_models["model_01"],
-                                                                   m_landscape,
-                                                                   m_camera);
-    
-    m_gameObjectNavigator = std::make_shared<CGameObjectNavigator>(20.0f,
-                                                                   10.0f,
-                                                                   0.0,
-                                                                   2.5,
-                                                                   m_landscape,
-                                                                   glm::vec3(512.0, 0.0, 512.0),
-                                                                   glm::vec3(0.0, 0.0, 0.0));
-    m_gameObjectNavigator->addNavigatorHandler(m_characterController);
-    
-    m_gameObjectNavigator->setPosition(glm::vec3(2.0, 0.0, 2.0));
-    m_gameObjectNavigator->setRotation(glm::vec3(0.0, 0.0, 0.0));
+    m_navigators["model_02"]->setPosition(glm::vec3(6.0, 0.0, 36.0));
+    m_navigators["model_02"]->setRotation(glm::vec3(0.0, 0.0, 0.0));
     
     m_globalLightSource->setAngle(3.0);
     m_globalLightSource->setDistanceToSun(512.0);
@@ -156,31 +142,44 @@ void CDemoGameScene::load(void)
     m_globalLightSource->setLookAt(m_models["model_01"]->getPosition());
     
     m_root->setBox2dScene(glm::vec2(0.0f), glm::vec2(512.0f));
-    m_root->addBox2dCollider(std::static_pointer_cast<IBox2dCollider>(m_gameObjectNavigator), false);
+    
+    m_models["model_01"]->addResourceLoadingCommand([this](ISharedResourceRef resource) {
+        if(resource->getResourceClass() == E_RESOURCE_CLASS_MESH)
+        {
+            m_root->addBox2dCollider(std::static_pointer_cast<IBox2dCollider>(m_navigators["model_01"]), false);
+        }
+    });
+    
+    m_models["model_02"]->addResourceLoadingCommand([this](ISharedResourceRef resource) {
+        if(resource->getResourceClass() == E_RESOURCE_CLASS_MESH)
+        {
+            m_root->addBox2dCollider(std::static_pointer_cast<IBox2dCollider>(m_navigators["model_02"]), false);
+        }
+    });
 }
 
 void CDemoGameScene::update(f32 deltatime)
 {
-    assert(m_characterController != nullptr);
+    assert(m_characterControllers["model_01"]);
     switch (m_characterControllerMoveState)
     {
         case E_CHARACTER_CONTROLLER_MOVE_STATE_NONE:
         {
-            m_characterController->decreaseSpeed();
+            m_characterControllers["model_01"]->decreaseSpeed();
             m_models["model_01"]->setAnimation("IDLE");
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_FORWARD:
         {
-            m_gameObjectNavigator->moveForward();
-            m_characterController->increaseSpeed();
+            m_navigators["model_01"]->moveForward();
+            m_characterControllers["model_01"]->increaseSpeed();
             m_models["model_01"]->setAnimation("RUN");
         }
             break;
         case E_CHARACTER_CONTROLLER_MOVE_STATE_BACKWARD:
         {
-            m_gameObjectNavigator->moveBackward();
-            m_characterController->decreaseSpeed();
+            m_navigators["model_01"]->moveBackward();
+            m_characterControllers["model_01"]->decreaseSpeed();
             m_models["model_01"]->setAnimation("RUN");
         }
             break;
@@ -198,12 +197,12 @@ void CDemoGameScene::update(f32 deltatime)
             break;
         case E_CHARACTER_CONTROLLER_STEER_STATE_LEFT:
         {
-            m_gameObjectNavigator->steerLeft();
+            m_navigators["model_01"]->steerLeft();
         }
             break;
         case E_CHARACTER_CONTROLLER_STEER_STATE_RIGHT:
         {
-            m_gameObjectNavigator->steerRight();
+            m_navigators["model_01"]->steerRight();
         }
             break;
         default:
@@ -213,28 +212,20 @@ void CDemoGameScene::update(f32 deltatime)
             break;
     }
     
-    m_gameObjectNavigator->update(deltatime);
-    m_characterController->update(deltatime);
+    m_navigators["model_01"]->update(deltatime);
+    m_characterControllers["model_01"]->update(deltatime);
+    
+    m_navigators["model_02"]->update(deltatime);
+    m_characterControllers["model_02"]->update(deltatime);
     
     static f32 angle = 0.0;
     angle += 0.033;
     m_skybox->setRotation(glm::vec3(0.0, angle, 0.0));
     m_globalLightSource->setLookAt(m_models["model_01"]->getPosition());
     
-    m_models["model_02"]->setAnimation("RUN");
+    m_models["model_02"]->setAnimation("IDLE");
     m_models["model_03"]->setAnimation("IDLE");
     m_models["model_04"]->setAnimation("IDLE");
-    
-    /*glm::mat4x4 matrix = m_models["model_01"]->getMMatrix();
-    glm::vec4 forward = matrix[2];
-    forward = glm::normalize(forward);
-    std::cout<<"FORWARD: "<<"X: "<<forward.x<<", Y: "<<forward.y<<", Z: "<<forward.z<<std::endl;
-    glm::vec4 up = matrix[1];
-    up = glm::normalize(up);
-    std::cout<<"UP: "<<"X: "<<up.x<<", Y: "<<up.y<<", Z: "<<up.z<<std::endl;
-    
-    m_models["model_02"]->setPosition(m_models["model_01"]->getPosition() + glm::vec3(forward.x, forward.y, forward.z) * 10.0f);
-    m_models["model_02"]->setRotation(m_models["model_01"]->getRotation());*/
 }
 
 void CDemoGameScene::onCollision(const glm::vec3& position, ISharedGameObjectRef gameObject)

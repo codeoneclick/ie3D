@@ -64,14 +64,9 @@ glm::vec2 IBox2dCollider::getBox2dCenter(void) const
     return glm::vec2(0.0f);
 }
 
-glm::vec2 IBox2dCollider::getBox2dMaxBound(void) const
+std::tuple<glm::vec2, glm::vec2> IBox2dCollider::getBox2dBoundingBox(void) const
 {
-    return glm::vec2(0.0f);
-}
-
-glm::vec2 IBox2dCollider::getBox2dMinBound(void) const
-{
-    return glm::vec2(0.0f);
+    return std::make_tuple(glm::vec2(0.0), glm::vec2(1.0));
 }
 
 CCollisionMgr::CCollisionMgr(void) :
@@ -139,8 +134,8 @@ void CCollisionMgr::addBox2dCollider(ISharedBox2dColliderRef collider, bool isSt
     collider->init(m_box2dScene);
     b2PolygonShape box2dShape;
     
-    glm::vec2 minBound = collider->getBox2dMinBound();
-    glm::vec2 maxBound = collider->getBox2dMaxBound();
+    glm::vec2 minBound = std::get<0>(collider->getBox2dBoundingBox());
+    glm::vec2 maxBound = std::get<1>(collider->getBox2dBoundingBox());
     
     box2dShape.SetAsBox((maxBound.x - minBound.x) / 2.0f,
                         (maxBound.y - minBound.y) / 2.0f);

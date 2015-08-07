@@ -379,9 +379,9 @@ void CHeightmapAccessor::generateSplattingTextures(i32 index, E_LANDSCAPE_CHUNK_
         
         DTexture->bind();
         
-        ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+        ieTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
                      m_container->getTexturesLODSize(LOD).x, m_container->getTexturesLODSize(LOD).y,
-                     0, GL_RGBA, GL_UNSIGNED_BYTE, m_container->getSplattingDTexturesMmap(index, LOD)->getPointer());
+                     0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, m_container->getSplattingDTexturesMmap(index, LOD)->getPointer());
         ieGenerateMipmap(GL_TEXTURE_2D);
         
         std::get<2>(m_chunksMetadata[index]) = DTexture;

@@ -29,8 +29,7 @@ m_currentLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
 m_inprogressLOD(E_LANDSCAPE_CHUNK_LOD_UNKNOWN),
 m_size(0),
 m_preprocessedSplattingDTexture(nullptr),
-m_preprocessedSplattingNTexture(nullptr),
-m_preprocessedSplattingHTexture(nullptr)
+m_preprocessedSplattingNTexture(nullptr)
 {
 
 }
@@ -88,9 +87,6 @@ void CLandscapeChunk::onConfigurationLoaded(ISharedConfigurationRef configuratio
     {
         m_sceneUpdateMgr->RegisterSceneUpdateHandler(shared_from_this());
     }
-    m_preprocessedSplattingHTexture = m_resourceAccessor->getTexture("base_DISP.png", true);
-    m_preprocessedSplattingHTexture->setMagFilter(GL_LINEAR);
-    m_preprocessedSplattingHTexture->setMinFilter(GL_LINEAR_MIPMAP_NEAREST);
     m_status |= E_LOADING_STATUS_TEMPLATE_LOADED;
 }
 
@@ -112,16 +108,6 @@ const CSharedTexture  CLandscapeChunk::getPreprocessedSplattingNTexture(void) co
 void CLandscapeChunk::setPreprocessedSplattingNTexture(CSharedTextureRef texture)
 {
     m_preprocessedSplattingNTexture = texture;
-}
-
-const CSharedTexture CLandscapeChunk::getPreprocessedSplattingHTexture(void) const
-{
-    return m_preprocessedSplattingHTexture;
-}
-
-void CLandscapeChunk::setPreprocessedSplattingHTexture(CSharedTextureRef texture)
-{
-    m_preprocessedSplattingHTexture = texture;
 }
 
 CSharedVertexBuffer CLandscapeChunk::getCollisionVertexBuffer(void) const

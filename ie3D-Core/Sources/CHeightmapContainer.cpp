@@ -263,13 +263,12 @@ void CHeightmapContainer::mmapDTextures(const std::string& filename)
         {
             for(ui32 k = 0; k < E_LANDSCAPE_CHUNK_LOD_MAX; ++k)
             {
-                m_splattingDTexturesMMAP[i + j * m_chunksNum.x][k] = std::make_shared<CHeightmapTextureMMAP_RGBA8>(m_splattingDTexturesMMAPDescriptor);
+                m_splattingDTexturesMMAP[i + j * m_chunksNum.x][k] = std::make_shared<CHeightmapTextureMMAP_RGB565>(m_splattingDTexturesMMAPDescriptor);
                 m_splattingDTexturesMMAP[i + j * m_chunksNum.x][k]->setSize(CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).x *
-                                                                           CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).y *
-                                                                           CHeightmapTextureGenerator::kSplattingTextureChannels);
+                                                                            CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).y);
                 m_splattingDTexturesMMAP[i + j * m_chunksNum.x][k]->setOffset(offset);
                 offset += CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).x *
-                CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).y * CHeightmapTextureGenerator::kSplattingTextureChannels;
+                CHeightmapContainer::getTexturesLODSize(static_cast<E_LANDSCAPE_CHUNK_LOD>(k)).y;
             }
         }
     }

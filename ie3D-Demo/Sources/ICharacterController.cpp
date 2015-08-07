@@ -20,15 +20,26 @@ m_landscape(landscape),
 m_camera(camera),
 m_speed(0.0)
 {
-    assert(m_gameObject != nullptr);
+    assert(m_gameObject);
     m_position = m_gameObject->getPosition();
     m_rotation = m_gameObject->getRotation();
-    m_cameraPrecomputedDistance = m_camera->getDistanceToLookAt();
+    if(m_camera)
+    {
+        m_cameraPrecomputedDistance = m_camera->getDistanceToLookAt();
+    }
 }
 
 ICharacterController::~ICharacterController(void)
 {
     
+}
+
+std::tuple<glm::vec2, glm::vec2> ICharacterController::getBox2dBouningBox(void)
+{
+    assert(m_gameObject);
+    std::tuple<glm::vec3, glm::vec3> boundingBox3d = m_gameObject->getBounds();
+    return std::make_tuple(glm::vec2(std::get<0>(boundingBox3d).x, std::get<0>(boundingBox3d).z),
+                           glm::vec2(std::get<1>(boundingBox3d).x, std::get<1>(boundingBox3d).z));
 }
 
 void ICharacterController::onPositionChanged(const glm::vec3& position)

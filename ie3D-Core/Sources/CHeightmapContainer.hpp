@@ -149,7 +149,7 @@ inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGB565>CHeight
     return m_splattingMTexturesMMAP[index];
 };
 
-inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGBA8> CHeightmapContainer::getSplattingDTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const
+inline std::shared_ptr<CHeightmapContainer::CHeightmapTextureMMAP_RGB565> CHeightmapContainer::getSplattingDTexturesMmap(i32 index, E_LANDSCAPE_CHUNK_LOD LOD) const
 {
     assert(LOD >= 0 && LOD < E_LANDSCAPE_CHUNK_LOD_MAX);
     assert(index >=0 && index < m_splattingDTexturesMMAP.size());

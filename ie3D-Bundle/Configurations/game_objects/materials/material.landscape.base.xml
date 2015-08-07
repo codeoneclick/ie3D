@@ -3,7 +3,7 @@
     is_cull_face="0"
     is_depth_test="1"
     is_depth_mask="1"
-    is_blending="0"
+    is_blending="1"
     cull_face_mode="GL_FRONT"
     blending_function_source="GL_SRC_ALPHA"
     blending_function_destination="GL_ONE_MINUS_SRC_ALPHA"
@@ -16,36 +16,29 @@
     is_shadowing="0"
     is_debugging="0">
     <shader
-        vs_filename="shaderLandscapePM.vert"
-        fs_filename="shaderLandscapePM.frag"/>
+    vs_filename="shaderLandscape.vert"
+    fs_filename="shaderLandscape.frag"/>
     <textures>
         <texture
-            filename="landscapeD_01.png"
-            render_operation_name=""
-            sampler_index="0"
-            wrap_mode="GL_REPEAT"
-            mag_filter="GL_LINEAR"
-            min_filter="GL_MIPMAP"/>
-            <texture
-            filename="landscapeD_02.png"
-            render_operation_name=""
-            sampler_index="1"
-            wrap_mode="GL_REPEAT"
-            mag_filter="GL_LINEAR"
-            min_filter="GL_MIPMAP"/>
-            <texture
-            filename="landscapeD_03.png"
-            render_operation_name=""
-            sampler_index="2"
-            wrap_mode="GL_REPEAT"
-            mag_filter="GL_LINEAR"
-            min_filter="GL_MIPMAP"/>
-            <texture
-            filename=""
-            render_operation_name="ws.shadowmap.depth"
-            sampler_index="4"
-            wrap_mode="GL_CLAMP_TO_EDGE"
-            mag_filter="GL_LINEAR"
-            min_filter="GL_LINEAR"/>
+        filename="landscapeD_01.png"
+        render_operation_name=""
+        sampler_index="0"
+        wrap_mode="GL_REPEAT"
+        mag_filter="GL_LINEAR"
+        min_filter="GL_MIPMAP"/>
+        <texture
+        filename="landscapeN_01.png"
+        render_operation_name=""
+        sampler_index="1"
+        wrap_mode="GL_REPEAT"
+        mag_filter="GL_LINEAR"
+        min_filter="GL_MIPMAP"/>
+        <texture
+        filename=""
+        render_operation_name="ws.shadowmap.depth"
+        sampler_index="2"
+        wrap_mode="GL_CLAMP_TO_EDGE"
+        mag_filter="GL_LINEAR"
+        min_filter="GL_LINEAR"/>
     </textures>
 </material>
